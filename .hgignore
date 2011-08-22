@@ -1,0 +1,14 @@
+syntax:glob
+bin
+*.swp
+db/*.db
+.sass-cache
+log/*.log
+*.bak
+public/stylesheets/themes/google/style.css
+Gemfile.lock
+local.rb
+.bundle
+db/*.sqlite3
+log/*.log
+tmp/
