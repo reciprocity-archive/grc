@@ -9,6 +9,19 @@ CmsRails::Application.routes.draw do
   match 'dashboard/opensys/:biz_process_id/:id' => 'dashboard#opensys'
   match 'dashboard/closesys/:biz_process_id/:id' => 'dashboard#closesys'
 
+  match 'testreport/index' => 'testreport#index'
+  match 'testreport/top' => 'testreport#top'
+  match 'testreport/regulation' => 'testreport#byregulation'
+  match 'testreport/process' => 'testreport#byprocess'
+
+  match 'testing/index' => 'testing#index'
+  match 'testing/show/:system_id/:control_id' => 'testing#show'
+  match 'testing/show_closed/:system_id/:control_id' => 'testing#show_closed'
+  match 'testing/update_control_state/:system_id/:control_id/:value' => 'testing#update_control_state'
+  match 'testing/edit_control_text/:system_id/:control_id' => 'testing#edit_control_text'
+  match 'testing/update_control_text/:system_id/:control_id' => 'testing#update_control_text'
+  match 'testing/review/:document_id/:value' => 'testing#review'
+
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action

@@ -1,0 +1,18 @@
+.tree.remote.control<
+  -link_to url_for(:action => :show_closed, :system_id => sc.system.id, :control_id => sc.control.id), :remote => true do
+    %img.tree{:src => "/images/collapse.gif"}>
+  %span{:class => :control, :title => sc.control.slug}=sc.control.title
+  -if sc.evidence_complete?
+    %span.review.done
+      -ControlState::VALUES.each do |value|
+        =link_to value.to_s.capitalize, url_for(:action => :update_control_state, :system_id => sc.system.id, :control_id => sc.control.id, :value => value.to_s), :class => (sc.state == value ? "#{value} selected" : value), :remote => true, :method => :post
+    -unless sc.good_state?
+      =render :partial => 'testing/control_text', :locals => {:sc => sc}
+    %div
+      %h3 Evidence:
+    -if sc.evidences.empty?
+      %div.tree None
+    -sc.evidences.each do |evidence|
+      =render :partial => 'testing/document', :locals => {:document => evidence}
+  -else
+    %div.note Incomplete evidence

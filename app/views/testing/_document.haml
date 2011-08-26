@@ -1,0 +1,19 @@
+%div.tree.remote
+  -if document.document_descriptor
+    =document.document_descriptor.title
+    \:
+  -if document.complete?
+    %a{:href => document.link}=document.title
+  -else
+    %span.incomplete<
+      =document.title
+
+  -if document.complete?
+    -review_opts = {}
+    -review_opts[:class] = 'done' if document.reviewed?
+    %span.review{review_opts}
+      Pass?
+      =link_to "Yes", url_for(:action => :review, :document_id => document.id, :value => 1), :class => (document.good? ? 'yes selected' : 'yes'), :remote => true, :method => :post
+      =link_to "No", url_for(:action => :review, :document_id => document.id, :value => 0), :class => (document.good? ? 'no' : 'no selected'), :remote => true, :method => :post
+      -if document.reviewed?
+        =link_to "Maybe", url_for(:action => :review, :document_id => document.id, :value => 'maybe'), :class => 'maybe', :remote => true, :method => :post

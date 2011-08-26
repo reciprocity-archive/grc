@@ -1,0 +1,17 @@
+.remote
+  %br
+  %table.table
+    %tr
+      %th Result
+      %th Impact
+      %th Recommendation
+      %th
+    %tr
+      %td
+        =h sc.test_why
+      %td
+        =h sc.test_impact
+      %td
+        =h sc.test_recommendation
+      %td
+        =link_to "edit", url_for(:action => :edit_control_text, :system_id => sc.system.id, :control_id => sc.control.id), :remote => true, :method => :get

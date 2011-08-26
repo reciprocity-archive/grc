@@ -9,10 +9,10 @@ module ApplicationHelper
   end
 
   def project_modules
-    %w(dashboard).map { |id| ProjectModule.new(id.humanize, url_for({:controller => id, :only_path => true})) }
+    %w(dashboard testing testreport).map { |id| ProjectModule.new(id.humanize, url_for({:controller => id, :only_path => true})) }
   end
 
-  def reset_session
+  def reset_sessionx
     session[:user] = nil
     set_current_account(nil)
   end

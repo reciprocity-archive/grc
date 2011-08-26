@@ -1,0 +1,33 @@
+=render :partial => 'testreport/menu'
+
+%h1 Top Level Issue Tracking
+
+.dashboard
+  %table.table
+    %tr
+      %th Regulation
+      %th Result / Recommendations
+      %th Owner
+      %th Due Date
+    -@system_controls.each do |sc|
+      %tr
+        %td
+          %p
+            &=sc.control.regulation.title
+          %p.slug
+            &=sc.control.slug
+        -if sc.evidence_complete?
+          -unless sc.good_state?
+            %td
+              %p
+                &=sc.test_why
+              %p
+                &=sc.test_recommendation
+            %td
+              &=sc.system.owner.name
+        -else
+          %td Evidence Incomplete
+          %td
+            &=sc.system.owner.name
+
+/-content_for :sidebar, partial("base/sidebar")
