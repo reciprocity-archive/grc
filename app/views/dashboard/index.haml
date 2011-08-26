@@ -1,0 +1,17 @@
+:javascript
+  $(document).ready(function(){
+    $('div.dashboard')
+    .bind("ajax:success", function(evt, data, status, xhr){
+      el = $(evt.target).parents("div.remote")[0];
+      $(el).parent().html(xhr.responseText);
+    })
+  });
+
+%h1
+  Dashboard
+%div.dashboard
+  -@biz_processes.each do |bp|
+    .tree.biz-process{:id => "bp#{bp.id}"}
+      =render :partial => 'dashboard/closebp', :locals => {:bp => bp}
+
+/-content_for :sidebar, partial("base/sidebar")

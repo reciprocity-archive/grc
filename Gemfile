@@ -8,6 +8,8 @@ gem 'actionpack',         RAILS_VERSION, :require => 'action_pack'
 gem 'actionmailer',       RAILS_VERSION, :require => 'action_mailer'
 gem 'railties',           RAILS_VERSION, :require => 'rails'
 
+gem 'haml', '~> 3.0.25'
+
 gem 'dm-rails',          '~> 1.1.0'
 gem 'dm-sqlite-adapter', DM_VERSION
 

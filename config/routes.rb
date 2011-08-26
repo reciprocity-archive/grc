@@ -2,6 +2,13 @@ CmsRails::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
+  match 'dashboard/index' => 'dashboard#index'
+
+  match 'dashboard/openbp/:id' => 'dashboard#openbp'
+  match 'dashboard/closebp/:id' => 'dashboard#closebp'
+  match 'dashboard/opensys/:biz_process_id/:id' => 'dashboard#opensys'
+  match 'dashboard/closesys/:biz_process_id/:id' => 'dashboard#closesys'
+
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
@@ -49,6 +56,8 @@ CmsRails::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   # root :to => "welcome#index"
+
+  root :to => "welcome#index"
 
   # See how all your routes lay out with "rake routes"
 

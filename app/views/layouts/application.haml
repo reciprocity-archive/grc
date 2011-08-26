@@ -1,0 +1,40 @@
+!!! Strict
+%html{:lang => "en", :xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}
+    %title CMS
+    =stylesheet_link_tag :all
+    =stylesheet_link_tag 'themes/google/style'
+    =javascript_include_tag :defaults
+    =csrf_meta_tag
+  %body
+    #container
+      #header
+        %h1=link_to "CMS", dashboard_index_path
+        #user-navigation
+          /%ul.wat-cf
+          /  %li=link_to pat(:admin), Admin.url(:base, :index)
+          /  -if current_account
+          /    %li
+          /      %b=h current_account.email
+          /    %li=link_to pat(:logout), url(:sessions, :destroy), :method => :delete    
+          /  -else
+          /    %li=link_to pat(:login), login_page
+
+        #main-navigation
+          %ul.wat-cf
+            -project_modules.each do |project_module|
+              %li{:class => ("active" if request.path_info =~ /^#{project_module.path}/)}
+                =link_to project_module.name, project_module.path
+
+      #wrapper.wat-cf
+        .flash!=[:error, :warning, :notice].map { |type| content_tag(:div, flash[type], :class => "message #{type}") if flash[type] }.join
+        #main
+          =yield
+          #footer
+            /
+              .block
+                %p
+                  Copyright &copy;
+                  =Time.now.year
+        /#sidebar=yield_content :sidebar
