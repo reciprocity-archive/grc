@@ -4,9 +4,15 @@ CmsRails::Application.routes.draw do
 
   resource :user_session
 
-  match 'user_sessions/new' => 'user_sessions#new', :as => 'login'
-  match 'user_sessions/destroy' => 'user_sessions#destroy', :as => 'logout'
-  match 'user_sessions/create' => 'user_sessions#create'
+  if CmsRails::Application.sso_callback_url
+    match 'sso/new' => 'sso#new', :as => 'login'
+    match CmsRails::Application.sso_callback_url => "sso#callback"
+    match 'sso/destroy' => 'sso#destroy', :as => 'logout'
+  else
+    match 'user_sessions/new' => 'user_sessions#new', :as => 'login'
+    match 'user_sessions/destroy' => 'user_sessions#destroy', :as => 'logout'
+    match 'user_sessions/create' => 'user_sessions#create'
+  end
 
   match 'dashboard/index' => 'dashboard#index'
 
