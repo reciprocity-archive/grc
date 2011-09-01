@@ -3,6 +3,7 @@ source 'http://rubygems.org'
 RAILS_VERSION = '~> 3.0.4'
 DM_VERSION    = '~> 1.1.0'
 
+gem 'authlogic'
 gem 'activesupport',      RAILS_VERSION, :require => 'active_support'
 gem 'actionpack',         RAILS_VERSION, :require => 'action_pack'
 gem 'actionmailer',       RAILS_VERSION, :require => 'action_mailer'

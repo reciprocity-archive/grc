@@ -2,6 +2,12 @@ CmsRails::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
+  resource :user_session
+
+  match 'user_sessions/new' => 'user_sessions#new', :as => 'login'
+  match 'user_sessions/destroy' => 'user_sessions#destroy', :as => 'logout'
+  match 'user_sessions/create' => 'user_sessions#create'
+
   match 'dashboard/index' => 'dashboard#index'
 
   match 'dashboard/openbp/:id' => 'dashboard#openbp'

@@ -56,4 +56,8 @@ module ApplicationHelper
     return collection if co_search.empty?
     return collection.all(:biz_process_control_objectives => { :control_objective => co_search})
   end
+
+  def pat(sym)
+    sym.to_s.humanize
+  end
 end

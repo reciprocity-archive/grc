@@ -12,14 +12,14 @@
       #header
         %h1=link_to "CMS", dashboard_index_path
         #user-navigation
-          /%ul.wat-cf
-          /  %li=link_to pat(:admin), Admin.url(:base, :index)
-          /  -if current_account
-          /    %li
-          /      %b=h current_account.email
-          /    %li=link_to pat(:logout), url(:sessions, :destroy), :method => :delete    
-          /  -else
-          /    %li=link_to pat(:login), login_page
+          %ul.wat-cf
+            /%li=link_to pat(:admin), Admin.url(:base, :index)
+            -if current_user
+              %li
+                %b=h current_user.email
+              %li=link_to pat(:logout), logout_url, :method => :delete    
+            -else
+              %li=link_to pat(:login), login_url
 
         #main-navigation
           %ul.wat-cf

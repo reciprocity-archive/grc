@@ -25,6 +25,11 @@ class Account
   validates_format_of        :email,    :with => :email_address
   validates_format_of        :role,     :with => /[A-Za-z]/
 
+  def password=(password)
+    @password = password
+    encrypt_password
+  end
+
   ##
   # This method is for authentication purpose
   #
@@ -40,13 +45,52 @@ class Account
     get(id) rescue nil
   end
 
-  def has_password?(password)
+  def valid_password?(password)
     ::BCrypt::Password.new(crypted_password) == password
   end
 
-  def display_name
-    username
+  ##
+  # These methods are for ActiveRecord compatibility to make the 
+  # authlogic gem work
+  #
+  def changed?
+    dirty?
   end
+
+  def display_name
+    email
+  end
+
+  def self.column_names
+    []
+  end
+
+  def self.with_scope(scope)
+    raise "cannot handle scopes" if scope[:find] && scope[:find] != {}
+    yield
+  end
+
+  ##
+  # Other authlogic configuration
+  def self.login_field
+    :email
+  end
+
+  def self.primary_key
+    :id
+  end
+
+  def self.find_by_smart_case_login_field(value)
+    first(:email => value)
+  end
+
+  def persistence_token
+    # Use a constant for now
+    'PERSIST'
+  end
+
+  ##
+  # End authlogic configuration
 
   private
     def password_required
