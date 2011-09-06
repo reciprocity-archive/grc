@@ -4,6 +4,9 @@ CmsRails::Application.configure do
   # In the development environment your application's code is reloaded on
   # every request.  This slows down response time but is perfect for development
   # since you don't have to restart the webserver when you make code changes.
+
+  # Reloading fails for many2many datamapper relations that use :through => Resource
+  #
   #FIXME config.cache_classes = false
   config.cache_classes = true
 
