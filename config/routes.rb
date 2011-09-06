@@ -2,6 +2,8 @@ CmsRails::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
+  # get "dev/index"
+
   resource :user_session
 
   if CmsRails::Application.sso_callback_url
@@ -13,6 +15,17 @@ CmsRails::Application.routes.draw do
     match 'user_sessions/destroy' => 'user_sessions#destroy', :as => 'logout'
     match 'user_sessions/create' => 'user_sessions#create'
   end
+
+  match 'evidence/index' => 'evidence#index'
+  match 'evidence/show_closed_control/:system_id/:control_id' => 'evidence#show_closed_control'
+  match 'evidence/show_control/:system_id/:control_id' => 'evidence#show_control'
+  match 'evidence/new/:system_id/:control_id/:descriptor_id' => 'evidence#new'
+  match 'evidence/new_gdoc/:system_id/:control_id/:descriptor_id' => 'evidence#new_gdoc'
+  match 'evidence/attach/:system_id/:control_id/:descriptor_id' => 'evidence#attach'
+  match 'evidence/show/:document_id' => 'evidence#show'
+  match 'evidence/update/:document_id' => 'evidence#update'
+  match 'evidence/destroy/:system_id/:control_id/:document_id' => 'evidence#destroy'
+  match 'evidence/review/:document_id/:value' => 'evidence#review'
 
   match 'dashboard/index' => 'dashboard#index'
 

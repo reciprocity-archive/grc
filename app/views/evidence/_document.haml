@@ -1,0 +1,11 @@
+%div.tree.remote
+  -if document.document_descriptor
+    =document.document_descriptor.title
+    \:
+  -if document.complete?
+    %a{:target => '_blank', :href => transform_document_url(document.link)}=document.title
+  -else
+    %span.incomplete<
+      =document.title
+  %a.action{:href => url_for(:action => :destroy, :system_id => sc.system.id, :control_id => sc.control.id, :document_id => document.id), "data-method" => :delete}<
+    %img{:src => "/images/remove.png"}

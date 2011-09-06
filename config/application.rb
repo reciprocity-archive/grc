@@ -46,7 +46,7 @@ module CmsRails
     config.filter_parameters += [:password]
 
     config.generators do |g|
-      # g.template_engine :haml
+      g.template_engine :haml
     end
   end
 end

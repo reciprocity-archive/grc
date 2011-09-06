@@ -9,7 +9,7 @@ module ApplicationHelper
   end
 
   def project_modules
-    %w(dashboard testing testreport).map { |id| ProjectModule.new(id.humanize, url_for({:controller => id, :only_path => true})) }
+    %w(dashboard evidence testing testreport).map { |id| ProjectModule.new(id.humanize, url_for({:controller => id, :only_path => true})) }
   end
 
   def reset_sessionx

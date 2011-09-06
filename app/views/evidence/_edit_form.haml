@@ -1,0 +1,8 @@
+%div.tree.remote
+  -form_for document, url_for(:action => :update, :document_id => document.id), :method => :put, :class => :form, :remote  => true do |f|
+    =f.label :title
+    =f.text_field :title, :class => :short_field
+    =f.label :link
+    =f.text_field :link, :class => :short_field
+    =f.submit :save, :class => :button
+    =link_to "Cancel", url_for(:action => :show, :document_id => document.id), :class => :cancel, :remote => true

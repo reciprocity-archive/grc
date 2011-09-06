@@ -1,0 +1,12 @@
+.remote
+  %div.control<
+    -link_to url_for(:action => :show_closed_control, :system_id => sc.system.id, :control_id => sc.control.id, :format => :html), :remote => true do
+      %img.tree{:src => "/images/collapse.gif"}>
+    %span{:class => :control, :title => sc.control.slug}=sc.control.title
+    %div
+      %b Evidence:
+    -if sc.evidences.empty?
+      .tree None
+    -sc.evidences.each do |evidence|
+      =render :partial => 'evidence/document', :locals => {:sc => sc, :document => evidence}
+    =render :partial => 'evidence/add', :locals => {:sc => sc}

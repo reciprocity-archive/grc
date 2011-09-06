@@ -6,6 +6,7 @@ db/*.db
 log/*.log
 *.bak
 public/stylesheets/themes/google/style.css
+app/controllers/dev_controller.rb
 Gemfile.lock
 local.rb
 .bundle

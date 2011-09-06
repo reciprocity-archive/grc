@@ -3,13 +3,19 @@ source 'http://rubygems.org'
 RAILS_VERSION = '~> 3.0.4'
 DM_VERSION    = '~> 1.1.0'
 
+gem 'gdata'
 gem 'authlogic'
+gem 'dalli'
+gem 'builder'
+gem 'json'
+
 gem 'activesupport',      RAILS_VERSION, :require => 'active_support'
 gem 'actionpack',         RAILS_VERSION, :require => 'action_pack'
 gem 'actionmailer',       RAILS_VERSION, :require => 'action_mailer'
 gem 'railties',           RAILS_VERSION, :require => 'rails'
 
 gem 'haml', '~> 3.0.25'
+gem 'haml-rails'
 
 gem 'dm-rails',          '~> 1.1.0'
 gem 'dm-sqlite-adapter', DM_VERSION
@@ -58,5 +64,6 @@ group(:development, :test) do
 
   # gem 'rails_metrics', '~> 0.1', :git => 'git://github.com/engineyard/rails_metrics'
 
+  gem 'ruby-debug'
 end
 
