@@ -15,6 +15,7 @@ gem 'actionmailer',       RAILS_VERSION, :require => 'action_mailer'
 gem 'railties',           RAILS_VERSION, :require => 'rails'
 
 gem 'haml', '~> 3.0.25'
+gem 'sass'
 gem 'haml-rails'
 
 gem 'dm-rails',          '~> 1.1.0'

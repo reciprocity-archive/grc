@@ -48,5 +48,7 @@ module CmsRails
     config.generators do |g|
       g.template_engine :haml
     end
+
+    Sass::Plugin.options[:template_location] = { 'app/stylesheets' => 'public/stylesheets' }
   end
 end

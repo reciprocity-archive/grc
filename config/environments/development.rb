@@ -26,5 +26,9 @@ CmsRails::Application.configure do
 
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin
-end
 
+  # hm... these don't work
+  Sass::Plugin.options[:always_update] = true
+  Sass::Plugin.options[:always_check] = true
+  Sass::Plugin.options[:cache] = false
+end
