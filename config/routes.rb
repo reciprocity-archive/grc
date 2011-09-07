@@ -16,6 +16,7 @@ CmsRails::Application.routes.draw do
     match 'user_sessions/create' => 'user_sessions#create'
   end
 
+  match 'document/:action' => 'document'
   match 'slugfilter/index' => 'slugfilter#index'
   match 'slugfilter/values' => 'slugfilter#values'
 

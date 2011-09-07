@@ -1,0 +1,9 @@
+%h3 Document Sync
+  
+%ul
+  -if @messages.size > 0
+    -@messages.each do |msg|
+      %li
+        &=msg
+  -else
+    Everything already in sync
