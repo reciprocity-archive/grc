@@ -16,6 +16,6 @@
     %div.system<
       %div{:class => :systemhead, :title => system.slug}&=system.title
       -scs.each do |sc|
-        =render :partial => 'testing/closed_control', :locals => {:sc => sc}
+        =render :partial => 'closed_control', :locals => {:sc => sc}
 
-/-content_for :sidebar, partial("base/sidebar")
+-content_for :sidebar, render(:partial => "base/sidebar")

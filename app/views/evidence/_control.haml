@@ -8,5 +8,5 @@
     -if sc.evidences.empty?
       .tree None
     -sc.evidences.each do |evidence|
-      =render :partial => 'evidence/document', :locals => {:sc => sc, :document => evidence}
-    =render :partial => 'evidence/add', :locals => {:sc => sc}
+      =render :partial => 'document', :locals => {:sc => sc, :document => evidence}
+    =render :partial => 'add', :locals => {:sc => sc}

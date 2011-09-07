@@ -16,6 +16,6 @@
       %div{:class => :systemhead, :title => system.slug}=system.title
       .tree
         -scs.each do |sc|
-          =render :partial => 'evidence/closed_control', :locals => {:sc => sc}
+          =render :partial => 'closed_control', :locals => {:sc => sc}
 
-/-content_for :sidebar, render :partial => "base/sidebar")
+-content_for :sidebar, render(:partial => "base/sidebar")

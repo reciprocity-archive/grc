@@ -1,4 +1,4 @@
-=render :partial => 'testreport/menu'
+=render :partial => 'menu'
 
 %h1 Regulation Issue Tracking
 
@@ -32,4 +32,4 @@
               &=sc.control.slug
           %td Evidence Incomplete
 
-/-content_for :sidebar, partial("base/sidebar")
+-content_for :sidebar, render(:partial => "base/sidebar")

@@ -5,6 +5,6 @@
   %span{:class => sc.state}&=sc.state.to_s.capitalize
 -if sc.evidence_complete?
   -unless sc.good_state?
-    =render :partial => 'testreport/control_text', :locals => {:sc => sc}
+    =render :partial => 'control_text', :locals => {:sc => sc}
 -else
   %div.note Incomplete evidence

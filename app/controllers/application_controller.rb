@@ -1,6 +1,7 @@
 require 'dm-rails/middleware/identity_map'
 class ApplicationController < ActionController::Base
   before_filter :require_user
+  before_filter :regulation_filter_set
 
   use Rails::DataMapper::Middleware::IdentityMap
   protect_from_forgery
@@ -45,4 +46,16 @@ class ApplicationController < ActionController::Base
       redirect_to(session[:return_to] || default)
       session[:return_to] = nil
     end
+
+    def regulation_filter_set
+      regulation_id = params[:regulation][:id] rescue nil
+      if !regulation_id.nil?
+        if regulation_id == ""
+          session[:regulation_id] = nil
+        else
+          session[:regulation_id] = regulation_id
+        end
+      end
+    end
+
 end

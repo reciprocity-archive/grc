@@ -3,10 +3,9 @@ class DashboardController < ApplicationController
 
   def index
     if request.post?
-      redirect_to url_for(:dashboard, :index)
+      redirect_to url_for
     else
       @biz_processes = filter_biz_processes(BizProcess.all)
-      render 'dashboard/index'
     end
   end
 
