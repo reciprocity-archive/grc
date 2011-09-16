@@ -1,0 +1,78 @@
+As root:
+============
+
+  apt-get install mysql-client mysql-server ruby-dev libsqlite3-dev libmysqlclient-dev nginx mercurial build-essential
+  adduser --shell /bin/bash --disabled-password --home /home1/cmsprod cmsprod
+
+  su - cmsprod
+
+As cmsprod:
+==============
+
+Add to .bashrc
+  alias so='. ~/.bashrc ; . ~/.profile'
+  alias gem=gem1.8
+  alias my='mysql -ucmsprod -pcmsprod cms'
+  alias mydump='mysqldump -ucmsprod -pcmsprod cms'
+  export RAILS_ENV=production
+
+set RAILS_ENV to 'development' if this is not production.
+
+Add to .profile
+  PATH="$HOME/gems/bin:$PATH"
+  export RUBYLIB="$HOME/gems/lib"
+  export GEM_HOME="$HOME/gems"
+
+Log out and back in to set the environment.
+
+Setup rubygems:
+  wget http://production.cf.rubygems.org/rubygems/rubygems-1.7.2.tgz
+  tar xzf rubygems-1.7.2.tgz
+  cd rubygems-1.7.2
+  ruby setup.rb --prefix ~/gems
+  gem install bundler
+
+  hg clone https://rails.compliance-management.googlecode.com/hg/ cms
+  cd cms
+  bundle install
+  mkdir log
+
+For dev:
+===========
+
+  rake dm:auto:migrate seed
+  rails start --host `hostname`
+
+For prod:
+=============
+
+Change /etc/nginx/sites-enabled/default:
+
+  server {
+          listen   80 default;
+          server_name  SERVER;
+
+          access_log  /var/log/nginx/cms-access.log;
+
+          location / {
+                  proxy_pass http://localhost:3000/;
+
+                  proxy_set_header  X-Real-IP  $remote_addr;
+                  proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+                  proxy_set_header  Host $http_host;
+
+                  root   /var/www/nginx-default;
+                  index  index.html index.htm;
+          }
+  }
+
+
+adjust SERVER above to your hostname as visible from outside.
+
+  sudo mysql
+    create database cms;
+    grant all on cms.* to cms@localhost identified by "cms";
+
+And finally, starting the application server in production:
+
+  rails server

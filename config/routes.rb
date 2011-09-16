@@ -17,8 +17,7 @@ CmsRails::Application.routes.draw do
   end
 
   match 'document/:action' => 'document'
-  match 'slugfilter/index' => 'slugfilter#index'
-  match 'slugfilter/values' => 'slugfilter#values'
+  match 'slugfilter/:action' => 'slugfilter'
 
   match 'evidence/index' => 'evidence#index'
   match 'evidence/show_closed_control/:system_id/:control_id' => 'evidence#show_closed_control'
@@ -38,10 +37,7 @@ CmsRails::Application.routes.draw do
   match 'dashboard/opensys/:biz_process_id/:id' => 'dashboard#opensys'
   match 'dashboard/closesys/:biz_process_id/:id' => 'dashboard#closesys'
 
-  match 'testreport/index' => 'testreport#index'
-  match 'testreport/top' => 'testreport#top'
-  match 'testreport/regulation' => 'testreport#byregulation'
-  match 'testreport/process' => 'testreport#byprocess'
+  match 'testreport/:action' => 'testreport'
 
   match 'testing/index' => 'testing#index'
   match 'testing/show/:system_id/:control_id' => 'testing#show'

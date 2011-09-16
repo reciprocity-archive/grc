@@ -1,5 +1,4 @@
 defaults: &defaults
-  adapter: sqlite
 
 development:
   database: db/._development.db
@@ -18,7 +17,12 @@ development:
 
 test:
   database: db/._test.db
+  adapter: sqlite
   <<: *defaults
 production:
-  database: db/._production.db
+  adapter: mysql
+  database: cms
+  username: cms
+  password: cms
+  host: localhost
   <<: *defaults
