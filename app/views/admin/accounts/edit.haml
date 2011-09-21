@@ -1,0 +1,15 @@
+.block
+  .secondary-navigation
+    %ul.wat-cf
+      %li.first.active=link_to pat(:list), accounts_path
+      %li=link_to pat(:new), new_account_path
+      %li.active=link_to pat(:edit), edit_account_path(@account)
+  .content
+    %h2.title
+      =pat(:edit)
+      =mt(:account)
+    .inner
+      =form_for @account, :method => :put, :html => {:class => :form} do |f|
+        =render :partial => "admin/accounts/form", :locals => { :f => f }
+
+/-content_for :sidebar, partial("base/sidebar")

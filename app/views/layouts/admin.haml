@@ -13,7 +13,7 @@
         %h1=link_to "CMS", root_path
         #user-navigation
           %ul.wat-cf
-            %li=link_to pat(:admin), admin_path
+            %li=link_to pat(:main), root_path
             -if current_user
               %li
                 %b=h current_user.email
@@ -23,7 +23,7 @@
 
         #main-navigation
           %ul.wat-cf
-            -project_modules.each do |project_module|
+            -admin_project_modules.each do |project_module|
               %li{:class => ("active" if request.path_info =~ /^#{project_module.path}/)}
                 =link_to project_module.name, project_module.path
 

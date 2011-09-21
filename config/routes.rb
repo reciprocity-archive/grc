@@ -1,4 +1,10 @@
 CmsRails::Application.routes.draw do
+  match 'admin' => 'admin/base#index'
+
+  scope :module => "admin" do
+    resources :accounts, :path => "/admin/accounts"
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

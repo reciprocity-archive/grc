@@ -9,7 +9,15 @@ module ApplicationHelper
   end
 
   def project_modules
-    %w(dashboard evidence testing testreport).map { |id| ProjectModule.new(id.humanize, url_for({:controller => id, :only_path => true})) }
+    %w(dashboard evidence testing testreport).map { |id| ProjectModule.new(id.humanize, url_for({:controller => "/" + id, :only_path => true})) }
+  end
+
+  def admin_project_modules
+    %w(accounts).map { |id| ProjectModule.new(id.humanize, url_for({:controller => "/admin/" + id, :only_path => true})) }
+  end
+
+  def access_control_roles
+    [:admin, :analyst, :guest]
   end
 
   def reset_sessionx
@@ -59,5 +67,13 @@ module ApplicationHelper
 
   def pat(sym)
     sym.to_s.humanize
+  end
+
+  def mt(sym)
+    sym.to_s.humanize
+  end
+
+  def mat(sym1, sym2)
+    sym2.to_s.humanize
   end
 end

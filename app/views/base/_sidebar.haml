@@ -2,19 +2,19 @@
   %h3 Sidebar
   .content
     %p Filter by Regulation
-    -form_for((@regulation || Regulation.new), :url => {} , :html => { :class => :form }) do |f|
-      = f.collection_select :id, Regulation.all, :id, :display_name, :include_blank => true
-      = f.submit "Show", :class => :button
+    =form_for((@regulation || Regulation.new), :url => {} , :html => { :class => :form }) do |f|
+      =f.collection_select :id, Regulation.all, :id, :display_name, :include_blank => true
+      =f.submit "Show", :class => :button
 
     %p Filter Controls by Slug
-    -form_tag url_for(:controller => :slugfilter, :action => :index, :format => :js), :class => :form, :remote => true do
+    =form_tag url_for(:controller => "/slugfilter", :action => :index, :format => :js), :class => :form, :remote => true do
       =text_field_tag :slugfilter, session[:slugfilter], :class => 'text_field'
       =submit_tag "Filter", :class => :button
       =submit_tag "Clear", :name => :clear, :class => :button
     :javascript
       $(document).ready(function() {
         $("input#slugfilter").autocomplete({
-          source: "#{url_for(:controller => :slugfilter, :action => :values, :format => :js)}",
+          source: "#{url_for(:controller => "/slugfilter", :action => :values, :format => :js)}",
           minLength: 0,
         });
       });
