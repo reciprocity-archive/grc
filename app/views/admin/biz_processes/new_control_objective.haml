@@ -1,0 +1,15 @@
+.block
+  .secondary-navigation
+    %ul.wat-cf
+      %li.first=link_to pat(:list), url(:biz_processes, :index)
+      %li.active=link_to pat(:new), url(:biz_processes, :new)
+  .content
+    %h2.title
+      Attach Control Objective to Business Process
+    .inner
+      %h3
+        &=@biz_process.title
+      -form_for :biz_process_control_objective, url(:biz_processes, :create_control_objective), :class => :form do |f|
+        =partial "biz_processes/control_objective_form", :locals => { :f => f }
+
+-content_for :sidebar, partial("base/sidebar")

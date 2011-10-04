@@ -1,0 +1,56 @@
+.group
+  =f.label :title
+  =f.text_field :title, :class => :text_field
+
+.group
+  =f.label :slug
+  =f.text_field :slug, :class => :text_field
+
+.group
+  =f.label :description
+  ~f.text_area :description, :class => :text_area
+
+.group
+  =f.label :documents
+  .sub-item
+    -edit_children_inline(@biz_process, :policies, :document)
+
+.group
+  =f.label :control_objectives
+  =f.collection_select :co_ids, filtered_control_objectives, :id, :display_name, {}, {:class => :collection, :multiple => true}
+
+:javascript
+  $('#biz_process_co_ids').multiselect(
+  {
+    noneSelectedText: "Select",
+    selectedList: 4,
+    minWidth: 500,
+  }).multiselectfilter( { });
+
+.group
+  =f.label :controls
+  =f.collection_select :control_ids, filtered_controls, :id, :display_name, {}, {:class => :collection, :multiple => true}
+
+:javascript
+  $('#biz_process_control_ids').multiselect(
+  {
+    noneSelectedText: "Select",
+    selectedList: 4,
+    minWidth: 500,
+  }).multiselectfilter( { });
+
+.group
+  =f.label :systems
+  =f.collection_select :system_ids, System.all, :id, :display_name, {}, {:class => :collection, :multiple => true}
+
+:javascript
+  $('#biz_process_system_ids').multiselect(
+  {
+    noneSelectedText: "Select",
+    selectedList: 4,
+    minWidth: 500,
+  }).multiselectfilter( { });
+
+.group.navform.wat-cf
+  =f.submit pat(:save), :class => :button
+  =f.submit pat(:cancel), :onclick => "window.location='#{biz_processes_path}';return false", :class => :button

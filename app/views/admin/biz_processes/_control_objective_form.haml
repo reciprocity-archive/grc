@@ -1,0 +1,8 @@
+.group
+  =f.label :control_objective_id
+  =f.collection_select :control_objective_id, :collection => filtered_control_objectives, :id, :display_name, {:include_blank => true}, {:class => :association}
+
+=f.hidden_field :biz_process_id, :value => @biz_process.id
+
+.group.navform.wat-cf
+  =f.submit pat(:save), :class => :button

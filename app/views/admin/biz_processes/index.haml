@@ -1,0 +1,26 @@
+.block
+  =render :partial => "admin/biz_processes/secnav"
+  .content
+    %h2.title
+      =pat(:all)
+      =mt(:biz_processes)
+    .inner
+      %table.table
+        %tr
+          %th.first=mat(:biz_process, :title)
+          %th=mat(:biz_process, :updated_at)
+          %th.last!="&nbsp;"
+        -@biz_processes.each do |biz_process|
+          %tr
+            %td.first
+              =link_to biz_process.title, edit_biz_process_path(biz_process)
+              .slug&=biz_process.slug
+            %td=display_time(biz_process.updated_at)
+            %td.last
+              =button_to pat(:edit), edit_biz_process_path(biz_process), :method => :get, :class => :button_to
+              ="|"
+              =button_to pat(:delete), biz_process, :method => :delete, :class => :button_to
+      .actions-bar.wat-cf
+        .actions!="&nbsp;"
+
+/-content_for :sidebar, partial("base/sidebar")

@@ -13,7 +13,7 @@ module ApplicationHelper
   end
 
   def admin_project_modules
-    %w(accounts).map { |id| ProjectModule.new(id.humanize, url_for({:controller => "/admin/" + id, :only_path => true})) }
+    %w(accounts biz_processes).map { |id| ProjectModule.new(id.humanize, url_for({:controller => "/admin/" + id, :only_path => true})) }
   end
 
   def access_control_roles
@@ -75,5 +75,9 @@ module ApplicationHelper
 
   def mat(sym1, sym2)
     sym2.to_s.humanize
+  end
+
+  def display_time(time)
+    time.strftime("%Y-%m-%d %H:%M") rescue "-"
   end
 end

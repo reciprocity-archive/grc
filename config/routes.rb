@@ -3,6 +3,7 @@ CmsRails::Application.routes.draw do
 
   scope :module => "admin" do
     resources :accounts, :path => "/admin/accounts"
+    resources :biz_processes, :path => "/admin/biz_processes"
   end
 
   # The priority is based upon order of creation:
