@@ -9,14 +9,14 @@ module ManyHelper
         if item
           haml_tag :td do
             haml_tag :strong do
-                haml_tag :a, :<, :href => url(other.to_s.pluralize.to_sym, :edit, item.id) do
+                haml_tag :a, :<, :href => url_for(:controller => other.to_s.pluralize.to_sym, :action => :edit, :id => item.id) do
                   haml_concat item.display_name
                 end
             end
           end
           yield(assoc_item)
           haml_tag :td do
-            haml_concat link_to(pat(:detach), url(controller, destroy_method, obj.id, item.id), :method => :delete, :class => :button)
+            haml_concat link_to(pat(:detach), url_for(:controller => controller, :action => destroy_method, :id => obj.id, :other_id => item.id), :method => :delete, :class => :button)
           end
         else
           haml_tag :td do
@@ -81,7 +81,7 @@ module ManyHelper
       obj.send(other.to_s.pluralize).each do |item|
         haml_tag :tr do
           haml_tag :td, :class => :title do
-            haml_tag :a, :<, :href => url(other.to_s.pluralize.to_sym, :edit, item.id) do
+            haml_tag :a, :<, :href => url_for(:controller => other.to_s.pluralize.to_sym, :action => :edit, :id => item.id) do
               haml_concat item.display_name
             end
           end

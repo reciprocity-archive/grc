@@ -1,0 +1,5 @@
+.secondary-navigation
+  %ul.wat-cf
+    %li.first.active=link_to pat(:list), control_objectives_path
+    %li=link_to pat(:new), new_control_objective_path
+    /%li=link_to pat(:controls), url(:control_objectives, :controls, 0)

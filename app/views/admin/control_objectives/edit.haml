@@ -1,0 +1,15 @@
+.block
+  .secondary-navigation
+    %ul.wat-cf
+      %li.first=link_to pat(:list), control_objectives_path
+      %li=link_to pat(:new), new_control_objective_path
+      %li.active=link_to pat(:edit), edit_control_objective_path(@control_objective)
+  .content
+    %h2.title
+      =pat(:edit)
+      =mt(:control_objective)
+    .inner
+      =form_for @control_objective, :method => :put, :html => {:class => :form} do |f|
+        =render :partial => "admin/control_objectives/form", :locals => { :f => f }
+
+/-content_for :sidebar, partial("base/sidebar")

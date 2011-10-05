@@ -13,7 +13,7 @@ module ApplicationHelper
   end
 
   def admin_project_modules
-    %w(accounts biz_processes business_areas).map { |id| ProjectModule.new(id.humanize, url_for({:controller => "/admin/" + id, :only_path => true})) }
+    %w(accounts biz_processes business_areas control_objectives).map { |id| ProjectModule.new(id.humanize, url_for({:controller => "/admin/" + id, :only_path => true})) }
   end
 
   def access_control_roles
@@ -79,5 +79,9 @@ module ApplicationHelper
 
   def display_time(time)
     time.strftime("%Y-%m-%d %H:%M") rescue "-"
+  end
+
+  def regulation_display(regulation)
+    regulation.company? ? 'Company' : 'Regulation'
   end
 end
