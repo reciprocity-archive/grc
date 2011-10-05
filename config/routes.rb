@@ -12,6 +12,7 @@ CmsRails::Application.routes.draw do
       end
     end
     resources :biz_processes, :path => "/admin/biz_processes"
+    resources :business_areas, :path => "/admin/business_areas"
   end
 
   # The priority is based upon order of creation:

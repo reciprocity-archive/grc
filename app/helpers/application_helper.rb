@@ -13,7 +13,7 @@ module ApplicationHelper
   end
 
   def admin_project_modules
-    %w(accounts biz_processes).map { |id| ProjectModule.new(id.humanize, url_for({:controller => "/admin/" + id, :only_path => true})) }
+    %w(accounts biz_processes business_areas).map { |id| ProjectModule.new(id.humanize, url_for({:controller => "/admin/" + id, :only_path => true})) }
   end
 
   def access_control_roles

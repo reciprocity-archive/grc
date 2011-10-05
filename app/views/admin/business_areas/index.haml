@@ -1,0 +1,25 @@
+.block
+  .secondary-navigation
+    %ul.wat-cf
+      %li.first.active=link_to pat(:list), business_areas_path
+      %li=link_to pat(:new), new_business_area_path
+  .content
+    %h2.title
+      =pat(:all)
+      =mt(:business_areas)
+    .inner
+      %table.table
+        %tr
+          %th.first=mat(:business_area, :title)
+          %th=mat(:business_area, :updated_at)
+          %th.last!="&nbsp;"
+        -@business_areas.each do |business_area|
+          %tr
+            %td.first=link_to h(business_area.title), edit_business_area_path(business_area)
+            %td=display_time(business_area.updated_at)
+            %td.last
+              =button_to pat(:edit), edit_business_area_path(business_area), :method => :get, :class => :button_to
+      .actions-bar.wat-cf
+        .actions!="&nbsp;"
+
+/-content_for :sidebar, partial("base/sidebar")
