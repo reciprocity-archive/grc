@@ -1,6 +1,8 @@
 class Admin::BizProcessesController < ApplicationController
   layout "admin"
   include Admin::BizProcessesHelper
+  include ManyHelper
+  include AutofilterHelper
 
   def index
     @biz_processes = BizProcess.all
@@ -103,21 +105,17 @@ class Admin::BizProcessesController < ApplicationController
   end
 
   def controls
-    if request.post?
-      post_many2many(:left_class => BizProcess,
-                     :right_class => Control,
-                     :lefts => filtered_control_objectives)
+    if request.put?
+      post_many2many(:left_class => BizProcess, :right_class => Control)
     else
-      content_for :secnav, partial("biz_processes/secnav")
       get_many2many(:left_class => BizProcess, :right_class => Control)
     end
   end
 
   def systems
-    if request.post?
+    if request.put?
       post_many2many(:left_class => BizProcess, :right_class => System)
     else
-      content_for :secnav, partial("biz_processes/secnav")
       get_many2many(:left_class => BizProcess, :right_class => System)
     end
   end

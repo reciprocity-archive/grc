@@ -117,7 +117,7 @@ module ManyHelper
     @lefts = opts[:lefts] || left_class.all(:order => :slug)
 
     id = params[:id]
-    if id == "0"
+    if id.nil? || id == "0"
       id = @lefts.first.id
     end
 
@@ -125,7 +125,6 @@ module ManyHelper
     @rights = @right_class.send("for_#{left_class_underscore}".to_sym, @left) rescue @right_class.all
     @rights = @rights.all(:order => :slug)
     @show_slugfilter = opts[:show_slugfilter]
-    render "base/many2many"
   end
 
   def post_many2many(opts)
@@ -148,7 +147,9 @@ module ManyHelper
     end
     if left.save
       flash[:notice] = 'Successfully updated.'
+    else
+      flash[:error] = 'Failed.'
     end
-    redirect url(left_class_underscore.pluralize.to_sym, right_relation.to_sym, :id => left.id)
+    redirect_to :controller => left_class_underscore.pluralize.to_sym, :action => right_relation.to_sym, :id => left.id
   end
 end

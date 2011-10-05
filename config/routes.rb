@@ -3,6 +3,14 @@ CmsRails::Application.routes.draw do
 
   scope :module => "admin" do
     resources :accounts, :path => "/admin/accounts"
+    resources :biz_processes do
+      collection do
+        get 'controls'
+        put 'controls'
+        get 'systems'
+        put 'systems'
+      end
+    end
     resources :biz_processes, :path => "/admin/biz_processes"
   end
 
