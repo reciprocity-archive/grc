@@ -20,6 +20,30 @@ CmsRails::Application.routes.draw do
       end
     end
     resources :control_objectives, :path => "/admin/control_objectives"
+    resources :controls do
+      collection do
+        get 'control_objectives'
+        put 'control_objectives'
+
+        get 'systems'
+        put 'systems'
+
+        get 'biz_processes'
+        put 'biz_processes'
+
+        get 'controls'
+        put 'controls'
+
+        get 'evidence_descriptors'
+        put 'evidence_descriptors'
+      end
+      member do
+        get 'add_biz_process'
+        delete 'destroy_biz_process'
+        post 'create_biz_process'
+      end
+    end
+    resources :controls, :path => "/admin/controls"
     resources :regulations, :path => "/admin/regulations"
   end
 
@@ -41,7 +65,8 @@ CmsRails::Application.routes.draw do
   end
 
   match 'document/:action' => 'document'
-  match 'slugfilter/:action' => 'slugfilter'
+  match 'slugfilter/index' => 'slugfilter#index', :as => 'slugfilter_index'
+  match 'slugfilter/values' => 'slugfilter#values', :as => 'slugfilter_values'
 
   match 'evidence/index' => 'evidence#index'
   match 'evidence/show_closed_control/:system_id/:control_id' => 'evidence#show_closed_control'

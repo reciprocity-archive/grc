@@ -1,0 +1,12 @@
+.block
+  =render :partial => "admin/controls/secnav"
+  .content
+    %h2.title
+      Attach Business Process to Control
+    .inner
+      %b
+        &=@control.title
+      =form_for :biz_process_control, {:url => {:action => :create_biz_process}, :html => {:class => :form}} do |f|
+        =render :partial => "admin/controls/biz_process_form", :locals => { :f => f }
+
+/-content_for :sidebar, partial("base/sidebar")

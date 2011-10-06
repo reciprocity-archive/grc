@@ -1,7 +1,6 @@
 -left_controller = @left.class.to_s.underscore.pluralize.to_sym
 -left_class = @left.class.to_s.underscore
 -right_action = @right_class.to_s.underscore.pluralize.to_sym
--right_ids = (@right_class.to_s.underscore + "_ids").to_sym
 #wrap
   #left
     -if @show_slugfilter
@@ -14,15 +13,15 @@
             %b
               &~left_object.display_name
           -else
-            %a{:href => url_for(:controller => left_controller, :action => right_action, :id => left_object.id)}
+            %a{:href => url_for(:id => left_object.id)}
               &~left_object.display_name
   #right
-    =form_for @left, :url => {:controller => left_controller, :action => right_action, :id => @left.id}, :method => :put, :html => {:class => :form} do |f|
+    =form_for @left, :url => {:id => @left.id}, :method => :put, :html => {:class => :form} do |f|
       .group.navform.wat-cf
         =f.submit pat(:save), :class => :button
-        =link_to :cancel, :controller => left_controller, :action => right_action, :id => @left.id
+        =link_to :cancel, :id => @left.id
 
       %h3=pat(@right_class.to_s.underscore)
-      =f.collection_select(right_ids, @rights, :id, :display_name, {}, {:multiple => true})
+      =f.collection_select(@right_ids, @rights, :id, :display_name, {}, {:multiple => true})
       :javascript
-        $('##{left_class}_#{right_ids}').manyselect({ });
+        $('##{left_class}_#{@right_ids}').manyselect({ });

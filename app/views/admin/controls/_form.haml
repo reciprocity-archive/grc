@@ -1,0 +1,110 @@
+.group
+  =f.label :regulation_id
+  -if !@control.new?
+    =link_to @control.regulation.display_name,
+      edit_regulation_path(@control.regulation)
+  -else
+    =f.collection_select :regulation_id, Regulation.all, :id, :display_name, {}, {:class => :collection, :multiple => true}
+    :javascript
+      old_slug_value = ""
+      $('#control_regulation_id').change(function() {
+        $.get("#{url(:regulations, :slug, :format => :js)}", {"id": $('#control_regulation_id').val()}, function(data) {
+          if ($("#control_slug")[0].value == old_slug_value)
+            $("#control_slug")[0].value = data
+            old_slug_value = data
+        }, "json");
+      });
+
+-if !@control.new?
+  .group
+    =f.label :control_objectives_id
+    =f.collection_select :co_ids, @control.regulation.control_objectives, :id, :display_name, {}, {:class => :collection, :multiple => true}
+
+  :javascript
+    $('#control_co_ids').multiselect(
+    {
+      noneSelectedText: "Select",
+      selectedList: 4,
+      minWidth: 500,
+    }).multiselectfilter(
+    {
+    });
+
+.group
+  =f.label :title
+  =f.text_field :title, :class => :text_field
+
+.group
+  =f.label :slug
+  =f.text_field :slug, :class => :text_field
+
+.group
+  =f.label :is_key
+  =f.check_box :is_key, :class => :check_box
+
+.group
+  =f.label :description
+  ~f.text_area :description, :class => :text_area
+
+.group
+  =f.label :frequency
+  =f.text_field :frequency, :class => :text_field
+
+.group
+  =f.label :frequency_type
+  =f.select :frequency_type, Control.properties[:frequency_type].flag_map.to_a.sort.map { |ind, name| name }, {:class => :enum}
+
+.group
+  =f.label :fraud_related
+  =f.check_box :fraud_related, :class => :check_box
+
+.group
+  =f.label :assertion
+  =f.text_field :assertion, :class => :text_field
+
+.group
+  =f.label :effective_at
+  =f.text_field :effective_at, :class => :text_field, :value => (@control.effective_at || Date.today).strftime("%Y-%m-%d")
+
+.group
+  =f.label :business_area_id
+  =f.collection_select :business_area_id, BusinessArea.all, :id, :display_name, {}, {:class => :collection}
+
+.group
+  =f.label :test_result_id
+  =f.collection_select :test_result_id, TestResult.all, :id, :display_name, {}, {:class => :collection}
+
+.group.navform.wat-cf
+  =f.submit pat(:save), :class => :button
+  =f.submit pat(:cancel), :onclick => "window.location='#{controls_path}';return false", :class => :button
+
+-if @control.regulation && @control.regulation.company?
+  %hr.section
+  %h3 Biz Processes
+  %table.table
+    %tr
+      %th Name
+      %th State
+      %th Ticket
+      %th
+    -edit_many(@control, :biz_process_controls, :biz_process) do |bpc|
+      %td
+        State: 
+        %span{:class => bpc.state}
+          =bpc.state.to_s.capitalize
+      %td
+        Ticket: 
+        =bpc.ticket
+  -edit_many_attach(@control, :biz_process_controls, :biz_process)
+
+/  %hr.section
+/  %h3 Systems
+/  -edit_children(@control, :system)
+/
+/  %hr.section
+/  %h3 Evidence Descriptors
+/  -edit_many_anon(@control, :evidence_descriptor, :document_descriptor)
+/
+/  %hr.section
+/  %h3 Implemented Controls
+/  -edit_many_anon(@control, :implemented_control, :control)

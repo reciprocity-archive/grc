@@ -1,0 +1,11 @@
+.block
+  =render :partial => "admin/controls/secnav"
+  .content
+    %h2.title
+      =pat(:edit)
+      =mt(:control)
+    .inner
+      =form_for @control, :method => :put, :html => {:class => :form} do |f|
+        =render :partial => "admin/controls/form", :locals => { :f => f }
+
+/-content_for :sidebar, partial("base/sidebar")

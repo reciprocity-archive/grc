@@ -16,13 +16,13 @@ module ManyHelper
           end
           yield(assoc_item)
           haml_tag :td do
-            haml_concat link_to(pat(:detach), url_for(:controller => controller, :action => destroy_method, :id => obj.id, :other_id => item.id), :method => :delete, :class => :button)
+            haml_concat link_to(pat(:detach), url_for(:controller => controller, :action => destroy_method, :id => obj.id, "#{other}_id" => item.id), :method => :delete, :class => :button)
           end
         else
           haml_tag :td do
             haml_concat "(deleted)"
             haml_concat link_to(pat(:detach),
-                                url(controller, destroy_method, obj.id, assoc_item.send("#{other}_id")),
+                                url_for(:controller => controller, :action => destroy_method, :id => obj.id, "#{other}_id" => assoc_item.send("#{other}_id")),
                                 :method => :delete, :class => :button)
           end
         end
@@ -35,7 +35,7 @@ module ManyHelper
     return "" unless obj.id
     controller = obj.class.to_s.underscore.pluralize.to_sym
     add_method = "add_#{other}".to_sym
-    haml_concat link_to(pat(:attach), url(controller, add_method, obj.id), :class => :button)
+    haml_concat link_to(pat(:attach), url_for(:controller => controller, :action => add_method, :id => obj.id), :class => :button)
   end
 
   def edit_many_anon(obj, other, other_controller=nil)
@@ -116,14 +116,20 @@ module ManyHelper
 
     @lefts = opts[:lefts] || left_class.all(:order => :slug)
 
+    @right_ids = opts[:right_ids] || (@right_class.to_s.underscore + "_ids").to_sym
+
     id = params[:id]
     if id.nil? || id == "0"
-      id = @lefts.first.id
+      if @lefts.empty?
+        id = left_class.first.id
+      else
+        id = @lefts.first.id
+      end
     end
 
     @left = left_class.get(id)
     @rights = @right_class.send("for_#{left_class_underscore}".to_sym, @left) rescue @right_class.all
-    @rights = @rights.all(:order => :slug)
+    @rights = @rights.all(:order => :slug) rescue @rights.all
     @show_slugfilter = opts[:show_slugfilter]
   end
 
@@ -133,10 +139,13 @@ module ManyHelper
 
     right_class = opts[:right_class]
     right_class_underscore = right_class.to_s.underscore
-    right_relation = right_class_underscore.pluralize
+
+    right_relation = opts[:right_relation] || right_class_underscore.pluralize
+
+    right_ids = opts[:right_ids] || "#{right_class_underscore}_ids"
 
     left = left_class.get(params[:id])
-    ids = params[left_class_underscore.to_sym]["#{right_class_underscore}_ids"]
+    ids = params[left_class_underscore.to_sym][right_ids]
 
     # left.rights = []
     left.send("#{right_relation}=".to_sym, [])
@@ -150,6 +159,6 @@ module ManyHelper
     else
       flash[:error] = 'Failed.'
     end
-    redirect_to :controller => left_class_underscore.pluralize.to_sym, :action => right_relation.to_sym, :id => left.id
+    redirect_to :id => left.id
   end
 end

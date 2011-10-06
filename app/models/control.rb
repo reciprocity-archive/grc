@@ -79,4 +79,12 @@ class Control
   def co_ids
     control_objectives.map { |co| co.id }
   end
+
+  def implemented_control_ids
+    implemented_controls.map { |c| c.id }
+  end
+
+  def evidence_descriptor_ids
+    evidence_descriptors.map { |e| e.id }
+  end
 end
