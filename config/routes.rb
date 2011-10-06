@@ -13,6 +13,12 @@ CmsRails::Application.routes.draw do
     end
     resources :biz_processes, :path => "/admin/biz_processes"
     resources :business_areas, :path => "/admin/business_areas"
+    resources :control_objectives do
+      collection do
+        get 'controls'
+        put 'controls'
+      end
+    end
     resources :control_objectives, :path => "/admin/control_objectives"
     resources :regulations, :path => "/admin/regulations"
   end

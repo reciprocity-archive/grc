@@ -95,12 +95,4 @@ class Admin::ControlObjectivesController < ApplicationController
       get_many2many(:left_class => ControlObjective, :right_class => Control)
     end
   end
-
-  def systems
-    if request.put?
-      post_many2many(:left_class => ControlObjective, :right_class => System)
-    else
-      get_many2many(:left_class => ControlObjective, :right_class => System)
-    end
-  end
 end
