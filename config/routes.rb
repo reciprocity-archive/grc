@@ -52,6 +52,7 @@ CmsRails::Application.routes.draw do
       end
     end
     resources :regulations, :path => "/admin/regulations"
+    resources :people, :path => "/admin/people"
   end
 
   # The priority is based upon order of creation:

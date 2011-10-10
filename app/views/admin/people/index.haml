@@ -1,0 +1,29 @@
+.block
+  .secondary-navigation
+    %ul.wat-cf
+      %li.first.active=link_to pat(:list), people_path
+      %li=link_to pat(:new), new_person_path
+  .content
+    %h2.title
+      =pat(:all)
+      =mt(:people)
+    .inner
+      %table.table
+        %tr
+          %th.first=mat(:person, :username)
+          %th=mat(:person, :name)
+          %th=mat(:person, :updated_at)
+          %th.last!="&nbsp;"
+        -@people.each do |person|
+          %tr
+            %td.first=link_to h(person.username), edit_person_path(person)
+            %td&=person.name
+            %td=display_time(person.updated_at)
+            %td.last
+              =button_to pat(:edit), edit_person_path(person), :method => :get, :class => :button_to
+              ="|"
+              =button_to pat(:delete), person, :method => :delete, :class => :button_to
+      .actions-bar.wat-cf
+        .actions!="&nbsp;"
+
+/-content_for :sidebar, partial("base/sidebar")

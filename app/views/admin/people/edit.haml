@@ -1,0 +1,15 @@
+.block
+  .secondary-navigation
+    %ul.wat-cf
+      %li.first=link_to pat(:list), people_path
+      %li=link_to pat(:new), new_person_path
+      %li.active=link_to pat(:edit), edit_person_path(@person)
+  .content
+    %h2.title
+      =pat(:edit)
+      =mt(:person)
+    .inner
+      =form_for @person, :method => :put, :html => {:class => :form} do |f|
+        =render :partial => "admin/people/form", :locals => { :f => f }
+
+/-content_for :sidebar, partial("base/sidebar")
