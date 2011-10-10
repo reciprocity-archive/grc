@@ -1,0 +1,15 @@
+.block
+  .secondary-navigation
+    %ul.wat-cf
+      %li.first=link_to pat(:list), document_descriptors_path
+      %li=link_to pat(:new), new_document_descriptor_path
+      %li.active=link_to pat(:edit), edit_document_descriptor_path(@document_descriptor)
+  .content
+    %h2.title
+      =pat(:edit)
+      =mt(:document_descriptor)
+    .inner
+      =form_for @document_descriptor, :method => :put, :html => {:class => :form} do |f|
+        =render :partial => "admin/document_descriptors/form", :locals => { :f => f }
+
+/-content_for :sidebar, partial("base/sidebar")

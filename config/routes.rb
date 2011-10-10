@@ -44,6 +44,8 @@ CmsRails::Application.routes.draw do
       end
     end
     resources :controls, :path => "/admin/controls"
+    resources :documents, :path => "/admin/documents"
+    resources :document_descriptors, :path => "/admin/document_descriptors"
     resources :regulations, :path => "/admin/regulations"
   end
 

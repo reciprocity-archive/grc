@@ -1,0 +1,27 @@
+.block
+  .secondary-navigation
+    %ul.wat-cf
+      %li.first.active=link_to pat(:list), document_descriptors_path
+      %li=link_to pat(:new), new_document_descriptor_path
+  .content
+    %h2.title
+      =pat(:all)
+      =mt(:document_descriptors)
+    .inner
+      %table.table
+        %tr
+          %th.first=mat(:document_descriptor, :id)
+          %th=mat(:document_descriptor, :title)
+          %th=mat(:document_descriptor, :updated_at)
+          %th.last!="&nbsp;"
+        -@document_descriptors.each do |document_descriptor|
+          %tr
+            %td.first=document_descriptor.id
+            %td=link_to h(document_descriptor.title), edit_document_descriptor_path(document_descriptor)
+            %td=display_time(document_descriptor.updated_at)
+            %td.last
+              =button_to pat(:edit), edit_document_descriptor_path(document_descriptor), :method => :get, :class => :button_to
+      .actions-bar.wat-cf
+        .actions!="&nbsp;"
+
+/-content_for :sidebar, partial("base/sidebar")
