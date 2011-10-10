@@ -1,0 +1,37 @@
+.group
+  =f.label :title
+  =f.text_field :title, :class => :text_field
+
+.group
+  =f.label :slug
+  =f.text_field :slug, :class => :text_field
+
+.group
+  =f.label :company
+  =f.check_box :company, :class => :check_box
+  %span.description Does this group a specific company's control objectives?
+
+.group
+  =f.label :description
+  ~f.text_area :description, :class => :text_area
+
+/.group
+/  =f.label :source_document
+/  .sub-item
+/    -fields_for_subitem @regulation.source_document || :document, :source_document do |subform|
+/      =render :partial => "admin/documents/subform", :locals => { :f => subform }
+/
+/.group
+/  =f.label :source_website
+/  .sub-item
+/    -fields_for_subitem @regulation.source_website || :document, :source_website do |subform|
+/      =render :partial => "admin/documents/subform", :locals => { :f => subform }
+
+.group.navform.wat-cf
+  =f.submit pat(:save), :class => :button
+  =f.submit pat(:cancel), :onclick => "window.location='#{regulations_path}';return false", :class => :button
+
+%hr.section
+%h3 Control Objectives
+-edit_children(@regulation, :control_objective)
+

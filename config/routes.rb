@@ -46,6 +46,11 @@ CmsRails::Application.routes.draw do
     resources :controls, :path => "/admin/controls"
     resources :documents, :path => "/admin/documents"
     resources :document_descriptors, :path => "/admin/document_descriptors"
+    resources :regulations do
+      member do
+        get 'slug'
+      end
+    end
     resources :regulations, :path => "/admin/regulations"
   end
 
