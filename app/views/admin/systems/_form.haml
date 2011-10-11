@@ -1,0 +1,28 @@
+.group
+  =f.label :title
+  =f.text_field :title, :class => :text_field
+
+.group
+  =f.label :slug
+  =f.text_field :slug, :class => :text_field
+
+.group
+  =f.label :infrastructure
+  =f.check_box :infrastructure, :class => :check_box
+
+.group
+  =f.label :description
+  ~f.text_area :description, :class => :text_area
+
+.group
+  =f.label :owner_id
+  =f.collection_select :owner_id, Person.all, :id, :display_name, {}, {:class => :collection}
+
+/.group
+/  =f.label :documents
+/  .sub-item
+/    -edit_children_inline(@system, :documents)
+
+.group.navform.wat-cf
+  =f.submit pat(:save), :class => :button
+  =f.submit pat(:cancel), :onclick => "window.location='#{systems_path}';return false", :class => :button

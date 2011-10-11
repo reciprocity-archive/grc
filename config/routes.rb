@@ -53,6 +53,17 @@ CmsRails::Application.routes.draw do
     end
     resources :regulations, :path => "/admin/regulations"
     resources :people, :path => "/admin/people"
+    resources :systems do
+      collection do
+        get 'biz_processes'
+        put 'biz_processes'
+        get 'controls'
+        put 'controls'
+        get 'control_objectives'
+        put 'control_objectives'
+      end
+    end
+    resources :systems, :path => "/admin/systems"
   end
 
   # The priority is based upon order of creation:
