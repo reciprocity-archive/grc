@@ -1,0 +1,12 @@
+.group
+  =f.label :link
+  =f.text_field :link, :class => :compact_text_field
+
+  =f.label :title
+  =f.text_field :title, :class => :compact_text_field
+
+  -unless document.new?
+    =f.check_box :delete, { :checked => false }
+    Delete
+
+  =f.hidden_field :id

@@ -22,6 +22,8 @@ class Admin::SystemsController < ApplicationController
 
   def new
     @system = System.new
+    @system.documents << Document.new
+    @system.documents << Document.new
 
     respond_to do |format|
       format.html
@@ -31,6 +33,8 @@ class Admin::SystemsController < ApplicationController
 
   def edit
     @system = System.get(params[:id])
+    @system.documents << Document.new
+    @system.documents << Document.new
   end
 
   def create
@@ -51,7 +55,8 @@ class Admin::SystemsController < ApplicationController
     @system = System.get(params[:id])
 
     results = []
-    params[:documents].each_pair do |index, doc_params|
+    documents_params = params[:system].delete("document")
+    documents_params.each_pair do |index, doc_params|
       next if doc_params["link"].blank?
       is_delete = doc_params.delete("delete") == "1"
       id = doc_params.delete("id")

@@ -18,10 +18,11 @@
   =f.label :owner_id
   =f.collection_select :owner_id, Person.all, :id, :display_name, {}, {:class => :collection}
 
-/.group
-/  =f.label :documents
-/  .sub-item
-/    -edit_children_inline(@system, :documents)
+.group
+  =f.label :documents
+  -@system.documents.each_with_index do |document, index|
+    =f.fields_for "document[#{index}]", document do |b|
+      =render "admin/documents/subitem", { :f => b, :document => document }
 
 .group.navform.wat-cf
   =f.submit pat(:save), :class => :button
