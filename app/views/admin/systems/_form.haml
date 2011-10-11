@@ -22,7 +22,7 @@
   =f.label :documents
   -@system.documents.each_with_index do |document, index|
     =f.fields_for "document[#{index}]", document do |b|
-      =render "admin/documents/subitem", { :f => b, :document => document }
+      =render "admin/documents/indexed_subitem", { :f => b, :document => document }
 
 .group.navform.wat-cf
   =f.submit pat(:save), :class => :button

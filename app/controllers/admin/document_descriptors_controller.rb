@@ -51,11 +51,6 @@ class Admin::DocumentDescriptorsController < ApplicationController
 
     respond_to do |format|
       if @document_descriptor.update(params[:document_descriptor])
-        if params[:document_descriptor][:password]
-          @document_descriptor.crypted_password = nil
-          @document_descriptor.save
-        end
-
         format.html { redirect_to(edit_document_descriptor_path(@document_descriptor), :notice => 'DocumentDescriptor was successfully updated.') }
         format.xml  { head :ok }
       else

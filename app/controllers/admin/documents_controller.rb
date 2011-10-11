@@ -51,11 +51,6 @@ class Admin::DocumentsController < ApplicationController
 
     respond_to do |format|
       if @document.update(params[:document])
-        if params[:document][:password]
-          @document.crypted_password = nil
-          @document.save
-        end
-
         format.html { redirect_to(edit_document_path(@document), :notice => 'Document was successfully updated.') }
         format.xml  { head :ok }
       else

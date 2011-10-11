@@ -51,11 +51,6 @@ class Admin::PeopleController < ApplicationController
 
     respond_to do |format|
       if @person.update(params[:person])
-        if params[:person][:password]
-          @person.crypted_password = nil
-          @person.save
-        end
-
         format.html { redirect_to(edit_person_path(@person), :notice => 'Person was successfully updated.') }
         format.xml  { head :ok }
       else

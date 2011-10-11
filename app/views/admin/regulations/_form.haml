@@ -15,17 +15,17 @@
   =f.label :description
   ~f.text_area :description, :class => :text_area
 
-/.group
-/  =f.label :source_document
-/  .sub-item
-/    -fields_for_subitem @regulation.source_document || :document, :source_document do |subform|
-/      =render :partial => "admin/documents/subform", :locals => { :f => subform }
-/
-/.group
-/  =f.label :source_website
-/  .sub-item
-/    -fields_for_subitem @regulation.source_website || :document, :source_website do |subform|
-/      =render :partial => "admin/documents/subform", :locals => { :f => subform }
+.group
+  =f.label :source_document
+  .sub-item
+    =f.fields_for :source_document, @regulation.source_document do |b|
+      =render "admin/documents/subitem", { :f => b, :document => @regulation.source_document }
+
+.group
+  =f.label :source_website
+  .sub-item
+    =f.fields_for :source_website, @regulation.source_website do |b|
+      =render "admin/documents/subitem", { :f => b, :document => @regulation.source_website }
 
 .group.navform.wat-cf
   =f.submit pat(:save), :class => :button

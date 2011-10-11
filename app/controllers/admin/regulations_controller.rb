@@ -40,8 +40,8 @@ class Admin::RegulationsController < ApplicationController
 
   def create
     @regulation = Regulation.new(params[:regulation])
-    @regulation.source_document = Document.new(params[:source_document])
-    @regulation.source_website = Document.new(params[:source_website])
+    @regulation.source_document = Document.new(params[:regulation].delete("source_document"))
+    @regulation.source_website = Document.new(params[:regulation].delete("source_website"))
 
     respond_to do |format|
       if @regulation.save
@@ -60,16 +60,16 @@ class Admin::RegulationsController < ApplicationController
     @regulation.source_document ||= Document.create
     @regulation.source_website ||= Document.create
 
+    results = []
+    results << @regulation.source_document.update(params[:regulation].delete("source_document") || {})
+    results << @regulation.source_website.update(params[:regulation].delete("source_website") || {})
+
     @regulation.save if @regulation.dirty?
 
+    results << @regulation.update(params[:regulation])
 
     respond_to do |format|
-      if @regulation.update(params[:regulation])
-        if params[:regulation][:password]
-          @regulation.crypted_password = nil
-          @regulation.save
-        end
-
+      if results.all?
         format.html { redirect_to(edit_regulation_path(@regulation), :notice => 'Regulation was successfully updated.') }
         format.xml  { head :ok }
       else

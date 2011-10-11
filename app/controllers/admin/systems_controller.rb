@@ -75,11 +75,6 @@ class Admin::SystemsController < ApplicationController
 
     respond_to do |format|
       if results.all?
-        if params[:system][:password]
-          @system.crypted_password = nil
-          @system.save
-        end
-
         format.html { redirect_to(edit_system_path(@system), :notice => 'System was successfully updated.') }
         format.xml  { head :ok }
       else
