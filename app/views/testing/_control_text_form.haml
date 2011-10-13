@@ -1,15 +1,15 @@
 -form_for sc, :url => url_for(:action => :update_control_text, :system_id => sc.system.id, :control_id => sc.control.id), :remote => true, :class => :form do |f|
   .group
     =f.label :result
-    ~f.text_area :test_why, :class => :text_area
+    =f.text_area :test_why, :class => :text_area
 
   .group
     =f.label :impact
-    ~f.text_area :test_impact, :class => :text_area
+    =f.text_area :test_impact, :class => :text_area
 
   .group
     =f.label :recommendation
-    ~f.text_area :test_recommendation, :class => :text_area
+    =f.text_area :test_recommendation, :class => :text_area
 
   =f.submit "Save", :class => :button
   =link_to "Cancel", url_for(:action => :show, :system_id => sc.system.id, :control_id => sc.control.id), :class => :cancel, :remote => true
