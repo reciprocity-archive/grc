@@ -1,6 +1,10 @@
 class SlugfilterController < ActionController::Base
   include SlugfilterHelper
 
+  access_control :acl do
+    allow :admin, :analyst
+  end
+
   def index
     slug = params[:slugfilter].upcase
     slug = "" if params[:clear]

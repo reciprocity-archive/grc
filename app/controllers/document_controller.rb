@@ -2,6 +2,10 @@ class DocumentController < ApplicationController
   include GdataHelper
   include DocumentHelper
 
+  access_control :acl do
+    allow :admin, :analyst
+  end
+
   def index
     return unless auth_gdocs
     render 'document/index'

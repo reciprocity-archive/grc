@@ -13,8 +13,9 @@
         %h1=link_to "CMS", root_path
         #user-navigation
           %ul.wat-cf
-            %li=link_to pat(:admin), admin_path
             -if current_user
+              -if current_user.has_role?(:admin)
+                %li=link_to pat(:admin), admin_path
               %li
                 %b=h current_user.email
               %li=link_to pat(:logout), logout_path, :method => :delete    

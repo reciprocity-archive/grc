@@ -91,6 +91,18 @@ class Account
 
   ##
   # End authlogic configuration
+  #
+
+
+  # For acl9 authorization
+  def has_role?(role_name, obj=nil)
+    self.role == role_name.to_s
+  end
+
+  def has_role!(role_name, obj=nil)
+    self.role = role_name
+    save!
+  end
 
   private
     def password_required

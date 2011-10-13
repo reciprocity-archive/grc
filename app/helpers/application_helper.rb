@@ -1,4 +1,6 @@
 module ApplicationHelper
+  ADMIN_MODULES = %w(accounts biz_processes business_areas control_objectives controls documents document_descriptors regulations people systems)
+
   class ProjectModule
     attr_accessor :name
     attr_accessor :path
@@ -13,7 +15,7 @@ module ApplicationHelper
   end
 
   def admin_project_modules
-    %w(accounts biz_processes business_areas control_objectives controls documents document_descriptors regulations people systems).map { |id| ProjectModule.new(id.humanize, url_for({:controller => "/admin/" + id, :only_path => true})) }
+    ADMIN_MODULES.map { |id| ProjectModule.new(id.humanize, url_for({:controller => "/admin/" + id, :only_path => true})) }
   end
 
   def access_control_roles

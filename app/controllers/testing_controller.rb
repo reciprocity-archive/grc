@@ -1,6 +1,10 @@
 class TestingController < ApplicationController
   include ApplicationHelper
 
+  access_control :acl do
+    allow :admin, :analyst
+  end
+
   def index
     if request.post?
       redirect_to url_for(:action => :index)

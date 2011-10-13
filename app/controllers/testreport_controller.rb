@@ -1,6 +1,10 @@
 class TestreportController < ApplicationController
   include ApplicationHelper
 
+  access_control :acl do
+    allow :admin, :analyst
+  end
+
   def index2
     render 'testreport/index'
   end

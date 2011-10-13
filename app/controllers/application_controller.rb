@@ -8,6 +8,16 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user_session, :current_user
 
+  access_control :as_method => :acl, :debug => true do
+    allow :admin
+  end
+
+  rescue_from Acl9::AccessDenied do
+      flash[:warning] = "You are not authorized to access this page"
+      redirect_to root_url
+      return false
+  end
+
   private
     def current_user_session
       return @current_user_session if defined?(@current_user_session)

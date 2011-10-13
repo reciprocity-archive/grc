@@ -9,6 +9,8 @@ gem 'dalli'
 gem 'builder'
 gem 'json'
 
+gem 'acl9'
+
 gem 'activesupport',      RAILS_VERSION, :require => 'active_support'
 gem 'actionpack',         RAILS_VERSION, :require => 'action_pack'
 gem 'actionmailer',       RAILS_VERSION, :require => 'action_mailer'

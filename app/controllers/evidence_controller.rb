@@ -3,6 +3,10 @@ class EvidenceController < ApplicationController
   include DocumentHelper
   include ApplicationHelper
 
+  access_control :acl do
+    allow :admin, :analyst
+  end
+
   def index
     if request.post?
       redirect_to :action => :index
