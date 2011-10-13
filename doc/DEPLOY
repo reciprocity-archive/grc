@@ -34,7 +34,7 @@ Setup rubygems:
 
   hg clone https://rails.compliance-management.googlecode.com/hg/ cms
   cd cms
-  bundle install
+  bundle install --binstubs
   mkdir log
 
 For dev:
@@ -73,6 +73,15 @@ adjust SERVER above to your hostname as visible from outside.
     create database cms;
     grant all on cms.* to cms@localhost identified by "cms";
 
+Copy these files:
+
+  config/initializers/sso_google.rb
+  app/controllers/sso_controller.rb
+
+adjust:
+
+  config/database.yml
+
 And finally, starting the application server in production:
 
-  rails server
+  script/rails server -d
