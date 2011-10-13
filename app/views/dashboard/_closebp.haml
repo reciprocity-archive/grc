@@ -1,6 +1,6 @@
 %div.bphead.remote{:title => bp.slug}><
-  -link_to url_for(:action => :openbp, :id => bp.id), :remote => true do
+  =link_to url_for(:action => :openbp, :id => bp.id), :remote => true do
     %img.tree{:src => "/images/expand.gif"}>
-  -link_to url_for(:action => :openbp, :id => bp.id), :remote => true do
+  =link_to url_for(:action => :openbp, :id => bp.id), :remote => true do
     =bp.title
   .tree
