@@ -1,9 +1,24 @@
 source 'http://rubygems.org'
 
-RAILS_VERSION = '~> 3.0.4'
-DM_VERSION    = '~> 1.1.0'
+RAILS_VERSION = '~> 3.1.1'
+DM_VERSION    = '~> 1.2.0'
 
 gem 'gdata'
+
+platforms :ruby do
+  gem 'sqlite3'
+end
+
+platforms :jruby do
+  gem 'jdbc-sqlite3', :require => false
+  gem 'jdbc-mysql', :require => false
+  gem 'jruby-openssl'
+end
+
+group(:production) do
+  gem 'dm-mysql-adapter',     DM_VERSION
+end
+
 gem 'authlogic'
 gem 'dalli'
 gem 'builder'
@@ -20,7 +35,7 @@ gem 'haml', '~> 3.0.25'
 gem 'sass'
 gem 'haml-rails'
 
-gem 'dm-rails',          '~> 1.1.0'
+gem 'dm-rails',          '~> 1.2.0'
 gem 'dm-sqlite-adapter', DM_VERSION
 
 gem 'dm-migrations',        DM_VERSION
@@ -53,8 +68,4 @@ group(:development, :test) do
   # gem 'rails_metrics', '~> 0.1', :git => 'git://github.com/engineyard/rails_metrics'
 
   gem 'ruby-debug'
-end
-
-group(:production) do
-  gem 'dm-mysql-adapter',     DM_VERSION
 end

@@ -15,7 +15,6 @@ CmsRails::Application.configure do
 
   # Show full error reports and disable caching
   config.consider_all_requests_local       = true
-  config.action_view.debug_rjs             = true
   config.action_controller.perform_caching = false
 
   # Don't care if the mailer can't send
@@ -28,7 +27,7 @@ CmsRails::Application.configure do
   config.action_dispatch.best_standards_support = :builtin
 
   # hm... these don't work
-  Sass::Plugin.options[:always_update] = true
-  Sass::Plugin.options[:always_check] = true
-  Sass::Plugin.options[:cache] = false
+  #Sass::Plugin.options[:always_update] = true
+  #Sass::Plugin.options[:always_check] = true
+  #Sass::Plugin.options[:cache] = false
 end
