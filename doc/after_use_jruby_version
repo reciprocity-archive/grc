@@ -1,0 +1,7 @@
+echo $GEM_HOME
+case "$GEM_HOME" in
+  *jruby*)
+    JRUBY_OPTS="--1.9" ; export JRUBY_OPTS
+  ;;
+esac
+

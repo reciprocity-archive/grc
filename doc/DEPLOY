@@ -1,7 +1,7 @@
 As root:
 ============
 
-  apt-get install mysql-client mysql-server ruby-dev libsqlite3-dev libmysqlclient-dev nginx mercurial build-essential
+  apt-get install mysql-client mysql-server ruby-dev libsqlite3-dev libmysqlclient-dev nginx mercurial build-essential java6-sdk
   adduser --shell /bin/bash --disabled-password --home /home1/cmsprod cmsprod
 
   su - cmsprod
@@ -9,31 +9,28 @@ As root:
 As cmsprod:
 ==============
 
+install rvm
+
+Run:
+  rvm install jruby
+  rvm gemset create cms
+
 Add to .bashrc
   alias so='. ~/.bashrc ; . ~/.profile'
-  alias gem=gem1.8
   alias my='mysql -ucmsprod -pcmsprod cms'
   alias mydump='mysqldump -ucmsprod -pcmsprod cms'
   export RAILS_ENV=production
+  export JRUBY_OPTS=--1.9
 
 set RAILS_ENV to 'development' if this is not production.
 
-Add to .profile
-  PATH="$HOME/gems/bin:$PATH"
-  export RUBYLIB="$HOME/gems/lib"
-  export GEM_HOME="$HOME/gems"
-
-Log out and back in to set the environment.
-
 Setup rubygems:
-  wget http://production.cf.rubygems.org/rubygems/rubygems-1.7.2.tgz
-  tar xzf rubygems-1.7.2.tgz
-  cd rubygems-1.7.2
-  ruby setup.rb --prefix ~/gems
   gem install bundler
-
   hg clone https://rails.compliance-management.googlecode.com/hg/ cms
   cd cms
+
+At this point rvm will ask you if it should trust the .rvmrc in this project directory.  Say yes and the correct version .
+
   bundle install --binstubs
   mkdir log
 
@@ -41,7 +38,7 @@ For dev:
 ===========
 
   rake dm:auto:migrate seed
-  rails start --host `hostname`
+  script/rails server
 
 For prod:
 =============
@@ -72,11 +69,6 @@ adjust SERVER above to your hostname as visible from outside.
   sudo mysql
     create database cms;
     grant all on cms.* to cms@localhost identified by "cms";
-
-Copy these files:
-
-  config/initializers/sso_google.rb
-  app/controllers/sso_controller.rb
 
 adjust:
 

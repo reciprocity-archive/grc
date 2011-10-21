@@ -12,9 +12,9 @@
         {
         });
       =f.submit :save, :class => :button
-      -link_to url_for(:action => :new, :system_id => sc.system.id, :control_id => sc.control.id, :descriptor_id => desc.id, :format => :html), :title => "Add from Link", :class => "button", :remote => true do
+      =link_to url_for(:action => :new, :system_id => sc.system.id, :control_id => sc.control.id, :descriptor_id => desc.id, :format => :html), :title => "Add from Link", :class => "button", :remote => true do
         &gt;link
-      -link_to url_for(:action => :new_gdoc, :system_id => sc.system.id, :control_id => sc.control.id, :descriptor_id => desc.id, :format => :html, :r => 1), :title => "Refresh Google Docs", :class => "button", :remote => true do
+      =link_to url_for(:action => :new_gdoc, :system_id => sc.system.id, :control_id => sc.control.id, :descriptor_id => desc.id, :format => :html, :r => 1), :title => "Refresh Google Docs", :class => "button", :remote => true do
         Refresh
 
   =render :partial => 'add', :locals => {:sc => sc}

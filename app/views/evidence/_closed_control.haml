@@ -1,5 +1,5 @@
 .remote
   %div.control<
-    -link_to url_for(:action => :show_control, :system_id => sc.system.id, :control_id => sc.control.id, :format => :html), :remote => true do
+    =link_to url_for(:action => :show_control, :system_id => sc.system.id, :control_id => sc.control.id, :format => :html), :remote => true do
       %img.tree{:src => "/images/expand.gif"}>
     %span{:class => :control, :title => sc.control.slug}=sc.control.title
