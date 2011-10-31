@@ -1,4 +1,14 @@
 CmsRails::Application.routes.draw do
+  get "dashboard/index"
+
+  get "dashboard/openbp"
+
+  get "dashboard/closebp"
+
+  get "dashboard/opensys"
+
+  get "dashboard/closesys"
+
   match 'admin' => 'admin/base#index'
 
   scope :module => "admin" do

@@ -96,6 +96,7 @@ class Account
 
   # For acl9 authorization
   def has_role?(role_name, obj=nil)
+    puts "#{role.inspect} #{role_name.inspect}"
     self.role == role_name.to_s
   end
 

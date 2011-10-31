@@ -56,7 +56,8 @@ group(:development, :test) do
 
   # Uncomment this if you want to use rspec for testing your application
 
-#  gem 'rspec-rails', '~> 2.0.1'
+  gem 'rspec-rails'
+  gem 'ZenTest'
 
   # To get a detailed overview about what queries get issued and how long they take
   # have a look at rails_metrics. Once you bundled it, you can run
