@@ -94,7 +94,6 @@ class EvidenceController < ApplicationController
         end
       end
     else
-      puts "XXXXXXXXXXXXXXXXXXXXXXXXX"
       doc = Document.first_or_create(
         { :link => doc_params[:link] },
         { :title => doc_params[:title], :document_descriptor => desc

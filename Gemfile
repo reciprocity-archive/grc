@@ -58,6 +58,7 @@ group(:development, :test) do
 
   gem 'rspec-rails'
   gem 'ZenTest'
+  gem 'rcov'
 
   # To get a detailed overview about what queries get issued and how long they take
   # have a look at rails_metrics. Once you bundled it, you can run

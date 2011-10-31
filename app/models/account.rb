@@ -96,7 +96,6 @@ class Account
 
   # For acl9 authorization
   def has_role?(role_name, obj=nil)
-    puts "#{role.inspect} #{role_name.inspect}"
     self.role == role_name.to_s
   end
 
@@ -111,7 +110,6 @@ class Account
     end
 
     def encrypt_password
-      puts "encrypt"
       self.crypted_password = ::BCrypt::Password.create(password) if password.present?
     end
 end

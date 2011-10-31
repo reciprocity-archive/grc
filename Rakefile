@@ -5,3 +5,11 @@ require File.expand_path('../config/application', __FILE__)
 require 'rake'
 
 CmsRails::Application.load_tasks
+
+require 'rspec/core/rake_task'
+
+RSpec::Core::RakeTask.new(:coverage) do |t|
+    t.fail_on_error = false
+    t.rcov = true
+    t.rcov_opts = %w{--no-html -T}
+end
