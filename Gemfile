@@ -57,6 +57,7 @@ group(:development, :test) do
   # Uncomment this if you want to use rspec for testing your application
 
   gem 'rspec-rails'
+  gem 'spork', '~> 0.9.0.rc'
   gem 'ZenTest'
   gem 'rcov'
 

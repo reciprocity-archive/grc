@@ -6,7 +6,7 @@
 # First we specify our desired <ruby>[@<gemset>], the @gemset name is optional.
 environment_id="jruby-1.6.5@cms"
 
-PROJECT_JRUBY_OPTS=( --1.9 )
+PROJECT_JRUBY_OPTS=( --1.9 -X+O )
 
 #
 # First we attempt to load the desired environment directly from the environment

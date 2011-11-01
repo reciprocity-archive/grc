@@ -50,6 +50,7 @@ module Gdoc
       @last_viewed = options[:last_viewed] || DateTime.new
       @xml = options[:xml] || nil
       @permissions = {'owner' => [], 'reader' => [], 'writer' => []}
+      @parent = options[:parent] || nil
     end
 
     def add_permission(email, role)
