@@ -18,19 +18,19 @@ class EvidenceController < ApplicationController
 
   def show_closed_control
     sc = SystemControl.by_system_control(params[:system_id], params[:control_id])
-    render(:partial => "evidence/closed_control", :locals => {:sc => sc})
+    render(:partial => "closed_control", :locals => {:sc => sc})
   end
 
   def show_control
     sc = SystemControl.by_system_control(params[:system_id], params[:control_id])
-    render(:partial => "evidence/control", :locals => {:sc => sc})
+    render(:partial => "control", :locals => {:sc => sc})
   end
 
   def new
     sc = SystemControl.by_system_control(params[:system_id], params[:control_id])
     desc = DocumentDescriptor.get(params[:descriptor_id])
     @document = Document.new
-    render(:partial => "evidence/attach_form", :locals => {:sc => sc, :desc => desc})
+    render(:partial => "attach_form", :locals => {:sc => sc, :desc => desc})
   end
 
   def new_gdoc
@@ -46,22 +46,22 @@ class EvidenceController < ApplicationController
     @docs = get_gdocs(:folder => sys_folder, :ajax => true, :retry_url => url_for(:action => :index))
     return unless @docs
 
-    render(:partial => "evidence/attach_form_gdoc", :locals => {:sc => sc, :desc => desc})
+    render(:partial => "attach_form_gdoc", :locals => {:sc => sc, :desc => desc})
   end
 
   def attach
     @system_control = SystemControl.by_system_control(params[:system_id], params[:control_id])
     desc = DocumentDescriptor.get(params[:descriptor_id])
 
-    folders = get_gfolders
-    return unless folders
-
-    by_title = gdocs_by_title(folders)
-    sys_folder = by_title["CMS/Systems/#{@system_control.system.slug}"]
-    accepted_folder = by_title["CMS/Accepted"]
-
     doc_params = params[:document]
     if doc_params[:gdocs]
+      folders = get_gfolders
+      return unless folders
+
+      by_title = gdocs_by_title(folders)
+      sys_folder = by_title["CMS/Systems/#{@system_control.system.slug}"]
+      accepted_folder = by_title["CMS/Accepted"]
+
       docs = get_gdocs(:folder => sys_folder)
       return if docs.nil?
       doc_params[:gdocs].each do |doc_href|
@@ -105,7 +105,6 @@ class EvidenceController < ApplicationController
       end
       @system_control.evidences << doc
     end
-    puts @system_control.evidences.dirty?
     # FIXME
     @system_control.evidences.save!
     flash[:notice] = "Attached evidence to #{@system_control.system.title} / #{@system_control.control.title}" if flash[:error].nil?
@@ -114,14 +113,14 @@ class EvidenceController < ApplicationController
 
   def show
     document = Document.get(params[:document_id])
-    render(:partial => "evidence/document", :locals => {:document => document})
+    render(:partial => "document", :locals => {:document => document})
   end
 
   def update
     document_id = params[:document_id]
     document = Document.get(document_id)
     document.update!(params[:document])
-    render(:partial => 'evidence/document', :locals => {:document => document})
+    render(:partial => 'document', :locals => {:document => document})
   end
 
   def destroy
@@ -160,6 +159,6 @@ class EvidenceController < ApplicationController
     document.reviewed = params[:value] != "maybe"
     document.good = params[:value] == "1"
     document.save!
-    render(:partial => 'evidence/document', :locals => {:document => document})
+    render(:partial => 'document', :locals => {:document => document})
   end
 end

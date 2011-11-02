@@ -60,6 +60,16 @@ Spork.prefork do
       @current_user = nil
       @user_session = nil
     end
+
+    def clear_db
+      DocumentSystemControl.destroy || raise
+      SystemControl.destroy || raise
+      Control.destroy || raise
+      System.destroy || raise
+      Regulation.destroy || raise
+      Document.destroy || raise
+      DocumentDescriptor.destroy || raise
+    end
   end
 end
 

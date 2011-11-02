@@ -52,7 +52,7 @@ module GdataHelper
   end
 
   def get_gdata_client(opts = {})
-    client = gdoc_client
+    client = Gdoc::Client.new
 
     if params[:token]
       session[:gtoken] = client.set_token(params[:token], true)
