@@ -41,6 +41,12 @@ describe DocumentController do
           'CMS/Accepted' => Gdoc::Document.new('Accepted', :parent => @cms),
         }
       end
+
+      @gdoc_client = double('Gdoc::Client')
+
+      controller.stub(:get_gdata_client) do
+        @gdoc_client
+      end
     end
 
     it "syncs with no systems" do
@@ -51,7 +57,7 @@ describe DocumentController do
 
     it "syncs new system" do
       System.create(:title => 'System 1', :slug => 'sys1', :description => 'x', :infrastructure => true)
-      Gdoc::Client.any_instance.should_receive(:create_folder).at_least(:once).with('SYS1', :parent => @systems).and_return(Gdoc::Document.new('sys1', :parent => @systems))
+      @gdoc_client.should_receive(:create_folder).at_least(:once).with('SYS1', :parent => @systems).and_return(Gdoc::Document.new('sys1', :parent => @systems))
       get 'sync'
       response.should be_success
       assert_template :template => 'document/sync'
@@ -65,9 +71,9 @@ describe DocumentController do
         }
       end
       System.create(:title => 'System 1', :slug => 'sys1', :description => 'x', :infrastructure => true)
-      Gdoc::Client.any_instance.should_receive(:create_folder).at_least(:once).with('Systems', :parent => @cms).and_return(@systems)
-      Gdoc::Client.any_instance.should_receive(:create_folder).at_least(:once).with('Accepted', :parent => @cms).and_return(Gdoc::Document.new('Accepted', :parent => @cms))
-      Gdoc::Client.any_instance.should_receive(:create_folder).at_least(:once).with('SYS1', :parent => @systems).and_return(Gdoc::Document.new('sys1', :parent => @systems))
+      @gdoc_client.should_receive(:create_folder).at_least(:once).with('Systems', :parent => @cms).and_return(@systems)
+      @gdoc_client.should_receive(:create_folder).at_least(:once).with('Accepted', :parent => @cms).and_return(Gdoc::Document.new('Accepted', :parent => @cms))
+      @gdoc_client.should_receive(:create_folder).at_least(:once).with('SYS1', :parent => @systems).and_return(Gdoc::Document.new('sys1', :parent => @systems))
       get 'sync'
       response.should be_success
       assert_template :template => 'document/sync'

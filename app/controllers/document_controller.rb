@@ -22,8 +22,8 @@ class DocumentController < ApplicationController
       return render 'document/sync'
     end
 
-    client = Gdoc::Client.new
-    client.set_token session[:gtoken]
+    client = get_gdata_client
+    return unless client
 
     @messages = []
 
@@ -46,6 +46,5 @@ class DocumentController < ApplicationController
         @messages << "Created #{folder.full_title}"
       end
     end
-    render 'document/sync'
   end
 end

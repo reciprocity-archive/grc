@@ -12,7 +12,7 @@ module GdataHelper
   def auth_gdocs()
     if params[:token]
       client = Gdoc::Client.new
-      session[:gtoken] = client.set_token params[:token], true
+      session[:gtoken] = client.set_token(params[:token], true)
       redirect_to "#{request.scheme}://#{request.host_with_port}#{request.path}"
       return false
     end
@@ -52,10 +52,10 @@ module GdataHelper
   end
 
   def get_gdata_client(opts = {})
-    client = Gdoc::Client.new
+    client = gdoc_client
 
     if params[:token]
-      session[:gtoken] = client.set_token params[:token], true
+      session[:gtoken] = client.set_token(params[:token], true)
       redirect_to "#{request.scheme}://#{request.host_with_port}#{request.path}"
       return nil
     elsif session[:gtoken].nil?
