@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe EvidenceController do
+describe TestingController do
   describe "GET 'index' without authorization" do
     it "fails as guest" do
       login({}, {})
@@ -36,9 +36,9 @@ describe EvidenceController do
       end
     end
 
-    describe "GET 'show_closed_control'" do
+    describe "GET 'show_closed'" do
       it "returns http success" do
-        get 'show_closed_control', :system_id => @sys.id, :control_id => @ctl.id
+        get 'show_closed', :system_id => @sys.id, :control_id => @ctl.id
         response.should be_success
         assert_template :partial => '_closed_control'
         #, :locals => { :sc => @sc }
@@ -46,78 +46,39 @@ describe EvidenceController do
       end
     end
 
-    describe "GET 'show_control'" do
+    describe "GET 'show'" do
       it "returns http success" do
-        get 'show_control', :system_id => @sys.id, :control_id => @ctl.id
+        get 'show', :system_id => @sys.id, :control_id => @ctl.id
         response.should be_success
         assert_template :partial => '_control'
       end
     end
 
-    describe "GET 'new'" do
+    describe "GET 'edit_control_text'" do
       it "returns http success" do
-        get 'new', :system_id => @sys.id, :control_id => @ctl.id, :descriptor_id => @desc
+        get 'edit_control_text', :system_id => @sys.id, :control_id => @ctl.id
         response.should be_success
-        assert_template :partial => '_attach_form'
-        assigns(:document).should_not be_nil
+        assert_template :partial => '_control_text_form'
       end
     end
 
-    describe "GET 'new_gdoc'" do
-      pending
-    end
-
-    describe "POST 'attach'" do
-      it "attaches a regular doc" do
-        attrs = { :link => 'http://abc.com/', :title => 'Abc' }
-        post 'attach', :system_id => @sys.id, :control_id => @ctl.id, :descriptor_id => @desc, :document => attrs
-        response.should be_redirect
-        @sc.evidences.reload
-        @sc.evidences.should have(1).items
-        @sc.evidences[0].link.to_s.should eq('http://abc.com/')
-      end
-      it "attaches a gdoc" do
-        pending
-      end
-    end
-
-    describe "GET 'show'" do
+    describe "POST 'update_control_text'" do
       it "returns http success" do
-        get 'show', :document_id => @doc.id
+        get 'update_control_text', :system_id => @sys.id, :control_id => @ctl.id, :system_control => { :test_why => 'why1' }
         response.should be_success
-        assert_template :partial => '_document'
+        @sc.reload
+        @sc.test_why.should eq('why1')
+        assert_template :partial => '_control'
       end
     end
 
-    describe "POST 'update'" do
-      it "updates a regular doc" do
-        attrs = { :link => 'http://abc.com/', :title => 'Abc' }
-        post 'attach', :system_id => @sys.id, :control_id => @ctl.id, :descriptor_id => @desc, :document => attrs
-        response.should be_redirect
-        @sc.evidences.should have(1).items
-
-        post 'update', :document_id => @sc.evidences[0].id, :document => { :title => 'Abc1' }
+    describe "POST 'update_control_state'" do
+      it "returns http success" do
+        get 'update_control_state', :system_id => @sys.id, :control_id => @ctl.id, :value => :red
         response.should be_success
-        assert_template :partial => '_document'
-        @sc.evidences.reload
-        @sc.evidences[0].title.to_s.should eq('Abc1')
-      end
-    end
-
-    describe "POST 'destroy'" do
-      it "destroys a regular doc" do
-        attrs = { :link => 'http://abc.com/', :title => 'Abc' }
-        post 'attach', :system_id => @sys.id, :control_id => @ctl.id, :descriptor_id => @desc, :document => attrs
-        response.should be_redirect
-        @sc.evidences.should have(1).items
-
-        post 'destroy', :system_id => @sys.id, :control_id => @ctl.id, :document_id => @sc.evidences[0].id
-        response.should be_redirect
-        @sc.evidences.reload
-        @sc.evidences.should have(0).items
-      end
-      it "destroys a gdoc" do
-        pending
+        @sc.reload
+        @sc.state.should eq(:red)
+        assert_template :partial => '_control'
       end
     end
 

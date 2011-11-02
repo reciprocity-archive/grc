@@ -10,18 +10,17 @@ class TestingController < ApplicationController
       redirect_to url_for(:action => :index)
     else
       @systems = filter_systems(System.all)
-      render 'testing/index'
     end
   end
 
   def show
     sc = SystemControl.by_system_control(params[:system_id], params[:control_id])
-    render :partial => "testing/control", :locals => {:sc => sc}
+    render :partial => "control", :locals => {:sc => sc}
   end
 
   def show_closed
     sc = SystemControl.by_system_control(params[:system_id], params[:control_id])
-    render :partial => "testing/closed_control", :locals => {:sc => sc}
+    render :partial => "closed_control", :locals => {:sc => sc}
   end
 
   def update_control_state
@@ -29,18 +28,18 @@ class TestingController < ApplicationController
     value = params[:value]
     sc.state = value.to_sym
     sc.save!
-    render :partial => "testing/control", :locals => {:sc => sc}
+    render :partial => "control", :locals => {:sc => sc}
   end
 
   def edit_control_text
     sc = SystemControl.by_system_control(params[:system_id], params[:control_id])
-    render :partial => "testing/control_text_form", :locals => {:sc => sc}
+    render :partial => "control_text_form", :locals => {:sc => sc}
   end
 
   def update_control_text
     sc = SystemControl.by_system_control(params[:system_id], params[:control_id])
     sc.update!(params[:system_control])
-    render :partial => "testing/control", :locals => {:sc => sc}
+    render :partial => "control", :locals => {:sc => sc}
   end
 
   def review
@@ -49,6 +48,6 @@ class TestingController < ApplicationController
     document.reviewed = params[:value] != "maybe"
     document.good = params[:value] == "1"
     document.save!
-    render :partial => 'testing/document', :locals => {:document => document}
+    render :partial => 'document', :locals => {:document => document}
   end
 end
