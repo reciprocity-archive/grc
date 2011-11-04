@@ -64,11 +64,13 @@ Spork.prefork do
     def clear_db
       DocumentSystemControl.destroy || raise
       SystemControl.destroy || raise
+      BizProcessControl.destroy || raise
       Control.destroy || raise
       System.destroy || raise
       Regulation.destroy || raise
       Document.destroy || raise
       DocumentDescriptor.destroy || raise
+      BizProcess.destroy || raise
     end
   end
 end

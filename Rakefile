@@ -10,6 +10,7 @@ require 'rspec/core/rake_task'
 
 RSpec::Core::RakeTask.new(:coverage) do |t|
     t.fail_on_error = false
+    t.spec_opts = %w{--no-drb}
     t.rcov = true
     t.rcov_opts = %w{--no-html -T}
 end

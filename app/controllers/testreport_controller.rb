@@ -5,25 +5,19 @@ class TestreportController < ApplicationController
     allow :admin, :analyst
   end
 
-  def index2
-    render 'testreport/index'
-  end
-
   def top
     if request.post?
-      redirect_to url_for(:action => :top)
+      redirect_to url_for
     else
       @system_controls = filter_system_controls(SystemControl.all)
-      render 'testreport/top'
     end
   end
 
   def byregulation
     if request.post?
-      redirect_to url_for(:action => :byregulation)
+      redirect_to url_for
     else
       @system_controls = filter_system_controls(SystemControl.all)
-      render 'testreport/regulation'
     end
   end
 
@@ -36,10 +30,8 @@ class TestreportController < ApplicationController
         @biz_process = BizProcess.get(biz_process_id)
         @system_controls = SystemControl.all(:control => @biz_process.controls)
       end
-      render 'testreport/process'
     else
       @system_controls = SystemControl.all
-      render 'testreport/process'
     end
   end
 end
