@@ -1,3 +1,9 @@
+# Author:: Miron Cuperman (mailto:miron+cms@google.com)
+# Copyright:: Google Inc. 2011
+# License:: Apache 2.0
+
+# Handle Google Docs integration
+
 class DocumentController < ApplicationController
   include GdataHelper
   include DocumentHelper
@@ -6,11 +12,15 @@ class DocumentController < ApplicationController
     allow :admin, :analyst
   end
 
+  # Show the list of Google docs
   def index
     return unless auth_gdocs
     render 'document/index'
   end
 
+  # Sync our local list of document folders with Google Docs.
+  #
+  # Ensure that folders exist for CMS, CMS/Systems, Cms/Accepted and each system.
   def sync
     folders = get_gfolders(:refresh => true) or return
 

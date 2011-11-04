@@ -1,3 +1,9 @@
+# Author:: Miron Cuperman (mailto:miron+cms@google.com)
+# Copyright:: Google Inc. 2011
+# License:: Apache 2.0
+
+# Report on the results of analyst testing for an audit
+
 class TestreportController < ApplicationController
   include ApplicationHelper
 
@@ -5,6 +11,7 @@ class TestreportController < ApplicationController
     allow :admin, :analyst
   end
 
+  # Show top issues
   def top
     if request.post?
       redirect_to url_for
@@ -13,6 +20,7 @@ class TestreportController < ApplicationController
     end
   end
 
+  # Show issues by regulation
   def byregulation
     if request.post?
       redirect_to url_for
@@ -21,6 +29,7 @@ class TestreportController < ApplicationController
     end
   end
 
+  # Show issues by business process, potentially filtering by process
   def byprocess
     if request.post?
       biz_process_id = params[:biz_process][:id]
