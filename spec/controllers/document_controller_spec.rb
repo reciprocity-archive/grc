@@ -25,7 +25,6 @@ describe DocumentController do
   context "gdata" do
     before :each do
       login({}, { :role => 'admin' })
-      clear_db
 
       @cms = Gdoc::Document.new('CMS')
       @systems = Gdoc::Document.new('Systems', :parent => @cms)

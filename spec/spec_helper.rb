@@ -37,6 +37,21 @@ Spork.prefork do
     # rspec-rails.
     config.infer_base_class_for_anonymous_controllers = true
 
+    config.before(:suite) { DataMapper.auto_migrate! }
+
+    config.before(:each) do
+      repository(:default) do
+        transaction = DataMapper::Transaction.new(repository)
+        transaction.begin
+        repository.adapter.push_transaction(transaction)
+      end 
+    end
+
+    config.after(:each) do
+      repository(:default).adapter.pop_transaction.rollback
+    end
+
+
     def current_user(stubs = {})
       return @current_user if @current_user
       
@@ -59,18 +74,6 @@ Spork.prefork do
     def logout
       @current_user = nil
       @user_session = nil
-    end
-
-    def clear_db
-      DocumentSystemControl.destroy || raise
-      SystemControl.destroy || raise
-      BizProcessControl.destroy || raise
-      Control.destroy || raise
-      System.destroy || raise
-      Regulation.destroy || raise
-      Document.destroy || raise
-      DocumentDescriptor.destroy || raise
-      BizProcess.destroy || raise
     end
   end
 end

@@ -12,7 +12,7 @@ describe TestreportController do
   context "authorized" do
     before :each do
       login({}, { :role => 'admin' })
-      clear_db
+
       @reg = Regulation.create(:title => 'Reg 1', :slug => 'reg1', :company => false)
       @ctl = Control.create(:title => 'Control 1', :slug => 'reg1-ctl1', :description => 'x', :regulation => @reg, :is_key => true, :fraud_related => false)
       @ctl2 = Control.create(:title => 'Control 2', :slug => 'reg1-ctl2', :description => 'x', :regulation => @reg, :is_key => true, :fraud_related => false)
