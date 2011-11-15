@@ -1,6 +1,7 @@
 class Admin::BusinessAreasController < ApplicationController
   layout "admin"
 
+  # List of biz areas
   def index
     @business_areas = BusinessArea.all
 
@@ -10,6 +11,7 @@ class Admin::BusinessAreasController < ApplicationController
     end
   end
 
+  # Show a biz area
   def show
     @business_area = BusinessArea.get(params[:id])
 
@@ -19,6 +21,7 @@ class Admin::BusinessAreasController < ApplicationController
     end
   end
 
+  # New biz area form
   def new
     @business_area = BusinessArea.new
 
@@ -28,10 +31,12 @@ class Admin::BusinessAreasController < ApplicationController
     end
   end
 
+  # Edit biz area form
   def edit
     @business_area = BusinessArea.get(params[:id])
   end
 
+  # Create a biz area
   def create
     @business_area = BusinessArea.new(params[:business_area])
 
@@ -46,6 +51,7 @@ class Admin::BusinessAreasController < ApplicationController
     end
   end
 
+  # Update a biz area
   def update
     @business_area = BusinessArea.get(params[:id])
 
@@ -60,6 +66,7 @@ class Admin::BusinessAreasController < ApplicationController
     end
   end
 
+  # Delete a biz area
   def destroy
     business_area = BusinessArea.get(params[:id])
 

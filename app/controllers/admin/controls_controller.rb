@@ -4,6 +4,7 @@ class Admin::ControlsController < ApplicationController
   include ManyHelper
   include AutofilterHelper
 
+  # List Controls
   def index
     @controls = filtered_controls
 
@@ -13,6 +14,7 @@ class Admin::ControlsController < ApplicationController
     end
   end
 
+  # Show a Control
   def show
     @control = Control.get(params[:id])
 
@@ -22,6 +24,7 @@ class Admin::ControlsController < ApplicationController
     end
   end
 
+  # New control form
   def new
     @control = Control.new
     @control.effective_at = Date.today
@@ -32,10 +35,12 @@ class Admin::ControlsController < ApplicationController
     end
   end
 
+  # Edit control form
   def edit
     @control = Control.get(params[:id])
   end
 
+  # Create a control
   def create
     @control = Control.new(params[:control])
 
@@ -50,9 +55,11 @@ class Admin::ControlsController < ApplicationController
     end
   end
 
+  # Update a control
   def update
     @control = Control.get(params[:id])
 
+    # Connect to related Control Objectives
     co_ids = params["control"].delete("co_ids") || []
 
     @control.control_objectives = []
@@ -72,6 +79,7 @@ class Admin::ControlsController < ApplicationController
     end
   end
 
+  # Delete a control
   def destroy
     control = Control.get(params[:id])
     success = control && control.biz_process_controls.destroy &&
@@ -85,12 +93,14 @@ class Admin::ControlsController < ApplicationController
     end
   end
 
+  # Slug for AJAX
   def slug
     respond_to do |format|
       format.js { Control.get(params[:id]).slug }
     end
   end
 
+  # Many2many relationship to Systems
   def systems
     if request.put?
       post_many2many(:left_class => Control,
@@ -104,6 +114,7 @@ class Admin::ControlsController < ApplicationController
     end
   end
 
+  # Many2many relationship to Control Objectives
   def control_objectives
     if request.put?
       post_many2many(:left_class => Control,
@@ -117,6 +128,7 @@ class Admin::ControlsController < ApplicationController
     end
   end
 
+  # Many2many relationship to Biz Processes
   def biz_processes
     if request.put?
       post_many2many(:left_class => Control,
@@ -130,6 +142,7 @@ class Admin::ControlsController < ApplicationController
     end
   end
 
+  # Many2many relationship to self (which controls implement other controls)
   def controls
     if request.put?
       post_many2many(:left_class => Control,
@@ -146,6 +159,7 @@ class Admin::ControlsController < ApplicationController
     end
   end
 
+  # Many2many relationship to Document Descriptors (describing what evidence can be attached)
   def evidence_descriptors
     if request.put?
       post_many2many(:left_class => Control,
@@ -162,10 +176,12 @@ class Admin::ControlsController < ApplicationController
     end
   end
 
+  # Another way to attach a biz process
   def add_biz_process
     @control = Control.get(params[:id])
   end
  
+  # Another way to attach a biz process
   def create_biz_process
     @control = Control.get(params[:id])
     @biz_process_control = BizProcessControl.new(params[:biz_process_control])
@@ -178,6 +194,7 @@ class Admin::ControlsController < ApplicationController
     end
   end
  
+  # Another way to detach a biz process
   def destroy_biz_process
     bpc = BizProcessControl.first(:control_id => params[:id], :biz_process_id => params[:biz_process_id])
     if bpc.destroy

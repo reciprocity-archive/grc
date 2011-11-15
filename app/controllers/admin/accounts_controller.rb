@@ -1,6 +1,7 @@
 class Admin::AccountsController < ApplicationController
   layout "admin"
 
+  # List accounts
   def index
     @accounts = Account.all
 
@@ -10,6 +11,7 @@ class Admin::AccountsController < ApplicationController
     end
   end
 
+  # Show one account
   def show
     @account = Account.get(params[:id])
 
@@ -19,6 +21,7 @@ class Admin::AccountsController < ApplicationController
     end
   end
 
+  # New account form
   def new
     @account = Account.new
 
@@ -28,10 +31,12 @@ class Admin::AccountsController < ApplicationController
     end
   end
 
+  # Edit account form
   def edit
     @account = Account.get(params[:id])
   end
 
+  # Create an account
   def create
     @account = Account.new(params[:account])
 
@@ -46,6 +51,7 @@ class Admin::AccountsController < ApplicationController
     end
   end
 
+  # Update an account
   def update
     @account = Account.get(params[:id])
 
@@ -65,6 +71,7 @@ class Admin::AccountsController < ApplicationController
     end
   end
 
+  # Delete an account
   def destroy
     @account = Account.get(params[:id])
     @account.destroy

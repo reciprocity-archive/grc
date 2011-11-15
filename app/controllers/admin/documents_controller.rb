@@ -1,6 +1,7 @@
 class Admin::DocumentsController < ApplicationController
   layout "admin"
 
+  # List documents
   def index
     @documents = Document.all
 
@@ -10,6 +11,7 @@ class Admin::DocumentsController < ApplicationController
     end
   end
 
+  # Show a doc
   def show
     @document = Document.get(params[:id])
 
@@ -19,6 +21,7 @@ class Admin::DocumentsController < ApplicationController
     end
   end
 
+  # New doc form
   def new
     @document = Document.new
 
@@ -28,10 +31,12 @@ class Admin::DocumentsController < ApplicationController
     end
   end
 
+  # Edit doc form
   def edit
     @document = Document.get(params[:id])
   end
 
+  # Create a doc
   def create
     @document = Document.new(params[:document])
 
@@ -46,6 +51,7 @@ class Admin::DocumentsController < ApplicationController
     end
   end
 
+  # Update a doc
   def update
     @document = Document.get(params[:id])
 
@@ -60,6 +66,7 @@ class Admin::DocumentsController < ApplicationController
     end
   end
 
+  # Delete a doc
   def destroy
     @document = Document.get(params[:id])
     @document.destroy

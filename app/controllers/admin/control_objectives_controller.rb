@@ -4,6 +4,7 @@ class Admin::ControlObjectivesController < ApplicationController
   include ManyHelper
   include AutofilterHelper
 
+  # List (possibly filtered) Control Objectives
   def index
     @control_objectives = filtered_control_objectives
 
@@ -13,6 +14,7 @@ class Admin::ControlObjectivesController < ApplicationController
     end
   end
 
+  # Show one CO
   def show
     @control_objective = ControlObjective.get(params[:id])
 
@@ -22,8 +24,10 @@ class Admin::ControlObjectivesController < ApplicationController
     end
   end
 
+  # Show new CO form
   def new
     @control_objective = ControlObjective.new
+    # If we memorized a regulation, prefill relevant fields
     if session[:ui_regulation_id]
       begin
         @control_objective.regulation_id = session[:ui_regulation_id]
@@ -38,12 +42,16 @@ class Admin::ControlObjectivesController < ApplicationController
     end
   end
 
+  # Show edit CO form
   def edit
     @control_objective = ControlObjective.get(params[:id])
   end
 
+  # Create CO
   def create
+    # Memorize regulation for faster data entry
     session[:ui_regulation_id] = params[:control_objective][:regulation_id]
+
     @control_objective = ControlObjective.new(params[:control_objective])
 
     respond_to do |format|
@@ -57,6 +65,7 @@ class Admin::ControlObjectivesController < ApplicationController
     end
   end
 
+  # Update CO
   def update
     session[:ui_regulation_id] = params[:control_objective][:regulation_id]
     @control_objective = ControlObjective.get(params[:id])
@@ -72,6 +81,7 @@ class Admin::ControlObjectivesController < ApplicationController
     end
   end
 
+  # Delete CO
   def destroy
     control_objective = ControlObjective.get(params[:id])
     control_objective.destroy
@@ -82,12 +92,14 @@ class Admin::ControlObjectivesController < ApplicationController
     end
   end
 
+  # Get CO slug for AJAX
   def slug
     respond_to do |format|
       format.js { ControlObjective.get(params[:id]).slug }
     end
   end
 
+  # Many2many editing of relationship to Controls
   def controls
     if request.put?
       post_many2many(:left_class => ControlObjective, :right_class => Control)

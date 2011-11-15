@@ -1,6 +1,7 @@
 class Admin::DocumentDescriptorsController < ApplicationController
   layout "admin"
 
+  # List Document Descriptors
   def index
     @document_descriptors = DocumentDescriptor.all
 
@@ -10,6 +11,7 @@ class Admin::DocumentDescriptorsController < ApplicationController
     end
   end
 
+  # Show a descriptor
   def show
     @document_descriptor = DocumentDescriptor.get(params[:id])
 
@@ -19,6 +21,7 @@ class Admin::DocumentDescriptorsController < ApplicationController
     end
   end
 
+  # New descriptor form
   def new
     @document_descriptor = DocumentDescriptor.new
 
@@ -28,10 +31,12 @@ class Admin::DocumentDescriptorsController < ApplicationController
     end
   end
 
+  # Edit descriptor form
   def edit
     @document_descriptor = DocumentDescriptor.get(params[:id])
   end
 
+  # Create a descriptor
   def create
     @document_descriptor = DocumentDescriptor.new(params[:document_descriptor])
 
@@ -46,6 +51,7 @@ class Admin::DocumentDescriptorsController < ApplicationController
     end
   end
 
+  # Update a descriptor
   def update
     @document_descriptor = DocumentDescriptor.get(params[:id])
 
@@ -60,6 +66,7 @@ class Admin::DocumentDescriptorsController < ApplicationController
     end
   end
 
+  # Delete a descriptor
   def destroy
     @document_descriptor = DocumentDescriptor.get(params[:id])
     @document_descriptor.destroy

@@ -1,6 +1,7 @@
 class Admin::PeopleController < ApplicationController
   layout "admin"
 
+  # List People
   def index
     @people = Person.all
 
@@ -10,6 +11,7 @@ class Admin::PeopleController < ApplicationController
     end
   end
 
+  # Show a person
   def show
     @person = Person.get(params[:id])
 
@@ -19,6 +21,7 @@ class Admin::PeopleController < ApplicationController
     end
   end
 
+  # New person form
   def new
     @person = Person.new
 
@@ -28,10 +31,12 @@ class Admin::PeopleController < ApplicationController
     end
   end
 
+  # Edit person form
   def edit
     @person = Person.get(params[:id])
   end
 
+  # Create a person
   def create
     @person = Person.new(params[:person])
 
@@ -46,6 +51,7 @@ class Admin::PeopleController < ApplicationController
     end
   end
 
+  # Update a person
   def update
     @person = Person.get(params[:id])
 
@@ -60,6 +66,8 @@ class Admin::PeopleController < ApplicationController
     end
   end
 
+  # Destroy a person 
+  # TODO: what about objects linking here?
   def destroy
     @person = Person.get(params[:id])
     @person.destroy

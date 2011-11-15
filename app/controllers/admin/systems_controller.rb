@@ -2,6 +2,7 @@ class Admin::SystemsController < ApplicationController
   layout "admin"
   include ManyHelper
 
+  # List Systems
   def index
     @systems = System.all
 
@@ -11,6 +12,7 @@ class Admin::SystemsController < ApplicationController
     end
   end
 
+  # Show a system
   def show
     @system = System.get(params[:id])
 
@@ -20,8 +22,11 @@ class Admin::SystemsController < ApplicationController
     end
   end
 
+  # New system form
   def new
     @system = System.new
+
+    # A couple of lines for new docs
     @system.documents << Document.new
     @system.documents << Document.new
 
@@ -31,12 +36,16 @@ class Admin::SystemsController < ApplicationController
     end
   end
 
+  # Edit system form
   def edit
     @system = System.get(params[:id])
+
+    # A couple of lines for new docs
     @system.documents << Document.new
     @system.documents << Document.new
   end
 
+  # Create a system
   def create
     @system = System.new(params[:system])
 
@@ -51,15 +60,18 @@ class Admin::SystemsController < ApplicationController
     end
   end
 
+  # Update a system
   def update
     @system = System.get(params[:id])
 
+    # Accumulate results
     results = []
     documents_params = params[:system].delete("document")
     documents_params.each_pair do |index, doc_params|
       next if doc_params["link"].blank?
       is_delete = doc_params.delete("delete") == "1"
       id = doc_params.delete("id")
+      # Create / delete / update attached doc
       if id.blank?
         doc = @system.documents.create(doc_params)
         results << doc
@@ -84,6 +96,7 @@ class Admin::SystemsController < ApplicationController
     end
   end
 
+  # Delete a system
   def destroy
     system = System.get(params[:id])
 
@@ -99,6 +112,7 @@ class Admin::SystemsController < ApplicationController
     end
   end
 
+  # Many2many relationship to Controls
   def controls
     if request.put?
       post_many2many(:left_class => System, :right_class => Control)
@@ -107,6 +121,7 @@ class Admin::SystemsController < ApplicationController
     end
   end
 
+  # Many2many relationship to COs
   def control_objectives
     if request.put?
       post_many2many(:left_class => System, :right_class => ControlObjective)
@@ -115,6 +130,7 @@ class Admin::SystemsController < ApplicationController
     end
   end
 
+  # Many2many relationship to Biz Processes
   def biz_processes
     if request.put?
       post_many2many(:left_class => System, :right_class => BizProcess)
