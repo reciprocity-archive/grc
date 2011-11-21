@@ -1,3 +1,7 @@
+# Describes a type of Document.
+#
+# Mainly use to classify types of evidence so that they can be
+# organized when attached to Controls
 class DocumentDescriptor
   include DataMapper::Resource
 

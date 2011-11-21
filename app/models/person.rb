@@ -1,3 +1,6 @@
+# A Person
+#
+# Normally an owner or otherwise responsbile for an audit function.
 class Person
   include DataMapper::Resource
 

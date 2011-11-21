@@ -1,3 +1,4 @@
+# An audit test result
 class TestResult
   include DataMapper::Resource
 

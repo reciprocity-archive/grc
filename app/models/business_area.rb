@@ -1,3 +1,4 @@
+# A business area (used to classify Controls)
 class BusinessArea
   include DataMapper::Resource
 

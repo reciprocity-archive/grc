@@ -1,5 +1,11 @@
 require 'slugged_model'
 
+# A control
+#
+# Hierarchically, a Control has one or more Control Objectives
+# as parents and those must all be of the same Regulation.
+#
+# The slug of a Control has to have the slug of the regulation as prefix.
 class Control
   include DataMapper::Resource
   include DataMapper::Validate
@@ -26,33 +32,57 @@ class Control
   property :assertion, String
   property :effective_at, DateTime
 
+  # Business area classification
   belongs_to :business_area, :required => false
+
+  # The regulation this control is under, for ease of validation of slug
+  # and COs.
   belongs_to :regulation, :required => false
+
+  # Many to many with BizProcess
   has n, :biz_process_controls
   has n, :biz_processes, :through => :biz_process_control
+
+  # Many to many with System
   has n, :system_controls
   has n, :systems, :through => :system_controls
+
+  # The types of evidence (Documents) that may be attached to this control
+  # during an audit.
   has n, :evidence_descriptors, 'DocumentDescriptor', :through => Resource
+
+  # The result of an audit test
   belongs_to :test_result, :required =>  false
+
+  # Which controls are implemented by this one.  A company
+  # control may implement several regulation controls.
   has n, :implemented_controls, "Control", :through => Resource
+
+  # Many to many with Control Objective
   has n, :control_objectives, :through => Resource
 
   property :created_at, DateTime
   property :updated_at, DateTime
 
+  # All non-company regulation controls
   def self.all_non_company
     all(:regulation => { :company => false })
   end
 
+  # All company controls
   def self.all_company
     all(:regulation => { :company => true })
   end
 
+  # All controls that may be attached to a CO (regulation
+  # must match)
   def self.for_control_objective(co)
     all(:regulation => co.regulation)
   end
 
-  def self.for_system(co)
+  # All controls that may be attached to a system (must be
+  # company control)
+  def self.for_system(s)
     all_company
   end
 
@@ -68,22 +98,27 @@ class Control
     systems.map { |s| s.id }
   end
 
+  # IDs of related Biz Processes (used by many2many widget)
   def biz_process_ids
     biz_processes.map { |bp| bp.id }
   end
 
+  # IDs of related Control Objectives (used by many2many widget)
   def control_objective_ids
     control_objectives.map { |co| co.id }
   end
 
+  # IDs of related Control Objectives (used by many2many widget)
   def co_ids
     control_objectives.map { |co| co.id }
   end
 
+  # IDs of related Controls (used by many2many widget)
   def implemented_control_ids
     implemented_controls.map { |c| c.id }
   end
 
+  # IDs of related evidence descriptors (used by many2many widget)
   def evidence_descriptor_ids
     evidence_descriptors.map { |e| e.id }
   end

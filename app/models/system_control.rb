@@ -1,3 +1,8 @@
+# System to Control many to many
+#
+# Some additional attributes are attached, including the state of the control
+# and a ticket (if state is not green).  Since a control can apply to systems,
+# these attributes cannot be attached to it directly.
 class SystemControl
   include DataMapper::Resource
 
@@ -5,11 +10,13 @@ class SystemControl
   property :state, Enum[*ControlState::VALUES], :default => :green, :required => true
   property :ticket, String
 
+  # A set of documents used as evidence in an audit
   has n, :evidences, 'Document', :through => Resource
 
   belongs_to :control
   belongs_to :system
 
+  # why/what/how free text
   property :test_why, Text
   property :test_impact, Text
   property :test_recommendation, Text
@@ -34,6 +41,7 @@ class SystemControl
                              :control_id => control_id)
   end
 
+  # Used by the slug filter widget
   def self.slugfilter(prefix)
     if !prefix.blank?
       all(:control => {:slug.like => "#{prefix}%"})

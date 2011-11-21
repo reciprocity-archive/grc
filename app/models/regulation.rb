@@ -1,3 +1,6 @@
+# A regulation
+#
+# The top of the Regulation -> CO -> Control hierarchy
 class Regulation
   include DataMapper::Resource
   include SluggedModel
