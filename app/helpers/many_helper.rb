@@ -1,4 +1,10 @@
 module ManyHelper
+  # Edit one to many relationship.
+  #
+  # Example:
+  #   edit_many(@control, :biz_process_controls, :biz_process) do |bpc|
+  # 
+  # will edit the BizProcesses attached to a control.
   def edit_many(obj, association, other)
     return "" unless obj.id
     controller = obj.class.to_s.underscore.pluralize.to_sym
@@ -31,6 +37,7 @@ module ManyHelper
     end
   end
 
+  # Edit one to many relationship - attach button.
   def edit_many_attach(obj, association, other)
     return "" unless obj.id
     controller = obj.class.to_s.underscore.pluralize.to_sym
@@ -38,6 +45,9 @@ module ManyHelper
     haml_concat link_to(pat(:attach), url_for(:controller => controller, :action => add_method, :id => obj.id), :class => :button)
   end
 
+  # Edit one to many relationship without an explicit intermediary class.
+  #
+  # (Not currently used)
   def edit_many_anon(obj, other, other_controller=nil)
     other_controller ||= other
     other_controller = other_controller.to_s.pluralize.to_sym
@@ -67,6 +77,13 @@ module ManyHelper
     haml_concat link_to(pat(:attach), url(controller, add_method, obj.id), :class => :button)
   end
 
+  # Edit one to many relationship.
+  #
+  # Example:
+  #
+  #   edit_children(@regulation, :control_objective)
+  #
+  # edits Control Objectives under a regulation.
   def edit_children(obj, other)
     res = []
     return "" unless obj.id
@@ -90,6 +107,7 @@ module ManyHelper
     end
   end
 
+  # Not currently used
   def edit_children_inline(obj, others, other_class=nil)
     if other_class.nil?
       other_class = others.to_s.singularize.to_sym
@@ -106,6 +124,23 @@ module ManyHelper
       #end
     end
   end
+
+  # Many to many AJAX page - show form.
+  #
+  # Example:
+  #     if request.put?
+  #       post_many2many(:left_class => Control,
+  #                      :right_class => DocumentDescriptor,
+  #                      :right_relation => :evidence_descriptors,
+  #                      :right_ids => :evidence_descriptor_ids,
+  #                      :lefts => filtered_controls.all_company)
+  #     else
+  #       get_many2many(:left_class => Control,
+  #                     :lefts => filtered_controls.all_company,
+  #                     :right_class => DocumentDescriptor,
+  #                     :right_ids => :evidence_descriptor_ids,
+  #                     :show_slugfilter => true)
+  #     end
 
   def get_many2many(opts)
     left_class = opts[:left_class]
@@ -133,6 +168,7 @@ module ManyHelper
     @show_slugfilter = opts[:show_slugfilter]
   end
 
+  # Many to many AJAX page - update.
   def post_many2many(opts)
     left_class = opts[:left_class]
     left_class_underscore = left_class.to_s.underscore
