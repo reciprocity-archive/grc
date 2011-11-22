@@ -2,7 +2,10 @@ require File.expand_path('../boot', __FILE__)
 
 # Pick the frameworks you want:
 require 'action_controller/railtie'
+
+# Datamapper
 require 'dm-rails/railtie'
+
 # require 'action_mailer/railtie'
 # require 'active_resource/railtie'
 # require 'rails/test_unit/railtie'
@@ -37,6 +40,8 @@ module CmsRails
     # config.i18n.default_locale = :de
 
     # JavaScript files you want as :defaults (application.js is always included).
+    #
+    # JQuery javascripts
     config.action_view.javascript_expansions[:defaults] = %w(jquery jquery-ujs jquery-ui jquery.multiselect jquery.manyselect jquery.multiselect.filter)
 
     # Configure the default encoding used in templates for Ruby 1.9.
@@ -46,6 +51,7 @@ module CmsRails
     config.filter_parameters += [:password, :password_confirmation]
 
     config.generators do |g|
+      # Haml generator
       g.template_engine :haml
     end
 

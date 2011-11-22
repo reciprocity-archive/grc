@@ -32,10 +32,12 @@ module Gdoc
   }
 
 
+  # Create a URI for internal identification of a google document
   def self.make_id_url(doc)
     return "xgdoc:#{doc.type}/#{doc.doc_id}"
   end
 
+  # Convert an internal URI to a Google Docs URL for editing the document
   def self.edit_url_from_id_url(id_url)
     return nil if id_url.scheme != 'xgdoc'
     (type, doc_id) = id_url.path.split("/")
@@ -44,6 +46,7 @@ module Gdoc
     return sprintf(edit_url, doc_id)
   end
 
+  # Construct a Gdoc::Document from an API results entry
   def self.create_doc(entry)
     resource_id = entry.elements['gd:resourceId'].text.split(':')
     doc = Gdoc::Document.new(entry.elements['title'].text,
@@ -92,6 +95,7 @@ module Gdoc
     return doc
   end
 
+  # A Google Docs API client
   class Client
     attr_reader :gclient
 
@@ -99,6 +103,8 @@ module Gdoc
       @gclient = GData::Client::DocList.new
     end
 
+    # Save a session auth token received through an incoming redirect
+    # of the user's browser.
     def set_token(token, upgrade = false)
       @gclient.authsub_token = token
       return @gclient.auth_handler.upgrade if upgrade
@@ -111,6 +117,11 @@ module Gdoc
       return @gclient.authsub_url(url, secure, sess, '')
     end
 
+    # Get Google Docs given search options.
+    #
+    # opts[:folder] - optional Gdoc::Document representing a folder to search in
+    #
+    # Returns a map of doc IDs to Gdoc::Document
     def get_docs(opts = {})
       url = Gdoc::DOCLIST_FEED
       if opts[:folder]
@@ -126,6 +137,11 @@ module Gdoc
       docs
     end
  
+    # Get Google Docs folders given search options.
+    #
+    # opts[:folder] - optional Gdoc::Document representing a folder to search in
+    #
+    # Returns a map of doc IDs to Gdoc::Document
     def get_folders(opts = {})
       url = Gdoc::DOCLIST_FEED
       folder = opts[:folder] || 'folder'
@@ -146,6 +162,7 @@ module Gdoc
       docs
     end
 
+    # Move a doc or folder into a folder
     def move_into_folder(doc, dest, opts = {})
       url = doc.type == 'folder' ? doc.links['content_src'] : doc.links['self']
       xm = Builder::XmlMarkup.new(:indent => 2)
@@ -157,6 +174,7 @@ module Gdoc
       doc.parent = dest if doc.type == 'folder'
     end
 
+    # Remove a doc or folder from a folder
     def remove_from_folder(doc, dest, opts = {})
       url = dest.links['content_src'] + "/#{doc.type}%3A#{doc.doc_id}"
       begin
@@ -167,6 +185,9 @@ module Gdoc
       end
     end
 
+    # Create a folder
+    #
+    # opts[:parent] optional parent folder
     def create_folder(title, opts = {})
       xm = Builder::XmlMarkup.new(:indent => 2)
       xm.instruct!

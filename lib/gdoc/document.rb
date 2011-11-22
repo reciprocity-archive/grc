@@ -41,6 +41,7 @@ module Gdoc
     #                                   'spreadsheet', 'folder', 'pdf'
     #                           +last_updated+: DateTime
     #                           +xml+: string An XML representation of this doc
+    #                           +parent+: containing folder
     #
     def initialize(title, options={})
       @title = title
@@ -65,6 +66,7 @@ module Gdoc
       @permissions[role].uniq!
     end
 
+    # Full title, including parent folder path
     def full_title
       t = ""
       if parent

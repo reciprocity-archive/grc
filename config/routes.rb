@@ -1,16 +1,8 @@
 CmsRails::Application.routes.draw do
-  get "dashboard/index"
-
-  get "dashboard/openbp"
-
-  get "dashboard/closebp"
-
-  get "dashboard/opensys"
-
-  get "dashboard/closesys"
-
+  # Admin front page
   match 'admin' => 'admin/base#index'
 
+  # Admin pages
   scope :module => "admin" do
     resources :accounts, :path => "/admin/accounts"
     resources :biz_processes do
@@ -93,10 +85,14 @@ CmsRails::Application.routes.draw do
     match 'user_sessions/create' => 'user_sessions#create'
   end
 
+  # Document page
   match 'document/:action' => 'document'
+
+  # Slugfilter widget routes
   match 'slugfilter/index' => 'slugfilter#index', :as => 'slugfilter_index'
   match 'slugfilter/values' => 'slugfilter#values', :as => 'slugfilter_values'
 
+  # Evidence workflow page
   match 'evidence/index' => 'evidence#index'
   match 'evidence/show_closed_control/:system_id/:control_id' => 'evidence#show_closed_control'
   match 'evidence/show_control/:system_id/:control_id' => 'evidence#show_control'
@@ -108,15 +104,17 @@ CmsRails::Application.routes.draw do
   match 'evidence/destroy/:system_id/:control_id/:document_id' => 'evidence#destroy'
   match 'evidence/review/:document_id/:value' => 'evidence#review'
 
+  # Dashboard workflow page
   match 'dashboard/index' => 'dashboard#index'
-
   match 'dashboard/openbp/:id' => 'dashboard#openbp'
   match 'dashboard/closebp/:id' => 'dashboard#closebp'
   match 'dashboard/opensys/:biz_process_id/:id' => 'dashboard#opensys'
   match 'dashboard/closesys/:biz_process_id/:id' => 'dashboard#closesys'
 
+  # Test report workflow page
   match 'testreport/:action' => 'testreport'
 
+  # Testing workflow page
   match 'testing/index' => 'testing#index'
   match 'testing/show/:system_id/:control_id' => 'testing#show'
   match 'testing/show_closed/:system_id/:control_id' => 'testing#show_closed'
@@ -125,59 +123,8 @@ CmsRails::Application.routes.draw do
   match 'testing/update_control_text/:system_id/:control_id' => 'testing#update_control_text'
   match 'testing/review/:document_id/:value' => 'testing#review'
 
-  # Sample of regular route:
-  #   match 'products/:id' => 'catalog#view'
-  # Keep in mind you can assign values other than :controller and :action
-
-  # Sample of named route:
-  #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
-  # This route can be invoked with purchase_url(:id => product.id)
-
-  # Sample resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
-  # Sample resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Sample resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Sample resource route with more complex sub-resources
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', :on => :collection
-  #     end
-  #   end
-
-  # Sample resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
-
-  # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
-  # root :to => "welcome#index"
-
+  # Welcome page
   root :to => "welcome#index"
 
   # See how all your routes lay out with "rake routes"
-
-  # This is a legacy wild controller route that's not recommended for RESTful applications.
-  # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id(.:format)))'
 end
