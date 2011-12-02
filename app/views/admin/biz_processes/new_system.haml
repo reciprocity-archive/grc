@@ -9,7 +9,7 @@
     .inner
       %h3
         &=@biz_process.title
-      -form_for :biz_process_system, url(:biz_processes, :create_system), :class => :form do |f|
+      =form_for :biz_process_system, url(:biz_processes, :create_system), :class => :form do |f|
         =partial "biz_processes/system_form", :locals => { :f => f }
 
 -content_for :sidebar, partial("base/sidebar")

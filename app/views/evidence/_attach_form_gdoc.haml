@@ -1,6 +1,7 @@
 .remote
+  x
   .tree
-    -form_for :document, :url => url_for(:action => :attach, :system_id => sc.system.id, :control_id => sc.control.id, :descriptor_id => desc.id), :html => { :class => :form } do |f|
+    =form_for :document, :url => url_for(:action => :attach, :system_id => sc.system.id, :control_id => sc.control.id, :descriptor_id => desc.id), :html => { :class => :form } do |f|
       =collection_select :document, :gdocs, @docs.values.sort, :href, :title, { :multiple => true }
       :javascript
         $('#document_gdocs').multiselect(

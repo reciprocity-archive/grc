@@ -5,7 +5,7 @@
       =pat(:edit)
       =mt(:biz_process)
     .inner
-      -form_for @biz_process, :method => :put, :html => {:class => :form} do |f|
+      =form_for @biz_process, :method => :put, :html => {:class => :form} do |f|
         =render :partial => "admin/biz_processes/form", :locals => { :f => f }
 
 /-content_for :sidebar, partial("base/sidebar")

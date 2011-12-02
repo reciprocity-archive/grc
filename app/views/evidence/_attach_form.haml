@@ -1,6 +1,6 @@
 .remote
   .tree
-    -form_for :document, :url => url_for(:action => :attach, :system_id => sc.system.id, :control_id => sc.control.id, :descriptor_id => desc.id), :html => { :class => :form } do |f|
+    =form_for :document, :url => url_for(:action => :attach, :system_id => sc.system.id, :control_id => sc.control.id, :descriptor_id => desc.id), :html => { :class => :form } do |f|
       New 
       =desc.title
       \:
