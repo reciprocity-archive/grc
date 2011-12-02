@@ -72,7 +72,9 @@ class EvidenceController < ApplicationController
     desc = DocumentDescriptor.get(params[:descriptor_id])
 
     doc_params = params[:document]
-    if doc_params[:gdocs]
+    gdocs_param = doc_params[:gdocs]
+    if gdocs_param
+      gdocs_param = [ gdocs_param ] unless gdocs_param.is_a?(Array)
       folders = get_gfolders
       return unless folders
 
@@ -82,20 +84,22 @@ class EvidenceController < ApplicationController
 
       docs = get_gdocs(:folder => sys_folder)
       return if docs.nil?
-      doc_params[:gdocs].each do |doc_href|
+      gdocs_param.each do |doc_href|
         gdoc = docs[doc_href]
         if gdoc.nil?
           flash[:error] = "Failed to attach some docs"
         else
+          gclient = get_gdata_client
+          copy = gclient.copy(gdoc, "Evidence - #{gdoc.title}")
           doc =  Document.first_or_create(
-            { :link => Gdoc.make_id_url(gdoc) },
+            { :link => Gdoc.make_id_url(copy) },
             { :title => gdoc.title, :document_descriptor => desc
           })
 
-          gclient = get_gdata_client
           if !SystemControl.evidence_attached?(doc)
             # newly attached - put it under the accepted folder
-            gclient.move_into_folder(gdoc, accepted_folder)
+            gclient.move_into_folder(copy, accepted_folder)
+            gclient.move_into_folder(copy, sys_folder)
           end
 
           #puts "---------------------------"

@@ -5,6 +5,7 @@ module Gdoc
   SPREADSHEETS_SCOPE = 'https://spreadsheets.google.com/feeds/'
 
   DOCLIST_FEED = DOCLIST_SCOPE + 'documents/private/full'
+  DEFAULT_FEED = DOCLIST_SCOPE + 'default/private/full'
 
   DOCUMENT_DOC_TYPE = 'document'
   FOLDER_DOC_TYPE = 'folder'
@@ -101,6 +102,8 @@ module Gdoc
 
     def initialize()
       @gclient = GData::Client::DocList.new
+      @gclient.version = '3.0'
+      @gclient.source = 'CMS'
     end
 
     # Save a session auth token received through an incoming redirect
@@ -143,7 +146,7 @@ module Gdoc
     #
     # Returns a map of doc IDs to Gdoc::Document
     def get_folders(opts = {})
-      url = Gdoc::DOCLIST_FEED
+      url = Gdoc::DEFAULT_FEED
       folder = opts[:folder] || 'folder'
       url += "/-/#{folder}?showfolders=true"
       feed = @gclient.get(url)
@@ -160,6 +163,19 @@ module Gdoc
         end
       end
       docs
+    end
+
+    # Copy
+    def copy(doc, new_title)
+      url = doc.links['self']
+      xm = Builder::XmlMarkup.new(:indent => 2)
+      xm.instruct!
+      body = xm.entry "xmlns" => ATOM_NS do
+        xm.id url
+        xm.title new_title
+      end
+      res = @gclient.post DEFAULT_FEED, body
+      return Gdoc.create_doc(res.to_xml)
     end
 
     # Move a doc or folder into a folder

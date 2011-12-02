@@ -15,6 +15,7 @@ class DocumentController < ApplicationController
   # Show the list of Google docs
   def index
     return unless auth_gdocs
+    @folders = get_gfolders()
     render 'document/index'
   end
 
