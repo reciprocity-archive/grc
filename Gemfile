@@ -75,5 +75,10 @@ group(:development, :test) do
 
   # gem 'rails_metrics', '~> 0.1', :git => 'git://github.com/engineyard/rails_metrics'
 
-  gem 'ruby-debug'
+  platform :jruby do
+    gem 'ruby-debug'
+  end
+  platform :ruby do
+    gem 'ruby-debug19'
+  end
 end
