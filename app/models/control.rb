@@ -44,7 +44,7 @@ class Control
   has n, :biz_processes, :through => :biz_process_control, :order => :slug
 
   # Many to many with System
-  has n, :system_controls, :order => :slug
+  has n, :system_controls
   has n, :systems, :through => :system_controls
 
   # The types of evidence (Documents) that may be attached to this control

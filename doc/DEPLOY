@@ -35,10 +35,21 @@ At this point rvm will ask you if it should trust the .rvmrc in this project dir
   bundle install --binstubs
   mkdir log
 
+  sudo mysql
+    create database cms;
+    grant all on cms.* to cms@localhost identified by "cms";
+
+adjust:
+
+  config/database.yml
+
 For dev:
 ===========
 
-  rake dm:auto:migrate seed
+  rake db:automigrate seed
+  rake db:sessions:create
+  my
+      alter table sessions modify sessions longtext;
   script/rails server
 
 For prod:
@@ -66,14 +77,6 @@ Change /etc/nginx/sites-enabled/default:
 
 
 adjust SERVER above to your hostname as visible from outside.
-
-  sudo mysql
-    create database cms;
-    grant all on cms.* to cms@localhost identified by "cms";
-
-adjust:
-
-  config/database.yml
 
 And finally, starting the application server in production:
 
