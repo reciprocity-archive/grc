@@ -14,7 +14,7 @@ class Regulation
   property :description, Text
   property :company, Boolean, :default => false, :required => true
 
-  has n, :control_objectives
+  has n, :control_objectives, :order => :slug
 
   belongs_to :source_document, 'Document', :required => false
   belongs_to :source_website, 'Document', :required => false

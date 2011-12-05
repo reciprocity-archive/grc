@@ -24,22 +24,22 @@ class ControlObjective
 
   property :description, Text
 
-  has n, :controls, :through => Resource
+  has n, :controls, :through => Resource, :order => :slug
   belongs_to :regulation
 
   # All COs associated with a regulation
   def self.all_non_company
-    all(:regulation => { :company => false })
+    all(:regulation => { :company => false }, :order => :slug)
   end
 
   # All COs associated with a company "regulation"
   def self.all_company
-    all(:regulation => { :company => true })
+    all(:regulation => { :company => true }, :order => :slug)
   end
 
   # All COs that could be associated with a control (in same regulation)
   def self.for_control(control)
-    all(:regulation => control.regulation)
+    all(:regulation => control.regulation, :order => :slug)
   end
 
   # All COs that could be associated with a system (any company CO)

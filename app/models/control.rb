@@ -41,10 +41,10 @@ class Control
 
   # Many to many with BizProcess
   has n, :biz_process_controls
-  has n, :biz_processes, :through => :biz_process_control
+  has n, :biz_processes, :through => :biz_process_control, :order => :slug
 
   # Many to many with System
-  has n, :system_controls
+  has n, :system_controls, :order => :slug
   has n, :systems, :through => :system_controls
 
   # The types of evidence (Documents) that may be attached to this control
@@ -56,28 +56,28 @@ class Control
 
   # Which controls are implemented by this one.  A company
   # control may implement several regulation controls.
-  has n, :implemented_controls, "Control", :through => Resource
+  has n, :implemented_controls, "Control", :through => Resource, :order => :slug
 
   # Many to many with Control Objective
-  has n, :control_objectives, :through => Resource
+  has n, :control_objectives, :through => Resource, :order => :slug
 
   property :created_at, DateTime
   property :updated_at, DateTime
 
   # All non-company regulation controls
   def self.all_non_company
-    all(:regulation => { :company => false })
+    all(:regulation => { :company => false }, :order => :slug)
   end
 
   # All company controls
   def self.all_company
-    all(:regulation => { :company => true })
+    all(:regulation => { :company => true }, :order => :slug)
   end
 
   # All controls that may be attached to a CO (regulation
   # must match)
   def self.for_control_objective(co)
-    all(:regulation => co.regulation)
+    all(:regulation => co.regulation, :order => :slug)
   end
 
   # All controls that may be attached to a system (must be

@@ -13,9 +13,9 @@ class BizProcess
   property :description, Text
 
   has n, :biz_process_controls
-  has n, :systems, :through => Resource
-  has n, :control_objectives, :through => Resource
-  has n, :controls, :through => Resource
+  has n, :systems, :through => Resource, :order => :slug
+  has n, :control_objectives, :through => Resource, :order => :slug
+  has n, :controls, :through => Resource, :order => :slug
 
   belongs_to :owner, 'Person', :required => false
 

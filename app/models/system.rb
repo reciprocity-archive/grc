@@ -14,14 +14,14 @@ class System
 
   # Many to many with Control
   has n, :system_controls
-  has n, :controls, :through => :system_controls
+  has n, :controls, :through => :system_controls, :order => :slug
 
   # Many to many with CO
   has n, :system_control_objectives
-  has n, :control_objectives, :through => :system_control_objectives
+  has n, :control_objectives, :through => :system_control_objectives, :order => :slug
 
   # Many to many with BizProcess
-  has n, :biz_processes, :through => Resource
+  has n, :biz_processes, :through => Resource, :order => :slug
 
   # Responsible party
   belongs_to :owner, 'Person', :required => false
@@ -35,12 +35,12 @@ class System
 
   # Which systems can be attached to a control
   def self.for_control(c)
-    all
+    all(:order => :slug)
   end
 
   # Which systems can be attached to a control objective
   def self.for_control_objective(co)
-    all
+    all(:order => :slug)
   end
 
   # Which systems can be attached to a biz process

@@ -25,7 +25,7 @@ class EvidenceController < ApplicationController
       redirect_to :action => :index
     else
       return unless auth_gdocs
-      @systems = filter_systems(System.all)
+      @systems = filter_systems(System.all(:order => :slug))
     end
   end
 
