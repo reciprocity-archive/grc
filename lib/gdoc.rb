@@ -4,7 +4,6 @@ module Gdoc
   CONTACTS_SCOPE = 'https://www.google.com/m8/feeds/'
   SPREADSHEETS_SCOPE = 'https://spreadsheets.google.com/feeds/'
 
-  DOCLIST_FEED = DOCLIST_SCOPE + 'documents/private/full'
   DEFAULT_FEED = DOCLIST_SCOPE + 'default/private/full'
 
   DOCUMENT_DOC_TYPE = 'document'
@@ -126,7 +125,7 @@ module Gdoc
     #
     # Returns a map of doc IDs to Gdoc::Document
     def get_docs(opts = {})
-      url = Gdoc::DOCLIST_FEED
+      url = Gdoc::DEFAULT_FEED
       if opts[:folder]
         url = opts[:folder].links['content_src']
       end
@@ -214,7 +213,7 @@ module Gdoc
       if opts[:parent]
         res = @gclient.post opts[:parent].links['content_src'], body
       else
-        res = @gclient.post Gdoc::DOCLIST_FEED, body
+        res = @gclient.post Gdoc::DEFAULT_FEED, body
       end
       doc = Gdoc.create_doc(res.to_xml)
       doc.parent = opts[:parent]
