@@ -16,7 +16,7 @@
         &gt;link
       =link_to url_for(:action => :new_gdoc, :system_id => sc.system.id, :control_id => sc.control.id, :descriptor_id => desc.id, :format => :html, :r => 1), :title => "Refresh Google Docs", :class => "button", :remote => true do
         Refresh
-      =link_to @folder_url do
+      =link_to @folder_url, :target => '_blank' do
         =sc.system.slug
         Docs Folder
 
