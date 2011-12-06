@@ -59,20 +59,25 @@ class EvidenceController < ApplicationController
 
     by_title = gdocs_by_title(folders)
     sys_folder = by_title["CMS/Systems/#{sc.system.slug}"]
+    new_folder = by_title['CMS/New Evidence']
+    systems_folder = by_title['CMS/Systems']
+
+    if !systems_folder
+      flash[:error] = 'No CMS/Systems folder in your Google Docs'
+      @redirect_url = url_for(:action => :index)
+      return render :partial => 'base/ajax_redirect'
+    end
 
     if sys_folder.nil?
-      systems_folder = by_title['CMS/Systems']
-      if !systems_folder
-        flash[:error] = 'No CMS/Systems folder in your Google Docs'
-        @redirect_url = url_for(:action => :index)
-        return render :partial => 'base/ajax_redirect'
-      end
       gclient = get_gdata_client
       sys_folder = gclient.create_folder(sc.system.slug, :parent => systems_folder)
       session[:gfolders] = {} # clear cache
     end
+
     @docs = get_gdocs(:folder => sys_folder, :ajax => true, :retry_url => url_for(:action => :index))
     return unless @docs
+    @docs.update(get_gdocs(:folder => new_folder, :ajax => true, :retry_url => url_for(:action => :index))) if new_folder
+    @docs.delete_if { |key, doc| doc.type == 'folder' }
     @folder_url = sys_folder.links["alternate"]
 
     render(:partial => "attach_form_gdoc", :locals => {:sc => sc, :desc => desc})
@@ -93,9 +98,12 @@ class EvidenceController < ApplicationController
       by_title = gdocs_by_title(folders)
       sys_folder = by_title["CMS/Systems/#{@system_control.system.slug}"]
       accepted_folder = by_title["CMS/Accepted"]
+      new_folder = by_title['CMS/New Evidence']
 
       docs = get_gdocs(:folder => sys_folder)
       return if docs.nil?
+      docs.update(get_gdocs(:folder => new_folder)) if new_folder
+
       gdocs_param.each do |doc_href|
         gdoc = docs[doc_href]
         if gdoc.nil?
