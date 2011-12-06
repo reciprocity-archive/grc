@@ -47,10 +47,23 @@ class Admin::SystemsController < ApplicationController
 
   # Create a system
   def create
+    documents_params = params[:system].delete("document")
     @system = System.new(params[:system])
 
+    # Accumulate results
+    results = []
+    documents_params.each_pair do |index, doc_params|
+      next if doc_params["link"].blank?
+      # Create / delete / update attached doc
+      # TODO: find existing doc, gdoc integration
+      doc = @system.documents.create(doc_params)
+      results << doc
+    end
+
+    results << @system.save
+
     respond_to do |format|
-      if @system.save
+      if results.all?
         format.html { redirect_to(edit_system_path(@system), :notice => 'System was successfully created.') }
         format.xml  { render :xml => @system, :status => :created, :location => @system }
       else

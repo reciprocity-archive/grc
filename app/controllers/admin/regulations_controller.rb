@@ -4,7 +4,7 @@ class Admin::RegulationsController < ApplicationController
   # Slug for AJAX
   def slug
     respond_to do |format|
-      format.js  { render :js => Regulation.get(params[:id]).slug }
+      format.js  { render :json => [Regulation.get(params[:id]).slug]  }
     end
   end
 
@@ -45,11 +45,13 @@ class Admin::RegulationsController < ApplicationController
 
   # Create a reg
   def create
+    source_document = params[:regulation].delete("source_document")
+    source_website = params[:regulation].delete("source_website")
     @regulation = Regulation.new(params[:regulation])
 
     # A couple of attached docs
-    @regulation.source_document = Document.new(params[:regulation].delete("source_document"))
-    @regulation.source_website = Document.new(params[:regulation].delete("source_website"))
+    @regulation.source_document = Document.new(source_document) if source_document && !source_document['link'].blank?
+    @regulation.source_website = Document.new(source_website) if source_website && !source_document['link'].blank?
 
     respond_to do |format|
       if @regulation.save

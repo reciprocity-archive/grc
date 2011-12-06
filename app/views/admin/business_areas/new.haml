@@ -8,7 +8,7 @@
       =pat(:new)
       =mt(:business_area)
     .inner
-      =form_for @business_area, :method => :put, :html => {:class => :form} do |f|
+      =form_for @business_area, :method => :post, :html => {:class => :form} do |f|
         =render :partial => "admin/business_areas/form", :locals => { :f => f }
 
 /-content_for :sidebar, partial("base/sidebar")

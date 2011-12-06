@@ -8,7 +8,7 @@
       =pat(:new)
       =mt(:document_descriptor)
     .inner
-      =form_for @document_descriptor, :method => :put, :html => {:class => :form} do |f|
+      =form_for @document_descriptor, :method => :post, :html => {:class => :form} do |f|
         =render :partial => "admin/document_descriptors/form", :locals => { :f => f }
 
 /-content_for :sidebar, partial("base/sidebar")

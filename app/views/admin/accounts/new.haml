@@ -8,7 +8,7 @@
       =pat(:new)
       =mt(:account)
     .inner
-      =form_for @account, :method => :put, :html => {:class => :form} do |f|
+      =form_for @account, :method => :post, :html => {:class => :form} do |f|
         =render :partial => "admin/accounts/form", :locals => { :f => f }
 
 /-content_for :sidebar, partial("base/sidebar")

@@ -8,7 +8,7 @@
       =pat(:new)
       =mt(:regulation)
     .inner
-      =form_for @regulation, :method => :put, :html => {:class => :form} do |f|
+      =form_for @regulation, :method => :post, :html => {:class => :form} do |f|
         =render :partial => "admin/regulations/form", :locals => { :f => f }
 
 /-content_for :sidebar, partial("base/sidebar")

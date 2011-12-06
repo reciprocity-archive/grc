@@ -5,7 +5,7 @@ CmsRails::Application.routes.draw do
   # Admin pages
   scope :module => "admin" do
     resources :accounts, :path => "/admin/accounts"
-    resources :biz_processes do
+    resources :biz_processes, :path => "/admin/biz_processes" do
       collection do
         get 'controls'
         put 'controls'
@@ -13,16 +13,14 @@ CmsRails::Application.routes.draw do
         put 'systems'
       end
     end
-    resources :biz_processes, :path => "/admin/biz_processes"
     resources :business_areas, :path => "/admin/business_areas"
-    resources :control_objectives do
+    resources :control_objectives, :path => "/admin/control_objectives" do
       collection do
         get 'controls'
         put 'controls'
       end
     end
-    resources :control_objectives, :path => "/admin/control_objectives"
-    resources :controls do
+    resources :controls, :path => "/admin/controls" do
       collection do
         get 'control_objectives'
         put 'control_objectives'
@@ -45,17 +43,15 @@ CmsRails::Application.routes.draw do
         post 'create_biz_process'
       end
     end
-    resources :controls, :path => "/admin/controls"
     resources :documents, :path => "/admin/documents"
     resources :document_descriptors, :path => "/admin/document_descriptors"
-    resources :regulations do
+    resources :regulations, :path => "/admin/regulations" do
       member do
         get 'slug'
       end
     end
-    resources :regulations, :path => "/admin/regulations"
     resources :people, :path => "/admin/people"
-    resources :systems do
+    resources :systems, :path => "/admin/systems" do
       collection do
         get 'biz_processes'
         put 'biz_processes'
@@ -65,7 +61,6 @@ CmsRails::Application.routes.draw do
         put 'control_objectives'
       end
     end
-    resources :systems, :path => "/admin/systems"
   end
 
   # The priority is based upon order of creation:

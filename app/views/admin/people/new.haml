@@ -8,7 +8,7 @@
       =pat(:new)
       =mt(:person)
     .inner
-      =form_for @person, :method => :put, :html => {:class => :form} do |f|
+      =form_for @person, :method => :post, :html => {:class => :form} do |f|
         =render :partial => "admin/people/form", :locals => { :f => f }
 
 /-content_for :sidebar, partial("base/sidebar")
