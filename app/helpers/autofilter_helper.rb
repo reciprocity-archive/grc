@@ -8,6 +8,7 @@ module AutofilterHelper
     if @regulation
       cos = cos.all(:regulation => @regulation)
     end
+    cos
   end
 
   # Filter Controls by slug.
@@ -19,5 +20,6 @@ module AutofilterHelper
     if @regulation
       controls = controls.all(:regulation => @regulation)
     end
+    controls
   end
 end
