@@ -58,6 +58,7 @@ class Admin::RegulationsController < ApplicationController
         format.html { redirect_to(edit_regulation_path(@regulation), :notice => 'Regulation was successfully created.') }
         format.xml  { render :xml => @regulation, :status => :created, :location => @regulation }
       else
+        flash.now[:error] = "Could not create."
         format.html { render :action => "new" }
         format.xml  { render :xml => @regulation.errors, :status => :unprocessable_entity }
       end
@@ -86,6 +87,7 @@ class Admin::RegulationsController < ApplicationController
         format.html { redirect_to(edit_regulation_path(@regulation), :notice => 'Regulation was successfully updated.') }
         format.xml  { head :ok }
       else
+        flash.now[:error] = "Could not update."
         format.html { render :action => "edit" }
         format.xml  { render :xml => @regulation.errors, :status => :unprocessable_entity }
       end

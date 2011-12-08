@@ -4,7 +4,10 @@ module AutofilterHelper
   # This is used for the respective filtering widgets.  The widgets store
   # their state in the session.
   def filtered_control_objectives
-    ControlObjective.slugfilter(session[:slugfilter])
+    cos = ControlObjective.slugfilter(session[:slugfilter])
+    if @regulation
+      cos = cos.all(:regulation => @regulation)
+    end
   end
 
   # Filter Controls by slug.
@@ -12,6 +15,9 @@ module AutofilterHelper
   # This is used for the respective filtering widgets.  The widgets store
   # their state in the session.
   def filtered_controls
-    Control.slugfilter(session[:slugfilter])
+    controls = Control.slugfilter(session[:slugfilter])
+    if @regulation
+      controls = controls.all(:regulation => @regulation)
+    end
   end
 end

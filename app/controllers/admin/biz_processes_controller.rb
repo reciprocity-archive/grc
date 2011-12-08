@@ -53,6 +53,7 @@ class Admin::BizProcessesController < ApplicationController
         format.html { redirect_to(edit_biz_process_path(@biz_process), :notice => 'Biz Process was successfully created.') }
         format.xml  { render :xml => @biz_process, :status => :created, :location => @biz_process }
       else
+        flash.now[:error] = "Could not create."
         format.html { render :action => "new" }
         format.xml  { render :xml => @biz_process.errors, :status => :unprocessable_entity }
       end
@@ -99,6 +100,7 @@ class Admin::BizProcessesController < ApplicationController
         format.html { redirect_to(edit_biz_process_path(@biz_process), :notice => 'Biz Process was successfully updated.') }
         format.xml  { head :ok }
       else
+        flash.now[:error] = "Could not update."
         format.html { render :action => "edit" }
         format.xml  { render :xml => @biz_process.errors, :status => :unprocessable_entity }
       end

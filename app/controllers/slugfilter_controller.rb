@@ -4,15 +4,28 @@
 
 # Handle the filter-by-slug form
 
-class SlugfilterController < ActionController::Base
+class SlugfilterController < ApplicationController
   include SlugfilterHelper
 
   access_control :acl do
     allow :admin, :analyst
   end
 
+  def regulation_update
+    regulation_id = params[:regulation][:id] rescue nil
+    if !regulation_id.nil?
+      if regulation_id == ""
+        session[:regulation_id] = nil
+      else
+        session[:regulation_id] = regulation_id
+      end
+    end
+    # TODO restore page state (e.g. drilldown)
+    render :js => "window.location.reload()"
+  end
+
   # Filter-by-slug form changed, memoize the requested prefix and reload - AJAX
-  def index
+  def slug_update
     slug = params[:slugfilter].upcase
     slug = "" if params[:clear]
     session[:slugfilter] = slug

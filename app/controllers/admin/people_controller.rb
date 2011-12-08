@@ -45,6 +45,7 @@ class Admin::PeopleController < ApplicationController
         format.html { redirect_to(edit_person_path(@person), :notice => 'Person was successfully created.') }
         format.xml  { render :xml => @person, :status => :created, :location => @person }
       else
+        flash.now[:error] = "Could not create."
         format.html { render :action => "new" }
         format.xml  { render :xml => @person.errors, :status => :unprocessable_entity }
       end
@@ -60,6 +61,7 @@ class Admin::PeopleController < ApplicationController
         format.html { redirect_to(edit_person_path(@person), :notice => 'Person was successfully updated.') }
         format.xml  { head :ok }
       else
+        flash.now[:error] = "Could not update."
         format.html { render :action => "edit" }
         format.xml  { render :xml => @person.errors, :status => :unprocessable_entity }
       end

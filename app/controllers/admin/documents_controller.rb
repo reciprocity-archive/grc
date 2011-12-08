@@ -45,6 +45,7 @@ class Admin::DocumentsController < ApplicationController
         format.html { redirect_to(edit_document_path(@document), :notice => 'Document was successfully created.') }
         format.xml  { render :xml => @document, :status => :created, :location => @document }
       else
+        flash.now[:error] = "Could not create."
         format.html { render :action => "new" }
         format.xml  { render :xml => @document.errors, :status => :unprocessable_entity }
       end
@@ -60,6 +61,7 @@ class Admin::DocumentsController < ApplicationController
         format.html { redirect_to(edit_document_path(@document), :notice => 'Document was successfully updated.') }
         format.xml  { head :ok }
       else
+        flash.now[:error] = "Could not update."
         format.html { render :action => "edit" }
         format.xml  { render :xml => @document.errors, :status => :unprocessable_entity }
       end

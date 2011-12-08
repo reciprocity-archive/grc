@@ -84,7 +84,8 @@ CmsRails::Application.routes.draw do
   match 'document/:action' => 'document'
 
   # Slugfilter widget routes
-  match 'slugfilter/index' => 'slugfilter#index', :as => 'slugfilter_index'
+  match 'slugfilter/slug_update' => 'slugfilter#slug_update', :as => 'slugfilter_slug_update'
+  match 'slugfilter/regulation_update' => 'slugfilter#regulation_update', :as => 'slugfilter_regulation_update'
   match 'slugfilter/values' => 'slugfilter#values', :as => 'slugfilter_values'
 
   # Evidence workflow page

@@ -67,6 +67,7 @@ class Admin::SystemsController < ApplicationController
         format.html { redirect_to(edit_system_path(@system), :notice => 'System was successfully created.') }
         format.xml  { render :xml => @system, :status => :created, :location => @system }
       else
+        flash.now[:error] = 'Could not create.'
         format.html { render :action => "new" }
         format.xml  { render :xml => @system.errors, :status => :unprocessable_entity }
       end
@@ -103,6 +104,8 @@ class Admin::SystemsController < ApplicationController
         format.html { redirect_to(edit_system_path(@system), :notice => 'System was successfully updated.') }
         format.xml  { head :ok }
       else
+        puts flash.inspect
+        flash.now[:error] = 'Could not update.'
         format.html { render :action => "edit" }
         format.xml  { render :xml => @system.errors, :status => :unprocessable_entity }
       end

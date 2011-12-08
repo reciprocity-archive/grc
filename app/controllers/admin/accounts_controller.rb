@@ -45,6 +45,7 @@ class Admin::AccountsController < ApplicationController
         format.html { redirect_to(edit_account_path(@account), :notice => 'Account was successfully created.') }
         format.xml  { render :xml => @account, :status => :created, :location => @account }
       else
+        flash.now[:error] = "Could not create."
         format.html { render :action => "new" }
         format.xml  { render :xml => @account.errors, :status => :unprocessable_entity }
       end
@@ -65,6 +66,7 @@ class Admin::AccountsController < ApplicationController
         format.html { redirect_to(edit_account_path(@account), :notice => 'Account was successfully updated.') }
         format.xml  { head :ok }
       else
+        flash.now[:error] = "Could not update."
         format.html { render :action => "edit" }
         format.xml  { render :xml => @account.errors, :status => :unprocessable_entity }
       end

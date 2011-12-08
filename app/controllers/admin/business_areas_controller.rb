@@ -45,6 +45,7 @@ class Admin::BusinessAreasController < ApplicationController
         format.html { redirect_to(edit_business_area_path(@business_area), :notice => 'Biz Process was successfully created.') }
         format.xml  { render :xml => @business_area, :status => :created, :location => @business_area }
       else
+        flash.now[:error] = "Could not create."
         format.html { render :action => "new" }
         format.xml  { render :xml => @business_area.errors, :status => :unprocessable_entity }
       end
@@ -60,6 +61,7 @@ class Admin::BusinessAreasController < ApplicationController
         format.html { redirect_to(edit_business_area_path(@business_area), :notice => 'Biz Process was successfully updated.') }
         format.xml  { head :ok }
       else
+        flash.now[:error] = "Could not update."
         format.html { render :action => "edit" }
         format.xml  { render :xml => @business_area.errors, :status => :unprocessable_entity }
       end

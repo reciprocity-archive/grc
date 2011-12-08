@@ -2,12 +2,12 @@
   %h3 Sidebar
   .content
     %p Filter by Regulation
-    =form_for((@regulation || Regulation.new), :url => {} , :html => { :class => :form }) do |f|
+    =form_for((@regulation || Regulation.new), :url => slugfilter_regulation_update_path(:format => :js) , :html => { :class => :form, :remote => true }) do |f|
       =f.collection_select :id, Regulation.all, :id, :display_name, :include_blank => true
       =f.submit "Show", :class => :button
 
     %p Filter Controls by Slug
-    =form_tag url_for(:controller => "/slugfilter", :action => :index, :format => :js), :class => :form, :remote => true do
+    =form_tag slugfilter_slug_update_path(:format => :js), :class => :form, :remote => true do
       =text_field_tag :slugfilter, session[:slugfilter], :class => 'text_field'
       =submit_tag "Filter", :class => :button
       =submit_tag "Clear", :name => :clear, :class => :button

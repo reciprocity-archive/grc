@@ -49,6 +49,7 @@ class Admin::ControlsController < ApplicationController
         format.html { redirect_to(edit_control_path(@control), :notice => 'Control Objective was successfully created.') }
         format.xml  { render :xml => @control, :status => :created, :location => @control }
       else
+        flash.now[:error] = "Could not create."
         format.html { render :action => "new" }
         format.xml  { render :xml => @control.errors, :status => :unprocessable_entity }
       end
@@ -73,6 +74,7 @@ class Admin::ControlsController < ApplicationController
         format.html { redirect_to(edit_control_path(@control), :notice => 'Control was successfully updated.') }
         format.xml  { head :ok }
       else
+        flash.now[:error] = "Could not update."
         format.html { render :action => "edit" }
         format.xml  { render :xml => @control.errors, :status => :unprocessable_entity }
       end

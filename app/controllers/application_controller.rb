@@ -74,13 +74,8 @@ class ApplicationController < ActionController::Base
   # a before filter that is always on, since the regulation filter pulldown appears on
   # many pages.
   def regulation_filter_set
-    regulation_id = params[:regulation][:id] rescue nil
-    if !regulation_id.nil?
-      if regulation_id == ""
-        session[:regulation_id] = nil
-      else
-        session[:regulation_id] = regulation_id
-      end
+    if session[:regulation_id]
+      @regulation = Regulation.get(session[:regulation_id])
     end
   end
 

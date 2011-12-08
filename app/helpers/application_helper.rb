@@ -102,4 +102,10 @@ module ApplicationHelper
   def regulation_display(regulation)
     regulation.company? ? 'Company' : 'Regulation'
   end
+
+  def render_for(tag, opts = {})
+    content_for tag do
+      render opts
+    end
+  end
 end
