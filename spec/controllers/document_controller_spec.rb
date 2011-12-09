@@ -5,7 +5,7 @@ describe DocumentController do
     it "fails as guest" do
       login({}, {})
       get 'index'
-      response.should be_redirect
+      response.should redirect_to(root_url)
     end
   end
 
@@ -17,7 +17,7 @@ describe DocumentController do
     describe "GET 'index'" do
       it "returns http success" do
         get 'index'
-        response.should be_success
+        response.should be_redirect
       end
     end
   end

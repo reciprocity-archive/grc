@@ -16,6 +16,7 @@ class DocumentController < ApplicationController
   def index
     return unless auth_gdocs
     @folders = get_gfolders()
+    return if !@folders
     render 'document/index'
   end
 
