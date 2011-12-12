@@ -40,6 +40,8 @@ gem 'haml', '~> 3.0.25'
 gem 'sass'
 gem 'haml-rails'
 
+gem 'prawn' # PDF generation
+
 gem 'dm-rails',          :path => ENV['HOME'] + '/localgems/dm-rails'
 gem 'dm-sqlite-adapter', DM_VERSION
 

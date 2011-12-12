@@ -7,6 +7,7 @@
 class EvidenceController < ApplicationController
   include GdataHelper
   include DocumentHelper
+  include EvidenceHelper
   include ApplicationHelper
 
   access_control :acl do
@@ -109,8 +110,8 @@ class EvidenceController < ApplicationController
         if gdoc.nil?
           flash[:error] = "Failed to attach some docs"
         else
+          copy = capture_evidence(gdoc, @system_control.system)
           gclient = get_gdata_client
-          copy = gclient.copy(gdoc, "Evidence - #{gdoc.title}")
           doc =  Document.first_or_create(
             { :link => Gdoc.make_id_url(copy) },
             { :title => gdoc.title, :document_descriptor => desc
@@ -122,10 +123,6 @@ class EvidenceController < ApplicationController
             gclient.move_into_folder(copy, sys_folder)
           end
 
-          #puts "---------------------------"
-          #puts doc.inspect
-          #puts (@system_control.evidences.map {|x| x.id}).inspect
-          #puts @system_control.evidences.include?(doc)
           if @system_control.evidences.include?(doc)
             flash[:error] = "Document already attached"
           elsif doc.document_descriptor == desc

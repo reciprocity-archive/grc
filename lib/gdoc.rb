@@ -119,6 +119,11 @@ module Gdoc
       return @gclient.authsub_url(url, secure, sess, '')
     end
 
+    def download(doc, type)
+      url = doc.links['content_src'] + "&format=#{type}&exportFormat=#{type}"
+      @gclient.get(url).body
+    end
+
     # Get Google Docs given search options.
     #
     # opts[:folder] - optional Gdoc::Document representing a folder to search in
@@ -220,5 +225,46 @@ module Gdoc
       doc
     end
  
+    def upload(title, path) 
+      begin
+        resumable = get_resumable
+        content_length = File.size(path)
+        @gclient.headers['X-Upload-Content-Type'] = 'application/pdf'
+        @gclient.headers['X-Upload-Content-Length'] = content_length
+        xm = Builder::XmlMarkup.new(:indent => 2)
+        xm.instruct!
+        body = xm.entry "xmlns" => Gdoc::ATOM_NS do
+          xm.title title
+        end
+        res = @gclient.post(resumable + '?convert=false', body)
+        location = res.headers['location']
+        @gclient.headers.delete('X-Upload-Content-Type')
+        @gclient.headers.delete('X-Upload-Content-Length')
+        @gclient.headers['Content-Type'] = 'application/pdf'
+        File.open(path) do |f|
+          pos = 0
+          while !f.eof?
+            chunk = f.read(512*1024)
+            @gclient.headers['Content-Length']= "#{chunk.size}"
+            @gclient.headers['Content-Range']= "bytes #{pos}-#{pos + chunk.size - 1}/#{content_length}"
+            res = @gclient.put(location, chunk)
+            location = res.headers['location']
+            pos = pos + chunk.size
+          end
+        end
+        return Gdoc.create_doc(res.to_xml)
+      ensure
+        @gclient.headers.delete('Content-Range')
+        @gclient.headers.delete('Content-Type')
+      end
+    end
+
+    def get_resumable
+      xml = @gclient.get(Gdoc::DEFAULT_FEED).to_xml
+      xml.elements.each('link') do |link|
+        return link.attributes['href'] if link.attributes['rel'] == 'http://schemas.google.com/g/2005#resumable-create-media'
+      end
+      raise 'could not find resumable link in default feed'
+    end
   end
 end
