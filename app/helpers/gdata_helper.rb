@@ -71,7 +71,7 @@ module GdataHelper
   #
   # This works inside an AJAX request.
   def get_gdata_client(opts = {})
-    client = Gdoc::Client.new
+    client = new_client
 
     if params[:token]
       session[:gtoken] = client.set_token(params[:token], true)
@@ -82,7 +82,6 @@ module GdataHelper
         next_url = opts[:retry_url]
         auth_url = client.authsub(next_url)
         @redirect_url = auth_url
-        #response.write(partial "base/ajax_redirect")
         render :partial => 'base/ajax_redirect'
       else
         next_url = "#{request.scheme}://#{request.host_with_port}#{request.path}"
@@ -94,5 +93,9 @@ module GdataHelper
     client.set_token session[:gtoken]
 
     client
+  end
+
+  def new_client
+     Gdoc::Client.new
   end
 end
