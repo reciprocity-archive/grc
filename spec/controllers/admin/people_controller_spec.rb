@@ -1,9 +1,6 @@
 require 'spec_helper'
-require 'base_objects'
 
-describe Admin::BizProcessesController do
-  include BaseObjects
-
+describe Admin::PeopleController do
   describe "GET 'index' without authorization" do
     it "fails as guest" do
       login({}, {})
@@ -15,14 +12,14 @@ describe Admin::BizProcessesController do
   describe "authorized" do
     before :each do
       login({}, { :role => 'admin' })
-      create_base_objects
+      @person = Person.create(:username => 'user1')
     end
 
     describe "GET 'index'" do
       it "returns http success" do
         get 'index'
         response.should be_success
-        assigns(:biz_processes).should eq([@bp])
+        assigns(:people).should eq([@person])
       end
     end
   end

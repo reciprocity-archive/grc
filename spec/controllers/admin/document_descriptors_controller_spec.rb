@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'base_objects'
 
-describe Admin::BizProcessesController do
+describe Admin::DocumentDescriptorsController do
   include BaseObjects
 
   describe "GET 'index' without authorization" do
@@ -22,7 +22,7 @@ describe Admin::BizProcessesController do
       it "returns http success" do
         get 'index'
         response.should be_success
-        assigns(:biz_processes).should eq([@bp])
+        assigns(:document_descriptors).should eq([@desc])
       end
     end
   end
