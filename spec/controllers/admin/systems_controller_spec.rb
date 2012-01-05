@@ -25,6 +25,18 @@ describe Admin::SystemsController do
         assigns(:systems).should eq([@sys])
       end
     end
+
+    describe "POST 'create'" do
+      it "creates a new object" do
+        test_controller_create(:system, :title => "sys2", :slug => 'SYS2', :description => "sys 2", :infrastructure => true)
+      end
+    end
+
+    describe "PUT 'update'" do
+      it "updates an existing object" do
+        test_controller_update(:system, @sys, :title => "sys1a")
+      end
+    end
   end
 
 end

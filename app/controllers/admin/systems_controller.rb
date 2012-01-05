@@ -47,7 +47,7 @@ class Admin::SystemsController < ApplicationController
 
   # Create a system
   def create
-    documents_params = params[:system].delete("document")
+    documents_params = params[:system].delete("document") || {}
     @system = System.new(params[:system])
 
     # Accumulate results
@@ -80,7 +80,7 @@ class Admin::SystemsController < ApplicationController
 
     # Accumulate results
     results = []
-    documents_params = params[:system].delete("document")
+    documents_params = params[:system].delete("document") || {}
     documents_params.each_pair do |index, doc_params|
       next if doc_params["link"].blank?
       is_delete = doc_params.delete("delete") == "1"

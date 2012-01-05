@@ -1,11 +1,12 @@
 require 'spec_helper'
+require 'base_objects'
 
 describe Admin::AccountsController do
+  include BaseObjects
+
   describe "GET 'index' without authorization" do
     it "fails as guest" do
-      login({}, {})
-      get 'index'
-      response.should be_redirect
+      test_unauth
     end
   end
 
@@ -14,14 +15,22 @@ describe Admin::AccountsController do
       login({}, { :role => 'admin' })
       @account = Account.create(:email => 'a@b.com', :role => 'analyst', :password => '1111', :password_confirmation => '1111')
     end
-
     describe "GET 'index'" do
       it "returns http success" do
-        get 'index'
-        response.should be_success
-        assigns(:accounts).should eq([@account])
+        test_controller_index(:accounts, [@account])
       end
     end
+
+
+    describe "PUT 'update'" do
+      it "updates an existing object" do
+        @account.valid_password?("2222").should be_false
+        test_controller_update(:account, @account, :password => "2222", :password_confirmation => '2222')
+        @account.reload
+        @account.valid_password?("2222").should be_true
+      end
+    end
+
   end
 
 end

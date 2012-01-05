@@ -25,6 +25,18 @@ describe Admin::RegulationsController do
         assigns(:regulations).should eq([@reg])
       end
     end
+
+    describe "POST 'create'" do
+      it "creates a new object" do
+        test_controller_create(:regulation, :title => "reg2", :slug => 'REG2')
+      end
+    end
+
+    describe "PUT 'update'" do
+      it "updates an existing object" do
+        test_controller_update(:regulation, @reg, :title => "reg1a")
+      end
+    end
   end
 
 end

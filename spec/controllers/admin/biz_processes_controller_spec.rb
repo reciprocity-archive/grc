@@ -6,9 +6,7 @@ describe Admin::BizProcessesController do
 
   describe "GET 'index' without authorization" do
     it "fails as guest" do
-      login({}, {})
-      get 'index'
-      response.should be_redirect
+      test_unauth
     end
   end
 
@@ -20,11 +18,22 @@ describe Admin::BizProcessesController do
 
     describe "GET 'index'" do
       it "returns http success" do
-        get 'index'
-        response.should be_success
-        assigns(:biz_processes).should eq([@bp])
+        test_controller_index(:biz_processes, [@bp])
       end
     end
+
+    describe "POST 'create'" do
+      it "creates a new object" do
+        test_controller_create(:biz_process, :description => "desc2", :slug => 'BP2', :title => 'BP2')
+      end
+    end
+
+    describe "PUT 'update'" do
+      it "updates an existing object" do
+        test_controller_update(:biz_process, @bp, :description => "desc2")
+      end
+    end
+
   end
 
 end

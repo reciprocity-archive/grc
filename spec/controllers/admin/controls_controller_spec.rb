@@ -25,6 +25,15 @@ describe Admin::ControlsController do
         assigns(:controls).should eq([@ctl])
       end
     end
+
+    describe "PUT 'update'" do
+      it "updates an existing object" do
+        @ctl.control_objectives.should eq([])
+        test_controller_update(:control, @ctl, :description => "desc2", :co_ids => [@co.id])
+        @ctl.reload
+        @ctl.control_objectives.should eq([@co])
+      end
+    end
   end
 
 end
