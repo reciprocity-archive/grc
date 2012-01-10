@@ -1,5 +1,15 @@
 module EvidenceHelper
   include ApplicationHelper
+
+  # Capture evidence on Google Docs
+  #
+  # Convert the evidence document to PDF and watermark it with:
+  #
+  # * Acceptance date
+  # * Who accepted the evidence
+  # * Which system was the evidence attached to
+  #
+  # The PDF is then uploaded with the title prefixed with +Evidence+.
   def capture_evidence(doc, system)
     gclient = get_gdata_client
     Tempfile.open('evidence', Rails.root.join('tmp')) do |temp|

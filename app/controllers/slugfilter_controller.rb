@@ -11,6 +11,8 @@ class SlugfilterController < ApplicationController
     allow :admin, :analyst
   end
 
+  # Update the last-used regulation in the session so that the user
+  # gets it as a default next time.
   def regulation_update
     regulation_id = params[:regulation][:id] rescue nil
     if !regulation_id.nil?

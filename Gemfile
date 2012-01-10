@@ -84,3 +84,7 @@ group(:development, :test) do
     gem 'ruby-debug19'
   end
 end
+
+gem 'yard-dm'
+gem 'yard'
+gem 'redcarpet'

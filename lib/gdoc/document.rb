@@ -36,12 +36,11 @@ module Gdoc
     # Args:
     # - title: string Title of the document
     # - options: hash of options
-    #            valid options: +type+: string The type of document. Possible
-    #                                   values are 'document', 'presentation',
-    #                                   'spreadsheet', 'folder', 'pdf'
-    #                           +last_updated+: DateTime
-    #                           +xml+: string An XML representation of this doc
-    #                           +parent+: containing folder
+    #   valid options:
+    #   * +type+: string The type of document. Possible values are 'document', 'presentation', 'spreadsheet', 'folder', 'pdf'
+    #   * +last_updated+: DateTime
+    #   * +xml+: string An XML representation of this doc
+    #   * +parent+: containing folder
     #
     def initialize(title, options={})
       @title = title

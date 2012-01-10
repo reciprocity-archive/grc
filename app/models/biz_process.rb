@@ -35,7 +35,7 @@ class BizProcess
     control_objectives.map { |co| co.id }
   end
 
-  # Return ids of related COs (used by many2many widget)
+  # Return ids of related Controls (used by many2many widget)
   def control_ids
     controls.map { |c| c.id }
   end
