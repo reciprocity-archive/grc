@@ -53,6 +53,8 @@ gem 'dm-transactions',      DM_VERSION
 gem 'dm-aggregates',        DM_VERSION
 gem 'dm-timestamps',        DM_VERSION
 gem 'dm-observer',          DM_VERSION
+#gem 'dm-is-versioned',      '1.3.0.beta', :git => 'http://github.com/devrandom1/dm-is-versioned.git'
+gem 'dm-is-versioned',      '1.3.0.beta', :path => '../dm-is-versioned'
 
 group(:development, :test) do
 
@@ -85,6 +87,7 @@ group(:development, :test) do
   end
 end
 
-gem 'yard-dm'
+# Causes rake to fail, uncomment to rebuild docs
+#gem 'yard-dm'
 gem 'yard'
 gem 'redcarpet'

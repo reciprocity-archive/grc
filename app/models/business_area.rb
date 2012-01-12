@@ -11,4 +11,6 @@ class BusinessArea
 
   property :created_at, DateTime
   property :updated_at, DateTime
+
+  is_versioned :on => [:updated_at]
 end

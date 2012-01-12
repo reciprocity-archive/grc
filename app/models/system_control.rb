@@ -24,6 +24,8 @@ class SystemControl
   property :created_at, DateTime
   property :updated_at, DateTime
 
+  is_versioned :on => [:updated_at]
+
   def <=>(other)
     return control.slug <=> other.control.slug;
   end

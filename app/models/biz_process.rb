@@ -25,6 +25,8 @@ class BizProcess
   property :created_at, DateTime
   property :updated_at, DateTime
 
+  is_versioned :on => [:updated_at]
+
   # All biz processes that could be attached to a system
   def self.for_system(s)
     all

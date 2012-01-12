@@ -17,6 +17,11 @@ class Account
   property :crypted_password, String, :length => 1..1000
   property :role,             String
 
+  property :updated_at, DateTime
+  property :created_at, DateTime
+
+  is_versioned :on => [:updated_at]
+
   # Validations
   validates_presence_of      :email, :role
   validates_presence_of      :password,                          :if => :password_required

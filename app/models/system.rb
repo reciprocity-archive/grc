@@ -33,6 +33,8 @@ class System
   property :created_at, DateTime
   property :updated_at, DateTime
 
+  is_versioned :on => [:updated_at]
+
   # Which systems can be attached to a control
   def self.for_control(c)
     all(:order => :slug)

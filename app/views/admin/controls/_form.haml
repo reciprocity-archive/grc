@@ -97,6 +97,7 @@
         =bpc.ticket
   -edit_many_attach(@control, :biz_process_controls, :biz_process)
 
+=render :partial => 'base/model_history', :locals => { :object => @control }
 /  %hr.section
 /  %h3 Systems
 /  -edit_children(@control, :system)

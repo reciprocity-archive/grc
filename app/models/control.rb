@@ -64,6 +64,8 @@ class Control
   property :created_at, DateTime
   property :updated_at, DateTime
 
+  is_versioned :on => [:updated_at]
+
   # All non-company regulation controls
   def self.all_non_company
     all(:regulation => { :company => false }, :order => :slug)

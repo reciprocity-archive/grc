@@ -1,0 +1,19 @@
+%hr.section
+%h3 History
+-unless object.versions.empty?
+  .block
+    -first = true
+    -versions = object.versions.all(:order => :is_versioned_id).to_a + [object]
+    -prev_version = versions.shift
+    .block
+      Created at
+      =display_time(object.created_at)
+      \:
+      =render :partial => "base/compact_model", :locals => {:model => object.model, :object => prev_version}
+    -versions.each do |version|
+      .block
+        Updated at
+        =display_time(version.updated_at)
+        \:
+        =render :partial => "base/model_diff", :locals => {:first => prev_version, :second => version}
+        -prev_version = version

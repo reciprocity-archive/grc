@@ -22,6 +22,8 @@ class Document
   property :created_at, DateTime
   property :updated_at, DateTime
 
+  is_versioned :on => [:updated_at]
+
   def complete?
     !link.nil? && !link.to_s.blank?
   end

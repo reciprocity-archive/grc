@@ -108,4 +108,22 @@ module ApplicationHelper
       render opts
     end
   end
+
+  # Display a compact version of an object property
+  def display_compact(model, object, prop)
+    value = object.send(prop.name)
+    if prop.name.to_s.end_with?('_id')
+      relation = prop.name.to_s.sub(/_id$/, '').to_sym
+      other = model.relationships[relation].parent_model.get(value)
+      if other
+        link_to other.display_name, url_for(other)
+      else
+        "-"
+      end
+    elsif value.is_a? DateTime
+      display_time(value)
+    else
+      value
+    end
+  end
 end
