@@ -7,8 +7,8 @@ CmsRails::Application.configure do
 
   # Reloading fails for many2many datamapper relations that use :through => Resource
   #
-  config.cache_classes = false
-  #config.cache_classes = true
+  #config.cache_classes = false
+  config.cache_classes = true
 
   # Log error messages when you accidentally call methods on nil.
   config.whiny_nils = true

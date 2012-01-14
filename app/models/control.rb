@@ -10,7 +10,7 @@ class Control
   include DataMapper::Resource
   include DataMapper::Validate
   include SluggedModel
-  extend SluggedModel::ClassMethods
+  include AuthoredModel
 
   before :save, :upcase_slug
 
@@ -64,7 +64,7 @@ class Control
   property :created_at, DateTime
   property :updated_at, DateTime
 
-  is_versioned :on => [:updated_at]
+  is_versioned_ext :on => [:updated_at]
 
   # All non-company regulation controls
   def self.all_non_company

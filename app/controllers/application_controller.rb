@@ -6,6 +6,8 @@
 
 require 'dm-rails/middleware/identity_map'
 class ApplicationController < ActionController::Base
+  include ApplicationHelper
+
   before_filter :require_user
   before_filter :regulation_filter_set
 

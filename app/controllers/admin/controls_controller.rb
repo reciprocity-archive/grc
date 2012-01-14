@@ -63,14 +63,17 @@ class Admin::ControlsController < ApplicationController
     # Connect to related Control Objectives
     co_ids = params["control"].delete("co_ids") || []
 
-    @control.control_objectives = []
-    co_ids.each do |co_id|
-      co = ControlObjective.get(co_id)
-      @control.control_objectives << co
+    if !equal_ids(co_ids, @control.control_objectives)
+      @control.control_objectives = []
+      co_ids.each do |co_id|
+        co = ControlObjective.get(co_id)
+        @control.control_objectives << co
+      end
     end
 
     respond_to do |format|
-      if @control.save && @control.update(params["control"])
+      res = @control.save
+      if res && @control.authored_update(current_user, params["control"])
         format.html { redirect_to(edit_control_path(@control), :notice => 'Control was successfully updated.') }
         format.xml  { head :ok }
       else
