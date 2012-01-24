@@ -49,7 +49,8 @@ class Control
 
   # The types of evidence (Documents) that may be attached to this control
   # during an audit.
-  has n, :evidence_descriptors, 'DocumentDescriptor', :through => Resource
+  has n, :evidence_descriptors, 'DocumentDescriptor', :through => :control_document_descriptors
+  has n, :control_document_descriptors
 
   # The result of an audit test
   belongs_to :test_result, :required =>  false

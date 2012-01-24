@@ -13,7 +13,8 @@ class BizProcess
   property :description, Text
 
   has n, :biz_process_controls
-  has n, :systems, :through => Resource, :order => :slug
+  has n, :biz_process_systems
+  has n, :systems, :through => :biz_process_systems, :order => :slug
   has n, :control_objectives, :through => Resource, :order => :slug
   has n, :controls, :through => Resource, :order => :slug
 

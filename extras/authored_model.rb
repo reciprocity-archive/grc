@@ -16,6 +16,11 @@ module AuthoredModel
     update(tparams.merge(:modified_by_id => author.id))
   end
 
+  def authored_destroy(author)
+    self.modified_by = author
+    destroy
+  end
+
   def self.included(model)
     model.extend(ClassMethods)
   end

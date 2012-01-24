@@ -21,7 +21,8 @@ class System
   has n, :control_objectives, :through => :system_control_objectives, :order => :slug
 
   # Many to many with BizProcess
-  has n, :biz_processes, :through => Resource, :order => :slug
+  has n, :biz_process_systems
+  has n, :biz_processes, :through => :biz_process_systems, :order => :slug
 
   # Responsible party
   belongs_to :owner, 'Person', :required => false
