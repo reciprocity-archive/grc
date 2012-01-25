@@ -54,19 +54,24 @@ describe Control do
   end
 
   it "versions relationships" do
-    @ctl.evidence_descriptors << @desc
+    @ctl.authored_update(@account, :evidence_descriptor_ids => [@desc.id])
     @ctl.save
     @ctl.reload
+    # A useless version without author is created (FIXME)
+    ControlDocumentDescriptor::Version.all.size.should eq(1)
+
     @ctl.authored_update(@account, :evidence_descriptor_ids => [])
     @ctl.reload
-    # FIXME should be 2
+
+    # Two versions - one with pre-destroy values, and one with timestamps set
     ControlDocumentDescriptor::Version.all.size.should eq(3)
     ControlDocumentDescriptor::Version.first.modified_by_id.should eq(nil)
     ControlDocumentDescriptor::Version.last.modified_by_id.should eq(@account.id)
     ControlDocumentDescriptor.all.size.should eq(0)
     @ctl.authored_update(@account, :evidence_descriptor_ids => [@desc.id])
     @ctl.reload
-    # FIXME should be 2
+
+    # A useless version without author is created (FIXME)
     ControlDocumentDescriptor::Version.all.size.should eq(4)
     @ctl.control_document_descriptors.size.should eq(1)
     @ctl.control_document_descriptors.first.evidence_descriptor.should eq(@desc)
