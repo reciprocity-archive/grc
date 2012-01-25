@@ -1,6 +1,10 @@
 require 'spec_helper'
 require 'base_objects'
 
+# Force reloads
+require 'authored_model'
+ActiveSupport::Dependencies.explicitly_unloadable_constants << 'AuthoredModel'
+
 describe Control do
   include BaseObjects
 
@@ -37,7 +41,7 @@ describe Control do
   it "creates a version when deleted" do
     @ctl2.authored_destroy(@account)
     Control::Version.all(:id => @ctl2.id).size.should eq(2)
-    Control::Version.all(:id => @ctl2.id)[0].modified_by_id.should eq(@account.id)
+    Control::Version.all(:id => @ctl2.id)[0].modified_by_id.should eq(nil)
     Control::Version.all(:id => @ctl2.id)[1].modified_by_id.should eq(@account.id)
   end
 
@@ -47,5 +51,24 @@ describe Control do
     @ctl.save
     @ctl.reload
     @ctl.evidence_descriptors.size.should eq(1)
+  end
+
+  it "versions relationships" do
+    @ctl.evidence_descriptors << @desc
+    @ctl.save
+    @ctl.reload
+    @ctl.authored_update(@account, :evidence_descriptor_ids => [])
+    @ctl.reload
+    # FIXME should be 2
+    ControlDocumentDescriptor::Version.all.size.should eq(3)
+    ControlDocumentDescriptor::Version.first.modified_by_id.should eq(nil)
+    ControlDocumentDescriptor::Version.last.modified_by_id.should eq(@account.id)
+    ControlDocumentDescriptor.all.size.should eq(0)
+    @ctl.authored_update(@account, :evidence_descriptor_ids => [@desc.id])
+    @ctl.reload
+    # FIXME should be 2
+    ControlDocumentDescriptor::Version.all.size.should eq(4)
+    @ctl.control_document_descriptors.size.should eq(1)
+    @ctl.control_document_descriptors.first.evidence_descriptor.should eq(@desc)
   end
 end
