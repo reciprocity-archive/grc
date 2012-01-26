@@ -5,6 +5,7 @@
 # Evidence is associated with a Document Descriptor
 class Document
   include DataMapper::Resource
+  include AuthoredModel
 
   property :id, Serial
   property :title, String, :length => 256
@@ -22,7 +23,7 @@ class Document
   property :created_at, DateTime
   property :updated_at, DateTime
 
-  is_versioned :on => [:updated_at]
+  is_versioned_ext :on => [:updated_at]
 
   def complete?
     !link.nil? && !link.to_s.blank?

@@ -1,17 +1,12 @@
-# A business area (used to classify Controls)
-class BusinessArea
+class BizProcessDocument
   include DataMapper::Resource
   include AuthoredModel
 
-  property :id, Serial
-  property :title, String, :length => 256
-
-  def display_name
-    title
-  end
-
   property :created_at, DateTime
   property :updated_at, DateTime
+
+  belongs_to :biz_process, :key => true
+  belongs_to :policy, 'Document', :key => true
 
   is_versioned_ext :on => [:updated_at]
 end

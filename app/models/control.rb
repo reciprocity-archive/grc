@@ -8,9 +8,9 @@ require 'slugged_model'
 # The slug of a Control has to have the slug of the regulation as prefix.
 class Control
   include DataMapper::Resource
+  include AuthoredModel
   include DataMapper::Validate
   include SluggedModel
-  include AuthoredModel
 
   before :save, :upcase_slug
 
@@ -57,10 +57,12 @@ class Control
 
   # Which controls are implemented by this one.  A company
   # control may implement several regulation controls.
-  has n, :implemented_controls, "Control", :through => Resource, :order => :slug
+  has n, :implemented_controls, "Control", :through => :control_controls, :order => :slug
+  has n, :control_controls
 
   # Many to many with Control Objective
-  has n, :control_objectives, :through => Resource, :order => :slug
+  has n, :control_objectives, :through => :control_control_objectives, :order => :slug
+  has n, :control_control_objectives
 
   property :created_at, DateTime
   property :updated_at, DateTime

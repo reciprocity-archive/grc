@@ -5,13 +5,15 @@
 # these attributes cannot be attached to it directly.
 class SystemControl
   include DataMapper::Resource
+  include AuthoredModel
 
   property :id, Serial
   property :state, Enum[*ControlState::VALUES], :default => :green, :required => true
   property :ticket, String
 
   # A set of documents used as evidence in an audit
-  has n, :evidences, 'Document', :through => Resource
+  has n, :evidences, 'Document', :through => :document_system_control
+  has n, :document_system_control
 
   belongs_to :control
   belongs_to :system
@@ -24,7 +26,7 @@ class SystemControl
   property :created_at, DateTime
   property :updated_at, DateTime
 
-  is_versioned :on => [:updated_at]
+  is_versioned_ext :on => [:updated_at]
 
   def <=>(other)
     return control.slug <=> other.control.slug;

@@ -1,8 +1,8 @@
 # A system to be audited
 class System
   include DataMapper::Resource
+  include AuthoredModel
   include SluggedModel
-  extend SluggedModel::ClassMethods
 
   before :save, :upcase_slug
 
@@ -28,13 +28,13 @@ class System
   belongs_to :owner, 'Person', :required => false
 
   # Relevant documentation
-  has n, :documents, :through => Resource
-  #has n, :supported_systems, "System", :through => Resource
+  has n, :documents, :through => :document_systems
+  has n, :document_systems
 
   property :created_at, DateTime
   property :updated_at, DateTime
 
-  is_versioned :on => [:updated_at]
+  is_versioned_ext :on => [:updated_at]
 
   # Which systems can be attached to a control
   def self.for_control(c)

@@ -1,17 +1,12 @@
-# A business area (used to classify Controls)
-class BusinessArea
+class ControlControl
   include DataMapper::Resource
   include AuthoredModel
 
-  property :id, Serial
-  property :title, String, :length => 256
-
-  def display_name
-    title
-  end
-
   property :created_at, DateTime
   property :updated_at, DateTime
+
+  belongs_to :control, :key => true
+  belongs_to :implemented_control, 'Control', :key => true
 
   is_versioned_ext :on => [:updated_at]
 end

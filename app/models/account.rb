@@ -3,6 +3,7 @@
 # have an account.
 class Account
   include DataMapper::Resource
+  include AuthoredModel
   include DataMapper::Validate
   attr_accessor :password, :password_confirmation
 
@@ -20,7 +21,7 @@ class Account
   property :updated_at, DateTime
   property :created_at, DateTime
 
-  is_versioned :on => [:updated_at]
+  is_versioned_ext :on => [:updated_at]
 
   # Validations
   validates_presence_of      :email, :role
