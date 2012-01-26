@@ -181,19 +181,13 @@ module ManyHelper
     right_ids = opts[:right_ids] || "#{right_class_underscore}_ids"
 
     left = left_class.get(params[:id])
-    ids = params[left_class_underscore.to_sym][right_ids]
+    ids = params[left_class_underscore.to_sym][right_ids].map {|x| x.to_i}
 
     # left.rights = []
-    left.send("#{right_relation}=".to_sym, [])
-    ids.each do |id|
-      right = right_class.get(id)
-      # left.rights << right
-      left.send(right_relation.to_sym) << right
-    end
-    if left.save
+    if left.authored_update(current_user, right_ids.to_sym => ids)
       flash[:notice] = 'Successfully updated.'
     else
-      flash[:error] = 'Failed.'
+      flash[:error] = "Failed."
     end
     redirect_to :id => left.id
   end

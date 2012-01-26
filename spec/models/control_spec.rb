@@ -43,6 +43,8 @@ describe Control do
     Control::Version.all(:id => @ctl2.id).size.should eq(2)
     Control::Version.all(:id => @ctl2.id)[0].modified_by_id.should eq(nil)
     Control::Version.all(:id => @ctl2.id)[1].modified_by_id.should eq(@account.id)
+    Control::Version.all(:id => @ctl2.id)[0].is_destroyed.should be_false
+    Control::Version.all(:id => @ctl2.id)[1].is_destroyed.should be_true
   end
 
   it "is associated with descriptor" do

@@ -17,3 +17,24 @@
         \:
         =render :partial => "base/model_diff", :locals => {:first => prev_version, :second => version}
         -prev_version = version
+    -object.model.relationships.each do |relation|
+      -if relation.instance_of?(DataMapper::Associations::ManyToMany::Relationship) && (relation.through.child_model::Version rescue false)
+        -through = relation.through
+        %h4
+          Connected
+          =relation.field.humanize
+        -through.child_model::Version.all(through.child_key.first.name => object.id).each do |version|
+          .block
+            -other_id = relation.via.child_key.get(version)
+            -other = relation.child_model.get(other_id)
+            -if version.is_destroyed
+              Disconnected at
+            -else
+              Updated at
+            =display_time(version.updated_at)
+            -if other
+              =link_to other.display_name, url_for(other)
+            -else
+              (deleted, id =
+              =other_id
+              )
