@@ -9,6 +9,8 @@ describe ManyHelper do
     @ctl_non_company = Control.create(:title => 'Control 3', :slug => 'reg2-ctl3', :description => 'x', :regulation => @reg_non_company, :is_key => true, :fraud_related => false)
     @sys = System.create(:title => 'System 1', :slug => 'sys1', :description => 'x', :infrastructure => true)
     @sc = SystemControl.create(:control => @ctl2, :system => @sys, :state => :green)
+    helper.set_rspec(self)
+    #helper.instance_variable_set(:@_rspec, self)
   end
 
   describe "get many2many" do
