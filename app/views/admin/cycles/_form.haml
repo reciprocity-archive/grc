@@ -1,0 +1,22 @@
+.group
+  =f.label :regulation_id
+  -if !@cycle.new?
+    =link_to @cycle.regulation.display_name,
+      edit_regulation_path(@cycle.regulation)
+  -else
+    =f.collection_select :regulation_id, Regulation.all, :id, :display_name, {}, {:class => :collection, :multiple => false}
+  %span.description Regulation being audited
+
+.group
+  =f.label :start_at
+  =f.text_field :start_at, :class => :text_field
+  %span.description Audit period start date
+
+.group
+  =f.label :complete
+  =f.check_box :complete, :class => :check_box
+  %span.description Was this audit cycle completed?
+
+.group.navform.wat-cf
+  =f.submit pat(:save), :class => :button
+  =f.submit pat(:cancel), :onclick => "window.location='#{cycles_path}';return false", :class => :button

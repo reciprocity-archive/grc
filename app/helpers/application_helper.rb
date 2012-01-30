@@ -1,5 +1,5 @@
 module ApplicationHelper
-  ADMIN_MODULES = %w(accounts biz_processes business_areas control_objectives controls documents document_descriptors regulations people systems)
+  ADMIN_MODULES = %w(accounts biz_processes business_areas cycles control_objectives controls documents document_descriptors regulations people systems)
   WORKFLOW_MODULES = %w(dashboard evidence testing testreport) 
 
   class ProjectModule

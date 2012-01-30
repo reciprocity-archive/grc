@@ -1,0 +1,14 @@
+.block
+  .secondary-navigation
+    %ul.wat-cf
+      %li.first=link_to pat(:list), cycles_path
+      %li.active=link_to pat(:new), new_cycle_path
+  .content
+    %h2.title
+      =pat(:new)
+      =mt(:cycle)
+    .inner
+      =form_for @cycle, :method => :post, :html => {:class => :form} do |f|
+        =render :partial => "admin/cycles/form", :locals => { :f => f }
+
+/-content_for :sidebar, partial("base/sidebar")

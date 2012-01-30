@@ -17,6 +17,7 @@ class SystemControl
 
   belongs_to :control
   belongs_to :system
+  belongs_to :cycle, :required => false
 
   # why/what/how free text
   property :test_why, Text
