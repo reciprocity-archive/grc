@@ -85,6 +85,6 @@ group(:development, :test) do
   end
 end
 
-gem 'yard-dm'
+#gem 'yard-dm'
 gem 'yard'
 gem 'redcarpet'

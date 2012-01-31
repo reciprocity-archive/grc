@@ -8,7 +8,7 @@
     :javascript
       old_slug_value = ""
       $('#control_regulation_id').change(function() {
-        $.get("#{regulations_path}/" + $('#control_regulation_id').val() + "/slug", {"id": $('#control_regulation_id').val()}, function(data) {
+        $.get("#{slug_regulations_path}", {"id": $('#control_regulation_id').val()}, function(data) {
           if ($("#control_slug")[0].value == old_slug_value)
             $("#control_slug")[0].value = data[0]
             old_slug_value = data[0]
