@@ -1,3 +1,9 @@
 .block
   =render :partial => "admin/controls/secnav"
-  =render :template => "base/many2many"
+  =form_for((@cycle || Cycle.new), :url => slugfilter_cycle_update_path(:format => :js) , :html => { :class => :form, :remote => true }) do |f|
+    Cycle:
+    =f.collection_select :id, Cycle.all(:order => :start_at), :id, :display_name, :include_blank => true
+    =f.submit "Show", :class => :button
+
+
+  =render :template => "base/many2many_nested"

@@ -1,6 +1,11 @@
 .block
   %h3 Sidebar
   .content
+    %p Audit Cycle
+    =form_for((@cycle || Cycle.new), :url => slugfilter_cycle_update_path(:format => :js) , :html => { :class => :form, :remote => true }) do |f|
+      =f.collection_select :id, Cycle.all(:order => :start_at), :id, :display_name, :include_blank => true
+      =f.submit "Show", :class => :button
+
     %p Filter by Regulation
     =form_for((@regulation || Regulation.new), :url => slugfilter_regulation_update_path(:format => :js) , :html => { :class => :form, :remote => true }) do |f|
       =f.collection_select :id, Regulation.all, :id, :display_name, :include_blank => true

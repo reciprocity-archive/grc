@@ -26,6 +26,20 @@ class SlugfilterController < ApplicationController
     render :js => "window.location.reload()"
   end
 
+  # Update the audit cycle
+  def cycle_update
+    cycle_id = params[:cycle][:id] rescue nil
+    if !cycle_id.nil?
+      if cycle_id == ""
+        session[:cycle_id] = nil
+      else
+        session[:cycle_id] = cycle_id
+      end
+    end
+    # TODO restore page state (e.g. drilldown)
+    render :js => "window.location.reload()"
+  end
+
   # Filter-by-slug form changed, memoize the requested prefix and reload - AJAX
   def slug_update
     slug = params[:slugfilter].upcase

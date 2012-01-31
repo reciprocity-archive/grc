@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   include ApplicationHelper
 
   before_filter :require_user
-  before_filter :regulation_filter_set
+  before_filter :filter_set
 
   use Rails::DataMapper::Middleware::IdentityMap
   protect_from_forgery
@@ -75,9 +75,12 @@ class ApplicationController < ActionController::Base
   # Set the regulation to filte rby if the user selected one on previous page.  This is
   # a before filter that is always on, since the regulation filter pulldown appears on
   # many pages.
-  def regulation_filter_set
+  def filter_set
     if session[:regulation_id]
       @regulation = Regulation.get(session[:regulation_id])
+    end
+    if session[:cycle_id]
+      @cycle = Cycle.get(session[:cycle_id])
     end
   end
 

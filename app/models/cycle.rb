@@ -17,7 +17,7 @@ class Cycle
   property :complete, Boolean, :default => false, :required => true
 
   def display_name
-    regulation.display_name + " " + display_time(start_at)
+    regulation.display_name + " " + (start_at.strftime("%Y-%m-%d") rescue "-")
   end
 
   property :created_at, DateTime

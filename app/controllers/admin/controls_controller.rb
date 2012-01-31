@@ -112,10 +112,22 @@ class Admin::ControlsController < ApplicationController
                      :right_class => System,
                      :lefts => filtered_controls.all_company)
     else
+      if params[:id]
+        control = Control.get(params[:id])
+        scs = SystemControl.all(:control_id => control.id)
+        if @cycle
+          scs.all(:cycle => @cycle)
+        end
+        right_ids = scs.map {|sc| sc.system.id }
+      else
+        right_ids = []
+      end
       get_many2many(:left_class => Control,
                     :right_class => System,
                     :lefts => filtered_controls.all_company,
-                    :show_slugfilter => true)
+                    :show_slugfilter => true,
+                    :right_ids => :systems
+                   )
     end
   end
 
