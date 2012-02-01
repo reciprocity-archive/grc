@@ -20,7 +20,7 @@
     :javascript
       old_slug_value = "#{h @control_objective.slug}"
       $('#control_objective_regulation_id').change(function() {
-        $.get("#{url(:regulations, :slug, :format => :js)}", {"id": $('#control_objective_regulation_id').val()}, function(data) {
+        $.get("#{slug_regulations_path}", {"id": $('#control_objective_regulation_id').val()}, function(data) {
           if ($("#control_objective_slug")[0].value == old_slug_value)
             $("#control_objective_slug")[0].value = data
             old_slug_value = data
