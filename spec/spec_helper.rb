@@ -1,4 +1,15 @@
 require 'spork'
+require 'simplecov'
+if ENV['COVERAGE']
+  SimpleCov.start do
+      add_group 'Models', 'app/models'
+      add_group 'Helpers', 'app/helpers'
+      add_group 'Controllers', 'app/controllers'
+      add_group 'Admin C', 'app/controllers/admin'
+      add_filter 'config'
+      add_filter 'spec'
+  end
+end
 
 Spork.prefork do
   # Loading more in this block will cause your tests to run faster. However,

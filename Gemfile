@@ -61,7 +61,7 @@ group(:development, :test) do
   gem 'rspec-rails'
   gem 'spork', '~> 0.9.0.rc'
   gem 'ZenTest'
-  gem 'rcov'
+  gem 'simplecov', :require => false
 
   # To get a detailed overview about what queries get issued and how long they take
   # have a look at rails_metrics. Once you bundled it, you can run
