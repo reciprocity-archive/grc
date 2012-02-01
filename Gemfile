@@ -63,6 +63,7 @@ group(:development, :test) do
   gem 'rspec-rails'
   gem 'spork', '~> 0.9.0.rc'
   gem 'ZenTest'
+  gem 'autotest-rails'
   gem 'simplecov', :require => false
 
   # To get a detailed overview about what queries get issued and how long they take
