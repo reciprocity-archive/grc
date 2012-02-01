@@ -16,7 +16,7 @@
     =link_to @control_objective.regulation.display_name,
       edit_regulation_path(@control_objective.regulation)
   -else
-    =f.collection_select :regulation_id, Regulation.all, :id, :display_name, {}, {:class => :collection, :multiple => true}
+    =f.collection_select :regulation_id, Regulation.all, :id, :display_name, {}, {:class => :collection, :multiple => false}
     :javascript
       old_slug_value = "#{h @control_objective.slug}"
       $('#control_objective_regulation_id').change(function() {

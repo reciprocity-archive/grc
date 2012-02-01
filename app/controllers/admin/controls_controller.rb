@@ -46,7 +46,7 @@ class Admin::ControlsController < ApplicationController
 
     respond_to do |format|
       if @control.save
-        format.html { redirect_to(edit_control_path(@control), :notice => 'Control Objective was successfully created.') }
+        format.html { redirect_to(edit_control_path(@control), :notice => 'Control was successfully created.') }
         format.xml  { render :xml => @control, :status => :created, :location => @control }
       else
         flash.now[:error] = "Could not create."
