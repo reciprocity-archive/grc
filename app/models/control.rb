@@ -127,4 +127,27 @@ class Control
   def evidence_descriptor_ids
     evidence_descriptors.map { |e| e.id }
   end
+
+  class ControlCycle
+    def initialize(scs)
+      @scs = scs
+    end
+
+    def system_ids
+      @scs.map &:system_id
+    end
+
+    def self.model_name
+      ControlCycle
+    end
+    def self.param_key
+      :control
+    end
+  end
+
+  def system_controls_for_cycle(cycle)
+    scs = system_controls
+    scs = scs.all(:cycle => cycle) if cycle
+    ControlCycle.new(scs)
+  end
 end

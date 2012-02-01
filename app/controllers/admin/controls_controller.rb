@@ -107,26 +107,37 @@ class Admin::ControlsController < ApplicationController
 
   # Many2many relationship to Systems
   def systems
+    lefts = filtered_controls.all_company
     if request.put?
-      post_many2many(:left_class => Control,
-                     :right_class => System,
-                     :lefts => filtered_controls.all_company)
+      raise "cannot save without cycle" unless @cycle
+      control = Control.get(params[:id])
+      ids = params[:control]["system_ids"]
+      control.system_controls.each do |sc|
+        if sc.cycle == @cycle && !ids.include?(sc.system_id)
+          ids.delete(sc.system_id)
+          sc.authored_destroy(current_user)
+        end
+      end
+      ids.each do |id|
+        res = control.system_controls.create(:system => System.get(id), :cycle => @cycle, :modified_by => current_user)
+        # FIXME why is this necessary?
+        res.save!
+      end
+      # FIXME
+      control.reload
     else
       if params[:id]
         control = Control.get(params[:id])
-        scs = SystemControl.all(:control_id => control.id)
-        if @cycle
-          scs.all(:cycle => @cycle)
-        end
-        right_ids = scs.map {|sc| sc.system.id }
       else
-        right_ids = []
+        control = lefts.first
       end
+    end
+    if @cycle
+      @left_nested = control.system_controls_for_cycle(@cycle)
       get_many2many(:left_class => Control,
                     :right_class => System,
-                    :lefts => filtered_controls.all_company,
+                    :lefts => lefts,
                     :show_slugfilter => true,
-                    :right_ids => :systems
                    )
     end
   end

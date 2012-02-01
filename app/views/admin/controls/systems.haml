@@ -6,4 +6,7 @@
     =f.submit "Show", :class => :button
 
 
-  =render :template => "base/many2many_nested"
+  -if @cycle
+    =render :template => "base/many2many_nested"
+  -else
+    Must choose a cycle before connecting systems.
