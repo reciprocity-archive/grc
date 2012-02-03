@@ -44,7 +44,12 @@ CmsRails::Application.routes.draw do
       end
     end
     resources :documents, :path => "/admin/documents"
-    resources :cycles, :path => "/admin/cycles"
+    resources :cycles, :path => "/admin/cycles" do
+      member do
+        get 'new_clone'
+        put 'clone'
+      end
+    end
     resources :document_descriptors, :path => "/admin/document_descriptors"
     resources :regulations, :path => "/admin/regulations" do
       collection do

@@ -1,0 +1,35 @@
+.block
+  .secondary-navigation
+    %ul.wat-cf
+      %li.first.active=link_to pat(:list), cycles_path
+      %li=link_to pat(:new), new_cycle_path
+  .content
+    %h2.title
+      =mt(:cycle)
+    .inner
+      .group
+        Regulation:
+        =link_to @cycle.regulation.display_name, edit_regulation_path(@cycle.regulation)
+
+      .group
+        Starting at: 
+        =@cycle.start_at
+
+      .group
+        Complete?
+        =(@cycle.complete? ? 'Y' : 'N')
+
+      .group
+        System-Control connections:
+        =SystemControl.count(:cycle => @cycle)
+
+        %table.table
+          %tr
+            %th Control
+            %th System
+            %th State
+          -SystemControl.all(:cycle => @cycle).each do |sc|
+            %tr
+            %td=link_to sc.control.display_name, sc.control
+            %td=link_to sc.system.display_name, sc.system
+            %td=mt(sc.state)

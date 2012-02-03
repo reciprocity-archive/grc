@@ -1,0 +1,28 @@
+.block
+  .secondary-navigation
+    %ul.wat-cf
+      %li.first=link_to pat(:list), cycles_path
+      %li.active=link_to pat(:new), new_cycle_path
+  .content
+    %h2.title
+      =pat(:clone)
+      =mt(:cycle)
+    .inner
+      .block
+        Cloning:
+        =link_to h(@other_cycle.display_name), @other_cycle
+      .block
+        System-Control connections:
+        =SystemControl.count(:cycle => @other_cycle)
+      =form_for @cycle, :url => clone_cycle_path(@other_cycle), :method => :put, :html => {:class => :form} do |f|
+        .group
+          =f.label :start_at
+          =f.text_field :start_at, :class => :text_field
+          %span.description Audit period start date in the format yyyy-mm-dd.  Page up/down to select month, control up/down/left/right to select day. Enter to apply.
+          :javascript
+            $('#cycle_start_at').datepicker({changeMonth: true, changeYear: true, dateFormat: 'yy-mm-dd'});
+
+        .group.navform.wat-cf
+          =f.submit pat(:save), :class => :button
+          =f.submit pat(:cancel), :onclick => "window.location='#{cycles_path}';return false", :class => :button
+/-content_for :sidebar, partial("base/sidebar")
