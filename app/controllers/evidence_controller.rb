@@ -14,6 +14,8 @@ class EvidenceController < ApplicationController
     allow :admin, :analyst
   end
 
+  before_filter :need_cycle
+
   # Show the tree of (possibly filtered) systems.
   #
   # We may get a POST here if a filter is changed.
@@ -26,25 +28,25 @@ class EvidenceController < ApplicationController
       redirect_to :action => :index
     else
       return unless auth_gdocs
-      @systems = filter_systems(System.all(:order => :slug))
+      @systems = filter_systems(System.all(:system_controls => { :cycle => @cycle }, :order => :slug))
     end
   end
 
   # Show an open Control - AJAX
   def show_closed_control
-    sc = SystemControl.by_system_control(params[:system_id], params[:control_id])
+    sc = SystemControl.by_system_control(params[:system_id], params[:control_id], @cycle)
     render(:partial => "closed_control", :locals => {:sc => sc})
   end
 
   # Show a closed Control - AJAX
   def show_control
-    sc = SystemControl.by_system_control(params[:system_id], params[:control_id])
+    sc = SystemControl.by_system_control(params[:system_id], params[:control_id], @cycle)
     render(:partial => "control", :locals => {:sc => sc})
   end
 
   # Show a document attachment form - AJAX
   def new
-    sc = SystemControl.by_system_control(params[:system_id], params[:control_id])
+    sc = SystemControl.by_system_control(params[:system_id], params[:control_id], @cycle)
     desc = DocumentDescriptor.get(params[:descriptor_id])
     @document = Document.new
     render(:partial => "attach_form", :locals => {:sc => sc, :desc => desc})
@@ -52,7 +54,7 @@ class EvidenceController < ApplicationController
 
   # Show a Google doc attachment form - AJAX
   def new_gdoc
-    sc = SystemControl.by_system_control(params[:system_id], params[:control_id])
+    sc = SystemControl.by_system_control(params[:system_id], params[:control_id], @cycle)
     desc = DocumentDescriptor.get(params[:descriptor_id])
 
     folders = get_gfolders(:ajax => true, :retry_url => url_for(:action => :index))
@@ -86,7 +88,7 @@ class EvidenceController < ApplicationController
 
   # Attach a document (either Google doc or regular)
   def attach
-    @system_control = SystemControl.by_system_control(params[:system_id], params[:control_id])
+    @system_control = SystemControl.by_system_control(params[:system_id], params[:control_id], @cycle)
     desc = DocumentDescriptor.get(params[:descriptor_id])
 
     doc_params = params[:document]
@@ -166,7 +168,7 @@ class EvidenceController < ApplicationController
 
   # Destroy a document - AJAX
   def destroy
-    system_control = SystemControl.by_system_control(params[:system_id], params[:control_id])
+    system_control = SystemControl.by_system_control(params[:system_id], params[:control_id], @cycle)
     doc = Document.get(params[:document_id])
     system_control.evidences.delete(doc)
     system_control.evidences.save

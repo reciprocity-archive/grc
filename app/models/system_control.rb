@@ -41,9 +41,10 @@ class SystemControl
     ControlState::STATE_IS_GOOD[state]
   end
 
-  def self.by_system_control(system_id, control_id)
+  def self.by_system_control(system_id, control_id, cycle)
     sc = SystemControl.first(:system_id => system_id,
-                             :control_id => control_id)
+                             :control_id => control_id,
+                             :cycle => cycle)
   end
 
   # Used by the slug filter widget

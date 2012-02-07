@@ -84,4 +84,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def need_cycle
+    unless @cycle
+      render 'base/need_cycle'
+      return false
+    end
+    return true
+  end
 end
