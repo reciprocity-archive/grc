@@ -14,14 +14,16 @@ describe TestreportController do
       login({}, { :role => 'admin' })
 
       @reg = Regulation.create(:title => 'Reg 1', :slug => 'reg1', :company => false)
+      @cycle = Cycle.create(:regulation => @reg, :start_at => '2012-01-01')
       @ctl = Control.create(:title => 'Control 1', :slug => 'reg1-ctl1', :description => 'x', :regulation => @reg, :is_key => true, :fraud_related => false)
       @ctl2 = Control.create(:title => 'Control 2', :slug => 'reg1-ctl2', :description => 'x', :regulation => @reg, :is_key => true, :fraud_related => false)
       @sys = System.create(:title => 'System 1', :slug => 'sys1', :description => 'x', :infrastructure => true)
-      @sc = SystemControl.create(:control => @ctl, :system => @sys, :state => :green)
-      @sc2 = SystemControl.create(:control => @ctl2, :system => @sys, :state => :green)
+      @sc = SystemControl.create(:control => @ctl, :system => @sys, :state => :green, :cycle => @cycle)
+      @sc2 = SystemControl.create(:control => @ctl2, :system => @sys, :state => :green, :cycle => @cycle)
       @bp = BizProcess.create(:title => 'Biz Process 1', :slug => 'bp1', :description => 'x')
       @bp.controls = [@ctl]
       @bp.save!
+      session[:cycle_id] = @cycle.id
     end
 
     describe "GET 'index'" do

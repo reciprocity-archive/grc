@@ -2,7 +2,7 @@
 
 %h1 Business Process Issue Tracking
 
-=form_for :biz_process, '/testreport/process', :class => :form do |f|
+=form_for :biz_process, :html => {:class => :form} do |f|
   = f.collection_select :id, BizProcess.all, :id, :title, { :include_blank => true }
   = f.submit "Show", :class => :button
 
@@ -35,3 +35,5 @@
         -else
           %td Evidence Incomplete
           %td
+
+-render_for :sidebar, :partial => "base/sidebar"
