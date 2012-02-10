@@ -26,6 +26,12 @@ describe Admin::ControlsController do
       end
     end
 
+    describe "POST 'create'" do
+      it "creates a new object" do
+        test_controller_create(:control, :regulation_id => @reg.id, :title => 'ctlx', :description => 'descx', :slug => "REG1-CX")
+      end
+    end
+
     describe "PUT 'update'" do
       it "updates an existing object" do
         @ctl.control_objectives.should eq([])

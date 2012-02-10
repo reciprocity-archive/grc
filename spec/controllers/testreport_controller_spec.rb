@@ -36,7 +36,7 @@ describe TestreportController do
     describe "GET on some actions" do
       %w{top byregulation byprocess}.each do |action|
         it "GET '#{action}'" do
-          get 'top'
+          get action
           response.should be_success
           assigns(:system_controls).should eq([@sc, @sc2])
         end
