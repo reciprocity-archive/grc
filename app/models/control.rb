@@ -17,7 +17,7 @@ class Control
   FREQUENCIES = [:day, :week, :month, :quarter, :year]
 
   property :id, Serial
-  property :title, String, :required => true
+  property :title, String, :required => true, :length => 255
   property :slug, String, :required => true
 
   validates_with_block :slug do

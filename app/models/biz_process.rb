@@ -8,7 +8,7 @@ class BizProcess
   before :save, :upcase_slug
 
   property :id, Serial
-  property :title, String, :required => true
+  property :title, String, :required => true, :length => 255
   property :slug, String, :required => true
   property :description, Text
 

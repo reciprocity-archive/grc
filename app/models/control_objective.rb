@@ -15,7 +15,7 @@ class ControlObjective
   before :save, :upcase_slug
 
   property :id, Serial
-  property :title, String, :required => true
+  property :title, String, :required => true, :length => 255
   property :slug, String, :required => true
 
   validates_with_block :slug do
