@@ -16,6 +16,10 @@ class Cycle
   # Whether the audit is archived (no modifications allowed)
   property :complete, Boolean, :default => false, :required => true
 
+  def slug
+    regulation.slug + "-" + (start_at.strftime("%Y-%m-%d") rescue "-")
+  end
+
   def display_name
     regulation.display_name + " " + (start_at.strftime("%Y-%m-%d") rescue "-")
   end
