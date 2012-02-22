@@ -41,9 +41,9 @@ class DocumentController < ApplicationController
 
     @messages = []
 
-    unless by_title["#{top.full_title}/#{@cycle.slug}"]
+    unless by_title[cycle_gfolder(@cycle)]
       folder = client.create_folder(@cycle.slug, :parent => top)
-      by_title["#{top.full_title}/#{@cycle.slug}"] = folder
+      by_title[cycle_gfolder(@cycle)] = folder
       session[:gfolders] = {} # clear cache
       @messages << "Created #{folder.full_title}"
     end
@@ -62,7 +62,7 @@ class DocumentController < ApplicationController
     systems = by_title["#{cycle_folder.full_title}/Systems"]
 
     System.all.each do |sys|
-      path = "#{systems.full_title}/#{sys.slug}"
+      path = system_gfolder(@cycle, sys)
       unless by_title[path]
         folder = client.create_folder(sys.slug, :parent => systems)
         session[:gfolders] = {} # clear cache

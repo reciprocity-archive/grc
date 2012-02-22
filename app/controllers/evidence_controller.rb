@@ -61,12 +61,12 @@ class EvidenceController < ApplicationController
     return unless folders
 
     by_title = gdocs_by_title(folders)
-    sys_folder = by_title["CMS/Systems/#{sc.system.slug}"]
-    new_folder = by_title['CMS/New Evidence']
-    systems_folder = by_title['CMS/Systems']
+    sys_folder = by_title[system_gfolder(@cycle, sc.system)]
+    new_folder = by_title[new_evidence_gfolder(@cycle)]
+    systems_folder = by_title[system_gfolder(@cycle)]
 
     if !systems_folder
-      flash[:error] = 'No CMS/Systems folder in your Google Docs'
+      flash[:error] = "No #{systems_folder} folder in your Google Docs"
       @redirect_url = url_for(:action => :index)
       return render :partial => 'base/ajax_redirect'
     end
@@ -99,9 +99,10 @@ class EvidenceController < ApplicationController
       return unless folders
 
       by_title = gdocs_by_title(folders)
-      sys_folder = by_title["CMS/Systems/#{@system_control.system.slug}"]
-      accepted_folder = by_title["CMS/Accepted"]
-      new_folder = by_title['CMS/New Evidence']
+      sys_folder = by_title[system_gfolder(@cycle, @system_control.system)]
+      new_folder = by_title[new_evidence_gfolder(@cycle)]
+      systems_folder = by_title[system_gfolder(@cycle)]
+      accepted_folder = by_title[accepted_gfolder(@cycle)]
 
       docs = get_gdocs(:folder => sys_folder)
       return if docs.nil?
@@ -177,8 +178,11 @@ class EvidenceController < ApplicationController
       return unless folders
 
       by_title = gdocs_by_title(folders)
-      sys_folder = by_title["CMS/Systems/#{system_control.system.slug}"]
-      accepted_folder = by_title["CMS/Accepted"]
+      sys_folder = by_title[system_gfolder(@cycle, system_control.system)]
+      new_folder = by_title[new_evidence_gfolder(@cycle)]
+      systems_folder = by_title[system_gfolder(@cycle)]
+      accepted_folder = by_title[accepted_gfolder(@cycle)]
+
       docs = get_gdocs(:folder => sys_folder)
       (type, docid) = doc.link.path.split('/')
       gdoc = nil
