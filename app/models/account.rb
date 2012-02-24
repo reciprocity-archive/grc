@@ -7,6 +7,9 @@ class Account
   attr_accessor :password, :password_confirmation
 
   before :save, :encrypt_password
+  before :save do
+    reset_persistence_token if reset_peristence_token?
+  end
 
   # Properties
   property :id,               Serial
@@ -16,6 +19,7 @@ class Account
   property :email,            String
   property :crypted_password, String, :length => 1..1000
   property :role,             String
+  property :persistence_token, String, :length => 1..256
 
   # Validations
   validates_presence_of      :email, :role
@@ -87,9 +91,8 @@ class Account
     first(:email => value)
   end
 
-  def persistence_token
-    # Use a constant for now
-    'PERSIST'
+  def self.find_by_persistence_token(value)
+    first(:persistence_token => value)
   end
 
   ##
@@ -107,12 +110,38 @@ class Account
     save!
   end
 
+  def reset_persistence_token
+    self.persistence_token = Authlogic::Random.hex_token
+  end
+
+  def reset_persistence_token!
+    reset_persistence_token
+    save!
+  end
+
+  def self.forget_all!
+    records = nil
+    i = 0
+    begin
+      records = all(:limit => 50, :offset => i)
+      records.each { |r| r.reset_persistence_token! }
+      i += 50
+    end while !records.blank?
+  end
+
   private
+    def reset_persistence_token?
+      persistence_token.blank?
+    end
+
     def password_required
       crypted_password.blank? || password.present?
     end
 
     def encrypt_password
-      self.crypted_password = ::BCrypt::Password.create(password) if password.present?
+      if password.present?
+        self.crypted_password = ::BCrypt::Password.create(password)
+        reset_persistence_token
+      end
     end
 end

@@ -68,8 +68,6 @@ CmsRails::Application.routes.draw do
 
   # get "dev/index"
 
-  resource :user_session
-
   if CmsRails::Application.sso_callback_url
     match 'sso/new' => 'sso#new', :as => 'login'
     match CmsRails::Application.sso_callback_url => "sso#callback"
