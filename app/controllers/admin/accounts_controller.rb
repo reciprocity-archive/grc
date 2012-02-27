@@ -1,6 +1,10 @@
 class Admin::AccountsController < ApplicationController
   layout "admin"
 
+  access_control :acl do
+    allow :superuser
+  end
+
   # List accounts
   def index
     @accounts = Account.all

@@ -9,7 +9,7 @@ class DocumentController < ApplicationController
   include DocumentHelper
 
   access_control :acl do
-    allow :admin, :analyst
+    allow :superuser, :admin, :analyst
   end
 
   # Show the list of Google docs

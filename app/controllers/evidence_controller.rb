@@ -11,7 +11,7 @@ class EvidenceController < ApplicationController
   include ApplicationHelper
 
   access_control :acl do
-    allow :admin, :analyst
+    allow :superuser, :admin, :analyst
   end
 
   # Show the tree of (possibly filtered) systems.

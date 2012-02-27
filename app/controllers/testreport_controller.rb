@@ -8,7 +8,7 @@ class TestreportController < ApplicationController
   include ApplicationHelper
 
   access_control :acl do
-    allow :admin, :analyst
+    allow :superuser, :admin, :analyst
   end
 
   # Show top issues

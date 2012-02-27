@@ -14,7 +14,7 @@
         #user-navigation
           %ul.wat-cf
             -if current_user
-              -if current_user.has_role?(:admin)
+              -if current_user.has_role?(:admin) || current_user.has_role?(:superuser)
                 %li=link_to pat(:admin), admin_path
               %li
                 %b=h current_user.email

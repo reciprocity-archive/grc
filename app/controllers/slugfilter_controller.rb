@@ -8,7 +8,7 @@ class SlugfilterController < ApplicationController
   include SlugfilterHelper
 
   access_control :acl do
-    allow :admin, :analyst
+    allow :superuser, :admin, :analyst
   end
 
   # Update the last-used regulation in the session so that the user

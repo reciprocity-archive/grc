@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
 
   # By default allow only admin access.  This is relaxed in specific controllers.
   access_control :acl do
-    allow :admin
+    allow :admin, :superuser
   end
 
   rescue_from Acl9::AccessDenied do
