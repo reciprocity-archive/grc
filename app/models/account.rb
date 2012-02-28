@@ -8,7 +8,7 @@ class Account
 
   before :save, :encrypt_password
   before :save do
-    reset_persistence_token if reset_peristence_token?
+    reset_persistence_token if reset_persistence_token?
   end
 
   # Properties
