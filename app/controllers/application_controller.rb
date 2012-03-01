@@ -79,4 +79,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  before_filter :check_ssl
+
+  def check_ssl
+    # FIXME properly check if we are behind an SSL proxy
+    request.env['HTTPS'] = 'on' if Rails.env.production?
+  end
+
 end
