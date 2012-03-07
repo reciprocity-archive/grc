@@ -8,4 +8,5 @@
       =form_for @control, :method => :put, :html => {:class => :form} do |f|
         =render :partial => "admin/controls/form", :locals => { :f => f }
 
-/-content_for :sidebar, partial("base/sidebar")
+-render_for :sidebar, :partial => "base/sidebar"
+-render_for :sidebar, :partial => "base/control_nav"

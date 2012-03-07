@@ -86,6 +86,8 @@ CmsRails::Application.routes.draw do
   match 'slugfilter/regulation_update' => 'slugfilter#regulation_update', :as => 'slugfilter_regulation_update'
   match 'slugfilter/values' => 'slugfilter#values', :as => 'slugfilter_values'
 
+  match 'navigation/control_hierarchy' => 'navigation#control_hierarchy', :as => 'control_hierarchy'
+
   # Evidence workflow page
   match 'evidence/index' => 'evidence#index'
   match 'evidence/show_closed_control/:system_id/:control_id' => 'evidence#show_closed_control'

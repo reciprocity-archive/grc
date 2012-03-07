@@ -1,0 +1,29 @@
+.block
+  %h3 Controls
+  .content
+    #control_tree
+    :javascript
+      $.getJSON(
+          "#{control_hierarchy_path}",
+          function(data) {
+              $('#control_tree').tree({
+                  data: data,
+                  autoOpen: false,
+                  saveState: 'control_tree'
+              });
+          }
+      );
+      $('#control_tree').bind(
+        'tree.click',
+        function (event) {
+          var node = event.node;
+          if (node.type == 'c') {
+            window.location = "/admin/controls/" + node.id + "/edit"
+          }
+          if (node.type == 'co') {
+            window.location = "/admin/control_objectives/" + node.id + "/edit"
+          }
+        }
+      );
+
+
