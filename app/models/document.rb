@@ -5,6 +5,15 @@
 # Evidence is associated with a Document Descriptor
 class Document
   include DataMapper::Resource
+  VALID_SCHEMES = ['http', 'https']
+
+  validates_with_block :link do
+    if VALID_SCHEMES.include?(link.scheme)
+      true
+    else
+      [false, "Scheme must be one of #{VALID_SCHEMES.join(',')}"]
+    end
+  end
 
   property :id, Serial
   property :title, String, :length => 256
