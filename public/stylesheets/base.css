@@ -162,3 +162,13 @@ input#slugfilter {width: 20em;}
 .form input.compact_text_field{width:30em;border-width:1px;border-style:solid;}
 hr.section {border-top: 3px solid black; margin-top: 20pt; margin-bottom: 10pt;}
 .systemreport {margin-left: 5pt;}
+.collapsible .head {
+  text-decoration: underline;
+  background: url(/images/treeRightTriangleBlack.png) no-repeat 0 50%;
+  padding-left: 10px;
+  cursor: pointer;
+}
+.collapsible .head.toggle {
+  background: url(/images/treeDownTriangleBlack.png) no-repeat 0 50%;
+}
+.collapsible .body {margin-left: 5pt;}

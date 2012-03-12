@@ -17,5 +17,10 @@
       .tree
         -scs.each do |sc|
           =render :partial => 'closed_control', :locals => {:sc => sc}
+      .docs.collapsible
+        %h4.head Documents (#{system.documents.count})
+        -system.documents.each do |document|
+          %div.body
+            %a{:target => '_blank', :href => transform_document_url(document.link)}=document.title
 
 -render_for :sidebar, :partial => "base/sidebar"
