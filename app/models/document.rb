@@ -17,7 +17,7 @@ class Document
 
   property :id, Serial
   property :title, String, :length => 256
-  property :link, URI, :length => 1024, :unique_index => true
+  property :link, URI, :length => 300, :unique_index => true
 
   belongs_to :document_descriptor, :required => false
 
