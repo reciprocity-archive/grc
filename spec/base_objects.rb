@@ -13,6 +13,9 @@ module BaseObjects
     @bp.controls << @ctl
     @bp.control_objectives << @co
     @biz_area = BusinessArea.create(:title => 'title1')
+    @person1 = Person.create(:username => 'john')
+    @sys_person1 = SystemPerson.create(:person => @person1, :system => @sys)
+    @bp_person1 = BizProcessPerson.create(:person => @person1, :biz_process => @bp)
   end
 
   def test_controller_index(assign, objs)

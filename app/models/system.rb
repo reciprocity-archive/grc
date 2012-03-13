@@ -27,6 +27,10 @@ class System
   # Responsible party
   belongs_to :owner, 'Person', :required => false
 
+  # Other parties
+  has n, :system_persons
+  has n, :persons, :through => :system_persons
+
   # Relevant documentation
   has n, :documents, :through => :document_systems
   has n, :document_systems

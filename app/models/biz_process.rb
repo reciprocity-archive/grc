@@ -20,7 +20,12 @@ class BizProcess
   has n, :controls, :through => :biz_process_controls, :order => :slug
   has n, :biz_process_controls
 
+  # Responsible party
   belongs_to :owner, 'Person', :required => false
+
+  # Other parties
+  has n, :biz_process_persons
+  has n, :persons, :through => :biz_process_persons
 
   has n, :policies, 'Document', :through => :biz_process_documents 
   has n, :biz_process_documents
