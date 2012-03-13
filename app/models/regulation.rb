@@ -3,8 +3,8 @@
 # The top of the Regulation -> CO -> Control hierarchy
 class Regulation
   include DataMapper::Resource
+  include AuthoredModel
   include SluggedModel
-  extend SluggedModel::ClassMethods
 
   before :save, :upcase_slug
 
@@ -25,4 +25,6 @@ class Regulation
 
   property :created_at, DateTime
   property :updated_at, DateTime
+
+  is_versioned_ext :on => [:updated_at]
 end

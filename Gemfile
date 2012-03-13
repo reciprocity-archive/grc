@@ -53,6 +53,8 @@ gem 'dm-transactions',      DM_VERSION
 gem 'dm-aggregates',        DM_VERSION
 gem 'dm-timestamps',        DM_VERSION
 gem 'dm-observer',          DM_VERSION
+#gem 'dm-is-versioned',      '1.3.0.beta', :git => 'http://github.com/devrandom1/dm-is-versioned.git'
+gem 'dm-is-versioned',      '1.3.0.beta', :path => '../dm-is-versioned'
 
 group(:development, :test) do
 
@@ -61,6 +63,7 @@ group(:development, :test) do
   gem 'rspec-rails'
   gem 'spork', '~> 0.9.0.rc'
   gem 'ZenTest'
+  gem 'autotest-rails'
   gem 'simplecov', :require => false
 
   # To get a detailed overview about what queries get issued and how long they take
@@ -85,6 +88,7 @@ group(:development, :test) do
   end
 end
 
+# Causes rake to fail, uncomment to rebuild docs
 #gem 'yard-dm'
 gem 'yard'
 gem 'redcarpet'

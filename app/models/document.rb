@@ -5,6 +5,7 @@
 # Evidence is associated with a Document Descriptor
 class Document
   include DataMapper::Resource
+  include AuthoredModel
   VALID_SCHEMES = ['http', 'https']
 
   validates_with_block :link do
@@ -30,6 +31,8 @@ class Document
 
   property :created_at, DateTime
   property :updated_at, DateTime
+
+  is_versioned_ext :on => [:updated_at]
 
   def complete?
     !link.nil? && !link.to_s.blank?

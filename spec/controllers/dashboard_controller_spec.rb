@@ -14,9 +14,12 @@ describe DashboardController do
       login({}, { :role => 'admin' })
       BizProcess.destroy
       System.destroy
+      @reg = Regulation.create(:title => 'Reg 1', :slug => 'reg1', :company => false)
+      @cycle = Cycle.create(:regulation => @reg, :start_at => '2012-01-01')
       @bp = BizProcess.create(:title => 'Biz Process 1', :slug => 'bp1', :description => 'x')
       @sys = System.create(:title => 'System 1', :slug => 'sys1', :description => 'x', :infrastructure => true)
       @locals = Hash.new(0)
+      session[:cycle_id] = @cycle.id
     end
 
     describe "GET 'index'" do

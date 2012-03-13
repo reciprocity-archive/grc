@@ -5,6 +5,7 @@
 # these attributes cannot be attached to it directly.
 class BizProcessControl
   include DataMapper::Resource
+  include AuthoredModel
 
   property :id, Serial
   property :state, Enum[*ControlState::VALUES], :default => :green, :required => true
@@ -15,4 +16,6 @@ class BizProcessControl
 
   property :created_at, DateTime
   property :updated_at, DateTime
+
+  is_versioned_ext :on => [:updated_at]
 end

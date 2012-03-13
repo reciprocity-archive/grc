@@ -1,6 +1,7 @@
 # An audit test result
 class TestResult
   include DataMapper::Resource
+  include AuthoredModel
 
   property :id, Serial
   property :title, String, :required => true
@@ -9,6 +10,8 @@ class TestResult
 
   property :created_at, DateTime
   property :updated_at, DateTime
+
+  is_versioned_ext :on => [:updated_at]
 
   def display_name
     title

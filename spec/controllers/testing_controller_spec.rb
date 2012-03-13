@@ -14,11 +14,13 @@ describe TestingController do
       login({}, { :role => 'admin' })
 
       @reg = Regulation.create(:title => 'Reg 1', :slug => 'reg1', :company => false)
+      @cycle = Cycle.create(:regulation => @reg, :start_at => '2012-01-01')
       @ctl = Control.create(:title => 'Control 1', :slug => 'reg1-ctl1', :description => 'x', :regulation => @reg, :is_key => true, :fraud_related => false)
       @sys = System.create(:title => 'System 1', :slug => 'sys1', :description => 'x', :infrastructure => true)
-      @sc = SystemControl.create(:control => @ctl, :system => @sys, :state => :green)
+      @sc = SystemControl.create(:control => @ctl, :system => @sys, :state => :green, :cycle => @cycle)
       @desc = DocumentDescriptor.create(:title => 'ACL')
       @doc = Document.create({ :link => 'http://cde.com/', :title => 'Cde' })
+      session[:cycle_id] = @cycle.id
     end
 
     describe "GET 'index'" do

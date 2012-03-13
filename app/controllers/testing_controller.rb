@@ -11,6 +11,8 @@ class TestingController < ApplicationController
     allow :superuser, :admin, :analyst
   end
 
+  before_filter :need_cycle
+
   # Show the collapsed testing view, consisting of the (possibly filtered) list of systems.
   #
   # We may get a POST here if a filter is changed.
@@ -18,25 +20,25 @@ class TestingController < ApplicationController
     if request.post?
       redirect_to url_for
     else
-      @systems = filter_systems(System.all)
+      @systems = filter_systems(System.all(:system_controls => { :cycle => @cycle }, :order => :slug))
     end
   end
 
   # Drilldown into a control - AJAX
   def show
-    sc = SystemControl.by_system_control(params[:system_id], params[:control_id])
+    sc = SystemControl.by_system_control(params[:system_id], params[:control_id], @cycle)
     render :partial => "control", :locals => {:sc => sc}
   end
 
   # Close drilldown into a control - AJAX
   def show_closed
-    sc = SystemControl.by_system_control(params[:system_id], params[:control_id])
+    sc = SystemControl.by_system_control(params[:system_id], params[:control_id], @cycle)
     render :partial => "closed_control", :locals => {:sc => sc}
   end
 
   # Set the state of a control (green/red/yellow) - AJAX
   def update_control_state
-    sc = SystemControl.by_system_control(params[:system_id], params[:control_id])
+    sc = SystemControl.by_system_control(params[:system_id], params[:control_id], @cycle)
     value = params[:value]
     sc.state = value.to_sym
     sc.save!
@@ -45,13 +47,13 @@ class TestingController < ApplicationController
 
   # Show the textual state of a control (why/impact/recommendation) - AJAX
   def edit_control_text
-    sc = SystemControl.by_system_control(params[:system_id], params[:control_id])
+    sc = SystemControl.by_system_control(params[:system_id], params[:control_id], @cycle)
     render :partial => "control_text_form", :locals => {:sc => sc}
   end
 
   # Set the textual state of a control (why/impact/recommendation) - AJAX
   def update_control_text
-    sc = SystemControl.by_system_control(params[:system_id], params[:control_id])
+    sc = SystemControl.by_system_control(params[:system_id], params[:control_id], @cycle)
     sc.update!(params[:system_control])
     render :partial => "control", :locals => {:sc => sc}
   end

@@ -12,6 +12,8 @@ class DashboardController < ApplicationController
     allow :superuser, :admin, :analyst
   end
 
+  before_filter :need_cycle
+
   # Show the collapsed dashboard view, consisting of a (possibly filtered) list of
   # BizProcess objects.
   #

@@ -8,9 +8,9 @@ require 'slugged_model'
 # The slug of a CO has to have the slug of the regulation as prefix.
 class ControlObjective
   include DataMapper::Resource
+  include AuthoredModel
   include DataMapper::Validate
   include SluggedModel
-  extend SluggedModel::ClassMethods
 
   before :save, :upcase_slug
 
@@ -24,7 +24,8 @@ class ControlObjective
 
   property :description, Text
 
-  has n, :controls, :through => Resource, :order => :slug
+  has n, :controls, :through => :control_control_objectives, :order => :slug
+  has n, :control_control_objectives
   belongs_to :regulation
 
   # All COs associated with a regulation
@@ -73,4 +74,6 @@ class ControlObjective
 
   property :created_at, DateTime
   property :updated_at, DateTime
+
+  is_versioned_ext :on => [:updated_at]
 end

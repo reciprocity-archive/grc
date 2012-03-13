@@ -63,14 +63,17 @@ class Admin::ControlsController < ApplicationController
     # Connect to related Control Objectives
     co_ids = params["control"].delete("co_ids") || []
 
-    @control.control_objectives = []
-    co_ids.each do |co_id|
-      co = ControlObjective.get(co_id)
-      @control.control_objectives << co
+    if !equal_ids(co_ids, @control.control_objectives)
+      @control.control_objectives = []
+      co_ids.each do |co_id|
+        co = ControlObjective.get(co_id)
+        @control.control_objectives << co
+      end
     end
 
     respond_to do |format|
-      if @control.save && @control.update(params["control"])
+      res = @control.save
+      if res && @control.authored_update(current_user, params["control"])
         format.html { redirect_to(edit_control_path(@control), :notice => 'Control was successfully updated.') }
         format.xml  { head :ok }
       else
@@ -104,15 +107,38 @@ class Admin::ControlsController < ApplicationController
 
   # Many2many relationship to Systems
   def systems
+    lefts = filtered_controls.all_company
     if request.put?
-      post_many2many(:left_class => Control,
-                     :right_class => System,
-                     :lefts => filtered_controls.all_company)
+      raise "cannot save without cycle" unless @cycle
+      control = Control.get(params[:id])
+      ids = params[:control]["system_ids"]
+      control.system_controls.each do |sc|
+        if sc.cycle == @cycle && !ids.include?(sc.system_id)
+          ids.delete(sc.system_id)
+          sc.authored_destroy(current_user)
+        end
+      end
+      ids.each do |id|
+        res = control.system_controls.create(:system => System.get(id), :cycle => @cycle, :modified_by => current_user)
+        # FIXME why is this necessary?
+        res.save!
+      end
+      # FIXME
+      control.reload
     else
+      if params[:id]
+        control = Control.get(params[:id])
+      else
+        control = lefts.first
+      end
+    end
+    if @cycle
+      @left_nested = control.system_controls_for_cycle(@cycle)
       get_many2many(:left_class => Control,
                     :right_class => System,
-                    :lefts => filtered_controls.all_company,
-                    :show_slugfilter => true)
+                    :lefts => lefts,
+                    :show_slugfilter => true,
+                   )
     end
   end
 

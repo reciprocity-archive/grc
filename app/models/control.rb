@@ -8,9 +8,9 @@ require 'slugged_model'
 # The slug of a Control has to have the slug of the regulation as prefix.
 class Control
   include DataMapper::Resource
+  include AuthoredModel
   include DataMapper::Validate
   include SluggedModel
-  extend SluggedModel::ClassMethods
 
   before :save, :upcase_slug
 
@@ -49,20 +49,25 @@ class Control
 
   # The types of evidence (Documents) that may be attached to this control
   # during an audit.
-  has n, :evidence_descriptors, 'DocumentDescriptor', :through => Resource
+  has n, :evidence_descriptors, 'DocumentDescriptor', :through => :control_document_descriptors
+  has n, :control_document_descriptors
 
   # The result of an audit test
   belongs_to :test_result, :required =>  false
 
   # Which controls are implemented by this one.  A company
   # control may implement several regulation controls.
-  has n, :implemented_controls, "Control", :through => Resource, :order => :slug
+  has n, :implemented_controls, "Control", :through => :control_controls, :order => :slug
+  has n, :control_controls
 
   # Many to many with Control Objective
-  has n, :control_objectives, :through => Resource, :order => :slug
+  has n, :control_objectives, :through => :control_control_objectives, :order => :slug
+  has n, :control_control_objectives
 
   property :created_at, DateTime
   property :updated_at, DateTime
+
+  is_versioned_ext :on => [:updated_at]
 
   # All non-company regulation controls
   def self.all_non_company
@@ -121,5 +126,28 @@ class Control
   # IDs of related evidence descriptors (used by many2many widget)
   def evidence_descriptor_ids
     evidence_descriptors.map { |e| e.id }
+  end
+
+  class ControlCycle
+    def initialize(scs)
+      @scs = scs
+    end
+
+    def system_ids
+      @scs.map &:system_id
+    end
+
+    def self.model_name
+      ControlCycle
+    end
+    def self.param_key
+      :control
+    end
+  end
+
+  def system_controls_for_cycle(cycle)
+    scs = system_controls
+    scs = scs.all(:cycle => cycle) if cycle
+    ControlCycle.new(scs)
   end
 end

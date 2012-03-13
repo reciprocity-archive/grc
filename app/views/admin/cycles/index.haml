@@ -1,0 +1,27 @@
+.block
+  .secondary-navigation
+    %ul.wat-cf
+      %li.first.active=link_to pat(:list), cycles_path
+      %li=link_to pat(:new), new_cycle_path
+  .content
+    %h2.title
+      =pat(:all)
+      =mt(:cycles)
+    .inner
+      %table.table
+        %tr
+          %th.first=mat(:cycle, :regulation)
+          %th=mat(:cycle, :start_at)
+          %th.last!="&nbsp;"
+        -@cycles.each do |cycle|
+          %tr
+            %td.first=link_to h(cycle.regulation.display_name), cycle.regulation
+            %td=link_to h(cycle.start_at), cycle
+            %td
+              =button_to pat(:clone), new_clone_cycle_path(cycle), :method => :get, :class => :button_to
+            %td.last
+              =button_to pat(:edit), edit_cycle_path(cycle), :method => :get, :class => :button_to
+      .actions-bar.wat-cf
+        .actions!="&nbsp;"
+
+-render_for :sidebar, :partial => "base/sidebar"

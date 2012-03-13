@@ -44,6 +44,12 @@ CmsRails::Application.routes.draw do
       end
     end
     resources :documents, :path => "/admin/documents"
+    resources :cycles, :path => "/admin/cycles" do
+      member do
+        get 'new_clone'
+        put 'clone'
+      end
+    end
     resources :document_descriptors, :path => "/admin/document_descriptors"
     resources :regulations, :path => "/admin/regulations" do
       collection do
@@ -83,6 +89,7 @@ CmsRails::Application.routes.draw do
 
   # Slugfilter widget routes
   match 'slugfilter/slug_update' => 'slugfilter#slug_update', :as => 'slugfilter_slug_update'
+  match 'slugfilter/cycle_update' => 'slugfilter#cycle_update', :as => 'slugfilter_cycle_update'
   match 'slugfilter/regulation_update' => 'slugfilter#regulation_update', :as => 'slugfilter_regulation_update'
   match 'slugfilter/values' => 'slugfilter#values', :as => 'slugfilter_values'
 

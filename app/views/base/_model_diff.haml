@@ -1,0 +1,14 @@
+-diff = second.attributes.diff(first.attributes)
+-diff.delete(:id)
+-diff.delete(:is_versioned_id)
+-diff.delete(:updated_at)
+-diff.delete(:modified_by)
+-diff.each do |k,v|
+  %i
+    =pat(k)
+  &=first[k]
+  \=>
+  &=second[k]
+Author:
+-author = Account.get(first.modified_by_id)
+=author ? (link_to author.display_name, url_for(author)) : '-'

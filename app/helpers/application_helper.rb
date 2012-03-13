@@ -1,5 +1,5 @@
 module ApplicationHelper
-  ADMIN_MODULES = %w(accounts biz_processes business_areas control_objectives controls documents document_descriptors regulations people systems)
+  ADMIN_MODULES = %w(accounts biz_processes business_areas cycles control_objectives controls documents document_descriptors regulations people systems)
   WORKFLOW_MODULES = %w(dashboard evidence testing testreport) 
 
   class ProjectModule
@@ -107,5 +107,50 @@ module ApplicationHelper
     content_for tag do
       render opts
     end
+  end
+
+  # Display a compact version of an object property
+  def display_compact(model, object, prop)
+    value = object.send(prop.name)
+    if prop.name == :modified_by
+      author = Account.get(value)
+      link_to author.display_name, url_for(author)
+    elsif prop.name.to_s.end_with?('_id')
+      relation = prop.name.to_s.sub(/_id$/, '').to_sym
+      other = model.relationships[relation].parent_model.get(value)
+      if other
+        link_to other.display_name, url_for(other)
+      else
+        "-"
+      end
+    elsif value.is_a? DateTime
+      display_time(value)
+    else
+      value
+    end
+  end
+
+  # Check if the set of ids coming from a form is already equal to the set of objects in an association.
+  #
+  # This is important for versioning so that we don't create a no-change versions.
+  def equal_ids(ids, objects)
+    return (ids.map {|x| x.to_i}).sort == (objects.map {|x| x.id}).sort
+  end
+
+  # Typecast form parameters into the right primitive to work around a DataMapper dirty-detection bug.
+  #
+  # If we don't do this, the persistence layer thinks all non-strings params are modifications
+  # where in fact we might just have changed false => 0, which is a no-op.  This is important
+  # for versioning so we don't create no-change versions when nothing was changed.
+  def typecast_params(params, model)
+    results = {}
+    params.each do |key, value|
+      property = model.properties[key.to_sym]
+      if property && property.respond_to?(:typecast)
+        value = property.typecast(value)
+      end
+      results[key] = value
+    end
+    results
   end
 end

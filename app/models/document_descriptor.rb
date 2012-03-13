@@ -4,6 +4,7 @@
 # organized when attached to Controls
 class DocumentDescriptor
   include DataMapper::Resource
+  include AuthoredModel
 
   property :id, Serial
 
@@ -16,4 +17,6 @@ class DocumentDescriptor
 
   property :created_at, DateTime
   property :updated_at, DateTime
+
+  is_versioned_ext :on => [:updated_at]
 end

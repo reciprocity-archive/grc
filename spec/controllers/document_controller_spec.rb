@@ -1,6 +1,12 @@
 require 'spec_helper'
 
 describe DocumentController do
+  before :each do
+      @reg = Regulation.create(:title => 'Reg 1', :slug => 'reg1', :company => false)
+      @cycle = Cycle.create(:regulation => @reg, :start_at => '2012-01-01')
+      session[:cycle_id] = @cycle.id
+  end
+
   describe "GET 'index' without authorization" do
     it "fails as guest" do
       login({}, {})
@@ -26,8 +32,9 @@ describe DocumentController do
     before :each do
       login({}, { :role => 'admin' })
 
-      @cms = Gdoc::Document.new('CMS')
-      @systems = Gdoc::Document.new('Systems', :parent => @cms)
+      @cms_folder = Gdoc::Document.new('CMS')
+      @cycle_folder = Gdoc::Document.new('REG1-2012-01-01', :parent => @cms_folder)
+      @systems_folder = Gdoc::Document.new('Systems', :parent => @cycle_folder)
 
       session[:gtoken] = 'gtoken1'
       controller.stub(:get_gfolders) do
@@ -35,9 +42,10 @@ describe DocumentController do
       end
       controller.stub(:gdocs_by_title) do |folders|
         {
-          'CMS' => @cms,
-          'CMS/Systems' => @systems,
-          'CMS/Accepted' => Gdoc::Document.new('Accepted', :parent => @cms),
+          'CMS' => @cms_folder,
+          'CMS/REG1-2012-01-01' => @cycle_folder,
+          'CMS/REG1-2012-01-01/Systems' => @systems_folder,
+          'CMS/REG1-2012-01-01/Accepted' => Gdoc::Document.new('Accepted', :parent => @cms_folder),
         }
       end
 
@@ -56,27 +64,28 @@ describe DocumentController do
 
     it "syncs new system" do
       System.create(:title => 'System 1', :slug => 'sys1', :description => 'x', :infrastructure => true)
-      @gdoc_client.should_receive(:create_folder).at_least(:once).with('SYS1', :parent => @systems).and_return(Gdoc::Document.new('sys1', :parent => @systems))
+      @gdoc_client.should_receive(:create_folder).at_least(:once).with('SYS1', :parent => @systems_folder).and_return(Gdoc::Document.new('sys1', :parent => @systems_folder))
       get 'sync'
       response.should be_success
       assert_template :template => 'document/sync'
-      assigns(:messages).should eq(["Created CMS/Systems/sys1"])
+      assigns(:messages).should eq(["Created CMS/REG1-2012-01-01/Systems/sys1"])
     end
 
     it "creates base folders" do
       controller.stub(:gdocs_by_title) do |folders|
         {
-          'CMS' => @cms,
+          'CMS' => @cms_folder,
         }
       end
       System.create(:title => 'System 1', :slug => 'sys1', :description => 'x', :infrastructure => true)
-      @gdoc_client.should_receive(:create_folder).at_least(:once).with('Systems', :parent => @cms).and_return(@systems)
-      @gdoc_client.should_receive(:create_folder).at_least(:once).with('Accepted', :parent => @cms).and_return(Gdoc::Document.new('Accepted', :parent => @cms))
-      @gdoc_client.should_receive(:create_folder).at_least(:once).with('SYS1', :parent => @systems).and_return(Gdoc::Document.new('sys1', :parent => @systems))
+      @gdoc_client.should_receive(:create_folder).at_least(:once).with('REG1-2012-01-01', :parent => @cms_folder).and_return(@cycle_folder)
+      @gdoc_client.should_receive(:create_folder).at_least(:once).with('Systems', :parent => @cycle_folder).and_return(@systems_folder)
+      @gdoc_client.should_receive(:create_folder).at_least(:once).with('Accepted', :parent => @cycle_folder).and_return(Gdoc::Document.new('Accepted', :parent => @cms_folder))
+      @gdoc_client.should_receive(:create_folder).at_least(:once).with('SYS1', :parent => @systems_folder).and_return(Gdoc::Document.new('sys1', :parent => @systems_folder))
       get 'sync'
       response.should be_success
       assert_template :template => 'document/sync'
-      assigns(:messages).length.should eq(3)
+      assigns(:messages).length.should eq(4)
     end
   end
 

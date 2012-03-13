@@ -5,16 +5,19 @@
 # these attributes cannot be attached to it directly.
 class SystemControl
   include DataMapper::Resource
+  include AuthoredModel
 
   property :id, Serial
   property :state, Enum[*ControlState::VALUES], :default => :green, :required => true
   property :ticket, String
 
   # A set of documents used as evidence in an audit
-  has n, :evidences, 'Document', :through => Resource
+  has n, :evidences, 'Document', :through => :document_system_control
+  has n, :document_system_control
 
   belongs_to :control
   belongs_to :system
+  belongs_to :cycle, :required => false
 
   # why/what/how free text
   property :test_why, Text
@@ -23,6 +26,8 @@ class SystemControl
 
   property :created_at, DateTime
   property :updated_at, DateTime
+
+  is_versioned_ext :on => [:updated_at]
 
   def <=>(other)
     return control.slug <=> other.control.slug;
@@ -36,9 +41,10 @@ class SystemControl
     ControlState::STATE_IS_GOOD[state]
   end
 
-  def self.by_system_control(system_id, control_id)
+  def self.by_system_control(system_id, control_id, cycle)
     sc = SystemControl.first(:system_id => system_id,
-                             :control_id => control_id)
+                             :control_id => control_id,
+                             :cycle => cycle)
   end
 
   # Used by the slug filter widget

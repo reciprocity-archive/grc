@@ -12,6 +12,8 @@ class DocumentController < ApplicationController
     allow :superuser, :admin, :analyst
   end
 
+  before_filter :need_cycle
+
   # Show the list of Google docs
   def index
     return unless auth_gdocs
@@ -22,7 +24,7 @@ class DocumentController < ApplicationController
 
   # Sync our local list of document folders with Google Docs.
   #
-  # Ensure that folders exist for CMS, CMS/Systems, Cms/Accepted and each system.
+  # Ensure that folders exist for CMS/CYCLE, CMS/CYCLE/Systems, Cms/CYCLE/Accepted and each system.
   def sync
     folders = get_gfolders(:refresh => true) or return
 
@@ -39,19 +41,28 @@ class DocumentController < ApplicationController
 
     @messages = []
 
+    unless by_title[cycle_gfolder(@cycle)]
+      folder = client.create_folder(@cycle.slug, :parent => top)
+      by_title[cycle_gfolder(@cycle)] = folder
+      session[:gfolders] = {} # clear cache
+      @messages << "Created #{folder.full_title}"
+    end
+
+    cycle_folder = by_title["#{top.full_title}/#{@cycle.slug}"]
+
     ['Systems', 'Accepted'].each do |name|
-      unless by_title["#{top.full_title}/#{name}"]
-        folder = client.create_folder(name, :parent => top)
-        by_title["#{top.full_title}/#{name}"] = folder
+      unless by_title["#{cycle_folder.full_title}/#{name}"]
+        folder = client.create_folder(name, :parent => cycle_folder)
+        by_title["#{cycle_folder.full_title}/#{name}"] = folder
         session[:gfolders] = {} # clear cache
         @messages << "Created #{folder.full_title}"
       end
     end
 
-    systems = by_title["#{top.full_title}/Systems"]
+    systems = by_title["#{cycle_folder.full_title}/Systems"]
 
     System.all.each do |sys|
-      path = "#{systems.full_title}/#{sys.slug}"
+      path = system_gfolder(@cycle, sys)
       unless by_title[path]
         folder = client.create_folder(sys.slug, :parent => systems)
         session[:gfolders] = {} # clear cache

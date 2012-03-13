@@ -1,4 +1,8 @@
 module SluggedModel
+  def self.included(model)
+    model.extend(ClassMethods)
+  end
+
   module ClassMethods
     def slugfilter(prefix)
       if !prefix.blank?

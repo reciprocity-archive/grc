@@ -98,4 +98,21 @@ module GdataHelper
   def new_client
      Gdoc::Client.new
   end
+
+  # Full path of the folder that contains
+  def cycle_gfolder(cycle)
+    "CMS/#{cycle.slug}"
+  end
+
+  def system_gfolder(cycle, system = nil)
+    system ? "CMS/#{cycle.slug}/Systems/#{system.slug}" : "CMS/#{cycle.slug}/Systems"
+  end
+
+  def accepted_gfolder(cycle)
+    "CMS/#{cycle.slug}/Accepted"
+  end
+
+  def new_evidence_gfolder(cycle)
+    "CMS/#{cycle.slug}/New Evidence"
+  end
 end

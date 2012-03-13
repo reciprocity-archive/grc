@@ -16,8 +16,10 @@
     )
   %span.owner
     =system.owner.display_name
--if !system.system_controls.empty?
+-scs = system.system_controls.all(:cycle => @cycle)
+-if !scs.empty?
   -system.system_controls_by_process(biz_process).each do |sc|
+    -next if sc.cycle != @cycle
     -control = sc.control
     .tree.control
       %span.dashtitle.control{:title => control.slug}><

@@ -1,0 +1,7 @@
+/Expecting object, model (parent model if this is a version object)
+-model.properties.each do |prop|
+  -unless [:id, :is_versioned_id, :updated_at].include?(prop.name)
+    %i
+      =pat(prop.name)
+    %u<
+      &=display_compact(model, object, prop)

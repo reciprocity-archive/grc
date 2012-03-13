@@ -41,3 +41,12 @@ Planned:
 
 * The frontend will is a web application.
 * The backend will be modular with a plugin system allowing interfacing with internal systems for acquisition of evidence and control status.
+
+## Testing
+
+    rspec spec
+
+and autotesting (runs tests as files change):
+
+    spork &
+    autotest -v
