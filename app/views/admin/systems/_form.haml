@@ -27,3 +27,16 @@
 .group.navform.wat-cf
   =f.submit pat(:save), :class => :button
   =f.submit pat(:cancel), :onclick => "window.location='#{systems_path}';return false", :class => :button
+
+%hr.section
+%h3 Contacts
+%table.table
+  %tr
+    %th Name
+    %th Role
+    %th
+  -edit_many(@system, :system_persons, :person) do |sysp|
+    %td
+      =sysp.role
+-edit_many_attach(@system, :system_persons, :person)
+

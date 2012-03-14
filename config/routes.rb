@@ -12,6 +12,11 @@ CmsRails::Application.routes.draw do
         get 'systems'
         put 'systems'
       end
+      member do
+        get 'add_person'
+        delete 'destroy_person'
+        post 'create_person'
+      end
     end
     resources :business_areas, :path => "/admin/business_areas"
     resources :control_objectives, :path => "/admin/control_objectives" do
@@ -65,6 +70,11 @@ CmsRails::Application.routes.draw do
         put 'controls'
         get 'control_objectives'
         put 'control_objectives'
+      end
+      member do
+        get 'add_person'
+        delete 'destroy_person'
+        post 'create_person'
       end
     end
   end

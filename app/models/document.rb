@@ -9,7 +9,7 @@ class Document
   VALID_SCHEMES = ['http', 'https']
 
   validates_with_block :link do
-    if VALID_SCHEMES.include?(link.scheme)
+    if link.nil? or VALID_SCHEMES.include?(link.scheme)
       true
     else
       [false, "Scheme must be one of #{VALID_SCHEMES.join(',')}"]

@@ -54,3 +54,16 @@
 .group.navform.wat-cf
   =f.submit pat(:save), :class => :button
   =f.submit pat(:cancel), :onclick => "window.location='#{biz_processes_path}';return false", :class => :button
+
+%hr.section
+%h3 Contacts
+%table.table
+  %tr
+    %th Name
+    %th Role
+    %th
+  -edit_many(@biz_process, :biz_process_persons, :person) do |bpp|
+    %td
+      =bpp.role
+-edit_many_attach(@biz_process, :biz_process_persons, :person)
+

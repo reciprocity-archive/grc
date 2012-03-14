@@ -154,4 +154,33 @@ class Admin::SystemsController < ApplicationController
       get_many2many(:left_class => System, :right_class => BizProcess)
     end
   end
+
+  def add_person
+    @system = System.get(params[:id])
+  end
+ 
+  # Another way to attach a biz process
+  def create_person
+    @system = System.get(params[:id])
+    @system_person = SystemPerson.new(params[:system_person])
+    @system_person.system = @system
+    if @system_person.save
+      flash[:notice] = 'Contact was successfully attached.'
+      redirect_to edit_system_path(@system)
+    else
+      flash[:error] = 'Failed' + @system_person.errors.inspect
+      redirect_to add_person_system_path(@system_person.person)
+    end
+  end
+ 
+  # Another way to detach a biz process
+  def destroy_person
+    sysp = SystemPerson.first(:person_id => params[:person_id], :system_id => params[:id])
+    if sysp && sysp.destroy
+      flash[:notice] = 'Contact was successfully detached.'
+    else
+      flash[:error] = 'Failed'
+    end
+    redirect_to edit_system_path(System.get(params[:id]))
+  end
 end

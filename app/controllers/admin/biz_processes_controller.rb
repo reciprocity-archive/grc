@@ -141,4 +141,33 @@ class Admin::BizProcessesController < ApplicationController
       get_many2many(:left_class => BizProcess, :right_class => System)
     end
   end
+
+  def add_person
+    @biz_process = BizProcess.get(params[:id])
+  end
+ 
+  # Another way to attach a biz process
+  def create_person
+    @biz_process = BizProcess.get(params[:id])
+    @biz_process_person = BizProcessPerson.new(params[:biz_process_person])
+    @biz_process_person.biz_process = @biz_process
+    if @biz_process_person.save
+      flash[:notice] = 'Contact was successfully attached.'
+      redirect_to edit_biz_process_path(@biz_process)
+    else
+      flash[:error] = 'Failed' + @biz_process_person.errors.inspect
+      redirect_to add_person_biz_process_path(@biz_process_person.person)
+    end
+  end
+ 
+  # Another way to detach a biz process
+  def destroy_person
+    bpp = BizProcessPerson.first(:person_id => params[:person_id], :biz_process_id => params[:id])
+    if bpp && bpp.destroy
+      flash[:notice] = 'Contact was successfully detached.'
+    else
+      flash[:error] = 'Failed'
+    end
+    redirect_to edit_biz_process_path(BizProcess.get(params[:id]))
+  end
 end

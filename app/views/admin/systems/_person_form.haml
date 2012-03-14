@@ -1,0 +1,11 @@
+.group
+  =f.label :role
+  =f.select :role, BizProcessPerson.properties[:role].flag_map.to_a.sort.map { |ind, name| name }, {:class => :enum}
+
+.group
+  =f.label :person_id
+  =f.collection_select :person_id, Person.all, :id, :display_name, {}, {:class => :collection}
+
+
+.group.navform.wat-cf
+  =f.submit pat(:save), :class => :button
