@@ -39,10 +39,6 @@
   =f.text_field :slug, :class => :text_field
 
 .group
-  =f.label :is_key
-  =f.check_box :is_key, :class => :check_box
-
-.group
   =f.label :description
   =f.text_area :description, :class => :text_area
 
@@ -55,8 +51,16 @@
   =f.select :frequency_type, Control.properties[:frequency_type].flag_map.to_a.sort.map { |ind, name| name }, {:class => :enum}
 
 .group
-  =f.label :fraud_related
+  =f.check_box :is_key, :class => :check_box
+  =f.label :key_control
+
+.group
   =f.check_box :fraud_related, :class => :check_box
+  =f.label :fraud_related
+
+.group
+  =f.check_box :technical, :class => :check_box
+  =f.label :technical
 
 .group
   =f.label :assertion

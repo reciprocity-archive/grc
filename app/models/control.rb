@@ -29,6 +29,7 @@ class Control
   property :frequency, Integer
   property :frequency_type, Enum[*FREQUENCIES], :default => :day
   property :fraud_related, Boolean, :required => true, :default => false
+  property :technical, Boolean, :required => true, :default => true
   property :assertion, String
   property :effective_at, DateTime
 
