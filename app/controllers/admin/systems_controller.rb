@@ -4,7 +4,7 @@ class Admin::SystemsController < ApplicationController
 
   # List Systems
   def index
-    @systems = System.all
+    @systems = System.all(:order => :slug)
 
     respond_to do |format|
       format.html
@@ -182,5 +182,28 @@ class Admin::SystemsController < ApplicationController
       flash[:error] = 'Failed'
     end
     redirect_to edit_system_path(System.get(params[:id]))
+  end
+
+  def clone
+    raise "cannot clone without cycle" unless @cycle
+    @orig = System.get(params[:id])
+    @system = System.new
+    @system.title = "Copy of #{@orig.title}"
+    @system.slug = "COPY-#{@orig.slug}-#{Time.new.to_i}"
+    @system.infrastructure = @orig.infrastructure
+    @system.description = @orig.description
+    @system.biz_processes += @orig.biz_processes
+    @system.control_objectives += @orig.control_objectives
+    @orig.system_controls.each do |sc|
+      @system.system_controls << SystemControl.new(:control => sc.control, :cycle => @cycle)
+    end
+
+    if @system.save
+      flash[:notice] = 'System was successfuly cloned.'
+      redirect_to edit_system_path(@system)
+    else
+      flash[:error] = 'Failed' + @system.errors.inspect
+      redirect_to systems_path
+    end
   end
 end

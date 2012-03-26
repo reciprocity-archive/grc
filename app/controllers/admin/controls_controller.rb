@@ -108,6 +108,11 @@ class Admin::ControlsController < ApplicationController
   # Many2many relationship to Systems
   def systems
     lefts = filtered_controls.all_company
+    if lefts.empty?
+      flash[:error] = 'No company controls'
+      redirect_to controls_path
+      return
+    end
     if request.put?
       raise "cannot save without cycle" unless @cycle
       control = Control.get(params[:id])
@@ -134,12 +139,12 @@ class Admin::ControlsController < ApplicationController
     end
     if @cycle
       @left_nested = control.system_controls_for_cycle(@cycle)
-      get_many2many(:left_class => Control,
-                    :right_class => System,
-                    :lefts => lefts,
-                    :show_slugfilter => true,
-                   )
     end
+    get_many2many(:left_class => Control,
+                  :right_class => System,
+                  :lefts => lefts,
+                  :show_slugfilter => true,
+                 )
   end
 
   # Many2many relationship to Control Objectives

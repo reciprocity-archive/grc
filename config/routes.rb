@@ -79,6 +79,8 @@ CmsRails::Application.routes.draw do
         get 'add_person'
         delete 'destroy_person'
         post 'create_person'
+
+        post 'clone'
       end
     end
   end

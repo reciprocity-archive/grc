@@ -22,6 +22,8 @@
               edit_people_path(system.owner) rescue '-'
             %td=display_time(system.updated_at)
             %td.last
+              =button_to pat(:clone), clone_system_path(system), :method => :post, :class => :button_to
+              ="|"
               =button_to pat(:edit), edit_system_path(system), :method => :get, :class => :button_to
               ="|"
               =button_to pat(:delete), system, :method => :delete, :class => :button_to
