@@ -46,6 +46,10 @@ CmsRails::Application.routes.draw do
         get 'add_biz_process'
         delete 'destroy_biz_process'
         post 'create_biz_process'
+
+        delete 'destroy_implemented_control'
+
+        post 'implement'
       end
     end
     resources :documents, :path => "/admin/documents"
@@ -101,6 +105,7 @@ CmsRails::Application.routes.draw do
   match 'slugfilter/slug_update' => 'slugfilter#slug_update', :as => 'slugfilter_slug_update'
   match 'slugfilter/cycle_update' => 'slugfilter#cycle_update', :as => 'slugfilter_cycle_update'
   match 'slugfilter/regulation_update' => 'slugfilter#regulation_update', :as => 'slugfilter_regulation_update'
+  match 'slugfilter/company_update' => 'slugfilter#company_update', :as => 'slugfilter_company_update'
   match 'slugfilter/values' => 'slugfilter#values', :as => 'slugfilter_values'
 
   match 'navigation/control_hierarchy' => 'navigation#control_hierarchy', :as => 'control_hierarchy'

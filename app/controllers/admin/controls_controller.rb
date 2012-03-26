@@ -232,4 +232,49 @@ class Admin::ControlsController < ApplicationController
     end
     redirect_to edit_control_path(bpc.control)
   end
+ 
+  # Another way to detach an implemented control
+  def destroy_implemented_control
+    cc = ControlControl.first(:control_id => params[:id], :implemented_control_id => params[:implemented_control_id])
+    if cc && cc.destroy
+      flash[:notice] = 'Control was successfully detached.'
+    else
+      flash[:error] = 'Failed'
+    end
+    redirect_to edit_control_path(Control.get(params[:id]))
+  end
+
+  def implement
+    unless @company
+      flash[:error] = 'Must set a company first.'
+      redirect_to controls_path
+      return
+    end
+    @origin = Control.get(params[:id])
+
+    @control = Control.new
+    @control.regulation = @company
+    @control.slug = "#{@company.slug}-#{@origin.slug}"
+    @control.implemented_controls << @origin
+    @control.title = @origin.title
+    @control.is_key = @origin.is_key
+    @control.frequency = @origin.frequency
+    @control.frequency_type = @origin.frequency_type
+    @control.fraud_related = @origin.fraud_related
+    @control.technical = @origin.technical
+    @control.assertion = @origin.assertion
+    @control.effective_at = @origin.effective_at
+    @control.business_area = @origin.business_area
+    
+    respond_to do |format|
+      if @control.save
+        format.html { redirect_to(edit_control_path(@control), :notice => 'Control was successfully created.') }
+        format.xml  { render :xml => @control, :status => :created, :location => @control }
+      else
+        flash.now[:error] = "Could not create."
+        format.html { redirect_to controls_path }
+        format.xml  { render :xml => @control.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
 end

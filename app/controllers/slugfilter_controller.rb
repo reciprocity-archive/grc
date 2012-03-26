@@ -26,6 +26,20 @@ class SlugfilterController < ApplicationController
     render :js => "window.location.reload()"
   end
 
+  # Update the default company.
+  def company_update
+    regulation_id = params[:regulation][:id] rescue nil
+    if !regulation_id.nil?
+      if regulation_id == ""
+        session[:company_id] = nil
+      else
+        session[:company_id] = regulation_id
+      end
+    end
+    # TODO restore page state (e.g. drilldown)
+    render :js => "window.location.reload()"
+  end
+
   # Update the audit cycle
   def cycle_update
     cycle_id = params[:cycle][:id] rescue nil

@@ -33,6 +33,9 @@
                 :title => control.regulation.description
             %td=display_time(control.updated_at)
             %td.last
+              -if !control.regulation.company?
+                =button_to pat(:implement), implement_control_path(control), :method => :post, :class => :button_to
+                ="|"
               =button_to pat(:edit), edit_control_path(control), :method => :get, :class => :button_to
               ="|"
               =button_to pat(:delete), control, :method => :delete, :class => :button_to

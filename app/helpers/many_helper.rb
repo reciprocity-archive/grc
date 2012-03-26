@@ -5,7 +5,8 @@ module ManyHelper
   #   edit_many(@control, :biz_process_controls, :biz_process) do |bpc|
   # 
   # will edit the BizProcesses attached to a control.
-  def edit_many(obj, association, other)
+  def edit_many(obj, association, other, options = {})
+    other_controller = options[:other_controller] || other.to_s.pluralize.to_sym
     return "" unless obj.id
     controller = obj.class.to_s.underscore.pluralize.to_sym
     destroy_method = "destroy_#{other}".to_sym
@@ -15,7 +16,7 @@ module ManyHelper
         if item
           haml_tag :td do
             haml_tag :strong do
-                haml_tag :a, :<, :href => url_for(:controller => other.to_s.pluralize.to_sym, :action => :edit, :id => item.id) do
+                haml_tag :a, :<, :href => url_for(:controller => other_controller, :action => :edit, :id => item.id) do
                   haml_concat item.display_name
                 end
             end

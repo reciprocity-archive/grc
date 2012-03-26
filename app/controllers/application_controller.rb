@@ -79,6 +79,9 @@ class ApplicationController < ActionController::Base
     if session[:regulation_id]
       @regulation = Regulation.get(session[:regulation_id])
     end
+    if session[:company_id]
+      @company = Regulation.get(session[:company_id])
+    end
     if session[:cycle_id]
       @cycle = Cycle.get(session[:cycle_id])
     end
