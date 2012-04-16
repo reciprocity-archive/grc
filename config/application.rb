@@ -1,5 +1,11 @@
 require File.expand_path('../boot', __FILE__)
 
+CMS_CONFIG = {
+  "SECRET_TOKEN" => ""
+}
+
+CMS_CONFIG["SECRET_TOKEN"] = ENV["SECRET_TOKEN"] if ENV["SECRET_TOKEN"]
+
 require 'rails/all'
 
 if defined?(Bundler)

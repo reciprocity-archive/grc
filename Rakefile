@@ -6,10 +6,12 @@ require 'rake'
 
 CmsRails::Application.load_tasks
 
-require 'rspec/core/rake_task'
+if Rails.env.development? || Rails.env.test?
+  require 'rspec/core/rake_task'
 
-RSpec::Core::RakeTask.new(:coverage) do |t|
-  ENV['COVERAGE'] = 'true'
-  t.fail_on_error = false
-  t.spec_opts = %w{--no-drb}
+  RSpec::Core::RakeTask.new(:coverage) do |t|
+    ENV['COVERAGE'] = 'true'
+    t.fail_on_error = false
+    t.spec_opts = %w{--no-drb}
+  end
 end
