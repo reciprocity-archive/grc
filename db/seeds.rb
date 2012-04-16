@@ -22,7 +22,7 @@ person2 = Person.create(:username => 'jane')
 sys = System.create(:title => 'System 1', :slug => 'SYS1', :description => 'x', :infrastructure => true, :owner => person2)
 sc = SystemControl.create(:control => company_ctl, :system => sys, :cycle => cycle, :state => :green)
 desc = DocumentDescriptor.create(:title => 'ACL')
-company_ctl.evidence_descriptors << acl
+company_ctl.evidence_descriptors << desc
 company_ctl.save
 doc = Document.create(:link => 'http://cde.com/', :title => 'Cde')
 bp = BizProcess.create(:title => 'BP1', :slug => 'BP1')
