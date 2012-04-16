@@ -1,12 +1,8 @@
-class ControlDocumentDescriptor
-  include DataMapper::Resource
+class ControlDocumentDescriptor < ActiveRecord::Base
   include AuthoredModel
 
-  property :created_at, DateTime
-  property :updated_at, DateTime
+  belongs_to :control
+  belongs_to :evidence_descriptor, :class_name => 'DocumentDescriptor'
 
-  belongs_to :control, :key => true
-  belongs_to :evidence_descriptor, 'DocumentDescriptor', :key => true
-
-  is_versioned_ext :on => [:updated_at]
+  is_versioned_ext
 end

@@ -3,7 +3,7 @@ class Admin::DocumentDescriptorsController < ApplicationController
 
   # List Document Descriptors
   def index
-    @document_descriptors = DocumentDescriptor.all
+    @document_descriptors = DocumentDescriptor.where({})
 
     respond_to do |format|
       format.html
@@ -13,7 +13,7 @@ class Admin::DocumentDescriptorsController < ApplicationController
 
   # Show a descriptor
   def show
-    @document_descriptor = DocumentDescriptor.get(params[:id])
+    @document_descriptor = DocumentDescriptor.find(params[:id])
 
     respond_to do |format|
       format.html
@@ -33,7 +33,7 @@ class Admin::DocumentDescriptorsController < ApplicationController
 
   # Edit descriptor form
   def edit
-    @document_descriptor = DocumentDescriptor.get(params[:id])
+    @document_descriptor = DocumentDescriptor.find(params[:id])
   end
 
   # Create a descriptor
@@ -54,10 +54,10 @@ class Admin::DocumentDescriptorsController < ApplicationController
 
   # Update a descriptor
   def update
-    @document_descriptor = DocumentDescriptor.get(params[:id])
+    @document_descriptor = DocumentDescriptor.find(params[:id])
 
     respond_to do |format|
-      if @document_descriptor.update(params[:document_descriptor])
+      if @document_descriptor.update_attributes(params[:document_descriptor])
         format.html { redirect_to(edit_document_descriptor_path(@document_descriptor), :notice => 'DocumentDescriptor was successfully updated.') }
         format.xml  { head :ok }
       else
@@ -70,7 +70,7 @@ class Admin::DocumentDescriptorsController < ApplicationController
 
   # Delete a descriptor
   def destroy
-    @document_descriptor = DocumentDescriptor.get(params[:id])
+    @document_descriptor = DocumentDescriptor.find(params[:id])
     @document_descriptor.destroy
 
     respond_to do |format|

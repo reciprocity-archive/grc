@@ -1,30 +1,26 @@
 # A regulation
 #
 # The top of the Regulation -> CO -> Control hierarchy
-class Regulation
-  include DataMapper::Resource
+class Regulation < ActiveRecord::Base
   include AuthoredModel
   include SluggedModel
 
-  before :save, :upcase_slug
+  before_save :upcase_slug
 
-  property :id, Serial
-  property :title, String, :required => true
-  property :slug, String, :required => true
-  property :description, Text
-  property :company, Boolean, :default => false, :required => true
+  after_initialize do
+    self.company = false if self.company.nil?
+  end
 
-  has n, :control_objectives, :order => :slug
+  validates :title, :slug, :presence => true
 
-  belongs_to :source_document, 'Document', :required => false
-  belongs_to :source_website, 'Document', :required => false
+  has_many :control_objectives, :order => :slug
+
+  belongs_to :source_document, :class_name => 'Document'
+  belongs_to :source_website, :class_name => 'Document'
   
   def display_name
     slug
   end
 
-  property :created_at, DateTime
-  property :updated_at, DateTime
-
-  is_versioned_ext :on => [:updated_at]
+  is_versioned_ext
 end

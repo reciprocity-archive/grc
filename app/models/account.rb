@@ -1,41 +1,26 @@
 # class to manage user accounts on CMS.  Note that this class is different
 # than the Person class, because not all people responsible for compliance will
 # have an account.
-class Account
-  include DataMapper::Resource
+class Account < ActiveRecord::Base
   include AuthoredModel
-  include DataMapper::Validate
   attr_accessor :password, :password_confirmation
 
-  before :save, :encrypt_password
-  before :save do
+  before_save :encrypt_password
+  before_save do
     reset_persistence_token if reset_persistence_token?
   end
 
-  # Properties
-  property :id,               Serial
-  property :username,         String
-  property :name,             String
-  property :surname,          String
-  property :email,            String
-  property :crypted_password, String, :length => 1..1000
-  property :role,             String
-  property :persistence_token, String, :length => 1..256
-
-  property :updated_at, DateTime
-  property :created_at, DateTime
-
-  is_versioned_ext :on => [:updated_at]
+  is_versioned_ext
 
   # Validations
   validates_presence_of      :email, :role
   validates_presence_of      :password,                          :if => :password_required
   validates_presence_of      :password_confirmation,             :if => :password_required
-  validates_length_of        :password, :min => 4, :max => 40,   :if => :password_required
+  validates_length_of        :password, :minimum => 4, :maximum => 40,   :if => :password_required
   validates_confirmation_of  :password,                          :if => :password_required
-  validates_length_of        :email,    :min => 3, :max => 100
+  validates_length_of        :email,    :minimum => 3, :maximum => 100
   validates_uniqueness_of    :email,    :case_sensitive => false
-  validates_format_of        :email,    :with => :email_address
+  #validates_format_of        :email,    :with => :email_address
   validates_format_of        :role,     :with => /[A-Za-z]/
 
   def password=(password)
@@ -47,7 +32,7 @@ class Account
   # This method is for authentication purpose
   #
   def self.authenticate(email, password)
-    account = first(:conditions => { :email => email }) if email.present?
+    account = self.where(:email => email).first if email.present?
     account && account.has_password?(password) ? account : nil
   end
 
@@ -55,7 +40,7 @@ class Account
   # This method is used by AuthenticationHelper
   #
   def self.find_by_id(id)
-    get(id) rescue nil
+    find(id) rescue nil
   end
 
   def valid_password?(password)
@@ -66,22 +51,20 @@ class Account
   # These methods are for ActiveRecord compatibility to make the 
   # authlogic gem work
   #
-  def changed?
-    dirty?
-  end
 
   def display_name
     email
   end
 
-  def self.column_names
-    []
-  end
+  # TODO: Why was this here?  (Commented out on move to AR)
+  #def self.column_names
+  #  []
+  #end
 
-  def self.with_scope(scope)
-    raise "cannot handle scopes" if scope[:find] && scope[:find] != {}
-    yield
-  end
+  #def self.with_scope(scope)
+  #  raise "cannot handle scopes" if scope[:find] && scope[:find] != {}
+  #  yield
+  #end
 
   ##
   # Other authlogic configuration
@@ -89,16 +72,17 @@ class Account
     :email
   end
 
-  def self.primary_key
-    :id
-  end
+  # Breaks .create()
+  #def self.primary_key
+  #  :id
+  #end
 
   def self.find_by_smart_case_login_field(value)
-    first(:email => value)
+    self.where(:email => value).first
   end
 
   def self.find_by_persistence_token(value)
-    first(:persistence_token => value)
+    where(:persistence_token => value).first
   end
 
   ##
@@ -129,7 +113,7 @@ class Account
     records = nil
     i = 0
     begin
-      records = all(:limit => 50, :offset => i)
+      records = self.limit(50).offset(i)
       records.each { |r| r.reset_persistence_token! }
       i += 50
     end while !records.blank?

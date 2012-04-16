@@ -17,7 +17,7 @@ class Admin::AccountsController < ApplicationController
 
   # Show one account
   def show
-    @account = Account.get(params[:id])
+    @account = Account.find(params[:id])
 
     respond_to do |format|
       format.html
@@ -37,7 +37,7 @@ class Admin::AccountsController < ApplicationController
 
   # Edit account form
   def edit
-    @account = Account.get(params[:id])
+    @account = Account.find(params[:id])
   end
 
   # Create an account
@@ -58,10 +58,10 @@ class Admin::AccountsController < ApplicationController
 
   # Update an account
   def update
-    @account = Account.get(params[:id])
+    @account = Account.find(params[:id])
 
     respond_to do |format|
-      if @account.update(params[:account])
+      if @account.update_attributes(params[:account])
         if params[:account][:password]
           @account.crypted_password = nil
           @account.save
@@ -79,7 +79,7 @@ class Admin::AccountsController < ApplicationController
 
   # Delete an account
   def destroy
-    @account = Account.get(params[:id])
+    @account = Account.find(params[:id])
     @account.destroy
 
     respond_to do |format|

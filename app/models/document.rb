@@ -3,36 +3,36 @@
 # Can either be linked by a URL or attached from Google Docs.
 #
 # Evidence is associated with a Document Descriptor
-class Document
-  include DataMapper::Resource
+class Document < ActiveRecord::Base
   include AuthoredModel
   VALID_SCHEMES = ['http', 'https']
 
-  validates_with_block :link do
+  after_initialize do
+    self.reviewed = false if self.reviewed.nil?
+    self.good = true if self.good.nil?
+  end
+
+  validate :link do
     if link.nil? or VALID_SCHEMES.include?(link.scheme)
       true
     else
-      [false, "Scheme must be one of #{VALID_SCHEMES.join(',')}"]
+      errors.add(:link, "Scheme must be one of #{VALID_SCHEMES.join(', ')}")
     end
   end
 
-  property :id, Serial
-  property :title, String, :length => 256
-  property :link, URI, :length => 300, :unique_index => true
+  belongs_to :document_descriptor
 
-  belongs_to :document_descriptor, :required => false
-
-  property :reviewed, Boolean, :default => false, :required => true
-  property :good, Boolean, :default => true, :required => false
+  validates :link,     :uniqueness => true
 
   def display_name
     title
   end
 
-  property :created_at, DateTime
-  property :updated_at, DateTime
+  def link
+    read_attribute(:link) && URI(read_attribute(:link))
+  end
 
-  is_versioned_ext :on => [:updated_at]
+  is_versioned_ext
 
   def complete?
     !link.nil? && !link.to_s.blank?

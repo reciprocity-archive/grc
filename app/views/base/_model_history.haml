@@ -3,7 +3,7 @@
 -unless object.versions.empty?
   .block
     -first = true
-    -versions = object.versions.all(:order => :is_versioned_id).to_a + [object]
+    -versions = object.versions.all + [object]
     -prev_version = versions.shift
     .block
       Created at
@@ -23,10 +23,10 @@
         %h4
           Connected
           =relation.field.humanize
-        -through.child_model::Version.all(through.child_key.first.name => object.id).each do |version|
+        -through.child_model::Version.where(through.child_key.first.name => object.id).each do |version|
           .block
-            -other_id = relation.via.child_key.get(version)
-            -other = relation.child_model.get(other_id)
+            -other_id = relation.via.child_key.find(version)
+            -other = relation.child_model.find(other_id)
             -if version.is_destroyed
               Disconnected at
             -else

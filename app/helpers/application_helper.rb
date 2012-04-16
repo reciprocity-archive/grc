@@ -33,8 +33,10 @@ module ApplicationHelper
   def filter_system_controls(collection)
     collection = collection.slugfilter(session[:slugfilter])
     if session[:regulation_id]
-      @regulation = Regulation.get(session[:regulation_id])
-      collection = collection.all({:control => { :regulation => @regulation }});
+      @regulation = Regulation.find(session[:regulation_id])
+      collection = collection.
+        joins(:control).
+        where({:control => { :regulation_id => @regulation.id }})
     end
 
     return collection
@@ -51,12 +53,14 @@ module ApplicationHelper
     end
 
     if session[:regulation_id]
-      @regulation = Regulation.get(session[:regulation_id])
-      control_search[:regulation] = @regulation
+      @regulation = Regulation.find(session[:regulation_id])
+      control_search[:regulation_id] = @regulation
     end
 
     return collection if control_search.empty?
-    return collection.all(:system_controls => {:control => control_search})
+    return collection.
+      joins(:system_controls => :control).
+      where(:system_controls => {:controls => control_search})
   end
 
   # Filter Biz Processes by slug and/or the regulation of their attached controls.
@@ -70,12 +74,14 @@ module ApplicationHelper
     end
 
     if session[:regulation_id]
-      @regulation = Regulation.get(session[:regulation_id])
-      co_search[:regulation] = @regulation
+      @regulation = Regulation.find(session[:regulation_id])
+      co_search[:regulation_id] = @regulation
     end
 
-    return collection if co_search.empty?
-    return collection.all(:biz_process_control_objectives => { :control_objective => co_search})
+    return collection.where({}) if co_search.empty?
+    return collection.
+      joins(:biz_process_control_objectives => :control_objective).
+      where(:biz_process_control_objectives => { :control_objectives => co_search})
   end
 
   # Shorthand humanized text for admin pages
@@ -113,11 +119,11 @@ module ApplicationHelper
   def display_compact(model, object, prop)
     value = object.send(prop.name)
     if prop.name == :modified_by
-      author = Account.get(value)
+      author = Account.find(value)
       link_to author.display_name, url_for(author)
     elsif prop.name.to_s.end_with?('_id')
       relation = prop.name.to_s.sub(/_id$/, '').to_sym
-      other = model.relationships[relation].parent_model.get(value)
+      other = model.relationships[relation].parent_model.find(value)
       if other
         link_to other.display_name, url_for(other)
       else

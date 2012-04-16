@@ -4,7 +4,7 @@ module Admin::BizProcessesHelper
 
     bp.control_objectives = []
     co_ids.each do |co_id|
-      co = ControlObjective.get(co_id)
+      co = ControlObjective.find(co_id)
       bp.control_objectives << co
     end
 
@@ -12,7 +12,7 @@ module Admin::BizProcessesHelper
 
     bp.controls = []
     control_ids.each do |control_id|
-      control = Control.get(control_id)
+      control = Control.find(control_id)
       bp.controls << control
     end
 
@@ -20,7 +20,7 @@ module Admin::BizProcessesHelper
 
     bp.systems = []
     system_ids.each do |system_id|
-      system = System.get(system_id)
+      system = System.find(system_id)
       bp.systems << system
     end
   end

@@ -12,14 +12,14 @@ class NavigationController < ApplicationController
     end
 
     control_map = {}
-    Control.all(:regulation_id => session[:regulation_id]).each do |c|
+    Control.where(:regulation_id => session[:regulation_id]).each do |c|
       c.control_objectives.each do |co|
         control_map[co.id] ||= []
         control_map[co.id] << { :type => 'c', :label => c.title, :slug => c.slug, :id => c.id }
       end
     end
 
-    cos = ControlObjective.all(:regulation_id => session[:regulation_id]).map do |co|
+    cos = ControlObjective.where(:regulation_id => session[:regulation_id]).map do |co|
       { :type => 'co', :label => co.title, :slug => co.slug, :id => co.id, :children => control_map[co.id] || [] }
     end
 

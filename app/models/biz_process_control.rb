@@ -3,19 +3,25 @@
 # Some additional attributes are attached, including the state of the control
 # and a ticket (if state is not green).  Since a control can apply to multiple processes,
 # these attributes cannot be attached to it directly.
-class BizProcessControl
-  include DataMapper::Resource
+class BizProcessControl < ActiveRecord::Base
   include AuthoredModel
 
-  property :id, Serial
-  property :state, Enum[*ControlState::VALUES], :default => :green, :required => true
-  property :ticket, String
+  after_initialize do
+    self.state = :green if self.state.nil?
+  end
+
+  validates :state, :presence => true
 
   belongs_to :control
   belongs_to :biz_process
 
-  property :created_at, DateTime
-  property :updated_at, DateTime
+  is_versioned_ext
 
-  is_versioned_ext :on => [:updated_at]
+  def state
+    ControlState::VALUES[read_attribute(:state)]
+  end
+
+  def state=(value)
+    write_attribute(:state, ControlState::VALUES.index(value))
+  end
 end

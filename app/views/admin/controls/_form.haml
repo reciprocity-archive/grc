@@ -1,6 +1,6 @@
 .group
   =f.label :regulation_id
-  -if !@control.new?
+  -if !@control.new_record?
     =link_to @control.regulation.display_name,
       edit_regulation_path(@control.regulation)
   -else
@@ -15,7 +15,7 @@
         }, "json");
       });
 
--if !@control.new?
+-if !@control.new_record?
   .group
     =f.label :control_objectives_id
     =f.collection_select :co_ids, @control.regulation.control_objectives, :id, :display_name, {}, {:class => :collection, :multiple => true}
@@ -48,11 +48,11 @@
 
 .group
   =f.label :frequency_type
-  =f.select :frequency_type, Control.properties[:frequency_type].flag_map.to_a.sort.map { |ind, name| name }, {:class => :enum}
+  =f.select :frequency_type, Control::FREQUENCIES, {:class => :enum}
 
 .group
   =f.check_box :is_key, :class => :check_box
-  =f.label :key_control
+  =f.label :is_key, "Key control"
 
 .group
   =f.check_box :fraud_related, :class => :check_box
@@ -111,7 +111,7 @@
         =bpc.ticket
   -edit_many_attach(@control, :biz_process_controls, :biz_process)
 
-=render :partial => 'base/model_history', :locals => { :object => @control }
+/=render :partial => 'base/model_history', :locals => { :object => @control }
 /  %hr.section
 /  %h3 Systems
 /  -edit_children(@control, :system)

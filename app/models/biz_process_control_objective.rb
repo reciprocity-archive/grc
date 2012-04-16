@@ -1,7 +1,7 @@
-class ControlControlObjective < ActiveRecord::Base
+class BizProcessControlObjective < ActiveRecord::Base
   include AuthoredModel
 
-  belongs_to :control
+  belongs_to :biz_process
   belongs_to :control_objective
 
   is_versioned_ext

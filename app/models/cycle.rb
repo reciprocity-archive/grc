@@ -1,20 +1,18 @@
 # An Audit Cycle
 #
 # Used to group evidence for a particular audit of a regulation
-class Cycle
-  include DataMapper::Resource
+# start_at is the audit period start date.  If missing, this is a continuous process.
+class Cycle < ActiveRecord::Base
   include AuthoredModel
 
-  property :id, Serial
+  after_initialize do
+    self.complete = false if self.complete.nil?
+  end
 
   # The regulation being audited
-  belongs_to :regulation, :required => true
+  belongs_to :regulation
 
-  # When the audit period start date.  If missing, this is a continuous process.
-  property :start_at, Date
-
-  # Whether the audit is archived (no modifications allowed)
-  property :complete, Boolean, :default => false, :required => true
+  validates :regulation, :presence => true
 
   def slug
     regulation.slug + "-" + (start_at.strftime("%Y-%m-%d") rescue "-")
@@ -24,8 +22,5 @@ class Cycle
     regulation.display_name + " " + (start_at.strftime("%Y-%m-%d") rescue "-")
   end
 
-  property :created_at, DateTime
-  property :updated_at, DateTime
-
-  is_versioned_ext :on => [:updated_at]
+  is_versioned_ext
 end

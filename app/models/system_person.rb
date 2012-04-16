@@ -1,15 +1,23 @@
-class SystemPerson
-  include DataMapper::Resource
+class SystemPerson < ActiveRecord::Base
   include AuthoredModel
 
-  property :id, Serial
-  property :role, Enum[:tech, :business], :default => :tech, :required => true
+  after_initialize do
+    self.role = :tech if self.role.nil?
+  end
 
-  belongs_to :person, :key => true
-  belongs_to :system, :key => true
+  validates :role, :presence => true
 
-  property :created_at, DateTime
-  property :updated_at, DateTime
+  ROLES = [:tech, :business]
+  def role
+    ROLES[read_attribute(:role)]
+  end
 
-  is_versioned_ext :on => [:updated_at]
+  def role=(value)
+    write_attribute(:role, ROLES.index(value))
+  end
+
+  belongs_to :person
+  belongs_to :system
+
+  is_versioned_ext
 end

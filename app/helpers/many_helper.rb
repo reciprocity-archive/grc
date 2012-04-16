@@ -150,23 +150,30 @@ module ManyHelper
     @right_class = opts[:right_class]
     right_class_underscore = @right_class.to_s.underscore
 
-    @lefts = opts[:lefts] || left_class.all(:order => :slug)
+    @lefts = opts[:lefts] || left_class.order(:slug)
 
     @right_ids = opts[:right_ids] || (@right_class.to_s.underscore + "_ids").to_sym
 
     id = params[:id]
     if id.nil? || id == "0"
       if @lefts.empty?
-        id = left_class.first.id
+        id = nil #left_class.first.id
       else
         id = @lefts.first.id
       end
     end
 
-    @left = left_class.get(id)
-    @rights = @right_class.send("for_#{left_class_underscore}".to_sym, @left) rescue @right_class.all
-    @rights = @rights.all(:order => :slug) rescue @rights.all
-    @show_slugfilter = opts[:show_slugfilter]
+    if id
+      @left = left_class.find(id)
+      #puts "#{@left}-#{@left.id}"
+      #puts "left_class: #{@right_class}.for_#{left_class_underscore}"
+      @rights = @right_class.send("for_#{left_class_underscore}".to_sym, @left) #rescue @rights_class
+      #puts "rights: #{@rights} #{@rights && @rights.count}"
+      #puts "#{@right_class.count}"
+      #@rights ||= @right_class.where({})
+      @rights = @rights.order(:slug).all rescue @rights.all
+      @show_slugfilter = opts[:show_slugfilter]
+    end
   end
 
   # Many to many AJAX page - update.
@@ -181,8 +188,13 @@ module ManyHelper
 
     right_ids = opts[:right_ids] || "#{right_class_underscore}_ids"
 
-    left = left_class.get(params[:id])
-    ids = params[left_class_underscore.to_sym][right_ids].map {|x| x.to_i}
+    left = left_class.find(params[:id])
+    if params[left_class_underscore.to_sym]
+      ids = params[left_class_underscore.to_sym][right_ids].map {|x| x.to_i}
+    else
+      ids = []
+    end
+
 
     # left.rights = []
     if left.authored_update(current_user, right_ids.to_sym => ids)

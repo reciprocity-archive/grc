@@ -1,18 +1,24 @@
 # System to CO many to many relationship
-class SystemControlObjective
-  include DataMapper::Resource
+# `state` is the rolled up state from the System to Control association
+class SystemControlObjective < ActiveRecord::Base
   include AuthoredModel
 
-  property :id, Serial
+  after_initialize do
+    self.state = :green if self.state.nil?
+  end
 
-  # This is the rolled up state from the System to Control association
-  property :state, Enum[*ControlState::VALUES], :default => :green, :required => true
+  validates :state, :presence => true
 
   belongs_to :control_objective
   belongs_to :system
 
-  property :created_at, DateTime
-  property :updated_at, DateTime
+  is_versioned_ext
 
-  is_versioned_ext :on => [:updated_at]
+  def state
+    ControlState::VALUES[read_attribute(:state)]
+  end
+
+  def state=(value)
+    write_attribute(:state, ControlState::VALUES.index(value))
+  end
 end

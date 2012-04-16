@@ -1,12 +1,8 @@
-class BizProcessDocument
-  include DataMapper::Resource
+class BizProcessDocument < ActiveRecord::Base
   include AuthoredModel
 
-  property :created_at, DateTime
-  property :updated_at, DateTime
+  belongs_to :biz_process
+  belongs_to :policy, :class_name => 'Document'
 
-  belongs_to :biz_process, :key => true
-  belongs_to :policy, 'Document', :key => true
-
-  is_versioned_ext :on => [:updated_at]
+  is_versioned_ext
 end

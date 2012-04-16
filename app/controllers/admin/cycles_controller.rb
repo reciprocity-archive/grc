@@ -3,7 +3,7 @@ class Admin::CyclesController < ApplicationController
 
   # List cycles
   def index
-    @cycles = Cycle.all(:order => [:regulation_id, :start_at])
+    @cycles = Cycle.order([:regulation_id, :start_at])
 
     respond_to do |format|
       format.html
@@ -13,7 +13,7 @@ class Admin::CyclesController < ApplicationController
 
   # Show a doc
   def show
-    @cycle = Cycle.get(params[:id])
+    @cycle = Cycle.find(params[:id])
 
     respond_to do |format|
       format.html
@@ -32,7 +32,7 @@ class Admin::CyclesController < ApplicationController
   end
 
   def new_clone
-    @other_cycle = Cycle.get(params[:id])
+    @other_cycle = Cycle.find(params[:id])
     @cycle = Cycle.new
     @cycle.regulation = @other_cycle.regulation
     @cycle.start_at ||= @other_cycle.start_at
@@ -45,18 +45,18 @@ class Admin::CyclesController < ApplicationController
 
   # Edit doc form
   def edit
-    @cycle = Cycle.get(params[:id])
+    @cycle = Cycle.find(params[:id])
   end
 
   # Create a doc
   def clone
     @cycle = Cycle.new(params[:cycle])
-    @other_cycle = Cycle.get(params[:id])
+    @other_cycle = Cycle.find(params[:id])
     @cycle.regulation = @other_cycle.regulation
     res = []
     res << @cycle.save
     if res.all?
-      SystemControl.all(:cycle => @other_cycle).each do |sc|
+      SystemControl.where(:cycle_id => @other_cycle).each do |sc|
         res << SystemControl.create(:control => sc.control, :system => sc.system, :cycle => @cycle)
       end
     end
@@ -94,10 +94,10 @@ class Admin::CyclesController < ApplicationController
 
   # Update a doc
   def update
-    @cycle = Cycle.get(params[:id])
+    @cycle = Cycle.find(params[:id])
 
     respond_to do |format|
-      if @cycle.update(params[:cycle])
+      if @cycle.update_attributes(params[:cycle])
         format.html { redirect_to(edit_cycle_path(@cycle), :notice => 'Cycle was successfully updated.') }
         format.xml  { head :ok }
       else
@@ -110,7 +110,7 @@ class Admin::CyclesController < ApplicationController
 
   # Delete a doc
   def destroy
-    @cycle = Cycle.get(params[:id])
+    @cycle = Cycle.find(params[:id])
     @cycle.destroy
 
     respond_to do |format|

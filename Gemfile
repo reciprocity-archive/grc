@@ -5,9 +5,12 @@ if File.exist? 'Gemfile.local'
 end
 
 RAILS_VERSION = '~> 3.1.1'
-DM_VERSION    = '~> 1.2.0'
 
-gem 'gdata', '1.1.2', :path => ENV['HOME'] + '/localgems/gdata'
+#gem 'gdata-ruby-util', '1.1.2'
+gem 'gdata_19',
+  :git => 'https://github.com/tokumine/GData.git',
+  :ref => '14e5a8a1381f4d50bc99ed083d89101f5111e3ea',
+  :require => 'gdata'
 
 platforms :ruby do
   gem 'sqlite3'
@@ -20,10 +23,6 @@ platforms :jruby do
   gem 'therubyrhino'
 end
 
-group(:production) do
-  gem 'dm-mysql-adapter',     DM_VERSION
-end
-
 gem 'authlogic'
 #gem 'dalli'
 gem 'builder'
@@ -31,30 +30,18 @@ gem 'json'
 
 gem 'acl9'
 
-gem 'activesupport',      RAILS_VERSION, :require => 'active_support'
-gem 'actionpack',         RAILS_VERSION, :require => 'action_pack'
-gem 'actionmailer',       RAILS_VERSION, :require => 'action_mailer'
-gem 'railties',           RAILS_VERSION, :require => 'rails'
+gem 'rails', RAILS_VERSION
 
 gem 'haml', '~> 3.0.25'
 gem 'sass'
 gem 'haml-rails'
 
+# Used to be pulled in by dm-types
+gem 'bcrypt-ruby'
+
 gem 'prawn' # PDF generation
 
-gem 'dm-rails',          :path => ENV['HOME'] + '/localgems/dm-rails'
-gem 'dm-sqlite-adapter', DM_VERSION
-
-gem 'dm-migrations',        DM_VERSION
-gem 'dm-types',             DM_VERSION
-gem 'dm-validations',       DM_VERSION
-gem 'dm-constraints',       DM_VERSION
-gem 'dm-transactions',      DM_VERSION
-gem 'dm-aggregates',        DM_VERSION
-gem 'dm-timestamps',        DM_VERSION
-gem 'dm-observer',          DM_VERSION
-#gem 'dm-is-versioned',      '1.3.0.beta', :git => 'http://github.com/devrandom1/dm-is-versioned.git'
-gem 'dm-is-versioned',      '1.3.0.beta', :path => '../dm-is-versioned'
+gem 'paper_trail', '~> 2'
 
 group(:development, :test) do
 

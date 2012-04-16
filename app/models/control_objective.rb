@@ -6,41 +6,36 @@ require 'slugged_model'
 # as children.
 #
 # The slug of a CO has to have the slug of the regulation as prefix.
-class ControlObjective
-  include DataMapper::Resource
+class ControlObjective < ActiveRecord::Base
   include AuthoredModel
-  include DataMapper::Validate
   include SluggedModel
 
-  before :save, :upcase_slug
+  before_save :upcase_slug
 
-  property :id, Serial
-  property :title, String, :required => true, :length => 255
-  property :slug, String, :required => true
+  #validates_presence_of :title
+  #validates_presence_of :slug
 
-  validates_with_block :slug do
+  validate :slug do
     validate_slug
   end
 
-  property :description, Text
-
-  has n, :controls, :through => :control_control_objectives, :order => :slug
-  has n, :control_control_objectives
+  has_many :controls, :through => :control_control_objectives, :order => :slug
+  has_many :control_control_objectives
   belongs_to :regulation
 
   # All COs associated with a regulation
   def self.all_non_company
-    all(:regulation => { :company => false }, :order => :slug)
+    joins(:regulation).where(:regulations => { :company => false }).order(:slug)
   end
 
   # All COs associated with a company "regulation"
   def self.all_company
-    all(:regulation => { :company => true }, :order => :slug)
+    joins(:regulation).where(:regulations => { :company => true }).order(:slug)
   end
 
   # All COs that could be associated with a control (in same regulation)
   def self.for_control(control)
-    all(:regulation => control.regulation, :order => :slug)
+    where(:regulation_id => control.regulation_id).order(:slug)
   end
 
   # All COs that could be associated with a system (any company CO)
@@ -72,8 +67,5 @@ class ControlObjective
     systems.map { |s| s.id }
   end
 
-  property :created_at, DateTime
-  property :updated_at, DateTime
-
-  is_versioned_ext :on => [:updated_at]
+  is_versioned_ext
 end

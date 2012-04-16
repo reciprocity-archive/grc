@@ -1,18 +1,12 @@
 # A Person
 #
 # Normally an owner or otherwise responsbile for an audit function.
-class Person
-  include DataMapper::Resource
+class Person < ActiveRecord::Base
   include AuthoredModel
 
-  property :id, Serial
-  property :username, String, :required => true
-  property :name, String
+  validates :username, :presence => true
 
-  property :created_at, DateTime
-  property :updated_at, DateTime
-
-  is_versioned_ext :on => [:updated_at]
+  is_versioned_ext
   
   def display_name
     username

@@ -16,12 +16,13 @@
             %a{:href => url_for(:id => left_object.id)}
               &~left_object.display_name
   #right
-    =form_for @left, :url => {:id => @left.id}, :method => :put, :html => {:class => :form} do |f|
-      .group.navform.wat-cf
-        =f.submit pat(:save), :class => :button
-        =link_to :cancel, :id => @left.id
+    -if @left
+      =form_for @left, :url => {:id => @left.id}, :method => :put, :html => {:class => :form} do |f|
+        .group.navform.wat-cf
+          =f.submit pat(:save), :class => :button
+          =link_to :cancel, :id => @left.id
 
-      %h3=pat(@right_class.to_s.underscore)
-      =f.collection_select(@right_ids, @rights, :id, :display_name, {}, {:multiple => true})
-      :javascript
-        $('##{left_class}_#{@right_ids}').manyselect({ });
+        %h3=pat(@right_class.to_s.underscore)
+        =f.collection_select(@right_ids, @rights, :id, :display_name, {}, {:multiple => true})
+        :javascript
+          $('##{left_class}_#{@right_ids}').manyselect({ });

@@ -1,12 +1,8 @@
-class DocumentSystem
-  include DataMapper::Resource
+class DocumentSystem < ActiveRecord::Base
   include AuthoredModel
 
-  property :created_at, DateTime
-  property :updated_at, DateTime
+  belongs_to :document
+  belongs_to :system
 
-  belongs_to :document, :key => true
-  belongs_to :system, :key => true
-
-  is_versioned_ext :on => [:updated_at]
+  is_versioned_ext
 end

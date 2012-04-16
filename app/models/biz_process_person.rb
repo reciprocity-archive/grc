@@ -1,15 +1,24 @@
-class BizProcessPerson
-  include DataMapper::Resource
+class BizProcessPerson < ActiveRecord::Base
   include AuthoredModel
 
-  property :id, Serial
-  property :role, Enum[:tech, :business], :default => :tech, :required => true
+  ROLES = [:tech, :business]
 
-  belongs_to :person, :key => true
-  belongs_to :biz_process, :key => true
+  after_initialize do
+    self.role = :tech if self.role.nil?
+  end
 
-  property :created_at, DateTime
-  property :updated_at, DateTime
+  validates :role, :presence => true
 
-  is_versioned_ext :on => [:updated_at]
+  belongs_to :person
+  belongs_to :biz_process
+
+  is_versioned_ext
+
+  def role
+    ROLES[read_attribute(:role)]
+  end
+
+  def role=(value)
+    write_attribute(:role, ROLES.index(value))
+  end
 end

@@ -13,7 +13,7 @@
         =link_to h(@other_cycle.display_name), @other_cycle
       .block
         System-Control connections:
-        =SystemControl.count(:cycle => @other_cycle)
+        =SystemControl.count(:cycle_id => @other_cycle)
       =form_for @cycle, :url => clone_cycle_path(@other_cycle), :method => :put, :html => {:class => :form} do |f|
         .group
           =f.label :start_at

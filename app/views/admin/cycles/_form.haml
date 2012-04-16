@@ -1,6 +1,6 @@
 .group
   =f.label :regulation_id
-  -if !@cycle.new?
+  -if !@cycle.new_record?
     =link_to @cycle.regulation.display_name,
       edit_regulation_path(@cycle.regulation)
   -else

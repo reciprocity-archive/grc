@@ -3,7 +3,7 @@ class Admin::PeopleController < ApplicationController
 
   # List People
   def index
-    @people = Person.all
+    @people = Person.where({})
 
     respond_to do |format|
       format.html
@@ -13,7 +13,7 @@ class Admin::PeopleController < ApplicationController
 
   # Show a person
   def show
-    @person = Person.get(params[:id])
+    @person = Person.find(params[:id])
 
     respond_to do |format|
       format.html
@@ -33,7 +33,7 @@ class Admin::PeopleController < ApplicationController
 
   # Edit person form
   def edit
-    @person = Person.get(params[:id])
+    @person = Person.find(params[:id])
   end
 
   # Create a person
@@ -54,10 +54,10 @@ class Admin::PeopleController < ApplicationController
 
   # Update a person
   def update
-    @person = Person.get(params[:id])
+    @person = Person.find(params[:id])
 
     respond_to do |format|
-      if @person.update(params[:person])
+      if @person.update_attributes(params[:person])
         format.html { redirect_to(edit_person_path(@person), :notice => 'Person was successfully updated.') }
         format.xml  { head :ok }
       else
@@ -71,7 +71,7 @@ class Admin::PeopleController < ApplicationController
   # Destroy a person 
   # TODO: what about objects linking here?
   def destroy
-    @person = Person.get(params[:id])
+    @person = Person.find(params[:id])
     @person.destroy
 
     respond_to do |format|

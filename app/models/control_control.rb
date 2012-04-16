@@ -1,12 +1,8 @@
-class ControlControl
-  include DataMapper::Resource
+class ControlControl < ActiveRecord::Base
   include AuthoredModel
 
-  property :created_at, DateTime
-  property :updated_at, DateTime
+  belongs_to :control
+  belongs_to :implemented_control, :class_name => 'Control'
 
-  belongs_to :control, :key => true
-  belongs_to :implemented_control, 'Control', :key => true
-
-  is_versioned_ext :on => [:updated_at]
+  is_versioned_ext
 end

@@ -3,7 +3,7 @@ class Admin::DocumentsController < ApplicationController
 
   # List documents
   def index
-    @documents = Document.all
+    @documents = Document.where({})
 
     respond_to do |format|
       format.html
@@ -13,7 +13,7 @@ class Admin::DocumentsController < ApplicationController
 
   # Show a doc
   def show
-    @document = Document.get(params[:id])
+    @document = Document.find(params[:id])
 
     respond_to do |format|
       format.html
@@ -33,7 +33,7 @@ class Admin::DocumentsController < ApplicationController
 
   # Edit doc form
   def edit
-    @document = Document.get(params[:id])
+    @document = Document.find(params[:id])
   end
 
   # Create a doc
@@ -54,10 +54,10 @@ class Admin::DocumentsController < ApplicationController
 
   # Update a doc
   def update
-    @document = Document.get(params[:id])
+    @document = Document.find(params[:id])
 
     respond_to do |format|
-      if @document.update(params[:document])
+      if @document.update_attributes(params[:document])
         format.html { redirect_to(edit_document_path(@document), :notice => 'Document was successfully updated.') }
         format.xml  { head :ok }
       else
@@ -70,7 +70,7 @@ class Admin::DocumentsController < ApplicationController
 
   # Delete a doc
   def destroy
-    @document = Document.get(params[:id])
+    @document = Document.find(params[:id])
     @document.destroy
 
     respond_to do |format|

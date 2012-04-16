@@ -8,7 +8,7 @@ module AuthoredModel
     tparams = {}
     trels = {}
     params.each do |key, value|
-      property = model.properties[key]
+      property = self.class.columns_hash[key.to_s.singularize.to_sym]
       if property && property.respond_to?(:typecast)
         # typecast scalar properties
         value = property.typecast(value)
@@ -16,61 +16,64 @@ module AuthoredModel
       elsif key.to_s.ends_with?('_ids')
         # handle association changes
         base_key = key.to_s.sub(/_ids$/, '').pluralize
-        relation = model.relationships[base_key]
-        raise "missing association #{base_key}" unless relation
 
-        existing = relation.get(self)
+        relation = association(base_key.to_sym)
+        existing = send(base_key).all
         existing_ids = existing.map {|e| e.id}
         new_ids = value - existing_ids
         destroy_ids = existing_ids - value
 
-        if relation.is_a? DataMapper::Associations::ManyToMany::Relationship
-          through = relation.through
-          rel_objs = through.get(self)
+        if relation.is_a? ActiveRecord::Associations::HasManyThroughAssociation
+          through = association(relation.through_reflection.name)
+          rel_objs = self.send(relation.through_reflection.name).all
           rel_objs.each do |rel_obj|
-            if destroy_ids.include?(through.child_key.get(rel_obj).first)
+            if destroy_ids.include?(rel_obj.id)
               rel_obj.modified_by = author
               rel_obj.save
             end
           end
-        elsif relation.is_a? DataMapper::Associations::OneToMany::Relationship
-          rel_objs = relation.get(self)
-          rel_objs.each do |rel_obj|
-            if destroy_ids.include?(relation.child_key.get(rel_obj).id)
-              rel_obj.modified_by = author
-              rel_obj.save
-            end
-          end
+        # Removed as unused and not ported to ActiveRecord
+        #elsif relation.is_a? ActiveRecord::Associations::HasManyAssociation
+        #  rel_objs = relation.get(self)
+        #  rel_objs.each do |rel_obj|
+        #    if destroy_ids.include?(relation.child_key.get(rel_obj).id)
+        #      rel_obj.modified_by = author
+        #      rel_obj.save
+        #    end
+        #  end
         else
           raise "can only handle one2many or many2many relations" 
         end
-        tparams[relation.field] = value.map { |id| relation.child_model.get(id) } 
+        tparams[base_key] = value.map { |id| relation.klass.find(id) }
         trels[relation] = new_ids
-        #relation.set(self, value.map { |id| relation.child_model.get(id) })
       else
         tparams[key] = value
       end
     end
-    return false unless update(tparams.merge(:modified_by_id => author.id))
+    return false unless update_attributes(tparams.merge(:modified_by_id => author.id))
 
     trels.each do |relation, new_ids|
-      if relation.is_a? DataMapper::Associations::ManyToMany::Relationship
-        through = relation.through
-        rel_objs = through.get(self)
+      if relation.is_a? ActiveRecord::Associations::HasManyThroughAssociation
+        through = association(relation.through_reflection.name)
+        rel_objs = self.send(relation.through_reflection.name).all
         rel_objs.each do |rel_obj|
-          if new_ids.include?(through.child_key.get(rel_obj).first)
+          if new_ids.include?(rel_obj.id)
             rel_obj.modified_by = author
             rel_obj.save
           end
         end
-      elsif relation.is_a? DataMapper::Associations::OneToMany::Relationship
-        rel_objs = relation.get(self)
-        rel_objs.each do |rel_obj|
-          if new_ids.include?(relation.child_key.get(rel_obj).id)
-            rel_obj.modified_by = author
-            rel_obj.save
-          end
-        end
+      # Removed as unused and not ported to ActiveRecord
+      #elsif relation.is_a? DataMapper::Associations::OneToMany::Relationship
+      #  raise "OneToMany"
+      #  rel_objs = relation.get(self)
+      #  rel_objs.each do |rel_obj|
+      #    if new_ids.include?(relation.child_key.get(rel_obj).id)
+      #      rel_obj.modified_by = author
+      #      rel_obj.save
+      #    end
+      #  end
+      else
+        raise "can only handle many2many relations"
       end
     end
 
@@ -87,9 +90,9 @@ module AuthoredModel
   end
 
   module ClassMethods
-    def is_versioned_ext(opts)
-      is_versioned(opts)
-      belongs_to :modified_by, 'Account', :required => false
+    def is_versioned_ext(opts=nil)
+      belongs_to :modified_by, :class_name => 'Account'
+      has_paper_trail :on => [:update, :destroy]
     end
   end
 end

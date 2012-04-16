@@ -1,7 +1,7 @@
 .systemhead.remote
-  =link_to url_for(:action => :opensys, :biz_process_id => biz_process.id, :id => system.id), :remote => true do
+  =link_to url_for(:action => :opensys, :biz_process_id => biz_process.id, :id => system.id), :remote => true, :"data-type" => "html" do
     %img.tree{:src => "/images/expand.gif"}>
-  =link_to url_for(:action => :opensys, :biz_process_id => biz_process.id, :id => system.id), :remote => true do
+  =link_to url_for(:action => :opensys, :biz_process_id => biz_process.id, :id => system.id), :remote => true, :"data-type" => "html" do
     %span{:title => system.slug}><
       =system.title
   -@state = system.state_by_process(biz_process)

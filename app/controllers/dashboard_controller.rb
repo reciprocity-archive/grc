@@ -22,33 +22,33 @@ class DashboardController < ApplicationController
     if request.post?
       redirect_to url_for
     else
-      @biz_processes = filter_biz_processes(BizProcess.all)
+      @biz_processes = filter_biz_processes(BizProcess)
     end
   end
 
   # AJAX for drilldown into a BizProcess
   def openbp
-    bp = BizProcess.get(params[:id])
+    bp = BizProcess.find(params[:id])
     render :partial => "dashboard/openbp", :locals => {:bp => bp}
   end
 
   # AJAX for closing a BizProcess drilldown
   def closebp
-    bp = BizProcess.get(params[:id])
+    bp = BizProcess.find(params[:id])
     render :partial => "dashboard/closebp", :locals => {:bp => bp}
   end
 
   # AJAX for drilldown into a System
   def opensys
-    biz_process = BizProcess.get(params[:biz_process_id])
-    system = System.get(params[:id])
+    biz_process = BizProcess.find(params[:biz_process_id])
+    system = System.find(params[:id])
     render :partial => "dashboard/opensys", :locals => {:biz_process => biz_process, :system => system}
   end
 
   # AJAX for closing a System drilldown
   def closesys
-    biz_process = BizProcess.get(params[:biz_process_id])
-    system = System.get(params[:id])
+    biz_process = BizProcess.find(params[:biz_process_id])
+    system = System.find(params[:id])
     render :partial => "dashboard/closesys", :locals => {:biz_process => biz_process, :system => system}
   end
 

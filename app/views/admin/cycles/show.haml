@@ -21,14 +21,14 @@
 
       .group
         System-Control connections:
-        =SystemControl.count(:cycle => @cycle)
+        =SystemControl.count(:cycle_id => @cycle)
 
         %table.table
           %tr
             %th Control
             %th System
             %th State
-          -SystemControl.all(:cycle => @cycle).each do |sc|
+          -SystemControl.where(:cycle_id => @cycle).each do |sc|
             %tr
             %td=link_to sc.control.display_name, sc.control
             %td=link_to sc.system.display_name, sc.system

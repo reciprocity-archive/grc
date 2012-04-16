@@ -16,7 +16,7 @@ class Admin::BizProcessesController < ApplicationController
 
   # Show one biz process
   def show
-    @biz_process = BizProcess.get(params[:id])
+    @biz_process = BizProcess.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -36,7 +36,7 @@ class Admin::BizProcessesController < ApplicationController
 
   # Show edit biz process form
   def edit
-    @biz_process = BizProcess.get(params[:id])
+    @biz_process = BizProcess.find(params[:id])
   end
 
   # Create a biz process
@@ -62,7 +62,7 @@ class Admin::BizProcessesController < ApplicationController
 
   # Update a biz process
   def update
-    @biz_process = BizProcess.get(params[:id])
+    @biz_process = BizProcess.find(params[:id])
 
     # Accumulate DB update results
     results = []
@@ -85,14 +85,14 @@ class Admin::BizProcessesController < ApplicationController
         results << Document.first(:id => id).destroy
       else
         # Otherwise, update
-        results << Document.get(id).update(doc_params)
+        results << Document.find(id).update_attributes(doc_params)
       end
     end
 
     # Save if any changes made above
-    @biz_process.save if @biz_process.dirty?
+    @biz_process.save if @biz_process.changed?
 
-    results << @biz_process.update(params[:biz_process])
+    results << @biz_process.update_attributes(params[:biz_process])
 
     respond_to do |format|
       # If all operations above succeeded, show overall success, otherwise show errors
@@ -109,7 +109,7 @@ class Admin::BizProcessesController < ApplicationController
 
   # Delete biz process
   def destroy
-    biz_process = BizProcess.get(params[:id])
+    biz_process = BizProcess.find(params[:id])
 
     # Delete links to other objects first, then delete the biz process
     success = biz_process && biz_process.biz_process_systems.destroy &&
@@ -143,12 +143,12 @@ class Admin::BizProcessesController < ApplicationController
   end
 
   def add_person
-    @biz_process = BizProcess.get(params[:id])
+    @biz_process = BizProcess.find(params[:id])
   end
  
   # Another way to attach a biz process
   def create_person
-    @biz_process = BizProcess.get(params[:id])
+    @biz_process = BizProcess.find(params[:id])
     @biz_process_person = BizProcessPerson.new(params[:biz_process_person])
     @biz_process_person.biz_process = @biz_process
     if @biz_process_person.save
@@ -168,6 +168,6 @@ class Admin::BizProcessesController < ApplicationController
     else
       flash[:error] = 'Failed'
     end
-    redirect_to edit_biz_process_path(BizProcess.get(params[:id]))
+    redirect_to edit_biz_process_path(BizProcess.find(params[:id]))
   end
 end

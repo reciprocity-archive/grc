@@ -10,5 +10,5 @@
   \=>
   &=second[k]
 Author:
--author = Account.get(first.modified_by_id)
+-author = Account.find(first.modified_by_id)
 =author ? (link_to author.display_name, url_for(author)) : '-'

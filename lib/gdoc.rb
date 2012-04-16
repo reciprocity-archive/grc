@@ -1,3 +1,5 @@
+require 'gdata'
+
 module Gdoc
   DOCLIST_SCOPE = 'https://docs.google.com/feeds/'
   DOCLIST_DOWNLOD_SCOPE = 'https://docs.googleusercontent.com/'

@@ -1,6 +1,8 @@
 # Be sure to restart your server when you modify this file.
 
-require 'dm-rails/session_store'
+CmsRails::Application.config.session_store :cookie_store, key: '_cms_session_id'
 
-# Store sessions in the database, managed by Datamapper
-CmsRails::Application.config.session_store Rails::DataMapper::SessionStore, :secure => Rails.env.production?, :key => '_cms_session_id'
+# Use the database for sessions instead of the cookie-based default,
+# which shouldn't be used to store highly confidential information
+# (create the session table with "rails generate session_migration")
+# CmsRails::Application.config.session_store :active_record_store

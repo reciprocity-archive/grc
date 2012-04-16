@@ -4,7 +4,7 @@ class Admin::RegulationsController < ApplicationController
   # Slug for AJAX
   def slug
     respond_to do |format|
-      format.js  { render :json => [Regulation.get(params[:id]).slug]  }
+      format.js  { render :json => [Regulation.find(params[:id]).slug]  }
     end
   end
 
@@ -20,7 +20,7 @@ class Admin::RegulationsController < ApplicationController
 
   # Show reg
   def show
-    @regulation = Regulation.get(params[:id])
+    @regulation = Regulation.find(params[:id])
 
     respond_to do |format|
       format.html
@@ -40,7 +40,7 @@ class Admin::RegulationsController < ApplicationController
 
   # Edit reg form
   def edit
-    @regulation = Regulation.get(params[:id])
+    @regulation = Regulation.find(params[:id])
   end
 
   # Create a reg
@@ -67,20 +67,20 @@ class Admin::RegulationsController < ApplicationController
 
   # Update a reg
   def update
-    @regulation = Regulation.get(params[:id])
+    @regulation = Regulation.find(params[:id])
 
     @regulation.source_document ||= Document.create
     @regulation.source_website ||= Document.create
 
     # Accumulate results
     results = []
-    results << @regulation.source_document.update(params[:regulation].delete("source_document") || {})
-    results << @regulation.source_website.update(params[:regulation].delete("source_website") || {})
+    results << @regulation.source_document.update_attributes(params[:regulation].delete("source_document") || {})
+    results << @regulation.source_website.update_attributes(params[:regulation].delete("source_website") || {})
 
     # Save if doc updated
-    @regulation.save if @regulation.dirty?
+    @regulation.save if @regulation.changed?
 
-    results << @regulation.update(params[:regulation])
+    results << @regulation.update_attributes(params[:regulation])
 
     respond_to do |format|
       if results.all?
@@ -96,7 +96,7 @@ class Admin::RegulationsController < ApplicationController
 
   # Delete a reg
   def destroy
-    @regulation = Regulation.get(params[:id])
+    @regulation = Regulation.find(params[:id])
     @regulation.destroy
 
     respond_to do |format|

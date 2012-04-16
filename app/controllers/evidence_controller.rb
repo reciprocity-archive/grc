@@ -28,7 +28,7 @@ class EvidenceController < ApplicationController
       redirect_to :action => :index
     else
       return unless auth_gdocs
-      @systems = filter_systems(System.all(:system_controls => { :cycle => @cycle }, :order => :slug))
+      @systems = filter_systems(System.joins(:system_controls).where(:system_controls => { :cycle_id => @cycle }).order(:slug))
     end
   end
 
@@ -47,7 +47,7 @@ class EvidenceController < ApplicationController
   # Show a document attachment form - AJAX
   def new
     sc = SystemControl.by_system_control(params[:system_id], params[:control_id], @cycle)
-    desc = DocumentDescriptor.get(params[:descriptor_id])
+    desc = DocumentDescriptor.find(params[:descriptor_id])
     @document = Document.new
     render(:partial => "attach_form", :locals => {:sc => sc, :desc => desc})
   end
@@ -55,7 +55,7 @@ class EvidenceController < ApplicationController
   # Show a Google doc attachment form - AJAX
   def new_gdoc
     sc = SystemControl.by_system_control(params[:system_id], params[:control_id], @cycle)
-    desc = DocumentDescriptor.get(params[:descriptor_id])
+    desc = DocumentDescriptor.find(params[:descriptor_id])
 
     folders = get_gfolders(:ajax => true, :retry_url => url_for(:action => :index))
     return unless folders
@@ -89,7 +89,7 @@ class EvidenceController < ApplicationController
   # Attach a document (either Google doc or regular)
   def attach
     @system_control = SystemControl.by_system_control(params[:system_id], params[:control_id], @cycle)
-    desc = DocumentDescriptor.get(params[:descriptor_id])
+    desc = DocumentDescriptor.find(params[:descriptor_id])
 
     doc_params = params[:document]
     gdocs_param = doc_params[:gdocs]
@@ -115,10 +115,11 @@ class EvidenceController < ApplicationController
         else
           copy = capture_evidence(gdoc, @system_control.system)
           gclient = get_gdata_client
-          doc =  Document.first_or_create(
-            { :link => Gdoc.make_id_url(copy) },
-            { :title => gdoc.title, :document_descriptor => desc
-          })
+          link = Gdoc.make_id_url(copy)
+          doc =  Document.where(:link => link).first
+          doc ||= Document.create(
+            :link => link, :title => gdoc.title, :document_descriptor => desc
+          )
 
           if !SystemControl.evidence_attached?(doc)
             # newly attached - put it under the accepted folder
@@ -136,43 +137,45 @@ class EvidenceController < ApplicationController
         end
       end
     else
-      doc = Document.first_or_create(
-        { :link => doc_params[:link] },
-        { :title => doc_params[:title], :document_descriptor => desc
-      })
+      doc = Document.where(:link => doc_params[:link]).first
+      doc ||= Document.create(
+        :link => doc_params[:link],
+        :title => doc_params[:title],
+        :document_descriptor => desc
+      )
       if doc.document_descriptor == desc
         @system_control.evidences << doc
       else
         flash[:error] = "Document already exists with another descriptor"
       end
-      @system_control.evidences << doc
+      #@system_control.evidences << doc
     end
     # FIXME
-    @system_control.evidences.save!
+    #@system_control.evidences.save!
     flash[:notice] = "Attached evidence to #{@system_control.system.title} / #{@system_control.control.title}" if flash[:error].nil?
     redirect_to :action => :index
   end
 
   # Show a document - AJAX
   def show
-    document = Document.get(params[:document_id])
+    document = Document.find(params[:document_id])
     render(:partial => "document", :locals => {:document => document})
   end
 
   # Update a regular document - AJAX
   def update
     document_id = params[:document_id]
-    document = Document.get(document_id)
-    document.update!(params[:document])
+    document = Document.find(document_id)
+    document.update_attributes!(params[:document])
     render(:partial => 'document', :locals => {:document => document})
   end
 
   # Destroy a document - AJAX
   def destroy
     system_control = SystemControl.by_system_control(params[:system_id], params[:control_id], @cycle)
-    doc = Document.get(params[:document_id])
+    doc = Document.find(params[:document_id])
     system_control.evidences.delete(doc)
-    system_control.evidences.save
+    #system_control.evidences.save
     if doc.link.scheme == 'xgdoc'
       folders = get_gfolders
       return unless folders
@@ -204,7 +207,7 @@ class EvidenceController < ApplicationController
   # User reviews a document by marking it pass/fail/maybe - AJAX
   def review
     document_id = params[:document_id]
-    document = Document.get(document_id)
+    document = Document.find(document_id)
     document.reviewed = params[:value] != "maybe"
     document.good = params[:value] == "1"
     document.save!

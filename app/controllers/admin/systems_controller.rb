@@ -4,7 +4,7 @@ class Admin::SystemsController < ApplicationController
 
   # List Systems
   def index
-    @systems = System.all(:order => :slug)
+    @systems = System.order(:slug)
 
     respond_to do |format|
       format.html
@@ -14,7 +14,7 @@ class Admin::SystemsController < ApplicationController
 
   # Show a system
   def show
-    @system = System.get(params[:id])
+    @system = System.find(params[:id])
 
     respond_to do |format|
       format.html
@@ -38,7 +38,7 @@ class Admin::SystemsController < ApplicationController
 
   # Edit system form
   def edit
-    @system = System.get(params[:id])
+    @system = System.find(params[:id])
 
     # A couple of lines for new docs
     @system.documents << Document.new
@@ -76,7 +76,7 @@ class Admin::SystemsController < ApplicationController
 
   # Update a system
   def update
-    @system = System.get(params[:id])
+    @system = System.find(params[:id])
 
     # Accumulate results
     results = []
@@ -93,18 +93,17 @@ class Admin::SystemsController < ApplicationController
         results << @system.document_systems.first(:document_id => id).destroy
         results << Document.first(:id => id).destroy
       else
-        results << Document.get(id).update(doc_params)
+        results << Document.find(id).update_attributes(doc_params)
       end
     end
 
-    results << @system.update(params[:system])
+    results << @system.update_attributes(params[:system])
 
     respond_to do |format|
       if results.all?
         format.html { redirect_to(edit_system_path(@system), :notice => 'System was successfully updated.') }
         format.xml  { head :ok }
       else
-        puts flash.inspect
         flash.now[:error] = 'Could not update.'
         format.html { render :action => "edit" }
         format.xml  { render :xml => @system.errors, :status => :unprocessable_entity }
@@ -114,7 +113,7 @@ class Admin::SystemsController < ApplicationController
 
   # Delete a system
   def destroy
-    system = System.get(params[:id])
+    system = System.find(params[:id])
 
     success = system.document_systems.destroy &&
         system.system_controls.destroy &&
@@ -156,12 +155,12 @@ class Admin::SystemsController < ApplicationController
   end
 
   def add_person
-    @system = System.get(params[:id])
+    @system = System.find(params[:id])
   end
  
   # Another way to attach a biz process
   def create_person
-    @system = System.get(params[:id])
+    @system = System.find(params[:id])
     @system_person = SystemPerson.new(params[:system_person])
     @system_person.system = @system
     if @system_person.save
@@ -181,12 +180,12 @@ class Admin::SystemsController < ApplicationController
     else
       flash[:error] = 'Failed'
     end
-    redirect_to edit_system_path(System.get(params[:id]))
+    redirect_to edit_system_path(System.find(params[:id]))
   end
 
   def clone
     raise "cannot clone without cycle" unless @cycle
-    @orig = System.get(params[:id])
+    @orig = System.find(params[:id])
     @system = System.new
     @system.title = "Copy of #{@orig.title}"
     @system.slug = "COPY-#{@orig.slug}-#{Time.new.to_i}"

@@ -7,7 +7,7 @@ module UserSpecHelper
   def current_user(stubs = {})
     return @current_user if @current_user
 
-    role = (stubs.delete(:role) || :guest).to_sym
+    role = (stubs.delete(:role) || :guest).to_s
 
     if respond_to?(:stub_model)
       @current_user = stub_model(Account, stubs.merge(:role => role))

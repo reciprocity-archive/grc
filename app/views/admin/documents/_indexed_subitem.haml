@@ -5,7 +5,7 @@
   =f.label :title
   =f.text_field :title, :class => :compact_text_field
 
-  -unless document.new?
+  -unless document.new_record?
     =f.check_box :delete, { :checked => false }
     Delete
 

@@ -1,7 +1,7 @@
 .systemhead.remote
-  =link_to url_for(:action => :closesys, :biz_process_id => biz_process.id, :id => system.id), :remote => true do
+  =link_to url_for(:action => :closesys, :biz_process_id => biz_process.id, :id => system.id), :remote => true, :"data-type" => "html" do
     %img.tree{:src => "/images/collapse.gif"}>
-  =link_to url_for(:action => :closesys, :biz_process_id => biz_process.id, :id => system.id), :remote => true do
+  =link_to url_for(:action => :closesys, :biz_process_id => biz_process.id, :id => system.id), :remote => true, :"data-type" => "html" do
     %span{:title => system.slug}><
       =system.title
   -@state = system.state_by_process(biz_process)
@@ -16,7 +16,7 @@
     )
   %span.owner
     =system.owner.display_name
--scs = system.system_controls.all(:cycle => @cycle)
+-scs = system.system_controls.where(:cycle_id => @cycle.id)
 -if !scs.empty?
   -system.system_controls_by_process(biz_process).each do |sc|
     -next if sc.cycle != @cycle

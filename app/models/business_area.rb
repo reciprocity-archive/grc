@@ -1,17 +1,10 @@
 # A business area (used to classify Controls)
-class BusinessArea
-  include DataMapper::Resource
+class BusinessArea < ActiveRecord::Base
   include AuthoredModel
-
-  property :id, Serial
-  property :title, String, :length => 256
 
   def display_name
     title
   end
 
-  property :created_at, DateTime
-  property :updated_at, DateTime
-
-  is_versioned_ext :on => [:updated_at]
+  is_versioned_ext
 end

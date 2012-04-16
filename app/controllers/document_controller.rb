@@ -26,9 +26,12 @@ class DocumentController < ApplicationController
   #
   # Ensure that folders exist for CMS/CYCLE, CMS/CYCLE/Systems, Cms/CYCLE/Accepted and each system.
   def sync
-    folders = get_gfolders(:refresh => true) or return
+    folders = get_gfolders(:refresh => true)
+    folders or return
 
     by_title = gdocs_by_title(folders)
+
+    @messages = []
 
     top = by_title['CMS']
     unless top
@@ -38,8 +41,6 @@ class DocumentController < ApplicationController
 
     client = get_gdata_client
     return unless client
-
-    @messages = []
 
     unless by_title[cycle_gfolder(@cycle)]
       folder = client.create_folder(@cycle.slug, :parent => top)

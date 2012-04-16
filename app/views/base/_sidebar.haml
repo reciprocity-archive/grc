@@ -3,7 +3,7 @@
   .content
     %p Audit Cycle
     =form_for((@cycle || Cycle.new), :url => slugfilter_cycle_update_path(:format => :js) , :html => { :class => :form, :remote => true }) do |f|
-      =f.collection_select :id, Cycle.all(:order => :start_at), :id, :display_name, :include_blank => true
+      =f.collection_select :id, Cycle.order(:start_at), :id, :display_name, :include_blank => true
       =f.submit "Show", :class => :button
 
     %p Filter by Regulation
@@ -13,7 +13,7 @@
 
     %p Default Company
     =form_for((@regulation || Regulation.new), :url => slugfilter_company_update_path(:format => :js) , :html => { :class => :form, :remote => true }) do |f|
-      =f.collection_select :id, Regulation.all(:company => true), :id, :display_name, :include_blank => true
+      =f.collection_select :id, Regulation.where(:company => true).all, :id, :display_name, :include_blank => true
       =f.submit "Show", :class => :button
 
     %p Filter Controls by Slug

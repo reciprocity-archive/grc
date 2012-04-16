@@ -13,7 +13,7 @@ class Admin::BusinessAreasController < ApplicationController
 
   # Show a biz area
   def show
-    @business_area = BusinessArea.get(params[:id])
+    @business_area = BusinessArea.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -33,7 +33,7 @@ class Admin::BusinessAreasController < ApplicationController
 
   # Edit biz area form
   def edit
-    @business_area = BusinessArea.get(params[:id])
+    @business_area = BusinessArea.find(params[:id])
   end
 
   # Create a biz area
@@ -54,10 +54,10 @@ class Admin::BusinessAreasController < ApplicationController
 
   # Update a biz area
   def update
-    @business_area = BusinessArea.get(params[:id])
+    @business_area = BusinessArea.find(params[:id])
 
     respond_to do |format|
-      if @business_area.update(params[:business_area])
+      if @business_area.update_attributes(params[:business_area])
         format.html { redirect_to(edit_business_area_path(@business_area), :notice => 'Biz Process was successfully updated.') }
         format.xml  { head :ok }
       else
@@ -70,7 +70,7 @@ class Admin::BusinessAreasController < ApplicationController
 
   # Delete a biz area
   def destroy
-    business_area = BusinessArea.get(params[:id])
+    business_area = BusinessArea.find(params[:id])
 
     respond_to do |format|
       format.html { redirect_to(business_areas_url) }

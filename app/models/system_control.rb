@@ -3,31 +3,32 @@
 # Some additional attributes are attached, including the state of the control
 # and a ticket (if state is not green).  Since a control can apply to systems,
 # these attributes cannot be attached to it directly.
-class SystemControl
-  include DataMapper::Resource
+class SystemControl < ActiveRecord::Base
   include AuthoredModel
 
-  property :id, Serial
-  property :state, Enum[*ControlState::VALUES], :default => :green, :required => true
-  property :ticket, String
+  after_initialize do
+    self.state = :green if self.state.nil?
+  end
+
+  validates :state, :presence => true
 
   # A set of documents used as evidence in an audit
-  has n, :evidences, 'Document', :through => :document_system_control
-  has n, :document_system_control
+  has_many :evidences, :class_name => 'Document', :through => :document_system_control
+  has_many :document_system_control
 
   belongs_to :control
   belongs_to :system
-  belongs_to :cycle, :required => false
+  belongs_to :cycle
 
-  # why/what/how free text
-  property :test_why, Text
-  property :test_impact, Text
-  property :test_recommendation, Text
+  is_versioned_ext
 
-  property :created_at, DateTime
-  property :updated_at, DateTime
+  def state
+    ControlState::VALUES[read_attribute(:state)]
+  end
 
-  is_versioned_ext :on => [:updated_at]
+  def state=(value)
+    write_attribute(:state, ControlState::VALUES.index(value))
+  end
 
   def <=>(other)
     return control.slug <=> other.control.slug;
@@ -42,23 +43,25 @@ class SystemControl
   end
 
   def self.by_system_control(system_id, control_id, cycle)
-    sc = SystemControl.first(:system_id => system_id,
-                             :control_id => control_id,
-                             :cycle => cycle)
+    sc = SystemControl
+      .where(:system_id => system_id,
+             :control_id => control_id,
+             :cycle_id => cycle)
+      .first
   end
 
   # Used by the slug filter widget
   def self.slugfilter(prefix)
     if !prefix.blank?
-      all(:control => {:slug.like => "#{prefix}%"})
+      joins(:control).where("controls.slug LIKE ?", "#{prefix}%")
     else
-      all()
+      where({})
     end
   end
 
   # Whether this evidence is attached to any SystemControls
   def self.evidence_attached?(evidence)
-    DocumentSystemControl.all(:evidence => evidence).any?
+    DocumentSystemControl.where(:evidence => evidence).any?
   end
 
 end

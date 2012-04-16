@@ -1,68 +1,60 @@
 # A system to be audited
-class System
-  include DataMapper::Resource
+class System < ActiveRecord::Base
   include AuthoredModel
   include SluggedModel
 
-  before :save, :upcase_slug
+  before_save :upcase_slug
 
-  property :id, Serial
-  property :title, String, :required => true, :length => 255
-  property :slug, String, :required => true
-  property :infrastructure, Boolean, :required => true
-  property :description, Text
+  validates :title, :slug, :presence => true
 
   # Many to many with Control
-  has n, :system_controls
-  has n, :controls, :through => :system_controls, :order => :slug
+  has_many :system_controls
+  has_many :controls, :through => :system_controls, :order => :slug
 
   # Many to many with CO
-  has n, :system_control_objectives
-  has n, :control_objectives, :through => :system_control_objectives, :order => :slug
+  has_many :system_control_objectives
+  has_many :control_objectives, :through => :system_control_objectives, :order => :slug
 
   # Many to many with BizProcess
-  has n, :biz_process_systems
-  has n, :biz_processes, :through => :biz_process_systems, :order => :slug
+  has_many :biz_process_systems
+  has_many :biz_processes, :through => :biz_process_systems, :order => :slug
 
   # Responsible party
-  belongs_to :owner, 'Person', :required => false
+  belongs_to :owner, :class_name => 'Person'
 
   # Other parties
-  has n, :system_persons
-  has n, :persons, :through => :system_persons
+  has_many :system_persons
+  has_many :persons, :through => :system_persons
 
   # Relevant documentation
-  has n, :documents, :through => :document_systems
-  has n, :document_systems
+  has_many :documents, :through => :document_systems
+  has_many :document_systems
 
-  property :created_at, DateTime
-  property :updated_at, DateTime
-
-  is_versioned_ext :on => [:updated_at]
+  is_versioned_ext
 
   # Which systems can be attached to a control
   def self.for_control(c)
-    all(:order => :slug)
+    order(:slug) #c.systems
   end
 
   # Which systems can be attached to a control objective
   def self.for_control_objective(co)
-    all(:order => :slug)
+    order(:slug)
   end
 
   # Which systems can be attached to a biz process
   def system_controls_by_process(bp)
-    system_controls.all(:control => bp.controls)
+    system_controls.where(:control_id => bp.controls)
   end
 
   # Rolled up state by biz process
   def state_by_process(bp)
-    state(:control => bp.controls)
+    state(:control_id => bp.controls)
   end
 
   # Rolled up state
   def state(opts = {})
-    scs = system_controls.all(opts)
+    scs = system_controls.where(opts)
     bad = 0
     count = 0
     res = [:green, ControlState::STATE_WEIGHT[:green]]

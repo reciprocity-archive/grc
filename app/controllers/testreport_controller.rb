@@ -18,7 +18,7 @@ class TestreportController < ApplicationController
     if request.post?
       redirect_to url_for
     else
-      @system_controls = filter_system_controls(SystemControl.all(:cycle => @cycle))
+      @system_controls = filter_system_controls(SystemControl.where(:cycle_id => @cycle))
     end
   end
 
@@ -27,7 +27,7 @@ class TestreportController < ApplicationController
     if request.post?
       redirect_to url_for
     else
-      @system_controls = filter_system_controls(SystemControl.all(:cycle => @cycle))
+      @system_controls = filter_system_controls(SystemControl.where(:cycle_id => @cycle))
     end
   end
 
@@ -36,14 +36,14 @@ class TestreportController < ApplicationController
     if request.post?
       biz_process_id = params[:biz_process][:id]
       if biz_process_id.empty?
-        @system_controls = SystemControl.all(:cycle => @cycle)
+        @system_controls = SystemControl.where(:cycle_id => @cycle)
       else
-        @biz_process = BizProcess.get(biz_process_id)
+        @biz_process = BizProcess.find(biz_process_id)
         @system_controls =
-          filter_system_controls(SystemControl.all(:cycle => @cycle, :control => @biz_process.controls))
+          filter_system_controls(SystemControl.where(:cycle_id => @cycle, :control_id => @biz_process.controls))
       end
     else
-      @system_controls = SystemControl.all(:cycle => @cycle)
+      @system_controls = SystemControl.where(:cycle_id => @cycle)
     end
   end
 end

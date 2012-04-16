@@ -12,7 +12,7 @@
 
 .group
   =f.label :regulation_id
-  -if !@control_objective.new?
+  -if !@control_objective.new_record?
     =link_to @control_objective.regulation.display_name,
       edit_regulation_path(@control_objective.regulation)
   -else

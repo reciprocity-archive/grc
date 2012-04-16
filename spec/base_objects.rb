@@ -16,6 +16,7 @@ module BaseObjects
     @person1 = Person.create(:username => 'john')
     @sys_person1 = SystemPerson.create(:person => @person1, :system => @sys)
     @bp_person1 = BizProcessPerson.create(:person => @person1, :biz_process => @bp)
+    #debugger
   end
 
   def test_controller_index(assign, objs)
@@ -28,7 +29,7 @@ module BaseObjects
     post 'create', assign => params
     response.should be_redirect
     result = assigns(assign)
-    result.dirty?.should be_false
+    result.changed?.should be_false
     params.each do |key, value|
       result.send(key).should eq(value)
     end
@@ -39,7 +40,7 @@ module BaseObjects
     response.should be_redirect
     result = assigns(assign)
     result.should eq(obj)
-    result.dirty?.should be_false
+    result.changed?.should be_false
     params.each do |key, value|
       result.send(key).should eq(value)
     end

@@ -16,7 +16,7 @@ class Admin::ControlObjectivesController < ApplicationController
 
   # Show one CO
   def show
-    @control_objective = ControlObjective.get(params[:id])
+    @control_objective = ControlObjective.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -31,7 +31,7 @@ class Admin::ControlObjectivesController < ApplicationController
     if session[:ui_regulation_id]
       begin
         @control_objective.regulation_id = session[:ui_regulation_id]
-        @control_objective.slug = Regulation.get(session[:ui_regulation_id]).slug
+        @control_objective.slug = Regulation.find(session[:ui_regulation_id]).slug
       rescue
       end
     end
@@ -44,7 +44,7 @@ class Admin::ControlObjectivesController < ApplicationController
 
   # Show edit CO form
   def edit
-    @control_objective = ControlObjective.get(params[:id])
+    @control_objective = ControlObjective.find(params[:id])
   end
 
   # Create CO
@@ -69,10 +69,10 @@ class Admin::ControlObjectivesController < ApplicationController
   # Update CO
   def update
     session[:ui_regulation_id] = params[:control_objective][:regulation_id]
-    @control_objective = ControlObjective.get(params[:id])
+    @control_objective = ControlObjective.find(params[:id])
 
     respond_to do |format|
-      if @control_objective.update(params[:control_objective])
+      if @control_objective.update_attributes(params[:control_objective])
         format.html { redirect_to(edit_control_objective_path(@control_objective), :notice => 'Control Objective was successfully updated.') }
         format.xml  { head :ok }
       else
@@ -85,7 +85,7 @@ class Admin::ControlObjectivesController < ApplicationController
 
   # Delete CO
   def destroy
-    control_objective = ControlObjective.get(params[:id])
+    control_objective = ControlObjective.find(params[:id])
     control_objective.destroy
 
     respond_to do |format|
@@ -97,7 +97,7 @@ class Admin::ControlObjectivesController < ApplicationController
   # Get CO slug for AJAX
   def slug
     respond_to do |format|
-      format.js { ControlObjective.get(params[:id]).slug }
+      format.js { ControlObjective.find(params[:id]).slug }
     end
   end
 

@@ -12,8 +12,8 @@ describe DashboardController do
   context "authorized" do
     before :each do
       login({}, { :role => 'admin' })
-      BizProcess.destroy
-      System.destroy
+      #BizProcess.destroy
+      #System.destroy
       @reg = Regulation.create(:title => 'Reg 1', :slug => 'reg1', :company => false)
       @cycle = Cycle.create(:regulation => @reg, :start_at => '2012-01-01')
       @bp = BizProcess.create(:title => 'Biz Process 1', :slug => 'bp1', :description => 'x')
@@ -25,6 +25,7 @@ describe DashboardController do
     describe "GET 'index'" do
       it "returns http success" do
         get 'index'
+        #debugger
         response.should be_success
         assigns(:biz_processes).should eq([@bp])
       end

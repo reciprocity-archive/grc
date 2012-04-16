@@ -6,7 +6,7 @@ module AutofilterHelper
   def filtered_control_objectives
     cos = ControlObjective.slugfilter(session[:slugfilter])
     if @regulation
-      cos = cos.all(:regulation => @regulation)
+      cos = cos.where(:regulation_id => @regulation)
     end
     cos
   end
@@ -18,7 +18,7 @@ module AutofilterHelper
   def filtered_controls
     controls = Control.slugfilter(session[:slugfilter])
     if @regulation
-      controls = controls.all(:regulation => @regulation)
+      controls = controls.where(:regulation_id => @regulation)
     end
     controls
   end

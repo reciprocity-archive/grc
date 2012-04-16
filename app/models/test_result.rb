@@ -1,17 +1,14 @@
 # An audit test result
-class TestResult
-  include DataMapper::Resource
+class TestResult < ActiveRecord::Base
   include AuthoredModel
 
-  property :id, Serial
-  property :title, String, :required => true
-  property :passed, Boolean, :required => true, :default => false
-  property :output, Text
+  after_initialize do
+    self.passed = false if self.passed.nil?
+  end
 
-  property :created_at, DateTime
-  property :updated_at, DateTime
+  validates :title, :passed, :presence => true
 
-  is_versioned_ext :on => [:updated_at]
+  is_versioned_ext
 
   def display_name
     title

@@ -16,7 +16,7 @@ class Admin::ControlsController < ApplicationController
 
   # Show a Control
   def show
-    @control = Control.get(params[:id])
+    @control = Control.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -37,7 +37,7 @@ class Admin::ControlsController < ApplicationController
 
   # Edit control form
   def edit
-    @control = Control.get(params[:id])
+    @control = Control.find(params[:id])
   end
 
   # Create a control
@@ -58,7 +58,7 @@ class Admin::ControlsController < ApplicationController
 
   # Update a control
   def update
-    @control = Control.get(params[:id])
+    @control = Control.find(params[:id])
 
     # Connect to related Control Objectives
     co_ids = params["control"].delete("co_ids") || []
@@ -66,7 +66,7 @@ class Admin::ControlsController < ApplicationController
     if !equal_ids(co_ids, @control.control_objectives)
       @control.control_objectives = []
       co_ids.each do |co_id|
-        co = ControlObjective.get(co_id)
+        co = ControlObjective.find(co_id)
         @control.control_objectives << co
       end
     end
@@ -86,7 +86,7 @@ class Admin::ControlsController < ApplicationController
 
   # Delete a control
   def destroy
-    control = Control.get(params[:id])
+    control = Control.find(params[:id])
     success = control && control.biz_process_controls.destroy &&
         control.system_controls.destroy &&
         control.control_document_descriptors.destroy &&
@@ -101,7 +101,7 @@ class Admin::ControlsController < ApplicationController
   # Slug for AJAX
   def slug
     respond_to do |format|
-      format.js { Control.get(params[:id]).slug }
+      format.js { Control.find(params[:id]).slug }
     end
   end
 
@@ -115,8 +115,13 @@ class Admin::ControlsController < ApplicationController
     end
     if request.put?
       raise "cannot save without cycle" unless @cycle
-      control = Control.get(params[:id])
-      ids = params[:control]["system_ids"]
+      control = Control.find(params[:id])
+      if params[:control]
+        ids = params[:control]["system_ids"] || []
+      else
+        ids = []
+      end
+      #ids = params[:control]["system_ids"]
       control.system_controls.each do |sc|
         if sc.cycle == @cycle && !ids.include?(sc.system_id)
           ids.delete(sc.system_id)
@@ -124,7 +129,7 @@ class Admin::ControlsController < ApplicationController
         end
       end
       ids.each do |id|
-        res = control.system_controls.create(:system => System.get(id), :cycle => @cycle, :modified_by => current_user)
+        res = control.system_controls.create(:system => System.find(id), :cycle => @cycle)#, :modified_by => current_user)
         # FIXME why is this necessary?
         res.save!
       end
@@ -132,7 +137,7 @@ class Admin::ControlsController < ApplicationController
       control.reload
     else
       if params[:id]
-        control = Control.get(params[:id])
+        control = Control.find(params[:id])
       else
         control = lefts.first
       end
@@ -211,12 +216,12 @@ class Admin::ControlsController < ApplicationController
 
   # Another way to attach a biz process
   def add_biz_process
-    @control = Control.get(params[:id])
+    @control = Control.find(params[:id])
   end
  
   # Another way to attach a biz process
   def create_biz_process
-    @control = Control.get(params[:id])
+    @control = Control.find(params[:id])
     @biz_process_control = BizProcessControl.new(params[:biz_process_control])
     @biz_process_control.control = @control
     if @biz_process_control.save
@@ -246,7 +251,7 @@ class Admin::ControlsController < ApplicationController
     else
       flash[:error] = 'Failed'
     end
-    redirect_to edit_control_path(Control.get(params[:id]))
+    redirect_to edit_control_path(Control.find(params[:id]))
   end
 
   def implement
@@ -255,7 +260,7 @@ class Admin::ControlsController < ApplicationController
       redirect_to controls_path
       return
     end
-    @origin = Control.get(params[:id])
+    @origin = Control.find(params[:id])
 
     @control = Control.new
     @control.regulation = @company

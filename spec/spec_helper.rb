@@ -42,13 +42,13 @@ Spork.prefork do
     # If you're not using ActiveRecord, or you'd prefer not to run each of your
     # examples within a transaction, remove the following line or assign false
     # instead of true.
-    config.use_transactional_fixtures = false
+    config.use_transactional_fixtures = true
 
     # If true, the base class of anonymous controllers will be inferred
     # automatically. This will be the default behavior in future versions of
     # rspec-rails.
     config.infer_base_class_for_anonymous_controllers = true
-
+=begin
     config.before(:suite) { DataMapper.auto_migrate! }
 
     config.before(:each) do
@@ -61,6 +61,12 @@ Spork.prefork do
 
     config.after(:each) do
       repository(:default).adapter.pop_transaction.rollback
+    end
+=end
+
+    config.before(:each) do
+      PaperTrail.controller_info = {}
+      PaperTrail.whodunnit = nil
     end
 
     include UserSpecHelper

@@ -50,8 +50,8 @@ describe Admin::CyclesController do
         response.should be_redirect
         assigns(:cycle).regulation.should eq(@reg)
         assigns(:cycle).start_at.should eq(Date.parse('2012-02-02'))
-        assigns(:cycle).new?.should be_false
-        SystemControl.all(:control => @ctl, :system => @sys, :cycle => assigns(:cycle)).size.should eq(1)
+        assigns(:cycle).new_record?.should be_false
+        SystemControl.where(:control_id => @ctl, :system_id => @sys, :cycle_id => assigns(:cycle)).size.should eq(1)
       end
     end
   end

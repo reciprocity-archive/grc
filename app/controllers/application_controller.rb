@@ -4,14 +4,14 @@
 
 # This class is the base for all controllers used in this app
 
-require 'dm-rails/middleware/identity_map'
+#require 'dm-rails/middleware/identity_map'
 class ApplicationController < ActionController::Base
   include ApplicationHelper
 
   before_filter :require_user
   before_filter :filter_set
 
-  use Rails::DataMapper::Middleware::IdentityMap
+  #use Rails::DataMapper::Middleware::IdentityMap
   protect_from_forgery
 
   helper_method :current_user_session, :current_user
@@ -33,12 +33,14 @@ class ApplicationController < ActionController::Base
   def current_user_session
     return @current_user_session if defined?(@current_user_session)
     @current_user_session = UserSession.find
+    @current_user_session
   end
 
   # The current user or nil
   def current_user
     return @current_user if defined?(@current_user)
     @current_user = current_user_session && current_user_session.record
+    @current_user
   end
 
   # Pre-filter for requiring the user to be logged in.  On by default.
@@ -77,13 +79,13 @@ class ApplicationController < ActionController::Base
   # many pages.
   def filter_set
     if session[:regulation_id]
-      @regulation = Regulation.get(session[:regulation_id])
+      @regulation = Regulation.where(:id => session[:regulation_id]).first
     end
     if session[:company_id]
-      @company = Regulation.get(session[:company_id])
+      @company = Regulation.where(:id => session[:company_id]).first
     end
     if session[:cycle_id]
-      @cycle = Cycle.get(session[:cycle_id])
+      @cycle = Cycle.where(:id => session[:cycle_id]).first
     end
   end
 
