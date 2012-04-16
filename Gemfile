@@ -13,7 +13,7 @@ gem 'gdata_19',
   :require => 'gdata'
 
 platforms :ruby do
-  group :development do
+  group :development, :test do
     gem 'sqlite3'
   end
 
