@@ -167,7 +167,7 @@ module ManyHelper
       @left = left_class.find(id)
       #puts "#{@left}-#{@left.id}"
       #puts "left_class: #{@right_class}.for_#{left_class_underscore}"
-      @rights = @right_class.send("for_#{left_class_underscore}".to_sym, @left) #rescue @rights_class
+      @rights = @right_class.send("for_#{left_class_underscore}".to_sym, @left) rescue @right_class
       #puts "rights: #{@rights} #{@rights && @rights.count}"
       #puts "#{@right_class.count}"
       #@rights ||= @right_class.where({})

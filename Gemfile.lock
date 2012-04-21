@@ -68,6 +68,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.18)
     multi_json (1.2.0)
+    mysql (2.8.1)
     paper_trail (2.6.3)
       activerecord (~> 3.0)
       railties (~> 3.0)
@@ -168,6 +169,7 @@ DEPENDENCIES
   jdbc-sqlite3
   jruby-openssl
   json
+  mysql
   paper_trail (~> 2)
   pg
   prawn

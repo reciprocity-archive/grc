@@ -17,8 +17,16 @@ platforms :ruby do
     gem 'sqlite3'
   end
 
-  group :production do
+  group :heroku do
     gem "pg"
+  end
+
+  group :staging do
+    gem "mysql"
+  end
+
+  group :production do
+    gem "mysql"
   end
 end
 

@@ -21,7 +21,7 @@
 
       .group
         System-Control connections:
-        =SystemControl.count(:cycle_id => @cycle)
+        =SystemControl.where(:cycle_id => @cycle).count
 
         %table.table
           %tr
