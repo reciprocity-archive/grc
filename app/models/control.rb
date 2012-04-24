@@ -1,11 +1,7 @@
 require 'slugged_model'
 
-# A control
+# A company control
 #
-# Hierarchically, a Control has one or more Control Objectives
-# as parents and those must all be of the same Regulation.
-#
-# The slug of a Control has to have the slug of the regulation as prefix.
 class Control < ActiveRecord::Base
   include AuthoredModel
   include SluggedModel
@@ -30,10 +26,6 @@ class Control < ActiveRecord::Base
   # Business area classification
   belongs_to :business_area
 
-  # The regulation this control is under, for ease of validation of slug
-  # and COs.
-  belongs_to :regulation
-
   # Many to many with BizProcess
   has_many :biz_process_controls
   has_many :biz_processes, :through => :biz_process_controls, :order => :slug
@@ -50,14 +42,10 @@ class Control < ActiveRecord::Base
   # The result of an audit test
   belongs_to :test_result
 
-  # Which controls are implemented by this one.  A company
-  # control may implement several regulation controls.
-  has_many :implemented_controls, :class_name => "Control", :through => :control_controls, :order => :slug
-  has_many :control_controls
-
-  # Many to many with Control Objective
-  has_many :control_objectives, :through => :control_control_objectives, :order => :slug
-  has_many :control_control_objectives
+  # Which sections are implemented by this one.  A company
+  # control may implement several sections.
+  has_many :sections, :class_name => "Control", :through => :control_sections, :order => :slug
+  has_many :control_sections
 
   is_versioned_ext
 
@@ -69,38 +57,17 @@ class Control < ActiveRecord::Base
     write_attribute(:frequency_type, FREQUENCIES.index(value))
   end
 
-  # All non-company regulation controls
+  # All non-company section controls
   def self.all_non_company
-    joins(:regulation).
-      where(:regulations => { :company => false }).
+    joins(:section).
+      where(:sections => { :company => false }).
       order(:slug)
-  end
-
-  # All company controls
-  #scope :all_company,
-  #  joins(:regulation).
-  #  where(:regulations => { :company => true }).
-  #  order(:slug)
-  def self.all_company
-    joins(:regulation).
-      where(:regulations => { :company => true }).
-      order(:slug)
-  end
-
-  # All controls that may be attached to a CO (regulation
-  # must match)
-  def self.for_control_objective(co)
-    where(:regulation_id => co.regulation.id).order(:slug)
   end
 
   # All controls that may be attached to a system (must be
   # company control)
   def self.for_system(s)
     all_company
-  end
-
-  def parent
-    regulation
   end
 
   def display_name
@@ -114,16 +81,6 @@ class Control < ActiveRecord::Base
   # IDs of related Biz Processes (used by many2many widget)
   def biz_process_ids
     biz_processes.map { |bp| bp.id }
-  end
-
-  # IDs of related Control Objectives (used by many2many widget)
-  def control_objective_ids
-    control_objectives.map { |co| co.id }
-  end
-
-  # IDs of related Control Objectives (used by many2many widget)
-  def co_ids
-    control_objectives.map { |co| co.id }
   end
 
   # IDs of related Controls (used by many2many widget)

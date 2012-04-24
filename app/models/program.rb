@@ -1,7 +1,7 @@
-# A regulation
+# A Regulatory Program
 #
 # The top of the Regulation -> CO -> Control hierarchy
-class Regulation < ActiveRecord::Base
+class Program < ActiveRecord::Base
   include AuthoredModel
   include SluggedModel
 
@@ -13,7 +13,7 @@ class Regulation < ActiveRecord::Base
 
   validates :title, :slug, :presence => true
 
-  has_many :control_objectives, :order => :slug
+  has_many :sections, :order => :slug
 
   belongs_to :source_document, :class_name => 'Document'
   belongs_to :source_website, :class_name => 'Document'

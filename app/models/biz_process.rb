@@ -11,8 +11,8 @@ class BizProcess < ActiveRecord::Base
 
   has_many :systems, :through => :biz_process_systems, :order => :slug
   has_many :biz_process_systems
-  has_many :control_objectives, :through => :biz_process_control_objectives, :order => :slug
-  has_many :biz_process_control_objectives
+  has_many :sections, :through => :biz_process_sections, :order => :slug
+  has_many :biz_process_sections
   has_many :controls, :through => :biz_process_controls, :order => :slug
   has_many :biz_process_controls
 
@@ -35,14 +35,9 @@ class BizProcess < ActiveRecord::Base
     where({})
   end
 
-  # Return ids of related COs (used by many2many widget)
-  def co_ids
-    control_objectives.map { |co| co.id }
-  end
-
-  # Return ids of related Controls (used by many2many widget)
-  def control_ids
-    controls.map { |c| c.id }
+  # Return ids of related section sections (used by many2many widget)
+  def section_ids
+    sections.map { |co| co.id }
   end
 
   # Return ids of related Systems (used by many2many widget)

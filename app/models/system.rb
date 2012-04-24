@@ -11,9 +11,9 @@ class System < ActiveRecord::Base
   has_many :system_controls
   has_many :controls, :through => :system_controls, :order => :slug
 
-  # Many to many with CO
-  has_many :system_control_objectives
-  has_many :control_objectives, :through => :system_control_objectives, :order => :slug
+  # Many to many with Section
+  has_many :system_sections
+  has_many :sections, :through => :system_sections, :order => :slug
 
   # Many to many with BizProcess
   has_many :biz_process_systems
@@ -38,7 +38,7 @@ class System < ActiveRecord::Base
   end
 
   # Which systems can be attached to a control objective
-  def self.for_control_objective(co)
+  def self.for_section(co)
     order(:slug)
   end
 
@@ -87,8 +87,8 @@ class System < ActiveRecord::Base
     biz_processes.map { |bp| bp.id }
   end
 
-  # Return ids of related COs (used by many2many widget)
-  def control_objective_ids
-    control_objectives.map { |co| co.id }
+  # Return ids of related Sections (used by many2many widget)
+  def section_ids
+    sections.map { |co| co.id }
   end
 end

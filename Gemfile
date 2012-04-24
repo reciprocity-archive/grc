@@ -6,6 +6,9 @@ end
 
 RAILS_VERSION = '~> 3.1.1'
 
+# Get latest psych - work around crash during reorg migration
+gem 'psych'
+
 #gem 'gdata-ruby-util', '1.1.2'
 gem 'gdata_19',
   :git => 'https://github.com/tokumine/GData.git',

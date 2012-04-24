@@ -1,6 +1,6 @@
 # System to CO many to many relationship
 # `state` is the rolled up state from the System to Control association
-class SystemControlObjective < ActiveRecord::Base
+class SystemSection < ActiveRecord::Base
   include AuthoredModel
 
   after_initialize do
@@ -9,7 +9,7 @@ class SystemControlObjective < ActiveRecord::Base
 
   validates :state, :presence => true
 
-  belongs_to :control_objective
+  belongs_to :section
   belongs_to :system
 
   is_versioned_ext
