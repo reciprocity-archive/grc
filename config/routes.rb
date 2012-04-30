@@ -47,7 +47,7 @@ CmsRails::Application.routes.draw do
         delete 'destroy_biz_process'
         post 'create_biz_process'
 
-        delete 'destroy_implemented_control'
+        delete 'destroy_section'
 
         post 'implement'
       end

@@ -107,7 +107,7 @@ class Admin::ControlsController < ApplicationController
 
   # Many2many relationship to Systems
   def systems
-    lefts = filtered_controls.all_company
+    lefts = filtered_controls
     if lefts.empty?
       flash[:error] = 'No company controls'
       redirect_to controls_path
@@ -171,11 +171,11 @@ class Admin::ControlsController < ApplicationController
     if request.put?
       post_many2many(:left_class => Control,
                      :right_class => BizProcess,
-                     :lefts => filtered_controls.all_company)
+                     :lefts => filtered_controls)
     else
       get_many2many(:left_class => Control,
                     :right_class => BizProcess,
-                    :lefts => filtered_controls.all_company,
+                    :lefts => filtered_controls,
                     :show_slugfilter => true)
     end
   end
@@ -185,14 +185,14 @@ class Admin::ControlsController < ApplicationController
     if request.put?
       post_many2many(:left_class => Control,
                      :right_class => Control,
-                     :right_relation => :implemented_controls,
-                     :right_ids => :implemented_control_ids,
-                     :lefts => filtered_controls.all_company)
+                     :right_relation => :sections,
+                     :right_ids => :section_ids,
+                     :lefts => filtered_controls)
     else
       get_many2many(:left_class => Control,
-                    :lefts => filtered_controls.all_company,
+                    :lefts => filtered_controls,
                     :right_class => Control,
-                    :right_ids => :implemented_control_ids,
+                    :right_ids => :section_ids,
                     :show_slugfilter => true)
     end
   end
@@ -204,10 +204,10 @@ class Admin::ControlsController < ApplicationController
                      :right_class => DocumentDescriptor,
                      :right_relation => :evidence_descriptors,
                      :right_ids => :evidence_descriptor_ids,
-                     :lefts => filtered_controls.all_company)
+                     :lefts => filtered_controls)
     else
       get_many2many(:left_class => Control,
-                    :lefts => filtered_controls.all_company,
+                    :lefts => filtered_controls,
                     :right_class => DocumentDescriptor,
                     :right_ids => :evidence_descriptor_ids,
                     :show_slugfilter => true)
@@ -244,10 +244,10 @@ class Admin::ControlsController < ApplicationController
   end
  
   # Another way to detach an implemented control
-  def destroy_implemented_control
-    cc = ControlControl.first(:control_id => params[:id], :implemented_control_id => params[:implemented_control_id])
-    if cc && cc.destroy
-      flash[:notice] = 'Control was successfully detached.'
+  def destroy_section
+    cs = ControlSection.first(:control_id => params[:id], :section_id => params[:section_id])
+    if cs && cs.destroy
+      flash[:notice] = 'Section was successfully detached.'
     else
       flash[:error] = 'Failed'
     end

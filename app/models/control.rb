@@ -62,7 +62,7 @@ class Control < ActiveRecord::Base
   # All controls that may be attached to a system (must be
   # company control)
   def self.for_system(s)
-    all_company
+    all
   end
 
   def display_name
@@ -78,9 +78,9 @@ class Control < ActiveRecord::Base
     biz_processes.map { |bp| bp.id }
   end
 
-  # IDs of related Controls (used by many2many widget)
-  def implemented_control_ids
-    implemented_controls.map { |c| c.id }
+  # IDs of related Sections (used by many2many widget)
+  def implemented_section_ids
+    sections.map { |c| c.id }
   end
 
   # IDs of related evidence descriptors (used by many2many widget)

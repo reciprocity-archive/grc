@@ -17,10 +17,10 @@
 
 .group
   =f.label :sections
-  =f.collection_select :co_ids, filtered_sections, :id, :display_name, {}, {:class => :collection, :multiple => true}
+  =f.collection_select :section_ids, filtered_sections, :id, :display_name, {}, {:class => :collection, :multiple => true}
 
 :javascript
-  $('#biz_process_co_ids').multiselect(
+  $('#biz_process_section_ids').multiselect(
   {
     noneSelectedText: "Select",
     selectedList: 4,

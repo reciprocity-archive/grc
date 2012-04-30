@@ -134,10 +134,10 @@ module ManyHelper
   #                      :right_class => DocumentDescriptor,
   #                      :right_relation => :evidence_descriptors,
   #                      :right_ids => :evidence_descriptor_ids,
-  #                      :lefts => filtered_controls.all_company)
+  #                      :lefts => filtered_controls)
   #     else
   #       get_many2many(:left_class => Control,
-  #                     :lefts => filtered_controls.all_company,
+  #                     :lefts => filtered_controls,
   #                     :right_class => DocumentDescriptor,
   #                     :right_ids => :evidence_descriptor_ids,
   #                     :show_slugfilter => true)

@@ -21,16 +21,6 @@ class Section < ActiveRecord::Base
   belongs_to :program
   belongs_to :parent, :class_name => "Section"
 
-  # All Sections associated with a Program
-  def self.all_non_company
-    joins(:program).where(:programs => { :company => false }).order(:slug)
-  end
-
-  # All Sections associated with a company "program"
-  def self.all_company
-    joins(:program).where(:programs => { :company => true }).order(:slug)
-  end
-
   # All Sections that could be associated with a control (in same program)
   def self.for_control(control)
     where(:program_id => control.program_id).order(:slug)
@@ -38,7 +28,7 @@ class Section < ActiveRecord::Base
 
   # All Sections that could be associated with a system (any company Section)
   def self.for_system(s)
-    all_company
+    all
   end
 
   # Whether this Section is associated with a company "program"
