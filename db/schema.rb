@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120424212141) do
+ActiveRecord::Schema.define(:version => 20120427181315) do
 
   create_table "accounts", :force => true do |t|
     t.string   "username"
@@ -25,9 +25,6 @@ ActiveRecord::Schema.define(:version => 20120424212141) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "accounts", ["email"], :name => "index_accounts_on_email", :unique => true
-  add_index "accounts", ["username"], :name => "index_accounts_on_username", :unique => true
 
   create_table "biz_process_controls", :force => true do |t|
     t.integer  "state",          :default => 1, :null => false
@@ -75,8 +72,7 @@ ActiveRecord::Schema.define(:version => 20120424212141) do
   end
 
   add_index "biz_process_sections", ["biz_process_id", "section_id"], :name => "index_biz_process_control_objectives_uniqueness", :unique => true
-  add_index "biz_process_sections", ["biz_process_id"], :name => "index_biz_process_control_objectives_on_biz_process_id"
-  add_index "biz_process_sections", ["section_id"], :name => "index_biz_process_control_objectives_on_control_objective_id"
+  add_index "biz_process_sections", ["section_id"], :name => "index_biz_process_sections_on_section_id"
 
   create_table "biz_process_systems", :force => true do |t|
     t.integer  "biz_process_id", :null => false
@@ -98,7 +94,6 @@ ActiveRecord::Schema.define(:version => 20120424212141) do
     t.integer  "modified_by_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "narrative_id"
   end
 
   add_index "biz_processes", ["owner_id"], :name => "index_biz_processes_on_owner_id"
@@ -158,7 +153,7 @@ ActiveRecord::Schema.define(:version => 20120424212141) do
     t.string   "assertion"
     t.datetime "effective_at"
     t.integer  "business_area_id"
-    t.integer  "regulation_id"
+    t.integer  "program_id"
     t.integer  "test_result_id"
     t.integer  "modified_by_id"
     t.datetime "created_at"
@@ -167,7 +162,7 @@ ActiveRecord::Schema.define(:version => 20120424212141) do
   end
 
   add_index "controls", ["business_area_id"], :name => "index_controls_on_business_area_id"
-  add_index "controls", ["regulation_id"], :name => "index_controls_on_regulation_id"
+  add_index "controls", ["program_id"], :name => "index_controls_on_regulation_id"
   add_index "controls", ["test_result_id"], :name => "index_controls_on_test_result_id"
 
   create_table "cycles", :force => true do |t|
@@ -244,6 +239,8 @@ ActiveRecord::Schema.define(:version => 20120424212141) do
     t.integer  "modified_by_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "frequency_type",     :default => 1
+    t.integer  "frequency",          :default => 1
   end
 
   add_index "programs", ["source_document_id"], :name => "index_regulations_on_source_document_id"
@@ -253,7 +250,7 @@ ActiveRecord::Schema.define(:version => 20120424212141) do
     t.string   "title",          :null => false
     t.string   "slug",           :null => false
     t.text     "description"
-    t.integer  "regulation_id",  :null => false
+    t.integer  "program_id",     :null => false
     t.integer  "modified_by_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -261,7 +258,7 @@ ActiveRecord::Schema.define(:version => 20120424212141) do
   end
 
   add_index "sections", ["parent_id"], :name => "index_sections_on_parent_id"
-  add_index "sections", ["regulation_id"], :name => "index_control_objectives_on_regulation_id"
+  add_index "sections", ["program_id"], :name => "index_control_objectives_on_regulation_id"
 
   create_table "system_controls", :force => true do |t|
     t.integer  "state",               :default => 1, :null => false
@@ -304,7 +301,6 @@ ActiveRecord::Schema.define(:version => 20120424212141) do
     t.integer  "modified_by_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "narrative_id"
   end
 
   create_table "test_results", :force => true do |t|

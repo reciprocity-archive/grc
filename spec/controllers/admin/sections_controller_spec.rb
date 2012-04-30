@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'base_objects'
 
-describe Admin::ControlObjectivesController do
+describe Admin::SectionsController do
   include BaseObjects
 
   describe "GET 'index' without authorization" do
@@ -22,7 +22,7 @@ describe Admin::ControlObjectivesController do
       it "returns http success" do
         get 'index'
         response.should be_success
-        assigns(:control_objectives).should eq([@co])
+        assigns(:sections).should eq([@co])
       end
     end
   end

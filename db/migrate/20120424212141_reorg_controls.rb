@@ -12,10 +12,15 @@ class ReorgControls < ActiveRecord::Migration
     change_table :control_sections do |t|
       t.rename :control_objective_id, :section_id
     end
+
+    remove_index :biz_process_control_objectives, :biz_process_id
+    remove_index :biz_process_control_objectives, :control_objective_id
     rename_table :biz_process_control_objectives, :biz_process_sections
     change_table :biz_process_sections do |t|
       t.rename :control_objective_id, :section_id
+      t.index :section_id
     end
+
     rename_table :system_control_objectives, :system_sections
     change_table :system_sections do |t|
       t.rename :control_objective_id, :section_id
@@ -23,6 +28,11 @@ class ReorgControls < ActiveRecord::Migration
 
     change_table :controls do |t|
       t.integer :parent_id
+      t.rename :regulation_id, :program_id
+    end
+
+    change_table :sections do |t|
+      t.rename :regulation_id, :program_id
     end
 
     change_table :cycles do |t|
@@ -33,7 +43,7 @@ class ReorgControls < ActiveRecord::Migration
     Section.reset_column_information
 
     Program.all.each do |oldr|
-      Section.create(:slug => oldr.slug, :title => oldr.title, :description => oldr.description, :regulation_id => 0)
+      Section.create(:slug => oldr.slug, :title => oldr.title, :description => oldr.description, :program_id => oldr)
     end
 
     ormap = {}

@@ -19,7 +19,7 @@ CmsRails::Application.routes.draw do
       end
     end
     resources :business_areas, :path => "/admin/business_areas"
-    resources :control_objectives, :path => "/admin/control_objectives" do
+    resources :sections, :path => "/admin/sections" do
       collection do
         get 'controls'
         put 'controls'
@@ -27,8 +27,8 @@ CmsRails::Application.routes.draw do
     end
     resources :controls, :path => "/admin/controls" do
       collection do
-        get 'control_objectives'
-        put 'control_objectives'
+        get 'sections'
+        put 'sections'
 
         get 'systems'
         put 'systems'
@@ -60,7 +60,7 @@ CmsRails::Application.routes.draw do
       end
     end
     resources :document_descriptors, :path => "/admin/document_descriptors"
-    resources :regulations, :path => "/admin/regulations" do
+    resources :programs, :path => "/admin/programs" do
       collection do
         get 'slug'
       end
@@ -72,8 +72,8 @@ CmsRails::Application.routes.draw do
         put 'biz_processes'
         get 'controls'
         put 'controls'
-        get 'control_objectives'
-        put 'control_objectives'
+        get 'sections'
+        put 'sections'
       end
       member do
         get 'add_person'
@@ -106,7 +106,7 @@ CmsRails::Application.routes.draw do
   # Slugfilter widget routes
   match 'slugfilter/slug_update' => 'slugfilter#slug_update', :as => 'slugfilter_slug_update'
   match 'slugfilter/cycle_update' => 'slugfilter#cycle_update', :as => 'slugfilter_cycle_update'
-  match 'slugfilter/regulation_update' => 'slugfilter#regulation_update', :as => 'slugfilter_regulation_update'
+  match 'slugfilter/program_update' => 'slugfilter#program_update', :as => 'slugfilter_program_update'
   match 'slugfilter/company_update' => 'slugfilter#company_update', :as => 'slugfilter_company_update'
   match 'slugfilter/values' => 'slugfilter#values', :as => 'slugfilter_values'
 

@@ -82,9 +82,9 @@ module ManyHelper
   #
   # Example:
   #
-  #   edit_children(@regulation, :control_objective)
+  #   edit_children(@program, :section)
   #
-  # edits Control Objectives under a regulation.
+  # edits Control Objectives under a program.
   def edit_children(obj, other)
     res = []
     return "" unless obj.id

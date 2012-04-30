@@ -1,14 +1,14 @@
 .group
-  =f.label :regulation_id
+  =f.label :program_id
   -if !@control.new_record?
-    =link_to @control.regulation.display_name,
-      edit_regulation_path(@control.regulation)
+    =link_to @control.program.display_name,
+      edit_program_path(@control.program)
   -else
-    =f.collection_select :regulation_id, Regulation.all, :id, :display_name, {}, {:class => :collection, :multiple => false}
+    =f.collection_select :program_id, Program.all, :id, :display_name, {}, {:class => :collection, :multiple => false}
     :javascript
       old_slug_value = ""
-      $('#control_regulation_id').change(function() {
-        $.get("#{slug_regulations_path}", {"id": $('#control_regulation_id').val()}, function(data) {
+      $('#control_program_id').change(function() {
+        $.get("#{slug_programs_path}", {"id": $('#control_program_id').val()}, function(data) {
           if ($("#control_slug")[0].value == old_slug_value)
             $("#control_slug")[0].value = data[0]
             old_slug_value = data[0]
@@ -17,8 +17,8 @@
 
 -if !@control.new_record?
   .group
-    =f.label :control_objectives_id
-    =f.collection_select :co_ids, @control.regulation.control_objectives, :id, :display_name, {}, {:class => :collection, :multiple => true}
+    =f.label :sections_id
+    =f.collection_select :co_ids, @control.program.sections, :id, :display_name, {}, {:class => :collection, :multiple => true}
 
   :javascript
     $('#control_co_ids').multiselect(
@@ -82,7 +82,7 @@
   =f.submit pat(:save), :class => :button
   =f.submit pat(:cancel), :onclick => "window.location='#{controls_path}';return false", :class => :button
 
--if @control.regulation && @control.regulation.company?
+-if @control.program && @control.program.company?
   %hr.section
   %h3 Implemented Controls
   %table.table
@@ -92,7 +92,7 @@
     -edit_many(@control, :control_controls, :implemented_control, :other_controller => :controls) do |bpc|
       &nbsp;
 
--if @control.regulation && @control.regulation.company?
+-if @control.program && @control.program.company?
   %hr.section
   %h3 Biz Processes
   %table.table

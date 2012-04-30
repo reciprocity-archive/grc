@@ -13,7 +13,7 @@
           %th=mat(:control, :fraud_related)
           %th=mat(:control, :effective_at)
           %th=mat(:control, :business_area)
-          %th=mat(:control, :regulation_id)
+          %th=mat(:control, :program_id)
           %th=mat(:control, :updated_at)
           %th.last!="&nbsp;"
         -@controls.each do |control|
@@ -28,13 +28,13 @@
             %td=display_time(control.effective_at)
             %td&=control.business_area.title rescue "-"
             %td
-              -if control.regulation
-                =link_to control.regulation.display_name,
-                  edit_regulation_path(control.regulation),
-                  :title => control.regulation.description
+              -if control.program
+                =link_to control.program.display_name,
+                  edit_program_path(control.program),
+                  :title => control.program.description
             %td=display_time(control.updated_at)
             %td.last
-              -if control.regulation && !control.regulation.company?
+              -if control.program && !control.program.company?
                 =button_to pat(:implement), implement_control_path(control), :method => :post, :class => :button_to
                 ="|"
               =button_to pat(:edit), edit_control_path(control), :method => :get, :class => :button_to

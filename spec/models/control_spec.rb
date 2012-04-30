@@ -11,7 +11,7 @@ describe Control do
   before :each do
     create_base_objects
     @account = Account.create(:email => "a@b.org", :password => "xxxx", :password_confirmation => "xxxx", :role => "admin")
-    @ctl2 = Control.create(:title => 'Control 2', :slug => 'REG1-CTL2', :description => 'x', :regulation => @reg, :is_key => true, :fraud_related => false)
+    @ctl2 = Control.create(:title => 'Control 2', :slug => 'REG1-CTL2', :description => 'x', :program => @reg, :is_key => true, :fraud_related => false)
   end
 
   it "was not modified by anybody in particular" do
@@ -32,7 +32,7 @@ describe Control do
     @ctl.frequency.should eq(12)
     @ctl.modified_by.should eq(@account)
     @ctl.versions.size.should eq(2)
-    @ctl.versions[1].reify.modified_by_id.should eq(1)
+    @ctl.versions[1].reify.modified_by_id.should eq(@account.id)
     @ctl.versions[1].reify.frequency.should eq(11)
     @ctl.versions[0].reify.modified_by_id.should eq(nil)
     @ctl.versions[0].reify.frequency.should eq(nil)

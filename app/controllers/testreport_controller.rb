@@ -22,8 +22,8 @@ class TestreportController < ApplicationController
     end
   end
 
-  # Show issues by regulation
-  def byregulation
+  # Show issues by program
+  def byprogram
     if request.post?
       redirect_to url_for
     else

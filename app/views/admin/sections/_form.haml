@@ -1,0 +1,37 @@
+.group
+  =f.label :title
+  =f.text_field :title, :class => :text_field
+
+.group
+  =f.label :slug
+  =f.text_field :slug, :class => :text_field
+
+.group
+  =f.label :description
+  =f.text_area :description, :class => :text_area
+
+.group
+  =f.label :program_id
+  -if !@section.new_record?
+    =link_to @section.program.display_name,
+      edit_program_path(@section.program)
+  -else
+    =f.collection_select :program_id, Program.all, :id, :display_name, {}, {:class => :collection, :multiple => false}
+    :javascript
+      old_slug_value = "#{h @section.slug}"
+      $('#section_program_id').change(function() {
+        $.get("#{slug_programs_path}", {"id": $('#section_program_id').val()}, function(data) {
+          if ($("#section_slug")[0].value == old_slug_value)
+            $("#section_slug")[0].value = data
+            old_slug_value = data
+        }, "json");
+      });
+
+
+.group.navform.wat-cf
+  =f.submit pat(:save), :class => :button
+  =f.submit pat(:cancel), :onclick => "window.location='#{sections_path}';return false", :class => :button
+
+%hr.section
+%h3 Controls
+/-edit_children(@section, :control)

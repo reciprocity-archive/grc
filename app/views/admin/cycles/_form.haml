@@ -1,11 +1,11 @@
 .group
-  =f.label :regulation_id
+  =f.label :program_id
   -if !@cycle.new_record?
-    =link_to @cycle.regulation.display_name,
-      edit_regulation_path(@cycle.regulation)
+    =link_to @cycle.program.display_name,
+      edit_program_path(@cycle.program)
   -else
-    =f.collection_select :regulation_id, Regulation.all, :id, :display_name, {}, {:class => :collection, :multiple => false}
-  %span.description Regulation being audited
+    =f.collection_select :program_id, Program.all, :id, :display_name, {}, {:class => :collection, :multiple => false}
+  %span.description Program being audited
 
 .group
   =f.label :start_at

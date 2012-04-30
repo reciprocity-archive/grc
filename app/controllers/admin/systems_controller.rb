@@ -118,7 +118,7 @@ class Admin::SystemsController < ApplicationController
     success = system.document_systems.destroy &&
         system.system_controls.destroy &&
         system.biz_process_systems.destroy &&
-        system.system_control_objectives.destroy &&
+        system.system_sections.destroy &&
         system.destroy
 
     respond_to do |format|
@@ -137,11 +137,11 @@ class Admin::SystemsController < ApplicationController
   end
 
   # Many2many relationship to COs
-  def control_objectives
+  def sections
     if request.put?
-      post_many2many(:left_class => System, :right_class => ControlObjective)
+      post_many2many(:left_class => System, :right_class => Section)
     else
-      get_many2many(:left_class => System, :right_class => ControlObjective)
+      get_many2many(:left_class => System, :right_class => Section)
     end
   end
 
@@ -192,7 +192,7 @@ class Admin::SystemsController < ApplicationController
     @system.infrastructure = @orig.infrastructure
     @system.description = @orig.description
     @system.biz_processes += @orig.biz_processes
-    @system.control_objectives += @orig.control_objectives
+    @system.sections += @orig.sections
     @orig.system_controls.each do |sc|
       @system.system_controls << SystemControl.new(:control => sc.control, :cycle => @cycle)
     end

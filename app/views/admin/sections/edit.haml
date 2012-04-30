@@ -1,0 +1,16 @@
+.block
+  .secondary-navigation
+    %ul.wat-cf
+      %li.first=link_to pat(:list), sections_path
+      %li=link_to pat(:new), new_section_path
+      %li.active=link_to pat(:edit), edit_section_path(@section)
+  .content
+    %h2.title
+      =pat(:edit)
+      =mt(:section)
+    .inner
+      =form_for @section, :method => :put, :html => {:class => :form} do |f|
+        =render :partial => "admin/sections/form", :locals => { :f => f }
+
+-render_for :sidebar, :partial => "base/sidebar"
+-render_for :sidebar, :partial => "base/control_nav"

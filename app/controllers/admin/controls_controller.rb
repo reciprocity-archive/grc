@@ -63,11 +63,11 @@ class Admin::ControlsController < ApplicationController
     # Connect to related Control Objectives
     co_ids = params["control"].delete("co_ids") || []
 
-    if !equal_ids(co_ids, @control.control_objectives)
-      @control.control_objectives = []
+    if !equal_ids(co_ids, @control.sections)
+      @control.sections = []
       co_ids.each do |co_id|
-        co = ControlObjective.find(co_id)
-        @control.control_objectives << co
+        co = Section.find(co_id)
+        @control.sections << co
       end
     end
 
@@ -153,14 +153,14 @@ class Admin::ControlsController < ApplicationController
   end
 
   # Many2many relationship to Control Objectives
-  def control_objectives
+  def sections
     if request.put?
       post_many2many(:left_class => Control,
-                     :right_class => ControlObjective,
+                     :right_class => Section,
                      :lefts => filtered_controls)
     else
       get_many2many(:left_class => Control,
-                    :right_class => ControlObjective,
+                    :right_class => Section,
                     :lefts => filtered_controls,
                     :show_slugfilter => true)
     end
@@ -263,7 +263,7 @@ class Admin::ControlsController < ApplicationController
     @origin = Control.find(params[:id])
 
     @control = Control.new
-    @control.regulation = @company
+    @control.program = @company
     @control.slug = "#{@company.slug}-#{@origin.slug}"
     @control.implemented_controls << @origin
     @control.title = @origin.title

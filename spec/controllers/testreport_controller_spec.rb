@@ -13,10 +13,10 @@ describe TestreportController do
     before :each do
       login({}, { :role => 'admin' })
 
-      @reg = Regulation.create(:title => 'Reg 1', :slug => 'reg1', :company => false)
-      @cycle = Cycle.create(:regulation => @reg, :start_at => '2012-01-01')
-      @ctl = Control.create(:title => 'Control 1', :slug => 'reg1-ctl1', :description => 'x', :regulation => @reg, :is_key => true, :fraud_related => false)
-      @ctl2 = Control.create(:title => 'Control 2', :slug => 'reg1-ctl2', :description => 'x', :regulation => @reg, :is_key => true, :fraud_related => false)
+      @reg = Program.create(:title => 'Reg 1', :slug => 'reg1', :company => false)
+      @cycle = Cycle.create(:program => @reg, :start_at => '2012-01-01')
+      @ctl = Control.create(:title => 'Control 1', :slug => 'reg1-ctl1', :description => 'x', :program => @reg, :is_key => true, :fraud_related => false)
+      @ctl2 = Control.create(:title => 'Control 2', :slug => 'reg1-ctl2', :description => 'x', :program => @reg, :is_key => true, :fraud_related => false)
       @sys = System.create(:title => 'System 1', :slug => 'sys1', :description => 'x', :infrastructure => true)
       @sc = SystemControl.create(:control => @ctl, :system => @sys, :state => :green, :cycle => @cycle)
       @sc2 = SystemControl.create(:control => @ctl2, :system => @sys, :state => :green, :cycle => @cycle)
@@ -34,7 +34,7 @@ describe TestreportController do
     end
 
     describe "GET on some actions" do
-      %w{top byregulation byprocess}.each do |action|
+      %w{top byprogram byprocess}.each do |action|
         it "GET '#{action}'" do
           get action
           response.should be_success
@@ -44,7 +44,7 @@ describe TestreportController do
     end
 
     describe "POST to some actions" do
-      %w{top byregulation}.each do |action|
+      %w{top byprogram}.each do |action|
         it "POST '#{action}' redirects" do
           post action
           response.should be_redirect

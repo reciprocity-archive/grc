@@ -1,0 +1,14 @@
+.block
+  .secondary-navigation
+    %ul.wat-cf
+      %li.first=link_to pat(:list), programs_path
+      %li.active=link_to pat(:new), new_program_path
+  .content
+    %h2.title
+      =pat(:new)
+      =mt(:program)
+    .inner
+      =form_for @program, :method => :post, :html => {:class => :form} do |f|
+        =render :partial => "admin/programs/form", :locals => { :f => f }
+
+/-content_for :sidebar, partial("base/sidebar")

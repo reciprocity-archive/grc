@@ -114,7 +114,7 @@ class Admin::BizProcessesController < ApplicationController
     # Delete links to other objects first, then delete the biz process
     success = biz_process && biz_process.biz_process_systems.destroy &&
         biz_process.biz_process_controls.destroy &&
-        biz_process.biz_process_control_objectives.destroy &&
+        biz_process.biz_process_sections.destroy &&
         biz_process.biz_process_documents.destroy &&
         biz_process.destroy
 

@@ -5,6 +5,7 @@ require 'slugged_model'
 class Control < ActiveRecord::Base
   include AuthoredModel
   include SluggedModel
+  include FrequentModel
 
   after_initialize do
     self.is_key = false if self.is_key.nil?
@@ -15,13 +16,15 @@ class Control < ActiveRecord::Base
 
   before_save :upcase_slug
 
-  FREQUENCIES = [:day, :week, :month, :quarter, :year]
-
   validates :slug, :title, :presence => true
 
   validate :slug do
     validate_slug
   end
+
+  belongs_to :program
+
+  belongs_to :parent, :class_name => 'Control'
 
   # Business area classification
   belongs_to :business_area
@@ -44,18 +47,10 @@ class Control < ActiveRecord::Base
 
   # Which sections are implemented by this one.  A company
   # control may implement several sections.
-  has_many :sections, :class_name => "Control", :through => :control_sections, :order => :slug
+  has_many :sections, :through => :control_sections, :order => :slug
   has_many :control_sections
 
   is_versioned_ext
-
-  def frequency_type
-    FREQUENCIES[read_attribute(:frequency_type)]
-  end
-
-  def frequency_type=(value)
-    write_attribute(:frequency_type, FREQUENCIES.index(value))
-  end
 
   # All non-company section controls
   def self.all_non_company

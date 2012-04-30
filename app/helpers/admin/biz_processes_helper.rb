@@ -1,11 +1,11 @@
 module Admin::BizProcessesHelper
   def update_biz_process_relations(bp, params)
-    co_ids = params.delete("co_ids") || []
+    sec_ids = params.delete("sec_ids") || []
 
-    bp.control_objectives = []
-    co_ids.each do |co_id|
-      co = ControlObjective.find(co_id)
-      bp.control_objectives << co
+    bp.sections = []
+    sec_ids.each do |sec_id|
+      sec = Section.find(sec_id)
+      bp.sections << sec
     end
 
     control_ids = params.delete("control_ids") || []

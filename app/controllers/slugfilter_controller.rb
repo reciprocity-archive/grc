@@ -11,15 +11,15 @@ class SlugfilterController < ApplicationController
     allow :superuser, :admin, :analyst
   end
 
-  # Update the last-used regulation in the session so that the user
+  # Update the last-used program in the session so that the user
   # gets it as a default next time.
-  def regulation_update
-    regulation_id = params[:regulation][:id] rescue nil
-    if !regulation_id.nil?
-      if regulation_id == ""
-        session[:regulation_id] = nil
+  def program_update
+    program_id = params[:program][:id] rescue nil
+    if !program_id.nil?
+      if program_id == ""
+        session[:program_id] = nil
       else
-        session[:regulation_id] = regulation_id
+        session[:program_id] = program_id
       end
     end
     # TODO restore page state (e.g. drilldown)
@@ -28,12 +28,12 @@ class SlugfilterController < ApplicationController
 
   # Update the default company.
   def company_update
-    regulation_id = params[:regulation][:id] rescue nil
-    if !regulation_id.nil?
-      if regulation_id == ""
+    program_id = params[:program][:id] rescue nil
+    if !program_id.nil?
+      if program_id == ""
         session[:company_id] = nil
       else
-        session[:company_id] = regulation_id
+        session[:company_id] = program_id
       end
     end
     # TODO restore page state (e.g. drilldown)

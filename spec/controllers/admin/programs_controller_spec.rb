@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'base_objects'
 
-describe Admin::RegulationsController do
+describe Admin::ProgramsController do
   include BaseObjects
 
   describe "GET 'index' without authorization" do
@@ -22,19 +22,19 @@ describe Admin::RegulationsController do
       it "returns http success" do
         get 'index'
         response.should be_success
-        assigns(:regulations).should eq([@reg])
+        assigns(:programs).should eq([@reg])
       end
     end
 
     describe "POST 'create'" do
       it "creates a new object" do
-        test_controller_create(:regulation, :title => "reg2", :slug => 'REG2')
+        test_controller_create(:program, :title => "reg2", :slug => 'REG2')
       end
     end
 
     describe "PUT 'update'" do
       it "updates an existing object" do
-        test_controller_update(:regulation, @reg, :title => "reg1a")
+        test_controller_update(:program, @reg, :title => "reg1a")
       end
     end
   end

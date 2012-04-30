@@ -5,7 +5,7 @@
 .dashboard
   %table.table
     %tr
-      %th Regulation
+      %th Program
       %th Result / Recommendations
       %th Owner
       %th Due Date
@@ -13,7 +13,7 @@
       %tr
         %td
           %p
-            &=sc.control.regulation.title
+            &=sc.control.program.title
           %p.slug
             &=sc.control.slug
         -if sc.evidence_complete?

@@ -3,7 +3,7 @@ class Admin::CyclesController < ApplicationController
 
   # List cycles
   def index
-    @cycles = Cycle.order([:regulation_id, :start_at])
+    @cycles = Cycle.order([:program_id, :start_at])
 
     respond_to do |format|
       format.html
@@ -34,7 +34,7 @@ class Admin::CyclesController < ApplicationController
   def new_clone
     @other_cycle = Cycle.find(params[:id])
     @cycle = Cycle.new
-    @cycle.regulation = @other_cycle.regulation
+    @cycle.program = @other_cycle.program
     @cycle.start_at ||= @other_cycle.start_at
 
     respond_to do |format|
@@ -52,7 +52,7 @@ class Admin::CyclesController < ApplicationController
   def clone
     @cycle = Cycle.new(params[:cycle])
     @other_cycle = Cycle.find(params[:id])
-    @cycle.regulation = @other_cycle.regulation
+    @cycle.program = @other_cycle.program
     res = []
     res << @cycle.save
     if res.all?

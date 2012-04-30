@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe DocumentController do
   before :each do
-      @reg = Regulation.create(:title => 'Reg 1', :slug => 'reg1', :company => false)
-      @cycle = Cycle.create(:regulation => @reg, :start_at => '2012-01-01')
+      @reg = Program.create(:title => 'Reg 1', :slug => 'reg1', :company => false)
+      @cycle = Cycle.create(:program => @reg, :start_at => '2012-01-01')
       session[:cycle_id] = @cycle.id
   end
 

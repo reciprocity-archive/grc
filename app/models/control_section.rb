@@ -1,4 +1,4 @@
-class ControlRegulation < ActiveRecord::Base
+class ControlSection < ActiveRecord::Base
   include AuthoredModel
 
   belongs_to :control

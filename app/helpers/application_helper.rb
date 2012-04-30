@@ -1,5 +1,5 @@
 module ApplicationHelper
-  ADMIN_MODULES = %w(accounts biz_processes business_areas cycles control_objectives controls documents document_descriptors regulations people systems)
+  ADMIN_MODULES = %w(accounts biz_processes business_areas cycles sections controls documents document_descriptors programs people systems)
   WORKFLOW_MODULES = %w(dashboard evidence testing testreport) 
 
   class ProjectModule
@@ -26,23 +26,23 @@ module ApplicationHelper
     [:superuser, :admin, :analyst, :guest]
   end
 
-  # Filter SystemControl relationship objects by slug and/or regulation.
+  # Filter SystemControl relationship objects by slug and/or program.
   #
   # This is used for the respective filtering widgets.  The widgets store
   # their state in the session.
   def filter_system_controls(collection)
     collection = collection.slugfilter(session[:slugfilter])
-    if session[:regulation_id]
-      @regulation = Regulation.find(session[:regulation_id])
+    if session[:program_id]
+      @program = Program.find(session[:program_id])
       collection = collection.
         joins(:control).
-        where({:control => { :regulation_id => @regulation.id }})
+        where({:control => { :program_id => @program.id }})
     end
 
     return collection
   end
 
-  # Filter Systems by slug and/or the regulation of their attached controls.
+  # Filter Systems by slug and/or the program of their attached controls.
   #
   # This is used for the respective filtering widgets.  The widgets store
   # their state in the session.
@@ -52,9 +52,9 @@ module ApplicationHelper
       control_search[:slug.like] = "#{session[:slugfilter]}%"
     end
 
-    if session[:regulation_id]
-      @regulation = Regulation.find(session[:regulation_id])
-      control_search[:regulation_id] = @regulation
+    if session[:program_id]
+      @program = Program.find(session[:program_id])
+      control_search[:program_id] = @program
     end
 
     return collection if control_search.empty?
@@ -63,7 +63,7 @@ module ApplicationHelper
       where(:system_controls => {:controls => control_search})
   end
 
-  # Filter Biz Processes by slug and/or the regulation of their attached controls.
+  # Filter Biz Processes by slug and/or the program of their attached controls.
   #
   # This is used for the respective filtering widgets.  The widgets store
   # their state in the session.
@@ -73,15 +73,15 @@ module ApplicationHelper
       co_search[:slug.like] = "#{session[:slugfilter]}%"
     end
 
-    if session[:regulation_id]
-      @regulation = Regulation.find(session[:regulation_id])
-      co_search[:regulation_id] = @regulation
+    if session[:program_id]
+      @program = Program.find(session[:program_id])
+      co_search[:program_id] = @program
     end
 
     return collection.where({}) if co_search.empty?
     return collection.
-      joins(:biz_process_control_objectives => :control_objective).
-      where(:biz_process_control_objectives => { :control_objectives => co_search})
+      joins(:biz_process_sections => :section).
+      where(:biz_process_sections => { :sections => co_search})
   end
 
   # Shorthand humanized text for admin pages
@@ -104,9 +104,9 @@ module ApplicationHelper
     time.strftime("%Y-%m-%d %H:%M") rescue "-"
   end
 
-  # Display of regulation type
-  def regulation_display(regulation)
-    regulation.company? ? 'Company' : 'Regulation'
+  # Display of program type
+  def program_display(program)
+    program.company? ? 'Company' : 'Program'
   end
 
   def render_for(tag, opts = {})

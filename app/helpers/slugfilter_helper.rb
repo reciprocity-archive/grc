@@ -1,7 +1,7 @@
 module SlugfilterHelper
   # Generate list of slugs to autocomplete in the slugfilter widget.
   def gen_slugs(prefix)
-    slugs = ControlObjective.all.map { |co| co.slug }
+    slugs = Section.all.map { |co| co.slug }
     slugs = slugs.find_all { |s| s.start_with?(prefix) }
     organize_slugs(slugs)
   end

@@ -74,15 +74,15 @@ class ApplicationController < ActionController::Base
     session[:return_to] = nil
   end
 
-  # Set the regulation to filte rby if the user selected one on previous page.  This is
-  # a before filter that is always on, since the regulation filter pulldown appears on
+  # Set the program to filte rby if the user selected one on previous page.  This is
+  # a before filter that is always on, since the program filter pulldown appears on
   # many pages.
   def filter_set
-    if session[:regulation_id]
-      @regulation = Regulation.where(:id => session[:regulation_id]).first
+    if session[:program_id]
+      @program = Program.where(:id => session[:program_id]).first
     end
     if session[:company_id]
-      @company = Regulation.where(:id => session[:company_id]).first
+      @company = Program.where(:id => session[:company_id]).first
     end
     if session[:cycle_id]
       @cycle = Cycle.where(:id => session[:cycle_id]).first

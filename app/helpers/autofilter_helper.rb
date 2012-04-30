@@ -1,14 +1,14 @@
 module AutofilterHelper
-  # Filter Control Objectives by slug.
+  # Filter Sections by slug.
   #
   # This is used for the respective filtering widgets.  The widgets store
   # their state in the session.
-  def filtered_control_objectives
-    cos = ControlObjective.slugfilter(session[:slugfilter])
-    if @regulation
-      cos = cos.where(:regulation_id => @regulation)
+  def filtered_sections
+    secs = Section.slugfilter(session[:slugfilter])
+    if @program
+      secs = secs.where(:program_id => @program)
     end
-    cos
+    secs
   end
 
   # Filter Controls by slug.
@@ -17,8 +17,8 @@ module AutofilterHelper
   # their state in the session.
   def filtered_controls
     controls = Control.slugfilter(session[:slugfilter])
-    if @regulation
-      controls = controls.where(:regulation_id => @regulation)
+    if @program
+      controls = controls.where(:program_id => @program)
     end
     controls
   end

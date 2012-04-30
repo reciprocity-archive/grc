@@ -16,8 +16,8 @@
     -edit_children_inline(@biz_process, :policies, :document)
 
 .group
-  =f.label :control_objectives
-  =f.collection_select :co_ids, filtered_control_objectives, :id, :display_name, {}, {:class => :collection, :multiple => true}
+  =f.label :sections
+  =f.collection_select :co_ids, filtered_sections, :id, :display_name, {}, {:class => :collection, :multiple => true}
 
 :javascript
   $('#biz_process_co_ids').multiselect(

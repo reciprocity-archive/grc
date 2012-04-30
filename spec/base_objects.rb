@@ -1,9 +1,9 @@
 module BaseObjects
   def create_base_objects
-    @reg = Regulation.create(:title => 'Reg 1', :slug => 'REG1', :company => false)
-    @ctl = Control.create(:title => 'Control 1', :slug => 'REG1-CTL1', :description => 'x', :regulation => @reg, :is_key => true, :fraud_related => false)
-    @cycle = Cycle.create(:regulation => @reg, :start_at => '2011-01-01')
-    @co = ControlObjective.create(:title => 'CO 1', :slug => 'REG1-CO1', :description => 'x', :regulation => @reg)
+    @reg = Program.create(:title => 'Reg 1', :slug => 'REG1', :company => false)
+    @ctl = Control.create(:title => 'Control 1', :slug => 'REG1-CTL1', :description => 'x', :program => @reg, :is_key => true, :fraud_related => false)
+    @cycle = Cycle.create(:program => @reg, :start_at => '2011-01-01')
+    @co = Section.create(:title => 'CO 1', :slug => 'REG1-CO1', :description => 'x', :program => @reg)
     @sys = System.create(:title => 'System 1', :slug => 'SYS1', :description => 'x', :infrastructure => true)
     @sc = SystemControl.create(:control => @ctl, :system => @sys, :cycle => @cycle, :state => :green)
     @desc = DocumentDescriptor.create(:title => 'ACL')
@@ -11,7 +11,7 @@ module BaseObjects
     @bp = BizProcess.create(:title => 'BP1', :slug => 'BP1')
     @bp.systems << @sys
     @bp.controls << @ctl
-    @bp.control_objectives << @co
+    @bp.sections << @co
     @biz_area = BusinessArea.create(:title => 'title1')
     @person1 = Person.create(:username => 'john')
     @sys_person1 = SystemPerson.create(:person => @person1, :system => @sys)

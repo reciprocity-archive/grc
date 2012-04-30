@@ -6,20 +6,20 @@ class NavigationController < ApplicationController
   end
 
   def control_hierarchy
-    unless session[:regulation_id]
+    unless session[:program_id]
       render :json => []
       return
     end
 
     control_map = {}
-    Control.where(:regulation_id => session[:regulation_id]).each do |c|
-      c.control_objectives.each do |co|
+    Control.where(:program_id => session[:program_id]).each do |c|
+      c.sections.each do |co|
         control_map[co.id] ||= []
         control_map[co.id] << { :type => 'c', :label => c.title, :slug => c.slug, :id => c.id }
       end
     end
 
-    cos = ControlObjective.where(:regulation_id => session[:regulation_id]).map do |co|
+    cos = Section.where(:program_id => session[:program_id]).map do |co|
       { :type => 'co', :label => co.title, :slug => co.slug, :id => co.id, :children => control_map[co.id] || [] }
     end
 
