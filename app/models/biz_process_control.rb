@@ -5,23 +5,10 @@
 # these attributes cannot be attached to it directly.
 class BizProcessControl < ActiveRecord::Base
   include AuthoredModel
-
-  after_initialize do
-    self.state = :green if self.state.nil?
-  end
-
-  validates :state, :presence => true
+  include StateModel
 
   belongs_to :control
   belongs_to :biz_process
 
   is_versioned_ext
-
-  def state
-    ControlState::VALUES[read_attribute(:state)]
-  end
-
-  def state=(value)
-    write_attribute(:state, ControlState::VALUES.index(value))
-  end
 end

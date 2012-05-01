@@ -5,12 +5,7 @@
 # these attributes cannot be attached to it directly.
 class SystemControl < ActiveRecord::Base
   include AuthoredModel
-
-  after_initialize do
-    self.state = :green if self.state.nil?
-  end
-
-  validates :state, :presence => true
+  include StateModel
 
   # A set of documents used as evidence in an audit
   has_many :evidences, :class_name => 'Document', :through => :document_system_control
@@ -22,24 +17,12 @@ class SystemControl < ActiveRecord::Base
 
   is_versioned_ext
 
-  def state
-    ControlState::VALUES[read_attribute(:state)]
-  end
-
-  def state=(value)
-    write_attribute(:state, ControlState::VALUES.index(value))
-  end
-
   def <=>(other)
     return control.slug <=> other.control.slug;
   end
 
   def evidence_complete?
     evidences.all? { |ev| ev.complete? }
-  end
-
-  def good_state?
-    ControlState::STATE_IS_GOOD[state]
   end
 
   def self.by_system_control(system_id, control_id, cycle)
