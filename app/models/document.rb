@@ -7,11 +7,6 @@ class Document < ActiveRecord::Base
   include AuthoredModel
   VALID_SCHEMES = ['http', 'https']
 
-  after_initialize do
-    self.reviewed = false if self.reviewed.nil?
-    self.good = true if self.good.nil?
-  end
-
   validate :link do
     if link.nil? or VALID_SCHEMES.include?(link.scheme)
       true

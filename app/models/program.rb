@@ -8,10 +8,6 @@ class Program < ActiveRecord::Base
 
   before_save :upcase_slug
 
-  after_initialize do
-    self.company = false if self.company.nil?
-  end
-
   validates :title, :slug, :presence => true
 
   has_many :sections, :order => :slug

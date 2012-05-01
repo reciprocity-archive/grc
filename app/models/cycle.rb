@@ -5,10 +5,6 @@
 class Cycle < ActiveRecord::Base
   include AuthoredModel
 
-  after_initialize do
-    self.complete = false if self.complete.nil?
-  end
-
   # The program being audited
   belongs_to :program
 

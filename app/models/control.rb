@@ -7,13 +7,6 @@ class Control < ActiveRecord::Base
   include SluggedModel
   include FrequentModel
 
-  after_initialize do
-    self.is_key = false if self.is_key.nil?
-    self.frequency_type ||= :day
-    self.fraud_related = false if self.fraud_related.nil?
-    self.technical = true if self.technical.nil?
-  end
-
   before_save :upcase_slug
 
   validates :slug, :title, :presence => true
