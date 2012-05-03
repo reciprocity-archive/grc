@@ -3,7 +3,7 @@ require File.expand_path('../boot', __FILE__)
 require 'yaml'
 
 CMS_CONFIG = {
-  "SECRET_TOKEN" => "",
+  "SECRET_TOKEN" => "0123456789abcdefChangethistosomethingsecret",
   "COMPANY_LOGO" => nil
 }
 
