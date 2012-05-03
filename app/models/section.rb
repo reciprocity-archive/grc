@@ -28,7 +28,7 @@ class Section < ActiveRecord::Base
 
   # All Sections that could be associated with a system (any company Section)
   def self.for_system(s)
-    all
+    self
   end
 
   # Whether this Section is associated with a company "program"
