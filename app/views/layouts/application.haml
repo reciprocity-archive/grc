@@ -10,7 +10,11 @@
   %body
     #container
       #header
-        %h1=link_to "CMS", root_path
+        -if CMS_CONFIG["COMPANY_LOGO"].present?
+          %h1=link_to image_tag(CMS_CONFIG["COMPANY_LOGO"]), root_path
+        -else
+          %h1=link_to "CMS", root_path
+
         #user-navigation
           %ul.wat-cf
             -if current_user

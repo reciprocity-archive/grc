@@ -1,10 +1,14 @@
 require File.expand_path('../boot', __FILE__)
 
+require 'yaml'
+
 CMS_CONFIG = {
-  "SECRET_TOKEN" => ""
+  "SECRET_TOKEN" => "",
+  "COMPANY_LOGO" => nil
 }
 
 CMS_CONFIG["SECRET_TOKEN"] = ENV["SECRET_TOKEN"] if ENV["SECRET_TOKEN"]
+CMS_CONFIG["COMPANY_LOGO"] = ENV["COMPANY_LOGO"] if ENV["COMPANY_LOGO"]
 
 require 'rails/all'
 
