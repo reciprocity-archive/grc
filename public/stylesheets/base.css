@@ -172,3 +172,7 @@ hr.section {border-top: 3px solid black; margin-top: 20pt; margin-bottom: 10pt;}
   background: url(/images/treeDownTriangleBlack.png) no-repeat 0 50%;
 }
 .collapsible .body {margin-left: 5pt;}
+.welcome.button a {color: white; font-weight: bold;}
+h1.welcome { background: transparent; font-size: 20pt; color: blue;}
+h2.welcome { background: transparent;  color: green;}
+div.welcome.head { font-size: 15pt;}

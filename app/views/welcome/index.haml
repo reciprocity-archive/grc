@@ -1,1 +1,11 @@
-Welcome!
+%div.welcome.head
+  Welcome to
+%h1.welcome
+  #{@company} Compliance Management
+%h2.welcome
+  We're Corporate QA!
+%span.welcome.button
+  =link_to pat(:about_this_project), about_path
+%span.welcome.button
+  =link_to pat(:login), login_path
+

@@ -145,6 +145,10 @@ CmsRails::Application.routes.draw do
 
   # Welcome page
   root :to => "welcome#index"
+  # About page
+  match 'about' => 'welcome#about', :as => 'about'
+  match 'placeholder' => 'welcome#placeholder', :as => 'placeholder'
+  match 'login_dispatch' => 'welcome#login_dispatch', :as => 'login_dispatch'
 
   # See how all your routes lay out with "rake routes"
 end
