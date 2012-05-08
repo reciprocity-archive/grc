@@ -11,7 +11,7 @@
     #container
       #header
         -if CMS_CONFIG["COMPANY_LOGO"].present?
-          %h1=link_to image_tag(CMS_CONFIG["COMPANY_LOGO"]), root_path
+          %h1=link_to image_tag(CMS_CONFIG['COMPANY_LOGO'], :alt => 'CMS', :title => 'CMS'), root_path
         -else
           %h1=link_to "CMS", root_path
 
