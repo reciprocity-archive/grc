@@ -185,14 +185,16 @@ class Admin::ControlsController < ApplicationController
     if request.put?
       post_many2many(:left_class => Control,
                      :right_class => Control,
-                     :right_relation => :sections,
-                     :right_ids => :section_ids,
+                     :right_relation => :implemented_controls,
+                     :right_ids => :implemented_control_ids,
                      :lefts => filtered_controls)
     else
       get_many2many(:left_class => Control,
-                    :lefts => filtered_controls,
+                    :lefts => filtered_controls.
+                        joins(:program).
+                        where(:programs => { :company => true }),
                     :right_class => Control,
-                    :right_ids => :section_ids,
+                    :right_ids => :implemented_control_ids,
                     :show_slugfilter => true)
     end
   end

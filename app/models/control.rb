@@ -43,6 +43,9 @@ class Control < ActiveRecord::Base
   has_many :sections, :through => :control_sections, :order => :slug
   has_many :control_sections
 
+  has_many :implemented_controls, :through => :control_controls, :order => :slug
+  has_many :control_controls
+
   is_versioned_ext
 
   # All non-company section controls
