@@ -61,11 +61,15 @@ First, setup your database by copying the provided `config/database.yml.dist` in
     cp config/database.yml{.dist,}
     vi config/database.yml
 
-Second, Rails requires a secret token for validating sessions and cookies.
+Second, there are a few deployment-specific settings in `config/application.rb`.
 
-    cp config/initializers/secret_token.rb{.dist,}
+#### CMS_CONFIG["SECRET_TOKEN"]
 
-For development, you can keep the default token, but in a public server, you should change it to something random.
+The default is fine for private development, but change this to something secret before deploying (or set with environment variables).
+
+#### CMS_CONFIG["COMPANY_LOGO"]
+
+The company logo shows in the top-left corner of most pages.  If this setting is nil, the logo will just be the text "CMS".  Change this to the URL to display a custom image.
 
 ### Initialize database:
 
