@@ -3,6 +3,7 @@ Setting up CMS for development
 
 If you've done sufficient Rails development before, you may skip to the end for the condensed version.
 
+
 Setup environment
 -----------------
 
@@ -33,6 +34,7 @@ Checkout CMS
 ------------
 
 CMS is open-source and hosted on Google Code using Git.  You can clone and checkout the project with:
+
     git clone https://code.google.com/p/compliance-management cms
     cd cms
 
@@ -49,8 +51,8 @@ And install the gems required for CMS using the command below.  (The `--path=.bu
     bundle install --path=.bundle
 
 
-Setup locally
--------------
+Configure local app settings
+----------------------------
 
 ### Setup development environment:
 
@@ -78,7 +80,6 @@ Now that your environment and database are configured, you need to initialize th
     bundle exec rake db:migrate
     bundle exec rake db:seed
 
-
 ### Setup for testing:
 
 To run tests, you must invoke `bundle exec rake db:test:load` after any migration.
@@ -91,11 +92,9 @@ Running locally
 
 To run the server locally, use `bundle exec rails s`, and then connect to the webserver using http://localhost:3000 .
 
-
 ### Console:
 
 It is often useful to have a Ruby console to test and debug.  Use `bundle exec rails c` to get to this console.
-
 
 ### Tests (RSpec):
 
@@ -138,6 +137,4 @@ CI (continuous integration)
 ---------------------------
 
 Commits to the `master` branch of the repository are automatically pulled and tested using Jenkins on an external server.  Results are then automatically pushed to a live development server.
-
-
 

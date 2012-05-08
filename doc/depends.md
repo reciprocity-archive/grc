@@ -37,6 +37,9 @@ Gems used by CMS
     [Homepage](http://onestepback.org/)
     Builder is used for generating XML, and is required by Rails.
 
+[psych](https://github.com/tenderlove/psych)
+    Psych provides YAML import/export; included to work around an issue with migrations.
+
 
 ### Gems used only in development
 
