@@ -1,6 +1,6 @@
 module ApplicationHelper
   ADMIN_MODULES = %w(accounts biz_processes business_areas cycles sections controls documents document_descriptors programs people systems)
-  WORKFLOW_MODULES = %w(dashboard evidence testing testreport) 
+  WORKFLOW_MODULES = %w(programs_dash dashboard evidence testing testreport) 
 
   class ProjectModule
     attr_accessor :name

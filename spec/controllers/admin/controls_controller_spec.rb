@@ -35,9 +35,9 @@ describe Admin::ControlsController do
     describe "PUT 'update'" do
       it "updates an existing object" do
         @ctl.sections.should eq([])
-        test_controller_update(:control, @ctl, :description => "desc2", :section_ids => [@co.id])
+        test_controller_update(:control, @ctl, :description => "desc2", :section_ids => [@sec.id])
         @ctl.reload
-        @ctl.sections.should eq([@co])
+        @ctl.sections.should eq([@sec])
       end
     end
   end

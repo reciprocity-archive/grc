@@ -1,0 +1,18 @@
+%h1 Programs Dashboard
+
+.section
+  -@programs.each do |program|
+    .item
+      -stats = program_stats(program)
+      %h3
+        =link_to program.title, flow_program_path(program)
+      .item
+        Reg sections:
+        #{stats[:sections_count]},
+        #{stats[:sections_done_count]} linked, 
+        #{stats[:sections_na_count]} N/A, 
+        #{stats[:sections_undone_count]} not finished
+      .item
+        Controls:
+        #{stats[:controls_count]},
+        #{stats[:controls_parented_count]} with parents
