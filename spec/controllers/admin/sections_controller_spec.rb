@@ -22,7 +22,7 @@ describe Admin::SectionsController do
       it "returns http success" do
         get 'index'
         response.should be_success
-        assigns(:sections).should eq([@co])
+        assigns(:sections).should eq([@sec])
       end
     end
   end

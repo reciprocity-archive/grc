@@ -85,6 +85,14 @@ CmsRails::Application.routes.draw do
     end
   end
 
+  resources :programs, :as => 'flow_programs', :only => [] do
+    member do
+      get 'show'
+    end
+  end
+
+  match 'programs_dash' => 'programs_dash#index'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
