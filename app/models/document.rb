@@ -8,7 +8,7 @@ class Document < ActiveRecord::Base
   VALID_SCHEMES = ['http', 'https']
 
   validate :link do
-    if link.nil? or VALID_SCHEMES.include?(link.scheme)
+    if link.nil? || VALID_SCHEMES.include?(link.scheme)
       true
     else
       errors.add(:link, "Scheme must be one of #{VALID_SCHEMES.join(', ')}")
@@ -17,14 +17,15 @@ class Document < ActiveRecord::Base
 
   belongs_to :document_descriptor
 
-  validates :link,     :uniqueness => true
+  validates :link,     :uniqueness => true, :allow_blank => true
 
   def display_name
     title
   end
 
   def link
-    read_attribute(:link) && URI(read_attribute(:link))
+    link = read_attribute(:link)
+    URI(link) if !link.blank?
   end
 
   is_versioned_ext
