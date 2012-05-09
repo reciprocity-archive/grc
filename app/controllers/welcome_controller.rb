@@ -10,7 +10,9 @@ class WelcomeController < ApplicationController
   end
 
   def login_dispatch
-    if current_user.role == "auditor"
+    if current_user.nil?
+      redirect_to :action => :index
+    elsif current_user.role == "auditor"
       redirect_to placeholder_path
     else
       redirect_to dashboard_index_path
