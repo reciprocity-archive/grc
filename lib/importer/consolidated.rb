@@ -44,10 +44,10 @@ module Importer
             headers_seen = true
 
             # Retrieve Program names and slugs from headers of columns
-            add_program(row[3], row[2], true)
-            add_program(row[6], row[5])
-            add_program(row[8], row[7])
-            add_program(row[10], row[9])
+            add_program(row[3], row[2], true)  # Required
+            add_program(row[6], row[5])  if row[5].present?
+            add_program(row[8], row[7])  if row[7].present?
+            add_program(row[10], row[9]) if row[9].present?
           end
 
         else
