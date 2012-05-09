@@ -35,7 +35,8 @@ module Importer
             slug = row[1].strip
             title = row[2].present? ? row[2].strip : slug
 
-            program = Program.create(
+            program = Program.where(:slug => slug).first
+            program ||= Program.create(
               :slug => slug,
               :title => title)
 
