@@ -1,2 +1,2 @@
-%h1 Controls#edit
-%p Find me in app/views/controls/edit.html.haml
+=form_for @control, :method => :put, :html => {:class => :form} do |f|
+  =render :partial => 'controls/form', :locals => { :f => f }
