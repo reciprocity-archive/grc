@@ -91,6 +91,8 @@ CmsRails::Application.routes.draw do
     end
   end
 
+  resources :controls, :as => 'flow_controls'
+
   match 'programs_dash' => 'programs_dash#index'
 
   # The priority is based upon order of creation:
