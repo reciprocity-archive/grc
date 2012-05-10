@@ -1,0 +1,4 @@
+%h1 Controls
+-@controls.each do |control|
+  .item
+    =link_to control.slug, flow_control_path(control)
