@@ -1,0 +1,53 @@
+%h1 Control
+
+.group
+  =f.label :title
+  =f.text_field :title, :class => :short_field
+
+.group
+  =f.label :description
+  =f.text_area :description, :class => :text_area
+
+.section
+  %h3 About this Control
+  .item
+    =f.label :short_code
+    =f.text_field :slug, :class => :short_field
+  .item
+    =f.label :effective_at
+    =f.text_field :effective_at, :class => :short_field, :value => (@control.effective_at || Date.today).strftime("%Y-%m-%d")
+    :javascript
+      $('#control_effective_at').datepicker({changeMonth: true, changeYear: true, dateFormat: 'yy-mm-dd'});
+  .item
+    Control Type: TBD
+.section
+  %h3 Control Verification
+  .item
+    =f.label :frequency
+    =f.text_field :frequency, :class => :short_field
+
+  .item
+    =f.label :frequency_type
+    =f.select :frequency_type, Control::FREQUENCIES, {:class => :enum}
+
+  .item
+    Evidence Types:
+    -@control.evidence_descriptors.each do |desc|
+      .item
+        =desc.title
+        .item
+          =desc.description
+.section
+  %h3 Mappings
+  .item
+    To Controls:
+    -@control.implemented_controls.each do |impl|
+      .item
+        =link_to impl.slug, flow_control_path(impl)
+        =impl.title
+  .item
+    To Sections:
+    -@control.sections.each do |sec|
+      .item
+        =link_to sec.slug, section_path(sec)
+        =sec.title
