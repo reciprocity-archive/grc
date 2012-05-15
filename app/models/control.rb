@@ -46,6 +46,9 @@ class Control < ActiveRecord::Base
   has_many :implemented_controls, :through => :control_controls, :order => :slug
   has_many :control_controls
 
+  has_many :implementing_controls, :through => :implementing_control_controls, :source => :control
+  has_many :implementing_control_controls, :class_name => "ControlControl", :foreign_key => "implemented_control_id"
+
   is_versioned_ext
 
   # All non-company section controls

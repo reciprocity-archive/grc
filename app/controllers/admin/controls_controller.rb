@@ -256,6 +256,34 @@ class Admin::ControlsController < ApplicationController
     redirect_to edit_control_path(Control.find(params[:id]))
   end
 
+  # Detach a control mapping from the implemented_controls perspective
+  def destroy_control
+    cc = ControlControl.
+        where(:implemented_control_id => params[:id],
+              :control_id => params[:control_id]).
+        first
+    if cc && cc.destroy
+      flash[:notice] = 'Control was successfully detached.'
+    else
+      flash[:error] = 'Failed'
+    end
+    redirect_to edit_control_path(Control.find(params[:id]))
+  end
+
+  # Detach a implemented_control mapping from the implementing controls perspective
+  def destroy_implemented_control
+    cc = ControlControl.
+        where(:control_id => params[:id],
+              :implemented_control_id => params[:implemented_control_id]).
+        first
+    if cc && cc.destroy
+      flash[:notice] = 'Control was successfully detached.'
+    else
+      flash[:error] = 'Failed'
+    end
+    redirect_to edit_control_path(Control.find(params[:id]))
+  end
+
   def implement
     unless @company
       flash[:error] = 'Must set a company first.'

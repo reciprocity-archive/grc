@@ -84,6 +84,26 @@
 
 -if @control.program && @control.program.company?
   %hr.section
+  %h3 Regulatory Controls
+  %table.table
+    %tr
+      %th Name
+      %th
+    -edit_many(@control, :control_controls, :implemented_control, :other_controller => :controls) do |bpc|
+      &nbsp;
+
+-if @control.program && !@control.program.company?
+  %hr.section
+  %h3 Consolidated Controls
+  %table.table
+    %tr
+      %th Name
+      %th
+    -edit_many(@control, :implementing_control_controls, :control, :other_controller => :controls) do |bpc|
+      &nbsp;
+
+-if @control.program && !@control.program.company?
+  %hr.section
   %h3 Implemented Sections
   %table.table
     %tr
