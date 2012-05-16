@@ -22,6 +22,12 @@ CmsRails::Application.configure do
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin
 
+  config.assets.compress = false
+  config.assets.debug = true
+  config.assets.compile = true
+  config.assets.digest = false
+  #config.serve_static_assets = false
+
   # hm... these don't work
   #Sass::Plugin.options[:always_update] = true
   #Sass::Plugin.options[:always_check] = true
