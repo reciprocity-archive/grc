@@ -11,6 +11,7 @@ class Program < ActiveRecord::Base
   validates :title, :slug, :presence => true
 
   has_many :sections, :order => :slug
+  has_many :controls, :order => :slug
 
   belongs_to :source_document, :class_name => 'Document'
   belongs_to :source_website, :class_name => 'Document'

@@ -1,4 +1,14 @@
-%h1 Controls
--@controls.each do |control|
-  .item
-    =link_to control.slug, flow_control_path(control)
+-content_for :header do
+  %ul#breadcrumbs
+    %li Dashboard
+    %li Controls
+  %h2 Controls
+
+.box
+  .head
+    %h1 Controls
+  .body
+    %ul
+      -@controls.each do |control|
+        %li.item
+          =link_to control.slug, flow_control_path(control)

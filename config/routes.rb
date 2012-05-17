@@ -90,10 +90,15 @@ CmsRails::Application.routes.draw do
   resources :programs, :as => 'flow_programs', :only => [] do
     member do
       get 'show'
+      get 'tooltip'
     end
   end
 
-  resources :controls, :as => 'flow_controls'
+  resources :controls, :as => 'flow_controls' do
+    member do
+      get 'tooltip'
+    end
+  end
 
   match 'programs_dash' => 'programs_dash#index'
 

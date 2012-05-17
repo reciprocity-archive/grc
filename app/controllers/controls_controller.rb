@@ -11,6 +11,8 @@ class ControlsController < ApplicationController
     allow :superuser, :admin, :analyst
   end
 
+  layout 'dashboard'
+
   def edit
     @control = Control.find(params[:id])
   end
@@ -27,6 +29,14 @@ class ControlsController < ApplicationController
   end
 
   def create
+    @control = Control.new(params[:control])
+
+    if @control.save
+      redirect_to :back
+    else
+      flash[:error] = "This is an error"
+      redirect_to :back
+    end
   end
 
   def index

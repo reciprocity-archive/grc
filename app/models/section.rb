@@ -103,5 +103,17 @@ class Section < ActiveRecord::Base
     systems.map { |s| s.id }
   end
 
+  def consolidated_controls
+    controls.includes(:implementing_controls).map do |control|
+      control.implementing_controls.all
+    end.flatten
+  end
+
+  def linked_controls
+    controls.includes(:implementing_controls).map do |control|
+      [control] + control.implementing_controls.all
+    end.flatten
+  end
+
   is_versioned_ext
 end

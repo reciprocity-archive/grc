@@ -1,18 +1,64 @@
-%h1 Programs Dashboard
+-content_for :header do
+  %ul#breadcrumbs
+    %li Dashboard
+    %li Programs
+  %h2 Programs
 
-.section
-  -@programs.each do |program|
-    .item
-      -stats = program_stats(program)
-      %h3
-        =link_to program.title, flow_program_path(program)
-      .item
-        Reg sections:
-        #{stats[:sections_count]},
-        #{stats[:sections_done_count]} linked, 
-        #{stats[:sections_na_count]} N/A, 
-        #{stats[:sections_undone_count]} not finished
-      .item
-        Controls:
-        #{stats[:controls_count]},
-        #{stats[:controls_parented_count]} with parents
+.box.section
+  .head
+    %h3 Programs
+    %ul.box-actions
+      %li.create-program
+        %a{ :href => new_program_path } Create Program
+        %div.hidden.dialog
+          -program = Program.new
+          =form_for program, :method => :post, :html => {:class => :form} do |f|
+            =render :partial => "admin/programs/form", :locals => { :f => f }
+
+  .body
+    %ul.items
+      -@programs.each do |program|
+        %li.item.tipped{:data => { :program_id => program.id }, :rel => tooltip_flow_program_path(:id => program.id)}
+          -stats = program_stats(program)
+          %h3
+            =link_to program.title, flow_program_path(program)
+          .item
+            Reg sections:
+            #{stats[:sections_count]},
+            #{stats[:sections_done_count]} linked, 
+            #{stats[:sections_na_count]} N/A, 
+            #{stats[:sections_undone_count]} not finished
+          .item
+            Controls:
+            #{stats[:controls_count]},
+            #{stats[:controls_parented_count]} with parents
+
+.box#quick_find
+  .head
+    %h3 Quick Find
+    %ul.box-actions
+      %li
+        %input.quick-search(type='text' value='Search...')
+
+  .body.tabbed
+    %ul
+      %li
+        %a(href="#tab1") Controls
+      %li
+        %a(href="#tab2") Systems
+      %li
+        %a(href="#tab3") Biz Processes
+    #tab1
+      %ul.items
+        -@quick_find[:controls].each do |control|
+          %li.item=link_to control.title, flow_control_path(control.id)
+    #tab2
+      %ul.items
+        -@quick_find[:systems].each do |system|
+          %li.item=link_to system.title, system_path(system.id)
+    #tab3
+      %ul.items
+        -@quick_find[:biz_processes].each do |bp|
+          %li.item=link_to bp.title, biz_process_path(bp.id)
+
+

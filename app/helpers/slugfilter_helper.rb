@@ -46,4 +46,28 @@ module SlugfilterHelper
       { :label => "#{slug}#{more_suffix}", :value => "#{slug}" }
     end
   end
+
+  def walk_slug_tree(tree, &block)
+    capture_haml do
+      walk_slug_tree_helper(tree, &block)
+    end
+  end
+
+  def walk_slug_tree_helper(tree, step=nil, odd=true, &block)
+    children = tree.first_level_descendents_with_step
+    if tree.object || !children.empty?
+      haml_tag("li", { :id => "content_#{tree.prefix}" }) do
+        if tree.object
+          yield [tree.object, step]
+        end
+        if !children.empty?
+          haml_tag("ul", { :id => "children_#{tree.prefix}" }) do
+            children.each do |step, child|
+              walk_slug_tree_helper(child, step, odd, &block)
+            end
+          end
+        end
+      end
+    end
+  end
 end

@@ -1,0 +1,255 @@
+/*
+ *= require jqtree
+ *= require jquery-ui
+ *= require jquery.multiselect
+ *= require jquery.multiselect.filter
+ *= require scaffold
+ */
+
+/* Misc base styles */
+
+a:visited { color: #b3b; }
+ul { margin: 0; padding: 0; }
+ul li { list-style: none; }
+.hidden { display: none; }
+
+/* Layout styles for dashbaord page structure */
+
+html,body { margin:0.3%; height: 99.4%; width: 99.4%; }
+
+#container {
+  height: 100%;
+
+  overflow: auto;
+  background-color: #ddd;
+
+  #header {
+    width: 100%;
+    background-color: #666666;
+    border-radius: 5px;
+    margin: 0; padding: 0;
+    h1 {
+      width: 200px;
+      margin: 0;
+    }
+
+    #main-navigation {
+      float: right;
+      margin: 8px;
+    }
+  }
+
+  #subheader {
+    padding: 10px;
+    border-radius: 5px 0 5px 5px;
+    background-color: #cccccc;
+
+    h2 {
+      margin: 0;
+    }
+  }
+
+  #flash {
+    text-align: center;
+    background-color: yellow;
+  }
+
+  #breadcrumbs {
+    margin: 0;
+
+    padding: 0;
+    list-style: none;
+
+    li {
+      display: inline;
+
+      &:after {
+        content: ' /'
+      }
+      &:last-child:after {
+        content: ''
+      }
+    }
+  }
+
+
+  #main-navigation {
+    ul li {
+      display: inline;
+      padding: 2px;
+      border-radius: 5px;
+      margin-left: 10px;
+      background-color: #ff8888;
+      font-weight: bold;
+
+      &:hover {
+        background-color: #bb8888
+      }
+
+      a {
+        text-decoration: none;
+        color: #000;
+        display: inline-block;
+
+	&:hover { background-color: #fff; }
+      }
+    }
+  }
+
+  #user-navigation {
+    float: right;
+
+    li {
+      display: inline;
+    }
+  }
+  #wrapper {
+    clear: both;
+  }
+
+  #footer {
+    position: absolute;
+    bottom: 20px;
+    height: 20px;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* BOX styles for the widgets/panes on the dashboard */
+
+.box {
+  position: relative;
+  float: left;
+  margin: 20px 0 20px 20px;
+
+  width: 40%;
+
+  border: 2px solid #888;
+  border-radius: 5px;
+  padding-bottom: 30px;
+
+  .head, .body, .foot { width: 100%; }
+
+  .head {
+    clear: both;
+    height: 30px;
+
+    background: #aaa;
+    width: 100%;
+
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+
+    h3 {
+      background: none;
+      color: black;
+      margin: 0;
+      float: left;
+    }
+  }
+
+  .body {
+    clear: both;
+    max-height: 400px;
+    overflow:auto;
+    background-color: #eee;
+
+    &.ui-tabs {
+      padding: 0;
+      border: none;
+    }
+    .ui-tabs-nav {
+      padding: 0;
+      border: none;
+      border-radius: 0;
+    }
+    .ui-tabs-panel {
+      padding: 5px;
+      overflow: auto;
+    }
+  }
+
+  .foot {
+    position: absolute;
+    bottom: 0px;
+
+    border-top: 1px solid #888;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+
+  ul.box-actions {
+
+    li {
+      float: right;
+      margin:2px 5px; display: inline;
+      border: 2px solid #555;
+    }
+  }
+}
+
+/* LIST styles for the quick-list lists */
+
+ul.items {
+  li.item {
+    border: 1px solid #eeeeee;
+    border-radius: 2px;
+    background-color: #bbddff;
+    list-style: none;
+    margin: 5px;
+    padding: 5px;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+/* TREE styles for the Section / Control trees on the Program page */
+
+ul.slugtree {
+  position: relative;
+  padding-left: 0px;
+  width: 80%;
+
+  .collapsed {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .prefix {
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  .expander {
+    position: absolute;
+    display: inline-block;
+    right: -2%;
+  }
+  .content {
+    background-color: #ccc;
+    display: none;
+  }
+  .attached {
+    position: absolute;
+    display: inline-block;
+    left: 102%;
+    margin-top: -16px;
+    width: 20%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    li {
+      margin: 2px;
+      background-color: #aaa;
+      display: inline;
+    }
+  }
+
+  ul {
+    padding-left: 10px;
+  }
+}

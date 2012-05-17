@@ -1,0 +1,45 @@
+!!! Strict
+%html{:lang => "en", :xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}
+    %title CMS
+    =stylesheet_link_tag 'dashboard'
+    =javascript_include_tag 'dashboard'
+    =csrf_meta_tag
+  %body
+    #container
+      #header
+        #main-navigation
+          %ul.wat-cf
+            -if current_user.has_role?(:admin) || current_user.has_role?(:superuser)
+              %li=link_to "Admin", admin_path
+            %li=link_to "Old Dashboard", dashboard_index_path
+        -if CMS_CONFIG["COMPANY_LOGO"].present?
+          %h1=link_to image_tag(CMS_CONFIG['COMPANY_LOGO'], :alt => 'CMS', :title => 'CMS'), root_path
+        -else
+          %h1=link_to "CMS", root_path
+
+      #subheader
+        #user-navigation
+          %ul.wat-cf
+            -if current_user
+              %li
+                Welcome
+                %strong=current_user.name || current_user.email
+              %li=link_to pat(:logout), logout_path, :method => :delete    
+            -else
+              %li=link_to pat(:login), login_path
+        =yield :header
+
+      #wrapper.wat-cf
+        .flash!=[:error, :warning, :notice].map { |type| content_tag(:div, flash[type], :class => "message #{type}") if flash[type] }.join
+        #main
+          =yield
+      #footer
+        .block
+          %p
+            =CMS_CONFIG['COMPANY']
+            Confidential.
+            Copyright &copy;
+            =Time.now.year
+            =CMS_CONFIG['COMPANY']
