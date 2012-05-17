@@ -2,7 +2,8 @@ module RoleModel
   ROLES = [:tech, :business]
 
   def role
-    ROLES[read_attribute(:role) || 0]
+    index = read_attribute(:role) || self.class.columns_hash['role'].default
+    ROLES[index]
   end
 
   def role=(value)
