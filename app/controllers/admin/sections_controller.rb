@@ -56,7 +56,7 @@ class Admin::SectionsController < ApplicationController
 
     respond_to do |format|
       if @section.save
-        format.html { redirect_to(edit_section_path(@section), :notice => 'Control Objective was successfully created.') }
+        format.html { redirect_to(edit_section_path(@section), :notice => 'Section was successfully created.') }
         format.xml  { render :xml => @section, :status => :created, :location => @section }
       else
         flash.now[:error] = "Could not create."
@@ -73,7 +73,7 @@ class Admin::SectionsController < ApplicationController
 
     respond_to do |format|
       if @section.update_attributes(params[:section])
-        format.html { redirect_to(edit_section_path(@section), :notice => 'Control Objective was successfully updated.') }
+        format.html { redirect_to(edit_section_path(@section), :notice => 'Section was successfully updated.') }
         format.xml  { head :ok }
       else
         flash.now[:error] = "Could not update."
