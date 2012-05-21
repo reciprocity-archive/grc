@@ -28,9 +28,10 @@
 
         #main-navigation
           %ul.wat-cf
-            -project_modules.each do |project_module|
-              %li{:class => ("active" if request.path_info =~ /^#{project_module.path}/)}
-                =link_to project_module.name, project_module.path
+            -if current_user
+              -project_modules.each do |project_module|
+                %li{:class => ("active" if request.path_info =~ /^#{project_module.path}/)}
+                  =link_to project_module.name, project_module.path
 
       #wrapper.wat-cf
         .flash!=[:error, :warning, :notice].map { |type| content_tag(:div, flash[type], :class => "message #{type}") if flash[type] }.join
