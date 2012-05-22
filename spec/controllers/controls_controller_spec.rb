@@ -58,8 +58,9 @@ describe ControlsController do
     end
 
     it "creates" do
-      post 'create'
-      response.should be_success
+      request.env["HTTP_REFERER"] = 'back'
+      post 'create', :control => { :slug => 'test' }
+      response.should redirect_to 'back'
     end
   end
 end
