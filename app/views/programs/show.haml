@@ -1,41 +1,104 @@
-%h1 Program Information
+-content_for :header do
+  %ul#breadcrumbs
+    %li=link_to 'Programs', programs_dash_path
+    %li=@program.slug
+  %h2=@program.title
 
-=@program.title
-\|
-=@program.slug
-\|
-=@program.company? ? 'Company' : 'Regulation'
+.box
+  .head
+    %h3 Program Information
+    %ul.box-actions
+      %li.create-control
+        %a{ :href => new_control_path } Create Control
+        %div.hidden.dialog
+          -control = @program.controls.new
+          =form_for control, :url => flow_controls_path, :method => :post, :html => {:class => :form} do |f|
+            =render :partial => "controls/form", :locals => { :f => f }
 
-%h3 Description
+  .body
+    =@program.title
+    \|
+    =@program.slug
+    \|
+    =@program.company? ? 'Company' : 'Regulation'
 
-.item
-  =@program.description
+    %h3 Description
 
-.item
-  Created:
-  =display_time(@program.created_at)
-.item
-  Updated:
-  =display_time(@program.updated_at)
+    .item
+      =@program.description
+
+    .item
+      Created:
+      =display_time(@program.created_at)
+    .item
+      Updated:
+      =display_time(@program.updated_at)
 
 
-%h3 Sections
-.item
-  Done: 
-  =@stats[:sections_done_count]
-.item
-  N/A: 
-  =@stats[:sections_na_count]
-.item
-  Not Done: 
-  =@stats[:sections_undone_count]
+    %h3 Sections
+    .item
+      Done: 
+      =@stats[:sections_done_count]
+    .item
+      N/A: 
+      =@stats[:sections_na_count]
+    .item
+      Not Done: 
+      =@stats[:sections_undone_count]
 
-%h3 Controls
-.item
-  Controls: 
-  =@stats[:controls_count]
+    %h3 Controls
+    .item
+      Controls: 
+      =@stats[:controls_count]
 
-.item
-  Parented Controls: 
-  =@stats[:controls_parented_count]
+    .item
+      Parented Controls: 
+      =@stats[:controls_parented_count]
+
+.box
+  .head
+    %h3 Regulations
+  .body.tabbed
+    %ul
+      %li
+        %a(href="#tab1") Regulations
+      %li
+        %a(href="#tab2") Controls
+    #tab1
+      %ul.slugtree
+        =walk_slug_tree(Program.slugtree(@program.sections.all)) do |item, step|
+          .collapsed
+            %span.prefix
+              =item.slug
+            =item.title || item.description
+            .expander='+' if !item.description.blank?
+          -controls = item.linked_controls
+          %ul.attached{ :title => controls.map(&:slug).join(", ") }
+            -controls.each do |control|
+              %li
+                %a{ :href => flow_control_path(control.id) }
+                  =control.slug
+            -if controls.empty?
+              %li N/A
+          .content
+            =item.description
+
+    #tab2
+      %ul.slugtree
+        =walk_slug_tree(Control.slugtree(@program.controls.all)) do |item, step|
+          .collapsed
+            %span.prefix
+              =item.slug
+            =item.title || item.description
+            .expander='+' if !item.description.blank?
+          -controls = item.implementing_controls.all
+          %ul.attached{ :title => controls.map(&:slug).join(", ") }
+            -controls.each do |control|
+              %li
+                %a{ :href => flow_control_path(control.id) }
+                  =control.slug
+            -if controls.empty?
+              %li N/A
+          .content
+            =item.description
 

@@ -18,14 +18,14 @@
 .group
   =f.label :source_document
   .sub-item
-    =f.fields_for :source_document, @program.source_document do |b|
-      =render "admin/documents/subitem", { :f => b, :document => @program.source_document }
+    =f.fields_for :source_document, f.object.source_document do |b|
+      =render "admin/documents/subitem", { :f => b, :document => f.object.source_document }
 
 .group
   =f.label :source_website
   .sub-item
-    =f.fields_for :source_website, @program.source_website do |b|
-      =render "admin/documents/subitem", { :f => b, :document => @program.source_website }
+    =f.fields_for :source_website, f.object.source_website do |b|
+      =render "admin/documents/subitem", { :f => b, :document => f.object.source_website }
 
 .group.navform.wat-cf
   =f.submit pat(:save), :class => :button
@@ -33,5 +33,5 @@
 
 %hr.section
 %h3 Control Objectives
--edit_children(@program, :section)
+-edit_children(f.object, :section)
 

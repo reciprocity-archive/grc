@@ -1,8 +1,7 @@
 module StateModel
-  DEFAULT_STATE = 0
-
   def state
-    ControlState::VALUES[read_attribute(:state) || DEFAULT_STATE]
+    index = read_attribute(:state) || self.class.columns_hash['state'].default
+    ControlState::VALUES[index]
   end
 
   def state=(value)

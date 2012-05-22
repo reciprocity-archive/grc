@@ -7,6 +7,7 @@
 
 class DashboardController < ApplicationController
   include ApplicationHelper
+  layout 'application'
 
   access_control :acl do
     allow :superuser, :admin, :analyst

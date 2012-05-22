@@ -1,8 +1,8 @@
 .group
   =f.label :program_id
-  -if !@control.new_record?
-    =link_to @control.program.display_name,
-      edit_program_path(@control.program)
+  -if !f.object.new_record?
+    =link_to f.object.program.display_name,
+      edit_program_path(f.object.program)
   -else
     =f.collection_select :program_id, Program.all, :id, :display_name, {}, {:class => :collection, :multiple => false}
     :javascript
@@ -15,10 +15,10 @@
         }, "json");
       });
 
--if !@control.new_record?
+-if !f.object.new_record?
   .group
     =f.label :sections_id
-    =f.collection_select :section_ids, @control.program.sections, :id, :display_name, {}, {:class => :collection, :multiple => true}
+    =f.collection_select :section_ids, f.object.program.sections, :id, :display_name, {}, {:class => :collection, :multiple => true}
 
   :javascript
     $('#control_section_ids').multiselect(
@@ -68,7 +68,7 @@
 
 .group
   =f.label :effective_at
-  =f.text_field :effective_at, :class => :text_field, :value => (@control.effective_at || Date.today).strftime("%Y-%m-%d")
+  =f.text_field :effective_at, :class => :text_field, :value => (f.object.effective_at || Date.today).strftime("%Y-%m-%d")
 
 .group
   =f.label :business_area_id
@@ -82,37 +82,37 @@
   =f.submit pat(:save), :class => :button
   =f.submit pat(:cancel), :onclick => "window.location='#{controls_path}';return false", :class => :button
 
--if @control.program && @control.program.company?
+-if f.object.program && f.object.program.company?
   %hr.section
   %h3 Regulatory Controls
   %table.table
     %tr
       %th Name
       %th
-    -edit_many(@control, :control_controls, :implemented_control, :other_controller => :controls) do |bpc|
+    -edit_many(f.object, :control_controls, :implemented_control, :other_controller => :controls) do |bpc|
       &nbsp;
 
--if @control.program && !@control.program.company?
+-if f.object.program && !f.object.program.company?
   %hr.section
   %h3 Consolidated Controls
   %table.table
     %tr
       %th Name
       %th
-    -edit_many(@control, :implementing_control_controls, :control, :other_controller => :controls) do |bpc|
+    -edit_many(f.object, :implementing_control_controls, :control, :other_controller => :controls) do |bpc|
       &nbsp;
 
--if @control.program && !@control.program.company?
+-if f.object.program && !f.object.program.company?
   %hr.section
   %h3 Implemented Sections
   %table.table
     %tr
       %th Name
       %th
-    -edit_many(@control, :control_sections, :section, :other_controller => :sections) do |bpc|
+    -edit_many(f.object, :control_sections, :section, :other_controller => :sections) do |bpc|
       &nbsp;
 
--if @control.program && @control.program.company?
+-if f.object.program && f.object.program.company?
   %hr.section
   %h3 Biz Processes
   %table.table
@@ -121,7 +121,7 @@
       %th State
       %th Ticket
       %th
-    -edit_many(@control, :biz_process_controls, :biz_process) do |bpc|
+    -edit_many(f.object, :biz_process_controls, :biz_process) do |bpc|
       %td
         State: 
         %span{:class => bpc.state}
@@ -129,17 +129,17 @@
       %td
         Ticket: 
         =bpc.ticket
-  -edit_many_attach(@control, :biz_process_controls, :biz_process)
+  -edit_many_attach(f.object, :biz_process_controls, :biz_process)
 
-/=render :partial => 'base/model_history', :locals => { :object => @control }
+/=render :partial => 'base/model_history', :locals => { :object => f.object }
 /  %hr.section
 /  %h3 Systems
-/  -edit_children(@control, :system)
+/  -edit_children(f.object, :system)
 /
 /  %hr.section
 /  %h3 Evidence Descriptors
-/  -edit_many_anon(@control, :evidence_descriptor, :document_descriptor)
+/  -edit_many_anon(f.object, :evidence_descriptor, :document_descriptor)
 /
 /  %hr.section
 /  %h3 Implemented Controls
-/  -edit_many_anon(@control, :implemented_control, :control)
+/  -edit_many_anon(f.object, :implemented_control, :control)

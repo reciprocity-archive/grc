@@ -11,8 +11,16 @@ class ProgramsController < ApplicationController
     allow :superuser, :admin, :analyst
   end
 
+  layout 'dashboard'
+
   def show
     @program = Program.find(params[:id])
     @stats = program_stats(@program)
+  end
+
+  def tooltip
+    @program = Program.find(params[:id])
+    @stats = program_stats(@program)
+    render :action => :show, :layout => 'tooltip'
   end
 end
