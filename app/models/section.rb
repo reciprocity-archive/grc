@@ -6,6 +6,7 @@ require 'slugged_model'
 class Section < ActiveRecord::Base
   include AuthoredModel
   include SluggedModel
+  include SearchableModel
 
   before_save :upcase_slug
 

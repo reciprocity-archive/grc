@@ -101,6 +101,9 @@ CmsRails::Application.routes.draw do
   end
 
   match 'programs_dash' => 'programs_dash#index'
+  match 'quick/programs' => 'quick#programs'
+  match 'quick/sections' => 'quick#sections'
+  match 'quick/controls' => 'quick#controls'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

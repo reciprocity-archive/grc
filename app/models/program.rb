@@ -5,6 +5,7 @@ class Program < ActiveRecord::Base
   include AuthoredModel
   include SluggedModel
   include FrequentModel
+  include SearchableModel
 
   before_save :upcase_slug
 

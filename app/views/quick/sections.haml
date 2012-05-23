@@ -1,0 +1,3 @@
+%ul.items
+  -@sections.each do |section|
+    %li.item=link_to section.title, section_path(section)
