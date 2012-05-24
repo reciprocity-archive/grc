@@ -94,6 +94,12 @@ CmsRails::Application.routes.draw do
     end
   end
 
+  resources :sections, :as => 'flow_sections', :only => [] do
+    member do
+      get 'tooltip'
+    end
+  end
+
   resources :controls, :as => 'flow_controls' do
     member do
       get 'tooltip'

@@ -24,6 +24,11 @@ class ControlsController < ApplicationController
     @control = Control.find(params[:id])
   end
 
+  def tooltip
+    @control = Control.find(params[:id])
+    render :layout => nil
+  end
+
   def new
     @control = Control.new
   end

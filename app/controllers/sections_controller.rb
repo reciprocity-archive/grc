@@ -2,8 +2,8 @@
 # Copyright:: Google Inc. 2012
 # License:: Apache 2.0
 
-# Browse programs
-class ProgramsController < ApplicationController
+# Browse sections
+class SectionsController < ApplicationController
   include ApplicationHelper
   include ProgramsHelper
 
@@ -13,14 +13,8 @@ class ProgramsController < ApplicationController
 
   layout 'dashboard'
 
-  def show
-    @program = Program.find(params[:id])
-    @stats = program_stats(@program)
-  end
-
   def tooltip
-    @program = Program.find(params[:id])
-    @stats = program_stats(@program)
+    @section = Section.find(params[:id])
     render :layout => nil
   end
 end

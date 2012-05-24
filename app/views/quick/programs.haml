@@ -1,3 +1,6 @@
 %ul.items
   -@programs.each do |program|
-    %li.item=link_to program.title, flow_program_path(program)
+    %li.item=link_to program.title, flow_program_path(program), 'data-tooltip' => tooltip_flow_program_path(program)
+
+:javascript
+  update_tooltips();

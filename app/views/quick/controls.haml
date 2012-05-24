@@ -1,3 +1,6 @@
 %ul.items
   -@controls.each do |control|
-    %li.item=link_to control.title, flow_control_path(control)
+    %li.item=link_to control.title, flow_control_path(control), 'data-tooltip' => tooltip_flow_control_path(control)
+
+:javascript
+  update_tooltips();

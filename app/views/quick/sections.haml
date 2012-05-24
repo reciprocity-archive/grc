@@ -1,3 +1,6 @@
 %ul.items
   -@sections.each do |section|
-    %li.item=link_to section.title, section_path(section)
+    %li.item=link_to section.title, section_path(section), 'data-tooltip' => tooltip_flow_section_path(section)
+
+:javascript
+  update_tooltips();

@@ -1,0 +1,29 @@
+.head
+  %h3 Control
+.body
+  %h4
+    =@control.title
+
+  .section
+    Description:
+    =@control.description
+
+  .section
+    %h3 About this Control
+    .item
+      Short Code: #{@control.slug}
+    .item
+      Effective Date: #{display_time(@control.effective_at)}
+    .item
+      Control Type: TBD
+  .section
+    %h3 Control Verification
+    .item
+      Frequency: #{pluralize(@control.frequency, @control.frequency_type.to_s)}
+    .item
+      Evidence Types:
+      -@control.evidence_descriptors.each do |desc|
+        .item
+          =desc.title
+          .item
+            =desc.description

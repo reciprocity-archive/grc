@@ -2,6 +2,7 @@
  *= require jquery-min
  *= require jquery-ujs
  *= require jquery-ui
+ *= require jquery.qtip
  */
 
 // Put your application scripts here
@@ -29,3 +30,20 @@ jQuery(document).ready(function() {
       });
     });
 });
+
+function update_tooltips()
+{
+  jQuery(document).ready(function() {
+    $('.item a[data-tooltip]').each(function () {
+      $(this).qtip({
+        content: {
+          text: 'Loading...',
+          ajax: { url: $(this).attr('data-tooltip')},
+        },
+        show: { target: $(this).parent(), solo: true },
+        hide: { target: $(this).parent(), delay: 50 },
+        position: { target: $(this).parent(), my: 'center', at: 'center' },
+      });
+    });
+  });
+}
