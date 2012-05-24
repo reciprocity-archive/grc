@@ -1,7 +1,5 @@
 /*
  *= require application
- *= require jquery-min
- *= require jquery-ui
  *= require_self
  */
 
