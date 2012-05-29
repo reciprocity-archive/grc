@@ -1,0 +1,33 @@
+.group
+  =f.label :title
+  =f.text_field :title, :class => :text_field
+
+.group
+  =f.label :slug
+  =f.text_field :slug, :class => :text_field
+
+.group
+  =f.label :company
+  =f.check_box :company, :class => :check_box
+  %span.description Does this group a specific company's control objectives?
+
+.group
+  =f.label :description
+  =f.text_area :description, :class => :text_area
+
+.group
+  =f.label :source_document
+  .sub-item
+    =f.fields_for :source_document, f.object.source_document do |b|
+      =render "admin/documents/subitem", { :f => b, :document => f.object.source_document }
+
+.group
+  =f.label :source_website
+  .sub-item
+    =f.fields_for :source_website, f.object.source_website do |b|
+      =render "admin/documents/subitem", { :f => b, :document => f.object.source_website }
+
+/%hr.section
+/%h3 Control Objectives
+/-edit_children(f.object, :section)
+

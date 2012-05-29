@@ -1,8 +1,12 @@
 /*
- *= require jquery-min
+ *= require jquery
  *= require jquery-ujs
  *= require jquery-ui
  *= require jquery.qtip
+ *= require bootstrap
+ *= require bootstrap/sticky-popover
+ *= require bootstrap/modal-form
+ *= require_self
  */
 
 // Put your application scripts here
@@ -10,40 +14,51 @@ jQuery(document).ready(function() {
   $('.collapsible .head').click(function() {
       $(this).toggleClass('toggle');
       $(this).next().toggle();
-      return false;
+      //return false;
   }).next().hide();
 });
 
-
+// Auto-clear search input on blur
 jQuery(document).ready(function() {
   $('.clear-value').each(function() {
     var default_value = this.value;
     $(this).focus(function() {
       if(this.value == default_value) {
-      this.value = '';
+        this.value = '';
       }
-      });
+    });
     $(this).blur(function() {
       if(this.value == '') {
-      this.value = default_value;
+        this.value = default_value;
       }
-      });
-    });
-});
-
-function update_tooltips()
-{
-  jQuery(document).ready(function() {
-    $('.item a[data-tooltip]').each(function () {
-      $(this).qtip({
-        content: {
-          text: 'Loading...',
-          ajax: { url: $(this).attr('data-tooltip')},
-        },
-        show: { target: $(this).parent(), solo: true },
-        hide: { target: $(this).parent(), delay: 50 },
-        position: { target: $(this).parent(), my: 'center', at: 'center' },
-      });
     });
   });
+});
+
+// Initialize tooltips
+function update_tooltips(options)
+{
+  $('a[data-popover-href]').each(function() {
+    var defaults = {
+      delay: { show: 500, hide: 750 },
+      placement: 'left',
+      content: function(trigger) {
+        var $trigger = $(trigger);
+
+        var $el = $(new Spinner().spin().el);
+        $el.css({
+          width: '100px',
+          height: '100px',
+          left: '50px',
+          top: '50px'
+        });
+        return $el[0];
+      }
+    };
+    $(this).sticky_popover($.extend({}, defaults, options));
+  });
 }
+
+jQuery(document).ready(function($) {
+  update_tooltips({ placement: 'right' });
+});

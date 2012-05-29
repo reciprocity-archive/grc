@@ -1,37 +1,16 @@
 -content_for :header do
-  %ul#breadcrumbs
-    %li Dashboard
-    %li Programs
-  %h2 Programs
+  %h5.highlighted
+    DASHBOARD
+    %span.divider /
+    PROGRAMS
+  %h1.location Programs
 
-.box.section
-  .head
-    %h3 Programs
-    %ul.box-actions
-      %li.create-program
-        %a{ :href => new_program_path } Create Program
-        %div.hidden.dialog
-          -program = Program.new
-          =form_for program, :method => :post, :html => {:class => :form} do |f|
-            =render :partial => "admin/programs/form", :locals => { :f => f }
+.row
+  .span8
+    =render :partial => 'programs/list',
+            :layout => 'layouts/widget_box',
+            :locals => { :programs => @programs }
+  .span4
+    =render :partial => 'quick/find',
+            :layout => 'layouts/widget_box'
 
-  .body
-    %ul.items
-      -@programs.each do |program|
-        %li.item.tipped{:data => { :program_id => program.id }, :rel => tooltip_flow_program_path(:id => program.id)}
-          -stats = program_stats(program)
-          %h3
-            =link_to program.title, flow_program_path(program)
-          .item
-            Reg sections:
-            #{stats[:sections_count]},
-            #{stats[:sections_done_count]} linked, 
-            #{stats[:sections_na_count]} N/A, 
-            #{stats[:sections_undone_count]} not finished
-          .item
-            Controls:
-            #{stats[:controls_count]},
-            #{stats[:controls_parented_count]} with parents
-
-.box
-  =render :partial => 'quick/find'
