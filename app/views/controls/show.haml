@@ -1,8 +1,9 @@
 -content_for :header do
-  %ul#breadcrumbs
-    %li=link_to 'Controls', flow_controls_path
-    %li=@control.slug
-  %h2=@control.title
+  %h5.highlighted
+    =link_to 'CONTROLS', flow_controls_path
+    %span.divider /
+    =@control.slug
+  %h1.location=@control.title
 
 .row
   .span8

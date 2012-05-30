@@ -1,8 +1,9 @@
 -content_for :header do
-  %ul#breadcrumbs
-    %li=link_to 'Programs', programs_dash_path
-    %li=@program.slug
-  %h2=@program.title
+  %h5.highlighted
+    =link_to 'PROGRAMS', programs_dash_path
+    %span.divider /
+    =@program.slug
+  %h1.location=@program.title
 
 .row
   .span8
