@@ -3,7 +3,7 @@
   .modal-form
     %a{ :href => new_program_path } Create Control
     %div.modal.fade
-      -control = Control.new
+      -control = Control.new(:program_id => program.id)
       =form_for control, :url => flow_controls_path, :method => :post, :remote => true, :html => {:class => :form} do |f|
         .modal-header
           Create New Control

@@ -64,8 +64,8 @@ jQuery(function($) {
 
 // Quick Search
 jQuery(function($) {
-  $('#quick_find').closest('.span4, .span8').find('nav > .widgetsearch').blur(function () {
-    var $tab = $(this).closest('.span4').find('ul.nav-tabs > li.active > a')
+  $('#quick_find').closest('.WidgetBox').find('nav > .widgetsearch').blur(function () {
+    var $tab = $(this).closest('.WidgetBox').find('ul.nav-tabs > li.active > a')
       , href = $tab.data('tab-href') + '?' + $.param({ s: $(this).val() });
     $tab.trigger('show', href);
   });
