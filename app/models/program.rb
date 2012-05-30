@@ -14,6 +14,8 @@ class Program < ActiveRecord::Base
   has_many :sections, :order => :slug
   has_many :controls, :order => :slug
 
+  has_many :cycles
+
   belongs_to :source_document, :class_name => 'Document'
   belongs_to :source_website, :class_name => 'Document'
   

@@ -1,0 +1,14 @@
+-content_for :widget_title do
+  Audit Cycles
+
+%ul.nav.nav-tabs.nav-stacked
+  -program.cycles.each do |cycle|
+    %li.group
+      %a{ :href => '#' }
+        -if cycle.complete
+          Complete (started #{time_ago_in_words cycle.start_at})
+        -else
+          -if cycle.start_at <= Date.today
+            Started #{time_ago_in_words cycle.start_at} ago
+          -else
+            Starting in #{time_ago_in_words cycle.start_at}

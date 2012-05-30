@@ -1,0 +1,35 @@
+-content_for :widget_buttons do
+  %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}
+  .modal-form
+    %a{ :href => new_program_path } Create Program
+    %div.modal.fade
+      -program = Program.new
+      =form_for program, :url => flow_programs_path, :method => :post, :remote => true, :html => {:class => :form} do |f|
+        .modal-header
+          Create New Program
+        .modal-body
+          .modal-flash
+          =render :partial => "programs/form", :locals => { :f => f }
+        .modal-footer
+          =f.submit pat(:save)
+          =f.submit pat(:cancel), :type => 'reset'
+
+-content_for :widget_title do
+  Programs
+
+%ul.nav.nav-tabs.nav-stacked
+  -@programs.each do |program|
+    %li
+      -stats = program_stats(program)
+      %a{ :href => flow_program_path(program), :data => { :'popover-href' => tooltip_flow_program_path(program)} }
+        %h3=program.title
+        %p.item
+          Reg sections:
+          #{stats[:sections_count]},
+          #{stats[:sections_done_count]} linked, 
+          #{stats[:sections_na_count]} N/A, 
+          #{stats[:sections_undone_count]} not finished
+        %p.item
+          Controls:
+          #{stats[:controls_count]},
+          #{stats[:controls_parented_count]} with parents

@@ -159,4 +159,12 @@ module ApplicationHelper
     end
     results
   end
+
+  # Use instead of 'yield :name' or 'content_for(:name)' in layouts for partials.
+  # References:
+  #   http://mikemayo.org/2012/rendering-a-collection-of-partials-with-content_for
+  #   https://gist.github.com/rails/rails/pull/4226
+  def yield_content!(name)
+    view_flow.content.delete(name)
+  end
 end

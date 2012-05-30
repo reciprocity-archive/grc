@@ -87,7 +87,7 @@ CmsRails::Application.routes.draw do
     end
   end
 
-  resources :programs, :as => 'flow_programs', :only => [] do
+  resources :programs, :as => 'flow_programs', :only => [:create] do
     member do
       get 'show'
       get 'tooltip'

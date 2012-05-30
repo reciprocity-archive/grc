@@ -1,54 +1,72 @@
 /*
  *= require application
+ *= require jquery
+ *= require jquery-ui
+ *= require bootstrap
+ *= require spin.min
  *= require_self
  */
 
-jQuery(function($) {
-  $('.box .tabbed').tabs();
-});
-
-jQuery(function($) {
-  $('.quick-search').bind('change', function(e) {
-    var $this = $(this),
-        val = $this.val(),
-        val_regex = new RegExp(val, 'i');
-
-    $this.closest('.box').find('ul.items').each(function(i) {
-      var $list = $(this);
-
-      $list.find('> li').each(function(i) {
-        if (val_regex.test($(this).text()))
-          $(this).show();
-        else
-          $(this).hide();
-      });
-    });
-  });
-});
-
+// Expand node content when '+' clicked in tree
 jQuery(function($) {
   $('ul.slugtree .expander').bind('click', function(e) {
     $(this).closest('li').find('> .content').toggle();
   });
+});
 
-  $('li.create-control a').bind('click', function(e) {
-    console.debug(this, $(this).siblings('.dialog'));
-    $(this).siblings('.dialog').dialog({
-      title: "Create new control",
-      height: 400,
-      width: 400
-    });
-    e.preventDefault();
+// Tabs via AJAX on 'Quick Find'
+jQuery(function($) {
+  $('.tabbable').on('show', 'ul.nav-tabs > li > a', function(e, href) {
+    var $tab = $(e.target)
+      , loaded = $tab.data('tab-loaded')
+      , pane = ($tab.data('tab-target') || $tab.attr('href'))
+      , template = "<div></div>";
+
+	if (href)
+	  loaded = false;
+	else
+	  href = $tab.data('tab-href');
+
+    if (!href) return;
+
+    if (!loaded) {
+      if (template) {
+        var spinner = new Spinner({ }).spin();
+        $(pane).append(spinner.el);
+        $(spinner.el).css({ width: '100px', height: '100px', left: '50px', top: '50px' });
+      }
+
+      $(pane).load(href, function(data, status, xhr) {
+        $tab.data('tab-loaded', true);
+        $tab.tab('show');
+        $(this).html(data);
+      });
+    }
   });
 
-  $('li.create-program a').bind('click', function(e) {
-    console.debug(this, $(this).siblings('.dialog'));
-    $(this).siblings('.dialog').dialog({
-      title: "Create new program",
-      height: 400,
-      width: 400
-    });
-    e.preventDefault();
-  });
-})
+  // Trigger first tab immediately
+  $('.tabbable > ul > li > a').eq(0).trigger('show');
+});
 
+// Modal forms
+jQuery(function($) {
+  $('nav .modal-form').each(function(i, el) {
+    var $this = $(el);
+    $this.on('click.modal-form', 'a', function(e) {
+      var $modal = $this.find('> .modal');
+
+      $modal.modal_form();
+
+      e && e.preventDefault();
+    });
+  });
+});
+
+// Quick Search
+jQuery(function($) {
+  $('#quick_find').closest('.WidgetBox').find('nav > .widgetsearch').blur(function () {
+    var $tab = $(this).closest('.WidgetBox').find('ul.nav-tabs > li.active > a')
+      , href = $tab.data('tab-href') + '?' + $.param({ s: $(this).val() });
+    $tab.trigger('show', href);
+  });
+});

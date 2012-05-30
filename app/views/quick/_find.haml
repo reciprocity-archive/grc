@@ -1,29 +1,16 @@
-.head
-  %h3 Quick Find
+-content_for :widget_title do
+  Quick Find
 
-  %form.form#quickform
-    %ul.box-actions
-      %li
-        %input.clear-value(type='text' value='Search...')
+-content_for :widget_buttons do
+  %input.ui-corner-all.widgetsearch.clear-value(type='text' value='Search...')
 
-  / DRY this
-  :javascript
-    var urls = [
-      '#{quick_controls_path}',
-      '#{quick_sections_path}',
-      '#{quick_programs_path}'
-    ];
-    $('#quickform').submit(function () {
-      var qf = $('#quick_find');
-      var sel = qf.tabs('option', 'selected');
-      url = urls[sel];
-      url = url + '?' + $.param({'s': $('#quickform input').val()});
-      qf.tabs('url', sel, url);
-      qf.tabs('load', sel);
-      return false;
-    });
-.body.tabbed#quick_find
-  %ul
-    %li=link_to 'Controls', quick_controls_path
-    %li=link_to 'Sections', quick_sections_path
-    %li=link_to 'Programs', quick_programs_path
+.tabbable#quick_find
+  %ul.nav.nav-tabs
+    %li=link_to 'Controls', '#controls', :data => { :'tab-href' => quick_controls_path, :toggle => 'tab' }
+    %li=link_to 'Sections', '#sections', :data => { :'tab-href' => quick_sections_path, :toggle => 'tab' }
+    %li=link_to 'Programs', '#programs', :data => { :'tab-href' => quick_programs_path, :toggle => 'tab' }
+  .tab-content
+    #controls.tab-pane
+    #sections.tab-pane
+    #programs.tab-pane
+

@@ -1,50 +1,13 @@
 -content_for :header do
-  %ul#breadcrumbs
-    %li=link_to 'Controls', flow_controls_path
-    %li=@control.slug
-  %h2=@control.title
+  %h5.highlighted
+    =link_to 'CONTROLS', flow_controls_path
+    %span.divider /
+    =@control.slug
+  %h1.location=@control.title
 
-.box
-  .head
-    %h3 Control
-  .body
-    %h4
-      =@control.title
+.row
+  .span8
+    =render :partial => 'controls/show',
+            :layout => 'layouts/widget_box',
+            :locals => { :control => @control }
 
-    .section
-      Description:
-      =@control.description
-
-    .section
-      %h3 About this Control
-      .item
-        Short Code: #{@control.slug}
-      .item
-        Effective Date: #{display_time(@control.effective_at)}
-      .item
-        Control Type: TBD
-    .section
-      %h3 Control Verification
-      .item
-        Frequency: #{pluralize(@control.frequency, @control.frequency_type.to_s)}
-      .item
-        Evidence Types:
-        -@control.evidence_descriptors.each do |desc|
-          .item
-            =desc.title
-            .item
-              =desc.description
-    .section
-      %h3 Mappings
-      .item
-        To Controls:
-        -@control.implemented_controls.each do |impl|
-          .item
-            =link_to impl.slug, flow_control_path(impl)
-            =impl.title
-      .item
-        To Sections:
-        -@control.sections.each do |sec|
-          .item
-            =link_to sec.slug, section_path(sec)
-            =sec.title

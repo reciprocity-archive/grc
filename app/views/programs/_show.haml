@@ -1,0 +1,58 @@
+-content_for :widget_buttons do
+  %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}
+  .modal-form
+    %a{ :href => new_program_path } Create Control
+    %div.modal.fade
+      -control = Control.new(:program_id => program.id)
+      =form_for control, :url => flow_controls_path, :method => :post, :remote => true, :html => {:class => :form} do |f|
+        .modal-header
+          Create New Control
+        .modal-body
+          .modal-flash
+          =render :partial => "controls/form", :locals => { :f => f }
+        .modal-footer
+          =f.submit pat(:save)
+          =f.submit pat(:cancel), :type => 'reset'
+
+-content_for :widget_title do
+  Program Information
+
+.nav.nav-tabs.nav-stacked
+  =program.title
+  \|
+  =program.slug
+  \|
+  =program.company? ? 'Company' : 'Regulation'
+
+  %h3 Description
+
+  .item
+    =program.description
+
+  .item
+    Created:
+    =display_time(program.created_at)
+  .item
+    Updated:
+    =display_time(program.updated_at)
+
+  %h3 Sections
+  .item
+    Done: 
+    =@stats[:sections_done_count]
+  .item
+    N/A: 
+    =@stats[:sections_na_count]
+  .item
+    Not Done: 
+    =@stats[:sections_undone_count]
+
+  %h3 Controls
+  .item
+    Controls: 
+    =@stats[:controls_count]
+
+  .item
+    Parented Controls: 
+    =@stats[:controls_parented_count]
+
