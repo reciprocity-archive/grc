@@ -24,4 +24,12 @@ class QuickController < ApplicationController
     end
     @controls = @controls.all
   end
+
+  def biz_processes
+    @biz_processes = BizProcess
+    if params[:s]
+      @biz_processes = @biz_processes.search(params[:s])
+    end
+    @biz_processes = @biz_processes.all
+  end
 end
