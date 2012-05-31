@@ -7,6 +7,9 @@ class WelcomeController < ApplicationController
 
   def index
     session[:return_to] = login_dispatch_path
+    if current_user
+      redirect_to programs_dash_path
+    end
   end
 
   def login_dispatch
@@ -15,7 +18,7 @@ class WelcomeController < ApplicationController
     elsif current_user.role == "auditor"
       redirect_to placeholder_path
     else
-      redirect_to dashboard_index_path
+      redirect_to programs_dash_path
     end
   end
 end
