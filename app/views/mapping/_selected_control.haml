@@ -1,0 +1,10 @@
+.body{:id => "selected_#{control_type}"}
+  -if control
+    %div
+      %span.prefix
+        =control.slug
+      =control.title
+    %div
+      =control.description
+  -else
+    Select a control.

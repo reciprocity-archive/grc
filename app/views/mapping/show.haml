@@ -1,0 +1,98 @@
+-content_for :header do
+  %h5.highlighted
+    =link_to 'Programs', programs_dash_path
+    %span.divider /
+    =@program.slug
+  %h1=@program.title
+
+.row
+  .span4
+    .mod.WidgetBox
+      .WidgetBoxHeading
+        .WidgetTitle Regulation Sections
+
+      .WidgetBoxContent
+        %ul.slugtree
+          =walk_slug_tree(Program.slugtree(@program.sections.all)) do |section, step|
+            .collapsed
+              %span.prefix
+                =section.slug
+              =link_to section.title, mapping_selected_section_path(section), :remote => true, :method => :post, :class => :section_selector
+            -controls = section.linked_controls
+            %ul.attached{ :title => controls.map(&:slug).join(", ") }
+              -controls.each do |control|
+                %li
+                  %a{ :href => flow_control_path(control.id) }
+                    =control.slug
+              -if controls.empty?
+                %li N/A
+            .content
+              =section.description
+
+    .mod.WidgetBox
+      .WidgetBoxHeading
+        .WidgetTitle Selected Sections
+      .WidgetBoxContent
+        =render :partial => 'selected_section', :locals => {:section => nil}
+
+  .span4
+    .mod.WidgetBox
+      .WidgetBoxHeading
+        .WidgetTitle Regulation Controls
+      .WidgetBoxContent
+        %ul.items
+          -@rcontrols.each do |control|
+            %li
+              %span.prefix
+                =control.slug
+              =link_to control.title, mapping_selected_control_path(control), :remote => true, :method => :post, :class => :rcontrol_selector
+
+    .mod.WidgetBox
+      .WidgetBoxHeading
+        .WidgetTitle Selected Control
+      .WidgetBoxContent
+        =render :partial => 'selected_control', :locals => {:control => nil, :control_type => 'rcontrol' }
+
+  .span4
+    .mod.WidgetBox
+      .WidgetBoxHeading
+        .WidgetTitle Company Controls
+      .WidgetBoxContent
+        %ul.items
+          -@ccontrols.each do |control|
+            %li
+              %span.prefix
+                =control.slug
+              =link_to control.title, mapping_selected_control_path(control, :control_type => 'company'), :remote => true, :method => :post, :class => :ccontrol_selector
+
+    .mod.WidgetBox
+      .WidgetBoxHeading
+        .WidgetTitle Selected Control
+      .WidgetBoxContent
+        =render :partial => 'selected_control', :locals => {:control => nil, :control_type => 'ccontrol' }
+
+:javascript
+  $(document).ready(function(){
+    $('.section_selector')
+      .bind("ajax:success", function(evt, data, status, xhr){
+        $('#selected_sections').replaceWith(xhr.responseText);
+        $('.section_selector').closest('li').removeClass('selected');
+        $(this).closest('li').addClass('selected');
+      })
+    });
+  $(document).ready(function(){
+    $('.rcontrol_selector')
+      .bind("ajax:success", function(evt, data, status, xhr){
+        $('#selected_rcontrol').replaceWith(xhr.responseText);
+        $('.rcontrol_selector').closest('li').removeClass('selected');
+        $(this).closest('li').addClass('selected');
+      })
+    });
+  $(document).ready(function(){
+    $('.ccontrol_selector')
+      .bind("ajax:success", function(evt, data, status, xhr){
+        $('#selected_ccontrol').replaceWith(xhr.responseText);
+        $('.ccontrol_selector').closest('li').removeClass('selected');
+        $(this).closest('li').addClass('selected');
+      })
+    });

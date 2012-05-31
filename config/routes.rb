@@ -111,6 +111,13 @@ CmsRails::Application.routes.draw do
   match 'quick/sections' => 'quick#sections'
   match 'quick/controls' => 'quick#controls'
 
+  get "mapping/show/:program_id" => 'mapping#show'
+  post "mapping/map_rcontrol"
+  post "mapping/map_ccontrol"
+  post "mapping/selected_section/:section_id" => 'mapping#selected_section', :as => :mapping_selected_section
+  post "mapping/selected_control/:control_id" => 'mapping#selected_control', :as => :mapping_selected_control
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
