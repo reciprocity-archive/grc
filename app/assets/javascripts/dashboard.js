@@ -45,7 +45,7 @@ jQuery(function($) {
   });
 
   // Trigger first tab immediately
-  $('.tabbable > ul > li > a').eq(0).trigger('show');
+  $('.tabbable > ul > li:first-child > a').tab('show');
 });
 
 // Modal forms

@@ -5,41 +5,41 @@
   %ul.nav.nav-tabs
     %li=link_to 'Regulations', '#regulations', :data => { :toggle => 'tab' }
     %li=link_to 'Controls', '#controls', :data => { :toggle => 'tab' }
-  #regulations
-    %ul.slugtree
-      =walk_slug_tree(Program.slugtree(program.sections.all)) do |item, step|
-        .collapsed
-          %span.prefix
-            =item.slug
-          =item.title || item.description
-          .expander='+' if !item.description.blank?
-        -controls = item.linked_controls
-        %ul.attached{ :title => controls.map(&:slug).join(", ") }
-          -controls.each do |control|
-            %li
-              %a{ :href => flow_control_path(control.id) }
-                =control.slug
-          -if controls.empty?
-            %li N/A
-        .content
-          =item.description
+  .tab-content
+    #regulations.tab-pane
+      %ul.slugtree
+        =walk_slug_tree(Program.slugtree(program.sections.all)) do |item, step|
+          .collapsed
+            %span.prefix
+              =item.slug
+            =item.title || item.description
+            .expander='+' if !item.description.blank?
+          -controls = item.linked_controls
+          %ul.attached{ :title => controls.map(&:slug).join(", ") }
+            -controls.each do |control|
+              %li
+                %a{ :href => flow_control_path(control.id) }
+                  =control.slug
+            -if controls.empty?
+              %li N/A
+          .content
+            =item.description
 
-  #controls
-    %ul.slugtree
-      =walk_slug_tree(Control.slugtree(program.controls.all)) do |item, step|
-        .collapsed
-          %span.prefix
-            =item.slug
-          =item.title || item.description
-          .expander='+' if !item.description.blank?
-        -controls = item.implementing_controls.all
-        %ul.attached{ :title => controls.map(&:slug).join(", ") }
-          -controls.each do |control|
-            %li
-              %a{ :href => flow_control_path(control.id) }
-                =control.slug
-          -if controls.empty?
-            %li N/A
-        .content
-          =item.description
-
+    #controls.tab-pane
+      %ul.slugtree
+        =walk_slug_tree(Control.slugtree(program.controls.all)) do |item, step|
+          .collapsed
+            %span.prefix
+              =item.slug
+            =item.title || item.description
+            .expander='+' if !item.description.blank?
+          -controls = item.implementing_controls.all
+          %ul.attached{ :title => controls.map(&:slug).join(", ") }
+            -controls.each do |control|
+              %li
+                %a{ :href => flow_control_path(control.id) }
+                  =control.slug
+            -if controls.empty?
+              %li N/A
+          .content
+            =item.description
