@@ -1,7 +1,7 @@
 -content_for :header_buttons do
   -if current_user.has_role?(:admin) || current_user.has_role?(:superuser)
     .btn-group
-      %a.btn{ :href => admin_path } Admin
+      %a.btn{ :href => admin_dash_path } Admin
 
 
 -content_for :header do

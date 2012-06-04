@@ -114,6 +114,8 @@ CmsRails::Application.routes.draw do
   match 'quick/controls' => 'quick#controls'
   match 'quick/biz_processes' => 'quick#biz_processes'
 
+  match 'admin_dash' => 'admin_dash#index'
+
   get "mapping/show/:program_id" => 'mapping#show', :as => 'mapping_program'
   post "mapping/map_rcontrol"
   post "mapping/map_ccontrol"

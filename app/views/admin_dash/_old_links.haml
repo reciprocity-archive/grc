@@ -1,0 +1,21 @@
+-content_for :widget_title do
+  Old Links
+
+
+%ul.nav.nav-tabs.nav-stacked
+  %li
+    %a{ :href => admin_path }
+      %h3 Old Admin
+  %li
+    %a{ :href => documents_path }
+      %h3 Documents
+  %li
+    %a{ :href => document_descriptors_path }
+      %h3 Document descriptors
+  %li
+    %a{ :href => accounts_path }
+      %h3 Accounts
+  %li
+    %a{ :href => people_path }
+      %h3 People
+
