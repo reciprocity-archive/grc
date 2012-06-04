@@ -4,9 +4,9 @@
 
 %ul.nav.nav-tabs.nav-stacked
   %li
-    %a{ :href => dashboard_index_path }
+    %a{ :href => dashboard_index_path(:cycle_id => cycle.id) }
       %h3 Old Dashboard
-      %a{ :href => evidence_index_path } Evidence
-      %a{ :href => testing_index_path } Testing
-      %a{ :href => '/testreport/top' } Test Reports
+      %a{ :href => evidence_index_path(:cycle_id => cycle.id) } Evidence
+      %a{ :href => testing_index_path(:cycle_id => cycle.id) } Testing
+      %a{ :href => "/testreport/top?cycle_id=#{cycle.id}" } Test Reports
 

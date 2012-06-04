@@ -84,8 +84,11 @@ class ApplicationController < ActionController::Base
     if session[:company_id]
       @company = Program.where(:id => session[:company_id]).first
     end
+    if params[:cycle_id]
+      session[:cycle_id] = params[:cycle_id]
+    end
     if session[:cycle_id]
-      @cycle = Cycle.where(:id => session[:cycle_id]).first
+      @cycle = Cycle.where(:id => params[:cycle_id] || session[:cycle_id]).first
     end
   end
 
