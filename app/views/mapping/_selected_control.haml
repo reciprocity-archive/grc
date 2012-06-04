@@ -1,14 +1,16 @@
 -if control
-  %div{:id => "selected_#{control_type}", :oid => control.id}
+  %div.description{:id => "selected_#{control_type}", :oid => control.id}
     %div
-      %span.prefix
-        =control.slug
-      =control.title
-    %div
-      =control.description
+      %div
+        %span.prefix
+          =control.slug
+        =control.title
+      %div
+        =control.description
 -else
-  %div{:id => "selected_#{control_type}"}
-    Select a control.
+  %div.description{:id => "selected_#{control_type}"}
+    %div
+      Nothing selected.
 
 :javascript
   $(document).ready(function(){

@@ -9,6 +9,11 @@ class MappingController < ApplicationController
     @rcontrols = Control.where(:program_id => @program)
   end
 
+  def section_tooltip
+    @section = Section.find(params[:section_id])
+    render :layout => nil
+  end
+
   def map_rcontrol
     if params[:u]
       ControlSection.where(:section_id => params[:section],
