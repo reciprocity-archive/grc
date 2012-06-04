@@ -131,7 +131,6 @@ CmsRails::Application.routes.draw do
     match CmsRails::Application.sso_callback_url => "sso#callback"
     match 'sso/destroy' => 'sso#destroy', :as => 'logout'
   else
-    match 'user_sessions/new' => 'user_sessions#new', :as => 'login'
     match 'user_sessions/destroy' => 'user_sessions#destroy', :as => 'logout'
     match 'user_sessions/create' => 'user_sessions#create'
   end
@@ -183,6 +182,7 @@ CmsRails::Application.routes.draw do
   root :to => "welcome#index"
   # About page
   match 'about' => 'welcome#about', :as => 'about'
+  match 'login' => 'welcome#login', :as => 'login'
   match 'placeholder' => 'welcome#placeholder', :as => 'placeholder'
   match 'login_dispatch' => 'welcome#login_dispatch', :as => 'login_dispatch'
 
