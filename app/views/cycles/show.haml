@@ -1,13 +1,16 @@
 -content_for :header do
   %h5.highlighted
-    %a{ :href => flow_programs_path(@cycle.program) } #{@cycle.program.title}
+    %a{ :href => flow_program_path(@cycle.program) } #{@cycle.program.title}
     %span.divider /
     AUDIT CYCLE
   %h1.location Audit Cycle for #{@cycle.program.title}
 
 .row
-  .span6
+  .span8
     =render :partial => 'cycles/show',
             :layout => 'layouts/widget_box',
             :locals => { :cycle => @cycle }
+  .span4
+    =render :partial => 'cycles/old_links',
+            :layout => 'layouts/widget_box'
 
