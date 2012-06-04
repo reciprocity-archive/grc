@@ -2,14 +2,14 @@
   .WidgetBoxHeading
     %nav
       -# Note, the trailing '>' suppresses whitespace, and is important here.
-      %a.clip{:href => "#", :title => "Help - What is this?"}
-        .button.buttonclose>
+      /%a.clip{:href => "#", :title => "Help - What is this?"}
+      /  .button.buttonclose>
       %a.clip{:href => "#", :title => "Help - What is this?"}
         .button.buttonhelp>
-      %a.clip{:href => "#", :title => "Help - What is this?"}
-        .button.buttonlock>
-      %a.clip{:href => "#", :title => "Help - What is this?"}
-        .button.buttonenlarge>
+      /%a.clip{:href => "#", :title => "Help - What is this?"}
+      /  .button.buttonlock>
+      /%a.clip{:href => "#", :title => "Help - What is this?"}
+      /  .button.buttonenlarge>
       =yield_content!(:widget_buttons)
     .WidgetTitle
       =yield_content!(:widget_title)
