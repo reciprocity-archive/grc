@@ -31,7 +31,9 @@
 
     .mod.WidgetBox
       .WidgetBoxHeading
-        .WidgetTitle Selected Sections
+        .WidgetTitle
+          Selected Sections
+          =link_to 'Map', mapping_map_rcontrol_path, :method => :post, :remote => true, :id => :rmap, :class => :btn
       .WidgetBoxContent
         =render :partial => 'selected_section', :locals => {:section => nil}
 
@@ -49,7 +51,9 @@
 
     .mod.WidgetBox
       .WidgetBoxHeading
-        .WidgetTitle Selected Control
+        .WidgetTitle
+          Selected Control
+          =link_to 'Map', mapping_map_ccontrol_path, :method => :post, :remote => true, :id => :cmap, :class => :btn
       .WidgetBoxContent
         =render :partial => 'selected_control', :locals => {:control => nil, :control_type => 'rcontrol' }
 
@@ -78,21 +82,34 @@
         $('#selected_sections').replaceWith(xhr.responseText);
         $('.section_selector').closest('li').removeClass('selected');
         $(this).closest('li').addClass('selected');
-      })
-    });
-  $(document).ready(function(){
+      });
     $('.rcontrol_selector')
       .bind("ajax:success", function(evt, data, status, xhr){
         $('#selected_rcontrol').replaceWith(xhr.responseText);
         $('.rcontrol_selector').closest('li').removeClass('selected');
         $(this).closest('li').addClass('selected');
-      })
-    });
-  $(document).ready(function(){
+      });
     $('.ccontrol_selector')
       .bind("ajax:success", function(evt, data, status, xhr){
         $('#selected_ccontrol').replaceWith(xhr.responseText);
         $('.ccontrol_selector').closest('li').removeClass('selected');
         $(this).closest('li').addClass('selected');
-      })
+      });
     });
+  function update_map_buttons() {
+    var section_id = $("#selected_sections").attr('oid') || "";
+    var rcontrol_id = $("#selected_rcontrol").attr('oid') || "";
+    var ccontrol_id = $("#selected_ccontrol").attr('oid') || "";
+    var qstr = '?' + $.param({section: section_id, rcontrol: rcontrol_id, ccontrol: ccontrol_id});
+    $.getJSON('#{mapping_buttons_path(:format => "json")}' + qstr,
+      function(data){
+        var rmap = $('#rmap');
+        var cmap = $('#cmap');
+        rmap.text(data[0] ? 'Unmap' : 'Map')
+        rmap.attr('disabled', !(section_id && rcontrol_id));
+        rmap.attr('href', rmap.attr('href').split('?')[0] + qstr + (data[0] ? '&u=1' : ""));
+        cmap.text(data[1] ? 'Unmap' : 'Map')
+        cmap.attr('disabled', !(rcontrol_id && ccontrol_id));
+        cmap.attr('href', cmap.attr('href').split('?')[0] + qstr + (data[1] ? '&u=1' : ""));
+      });
+  }

@@ -10,9 +10,31 @@ class MappingController < ApplicationController
   end
 
   def map_rcontrol
+    if params[:u]
+      ControlSection.where(:section_id => params[:section],
+                           :control_id => params[:rcontrol]).each {|r|
+        r.destroy
+      }
+    else
+      ControlSection.create(:section_id => params[:section],
+                            :control_id => params[:rcontrol])
+    end
+
+    render :js => 'update_map_buttons();'
   end
 
   def map_ccontrol
+    if params[:u]
+      ControlControl.where(:implemented_control_id => params[:rcontrol],
+                           :control_id => params[:ccontrol]).each {|r|
+        r.destroy
+      }
+    else
+      ControlControl.create(:implemented_control_id => params[:rcontrol],
+                            :control_id => params[:ccontrol])
+    end
+
+    render :js => 'update_map_buttons();'
   end
 
   def selected_control
@@ -30,6 +52,22 @@ class MappingController < ApplicationController
     respond_with do |format|
       format.html do
         render :partial => 'selected_section', :locals => { :section => section }
+      end
+    end
+  end
+
+  def buttons
+    reg_exists =
+      params[:section] && params[:rcontrol] && 
+      ControlSection.exists?(:section_id => params[:section],
+                             :control_id => params[:rcontrol])
+    com_exists =
+      params[:rcontrol] && params[:ccontrol] && 
+      ControlControl.exists?(:implemented_control_id => params[:rcontrol],
+                             :control_id => params[:ccontrol])
+    respond_with do |format|
+      format.json do
+        render :json => [reg_exists, com_exists]
       end
     end
   end

@@ -1,5 +1,5 @@
-#selected_sections
-  -if section
+-if section
+  #selected_sections{:oid => section.id}
     %ul.slugtree
       =walk_slug_tree(Program.slugtree(Section.slugfilter(section.slug))) do |item, step|
         %div
@@ -8,5 +8,11 @@
           =item.title
         %div
           =item.description
-  -else
+-else
+  #selected_sections
     Select a section.
+
+:javascript
+  $(document).ready(function(){
+    update_map_buttons();
+  });

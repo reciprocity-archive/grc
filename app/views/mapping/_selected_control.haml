@@ -1,10 +1,16 @@
-.body{:id => "selected_#{control_type}"}
-  -if control
+-if control
+  %div{:id => "selected_#{control_type}", :oid => control.id}
     %div
       %span.prefix
         =control.slug
       =control.title
     %div
       =control.description
-  -else
+-else
+  %div{:id => "selected_#{control_type}"}
     Select a control.
+
+:javascript
+  $(document).ready(function(){
+    update_map_buttons();
+  });
