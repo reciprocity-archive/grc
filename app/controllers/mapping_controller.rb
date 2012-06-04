@@ -6,7 +6,7 @@ class MappingController < ApplicationController
     @program = Program.find(params[:program_id])
     @sections = @program.sections
     @ccontrols = Control.joins(:program).where(Program.arel_table[:company].eq(true))
-    @rcontrols = Control.joins(:program).where(Program.arel_table[:company].eq(false))
+    @rcontrols = Control.where(:program_id => @program)
   end
 
   def map_rcontrol

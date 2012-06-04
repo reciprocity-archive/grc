@@ -2,8 +2,9 @@
   %h5.highlighted
     =link_to 'Programs', programs_dash_path
     %span.divider /
-    =@program.slug
-  %h1=@program.title
+    Mapping
+    %span.divider /
+  %h1=link_to @program.title, flow_program_path(@program)
 
 .row
   .span4
