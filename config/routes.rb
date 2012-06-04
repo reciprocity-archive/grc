@@ -94,6 +94,8 @@ CmsRails::Application.routes.draw do
     end
   end
 
+  resources :cycles, :as => 'flow_cycles', :only => [:show]
+
   resources :sections, :as => 'flow_sections', :only => [] do
     member do
       get 'tooltip'
@@ -110,6 +112,7 @@ CmsRails::Application.routes.draw do
   match 'quick/programs' => 'quick#programs'
   match 'quick/sections' => 'quick#sections'
   match 'quick/controls' => 'quick#controls'
+  match 'quick/biz_processes' => 'quick#biz_processes'
 
   get "mapping/show/:program_id" => 'mapping#show', :as => 'mapping_program'
   post "mapping/map_rcontrol"

@@ -1,0 +1,6 @@
+%ul.nav.nav-tabs.nav-stacked
+  -@biz_processes.each do |biz_process|
+    %li=link_to biz_process.title, edit_biz_process_path(biz_process)
+
+:javascript
+  update_tooltips();

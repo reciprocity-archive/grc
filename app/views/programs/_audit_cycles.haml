@@ -4,7 +4,7 @@
 %ul.nav.nav-tabs.nav-stacked
   -program.cycles.each do |cycle|
     %li.group
-      %a{ :href => '#' }
+      %a{ :href => flow_cycle_path(cycle) }
         -if cycle.complete
           Complete (started #{time_ago_in_words cycle.start_at})
         -else
