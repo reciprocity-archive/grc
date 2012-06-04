@@ -22,10 +22,10 @@ jQuery(function($) {
       , pane = ($tab.data('tab-target') || $tab.attr('href'))
       , template = "<div></div>";
 
-	if (href)
-	  loaded = false;
-	else
-	  href = $tab.data('tab-href');
+    if (href)
+      loaded = false;
+    else
+      href = $tab.data('tab-href');
 
     if (!href) return;
 
@@ -64,9 +64,10 @@ jQuery(function($) {
 
 // Quick Search
 jQuery(function($) {
-  $('#quick_find').closest('.WidgetBox').find('nav > .widgetsearch').blur(function () {
+  $('#quick_find').closest('.WidgetBox').find('nav > .widgetsearch').keypress(function (e) {
     var $tab = $(this).closest('.WidgetBox').find('ul.nav-tabs > li.active > a')
       , href = $tab.data('tab-href') + '?' + $.param({ s: $(this).val() });
-    $tab.trigger('show', href);
+    if (e.which == 13)
+      $tab.trigger('show', href);
   });
 });
