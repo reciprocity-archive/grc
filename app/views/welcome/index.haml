@@ -1,9 +1,29 @@
-%div.welcome.head
-  Welcome to
-%h1.welcome
-  #{@company} Compliance Management
-%span.welcome.button
-  =link_to pat(:about_this_project), about_path
-%span.welcome.button
-  =link_to pat(:login), login_path
+.container.graphpaper
+  %header.jumbotron.masthead
+    .clearfix
+      %p.fltlft.highlighted Welcome to
+    %h1 Google Compliance Management
+    %p
+      %a.btn.btn-large{"data-toggle" => "modal", :href => "#tour-modal"} Take the Tour
+      %a.btn.btn-large{"data-toggle" => "modal", :href => "#about-modal"} About this Project
+      %a.btn.btn-primary.btn-large{:href => login_path} Login
+
+#tour-modal.modal.hide.fade
+  .modal-header
+    %button.close{"data-dismiss" => "modal"} ×
+    %h1 This content/function is coming soon
+  .modal-body
+    %p We are working on it!
+  .modal-footer
+    %a.close{"data-dismiss" => "modal", :href => "#"} Close
+
+#about-modal.modal.hide.fade
+  .modal-header
+    %button.close{"data-dismiss" => "modal"} ×
+    %h1 This content/function is coming soon
+  .modal-body
+    %p We are working on it!
+  .modal-footer
+    %a.close{"data-dismiss" => "modal", :href => "#"} Close
+
 

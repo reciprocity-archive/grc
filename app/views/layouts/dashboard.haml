@@ -18,9 +18,6 @@
               %a.btn{ :href => '#' } Help
               -if current_user.has_role?(:admin) || current_user.has_role?(:superuser)
               %a.btn{ :href => admin_path } Admin
-            .btn-group
-              %a.btn{ :href => programs_dash_path } Dashboard
-              %a.btn{ :href => dashboard_index_path } Old Dashboard
           %a.brand{:href => root_path}
             -if CMS_CONFIG["COMPANY_LOGO"].present?
               =image_tag(CMS_CONFIG['COMPANY_LOGO'], :alt => 'CMS', :title => 'CMS')
@@ -35,7 +32,7 @@
               %h5.fltrt
                 Welcome
                 %strong=current_user.name || current_user.email
-                %a{:href => logout_path} Sign Out
+                %a{:href => logout_path} Logout
               %br/
               /%h1.fltrt.highlighted Page Keyssss
     .container.graphpaper
