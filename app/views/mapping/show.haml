@@ -8,7 +8,7 @@
 
 .row
   .span4
-    .mod.WidgetBox
+    .mod.WidgetBox#section_list
       .WidgetBoxHeading
         .WidgetTitle Regulation Sections
 
@@ -18,12 +18,12 @@
             .collapsed
               %span.prefix
                 =section.slug
-              =link_to section.title, mapping_selected_section_path(section), :remote => true, :method => :post, :class => :section_selector
+              =link_to section.title, mapping_selected_section_path(section), :remote => true, :method => :post, :class => :selector
             -controls = section.linked_controls
             %ul.attached{ :title => controls.map(&:slug).join(", ") }
               -controls.each do |control|
                 %li
-                  %a{ :href => flow_control_path(control.id) }
+                  %a{ :href => flow_control_path(control.id), :data => { :'popover-href' => mapping_section_tooltip_path(section)} }
                     =control.slug
               -if controls.empty?
                 %li N/A
@@ -34,69 +34,74 @@
       .WidgetBoxHeading
         .WidgetTitle
           Selected Sections
-          =link_to 'Map', mapping_map_rcontrol_path, :method => :post, :remote => true, :id => :rmap, :class => :btn
+          =link_to 'Map section to control', mapping_map_rcontrol_path, :method => :post, :remote => true, :id => :rmap, :class => :btn
+          =link_to_function 'Clear', 'clear_selection(this)', :class => :btn
       .WidgetBoxContent
         =render :partial => 'selected_section', :locals => {:section => nil}
 
   .span4
-    .mod.WidgetBox
+    .mod.WidgetBox#rcontrol_list
       .WidgetBoxHeading
         .WidgetTitle Regulation Controls
       .WidgetBoxContent
-        %ul.items
+        .items
           -@rcontrols.each do |control|
-            %li
+            .item
               %span.prefix
                 =control.slug
-              =link_to control.title, mapping_selected_control_path(control), :remote => true, :method => :post, :class => :rcontrol_selector
+              =link_to control.title, mapping_selected_control_path(control), :remote => true, :method => :post, :class => :selector
 
     .mod.WidgetBox
       .WidgetBoxHeading
         .WidgetTitle
           Selected Control
-          =link_to 'Map', mapping_map_ccontrol_path, :method => :post, :remote => true, :id => :cmap, :class => :btn
+          =link_to 'Map control to control', mapping_map_ccontrol_path, :method => :post, :remote => true, :id => :cmap, :class => :btn
+          =link_to_function 'Clear', 'clear_selection(this)', :class => :btn
       .WidgetBoxContent
         =render :partial => 'selected_control', :locals => {:control => nil, :control_type => 'rcontrol' }
 
   .span4
-    .mod.WidgetBox
+    .mod.WidgetBox#ccontrol_list
       .WidgetBoxHeading
         .WidgetTitle Company Controls
       .WidgetBoxContent
-        %ul.items
+        .items
           -@ccontrols.each do |control|
-            %li
+            .item
               %span.prefix
                 =control.slug
-              =link_to control.title, mapping_selected_control_path(control, :control_type => 'company'), :remote => true, :method => :post, :class => :ccontrol_selector
+              =link_to control.title, mapping_selected_control_path(control, :control_type => 'company'), :remote => true, :method => :post, :class => :selector
 
     .mod.WidgetBox
       .WidgetBoxHeading
-        .WidgetTitle Selected Control
+        .WidgetTitle
+          Selected Control
+          =link_to_function 'Clear', 'clear_selection(this)', :class => :btn
       .WidgetBoxContent
         =render :partial => 'selected_control', :locals => {:control => nil, :control_type => 'ccontrol' }
 
 :javascript
   $(document).ready(function(){
-    $('.section_selector')
+    $('#section_list .selector')
       .bind("ajax:success", function(evt, data, status, xhr){
         $('#selected_sections').replaceWith(xhr.responseText);
-        $('.section_selector').closest('li').removeClass('selected');
+        $('#section_list .selector').closest('li').removeClass('selected');
         $(this).closest('li').addClass('selected');
       });
-    $('.rcontrol_selector')
+    $('#rcontrol_list .selector')
       .bind("ajax:success", function(evt, data, status, xhr){
         $('#selected_rcontrol').replaceWith(xhr.responseText);
-        $('.rcontrol_selector').closest('li').removeClass('selected');
+        $('#rcontrol_list .selector').closest('li').removeClass('selected');
         $(this).closest('li').addClass('selected');
       });
-    $('.ccontrol_selector')
+    $('#ccontrol_list .selector')
       .bind("ajax:success", function(evt, data, status, xhr){
         $('#selected_ccontrol').replaceWith(xhr.responseText);
-        $('.ccontrol_selector').closest('li').removeClass('selected');
+        $('#ccontrol_list .selector').closest('li').removeClass('selected');
         $(this).closest('li').addClass('selected');
       });
     });
+
   function update_map_buttons() {
     var section_id = $("#selected_sections").attr('oid') || "";
     var rcontrol_id = $("#selected_rcontrol").attr('oid') || "";
@@ -106,11 +111,19 @@
       function(data){
         var rmap = $('#rmap');
         var cmap = $('#cmap');
-        rmap.text(data[0] ? 'Unmap' : 'Map')
+        rmap.text(data[0] ? 'Unmap section from control' : 'Map section to control')
         rmap.attr('disabled', !(section_id && rcontrol_id));
         rmap.attr('href', rmap.attr('href').split('?')[0] + qstr + (data[0] ? '&u=1' : ""));
-        cmap.text(data[1] ? 'Unmap' : 'Map')
+        cmap.text(data[1] ? 'Unmap control from control' : 'Map control to control')
         cmap.attr('disabled', !(rcontrol_id && ccontrol_id));
         cmap.attr('href', cmap.attr('href').split('?')[0] + qstr + (data[1] ? '&u=1' : ""));
       });
+  }
+
+  function clear_selection(el) {
+    $(el).closest('.WidgetBox').prev().find('.selected').removeClass('selected');
+    description_el = $(el).closest('.WidgetBox').find('.WidgetBoxContent .description').children()[0]
+    $(description_el).replaceWith('Nothing selected.');
+    $(el).closest('.WidgetBox').find('.WidgetBoxContent .description').attr('oid', '');
+    update_map_buttons();
   }

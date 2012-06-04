@@ -1,5 +1,5 @@
 -if section
-  #selected_sections{:oid => section.id}
+  #selected_sections{:class => 'description', :oid => section.id}
     %ul.slugtree
       =walk_slug_tree(Program.slugtree(Section.slugfilter(section.slug))) do |item, step|
         %div
@@ -9,8 +9,9 @@
         %div
           =item.description
 -else
-  #selected_sections
-    Select a section.
+  #selected_sections.description
+    %div
+      Nothing selected.
 
 :javascript
   $(document).ready(function(){

@@ -1,0 +1,13 @@
+.popover-title
+  %h3 Mapped Controls
+
+.popover-content
+  -@section.controls.each do |control|
+    %div
+      %div
+        %span.prefix
+          =control.slug
+        =control.title
+      %div
+        =control.description
+

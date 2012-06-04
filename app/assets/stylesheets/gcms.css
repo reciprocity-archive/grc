@@ -553,9 +553,13 @@ ul.slugtree .collapsed {
 	text-overflow: ellipsis; 
 }
 ul.slugtree .prefix {
-    font-weight: bold;
     margin-right: 10px; 
 }
+
+.prefix {
+    font-weight: bold;
+}
+
 ul.slugtree .expander {
 	position:relative;
 	background-image:url(../images/expand.png);
