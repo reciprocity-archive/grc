@@ -77,4 +77,14 @@ ul.slugtree {
 
 li.selected, div.selected { background: #8888ff;}
 
-.WidgetBoxContent { overflow:auto; max-height: 500pt; }
+.WidgetBox {
+  nav {
+    max-height: 30px;
+  }
+
+  .WidgetBoxContent {
+    overflow:auto;
+    max-height: 500px;
+  }
+}
+
