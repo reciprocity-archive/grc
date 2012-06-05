@@ -64,10 +64,17 @@ jQuery(function($) {
 
 // Quick Search
 jQuery(function($) {
-  $('#quick_find').closest('.WidgetBox').find('nav > .widgetsearch').keypress(function (e) {
+  $('nav-tabs > .widgetsearch').keypress(function (e) {
     var $tab = $(this).closest('.WidgetBox').find('ul.nav-tabs > li.active > a')
       , href = $tab.data('tab-href') + '?' + $.param({ s: $(this).val() });
     if (e.which == 13)
       $tab.trigger('show', href);
+  });
+  $('.nav-box > .widgetsearch').keypress(function (e) {
+    if (e.which == 13) {
+      var $box = $($(this).closest('.WidgetBox').find('.WidgetBoxContent').children()[0])
+        , href = $box.data('href') + '?' + $.param({ s: $(this).val() });
+      $box.load(href);
+    }
   });
 });

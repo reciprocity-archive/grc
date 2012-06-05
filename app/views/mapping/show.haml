@@ -35,25 +35,50 @@
             :locals => {:control => nil, :control_type => 'ccontrol', :map_button_id => nil }
 
 :javascript
-  $(document).ready(function(){
+  function bind_section_selectors() {
     $('#section_list .selector')
       .bind("ajax:success", function(evt, data, status, xhr){
         $('#selected_sections').replaceWith(xhr.responseText);
         $('#section_list .selector').closest('li').removeClass('selected');
         $(this).closest('li').addClass('selected');
       });
+  }
+
+  function bind_rcontrol_selectors() {
     $('#rcontrol_list .selector')
       .bind("ajax:success", function(evt, data, status, xhr){
         $('#selected_rcontrol').replaceWith(xhr.responseText);
         $('#rcontrol_list .selector').closest('.item').removeClass('selected');
         $(this).closest('.item').addClass('selected');
       });
+  }
+  
+  function bind_ccontrol_selectors() {
     $('#ccontrol_list .selector')
       .bind("ajax:success", function(evt, data, status, xhr){
         $('#selected_ccontrol').replaceWith(xhr.responseText);
         $('#ccontrol_list .selector').closest('.item').removeClass('selected');
         $(this).closest('.item').addClass('selected');
       });
+  }
+
+  $(document).ready(function(){
+        bind_section_selectors();
+        bind_rcontrol_selectors();
+        bind_ccontrol_selectors();
+
+        $($($('#section_list').find('.WidgetBoxContent')[0]).children()[0])
+          .bind("ajax:success", function(evt, data, status, xhr){
+            bind_section_selectors();
+        });
+        $($($('#rcontrol_list').find('.WidgetBoxContent')[0]).children()[0])
+          .bind("ajax:success", function(evt, data, status, xhr){
+            bind_rcontrol_selectors();
+        });
+        $($($('#ccontrol_list').find('.WidgetBoxContent')[0]).children()[0])
+          .bind("ajax:success", function(evt, data, status, xhr){
+            bind_ccontrol_selectors();
+        });
     });
 
   function update_map_buttons() {

@@ -80,4 +80,41 @@ class MappingController < ApplicationController
       end
     end
   end
+
+  def find_sections
+    @program = Program.find(params[:program_id])
+    sections = @program.sections
+    if params[:s]
+      sections = sections.search(params[:s])
+    end
+
+    respond_with do |format|
+      format.html do
+        render :partial => 'section_list_content',
+               :locals => { :sections => sections.all }
+      end
+    end
+  end
+
+  def find_controls
+    @program = Program.find(params[:program_id])
+    is_company = params[:control_type] == 'company'
+
+    if is_company
+      controls = Control.joins(:program).where(Program.arel_table[:company].eq(true))
+    else
+      controls = Control.where(:program_id => @program)
+    end
+
+    if params[:s]
+      controls = controls.search(params[:s])
+    end
+
+    respond_with do |format|
+      format.html do
+        render :partial => 'control_list_content',
+               :locals => { :controls => controls.all, :control_type => params[:control_type] }
+      end
+    end
+  end
 end

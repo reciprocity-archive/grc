@@ -1,8 +1,8 @@
 -content_for :widget_title do
   #{title_prefix} Controls
-.items
-  -controls.each do |control|
-    .item
-      %span.prefix
-        =control.slug
-      =link_to control.title, mapping_selected_control_path(control, :control_type => control_type), :remote => true, :method => :post, :class => :selector
+
+-content_for :widget_buttons do
+  %span.nav-box
+    %input.ui-corner-all.widgetsearch.clear-value(type='text' value='Search...')
+
+=render :partial => 'control_list_content', :locals => { :controls => controls, :control_type => control_type }

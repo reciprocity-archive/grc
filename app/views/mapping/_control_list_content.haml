@@ -1,0 +1,6 @@
+.items{:data => { :href => mapping_controls_path(@program, control_type, :format => :html)}}
+  -controls.each do |control|
+    .item
+      %span.prefix
+        =control.slug
+      =link_to control.title, mapping_selected_control_path(control, :control_type => control_type), :remote => true, :method => :post, :class => :selector

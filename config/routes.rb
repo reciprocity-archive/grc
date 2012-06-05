@@ -123,6 +123,8 @@ CmsRails::Application.routes.draw do
   get "mapping/buttons", :as => :mapping_buttons
   post "mapping/selected_section/:section_id" => 'mapping#selected_section', :as => :mapping_selected_section
   post "mapping/selected_control/:control_id" => 'mapping#selected_control', :as => :mapping_selected_control
+  match 'mapping/sections/:program_id' => 'mapping#find_sections', :as => :mapping_sections
+  match 'mapping/controls/:program_id/:control_type' => 'mapping#find_controls', :as => :mapping_controls
 
 
   # The priority is based upon order of creation:
