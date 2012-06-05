@@ -40,7 +40,7 @@ function update_tooltips(options)
 {
   $('a[data-popover-href]').each(function() {
     var defaults = {
-      delay: { show: 500, hide: 750 },
+      delay: { show: 150, hide: 100 },
       placement: 'left',
       content: function(trigger) {
         var $trigger = $(trigger);
