@@ -45,13 +45,13 @@
     $('#rcontrol_list .selector')
       .bind("ajax:success", function(evt, data, status, xhr){
         $('#selected_rcontrol').replaceWith(xhr.responseText);
-        $('#rcontrol_list .selector').closest('li').removeClass('selected');
+        $('#rcontrol_list .selector').closest('.item').removeClass('selected');
         $(this).closest('.item').addClass('selected');
       });
     $('#ccontrol_list .selector')
       .bind("ajax:success", function(evt, data, status, xhr){
         $('#selected_ccontrol').replaceWith(xhr.responseText);
-        $('#ccontrol_list .selector').closest('li').removeClass('selected');
+        $('#ccontrol_list .selector').closest('.item').removeClass('selected');
         $(this).closest('.item').addClass('selected');
       });
     });
