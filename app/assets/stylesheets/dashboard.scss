@@ -78,8 +78,11 @@ ul.slugtree {
 li.selected, div.selected { background: #8888ff;}
 
 .WidgetBox {
-  nav {
-    max-height: 30px;
+  .WidgetBoxHeading:after {
+    clear:both;
+    content: '';
+    height: 0;
+    display: block;
   }
 
   .WidgetBoxContent {
