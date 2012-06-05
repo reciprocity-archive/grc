@@ -1,3 +1,11 @@
+-content_for :widget_title do
+  Selected Control
+
+-content_for :widget_buttons do
+  -if map_button_id
+    =link_to 'Map control to control', map_button_path, :method => :post, :remote => true, :id => map_button_id, :class => :btn
+  =link_to_function 'Clear', 'clear_selection(this)', :class => :btn
+
 -if control
   %div.description{:id => "selected_#{control_type}", :oid => control.id}
     %div

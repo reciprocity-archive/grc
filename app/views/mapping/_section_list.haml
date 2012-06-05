@@ -1,0 +1,19 @@
+-content_for :widget_title do
+  Regulation Sections
+
+%ul.slugtree
+  =walk_slug_tree(Program.slugtree(@program.sections.all)) do |section, step|
+    .collapsed
+      %span.prefix
+        =section.slug
+      =link_to section.title, mapping_selected_section_path(section), :remote => true, :method => :post, :class => :selector
+    -controls = section.linked_controls
+    %ul.attached{ :title => controls.map(&:slug).join(", ") }
+      -controls.each do |control|
+        %li
+          %a{ :href => flow_control_path(control.id), :data => { :'popover-href' => mapping_section_tooltip_path(section)} }
+            =control.slug
+      -if controls.empty?
+        %li N/A
+    .content
+      =section.description

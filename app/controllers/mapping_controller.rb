@@ -47,7 +47,11 @@ class MappingController < ApplicationController
     is_company = params[:control_type] == 'company'
     respond_with do |format|
       format.html do
-        render :partial => 'selected_control', :locals => { :control => control, :control_type => (is_company ? 'ccontrol' : 'rcontrol') }
+        if is_company
+          render :partial => 'selected_control', :locals => { :control => control, :control_type => 'ccontrol', :map_button_id => nil }
+        else
+          render :partial => 'selected_control', :locals => { :control => control, :control_type => 'rcontrol', :map_button_id => :cmap, :map_button_path => mapping_map_ccontrol_path }
+        end
       end
     end
   end

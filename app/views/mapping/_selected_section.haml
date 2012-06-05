@@ -1,3 +1,10 @@
+-content_for :widget_title do
+  Selected Sections
+
+-content_for :widget_buttons do
+  =link_to 'Map section to control', mapping_map_rcontrol_path, :method => :post, :remote => true, :id => :rmap, :class => :btn
+  =link_to_function 'Clear', 'clear_selection(this)', :class => :btn
+
 -if section
   #selected_sections{:class => 'description', :oid => section.id}
     %ul.slugtree
