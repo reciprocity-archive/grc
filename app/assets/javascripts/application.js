@@ -18,23 +18,6 @@ jQuery(document).ready(function() {
   }).next().hide();
 });
 
-// Auto-clear search input on blur
-jQuery(document).ready(function() {
-  $('.clear-value').each(function() {
-    var default_value = this.value;
-    $(this).focus(function() {
-      if(this.value == default_value) {
-        this.value = '';
-      }
-    });
-    $(this).blur(function() {
-      if(this.value == '') {
-        this.value = default_value;
-      }
-    });
-  });
-});
-
 // Initialize tooltips
 function update_tooltips(options)
 {

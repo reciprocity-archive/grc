@@ -1,23 +1,32 @@
 -content_for :widget_title do
   Selected Sections
 
--content_for :widget_buttons do
-  =link_to 'Map section to control', mapping_map_rcontrol_path, :method => :post, :remote => true, :id => :rmap, :class => :btn
-  =link_to_function 'Clear', 'clear_selection(this)', :class => :btn
+#selected_sections.description{:oid => section ? section.id : ""}
+  .btn-toolbar.fltlft
+    .btn-group
+      %a.btn(onclick='clear_selection(this)')
+        %i.icon-step-backward
+        Clear
 
--if section
-  #selected_sections{:class => 'description', :oid => section.id}
-    %ul.slugtree
-      =walk_slug_tree(Program.slugtree(Section.slugfilter(section.slug))) do |item, step|
-        %div
-          %span.prefix
-            =item.slug
-          =item.title
-        %div
-          =item.description
--else
-  #selected_sections.description
-    %div
+  .btn-toolbar.fltrt
+    .btn-group
+      =link_to mapping_map_rcontrol_path, :method => :post, :remote => true, :id => :rmap, :class => %w(btn btn-warning) do
+        %span Map section to control
+        %i.icon-play.icon-white
+
+  .clearfix
+
+  .content
+    -if section
+      %ul.slugtree
+        =walk_slug_tree(Program.slugtree(Section.slugfilter(section.slug))) do |item, step|
+          %div
+            %span.prefix
+              =item.slug
+            =item.title
+          %textarea(disabled='disabled' style='width: 98%')
+            =item.description
+    -else
       Nothing selected.
 
 :javascript

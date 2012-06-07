@@ -3,6 +3,6 @@
 
 -content_for :widget_buttons do
   %span.nav-box
-    %input.ui-corner-all.widgetsearch.clear-value(type='text' value='Search...')
+    %input.ui-corner-all.widgetsearch(type='text' placeholder='Search')
 
 =render :partial => 'control_list_content', :locals => { :controls => controls, :control_type => control_type }

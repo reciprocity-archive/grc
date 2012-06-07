@@ -36,26 +36,26 @@
 
 :javascript
   function bind_section_selectors() {
-    $('#section_list .selector')
-      .bind("ajax:success", function(evt, data, status, xhr){
+    $('#section_list')
+      .on("ajax:success", '.selector', function(evt, data, status, xhr){
         $('#selected_sections').replaceWith(xhr.responseText);
-        $('#section_list .selector').closest('li').removeClass('selected');
-        $(this).closest('li').addClass('selected');
+        $('#section_list .selector').closest('.item').removeClass('selected');
+        $(this).closest('.item').addClass('selected');
       });
   }
 
-  function bind_rcontrol_selectors() {
-    $('#rcontrol_list .selector')
-      .bind("ajax:success", function(evt, data, status, xhr){
+  function bind_rcontrol_selectors($el) {
+    $('#rcontrol_list')
+      .on("ajax:success", '.selector', function(evt, data, status, xhr){
         $('#selected_rcontrol').replaceWith(xhr.responseText);
         $('#rcontrol_list .selector').closest('.item').removeClass('selected');
         $(this).closest('.item').addClass('selected');
       });
   }
-  
+
   function bind_ccontrol_selectors() {
-    $('#ccontrol_list .selector')
-      .bind("ajax:success", function(evt, data, status, xhr){
+    $('#ccontrol_list')
+      .on("ajax:success", '.selector', function(evt, data, status, xhr){
         $('#selected_ccontrol').replaceWith(xhr.responseText);
         $('#ccontrol_list .selector').closest('.item').removeClass('selected');
         $(this).closest('.item').addClass('selected');
@@ -66,20 +66,7 @@
         bind_section_selectors();
         bind_rcontrol_selectors();
         bind_ccontrol_selectors();
-
-        $($($('#section_list').find('.WidgetBoxContent')[0]).children()[0])
-          .bind("ajax:success", function(evt, data, status, xhr){
-            bind_section_selectors();
-        });
-        $($($('#rcontrol_list').find('.WidgetBoxContent')[0]).children()[0])
-          .bind("ajax:success", function(evt, data, status, xhr){
-            bind_rcontrol_selectors();
-        });
-        $($($('#ccontrol_list').find('.WidgetBoxContent')[0]).children()[0])
-          .bind("ajax:success", function(evt, data, status, xhr){
-            bind_ccontrol_selectors();
-        });
-    });
+  });
 
   function update_map_buttons() {
     var section_id = $("#selected_sections").attr('oid') || "";
@@ -89,11 +76,13 @@
     $.getJSON('#{mapping_buttons_path(:format => "json")}' + qstr,
       function(data){
         var rmap = $('#rmap');
+        var rmap_text = $(rmap.children()[0]);
         var cmap = $('#cmap');
-        rmap.text(data[0] ? 'Unmap section from control' : 'Map section to control')
+        var cmap_text = $(cmap.children()[0]);
+        rmap_text.text(data[0] ? 'Unmap section from control' : 'Map section to control')
         rmap.attr('disabled', !(section_id && rcontrol_id));
         rmap.attr('href', rmap.attr('href').split('?')[0] + qstr + (data[0] ? '&u=1' : ""));
-        cmap.text(data[1] ? 'Unmap control from control' : 'Map control to control')
+        cmap_text.text(data[1] ? 'Unmap control from control' : 'Map control to control')
         cmap.attr('disabled', !(rcontrol_id && ccontrol_id));
         cmap.attr('href', cmap.attr('href').split('?')[0] + qstr + (data[1] ? '&u=1' : ""));
       });
@@ -101,7 +90,7 @@
 
   function clear_selection(el) {
     $(el).closest('.WidgetBox').prev().find('.selected').removeClass('selected');
-    description_el = $(el).closest('.WidgetBox').find('.WidgetBoxContent .description').children()[0]
+    description_el = $(el).closest('.WidgetBox').find('.WidgetBoxContent .description .content')
     $(description_el).replaceWith('Nothing selected.');
     $(el).closest('.WidgetBox').find('.WidgetBoxContent .description').attr('oid', '');
     update_map_buttons();

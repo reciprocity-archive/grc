@@ -72,7 +72,8 @@ jQuery(function($) {
   });
   $('.nav-box > .widgetsearch').keypress(function (e) {
     if (e.which == 13) {
-      var $box = $($(this).closest('.WidgetBox').find('.WidgetBoxContent').children()[0])
+      var $this = $(this);
+      var $box = $($this.closest('.WidgetBox').find('.WidgetBoxContent').children()[0])
         , href = $box.data('href') + '?' + $.param({ s: $(this).val() });
       $box.load(href);
     }
