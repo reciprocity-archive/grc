@@ -50,7 +50,7 @@ jQuery(function($) {
 
 // Quick Search
 jQuery(function($) {
-  $('nav-tabs > .widgetsearch').keypress(function (e) {
+  $('nav > .widgetsearch').keypress(function (e) {
     var $tab = $(this).closest('.WidgetBox').find('ul.nav-tabs > li.active > a')
       , href = $tab.data('tab-href') + '?' + $.param({ s: $(this).val() });
     if (e.which == 13)

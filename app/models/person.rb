@@ -11,4 +11,11 @@ class Person < ActiveRecord::Base
   def display_name
     username
   end
+
+  def self.search(q)
+    q = "%#{q}%"
+    t = arel_table
+    where(t[:name].matches(q).
+      or(t[:username].matches(q)))
+  end
 end
