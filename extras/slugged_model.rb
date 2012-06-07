@@ -62,7 +62,7 @@ module SluggedModel
 
 private
   def upcase_slug
-    self.slug = slug.upcase
+    self.slug = slug.present? ? slug.upcase : nil
   end
 
   def validate_slug
