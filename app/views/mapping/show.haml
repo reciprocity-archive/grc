@@ -34,6 +34,10 @@
             :layout => 'layouts/widget_box',
             :locals => {:control => nil, :control_type => 'ccontrol', :map_button_id => nil }
 
+#controls-dialog(style='display: none')
+  %div
+    Content
+
 :javascript
   function bind_section_selectors() {
     $('#section_list')
@@ -63,9 +67,18 @@
   }
 
   $(document).ready(function(){
-        bind_section_selectors();
-        bind_rcontrol_selectors();
-        bind_ccontrol_selectors();
+    bind_section_selectors();
+    bind_rcontrol_selectors();
+    bind_ccontrol_selectors();
+    $('#controls-dialog').dialog({autoOpen : false, width: 400, height:300});
+    $('#section_list').on('click', 'a.controls', function() {
+      $('#controls-dialog > :first-child').load($(this).data('href'), function() {
+        $('#controls-dialog').dialog('open');
+      });
+    });
+    $('#cmap, #rmap').on('click', function() {
+      $('#controls-dialog').dialog('close');
+    });
   });
 
   function update_map_buttons() {

@@ -11,7 +11,7 @@
       %ul.attached{ :title => controls.map(&:slug).join(", ") }
         -controls.each do |control|
           %li
-            %a{ :href => flow_control_path(control.id), :data => { :'popover-href' => mapping_section_tooltip_path(section)} }
+            %a.controls{:data => { :href => mapping_section_tooltip_path(section)} }
               =control.slug
         -if controls.empty?
           %li N/A

@@ -1,7 +1,8 @@
 .popover-title
-  %h3 Mapped Controls
+  %h3 Controls Mapped to this Section
 
 .popover-content
+  %h3 Regulation Controls
   -@section.controls.each do |control|
     %div
       %div
@@ -11,3 +12,12 @@
       %div
         =control.description
 
+  %h3 Company Controls
+  -@section.consolidated_controls.each do |control|
+    %div
+      %div
+        %span.prefix
+          =control.slug
+        =control.title
+      %div
+        =control.description
