@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120427181315) do
+ActiveRecord::Schema.define(:version => 20120611223954) do
 
   create_table "accounts", :force => true do |t|
     t.string   "username"
@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(:version => 20120427181315) do
   end
 
   add_index "biz_processes", ["owner_id"], :name => "index_biz_processes_on_owner_id"
+  add_index "biz_processes", ["slug"], :name => "index_biz_processes_on_slug", :unique => true
 
   create_table "business_areas", :force => true do |t|
     t.string   "title"
@@ -112,10 +113,6 @@ ActiveRecord::Schema.define(:version => 20120427181315) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "control_controls", ["control_id", "implemented_control_id"], :name => "index_control_controls_uniqueness", :unique => true
-  add_index "control_controls", ["control_id"], :name => "index_control_controls_on_control_id"
-  add_index "control_controls", ["implemented_control_id"], :name => "index_control_controls_on_implemented_control_id"
 
   create_table "control_document_descriptors", :force => true do |t|
     t.integer  "control_id",             :null => false
@@ -163,6 +160,7 @@ ActiveRecord::Schema.define(:version => 20120427181315) do
 
   add_index "controls", ["business_area_id"], :name => "index_controls_on_business_area_id"
   add_index "controls", ["program_id"], :name => "index_controls_on_regulation_id"
+  add_index "controls", ["slug"], :name => "index_controls_on_slug", :unique => true
   add_index "controls", ["test_result_id"], :name => "index_controls_on_test_result_id"
 
   create_table "cycles", :force => true do |t|
@@ -243,6 +241,7 @@ ActiveRecord::Schema.define(:version => 20120427181315) do
     t.integer  "frequency",          :default => 1
   end
 
+  add_index "programs", ["slug"], :name => "index_programs_on_slug", :unique => true
   add_index "programs", ["source_document_id"], :name => "index_regulations_on_source_document_id"
   add_index "programs", ["source_website_id"], :name => "index_regulations_on_source_website_id"
 
@@ -259,6 +258,7 @@ ActiveRecord::Schema.define(:version => 20120427181315) do
 
   add_index "sections", ["parent_id"], :name => "index_sections_on_parent_id"
   add_index "sections", ["program_id"], :name => "index_control_objectives_on_regulation_id"
+  add_index "sections", ["slug"], :name => "index_sections_on_slug", :unique => true
 
   create_table "system_controls", :force => true do |t|
     t.integer  "state",               :default => 1, :null => false
@@ -302,6 +302,8 @@ ActiveRecord::Schema.define(:version => 20120427181315) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "systems", ["slug"], :name => "index_systems_on_slug", :unique => true
 
   create_table "test_results", :force => true do |t|
     t.string   "title",                             :null => false

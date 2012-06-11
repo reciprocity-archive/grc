@@ -38,8 +38,10 @@ class MappingController < ApplicationController
                        :assertion => ccontrol.assertion,
                        :description => "Placeholder",
                       )
-      notice = notice + "Created regulation control #{rcontrol.slug}. "
       rcontrol_id = rcontrol.id
+      ControlControl.create(:implemented_control_id => rcontrol.id,
+                            :control_id => ccontrol.id)
+      notice = notice + "Created regulation control #{rcontrol.slug}. "
     end
 
     if params[:u]
