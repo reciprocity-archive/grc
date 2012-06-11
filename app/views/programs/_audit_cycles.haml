@@ -2,7 +2,7 @@
   Audit Cycles
 
 %ul.nav.nav-tabs.nav-stacked
-  -program.cycles.each do |cycle|
+  -program.cycles.order("start_at DESC").each do |cycle|
     %li.group
       %a{ :href => flow_cycle_path(cycle) }
         -if cycle.complete
