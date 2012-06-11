@@ -8,7 +8,7 @@
   -@programs.each do |program|
     %li
       -stats = program_stats(program)
-      %a{ :href => flow_program_path(program), :data => { :'popover-href' => tooltip_flow_program_path(program)} }
+      %a{ :href => flow_program_path(program), :data => { :'popover-href' => tooltip_flow_program_path(program), :placement => 'right'} }
         %h3=program.title
         %p.item
           Reg sections:

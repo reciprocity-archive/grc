@@ -1,6 +1,3 @@
 %ul.nav.nav-tabs.nav-stacked
   -@controls.each do |control|
     %li=link_to control.title, flow_control_path(control), 'data-popover-href' => tooltip_flow_control_path(control)
-
-:javascript
-  update_tooltips();

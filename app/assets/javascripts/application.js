@@ -18,32 +18,32 @@ jQuery(document).ready(function() {
   }).next().hide();
 });
 
-// Initialize tooltips
-function update_tooltips(options)
-{
-  $('a[data-popover-href]').each(function() {
-    var defaults = {
-      delay: { show: 150, hide: 100 },
-      placement: 'left',
-      content: function(trigger) {
-        var $trigger = $(trigger);
-
-        var $el = $(new Spinner().spin().el);
-        $el.css({
-          width: '100px',
-          height: '100px',
-          left: '50px',
-          top: '50px'
-        });
-        return $el[0];
-      }
-    };
-    $(this).sticky_popover($.extend({}, defaults, options));
-  });
-}
-
 jQuery(document).ready(function($) {
-  update_tooltips({ placement: 'right' });
+  var defaults = {
+    delay: { show: 150, hide: 100 },
+    placement: 'left',
+    content: function(trigger) {
+      var $trigger = $(trigger);
+
+      var $el = $(new Spinner().spin().el);
+      $el.css({
+        width: '100px',
+        height: '100px',
+        left: '50px',
+        top: '50px'
+      });
+      return $el[0];
+    }
+  };
+
+  $('body').on('mouseover', 'a[data-popover-href]', function(e) {
+    // If popover instance doesn't exist already, create it and
+    // force the 'enter' event.
+    if (!$(e.currentTarget).data('sticky_popover')) {
+      $(e.currentTarget).sticky_popover(defaults);
+      $(e.currentTarget).data('sticky_popover').enter(e);
+    }
+  });
 });
 
 $(document).ajaxComplete(function(event, request){

@@ -1,6 +1,3 @@
 %ul.nav.nav-tabs.nav-stacked
   -@sections.each do |section|
     %li=link_to section.title, section_path(section), 'data-popover-href' => tooltip_flow_section_path(section)
-
-:javascript
-  update_tooltips();
