@@ -108,11 +108,21 @@ CmsRails::Application.routes.draw do
     end
   end
 
+  resources :systems, :as => 'flow_systems' do
+    member do
+    end
+  end
+
+  resources :accounts, :as => 'flow_accounts'
+  resources :people, :as => 'flow_people'
+
   match 'programs_dash' => 'programs_dash#index'
   match 'quick/programs' => 'quick#programs'
   match 'quick/sections' => 'quick#sections'
   match 'quick/controls' => 'quick#controls'
   match 'quick/biz_processes' => 'quick#biz_processes'
+  match 'quick/accounts' => 'quick#accounts'
+  match 'quick/people' => 'quick#people'
 
   match 'admin_dash' => 'admin_dash#index'
 

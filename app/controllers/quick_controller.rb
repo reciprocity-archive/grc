@@ -32,4 +32,20 @@ class QuickController < ApplicationController
     end
     @biz_processes = @biz_processes.all
   end
+
+  def accounts
+    @accounts = Account
+    if params[:s]
+      @accounts = @accounts.search(params[:s])
+    end
+    @accounts = @accounts.all
+  end
+
+  def people
+    @people = Person
+    if params[:s]
+      @people = @people.search(params[:s])
+    end
+    @people = @people.all
+  end
 end

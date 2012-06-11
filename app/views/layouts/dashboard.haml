@@ -12,8 +12,6 @@
       .navbar-inner
         .container
           .btn-toolbar.fltrt.toolbar-nav
-            /.btn-group
-            /  %button.btn a
             .btn-group
               %a.btn{ :href => '#help-modal', :'data-toggle' => 'modal' } Help
             -# Show 'Dashboard' unless on dashboard page
@@ -37,7 +35,8 @@
                 %strong=current_user.name || current_user.email
                 %a{:href => logout_path} Logout
               %br/
-              /%h1.fltrt.highlighted Page Keyssss
+              =yield :subheader_extras
+
     .container.graphpaper
       .row
         .span12
@@ -55,6 +54,15 @@
             =CMS_CONFIG['COMPANY']
 
       #help-modal.modal.hide.fade
+        .modal-header
+          %button.close{"data-dismiss" => "modal"} x
+          %h1 This content/function is coming soon
+        .modal-body
+          %p We are working on it!
+        .modal-footer
+          %a.close{"data-dismiss" => "modal", :href => "#"} Close
+
+      #comingsoon-modal.modal.hide.fade
         .modal-header
           %button.close{"data-dismiss" => "modal"} x
           %h1 This content/function is coming soon

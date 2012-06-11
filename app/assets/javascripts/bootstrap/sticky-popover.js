@@ -51,25 +51,25 @@
 
       if (!loaded) {
         $.get(href, function(data) {
-	  var $data = $(data);
-	  console.debug($data)
-	  self.$element.attr('data-original-title', $data.filter('.popover-title').html());
+          var $data = $(data);
+          self.$element.attr('data-original-title', $data.filter('.popover-title').html());
           self.$element.attr('data-content', $data.filter('.popover-content').html());
           self.$element.data('popover-loaded', true);
-          self.show(true);
+          if (self.displayState === 'show')
+            self.show(true);
         });
       }
     }
   , tip_enter: function(e) {
       // Handle `mouseenter` on the popover element
-      // Must set 'e.currentTarget' or it looks for `data.stick_popover`
+      // Must set 'e.currentTarget' or it looks for `data.sticky_popover`
       //   in the wrong place
       e.currentTarget = this.$element[0];
       $.fn.popover.Constructor.prototype.enter.apply(this, arguments);
     }
   , tip_leave: function(e) {
       // Handle `mouseenter` on the popover element
-      // Must set 'e.currentTarget' or it looks for `data.stick_popover`
+      // Must set 'e.currentTarget' or it looks for `data.sticky_popover`
       //   in the wrong place
       e.currentTarget = this.$element[0];
       $.fn.popover.Constructor.prototype.leave.apply(this, arguments);

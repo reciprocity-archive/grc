@@ -1,23 +1,25 @@
-.popover-title
-  %h3 Controls Mapped to this Section
+.WidgetBox
+  .WidgetBoxHeading
+    .WidgetTitle Regulation Controls
+  .WidgetBoxContent
+    -@section.controls.each do |control|
+      %div
+        %div
+          %span.prefix
+            =control.slug
+          =control.title
+        %div
+          =control.description
 
-.popover-content
-  %h3 Regulation Controls
-  -@section.controls.each do |control|
-    %div
+.WidgetBox
+  .WidgetBoxHeading
+    .WidgetTitle Company Controls
+  .WidgetBoxContent
+    -@section.consolidated_controls.each do |control|
       %div
-        %span.prefix
-          =control.slug
-        =control.title
-      %div
-        =control.description
-
-  %h3 Company Controls
-  -@section.consolidated_controls.each do |control|
-    %div
-      %div
-        %span.prefix
-          =control.slug
-        =control.title
-      %div
-        =control.description
+        %div
+          %span.prefix
+            =control.slug
+          =control.title
+        %div
+          =control.description
