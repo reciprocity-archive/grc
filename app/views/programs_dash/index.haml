@@ -21,7 +21,7 @@
             :layout => 'layouts/widget_box'
 
 -content_for :subheader_extras do
-  .btn-group.closed.fltrt
+  -#.btn-group.closed.fltrt
     %a.btn.btn-blue.dropdown-toggle{ :'data-toggle' => 'dropdown' }
       New Interface Widget
       %span.caret
@@ -29,7 +29,7 @@
       %li.divider
       %li.dropdown-menulabel.txtindent1 Create New ...
       %li
-        %a{ :'data-toggle' => 'modal-form', :href => '#create-program-modal' }
+        %a{ :'data-toggle' => 'modal-form', :href => '#comingsoon-modal' }
           Search
 
   .btn-group.closed.fltrt
@@ -43,7 +43,7 @@
         %a{ :'data-toggle' => 'modal-form', :href => '#create-program-modal' }
           Program
       %li
-        %a{ :'data-toggle' => 'modal-form', :href => '#create-product-modal' }
+        %a{ :'data-toggle' => 'modal-form', :href => '#comingsoon-modal' }
           Product
       %li
         %a{ :'data-toggle' => 'modal-form', :href => '#create-system-modal' }
