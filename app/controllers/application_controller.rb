@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :require_user
   before_filter :filter_set
+  after_filter :flash_to_headers
 
   #use Rails::DataMapper::Middleware::IdentityMap
   protect_from_forgery
@@ -105,5 +106,13 @@ class ApplicationController < ActionController::Base
       return false
     end
     return true
+  end
+
+  def flash_to_headers
+    if request.xhr?
+      flash_json = Hash[flash.map{|k,v| [k,ERB::Util.h(v)] }].to_json
+      response.headers['X-Flash-Messages'] = flash_json
+      flash.discard
+    end
   end
 end

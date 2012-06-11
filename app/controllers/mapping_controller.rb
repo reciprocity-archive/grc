@@ -1,6 +1,7 @@
 class MappingController < ApplicationController
   layout 'dashboard'
   respond_to :html, :json
+  skip_after_filter :flash_to_headers, :only => [:buttons]
 
   def show
     @program = Program.find(params[:program_id])
@@ -15,15 +16,45 @@ class MappingController < ApplicationController
   end
 
   def map_rcontrol
+    rcontrol_id = params[:rcontrol]
+    section = Section.find(params[:section])
+    notice = ""
+
+    if rcontrol_id.blank?
+      if params[:u]
+        flash[:error] = "I don't know how to unmap an indirect relationship"
+        render :js => 'update_map_buttons();'
+        return
+      end
+      ccontrol = Control.find(params[:ccontrol])
+      rcontrol =
+        Control.create(:title => section.title,
+                       :slug => section.slug + "-" + ccontrol.slug,
+                       :program => section.program,
+                       :technical => ccontrol.technical,
+                       :fraud_related => ccontrol.fraud_related,
+                       :frequency => ccontrol.frequency,
+                       :frequency_type => ccontrol.frequency_type,
+                       :assertion => ccontrol.assertion,
+                       :description => "Placeholder",
+                      )
+      notice = notice + "Created regulation control #{rcontrol.slug}. "
+      rcontrol_id = rcontrol.id
+    end
+
     if params[:u]
-      ControlSection.where(:section_id => params[:section],
-                           :control_id => params[:rcontrol]).each {|r|
+      ControlSection.where(:section_id => section.id,
+                           :control_id => rcontrol_id).each {|r|
         r.destroy
       }
+      notice = notice + "Unmapped regulation control. "
     else
-      ControlSection.create(:section_id => params[:section],
-                            :control_id => params[:rcontrol])
+      ControlSection.create(:section_id => section.id,
+                            :control_id => rcontrol_id)
+      notice = notice + "Mapped regulation control. "
     end
+
+    flash[:notice] = notice
 
     render :js => 'update_map_buttons();'
   end
@@ -34,9 +65,11 @@ class MappingController < ApplicationController
                            :control_id => params[:ccontrol]).each {|r|
         r.destroy
       }
+      flash[:notice] = "Unmapped company control"
     else
       ControlControl.create(:implemented_control_id => params[:rcontrol],
                             :control_id => params[:ccontrol])
+      flash[:notice] = "Mapped company control"
     end
 
     render :js => 'update_map_buttons();'
@@ -66,10 +99,17 @@ class MappingController < ApplicationController
   end
 
   def buttons
-    reg_exists =
-      params[:section] && params[:rcontrol] && 
-      ControlSection.exists?(:section_id => params[:section],
-                             :control_id => params[:rcontrol])
+    if !params[:rcontrol].blank?
+      reg_exists =
+        params[:section] && params[:rcontrol] && 
+        ControlSection.exists?(:section_id => params[:section],
+                               :control_id => params[:rcontrol])
+    else
+      reg_exists = 
+        params[:section] && params[:ccontrol] && 
+        Control.joins(:implementing_controls).joins(:sections).
+        exists?(:sections => {:id => params[:section]}, :implementing_controls_controls => {:id => params[:ccontrol]})
+    end
     com_exists =
       params[:rcontrol] && params[:ccontrol] && 
       ControlControl.exists?(:implemented_control_id => params[:rcontrol],

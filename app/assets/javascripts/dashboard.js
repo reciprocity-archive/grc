@@ -65,3 +65,63 @@ jQuery(function($) {
     }
   });
 });
+
+// Regulation mapping
+function init_mapping() {
+  $('#section_list')
+    .on("ajax:success", '.selector', function(evt, data, status, xhr){
+      $('#selected_sections').replaceWith(xhr.responseText);
+      $('#section_list .selector').closest('.item').removeClass('selected');
+      $(this).closest('.item').addClass('selected');
+    });
+  $('#rcontrol_list')
+    .on("ajax:success", '.selector', function(evt, data, status, xhr){
+      $('#selected_rcontrol').replaceWith(xhr.responseText);
+      $('#rcontrol_list .selector').closest('.item').removeClass('selected');
+      $(this).closest('.item').addClass('selected');
+    });
+  $('#ccontrol_list')
+    .on("ajax:success", '.selector', function(evt, data, status, xhr){
+      $('#selected_ccontrol').replaceWith(xhr.responseText);
+      $('#ccontrol_list .selector').closest('.item').removeClass('selected');
+      $(this).closest('.item').addClass('selected');
+    });
+
+  $('#controls-dialog').dialog({autoOpen : false, width: 400, height:300});
+  $('#section_list').on('click', 'a.controls', function() {
+    $('#controls-dialog > :first-child').load($(this).data('href'), function() {
+      $('#controls-dialog').dialog('open');
+    });
+  });
+  $('#cmap, #rmap').on('click', function() {
+    $('#controls-dialog').dialog('close');
+  });
+}
+
+function update_map_buttons_with_path(path) {
+  var section_id = $("#selected_sections").attr('oid') || "";
+  var rcontrol_id = $("#selected_rcontrol").attr('oid') || "";
+  var ccontrol_id = $("#selected_ccontrol").attr('oid') || "";
+  var qstr = '?' + $.param({section: section_id, rcontrol: rcontrol_id, ccontrol: ccontrol_id});
+  $.getJSON(path + qstr,
+    function(data){
+      var rmap = $('#rmap');
+      var rmap_text = $(rmap.children()[0]);
+      var cmap = $('#cmap');
+      var cmap_text = $(cmap.children()[0]);
+      rmap_text.text(data[0] ? 'Unmap section from control' : 'Map section to control')
+      rmap.attr('disabled', !(section_id && (rcontrol_id || ccontrol_id)));
+      rmap.attr('href', rmap.attr('href').split('?')[0] + qstr + (data[0] ? '&u=1' : ""));
+      cmap_text.text(data[1] ? 'Unmap control from control' : 'Map control to control')
+      cmap.attr('disabled', !(rcontrol_id && ccontrol_id));
+      cmap.attr('href', cmap.attr('href').split('?')[0] + qstr + (data[1] ? '&u=1' : ""));
+    });
+}
+
+function clear_selection(el) {
+  $(el).closest('.WidgetBox').prev().find('.selected').removeClass('selected');
+  description_el = $(el).closest('.WidgetBox').find('.WidgetBoxContent .description .content')
+  $(description_el).replaceWith('Nothing selected.');
+  $(el).closest('.WidgetBox').find('.WidgetBoxContent .description').attr('oid', '');
+  update_map_buttons();
+}

@@ -855,3 +855,19 @@ ul.slugtree ul {
   vertical-align: baseline;
   background-color: #efefef;
 }
+
+.message {
+  font-size: 200%;
+  margin-top: 3pt;
+  margin-bottom: 3pt;
+}
+
+.message.error {
+  color: #800;
+}
+.message.warning {
+  color: #880;
+}
+.message.notice {
+  color: #888;
+}
