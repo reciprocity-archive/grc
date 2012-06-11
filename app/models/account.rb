@@ -119,6 +119,14 @@ class Account < ActiveRecord::Base
     end while !records.blank?
   end
 
+  def self.search(q)
+    q = "%#{q}%"
+    t = arel_table
+    where(t[:name].matches(q).
+      or(t[:username].matches(q)).
+      or(t[:email].matches(q)))
+  end
+
   private
     def reset_persistence_token?
       persistence_token.blank?

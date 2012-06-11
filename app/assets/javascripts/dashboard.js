@@ -48,23 +48,9 @@ jQuery(function($) {
   $('.tabbable > ul > li:first-child > a').tab('show');
 });
 
-// Modal forms
-jQuery(function($) {
-  $('nav .modal-form').each(function(i, el) {
-    var $this = $(el);
-    $this.on('click.modal-form', 'a', function(e) {
-      var $modal = $this.find('> .modal');
-
-      $modal.modal_form();
-
-      e && e.preventDefault();
-    });
-  });
-});
-
 // Quick Search
 jQuery(function($) {
-  $('nav-tabs > .widgetsearch').keypress(function (e) {
+  $('nav > .widgetsearch').keypress(function (e) {
     var $tab = $(this).closest('.WidgetBox').find('ul.nav-tabs > li.active > a')
       , href = $tab.data('tab-href') + '?' + $.param({ s: $(this).val() });
     if (e.which == 13)

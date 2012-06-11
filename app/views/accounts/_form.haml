@@ -1,0 +1,34 @@
+-if f.object.errors.any?
+  #error_explanation
+    %h2= "#{pluralize(f.object.errors.count, "error")} prohibited this account from being saved:"
+    %ul
+      - f.object.errors.full_messages.each do |msg|
+        %li= msg
+
+.group
+  =f.label :name
+  =f.text_field :name, :class => :text_field
+  %span.description Ex: John
+
+.group
+  =f.label :surname
+  =f.text_field :surname, :class => :text_field
+  %span.description Ex: Doe
+
+.group
+  =f.label :email
+  =f.text_field :email, :class => :text_field
+  %span.description Ex: jdoe@google.com
+
+.group
+  =f.label :password
+  =f.password_field :password, :class => :password_field
+
+.group
+  =f.label :password_confirmation
+  =f.password_field :password_confirmation, :class => :password_field
+
+.group
+  =f.label :role
+  =f.select :role, access_control_roles
+

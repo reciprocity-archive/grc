@@ -28,6 +28,7 @@
     constructor: ModalForm
 
   , reset: function(e) {
+      console.debug("reset");
       $(e.target).closest('form')[0].reset();
       this.hide(e);
     }
@@ -39,26 +40,26 @@
 
   , submit: function(e) {
       var $form = $(e.target);
-      console.debug($form);
       e && e.preventDefault();
     }
 
   , on_success: function(ev, data, status, xhr) {
       // Hide, then display flash messages globally
-      this.hide();
-      console.debug('flash: ', arguments);
-      this.$element.trigger('flash', status);
+      if (data.redirect) {
+        window.location.replace(data.redirect);
+      } else {
+        this.hide();
+        this.$element.trigger('flash', status);
+      }
     }
 
   , on_error: function(xhr, status, error) {
       // Display flash messages
-      console.debug('err: ', arguments);
       this.$element.trigger('flash', error);
     }
 
   , on_flash: function(e, messages) {
       e.stopPropagation();
-      console.debug('on_flash', arguments);
     }
   });
 
@@ -77,5 +78,19 @@
 
   $.fn.modal_form.defaults = $.extend({}, $.fn.modal.defaults, {
 
+  });
+
+  /* MODAL-FORM DATA-API
+   * =================== */
+
+  $(function () {
+    $('body').on('click.modal.data-api', '[data-toggle="modal-form"]', function ( e ) {
+      var $this = $(this), href
+        , $target = $($this.attr('data-target') || (href = $this.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '')) //strip for ie7
+        , option = $target.data('modal') ? 'toggle' : $.extend({}, $target.data(), $this.data());
+
+      e.preventDefault();
+      $target.modal_form(option);
+    });
   });
 }(window.jQuery);

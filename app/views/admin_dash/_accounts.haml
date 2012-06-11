@@ -4,10 +4,10 @@
 -#-content_for :widget_buttons do
   %input.ui-corner-all.widgetsearch.clear-value(type='text' placeholder='Search')
 
-.tabbable
+.tabbable#quick_find
   %ul.nav.nav-tabs
-    %li=link_to 'Accounts', '#accounts', :data => { :'xtab-href' => quick_controls_path, :toggle => 'tab' }
-    %li=link_to 'People', '#people', :data => { :'xtab-href' => quick_sections_path, :toggle => 'tab' }
+    %li=link_to 'Accounts', '#accounts', :data => { :'tab-href' => quick_accounts_path, :toggle => 'tab' }
+    %li=link_to 'People', '#people', :data => { :'tab-href' => quick_people_path, :toggle => 'tab' }
   .tab-content
     #accounts.tab-pane
     #people.tab-pane
