@@ -12,6 +12,9 @@ class ApplicationController < ActionController::Base
   before_filter :filter_set
   after_filter :flash_to_headers
 
+  after_filter  :ajax_flash_to_headers
+  after_filter  :ajax_redirect_to_headers
+
   #use Rails::DataMapper::Middleware::IdentityMap
   protect_from_forgery
 
@@ -113,6 +116,38 @@ class ApplicationController < ActionController::Base
       flash_json = Hash[flash.map{|k,v| [k,ERB::Util.h(v)] }].to_json
       response.headers['X-Flash-Messages'] = flash_json
       flash.discard
+    end
+  end
+
+  def ajax_refresh
+    render :text => "", :status => 279
+
+    flash.keep
+  end
+
+  # Move flash messages to HTTP headers
+  def ajax_flash_to_headers
+    # Only if AJAX request
+    return unless request.xhr?
+
+    # Not if AJAX redirect
+    #return if [302, 278, 279].include?(response.status)
+
+    [:error, :alert, :warning, :notice].each do |type|
+      if flash[type]
+        response.headers["X-Flash-#{type.capitalize}"] = flash[type].to_json
+      end
+    end
+
+    flash.discard unless [302, 278, 279].include?(response.status)
+  end
+
+  # Change redirect status code for AJAX redirects
+  def ajax_redirect_to_headers
+    return unless request.xhr?
+
+    if response.status == 302
+      response.status = 278
     end
   end
 end
