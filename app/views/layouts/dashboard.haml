@@ -40,8 +40,7 @@
     .container.graphpaper
       .row
         .span12
-          .flash-holder
-          .flash!=[:error, :warning, :notice].map { |type| content_tag(:div, flash[type], :class => "message #{type}") }.join
+          .flash!=[:error, :warning, :notice].map { |type| content_tag(:div, flash[type], :class => type) if flash[type] }.join
       =yield
 
       -##footer
@@ -55,7 +54,7 @@
 
       #help-modal.modal.hide.fade
         .modal-header
-          %button.close{"data-dismiss" => "modal"} x
+          %a.close{"data-dismiss" => "modal"} x
           %h1 This content/function is coming soon
         .modal-body
           %p We are working on it!
@@ -64,7 +63,7 @@
 
       #comingsoon-modal.modal.hide.fade
         .modal-header
-          %button.close{"data-dismiss" => "modal"} x
+          %a.close{"data-dismiss" => "modal"} x
           %h1 This content/function is coming soon
         .modal-body
           %p We are working on it!
