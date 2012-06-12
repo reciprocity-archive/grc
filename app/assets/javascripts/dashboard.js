@@ -71,8 +71,8 @@ function init_mapping() {
   $('#section_list')
     .on("ajax:success", '.selector', function(evt, data, status, xhr){
       $('#selected_sections').replaceWith(xhr.responseText);
-      $('#section_list .selector').closest('.item').removeClass('selected');
-      $(this).closest('.item').addClass('selected');
+      $('#section_list .selector').closest('.regulationslot').removeClass('selected');
+      $(this).closest('.regulationslot').addClass('selected');
     });
   $('#rcontrol_list')
     .on("ajax:success", '.selector', function(evt, data, status, xhr){
@@ -119,9 +119,9 @@ function update_map_buttons_with_path(path) {
 }
 
 function clear_selection(el) {
-  $(el).closest('.WidgetBox').prev().find('.selected').removeClass('selected');
-  description_el = $(el).closest('.WidgetBox').find('.WidgetBoxContent .description .content')
+  $(el).closest('.WidgetBox').find('.selected').removeClass('selected');
+  description_el = $(el).closest('.WidgetBox').next().find('.WidgetBoxContent .description .content')
   $(description_el).replaceWith('Nothing selected.');
-  $(el).closest('.WidgetBox').find('.WidgetBoxContent .description').attr('oid', '');
+  $(el).closest('.WidgetBox').next().find('.WidgetBoxContent .description').attr('oid', '');
   update_map_buttons();
 }

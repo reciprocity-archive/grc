@@ -1,19 +1,12 @@
 -content_for :widget_title do
   Selected Sections
 
+-content_for :widget_buttons do
+  =link_to mapping_map_rcontrol_path, :method => :post, :remote => true, :id => :rmap, :class => %w(btn widgetbtn btn-warning) do
+    %span Map section to control
+    %i.icon-play.icon-white
+
 #selected_sections.description{:oid => section ? section.id : ""}
-  .btn-toolbar.fltlft
-    .btn-group
-      %a.btn(onclick='clear_selection(this)')
-        %i.icon-step-backward
-        Clear
-
-  .btn-toolbar.fltrt
-    .btn-group
-      =link_to mapping_map_rcontrol_path, :method => :post, :remote => true, :id => :rmap, :class => %w(btn btn-warning) do
-        %span Map section to control
-        %i.icon-play.icon-white
-
   .clearfix
 
   .content

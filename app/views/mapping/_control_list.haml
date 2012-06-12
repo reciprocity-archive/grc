@@ -2,7 +2,9 @@
   #{title_prefix} Controls
 
 -content_for :widget_buttons do
-  %span.nav-box
-    %input.ui-corner-all.widgetsearch(type='text' placeholder='Search')
+  %a.btn.widgetbtn(onclick='clear_selection(this)')
+    Reset
+
+  %input.ui-corner-all.widgetsearch(type='text' placeholder='Search')
 
 =render :partial => 'control_list_content', :locals => { :controls => controls, :control_type => control_type }

@@ -2,18 +2,23 @@
   -if sections.empty?
     Nothing found.
   =walk_slug_tree(Program.slugtree(sections)) do |section, step|
-    .item
-      %div
-        =link_to mapping_selected_section_path(section), :remote => true, :method => :post, :class => :selector do
-          %h3=section.slug
-          %p=section.title
-      -controls = section.linked_controls
-      %ul.attached{ :title => controls.map(&:slug).join(", ") }
-        -controls.each do |control|
-          %li
-            %a.controls{:data => { :href => mapping_section_tooltip_path(section)} }
-              =control.slug
-        -if controls.empty?
-          %li N/A
-      .content
-        =section.description
+    .row-fluid
+      .span12
+        .regulationslot.toggle.span9{:data => {:toggle => 'collapse', :target => ''}}
+          =link_to mapping_selected_section_path(section), :remote => true, :method => :post, :class => :selector do
+            %span.prefix=section.slug
+            =section.title
+        -controls = section.linked_controls
+        .attached.controllistRM.span3.statusgreen
+          %ul.spannomargin{ :title => controls.map(&:slug).join(", ") }
+            %li
+              %strong=controls.count
+              \:
+            -controls.each do |control|
+              %li
+                %a.controls{:data => { :href => mapping_section_tooltip_path(section)} }
+                  =control.slug
+            -if controls.empty?
+              %li N/A
+        .row-fluid-slotcontent.span9.content.in.collapse
+          =section.description

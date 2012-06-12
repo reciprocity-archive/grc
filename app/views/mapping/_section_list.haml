@@ -2,7 +2,9 @@
   Regulation Sections
 
 -content_for :widget_buttons do
-  %span.nav-box
-    %input.ui-corner-all.widgetsearch(type='text' placeholder='Search')
+  %a.btn.widgetbtn(onclick='clear_selection(this)')
+    Reset
+
+  %input.ui-corner-all.widgetsearch(type='text' placeholder='Search')
 
 =render :partial => 'section_list_content', :locals => { :sections => sections }

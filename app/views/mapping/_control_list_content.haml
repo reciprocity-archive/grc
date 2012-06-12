@@ -1,6 +1,9 @@
-%ul.nav.nav-stacked.nav-tabs{:data => { :href => mapping_controls_path(@program, control_type, :format => :html)}}
+%ul.sluglist.nav.nav-stacked.nav-tabs{:data => { :href => mapping_controls_path(@program, control_type, :format => :html)}}
   -controls.each do |control|
-    %li.group.item
-      =link_to  mapping_selected_control_path(control, :control_type => control_type), :remote => true, :method => :post, :class => :selector do
-        %h3=control.slug
-        %p=control.title
+    %li
+      .row-fluid
+        .span12
+          .item.regulationslot.span12.collapsed
+            =link_to  mapping_selected_control_path(control, :control_type => control_type), :remote => true, :method => :post, :class => :selector do
+              %span.prefix=control.slug
+              =control.title

@@ -10,84 +10,37 @@
  *= require gcms
  */
 
-/* LIST styles for the quick-list lists */
-
-ul.items {
-  li.item {
-    border: 1px solid #eeeeee;
-    border-radius: 2px;
-    background-color: #bbddff;
-    list-style: none;
-    margin: 5px;
-    padding: 5px;
-
-    &:last-child {
-      border-bottom: none;
-    }
-  }
+ul.slugtree ul ul > li {
+  margin-left: 10pt;
+  width: 100%;
+  display: block;
 }
 
-/* TREE styles for the Section / Control trees on the Program page */
-
-ul.slugtree {
-  position: relative;
-  padding-left: 0px;
-  width: 80%;
-
-  .collapsed {
-    display: block;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
-  .prefix {
-    font-weight: bold;
-    margin-right: 10px;
-  }
-  .expander {
-    position: absolute;
-    display: inline-block;
-    right: -2%;
-  }
-  .content {
-    background-color: #ccc;
-    display: none;
-  }
-  .attached {
-    position: absolute;
-    display: inline-block;
-    left: 102%;
-    margin-top: -16px;
-    width: 20%;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-
-    li {
-      margin: 2px;
-      background-color: #aaa;
-      display: inline;
-    }
-  }
-
-  ul {
-    padding-left: 10px;
-  }
+ul.slugtree ul ul.spannomargin > li {
+  margin-left: 0pt;
 }
 
-li.selected, div.selected { background: #8888ff;}
-
-.WidgetBox {
-  .WidgetBoxHeading:after {
-    clear:both;
-    content: '';
-    height: 0;
-    display: block;
-  }
-
-  .WidgetBoxContent {
-    overflow:auto;
-    max-height: 500px;
-  }
+.selected a {
+  color:#fff;
 }
 
+.sluglist .prefix {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.sluglist .collapsed {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.sluglist li {
+  padding: 0px;
+  margin: 0px;
+}
+
+.regulationslot a {
+  color: #666;
+}
