@@ -1,5 +1,3 @@
-%h1 Control
-
 =f.hidden_field :program_id, :value => f.object.program_id
 
 .group
@@ -32,14 +30,14 @@
     =f.label :frequency_type
     =f.select :frequency_type, Control::FREQUENCIES, {:class => :enum}
 
-  .item
+  -#.item
     Evidence Types:
     -f.object.evidence_descriptors.each do |desc|
       .item
         =desc.title
         .item
           =desc.description
-.section
+-#.section
   %h3 Mappings
   .item
     To Controls:
@@ -53,7 +51,3 @@
       .item
         =link_to sec.slug, section_path(sec)
         =sec.title
-
-.group.navform.wat-cf
-  =f.submit pat(:save), :class => :button
-  =f.submit pat(:cancel), :onclick => "window.location='#{controls_path}';return false", :class => :button

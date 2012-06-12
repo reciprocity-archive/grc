@@ -17,9 +17,6 @@ class ControlsController < ApplicationController
     @control = Control.find(params[:id])
   end
 
-  def update
-  end
-
   def show
     @control = Control.find(params[:id])
   end
@@ -36,11 +33,28 @@ class ControlsController < ApplicationController
   def create
     @control = Control.new(params[:control])
 
-    if @control.save
-      redirect_to :back
-    else
-      flash[:error] = "This is an error"
-      redirect_to :back
+    respond_to do |format|
+      if @control.save
+        flash[:notice] = "Successfully created a new control"
+        format.html { redirect_to flow_control_path(@control) }
+      else
+        flash[:error] = @control.errors.full_messages
+        format.html { render :layout => nil, :status => 400 }
+      end
+    end
+  end
+
+  def update
+    @control = Control.find(params[:id])
+
+    respond_to do |format|
+      if @control.authored_update(current_user, params[:control])
+        flash[:notice] = "Successfully updated the control!"
+        format.html { redirect_to flow_control_path(@control) }
+      else
+        flash[:error] = @control.errors.full_messages
+        format.html { render :layout => nil, :status => 400 }
+      end
     end
   end
 
