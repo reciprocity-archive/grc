@@ -51,16 +51,18 @@ jQuery(function($) {
 // Quick Search
 jQuery(function($) {
   $('nav > .widgetsearch').keypress(function (e) {
-    var $tab = $(this).closest('.WidgetBox').find('ul.nav-tabs > li.active > a')
-      , href = $tab.data('tab-href') + '?' + $.param({ s: $(this).val() });
     if (e.which == 13)
+      var $this = $this;
+      var $tab = $this.closest('.WidgetBox').find('ul.nav-tabs > li.active > a')
+        , href = $tab.data('tab-href') + '?' + $.param({ s: $this.val() });
       $tab.trigger('show', href);
   });
-  $('.nav-box > .widgetsearch').keypress(function (e) {
+  $('nav > .widgetsearch-tocontent').keypress(function (e) {
     if (e.which == 13) {
       var $this = $(this);
-      var $box = $($this.closest('.WidgetBox').find('.WidgetBoxContent').children()[0])
-        , href = $box.data('href') + '?' + $.param({ s: $(this).val() });
+      var $box = $this.closest('.WidgetBox').find('.WidgetBoxContent')
+        , $child = $($box.children()[0])
+        , href = $child.data('href') + '?' + $.param({ s: $this.val() });
       $box.load(href);
     }
   });
