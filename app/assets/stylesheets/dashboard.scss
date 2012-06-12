@@ -11,9 +11,12 @@
  */
 
 ul.slugtree ul ul > li {
-  margin-left: 10pt;
-  width: 100%;
+  margin-left: 0;
   display: block;
+}
+
+ul.slugtree ul ul > li .regulationslot {
+  padding-left: 1.5em;
 }
 
 ul.slugtree ul ul.spannomargin > li {
@@ -43,4 +46,5 @@ ul.slugtree ul ul.spannomargin > li {
 
 .regulationslot a {
   color: #666;
+  display: block;
 }
