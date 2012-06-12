@@ -3,7 +3,7 @@
     %li
       .row-fluid
         .span12
-          .item.regulationslot.span12.collapsed
-            =link_to  mapping_selected_control_path(control, :control_type => control_type), :remote => true, :method => :post, :class => :selector do
+          .item.regulationslot.span12
+            =link_to  mapping_selected_control_path(control, :control_type => control_type), :remote => true, :method => :post, :class => [:selector, :collapsed] do
               %span.prefix=control.slug
               =control.title
