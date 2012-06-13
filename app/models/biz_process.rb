@@ -4,6 +4,7 @@ class BizProcess < ActiveRecord::Base
   include AuthoredModel
   include SluggedModel
   extend SluggedModel::ClassMethods
+  include SearchableModel
 
   before_save :upcase_slug
 
