@@ -53,3 +53,17 @@ ul.slugtree ul ul.spannomargin > li {
   color: #666;
   display: block;
 }
+
+.WidgetBox {
+  .WidgetBoxContent {
+    overflow:auto;
+    max-height: 500px;
+  }
+
+  .WidgetBoxContent {
+    width: auto;
+  }
+  .smallerWidgetBoxHeading {
+    margin-bottom: -2px;
+  }
+}
