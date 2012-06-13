@@ -28,19 +28,33 @@ jQuery(function($) {
       href = $tab.data('tab-href');
 
     if (!href) return;
+    if (href === 'reset') {
+      $tab.data('tab-loaded', false);
+      return;
+    }
 
     if (!loaded) {
       if (template) {
         var spinner = new Spinner({ }).spin();
-        $(pane).append(spinner.el);
+        $(pane).html(spinner.el);
         $(spinner.el).css({ width: '100px', height: '100px', left: '50px', top: '50px' });
       }
 
       $(pane).load(href, function(data, status, xhr) {
         $tab.data('tab-loaded', true);
-        $tab.tab('show');
         $(this).html(data);
       });
+    }
+  });
+
+  // Clear the .widgetsearch box when tab is changed
+  $('.tabbable').on('show', 'ul.nav-tabs > li > a', function(e) {
+    if (e.relatedTarget) {
+      $input = $(this).closest('.WidgetBox').find('.widgetsearch');
+      if ($input.val()) {
+        $input.val("");
+        $(e.relatedTarget).trigger('show', 'reset');
+      }
     }
   });
 
@@ -51,16 +65,17 @@ jQuery(function($) {
 // Quick Search
 jQuery(function($) {
   $('nav > .widgetsearch').keypress(function (e) {
-    if (e.which == 13)
-      var $this = $this;
-      var $tab = $this.closest('.WidgetBox').find('ul.nav-tabs > li.active > a')
+    if (e.which == 13) {
+      var $this = $(this)
+        , $tab = $this.closest('.WidgetBox').find('ul.nav-tabs > li.active > a')
         , href = $tab.data('tab-href') + '?' + $.param({ s: $this.val() });
       $tab.trigger('show', href);
+    }
   });
   $('nav > .widgetsearch-tocontent').keypress(function (e) {
     if (e.which == 13) {
-      var $this = $(this);
-      var $box = $this.closest('.WidgetBox').find('.WidgetBoxContent')
+      var $this = $(this)
+        , $box = $this.closest('.WidgetBox').find('.WidgetBoxContent')
         , $child = $($box.children()[0])
         , href = $child.data('href') + '?' + $.param({ s: $this.val() });
       $box.load(href);
