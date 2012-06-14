@@ -94,7 +94,7 @@ CmsRails::Application.routes.draw do
     end
   end
 
-  resources :cycles, :as => 'flow_cycles', :only => [:show]
+  resources :cycles, :as => 'flow_cycles', :only => [:show, :create, :update]
 
   resources :sections, :as => 'flow_sections', :only => [] do
     member do

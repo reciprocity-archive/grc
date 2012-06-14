@@ -16,7 +16,7 @@
         Reg Mapper
     -if !program.company?
       .btn-group
-        %a.btn.btn-warning{ :href => '#comingsoon-modal', :'data-toggle' => 'modal' }
+        %a.btn.btn-warning{ :href => '#create-cycle-modal', :'data-toggle' => 'modal-form' }
           %i.icon-play.icon-white
           Start Audit
     %hr
@@ -59,3 +59,15 @@
     Parented Controls: 
     =@stats[:controls_parented_count]
 
+#create-cycle-modal.modal.hide.fade
+  -cycle = Cycle.new(:program_id => program.id)
+  =form_for cycle, :url => flow_cycles_path, :method => :post, :remote => true, :html => {:class => :form} do |f|
+    .modal-header
+      %a.close{ "data-dismiss" => "modal" } x
+      %h1 Edit Audit Cycle
+    .modal-body
+      =render :partial => 'cycles/form',
+              :locals  => { :f => f }
+    .modal-footer
+      =f.submit pat(:save)
+      =f.submit pat(:cancel), :type => 'reset'

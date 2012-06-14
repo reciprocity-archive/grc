@@ -9,6 +9,7 @@ class Cycle < ActiveRecord::Base
   belongs_to :program
 
   validates :program, :presence => true
+  validates :start_at, :presence => true
 
   def slug
     program.slug + "-" + (start_at.strftime("%Y-%m-%d") rescue "-")

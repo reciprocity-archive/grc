@@ -1,0 +1,21 @@
+.group
+  =f.label :program_id
+  -if !f.object.new_record?
+    =link_to f.object.program.display_name,
+      edit_program_path(f.object.program)
+  -else
+    =f.collection_select :program_id, Program.all, :id, :display_name, {}, {:class => :collection, :multiple => false}
+  %span.description Program being audited
+
+.group
+  =f.label :start_at
+  =f.text_field :start_at, :class => :text_field
+  %span.description Audit period start date in the format yyyy-mm-dd.  Page up/down to select month, control up/down/left/right to select day. Enter to apply.
+  :javascript
+    $('#cycle_start_at').datepicker({changeMonth: true, changeYear: true, dateFormat: 'yy-mm-dd'});
+
+.group
+  =f.label :complete
+  =f.check_box :complete, :class => :check_box
+  %span.description Was this audit cycle completed?
+
