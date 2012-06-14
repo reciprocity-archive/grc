@@ -4,22 +4,19 @@
 -content_for :widget_title do
   Program Information
 
-.nav.nav-tabs.nav-stacked
-  .btn-toolbar.toolbar-widget
-    .btn-group
-      %a.btn.btn-warning{ :href => import_flow_program_path(@program) }
-        %i.icon-share.icon-white
-        Import Regs
-    .btn-group
-      %a.btn.btn-warning{ :href => mapping_program_path(program) }
-        %i.icon-random.icon-white
-        Reg Mapper
+.programinformation
+  .toolbar-widget
+    %a.btn.btn-warning{ :href => import_flow_program_path(@program) }
+      %i.icon-share.icon-white
+      Import Regs
+    %a.btn.btn-warning{ :href => mapping_program_path(program) }
+      %i.icon-random.icon-white
+      Reg Mapper
     -if !program.company?
-      .btn-group
-        %a.btn.btn-warning{ :href => '#create-cycle-modal', :'data-toggle' => 'modal-form' }
-          %i.icon-play.icon-white
-          Start Audit
-    %hr
+      %a.btn.btn-warning{ :href => '#create-cycle-modal', :'data-toggle' => 'modal-form' }
+        %i.icon-play.icon-white
+        Start Audit
+  %hr.hr-widget
 
   =program.title
   \|

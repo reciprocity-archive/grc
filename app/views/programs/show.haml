@@ -5,12 +5,12 @@
     =@program.slug
   %h1.location=@program.title
 
-.row
-  .span8
+.row-static
+  .doublewide
     =render :partial => 'programs/controls',
             :layout => 'layouts/widget_box',
             :locals => { :program => @program }
-  .span4
+  .singlewide
     =render :partial => 'programs/show',
             :layout => 'layouts/widget_box',
             :locals => { :program => @program }
