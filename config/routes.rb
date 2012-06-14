@@ -91,6 +91,7 @@ CmsRails::Application.routes.draw do
     member do
       get 'show'
       get 'tooltip'
+      get 'import'
     end
   end
 

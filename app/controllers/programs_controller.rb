@@ -18,6 +18,10 @@ class ProgramsController < ApplicationController
     @stats = program_stats(@program)
   end
 
+  def import
+    @program = Program.find(params[:id])
+  end
+
   def create
     source_document = params[:program].delete(:source_document)
     source_website = params[:program].delete(:source_website)
