@@ -9,6 +9,7 @@ class Section < ActiveRecord::Base
   include SearchableModel
 
   before_save :upcase_slug
+  before_save :update_parent_id
 
   #validates_presence_of :title
   #validates_presence_of :slug

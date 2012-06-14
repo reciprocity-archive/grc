@@ -1,4 +1,11 @@
 module SluggedModel
+  def compact_slug
+    return slug unless parent
+    cslug = slug
+    cslug[parent.slug] = ''
+    return cslug
+  end
+
   def self.included(model)
     model.extend(ClassMethods)
   end

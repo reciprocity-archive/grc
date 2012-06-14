@@ -6,7 +6,7 @@
       .span12
         .regulationslot.toggle.span9
           =link_to mapping_selected_section_path(section), :remote => true, :method => :post, :class => [:selector, :collapsed] do
-            %span.prefix=section.slug
+            %span.prefix=section.compact_slug
             =section.title
         -controls = section.linked_controls
         .attached.controllistRM.span3.statusgreen
