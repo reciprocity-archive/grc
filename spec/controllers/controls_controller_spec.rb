@@ -18,7 +18,7 @@ describe ControlsController do
       login({}, { :role => 'admin' })
       create_base_objects
       @ctl2 = Control.create(:title => 'Control 2', :slug => 'CTL2', :description => 'x', :is_key => true, :fraud_related => false)
-      @ctl3 = Control.create(:title => 'Control 3', :slug => 'CTL1-CTL3', :description => 'x', :is_key => true, :fraud_related => false, :parent_id => @ctl2)
+      @ctl3 = Control.create(:title => 'Control 3', :slug => 'CTL2-CTL3', :description => 'x', :is_key => true, :fraud_related => false, :parent => @ctl2)
       @sec2 = Section.create(:title => 'Section 2', :slug => 'REG1-SEC2', :description => 'x', :program => @reg)
       @sec3 = Section.create(:title => 'Section 3', :slug => 'REG1-SEC3', :description => 'x', :program => @reg)
       @sec2.controls << @ctl

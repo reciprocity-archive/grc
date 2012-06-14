@@ -22,7 +22,7 @@ describe Admin::ProgramsController do
       it "returns http success" do
         get 'index'
         response.should be_success
-        assigns(:programs).should eq([@reg])
+        assigns(:programs).should eq([@creg, @reg])
       end
     end
 

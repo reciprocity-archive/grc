@@ -1,7 +1,8 @@
 module BaseObjects
   def create_base_objects
+    @creg = Program.create(:title => 'Company', :slug => 'COM1', :company => true)
     @reg = Program.create(:title => 'Reg 1', :slug => 'REG1', :company => false)
-    @ctl = Control.create(:title => 'Control 1', :slug => 'CTL1', :description => 'x', :program => @reg, :is_key => true, :fraud_related => false)
+    @ctl = Control.create(:title => 'Control 1', :slug => 'REG1-CTL1', :description => 'x', :program => @reg, :is_key => true, :fraud_related => false)
     @cycle = Cycle.create(:program => @reg, :start_at => '2011-01-01')
     @sec = Section.create(:title => 'Section 1', :slug => 'REG1-SEC1', :description => 'x', :program => @reg)
     @sys = System.create(:title => 'System 1', :slug => 'SYS1', :description => 'x', :infrastructure => true)
