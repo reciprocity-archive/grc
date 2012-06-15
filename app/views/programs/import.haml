@@ -1,9 +1,8 @@
 -content_for :header do
-  %h5.highlighted
-    =link_to @program.slug, flow_program_path(@program)
-    %span.divider /
-    Import
-  %h1.location Import regulations for #{@program.title}
+  %ol#breadcrumb
+    %li=link_to @program.slug, flow_program_path(@program)
+    %li Import
+  .location#pageTitle Import regulations for #{@program.title}
 
 .row-static
   =render :partial => 'programs/import',

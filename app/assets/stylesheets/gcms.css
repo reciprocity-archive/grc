@@ -179,12 +179,12 @@ body {
 /* Height attributes that should be applied to WidgetBox only */
 
 /* Goal is to specify height outside of the widgetbox */
-.halfHeight  > .WidgetBoxContent {
+.halfHeight > .WidgetBox > .WidgetBoxContent {
 	height:265px;
 	//width:346px;
 }
 
-.fullHeight  > .WidgetBoxContent {
+.fullHeight > .WidgetBox > .WidgetBoxContent {
 	position:relative;
 	min-height:265px;
 	max-height:600px;
@@ -193,12 +193,12 @@ body {
 	overflow-x:hidden;
 }
 
-.singleWide > .WidgetBoxContent {
+.singleWide > .WidgetBox > .WidgetBoxContent {
 	width:346px;
 }
 
 
-.doubleWide > .WidgetBoxContent {
+.doubleWide > .WidgetBox > .WidgetBoxContent {
 	width:720px;
 }
 

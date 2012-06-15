@@ -1,7 +1,7 @@
 -content_for :header do
-  %h5.highlighted
-    ADMIN
-  %h1.location Admin Dashboard
+  %ol#breadcrumb
+    %li ADMIN
+  .location#pageTitle Admin Dashboard
 
 -content_for :subheader_extras do
   .btn-group.closed.fltrt
@@ -18,14 +18,16 @@
         %a{ :'data-toggle' => 'modal-form', :href => '#create-person-modal' }
           Person
 
-.row
-  .span8
-    =render :partial => 'admin_dash/accounts',
-            :layout => 'layouts/widget_box',
-            :locals => { :accounts => @accounts, :people => @people }
-  .span4
-    =render :partial => 'admin_dash/old_links',
-            :layout => 'layouts/widget_box'
+.row-static
+  .doubleColumn
+    .doubleWide.fullHeight
+      =render :partial => 'admin_dash/accounts',
+              :layout => 'layouts/widget_box',
+              :locals => { :accounts => @accounts, :people => @people }
+  .singleColumn
+    .singleWide.halfHeight
+      =render :partial => 'admin_dash/old_links',
+              :layout => 'layouts/widget_box'
 
 
 #create-account-modal.modal.hide.fade

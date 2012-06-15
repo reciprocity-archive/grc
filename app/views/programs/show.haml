@@ -1,20 +1,21 @@
 -content_for :header do
-  %h5.highlighted
-    =link_to 'PROGRAMS', programs_dash_path
-    %span.divider /
-    =@program.slug
-  %h1.location=@program.title
+  %ol#breadcrumb
+    %li=link_to 'PROGRAMS', programs_dash_path
+    %li=@program.slug
+  .location#pageTitle=@program.title
 
 .row-static
-  .doublewide
-    =render :partial => 'programs/controls',
-            :layout => 'layouts/widget_box',
-            :locals => { :program => @program }
-  .singlewide
-    =render :partial => 'programs/show',
-            :layout => 'layouts/widget_box',
-            :locals => { :program => @program }
-    =render :partial => 'programs/audit_cycles',
-            :layout => 'layouts/widget_box',
-            :locals => { :program => @program }
-
+  .doubleColumn
+    .doubleWide.fullHeight
+      =render :partial => 'programs/controls',
+              :layout => 'layouts/widget_box',
+              :locals => { :program => @program }
+  .singleColumn
+    .singleWide.halfHeight
+      =render :partial => 'programs/show',
+              :layout => 'layouts/widget_box',
+              :locals => { :program => @program }
+    .singleWide.halfHeight
+      =render :partial => 'programs/audit_cycles',
+              :layout => 'layouts/widget_box',
+              :locals => { :program => @program }
