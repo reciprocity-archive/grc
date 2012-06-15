@@ -10,7 +10,6 @@
  */
  
 
-
 a {
 	color:#43C2C7;
 }
@@ -29,14 +28,6 @@ td {
 	vertical-align:top;
 }
 
-headerz {
-  width: 940px;
-  margin-right: auto;
-  margin-left: auto;
-  *zoom: 1;
-  background:#fff;
-}
-
 .header:before,
 .header:after {
   display: table;
@@ -50,21 +41,12 @@ headerz {
 /* Static columns for pages that should not have responsive design - ex. Reg Mapper */
 
 .row-static {
-	margin:0 0 0 0;
-	float:left;
+	margin:0 15px 0 15px;
+	float:none;
 	display:block;
-	min-width: 1190px;
+	min-width: 1120px;
 }
-  .span4-static {
-    width: 380px;
-	padding: 0px 0px 15px 0px;
-	margin:0 0 0 0;
-	float:left;
-  }
-  
-  .span4-padding {
-	 padding: 0px 15px 15px 0px; 
-  }
+
   
   /* Minimum width for spans under pressure */
   
@@ -117,15 +99,24 @@ headerz {
 
 body {
 	background:url("../images/bkgd.gif");
-	padding-top: 128px; /* 160px to make the container go all the way to the bottom of the topbar */
+	padding-top: 135px; /* 160px to make the container go all the way to the bottom of the topbar */
 	font-family: 'PT Sans', sans-serif;
 	height:100%;
+}
+
+
+
+.class="cleanlabel" {
+	background: whiteSmoke;
+	border: #CCC 1px solid;
+	padding: 5px;
+	margin: 0;	
 }
 
 .WidgetBox {
 	color:#666;
 	
-	margin: 0 0 15px 0; /* bottom margin */
+	margin: 0 15px 15px 0; /* bottom margin */
 /*	padding: 0 15px 0px 0px; padding for scrollbar */
 	--background: white;
 	-webkit-border-radius: 6px;
@@ -140,17 +131,6 @@ body {
 	-moz-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 	box-shadow: 1px 1px 2px 
 	rgba(0, 0, 0, 0.1);
-}
-
-
-.WidgetBox p {
-	margin: 0 0 0 0;
-	font-size: 13px;
-	line-height: 15px;
-	
-}
-.WidgetTitle {
-	padding: 2px 0 0 0;
 	
 }
 
@@ -172,13 +152,106 @@ body {
 	
 	font-family: 'PT Sans', sans-serif;
 	font-weight: 400;
-	font-size:18px;
+	font-size:17px;
 	padding: 6px;
 	margin:0 0 0 0;
 	color: #fff;
 	text-shadow: 0px 1px 1px #000;
 	
 }
+
+.WidgetBox p {
+	margin: 0 0 0 0;
+	font-size: 13px;
+	line-height: 15px;
+	
+}
+.WidgetTitle {
+	padding: 2px 0 4px 3px;
+	width:130px;
+	font-family: 'PT Sans', sans-serif;
+	font-weight: 400;
+	font-size:16px;
+	display:inline-block;
+	overflow:hidden;
+}
+
+/* Height attributes that should be applied to WidgetBox only */
+
+/* Goal is to specify height outside of the widgetbox */
+.halfHeight > .WidgetBox > .WidgetBoxContent {
+	height:265px;
+	//width:346px;
+}
+
+.maxhalfHeight > .WidgetBox > .WidgetBoxContent {
+	max-height:265px;
+}
+
+.fullHeight > .WidgetBox > .WidgetBoxContent {
+	position:relative;
+	min-height:265px;
+	max-height:600px;
+	//width:346px;
+	overflow-y:auto;
+	overflow-x:hidden;
+}
+
+.singleWide > .WidgetBox > .WidgetBoxContent {
+	width:346px;
+}
+
+
+.doubleWide > .WidgetBox > .WidgetBoxContent {
+	width:720px;
+}
+
+
+.WidgetBoxContent {
+	background: whiteSmoke;
+	border: #CCC 1px solid;
+	padding: 5px;
+	margin: 0;	
+	overflow-y:auto;
+	overflow-x:hidden;
+}
+
+
+/* Width attriutes that should be applied to columns only - NOT WIDGETS */
+.doublewidth {
+	width:350px;
+}
+
+
+.doubleColumn {
+	width: 747px;
+	float: left;
+	display:inline-block;
+}
+
+
+.singleColumn {
+	width: 373px;
+	padding: 0 0 0 0; //This is a column, so no padding (let the Widget do it)
+	margin:0 0 0 0;
+	float:left;
+	display:inline-block;
+}
+
+  .static4 {
+    width: 365px;
+	padding: 0px 0px 15px 0px;
+	margin:0 0 0 0;
+	float:left;
+  }
+
+
+.last {
+	padding-right: 0px;
+	margin-right: 0px;
+}
+
+
 
 .fltlft {
 	float: left;
@@ -282,6 +355,20 @@ background: -ms-linear-gradient(top,  #43c2c7 0%,#0fb4e7 100%); /* IE10+ */
 background: linear-gradient(top,  #43c2c7 0%,#0fb4e7 100%); /* W3C */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#43c2c7', endColorstr='#0fb4e7',GradientType=0 ); /* IE6-9 */
 
+	border: 1px solid #e1e1e1;
+}
+
+.selected:hover {
+	float:left;
+	height:30px;
+	display:inline-block;
+	  -webkit-box-sizing: border-box;
+		 -moz-box-sizing: border-box;
+		  -ms-box-sizing: border-box;
+			  box-sizing: border-box;
+	padding:6px 6px 6px 8px;
+	color:#fff;
+	background: #227b84	; /* Old browsers */
 	border: 1px solid #e1e1e1;
 }
 
@@ -469,7 +556,7 @@ nav {
 }
 
 
-.navbar-header {
+.header {
   height: 43px;
   padding: 8px 20px 8px 20px;
   margin: 0 0 15px 0;
@@ -481,11 +568,11 @@ nav {
 	rgba(0, 0, 0, 0.2);
 }
 
-.navbar-header pagekey {
+.header pagekey {
 	float:right;
 }
 
-.navbar-header:after {
+.header:after {
   position: absolute;
   top: -6px;
   left: 10px;
@@ -524,15 +611,12 @@ nav {
 	width: 130px;
 	height: 12px;
 	padding: 4px;
-	margin: -5px 0 9px 0;
+	margin: -9px 0 5px 0;
 	font-size: 12px;
 	line-height: 15px;
-	color: 
-	#555;
-	background-color: 
-	white;
-	border: 1px solid 
-	#CCC;
+	color: #555;
+	background-color: white;
+	border: 1px solid #CCC;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
@@ -540,7 +624,7 @@ nav {
 
 .smallerWidgetBoxHeading input {
 	display: inline-block;
-	width: 80px;
+	width: 70px;
 	height: 12px;
 	padding: 4px;
 	margin: -5px 0 9px 0;
@@ -656,9 +740,16 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
 	padding: 0 0 0 0;
 }
 .toolbar-widget {
-	float:none;
 	margin: 5px auto 5px; /*this should be auto centered */
+	text-align:center;
 }
+.hr-widget {
+	margin: 9px 0;
+	border: 0;
+	border-top: 1px solid #EEE;
+	border-bottom: 1px solid white;
+}
+
 .toolbar-widget hr {
 	margin: 5px 0 0 0;
 	border: 0;
@@ -677,21 +768,46 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
   color: #efefef;
 }
 
+.navbar-secondinner {
+  height:53px;
+  padding: 5px 0px 0px 5px;
 
-.navbar-fixed-top .navbar-inner, .navbar-fixed-bottom .navbar-inner {
-	padding:0 5px 0 5px;
+  background-color: #fff;
+  filter: progid:dximagetransform.microsoft.gradient(startColorstr='#333333', endColorstr='#222222', GradientType=0);
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+     -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
 }
 
-.navbar-fixed-top {
+.fixed-top .inner, .fixed-bottom .inner {
+	padding:0 5px 0 5px;
+	width:100%;
+}
+
+.fixed-top {
 	position:absolute;
 	top: 0;
 	margin:0 0 0 0; /*Required to stop boostrap-responsive from changing size of header bed */
 	padding:0 0 0 0; /*Required to stop boostrap-responsive from changing size of header bed */
 }
-.navbar-inner .container {
-  
+
+.container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {
+	width: 1120px;
 }
-.navbar-inner {
+
+.headerleft {
+	width: 540px;
+	float: left;
+	margin-left: 0px;
+}
+
+.headerright {
+	width: 540px;
+	float: right;
+	margin-right: 15px;
+}
+
+.inner {
   height: 55px; /*We do not want this changing size */
   margin:0 0 0 0; /*Required to stop boostrap-responsive from changing size of header bed */
   padding:0 0 0 5px; /*Required to stop boostrap-responsive from changing size of header bed */
@@ -712,7 +828,7 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
           box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
 }
 
-.navbar-secondinner {
+.secondinner {
   height:53px;
   padding: 5px 0px 0px 5px;
   background-color: #fff;
@@ -1051,13 +1167,18 @@ ul.slugtree .attached {
 	text-overflow: ellipsis; 
 }
 ul.slugtree .attached li {
-	padding: 2px 2px 2px 5px;
+	padding: 2px 0px 2px 2px;
+	margin: 0 0 0 0;
 	background-color: transparent;
 	display: inline; 
   }
 ul.slugtree ul {
 	padding-left: 0px;
 	list-style:none; 
+}
+/* Change via Miron */
+ul.slugtree ul ul > li {
+	margin-left:10px;
 }
 
 
@@ -1144,6 +1265,7 @@ form {
 
 .modal-header h1 { 
 	width:90%;
+	font-size:26px;
 }
 
 
@@ -1156,32 +1278,13 @@ form {
 
 /* Reg mapper CSS */
 
-.halfHeight {
-	height:265px;
-	overflow-y:auto;
-	overflow-x:hidden;	
-}
 
 
-.WidgetBoxContent {
-	background: whiteSmoke;
-	border: #CCC 1px solid;
-	padding: 6px;
-	margin: 0;	
-	width:96%;
-}
-
-
+/* This widget isn't full of content slots, so lets add some padding to make the input boxes look less cramped */
 .programinformation {
-	
-	margin:0px; 
-	width:98%; 
-	height:120px;
+	padding:10px;
 }
 
-.programinformation input, textarea {
-	color:#333;
-}
 
 /* Widget Buttons */
 
@@ -1274,4 +1377,32 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff7400', end
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0 ); /* IE6-9 */
 	border: 1px solid #e1e1e1;
 }
+
+/* GCMS open-source icons */
+
+.icon-play-white {
+	background-image: url("../images/icons/icon-play-white.png");
+}
+.icon-back-white {
+	background-image: url("../images/icons/icon-back-white.png");
+}
+.icon-mapping-white {
+	background-image: url("../images/icons/icon-mapping-white.png");
+}
+.icon-import-white {
+	background-image: url("../images/icons/icon-import-white.png");
+}
+.icon-back-black {
+	background-image: url("../images/icons/icon-back-black.png");
+}
+[class^="icon-"], [class*=" icon-"] {
+	display: inline-block;
+	width: 18px;
+	height: 18px;
+	line-height: 18px;
+	vertical-align: text-top;
+	background-position: 0px 0px;
+	background-repeat: no-repeat;
+}
+
 

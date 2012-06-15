@@ -18,20 +18,59 @@ class ProgramsController < ApplicationController
     @stats = program_stats(@program)
   end
 
+  def import
+    @program = Program.find(params[:id])
+  end
+
   def create
     source_document = params[:program].delete(:source_document)
     source_website = params[:program].delete(:source_website)
     @program = Program.new(params[:program])
 
-    @program.source_document = Document.new(source_document)
-    @program.source_website = Document.new(source_website)
+    @program.source_document = Document.new(source_document) if source_document && !source_document['link'].blank?
+    @program.source_website = Document.new(source_website) if source_website && !source_website['link'].blank?
 
-    if @program.save
-      flash[:notice] = "Program was created successfully."
-      render :json => { :redirect => flow_program_path(@program) }
-    else
-      flash[:error] = "Could not create program."
-      render :json => { :errors => @program.error_messages }
+    respond_to do |format|
+      if @program.save
+        flash[:notice] = "Program was created successfully."
+        format.html do
+          redirect_to flow_program_path(@program)
+        end
+      else
+        flash[:error] = "There was an error creating the program"
+        format.html do
+          if request.xhr?
+            render :layout => nil, :status => 400
+          end
+        end
+      end
+    end
+  end
+
+  def update
+    @program = Program.find(params[:id])
+
+    @program.source_document ||= Document.create
+    @program.source_website ||= Document.create
+
+    # Accumulate results
+    results = []
+    results << @program.source_document.update_attributes(params[:program].delete("source_document") || {})
+    results << @program.source_website.update_attributes(params[:program].delete("source_website") || {})
+
+    # Save if doc updated
+    @program.save if @program.changed?
+
+    results << @program.update_attributes(params[:program])
+
+    respond_to do |format|
+      if results.all?
+        flash[:notice] = 'Program was successfully updated.'
+        format.html { ajax_refresh }
+      else
+        flash[:error] = "There was an error updating the program"
+        format.html { render :layout => nil, :status => 400 }
+      end
     end
   end
 

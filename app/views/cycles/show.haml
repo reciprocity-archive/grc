@@ -5,13 +5,29 @@
     AUDIT CYCLE
   %h1.location Audit Cycle for #{@cycle.program.title}
 
-.row
-  .span8
+-content_for :subheader_extras do
+  .btn-group.fltrt
+    %a.btn.btn-warning{ :'data-toggle' => 'modal-form', :href => '#edit-cycle-modal' }
+      Edit Cycle
+
+.row-static
+  .doublewide
     =render :partial => 'cycles/show',
             :layout => 'layouts/widget_box',
             :locals => { :cycle => @cycle }
-  .span4
+  .singlewide
     =render :partial => 'cycles/old_links',
             :layout => 'layouts/widget_box',
             :locals => { :cycle => @cycle }
 
+#edit-cycle-modal.modal.fade
+  =form_for @cycle, :url => flow_cycle_path(@cycle), :method => :put, :remote => true, :html => {:class => :form} do |f|
+    .modal-header
+      %a.close{ "data-dismiss" => "modal" } x
+      %h1 Edit Audit Cycle
+    .modal-body
+      =render :partial => 'cycles/form',
+              :locals  => { :f => f }
+    .modal-footer
+      =f.submit pat(:save)
+      =f.submit pat(:cancel), :type => 'reset'

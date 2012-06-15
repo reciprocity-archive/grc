@@ -3,21 +3,24 @@
     .btn-group
       %a.btn{ :href => admin_dash_path } Admin
 
-
 -content_for :header do
-  %h5.highlighted
-    DASHBOARD
-  %h1.location Dashboard
+  %ol#breadcrumb
+    %li
+      DASHBOARD
+  .location#pageTitle Dashboard
 
-.row
-  .span8
-    =render :partial => 'programs/list',
-            :layout => 'layouts/widget_box',
-            :locals => { :programs => @programs }
-  .span4
-    =render :partial => 'quick/find',
+.row-static
+  .singleColumn
+    .singleWide.fullHeight
+      =render :partial => 'programs/list',
+              :layout => 'layouts/widget_box',
+              :locals => { :programs => @programs }
+  .singleColumn
+    .singleWide.halfHeight
+      =render :partial => 'quick/find',
             :layout => 'layouts/widget_box'
-    =render :partial => 'programs_dash/old_links',
+    .singleWide.halfHeight
+      =render :partial => 'programs_dash/old_links',
             :layout => 'layouts/widget_box'
 
 -content_for :subheader_extras do
@@ -43,7 +46,7 @@
         %a{ :'data-toggle' => 'modal-form', :href => '#create-program-modal' }
           Program
       %li
-        %a{ :'data-toggle' => 'modal-form', :href => '#comingsoon-modal' }
+        %a{ :'data-toggle' => 'modal', :href => '#comingsoon-modal' }
           Product
       %li
         %a{ :'data-toggle' => 'modal-form', :href => '#create-system-modal' }
@@ -56,7 +59,7 @@
   -program = Program.new
   =form_for program, :url => flow_programs_path, :method => :post, :remote => true, :html => {:class => :form} do |f|
     .modal-header
-      %button.close{"data-dismiss" => "modal"} x
+      %a.close{"data-dismiss" => "modal"} x
       %h1 Create a new program
     .modal-body
       =render :partial => 'programs/form',
@@ -69,7 +72,7 @@
   -system = System.new
   =form_for system, :url => flow_systems_path, :method => :post, :remote => true, :html => {:class => :form} do |f|
     .modal-header
-      %button.close{"data-dismiss" => "modal"} x
+      %a.close{"data-dismiss" => "modal"} x
       %h1 Create a new system
     .modal-body
       =render :partial => 'systems/form',
@@ -82,7 +85,7 @@
   -control = Control.new
   =form_for control, :url => flow_controls_path, :method => :post, :remote => true, :html => {:class => :form} do |f|
     .modal-header
-      %button.close{"data-dismiss" => "modal"} x
+      %a.close{"data-dismiss" => "modal"} x
       %h1 Create a new control
     .modal-body
       =render :partial => 'controls/form',

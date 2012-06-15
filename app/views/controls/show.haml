@@ -1,25 +1,25 @@
 -content_for :header do
-  %h5.highlighted
-    =link_to 'CONTROLS', flow_controls_path
-    %span.divider /
-    =@control.slug
-  %h1.location=@control.title
+  %ol#breadcrumb
+    %li=link_to 'CONTROLS', flow_controls_path
+    %li=@control.slug
+  .location#pageTitle=@control.title
 
 -content_for :subheader_extras do
   .btn-group.fltrt
     %a.btn.btn-warning{ :'data-toggle' => 'modal-form', :href => '#edit-control-modal' }
       Edit Control
 
-.row
-  .span8
-    =render :partial => 'controls/show',
-            :layout => 'layouts/widget_box',
-            :locals => { :control => @control }
+.row-static
+  .singleColumn
+    .singleWide.halfHeight
+      =render :partial => 'controls/show',
+              :layout => 'layouts/widget_box',
+              :locals => { :control => @control }
 
 #edit-control-modal.modal.fade
   =form_for @control, :url => flow_control_path(@control), :method => :put, :remote => true, :html => {:class => :form} do |f|
     .modal-header
-      %button.close{"data-dismiss" => "modal"} x
+      %a.close{ "data-dismiss" => "modal" } x
       %h1 Edit control
     .modal-body
       =render :partial => 'controls/form',
@@ -27,4 +27,3 @@
     .modal-footer
       =f.submit pat(:save)
       =f.submit pat(:cancel), :type => 'reset'
-

@@ -16,9 +16,6 @@ class SystemsController < ApplicationController
     @system = System.find(params[:id])
   end
 
-  def update
-  end
-
   def show
     @system = System.find(params[:id])
   end
@@ -35,11 +32,28 @@ class SystemsController < ApplicationController
   def create
     @system = System.new(params[:system])
 
-    if @system.save
-      redirect_to :back
-    else
-      flash[:error] = "This is an error"
-      redirect_to :back
+    respond_to do |format|
+      if @system.save
+        flash[:notice] = "Successfully created a new system."
+        format.html { redirect_to flow_system_path(@system) }
+      else
+        flash[:error] = @system.errors.full_messages
+        format.html { render :layout => nil, :status => 400 }
+      end
+    end
+  end
+
+  def update
+    @system = System.new(params[:id])
+
+    respond_to do |format|
+      if @system.authored_update(current_user, params[:system])
+        flash[:notice] = "Successfully updated the system."
+        format.html { redirect_to flow_system_path(@system) }
+      else
+        flash[:error] = @system.errors.full_messages
+        format.html { render :layout => nil, :status => 400 }
+      end
     end
   end
 

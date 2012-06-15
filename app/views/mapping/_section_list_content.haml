@@ -4,7 +4,7 @@
   =walk_slug_tree(Program.slugtree(sections)) do |section, step|
     .row-fluid
       .span12
-        .regulationslot.toggle.span9
+        .regulationslot.toggle.span9.collapsed
           =link_to mapping_selected_section_path(section), :remote => true, :method => :post, :class => [:selector, :collapsed] do
             %span.prefix=section.compact_slug
             =section.title
