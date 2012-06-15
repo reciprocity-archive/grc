@@ -10,7 +10,7 @@ class MappingController < ApplicationController
     @rcontrols = Control.where(:program_id => @program)
   end
 
-  def section_tooltip
+  def section_dialog
     @section = Section.find(params[:section_id])
     render :layout => nil
   end
@@ -98,6 +98,16 @@ class MappingController < ApplicationController
         render :partial => 'selected_section', :locals => { :section => section }
       end
     end
+  end
+
+  def update
+    section = Section.find(params[:section_id])
+    section.na = params[:section]['na']
+    section.notes = params[:section]['notes']
+    section.save
+
+    flash[:notice] = "Saved"
+    render :js => "$('#controls-dialog').dialog('close');"
   end
 
   def buttons

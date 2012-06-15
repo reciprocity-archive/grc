@@ -9,14 +9,17 @@
             %span.prefix=section.compact_slug
             =section.title
         -controls = section.linked_controls
-        .attached.controllistRM.span3.statusgreen
+        -status_class = (controls.empty? && !section.na?) ? 'statusred' : 'statusyellow'
+        .attached.controllistRM.span3(class = status_class)
           %ul.spannomargin{ :title => controls.map(&:slug).join(", ") }
             %li
               %strong=controls.count
               \:
             -controls.each do |control|
               %li
-                %a.controls{:data => { :href => mapping_section_tooltip_path(section)} }
+                %a.controls{:data => { :href => mapping_section_dialog_path(section)} }
                   =control.slug
             -if controls.empty?
-              %li N/A
+              %li
+                %a.controls{:data => { :href => mapping_section_dialog_path(section)} }
+                  N/A

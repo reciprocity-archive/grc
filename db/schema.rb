@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120611223954) do
+ActiveRecord::Schema.define(:version => 20120615190103) do
 
   create_table "accounts", :force => true do |t|
     t.string   "username"
@@ -246,14 +246,16 @@ ActiveRecord::Schema.define(:version => 20120611223954) do
   add_index "programs", ["source_website_id"], :name => "index_regulations_on_source_website_id"
 
   create_table "sections", :force => true do |t|
-    t.string   "title",          :null => false
-    t.string   "slug",           :null => false
+    t.string   "title",                             :null => false
+    t.string   "slug",                              :null => false
     t.text     "description"
-    t.integer  "program_id",     :null => false
+    t.integer  "program_id",                        :null => false
     t.integer  "modified_by_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "parent_id"
+    t.boolean  "na",             :default => false, :null => false
+    t.text     "notes"
   end
 
   add_index "sections", ["parent_id"], :name => "index_sections_on_parent_id"

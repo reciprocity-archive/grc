@@ -1,0 +1,8 @@
+-ccontrols = @section.consolidated_controls
+-rcontrols = @section.controls
+.modal-body
+  .row-fluid
+    -if ccontrols.empty? && rcontrols.empty?
+      =render :partial => 'section_dialog_na', :locals => { :section => @section }
+    -else
+      =render :partial => 'section_dialog_controls', :locals => { :ccontrols => ccontrols, :rcontrols => rcontrols }

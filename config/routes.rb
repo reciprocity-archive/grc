@@ -127,9 +127,10 @@ CmsRails::Application.routes.draw do
   match 'admin_dash' => 'admin_dash#index'
 
   get "mapping/show/:program_id" => 'mapping#show', :as => 'mapping_program'
-  get 'mapping_section_tooltip/:section_id' => 'mapping#section_tooltip', :as => 'mapping_section_tooltip'
+  get 'mapping_section_dialog/:section_id' => 'mapping#section_dialog', :as => 'mapping_section_dialog'
   post "mapping/map_rcontrol"
   post "mapping/map_ccontrol"
+  put "mapping/update/:section_id" => 'mapping#update', :as => 'mapping_update'
   get "mapping/buttons", :as => :mapping_buttons
   post "mapping/selected_section/:section_id" => 'mapping#selected_section', :as => :mapping_selected_section
   post "mapping/selected_control/:control_id" => 'mapping#selected_control', :as => :mapping_selected_control

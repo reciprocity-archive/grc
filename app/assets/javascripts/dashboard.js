@@ -136,9 +136,17 @@ function update_map_buttons_with_path(path) {
 }
 
 function clear_selection(el) {
-  $(el).closest('.WidgetBox').find('.selected').removeClass('selected');
+  var $box = $(el).closest('.WidgetBox');
+
+  $box.find('.selected').removeClass('selected');
+
+  var $searchbox = $box.find('.widgetsearch-tocontent');
+  $searchbox.val("");
+  $searchbox.trigger({type: 'keypress', 'which': 13});
+
   description_el = $(el).closest('.WidgetBox').next().find('.WidgetBoxContent .description .content')
   $(description_el).replaceWith('Nothing selected.');
-  $(el).closest('.WidgetBox').next().find('.WidgetBoxContent .description').attr('oid', '');
+  $box.next().find('.WidgetBoxContent .description').attr('oid', '');
+
   update_map_buttons();
 }
