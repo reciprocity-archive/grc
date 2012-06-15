@@ -184,6 +184,10 @@ body {
 	//width:346px;
 }
 
+.maxhalfHeight > .WidgetBox > .WidgetBoxContent {
+	max-height:265px;
+}
+
 .fullHeight > .WidgetBox > .WidgetBoxContent {
 	position:relative;
 	min-height:265px;

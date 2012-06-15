@@ -1,38 +1,41 @@
 -content_for :header do
-  %h5.highlighted
-    =link_to 'Programs', programs_dash_path
-    %span.divider /
-    Mapping
-    %span.divider /
-  %h1=link_to @program.title, flow_program_path(@program)
+  %ol#breadcrumb
+    %li=link_to 'Programs', programs_dash_path
+    %li Mapping
+  .location#pageTitle=@program.title
 
-.row
-  .span4#section_list
-    =render :partial => 'section_list',
-            :layout => 'layouts/widget_box',
-            :locals => { :sections => @program.sections.all }
+.row-static
+  .singleColumn
+    .singleWide.halfHeight#section_list
+      =render :partial => 'section_list',
+              :layout => 'layouts/widget_box',
+              :locals => { :sections => @program.sections.all }
+    .singleWide.maxhalfHeight
+      =render :partial => 'selected_section',
+              :layout => 'layouts/widget_box',
+              :locals => {:section => nil}
+ 
+  .singleColumn
+    .singleWide.halfHeight#rcontrol_list
+      =render :partial => 'control_list',
+              :layout => 'layouts/widget_box',
+              :locals => { :controls => @rcontrols, :title_prefix => 'Reg', :control_type => 'regulation' }
 
-    =render :partial => 'selected_section',
-            :layout => 'layouts/widget_box',
-            :locals => {:section => nil}
+    .singleWide.maxhalfHeight
+      =render :partial => 'selected_control',
+              :layout => 'layouts/widget_box',
+              :locals => {:control => nil, :control_type => 'rcontrol', :map_button_id => :cmap, :map_button_path => mapping_map_ccontrol_path }
 
-  .span4#rcontrol_list
-    =render :partial => 'control_list',
-            :layout => 'layouts/widget_box',
-            :locals => { :controls => @rcontrols, :title_prefix => 'Regulation', :control_type => 'regulation' }
+  .singleColumn
+    .singleWide.halfHeight#ccontrol_list
+      =render :partial => 'control_list',
+              :layout => 'layouts/widget_box',
+              :locals => { :controls => @ccontrols, :title_prefix => 'Company', :control_type => 'company' }
 
-    =render :partial => 'selected_control',
-            :layout => 'layouts/widget_box',
-            :locals => {:control => nil, :control_type => 'rcontrol', :map_button_id => :cmap, :map_button_path => mapping_map_ccontrol_path }
-
-  .span4#ccontrol_list
-    =render :partial => 'control_list',
-            :layout => 'layouts/widget_box',
-            :locals => { :controls => @ccontrols, :title_prefix => 'Company', :control_type => 'company' }
-
-    =render :partial => 'selected_control',
-            :layout => 'layouts/widget_box',
-            :locals => {:control => nil, :control_type => 'ccontrol', :map_button_id => nil }
+    .singleWide.maxhalfHeight
+      =render :partial => 'selected_control',
+              :layout => 'layouts/widget_box',
+              :locals => {:control => nil, :control_type => 'ccontrol', :map_button_id => nil }
 
 #controls-dialog(style='display: none' title='Controls Mapped to this Section')
   %div
