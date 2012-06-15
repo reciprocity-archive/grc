@@ -1,9 +1,9 @@
 -content_for :header do
-  %h5.highlighted
-    %a{ :href => flow_program_path(@cycle.program) } #{@cycle.program.title}
-    %span.divider /
-    AUDIT CYCLE
-  %h1.location Audit Cycle for #{@cycle.program.title}
+  %ol#breadcrumb
+    %li
+      %a{ :href => flow_program_path(@cycle.program) } #{@cycle.program.title}
+    %li AUDIT CYCLE
+  .location#pageTitle Audit Cycle for #{@cycle.program.title}
 
 -content_for :subheader_extras do
   .btn-group.fltrt
@@ -11,14 +11,16 @@
       Edit Cycle
 
 .row-static
-  .doublewide
-    =render :partial => 'cycles/show',
-            :layout => 'layouts/widget_box',
-            :locals => { :cycle => @cycle }
-  .singlewide
-    =render :partial => 'cycles/old_links',
-            :layout => 'layouts/widget_box',
-            :locals => { :cycle => @cycle }
+  .doubleColumn
+    .doubleWide.halfHeight
+      =render :partial => 'cycles/show',
+              :layout => 'layouts/widget_box',
+              :locals => { :cycle => @cycle }
+  .singleColumn
+    .singleWide.halfHeight
+      =render :partial => 'cycles/old_links',
+              :layout => 'layouts/widget_box',
+              :locals => { :cycle => @cycle }
 
 #edit-cycle-modal.modal.fade
   =form_for @cycle, :url => flow_cycle_path(@cycle), :method => :put, :remote => true, :html => {:class => :form} do |f|
