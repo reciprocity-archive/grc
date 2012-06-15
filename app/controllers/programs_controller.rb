@@ -37,7 +37,7 @@ class ProgramsController < ApplicationController
           redirect_to flow_program_path(@program)
         end
       else
-        flash[:error] = @program.errors.full_messages
+        flash[:error] = "There was an error creating the program"
         format.html do
           if request.xhr?
             render :layout => nil, :status => 400
@@ -68,7 +68,7 @@ class ProgramsController < ApplicationController
         flash[:notice] = 'Program was successfully updated.'
         format.html { ajax_refresh }
       else
-        flash[:error] = @program.errors.full_messages
+        flash[:error] = "There was an error updating the program"
         format.html { render :layout => nil, :status => 400 }
       end
     end

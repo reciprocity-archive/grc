@@ -10,7 +10,7 @@ class Control < ActiveRecord::Base
 
   before_save :upcase_slug
 
-  validates :slug, :title, :presence => true
+  validates :slug, :title, :program, :presence => true
 
   validate :slug do
     validate_slug

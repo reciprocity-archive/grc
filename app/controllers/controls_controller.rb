@@ -38,7 +38,7 @@ class ControlsController < ApplicationController
         flash[:notice] = "Successfully created a new control"
         format.html { redirect_to flow_control_path(@control) }
       else
-        flash[:error] = @control.errors.full_messages
+        flash[:error] = "There was an error creating the control."
         format.html { render :layout => nil, :status => 400 }
       end
     end
@@ -52,7 +52,7 @@ class ControlsController < ApplicationController
         flash[:notice] = "Successfully updated the control!"
         format.html { redirect_to flow_control_path(@control) }
       else
-        flash[:error] = @control.errors.full_messages
+        flash[:error] = "There was an error updating the control"
         format.html { render :layout => nil, :status => 400 }
       end
     end
