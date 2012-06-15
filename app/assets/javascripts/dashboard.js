@@ -88,6 +88,13 @@ function init_mapping() {
   $('#section_list')
     .on("ajax:success", '.selector', function(evt, data, status, xhr){
       $('#selected_sections').replaceWith(xhr.responseText);
+
+      // Resize textareas to avoid scrollable-inside-scrollable
+      $('#selected_sections textarea').each(function() {
+        var $this = $(this);
+        $this.height(10).height($this[0].scrollHeight - 8);
+      });
+
       $('#section_list .selector').closest('.regulationslot').removeClass('selected');
       $(this).closest('.regulationslot').addClass('selected');
     });
