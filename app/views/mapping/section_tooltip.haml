@@ -1,25 +1,23 @@
-.WidgetBox
-  .WidgetBoxHeading
-    .WidgetTitle Regulation Controls
-  .WidgetBoxContent
-    -@section.controls.each do |control|
-      %div
-        %div
-          %span.prefix
-            =control.slug
-          =control.title
-        %div
-          =control.description
+.modal-body
+  .row-fluid
+    .span6.control-group
+      %label.cleanlabel Regulation Controls
+      %ul.sluglist.nav
+        -@section.controls.each do |control|
+          %li.row-fluid
+            .span12
+              .modalSlot
+                %span.prefix
+                  =control.slug
+                =control.title
 
-.WidgetBox
-  .WidgetBoxHeading
-    .WidgetTitle Company Controls
-  .WidgetBoxContent
-    -@section.consolidated_controls.each do |control|
-      %div
-        %div
-          %span.prefix
-            =control.slug
-          =control.title
-        %div
-          =control.description
+    .span6.control-group
+      %label.cleanlabel Company Controls
+      %ul.sluglist.nav
+        -@section.consolidated_controls.each do |control|
+          %li.row-fluid
+            .span12
+              .modalSlot
+                %span.prefix
+                  =control.slug
+                =control.title

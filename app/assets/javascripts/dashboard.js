@@ -104,7 +104,7 @@ function init_mapping() {
       $(this).closest('.item').addClass('selected');
     });
 
-  $('#controls-dialog').dialog({autoOpen : false, width: 400, height:300});
+  $('#controls-dialog').dialog({autoOpen : false, width: 560, height:300});
   $('#section_list').on('click', 'a.controls', function() {
     $('#controls-dialog > :first-child').load($(this).data('href'), function() {
       $('#controls-dialog').dialog('open');
