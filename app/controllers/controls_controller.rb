@@ -48,7 +48,7 @@ class ControlsController < ApplicationController
     @control = Control.find(params[:id])
 
     respond_to do |format|
-      if @control.authored_update(current_user, params[:control])
+      if @control.authored_update(current_user, params[:control] || {})
         flash[:notice] = "Successfully updated the control!"
         format.html { redirect_to flow_control_path(@control) }
       else

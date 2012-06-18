@@ -48,7 +48,7 @@ describe ControlsController do
 
     it "updates" do
         put 'update', :id => @ctl.id
-        response.should be_success
+        response.should be_redirect
     end
 
     it "news" do
@@ -58,9 +58,8 @@ describe ControlsController do
     end
 
     it "creates" do
-      request.env["HTTP_REFERER"] = 'back'
-      post 'create', :control => { :slug => 'test' }
-      response.should redirect_to 'back'
+      post 'create', :control => { :slug => 'test', :title => 'test', :program_id => @creg.id }
+      response.should be_redirect
     end
   end
 end
