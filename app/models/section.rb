@@ -23,6 +23,8 @@ class Section < ActiveRecord::Base
   belongs_to :program
   belongs_to :parent, :class_name => "Section"
 
+  scope :with_controls, includes([:parent, {:controls => [:implementing_controls]}])
+
   def update_parent_id
     self.parent = self.class.find_parent_by_slug(slug) if parent_id.nil?
   end
@@ -114,6 +116,12 @@ class Section < ActiveRecord::Base
   def linked_controls
     controls.map do |control|
       [control] + control.implementing_controls
+    end.flatten
+  end
+
+  def preloaded_linked_controls
+    controls.map do |control|
+      [control] + control.implementing_controls.to_a
     end.flatten
   end
 

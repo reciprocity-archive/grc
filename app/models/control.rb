@@ -25,7 +25,7 @@ class Control < ActiveRecord::Base
 
   # Many to many with BizProcess
   has_many :biz_process_controls
-  has_many :biz_processes, :through => :biz_process_controls, :order => :slug
+  has_many :biz_processes, :through => :biz_process_controls
 
   # Many to many with System
   has_many :system_controls
@@ -41,10 +41,10 @@ class Control < ActiveRecord::Base
 
   # Which sections are implemented by this one.  A company
   # control may implement several sections.
-  has_many :sections, :through => :control_sections, :order => :slug
+  has_many :sections, :through => :control_sections
   has_many :control_sections
 
-  has_many :implemented_controls, :through => :control_controls, :order => :slug
+  has_many :implemented_controls, :through => :control_controls
   has_many :control_controls
 
   has_many :implementing_controls, :through => :implementing_control_controls, :source => :control

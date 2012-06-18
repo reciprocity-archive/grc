@@ -3,9 +3,12 @@ class MappingController < ApplicationController
   respond_to :html, :json
   skip_after_filter :flash_to_headers, :only => [:buttons]
 
+  cache_sweeper :section_sweeper, :only => [:map_rcontrol, :map_ccontrol]
+  cache_sweeper :control_sweeper, :only => [:map_rcontrol, :map_ccontrol]
+
   def show
     @program = Program.find(params[:program_id])
-    @sections = @program.sections
+    @sections = @program.sections.with_controls
     @ccontrols = Control.joins(:program).where(Program.arel_table[:company].eq(true))
     @rcontrols = Control.where(:program_id => @program)
   end
@@ -135,14 +138,17 @@ class MappingController < ApplicationController
 
   def find_sections
     @program = Program.find(params[:program_id])
-    sections = @program.sections
-    if params[:s]
-      sections = sections.search(params[:s])
+    @search = params[:s]
+    sections = @program.sections.with_controls
+
+    unless @search.blank?
+      sections = sections.search(@search)
+      @ttl = 120 # cache searches for less time so as not to fill up the cache
     end
 
     respond_with do |format|
       format.html do
-        render :partial => 'section_list_content',
+        render :partial => 'section_list',
                :locals => { :sections => sections.all }
       end
     end
@@ -150,6 +156,7 @@ class MappingController < ApplicationController
 
   def find_controls
     @program = Program.find(params[:program_id])
+    @search = params[:s]
     is_company = params[:control_type] == 'company'
 
     if is_company
@@ -158,8 +165,9 @@ class MappingController < ApplicationController
       controls = Control.where(:program_id => @program)
     end
 
-    if params[:s]
-      controls = controls.search(params[:s])
+    unless @search.blank?
+      controls = controls.search(@search)
+      @ttl = 120 # cache searches for less time so as not to fill up the cache
     end
 
     respond_with do |format|
