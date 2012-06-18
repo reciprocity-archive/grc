@@ -1405,4 +1405,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff7400', end
 	background-repeat: no-repeat;
 }
 
-
+p.oneline {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

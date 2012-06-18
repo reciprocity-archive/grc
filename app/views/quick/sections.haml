@@ -3,4 +3,7 @@
     %li
       %a{ :href => '#', :'data-popover-href' => tooltip_flow_section_path(section) }
         %h3=section.slug
-        %p=section.title
+        %p.oneline
+          %strong=section.title
+          &nbsp;
+          =control.description

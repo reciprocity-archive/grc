@@ -3,4 +3,7 @@
     %li
       %a{ :href => flow_control_path(control), :'data-popover-href' => tooltip_flow_control_path(control) }
         %h3=control.slug
-        %p=control.title
+        %p.oneline
+          %strong=control.title
+          &nbsp;
+          =control.description
