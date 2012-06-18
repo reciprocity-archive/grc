@@ -11,12 +11,18 @@
       %a{ :href => flow_program_path(program), :data => { :'popover-href' => tooltip_flow_program_path(program), :placement => 'right'} }
         %h3=program.title
         %p.item
-          Reg sections:
-          #{stats[:sections_count]},
-          #{stats[:sections_done_count]} linked, 
-          #{stats[:sections_na_count]} N/A, 
-          #{stats[:sections_undone_count]} not finished
+          %strong Reg sections:&nbsp;&nbsp;
+          %strong> #{stats[:sections_count]}
+          , 
+          %strong #{stats[:sections_done_count]}
+          linked, 
+          %strong #{stats[:sections_na_count]}
+          N/A, 
+          %strong #{stats[:sections_undone_count]}
+          not finished
         %p.item
-          Controls:
-          #{stats[:controls_count]},
-          #{stats[:controls_parented_count]} with parents
+          %strong Controls:&nbsp;&nbsp;
+          %strong> #{stats[:controls_count]}
+          , 
+          %strong #{stats[:controls_parented_count]}
+          with parents
