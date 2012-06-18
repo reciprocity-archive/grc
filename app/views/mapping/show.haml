@@ -9,7 +9,7 @@
     .singleWide.halfHeight#section_list
       =render :partial => 'section_list',
               :layout => 'layouts/widget_box',
-              :locals => { :sections => @program.sections.all }
+              :locals => { :sections => @program.sections.includes(:parent, :controls => :implementing_controls) }
     .singleWide.maxhalfHeight
       =render :partial => 'selected_section',
               :layout => 'layouts/widget_box',

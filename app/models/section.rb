@@ -18,7 +18,7 @@ class Section < ActiveRecord::Base
     validate_slug
   end
 
-  has_many :controls, :through => :control_sections, :order => :slug
+  has_many :controls, :through => :control_sections
   has_many :control_sections
   belongs_to :program
   belongs_to :parent, :class_name => "Section"
@@ -106,14 +106,14 @@ class Section < ActiveRecord::Base
   end
 
   def consolidated_controls
-    controls.includes(:implementing_controls).map do |control|
-      control.implementing_controls.all
+    controls.map do |control|
+      control.implementing_controls
     end.flatten
   end
 
   def linked_controls
-    controls.includes(:implementing_controls).map do |control|
-      [control] + control.implementing_controls.all
+    controls.map do |control|
+      [control] + control.implementing_controls
     end.flatten
   end
 

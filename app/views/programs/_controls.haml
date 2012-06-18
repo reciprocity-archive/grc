@@ -7,39 +7,56 @@
     %li=link_to 'Controls', '#controls', :data => { :toggle => 'tab' }
   .tab-content
     #regulations.tab-pane
+      -sections = program.sections.includes(:controls => :implementing_controls)
       %ul.slugtree
-        =walk_slug_tree(Program.slugtree(program.sections.all)) do |item, step|
-          .collapsed
-            %span.prefix
-              =item.slug
-            =item.title || item.description
-            .expander='+' if !item.description.blank?
-          -controls = item.linked_controls
-          %ul.attached{ :title => controls.map(&:slug).join(", ") }
-            -controls.each do |control|
-              %li
-                %a{ :href => flow_control_path(control.id) }
-                  =control.slug
-            -if controls.empty?
-              %li N/A
-          .content
-            =item.description
+        =walk_slug_tree(Program.slugtree(sections)) do |item, step|
+          .row-fluid
+            .span12
+              .regulationslot.toggle.span9.collapsed{ :'data-toggle' => 'collapse', :'data-target' => "#content_#{item.id}" }
+                %span.prefix=item.slug
+                =item.title || item.description
+                -if !item.description.blank?
+                  .expander
+              .attached.span3
+                -controls = item.linked_controls
+                -if !controls.empty?
+                  %ul.spannomargin{ :title => controls.map(&:slug).join(", ") }
+                    %li #{controls.size}:
+                    -controls.each do |control|
+                      %li=control.slug
+                -elsif item.na?
+                  .controls
+                    N/A
+                -else
+                  .controls
+                    %strong 0
+            .row-fluid-slotcontent
+              .span9
+                .collapse{ :id => "content_#{item.id}" }
+                  =item.description
 
     #controls.tab-pane
+      -controls = program.controls.includes(:implementing_controls)
       %ul.slugtree
-        =walk_slug_tree(Control.slugtree(program.controls.all)) do |item, step|
-          .collapsed
-            %span.prefix
-              =item.slug
-            =item.title || item.description
-            .expander='+' if !item.description.blank?
-          -controls = item.implementing_controls.all
-          %ul.attached{ :title => controls.map(&:slug).join(", ") }
-            -controls.each do |control|
-              %li
-                %a{ :href => flow_control_path(control.id) }
-                  =control.slug
-            -if controls.empty?
-              %li N/A
-          .content
-            =item.description
+        =walk_slug_tree(Program.slugtree(controls)) do |item, step|
+          .row-fluid
+            .span12
+              .regulationslot.toggle.span9.collapsed{ :'data-toggle' => 'collapse', :'data-target' => "#content_#{item.id}" }
+                %span.prefix=item.slug
+                =item.title || item.description
+                -if !item.description.blank?
+                  .expander
+              .attached.span3
+                -controls = item.implementing_controls
+                -if !controls.empty?
+                  %ul.spannomargin{ :title => controls.map(&:slug).join(", ") }
+                    %li #{controls.size}:
+                    -controls.each do |control|
+                      %li=control.slug
+                -else
+                  .controls
+                    %strong 0
+            .row-fluid-slotcontent
+              .span9
+                .collapse{ :id => "content_#{item.id}" }
+                  =item.description
