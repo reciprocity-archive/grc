@@ -10,7 +10,7 @@ As root
 
 Install required packages:
 
-    apt-get install mysql-client mysql-server ruby-dev libsqlite3-dev libmysqlclient-dev nginx mercurial build-essential java6-sdk git-core libreadline6-dev libssl-dev
+    apt-get install mysql-client mysql-server ruby-dev libsqlite3-dev libmysqlclient-dev nginx mercurial build-essential java6-sdk git-core libreadline6-dev libssl-dev libpq-dev
 
 Create the `cmsprod` user:
 
