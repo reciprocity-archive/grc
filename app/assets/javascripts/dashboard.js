@@ -78,7 +78,7 @@ jQuery(function($) {
         , $box = $this.closest('.WidgetBox').find('.WidgetBoxContent')
         , $child = $($box.children()[0])
         , href = $child.data('href') + '?' + $.param({ s: $this.val() });
-      $box.load(href);
+      $box.load(href, function() { clear_selection($this[0], true); });
     }
   });
 });
@@ -146,14 +146,16 @@ function update_map_buttons_with_path(path) {
     });
 }
 
-function clear_selection(el) {
+function clear_selection(el, keep_search) {
   var $box = $(el).closest('.WidgetBox');
 
   $box.find('.selected').removeClass('selected');
 
-  var $searchbox = $box.find('.widgetsearch-tocontent');
-  $searchbox.val("");
-  $searchbox.trigger({type: 'keypress', 'which': 13});
+  if (!keep_search) {
+    var $searchbox = $box.find('.widgetsearch-tocontent');
+    $searchbox.val("");
+    $searchbox.trigger({type: 'keypress', 'which': 13});
+  }
 
   description_el = $(el).closest('.WidgetBox').parent().next().find('.WidgetBoxContent .description .content')
   $(description_el).replaceWith('Nothing selected.');
