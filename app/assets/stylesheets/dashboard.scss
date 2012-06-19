@@ -72,3 +72,8 @@ ul.slugtree ul ul.spannomargin > li {
     margin-bottom: -2px;
   }
 }
+
+// Avoid double scrollbars on RegMapper jQueryUI dialog
+.ui-dialog-content .modal-body {
+  overflow:hidden;
+}
