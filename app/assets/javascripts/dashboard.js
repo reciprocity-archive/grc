@@ -127,11 +127,15 @@ function update_map_buttons_with_path(path) {
   var rcontrol_id = $("#selected_rcontrol").attr('oid') || "";
   var ccontrol_id = $("#selected_ccontrol").attr('oid') || "";
   var qstr = '?' + $.param({section: section_id, rcontrol: rcontrol_id, ccontrol: ccontrol_id});
+
+  var rmap = $('#rmap');
+  var cmap = $('#cmap');
+  rmap.attr('disabled', !(section_id && (rcontrol_id || ccontrol_id)));
+  cmap.attr('disabled', !(rcontrol_id && ccontrol_id));
+
   $.getJSON(path + qstr,
     function(data){
-      var rmap = $('#rmap');
       var rmap_text = $(rmap.children()[0]);
-      var cmap = $('#cmap');
       var cmap_text = $(cmap.children()[0]);
       rmap_text.text(data[0] ? 'Unmap' : 'Map section to control')
       rmap.attr('disabled', !(section_id && (rcontrol_id || ccontrol_id)));
@@ -151,9 +155,9 @@ function clear_selection(el) {
   $searchbox.val("");
   $searchbox.trigger({type: 'keypress', 'which': 13});
 
-  description_el = $(el).closest('.WidgetBox').next().find('.WidgetBoxContent .description .content')
+  description_el = $(el).closest('.WidgetBox').parent().next().find('.WidgetBoxContent .description .content')
   $(description_el).replaceWith('Nothing selected.');
-  $box.next().find('.WidgetBoxContent .description').attr('oid', '');
+  $box.parent().next().find('.WidgetBoxContent .description').attr('oid', '');
 
   update_map_buttons();
 }
