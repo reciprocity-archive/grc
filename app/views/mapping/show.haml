@@ -1,8 +1,13 @@
+-@title = "CMS Reg Mapper for: #{@program.title}"
+
 -content_for :header do
   %ol#breadcrumb
     %li=link_to 'Programs', programs_dash_path
     %li Mapping
   .location#pageTitle=@program.title
+
+-content_for :subheader_extras do
+  %h1.fltrt.highlighted Regulation to Control Mapping
 
 .row-static
   .singleColumn

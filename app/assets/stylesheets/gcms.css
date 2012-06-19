@@ -336,6 +336,10 @@ border: 0px solid transparent;
 	cursor:pointer;
 }
 
+.regulationslot > a {
+  text-decoration: none;
+}
+
 .selected {
 	float:left;
 	height:30px;

@@ -1,3 +1,5 @@
+-@title = "CMS Control: #{@control.title}"
+
 -content_for :header do
   %ol#breadcrumb
     %li=link_to 'CONTROLS', flow_controls_path
@@ -8,6 +10,7 @@
   .btn-group.fltrt
     %a.btn.btn-warning{ :'data-toggle' => 'modal-form', :href => '#edit-control-modal' }
       Edit Control
+  %h1.fltrt.highlighted Control
 
 .row-static
   .singleColumn

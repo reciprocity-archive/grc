@@ -13,11 +13,11 @@
           .row-fluid
             .span12
               .regulationslot.toggle.span9.collapsed{ :'data-toggle' => 'collapse', :'data-target' => "#content_#{item.id}" }
-                %span.prefix=item.slug
-                =item.title || item.description
                 -if !item.description.blank?
                   .expander
-              .attached.span3
+                %span.prefix=item.slug
+                =item.title || item.description
+              .controllist.attached.span3{ :class => "statusblue" }
                 -controls = item.linked_controls
                 -if !controls.empty?
                   %ul.spannomargin{ :title => controls.map(&:slug).join(", ") }
@@ -42,11 +42,11 @@
           .row-fluid
             .span12
               .regulationslot.toggle.span9.collapsed{ :'data-toggle' => 'collapse', :'data-target' => "#content_#{item.id}" }
-                %span.prefix=item.slug
-                =item.title || item.description
                 -if !item.description.blank?
                   .expander
-              .attached.span3
+                %span.prefix=item.slug
+                =item.title || item.description
+              .controllist.attached.span3{ :class => "statusblue" }
                 -controls = item.implementing_controls
                 -if !controls.empty?
                   %ul.spannomargin{ :title => controls.map(&:slug).join(", ") }
