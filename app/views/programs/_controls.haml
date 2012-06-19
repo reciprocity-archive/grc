@@ -20,10 +20,12 @@
               .controllist.attached.span3{ :class => "statusblue" }
                 -controls = item.linked_controls
                 -if !controls.empty?
-                  %ul.spannomargin{ :title => controls.map(&:slug).join(", ") }
-                    %li #{controls.size}:
-                    -controls.each do |control|
-                      %li=control.slug
+                  %a.controls{ :href => mapping_section_dialog_path(item) }
+                    %ul.spannomargin{ :title => controls.map(&:slug).join(", ") }
+                      %li
+                        %strong #{controls.size}:
+                      -controls.each do |control|
+                        %li=control.slug
                 -elsif item.na?
                   .controls
                     N/A
@@ -50,7 +52,8 @@
                 -controls = item.implementing_controls
                 -if !controls.empty?
                   %ul.spannomargin{ :title => controls.map(&:slug).join(", ") }
-                    %li #{controls.size}:
+                    %li
+                      %strong #{controls.size}:
                     -controls.each do |control|
                       %li=control.slug
                 -else

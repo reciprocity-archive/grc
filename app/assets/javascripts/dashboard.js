@@ -122,6 +122,17 @@ function init_mapping() {
   });
 }
 
+jQuery(function($) {
+  var $dialog = $('<div></div>');
+  $dialog.dialog({autoOpen : false, width: 560, height:300});
+  $('#regulations, #controls').on('click', 'a.controls', function(e) {
+    e.preventDefault();
+    $dialog.load($(this).attr('href'), function() {
+      $dialog.dialog('open');
+    });
+  });
+});
+
 function update_map_buttons_with_path(path) {
   var section_id = $("#selected_sections").attr('oid') || "";
   var rcontrol_id = $("#selected_rcontrol").attr('oid') || "";
