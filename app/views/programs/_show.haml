@@ -4,14 +4,14 @@
 .programinformation
   .toolbar-widget
     %a.btn.btn-warning{ :href => import_flow_program_path(@program) }
-      %i.icon-import-white
+      %i.gcmsicon-import-white
       Import Regs
     %a.btn.btn-warning{ :href => mapping_program_path(program) }
-      %i.icon-mapping-white
+      %i.gcmsicon-mapping-white
       Reg Mapper
     -if !program.company?
       %a.btn.btn-warning{ :href => '#create-cycle-modal', :'data-toggle' => 'modal-form' }
-        %i.icon-play-white
+        %i.gcmsicon-play-white
         Start Audit
   %hr.hr-widget
 

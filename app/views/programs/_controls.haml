@@ -12,7 +12,7 @@
         =walk_slug_tree(Program.slugtree(sections)) do |item, step|
           .row-fluid
             .span12
-              .regulationslot.toggle.span9.collapsed{ :'data-toggle' => 'collapse', :'data-target' => "#content_#{item.id}" }
+              %a.regulationslot.toggle.span9.collapsed{ :'data-toggle' => 'collapse', :'data-target' => "#content_#{item.id}" }
                 -if !item.description.blank?
                   .expander
                 %span.prefix=item.slug
@@ -43,7 +43,7 @@
         =walk_slug_tree(Program.slugtree(controls)) do |item, step|
           .row-fluid
             .span12
-              .regulationslot.toggle.span9.collapsed{ :'data-toggle' => 'collapse', :'data-target' => "#content_#{item.id}" }
+              %a.regulationslot.toggle.span9.collapsed{ :'data-toggle' => 'collapse', :'data-target' => "#content_#{item.id}" }
                 -if !item.description.blank?
                   .expander
                 %span.prefix=item.slug

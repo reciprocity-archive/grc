@@ -10,66 +10,18 @@
  *= require gcms
  */
 
-ul.slugtree ul ul > li {
-  margin-left: 0;
+.WidgetBox .smallerWidgetBoxHeading {
+  margin-bottom: -2px;
 }
 
-.regulationslot a {
-  display: block;
+.flash {
   width: 100%;
-}
+  background: yellow;
+  list-style: none;
+  margin: 5px 0;
 
-ul.slugtree ul ul > li {
-  margin-left: 3%;
-  width: 97%
-}
-
-ul.slugtree ul ul.spannomargin > li {
-  margin-left: 0pt;
-}
-
-.selected a {
-  color:#fff;
-}
-
-.sluglist .prefix {
-  font-weight: bold;
-  margin-right: 10px;
-}
-
-.sluglist .collapsed {
-  display: inline-block;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.sluglist li {
-  padding: 0px;
-  margin: 0px;
-}
-
-.regulationslot a {
-  color: #666;
-  display: block;
-}
-
-.controllistRM a {
-  color: #666;
-  display: inline-block;
-}
-
-.WidgetBox {
-  .WidgetBoxContent {
-    overflow:auto;
-    max-height: 300px;
-  }
-
-  .WidgetBoxContent {
-    width: auto;
-  }
-  .smallerWidgetBoxHeading {
-    margin-bottom: -2px;
+  .message {
+    list-style: none;
   }
 }
 

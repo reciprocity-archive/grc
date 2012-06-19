@@ -181,7 +181,6 @@ body {
 /* Goal is to specify height outside of the widgetbox */
 .halfHeight > .WidgetBox > .WidgetBoxContent {
 	height:265px;
-	//width:346px;
 }
 
 .maxhalfHeight > .WidgetBox > .WidgetBoxContent {
@@ -192,7 +191,6 @@ body {
 	position:relative;
 	min-height:265px;
 	max-height:600px;
-	//width:346px;
 	overflow-y:auto;
 	overflow-x:hidden;
 }
@@ -259,6 +257,10 @@ body {
 
 .fltrt {
 	float: right;
+}
+
+.fltnone {
+	float: none;
 }
 
 /* Tabs */
@@ -1129,6 +1131,31 @@ margin: 0 0 0 0;
 
 
 /* TREE styles for the Section / Control trees on the Program page */
+
+/* Change to Indent 
+ul.slugtree ul ul > li {
+	margin-left:10px;
+}
+*/
+/* Change to Indent Within - Could be more elegant */
+ul.slugtree ul ul > li > div > div > a > span.prefix {
+	margin-left:6px;
+}
+ul.slugtree ul ul ul > li > div > div > a > span.prefix {
+	margin-left:12px;
+}
+ul.slugtree ul ul ul ul > li > div > div > a > span.prefix {
+	margin-left:18px;
+}
+ul.slugtree ul ul ul ul ul > li > div > div > a > span.prefix {
+	margin-left:24px;
+}
+ul.slugtree ul ul ul ul ul ul > li > div > div > a > span.prefix {
+	margin-left:30px;
+}
+ul.slugtree ul ul ul ul ul ul ul > li > div > div > a > span.prefix {
+	margin-left:36px;
+}
 ul.slugtree {
   position: relative;
   padding: 0 0 0 0;
@@ -1182,10 +1209,6 @@ ul.slugtree .attached li {
 ul.slugtree ul {
 	padding-left: 0px;
 	list-style:none; 
-}
-/* Change via Miron */
-ul.slugtree ul ul > li {
-	margin-left:10px;
 }
 
 
@@ -1366,7 +1389,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff7400', end
 
 .modalSlot {
 	float:left;
+	width:220px;
 	height:auto;
+	margin:3px 0px 2px 0px;
 	display:inline-block;
 	  -webkit-box-sizing: border-box;
 		 -moz-box-sizing: border-box;
@@ -1387,22 +1412,22 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff7400', end
 
 /* GCMS open-source icons */
 
-.icon-play-white {
+.gcmsicon-play-white {
 	background-image: url("../images/icons/icon-play-white.png");
 }
-.icon-back-white {
+.gcmsicon-back-white {
 	background-image: url("../images/icons/icon-back-white.png");
 }
-.icon-mapping-white {
+.gcmsicon-mapping-white {
 	background-image: url("../images/icons/icon-mapping-white.png");
 }
-.icon-import-white {
+.gcmsicon-import-white {
 	background-image: url("../images/icons/icon-import-white.png");
 }
-.icon-back-black {
+.gcmsicon-back-black {
 	background-image: url("../images/icons/icon-back-black.png");
 }
-[class^="icon-"], [class*=" icon-"] {
+[class^="gcmsicon-"], [class*=" gcmsicon-"] {
 	display: inline-block;
 	width: 18px;
 	height: 18px;
@@ -1410,6 +1435,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff7400', end
 	vertical-align: text-top;
 	background-position: 0px 0px;
 	background-repeat: no-repeat;
+}
+
+.pagination {
+	height: 36px;
+	margin: 8px 0px 0px 0px;
 }
 
 p.oneline {
