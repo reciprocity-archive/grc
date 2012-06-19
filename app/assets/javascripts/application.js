@@ -2,7 +2,6 @@
  *= require jquery
  *= require jquery-ujs
  *= require jquery-ui
- *= require jquery.qtip
  *= require bootstrap
  *= require bootstrap/sticky-popover
  *= require bootstrap/modal-form
