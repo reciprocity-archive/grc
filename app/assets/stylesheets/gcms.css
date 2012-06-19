@@ -334,13 +334,14 @@ border: 0px solid transparent;
 
 	border: 1px solid #3badb3;
 	cursor:pointer;
+	text-decoration: none;
 }
 
-.regulationslot > a {
+/*.regulationslot > a {
   text-decoration: none;
-}
+}*/
 
-.selected {
+.regulationslot.selected {
 	float:left;
 	height:30px;
 	display:inline-block;
@@ -362,7 +363,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#43c2c7', end
 	border: 1px solid #e1e1e1;
 }
 
-.selected:hover {
+.regulationslot.selected:hover {
 	float:left;
 	height:30px;
 	display:inline-block;

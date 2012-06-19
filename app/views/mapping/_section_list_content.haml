@@ -4,10 +4,9 @@
   =walk_slug_tree(Program.slugtree(sections)) do |section, step|
     .row-fluid
       .span12
-        .regulationslot.toggle.span9.collapsed
-          =link_to mapping_selected_section_path(section), :remote => true, :method => :post, :class => [:selector, :collapsed] do
-            %span.prefix=section.compact_slug
-            =section.title
+        %a.regulationslot.toggle.span9.selector.collapsed{ :href => mapping_selected_section_path(section), :'data-remote' => "true", :'data-method' => "post" }
+          %span.prefix=section.compact_slug
+          =section.title
         -controls = section.preloaded_linked_controls
         -status_class = (controls.empty? && !section.na?) ? 'statusred' : 'statusyellow'
         .attached.controllistRM.span3(class = status_class)
