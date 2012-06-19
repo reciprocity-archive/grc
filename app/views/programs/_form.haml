@@ -16,6 +16,11 @@
         %input#control-version.input-supermini{
           :name => "control[version]", :placeholder => "SOX", :type => "text"}
         %span.help-inline Should be a number!
+      .span8.form-inline.control-group
+        %label.cleanlabel{:for => "program-type"} Type
+        %select#program-type.input-small{:name => "program[type]", :class => (f.object.errors.empty? ? "" : (f.object.errors[:type].empty? ? "forminputsuccess" : "forminputfail"))}
+          %option{:value => "regulation", :selected => !f.object.company} Reg
+          %option{:value => "company", :selected => f.object.company} Company
   .span1
   .span7.control-group.fltrt
     .row-fluid.fltrt

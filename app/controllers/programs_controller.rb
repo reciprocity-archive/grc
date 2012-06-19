@@ -25,6 +25,8 @@ class ProgramsController < ApplicationController
   def create
     source_document = params[:program].delete(:source_document)
     source_website = params[:program].delete(:source_website)
+    params[:program][:company] = params[:program].delete(:type) == 'company'
+
     @program = Program.new(params[:program])
 
     @program.source_document = Document.new(source_document) if source_document && !source_document['link'].blank?
