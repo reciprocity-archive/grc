@@ -1018,6 +1018,8 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
   -webkit-background-clip: padding-box;
      -moz-background-clip: padding-box;
           background-clip: padding-box;
+  max-height: 300px;
+  overflow: auto;
 }
 
 .popover-content p,
