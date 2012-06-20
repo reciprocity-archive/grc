@@ -111,7 +111,8 @@ function init_mapping() {
       $(this).closest('.item').addClass('selected');
     });
 
-  $('#controls-dialog').dialog({autoOpen : false, width: 560, height:300});
+  // zIndex: 1040 => over header (1030) but under bootstrap modals (1050)
+  $('#controls-dialog').dialog({autoOpen : false, width: 560, height:300, zIndex: 1040});
   $('#section_list').on('click', 'a.controls', function() {
     $('#controls-dialog > :first-child').load($(this).data('href'), function() {
       $('#controls-dialog').dialog('open');
@@ -124,7 +125,8 @@ function init_mapping() {
 
 jQuery(function($) {
   var $dialog = $('<div></div>');
-  $dialog.dialog({autoOpen : false, width: 560, height:300});
+  // zIndex: 1040 => over header (1030) but under bootstrap modals (1050)
+  $dialog.dialog({autoOpen : false, width: 560, height:300, zIndex: 1040});
   $('#regulations, #controls').on('click', 'a.controls', function(e) {
     e.preventDefault();
     $dialog.load($(this).attr('href'), function() {
