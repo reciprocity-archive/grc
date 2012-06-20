@@ -1,7 +1,7 @@
 %ul.nav.nav-tabs.nav-stacked
   -@sections.each do |section|
     %li
-      %a{ :href => '#', :'data-popover-href' => tooltip_flow_section_path(section) }
+      %a{ :href => '#', :'data-popover-href' => tooltip_flow_section_path(section), :'data-popover-trigger' => 'sticky-hover' }
         %h3=section.slug
         %p.oneline
           %strong=section.title

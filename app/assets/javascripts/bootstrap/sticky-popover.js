@@ -19,21 +19,43 @@
     constructor: StickyPopover
 
   , init: function(type, element, options) {
+      if (options.trigger == 'sticky-hover') {
+        options.sticky_hover = true;
+        options.trigger = 'hover';
+      } else if (options.trigger == 'click') {
+        options.trigger_click = true;
+        options.trigger = 'manual';
+      }
       $.fn.popover.Constructor.prototype.init.apply(this, arguments);
 
       // `displayState` is used to avoid duplicate calls to `show`
       //   (otherwise it flickers if `animation` is true
       this.displayState = this.displayState || 'hide';
+
+      if (this.options.show)
+        this.show();
+      if (this.options.trigger_click) {
+        this.$element.on('click', $.proxy(this.click_toggle, this));
+      }
+    }
+  , click_toggle: function(e) {
+      e && e.preventDefault();
+      this.toggle();
     }
   , show: function(force) {
       // Overload `show` to listen for mouseovers on the popover div
       if (force || this.displayState !== 'show') {
+        if (this.displayState !== 'show')
+          this.$element.trigger($.Event('show'));
+
         this.displayState = 'show';
         this.trigger_load();
         $.fn.popover.Constructor.prototype.show.apply(this);
-        this.tip().
-          on('mouseenter', $.proxy(this.tip_enter, this)).
-          on('mouseleave', $.proxy(this.tip_leave, this));
+        if (this.options.sticky_hover) {
+          this.tip().
+            on('mouseenter', $.proxy(this.tip_enter, this)).
+            on('mouseleave', $.proxy(this.tip_leave, this));
+        }
       }
     }
   , hide: function() {
@@ -85,7 +107,11 @@
       var $this = $(this)
         , data = $this.data('sticky_popover')
         , options = typeof option == 'object' && option
-      if (!data) $this.data('sticky_popover', (data = new StickyPopover(this, options)))
+      if (!data) {
+        $this.data('sticky_popover', (data = new StickyPopover(this, options)));
+        // Make instantiated popovers findable by $('[data-sticky_popover]');
+        $this.attr('data-sticky_popover', true);
+      }
       if (typeof option == 'string') data[option]()
     })
   }

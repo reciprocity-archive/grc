@@ -19,6 +19,8 @@ jQuery(document).ready(function() {
 
 jQuery(document).ready(function($) {
   var defaults = {
+    show: true,
+    //trigger: 'hover',
     delay: { show: 150, hide: 100 },
     placement: 'left',
     content: function(trigger) {
@@ -35,13 +37,29 @@ jQuery(document).ready(function($) {
     }
   };
 
-  $('body').on('mouseover', 'a[data-popover-href]', function(e) {
+  // Listeners for initial mouseovers for stick-hover
+  $('body').on('mouseover', 'a[data-popover-trigger="sticky-hover"]', function(e) {
     // If popover instance doesn't exist already, create it and
     // force the 'enter' event.
     if (!$(e.currentTarget).data('sticky_popover')) {
-      $(e.currentTarget).sticky_popover(defaults);
-      $(e.currentTarget).data('sticky_popover').enter(e);
+      $(e.currentTarget).sticky_popover($.extend({}, defaults, { trigger: 'sticky-hover' }));
     }
+  });
+
+  // Listeners for initial clicks for popovers
+  $('body').on('click', 'a[data-popover-trigger="click"]', function(e) {
+    e.preventDefault();
+    if (!$(e.currentTarget).data('sticky_popover')) {
+      $(e.currentTarget).sticky_popover($.extend({}, defaults, { trigger: 'click' }));
+    }
+  });
+
+  // Close other popovers when one is shown
+  $('body').on('show.popover', function(e) {
+    $('[data-sticky_popover]').each(function() {
+      var popover = $(this).data('sticky_popover');
+      popover && popover.hide();
+    });
   });
 });
 
