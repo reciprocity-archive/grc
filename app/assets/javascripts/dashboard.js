@@ -96,7 +96,7 @@ function init_mapping() {
       });
 
       $('#section_list .selector').closest('.regulationslot').removeClass('selected');
-      $(this).closest('.regulationslot').addClass('selected');
+      $(this).closest('.row-fluid').find('.regulationslot').addClass('selected');
     });
   $('#rcontrol_list')
     .on("ajax:success", '.selector', function(evt, data, status, xhr){
@@ -111,26 +111,28 @@ function init_mapping() {
       $(this).closest('.item').addClass('selected');
     });
 
-  // zIndex: 1040 => over header (1030) but under bootstrap modals (1050)
-  $('#controls-dialog').dialog({autoOpen : false, width: 560, height:300, zIndex: 1040});
+  var $dialog = $('<div class="modal fade"></div>').appendTo('body');
+  $dialog.draggable({ handle: '.modal-header' });
   $('#section_list').on('click', 'a.controls', function() {
-    $('#controls-dialog > :first-child').load($(this).data('href'), function() {
-      $('#controls-dialog').dialog('open');
+    // Save the current href for reloadability
+    $dialog.data('href', $(this).data('href'));
+    $dialog.load($(this).data('href'), function() {
+      $dialog.modal({ backdrop: false }).modal('show');
     });
   });
-  $('#cmap, #rmap').on('click', function() {
-    $('#controls-dialog').dialog('close');
+
+  $('#rmap, #cmap').on('ajax:success', function(evt, data, status, xhr) {
+    $dialog.load($dialog.data('href'));
   });
 }
 
 jQuery(function($) {
-  var $dialog = $('<div></div>');
-  // zIndex: 1040 => over header (1030) but under bootstrap modals (1050)
-  $dialog.dialog({autoOpen : false, width: 560, height:300, zIndex: 1040});
+  var $dialog = $('<div class="modal fade"></div>').appendTo('body');
+  $dialog.draggable({ handle: '.modal-header' });
   $('#regulations, #controls').on('click', 'a.controls', function(e) {
     e.preventDefault();
     $dialog.load($(this).attr('href'), function() {
-      $dialog.dialog('open');
+      $dialog.modal({ backdrop: false }).modal('show');
     });
   });
 });

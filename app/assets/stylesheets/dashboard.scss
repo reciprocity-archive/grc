@@ -18,8 +18,3 @@
     list-style: none;
   }
 }
-
-// Avoid double scrollbars on RegMapper jQueryUI dialog
-.ui-dialog-content .modal-body {
-  overflow:hidden;
-}

@@ -10,19 +10,16 @@
         -controls = section.preloaded_linked_controls
         -status_class = (controls.empty? && !section.na?) ? 'statusred' : 'statusyellow'
         .attached.controllistRM.span3(class = status_class)
-          -if !controls.empty?
-            %ul.spannomargin{ :title => controls.map(&:slug).join(", ") }
-              %li
-                %a.controls{:data => { :href => mapping_section_dialog_path(section)} }
+          %a.controls.selector{ :href => mapping_selected_section_path(section), :data => { :remote => "true", :method => "post", :href => mapping_section_dialog_path(section)} }
+            -if !controls.empty?
+              %ul.spannomargin{ :title => controls.map(&:slug).join(", ") }
+                %li
                   %strong=controls.size
                   \:
-              -controls.each do |control|
-                %li
-                  %a.controls{:data => { :href => mapping_section_dialog_path(section)} }
+                -controls.each do |control|
+                  %li
                     =control.slug
-          -if section.na?
-            %a.controls{:data => { :href => mapping_section_dialog_path(section)} }
+            -if section.na?
               N/A
-          -elsif controls.empty?
-            %a.controls{:data => { :href => mapping_section_dialog_path(section)} }
+            -elsif controls.empty?
               %strong 0

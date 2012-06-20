@@ -1,3 +1,7 @@
+.modal-header
+  %a.close{"data-dismiss" => "modal"} x
+  %h1 Controls Mapped to #{@section.slug}
+
 -ccontrols = @section.consolidated_controls
 -rcontrols = @section.controls
 .modal-body
@@ -6,3 +10,5 @@
       =render :partial => 'section_dialog_na', :locals => { :section => @section }
     -else
       =render :partial => 'section_dialog_controls', :locals => { :ccontrols => ccontrols, :rcontrols => rcontrols }
+
+.modal-footer
