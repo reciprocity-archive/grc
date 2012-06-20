@@ -1107,9 +1107,7 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
 }
 
 .dropdown-menulabel {
-  color: #efefef;
   text-decoration: none;
-  background-color: #43C2C7;
   padding: 6px 0 6px 0;
   
 }
