@@ -12,7 +12,7 @@
   .content
     -if section
       %ul.slugtree
-        =walk_slug_tree(Program.slugtree(Section.slugfilter(section.slug))) do |item, step|
+        =walk_slug_tree(Program.slugtree(Section.slugfilter(section.slug)), 2) do |item, step|
           %div
             %span.prefix
               =item.slug

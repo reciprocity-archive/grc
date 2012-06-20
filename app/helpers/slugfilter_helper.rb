@@ -47,14 +47,19 @@ module SlugfilterHelper
     end
   end
 
-  def walk_slug_tree(tree, &block)
+  def walk_slug_tree(tree, depth=nil, &block)
     capture_haml do
-      walk_slug_tree_helper(tree, &block)
+      walk_slug_tree_helper(tree, nil, true, depth, &block)
     end
   end
 
-  def walk_slug_tree_helper(tree, step=nil, odd=true, &block)
+  def walk_slug_tree_helper(tree, step=nil, odd=true, depth=nil, &block)
     children = tree.first_level_descendents_with_step
+    unless depth.nil?
+      depth = depth - 1
+      children = [] if depth == 0
+    end
+
     if tree.object || !children.empty?
       haml_tag("li", { :id => "content_#{tree.prefix}" }) do
         if tree.object
@@ -63,7 +68,7 @@ module SlugfilterHelper
         if !children.empty?
           haml_tag("ul", { :id => "children_#{tree.prefix}" }) do
             children.each do |step, child|
-              walk_slug_tree_helper(child, step, odd, &block)
+              walk_slug_tree_helper(child, step, odd, depth, &block)
             end
           end
         end
