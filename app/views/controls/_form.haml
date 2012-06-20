@@ -43,7 +43,7 @@
           -f.object.errors[:effective_date].each do |error|
             %span Short code #{error}
       :javascript
-        jQuery(function($) { console.debug("HEY"); $('#control-effective_date').datepicker(); });
+        jQuery(function($) { $('#control-effective_date').datepicker(); });
       -#.span4.form-inline.control-group.fltrt
         %label{:for => "control-frequency"} Sub-Category
         %input#control-frequency.input-small{:placeholder => "Security", :type => "text"}
