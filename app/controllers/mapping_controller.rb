@@ -15,7 +15,18 @@ class MappingController < ApplicationController
 
   def section_dialog
     @section = Section.find(params[:section_id])
-    render :layout => nil
+    ccontrols = @section.consolidated_controls
+    rcontrols = @section.controls
+    if ccontrols.empty? && rcontrols.empty?
+      render :partial => 'section_dialog_na', :locals => { :section => @section }
+    else
+      render :partial => 'section_dialog_controls',
+             :locals => {
+               :section => @section,
+               :ccontrols => ccontrols,
+               :rcontrols => rcontrols
+             }
+    end
   end
 
   def map_rcontrol

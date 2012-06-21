@@ -1,4 +1,8 @@
 =form_for section, :url => mapping_update_path(section), :remote => true, :class => 'form-inline' do |f|
+  .modal-header
+    %a.close{"data-dismiss" => "modal"} x
+    %h1 Controls Mapped to #{@section.slug}
+
   .modal-body
     .row-fluid
       .span12.well

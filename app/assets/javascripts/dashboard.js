@@ -121,7 +121,7 @@ function init_mapping() {
     // Save the current href for reloadability
     $dialog.data('href', $(this).data('href'));
     $dialog.load($(this).data('href'), function() {
-      $dialog.modal({ backdrop: false }).modal('show');
+      $dialog.modal_form({ backdrop: false }).modal_form('show');
     });
   });
 
@@ -137,7 +137,7 @@ jQuery(function($) {
   $('#regulations, #controls').on('click', 'a.controls', function(e) {
     e.preventDefault();
     $dialog.load($(this).attr('href'), function() {
-      $dialog.modal({ backdrop: false }).modal('show');
+      $dialog.modal_form({ backdrop: false }).modal_form('show');
     });
   });
 });

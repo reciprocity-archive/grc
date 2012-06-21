@@ -1,21 +1,32 @@
-.span6.control-group
-  %label.cleanlabel Regulation Controls
-  %ul.slugtree.nav
-    -rcontrols.each do |control|
-      %li.row-fluid
-        .span12
-          .modalSlot
-            %span.prefix
-              =control.slug
-            =control.title
+=form_for section, :url => mapping_update_path(section), :remote => true, :class => 'form-inline' do |f|
+  .modal-header
+    %a.close{"data-dismiss" => "modal"} x
+    %h1 Controls Mapped to #{section.slug}
 
-.span6.control-group
-  %label.cleanlabel Company Controls
-  %ul.slugtree.nav
-    -ccontrols.each do |control|
-      %li.row-fluid
-        .span12
-          .modalSlot
-            %span.prefix
-              =control.slug
-            =control.title
+  .modal-body
+    .row-fluid
+      .span6.control-group
+        %label.cleanlabel Regulation Controls
+        %ul.slugtree.nav
+          -rcontrols.each do |control|
+            %li.row-fluid
+              .span12
+                .modalSlot
+                  %span.prefix
+                    =control.slug
+                  =control.title
+
+      .span6.control-group
+        %label.cleanlabel Company Controls
+        %ul.slugtree.nav
+          -ccontrols.each do |control|
+            %li.row-fluid
+              .span12
+                .modalSlot
+                  %span.prefix
+                    =control.slug
+                  =control.title
+
+  .modal-footer
+    =f.submit pat(:approve)
+    =f.submit pat(:cancel), :type => 'reset'
