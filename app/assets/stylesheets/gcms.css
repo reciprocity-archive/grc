@@ -1224,6 +1224,7 @@ form {
   margin-left: 70px;
 }
 
+.cleanlabels label,
 .cleanlabel,
 .badge {
   font-size: 12px;
@@ -1442,7 +1443,7 @@ a.controllistRM {
 	margin: 8px 0px 0px 0px;
 }
 
-p.oneline {
+.oneline {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
