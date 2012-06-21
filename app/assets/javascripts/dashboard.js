@@ -97,6 +97,10 @@ function init_mapping() {
 
       $('#section_list .selector').closest('.regulationslot').removeClass('selected');
       $(this).closest('.row-fluid').find('.regulationslot').addClass('selected');
+
+      if ($dialog.is(':visible')) {
+        $dialog.load($(this).closest('.row-fluid').find('a.controls').data('href'));
+      }
     });
   $('#rcontrol_list')
     .on("ajax:success", '.selector', function(evt, data, status, xhr){
@@ -111,7 +115,7 @@ function init_mapping() {
       $(this).closest('.item').addClass('selected');
     });
 
-  var $dialog = $('<div class="modal fade"></div>').appendTo('body');
+  var $dialog = $('<div class="modal hide fade"></div>').appendTo('body');
   $dialog.draggable({ handle: '.modal-header' });
   $('#section_list').on('click', 'a.controls', function() {
     // Save the current href for reloadability
@@ -122,12 +126,13 @@ function init_mapping() {
   });
 
   $('#rmap, #cmap').on('ajax:success', function(evt, data, status, xhr) {
-    $dialog.load($dialog.data('href'));
+    if ($dialog.is(':visible'))
+      $dialog.load($dialog.data('href'));
   });
 }
 
 jQuery(function($) {
-  var $dialog = $('<div class="modal fade"></div>').appendTo('body');
+  var $dialog = $('<div class="modal hide fade"></div>').appendTo('body');
   $dialog.draggable({ handle: '.modal-header' });
   $('#regulations, #controls').on('click', 'a.controls', function(e) {
     e.preventDefault();
