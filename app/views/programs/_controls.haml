@@ -17,7 +17,9 @@
                   .expander
                 %span.prefix=item.slug
                 =item.title || item.description
-              %a.controls.controllist.attached.span3{ :class => "statusblue", :href => mapping_section_dialog_path(item) }
+              -controls = item.linked_controls
+              -status_class = (controls.empty? && !item.na?) ? 'statusred' : 'statusyellow'
+              %a.controls.controllist.attached.span3{ :class => status_class, :href => mapping_section_dialog_path(item) }
 
                 -controls = item.linked_controls
                 -if !controls.empty?

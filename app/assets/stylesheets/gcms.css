@@ -469,12 +469,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5fbc8', end
 	margin: 0px 0px 2px 2px;
 	padding:6px 6px 6px 4px;
 	
-	color:#eee;
+	color:#000;
 	border: 1px solid #eeeeee;		
 }
 
 a.controllist {
-	color:#fff;
+	color:#000;
 	font-size:12px;
 	text-decoration: none;
 }
