@@ -1,9 +1,13 @@
-%ul.nav.nav-tabs.nav-stacked
-  -@controls.each do |control|
-    %li
-      %a{ :href => flow_control_path(control), :'data-popover-href' => tooltip_flow_control_path(control), :'data-popover-trigger' => 'sticky-hover' }
-        %h3=control.slug
-        %p.oneline
-          %strong=control.title
-          &nbsp;
-          =control.description
+-if @controls.empty?
+  .no-results
+    No results found
+-else
+  %ul.nav.nav-tabs.nav-stacked
+    -@controls.each do |control|
+      %li
+        %a{ :href => flow_control_path(control), :'data-popover-href' => tooltip_flow_control_path(control), :'data-popover-trigger' => 'sticky-hover' }
+          %h3=control.slug
+          %p.oneline
+            %strong=control.title
+            &nbsp;
+            =control.description

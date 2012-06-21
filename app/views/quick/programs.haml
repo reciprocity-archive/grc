@@ -1,3 +1,7 @@
-%ul.nav.nav-tabs.nav-stacked
-  -@programs.each do |program|
-    %li=link_to program.title, flow_program_path(program), 'data-popover-href' => tooltip_flow_program_path(program), 'data-popover-trigger' => 'sticky-hover'
+-if @programs.empty?
+  .no-results
+    No results found
+-else
+  %ul.nav.nav-tabs.nav-stacked
+    -@programs.each do |program|
+      %li=link_to program.title, flow_program_path(program), 'data-popover-href' => tooltip_flow_program_path(program), 'data-popover-trigger' => 'sticky-hover'

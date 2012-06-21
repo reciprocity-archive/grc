@@ -1,5 +1,9 @@
-%ul.nav.nav-tabs.nav-stacked
-  -@accounts.each do |account|
-    %li
-      =link_to '#' do #flow_account_path(account), 'data-popover-href' => tooltip_flow_account_path(account)
-        =account.name || account.username || account.email
+-if @accounts.empty?
+  .no-results
+    No results found
+-else
+  %ul.nav.nav-tabs.nav-stacked
+    -@accounts.each do |account|
+      %li
+        =link_to '#' do #flow_account_path(account), 'data-popover-href' => tooltip_flow_account_path(account)
+          =account.name || account.username || account.email
