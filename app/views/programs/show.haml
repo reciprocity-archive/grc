@@ -24,3 +24,15 @@
       =render :partial => 'programs/audit_cycles',
               :layout => 'layouts/widget_box',
               :locals => { :program => @program }
+
+#edit-program-modal.modal.hide.fade
+  =form_for @program, :url => flow_program_path(@program), :method => :put, :remote => true, :html => {:class => :form} do |f|
+    .modal-header
+      %a.close{"data-dismiss" => "modal"} x
+      %h1 Create a new program
+    .modal-body
+      =render :partial => 'programs/form',
+              :locals  => { :f => f }
+    .modal-footer
+      =f.submit pat(:save)
+      =f.submit pat(:cancel), :type => 'reset'
