@@ -17,21 +17,19 @@
                   .expander
                 %span.prefix=item.slug
                 =item.title || item.description
-              .controllist.attached.span3{ :class => "statusblue" }
+              %a.controls.controllist.attached.span3{ :class => "statusblue", :href => mapping_section_dialog_path(item) }
+
                 -controls = item.linked_controls
                 -if !controls.empty?
-                  %a.controls{ :href => mapping_section_dialog_path(item) }
-                    %ul.spannomargin{ :title => controls.map(&:slug).join(", ") }
-                      %li
-                        %strong #{controls.size}:
-                      -controls.each do |control|
-                        %li=control.slug
+                  %ul.spannomargin{ :title => controls.map(&:slug).join(", ") }
+                    %li
+                      %strong #{controls.size}:
+                    -controls.each do |control|
+                      %li=control.slug
                 -elsif item.na?
-                  .controls
-                    N/A
+                  N/A
                 -else
-                  .controls
-                    %strong 0
+                  %strong 0
             .row-fluid-slotcontent
               .span9
                 .collapse{ :id => "content_#{item.id}" }

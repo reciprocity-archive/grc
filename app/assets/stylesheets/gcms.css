@@ -473,9 +473,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5fbc8', end
 	border: 1px solid #eeeeee;		
 }
 
-.controllist a {
+a.controllist {
 	color:#fff;
 	font-size:12px;
+	text-decoration: none;
 }
 
 
@@ -1380,9 +1381,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff7400', end
 	border: 1px solid #eeeeee;		
 }
 
-.controllistRM a {
+a.controllistRM {
 	color:#000;
 	font-size:10px;
+	text-decoration: none;
 }
 
 .modalSlot {
