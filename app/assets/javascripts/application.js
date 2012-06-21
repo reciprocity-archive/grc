@@ -5,6 +5,7 @@
  *= require bootstrap
  *= require bootstrap/sticky-popover
  *= require bootstrap/modal-form
+ *= require bootstrap/modal-ajax
  *= require_self
  */
 

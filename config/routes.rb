@@ -138,6 +138,7 @@ CmsRails::Application.routes.draw do
   match 'mapping/sections/:program_id' => 'mapping#find_sections', :as => :mapping_sections
   match 'mapping/controls/:program_id/:control_type' => 'mapping#find_controls', :as => :mapping_controls
 
+  match 'help/:slug' => 'help#show', :as => :help
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

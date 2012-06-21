@@ -1,0 +1,9 @@
+.modal-header
+  %a.close{ :href => '#', :'data-dismiss' => 'modal' } x
+  %h3=yield_content!(:modal_title) || "Help"
+
+.modal-body
+  =yield
+
+.modal-footer
+  %a.close{ :href => '#', :'data-dismiss' => 'modal' } Close
