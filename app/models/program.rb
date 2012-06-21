@@ -9,7 +9,10 @@ class Program < ActiveRecord::Base
 
   before_save :upcase_slug
 
-  validates :title, :slug, :presence => true
+  validates :title, :slug,
+    :presence => { :message => "needs a value" }
+  validates :slug,
+    :uniqueness => { :message => "must be unique" }
 
   has_many :sections, :order => :slug
   has_many :controls, :order => :slug

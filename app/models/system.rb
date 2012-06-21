@@ -5,7 +5,10 @@ class System < ActiveRecord::Base
 
   before_save :upcase_slug
 
-  validates :title, :slug, :presence => true
+  validates :title, :slug,
+    :presence => { :message => "needs a value" }
+  validates :slug,
+    :uniqueness => { :message => "must be unique" }
 
   # Many to many with Control
   has_many :system_controls

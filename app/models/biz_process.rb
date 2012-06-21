@@ -8,7 +8,10 @@ class BizProcess < ActiveRecord::Base
 
   before_save :upcase_slug
 
-  validates :title, :slug, :presence => true
+  validates :title, :slug,
+    :presence => { :message => "needs a value" }
+  validates :slug,
+    :uniqueness => { :message => "must be unique" }
 
   has_many :systems, :through => :biz_process_systems, :order => :slug
   has_many :biz_process_systems

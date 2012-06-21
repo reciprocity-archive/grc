@@ -10,7 +10,10 @@ class Control < ActiveRecord::Base
 
   before_save :upcase_slug
 
-  validates :slug, :title, :program, :presence => true
+  validates :slug, :title, :program,
+    :presence => { :message => "needs a value" }
+  validates :slug,
+    :uniqueness => { :message => "must be unique" }
 
   validate :slug do
     validate_slug
