@@ -65,6 +65,9 @@ class Section < ActiveRecord::Base
       slug = slugs.last[0, slugs.last.rindex(/\.|-|^/)]
     end
 
+    # Remove initial slug, since it is not its own ancestor
+    slugs.shift
+
     self.where(:slug => slugs).all
   end
 
