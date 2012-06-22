@@ -11,14 +11,19 @@
 
   .content
     -if section
-      %ul.slugtree
-        =walk_slug_tree(Program.slugtree(Section.slugfilter(section.slug)), 2) do |item, step|
+      %ul.sectiontree
+        /-sections = Section.slugfilter(section.slug)
+        -sections = Section.find_descendents_by_slug(section.slug)
+        -puts sections.count
+        -puts section.slug
+        =walk_slug_tree(Program.slugtree([section] + sections), 2) do |item, step|
           %div
             %span.prefix
               =item.slug
             =item.title
-          %textarea(disabled='disabled' style='width: 98%')
-            =item.description
+          -if !item.description.blank?
+            %textarea(disabled='disabled' style='width: 98%')
+              =item.description
     -else
       Nothing selected.
 

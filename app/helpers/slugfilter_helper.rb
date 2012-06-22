@@ -55,9 +55,10 @@ module SlugfilterHelper
 
   def walk_slug_tree_helper(tree, step=nil, odd=true, depth=nil, &block)
     children = tree.first_level_descendents_with_step
-    unless depth.nil?
+
+    if tree.object && !depth.nil?
       depth = depth - 1
-      children = [] if depth == 0
+      children = [] if depth <= 0
     end
 
     if tree.object || !children.empty?

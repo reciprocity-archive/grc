@@ -78,7 +78,7 @@ class Section < ActiveRecord::Base
   end
 
   def self.find_descendents_by_slug(slug)
-    prefix_test = Regexp.new("^#{Regexp.escape(slug)}[$.-]")
+    prefix_test = Regexp.new("^#{Regexp.escape(slug)}[$.(-]")
     sections = self.where("#{table_name}.slug LIKE ?", "#{slug}%").all
     sections.select { |section| prefix_test.match(section.slug) }
   end

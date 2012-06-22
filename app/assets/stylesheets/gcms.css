@@ -1126,6 +1126,24 @@ margin: 0 0 0 0;
 
 }
 
+/* TREE styles for the selected-section box on reg-mapper page */
+
+ul.sectiontree, ul.sectiontree ul {
+  list-style: none;
+}
+
+ul.sectiontree .prefix {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+ul.sectiontree ul ul > li {
+  margin-left: 12px;
+}
+
+ul.sectiontree ul ul ul > li {
+  margin-left: 24px;
+}
 
 
 
