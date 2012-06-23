@@ -17,6 +17,16 @@ jQuery(function($) {
   });
 });
 
+// expandAll and shrinkAll buttons
+jQuery(function($) {
+  $('body').on('click', 'a.expandAll', function(e) {
+    $(this).closest('.tabbable').find('.tab-pane:visible').find('.collapse').collapse('show');
+  });
+  $('body').on('click', 'a.shrinkAll', function(e) {
+    $(this).closest('.tabbable').find('.tab-pane:visible').find('.collapse').collapse('hide');
+  });
+});
+
 // Tabs via AJAX on 'Quick Find'
 jQuery(function($) {
   $('.tabbable').on('show', 'ul.nav-tabs > li > a', function(e, href) {
