@@ -10,6 +10,10 @@ module SluggedModel
     model.extend(ClassMethods)
   end
 
+  def slug_split_for_sort
+    self.slug.split(/(\d+)/).map { |s| [s.to_i, s] }
+  end
+
   module ClassMethods
     def slugfilter(prefix)
       if !prefix.blank?
@@ -23,6 +27,10 @@ module SluggedModel
       st = SlugTree.new("")
       items.each { |item| st.insert(item) }
       st
+    end
+
+    def sort_by_slug(items)
+      items.sort_by &:slug_split_for_sort
     end
   end
 

@@ -6,7 +6,7 @@ class QuickController < ApplicationController
     if params[:s]
       @programs = @programs.search(params[:s])
     end
-    @programs = @programs.all
+    @programs = @programs.all.sort_by(&:slug_split_for_sort)
   end
 
   def sections
@@ -14,7 +14,7 @@ class QuickController < ApplicationController
     if params[:s]
       @sections = @sections.search(params[:s])
     end
-    @sections = @sections.all
+    @sections = @sections.all.sort_by(&:slug_split_for_sort)
   end
 
   def controls
@@ -22,7 +22,7 @@ class QuickController < ApplicationController
     if params[:s]
       @controls = @controls.search(params[:s])
     end
-    @controls = @controls.all
+    @controls = @controls.all.sort_by(&:slug_split_for_sort)
   end
 
   def biz_processes

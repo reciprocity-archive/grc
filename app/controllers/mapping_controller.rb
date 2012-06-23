@@ -9,8 +9,8 @@ class MappingController < ApplicationController
   def show
     @program = Program.find(params[:program_id])
     @sections = @program.sections.with_controls
-    @ccontrols = Control.joins(:program).where(Program.arel_table[:company].eq(true))
-    @rcontrols = Control.where(:program_id => @program)
+    @ccontrols = Control.joins(:program).where(Program.arel_table[:company].eq(true)).all.sort_by(&:slug_split_for_sort)
+    @rcontrols = Control.where(:program_id => @program).all.sort_by(&:slug_split_for_sort)
   end
 
   def section_dialog
