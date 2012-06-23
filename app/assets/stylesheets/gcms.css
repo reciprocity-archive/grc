@@ -1340,6 +1340,16 @@ form {
 	padding:10px;
 }
 
+/* Tab bar buttons */
+
+.tabbarbtn {
+  padding: 1px 3px 1px 3px;
+  margin-top: -2px;
+  *margin-left: .3em;
+  font-size: 13px;
+  line-height: 18px;
+  *line-height: 20px;
+}
 
 /* Widget Buttons */
 
