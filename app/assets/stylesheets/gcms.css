@@ -1203,7 +1203,14 @@ ul.slugtree .expander {
 	height:20px;
 	padding: 0 0 0 0;
 	margin:0 0px 0px 0;
-	cursor:pointer; 
+	cursor:pointer;
+}
+ul.slugtree .expander.in {
+  /* for firefox, safari, chrome, etc. */
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  /* for ie */
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
 }
 ul.slugtree .content {
 	background-color: #fff;

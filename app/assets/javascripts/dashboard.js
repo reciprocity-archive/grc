@@ -7,10 +7,13 @@
  *= require_self
  */
 
-// Expand node content when '+' clicked in tree
+// Turn the arrow when tree node content is shown
 jQuery(function($) {
-  $('ul.slugtree .expander').bind('click', function(e) {
-    $(this).closest('li').find('> .content').toggle();
+  $('body').on('show', 'ul.slugtree .collapse', function(e) {
+    $(this).closest('li').find('.expander').eq(0).addClass('in');
+  });
+  $('body').on('hide', 'ul.slugtree .collapse', function(e) {
+    $(this).closest('li').find('.expander').eq(0).removeClass('in');
   });
 });
 
