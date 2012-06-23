@@ -188,4 +188,32 @@ class MappingController < ApplicationController
       end
     end
   end
+
+  def create_ccontrol
+    @control = Control.new(params[:control])
+
+    respond_to do |format|
+      if @control.save
+        flash[:notice] = "Successfully created a new company control"
+        format.html { ajax_refresh }
+      else
+        flash[:error] = "There was an error creating the control."
+        format.html { render :layout => nil, :status => 400 }
+      end
+    end
+  end
+
+  def create_rcontrol
+    @control = Control.new(params[:control])
+
+    respond_to do |format|
+      if @control.save
+        flash[:notice] = "Successfully created a new regulation control"
+        format.html { ajax_refresh }
+      else
+        flash[:error] = "There was an error creating the control."
+        format.html { render :layout => nil, :status => 400 }
+      end
+    end
+  end
 end

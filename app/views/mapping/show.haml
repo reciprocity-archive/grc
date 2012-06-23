@@ -49,3 +49,29 @@
   function update_map_buttons() {
     update_map_buttons_with_path('#{mapping_buttons_path(:format => "json")}');
   }
+
+#create-rcontrol-modal.modal.hide.fade
+  -control = Control.new(:program => @program)
+  =form_for control, :url => mapping_create_rcontrol_path, :method => :post, :remote => true, :html => {:class => :form} do |f|
+    .modal-header
+      %a.close{"data-dismiss" => "modal"} x
+      %h1 Create a new regulation control
+    .modal-body
+      =render :partial => 'controls/form',
+              :locals  => { :f => f }
+    .modal-footer
+      =f.submit pat(:save)
+      =f.submit pat(:cancel), :type => 'reset'
+
+#create-ccontrol-modal.modal.hide.fade
+  -control = Control.new
+  =form_for control, :url => mapping_create_ccontrol_path, :method => :post, :remote => true, :html => {:class => :form} do |f|
+    .modal-header
+      %a.close{"data-dismiss" => "modal"} x
+      %h1 Create a new company control
+    .modal-body
+      =render :partial => 'controls/form',
+              :locals  => { :f => f }
+    .modal-footer
+      =f.submit pat(:save)
+      =f.submit pat(:cancel), :type => 'reset'
