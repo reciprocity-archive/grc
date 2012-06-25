@@ -1502,7 +1502,6 @@ border-top-right-radius: 4px;
 /* Map to Controls Buttons */
 
 .btn-warning {
-	margin-bottom: 6px;
 	background: #ff8401; /* Old browsers */
 	background: -moz-linear-gradient(top,  #ff8401 0%, #ce5d00 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top,left bottom, color-stop(0%,#ff8401), color-stop(100%,#ce5d00)); /* Chrome,Safari4+ */
@@ -1698,6 +1697,56 @@ font-size: 12px;
 	background-position: 0px 0px;
 	background-repeat: no-repeat;
 }
+.gcmsicon-newfacility-white { 
+	background-image: url("../images/icons/icon-newfacility-white.png");
+	display: inline-block;
+	width: 18px;
+	height: 18px;
+	margin:0;
+	padding:0;
+	background-position: 0px 0px;
+	background-repeat: no-repeat;
+}
+.gcmsicon-organization-white { 
+	background-image: url("../images/icons/icon-organization-white.png");
+	display: inline-block;
+	width: 18px;
+	height: 18px;
+	margin:0;
+	padding:0;
+	background-position: 0px 0px;
+	background-repeat: no-repeat;
+}
+.gcmsicon-gears-white { 
+	background-image: url("../images/icons/icon-gears-white.png");
+	display: inline-block;
+	width: 18px;
+	height: 18px;
+	margin:0;
+	padding:0;
+	background-position: 0px 0px;
+	background-repeat: no-repeat;
+}
+.gcmsicon-asterix-white { 
+	background-image: url("../images/icons/icon-asterix-white.png");
+	display: inline-block;
+	width: 18px;
+	height: 18px;
+	margin:0;
+	padding:0;
+	background-position: 0px 0px;
+	background-repeat: no-repeat;
+}
+.gcmsicon-threat-white { 
+	background-image: url("../images/icons/icon-threat-white.png");
+	display: inline-block;
+	width: 18px;
+	height: 18px;
+	margin:0;
+	padding:0;
+	background-position: 0px 0px;
+	background-repeat: no-repeat;
+}
 .gcmssmallicon-dash-white { 
 	background-image: url("../images/icons/icon-dash-white.png");
 	display: inline-block;
@@ -1712,8 +1761,9 @@ font-size: 12px;
 .calendar { 
 	background-image: url("../images/icons/icon-calendar.png");
 	display: inline-block;
-	width: 27px;
-	height: 26px;
+	position: absolute;	
+	width: 20px;
+	height: 20px;
 	margin:0;
 	padding:0;
 	background-position: 0px 0px;
