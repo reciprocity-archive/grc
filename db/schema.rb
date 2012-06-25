@@ -114,6 +114,8 @@ ActiveRecord::Schema.define(:version => 20120615190103) do
     t.datetime "updated_at"
   end
 
+  add_index "control_controls", ["control_id", "implemented_control_id"], :name => "index_control_controls_uniqueness", :unique => true
+
   create_table "control_document_descriptors", :force => true do |t|
     t.integer  "control_id",             :null => false
     t.integer  "evidence_descriptor_id", :null => false
