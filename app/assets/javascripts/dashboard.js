@@ -147,10 +147,20 @@ function init_mapping() {
     });
   });
 
-  $('#rmap, #cmap').on('ajax:success', function(evt, data, status, xhr) {
-    if ($dialog.is(':visible'))
-      $dialog.load($dialog.data('href'));
-  });
+  //$('body')
+  //  .on('ajax:beforeSend', '[disabled="disabled"]', function(evt) {
+  //    return false;
+  //  });
+  $('#rmap, #cmap')
+    // Prevent disabled buttons from triggering AJAX requests
+    .on('ajax:beforeSend', function(evt, xhr, request) {
+      if ($(this).is('[disabled="disabled"]'))
+        return false;
+    })
+    .on('ajax:success', function(evt, data, status, xhr) {
+      if ($dialog.is(':visible'))
+        $dialog.load($dialog.data('href'));
+    });
 }
 
 jQuery(function($) {
@@ -172,20 +182,27 @@ function update_map_buttons_with_path(path) {
 
   var rmap = $('#rmap');
   var cmap = $('#cmap');
-  rmap.attr('disabled', !(section_id && (rcontrol_id || ccontrol_id)));
-  cmap.attr('disabled', !(rcontrol_id && ccontrol_id));
 
-  $.getJSON(path + qstr,
-    function(data){
-      var rmap_text = $(rmap.children()[0]);
-      var cmap_text = $(cmap.children()[0]);
-      rmap_text.text(data[0] ? 'Unmap' : 'Map section to control')
-      rmap.attr('disabled', !(section_id && (rcontrol_id || ccontrol_id)));
-      rmap.attr('href', rmap.attr('href').split('?')[0] + qstr + (data[0] ? '&u=1' : ""));
-      cmap_text.text(data[1] ? 'Unmap' : 'Map control to control')
-      cmap.attr('disabled', !(rcontrol_id && ccontrol_id));
-      cmap.attr('href', cmap.attr('href').split('?')[0] + qstr + (data[1] ? '&u=1' : ""));
-    });
+  rmap.attr('disabled', !(section_id && (rcontrol_id || ccontrol_id)));
+  if (!(section_id && (rcontrol_id || ccontrol_id))) {
+    rmap.children().eq(0).text('Map section to control');
+  }
+  cmap.attr('disabled', !(rcontrol_id && ccontrol_id));
+  if (!(rcontrol_id && ccontrol_id)) {
+    cmap.children().eq(0).text('Map control to control');
+  }
+
+  if ((section_id && (rcontrol_id || ccontrol_id)) || (rcontrol_id && ccontrol_id)) {
+    $.getJSON(path + qstr,
+      function(data){
+        var rmap_text = $(rmap.children()[0]);
+        var cmap_text = $(cmap.children()[0]);
+        rmap_text.text(data[0] ? 'Unmap' : 'Map section to control')
+        rmap.attr('href', rmap.attr('href').split('?')[0] + qstr + (data[0] ? '&u=1' : ""));
+        cmap_text.text(data[1] ? 'Unmap' : 'Map control to control')
+        cmap.attr('href', cmap.attr('href').split('?')[0] + qstr + (data[1] ? '&u=1' : ""));
+      });
+  }
 }
 
 function clear_selection(el, keep_search) {
@@ -195,8 +212,10 @@ function clear_selection(el, keep_search) {
 
   if (!keep_search) {
     var $searchbox = $box.find('.widgetsearch-tocontent');
-    $searchbox.val("");
-    $searchbox.trigger({type: 'keypress', 'which': 13});
+    if ($searchbox.val().length > 0) {
+      $searchbox.val("");
+      $searchbox.trigger({type: 'keypress', 'which': 13});
+    }
   }
 
   description_el = $(el).closest('.WidgetBox').parent().next().find('.WidgetBoxContent .description .content')
