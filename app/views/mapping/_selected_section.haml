@@ -14,8 +14,6 @@
       %ul.sectiontree
         /-sections = Section.slugfilter(section.slug)
         -sections = Section.find_descendents_by_slug(section.slug)
-        -puts sections.count
-        -puts section.slug
         =walk_slug_tree(Program.slugtree([section] + sections), 2) do |item, step|
           %div
             %span.prefix
