@@ -38,12 +38,10 @@
         %span.help-inline
       .span6.form-inline.control-group
         %label.cleanlabel{:for => "control-effective_date"} Effective Date
-        %input#control-effective_date.input-small{:xname => "control[effective_date]", :placeholder => "MM/DD/YYYY", :type => "text", :value => "", :class => (f.object.errors.empty? ? "" : (f.object.errors[:effective_date].empty? ? "forminputsuccess" : "forminputfail"))}
+        %input#control-effective_date.input-small{:xname => "control[effective_date]", :placeholder => "MM/DD/YYYY", :type => "text", :value => "", :class => (f.object.errors.empty? ? "" : (f.object.errors[:effective_date].empty? ? "forminputsuccess" : "forminputfail")), :'data-toggle' => 'datepicker'}
         %span.help-inline
           -f.object.errors[:effective_date].each do |error|
             %span Short code #{error}
-      :javascript
-        jQuery(function($) { $('#control-effective_date').datepicker(); });
       -#.span4.form-inline.control-group.fltrt
         %label{:for => "control-frequency"} Sub-Category
         %input#control-frequency.input-small{:placeholder => "Security", :type => "text"}

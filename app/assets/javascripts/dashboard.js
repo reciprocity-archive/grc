@@ -7,6 +7,15 @@
  *= require_self
  */
 
+jQuery(function($) {
+  $('body').on('focus', '[data-toggle="datepicker"]', function(e) {
+    var $this = $(this);
+
+    if (!$this.data('datepicker'))
+      $(this).datepicker({changeMonth: true, changeYear: true, dateFormat: 'yy-mm-dd'});
+  });
+});
+
 // Turn the arrow when tree node content is shown
 jQuery(function($) {
   $('body').on('show', 'ul.slugtree .collapse', function(e) {

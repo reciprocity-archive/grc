@@ -9,10 +9,8 @@
 
 .group
   =f.label :start_at
-  =f.text_field :start_at, :class => :text_field
+  =f.text_field :start_at, :class => :text_field, :'data-toggle' => 'datepicker'
   %span.description Audit period start date in the format yyyy-mm-dd.  Page up/down to select month, control up/down/left/right to select day. Enter to apply.
-  :javascript
-    $('#cycle_start_at').datepicker({changeMonth: true, changeYear: true, dateFormat: 'yy-mm-dd'});
 
 .group
   =f.label :complete
