@@ -78,7 +78,6 @@ class ProgramsController < ApplicationController
 
   def tooltip
     @program = Program.find(params[:id])
-    @stats = program_stats(@program)
-    render :layout => nil
+    render :layout => nil, :locals => { :program => @program }
   end
 end
