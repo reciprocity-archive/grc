@@ -4,7 +4,7 @@ if File.exist? 'Gemfile.local'
   instance_eval(Bundler.read_file('Gemfile.local'), 'Gemfile.local', 1)
 end
 
-RAILS_VERSION = '~> 3.1.1'
+RAILS_VERSION = '= 3.2.3'
 
 # Get latest psych - work around crash during reorg migration
 gem 'psych'
@@ -49,7 +49,7 @@ gem 'acl9'
 
 gem 'rails', RAILS_VERSION
 
-gem 'haml', '~> 3.0.25'
+gem 'haml'
 gem 'sass'
 gem 'haml-rails'
 
