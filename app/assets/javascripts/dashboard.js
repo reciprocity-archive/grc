@@ -29,10 +29,10 @@ jQuery(function($) {
 // expandAll and shrinkAll buttons
 jQuery(function($) {
   $('body').on('click', 'a.expandAll', function(e) {
-    $(this).closest('.tabbable').find('.tab-pane:visible').find('.collapse').collapse('show');
+    $(this).closest('.tabbable').find('.tab-pane:visible').find('.collapse').collapse({ toggle: false }).collapse('show');
   });
   $('body').on('click', 'a.shrinkAll', function(e) {
-    $(this).closest('.tabbable').find('.tab-pane:visible').find('.collapse').collapse('hide');
+    $(this).closest('.tabbable').find('.tab-pane:visible').find('.collapse').collapse({ toggle: false }).collapse('hide');
   });
 });
 
