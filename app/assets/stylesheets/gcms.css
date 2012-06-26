@@ -430,10 +430,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5fbc8', end
 	height:auto;
 }
 
-/*Required for accordian slots using fluid layout*/
+/*Required for bootstrap to not break firefox */
 
-
-  
+.row-fluid [class*="span"] {
+min-height:28px;	
+}
+ 
+ /*Required for accordian slots using fluid layout*/ 
 .row-fluid-slotcontent [class*="span"] {
 	display: block;
 	float: left;
@@ -521,7 +524,7 @@ a.controllist {
 
 .modal-body {
 	max-height: 500px;
-	padding: 15px 15px 0 15px;
+	padding: 10px 15px 0 15px;
 	overflow-y: auto;
 }
 modal-pager {
@@ -1163,15 +1166,15 @@ ul.slugtree .prefix {
     font-weight: bold;
     margin-right: 10px; 
 }
-ul.slugtree .expanderz {
+ul.slugtree .expander {
 	position:relative;
 	background-image:url(../images/expand.png);
 	float:right;
 	display: inline-block;
-	width:22px;
-	height:20px;
+	width:18px;
+	height:18px;
 	padding: 0 0 0 0;
-	margin:0 0px 0px 0;
+	margin:0 0 0 0;
 	cursor:pointer;
 }
 ul.slugtree .expander.in {
@@ -1389,6 +1392,33 @@ border-top-right-radius: 4px;
 	transition: border linear 0.2s, box-shadow linear 0.2s;
 }
 
+.widgetmapbtn { 
+	*margin-left: .3em;
+	font-size: 13px;
+	line-height: 18px;
+	*line-height: 20px;
+	display: inline-block;
+	padding: 2px 6px 1px 6px;
+	color: #efefef;
+	text-align: center;
+	
+	vertical-align: top;
+	cursor: pointer;
+	background-color: white;
+	border: 1px solid #F60;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	-webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+	-moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+	-ms-transition: border linear 0.2s, box-shadow linear 0.2s;
+	-o-transition: border linear 0.2s, box-shadow linear 0.2s;
+	transition: border linear 0.2s, box-shadow linear 0.2s;
+}
+
 .widgetbtn { 
 	*margin-left: .3em;
 	font-size: 13px;
@@ -1499,9 +1529,30 @@ border-top-right-radius: 4px;
 	line-height: 13px;
 }
 
+textarea { resize:vertical; max-height:300px; height:120px; width: 98%; }
+
+.slugtree textarea { resize:vertical; max-height:300px; height:100px; }
+
+.note { resize:vertical; max-height:300px; height:45px; }
+
+.topmargintwo {
+	margin-top:2px;
+}
+.topmarginone {
+	margin-top:2px;
+}
+
+.unmapbtn {
+	padding: 2px 4px 3px 4px;
+	font-size:11.4px;
+	margin-bottom: 2px;
+}
 /* Map to Controls Buttons */
 
 .btn-warning {
+	display: inline-block;
+	color:#fff;
+	/* margin-bottom: 6px; breaks modal bottoms */
 	background: #ff8401; /* Old browsers */
 	background: -moz-linear-gradient(top,  #ff8401 0%, #ce5d00 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top,left bottom, color-stop(0%,#ff8401), color-stop(100%,#ce5d00)); /* Chrome,Safari4+ */
@@ -1517,6 +1568,8 @@ border-top-right-radius: 4px;
 .btn-warning.active,
 .btn-warning.disabled,
 .btn-warning[disabled] {
+	color:#fff;
+	text-decoration:none;
   background: #ff7400; /* Old browsers */
 background: -moz-linear-gradient(top,  #ff7400 0%, #ff7400 100%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff7400), color-stop(100%,#ff7400)); /* Chrome,Safari4+ */
@@ -1643,16 +1696,10 @@ a.controllistRM {
 	width: 720px;
 	margin: -300px 0 0 -360px;
 }
-.modal-textarea {
-	height: 120px;
-}
-textarea {
-    height: 120px;
-  }
 
 
 select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
-
+min-height:13px; /* must be 13, the size of a widgettextbox */
 font-size: 12px;
 }
 
@@ -1698,7 +1745,17 @@ font-size: 12px;
 	background-repeat: no-repeat;
 }
 .gcmsicon-newfacility-white { 
-	background-image: url("../images/icons/icon-newfacility-white.png");
+	background-image: url("../images/icons/icon-newfacility-black.png");
+	display: inline-block;
+	width: 18px;
+	height: 18px;
+	margin:0;
+	padding:0;
+	background-position: 0px 0px;
+	background-repeat: no-repeat;
+}
+.gcmsicon-newfacility-black { 
+	background-image: url("../images/icons/icon-newfacility-black.png");
 	display: inline-block;
 	width: 18px;
 	height: 18px;
@@ -1717,6 +1774,16 @@ font-size: 12px;
 	background-position: 0px 0px;
 	background-repeat: no-repeat;
 }
+.gcmsicon-organization-black { 
+	background-image: url("../images/icons/icon-organization-black.png");
+	display: inline-block;
+	width: 18px;
+	height: 18px;
+	margin:0;
+	padding:0;
+	background-position: 0px 0px;
+	background-repeat: no-repeat;
+}
 .gcmsicon-gears-white { 
 	background-image: url("../images/icons/icon-gears-white.png");
 	display: inline-block;
@@ -1727,8 +1794,28 @@ font-size: 12px;
 	background-position: 0px 0px;
 	background-repeat: no-repeat;
 }
+.gcmsicon-gears-black { 
+	background-image: url("../images/icons/icon-gears-black.png");
+	display: inline-block;
+	width: 18px;
+	height: 18px;
+	margin:0;
+	padding:0;
+	background-position: 0px 0px;
+	background-repeat: no-repeat;
+}
 .gcmsicon-asterix-white { 
-	background-image: url("../images/icons/icon-asterix-white.png");
+	background-image: url("../images/icons/icon-asterix-black.png");
+	display: inline-block;
+	width: 18px;
+	height: 18px;
+	margin:0;
+	padding:0;
+	background-position: 0px 0px;
+	background-repeat: no-repeat;
+}
+.gcmsicon-asterix-black { 
+	background-image: url("../images/icons/icon-asterix-black.png");
 	display: inline-block;
 	width: 18px;
 	height: 18px;
@@ -1739,6 +1826,16 @@ font-size: 12px;
 }
 .gcmsicon-threat-white { 
 	background-image: url("../images/icons/icon-threat-white.png");
+	display: inline-block;
+	width: 18px;
+	height: 18px;
+	margin:0;
+	padding:0;
+	background-position: 0px 0px;
+	background-repeat: no-repeat;
+}
+.gcmsicon-threat-black { 
+	background-image: url("../images/icons/icon-threat-black.png");
 	display: inline-block;
 	width: 18px;
 	height: 18px;
@@ -1784,6 +1881,18 @@ font-size: 12px;
 }
 .gcmsicon-import-white {
 	background-image: url("../images/icons/icon-import-white.png");
+}
+.gcmsicon-play-black {
+	background-image: url("../images/icons/icon-play-black.png");
+}
+.gcmsicon-back-black {
+	background-image: url("../images/icons/icon-back-black.png");
+}
+.gcmsicon-mapping-black {
+	background-image: url("../images/icons/icon-mapping-black.png");
+}
+.gcmsicon-import-black {
+	background-image: url("../images/icons/icon-import-black.png");
 }
 .gcmsicon-back-black {
 	background-image: url("../images/icons/icon-back-black.png");
