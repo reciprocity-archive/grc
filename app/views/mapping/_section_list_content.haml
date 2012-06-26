@@ -2,23 +2,5 @@
   -if sections.empty?
     Nothing found.
   =walk_slug_tree(Program.slugtree(sections)) do |section, step|
-    .row-fluid
-      .span12
-        %a.regulationslot.toggle.span9.selector.collapsed{ :href => mapping_selected_section_path(section), :'data-remote' => "true", :'data-method' => "post" }
-          %span.prefix=section.compact_slug
-          =section.title
-        -controls = section.preloaded_linked_controls
-        -status_class = (controls.empty? && !section.na?) ? 'statusred' : 'statusyellow'
-        %a.controls.selector.attached.controllistRM.span3(class = status_class){ :href => mapping_selected_section_path(section), :data => { :remote => "true", :method => "post", :href => mapping_section_dialog_path(section)} }
-          -if !controls.empty?
-            %ul.spannomargin{ :title => controls.map(&:slug).join(", ") }
-              %li
-                %strong=controls.size
-                \:
-              -controls.each do |control|
-                %li
-                  =control.slug
-          -if section.na?
-            N/A
-          -elsif controls.empty?
-            %strong 0
+    =render :partial => 'section_list_content_item',
+            :locals => { :section => section }

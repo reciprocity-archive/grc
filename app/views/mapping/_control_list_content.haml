@@ -1,8 +1,4 @@
 %ul.slugtree.nav.nav-stacked{:data => { :href => mapping_controls_path(@program, control_type, :format => :html)}}
   -controls.each do |control|
-    %li
-      .row-fluid
-        .span12
-          %a.item.regulationslot.selector.collapsed.span12{ :href => mapping_selected_control_path(control, :control_type => control_type), :'data-remote' => "true", :'data-method' => "post" }
-            %span.prefix=control.slug
-            =control.title
+    =render :partial => 'control_list_content_item',
+            :locals => { :control => control, :control_type => control_type }
