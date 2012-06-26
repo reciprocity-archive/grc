@@ -1,5 +1,5 @@
 class QuickController < ApplicationController
-  layout nil
+  layout false
 
   def programs
     @programs = Program
