@@ -78,7 +78,7 @@ class ProgramsController < ApplicationController
 
   def tooltip
     @program = Program.find(params[:id])
-    render :layout => nil, :locals => { :program => @program }
+    render :layout => '_tooltip', :locals => { :program => @program }
   end
 
   def sections

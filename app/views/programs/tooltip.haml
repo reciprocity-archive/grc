@@ -1,43 +1,41 @@
-.popover-title
+-content_for :tooltip_title do
   %h3 Program Information
 
-.popover-content
-  =program.title
-  \|
-  =program.slug
-  \|
-  =program.company? ? 'Company' : 'Regulation'
+=program.title
+\|
+=program.slug
+\|
+=program.company? ? 'Company' : 'Regulation'
 
-  %h3 Description
+%h3 Description
 
-  .item
-    =program.description
+.item
+  =program.description
 
-  .item
-    Created:
-    =display_time(program.created_at)
-  .item
-    Updated:
-    =display_time(program.updated_at)
+.item
+  Created:
+  =display_time(program.created_at)
+.item
+  Updated:
+  =display_time(program.updated_at)
 
-  -stats = program_stats(program)
-  %h3 Sections
-  .item
-    Done: 
-    =stats[:sections_done_count]
-  .item
-    N/A: 
-    =stats[:sections_na_count]
-  .item
-    Not Done: 
-    =stats[:sections_undone_count]
+-stats = program_stats(program)
+%h3 Sections
+.item
+  Done: 
+  =stats[:sections_done_count]
+.item
+  N/A: 
+  =stats[:sections_na_count]
+.item
+  Not Done: 
+  =stats[:sections_undone_count]
 
-  %h3 Controls
-  .item
-    Controls: 
-    =stats[:controls_count]
+%h3 Controls
+.item
+  Controls: 
+  =stats[:controls_count]
 
-  .item
-    Parented Controls: 
-    =stats[:controls_parented_count]
-
+.item
+  Parented Controls: 
+  =stats[:controls_parented_count]
