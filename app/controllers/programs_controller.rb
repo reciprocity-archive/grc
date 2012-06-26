@@ -80,4 +80,24 @@ class ProgramsController < ApplicationController
     @program = Program.find(params[:id])
     render :layout => nil, :locals => { :program => @program }
   end
+
+  def sections
+    @program = Program.find(params[:id])
+    @sections = @program.sections.includes(:controls => :implementing_controls)
+    if params[:s]
+      @sections = @sections.search(params[:s])
+    end
+    @sections.all.sort_by(&:slug_split_for_sort)
+    render :layout => nil, :locals => { :sections => @sections }
+  end
+
+  def controls
+    @program = Program.find(params[:id])
+    @controls = @program.controls.includes(:implementing_controls)
+    if params[:s]
+      @controls = @controls.search(params[:s])
+    end
+    @controls.all.sort_by(&:slug_split_for_sort)
+    render :layout => nil, :locals => { :controls => @controls }
+  end
 end

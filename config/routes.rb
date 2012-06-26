@@ -92,6 +92,8 @@ CmsRails::Application.routes.draw do
       get 'show'
       get 'tooltip'
       get 'import'
+      get 'sections'
+      get 'controls'
     end
   end
 

@@ -1,0 +1,29 @@
+%ul.slugtree
+  =walk_slug_tree(Program.slugtree(sections)) do |item, step|
+    .row-fluid
+      .span12
+        %a.regulationslot.toggle.span9.collapsed{ :'data-toggle' => 'collapse', :'data-target' => "#content_#{item.id}" }
+          -if !item.description.blank?
+            .expander
+          %span.prefix=item.slug
+          =item.title || item.description
+        -controls = item.linked_controls
+        -status_class = (controls.empty? && !item.na?) ? 'statusred' : 'statusyellow'
+        %a.controls.controllist.attached.span3{ :class => status_class, :href => mapping_section_dialog_path(item) }
+
+          -controls = item.linked_controls
+          -if !controls.empty?
+            %ul.spannomargin{ :title => controls.map(&:slug).join(", ") }
+              %li
+                %strong #{controls.size}:
+              -controls.each do |control|
+                %li=control.slug
+          -elsif item.na?
+            N/A
+          -else
+            %strong 0
+      .row-fluid-slotcontent
+        .span9
+          .collapse{ :id => "content_#{item.id}" }
+            =item.description
+

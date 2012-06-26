@@ -1,0 +1,24 @@
+%ul.slugtree
+  =walk_slug_tree(Program.slugtree(controls)) do |item, step|
+    .row-fluid
+      .span12
+        %a.regulationslot.toggle.span9.collapsed{ :'data-toggle' => 'collapse', :'data-target' => "#content_#{item.id}" }
+          -if !item.description.blank?
+            .expander
+          %span.prefix=item.slug
+          =item.title || item.description
+        .controllist.attached.span3{ :class => "statusblue" }
+          -controls = item.implementing_controls
+          -if !controls.empty?
+            %ul.spannomargin{ :title => controls.map(&:slug).join(", ") }
+              %li
+                %strong #{controls.size}:
+              -controls.each do |control|
+                %li=control.slug
+          -else
+            .controls
+              %strong 0
+      .row-fluid-slotcontent
+        .span9
+          .collapse{ :id => "content_#{item.id}" }
+            =item.description

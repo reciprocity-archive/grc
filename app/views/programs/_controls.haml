@@ -1,6 +1,9 @@
 -content_for :widget_title do
   Regulations and Controls
 
+-content_for :widget_buttons do
+  %input.ui-corner-all.widgetsearch.clear-value(type='text' placeholder='Search')
+
 .tabbable
   .fltrt
     %a.btn.tabbarbtn.shrinkAll
@@ -8,63 +11,8 @@
     %a.btn.tabbarbtn.expandAll
       %img{ :src => '/images/expandAll.png', :alt => 'Expand All', :title => 'Expand All' }
   %ul.nav.nav-tabs
-    %li=link_to 'Regulations', '#regulations', :data => { :toggle => 'tab' }
-    %li=link_to 'Controls', '#controls', :data => { :toggle => 'tab' }
+    %li=link_to 'Regulations', '#regulations', :data => { :toggle => 'tab', :'tab-href' => sections_flow_program_path(program) }
+    %li=link_to 'Controls', '#controls', :data => { :toggle => 'tab', :'tab-href' => controls_flow_program_path(program) }
   .tab-content
     #regulations.tab-pane
-      -sections = program.sections.includes(:controls => :implementing_controls)
-      %ul.slugtree
-        =walk_slug_tree(Program.slugtree(sections)) do |item, step|
-          .row-fluid
-            .span12
-              %a.regulationslot.toggle.span9.collapsed{ :'data-toggle' => 'collapse', :'data-target' => "#content_#{item.id}" }
-                -if !item.description.blank?
-                  .expander
-                %span.prefix=item.slug
-                =item.title || item.description
-              -controls = item.linked_controls
-              -status_class = (controls.empty? && !item.na?) ? 'statusred' : 'statusyellow'
-              %a.controls.controllist.attached.span3{ :class => status_class, :href => mapping_section_dialog_path(item) }
-
-                -controls = item.linked_controls
-                -if !controls.empty?
-                  %ul.spannomargin{ :title => controls.map(&:slug).join(", ") }
-                    %li
-                      %strong #{controls.size}:
-                    -controls.each do |control|
-                      %li=control.slug
-                -elsif item.na?
-                  N/A
-                -else
-                  %strong 0
-            .row-fluid-slotcontent
-              .span9
-                .collapse{ :id => "content_#{item.id}" }
-                  =item.description
-
     #controls.tab-pane
-      -controls = program.controls.includes(:implementing_controls)
-      %ul.slugtree
-        =walk_slug_tree(Program.slugtree(controls)) do |item, step|
-          .row-fluid
-            .span12
-              %a.regulationslot.toggle.span9.collapsed{ :'data-toggle' => 'collapse', :'data-target' => "#content_#{item.id}" }
-                -if !item.description.blank?
-                  .expander
-                %span.prefix=item.slug
-                =item.title || item.description
-              .controllist.attached.span3{ :class => "statusblue" }
-                -controls = item.implementing_controls
-                -if !controls.empty?
-                  %ul.spannomargin{ :title => controls.map(&:slug).join(", ") }
-                    %li
-                      %strong #{controls.size}:
-                    -controls.each do |control|
-                      %li=control.slug
-                -else
-                  .controls
-                    %strong 0
-            .row-fluid-slotcontent
-              .span9
-                .collapse{ :id => "content_#{item.id}" }
-                  =item.description
