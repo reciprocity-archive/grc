@@ -247,14 +247,17 @@ body {
 
 .fltlft {
 	float: left;
+	text-align: left;
 }
 
 .fltrt {
 	float: right;
+	text-align: right;
 }
 
 .fltnone {
 	float: none;
+	text-align: center;
 }
 
 /* Tabs */
