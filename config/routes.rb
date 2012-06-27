@@ -99,7 +99,7 @@ CmsRails::Application.routes.draw do
 
   resources :cycles, :as => 'flow_cycles', :only => [:show, :create, :update]
 
-  resources :sections, :as => 'flow_sections', :only => [] do
+  resources :sections, :as => 'flow_sections', :only => [:new, :edit, :create, :update] do
     member do
       get 'tooltip'
     end

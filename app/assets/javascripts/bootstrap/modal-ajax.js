@@ -25,7 +25,7 @@
   }
 
   $(function() {
-    $('body').on('click.modal-ajax.data-api', '[data-toggle="modal-ajax"]', function(e) {
+    $('body').on('click.modal-ajax.data-api', '[data-toggle="modal-ajax"], [data-toggle="modal-ajax-form"]', function(e) {
       var $this = $(this), modal_id, target, $target, option, href;
 
       href = $this.attr('data-href') || $this.attr('href');
@@ -38,12 +38,19 @@
         $target = $('<div id="' + modal_id + '" class="modal hide"></div>').append(preload_content());
         $this.attr('data-target', '#' + modal_id);
         $target.load(href);
+      } else if ($this.data('modal-reset')) {
+        $target.html(preload_content());
+        $target.load(href);
       }
 
       option = $target.data('modal-help') ? 'toggle' : $.extend({}, $target.data(), $this.data());
 
       e.preventDefault();
-      $target.modal(option);
+
+      if ($this.data('toggle') == 'modal-ajax-form')
+        $target.modal_form(option);
+      else
+        $target.modal(option);
     });
   });
 }(window.jQuery);
