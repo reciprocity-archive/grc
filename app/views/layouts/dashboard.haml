@@ -21,8 +21,10 @@
                   Google Compliance
             .headerright
               .btn-toolbar.fltrt.toolbar-nav
-                .btn-group
-                  %a.btn{ :href => '#help-modal', :'data-toggle' => 'modal' } Help
+                -help_path = yield(:page_help)
+                -if !help_path.blank?
+                  .btn-group
+                    %a.btn{ :href => "/help/#{help_path}", :'data-toggle' => 'modal-ajax' } Help
                 -# Show 'Dashboard' unless on dashboard page
                 -if controller.controller_name != 'programs_dash'
                   .btn-group

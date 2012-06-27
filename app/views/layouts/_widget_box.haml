@@ -5,8 +5,10 @@
       -# Note, the trailing '>' suppresses whitespace, and is important here.
       /%a.widgetbtn{:href => "#", :title => "Help - What is this?"}
       /  %i.gcmsicon-x-grey
-      %a.widgetbtn{:href => "#help-modal", :'data-toggle' => 'modal', :title => "Help - What is this?"}
-        %i.gcmsicon-questionmark-grey
+      -help_path = yield_content!(:widget_help)
+      -if !help_path.blank?
+        %a.widgetbtn{:href => "/help/#{help_path}", :'data-toggle' => 'modal-ajax', :title => "Help - What is this?"}
+          %i.gcmsicon-questionmark-grey
       /%a.widgetbtn{:href => "#", :title => "Help - What is this?"}
       /  %i.gcmsicon-lock-grey
       /%a.widgetbtn{:href => "#", :title => "Help - What is this?"}
