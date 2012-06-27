@@ -5,11 +5,14 @@
   %input.ui-corner-all.widgetsearch.clear-value(type='text' placeholder='Search')
 
 .tabbable
-  .fltrt
+  .span3.fltrt
     %a.btn.tabbarbtn.shrinkAll
       %img{ :src => '/images/shrinkAll.png', :alt => 'Shrink All', :title => 'Shrink All' }
     %a.btn.tabbarbtn.expandAll
       %img{ :src => '/images/expandAll.png', :alt => 'Expand All', :title => 'Expand All' }
+    %a.widgetbtn.fltrt{ :href => new_flow_section_path(:'section[program_id]' => program.id), :'data-toggle' => 'modal-ajax-form', :title => 'Create New Section' }
+      %i.gcmsicon-lock-grey
+
   %ul.nav.nav-tabs
     %li=link_to 'Regulations', '#regulations', :data => { :toggle => 'tab', :'tab-href' => sections_flow_program_path(program) }
     %li=link_to 'Controls', '#controls', :data => { :toggle => 'tab', :'tab-href' => controls_flow_program_path(program) }
