@@ -5,6 +5,8 @@
     %li AUDIT CYCLE
   .location#pageTitle Audit Cycle for #{@cycle.program.title}
 
+-content_for :page_help, 'cycle'
+
 -content_for :subheader_extras do
   .btn-group.fltrt
     %a.btn.btn-warning{ :'data-toggle' => 'modal-form', :href => '#edit-cycle-modal' }

@@ -1,6 +1,8 @@
 -content_for :widget_title do
   Audit Cycle
 
+-content_for :widget_help, 'cycle_info'
+
 .nav.nav-tabs.nav-stacked
   %p
     -if cycle.complete

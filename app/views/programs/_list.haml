@@ -1,6 +1,8 @@
 -content_for :widget_title do
   Programs
 
+-content_for :widget_help, 'programs_list'
+
 %ul.nav.nav-tabs.nav-stacked
   -@programs.each do |program|
     %li

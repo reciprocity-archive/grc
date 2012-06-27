@@ -1,5 +1,7 @@
 -@title = "Dashboard"
 
+-content_for :page_help, 'dashboard'
+
 -content_for :header_buttons do
   -if current_user.has_role?(:admin) || current_user.has_role?(:superuser)
     .btn-group
