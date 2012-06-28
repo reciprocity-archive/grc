@@ -33,3 +33,26 @@
 .disabled {
   opacity: 0.25;
 }
+
+.field-failure {
+  input, select, textarea {
+    background-color: #FFC8C8;
+    border-color: #B94A48;
+  }
+
+  label {
+    color: #B94A48;
+  }
+}
+
+.field-success {
+  input, select, textarea {
+    background-color: #EAFFE6;
+  }
+}
+
+.compact-rows {
+  input, select, textarea {
+    margin-bottom: 0px;
+  }
+}

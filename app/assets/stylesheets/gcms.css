@@ -1263,7 +1263,7 @@ form {
 	color:#888;	
 }
 
-.control-group {
+.control-group, .compact-rows [class*="span"] {
   padding-bottom:0px;
   margin-bottom:0px;	
 }

@@ -41,7 +41,7 @@ class SystemsController < ApplicationController
         flash[:notice] = "Successfully created a new system."
         format.html { redirect_to flow_system_path(@system) }
       else
-        flash[:error] = @system.errors.full_messages
+        flash[:error] = "There was an error creating the system"
         format.html { render :layout => nil, :status => 400 }
       end
     end
@@ -55,7 +55,7 @@ class SystemsController < ApplicationController
         flash[:notice] = "Successfully updated the system."
         format.html { redirect_to flow_system_path(@system) }
       else
-        flash[:error] = @system.errors.full_messages
+        flash[:error] = "There was an error updating the system"
         format.html { render :layout => nil, :status => 400 }
       end
     end

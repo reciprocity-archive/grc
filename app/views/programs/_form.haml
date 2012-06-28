@@ -4,65 +4,53 @@
   -else
     Edit program
 
-.row-fluid.cleanlabels.form-inline
+.row-fluid
   .span6
     .row-fluid
-      .span2.control-group
+      .span2{ :class => error_class(f, :slug) }
         %label{:for => "program-slug"} Short Code
-        %input#program-slug.input-supermini{:name => "program[slug]", :placeholder => "SOX", :type => "text", :value => f.object.slug, :class => (f.object.errors.empty? ? "" : (f.object.errors[:slug].empty? ? "forminputsuccess" : "forminputfail"))}
-        %span.help-inline
-          -f.object.errors[:slug].each do |error|
-            %span Short code #{error}
-      .span2.control-group.disabled
+        %input#program-slug.input-supermini{:name => "program[slug]", :placeholder => "SOX", :type => "text", :value => f.object.slug}
+        =error_messages_inline(f, :slug)
+
+      .span2.disabled{ :class => error_class(f, :version) }
         %label{:for => "program-version"} Version
-        %input#program-version.input-supermini{:name => "program[version]", :placeholder => "SOX", :type => "text", :name => "program[version]", :value => f.object.version, :class => (f.object.errors.empty? ? "" : (f.object.errors[:version].empty? ? "forminputsuccess" : "forminputfail"))}
-        %span.help-inline
-          -f.object.errors[:version].each do |error|
-            %span Short code #{error}
-      .span4.control-group
+        %input#program-version.input-supermini{:name => "program[version]", :placeholder => "SOX", :type => "text", :name => "program[version]", :value => nil}
+        =error_messages_inline(f, :version)
+
+      .span4{ :class => error_class(f, :type) }
         %label{:for => "program-type"} Type
-        .controls
-          %select#program-type.input-small{:name => "program[type]", :class => (f.object.errors.empty? ? "" : (f.object.errors[:type].empty? ? "forminputsuccess" : "forminputfail"))}
-            %option{:value => "regulation", :selected => !f.object.company} Reg
-            %option{:value => "company", :selected => f.object.company} Company
-        %span.help-inline
-          -f.object.errors[:type].each do |error|
-            %span Short code #{error}
+        %select#program-type.input-small{:name => "program[type]"}
+          %option{:value => "regulation", :selected => !f.object.company} Reg
+          %option{:value => "company", :selected => f.object.company} Company
+        =error_messages_inline(f, :type)
+
     .row-fluid
-      .span12.control-group
+      .span12{ :class => error_class(f, :title) }
         %label{:for => "program-title"} Title
-        %input#program-title.span12{:placeholder => "SOX", :type => "text", :name => "program[title]", :value => f.object.title, :class => (f.object.errors.empty? ? "" : (f.object.errors[:title].empty? ? "forminputsuccess" : "forminputfail"))}/
-        %span.help-inline
-          -f.object.errors[:title].each do |error|
-            %span=error
+        %input#program-title.span12{:placeholder => "SOX", :type => "text", :name => "program[title]", :value => f.object.title}/
+        =error_messages_inline(f, :title)
+
     .row-fluid
-      .span12.control-group
+      .span12{ :class => error_class(f, :description) }
         %label{:for => "program-description"} Description
-        %textarea.span12#program-description{:placeholder => "", :name => "program[description]", :class => (f.object.errors.empty? ? "" : (f.object.errors[:description].empty? ? "forminputsuccess" : "forminputfail"))}=f.object.description
-        %span.help-inline
-          -f.object.errors[:description].each do |error|
-            %span=error
+        %textarea.span12#program-description{:placeholder => "", :name => "program[description]"}=f.object.description
+        =error_messages_inline(f, :description)
 
   .span6
-    -puts f.object.errors.full_messages
     .row-fluid
-      .span12.control-group.disabled
+      .span12.disabled{ :class => error_class(f, :url) }
         %label{:for => 'program-url'} URL for Organization
-        %input#program-url.span12{:placeholder => "http://", :type => "text", :name => "program[source_website][link]", :value => nil, :class => (f.object.errors.empty? ? "" : (f.object.errors[:link].empty? ? "forminputsuccess" : "forminputfail"))}
-        %span.help-inline
-          -f.object.errors[:url].each do |error|
-            %span=error
+        %input#program-url.span12{:placeholder => "http://", :type => "text", :name => "program[source_website][link]", :value => nil}
+        =error_messages_inline(f, :url)
+
     .row-fluid
-      .span12.control-group.disabled
+      .span12.disabled{ :class => error_class(f, :organization) }
         %label{:for => 'program-organization'} Organization for Program
-        %input#program-organization.span12{:placeholder => "Organization Responsible for this Program", :type => "text", :name => "program[organization]", :value => nil, :class => (f.object.errors.empty? ? "" : (f.object.errors[:organization].empty? ? "forminputsuccess" : "forminputfail"))}
-        %span.help-inline
-          -f.object.errors[:organization].each do |error|
-            %span=error
+        %input#program-organization.span12{:placeholder => "Organization Responsible for this Program", :type => "text", :name => "program[organization]", :value => nil}
+        =error_messages_inline(f, :organization)
+
     .row-fluid
-      .span12.control-group.disabled
+      .span12.disabled{ :class => error_class(f, :scope) }
         %label{:for => "program-scope"} Scope / Applicability (this text used for mail merge view)
-        %textarea#program-scope.span12{:placeholder => "", :rows => "4", :name => "program[scope]", :value => nil, :class => (f.object.errors.empty? ? "" : (f.object.errors[:scope].empty? ? "forminputsuccess" : "forminputfail"))}
-        %span.help-inline
-          -f.object.errors[:scope].each do |error|
-            %span=error
+        %textarea#program-scope.span12{:placeholder => "", :rows => "4", :name => "program[scope]", :value => nil}
+        =error_messages_inline(f, :scope)

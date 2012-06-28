@@ -4,29 +4,34 @@
   -else
     Edit system
 
-.group
-  =f.label :title
-  =f.text_field :title, :class => :text_field
+.row-fluid
+  .span1{ :class => error_class(f, :slug) }
+    =f.label :slug, "Code"
+    =f.text_field :slug, :class => 'input-supermini'
+    =error_messages_inline(f, :slug)
 
-.group
-  =f.label :slug
-  =f.text_field :slug, :class => :text_field
+  .span4{ :class => error_class(f, :title) }
+    =f.label :title
+    =f.text_field :title, :class => 'input-large'
+    =error_messages_inline(f, :title)
 
-.group
-  =f.label :infrastructure
-  =f.check_box :infrastructure, :class => :check_box
+  .span2.disabled{ :class => error_class(f, :version) }
+    =f.label :version
+    =f.text_field :version, :class => 'input-supermini'
+    =error_messages_inline(f, :version)
 
-.group
-  =f.label :description
-  =f.text_area :description, :class => :text_area
+  .span5{ :class => error_class(f, :owner) }
+    =f.label :owner_id
+    =f.collection_select :owner_id, Person.all, :id, :display_name, {:include_blank => true}, {}
+    =error_messages_inline(f, :owner)
 
-.group
-  =f.label :owner_id
-  =f.collection_select :owner_id, Person.all, :id, :display_name, {}, {:class => :collection}
-
-.group
-  =f.label :documents
-  -f.object.documents.each_with_index do |document, index|
-    =f.fields_for "document[#{index}]", document do |b|
-      =render "admin/documents/indexed_subitem", { :f => b, :document => document }
-
+%br
+.row-fluid
+  .span12
+    =f.label :description, "Description"
+.row-fluid
+  .span12.well{ :class => error_class(f, :description) }
+    =f.text_area :description
+.row-fluid
+  .span12
+    =error_messages_inline(f, :description)

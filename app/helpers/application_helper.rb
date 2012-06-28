@@ -167,4 +167,27 @@ module ApplicationHelper
   def yield_content!(name)
     view_flow.content.delete(name)
   end
+
+  # Simple helper for repetitive form error spans
+  def error_messages_inline(f, field_name)
+    capture_haml do
+      haml_tag :span, :class => 'help-inline' do
+        f.object.errors[field_name].each do |error|
+          haml_tag :span do
+            haml_concat "#{error}"
+          end
+        end
+      end
+    end
+  end
+
+  def error_class(f, field_name)
+    if !f.object.errors.empty?
+      if f.object.errors[field_name].empty?
+        'field-success'
+      else
+        'field-failure'
+      end
+    end
+  end
 end
