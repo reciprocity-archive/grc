@@ -7,6 +7,18 @@
  *= require_self
  */
 
+// Before submitting, remove any disabled form elements
+jQuery(function($) {
+  $('body').on('submit', 'form[data-remote]', function(e, xhr, req) {
+    $(this)
+      .find('.disabled input, .disabled select, .disabled textarea')
+      .each(function(i, el) {
+        $(el).attr('name', '');
+      });
+  });
+});
+
+// On-demand creation of datepicker() objects
 jQuery(function($) {
   $('body').on('focus', '[data-toggle="datepicker"]', function(e) {
     var $this = $(this);

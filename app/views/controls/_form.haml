@@ -1,67 +1,151 @@
+-content_for :modal_title do
+  -if f.object.new_record?
+    Create a new control
+  -else
+    Edit control
+
 .row-fluid
-  .span4.control-group
+  .span8
     .row-fluid
-      .span8.form-inline.control-group
-        %label.cleanlabel{:for => "control-program_id"} Program
-        %select#control-program_id.input-small{:name => "control[program_id]", :placeholder => "SOX", :type => "text", :class => (f.object.errors.empty? ? "" : (f.object.errors[:program].empty? ? "forminputsuccess" : "forminputfail"))}
-          %option{:value => ""}
-          -Program.all.each do |program|
-            -if f.object.program_id == program.id
-              %option{:value => program.id, :selected => true}=program.slug
-            -else
-              %option{:value => program.id}=program.slug
+      .span3.form-inline.control-group
+        %label{:for => "control-program_id"} Program
+        .controls
+          %select#control-program_id.input-small{:name => "control[program_id]", :placeholder => "SOX", :type => "text", :class => (f.object.errors.empty? ? "" : (f.object.errors[:program].empty? ? "forminputsuccess" : "forminputfail"))}
+            %option{:value => ""}
+            -Program.all.each do |program|
+              -if f.object.program_id == program.id
+                %option{:value => program.id, :selected => true}=program.slug
+              -else
+                %option{:value => program.id}=program.slug
         %span.help-inline
           -f.object.errors[:program].each do |error|
-            %span Program #{error}
-      .span4.form-inline.control-group
-        %label.cleanlabel{:for => "control-slug"} Code
-        %input#control-slug.input-supermini{:name => "control[slug]", :placeholder => "SOX", :type => "text", :value => f.object.slug, :class => (f.object.errors.empty? ? "" : (f.object.errors[:slug].empty? ? "forminputsuccess" : "forminputfail"))}
+            %span #{error}
+
+      .span3.form-inline.control-group
+        %label{:for => "control-code"} Code
+        %input#control-code.inputtext-small{:placeholder => "SOX", :type => "text", :value => f.object.slug, :name => 'control[slug]', :class => (f.object.errors.empty? ? "" : (f.object.errors[:slug].empty? ? "forminputsuccess" : "forminputfail"))}
         %span.help-inline
           -f.object.errors[:slug].each do |error|
-            %span Short code #{error}
-      -#.span4.form-inline.control-group
-        %label{:for => "control-version"} Version
-        %input#control-version.input-supermini{:name => "control[version]", :placeholder => "SOX", :type => "text", :value => f.object.version}
-        %span.help-inline
-          -f.object.errors[:version].each do |error|
-            %span=error
-  .span1
-  .span7.control-group.fltrt
-    .row-fluid.fltrt
-      -#.span4.form-inline.control-group
-        %label{:for => "control-effectivedate"} Effective Date
-        %input#control-effectivedate.input-small{:placeholder => "12/12/12", :type => "text"}
-        %span.help-inline
-      -#.span4.form-inline.control-group
-        %label{:for => "control-verificationdate"} Category
-        %input#control-verificationdate.input-small{:placeholder => "Building", :type => "text"}
-        %span.help-inline
-      .span6.form-inline.control-group
-        %label.cleanlabel{:for => "control-effective_date"} Effective Date
-        %input#control-effective_date.input-small{:xname => "control[effective_date]", :placeholder => "MM/DD/YYYY", :type => "text", :value => "", :class => (f.object.errors.empty? ? "" : (f.object.errors[:effective_date].empty? ? "forminputsuccess" : "forminputfail")), :'data-toggle' => 'datepicker'}
-        %span.help-inline
-          -f.object.errors[:effective_date].each do |error|
-            %span Short code #{error}
-      -#.span4.form-inline.control-group.fltrt
-        %label{:for => "control-frequency"} Sub-Category
-        %input#control-frequency.input-small{:placeholder => "Security", :type => "text"}
-        %span.help-inline
+            %span #{error}
 
-%br
-.row-fluid
-  .span12.control-group
-    %label.cleanlabel{:for => "control-title"} Title
-    %input#control-title.span12{:placeholder => "", :type => "text", :name => "control[title]", :value => f.object.title, :class => (f.object.errors.empty? ? "" : (f.object.errors[:title].empty? ? "forminputsuccess" : "forminputfail"))}
+      .span6.control-group.fltrt.disabled
+        .row-fluid.fltrt
+          .span6.form-inline.control-group
+            %label{:for => "control-effectivedate"} Effective Date
+            %br
+            .date{"data-date" => "02-12-12", "data-date-format" => "dd-mm-yy"}
+              %input#control-effectivedate.input-mini{:size => "16", :type => "text", :name => 'control[effectivedate]', :value => nil, :'data-toggle' => 'datepicker', :class => (f.object.errors.empty? ? "" : (f.object.errors[:effectivedate].empty? ? "forminputsuccess" : "forminputfail"))}
+                %span.add-on
+                  %i.calendar
+            %span.help-inline
+              -f.object.errors[:effectivedate].each do |error|
+                %span #{error}
+          .span6.form-inline.control-group
+            %label{:for => "control-version"} Version
+            %br
+            %input#control-version.input-supermini{:name => 'control[version]', :placeholder => "SOX", :type => "text", :class => (f.object.errors.empty? ? "" : (f.object.errors[:version].empty? ? "forminputsuccess" : "forminputfail"))}
+            %span.help-inline
+              -f.object.errors[:version].each do |error|
+                %span #{error}
+
+    .row-fluid
+      .span3.form-inline.control-group.disabled
+        %label{:for => 'control-type'} Type
+        %br
+        .controls
+          %select#control-type.input-small{:name => 'control[type]', :value => nil, :class => (f.object.errors.empty? ? "" : (f.object.errors[:type].empty? ? "forminputsuccess" : "forminputfail"))}
+            %option Company
+        %br
+        %span.help-inline
+          -f.object.errors[:type].each do |error|
+            %span #{error}
+      .span3.form-inline.control-group.disabled
+        %label{:for => 'control-kind'} Kind
+        %br
+        .controls
+          %select#control-kind.input-small{:name => 'control[kind]', :value => nil, :class => (f.object.errors.empty? ? "" : (f.object.errors[:kind].empty? ? "forminputsuccess" : "forminputfail"))}
+            %option Preventative
+        %br
+        %span.help-inline
+          -f.object.errors[:kind].each do |error|
+            %span #{error}
+      .span6.form-inline.control-group.disabled
+        %label{:for => 'control-means'} Means of Operation
+        %br
+        .controls
+          %select#control-means.span12{:name => 'control[means]', :value => nil, :class => (f.object.errors.empty? ? "" : (f.object.errors[:means].empty? ? "forminputsuccess" : "forminputfail"))}
+            %option Manual w/ Segregation of Duties
+        %br
+        %span.help-inline
+          -f.object.errors[:means].each do |error|
+            %span #{error}
+
+    .row-fluid
+      .span9.control-group.disabled
+        %label{:for => 'control-title'} Title
+        %input#control-title.span12{:placeholder => "Title Goes Here", :type => "text", :name => 'control[title]', :value => f.object.title, :class => (f.object.errors.empty? ? "" : (f.object.errors[:title].empty? ? "forminputsuccess" : "forminputfail"))}
+        %br
+        %span.help-inline
+          -f.object.errors[:title].each do |error|
+            %span #{error}
+      .span3.form-inline.control-group.disabled
+        %label{:for => 'control-status'} Status
+        %br
+        .controls
+          %select#control-status.input-small{:name => 'control[title]', :value => f.object.title, :class => (f.object.errors.empty? ? "" : (f.object.errors[:title].empty? ? "forminputsuccess" : "forminputfail"))}
+            %option Deprecated
+            %option Open
+        %br
+        %span.help-inline
+          -f.object.errors[:status].each do |error|
+            %span #{error}
+
+  #categorylist.span4.form-inline.control-group.well.disabled
+    %label{:for => 'control-categories'} Categories
+    - category_list = [['Access Control', ['Access Management', 'Authorization', 'Authentication']], ['Change Management', ['Segregation of Duties', 'Configuration Management']], ['Business Continuity', ['Disaster Recovery', 'Physical Security']], ['Governance', ['Training', 'Policies & Procedures', 'Monitoring']]]
+    %select{:multiple => "multiple", :name => 'control[categories]', :class => (f.object.errors.empty? ? "" : (f.object.errors[:categories].empty? ? "forminputsuccess" : "forminputfail"))}
+      -category_list.each do |category_label, categories|
+        %optgroup{ :label => category_label }
+          -categories.each do |category|
+            %option{ :value => category }=category
     %span.help-inline
-      -f.object.errors[:title].each do |error|
-        %span Title #{error}
+      -f.object.errors[:categories].each do |error|
+        %span #{error}
 
-%br
 .row-fluid
-  .span12.control-group
-    %label.cleanlabel{:for => "control-description"} Description
-    %textarea.span12#control-description{:placeholder => "", :name => "control[description]", :class => (f.object.errors.empty? ? "" : (f.object.errors[:description].empty? ? "forminputsuccess" : "forminputfail"))}=f.object.description
+  %label.cleanlabel{:for => "control-description"} Description
+.row-fluid{"control-group" => ""}
+  .span12.well
+    %textarea#control-description.span12{:placeholder => "", :rows => "4", :name => 'control[description]', :value => f.object.description, :class => (f.object.errors.empty? ? "" : (f.object.errors[:description].empty? ? "forminputsuccess" : "forminputfail"))}=f.object.description
     %span.help-inline
       -f.object.errors[:description].each do |error|
-        %span Description #{error}
+        %span #{error}
 
+%br
+.row-fluid
+  .span12.control-group.disabled
+    %label.cleanlabel{:for => 'control-url'} URL
+    %input#control-url.span12{:placeholder => "http://", :type => "text", :name => 'control[url]', :value => nil, :class => (f.object.errors.empty? ? "" : (f.object.errors[:url].empty? ? "forminputsuccess" : "forminputfail"))}
+    %span.help-inline
+      -f.object.errors[:url].each do |error|
+        %span #{error}
+
+-if !f.object.new_record?
+  .row-fluid.nominheight
+    .span3.nominheight
+      %label.cleanlabel.fltlft
+        %strong> Created
+        \: #{f.object.created_at}
+    .span3.nominheight
+      %label.cleanlabel.fltlft
+        %strong> Updated
+        \: #{f.object.updated_at}
+    .span3.nominheight
+      %label.cleanlabel.fltrt
+        %strong> Last Editor
+        \: #{f.object.modified_by && (f.object.modified_by.name || f.object.modified_by.username || f.object.modified_by.email)}
+    .span3.nominheight
+      %label.cleanlabel.fltrt
+        %strong> Approved
+        \:
+        %span.statustextred Not Approved

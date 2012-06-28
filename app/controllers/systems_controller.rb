@@ -14,6 +14,8 @@ class SystemsController < ApplicationController
 
   def edit
     @system = System.find(params[:id])
+
+    render :layout => nil
   end
 
   def show
@@ -27,6 +29,8 @@ class SystemsController < ApplicationController
 
   def new
     @system = System.new
+
+    render :layout => nil
   end
 
   def create

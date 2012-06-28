@@ -1,6 +1,6 @@
 .modal-header
   %a.close{ :href => '#', :'data-dismiss' => 'modal' } x
-  %h3=yield_content!(:modal_title) || "&nbsp;".html_safe
+  %h1=yield_content!(:modal_title) || "&nbsp;".html_safe
 
 .modal-body
   =yield

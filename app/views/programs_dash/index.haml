@@ -28,17 +28,6 @@
             :layout => 'layouts/widget_box'
 
 -content_for :subheader_extras do
-  -#.btn-group.closed.fltrt
-    %a.btn.btn-blue.dropdown-toggle{ :'data-toggle' => 'dropdown' }
-      New Interface Widget
-      %span.caret
-    %ul.dropdown-menu
-      %li.divider
-      %li.dropdown-menulabel.txtindent1 Create New ...
-      %li
-        %a{ :'data-toggle' => 'modal-form', :href => '#comingsoon-modal' }
-          Search
-
   .btn-group.closed.fltrt
     %a.btn.btn-blue.dropdown-toggle{ :'data-toggle' => 'dropdown' }
       New Business Object
@@ -47,53 +36,14 @@
       %li.divider
       %li.dropdown-menulabel.txtindent1 Create New ...
       %li
-        %a{ :'data-toggle' => 'modal-form', :href => '#create-program-modal' }
+        %a{ :'data-toggle' => 'modal-ajax-form', :href => new_flow_program_path }
           Program
       %li
         %a{ :'data-toggle' => 'modal', :href => '#comingsoon-modal' }
           Product
       %li
-        %a{ :'data-toggle' => 'modal-form', :href => '#create-system-modal' }
+        %a{ :'data-toggle' => 'modal-ajax-form', :href => new_flow_system_path }
           System
       %li
-        %a{ :'data-toggle' => 'modal-form', :href => '#create-control-modal' }
+        %a{ :'data-toggle' => 'modal-ajax-form', :href => new_flow_control_path }
           Control
-
-#create-program-modal.modal.hide.fade
-  -program = Program.new
-  =form_for program, :url => flow_programs_path, :method => :post, :remote => true, :html => {:class => :form} do |f|
-    .modal-header
-      %a.close{"data-dismiss" => "modal"} x
-      %h1 Create a new program
-    .modal-body
-      =render :partial => 'programs/form',
-              :locals  => { :f => f }
-    .modal-footer
-      =f.submit pat(:save)
-      =f.submit pat(:cancel), :type => 'reset'
-
-#create-system-modal.modal.hide.fade
-  -system = System.new
-  =form_for system, :url => flow_systems_path, :method => :post, :remote => true, :html => {:class => :form} do |f|
-    .modal-header
-      %a.close{"data-dismiss" => "modal"} x
-      %h1 Create a new system
-    .modal-body
-      =render :partial => 'systems/form',
-              :locals  => { :f => f }
-    .modal-footer
-      =f.submit pat(:save)
-      =f.submit pat(:cancel), :type => 'reset'
-
-#create-control-modal.modal.hide.fade
-  -control = Control.new
-  =form_for control, :url => flow_controls_path, :method => :post, :remote => true, :html => {:class => :form} do |f|
-    .modal-header
-      %a.close{"data-dismiss" => "modal"} x
-      %h1 Create a new control
-    .modal-body
-      =render :partial => 'controls/form',
-              :locals  => { :f => f }
-    .modal-footer
-      =f.submit pat(:save)
-      =f.submit pat(:cancel), :type => 'reset'

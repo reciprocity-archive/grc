@@ -22,6 +22,18 @@ class ProgramsController < ApplicationController
     @program = Program.find(params[:id])
   end
 
+  def new
+    @program = Program.new(params[:program])
+
+    render :layout => nil
+  end
+
+  def edit
+    @program = Program.find(params[:id])
+
+    render :layout => nil
+  end
+
   def create
     source_document = params[:program].delete(:source_document)
     source_website = params[:program].delete(:source_website)

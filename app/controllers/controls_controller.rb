@@ -15,6 +15,8 @@ class ControlsController < ApplicationController
 
   def edit
     @control = Control.find(params[:id])
+
+    render :layout => nil
   end
 
   def show
@@ -28,6 +30,8 @@ class ControlsController < ApplicationController
 
   def new
     @control = Control.new
+
+    render :layout => nil
   end
 
   def create

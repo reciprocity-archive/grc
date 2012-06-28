@@ -87,9 +87,8 @@ CmsRails::Application.routes.draw do
     end
   end
 
-  resources :programs, :as => 'flow_programs', :only => [:create, :update] do
+  resources :programs, :as => 'flow_programs', :only => [:show, :new, :edit, :create, :update] do
     member do
-      get 'show'
       get 'tooltip'
       get 'import'
       get 'sections'
@@ -105,13 +104,13 @@ CmsRails::Application.routes.draw do
     end
   end
 
-  resources :controls, :as => 'flow_controls' do
+  resources :controls, :as => 'flow_controls', :only => [:show, :new, :edit, :create, :update] do
     member do
       get 'tooltip'
     end
   end
 
-  resources :systems, :as => 'flow_systems' do
+  resources :systems, :as => 'flow_systems', :only => [:show, :new, :edit, :create, :update] do
     member do
     end
   end
