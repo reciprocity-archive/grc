@@ -640,6 +640,14 @@ nav {
 	
 }
 
+/* Lighten placeholder text from bootstrap defaults */
+/* These rules must be separate, see http://stackoverflow.com/questions/2610497/change-an-inputs-html5-placeholder-color-with-css */
+::-webkit-input-placeholder {
+  color: #cccccc;
+}
+:-moz-placeholder {
+  color: #cccccc;
+}
 
 .input-mini {
   width: 60px;
