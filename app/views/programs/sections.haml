@@ -26,5 +26,4 @@
         .span9
           .collapse{ :id => "content_#{item.id}" }
             =item.description
-            %a.opacity40.fltrt.widgetbtn{ :href => edit_flow_section_path(item), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :title => 'Edit Section' }
-              %i.gcmsicon-lock-grey
+            %a.btn.btn-blue.addbtn.fltrt{ :href => edit_flow_section_path(item), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :title => 'Edit Section' } Edit
