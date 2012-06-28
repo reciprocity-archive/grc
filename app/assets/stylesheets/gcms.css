@@ -185,8 +185,15 @@ body {
 	position:relative;
 	min-height:265px;
 	max-height:600px;
-	overflow-y:auto;
-	overflow-x:hidden;
+}
+
+/* Required `height` setting to trigger overflow scrolling in tab content */
+.fullHeight > .WidgetBox > .WidgetBoxContent .tab-pane {
+  max-height: 535px;
+}
+
+.halfHeight > .WidgetBox > .WidgetBoxContent .tab-pane {
+  max-height: 200px;
 }
 
 .singleWide > .WidgetBox > .WidgetBoxContent {
@@ -266,6 +273,7 @@ body {
 	border-bottom-color: transparent;
 }
 .nav-tabs {
+	margin-bottom: 2px;
 	border-bottom: 10px solid #43C2C7;
 	}
 /* Not totally sure why this is necessary, double check */
