@@ -36,14 +36,14 @@
       %li.divider
       %li.dropdown-menulabel.txtindent1 Create New ...
       %li
-        %a{ :'data-toggle' => 'modal-ajax-form', :href => new_flow_program_path }
+        %a{ :href => new_flow_program_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset' }
           Program
       %li
         %a{ :'data-toggle' => 'modal', :href => '#comingsoon-modal' }
           Product
       %li
-        %a{ :'data-toggle' => 'modal-ajax-form', :href => new_flow_system_path }
+        %a{ :href => new_flow_system_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset' }
           System
       %li
-        %a{ :'data-toggle' => 'modal-ajax-form', :href => new_flow_control_path }
+        %a{ :href => new_flow_control_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset' }
           Control

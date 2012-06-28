@@ -12,7 +12,7 @@
       %img{ :src => '/images/shrinkAll.png', :alt => 'Shrink All', :title => 'Shrink All' }
     %a.btn.tabbarbtn.expandAll
       %img{ :src => '/images/expandAll.png', :alt => 'Expand All', :title => 'Expand All' }
-    %a.widgetbtn.fltrt{ :href => new_flow_section_path(:'section[program_id]' => program.id), :'data-toggle' => 'modal-ajax-form', :title => 'Create New Section' }
+    %a.widgetbtn.fltrt{ :href => new_flow_section_path(:'section[program_id]' => program.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :title => 'Create New Section' }
       %i.gcmsicon-lock-grey
 
   %ul.nav.nav-tabs

@@ -5,86 +5,69 @@
     Edit regulation section
 
 .row-fluid
-  .span2.form-inline.control-group
-    %label.cleanlabel{:for => "section-program_id"} Program
-    %select#section-program_id.input-small{:name => "section[program_id]", :placeholder => "SOX", :type => "text", :class => (f.object.errors.empty? ? "" : (f.object.errors[:program].empty? ? "forminputsuccess" : "forminputfail"))}
+  .span2{:class => error_class(f, :program)}
+    %label{:for => "section-program_id"} Program
+    %select#section-program_id.input-small{:name => "section[program_id]", :placeholder => "SOX", :type => "text"}
       %option{:value => ""}
       -Program.all.each do |program|
         -if f.object.program_id == program.id
           %option{:value => program.id, :selected => true}=program.slug
         -else
           %option{:value => program.id}=program.slug
-    %span.help-inline
-      -f.object.errors[:program].each do |error|
-        %span Program #{error}
+    =error_messages_inline(f, :program)
 
-  .span2.form-inline.control-group
-    %label.cleanlabel{:for => "section-code"} Code
-    %input#section-code.inputtext-small{:placeholder => "SOX", :type => "text", :value => f.object.slug, :name => 'section[slug]', :class => (f.object.errors.empty? ? "" : (f.object.errors[:slug].empty? ? "forminputsuccess" : "forminputfail"))}
-    %span.help-inline
-      -f.object.errors[:slug].each do |error|
-        %span Section #{error}
+  .span2{:class => error_class(f, :slug)}
+    %label{:for => "section-code"} Code
+    %input#section-code.inputtext-small{:placeholder => "SOX", :type => "text", :value => f.object.slug, :name => 'section[slug]'}
+    =error_messages_inline(f, :slug)
 
-  .span1.form-inline.control-group.disabled
-    %label.cleanlabel{:for => "section-version"} Version
-    %input#section-version.input-supermini{:placeholder => "SOX", :type => "text", :value => nil, :name => 'section[version]', :class => (f.object.errors.empty? ? "" : (f.object.errors[:version].empty? ? "forminputsuccess" : "forminputfail"))}
-    %span.help-inline
-      -f.object.errors[:version].each do |error|
-        %span Section #{error}
+  .span1.disabled{:class => error_class(f, :version)}
+    %label{:for => "section-version"} Version
+    %input#section-version.input-supermini{:placeholder => "SOX", :type => "text", :value => nil, :name => 'section[version]'}
+    =error_messages_inline(f, :version)
 
-  .span7.form-inline.control-group.disabled
-    %label.cleanlabel{:for => "section-status"} Status
-    .controls
-      %select#section-status.input-small{ :name => 'section[status]', :value => nil, :class => (f.object.errors.empty? ? "" : (f.object.errors[:status].empty? ? "forminputsuccess" : "forminputfail")) }
-        %option Deprecated
-        %option Open
-    %span.help-inline
-      -f.object.errors[:status].each do |error|
-        %span Section #{error}
+  .span7.disabled{:class => error_class(f, :status)}
+    %label{:for => "section-status"} Status
+    %select#section-status.input-small{ :name => 'section[status]', :value => nil }
+      %option Deprecated
+      %option Open
+    =error_messages_inline(f, :status)
 
 .row-fluid
-  .span12.control-group
-    %label.cleanlabel{:for => "section-title"} Title
-    %input#section-title.span12{:placeholder => "Title", :type => "text", :value => f.object.title, :name => 'section[title]', :class => (f.object.errors.empty? ? "" : (f.object.errors[:title].empty? ? "forminputsuccess" : "forminputfail"))}
-    %span.help-inline
-      -f.object.errors[:title].each do |error|
-        %span Section #{error}
+  .span12{:class => error_class(f, :title)}
+    %label{:for => "section-title"} Title
+    %input#section-title.span12{:placeholder => "Title", :type => "text", :value => f.object.title, :name => 'section[title]'}
+    =error_messages_inline(f, :title)
 
 .row-fluid
-  %label.cleanlabel{:for => "section-description"} Text of Section:
+  %label{:for => "section-description"} Text of Section:
 .row-fluid{"control-group" => ""}
-  .span12.well
-    %textarea#section-description.span12{:placeholder => "", :rows => "4", :name => 'section[description]', :class => (f.object.errors.empty? ? "" : (f.object.errors[:description].empty? ? "forminputsuccess" : "forminputfail"))}=f.object.description
-    %span.help-inline.description
-      -f.object.errors[:description].each do |error|
-        %span Section #{error}
+  .span12.well{:class => error_class(f, :description)}
+    %textarea#section-description.span12{:placeholder => "", :rows => "4", :name => 'section[description]'}=f.object.description
+    =error_messages_inline(f, :description)
 
 .row-fluid
-  .span12.control-group.disabled
-    %label.cleanlabel{:for => "section-url"} URL for this section (optional)
-    %input#section-link.span12{:placeholder => "http://", :type => "text", :value => nil, :name => 'section[url]', :class => (f.object.errors.empty? ? "" : (f.object.errors[:url].empty? ? "forminputsuccess" : "forminputfail"))}
-    %span.help-inline
-      -f.object.errors[:url].each do |error|
-        %span Section #{error}
+  .span12.disabled{:class => error_class(f, :url)}
+    %label{:for => "section-url"} URL for this section (optional)
+    %input#section-link.span12{:placeholder => "http://", :type => "text", :value => nil, :name => 'section[url]'}
+    =error_messages_inline(f, :url)
 
 -if !f.object.new_record?
   .row-fluid.nominheight
     .span3.nominheight
-      %label.cleanlabel.fltlft
+      %label.fltlft
         %strong> Created
         \: #{f.object.created_at}
     .span3.nominheight
-      %label.cleanlabel.fltlft
+      %label.fltlft
         %strong> Updated
         \: #{f.object.updated_at}
     .span3.nominheight
-      %label.cleanlabel.fltrt
+      %label.fltrt
         %strong> Last Editor
         \: #{f.object.modified_by && (f.object.modified_by.name || f.object.modified_by.username || f.object.modified_by.email)}
     .span3.nominheight
-      %label.cleanlabel.fltrt
+      %label.fltrt
         %strong> Approved
         \:
         %span.statustextred Not Approved
-
-
