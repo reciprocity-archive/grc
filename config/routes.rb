@@ -104,7 +104,7 @@ CmsRails::Application.routes.draw do
     end
   end
 
-  resources :controls, :as => 'flow_controls', :only => [:show, :new, :edit, :create, :update] do
+  resources :controls, :as => 'flow_controls', :only => [:index, :show, :new, :edit, :create, :update] do
     member do
       get 'tooltip'
     end
