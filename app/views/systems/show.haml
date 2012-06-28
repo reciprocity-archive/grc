@@ -5,9 +5,10 @@
     =@system.slug
   %h1.location=@system.title
 
+-content_for :page_help, 'system'
+
 .row
   .span8
     =render :partial => 'systems/show',
             :layout => 'layouts/widget_box',
             :locals => { :system => @system }
-

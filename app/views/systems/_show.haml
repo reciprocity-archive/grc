@@ -1,6 +1,8 @@
 -content_for :widget_title do
   System Information
 
+-content_for :widget_help, 'system_info'
+
 .nav.nav-tabs.nav-stacked
   =system.title
 
@@ -10,4 +12,3 @@
   .item
     Updated:
     =display_time(system.updated_at)
-
