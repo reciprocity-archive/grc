@@ -15,7 +15,19 @@ class PeopleController < ApplicationController
     @person = Person.find(params[:id])
     render :layout => nil
   end
-  
+
+  def new
+    @person = Person.new(params[:section])
+
+    render :layout => nil
+  end
+
+  def edit
+    @person = Person.find(params[:id])
+
+    render :layout => nil
+  end
+
   def create
     @person = Person.new(params[:person])
 

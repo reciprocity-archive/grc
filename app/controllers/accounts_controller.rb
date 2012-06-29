@@ -16,6 +16,18 @@ class AccountsController < ApplicationController
     render :layout => nil
   end
 
+  def new
+    @account = Account.new(params[:section])
+
+    render :layout => nil
+  end
+
+  def edit
+    @account = Account.find(params[:id])
+
+    render :layout => nil
+  end
+
   def create
     @account = Account.new(params[:account])
 

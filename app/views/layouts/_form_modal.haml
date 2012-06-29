@@ -6,5 +6,16 @@
   =yield
 
 .modal-footer
-  =f.submit pat(:save)
-  =f.submit pat(:cancel), :type => 'reset'
+  .row-fluid
+    %nav.fltlft.txtlft.span3
+      %input.btn-large.btn-info{:type => 'reset', :value => 'Cancel'}
+      %input.btn-large.btn-warning.disabled{:type => 'submit', :value => 'Delete', :disabled => 'disabled'}
+    .toolbar-widget.span6.disabled
+      %a.btn{:href => "#comingsoonModal"}
+        %i.gcmsicon-arrowleft-black
+      %span.btnwell Showing Most Recent of N Revisions
+      %a.btn{:href => "#comingsoonModal"}
+        %i.gcmsicon-arrowright-black
+    %nav.fltrt.txtrt.span3
+      %input.btn-large.btn-warning{:type => 'submit', :value => 'Save'}
+      %input.btn-large.btn-success.disabled{:type => 'submit', :value => 'Approve', :disabled => 'disabled'}

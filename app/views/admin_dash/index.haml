@@ -14,10 +14,10 @@
       %li.divider
       %li.dropdown-menulabel.txtindent1 Create New ...
       %li
-        %a{ :'data-toggle' => 'modal-form', :href => '#create-account-modal' }
+        %a{ :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :href => new_flow_account_path }
           Account
       %li
-        %a{ :'data-toggle' => 'modal-form', :href => '#create-person-modal' }
+        %a{ :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :href => new_flow_person_path }
           Person
 
 .row-static
@@ -30,31 +30,3 @@
     .singleWide.halfHeight
       =render :partial => 'admin_dash/old_links',
               :layout => 'layouts/widget_box'
-
-
-#create-account-modal.modal.hide.fade
-  -account = Account.new
-  =form_for account, :url => flow_accounts_path, :method => :post, :remote => true, :html => {:class => :form} do |f|
-    .modal-header
-      %button.close{"data-dismiss" => "modal"} x
-      %h1 Create a new account
-    .modal-body
-      =render :partial => 'accounts/form',
-              :locals  => { :f => f }
-    .modal-footer
-      =f.submit pat(:save)
-      =f.submit pat(:cancel), :type => 'reset'
-
-#create-person-modal.modal.hide.fade
-  -person = Person.new
-  =form_for person, :url => flow_people_path, :method => :post, :remote => true, :html => {:class => :form} do |f|
-    .modal-header
-      %button.close{"data-dismiss" => "modal"} x
-      %h1 Create a new person
-    .modal-body
-      =render :partial => 'people/form',
-              :locals  => { :f => f }
-    .modal-footer
-      =f.submit pat(:save)
-      =f.submit pat(:cancel), :type => 'reset'
-
