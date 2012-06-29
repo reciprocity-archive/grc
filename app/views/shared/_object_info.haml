@@ -1,0 +1,21 @@
+.row-fluid.nominheight
+  .span3.nominheight
+    %label.fltlft
+      %strong> Created
+      \: #{object.created_at.strftime("%m/%d/%y")}
+  .span3.nominheight
+    %label.fltlft
+      %strong> Updated
+      \: #{object.updated_at.strftime("%m/%d/%y")}
+  .span3.nominheight
+    %label.fltrt
+      %strong> Last Editor
+      \: #{object.modified_by && (object.modified_by.name || object.modified_by.username || object.modified_by.email)}
+  .span3.nominheight
+    %label.fltrt
+      %strong> Approved
+      \:
+      -if approved
+        %span.statustextgreen Approved
+      -else
+        %span.statustextred Not Approved

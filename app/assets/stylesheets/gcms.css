@@ -398,6 +398,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8ccb8', end
 .statustextred {
 	color:#C00;
 }
+.statustextgreen {
+	color:#0A0;
+}
 
 .statusyellow {
 background: #f4f8b8; /* Old browsers */
