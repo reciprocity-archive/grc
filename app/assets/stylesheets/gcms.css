@@ -162,7 +162,6 @@ body {
 }
 .WidgetTitle {
 	padding: 2px 0 4px 3px;
-	width:130px;
 	font-family: 'PT Sans', sans-serif;
 	font-weight: 400;
 	font-size:16px;
@@ -193,7 +192,7 @@ body {
 }
 
 .halfHeight > .WidgetBox > .WidgetBoxContent .tab-pane {
-  max-height: 200px;
+  max-height: 215px;
 }
 
 .singleWide > .WidgetBox > .WidgetBoxContent {
