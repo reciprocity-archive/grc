@@ -35,3 +35,6 @@
 .row-fluid
   .span12
     =error_messages_inline(f, :description)
+
+-if !f.object.new_record?
+  =render :partial => 'shared/object_info', :locals => { :object => f.object, :approved => false }

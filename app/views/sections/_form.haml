@@ -53,21 +53,4 @@
     =error_messages_inline(f, :url)
 
 -if !f.object.new_record?
-  .row-fluid.nominheight
-    .span3.nominheight
-      %label.fltlft
-        %strong> Created
-        \: #{f.object.created_at}
-    .span3.nominheight
-      %label.fltlft
-        %strong> Updated
-        \: #{f.object.updated_at}
-    .span3.nominheight
-      %label.fltrt
-        %strong> Last Editor
-        \: #{f.object.modified_by && (f.object.modified_by.name || f.object.modified_by.username || f.object.modified_by.email)}
-    .span3.nominheight
-      %label.fltrt
-        %strong> Approved
-        \:
-        %span.statustextred Not Approved
+  =render :partial => 'shared/object_info', :locals => { :object => f.object, :approved => false }
