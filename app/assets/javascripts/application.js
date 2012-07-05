@@ -20,8 +20,6 @@ jQuery(document).ready(function() {
 
 jQuery(document).ready(function($) {
   var defaults = {
-    show: true,
-    //trigger: 'hover',
     delay: { show: 150, hide: 100 },
     placement: 'left',
     content: function(trigger) {
@@ -43,7 +41,9 @@ jQuery(document).ready(function($) {
     // If popover instance doesn't exist already, create it and
     // force the 'enter' event.
     if (!$(e.currentTarget).data('sticky_popover')) {
-      $(e.currentTarget).sticky_popover($.extend({}, defaults, { trigger: 'sticky-hover' }));
+      $(e.currentTarget)
+        .sticky_popover($.extend({}, defaults, { trigger: 'sticky-hover' }))
+        .triggerHandler(e);
     }
   });
 
@@ -51,7 +51,9 @@ jQuery(document).ready(function($) {
   $('body').on('click', 'a[data-popover-trigger="click"]', function(e) {
     e.preventDefault();
     if (!$(e.currentTarget).data('sticky_popover')) {
-      $(e.currentTarget).sticky_popover($.extend({}, defaults, { trigger: 'click' }));
+      $(e.currentTarget)
+        .sticky_popover($.extend({}, defaults, { trigger: 'click' }))
+        .triggerHandler(e);
     }
   });
 
