@@ -24,6 +24,10 @@
         ).end();
   }
 
+  function emit_loaded() {
+    $(this).trigger('loaded');
+  }
+
   $(function() {
     $('body').on('click.modal-ajax.data-api', '[data-toggle="modal-ajax"], [data-toggle="modal-ajax-form"]', function(e) {
       var $this = $(this), modal_id, target, $target, option, href;
@@ -37,10 +41,10 @@
       if ($target.length == 0) {
         $target = $('<div id="' + modal_id + '" class="modal hide"></div>').append(preload_content());
         $this.attr('data-target', '#' + modal_id);
-        $target.load(href);
+        $target.load(href, emit_loaded);
       } else if ($this.data('modal-reset')) {
         $target.html(preload_content());
-        $target.load(href);
+        $target.load(href, emit_loaded);
       }
 
       option = $target.data('modal-help') ? 'toggle' : $.extend({}, $target.data(), $this.data());

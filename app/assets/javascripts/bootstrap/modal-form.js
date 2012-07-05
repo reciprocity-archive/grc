@@ -13,6 +13,8 @@
     this.$element
       .on('click.modal-form.close', '[data-dismiss="modal"]', $.proxy(this.hide, this))
       .on('click.modal-form.reset', 'input[type=reset], [data-dismiss="modal-reset"]', $.proxy(this.reset, this))
+      .on('shown.modal-form', $.proxy(this.focus_first_input, this))
+      .on('loaded.modal-form', $.proxy(this.focus_first_input, this))
       .on('ajax:complete', 'form', $.proxy(this.on_complete, this))
       .on('ajax:flash',    'form', $.proxy(this.on_flash, this))
   }
@@ -32,6 +34,14 @@
   , hide: function(e) {
       $.fn.modal.Constructor.prototype.hide.apply(this, [e]);
       this.$element.off('modal_form');
+    }
+
+  , focus_first_input: function() {
+      var $first_input = this.$element
+        .find('input[type="text"], input[type="checkbox"], select, textarea')
+	.first();
+      if ($first_input.length > 0)
+        setTimeout(function() { $first_input.get(0).focus(); }, 100);
     }
 
   , on_complete: function(ev, xhr, status) {
