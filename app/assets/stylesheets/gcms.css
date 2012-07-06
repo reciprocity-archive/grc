@@ -144,15 +144,47 @@ body {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#828a97', endColorstr='#4c525b',GradientType=0 ); /* IE6-9 */
 	
 	height:24px;
-	
 	font-family: 'PT Sans', sans-serif;
 	font-weight: 400;
 	padding: 6px;
 	margin:0 0 0 0;
 	color: #fff;
 	text-shadow: 0px 1px 1px #000;
-	
 }
+
+.subtleGreen {
+	background: #75997e; /* Old browsers */
+	background: -moz-linear-gradient(top,  #75997e 0%, #596d57 40%, #48594a 79%, #445449 83%, #4f5e53 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#75997e), color-stop(40%,#596d57), color-stop(79%,#48594a), color-stop(83%,#445449), color-stop(100%,#4f5e53)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #75997e 0%,#596d57 40%,#48594a 79%,#445449 83%,#4f5e53 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #75997e 0%,#596d57 40%,#48594a 79%,#445449 83%,#4f5e53 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #75997e 0%,#596d57 40%,#48594a 79%,#445449 83%,#4f5e53 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #75997e 0%,#596d57 40%,#48594a 79%,#445449 83%,#4f5e53 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#75997e', endColorstr='#4f5e53',GradientType=0 ); /* IE6-9 */
+}
+
+.subtleBlue {
+	background: #77979b; /* Old browsers */
+	background: -mozlinear-gradient(top,  #77979b 0%, #55656b 40%, #4c5a5e 79%, #485559 84%, #4e565b 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#77979b), color-stop(40%,#55656b), color-stop(79%,#4c5a5e), color-stop(84%,#485559), color-stop(100%,#4e565b)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #77979b 0%,#55656b 40%,#4c5a5e 79%,#485559 84%,#4e565b 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #77979b 0%,#55656b 40%,#4c5a5e 79%,#485559 84%,#4e565b 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #77979b 0%,#55656b 40%,#4c5a5e 79%,#485559 84%,#4e565b 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #77979b 0%,#55656b 40%,#4c5a5e 79%,#485559 84%,#4e565b 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#77979b', endColorstr='#4e565b',GradientType=0 ); /* IE6-9 */
+}
+
+.subtleRed {
+	background: #966768; /* Old browsers */
+	background: -moz-linear-gradient(top,  #966768 0%, #665151 40%, #604242 79%, #5b4e4f 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#966768), color-stop(40%,#665151), color-stop(79%,#604242), color-stop(100%,#5b4e4f)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #966768 0%,#665151 40%,#604242 79%,#5b4e4f 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #966768 0%,#665151 40%,#604242 79%,#5b4e4f 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #966768 0%,#665151 40%,#604242 79%,#5b4e4f 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #966768 0%,#665151 40%,#604242 79%,#5b4e4f 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#966768', endColorstr='#5b4e4f',GradientType=0 ); /* IE6-9 */
+}
+
 
 .WidgetBox p {
 	margin: 0 0 0 0;
@@ -162,6 +194,7 @@ body {
 }
 .WidgetTitle {
 	padding: 2px 0 4px 3px;
+	/* width:130px; /* This is set to 130 because inside regmapper thats all you will get */
 	font-family: 'PT Sans', sans-serif;
 	font-weight: 400;
 	font-size:16px;
@@ -217,7 +250,7 @@ body {
 
 /* Width attriutes that should be applied to columns only - NOT WIDGETS */
 .doublewidth {
-	width:350px;
+	width:300px; /* Sets the width of a widgettitle (or anything) with room for one or two icons */
 }
 
 
@@ -230,7 +263,7 @@ body {
 
 .singleColumn {
 	width: 373px;
-	padding: 0 0 0 0; //This is a column, so no padding (let the Widget do it)
+	padding: 0 0 0 0; /* This is a column, so no padding (let the Widget do it) */
 	margin:0 0 0 0;
 	float:left;
 	display:inline-block;
@@ -255,8 +288,16 @@ body {
 	float: left;
 }
 
+.txtlft {
+	text-align: left;
+}
+
 .fltrt {
 	float: right;
+}
+
+.txtrt {
+	text-align: right;
 }
 
 .fltnone {
@@ -561,6 +602,8 @@ nav {
 	float:right;
 	display:inline-block;
 }
+
+.nav { margin-bottom:7px; }
 
 .modal-header > nav {
 	padding:5px 10px;
@@ -1105,15 +1148,15 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
 
 
 ul, ol {
-padding: 0 0 0 0;
-margin: 0 0 0 0;
-
--webkit-margin-before: 0px;
--webkit-margin-after: 0px;
--webkit-margin-start: 0px;
--webkit-margin-end: 0px;
--webkit-padding-start: 0px;
-
+	position: relative;
+	padding: 0 0 0 0;
+	margin: 0 0 0 0;
+	list-style: none;
+	-webkit-margin-before: 0px;
+	-webkit-margin-after: 0px;
+	-webkit-margin-start: 0px;
+	-webkit-margin-end: 0px;
+	-webkit-padding-start: 0px;
 }
 
 /* TREE styles for the selected-section box on reg-mapper page */
@@ -1144,6 +1187,7 @@ ul.slugtree ul ul > li {
 	margin-left:10px;
 }
 */
+
 /* Change to Indent Within - Could be more elegant */
 ul.slugtree ul ul > li > div > div > a > span.prefix {
 	margin-left:6px;
@@ -1239,8 +1283,7 @@ form {
   margin-left: 70px;
 }
 
-.cleanlabels label,
-.cleanlabel {
+label {
   font-size: 11.4px;
   font-weight: regular;
   line-height: 14px;
@@ -1249,6 +1292,7 @@ form {
   white-space: nowrap;
   vertical-align: baseline;
   background-color: transparent;
+  margin-top:5px;
   margin-bottom:2px;
 }
 
@@ -1528,15 +1572,6 @@ border-top-right-radius: 4px;
           box-shadow: none;
 }
 
-
-.addbtn { 
-  padding: 2px 6px 1px 6px;
-  *margin-left: .3em;
-  font-size: 13px;
-  line-height: 18px;
-  *line-height: 20px;
-}
-
 /* Standard buttons (Bottom of modals) */
 
 .btn {
@@ -1546,6 +1581,18 @@ border-top-right-radius: 4px;
 	font-size: 13px;
 	line-height: 13px;
 }
+
+/* Button specifics - build on .btn */
+
+.addbtn, .unmapbtn { 
+  padding: 1px 5px 2px 5px;
+  *margin-left: .3em;
+  font-size: 11px;
+  line-height: 12px;
+  *line-height: 12px;
+  vertical-align:baseline;
+}
+.unmapbtn { margin-bottom:5px; /* Correct spacing from textarea underneath */ }
 
 textarea { resize:vertical; max-height:300px; height:120px; width: 98%; }
 
@@ -1560,11 +1607,6 @@ textarea { resize:vertical; max-height:300px; height:120px; width: 98%; }
 	margin-top:2px;
 }
 
-.unmapbtn {
-	padding: 2px 4px 3px 4px;
-	font-size:11.4px;
-	margin-bottom: 2px;
-}
 /* Map to Controls Buttons */
 
 .btn-warning {
@@ -1635,7 +1677,6 @@ a.controllistRM {
 }
 .controlSlot {
 	float:left;
-	width:199px;
 	height:auto;
 	margin:3px 0px 2px 0px;
 	display:inline-block;
@@ -1652,7 +1693,6 @@ a.controllistRM {
 }
 .controlSlot:hover {
 	float:left;
-	width:199px;
 	height:auto;
 	margin:3px 0px 2px 0px;
 	display:inline-block;
@@ -1666,6 +1706,9 @@ a.controllistRM {
 	vertical-align:central;
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0 ); /* IE6-9 */
 	border: 1px solid #3badb3;
+}
+.controlSlot {
+	width: 100%;
 }
 
 .circle {
@@ -1722,6 +1765,36 @@ font-size: 12px;
 }
 
 /* GCMS open-source icons */
+.gcmsicon-questionmark-grey { 
+	background-image: url("../images/icons/icon-questmark-grey.png");
+	display: inline-block;
+	width: 18px;
+	height: 18px;
+	margin:0;
+	padding:0;
+	background-position: 0px 0px;
+	background-repeat: no-repeat;
+}
+.gcmsicon-arrowleft-black { 
+	background-image: url("../images/icons/icon-arrowleft-black.png");
+	display: inline-block;
+	width: 18px;
+	height: 18px;
+	margin:0;
+	padding:0;
+	background-position: 0px 0px;
+	background-repeat: no-repeat;
+}
+.gcmsicon-arrowright-black { 
+	background-image: url("../images/icons/icon-arrowright-black.png");
+	display: inline-block;
+	width: 18px;
+	height: 18px;
+	margin:0;
+	padding:0;
+	background-position: 0px 0px;
+	background-repeat: no-repeat;
+}
 .gcmsicon-questionmark-grey { 
 	background-image: url("../images/icons/icon-questmark-grey.png");
 	display: inline-block;
@@ -1823,7 +1896,7 @@ font-size: 12px;
 	background-repeat: no-repeat;
 }
 .gcmsicon-asterix-white { 
-	background-image: url("../images/icons/icon-asterix-black.png");
+	background-image: url("../images/icons/icon-asterix-white.png");
 	display: inline-block;
 	width: 18px;
 	height: 18px;
