@@ -1313,6 +1313,7 @@ rgba(255, 255, 255, 0.38);*/
 margin: 2px 2px 2px 2px;
 text-align: center;
 z-index: 50;
+pointer-events: none;
 }
 
 .labelOverlayright {
@@ -1330,6 +1331,7 @@ z-index: 50;
 	margin: 2px 2px 2px 2px;
 	text-align: center;
 	z-index: 50;
+	pointer-events: none;
 }
 
 .btnwell {
