@@ -10,19 +10,23 @@
       /%a{ :href => flow_program_path(program), :'data-popover-href' => tooltip_flow_program_path(program), :'data-popover-trigger' => 'sticky-hover', :'data-placement' => 'right'}
       %a{ :href => flow_program_path(program), :data => { :'original-title' => 'Program Information', :'content' => render(:template => 'programs/tooltip', :locals => { :program => program }), :placement => 'right', :'popover-trigger' => 'sticky-hover'} }
         %h3=program.title
-        %p.item
-          %strong Reg sections:&nbsp;&nbsp;
-          %strong> #{stats[:sections_count]}
-          , 
-          %strong #{stats[:sections_done_count]}
-          linked, 
-          %strong #{stats[:sections_na_count]}
-          N/A, 
-          %strong #{stats[:sections_undone_count]}
-          not finished
-        %p.item
-          %strong Controls:&nbsp;&nbsp;
-          %strong> #{stats[:controls_count]}
-          , 
-          %strong #{stats[:controls_parented_count]}
-          with parents
+        .progress.progress-striped.active
+          -if stats[:sections_count] > 0
+            .labelOverlay.fltlft Regulation Linking
+            /.labelOverlayright.fltrt=stats[:sections_count]
+            .bar.progressbar-success.hidefont.fltlft{ :'data-percentage' => stats[:sections_done_percentage] } #{stats[:sections_done_count]}%
+            .bar.progressbar-danger.hidefont.fltrt{ :'data-percentage' => stats[:sections_na_percentage] } #{stats[:sections_na_count]}%
+            .bar.progressbar-warning.hidefont.fltrt{ :'data-percentage' => stats[:sections_undone_percentage]} #{stats[:sections_undone_count]}%
+          -else
+            .labelOverlay.fltlft No sections
+
+        .progress.progress-striped.active
+          -if stats[:controls_count] > 0
+            .labelOverlay.fltlft Control compliance
+            /.labelOverlayright.fltrt=stats[:controls_count]
+            .bar.progressbar-success.hidefont.fltlft{ :'data-percentage' => stats[:controls_complying_percentage] }
+              #{stats[:controls_complying_count]}%
+            .bar.progressbar-danger.hidefont.fltrt{ :'data-percentage' => stats[:controls_pending_percentage] } #{stats[:controls_pending_count]}%
+            .bar.progressbar-warning.hidefont.fltrt{ :'data-percentage' => stats[:controls_approved_percentage]} #{stats[:controls_approved_count]}%
+          -else
+            .labelOverlay.fltlft No controls

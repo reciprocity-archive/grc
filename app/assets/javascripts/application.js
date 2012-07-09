@@ -10,12 +10,18 @@
  */
 
 // Put your application scripts here
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
   $('.collapsible .head').click(function(e) {
       $(this).toggleClass('toggle');
       $(this).next().toggle();
       e.preventDefault();
   }).next().hide();
+});
+
+jQuery(document).ready(function($) {
+  $('.bar[data-percentage]').each(function() {
+    $(this).css({ width: $(this).data('percentage') + '%' })
+  });
 });
 
 jQuery(document).ready(function($) {
