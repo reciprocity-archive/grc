@@ -39,7 +39,7 @@
   , focus_first_input: function() {
       var $first_input = this.$element
         .find('input[type="text"], input[type="checkbox"], select, textarea')
-	.first();
+        .first();
       if ($first_input.length > 0)
         setTimeout(function() { $first_input.get(0).focus(); }, 100);
     }
@@ -79,10 +79,13 @@
       // Find or create the flash-message holder
       var $flash_holder = this.$element.find('.flash')
         , type, ucase_type
-        , messages, message, message_i;
+        , messages, message, message_i
+        , flash_class
+        , flash_class_mappings = { notice: "success" }
+        , html;
 
       if ($flash_holder.length == 0) {
-        $flash_holder = $('<ul class="flash"></ul>');
+        $flash_holder = $('<div class="flash"></div>');
         this.$element.find('.modal-body').prepend($flash_holder);
       } else {
         $flash_holder.empty();
@@ -93,9 +96,17 @@
           if (typeof(flash[type]) == "string")
             flash[type] = [flash[type]];
 
+          flash_class = flash_class_mappings[type] || type
+
+          html =
+            [ '<div class="alert alert-' + flash_class + '">'
+            ,   '<a href="#" class="close" data-dismiss="alert">x</a>'
+            ]
           for (message_i in flash[type]) {
-            $flash_holder.append('<li class="' + type + '">' + flash[type][message_i] + '</li>');
+            html.push('<span>' + flash[type][message_i] + '</span>');
           }
+          html.push('</div>');
+          $flash_holder.append(html.join(''));
         }
       }
       e.stopPropagation();
