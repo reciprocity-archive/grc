@@ -13,7 +13,7 @@
         .progress.progress-striped.active
           -if stats[:sections_count] > 0
             .labelOverlay.fltlft Regulation Linking
-            /.labelOverlayright.fltrt=stats[:sections_count]
+            .labelOverlayright.fltrt=stats[:sections_count]
             .bar.progressbar-success.hidefont.fltlft{ :'data-percentage' => stats[:sections_done_percentage] } #{stats[:sections_done_count]}%
             .bar.progressbar-danger.hidefont.fltrt{ :'data-percentage' => stats[:sections_na_percentage] } #{stats[:sections_na_count]}%
             .bar.progressbar-warning.hidefont.fltrt{ :'data-percentage' => stats[:sections_undone_percentage]} #{stats[:sections_undone_count]}%
@@ -23,7 +23,7 @@
         .progress.progress-striped.active
           -if stats[:controls_count] > 0
             .labelOverlay.fltlft Control compliance
-            /.labelOverlayright.fltrt=stats[:controls_count]
+            .labelOverlayright.fltrt=stats[:controls_count]
             .bar.progressbar-success.hidefont.fltlft{ :'data-percentage' => stats[:controls_complying_percentage] }
               #{stats[:controls_complying_count]}%
             .bar.progressbar-danger.hidefont.fltrt{ :'data-percentage' => stats[:controls_pending_percentage] } #{stats[:controls_pending_count]}%
