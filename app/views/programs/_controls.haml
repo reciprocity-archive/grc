@@ -4,6 +4,8 @@
 -content_for :widget_help, 'program_controls'
 
 -content_for :widget_buttons do
+  %a.btn.widgetbtn{ :href => new_flow_section_path(:'section[program_id]' => program.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :title => 'Create New Section' } Add Section
+  %a.btn.widgetbtn{ :href => new_flow_control_path(:'control[program_id]' => program.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :title => 'Create New Control' } Add Control
   %input.ui-corner-all.widgetsearch.clear-value(type='text' placeholder='Search')
 
 .tabbable
@@ -12,7 +14,6 @@
       %img{ :src => '/images/shrinkAll.png', :alt => 'Shrink All', :title => 'Shrink All' }
     %a.btn.tabbarbtn.expandAll
       %img{ :src => '/images/expandAll.png', :alt => 'Expand All', :title => 'Expand All' }
-    %a.btn.btn-blue.addbtn.fltrt{ :href => new_flow_section_path(:'section[program_id]' => program.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :title => 'Create New Section' } Add
 
   %ul.nav.nav-tabs
     %li=link_to 'Regulations', '#regulations', :data => { :toggle => 'tab', :'tab-href' => sections_flow_program_path(program) }
