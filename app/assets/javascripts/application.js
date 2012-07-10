@@ -9,16 +9,17 @@
  *= require_self
  */
 
-// Put your application scripts here
+/* Unused?
 jQuery(document).ready(function($) {
   $('.collapsible .head').click(function(e) {
       $(this).toggleClass('toggle');
       $(this).next().toggle();
       e.preventDefault();
   }).next().hide();
-});
+});*/
 
 jQuery(document).ready(function($) {
+  // TODO: Not AJAX friendly
   $('.bar[data-percentage]').each(function() {
     $(this).css({ width: $(this).data('percentage') + '%' })
   });
@@ -36,6 +37,7 @@ jQuery(document).ready(function($) {
   });
 });
 
+// Setup for Popovers
 jQuery(document).ready(function($) {
   var defaults = {
     delay: { show: 150, hide: 100 },

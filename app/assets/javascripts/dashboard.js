@@ -40,17 +40,17 @@ jQuery(function($) {
 
 // expandAll and shrinkAll buttons
 jQuery(function($) {
-  $('body').on('click', 'a.expandAll', function(e) {
+  $('body').on('click', '.tabbable a.expandAll', function(e) {
     $(this).closest('.tabbable').find('.tab-pane:visible').find('.collapse').collapse({ toggle: false }).collapse('show');
   });
-  $('body').on('click', 'a.shrinkAll', function(e) {
+  $('body').on('click', '.tabbable a.shrinkAll', function(e) {
     $(this).closest('.tabbable').find('.tab-pane:visible').find('.collapse').collapse({ toggle: false }).collapse('hide');
   });
 });
 
 // Tabs via AJAX on 'Quick Find'
 jQuery(function($) {
-  $('.tabbable').on('show', 'ul.nav-tabs > li > a', function(e, href) {
+  $('body').on('show', '.tabbable ul.nav-tabs > li > a', function(e, href) {
     var $tab = $(e.target)
       , loaded = $tab.data('tab-loaded')
       , pane = ($tab.data('tab-target') || $tab.attr('href'))
@@ -82,7 +82,7 @@ jQuery(function($) {
   });
 
   // Clear the .widgetsearch box when tab is changed
-  $('.tabbable').on('show', 'ul.nav-tabs > li > a', function(e) {
+  $('body').on('show', '.tabbable ul.nav-tabs > li > a', function(e) {
     if (e.relatedTarget) {
       $input = $(this).closest('.WidgetBox').find('.widgetsearch');
       if ($input.val()) {
@@ -98,7 +98,7 @@ jQuery(function($) {
 
 // Quick Search
 jQuery(function($) {
-  $('nav > .widgetsearch').keypress(function (e) {
+  $('body').on('keypress', 'nav > .widgetsearch', function (e) {
     if (e.which == 13) {
       var $this = $(this)
         , $tab = $this.closest('.WidgetBox').find('ul.nav-tabs > li.active > a')
@@ -106,7 +106,7 @@ jQuery(function($) {
       $tab.trigger('show', href);
     }
   });
-  $('nav > .widgetsearch-tocontent').keypress(function (e) {
+  $('body').on('keypress', 'nav > .widgetsearch-tocontent', function (e) {
     if (e.which == 13) {
       var $this = $(this)
         , $box = $this.closest('.WidgetBox').find('.WidgetBoxContent')
