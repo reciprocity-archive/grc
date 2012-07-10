@@ -316,11 +316,8 @@ body {
 	margin-bottom: 2px;
 	border-bottom: 10px solid #43C2C7;
 	}
-/* Not totally sure why this is necessary, double check */
-.nav-tabs > li > a { 
-color:#666;
-border: 0px solid transparent;
-}
+
+
 .expanderslot {
 	float:left;
 	width:79%;
@@ -538,21 +535,30 @@ a.controllist {
   margin: 0px;
 }
 
-.group {
+.nav-tabs.nav-stacked > li {
 	margin: 1px;
 	padding: 1px 1px 3px 1px;
 }
 
-.group:hover {
-	color:#666666;
+.nav-tabs.nav-stacked > li:hover {
+	color:#333;
 	background: #eeeeee; /* Old browsers */
-	border: 1px solid #3badb3;
-	margin: 1px 1px 0px 1px;
-	padding: 0px 0px 1px 0px;
+
 }
 
-.group a { color:#666; }
-.group a:hover, .group a h3:hover { color:#43C2C7; }
+.nav-tabs.nav-stacked > li:first-child > a:hover {
+	
+	border: 1px solid #3badb3;
+-webkit-border-radius: 4px 4px 0 0;
+-moz-border-radius: 4px 4px 0 0;
+border-radius: 4px 4px 0 0;
+}
+.nav-tabs.nav-stacked > li > a:hover {
+	border: 1px solid #3badb3;
+}
+
+.nav-tabs.nav-stacked > li > a { color:#666; }
+.nav-tabs.nav-stacked > li > a:hover, .nav-tabs.nav-stacked > li > a h3:hover { color:#333; }
 
 .txtindent1 {
 	text-indent: .5em;
@@ -965,7 +971,7 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
   left: 0;
   z-index: 2000;
   display: none;
-  padding: 5px;
+  padding: 10px;
 }
 
 .popover.top {
@@ -973,7 +979,7 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
 }
 
 .popover.right {
-  margin-left: 5px;
+  margin-left: 14px;
 }
 
 .popover.bottom {
@@ -996,10 +1002,10 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
 .popover.right .arrow {
   top: 50%;
   left: 0;
-  margin-top: -5px;
-  border-top: 5px solid transparent;
-  border-right: 5px solid #666;
-  border-bottom: 5px solid transparent;
+  margin-top: -10px;
+  border-top: 10px solid transparent;
+  border-right: 10px solid #43C2C7;
+  border-bottom: 10px solid transparent;
 }
 
 .popover.bottom .arrow {
@@ -1017,7 +1023,7 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
   margin-top: -5px;
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
-  border-left: 5px solid #666;
+  border-left: 5px solid #43C2C7;
 }
 
 .popover .arrow {
@@ -1027,21 +1033,20 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
 }
 
 .popover-inner {
-  width: 280px;
+  width: 350px;
   padding: 3px;
   overflow: hidden;
-  background: #fff;
-  background: rgba(255, 255, 255, 0.8);
-  -webkit-border-radius: 6px;
-     -moz-border-radius: 6px;
-          border-radius: 6px;
+  background: #43C2C7;
+  -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+          border-radius: 3px;
   -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
      -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
           box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
 }
 
 .popover-title {
-  padding: 9px 15px;
+  padding: 4px 8px;
   line-height: 1;
   background-color: #efefef;
   border-bottom: 1px solid #eee;
@@ -1051,7 +1056,7 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
 }
 
 .popover-content {
-  padding: 14px;
+  padding: 8px;
   background-color: #ffffff;
   -webkit-border-radius: 0 0 3px 3px;
      -moz-border-radius: 0 0 3px 3px;
@@ -1296,41 +1301,37 @@ label {
   margin-bottom:2px;
 }
 
-.labelOverlay {
+.barTitle {
 display: inline;
 position: absolute;
 font-size: 11px;
 font-weight: regular;
 line-height: 14px;
-color: 
-#444;
-text-shadow: 0 1px 0 
-rgba(255, 255, 255, 0.25);
+color: #444;
+text-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
 white-space: nowrap;
 vertical-align: baseline;
-/*background-color: 
-rgba(255, 255, 255, 0.38);*/
-margin: 2px 2px 2px 2px;
-text-align: center;
+/*background-color: rgba(255, 255, 255, 0.38);*/
+margin: 2px 4px 2px 4px;
+text-align: left;
+width:89%;
 z-index: 50;
 pointer-events: none;
 }
 
-.labelOverlayright {
+.barCount {
 	display: inline;
 	position: absolute;
-	right:15px;
+	right:10px;
 	font-size: 11px;
 	font-weight: regular;
 	line-height: 14px;
-	color: #444;
-	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
+	color: #eee;
+	text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
 	white-space: nowrap;
 	vertical-align: baseline;
 	/*background-color: rgba(255, 255, 255, 0.38);*/
-	margin: 2px 2px 2px 2px;
-	text-align: center;
-	z-index: 50;
+	text-align: right;
 	pointer-events: none;
 }
 
@@ -2050,6 +2051,15 @@ font-size: 12px;
 
 /* Progress Bars */
 
+.nav-tabs.nav-stacked > li > a:hover .progress .progressbar-warning, .nav-tabs.nav-stacked > li > a:hover .progress .progressbar-success, .nav-tabs.nav-stacked > li > a:hover .progress .progressbar-danger  {
+	opacity:1;
+	filter:alpha(opacity=100); /* For IE8 and earlier */
+	
+}
+ .progressbar-warning:hover,.progressbar-success:hover, .progressbar-danger:hover {
+	border: 1px solid #555;
+}
+
 .progressbar-warning {
 background-color: #FAA732 !important;
 background-image: -moz-linear-gradient(top, #FBB450, #F89406) !important;
@@ -2062,10 +2072,6 @@ background-repeat: repeat-x !important;
 filter: progid:dximagetransform.microsoft.gradient(startColorstr='#fbb450', endColorstr='#f89406', GradientType=0) !important;
 opacity:0.4;
 filter:alpha(opacity=40); /* For IE8 and earlier */
-}
-.progressbar-warning:hover {
-	opacity:1;
-	filter:alpha(opacity=100); /* For IE8 and earlier */
 }
 
 .progressbar-success {
@@ -2081,10 +2087,6 @@ filter: progid:dximagetransform.microsoft.gradient(startColorstr='#62c462', endC
 opacity:0.4;
 filter:alpha(opacity=40); /* For IE8 and earlier */
 }
-.progressbar-success:hover {
-	opacity:1;
-	filter:alpha(opacity=100); /* For IE8 and earlier */
-}
 
 .progressbar-danger {
 background-color: #DD514C!important;
@@ -2098,10 +2100,6 @@ background-repeat: repeat-x !important;
 filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ee5f5b', endColorstr='#c43c35', GradientType=0)!important;
 opacity:0.4;
 filter:alpha(opacity=40); /* For IE8 and earlier */
-}
-.progressbar-danger:hover {
-	opacity:1;
-	filter:alpha(opacity=100); /* For IE8 and earlier */
 }
 
 .progress {

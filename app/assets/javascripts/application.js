@@ -25,6 +25,18 @@ jQuery(document).ready(function($) {
 });
 
 jQuery(document).ready(function($) {
+  // Listeners for initial tooltip mouseovers
+  $('body').on('mouseover', '[data-toggle="tooltip"]', function(e) {
+    if (!$(e.currentTarget).data('tooltip')) {
+      console.debug("tooltip");
+      $(e.currentTarget)
+        .tooltip()
+	.triggerHandler(e);
+    }
+  });
+});
+
+jQuery(document).ready(function($) {
   var defaults = {
     delay: { show: 150, hide: 100 },
     placement: 'left',
