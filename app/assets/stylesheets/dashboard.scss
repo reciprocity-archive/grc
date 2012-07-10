@@ -4,6 +4,10 @@
  *= require gcms
  */
 
+.tab-pane {
+  overflow: auto;
+}
+
 .WidgetBox .smallerWidgetBoxHeading {
   margin-bottom: -2px;
 }
