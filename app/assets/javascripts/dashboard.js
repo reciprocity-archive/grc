@@ -71,6 +71,8 @@ jQuery(function($) {
       if (template) {
         var spinner = new Spinner({ }).spin();
         $(pane).html(spinner.el);
+        // Scroll up so spinner doesn't get pushed out of visibility
+        $(pane).closest('.tab-content').scrollTop(0);
         $(spinner.el).css({ width: '100px', height: '100px', left: '50px', top: '50px' });
       }
 
