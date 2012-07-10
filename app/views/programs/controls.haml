@@ -1,8 +1,9 @@
 %ul.slugtree
   =walk_slug_tree(Program.slugtree(controls)) do |item, step|
     .row-fluid
+      -content_id = "content_#{rand(36**8).to_s(36)}" # unique ID for toggle
       .span12
-        %a.regulationslot.toggle.span9.collapsed{ :'data-toggle' => 'collapse', :'data-target' => "#content_#{item.id}" }
+        %a.regulationslot.toggle.span9.collapsed{ :'data-toggle' => 'collapse', :'data-target' => "##{content_id}" }
           -if !item.description.blank?
             .expander
           %span.prefix=item.slug
@@ -20,5 +21,5 @@
               %strong 0
       .row-fluid-slotcontent
         .span9
-          .collapse{ :id => "content_#{item.id}" }
+          .collapse{ :id => content_id }
             =item.description
