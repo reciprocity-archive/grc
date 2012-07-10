@@ -29,7 +29,7 @@ class ControlsController < ApplicationController
   end
 
   def new
-    @control = Control.new
+    @control = Control.new(params[:control])
 
     render :layout => nil
   end

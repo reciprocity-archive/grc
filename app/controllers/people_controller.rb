@@ -17,7 +17,7 @@ class PeopleController < ApplicationController
   end
 
   def new
-    @person = Person.new(params[:section])
+    @person = Person.new(params[:person])
 
     render :layout => nil
   end

@@ -28,7 +28,7 @@ class SystemsController < ApplicationController
   end
 
   def new
-    @system = System.new
+    @system = System.new(params[:system])
 
     render :layout => nil
   end
