@@ -15,8 +15,6 @@
       .on('click.modal-form.reset', 'input[type=reset], [data-dismiss="modal-reset"]', $.proxy(this.reset, this))
       .on('shown.modal-form', $.proxy(this.focus_first_input, this))
       .on('loaded.modal-form', $.proxy(this.focus_first_input, this))
-      .on('ajax:complete', 'form', $.proxy(this.on_complete, this))
-      .on('ajax:flash',    'form', $.proxy(this.on_flash, this))
   }
 
   /* NOTE: MODAL_FORM EXTENDS BOOTSTRAP-MODAL.js
@@ -42,74 +40,6 @@
         .first();
       if ($first_input.length > 0)
         setTimeout(function() { $first_input.get(0).focus(); }, 100);
-    }
-
-  , on_complete: function(ev, xhr, status) {
-      // Replace form body
-      this.$element.find('.modal-body').html(xhr.responseText);
-
-      // Maybe handle AJAX/JSON redirect or refresh
-      if (xhr.status == 278) {
-        // Handle 278 redirect (AJAX redirect)
-        window.location.assign(xhr.getResponseHeader('location'));
-      } else if (xhr.status == 279) {
-        window.location.assign(window.location.href);
-      }
-
-      // Maybe handle AJAX flash messages
-      var flash_types = ["error", "alert", "notice", "warning"]
-        , type_i, message
-        , flash;
-
-      for (type_i in flash_types) {
-        message = xhr.getResponseHeader('x-flash-' + flash_types[type_i]);
-        message = JSON.parse(message);
-        if (message) {
-          if (!flash)
-            flash = {};
-          flash[flash_types[type_i]] = message;
-        }
-      }
-
-      if (flash)
-        this.$element.find('form').trigger('ajax:flash', flash);
-    }
-
-  , on_flash: function(e, flash) {
-      // Find or create the flash-message holder
-      var $flash_holder = this.$element.find('.flash')
-        , type, ucase_type
-        , messages, message, message_i
-        , flash_class
-        , flash_class_mappings = { notice: "success" }
-        , html;
-
-      if ($flash_holder.length == 0) {
-        $flash_holder = $('<div class="flash"></div>');
-        this.$element.find('.modal-body').prepend($flash_holder);
-      } else {
-        $flash_holder.empty();
-      }
-
-      for (type in flash) {
-        if (flash[type]) {
-          if (typeof(flash[type]) == "string")
-            flash[type] = [flash[type]];
-
-          flash_class = flash_class_mappings[type] || type
-
-          html =
-            [ '<div class="alert alert-' + flash_class + '">'
-            ,   '<a href="#" class="close" data-dismiss="alert">x</a>'
-            ]
-          for (message_i in flash[type]) {
-            html.push('<span>' + flash[type][message_i] + '</span>');
-          }
-          html.push('</div>');
-          $flash_holder.append(html.join(''));
-        }
-      }
-      e.stopPropagation();
     }
   });
 
@@ -143,4 +73,89 @@
       $target.modal_form(option);
     });
   });
+
+  // Default flash handler
+  $(function() {
+    $('body').on('ajax:flash', function(e, flash) {
+      var $target, $flash_holder// = this.$element.find('.flash')
+        , type, ucase_type
+        , messages, message, message_i
+        , flash_class
+        , flash_class_mappings = { notice: "success" }
+        , html;
+
+      // Find or create the flash-message holder
+      $target = e.target ? $(e.target) : $('body');
+      $flash_holder = $target.find('.flash');
+
+      if ($flash_holder.length == 0) {
+        $flash_holder = $('<div class="flash"></div>');
+        $target.find('.modal-body').prepend($flash_holder);
+      } else {
+        $flash_holder.empty();
+      }
+
+      for (type in flash) {
+        if (flash[type]) {
+          if (typeof(flash[type]) == "string")
+            flash[type] = [flash[type]];
+
+          flash_class = flash_class_mappings[type] || type
+
+          html =
+            [ '<div class="alert alert-' + flash_class + '">'
+            ,   '<a href="#" class="close" data-dismiss="alert">x</a>'
+            ]
+          for (message_i in flash[type]) {
+            html.push('<span>' + flash[type][message_i] + '</span>');
+          }
+          html.push('</div>');
+          $flash_holder.append(html.join(''));
+        }
+      }
+      //e.stopPropagation();
+    });
+
+    // Default form complete handler
+    $('body').on('ajax:complete', function(e, xhr, status) {
+      var data, data_k;
+
+      try {
+        // Parse and dispatch JSON object
+        data = JSON.parse(xhr.responseText);
+      } catch (exc) {
+        // Replace form body
+        $(e.target).find('.modal-body').html(xhr.responseText);
+      }
+
+      // Maybe handle AJAX/JSON redirect or refresh
+      if (xhr.status == 278) {
+        // Handle 278 redirect (AJAX redirect)
+        window.location.assign(xhr.getResponseHeader('location'));
+      } else if (xhr.status == 279) {
+        // Handle 279 page refresh
+        window.location.assign(window.location.href);
+      }
+
+      // Maybe handle AJAX flash messages
+      var flash_types = ["error", "alert", "notice", "warning"]
+        , type_i, message
+        , flash;
+
+      for (type_i in flash_types) {
+        message = xhr.getResponseHeader('x-flash-' + flash_types[type_i]);
+        message = JSON.parse(message);
+        if (message) {
+          if (!flash)
+            flash = {};
+          flash[flash_types[type_i]] = message;
+        }
+      }
+
+      if (flash) {
+        $(e.target).trigger('ajax:flash', flash);
+      }
+    });
+  });
+
 }(window.jQuery);
