@@ -118,8 +118,7 @@
 
   $.fn.sticky_popover.Constructor = StickyPopover
 
-  $.fn.sticky_popover.defaults = $.extend({} , $.fn.popover.defaults, {
+  $.fn.sticky_popover.defaults = $.extend({}, $.fn.popover.defaults, {
   })
 
 }(window.jQuery);
-
