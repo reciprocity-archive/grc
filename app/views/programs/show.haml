@@ -11,6 +11,9 @@
 -content_for :subheader_extras do
   %h1.fltrt.highlighted Program
 
+-content_for :subheader_plus do
+  %a.navbarplus.fltrt{ :href => new_flow_program_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset' }
+
 .row-static
   .doubleColumn
     .doubleWide.fullHeight
@@ -18,7 +21,7 @@
               :layout => 'layouts/widget_box',
               :locals => { :program => @program }
   .singleColumn
-    .singleWide.halfHeight
+    .singleWide.fullHeight
       =render :partial => 'programs/show',
               :layout => 'layouts/widget_box',
               :locals => { :program => @program }
@@ -26,15 +29,3 @@
       =render :partial => 'programs/audit_cycles',
               :layout => 'layouts/widget_box',
               :locals => { :program => @program }
-
-#edit-program-modal.modal.hide.fade
-  =form_for @program, :url => flow_program_path(@program), :method => :put, :remote => true, :html => {:class => :form} do |f|
-    .modal-header
-      %a.close{"data-dismiss" => "modal"} x
-      %h1 Create a new program
-    .modal-body
-      =render :partial => 'programs/form',
-              :locals  => { :f => f }
-    .modal-footer
-      =f.submit pat(:save)
-      =f.submit pat(:cancel), :type => 'reset'

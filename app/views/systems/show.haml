@@ -1,14 +1,36 @@
+-@title = "CMS System: #{@system.title}"
+
 -content_for :header do
-  %h5.highlighted
-    SYSTEMS
-    %span.divider /
-    =@system.slug
-  %h1.location=@system.title
+  %ol#breadcrumb
+    %li=link_to 'Systems', flow_systems_path
+    %li=@system.slug
+  .location#pageTitle=@system.title
 
 -content_for :page_help, 'system'
 
-.row
-  .span8
-    =render :partial => 'systems/show',
-            :layout => 'layouts/widget_box',
-            :locals => { :system => @system }
+-content_for :subheader_extras do
+  %h1.fltrt.highlighted System
+
+-content_for :subheader_plus do
+  %a.navbarplus.fltrt{ :href => new_flow_system_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset' }
+
+.row-static
+  .doubleColumn
+    .doubleWide.halfHeight
+      =render :partial => 'systems/sub_systems',
+              :layout => 'layouts/widget_box',
+              :locals => { :system => @system }
+    .singleColumn.halfHeight
+      =render :partial => 'systems/super_systems',
+              :layout => 'layouts/widget_box',
+              :locals => { :system => @system }
+    .singleColumn.halfHeight
+      =render :partial => 'systems/transactions',
+              :layout => 'layouts/widget_box',
+              :locals => { :system => @system }
+      
+  .singleColumn
+    .singleWide.fullHeight
+      =render :partial => 'systems/show',
+              :layout => 'layouts/widget_box',
+              :locals => { :system => @system }

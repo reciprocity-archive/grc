@@ -1,0 +1,40 @@
+-content_for :modal_title do
+  -if f.object.new_record?
+    Create a new reference
+  -else
+    Edit reference
+
+.row-fluid
+  .span12{ :class => error_class(f, :title) }
+    =f.label :title, "Title"
+    =f.text_field :title, :class => 'input-large'
+    =error_messages_inline(f, :slug)
+
+%br
+.row-fluid
+  .span12{ :class => error_class(f, :link) }
+    =f.label :link, "URL"
+    =f.text_field :link, :class => 'input-large', :placeholder => 'https://www.example.com/xyz.pdf'
+    =error_messages_inline(f, :link)
+
+-#.group
+  =f.label :title
+  =f.text_field :title, :class => :text_field
+
+-#.group
+  =f.label :link
+  =f.text_field :link, :class => :text_field
+  %span.description https://www.example.com/xyz.pdf
+
+-#.group
+  =f.label :reviewed
+  =f.check_box :reviewed, :class => :check_box
+  %span.description Was this document reviewed?
+
+-#.group
+  =f.label :passed
+  =f.check_box :good, :class => :check_box
+
+-#.group
+  =f.label :document_descriptor_id
+  =f.collection_select :document_descriptor_id, DocumentDescriptor.all, :id, :display_name, {}, {:class => :collection}

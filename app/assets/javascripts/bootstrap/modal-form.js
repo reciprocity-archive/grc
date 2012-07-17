@@ -1,12 +1,12 @@
 !function($) {
-  
+
   "use strict"; // jshint ;_;
 
   /* MODAL_FORM PUBLIC CLASS DEFINITION
    * =============================== */
 
   var ModalForm = function ( element, options ) {
-    
+
     this.options = options;
     this.$element = $(element);
 
@@ -76,6 +76,51 @@
 
   // Default flash handler
   $(function() {
+    // Default form complete handler
+    $('body').on('ajax:complete', function(e, xhr, status) {
+      var data, data_k;
+      try {
+        // Parse and dispatch JSON object
+        data = JSON.parse(xhr.responseText);
+        $(e.target).trigger('ajax:json', [data, xhr]);
+      } catch (exc) {
+        // Dispatch as html
+        $(e.target).trigger('ajax:html', [xhr.responseText, xhr]);
+      }
+
+      if (!e.stopRedirect) {
+        // Maybe handle AJAX/JSON redirect or refresh
+        if (xhr.status == 278) {
+          // Handle 278 redirect (AJAX redirect)
+          window.location.assign(xhr.getResponseHeader('location'));
+        } else if (xhr.status == 279) {
+          // Handle 279 page refresh
+          window.location.assign(window.location.href);
+        }
+      }
+
+      if (!e.stopFlash) {
+        // Maybe handle AJAX flash messages
+        var flash_types = ["error", "alert", "notice", "warning"]
+          , type_i, message
+          , flash;
+
+        for (type_i in flash_types) {
+          message = xhr.getResponseHeader('x-flash-' + flash_types[type_i]);
+          message = JSON.parse(message);
+          if (message) {
+            if (!flash)
+              flash = {};
+            flash[flash_types[type_i]] = message;
+          }
+        }
+
+        if (flash) {
+          $(e.target).trigger('ajax:flash', flash);
+        }
+      }
+    });
+
     $('body').on('ajax:flash', function(e, flash) {
       var $target, $flash_holder// = this.$element.find('.flash')
         , type, ucase_type
@@ -116,46 +161,11 @@
       //e.stopPropagation();
     });
 
-    // Default form complete handler
-    $('body').on('ajax:complete', function(e, xhr, status) {
-      var data, data_k;
+    $('body').on('ajax:html', '.modal > form', function(e, html, xhr) {
+      $(this).find('.modal-body').html(html);
+    });
 
-      try {
-        // Parse and dispatch JSON object
-        data = JSON.parse(xhr.responseText);
-      } catch (exc) {
-        // Replace form body
-        $(e.target).find('.modal-body').html(xhr.responseText);
-      }
-
-      // Maybe handle AJAX/JSON redirect or refresh
-      if (xhr.status == 278) {
-        // Handle 278 redirect (AJAX redirect)
-        window.location.assign(xhr.getResponseHeader('location'));
-      } else if (xhr.status == 279) {
-        // Handle 279 page refresh
-        window.location.assign(window.location.href);
-      }
-
-      // Maybe handle AJAX flash messages
-      var flash_types = ["error", "alert", "notice", "warning"]
-        , type_i, message
-        , flash;
-
-      for (type_i in flash_types) {
-        message = xhr.getResponseHeader('x-flash-' + flash_types[type_i]);
-        message = JSON.parse(message);
-        if (message) {
-          if (!flash)
-            flash = {};
-          flash[flash_types[type_i]] = message;
-        }
-      }
-
-      if (flash) {
-        $(e.target).trigger('ajax:flash', flash);
-      }
+    $('body').on('ajax:json', function(e, data, xhr) {
     });
   });
-
 }(window.jQuery);

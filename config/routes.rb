@@ -112,11 +112,22 @@ CmsRails::Application.routes.draw do
 
   resources :systems, :as => 'flow_systems', :only => [:show, :new, :edit, :create, :update] do
     member do
+      get 'tooltip'
     end
   end
 
   resources :accounts, :as => 'flow_accounts'
-  resources :people, :as => 'flow_people'
+  resources :people, :as => 'flow_people' do
+    collection do
+      get 'list'
+    end
+  end
+
+  resources :documents, :as => 'flow_documents' do
+    collection do
+      get 'list'
+    end
+  end
 
   match 'programs_dash' => 'programs_dash#index'
   match 'quick/programs' => 'quick#programs'
@@ -125,6 +136,7 @@ CmsRails::Application.routes.draw do
   match 'quick/biz_processes' => 'quick#biz_processes'
   match 'quick/accounts' => 'quick#accounts'
   match 'quick/people' => 'quick#people'
+  match 'quick/systems' => 'quick#systems'
 
   match 'admin_dash' => 'admin_dash#index'
 

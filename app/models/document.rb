@@ -8,16 +8,21 @@ class Document < ActiveRecord::Base
   VALID_SCHEMES = ['http', 'https']
 
   validate :link do
-    if link.nil? || VALID_SCHEMES.include?(link.scheme)
-      true
-    else
-      errors.add(:link, "Scheme must be one of #{VALID_SCHEMES.join(', ')}")
+    begin
+      if link.nil? || VALID_SCHEMES.include?(link.scheme)
+        true
+      else
+        errors.add(:link, "scheme must be one of #{VALID_SCHEMES.join(', ')}")
+      end
+    rescue
+      errors.add(:link, "must be a valid URI")
     end
   end
 
   belongs_to :document_descriptor
 
-  validates :link,     :uniqueness => true, :allow_blank => true
+  validates :link,
+    :uniqueness => true, :allow_blank => true, :presence => true
 
   def display_name
     title

@@ -1,0 +1,17 @@
+.modal-header
+  %nav
+    =yield_content!(:modal_buttons)
+    %a.widgetbtn{ :'data-dismiss' => 'modal', :href => '#'}
+      %i.gcmsicon-x-grey
+  =yield_content!(:modal_title) || 'Add Object'
+
+.modal-body
+  =yield
+
+.modal-footer
+  .row-fluid
+    %nav.fltlft.txtlft.span3
+      %a.btn-large.btn-info{'data-dismiss' => 'modal', :href => '#'} Cancel
+    .span6
+    %nav.fltrt.txtrt.span3
+      %a.btn-large.btn-success{'data-dismiss' => 'modal', :href => '#'} Done

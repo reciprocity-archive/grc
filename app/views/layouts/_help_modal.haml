@@ -1,9 +1,14 @@
 .modal-header
-  %a.close{ :href => '#', :'data-dismiss' => 'modal' } x
-  %h3=yield_content!(:modal_title) || "Help"
+  %nav
+    %a.widgetbtn{ :'data-dismiss' => 'modal', :href => '#'}
+      %i.gcmsicon-x-grey
+  %h1=yield_content!(:modal_title) || "Help"
 
 .modal-body
   =yield
 
 .modal-footer
-  %a.close{ :href => '#', :'data-dismiss' => 'modal' } Close
+  .row-fluid
+    .span9
+    %nav.fltrt.txtrt.span3
+      %a.btn-large.btn-success{"data-dismiss" => "modal", :href => "#"} Close
