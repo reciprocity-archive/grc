@@ -29,10 +29,9 @@ jQuery(document).ready(function($) {
   // Listeners for initial tooltip mouseovers
   $('body').on('mouseover', '[data-toggle="tooltip"]', function(e) {
     if (!$(e.currentTarget).data('tooltip')) {
-      console.debug("tooltip");
       $(e.currentTarget)
         .tooltip()
-	.triggerHandler(e);
+        .triggerHandler(e);
     }
   });
 });

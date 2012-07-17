@@ -16,6 +16,20 @@ class PeopleController < ApplicationController
     render :layout => nil
   end
 
+  def list
+    @people = Person.where({})
+    if params[:s] && !params[:s].blank?
+      @people = @people.where(:name => params[:s])
+    end
+    respond_to do |format|
+      format.html { render :layout => nil }
+      format.json do
+        @people.include_root_in_json = false
+        render :json => @people
+      end
+    end
+  end
+
   def new
     @person = Person.new(params[:person])
 
@@ -34,6 +48,7 @@ class PeopleController < ApplicationController
     respond_to do |format|
       if @person.save
         flash[:notice] = "Successfully created a new person."
+        format.json { @person.include_root_in_json = false; render :json => @person }
         format.html { ajax_refresh }
       else
         flash[:error] = @person.errors.full_messages

@@ -1,0 +1,24 @@
+-content_for :modal_buttons do
+  %input.ui-corner-all.widgetsearch{ :type => 'text', :placeholder => 'Search' }
+
+-content_for :modal_title do
+  %h1 Add Reference
+  %h3 Select a reference
+
+%a{ :href => new_flow_document_path(:format => 'json'), :'data-toggle' => 'modal-ajax-listform', :'data-list-target' => '#listDocumentList' }
+  New
+
+%script{ :type => 'text/html', :data => { :title => '', :link => '', :descriptor => '' }}
+  %li
+    %a.btn.documentItem{ :'data-dismiss' => 'modal', :href => '#', :data => { :id => '<%= id %>', :title => '<%= title %>', :link => '<%= link %>', :descriptor => '<%= descriptor %>' }}
+      %i.gcmsicon-gears-black
+      %strong <%= title || link %>
+      %span <%= descriptor %>
+
+%ul.nav.nav-tabs.nav-stacked.itemlist#listDocumentList{ :'data-list-href' => list_flow_documents_path(:format => 'json') }
+  -documents.each do |document|
+    %li
+      %a.btn.referenceItem{ :'data-dismiss' => 'modal', :href => '#', :data => { :id => document.id, :title => document.title, :link => document.link, :descriptor => document.document_descriptor && document.document_descriptor.title }}
+        %i.gcmsicon-gears-black
+        %strong=document.title || document.link
+        %span=document.document_descriptor && document.document_descriptor.title

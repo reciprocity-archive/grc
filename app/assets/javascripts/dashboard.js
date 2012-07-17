@@ -4,11 +4,13 @@
  *= require jquery-ui
  *= require bootstrap
  *= require spin.min
+ *= require tmpl
  *= require_self
  */
 
-// Before submitting, remove any disabled form elements
+// Initialize delegated event handlers
 jQuery(function($) {
+  // Before submitting, remove any disabled form elements
   $('body').on('submit', 'form[data-remote]', function(e, xhr, req) {
     $(this)
       .find('.disabled input, .disabled select, .disabled textarea')
@@ -16,40 +18,40 @@ jQuery(function($) {
         $(el).attr('name', '');
       });
   });
-});
 
-// On-demand creation of datepicker() objects
-jQuery(function($) {
+  // On-demand creation of datepicker() objects
   $('body').on('focus', '[data-toggle="datepicker"]', function(e) {
     var $this = $(this);
 
     if (!$this.data('datepicker'))
       $(this).datepicker({changeMonth: true, changeYear: true, dateFormat: 'yy-mm-dd'});
   });
-});
 
-// Turn the arrow when tree node content is shown
-jQuery(function($) {
-  $('body').on('show', 'ul.slugtree .collapse', function(e) {
-    $(this).closest('li').find('.expander').eq(0).addClass('in');
-  });
-  $('body').on('hide', 'ul.slugtree .collapse', function(e) {
-    $(this).closest('li').find('.expander').eq(0).removeClass('in');
-  });
-});
+  // Setup program-select inputs to prefill slug field
+  $('body').on('change', 'select[name$="[program_id]"]', function(e) {
+    var $this = $(this)
+      , $form = $(this).closest('form')
+      , $option = $(this).find('option[value="' + $(this).val() + '"]')
+      , $slugfield = $form.find('input[name$="[slug]"]').first()
+      , slugsteps = $slugfield.val().split(/-/);
 
-// expandAll and shrinkAll buttons
-jQuery(function($) {
+    $slugfield.val([$option.text()].concat(slugsteps.slice(1)).join("-"));
+  });
+
+  // Turn the arrow when tree node content is shown
+  $('body').on('click', '[data-toggle="collapse"]', function(e) {
+    $(this).find('.expander').eq(0).toggleClass('in');
+  });
+
+  // expandAll and shrinkAll buttons
   $('body').on('click', '.tabbable a.expandAll', function(e) {
     $(this).closest('.tabbable').find('.tab-pane:visible').find('.collapse').collapse({ toggle: false }).collapse('show');
   });
   $('body').on('click', '.tabbable a.shrinkAll', function(e) {
     $(this).closest('.tabbable').find('.tab-pane:visible').find('.collapse').collapse({ toggle: false }).collapse('hide');
   });
-});
 
-// Tabs via AJAX on 'Quick Find'
-jQuery(function($) {
+  // Tabs via AJAX on 'Quick Find'
   $('body').on('show', '.tabbable ul.nav-tabs > li > a', function(e, href) {
     var $tab = $(e.target)
       , loaded = $tab.data('tab-loaded')
@@ -94,13 +96,21 @@ jQuery(function($) {
     }
   });
 
-  // Trigger first tab immediately
-  $('.tabbable > ul > li:first-child > a').tab('show');
-});
-
-// Quick Search
-jQuery(function($) {
-  $('body').on('keypress', 'nav > .widgetsearch', function (e) {
+  // Initialize Quick Search handlers
+  $('body').on('keypress', '.modal nav > .widgetsearch', function (e) {
+    if (e.which == 13) {
+      var $this = $(this)
+        , $list = $this.closest('.modal').find('.modal-body > ul')
+        , href = $list.data('list-href') + '?' + $.param({ s: $this.val() });
+      $.get(href, function(data) {
+        $list.empty();
+        $.each(data, function(i, item) {
+          $list.tmpl_additem(item);
+        });
+      });
+    }
+  });
+  $('body').on('keypress', '.WidgetBox nav > .widgetsearch', function (e) {
     if (e.which == 13) {
       var $this = $(this)
         , $tab = $this.closest('.WidgetBox').find('ul.nav-tabs > li.active > a')
@@ -117,7 +127,18 @@ jQuery(function($) {
       $box.load(href, function() { clear_selection($this[0], true); });
     }
   });
+
+  $('body').on('click', '[data-toggle="list-remove"]', function(e) {
+    $(this).closest('li').remove();
+    e.preventDefault();
+  });
 });
+
+jQuery(function($) {
+  // Trigger first tab immediately
+  $('.tabbable > ul > li:first-child > a').tab('show');
+});
+
 
 // Regulation mapping
 function init_mapping() {
