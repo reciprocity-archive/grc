@@ -8,6 +8,7 @@
     %i.gcmsicon-lock-grey
 
 .programinformation
+
   .toolbar-widget
     %a.btn.btn-warning{ :href => import_flow_program_path(@program) }
       %i.gcmsicon-import-white
@@ -19,55 +20,76 @@
       %a.btn.btn-warning{ :href => '#create-cycle-modal', :'data-toggle' => 'modal-form' }
         %i.gcmsicon-play-white
         Start Audit
+
   %hr.hr-widget
 
-  =program.title
-  \|
-  =program.slug
-  \|
-  =program.company? ? 'Company' : 'Regulation'
+  .row-fluid
+    .span12
+      .span4
+        %label Short Code
+        %input.span12{:disabled => "disabled", :type => "text", :value => program.slug }
+      .span8
+        %label Type
+        %select.span12{:disabled => "disabled" }
+          %option{ :selected => 'selected' }
+            =program.company? ? 'Company' : 'Regulation'
+  .row-fluid
+    .span12
+      %label Full Title
+      %input.span12{:disabled => "disabled", :type => "text", :value => program.title }
+  .row-fluid
+    .span12
+      %label Description
+      %textarea#textarea.span12{:disabled => "disabled"}=program.description
 
-  %h3 Description
+  -#%hr.hr-widget
+    =program.title
+    \|
+    =program.slug
+    \|
+    =program.company? ? 'Company' : 'Regulation'
 
-  .item
-    =program.description
+    %h3 Description
 
-  .item
-    Created:
-    =display_time(program.created_at)
-  .item
-    Updated:
-    =display_time(program.updated_at)
+    .item
+      =program.description
 
-  %h3 Sections
-  .item
-    Done: 
-    =@stats[:sections_done_count]
-  .item
-    N/A: 
-    =@stats[:sections_na_count]
-  .item
-    Not Done: 
-    =@stats[:sections_undone_count]
+    .item
+      Created:
+      =display_time(program.created_at)
+    .item
+      Updated:
+      =display_time(program.updated_at)
 
-  %h3 Controls
-  .item
-    Controls: 
-    =@stats[:controls_count]
+    %h3 Sections
+    .item
+      Done: 
+      =@stats[:sections_done_count]
+    .item
+      N/A: 
+      =@stats[:sections_na_count]
+    .item
+      Not Done: 
+      =@stats[:sections_undone_count]
 
-  .item
-    Parented Controls: 
-    =@stats[:controls_parented_count]
+    %h3 Controls
+    .item
+      Controls: 
+      =@stats[:controls_count]
 
-#create-cycle-modal.modal.hide.fade
-  -cycle = Cycle.new(:program_id => program.id)
-  =form_for cycle, :url => flow_cycles_path, :method => :post, :remote => true, :html => {:class => :form} do |f|
-    .modal-header
-      %a.close{ "data-dismiss" => "modal" } x
-      %h1 Edit Audit Cycle
-    .modal-body
-      =render :partial => 'cycles/form',
-              :locals  => { :f => f }
-    .modal-footer
-      =f.submit pat(:save)
-      =f.submit pat(:cancel), :type => 'reset'
+    .item
+      Parented Controls: 
+      =@stats[:controls_parented_count]
+
+  #create-cycle-modal.modal.hide.fade
+    -cycle = Cycle.new(:program_id => program.id)
+    =form_for cycle, :url => flow_cycles_path, :method => :post, :remote => true, :html => {:class => :form} do |f|
+      .modal-header
+        %a.close{ "data-dismiss" => "modal" } x
+        %h1 Edit Audit Cycle
+      .modal-body
+        =render :partial => 'cycles/form',
+                :locals  => { :f => f }
+      .modal-footer
+        =f.submit pat(:save)
+        =f.submit pat(:cancel), :type => 'reset'

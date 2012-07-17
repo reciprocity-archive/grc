@@ -30,6 +30,9 @@ class ProgramsController < ApplicationController
 
   def edit
     @program = Program.find(params[:id])
+    if @program.previous_version
+      @program = @program.previous_version
+    end
 
     render :layout => nil
   end
@@ -64,13 +67,14 @@ class ProgramsController < ApplicationController
   def update
     @program = Program.find(params[:id])
 
-    @program.source_document ||= Document.create
-    @program.source_website ||= Document.create
+    #@program.source_document ||= Document.create
+    #@program.source_website ||= Document.create
 
     # Accumulate results
     results = []
-    results << @program.source_document.update_attributes(params[:program].delete("source_document") || {})
-    results << @program.source_website.update_attributes(params[:program].delete("source_website") || {})
+    #results << @program.source_document.update_attributes(params[:program].delete("source_document") || {})
+    #results << @program.source_website.update_attributes(params[:program].delete("source_website") || {})
+    params[:program][:company] = params[:program].delete(:type) == 'company'
 
     # Save if doc updated
     @program.save if @program.changed?

@@ -7,12 +7,12 @@
 .row-fluid
   .span6
     .row-fluid
-      .span2{ :class => error_class(f, :slug) }
+      .span4{ :class => error_class(f, :slug) }
         %label{:for => "program-slug"} Short Code
-        %input#program-slug.input-supermini{:name => "program[slug]", :placeholder => "SOX", :type => "text", :value => f.object.slug}
+        %input#program-slug.span12{:name => "program[slug]", :placeholder => "SOX", :type => "text", :value => f.object.slug}
         =error_messages_inline(f, :slug)
 
-      .span2.disabled{ :class => error_class(f, :version) }
+      -#.span2.disabled{ :class => error_class(f, :version) }
         %label{:for => "program-version"} Version
         %input#program-version.input-supermini{:name => "program[version]", :placeholder => "SOX", :type => "text", :name => "program[version]", :value => nil}
         =error_messages_inline(f, :version)
