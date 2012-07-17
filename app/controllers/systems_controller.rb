@@ -24,7 +24,7 @@ class SystemsController < ApplicationController
 
   def tooltip
     @system = System.find(params[:id])
-    render :layout => nil
+    render :layout => '_tooltip', :locals => { :system => @system }
   end
 
   def new
