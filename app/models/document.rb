@@ -35,6 +35,13 @@ class Document < ActiveRecord::Base
     link
   end
 
+  def link=(value)
+    if !VALID_SCHEMES.include?(value.split(':')[0])
+      value = "http://#{value}"
+    end
+    write_attribute(:link, value)
+  end
+
   is_versioned_ext
 
   def complete?
