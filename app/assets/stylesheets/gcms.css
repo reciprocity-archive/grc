@@ -2123,3 +2123,32 @@ background:#CED1D7;
 	height:30px;
 	line-height:30px;
 }
+
+.navbarplus {
+position:relative;
+top:-5px;
+}
+
+.navbarplus {
+	background-image: url("../images/navbarplus_off.png");
+	display: inline-block;
+	position:relative;
+	top:-5px;
+	width: 40px;
+	height: 57px;
+	margin:0;
+	padding:0;
+	background-position: 0px 0px;
+	background-repeat: no-repeat;
+}
+
+.navbarplus:hover {
+	background-image: url("../images/navbarplus_on.png");
+	display: inline-block;
+	width: 40px;
+	height: 57px;
+	margin:0;
+	padding:0;
+	background-position: 0px 0px;
+	background-repeat: no-repeat;
+}
