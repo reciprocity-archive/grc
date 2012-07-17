@@ -1,0 +1,18 @@
+-content_for :tooltip_title do
+  %h3 System Information
+
+=system.title
+\|
+=system.slug
+
+%h3 Description
+
+.item
+  =system.description
+
+.item
+  Created:
+  =display_time(system.created_at)
+.item
+  Updated:
+  =display_time(system.updated_at)

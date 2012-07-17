@@ -1,0 +1,13 @@
+-if @systems.empty?
+  .no-results
+    No results found
+-else
+  %ul.nav.nav-tabs.nav-stacked
+    -@systems.each do |system|
+      %li
+        %a{ :href => flow_system_path(system), :'data-popover-href' => tooltip_flow_system_path(system), :'data-popover-trigger' => 'sticky-hover' }
+          %h3=system.slug
+          %p.oneline
+            %strong=system.title
+            &nbsp;
+            =system.description

@@ -1,0 +1,20 @@
+-content_for :widget_title do
+  Systems that rely on this System
+
+-content_for :widget_help, 'system_super_systems'
+
+-content_for :widget_buttons do
+  /%a.btn.widgetbtn{ :href => new_flow_system_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :title => 'Create New System' } Add System
+  %input.ui-corner-all.widgetsearch.clear-value(type='text' placeholder='Search')
+
+.description
+  .content
+    /-system.super_systems.all.each do |item|
+    -System.all.each do |item|
+      %div
+        %span.prefix
+          =item.slug
+        =item.title
+      -if !item.description.blank?
+        %textarea(disabled='disabled')
+          =item.description

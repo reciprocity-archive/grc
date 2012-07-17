@@ -48,4 +48,12 @@ class QuickController < ApplicationController
     end
     @people = @people.all
   end
+
+  def systems
+    @systems = System
+    if params[:s]
+      @systems = @systems.search(params[:s])
+    end
+    @systems = @systems.all
+  end
 end
