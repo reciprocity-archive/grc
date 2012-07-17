@@ -93,3 +93,63 @@
       .modal-footer
         =f.submit pat(:save)
         =f.submit pat(:cancel), :type => 'reset'
+
+%hr
+
+.row-fluid
+  .span12#referenceList
+    %h3
+      References
+      %a.btn.btn-blue.addbtn.fltrt{:href => list_flow_documents_path, :'data-toggle' => 'modal-ajax-list', :'data-modal-reset' => 'reset', :'data-list-target' => '#referenceList' } Add
+    %script{ :type => 'text/html', :data => { :title => '', :link => '', :descriptor => '' }}
+      %li.controlSlot{ :'data-id' => '<%= id %>' }
+        %input{ :type => 'hidden', :name => '', :value => '<%= id %>' }
+        %a{:href => "#", :'data-toggle' => 'list-remove'}
+          .circle.fltrt
+            %i.gcmssmallicon-dash-white
+        %span.controls-group <%= title || link %>
+        %br
+        %span.controls-subgroup <%= descriptor %>
+        %br
+    %ul.referenceList
+      -#program.documents.all.each do |item|
+      -Document.first(3).each do |item|
+        %li.controlSlot{ :'data-id' => item.id }
+          %input{ :type => 'hidden', :name => '', :value => item.id }
+          %a{:href => "#", :'data-toggle' => 'list-remove'}
+            .circle.fltrt
+              %i.gcmssmallicon-dash-white
+          %span.controls-group=item.title || item.link
+          %br
+          %span.controls-subgroup=item.document_descriptor && item.document_descriptor.title
+          %br
+
+%hr
+
+.row-fluid
+  .span12#peopleList
+    %h3
+      People
+      %a.btn.btn-blue.addbtn.fltrt{:href => list_flow_people_path, :'data-toggle' => 'modal-ajax-list', :'data-modal-reset' => 'reset', :'data-list-target' => '#peopleList' } Add
+    %script{ :type => 'text/html', :data => { :username => '', :name => '' }}
+      %li.controlSlot{ :'data-id' => '<%= id %>' }
+        %input{ :type => 'hidden', :name => '', :value => '<%= id %>' }
+        %a{ :href => '#', :'data-toggle' => 'list-remove' }
+          .circle.fltrt
+            %i.gcmssmallicon-dash-white
+        %span.controls-group <%= username %>
+        %br
+        %span.controls-subgroup <%= name %>
+        %br
+    %ul
+      -#program.persons.all.each do |item|
+      -Person.first(3).each do |item|
+        %li.controlSlot{ :'data-id' => item.id }
+          %input{ :type => 'hidden', :name => '', :value => item.id }
+          %a{:href => "#", :'data-toggle' => 'list-remove'}
+            .circle.fltrt
+              %i.gcmssmallicon-dash-white
+          %span.controls-group=item.username
+          %br
+          %span.controls-subgroup=item.name
+          %br
