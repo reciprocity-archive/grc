@@ -5,15 +5,10 @@
     Edit system or business process
 
 .row-fluid
-  .span1{ :class => error_class(f, :slug) }
+  .span2{ :class => error_class(f, :slug) }
     =f.label :slug, "Code"
-    =f.text_field :slug, :class => 'input-supermini'
+    =f.text_field :slug, :class => 'span12'
     =error_messages_inline(f, :slug)
-
-  .span4{ :class => error_class(f, :title) }
-    =f.label :title
-    =f.text_field :title, :class => 'input-large'
-    =error_messages_inline(f, :title)
 
   .span2.disabled{ :class => error_class(f, :version) }
     =f.label :version
@@ -24,6 +19,20 @@
     =f.label :owner_id
     =f.collection_select :owner_id, Person.all, :id, :display_name, {:include_blank => true}, {}
     =error_messages_inline(f, :owner)
+
+  .span3{ :class => error_class(f, :infrastructure) }
+    =f.label 'Type'
+    %select.span12{ :name => 'system[type]' }
+      %option{ :value => 'none', :selected => f.object.infrastructure || 'selected' } None
+      %option{ :value => 'infrastructure', :selected => f.object.infrastructure && 'selected' } Infrastructure
+    =error_messages_inline(f, :infrastructure)
+
+%br
+.row-fluid
+  .span12{ :class => error_class(f, :title) }
+    =f.label :title
+    =f.text_field :title, :class => 'span12'
+    =error_messages_inline(f, :title)
 
 %br
 .row-fluid
@@ -37,7 +46,7 @@
     =error_messages_inline(f, :description)
 
 %br
-.row-fluid
+-#.row-fluid
   .span12{ :class => error_class(f, :url) }
     =f.label :url
     =f.text_field :url, :class => 'span12'

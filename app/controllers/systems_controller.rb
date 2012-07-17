@@ -34,6 +34,11 @@ class SystemsController < ApplicationController
   end
 
   def create
+    if params[:system]
+      params[:system][:infrastructure] = params[:system][:type] == 'infrastructure'
+      params[:system].delete(:type)
+    end
+
     @system = System.new(params[:system])
 
     respond_to do |format|
@@ -48,6 +53,11 @@ class SystemsController < ApplicationController
   end
 
   def update
+    if params[:system]
+      params[:system][:infrastructure] = params[:system][:type] == 'infrastructure'
+      params[:system].delete(:type)
+    end
+
     @system = System.new(params[:id])
 
     respond_to do |format|
