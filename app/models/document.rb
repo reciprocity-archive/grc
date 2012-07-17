@@ -31,6 +31,8 @@ class Document < ActiveRecord::Base
   def link
     link = read_attribute(:link)
     URI(link) if !link.blank?
+  rescue
+    link
   end
 
   is_versioned_ext
