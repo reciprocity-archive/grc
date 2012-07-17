@@ -2,6 +2,7 @@
 class System < ActiveRecord::Base
   include AuthoredModel
   include SluggedModel
+  include SearchableModel
 
   attr_accessible :title, :slug, :description, :infrastructure
 
