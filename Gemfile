@@ -60,6 +60,8 @@ gem 'prawn' # PDF generation
 
 gem 'paper_trail', '~> 2'
 
+gem 'awesome_nested_set'
+
 group(:development, :test) do
 
   # Uncomment this if you want to use rspec for testing your application
