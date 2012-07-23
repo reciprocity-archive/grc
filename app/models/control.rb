@@ -8,6 +8,8 @@ class Control < ActiveRecord::Base
   include FrequentModel
   include SearchableModel
 
+  CATEGORY_TYPE_ID = 100
+
   before_save :upcase_slug
 
   validates :slug, :title, :program,
@@ -52,6 +54,9 @@ class Control < ActiveRecord::Base
 
   has_many :implementing_controls, :through => :implementing_control_controls, :source => :control
   has_many :implementing_control_controls, :class_name => "ControlControl", :foreign_key => "implemented_control_id"
+
+  has_many :categorizations, :as => :stuff
+  has_many :categories, :through => :categorizations, :as => :stuff
 
   is_versioned_ext
 
