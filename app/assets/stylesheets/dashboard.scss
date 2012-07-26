@@ -4,6 +4,14 @@
  *= require gcms
  */
 
+.flare {
+  -webkit-transition: background-color 2s ease-out;
+}
+
+.flaretemp {
+  background-color: #d44;
+}
+
 .tab-pane {
   overflow: auto;
 }
