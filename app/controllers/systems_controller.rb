@@ -102,7 +102,10 @@ class SystemsController < ApplicationController
     params[:items].each do |_, item|
       # Do whatever is needed with item-forms
       subsystem = System.find(item[:id])
-      @system.sub_system_systems << SystemSystem.new(:child => subsystem)
+      # Don't allow adding self as a sub system
+      if subsystem != @system
+        @system.sub_system_systems << SystemSystem.new(:child => subsystem)
+      end
     end
 
     @system.sub_systems.reload

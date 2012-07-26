@@ -11,11 +11,13 @@ class System < ActiveRecord::Base
     :uniqueness => { :message => "must be unique" }
 
   # Many to many with Control
-  has_many :system_controls
+  has_many :system_controls,
+    :dependent => :destroy
   has_many :controls, :through => :system_controls, :order => :slug
 
   # Many to many with Section
-  has_many :system_sections
+  has_many :system_sections,
+    :dependent => :destroy
   has_many :sections, :through => :system_sections, :order => :slug
 
   # Many to many with BizProcess
