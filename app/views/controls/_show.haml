@@ -49,3 +49,16 @@
           =link_to sec.slug, section_path(sec)
           =sec.title
 
+%hr
+
+.row-fluid
+  .span12#referenceList
+    =render :partial => 'documents/object_list',
+            :locals  => { :object => control }
+
+%hr
+
+.row-fluid
+  .span12#peopleList
+    =render :partial => 'people/object_list',
+            :locals  => { :object => control }

@@ -29,9 +29,15 @@ class System < ActiveRecord::Base
   has_many :system_persons
   has_many :persons, :through => :system_persons
 
+  has_many :object_people, :as => :personable
+  has_many :people, :through => :object_people
+
   # Relevant documentation
-  has_many :documents, :through => :document_systems
+  #has_many :documents, :through => :document_systems
   has_many :document_systems
+
+  has_many :object_documents, :as => :documentable
+  has_many :documents, :through => :object_documents
 
   is_versioned_ext
 

@@ -54,14 +54,54 @@
     }
   };
 
+  $.tmpl.render_items = function($list, list) {
+    var $tmpl = $list.siblings('script[type="text/html"]').add($list.find('> script[type="text/html"]'))
+      , defaults = $.extend({}, $tmpl.data(), $list.data())
+      , output = [];
+    $.each(list, function(i, data) {
+      output.push($tmpl.tmpl($.extend(defaults, data)));
+    });
+    return output.join('');
+  };
+
   $.fn.tmpl_additem = function(data) {
+    return this.tmpl_additems([data]);
+  };
+
+  $.fn.tmpl_additems = function(list) {
     return this.each(function() {
       var $this = $(this)
-        , $tmpl = $this.siblings('script[type="text/html"]').add($this.find('> script[type="text/html"]'))
-        , locals = $.extend($tmpl.data(), data)
-        , output = $tmpl.tmpl(locals);
-      ($this.is('ul') ? $this : $this.find('> ul')).append(output);
+        , $output = $($.tmpl.render_items($this, list));
+      ($this.is('ul') ? $this : $this.find('> ul')).append($output);
     });
   };
 
+  $.fn.tmpl_mergeitems = function(list) {
+    return this.each(function() {
+      var $this = $(this)
+        , $el;
+
+      $.each(list, function(i, data) {
+        if (data.id)
+          $el = $this.find('> [data-id="' + data.id + '"]');
+        if (!$el.length) {
+          $el = $($.tmpl.render_items($this, [data]));
+          $this.append($el);
+        }
+
+        $el.removeClass('flare').addClass('flaretemp');
+        setTimeout(function() {
+          $el.removeClass('flaretemp').addClass('flare');
+        }, 100);
+      });
+    });
+  };
+
+  $.fn.tmpl_setitems = function(list) {
+    return this.each(function() {
+      var $this = $(this)
+        , output = $.tmpl.render_items($this, list);
+      ($this.is('ul') ? $this : $this.find('> ul')).html(output);
+    });
+  };
 }(jQuery);

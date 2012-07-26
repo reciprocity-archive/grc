@@ -120,12 +120,16 @@ CmsRails::Application.routes.draw do
   resources :people, :as => 'flow_people' do
     collection do
       get 'list'
+      get 'list_form'
+      post 'list_save'
     end
   end
 
   resources :documents, :as => 'flow_documents' do
     collection do
       get 'list'
+      get 'list_form'
+      post 'list_save'
     end
   end
 

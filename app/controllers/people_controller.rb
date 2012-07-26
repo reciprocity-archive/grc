@@ -30,6 +30,26 @@ class PeopleController < ApplicationController
     end
   end
 
+  def list_form
+    @object = params[:object_type].classify.constantize.find(params[:object_id])
+    @people = Person.where({})
+    render :layout => nil
+  end
+
+  def list_save
+    @object = params[:object_type].classify.constantize.find(params[:object_id])
+    @object.people.clear
+
+    params[:items].each do |_, item|
+      person = Person.find(item[:id])
+      role = item[:role] == 'none' ? nil : item[:role]
+      @object.object_people << ObjectPerson.new(:person => person, :role => role)
+    end
+
+    @object.object_people.include_root_in_json = false
+    render :json => @object.object_people.all.map(&:as_json_with_role_and_person)
+  end
+
   def new
     @person = Person.new(params[:person])
 

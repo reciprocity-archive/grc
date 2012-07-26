@@ -99,14 +99,14 @@ jQuery(function($) {
   // Initialize Quick Search handlers
   $('body').on('keypress', '.modal nav > .widgetsearch', function (e) {
     if (e.which == 13) {
+      // If this input is within a form, don't submit the form
+      e.preventDefault();
+
       var $this = $(this)
-        , $list = $this.closest('.modal').find('.modal-body > ul')
+        , $list = $this.closest('.modal').find('.modal-body ul[data-list-href]')
         , href = $list.data('list-href') + '?' + $.param({ s: $this.val() });
       $.get(href, function(data) {
-        $list.empty();
-        $.each(data, function(i, item) {
-          $list.tmpl_additem(item);
-        });
+        $list.tmpl_setitems(data);
       });
     }
   });
@@ -129,14 +129,34 @@ jQuery(function($) {
   });
 
   $('body').on('click', '[data-toggle="list-remove"]', function(e) {
-    $(this).closest('li').remove();
     e.preventDefault();
+    $(this).closest('li').remove();
+  });
+
+  $('body').on('click', '[data-toggle="list-select"]', function(e) {
+    e.preventDefault();
+
+    var $li = $(this).closest('li')
+      , target = $li.closest('ul').data('list-target')
+
+    if (target) {
+      $(target).tmpl_mergeitems([$(this).data()]);
+    }
   });
 });
 
 jQuery(function($) {
-  // Trigger first tab immediately
-  $('.tabbable > ul > li:first-child > a').tab('show');
+  // Onload trigger tab with 'active' class or default to first tab
+  $('.tabbable > ul').each(function(i, el) {
+    var $tab = $(this).find('> li.active');
+    if (!$tab.length)
+      $tab = $(this).find('> li:first-child');
+    $tab
+      .removeClass('active')
+      .find('> a')
+      .tab('show');
+  });
+  //$('.tabbable > ul > li:first-child > a').tab('show');
 });
 
 

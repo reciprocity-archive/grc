@@ -47,4 +47,8 @@ class Document < ActiveRecord::Base
   def complete?
     !link.nil? && !link.to_s.blank?
   end
+
+  def descriptor
+    (document_descriptor && document_descriptor.title) || ''
+  end
 end

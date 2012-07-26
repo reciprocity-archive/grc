@@ -1,0 +1,62 @@
+-content_for :modal_buttons do
+  %input.ui-corner-all.widgetsearch{ :type => 'text', :placeholder => 'Search' }
+
+-content_for :modal_title do
+  %h1 Add Reference
+  %h3 Select a reference
+
+.row-fluid
+  .span6
+    %h3 References for this object
+
+    %script{ :type => 'text/html', :data => { :title => '', :link => '', :descriptor => '' }}
+      %li{ :'data-id' => '<%= id %>' }
+        .span12.btn.documentItem{ :href => '#', :data => { :id => '<%= id %>', :title => '<%= title %>', :link => '<%= link %>', :descriptor => '<%= descriptor %>' }}
+          %i.gcmsicon-gears-black
+          %a{:href => "#", :'data-toggle' => 'list-remove'}
+            .circle.fltrt
+              %i.gcmssmallicon-dash-white
+
+          %strong <%= title || link %>
+          %span <%= descriptor %>
+          %input(type='hidden' name='items[<%= id %>][id]' value='<%= id %>')
+          -#%select(name="items[<%= id %>][role]")
+            %option(value='none') None
+            %option(value='owner') Owner
+
+    %ul.itemlist#listObjectDocumentList
+      -@object.object_documents.each do |object_document|
+        -document = object_document.document
+        %li.controlSlot{ :'data-id' => document.id }
+          .arrowcontrols-group{ :href => '#', :data => { :id => document.id, :title => document.title, :link => document.link, :descriptor => document.document_descriptor && document.document_descriptor.title }}
+            %a{:href => "#", :'data-toggle' => 'list-remove'}
+              .circle.fltrt
+                %i.gcmssmallicon-dash-white
+            %strong=document.title || document.link
+            %span=document.document_descriptor && document.document_descriptor.title
+            %input(type='hidden' name="items[#{document.id}][id]" value="#{document.id}")
+            -#%select(name="items[#{person.id}][role]")
+              %option(value='none'){ :selected => object_person.role.nil? } None
+              %option(value='owner'){ :selected => object_person.role == 'owner' } Owner
+
+  .span6
+    %h3
+      Select a reference to add
+      %a.btn.btn-blue.addbtn.fltrt{ :href => new_flow_document_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-list-target' => '#listDocumentList' }
+        New Reference
+
+    %script{ :type => 'text/html' }
+      %li
+        .btn.documentItem{ :'data-toggle' => 'list-select', :href => '#', :data => { :id => '<%= id %>', :title => '<%= title %>', :link => '<%= link %>', :descriptor => '<%= descriptor %>' }}
+          %i.gcmsicon-gears-black
+          %strong <%= title || link %>
+          %span <%= descriptor %>
+
+    %ul.nav.nav-tabs.nav-stacked.itemlist#listDocumentList{ :'data-list-href' => list_flow_documents_path(:format => 'json'), :'data-list-target' => '#listObjectDocumentList'}
+      -@documents.each do |document|
+        %li
+          %a.btn.referenceItem{ :'data-toggle' => 'list-select', :href => '#', :data => { :id => document.id, :title => document.title, :link => document.link, :descriptor => document.document_descriptor && document.document_descriptor.title }}
+            %i.gcmsicon-gears-black
+            %strong=document.title || document.link
+            %span=document.document_descriptor && document.document_descriptor.title
+
