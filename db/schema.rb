@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120615190103) do
+ActiveRecord::Schema.define(:version => 20120717225437) do
 
   create_table "accounts", :force => true do |t|
     t.string   "username"
@@ -115,6 +115,8 @@ ActiveRecord::Schema.define(:version => 20120615190103) do
   end
 
   add_index "control_controls", ["control_id", "implemented_control_id"], :name => "index_control_controls_uniqueness", :unique => true
+  add_index "control_controls", ["control_id"], :name => "index_control_controls_on_control_id"
+  add_index "control_controls", ["implemented_control_id"], :name => "index_control_controls_on_implemented_control_id"
 
   create_table "control_document_descriptors", :force => true do |t|
     t.integer  "control_id",             :null => false
@@ -220,6 +222,32 @@ ActiveRecord::Schema.define(:version => 20120615190103) do
   end
 
   add_index "documents", ["document_descriptor_id"], :name => "index_documents_on_document_descriptor_id"
+
+  create_table "object_documents", :force => true do |t|
+    t.string   "role"
+    t.text     "notes"
+    t.integer  "document_id",       :null => false
+    t.integer  "documentable_id",   :null => false
+    t.string   "documentable_type", :null => false
+    t.integer  "modified_by_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  add_index "object_documents", ["documentable_type", "documentable_id"], :name => "index_object_documents_on_documentable_type_and_documentable_id"
+
+  create_table "object_people", :force => true do |t|
+    t.string   "role"
+    t.text     "notes"
+    t.integer  "person_id",       :null => false
+    t.integer  "personable_id",   :null => false
+    t.string   "personable_type", :null => false
+    t.integer  "modified_by_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "object_people", ["personable_type", "personable_id"], :name => "index_object_people_on_personable_type_and_personable_id"
 
   create_table "people", :force => true do |t|
     t.string   "username",       :null => false
