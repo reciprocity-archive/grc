@@ -37,7 +37,7 @@ class CopyBizProcessesToSystems < ActiveRecord::Migration
           :modified_by_id => bps.modified_by_id,
           :created_at => bps.created_at,
           :updated_at => bps.updated_at
-        )
+        ) if bps.section
       end
 
       SystemSystem.reset_column_information
