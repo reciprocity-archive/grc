@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120717225437) do
+ActiveRecord::Schema.define(:version => 20120724181647) do
 
   create_table "accounts", :force => true do |t|
     t.string   "username"
@@ -324,15 +324,26 @@ ActiveRecord::Schema.define(:version => 20120717225437) do
     t.datetime "updated_at"
   end
 
+  create_table "system_systems", :force => true do |t|
+    t.integer  "parent_id",      :null => false
+    t.integer  "child_id",       :null => false
+    t.string   "type"
+    t.integer  "order"
+    t.integer  "modified_by_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
   create_table "systems", :force => true do |t|
-    t.string   "title",          :null => false
-    t.string   "slug",           :null => false
-    t.boolean  "infrastructure", :null => false
+    t.string   "title",                             :null => false
+    t.string   "slug",                              :null => false
+    t.boolean  "infrastructure",                    :null => false
     t.text     "description"
     t.integer  "owner_id"
     t.integer  "modified_by_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_biz_process", :default => false
   end
 
   add_index "systems", ["slug"], :name => "index_systems_on_slug", :unique => true
@@ -344,6 +355,15 @@ ActiveRecord::Schema.define(:version => 20120717225437) do
     t.integer  "modified_by_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "transactions", :force => true do |t|
+    t.string   "title",          :null => false
+    t.text     "description"
+    t.integer  "system_id"
+    t.integer  "modified_by_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "versions", :force => true do |t|

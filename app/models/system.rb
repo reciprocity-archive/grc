@@ -39,6 +39,20 @@ class System < ActiveRecord::Base
   has_many :object_documents, :as => :documentable
   has_many :documents, :through => :object_documents
 
+  has_many :sub_system_systems,
+    :class_name => 'SystemSystem', :foreign_key => 'parent_id',
+    :dependent => :destroy
+  has_many :sub_systems,
+    :through => :sub_system_systems, :source => 'child'
+
+  has_many :super_system_systems,
+    :class_name => 'SystemSystem', :foreign_key => 'child_id',
+    :dependent => :destroy
+  has_many :super_systems,
+    :through => :super_system_systems, :source => 'parent'
+
+  has_many :transactions
+
   is_versioned_ext
 
   # Which systems can be attached to a control
