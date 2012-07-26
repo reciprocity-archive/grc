@@ -65,4 +65,33 @@ class ControlsController < ApplicationController
   def index
     @controls = Control.all
   end
+
+  def sections
+    @control = Control.find(params[:id])
+    @sections =
+      @control.sections.all +
+      @control.implemented_controls.includes(:sections).map(&:sections).flatten
+    @sections.sort_by(&:slug_split_for_sort)
+    render :layout => nil, :locals => { :sections => @sections }
+  end
+
+  def implemented_controls
+    @control = Control.find(params[:id])
+    @controls = @control.implemented_controls
+    if params[:s]
+      @controls = @controls.search(params[:s])
+    end
+    @controls.all.sort_by(&:slug_split_for_sort)
+    render :action => 'controls', :layout => nil, :locals => { :controls => @controls }
+  end
+
+  def implementing_controls
+    @control = Control.find(params[:id])
+    @controls = @control.implementing_controls
+    if params[:s]
+      @controls = @controls.search(params[:s])
+    end
+    @controls.all.sort_by(&:slug_split_for_sort)
+    render :action => 'controls', :layout => nil, :locals => { :controls => @controls }
+  end
 end

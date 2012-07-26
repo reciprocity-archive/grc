@@ -58,7 +58,7 @@ class SystemsController < ApplicationController
       params[:system].delete(:type)
     end
 
-    @system = System.new(params[:id])
+    @system = System.find(params[:id])
 
     respond_to do |format|
       if @system.authored_update(current_user, params[:system])
@@ -71,7 +71,63 @@ class SystemsController < ApplicationController
     end
   end
 
+  def destroy
+    @system = System.find(params[:id])
+
+    respond_to do |format|
+      if @system.destroy
+        flash[:notice] = "System deleted"
+        format.html { ajax_refresh }
+      else
+        flash[:error] = "Failed to delete system"
+        format.html { ajax_refresh }
+      end
+    end
+  end
+
   def index
     @systems = System.all
+  end
+
+  def subsystems_edit
+    @system = System.find(params[:id])
+    @systems = System.where({})
+    render :layout => nil
+  end
+
+  def subsystems_update
+    @system = System.find(params[:id])
+    @system.sub_system_systems.clear
+
+    params[:items].each do |_, item|
+      # Do whatever is needed with item-forms
+      subsystem = System.find(item[:id])
+      @system.sub_system_systems << SystemSystem.new(:child => subsystem)
+    end
+
+    @system.sub_systems.reload
+    @system.sub_systems.include_root_in_json = false
+    render :json => @system.sub_systems.all.map(&:as_json)
+  end
+
+  def controls_edit
+    @system = System.find(params[:id])
+    @controls = Control.where({})
+    render :layout => nil
+  end
+
+  def controls_update
+    @system = System.find(params[:id])
+    @system.system_controls.clear
+
+    params[:items].each do |_, item|
+      # Do whatever is needed with item-forms
+      control = Control.find(item[:id])
+      @system.system_controls << SystemControl.new(:control => control)
+    end
+
+    @system.controls.reload
+    @system.controls.include_root_in_json = false
+    render :json => @system.controls.all.map(&:as_json)
   end
 end

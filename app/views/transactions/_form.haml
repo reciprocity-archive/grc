@@ -1,0 +1,26 @@
+-content_for :modal_title do
+  -if f.object.new_record?
+    Create a new transaction
+  -else
+    Edit transaction
+
+-if !f.object.new_record?
+  -content_for :modal_delete_path, flow_transaction_path(f.object)
+
+=f.hidden_field :system_id
+
+.row-fluid
+  .span12{ :class => error_class(f, :title) }
+    =f.label :title
+    =f.text_field :title, :class => 'span12', :placeholder => 'John Doe'
+    %br
+.row-fluid
+  .span12{ :class => error_class(f, :description) }
+    =f.label :description
+    =f.text_field :description, :class => 'span12', :placeholder => 'Acme, Inc.'
+    %br
+
+%br
+
+-if !f.object.new_record?
+  =render :partial => 'shared/object_info', :locals => { :object => f.object, :approved => false }

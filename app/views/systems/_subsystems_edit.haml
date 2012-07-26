@@ -1,0 +1,52 @@
+-content_for :modal_buttons do
+  %input.ui-corner-all.widgetsearch{ :type => 'text', :placeholder => 'Search' }
+
+-content_for :modal_title do
+  %h1 Add Subsystem
+  %h3 Select a system
+
+.row-fluid
+  .span6
+    %script{ :type => 'text/html', :data => { :title => '', :link => '', :descriptor => '' }}
+      %li{ :'data-id' => '<%= id %>' }
+        %input(type='hidden' name='items[<%= id %>][id]' value='<%= id %>')
+        .span12.btn.documentItem{ :href => '#', :data => { :id => '<%= id %>', :title => '<%= title %>', :description => '<%= description %>' }}
+          %i.gcmsicon-gears-black
+          %a{:href => "#", :'data-toggle' => 'list-remove'}
+            .circle.fltrt
+              %i.gcmssmallicon-dash-white
+
+          %strong <%= title %>
+          %span <%= description %>
+
+    %ul.nav.nav-tabs.nav-stacked.itemlist.documentList#listCurrentList
+      -current.each do |item|
+        %li{ :'data-id' => item.id }
+          %input(type='hidden' name="items[#{item.id}][id]" value="#{item.id}")
+          .span12.btn.referenceItem{ :href => '#', :data => { :id => item.id, :title => item.title, :description => item.description }}
+            %i.gcmsicon-gears-black
+            %a{:href => "#", :'data-toggle' => 'list-remove'}
+              .circle.fltrt
+                %i.gcmssmallicon-dash-white
+            %strong=item.title
+            %span=item.description
+
+  .span6
+    %a{ :href => new_flow_system_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-list-target' => '#listOptionsList' }
+      New
+
+    %script{ :type => 'text/html' }
+      %li
+        .btn.documentItem{ :'data-toggle' => 'list-select', :href => '#', :data => { :id => '<%= id %>', :title => '<%= title %>', :description => '<%= description %>' }}
+          %i.gcmsicon-gears-black
+          %strong <%= title %>
+          %span <%= description %>
+
+    %ul.nav.nav-tabs.nav-stacked.itemlist.documentList#listOptionsList{ :'data-list-href' => subsystems_list_flow_system_path(object, :format => 'json'), :'data-list-target' => '#listCurrentList'}
+      -options.each do |item|
+        %li
+          %a.btn.referenceItem{ :'data-toggle' => 'list-select', :href => '#', :data => { :id => item.id, :title => item.title, :description => item.description }}
+            %i.gcmsicon-gears-black
+            %strong=item.title
+            %span=item.description
+

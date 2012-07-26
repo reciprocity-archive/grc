@@ -17,7 +17,11 @@
 
   %ul.nav.nav-tabs
     %li=link_to 'Regulations', '#regulations', :data => { :toggle => 'tab', :'tab-href' => sections_flow_program_path(program) }
-    %li=link_to 'Controls', '#controls', :data => { :toggle => 'tab', :'tab-href' => controls_flow_program_path(program) }
-  .tab-content
+    %li.active=link_to 'Controls', '#controls', :data => { :toggle => 'tab', :'tab-href' => controls_flow_program_path(program) }
+    %li=link_to 'Regulations -> Controls', '#section_controls', :data => { :toggle => 'tab', :'tab-href' => section_controls_flow_program_path(program) }
+    %li=link_to 'Controls -> Regulations', '#control_sections', :data => { :toggle => 'tab', :'tab-href' => control_sections_flow_program_path(program) }
+  .tab-content{ :style => 'position: relative; overflow: visible;' }
     #regulations.tab-pane
     #controls.tab-pane
+    #section_controls.tab-pane
+    #control_sections.tab-pane

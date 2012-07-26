@@ -1,0 +1,30 @@
+%ul.slugtree
+  =walk_slug_tree(Program.slugtree(sections)) do |item, step|
+    .row-fluid
+      -content_id = "content_#{rand(36**8).to_s(36)}" # unique ID for toggle
+      .span12
+        %a.regulationslot.toggle.span9.collapsed{ :'data-toggle' => 'collapse', :'data-target' => "##{content_id}" }
+          -if !item.description.blank?
+            .expander
+          %span.prefix=item.slug
+          =item.title || item.description
+        -controls = item.linked_controls
+        -status_class = (controls.empty? && !item.na?) ? 'statusred' : 'statusyellow'
+        %a.controls.controllist.attached.span3{ :class => status_class, :href => mapping_section_dialog_path(item) }
+
+          -controls = item.linked_controls
+          -if !controls.empty?
+            %ul.spannomargin{ :title => controls.map(&:slug).join(", ") }
+              %li
+                %strong #{controls.size}:
+              -controls.each do |control|
+                %li=control.slug
+          -elsif item.na?
+            N/A
+          -else
+            %strong 0
+      .row-fluid-slotcontent
+        .span9
+          .collapse{ :id => content_id }
+            =item.description
+            %a.btn.btn-blue.addbtn.fltrt{ :href => edit_flow_section_path(item), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :title => 'Edit Section' } Edit

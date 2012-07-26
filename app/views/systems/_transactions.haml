@@ -5,17 +5,26 @@
 -content_for :widget_help, 'system_transactions'
 
 -content_for :widget_buttons do
-  /%a.btn.widgetbtn{ :href => "#new_flow_transaction_path", :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :title => 'Create New Transaction' } Add Transaction
-  %input.ui-corner-all.widgetsearch.clear-value(type='text' placeholder='Search')
+  %a.widgettextbtn{ :href => new_flow_transaction_path('transaction[system_id]' => system.id), :'data-toggle' => 'modal-ajax-listnewform', :'data-modal-reset' => 'reset', :'data-list-target' => '#transactionsList', :title => 'Create New Transaction' } New
 
 .description
-  .content
-    /-system.transactions.all.each do |item|
-    -System.all.each do |item|
-      %div
-        %span.prefix
-          =item.slug
-        =item.title
-      -if !item.description.blank?
-        %textarea(disabled='disabled')
+  %script(type='text/html' data-title='' data-description='')
+    %li.singleControlSlot.accordion-toggle(data-id='<%= id %>' data-toggle='collapse' href='#transaction-<%= id %>')
+      .expander
+      %a{:href => "#"}
+        .greyOut.fltrt
+          %i.gcmssmallicon-dash-white
+      %span.prefix <%= title %>
+      .row-fluid-slotcontent.collapse{ :id => "transaction-<%= id %>" }
+        <%= description %>
+
+  %ul.slugtree#transactionsList
+    -system.transactions.all.each do |item|
+      %li.singleControlSlot.accordion-toggle{'data-toggle' => 'collapse', :href => "#transaction-#{item.id}", :'data-id' => item.id}
+        .expander
+        %a{:href => "#"}
+          .greyOut.fltrt
+            %i.gcmssmallicon-dash-white
+        %span.prefix=item.title
+        .row-fluid-slotcontent.collapse{ :id => "transaction-#{item.id}" }
           =item.description

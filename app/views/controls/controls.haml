@@ -1,0 +1,37 @@
+-#.row-fluid{ :style => 'position:absolute; top:-46px;' }
+  .span12
+    .span9
+    .span3{ :style => 'margin: 0 0 0 5px;' }
+      .barTitle.fltlft
+        Regulation Linking
+        .barCount.fltrt 100
+      .progress.progress-large.active
+        .bar.progressbar-success.hidefont.fltlft{ :'data-percentage' => '20', :'data-toggle' => 'tooltip', :'title' => "20 Done" } 20%
+        .bar.progressbar-danger.hidefont.fltrt{ :'data-percentage' => '30', :'data-toggle' => 'tooltip', :'title' => "30 N/A" } 30%
+        .bar.progressbar-warning.hidefont.fltrt{ :'data-percentage' => '50', :'data-toggle' => 'tooltip', :'title' => "50 Pending" } 50%
+
+%ul.slugtree
+  =walk_slug_tree(Program.slugtree(controls)) do |item, step|
+    .row-fluid
+      -content_id = "content_#{rand(36**8).to_s(36)}" # unique ID for toggle
+      .span12
+        %a.regulationslot.toggle.span9.collapsed{ :'data-toggle' => 'collapse', :'data-target' => "##{content_id}" }
+          -if !item.description.blank?
+            .expander
+          %span.prefix=item.slug
+          =item.title || item.description
+        .controllist.attached.span3{ :class => "statusblue" }
+          -controls = item.implementing_controls
+          -if !controls.empty?
+            %ul.spannomargin{ :title => controls.map(&:slug).join(", ") }
+              %li
+                %strong #{controls.size}:
+              -controls.each do |control|
+                %li=control.slug
+          -else
+            .controls
+              %strong 0
+      .row-fluid-slotcontent
+        .span9
+          .collapse{ :id => content_id }
+            =item.description

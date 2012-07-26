@@ -87,34 +87,47 @@ CmsRails::Application.routes.draw do
     end
   end
 
-  resources :programs, :as => 'flow_programs', :only => [:show, :new, :edit, :create, :update] do
+  resources :programs, :as => 'flow_programs', :only => [:show, :new, :edit, :create, :update, :destroy] do
     member do
       get 'tooltip'
       get 'import'
       get 'sections'
       get 'controls'
+      get 'section_controls'
+      get 'control_sections'
     end
   end
 
   resources :cycles, :as => 'flow_cycles', :only => [:show, :create, :update]
 
-  resources :sections, :as => 'flow_sections', :only => [:new, :edit, :create, :update] do
+  resources :sections, :as => 'flow_sections', :only => [:new, :edit, :create, :update, :destroy] do
     member do
       get 'tooltip'
     end
   end
 
-  resources :controls, :as => 'flow_controls', :only => [:index, :show, :new, :edit, :create, :update] do
+  resources :controls, :as => 'flow_controls', :only => [:index, :show, :new, :edit, :create, :update, :destroy] do
     member do
       get 'tooltip'
+      get 'sections'
+      get 'implemented_controls'
+      get 'implementing_controls'
     end
   end
 
-  resources :systems, :as => 'flow_systems', :only => [:show, :new, :edit, :create, :update] do
+  resources :systems, :as => 'flow_systems', :only => [:index, :show, :new, :edit, :create, :update, :destroy] do
     member do
       get 'tooltip'
+      get 'subsystems_list'
+      get 'subsystems_edit'
+      post 'subsystems_update'
+      get 'controls_list'
+      get 'controls_edit'
+      post 'controls_update'
     end
   end
+
+  resources :transactions, :as => 'flow_transactions', :only => [:new, :edit, :create, :update, :destroy]
 
   resources :accounts, :as => 'flow_accounts'
   resources :people, :as => 'flow_people' do

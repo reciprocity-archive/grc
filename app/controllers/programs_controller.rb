@@ -116,4 +116,24 @@ class ProgramsController < ApplicationController
     @controls.all.sort_by(&:slug_split_for_sort)
     render :layout => nil, :locals => { :controls => @controls }
   end
+
+  def section_controls
+    @program = Program.find(params[:id])
+    @sections = @program.sections.includes(:controls => :implementing_controls)
+    if params[:s]
+      @sections = @sections.search(params[:s])
+    end
+    @sections.all.sort_by(&:slug_split_for_sort)
+    render :layout => nil, :locals => { :sections => @sections }
+  end
+
+  def control_sections
+    @program = Program.find(params[:id])
+    @controls = @program.controls.includes(:sections)
+    if params[:s]
+      @controls = @controls.search(params[:s])
+    end
+    @controls.all.sort_by(&:slug_split_for_sort)
+    render :layout => nil, :locals => { :controls => @controls }
+  end
 end

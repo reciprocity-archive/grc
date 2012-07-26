@@ -1,22 +1,22 @@
--expanded = false unless local_assigns.has_key?(:expanded)
+-expanded = false #unless local_assigns.has_key?(:expanded)
 
--systems.each do |system|
+=walk_slug_tree(Program.slugtree(sections)) do |item, step|
   %li.system-node
     .row-fluid
       .span12
-        %a.system-slot.regulationslot.toggle.span12.collapsed{ :'data-toggle' => 'collapse', :'data-target' => "#content_system_#{system.id}" }
+        %a.system-slot.regulationslot.toggle.span12.collapsed{ :'data-toggle' => 'collapse', :'data-target' => "#content_system_#{item.id}" }
           /-if !system.description.blank?
           .expander{ :class => expanded && 'in' }
-          %span.prefix=system.slug
-          =system.title || system.description
+          %span.prefix=item.slug
+          =item.title || item.description
         -#.controllist.attached.span3{ :class => "statusblue" }
           dunno
       .row-fluid-slotcontent
         .span12
           -#.collapse{ :id => "content_#{system.id}" }
-          =system.description
-    %ul.collapse{ :class => expanded && 'in', :id => "content_system_#{system.id}" }
-      =walk_slug_tree(Program.slugtree(system.controls)) do |item, step|
+          =item.description
+    %ul.collapse{ :class => expanded && 'in', :id => "content_system_#{item.id}" }
+      =walk_slug_tree(Program.slugtree(item.controls)) do |item, step|
         .row-fluid
           .span12
             %a.regulationslot.toggle.span9.collapsed{ :'data-toggle' => 'collapse', :'data-target' => "#content_item_#{item.id}" }
@@ -39,8 +39,8 @@
             .span9
               .collapse{ :id => "content_item_#{item.id}" }
                 =item.description
-      -subsystems = system.sub_systems.all
-      -if subsystems.count > 0
+      -#subsystems = system.id == 3 ? [System.find(2), System.find(4)] : []
+      -#if subsections.count > 0
         %li
           %ul
-            =render :partial => 'sub_system_branch', :locals => { :systems => subsystems }
+            =render :partial => 'section_controls_branch', :locals => { :sections =>  }
