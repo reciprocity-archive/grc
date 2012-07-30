@@ -5,8 +5,12 @@
   function preload_content() {
     var template =
       [ '<div class="modal-header">'
-      , '  <a class="close" href="#" data-dismiss="modal">x</a>'
-      , '  Loading...'
+      , '  <nav>'
+      , '    <a class="widgetbtn" href="#" data-dismiss="modal">'
+      , '      <i class="gcmsicon-x-grey"></i>'
+      , '    </a>'
+      , '  </nav>'
+      , '  <h1>Loading...</h1>'
       , '</div>'
       , '<div class="modal-body"></div>'
       , '<div class="modal-footer">'
@@ -33,15 +37,17 @@
       $target.modal(option);
     },
 
-    'listform': function($modal, $trigger, option) {
-      $modal.modal_form(option);
+    'listform': function($target, $trigger, option) {
       var list_target = $trigger.data('list-target');
+      $target.modal_form(option);
 
       // Close the modal and rewrite the target list
-      $modal.on('ajax:json', function(e, data, xhr) {
-        if (list_target) {
+      $target.on('ajax:json', function(e, data, xhr) {
+        if (list_target == 'refresh') {
+          window.location.assign(window.location.href);
+        } else if (list_target) {
           $(list_target).tmpl_setitems(data);
-          $modal.modal_form('hide');
+          $target.modal_form('hide');
         }
       });
     },
@@ -61,7 +67,14 @@
     },
 
     'form': function($target, $trigger, option) {
+      var form_target = $trigger.data('form-target');
       $target.modal_form(option);
+
+      $target.on('ajax:json', function(e, data, xhr) {
+        if (form_target == 'refresh') {
+          window.location.assign(window.location.href);
+        }
+      });
     }
   };
 

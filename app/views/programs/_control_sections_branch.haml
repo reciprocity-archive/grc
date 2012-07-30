@@ -1,10 +1,10 @@
--expanded = true #false #unless local_assigns.has_key?(:expanded)
+-expanded = local_assigns.has_key?(:expanded) && expanded
 
 =walk_slug_tree(Program.slugtree(controls)) do |item, step|
   %li.system-node
     .row-fluid
       .span12
-        %a.system-slot.regulationslot.toggle.span12.collapsed{ :'data-toggle' => 'collapse', :'data-target' => "#content_system_#{item.id}" }
+        %a.slot.controlslot.span12{ :'data-toggle' => 'collapse', :'data-target' => "#content_system_#{item.id}" }
           /-if !system.description.blank?
           .expander{ :class => expanded && 'in' }
           %span.prefix=item.slug
@@ -19,7 +19,7 @@
       =walk_slug_tree(Program.slugtree(item.implemented_controls)) do |item, step|
         .row-fluid
           .span12
-            %a.regulationslot.toggle.span9.collapsed{ :'data-toggle' => 'collapse', :'data-target' => "#content_item_#{item.id}" }
+            %a.slot.regulationslot.span9{ :'data-toggle' => 'collapse', :'data-target' => "#content_item_#{item.id}" }
               -if !item.description.blank?
                 .expander
               %span.prefix=item.slug

@@ -7,46 +7,48 @@
 
 .row-fluid
   .span6
-    %script{ :type => 'text/html', :data => { :title => '', :link => '', :descriptor => '' }}
-      %li{ :'data-id' => '<%= id %>' }
+    %h3 Sub-systems for this system
+
+    %script{ :type => 'text/html', :data => { :title => '', :id => '', :slug => '' }}
+      %li.slot.controlSlot{ :'data-id' => '<%= id %>' }
         %input(type='hidden' name='items[<%= id %>][id]' value='<%= id %>')
-        .span12.btn.documentItem{ :href => '#', :data => { :id => '<%= id %>', :title => '<%= title %>', :description => '<%= description %>' }}
-          %i.gcmsicon-gears-black
+        .arrowcontrols-group{ :href => '#', :data => { :id => '<%= id %>', :title => '<%= title %>', :slug => '<%= slug %>' }}
+          .controls-type <%= slug %>
+          .controls-subgroup <%= title %>
+        %a{:href => "#", :'data-toggle' => 'list-remove'}
+          .removeCircleButton.fltrt
+            %i.gcmssmallicon-dash-white
+
+    %ul.itemlist#listCurrentList
+      -current.each do |object_item|
+        -item = object_item.child
+        %li.slot.controlSlot{ :'data-id' => item.id, :class => member_error_class(object_item) }
+          =member_error_messages_inline(object_item)
+          %input(type='hidden' name="items[#{item.id}][id]" value="#{item.id}")
+          .arrowcontrols-group{ :href => '#', :data => { :id => item.id, :title => item.title, :slug => item.slug }}
+            .controls-type=item.slug
+            .controls-subgroup=item.title
           %a{:href => "#", :'data-toggle' => 'list-remove'}
-            .circle.fltrt
+            .removeCircleButton.fltrt
               %i.gcmssmallicon-dash-white
 
-          %strong <%= title %>
-          %span <%= description %>
-
-    %ul.nav.nav-tabs.nav-stacked.itemlist.documentList#listCurrentList
-      -current.each do |item|
-        %li{ :'data-id' => item.id }
-          %input(type='hidden' name="items[#{item.id}][id]" value="#{item.id}")
-          .span12.btn.referenceItem{ :href => '#', :data => { :id => item.id, :title => item.title, :description => item.description }}
-            %i.gcmsicon-gears-black
-            %a{:href => "#", :'data-toggle' => 'list-remove'}
-              .circle.fltrt
-                %i.gcmssmallicon-dash-white
-            %strong=item.title
-            %span=item.description
-
   .span6
-    %a{ :href => new_flow_system_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-list-target' => '#listOptionsList' }
-      New
+    %h3
+      Select a sub-system to add
+      %a.btn.btn-blue.addbtn.fltrt{ :href => new_flow_system_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-list-target' => '#listOptionsList' }
+        New System
 
     %script{ :type => 'text/html' }
-      %li
-        .btn.documentItem{ :'data-toggle' => 'list-select', :href => '#', :data => { :id => '<%= id %>', :title => '<%= title %>', :description => '<%= description %>' }}
-          %i.gcmsicon-gears-black
-          %strong <%= title %>
-          %span <%= description %>
+      %li.slot.controlSlot
+        .itemarrow
+        .arrowcontrols-group{ :'data-toggle' => 'list-select', :href => '#', :data => { :id => '<%= id %>', :title => '<%= title %>', :slug => '<%= slug %>' }}
+          .controls-type <%= slug %>
+          .controls-subgroup <%= title %>
 
-    %ul.nav.nav-tabs.nav-stacked.itemlist.documentList#listOptionsList{ :'data-list-href' => subsystems_list_flow_system_path(object, :format => 'json'), :'data-list-target' => '#listCurrentList'}
+    %ul.itemlist#listOptionsList{ :'data-list-href' => subsystems_list_flow_system_path(object, :format => 'json'), :'data-list-target' => '#listCurrentList'}
       -options.each do |item|
-        %li
-          %a.btn.referenceItem{ :'data-toggle' => 'list-select', :href => '#', :data => { :id => item.id, :title => item.title, :description => item.description }}
-            %i.gcmsicon-gears-black
-            %strong=item.title
-            %span=item.description
-
+        %li.slot.controlSlot
+          .itemarrow
+          .arrowcontrols-group{ :'data-toggle' => 'list-select', :href => '#', :data => { :id => item.id, :title => item.title, :slug => item.slug }}
+            .controls-type=item.slug
+            .controls-subgroup=item.title

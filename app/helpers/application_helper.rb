@@ -188,6 +188,30 @@ module ApplicationHelper
       else
         'field-failure'
       end
+    else
+      'field-success'
+    end
+  end
+
+  def member_error_messages_inline(o)
+    capture_haml do
+      if !o.errors.empty?
+        haml_tag :span, :class => 'help-inline' do
+          o.errors.each do |_, error|
+            haml_tag :span do
+              haml_concat "#{error}"
+            end
+          end
+        end
+      end
+    end
+  end
+
+  def member_error_class(o)
+    if !o.errors.empty?
+      'member-failure'
+    else
+      'member-success'
     end
   end
 end

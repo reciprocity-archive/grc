@@ -7,12 +7,17 @@
   %input.ui-corner-all.widgetsearch.clear-value(type='text' placeholder='Search')
 
 .description
-  .content
+  %ul.slugtree
     -system.super_systems.all.each do |item|
-      %div
+      %li.slot.singleControlSlot.accordian-toggle( data-toggle='collapse' href="#super-system-#{item.id}" data-id="#{item.id}" )
+        .expander
+        %a.btn.btn-blue.fltrt{ :href => flow_system_path(item) }
+          Go
         %span.prefix
           =item.slug
         =item.title
-      -if !item.description.blank?
-        %textarea(disabled='disabled')
+
+        .row-fluid-slotcontent.collapse{ :id => "super-system-#{item.id}" }
           =item.description
+          %a.btn.btn-blue.fltrt{ :href => edit_flow_system_path(item), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh' }
+            Edit

@@ -44,6 +44,7 @@ class System < ActiveRecord::Base
   has_many :sub_system_systems,
     :class_name => 'SystemSystem', :foreign_key => 'parent_id',
     :dependent => :destroy
+
   has_many :sub_systems,
     :through => :sub_system_systems, :source => 'child'
 

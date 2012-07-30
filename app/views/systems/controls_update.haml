@@ -1,0 +1,3 @@
+=fields_for :systems do |f|
+  =render :partial => 'controls_edit',
+          :locals  => { :object => @system, :current => @system.system_controls, :options => Control.all }

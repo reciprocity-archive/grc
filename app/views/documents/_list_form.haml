@@ -10,34 +10,29 @@
     %h3 References for this object
 
     %script{ :type => 'text/html', :data => { :title => '', :link => '', :descriptor => '' }}
-      %li{ :'data-id' => '<%= id %>' }
-        .span12.btn.documentItem{ :href => '#', :data => { :id => '<%= id %>', :title => '<%= title %>', :link => '<%= link %>', :descriptor => '<%= descriptor %>' }}
-          %i.gcmsicon-gears-black
-          %a{:href => "#", :'data-toggle' => 'list-remove'}
-            .circle.fltrt
-              %i.gcmssmallicon-dash-white
-
-          %strong <%= title || link %>
-          %span <%= descriptor %>
-          %input(type='hidden' name='items[<%= id %>][id]' value='<%= id %>')
-          -#%select(name="items[<%= id %>][role]")
-            %option(value='none') None
-            %option(value='owner') Owner
+      %li.slot.controlSlot{ :'data-id' => '<%= id %>' }
+        %input(type='hidden' name='items[<%= id %>][id]' value='<%= id %>')
+        %a{:href => "#", :'data-toggle' => 'list-remove'}
+          .removeCircleButton.fltrt
+            %i.gcmssmallicon-dash-white
+        .arrowcontrols-group{ :href => '#', :data => { :id => '<%= id %>', :title => '<%= title %>', :link => '<%= link %>', :descriptor => '<%= descriptor %>' }}
+          .controls-type <%= link %>
+          .controls-subtype <%= descriptor %>
+          .controls-subgroup <%= title || '&nbsp;' %>
 
     %ul.itemlist#listObjectDocumentList
       -@object.object_documents.each do |object_document|
         -document = object_document.document
-        %li.controlSlot{ :'data-id' => document.id }
-          .arrowcontrols-group{ :href => '#', :data => { :id => document.id, :title => document.title, :link => document.link, :descriptor => document.document_descriptor && document.document_descriptor.title }}
-            %a{:href => "#", :'data-toggle' => 'list-remove'}
-              .circle.fltrt
-                %i.gcmssmallicon-dash-white
-            %strong=document.title || document.link
-            %span=document.document_descriptor && document.document_descriptor.title
-            %input(type='hidden' name="items[#{document.id}][id]" value="#{document.id}")
-            -#%select(name="items[#{person.id}][role]")
-              %option(value='none'){ :selected => object_person.role.nil? } None
-              %option(value='owner'){ :selected => object_person.role == 'owner' } Owner
+        %li.slot.controlSlot{ :'data-id' => document.id, :class => member_error_class(object_document) }
+          =member_error_messages_inline(object_document)
+          %input(type='hidden' name="items[#{document.id}][id]" value="#{document.id}")
+          %a{:href => "#", :'data-toggle' => 'list-remove'}
+            .removeCircleButton.fltrt
+              %i.gcmssmallicon-dash-white
+          .arrowcontrols-group{ :href => '#', :data => { :id => document.id, :title => document.title, :link => document.link, :descriptor => document.descriptor }}
+            .controls-type=document.link
+            .controls-subtype=document.descriptor
+            .controls-subgroup=document.title || '&nbsp;'.html_safe
 
   .span6
     %h3
@@ -46,17 +41,18 @@
         New Reference
 
     %script{ :type => 'text/html' }
-      %li
-        .btn.documentItem{ :'data-toggle' => 'list-select', :href => '#', :data => { :id => '<%= id %>', :title => '<%= title %>', :link => '<%= link %>', :descriptor => '<%= descriptor %>' }}
-          %i.gcmsicon-gears-black
-          %strong <%= title || link %>
-          %span <%= descriptor %>
+      %li.slot.controlSlot{ :'data-id' => '<%= id %>' }
+        .itemarrow
+        .arrowcontrols-group{ :'data-toggle' => 'list-select', :href => '#', :data => { :id => '<%= id %>', :title => '<%= title %>', :link => '<%= link %>', :descriptor => '<%= descriptor %>' }}
+          .controls-type <%= link %>
+          .controls-subtype <%= descriptor %>
+          .controls-subgroup <%= title || '&nbsp;' %>
 
-    %ul.nav.nav-tabs.nav-stacked.itemlist#listDocumentList{ :'data-list-href' => list_flow_documents_path(:format => 'json'), :'data-list-target' => '#listObjectDocumentList'}
+    %ul.itemlist#listDocumentList{ :'data-list-href' => list_flow_documents_path(:format => 'json'), :'data-list-target' => '#listObjectDocumentList'}
       -@documents.each do |document|
-        %li
-          %a.btn.referenceItem{ :'data-toggle' => 'list-select', :href => '#', :data => { :id => document.id, :title => document.title, :link => document.link, :descriptor => document.document_descriptor && document.document_descriptor.title }}
-            %i.gcmsicon-gears-black
-            %strong=document.title || document.link
-            %span=document.document_descriptor && document.document_descriptor.title
-
+        %li.slot.controlSlot{ :'data-id' => document.id }
+          .itemarrow
+          .arrowcontrols-group{ :'data-toggle' => 'list-select', :href => '#', :data => { :id => document.id, :title => document.title, :link => document.link, :descriptor => document.descriptor }}
+            .controls-type=document.link
+            .controls-subtype=document.descriptor
+            .controls-subgroup=document.title || '&nbsp;'.html_safe

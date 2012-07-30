@@ -1,44 +1,33 @@
--expanded = false unless local_assigns.has_key?(:expanded)
+-expanded = local_assigns.has_key?(:expanded) && expanded
 
 -systems.each do |system|
   %li.system-node
     .row-fluid
       .span12
-        %a.system-slot.regulationslot.toggle.span12.collapsed{ :'data-toggle' => 'collapse', :'data-target' => "#content_system_#{system.id}" }
+        .slot.subsystemslot.span12{ :'data-toggle' => 'collapse', :'data-target' => "#content_system_#{system.id}" }
           /-if !system.description.blank?
           .expander{ :class => expanded && 'in' }
+          %a.btn.btn-blue.fltrt{ :href => flow_system_path(system) }
+            Go
+          %a.btn.btn-blue.fltrt{ :href => edit_flow_system_path(system), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset' }
+            Edit
           %span.prefix=system.slug
           =system.title || system.description
-        -#.controllist.attached.span3{ :class => "statusblue" }
-          dunno
-      .row-fluid-slotcontent
+      .row-fluid-slotcontent.collapse{ :id => "content_system_#{system.id}" }
         .span12
-          -#.collapse{ :id => "content_#{system.id}" }
           =system.description
-    %ul.collapse{ :class => expanded && 'in', :id => "content_system_#{system.id}" }
+    %ul.collapse{ :class => expanded && 'in', :xid => "content_system_#{system.id}" }
       =walk_slug_tree(Program.slugtree(system.controls)) do |item, step|
         .row-fluid
           .span12
-            %a.regulationslot.toggle.span9.collapsed{ :'data-toggle' => 'collapse', :'data-target' => "#content_item_#{item.id}" }
-              -if !item.description.blank?
-                .expander
+            .slot.controlslot.span12{ :'data-toggle' => 'collapse', :'data-target' => "#content_item_#{item.id}" }
+              /-if !item.description.blank?
+              .expander
               %span.prefix=item.slug
               =item.title || item.description
-            .controllist.attached.span3{ :class => "statusblue" }
-              -controls = item.implementing_controls
-              -if !controls.empty?
-                %ul.spannomargin{ :title => controls.map(&:slug).join(", ") }
-                  %li
-                    %strong #{controls.size}:
-                  -controls.each do |control|
-                    %li=control.slug
-              -else
-                .controls
-                  %strong 0
-          .row-fluid-slotcontent
+          .row-fluid-slotcontent.collapse{ :id => "content_item_#{item.id}" }
             .span9
-              .collapse{ :id => "content_item_#{item.id}" }
-                =item.description
+              =item.description
       -subsystems = system.sub_systems.all
       -if subsystems.count > 0
         %li

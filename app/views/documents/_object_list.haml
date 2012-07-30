@@ -5,7 +5,7 @@
   %a.btn.btn-blue.addbtn.fltrt{:href => list_form_flow_documents_path(:object_type => object.class.name, :object_id => object.id), :'data-toggle' => 'modal-ajax-listform', :'data-modal-reset' => 'reset', :'data-list-target' => '#referenceList' } Edit List
 
 %script{ :type => 'text/html', :data => { :document => '' }}
-  %li.controlSlot{ :'data-id' => '<%= document.id %>' }
+  %li.slot.controlSlot{ :'data-id' => '<%= document.id %>' }
     -#%input{ :type => 'hidden', :name => '', :value => '<%= document.id %>' }
     -#%a{:href => "#", :'data-toggle' => 'list-remove'}
       .circle.fltrt
@@ -18,7 +18,7 @@
 %ul.referenceList
   -object.object_documents.all.each do |object_item|
     -item = object_item.document
-    %li.controlSlot{ :'data-id' => item.id }
+    %li.slot.controlSlot{ :'data-id' => item.id }
       -#%input{ :type => 'hidden', :name => '', :value => item.id }
       -#%a{:href => "#", :'data-toggle' => 'list-remove'}
         .circle.fltrt

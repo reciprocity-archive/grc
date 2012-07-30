@@ -97,20 +97,32 @@ class SystemsController < ApplicationController
 
   def subsystems_update
     @system = System.find(params[:id])
-    @system.sub_system_systems.clear
+
+    new_system_systems = []
 
     params[:items].each do |_, item|
       # Do whatever is needed with item-forms
-      subsystem = System.find(item[:id])
-      # Don't allow adding self as a sub system
-      if subsystem != @system
-        @system.sub_system_systems << SystemSystem.new(:child => subsystem)
+      system_system = @system.sub_system_systems.where(:child_id => item[:id]).first
+      if !system_system
+        system_system = @system.sub_system_systems.new(:child_id => item[:id])
       end
+      new_system_systems.push(system_system)
     end
 
-    @system.sub_systems.reload
-    @system.sub_systems.include_root_in_json = false
-    render :json => @system.sub_systems.all.map(&:as_json)
+    @system.sub_system_systems = new_system_systems
+
+    respond_to do |format|
+      if @system.save
+        format.json do
+          @system.sub_systems.include_root_in_json = false
+          render :json => @system.sub_systems.all.map(&:as_json)
+        end
+        format.html
+      else
+        flash[:error] = "Could not update subsystems"
+        format.html { render :layout => nil }
+      end
+    end
   end
 
   def controls_edit
@@ -121,16 +133,31 @@ class SystemsController < ApplicationController
 
   def controls_update
     @system = System.find(params[:id])
-    @system.system_controls.clear
+
+    new_system_controls = []
 
     params[:items].each do |_, item|
       # Do whatever is needed with item-forms
-      control = Control.find(item[:id])
-      @system.system_controls << SystemControl.new(:control => control)
+      system_control = @system.system_controls.where(:control_id => item[:id]).first
+      if !system_control
+        system_control = @system.system_controls.new(:control_id => item[:id])
+      end
+      new_system_controls.push(system_control)
     end
 
-    @system.controls.reload
-    @system.controls.include_root_in_json = false
-    render :json => @system.controls.all.map(&:as_json)
+    @system.system_controls = new_system_controls
+
+    respond_to do |format|
+      if @system.save
+        format.json do
+          @system.sub_systems.include_root_in_json = false
+          render :json => @system.controls.all.map(&:as_json)
+        end
+        format.html
+      else
+        flash[:error] = "Could not update subsystems"
+        format.html { render :layout => nil }
+      end
+    end
   end
 end

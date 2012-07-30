@@ -41,7 +41,7 @@ class TransactionsController < ApplicationController
   end
 
   def update
-    @transaction = Transaction.new(params[:id])
+    @transaction = Transaction.find(params[:id])
 
     respond_to do |format|
       if @transaction.authored_update(current_user, params[:transaction])

@@ -9,9 +9,9 @@
 
 .description
   %script(type='text/html' data-title='' data-description='')
-    %li.singleControlSlot.accordion-toggle(data-id='<%= id %>' data-toggle='collapse' href='#transaction-<%= id %>')
+    %li.slot.singleControlSlot.accordion-toggle(data-id='<%= id %>' data-toggle='collapse' href='#transaction-<%= id %>')
       .expander
-      %a{:href => "#"}
+      -#%a{:href => "#"}
         .greyOut.fltrt
           %i.gcmssmallicon-dash-white
       %span.prefix <%= title %>
@@ -20,11 +20,15 @@
 
   %ul.slugtree#transactionsList
     -system.transactions.all.each do |item|
-      %li.singleControlSlot.accordion-toggle{'data-toggle' => 'collapse', :href => "#transaction-#{item.id}", :'data-id' => item.id}
+      %li.slot.singleControlSlot.accordion-toggle{'data-toggle' => 'collapse', :href => "#transaction-#{item.id}", :'data-id' => item.id}
         .expander
-        %a{:href => "#"}
+        -#%a{:href => "#"}
           .greyOut.fltrt
             %i.gcmssmallicon-dash-white
-        %span.prefix=item.title
+        %span.prefix
+        =item.title
+
         .row-fluid-slotcontent.collapse{ :id => "transaction-#{item.id}" }
           =item.description
+          %a.btn.btn-blue.fltrt{ :href => edit_flow_transaction_path(item), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset' }
+            Edit
