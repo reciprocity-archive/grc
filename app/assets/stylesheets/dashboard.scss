@@ -56,6 +56,15 @@
   }
 }
 
+.member-failure {
+  background-color: #FFC8C8;
+  border-color: #B94A48;
+}
+
+.member-success {
+  background-color: #EAFFE6;
+}
+
 .compact-rows {
   input, select, textarea {
     margin-bottom: 0px;

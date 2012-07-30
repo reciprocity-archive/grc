@@ -329,7 +329,7 @@ body {
 	}
 
 
-.expanderslot {
+unused.expanderslot {
 	float:left;
 	width:79%;
 	height:45px;
@@ -351,15 +351,43 @@ body {
 	border: 1px solid #e1e1e1;
 }
 
-.subsystemslot {
+.slot {
+	padding: 7px 6px 0 6px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+
 	float:left;
+	height:30px;
+	display:inline-block;
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	    -ms-box-sizing: border-box;
+	        box-sizing: border-box;
+
+	border: 1px solid #e1e1e1;
+	margin-top: 4px;
+}
+
+.slot:hover {
+	cursor: pointer;
+}
+
+.slot > .btn {
+	/*float: right;*/
+	margin-top: -4px;
+	margin-left: 6px;
+}
+
+.subsystemslot {
+	/*float:left;
 	height:30px;
 	display:inline-block;
 	  -webkit-box-sizing: border-box;
 		 -moz-box-sizing: border-box;
 		  -ms-box-sizing: border-box;
 			  box-sizing: border-box;
-	padding:6px 6px 6px 20px;
+	/*padding:7px 6px 6px 6px;*/
 background: #fefcea; /* Old browsers */
 background: -moz-linear-gradient(top,  #fefcea 0%, #ede9ce 100%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fefcea), color-stop(100%,#ede9ce)); /* Chrome,Safari4+ */
@@ -368,17 +396,18 @@ background: -o-linear-gradient(top,  #fefcea 0%,#ede9ce 100%); /* Opera 11.10+ *
 background: -ms-linear-gradient(top,  #fefcea 0%,#ede9ce 100%); /* IE10+ */
 background: linear-gradient(to bottom,  #fefcea 0%,#ede9ce 100%); /* W3C */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefcea', endColorstr='#ede9ce',GradientType=0 ); /* IE6-9 */
-border: 1px solid #e1e1e1;
+/*border: 1px solid #e1e1e1;*/
 }
+
 .regulationslot {
-	float:left;
+/*	float:left;
 	height:30px;
 	display:inline-block;
 	  -webkit-box-sizing: border-box;
 		 -moz-box-sizing: border-box;
 		  -ms-box-sizing: border-box;
 			  box-sizing: border-box;
-	padding:7px 6px 6px 6px;
+	/*padding:7px 6px 6px 6px;*/
 	color:#666666;
 	background: #ffffff; /* Old browsers */
 	background: -moz-linear-gradient(top,  #ffffff 0%, #eef4ed 70%, #edebe6 100%, #f6f6f6 100%); /* FF3.6+ */
@@ -388,7 +417,7 @@ border: 1px solid #e1e1e1;
 	background: -ms-linear-gradient(top,  #ffffff 0%,#eef4ed 70%,#edebe6 100%,#f6f6f6 100%); /* IE10+ */
 	background: linear-gradient(top,  #ffffff 0%,#eef4ed 70%,#edebe6 100%,#f6f6f6 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0 ); /* IE6-9 */
-	border: 1px solid #e1e1e1;
+/*	border: 1px solid #e1e1e1;*/
 }
 
 .regulationslot:hover {
@@ -403,8 +432,19 @@ border: 1px solid #e1e1e1;
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#f6f6f6',GradientType=0 ); /* IE6-9 */
 
 	border: 1px solid #3badb3;
-	cursor:pointer;
+	/*cursor:pointer;
 	/*text-decoration: none;*/
+}
+
+.controlslot {
+	background: #eeeeee; /* Old browsers */
+	background: -moz-linear-gradient(top,  #eeeeee 0%, #f1f1f1 50%, #e1e1e1 100%, #f6f6f6 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(50%,#f1f1f1), color-stop(100%,#e1e1e1), color-stop(100%,#f6f6f6)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #eeeeee 0%,#f1f1f1 50%,#e1e1e1 100%,#f6f6f6 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #eeeeee 0%,#f1f1f1 50%,#e1e1e1 100%,#f6f6f6 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #eeeeee 0%,#f1f1f1 50%,#e1e1e1 100%,#f6f6f6 100%); /* IE10+ */
+	background: linear-gradient(top,  #eeeeee 0%,#f1f1f1 50%,#e1e1e1 100%,#f6f6f6 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#f6f6f6',GradientType=0 ); /* IE6-9 */
 }
 
 .subsystemslot:hover {
@@ -516,9 +556,18 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5fbc8', end
 /*Required for bootstrap to not break firefox */
 
 .row-fluid [class*="span"] {
-min-height:28px;	
+	min-height:10px;
 }
- 
+
+.cleanlabels .row-fluid [class*="span"] {
+	min-height:28px;
+}
+
+.row-fluid-slotcontent {
+  margin-top: 5px;
+  clear:both;
+}
+
  /*Required for accordian slots using fluid layout*/ 
 .row-fluid-slotcontent [class*="span"] {
 	display: block;
@@ -1258,23 +1307,23 @@ ul.slugtree ul ul > li {
 */
 
 /* Change to Indent Within - Could be more elegant */
-ul.slugtree ul ul > li > div > div > a > span.prefix {
-	margin-left:6px;
+ul.slugtree ul ul > li > div > div > div {
+	padding-left:18px;
 }
-ul.slugtree ul ul ul > li > div > div > a > span.prefix {
-	margin-left:12px;
+ul.slugtree ul ul ul > li > div > div > div {
+	padding-left:30px;
 }
-ul.slugtree ul ul ul ul > li > div > div > a > span.prefix {
-	margin-left:18px;
+ul.slugtree ul ul ul ul > li > div > div > div {
+	padding-left:42px;
 }
-ul.slugtree ul ul ul ul ul > li > div > div > a > span.prefix {
-	margin-left:24px;
+ul.slugtree ul ul ul ul ul > li > div > div > div {
+	padding-left:54px;
 }
-ul.slugtree ul ul ul ul ul ul > li > div > div > a > span.prefix {
-	margin-left:30px;
+ul.slugtree ul ul ul ul ul ul > li > div > div > div {
+	padding-left:66px;
 }
-ul.slugtree ul ul ul ul ul ul ul > li > div > div > a > span.prefix {
-	margin-left:36px;
+ul.slugtree ul ul ul ul ul ul ul > li > div > div > div {
+	padding-left:78px;
 }
 
 /*ul.slugtree {
@@ -1330,7 +1379,7 @@ ul.slugtree .content {
 ul.slugtree .attached {
 	/* width:178px; /* preferable to be fluid spans, but not aligning */
 	display: inline-block;
-	margin:0 0 0 5px;
+	margin:4px 0 0 5px;
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis; 
@@ -1850,13 +1899,13 @@ a.controllistRM {
 	float:left;
 	height:auto;
 	margin:3px 0px 0px 0px;
-	display:inline-block;
+	/*display:inline-block;
 	  -webkit-box-sizing: border-box;
 		 -moz-box-sizing: border-box;
 		  -ms-box-sizing: border-box;
 			  box-sizing: border-box;
 	padding: 5px 6px 5px 6px;
-	color:#666666;
+	*/color:#666666;
 	background: #ffffff; /* Old browsers */
 	vertical-align:central;
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0 ); /* IE6-9 */
@@ -1868,13 +1917,13 @@ a.controllistRM {
 	float:left;
 	height:auto;
 	margin:3px 3px 0px 0px;
-	display:inline-block;
+	/*display:inline-block;
 	  -webkit-box-sizing: border-box;
 		 -moz-box-sizing: border-box;
 		  -ms-box-sizing: 	-box;
 			  box-sizing: border-box;
 	padding:6px 8px 0px 6px;
-	color:#666666;
+	*/color:#666666;
 	background: #ffffff; /* Old browsers */
 	vertical-align:central;
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0 ); /* IE6-9 */
@@ -1884,7 +1933,7 @@ a.controllistRM {
 	float:left;
 	height:auto;
 	
-	display:inline-block;
+	/*display:inline-block;
 	  -webkit-box-sizing: border-box;
 		 -moz-box-sizing: border-box;
 		  -ms-box-sizing: border-box;
@@ -1948,8 +1997,9 @@ a.controllistRM {
 	vertical-align:top;
 	font-size:10px;
 	line-height:10px;
-    width:91%; 
+	width:91%; 
 	color:#777;
+	float:left;
 }
 
 .control-group {
@@ -2025,6 +2075,7 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 	padding:0;
 	background-position: 0px 0px;
 	background-repeat: no-repeat;
+	float:left;
 }
 
 .itemarrow:hover {
@@ -2453,6 +2504,10 @@ filter:alpha(opacity=40); /* For IE8 and earlier */
 .itemlist li a span{
 	text-align: right;
 	float:right;
+}
+
+.itemlist li select {
+	width: auto;
 }
 
 .badge {
