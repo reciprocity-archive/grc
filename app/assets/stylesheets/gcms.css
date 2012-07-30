@@ -559,7 +559,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5fbc8', end
 	min-height:10px;
 }
 
-.cleanlabels .row-fluid [class*="span"] {
+.cleanlabels .row-fluid [class*="span"], .information .row-fluid [class*="span"] {
 	min-height:28px;
 }
 
@@ -1307,22 +1307,22 @@ ul.slugtree ul ul > li {
 */
 
 /* Change to Indent Within - Could be more elegant */
-ul.slugtree ul ul > li > div > div > div {
+ul.slugtree ul ul > li > div > div > .slot {
 	padding-left:18px;
 }
-ul.slugtree ul ul ul > li > div > div > div {
+ul.slugtree ul ul ul > li > div > div > .slot {
 	padding-left:30px;
 }
-ul.slugtree ul ul ul ul > li > div > div > div {
+ul.slugtree ul ul ul ul > li > div > div > .slot {
 	padding-left:42px;
 }
-ul.slugtree ul ul ul ul ul > li > div > div > div {
+ul.slugtree ul ul ul ul ul > li > div > div > .slot {
 	padding-left:54px;
 }
-ul.slugtree ul ul ul ul ul ul > li > div > div > div {
+ul.slugtree ul ul ul ul ul ul > li > div > div > .slot {
 	padding-left:66px;
 }
-ul.slugtree ul ul ul ul ul ul ul > li > div > div > div {
+ul.slugtree ul ul ul ul ul ul ul > li > div > div > .slot {
 	padding-left:78px;
 }
 
@@ -1540,7 +1540,7 @@ border-top-right-radius: 4px;
 
 
 /* This widget isn't full of content slots, so lets add some padding to make the input boxes look less cramped */
-.programinformation {
+.information {
 	padding:10px;
 }
 
