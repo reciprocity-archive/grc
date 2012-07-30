@@ -15,7 +15,7 @@
 .modal-footer
   .row-fluid
     %nav.fltlft.txtlft.span3
-      %input.btn-large.btn-info{:type => 'reset', :value => 'Cancel'}
+      %a.btn-large.btn-info{:'data-dismiss' => 'modal-reset' } Cancel
     .span6
     %nav.fltrt.txtrt.span3
-      %input.btn-large.btn-warning{:type => 'submit', :value => 'Save'}
+      %a.btn-large.btn-warning{:'data-toggle' => 'modal-submit' } Save
