@@ -6,24 +6,18 @@
 
 %script{ :type => 'text/html', :data => { :person => '', :role => '' }}
   %li.slot.controlSlot{ :'data-id' => '<%= person.id %>' }
-    -#%input{ :type => 'hidden', :name => '', :value => '<%= person.id %>' }
-    -#%a{ :href => '#', :'data-toggle' => 'list-remove' }
-      .circle.fltrt
-        %i.gcmssmallicon-dash-white
-    %span.controls-group <%= role %>
-    %br
-    %span.controls-subgroup <%= person.name %>
-    %br
+    .controls-group
+      %a.btn.widgettextbtn.fltrt{ :href => flow_people_path + '/<%= person.id %>/edit', :'data-toggle' => 'modal-ajax', :'data-modal-reset' => 'reset', :'data-ajax-target' => 'refresh' }
+        Edit
+      .controls-type <%= role %>
+      .controls-subgroup <%= person.name || '&nbsp' %>
 
 %ul
   -object.object_people.all.each do |object_item|
     -item = object_item.person
     %li.slot.controlSlot{ :'data-id' => item.id }
-      -#%input{ :type => 'hidden', :name => '', :value => item.id }
-      -#%a{:href => "#", :'data-toggle' => 'list-remove'}
-        .circle.fltrt
-          %i.gcmssmallicon-dash-white
-      %span.controls-group=object_item.role
-      %br
-      %span.controls-subgroup=item.name
-      %br
+      .controls-group
+        %a.btn.widgettextbtn.fltrt{ :href => edit_flow_person_path(item), :'data-toggle' => 'modal-ajax', :'data-modal-reset' => 'reset', :'data-ajax-target' => 'refresh' }
+          Edit
+        .controls-type=object_item.role
+        .controls-subgroup=item.name || '&nbsp;'.html_safe

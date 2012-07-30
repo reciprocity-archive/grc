@@ -6,24 +6,18 @@
 
 %script{ :type => 'text/html', :data => { :document => '' }}
   %li.slot.controlSlot{ :'data-id' => '<%= document.id %>' }
-    -#%input{ :type => 'hidden', :name => '', :value => '<%= document.id %>' }
-    -#%a{:href => "#", :'data-toggle' => 'list-remove'}
-      .circle.fltrt
-        %i.gcmssmallicon-dash-white
-    %span.controls-group <%= document.title || document.link %>
-    %br
-    %span.controls-subgroup <%= document.descriptor %>
-    %br
+    .controls-group
+      %a.btn.widgettextbtn.fltrt{ :href => flow_documents_path + '/<%= document.id %>/edit', :'data-toggle' => 'modal-ajax', :'data-modal-reset' => 'reset', :'data-ajax-target' => 'refresh' }
+        Edit
+      .controls-type <%= document.descriptor %>
+      .controls-subgroup <%= document.title || document.link || '&nbsp;' %>
 
 %ul.referenceList
   -object.object_documents.all.each do |object_item|
     -item = object_item.document
     %li.slot.controlSlot{ :'data-id' => item.id }
-      -#%input{ :type => 'hidden', :name => '', :value => item.id }
-      -#%a{:href => "#", :'data-toggle' => 'list-remove'}
-        .circle.fltrt
-          %i.gcmssmallicon-dash-white
-      %span.controls-group=item.title || item.link
-      %br
-      %span.controls-subgroup=item.descriptor
-      %br
+      .controls-group
+        %a.btn.widgettextbtn.fltrt{ :href => edit_flow_document_path(item), :'data-toggle' => 'modal-ajax', :'data-modal-reset' => 'reset', :'data-ajax-target' => 'refresh' }
+          Edit
+        .controls-type=item.descriptor
+        .controls-subgroup=item.title || item.link || '&nbsp;'.html_safe

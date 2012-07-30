@@ -83,7 +83,7 @@ class DocumentsController < ApplicationController
   end
 
   def update
-    @document = Document.new(params[:id])
+    @document = Document.find(params[:id])
 
     respond_to do |format|
       if @document.authored_update(current_user, params[:document])

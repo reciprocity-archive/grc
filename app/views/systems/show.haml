@@ -1,18 +1,18 @@
--@title = "CMS System: #{@system.title}"
+-@title = "CMS #{@system.is_biz_process ? 'Biz Process' : 'System'}: #{@system.title}"
 
 -content_for :header do
   %ol#breadcrumb
-    %li SYSTEMS
+    %li=@system.is_biz_process ? 'BIZ PROCESSES' : 'SYSTEMS'
     %li=@system.slug
   .location#pageTitle=@system.title
 
 -content_for :page_help, 'system'
 
 -content_for :subheader_extras do
-  %h1.fltrt.highlighted System
+  %h1.fltrt.highlighted=@system.is_biz_process ? 'Biz Process' : 'System'
 
 -content_for :subheader_plus do
-  %a.navbarplus.fltrt{ :href => new_flow_system_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset' }
+  %a.navbarplus.fltrt{ :href => new_flow_system_path(:'system[is_biz_process]' => @system.is_biz_process), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset' }
 
 .row-static
   .doubleColumn

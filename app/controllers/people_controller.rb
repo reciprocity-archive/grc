@@ -78,7 +78,7 @@ class PeopleController < ApplicationController
   end
 
   def update
-    @person = Person.new(params[:id])
+    @person = Person.find(params[:id])
 
     respond_to do |format|
       if @person.authored_update(current_user, params[:person])

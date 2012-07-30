@@ -18,10 +18,17 @@
     =f.text_field :version, :class => 'input-supermini'
     =error_messages_inline(f, :version)
 
-  .span5{ :class => error_class(f, :owner) }
+  .span3{ :class => error_class(f, :owner) }
     =f.label :owner_id
-    =f.collection_select :owner_id, Person.all, :id, :display_name, {:include_blank => true}, {}
+    =f.collection_select :owner_id, Person.all, :id, :display_name, {:include_blank => true}, {:class => 'span12'}
     =error_messages_inline(f, :owner)
+
+  .span2{ :class => error_class(f, :is_biz_process) }
+    =f.label 'System or Process'
+    %select.span12{ :name => 'system[is_biz_process]' }
+      %option{ :value => '0', :selected => f.object.is_biz_process || 'selected' } System
+      %option{ :value => '1', :selected => f.object.is_biz_process && 'selected' } Biz Process
+    =error_messages_inline(f, :is_biz_process)
 
   .span3{ :class => error_class(f, :infrastructure) }
     =f.label 'Type'

@@ -26,7 +26,7 @@ class QuickController < ApplicationController
   end
 
   def biz_processes
-    @biz_processes = BizProcess
+    @biz_processes = System.where(:is_biz_process => true)
     if params[:s]
       @biz_processes = @biz_processes.search(params[:s])
     end
