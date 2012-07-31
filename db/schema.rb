@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120723212644) do
+ActiveRecord::Schema.define(:version => 20120726203406) do
 
   create_table "accounts", :force => true do |t|
     t.string   "username"
@@ -267,6 +267,15 @@ ActiveRecord::Schema.define(:version => 20120723212644) do
   end
 
   add_index "object_people", ["personable_type", "personable_id"], :name => "index_object_people_on_personable_type_and_personable_id"
+
+  create_table "options", :force => true do |t|
+    t.string   "role",           :null => false
+    t.string   "title",          :null => false
+    t.text     "description"
+    t.integer  "modified_by_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
 
   create_table "people", :force => true do |t|
     t.string   "username",       :null => false
