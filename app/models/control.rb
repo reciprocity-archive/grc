@@ -77,6 +77,10 @@ class Control < ActiveRecord::Base
       order(:slug)
   end
 
+  def self.category_tree
+    Category.roots.all.map { |c| [c, c.children.all] }
+  end
+
   # All controls that may be attached to a system (must be
   # company control)
   def self.for_system(s)

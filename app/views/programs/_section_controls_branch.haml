@@ -4,22 +4,16 @@
   %li.system-node
     .row-fluid
       .span12
-        %a.slot.regulationslot.span12{ :'data-toggle' => 'collapse', :'data-target' => "#content_system_#{item.id}" }
-          /-if !system.description.blank?
+        .slot.regulationslot.span12{ :'data-toggle' => 'collapse', :'data-target' => "#content_system_#{item.id}" }
           .expander{ :class => expanded && 'in' }
           %span.prefix=item.slug
-          =item.title || item.description
-        -#.controllist.attached.span3{ :class => "statusblue" }
-          dunno
-      .row-fluid-slotcontent
-        .span12
-          -#.collapse{ :id => "content_#{system.id}" }
-          =item.description
+          =item.title
     %ul.collapse{ :class => expanded && 'in', :id => "content_system_#{item.id}" }
       =walk_slug_tree(Program.slugtree(item.controls)) do |item, step|
+        -content_id = "content_#{rand(36**8).to_s(36)}"
         .row-fluid
           .span12
-            %a.slot.controlslot.span9{ :'data-toggle' => 'collapse', :'data-target' => "#content_item_#{item.id}" }
+            .slot.controlslot.span9{ :'data-toggle' => 'collapse', :'data-target' => "##{content_id}" }
               -if !item.description.blank?
                 .expander
               %span.prefix=item.slug
@@ -35,12 +29,6 @@
               -else
                 .controls
                   %strong 0
-          .row-fluid-slotcontent
-            .span9
-              .collapse{ :id => "content_item_#{item.id}" }
-                =item.description
-      -#subsystems = system.id == 3 ? [System.find(2), System.find(4)] : []
-      -#if subsections.count > 0
-        %li
-          %ul
-            =render :partial => 'section_controls_branch', :locals => { :sections =>  }
+        .row-fluid-slotcontent.collapse{ :id => content_id }
+          .span9
+            =item.description

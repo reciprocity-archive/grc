@@ -20,7 +20,7 @@
       .span3{ :class => error_class(f, :effective_at) }
         %label{:for => "control-effective_at"} Effective Date
         .date{"data-date" => "02-12-12", "data-date-format" => "dd-mm-yy"}
-          %input#control-effective_at.input-mini{:size => "16", :type => "text", :name => 'control[effective_at]', :value => nil, :'data-toggle' => 'datepicker'}
+          %input#control-effective_at.input-mini{:size => "16", :type => "text", :name => 'control[effective_at]', :value => f.object.effective_at && f.object.effective_at.strftime('%Y-%m-%d'), :'data-toggle' => 'datepicker'}
             %span.add-on
               %i.calendar
         =error_messages_inline(f, :effective_at)
@@ -68,14 +68,14 @@
           %option Open
         =error_messages_inline(f, :status)
 
-  #categorylist.span4.well.disabled{ :class => error_class(f, :categories) }
+  #categorylist.span4.well{ :class => error_class(f, :categories) }
     %label{:for => 'control-categories'} Categories
-    - category_list = [['Access Control', ['Access Management', 'Authorization', 'Authentication']], ['Change Management', ['Segregation of Duties', 'Configuration Management']], ['Business Continuity', ['Disaster Recovery', 'Physical Security']], ['Governance', ['Training', 'Policies & Procedures', 'Monitoring']]]
-    %select{:multiple => "multiple", :name => 'control[categories]'}
-      -category_list.each do |category_label, categories|
-        %optgroup{ :label => category_label }
-          -categories.each do |category|
-            %option{ :value => category }=category
+    -category_list = Control.category_tree
+    %select{:multiple => "multiple", :name => 'control[category_ids][]'}
+      -category_list.each do |category, subcategories|
+        %optgroup{ :label => category.name }
+          -subcategories.each do |subcategory|
+            %option{ :value => subcategory.id, :selected => (f.object.category_ids.include?(subcategory.id)) }=subcategory.name
     =error_messages_inline(f, :categories)
 
 .row-fluid

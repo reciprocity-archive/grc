@@ -568,6 +568,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5fbc8', end
   clear:both;
 }
 
+.row-fluid-slotcontent.collapse {
+  margin-top: 0;
+}
+
  /*Required for accordian slots using fluid layout*/ 
 .row-fluid-slotcontent [class*="span"] {
 	display: block;
@@ -1758,6 +1762,10 @@ textarea { resize:vertical; max-height:300px; height:120px; width: 98%; }
 }
 
 /* Map to Controls Buttons */
+
+.btn-large {
+	cursor: pointer;
+}
 
 .btn-warning {
 	display: inline-block;

@@ -3,4 +3,8 @@ class Category < ActiveRecord::Base
   acts_as_nested_set :scope => :scope_id
 
   attr_accessible :name, :scope_id
+
+  has_many :categorizations, :dependent => :destroy
+  has_many :controls, :through => :categorizations,
+    :source => :stuff, :source_type => 'Control'
 end

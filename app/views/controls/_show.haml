@@ -24,13 +24,13 @@
     .span12
       .span4
         %label Type
-        %input.inputtext-small{:disabled => "disabled", :type => "text", :value => "" || control.type}
+        %input.inputtext-small{:disabled => "disabled", :type => "text", :value => control.type && control.type.title}
       .span4
         %label Kind
-        %input.inputtext-small{:disabled => "disabled", :type => "text", :value => "" || control.kind}
+        %input.inputtext-small{:disabled => "disabled", :type => "text", :value => control.kind && control.kind.title}
       .span4
         %label Means of Operation
-        %input.inputtext-small{:disabled => "disabled", :type => "text", :value => "" || control.means}
+        %input.inputtext-small{:disabled => "disabled", :type => "text", :value => control.means && control.means.title}
   .row-fluid
     .span12
       %label Full Title

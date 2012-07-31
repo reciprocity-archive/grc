@@ -95,6 +95,7 @@ CmsRails::Application.routes.draw do
       get 'controls'
       get 'section_controls'
       get 'control_sections'
+      get 'category_controls'
     end
   end
 
