@@ -72,8 +72,7 @@ ActiveRecord::Schema.define(:version => 20120723212644) do
   end
 
   add_index "biz_process_sections", ["biz_process_id", "section_id"], :name => "index_biz_process_control_objectives_uniqueness", :unique => true
-  add_index "biz_process_sections", ["biz_process_id"], :name => "index_biz_process_control_objectives_on_biz_process_id"
-  add_index "biz_process_sections", ["section_id"], :name => "index_biz_process_control_objectives_on_control_objective_id"
+  add_index "biz_process_sections", ["section_id"], :name => "index_biz_process_sections_on_section_id"
 
   create_table "biz_process_systems", :force => true do |t|
     t.integer  "biz_process_id", :null => false
