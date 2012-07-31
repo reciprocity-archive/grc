@@ -64,6 +64,10 @@ class Control < ActiveRecord::Base
   has_many :categorizations, :as => :stuff
   has_many :categories, :through => :categorizations, :as => :stuff
 
+  belongs_to :type, :class_name => 'Option'
+  belongs_to :kind, :class_name => 'Option'
+  belongs_to :means, :class_name => 'Option'
+
   is_versioned_ext
 
   # All non-company section controls

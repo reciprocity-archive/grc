@@ -51,6 +51,8 @@ class System < ActiveRecord::Base
 
   has_many :transactions
 
+  belongs_to :type, :class_name => 'Option'
+
   is_versioned_ext
 
   # Which systems can be attached to a control

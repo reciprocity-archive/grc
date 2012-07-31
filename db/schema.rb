@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120726203406) do
+ActiveRecord::Schema.define(:version => 20120731165414) do
 
   create_table "accounts", :force => true do |t|
     t.string   "username"
@@ -179,6 +179,9 @@ ActiveRecord::Schema.define(:version => 20120726203406) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "parent_id"
+    t.integer  "type_id"
+    t.integer  "kind_id"
+    t.integer  "means_id"
   end
 
   add_index "controls", ["business_area_id"], :name => "index_controls_on_business_area_id"
@@ -372,6 +375,7 @@ ActiveRecord::Schema.define(:version => 20120726203406) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "is_biz_process", :default => false
+    t.integer  "type_id"
   end
 
   add_index "systems", ["slug"], :name => "index_systems_on_slug", :unique => true
