@@ -1,0 +1,4 @@
+=form_for :people, :url => list_update_flow_people_path(:object_type => @object.class.name, :object_id => @object.id), :method => :post, :remote => true do |f|
+  =render :partial => 'list_form',
+          :layout  => 'layouts/list_modal',
+          :locals  => { :object => @object, :current => @object.object_people, :options => Person.all }

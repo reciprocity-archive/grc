@@ -188,8 +188,6 @@ module ApplicationHelper
       else
         'field-failure'
       end
-    else
-      'field-success'
     end
   end
 
@@ -208,10 +206,12 @@ module ApplicationHelper
   end
 
   def member_error_class(o)
-    if !o.errors.empty?
-      'member-failure'
-    else
-      'member-success'
+    if o.changed?
+      if !o.errors.empty?
+        'member-failure'
+      else
+        'member-success'
+      end
     end
   end
 end

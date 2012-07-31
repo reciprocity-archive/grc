@@ -19,12 +19,13 @@
           .controls-type <%= username %>
           .controls-subtype
             %select(name="items[<%= id %>][role]")
-              %option(value='none') None
+              %option(value='') Select Role
               %option(value='owner') Owner
+              %option(value='none') None
           .controls-subgroup <%= name || '&nbsp;' %>
 
     %ul.itemlist#listObjectPersonList
-      -@object.object_people.each do |object_person|
+      -object.object_people.each do |object_person|
         -person = object_person.person
         %li.slot.controlSlot{ :'data-id' => person.id, :class => member_error_class(object_person) }
           =member_error_messages_inline(object_person)
@@ -36,8 +37,9 @@
             .controls-type=person.username
             .controls-subtype
               %select(name="items[#{person.id}][role]")
-                %option(value='none'){ :selected => object_person.role.nil? } None
+                %option(value=''){ :selected => object_person.role.nil? } Select Role
                 %option(value='owner'){ :selected => object_person.role == 'owner' } Owner
+                %option(value='none'){ :selected => object_person.role == 'none' } None
             .controls-subgroup=person.name || '&nbsp;'.html_safe
 
   .span6
@@ -54,7 +56,7 @@
           .controls-subgroup <%= name || '&nbsp;' %>
 
     %ul.itemlist#listPersonList{ :'data-list-href' => list_flow_people_path(:format => 'json'), :'data-list-target' => '#listObjectPersonList'}
-      -@people.each do |person|
+      -options.each do |person|
         %li.slot.controlSlot{ :'data-id' => person.id }
           .itemarrow
           .arrowcontrols-group{:'data-toggle' => 'list-select', :href => '#', :data => { :id => person.id, :name => person.name, :username => person.username }}

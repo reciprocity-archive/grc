@@ -20,7 +20,7 @@
           .controls-subgroup <%= title || '&nbsp;' %>
 
     %ul.itemlist#listObjectDocumentList
-      -@object.object_documents.each do |object_document|
+      -object.object_documents.each do |object_document|
         -document = object_document.document
         %li.slot.controlSlot{ :'data-id' => document.id, :class => member_error_class(object_document) }
           =member_error_messages_inline(object_document)
@@ -48,7 +48,7 @@
           .controls-subgroup <%= title || '&nbsp;' %>
 
     %ul.itemlist#listDocumentList{ :'data-list-href' => list_flow_documents_path(:format => 'json'), :'data-list-target' => '#listObjectDocumentList'}
-      -@documents.each do |document|
+      -options.each do |document|
         %li.slot.controlSlot{ :'data-id' => document.id }
           .itemarrow
           .arrowcontrols-group{ :'data-toggle' => 'list-select', :href => '#', :data => { :id => document.id, :title => document.title, :link => document.link, :descriptor => document.descriptor }}

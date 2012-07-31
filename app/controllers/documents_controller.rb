@@ -45,23 +45,41 @@ class DocumentsController < ApplicationController
     end
   end
 
-  def list_form
+  def list_edit
     @object = params[:object_type].classify.constantize.find(params[:object_id])
-    @documents = Document.where({})
+    #@documents = Document.where({})
     render :layout => nil
   end
 
-  def list_save
+  def list_update
     @object = params[:object_type].classify.constantize.find(params[:object_id])
-    params[:items].each do |_, item|
-      @object.documents.clear
-      document = Document.find(item[:id])
-      role = item[:role] == 'none' ? nil : item[:role]
-      @object.object_documents << ObjectDocument.new(:document => document, :role => role)
+
+    new_object_documents = []
+
+    if params[:items]
+      params[:items].each do |_, item|
+        object_document = @object.object_documents.where(:document_id => item[:id]).first
+        if !object_document
+          object_document = @object.object_documents.new(:document_id => item[:id])
+        end
+        new_object_documents.push(object_document)
+      end
     end
 
-    @object.object_documents.include_root_in_json = false
-    render :json => @object.object_documents.all.map(&:as_json_with_role_and_document)
+    @object.object_documents = new_object_documents
+
+    respond_to do |format|
+      if @object.save
+        format.json do
+          @object.object_documents.include_root_in_json = false
+          render :json => @object.object_documents.all.map(&:as_json_with_role_and_document)
+        end
+        format.html
+      else
+        flash[:error] = "Could not update attached documents"
+        format.html { render :layout => nil }
+      end
+    end
   end
 
   def create
@@ -102,5 +120,10 @@ class DocumentsController < ApplicationController
 
   def index
     @documents = Document.all
+  end
+
+  def destroy
+    @document = Document.find(params[:id])
+    @document.destroy
   end
 end

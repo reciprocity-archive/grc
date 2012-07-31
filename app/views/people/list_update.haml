@@ -1,0 +1,3 @@
+=fields_for :people do |f|
+  =render :partial => 'list_form',
+          :locals  => { :object => @object, :current => @object.object_people, :options => Person.all }

@@ -4,6 +4,9 @@
   -else
     Edit reference
 
+-if !f.object.new_record?
+  -content_for :modal_delete_path, flow_document_path(f.object)
+
 .row-fluid
   .span8
     .span12{ :class => error_class(f, :title) }
@@ -38,6 +41,11 @@
   .span2
     %label
     %a.btn.btn-large{:href => "#comingsoonModal"} Attach
+
+%br
+
+-if !f.object.new_record?
+  =render :partial => 'shared/object_info', :locals => { :object => f.object, :approved => false }
 
 -#.row-fluid
   .span12{ :class => error_class(f, :title) }
