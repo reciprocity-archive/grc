@@ -31,7 +31,7 @@ class Control < ActiveRecord::Base
   has_many :biz_processes, :through => :biz_process_controls
 
   # Many to many with System
-  has_many :system_controls
+  has_many :system_controls, :dependent => :destroy
   has_many :systems, :through => :system_controls
 
   # The types of evidence (Documents) that may be attached to this control
@@ -53,10 +53,10 @@ class Control < ActiveRecord::Base
   has_many :implementing_controls, :through => :implementing_control_controls, :source => :control
   has_many :implementing_control_controls, :class_name => "ControlControl", :foreign_key => "implemented_control_id"
 
-  has_many :object_people, :as => :personable
+  has_many :object_people, :as => :personable, :dependent => :destroy
   has_many :people, :through => :object_people
 
-  has_many :object_documents, :as => :documentable
+  has_many :object_documents, :as => :documentable, :dependent => :destroy
   has_many :documents, :through => :object_documents
 
   is_versioned_ext

@@ -22,10 +22,10 @@ class Program < ActiveRecord::Base
   belongs_to :source_document, :class_name => 'Document'
   belongs_to :source_website, :class_name => 'Document'
 
-  has_many :object_people, :as => :personable
+  has_many :object_people, :as => :personable, :dependent => :destroy
   has_many :people, :through => :object_people
 
-  has_many :object_documents, :as => :documentable
+  has_many :object_documents, :as => :documentable, :dependent => :destroy
   has_many :documents, :through => :object_documents
 
   is_versioned_ext
