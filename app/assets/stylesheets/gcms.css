@@ -1343,11 +1343,11 @@ ul.slugtree .collapsed {
 	white-space: nowrap;
 	text-overflow: ellipsis; 
 }
+*/
 ul.slugtree .prefix {
     font-weight: bold;
     margin-right: 10px; 
 }
-*/
 /*ul.slugtree .expander {*/
 .expander {
 	position:relative;
