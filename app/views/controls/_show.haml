@@ -7,58 +7,67 @@
   %a.widgetbtn{ :href => edit_flow_control_path(control), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :title => 'Edit Control' }
     %i.gcmsicon-edit-grey
 
-.nav.nav-tabs.nav-stacked
-  %h4
-    =control.title
+.information
+  .toolbar-widget
 
-  .section
-    Description:
-    -#=control.description
+  %hr.hr-widget
 
-  .section
-    %h3 About this Control
-    .item
-      Short Code: #{control.slug}
-    .item
-      Effective Date: #{display_time(control.effective_at)}
-    .item
-      Control Type: TBD
-  .section
-    %h3 Control Verification
-    .item
-      Frequency: #{pluralize(control.frequency, control.frequency_type.to_s)}
-    .item
-      Evidence Types:
-      -control.evidence_descriptors.each do |desc|
-        .item
-          =desc.title
-          .item
-            =desc.description
-  .section
-    %h3 Mappings
-    .item
-      To Controls:
-      -control.implemented_controls.each do |impl|
-        .item
-          =link_to impl.slug, flow_control_path(impl)
-          =impl.title
-    .item
-      To Sections:
-      -control.sections.each do |sec|
-        .item
-          =link_to sec.slug, section_path(sec)
-          =sec.title
+  .row-fluid
+    .span12
+      .span4
+        %label Short Code
+        %input.inputtext-small{:type => "text", :disabled => "disabled", :value => control.slug}
+      .span4
+        %label Effective Date
+        %input.inputtext-small{:type => "text", :disabled => "disabled", :value => control.effective_at && control.effective_at.strftime("%m/%d/%y")}
+  .row-fluid
+    .span12
+      .span4
+        %label Type
+        %input.inputtext-small{:disabled => "disabled", :type => "text", :value => "" || control.type}
+      .span4
+        %label Kind
+        %input.inputtext-small{:disabled => "disabled", :type => "text", :value => "" || control.kind}
+      .span4
+        %label Means of Operation
+        %input.inputtext-small{:disabled => "disabled", :type => "text", :value => "" || control.means}
+  .row-fluid
+    .span12
+      %label Full Title
+      %input.span12{:disabled => "disabled", :type => "text", :value => control.title}
+  .row-fluid
+    .span4
+      %label Version
+      %input.inputtext-small{:disabled => "disabled", :type => "text"}
+    .span4
+      %label Status
+      %input.inputtext-small{:disabled => "disabled", :type => "text"}
+  .row-fluid
+    .span12
+      %label Description
+      %textarea#textarea{:disabled => "disabled", :rows => 3}=control.description
 
-%hr
+%hr.hr-widget
 
 .row-fluid
   .span12#referenceList
     =render :partial => 'documents/object_list',
             :locals  => { :object => control }
 
-%hr
+%hr.hr-widget
 
 .row-fluid
   .span12#peopleList
     =render :partial => 'people/object_list',
             :locals  => { :object => control }
+
+%hr.hr-widget
+
+.row-fluid
+  .span3.nominheight
+    %label.fltlft
+      %strong> Created: #{control.created_at.strftime("%m/%d/%y")}
+  .span3
+  .span3.nominheight
+    %label.fltlft
+      %strong> Updated: #{control.updated_at.strftime("%m/%d/%y")}

@@ -7,26 +7,59 @@
   %a.widgetbtn{:href => edit_flow_system_path(system), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :title => 'Edit System'}
     %i.gcmsicon-edit-grey
 
-.nav.nav-tabs.nav-stacked
-  =system.title
+.information
+  .toolbar-widget
 
-  .item
-    Created:
-    =display_time(system.created_at)
-  .item
-    Updated:
-    =display_time(system.updated_at)
+  %hr.hr-widget
 
-%hr
+  .row-fluid
+    .span12
+      .span4
+        %label Short Code
+        %input.inputtext-small{:type => "text", :disabled => "disabled", :value => system.slug}
+      .span4
+        %label Type
+        %input.inputtext-small{:disabled => "disabled", :type => "text", :value => "" || system.type}
+      .span4
+        %label System or Process
+        %input.inputtext-small{:disabled => "disabled", :type => "text", :value => system.is_biz_process? ? 'Process' : 'System'}
+  .row-fluid
+    .span12
+      %label Full Title
+      %input.span12{:disabled => "disabled", :type => "text", :value => system.title}
+  .row-fluid
+    .span4
+      %label Version
+      %input.inputtext-small{:disabled => "disabled", :type => "text"}
+    .span4
+      %label Status
+      %input.inputtext-small{:disabled => "disabled", :type => "text"}
+  .row-fluid
+    .span12
+      %label Description
+      %textarea#textarea{:disabled => "disabled", :rows => 3}=system.description
+
+%hr.hr-widget
 
 .row-fluid
   .span12#referenceList
     =render :partial => 'documents/object_list',
             :locals  => { :object => system }
 
-%hr
+%hr.hr-widget
 
 .row-fluid
   .span12#peopleList
     =render :partial => 'people/object_list',
             :locals  => { :object => system }
+
+%hr.hr-widget
+
+.row-fluid
+  .span3.nominheight
+    %label.fltlft
+      %strong> Created: #{system.created_at.strftime("%m/%d/%y")}
+  .span3
+  .span3.nominheight
+    %label.fltlft
+      %strong> Updated: #{system.updated_at.strftime("%m/%d/%y")}

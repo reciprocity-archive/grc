@@ -30,12 +30,13 @@
       %option{ :value => '1', :selected => f.object.is_biz_process && 'selected' } Biz Process
     =error_messages_inline(f, :is_biz_process)
 
-  .span3{ :class => error_class(f, :infrastructure) }
+  .span3{ :class => error_class(f, :type) }
     =f.label 'Type'
-    %select.span12{ :name => 'system[type]' }
-      %option{ :value => 'none', :selected => f.object.infrastructure || 'selected' } None
-      %option{ :value => 'infrastructure', :selected => f.object.infrastructure && 'selected' } Infrastructure
-    =error_messages_inline(f, :infrastructure)
+    %select.span12{ :name => 'system[type_id]' }
+      %option(value='') Select Option
+      -Option.system_type_options.each do |o|
+        %option{ :value => o.id, :selected => (o.id == f.object.type_id) }=o.title
+    =error_messages_inline(f, :type)
 
 %br
 .row-fluid

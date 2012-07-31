@@ -16,21 +16,21 @@
 
 .row-static
   .doubleColumn
-    .doubleWide.halfHeight
+    .doubleWide.maxHalfHeight
       =render :partial => 'systems/sub_systems',
               :layout => 'layouts/widget_box',
               :locals => { :system => @system }
-    .singleColumn.halfHeight
+    .singleColumn.maxHalfHeight
       =render :partial => 'systems/super_systems',
               :layout => 'layouts/widget_box',
               :locals => { :system => @system }
-    .singleColumn.halfHeight
+    .singleColumn.maxHalfHeight
       =render :partial => 'systems/transactions',
               :layout => 'layouts/widget_box',
               :locals => { :system => @system }
       
   .singleColumn
-    .singleWide.fullHeight
+    .singleWide.maxFullHeight
       =render :partial => 'systems/show',
               :layout => 'layouts/widget_box',
               :locals => { :system => @system }

@@ -42,45 +42,6 @@
       %label Description
       %textarea#textarea.span12{:disabled => "disabled"}=program.description
 
-  -#%hr.hr-widget
-    =program.title
-    \|
-    =program.slug
-    \|
-    =program.company? ? 'Company' : 'Regulation'
-
-    %h3 Description
-
-    .item
-      =program.description
-
-    .item
-      Created:
-      =display_time(program.created_at)
-    .item
-      Updated:
-      =display_time(program.updated_at)
-
-    %h3 Sections
-    .item
-      Done: 
-      =@stats[:sections_done_count]
-    .item
-      N/A: 
-      =@stats[:sections_na_count]
-    .item
-      Not Done: 
-      =@stats[:sections_undone_count]
-
-    %h3 Controls
-    .item
-      Controls: 
-      =@stats[:controls_count]
-
-    .item
-      Parented Controls: 
-      =@stats[:controls_parented_count]
-
   #create-cycle-modal.modal.hide.fade
     -cycle = Cycle.new(:program_id => program.id)
     =form_for cycle, :url => flow_cycles_path, :method => :post, :remote => true, :html => {:class => :form} do |f|
@@ -107,3 +68,14 @@
   .span12#peopleList
     =render :partial => 'people/object_list',
             :locals  => { :object => program }
+
+%hr.hr-widget
+
+.row-fluid
+  .span3.nominheight
+    %label.fltlft
+      %strong> Created: #{program.created_at.strftime("%m/%d/%y")}
+  .span3
+  .span3.nominheight
+    %label.fltlft
+      %strong> Updated: #{program.updated_at.strftime("%m/%d/%y")}
