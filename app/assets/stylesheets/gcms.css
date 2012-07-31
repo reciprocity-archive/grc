@@ -352,7 +352,7 @@ unused.expanderslot {
 }
 
 .slot {
-	padding: 7px 6px 0 6px;
+	padding: 7px 6px 3px 6px;
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;

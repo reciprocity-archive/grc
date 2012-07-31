@@ -3,7 +3,6 @@
 
 -content_for :modal_title do
   %h1 Add Control
-  %h3 Select a control
 
 .row-fluid
   .span6
@@ -48,6 +47,7 @@
     %ul.itemlist#listOptionsList{ :'data-list-href' => controls_list_flow_system_path(object, :format => 'json'), :'data-list-target' => '#listCurrentList'}
       -options.each do |item|
         %li.slot.controlSlot
+          .itemarrow
           .arrowcontrols-group{ :'data-toggle' => 'list-select', :href => '#', :data => { :id => item.id, :title => item.title, :slug => item.slug }}
             .controls-type=item.slug
             .controls-subgroup=item.title
