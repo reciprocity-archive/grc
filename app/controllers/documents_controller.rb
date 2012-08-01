@@ -39,8 +39,7 @@ class DocumentsController < ApplicationController
     respond_to do |format|
       format.html { render :layout => nil }
       format.json do
-        @documents.include_root_in_json = false
-        render :json => @documents.as_json(:methods => :descriptor)
+        render :json => @documents.as_json(:root => nil, :methods => [:descriptor, :link_url])
       end
     end
   end
@@ -71,8 +70,7 @@ class DocumentsController < ApplicationController
     respond_to do |format|
       if @object.save
         format.json do
-          @object.object_documents.include_root_in_json = false
-          render :json => @object.object_documents.all.map(&:as_json_with_role_and_document)
+          render :json => @object.object_documents.all.map { |od| od.as_json_with_role_and_document(:root => nil) }
         end
         format.html
       else
@@ -89,8 +87,7 @@ class DocumentsController < ApplicationController
       if @document.save
         flash[:notice] = "Successfully created a new document."
         format.json do
-          @document.include_root_in_json=false
-          render :json => @document.as_json(:methods => :descriptor)
+          render :json => @document.as_json(:root => nil, :methods => [:descriptor, :link_url])
         end
         format.html { ajax_refresh }
       else
@@ -107,8 +104,7 @@ class DocumentsController < ApplicationController
       if @document.authored_update(current_user, params[:document])
         flash[:notice] = "Successfully updated the document."
         format.json do
-          @document.include_root_in_json = false
-          render :json => @document.as_json(:methods => :descriptor)
+          render :json => @document.as_json(:root => nil, :methods => [:descriptor, :link_url])
         end
         format.html { redirect_to flow_document_path(@document) }
       else

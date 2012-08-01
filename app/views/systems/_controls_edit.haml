@@ -34,15 +34,15 @@
   .span6
     %h3
       Select a control to add
-      %a.btn.btn-blue.addbtn.fltrt{ :href => new_flow_control_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-list-target' => '#listOptionsList' }
+      %a.btn.btn-blue.addbtn.fltrt{ :href => new_flow_control_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-list-target' => '#listOptionsList, #listCurrentList' }
         New Control
 
     %script{ :type => 'text/html' }
       %li.slot.controlSlot
         .itemarrow
         .arrowcontrols-group{ :'data-toggle' => 'list-select', :href => '#', :data => { :id => '<%= id %>', :title => '<%= title %>', :slug => '<%= slug %>' }}
-        .controls-type '<%= slug %>'
-        .controls-subgroup '<%= title %>'
+          .controls-type <%= slug %>
+          .controls-subgroup <%= title %>
 
     %ul.itemlist#listOptionsList{ :'data-list-href' => controls_list_flow_system_path(object, :format => 'json'), :'data-list-target' => '#listCurrentList'}
       -options.each do |item|

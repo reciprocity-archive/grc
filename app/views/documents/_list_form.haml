@@ -8,14 +8,14 @@
   .span6
     %h3 References for this object
 
-    %script{ :type => 'text/html', :data => { :title => '', :link => '', :descriptor => '' }}
+    %script{ :type => 'text/html', :data => { :title => '', :link_url => '', :descriptor => '' }}
       %li.slot.controlSlot{ :'data-id' => '<%= id %>' }
         %input(type='hidden' name='items[<%= id %>][id]' value='<%= id %>')
         %a{:href => "#", :'data-toggle' => 'list-remove'}
           .removeCircleButton.fltrt
             %i.gcmssmallicon-dash-white
-        .arrowcontrols-group{ :href => '#', :data => { :id => '<%= id %>', :title => '<%= title %>', :link => '<%= link %>', :descriptor => '<%= descriptor %>' }}
-          .controls-type <%= link %>
+        .arrowcontrols-group{ :href => '#', :data => { :id => '<%= id %>', :title => '<%= title %>', :link_url => '<%= link_url %>', :descriptor => '<%= descriptor %>' }}
+          .controls-type <%= link_url %>
           .controls-subtype <%= descriptor %>
           .controls-subgroup <%= title || '&nbsp;' %>
 
@@ -28,22 +28,22 @@
           %a{:href => "#", :'data-toggle' => 'list-remove'}
             .removeCircleButton.fltrt
               %i.gcmssmallicon-dash-white
-          .arrowcontrols-group{ :href => '#', :data => { :id => document.id, :title => document.title, :link => document.link, :descriptor => document.descriptor }}
-            .controls-type=document.link
+          .arrowcontrols-group{ :href => '#', :data => { :id => document.id, :title => document.title, :link_url => document.link_url, :descriptor => document.descriptor }}
+            .controls-type=document.link_url
             .controls-subtype=document.descriptor
             .controls-subgroup=document.title || '&nbsp;'.html_safe
 
   .span6
     %h3
       Select a reference to add
-      %a.btn.btn-blue.addbtn.fltrt{ :href => new_flow_document_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-list-target' => '#listDocumentList' }
+      %a.btn.btn-blue.addbtn.fltrt{ :href => new_flow_document_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-list-target' => '#listDocumentList, #listObjectDocumentList' }
         New Reference
 
     %script{ :type => 'text/html' }
       %li.slot.controlSlot{ :'data-id' => '<%= id %>' }
         .itemarrow
-        .arrowcontrols-group{ :'data-toggle' => 'list-select', :href => '#', :data => { :id => '<%= id %>', :title => '<%= title %>', :link => '<%= link %>', :descriptor => '<%= descriptor %>' }}
-          .controls-type <%= link %>
+        .arrowcontrols-group{ :'data-toggle' => 'list-select', :href => '#', :data => { :id => '<%= id %>', :title => '<%= title %>', :link_url => '<%= link_url %>', :descriptor => '<%= descriptor %>' }}
+          .controls-type <%= link_url %>
           .controls-subtype <%= descriptor %>
           .controls-subgroup <%= title || '&nbsp;' %>
 
@@ -51,7 +51,7 @@
       -options.each do |document|
         %li.slot.controlSlot{ :'data-id' => document.id }
           .itemarrow
-          .arrowcontrols-group{ :'data-toggle' => 'list-select', :href => '#', :data => { :id => document.id, :title => document.title, :link => document.link, :descriptor => document.descriptor }}
-            .controls-type=document.link
+          .arrowcontrols-group{ :'data-toggle' => 'list-select', :href => '#', :data => { :id => document.id, :title => document.title, :link_url => document.link_url, :descriptor => document.descriptor }}
+            .controls-type=document.link_url
             .controls-subtype=document.descriptor
             .controls-subgroup=document.title || '&nbsp;'.html_safe

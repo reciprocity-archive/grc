@@ -24,8 +24,7 @@ class PeopleController < ApplicationController
     respond_to do |format|
       format.html { render :layout => nil }
       format.json do
-        @people.include_root_in_json = false
-        render :json => @people
+        render :json => @people.as_json(:root => nil)
       end
     end
   end
@@ -57,8 +56,7 @@ class PeopleController < ApplicationController
     respond_to do |format|
       if @object.save
         format.json do
-          @object.object_people.include_root_in_json = false
-          render :json => @object.object_people.all.map(&:as_json_with_role_and_person)
+          render :json => @object.object_people.all.map { |op| op.as_json_with_role_and_person(:root => nil) }
         end
         format.html
       else
@@ -86,7 +84,7 @@ class PeopleController < ApplicationController
     respond_to do |format|
       if @person.save
         flash[:notice] = "Successfully created a new person."
-        format.json { @person.include_root_in_json = false; render :json => @person }
+        format.json { render :json => @person.as_json(:root => nil) }
         format.html { ajax_refresh }
       else
         flash[:error] = @person.errors.full_messages

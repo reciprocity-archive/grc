@@ -2,7 +2,7 @@
   %input.ui-corner-all.widgetsearch{ :type => 'text', :placeholder => 'Search' }
 
 -content_for :modal_title do
-  %h1 Add Subsystem
+  %h1 Edit Sub-Systems
 
 .row-fluid
   .span6
@@ -34,7 +34,7 @@
   .span6
     %h3
       Select a sub-system to add
-      %a.btn.btn-blue.addbtn.fltrt{ :href => new_flow_system_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-list-target' => '#listOptionsList' }
+      %a.btn.btn-blue.addbtn.fltrt{ :href => new_flow_system_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-list-target' => '#listOptionsList, #listCurrentList' }
         New System
 
     %script{ :type => 'text/html' }

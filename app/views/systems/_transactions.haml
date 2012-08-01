@@ -11,7 +11,7 @@
   %script(type='text/html' data-title='' data-description='')
     %li.slot.singleControlSlot.accordion-toggle(data-id='<%= id %>' data-toggle='collapse' data-target='#transaction-<%= id %>')
       .expander
-      %a.btn.btn-blue.fltrt{ :href => flow_transaction_path + '/<%= id %>/edit', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset' }
+      %a.btn.btn-blue.fltrt{ :href => flow_transactions_path + '/<%= id %>/edit', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset' }
         Edit
       %span.prefix <%= title %>
       .row-fluid-slotcontent.collapse{ :id => "transaction-<%= id %>" }
@@ -28,8 +28,7 @@
           .expander
           %a.btn.btn-blue.fltrt{ :href => edit_flow_transaction_path(item), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset' }
             Edit
-          %span.prefix
-          =item.title
+          %span.prefix=item.title
         .row-fluid-slotcontent.collapse{ :id => "transaction-#{item.id}" }
           .span12
             =item.description

@@ -40,6 +40,9 @@ class ControlsController < ApplicationController
     respond_to do |format|
       if @control.save
         flash[:notice] = "Successfully created a new control"
+        format.json do
+          render :json => @control.as_json(:root => nil)
+        end
         format.html { redirect_to flow_control_path(@control) }
       else
         flash[:error] = "There was an error creating the control."
@@ -54,6 +57,9 @@ class ControlsController < ApplicationController
     respond_to do |format|
       if @control.authored_update(current_user, params[:control] || {})
         flash[:notice] = "Successfully updated the control!"
+        format.json do
+          render :json => @control.as_json(:root => nil)
+        end
         format.html { redirect_to flow_control_path(@control) }
       else
         flash[:error] = "There was an error updating the control"

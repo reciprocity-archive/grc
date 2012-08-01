@@ -46,6 +46,10 @@ class Document < ActiveRecord::Base
     write_attribute(:link, value)
   end
 
+  def link_url
+    link && link.to_s
+  end
+
   def complete?
     !link.nil? && !link.to_s.blank?
   end

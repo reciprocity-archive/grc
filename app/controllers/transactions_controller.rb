@@ -29,8 +29,7 @@ class TransactionsController < ApplicationController
       if @transaction.save
         flash[:notice] = "Successfully created a new transaction."
         format.json do
-          @transaction.include_root_in_json=false
-          render :json => @transaction.as_json
+          render :json => @transaction.as_json(:root => nil)
         end
         format.html { ajax_refresh }
       else
@@ -47,8 +46,7 @@ class TransactionsController < ApplicationController
       if @transaction.authored_update(current_user, params[:transaction])
         flash[:notice] = "Successfully updated the transaction."
         format.json do
-          @transaction.include_root_in_json = false
-          render :json => @transaction.as_json(:methods => :descriptor)
+          render :json => @transaction.as_json(:root => nil, :methods => :descriptor)
         end
         format.html { redirect_to flow_transaction_path(@transaction) }
       else

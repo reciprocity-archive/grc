@@ -4,7 +4,7 @@ class ObjectPerson < ActiveRecord::Base
 
   validates :role, :presence => true
 
-  def as_json_with_role_and_person
-    as_json(:only => :role, :include => :person)
+  def as_json_with_role_and_person(options={})
+    as_json(options.merge(:only => :role, :include => :person))
   end
 end

@@ -1,5 +1,5 @@
 -content_for :widget_title do
-  System Information
+  System Info
 
 -content_for :widget_help, 'system_info'
 
@@ -56,10 +56,9 @@
 %hr.hr-widget
 
 .row-fluid
-  .span3.nominheight
+  .span6.nominheight
     %label.fltlft
       %strong> Created: #{system.created_at.strftime("%m/%d/%y")}
-  .span3
-  .span3.nominheight
-    %label.fltlft
+  .span6.nominheight
+    %label.fltrt
       %strong> Updated: #{system.updated_at.strftime("%m/%d/%y")}

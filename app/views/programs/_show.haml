@@ -1,5 +1,5 @@
 -content_for :widget_title do
-  Program Information
+  Program Info
 
 -content_for :widget_help, 'program_info'
 
@@ -72,10 +72,9 @@
 %hr.hr-widget
 
 .row-fluid
-  .span3.nominheight
+  .span6.nominheight
     %label.fltlft
       %strong> Created: #{program.created_at.strftime("%m/%d/%y")}
-  .span3
-  .span3.nominheight
-    %label.fltlft
+  .span6.nominheight
+    %label.fltrt
       %strong> Updated: #{program.updated_at.strftime("%m/%d/%y")}
