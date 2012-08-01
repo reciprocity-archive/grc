@@ -119,7 +119,7 @@
           window.location.assign(xhr.getResponseHeader('location'));
         } else if (xhr.status == 279) {
           // Handle 279 page refresh
-          window.location.assign(window.location.href);
+          window.location.assign(window.location.href.replace(/#.*/, ''));
         }
       }
 

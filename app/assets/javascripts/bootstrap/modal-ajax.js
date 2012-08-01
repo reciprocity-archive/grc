@@ -32,6 +32,10 @@
     $(this).trigger('loaded');
   }
 
+  function refresh_page() {
+    window.location.assign(window.location.href.replace(/#.*/, ''));
+  }
+
   var handlers = {
     'modal': function($target, $trigger, option) {
       $target.modal(option);
@@ -44,7 +48,7 @@
       // Close the modal and rewrite the target list
       $target.on('ajax:json', function(e, data, xhr) {
         if (list_target == 'refresh') {
-          window.location.assign(window.location.href);
+          refresh_page();
         } else if (list_target) {
           $(list_target).tmpl_setitems(data);
           $target.modal_form('hide');
@@ -58,7 +62,6 @@
 
       // Close the modal and append to the target list
       $target.on('ajax:json', function(e, data, xhr) {
-        console.debug('listnewform', list_target, arguments);
         if (list_target) {
           $(list_target).tmpl_additem(data);
           $target.modal_form('hide');
@@ -72,7 +75,7 @@
 
       $target.on('ajax:json', function(e, data, xhr) {
         if (form_target == 'refresh') {
-          window.location.assign(window.location.href);
+          refresh_page();
         }
       });
     }
