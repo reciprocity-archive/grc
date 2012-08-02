@@ -12,9 +12,8 @@
 
 CMS uses the following third-party software:
 
-* Ruby 1.9
-* Rails 3
-* DataMapper for object persistence
+* Ruby 1.9.3
+* Rails 3.2
 * HAML for view templates
 * Prawn for PDF manipulation
 * Yard for documentation
@@ -50,3 +49,18 @@ and autotesting (runs tests as files change):
 
     spork &
     autotest -v
+
+## Setup
+### On OS X (Mountain Lion - 10.8)
+
+* Install XCode 4.4
+* In XCode/Preferences - install Command Line tools
+* Install RVM
+* Install Ruby 1.9.3
+    rvm install 1.9.3-p194
+* Copy Gemfile.lock-dist to Gemfile.lock to configure the right gems
+* Set up gems by using bundle install.
+* Configure database by copying/modifying database.yml.dist to database.yml
+* Set up database w/ standard Rails commands
+
+### Use autotest (+ spork) for rapid testing
