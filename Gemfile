@@ -4,10 +4,11 @@ if File.exist? 'Gemfile.local'
   instance_eval(Bundler.read_file('Gemfile.local'), 'Gemfile.local', 1)
 end
 
-RAILS_VERSION = '= 3.2.3'
+RAILS_VERSION = '= 3.2.6'
+# XXX 3.2.6
 
 # Get latest psych - work around crash during reorg migration
-gem 'psych'
+# gem 'psych'
 
 #gem 'gdata-ruby-util', '1.1.2'
 gem 'gdata_19',
@@ -34,7 +35,8 @@ platforms :ruby do
 end
 
 platforms :jruby do
-  gem 'jdbc-sqlite3', :require => false
+  #gem 'jdbc-sqlite3', :require => false
+  gem 'activerecord-jdbcsqlite3-adapter'
   gem 'jdbc-mysql', :require => false
   gem 'jruby-openssl'
   gem 'therubyrhino'
@@ -49,7 +51,7 @@ gem 'acl9'
 
 gem 'rails', RAILS_VERSION
 
-gem 'haml'
+gem 'haml', :git => 'https://github.com/haml/haml.git', :ref => '3-2-stable'
 gem 'sass'
 gem 'haml-rails'
 
@@ -90,11 +92,16 @@ group(:development, :test) do
     gem 'ruby-debug'
   end
   platform :ruby do
-    gem 'ruby-debug19'
+    gem 'linecache19', :git => 'git://github.com/mark-moseley/linecache'
+    gem 'ruby-debug-base19x', '~> 0.11.30.pre4'
+    gem 'ruby-debug19', :require => 'ruby-debug'
+    gem 'ruby-prof'
   end
+
+  # Causes rake to fail, uncomment to rebuild docs
+  #gem 'yard-dm'
+  # XXX gem 'yard'
+  # XXX gem 'redcarpet'
+  gem 'test-unit'
 end
 
-# Causes rake to fail, uncomment to rebuild docs
-#gem 'yard-dm'
-gem 'yard'
-gem 'redcarpet'
