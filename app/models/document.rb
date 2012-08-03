@@ -22,7 +22,9 @@ class Document < ActiveRecord::Base
   end
 
   validates :link,
-    :uniqueness => true, :allow_blank => true, :presence => true
+    :uniqueness => true, :allow_blank => true
+
+  validates :title, :presence => true
 
   has_many :object_documents, :dependent => :destroy
 
@@ -42,7 +44,7 @@ class Document < ActiveRecord::Base
   end
 
   def link=(value)
-    if !VALID_SCHEMES.include?(value.split(':')[0])
+    if !value.blank? && !VALID_SCHEMES.include?(value.split(':')[0])
       value = "http://#{value}"
     end
     write_attribute(:link, value)
