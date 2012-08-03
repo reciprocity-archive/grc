@@ -43,6 +43,11 @@ jQuery(function($) {
     $(this).find('.expander').eq(0).toggleClass('in');
   });
 
+  // When clicking a slot-link, don't toggle collapse
+  $('body').on('click', '.slot > a', function(e) {
+    e.stopPropagation();
+  });
+
   // expandAll and shrinkAll buttons
   $('body').on('click', '.tabbable a.expandAll', function(e) {
     $(this).closest('.tabbable').find('.tab-pane:visible').find('.collapse').collapse({ toggle: false }).collapse('show');
