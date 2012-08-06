@@ -55,8 +55,8 @@ class Control < ActiveRecord::Base
   has_many :implementing_controls, :through => :implementing_control_controls, :source => :control
   has_many :implementing_control_controls, :class_name => "ControlControl", :foreign_key => "implemented_control_id"
 
-  has_many :categorizations, :as => :stuff
-  has_many :categories, :through => :categorizations, :as => :stuff
+  has_many :categorizations, :as => :categorizable
+  has_many :categories, :through => :categorizations
 
   is_versioned_ext
 

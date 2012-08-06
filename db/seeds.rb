@@ -46,9 +46,12 @@ ccats = Category.ctype(Control::CATEGORY_TYPE_ID)
 ac_cat = ccats.create(:name => 'Access Control')
 ac_cats = ac_cat.children.ctype(Control::CATEGORY_TYPE_ID)
 ac_cats.create(:name => 'Access Management')
-ac_cats.create(:name => 'Authorization')
+cauth = ac_cats.create(:name => 'Authorization')
 ac_cats.create(:name => 'Authentication')
 cm_cat = ccats.create(:name => 'Change Management')
 cm_cats = cm_cat.children.ctype(Control::CATEGORY_TYPE_ID)
 cm_cats.create(:name => 'Segregation of Duties')
 cm_cats.create(:name => 'Configuration Management')
+
+ctl.categories << cauth
+ctl.save

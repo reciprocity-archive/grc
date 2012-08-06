@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120723212644) do
+ActiveRecord::Schema.define(:version => 20120806220812) do
 
   create_table "accounts", :force => true do |t|
     t.string   "username"
@@ -22,8 +22,8 @@ ActiveRecord::Schema.define(:version => 20120723212644) do
     t.string   "role"
     t.string   "persistence_token"
     t.integer  "modified_by_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
 
   create_table "biz_process_controls", :force => true do |t|
@@ -32,8 +32,8 @@ ActiveRecord::Schema.define(:version => 20120723212644) do
     t.integer  "biz_process_id",                :null => false
     t.integer  "control_id",                    :null => false
     t.integer  "modified_by_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   add_index "biz_process_controls", ["biz_process_id"], :name => "index_biz_process_controls_on_biz_process_id"
@@ -43,8 +43,8 @@ ActiveRecord::Schema.define(:version => 20120723212644) do
     t.integer  "biz_process_id", :null => false
     t.integer  "policy_id",      :null => false
     t.integer  "modified_by_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   add_index "biz_process_documents", ["biz_process_id", "policy_id"], :name => "index_biz_process_documents_on_biz_process_id_and_policy_id", :unique => true
@@ -56,8 +56,8 @@ ActiveRecord::Schema.define(:version => 20120723212644) do
     t.integer  "person_id",                     :null => false
     t.integer  "biz_process_id",                :null => false
     t.integer  "modified_by_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   add_index "biz_process_people", ["biz_process_id"], :name => "index_biz_process_people_on_biz_process_id"
@@ -67,20 +67,19 @@ ActiveRecord::Schema.define(:version => 20120723212644) do
     t.integer  "biz_process_id", :null => false
     t.integer  "section_id",     :null => false
     t.integer  "modified_by_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   add_index "biz_process_sections", ["biz_process_id", "section_id"], :name => "index_biz_process_control_objectives_uniqueness", :unique => true
-  add_index "biz_process_sections", ["biz_process_id"], :name => "index_biz_process_control_objectives_on_biz_process_id"
-  add_index "biz_process_sections", ["section_id"], :name => "index_biz_process_control_objectives_on_control_objective_id"
+  add_index "biz_process_sections", ["section_id"], :name => "index_biz_process_sections_on_section_id"
 
   create_table "biz_process_systems", :force => true do |t|
     t.integer  "biz_process_id", :null => false
     t.integer  "system_id",      :null => false
     t.integer  "modified_by_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   add_index "biz_process_systems", ["biz_process_id", "system_id"], :name => "index_biz_process_systems_uniqueness", :unique => true
@@ -93,8 +92,8 @@ ActiveRecord::Schema.define(:version => 20120723212644) do
     t.text     "description"
     t.integer  "owner_id"
     t.integer  "modified_by_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   add_index "biz_processes", ["owner_id"], :name => "index_biz_processes_on_owner_id"
@@ -103,8 +102,8 @@ ActiveRecord::Schema.define(:version => 20120723212644) do
   create_table "business_areas", :force => true do |t|
     t.string   "title"
     t.integer  "modified_by_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "categories", :force => true do |t|
@@ -114,34 +113,38 @@ ActiveRecord::Schema.define(:version => 20120723212644) do
     t.integer  "rgt"
     t.integer  "scope_id"
     t.integer  "depth"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "modified_by_id"
   end
 
   create_table "categorizations", :force => true do |t|
-    t.integer  "category_id", :null => false
-    t.integer  "stuff_id",    :null => false
-    t.string   "stuff_type",  :null => false
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.integer  "category_id",        :null => false
+    t.integer  "categorizable_id",   :null => false
+    t.string   "categorizable_type", :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.integer  "modified_by_id"
   end
 
   create_table "control_controls", :force => true do |t|
     t.integer  "control_id",             :null => false
     t.integer  "implemented_control_id", :null => false
     t.integer  "modified_by_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
   end
 
   add_index "control_controls", ["control_id", "implemented_control_id"], :name => "index_control_controls_uniqueness", :unique => true
+  add_index "control_controls", ["control_id"], :name => "index_control_controls_on_control_id"
+  add_index "control_controls", ["implemented_control_id"], :name => "index_control_controls_on_implemented_control_id"
 
   create_table "control_document_descriptors", :force => true do |t|
     t.integer  "control_id",             :null => false
     t.integer  "evidence_descriptor_id", :null => false
     t.integer  "modified_by_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
   end
 
   add_index "control_document_descriptors", ["control_id", "evidence_descriptor_id"], :name => "index_control_document_descriptors_uniqueness", :unique => true
@@ -152,8 +155,8 @@ ActiveRecord::Schema.define(:version => 20120723212644) do
     t.integer  "control_id",     :null => false
     t.integer  "section_id",     :null => false
     t.integer  "modified_by_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   add_index "control_sections", ["control_id", "section_id"], :name => "index_control_control_objectives_uniqueness", :unique => true
@@ -175,8 +178,8 @@ ActiveRecord::Schema.define(:version => 20120723212644) do
     t.integer  "program_id"
     t.integer  "test_result_id"
     t.integer  "modified_by_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.integer  "parent_id"
   end
 
@@ -190,8 +193,8 @@ ActiveRecord::Schema.define(:version => 20120723212644) do
     t.date     "start_at"
     t.boolean  "complete",       :default => false, :null => false
     t.integer  "modified_by_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
   end
 
   add_index "cycles", ["program_id"], :name => "index_cycles_on_regulation_id"
@@ -200,16 +203,16 @@ ActiveRecord::Schema.define(:version => 20120723212644) do
     t.string   "title"
     t.text     "description"
     t.integer  "modified_by_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "document_system_controls", :force => true do |t|
     t.integer  "evidence_id",       :null => false
     t.integer  "system_control_id", :null => false
     t.integer  "modified_by_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
 
   add_index "document_system_controls", ["evidence_id", "system_control_id"], :name => "index_document_system_controls_uniqueness", :unique => true
@@ -220,8 +223,8 @@ ActiveRecord::Schema.define(:version => 20120723212644) do
     t.integer  "document_id",    :null => false
     t.integer  "system_id",      :null => false
     t.integer  "modified_by_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   add_index "document_systems", ["document_id", "system_id"], :name => "index_document_systems_uniqueness", :unique => true
@@ -235,8 +238,8 @@ ActiveRecord::Schema.define(:version => 20120723212644) do
     t.boolean  "reviewed",               :default => false, :null => false
     t.boolean  "good",                   :default => true
     t.integer  "modified_by_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
   end
 
   add_index "documents", ["document_descriptor_id"], :name => "index_documents_on_document_descriptor_id"
@@ -245,8 +248,8 @@ ActiveRecord::Schema.define(:version => 20120723212644) do
     t.string   "username",       :null => false
     t.string   "name"
     t.integer  "modified_by_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "programs", :force => true do |t|
@@ -257,8 +260,8 @@ ActiveRecord::Schema.define(:version => 20120723212644) do
     t.integer  "source_document_id"
     t.integer  "source_website_id"
     t.integer  "modified_by_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
     t.integer  "frequency_type",     :default => 1
     t.integer  "frequency",          :default => 1
   end
@@ -273,8 +276,8 @@ ActiveRecord::Schema.define(:version => 20120723212644) do
     t.text     "description"
     t.integer  "program_id",                        :null => false
     t.integer  "modified_by_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.integer  "parent_id"
     t.boolean  "na",             :default => false, :null => false
     t.text     "notes"
@@ -294,8 +297,8 @@ ActiveRecord::Schema.define(:version => 20120723212644) do
     t.text     "test_impact"
     t.text     "test_recommendation"
     t.integer  "modified_by_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
   end
 
   create_table "system_people", :force => true do |t|
@@ -303,8 +306,8 @@ ActiveRecord::Schema.define(:version => 20120723212644) do
     t.integer  "person_id",                     :null => false
     t.integer  "system_id",                     :null => false
     t.integer  "modified_by_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   create_table "system_sections", :force => true do |t|
@@ -312,8 +315,8 @@ ActiveRecord::Schema.define(:version => 20120723212644) do
     t.integer  "section_id",                    :null => false
     t.integer  "system_id",                     :null => false
     t.integer  "modified_by_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   create_table "systems", :force => true do |t|
@@ -323,8 +326,8 @@ ActiveRecord::Schema.define(:version => 20120723212644) do
     t.text     "description"
     t.integer  "owner_id"
     t.integer  "modified_by_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   add_index "systems", ["slug"], :name => "index_systems_on_slug", :unique => true
@@ -334,8 +337,8 @@ ActiveRecord::Schema.define(:version => 20120723212644) do
     t.boolean  "passed",         :default => false, :null => false
     t.text     "output"
     t.integer  "modified_by_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
   end
 
   create_table "versions", :force => true do |t|
