@@ -5,6 +5,8 @@
 class Cycle < ActiveRecord::Base
   include AuthoredModel
 
+  attr_accessible :program_id, :start_at, :complete
+
   # The program being audited
   belongs_to :program
 

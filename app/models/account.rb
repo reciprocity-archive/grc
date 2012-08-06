@@ -5,6 +5,8 @@ class Account < ActiveRecord::Base
   include AuthoredModel
   attr_accessor :password, :password_confirmation
 
+  attr_accessible :name, :surname, :email, :password, :password_confirmation
+
   before_save :encrypt_password
   before_save do
     reset_persistence_token if reset_persistence_token?

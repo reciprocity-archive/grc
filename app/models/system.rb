@@ -3,6 +3,8 @@ class System < ActiveRecord::Base
   include AuthoredModel
   include SluggedModel
 
+  attr_accessible :title, :slug, :description, :infrastructure
+
   before_save :upcase_slug
 
   validates :title, :slug,

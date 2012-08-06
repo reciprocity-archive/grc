@@ -7,6 +7,8 @@ class Program < ActiveRecord::Base
   include FrequentModel
   include SearchableModel
 
+  attr_accessible :title, :slug, :company
+
   before_save :upcase_slug
 
   validates :title, :slug,

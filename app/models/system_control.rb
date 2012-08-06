@@ -7,6 +7,8 @@ class SystemControl < ActiveRecord::Base
   include AuthoredModel
   include StateModel
 
+  attr_accessible :control, :system, :cycle
+
   # A set of documents used as evidence in an audit
   has_many :evidences, :class_name => 'Document', :through => :document_system_control
   has_many :document_system_control

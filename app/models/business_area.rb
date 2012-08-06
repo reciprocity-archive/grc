@@ -2,6 +2,8 @@
 class BusinessArea < ActiveRecord::Base
   include AuthoredModel
 
+  attr_accessible :title
+
   def display_name
     title
   end

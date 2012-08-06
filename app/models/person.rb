@@ -6,6 +6,8 @@ class Person < ActiveRecord::Base
 
   validates :username, :presence => true
 
+  attr_accessible :username
+
   is_versioned_ext
   
   def display_name

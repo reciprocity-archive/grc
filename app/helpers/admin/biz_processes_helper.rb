@@ -2,26 +2,35 @@ module Admin::BizProcessesHelper
   def update_biz_process_relations(bp, params)
     sec_ids = params.delete("sec_ids") || []
 
-    bp.sections = []
+    sections = []
     sec_ids.each do |sec_id|
-      sec = Section.find(sec_id)
-      bp.sections << sec
+      unless sec_id.blank?
+        sec = Section.find(sec_id)
+        sections << sec
+      end
     end
+    bp.sections = sections
 
     control_ids = params.delete("control_ids") || []
 
-    bp.controls = []
+    controls = []
     control_ids.each do |control_id|
-      control = Control.find(control_id)
-      bp.controls << control
+      unless control_id.blank?
+        control = Control.find(control_id)
+        controls << control
+      end
     end
+    bp.controls = controls
 
     system_ids = params.delete("system_ids") || []
 
-    bp.systems = []
+    systems = []
     system_ids.each do |system_id|
-      system = System.find(system_id)
-      bp.systems << system
+      unless system_id.blank?
+        system = System.find(system_id)
+        systems << system
+      end
     end
+    bp.systems = systems
   end
 end

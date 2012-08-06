@@ -64,5 +64,7 @@ module CmsRails
       g.template_engine :haml
     end
 
+    config.mass_assignment_sanitizer = :strict
+
   end
 end

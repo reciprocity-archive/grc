@@ -5,6 +5,8 @@
 class DocumentDescriptor < ActiveRecord::Base
   include AuthoredModel
 
+  attr_accessible :title, :description
+
   def display_name
     title
   end

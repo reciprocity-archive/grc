@@ -42,7 +42,9 @@ class Admin::AccountsController < ApplicationController
 
   # Create an account
   def create
+    role = params[:account].delete('role')
     @account = Account.new(params[:account])
+    @account.role = role
 
     respond_to do |format|
       if @account.save
@@ -59,9 +61,11 @@ class Admin::AccountsController < ApplicationController
   # Update an account
   def update
     @account = Account.find(params[:id])
+    role = params[:account].delete('role')
+    @account.role = role
 
     respond_to do |format|
-      if @account.update_attributes(params[:account])
+      if @account.save && @account.update_attributes(params[:account])
         if params[:account][:password]
           @account.crypted_password = nil
           @account.save

@@ -6,6 +6,8 @@ class BizProcess < ActiveRecord::Base
   extend SluggedModel::ClassMethods
   include SearchableModel
 
+  attr_accessible :title, :slug, :description, :section_ids, :control_ids, :system_ids
+
   before_save :upcase_slug
 
   validates :title, :slug,

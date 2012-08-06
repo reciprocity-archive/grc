@@ -8,6 +8,8 @@ class Control < ActiveRecord::Base
   include FrequentModel
   include SearchableModel
 
+  attr_accessible :title, :slug, :description, :program_id, :technical, :assertion, :effective_at, :is_key, :fraud_related, :frequency, :frequency_type, :business_area_id, :section_ids
+
   CATEGORY_TYPE_ID = 100
 
   before_save :upcase_slug

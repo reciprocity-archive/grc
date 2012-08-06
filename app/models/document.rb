@@ -7,6 +7,8 @@ class Document < ActiveRecord::Base
   include AuthoredModel
   VALID_SCHEMES = ['http', 'https']
 
+  attr_accessible :link, :title, :document_descriptor_id, :good, :reviewed
+
   validate :link do
     begin
       if link.nil? || VALID_SCHEMES.include?(link.scheme)
