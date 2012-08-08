@@ -84,4 +84,41 @@ describe Control do
     @ctl.control_document_descriptors.size.should eq(1)
     @ctl.control_document_descriptors.first.evidence_descriptor.should eq(@desc)
   end
+
+  it "generates hierarchical relationships" do
+    parent_control = FactoryGirl.create(:control_with_child_controls, child_depth: 2)
+
+    parent_control.implemented_controls.count.should(be 3)
+    parent_control.implemented_controls.first.implemented_controls.count.should(be 3)
+    parent_control.implemented_controls[1].implemented_controls.count.should(be 3)
+    parent_control.implemented_controls[2].implemented_controls.count.should(be 3)
+  end
+
+  it "generates controls and sections with the right program relationship" do
+  end
+
+  it "gets the ancestor controls" do
+    parent_control = FactoryGirl.create(:control_with_child_controls, child_depth: 2)
+    parent_control.ancestor_controls.count.should eq(0)
+    child_control = parent_control.implemented_controls.first
+    child_control.ancestor_controls.count.should eq(1)
+    child_control.implemented_controls.first.ancestor_controls.count.should eq(2)
+  end
+
+  it "gets the parent sections" do
+    pending
+    control = FactoryGirl.create(:control_with_ancestor_sections, ancestor_depth: 2)
+    control.ancestor_sections.count.should eq(6)
+  end
+
+  it "gets the parent persons" do
+    # Get all of the parent persons from all of the sections/programs
+    program = FactoryGirl.create(:program_with_people)
+    program.people.count.should eq(3)
+    pending
+  end
+
+  it "gets the proper persons that own the control" do
+    parent_control = FactoryGirl.create(:control_with_child_controls, child_depth: 2)
+  end
 end

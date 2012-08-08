@@ -74,6 +74,8 @@ group(:development, :test) do
   gem 'autotest-rails'
   gem 'simplecov', :require => false
 
+  gem 'factory_girl_rails', "~> 4.0"
+
   # To get a detailed overview about what queries get issued and how long they take
   # have a look at rails_metrics. Once you bundled it, you can run
   #

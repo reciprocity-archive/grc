@@ -112,6 +112,30 @@ class Control < ActiveRecord::Base
     evidence_descriptors.map { |e| e.id }
   end
 
+  # Get the list of both immediate and eventual parents
+  def ancestor_controls
+    implementing_controls.reduce([]) do |ancestors, control|
+      ancestors.push(control)
+
+      # Now traverse up the hierarchy
+      control_ancestors = control.ancestor_controls
+      ancestors.concat(control_ancestors)
+      ancestors
+    end
+  end
+
+  def ancestor_sections
+    # Not only need to look for instance's ancestor sections, but
+    # also the ancestor sections of all ancestor controls.
+    sections.reduce([]) do |ancestors, section|
+      ancestors.push(section)
+
+      # Now traverse up the hierarchy
+      section_ancestors = section.ancestors
+      ancestors.concat(section_ancestors)
+    end
+  end
+
   class ControlCycle
     def initialize(scs)
       @scs = scs
