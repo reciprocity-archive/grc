@@ -42,7 +42,7 @@ module AuthoredModel
         #    end
         #  end
         else
-          raise "can only handle one2many or many2many relations" 
+          raise "can only handle one2many or many2many relations"
         end
         tparams[base_key] = value.map { |id| relation.klass.find(id) }
         trels[relation] = new_ids
@@ -56,7 +56,7 @@ module AuthoredModel
       self.assign_attributes(tparams)
     else
       tparams.each do |key, value|
-        send(key, value)
+        send(key + '=', value)
       end
     end
 

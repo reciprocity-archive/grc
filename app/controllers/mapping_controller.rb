@@ -41,17 +41,19 @@ class MappingController < ApplicationController
         return
       end
       ccontrol = Control.find(params[:ccontrol])
-      rcontrol =
-        Control.create(:title => section.title,
-                       :slug => section.slug + "-" + ccontrol.slug,
-                       :program => section.program,
-                       :technical => ccontrol.technical,
-                       :fraud_related => ccontrol.fraud_related,
-                       :frequency => ccontrol.frequency,
-                       :frequency_type => ccontrol.frequency_type,
-                       :assertion => ccontrol.assertion,
-                       :description => "Placeholder",
-                      )
+      rcontrol = Control.new(
+        :title => section.title,
+        :slug => section.slug + "-" + ccontrol.slug,
+        :technical => ccontrol.technical,
+        :fraud_related => ccontrol.fraud_related,
+        :frequency => ccontrol.frequency,
+        :frequency_type => ccontrol.frequency_type,
+        :assertion => ccontrol.assertion,
+        :description => "Placeholder"
+      )
+      rcontrol.program = section.program
+      rcontrol.save
+
       rcontrol_id = rcontrol.id
       ControlControl.create(:implemented_control_id => rcontrol.id,
                             :control_id => ccontrol.id)
@@ -127,17 +129,17 @@ class MappingController < ApplicationController
   def buttons
     if !params[:rcontrol].blank?
       reg_exists =
-        params[:section] && params[:rcontrol] && 
+        params[:section] && params[:rcontrol] &&
         ControlSection.exists?(:section_id => params[:section],
                                :control_id => params[:rcontrol])
     else
-      reg_exists = 
-        params[:section] && params[:ccontrol] && 
+      reg_exists =
+        params[:section] && params[:ccontrol] &&
         Control.joins(:implementing_controls).joins(:sections).
         exists?(:sections => {:id => params[:section]}, :implementing_controls_controls => {:id => params[:ccontrol]})
     end
     com_exists =
-      params[:rcontrol] && params[:ccontrol] && 
+      params[:rcontrol] && params[:ccontrol] &&
       ControlControl.exists?(:implemented_control_id => params[:rcontrol],
                              :control_id => params[:ccontrol])
     respond_with do |format|
