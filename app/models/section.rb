@@ -8,7 +8,7 @@ class Section < ActiveRecord::Base
   include SluggedModel
   include SearchableModel
 
-  attr_accessible :title, :slug, :description, :program_id
+  attr_accessible :title, :slug, :description, :program
 
   before_save :upcase_slug
   before_save :update_parent_id

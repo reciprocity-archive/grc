@@ -35,7 +35,9 @@ class ControlsController < ApplicationController
   end
 
   def create
+    program = Program.find(params[:control].delete("program_id"))
     @control = Control.new(params[:control])
+    @control.program = program
 
     respond_to do |format|
       if @control.save

@@ -42,7 +42,9 @@ class Admin::ControlsController < ApplicationController
 
   # Create a control
   def create
+    program = Program.find(params[:control].delete("program_id"))
     @control = Control.new(params[:control])
+    @control.program = program
 
     respond_to do |format|
       if @control.save
@@ -66,7 +68,6 @@ class Admin::ControlsController < ApplicationController
     if !equal_ids(section_ids, @control.sections)
       sections = []
       section_ids.each do |section_id|
-        puts "<<<<<#{section_id.inspect}>>>>"
         unless section_id.blank?
           section = Section.find(section_id)
           sections << section

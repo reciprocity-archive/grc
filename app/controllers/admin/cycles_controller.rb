@@ -78,7 +78,9 @@ class Admin::CyclesController < ApplicationController
 
   # Create a doc
   def create
+    program = Program.find(params[:cycle].delete("program_id"))
     @cycle = Cycle.new(params[:cycle])
+    @cycle.program = program
 
     respond_to do |format|
       if @cycle.save

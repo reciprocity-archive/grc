@@ -192,7 +192,7 @@ module ManyHelper
 
 
     # left.rights = []
-    if left.authored_update(current_user, right_ids.to_sym => ids)
+    if left.authored_update(current_user, {right_ids.to_sym => ids}, false)
       flash[:notice] = 'Successfully updated.'
     else
       flash[:error] = "Failed."

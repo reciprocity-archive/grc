@@ -62,7 +62,7 @@ class Admin::AccountsController < ApplicationController
   def update
     @account = Account.find(params[:id])
     role = params[:account].delete('role')
-    @account.role = role
+    @account.role = role if role
 
     respond_to do |format|
       if @account.save && @account.update_attributes(params[:account])

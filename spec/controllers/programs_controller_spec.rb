@@ -38,7 +38,7 @@ describe ProgramsController do
       stats[:sections_undone_count].should eq(1)
       stats[:sections_na_count].should eq(0)
       stats[:controls_count].should eq(3)
-      stats[:controls_parented_count].should eq(1)
+      stats[:controls_parented_count].should eq(0)
     end
   end
 end

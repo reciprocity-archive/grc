@@ -30,8 +30,8 @@ class Admin::SectionsController < ApplicationController
     # If we memorized a program, prefill relevant fields
     if session[:ui_program_id]
       begin
-        @section.program_id = session[:ui_program_id]
-        @section.slug = Program.find(session[:ui_program_id]).slug
+        @section.program = Program.find(session[:ui_program_id])
+        @section.slug = @section.program.slug + "-"
       rescue
       end
     end
@@ -52,7 +52,9 @@ class Admin::SectionsController < ApplicationController
     # Memorize program for faster data entry
     session[:ui_program_id] = params[:section][:program_id]
 
+    program = Program.find(params[:section].delete("program_id"))
     @section = Section.new(params[:section])
+    @section.program = program
 
     respond_to do |format|
       if @section.save

@@ -10,8 +10,10 @@ describe Control do
 
   before :each do
     create_base_objects
-    @account = Account.create(:email => "a@b.org", :password => "xxxx", :password_confirmation => "xxxx", :role => "admin")
-    @ctl2 = Control.create(:title => 'Control 2', :slug => 'REG1-CTL2', :description => 'x', :program => @reg, :is_key => true, :fraud_related => false)
+    @account = Account.new(:email => "a@b.org", :password => "xxxx", :password_confirmation => "xxxx")
+    @account.role = "admin"
+    @account.save!
+    @ctl2 = Control.create!(:title => 'Control 2', :slug => 'REG1-CTL2', :description => 'x', :program => @reg, :is_key => true, :fraud_related => false)
   end
 
   it "was not modified by anybody in particular" do
