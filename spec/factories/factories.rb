@@ -19,17 +19,34 @@ FactoryGirl.define do
   end
 
   factory :program do
+    ignore do
+      num_people 3
+      num_sections 3
+    end
+
     title 'Program'
     slug
 
-    factory :program_with_people do
-      ignore do
-        num_people 3
-      end
+    trait :with_people do
       after(:create) do |prog, evaluator|
         (1..evaluator.num_people).to_a.map do
           person = FactoryGirl.create(:person)
           FactoryGirl.create(:object_person, :person => person, :personable => prog)
+        end
+      end
+    end
+
+    trait :with_sections do
+      after(:create) do |prog, evaluator|
+        section = FactoryGirl.create_list(:section, evaluator.num_sections, program: prog)
+      end
+    end
+
+    trait :with_sections_with_children do
+      after(:create) do |prog, evaluator|
+        (1..evaluator.num_sections).to_a.map do
+          section = FactoryGirl.create(:section_with_children,
+                                       { program: prog })
         end
       end
     end
@@ -56,7 +73,9 @@ FactoryGirl.define do
       # FIXME: Make all sections have the same program
       parent do |s|
         if s.ancestor_depth > 0
-          s.association(:section_with_ancestors, ancestor_depth: s.ancestor_depth - 1)
+          s.association(:section_with_ancestors,
+                        { ancestor_depth: s.ancestor_depth - 1,
+                          program: s.program })
         end
       end
     end
@@ -127,4 +146,17 @@ FactoryGirl.define do
       end
     end
   end
+
+  factory :account
+  factory :biz_process
+  factory :biz_process_person
+  factory :business_area
+  factory :control_section
+  factory :control_control
+  factory :cycle
+  factory :document
+  factory :document_descriptor
+  factory :system
+  factory :system_control
+  factory :system_person
 end

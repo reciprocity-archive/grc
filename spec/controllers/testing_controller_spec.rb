@@ -13,13 +13,13 @@ describe TestingController do
     before :each do
       login({}, { :role => 'admin' })
 
-      @reg = Program.create(:title => 'Reg 1', :slug => 'reg1', :company => false)
-      @cycle = Cycle.create(:program => @reg, :start_at => '2012-01-01')
-      @ctl = Control.create(:title => 'Control 1', :slug => 'reg1-ctl1', :description => 'x', :program => @reg, :is_key => true, :fraud_related => false)
-      @sys = System.create(:title => 'System 1', :slug => 'sys1', :description => 'x', :infrastructure => true)
-      @sc = SystemControl.create(:control => @ctl, :system => @sys, :state => :green, :cycle => @cycle)
-      @desc = DocumentDescriptor.create(:title => 'ACL')
-      @doc = Document.create({ :link => 'http://cde.com/', :title => 'Cde' })
+      @reg = FactoryGirl.create(:program, :title => 'Reg 1', :slug => 'reg1', :company => false)
+      @cycle = FactoryGirl.create(:cycle, :program => @reg, :start_at => '2012-01-01')
+      @ctl = FactoryGirl.create(:control, :title => 'Control 1', :slug => 'reg1-ctl1', :description => 'x', :program => @reg, :is_key => true, :fraud_related => false)
+      @sys = FactoryGirl.create(:system, :title => 'System 1', :slug => 'sys1', :description => 'x', :infrastructure => true)
+      @sc = FactoryGirl.create(:system_control, :control => @ctl, :system => @sys, :state => :green, :cycle => @cycle)
+      @desc = FactoryGirl.create(:document_descriptor, :title => 'ACL')
+      @doc = FactoryGirl.create(:document, :link => 'http://cde.com/', :title => 'Cde')
       session[:cycle_id] = @cycle.id
     end
 

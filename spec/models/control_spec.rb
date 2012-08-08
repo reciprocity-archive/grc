@@ -10,10 +10,8 @@ describe Control do
 
   before :each do
     create_base_objects
-    @account = Account.new(:email => "a@b.org", :password => "xxxx", :password_confirmation => "xxxx")
-    @account.role = "admin"
-    @account.save!
-    @ctl2 = Control.create!(:title => 'Control 2', :slug => 'REG1-CTL2', :description => 'x', :program => @reg, :is_key => true, :fraud_related => false)
+    @account = FactoryGirl.create(:account, :email => "a@b.org", :password => "xxxx", :password_confirmation => "xxxx", :role => "admin")
+    @ctl2 = FactoryGirl.create(:control, :title => 'Control 2', :slug => 'REG1-CTL2', :description => 'x', :program => @reg, :is_key => true, :fraud_related => false)
   end
 
   it "was not modified by anybody in particular" do
@@ -113,7 +111,7 @@ describe Control do
 
   it "gets the parent persons" do
     # Get all of the parent persons from all of the sections/programs
-    program = FactoryGirl.create(:program_with_people)
+    program = FactoryGirl.create(:program, :with_people)
     program.people.count.should eq(3)
     pending
   end
