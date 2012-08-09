@@ -1,10 +1,51 @@
-.group
-  =f.label :username
-  =f.text_field :username, :class => :text_field
+-content_for :modal_title do
+  -if f.object.new_record?
+    Create a new person object
+  -else
+    Edit person object
 
-.group
-  =f.label :name
-  =f.text_field :name, :class => :text_field
+-if !f.object.new_record?
+  -content_for :modal_delete_path, flow_person_path(f.object)
+
+.row-fluid
+  .span6
+    .row-fluid
+      .span12{ :class => error_class(f, :name) }
+        =f.label :name
+        =f.text_field :name, :class => 'span12', :placeholder => 'John Doe'
+        %br
+    .row-fluid
+      .span12{ :class => error_class(f, :company) }
+        =f.label :company
+        =f.text_field :username, :class => 'span12', :placeholder => 'Acme, Inc.'
+        %br
+    .row-fluid
+      .span12{ :class => error_class(f, :email) }
+        =f.label :email
+        =f.text_field :username, :class => 'span12', :placeholder => 'john@acme'
+        %br
+    .row-fluid
+      .span4
+        /%label Short Code
+        /%input.inputtext-small{:placeholder => "JHoov", :type => "text"}
+      .span4.disabled
+        =f.label :language
+        =f.text_field :username, :class => 'inputtext-small', :placeholder => 'English'
+      .span4
+        /%label Status
+        /%input#control-version.inputtext-small.forminputsuccess{:placeholder => "Deprecated", :type => "text"}
+
+  .span6
+    .row-fluid
+      .span12
+        %label Roles
+        %br
+        -[[:owner, 'Owner'], [:compliance_analyst, 'Compliance Analyst'], [:business_analyst, 'Business Product Analyst']].each do |role, title|
+          %input(name='person[roles][]' id="person_roles_#{role}" value="#{role}" type='checkbox')
+          %label(for="person_roles_#{role}")
+            =title
+          %br
+%br
 
 -if !f.object.new_record?
   =render :partial => 'shared/object_info', :locals => { :object => f.object, :approved => false }

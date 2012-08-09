@@ -1,6 +1,6 @@
 .row-fluid
   .span12
-    %a.regulationslot.toggle.span9.selector.collapsed{ :href => mapping_selected_section_path(section), :'data-remote' => "true", :'data-method' => "post" }
+    %a.slot.regulationslot.toggle.span9.selector.collapsed{ :href => mapping_selected_section_path(section), :'data-remote' => "true", :'data-method' => "post" }
       %span.prefix=section.compact_slug
       =section.title
     -controls = section.preloaded_linked_controls

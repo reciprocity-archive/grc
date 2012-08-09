@@ -3,18 +3,21 @@
 
 -content_for :widget_help, 'system_super_systems'
 
--content_for :widget_buttons do
-  /%a.btn.widgetbtn{ :href => new_flow_system_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :title => 'Create New System' } Add System
-  %input.ui-corner-all.widgetsearch.clear-value(type='text' placeholder='Search')
-
 .description
-  .content
-    /-system.super_systems.all.each do |item|
-    -System.all.each do |item|
-      %div
-        %span.prefix
-          =item.slug
-        =item.title
-      -if !item.description.blank?
-        %textarea(disabled='disabled')
-          =item.description
+  -super_systems = system.super_systems.all
+  -if super_systems.empty?
+    %p There are no other systems that rely on this system.
+
+  %ul.slugtree
+    -super_systems.each do |item|
+      %li( data-toggle='collapse' data-target="#super-system-#{item.id}" data-id="#{item.id}" )
+        .slot.singleControlSlot
+          .expander
+          %a.btn.btn-blue.fltrt{ :href => flow_system_path(item) }
+            Go
+          %span.prefix
+            =item.slug
+          =item.title
+        .row-fluid-slotcontent.collapse{ :id => "super-system-#{item.id}" }
+          .span12
+            =item.description

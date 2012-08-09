@@ -1,0 +1,3 @@
+=fields_for :systems do |f|
+  =render :partial => 'subsystems_edit',
+          :locals  => { :object => @system, :current => @system.sub_system_systems, :options => System.all }

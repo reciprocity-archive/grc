@@ -1,13 +1,13 @@
 -content_for :widget_title do
-  Program Information
+  Program Info
 
 -content_for :widget_help, 'program_info'
 
 -content_for :widget_buttons do
   %a.widgetbtn{:href => edit_flow_program_path(program), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :title => 'Edit Program'}
-    %i.gcmsicon-lock-grey
+    %i.gcmsicon-edit-grey
 
-.programinformation
+.information
 
   .toolbar-widget
     %a.btn.btn-warning{ :href => import_flow_program_path(@program) }
@@ -42,45 +42,6 @@
       %label Description
       %textarea#textarea.span12{:disabled => "disabled"}=program.description
 
-  -#%hr.hr-widget
-    =program.title
-    \|
-    =program.slug
-    \|
-    =program.company? ? 'Company' : 'Regulation'
-
-    %h3 Description
-
-    .item
-      =program.description
-
-    .item
-      Created:
-      =display_time(program.created_at)
-    .item
-      Updated:
-      =display_time(program.updated_at)
-
-    %h3 Sections
-    .item
-      Done: 
-      =@stats[:sections_done_count]
-    .item
-      N/A: 
-      =@stats[:sections_na_count]
-    .item
-      Not Done: 
-      =@stats[:sections_undone_count]
-
-    %h3 Controls
-    .item
-      Controls: 
-      =@stats[:controls_count]
-
-    .item
-      Parented Controls: 
-      =@stats[:controls_parented_count]
-
   #create-cycle-modal.modal.hide.fade
     -cycle = Cycle.new(:program_id => program.id)
     =form_for cycle, :url => flow_cycles_path, :method => :post, :remote => true, :html => {:class => :form} do |f|
@@ -98,58 +59,22 @@
 
 .row-fluid
   .span12#referenceList
-    %h3
-      References
-      %a.btn.btn-blue.addbtn.fltrt{:href => list_flow_documents_path, :'data-toggle' => 'modal-ajax-list', :'data-modal-reset' => 'reset', :'data-list-target' => '#referenceList' } Add
-    %script{ :type => 'text/html', :data => { :title => '', :link => '', :descriptor => '' }}
-      %li.controlSlot{ :'data-id' => '<%= id %>' }
-        %input{ :type => 'hidden', :name => '', :value => '<%= id %>' }
-        %a{:href => "#", :'data-toggle' => 'list-remove'}
-          .circle.fltrt
-            %i.gcmssmallicon-dash-white
-        %span.controls-group <%= title || link %>
-        %br
-        %span.controls-subgroup <%= descriptor %>
-        %br
-    %ul.referenceList
-      -#program.documents.all.each do |item|
-      -Document.first(3).each do |item|
-        %li.controlSlot{ :'data-id' => item.id }
-          %input{ :type => 'hidden', :name => '', :value => item.id }
-          %a{:href => "#", :'data-toggle' => 'list-remove'}
-            .circle.fltrt
-              %i.gcmssmallicon-dash-white
-          %span.controls-group=item.title || item.link
-          %br
-          %span.controls-subgroup=item.document_descriptor && item.document_descriptor.title
-          %br
+    =render :partial => 'documents/object_list',
+            :locals  => { :object => program }
 
 %hr
 
 .row-fluid
   .span12#peopleList
-    %h3
-      People
-      %a.btn.btn-blue.addbtn.fltrt{:href => list_flow_people_path, :'data-toggle' => 'modal-ajax-list', :'data-modal-reset' => 'reset', :'data-list-target' => '#peopleList' } Add
-    %script{ :type => 'text/html', :data => { :username => '', :name => '' }}
-      %li.controlSlot{ :'data-id' => '<%= id %>' }
-        %input{ :type => 'hidden', :name => '', :value => '<%= id %>' }
-        %a{ :href => '#', :'data-toggle' => 'list-remove' }
-          .circle.fltrt
-            %i.gcmssmallicon-dash-white
-        %span.controls-group <%= username %>
-        %br
-        %span.controls-subgroup <%= name %>
-        %br
-    %ul
-      -#program.persons.all.each do |item|
-      -Person.first(3).each do |item|
-        %li.controlSlot{ :'data-id' => item.id }
-          %input{ :type => 'hidden', :name => '', :value => item.id }
-          %a{:href => "#", :'data-toggle' => 'list-remove'}
-            .circle.fltrt
-              %i.gcmssmallicon-dash-white
-          %span.controls-group=item.username
-          %br
-          %span.controls-subgroup=item.name
-          %br
+    =render :partial => 'people/object_list',
+            :locals  => { :object => program }
+
+%hr.hr-widget
+
+.row-fluid
+  .span6.nominheight
+    %label.fltlft
+      %strong> Created: #{program.created_at.strftime("%m/%d/%y")}
+  .span6.nominheight
+    %label.fltrt
+      %strong> Updated: #{program.updated_at.strftime("%m/%d/%y")}

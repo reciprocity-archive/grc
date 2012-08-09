@@ -1,0 +1,46 @@
+-expanded = local_assigns.has_key?(:expanded) && expanded
+
+=walk_slug_tree(Program.slugtree(controls)) do |item, step|
+  %li.system-node
+    .row-fluid
+      .span12
+        %a.slot.controlslot.span12{ :'data-toggle' => 'collapse', :'data-target' => "#content_system_#{item.id}" }
+          /-if !system.description.blank?
+          .expander{ :class => expanded && 'in' }
+          %span.prefix=item.slug
+          =item.title || item.description
+        -#.controllist.attached.span3{ :class => "statusblue" }
+          dunno
+      .row-fluid-slotcontent
+        .span12
+          -#.collapse{ :id => "content_#{system.id}" }
+          =item.description
+    %ul.collapse{ :class => expanded && 'in', :id => "content_system_#{item.id}" }
+      =walk_slug_tree(Program.slugtree(item.implemented_controls)) do |item, step|
+        .row-fluid
+          .span12
+            %a.slot.regulationslot.span9{ :'data-toggle' => 'collapse', :'data-target' => "#content_item_#{item.id}" }
+              -if !item.description.blank?
+                .expander
+              %span.prefix=item.slug
+              =item.title || item.description
+            .controllist.attached.span3{ :class => "statusblue" }
+              -controls = item.implementing_controls
+              -if !controls.empty?
+                %ul.spannomargin{ :title => controls.map(&:slug).join(", ") }
+                  %li
+                    %strong #{controls.size}:
+                  -controls.each do |control|
+                    %li=control.slug
+              -else
+                .controls
+                  %strong 0
+          .row-fluid-slotcontent
+            .span9
+              .collapse{ :id => "content_item_#{item.id}" }
+                =item.description
+      -#subsystems = system.id == 3 ? [System.find(2), System.find(4)] : []
+      -#if subsections.count > 0
+        %li
+          %ul
+            =render :partial => 'section_controls_branch', :locals => { :sections =>  }

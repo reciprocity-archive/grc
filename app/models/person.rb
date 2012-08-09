@@ -4,12 +4,14 @@
 class Person < ActiveRecord::Base
   include AuthoredModel
 
-  validates :username, :presence => true
-
   attr_accessible :username
 
+  validates :username, :presence => true
+
+  has_many :object_people, :dependent => :destroy
+
   is_versioned_ext
-  
+
   def display_name
     username
   end

@@ -116,4 +116,52 @@ class ProgramsController < ApplicationController
     @controls.all.sort_by(&:slug_split_for_sort)
     render :layout => nil, :locals => { :controls => @controls }
   end
+
+  def section_controls
+    @program = Program.find(params[:id])
+    @sections = @program.sections.includes(:controls => :implementing_controls)
+    if params[:s]
+      @sections = @sections.search(params[:s])
+    end
+    @sections.all.sort_by(&:slug_split_for_sort)
+    render :layout => nil, :locals => { :sections => @sections }
+  end
+
+  def control_sections
+    @program = Program.find(params[:id])
+    @controls = @program.controls.includes(:sections)
+    if params[:s]
+      @controls = @controls.search(params[:s])
+    end
+    @controls.all.sort_by(&:slug_split_for_sort)
+    render :layout => nil, :locals => { :controls => @controls }
+  end
+
+  def category_controls
+    @program = Program.find(params[:id])
+
+    @category_tree = Category.roots.all.map do |category|
+      branches = category.children.all.map do |subcategory|
+        controls = subcategory.controls.where(:program_id => @program.id).all
+        if !controls.empty?
+          [subcategory, controls]
+        end
+      end.compact
+      if !branches.empty?
+        [category, branches]
+      end
+    end.compact
+
+    uncategorized_controls = Control.
+      joins("LEFT OUTER JOIN categorizations ON categorizations.categorizable_type = 'Control' AND categorizations.categorizable_id = controls.id").
+      where("categorizations.categorizable_id IS NULL").
+      where(:program_id => @program.id).
+      all
+
+    if !uncategorized_controls.empty?
+      @category_tree.push([nil, uncategorized_controls])
+    end
+
+    render :layout => nil, :locals => { }
+  end
 end

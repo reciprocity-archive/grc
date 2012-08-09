@@ -4,6 +4,14 @@
  *= require gcms
  */
 
+.flare {
+  -webkit-transition: background-color 2s ease-out;
+}
+
+.flaretemp {
+  background-color: yellow;
+}
+
 .tab-pane {
   overflow: auto;
 }
@@ -46,6 +54,15 @@
   input, select, textarea {
     background-color: #EAFFE6;
   }
+}
+
+.member-failure {
+  background-color: #FFC8C8;
+  border-color: #B94A48;
+}
+
+.member-success {
+  background-color: #EAFFE6;
 }
 
 .compact-rows {

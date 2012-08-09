@@ -7,8 +7,8 @@
 -content_for :widget_help, 'system_sub_systems'
 
 -content_for :widget_buttons do
-  %a.btn.widgetbtn{ :href => new_flow_system_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :title => 'Create New System' } Add System
-  %a.btn.widgetbtn{ :href => new_flow_control_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :title => 'Create New Control' } Add Control
+  %a.btn.widgettextbtn{ :href => subsystems_edit_flow_system_path(system), :'data-toggle' => 'modal-ajax-listform', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :title => 'Create New System' } Add System
+  %a.btn.widgettextbtn{ :href => controls_edit_flow_system_path(system), :'data-toggle' => 'modal-ajax-listform', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :title => 'Create New Control' } Add Control
   %input.ui-corner-all.widgetsearch.clear-value(type='text' placeholder='Search')
 
 %ul.slugtree

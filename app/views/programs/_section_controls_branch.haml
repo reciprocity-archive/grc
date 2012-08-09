@@ -1,0 +1,34 @@
+-expanded = false #unless local_assigns.has_key?(:expanded)
+
+=walk_slug_tree(Program.slugtree(sections)) do |item, step|
+  %li.system-node
+    .row-fluid
+      .span12
+        .slot.regulationslot.span12{ :'data-toggle' => 'collapse', :'data-target' => "#content_system_#{item.id}" }
+          .expander{ :class => expanded && 'in' }
+          %span.prefix=item.slug
+          =item.title
+    %ul.collapse{ :class => expanded && 'in', :id => "content_system_#{item.id}" }
+      =walk_slug_tree(Program.slugtree(item.controls)) do |item, step|
+        -content_id = "content_#{rand(36**8).to_s(36)}"
+        .row-fluid
+          .span12
+            .slot.controlslot.span9{ :'data-toggle' => 'collapse', :'data-target' => "##{content_id}" }
+              -if !item.description.blank?
+                .expander
+              %span.prefix=item.slug
+              =item.title || item.description
+            .controllist.attached.span3{ :class => "statusblue" }
+              -controls = item.implementing_controls
+              -if !controls.empty?
+                %ul.spannomargin{ :title => controls.map(&:slug).join(", ") }
+                  %li
+                    %strong #{controls.size}:
+                  -controls.each do |control|
+                    %li=control.slug
+              -else
+                .controls
+                  %strong 0
+        .row-fluid-slotcontent.collapse{ :id => content_id }
+          .span9
+            =item.description

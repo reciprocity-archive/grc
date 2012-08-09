@@ -11,10 +11,23 @@
 -content_for :subheader_extras do
   %h1.fltrt.highlighted Control
 
+-content_for :subheader_plus do
+  %a.navbarplus.fltrt{ :href => new_flow_control_path('control[program_id]' => @control.program_id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset' }
+
 .row-static
-  .singleColumn
-    .singleWide.halfHeight
-      =render :partial => 'controls/show',
+  .doubleColumn
+    .doubleWide.halfHeight
+      =render :partial => 'controls/text',
               :layout => 'layouts/widget_box',
               :locals => { :control => @control }
 
+    .doubleWide.halfHeight
+      =render :partial => 'controls/mappings',
+              :layout => 'layouts/widget_box',
+              :locals => { :control => @control }
+
+  .singleColumn
+    .singleWide.fullHeight
+      =render :partial => 'controls/show',
+              :layout => 'layouts/widget_box',
+              :locals => { :control => @control }

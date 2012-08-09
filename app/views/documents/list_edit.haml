@@ -1,0 +1,4 @@
+=form_for :documents, :url => list_update_flow_documents_path(:object_type => @object.class.name, :object_id => @object.id), :method => :post, :remote => true do |f|
+  =render :partial => 'list_form',
+          :layout  => 'layouts/list_modal',
+          :locals  => { :object => @object, :current => @object.object_documents, :options => Document.all }

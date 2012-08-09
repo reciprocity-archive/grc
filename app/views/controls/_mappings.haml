@@ -1,0 +1,19 @@
+-content_for :widget_title do
+  Regulations and Controls
+
+-content_for :widget_help, 'control_mappings'
+
+-content_for :widget_buttons do
+  %a.widgettextbtn{ :href => new_flow_section_path(:'section[program_id]' => control.program_id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :title => 'Create New Section' } Add Section
+  %a.widgettextbtn{ :href => new_flow_control_path(:'control[program_id]' => control.program_id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :title => 'Create New Control' } Add Control
+
+.tabbable
+  %ul.nav.nav-tabs
+    %li=link_to 'Regulation Sections', '#regulations', :data => { :toggle => 'tab', :'tab-href' => sections_flow_control_path(control) }
+    -if control.program.company?
+      %li=link_to 'Controls', '#controls', :data => { :toggle => 'tab', :'tab-href' => implemented_controls_flow_control_path(control) }
+    -else
+      %li=link_to 'Controls', '#controls', :data => { :toggle => 'tab', :'tab-href' => implementing_controls_flow_control_path(control) }
+  .tab-content{ :style => 'position: relative; overflow: visible;' }
+    #regulations.tab-pane
+    #controls.tab-pane

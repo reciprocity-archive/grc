@@ -1,6 +1,10 @@
 .modal-header
   %nav
     =yield_content!(:modal_buttons)
+    -help_path = yield_content!(:modal_help)
+    -if !help_path.blank?
+      %a.widgetbtn{ :href => "/help/#{help_path}", :'data-toggle' => 'modal-ajax', :title => "Help - What is this?"}
+        %i.gcmsicon-questionmark-grey
     %a.widgetbtn{ :'data-dismiss' => 'modal', :href => '#'}
       %i.gcmsicon-x-grey
   =yield_content!(:modal_title) || 'Add Object'
@@ -11,7 +15,7 @@
 .modal-footer
   .row-fluid
     %nav.fltlft.txtlft.span3
-      %a.btn-large.btn-info{'data-dismiss' => 'modal', :href => '#'} Cancel
+      %a.btn-large.btn-info{:'data-dismiss' => 'modal-reset' } Cancel
     .span6
     %nav.fltrt.txtrt.span3
-      %a.btn-large.btn-success{'data-dismiss' => 'modal', :href => '#'} Done
+      %a.btn-large.btn-warning{:'data-toggle' => 'modal-submit' } Save

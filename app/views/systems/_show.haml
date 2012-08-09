@@ -1,72 +1,64 @@
 -content_for :widget_title do
-  System Information
+  System Info
 
 -content_for :widget_help, 'system_info'
 
-.nav.nav-tabs.nav-stacked
-  =system.title
+-content_for :widget_buttons do
+  %a.widgetbtn{:href => edit_flow_system_path(system), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :title => 'Edit System'}
+    %i.gcmsicon-edit-grey
 
-  .item
-    Created:
-    =display_time(system.created_at)
-  .item
-    Updated:
-    =display_time(system.updated_at)
+.information
+  .toolbar-widget
 
-%hr
+  %hr.hr-widget
+
+  .row-fluid
+    .span12
+      .span4
+        %label Short Code
+        %input.inputtext-small{:type => "text", :disabled => "disabled", :value => system.slug}
+      .span4
+        %label Type
+        %input.inputtext-small{:disabled => "disabled", :type => "text", :value => system.type && system.type.title}
+      .span4
+        %label System or Process
+        %input.inputtext-small{:disabled => "disabled", :type => "text", :value => system.is_biz_process? ? 'Process' : 'System'}
+  .row-fluid
+    .span12
+      %label Full Title
+      %input.span12{:disabled => "disabled", :type => "text", :value => system.title}
+  .row-fluid
+    .span4
+      %label Version
+      %input.inputtext-small{:disabled => "disabled", :type => "text"}
+    .span4
+      %label Status
+      %input.inputtext-small{:disabled => "disabled", :type => "text"}
+  .row-fluid
+    .span12
+      %label Description
+      %textarea#textarea{:disabled => "disabled", :rows => 3}=system.description
+
+%hr.hr-widget
 
 .row-fluid
   .span12#referenceList
-    %h3
-      References
-      %a.btn.btn-blue.addbtn.fltrt{:href => list_flow_documents_path, :'data-toggle' => 'modal-ajax-list', :'data-modal-reset' => 'reset', :'data-list-target' => '#referenceList' } Add
-    %script{ :type => 'text/html', :data => { :title => '', :link => '', :descriptor => '' }}
-      %li.controlSlot{ :'data-id' => '<%= id %>' }
-        %input{ :type => 'hidden', :name => '', :value => '<%= id %>' }
-        %a{:href => "#", :'data-toggle' => 'list-remove'}
-          .circle.fltrt
-            %i.gcmssmallicon-dash-white
-        %span.controls-group <%= title || link %>
-        %br
-        %span.controls-subgroup <%= descriptor %>
-        %br
-    %ul.referenceList
-      -system.documents.all.each do |item|
-        %li.controlSlot{ :'data-id' => item.id }
-          %input{ :type => 'hidden', :name => '', :value => item.id }
-          %a{:href => "#", :'data-toggle' => 'list-remove'}
-            .circle.fltrt
-              %i.gcmssmallicon-dash-white
-          %span.controls-group=item.title || item.link
-          %br
-          %span.controls-subgroup=item.document_descriptor && item.document_descriptor.title
-          %br
+    =render :partial => 'documents/object_list',
+            :locals  => { :object => system }
 
-%hr
+%hr.hr-widget
 
 .row-fluid
   .span12#peopleList
-    %h3
-      People
-      %a.btn.btn-blue.addbtn.fltrt{:href => list_flow_people_path, :'data-toggle' => 'modal-ajax-list', :'data-modal-reset' => 'reset', :'data-list-target' => '#peopleList' } Add
-    %script{ :type => 'text/html', :data => { :username => '', :name => '' }}
-      %li.controlSlot{ :'data-id' => '<%= id %>' }
-        %input{ :type => 'hidden', :name => '', :value => '<%= id %>' }
-        %a{ :href => '#', :'data-toggle' => 'list-remove' }
-          .circle.fltrt
-            %i.gcmssmallicon-dash-white
-        %span.controls-group <%= username %>
-        %br
-        %span.controls-subgroup <%= name %>      
-        %br
-    %ul
-      -system.persons.all.each do |item|
-        %li.controlSlot{ :'data-id' => item.id }
-          %input{ :type => 'hidden', :name => '', :value => item.id }
-          %a{:href => "#", :'data-toggle' => 'list-remove'}
-            .circle.fltrt
-              %i.gcmssmallicon-dash-white
-          %span.controls-group=item.username
-          %br
-          %span.controls-subgroup=item.name
-          %br
+    =render :partial => 'people/object_list',
+            :locals  => { :object => system }
+
+%hr.hr-widget
+
+.row-fluid
+  .span6.nominheight
+    %label.fltlft
+      %strong> Created: #{system.created_at.strftime("%m/%d/%y")}
+  .span6.nominheight
+    %label.fltrt
+      %strong> Updated: #{system.updated_at.strftime("%m/%d/%y")}

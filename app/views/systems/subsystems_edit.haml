@@ -1,0 +1,4 @@
+=form_for :systems, :url => subsystems_update_flow_system_path(@system), :method => :post, :remote => true do |f|
+  =render :partial => 'subsystems_edit',
+          :layout  => 'layouts/list_modal',
+          :locals  => { :object => @system, :current => @system.sub_system_systems, :options => System.all }

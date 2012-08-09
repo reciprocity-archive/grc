@@ -127,6 +127,25 @@ ActiveRecord::Schema.define(:version => 20120806220812) do
     t.integer  "modified_by_id"
   end
 
+  create_table "categories", :force => true do |t|
+    t.string   "name"
+    t.integer  "parent_id"
+    t.integer  "lft"
+    t.integer  "rgt"
+    t.integer  "scope_id"
+    t.integer  "depth"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "categorizations", :force => true do |t|
+    t.integer  "category_id", :null => false
+    t.integer  "stuff_id",    :null => false
+    t.string   "stuff_type",  :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "control_controls", :force => true do |t|
     t.integer  "control_id",             :null => false
     t.integer  "implemented_control_id", :null => false
@@ -181,6 +200,9 @@ ActiveRecord::Schema.define(:version => 20120806220812) do
     t.datetime "created_at",                          :null => false
     t.datetime "updated_at",                          :null => false
     t.integer  "parent_id"
+    t.integer  "type_id"
+    t.integer  "kind_id"
+    t.integer  "means_id"
   end
 
   add_index "controls", ["business_area_id"], :name => "index_controls_on_business_area_id"
@@ -243,6 +265,41 @@ ActiveRecord::Schema.define(:version => 20120806220812) do
   end
 
   add_index "documents", ["document_descriptor_id"], :name => "index_documents_on_document_descriptor_id"
+
+  create_table "object_documents", :force => true do |t|
+    t.string   "role"
+    t.text     "notes"
+    t.integer  "document_id",       :null => false
+    t.integer  "documentable_id",   :null => false
+    t.string   "documentable_type", :null => false
+    t.integer  "modified_by_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  add_index "object_documents", ["documentable_type", "documentable_id"], :name => "index_object_documents_on_documentable_type_and_documentable_id"
+
+  create_table "object_people", :force => true do |t|
+    t.string   "role"
+    t.text     "notes"
+    t.integer  "person_id",       :null => false
+    t.integer  "personable_id",   :null => false
+    t.string   "personable_type", :null => false
+    t.integer  "modified_by_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "object_people", ["personable_type", "personable_id"], :name => "index_object_people_on_personable_type_and_personable_id"
+
+  create_table "options", :force => true do |t|
+    t.string   "role",           :null => false
+    t.string   "title",          :null => false
+    t.text     "description"
+    t.integer  "modified_by_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
 
   create_table "people", :force => true do |t|
     t.string   "username",       :null => false
@@ -319,15 +376,27 @@ ActiveRecord::Schema.define(:version => 20120806220812) do
     t.datetime "updated_at",                    :null => false
   end
 
+  create_table "system_systems", :force => true do |t|
+    t.integer  "parent_id",      :null => false
+    t.integer  "child_id",       :null => false
+    t.string   "type"
+    t.integer  "order"
+    t.integer  "modified_by_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
   create_table "systems", :force => true do |t|
-    t.string   "title",          :null => false
-    t.string   "slug",           :null => false
-    t.boolean  "infrastructure", :null => false
+    t.string   "title",                             :null => false
+    t.string   "slug",                              :null => false
+    t.boolean  "infrastructure",                    :null => false
     t.text     "description"
     t.integer  "owner_id"
     t.integer  "modified_by_id"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.boolean  "is_biz_process", :default => false
+    t.integer  "type_id"
   end
 
   add_index "systems", ["slug"], :name => "index_systems_on_slug", :unique => true
@@ -339,6 +408,15 @@ ActiveRecord::Schema.define(:version => 20120806220812) do
     t.integer  "modified_by_id"
     t.datetime "created_at",                        :null => false
     t.datetime "updated_at",                        :null => false
+  end
+
+  create_table "transactions", :force => true do |t|
+    t.string   "title",          :null => false
+    t.text     "description"
+    t.integer  "system_id"
+    t.integer  "modified_by_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "versions", :force => true do |t|

@@ -21,10 +21,14 @@ class Document < ActiveRecord::Base
     end
   end
 
-  belongs_to :document_descriptor
-
   validates :link,
     :uniqueness => true, :allow_blank => true, :presence => true
+
+  has_many :object_documents, :dependent => :destroy
+
+  belongs_to :document_descriptor
+
+  is_versioned_ext
 
   def display_name
     title
@@ -44,9 +48,15 @@ class Document < ActiveRecord::Base
     write_attribute(:link, value)
   end
 
-  is_versioned_ext
+  def link_url
+    link && link.to_s
+  end
 
   def complete?
     !link.nil? && !link.to_s.blank?
+  end
+
+  def descriptor
+    (document_descriptor && document_descriptor.title) || ''
   end
 end

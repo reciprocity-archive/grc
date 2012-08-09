@@ -17,13 +17,13 @@
         =f.text_field :slug, :class => 'inputtext-small'
         =error_messages_inline(f, :slug)
 
-      .span3.disabled{ :class => error_class(f, :effectivedate) }
-        %label{:for => "control-effectivedate"} Effective Date
+      .span3{ :class => error_class(f, :effective_at) }
+        %label{:for => "control-effective_at"} Effective Date
         .date{"data-date" => "02-12-12", "data-date-format" => "dd-mm-yy"}
-          %input#control-effectivedate.input-mini{:size => "16", :type => "text", :name => 'control[effectivedate]', :value => nil, :'data-toggle' => 'datepicker'}
+          %input#control-effective_at.input-mini{:size => "16", :type => "text", :name => 'control[effective_at]', :value => f.object.effective_at && f.object.effective_at.strftime('%Y-%m-%d'), :'data-toggle' => 'datepicker'}
             %span.add-on
               %i.calendar
-        =error_messages_inline(f, :effectivedate)
+        =error_messages_inline(f, :effective_at)
 
       .span3.disabled{ :class => error_class(f, :version) }
         %label{:for => "control-version"} Version
@@ -31,22 +31,28 @@
         =error_messages_inline(f, :version)
 
     .row-fluid
-      .span3.disabled{ :class => error_class(f, :type) }
+      .span3{ :class => error_class(f, :type) }
         %label{:for => 'control-type'} Type
-        %select#control-type.input-small{:name => 'control[type]', :value => nil}
-          %option Company
+        %select#control-type.input-small{:name => 'control[type_id]', :value => nil}
+          %option(value='') Select Type
+          -Option.control_type_options.each do |o|
+            %option{ :value => o.id, :selected => (o.id == f.object.type_id) }=o.title
         =error_messages_inline(f, :type)
 
-      .span3.disabled{ :class => error_class(f, :kind) }
+      .span3{ :class => error_class(f, :kind) }
         %label{:for => 'control-kind'} Kind
-        %select#control-kind.input-small{:name => 'control[kind]', :value => nil}
-          %option Preventative
+        %select#control-kind.input-small{:name => 'control[kind_id]', :value => nil}
+          %option(value='') Select Kind
+          -Option.control_kind_options.each do |o|
+            %option{ :value => o.id, :selected => (o.id == f.object.kind_id) }=o.title
         =error_messages_inline(f, :kind)
 
-      .span6.disabled{ :class => error_class(f, :means) }
+      .span6{ :class => error_class(f, :means) }
         %label{:for => 'control-means'} Means of Operation
-        %select#control-means.span12{:name => 'control[means]', :value => nil}
-          %option Manual w/ Segregation of Duties
+        %select#control-means.span12{:name => 'control[means_id]', :value => nil}
+          %option(value='') Select Option
+          -Option.control_means_options.each do |o|
+            %option{ :value => o.id, :selected => (o.id == f.object.means_id) }=o.title
         =error_messages_inline(f, :means)
 
     .row-fluid
@@ -62,14 +68,14 @@
           %option Open
         =error_messages_inline(f, :status)
 
-  #categorylist.span4.well.disabled{ :class => error_class(f, :categories) }
+  #categorylist.span4.well{ :class => error_class(f, :categories) }
     %label{:for => 'control-categories'} Categories
-    - category_list = [['Access Control', ['Access Management', 'Authorization', 'Authentication']], ['Change Management', ['Segregation of Duties', 'Configuration Management']], ['Business Continuity', ['Disaster Recovery', 'Physical Security']], ['Governance', ['Training', 'Policies & Procedures', 'Monitoring']]]
-    %select{:multiple => "multiple", :name => 'control[categories]'}
-      -category_list.each do |category_label, categories|
-        %optgroup{ :label => category_label }
-          -categories.each do |category|
-            %option{ :value => category }=category
+    -category_list = Control.category_tree
+    %select{:multiple => "multiple", :name => 'control[category_ids][]'}
+      -category_list.each do |category, subcategories|
+        %optgroup{ :label => category.name }
+          -subcategories.each do |subcategory|
+            %option{ :value => subcategory.id, :selected => (f.object.category_ids.include?(subcategory.id)) }=subcategory.name
     =error_messages_inline(f, :categories)
 
 .row-fluid

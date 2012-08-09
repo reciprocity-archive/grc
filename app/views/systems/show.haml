@@ -1,36 +1,36 @@
--@title = "CMS System: #{@system.title}"
+-@title = "CMS #{@system.is_biz_process ? 'Biz Process' : 'System'}: #{@system.title}"
 
 -content_for :header do
   %ol#breadcrumb
-    %li Systems
+    %li=@system.is_biz_process ? 'BIZ PROCESSES' : 'SYSTEMS'
     %li=@system.slug
   .location#pageTitle=@system.title
 
 -content_for :page_help, 'system'
 
 -content_for :subheader_extras do
-  %h1.fltrt.highlighted System
+  %h1.fltrt.highlighted=@system.is_biz_process ? 'Biz Process' : 'System'
 
 -content_for :subheader_plus do
-  %a.navbarplus.fltrt{ :href => new_flow_system_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset' }
+  %a.navbarplus.fltrt{ :href => new_flow_system_path(:'system[is_biz_process]' => @system.is_biz_process), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset' }
 
 .row-static
   .doubleColumn
-    .doubleWide.halfHeight
+    .doubleWide.maxHalfHeight
       =render :partial => 'systems/sub_systems',
               :layout => 'layouts/widget_box',
               :locals => { :system => @system }
-    .singleColumn.halfHeight
+    .singleColumn.maxHalfHeight
       =render :partial => 'systems/super_systems',
               :layout => 'layouts/widget_box',
               :locals => { :system => @system }
-    .singleColumn.halfHeight
+    .singleColumn.maxHalfHeight
       =render :partial => 'systems/transactions',
               :layout => 'layouts/widget_box',
               :locals => { :system => @system }
       
   .singleColumn
-    .singleWide.fullHeight
+    .singleWide.maxFullHeight
       =render :partial => 'systems/show',
               :layout => 'layouts/widget_box',
               :locals => { :system => @system }

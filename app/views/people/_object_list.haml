@@ -1,0 +1,23 @@
+-# locals: object
+
+%h3
+  People
+  %a.btn.btn-blue.addbtn.fltrt{:href => list_edit_flow_people_path(:object_type => object.class.name, :object_id => object.id), :'data-toggle' => 'modal-ajax-listform', :'data-modal-reset' => 'reset', :'data-list-target' => '#peopleList' } Edit List
+
+%script{ :type => 'text/html', :data => { :person => '', :role => '' }}
+  %li.slot.controlSlot{ :'data-id' => '<%= person.id %>' }
+    .controls-group
+      %a.btn.btn-blue.fltrt{ :href => flow_people_path + '/<%= person.id %>/edit', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-ajax-target' => 'refresh' }
+        Edit
+      .controls-type <%= role %>
+      .controls-subgroup <%= person.name || '&nbsp' %>
+
+%ul
+  -object.object_people.all.each do |object_item|
+    -item = object_item.person
+    %li.slot.controlSlot{ :'data-id' => item.id }
+      .controls-group
+        %a.btn.btn-blue.fltrt{ :href => edit_flow_person_path(item), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-ajax-target' => 'refresh' }
+          Edit
+        .controls-type=object_item.role
+        .controls-subgroup=item.name || '&nbsp;'.html_safe

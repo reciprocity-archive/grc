@@ -11,8 +11,11 @@
     this.$element = $(element);
 
     this.$element
+      .on('keypress', 'form', $.proxy(this.keypress_submit, this))
       .on('click.modal-form.close', '[data-dismiss="modal"]', $.proxy(this.hide, this))
       .on('click.modal-form.reset', 'input[type=reset], [data-dismiss="modal-reset"]', $.proxy(this.reset, this))
+      .on('click.modal-form.submit', 'input[type=submit], [data-toggle="modal-submit"]', $.proxy(this.submit, this))
+      .on('click.modal-form.destroy', '[data-toggle="form-destroy"]', $.proxy(this.destroy, this))
       .on('shown.modal-form', $.proxy(this.focus_first_input, this))
       .on('loaded.modal-form', $.proxy(this.focus_first_input, this))
   }
@@ -24,8 +27,26 @@
 
     constructor: ModalForm
 
+  , $form: function() {
+      return this.$element.find('form').first();
+    }
+
+  , submit: function(e) {
+      this.$form().submit();
+    }
+
+  , keypress_submit: function(e) {
+      if (e.which == 13 && !$(e.target).is('textarea')) {
+        if (!e.isDefaultPrevented()) {
+          e.preventDefault();
+          this.$form().submit();
+        }
+      }
+    }
+
   , reset: function(e) {
-      $(e.target).closest('form')[0].reset();
+      this.$form()[0].reset();
+      //$(e.target).closest('form')[0].reset();
       this.hide(e);
     }
 
@@ -40,6 +61,9 @@
         .first();
       if ($first_input.length > 0)
         setTimeout(function() { $first_input.get(0).focus(); }, 100);
+    }
+
+  , destroy: function(e) {
     }
   });
 
@@ -95,7 +119,7 @@
           window.location.assign(xhr.getResponseHeader('location'));
         } else if (xhr.status == 279) {
           // Handle 279 page refresh
-          window.location.assign(window.location.href);
+          window.location.assign(window.location.href.replace(/#.*/, ''));
         }
       }
 

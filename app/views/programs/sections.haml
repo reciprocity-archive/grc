@@ -3,9 +3,9 @@
     .row-fluid
       -content_id = "content_#{rand(36**8).to_s(36)}" # unique ID for toggle
       .span12
-        %a.regulationslot.toggle.span9.collapsed{ :'data-toggle' => 'collapse', :'data-target' => "##{content_id}" }
-          -if !item.description.blank?
-            .expander
+        %a.slot.regulationslot.span9{ :'data-toggle' => 'collapse', :'data-target' => "##{content_id}" }
+          /-if !item.description.blank?
+          .expander
           %span.prefix=item.slug
           =item.title || item.description
         -controls = item.linked_controls
@@ -23,8 +23,7 @@
             N/A
           -else
             %strong 0
-      .row-fluid-slotcontent
+      .row-fluid-slotcontent.collapse{ :id => content_id }
         .span9
-          .collapse{ :id => content_id }
-            =item.description
-            %a.btn.btn-blue.addbtn.fltrt{ :href => edit_flow_section_path(item), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :title => 'Edit Section' } Edit
+          =item.description
+          %a.btn.btn-blue.addbtn.fltrt{ :href => edit_flow_section_path(item), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :title => 'Edit Section' } Edit

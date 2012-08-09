@@ -5,8 +5,12 @@
   function preload_content() {
     var template =
       [ '<div class="modal-header">'
-      , '  <a class="close" href="#" data-dismiss="modal">x</a>'
-      , '  Loading...'
+      , '  <nav>'
+      , '    <a class="widgetbtn" href="#" data-dismiss="modal">'
+      , '      <i class="gcmsicon-x-grey"></i>'
+      , '    </a>'
+      , '  </nav>'
+      , '  <h1>Loading...</h1>'
       , '</div>'
       , '<div class="modal-body"></div>'
       , '<div class="modal-footer">'
@@ -28,28 +32,67 @@
     $(this).trigger('loaded');
   }
 
-  function setup_event_relay($source, $target, events, options) {
-    var events = events;
-    if (options.namespace) {
-      events = events.split(' ').join('.' + options.namespace + ' ')
-             + '.' + options.namespace;
-      $source.off(events);
-    }
-    $source.on(events, function(e) {
-      var relay_type  = options.prefix ? options.prefix + e.type : e.type
-        , relay_opts  = $.extend({}, e, { type: relay_type, relayTarget: $target[0] })
-        , relay_event =  $.Event(relay_type, relay_opts);
-      $target.trigger(relay_event);
-    });
+  function refresh_page() {
+    window.location.assign(window.location.href.replace(/#.*/, ''));
   }
 
+  var handlers = {
+    'modal': function($target, $trigger, option) {
+      $target.modal(option);
+    },
+
+    'listform': function($target, $trigger, option) {
+      var list_target = $trigger.data('list-target');
+      $target.modal_form(option);
+
+      // Close the modal and rewrite the target list
+      $target.on('ajax:json', function(e, data, xhr) {
+        if (list_target == 'refresh') {
+          refresh_page();
+        } else if (list_target) {
+          $(list_target).tmpl_setitems(data);
+          $target.modal_form('hide');
+        }
+      });
+    },
+
+    'listnewform': function($target, $trigger, option) {
+      $target.modal_form(option);
+      var list_target = $trigger.data('list-target');
+
+      // Close the modal and append to the target list
+      $target.on('ajax:json', function(e, data, xhr) {
+        if (list_target) {
+          $(list_target).tmpl_additem(data);
+          $target.modal_form('hide');
+        }
+      });
+    },
+
+    'form': function($target, $trigger, option) {
+      var form_target = $trigger.data('form-target');
+      $target.modal_form(option);
+
+      $target.on('ajax:json', function(e, data, xhr) {
+        if (form_target == 'refresh') {
+          refresh_page();
+        }
+      });
+    }
+  };
+
   $(function() {
-    $('body').on('click.modal-ajax.data-api', '[data-toggle="modal-ajax"], [data-toggle="modal-ajax-form"], [data-toggle="modal-ajax-list"], [data-toggle="modal-ajax-listform"]', function(e) {
-      var $this = $(this), modal_id, target, $target, option, href, new_target;
+    $('body').on('click.modal-ajax.data-api', '[data-toggle="modal-ajax"], [data-toggle="modal-ajax-form"], [data-toggle="modal-ajax-listform"], [data-toggle="modal-ajax-listnewform"]', function(e) {
+      var $this = $(this)
+        , toggle_type = $(this).data('toggle')
+        , modal_id, target, $target, option, href, new_target, modal_type;
 
       href = $this.attr('data-href') || $this.attr('href');
       modal_id = 'ajax-modal-' + href.replace(/\//g, '-').replace(/^-/, '');
-      target = $this.data('modal-reset') != "reset" && ($this.attr('data-target') || $('#' + modal_id));
+      target = $this.attr('data-target') || $('#' + modal_id);
+
+      //if ($this.data('modal-reset') == 'reset')
+      //  $(target).remove();
 
       $target = $(target);
       new_target = $target.length == 0
@@ -59,10 +102,9 @@
         $this.attr('data-target', '#' + modal_id);
       }
 
-      /*setup_event_relay($target, $this, 'show shown hide hidden loaded',
-        { namespace: 'modal-trigger-relay'
-        , prefix: 'target-'
-        });*/
+      $target.on('hidden', function() {
+        $target.remove();
+      });
 
       if (new_target || $this.data('modal-reset') == 'reset') {
         $target.html(preload_content());
@@ -73,34 +115,16 @@
 
       e.preventDefault();
 
-      if ($this.data('toggle') == 'modal-ajax-form') {
-        /*setup_event_relay(
-          $target, $this,
-          'ajax:beforeSend ajax:success ajax:error ajax:complete ajax:flash',
-          { namespace: 'modal-form-trigger-relay'
-          , prefix: 'target-'
-          });*/
-        $target.modal_form(option);
-      } else if ($this.data('toggle') == 'modal-ajax-list') {
-        $target.modal(option);
-        $target.on('loaded', function(e) {
-          $(this).on('click', 'ul.itemlist > li > a', function(e) {
-            var target = $this.data('list-target');
-            if (target) {
-              $(target).tmpl_additem($(this).data());
-            }
-          });
-        });
-      } else if ($this.data('toggle') == 'modal-ajax-listform') {
-        $target.modal_form(option);
-        $target.on('ajax:json', function(e, data, xhr) {
-          if ($this.data('list-target')) {
-            $($this.data('list-target')).tmpl_additem(data);
-            $target.modal_form('hide');
-          }
-        });
-      } else
-        $target.modal(option);
+      modal_type = $this.data('modal-type');
+      if (!modal_type) {
+        if (toggle_type == 'modal-ajax-form') modal_type = 'form';
+        if (toggle_type == 'modal-ajax-listform') modal_type = 'listform';
+        if (toggle_type == 'modal-ajax-listnewform') modal_type = 'listnewform';
+        if (toggle_type == 'modal-ajax') modal_type = 'modal';
+        if (!modal_type) modal_type = 'modal';
+      }
+
+      handlers[modal_type].apply($target, [$target, $this, option]);
     });
   });
 }(window.jQuery);

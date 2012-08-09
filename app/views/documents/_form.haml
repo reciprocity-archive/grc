@@ -4,14 +4,57 @@
   -else
     Edit reference
 
+-if !f.object.new_record?
+  -content_for :modal_delete_path, flow_document_path(f.object)
+
 .row-fluid
+  .span8
+    .span12{ :class => error_class(f, :title) }
+      =f.label :title
+      =f.text_field :title, :class => 'span12', :placeholder => 'Document Title'
+      /%label Title
+      /%input.span12{:placeholder => "Complete Title Goes Here", :type => "text"}
+  .span2{ :class => error_class(f, :title) }
+    %label Year
+    %input.inputtext-small{:placeholder => "2012", :type => "text"}
+  .span1
+    %label Type
+    .controls
+      %select.input-small
+        %option PDF
+        %option 2
+        %option 3
+        %option 4
+        %option 5
+.row-fluid
+  .span10
+    %label Description
+    %textarea.span12{:placeholder => "", :rows => "4"}
+  .span1
+    %label Language
+    %input.inputtext-small{:placeholder => "English", :type => "text"}
+.row-fluid
+  .span10{ :class => error_class(f, :link) }
+    =f.label :link, "URL"
+    =f.text_field :link, :class => 'span12', :placeholder => 'https://www.example.com/xyz.pdf'
+    =error_messages_inline(f, :link)
+  .span2
+    %label
+    %a.btn.btn-large{:href => "#comingsoonModal"} Attach
+
+%br
+
+-if !f.object.new_record?
+  =render :partial => 'shared/object_info', :locals => { :object => f.object, :approved => false }
+
+-#.row-fluid
   .span12{ :class => error_class(f, :title) }
     =f.label :title, "Title"
     =f.text_field :title, :class => 'input-large'
     =error_messages_inline(f, :slug)
 
-%br
-.row-fluid
+-#%br
+-#.row-fluid
   .span12{ :class => error_class(f, :link) }
     =f.label :link, "URL"
     =f.text_field :link, :class => 'input-large', :placeholder => 'https://www.example.com/xyz.pdf'

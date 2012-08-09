@@ -4,8 +4,8 @@
 -content_for :widget_help, 'program_controls'
 
 -content_for :widget_buttons do
-  %a.btn.widgetbtn{ :href => new_flow_section_path(:'section[program_id]' => program.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :title => 'Create New Section' } Add Section
-  %a.btn.widgetbtn{ :href => new_flow_control_path(:'control[program_id]' => program.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :title => 'Create New Control' } Add Control
+  %a.btn.widgettextbtn{ :href => new_flow_section_path(:'section[program_id]' => program.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :title => 'Create New Section' } Add Section
+  %a.btn.widgettextbtn{ :href => new_flow_control_path(:'control[program_id]' => program.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :title => 'Create New Control' } Add Control
   %input.ui-corner-all.widgetsearch.clear-value(type='text' placeholder='Search')
 
 .tabbable
@@ -17,7 +17,9 @@
 
   %ul.nav.nav-tabs
     %li=link_to 'Regulations', '#regulations', :data => { :toggle => 'tab', :'tab-href' => sections_flow_program_path(program) }
-    %li=link_to 'Controls', '#controls', :data => { :toggle => 'tab', :'tab-href' => controls_flow_program_path(program) }
-  .tab-content
+    %li.active=link_to 'Controls', '#category_controls', :data => { :toggle => 'tab', :'tab-href' => category_controls_flow_program_path(program) }
+    %li=link_to 'Combo', '#combo', :data => { :toggle => 'tab', :'tab-href' => section_controls_flow_program_path(program) }
+  .tab-content{ :style => 'position: relative; overflow: visible;' }
     #regulations.tab-pane
-    #controls.tab-pane
+    #category_controls.tab-pane
+    #combo.tab-pane

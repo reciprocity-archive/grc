@@ -14,14 +14,19 @@
 .modal-footer
   .row-fluid
     %nav.fltlft.txtlft.span3
-      %input.btn-large.btn-info{:type => 'reset', :value => 'Cancel'}
-      %input.btn-large.btn-warning.disabled{:type => 'submit', :value => 'Delete', :disabled => 'disabled'}
+      %a.btn-large.btn-info{:'data-dismiss' => 'modal-reset', :href => '#' } Cancel
+      -delete_path = yield_content!(:modal_delete_path)
+      -if !delete_path.blank?
+        %a.btn-large.btn-warning{:href => delete_path, :'data-toggle' => 'form-destroy', :'data-remote' => 'remote', :'data-method' => 'delete'} Delete
     .toolbar-widget.span6.disabled
-      %a.btn{:href => "#comingsoonModal"}
+      %a.btn{:href => "#", :'data-toggle' => 'version-prev'}
         %i.gcmsicon-arrowleft-black
-      %span.btnwell Showing Most Recent of N Revisions
-      %a.btn{:href => "#comingsoonModal"}
+      %span.btnwell
+        Showing Most Recent of
+        %strong=f.object.versions.count
+        Revisions
+      %a.btn{:href => "#", :'data-toggle' => 'version-next'}
         %i.gcmsicon-arrowright-black
     %nav.fltrt.txtrt.span3
-      %input.btn-large.btn-warning{:type => 'submit', :value => 'Save'}
-      %input.btn-large.btn-success.disabled{:type => 'submit', :value => 'Approve', :disabled => 'disabled'}
+      %a.btn-large.btn-warning{:'data-toggle' => 'modal-submit', :href => '#' } Save
+      %a.btn-large.btn-success.disabled{:'data-toggle' => 'modal-approve', :href => '#', :disabled => 'disabled'} Approve

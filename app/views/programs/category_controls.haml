@@ -1,0 +1,19 @@
+-category_roots = Category.roots.all
+
+%ul.slugtree
+  %li
+    %ul
+      -@category_tree.each do |category, branches|
+        -if category.nil?
+          =render :partial => 'category_controls_branch',
+                  :locals  => { :subcategory => category, :controls => branches }
+        -else
+          %li
+            .row-fluid
+              .span12
+                .slot.subsystemslot.span12
+                  %span.prefix=category.name
+            %ul
+              -branches.each do |subcategory, controls|
+                =render :partial => 'category_controls_branch',
+                        :locals  => { :subcategory => subcategory, :controls => controls }
