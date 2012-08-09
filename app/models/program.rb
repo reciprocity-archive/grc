@@ -6,6 +6,7 @@ class Program < ActiveRecord::Base
   include SluggedModel
   include FrequentModel
   include SearchableModel
+  include AuthorizedModel
 
   attr_accessible :title, :slug, :company
 
@@ -34,5 +35,9 @@ class Program < ActiveRecord::Base
 
   def display_name
     slug
+  end
+
+  def authorizing_objects
+    Set.new([self])
   end
 end

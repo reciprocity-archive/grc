@@ -24,4 +24,9 @@ class Person < ActiveRecord::Base
     where(t[:name].matches(q).
       or(t[:username].matches(q)))
   end
+
+  def is_superuser
+    # FIXME: No superusers for now
+    return false
+  end
 end

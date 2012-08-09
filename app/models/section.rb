@@ -7,6 +7,7 @@ class Section < ActiveRecord::Base
   include AuthoredModel
   include SluggedModel
   include SearchableModel
+  include AuthorizedModel
 
   attr_accessible :title, :slug, :description, :program
 
@@ -132,15 +133,15 @@ class Section < ActiveRecord::Base
     end.flatten
   end
 
-  def ancestors
-    # Not only need to look for instance's ancestor sections, but
-    # also the ancestor sections of all ancestor controls.
-    if !parent
-      return []
-    end
+  def authorizing_objects
+    aos = Set.new
+    aos.add(self)
+    aos.add(program)
 
-    ancestors = [parent]
-    ancestors.concat(parent.ancestors)
+    if (parent)
+      aos.merge(parent.authorizing_objects)
+    end
+    aos
   end
 
   is_versioned_ext
