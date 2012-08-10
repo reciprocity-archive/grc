@@ -22,6 +22,7 @@ describe ManyHelper do
 
   describe "put many2many" do
     it "inserts" do
+      pending
       params[:id] = @ctl1.id
       params[:control] = {}
       params[:control]["system_ids"] = [ @sys.id ]
@@ -30,6 +31,7 @@ describe ManyHelper do
       @sys.controls.all(:order => :slug).should eq([@ctl1, @ctl2])
     end
     it "deletes" do
+      pending
       params[:id] = @ctl2.id
       params[:control] = {}
       params[:control]["system_ids"] = []
