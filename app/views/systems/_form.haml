@@ -34,7 +34,7 @@
     =f.label 'Type'
     %select.span12{ :name => 'system[type_id]' }
       %option(value='') Select Option
-      -Option.system_type_options.each do |o|
+      -Option.options_for(:system_type).each do |o|
         %option{ :value => o.id, :selected => (o.id == f.object.type_id) }=o.title
     =error_messages_inline(f, :type)
 

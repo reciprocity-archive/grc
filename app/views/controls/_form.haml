@@ -35,7 +35,7 @@
         %label{:for => 'control-type'} Type
         %select#control-type.input-small{:name => 'control[type_id]', :value => nil}
           %option(value='') Select Type
-          -Option.control_type_options.each do |o|
+          -Option.options_for(:control_type).each do |o|
             %option{ :value => o.id, :selected => (o.id == f.object.type_id) }=o.title
         =error_messages_inline(f, :type)
 
@@ -43,7 +43,7 @@
         %label{:for => 'control-kind'} Kind
         %select#control-kind.input-small{:name => 'control[kind_id]', :value => nil}
           %option(value='') Select Kind
-          -Option.control_kind_options.each do |o|
+          -Option.options_for(:control_kind).each do |o|
             %option{ :value => o.id, :selected => (o.id == f.object.kind_id) }=o.title
         =error_messages_inline(f, :kind)
 
@@ -51,7 +51,7 @@
         %label{:for => 'control-means'} Means of Operation
         %select#control-means.span12{:name => 'control[means_id]', :value => nil}
           %option(value='') Select Option
-          -Option.control_means_options.each do |o|
+          -Option.options_for(:control_means).each do |o|
             %option{ :value => o.id, :selected => (o.id == f.object.means_id) }=o.title
         =error_messages_inline(f, :means)
 

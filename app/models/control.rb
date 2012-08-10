@@ -66,9 +66,9 @@ class Control < ActiveRecord::Base
   has_many :categorizations, :as => :categorizable
   has_many :categories, :through => :categorizations
 
-  belongs_to :type, :class_name => 'Option'
-  belongs_to :kind, :class_name => 'Option'
-  belongs_to :means, :class_name => 'Option'
+  belongs_to :type, :class_name => 'Option', :conditions => { :role => 'control_type' }
+  belongs_to :kind, :class_name => 'Option', :conditions => { :role => 'control_kind' }
+  belongs_to :means, :class_name => 'Option', :conditions => { :role => 'control_means' }
 
   is_versioned_ext
 

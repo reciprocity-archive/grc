@@ -53,7 +53,7 @@ class System < ActiveRecord::Base
 
   has_many :transactions
 
-  belongs_to :type, :class_name => 'Option'
+  belongs_to :type, :class_name => 'Option', :conditions => { :role => 'system_type' }
 
   is_versioned_ext
 

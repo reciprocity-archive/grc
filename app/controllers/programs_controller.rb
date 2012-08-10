@@ -153,9 +153,10 @@ class ProgramsController < ApplicationController
     end.compact
 
     uncategorized_controls = Control.
-      joins("LEFT OUTER JOIN categorizations ON categorizations.categorizable_type = 'Control' AND categorizations.categorizable_id = controls.id").
-      where("categorizations.categorizable_id IS NULL").
-      where(:program_id => @program.id).
+      includes(:categorizations).
+      where(
+        :program_id => @program.id,
+        :categorizations => { :categorizable_id => nil }).
       all
 
     if !uncategorized_controls.empty?
