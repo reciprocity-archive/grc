@@ -19,7 +19,7 @@ class SectionsController < ApplicationController
   end
 
   def new
-    @section = Section.new(params[:section])
+    @section = Section.new(section_params)
 
     render :layout => nil
   end
@@ -31,7 +31,7 @@ class SectionsController < ApplicationController
   end
 
   def create
-    @section = Section.new(params[:section])
+    @section = Section.new(section_params)
 
     respond_to do |format|
       if @section.save
@@ -48,7 +48,7 @@ class SectionsController < ApplicationController
     @section = Section.find(params[:id])
 
     respond_to do |format|
-      if @section.authored_update(current_user, params[:section] || {})
+      if @section.authored_update(current_user, section_params)
         flash[:notice] = "Successfully updated the section!"
         format.html { ajax_refresh }
       else
@@ -57,4 +57,15 @@ class SectionsController < ApplicationController
       end
     end
   end
+
+  private
+
+    def section_params
+      section_params = params[:section] || {}
+      if section_params[:program_id]
+        # TODO: Validate the user has access to add sections to the program
+        params[:section][:program] = Program.find(section_params.delete(:program_id))
+      end
+      section_params
+    end
 end

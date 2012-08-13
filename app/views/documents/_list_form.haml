@@ -14,7 +14,7 @@
         %a{:href => "#", :'data-toggle' => 'list-remove'}
           .removeCircleButton.fltrt
             %i.gcmssmallicon-dash-white
-        .arrowcontrols-group{ :href => '#', :'data-context' => "{ id: '<%= id %>', title: '<%= title %>', link_url: '<%= link_url %>', descriptor: '<%= descriptor %>' }"}
+        .arrowcontrols-group{ :href => '#', :'data-id' => '<%= id %>', :'data-context' => "{ title: '<%= title %>', link_url: '<%= link_url %>', descriptor: '<%= descriptor %>' }"}
           .controls-type <%= link_url %>
           .controls-subtype <%= descriptor %>
           .controls-subgroup <%= title || '&nbsp;' %>
@@ -28,7 +28,7 @@
           %a{:href => "#", :'data-toggle' => 'list-remove'}
             .removeCircleButton.fltrt
               %i.gcmssmallicon-dash-white
-          .arrowcontrols-group{ :href => '#', :'data-context' => { :id => document.id, :title => document.title, :link_url => document.link_url, :descriptor => document.descriptor }.to_json}
+          .arrowcontrols-group{ :href => '#', :'data-id' => document.id, :'data-context' => { :title => document.title, :link_url => document.link_url, :descriptor => document.descriptor }.to_json}
             .controls-type=document.link_url
             .controls-subtype=document.descriptor
             .controls-subgroup=document.title || '&nbsp;'.html_safe
@@ -42,7 +42,7 @@
     %script{ :type => 'text/html' }
       %li.controlSlot{ :'data-id' => '<%= id %>' }
         .itemarrow
-        .arrowcontrols-group{ :'data-toggle' => 'list-select', :href => '#',  :'data-context' => "{ id: '<%= id %>', title: '<%= title %>', link_url: '<%= link_url %>', descriptor: '<%= descriptor %>' }"}
+        .arrowcontrols-group{ :'data-toggle' => 'list-select', :href => '#',  :'data-id' => '<%= id %>', :'data-context' => "{ title: '<%= title %>', link_url: '<%= link_url %>', descriptor: '<%= descriptor %>' }"}
           .controls-type <%= link_url %>
           .controls-subtype <%= descriptor %>
           .controls-subgroup <%= title || '&nbsp;' %>
@@ -51,7 +51,7 @@
       -options.each do |document|
         %li.controlSlot{ :'data-id' => document.id }
           .itemarrow
-          .arrowcontrols-group{ :'data-toggle' => 'list-select', :href => '#', :'data-context' => { :id => document.id, :title => document.title, :link_url => document.link_url, :descriptor => document.descriptor }.to_json}
+          .arrowcontrols-group{ :'data-toggle' => 'list-select', :href => '#', :'data-id' => document.id, :'data-context' => { :title => document.title, :link_url => document.link_url, :descriptor => document.descriptor }.to_json}
             .controls-type=document.link_url
             .controls-subtype=document.descriptor
             .controls-subgroup=document.title || '&nbsp;'.html_safe
