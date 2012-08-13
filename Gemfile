@@ -1,20 +1,14 @@
-source 'http://rubygems.org'
+# Uncomment or put the following in Gemfile.local
+#  source 'http://rubygems.org'
 
 if File.exist? 'Gemfile.local'
   instance_eval(Bundler.read_file('Gemfile.local'), 'Gemfile.local', 1)
 end
 
 RAILS_VERSION = '= 3.2.6'
-# XXX 3.2.6
-
-# Get latest psych - work around crash during reorg migration
-# gem 'psych'
 
 #gem 'gdata-ruby-util', '1.1.2'
-gem 'gdata_19',
-  :git => 'https://github.com/tokumine/GData.git',
-  :ref => '14e5a8a1381f4d50bc99ed083d89101f5111e3ea',
-  :require => 'gdata'
+gem 'gdata_19', '~> 1.1.5', :require => 'gdata'
 
 platforms :ruby do
   group :development, :test do
@@ -35,15 +29,17 @@ platforms :ruby do
 end
 
 platforms :jruby do
-  #gem 'jdbc-sqlite3', :require => false
   gem 'activerecord-jdbcsqlite3-adapter'
-  gem 'jdbc-mysql', :require => false
-  gem 'jruby-openssl'
-  gem 'therubyrhino'
+  gem 'activerecord-jdbcmysql-adapter'
+
+  group :development do
+    gem 'warbler', '1.3.5'
+    gem 'jruby-openssl'
+    gem 'therubyrhino'
+  end
 end
 
 gem 'authlogic'
-#gem 'dalli'
 gem 'builder'
 gem 'json'
 
@@ -51,8 +47,8 @@ gem 'acl9'
 
 gem 'rails', RAILS_VERSION
 
-gem 'haml', :git => 'https://github.com/haml/haml.git', :ref => '3-2-stable'
-gem 'sass'
+gem 'haml', '~> 3.2.0.beta.2'
+gem 'sass', '~> 3.2.0'
 gem 'haml-rails'
 
 # Used to be pulled in by dm-types
