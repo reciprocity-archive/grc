@@ -127,25 +127,6 @@ ActiveRecord::Schema.define(:version => 20120806220812) do
     t.integer  "modified_by_id"
   end
 
-  create_table "categories", :force => true do |t|
-    t.string   "name"
-    t.integer  "parent_id"
-    t.integer  "lft"
-    t.integer  "rgt"
-    t.integer  "scope_id"
-    t.integer  "depth"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "categorizations", :force => true do |t|
-    t.integer  "category_id", :null => false
-    t.integer  "stuff_id",    :null => false
-    t.string   "stuff_type",  :null => false
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
   create_table "control_controls", :force => true do |t|
     t.integer  "control_id",             :null => false
     t.integer  "implemented_control_id", :null => false
@@ -393,8 +374,8 @@ ActiveRecord::Schema.define(:version => 20120806220812) do
     t.text     "description"
     t.integer  "owner_id"
     t.integer  "modified_by_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.boolean  "is_biz_process", :default => false
     t.integer  "type_id"
   end
