@@ -13,11 +13,11 @@
       %li( data-toggle='collapse' data-target="#super-system-#{item.id}" data-id="#{item.id}" )
         .slot.singleControlSlot
           .expander
-          %a.btn.btn-blue.fltrt{ :href => flow_system_path(item) }
-            Go
+          %a.widgetbtn.fltrt{ :href => flow_system_path(item) }
+            %i.gcmsicon-arrowright-grey
           %span.prefix
             =item.slug
           =item.title
         .row-fluid-slotcontent.collapse{ :id => "super-system-#{item.id}" }
-          .span12
+          .span13
             =item.description

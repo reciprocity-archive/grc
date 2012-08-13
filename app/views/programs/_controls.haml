@@ -9,7 +9,7 @@
   %input.ui-corner-all.widgetsearch.clear-value(type='text' placeholder='Search')
 
 .tabbable
-  .span3.fltrt
+  -#.span3.fltrt
     %a.btn.tabbarbtn.shrinkAll
       %img{ :src => '/images/shrinkAll.png', :alt => 'Shrink All', :title => 'Shrink All' }
     %a.btn.tabbarbtn.expandAll
@@ -19,7 +19,7 @@
     %li=link_to 'Regulations', '#regulations', :data => { :toggle => 'tab', :'tab-href' => sections_flow_program_path(program) }
     %li.active=link_to 'Controls', '#category_controls', :data => { :toggle => 'tab', :'tab-href' => category_controls_flow_program_path(program) }
     %li=link_to 'Combo', '#combo', :data => { :toggle => 'tab', :'tab-href' => section_controls_flow_program_path(program) }
-  .tab-content{ :style => 'position: relative; overflow: visible;' }
+  .tab-content
     #regulations.tab-pane
     #category_controls.tab-pane
     #combo.tab-pane

@@ -70,7 +70,7 @@ class DocumentsController < ApplicationController
     respond_to do |format|
       if @object.save
         format.json do
-          render :json => @object.object_documents.all.map { |od| od.as_json_with_role_and_document(:root => nil) }
+          render :json => @object.object_documents.all.map { |od| od.as_json_with_role_and_document(:root => nil, :methods => [:descriptor, :link_url]) }
         end
         format.html
       else

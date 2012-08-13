@@ -13,7 +13,10 @@
           .span12
             .slot.controlslot.span12
               .expander
-              %a.btn.btn-blue.addbtn.fltrt{ :href => edit_flow_control_path(control), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :title => 'Edit Control' } Edit
+              %a.widgetbtn.fltrt{ :href => edit_flow_control_path(control), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :title => 'Edit Control' }
+                %i.gcmsicon-edit-grey
+              %a.widgetbtn.fltrt{ :href => flow_control_path(control), :title => 'View Control' }
+                %i.gcmsicon-arrowright-grey
               %span.prefix=control.slug
               =control.title
         .row-fluid-slotcontent.collapse{ :id => control_content_id }

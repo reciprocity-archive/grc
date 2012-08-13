@@ -4,13 +4,13 @@
 -content_for :widget_help, (control_type == 'regulation' ? 'mapping_rcontrols' : 'mapping_ccontrols' )
 
 -content_for :widget_buttons do
-  %a.btn.widgetbtn(onclick='clear_selection(this)')
+  %a.widgettextbtn(onclick='clear_selection(this)')
     Reset
   -if control_type == 'regulation'
-    %a.btn.widgetbtn{ :href => '#create-rcontrol-modal', :data => { :toggle => 'modal-form', :control_type => control_type }}
+    %a.widgettextbtn{ :href => '#create-rcontrol-modal', :data => { :toggle => 'modal-form', :control_type => control_type }}
       New
   -else
-    %a.btn.widgetbtn{ :href => '#create-ccontrol-modal', :data => { :toggle => 'modal-form', :control_type => control_type }}
+    %a.widgettextbtn{ :href => '#create-ccontrol-modal', :data => { :toggle => 'modal-form', :control_type => control_type }}
       New
 
   %input.ui-corner-all.widgetsearch-tocontent(type='text' placeholder='Search')
