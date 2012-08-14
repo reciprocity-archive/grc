@@ -1,27 +1,12 @@
 require 'spec_helper'
+require 'authorized_controller'
 
 describe Admin::PeopleController do
-  describe "GET 'index' without authorization" do
-    it "fails as guest" do
-      login({}, {})
-      get 'index'
-      response.should be_redirect
-    end
+  before :each do
+    @person = FactoryGirl.create(:person, :email => 'user1@example.com')
+    @show_obj = @person
+    @index_objs = [@person]
   end
 
-  describe "authorized" do
-    before :each do
-      login({}, { :role => 'admin' })
-      @person = Person.create(:username => 'user1')
-    end
-
-    describe "GET 'index'" do
-      it "returns http success" do
-        get 'index'
-        response.should be_success
-        assigns(:people).should eq([@person])
-      end
-    end
-  end
-
+  it_behaves_like "an authorized controller"
 end

@@ -1,22 +1,24 @@
 require 'spec_helper'
 require 'base_objects'
+require 'authorized_controller'
 
 describe ProgramsController do
   include BaseObjects
 
-  describe "GET 'show' without authorization" do
-    it "fails as guest" do
-      login({}, {})
-      create_base_objects
-      get 'show', :id => @reg.id
-      response.should be_redirect
-    end
+  before :each do
+    create_base_objects
+
+    # For use by authorized_controller tests
+    @model = Program
+    @show_obj = @reg
+    @login_role = 'admin'
   end
+
+  it_behaves_like "an authorized controller"
 
   context "authorized" do
     before :each do
       login({}, { :role => 'admin' })
-      create_base_objects
       @ctl2 = FactoryGirl.create(:control, :title => 'Control 2', :slug => 'CTL2', :description => 'x', :is_key => true, :fraud_related => false, :program => @creg)
       @ctl3 = FactoryGirl.create(:control, :title => 'Control 3', :slug => 'CTL2-1', :description => 'x', :is_key => true, :fraud_related => false, :parent => @ctl2, :program => @creg)
       @sec2 = FactoryGirl.create(:section, :title => 'Section 2', :slug => 'REG1-SEC2', :description => 'x', :program => @reg)
@@ -28,10 +30,8 @@ describe ProgramsController do
       @sec3.save
     end
 
-    it "shows a program" do
+    it "shows stats" do
       get 'show', :id => @reg.id
-      response.should be_success
-      assigns(:program).should eq(@reg)
       stats = assigns(:stats)
       stats[:sections_count].should eq(3)
       stats[:sections_done_count].should eq(2)

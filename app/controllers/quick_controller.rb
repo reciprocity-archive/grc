@@ -1,5 +1,8 @@
 class QuickController < ApplicationController
   layout false
+  access_control :acl do
+    allow logged_in # Filtering is done in the controllers/queries
+  end
 
   def programs
     @programs = Program

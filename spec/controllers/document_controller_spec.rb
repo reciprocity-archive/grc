@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'authorized_controller'
 
 describe DocumentController do
   before :each do
@@ -7,27 +8,10 @@ describe DocumentController do
       session[:cycle_id] = @cycle.id
   end
 
-  describe "GET 'index' without authorization" do
-    it "fails as guest" do
-      login({}, {})
-      get 'index'
-      response.should redirect_to(root_url)
-    end
-  end
-
-  context "authorized" do
-    before :each do
-      login({}, { :role => 'admin' })
-    end
-
-    describe "GET 'index'" do
-      it "returns http success" do
-        get 'index'
-        response.should be_redirect
-      end
-    end
-  end
-
+  # FIXME: use authorized controller tests when this is more
+  # restful
+  it_behaves_like "an admin controller"
+  
   context "gdata" do
     before :each do
       login({}, { :role => 'admin' })

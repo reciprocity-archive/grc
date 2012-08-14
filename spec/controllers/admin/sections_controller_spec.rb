@@ -1,30 +1,18 @@
 require 'spec_helper'
 require 'base_objects'
+require 'authorized_controller'
 
 describe Admin::SectionsController do
   include BaseObjects
 
-  describe "GET 'index' without authorization" do
-    it "fails as guest" do
-      login({}, {})
-      get 'index'
-      response.should be_redirect
-    end
+  before :each do
+    create_base_objects
+
+    @model = Section
+    @show_obj = @sec
+    @index_objs = [@sec]
   end
 
-  describe "authorized" do
-    before :each do
-      login({}, { :role => 'admin' })
-      create_base_objects
-    end
-
-    describe "GET 'index'" do
-      it "returns http success" do
-        get 'index'
-        response.should be_success
-        assigns(:sections).should eq([@sec])
-      end
-    end
-  end
-
+  it_behaves_like "an admin controller"
+  it_behaves_like "an authorized controller"
 end

@@ -11,15 +11,16 @@ class Admin::PeopleController < ApplicationController
     end
   end
 
+  # FIXME: no template!
   # Show a person
-  def show
-    @person = Person.find(params[:id])
-
-    respond_to do |format|
-      format.html
-      format.xml  { render :xml => @person }
-    end
-  end
+  #def show
+  #  @person = Person.find(params[:id])
+  #
+  #  respond_to do |format|
+  #    format.html
+  #    format.xml  { render :xml => @person }
+  #  end
+  #end
 
   # New person form
   def new
@@ -68,7 +69,7 @@ class Admin::PeopleController < ApplicationController
     end
   end
 
-  # Destroy a person 
+  # Destroy a person
   # TODO: what about objects linking here?
   def destroy
     @person = Person.find(params[:id])

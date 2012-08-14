@@ -1,37 +1,48 @@
 require 'spec_helper'
 require 'base_objects'
+require 'authorized_controller'
 
 describe ProgramsDashController do
   include BaseObjects
 
-  describe "GET 'show' without authorization" do
-    it "fails as guest" do
-      login({}, {})
-      create_base_objects
-      get 'index'
-      response.should be_redirect
+  before :each do
+    Account.create({:email => 'owner1@t.com', :password => 'owner1', :password_confirmation => 'owner1', :role => :owner}, :without_protection => true)
+    Account.create({:email => 'owner2@t.com', :password => 'owner2', :password_confirmation => 'owner2', :role => :owner}, :without_protection => true)
+    prog = Program.create(:title => 'Reg 1', :slug => 'REG1')
+
+    (2..10).each do |ind|
+      Program.create(:title => "Reg #{ind}", :slug => "REG#{ind}")
     end
+
+    # Set up program owners
+    @o1 = Account.find_by_email('owner1@t.com')
+    @p1 = Program.find_by_slug('REG1')
+    ObjectPerson.create(:person => @o1.person, :personable => @p1, :role => 'owner')
+
+    @o2 = Account.find_by_email('owner2@t.com')
+    @p2 = Program.find_by_slug('REG2')
+    ObjectPerson.create(:person => @o2.person, :personable => @p2, :role => 'owner')
   end
 
-  context "authorized" do
-    before :each do
-      login({}, { :role => 'admin' })
-      create_base_objects
-      @ctl2 = FactoryGirl.create(:control, :title => 'Control 2', :slug => 'REG1-CTL2', :description => 'x', :is_key => true, :fraud_related => false, :program => @creg)
-      @ctl3 = FactoryGirl.create(:control, :title => 'Control 3', :slug => 'REG1-CTL2-3', :description => 'x', :is_key => true, :fraud_related => false, :program => @creg)
-      @sec2 = FactoryGirl.create(:section, :title => 'Section 2', :slug => 'REG1-SEC2', :description => 'x', :program => @reg)
-      @sec3 = FactoryGirl.create(:section, :title => 'Section 3', :slug => 'REG1-SEC3', :description => 'x', :program => @reg)
-      @sec2.controls << @ctl
-      @sec2.save
-      @sec3.controls << @ctl2
-      @sec3.controls << @ctl3
-      @sec3.save
-    end
+  it_behaves_like "an authorized controller"
 
-    it "shows the programs" do
+
+  context "owner" do
+    it "shows the right programs" do
+      @current_user = @o1
+      login({}, {})
+
       get 'index'
       response.should be_success
-      assigns(:programs).should eq([@creg, @reg])
+      assigns(:programs).should eq([@p1])
+    end
+
+    it "shows all programs for superuser" do
+      login({}, {:role => 'superuser'})
+      get 'index'
+      response.should be_success
+      @all_programs = Program.all
+      assigns(:programs).should eq(@all_programs)
     end
   end
 end

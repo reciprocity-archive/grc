@@ -4,9 +4,9 @@
 class Person < ActiveRecord::Base
   include AuthoredModel
 
-  attr_accessible :username, :name, :company, :language
+  attr_accessible :email, :name, :company, :language
 
-  validates :username, :presence => true
+  validates :email, :presence => true
 
   has_many :object_people, :dependent => :destroy
 
@@ -15,18 +15,21 @@ class Person < ActiveRecord::Base
   is_versioned_ext
 
   def display_name
-    username
+    email
   end
 
   def self.search(q)
     q = "%#{q}%"
     t = arel_table
     where(t[:name].matches(q).
-      or(t[:username].matches(q)))
+      or(t[:email].matches(q)))
   end
 
-  def is_superuser
-    # FIXME: No superusers for now
-    return false
+  def abilities(object = nil)
+    Authorization::abilities(self, object)
+  end
+
+  def allowed?(ability, object = nil, &block)
+    Authorization::allowed?(ability, self, object, &block)
   end
 end

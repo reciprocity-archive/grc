@@ -14,15 +14,16 @@ class Admin::ControlsController < ApplicationController
     end
   end
 
-  # Show a Control
-  def show
-    @control = Control.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @control }
-    end
-  end
+  # No template
+  ## Show a Control
+  #def show
+  #  @control = Control.find(params[:id])
+  #
+  #  respond_to do |format|
+  #    format.html # show.html.erb
+  #    format.xml  { render :xml => @control }
+  #  end
+  #end
 
   # New control form
   def new
@@ -225,7 +226,7 @@ class Admin::ControlsController < ApplicationController
   def add_biz_process
     @control = Control.find(params[:id])
   end
- 
+
   # Another way to attach a biz process
   def create_biz_process
     @control = Control.find(params[:id])
@@ -238,7 +239,7 @@ class Admin::ControlsController < ApplicationController
       redirect_to add_biz_process_control_path(@biz_process_control.control)
     end
   end
- 
+
   # Another way to detach a biz process
   def destroy_biz_process
     bpc = BizProcessControl.first(:control_id => params[:id], :biz_process_id => params[:biz_process_id])
@@ -249,7 +250,7 @@ class Admin::ControlsController < ApplicationController
     end
     redirect_to edit_control_path(bpc.control)
   end
- 
+
   # Another way to detach an implemented control
   def destroy_section
     cs = ControlSection.first(:control_id => params[:id], :section_id => params[:section_id])
@@ -310,7 +311,7 @@ class Admin::ControlsController < ApplicationController
     @control.assertion = @origin.assertion
     @control.effective_at = @origin.effective_at
     @control.business_area = @origin.business_area
-    
+
     respond_to do |format|
       if @control.save
         format.html { redirect_to(edit_control_path(@control), :notice => 'Control was successfully created.') }

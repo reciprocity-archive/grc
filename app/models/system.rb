@@ -3,6 +3,7 @@ class System < ActiveRecord::Base
   include AuthoredModel
   include SluggedModel
   include SearchableModel
+  include AuthorizedModel
 
   attr_accessible :title, :slug, :description, :infrastructure, :is_biz_process, :type
 
@@ -116,5 +117,19 @@ class System < ActiveRecord::Base
   # Return ids of related Sections (used by many2many widget)
   def section_ids
     sections.map { |co| co.id }
+  end
+
+  def authorizing_objects
+    # FIXME: Make sure this is the right set of objects
+    # to do authorization through.
+    aos = Set.new
+    aos.add(self)
+    #aos.add(program)
+    #
+    #if (parent)
+    #  aos.merge(parent.authorizing_objects)
+    #end
+
+    aos
   end
 end

@@ -6,9 +6,7 @@ describe Admin::CyclesController do
 
   describe "GET 'index' without authorization" do
     it "fails as guest" do
-      login({}, {})
-      get 'index'
-      response.should be_redirect
+      test_unauth
     end
   end
 

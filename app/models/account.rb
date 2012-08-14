@@ -7,10 +7,14 @@ class Account < ActiveRecord::Base
 
   attr_accessible :name, :surname, :email, :password, :password_confirmation
 
+  belongs_to :person
+
   before_save :encrypt_password
   before_save do
     reset_persistence_token if reset_persistence_token?
   end
+
+  before_save :create_person_if_necessary
 
   is_versioned_ext
 
@@ -50,7 +54,7 @@ class Account < ActiveRecord::Base
   end
 
   ##
-  # These methods are for ActiveRecord compatibility to make the 
+  # These methods are for ActiveRecord compatibility to make the
   # authlogic gem work
   #
 
@@ -94,12 +98,15 @@ class Account < ActiveRecord::Base
 
   # For acl9 authorization
   def has_role?(role_name, obj=nil)
-    self.role == role_name.to_s
+    self.allowed?(role_name, obj)
   end
 
-  def has_role!(role_name, obj=nil)
-    self.role = role_name
-    save!
+  def abilities(object = nil)
+    Authorization::abilities(self, object)
+  end
+
+  def allowed?(ability, object = nil, &block)
+    Authorization::allowed?(ability, self, object, &block)
   end
 
   def reset_persistence_token
@@ -144,4 +151,24 @@ class Account < ActiveRecord::Base
         reset_persistence_token
       end
     end
+
+    def create_person_if_necessary
+      # If one's been set, don't bother.
+      account = self
+      if account.person
+        return
+      else
+        person = Person.find_by_email(account.email)
+        if person
+          # A person exists with the e-mail, create the relationship
+          logger.info "Associating #{account.inspect} with #{person.inspect}"
+        else
+          # No person exists with the e-mail, create an associated person
+          person = Person.create(:email => account.email)
+          logger.info "Associating #{account.inspect} with NEW person #{person.inspect}"
+        end
+        account.person = person
+      end
+    end
+
 end

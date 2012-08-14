@@ -1,29 +1,22 @@
 require 'spec_helper'
 require 'base_objects'
+require 'authorized_controller'
 
 describe Admin::SystemsController do
   include BaseObjects
 
-  describe "GET 'index' without authorization" do
-    it "fails as guest" do
-      login({}, {})
-      get 'index'
-      response.should be_redirect
-    end
+  before :each do
+    create_base_objects
+    @model = System
+    @show_obj = @sys
+    @index_objs = [@sys]
   end
+
+  it_behaves_like "an authorized resource controller"
 
   describe "authorized" do
     before :each do
       login({}, { :role => 'admin' })
-      create_base_objects
-    end
-
-    describe "GET 'index'" do
-      it "returns http success" do
-        get 'index'
-        response.should be_success
-        assigns(:systems).should eq([@sys])
-      end
     end
 
     describe "POST 'create'" do

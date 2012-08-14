@@ -7,24 +7,28 @@ class ControlsController < ApplicationController
   include ApplicationHelper
   include ControlsHelper
 
+  before_filter :load_control, :only => [:show,
+                                         :edit,
+                                         :tooltip,
+                                         :update,
+                                         :sections]
+
   access_control :acl do
     allow :superuser, :admin, :analyst
+    allow :view, :of => :control, :to => [:show,
+                                          :tooltip]
   end
 
   layout 'dashboard'
 
   def edit
-    @control = Control.find(params[:id])
-
     render :layout => nil
   end
 
   def show
-    @control = Control.find(params[:id])
   end
 
   def tooltip
-    @control = Control.find(params[:id])
     render :layout => nil
   end
 
@@ -52,8 +56,6 @@ class ControlsController < ApplicationController
   end
 
   def update
-    @control = Control.find(params[:id])
-
     respond_to do |format|
       if @control.authored_update(current_user, control_params)
         flash[:notice] = "Successfully updated the control!"
@@ -73,7 +75,6 @@ class ControlsController < ApplicationController
   end
 
   def sections
-    @control = Control.find(params[:id])
     @sections =
       @control.sections.all +
       @control.implemented_controls.includes(:sections).map(&:sections).flatten
@@ -100,21 +101,4 @@ class ControlsController < ApplicationController
     @controls.all.sort_by(&:slug_split_for_sort)
     render :action => 'controls', :layout => nil, :locals => { :controls => @controls, :prefix => 'Child of' }
   end
-
-  private
-
-    def control_params
-      control_params = params[:control] || {}
-      if control_params[:program_id]
-        # TODO: Validate the user has access to add controls to the program
-        control_params[:program] = Program.find(control_params.delete(:program_id))
-      end
-      %w(type kind means).each do |field|
-        value = control_params.delete(field + '_id')
-        if value.present?
-          control_params[field] = Option.find(value)
-        end
-      end
-      control_params
-    end
 end

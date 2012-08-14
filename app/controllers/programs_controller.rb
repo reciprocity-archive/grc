@@ -7,19 +7,40 @@ class ProgramsController < ApplicationController
   include ApplicationHelper
   include ProgramsHelper
 
+  # FIXME: Decide if the :section, controls, etc.
+  # methods should be moved, and what access controls they
+  # need.
+  before_filter :load_program, :only => [:show,
+                                         :import,
+                                         :tooltip,
+                                         :edit,
+                                         :update,
+                                         :sections,
+                                         :controls,
+                                         :section_controls,
+                                         :control_sections,
+                                         :category_controls]
+
   access_control :acl do
     allow :superuser, :admin, :analyst
+    allow :read, :of => :program, :to => [:show,
+                                          :tooltip,
+                                          :sections,
+                                          :controls,
+                                          :section_controls,
+                                          :control_sections,
+                                          :category_controls]
+    allow :edit, :of => :program, :to => [:edit]
   end
 
   layout 'dashboard'
 
   def show
-    @program = Program.find(params[:id])
+    #@program = Program.find(params[:id])
     @stats = program_stats(@program)
   end
 
   def import
-    @program = Program.find(params[:id])
   end
 
   def new
@@ -29,7 +50,6 @@ class ProgramsController < ApplicationController
   end
 
   def edit
-    @program = Program.find(params[:id])
     if @program.previous_version
       @program = @program.previous_version
     end
@@ -65,8 +85,6 @@ class ProgramsController < ApplicationController
   end
 
   def update
-    @program = Program.find(params[:id])
-
     #@program.source_document ||= Document.create
     #@program.source_website ||= Document.create
 
@@ -93,12 +111,10 @@ class ProgramsController < ApplicationController
   end
 
   def tooltip
-    @program = Program.find(params[:id])
     render :layout => '_tooltip', :locals => { :program => @program }
   end
 
   def sections
-    @program = Program.find(params[:id])
     @sections = @program.sections.includes(:controls => :implementing_controls)
     if params[:s]
       @sections = @sections.search(params[:s])
@@ -108,7 +124,6 @@ class ProgramsController < ApplicationController
   end
 
   def controls
-    @program = Program.find(params[:id])
     @controls = @program.controls.includes(:implementing_controls)
     if params[:s]
       @controls = @controls.search(params[:s])
@@ -118,7 +133,6 @@ class ProgramsController < ApplicationController
   end
 
   def section_controls
-    @program = Program.find(params[:id])
     if @program.company?
       @sections = @program.controls.includes(:implemented_controls => { :control_sections => :section }).map { |cc| cc.implemented_controls.map { |ic| ic.control_sections.map { |cs| cs.section } }.flatten }.flatten.uniq
     else
@@ -130,7 +144,6 @@ class ProgramsController < ApplicationController
   end
 
   def control_sections
-    @program = Program.find(params[:id])
     @controls = @program.controls.includes(:sections)
     if params[:s]
       @controls = @controls.search(params[:s])
@@ -140,8 +153,6 @@ class ProgramsController < ApplicationController
   end
 
   def category_controls
-    @program = Program.find(params[:id])
-
     @category_tree = Category.roots.all.map do |category|
       branches = category.children.all.map do |subcategory|
         controls = subcategory.controls.where(:program_id => @program.id).all
@@ -166,5 +177,11 @@ class ProgramsController < ApplicationController
     end
 
     render :layout => nil, :locals => { }
+  end
+
+  private
+
+  def load_program
+    @program = Program.find(params[:id])
   end
 end

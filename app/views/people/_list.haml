@@ -8,17 +8,17 @@
 %a{ :href => new_flow_person_path(:format => 'json'), :'data-toggle' => 'modal-ajax-listform', :'data-list-target' => '#listPersonList' }
   New
 
-%script{ :type => 'text/html', :data => { :name => '', :username => '' }}
+%script{ :type => 'text/html', :data => { :name => '', :email => '' }}
   %li
-    %a.btn.referenceItem{:'data-dismiss' => 'modal', :href => '#', :data => { :id => '<%= id %>', :name => '<%= name %>', :username => '<%= username %>' }}
+    %a.btn.referenceItem{:'data-dismiss' => 'modal', :href => '#', :data => { :id => '<%= id %>', :name => '<%= name %>', :email => '<%= email %>' }}
       %i.gcmsicon-gears-black
       %strong <%= name %>
-      %span <%= username %>
+      %span <%= email %>
 
 %ul.nav.nav-tabs.nav-stacked.itemlist.personList#listPersonList{ :'data-list-href' => list_flow_people_path(:format => 'json') }
   -people.each do |person|
     %li
-      %a.btn.referenceItem{:'data-dismiss' => 'modal', :href => '#', :data => { :id => person.id, :name => person.name, :username => person.username }}
+      %a.btn.referenceItem{:'data-dismiss' => 'modal', :href => '#', :data => { :id => person.id, :name => person.name, :email => person.email }}
         %i.gcmsicon-gears-black
         %strong=person.name
-        %span=person.username
+        %span=person.email

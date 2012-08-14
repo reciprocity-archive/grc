@@ -11,15 +11,16 @@ class Admin::DocumentsController < ApplicationController
     end
   end
 
+  # FIXME: no template
   # Show a doc
-  def show
-    @document = Document.find(params[:id])
-
-    respond_to do |format|
-      format.html
-      format.xml  { render :xml => @document }
-    end
-  end
+  #def show
+  #  @document = Document.find(params[:id])
+  #
+  #  respond_to do |format|
+  #    format.html
+  #    format.xml  { render :xml => @document }
+  #  end
+  #end
 
   # New doc form
   def new

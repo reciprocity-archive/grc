@@ -14,15 +14,16 @@ class Admin::SectionsController < ApplicationController
     end
   end
 
+  # FIXME: No template!
   # Show one CO
-  def show
-    @section = Section.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @section }
-    end
-  end
+  #def show
+  #  @section = Section.find(params[:id])
+  #
+  #  respond_to do |format|
+  #    format.html # show.html.erb
+  #    format.xml  { render :xml => @section }
+  #  end
+  #end
 
   # Show new CO form
   def new

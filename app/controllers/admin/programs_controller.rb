@@ -18,15 +18,15 @@ class Admin::ProgramsController < ApplicationController
     end
   end
 
-  # Show reg
-  def show
-    @program = Program.find(params[:id])
-
-    respond_to do |format|
-      format.html
-      format.xml  { render :xml => @program }
-    end
-  end
+  ## Show reg
+  #def show
+  #  @program = Program.find(params[:id])
+  #
+  #  respond_to do |format|
+  #    format.html
+  #    format.xml  { render :xml => @program }
+  #  end
+  #end
 
   # New reg form
   def new

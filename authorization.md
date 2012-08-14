@@ -1,5 +1,7 @@
 # Authorization notes
 
+# THIS IS OUT OF DATE. Update this!
+
 Authorization will be built on top of CanCan, a gem for Rails
 authorization (https://github.com/ryanb/cancan)
 
@@ -103,7 +105,7 @@ Declarative authorizations
                 if_attribute :auditors => contains {user}
             end
 
-            has_permission_on :control, :to => :view do
+            has_permission_on :control, :to => :read do
             end
 
         has_permission_on :controls, :to => :manage do

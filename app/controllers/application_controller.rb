@@ -26,9 +26,19 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from Acl9::AccessDenied do
-      flash[:warning] = "You are not authorized to access this page"
-      redirect_to root_url
-      return false
+    # FIXME: This should probably render a page more specific to
+    # 403s, especially for AJAXy stuff.
+    render_unauthorized
+  end
+
+  def render_unauthorized
+    flash[:warning] = "You are not authorized to access this page"
+    render :template => 'welcome/login', :status => 403
+  end
+
+  def render_unauthenticated
+      flash[:notice] = "You must be logged in to access this page"
+    render :template => 'welcome/login', :status => 401
   end
 
   private
@@ -44,6 +54,7 @@ class ApplicationController < ActionController::Base
   def current_user
     return @current_user if defined?(@current_user)
     @current_user = current_user_session && current_user_session.record
+    Authorization.current_person = current_user.person
     @current_user
   end
 
@@ -51,10 +62,10 @@ class ApplicationController < ActionController::Base
   def require_user
     unless current_user
       store_location
-      flash[:notice] = "You must be logged in to access this page"
-      redirect_to login_url
+      render_unauthenticated
       return false
     end
+
   end
 
   # Pre-filter for requiring the user to not be logged in

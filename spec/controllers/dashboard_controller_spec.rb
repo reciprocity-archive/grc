@@ -1,35 +1,45 @@
 require 'spec_helper'
+require 'authorized_controller'
 
 describe DashboardController do
-  describe "GET 'index' without authorization" do
-    it "fails as guest" do
-      login({}, {})
-      get 'index'
-      response.should be_redirect
-    end
+
+  before :each do
+    @reg = FactoryGirl.create(:program, :title => 'Reg 1', :slug => 'reg1', :company => false)
+    @cycle = FactoryGirl.create(:cycle, :program => @reg, :start_at => '2012-01-01')
+    @bp = FactoryGirl.create(:biz_process, :title => 'Biz Process 1', :slug => 'bp1', :description => 'x')
+    @sys = FactoryGirl.create(:system, :title => 'System 1', :slug => 'sys1', :description => 'x', :infrastructure => true)
+
+    @model = BizProcess
+    @index_objs = [@bp]
   end
+
+  it_behaves_like "an authorized controller"
+
+  #describe "GET 'index' without authorization" do
+  #  it "fails as guest" do
+  #    login({}, {})
+  #    get 'index'
+  #    response.should be_redirect
+  #  end
+  #end
 
   context "authorized" do
     before :each do
       login({}, { :role => 'admin' })
       #BizProcess.destroy
       #System.destroy
-      @reg = FactoryGirl.create(:program, :title => 'Reg 1', :slug => 'reg1', :company => false)
-      @cycle = FactoryGirl.create(:cycle, :program => @reg, :start_at => '2012-01-01')
-      @bp = FactoryGirl.create(:biz_process, :title => 'Biz Process 1', :slug => 'bp1', :description => 'x')
-      @sys = FactoryGirl.create(:system, :title => 'System 1', :slug => 'sys1', :description => 'x', :infrastructure => true)
       @locals = Hash.new(0)
       session[:cycle_id] = @cycle.id
     end
 
-    describe "GET 'index'" do
-      it "returns http success" do
-        get 'index'
-        #debugger
-        response.should be_success
-        assigns(:biz_processes).should eq([@bp])
-      end
-    end
+    #describe "GET 'index'" do
+    #  it "returns http success" do
+    #    get 'index'
+    #    #debugger
+    #    response.should be_success
+    #    assigns(:biz_processes).should eq([@bp])
+    #  end
+    #end
 
     describe "POST 'index'" do
       it "redirects" do

@@ -5,7 +5,11 @@ describe TestreportController do
     it "fails as guest" do
       login({}, {})
       get 'index'
-      response.should be_redirect
+
+      # FIXME: This should share the same tests that all of the
+      # controllers share surrounding authorization.
+      response.status.should == 403
+      response.should render_template('welcome/login')
     end
   end
 

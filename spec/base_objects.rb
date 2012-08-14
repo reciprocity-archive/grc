@@ -14,7 +14,7 @@ module BaseObjects
     @bp.controls << @ctl
     @bp.sections << @sec
     @biz_area = FactoryGirl.create(:business_area, :title => 'title1')
-    @person1 = FactoryGirl.create(:person, :username => 'john')
+    @person1 = FactoryGirl.create(:person, :email => 'john@example.com')
     @sys_person1 = FactoryGirl.create(:system_person, :person => @person1, :system => @sys)
     @bp_person1 = FactoryGirl.create(:biz_process_person, :person => @person1, :biz_process => @bp)
     #debugger
@@ -48,9 +48,9 @@ module BaseObjects
   end
 
   def test_unauth
-      login({}, {})
-      get 'index'
-      response.should be_redirect
+    login({}, {})
+    get 'index'
+    response.status.should == 403
+    response.should render_template('welcome/login')
   end
-
 end

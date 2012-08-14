@@ -6,10 +6,12 @@ describe MappingController do
 
   describe "GET 'index' without authorization" do
     it "fails as guest" do
+      # FIXME: rewrite this using the shared authorization controller tests
       login({}, {})
       create_base_objects
       get 'show', :program_id => @reg.id
-      response.should be_redirect
+      response.status.should == 403
+      response.should render_template('welcome/login')
     end
   end
 

@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(:version => 20120816195416) do
     t.integer  "modified_by_id"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
+    t.integer  "person_id"
   end
 
   create_table "biz_process_controls", :force => true do |t|
@@ -283,7 +284,7 @@ ActiveRecord::Schema.define(:version => 20120816195416) do
   end
 
   create_table "people", :force => true do |t|
-    t.string   "username",       :null => false
+    t.string   "email",          :null => false
     t.string   "name"
     t.integer  "modified_by_id"
     t.datetime "created_at",     :null => false
