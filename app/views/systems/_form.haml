@@ -9,7 +9,7 @@
 
 .row-fluid
   .span2{ :class => error_class(f, :slug) }
-    =f.label :slug, "Code"
+    =f.label :slug, "Short Code"
     =f.text_field :slug, :class => 'span12'
     =error_messages_inline(f, :slug)
 
@@ -18,10 +18,7 @@
     =f.text_field :version, :class => 'input-supermini'
     =error_messages_inline(f, :version)
 
-  .span3{ :class => error_class(f, :owner) }
-    =f.label :owner_id
-    =f.collection_select :owner_id, Person.all, :id, :display_name, {:include_blank => true}, {:class => 'span12'}
-    =error_messages_inline(f, :owner)
+  .span3
 
   .span2{ :class => error_class(f, :is_biz_process) }
     =f.label 'System or Process'
@@ -38,14 +35,12 @@
         %option{ :value => o.id, :selected => (o.id == f.object.type_id) }=o.title
     =error_messages_inline(f, :type)
 
-%br
 .row-fluid
   .span12{ :class => error_class(f, :title) }
     =f.label :title
     =f.text_field :title, :class => 'span12'
     =error_messages_inline(f, :title)
 
-%br
 .row-fluid
   .span12
     =f.label :description, "Description"
@@ -55,13 +50,6 @@
 .row-fluid
   .span12
     =error_messages_inline(f, :description)
-
-%br
--#.row-fluid
-  .span12{ :class => error_class(f, :url) }
-    =f.label :url
-    =f.text_field :url, :class => 'span12'
-    =error_messages_inline(f, :url)
 
 -if !f.object.new_record?
   =render :partial => 'shared/object_info', :locals => { :object => f.object, :approved => false }

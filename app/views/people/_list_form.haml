@@ -10,7 +10,7 @@
       People associated with this object
 
     %script{ :type => 'text/html', :data => { :name => '', :username => '' }}
-      %li.slot.controlSlot{ :'data-id' => '<%= id %>' }
+      %li.controlSlot{ :'data-id' => '<%= id %>' }
         %input(type='hidden' name='items[<%= id %>][id]' value='<%= id %>')
         %a{:href => "#", :'data-toggle' => 'list-remove'}
           .removeCircleButton.fltrt
@@ -27,7 +27,7 @@
     %ul.itemlist#listObjectPersonList
       -object.object_people.each do |object_person|
         -person = object_person.person
-        %li.slot.controlSlot{ :'data-id' => person.id, :class => member_error_class(object_person) }
+        %li.controlSlot{ :'data-id' => person.id, :class => member_error_class(object_person) }
           =member_error_messages_inline(object_person)
           %input(type='hidden' name="items[#{person.id}][id]" value="#{person.id}")
           %a{:href => "#", :'data-toggle' => 'list-remove'}
@@ -49,7 +49,7 @@
         New Person
 
     %script{ :type => 'text/html' }
-      %li.slot.controlSlot{ :'data-id' => '<%= id %>' }
+      %li.controlSlot{ :'data-id' => '<%= id %>' }
         .itemarrow
         .arrowcontrols-group{ :'data-toggle' => 'list-select', :href => '#', :data => { :id => '<%= id %>', :name => '<%= name %>', :username => '<%= username %>' }}
           .controls-type <%= username %>
@@ -57,7 +57,7 @@
 
     %ul.itemlist#listPersonList{ :'data-list-href' => list_flow_people_path(:format => 'json'), :'data-list-target' => '#listObjectPersonList'}
       -options.each do |person|
-        %li.slot.controlSlot{ :'data-id' => person.id }
+        %li.controlSlot{ :'data-id' => person.id }
           .itemarrow
           .arrowcontrols-group{:'data-toggle' => 'list-select', :href => '#', :data => { :id => person.id, :name => person.name, :username => person.username }}
             .controls-type=person.username

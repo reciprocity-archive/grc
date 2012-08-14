@@ -28,7 +28,7 @@ Install RVM by following instructions at http://beginrescueend.com/ .
 
 Run:
 
-    rvm install jruby # or ruby-1.9.2
+    rvm install jruby # or ruby-1.9.3
     rvm gemset create cms
 
 Add to .bashrc

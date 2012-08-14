@@ -9,23 +9,27 @@ Setup environment
 
 CMS development uses RVM for environment-isolation during development.
 
-### Install RVM
+### Install or Update RVM
 
 Follow instructions at http://beginrescueend.com/ to install RVM.
 
-### Install Ruby 1.9.2 for CMS
+If you already have RVM installed, you may need to update to use Ruby 1.9.3:
 
-If RVM is successfully installed, you should setup a Ruby 1.9.2 environment using:
+    rvm reload && rvm get stable
 
-    rvm install 1.9.2
+### Install Ruby 1.9.3 for CMS
+
+If RVM is successfully installed, you should setup a Ruby 1.9.3 environment using:
+
+    rvm install 1.9.3-p194
 
 After the Ruby version has installed, setup the gemset for CMS using:
 
-    rvm --create use ruby-1.9.2@cms
+    rvm --create use ruby-1.9.3-p194@cms
 
 #### Problems?
 
-If you have problems building Ruby 1.9.2, make sure you have the dependencies described in `rvm requirements`.  If on OSX, use Xcode 4.1 (Xcode 4.2 uses LLVM, which in turn breaks everything.)
+If you have problems building Ruby 1.9.3, make sure you have the dependencies described in `rvm requirements`.  If on OSX, use Xcode 4.1 (Xcode 4.2 uses LLVM, which in turn breaks everything.)
 
 You may need to reinstall using `rvm pkg install openssl` and/or `rvm pkg install readline` if you have problems with the `linecache19` or `ruby-debug19` gems later on.
 
@@ -109,8 +113,8 @@ Condensed version
 You have RVM, right?  Do this:
 
     # Install RVM environment
-    rvm install 1.9.2
-    rvm --create use ruby-1.9.2@cms
+    rvm install 1.9.3-p194
+    rvm --create use ruby-1.9.3-p194@cms
 
     # Checkout code
     git clone https://code.google.com/p/compliance-management cms
@@ -122,7 +126,6 @@ You have RVM, right?  Do this:
 
     # Configure application
     cp config/database.yml{.dist,}
-    cp config/initializers/secret_token.rb{.dist,}
 
     # Initialize database
     bundle exec rake db:migrate

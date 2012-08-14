@@ -16,8 +16,11 @@
       -content_id = "content_#{rand(36**8).to_s(36)}" # unique ID for toggle
       .span12
         .slot.regulationslot.span9{ :'data-toggle' => 'collapse', :'data-target' => "##{content_id}" }
-          /-if !item.description.blank?
           .expander
+          %a.widgetbtn.fltrt{ :href => edit_flow_control_path(item), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :title => 'Edit Control' }
+            %i.gcmsicon-edit-grey
+          %a.widgetbtn.fltrt{ :href => flow_control_path(item), :title => 'View Control' }
+            %i.gcmsicon-arrowright-grey
           %span.prefix=item.slug
           =item.title || item.description
         .controllist.attached.span3{ :class => "statusblue" }

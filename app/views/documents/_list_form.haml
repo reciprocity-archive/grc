@@ -9,12 +9,12 @@
     %h3 References for this object
 
     %script{ :type => 'text/html', :data => { :title => '', :link_url => '', :descriptor => '' }}
-      %li.slot.controlSlot{ :'data-id' => '<%= id %>' }
+      %li.controlSlot{ :'data-id' => '<%= id %>' }
         %input(type='hidden' name='items[<%= id %>][id]' value='<%= id %>')
         %a{:href => "#", :'data-toggle' => 'list-remove'}
           .removeCircleButton.fltrt
             %i.gcmssmallicon-dash-white
-        .arrowcontrols-group{ :href => '#', :data => { :id => '<%= id %>', :title => '<%= title %>', :link_url => '<%= link_url %>', :descriptor => '<%= descriptor %>' }}
+        .arrowcontrols-group{ :href => '#', :'data-id' => '<%= id %>', :'data-context' => "{ title: '<%= title %>', link_url: '<%= link_url %>', descriptor: '<%= descriptor %>' }"}
           .controls-type <%= link_url %>
           .controls-subtype <%= descriptor %>
           .controls-subgroup <%= title || '&nbsp;' %>
@@ -22,13 +22,13 @@
     %ul.itemlist#listObjectDocumentList
       -object.object_documents.each do |object_document|
         -document = object_document.document
-        %li.slot.controlSlot{ :'data-id' => document.id, :class => member_error_class(object_document) }
+        %li.controlSlot{ :'data-id' => document.id, :class => member_error_class(object_document) }
           =member_error_messages_inline(object_document)
           %input(type='hidden' name="items[#{document.id}][id]" value="#{document.id}")
           %a{:href => "#", :'data-toggle' => 'list-remove'}
             .removeCircleButton.fltrt
               %i.gcmssmallicon-dash-white
-          .arrowcontrols-group{ :href => '#', :data => { :id => document.id, :title => document.title, :link_url => document.link_url, :descriptor => document.descriptor }}
+          .arrowcontrols-group{ :href => '#', :'data-id' => document.id, :'data-context' => { :title => document.title, :link_url => document.link_url, :descriptor => document.descriptor }.to_json}
             .controls-type=document.link_url
             .controls-subtype=document.descriptor
             .controls-subgroup=document.title || '&nbsp;'.html_safe
@@ -40,18 +40,18 @@
         New Reference
 
     %script{ :type => 'text/html' }
-      %li.slot.controlSlot{ :'data-id' => '<%= id %>' }
+      %li.controlSlot{ :'data-id' => '<%= id %>' }
         .itemarrow
-        .arrowcontrols-group{ :'data-toggle' => 'list-select', :href => '#', :data => { :id => '<%= id %>', :title => '<%= title %>', :link_url => '<%= link_url %>', :descriptor => '<%= descriptor %>' }}
+        .arrowcontrols-group{ :'data-toggle' => 'list-select', :href => '#',  :'data-id' => '<%= id %>', :'data-context' => "{ title: '<%= title %>', link_url: '<%= link_url %>', descriptor: '<%= descriptor %>' }"}
           .controls-type <%= link_url %>
           .controls-subtype <%= descriptor %>
           .controls-subgroup <%= title || '&nbsp;' %>
 
     %ul.itemlist#listDocumentList{ :'data-list-href' => list_flow_documents_path(:format => 'json'), :'data-list-target' => '#listObjectDocumentList'}
       -options.each do |document|
-        %li.slot.controlSlot{ :'data-id' => document.id }
+        %li.controlSlot{ :'data-id' => document.id }
           .itemarrow
-          .arrowcontrols-group{ :'data-toggle' => 'list-select', :href => '#', :data => { :id => document.id, :title => document.title, :link_url => document.link_url, :descriptor => document.descriptor }}
+          .arrowcontrols-group{ :'data-toggle' => 'list-select', :href => '#', :'data-id' => document.id, :'data-context' => { :title => document.title, :link_url => document.link_url, :descriptor => document.descriptor }.to_json}
             .controls-type=document.link_url
             .controls-subtype=document.descriptor
             .controls-subgroup=document.title || '&nbsp;'.html_safe

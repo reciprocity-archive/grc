@@ -56,7 +56,7 @@
 
   $.tmpl.render_items = function($list, list) {
     var $tmpl = $list.siblings('script[type="text/html"]').add($list.find('> script[type="text/html"]'))
-      , defaults = $.extend({}, $tmpl.data(), $list.data())
+      , defaults = $.extend({}, $tmpl.data('context'), $tmpl.data(), $list.data('context'), $list.data())
       , output = [];
     $.each(list, function(i, data) {
       output.push($tmpl.tmpl($.extend(defaults, data)));

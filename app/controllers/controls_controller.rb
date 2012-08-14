@@ -29,15 +29,13 @@ class ControlsController < ApplicationController
   end
 
   def new
-    @control = Control.new(params[:control])
+    @control = Control.new(control_params)
 
     render :layout => nil
   end
 
   def create
-    program = Program.find(params[:control].delete("program_id"))
-    @control = Control.new(params[:control])
-    @control.program = program
+    @control = Control.new(control_params)
 
     respond_to do |format|
       if @control.save
@@ -57,7 +55,7 @@ class ControlsController < ApplicationController
     @control = Control.find(params[:id])
 
     respond_to do |format|
-      if @control.authored_update(current_user, params[:control] || {})
+      if @control.authored_update(current_user, control_params)
         flash[:notice] = "Successfully updated the control!"
         format.json do
           render :json => @control.as_json(:root => nil)
@@ -90,7 +88,7 @@ class ControlsController < ApplicationController
       @controls = @controls.search(params[:s])
     end
     @controls.all.sort_by(&:slug_split_for_sort)
-    render :action => 'controls', :layout => nil, :locals => { :controls => @controls }
+    render :action => 'controls', :layout => nil, :locals => { :controls => @controls, :prefix => 'Parent of' }
   end
 
   def implementing_controls
@@ -100,6 +98,23 @@ class ControlsController < ApplicationController
       @controls = @controls.search(params[:s])
     end
     @controls.all.sort_by(&:slug_split_for_sort)
-    render :action => 'controls', :layout => nil, :locals => { :controls => @controls }
+    render :action => 'controls', :layout => nil, :locals => { :controls => @controls, :prefix => 'Child of' }
   end
+
+  private
+
+    def control_params
+      control_params = params[:control] || {}
+      if control_params[:program_id]
+        # TODO: Validate the user has access to add controls to the program
+        params[:control][:program] = Program.find(control_params.delete(:program_id))
+      end
+      %w(type kind means).each do |field|
+        value = control_params.delete(field + '_id')
+        if value.present?
+          control_params[field] = Option.find(value)
+        end
+      end
+      control_params
+    end
 end

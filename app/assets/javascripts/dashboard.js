@@ -43,6 +43,11 @@ jQuery(function($) {
     $(this).find('.expander').eq(0).toggleClass('in');
   });
 
+  // When clicking a slot-link, don't toggle collapse
+  $('body').on('click', '.slot > a', function(e) {
+    e.stopPropagation();
+  });
+
   // expandAll and shrinkAll buttons
   $('body').on('click', '.tabbable a.expandAll', function(e) {
     $(this).closest('.tabbable').find('.tab-pane:visible').find('.collapse').collapse({ toggle: false }).collapse('show');
@@ -136,11 +141,14 @@ jQuery(function($) {
   $('body').on('click', '[data-toggle="list-select"]', function(e) {
     e.preventDefault();
 
-    var $li = $(this).closest('li')
+    var $this = $(this)
+      , $li = $this.closest('li')
       , target = $li.closest('ul').data('list-target')
+      , data;
 
     if (target) {
-      $(target).tmpl_mergeitems([$(this).data()]);
+      data = $.extend({}, $this.data('context') || {}, $this.data());
+      $(target).tmpl_mergeitems([data]);
     }
   });
 });
@@ -176,7 +184,7 @@ function init_mapping() {
       $(this).closest('.row-fluid').find('.regulationslot').addClass('selected');
 
       if ($dialog.is(':visible')) {
-        $dialog.load($(this).closest('.row-fluid').find('a.controls').data('href'));
+        $dialog.load($(this).closest('.row-fluid').find('a.controllist').data('href'));
       }
     });
   $('#rcontrol_list')
@@ -194,7 +202,7 @@ function init_mapping() {
 
   var $dialog = $('<div class="modal hide fade"></div>').appendTo('body');
   $dialog.draggable({ handle: '.modal-header' });
-  $('#section_list').on('click', 'a.controls', function() {
+  $('#section_list').on('click', 'a.controllist', function() {
     // Save the current href for reloadability
     $dialog.data('href', $(this).data('href'));
     $dialog.load($(this).data('href'), function() {
@@ -221,7 +229,7 @@ function init_mapping() {
 jQuery(function($) {
   var $dialog = $('<div class="modal hide fade"></div>').appendTo('body');
   $dialog.draggable({ handle: '.modal-header' });
-  $('#regulations, #controls').on('click', 'a.controls', function(e) {
+  $('#regulations, #controls').on('click', 'a.controllist', function(e) {
     e.preventDefault();
     $dialog.load($(this).attr('href'), function() {
       $dialog.modal_form({ backdrop: false }).modal_form('show');
