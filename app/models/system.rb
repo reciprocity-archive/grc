@@ -2,8 +2,9 @@
 class System < ActiveRecord::Base
   include AuthoredModel
   include SluggedModel
+  include SearchableModel
 
-  attr_accessible :title, :slug, :description, :infrastructure
+  attr_accessible :title, :slug, :description, :infrastructure, :is_biz_process, :type
 
   before_save :upcase_slug
 
