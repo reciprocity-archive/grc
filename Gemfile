@@ -5,7 +5,7 @@ if File.exist? 'Gemfile.local'
   instance_eval(Bundler.read_file('Gemfile.local'), 'Gemfile.local', 1)
 end
 
-RAILS_VERSION = '= 3.2.6'
+RAILS_VERSION = '= 3.2.5'
 
 #gem 'gdata-ruby-util', '1.1.2'
 gem 'gdata_19', '~> 1.1.5', :require => 'gdata'
@@ -88,7 +88,7 @@ group(:development, :test) do
     gem 'ruby-debug'
   end
   platform :ruby do
-    gem 'linecache19', :git => 'git://github.com/mark-moseley/linecache'
+    gem 'linecache19'
     gem 'ruby-debug-base19x', '~> 0.11.30.pre4'
     gem 'ruby-debug19', :require => 'ruby-debug'
     gem 'ruby-prof'
