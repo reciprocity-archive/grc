@@ -78,3 +78,8 @@ $white: #ffffff;
     @if $experimental-support-for-opera {
       -o-transition: $o-value; }
     transition: $transitions; }
+    
+    // box-sizing
+    @mixin box-sizing($bs) {
+      $bs: unquote($bs);
+      @include experimental(box-sizing, $bs, -moz, -webkit, not -o, not -ms, not -khtml, official); }
