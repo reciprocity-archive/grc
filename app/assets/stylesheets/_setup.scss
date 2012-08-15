@@ -84,6 +84,19 @@ $white: #ffffff;
       $bs: unquote($bs);
       @include experimental(box-sizing, $bs, -moz, -webkit, not -o, not -ms, not -khtml, official); }
 
+    // background-clip
+    @mixin background-clip($clip: $default-background-clip) {
+      // webkit and mozilla use the deprecated short [border | padding]
+      $clip: unquote($clip);
+      $deprecated: $clip;
+      @if $clip == padding-box {
+        $deprecated: padding; }
+      @if $clip == border-box {
+        $deprecated: border; }
+      // Support for webkit and mozilla's use of the deprecated short form
+      @include experimental(background-clip, $deprecated, -moz, -webkit, not -o, not -ms, not -khtml, not official);
+      @include experimental(background-clip, $clip, not -moz, not -webkit, not -o, not -ms, -khtml, official); }
+
 // placeholders
 
 // Lighten placeholder text from bootstrap defaults

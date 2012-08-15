@@ -1085,9 +1085,7 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
   padding: 8px;
   background-color: #ffffff;
 	@include border-radius(0 0 3px 3px);    
-  -webkit-background-clip: padding-box;
-     -moz-background-clip: padding-box;
-          background-clip: padding-box;
+  @include background-clip(padding-box);
   /* dan: */
   max-height: 300px;
   overflow: auto;
@@ -1140,9 +1138,7 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
   *border-bottom-width: 2px;
   @include border-radius(5px);
 	@include box-shadow(0 5px 10px rgba(0, 0, 0, 0.2));
-  -webkit-background-clip: padding-box;
-     -moz-background-clip: padding;
-          background-clip: padding-box;
+  @include background-clip(padding-box);
 }
 
 .dropdown-menu.pull-right {
