@@ -102,8 +102,7 @@ td {
 
 
 .WidgetBox {
-	color:#666;
-	
+	color:$textColor;
 	margin: 0 15px 15px 0; /* bottom margin */
 /*	padding: 0 15px 0px 0px; padding for scrollbar */
   background: white;
@@ -117,7 +116,7 @@ td {
 
 
 .WidgetBoxHeading2 {
-	color:#666;
+	color:$textColor;
   @include border-radius(5px 5px 0px 0px);
 	background: #828a97; /* Old browsers */
 	background: -moz-linear-gradient(top,  #828a97 0%, #565f6c 39%, #4b535d 80%, #474e59 82%, #4c525b 100%); /* FF3.6+ */
@@ -349,7 +348,7 @@ unused.expanderslot {
 		  -ms-box-sizing: border-box;
 			  box-sizing: border-box;
 	padding:6px 6px 6px 2px;
-	color:#666666;
+	color:$textColor;
 	background: #ffffff; /* Old browsers */
 	background: -moz-linear-gradient(top,  #ffffff 0%, #eef4ed 70%, #edebe6 100%, #f6f6f6 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(70%,#eef4ed), color-stop(100%,#edebe6), color-stop(100%,#f6f6f6)); /* Chrome,Safari4+ */
@@ -386,13 +385,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefcea', end
 
 .subsystemslot:hover {
 	
-	color:#666666;
+	color:$textColor;
 	border: 1px solid #3badb3;
 	cursor:pointer;
 }
 
 .regulationslot {
-	color:#666666;
+	color:$textColor;
 	background: #ffffff; /* Old browsers */
 	background: -moz-linear-gradient(top,  #ffffff 0%, #eef4ed 70%, #edebe6 100%, #f6f6f6 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(70%,#eef4ed), color-stop(100%,#edebe6), color-stop(100%,#f6f6f6)); /* Chrome,Safari4+ */
@@ -404,7 +403,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefcea', end
 }
 
 .regulationslot:hover {
-	color:#666666;
+	color:$textColor;
 	background: #eeeeee; /* Old browsers */
 	background: -moz-linear-gradient(top,  #eeeeee 0%, #f1f1f1 50%, #e1e1e1 100%, #f6f6f6 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(50%,#f1f1f1), color-stop(100%,#e1e1e1), color-stop(100%,#f6f6f6)); /* Chrome,Safari4+ */
@@ -449,7 +448,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefcea', end
 }
 
 .controlslot {
-	color:#666666;
+	color:$textColor;
 	background: #ffffff; /* Old browsers */
 	background: -moz-linear-gradient(top,  #ffffff 0%, #eef4ed 70%, #edebe6 100%, #f6f6f6 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(70%,#eef4ed), color-stop(100%,#edebe6), color-stop(100%,#f6f6f6)); /* Chrome,Safari4+ */
@@ -461,7 +460,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefcea', end
 }
 
 .controlslot:hover {
-	color:#666666;
+	color:$textColor;
 	background: #eeeeee; /* Old browsers */
 	background: -moz-linear-gradient(top,  #eeeeee 0%, #f1f1f1 50%, #e1e1e1 100%, #f6f6f6 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(50%,#f1f1f1), color-stop(100%,#e1e1e1), color-stop(100%,#f6f6f6)); /* Chrome,Safari4+ */
@@ -698,12 +697,15 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffd8ab', end
 	border: 1px solid #3badb3;
 }
 
-.nav-tabs.nav-stacked > li > a { color:#666; }
+.nav-tabs.nav-stacked > li > a {
+  color:$textColor;
+}
+
 .nav-tabs.nav-stacked > li > a:hover, .nav-tabs.nav-stacked > li > a h3:hover { color:#333; }
 
-.group a { color:#666;  }
+.group a { 	color:$textColor;  }
 
-.group a:hover { color:#666;
+.group a:hover { 	color:$textColor;
 	background: #def4f5 !important; /* Old browsers */
 }
 	
@@ -813,7 +815,7 @@ nav {
 	font-size: 28px;
 	font-weight: bold;
 	line-height: 28px;
-	color: #666;
+	color:$textColor;
 	line-height: 1;
 	text-align: left;
 }
@@ -1543,7 +1545,7 @@ label {
 			  box-sizing: border-box;
 	padding:6px 6px 6px 8px;
 	font-size:14px;
-	color:#666666;
+	color:$textColor;
 	background: #ffffff; /* Old browsers */
 	background: -moz-linear-gradient(top,  #ffffff 0%, #eef4ed 70%, #edebe6 100%, #f6f6f6 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(70%,#eef4ed), color-stop(100%,#edebe6), 	color-stop(100%,#f6f6f6)); /* Chrome,Safari4+ */
@@ -1957,7 +1959,8 @@ a.controllistRM {
 		  -ms-box-sizing: border-box;
 			  box-sizing: border-box;
 	padding: 5px 6px 5px 6px;
-	*/color:#666666;
+	*/
+	color:$textColor;
 	background: #ffffff; /* Old browsers */
 	vertical-align:central;
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0 ); /* IE6-9 */
@@ -1975,7 +1978,7 @@ a.controllistRM {
 		  -ms-box-sizing: 	-box;
 			  box-sizing: border-box;
 	padding:6px 8px 0px 6px;
-	color:#666666;
+	color:$textColor;
 	background: #ffffff; /* Old browsers */
 	vertical-align:central;
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0 ); /* IE6-9 */
@@ -2057,7 +2060,7 @@ a.controllistRM {
 .control-group {
 	font-size:9px;
 	line-height:9px;
-	color:#666;
+	color:$textColor;
 }
 
 .controls-type {
