@@ -2638,11 +2638,6 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
   @include border-radius(0px); 
 }
 
-.navbarplus {
-	position:relative;
-	top:-5px;	
-}
-
 .navbarplus { 
 	background-image: url("../images/navbarplus_off.png");
 	display: inline-block;
@@ -2654,17 +2649,9 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 	padding:0;
 	background-position: 0px 0px;
 	background-repeat: no-repeat;
-}
-
-.navbarplus:hover { 
-	background-image: url("../images/navbarplus_on.png");
-	display: inline-block;
-	width: 40px;
-	height: 57px;
-	margin:0;
-	padding:0;
-	background-position: 0px 0px;
-	background-repeat: no-repeat;
+	&:hover {
+  	background-image: url("../images/navbarplus_on.png");
+	}
 }
 
 .regulationslot {
