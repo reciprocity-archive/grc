@@ -46,28 +46,27 @@
 
 .field-failure {
   input, select, textarea {
-    background-color: #FFC8C8;
-    border-color: #B94A48;
+    background-color: $failureBgndColor;
+    border-color: $failureBorderColor;
   }
-
   label {
-    color: #B94A48;
+    color: $failureColor;
   }
 }
 
 .field-success {
   input, select, textarea {
-    background-color: #EAFFE6;
+    background-color: $successBgndColor;
   }
 }
 
 .member-failure {
-  background-color: #FFC8C8;
-  border-color: #B94A48;
+  background-color: $failureBgndColor;
+  border-color: $failureBorderColor;
 }
 
 .member-success {
-  background-color: #EAFFE6;
+  background-color: $successBgndColor;
 }
 
 .compact-rows {
