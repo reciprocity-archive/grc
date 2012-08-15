@@ -2619,17 +2619,18 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 	border: 1px solid #e1e1e1;
 	padding:4px;
 	overflow-y:auto;
-}
-.itemlist li a{
-	text-align:left;
-}
-.itemlist li a span{
-	text-align: right;
-	float:right;
-}
-
-.itemlist li select {
-	width: auto;
+	li {
+	  a {
+	    text-align:left;
+	    span {
+	      text-align: right;
+      	float:right;
+	    }
+	  }
+	  select {
+	    width: auto;	    
+	  }
+	}
 }
 
 .badge {
