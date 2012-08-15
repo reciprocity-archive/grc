@@ -9,6 +9,13 @@
 * Fade transitions -since they can't be reset only overwritten
  */
 
+body {
+ 	background:url("../images/bkgd.gif");
+ 	padding-top: 135px; /* 160px to make the container go all the way to the bottom of the topbar */
+ 	font-family: 'PT Sans', sans-serif;
+ 	height:100%;
+}
+
 a {
   color:$linkColor;
   &:hover {
@@ -52,7 +59,6 @@ td {
 
 .minimumwidth313px {
   min-width:313px;
-  
 }
 
 .minimumwidth666px {
@@ -71,14 +77,11 @@ td {
   opacity: 0.4;
   filter: alpha(opacity=40);
 }
+
 .modal.fade {
   top: -25%;
   /*bootstrap.css line 4194 overwriting, it would be better to completely remove them */
-   -webkit-transition: none;
-     -moz-transition: opacity 0s linear, top 0s ease-out;
-      -ms-transition: opacity 0s linear, top 0s ease-out;
-       -o-transition: opacity 0s linear, top 0s ease-out;
-          transition: opacity 0s linear, top 0s ease-out;
+  @include transition(opacity 0s linear, top 0s ease-out);
 }
 
 .gcms-footer { 
@@ -96,16 +99,6 @@ td {
 	height: 3em;
 	right:0px;
 }
-
-
-body {
-	background:url("../images/bkgd.gif");
-	padding-top: 135px; /* 160px to make the container go all the way to the bottom of the topbar */
-	font-family: 'PT Sans', sans-serif;
-	height:100%;
-}
-
-
 
 
 .WidgetBox {
@@ -2560,8 +2553,6 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 	text-align: right;
 }
 
-
-
 .hidefont {
 	font-size:0px !important;
 }
@@ -2571,31 +2562,29 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
   @include border-radius(0px);
 	line-height:30px;
 	background:#CED1D7;
-}
-
-.progress-large .bar {
-	height:30px;
-	line-height:30px;
+	.bar {
+  	height:30px;
+  	line-height:30px;  
+	}
 }
 
 #chevron {
-    font-size: 0;
-    height: 0;
-    line-height: 0;
-    border-style: solid;
-    border-color: transparent;
-    /* chevron color */
-    border-right-color: #fff;
-    /* for left pointers, right border is 0 */
-    border-width: 23px 23px 23px 0;
-    float: left;
-    margin: 10px;
-    position:relative;
-    transition:all 0.5s ease-out;
-}
-
-#chevron:hover{
-  transform:rotate(-90deg);
+  font-size: 0;
+  height: 0;
+  line-height: 0;
+  border-style: solid;
+  border-color: transparent;
+  /* chevron color */
+  border-right-color: #fff;
+  /* for left pointers, right border is 0 */
+  border-width: 23px 23px 23px 0;
+  float: left;
+  margin: 10px;
+  position:relative;
+  transition:all 0.5s ease-out;
+  &:hover {
+    transform:rotate(-90deg);      
+  }
 }
 
 .widgetsearch {
