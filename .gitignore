@@ -14,3 +14,5 @@ Gemfile.local
 public/stylesheets/themes/google/style.css
 app/controllers/dev_controller.rb
 doc/yard
+
+.DS_Store
