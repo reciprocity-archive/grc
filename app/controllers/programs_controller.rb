@@ -119,11 +119,13 @@ class ProgramsController < ApplicationController
 
   def section_controls
     @program = Program.find(params[:id])
-    @sections = @program.sections.includes(:controls => :implementing_controls)
-    if params[:s]
-      @sections = @sections.search(params[:s])
+    if @program.company?
+      @sections = @program.controls.includes(:implemented_controls => { :control_sections => :section }).map { |cc| cc.implemented_controls.map { |ic| ic.control_sections.map { |cs| cs.section } }.flatten }.flatten.uniq
+    else
+      @sections = @program.sections.includes(:controls => :implementing_controls).all
     end
-    @sections.all.sort_by(&:slug_split_for_sort)
+
+    @sections.sort_by(&:slug_split_for_sort)
     render :layout => nil, :locals => { :sections => @sections }
   end
 

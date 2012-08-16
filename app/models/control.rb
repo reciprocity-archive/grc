@@ -63,7 +63,7 @@ class Control < ActiveRecord::Base
   has_many :object_documents, :as => :documentable, :dependent => :destroy
   has_many :documents, :through => :object_documents
 
-  has_many :categorizations, :as => :categorizable
+  has_many :categorizations, :as => :categorizable, :dependent => :destroy
   has_many :categories, :through => :categorizations
 
   belongs_to :type, :class_name => 'Option', :conditions => { :role => 'control_type' }

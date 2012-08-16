@@ -1,0 +1,53 @@
+-content_for :modal_buttons do
+  %input.ui-corner-all.widgetsearch{ :type => 'text', :placeholder => 'Search' }
+
+-content_for :modal_title do
+  %h1 Add Category
+
+.row-fluid
+  .span6
+    %h3 Categories for this object
+
+    %script{ :type => 'text/html', :data => { :name => '' }}
+      %li.controlSlot{ :'data-id' => '<%= id %>' }
+        %input(type='hidden' name='items[<%= id %>][id]' value='<%= id %>')
+        %a{:href => "#", :'data-toggle' => 'list-remove'}
+          .removeCircleButton.fltrt
+            %i.gcmssmallicon-dash-white
+        .arrowcontrols-group{ :href => '#', :'data-id' => '<%= id %>', :'data-context' => "{ name: '<%= name %>' }"}
+          .controls-type <%= parent_name %>
+          .controls-subgroup <%= name || '&nbsp;' %>
+
+    %ul.itemlist#listObjectCategoryList
+      -object.categorizations.each do |categorization|
+        -category = categorization.category
+        %li.controlSlot{ :'data-id' => category.id, :class => member_error_class(categorization) }
+          =member_error_messages_inline(categorization)
+          %input(type='hidden' name="items[#{category.id}][id]" value="#{category.id}")
+          %a{:href => "#", :'data-toggle' => 'list-remove'}
+            .removeCircleButton.fltrt
+              %i.gcmssmallicon-dash-white
+          .arrowcontrols-group{ :href => '#', :'data-id' => category.id, :'data-context' => { :name => category.name, :parent_name => category.parent_name }.to_json}
+            .controls-type=category.parent_name
+            .controls-subgroup=category.name || '&nbsp;'.html_safe
+
+  .span6
+    %h3
+      Select a category to add
+      %a.btn.btn-blue.addbtn.fltrt{ :href => new_flow_category_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-list-target' => '#listCategoryList, #listObjectCategoryList' }
+        New Category
+
+    %script{ :type => 'text/html' }
+      %li.controlSlot{ :'data-id' => '<%= id %>' }
+        .itemarrow
+        .arrowcontrols-group{ :'data-toggle' => 'list-select', :href => '#',  :'data-id' => '<%= id %>', :'data-context' => "{ name: '<%= name %>' }"}
+          .controls-type <%= parent_name %>
+          .controls-subgroup <%= name || '&nbsp;' %>
+
+    %ul.itemlist#listCategoryList{ :'data-list-href' => list_flow_categories_path(:format => 'json'), :'data-list-target' => '#listObjectCategoryList'}
+      -options.each do |category|
+        %li.controlSlot{ :'data-id' => category.id }
+          .itemarrow
+          .arrowcontrols-group{ :'data-toggle' => 'list-select', :href => '#', :'data-id' => category.id, :'data-context' => { :name => category.name, :parent_name => category.parent_name }.to_json}
+            .controls-type=category.parent_name
+            .controls-subgroup=category.name || '&nbsp;'.html_safe

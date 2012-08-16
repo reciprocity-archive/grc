@@ -67,7 +67,7 @@ class PeopleController < ApplicationController
   end
 
   def new
-    @person = Person.new(params[:person])
+    @person = Person.new(person_params)
 
     render :layout => nil
   end
@@ -79,7 +79,7 @@ class PeopleController < ApplicationController
   end
 
   def create
-    @person = Person.new(params[:person])
+    @person = Person.new(person_params)
 
     respond_to do |format|
       if @person.save
@@ -97,7 +97,7 @@ class PeopleController < ApplicationController
     @person = Person.find(params[:id])
 
     respond_to do |format|
-      if @person.authored_update(current_user, params[:person])
+      if @person.authored_update(current_user, person_params)
         flash[:notice] = "Successfully updated the person."
         format.html { ajax_refresh }
       else
@@ -111,4 +111,18 @@ class PeopleController < ApplicationController
     @person = Person.find(params[:id])
     @person.destroy
   end
+
+  private
+
+    def person_params
+      person_params = params[:person] || {}
+      language_id = person_params.delete(:language_id)
+      if language_id
+        language = Option.where(:role => 'person_language', :id => language_id).first
+        if language
+          person_params[:language] = language
+        end
+      end
+      person_params
+    end
 end
