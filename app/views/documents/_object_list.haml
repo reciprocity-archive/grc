@@ -12,7 +12,7 @@
       .controls-type <%= document.descriptor %>
       .controls-subgroup <%= document.title || document.link_url || '&nbsp;' %>
 
-%ul.referenceList
+%ul#referenceList
   -object.object_documents.all.each do |object_item|
     -item = object_item.document
     %li.controlSlot{ :'data-id' => item.id }

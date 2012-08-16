@@ -8,43 +8,31 @@
   -content_for :modal_delete_path, flow_person_path(f.object)
 
 .row-fluid
-  .span6
-    .row-fluid
-      .span12{ :class => error_class(f, :name) }
-        =f.label :name
-        =f.text_field :name, :class => 'span12', :placeholder => 'John Doe'
-        %br
-    .row-fluid
-      .span12{ :class => error_class(f, :company) }
-        =f.label :company
-        =f.text_field :username, :class => 'span12', :placeholder => 'Acme, Inc.'
-        %br
-    .row-fluid
-      .span12{ :class => error_class(f, :email) }
-        =f.label :email
-        =f.text_field :username, :class => 'span12', :placeholder => 'john@acme'
-        %br
-    .row-fluid
-      .span4
-        /%label Short Code
-        /%input.inputtext-small{:placeholder => "JHoov", :type => "text"}
-      .span4.disabled
-        =f.label :language
-        =f.text_field :username, :class => 'inputtext-small', :placeholder => 'English'
-      .span4
-        /%label Status
-        /%input#control-version.inputtext-small.forminputsuccess{:placeholder => "Deprecated", :type => "text"}
+  .span3{ :class => error_class(f, :name) }
+    =f.label :name
+    =f.text_field :name, :class => 'span12', :placeholder => 'John Doe'
+    %br
+  .span3{ :class => error_class(f, :email) }
+    =f.label :email
+    =f.text_field :username, :class => 'span12', :placeholder => 'john@acme'
+    %br
+  .span3{ :class => error_class(f, :language) }
+    %label{:for => 'person-language'} Language
+    %select#person-language.input-small{:name => 'person[language_id]', :value => nil}
+      -Option.options_for(:person_language).each do |o|
+        %option{ :value => o.id, :selected => (o.id == f.object.language_id) }=o.title
+    =error_messages_inline(f, :language)
 
-  .span6
-    .row-fluid
-      .span12
-        %label Roles
-        %br
-        -[[:owner, 'Owner'], [:compliance_analyst, 'Compliance Analyst'], [:business_analyst, 'Business Product Analyst']].each do |role, title|
-          %input(name='person[roles][]' id="person_roles_#{role}" value="#{role}" type='checkbox')
-          %label(for="person_roles_#{role}")
-            =title
-          %br
+  .span2.disabled.fltrt{ :class => error_class(f, :status) }
+    %label Status
+    %input.span12{:placeholder => "Deprecated", :type => "text"}
+
+.row-fluid
+  .span12{ :class => error_class(f, :company) }
+    =f.label :company
+    =f.text_field :username, :class => 'span12', :placeholder => 'Acme, Inc.'
+    %br
+
 %br
 
 -if !f.object.new_record?

@@ -1,0 +1,26 @@
+-content_for :modal_title do
+  -if f.object.new_record?
+    Create a new category
+  -else
+    Edit category
+
+-if !f.object.new_record?
+  -content_for :modal_delete_path, flow_category_path(f.object)
+
+.row-fluid
+  .span4
+    %label Type
+    .controls
+      %select(name='category[parent_id]')
+        -Category.where(:parent_id => nil).each do |category|
+          %option{ :value => category.id }=category.name
+  .span1
+  .span7
+    .span12{ :class => error_class(f, :name) }
+      =f.label :name, 'Category Name'
+      =f.text_field :name, :class => 'span12', :placeholder => 'Category Name'
+
+%br
+
+-if !f.object.new_record?
+  =render :partial => 'shared/object_info', :locals => { :object => f.object, :approved => false }
