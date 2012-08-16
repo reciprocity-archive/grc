@@ -35,16 +35,6 @@ td {
 	vertical-align:top;
 }
 
-.header:before,
-.header:after {
-  display: table;
-  content: "";
-}
-
-.header:after {
-  clear: both;
-}
-
 // Static columns for pages that should not have responsive design - ex. Reg Mapper
 
 .row-static {
@@ -563,22 +553,6 @@ td {
 	padding: 10px 15px 0 15px;
 	overflow-y: auto;
 }
-
-
-/*
-unused.modal-pager {
-	padding: 6px 15px 6px 15px;
-	margin-bottom: 0;
-	text-align: right;
-	background-color: 
-	whiteSmoke;
-	border-top: 1px solid 
-	#DDD;
-	@include border-radius(0 0 6px 6px);
-	@include box-shadow(inset 0 1px 0 $white);
-}
-*/
-
 
 /* BUTTONS */
 
@@ -1736,9 +1710,6 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 	margin:3px;
 }
 
-/* GCMS open-source icons */
-@import "icons";
-
 .pagination {
 	height: 36px;
 	margin: 8px 0px 0px 0px;
@@ -1925,3 +1896,6 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 .controllist {
 	width:24%;
 }
+
+/* GCMS open-source icons */
+@import "icons";
