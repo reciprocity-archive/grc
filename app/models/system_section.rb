@@ -4,6 +4,8 @@ class SystemSection < ActiveRecord::Base
   include AuthoredModel
   include StateModel
 
+  attr_accessible :section, :system
+
   belongs_to :section
   belongs_to :system
 

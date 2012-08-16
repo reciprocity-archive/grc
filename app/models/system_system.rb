@@ -1,5 +1,9 @@
 # A link between systems
 class SystemSystem < ActiveRecord::Base
+  include AuthoredModel
+
+  attr_accessible :parent, :child, :type, :order
+
   belongs_to :parent,
     :foreign_key => 'parent_id', :class_name => 'System'
 
@@ -8,6 +12,8 @@ class SystemSystem < ActiveRecord::Base
 
   validate :does_not_link_to_self
   validate :does_not_create_cycles
+
+  is_versioned_ext
 
   def does_not_link_to_self
     if parent_id == child_id
