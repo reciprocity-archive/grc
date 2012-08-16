@@ -1,9 +1,14 @@
 /*
- *= require jquery-ui
- *= require bootstrap
+ * Don't use Sprockets `require` statements inside SASS files
  */
 
 // old code that needs to be validated and fixed
+
+// Required external stylesheets
+@import "jquery-ui";
+@import "bootstrap";
+
+@import "compass/css3";
 
 @import "setup";
 @import "gcms";

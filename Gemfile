@@ -48,8 +48,10 @@ gem 'acl9'
 gem 'rails', RAILS_VERSION
 
 gem 'haml', '~> 3.2.0.beta.2'
-gem 'sass', '~> 3.2.0'
 gem 'haml-rails'
+gem 'sass', '~> 3.2.0'
+gem 'sass-rails'
+gem 'compass-rails'
 
 # Used to be pulled in by dm-types
 gem 'bcrypt-ruby'
