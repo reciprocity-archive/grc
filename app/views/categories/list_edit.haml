@@ -1,0 +1,4 @@
+=form_for :categories, :url => list_update_flow_categories_path(:object_type => @object.class.name, :object_id => @object.id), :method => :post, :remote => true do |f|
+  =render :partial => 'list_form',
+          :layout  => 'layouts/list_modal',
+          :locals  => { :object => @object, :current => @object.categorizations, :options => Category.where(Category.arel_table[:parent_id].not_eq(nil)) }

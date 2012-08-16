@@ -147,6 +147,14 @@ CmsRails::Application.routes.draw do
     end
   end
 
+  resources :categories, :as => 'flow_categories' do
+    collection do
+      get 'list'
+      get 'list_edit'
+      post 'list_update'
+    end
+  end
+
   match 'programs_dash' => 'programs_dash#index'
   match 'quick/programs' => 'quick#programs'
   match 'quick/sections' => 'quick#sections'

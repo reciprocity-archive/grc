@@ -2,18 +2,18 @@
 
 %h3
   Categories
-  /%a.btn.btn-blue.addbtn.fltrt{:href => list_edit_flow_categories_path(:object_type => object.class.name, :object_id => object.id), :'data-toggle' => 'modal-ajax-listform', :'data-modal-reset' => 'reset', :'data-list-target' => '#referenceList' } Edit List
+  %a.btn.btn-blue.addbtn.fltrt{:href => list_edit_flow_categories_path(:object_type => object.class.name, :object_id => object.id), :'data-toggle' => 'modal-ajax-listform', :'data-modal-reset' => 'reset', :'data-list-target' => '#categoryList' } Edit List
 
 %script{ :type => 'text/html', :data => { :category => '' }}
   %li.controlSlot{ :'data-id' => '<%= category.id %>' }
     .controls-group
-      .controls-subtype <%= category.parent_name %>
+      .controls-type <%= category.parent_name %>
       .controls-subgroup <%= category.name || '&nbsp;' %>
 
-%ul.referenceList
+%ul#categoryList
   -object.categorizations.all.each do |object_item|
     -item = object_item.category
     %li.controlSlot{ :'data-id' => item.id }
       .controls-group
-        .controls-subtype=item.parent.name
+        .controls-type=item.parent_name
         .controls-subgroup=item.name || '&nbsp;'.html_safe

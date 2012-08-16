@@ -11,10 +11,10 @@ Warbler::Config.new do |config|
   # config.features = %w(gemjar)
 
   # Application directories to be included in the webapp.
-  config.dirs = %w(app config lib log vendor tmp)
+  config.dirs = %w(app config lib log vendor extras)
 
   # Additional files/directories to include, above those in config.dirs
-  config.includes = FileList["extras"]
+  config.includes = %w(Gemfile.local)
 
   # Additional files/directories to exclude
   # config.excludes = FileList["lib/tasks/*"]
@@ -42,7 +42,7 @@ Warbler::Config.new do |config|
 
   # An array of Bundler groups to avoid including in the war file.
   # Defaults to ["development", "test"].
-  # config.bundle_without = []
+  config.bundle_without = ['development', 'test', 'assets', 'staging']
 
   # Other gems to be included. If you don't use Bundler or a gemspec
   # file, you need to tell Warbler which gems your application needs
@@ -82,7 +82,7 @@ Warbler::Config.new do |config|
 
   # Name of the MANIFEST.MF template for the war file. Defaults to a simple
   # MANIFEST.MF that contains the version of Warbler used to create the war file.
-  # config.manifest_file = "config/MANIFEST.MF"
+  config.manifest_file = ENV['MANIFEST_FILE']
 
   # When using the 'compiled' feature and specified, only these Ruby
   # files will be compiled. Default is to compile all \.rb files in
@@ -116,7 +116,7 @@ Warbler::Config.new do |config|
   # config.webxml.booter = :rails
 
   # Set JRuby to run in 1.9 mode.
-  # config.webxml.jruby.compat.version = "1.9"
+  config.webxml.jruby.compat.version = "1.9"
 
   # When using the :rack booter, "Rackup" script to use.
   # - For 'rackup.path', the value points to the location of the rackup
@@ -139,4 +139,7 @@ Warbler::Config.new do |config|
 
   # JNDI data source name
   # config.webxml.jndi = 'jdbc/rails'
+  config.java_libs.reject!{|lib| lib =~ /\/(jruby-core|jruby-stdlib|jruby-complete|sql_deploy)[^\/]*\.jar$/}
+  config.webxml.jruby.min.runtimes = 1
+  config.webxml.jruby.max.runtimes = 1
 end

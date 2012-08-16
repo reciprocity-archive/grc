@@ -2,7 +2,7 @@
 
 %h3
   People
-  %a.btn.btn-blue.addbtn.fltrt{:href => list_edit_flow_people_path(:object_type => object.class.name, :object_id => object.id), :'data-toggle' => 'modal-ajax-listform', :'data-modal-reset' => 'reset', :'data-list-target' => '#peopleList' } Edit List
+  %a.btn.btn-blue.addbtn.fltrt{:href => list_edit_flow_people_path(:object_type => object.class.name, :object_id => object.id), :'data-toggle' => 'modal-ajax-listform', :'data-modal-reset' => 'reset', :'data-list-target' => '#personList' } Edit List
 
 %script{ :type => 'text/html', :data => { :person => '', :role => '' }}
   %li.controlSlot{ :'data-id' => '<%= person.id %>' }
@@ -12,7 +12,7 @@
       .controls-type <%= role %>
       .controls-subgroup <%= person.name || '&nbsp' %>
 
-%ul
+%ul#personList
   -object.object_people.all.each do |object_item|
     -item = object_item.person
     %li.controlSlot{ :'data-id' => item.id }
