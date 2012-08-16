@@ -4,7 +4,7 @@
 class Person < ActiveRecord::Base
   include AuthoredModel
 
-  attr_accessible :username, :name, :language
+  attr_accessible :username, :name, :company, :language
 
   validates :username, :presence => true
 
