@@ -16,95 +16,620 @@ $white: #ffffff;
 
 // SASS mixins
 
-  // compass default variables values
-  $experimental-support-for-webkit: true ;
-  $experimental-support-for-mozilla: true ;
-  $experimental-support-for-opera: true ;
-  $experimental-support-for-microsoft: true ;
-  $experimental-support-for-khtml: true ;
+// compass/support
 
-  // background
-  @mixin background($background-1, $background-2: false, $background-3: false, $background-4: false, $background-5: false, $background-6: false, $background-7: false, $background-8: false, $background-9: false, $background-10: false) {
-    $backgrounds: compact($background-1, $background-2, $background-3, $background-4, $background-5, $background-6, $background-7, $background-8, $background-9, $background-10);
+// Usually compass hacks apply to both ie6 & 7 -- set this to false to disable support for both.
+$legacy-support-for-ie: true !default;
+
+// Setting this to false will result in smaller output, but no support for ie6 hacks
+$legacy-support-for-ie6: $legacy-support-for-ie !default;
+
+// Setting this to false will result in smaller output, but no support for ie7 hacks
+$legacy-support-for-ie7: $legacy-support-for-ie !default;
+
+// Setting this to false will result in smaller output, but no support for legacy ie8 hacks
+$legacy-support-for-ie8: $legacy-support-for-ie !default;
+
+// @private
+// The user can simply set $legacy-support-for-ie and 6, 7, and 8 will be set accordingly,
+// But in case the user set each of those explicitly, we need to sync the value of
+// this combined variable.
+$legacy-support-for-ie: $legacy-support-for-ie6 or $legacy-support-for-ie7 or $legacy-support-for-ie8;
+
+// Whether to output legacy support for mozilla.
+// Usually this means hacks to support Firefox 3.6 or earlier.
+$legacy-support-for-mozilla: true;
+
+// Support for mozilla in experimental css3 properties (-moz).
+$experimental-support-for-mozilla : true !default;
+// Support for webkit in experimental css3 properties (-webkit).
+$experimental-support-for-webkit : true !default;
+// Support for webkit's original (non-standard) gradient syntax.
+$support-for-original-webkit-gradients : true !default;
+// Support for opera in experimental css3 properties (-o).
+$experimental-support-for-opera : true !default;
+// Support for microsoft in experimental css3 properties (-ms).
+$experimental-support-for-microsoft : true !default;
+// Support for khtml in experimental css3 properties (-khtml).
+$experimental-support-for-khtml : false !default;
+// Support for svg in experimental css3 properties.
+// Setting this to true might add significant size to your
+// generated stylesheets.
+$experimental-support-for-svg : false !default;
+// Support for CSS PIE in experimental css3 properties (-pie).
+$experimental-support-for-pie : false !default;
+
+// compass/css3/shared
+
+// This mixin provides basic support for CSS3 properties and
+// their corresponding experimental CSS2 properties when
+// the implementations are identical except for the property
+// prefix.
+@mixin experimental($property, $value,
+  $moz : $experimental-support-for-mozilla,
+  $webkit : $experimental-support-for-webkit,
+  $o : $experimental-support-for-opera,
+  $ms : $experimental-support-for-microsoft,
+  $khtml : $experimental-support-for-khtml,
+  $official : true
+) {
+  @if $webkit and $experimental-support-for-webkit { -webkit-#{$property} : $value; }
+  @if $khtml and $experimental-support-for-khtml { -khtml-#{$property} : $value; }
+  @if $moz and $experimental-support-for-mozilla { -moz-#{$property} : $value; }
+  @if $ms and $experimental-support-for-microsoft { -ms-#{$property} : $value; }
+  @if $o and $experimental-support-for-opera { -o-#{$property} : $value; }
+  @if $official { #{$property} : $value; }
+}
+
+// Same as experimental(), but for cases when the property is the same and the value is vendorized
+@mixin experimental-value($property, $value,
+  $moz : $experimental-support-for-mozilla,
+  $webkit : $experimental-support-for-webkit,
+  $o : $experimental-support-for-opera,
+  $ms : $experimental-support-for-microsoft,
+  $khtml : $experimental-support-for-khtml,
+  $official : true
+) {
+  @if $webkit and $experimental-support-for-webkit { #{$property} : -webkit-#{$value}; }
+  @if $khtml and $experimental-support-for-khtml { #{$property} : -khtml-#{$value}; }
+  @if $moz and $experimental-support-for-mozilla { #{$property} : -moz-#{$value}; }
+  @if $ms and $experimental-support-for-microsoft { #{$property} : -ms-#{$value}; }
+  @if $o and $experimental-support-for-opera { #{$property} : -o-#{$value}; }
+  @if $official { #{$property} : #{$value}; }
+}
+
+$default-border-radius: 5px !default;
+
+// Round all corners by a specific amount, defaults to value of `$default-border-radius`.
+//
+// When two values are passed, the first is the horizontal radius
+// and the second is the vertical radius.
+//
+// Note: webkit does not support shorthand syntax for several corners at once.
+// So in the case where you pass several values only the first will be passed to webkit.
+//
+// Examples:
+//
+// .simple { @include border-radius(4px, 4px); }
+// .compound { @include border-radius(2px 5px, 3px 6px); }
+// .crazy { @include border-radius(1px 3px 5px 7px, 2px 4px 6px 8px)}
+//
+// Which generates:
+//
+// .simple {
+// -webkit-border-radius: 4px 4px;
+// -moz-border-radius: 4px / 4px;
+// -khtml-border-radius: 4px / 4px;
+// border-radius: 4px / 4px; }
+//
+// .compound {
+// -webkit-border-radius: 2px 3px;
+// -moz-border-radius: 2px 5px / 3px 6px;
+// -khtml-border-radius: 2px 5px / 3px 6px;
+// border-radius: 2px 5px / 3px 6px; }
+//
+// .crazy {
+// -webkit-border-radius: 1px 2px;
+// -moz-border-radius: 1px 3px 5px 7px / 2px 4px 6px 8px;
+// -khtml-border-radius: 1px 3px 5px 7px / 2px 4px 6px 8px;
+// border-radius: 1px 3px 5px 7px / 2px 4px 6px 8px; }
+
+@mixin border-radius($radius: $default-border-radius, $vertical-radius: false) {
+
+  @if $vertical-radius {
+    // Webkit doesn't understand the official shorthand syntax for specifying
+    // a vertical radius unless so in case there's several we only take the first.
+    @include experimental(border-radius, first-value-of($radius) first-value-of($vertical-radius),
+      not -moz,
+      -webkit,
+      not -o,
+      not -ms,
+      not -khtml,
+      not official
+    );
+    @include experimental("border-radius", $radius unquote("/") $vertical-radius,
+      -moz,
+      not -webkit,
+      not -o,
+      not -ms,
+      -khtml,
+      official
+    );
+  }
+  @else {
+    @include experimental(border-radius, $radius);
+  }
+}
+
+// Round radius at position by amount.
+//
+// * legal values for `$vert`: `top`, `bottom`
+// * legal values for `$horz`: `left`, `right`
+
+@mixin border-corner-radius($vert, $horz, $radius: $default-border-radius) {
+  // Support for mozilla's syntax for specifying a corner
+  @include experimental("border-radius-#{$vert}#{$horz}", $radius,
+    -moz,
+    not -webkit,
+    not -o,
+    not -ms,
+    not -khtml,
+    not official
+  );
+  @include experimental("border-#{$vert}-#{$horz}-radius", $radius,
+    not -moz,
+    -webkit,
+    not -o,
+    not -ms,
+    -khtml,
+    official
+  );
+  
+}
+
+// Round top-left corner only
+
+@mixin border-top-left-radius($radius: $default-border-radius) {
+  @include border-corner-radius(top, left, $radius); }
+
+// Round top-right corner only
+
+@mixin border-top-right-radius($radius: $default-border-radius) {
+  @include border-corner-radius(top, right, $radius); }
+
+// Round bottom-left corner only
+
+@mixin border-bottom-left-radius($radius: $default-border-radius) {
+  @include border-corner-radius(bottom, left, $radius); }
+
+// Round bottom-right corner only
+
+@mixin border-bottom-right-radius($radius: $default-border-radius) {
+  @include border-corner-radius(bottom, right, $radius); }
+
+// Round both top corners by amount
+@mixin border-top-radius($radius: $default-border-radius) {
+  @include border-top-left-radius($radius);
+  @include border-top-right-radius($radius); }
+
+// Round both right corners by amount
+@mixin border-right-radius($radius: $default-border-radius) {
+  @include border-top-right-radius($radius);
+  @include border-bottom-right-radius($radius); }
+
+// Round both bottom corners by amount
+@mixin border-bottom-radius($radius: $default-border-radius) {
+  @include border-bottom-left-radius($radius);
+  @include border-bottom-right-radius($radius); }
+
+// Round both left corners by amount
+@mixin border-left-radius($radius: $default-border-radius) {
+  @include border-top-left-radius($radius);
+  @include border-bottom-left-radius($radius); }
+
+
+  // The `zoom` approach generates less CSS but does not validate.
+  // Set this to `block` to use the display-property to hack the
+  // element to gain layout.
+  $default-has-layout-approach: zoom !default;
+
+  // This mixin causes an element matching the selector
+  // to gain the "hasLayout" property in internet explorer.
+  // More information on [hasLayout](http://reference.sitepoint.com/css/haslayout).
+  @mixin has-layout($approach: $default-has-layout-approach) {
+    @if $legacy-support-for-ie {
+      @if $approach == zoom {
+        @include has-layout-zoom;
+      } @else if $approach == block {
+        @include has-layout-block;
+      } @else {
+        @warn "Unknown has-layout approach: #{$approach}";
+        @include has-layout-zoom;
+      }
+    }
+  }
+
+  @mixin has-layout-zoom {
+    @if $legacy-support-for-ie6 or $legacy-support-for-ie7 {
+      *zoom: 1;
+    }
+  }
+
+  @mixin has-layout-block {
+    @if $legacy-support-for-ie {
+      // This makes ie6 get layout
+      display: inline-block;
+      // and this puts it back to block
+      & { display: block; }
+    }
+  }
+
+  // A hack to supply IE6 (and below) with a different property value.
+  // [Read more](http://www.cssportal.com/css-hacks/#in_css-important).
+  @mixin bang-hack($property, $value, $ie6-value) {
+    @if $legacy-support-for-ie6 {
+      #{$property}: #{$value} !important;
+      #{$property}: #{$ie6-value};
+    }
+  }
+
+
+  // Background property support for vendor prefixing within values.
+  @mixin background(
+    $background-1,
+    $background-2: false,
+    $background-3: false,
+    $background-4: false,
+    $background-5: false,
+    $background-6: false,
+    $background-7: false,
+    $background-8: false,
+    $background-9: false,
+    $background-10: false
+  ) {
+    $backgrounds: compact($background-1, $background-2, $background-3, $background-4, $background-5,
+                          $background-6, $background-7, $background-8, $background-9, $background-10);
     $mult-bgs: -compass-list-size($backgrounds) > 1;
     $add-pie-bg: prefixed(-pie, $backgrounds) or $mult-bgs;
-    @if $experimental-support-for-svg and prefixed(-svg, $backgrounds) {
-      background: -svg($backgrounds); }
-    @if $support-for-original-webkit-gradients and prefixed(-owg, $backgrounds) {
-      background: -owg($backgrounds); }
-    @if $experimental-support-for-webkit and prefixed(-webkit, $backgrounds) {
-      background: -webkit($backgrounds); }
-    @if $experimental-support-for-mozilla and prefixed(-moz, $backgrounds) {
-      background: -moz($backgrounds); }
-    @if $experimental-support-for-opera and prefixed(-o, $backgrounds) {
-      background: -o($backgrounds); }
-    @if $experimental-support-for-pie and $add-pie-bg {
-      -pie-background: -pie($backgrounds); }
-    background: $backgrounds; }
+    @if $experimental-support-for-svg and prefixed(-svg, $backgrounds) { background: -svg($backgrounds); }
+    @if $support-for-original-webkit-gradients and prefixed(-owg, $backgrounds) { background: -owg($backgrounds); }
+    @if $experimental-support-for-webkit and prefixed(-webkit, $backgrounds) { background: -webkit($backgrounds); }
+    @if $experimental-support-for-mozilla and prefixed(-moz, $backgrounds) { background: -moz($backgrounds); }
+    @if $experimental-support-for-opera and prefixed(-o, $backgrounds) { background: -o($backgrounds); }
+    @if $experimental-support-for-pie and $add-pie-bg { -pie-background: -pie($backgrounds); }
+                                                                                          background: $backgrounds ;
+  }
+
+  @mixin background-with-css2-fallback(
+    $background-1,
+    $background-2: false,
+    $background-3: false,
+    $background-4: false,
+    $background-5: false,
+    $background-6: false,
+    $background-7: false,
+    $background-8: false,
+    $background-9: false,
+    $background-10: false
+  ) {
+    $backgrounds: compact($background-1, $background-2, $background-3, $background-4, $background-5,
+                          $background-6, $background-7, $background-8, $background-9, $background-10);
+    $mult-bgs: -compass-list-size($backgrounds) > 1;
+    $simple-background: if($mult-bgs or prefixed(-css2, $backgrounds), -css2(-compass-nth($backgrounds, last)), false);
+    @if not blank($simple-background) { background: $simple-background; }
+    @include background($background-1, $background-2, $background-3, $background-4, $background-5,
+                        $background-6, $background-7, $background-8, $background-9, $background-10);
+  }
 
 
-  // experimental
-  @mixin experimental($property, $value, $moz: $experimental-support-for-mozilla, $webkit: $experimental-support-for-webkit, $o: $experimental-support-for-opera, $ms: $experimental-support-for-microsoft, $khtml: $experimental-support-for-khtml, $official: true) {
-    @if $webkit and $experimental-support-for-webkit {
-      -webkit-#{$property}: $value; }
-    @if $khtml and $experimental-support-for-khtml {
-      -khtml-#{$property}: $value; }
-    @if $moz and $experimental-support-for-mozilla {
-      -moz-#{$property}: $value; }
-    @if $ms and $experimental-support-for-microsoft {
-      -ms-#{$property}: $value; }
-    @if $o and $experimental-support-for-opera {
-      -o-#{$property}: $value; }
-    @if $official {
-      #{$property}: $value; } }
+  // Background image property support for vendor prefixing within values.
+  @mixin background-image(
+    $image-1,
+    $image-2: false,
+    $image-3: false,
+    $image-4: false,
+    $image-5: false,
+    $image-6: false,
+    $image-7: false,
+    $image-8: false,
+    $image-9: false,
+    $image-10: false
+  ) {
+    $images: compact($image-1, $image-2, $image-3, $image-4, $image-5, $image-6, $image-7, $image-8, $image-9, $image-10);
+    $add-pie-bg: prefixed(-pie, $images) or -compass-list-size($images) > 1;
+
+    @if $experimental-support-for-svg and prefixed(-svg, $images) { background-image: -svg($images); background-size: 100%; }
+    @if $support-for-original-webkit-gradients and prefixed(-owg, $images) { background-image: -owg($images); }
+    @if $experimental-support-for-webkit and prefixed(-webkit, $images) { background-image: -webkit($images); }
+    @if $experimental-support-for-mozilla and prefixed(-moz, $images) { background-image: -moz($images); }
+    @if $experimental-support-for-opera and prefixed(-o, $images) { background-image: -o($images); }
+    @if $experimental-support-for-pie and $add-pie-bg { @warn "PIE does not support background-image. Use @include background(#{$images}) instead." }
+                                                                                background-image: $images ;
+  }
+
+  // Emit a IE-Specific filters that renders a simple linear gradient.
+  // For use in IE 6 - 8. Best practice would have you apply this via a
+  // conditional IE stylesheet, but if you must, you should place this before
+  // any background-image properties that you have specified.
+  //
+  // For the `$orientation` parameter, you can pass `vertical` or `horizontal`.
+  @mixin filter-gradient($start-color, $end-color, $orientation: vertical) {
+    @include has-layout;
+    $gradient-type: if($orientation == vertical, 0, 1);
+    @if $legacy-support-for-ie6 or $legacy-support-for-ie7 or $legacy-support-for-ie8 {
+      filter: progid:DXImageTransform.Microsoft.gradient(gradientType=#{$gradient-type}, startColorstr='#{ie-hex-str($start-color)}', endColorstr='#{ie-hex-str($end-color)}');
+    }
+  }
 
 
-  // experimental value
-  @mixin experimental-value($property, $value, $moz: $experimental-support-for-mozilla, $webkit: $experimental-support-for-webkit, $o: $experimental-support-for-opera, $ms: $experimental-support-for-microsoft, $khtml: $experimental-support-for-khtml, $official: true) {
-    @if $webkit and $experimental-support-for-webkit {
-      #{$property}: -webkit-#{$value}; }
-    @if $khtml and $experimental-support-for-khtml {
-      #{$property}: -khtml-#{$value}; }
-    @if $moz and $experimental-support-for-mozilla {
-      #{$property}: -moz-#{$value}; }
-    @if $ms and $experimental-support-for-microsoft {
-      #{$property}: -ms-#{$value}; }
-    @if $o and $experimental-support-for-opera {
-      #{$property}: -o-#{$value}; }
-    @if $official {
-      #{$property}: #{$value}; } }
+  // Border image property support for vendor prefixing properties and values.
+  @mixin border-image($value) {
+    @if $experimental-support-for-mozilla { -moz-border-image: -moz(reject(-compass-list($value), fill)); }
+    @if $support-for-original-webkit-gradients { -webkit-border-image: -owg(reject(-compass-list($value), fill)); }
+    @if $experimental-support-for-webkit { -webkit-border-image: -webkit(reject(-compass-list($value), fill)); }
+    @if $experimental-support-for-opera { -o-border-image: -o(reject(-compass-list($value), fill)); }
+    @if $experimental-support-for-svg { border-image: -svg(reject(-compass-list($value), fill)); }
+                                                         border-image: $value;
+  }
 
-  // boxshadow
-  @mixin box-shadow($shadow-1: default, $shadow-2: false, $shadow-3: false, $shadow-4: false, $shadow-5: false, $shadow-6: false, $shadow-7: false, $shadow-8: false, $shadow-9: false, $shadow-10: false) {
+  // List style image property support for vendor prefixing within values.
+  @mixin list-style-image($image) {
+    @if $experimental-support-for-mozilla and prefixed(-moz, $image) { list-style-image: -moz($image); }
+    @if $support-for-original-webkit-gradients and prefixed(-owg, $image) { list-style-image: -owg($image); }
+    @if $experimental-support-for-webkit and prefixed(-webkit, $image) { list-style-image: -webkit($image); }
+    @if $experimental-support-for-opera and prefixed(-o, $image) { list-style-image: -o($image); }
+    @if $experimental-support-for-svg and prefixed(-svg, $image) { list-style-image: -svg($image); }
+                                                                               list-style-image: $image ;
+  }
+
+  // List style property support for vendor prefixing within values.
+  @mixin list-style($value) {
+    $value: -compass-list($value);
+    @if $experimental-support-for-mozilla and prefixed(-moz, $value) { list-style-image: -moz($value); }
+    @if $support-for-original-webkit-gradients and prefixed(-owg, $value) { list-style-image: -owg($value); }
+    @if $experimental-support-for-webkit and prefixed(-webkit, $value) { list-style-image: -webkit($value); }
+    @if $experimental-support-for-opera and prefixed(-o, $value) { list-style-image: -o($value); }
+    @if $experimental-support-for-svg and prefixed(-svg, $value) { list-style-image: -svg($value); }
+                                                                               list-style-image: $value ;
+  }
+
+  // content property support for vendor prefixing within values.
+  @mixin content($value) {
+    $value: -compass-list($value);
+    @if $experimental-support-for-mozilla and prefixed(-moz, $value) { content: -moz($value); }
+    @if $support-for-original-webkit-gradients and prefixed(-owg, $value) { content: -owg($value); }
+    @if $experimental-support-for-webkit and prefixed(-webkit, $value) { content: -webkit($value); }
+    @if $experimental-support-for-opera and prefixed(-o, $value) { content: -o($value); }
+    @if $experimental-support-for-svg and prefixed(-svg, $value) { content: -svg($value); }
+                                                                               content: $value ;
+  }
+  
+
+  // The default color for box shadows
+  $default-box-shadow-color: #333333 !default;
+
+  // The default horizontal offset. Positive is to the right.
+  $default-box-shadow-h-offset: 0px !default;
+
+  // The default vertical offset. Positive is down.
+  $default-box-shadow-v-offset: 0px !default;
+
+  // The default blur length.
+  $default-box-shadow-blur: 5px !default;
+
+  // The default spread length.
+  $default-box-shadow-spread : false !default;
+
+  // The default shadow inset: inset or false (for standard shadow).
+  $default-box-shadow-inset : false !default;
+
+  // Provides cross-browser for Webkit, Gecko, and CSS3 box shadows when one or more box
+  // shadows are needed.
+  // Each shadow argument should adhere to the standard css3 syntax for the
+  // box-shadow property.
+  @mixin box-shadow(
+    $shadow-1 : default,
+    $shadow-2 : false,
+    $shadow-3 : false,
+    $shadow-4 : false,
+    $shadow-5 : false,
+    $shadow-6 : false,
+    $shadow-7 : false,
+    $shadow-8 : false,
+    $shadow-9 : false,
+    $shadow-10: false
+  ) {
     @if $shadow-1 == default {
-      $shadow-1: -compass-space-list(compact(if($default-box-shadow-inset, inset, false), $default-box-shadow-h-offset, $default-box-shadow-v-offset, $default-box-shadow-blur, $default-box-shadow-spread, $default-box-shadow-color)); }
-    $shadow: compact($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10);
-    @include experimental(box-shadow, $shadow, -moz, -webkit, not -o, not -ms, not -khtml, official); }
+      $shadow-1 : -compass-space-list(compact(if($default-box-shadow-inset, inset, false), $default-box-shadow-h-offset, $default-box-shadow-v-offset, $default-box-shadow-blur, $default-box-shadow-spread, $default-box-shadow-color));
+    }
+    $shadow : compact($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10);
+    @include experimental(box-shadow, $shadow,
+      -moz, -webkit, not -o, not -ms, not -khtml, official
+    );
+  }
 
-  // border radius  
-  @mixin border-radius($radius: $default-border-radius, $vertical-radius: false) {
-    @if $vertical-radius {
-      // Webkit doesn't understand the official shorthand syntax for specifying
-      // a vertical radius unless so in case there's several we only take the first.
-      @include experimental(border-radius, first-value-of($radius) first-value-of($vertical-radius), not -moz, -webkit, not -o, not -ms, not -khtml, not official);
-      @include experimental("border-radius", $radius unquote("/") $vertical-radius, -moz, not -webkit, not -o, not -ms, -khtml, official); }
-    @else {
-      @include experimental(border-radius, $radius); } }
+  // Provides a single cross-browser CSS box shadow for Webkit, Gecko, and CSS3.
+  // Includes default arguments for color, horizontal offset, vertical offset, blur length, spread length, and inset.
+  @mixin single-box-shadow(
+    $color : $default-box-shadow-color,
+    $hoff : $default-box-shadow-h-offset,
+    $voff : $default-box-shadow-v-offset,
+    $blur : $default-box-shadow-blur,
+    $spread : $default-box-shadow-spread,
+    $inset : $default-box-shadow-inset
+  ) {
+    @if not ($inset == true or $inset == false or $inset == inset) {
+      @warn "$inset expected to be true or the inset keyword. Got #{$inset} instead. Using: inset";
+    }
 
-  // transition
-  @mixin transition($transition-1: default, $transition-2: false, $transition-3: false, $transition-4: false, $transition-5: false, $transition-6: false, $transition-7: false, $transition-8: false, $transition-9: false, $transition-10: false) {
+    @if $color == none {
+      @include box-shadow(none);
+    } @else {
+      $full : $hoff $voff;
+      @if $blur { $full: $full $blur; }
+      @if $spread { $full: $full $spread; }
+      @if $color { $full: $full $color; }
+      @if $inset { $full: inset $full; }
+      @include box-shadow($full);
+    }
+  }
+
+
+  // Change the box model for Mozilla, Webkit, IE8 and the future
+  //
+  // @param $bs
+  // [ content-box | border-box ]
+
+  @mixin box-sizing($bs) {
+    $bs: unquote($bs);
+    @include experimental(box-sizing, $bs,
+      -moz, -webkit, not -o, not -ms, not -khtml, official
+    );
+  }
+
+
+  $default-transition-property: all !default;
+
+  $default-transition-duration: 1s !default;
+
+  $default-transition-function: false !default;
+
+  $default-transition-delay: false !default;
+
+  $transitionable-prefixed-values: transform, transform-origin !default;
+
+  // One or more properties to transition
+  //
+  // * for multiple, use a comma-delimited list
+  // * also accepts "all" or "none"
+
+  @mixin transition-property($property-1: $default-transition-property,
+    $property-2 : false,
+    $property-3 : false,
+    $property-4 : false,
+    $property-5 : false,
+    $property-6 : false,
+    $property-7 : false,
+    $property-8 : false,
+    $property-9 : false,
+    $property-10: false
+  ) {
+    @if type-of($property-1) == string { $property-1: unquote($property-1); }
+    $properties: compact($property-1, $property-2, $property-3, $property-4, $property-5, $property-6, $property-7, $property-8, $property-9, $property-10);
+    @if $experimental-support-for-webkit { -webkit-transition-property : prefixed-for-transition(-webkit, $properties); }
+    @if $experimental-support-for-mozilla { -moz-transition-property : prefixed-for-transition(-moz, $properties); }
+    @if $experimental-support-for-opera { -o-transition-property : prefixed-for-transition(-o, $properties); }
+                                                            transition-property : $properties;
+  }
+
+  // One or more durations in seconds
+  //
+  // * for multiple, use a comma-delimited list
+  // * these durations will affect the properties in the same list position
+
+  @mixin transition-duration($duration-1: $default-transition-duration,
+    $duration-2 : false,
+    $duration-3 : false,
+    $duration-4 : false,
+    $duration-5 : false,
+    $duration-6 : false,
+    $duration-7 : false,
+    $duration-8 : false,
+    $duration-9 : false,
+    $duration-10: false
+  ) {
+    @if type-of($duration-1) == string { $duration-1: unquote($duration-1); }
+    $durations: compact($duration-1, $duration-2, $duration-3, $duration-4, $duration-5, $duration-6, $duration-7, $duration-8, $duration-9, $duration-10);
+    @include experimental(transition-duration, $durations,
+      -moz, -webkit, -o, not -ms, not -khtml, official
+    );
+  }
+
+  // One or more timing functions
+  //
+  // * [ ease | linear | ease-in | ease-out | ease-in-out | cubic-bezier(x1, y1, x2, y2)]
+  // * For multiple, use a comma-delimited list
+  // * These functions will effect the properties in the same list position
+
+  @mixin transition-timing-function($function-1: $default-transition-function,
+    $function-2 : false,
+    $function-3 : false,
+    $function-4 : false,
+    $function-5 : false,
+    $function-6 : false,
+    $function-7 : false,
+    $function-8 : false,
+    $function-9 : false,
+    $function-10: false
+  ) {
+    $function-1: unquote($function-1);
+    $functions: compact($function-1, $function-2, $function-3, $function-4, $function-5, $function-6, $function-7, $function-8, $function-9, $function-10);
+    @include experimental(transition-timing-function, $functions,
+      -moz, -webkit, -o, not -ms, not -khtml, official
+    );
+  }
+
+  // One or more transition-delays in seconds
+  //
+  // * for multiple, use a comma-delimited list
+  // * these delays will effect the properties in the same list position
+
+  @mixin transition-delay($delay-1: $default-transition-delay,
+    $delay-2 : false,
+    $delay-3 : false,
+    $delay-4 : false,
+    $delay-5 : false,
+    $delay-6 : false,
+    $delay-7 : false,
+    $delay-8 : false,
+    $delay-9 : false,
+    $delay-10: false
+  ) {
+    @if type-of($delay-1) == string { $delay-1: unquote($delay-1); }
+    $delays: compact($delay-1, $delay-2, $delay-3, $delay-4, $delay-5, $delay-6, $delay-7, $delay-8, $delay-9, $delay-10);
+    @include experimental(transition-delay, $delays,
+      -moz, -webkit, -o, not -ms, not -khtml, official
+    );
+  }
+
+  // Transition all-in-one shorthand
+
+  @mixin single-transition(
+    $property: $default-transition-property,
+    $duration: $default-transition-duration,
+    $function: $default-transition-function,
+    $delay: $default-transition-delay
+  ) {
+    @include transition(compact($property $duration $function $delay));
+  }
+
+  @mixin transition(
+    $transition-1 : default,
+    $transition-2 : false,
+    $transition-3 : false,
+    $transition-4 : false,
+    $transition-5 : false,
+    $transition-6 : false,
+    $transition-7 : false,
+    $transition-8 : false,
+    $transition-9 : false,
+    $transition-10: false
+  ) {
     @if $transition-1 == default {
-      $transition-1: compact($default-transition-property $default-transition-duration $default-transition-function $default-transition-delay); }
+      $transition-1 : compact($default-transition-property $default-transition-duration $default-transition-function $default-transition-delay);
+    }
     $transitions: false;
-    @if type-of($transition-1) == list and type-of(nth($transition-1, 1)) == list {
-      $transitions: join($transition-1, compact($transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10), comma); }
-    @else {
-      $transitions: compact($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10); }
+    @if type-of($transition-1) == list and type-of(nth($transition-1,1)) == list {
+      $transitions: join($transition-1, compact($transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10), comma);
+    } @else {
+      $transitions : compact($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10);
+    }
     $delays: comma-list();
     $has-delays: false;
     $webkit-value: comma-list();
     $moz-value: comma-list();
     $o-value: comma-list();
+
     // This block can be made considerably simpler at the point in time that
     // we no longer need to deal with the differences in how delays are treated.
     @each $transition in $transitions {
@@ -114,51 +639,101 @@ $white: #ffffff;
       $duration: false;
       $timing-function: false;
       $delay: false;
-      @if length($transition) > 1 {
-        $duration: nth($transition, 2); }
-      @if length($transition) > 2 {
-        $timing-function: nth($transition, 3); }
-      @if length($transition) > 3 {
-        $delay: nth($transition, 4);
-        $has-delays: true; }
+      @if length($transition) > 1 { $duration: nth($transition, 2); }
+      @if length($transition) > 2 { $timing-function: nth($transition, 3); }
+      @if length($transition) > 3 { $delay: nth($transition, 4); $has-delays: true; }
+
       // If a delay is provided without a timing function
-      @if is-time($timing-function) and not $delay {
-        $delay: $timing-function;
-        $timing-function: false;
-        $has-delays: true; }
+      @if is-time($timing-function) and not $delay { $delay: $timing-function; $timing-function: false; $has-delays: true; }
+
       // Keep a list of delays in case one is specified
       $delays: append($delays, if($delay, $delay, 0s));
-      $webkit-value: append($webkit-value, compact(prefixed-for-transition(-webkit, $property) $duration $timing-function));
-      $moz-value: append($moz-value, compact(prefixed-for-transition(-moz, $property) $duration $timing-function $delay));
-      $o-value: append($o-value, compact(prefixed-for-transition(-o, $property) $duration $timing-function $delay)); }
-    @if $experimental-support-for-webkit {
-      -webkit-transition: $webkit-value;
-      // old webkit doesn't support the delay parameter in the shorthand so we progressively enhance it.
-      @if $has-delays {
-        -webkit-transition-delay: $delays; } }
-    @if $experimental-support-for-mozilla {
-      -moz-transition: $moz-value; }
-    @if $experimental-support-for-opera {
-      -o-transition: $o-value; }
-    transition: $transitions; }
-    
-    // box-sizing
-    @mixin box-sizing($bs) {
-      $bs: unquote($bs);
-      @include experimental(box-sizing, $bs, -moz, -webkit, not -o, not -ms, not -khtml, official); }
 
-    // background-clip
-    @mixin background-clip($clip: $default-background-clip) {
-      // webkit and mozilla use the deprecated short [border | padding]
-      $clip: unquote($clip);
-      $deprecated: $clip;
-      @if $clip == padding-box {
-        $deprecated: padding; }
-      @if $clip == border-box {
-        $deprecated: border; }
-      // Support for webkit and mozilla's use of the deprecated short form
-      @include experimental(background-clip, $deprecated, -moz, -webkit, not -o, not -ms, not -khtml, not official);
-      @include experimental(background-clip, $clip, not -moz, not -webkit, not -o, not -ms, -khtml, official); }
+      $webkit-value: append($webkit-value, compact(prefixed-for-transition(-webkit, $property) $duration $timing-function));
+         $moz-value: append( $moz-value, compact(prefixed-for-transition( -moz, $property) $duration $timing-function $delay));
+           $o-value: append( $o-value, compact(prefixed-for-transition( -o, $property) $duration $timing-function $delay));
+    }
+
+    @if $experimental-support-for-webkit { -webkit-transition : $webkit-value;
+      // old webkit doesn't support the delay parameter in the shorthand so we progressively enhance it.
+      @if $has-delays { -webkit-transition-delay : $delays; } }
+    @if $experimental-support-for-mozilla { -moz-transition : $moz-value; }
+    @if $experimental-support-for-opera { -o-transition : $o-value; }
+                                                            transition : $transitions;
+  }
+
+  // coerce a list to be comma delimited or make a new, empty comma delimited list.
+  @function comma-list($list: ()) {
+    @return join((), $list, comma);
+  }
+
+  // Returns `$property` with the given prefix if it is found in `$transitionable-prefixed-values`.
+  @function prefixed-for-transition($prefix, $property) {
+    @if type-of($property) == list {
+      $new-list: comma-list();
+      @each $v in $property {
+        $new-list: append($new-list, prefixed-for-transition($prefix, $v));
+      }
+      @return $new-list;
+    } @else {
+      @if index($transitionable-prefixed-values, $property) {
+        @return #{$prefix}-#{$property};
+      } @else {
+        @return $property;
+      }
+    }
+  }
+
+  // Checks if the value given is a unit of time.
+  @function is-time($value) {
+    @if type-of($value) == number {
+      @return not not index(s ms, unit($value));
+    } @else {
+      @return false;
+    }
+  }
+
+  // The default value is `padding-box` -- the box model used by modern browsers.
+  //
+  // If you wish to do so, you can override the default constant with `border-box`
+  //
+  // To override to the default border-box model, use this code:
+  // $default-background-clip: border-box
+
+  $default-background-clip: padding-box !default;
+
+  // Clip the background (image and color) at the edge of the padding or border.
+  //
+  // Legal Values:
+  //
+  // * padding-box
+  // * border-box
+  // * text
+
+  @mixin background-clip($clip: $default-background-clip) {
+    // webkit and mozilla use the deprecated short [border | padding]
+    $clip: unquote($clip);
+    $deprecated: $clip;
+    @if $clip == padding-box { $deprecated: padding; }
+    @if $clip == border-box { $deprecated: border; }
+    // Support for webkit and mozilla's use of the deprecated short form
+    @include experimental(background-clip, $deprecated,
+      -moz,
+      -webkit,
+      not -o,
+      not -ms,
+      not -khtml,
+      not official
+    );
+    @include experimental(background-clip, $clip,
+      not -moz,
+      not -webkit,
+      not -o,
+      not -ms,
+      -khtml,
+      official
+    );
+  }
 
 // placeholders
 
