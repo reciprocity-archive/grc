@@ -4,6 +4,6 @@
 -else
   %ul.nav.nav-tabs.nav-stacked
     -@people.each do |person|
-      %li
+      %li.group
         =link_to '#' do #flow_person_path(person), 'data-popover-href' => tooltip_flow_person_path(person)
           =person.name || person.username || person.email

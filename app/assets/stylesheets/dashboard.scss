@@ -1,20 +1,15 @@
-/*
- * Don't use Sprockets `require` statements inside SASS files
- */
-
-// old code that needs to be validated and fixed
+//  NOTE! Don't use Sprockets `require` statements inside SASS files
 
 // Required external stylesheets
+
 @import "jquery-ui";
 @import "bootstrap";
-
 @import "compass/css3";
-
 @import "setup";
 @import "gcms";
 
 .flare {
-  -webkit-transition: background-color 2s ease-out;
+  @include transition(background-color 2s ease-out);
 }
 
 .flaretemp {

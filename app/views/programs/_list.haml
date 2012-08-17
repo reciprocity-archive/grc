@@ -5,7 +5,7 @@
 
 %ul.nav.nav-tabs.nav-stacked
   -@programs.each do |program|
-    %li
+    %li.group
       -stats = program_stats(program)
       /%a{ :href => flow_program_path(program), :'data-popover-href' => tooltip_flow_program_path(program), :'data-popover-trigger' => 'sticky-hover', :'data-placement' => 'right'}
       %a{ :href => flow_program_path(program), :data => { :'original-title' => 'Program Information', :'content' => render(:template => 'programs/tooltip', :locals => { :program => program }), :placement => 'right', :'popover-trigger' => 'sticky-hover'} }
