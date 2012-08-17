@@ -35,6 +35,13 @@ td {
 	vertical-align:top;
 }
 
+/*Required for bootstrap to not break firefox */
+
+.row-fluid [class*="span"] {
+	/* min-height:10px; /* This fixes something for Dan, but breaks modal input boxs for joe. Discuss! */ 
+}
+
+
 // Static columns for pages that should not have responsive design - ex. Reg Mapper
 
 .row-static {
@@ -355,6 +362,9 @@ td {
 	  @include background-image(linear-gradient(top,  #eeeeee 0%, #f1f1f1 50%, #e1e1e1 100%, #f6f6f6 100%));  		
   	border: 1px solid #3badb3;
   }
+  #category_controls & { // fix for controls accordion
+    min-height:23px;
+  }
 }
 
 .selected {
@@ -413,39 +423,9 @@ td {
 	background: #EFEFEF;
 }
 
-/*Required for bootstrap to not break firefox */
-
-.row-fluid [class*="span"] {
-	/* min-height:10px; /* This fixes something for Dan, but breaks modal input boxs for joe. Discuss! */ 
-}
-
 .cleanlabels .row-fluid [class*="span"], .information .row-fluid [class*="span"] {
 	min-height:28px;
 }
-
- /*Required for accordian slots using fluid layout
-.row-fluid-slotcontent [class*="span"] {
-	display: block;
-	float: left;
-	width: 100%;
-	min-height: 0px;
-  margin-left: 2.564102564%;
-	@include box-sizing(border-box);
-}
-
-*/ 
-
-/*.row-fluid-slotcontent .span9 {
-	width:75%;
-	margin:2px 2px 2px 2px;
-	padding: 0px 5px 0px 8px;
-	background: #efefef;
-}
-
-.row-fluid-slotcontent {
-  margin-top: 5px;
-  clear:both;
-}*/
 
 .row-fluid-slotcontent {
 	margin-top: 5px;

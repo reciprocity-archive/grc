@@ -2,7 +2,7 @@
 %li
   .row-fluid{ :'data-toggle' => 'collapse', :'data-target' => "##{subcategory_content_id}" }
     .span12
-      .slot.subsystemslot.span12
+      .span12.slot.controlslot
         .expander
         %span.prefix=subcategory ? subcategory.name : 'Uncategorized Controls'
   %ul.collapse{ :id => subcategory_content_id }
