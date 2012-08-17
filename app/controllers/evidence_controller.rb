@@ -140,9 +140,10 @@ class EvidenceController < ApplicationController
       doc = Document.where(:link => doc_params[:link]).first
       doc ||= Document.create(
         :link => doc_params[:link],
-        :title => doc_params[:title],
-        :document_descriptor => desc
+        :title => doc_params[:title]
       )
+      doc.document_descriptor = desc
+      doc.save
       if doc.document_descriptor == desc
         @system_control.evidences << doc
       else

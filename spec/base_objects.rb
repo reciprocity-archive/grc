@@ -1,22 +1,22 @@
 module BaseObjects
   def create_base_objects
-    @creg = Program.create(:title => 'Company', :slug => 'COM1', :company => true)
-    @reg = Program.create(:title => 'Reg 1', :slug => 'REG1', :company => false)
-    @ctl = Control.create(:title => 'Control 1', :slug => 'REG1-CTL1', :description => 'x', :program => @reg, :is_key => true, :fraud_related => false)
-    @cycle = Cycle.create(:program => @reg, :start_at => '2011-01-01')
-    @sec = Section.create(:title => 'Section 1', :slug => 'REG1-SEC1', :description => 'x', :program => @reg)
-    @sys = System.create(:title => 'System 1', :slug => 'SYS1', :description => 'x', :infrastructure => true)
-    @sc = SystemControl.create(:control => @ctl, :system => @sys, :cycle => @cycle, :state => :green)
-    @desc = DocumentDescriptor.create(:title => 'ACL')
-    @doc = Document.create(:link => 'http://cde.com/', :title => 'Cde')
-    @bp = BizProcess.create(:title => 'BP1', :slug => 'BP1')
+    @creg = FactoryGirl.create(:program, :title => 'Company', :slug => 'COM1', :company => true)
+    @reg = FactoryGirl.create(:program, :title => 'Reg 1', :slug => 'REG1', :company => false)
+    @ctl = FactoryGirl.create(:control, :title => 'Control 1', :slug => 'REG1-CTL1', :description => 'x', :program => @reg, :is_key => true, :fraud_related => false, :program => @reg)
+    @cycle = FactoryGirl.create(:cycle, :program => @reg, :start_at => '2011-01-01')
+    @sec = FactoryGirl.create(:section, :title => 'Section 1', :slug => 'REG1-SEC1', :description => 'x', :program => @reg)
+    @sys = FactoryGirl.create(:system, :title => 'System 1', :slug => 'SYS1', :description => 'x', :infrastructure => true)
+    @sc = FactoryGirl.create(:system_control, :control => @ctl, :system => @sys, :cycle => @cycle, :state => :green)
+    @desc = FactoryGirl.create(:document_descriptor, :title => 'ACL')
+    @doc = FactoryGirl.create(:document, :link => 'http://cde.com/', :title => 'Cde')
+    @bp = FactoryGirl.create(:biz_process, :title => 'BP1', :slug => 'BP1')
     @bp.systems << @sys
     @bp.controls << @ctl
     @bp.sections << @sec
-    @biz_area = BusinessArea.create(:title => 'title1')
-    @person1 = Person.create(:username => 'john')
-    @sys_person1 = SystemPerson.create(:person => @person1, :system => @sys)
-    @bp_person1 = BizProcessPerson.create(:person => @person1, :biz_process => @bp)
+    @biz_area = FactoryGirl.create(:business_area, :title => 'title1')
+    @person1 = FactoryGirl.create(:person, :username => 'john')
+    @sys_person1 = FactoryGirl.create(:system_person, :person => @person1, :system => @sys)
+    @bp_person1 = FactoryGirl.create(:biz_process_person, :person => @person1, :biz_process => @bp)
     #debugger
   end
 

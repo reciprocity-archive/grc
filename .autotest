@@ -3,4 +3,10 @@ Autotest.add_hook :initialize do |at|
   at.add_exception /\.db$/
   at.add_exception /^\.\/.git/
   at.add_exception /^\.\/tmp/
+  at.add_mapping(/factories\/.+\.rb$/) { |f, _|
+    Dir['spec/**/*_spec.rb']
+  }
+  at.add_mapping(/extras\/.+\.rb$/) { |f, _|
+    Dir['spec/extras/*_spec.rb']
+  }
 end
