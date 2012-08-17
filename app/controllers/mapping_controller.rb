@@ -55,20 +55,22 @@ class MappingController < ApplicationController
       rcontrol.save
 
       rcontrol_id = rcontrol.id
-      ControlControl.create(:implemented_control_id => rcontrol.id,
-                            :control_id => ccontrol.id)
+      ControlControl.create(:implemented_control => rcontrol,
+                            :control => ccontrol)
       notice = notice + "Created regulation control #{rcontrol.slug}. "
+    else
+      rcontrol = Control.find(rcontrol_id)
     end
 
     if params[:u]
       ControlSection.where(:section_id => section.id,
-                           :control_id => rcontrol_id).each {|r|
+                           :control_id => rcontrol.id).each {|r|
         r.destroy
       }
       notice = notice + "Unmapped regulation control. "
     else
-      ControlSection.create(:section_id => section.id,
-                            :control_id => rcontrol_id)
+      ControlSection.create(:section => section,
+                            :control => rcontrol)
       notice = notice + "Mapped regulation control. "
     end
 
@@ -78,15 +80,18 @@ class MappingController < ApplicationController
   end
 
   def map_ccontrol
+    rcontrol = Control.find(params[:rcontrol])
+    ccontrol = Control.find(params[:ccontrol])
+
     if params[:u]
-      ControlControl.where(:implemented_control_id => params[:rcontrol],
-                           :control_id => params[:ccontrol]).each {|r|
+      ControlControl.where(:implemented_control_id => rcontrol.id,
+                           :control_id => ccontrol.id).each {|r|
         r.destroy
       }
       flash[:notice] = "Unmapped company control"
     else
-      ControlControl.create(:implemented_control_id => params[:rcontrol],
-                            :control_id => params[:ccontrol])
+      ControlControl.create(:implemented_control => rcontrol,
+                            :control => ccontrol)
       flash[:notice] = "Mapped company control"
     end
 
