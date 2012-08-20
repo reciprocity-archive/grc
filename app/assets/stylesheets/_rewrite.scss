@@ -1,0 +1,26 @@
+/*Required for bootstrap to not break firefox */
+.row-fluid [class*="span"] {
+  /* min-height:10px; /* This fixes something for Dan, but breaks modal input boxs for joe. Discuss! */
+}
+
+// Static columns for pages that should not have responsive design - ex. Reg Mapper
+.row-static {
+  margin:0 auto 0 auto;
+  float:none;
+  display:block;
+  min-width: 1120px;
+}
+
+// Overwrite of Boostrap Modal backdrop opacity, keeping fade in but removing transition
+.modal-backdrop,
+.modal-backdrop.fade.in {
+  opacity: 0.4;
+  filter: alpha(opacity=40);
+}
+
+// bootstrap.css line 4194 overwriting, it would be better to completely remove them
+.modal.fade {
+  top: -25%;
+  @include transition(opacity 0s linear, top 0s ease-out);
+}
+

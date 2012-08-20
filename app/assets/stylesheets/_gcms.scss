@@ -10,27 +10,6 @@
  */
 
 
-.editable {
-  padding:5px;
-  color:#666666;
-  background:#fff;
-}
-
-
-/*Required for bootstrap to not break firefox */
-.row-fluid [class*="span"] {
-  /* min-height:10px; /* This fixes something for Dan, but breaks modal input boxs for joe. Discuss! */
-}
-
-// Static columns for pages that should not have responsive design - ex. Reg Mapper
-.row-static {
-  margin:0 auto 0 auto;
-  float:none;
-  display:block;
-  min-width: 1120px;
-}
-
-
 // Minimum width for spans under pressure
 
 .minimumwidth313px {
@@ -45,47 +24,17 @@
   opacity:.5;
 }
 
-
-// Overwrite of Boostrap Modal backdrop opacity, keeping fade in but removing transition
-
-.modal-backdrop,
-.modal-backdrop.fade.in {
-  opacity: 0.4;
-  filter: alpha(opacity=40);
-}
-
-.modal.fade {
-  top: -25%;
-  // bootstrap.css line 4194 overwriting, it would be better to completely remove them
-  @include transition(opacity 0s linear, top 0s ease-out);
-}
-
 .WidgetBox {
-  color:$textColor;
-  margin: 0 15px 15px 0; // bottom margin
-  //padding: 0 15px 0px 0px; padding for scrollbar
-  background: white;
   @include border-radius(6px);
   @include box-sizing(border-box);
   @include box-shadow(1px 1px 2px rgba(0, 0, 0, 0.1));
+  color:$textColor;
+  margin: 0 15px 15px 0;
   p {
     margin: 0 0 0 0;
     font-size: 13px;
     line-height: 15px;
   }
-}
-
-.WidgetBoxHeading2 {
-  color:$textColor;
-  @include border-radius(5px 5px 0px 0px);
-  background: #828a97; // Old browsers
-  @include background-image(linear-gradient(top,  #828a97 0%,#565f6c 39%,#4b535d 80%,#474e59 82%,#4c525b 100%));
-  height:24px;
-  font-weight: 400;
-  padding: 6px;
-  margin:0 0 0 0;
-  color: #fff;
-  text-shadow: 0px 1px 1px #000;
 }
 
 .WidgetBoxHeading {
@@ -104,20 +53,18 @@
   color: #fff;
   text-shadow: 0px 1px 1px #000;
   input {
+    @include border-radius(3px);
     display: inline-block;
     vertical-align: top;
-    width: 130px;
+    width: 180px;
     height: 13px;
     padding: 4px;
     margin: 0px 0px 0px 0px;
     font-size: 12px;
     line-height: 15px;
     color: #555;
-    background-color: white;
-    border: 1px solid #CCC;
-    @include border-radius(3px);
-  // TODO: overflow needed?
-    /*overflow:hidden;*/
+    background-color: $white;
+    border: 1px solid $lightGray;
   }
 }
 
@@ -190,7 +137,7 @@
 
 .WidgetBoxContent {
   background: whiteSmoke;
-  border: #CCC 1px solid;
+  border: $lightGray 1px solid;
   padding: 8px;
   margin: 0;
   // TODO: decide which .WidgetBox descendent should be scrollable
@@ -259,7 +206,7 @@
 
 /* Tabs */
 .nav-tabs > .active > a, .nav-tabs > .active > a:hover {
-  color: white;
+  color: $white;
   cursor: default;
   background-color: #43C2C7;
   border: 1px solid #43C2C7;
@@ -947,7 +894,7 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
   list-style: none;
   font-size:14px;
   background-color: #efefef;
-  border: 1px solid #ccc;
+  border: 1px solid $lightGray;
   border: 1px solid rgba(0, 0, 0, 0.2);
   *border-right-width: 2px;
   *border-bottom-width: 2px;
@@ -1304,14 +1251,14 @@ margin-top:7px;
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
   vertical-align: top;
   cursor: pointer;
-  border: 1px solid #CCC;
+  border: 1px solid $lightGray;
   @include border-radius(3px);
   @include box-shadow(inset 0 1px 1px rgba(0, 0, 0, 0.075));
   @include transition(border linear 0.2s, box-shadow linear 0.2s);
   background-color: #11BFC5 !important;
   @include background-image(linear-gradient(top, #32aeb3, #028e93));
   border-color: #11BFC5 #11BFC5 #0FABB0;
-  color: white !important;
+  color: $white !important;
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.29);
   -webkit-font-smoothing: antialiased;
 }
@@ -1325,7 +1272,7 @@ margin-top:7px;
   text-align: center;
   vertical-align: top;
   cursor: pointer;
-  background-color: white;
+  background-color: $white;
   border: 1px solid #F60;
   @include border-radius(3px);
   @include box-shadow(inset 0 1px 1px rgba(0, 0, 0, 0.075));
@@ -1352,8 +1299,8 @@ margin-top:7px;
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
   vertical-align: center;
   cursor: pointer;
-  background-color: white;
-  border: 1px solid #CCC;
+  background-color: $white;
+  border: 1px solid $lightGray;
   @include border-radius(3px);
   @include box-shadow(inset 0 1px 1px rgba(0, 0, 0, 0.075));
   @include transition(border linear 0.2s, box-shadow linear 0.2s);
@@ -1374,8 +1321,8 @@ margin-top:7px;
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
   vertical-align: center;
   cursor: pointer;
-  background-color: white;
-  border: 1px solid #CCC;
+  background-color: $white;
+  border: 1px solid $lightGray;
   @include border-radius(3px);
   @include box-shadow(inset 0 1px 1px rgba(0, 0, 0, 0.075));
   @include transition(border linear 0.2s, box-shadow linear 0.2s);
@@ -1393,7 +1340,7 @@ margin-top:7px;
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
   vertical-align: top;
   cursor: pointer;
-  background-color: white;
+  background-color: $white;
   border: 1px solid #ddd;
   @include border-radius(3px);
   // @include box-shadow(inset 0 1px 1px rgba(0, 0, 0, 0.075));
@@ -1422,7 +1369,7 @@ margin-top:7px;
 .widgetbtn:active,
 .widgetbtn.active, .slotbtn:active,
 .slotbtn.active {
-  background-color: #cccccc;
+  background-color: $lightGray;
 }
 
 .widgetbtn:first-child {
@@ -1891,8 +1838,8 @@ body .container {
   padding: 4px 4px 4px 4px !important;
   vertical-align: top !important;
   cursor: pointer !important;
-  background-color: white !important;
-  border: 1px solid #CCC !important;
+  background-color: $white !important;
+  border: 1px solid $lightGray !important;
 }
 
 .itemlist {
@@ -1953,6 +1900,74 @@ body .container {
   height: 3em;
 }
 
+// old dashboard.scss
 
-/* GCMS open-source icons */
-@import "icons";
+.flare {
+  @include transition(background-color 2s ease-out);
+}
+
+.flaretemp {
+  background-color: yellow;
+}
+
+.tab-pane {
+  overflow: auto;
+}
+
+.system-node a.system-slot {
+  background: #bbb;
+}
+
+.WidgetBox .smallerWidgetBoxHeading {
+  margin-bottom: -2px;
+}
+
+.opacity40 {
+  opacity: .4;
+}
+
+#categorylist {
+  select {
+    width: 100%;
+    height: 160px;
+  }
+}
+
+.disabled {
+  opacity: 0.25;
+}
+
+.field-failure {
+  input, select, textarea {
+    background-color: $failureBgndColor;
+    border-color: $failureBorderColor;
+  }
+  label {
+    color: $failureColor;
+  }
+}
+
+.field-success {
+  input, select, textarea {
+    background-color: $successBgndColor;
+  }
+}
+
+.member-failure {
+  background-color: $failureBgndColor;
+  border-color: $failureBorderColor;
+}
+
+.member-success {
+  background-color: $successBgndColor;
+}
+
+.compact-rows {
+  input, select, textarea {
+    margin-bottom: 0px;
+  }
+}
+
+.help-inline span {
+  display: block;
+}

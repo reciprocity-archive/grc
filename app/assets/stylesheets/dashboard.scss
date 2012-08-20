@@ -8,79 +8,42 @@
 
 // editable styles start here
 
-  // general setup
+  // variables, overrides, mixins
   @import "setup";
+
+  // bootstrap rewrites
+  @import "rewrite";
+  
+  // global definitions
   @import "global";
+
+  // everything
   @import "gcms";
+  
+  // icons
+  @import "icons";
+
+  // ----------------- TO CHECK ----------------- \\
+
+  // !!NOT-USED
+  //.editable {
+  //  padding:5px;
+  //  color:#666666;
+  //  background:#fff;
+  //}
+
+  // !!NOT-USED
+  //.WidgetBoxHeading2 {
+  //  color:$textColor;
+  //  @include border-radius(5px 5px 0px 0px);
+  //  background: #828a97; // Old browsers
+  //  @include background-image(linear-gradient(top,  #828a97 0%,#565f6c 39%,#4b535d 80%,#474e59 82%,#4c525b 100%));
+  //  height:24px;
+  //  font-weight: 400;
+  //  padding: 6px;
+  //  margin:0 0 0 0;
+  //  color: #fff;
+  //  text-shadow: 0px 1px 1px #000;
+  //}
 
 
-
-.flare {
-  @include transition(background-color 2s ease-out);
-}
-
-.flaretemp {
-  background-color: yellow;
-}
-
-.tab-pane {
-  overflow: auto;
-}
-
-.system-node a.system-slot {
-  background: #bbb;
-}
-
-.WidgetBox .smallerWidgetBoxHeading {
-  margin-bottom: -2px;
-}
-
-.opacity40 {
-  opacity: .4;
-}
-
-#categorylist {
-  select {
-    width: 100%;
-    height: 160px;
-  }
-}
-
-.disabled {
-  opacity: 0.25;
-}
-
-.field-failure {
-  input, select, textarea {
-    background-color: $failureBgndColor;
-    border-color: $failureBorderColor;
-  }
-  label {
-    color: $failureColor;
-  }
-}
-
-.field-success {
-  input, select, textarea {
-    background-color: $successBgndColor;
-  }
-}
-
-.member-failure {
-  background-color: $failureBgndColor;
-  border-color: $failureBorderColor;
-}
-
-.member-success {
-  background-color: $successBgndColor;
-}
-
-.compact-rows {
-  input, select, textarea {
-    margin-bottom: 0px;
-  }
-}
-
-.help-inline span {
-  display: block;
-}

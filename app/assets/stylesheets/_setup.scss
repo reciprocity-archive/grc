@@ -2,7 +2,7 @@
 // SASS variables
 
 $linkColor : #43c2c7;
-$textColor: #666666;
+$textColor: #666;
 $failureBgndColor: #FFC8C8;
 $failureColor: #B94A48;
 $failureBorderColor: #B94A48;
@@ -11,8 +11,9 @@ $font-family: 'PT Sans', Helvetica, Arial, Tahoma, Verdana, sans-serif;
 
 // helper variables (it seems it is duplicated, but it is good to keep semantically correct var names)
 
-$darkGray: #666666;
-$white: #ffffff;
+$darkGray: #666;
+$lightGray : #ccc;
+$white: #fff;
 
 // SASS mixins
 
@@ -22,10 +23,10 @@ $white: #ffffff;
 // These rules must be separate, see http://stackoverflow.com/questions/2610497/change-an-inputs-html5-placeholder-color-with-css
 
 ::-webkit-input-placeholder {
-  color: #cccccc;
+  color: $lightGray;
 }
 :-moz-placeholder {
-  color: #cccccc;
+  color: $lightGray;
 }
 
 // clearfix
