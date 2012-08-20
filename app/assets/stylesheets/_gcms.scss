@@ -10,8 +10,8 @@
  */
 
 body {
- 	background:url("../images/bkgd.gif");
- 	padding-top: 135px; /* 160px to make the container go all the way to the bottom of the topbar */
+	background: url("../images/navbkgd.png") left top repeat-x, url("../images/bkgd.gif") left top repeat;
+	padding-top: 135px; /* 160px to make the container go all the way to the bottom of the topbar */
  	font-family: $font-family;
  	height:100%;
 }
@@ -31,6 +31,22 @@ p {
   color:$textColor;
 }
 
+.editable {
+	padding:5px;
+	color:#666666;
+	background:#fff;
+}
+
+.header:before,
+.header:after {
+  display: table;
+  content: "";
+}
+
+.header:after {
+  clear: both;
+}
+
 td {
 	vertical-align:top;
 }
@@ -45,7 +61,7 @@ td {
 // Static columns for pages that should not have responsive design - ex. Reg Mapper
 
 .row-static {
-	margin:0 15px 0 15px;
+	margin:0 auto 0 auto;
 	float:none;
 	display:block;
 	min-width: 1120px;
@@ -77,7 +93,7 @@ td {
 
 .modal.fade {
   top: -25%;
-  /*bootstrap.css line 4194 overwriting, it would be better to completely remove them */
+  // bootstrap.css line 4194 overwriting, it would be better to completely remove them
   @include transition(opacity 0s linear, top 0s ease-out);
 }
 
@@ -100,8 +116,8 @@ td {
 
 .WidgetBox {
 	color:$textColor;
-	margin: 0 15px 15px 0; /* bottom margin */
-/*	padding: 0 15px 0px 0px; padding for scrollbar */
+	margin: 0 15px 15px 0; // bottom margin
+	//padding: 0 15px 0px 0px; padding for scrollbar
   background: white;
   @include border-radius(6px);
 	@include box-sizing(border-box);
@@ -116,7 +132,7 @@ td {
 .WidgetBoxHeading2 {
 	color:$textColor;
   @include border-radius(5px 5px 0px 0px);
-	background: #828a97; /* Old browsers */
+	background: #828a97; // Old browsers
   @include background-image(linear-gradient(top,  #828a97 0%,#565f6c 39%,#4b535d 80%,#474e59 82%,#4c525b 100%));
 	height:24px;
 	font-weight: 400;
@@ -154,6 +170,7 @@ td {
   	background-color: white;
   	border: 1px solid #CCC;
   	@include border-radius(3px);
+	// TODO: overflow needed?
   	/*overflow:hidden;*/  
 	}
 }
@@ -187,10 +204,12 @@ td {
 /* Height attributes that should be applied to WidgetBox only */
 
 /* Goal is to specify height outside of the widgetbox */
+// TODO: use instead? .halfHeight > .WidgetBoxContent
 .halfHeight > .WidgetBox > .WidgetBoxContent {
 	height:265px;
 }
 
+// TODO: use instead? .fullHeight > .WidgetBoxContent
 .maxhalfHeight > .WidgetBox > .WidgetBoxContent {
 	max-height:265px;
 }
@@ -199,8 +218,9 @@ td {
 	position:relative;
 	min-height:265px;
 	max-height:600px;
-	/*overflow-y:auto;
-	overflow-x:hidden;*/
+	// TODO: decide which .WidgetBox descendent should be scrollable
+	//overflow-y:auto;
+	//overflow-x:hidden;*/
 }
 
 /* Required `height` setting to trigger overflow scrolling in tab content */
@@ -226,7 +246,8 @@ td {
 	background: whiteSmoke;
 	border: #CCC 1px solid;
 	padding: 8px;
-	margin: 0;	
+	margin: 0;
+	// TODO: decide which .WidgetBox descendent should be scrollable
 	overflow-y:auto;
 	overflow-x:hidden;
 }
@@ -305,16 +326,21 @@ td {
 }
 
 .subsystemslot {
-	/*float:left;
+	// TODO: float needed?
+	// float:left;
 	height:30px;
 	display:inline-block;
 	@include box-sizing(border-box);
+	// TODO: padding needed?
 	/*padding:7px 6px 6px 6px;*/
   background: #fefcea; /* Old browsers */
   @include background-image(linear-gradient(top,  #fefcea 0%, #ede9ce 100%));
   &:hover {
   	color:$textColor;
-  	border: 1px solid #3badb3;
+  	// TODO: #3badb3 or #e1e1e1 ?
+	border: 1px solid #3badb3;
+	// TODO: margin-top needed?
+	// margin-top: 2px;
   	cursor:pointer;  
   }
 }
@@ -350,7 +376,11 @@ td {
 
 .slot > .btn {
 	/*float: right;*/
-	margin: -4px 6px 0 6px;
+	margin-top: -4px;
+	//TODO: needed?
+	margin-left: 6px;
+	//TODO: needed?
+	margin-right: 6px;
 }
 
 .controlslot {
@@ -442,6 +472,7 @@ td {
   margin-top: 0;
 }*/
 
+//TODO: .controllist a OR a.controllist ?
 .controllist {
 	float:left;
 	display: inline-block;
@@ -453,6 +484,7 @@ td {
 	@include box-sizing(border-box);
 	/* margin: 3px 0px 2px 2px; */
 	padding:0px 6px 0px 6px;
+	//TODO: #333 or #eee
 	color:#333;
 	border: 1px solid #eeeeee;		
 	font-weight:normal;
@@ -520,16 +552,18 @@ td {
 }
 
 .location {
-	color:#5c5c5c;	
+	color:#5c5c5c;
+	display: table;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;	
+}
+
+#pageType {
+	margin-right:7px;
 }
 
 .modal-body {
-	/* max-height: 500px; 
-	height: 297px; */
-	
-	/*max-height:60%;
-	min-height:297px;*/
-	
 	padding: 10px 15px 0 15px;
 	overflow-y: auto;
 }
@@ -715,6 +749,10 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
   color: #efefef;
 }
 
+.navbar-inner {
+  background: none;
+}
+
 .navbar-secondinner {
   height:53px;
   padding: 5px 0px 0px 5px;
@@ -728,7 +766,7 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
 	width:100%;
 }
 
-.fixed-top {
+.fixed-top, .navbar-fixed-top {
 	position:absolute;
 	top: 0;
 	margin:0 0 0 0; /*Required to stop boostrap-responsive from changing size of header bed */
@@ -736,19 +774,26 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
 }
 
 .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {
+	// TODO: 'SOON' ??
+	// max-width: 1120px;
+	// min-width: 1004px;
 	width: 1120px;
+	padding:0 15px 0 15px;
 }
 
 .headerleft {
-	width: 540px;
+	max-width:502px;
+	min-width:251px;
 	float: left;
 	margin-left: 0px;
 }
 
 .headerright {
-	width: 540px;
+	
+	max-width:502px;
+	min-width:251px;
 	float: right;
-	margin-right: 15px;
+	margin-right: 0px;
 }
 
 .inner {
@@ -819,6 +864,14 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
     font-size: 30px;
     line-height: 36px;
   }
+}
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
 }
 
 /* Popover-Hover items */
@@ -996,7 +1049,8 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
 }
 
 ul, ol {
-	/*position: relative;*/
+	//TODO: needed?
+	//position: relative;
 	padding: 0 0 0 0;
 	margin: 0 0 0 0;
 	list-style:none;
@@ -1072,39 +1126,17 @@ ul.slugtree {
   	white-space: nowrap;
   	text-overflow: ellipsis; 
   }
-  .prefix {
-    font-weight: bold;
-  	margin-left:4px;
-    margin-right: 6px; 
-  }
   .content {
   	background-color: #fff;
   	display: none; 
   	margin: 0px 0px 5px 0px;;
   }
-  .expander {
-  	position:relative;
-  	background-image:url("../images/toggle_shrank.png");
-  	float:left;
-  	display: inline-block;
-  	width:18px;
-  	height:18px;
-  	padding: 0 0 0 0;
-  	margin:0 0 0 0;
-  	cursor:pointer;
-  	&.in {
-  	  /* for firefox, safari, chrome, etc. */
-      -webkit-transform: rotate(90deg);
-      -moz-transform: rotate(90deg);
-      /* for ie */
-      filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);  
-  	}
-  }
   .attached {
   	/* width:180px; /* preferable to be fluid spans, but not aligning */
   	float:right;
   	display: inline-block;
-  	margin:1px 0 1px 0px; 
+  	margin: 2px 0 0 0;
+	// TODO: margin/overflow/whitespace/text-overflow needed?
     /*	margin:4px 0 0 5px;
   	overflow: hidden;
   	white-space: nowrap;
@@ -1123,6 +1155,48 @@ ul.slugtree {
   	padding-left: 0px;
   	list-style:none; 
   }
+}
+
+.prefix {
+  font-weight: bold;
+  margin-left:4px;
+  margin-right: 6px; 
+}
+
+.expander {
+	position:relative;
+	background-image:url("../images/toggle_shrank.png");
+	float:left;
+	display: inline-block;
+	width:18px;
+	height:18px;
+	padding: 0 0 0 0;
+	margin:0 0 0 0;
+	cursor:pointer;
+	&.in {
+		/* for firefox, safari, chrome, etc. */
+		-webkit-transform: rotate(90deg);
+		-moz-transform: rotate(90deg);
+		/* for ie */
+		filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);  
+	}
+}
+  
+/* Hack for modal invite auditors */
+.span6 > .prefix {
+	font-size:15px;
+	line-height:15px;
+	font-weight: bold;
+	margin-left: 4px;
+	margin-right: 6px;
+}
+
+
+.span4 > .prefix {
+	
+	font-size:15px;
+	line-height:15px;
+	font-weight: bold;
 }
 
 .toggleExpanded { 
@@ -1155,6 +1229,24 @@ label {
   background-color: transparent;
   margin-top:5px;
   margin-bottom:2px;
+}
+
+.slotlabel {
+  font-size:13px;
+  line-height:16px;
+  vertical-align:top;
+ 
+}
+
+/* Action buttons are buttons on widgets that take half size and a larger footprint */
+.actionbutton {
+	width:92%;
+	height:18px !important;	
+	line-height:18px !important;
+}
+
+.badges {
+margin-top:7px;	
 }
 
 .btnwell {
@@ -1283,15 +1375,12 @@ label {
 }
 
 .widgetmapbtn { 
-	*margin-left: .3em;
 	font-size: 13px;
 	line-height: 18px;
-	*line-height: 20px;
 	display: inline-block;
 	padding: 2px 6px 1px 6px;
 	color: #efefef;
 	text-align: center;
-	
 	vertical-align: top;
 	cursor: pointer;
 	background-color: white;
@@ -1301,8 +1390,16 @@ label {
   @include transition(border linear 0.2s, box-shadow linear 0.2s);
 }
 
+.widgetmapbtn[disabled], .widgetmapbtn.disabled {
+	opacity:.5;
+}
+
 .slotbtn { 
-	*margin-left: .3em;
+	margin-left: 3px;
+	position:relative; 
+	top:-3px;
+	right: -4px;
+
 	font-size: 13px;
 	line-height: 13px;
 	*line-height: 13px;
@@ -1321,8 +1418,32 @@ label {
   @include transition(border linear 0.2s, box-shadow linear 0.2s);	
 }
 
-.widgetbtn { 
-	margin-left: .3em;
+.checkbutton { 
+	position:relative; 
+	top:-3px;
+	right: -4px;
+
+	font-size: 13px;
+	line-height: 13px;
+	*line-height: 13px;
+	display: inline-block;
+	padding: 1px 0px 1px 0px;
+	color: #333;
+	text-align: center;
+	text-shadow: 0 1px 1px 
+	rgba(255, 255, 255, 0.75);
+	vertical-align: center;
+	cursor: pointer;
+	background-color: white;
+	border: 1px solid #CCC;
+  @include border-radius(3px);
+  @include box-shadow(inset 0 1px 1px rgba(0, 0, 0, 0.075));
+  @include transition(border linear 0.2s, box-shadow linear 0.2s);	
+}
+
+.widgetbtn {
+	//TODO: needed?
+	//margin-left: .3em;
 	font-size: 13px;
 	line-height: 18px;
 	display: inline-block;
@@ -1352,8 +1473,9 @@ label {
 .widgettextbtn:active, .widgetbtn:active,
 .widgettextbtn.active, .widgetbtn.active,
 .widgettextbtn.disabled, .widgetbtn.disabled,
-.widgetbtn[disabled], .slotbtn:hover, .slotbtn:active, .slotbtn:disabled, 
-.slotbtn[disabled] {
+.widgettextbtn[disabled], .widgetmapbtn[disabled], .widgetmapbtn.disabled, .widgetbtn[disabled], .slotbtn:hover, .slotbtn:active, .slotbtn:disabled, 
+.slotbtn[disabled], .checkbutton:active, .checkbutton:disabled, 
+.checkbutton[disabled] {
   background-color: #e6e6e6;
   *background-color: #d9d9d9;
 }
@@ -1370,12 +1492,13 @@ label {
 
 .widgettextbtn:hover {
   background: #43e8ee; /* Old browsers */
-  @include background-image(linear-gradient(top,  #43e8ee 0%, #11bfc5 100%));	  
-	/*color: #333333;
-	text-decoration: none;
-	background-color: #e6e6e6;
-	*background-color: #d9d9d9;
-	/* Buttons in IE7 don't get borders, so darken on hover */
+  @include background-image(linear-gradient(top,  #43e8ee 0%, #11bfc5 100%));
+	// Needed?
+	color: #333333;
+	//text-decoration: none;
+	//background-color: #e6e6e6;
+	//*background-color: #d9d9d9;
+	// Buttons in IE7 don't get borders, so darken on hover
 }
 
 .widgetbtn:focus {
@@ -1417,7 +1540,7 @@ label {
 
 .addbtn, .unmapbtn { 
 padding: 5px 6px 4px 6px;
-  /* padding: 1px 5px 2px 5px;*/
+  // padding: 1px 5px 2px 5px;
   *margin-left: .3em;
   margin-top:0px;
   font-size: 11px;
@@ -1538,15 +1661,14 @@ a.controllistRM {
 	line-height:0px !important;
 }
 
-.singleControlSlot {
+.singlecontrolSlot {
 	width:100%;	
 	float:left;
 	height:auto;
 	margin:3px 0px 0px 0px;
-	/*display:inline-block;
+	display:inline-block;
 	@include box-sizing(border-box);
 	padding: 5px 6px 5px 6px;
-	*/
 	color:$textColor;
 	background: #ffffff; /* Old browsers */
 	vertical-align:central;
@@ -1570,7 +1692,7 @@ a.controllistRM {
 }
 
 .controlSlot:hover,
-.singleControlSlot:hover {
+.singlecontrolSlot:hover {
 	float:left;
 	height:auto;
 	color:#000;
@@ -1617,9 +1739,10 @@ a.controllistRM {
 }
 
 .controls-group {
-	/*display:inline-block;
-	position:relative;
-	vertical-align:top;*/
+	// TODO: needed?
+	//display: inline-block;
+	//position: relative;
+	//vertical-align: top;
 	font-size:10px;
 	line-height:10px;
     width:100%; 
@@ -1634,7 +1757,6 @@ a.controllistRM {
 	line-height:10px;
     width:91%; 
 	color:#777;
-	/*float:left;*/
 }
 
 .control-group {
@@ -1671,6 +1793,12 @@ a.controllistRM {
 	max-height: 720px;
 }
 
+.slimmodal {
+	width: 480px;
+	margin-left:-240px;
+	max-height: 720px;
+}
+
 select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
 	min-height:13px; /* must be 13, the size of a widgettextbox, for search */
 	font-size: 12px;
@@ -1703,10 +1831,13 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 
 /* Progress Bars */
 
-.nav-tabs.nav-stacked > li > a:hover .progress .progressbar-warning, .nav-tabs.nav-stacked > li > a:hover .progress .progressbar-success, .nav-tabs.nav-stacked > li > a:hover .progress .progressbar-danger  {
+body .container {
+// TODO: .nav-tabs.nav-stacked > li > a:hover OR .nav-tabs.nav-stacked > li:hover?
+.nav-tabs.nav-stacked > li > a:hover .progress {
+  .progressbar-warning, .progressbar-success, .progressbar-danger  {
 	opacity:1;
 	filter:alpha(opacity=100); /* For IE8 and earlier */
-	
+  }
 }
  .progressbar-warning:hover,.progressbar-success:hover, .progressbar-danger:hover {
 	border: 1px solid #555;
@@ -1791,6 +1922,7 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
   	height:30px;
   	line-height:30px;  
 	}
+}
 }
 
 #chevron {

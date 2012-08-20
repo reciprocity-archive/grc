@@ -48,6 +48,17 @@
 	}
 }
 
+.gcmsicon-blank { 
+	background-image: none;
+	display: inline-block;
+	width: 18px;
+	height: 18px;
+	margin:0;
+	padding:0;
+	background-position: 0px 0px;
+	background-repeat: no-repeat;
+}
+
 .gcmsicon-arrowleft-black { 
 	background-image: url("../images/icons/icon-arrowleft-black.png");
 	display: inline-block;
