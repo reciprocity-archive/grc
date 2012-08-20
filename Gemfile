@@ -5,7 +5,7 @@ if File.exist? 'Gemfile.local'
   instance_eval(Bundler.read_file('Gemfile.local'), 'Gemfile.local', 1)
 end
 
-RAILS_VERSION = '= 3.2.5'
+RAILS_VERSION = '= 3.2.8'
 
 #gem 'gdata-ruby-util', '1.1.2'
 gem 'gdata_19', '~> 1.1.5', :require => 'gdata'
