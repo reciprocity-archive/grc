@@ -41,32 +41,36 @@ class MappingController < ApplicationController
         return
       end
       ccontrol = Control.find(params[:ccontrol])
-      rcontrol =
-        Control.create(:title => section.title,
-                       :slug => section.slug + "-" + ccontrol.slug,
-                       :program => section.program,
-                       :technical => ccontrol.technical,
-                       :fraud_related => ccontrol.fraud_related,
-                       :frequency => ccontrol.frequency,
-                       :frequency_type => ccontrol.frequency_type,
-                       :assertion => ccontrol.assertion,
-                       :description => "Placeholder",
-                      )
+      rcontrol = Control.new(
+        :title => section.title,
+        :slug => section.slug + "-" + ccontrol.slug,
+        :technical => ccontrol.technical,
+        :fraud_related => ccontrol.fraud_related,
+        :frequency => ccontrol.frequency,
+        :frequency_type => ccontrol.frequency_type,
+        :assertion => ccontrol.assertion,
+        :description => "Placeholder"
+      )
+      rcontrol.program = section.program
+      rcontrol.save
+
       rcontrol_id = rcontrol.id
-      ControlControl.create(:implemented_control_id => rcontrol.id,
-                            :control_id => ccontrol.id)
+      ControlControl.create(:implemented_control => rcontrol,
+                            :control => ccontrol)
       notice = notice + "Created regulation control #{rcontrol.slug}. "
+    else
+      rcontrol = Control.find(rcontrol_id)
     end
 
     if params[:u]
       ControlSection.where(:section_id => section.id,
-                           :control_id => rcontrol_id).each {|r|
+                           :control_id => rcontrol.id).each {|r|
         r.destroy
       }
       notice = notice + "Unmapped regulation control. "
     else
-      ControlSection.create(:section_id => section.id,
-                            :control_id => rcontrol_id)
+      ControlSection.create(:section => section,
+                            :control => rcontrol)
       notice = notice + "Mapped regulation control. "
     end
 
@@ -76,15 +80,18 @@ class MappingController < ApplicationController
   end
 
   def map_ccontrol
+    rcontrol = Control.find(params[:rcontrol])
+    ccontrol = Control.find(params[:ccontrol])
+
     if params[:u]
-      ControlControl.where(:implemented_control_id => params[:rcontrol],
-                           :control_id => params[:ccontrol]).each {|r|
+      ControlControl.where(:implemented_control_id => rcontrol.id,
+                           :control_id => ccontrol.id).each {|r|
         r.destroy
       }
       flash[:notice] = "Unmapped company control"
     else
-      ControlControl.create(:implemented_control_id => params[:rcontrol],
-                            :control_id => params[:ccontrol])
+      ControlControl.create(:implemented_control => rcontrol,
+                            :control => ccontrol)
       flash[:notice] = "Mapped company control"
     end
 
@@ -127,17 +134,17 @@ class MappingController < ApplicationController
   def buttons
     if !params[:rcontrol].blank?
       reg_exists =
-        params[:section] && params[:rcontrol] && 
+        params[:section] && params[:rcontrol] &&
         ControlSection.exists?(:section_id => params[:section],
                                :control_id => params[:rcontrol])
     else
-      reg_exists = 
-        params[:section] && params[:ccontrol] && 
+      reg_exists =
+        params[:section] && params[:ccontrol] &&
         Control.joins(:implementing_controls).joins(:sections).
         exists?(:sections => {:id => params[:section]}, :implementing_controls_controls => {:id => params[:ccontrol]})
     end
     com_exists =
-      params[:rcontrol] && params[:ccontrol] && 
+      params[:rcontrol] && params[:ccontrol] &&
       ControlControl.exists?(:implemented_control_id => params[:rcontrol],
                              :control_id => params[:ccontrol])
     respond_with do |format|
