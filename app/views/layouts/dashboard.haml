@@ -48,29 +48,29 @@
           .flash!=[:error, :warning, :notice].map { |type| content_tag(:div, flash[type], :class => type) if flash[type] }.join
       =yield
 
-      -##footer
-        .block
-          %p
-            =CMS_CONFIG['COMPANY']
-            Confidential.
-            Copyright &copy;
-            =Time.now.year
-            =CMS_CONFIG['COMPANY']
+    .gcms-footer
+      .block
+        %p
+          =CMS_CONFIG['COMPANY']
+          Confidential.
+          Copyright &copy;
+          =Time.now.year
+          =CMS_CONFIG['COMPANY']
 
-      #help-modal.modal.hide.fade
-        .modal-header
-          %a.close{"data-dismiss" => "modal"} x
-          %h1 This content/function is coming soon
-        .modal-body
-          %p We are working on it!
-        .modal-footer
-          %a.close{"data-dismiss" => "modal", :href => "#"} Close
+    #help-modal.modal.hide.fade
+      .modal-header
+        %a.close{"data-dismiss" => "modal"} x
+        %h1 This content/function is coming soon
+      .modal-body
+        %p We are working on it!
+      .modal-footer
+        %a.close{"data-dismiss" => "modal", :href => "#"} Close
 
-      #comingsoon-modal.modal.hide.fade
-        .modal-header
-          %a.close{"data-dismiss" => "modal"} x
-          %h1 This content/function is coming soon
-        .modal-body
-          %p We are working on it!
-        .modal-footer
-          %a.close{"data-dismiss" => "modal", :href => "#"} Close
+    #comingsoon-modal.modal.hide.fade
+      .modal-header
+        %a.close{"data-dismiss" => "modal"} x
+        %h1 This content/function is coming soon
+      .modal-body
+        %p We are working on it!
+      .modal-footer
+        %a.close{"data-dismiss" => "modal", :href => "#"} Close

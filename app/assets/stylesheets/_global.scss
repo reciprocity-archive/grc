@@ -1,0 +1,26 @@
+
+body {
+  background: url("../images/navbkgd.png") left top repeat-x, url("../images/bkgd.gif") left top repeat;
+  padding-top: 135px; /* 160px to make the container go all the way to the bottom of the topbar */
+  font-family: $font-family;
+  height:100%;
+}
+
+a {
+  color:$linkColor;
+  &:hover {
+    text-decoration:none;
+  }
+  &.underline {
+    text-decoration:underline;
+  }
+}
+
+p {
+  font-family: $font-family;
+  color:$textColor;
+}
+
+td {
+  vertical-align:top;
+}

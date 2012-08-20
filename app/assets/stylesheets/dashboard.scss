@@ -5,8 +5,15 @@
 @import "jquery-ui";
 @import "bootstrap";
 @import "compass/css3";
-@import "setup";
-@import "gcms";
+
+// editable styles start here
+
+  // general setup
+  @import "setup";
+  @import "global";
+  @import "gcms";
+
+
 
 .flare {
   @include transition(background-color 2s ease-out);

@@ -9,27 +9,6 @@
 * Fade transitions -since they can't be reset only overwritten
  */
 
-body {
-  background: url("../images/navbkgd.png") left top repeat-x, url("../images/bkgd.gif") left top repeat;
-  padding-top: 135px; /* 160px to make the container go all the way to the bottom of the topbar */
-  font-family: $font-family;
-  height:100%;
-}
-
-a {
-  color:$linkColor;
-  &:hover {
-    text-decoration:none;
-  }
-  &.underline {
-    text-decoration:underline;
-  }
-}
-
-p {
-  font-family: $font-family;
-  color:$textColor;
-}
 
 .editable {
   padding:5px;
@@ -37,19 +16,13 @@ p {
   background:#fff;
 }
 
-td {
-  vertical-align:top;
-}
 
 /*Required for bootstrap to not break firefox */
-
 .row-fluid [class*="span"] {
   /* min-height:10px; /* This fixes something for Dan, but breaks modal input boxs for joe. Discuss! */
 }
 
-
 // Static columns for pages that should not have responsive design - ex. Reg Mapper
-
 .row-static {
   margin:0 auto 0 auto;
   float:none;
@@ -86,23 +59,6 @@ td {
   // bootstrap.css line 4194 overwriting, it would be better to completely remove them
   @include transition(opacity 0s linear, top 0s ease-out);
 }
-
-.gcms-footer {
-  padding: 14px 15px 15px;
-  margin-bottom: 0;
-  text-align: right;
-  background-color: #f5f5f5;
-  border-top: 1px solid #ddd;
-  @include border-radius(0 0 6px 6px);
-  @include box-shadow(inset 0 1px 0 #fff);
-  *zoom: 1;
-  position:absolute;
-  display:inline;
-  bottom:20px;
-  height: 3em;
-  right:0px;
-}
-
 
 .WidgetBox {
   color:$textColor;
@@ -1987,6 +1943,16 @@ body .container {
 .controllist {
   width:24%;
 }
+
+// footer 
+.gcms-footer {
+  padding: 14px 0 0 0;
+  margin-bottom: 0;
+  text-align: center;
+  *zoom: 1;
+  height: 3em;
+}
+
 
 /* GCMS open-source icons */
 @import "icons";
