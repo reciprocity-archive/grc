@@ -24,3 +24,26 @@ p {
 td {
   vertical-align:top;
 }
+
+// common classes
+
+.fltlft {
+  float: left !important;
+}
+
+.txtlft {
+  text-align:left !important;
+}
+
+.fltrt {
+  float: right !important;
+}
+
+.txtrt {
+  text-align:right !important;
+}
+
+.fltnone {
+  float: none !important;
+  text-align:center !important;
+}

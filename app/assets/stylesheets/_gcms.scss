@@ -137,7 +137,7 @@
 */
 
 .WidgetBoxContent {
-  background: whiteSmoke;
+  background: #f5f5f5;
   border: $lightGray 1px solid;
   padding: 8px;
   margin: 0;
@@ -184,26 +184,6 @@
   margin-right: 0px;
 }
 
-.fltlft {
-  float: left !important;
-}
-
-.txtlft {
-  text-align:left !important;
-}
-
-.fltrt {
-  float: right !important;
-}
-
-.txtrt {
-  text-align:right !important;
-}
-
-.fltnone {
-  float: none !important;
-  text-align:center !important;
-}
 
 /* Tabs */
 .nav-tabs > .active > a, .nav-tabs > .active > a:hover {
@@ -219,25 +199,41 @@
   border-bottom: 10px solid #43C2C7;
 }
 
-.subsystemslot {
-  // TODO: float needed?
-  // float:left;
+// ----- SLOTS ----- //
+
+.slot {
+  border: 1px solid $borderDefault;
+  display:inline-block;  
+  float:left;
   height:30px;
-  display:inline-block;
+  margin-top: 2px;
+  overflow: hidden;
+  padding: 5px 6px 0 6px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   @include box-sizing(border-box);
-  // TODO: padding needed?
-  /*padding:7px 6px 6px 6px;*/
-  background: #fefcea; /* Old browsers */
-  @include background-image(linear-gradient(top,  #fefcea 0%, #ede9ce 100%));
   &:hover {
-    color:$textColor;
-    // TODO: #3badb3 or #e1e1e1 ?
-  border: 1px solid #3badb3;
-  // TODO: margin-top needed?
-  // margin-top: 2px;
-    cursor:pointer;
+    cursor: pointer;
   }
+  &.subsystemslot {
+    display:inline-block;
+    @include box-sizing(border-box);
+    background: #fefcea;
+    @include background-image(linear-gradient(top,  #fefcea 0%, #ede9ce 100%));
+    &:hover {
+      color:$textColor;
+      border: 1px solid #3badb3;
+    }
+  }
+
+
 }
+
+
+
+
+
+
 
 .regulationslot {
   color:$textColor;
@@ -252,21 +248,6 @@
   }
 }
 
-.slot {
-  padding: 5px 6px 0 6px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  float:left;
-  height:28px;
-  display:inline-block;
-  @include box-sizing(border-box);
-  border: 1px solid #e1e1e1;
-  margin-top: 2px;
-  &:hover {
-    cursor: pointer;
-  }
-}
 
 .slot > .btn {
   /*float: right;*/
@@ -293,16 +274,17 @@
 
 .selected {
   float:left;
-  height:30px;
   display:inline-block;
   @include box-sizing(border-box);
   padding:6px 6px 6px 8px;
   color:$white;
   background: #43c2c7; /* Old browsers */
-  @include background-image(linear-gradient(top,  #43c2c7 0%, #0fb4e7 100%));
-  border: 1px solid #e1e1e1;
+  @include background-image(linear-gradient(top,  lighten(#43c2c7,10%) 0%, darken(#43c2c7,10%) 100%));
+  border: 1px solid $borderDefault;
   &:hover {
     background: #227b84; /* Old browsers */
+    @include background-image(linear-gradient(top,  darken(#43c2c7,10%) 0%, lighten(#43c2c7,10%) 100%));
+    color:$white;
   }
 }
 
@@ -1212,7 +1194,7 @@ margin-top:7px;
   color:$textColor;
   background: $white; /* Old browsers */
   @include background-image(linear-gradient(top,  $white 0%, #eef4ed 70%, #edebe6 100%, #f6f6f6 100%));
-  border: 1px solid #e1e1e1;
+  border: 1px solid $borderDefault;
 }
 
 .forminputfail {
@@ -1558,7 +1540,7 @@ a.controllistRM {
   background: $white; /* Old browsers */
   vertical-align:center;
   @include background-image(linear-gradient(top,  $white 0%, #f6f6f6 100%));
-  border: 1px solid #e1e1e1;
+  border: 1px solid $borderDefault;
 }
 
 .controlSlot {
@@ -1573,7 +1555,7 @@ a.controllistRM {
   background: #ffffff; /* Old browsers */
   vertical-align:center;
   @include background-image(linear-gradient(top,  $white 0%, #f6f6f6 100%));
-  border: 1px solid #e1e1e1;
+  border: 1px solid $borderDefault;
 }
 
 .controlSlot:hover,
@@ -1833,7 +1815,7 @@ body .container {
 
 .itemlist {
   height:230px;
-  border: 1px solid #e1e1e1;
+  border: 1px solid $borderDefault;
   padding:4px;
   overflow-y:auto;
   li {
