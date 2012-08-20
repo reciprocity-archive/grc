@@ -47,3 +47,11 @@ td {
   float: none !important;
   text-align:center !important;
 }
+
+.nominheight {
+  min-height: 5px !important;
+}
+.noheight {
+  height:0px !important;
+  line-height:0px !important;
+}

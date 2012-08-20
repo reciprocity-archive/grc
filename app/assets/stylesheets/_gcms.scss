@@ -152,7 +152,7 @@
   @include border-radius(0px);
 }
 
-/* Width attriutes that should be applied to columns only - NOT WIDGETS */
+/* Width attributes that should be applied to columns only - NOT WIDGETS */
 .doublewidth {
   width:300px; /* Sets the width of a widgettitle (or anything) with room for one or two icons */
 }
@@ -165,8 +165,8 @@
 
 .singleColumn {
   width: 373px;
-  padding: 0 0 0 0; /* This is a column, so no padding (let the Widget do it) */
-  margin:0 0 0 0;
+  padding:0; /* This is a column, so no padding (let the Widget do it) */
+  margin:0;
   float:left;
   display:inline-block;
 }
@@ -206,87 +206,65 @@
   display:inline-block;  
   float:left;
   height:30px;
+  line-height:30px;
   margin-top: 2px;
   overflow: hidden;
-  padding: 5px 6px 0 6px;
+  padding: 0 0 0 6px;
   text-overflow: ellipsis;
   white-space: nowrap;
   @include box-sizing(border-box);
   &:hover {
     cursor: pointer;
+    text-decoration:none;
   }
   &.subsystemslot {
-    display:inline-block;
-    @include box-sizing(border-box);
     background: #fefcea;
     @include background-image(linear-gradient(top,  #fefcea 0%, #ede9ce 100%));
     &:hover {
-      color:$textColor;
-      border: 1px solid #3badb3;
+      border: 1px solid $borderDefaultHover;
     }
   }
-
-
-}
-
-
-
-
-
-
-
-.regulationslot {
-  color:$textColor;
-  background: $white; /* Old browsers */
-  @include background-image(linear-gradient(top,  $white 0%, #eef4ed 70%, #edebe6 100%, #f6f6f6 100%));
-  &:hover{
-    background: #eeeeee; /* Old browsers */
-    @include background-image(linear-gradient(top,  #eeeeee 0%, #f1f1f1 50%, #e1e1e1 100%, #f6f6f6 100%));
-    border: 1px solid #3badb3;
-    /*cursor:pointer;
-    /*text-decoration: none;*/
+  &.regulationslot {
+    background: $white; /* Old browsers */
+    @include background-image(linear-gradient(top,  $white 0%, #eef4ed 70%, #edebe6 100%, #f6f6f6 100%));
+    &:hover {
+      background: #eeeeee; /* Old browsers */
+      border: 1px solid $borderDefaultHover;
+      @include background-image(linear-gradient(top,  #eeeeee 0%, #f1f1f1 50%, #e1e1e1 100%, #f6f6f6 100%));
+    }
   }
-}
-
-
-.slot > .btn {
-  /*float: right;*/
-  margin-top: -4px;
-  //TODO: needed?
-  margin-left: 6px;
-  //TODO: needed?
-  margin-right: 6px;
-}
-
-.controlslot {
-  color:$textColor;
-  background: $white; /* Old browsers */
-  @include background-image(linear-gradient(top,  $white 0%, #eef4ed 70%, #edebe6 100%, #f6f6f6 100%));
-  &:hover {
-    background: #eeeeee; /* Old browsers */
-    @include background-image(linear-gradient(top,  #eeeeee 0%, #f1f1f1 50%, #e1e1e1 100%, #f6f6f6 100%));
-    border: 1px solid #3badb3;
+  &.controlslot {
+    background: $white; /* Old browsers */
+    @include background-image(linear-gradient(top,  $white 0%, #eef4ed 70%, #edebe6 100%, #f6f6f6 100%));
+    &:hover {
+      background: #eeeeee; /* Old browsers */
+      border: 1px solid $borderDefaultHover;
+      @include background-image(linear-gradient(top,  #eeeeee 0%, #f1f1f1 50%, #e1e1e1 100%, #f6f6f6 100%));
+    }  
   }
-  #category_controls & { // fix for controls accordion
-    min-height:23px;
-  }
-}
-
-.selected {
-  float:left;
-  display:inline-block;
-  @include box-sizing(border-box);
-  padding:6px 6px 6px 8px;
-  color:$white;
-  background: #43c2c7; /* Old browsers */
-  @include background-image(linear-gradient(top,  lighten(#43c2c7,10%) 0%, darken(#43c2c7,10%) 100%));
-  border: 1px solid $borderDefault;
-  &:hover {
-    background: #227b84; /* Old browsers */
-    @include background-image(linear-gradient(top,  darken(#43c2c7,10%) 0%, lighten(#43c2c7,10%) 100%));
+  &.selected {
     color:$white;
+    background: #43c2c7; /* Old browsers */
+    border: 1px solid $borderDefault;
+    @include background-image(linear-gradient(top,  lighten(#43c2c7,10%) 0%, darken(#43c2c7,10%) 100%));
+    &:hover {
+      color:$white;
+      background: #227b84; /* Old browsers */
+      @include background-image(linear-gradient(top,  darken(#43c2c7,10%) 0%, lighten(#43c2c7,10%) 100%));
+    }  
   }
+
+  .btn {
+    /*float: right;*/
+    margin-top: -4px;
+    //TODO: needed?
+    margin-left: 6px;
+    //TODO: needed?
+    margin-right: 6px;
+  }
+  
 }
+
 
 .statusblue {
   background:#40bac0;
@@ -388,12 +366,12 @@
 }
 
 .nav-tabs.nav-stacked > li:first-child > a:hover {
-  border: 1px solid #3badb3;
+  border: 1px solid $borderDefaultHover;
   @include border-radius(4px 4px 0 0);
 }
 
 .nav-tabs.nav-stacked > li > a:hover {
-  border: 1px solid #3badb3;
+  border: 1px solid $borderDefaultHover;
 }
 
 .nav-tabs.nav-stacked > li > a {
@@ -1044,7 +1022,7 @@ ul.slugtree {
   width:18px;
   height:18px;
   padding: 0 0 0 0;
-  margin:0 0 0 0;
+  margin:6px 0 0 0;
   cursor:pointer;
   &.in {
     /* for firefox, safari, chrome, etc. */
@@ -1292,7 +1270,6 @@ margin-top:7px;
   position:relative;
   top:-3px;
   right: -4px;
-
   font-size: 13px;
   line-height: 13px;
   *line-height: 13px;
@@ -1311,8 +1288,7 @@ margin-top:7px;
 }
 
 .widgetbtn {
-  //TODO: needed?
-  //margin-left: .3em;
+  margin-right: .3em;
   font-size: 13px;
   line-height: 18px;
   display: inline-block;
@@ -1333,7 +1309,8 @@ margin-top:7px;
 .slot > .widgetbtn {
   /* Needed to keep buttons on top of truncated text in slots */
   position: relative;
-  top: -3px;
+  margin-top:2px;
+
 }
 
 
@@ -1520,13 +1497,6 @@ a.controllistRM {
   font-size:10px;
 }
 
-.nominheight {
-  min-height: 5px !important;
-}
-.noheight {
-  height:0px !important;
-  line-height:0px !important;
-}
 
 .singlecontrolSlot {
   width:100%;
@@ -1566,7 +1536,7 @@ a.controllistRM {
   background: #ffffff; /* Old browsers */
   vertical-align:center;
   @include background-image(linear-gradient(top,  $white 0%, #f6f6f6 100%));
-  border: 1px solid #3badb3;
+  border: 1px solid $borderDefaultHover;
   cursor: pointer;
 }
 
