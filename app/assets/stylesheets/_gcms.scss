@@ -37,16 +37,6 @@ p {
   background:#fff;
 }
 
-.header:before,
-.header:after {
-  display: table;
-  content: "";
-}
-
-.header:after {
-  clear: both;
-}
-
 td {
   vertical-align:top;
 }
@@ -554,7 +544,6 @@ td {
 .location {
   color:#5c5c5c;
   display: table;
-  overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
@@ -757,7 +746,6 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
   height:53px;
   padding: 5px 0px 0px 5px;
   background-color: #ffffff;
-  @include box-shadow(0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1));
 }
 
 .fixed-top .inner,
