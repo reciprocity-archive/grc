@@ -17,7 +17,7 @@
       =walk_slug_tree(Program.slugtree(system.controls)) do |item, step|
         .row-fluid
           .span12
-            .slot.controlslot.span12{ :'data-toggle' => 'collapse', :'data-target' => "#content_item_#{item.id}" }
+            .span12.slot.controlslot{ :'data-toggle' => 'collapse', :'data-target' => "#content_item_#{item.id}" }
               .expander
               %a.widgetbtn.fltrt{ :href => flow_control_path(item) }
                 %i.gcmsicon-arrowright-grey

@@ -4,7 +4,7 @@
   %li.system-node
     .row-fluid
       .span12
-        %a.slot.controlslot.span12{ :'data-toggle' => 'collapse', :'data-target' => "#content_system_#{item.id}" }
+        %a.span12.slot.controlslot{ :'data-toggle' => 'collapse', :'data-target' => "#content_system_#{item.id}" }
           /-if !system.description.blank?
           .expander{ :class => expanded && 'in' }
           %span.prefix=item.slug
@@ -19,7 +19,7 @@
       =walk_slug_tree(Program.slugtree(item.implemented_controls)) do |item, step|
         .row-fluid
           .span12
-            %a.slot.regulationslot.span9{ :'data-toggle' => 'collapse', :'data-target' => "#content_item_#{item.id}" }
+            %a.span9.slot.regulationslot{ :'data-toggle' => 'collapse', :'data-target' => "#content_item_#{item.id}" }
               -if !item.description.blank?
                 .expander
               %span.prefix=item.slug

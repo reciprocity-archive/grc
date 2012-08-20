@@ -35,38 +35,39 @@
     font-size: 13px;
     line-height: 15px;
   }
-}
-
-.WidgetBoxHeading {
-  background-color:#adb1c2;
-  border:1px solid #b7b8b6;
-  font-weight:bold;
-  text-decoration:none;
-  text-shadow:1px 1px 0px #7c8076;
-  height:24px;
-  font-weight: 400;
-  padding: 5px;
-  margin:0 0 0 0;
-  color: $white;
-  text-shadow: 0px 1px 1px #000;
-  @include box-shadow(inset 0px 1px 0px 0px #dbe0d7);
-  @include background-image(linear-gradient(center top, #828a97 5%, #4c525b 100% ));
-  @include border-radius(4px 4px 0px 0px);
-  input {
-    @include border-radius(3px);
-    display: inline-block;
-    vertical-align: top;
-    width: 180px;
-    height: 13px;
-    padding: 4px;
-    margin: 0px 0px 0px 0px;
-    font-size: 12px;
-    line-height: 15px;
-    color: #555;
-    background-color: $white;
-    border: 1px solid $lightGray;
+  .WidgetBoxHeading {
+    background-color:#adb1c2;
+    border:1px solid #b7b8b6;
+    font-weight:bold;
+    text-decoration:none;
+    text-shadow:1px 1px 0px #7c8076;
+    height:24px;
+    font-weight: 400;
+    padding: 5px;
+    margin:0 0 0 0;
+    color: $white;
+    text-shadow: 0px 1px 1px #000;
+    @include box-shadow(inset 0px 1px 0px 0px #dbe0d7);
+    @include background-image(linear-gradient(center top, #828a97 5%, #4c525b 100% ));
+    @include border-radius(4px 4px 0px 0px);
+    input {
+      display: inline-block;
+      vertical-align: top;
+      width: 80px;
+      height: 13px;
+      padding: 4px;
+      margin: 0px 0px 0px 0px;
+      font-size: 12px;
+      line-height: 15px;
+      color: #555;
+      background-color: $white;
+      border: 1px solid $lightGray;
+      @include border-radius(3px);
+    }
   }
 }
+
+
 
 .subtleGreen {
   background: #75997e; /* Old browsers */
@@ -86,7 +87,7 @@
 .WidgetTitle {
   padding: 2px 5px 4px 3px;
   /* width:130px; /* This is set to 130 because inside regmapper thats all you will get */
-  font-weight: 400;
+  font-weight: normal;
   line-height:24px;
   font-size:16px;
   display:inline;
