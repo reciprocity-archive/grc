@@ -1712,10 +1712,9 @@ body .container {
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
   white-space: nowrap;
   vertical-align: baseline;
-  /* background-color: rgba(255, 255, 255, 0.38); */
   margin: 2px 0 4px 4px;
   text-align: left;
-  width:89%;
+  width:325px; /*This is set to position right side label correctly, upgrade to responsive in future */
   z-index: 50;
   pointer-events: none;
 }
@@ -1723,8 +1722,7 @@ body .container {
 .barCount {
   display: inline;
   position: absolute;
-  right:0px;
-  line-height: inherit;
+  right:18px;
   color: #eee;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
   white-space: nowrap;
