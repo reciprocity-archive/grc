@@ -10,15 +10,15 @@ describe Admin::AccountsController do
 
     # For use by authorized_controller tests
     @model = Program
-    @show_obj = @account
-    @login_role = 'superuser'
+    @object = @account
+    @login_role = :superuser
   end
 
   it_behaves_like "an authorized controller"
 
   describe "superuser" do
     before :each do
-      login({}, { :role => 'superuser' })
+      login({}, { :role => :superuser })
     end
 
     describe "PUT 'update'" do

@@ -10,13 +10,24 @@ describe ProgramsController do
 
     # For use by authorized_controller tests
     @model = Program
-    @show_obj = @reg
-    @login_role = 'admin'
+    @object = @reg
   end
 
-  it_behaves_like "an authorized controller"
+  context "authorization" do
+    it_behaves_like "an authorized create"
+    it_behaves_like "an authorized new"
+    it_behaves_like "an authorized read", ['show',
+                                           'tooltip',
+                                           'controls',
+                                           'sections',
+                                           'section_controls',
+                                           'control_sections',
+                                           'category_controls']
+    it_behaves_like "an authorized update", ['edit', 'update']
+    it_behaves_like "an authorized action", ['import'], 'update_program'
+  end
 
-  context "authorized" do
+  context "show" do
     before :each do
       login({}, { :role => 'admin' })
       @ctl2 = FactoryGirl.create(:control, :title => 'Control 2', :slug => 'CTL2', :description => 'x', :is_key => true, :fraud_related => false, :program => @creg)
@@ -30,7 +41,7 @@ describe ProgramsController do
       @sec3.save
     end
 
-    it "shows stats" do
+    it "gets the correct stats" do
       get 'show', :id => @reg.id
       stats = assigns(:stats)
       stats[:sections_count].should eq(3)
@@ -39,6 +50,39 @@ describe ProgramsController do
       stats[:sections_na_count].should eq(0)
       stats[:controls_count].should eq(3)
       stats[:controls_parented_count].should eq(1)
+    end
+  end
+
+  context "update" do
+    it "should properly validate and update the program"
+  end
+
+  context "non-CRUD" do
+    before :each do
+      login({}, {:role => 'admin'})
+    end
+
+    context "sections" do
+      it "should show the right associated sections"
+      it "should search properly"
+    end
+
+    context "controls" do
+      it "should show the right associated sections"
+      it "should search properly"
+    end
+
+
+    context "category_controls" do
+      it "should display the right categories"
+    end
+
+    context "section_controls" do
+      it "should do some tests"
+    end
+
+    context "control_sections" do
+      it "should show the right sections"
     end
   end
 end

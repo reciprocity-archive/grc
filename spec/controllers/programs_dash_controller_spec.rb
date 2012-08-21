@@ -6,8 +6,8 @@ describe ProgramsDashController do
   include BaseObjects
 
   before :each do
-    Account.create({:email => 'owner1@t.com', :password => 'owner1', :password_confirmation => 'owner1', :role => :owner}, :without_protection => true)
-    Account.create({:email => 'owner2@t.com', :password => 'owner2', :password_confirmation => 'owner2', :role => :owner}, :without_protection => true)
+    Account.create({:email => 'owner1@t.com', :password => 'owner1', :password_confirmation => 'owner1', :role => :user}, :without_protection => true)
+    Account.create({:email => 'owner2@t.com', :password => 'owner2', :password_confirmation => 'owner2', :role => :user}, :without_protection => true)
     prog = Program.create(:title => 'Reg 1', :slug => 'REG1')
 
     (2..10).each do |ind|
@@ -17,11 +17,11 @@ describe ProgramsDashController do
     # Set up program owners
     @o1 = Account.find_by_email('owner1@t.com')
     @p1 = Program.find_by_slug('REG1')
-    ObjectPerson.create(:person => @o1.person, :personable => @p1, :role => 'owner')
+    ObjectPerson.create(:person => @o1.person, :personable => @p1, :role => :owner)
 
     @o2 = Account.find_by_email('owner2@t.com')
     @p2 = Program.find_by_slug('REG2')
-    ObjectPerson.create(:person => @o2.person, :personable => @p2, :role => 'owner')
+    ObjectPerson.create(:person => @o2.person, :personable => @p2, :role => :owner)
   end
 
   it_behaves_like "an authorized controller"
@@ -29,6 +29,7 @@ describe ProgramsDashController do
 
   context "owner" do
     it "shows the right programs" do
+      pending "enable full authorization"
       @current_user = @o1
       login({}, {})
 

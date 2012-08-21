@@ -6,7 +6,7 @@ module AuthoredModel
   # for versioning so we don't create no-change versions when nothing was changed.
   def authored_update(author, params, mass_assign = true)
     if (!params)
-      # Makes testing easier.
+      # Early out if there are no changes. Makes testing easier.
       return true
     end
     tparams = {}

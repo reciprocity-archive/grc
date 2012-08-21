@@ -8,7 +8,7 @@ describe Admin::DocumentsController do
   before :each do
     create_base_objects
     @model = Document
-    @show_obj = @doc
+    @object = @doc
     @index_objs = [@doc]
   end
 

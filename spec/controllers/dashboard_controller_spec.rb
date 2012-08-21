@@ -13,15 +13,7 @@ describe DashboardController do
     @index_objs = [@bp]
   end
 
-  it_behaves_like "an authorized controller"
-
-  #describe "GET 'index' without authorization" do
-  #  it "fails as guest" do
-  #    login({}, {})
-  #    get 'index'
-  #    response.should be_redirect
-  #  end
-  #end
+  it_behaves_like "an admin controller"
 
   context "authorized" do
     before :each do
@@ -32,14 +24,6 @@ describe DashboardController do
       session[:cycle_id] = @cycle.id
     end
 
-    #describe "GET 'index'" do
-    #  it "returns http success" do
-    #    get 'index'
-    #    #debugger
-    #    response.should be_success
-    #    assigns(:biz_processes).should eq([@bp])
-    #  end
-    #end
 
     describe "POST 'index'" do
       it "redirects" do

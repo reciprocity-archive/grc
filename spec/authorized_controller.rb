@@ -1,8 +1,29 @@
 # Test some of the authorization basics for resource controllers.
 
+#
+# Usage:
+#
+# require 'authorized_controller'
+#
+# before :each do
+#   @model = <model> # The model that you're testing authorization for, e.g. Account
+#   @object = <obj> # An instance you want to test read and update actions against
+#   @index_objs = [<obj1>,<obj2>] # A list of objects that should be visible when
+#                                 # an authenticated 'index' action is performed
+#   @create_params = {} # Parameters to pass into the authorized create test
+# end
+#
+# it_behaves_like "an authorized create"
+# it_behaves_like "an authorized new"
+# it_behaves_like "an authorized index"
+# it_behaves_like "an authorized read", [<action1>, <action2>] # actions are optional, defaults to 'show'
+# it_behaves_like "an authorized update", [<action1>, <action2>] # actions are optional, defaults to 'edit'
+# it_behaves_like "an authorized action", [<action1>, <action2>], <ability> # Tests basic authorization for any action
+
 # FIXME: Should (based on parameters) automatically test
 # multiple login roles.
 
+# Helper functions for specs, makes it easier to write specs for authorization
 class BeSuccessOrRedirect
   def matches?(target)
     @target = target
@@ -63,113 +84,6 @@ def be_unauthenticated
   BeUnauthenticated.new
 end
 
-shared_examples_for "an admin controller" do
-  context "non-admin" do
-    before :each do
-      login({}, {})
-    end
-    if described_class.action_methods.include? 'index'
-      it "fails as non-admin" do
-        get 'index'
-
-        response.should be_unauthorized
-      end
-
-      if described_class.action_methods.include? 'show'
-        it "should fail for show" do
-          get 'show', :id => @show_obj.id
-
-        response.should be_unauthorized
-        end
-      end
-    end
-  end
-
-  context "admin" do
-    before :each do
-      login({}, { :role => @login_role || 'admin' })
-    end
-
-    if described_class.action_methods.include? 'index'
-      describe "GET 'index'" do
-        it "returns http success" do
-          get 'index'
-          response.should be_success_or_redirect
-        end
-      end
-    end
-  end
-end
-
-shared_examples_for "an authorized read" do |actions|
-  actions.each do |action|
-    if described_class.action_methods.include? action
-      context "not logged in" do
-        it "should fail for #{action}" do
-          get action, :id => @show_obj.id
-          response.should be_unauthenticated
-        end
-      end
-
-      context "logged in w/o read" do
-        before :each do
-          login({}, {})
-        end
-        it "should be unauthorized for #{action}" do
-          get action, :id => @show_obj.id
-          response.should be_unauthorized
-        end
-      end
-
-      context "logged in with read" do
-        before :each do
-          login({}, {:role => :read})
-        end
-
-        it "should be authorized w/ read for #{action}" do
-          get action, :id => @show_obj.id
-          response.should be_success_or_redirect
-          assigns(@show_obj.class.table_name.singularize.to_sym).should eq(@show_obj)
-        end
-      end
-    end
-  end
-end
-
-shared_examples_for "an authorized update" do |actions|
-  actions.each do |action|
-    if described_class.action_methods.include? action
-      context "not logged in" do
-        it "is unauthorized for #{action}" do
-          get action, :id => @show_obj.id
-          response.should be_unauthenticated
-        end
-      end
-
-      context "logged in w/o update" do
-        before :each do
-          login({}, {})
-        end
-        it "is unauthorized for #{action}" do
-          get action, :id => @show_obj.id
-          response.should be_unauthorized
-        end
-      end
-
-      context "logged in w/ update" do
-        before :each do
-          login({}, {:role => :update})
-        end
-
-        it "updates for #{action}" do
-          put action, :id => @show_obj.id
-          response.should be_success_or_redirect
-          assigns(@show_obj.class.table_name.singularize.to_sym).should eq(@show_obj)
-        end
-      end
-    end
-  end
-end
 
 shared_examples_for "an authorized create" do
   context "not logged in" do
@@ -191,14 +105,16 @@ shared_examples_for "an authorized create" do
 
   context "logged in w/ create" do
     before :each do
-      login({}, {:role => :create})
+      login({}, {:role => 'create_' + @model.table_name.singularize})
     end
 
-    it "not unauthorized" do
-      post 'create'
+    it "authorizes and creates" do
+      post 'create', @model.table_name.singularize.to_sym => @create_params || {}
+
       # Note: The operation may still fail, just not due to
       # an authorization issue.
       response.should_not be_unauthorized
+      # FIXME: Should test for the existence of the new record
     end
   end
 end
@@ -223,14 +139,276 @@ shared_examples_for "an authorized new" do
 
   context "logged in w/ create" do
     before :each do
-      login({}, {:role => :create})
+      login({}, {:role => 'create_' + @model.table_name.singularize})
     end
 
-    it "not unauthorized" do
+    it "authorized and creates" do
       get 'new'
       # Note: The operation may still fail, just not due to
       # an authorization issue.
       response.should_not be_unauthorized
+      assigns(@model.table_name.singularize).class.should eq(@model)
+    end
+  end
+end
+
+shared_examples_for "an authorized read" do |actions|
+  if !actions
+    actions = ['show']
+  end
+  context "not logged in" do
+    actions.each do |action|
+      if described_class.action_methods.include? action
+        it "should fail for: #{action}" do
+          get action, :id => @object.id
+          response.should be_unauthenticated
+        end
+      end
+    end
+  end
+
+  context "logged in w/o read" do
+    before :each do
+      login({}, {})
+    end
+    actions.each do |action|
+      if described_class.action_methods.include? action
+        it "should be unauthorized for: #{action}" do
+          get action, :id => @object.id
+          response.should be_unauthorized
+        end
+      end
+    end
+  end
+
+  context "logged in with read" do
+    before :each do
+      login({}, {:role => 'read_' + @model.table_name.singularize})
+    end
+    actions.each do |action|
+      if described_class.action_methods.include? action
+        it "should be authorized w/ read for: #{action}" do
+          get action, :id => @object.id
+          response.should be_success_or_redirect
+          assigns(@object.class.table_name.singularize.to_sym).should eq(@object)
+        end
+      end
+    end
+  end
+end
+
+shared_examples_for "an authorized index" do
+  context "not logged in" do
+    it "should fail for: index" do
+      get 'index'
+      response.should be_unauthenticated
+    end
+  end
+
+  context "logged in w/o read" do
+    before :each do
+      login({}, {})
+    end
+
+    it "should be unauthorized for: index" do
+      get 'index'
+      response.should be_unauthorized
+    end
+  end
+
+  context "logged in with read" do
+    before :each do
+      login({}, {:role => 'read_' + @model.table_name.singularize})
+    end
+
+    it "should be authorized w/ read for: index" do
+      get 'index'
+      response.should be_success_or_redirect
+      assigns(@model.table_name.to_sym).should eq(@index_objs)
+    end
+  end
+end
+
+shared_examples_for "an authorized edit" do |actions|
+  if !actions
+    actions = ['edit']
+  end
+
+  context "not logged in" do
+    actions.each do |action|
+      if described_class.action_methods.include? action
+        it "should fail for: #{action}" do
+          get action, :id => @object.id
+          response.should be_unauthenticated
+        end
+      end
+    end
+  end
+
+  context "logged in w/o update" do
+    before :each do
+      login({}, {})
+    end
+    actions.each do |action|
+      if described_class.action_methods.include? action
+        it "should be unauthorized for: #{action}" do
+          get action, :id => @object.id
+          response.should be_unauthorized
+        end
+      end
+    end
+  end
+
+  context "logged in with update" do
+    before :each do
+      login({}, {:role => 'update_' + @model.table_name.singularize})
+    end
+    actions.each do |action|
+      if described_class.action_methods.include? action
+        it "should be authorized w/ edit for: #{action}" do
+          get action, :id => @object.id
+          response.should be_success_or_redirect
+          assigns(@object.class.table_name.singularize.to_sym).should eq(@object)
+        end
+      end
+    end
+  end
+end
+
+shared_examples_for "an authorized update" do |actions|
+  if !actions
+    actions = ['update']
+  end
+
+  context "not logged in" do
+    actions.each do |action|
+      if described_class.action_methods.include? action
+        it "is unauthorized for: #{action}" do
+          put action, :id => @object.id
+          response.should be_unauthenticated
+        end
+      end
+    end
+  end
+
+  context "logged in w/o update" do
+    before :each do
+      login({}, {})
+    end
+
+    actions.each do |action|
+      if described_class.action_methods.include? action
+        it "is unauthorized for: #{action}" do
+          put action, :id => @object.id
+          response.should be_unauthorized
+        end
+      end
+    end
+  end
+
+  context "logged in w/ update" do
+    before :each do
+      login({}, {:role => 'update_' + @model.table_name.singularize})
+    end
+    actions.each do |action|
+      if described_class.action_methods.include? action
+        it "updates for: #{action}" do
+          put action, :id => @object.id
+          response.should be_success_or_redirect
+          assigns(@object.class.table_name.singularize.to_sym).should eq(@object)
+        end
+      end
+    end
+  end
+end
+
+shared_examples_for "an authorized delete" do |actions|
+  if !actions
+    actions = ['destroy']
+  end
+
+  context "not logged in" do
+    actions.each do |action|
+      if described_class.action_methods.include? action
+        it "is unauthorized for: #{action}" do
+          get action, :id => @object.id
+          response.should be_unauthenticated
+        end
+      end
+    end
+  end
+
+  context "logged in w/o delete" do
+    before :each do
+      login({}, {})
+    end
+
+    actions.each do |action|
+      if described_class.action_methods.include? action
+        it "is unauthorized for: #{action}" do
+          get action, :id => @object.id
+          response.should be_unauthorized
+        end
+      end
+    end
+  end
+
+  context "logged in w/ delete" do
+    before :each do
+      login({}, {:role => 'delete_' + @model.table_name.singularize})
+    end
+    actions.each do |action|
+      if described_class.action_methods.include? action
+        it "updates for: #{action}" do
+          object_id = @object.id
+          put action, :id => @object.id
+          response.should be_success_or_redirect
+          @model.where(:id => object_id).count.should eq(0)
+        end
+      end
+    end
+  end
+end
+
+shared_examples_for "an authorized action" do |actions, ability|
+  context "not logged in" do
+    actions.each do |action|
+      if described_class.action_methods.include? action
+        it "is unauthorized for: #{action}" do
+          get action, :id => @object.id
+          response.should be_unauthenticated
+        end
+      end
+    end
+  end
+
+  context "logged in w/o #{ability}" do
+    before :each do
+      login({}, {})
+    end
+
+    actions.each do |action|
+      if described_class.action_methods.include? action
+        it "is unauthorized for: #{action}" do
+          get action, :id => @object.id
+          response.should be_unauthorized
+        end
+      end
+    end
+  end
+
+  context "logged in w/ #{ability}" do
+    before :each do
+      login({}, {:role => ability})
+    end
+    actions.each do |action|
+      if described_class.action_methods.include? action
+        it "succeeds for: #{action}" do
+          object_id = @object.id
+          get action, :id => @object.id
+          response.should_not be_unauthorized
+        end
+      end
     end
   end
 end
@@ -247,7 +425,7 @@ shared_examples_for "an authorized controller" do
     ['show', 'tooltip'].each do |action|
       if described_class.action_methods.include? action
         it "should fail for #{action}" do
-          get action, :id => @show_obj.id
+          get action, :id => @object.id
           response.should be_unauthenticated
         end
       end
@@ -271,12 +449,12 @@ shared_examples_for "an authorized controller" do
     if described_class.action_methods.include? 'show'
       describe "GET 'show'" do
         it "returns http success" do
-          get 'show', :id => @show_obj.id
+          get 'show', :id => @object.id
           response.should be_success_or_redirect
         end
         it "returns the right object" do
-          get 'show', :id => @show_obj.id
-          assigns(@show_obj.class.table_name.singularize.to_sym).should eq(@show_obj)
+          get 'show', :id => @object.id
+          assigns(@object.class.table_name.singularize.to_sym).should eq(@object)
         end
       end
     end
@@ -295,6 +473,44 @@ shared_examples_for "an authorized resource controller" do
       it "returns the right objects" do
         get 'index'
         assigns(@model.table_name.to_sym).should eq(@index_objs)
+      end
+    end
+  end
+end
+
+shared_examples_for "an admin controller" do
+  context "non-admin" do
+    before :each do
+      login({}, {})
+    end
+    if described_class.action_methods.include? 'index'
+      it "fails as non-admin" do
+        get 'index'
+
+        response.should be_unauthorized
+      end
+
+      if described_class.action_methods.include? 'show'
+        it "should fail for show" do
+          get 'show', :id => @object.id
+
+        response.should be_unauthorized
+        end
+      end
+    end
+  end
+
+  context "admin" do
+    before :each do
+      login({}, { :role => @login_role || 'admin' })
+    end
+
+    if described_class.action_methods.include? 'index'
+      describe "GET 'index'" do
+        it "returns http success" do
+          get 'index'
+          response.should be_success_or_redirect
+        end
       end
     end
   end

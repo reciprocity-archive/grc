@@ -7,7 +7,7 @@ class LinkAccountsAndPeople < ActiveRecord::Migration
 
   # Local models so that migration is safe
   class Account < ActiveRecord::Base
-    has_one :person
+    belongs_to :person
   end
 
   class Person < ActiveRecord::Base
@@ -17,8 +17,6 @@ class LinkAccountsAndPeople < ActiveRecord::Migration
     add_column :accounts, :person_id, :integer
     rename_column :people, :username, :email
 
-    # Create a bunch of fake models for the migration
-    #
     Account.reset_column_information
     Person.reset_column_information
 

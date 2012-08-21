@@ -9,7 +9,7 @@ describe Admin::SectionsController do
     create_base_objects
 
     @model = Section
-    @show_obj = @sec
+    @object = @sec
     @index_objs = [@sec]
   end
 

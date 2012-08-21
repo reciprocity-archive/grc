@@ -7,6 +7,7 @@
 #require 'dm-rails/middleware/identity_map'
 class ApplicationController < ActionController::Base
   include ApplicationHelper
+  include AuthorizationHelper
 
   before_filter :require_user
   before_filter :filter_set
@@ -20,7 +21,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user_session, :current_user
 
-  # By default allow only admin access.  This is relaxed in specific controllers.
+  # By default allow only superuser and admin access.  This is relaxed in specific controllers.
   access_control :acl do
     allow :admin, :superuser
   end
@@ -54,7 +55,7 @@ class ApplicationController < ActionController::Base
   def current_user
     return @current_user if defined?(@current_user)
     @current_user = current_user_session && current_user_session.record
-    Authorization.current_person = current_user.person
+    Authorization.current_account = current_user
     @current_user
   end
 

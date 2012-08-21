@@ -1,6 +1,10 @@
 class HelpController < ApplicationController
   layout 'help'
 
+  access_control :acl do
+    allow logged_in
+  end
+
   # Render the requested partial under 'help'
   def show
     help_slug = params[:slug]

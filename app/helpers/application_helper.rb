@@ -1,6 +1,6 @@
 module ApplicationHelper
   ADMIN_MODULES = %w(accounts biz_processes business_areas cycles sections controls documents document_descriptors programs people systems)
-  WORKFLOW_MODULES = %w(programs_dash controls dashboard evidence testing testreport) 
+  WORKFLOW_MODULES = %w(programs_dash controls dashboard evidence testing testreport)
 
   class ProjectModule
     attr_accessor :name
@@ -23,7 +23,7 @@ module ApplicationHelper
 
   # Roles
   def access_control_roles
-    [:superuser, :admin, :analyst, :guest]
+    [:superuser, :admin, :analyst, :user]
   end
 
   # Filter SystemControl relationship objects by slug and/or program.

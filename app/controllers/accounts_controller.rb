@@ -5,26 +5,31 @@
 class AccountsController < ApplicationController
   include ApplicationHelper
 
+  before_filter :load_account, :only => [:tooltip,
+                                         :edit,
+                                         :update]
+
   access_control :acl do
     allow :superuser, :admin, :analyst
+
+    actions :new, :create do
+      allow :create_account
+    end
+
+    actions :edit, :update do
+      allow :update_account, :of => :account
+    end
   end
 
   layout 'dashboard'
 
-  def tooltip
-    @account = Account.find(params[:id])
-    render :layout => nil
-  end
-
   def new
-    @account = Account.new(params[:section])
+    @account = Account.new(params[:account])
 
     render :layout => nil
   end
 
   def edit
-    @account = Account.find(params[:id])
-
     render :layout => nil
   end
 
@@ -43,8 +48,6 @@ class AccountsController < ApplicationController
   end
 
   def update
-    @account = Account.new(params[:id])
-
     respond_to do |format|
       if @account.authored_update(current_user, params[:account])
         flash[:notice] = "Successfully updated the account."
@@ -54,5 +57,11 @@ class AccountsController < ApplicationController
         format.html { render :layout => nil, :status => 400 }
       end
     end
+  end
+
+  private
+
+  def load_account
+    @account = Account.find(params[:id])
   end
 end

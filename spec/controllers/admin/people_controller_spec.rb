@@ -4,7 +4,7 @@ require 'authorized_controller'
 describe Admin::PeopleController do
   before :each do
     @person = FactoryGirl.create(:person, :email => 'user1@example.com')
-    @show_obj = @person
+    @object = @person
     @index_objs = [@person]
   end
 

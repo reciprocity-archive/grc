@@ -19,4 +19,9 @@ describe Account do
       account.person.should_not eq(nil)
     end
   end
+
+  context "authorization" do
+    it "should do the right thing with no object"
+    it "should do the right thing with an object"
+  end
 end

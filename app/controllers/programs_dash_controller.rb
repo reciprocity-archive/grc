@@ -13,12 +13,7 @@ class ProgramsDashController < ApplicationController
   layout 'dashboard'
 
   def index
-    @programs = Program.all.reduce([]) do |progs, program|
-      if current_user.has_role?('read', program)
-        progs.append(program)
-      end
-      progs
-    end
+    @programs = allowed_objs(Program.all, 'read')
     init_quick_find
   end
 end

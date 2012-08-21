@@ -3,15 +3,18 @@ require 'authorized_controller'
 
 describe DocumentController do
   before :each do
-      @reg = FactoryGirl.create(:program, :title => 'Reg 1', :slug => 'reg1', :company => false)
-      @cycle = FactoryGirl.create(:cycle, :program => @reg, :start_at => '2012-01-01')
-      session[:cycle_id] = @cycle.id
+    @model = Document
+    @reg = FactoryGirl.create(:program, :title => 'Reg 1', :slug => 'reg1', :company => false)
+    @cycle = FactoryGirl.create(:cycle, :program => @reg, :start_at => '2012-01-01')
+    session[:cycle_id] = @cycle.id
+    @object = @reg # FIXME: Necessary for authorized action test to work
   end
 
-  # FIXME: use authorized controller tests when this is more
-  # restful
-  it_behaves_like "an admin controller"
-  
+  context "authorization" do
+    it_behaves_like "an authorized index"
+    it_behaves_like "an authorized action", ['sync'], :update_document
+  end
+
   context "gdata" do
     before :each do
       login({}, { :role => 'admin' })

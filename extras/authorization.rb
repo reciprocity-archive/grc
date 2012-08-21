@@ -81,6 +81,8 @@ module Authorization
       # what roles are available on this object for the account
       if (object)
         auth_objects = object.authorizing_objects
+      else
+        auth_objects = []
       end
 
       object_roles.each do |object_role|

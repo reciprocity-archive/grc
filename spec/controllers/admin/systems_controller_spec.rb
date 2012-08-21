@@ -8,7 +8,7 @@ describe Admin::SystemsController do
   before :each do
     create_base_objects
     @model = System
-    @show_obj = @sys
+    @object = @sys
     @index_objs = [@sys]
   end
 

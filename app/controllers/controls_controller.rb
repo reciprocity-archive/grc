@@ -6,17 +6,39 @@
 class ControlsController < ApplicationController
   include ApplicationHelper
   include ControlsHelper
+  include AuthorizationHelper
 
   before_filter :load_control, :only => [:show,
                                          :edit,
                                          :tooltip,
                                          :update,
-                                         :sections]
+                                         :sections,
+                                         :implemented_controls,
+                                         :implementing_controls]
+
 
   access_control :acl do
     allow :superuser, :admin, :analyst
-    allow :view, :of => :control, :to => [:show,
-                                          :tooltip]
+
+    actions :new, :create do
+      allow :create_control
+    end
+
+    actions :edit, :update do
+      allow :update_control, :of => :control
+    end
+
+    actions :show, :tooltip do
+      allow :read_control, :of => :control
+    end
+
+    actions :index do
+      allow :read_control
+    end
+
+    actions :sections, :implemented_controls, :implementing_controls do
+      allow :read_control, :of => :control
+    end
   end
 
   layout 'dashboard'
@@ -71,34 +93,55 @@ class ControlsController < ApplicationController
   end
 
   def index
-    @controls = Control.all
+    @controls = allowed_objs(Control.all, :read)
   end
 
   def sections
     @sections =
       @control.sections.all +
       @control.implemented_controls.includes(:sections).map(&:sections).flatten
+    @sections = allowed_objs(@sections, :read)
     @sections.sort_by(&:slug_split_for_sort)
     render :layout => nil, :locals => { :sections => @sections }
   end
 
   def implemented_controls
-    @control = Control.find(params[:id])
     @controls = @control.implemented_controls
     if params[:s]
       @controls = @controls.search(params[:s])
     end
-    @controls.all.sort_by(&:slug_split_for_sort)
+    @controls = allowed_objs(@controls.all, :read).sort_by(&:slug_split_for_sort)
     render :action => 'controls', :layout => nil, :locals => { :controls => @controls, :prefix => 'Parent of' }
   end
 
   def implementing_controls
-    @control = Control.find(params[:id])
+
     @controls = @control.implementing_controls
     if params[:s]
       @controls = @controls.search(params[:s])
     end
-    @controls.all.sort_by(&:slug_split_for_sort)
+    @controls = allowed_objs(@controls.all, :read).sort_by(&:slug_split_for_sort)
     render :action => 'controls', :layout => nil, :locals => { :controls => @controls, :prefix => 'Child of' }
   end
+
+  private
+  
+    def load_control
+      @control = Control.find(params[:id])
+    end
+
+    def control_params
+      control_params = params[:control] || {}
+      if control_params[:program_id]
+        # TODO: Validate the user has access to add controls to the program
+        params[:control][:program] = Program.find(control_params.delete(:program_id))
+      end
+      %w(type kind means).each do |field|
+        value = control_params.delete(field + '_id')
+        if value.present?
+          control_params[field] = Option.find(value)
+        end
+      end
+      control_params
+    end
 end

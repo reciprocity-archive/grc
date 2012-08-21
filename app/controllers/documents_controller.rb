@@ -6,25 +6,58 @@
 class DocumentsController < ApplicationController
   include ApplicationHelper
 
+  before_filter :load_document, :only => [:edit,
+                                          :show,
+                                          :tooltip,
+                                          :update,
+                                          :destroy]
+
   access_control :acl do
     allow :superuser, :admin, :analyst
+
+    actions :create, :new do
+      allow :create_document
+    end
+
+    actions :show do
+      allow :read_document, :of => :document
+    end
+
+    # FIXME: no template!
+    #actions :index do
+    #  allow :read_document
+    #end
+
+    actions :edit, :update do
+      allow :update_document, :of => :document
+    end
+
+    actions :destroy do
+      allow :delete_document, :of => :document
+    end
+
+    actions :list do
+      allow :read_document
+    end
+
+    actions :list_update, :list_edit do
+      allow :update_document
+    end
   end
 
   layout 'dashboard'
 
   def edit
-    @document = Document.find(params[:id])
     render :layout => nil
   end
 
-  def show
-    @document = Document.find(params[:id])
-  end
-
-  def tooltip
-    @document = Document.find(params[:id])
-    render :layout => nil
-  end
+  # FIXME: No template
+  #def show
+  #end
+  #
+  #def tooltip
+  #  render :layout => nil
+  #end
 
   def new
     @document = Document.new(params[:document])
@@ -45,12 +78,19 @@ class DocumentsController < ApplicationController
   end
 
   def list_edit
+    if !params[:object_type] || !params[:object_id]
+      return 400
+    end
     @object = params[:object_type].classify.constantize.find(params[:object_id])
     #@documents = Document.where({})
     render :layout => nil
   end
 
   def list_update
+    if !params[:object_type] || !params[:object_id]
+      return 400
+    end
+
     @object = params[:object_type].classify.constantize.find(params[:object_id])
 
     new_object_documents = []
@@ -99,8 +139,6 @@ class DocumentsController < ApplicationController
   end
 
   def update
-    @document = Document.find(params[:id])
-
     respond_to do |format|
       if @document.authored_update(current_user, params[:document])
         flash[:notice] = "Successfully updated the document."
@@ -115,12 +153,18 @@ class DocumentsController < ApplicationController
     end
   end
 
-  def index
-    @documents = Document.all
-  end
+  # FIXME: No template!
+  #def index
+  #  @documents = Document.all
+  #end
 
-  def destroy
-    @document = Document.find(params[:id])
-    @document.destroy
-  end
+  # FIXME: No template
+  #def destroy
+  #  @document.destroy
+  #end
+
+  private
+    def load_document
+      @document = Document.find(params[:id])
+    end
 end

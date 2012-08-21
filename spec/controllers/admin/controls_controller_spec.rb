@@ -11,7 +11,7 @@ describe Admin::ControlsController do
     # Authorized_controller test setup
     @model = Control
     @index_objs = [@ctl, @ctl2, @ctl3]
-    @show_obj = @ctl
+    @object = @ctl
     @index_objs = [@ctl]
   end
 

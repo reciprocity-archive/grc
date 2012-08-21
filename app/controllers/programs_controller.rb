@@ -23,14 +23,20 @@ class ProgramsController < ApplicationController
 
   access_control :acl do
     allow :superuser, :admin, :analyst
-    allow :read, :of => :program, :to => [:show,
-                                          :tooltip,
-                                          :sections,
-                                          :controls,
-                                          :section_controls,
-                                          :control_sections,
-                                          :category_controls]
-    allow :edit, :of => :program, :to => [:edit]
+
+    allow :create_program, :to => [:create,
+                                   :new]
+    allow :read_program, :of => :program, :to => [:show,
+                                                  :tooltip,
+                                                  :sections,
+                                                  :controls,
+                                                  :section_controls,
+                                                  :control_sections,
+                                                  :category_controls]
+
+    allow :update_program, :of => :program, :to => [:edit,
+                                                    :update,
+                                                    :import]
   end
 
   layout 'dashboard'
@@ -85,6 +91,9 @@ class ProgramsController < ApplicationController
   end
 
   def update
+    if !params[:program]
+      return 400
+    end
     #@program.source_document ||= Document.create
     #@program.source_website ||= Document.create
 
@@ -119,7 +128,7 @@ class ProgramsController < ApplicationController
     if params[:s]
       @sections = @sections.search(params[:s])
     end
-    @sections.all.sort_by(&:slug_split_for_sort)
+    @sections = allowed_objs(@sections.all.sort_by(&:slug_split_for_sort), :read)
     render :layout => nil, :locals => { :sections => @sections }
   end
 
@@ -128,7 +137,7 @@ class ProgramsController < ApplicationController
     if params[:s]
       @controls = @controls.search(params[:s])
     end
-    @controls.all.sort_by(&:slug_split_for_sort)
+    @controls = allowed_objs(@controls.all.sort_by(&:slug_split_for_sort), :read)
     render :layout => nil, :locals => { :controls => @controls }
   end
 
@@ -148,7 +157,7 @@ class ProgramsController < ApplicationController
     if params[:s]
       @controls = @controls.search(params[:s])
     end
-    @controls.all.sort_by(&:slug_split_for_sort)
+    @controls = allowed_objs(@controls.all.sort_by(&:slug_split_for_sort), :read)
     render :layout => nil, :locals => { :controls => @controls }
   end
 

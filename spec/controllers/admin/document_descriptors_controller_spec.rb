@@ -8,7 +8,7 @@ describe Admin::DocumentDescriptorsController do
   before :each do
     create_base_objects
 
-    @show_obj = @desc
+    @object = @desc
     @index_objs = [@desc]
   end
 

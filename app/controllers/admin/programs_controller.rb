@@ -10,7 +10,7 @@ class Admin::ProgramsController < ApplicationController
 
   # List Programs
   def index
-    @programs = Program.all
+    @programs = allowed_objs(Program.all, :read)
 
     respond_to do |format|
       format.html

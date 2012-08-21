@@ -120,12 +120,10 @@ class Control < ActiveRecord::Base
     aos.add(program)
 
     implementing_controls.each do |control|
-      # Now traverse up the hierarchy
       aos.merge(control.authorizing_objects)
     end
 
     sections.each do |section|
-      # Now traverse up the hierarchy
       aos.merge(section.authorizing_objects)
     end
     aos
