@@ -172,8 +172,8 @@ CmsRails::Application.routes.draw do
   post "mapping/map_ccontrol"
   put "mapping/update/:section_id" => 'mapping#update', :as => 'mapping_update'
   get "mapping/buttons", :as => :mapping_buttons
-  post "mapping/selected_section/:section_id" => 'mapping#selected_section', :as => :mapping_selected_section
-  post "mapping/selected_control/:control_id" => 'mapping#selected_control', :as => :mapping_selected_control
+  get "mapping/selected_section/:section_id" => 'mapping#selected_section', :as => :mapping_selected_section
+  get "mapping/selected_control/:control_id" => 'mapping#selected_control', :as => :mapping_selected_control
   match 'mapping/sections/:program_id' => 'mapping#find_sections', :as => :mapping_sections
   match 'mapping/controls/:program_id/:control_type' => 'mapping#find_controls', :as => :mapping_controls
   post "mapping/create_rcontrol" => 'mapping#create_rcontrol', :as => 'mapping_create_rcontrol'
