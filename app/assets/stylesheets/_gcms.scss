@@ -342,7 +342,7 @@
 }
 
 .row-fluid-slotcontent {
-  margin-top: 5px;
+  margin-top: 0px; /* margin top removed (was 5) for chrome/macosx */
   clear:both;
   padding: 0px 7px 0px 7px;
   background: #efefef;
@@ -1097,6 +1097,18 @@ label {
 margin-top:7px;
 }
 
+.regulationslot .badge {
+margin-top:5px;
+}
+
+
+//Our badges are not circular and are mostly used for status. 
+.badge {
+  text-align:center;
+  padding: 2px 9px 2px;
+  @include border-radius(0px);
+  }
+
 .btnwell {
   position:relative;
   top:3px;
@@ -1248,8 +1260,8 @@ margin-top:7px;
 .slotbtn {
   margin-left: 3px;
   position:relative;
-  top:-3px;
-  right: -4px;
+  top:3px;
+  right: 3px;
   font-size: 13px;
   line-height: 13px;
   display: inline-block;
@@ -1269,10 +1281,9 @@ margin-top:7px;
 .checkbutton {
   position:relative;
   top:-3px;
-  right: -4px;
+  left:0px;
   font-size: 13px;
   line-height: 13px;
-  *line-height: 13px;
   display: inline-block;
   padding: 1px 0px 1px 0px;
   color: #333;
