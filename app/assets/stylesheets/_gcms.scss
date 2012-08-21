@@ -417,6 +417,7 @@
 .modal-body {
   padding: 10px 15px 0 15px;
   overflow-y: auto;
+  width:690px;
 }
 
 /* BUTTONS */
@@ -1156,6 +1157,11 @@ margin-top:7px;
     width:90%;
     font-size:24px;
     font-weight:normal;
+  }
+  .widgetsearch {
+    height:22px;
+    padding:0 0 0 6px;
+    
   }
 }
 
