@@ -6,6 +6,13 @@ body {
   height:100%;
 }
 
+// Welcome ID overwrites body so there isn't a navbar. Could also be called 'loggedOut'
+#welcome {
+  background: url("../images/bkgd.gif") left top repeat;
+  font-family: $font-family;
+  height:100%;
+}
+
 a {
   color:$linkColor;
   &:hover {
