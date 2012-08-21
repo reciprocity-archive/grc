@@ -171,21 +171,14 @@
   display:inline-block;
 }
 
-.static4 {
-  width: 365px;
-  padding: 0px 0px 15px 0px;
-  margin:0 0 0 0;
-  float:left;
-  }
-
-
 .last {
   padding-right: 0px;
   margin-right: 0px;
 }
 
 
-/* Tabs */
+// ----- TABS ----- //
+
 .nav-tabs > .active > a, .nav-tabs > .active > a:hover {
   color: $white;
   cursor: default;
@@ -198,6 +191,35 @@
   /*margin-bottom: 2px;*/
   border-bottom: 10px solid #43C2C7;
 }
+
+.nav-tabs.nav-stacked > li {
+  margin: 1px;
+  padding: 1px 1px 3px 1px;
+}
+
+.nav-tabs.nav-stacked > li:hover {
+  color:#333;
+  background: #eeeeee; /* Old browsers */
+
+}
+
+.nav-tabs.nav-stacked > li:first-child > a:hover {
+  border: 1px solid $borderDefaultHover;
+  @include border-radius(4px 4px 0 0);
+}
+
+.nav-tabs.nav-stacked > li > a:hover {
+  border: 1px solid $borderDefaultHover;
+}
+
+.nav-tabs.nav-stacked > li > a {
+  color:$textColor;
+}
+
+.nav-tabs.nav-stacked > li > a:hover, .nav-tabs.nav-stacked > li > a h3:hover { color:#333; }
+
+
+
 
 // ----- SLOTS ----- //
 
@@ -307,7 +329,8 @@
   background: #EFEFEF;
 }
 
-.cleanlabels .row-fluid [class*="span"], .information .row-fluid [class*="span"] {
+.cleanlabels .row-fluid [class*="span"],
+.information .row-fluid [class*="span"] {
   min-height:28px;
 }
 
@@ -354,31 +377,6 @@
   margin: 0px;
 }
 
-.nav-tabs.nav-stacked > li {
-  margin: 1px;
-  padding: 1px 1px 3px 1px;
-}
-
-.nav-tabs.nav-stacked > li:hover {
-  color:#333;
-  background: #eeeeee; /* Old browsers */
-
-}
-
-.nav-tabs.nav-stacked > li:first-child > a:hover {
-  border: 1px solid $borderDefaultHover;
-  @include border-radius(4px 4px 0 0);
-}
-
-.nav-tabs.nav-stacked > li > a:hover {
-  border: 1px solid $borderDefaultHover;
-}
-
-.nav-tabs.nav-stacked > li > a {
-  color:$textColor;
-}
-
-.nav-tabs.nav-stacked > li > a:hover, .nav-tabs.nav-stacked > li > a h3:hover { color:#333; }
 
 .group a {
   color:$textColor;
@@ -1157,6 +1155,7 @@ margin-top:7px;
   h1 {
     width:90%;
     font-size:24px;
+    font-weight:normal;
   }
 }
 
@@ -1192,19 +1191,16 @@ margin-top:7px;
 .tabbable > div > .tabbarbtn {
   padding: 1px 3px 1px 3px;
   margin-top: -2px;
-  *margin-left: .3em;
   font-size: 13px;
   line-height: 18px;
-  *line-height: 20px;
+
 }
 
 /* Widget Buttons - These are smaller and tighter than all other buttons*/
 
 .widgettextbtn {
-  *margin-left: .3em;
   font-size: 13px;
   line-height: 18px;
-  *line-height: 20px;
   display: inline-block;
   padding: 2px 6px 1px 6px;
   text-align: center;
@@ -1248,10 +1244,8 @@ margin-top:7px;
   position:relative;
   top:-3px;
   right: -4px;
-
   font-size: 13px;
   line-height: 13px;
-  *line-height: 13px;
   display: inline-block;
   padding: 1px 0px 1px 0px;
   color: #333;
@@ -1456,7 +1450,7 @@ textarea {
   @include background-image(linear-gradient(top, #5BC0DE, #2F96B4));
   border-color: #2F96B4 #2F96B4 #1F6377;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  :hover {
+  &:hover {
     text-decoration:none;
     background: #73c6dd; /* Old browsers */
     @include background-image(linear-gradient(top,  #73c6dd 0%, #4bb4c1 100%));
@@ -1714,7 +1708,7 @@ body .container {
   vertical-align: baseline;
   margin: 2px 0 4px 4px;
   text-align: left;
-  width:325px; /*This is set to position right side label correctly, upgrade to responsive in future */
+  width:325px; // This is set to position right side label correctly, upgrade to responsive in future
   z-index: 50;
   pointer-events: none;
 }
@@ -1730,10 +1724,6 @@ body .container {
   text-align: right;
 }
 
-.hidefont {
-  font-size:0px !important;
-}
-
 .progress-large {
   height:30px;
   @include border-radius(0px);
@@ -1746,40 +1736,6 @@ body .container {
 }
 }
 
-#chevron {
-  font-size: 0;
-  height: 0;
-  line-height: 0;
-  border-style: solid;
-  border-color: transparent;
-  /* chevron color */
-  border-right-color: #fff;
-  /* for left pointers, right border is 0 */
-  border-width: 23px 23px 23px 0;
-  float: left;
-  margin: 10px;
-  position:relative;
-  transition:all 0.5s ease-out;
-  &:hover {
-    transform:rotate(-90deg);
-  }
-}
-
-.widgetsearch {
-  font-size: 12px !important;
-  height: 13px !important;
-  /* line-height: 23px !important; */
-  color: #333 !important;
-  text-align: left !important;
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75) !important;
-  display: inline-block !important;
-  margin: 0 0 0 0 !important;
-  padding: 4px 4px 4px 4px !important;
-  vertical-align: top !important;
-  cursor: pointer !important;
-  background-color: $white !important;
-  border: 1px solid $lightGray !important;
-}
 
 .itemlist {
   height:230px;
@@ -1800,11 +1756,6 @@ body .container {
   }
 }
 
-.badge {
-  text-align:center;
-  padding: 2px 9px 2px;
-  @include border-radius(0px);
-}
 
 .navbarplus {
   background-image: url("../images/navbarplus_off.png");
