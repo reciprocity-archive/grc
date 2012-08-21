@@ -190,6 +190,13 @@
 .nav-tabs {
   /*margin-bottom: 2px;*/
   border-bottom: 10px solid #43C2C7;
+  li {
+    a:hover {
+      background:lighten(#43C2C7,15%);
+      color:$white;
+      border:1px solid #43C2C7;
+    }
+  }
 }
 
 .nav-tabs.nav-stacked > li {
@@ -415,7 +422,7 @@
 }
 
 .modal-body {
-  padding: 10px 15px 0 15px;
+  padding: 10px 15px;
   overflow-y: auto;
   width:690px;
 }
@@ -717,13 +724,6 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
   }
 }
 
-.clearfix:after {
-    content: ".";
-    display: block;
-    height: 0;
-    clear: both;
-    visibility: hidden;
-}
 
 /* Popover-Hover items */
 
@@ -1511,6 +1511,10 @@ a.controllistRM {
   vertical-align:center;
   @include background-image(linear-gradient(top,  $white 0%, #f6f6f6 100%));
   border: 1px solid $borderDefault;
+  &:hover {
+    color:$black;
+    cursor: pointer;  
+  }
 }
 
 .controlSlot {
@@ -1526,19 +1530,12 @@ a.controllistRM {
   vertical-align:center;
   @include background-image(linear-gradient(top,  $white 0%, #f6f6f6 100%));
   border: 1px solid $borderDefault;
+  &:hover {
+    color:$black;
+    cursor: pointer;  
+  }
 }
 
-.controlSlot:hover,
-.singlecontrolSlot:hover {
-  float:left;
-  height:auto;
-  color:#000;
-  background: #ffffff; /* Old browsers */
-  vertical-align:center;
-  @include background-image(linear-gradient(top,  $white 0%, #f6f6f6 100%));
-  border: 1px solid $borderDefaultHover;
-  cursor: pointer;
-}
 
 .removeCircleButton {
   margin:8px 2px 0 0; /*placement hack for controlSlot height*/
