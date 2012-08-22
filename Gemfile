@@ -39,6 +39,7 @@ platforms :jruby do
   end
 end
 
+gem 'encrypted-cookie-store'
 gem 'strict-forgery-protection'
 gem 'authlogic'
 gem 'builder'
@@ -93,12 +94,12 @@ group(:development, :test) do
 #    gem 'ruby-debug'
 #  end
 #
-#  platform :ruby do
+  platform :ruby do
 #    gem 'linecache19'
 #    gem 'ruby-debug-base19x', '~> 0.11.30.pre4'
 #    gem 'ruby-debug19', :require => 'ruby-debug'
-#    gem 'ruby-prof'
-#  end
+    gem 'ruby-prof'
+  end
 
   # Causes rake to fail, uncomment to rebuild docs
   # gem 'yard-dm'
