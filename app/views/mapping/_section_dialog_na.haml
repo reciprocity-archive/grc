@@ -15,6 +15,9 @@
         =f.text_area :notes, :class => [:text_area, :span12], :rows => 2
 
   .modal-footer
-    =f.submit pat(:save)
-    =f.submit pat(:cancel), :type => 'reset'
+    .row-fluid
+      %nav.fltlft.txtlft.span3
+        =f.submit pat(:cancel), :type => 'reset', :class => 'btn-large btn-info'
+      %nav.fltrt.txtrt.span3  
+        =f.submit pat(:save), :class => 'btn-large btn-success'
 

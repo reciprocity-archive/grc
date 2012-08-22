@@ -1495,9 +1495,9 @@ textarea {
   display: inline-block;
   color:$white;
   background-color: #49AFCD;
-  @include background-image(linear-gradient(top, #5BC0DE, #2F96B4));
-  border-color: #2F96B4 #2F96B4 #1F6377;
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+//  @include background-image(linear-gradient(top, #5BC0DE, #2F96B4));
+//  border-color: #2F96B4 #2F96B4 #1F6377;
+//  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
   &:hover {
     text-decoration:none;
     background: #73c6dd; /* Old browsers */

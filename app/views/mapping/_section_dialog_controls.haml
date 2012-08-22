@@ -28,5 +28,8 @@
                   =control.title
 
   .modal-footer
-    =f.submit pat(:approve)
-    =f.submit pat(:cancel), :type => 'reset'
+    .row-fluid
+      %nav.fltlft.txtlft.span3
+        =f.submit pat(:cancel), :type => 'reset', :class => 'btn-large btn-info'
+      %nav.fltrt.txtrt.span3  
+        =f.submit pat(:approve), :class => 'btn-large btn-success'
