@@ -201,7 +201,7 @@
 
 .nav-tabs.nav-stacked > li {
   margin: 1px;
-  padding: 1px 1px 3px 1px;
+  // padding: 1px 1px 3px 1px; /* padding removed */
 }
 
 .nav-tabs.nav-stacked > li:hover {
@@ -247,8 +247,10 @@
     text-decoration:none;
   }
   &.subsystemslot {
-    background: #fefcea;
-    @include background-image(linear-gradient(top,  #fefcea 0%, #ede9ce 100%));
+    background-color: #fffbe9; // Old browsers
+    @include filter-gradient(#fffbe9, #f9f8cf, vertical); // IE6-9
+    @include background-image(linear-gradient(top,  #fffbe9 0%,#f9f8cf 100%));
+
     &:hover {
       border: 1px solid $borderDefaultHover;
     }
@@ -262,9 +264,40 @@
       @include background-image(linear-gradient(top,  #eeeeee 0%, #f1f1f1 50%, #e1e1e1 100%, #f6f6f6 100%));
     }
   }
+  &.greenslot {
+    background-color: #e9fff0;
+    @include filter-gradient(#e9fff0, #cff9e3, vertical);
+    @include background-image(linear-gradient(top,  #e9fff0 0%,#cff9e3 100%));
+    &:hover {
+      background: #eeeeee; /* Old browsers */
+      border: 1px solid $borderDefaultHover;
+      @include background-image(linear-gradient(top,  #eeeeee 0%, #f1f1f1 50%, #e1e1e1 100%, #f6f6f6 100%));
+    }
+  }
+  &.purpleslot {
+    background-color: #f3e9ff;
+    @include filter-gradient(#f3e9ff, #e7cff9, vertical);
+    @include background-image(linear-gradient(top,  #f3e9ff 0%,#e7cff9 100%));
+    &:hover {
+      background: #eeeeee; /* Old browsers */
+      border: 1px solid $borderDefaultHover;
+      @include background-image(linear-gradient(top,  #eeeeee 0%, #f1f1f1 50%, #e1e1e1 100%, #f6f6f6 100%));
+    }
+  }
+  &.redslot {
+    background-color: #ffe9f0;
+    @include filter-gradient(#ffe9f0, #f9cfd7, vertical);
+    @include background-image(linear-gradient(top,  #ffe9f0 0%,#f9cfd7 100%));
+    &:hover {
+      background: #eeeeee; /* Old browsers */
+      border: 1px solid $borderDefaultHover;
+      @include background-image(linear-gradient(top,  #eeeeee 0%, #f1f1f1 50%, #e1e1e1 100%, #f6f6f6 100%));
+    }
+  }
   &.controlslot {
-    background: $white; /* Old browsers */
-    @include background-image(linear-gradient(top,  $white 0%, #eef4ed 70%, #edebe6 100%, #f6f6f6 100%));
+    background-color: #eafbff; // Old browsers
+    @include filter-gradient(#eafbff, #cfebf9, vertical); // IE6-9
+    @include background-image(linear-gradient(top,  #eafbff 0%,#cfebf9 100%));
     &:hover {
       background: #eeeeee; /* Old browsers */
       border: 1px solid $borderDefaultHover;
@@ -1516,7 +1549,8 @@ a.controllistRM {
   margin:3px 0px 0px 0px;
   display:inline-block;
   @include box-sizing(border-box);
-  padding: 5px 6px 5px 6px;
+  // padding: 5px 6px 5px 6px; /* Padding removed */
+  line-height:28px;
   color:$textColor;
   background: $white; /* Old browsers */
   vertical-align:center;
