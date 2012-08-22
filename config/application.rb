@@ -69,3 +69,10 @@ module CmsRails
 
   end
 end
+
+begin
+  require File.expand_path('../application-local', __FILE__)
+rescue
+  puts "no application-local, or caught exception"
+end
+
