@@ -508,13 +508,12 @@ nav {
 #pageTitle {
   margin: 0;
   font-weight: bold;
-  text-rendering: optimizelegibility;
+  //text-rendering: optimizelegibility;
   margin-top:0px;
   font-size: 28px;
   font-weight: bold;
   line-height: 28px;
   color:$textColor;
-  line-height: 1;
   text-align: left;
 }
 
@@ -608,12 +607,12 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
 }
 
 .toolbar-nav {
-  margin: 12px 0 0 0;
+  margin: 8px 0 0 0;
   padding: 0 0 0 0;
 }
 
 .toolbar-widget {
-  margin: 5px auto 5px; /*this should be auto centered */
+  margin: 5px auto 5px; // this should be auto centered 
   text-align:center;
   hr {
     margin: 5px 0 0 0;
@@ -630,24 +629,23 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
   border-bottom: 1px solid $white;
 }
 
-.navbar .brand {
-  display: inline-block;
-  float: left;
-  padding: 13px 0px 7px 0px;
-  margin-left: 0px;
-  font-size: 22px;
-  font-weight: 200;
-  line-height: 1;
-  color: #efefef;
+.navbar {
+  .brand {
+    display: inline-block;
+    float: left;
+    padding: 0;
+    margin:0;
+    font-size: 22px;
+    font-weight: normal;
+    line-height: 56px;
+    color: #efefef;
+  }
 }
 
-.navbar-inner {
-  background: none;
-}
 
 .navbar-secondinner {
-  height:53px;
-  padding: 5px 0px 0px 5px;
+  height:54px;
+  padding: 5px 0 0 5px;
   background-color: $white;
 }
 
@@ -1524,14 +1522,14 @@ textarea {
 .controllistRM {
   float:left;
   display: inline-block;
-  height:30px;
   overflow:hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  min-height: 28px;
+  height: 31px;
   @include box-sizing(border-box);
   margin: 0px 0px 2px 2px;
-  padding:6px 6px 6px 4px;
+  padding:0 6px;
+  line-height:31px;
   color:#000;
   border: 1px solid #eeeeee;
 }
@@ -1809,9 +1807,9 @@ body .container {
   background-image: url("../images/navbarplus_off.png");
   display: inline-block;
   position:relative;
-  top:-5px;
+  top:2px;
   width: 40px;
-  height: 57px;
+  height: 54px;
   margin:0;
   padding:0;
   background-position: 0px 0px;
