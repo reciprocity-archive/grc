@@ -44,7 +44,8 @@ class PeopleController < ApplicationController
       params[:items].each do |_, item|
         object_person = @object.object_people.where(:person_id => item[:id]).first
         if !object_person
-          object_person = @object.object_people.new(:person_id => item[:id])
+          person = Person.find(item[:id])
+          object_person = @object.object_people.new(:person => person)
         end
         object_person.role = item[:role].blank? ? nil : item[:role]
         new_object_people.push(object_person)

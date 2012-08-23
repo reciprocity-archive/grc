@@ -18,12 +18,12 @@ class TransactionsController < ApplicationController
   end
 
   def new
-    @transaction = Transaction.new(params[:transaction])
+    @transaction = Transaction.new(transaction_params)
     render :layout => nil
   end
 
   def create
-    @transaction = Transaction.new(params[:transaction])
+    @transaction = Transaction.new(transaction_params)
 
     respond_to do |format|
       if @transaction.save
@@ -43,7 +43,7 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.find(params[:id])
 
     respond_to do |format|
-      if @transaction.authored_update(current_user, params[:transaction])
+      if @transaction.authored_update(current_user, transaction_params)
         flash[:notice] = "Successfully updated the transaction."
         format.json do
           render :json => @transaction.as_json(:root => nil, :methods => :descriptor)
@@ -60,4 +60,15 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.find(params[:id])
     @transaction.destroy
   end
+
+  private
+
+    def transaction_params
+      transaction_params = params[:transaction] || {}
+      if transaction_params[:system_id]
+        # TODO: Validate the user has access to add transactions to the system
+        transaction_params[:system] = System.find(transaction_params.delete(:system_id))
+      end
+      transaction_params
+    end
 end

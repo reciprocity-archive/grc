@@ -111,7 +111,8 @@ class SystemsController < ApplicationController
         # Do whatever is needed with item-forms
         system_system = @system.sub_system_systems.where(:child_id => item[:id]).first
         if !system_system
-          system_system = @system.sub_system_systems.new(:child_id => item[:id])
+          child = System.find(item[:id])
+          system_system = @system.sub_system_systems.new(:child => child)
         end
         new_system_systems.push(system_system)
       end
@@ -148,7 +149,8 @@ class SystemsController < ApplicationController
         # Do whatever is needed with item-forms
         system_control = @system.system_controls.where(:control_id => item[:id]).first
         if !system_control
-          system_control = @system.system_controls.new(:control_id => item[:id])
+          control = Control.find(item[:id])
+          system_control = @system.system_controls.new(:control => control)
         end
         new_system_controls.push(system_control)
       end

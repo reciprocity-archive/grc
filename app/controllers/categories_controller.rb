@@ -26,7 +26,8 @@ class CategoriesController < ApplicationController
       params[:items].each do |_, item|
         categorization = @object.categorizations.where(:category_id => item[:id]).first
         if !categorization
-          categorization = @object.categorizations.new(:category_id => item[:id])
+          category = Category.find(item[:id])
+          categorization = @object.categorizations.new(:category => category)
         end
         new_categorizations.push(categorization)
       end

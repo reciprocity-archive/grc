@@ -107,7 +107,7 @@ class ControlsController < ApplicationController
       control_params = params[:control] || {}
       if control_params[:program_id]
         # TODO: Validate the user has access to add controls to the program
-        params[:control][:program] = Program.find(control_params.delete(:program_id))
+        control_params[:program] = Program.find(control_params.delete(:program_id))
       end
       %w(type kind means).each do |field|
         value = control_params.delete(field + '_id')

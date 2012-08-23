@@ -59,7 +59,8 @@ class DocumentsController < ApplicationController
       params[:items].each do |_, item|
         object_document = @object.object_documents.where(:document_id => item[:id]).first
         if !object_document
-          object_document = @object.object_documents.new(:document_id => item[:id])
+          document = Document.find(item[:id])
+          object_document = @object.object_documents.new(:document => document)
         end
         new_object_documents.push(object_document)
       end
