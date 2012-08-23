@@ -49,9 +49,12 @@ gem 'rails', RAILS_VERSION
 
 gem 'haml', '~> 3.2.0.beta.2'
 gem 'haml-rails'
-gem 'sass', '~> 3.2.0'
-gem 'sass-rails'
-gem 'compass-rails'
+
+group :assets do
+  gem 'sass', '~> 3.2.0'
+  gem 'sass-rails'
+  gem 'compass-rails'
+end
 
 # Used to be pulled in by dm-types
 gem 'bcrypt-ruby'
