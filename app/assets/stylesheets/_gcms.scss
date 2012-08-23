@@ -457,7 +457,8 @@
 .modal-body {
   padding: 10px 15px;
   overflow-y: auto;
-  width:690px;
+  // TODO: Removed because it breaks .slimmodal
+  //width:690px;
 }
 
 /* BUTTONS */
@@ -1204,7 +1205,8 @@ margin-top:5px;
   .widgetsearch {
     height:22px;
     padding:0 0 0 6px;
-    
+    // Fix to not stretch below .modal-header border
+    margin-bottom: 3px;
   }
 }
 
