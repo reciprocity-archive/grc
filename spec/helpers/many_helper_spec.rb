@@ -2,11 +2,11 @@ require 'spec_helper'
 
 describe ManyHelper do
   before :each do
-    @reg = Program.create(:title => 'Reg 1', :slug => 'reg1', :company => true)
-    @ctl1 = Control.create(:title => 'Control 1', :slug => 'reg1-ctl1', :description => 'x', :program => @reg, :is_key => true, :fraud_related => false)
-    @ctl2 = Control.create(:title => 'Control 2', :slug => 'reg1-ctl2', :description => 'x', :program => @reg, :is_key => true, :fraud_related => false)
-    @sys = System.create(:title => 'System 1', :slug => 'sys1', :description => 'x', :infrastructure => true)
-    @sc = SystemControl.create(:control => @ctl2, :system => @sys, :state => :green)
+    @reg = FactoryGirl.create(:program, :title => 'Reg 1', :slug => 'reg1', :company => true)
+    @ctl1 = FactoryGirl.create(:control, :title => 'Control 1', :slug => 'reg1-ctl1', :description => 'x', :program => @reg, :is_key => true, :fraud_related => false)
+    @ctl2 = FactoryGirl.create(:control, :title => 'Control 2', :slug => 'reg1-ctl2', :description => 'x', :program => @reg, :is_key => true, :fraud_related => false)
+    @sys = FactoryGirl.create(:system, :title => 'System 1', :slug => 'sys1', :description => 'x', :infrastructure => true)
+    @sc = FactoryGirl.create(:system_control, :control => @ctl2, :system => @sys, :state => :green)
     helper.set_rspec(self)
     #helper.instance_variable_set(:@_rspec, self)
   end
@@ -22,7 +22,6 @@ describe ManyHelper do
 
   describe "put many2many" do
     it "inserts" do
-      pending
       params[:id] = @ctl1.id
       params[:control] = {}
       params[:control]["system_ids"] = [ @sys.id ]
@@ -31,7 +30,6 @@ describe ManyHelper do
       @sys.controls.all(:order => :slug).should eq([@ctl1, @ctl2])
     end
     it "deletes" do
-      pending
       params[:id] = @ctl2.id
       params[:control] = {}
       params[:control]["system_ids"] = []

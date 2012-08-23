@@ -132,5 +132,16 @@ class Section < ActiveRecord::Base
     end.flatten
   end
 
+  def ancestors
+    # Not only need to look for instance's ancestor sections, but
+    # also the ancestor sections of all ancestor controls.
+    if !parent
+      return []
+    end
+
+    ancestors = [parent]
+    ancestors.concat(parent.ancestors)
+  end
+
   is_versioned_ext
 end

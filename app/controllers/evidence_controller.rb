@@ -117,7 +117,7 @@ class EvidenceController < ApplicationController
           gclient = get_gdata_client
           link = Gdoc.make_id_url(copy)
           doc =  Document.where(:link => link).first
-          doc ||= Document.create(
+          doc ||= Document.new(
             :link => link, :title => gdoc.title, :document_descriptor => desc
           )
 
@@ -140,9 +140,10 @@ class EvidenceController < ApplicationController
       doc = Document.where(:link => doc_params[:link]).first
       doc ||= Document.create(
         :link => doc_params[:link],
-        :title => doc_params[:title],
-        :document_descriptor => desc
+        :title => doc_params[:title]
       )
+      doc.document_descriptor = desc
+      doc.save
       if doc.document_descriptor == desc
         @system_control.evidences << doc
       else

@@ -11,6 +11,7 @@ bin
 .yardoc
 .sass-cache
 Gemfile.local
+config/application-local.rb
 public/stylesheets/themes/google/style.css
 app/controllers/dev_controller.rb
 doc/yard
@@ -20,3 +21,4 @@ vendor/cache
 public/assets
 cms.war
 Gemfile.lock
+/coverage/

@@ -68,7 +68,14 @@ module CmsRails
       g.template_engine :haml
     end
 
-    config.mass_assignment_sanitizer = :strict
+    config.active_record.mass_assignment_sanitizer = :strict
 
   end
 end
+
+begin
+  require File.expand_path('../application-local', __FILE__)
+rescue LoadError
+  puts "no application-local, or caught exception"
+end
+

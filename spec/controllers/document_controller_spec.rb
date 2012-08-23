@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe DocumentController do
   before :each do
-      @reg = Program.create(:title => 'Reg 1', :slug => 'reg1', :company => false)
-      @cycle = Cycle.create(:program => @reg, :start_at => '2012-01-01')
+      @reg = FactoryGirl.create(:program, :title => 'Reg 1', :slug => 'reg1', :company => false)
+      @cycle = FactoryGirl.create(:cycle, :program => @reg, :start_at => '2012-01-01')
       session[:cycle_id] = @cycle.id
   end
 
@@ -63,7 +63,7 @@ describe DocumentController do
     end
 
     it "syncs new system" do
-      System.create(:title => 'System 1', :slug => 'sys1', :description => 'x', :infrastructure => true)
+      FactoryGirl.create(:system, :title => 'System 1', :slug => 'sys1', :description => 'x', :infrastructure => true)
       @gdoc_client.should_receive(:create_folder).at_least(:once).with('SYS1', :parent => @systems_folder).and_return(Gdoc::Document.new('sys1', :parent => @systems_folder))
       get 'sync'
       response.should be_success
@@ -77,7 +77,7 @@ describe DocumentController do
           'CMS' => @cms_folder,
         }
       end
-      System.create(:title => 'System 1', :slug => 'sys1', :description => 'x', :infrastructure => true)
+      FactoryGirl.create(:system, :title => 'System 1', :slug => 'sys1', :description => 'x', :infrastructure => true)
       @gdoc_client.should_receive(:create_folder).at_least(:once).with('REG1-2012-01-01', :parent => @cms_folder).and_return(@cycle_folder)
       @gdoc_client.should_receive(:create_folder).at_least(:once).with('Systems', :parent => @cycle_folder).and_return(@systems_folder)
       @gdoc_client.should_receive(:create_folder).at_least(:once).with('Accepted', :parent => @cycle_folder).and_return(Gdoc::Document.new('Accepted', :parent => @cms_folder))
