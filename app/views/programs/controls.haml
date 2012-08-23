@@ -17,8 +17,6 @@
       .span12
         .span9.slot.regulationslot{ :'data-toggle' => 'collapse', :'data-target' => "##{content_id}" }
           .expander
-          %a.widgetbtn.fltrt{ :href => edit_flow_control_path(item), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :title => 'Edit Control' }
-            %i.gcmsicon-edit-grey
           %a.widgetbtn.fltrt{ :href => flow_control_path(item), :title => 'View Control' }
             %i.gcmsicon-arrowright-grey
           %span.prefix=item.slug
