@@ -1,0 +1,137 @@
+-@title = "CMS: Control Review"
+
+-content_for :header do
+  %ol#breadcrumb
+    %li
+      %a{:href => '/design/audit-setup'} AUDIT
+    %li.last
+      CONTROL REVIEW
+  #pageTitle.location Physically Protect Stored Data
+
+-content_for :page_help, 'changeme'
+
+-content_for :subheader_extras do
+  %h1#pageType.fltrt.highlighted Control Review
+
+.row-static
+  .doubleColumn
+    / .Widget
+    #RegsandControls.WidgetBox.fullHeight
+      .WidgetBoxHeading
+        .fltrt
+          %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+            %i.gcmsicon-questionmark-grey
+          %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
+        .WidgetTitle.doublewidth
+          %strong Regulation
+          \/
+          %strong Controls
+          Mapped to this Control
+      / /.WidgetBoxHeading
+      .WidgetBoxContent
+        %ul#quicklinks.nav.nav-tabs
+          %li
+            %a{"data-toggle" => "tab", :href => "#sysproc"} Systems & Processes
+          %li.active
+            %a{"data-toggle" => "tab", :href => "#requests"} Auditor Requests (PBCs)
+        .tab-content
+          #requests.tab-pane.active
+            / CONTENT VIA JSRENDER
+          #sysproc.tab-pane
+            / 
+            / CONTENT VIA JSRENDER
+        / /.Class Content
+      / /.WidgetBoxContent
+    / /.Widget
+  / end of doubleColumn
+  .singleColumn
+    #systeminfowidget.WidgetBox
+      .WidgetBoxHeading
+        %nav
+          %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+            %i.gcmsicon-questionmark-grey
+          %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+            %i.gcmsicon-edit-grey
+          %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#programinformation"}
+            %i.gcmsicon-enlarge-grey
+        .WidgetTitle Auditor Notes
+      .WidgetBoxContent.information
+        .toolbar-widget.row-fluid
+          / Make buttons slightly darker and washed out
+          .span6
+            %label Internal Audit Status
+            %a.btn.btn-warning.span12{"data-toggle" => "modal", :href => "#comingsoonModal"}
+              %i.gcmsicon-asterix-white
+              Remediate
+          .span6
+            %label External Audit Status
+            %a.btn.btn-warning.span12{"data-toggle" => "modal", :href => "#"}
+              %i.gcmsicon-asterix-white
+              Blank
+        #programinformation.in
+          %hr.hr-widget/
+          .row-fluid
+            .span12
+              .span4
+                %label Approve Date
+                %input.inputtext-small{:disabled => "disabled", :placeholder => "April 14,2012", :type => "text"}/
+              .span4
+                %label Approving Auditor
+                %input.inputtext-small{:disabled => "disabled", :placeholder => "John Peters", :type => "text"}/
+              .span4
+                %label Year
+                %input.inputtext-small{:disabled => "disabled", :placeholder => "2011", :type => "text"}/
+          %label Auditor Notes
+          %textarea#textarea{:disabled => "disabled", :placeholder => "", :rows => "3", :style => "margin: 0px; width: 98%; height: 73px; "} PCI DDS applies whenever Cardholder account data and Authentication Data is Stored, Processed or Transmitted. Examples Include: For more See Page 7 of document. Using h6 makes the label caps.
+          %label Control Text
+          Version 1.2
+          %textarea#textarea{:disabled => "disabled", :placeholder => "", :rows => "3", :style => "margin: 0px; width: 98%; height: 73px; "} PCI DDS applies whenever Cardholder account data and Authentication Data is Stored, Processed or Transmitted. Examples Include: For more See Page 7 of document. Using h6 makes the label caps.
+          %label Control Verification
+          %label Testing Procedure
+          %textarea#textarea{:disabled => "disabled", :placeholder => "", :rows => "3", :style => "margin: 0px; width: 98%; height: 73px; "} PCI DDS applies whenever Cardholder account data and Authentication Data is Stored, Processed or Transmitted. Examples Include: For more See Page 7 of document. Using h6 makes the label caps.
+          .row-fluid
+            .span4
+              %label Date Start
+              %input.inputtext-small{:disabled => "disabled", :placeholder => "Sarbanes-Oxley Long Title", :type => "text"}/
+            .span4
+              %label Frequency
+              %input.inputtext-small{:disabled => "disabled", :placeholder => "Deprecated", :type => "text"}/
+            .span4
+              %label Means
+              %input.inputtext-small{:disabled => "disabled", :placeholder => "Deprecated", :type => "text"}/
+          %hr.hr-widget/
+          .row-fluid
+            .span12
+              %h3
+                References
+                %a.btn.btn-blue.addbtn.fltrt{"data-toggle" => "modal", :href => "#referenceSelectorModal"} Edit
+              %ul#referenceList
+                %li.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+                  .controls-group
+                    .controls-type 2010
+                    .controls-subtype PDF
+                    .controls-subgroup Official Company Document
+          %hr.hr-widget/
+          .row-fluid
+            .span12
+              %h3
+                People
+                %a.btn.btn-blue.addbtn.fltrt{"data-toggle" => "modal", :href => "#peopleSelectorModal"} Edit
+              %ul#peopleList
+                %li.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#peopleSelectorModal"}
+                  .controls-group
+                    .controls-type Joss Rayburn
+                    .controls-subtype Owner
+                    .controls-subgroup JRayburn@google.com
+          %hr.hr-widget/
+        / close enlarge div
+        .row-fluid.nominheight
+          .span6.nominheight
+            %label.fltlft{:for => "control-effectivedate"}
+              %strong> Created
+              \: 03/15/2012 19:16
+          .span6.nominheight.fltrt
+            %label.fltlft{:for => "control-verificationdate"}
+              %strong> Updated
+              \: 04/12/2012 14:32
+      / end of widget

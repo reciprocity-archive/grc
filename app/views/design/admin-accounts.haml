@@ -1,0 +1,79 @@
+-@title = "CMS: Admin Area"
+
+-content_for :header do
+  %ol#breadcrumb
+    %li.last
+      %a{:href => "programs.htm"} ADMIN AREA
+  #pageTitle.location Sys Admin
+
+-content_for :page_help, 'admin_accounts'
+
+-content_for :subheader_extras do
+  %h1#pageType.fltrt.highlighted Accounts and Roles
+
+.row-static
+  .doubleColumn
+    / Start of widget
+    #companycontrolwidget.WidgetBox
+      .WidgetBoxHeading
+        %nav
+          %a.widgettextbtn{"data-toggle" => "modal", :href => "#"} Edit
+        .WidgetTitle.doublewidth Accounts
+      .WidgetBoxContent
+        %ul.slugtree
+          %li.row-fluid{:id => "content_PCI.A.0"}
+            .collapsed.slot.regulationslot.span12.toggle{"data-target" => "#examplecontrols0", "data-toggle" => "collapse"}
+              %a.widgetbtn.fltrt{:href => "controls.htm", :style => "position:relative; top:-3px; margin-left:4px;"}
+                %i.gcmsicon-arrowright-grey
+              .expander
+              %span.prefix PCI.A.1
+              Money-back feel superior deeply tasting chosen far new discover calories survey satisfied, get. Rosy offer low-cost hot, dry touch grab permanent register genuine provocative.
+            #examplecontrols0.row-fluid-slotcontent.collapse.out
+              Money-back feel superior deeply tasting chosen far new discover calories survey satisfied, get. Rosy offer low-cost hot, dry touch grab permanent register genuine provocative. Want, durable rosy, triple chosen buy wholesome traditional all extravaganza. Desire coming all-over classic satisfied traditional what original creamy choice reputation have quite well. Savor proven finest our action, crystals deserve. All-over monster discount chunky deal find goodness. Offer by you also plus a incredible time. Find sure are appearance, want, golden.
+    / end of widget
+  .singleColumn
+    / Start of widget
+    #companycontrolwidget.WidgetBox
+      .WidgetBoxHeading
+        %nav
+          %a.widgettextbtn{"data-toggle" => "modal", :href => "#"} Edit
+        .WidgetTitle.doublewidth Roles
+      .WidgetBoxContent
+        .row-fluid
+          .span12
+            .span6
+              %label Role
+            .span6
+              %label Name of Role
+        .row-fluid
+          .span12
+            .span6
+              %h3 Program Managers
+            .span6.fltrt
+              %input.input-medium{:id => "", :placeholder => "Program Manager", :type => "text"}/
+        .row-fluid
+          .span12
+            %textarea.span12{:disabled => "disabled", :placeholder => "", :rows => "3", :style => "margin: 0px; width: 98%; height: 73px; "} Program Managers are company employees who are resposible for one or more regulatory programs. They can review all program-related info and launch audit cycles.
+          %br/
+          %span.help-inline
+        .row-fluid
+          .span12
+            .span6
+              %h3 External Auditors
+            .span6.fltrt
+              %input.input-medium{:id => "", :placeholder => "External Auditor", :type => "text"}/
+        .row-fluid
+          .span12
+            %textarea.span12{:disabled => "disabled", :placeholder => "", :rows => "3", :style => "margin: 0px; width: 98%; height: 73px; "} External Auditor are company employees who are resposible for one or more regulatory programs. They can review all program-related info and launch audit cycles.
+          %br/
+          %span.help-inline
+        .row-fluid
+          .span12
+            .span6
+              %h3 Analyst
+            .span6.fltrt
+              %input.input-medium{:id => "", :placeholder => "Analyst", :type => "text"}/
+        .row-fluid
+          .span12
+            %textarea.span12{:disabled => "disabled", :placeholder => "", :rows => "3", :style => "margin: 0px; width: 98%; height: 73px; "} External Auditor are company employees who are resposible for one or more regulatory programs. They can review all program-related info and launch audit cycles.
+    / end of widget

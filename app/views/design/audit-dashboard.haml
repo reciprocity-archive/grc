@@ -1,0 +1,165 @@
+-@title = "CMS: Auditor Dashboard"
+
+-content_for :header do
+  %ol#breadcrumb
+    %li.last
+      %a{:href => "programs.htm"} AUDIT
+  #pageTitle.location Sarbanes-Oxley 2012 Audit
+
+-content_for :page_help, 'changeme'
+
+-content_for :subheader_extras do
+  %h1#pageType.fltrt.highlighted Auditor Dashboard
+
+-content_for :header_buttons do
+  .btn-group.last
+    %a.btn{:href => "#"} Select Audit
+
+.row-static
+  .doubleColumn
+    / .RegsandControls
+    .WidgetBox.fullHeight.doubleWide
+      .WidgetBoxHeading
+        .fltrt
+          /
+            <a href="#comingsoonModal" class="widgetbtn" data-toggle="modal"><i class="gcmsicon-questionmark-grey"></i></a>
+            <a href="#newsectionModal" data-toggle="modal"  class="widgettextbtn">Edit Regulations</a>
+            <a href="#newsectionModal" data-toggle="modal"  class="widgettextbtn">Edit Controls</a>
+            <input type="text" placeholder="Search" class="ui-corner-all widgetsearch">
+        .WidgetTitle.doublewidth Audit Status
+      / /.WidgetBoxHeading
+      .WidgetBoxContent
+        .row-fluid
+          .span7
+          .span2.well
+            .fltnone Requests
+          .span3.well.fltrt
+            .fltnone Target Systems
+        .row-fluid
+          .span7
+          .span2
+            %label.fltnone &nbsp; Requests
+          .span1
+            %label.fltnone &nbsp;Complete
+          .span1
+            %label.fltnone &nbsp;Pending
+          .span1
+            %label.fltnone &nbsp;Out
+        #auditstatus
+          / CONTENT VIA JSRENDER
+      / /.WidgetBoxContent
+    / /.RegsandControls
+    .singleColumn
+    / end of singlecolumn
+    .singleColumn
+  / end of doubleColumn
+  .singleColumn
+    #systeminfowidget.WidgetBox
+      .WidgetBoxHeading
+        %nav
+          %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+            %i.gcmsicon-questionmark-grey
+          %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#auditInfo"}
+            %i.gcmsicon-enlarge-grey
+        .WidgetTitle Audit Info
+      .WidgetBoxContent
+        .row-fluid
+          .span6
+            %label Audit Phase/Status
+            %a.btn.btn-warning.span12{"data-toggle" => "modal", :href => "#comingsoonModal"}
+              %i.gcmsicon-asterix-white
+              Pre-Audit
+          .span6
+            %label Audit Firm
+            %a.btn.span12{"data-toggle" => "modal", :href => "#comingsoonModal"}
+              %i.gcmsicon-asterix-black
+              Ernst and Young
+        #auditInfo.in
+          %hr.hr-widget/
+          .row-fluid
+            .span12
+              %h3
+                References
+                %a.btn.btn-blue.addbtn.fltrt{"data-toggle" => "modal", :href => "#referenceSelectorModal"} Edit
+              %ul#referenceList
+                %li.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+                  .controls-group
+                    .controls-type 2010
+                    .controls-subtype PDF
+                    .controls-subgroup Privacy Report
+                %li.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+                  .controls-group
+                    .controls-type 2011
+                    .controls-subtype PDF
+                    .controls-subgroup PWC Audit Portal
+          %hr.hr-widget/
+          .row-fluid
+            .span12
+              %h3
+                Responsible Parties
+                %a.btn.btn-blue.addbtn.fltrt{"data-toggle" => "modal", :href => "#peopleSelectorModal"} Edit
+              %ul#peopleList
+                %li.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+                  .controls-group
+                    .controls-type Paul Maybeck
+                    .controls-subtype Senior Auditor
+                    .controls-subgroup pMaybeck@ey.com
+                %li.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+                  .controls-group
+                    .controls-type Sal Maybeck
+                    .controls-subtype Field Auditor
+                    .controls-subgroup sMaybeck@ey.com
+    / end of widget
+    #companycontrolwidget.WidgetBox
+      .WidgetBoxHeading
+        %nav
+          %a.widgettextbtn{"data-toggle" => "modal", :href => "#auditdefaultscope"} Edit
+        .WidgetTitle.doublewidth Default Scope of Audit
+      .WidgetBoxContent
+        .row-fluid.FLTNONE.nominheight
+          .controls-group.span6.nominheight
+          .span6.nominheight
+            .span4.nominheight
+              %label.fltnone Current
+            .span4.nominheight
+              %label.fltnone Pending
+            .span4.nominheight
+              %label.fltnone Out
+        %ul#TransactionList.in
+          %li.controlSlot.ui-draggable.row-fluid.nominheight{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+            .controls-group.span6.nominheight
+              .controls-type PC-2
+              .controls-subtype
+              .controls-subgroup Traffic Team
+            .span6.badges.nominheight
+              .span4.nominheight
+                .badge.badge-success.fltnone 1/3
+              .span4.nominheight
+                .badge.badge-warning.fltnone 33
+              .span4.nominheight
+                .badge.badge-important.fltnone 9
+          %li.controlSlot.ui-draggable.row-fluid.nominheight{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+            .controls-group.span6.nominheight
+              .controls-type PC-2
+              .controls-subtype
+              .controls-subgroup Enterprise Apps
+            .span6.badges.nominheight
+              .span4.nominheight
+                .badge.badge-success.fltnone 1/3
+              .span4.nominheight
+                .badge.badge-warning.fltnone 33
+              .span4.nominheight
+                .badge.badge-important.fltnone 9
+          %li.controlSlot.ui-draggable.row-fluid.nominheight{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+            .controls-group.span6.nominheight
+              .controls-type PC-2
+              .controls-subtype
+              .controls-subgroup More Team Stuff
+            .span6.badges.nominheight
+              .span4.nominheight
+                .badge.badge-success.fltnone 1/3
+              .span4.nominheight
+                .badge.badge-warning.fltnone 33
+              .span4.nominheight
+                .badge.badge-important.fltnone 9
+    / end of widget

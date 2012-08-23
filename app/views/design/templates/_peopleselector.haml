@@ -1,0 +1,81 @@
+#peopleSelectorModal.modal.hide.fade
+  .modal-header
+    %nav
+      %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
+      %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+        %i.gcmsicon-questionmark-grey
+      %a.widgetbtn{"data-dismiss" => "modal", :href => "#"}
+        %i.gcmsicon-x-grey
+    %h1 Select People
+  .modal-body
+    .row-fluid
+      .span6
+        %h3 People associated with this object
+        %ul#modalpeopleList.itemlist
+          %li.controlSlot.ui-draggable
+            .arrowcontrols-group
+              .controls-type Controls-Type
+              .controls-subtype{:style => "top:5px;"}
+                %a.btn.dropdown-toggle.statustextred{"data-toggle" => "dropdown", :href => "#"} Select Role
+                %ul.dropdown-menu.dropdown-menusmall
+                  %li Owner
+                  %li User
+              .controls-subgroup Controls-Subgroup
+            %a.personItem.removeCircleButton.fltrt
+              %i.gcmssmallicon-dash-white
+          %li.controlSlot.ui-draggable
+            .arrowcontrols-group
+              .controls-type Joss Rayburn
+              .controls-subtype Owner
+              .controls-subgroup JRayburn@google.com
+            %a.personItem.removeCircleButton.fltrt
+              %i.gcmssmallicon-dash-white
+          %li.controlSlot.ui-draggable
+            .arrowcontrols-group
+              .controls-type Joss Rayburn
+              .controls-subtype Owner
+              .controls-subgroup JRayburn@google.com
+            %a.personItem.removeCircleButton.fltrt
+              %i.gcmssmallicon-dash-white
+      .span6
+        %h3
+          Select person to add
+          %a.btn.btn-blue.addbtn.fltrt{"data-toggle" => "modal", :href => "#newpersonModal"} New Person
+        %ul#modalfullpeopleList.itemlist
+          %li.controlSlot.addpersonItem.ui-draggable
+            .itemarrow
+            .arrowcontrols-group
+              .controls-type Controls-Type
+              .controls-subtype Controls-Subtype
+              .controls-subgroup Controls-Subgroup
+          %li.controlSlot.addpersonItem.ui-draggable
+            .itemarrow
+            .arrowcontrols-group
+              .controls-type Joss Rayburn
+              .controls-subtype Owner
+              .controls-subgroup JRayburn@google.com
+          %li.controlSlot.addpersonItem.ui-draggable
+            .itemarrow
+            .arrowcontrols-group
+              .controls-type Joss Rayburn
+              .controls-subtype Owner
+              .controls-subgroup JRayburn@google.com
+          %li.controlSlot.addpersonItem.ui-draggable
+            .itemarrow
+            .arrowcontrols-group
+              .controls-type Ron Poder
+              .controls-subtype Owner
+              .controls-subgroup rpoder@google.com
+      .span12
+  .modal-footer
+    .row-fluid
+      %nav.fltlft.txtlft.span3
+        %a.btn-large.btn-info{"data-dismiss" => "modal", :href => "#comingsoonModal"} Cancel
+        / <a href="#comingsoonModal" class="btn-large btn-warning" data-dismiss="modal">Delete</a>
+      .toolbar-widget.span6
+        /
+          <a href="#comingsoonModal" class="btn"><i class="gcmsicon-arrowleft-black"></i></a>
+          <span class="btnwell">Showing Most Recent of 3 Revisions</span>
+          <a href="#comingsoonModal" class="btn"><i class="gcmsicon-arrowright-black"></i></a>
+      %nav.fltrt.txtrt.span3
+        %a.close{"data-dismiss" => "modal", :href => "#comingsoonModal"} Done

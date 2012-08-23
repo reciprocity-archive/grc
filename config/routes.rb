@@ -166,6 +166,11 @@ CmsRails::Application.routes.draw do
 
   match 'admin_dash' => 'admin_dash#index'
 
+  # Catch-all for beta views
+  get 'admin_dash/:action' => 'admin_dash'
+  get 'design/templates/:name' => 'design#templates'
+  get 'design/:action' => 'design'
+
   get "mapping/show/:program_id" => 'mapping#show', :as => 'mapping_program'
   get 'mapping_section_dialog/:section_id' => 'mapping#section_dialog', :as => 'mapping_section_dialog'
   post "mapping/map_rcontrol"

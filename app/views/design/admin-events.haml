@@ -1,0 +1,40 @@
+-@title = "CMS: Admin Area"
+
+-content_for :header do
+  %ol#breadcrumb
+    %li.last
+      %a{:href => "programs.htm"} ADMIN AREA
+  #pageTitle.location Sys Admin
+
+-content_for :page_help, 'admin_events'
+
+-content_for :subheader_extras do
+  %h1#pageType.fltrt.highlighted Scheduled Events
+
+.row-static
+  .doubleColumn
+    / Start of widget
+    #companycontrolwidget.WidgetBox
+      .WidgetBoxHeading
+        %nav
+          %a.widgettextbtn{"data-toggle" => "modal", :href => "#"} Edit
+        .WidgetTitle.doublewidth Calendar
+      .WidgetBoxContent
+        %hr.hr-widget/
+        .row-fluid.nominheight
+          %hr.hr-widget/
+          %a.fltrt.btn-large.btn-info{"data-dismiss" => "modal", :href => "#comingsoonModal"} View
+    / end of widget
+  .singleColumn
+    / Start of widget
+    #companycontrolwidget.WidgetBox
+      .WidgetBoxHeading
+        %nav
+          %a.widgettextbtn{"data-toggle" => "modal", :href => "#"} Edit
+        .WidgetTitle.doublewidth Create an Event
+      .WidgetBoxContent
+        %hr.hr-widget/
+        .row-fluid.nominheight
+          %hr.hr-widget/
+          %a.fltrt.btn-large.btn-info{"data-dismiss" => "modal", :href => "#comingsoonModal"} Settings
+    / end of widget

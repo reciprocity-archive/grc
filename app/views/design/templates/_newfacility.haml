@@ -1,0 +1,55 @@
+/ createnewfacility Modal
+#createnewfacility.modal.hide.fade
+  .modal-header
+    %nav
+      %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+        %i.gcmsicon-questionmark-grey
+      %a.widgetbtn{"data-dismiss" => "modal", :href => "#"}
+        %i.gcmsicon-x-grey
+    %h1 Create New Facility
+  .modal-body
+    .row-fluid
+      .span2.form-inline.control-group
+        %label{:for => "control-program"} Code
+        %br/
+        %input#control-program.inputtext-small.forminputsuccess{:placeholder => "BUILD-43", :type => "text"}/
+        %br/
+        %span.help-inline
+      .span4.form-inline.control-group
+        %label{:for => "control-code"} Name
+        %br/
+        %input#control-code.input-large.forminputsuccess{:placeholder => "", :type => "text", :value => "Building"}/
+        %br/
+        %span.help-inline
+      .span3.form-inline.control-group
+        %label{:for => "control-version"} Version
+        %br/
+        %input#control-version.input-supermini.forminputsuccess{:placeholder => "4.3", :type => "text"}/
+        %br/
+        %span.help-inline
+      .span3.form-inline.control-group.fltrt
+        %label{:for => "select01"} Type
+        %br/
+        .controls
+          %select#select01
+            %option List Table
+            %option 2
+            %option 3
+            %option 4
+            %option 5
+        %br/
+        %span.help-inline
+  .modal-footer
+    .row-fluid
+      %nav.fltlft.txtlft.span3
+        %a.btn-large.btn-info{"data-dismiss" => "modal", :href => "#comingsoonModal"} Cancel
+        %a.btn-large.btn-warning{"data-dismiss" => "modal", :href => "#comingsoonModal"} Delete
+      .toolbar-widget.span6
+        %a.btn{:href => "#comingsoonModal"}
+          %i.gcmsicon-arrowleft-black
+        %span.btnwell Showing Most Recent of 3 Revisions
+        %a.btn{:href => "#comingsoonModal"}
+          %i.gcmsicon-arrowright-black
+      %nav.fltrt.txtrt.span3
+        %a.btn-large.btn-warning{"data-dismiss" => "modal", :href => "#comingsoonModal"} Save
+        %a.btn-large.btn-success{"data-dismiss" => "modal", :href => "#comingsoonModal"} I Approve

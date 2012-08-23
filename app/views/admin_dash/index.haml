@@ -1,7 +1,7 @@
 -content_for :header do
   %ol#breadcrumb
     %li ADMIN
-  .location#pageTitle Admin Dashboard
+  .location#pageTitle Sys Admin Dashboard
 
 -content_for :page_help, 'admin'
 
@@ -20,13 +20,259 @@
         %a{ :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :href => new_flow_person_path }
           Person
 
+-if has_feature? :BETA
+  .row-static
+    .singleColumn
+      / Start of widget
+      #companycontrolwidget.WidgetBox
+        .WidgetBoxHeading
+          %nav
+            %a.widgettextbtn{"data-toggle" => "modal", :href => "#"} Edit
+          .WidgetTitle.doublewidth Settings and Options
+        .WidgetBoxContent
+          %h3 System-Wide Settings
+          %hr.hr-widget/
+          %h3 Options - These are used for Menus
+          .row-fluid.nominheight
+            %hr.hr-widget/
+            %a.fltrt.btn-large.btn-info{"data-dismiss" => "modal", :href => "/design/admin-settings"} View
+      / end of widget
+      / Start of widget
+      #companycontrolwidget.WidgetBox
+        .WidgetBoxHeading
+          %nav
+            %a.widgettextbtn{"data-toggle" => "modal", :href => "#"} Edit
+          .WidgetTitle.doublewidth Documentation and Help
+        .WidgetBoxContent
+          %hr.hr-widget/
+          .row-fluid.nominheight
+            %hr.hr-widget/
+            %a.fltrt.btn-large.btn-info{"data-dismiss" => "modal", :href => "#comingsoonModal"} Go to Documentation Folder
+      / end of widget
+    .singleColumn
+      / Start of widget
+      #companycontrolwidget.WidgetBox
+        .WidgetBoxHeading
+          %nav
+            %a.widgettextbtn{"data-toggle" => "modal", :href => "#"} Edit
+          .WidgetTitle.doublewidth Accounts & Roles
+        .WidgetBoxContent
+          %hr.hr-widget/
+          .row-fluid.nominheight
+            %hr.hr-widget/
+            %a.fltrt.btn-large.btn-info{"data-dismiss" => "modal", :href => "/design/admin-accounts"} View
+      / end of widget
+
+      / Start of widget
+      #companycontrolwidget.WidgetBox
+        .WidgetBoxHeading
+          %nav
+            %a.widgettextbtn{"data-toggle" => "modal", :href => "#"} Edit
+          .WidgetTitle.doublewidth Scheduled Events
+        .WidgetBoxContent
+          .row-fluid.fltnone
+            .span6
+              %label
+                %strong Scheduled Events
+              %strong 239
+              Systems
+            .span6
+              .row-fluid
+                .span2.fltrt
+                .span4.fltrt
+                  %label.fltnone
+                    %strong Past
+                  .badge.badge-success.fltnone 197
+                .span3.fltrt
+                  %label.fltnone
+                    %strong Present
+                  .badge.badge-warning.fltnone 33
+                .span3.fltrt
+                  %label.fltnone
+                    %strong Future
+                  .badge.badge-important.fltnone 9
+          %hr.hr-widget/
+          .row-fluid.nominheight
+            %hr.hr-widget/
+            %a.fltrt.btn-large.btn-info{"data-dismiss" => "modal", :href => "/design/admin-events"} View
+      / end of widget
+
+    .singleColumn
+      / Start of widget
+      #companycontrolwidget.WidgetBox
+        .WidgetBoxHeading
+          %nav
+            %a.widgettextbtn{"data-toggle" => "modal", :href => "#"} Edit
+          .WidgetTitle.doublewidth References and Validations
+        .WidgetBoxContent
+          %hr.hr-widget/
+          .row-fluid.nominheight
+            %hr.hr-widget/
+            %a.fltrt.btn-large.btn-info{"data-dismiss" => "modal", :href => "/design/admin-refval"} View
+      / end of widget
+      / Start of widget
+      #companycontrolwidget.WidgetBox
+        .WidgetBoxHeading
+          %nav
+            %a.widgettextbtn{"data-toggle" => "modal", :href => "#"} Edit
+          .WidgetTitle.doublewidth Logs
+        .WidgetBoxContent
+          %hr.hr-widget/
+          %ul#TransactionList.in
+            %li.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+              .controls-group
+                .controls-type Log-1
+                .controls-subtype
+                .controls-subgroup Log Report 1
+            %li.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+              .controls-group
+                .controls-type Log-2
+                .controls-subtype
+                .controls-subgroup Log Report 2
+            %li.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+              .controls-group
+                .controls-type Log-3
+                .controls-subtype
+                .controls-subgroup Log Report 3
+          .row-fluid.nominheight
+            %hr.hr-widget/
+          %a.fltrt.btn-large.btn-info{"data-dismiss" => "modal", :href => "/design/admin-logs"} View
+      / end of widget
+
 .row-static
-  .doubleColumn
-    .doubleWide.fullHeight
+  .singleColumn
+    .singleWide
+      .WidgetBox
+        .WidgetBoxHeading
+          .WidgetTitle Toggle Features
+        .WidgetBoxContent.fltnone
+          -path = request.fullpath.gsub(/BETA=[^&]*&?/, '').sub(/[?&]$/, '')
+          -path += path.include?('?') ? '&' : '?'
+          -if has_feature? :BETA
+            %a.btn-large.btn-warning{ :href => "#{path}BETA=0" } disable Beta features
+          -else
+            %a.btn-large.btn-success{ :href => "#{path}BETA=1" } enable Beta features
+
+  -if has_feature? :BETA
+    .singleColumn
+      / in progress
+      #Programs.WidgetBox.singleWide
+        .WidgetBoxHeading
+          .WidgetTitle In-Progress
+          %nav
+            %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+              %i.gcmsicon-questionmark-grey
+            %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
+            %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#programInProgress"}
+              %i.gcmsicon-enlarge-grey
+        / /.WidgetBoxHeading
+        .WidgetBoxContent
+          #programInProgress.toolbar-widget.in
+            The following are out of place Modals (for testing only)
+            %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#quickLinks"}
+              %i.fltrt.gcmsicon-enlarge-grey.gcmssmallicon-blue-expand
+            %ul#quickLinks.nav.nav-tabs.nav-stacked.in
+              %li.group
+                %a.btn{"data-toggle" => "modal", :href => "#sendauditorinvite"}
+                  %i.gcmsicon-mapping-black>
+                  Send Auditor Invite
+              %li.group
+                %a.btn{"data-toggle" => "modal", :href => "#auditdefaultscope"}
+                  %i.gcmsicon-mapping-black>
+                  Set Audit Default Scope
+              %li.group
+                %a.btn{"data-toggle" => "modal", :href => "#confirmModal"}
+                  %i.gcmsicon-mapping-black>
+                  Are You Sure?
+              %li.group
+                %a.btn{"data-toggle" => "modal", :href => "#basicnewpersonModal"}
+                  %i.gcmsicon-mapping-black>
+                  Basic New Person
+              %li.group
+                %a.btn{"data-toggle" => "modal", :href => "#newtransactionModal"}
+                  %i.gcmsicon-mapping-black>
+                  New Transaction
+              %li.group
+                %a.btn{"data-toggle" => "modal", :href => "#newprogramModal"}
+                  %i.gcmsicon-mapping-black>
+                  New Program
+              %li.group
+                %a.btn{"data-toggle" => "modal", :href => "#newcontrolModal"}
+                  %i.gcmsicon-gears-black>
+                  New Control
+              %li.group
+                %a.btn{"data-toggle" => "modal", :href => "#newsectionModal"}
+                  %i.gcmsicon-asterix-black
+                  New Section
+              %li.group
+                %a.btn{"data-toggle" => "modal", :href => "#newsystemModal"}
+                  %i.gcmsicon-asterix-black
+                  New/Edit System/Biz Process
+              %li.group
+                %a.btn{"data-toggle" => "modal", :href => "#createnewProduct"}
+                  %i.gcmsicon-asterix-black
+                  New/Edit Product
+              %li
+                %h5 In progress
+              %li.group
+                %a.btn{"data-toggle" => "modal", :href => "#createnewfacility"}
+                  %i.gcmsicon-newfacility-black
+                  New Location/Facility
+              %li.group
+                %a.btn{"data-toggle" => "modal", :href => "#newentityModal"}
+                  %i.gcmsicon-organization-black
+                  New Entity/Org Group
+              %li.group
+                %a.btn{"data-toggle" => "modal", :href => "#createnewthreat"}
+                  %i.gcmsicon-threat-black
+                  New Threat/Risk
+            %br/
+            %h5 The following are out of place Pages (for testing only).
+            %ul.nav.nav-tabs.nav-stacked
+              -#%li.group
+                %a.btn{:href => "admin.htm"}
+                  %i.gcmsicon-asterix-black
+                  Admin
+              -#%li.group
+                %a.btn{:href => "controls.htm"}
+                  %i.gcmsicon-asterix-black
+                  Controls Page
+              %li.group
+                %a.btn{:href => "/design/audit-setup"}
+                  %i.gcmsicon-asterix-black
+                  Audit Setup
+              %li.group
+                %a.btn{:href => "/design/audit-dashboard"}
+                  %i.gcmsicon-asterix-black
+                  Audit Manager
+              %li.group
+                %a.btn{:href => "/design/audit-manager"}
+                  %i.gcmsicon-asterix-black
+                  Audit Manager
+              %li.group
+                %a.btn{:href => "/design/audit-control-review"}
+                  %i.gcmsicon-asterix-black
+                  Audit Controls Review
+              -#%li.group
+                %a.btn{:href => "systems.htm"}
+                  %i.gcmsicon-asterix-black
+                  Systems Page
+              %li.group
+                %a.btn{:href => "/design/products"}
+                  %i.gcmsicon-asterix-black
+                  Products Page
+              -#%li.group
+                %a.btn{:href => "programs.htm"}
+                  %i.gcmsicon-asterix-black
+                  Programs Page
+      / end in progress
+  .singleColumn
+    .fullHeight
       =render :partial => 'admin_dash/accounts',
               :layout => 'layouts/widget_box',
               :locals => { :accounts => @accounts, :people => @people }
+
   .singleColumn
-    .singleWide.halfHeight
+    .halfHeight
       =render :partial => 'admin_dash/old_links',
               :layout => 'layouts/widget_box'

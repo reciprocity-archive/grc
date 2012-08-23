@@ -1,0 +1,170 @@
+#newcontrolModal.modal.hide.fade
+  .modal-header
+    %nav
+      %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+        %i.gcmsicon-questionmark-grey
+      %a.widgetbtn{"data-dismiss" => "modal", :href => "#"}
+        %i.gcmsicon-x-grey
+    %h1 Create/Edit New Control
+  .modal-body
+    %form.form-inline
+      / start row
+      .row-fluid
+        .span8
+          / start column
+          .row-fluid
+            .span3.form-inline.control-group
+              .form-inline.control-group
+                %label{:for => "select01"} Program
+                %br/
+                .controls
+                  %select#select01.input-small.forminputsuccess
+                    %option SOX
+                    %option 2
+                    %option 3
+                    %option 4
+                    %option 5
+                %br/
+                %span.help-inline
+            .span3.form-inline.control-group
+              .form-inline.control-group
+                %label{:for => "control-code"} Code
+                %br/
+                %input#control-code.inputtext-small.forminputsuccess{:placeholder => "SOX", :type => "text"}/
+                %span.help-inline
+            .span6.control-group.fltrt
+              .row-fluid.fltrt
+                #datepicker.span6.form-inline.control-group.date
+                  %label{:for => "control-effectivedate"} Effective Date
+                  %br/
+                  #dp3.date{"data-date" => "02-12-12", "data-date-format" => "dd-mm-yy"}
+                    %input.input-mini.forminputsuccess{:size => "16", :type => "text", :value => "02-12-12"}/
+                    / <span class="calendar"></span>
+                    %span.add-on
+                      %i.calendar
+                  :javascript
+                    // $('#dp3').datepicker('');
+                .span6.form-inline.control-group.error
+                  %label{:for => "control-version"} Version
+                  %br/
+                  %input#control-version.input-supermini.forminputfail{:placeholder => "SOX", :type => "text"}/
+                  %span.help-inline Not a number!
+          / Column one start
+          .row-fluid
+            .span3.form-inline.control-group
+              %label{:for => "select01"} Type
+              %br/
+              .controls
+                %select#select01.input-small.forminputsuccess
+                  %option Company
+                  %option 2
+                  %option 3
+                  %option 4
+                  %option 5
+              %br/
+              %span.help-inline
+            .span3.form-inline.control-group
+              %label{:for => "select01"} Kind
+              %br/
+              .controls
+                %select#select01.input-small.forminputsuccess
+                  %option Preventative
+                  %option 2
+                  %option 3
+                  %option 4
+                  %option 5
+              %br/
+              %span.help-inline
+            .span6.form-inline.control-group
+              %label{:for => "select01"} Means of Operation
+              %br/
+              .controls
+                %select#select01.forminputsuccess.span12
+                  %option Manual w/ Segregation of Duties
+                  %option 2
+                  %option 3
+                  %option 4
+                  %option 5
+              %br/
+              %span.help-inline
+          .row-fluid
+            .span9.control-group
+              %label{:for => "inputError"} Title
+              %input#inputError.span12.forminputsuccess{:placeholder => "Complete Title Goes Here", :type => "text"}/
+              %br/
+              %span.help-inline
+            .span3.form-inline.control-group
+              %label{:for => "select01"} Status
+              %br/
+              .controls
+                %select#select01.forminputsuccess.input-small
+                  %option Deprecated
+                  %option Open
+              %br/
+              %span.help-inline
+        / end first column
+        #categorylist.span4.form-inline.control-group.well
+          %h3
+            Categories
+            %a#popoverexample9.btn.btn-blue.addbtn.fltrt{ "data-popover-href" => "#", :href => "#"} Add
+          %hr.hrspaced/
+          %ul
+            %li.controlSlot.ui-draggable
+              .controls-type Joss Rayburn
+              .controls-subtype Owner
+              .controls-subgroup JRayburn@google.com
+            %li.controlSlot.ui-draggable
+              .controls-type Joss Rayburn
+              .controls-subtype Owner
+              .controls-subgroup JRayburn@google.com
+      .row-fluid
+        %label{:for => "control-description"} Note
+      .row-fluid{"control-group" => ""}
+        .span12.well
+          %textarea#control-description.span12.forminputsuccess{:placeholder => "", :rows => "4"}
+            :preserve
+              Hendrerit dolus nullus nimis pneum abico quibus, vulputate, macto, autem vulputate. Qui, sagaciter letalis eum quae interdico iriure, eum. Praesent, jus importunus capio abdo velit genitus. Luptatum zelus meus illum, eros capto nulla in augue ymo quod ibidem.
+          :javascript
+            $('#control-description').wysihtml5({
+              "image": false //Button to insert an image. Default true
+            });
+          %span.help-inline.description
+      / end row
+      .row-fluid
+        .span12.control-group
+          %label{:for => "inputError"} URL
+          %input#inputError.span12.forminputsuccess{:placeholder => "http://www.thisisaurl.com/thisurl", :type => "text"}/
+          %br/
+          %span.help-inline
+      .row-fluid.nominheight
+        .span3.nominheight
+          %label.fltlft{:for => "control-effectivedate"}
+            %strong> Created
+            \: 4/1/11
+        .span3.nominheight
+          %label.fltlft{:for => "control-verificationdate"}
+            %strong> Updated
+            \: 5/1/12
+        .span3.nominheight
+          %label.fltrt{:for => "control-effectivedate"}
+            %strong> Last Editor
+            \: Joss Rayburn
+        .span3.nominheight
+          %label.fltrt{:for => "control-verificationdate"}
+            %strong> Approved
+            \:
+            %span.statustextred Not Approved
+  .modal-footer
+    .row-fluid
+      %nav.fltlft.txtlft.span3
+        %a.btn-large.btn-info{"data-dismiss" => "modal", :href => "#comingsoonModal"} Cancel
+        %a.btn-large.btn-warning{"data-dismiss" => "modal", :href => "#comingsoonModal"} Delete
+      .toolbar-widget.span6
+        %a.btn{:href => "#comingsoonModal"}
+          %i.gcmsicon-arrowleft-black
+        %span.btnwell Showing Most Recent of 3 Revisions
+        %a.btn{:href => "#comingsoonModal"}
+          %i.gcmsicon-arrowright-black
+      %nav.fltrt.txtrt.span3
+        %a.btn-large.btn-warning{"data-dismiss" => "modal", :href => "#comingsoonModal"} Save
+        %a.btn-large.btn-success{"data-dismiss" => "modal", :href => "#comingsoonModal"} I Approve

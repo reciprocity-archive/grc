@@ -1,0 +1,15 @@
+#confirmModal.modal.hide.fade
+  .modal-header
+    %nav
+      %a.widgetbtn{"data-dismiss" => "modal", :href => "#"}
+        %i.gcmsicon-x-grey
+    %h1 Confirm_Duplicate
+  .modal-body
+    %p Are you sure you want to delete this record?
+  .modal-footer
+    .row-fluid
+      %nav.fltlft.txtlft.span3
+        %a.btn-large.btn-info{"data-dismiss" => "modal", :href => "#comingsoonModal"} Cancel
+      .toolbar-widget.span6
+      %nav.fltrt.txtrt.span3
+        %a.btn-large.btn-warning{"data-dismiss" => "modal", :href => "#comingsoonModal"} Delete

@@ -1,0 +1,135 @@
+#createnewProduct.modal.hide.fade
+  .modal-header
+    %nav
+      %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+        %i.gcmsicon-questionmark-grey
+      %a.widgetbtn{"data-dismiss" => "modal", :href => "#"}
+        %i.gcmsicon-x-grey
+    %h1 New/Edit Product
+  .modal-body
+    .row-fluid
+      .span2.form-inline.control-group
+        %label{:for => "control-program"} Short Code
+        %br/
+        %input#control-program.inputtext-small.forminputsuccess{:placeholder => "BUILD-43", :type => "text"}/
+        %br/
+        %span.help-inline
+      .span1.form-inline.control-group
+        %label{:for => "control-version"} Version
+        %br/
+        %input#control-version.input-supermini.forminputsuccess{:placeholder => "4.3", :type => "text"}/
+        %br/
+        %span.help-inline
+      .span3.form-inline.control-group.fltrt
+        %label{:for => "select01"} Type
+        %br/
+        .controls
+          %select#select01.inputtext-small
+            %option Select
+            %option 2
+            %option 3
+            %option 4
+            %option 5
+        %br/
+        %span.help-inline
+      .span6.form-inline.control-group.fltrt
+        .controls.fltrt
+          %label{:for => "select02"} Status
+          %br/
+          %select#select02.inputtext-small
+            %option Depreciated
+            %option 2
+            %option 3
+            %option 4
+            %option 5
+        %br/
+        %span.help-inline
+    .row-fluid
+      .span12.control-group
+        %label{:for => ""} Title of Product
+        %input#inputError.span12.forminputsuccess{:placeholder => "http://www.thisisaurl.com/thisurl", :type => "text"}/
+        %br/
+        %span.help-inline
+    / desc
+    .row-fluid
+      .span12.control-group
+        %label{:for => ""} Description
+    .row-fluid{"control-group" => ""}
+      .span12.well
+        %textarea#control-description3.span12.forminputsuccess{:placeholder => "", :rows => "4"}
+          :preserve
+            Hendrerit dolus nullus nimis pneum abico quibus, vulputate, macto, autem vulputate. Qui, sagaciter letalis eum quae interdico iriure, eum. Praesent, jus importunus capio abdo velit genitus. Luptatum zelus meus illum, eros capto nulla in augue ymo quod ibidem.
+        :javascript
+          $('#control-description3').wysihtml5({
+            "image": false //Button to insert an image. Default true
+          });
+        %span.help-inline.description
+    / end row
+    .row-fluid
+      .span12.control-group
+        %label{:for => ""} Direct URL for Control (optional)
+        %input#inputError.span12.forminputsuccess{:placeholder => "http://www.thisisaurl.com/thisurl", :type => "text"}/
+        %br/
+        %span.help-inline
+    .row-fluid
+      #categorylist.span5.form-inline.control-group.well
+        %h3
+          Product Owners
+          %a#popoverexample9.btn.btn-blue.addbtn.fltrt{"data-original-title" => "Popover content", "data-popover-href" => "#", :href => "#"} Add
+        %hr.hrspaced/
+        %ul
+          %li.controlSlot
+            %span.controls-group Jane Goodman
+            %br/
+            %span.controls-subgroup Owner
+          %li.controlSlot
+            %span.controls-group Jeff Goodman
+            %br/
+            %span.controls-subgroup Training
+      #categorylist.span7.form-inline.control-group.well
+        %h3
+          References for Product
+          %a#popoverexample9.btn.btn-blue.addbtn.fltrt{"data-original-title" => "Popover content", "data-popover-href" => "#", :href => "#"} Add
+        %hr.hrspaced/
+        %ul
+          %li.controlSlot
+            %span.controls-group 2012 Style Guides
+            %br/
+            %span.controls-subgroup PDF
+          %li.controlSlot
+            %span.controls-group Policies Website
+            %br/
+            %span.controls-subgroup URL
+    %hr/
+    .row-fluid.nominheight
+      .span3.nominheight
+        %label.fltlft{:for => "control-effectivedate"}
+          %strong> Created
+          \: 4/1/11
+      .span3.nominheight
+        %label.fltlft{:for => "control-verificationdate"}
+          %strong> Updated
+          \: 5/1/12
+      .span3.nominheight
+        %label.fltrt{:for => "control-effectivedate"}
+          %strong> Last Editor
+          \: Joss Rayburn
+      .span3.nominheight
+        %label.fltrt{:for => "control-verificationdate"}
+          %strong> Approved
+          \:
+          %span.statustextred Not Approved
+  .modal-footer
+    .row-fluid
+      %nav.fltlft.txtlft.span3
+        %a.btn-large.btn-info{"data-dismiss" => "modal", :href => "#comingsoonModal"} Cancel
+        %a.btn-large.btn-warning{"data-dismiss" => "modal", :href => "#comingsoonModal"} Delete
+      .toolbar-widget.span6
+        %a.btn{:href => "#comingsoonModal"}
+          %i.gcmsicon-arrowleft-black
+        %span.btnwell Showing Most Recent of 3 Revisions
+        %a.btn{:href => "#comingsoonModal"}
+          %i.gcmsicon-arrowright-black
+      %nav.fltrt.txtrt.span3
+        %a.btn-large.btn-warning{"data-dismiss" => "modal", :href => "#comingsoonModal"} Save
+        %a.btn-large.btn-success{"data-dismiss" => "modal", :href => "#comingsoonModal"} I Approve
