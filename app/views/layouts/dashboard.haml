@@ -38,6 +38,13 @@
                   %a.btn{:href => "dashboard.htm"}
                     %i.gcmsicon-back-black
                     Back
+              -else #we still have a back button when not in beta
+                -if controller.controller_name != 'programs_dash'
+                  .btn-group
+                    -# should find their site path back, jvg hack 
+                    %a.btn{ :onclick => 'history.back(); return false;'  } 
+                      %i.gcmsicon-back-black
+                      Back
               -help_path = yield(:page_help)
               -if !help_path.blank?
                 .btn-group
