@@ -20,7 +20,7 @@
         %input#control-version.input-supermini.forminputsuccess{:placeholder => "4.3", :type => "text"}/
         %br/
         %span.help-inline
-      .span3.form-inline.control-group.fltrt
+      .span2.form-inline.control-group
         %label{:for => "select01"} Type
         %br/
         .controls
@@ -32,7 +32,19 @@
             %option 5
         %br/
         %span.help-inline
-      .span6.form-inline.control-group.fltrt
+      .span3.form-inline.control-group
+        %label{:for => "select01"} Kind
+        %br/
+        .controls
+          %select#select02.input-small
+            %option ---
+            %option 2
+            %option 3
+            %option 4
+            %option 5
+        %br/
+        %span.help-inline
+      .span4.form-inline.control-group.fltrt
         .controls.fltrt
           %label{:for => "select02"} Status
           %br/
@@ -69,37 +81,6 @@
       .span12.control-group
         %label{:for => ""} Direct URL for Control (optional)
         %input#inputError.span12.forminputsuccess{:placeholder => "http://www.thisisaurl.com/thisurl", :type => "text"}/
-        %br/
-        %span.help-inline
-    .row-fluid
-      #categorylist.span5.form-inline.control-group.well
-        %h3
-          Product Owners
-          %a#popoverexample9.btn.btn-blue.addbtn.fltrt{"data-original-title" => "Popover content", "data-popover-href" => "#", :href => "#"} Add
-        %hr.hrspaced/
-        %ul
-          %li.controlSlot
-            %span.controls-group Jane Goodman
-            %br/
-            %span.controls-subgroup Owner
-          %li.controlSlot
-            %span.controls-group Jeff Goodman
-            %br/
-            %span.controls-subgroup Training
-      #categorylist.span7.form-inline.control-group.well
-        %h3
-          References for Product
-          %a#popoverexample9.btn.btn-blue.addbtn.fltrt{"data-original-title" => "Popover content", "data-popover-href" => "#", :href => "#"} Add
-        %hr.hrspaced/
-        %ul
-          %li.controlSlot
-            %span.controls-group 2012 Style Guides
-            %br/
-            %span.controls-subgroup PDF
-          %li.controlSlot
-            %span.controls-group Policies Website
-            %br/
-            %span.controls-subgroup URL
     %hr/
     .row-fluid.nominheight
       .span3.nominheight
