@@ -7,6 +7,9 @@
         %i.gcmsicon-x-grey
     %h1 Create New Program
   .modal-body
+    .alert.alert-info
+      %span#alertMessage
+      / %button.close{:type => "button", :"data-dismiss" => "alert"} ×
     %form.form-inline
       / start row
       .row-fluid
@@ -90,7 +93,7 @@
               %strong> Created
               \: 4/1/11
           .span3.nominheight
-            %label.fltlft{:for => "control-verificationdate"}
+            %label#updatedDate.fltlft{:for => "control-verificationdate"}
               %strong> Updated
               \: 5/1/12
           .span3.nominheight
@@ -99,9 +102,9 @@
               \: Joss Rayburn
           .span3.nominheight
             %label.fltrt{:for => "control-verificationdate"}
-              %strong> Approved
+              %strong> Status
               \:
-              %span.statustextred Not Approved
+              %span#statusValue Draft
   .modal-footer
     .row-fluid
       %nav.fltlft.txtlft.span3
@@ -114,5 +117,5 @@
         %a.btn{:href => "#comingsoonModal"}
           %i.gcmsicon-arrowright-black
       %nav.fltrt.txtrt.span3
-        %a.btn-large.btn-warning{"data-dismiss" => "modal", :href => "#comingsoonModal"} Save
-        %a.btn-large.btn-success{"data-dismiss" => "modal", :href => "#comingsoonModal"} I Approve
+        %a#actionButton.btn-large.btn-success{:href => "#"} Save
+        -#%a.btn-large.btn-success{"data-dismiss" => "modal", :href => "#comingsoonModal"} I Approve

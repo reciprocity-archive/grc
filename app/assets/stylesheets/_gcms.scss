@@ -457,6 +457,9 @@
 .modal-body {
   padding: 10px 15px;
   overflow-y: auto;
+  .alert {
+    display:none;
+  }
   // TODO: Removed because it breaks .slimmodal
   //width:690px;
 }
