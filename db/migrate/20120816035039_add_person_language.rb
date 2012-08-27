@@ -3,6 +3,7 @@ class AddPersonLanguage < ActiveRecord::Migration
 
   # Local models so that migration is safe
   class Option < ActiveRecord::Base
+    attr_accessible :role, :title
   end
 
   def up

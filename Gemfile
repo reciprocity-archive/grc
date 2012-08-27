@@ -5,7 +5,7 @@ if File.exist? 'Gemfile.local'
   instance_eval(Bundler.read_file('Gemfile.local'), 'Gemfile.local', 1)
 end
 
-RAILS_VERSION = '= 3.2.5'
+RAILS_VERSION = '= 3.2.8'
 
 #gem 'gdata-ruby-util', '1.1.2'
 gem 'gdata_19', '~> 1.1.5', :require => 'gdata'
@@ -39,6 +39,8 @@ platforms :jruby do
   end
 end
 
+gem 'encrypted-cookie-store'
+gem 'strict-forgery-protection'
 gem 'authlogic'
 gem 'builder'
 gem 'json'
@@ -76,6 +78,8 @@ group(:development, :test) do
   gem 'autotest-rails'
   gem 'simplecov', :require => false
 
+  gem 'factory_girl_rails', "~> 4.0"
+
   # To get a detailed overview about what queries get issued and how long they take
   # have a look at rails_metrics. Once you bundled it, you can run
   #
@@ -90,20 +94,23 @@ group(:development, :test) do
 
   # gem 'rails_metrics', '~> 0.1', :git => 'git://github.com/engineyard/rails_metrics'
 
-  platform :jruby do
-    gem 'ruby-debug'
-  end
+# Uncomment or paste into Gemfile.local
+#
+#  platform :jruby do
+#    gem 'ruby-debug'
+#  end
+#
   platform :ruby do
-    gem 'linecache19'
-    gem 'ruby-debug-base19x', '~> 0.11.30.pre4'
-    gem 'ruby-debug19', :require => 'ruby-debug'
+#    gem 'linecache19'
+#    gem 'ruby-debug-base19x', '~> 0.11.30.pre4'
+#    gem 'ruby-debug19', :require => 'ruby-debug'
     gem 'ruby-prof'
   end
 
   # Causes rake to fail, uncomment to rebuild docs
-  #gem 'yard-dm'
-  # XXX gem 'yard'
-  # XXX gem 'redcarpet'
+  # gem 'yard-dm'
+  # gem 'yard'
+  # gem 'redcarpet'
   gem 'test-unit'
 end
 

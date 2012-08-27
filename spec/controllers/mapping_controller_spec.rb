@@ -17,7 +17,7 @@ describe MappingController do
     before :each do
       login({}, { :role => 'admin' })
       create_base_objects
-      @cctl = Control.create(:title => 'Company ctl 1', :slug => 'COM1-CTL2', :description => 'x', :program => @creg);
+      @cctl = FactoryGirl.create(:control, :title => 'Company ctl 1', :slug => 'COM1-CTL2', :description => 'x', :program => @creg);
     end
 
     describe "GET 'show'" do
@@ -40,13 +40,13 @@ describe MappingController do
         JSON.parse(response.body).should eq([false, false])
       end
       it "has reg mappings" do
-        ControlSection.create(:section_id => @sec.id, :control_id => @ctl.id)
+        FactoryGirl.create(:control_section, :section_id => @sec.id, :control_id => @ctl.id)
         get 'buttons', :format => :json, :section => @sec.id, :rcontrol => @ctl.id, :ccontrol => @cctl.id
         JSON.parse(response.body).should eq([true, false])
       end
       it "has both mappings" do
-        ControlSection.create(:section_id => @sec.id, :control_id => @ctl.id)
-        ControlControl.create(:control_id => @cctl.id, :implemented_control_id => @ctl.id)
+        FactoryGirl.create(:control_section, :section_id => @sec.id, :control_id => @ctl.id)
+        FactoryGirl.create(:control_control, :control_id => @cctl.id, :implemented_control_id => @ctl.id)
         get 'buttons', :format => :json, :section => @sec.id, :rcontrol => @ctl.id, :ccontrol => @cctl.id
         JSON.parse(response.body).should eq([true, true])
       end

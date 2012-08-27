@@ -23,7 +23,7 @@ CmsRails::Application.configure do
   config.action_dispatch.best_standards_support = :builtin
 
   config.assets.compress = false
-  config.assets.debug = true
+  config.assets.debug = false
   config.assets.compile = true
   config.assets.digest = false
   #config.serve_static_assets = false

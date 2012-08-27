@@ -1,6 +1,6 @@
 /*
  *= require jquery
- *= require jquery-ujs
+ *= require rails
  *= require jquery-ui
  *= require bootstrap
  *= require bootstrap/sticky-popover

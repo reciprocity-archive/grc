@@ -1,11 +1,11 @@
 .row-fluid
   .span12
-    %a.span9.slot.regulationslot.toggle.selector.collapsed{ :href => mapping_selected_section_path(section), :'data-remote' => "true", :'data-method' => "post" }
+    %a.span9.slot.regulationslot.toggle.selector.collapsed{ :href => mapping_selected_section_path(section), :'data-remote' => "true" }
       %span.prefix=section.compact_slug
       =section.title
     -controls = section.preloaded_linked_controls
     -status_class = (controls.empty? && !section.na?) ? 'statusred' : 'statusyellow'
-    %a.controls.selector.attached.controllistRM.span3(class = status_class){ :href => mapping_selected_section_path(section), :data => { :remote => "true", :method => "post", :href => mapping_section_dialog_path(section)} }
+    %a.controls.selector.attached.controllistRM.span3(class = status_class){ :href => mapping_selected_section_path(section), :data => { :remote => "true", :href => mapping_section_dialog_path(section)} }
       -if !controls.empty?
         %ul.spannomargin{ :title => controls.map(&:slug).join(", ") }
           %li

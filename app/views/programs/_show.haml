@@ -43,7 +43,8 @@
       %textarea#textarea.span12{:disabled => "disabled"}=program.description
 
   #create-cycle-modal.modal.hide.fade
-    -cycle = Cycle.new(:program_id => program.id)
+    -cycle = Cycle.new()
+    -cycle.program = program
     =form_for cycle, :url => flow_cycles_path, :method => :post, :remote => true, :html => {:class => :form} do |f|
       .modal-header
         %a.close{ "data-dismiss" => "modal" } x

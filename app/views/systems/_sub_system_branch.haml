@@ -13,7 +13,7 @@
       .row-fluid-slotcontent.collapse{ :id => "content_system_#{system.id}" }
         .span12
           =system.description
-    %ul.collapse{ :class => expanded && 'in', :xid => "content_system_#{system.id}" }
+    %ul
       =walk_slug_tree(Program.slugtree(system.controls)) do |item, step|
         .row-fluid
           .span12
