@@ -147,8 +147,8 @@ class ProgramsController < ApplicationController
     else
       @sections = @program.sections.includes(:controls => :implementing_controls).all
     end
-
     @sections.sort_by(&:slug_split_for_sort)
+    @sections = allowed_objs(@sections, :read)
     render :layout => nil, :locals => { :sections => @sections }
   end
 

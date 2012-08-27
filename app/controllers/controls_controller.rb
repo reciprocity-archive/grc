@@ -110,7 +110,7 @@ class ControlsController < ApplicationController
     if params[:s]
       @controls = @controls.search(params[:s])
     end
-    @controls = allowed_objs(@controls.all, :read).sort_by(&:slug_split_for_sort)
+    @controls.all.sort_by(&:slug_split_for_sort)
     render :action => 'controls', :layout => nil, :locals => { :controls => @controls, :prefix => 'Parent of' }
   end
 
@@ -120,12 +120,11 @@ class ControlsController < ApplicationController
     if params[:s]
       @controls = @controls.search(params[:s])
     end
-    @controls = allowed_objs(@controls.all, :read).sort_by(&:slug_split_for_sort)
+    @controls.all.sort_by(&:slug_split_for_sort)
     render :action => 'controls', :layout => nil, :locals => { :controls => @controls, :prefix => 'Child of' }
   end
 
   private
-  
     def load_control
       @control = Control.find(params[:id])
     end
@@ -134,7 +133,7 @@ class ControlsController < ApplicationController
       control_params = params[:control] || {}
       if control_params[:program_id]
         # TODO: Validate the user has access to add controls to the program
-        params[:control][:program] = Program.find(control_params.delete(:program_id))
+        control_params[:program] = Program.find(control_params.delete(:program_id))
       end
       %w(type kind means).each do |field|
         value = control_params.delete(field + '_id')

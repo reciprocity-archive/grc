@@ -38,7 +38,7 @@ describe ControlsController do
                                            'implementing_controls']
   end
 
-    context "related" do
+  context "related" do
     before :each do
       login({}, {:role => 'read_control'})
       create_base_objects

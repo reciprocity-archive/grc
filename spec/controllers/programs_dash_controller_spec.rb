@@ -17,11 +17,11 @@ describe ProgramsDashController do
     # Set up program owners
     @o1 = Account.find_by_email('owner1@t.com')
     @p1 = Program.find_by_slug('REG1')
-    ObjectPerson.create(:person => @o1.person, :personable => @p1, :role => :owner)
+    FactoryGirl.create(:object_person, :person => @o1.person, :personable => @p1, :role => :owner)
 
     @o2 = Account.find_by_email('owner2@t.com')
     @p2 = Program.find_by_slug('REG2')
-    ObjectPerson.create(:person => @o2.person, :personable => @p2, :role => :owner)
+    FactoryGirl.create(:object_person,:person => @o2.person, :personable => @p2, :role => :owner)
   end
 
   it_behaves_like "an authorized controller"
