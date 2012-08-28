@@ -67,7 +67,7 @@ class TransactionsController < ApplicationController
       transaction_params = params[:transaction] || {}
       if transaction_params[:system_id]
         # TODO: Validate the user has access to add transactions to the system
-        transaction_params[:system] = System.find(transaction_params.delete(:system_id))
+        transaction_params[:system] = System.where(:id => transaction_params.delete(:system_id)).first
       end
       transaction_params
     end
