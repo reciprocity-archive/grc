@@ -120,7 +120,7 @@ class ControlsController < ApplicationController
         values = []
         if value_ids.respond_to?(:each)
           value_ids.each do |value_id|
-            values.push(*Category.where(:id => value_id).first)
+            values.push(Category.where(:id => value_id).first)
           end
           control_params[field.pluralize] = values
         end
