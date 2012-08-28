@@ -235,9 +235,11 @@
               %i.fltrt.gcmsicon-enlarge-grey.gcmssmallicon-blue-expand
             %ul#quickLinks.nav.nav-tabs.nav-stacked.in
               %li.group
+                %a.btn{"data-toggle" => "modal", :href => "#newcontrolModal"}
+                  New Control
+              %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#newprogramModal"}
                   New Program
-              
               %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#newsectionModal"}
                   New Section
@@ -261,14 +263,8 @@
                 %a.btn{"data-toggle" => "modal", :href => "#newtransactionModal"}
                   %i.gcmsicon-mapping-black>
                   New Transaction
-              %li.group
-                %a.btn{"data-toggle" => "modal", :href => "#newcontrolModal"}
-                  %i.gcmsicon-gears-black>
-                  New Control
-              %li.group
-                %a.btn{"data-toggle" => "modal", :href => "#newsectionModal"}
-                  %i.gcmsicon-asterix-black
-                  New Section
+              
+              
               %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#newsystemModal"}
                   %i.gcmsicon-asterix-black
