@@ -64,7 +64,7 @@ class SectionsController < ApplicationController
       section_params = params[:section] || {}
       if section_params[:program_id]
         # TODO: Validate the user has access to add sections to the program
-        params[:section][:program] = Program.find(section_params.delete(:program_id))
+        section_params[:program] = Program.where(:id => section_params.delete(:program_id)).first
       end
       section_params
     end
