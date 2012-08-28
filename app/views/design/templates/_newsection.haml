@@ -16,7 +16,7 @@
             %label{:for => "select01"} Program
             %br/
             .controls
-              %select#select01.input-small.forminputsuccess
+              %select#select01.span12.forminputsuccess
                 %option PCI
                 %option 2
                 %option 3
@@ -28,12 +28,12 @@
           .form-inline.control-group
             %label{:for => "control-code"} Code
             %br/
-            %input#control-code.inputtext-small.forminputsuccess{:placeholder => "SOX", :type => "text"}/
+            %input#control-code.span12.forminputsuccess{:placeholder => "SOX", :type => "text"}/
             %span.help-inline
-        .span1.form-inline.control-group.error
+        .span1.form-inline.control-group
           %label{:for => "control-version"} Version
           %br/
-          %input#control-version.input-supermini.forminputfail{:placeholder => "SOX", :type => "text"}/
+          %input#control-version.span12.forminputsuccess{:placeholder => "SOX", :type => "text"}/
           %span.help-inline Not a number!
         .span7.form-inline.control-group.fltrt
           %label{:for => "status"} Status
@@ -70,25 +70,25 @@
           %input#inputError.span12.forminputsuccess{:placeholder => "http://www.thisisaurl.com/thisurl", :type => "text"}/
           %br/
           %span.help-inline
-      .row-fluid.nominheight
-        .span3.nominheight
-          %label.fltlft{:for => "control-effectivedate"}
-            %strong> Created
-            \: 4/1/11
-        .span3.nominheight
-          %label.fltlft{:for => "control-verificationdate"}
-            %strong> Updated
-            \: 5/1/12
-        .span3.nominheight
-          %label.fltrt{:for => "control-effectivedate"}
-            %strong> Last Editor
-            \: Joss Rayburn
-        .span3.nominheight
-          %label.fltrt{:for => "control-verificationdate"}
-            %strong> Approved
-            \:
-            %span.statustextred Not Approved
   .modal-footer
+    .row-fluid
+      .span3
+        %label.fltlft{:for => "control-effectivedate"}
+          %strong> Created
+          \: 4/1/11
+      .span3
+        %label#updatedDate.fltlft{:for => "control-verificationdate"}
+          %strong> Updated
+          \: 5/1/12
+      .span3
+        %label.fltrt{:for => "control-effectivedate"}
+          %strong> Last Editor
+          \: Joss Rayburn
+      .span3
+        %label.fltrt{:for => "control-verificationdate"}
+          %strong> Status
+          \:
+          %span#statusValue Draft
     .row-fluid
       %nav.fltlft.txtlft.span3
         %a.btn-large.btn-info{"data-dismiss" => "modal", :href => "#comingsoonModal"} Cancel
@@ -100,5 +100,5 @@
         %a.btn{:href => "#comingsoonModal"}
           %i.gcmsicon-arrowright-black
       %nav.fltrt.txtrt.span3
-        %a.btn-large.btn-warning{"data-dismiss" => "modal", :href => "#comingsoonModal"} Save
-        %a.btn-large.btn-success{"data-dismiss" => "modal", :href => "#comingsoonModal"} I Approve
+        %a#actionButton.btn-large.btn-success{:href => "#"} Save
+        -#%a.btn-large.btn-success{"data-dismiss" => "modal", :href => "#comingsoonModal"} I Approve

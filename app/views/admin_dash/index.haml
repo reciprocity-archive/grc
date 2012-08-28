@@ -168,10 +168,17 @@
         / /.WidgetBoxHeading
         .WidgetBoxContent
           #programInProgress.toolbar-widget.in
-            The following are out of place Modals (for testing only)
+            The following are Modals for testing.
             %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#quickLinks"}
               %i.fltrt.gcmsicon-enlarge-grey.gcmssmallicon-blue-expand
             %ul#quickLinks.nav.nav-tabs.nav-stacked.in
+              %li.group
+                %a.btn{"data-toggle" => "modal", :href => "#newprogramModal"}
+                  New Program
+              
+              %li.group
+                %a.btn{"data-toggle" => "modal", :href => "#newsectionModal"}
+                  New Section
               %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#sendauditorinvite"}
                   %i.gcmsicon-mapping-black>
@@ -192,10 +199,6 @@
                 %a.btn{"data-toggle" => "modal", :href => "#newtransactionModal"}
                   %i.gcmsicon-mapping-black>
                   New Transaction
-              %li.group
-                %a.btn{"data-toggle" => "modal", :href => "#newprogramModal"}
-                  %i.gcmsicon-mapping-black>
-                  New Program
               %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#newcontrolModal"}
                   %i.gcmsicon-gears-black>
