@@ -19,7 +19,7 @@
     %link(href='https://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css')
     %link(href='favicon.ico' rel='icon' type='image/x-icon')
 
-  %body
+  %body{ :class => "#{has_feature?(:BETA) ? 'BETA' : ''}" }
     .navbar.navbar-fixed-top
       .navbar-inner#pageheader
         .row-static.container
