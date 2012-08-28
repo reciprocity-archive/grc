@@ -18,8 +18,8 @@
                 %label{:for => "select01"} Program
                 %br/
                 .controls
-                  %select#select01.input-small.forminputsuccess
-                    %option SOX
+                  %select#select01.span12.forminputsuccess
+                    %option SOX - Sarbanes-Oxley
                     %option 2
                     %option 3
                     %option 4
@@ -32,8 +32,8 @@
                 %br/
                 %input#control-code.span12.forminputsuccess{:placeholder => "SOX", :type => "text"}/
                 %span.help-inline
-            .span6.control-group.fltrt
-              .row-fluid.fltrt
+            .span6.control-group
+              .row-fluid
                 .span6.form-inline.control-group
                   %label{:for => "control-version"} Version
                   %br/
@@ -43,12 +43,9 @@
                   %label{:for => "control-effectivedate"} Effective Date
                   %br/
                   #dp3.date{"data-date" => "02-12-12", "data-date-format" => "dd-mm-yy"}
-                    %input.span12.forminputsuccess{:size => "16", :type => "text", :value => "02-12-12"}/
-                    / <span class="calendar"></span>
-                    %span.add-on
-                      %i.calendar
-                  :javascript
-                    // $('#dp3').datepicker('');
+                    %input.span12.forminputsuccess.calendar{:size => "16", :type => "text", :value => "02-12-12"}/
+                  -#:javascript
+                    -#$('#dp3').datepicker('');
                 
           / Column one start
           .row-fluid
@@ -56,7 +53,7 @@
               %label{:for => "select01"} Type
               %br/
               .controls
-                %select#select01.input-small.forminputsuccess
+                %select#select01.span12.forminputsuccess
                   %option Company
                   %option 2
                   %option 3
@@ -68,7 +65,7 @@
               %label{:for => "select01"} Kind
               %br/
               .controls
-                %select#select01.input-small.forminputsuccess
+                %select#select01.span12.forminputsuccess
                   %option Preventative
                   %option 2
                   %option 3
@@ -80,7 +77,7 @@
               %label{:for => "select01"} Means of Operation
               %br/
               .controls
-                %select#select01.forminputsuccess.span12
+                %select#select01.span12.forminputsuccess
                   %option Manual w/ Segregation of Duties
                   %option 2
                   %option 3
@@ -98,7 +95,7 @@
               %label{:for => "select01"} Status
               %br/
               .controls
-                %select#select01.forminputsuccess.input-small
+                %select#select01.forminputstatus.input-small
                   %option Deprecated
                   %option Open
               %br/
@@ -137,35 +134,4 @@
           %input#inputError.span12.forminputsuccess{:placeholder => "http://www.thisisaurl.com/thisurl", :type => "text"}/
           %br/
           %span.help-inline
-  .modal-footer
-    .row-fluid
-      .span3
-        %label.fltlft{:for => "control-effectivedate"}
-          %strong> Created
-          \: 4/1/11
-      .span3
-        %label#updatedDate.fltlft{:for => "control-verificationdate"}
-          %strong> Updated
-          \: 5/1/12
-      .span3
-        %label.fltrt{:for => "control-effectivedate"}
-          %strong> Last Editor
-          \: Joss Rayburn
-      .span3
-        %label.fltrt{:for => "control-verificationdate"}
-          %strong> Status
-          \:
-          %span#statusValue Draft
-    .row-fluid
-      %nav.fltlft.txtlft.span3
-        %a.btn-large.btn-info{"data-dismiss" => "modal", :href => "#comingsoonModal"} Cancel
-        %a.btn-large.btn-warning{"data-dismiss" => "modal", :href => "#comingsoonModal"} Delete
-      .toolbar-widget.span6
-        %a.btn{:href => "#comingsoonModal"}
-          %i.gcmsicon-arrowleft-black
-        %span.btnwell Showing Most Recent of 3 Revisions
-        %a.btn{:href => "#comingsoonModal"}
-          %i.gcmsicon-arrowright-black
-      %nav.fltrt.txtrt.span3
-        %a#actionButton.btn-large.btn-success{:href => "#"} Save
-        -#%a.btn-large.btn-success{"data-dismiss" => "modal", :href => "#comingsoonModal"} I Approve
+  =render :partial => 'design/templates/modalfooter'

@@ -694,6 +694,13 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
   margin-left: 0px;
 }
 
+.headercenter {
+  display: inline-block;
+  position:relative;
+  width:600px;
+  margin: 8px auto 0 auto;
+}
+
 .headerright {
 
   max-width:502px;
@@ -1248,6 +1255,10 @@ margin-top:5px;
   background-color: #EAFFE6 !important;
 }
 
+.forminputstatus {
+  background-color: #e6feff !important;
+}
+
 /* This widget isn't full of content slots, so lets add some padding to make the input boxes look less cramped */
 .information {
   padding:10px;
@@ -1692,6 +1703,8 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
   min-height:13px; /* must be 13, the size of a widgettextbox, for search */
   font-size: 12px;
 }
+
+
 
 .tab-content {
   margin:5px;
