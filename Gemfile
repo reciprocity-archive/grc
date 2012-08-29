@@ -56,6 +56,7 @@ group :assets do
   gem 'sass', '~> 3.2.0'
   gem 'sass-rails'
   gem 'compass-rails'
+  gem 'bootstrap-sass'
 end
 
 # Used to be pulled in by dm-types

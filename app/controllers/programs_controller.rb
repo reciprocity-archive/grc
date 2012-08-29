@@ -50,7 +50,7 @@ class ProgramsController < ApplicationController
   end
 
   def new
-    @program = Program.new(params[:program])
+    @program = Program.new(program_params)
 
     render :layout => nil
   end
@@ -64,14 +64,7 @@ class ProgramsController < ApplicationController
   end
 
   def create
-    source_document = params[:program].delete(:source_document)
-    source_website = params[:program].delete(:source_website)
-    params[:program][:company] = params[:program].delete(:type) == 'company'
-
-    @program = Program.new(params[:program])
-
-    @program.source_document = Document.new(source_document) if source_document && !source_document['link'].blank?
-    @program.source_website = Document.new(source_website) if source_website && !source_website['link'].blank?
+    @program = Program.new(program_params)
 
     respond_to do |format|
       if @program.save
@@ -94,22 +87,9 @@ class ProgramsController < ApplicationController
     if !params[:program]
       return 400
     end
-    #@program.source_document ||= Document.create
-    #@program.source_website ||= Document.create
-
-    # Accumulate results
-    results = []
-    #results << @program.source_document.update_attributes(params[:program].delete("source_document") || {})
-    #results << @program.source_website.update_attributes(params[:program].delete("source_website") || {})
-    params[:program][:company] = params[:program].delete(:type) == 'company'
-
-    # Save if doc updated
-    @program.save if @program.changed?
-
-    results << @program.update_attributes(params[:program])
 
     respond_to do |format|
-      if results.all?
+      if @program.authored_update(current_user, program_params)
         flash[:notice] = 'Program was successfully updated.'
         format.html { ajax_refresh }
       else
@@ -190,7 +170,16 @@ class ProgramsController < ApplicationController
 
   private
 
-  def load_program
-    @program = Program.find(params[:id])
-  end
+    def load_program
+      @program = Program.find(params[:id])
+    end
+
+    def program_params
+      program_params = params[:program] || {}
+      if program_params[:type]
+        program_params[:company] = (program_params.delete(:type) == 'company')
+      end
+      program_params
+    end
+
 end

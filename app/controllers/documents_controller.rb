@@ -60,7 +60,7 @@ class DocumentsController < ApplicationController
   #end
 
   def new
-    @document = Document.new(params[:document])
+    @document = Document.new(document_params)
     render :layout => nil
   end
 
@@ -122,7 +122,7 @@ class DocumentsController < ApplicationController
   end
 
   def create
-    @document = Document.new(params[:document])
+    @document = Document.new(document_params)
 
     respond_to do |format|
       if @document.save
@@ -140,7 +140,7 @@ class DocumentsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @document.authored_update(current_user, params[:document])
+      if @document.authored_update(current_user, document_params)
         flash[:notice] = "Successfully updated the document."
         format.json do
           render :json => @document.as_json(:root => nil, :methods => [:descriptor, :link_url])
@@ -166,5 +166,10 @@ class DocumentsController < ApplicationController
   private
     def load_document
       @document = Document.find(params[:id])
+    end
+
+    def document_params
+      document_params = params[:document] || {}
+      document_params
     end
 end

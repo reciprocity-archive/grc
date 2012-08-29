@@ -1,0 +1,28 @@
+#comingsoonModal.modal.hide.fade
+  .modal-header
+    %nav
+      %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+        %i.gcmsicon-questionmark-grey
+      %a.widgetbtn{"data-dismiss" => "modal", :href => "#"}
+        %i.gcmsicon-x-grey
+    %h1 This content/function is coming soon
+  .modal-body
+    %p We are working on it!
+  .modal-footer
+    %a.close{"data-dismiss" => "modal", "data-toggle" => "modal", :href => "#comingsoonModal"} Close
+/ End coming soon Modal
+/ Record Modal
+#recordModal.modal.hide.fade
+  .modal-header
+    %nav
+      %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+        %i.gcmsicon-questionmark-grey
+      %a.widgetbtn{"data-dismiss" => "modal", :href => "#"}
+        %i.gcmsicon-x-grey
+    %h1 I'm a WIP Control
+  .modal-body
+    %p We are working on it!
+    .progress.progress-striped.active
+      .bar{:style => "width: 40%;"}
+  .modal-footer
+    %a.close{"data-dismiss" => "modal", "data-toggle" => "modal", :href => "#comingsoonModal"} Close

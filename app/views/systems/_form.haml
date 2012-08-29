@@ -9,7 +9,7 @@
 
 .row-fluid
   .span2{ :class => error_class(f, :slug) }
-    =f.label :slug, "Short Code"
+    =f.label :slug, "Code"
     =f.text_field :slug, :class => 'span12'
     =error_messages_inline(f, :slug)
 

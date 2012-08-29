@@ -1,0 +1,143 @@
+#newprogramModal.modal.hide.fade
+  .modal-header
+    %nav
+      %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+        %i.gcmsicon-questionmark-grey
+      %a.widgetbtn{"data-dismiss" => "modal", :href => "#"}
+        %i.gcmsicon-x-grey
+    %h1 Create New Program
+  .modal-body
+    .alert.alert-info
+      %span#alertMessage
+      / %button.close{:type => "button", :"data-dismiss" => "alert"} ×
+    %form.form-inline
+      .row-fluid
+        .span6
+          .row-fluid
+            .span4.form-inline.control-group
+              .form-inline.control-group
+                %label{:for => "control-code"} Code
+                %br/
+                %input#control-code.span12.forminputsuccess{:placeholder => "SOX", :type => "text"}/
+                %span.help-inline
+            .span4.form-inline.control-group
+              %label{:for => "control-version"} Version
+              %br/
+              %input#control-version.span12.forminputsuccess{:placeholder => "SOX", :type => "text"}/
+              %span.help-inline 
+            .span4.form-inline.control-group
+              %label{:for => "select01"} Type
+              %br/
+              .controls
+                %select#select01.span12.forminputsuccess
+                  %option Regulation
+                  %option 2
+                  %option 3
+                  %option 4
+                  %option 5
+              %br/
+              %span.help-inline
+          .row-fluid
+            .span12.control-group
+              %label{:for => "inputError"} Full Title
+              %input#inputError.span12.forminputsuccess{:placeholder => "Complete Title Goes Here", :type => "text"}/
+              %br/
+              %span.help-inline
+          .row-fluid
+            .span12.control-group
+              / Description
+              %label{:for => "control-description"} Description
+              %br/
+              %textarea.span12.forminputsuccess{:id => "", :placeholder => "", :rows => "4", :style => "height:188px"}
+                :preserve
+                  Hendrerit dolus nullus nimis pneum abico quibus, vulputate, macto, autem vulputate. Qui, sagaciter letalis eum quae interdico iriure, eum. Praesent, jus importunus capio abdo velit genitus. Luptatum zelus meus illum, eros capto nulla in augue ymo quod ibidem.
+              %br/
+              %span.help-inline
+          / Column one start
+        .span6
+          .row-fluid
+            .span3.form-inline.control-group
+              .form-inline.control-group
+                %label{:for => "control-startdate"} Start Date
+                %br/
+                %input#control-startdate.span12.forminputsuccess{:placeholder => "03/01/2012", :type => "text"}/
+                %span.help-inline
+            .span2.form-inline.control-period
+              %label{:for => "control-version"} Period
+              %br/
+              %input#control-period.span12.forminputsuccess{:placeholder => "Annual", :type => "text"}/
+              %span.help-inline
+            .span3.form-inline.control-group
+              %label{:for => "control-duration"} Duration
+              %br/
+              %input#control-duration.span12.forminputsuccess{:placeholder => "90 Days", :type => "text"}/
+              %span.help-inline
+            .span4.form-inline.control-group
+              %label{:for => "control-status"} Status
+              %br/
+              .controls
+                %select#control-status.span12.forminputsuccess
+                  %option Active
+                  %option 2
+                  %option 3
+                  %option 4
+                  %option 5
+              %br/
+              %span.help-inline
+          .row-fluid
+            .span12.control-group
+              %label{:for => "inputError"} Organization
+              %input#inputError.span12.forminputsuccess{:placeholder => "Organization Responsible for this Program", :type => "text"}/
+              %br/
+              %span.help-inline
+          .row-fluid
+            .span12.control-group
+              %label{:for => "inputError"} Organization URL
+              %input#inputError.span12.forminputsuccess{:placeholder => "http://www.thisisaurl.com/thisurl", :type => "text"}/
+              %br/
+              %span.help-inline
+          .row-fluid
+            .span12.control-group
+              / Description
+              %label{:for => "control-description"} Scope / Applicability
+              %label.fltrt
+                %a.underline{"data-toggle" => "modal", :href => "#comingsoonModal"} View text as it appears in mail merge
+              %br/
+              %textarea.span12.forminputsuccess{:id => "", :placeholder => "", :rows => "4"}
+                :preserve
+                  Hendrerit dolus nullus nimis pneum abico quibus, vulputate, macto, autem vulputate. Qui, sagaciter letalis eum quae interdico iriure, eum. Praesent, jus importunus capio abdo velit genitus. Luptatum zelus meus illum, eros capto nulla in augue ymo quod ibidem.
+              %br/
+              %span.help-inline
+  render :partial => "modalfooter.haml"
+  .modal-footer
+    .row-fluid
+      .span3
+        %label.fltlft{:for => "control-effectivedate"}
+          %strong> Created
+          \: 4/1/11
+      .span3
+        %label#updatedDate.fltlft{:for => "control-verificationdate"}
+          %strong> Updated
+          \: 5/1/12
+      .span3
+        %label.fltrt{:for => "control-effectivedate"}
+          %strong> Last Editor
+          \: Joss Rayburn
+      .span3
+        %label.fltrt{:for => "control-verificationdate"}
+          %strong> Status
+          \:
+          %span#statusValue Draft
+    .row-fluid
+      %nav.fltlft.txtlft.span3
+        %a.btn-large.btn-info{"data-dismiss" => "modal", :href => "#comingsoonModal"} Cancel
+        %a.btn-large.btn-warning{"data-dismiss" => "modal", :href => "#comingsoonModal"} Delete
+      .toolbar-widget.span6
+        %a.btn{:href => "#comingsoonModal"}
+          %i.gcmsicon-arrowleft-black
+        %span.btnwell Showing Most Recent of 3 Revisions
+        %a.btn{:href => "#comingsoonModal"}
+          %i.gcmsicon-arrowright-black
+      %nav.fltrt.txtrt.span3
+        %a#actionButton.btn-large.btn-success{:href => "#"} Save
+        -#%a.btn-large.btn-success{"data-dismiss" => "modal", :href => "#comingsoonModal"} I Approve

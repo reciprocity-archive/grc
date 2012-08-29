@@ -1,0 +1,59 @@
+#sendauditorinvite.modal.slimmodal.hide.fade
+  .modal-header
+    %nav
+      %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+        %i.gcmsicon-questionmark-grey
+      %a.widgetbtn{"data-dismiss" => "modal", :href => "#"}
+        %i.gcmsicon-x-grey
+    %h1 Send Invite to Auditors
+  .modal-body
+    .row-fluid
+      .span12
+        / start column
+        .well
+          .row-fluid
+            .span6
+              %h3 Auditors for this Audit
+            .span6
+              %label.fltrt
+                %a.underline{:href => "#"} View Email
+          %ul#systemcontrolowners.clearfix
+            %li.controlSlot.ui-draggable
+              .arrowcontrols-group.row-fluid.nominheight
+                .span6.nominheight
+                  .checkbutton
+                    %i.gcmsicon-x-grey
+                  %span.prefix Joss Rayburn
+                .span6.nominheight
+                  %span.fltrt.prefix Owner
+            %li.controlSlot.ui-draggable
+              .arrowcontrols-group.row-fluid.nominheight
+                .span6.nominheight
+                  .checkbutton
+                    %i.gcmsicon-x-grey
+                  %span.prefix William Twiddle
+                .span6.nominheight
+                  %span.fltrt.prefix Owner
+            %li.controlSlot.ui-draggable
+              .arrowcontrols-group.row-fluid.nominheight
+                .span6.nominheight
+                  .checkbutton
+                    %i.gcmsicon-x-grey.gcmsicon-blank
+                  %span.prefix Lara Rayburn
+                .span6.nominheight
+                  %span.fltrt.prefix Owner
+            %li.controlSlot.ui-draggable
+              .arrowcontrols-group.row-fluid.nominheight
+                .span6.nominheight
+                  .checkbutton
+                    %i.gcmsicon-x-grey
+                  %span.prefix Satah Fox
+                .span6.nominheight
+                  %span.fltrt.prefix Owner
+  .modal-footer
+    .row-fluid
+      %nav.fltlft.txtlft.span3
+        %a.btn-large.btn-info{"data-dismiss" => "modal", :href => "#comingsoonModal"} Cancel
+        / <a href="#comingsoonModal" class="btn-large btn-warning"  data-dismiss="modal">Delete</a>
+      %nav.fltrt.txtrt.span9
+        %a.btn-large.btn-success{"data-dismiss" => "modal", :href => "#comingsoonModal"} Send Invites with Login Info

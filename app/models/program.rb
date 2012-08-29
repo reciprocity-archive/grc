@@ -8,7 +8,7 @@ class Program < ActiveRecord::Base
   include SearchableModel
   include AuthorizedModel
 
-  attr_accessible :title, :slug, :company
+  attr_accessible :title, :slug, :company, :description
 
   before_save :upcase_slug
 

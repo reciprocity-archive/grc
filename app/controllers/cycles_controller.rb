@@ -28,7 +28,7 @@ class CyclesController < ApplicationController
   end
 
   def create
-    @cycle = Cycle.new(params[:cycle])
+    @cycle = Cycle.new(cycle_params)
 
     respond_to do |format|
       if @cycle.save
@@ -43,7 +43,7 @@ class CyclesController < ApplicationController
 
   def update
     respond_to do |format|
-      if @cycle.authored_update(current_user, params[:cycle])
+      if @cycle.authored_update(current_user, cycle_params)
         flash[:notice] = "Successfully updated the cycle!"
         format.html { redirect_to flow_cycle_path(@cycle) }
       else
@@ -56,5 +56,10 @@ class CyclesController < ApplicationController
   private
     def load_cycle
       @cycle = Cycle.find(params[:id])
+    end
+
+    def cycle_params
+      cycle_params = params[:cycle] || {}
+      cycle_params
     end
 end

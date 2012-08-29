@@ -457,6 +457,9 @@
 .modal-body {
   padding: 10px 15px;
   overflow-y: auto;
+  .alert {
+    display:none;
+  }
   // TODO: Removed because it breaks .slimmodal
   //width:690px;
 }
@@ -526,9 +529,22 @@ nav {
   width: 60px;
 }
 
+.input-tiny {
+  width:69px;
+}
+
+.select-tiny {
+  width:79px;
+}
+
+.textarea-tall {
+  height:178px;
+}
+
 .input-small {
   width: 107px;
 }
+
 .inputtext-small {
   width: 98px;
 }

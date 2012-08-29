@@ -8,7 +8,7 @@
   .span6
     .row-fluid
       .span4{ :class => error_class(f, :slug) }
-        %label{:for => "program-slug"} Short Code
+        %label{:for => "program-slug"} Code
         %input#program-slug.span12{:name => "program[slug]", :placeholder => "SOX", :type => "text", :value => f.object.slug}
         =error_messages_inline(f, :slug)
 

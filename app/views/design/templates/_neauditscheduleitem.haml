@@ -1,0 +1,69 @@
+#neauditscheduleitem.modal.hide.fade
+  .modal-header
+    %nav
+      %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+        %i.gcmsicon-questionmark-grey
+      %a.widgetbtn{"data-dismiss" => "modal", :href => "#"}
+        %i.gcmsicon-x-grey
+    %h1 New/Edit Audit Schedule Item
+  .modal-body
+    .row-fluid
+      .span2.form-inline.control-group
+        %label{:for => "control-program"} Date
+        %br/
+        %input#control-program.inputtext-small.forminputsuccess{:placeholder => "MM/DD/YYYY", :type => "text"}/
+        %br/
+        %span.help-inline
+      .span7.form-inline.control-group
+        %label{:for => "select01"} Phase
+        %br/
+        .controls
+          %select#select01.inputtext-small
+            %option Pre-Audit
+            %option 2
+            %option 3
+            %option 4
+            %option 5
+        %br/
+        %span.help-inline
+      .span2.form-inline.control-group.fltrt
+        .controls.fltrt
+          %label{:for => "select02"} Status
+          %br/
+          %select#select02.inputtext-small
+            %option Depreciated
+            %option 2
+            %option 3
+            %option 4
+            %option 5
+        %br/
+        %span.help-inline
+    .row-fluid
+      .span12.control-group
+        %label{:for => ""} Event Title
+        %input#inputError.span12.forminputsuccess{:placeholder => "Audit MOU /Scope Set", :type => "text"}/
+        %br/
+        %span.help-inline
+    / desc
+    .row-fluid
+      .span12.control-group
+        %label{:for => ""} Description
+    .row-fluid{"control-group" => ""}
+      .span12.well
+        %textarea#control-description3.span12.forminputsuccess{:placeholder => "", :rows => "4"}
+          :preserve
+            Hendrerit dolus nullus nimis pneum abico quibus, vulputate, macto, autem vulputate. Qui, sagaciter letalis eum quae interdico iriure, eum. Praesent, jus importunus capio abdo velit genitus. Luptatum zelus meus illum, eros capto nulla in augue ymo quod ibidem.
+        :javascript
+          $('#control-description3').wysihtml5({
+            "image": false //Button to insert an image. Default true
+          });
+        %span.help-inline.description
+    / end row
+  .modal-footer
+    .row-fluid
+      %nav.fltlft.txtlft.span3
+        %a.btn-large.btn-info{"data-dismiss" => "modal", :href => "#comingsoonModal"} Cancel
+        %a.btn-large.btn-warning{"data-dismiss" => "modal", :href => "#comingsoonModal"} Delete
+      .toolbar-widget.span6
+      %nav.fltrt.txtrt.span3
+        %a.close{"data-dismiss" => "modal", :href => "#comingsoonModal"} Save
