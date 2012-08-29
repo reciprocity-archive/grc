@@ -28,7 +28,12 @@
         ).end();
   }
 
-  function emit_loaded() {
+  function emit_loaded(responseText, textStatus, xhr) {
+    if (xhr.status == 403) {
+      // For now, only inject the response HTML in the case
+      // of an authorization error
+      $(this).html(responseText)
+    }
     $(this).trigger('loaded');
   }
 
@@ -83,6 +88,7 @@
 
   $(function() {
     $('body').on('click.modal-ajax.data-api', '[data-toggle="modal-ajax"], [data-toggle="modal-ajax-form"], [data-toggle="modal-ajax-listform"], [data-toggle="modal-ajax-listnewform"]', function(e) {
+
       var $this = $(this)
         , toggle_type = $(this).data('toggle')
         , modal_id, target, $target, option, href, new_target, modal_type;

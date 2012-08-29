@@ -35,7 +35,11 @@ class ApplicationController < ActionController::Base
 
   def render_unauthorized
     flash[:warning] = "You are not authorized to access this page"
-    render :template => 'welcome/login', :status => 403
+    if request.xhr?
+      render :partial => 'error/unauthorized', :layout => nil, :status => 403
+    else
+      render :template => 'error/unauthorized', :status => 403
+    end
   end
 
   def render_unauthenticated
