@@ -32,6 +32,9 @@
                 GRC
               -else
                 Google GRC
+          .headercenter.fltnone
+            -if has_feature? :BETA
+              =render :partial => 'design/templates/grcmenu'
           .headerright
             .btn-toolbar.fltrt.toolbar-nav
               -if has_feature? :BETA

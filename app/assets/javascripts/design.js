@@ -165,3 +165,20 @@ $(function () {
   },300);
   */
 });
+
+
+
+
+function toggleCompliance() {
+  alert("works");
+}
+
+function toggleRisk() {
+  alert("works");
+}
+
+function toggleGovernance() {
+  alert("works");
+}
+
+
