@@ -5,8 +5,7 @@ describe EvidenceController do
     it "fails as guest" do
       login({}, {})
       get 'index'
-        response.status.should == 403
-        response.should render_template('welcome/login')
+      response.should be_unauthorized
     end
   end
 
