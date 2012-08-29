@@ -2,7 +2,7 @@
 %html{:lang => "en", :xmlns => "http://www.w3.org/1999/xhtml"}
   %head
     %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}
-    %title CMS
+    %title GRC
     =stylesheet_link_tag 'admin'
     =javascript_include_tag 'admin'
     =csrf_meta_tag
@@ -11,9 +11,9 @@
     #container
       #header
         -if CMS_CONFIG["COMPANY_LOGO"].present?
-          %h1=link_to image_tag(CMS_CONFIG['COMPANY_LOGO'], :alt => 'CMS', :title => 'CMS'), root_path
+          %h1=link_to image_tag(CMS_CONFIG['COMPANY_LOGO'], :alt => 'GRC', :title => 'GRC'), root_path
         -else
-          %h1=link_to "CMS", root_path
+          %h1=link_to "GRC", root_path
 
         #user-navigation
           %ul.wat-cf
