@@ -64,7 +64,7 @@ class Section < ActiveRecord::Base
     slugs = []
     while slug.size > 0
       slugs.push(slug)
-      slug = slugs.last[0, slugs.last.rindex(/\.|-|^/)]
+      slug = slugs.last[0, slugs.last.rindex(/\(|\.|-|^/)]
     end
 
     # Remove initial slug, since it is not its own ancestor
