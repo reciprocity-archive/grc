@@ -14,7 +14,7 @@ class CyclesController < ApplicationController
     end
 
     actions :show do
-      allow :read_cycle, :of => :cycle
+      allow :read, :read_cycle, :of => :cycle
     end
 
     actions :update do

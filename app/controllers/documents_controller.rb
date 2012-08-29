@@ -20,7 +20,7 @@ class DocumentsController < ApplicationController
     end
 
     actions :show do
-      allow :read_document, :of => :document
+      allow :read, :read_document, :of => :document
     end
 
     # FIXME: no template!

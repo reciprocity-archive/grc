@@ -26,7 +26,7 @@ class ProgramsController < ApplicationController
 
     allow :create_program, :to => [:create,
                                    :new]
-    allow :read_program, :of => :program, :to => [:show,
+    allow :read, :read_program, :of => :program, :to => [:show,
                                                   :tooltip,
                                                   :sections,
                                                   :controls,

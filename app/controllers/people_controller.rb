@@ -17,7 +17,7 @@ class PeopleController < ApplicationController
     end
 
     actions :list do
-      allow :read_person
+      allow :read, :read_person
     end
 
     actions :list_update, :list_edit do

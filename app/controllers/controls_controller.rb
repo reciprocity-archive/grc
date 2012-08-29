@@ -29,15 +29,15 @@ class ControlsController < ApplicationController
     end
 
     actions :show, :tooltip do
-      allow :read_control, :of => :control
+      allow :read, :read_control, :of => :control
     end
 
     actions :index do
-      allow :read_control
+      allow :read, :read_control
     end
 
     actions :sections, :implemented_controls, :implementing_controls do
-      allow :read_control, :of => :control
+      allow :read, :read_control, :of => :control
     end
   end
 

@@ -19,7 +19,7 @@ class SectionsController < ApplicationController
     end
 
     actions :tooltip do
-      allow :read_section, :of => :section
+      allow :read, :read_section, :of => :section
     end
 
     actions :edit, :update do
