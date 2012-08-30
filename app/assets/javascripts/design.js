@@ -167,18 +167,16 @@ $(function () {
 });
 
 
-
-
 function toggleCompliance() {
-  alert("works");
+  $('.compWidget').fadeToggle("slow", "linear");
 }
 
 function toggleRisk() {
-  alert("works");
+  $('.riskWidget').fadeToggle("slow", "linear");
 }
 
 function toggleGovernance() {
-  alert("works");
+  $('.govWidget').fadeToggle("slow", "linear");
 }
 
 
