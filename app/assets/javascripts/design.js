@@ -165,3 +165,18 @@ $(function () {
   },300);
   */
 });
+
+
+function toggleCompliance() {
+  $('.compWidget').fadeToggle("slow", "linear");
+}
+
+function toggleRisk() {
+  $('.riskWidget').fadeToggle("slow", "linear");
+}
+
+function toggleGovernance() {
+  $('.govWidget').fadeToggle("slow", "linear");
+}
+
+

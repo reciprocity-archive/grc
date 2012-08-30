@@ -1,5 +1,7 @@
 -content_for :tooltip_title do
-  %h3 System Information
+  %h3
+    =system.is_biz_process? ? "Business Process" : "System"
+    Information
 
 =system.title
 \|

@@ -1,4 +1,6 @@
 class MappingController < ApplicationController
+  include ControlsHelper
+
   layout 'dashboard'
   respond_to :html, :json
   skip_after_filter :flash_to_headers, :only => [:buttons]
@@ -197,7 +199,7 @@ class MappingController < ApplicationController
   end
 
   def create_ccontrol
-    @control = Control.new(params[:control])
+    @control = Control.new(control_params)
 
     respond_to do |format|
       if @control.save
@@ -211,7 +213,7 @@ class MappingController < ApplicationController
   end
 
   def create_rcontrol
-    @control = Control.new(params[:control])
+    @control = Control.new(control_params)
 
     respond_to do |format|
       if @control.save
