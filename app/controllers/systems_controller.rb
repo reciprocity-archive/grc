@@ -175,6 +175,8 @@ class SystemsController < ApplicationController
       # Fixup legacy boolean
       if system_params[:type]
         system_params[:infrastructure] = system_params[:type].title == 'Infrastructure'
+      else
+        system_params[:infrastructure] = false
       end
 
       system_params

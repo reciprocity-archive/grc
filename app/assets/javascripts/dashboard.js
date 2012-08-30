@@ -246,7 +246,7 @@ function init_mapping() {
       $(this).closest('.row-fluid').find('.regulationslot').addClass('selected');
 
       if ($dialog.is(':visible')) {
-        $dialog.load($(this).closest('.row-fluid').find('a.controllist').data('href'));
+        $dialog.load($(this).closest('.row-fluid').find('a.controllist, a.controllistRM').data('href'));
       }
     });
   $('#rcontrol_list')
@@ -264,10 +264,11 @@ function init_mapping() {
 
   var $dialog = $('<div class="modal hide fade"></div>').appendTo('body');
   $dialog.draggable({ handle: '.modal-header' });
-  $('#section_list').on('click', 'a.controllist', function() {
+  $('#section_list').on('click', 'a.controllist, a.controllistRM', function(e) {
     // Save the current href for reloadability
-    $dialog.data('href', $(this).data('href'));
-    $dialog.load($(this).data('href'), function() {
+    e.preventDefault();
+    $dialog.data('href', $(this).attr('href'));
+    $dialog.load($(this).attr('href'), function() {
       $dialog.modal_form({ backdrop: false }).modal_form('show');
     });
   });
@@ -291,7 +292,7 @@ function init_mapping() {
 jQuery(function($) {
   var $dialog = $('<div class="modal hide fade"></div>').appendTo('body');
   $dialog.draggable({ handle: '.modal-header' });
-  $('#regulations, #controls').on('click', 'a.controllist', function(e) {
+  $('#regulations, #controls').on('click', 'a.controllist, a.controllistRM', function(e) {
     e.preventDefault();
     $dialog.load($(this).attr('href'), function() {
       $dialog.modal_form({ backdrop: false }).modal_form('show');
