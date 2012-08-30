@@ -196,7 +196,7 @@ CmsRails::Application.routes.draw do
     match CmsRails::Application.sso_callback_url => "sso#callback"
     match 'sso/destroy' => 'sso#destroy', :as => 'logout'
   else
-    match 'login' => 'welcome#login', :as => 'login'
+    match 'login' => 'user_sessions#login', :as => 'login'
     match 'user_sessions/destroy' => 'user_sessions#destroy', :as => 'logout'
     match 'user_sessions/create' => 'user_sessions#create'
   end

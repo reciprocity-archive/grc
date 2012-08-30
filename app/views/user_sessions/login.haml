@@ -2,6 +2,8 @@
   %header
     %h1 Login
 
+    .flash!=[:error, :warning, :notice].map { |type| content_tag(:div, flash[type], :class => "message #{type}") if flash[type] }.join
+
     =form_for :user_session, :url => user_sessions_create_path, :html => { :class => :form } do |f|
       =f.label :email
       =f.text_field :email, :class => :text_field
@@ -13,4 +15,3 @@
       =f.label :remember_me
       %br
       =f.submit "Login"
-
