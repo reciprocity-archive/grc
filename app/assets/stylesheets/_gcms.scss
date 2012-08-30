@@ -144,6 +144,11 @@
   // TODO: decide which .WidgetBox descendent should be scrollable
   overflow-y:auto;
   overflow-x:hidden;
+
+  border-color: #97abc2;
+  .btn {
+    line-height:18px;
+  }
 }
 
 .accordion-group {
@@ -636,9 +641,6 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
     border: 0;
     border-top: 1px solid #eee;
     border-bottom: 1px solid $white;
-  }
-  .btn {
-    line-height:18px;
   }
 }
 
