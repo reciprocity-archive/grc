@@ -637,6 +637,9 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
     border-top: 1px solid #eee;
     border-bottom: 1px solid $white;
   }
+  .btn {
+    line-height:18px;
+  }
 }
 
 .hr-widget {
