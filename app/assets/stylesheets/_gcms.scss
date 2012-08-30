@@ -694,6 +694,13 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
   margin-left: 0px;
 }
 
+.headercenter {
+  display: inline-block;
+  position:relative;
+  width:600px;
+  margin: 8px auto 0 auto;
+}
+
 .headerright {
 
   max-width:502px;
