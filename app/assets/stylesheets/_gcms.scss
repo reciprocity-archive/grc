@@ -1924,3 +1924,11 @@ body .container {
 .help-inline span {
   display: block;
 }
+
+.menu-buttons {
+  /* I have no idea what this is for, commenting out JVG */
+  /* padding-left:122px !important; */
+  .btn {
+    width:97px;  
+  }
+}
