@@ -4,4 +4,10 @@
 -else
   %ul.nav.nav-tabs.nav-stacked
     -@biz_processes.each do |biz_process|
-      %li=link_to biz_process.title, flow_system_path(biz_process)
+      %li.group
+        %a{ :href => flow_system_path(biz_process), :'data-popover-href' => tooltip_flow_system_path(biz_process), :'data-popover-trigger' => 'sticky-hover' }
+          %h3=biz_process.slug
+          %p.oneline
+            %strong=biz_process.title
+            &nbsp;
+            =biz_process.description

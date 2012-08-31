@@ -10,6 +10,68 @@
 
 // Initialize delegated event handlers
 jQuery(function($) {
+  
+  // status js
+  
+  var userHasPriviledge = true;
+  
+  $('body').on('click', '#actionButton', function(e) {
+    e.preventDefault();
+    
+    var fullDate = new Date();
+    var twoDigitMonth = ((fullDate.getMonth().length+1) === 1)? (fullDate.getMonth()+1) : '0' + (fullDate.getMonth()+1);
+    var currentDate = fullDate.getDate() + "/" + twoDigitMonth + "/" + fullDate.getFullYear();
+    
+    var $this = $(this),
+        $alert = $this.closest(".modal").find(".alert"),
+        $date = $this.closest(".modal").find("#updatedDate"),
+        $alertMessage = $this.closest(".modal").find("#alertMessage"),
+        $status = $this.closest(".modal").find("#statusValue"),
+        $currentStatus = $this.closest(".modal").find("#statusValue").html();
+
+      
+
+        if(userHasPriviledge) {
+
+          if ($currentStatus === "Draft") {
+            $status
+              .html("Waiting for Approval")
+              .addClass("statustextred");
+            $alertMessage
+              .html("New Program has been saved. Waiting on Approval.");
+            $alert
+              .fadeIn();
+            $this
+              .html("Approve");
+            $date
+              .html("<strong>Updated</strong> "+ currentDate);
+            
+          } else if ($currentStatus === "Waiting for Approval") {
+            $status
+              .html("Approved")
+              .removeClass("statustextred");
+            $alertMessage
+              .html("Program has been approved.");
+            $alert
+              .fadeIn();
+            $this
+            .addClass("disabled");
+            window.location = "/programs/1";
+          }                
+          
+        }
+        
+        
+    
+    
+  //  $this
+  //    .closest(".modal")
+  //    .find("#statusValue")
+  //    .html("jo");
+  });
+
+      
+  
   // Before submitting, remove any disabled form elements
   $('body').on('submit', 'form[data-remote]', function(e, xhr, req) {
     $(this)
@@ -184,7 +246,7 @@ function init_mapping() {
       $(this).closest('.row-fluid').find('.regulationslot').addClass('selected');
 
       if ($dialog.is(':visible')) {
-        $dialog.load($(this).closest('.row-fluid').find('a.controllist').data('href'));
+        $dialog.load($(this).closest('.row-fluid').find('a.controllist, a.controllistRM').data('href'));
       }
     });
   $('#rcontrol_list')
@@ -202,10 +264,11 @@ function init_mapping() {
 
   var $dialog = $('<div class="modal hide fade"></div>').appendTo('body');
   $dialog.draggable({ handle: '.modal-header' });
-  $('#section_list').on('click', 'a.controllist', function() {
+  $('#section_list').on('click', 'a.controllist, a.controllistRM', function(e) {
     // Save the current href for reloadability
-    $dialog.data('href', $(this).data('href'));
-    $dialog.load($(this).data('href'), function() {
+    e.preventDefault();
+    $dialog.data('href', $(this).attr('href'));
+    $dialog.load($(this).attr('href'), function() {
       $dialog.modal_form({ backdrop: false }).modal_form('show');
     });
   });
@@ -229,7 +292,7 @@ function init_mapping() {
 jQuery(function($) {
   var $dialog = $('<div class="modal hide fade"></div>').appendTo('body');
   $dialog.draggable({ handle: '.modal-header' });
-  $('#regulations, #controls').on('click', 'a.controllist', function(e) {
+  $('#regulations, #controls').on('click', 'a.controllist, a.controllistRM', function(e) {
     e.preventDefault();
     $dialog.load($(this).attr('href'), function() {
       $dialog.modal_form({ backdrop: false }).modal_form('show');

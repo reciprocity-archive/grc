@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :require_user
   before_filter :filter_set
+  before_filter :set_features
   after_filter :flash_to_headers
 
   after_filter  :ajax_flash_to_headers
@@ -32,6 +33,17 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def set_features
+    if params[:BETA].present? && params[:BETA] != session[:BETA]
+      session[:BETA] = params[:BETA]
+      redirect_to request.fullpath.gsub(/BETA=[^&]*&?/, '').sub(/[?&]$/, '')
+    else
+      @_features = {
+        :BETA => session[:BETA] == '1'
+      }
+    end
+  end
 
   # The current user session or nil
   def current_user_session

@@ -214,4 +214,8 @@ module ApplicationHelper
       end
     end
   end
+
+  def has_feature?(feature)
+    @_features[feature]
+  end
 end

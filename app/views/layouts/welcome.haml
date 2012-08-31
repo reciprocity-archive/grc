@@ -3,15 +3,16 @@
   %head
     %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}
     /%meta{:charset => "utf-8"}
-    %title Google Compliance Management System
+    %title Governance, Risk and Compliance
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
     =stylesheet_link_tag 'dashboard'
     =javascript_include_tag 'dashboard'
     =csrf_meta_tag
+    %link(href='favicon.ico' rel='icon' type='image/x-icon')
     
     / Google Web Font(s)
     /%link{:href => "http://fonts.googleapis.com/css?family=PT+Sans", :rel => "stylesheet", :type => "text/css"}
 
-  %body
+  %body#welcome
     =yield
 

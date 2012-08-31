@@ -1,0 +1,100 @@
+#newpersonModal.modal.hide.fade
+  .modal-header
+    %nav
+      %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+        %i.gcmsicon-questionmark-grey
+      %a.widgetbtn{"data-dismiss" => "modal", :href => "#"}
+        %i.gcmsicon-x-grey
+    %h1 Create New Person
+  .modal-body
+    %form.form-inline
+      / start row
+      .row-fluid
+        .span6
+          / start column
+          .row-fluid
+            .span12.control-group
+              %label{:for => "inputError"} Name
+              %input#inputError.span12.forminputsuccess{:placeholder => "Complete Title Goes Here", :type => "text"}/
+              %br/
+              %span.help-inline
+          .row-fluid
+            .span12.control-group
+              %label{:for => "inputError"} Company
+              %input#inputError.span12.forminputsuccess{:placeholder => "Complete Title Goes Here", :type => "text"}/
+              %br/
+              %span.help-inline
+          .row-fluid
+            .span12.control-group
+              %label{:for => "inputError"} Email
+              %input#inputError.span12.forminputsuccess{:placeholder => "Complete Title Goes Here", :type => "text"}/
+              %br/
+              %span.help-inline
+          .row-fluid
+            .span4.form-inline.control-group
+              %label{:for => "control-version"} Code
+              %br/
+              %input#control-version.inputtext-small.forminputsuccess{:placeholder => "JHoov", :type => "text"}/
+              %br/
+              %span.help-inline
+            .span4.form-inline.control-group
+              %label{:for => "select01"} Language
+              %br/
+              %input#control-version.inputtext-small.forminputsuccess{:placeholder => "English", :type => "text"}/
+              %span.help-inline
+            .span4.form-inline.control-group
+              %label{:for => "select01"} Status
+              %br/
+              %input#control-version.inputtext-small.forminputsuccess{:placeholder => "Deprecated", :type => "text"}/
+              %span.help-inline
+        .span6
+          .row-fluid
+            .span12.control-group
+              %label{:for => "inputError"} Roles
+              %h3.notbold
+                %a.widgetbtn.topmargintwo{"data-dismiss" => "modal", :href => "#comingsoonModal"}>
+                  %i.gcmsicon-x-grey
+                \&nbsp; Owner (System, Control, Product, etc)
+              %h3.notbold
+                %a.widgetbtn.topmargintwo{"data-dismiss" => "modal", :href => "#comingsoonModal"}>
+                  %i.gcmsicon-x-grey
+                \&nbsp; Compliance Analyst
+              %h3.notbold
+                %a.widgetbtn.topmargintwo{"data-dismiss" => "modal", :href => "#comingsoonModal"}>
+                  %i.gcmsicon-x-grey
+                \&nbsp; Business Process Analyst
+              %h3.notbold
+                %a.widgetbtn.topmargintwo{"data-dismiss" => "modal", :href => "#comingsoonModal"}>
+                  %i.gcmsicon-x-grey
+                \&nbsp; Risk Analyts
+              %h3.notbold
+                %a.widgetbtn.topmargintwo{"data-dismiss" => "modal", :href => "#comingsoonModal"}>
+                  %i.gcmsicon-x-grey
+                \&nbsp; Compliance Program Manager
+              %h3.notbold
+                %a.widgetbtn.topmargintwo{"data-dismiss" => "modal", :href => "#comingsoonModal"}>
+                  %i.gcmsicon-x-grey
+                \&nbsp; Can Approve Own Edits
+              %h3.notbold
+                %a.widgetbtn.topmargintwo{"data-dismiss" => "modal", :href => "#comingsoonModal"}>
+                  %i.gcmsicon-x-grey
+                \&nbsp; Internal Auditor
+              %h3.notbold
+                %a.widgetbtn.topmargintwo{"data-dismiss" => "modal", :href => "#comingsoonModal"}>
+                  %i.gcmsicon-x-grey
+                \&nbsp; External Auditor
+        / end span6
+  .modal-footer
+    .row-fluid
+      %nav.fltlft.txtlft.span3
+        %a.btn-large.btn-info{"data-dismiss" => "modal", :href => "#comingsoonModal"} Cancel
+        %a.btn-large.btn-warning{"data-dismiss" => "modal", :href => "#comingsoonModal"} Delete
+      .toolbar-widget.span6
+        %a.btn{:href => "#comingsoonModal"}
+          %i.gcmsicon-arrowleft-black
+        %span.btnwell Showing Most Recent of 3 Revisions
+        %a.btn{:href => "#comingsoonModal"}
+          %i.gcmsicon-arrowright-black
+      %nav.fltrt.txtrt.span3
+        %a.btn-large.btn-warning{"data-dismiss" => "modal", :href => "#comingsoonModal"} Save
+        / <a href="#comingsoonModal" class="btn-large btn-success" data-dismiss="modal">I Approve</a>

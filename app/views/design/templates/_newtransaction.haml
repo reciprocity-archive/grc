@@ -1,0 +1,43 @@
+#newtransactionModal.modal.hide.fade
+  .modal-header
+    %nav
+      %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+        %i.gcmsicon-questionmark-grey
+      %a.widgetbtn{"data-dismiss" => "modal", :href => "#"}
+        %i.gcmsicon-x-grey
+    %h1 New Transaction
+  .modal-body
+    %form.form-inline
+      .row-fluid
+        .span12
+          %label{:for => "inputError"} Title
+          %input#inputError.span12.forminputsuccess{:placeholder => "Transaction Title", :type => "text"}/
+          %br/
+          %span.help-inline
+      .row-fluid
+        %label{:for => "control-description"} Text of Section:
+      .row-fluid{"control-group" => ""}
+        .span12.well
+          %textarea#wysihtml5.span12.forminputsuccess{:placeholder => "", :rows => "4"}
+            :preserve
+              Hendrerit dolus nullus nimis pneum abico quibus, vulputate, macto, autem vulputate. Qui, sagaciter letalis eum quae interdico iriure, eum. Praesent, jus importunus capio abdo velit genitus. Luptatum zelus meus illum, eros capto nulla in augue ymo quod ibidem.
+          :javascript
+            $('#wysihtml5').wysihtml5({
+              "image": false //Button to insert an image. Default true
+            });
+          %span.help-inline.description
+      / end row
+  .modal-footer
+    .row-fluid
+      %nav.fltlft.txtlft.span3
+        %a.btn-large.btn-info{"data-dismiss" => "modal", :href => "#comingsoonModal"} Cancel
+        %a.btn-large.btn-warning{"data-dismiss" => "modal", :href => "#comingsoonModal"} Delete
+      .toolbar-widget.span6
+        %a.btn{:href => "#comingsoonModal"}
+          %i.gcmsicon-arrowleft-black
+        %span.btnwell Showing Most Recent of 3 Revisions
+        %a.btn{:href => "#comingsoonModal"}
+          %i.gcmsicon-arrowright-black
+      %nav.fltrt.txtrt.span3
+        %a.btn-large.btn-success{"data-dismiss" => "modal", :href => "#comingsoonModal"} Save
+        %a.btn-large.btn-success{"data-dismiss" => "modal", :href => "#comingsoonModal"} I Approve

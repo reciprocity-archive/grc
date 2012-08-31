@@ -85,7 +85,7 @@
 }
 
 .WidgetTitle {
-  padding: 2px 5px 4px 3px;
+  padding: 2px 0px 4px 3px;
   /* width:130px; /* This is set to 130 because inside regmapper thats all you will get */
   font-weight: normal;
   line-height:24px;
@@ -457,6 +457,9 @@
 .modal-body {
   padding: 10px 15px;
   overflow-y: auto;
+  .alert {
+    display:none;
+  }
   // TODO: Removed because it breaks .slimmodal
   //width:690px;
 }
@@ -526,9 +529,22 @@ nav {
   width: 60px;
 }
 
+.input-tiny {
+  width:69px;
+}
+
+.select-tiny {
+  width:79px;
+}
+
+.textarea-tall {
+  height:178px;
+}
+
 .input-small {
   width: 107px;
 }
+
 .inputtext-small {
   width: 98px;
 }
@@ -676,6 +692,13 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
   min-width:251px;
   float: left;
   margin-left: 0px;
+}
+
+.headercenter {
+  display: inline-block;
+  position:relative;
+  width:600px;
+  margin: 8px auto 0 auto;
 }
 
 .headerright {
@@ -1907,4 +1930,12 @@ body .container {
 
 .help-inline span {
   display: block;
+}
+
+.menu-buttons {
+  /* I have no idea what this is for, commenting out JVG */
+  /* padding-left:122px !important; */
+  .btn {
+    width:97px;  
+  }
 }

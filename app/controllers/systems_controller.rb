@@ -28,18 +28,13 @@ class SystemsController < ApplicationController
   end
 
   def new
-    @system = System.new(params[:system])
+    @system = System.new(system_params)
 
     render :layout => nil
   end
 
   def create
-    if params[:system]
-      params[:system][:infrastructure] = params[:system][:type] == 'infrastructure'
-      params[:system].delete(:type)
-    end
-
-    @system = System.new(params[:system])
+    @system = System.new(system_params)
 
     respond_to do |format|
       if @system.save
@@ -56,15 +51,10 @@ class SystemsController < ApplicationController
   end
 
   def update
-    if params[:system]
-      params[:system][:infrastructure] = params[:system][:type] == 'infrastructure'
-      params[:system].delete(:type)
-    end
-
     @system = System.find(params[:id])
 
     respond_to do |format|
-      if @system.authored_update(current_user, params[:system])
+      if @system.authored_update(current_user, system_params)
         flash[:notice] = "Successfully updated the system."
         format.json do
           render :json => @system.as_json(:root => nil)
@@ -170,4 +160,25 @@ class SystemsController < ApplicationController
       end
     end
   end
+
+  private
+
+    def system_params
+      system_params = params[:system] || {}
+      %w(type).each do |field|
+        value = system_params.delete(field + '_id')
+        if value.present?
+          system_params[field] = Option.find(value)
+        end
+      end
+
+      # Fixup legacy boolean
+      if system_params[:type]
+        system_params[:infrastructure] = system_params[:type].title == 'Infrastructure'
+      else
+        system_params[:infrastructure] = false
+      end
+
+      system_params
+    end
 end

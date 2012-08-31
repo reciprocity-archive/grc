@@ -100,21 +100,4 @@ class ControlsController < ApplicationController
     @controls.all.sort_by(&:slug_split_for_sort)
     render :action => 'controls', :layout => nil, :locals => { :controls => @controls, :prefix => 'Child of' }
   end
-
-  private
-
-    def control_params
-      control_params = params[:control] || {}
-      if control_params[:program_id]
-        # TODO: Validate the user has access to add controls to the program
-        control_params[:program] = Program.find(control_params.delete(:program_id))
-      end
-      %w(type kind means).each do |field|
-        value = control_params.delete(field + '_id')
-        if value.present?
-          control_params[field] = Option.find(value)
-        end
-      end
-      control_params
-    end
 end
