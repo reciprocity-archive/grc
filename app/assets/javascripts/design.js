@@ -33,6 +33,7 @@ $(function () {
   renderExternalTmpl({ name: 'newfacility', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'newsystem', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'newcontrol', selector: '#templates', data: {} });
+  renderExternalTmpl({ name: 'auditcycle', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'peopleselector', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'referenceselector', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'newperson', selector: '#templates', data: {} });
