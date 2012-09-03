@@ -460,13 +460,49 @@
 }
 
 .modal-body {
-  padding: 10px 15px;
+  padding: 10px 10px;
   overflow-y: auto;
   .alert {
     display:none;
   }
-  // TODO: Removed because it breaks .slimmodal
-  //width:690px;
+  
+  ::-webkit-input-placeholder {
+    color: $lightGray;
+  }
+
+  :-moz-placeholder {
+    color: $lightGray;
+  }
+  
+  textarea {
+    height:28px;
+  }
+  .scope {
+    padding:0 6px;
+    background:$lightestGray;
+    border:1px solid darken($lightestGray,10%);
+    @include border-radius();
+    label {
+      &.subtitle {
+        font-weight:bold;
+      }
+    }
+  }
+  
+  .audit {
+    padding:0 6px;
+    background:$auditBgndColor;
+    border:1px solid darken($auditBgndColor,10%);
+    @include border-radius();
+    label {
+      color:#2a909c;
+      &.subtitle {
+        font-weight:bold;
+      }
+    }
+    
+  }
+  
 }
 
 /* BUTTONS */
@@ -1690,18 +1726,6 @@ a.controllistRM {
   font-size:13px;
   line-height:26px;
   color:#000;
-}
-
-.modal {
-  width: 720px;
-  margin-left:-360px;
-  max-height: 720px;
-}
-
-.slimmodal {
-  width: 480px;
-  margin-left:-240px;
-  max-height: 720px;
 }
 
 select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {

@@ -1,0 +1,14 @@
+.modal {
+  max-height: 720px;
+  width: 720px;
+  margin-left:-360px;
+  &.modal-wide {
+    width:960px;
+    margin-left:-480px;
+  }
+  &.modal-slim {
+    width: 480px;
+    margin-left:-240px;
+  }
+}
+

@@ -44,7 +44,10 @@ $(function () {
   renderExternalTmpl({ name: 'newthreat', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'mappedcontrols', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'newprogram', selector: '#templates', data: {} });
-
+  // new modals START
+  renderExternalTmpl({ name: 'redesignNewProgram', selector: '#templates', data: {} });
+  renderExternalTmpl({ name: 'redesignNewProgramWide', selector: '#templates', data: {} });
+  // new modals END
   renderExternalTmpl({ name: 'newpersonBasic', selector: '#templates', data: {} });
 
   renderExternalTmpl({ name: 'newtransaction', selector: '#templates', data: {} });
