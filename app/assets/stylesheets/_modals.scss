@@ -12,3 +12,66 @@
   }
 }
 
+.modal-body {
+  padding: 10px;
+  overflow-y: auto;
+  .alert {
+    display:none;
+  }
+  ::-webkit-input-placeholder {
+    color: $lightGray;
+  }
+  :-moz-placeholder {
+    color: $lightGray;
+  }
+  textarea {
+    height:28px;
+  }
+  .scope {
+    padding:0 6px;
+    background:$lightestGray;
+    border:1px solid darken($lightestGray,10%);
+    @include border-radius();
+    label {
+      &.subtitle {
+        font-weight:bold;
+      }
+    }
+  }
+  .audit {
+    padding:0 6px;
+    background:$auditBgndColor;
+    border:1px solid darken($auditBgndColor,10%);
+    @include border-radius();
+    label {
+      color:#2a909c;
+      &.subtitle {
+        font-weight:bold;
+      }
+    }  
+  }
+}
+
+.modal-info {
+  background:#f0f0f0;
+  border-top:1px solid $borderDefault;
+  padding:10px 10px 0 10px;
+  font-size:11px;
+  color:#999;
+  .status {
+    text-align:right;
+    strong {
+      color:#369;
+    }
+    span {
+      color:#333;
+    }
+  }
+}
+
+.modal-footer {
+  padding:10px;
+  .btn-primary {
+    display:inline-block;
+  }
+}

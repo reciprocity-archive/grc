@@ -459,51 +459,6 @@
   margin-right:7px;
 }
 
-.modal-body {
-  padding: 10px 10px;
-  overflow-y: auto;
-  .alert {
-    display:none;
-  }
-  
-  ::-webkit-input-placeholder {
-    color: $lightGray;
-  }
-
-  :-moz-placeholder {
-    color: $lightGray;
-  }
-  
-  textarea {
-    height:28px;
-  }
-  .scope {
-    padding:0 6px;
-    background:$lightestGray;
-    border:1px solid darken($lightestGray,10%);
-    @include border-radius();
-    label {
-      &.subtitle {
-        font-weight:bold;
-      }
-    }
-  }
-  
-  .audit {
-    padding:0 6px;
-    background:$auditBgndColor;
-    border:1px solid darken($auditBgndColor,10%);
-    @include border-radius();
-    label {
-      color:#2a909c;
-      &.subtitle {
-        font-weight:bold;
-      }
-    }
-    
-  }
-  
-}
 
 /* BUTTONS */
 
@@ -1480,16 +1435,6 @@ margin-top:5px;
   background-image: none;
   @include opacity(0.65);
   @include box-shadow(none);
-}
-
-/* Standard buttons (Bottom of modals) */
-
-.btn {
-  display: inline-block;
-  padding: 4px 6px 4px;
-  margin-bottom: 0px; /* This must stay zero or it will conflict with bootstrap's .btn + .btn rule */
-  font-size: 13px;
-  line-height: 13px;
 }
 
 /* Button specifics - build on .btn */
