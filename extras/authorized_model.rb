@@ -8,7 +8,7 @@
 
 module AuthorizedModel
   def allowed?(ability, account_or_person = nil, &block)
-    Authorization::allowed?(ability, account_or_person = nil, self, &block)
+    Authorization::allowed?(ability, account_or_person, self, &block)
   end
 
   def abilities(account_or_person = nil)

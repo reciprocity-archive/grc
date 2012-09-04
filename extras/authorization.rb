@@ -3,14 +3,6 @@
 module Authorization
   # Controller-independent method for retrieving the current user.
   # Needed for model security where the current controller is not available.
-  def self.current_account
-    Thread.current["current_account"]
-  end
-
-  # Controller-independent method for setting the current user.
-  def self.current_account=(account)
-    Thread.current["current_account"] = account
-  end
 
   # Primarily for use by the console and tests, where we don't
   # necessarily want to use authorization.
@@ -52,9 +44,6 @@ module Authorization
   def self.roles(account_or_person = nil, object = nil)
     roles = Set.new
 
-    if !account_or_person
-      account_or_person = Authorization.current_account
-    end
 
     # If you have an account, turn it into a person
     if account_or_person
