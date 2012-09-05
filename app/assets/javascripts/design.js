@@ -8,8 +8,23 @@
  *= require bootstrap-wysihtml5-0.0.2
  *= require bootstrap-datepicker
  */
-
 $(function () {
+
+
+$(".govWidget").each(function() {
+  $.data(this, "realHeight", $(this).height());
+}).fadeToggle(); //css({ overflow: "hidden", height: "0px" });
+
+
+$(".riskWidget").each(function() {
+  $.data(this, "realHeight", $(this).height());
+}).fadeToggle(); //css({ overflow: "hidden", height: "0px" });
+
+$(".compWidget").each(function() {
+  $.data(this, "realHeight", $(this).height());
+}).fadeToggle(); //.css({ overflow: "hidden", height: "0px" });
+
+
 
   //render out templates function
   var renderExternalTmpl = function(item) {
@@ -103,6 +118,8 @@ $(function () {
     $(this).children(".expander").toggleClass("toggleExpanded");
   });*/
 
+
+
   $(document).on("click", ".expandAll", function(event) {
     // $("h3.trigger").toggleClass("active").next().slideToggle("fast");
     $(this).children("i").toggleClass("gcmssmallicon-blue-expand");
@@ -151,13 +168,25 @@ $(function () {
 
 
 function toggleCompliance() {
-  $('.compWidget').fadeToggle("slow", "linear");
+  $('.compWidget').fadeToggle("slow", "linear").animate({height: "100%"});
+  //  $('#cotWidget').animate({height: $('#cotWidget').data("realHeight")} );
+
 }
+
+
 
 function toggleRisk() {
-  $('.riskWidget').fadeToggle("slow", "linear");
+  $('.riskWidget').fadeToggle("slow", "linear").animate({height: "100%"});
+
+
+  //var div = $(".riskWidget")
+  //div.animate({ height: div.data("realHeight") }, 600);
+  //$(this).next(".riskWidget").animate({ height: 30 }, 600);
+
 }
 
+
+
 function toggleGovernance() {
-  $('.govWidget').fadeToggle("slow", "linear");
+  $('.govWidget').fadeToggle("slow", "linear").animate({height: "100%"});
 }
