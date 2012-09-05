@@ -28,7 +28,9 @@ class CyclesController < ApplicationController
   end
 
   def create
+    program_id = cycle_params.delete(:program_id)
     @cycle = Cycle.new(cycle_params)
+    @cycle.program = Program.find(program_id)
 
     respond_to do |format|
       if @cycle.save
