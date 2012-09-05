@@ -8,8 +8,7 @@ describe TestreportController do
 
       # FIXME: This should share the same tests that all of the
       # controllers share surrounding authorization.
-      response.status.should == 403
-      response.should render_template('welcome/login')
+      response.should be_unauthorized
     end
   end
 

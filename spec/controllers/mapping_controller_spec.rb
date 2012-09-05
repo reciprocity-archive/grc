@@ -10,8 +10,7 @@ describe MappingController do
       login({}, {})
       create_base_objects
       get 'show', :program_id => @reg.id
-      response.status.should == 403
-      response.should render_template('welcome/login')
+      response.should be_unauthorized
     end
   end
 
