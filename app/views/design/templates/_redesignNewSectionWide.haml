@@ -1,0 +1,49 @@
+#redesignNewSectionWide.modal.modal-wide.hide.fade
+  .modal-header
+    %nav
+      %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+        %i.gcmsicon-questionmark-grey
+      %a.widgetbtn{"data-dismiss" => "modal", :href => "#"}
+        %i.gcmsicon-x-grey
+    %h1 Create New Section
+  .modal-body
+    .alert.alert-info
+      %span#alertMessage
+      / %button.close{:type => "button", :"data-dismiss" => "alert"} ×
+    %form
+      .row-fluid
+        .span12
+          %label Program
+          %select.span12
+            %option Program Title 1
+            %option Program Title 2
+            %option Program Title 3
+
+      .row-fluid
+        .span8
+          %label Title
+          %input.span12{:type => "text", :placeholder => "Enter title"}
+        .span2
+          %label Code
+          %input.span12{:type => "text", :placeholder => "TO 16 CHARACTERS"}
+        .span2
+          %label Version
+          %input.span12{:type => "text", :placeholder => "1.1.1"}
+      .row-fluid
+        .span8
+          %label Description
+          %textarea.span12.double{:placeholder => "Enter description here", :rows => "3"}
+        .span4
+          .row-fluid
+            .span6
+              %label Effective Date
+              %input.span12{:type => "text", :placeholder => "MM/DD/YYYY"}
+            .span6
+              %label Stop Date    
+              %input.span12{:type => "text", :placeholder => "MM/DD/YYYY"}
+          .row-fluid
+            .span12
+              %label Direct Link
+              %input.span12{:type => "text", :placeholder => "http://www.examplelink.com/"}
+
+  =render :partial => 'design/templates/modalfooter'
