@@ -8,8 +8,8 @@
  *= require bootstrap-wysihtml5-0.0.2
  *= require bootstrap-datepicker
  */
-$(function () {
 
+jQuery(function ($) {
 
 $(".govWidget").each(function() {
   $.data(this, "realHeight", $(this).height());
@@ -164,6 +164,50 @@ $(".compWidget").each(function() {
     $('#tooltip' + i).tooltip();
   }
 
+  // status js
+  var userHasPriviledge = true;
+  $('body').on('click', '#actionButton', function(e) {
+    e.preventDefault();
+
+    var fullDate = new Date();
+    var twoDigitMonth = ((fullDate.getMonth().length+1) === 1)? (fullDate.getMonth()+1) : '0' + (fullDate.getMonth()+1);
+    var currentDate = fullDate.getDate() + "/" + twoDigitMonth + "/" + fullDate.getFullYear();
+
+    var $this = $(this),
+        $alert = $this.closest(".modal").find(".alert"),
+        $date = $this.closest(".modal").find("#updatedDate"),
+        $alertMessage = $this.closest(".modal").find("#alertMessage"),
+        $status = $this.closest(".modal").find("#statusValue"),
+        $currentStatus = $this.closest(".modal").find("#statusValue").html();
+
+    if(userHasPriviledge) {
+
+      if ($currentStatus === "Draft") {
+        $status
+          .html("Waiting for Approval")
+          .addClass("statustextred");
+        $alertMessage
+          .html("New Program has been saved. Waiting on Approval.");
+        $alert
+          .fadeIn();
+        $this
+          .html("Approve");
+        $date
+          .html(currentDate);
+      } else if ($currentStatus === "Waiting for Approval") {
+        $status
+          .html("Approved")
+          .removeClass("statustextred");
+        $alertMessage
+          .html("Program has been approved.");
+        $alert
+          .fadeIn();
+        $this
+        .addClass("disabled");
+        window.location = "/programs/1";
+      }
+    }
+  });
 });
 
 
