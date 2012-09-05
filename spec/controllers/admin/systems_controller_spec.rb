@@ -16,7 +16,7 @@ describe Admin::SystemsController do
 
   describe "authorized" do
     before :each do
-      login({}, { :role => 'admin' })
+      login({}, { :role => 'superuser' })
     end
 
     describe "POST 'create'" do

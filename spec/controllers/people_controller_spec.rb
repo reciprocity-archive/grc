@@ -18,7 +18,7 @@ describe PeopleController do
 
   context "list_update" do
     it "should add a new user" do
-      login({}, {:role => :admin})
+      login({}, {:role => :superuser})
       post 'list_update', {
         :object_type => 'program',
         :object_id => @program.id,
@@ -30,7 +30,7 @@ describe PeopleController do
 
   context "list_edit" do
     it "should show the right objects" do
-      login({}, {:role => :admin})
+      login({}, {:role => :superuser})
       get 'list_edit', {
         :object_type => 'program',
         :object_id => @program.id,

@@ -8,7 +8,7 @@ class SlugfilterController < ApplicationController
   include SlugfilterHelper
 
   access_control :acl do
-    allow :superuser, :admin, :analyst
+    allow :superuser
   end
 
   # Update the last-used program in the session so that the user

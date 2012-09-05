@@ -22,9 +22,9 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user_session, :current_user
 
-  # By default allow only superuser and admin access.  This is relaxed in specific controllers.
+  # By default allow only superuser access.  This is relaxed in specific controllers.
   access_control :acl do
-    allow :admin, :superuser
+    allow :superuser
   end
 
   rescue_from Acl9::AccessDenied do

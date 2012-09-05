@@ -11,7 +11,7 @@ describe EvidenceController do
 
   context "authorized" do
     before :each do
-      login({}, { :role => 'admin' })
+      login({}, { :role => 'superuser' })
 
       @reg = FactoryGirl.create(:program, :title => 'Reg 1', :slug => 'reg1', :company => false)
       @ctl = FactoryGirl.create(:control, :title => 'Control 1', :slug => 'reg1-ctl1', :description => 'x', :program => @reg, :is_key => true, :fraud_related => false)

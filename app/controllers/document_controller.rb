@@ -9,14 +9,14 @@ class DocumentController < ApplicationController
   include DocumentHelper
 
   access_control :acl do
-    allow :superuser, :admin, :analyst
+    allow :superuser
 
     actions :index do
-      allow :read_document
+      allow :read, :read_document
     end
 
     actions :sync do
-      allow :update_document
+      allow :update, :update_document
     end
   end
 

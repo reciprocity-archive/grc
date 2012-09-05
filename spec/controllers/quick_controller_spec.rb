@@ -5,7 +5,7 @@ describe QuickController do
 
   context "authorization" do
     before :each do
-      login({}, {:role => 'admin'})
+      login({}, {:role => 'superuser'})
     end
 
     context "programs" do

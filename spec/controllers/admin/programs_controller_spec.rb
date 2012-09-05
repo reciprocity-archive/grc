@@ -16,7 +16,7 @@ describe Admin::ProgramsController do
 
   describe "authorized" do
     before :each do
-      login({}, { :role => 'admin' })
+      login({}, { :role => 'superuser' })
     end
 
     #describe "GET 'index'" do

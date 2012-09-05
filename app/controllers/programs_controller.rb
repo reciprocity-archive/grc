@@ -22,9 +22,9 @@ class ProgramsController < ApplicationController
                                          :category_controls]
 
   access_control :acl do
-    allow :superuser, :admin, :analyst
+    allow :superuser
 
-    allow :create_program, :to => [:create,
+    allow :create, :create_program, :to => [:create,
                                    :new]
     allow :read, :read_program, :of => :program, :to => [:show,
                                                   :tooltip,
@@ -34,7 +34,7 @@ class ProgramsController < ApplicationController
                                                   :control_sections,
                                                   :category_controls]
 
-    allow :update_program, :of => :program, :to => [:edit,
+    allow :update, :update_program, :of => :program, :to => [:edit,
                                                     :update,
                                                     :import]
   end

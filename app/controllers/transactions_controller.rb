@@ -7,7 +7,7 @@ class TransactionsController < ApplicationController
   include ApplicationHelper
 
   access_control :acl do
-    allow :superuser, :admin, :analyst
+    allow :superuser
   end
 
   layout 'dashboard'

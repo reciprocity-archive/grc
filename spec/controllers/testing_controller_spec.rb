@@ -14,7 +14,7 @@ describe TestingController do
 
   context "authorized" do
     before :each do
-      login({}, { :role => 'admin' })
+      login({}, { :role => 'superuser' })
 
       @reg = FactoryGirl.create(:program, :title => 'Reg 1', :slug => 'reg1', :company => false)
       @cycle = FactoryGirl.create(:cycle, :program => @reg, :start_at => '2012-01-01')

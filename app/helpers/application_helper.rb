@@ -23,7 +23,7 @@ module ApplicationHelper
 
   # Roles
   def access_control_roles
-    [:superuser, :admin, :analyst, :user]
+    [:superuser, :user]
   end
 
   # Filter SystemControl relationship objects by slug and/or program.

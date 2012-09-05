@@ -12,10 +12,10 @@ class SectionsController < ApplicationController
                                         :tooltip]
 
   access_control :acl do
-    allow :superuser, :admin, :analyst
+    allow :superuser
 
     actions :new, :create do
-      allow :create_section
+      allow :create, :create_section
     end
 
     actions :tooltip do
@@ -23,7 +23,7 @@ class SectionsController < ApplicationController
     end
 
     actions :edit, :update do
-      allow :update_section, :of => :section
+      allow :update, :update_section, :of => :section
     end
   end
 

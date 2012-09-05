@@ -6,7 +6,7 @@ class CategoriesController < ApplicationController
   include ApplicationHelper
 
   access_control :acl do
-    allow :superuser, :admin
+    allow :superuser
   end
 
   layout 'dashboard'

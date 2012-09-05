@@ -18,12 +18,11 @@ module Authorization
     # Should we add some more enforcement?
     role_to_ability = {
       :superuser => [:all],
-      :admin => [:create, :read, :update, :delete],
-      :compliance_analyst => [:read, :update, :delete],# Same as owner
       :user => [],
 
       # Non-global roles
-      :owner => [:read, :edit, :delete]
+      :owner => [:create, :read, :update, :delete],
+      :viewer => [:read]
     }
     return role_to_ability[role] || [role]
   end

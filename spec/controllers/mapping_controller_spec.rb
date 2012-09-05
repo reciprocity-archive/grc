@@ -17,7 +17,7 @@ describe MappingController do
 
   context "authorized" do
     before :each do
-      login({}, { :role => 'admin' })
+      login({}, { :role => 'superuser' })
       create_base_objects
       @cctl = FactoryGirl.create(:control, :title => 'Company ctl 1', :slug => 'COM1-CTL2', :description => 'x', :program => @creg);
     end

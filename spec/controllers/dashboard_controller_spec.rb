@@ -17,7 +17,7 @@ describe DashboardController do
 
   context "authorized" do
     before :each do
-      login({}, { :role => 'admin' })
+      login({}, { :role => 'superuser' })
       #BizProcess.destroy
       #System.destroy
       @locals = Hash.new(0)

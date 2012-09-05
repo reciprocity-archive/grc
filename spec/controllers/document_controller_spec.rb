@@ -17,7 +17,7 @@ describe DocumentController do
 
   context "gdata" do
     before :each do
-      login({}, { :role => 'admin' })
+      login({}, { :role => 'superuser' })
 
       @cms_folder = Gdoc::Document.new('CMS')
       @cycle_folder = Gdoc::Document.new('REG1-2012-01-01', :parent => @cms_folder)

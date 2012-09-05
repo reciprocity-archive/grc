@@ -12,7 +12,7 @@ describe Admin::BusinessAreasController do
 
   describe "authorized" do
     before :each do
-      login({}, { :role => 'admin' })
+      login({}, { :role => 'superuser' })
       create_base_objects
     end
 

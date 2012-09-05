@@ -7,10 +7,10 @@ class CyclesController < ApplicationController
                                        :update]
 
   access_control :acl do
-    allow :superuser, :admin, :analyst
+    allow :superuser
 
     actions :create do
-      allow :create_cycle
+      allow :create, :create_cycle
     end
 
     actions :show do
@@ -18,7 +18,7 @@ class CyclesController < ApplicationController
     end
 
     actions :update do
-      allow :update_cycle, :of => :cycle
+      allow :update, :update_cycle, :of => :cycle
     end
   end
 

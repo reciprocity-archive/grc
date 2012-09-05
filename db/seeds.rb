@@ -10,8 +10,7 @@
 SIZE=20
 
 Account.create({:email => 'root@t.com', :password => 'root', :password_confirmation => 'root', :role => :superuser}, :without_protection => true)
-Account.create({:email => 'admin@t.com', :password => 'admin', :password_confirmation => 'admin', :role => :admin}, :without_protection => true)
-Account.create({:email => 'user@t.com', :password => 'user', :password_confirmation => 'user', :role => :analyst}, :without_protection => true)
+Account.create({:email => 'user@t.com', :password => 'user', :password_confirmation => 'user', :role => :user}, :without_protection => true)
 Account.create({:email => 'owner1@t.com', :password => 'owner1', :password_confirmation => 'owner1', :role => :user}, :without_protection => true)
 Account.create({:email => 'owner2@t.com', :password => 'owner2', :password_confirmation => 'owner2', :role => :user}, :without_protection => true)
 prog = Program.create(:title => 'Reg 1', :slug => 'REG1')

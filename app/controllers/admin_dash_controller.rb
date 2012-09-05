@@ -6,7 +6,7 @@
 class AdminDashController < ApplicationController
 
   access_control :acl do
-    allow :admin, :superuser
+    allow :superuser
   end
 
   layout 'dashboard'

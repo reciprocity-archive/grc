@@ -26,7 +26,7 @@ describe DocumentsController do
 
   context "list_edit" do
     it "should show the right objects" do
-      login({}, {:role => :admin})
+      login({}, {:role => :superuser})
       get 'list_edit', {
         :object_type => 'program',
         :object_id => @program.id,

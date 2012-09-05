@@ -11,7 +11,7 @@ describe AuthorizedModel do
       @authorized_multiple_person = FactoryGirl.create(:person)
       FactoryGirl.create(:object_person, :person => @authorized_person, :personable => @control)
       FactoryGirl.create(:object_person, :person => @authorized_person, :personable => @child_control, :role => 'test')
-      FactoryGirl.create(:object_person, :person => @authorized_multiple_person, :personable => @control, :role => 'admin')
+      FactoryGirl.create(:object_person, :person => @authorized_multiple_person, :personable => @control, :role => 'owner')
       FactoryGirl.create(:object_person, :person => @authorized_person, :personable => @control.program, :role => 'program_role')
     end
 
@@ -49,7 +49,7 @@ describe AuthorizedModel do
   context "allowed" do
     before :each do
       @superuser = FactoryGirl.create(:account, :email => 'root@t.com', :password => 'root', :password_confirmation => 'root', :role => :superuser)
-      @analyst = FactoryGirl.create(:account, :email => 'analyst@t.com', :password => 'root', :password_confirmation => 'root', :role => :compliance_analyst)
+      @viewer = FactoryGirl.create(:account, :email => 'viewer@t.com', :password => 'viewer', :password_confirmation => 'viewer', :role => :viewer)
       @unauthorized_person = FactoryGirl.create(:person)
       @authorized_person = FactoryGirl.create(:person)
 
@@ -59,7 +59,7 @@ describe AuthorizedModel do
       @authorized_multiple_person = FactoryGirl.create(:person)
       FactoryGirl.create(:object_person, :person => @authorized_person, :personable => @control)
       FactoryGirl.create(:object_person, :person => @authorized_person, :personable => @child_control, :role => :test)
-      FactoryGirl.create(:object_person, :person => @authorized_multiple_person, :personable => @control, :role => :admin)
+      FactoryGirl.create(:object_person, :person => @authorized_multiple_person, :personable => @control, :role => :superuser)
       FactoryGirl.create(:object_person, :person => @authorized_person, :personable => @control.program, :role => :program_role)
     end
 
@@ -82,8 +82,8 @@ describe AuthorizedModel do
     end
 
     it "should properly set account-level abilities" do
-      @control.allowed?('not_allowed', @analyst).should be(false)
-      @control.allowed?(:read, @analyst).should be(true)
+      @control.allowed?('not_allowed', @viewer).should be(false)
+      @control.allowed?(:read, @viewer).should be(true)
     end
 
     it "should always return true if you are the superuser" do

@@ -8,7 +8,7 @@ class TestingController < ApplicationController
   include ApplicationHelper
 
   access_control :acl do
-    allow :superuser, :admin, :analyst
+    allow :superuser
   end
 
   before_filter :need_cycle

@@ -6,7 +6,7 @@ describe Admin::AccountsController do
   include BaseObjects
 
   before :each do
-    @account = FactoryGirl.create(:account, :email => 'a@b.com', :role => 'analyst', :password => '1111', :password_confirmation => '1111')
+    @account = FactoryGirl.create(:account, :email => 'a@b.com', :role => 'superuser', :password => '1111', :password_confirmation => '1111')
 
     # For use by authorized_controller tests
     @model = Program

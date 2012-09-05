@@ -18,14 +18,14 @@ class ControlsController < ApplicationController
 
 
   access_control :acl do
-    allow :superuser, :admin, :analyst
+    allow :superuser
 
     actions :new, :create do
-      allow :create_control
+      allow :create, :create_control
     end
 
     actions :edit, :update do
-      allow :update_control, :of => :control
+      allow :update, :update_control, :of => :control
     end
 
     actions :show, :tooltip do

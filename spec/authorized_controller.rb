@@ -218,7 +218,7 @@ shared_examples_for "an authorized index" do
 
   context "logged in with read" do
     before :each do
-      login({}, {:role => 'read_' + @model.table_name.singularize})
+      login({}, {:role => :read})
     end
 
     it "should be authorized w/ read for: index" do
@@ -434,7 +434,7 @@ shared_examples_for "an authorized controller" do
 
   context "authorized" do
     before :each do
-      login({}, { :role => @login_role || 'admin' })
+      login({}, { :role => @login_role || 'superuser' })
     end
 
     if described_class.action_methods.include? 'index'
@@ -466,7 +466,7 @@ shared_examples_for "an authorized resource controller" do
 
   context "authorized" do
     before :each do
-      login({}, { :role => @login_role || 'admin' })
+      login({}, { :role => @login_role || 'superuser' })
     end
 
     describe "GET 'index'" do
@@ -502,7 +502,7 @@ shared_examples_for "an admin controller" do
 
   context "admin" do
     before :each do
-      login({}, { :role => @login_role || 'admin' })
+      login({}, { :role => @login_role || 'superuser' })
     end
 
     if described_class.action_methods.include? 'index'
