@@ -150,7 +150,7 @@ $(".compWidget").each(function() {
     $('#referenceList').append("<li class='controlSlot'><a href='#'><div class='circle fltrt'><i class='gcmssmallicon-dash-white'></i></div></a><span class='controls-group'>Reference Type</span><br /><span class='controls-subgroup'>Reference Item</span></li>");
   });
 
-  $(".collapse").collapse();
+  //$(".collapse").collapse();
   $('#quicklinks a:last').tab('show');
 
   $('#myLock a').click(function (e) {
