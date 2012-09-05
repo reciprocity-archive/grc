@@ -1,0 +1,74 @@
+#redesignNewControlWide.modal.modal-wide.hide.fade
+  .modal-header
+    %nav
+      %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+        %i.gcmsicon-questionmark-grey
+      %a.widgetbtn{"data-dismiss" => "modal", :href => "#"}
+        %i.gcmsicon-x-grey
+    %h1 Create New Control
+  .modal-body
+    .alert.alert-info
+      %span#alertMessage
+      / %button.close{:type => "button", :"data-dismiss" => "alert"} ×
+    %form
+      .row-fluid
+        .span4
+          %label Program
+          %select.span12
+            %option Program Title 1
+            %option Program Title 2
+            %option Program Title 3
+        .span4
+          %label Control Means
+          %select.span12
+            %option Manual
+            %option Manual with Segregation of Duties
+            %option Automated
+        .span2
+          %label Type
+          %select.span12
+            %option Regulation
+            %option Company
+        .span2
+          %label Kind
+          %select.span12
+            %option Reactive
+            %option Administrative
+            %option Detective
+            %option Preventative
+          
+      .row-fluid
+        .span8
+          %label Title
+          %input.span12{:type => "text", :placeholder => "Enter title"}
+        .span2
+          %label Code
+          %input.span12{:type => "text", :placeholder => "TO 16 CHARACTERS"}
+        .span2
+          %label Version
+          %input.span12{:type => "text", :placeholder => "1.1.1"}
+      .row-fluid
+        .span8
+          %label Description/Note
+          %textarea.span12.double{:placeholder => "Enter note/description here", :rows => "3"}
+        .span4
+          .row-fluid
+            .span6
+              %label Effective Date
+              %input.span12{:type => "text", :placeholder => "MM/DD/YYYY"}
+            .span6
+              %label Stop Date    
+              %input.span12{:type => "text", :placeholder => "MM/DD/YYYY"}
+          .row-fluid
+            .span12
+              %label Direct Link
+              %input.span12{:type => "text", :placeholder => "http://www.examplelink.com/"}
+
+      .row-fluid
+        .span12
+          %label Categories
+          %span.label Access Control &gt; Authorization
+          %span.label Change Management &gt; Segregation of Duties
+          %a.btn.btn-mini.btn-primary +/- Manage Categories
+
+  =render :partial => 'design/templates/modalfooter'

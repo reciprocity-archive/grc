@@ -47,6 +47,9 @@ $(function () {
   // new modals START
   renderExternalTmpl({ name: 'redesignNewProgram', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'redesignNewProgramWide', selector: '#templates', data: {} });
+  renderExternalTmpl({ name: 'redesignNewProgramWide2', selector: '#templates', data: {} });
+  renderExternalTmpl({ name: 'redesignNewControlWide', selector: '#templates', data: {} });
+
   // new modals END
   renderExternalTmpl({ name: 'newpersonBasic', selector: '#templates', data: {} });
 
