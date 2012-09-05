@@ -1,26 +1,25 @@
 require 'spec_helper'
 require 'base_objects'
+require 'authorized_controller'
 
 describe Admin::AccountsController do
   include BaseObjects
 
-  describe "GET 'index' without authorization" do
-    it "fails as guest" do
-      test_unauth
-    end
+  before :each do
+    @account = FactoryGirl.create(:account, :email => 'a@b.com', :role => 'analyst', :password => '1111', :password_confirmation => '1111')
+
+    # For use by authorized_controller tests
+    @model = Program
+    @object = @account
+    @login_role = :superuser
   end
 
-  describe "authorized" do
-    before :each do
-      login({}, { :role => 'superuser' })
-      @account = FactoryGirl.create(:account, :email => 'a@b.com', :role => 'analyst', :password => '1111', :password_confirmation => '1111')
-    end
-    describe "GET 'index'" do
-      it "returns http success" do
-        test_controller_index(:accounts, [@account])
-      end
-    end
+  it_behaves_like "an authorized controller"
 
+  describe "superuser" do
+    before :each do
+      login({}, { :role => :superuser })
+    end
 
     describe "PUT 'update'" do
       it "updates an existing object" do

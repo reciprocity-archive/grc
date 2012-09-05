@@ -5,6 +5,10 @@ module AuthoredModel
   # where in fact we might just have changed false => 0, which is a no-op.  This is important
   # for versioning so we don't create no-change versions when nothing was changed.
   def authored_update(author, params, mass_assign = true)
+    if (!params)
+      # Early out if there are no changes. Makes testing easier.
+      return true
+    end
     tparams = {}
     trels = {}
     params.each do |key, value|

@@ -7,6 +7,7 @@ class Control < ActiveRecord::Base
   include SluggedModel
   include FrequentModel
   include SearchableModel
+  include AuthorizedModel
 
   attr_accessible :title, :slug, :description, :program, :technical, :assertion, :effective_at, :is_key, :fraud_related, :frequency, :frequency_type, :business_area_id, :section_ids, :type, :kind, :means, :categories
 
@@ -112,28 +113,20 @@ class Control < ActiveRecord::Base
     evidence_descriptors.map { |e| e.id }
   end
 
-  # Get the list of both immediate and eventual parents
-  def ancestor_controls
-    implementing_controls.reduce([]) do |ancestors, control|
-      ancestors.push(control)
+  # Return all objects that allow operations on this object
+  def authorizing_objects
+    aos = Set.new
+    aos.add(self)
+    aos.add(program)
 
-      # Now traverse up the hierarchy
-      control_ancestors = control.ancestor_controls
-      ancestors.concat(control_ancestors)
-      ancestors
+    implementing_controls.each do |control|
+      aos.merge(control.authorizing_objects)
     end
-  end
 
-  def ancestor_sections
-    # Not only need to look for instance's ancestor sections, but
-    # also the ancestor sections of all ancestor controls.
-    sections.reduce([]) do |ancestors, section|
-      ancestors.push(section)
-
-      # Now traverse up the hierarchy
-      section_ancestors = section.ancestors
-      ancestors.concat(section_ancestors)
+    sections.each do |section|
+      aos.merge(section.authorizing_objects)
     end
+    aos
   end
 
   class ControlCycle

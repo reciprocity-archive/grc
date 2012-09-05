@@ -18,6 +18,10 @@ FactoryGirl.define do
     "User#{n}"
   end
 
+  sequence(:email) do |n|
+    "user#{n}@example.com"
+  end
+
   factory :program do
     ignore do
       num_people 3
@@ -52,8 +56,15 @@ FactoryGirl.define do
     end
   end
 
+  factory :account do
+    email
+    password 'password'
+    password_confirmation 'password'
+    role 'default'
+  end
+
   factory :person do
-    username
+    email
   end
 
   factory :object_person do
@@ -147,7 +158,6 @@ FactoryGirl.define do
     end
   end
 
-  factory :account
   factory :biz_process
   factory :biz_process_person
   factory :business_area

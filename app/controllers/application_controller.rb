@@ -7,6 +7,7 @@
 #require 'dm-rails/middleware/identity_map'
 class ApplicationController < ActionController::Base
   include ApplicationHelper
+  include AuthorizationHelper
 
   before_filter :require_user
   before_filter :filter_set
@@ -21,15 +22,29 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user_session, :current_user
 
-  # By default allow only admin access.  This is relaxed in specific controllers.
+  # By default allow only superuser and admin access.  This is relaxed in specific controllers.
   access_control :acl do
     allow :admin, :superuser
   end
 
   rescue_from Acl9::AccessDenied do
-      flash[:warning] = "You are not authorized to access this page"
-      redirect_to root_url
-      return false
+    # FIXME: This should probably render a page more specific to
+    # 403s, especially for AJAXy stuff.
+    render_unauthorized
+  end
+
+  def render_unauthorized
+    flash[:warning] = "You are not authorized to access this page"
+    if request.xhr?
+      render :partial => 'error/unauthorized', :layout => nil, :status => 403
+    else
+      render :template => 'error/unauthorized', :status => 403
+    end
+  end
+
+  def render_unauthenticated
+      flash[:notice] = "You must be logged in to access this page"
+    render :template => 'welcome/login', :status => 401
   end
 
   private
@@ -63,10 +78,10 @@ class ApplicationController < ActionController::Base
   def require_user
     unless current_user
       store_location
-      flash[:notice] = "You must be logged in to access this page"
-      redirect_to login_url
+      render_unauthenticated
       return false
     end
+
   end
 
   # Pre-filter for requiring the user to not be logged in

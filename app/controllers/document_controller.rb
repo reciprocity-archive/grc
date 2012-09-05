@@ -10,6 +10,14 @@ class DocumentController < ApplicationController
 
   access_control :acl do
     allow :superuser, :admin, :analyst
+
+    actions :index do
+      allow :read_document
+    end
+
+    actions :sync do
+      allow :update_document
+    end
   end
 
   before_filter :need_cycle

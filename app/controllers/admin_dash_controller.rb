@@ -12,8 +12,7 @@ class AdminDashController < ApplicationController
   layout 'dashboard'
 
   def index
-    @accounts = Account.all
-    @people = Person.all
+    @accounts = allowed_objs(Account.all, :read)
+    @people = allowed_objs(Person.all, :read)
   end
 end
-

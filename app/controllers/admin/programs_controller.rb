@@ -10,7 +10,7 @@ class Admin::ProgramsController < ApplicationController
 
   # List Programs
   def index
-    @programs = Program.all
+    @programs = allowed_objs(Program.all, :read)
 
     respond_to do |format|
       format.html
@@ -18,15 +18,15 @@ class Admin::ProgramsController < ApplicationController
     end
   end
 
-  # Show reg
-  def show
-    @program = Program.find(params[:id])
-
-    respond_to do |format|
-      format.html
-      format.xml  { render :xml => @program }
-    end
-  end
+  ## Show reg
+  #def show
+  #  @program = Program.find(params[:id])
+  #
+  #  respond_to do |format|
+  #    format.html
+  #    format.xml  { render :xml => @program }
+  #  end
+  #end
 
   # New reg form
   def new

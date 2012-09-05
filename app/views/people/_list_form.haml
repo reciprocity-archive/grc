@@ -9,14 +9,14 @@
     %h3
       People associated with this object
 
-    %script{ :type => 'text/html', :data => { :name => '', :username => '' }}
+    %script{ :type => 'text/html', :data => { :name => '', :email => '' }}
       %li.controlSlot{ :'data-id' => '<%= id %>' }
         %input(type='hidden' name='items[<%= id %>][id]' value='<%= id %>')
         %a{:href => "#", :'data-toggle' => 'list-remove'}
           .removeCircleButton.fltrt
             %i.gcmssmallicon-dash-white
-        .arrowcontrols-group{ :'data-toggle' => 'list-select', :href => '#', :data => { :id => '<%= id %>', :name => '<%= name %>', :username => '<%= username %>' }}
-          .controls-type <%= username %>
+        .arrowcontrols-group{ :'data-toggle' => 'list-select', :href => '#', :data => { :id => '<%= id %>', :name => '<%= name %>', :email => '<%= email %>' }}
+          .controls-type <%= email %>
           .controls-subtype
             %select(name="items[<%= id %>][role]")
               %option(value='') Select Role
@@ -33,8 +33,8 @@
           %a{:href => "#", :'data-toggle' => 'list-remove'}
             .removeCircleButton.fltrt
               %i.gcmssmallicon-dash-white
-          .arrowcontrols-group{:'data-toggle' => 'list-select', :href => '#', :data => { :id => person.id, :name => person.name, :username => person.username, :role => object_person.role }}
-            .controls-type=person.username
+          .arrowcontrols-group{:'data-toggle' => 'list-select', :href => '#', :data => { :id => person.id, :name => person.name, :email => person.email, :role => object_person.role }}
+            .controls-type=person.email
             .controls-subtype
               %select(name="items[#{person.id}][role]")
                 %option(value=''){ :selected => object_person.role.nil? } Select Role
@@ -51,14 +51,14 @@
     %script{ :type => 'text/html' }
       %li.controlSlot{ :'data-id' => '<%= id %>' }
         .itemarrow
-        .arrowcontrols-group{ :'data-toggle' => 'list-select', :href => '#', :data => { :id => '<%= id %>', :name => '<%= name %>', :username => '<%= username %>' }}
-          .controls-type <%= username %>
+        .arrowcontrols-group{ :'data-toggle' => 'list-select', :href => '#', :data => { :id => '<%= id %>', :name => '<%= name %>', :email => '<%= email %>' }}
+          .controls-type <%= email %>
           .controls-subgroup <%= name || '&nbsp;' %>
 
     %ul.itemlist#listPersonList{ :'data-list-href' => list_flow_people_path(:format => 'json'), :'data-list-target' => '#listObjectPersonList'}
       -options.each do |person|
         %li.controlSlot{ :'data-id' => person.id }
           .itemarrow
-          .arrowcontrols-group{:'data-toggle' => 'list-select', :href => '#', :data => { :id => person.id, :name => person.name, :username => person.username }}
-            .controls-type=person.username
+          .arrowcontrols-group{:'data-toggle' => 'list-select', :href => '#', :data => { :id => person.id, :name => person.name, :email => person.email }}
+            .controls-type=person.email
             .controls-subgroup=person.name || '&nbsp;'.html_safe

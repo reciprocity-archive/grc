@@ -11,15 +11,16 @@ class Admin::DocumentDescriptorsController < ApplicationController
     end
   end
 
-  # Show a descriptor
-  def show
-    @document_descriptor = DocumentDescriptor.find(params[:id])
-
-    respond_to do |format|
-      format.html
-      format.xml  { render :xml => @document_descriptor }
-    end
-  end
+  # FIXME: No template!
+  ## Show a descriptor
+  #def show
+  #  @document_descriptor = DocumentDescriptor.find(params[:id])
+  #
+  #  respond_to do |format|
+  #    format.html
+  #    format.xml  { render :xml => @document_descriptor }
+  #  end
+  #end
 
   # New descriptor form
   def new

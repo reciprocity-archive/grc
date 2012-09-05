@@ -1,11 +1,14 @@
 require 'spec_helper'
 
 describe TestingController do
+  # FIXME: Too different from standard authorized controller
+  # to use the normal shared examples
   describe "GET 'index' without authorization" do
     it "fails as guest" do
       login({}, {})
       get 'index'
-      response.should be_redirect
+
+      response.should be_unauthorized
     end
   end
 

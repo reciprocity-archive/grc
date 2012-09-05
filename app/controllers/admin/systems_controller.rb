@@ -12,15 +12,16 @@ class Admin::SystemsController < ApplicationController
     end
   end
 
-  # Show a system
-  def show
-    @system = System.find(params[:id])
-
-    respond_to do |format|
-      format.html
-      format.xml  { render :xml => @system }
-    end
-  end
+  # FIXME: no template
+  ## Show a system
+  #def show
+  #  @system = System.find(params[:id])
+  #
+  #  respond_to do |format|
+  #    format.html
+  #    format.xml  { render :xml => @system }
+  #  end
+  #end
 
   # New system form
   def new
@@ -157,7 +158,7 @@ class Admin::SystemsController < ApplicationController
   def add_person
     @system = System.find(params[:id])
   end
- 
+
   # Another way to attach a biz process
   def create_person
     @system = System.find(params[:id])
@@ -171,7 +172,7 @@ class Admin::SystemsController < ApplicationController
       redirect_to add_person_system_path(@system_person.person)
     end
   end
- 
+
   # Another way to detach a biz process
   def destroy_person
     sysp = SystemPerson.first(:person_id => params[:person_id], :system_id => params[:id])

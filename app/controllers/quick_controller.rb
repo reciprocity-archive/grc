@@ -1,12 +1,18 @@
 class QuickController < ApplicationController
   layout false
 
+  # FIXME: Do real access control pending refactoring
+  #
+  #access_control :acl do
+  #  allow logged_in # Filtering is done in the controllers/queries
+  #end
+
   def programs
     @programs = Program
     if params[:s]
       @programs = @programs.search(params[:s])
     end
-    @programs = @programs.all.sort_by(&:slug_split_for_sort)
+    @programs = allowed_objs(@programs.all.sort_by(&:slug_split_for_sort), :read)
   end
 
   def sections
@@ -14,7 +20,7 @@ class QuickController < ApplicationController
     if params[:s]
       @sections = @sections.search(params[:s])
     end
-    @sections = @sections.all.sort_by(&:slug_split_for_sort)
+    @sections = allowed_objs(@sections.all.sort_by(&:slug_split_for_sort), :read)
   end
 
   def controls
@@ -22,7 +28,7 @@ class QuickController < ApplicationController
     if params[:s]
       @controls = @controls.search(params[:s])
     end
-    @controls = @controls.all.sort_by(&:slug_split_for_sort)
+    @controls = allowed_objs(@controls.all.sort_by(&:slug_split_for_sort), :read)
   end
 
   def biz_processes
@@ -30,7 +36,7 @@ class QuickController < ApplicationController
     if params[:s]
       @biz_processes = @biz_processes.search(params[:s])
     end
-    @biz_processes = @biz_processes.all
+    @biz_processes = allowed_objs(@biz_processes.all, :read)
   end
 
   def accounts
@@ -38,7 +44,7 @@ class QuickController < ApplicationController
     if params[:s]
       @accounts = @accounts.search(params[:s])
     end
-    @accounts = @accounts.all
+    @accounts = allowed_objs(@accounts.all, :read)
   end
 
   def people
@@ -46,7 +52,7 @@ class QuickController < ApplicationController
     if params[:s]
       @people = @people.search(params[:s])
     end
-    @people = @people.all
+    @people = allowed_objs(@people.all, :read)
   end
 
   def systems
@@ -54,6 +60,6 @@ class QuickController < ApplicationController
     if params[:s]
       @systems = @systems.search(params[:s])
     end
-    @systems = @systems.all
+    @systems = allowed_objs(@systems.all, :read)
   end
 end

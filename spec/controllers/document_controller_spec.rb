@@ -1,31 +1,18 @@
 require 'spec_helper'
+require 'authorized_controller'
 
 describe DocumentController do
   before :each do
-      @reg = FactoryGirl.create(:program, :title => 'Reg 1', :slug => 'reg1', :company => false)
-      @cycle = FactoryGirl.create(:cycle, :program => @reg, :start_at => '2012-01-01')
-      session[:cycle_id] = @cycle.id
+    @model = Document
+    @reg = FactoryGirl.create(:program, :title => 'Reg 1', :slug => 'reg1', :company => false)
+    @cycle = FactoryGirl.create(:cycle, :program => @reg, :start_at => '2012-01-01')
+    session[:cycle_id] = @cycle.id
+    @object = @reg # FIXME: Necessary for authorized action test to work
   end
 
-  describe "GET 'index' without authorization" do
-    it "fails as guest" do
-      login({}, {})
-      get 'index'
-      response.should redirect_to(root_url)
-    end
-  end
-
-  context "authorized" do
-    before :each do
-      login({}, { :role => 'admin' })
-    end
-
-    describe "GET 'index'" do
-      it "returns http success" do
-        get 'index'
-        response.should be_redirect
-      end
-    end
+  context "authorization" do
+    it_behaves_like "an authorized index"
+    it_behaves_like "an authorized action", ['sync'], :update_document
   end
 
   context "gdata" do

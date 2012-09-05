@@ -12,10 +12,23 @@ SIZE=20
 Account.create({:email => 'root@t.com', :password => 'root', :password_confirmation => 'root', :role => :superuser}, :without_protection => true)
 Account.create({:email => 'admin@t.com', :password => 'admin', :password_confirmation => 'admin', :role => :admin}, :without_protection => true)
 Account.create({:email => 'user@t.com', :password => 'user', :password_confirmation => 'user', :role => :analyst}, :without_protection => true)
+Account.create({:email => 'owner1@t.com', :password => 'owner1', :password_confirmation => 'owner1', :role => :user}, :without_protection => true)
+Account.create({:email => 'owner2@t.com', :password => 'owner2', :password_confirmation => 'owner2', :role => :user}, :without_protection => true)
 prog = Program.create(:title => 'Reg 1', :slug => 'REG1')
 (2..SIZE).each do |ind|
   Program.create(:title => "Reg #{ind}", :slug => "REG#{ind}")
 end
+
+# Set up program owners
+o1 = Account.find_by_email('owner1@t.com')
+p1 = prog
+ObjectPerson.create(:person => o1.person, :personable => p1, :role => 'owner')
+
+o2 = Account.find_by_email('owner2@t.com')
+p2 = Program.find_by_slug('REG2')
+ObjectPerson.create(:person => o2.person, :personable => p2, :role => 'owner')
+
+
 co = Section.create({:title => 'CO 1', :slug => 'REG1-CO1', :description => 'x', :program => prog}, :without_protection => true)
 ctl = Control.create({:title => 'Control 1', :slug => 'REG1-CTL1', :description => 'x', :program => prog, :is_key => true, :fraud_related => false}, :without_protection => true)
 (2..SIZE).each do |ind|
@@ -23,8 +36,8 @@ ctl = Control.create({:title => 'Control 1', :slug => 'REG1-CTL1', :description 
 end
 company_ctl = Control.create({:title => 'Company Control 1', :slug => 'COM-CTL1', :description => 'x', :program => prog, :is_key => true, :fraud_related => false}, :without_protection => true)
 cycle = Cycle.create({:program_id => prog, :start_at => '2011-01-01', :complete => false}, :without_protection => true)
-person1 = Person.create(:username => 'john')
-person2 = Person.create(:username => 'jane')
+person1 = Person.create(:email => 'john@example.com')
+person2 = Person.create(:email => 'jane@example.com')
 sys = System.create(:title => 'System 1', :slug => 'SYS1', :description => 'x', :infrastructure => true)
 sys.owner = person2
 sys.save

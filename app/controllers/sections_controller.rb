@@ -7,14 +7,29 @@ class SectionsController < ApplicationController
   include ApplicationHelper
   include ProgramsHelper
 
+  before_filter :load_section, :only => [:edit,
+                                        :update,
+                                        :tooltip]
+
   access_control :acl do
     allow :superuser, :admin, :analyst
+
+    actions :new, :create do
+      allow :create_section
+    end
+
+    actions :tooltip do
+      allow :read, :read_section, :of => :section
+    end
+
+    actions :edit, :update do
+      allow :update_section, :of => :section
+    end
   end
 
   layout 'dashboard'
 
   def tooltip
-    @section = Section.find(params[:id])
     render :layout => nil
   end
 
@@ -25,8 +40,6 @@ class SectionsController < ApplicationController
   end
 
   def edit
-    @section = Section.find(params[:id])
-
     render :layout => nil
   end
 
@@ -45,8 +58,6 @@ class SectionsController < ApplicationController
   end
 
   def update
-    @section = Section.find(params[:id])
-
     respond_to do |format|
       if @section.authored_update(current_user, section_params)
         flash[:notice] = "Successfully updated the section!"
@@ -59,6 +70,9 @@ class SectionsController < ApplicationController
   end
 
   private
+    def load_section
+      @section = Section.find(params[:id])
+    end
 
     def section_params
       section_params = params[:section] || {}

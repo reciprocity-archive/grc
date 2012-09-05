@@ -10,13 +10,13 @@
     .inner
       %table.table
         %tr
-          %th.first=mat(:person, :username)
+          %th.first=mat(:person, :email)
           %th=mat(:person, :name)
           %th=mat(:person, :updated_at)
           %th.last!="&nbsp;"
         -@people.each do |person|
           %tr
-            %td.first=link_to h(person.username), edit_person_path(person)
+            %td.first=link_to h(person.email), edit_person_path(person)
             %td&=person.name
             %td=display_time(person.updated_at)
             %td.last

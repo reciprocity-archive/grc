@@ -5,7 +5,7 @@ describe EvidenceController do
     it "fails as guest" do
       login({}, {})
       get 'index'
-      response.should be_redirect
+      response.should be_unauthorized
     end
   end
 

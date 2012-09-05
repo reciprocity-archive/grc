@@ -9,9 +9,11 @@ class DashboardController < ApplicationController
   include ApplicationHelper
   layout 'application'
 
-  access_control :acl do
-    allow :superuser, :admin, :analyst
-  end
+  before_filter :load_biz_process, :only => [:openbp,
+                                             :closebp]
+
+  before_filter :load_sys, :only => [:opensys, :closesys]
+
 
   before_filter :need_cycle
 
@@ -29,28 +31,31 @@ class DashboardController < ApplicationController
 
   # AJAX for drilldown into a BizProcess
   def openbp
-    bp = BizProcess.find(params[:id])
-    render :partial => "dashboard/openbp", :locals => {:bp => bp}
+    render :partial => "dashboard/openbp", :locals => {:bp => @bp}
   end
 
   # AJAX for closing a BizProcess drilldown
   def closebp
-    bp = BizProcess.find(params[:id])
-    render :partial => "dashboard/closebp", :locals => {:bp => bp}
+    render :partial => "dashboard/closebp", :locals => {:bp => @bp}
   end
 
   # AJAX for drilldown into a System
   def opensys
-    biz_process = BizProcess.find(params[:biz_process_id])
-    system = System.find(params[:id])
-    render :partial => "dashboard/opensys", :locals => {:biz_process => biz_process, :system => system}
+    render :partial => "dashboard/opensys", :locals => {:biz_process => @biz_process, :system => @system}
   end
 
   # AJAX for closing a System drilldown
   def closesys
-    biz_process = BizProcess.find(params[:biz_process_id])
-    system = System.find(params[:id])
-    render :partial => "dashboard/closesys", :locals => {:biz_process => biz_process, :system => system}
+    render :partial => "dashboard/closesys", :locals => {:biz_process => @biz_process, :system => @system}
   end
 
+  private
+    def load_biz_process
+      @bp = BizProcess.find(params[:id])
+    end
+
+    def load_sys
+      @biz_process = BizProcess.find(params[:biz_process_id])
+      @system = System.find(params[:id])
+    end
 end

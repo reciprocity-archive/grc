@@ -16,14 +16,15 @@ class Admin::AccountsController < ApplicationController
   end
 
   # Show one account
-  def show
-    @account = Account.find(params[:id])
-
-    respond_to do |format|
-      format.html
-      format.xml  { render :xml => @account }
-    end
-  end
+  # FIXME: No template yet for show
+  #def show
+  #  @account = Account.find(params[:id])
+  #
+  #  respond_to do |format|
+  #    format.html
+  #    format.xml  { render :xml => @account }
+  #  end
+  #end
 
   # New account form
   def new

@@ -12,10 +12,10 @@
     =f.label :name
     =f.text_field :name, :class => 'span12', :placeholder => 'John Doe'
     %br
-  .span3{ :class => error_class(f, :username) }
-    =f.label :username
-    =f.text_field :username, :class => 'span12', :placeholder => 'john@acme'
-    =error_messages_inline(f, :username)
+  .span3{ :class => error_class(f, :email) }
+    =f.label :email
+    =f.text_field :email, :class => 'span12', :placeholder => 'john@acme'
+    =error_messages_inline(f, :email)
     %br
   .span3{ :class => error_class(f, :language) }
     %label{:for => 'person-language'} Language

@@ -5,16 +5,39 @@
 class PeopleController < ApplicationController
   include ApplicationHelper
 
+  before_filter :load_person, :only => [:edit,
+                                        :update,
+                                        :destroy]
+
   access_control :acl do
     allow :superuser, :admin
+
+    actions :new, :create do
+      allow :create_person
+    end
+
+    actions :list do
+      allow :read, :read_person
+    end
+
+    actions :list_update, :list_edit do
+      allow :update_person
+    end
+
+    actions :edit, :update do
+      allow :update_person, :of => :person
+    end
+
+    actions :destroy do
+      allow :delete_person, :of => :person
+    end
   end
 
   layout 'dashboard'
 
-  def tooltip
-    @person = Person.find(params[:id])
-    render :layout => nil
-  end
+  #def tooltip
+  #  render :layout => nil
+  #end
 
   def list
     @people = Person.where({})
@@ -30,12 +53,20 @@ class PeopleController < ApplicationController
   end
 
   def list_edit
+    if !params[:object_type] || !params[:object_id]
+      return 400
+    end
+
     @object = params[:object_type].classify.constantize.find(params[:object_id])
     #@people = Person.where({})
     render :layout => nil
   end
 
   def list_update
+    if !params[:object_type] || !params[:object_id]
+      return 400
+    end
+
     @object = params[:object_type].classify.constantize.find(params[:object_id])
 
     new_object_people = []
@@ -44,8 +75,7 @@ class PeopleController < ApplicationController
       params[:items].each do |_, item|
         object_person = @object.object_people.where(:person_id => item[:id]).first
         if !object_person
-          person = Person.find(item[:id])
-          object_person = @object.object_people.new(:person => person)
+          object_person = @object.object_people.new({:person_id => item[:id]}, :without_protection => true)
         end
         object_person.role = item[:role].blank? ? nil : item[:role]
         new_object_people.push(object_person)
@@ -74,8 +104,6 @@ class PeopleController < ApplicationController
   end
 
   def edit
-    @person = Person.find(params[:id])
-
     render :layout => nil
   end
 
@@ -95,8 +123,6 @@ class PeopleController < ApplicationController
   end
 
   def update
-    @person = Person.find(params[:id])
-
     respond_to do |format|
       if @person.authored_update(current_user, person_params)
         flash[:notice] = "Successfully updated the person."
@@ -108,12 +134,15 @@ class PeopleController < ApplicationController
     end
   end
 
-  def destroy
-    @person = Person.find(params[:id])
-    @person.destroy
-  end
+  # FIXME: No template
+  #def destroy
+  #  @person.destroy
+  #end
 
   private
+    def load_person
+      @person = Person.find(params[:id])
+    end
 
     def person_params
       person_params = params[:person] || {}

@@ -3,11 +3,28 @@
 # License:: Apache 2.0
 
 class CyclesController < ApplicationController
+  before_filter :load_cycle, :only => [:show,
+                                       :update]
+
+  access_control :acl do
+    allow :superuser, :admin, :analyst
+
+    actions :create do
+      allow :create_cycle
+    end
+
+    actions :show do
+      allow :read, :read_cycle, :of => :cycle
+    end
+
+    actions :update do
+      allow :update_cycle, :of => :cycle
+    end
+  end
 
   layout 'dashboard'
 
   def show
-    @cycle = Cycle.find(params[:id])
   end
 
   def create
@@ -25,8 +42,6 @@ class CyclesController < ApplicationController
   end
 
   def update
-    @cycle = Cycle.find(params[:id])
-
     respond_to do |format|
       if @cycle.authored_update(current_user, cycle_params)
         flash[:notice] = "Successfully updated the cycle!"
@@ -39,6 +54,9 @@ class CyclesController < ApplicationController
   end
 
   private
+    def load_cycle
+      @cycle = Cycle.find(params[:id])
+    end
 
     def cycle_params
       cycle_params = params[:cycle] || {}
