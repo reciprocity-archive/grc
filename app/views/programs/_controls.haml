@@ -16,8 +16,8 @@
       %img{ :src => '/images/expandAll.png', :alt => 'Expand All', :title => 'Expand All' }
 
   %ul.nav.nav-tabs
-    %li=link_to 'Regulations', '#regulations', :data => { :toggle => 'tab', :'tab-href' => sections_flow_program_path(program) }
-    %li.active=link_to 'Controls', '#category_controls', :data => { :toggle => 'tab', :'tab-href' => category_controls_flow_program_path(program) }
+    %li.active=link_to 'Regulations', '#regulations', :data => { :toggle => 'tab', :'tab-href' => sections_flow_program_path(program) }
+    %li=link_to 'Controls', '#category_controls', :data => { :toggle => 'tab', :'tab-href' => category_controls_flow_program_path(program) }
     %li=link_to 'Combo', '#combo', :data => { :toggle => 'tab', :'tab-href' => section_controls_flow_program_path(program) }
   .tab-content
     #regulations.tab-pane
