@@ -13,16 +13,4 @@
   -@biz_processes.each do |bp|
     .tree.biz-process{:id => "bp#{bp.id}"}
       =render :partial => 'dashboard/closebp', :locals => {:bp => bp}
-
-/ This should not be here, DAN please move to what is being yielded (and show me where.how)
-      -if has_feature? :BETA
-        .row-static
-          .singleColumn
-            =render :partial => 'design/templates/govWidgetProducts'
-            =render :partial => 'design/templates/govWidgetReports'
-            =render :partial => 'design/templates/compWidgetCot'
-            =render :partial => 'design/templates/compWidgetOverprocess'
-            =render :partial => 'design/templates/riskWidgetGap'
-            =render :partial => 'design/templates/riskWidgetRisk'
-            
 -render_for :sidebar, :partial => "base/sidebar"
