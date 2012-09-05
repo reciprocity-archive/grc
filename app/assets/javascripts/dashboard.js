@@ -44,7 +44,7 @@ jQuery(function($) {
             $this
               .html("Approve");
             $date
-              .html("<strong>Updated</strong> "+ currentDate);
+              .html(currentDate);
             
           } else if ($currentStatus === "Waiting for Approval") {
             $status

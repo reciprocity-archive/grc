@@ -1,0 +1,88 @@
+#redesignNewProgram.modal.hide.fade
+  .modal-header
+    %nav
+      %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+        %i.gcmsicon-questionmark-grey
+      %a.widgetbtn{"data-dismiss" => "modal", :href => "#"}
+        %i.gcmsicon-x-grey
+    %h1 Create New Program
+  .modal-body
+    .alert.alert-info
+      %span#alertMessage
+      / %button.close{:type => "button", :"data-dismiss" => "alert"} ×
+    %form
+      .row-fluid
+        .span6
+          %label Title
+          %input.span12{:type => "text"}
+        .span1
+          %label Code
+          %input.span12{:type => "text"}
+        .span1
+          %label Version
+          %input.span12{:type => "text"}
+        .span2
+          %label Effective Date
+          %input.span12{:type => "text", :placeholder => "MM/DD/YYYY"}
+        .span2
+          %label Stop Date    
+          %input.span12{:type => "text", :placeholder => "MM/DD/YYYY"}
+      .row-fluid
+        .span12
+          %label Description
+          %textarea.span12{:placeholder => "Enter description here", :rows => "3"}
+      .row-fluid
+        .span12
+          %label Direct Link
+          %input.span12{:type => "text", :placeholder => "Enter direct link"}
+      .row-fluid
+        .span3
+          %label Type
+          %select.span12
+            %option Regulation
+            %option Company
+        .span3
+          %label Kind
+          %select.span12
+            %option -
+        .span6
+          %label Organization
+          %input.span12{:type => "text", :placeholder => "Responsible organization for this program"}
+      .row-fluid
+        .span6.scope      
+          %label.subtitle Scope/Applicability
+          .row-fluid
+            %label Explanation of the applicability of this program
+            %textarea.span12{:placeholder => "One-sentence explanation of the applicability of this program, used in mail merge templates.", :rows => "3"}
+        .span6.audit
+          %label.subtitle Audit Cycle
+          .row-fluid
+            .span4
+              %label Start
+              %input.span12{:type => "text", :placeholder => "MM/DD/YYYY"}
+            .span4
+              %label Period
+              %select.span12
+                %option Continuous
+                %option Ad-Hoc
+                %option Hourly
+                %option Daily
+                %option Weekly
+                %option Monthly
+                %option Quarterly
+                %option Semi-Annual
+                %option Annual
+                %option Bi-Annual
+            .span4          
+              %label Duration
+              %select.span12
+                %option 1 Week
+                %option 2 Weeks
+                %option 1 Month
+                %option 2 Months
+                %option 3 Months
+                %option 4 Months
+                %option 6 Months
+                %option 1 Year
+
+  =render :partial => 'design/templates/modalfooter'

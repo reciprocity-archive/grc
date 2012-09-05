@@ -235,14 +235,29 @@
               %i.fltrt.gcmsicon-enlarge-grey.gcmssmallicon-blue-expand
             %ul#quickLinks.nav.nav-tabs.nav-stacked.in
               %li.group
+                %a.btn{"data-toggle" => "modal", :href => "#redesignNewProgram"}
+                  Redesign: New Program
+              %li.group
+                %a.btn{"data-toggle" => "modal", :href => "#redesignNewProgramWide"}
+                  Redesign: New Program (Wide)
+              %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#newcontrolModal"}
                   New Control
+              %li.group
+                %a.btn{"data-toggle" => "modal", :href => "#auditCycleModal"}
+                  New/Edit Audit Cycle
               %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#newprogramModal"}
                   New Program
               %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#newsectionModal"}
                   New Section
+              %li.group
+                %a.btn{"data-toggle" => "modal", :href => "#createnewProduct"}
+                  New/Edit Product
+              %li.group
+                %a.btn{"data-toggle" => "modal", :href => "#newsystemModal"}
+                  New/Edit System
               %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#sendauditorinvite"}
                   %i.gcmsicon-mapping-black>
@@ -263,8 +278,6 @@
                 %a.btn{"data-toggle" => "modal", :href => "#newtransactionModal"}
                   %i.gcmsicon-mapping-black>
                   New Transaction
-              
-              
               %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#newsystemModal"}
                   %i.gcmsicon-asterix-black
@@ -299,17 +312,16 @@
                   %i.gcmsicon-asterix-black
                   Controls Page
               %li.group
+                %a.btn{:href => "/design/audit-dashboard"}
+                  Audit Dashboard
+              %li.group
+                %a.btn{:href => "/design/audit-manager"}
+                  Audit Manager
+              
+              %li.group
                 %a.btn{:href => "/design/audit-setup"}
                   %i.gcmsicon-asterix-black
                   Audit Setup
-              %li.group
-                %a.btn{:href => "/design/audit-dashboard"}
-                  %i.gcmsicon-asterix-black
-                  Audit Manager
-              %li.group
-                %a.btn{:href => "/design/audit-manager"}
-                  %i.gcmsicon-asterix-black
-                  Audit Manager
               %li.group
                 %a.btn{:href => "/design/audit-control-review"}
                   %i.gcmsicon-asterix-black

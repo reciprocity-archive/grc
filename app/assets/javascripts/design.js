@@ -33,6 +33,7 @@ $(function () {
   renderExternalTmpl({ name: 'newfacility', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'newsystem', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'newcontrol', selector: '#templates', data: {} });
+  renderExternalTmpl({ name: 'auditcycle', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'peopleselector', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'referenceselector', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'newperson', selector: '#templates', data: {} });
@@ -43,7 +44,10 @@ $(function () {
   renderExternalTmpl({ name: 'newthreat', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'mappedcontrols', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'newprogram', selector: '#templates', data: {} });
-
+  // new modals START
+  renderExternalTmpl({ name: 'redesignNewProgram', selector: '#templates', data: {} });
+  renderExternalTmpl({ name: 'redesignNewProgramWide', selector: '#templates', data: {} });
+  // new modals END
   renderExternalTmpl({ name: 'newpersonBasic', selector: '#templates', data: {} });
 
   renderExternalTmpl({ name: 'newtransaction', selector: '#templates', data: {} });
@@ -139,31 +143,6 @@ $(function () {
     $('#tooltip' + i).tooltip();
   }
 
-  /*
-  // Handled now by CSS transitions
-  setTimeout(function(){
-    $('.progress .bar').each(function() {
-        var me = $(this);
-        var perc = me.attr("data-percentage");
-
-        //TODO: left and right text handling
-
-        var current_perc = 0;
-
-        var progress = setInterval(function() {
-            if (current_perc>=perc) {
-                clearInterval(progress);
-            } else {
-                current_perc +=1;
-                me.css('width', (current_perc)+'%');
-            }
-
-           // me.text((current_perc)+'%');
-
-        }, 0);
-    });
-  },300);
-  */
 });
 
 
@@ -178,5 +157,3 @@ function toggleRisk() {
 function toggleGovernance() {
   $('.govWidget').fadeToggle("slow", "linear");
 }
-
-

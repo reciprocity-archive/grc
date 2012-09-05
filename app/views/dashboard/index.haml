@@ -13,5 +13,4 @@
   -@biz_processes.each do |bp|
     .tree.biz-process{:id => "bp#{bp.id}"}
       =render :partial => 'dashboard/closebp', :locals => {:bp => bp}
-
 -render_for :sidebar, :partial => "base/sidebar"

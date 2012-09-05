@@ -144,6 +144,11 @@
   // TODO: decide which .WidgetBox descendent should be scrollable
   overflow-y:auto;
   overflow-x:hidden;
+
+  border-color: #97abc2;
+  .btn {
+    line-height:18px;
+  }
 }
 
 .accordion-group {
@@ -454,15 +459,6 @@
   margin-right:7px;
 }
 
-.modal-body {
-  padding: 10px 15px;
-  overflow-y: auto;
-  .alert {
-    display:none;
-  }
-  // TODO: Removed because it breaks .slimmodal
-  //width:690px;
-}
 
 /* BUTTONS */
 
@@ -1255,9 +1251,13 @@ margin-top:5px;
   background-color: #EAFFE6 !important;
 }
 
+.forminputstatus {
+  background-color: #e6feff !important;
+}
+
 /* This widget isn't full of content slots, so lets add some padding to make the input boxes look less cramped */
 .information {
-  padding:10px;
+  /* padding:10px; */
 }
 
 /* Tab bar buttons */
@@ -1435,16 +1435,6 @@ margin-top:5px;
   background-image: none;
   @include opacity(0.65);
   @include box-shadow(none);
-}
-
-/* Standard buttons (Bottom of modals) */
-
-.btn {
-  display: inline-block;
-  padding: 4px 6px 4px;
-  margin-bottom: 0px; /* This must stay zero or it will conflict with bootstrap's .btn + .btn rule */
-  font-size: 13px;
-  line-height: 13px;
 }
 
 /* Button specifics - build on .btn */
@@ -1683,22 +1673,12 @@ a.controllistRM {
   color:#000;
 }
 
-.modal {
-  width: 720px;
-  margin-left:-360px;
-  max-height: 720px;
-}
-
-.slimmodal {
-  width: 480px;
-  margin-left:-240px;
-  max-height: 720px;
-}
-
 select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
   min-height:13px; /* must be 13, the size of a widgettextbox, for search */
   font-size: 12px;
 }
+
+
 
 .tab-content {
   margin:5px;

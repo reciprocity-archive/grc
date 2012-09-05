@@ -287,13 +287,7 @@
 }
 .calendar {
   background-image: url("../images/icons/icon-calendar.png");
-  display: inline-block;
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  margin:0;
-  padding:0;
-  background-position: 0px 0px;
+  background-position: 94% 75%;
   background-repeat: no-repeat;
 }
 .gcmsicon-square-white {
@@ -332,7 +326,7 @@
   width: 18px;
   height: 18px;
   line-height: 18px;
-  vertical-align: text-top;
+  vertical-align: top;
   margin:0px 2px 0px 2px;
   background-position: 0px 0px;
   background-repeat: no-repeat;

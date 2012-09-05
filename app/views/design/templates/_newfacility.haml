@@ -9,47 +9,25 @@
     %h1 Create New Facility
   .modal-body
     .row-fluid
-      .span2.form-inline.control-group
-        %label{:for => "control-program"} Code
-        %br/
-        %input#control-program.inputtext-small.forminputsuccess{:placeholder => "BUILD-43", :type => "text"}/
-        %br/
+      .span2
+        %label{:for => "control-program"} Coders
+        %input#control-program.span12.forminputsuccess{:placeholder => "BUILD-43", :type => "text"}
         %span.help-inline
-      .span4.form-inline.control-group
+      .span6
         %label{:for => "control-code"} Name
-        %br/
-        %input#control-code.input-large.forminputsuccess{:placeholder => "", :type => "text", :value => "Building"}/
-        %br/
+        %input#control-code.span12.forminputsuccess{:placeholder => "", :type => "text", :value => "Building"}
         %span.help-inline
-      .span3.form-inline.control-group
+      .span1
         %label{:for => "control-version"} Version
-        %br/
-        %input#control-version.input-supermini.forminputsuccess{:placeholder => "4.3", :type => "text"}/
-        %br/
+        %input#control-version.span12.forminputsuccess{:placeholder => "4.3", :type => "text"}
         %span.help-inline
-      .span3.form-inline.control-group.fltrt
+      .span3
         %label{:for => "select01"} Type
-        %br/
-        .controls
-          %select#select01
-            %option List Table
-            %option 2
-            %option 3
-            %option 4
-            %option 5
-        %br/
+        %select#select01.span12
+          %option List Table
+          %option 2
+          %option 3
+          %option 4
+          %option 5
         %span.help-inline
-  .modal-footer
-    .row-fluid
-      %nav.fltlft.txtlft.span3
-        %a.btn-large.btn-info{"data-dismiss" => "modal", :href => "#comingsoonModal"} Cancel
-        %a.btn-large.btn-warning{"data-dismiss" => "modal", :href => "#comingsoonModal"} Delete
-      .toolbar-widget.span6
-        %a.btn{:href => "#comingsoonModal"}
-          %i.gcmsicon-arrowleft-black
-        %span.btnwell Showing Most Recent of 3 Revisions
-        %a.btn{:href => "#comingsoonModal"}
-          %i.gcmsicon-arrowright-black
-      %nav.fltrt.txtrt.span3
-        %a.btn-large.btn-warning{"data-dismiss" => "modal", :href => "#comingsoonModal"} Save
-        %a.btn-large.btn-success{"data-dismiss" => "modal", :href => "#comingsoonModal"} I Approve
+  =render :partial => 'design/templates/modalfooter'

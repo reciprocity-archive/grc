@@ -8,39 +8,55 @@
   -content_for :modal_delete_path, flow_document_path(f.object)
 
 .row-fluid
-  .span8
+  .span4
     .span12{ :class => error_class(f, :title) }
       =f.label :title
       =f.text_field :title, :class => 'span12', :placeholder => 'Document Title'
       /%label Title
       /%input.span12{:placeholder => "Complete Title Goes Here", :type => "text"}
-  .span2{ :class => error_class(f, :title) }
+  .span2
     %label Year
-    %input.inputtext-small{:placeholder => "2012", :type => "text"}
-  .span1
+    %select.span12
+      %option 2012
+      %option 2011
+      %option 2010
+      %option 2009
+      %option 2008
+  .span2
+    %label Language
+    %select.span12
+      %option English
+      %option German
+      %option Spanish
+      %option French
+      %option Dutch
+  .span2
     %label Type
-    .controls
-      %select.input-small
-        %option PDF
-        %option 2
-        %option 3
-        %option 4
-        %option 5
+    %select.span12
+      %option PDF
+      %option Word
+      %option Spreadsheet
+      %option Website
+  .span2
+    %label Status
+    %select.span12.forminputstatus
+      %option Current
+      %option Deprecated
+      %option Approved
+
 .row-fluid
-  .span10
+  .span12
     %label Description
     %textarea.span12{:placeholder => "", :rows => "4"}
-  .span1
-    %label Language
-    %input.inputtext-small{:placeholder => "English", :type => "text"}
+
 .row-fluid
-  .span10{ :class => error_class(f, :link) }
+  .span12{ :class => error_class(f, :link) }
     =f.label :link, "URL"
     =f.text_field :link, :class => 'span12', :placeholder => 'https://www.example.com/xyz.pdf'
     =error_messages_inline(f, :link)
-  .span2
-    %label
-    %a.btn.btn-large{:href => "#comingsoonModal"} Attach
+/  .span2
+/    %label
+/    %a.btn.btn-large{:href => "#comingsoonModal"} Attach
 
 %br
 
