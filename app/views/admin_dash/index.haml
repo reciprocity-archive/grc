@@ -339,13 +339,13 @@
                   %i.gcmsicon-asterix-black
                   Programs Page
       / end in progress
-  .singleColumn
+  .doubleColumn
     .fullHeight
       =render :partial => 'admin_dash/accounts',
               :layout => 'layouts/widget_box',
               :locals => { :accounts => @accounts, :people => @people }
 
-  .singleColumn
+  -#.singleColumn
     .halfHeight
       =render :partial => 'admin_dash/old_links',
               :layout => 'layouts/widget_box'
