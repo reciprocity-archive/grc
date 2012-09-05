@@ -59,8 +59,7 @@
       %a.close{"data-dismiss" => "modal"} x
       %h1 Create a new regulation control
     .modal-body
-      =render :partial => 'controls/form',
-              :locals  => { :f => f }
+      =render :partial => 'controls/form', :locals  => { :f => f, :create_reg_control => true }
     .modal-footer
       .row-fluid
         %nav.fltlft.txtlft.span3
@@ -77,8 +76,7 @@
       %a.close{"data-dismiss" => "modal"} x
       %h1 Create a new company control
     .modal-body
-      =render :partial => 'controls/form',
-              :locals  => { :f => f }
+      =render :partial => 'controls/form', :locals  => { :f => f, :create_company_control => true }
     .modal-footer
       .row-fluid
         %nav.fltlft.txtlft.span3

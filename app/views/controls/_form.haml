@@ -8,8 +8,14 @@
   .span8
     .row-fluid
       .span3{ :class => error_class(f, :program) }
+        -if defined? create_company_control
+          -programs = Program.where(:company => true)
+        -elsif defined? create_reg_control
+          -programs = Program.where(:company => false)
+        -else
+          -programs = Program.all
         =f.label :program_id
-        =f.collection_select :program_id, Program.all, :id, :slug, { :include_blank => true }, { :class => 'input-small' }
+        =f.collection_select :program_id, programs, :id, :slug, { :include_blank => true }, { :class => 'input-small' }
         =error_messages_inline(f, :program)
 
       .span3{ :class => error_class(f, :slug) }
