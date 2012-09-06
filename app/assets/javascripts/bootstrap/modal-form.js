@@ -64,6 +64,9 @@
     }
 
   , destroy: function(e) {
+      // Bail if button is disabled
+      if ($(e.target).is('.disabled'))
+        return false;
     }
   });
 
