@@ -23,4 +23,7 @@ CmsRails::Application.configure do
   #Sass::Plugin.options[:always_update] = true
   #Sass::Plugin.options[:always_check] = true
   #Sass::Plugin.options[:cache] = false
+
+  config.assets.compile = false
+  config.assets.digest = true
 end
