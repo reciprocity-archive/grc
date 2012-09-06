@@ -22,6 +22,9 @@
 
 .halfopacity {
   @include opacity(0.5);
+  &:hover {
+    @include opacity(1.0);
+  }
 }
 
 .WidgetBox {
