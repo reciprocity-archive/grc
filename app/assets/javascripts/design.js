@@ -21,9 +21,9 @@ $(".riskWidget").each(function() {
 }).hide(); //css({ overflow: "hidden", height: "0px" });
 
 //These aren't hidden
-$(".compWidget").each(function() {
-  $.data(this, "realHeight", $(this).height());
-}); //.css({ overflow: "hidden", height: "0px" });
+//$(".compWidget").each(function() {
+//  $.data(this, "realHeight", $(this).height());
+//}); //.css({ overflow: "hidden", height: "0px" });
 
 
 
@@ -218,7 +218,7 @@ $(document).on("click", "#grcbutton", function(event) {
 
 
 function toggleCompliance() {
-  $('.compWidget').fadeToggle("slow", "linear").animate({height: "100%"});
+  //$('.compWidget').fadeToggle("slow", "linear").animate({height: "100%"});
   //  $('#cotWidget').animate({height: $('#cotWidget').data("realHeight")} );
 
 }
