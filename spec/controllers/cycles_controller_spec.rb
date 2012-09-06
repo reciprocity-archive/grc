@@ -12,6 +12,7 @@ describe CyclesController do
       # For use by authorized_controller tests
       @model = Cycle
       @object = @cycle
+      @create_params = {:program_id => 1}
     end
 
     it_behaves_like "an authorized create"
