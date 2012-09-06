@@ -43,7 +43,7 @@
     text-shadow:1px 1px 0px #7c8076;
     height:24px;
     font-weight: 400;
-    padding: 5px;
+    padding: 4px;
     margin:0 0 0 0;
     color: $white;
     text-shadow: 0px 1px 1px #000;
@@ -55,10 +55,10 @@
       vertical-align: top;
       width: 80px;
       height: 13px;
-      padding: 4px;
+      padding: 6px 4px 2px 4px;
       margin: 0px 0px 0px 0px;
       font-size: 12px;
-      line-height: 15px;
+      line-height: 12px;
       color: #555;
       background-color: $white;
       border: 1px solid $lightGray;
@@ -1355,7 +1355,7 @@ margin-top:5px;
 }
 
 .widgetbtn {
-  margin-right: .3em;
+  /* margin-right: 2px; */
   font-size: 13px;
   line-height: 18px;
   display: inline-block;
@@ -1440,15 +1440,11 @@ margin-top:5px;
 /* Button specifics - build on .btn */
 
 .addbtn, .unmapbtn {
-padding: 5px 6px 4px 6px;
-  // padding: 1px 5px 2px 5px;
-  *margin-left: .3em;
+  padding: 2px 6px 1px 6px;
   margin-top:0px;
-  font-size: 11px;
-  line-height: 11px;
-  *line-height: 11px;
-
-  vertical-align:middle;
+  font-size: 13px;
+  line-height: 18px;
+  vertical-align:text-top;
 }
 
 .slot > .btn {

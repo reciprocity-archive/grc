@@ -24,8 +24,17 @@
   :-moz-placeholder {
     color: $lightGray;
   }
+  
+  span.label {
+    font-weight:normal;
+    font-size:12px;
+  }
+  
   textarea {
     height:28px;
+    &.double {
+      height:86px;
+    }
   }
   .scope {
     padding:0 6px;

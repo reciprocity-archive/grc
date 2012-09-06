@@ -17,6 +17,7 @@
     .WidgetBox.fullHeight.doubleWide
       .WidgetBoxHeading
         .fltrt
+          %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}
           /
             <a href="#comingsoonModal" class="widgetbtn" data-toggle="modal"><i class="gcmsicon-questionmark-grey"></i></a>
             <a href="#newsectionModal" data-toggle="modal"  class="widgettextbtn">Edit Regulations</a>
@@ -49,7 +50,7 @@
       #companycontrolwidget.WidgetBox
         .WidgetBoxHeading
           %nav
-            %a.widgettextbtn{"data-toggle" => "modal", :href => "#auditdefaultscope"} Edit
+            %a.widgettextbtn{"data-toggle" => "modal", :href => "#auditdefaultscope"} Set Scope
           .WidgetTitle.doublewidth Default Scope of Audit
         .WidgetBoxContent
           .row-fluid.FLTNONE.nominheight
@@ -106,10 +107,11 @@
         .WidgetBoxHeading
           .WidgetTitle Workflows
           %nav
-            %a.widgettextbtn{"data-toggle" => "modal", :href => "#auditmeetingnotice"} Edit
-            %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
-            %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#impactScopeInfo"}
-              %i.gcmsicon-enlarge-grey
+            .btn-group
+              %a.widgettextbtn{"data-toggle" => "modal", :href => "#auditmeetingnotice"} All Owners
+              %a.widgettextbtn{"data-toggle" => "modal", :href => "#auditmeetingnotice"} All Status
+              %a.widgettextbtn{"data-toggle" => "modal", :href => "#auditmeetingnotice"} All Types
+            / %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}
         .WidgetBoxContent.information
           %ul#quicklinks.nav.nav-tabs
             %li
@@ -258,9 +260,9 @@
         %br/
         .row-fluid
           .span6
-            %a.btn.btn-warning.actionbutton{"data-toggle" => "modal", :href => "#comingsoonModal"} Future Action
+            %a.span12.btn.btn-warning.actionbutton{"data-toggle" => "modal", :href => "#comingsoonModal"} Future Action
           .span6
-            %a.btn.btn-warning.actionbutton{"data-toggle" => "modal", :href => "#sendauditorinvite"} Clone 2011 Audit
+            %a.span12.btn.btn-warning.actionbutton{"data-toggle" => "modal", :href => "#sendauditorinvite"} Clone 2011 Audit
         #auditInfo.in
           %hr.hr-widget/
           .row-fluid

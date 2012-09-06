@@ -9,7 +9,22 @@
  *= require bootstrap-datepicker
  */
 
-$(function () {
+jQuery(function ($) {
+
+$(".govWidget").each(function() {
+  $.data(this, "realHeight", $(this).height());
+}).fadeToggle(); //css({ overflow: "hidden", height: "0px" });
+
+
+$(".riskWidget").each(function() {
+  $.data(this, "realHeight", $(this).height());
+}).fadeToggle(); //css({ overflow: "hidden", height: "0px" });
+
+$(".compWidget").each(function() {
+  $.data(this, "realHeight", $(this).height());
+}).fadeToggle(); //.css({ overflow: "hidden", height: "0px" });
+
+
 
   //render out templates function
   var renderExternalTmpl = function(item) {
@@ -47,6 +62,10 @@ $(function () {
   // new modals START
   renderExternalTmpl({ name: 'redesignNewProgram', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'redesignNewProgramWide', selector: '#templates', data: {} });
+  renderExternalTmpl({ name: 'redesignNewProgramWide2', selector: '#templates', data: {} });
+  renderExternalTmpl({ name: 'redesignNewControlWide', selector: '#templates', data: {} });
+  renderExternalTmpl({ name: 'redesignNewSectionWide', selector: '#templates', data: {} });
+
   // new modals END
   renderExternalTmpl({ name: 'newpersonBasic', selector: '#templates', data: {} });
 
@@ -99,6 +118,8 @@ $(function () {
     $(this).children(".expander").toggleClass("toggleExpanded");
   });*/
 
+
+
   $(document).on("click", ".expandAll", function(event) {
     // $("h3.trigger").toggleClass("active").next().slideToggle("fast");
     $(this).children("i").toggleClass("gcmssmallicon-blue-expand");
@@ -129,7 +150,7 @@ $(function () {
     $('#referenceList').append("<li class='controlSlot'><a href='#'><div class='circle fltrt'><i class='gcmssmallicon-dash-white'></i></div></a><span class='controls-group'>Reference Type</span><br /><span class='controls-subgroup'>Reference Item</span></li>");
   });
 
-  $(".collapse").collapse();
+  //$(".collapse").collapse();
   $('#quicklinks a:last').tab('show');
 
   $('#myLock a').click(function (e) {
@@ -143,17 +164,73 @@ $(function () {
     $('#tooltip' + i).tooltip();
   }
 
+  // status js
+  var userHasPriviledge = true;
+  $('body').on('click', '#actionButton', function(e) {
+    e.preventDefault();
+
+    var fullDate = new Date();
+    var twoDigitMonth = ((fullDate.getMonth().length+1) === 1)? (fullDate.getMonth()+1) : '0' + (fullDate.getMonth()+1);
+    var currentDate = fullDate.getDate() + "/" + twoDigitMonth + "/" + fullDate.getFullYear();
+
+    var $this = $(this),
+        $alert = $this.closest(".modal").find(".alert"),
+        $date = $this.closest(".modal").find("#updatedDate"),
+        $alertMessage = $this.closest(".modal").find("#alertMessage"),
+        $status = $this.closest(".modal").find("#statusValue"),
+        $currentStatus = $this.closest(".modal").find("#statusValue").html();
+
+    if(userHasPriviledge) {
+
+      if ($currentStatus === "Draft") {
+        $status
+          .html("Waiting for Approval")
+          .addClass("statustextred");
+        $alertMessage
+          .html("New Program has been saved. Waiting on Approval.");
+        $alert
+          .fadeIn();
+        $this
+          .html("Approve");
+        $date
+          .html(currentDate);
+      } else if ($currentStatus === "Waiting for Approval") {
+        $status
+          .html("Approved")
+          .removeClass("statustextred");
+        $alertMessage
+          .html("Program has been approved.");
+        $alert
+          .fadeIn();
+        $this
+        .addClass("disabled");
+        window.location = "/programs/1";
+      }
+    }
+  });
 });
 
 
 function toggleCompliance() {
-  $('.compWidget').fadeToggle("slow", "linear");
+  $('.compWidget').fadeToggle("slow", "linear").animate({height: "100%"});
+  //  $('#cotWidget').animate({height: $('#cotWidget').data("realHeight")} );
+
 }
+
+
 
 function toggleRisk() {
-  $('.riskWidget').fadeToggle("slow", "linear");
+  $('.riskWidget').fadeToggle("slow", "linear").animate({height: "100%"});
+
+
+  //var div = $(".riskWidget")
+  //div.animate({ height: div.data("realHeight") }, 600);
+  //$(this).next(".riskWidget").animate({ height: 30 }, 600);
+
 }
 
+
+
 function toggleGovernance() {
-  $('.govWidget').fadeToggle("slow", "linear");
+  $('.govWidget').fadeToggle("slow", "linear").animate({height: "100%"});
 }
