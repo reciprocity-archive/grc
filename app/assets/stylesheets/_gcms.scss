@@ -439,13 +439,19 @@ width: 97px;
   }
   &.selected {
     color:$white;
+    background: #43C2C7;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#43C2C7), color-stop(100%,#0FB4E7));
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#43c2c7', endColorstr='#0fb4e7',GradientType=0 );
+    border: 1px solid #E1E1E1;
     background: #43c2c7; /* Old browsers */
-    border: 1px solid $borderDefault;
-    @include background-image(linear-gradient(top,  lighten(#43c2c7,10%) 0%, darken(#43c2c7,10%) 100%));
     &:hover {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      -ms-box-sizing: border-box;
+      box-sizing: border-box;
+      background: #227b84 ; /* Old browsers */
+      border: 1px solid #e1e1e1;
       color:$white;
-      background: #227b84; /* Old browsers */
-      @include background-image(linear-gradient(top,  darken(#43c2c7,10%) 0%, lighten(#43c2c7,10%) 100%));
     }  
   }
 
@@ -560,6 +566,10 @@ width: 97px;
   h3:hover {
     color:#333;
   }
+}
+
+a.slot {
+  color:#666;
 }
 
 .txtindent1 {

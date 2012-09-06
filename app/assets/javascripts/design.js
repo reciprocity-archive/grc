@@ -59,6 +59,8 @@ $(".riskWidget").each(function() {
   renderExternalTmpl({ name: 'newsection', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'newthreat', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'mappedcontrols', selector: '#templates', data: {} });
+  renderExternalTmpl({ name: 'mappedcontrolsfull', selector: '#templates', data: {} });
+  
   renderExternalTmpl({ name: 'newprogram', selector: '#templates', data: {} });
   // new modals START
   renderExternalTmpl({ name: 'redesignNewProgram', selector: '#templates', data: {} });
