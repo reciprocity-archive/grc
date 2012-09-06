@@ -34,7 +34,9 @@ class AccountsController < ApplicationController
   end
 
   def create
+    role = params[:account].delete(:role)
     @account = Account.new(params[:account])
+    @account.role = role
 
     respond_to do |format|
       if @account.save
