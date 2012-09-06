@@ -1763,7 +1763,7 @@ body .container {
 .barCount {
   display: inline;
   position: absolute;
-  right:18px;
+  right:33px; /* This accounts for the margin but it shouldn't float outside the div anyway NEEDS FIX */
   color: #eee;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
   white-space: nowrap;

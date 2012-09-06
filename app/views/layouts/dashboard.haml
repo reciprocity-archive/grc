@@ -36,6 +36,11 @@
             -if has_feature? :BETA
               -if controller.controller_name == 'programs_dash'
                 =render :partial => 'design/templates/grcmenu'
+            -else
+              -if has_feature? :BETA
+                %a.btn.btn-warning{ :href => "programs_dash?BETA=0" } -
+              -else
+                %a.btn.btn-success{ :href => "programs_dash?BETA=1" } +
           .headerright
             .btn-toolbar.fltrt.toolbar-nav
               -if has_feature? :BETA
