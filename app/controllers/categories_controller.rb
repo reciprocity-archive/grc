@@ -61,7 +61,9 @@ class CategoriesController < ApplicationController
   end
 
   def create
-    @category = Category.new(category_params)
+    # Ctype needs to be set to something, default to CATEGORY_TYPE_ID as it's the only type we have right now.
+    ccats = Category.ctype(Control::CATEGORY_TYPE_ID)
+    @category = ccats.new(category_params)
 
     respond_to do |format|
       if @category.save
@@ -105,4 +107,3 @@ class CategoriesController < ApplicationController
       category_params
     end
 end
-
