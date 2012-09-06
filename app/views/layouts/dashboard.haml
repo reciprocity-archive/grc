@@ -32,8 +32,8 @@
                 GRC
               -else
                 Google GRC
-          .headercenter.fltnone
-            -if has_feature? :BETA
+          -if has_feature? :BETA
+            .headercenter.fltnone
               -if controller.controller_name == 'programs_dash'
                 =render :partial => 'design/templates/grcmenu'
           .headerright
@@ -43,7 +43,7 @@
                   -path = request.fullpath.gsub(/BETA=[^&]*&?/, '').sub(/[?&]$/, '')
                   -path += path.include?('?') ? '&' : '?'
                   -if has_feature? :BETA
-                    %a.btn.btn-warning{ :href => "#{path}BETA=0" } Hide Demo
+                    %a.btn.btn-warning{ :href => "#{path}BETA=0" } Hide
                   -else
                     %a.btn.btn-success{ :href => "#{path}BETA=1" } Show Demo
               -if has_feature? :BETA

@@ -513,6 +513,10 @@ width: 97px;
   min-height:28px;
 }
 
+.row-static {
+  padding: 0 5px;
+}
+
 .row-fluid-slotcontent {
   margin-top: 0px; /* margin top removed (was 5) for chrome/macosx */
   clear:both;
@@ -796,8 +800,8 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
 
 .navbar-secondinner {
   height:54px;
-  padding: 5px 0 0 5px;
-  background-color: $white;
+  padding: 4px 0 0 5px;
+  /* background-color: $white; */
 }
 
 .fixed-top .inner,
@@ -1946,10 +1950,10 @@ body .container {
   background-image: url("../images/navbarplus_off.png");
   display: inline-block;
   position:relative;
-  top:2px;
+  top:-4px;
   width: 40px;
   height: 54px;
-  margin:0;
+  margin:0 5px 0px 5px;
   padding:0;
   background-position: 0px 0px;
   background-repeat: no-repeat;
