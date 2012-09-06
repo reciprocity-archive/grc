@@ -1,7 +1,8 @@
 #cotWidget.WidgetBox.compWidget
 	.WidgetBoxHeading
-		%nav
-		%a.fltrt.widgettextbtn{"data-toggle" => "modal", :href => "#"} Edit
 		.WidgetTitle.doublewidth Change Over Time
+		%nav
+			%a.widgettextbtn{"data-toggle" => "modal", :href => "#"} Edit
 	.WidgetBoxContent
-		%img{:src => "images/tempCOT.jpg"}
+		%a{href: 'compliancemodule/changeovertime/'}
+			%img{:src => "images/tempCOT.jpg"}
