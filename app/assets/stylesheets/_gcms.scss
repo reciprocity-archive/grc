@@ -5,8 +5,6 @@
  */
 
 /* Changes made to bootstrap code instead of overwriting
-* Img directory renamed to images
-* Fade transitions -since they can't be reset only overwritten
  */
 
 
@@ -21,7 +19,14 @@
 }
 
 .halfopacity {
-  @include opacity(0.5);
+  @include opacity(0.4);
+  &:hover {
+    @include opacity(0.8);
+  }
+}
+
+#grcbutton {
+  font-size:16px;
 }
 
 .WidgetBox {

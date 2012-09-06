@@ -13,16 +13,17 @@ jQuery(function ($) {
 
 $(".govWidget").each(function() {
   $.data(this, "realHeight", $(this).height());
-}).fadeToggle(); //css({ overflow: "hidden", height: "0px" });
+}).hide(); //css({ overflow: "hidden", height: "0px" });
 
 
 $(".riskWidget").each(function() {
   $.data(this, "realHeight", $(this).height());
-}).fadeToggle(); //css({ overflow: "hidden", height: "0px" });
+}).hide(); //css({ overflow: "hidden", height: "0px" });
 
+//These aren't hidden
 $(".compWidget").each(function() {
   $.data(this, "realHeight", $(this).height());
-}).fadeToggle(); //.css({ overflow: "hidden", height: "0px" });
+}); //.css({ overflow: "hidden", height: "0px" });
 
 
 
@@ -209,6 +210,11 @@ $(".compWidget").each(function() {
     }
   });
 });
+
+
+$(document).on("click", "#grcbutton", function(event) {
+    $(this).toggleClass("halfopacity");
+  });
 
 
 function toggleCompliance() {
