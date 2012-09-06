@@ -1,4 +1,9 @@
-//  NOTE! Don't use Sprockets `require` statements inside SASS files
+/* FIXME: Fix for https://github.com/rails/rails/issues/3686
+ * - Bump this counter if asset dependencies aren't re-compiled on change
+ * counter: 0
+ */
+
+// NOTE! Don't use Sprockets `require` statements inside SASS files
 
 // Required external stylesheets
 
