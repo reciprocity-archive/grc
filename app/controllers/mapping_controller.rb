@@ -130,7 +130,7 @@ class MappingController < ApplicationController
     section.save
 
     flash[:notice] = "Saved"
-    render :js => "$('#controls-dialog').dialog('close');"
+    ajax_refresh
   end
 
   def buttons
