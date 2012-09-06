@@ -1,5 +1,6 @@
 require 'spec_helper'
 require 'base_objects'
+require 'authorized_controller'
 
 describe MappingController do
   include BaseObjects
