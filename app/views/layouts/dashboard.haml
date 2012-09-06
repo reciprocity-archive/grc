@@ -43,9 +43,9 @@
                   -path = request.fullpath.gsub(/BETA=[^&]*&?/, '').sub(/[?&]$/, '')
                   -path += path.include?('?') ? '&' : '?'
                   -if has_feature? :BETA
-                    %a.btn.btn-warning{ :href => "#{path}BETA=0" } Disable Beta
+                    %a.btn.btn-warning{ :href => "#{path}BETA=0" } Hide Demo
                   -else
-                    %a.btn.btn-success{ :href => "#{path}BETA=1" } Enable Beta
+                    %a.btn.btn-success{ :href => "#{path}BETA=1" } Show Demo
               -if has_feature? :BETA
                 -if controller.controller_name != 'programs_dash'
                   .btn-group

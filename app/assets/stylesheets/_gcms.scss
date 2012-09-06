@@ -29,8 +29,57 @@
   font-size:16px;
 }
 
+
 #grcbuttonStable {
-  font-size:16px;
+  -webkit-background-clip: border-box;
+-webkit-background-origin: padding-box;
+-webkit-background-size: auto;
+-webkit-border-image: none;
+-webkit-box-shadow: rgba(255, 255, 255, 0.199219) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.046875) 0px 1px 2px 0px;
+background-attachment: scroll;
+background-clip: border-box;
+background-color: #5BB75B;
+background-image: -webkit-linear-gradient(top, #62C462, #51A351);
+background-origin: padding-box;
+background-repeat: repeat-x;
+background-size: auto;
+border-bottom-color: rgba(0, 0, 0, 0.246094);
+border-bottom-left-radius: 4px;
+border-bottom-right-radius: 4px;
+border-bottom-style: solid;
+border-bottom-width: 1px;
+border-left-color: rgba(0, 0, 0, 0.0976563);
+border-left-style: solid;
+border-left-width: 1px;
+border-right-color: rgba(0, 0, 0, 0.0976563);
+border-right-style: solid;
+border-right-width: 1px;
+border-top-color: rgba(0, 0, 0, 0.0976563);
+border-top-left-radius: 4px;
+border-top-right-radius: 4px;
+border-top-style: solid;
+border-top-width: 1px;
+box-shadow: rgba(255, 255, 255, 0.199219) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.046875) 0px 1px 2px 0px;
+color: white;
+display: inline-block;
+float: none;
+font-family: 'PT Sans', Helvetica, Arial, Tahoma, Verdana, sans-serif;
+font-size: 16px;
+height: 18px;
+line-height: 18px;
+margin-bottom: 6px;
+margin-left: 5px;
+margin-right: 5px;
+margin-top: 5px;
+padding-bottom: 4px;
+padding-left: 10px;
+padding-right: 10px;
+padding-top: 4px;
+text-align: center;
+text-decoration: none;
+text-shadow: rgba(0, 0, 0, 0.246094) 0px -1px 0px;
+vertical-align: middle;
+width: 97px;
 }
 
 .WidgetBox {
@@ -73,7 +122,77 @@
       border: 1px solid $lightGray;
       @include border-radius(3px);
     }
-  }
+    }
+    .WidgetBoxRedHeading {
+      background: #2c4361;
+      @include background-image(linear-gradient(top,  #966768 0%, #665151 40%, #604242 79%, #5b4e4f 100%)); 
+    
+      text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.56);
+      -webkit-font-smoothing: antialiased;
+
+      border:1px solid #661111;
+      font-weight:bold;
+      text-decoration:none;
+      text-shadow:1px 1px 0px #7c8076;
+      height:24px;
+      font-weight: 400;
+      padding: 4px;
+      margin:0 0 0 0;
+      color: $white;
+      text-shadow: 0px 1px 1px #000;
+
+    
+      @include border-radius(4px 4px 0px 0px);
+      input {
+        display: inline-block;
+        vertical-align: top;
+        width: 80px;
+        height: 13px;
+        padding: 6px 4px 2px 4px;
+        margin: 0px 0px 0px 0px;
+        font-size: 12px;
+        line-height: 12px;
+        color: #555;
+        background-color: $white;
+        border: 1px solid $lightGray;
+        @include border-radius(3px);
+      }
+    }
+    .WidgetBoxBlueHeading {
+      background: #77979b; /* Old browsers */
+     @include background-image(linear-gradient(top,  #77979b 0%, #55656b 40%, #4c5a5e 79%, #485559 84%, #4e565b 100%)) ;
+      
+      text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.56);
+      -webkit-font-smoothing: antialiased;
+
+      border:1px solid #661111;
+      font-weight:bold;
+      text-decoration:none;
+      text-shadow:1px 1px 0px #7c8076;
+      height:24px;
+      font-weight: 400;
+      padding: 4px;
+      margin:0 0 0 0;
+      color: $white;
+      text-shadow: 0px 1px 1px #000;
+
+    
+      @include border-radius(4px 4px 0px 0px);
+      input {
+        display: inline-block;
+        vertical-align: top;
+        width: 80px;
+        height: 13px;
+        padding: 6px 4px 2px 4px;
+        margin: 0px 0px 0px 0px;
+        font-size: 12px;
+        line-height: 12px;
+        color: #555;
+        background-color: $white;
+        border: 1px solid $lightGray;
+        @include border-radius(3px);
+      }
+    }
 }
 
 
@@ -85,7 +204,7 @@
 
 .subtleBlue {
   background: #77979b; /* Old browsers */
-  @include background-image(linear-gradient(top,  #77979b 0%, #55656b 40%, #4c5a5e 79%, #485559 84%, #4e565b 100%));
+  @include background-image(linear-gradient(top,  #77979b 0%, #55656b 40%, #4c5a5e 79%, #485559 84%, #4e565b 100%)) ;
 }
 
 .subtleRed {

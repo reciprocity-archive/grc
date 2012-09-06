@@ -214,11 +214,12 @@ $(".riskWidget").each(function() {
 
 $(document).on("click", "#grcbutton", function(event) {
     $(this).toggleClass("halfopacity");
+    $(this).toggleClass("active"); //This is a duplicate request to keep 'active' styling off.
   });
 
 
 function toggleCompliance() {
-  //$('.compWidget').fadeToggle("slow", "linear").animate({height: "100%"});
+  //$('.compWidget').fadeToggle("fast", "linear").animate({height: "100%"});
   //  $('#cotWidget').animate({height: $('#cotWidget').data("realHeight")} );
 
 }
@@ -226,7 +227,7 @@ function toggleCompliance() {
 
 
 function toggleRisk() {
-  $('.riskWidget').fadeToggle("slow", "linear").animate({height: "100%"});
+  $('.riskWidget').fadeToggle("fast", "linear").animate({height: "100%"});
 
 
   //var div = $(".riskWidget")
@@ -238,5 +239,5 @@ function toggleRisk() {
 
 
 function toggleGovernance() {
-  $('.govWidget').fadeToggle("slow", "linear").animate({height: "100%"});
+  $('.govWidget').fadeToggle("fast", "linear").animate({height: "100%"});
 }
