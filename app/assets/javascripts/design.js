@@ -4,23 +4,13 @@
 
 /*
  *= require dashboard
+ *= require jquery.cookie
  *= require wysihtml5-0.3.0_rc2
  *= require bootstrap-wysihtml5-0.0.2
  *= require bootstrap-datepicker
  */
 
 jQuery(function ($) {
-
-//These aren't hidden
-//$(".compWidget").each(function() {
-//  $.data(this, "realHeight", $(this).height());
-//}); //.css({ overflow: "hidden", height: "0px" });
-
-$(".riskWidget").hide();
-
-
-$(".govWidget").hide();
-
 
   //render out templates function
   var renderExternalTmpl = function(item) {
@@ -208,53 +198,60 @@ $(".govWidget").hide();
   });
 });
 
-
- //css({ overflow: "hidden", height: "0px" });
-
-
-
-$(document).on("click", "#grcbutton", function(event) {
-    $(this).toggleClass("halfopacity");
-    $(this).toggleClass("active"); //This is a duplicate request to keep 'active' styling off.
-  });
-
-
-function toggleCompliance() {
-  //$('.compWidget').fadeToggle("fast", "linear").animate({height: "100%"});
-  //  $('#cotWidget').animate({height: $('#cotWidget').data("realHeight")} );
-}
-
-
-
 function toggleRisk() {
   //$('.riskWidget').fadeToggle("fast", "linear");
   var interval = 200;
   $('.riskWidget').each(function(i){
     var el = $(this);
     if(el.hasClass('active')){
+      $('#grcbutton-risk').addClass('halfopacity').removeClass('active');
+      $.cookie('toggle_risk', null);
       el.delay(i*interval).slideUp(interval);
       el.removeClass('active');
     }else{
+      $('#grcbutton-risk').removeClass('halfopacity').addClass('active');
+      $.cookie('toggle_risk', '1', { expires: 1, path: '/' });
       el.delay(i*interval).slideDown(interval);
       el.addClass('active');
     }
   });
 
 }
-
-
 
 function toggleGovernance() {
    var interval = 200;
   $('.govWidget').each(function(i){
     var el = $(this);
     if(el.hasClass('active')){
+      $('#grcbutton-governance').addClass('halfopacity').removeClass('active');
+      $.cookie('toggle_governance', null);
       el.delay(i*interval).slideUp(interval);
       el.removeClass('active');
     }else{
+      $('#grcbutton-governance').removeClass('halfopacity').addClass('active');
+      $.cookie('toggle_governance', '1', { expires: 1, path: '/' });
       el.delay(i*interval).slideDown(interval);
       el.addClass('active');
     }
   });
 
 }
+
+jQuery(function($) {
+  if ($.cookie('toggle_governance') == '1')
+    toggleGovernance();
+  else
+    $('.govWidget').hide();
+  if ($.cookie('toggle_risk') == '1')
+    toggleRisk();
+  else
+    $('.riskWidget').hide();
+
+  $('body').on('click', '#grcbutton-risk', function(e) {
+    toggleRisk();
+  });
+
+  $('body').on('click', '#grcbutton-governance', function(e) {
+    toggleGovernance();
+  });
+});
