@@ -1226,7 +1226,7 @@ ul.slugtree {
 }
 
 #auditstatuscolumns {
-  padding:10px;
+  padding:0 8px 0 8px;
 }
 
 /* Hack for modal invite auditors */
@@ -1291,6 +1291,12 @@ label {
 
 .badges {
 margin-top:7px;
+}
+
+.badge-clear {
+background-color: transparent !important;
+color:#333;
+text-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
 }
 
 .regulationslot .badge {
