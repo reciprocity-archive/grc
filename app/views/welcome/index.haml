@@ -4,5 +4,6 @@
       %p.fltlft.highlighted Welcome to
     %h1 Governance, Risk and Compliance
     %p
-      %a.btn.btn-large{:href => "https://code.google.com/p/compliance-management/"} About this Project
+      -if CMS_CONFIG["ABOUT_LINK"]
+        %a.btn.btn-large{:href => CMS_CONFIG["ABOUT_LINK"]} About this Project
       %a.btn.btn-primary.btn-large{:href => login_path} Login

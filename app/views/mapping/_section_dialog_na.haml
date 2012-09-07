@@ -1,23 +1,43 @@
 =form_for section, :url => mapping_update_path(section), :remote => true, :class => 'form-inline' do |f|
   .modal-header
-    %a.close{"data-dismiss" => "modal"} x
+    %nav
+      %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+        %i.gcmsicon-questionmark-grey
+      %a.widgetbtn{"data-dismiss" => "modal", :href => '#'}
+        %i.gcmsicon-x-grey
     %h1 Controls Mapped to #{@section.slug}
 
   .modal-body
     .row-fluid
       .span12.well
         =f.check_box :na, :class => :checkbox
-        %h3(style='display: inline') This section not linked to any control
+        %h3(style='display:inline;')
+          &nbsp;No controls implemented for this section
+    %br
+
     .row-fluid
       =f.label :notes, "Note", :class => :cleanlabel
     .row-fluid
-      .span12.well
-        =f.text_area :notes, :class => [:text_area, :span12], :rows => 2
+      .span12
+        =f.text_area :notes, :class => [:span12, :note], :rows => 3
+    %br
+
+    .row-fluid.nominheight
+      .span3
+      .span3
+      .span3
+        -#%label.fltrt{:for => "control-effectivedate"}
+          %strong> Last Editor
+          \: Joss Rayburn
+      .span3
+        %label.fltrt{:for => "control-verificationdate"}
+          %strong> Approved
+          \:
+          %span.statustextred Not Approved
 
   .modal-footer
     .row-fluid
-      %nav.fltlft.txtlft.span3
+      %nav.fltlft
         =f.submit pat(:cancel), :type => 'reset', :class => 'btn-large btn-info'
-      %nav.fltrt.txtrt.span3  
+      %nav.fltrt
         =f.submit pat(:save), :class => 'btn-large btn-success'
-

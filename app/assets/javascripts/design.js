@@ -11,20 +11,15 @@
 
 jQuery(function ($) {
 
-$(".govWidget").each(function() {
-  $.data(this, "realHeight", $(this).height());
-}).hide(); //css({ overflow: "hidden", height: "0px" });
-
-
-$(".riskWidget").each(function() {
-  $.data(this, "realHeight", $(this).height());
-}).hide(); //css({ overflow: "hidden", height: "0px" });
-
 //These aren't hidden
 //$(".compWidget").each(function() {
 //  $.data(this, "realHeight", $(this).height());
 //}); //.css({ overflow: "hidden", height: "0px" });
 
+$(".riskWidget").hide();
+
+
+$(".govWidget").hide();
 
 
   //render out templates function
@@ -214,6 +209,10 @@ $(".riskWidget").each(function() {
 });
 
 
+ //css({ overflow: "hidden", height: "0px" });
+
+
+
 $(document).on("click", "#grcbutton", function(event) {
     $(this).toggleClass("halfopacity");
     $(this).toggleClass("active"); //This is a duplicate request to keep 'active' styling off.
@@ -223,23 +222,39 @@ $(document).on("click", "#grcbutton", function(event) {
 function toggleCompliance() {
   //$('.compWidget').fadeToggle("fast", "linear").animate({height: "100%"});
   //  $('#cotWidget').animate({height: $('#cotWidget').data("realHeight")} );
-
 }
 
 
 
 function toggleRisk() {
-  $('.riskWidget').fadeToggle("fast", "linear").animate({height: "100%"});
-
-
-  //var div = $(".riskWidget")
-  //div.animate({ height: div.data("realHeight") }, 600);
-  //$(this).next(".riskWidget").animate({ height: 30 }, 600);
+  //$('.riskWidget').fadeToggle("fast", "linear");
+  var interval = 200;
+  $('.riskWidget').each(function(i){
+    var el = $(this);
+    if(el.hasClass('active')){
+      el.delay(i*interval).slideUp(interval);
+      el.removeClass('active');
+    }else{
+      el.delay(i*interval).slideDown(interval);
+      el.addClass('active');
+    }
+  });
 
 }
 
 
 
 function toggleGovernance() {
-  $('.govWidget').fadeToggle("fast", "linear").animate({height: "100%"});
+   var interval = 200;
+  $('.govWidget').each(function(i){
+    var el = $(this);
+    if(el.hasClass('active')){
+      el.delay(i*interval).slideUp(interval);
+      el.removeClass('active');
+    }else{
+      el.delay(i*interval).slideDown(interval);
+      el.addClass('active');
+    }
+  });
+
 }

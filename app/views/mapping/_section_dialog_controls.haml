@@ -1,31 +1,72 @@
 =form_for section, :url => mapping_update_path(section), :remote => true, :class => 'form-inline' do |f|
   .modal-header
-    %a.close{"data-dismiss" => "modal"} x
-    %h1 Controls Mapped to #{section.slug}
+    %nav
+      %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+        %i.gcmsicon-questionmark-grey
+      %a.widgetbtn{"data-dismiss" => "modal", :href => "#comingsoonModal"}
+        %i.gcmsicon-x-grey
+    %h1 Controls Mapped to this Section
+    %h3 #{section.slug}
 
   .modal-body
     .row-fluid
       .span6.control-group
-        %label.cleanlabel Regulation Controls
-        %ul.slugtree.nav
-          -rcontrols.each do |control|
-            %li.row-fluid
-              .span12
-                .modalSlot
-                  %span.prefix
-                    =control.slug
-                  =control.title
-
+        %h3 Regulation Controls
       .span6.control-group
-        %label.cleanlabel Company Controls
-        %ul.slugtree.nav
-          -ccontrols.each do |control|
-            %li.row-fluid
-              .span12
-                .modalSlot
-                  %span.prefix
-                    =control.slug
-                  =control.title
+        %h3 Company Controls
+
+    .row-fluid-alternating-background-colors
+      -rcontrols.each do |control|
+        .row-fluid
+          .span6.control-group
+            %ul.slugtree.nav
+              %li
+                .row-fluid
+                  .span12
+                    .modalSlot.span12
+                      %a.btn.btn-blue.unmapbtn.fltrt{:href => mapping_map_rcontrol_path(:section => section.id, :rcontrol => control.id, :u => 1), :'data-remote' => true, :'data-method' => 'post', :'data-toggle' => 'unmap-rcontrol'} unmap
+                      %span.prefix
+                        =control.slug
+                        -
+                        =control.title
+                      %br
+                      %textarea.span12(rows='4')=control.description
+
+          .span6.control-group
+            %ul.slugtree.nav
+              -control.implementing_controls.each do |ccontrol|
+                %li
+                  .row-fluid
+                    .span12
+                      .modalSlot.span12
+                        %a.btn.btn-blue.unmapbtn.fltrt{:href => mapping_map_ccontrol_path(:rcontrol => control.id, :ccontrol => ccontrol.id, :u => 1), :'data-remote' => true, :'data-method' => 'post', :'data-toggle' => 'unmap-ccontrol'} unmap
+                        %span.prefix
+                          =ccontrol.slug
+                          -
+                          =ccontrol.title
+                        %br
+                        %textarea.span12(rows='4')=ccontrol.description
+    %br
+
+    .row-fluid
+      =f.label :notes, "Note", :class => :cleanlabel
+    .row-fluid
+      .span12
+        =f.text_area :notes, :class => [:span12, :note], :rows => 3
+    %br
+
+    .row-fluid.nominheight
+      .span3
+      .span3
+      .span3
+        -#%label.fltrt{:for => "control-effectivedate"}
+          %strong> Last Editor
+          \: Joss Rayburn
+      .span3
+        %label.fltrt{:for => "control-verificationdate"}
+          %strong> Approved
+          \:
+          %span.statustextred Not Approved
 
   .modal-footer
     .row-fluid
