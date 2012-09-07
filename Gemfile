@@ -1,5 +1,5 @@
 # Uncomment or put the following in Gemfile.local
-source 'http://rubygems.org'
+# source 'http://rubygems.org'
 
 if File.exist? 'Gemfile.local'
   instance_eval(Bundler.read_file('Gemfile.local'), 'Gemfile.local', 1)
