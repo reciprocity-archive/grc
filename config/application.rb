@@ -4,12 +4,15 @@ require 'yaml'
 
 CMS_CONFIG = {
   "SECRET_TOKEN" => "0123456789abcdefChangethistosomethingsecret",
-  "COMPANY_LOGO" => nil
+  "COMPANY" => "Company, Inc.",
+  "COMPANY_LOGO" => nil,
+  "ABOUT_LINK" => "https://code.google.com/p/compliance-management/"
 }
 
 CMS_CONFIG["SECRET_TOKEN"] = ENV["SECRET_TOKEN"] if ENV["SECRET_TOKEN"]
 CMS_CONFIG["COMPANY_LOGO"] = ENV["COMPANY_LOGO"] if ENV["COMPANY_LOGO"]
 CMS_CONFIG["COMPANY"] = ENV["COMPANY"] if ENV["COMPANY"]
+CMS_CONFIG["ABOUT_LINK"] = ENV["ABOUT_LINK"] if ENV["ABOUT_LINK"]
 
 require 'rails/all'
 
