@@ -39,7 +39,7 @@ class MappingController < ApplicationController
     if rcontrol_id.blank?
       if params[:u]
         flash[:error] = "I don't know how to unmap an indirect relationship"
-        render :js => 'update_map_buttons();'
+        render :text => ''
         return
       end
       ccontrol = Control.find(params[:ccontrol])
@@ -78,7 +78,7 @@ class MappingController < ApplicationController
 
     flash[:notice] = notice
 
-    render :js => 'update_map_buttons();'
+    render :text => ''
   end
 
   def map_ccontrol
@@ -97,7 +97,7 @@ class MappingController < ApplicationController
       flash[:notice] = "Mapped company control"
     end
 
-    render :js => 'update_map_buttons();'
+    render :text => ''
   end
 
   def selected_control

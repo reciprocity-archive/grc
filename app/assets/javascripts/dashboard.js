@@ -184,7 +184,8 @@ function init_mapping() {
       $('#section_list .selector').closest('.regulationslot').removeClass('selected');
       $(this).closest('.row-fluid').find('.regulationslot').addClass('selected');
 
-      if ($dialog.is(':visible')) {
+      var $dialog = $('#mapping_dialog');
+      if ($dialog.length > 0 && $dialog.is(':visible')) {
         $dialog.load($(this).closest('.row-fluid').find('a.controllist, a.controllistRM').data('href'));
       }
     });
@@ -201,21 +202,6 @@ function init_mapping() {
       $(this).closest('.item').addClass('selected');
     });
 
-  var $dialog = $('<div class="modal hide fade"></div>').appendTo('body');
-  $dialog.draggable({ handle: '.modal-header' });
-  $('#section_list').on('click', 'a.controllist, a.controllistRM', function(e) {
-    // Save the current href for reloadability
-    e.preventDefault();
-    $dialog.data('href', $(this).attr('href'));
-    $dialog.load($(this).attr('href'), function() {
-      $dialog.modal_form({ backdrop: false }).modal_form('show');
-    });
-  });
-
-  //$('body')
-  //  .on('ajax:beforeSend', '[disabled="disabled"]', function(evt) {
-  //    return false;
-  //  });
   $('#rmap, #cmap')
     // Prevent disabled buttons from triggering AJAX requests
     .on('ajax:beforeSend', function(evt, xhr, request) {
@@ -223,19 +209,26 @@ function init_mapping() {
         return false;
     })
     .on('ajax:success', function(evt, data, status, xhr) {
-      if ($dialog.is(':visible'))
+      var $dialog = $('#mapping_dialog');
+      update_map_buttons();
+      if ($dialog.length > 0 && $dialog.is(':visible'))
         $dialog.load($dialog.data('href'));
     });
 }
 
 jQuery(function($) {
-  var $dialog = $('<div class="modal hide fade"></div>').appendTo('body');
+  var $dialog = $('<div id="mapping_dialog" class="modal hide"></div>').appendTo('body');
   $dialog.draggable({ handle: '.modal-header' });
-  $('#regulations, #controls').on('click', 'a.controllist, a.controllistRM', function(e) {
+  $('#regulations, #controls, #section_list').on('click', 'a.controllist, a.controllistRM', function(e) {
     e.preventDefault();
+    $dialog.data('href', $(this).attr('href'));
     $dialog.load($(this).attr('href'), function() {
       $dialog.modal_form({ backdrop: false }).modal_form('show');
     });
+  });
+
+  $dialog.on('ajax:success', '.unmapbtn', function(evt, data, status, xhr) {
+    $dialog.load($dialog.data('href'));
   });
 });
 

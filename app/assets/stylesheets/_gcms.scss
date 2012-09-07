@@ -2057,3 +2057,9 @@ body .container {
     width:97px;  
   }
 }
+
+.row-fluid-alternating-background-colors {
+  > .row-fluid:nth-child(even) {
+    @include background-image(linear-gradient(top,  #dddddd 0%, #eef4ed 70%, #edebe6 100%, #f6f6f6 100%));
+  }
+}
