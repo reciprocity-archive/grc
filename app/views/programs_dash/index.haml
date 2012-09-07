@@ -33,8 +33,8 @@
     -if has_feature? :BETA
       .row-static
         .singleColumn
+          =render :partial => 'design/templates/govWidgetCot'
           =render :partial => 'design/templates/govWidgetProducts'
-          =render :partial => 'design/templates/govWidgetReports'
 -content_for :subheader_extras do
   .btn-group.closed.fltrt
     %a.btn.btn-blue.dropdown-toggle{ :'data-toggle' => 'dropdown' }
