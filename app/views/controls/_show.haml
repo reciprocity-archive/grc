@@ -4,7 +4,7 @@
 -content_for :widget_help, 'control_info'
 
 -content_for :widget_buttons do
-  %a.widgetbtn{ :href => edit_flow_control_path(control), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :title => 'Edit Control' }
+  %a.widgetbtn{ :href => edit_flow_control_path(control), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :title => 'Edit Control' }
     %i.gcmsicon-edit-grey
 
 .information

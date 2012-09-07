@@ -40,7 +40,7 @@ class SystemsController < ApplicationController
       if @system.save
         flash[:notice] = "Successfully created a new system."
         format.json do
-          render :json => @system.as_json(:root => nil)
+          render :json => @system.as_json(:root => nil), :location => flow_system_path(@system)
         end
         format.html { redirect_to flow_system_path(@system) }
       else

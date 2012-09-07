@@ -14,10 +14,10 @@
       %li.divider
       %li.dropdown-menulabel.txtindent1 Create New ...
       %li
-        %a{ :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :href => new_flow_account_path }
+        %a{ :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :href => new_flow_account_path }
           Account
       %li
-        %a{ :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :href => new_flow_person_path }
+        %a{ :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :href => new_flow_person_path }
           Person
 
 .row-static

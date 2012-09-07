@@ -81,6 +81,8 @@
       $target.on('ajax:json', function(e, data, xhr) {
         if (form_target == 'refresh') {
           refresh_page();
+        } else if (form_target == 'redirect') {
+          window.location.assign(xhr.getResponseHeader('location'));
         }
       });
     }

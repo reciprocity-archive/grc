@@ -7,7 +7,7 @@
 %script{ :type => 'text/html', :data => { :document => '' }}
   %li.controlSlot{ :'data-id' => '<%= document.id %>' }
     .controls-group
-      %a.widgetbtn.fltrt{ :href => flow_documents_path + '/<%= document.id %>/edit', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-ajax-target' => 'refresh' }
+      %a.widgetbtn.fltrt{ :href => flow_documents_path + '/<%= document.id %>/edit', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh' }
         %i.gcmsicon-edit-grey
       .controls-type <%= document.descriptor %>
       .controls-subgroup <%= document.title || document.link_url || '&nbsp;' %>
@@ -17,7 +17,7 @@
     -item = object_item.document
     %li.controlSlot{ :'data-id' => item.id }
       .controls-group
-        %a.widgetbtn.fltrt{ :href => edit_flow_document_path(item), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-ajax-target' => 'refresh' }
+        %a.widgetbtn.fltrt{ :href => edit_flow_document_path(item), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh' }
           %i.gcmsicon-edit-grey
         .controls-type=item.descriptor
         .controls-subgroup=item.title || item.link_url || '&nbsp;'.html_safe

@@ -67,7 +67,7 @@ class ControlsController < ApplicationController
       if @control.save
         flash[:notice] = "Successfully created a new control"
         format.json do
-          render :json => @control.as_json(:root => nil)
+          render :json => @control.as_json(:root => nil), :location => flow_control_path(@control)
         end
         format.html { redirect_to flow_control_path(@control) }
       else

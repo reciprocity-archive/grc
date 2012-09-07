@@ -4,8 +4,8 @@
 -content_for :widget_help, 'control_mappings'
 
 -content_for :widget_buttons do
-  %a.widgettextbtn{ :href => new_flow_section_path(:'section[program_id]' => control.program_id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :title => 'Create New Section' } Add Section
-  %a.widgettextbtn{ :href => new_flow_control_path(:'control[program_id]' => control.program_id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :title => 'Create New Control' } Add Control
+  %a.widgettextbtn{ :href => new_flow_section_path(:'section[program_id]' => control.program_id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :title => 'Create New Section' } Add Section
+  %a.widgettextbtn{ :href => new_flow_control_path(:'control[program_id]' => control.program_id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :title => 'Create New Control' } Add Control
 
 .tabbable
   %ul.nav.nav-tabs

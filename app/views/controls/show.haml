@@ -12,7 +12,7 @@
   %h1.fltrt.highlighted Control
 
 -content_for :subheader_plus do
-  %a.navbarplus.fltrt{ :href => new_flow_control_path('control[program_id]' => @control.program_id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset' }
+  %a.navbarplus.fltrt{ :href => new_flow_control_path('control[program_id]' => @control.program_id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect' }
 
 .row-static
   .doubleColumn
