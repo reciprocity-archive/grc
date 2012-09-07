@@ -12,6 +12,12 @@
   }
 }
 
+.modal-header {
+  span.version {
+    display:none;
+  }
+}
+
 .modal-body {
   padding: 10px;
   overflow-y: auto;
@@ -36,6 +42,7 @@
       height:86px;
     }
   }
+  
   .scope {
     padding:0 6px;
     background:$lightestGray;
@@ -47,6 +54,7 @@
       }
     }
   }
+  
   .audit {
     padding:0 6px;
     background:$auditBgndColor;
@@ -59,6 +67,7 @@
       }
     }  
   }
+  
 }
 
 .modal-info {
