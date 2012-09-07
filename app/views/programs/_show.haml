@@ -7,19 +7,24 @@
   %a.widgetbtn{:href => edit_flow_program_path(program), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :title => 'Edit Program'}
     %i.gcmsicon-edit-grey
 
-.information
+.button-set
+  .row-fluid
+    .span4
+      %a.span12.btn.btn-warning{ :href => import_flow_program_path(@program) }
+        %i.gcmsicon-import-white
+        Import Regs
+    .span4
+      %a.span12.btn.btn-warning{ :href => mapping_program_path(program) }
+        %i.gcmsicon-mapping-white
+        Reg Mapper    
+    .span4
+      -if !program.company?
+        %a.span12.btn.btn-warning{ :href => '#create-cycle-modal', :'data-toggle' => 'modal-form' }
+          %i.gcmsicon-play-white
+          Start Audit
+    
 
-  .toolbar-widget
-    %a.btn.btn-warning{ :href => import_flow_program_path(@program) }
-      %i.gcmsicon-import-white
-      Import Regs
-    %a.btn.btn-warning{ :href => mapping_program_path(program) }
-      %i.gcmsicon-mapping-white
-      Reg Mapper
-    -if !program.company?
-      %a.btn.btn-warning{ :href => '#create-cycle-modal', :'data-toggle' => 'modal-form' }
-        %i.gcmsicon-play-white
-        Start Audit
+.information
 
   %hr.hr-widget
 

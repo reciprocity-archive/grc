@@ -26,22 +26,60 @@
         .WidgetTitle.doublewidth Audit Status
       / /.WidgetBoxHeading
       .WidgetBoxContent
+        #auditstatuscolumns
+          .row-fluid
+            .span6
+            .span6
+              .row-fluid
+                .span3 Requests
+                .span1
+                .span3 Tests
+                .span1
+                .span2
+                  Internal
+                  %br/
+                  .rowfluid
+                    .span12
+                      .span6.badge
+                        D
+                      .span6.badge
+                        E
+                .span2
+                  External
+                  %br/
+                  .rowfluid
+                    .span12
+                      .span6.badge
+                        D
+                      .span6.badge
+                        E
         .row-fluid
-          .span6
-          .span2 Requests
-          .span2 Tests
-          .span1
-            Internal
-            %br/
-            %label
-              \&nbsp;&nbsp;D
-              %span.fltrt E&nbsp;&nbsp;&nbsp;&nbsp;
-          .span1
-            External
-            %br/
-            %label
-              \&nbsp;&nbsp;D
-              %span.fltrt E&nbsp;&nbsp;&nbsp;&nbsp;
+          .span12.nominheight
+            .span6.nominheight
+              %span.prefix SOX-CON-1
+              Goog-Con-23 Physically Protect Stored Data
+            .span6.nominheight
+              .row-fluid.nominheight
+                .span3.progress.progress-striped.active.nominheight
+                  .bar.progressbar-success{"data-percentage" => "7", :style => "float: left; width: 0%; "}
+                  .bar.progressbar-danger{"data-percentage" => "58", :style => "float: right; width: 0%; "}
+                  .bar.progressbar-warning{"data-percentage" => "35", :style => "float: right; width: 0%; "}
+                .span1.nominheight
+                .span3.progress.active.nominheight
+                  .bar.progressbar-success{"data-percentage" => "7", :style => "float: left; width: 0%; "}
+                  .bar.progressbar-danger{"data-percentage" => "58", :style => "float: right; width: 0%; "}
+                  .bar.progressbar-warning{"data-percentage" => "35", :style => "float: right; width: 0%; "}
+                .span1.nominheight
+                .span2
+                  .rowfluid.nominheight
+                    .span12.nominheight
+                      .span6.badge.badge-warning 1
+                      .span6.badge.badge-warning 0
+                .span2
+                  .rowfluid.nominheight
+                    .span12.nominheight
+                      .span6.badge.badge-important 1
+                      .span6.badge.badge-success 0
         #auditstatus
           / CONTENT VIA JSRENDER
       / /.WidgetBoxContent

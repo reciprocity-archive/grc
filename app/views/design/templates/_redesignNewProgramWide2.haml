@@ -5,7 +5,10 @@
         %i.gcmsicon-questionmark-grey
       %a.widgetbtn{"data-dismiss" => "modal", :href => "#"}
         %i.gcmsicon-x-grey
-    %h1 Create New Program
+    %h1 
+      Create New Program
+      %span.version v.0.1.3
+
   .modal-body
     .alert.alert-info
       %span#alertMessage
@@ -14,7 +17,8 @@
       .row-fluid
         .span8
           %label Title
-          %input.span12{:type => "text", :placeholder => "Enter title"}
+          %input.span12.forminputfail{:type => "text", :placeholder => "Enter title"}
+          %span.help-inline Title can't be empty
         .span2
           %label Code
           %input.span12{:type => "text", :placeholder => "TO 16 CHARACTERS"}
@@ -29,10 +33,10 @@
           .row-fluid
             .span6
               %label Effective Date
-              %input.span12{:type => "text", :placeholder => "MM/DD/YYYY"}
+              %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
             .span6
               %label Stop Date    
-              %input.span12{:type => "text", :placeholder => "MM/DD/YYYY"}
+              %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
           .row-fluid
             .span12
               %label Direct Link
@@ -48,8 +52,9 @@
             %option Company
         .span3
           %label Kind
-          %select.span12
+          %select.span12.forminputfail
             %option -
+          %span.help-inline Select program kind
       .row-fluid
         .span6.scope      
           %label.subtitle Scope/Applicability
@@ -61,7 +66,7 @@
           .row-fluid
             .span4
               %label Start
-              %input.span12{:type => "text", :placeholder => "MM/DD/YYYY"}
+              %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
             .span4
               %label Period
               %select.span12

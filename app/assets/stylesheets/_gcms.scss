@@ -370,8 +370,8 @@ width: 97px;
   height:30px;
   line-height:30px;
   margin-top: 2px;
+  padding: 0px 5px 0px 5px;
   overflow: hidden;
-  padding: 0 0 0 6px;
   text-overflow: ellipsis;
   white-space: nowrap;
   @include box-sizing(border-box);
@@ -520,12 +520,12 @@ width: 97px;
 .row-fluid-slotcontent {
   margin-top: 0px; /* margin top removed (was 5) for chrome/macosx */
   clear:both;
-  padding: 0px 7px 0px 7px;
+  padding: 0px 0px 0px 0px;
   background: #efefef;
 }
 
 .row-fluid-slotcontent.in {
-  padding: 5px 7px 5px 7px;
+  padding: 5px 0px 5px 0px;
 }
 
 /*.row-fluid-slotcontent.collapse {
@@ -1225,15 +1225,18 @@ ul.slugtree {
   }
 }
 
+#auditstatuscolumns {
+  padding:10px;
+}
+
 /* Hack for modal invite auditors */
 .span6 > .prefix {
   font-size:15px;
-  line-height:15px;
+  line-height:22px;
   font-weight: bold;
-  margin-left: 4px;
+  margin-left: 12px;
   margin-right: 6px;
 }
-
 
 .span4 > .prefix {
   font-size:15px;
@@ -1314,7 +1317,7 @@ margin-top:5px;
 
 .help-inline {
   font-size: 10px;
-  font-weight: regular;
+  font-weight: normal;
   line-height: 12px;
   color: #900;
   white-space: nowrap;
@@ -1700,7 +1703,7 @@ a.controllistRM {
   margin:3px 0px 0px 0px;
   display:inline-block;
   @include box-sizing(border-box);
-  // padding: 5px 6px 5px 6px; /* Padding removed */
+  padding: 1px 3px 0px 5px; /* Padding removed */
   line-height:28px;
   color:$textColor;
   background: $white; /* Old browsers */
@@ -1711,6 +1714,14 @@ a.controllistRM {
     color:$black;
     cursor: pointer;  
   }
+}
+
+.singlecontrolSlot > #children_ > li {
+  line-height:28px !important;
+}
+
+.singlecontrolSlot > #children_ > li > .badge {
+  margin-top:5px;
 }
 
 .controlSlot {
@@ -1880,7 +1891,7 @@ body .container {
 .progress {
   height: 18px;
   line-height: 18px;
-  margin: 2px 0 4px 0;
+  margin: 0px 0 4px 0;
   padding:0px;
   background:#CED1D7;
 }
