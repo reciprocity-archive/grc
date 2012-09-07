@@ -29,9 +29,9 @@
         -path = request.fullpath.gsub(/BETA=[^&]*&?/, '').sub(/[?&]$/, '')
         -path += path.include?('?') ? '&' : '?'
         -if has_feature? :BETA
-          %a.btn-large.btn-warning{ :href => "#{path}BETA=0" } disable Beta features
+          %a.btn.btn-large.btn-warning{ :href => "#{path}BETA=0" } disable Beta features
         -else
-          %a.btn-large.btn-success{ :href => "#{path}BETA=1" } enable Beta features
+          %a.btn.btn-large.btn-success{ :href => "#{path}BETA=1" } enable Beta features
     .singleColumn
       -if has_feature? :BETA
       
@@ -100,7 +100,7 @@
           %h3 Options - These are used for Menus
           .row-fluid.nominheight
             %hr.hr-widget/
-            %a.fltrt.btn-large.btn-info{"data-dismiss" => "modal", :href => "/design/admin-settings"} View
+            %a.fltrt.btn.btn-large.btn-info{"data-dismiss" => "modal", :href => "/design/admin-settings"} View
       / end of widget
       / Start of widget
       #companycontrolwidget.WidgetBox
@@ -112,7 +112,7 @@
           %hr.hr-widget/
           .row-fluid.nominheight
             %hr.hr-widget/
-            %a.fltrt.btn-large.btn-info{"data-dismiss" => "modal", :href => "#comingsoonModal"} Go to Documentation Folder
+            %a.fltrt.btn.btn-large.btn-info{"data-dismiss" => "modal", :href => "#comingsoonModal"} Go to Documentation Folder
       / end of widget
     /second column
     .singleColumn
@@ -125,7 +125,7 @@
           %hr.hr-widget/
           .row-fluid.nominheight
             %hr.hr-widget/
-            %a.fltrt.btn-large.btn-info{"data-dismiss" => "modal", :href => "/design/admin-accounts"} View
+            %a.fltrt.btn.btn-large.btn-info{"data-dismiss" => "modal", :href => "/design/admin-accounts"} View
       / end of widget
 
       / Start of widget
@@ -159,7 +159,7 @@
           %hr.hr-widget/
           .row-fluid.nominheight
             %hr.hr-widget/
-            %a.fltrt.btn-large.btn-info{"data-dismiss" => "modal", :href => "/design/admin-events"} View
+            %a.fltrt.btn.btn-large.btn-info{"data-dismiss" => "modal", :href => "/design/admin-events"} View
       / end of widget
     /third column
     .singleColumn
@@ -188,7 +188,7 @@
                 .controls-subgroup Log Report 3
           .row-fluid.nominheight
             %hr.hr-widget/
-          %a.fltrt.btn-large.btn-info{"data-dismiss" => "modal", :href => "/design/admin-logs"} View
+          %a.fltrt.btn.btn-large.btn-info{"data-dismiss" => "modal", :href => "/design/admin-logs"} View
       / end of widget
       / Start of widget
       #companycontrolwidget.WidgetBox
@@ -200,7 +200,7 @@
           %hr.hr-widget/
           .row-fluid.nominheight
             %hr.hr-widget/
-            %a.fltrt.btn-large.btn-info{"data-dismiss" => "modal", :href => "/design/admin-refval"} View
+            %a.fltrt.btn.btn-large.btn-info{"data-dismiss" => "modal", :href => "/design/admin-refval"} View
       / end of widget
       / Start of widget
       
