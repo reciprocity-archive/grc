@@ -19,16 +19,31 @@
 }
 
 .modal-body {
+
   padding: 10px;
   overflow-y: auto;
   .alert {
     display:none;
   }
+
   ::-webkit-input-placeholder {
     color: $lightGray;
   }
   :-moz-placeholder {
     color: $lightGray;
+  }
+  
+  label {
+    font-weight:bold;
+    font-family:helvetica, arial, tahoma, sans-serif ;
+    text-shadow:none;
+    font-size:11px;
+  }
+  
+  input.date {
+    background:#fff url(/images/icons/icon-calendar-inline.png) no-repeat 6px 5px;
+    padding-left:26px;
+    cursor:pointer;
   }
   
   span.label {
@@ -68,6 +83,18 @@
     }  
   }
   
+  .forminputfail {
+    background:$failureBgndColor;
+    border:1px solid $failureBorderColor;
+    color:$failureColor;
+  }
+
+  .help-inline {
+    margin:-6px 0 10px 0;
+    display:block;
+    font-size:11px;
+  }
+
 }
 
 .modal-info {
