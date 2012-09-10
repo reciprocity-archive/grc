@@ -120,3 +120,56 @@
     display:inline-block;
   }
 }
+
+// various modal items
+
+.people-list {
+  height:300px;
+  overflow:auto;
+  li {
+    .additional {
+      display:none;
+    }
+    border:1px solid $borderDefault;
+    background:#f0f0f0;
+    border-bottom:none;
+    &:hover {
+     background:#fff;
+     .additional {
+       display:block;
+     }
+    }
+    &:first-child {
+      @include border-radius(4px 4px 0 0);
+    }
+    &:last-child {
+      border-bottom:1px solid $borderDefault;
+      @include border-radius(0 0 4px 4px);
+    }
+    padding:10px;
+    h2.name {
+      margin:0;
+      padding:0;
+      font-size:18px;
+      color:$textColor;
+      line-height:22px;
+    }
+    .company {
+      font-size:12px;
+      font-weight:normal;
+      color:#999;
+    }
+    .btn-mini {
+      margin-left:4px;
+    }
+    label.status-label {
+      color:#333;
+    }
+    .btn-solid {
+      height:22px;
+      line-height:18px;
+      margin-left:0;
+    }
+
+  }
+}
