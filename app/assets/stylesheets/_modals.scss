@@ -66,7 +66,7 @@
   }
   
   .scope {
-    padding:0 6px;
+    padding:0 6px 5px;
     background:$lightestGray;
     border:1px solid darken($lightestGray,10%);
     @include border-radius();
@@ -78,7 +78,7 @@
   }
   
   .audit {
-    padding:0 6px;
+    padding:0 6px 5px;
     background:$auditBgndColor;
     border:1px solid darken($auditBgndColor,10%);
     @include border-radius();
