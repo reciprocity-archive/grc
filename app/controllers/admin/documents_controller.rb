@@ -39,7 +39,11 @@ class Admin::DocumentsController < ApplicationController
 
   # Create a doc
   def create
+    document_descriptor_id = params[:document].delete(:document_descriptor_id)
     @document = Document.new(params[:document])
+    if document_descriptor_id
+      @document.document_descriptor = DocumentDescriptor.find(document_descriptor_id)
+    end
 
     respond_to do |format|
       if @document.save

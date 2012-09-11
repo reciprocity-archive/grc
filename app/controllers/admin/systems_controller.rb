@@ -48,8 +48,10 @@ class Admin::SystemsController < ApplicationController
 
   # Create a system
   def create
+    owner_id = params[:system].delete("owner_id")
     documents_params = params[:system].delete("document") || {}
     @system = System.new(params[:system])
+    @system.owner = Person.find(owner_id)
 
     # Accumulate results
     results = []

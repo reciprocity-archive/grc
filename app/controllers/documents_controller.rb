@@ -122,7 +122,13 @@ class DocumentsController < ApplicationController
   end
 
   def create
+    # FIXME: We may not need document descriptor at all, but we still
+    # need deal with mass assignment of it.
+    document_descriptor_id = document_params.delete(:descriptor_id)
     @document = Document.new(document_params)
+    if document_descriptor_id
+      @document.descriptor = DocumentDescriptor.find(document_descriptor_id)
+    end
 
     respond_to do |format|
       if @document.save
