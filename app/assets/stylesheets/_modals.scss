@@ -33,6 +33,13 @@
     color: $lightGray;
   }
   
+  h4 {
+    font-size:16px;
+    color:$mediumGray;
+    margin-bottom:10px;
+    font-weight:normal;
+  }
+  
   label {
     font-weight:bold;
     font-family:helvetica, arial, tahoma, sans-serif ;
@@ -147,12 +154,12 @@
       @include border-radius(0 0 4px 4px);
     }
     padding:10px;
-    h2.name {
+    .name {
       margin:0;
       padding:0;
-      font-size:18px;
-      color:$textColor;
-      line-height:22px;
+      font-size:16px;
+      font-weight:bold;
+      color:#111;
     }
     .company {
       font-size:12px;
@@ -162,8 +169,10 @@
     .btn-mini {
       margin-left:4px;
     }
-    label.status-label {
-      color:#333;
+    label {
+      strong {
+        color:#e00;
+      }
     }
     .btn-solid {
       height:22px;

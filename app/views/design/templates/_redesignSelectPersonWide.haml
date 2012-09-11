@@ -15,114 +15,217 @@
     %form
       .row-fluid
         .span6
+          %h4 Roles for this system
           .people-list
             %ul
               %li
                 .row-fluid
                   .span8
-                    %h2.name
-                      Joss Rayburn
-                      %span.company Google
+                    %span.name Joss Rayburn
+                    %span.company Google
+                    %span.label.label-warning Responsible
                   .span4.actions                
                     %a.btn.btn-mini.pull-right{:href => "#"}
                       %i.icon-minus-sign
                     %a.btn.btn-mini.pull-right{:href => "#"}
                       %i.icon-pencil
                 .row-fluid.additional
-                  .span4
-                    %label.status-label Status: Pending
-                    %a.span12.btn.btn-solid{:href => "#"} is Responsible for
-                  .span4
+                  .span6
+                    %label
+                      Relationship
+                      %strong PENDING
+                    %select.span12
+                      %option no relationship
+                      %option Is Accountable for
+                      %option{:selected => "selected"} Is Responsible for
+                  .span3
                     %label Start Date
                     %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
-                  .span4
+                  .span3
                     %label Stop Date
                     %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
-              %li
-                .row-fluid
-                  .span8
-                    %h2.name
-                      Joss Rayburn
+                %li
+                  .row-fluid
+                    .span8
+                      %span.name Mr. Cool
                       %span.company Google
-                  .span4.actions                
-                    %a.btn.btn-mini.pull-right{:href => "#"}
-                      %i.icon-minus-sign
-                    %a.btn.btn-mini.pull-right{:href => "#"}
-                      %i.icon-pencil
-                .row-fluid.additional
-                  .span4
-                    %label.status-label Status: Pending
-                    %a.span12.btn.btn-solid{:href => "#"} is Responsible for
-                  .span4
-                    %label Start Date
-                    %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
-                  .span4
-                    %label Stop Date
-                    %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
-              %li
-                .row-fluid
-                  .span8
-                    %h2.name
-                      Joss Rayburn
+                      %span.label No relationship
+                    .span4.actions                
+                      %a.btn.btn-mini.pull-right{:href => "#"}
+                        %i.icon-minus-sign
+                      %a.btn.btn-mini.pull-right{:href => "#"}
+                        %i.icon-pencil
+                  .row-fluid.additional
+                    .span6
+                      %label
+                        Relationship
+                      %select.span12
+                        %option{:selected => "selected"} no relationship
+                        %option Is Accountable for
+                        %option Is Responsible for
+                    .span3
+                      %label Start Date
+                      %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
+                    .span3
+                      %label Stop Date
+                      %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
+                %li
+                  .row-fluid
+                    .span8
+                      %span.name Daniel K. Amassy
                       %span.company Google
-                  .span4.actions                
-                    %a.btn.btn-mini.pull-right{:href => "#"}
-                      %i.icon-minus-sign
-                    %a.btn.btn-mini.pull-right{:href => "#"}
-                      %i.icon-pencil
-                .row-fluid.additional
-                  .span4
-                    %label.status-label Status: Pending
-                    %a.span12.btn.btn-solid{:href => "#"} is Responsible for
-                  .span4
-                    %label Start Date
-                    %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
-                  .span4
-                    %label Stop Date
-                    %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
-              %li
-                .row-fluid
-                  .span8
-                    %h2.name
-                      Joss Rayburn
-                      %span.company Google
-                  .span4.actions                
-                    %a.btn.btn-mini.pull-right{:href => "#"}
-                      %i.icon-minus-sign
-                    %a.btn.btn-mini.pull-right{:href => "#"}
-                      %i.icon-pencil
-                .row-fluid.additional
-                  .span4
-                    %label.status-label Status: Pending
-                    %a.span12.btn.btn-solid{:href => "#"} is Responsible for
-                  .span4
-                    %label Start Date
-                    %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
-                  .span4
-                    %label Stop Date
-                    %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
-              %li
-                .row-fluid
-                  .span8
-                    %h2.name
-                      Joss Rayburn
-                      %span.company Google
-                  .span4.actions                
-                    %a.btn.btn-mini.pull-right{:href => "#"}
-                      %i.icon-minus-sign
-                    %a.btn.btn-mini.pull-right{:href => "#"}
-                      %i.icon-pencil
-                .row-fluid.additional
-                  .span4
-                    %label.status-label Status: Pending
-                    %a.span12.btn.btn-solid{:href => "#"} is Responsible for
-                  .span4
-                    %label Start Date
-                    %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
-                  .span4
-                    %label Stop Date
-                    %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
-                  
+                      %span.label.label-success Responsible
+                    .span4.actions                
+                      %a.btn.btn-mini.pull-right{:href => "#"}
+                        %i.icon-minus-sign
+                      %a.btn.btn-mini.pull-right{:href => "#"}
+                        %i.icon-pencil
+                  .row-fluid.additional
+                    .span6
+                      %label
+                        Relationship
+                        %strong
+                      %select.span12
+                        %option no relationship
+                        %option Is Accountable for
+                        %option{:selected => "selected"} Is Responsible for
+                    .span3
+                      %label Start Date
+                      %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
+                    .span3
+                      %label Stop Date
+                      %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
+                  %li
+                    .row-fluid
+                      .span8
+                        %span.name Kelly Smith
+                        %span.company Google
+                        %span.label.label-success Accountable
+                      .span4.actions                
+                        %a.btn.btn-mini.pull-right{:href => "#"}
+                          %i.icon-minus-sign
+                        %a.btn.btn-mini.pull-right{:href => "#"}
+                          %i.icon-pencil
+                    .row-fluid.additional
+                      .span6
+                        %label
+                          Relationship
+                          %strong
+                        %select.span12
+                          %option no relationship
+                          %option{:selected => "selected"} Is Accountable for
+                          %option Is Responsible for
+                      .span3
+                        %label Start Date
+                        %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
+                      .span3
+                        %label Stop Date
+                        %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
+                  %li
+                    .row-fluid
+                      .span8
+                        %span.name Jeffrey Nyarr
+                        %span.company Google
+                        %span.label.label-warning Accountable
+                      .span4.actions                
+                        %a.btn.btn-mini.pull-right{:href => "#"}
+                          %i.icon-minus-sign
+                        %a.btn.btn-mini.pull-right{:href => "#"}
+                          %i.icon-pencil
+                    .row-fluid.additional
+                      .span6
+                        %label
+                          Relationship
+                          %strong PENDING
+                        %select.span12
+                          %option no relationship
+                          %option{:selected => "selected"} Is Accountable for
+                          %option Is Responsible for
+                      .span3
+                        %label Start Date
+                        %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
+                      .span3
+                        %label Stop Date
+                        %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
+                  %li
+                    .row-fluid
+                      .span8
+                        %span.name Daniel K. Amassy
+                        %span.company Google
+                        %span.label.label-success Responsible
+                      .span4.actions                
+                        %a.btn.btn-mini.pull-right{:href => "#"}
+                          %i.icon-minus-sign
+                        %a.btn.btn-mini.pull-right{:href => "#"}
+                          %i.icon-pencil
+                    .row-fluid.additional
+                      .span6
+                        %label
+                          Relationship
+                          %strong
+                        %select.span12
+                          %option no relationship
+                          %option Is Accountable for
+                          %option{:selected => "selected"} Is Responsible for
+                      .span3
+                        %label Start Date
+                        %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
+                      .span3
+                        %label Stop Date
+                        %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
+                    %li
+                      .row-fluid
+                        .span8
+                          %span.name Kelly Smith
+                          %span.company Google
+                          %span.label.label-success Accountable
+                        .span4.actions                
+                          %a.btn.btn-mini.pull-right{:href => "#"}
+                            %i.icon-minus-sign
+                          %a.btn.btn-mini.pull-right{:href => "#"}
+                            %i.icon-pencil
+                      .row-fluid.additional
+                        .span6
+                          %label
+                            Relationship
+                            %strong
+                          %select.span12
+                            %option no relationship
+                            %option{:selected => "selected"} Is Accountable for
+                            %option Is Responsible for
+                        .span3
+                          %label Start Date
+                          %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
+                        .span3
+                          %label Stop Date
+                          %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
+                    %li
+                      .row-fluid
+                        .span8
+                          %span.name Jeffrey Nyarr
+                          %span.company Google
+                          %span.label.label-warning Accountable
+                        .span4.actions                
+                          %a.btn.btn-mini.pull-right{:href => "#"}
+                            %i.icon-minus-sign
+                          %a.btn.btn-mini.pull-right{:href => "#"}
+                            %i.icon-pencil
+                      .row-fluid.additional
+                        .span6
+                          %label
+                            Relationship
+                            %strong PENDING
+                          %select.span12
+                            %option no relationship
+                            %option{:selected => "selected"} Is Accountable for
+                            %option Is Responsible for
+                        .span3
+                          %label Start Date
+                          %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
+                        .span3
+                          %label Stop Date
+                          %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
         .span6
+          %h4 Add people
 
   =render :partial => 'design/templates/modalfooter'
