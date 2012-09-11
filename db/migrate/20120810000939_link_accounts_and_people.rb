@@ -38,7 +38,7 @@ class LinkAccountsAndPeople < ActiveRecord::Migration
         puts "Associating #{account.inspect} with #{person.inspect}"
       else
         # No person exists with the e-mail, create an associated person
-        person = Person.create(:email => account.email)
+        person = Person.create({:email => account.email}, :without_protection => true)
         puts "Associating #{account.inspect} with NEW person #{person.inspect}"
       end
       account.person = person
