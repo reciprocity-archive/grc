@@ -304,6 +304,30 @@
                 %a.btn{"data-toggle" => "modal", :href => "#createnewthreat"}
                   %i.gcmsicon-threat-black
                   New Threat/Risk
+    .singleColumn
+      / in progress
+      #Programs.WidgetBox.singleWide
+        .WidgetBoxHeading
+          .WidgetTitle In-Progress x2 Modals
+          %nav
+            %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+              %i.gcmsicon-questionmark-grey
+            %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
+            %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#programInProgressRedesign"}
+              %i.gcmsicon-enlarge-grey
+        / /.WidgetBoxHeading
+        .WidgetBoxContent
+          #programInProgressRedesign.toolbar-widget.in
+            %ul#quickLinks.nav.nav-tabs.nav-stacked.in
+              %li.group
+                %a.btn{"data-toggle" => "modal", :href => "#redesignNewProgramWide2"}
+                  Redesign: New Program 2 (Wide)
+              %li.group
+                %a.btn{"data-toggle" => "modal", :href => "#redesignNewControlWide"}
+                  Redesign: New Control (Wide)
+              %li.group
+                %a.btn{"data-toggle" => "modal", :href => "#redesignNewSectionWide"}
+                  Redesign: New Section (Wide)
             
   .doubleColumn
     .fullHeight

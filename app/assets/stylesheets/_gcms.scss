@@ -663,45 +663,6 @@ nav {
   width: 70px;
 }
 
-.input-mini {
-  width: 60px;
-}
-
-.input-tiny {
-  width:69px;
-}
-
-.select-tiny {
-  width:79px;
-}
-
-.textarea-tall {
-  height:178px;
-}
-
-.input-small {
-  width: 107px;
-}
-
-.inputtext-small {
-  width: 98px;
-}
-
-.input-medium {
-  width: 150px;
-}
-
-.input-large {
-  width: 210px;
-}
-
-.input-xlarge {
-  width: 270px;
-}
-
-.input-xxlarge {
-  width: 530px;
-}
 
 /* Arrows */
 
@@ -1364,7 +1325,7 @@ margin-top:5px;
   color:$white;
   border-bottom: 2px solid #808040;
   font-weight: 400;
-  padding: 5px 5px 2px 15px;
+  padding: 5px 5px 0px 10px;
   margin:0 0 0 0;
   text-shadow: 0px 1px 1px #000;
   h1 {
@@ -1607,8 +1568,7 @@ margin-top:5px;
 textarea {
   resize:vertical;
   max-height:300px;
-  height:120px;
-  width: 98%;
+  height:70px !important;
   .slugtree & {
     height:100px;
   }
