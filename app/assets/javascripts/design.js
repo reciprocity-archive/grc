@@ -153,6 +153,23 @@ jQuery(function ($) {
     $('#tooltip' + i).tooltip();
   }
 
+  // show filters in modals
+  
+  $('body').on('click', '#showFilters', function(e) {
+    e.preventDefault();
+    var $this = $(this),
+        $filters = $(this).closest(".modal-body").find(".filter-group");
+        
+    if( $this.hasClass("active") ) {
+      $filters.hide();
+      $this.removeClass("active");        
+    } else {
+      $filters.show();
+      $this.addClass("active");    
+    }
+        
+  });
+
   // status js
   var userHasPriviledge = true;
   $('body').on('click', '#actionButton', function(e) {

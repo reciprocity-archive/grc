@@ -7,24 +7,134 @@
         %i.gcmsicon-x-grey
     %h1
       Select Person
-      %span.version v.0.0.1
+      %span.version v.0.1.1
   .modal-body
     .alert.alert-info
       %span#alertMessage
-      / %button.close{:type => "button", :"data-dismiss" => "alert"} ×
+      %button.close{:type => "button", :"data-dismiss" => "alert"} ×
     %form
       .row-fluid
+        .span6
+          .btn-group.pull-right
+            %a#showFilters.btn.btn-primary.btn-mini.new{:href => "#"}
+              %i.icon-search.icon-white
+              Filters
+            %a.btn.btn-primary.btn-mini.new{:href => "#"}
+              %i.icon-user.icon-white              
+              + New Person
+          %h4 Add people
+          .filter-block
+          
+            .row-fluid.filter-group
+              .span12
+                .input-append.pull-right.search-list
+                  %input{:type => "text", :placeholder => "Type your keywords here..."}
+                  %button.btn{:type => "submit"} Search      
+            .row-fluid
+              .span12              
+                .tabbable.tabs-left
+                
+                  %ul.nav.nav-tabs.filter-group
+                    %li{:class => "active"}
+                      %a{:href => "#category1", :"data-toggle" => "tab" } Category 1
+                    %li
+                      %a{:href => "#category2", :"data-toggle" => "tab" } Category 2
+                    %li
+                      %a{:href => "#category3", :"data-toggle" => "tab" } Category 3
+                    %li
+                      %a{:href => "#category4", :"data-toggle" => "tab" } Category 4
+
+                  .tab-content
+
+                
+                    #category1.tab-pane.active
+                      .people-list
+                        %ul
+                          %li
+                            .row-fluid
+                              .span6
+                                %span.company Google
+                                %span.name David Buick
+                              .span6.actions                
+                                %a.btn.btn-primary.btn-mini.pull-right{:href => "#"}
+                                  %i.icon-chevron-right.icon-white 
+                                %a.btn.btn-mini.pull-right{:href => "#"}
+                                  %i.icon-pencil
+
+                          %li
+                            .row-fluid
+                              .span6
+                                %span.company Google
+                                %span.name Niki Lauda
+                              .span6.actions                
+                                %a.btn.btn-primary.btn-mini.pull-right{:href => "#"}
+                                  %i.icon-chevron-right.icon-white 
+                                %a.btn.btn-mini.pull-right{:href => "#"}
+                                  %i.icon-pencil
+
+                          %li
+                            .row-fluid
+                              .span6
+                                %span.company Google
+                                %span.name Daniel Harms
+                              .span6.actions                
+                                %a.btn.btn-primary.btn-mini.pull-right{:href => "#"}
+                                  %i.icon-chevron-right.icon-white 
+                                %a.btn.btn-mini.pull-right{:href => "#"}
+                                  %i.icon-pencil
+
+                          %li
+                            .row-fluid
+                              .span6
+                                %span.company Google
+                                %span.name David Buick
+                              .span6.actions                
+                                %a.btn.btn-primary.btn-mini.pull-right{:href => "#"}
+                                  %i.icon-chevron-right.icon-white 
+                                %a.btn.btn-mini.pull-right{:href => "#"}
+                                  %i.icon-pencil
+
+                          %li
+                            .row-fluid
+                              .span6
+                                %span.company Google
+                                %span.name Niki Lauda
+                              .span6.actions                
+                                %a.btn.btn-primary.btn-mini.pull-right{:href => "#"}
+                                  %i.icon-chevron-right.icon-white 
+                                %a.btn.btn-mini.pull-right{:href => "#"}
+                                  %i.icon-pencil
+
+                          %li
+                            .row-fluid
+                              .span6
+                                %span.company Google
+                                %span.name Daniel Harms
+                              .span6.actions                
+                                %a.btn.btn-primary.btn-mini.pull-right{:href => "#"}
+                                  %i.icon-chevron-right.icon-white 
+                                %a.btn.btn-mini.pull-right{:href => "#"}
+                                  %i.icon-pencil
+                    #category2.tab-pane
+                      Tab 2
+                    #category3.tab-pane
+                      Tab 3
+                    #category4.tab-pane
+                      Tab 4
+
+
         .span6
           %h4 Roles for this system
           .people-list
             %ul
               %li
                 .row-fluid
-                  .span8
+                  .span6
                     %span.name Joss Rayburn
                     %span.company Google
+                  .span3
                     %span.label.label-warning Responsible
-                  .span4.actions                
+                  .span3.actions                
                     %a.btn.btn-mini.pull-right{:href => "#"}
                       %i.icon-minus-sign
                     %a.btn.btn-mini.pull-right{:href => "#"}
@@ -46,11 +156,12 @@
                     %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
                 %li
                   .row-fluid
-                    .span8
+                    .span6
                       %span.name Mr. Cool
                       %span.company Google
+                    .span3
                       %span.label No relationship
-                    .span4.actions                
+                    .span3.actions                
                       %a.btn.btn-mini.pull-right{:href => "#"}
                         %i.icon-minus-sign
                       %a.btn.btn-mini.pull-right{:href => "#"}
@@ -71,11 +182,12 @@
                       %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
                 %li
                   .row-fluid
-                    .span8
-                      %span.name Daniel K. Amassy
+                    .span6
                       %span.company Google
+                      %span.name Daniel K. Amassy
+                    .span3
                       %span.label.label-success Responsible
-                    .span4.actions                
+                    .span3.actions                
                       %a.btn.btn-mini.pull-right{:href => "#"}
                         %i.icon-minus-sign
                       %a.btn.btn-mini.pull-right{:href => "#"}
@@ -97,11 +209,12 @@
                       %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
                   %li
                     .row-fluid
-                      .span8
-                        %span.name Kelly Smith
+                      .span6
                         %span.company Google
+                        %span.name Kelly Smith
+                      .span3
                         %span.label.label-success Accountable
-                      .span4.actions                
+                      .span3.actions                
                         %a.btn.btn-mini.pull-right{:href => "#"}
                           %i.icon-minus-sign
                         %a.btn.btn-mini.pull-right{:href => "#"}
@@ -123,11 +236,12 @@
                         %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
                   %li
                     .row-fluid
-                      .span8
-                        %span.name Jeffrey Nyarr
+                      .span6
                         %span.company Google
+                        %span.name Jeffrey Nyarr
+                      .span3
                         %span.label.label-warning Accountable
-                      .span4.actions                
+                      .span3.actions                
                         %a.btn.btn-mini.pull-right{:href => "#"}
                           %i.icon-minus-sign
                         %a.btn.btn-mini.pull-right{:href => "#"}
@@ -149,11 +263,12 @@
                         %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
                   %li
                     .row-fluid
-                      .span8
-                        %span.name Daniel K. Amassy
+                      .span6
                         %span.company Google
+                        %span.name Daniel K. Amassy
+                      .span3
                         %span.label.label-success Responsible
-                      .span4.actions                
+                      .span3.actions                
                         %a.btn.btn-mini.pull-right{:href => "#"}
                           %i.icon-minus-sign
                         %a.btn.btn-mini.pull-right{:href => "#"}
@@ -175,11 +290,12 @@
                         %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
                     %li
                       .row-fluid
-                        .span8
-                          %span.name Kelly Smith
+                        .span6
                           %span.company Google
+                          %span.name Kelly Smith
+                        .span3
                           %span.label.label-success Accountable
-                        .span4.actions                
+                        .span3.actions                
                           %a.btn.btn-mini.pull-right{:href => "#"}
                             %i.icon-minus-sign
                           %a.btn.btn-mini.pull-right{:href => "#"}
@@ -201,11 +317,12 @@
                           %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
                     %li
                       .row-fluid
-                        .span8
-                          %span.name Jeffrey Nyarr
+                        .span6
                           %span.company Google
+                          %span.name Jeffrey Nyarr
+                        .span3
                           %span.label.label-warning Accountable
-                        .span4.actions                
+                        .span3.actions                
                           %a.btn.btn-mini.pull-right{:href => "#"}
                             %i.icon-minus-sign
                           %a.btn.btn-mini.pull-right{:href => "#"}
@@ -225,7 +342,5 @@
                         .span3
                           %label Stop Date
                           %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
-        .span6
-          %h4 Add people
 
   =render :partial => 'design/templates/modalfooter'

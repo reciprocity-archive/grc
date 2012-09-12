@@ -19,6 +19,13 @@
 }
 
 .modal-body {
+  .tab-content {
+    margin:0;
+  }
+  
+  .btn.new {
+    margin-top:8px;
+  }
 
   padding: 10px;
   overflow-y: auto;
@@ -36,7 +43,9 @@
   h4 {
     font-size:16px;
     color:$mediumGray;
-    margin-bottom:10px;
+    line-height:36px;
+    height:36px;
+    margin:0px;
     font-weight:normal;
   }
   
@@ -146,14 +155,7 @@
        display:block;
      }
     }
-    &:first-child {
-      @include border-radius(4px 4px 0 0);
-    }
-    &:last-child {
-      border-bottom:1px solid $borderDefault;
-      @include border-radius(0 0 4px 4px);
-    }
-    padding:10px;
+    padding:4px 8px;
     .name {
       margin:0;
       padding:0;
@@ -162,6 +164,7 @@
       color:#111;
     }
     .company {
+      display:block;
       font-size:12px;
       font-weight:normal;
       color:#999;
@@ -174,11 +177,62 @@
         color:#e00;
       }
     }
+    span.label {
+      display:block;
+      margin-top:10px;
+      text-align:center;
+      font-size:13px;
+    }
     .btn-solid {
       height:22px;
       line-height:18px;
       margin-left:0;
     }
-
+    .actions {
+      .btn {
+        height:20px;
+        margin-top:4px;
+        i {
+          margin-top:3px;
+        }
+      }
+    }
   }
+}
+
+.filter-block {
+  .search-list input {
+    margin-bottom:0 !important;
+    margin-right:-4px;
+  }
+  .nav-tabs {
+    margin:0;
+    border:none;
+    li {
+      margin-bottom:0;
+      float:none;
+      &.active {
+        a {
+          background:#eee;
+          @include border-radius(4px 0 0 4px);
+          color:$black;
+        }
+      }
+      a {
+        margin-right:0;
+        &:hover {
+          background:$white;          
+          color:$darkGray;
+          border-right:1px solid $white;
+          @include border-radius(4px 0 0 4px);
+        }      
+      }
+    }
+  }
+}
+
+// JS class
+
+.filter-group {
+  display:none;
 }
