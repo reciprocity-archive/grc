@@ -51,7 +51,9 @@ class Admin::SystemsController < ApplicationController
     owner_id = params[:system].delete("owner_id")
     documents_params = params[:system].delete("document") || {}
     @system = System.new(params[:system])
-    @system.owner = Person.find(owner_id)
+    if owner_id
+      @system.owner = Person.find(owner_id)
+    end
 
     # Accumulate results
     results = []
