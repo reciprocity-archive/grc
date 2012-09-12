@@ -19,12 +19,14 @@
           %label Title
           %input.span12.forminputfail{:type => "text", :placeholder => "Enter title"}
           %span.help-inline Title can't be empty
-        .span3
-          %label Code
-          %input.span12{:type => "text", :placeholder => "TO 16 CHARACTERS"}
-        .span3
-          %label Version
-          %input.span12{:type => "text", :placeholder => "1.1.1"}
+        .span6
+          .row-fluid
+            .span6
+              %label Code
+              %input.span12{:type => "text", :placeholder => "TO 16 CHARACTERS"}
+            .span6
+              %label Version
+              %input.span12{:type => "text", :placeholder => "1.1.1"}
       .row-fluid
         .span6
           %label Description
