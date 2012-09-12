@@ -158,14 +158,16 @@ jQuery(function ($) {
   $('body').on('click', '#showFilters', function(e) {
     e.preventDefault();
     var $this = $(this),
-        $filters = $(this).closest(".modal-body").find(".filter-group");
+        $filters = $this.closest(".modal-body").find(".filter-group"),
+        $searchableLists = $this.closest(".modal-body").find(".filter-block .people-list");
         
     if( $this.hasClass("active") ) {
       $filters.hide();
       $this.removeClass("active");        
     } else {
       $filters.show();
-      $this.addClass("active");    
+      $this.addClass("active");
+      $searchableLists.addClass("short");
     }
         
   });

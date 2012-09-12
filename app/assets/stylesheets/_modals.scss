@@ -141,6 +141,9 @@
 
 .people-list {
   height:300px;
+  &.short {
+    height:267px;
+  }  
   overflow:auto;
   li {
     .additional {
@@ -154,6 +157,9 @@
      .additional {
        display:block;
      }
+    }
+    &:last-child {
+      border-bottom:1px solid $borderDefault;
     }
     padding:4px 8px;
     .name {
@@ -229,6 +235,7 @@
       }
     }
   }
+  
 }
 
 // JS class
