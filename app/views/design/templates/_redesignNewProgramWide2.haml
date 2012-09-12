@@ -57,11 +57,12 @@
           %span.help-inline Select program kind
       .row-fluid
         .span6.scope      
-          %label.subtitle Scope/Applicability
+          %label.subtitle Scope/Applicability of this Framework or Program
           .row-fluid
             %label Explanation of the applicability of this program
-            %textarea.span12{:placeholder => "One-sentence explanation of the applicability of this program, used in mail merge templates.", :rows => "30"}
-        .span6.audit
+            %textarea.span12{:placeholder => "One-sentence explanation of the applicability of this program, used in mail merge templates.", :rows => "3"}
+            -#Visual hack 
+        .span6.audit{:style => "height:122px;"}
           %label.subtitle Audit Cycle
           .row-fluid
             .span4
