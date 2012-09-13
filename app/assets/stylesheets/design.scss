@@ -31,3 +31,105 @@
   
 
 }
+
+
+// STYLES FOR NEW PAGE LAYOUT (Shouldn't affect existing pages)
+
+.fluid-layout {
+
+  .widget {
+
+    margin-bottom:20px;
+    background:$widgetBgnd;
+    border:$widgetBorder;
+
+    @include border-radius();
+
+    .widget-head {
+      
+      h2 {
+        font-size:18px;
+        line-height:30px;
+        font-weight:bold;
+        margin:0;
+        padding:0 10px;
+      }
+      
+      .widget-trigger {
+        margin:5px 10px 0 5px;
+        padding-left:3px;
+        padding-right:2px;
+      }
+      
+      .widget-search {
+        margin:0 0 0 4px;
+        padding:0;
+        height:20px;
+        width:140px;
+        display:block;
+        float:right;
+      }
+      
+      .widget-actions {
+        padding:4px;
+        float:right;
+        
+        .btn {
+          line-height:20px;
+          margin:0 0 0 4px;
+          padding:0 3px;
+        }
+      }
+      
+    }
+
+    .widget-body {
+      padding:5px;
+      border-top:$widgetBorder;
+    }
+
+    .list-trigger {
+      margin:5px 5px 0 5px;
+      padding:1px 0 1px 1px;
+    }
+
+    
+    ul.wlist {
+      li {
+        border:$widgetInnerBorder;
+        margin-bottom:4px;
+      }
+      .wlist-title {
+        h3 {
+          font-size:16px;
+        }
+      }
+      .wlist-body {
+        border-top:$widgetInnerBorder;
+        padding:4px;
+      }
+    }
+    
+    
+  }
+
+  .sidebar {
+
+    // sidebar widget styles TBD
+
+    .widget {
+
+      .widget-head {
+        h2 {
+          font-size:16px;
+        }
+        .widget-search {
+          width:100px;
+        }
+      }
+
+
+    }
+
+  }
+}

@@ -153,6 +153,54 @@ jQuery(function ($) {
     $('#tooltip' + i).tooltip();
   }
 
+  // show/hide widget
+
+  $('body').on('click', '.widget-trigger', function(e) {
+    e.preventDefault();
+    var $this = $(this),
+        $widgetBody = $this.closest(".widget").find(".widget-body"),
+        $icon = $this.find("i");
+
+    if( $this.hasClass("active") ) {
+      $widgetBody.slideUp("fast");
+      $this.removeClass("active");
+      $icon
+        .removeClass("icon-chevron-down")
+        .addClass("icon-chevron-right");
+    } else {
+      $widgetBody.slideDown("fast");
+      $this.addClass("active");
+      $icon
+        .removeClass("icon-chevron-right")
+        .addClass("icon-chevron-down");
+    }
+
+  });
+
+    // show/hide list item
+
+  $('body').on('click', '.list-trigger', function(e) {
+    e.preventDefault();
+    var $this = $(this),
+        $listBody = $this.closest(".wlist-title").next(),
+        $icon = $this.find("i");
+
+    if( $this.hasClass("active") ) {
+      $listBody.slideUp("fast");
+      $this.removeClass("active");
+      $icon
+        .removeClass("icon-chevron-down")
+        .addClass("icon-chevron-right");
+    } else {
+      $listBody.slideDown("fast");
+      $this.addClass("active");
+      $icon
+        .removeClass("icon-chevron-right")
+        .addClass("icon-chevron-down");
+    }
+
+  });
+
   // show filters in modals
   
   $('body').on('click', '#showFilters', function(e) {
@@ -164,6 +212,7 @@ jQuery(function ($) {
     if( $this.hasClass("active") ) {
       $filters.hide();
       $this.removeClass("active");        
+      $searchableLists.removeClass("short");
     } else {
       $filters.show();
       $this.addClass("active");
