@@ -62,8 +62,11 @@
           %label.subtitle Scope/Applicability of this Framework or Program
           .row-fluid
             %label Explanation of the applicability of this program
-            %textarea.span12{:placeholder => "One-sentence explanation of the applicability of this program, used in mail merge templates.", :rows => "3"}
-            -#Visual hack 
+            %textarea#wysihtml5.span12{:placeholder => "One-sentence explanation of the applicability of this program, used in mail merge templates.", :rows => "3", }
+            :javascript
+              $('#wysihtml5').wysihtml5({
+                "image": false //Button to insert an image. Default true
+              });
         .span6.audit{:style => "height:122px;"}
           %label.subtitle Audit Cycle
           .row-fluid
