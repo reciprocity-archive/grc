@@ -1,5 +1,4 @@
 module ApplicationHelper
-  ADMIN_MODULES = %w(accounts biz_processes business_areas cycles sections controls documents document_descriptors programs people systems)
   WORKFLOW_MODULES = %w(programs_dash controls dashboard evidence testing testreport)
 
   class ProjectModule
@@ -14,11 +13,6 @@ module ApplicationHelper
   # The set of modules shown as tabs on the main application page (aka workflow pages)
   def project_modules
     WORKFLOW_MODULES.map { |id| ProjectModule.new(id.humanize, url_for({:controller => "/" + id, :only_path => true})) }
-  end
-
-  # The set of modules shown as tabs on the admin application page (aka admin pages)
-  def admin_project_modules
-    ADMIN_MODULES.map { |id| ProjectModule.new(id.humanize, url_for({:controller => "/admin/" + id, :only_path => true})) }
   end
 
   # Roles

@@ -1,8 +1,0 @@
-.bphead.remote{:title => bp.slug}><
-  =link_to url_for(:action => :closebp, :id => bp.id), :remote => true, :"data-type" => "html" do
-    %img.tree{:src => "/images/collapse.gif"}>
-  =link_to url_for(:action => :closebp, :id => bp.id), :remote => true, :"data-type" => "html" do
-    =bp.title
--bp.systems.each do |system|
-  .tree.system{:id => "sys#{system.id}"}
-    =render :partial => 'dashboard/closesys', :locals => {:biz_process => bp, :system => system}

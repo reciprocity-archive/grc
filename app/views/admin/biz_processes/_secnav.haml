@@ -1,6 +1,0 @@
-.secondary-navigation
-  %ul.wat-cf
-    %li.first{:class => ("active" if request.path_info =~ /biz_processes$/)}=link_to pat(:list), biz_processes_path
-    %li=link_to pat(:new), new_biz_process_path
-    %li=link_to pat(:controls), controls_biz_processes_path
-    %li=link_to pat(:systems), systems_biz_processes_path
