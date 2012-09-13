@@ -25,9 +25,9 @@ class AddDefaultOptionsAndCategories < ActiveRecord::Migration
     ]
 
     categories.each do |k, opts|
-      c = Category.create(:name => k)
+      c = Category.ctype(Control::CATEGORY_TYPE_ID).create(:name => k)
       opts.each do |opt|
-        d = Category.create(:name => opt)
+        d = Category.ctype(Control::CATEGORY_TYPE_ID).create(:name => opt)
         d.move_to_child_of(c)
       end
     end
