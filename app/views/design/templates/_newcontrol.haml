@@ -44,8 +44,8 @@
                   %br/
                   #dp3.date{"data-date" => "02-12-12", "data-date-format" => "dd-mm-yy"}
                     %input.span12.forminputsuccess.calendar{:size => "16", :type => "text", :value => "02-12-12"}/
-                  -#:javascript
-                    -#$('#dp3').datepicker('');
+                  :javascript
+                    $('#dp3').datepicker();
           / Column one start
           .row-fluid
             .span3.form-inline.control-group

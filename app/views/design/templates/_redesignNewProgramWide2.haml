@@ -7,7 +7,7 @@
         %i.gcmsicon-x-grey
     %h1 
       Create New Program
-      %span.version v.0.8
+      %span.version v.9.1
 
   .modal-body
     .alert.alert-info
@@ -17,13 +17,13 @@
       .row-fluid
         .span6
           %label Title
-          %input.span12.forminputfail{:type => "text", :placeholder => "Enter title"}
-          %span.help-inline Title can't be empty
+          %input.span12{:type => "text", :placeholder => "Enter title"}
+          %span.help-inline 
         .span6
           .row-fluid
             .span6
-              %label Code
-              %input.span12{:type => "text", :placeholder => "TO 16 CHARACTERS"}
+              %label Code (optional)
+              %input.span12{:type => "text", :placeholder => "Autofill code"}
             .span6
               %label Version
               %input.span12{:type => "text", :placeholder => "1.1.1"}
@@ -32,13 +32,17 @@
           %label Description
           %textarea.span12.double{:placeholder => "Enter description here", :rows => "3"}
         .span6
-          .row-fluid
+          .row-fluid 
             .span6
               %label Effective Date
-              %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
+              %input.span12#datepicker-effectivedate.date{:type => "text",  :placeholder => "MM/DD/YYYY"}
+              :javascript
+                $('#datepicker-effectivedate').datepicker();
             .span6
               %label Stop Date    
-              %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
+              %input.span12#datepicker-stopdate.date{:type => "text",  :placeholder => "MM/DD/YYYY"}
+              :javascript
+                $('#datepicker-stopdate').datepicker();
           .row-fluid
             .span12
               %label Direct Link
@@ -53,26 +57,29 @@
             %option Regulation
             %option Company
         .span3
-          %label Kind
-          %select.span12.forminputfail
-            %option -
-          %span.help-inline Select program kind
+          %label Kind 
+          %select.span12
+            %option Not Applicable
+          %span.help-inline &nbsp;
       .row-fluid
         .span6.scope      
-          %label.subtitle Scope/Applicability of this Framework or Program
+          %label.subtitle 
+            Scope/Applicability of this Framework or Program
+            %a.fltrt.underline{"data-toggle" => "modal", :href => "#comingsoonModal"} View as mail merge
           .row-fluid
-            %label Explanation of the applicability of this program
-            %textarea#wysihtml5.span12{:placeholder => "One-sentence explanation of the applicability of this program, used in mail merge templates.", :rows => "3", }
+            %textarea#wysihtml5d.span12{:placeholder => "One-sentence explanation of the applicability of this program, used in mail merge templates.", :rows => "3", }
             :javascript
               $('#wysihtml5').wysihtml5({
                 "image": false //Button to insert an image. Default true
               });
-        .span6.audit{:style => "height:122px;"}
+        .span6.audit{:style => "height:102px;"}
           %label.subtitle Audit Cycle
           .row-fluid
             .span4
               %label Start
-              %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
+              %input.span12#datepicker-auditstart.date{:type => "text", :placeholder => "MM/DD/YYYY"}
+              :javascript
+                $('#datepicker-auditstart').datepicker();
             .span4
               %label Period
               %select.span12
