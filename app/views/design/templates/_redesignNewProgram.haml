@@ -1,4 +1,4 @@
-#redesignNewProgram.modal.hide.fade
+#redesignNewProgram.modal.modal-wide.hide.fade
   .modal-header
     %nav
       %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
@@ -7,7 +7,8 @@
         %i.gcmsicon-x-grey
     %h1 
       Create New Program
-      %span.version v.0.0.1
+      %span.version v.9.1
+
   .modal-body
     .alert.alert-info
       %span#alertMessage
@@ -16,52 +17,69 @@
       .row-fluid
         .span6
           %label Title
-          %input.span12{:type => "text"}
-        .span1
-          %label Code
-          %input.span12{:type => "text"}
-        .span1
-          %label Version
-          %input.span12{:type => "text"}
-        .span2
-          %label Effective Date
-          %input.span12{:type => "text", :placeholder => "MM/DD/YYYY"}
-        .span2
-          %label Stop Date    
-          %input.span12{:type => "text", :placeholder => "MM/DD/YYYY"}
+          %input.span12{:type => "text", :placeholder => "Enter title"}
+          %span.help-inline 
+        .span6
+          .row-fluid
+            .span6
+              %label Code (optional)
+              %input.span12{:type => "text", :placeholder => "Autofill code"}
+            .span6
+              %label Version
+              %input.span12{:type => "text", :placeholder => "1.1.1"}
       .row-fluid
-        .span12
+        .span6
           %label Description
-          %textarea.span12{:placeholder => "Enter description here", :rows => "3"}
+          %textarea.span12.double{:placeholder => "Enter description here", :rows => "3"}
+        .span6
+          .row-fluid 
+            .span6
+              %label Effective Date
+              %input.span12#datepicker-effectivedate.date{:type => "text",  :placeholder => "MM/DD/YYYY"}
+              :javascript
+                $('#datepicker-effectivedate').datepicker();
+            .span6
+              %label Stop Date    
+              %input.span12#datepicker-stopdate.date{:type => "text",  :placeholder => "MM/DD/YYYY"}
+              :javascript
+                $('#datepicker-stopdate').datepicker();
+          .row-fluid
+            .span12
+              %label Direct Link
+              %input.span12{:type => "text", :placeholder => "http://www.examplelink.com/"}
       .row-fluid
-        .span12
-          %label Direct Link
-          %input.span12{:type => "text", :placeholder => "Enter direct link"}
-      .row-fluid
+        .span6
+          %label Organization
+          %input.span12{:type => "text", :placeholder => "Responsible organization for this program"}
         .span3
           %label Type
           %select.span12
             %option Regulation
             %option Company
         .span3
-          %label Kind
+          %label Kind 
           %select.span12
-            %option -
-        .span6
-          %label Organization
-          %input.span12{:type => "text", :placeholder => "Responsible organization for this program"}
+            %option Not Applicable
+          %span.help-inline &nbsp;
       .row-fluid
         .span6.scope      
-          %label.subtitle Scope/Applicability
+          %label.subtitle 
+            Scope/Applicability of this Framework or Program
+            %a.fltrt.underline{"data-toggle" => "modal", :href => "#comingsoonModal"} View as mail merge
           .row-fluid
-            %label Explanation of the applicability of this program
-            %textarea.span12{:placeholder => "One-sentence explanation of the applicability of this program, used in mail merge templates.", :rows => "3"}
-        .span6.audit
+            %textarea#wysihtml5d.span12{:placeholder => "One-sentence explanation of the applicability of this program, used in mail merge templates.", :rows => "3", }
+            :javascript
+              $('#wysihtml5').wysihtml5({
+                "image": false //Button to insert an image. Default true
+              });
+        .span6.audit{:style => "height:102px;"}
           %label.subtitle Audit Cycle
           .row-fluid
             .span4
               %label Start
-              %input.span12{:type => "text", :placeholder => "MM/DD/YYYY"}
+              %input.span12#datepicker-auditstart.date{:type => "text", :placeholder => "MM/DD/YYYY"}
+              :javascript
+                $('#datepicker-auditstart').datepicker();
             .span4
               %label Period
               %select.span12
