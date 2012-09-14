@@ -177,7 +177,7 @@ jQuery(function ($) {
 
   });
 
-    // show/hide list item
+  // show/hide list item
 
   $('body').on('click', '.list-trigger', function(e) {
     e.preventDefault();
@@ -199,6 +199,41 @@ jQuery(function ($) {
         .addClass("icon-chevron-down");
     }
 
+  });
+
+  // nicer hover
+
+  $('body').on('mouseenter', '.people-list li', function(e) {
+    $(this).find(".additional").slideDown("fast");
+  });
+
+  $('body').on('mouseleave', '.people-list li', function(e) {
+    $(this).find(".additional").slideUp("fast");
+  });
+
+
+  // add item in target list
+
+  $('body').on('click', '.add-me', function(e) {
+    
+    e.preventDefault();
+    
+    var $this = $(this),
+        $icon = $this.find("i"),
+        $itemToAdd = $this.closest("li"),
+        $name = $itemToAdd.find(".name").html(),
+        $company = $itemToAdd.find(".company").html(),        
+        $target = $this.closest(".modal-body").find(".target");
+    
+    $this
+      .addClass("btn-success");    
+    $icon
+      .removeClass("icon-chevron-right")
+      .addClass("icon-ok")
+      .addClass("icon-white");
+    $target
+      .prepend('<li class="new-item"><div class="row-fluid"><div class="span6"><span class="company">' + $company + '</span><span class="name">'+ $name +'</span></div><div class="span3"><span class="label">No relationship</span></div><div class="span3 actions"><a href="#" class="btn btn-mini pull-right"><i class="icon-minus-sign"></i></a><a href="#" class="btn btn-mini pull-right"><i class="icon-pencil"></i></a></div></div><div class="row-fluid additional"><div class="span6"><label>Relationship <strong>PENDING</strong></label><select class="span12"><option>No relationship</option><option>Is Accountable</option><option>Is Responsible</option></select></div><div class="span3"><label>Start Date</label><input class="span12" type="text" placeholder="MM/DD/YYYY"></div><div class="span3"><label>Stop Date</label><input class="span12" type="text" placeholder="MM/DD/YYYY"></div></div></li>')
+      .find("li.new-item").hide().fadeIn('slow').removeClass("new-item");
   });
 
   // show filters in modals

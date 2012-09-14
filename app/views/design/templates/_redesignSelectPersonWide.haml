@@ -16,24 +16,22 @@
       .row-fluid
         .span6
           .btn-group.pull-right
-            %a#showFilters.btn.btn-primary.btn-mini.new{:href => "#"}
-              %i.icon-search.icon-white
-              Filters
             %a.btn.btn-primary.btn-mini.new{:href => "#"}
               %i.icon-user.icon-white              
               + New Person
           %h4 Add people
           .filter-block
           
-            .row-fluid.filter-group
-              .span12
-                .input-append.pull-right.search-list
-                  %input{:type => "text", :placeholder => "Type your keywords here..."}
-                  %button.btn{:type => "submit"} Search      
             .row-fluid
-              .span12              
+              .span12
+
+                .modal-search.clearfix              
+                  %a#showFilters.btn.btn-primary.btn-mini{:href => "#"}
+                    Show Filters
+                  .pull-right
+                    %input{:type => "text", :placeholder => "Search GRC Directory"}
+                            
                 .tabbable.tabs-left
-                
                   %ul.nav.nav-tabs.filter-group
                     %li{:class => "active"}
                       %a{:href => "#category1", :"data-toggle" => "tab" } Category 1
@@ -49,89 +47,236 @@
                 
                     #category1.tab-pane.active
                       .people-list
-                        %ul
+                        %ul.source
+                          %li
+                            .row-fluid
+                              .span6
+                                %span.company Facebook
+                                %span.name Another One
+                              .span6.actions                
+                                %a.btn.btn-mini.pull-right.add-me{:href => "#"}
+                                  %i.icon-chevron-right
+                                %a.btn.btn-mini.pull-right{:href => "#"}
+                                  %i.icon-pencil
                           %li
                             .row-fluid
                               .span6
                                 %span.company Google
                                 %span.name David Buick
                               .span6.actions                
-                                %a.btn.btn-primary.btn-mini.pull-right{:href => "#"}
-                                  %i.icon-chevron-right.icon-white 
+                                %a.btn.btn-mini.pull-right.add-me{:href => "#"}
+                                  %i.icon-chevron-right 
                                 %a.btn.btn-mini.pull-right{:href => "#"}
                                   %i.icon-pencil
-
                           %li
                             .row-fluid
                               .span6
                                 %span.company Google
                                 %span.name Niki Lauda
                               .span6.actions                
-                                %a.btn.btn-primary.btn-mini.pull-right{:href => "#"}
-                                  %i.icon-chevron-right.icon-white 
+                                %a.btn.btn-mini.pull-right.add-me{:href => "#"}
+                                  %i.icon-chevron-right
                                 %a.btn.btn-mini.pull-right{:href => "#"}
                                   %i.icon-pencil
-
                           %li
                             .row-fluid
                               .span6
                                 %span.company Google
                                 %span.name Daniel Harms
                               .span6.actions                
-                                %a.btn.btn-primary.btn-mini.pull-right{:href => "#"}
-                                  %i.icon-chevron-right.icon-white 
+                                %a.btn.btn-mini.pull-right.add-me{:href => "#"}
+                                  %i.icon-chevron-right
                                 %a.btn.btn-mini.pull-right{:href => "#"}
                                   %i.icon-pencil
-
                           %li
                             .row-fluid
                               .span6
                                 %span.company Google
                                 %span.name David Buick
                               .span6.actions                
-                                %a.btn.btn-primary.btn-mini.pull-right{:href => "#"}
-                                  %i.icon-chevron-right.icon-white 
+                                %a.btn.btn-mini.pull-right.add-me{:href => "#"}
+                                  %i.icon-chevron-right 
                                 %a.btn.btn-mini.pull-right{:href => "#"}
                                   %i.icon-pencil
 
-                          %li
-                            .row-fluid
-                              .span6
-                                %span.company Google
-                                %span.name Niki Lauda
-                              .span6.actions                
-                                %a.btn.btn-primary.btn-mini.pull-right{:href => "#"}
-                                  %i.icon-chevron-right.icon-white 
-                                %a.btn.btn-mini.pull-right{:href => "#"}
-                                  %i.icon-pencil
-
-                          %li
-                            .row-fluid
-                              .span6
-                                %span.company Google
-                                %span.name Daniel Harms
-                              .span6.actions                
-                                %a.btn.btn-primary.btn-mini.pull-right{:href => "#"}
-                                  %i.icon-chevron-right.icon-white 
-                                %a.btn.btn-mini.pull-right{:href => "#"}
-                                  %i.icon-pencil
                     #category2.tab-pane
-                      Tab 2
+
+                      .people-list
+                        %ul.source
+                          %li
+                            .row-fluid
+                              .span6
+                                %span.company Motorola
+                                %span.name Moto Rola
+                              .span6.actions                
+                                %a.btn.btn-mini.pull-right.add-me{:href => "#"}
+                                  %i.icon-chevron-right
+                                %a.btn.btn-mini.pull-right{:href => "#"}
+                                  %i.icon-pencil
+                          %li
+                            .row-fluid
+                              .span6
+                                %span.company Google
+                                %span.name David Buick
+                              .span6.actions                
+                                %a.btn.btn-mini.pull-right.add-me{:href => "#"}
+                                  %i.icon-chevron-right 
+                                %a.btn.btn-mini.pull-right{:href => "#"}
+                                  %i.icon-pencil
+                          %li
+                            .row-fluid
+                              .span6
+                                %span.company Google
+                                %span.name Niki Lauda
+                              .span6.actions                
+                                %a.btn.btn-mini.pull-right.add-me{:href => "#"}
+                                  %i.icon-chevron-right 
+                                %a.btn.btn-mini.pull-right{:href => "#"}
+                                  %i.icon-pencil
+                          %li
+                            .row-fluid
+                              .span6
+                                %span.company Google
+                                %span.name Daniel Harms
+                              .span6.actions                
+                                %a.btn.btn-mini.pull-right.add-me{:href => "#"}
+                                  %i.icon-chevron-right 
+                                %a.btn.btn-mini.pull-right{:href => "#"}
+                                  %i.icon-pencil
+                          %li
+                            .row-fluid
+                              .span6
+                                %span.company Google
+                                %span.name David Buick
+                              .span6.actions                
+                                %a.btn.btn-mini.pull-right.add-me{:href => "#"}
+                                  %i.icon-chevron-right 
+                                %a.btn.btn-mini.pull-right{:href => "#"}
+                                  %i.icon-pencil
+
+
                     #category3.tab-pane
-                      Tab 3
+
+                      .people-list
+                        %ul.source
+                          %li
+                            .row-fluid
+                              .span6
+                                %span.company Facebook
+                                %span.name Rad Ian
+                              .span6.actions                
+                                %a.btn.btn-mini.pull-right.add-me{:href => "#"}
+                                  %i.icon-chevron-right 
+                                %a.btn.btn-mini.pull-right{:href => "#"}
+                                  %i.icon-pencil
+                          %li
+                            .row-fluid
+                              .span6
+                                %span.company Google
+                                %span.name Brain Storm
+                              .span6.actions                
+                                %a.btn.btn-mini.pull-right.add-me{:href => "#"}
+                                  %i.icon-chevron-right 
+                                %a.btn.btn-mini.pull-right{:href => "#"}
+                                  %i.icon-pencil
+                          %li
+                            .row-fluid
+                              .span6
+                                %span.company Google
+                                %span.name Niki Lauda
+                              .span6.actions                
+                                %a.btn.btn-mini.pull-right.add-me{:href => "#"}
+                                  %i.icon-chevron-right 
+                                %a.btn.btn-mini.pull-right{:href => "#"}
+                                  %i.icon-pencil
+                          %li
+                            .row-fluid
+                              .span6
+                                %span.company Google
+                                %span.name Daniel Harms
+                              .span6.actions                
+                                %a.btn.btn-mini.pull-right.add-me{:href => "#"}
+                                  %i.icon-chevron-right 
+                                %a.btn.btn-mini.pull-right{:href => "#"}
+                                  %i.icon-pencil
+                          %li
+                            .row-fluid
+                              .span6
+                                %span.company Google
+                                %span.name David Buick
+                              .span6.actions                
+                                %a.btn.btn-mini.pull-right.add-me{:href => "#"}
+                                  %i.icon-chevron-right 
+                                %a.btn.btn-mini.pull-right{:href => "#"}
+                                  %i.icon-pencil
+
+
                     #category4.tab-pane
-                      Tab 4
+
+                      .people-list
+                        %ul.source
+                          %li
+                            .row-fluid
+                              .span6
+                                %span.company Nook
+                                %span.name Githubian Rose
+                              .span6.actions                
+                                %a.btn.btn-mini.pull-right.add-me{:href => "#"}
+                                  %i.icon-chevron-right 
+                                %a.btn.btn-mini.pull-right{:href => "#"}
+                                  %i.icon-pencil
+                          %li
+                            .row-fluid
+                              .span6
+                                %span.company Google
+                                %span.name Suzy Q
+                              .span6.actions                
+                                %a.btn.btn-mini.pull-right.add-me{:href => "#"}
+                                  %i.icon-chevron-right 
+                                %a.btn.btn-mini.pull-right{:href => "#"}
+                                  %i.icon-pencil
+                          %li
+                            .row-fluid
+                              .span6
+                                %span.company Google
+                                %span.name Niki Lauda
+                              .span6.actions                
+                                %a.btn.btn-mini.pull-right.add-me{:href => "#"}
+                                  %i.icon-chevron-right
+                                %a.btn.btn-mini.pull-right{:href => "#"}
+                                  %i.icon-pencil
+                          %li
+                            .row-fluid
+                              .span6
+                                %span.company Google
+                                %span.name Daniel Harms
+                              .span6.actions                
+                                %a.btn.btn-mini.pull-right.add-me{:href => "#"}
+                                  %i.icon-chevron-right 
+                                %a.btn.btn-mini.pull-right{:href => "#"}
+                                  %i.icon-pencil
+                          %li
+                            .row-fluid
+                              .span6
+                                %span.company Google
+                                %span.name David Buick
+                              .span6.actions                
+                                %a.btn.btn-mini.pull-right.add-me{:href => "#"}
+                                  %i.icon-chevron-right 
+                                %a.btn.btn-mini.pull-right{:href => "#"}
+                                  %i.icon-pencil
+
 
 
         .span6
           %h4 Roles for this system
           .people-list
-            %ul
+            %ul.target
               %li
                 .row-fluid
                   .span6
-                    %span.name Joss Rayburn
                     %span.company Google
+                    %span.name Joss Rayburn
                   .span3
                     %span.label.label-warning Responsible
                   .span3.actions                
@@ -157,8 +302,8 @@
                 %li
                   .row-fluid
                     .span6
-                      %span.name Mr. Cool
                       %span.company Google
+                      %span.name Mr. Cool
                     .span3
                       %span.label No relationship
                     .span3.actions                
@@ -183,8 +328,8 @@
                 %li
                   .row-fluid
                     .span6
-                      %span.company Google
                       %span.name Daniel K. Amassy
+                      %span.company Google
                     .span3
                       %span.label.label-success Responsible
                     .span3.actions                
