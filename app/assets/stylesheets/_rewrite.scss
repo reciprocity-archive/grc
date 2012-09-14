@@ -31,9 +31,14 @@
   padding-left: 10px;
   }
 
-/* line 59, ../../../../.rvm/gems/ruby-1.9.3-p194@cms/gems/bootstrap-sass-2.0.4.2/vendor/assets/stylesheets/bootstrap/_forms.scss */
+/* line 59, _forms.scss */
 select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"],
 input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"],
 input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
   margin-bottom: 2px !important;
+}
+
+/* line 5, alerts.scss */
+.alert {
+  margin-bottom: 5px;
 }
