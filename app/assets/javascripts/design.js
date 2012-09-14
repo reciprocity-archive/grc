@@ -46,12 +46,9 @@ jQuery(function ($) {
   renderExternalTmpl({ name: 'mappedcontrols', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'mappedcontrolsfull', selector: '#templates', data: {} });
   
-  renderExternalTmpl({ name: 'newprogram', selector: '#templates', data: {} });
   // new modals START
   renderExternalTmpl({ name: 'redesignNewProgram', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'redesignSelectPersonWide', selector: '#templates', data: {} });
-  renderExternalTmpl({ name: 'redesignNewProgramWide', selector: '#templates', data: {} });
-  renderExternalTmpl({ name: 'redesignNewProgramWide2', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'redesignNewControlWide', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'redesignNewSectionWide', selector: '#templates', data: {} });
 

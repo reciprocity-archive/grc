@@ -1,13 +1,4 @@
-.gcmsicon-questionmark-grey {
-  background-image: url("../images/icons/icon-questmark-grey.png");
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  margin:0;
-  padding:0;
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
-}
+
 
 .gcmsicon-expandAll-grey {
   background-image: url("../images/expandAll.png");
@@ -103,16 +94,6 @@
   background-repeat: no-repeat;
 }
 
-.gcmsicon-questionmark-grey {
-  background-image: url("../images/icons/icon-questmark-grey.png");
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  margin:0;
-  padding:0;
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
-}
 
 .gcmsicon-enlarge-grey {
   background-image: url("../images/icons/icon-enlarge-grey.png");
@@ -125,16 +106,6 @@
   background-repeat: no-repeat;
 }
 
-.gcmsicon-x-grey {
-  background-image: url("../images/icons/icon-x-grey.png");
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  margin:0;
-  padding:0;
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
-}
 .gcmsicon-edit-grey {
   background-image: url("../images/icons/icon-edit-grey.png");
   display: inline-block;
@@ -321,13 +292,54 @@
   background-image: url("../images/icons/icon-back-black.png");
 }
 
+
 [class^="gcmsicon-"], [class*=" gcmsicon-"] {
   display: inline-block;
-  width: 18px;
-  height: 18px;
-  line-height: 18px;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
   vertical-align: top;
   margin:0px 2px 0px 2px;
   background-position: 0px 0px;
   background-repeat: no-repeat;
+}
+
+.gcmsicon-x-grey {
+  background-image: url("../images/icons/icon-x-grey.png");
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-position: 0px 0px;
+  background-repeat: no-repeat;
+}
+
+.gcmsicon-questionmark-grey {
+  background-image: url("../images/icons/icon-questmark-grey.png");
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-position: 0px 0px;
+  background-repeat: no-repeat;
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+ only screen and (-o-min-device-pixel-ratio: 3/2),
+ only screen and (min--moz-device-pixel-ratio: 1.5),
+     only screen and (min-device-pixel-ratio: 1.5) {
+       .gcmsicon-x-grey {
+          background-image:url("../images/icons/icon-x-grey@2X.png");
+            -moz-background-size:16px 16px;
+             -ie-background-size:16px 16px;
+              -o-background-size:16px 16px;
+         -webkit-background-size:16px 16px;
+                 background-size:16px 16px;
+        }
+        .gcmsicon-questionmark-grey {
+          background-image:url("../images/icons/icon-questionmark-grey@2X.png");
+            -moz-background-size:16px 16px;
+             -ie-background-size:16px 16px;
+              -o-background-size:16px 16px;
+         -webkit-background-size:16px 16px;
+                 background-size:16px 16px;
+        }
 }
