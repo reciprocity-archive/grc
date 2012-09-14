@@ -54,7 +54,10 @@
                 $('#datepicker-control-stopdate').datepicker();
               %label Kind 
               %select.span12
-                %option Not Applicable
+                %option Reactive
+                %option Administrative
+                %option Detective
+                %option Preventative
       .row-fluid
         .span6
           %label Direct Link
@@ -71,14 +74,16 @@
             .span6
               %label Verify Control
               %select.span12
-                %option Evidence
-                %option Manual with Segregation of Duties
-                %option Automated
+                %option Continuous
+                %option Ad-hoc
+                %option - 
+                %option Monthly
+                %option Quarterly
+                %option Annually
       .row-fluid
-        .span6.scope      
+        .span6      
           %label.subtitle 
             Evidence Instructions
-            %a.fltrt.underline{"data-toggle" => "modal", :href => "#comingsoonModal"} Verify Control
           .row-fluid
             %textarea.span12.double{:placeholder => "Enter in a description that a system owner would follow to collect evidence for this control.", :rows => "3"}
             %span.help-inline &nbsp;

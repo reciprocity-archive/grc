@@ -51,14 +51,16 @@
               %select.span12
                 %option Not Applicable
       .row-fluid
-        .span6
+        .span3
+          %label Organization
+          %input.span12{:type => "text", :placeholder => "Organization for this program"}
+          %span.help-inline &nbsp;
+        .span3
           %label Direct Link
           %input.span12{:type => "text", :placeholder => "http://www.examplelink.com/"}
           %span.help-inline &nbsp;
+        
         .span6
-          %label Organization
-          %input.span12{:type => "text", :placeholder => "Responsible organization for this program"}
-          %span.help-inline &nbsp;
       .row-fluid
         .span6.scope      
           %label.subtitle 
