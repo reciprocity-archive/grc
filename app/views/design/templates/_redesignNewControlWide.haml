@@ -60,6 +60,9 @@
           %label Direct Link
           %input.span12{:type => "text", :placeholder => "http://www.examplelink.com/"}
           %span.help-inline &nbsp;
+          %label Evidence Instructions
+          %textarea.span12.double{:placeholder => "Enter in a description that a system owner would follow to collect evidence for this control.", :rows => "3"}
+          %span.help-inline &nbsp;
         .span6
           .row-fluid 
             .span6
@@ -69,6 +72,11 @@
                 %option Manual with Segregation of Duties
                 %option Automated
             .span6
+              %label Verify Control
+              %select.span12
+                %option Evidence
+                %option Manual with Segregation of Duties
+                %option Automated
           
 
 
