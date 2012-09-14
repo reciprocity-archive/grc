@@ -120,7 +120,7 @@
       
       .progress {
         margin-top:2px;
-        width:200px;
+        width:100px;
         .bar {
           float:left;
         }
@@ -149,11 +149,67 @@
         height:30px;
         h3 {
           font-size:16px;
+          
+          .code {
+            display:block;
+            float:left;
+            color:$darkGray;
+            padding-left:6px;
+            width:80px;
+          }
+
+          .title {
+            display:block;
+            float:left;
+            font-weight:normal;
+            color:$black;
+            padding-right:10px;
+            width:260px;
+            overflow:hidden;
+          }
+
+          .owner {
+            display:block;
+            float:left;
+            font-weight:normal;
+            font-size:12px;
+            line-height:30px;
+          }
+
+          
         }
+        &.main-title {
+          h3 {
+            font-size:18px;
+            padding-left:37px;
+          }
+        }
+        &.is-product{
+          background:$bgndProduct;
+          border-bottom:1px solid darken($bgndProduct,10%);
+          .btn, input {
+            border:1px solid $white;
+          }
+        }
+        &.is-system{
+          background:$bgndSystem;
+          border-bottom:1px solid darken($bgndSystem,10%);
+          .btn, input {
+            border:1px solid $white;
+          }
+        }
+        &.is-control{
+          background:$bgndControl;
+          border-bottom:1px solid darken($bgndControl,10%);
+          .btn, input {
+            border:1px solid $white;
+          }
+        }
+
       }
       .wlist-body {
         border-top:$widgetInnerBorder;
-        padding:4px;
+        padding:4px 4px 4px 4px;
       }
     }
         

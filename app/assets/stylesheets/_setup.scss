@@ -28,12 +28,16 @@ $black: #000;
   // changes should be made only here
 
   $widgetBorder:1px solid $lightGray;
-  $widgetInnerBorder: 1px solid $lightGray;
+  $widgetInnerBorder: 1px solid $lightestGray;
   $bgndWidget: $white;
   $bgndDefault: $mediumGray;
   $bgndGovernance: #0a57bf;
   $bgndRisk: #d34827;
   $bgndCompliance: #008d00;
+
+  $bgndProduct: #e6e0f6;
+  $bgndSystem: #d5eff3;
+  $bgndControl: #f4e4e0;
 
 // SASS mixins
 
