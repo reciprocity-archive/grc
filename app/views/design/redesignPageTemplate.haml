@@ -14,7 +14,7 @@
 .row-fluid.fluid-layout
 
   .span8
-    .widget
+    .widget.governance
       .widget-head
         .widget-actions      
           %a.btn.btn-mini{:href => "#"}
@@ -29,7 +29,7 @@
         
         %ul.wlist
           %li
-            .wlist-title
+            .wlist-title              
               %a.btn.btn-mini.pull-left.list-trigger.active
                 %i.icon-chevron-down
               %h3
@@ -39,25 +39,33 @@
               %ul.wlist
                 %li
                   .wlist-title
-                    %a.btn.btn-mini.pull-left.list-trigger
-                      %i.icon-chevron-right
+                    .widget-actions      
+                      %a.btn.btn-mini.btn-warning{:href => "#"}
+                        %i.icon-eye-open.icon-white
+                        Data Integrity Review
+                    %a.btn.btn-mini.pull-left.list-trigger.active
+                      %i.icon-chevron-down
                     %h3
-                      %span.code Proc-41
-                      Product Policies Annual Review
-                  .wlist-body.hide
+                      %span.code Con-23
+                      Data Retention Policy
+                  .wlist-body
                     %p
                       Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                 %li
                   .wlist-title
-                    %a.btn.btn-mini.pull-left.list-trigger
-                      %i.icon-chevron-right
+                    %a.btn.btn-mini.pull-left.list-trigger.active
+                      %i.icon-chevron-down
                     %h3
                       %span.code Proc-41
                       Product Policies Annual Review
-                  .wlist-body.hide
+                  .wlist-body
                     %ul.wlist
                       %li
                         .wlist-title
+                          .widget-actions      
+                            %a.btn.btn-mini.btn-success{:href => "#"}
+                              %i.icon-eye-open.icon-white
+                              Annual Contracts Review
                           %a.btn.btn-mini.pull-left.list-trigger.active
                             %i.icon-chevron-down
                           %h3
@@ -68,8 +76,15 @@
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                       %li
                         .wlist-title
+                          .widget-actions
+                            .progress
+                              .bar.bar-success{:style => "width:50%"}
+                              .bar.bar-warning{:style => "width:15%"}                            
+                              .bar.bar-danger{:style => "width:35%"}
+                            
                           %a.btn.btn-mini.pull-left.list-trigger.active
                             %i.icon-chevron-down
+
                           %h3
                             %span.code Proc-41
                             Product Policies Annual Review
@@ -93,7 +108,7 @@
   .span4
     .sidebar
 
-      .widget
+      .widget.risk
         .widget-head
           .widget-actions
             %a.btn.btn-mini{:href => "#"}
@@ -105,7 +120,7 @@
         .widget-body
           %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
-      .widget
+      .widget.compliance
         .widget-head
           .widget-actions
             %a.btn.btn-mini{:href => "#"}
@@ -117,7 +132,7 @@
         .widget-body
           %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
-      .widget
+      .widget.risk
         .widget-head
           %a.btn.btn-mini.pull-left.widget-trigger.active
             %i.icon-chevron-down

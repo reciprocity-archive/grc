@@ -38,20 +38,23 @@
 .fluid-layout {
 
   .widget {
-
     margin-bottom:20px;
-    background:$widgetBgnd;
-    border:$widgetBorder;
-
     @include border-radius();
+    background:$bgndWidget;
+    border:1px solid darken($bgndDefault, 10%);
 
-    .widget-head {
-      
+    .widget-head {    
+
+      background:$bgndDefault;
+      @include background-image(linear-gradient(center top, lighten($bgndDefault, 5%) 5%, darken($bgndDefault, 5%) 100% ));
+
       h2 {
+        text-shadow:0 1px 1px rgba(0,0,0,0.5);
         font-size:18px;
         line-height:30px;
-        font-weight:bold;
+        font-weight:normal;
         margin:0;
+        color:$white;
         padding:0 10px;
       }
       
@@ -61,6 +64,45 @@
         padding-right:2px;
       }
       
+
+      input,
+      .btn {
+        border:1px solid $white;
+      }
+      
+    }
+
+
+    // headers
+    
+    &.governance {
+      border:1px solid darken($bgndGovernance, 10%);
+      .widget-head {
+        background:$bgndGovernance;
+        @include background-image(linear-gradient(center top, lighten($bgndGovernance, 5%) 5%, darken($bgndGovernance, 5%) 100% ));
+      }
+    }
+
+    &.risk {
+      border:1px solid darken($bgndRisk, 10%);
+      .widget-head {
+        background:$bgndRisk;
+        @include background-image(linear-gradient(center top, lighten($bgndRisk, 5%) 5%, darken($bgndRisk, 5%) 100% ));
+      }
+    }
+
+    &.compliance {
+      border:1px solid darken($bgndCompliance, 10%);
+      .widget-head {
+        background:$bgndCompliance;
+        @include background-image(linear-gradient(center top, lighten($bgndCompliance, 5%) 5%, darken($bgndCompliance, 5%) 100% ));
+      }
+    }
+
+    .widget-actions {
+      padding:4px;
+      float:right;
+
       .widget-search {
         margin:0 0 0 4px;
         padding:0;
@@ -70,18 +112,22 @@
         float:right;
       }
       
-      .widget-actions {
-        padding:4px;
-        float:right;
-        
-        .btn {
-          line-height:20px;
-          margin:0 0 0 4px;
-          padding:0 3px;
+      .btn {
+        line-height:20px;
+        margin:0 0 0 4px;
+        padding:0 3px;
+      }
+      
+      .progress {
+        margin-top:2px;
+        width:200px;
+        .bar {
+          float:left;
         }
       }
       
     }
+
 
     .widget-body {
       padding:5px;
@@ -100,6 +146,7 @@
         margin-bottom:4px;
       }
       .wlist-title {
+        height:30px;
         h3 {
           font-size:16px;
         }
@@ -109,8 +156,7 @@
         padding:4px;
       }
     }
-    
-    
+        
   }
 
   .sidebar {
