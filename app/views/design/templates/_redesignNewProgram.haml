@@ -38,28 +38,26 @@
               %input.span12#datepicker-effectivedate.date{:type => "text",  :placeholder => "MM/DD/YYYY"}
               :javascript
                 $('#datepicker-effectivedate').datepicker();
+              %label Type
+              %select.span12
+                %option Regulation
+                %option Company
             .span6
               %label Stop Date    
               %input.span12#datepicker-stopdate.date{:type => "text",  :placeholder => "MM/DD/YYYY"}
               :javascript
                 $('#datepicker-stopdate').datepicker();
-          .row-fluid
-            .span12
-              %label Direct Link
-              %input.span12{:type => "text", :placeholder => "http://www.examplelink.com/"}
+              %label Kind 
+              %select.span12
+                %option Not Applicable
       .row-fluid
+        .span6
+          %label Direct Link
+          %input.span12{:type => "text", :placeholder => "http://www.examplelink.com/"}
+          %span.help-inline &nbsp;
         .span6
           %label Organization
           %input.span12{:type => "text", :placeholder => "Responsible organization for this program"}
-        .span3
-          %label Type
-          %select.span12
-            %option Regulation
-            %option Company
-        .span3
-          %label Kind 
-          %select.span12
-            %option Not Applicable
           %span.help-inline &nbsp;
       .row-fluid
         .span6.scope      
@@ -72,7 +70,7 @@
               $('#wysihtml5').wysihtml5({
                 "image": false //Button to insert an image. Default true
               });
-        .span6.audit{:style => "height:102px;"}
+        .span6.audit{:style => "height:101px;"}
           %label.subtitle Audit Cycle
           .row-fluid
             .span4

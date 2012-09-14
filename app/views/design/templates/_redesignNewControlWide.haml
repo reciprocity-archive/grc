@@ -15,56 +15,62 @@
     %form
       .row-fluid
         .span4
+          %label Title
+          %input.span12{:type => "text", :placeholder => "Enter title"}
+          %span.help-inline 
+        .span2
           %label Program
           %select.span12
             %option Program Title 1
             %option Program Title 2
             %option Program Title 3
-        .span4
-          %label Control Means
-          %select.span12
-            %option Manual
-            %option Manual with Segregation of Duties
-            %option Automated
-        .span2
-          %label Type
-          %select.span12
-            %option Regulation
-            %option Company
-        .span2
-          %label Kind
-          %select.span12
-            %option Reactive
-            %option Administrative
-            %option Detective
-            %option Preventative
-          
-      .row-fluid
-        .span8
-          %label Title
-          %input.span12{:type => "text", :placeholder => "Enter title"}
-        .span2
-          %label Code
-          %input.span12{:type => "text", :placeholder => "TO 16 CHARACTERS"}
-        .span2
-          %label Version
-          %input.span12{:type => "text", :placeholder => "1.1.1"}
-      .row-fluid
-        .span8
-          %label Description/Note
-          %textarea.span12.double{:placeholder => "Enter note/description here", :rows => "3"}
-        .span4
+        .span6
           .row-fluid
+            .span6
+              %label Code (optional)
+              %input.span12{:type => "text", :placeholder => "Autofill code"}
+            .span6
+              %label Version
+              %input.span12{:type => "text", :placeholder => "1.1.1"}
+      .row-fluid
+        .span6
+          %label Description
+          %textarea.span12.double{:placeholder => "Enter description here", :rows => "3"}
+        .span6
+          .row-fluid 
             .span6
               %label Effective Date
-              %input.span12{:type => "text", :placeholder => "MM/DD/YYYY"}
+              %input.span12#datepicker-effectivedate.date{:type => "text",  :placeholder => "MM/DD/YYYY"}
+              :javascript
+                $('#datepicker-effectivedate').datepicker();
+              %label Type
+              %select.span12
+                %option Regulation
+                %option Company
             .span6
               %label Stop Date    
-              %input.span12{:type => "text", :placeholder => "MM/DD/YYYY"}
-          .row-fluid
-            .span12
-              %label Direct Link
-              %input.span12{:type => "text", :placeholder => "http://www.examplelink.com/"}
+              %input.span12#datepicker-stopdate.date{:type => "text",  :placeholder => "MM/DD/YYYY"}
+              :javascript
+                $('#datepicker-stopdate').datepicker();
+              %label Kind 
+              %select.span12
+                %option Not Applicable
+      .row-fluid
+        .span6
+          %label Direct Link
+          %input.span12{:type => "text", :placeholder => "http://www.examplelink.com/"}
+          %span.help-inline &nbsp;
+        .span6
+          .row-fluid 
+            .span6
+              %label Control Means
+              %select.span12
+                %option Manual
+                %option Manual with Segregation of Duties
+                %option Automated
+            .span6
+          
+
 
       .row-fluid
         .span12
