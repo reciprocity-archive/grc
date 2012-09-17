@@ -92,9 +92,20 @@
                 "image": false //Button to insert an image. Default true
               });
         .span6
-          %label Categories
-          %span.label Access Control &gt; Authorization
-          %span.label Change Management &gt; Segregation of Duties
+          .row-fluid
+            .span6
+              %label Categories
+              %li.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+                .controls-group
+                  .controls-type Authorization
+                  .controls-subtype 
+                  .controls-subgroup Access Control
+              %li.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+                .controls-group
+                  .controls-type Change Management
+                  .controls-subtype 
+                  .controls-subgroup Segregation of Duties
+          %br
           %a.btn.btn-mini.btn-primary +/- Manage Categories
 
   =render :partial => 'design/templates/modalfooter'
