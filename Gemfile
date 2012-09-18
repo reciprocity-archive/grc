@@ -77,6 +77,7 @@ group(:development, :test) do
   gem 'ZenTest'
   gem 'autotest-rails'
   gem 'simplecov', :require => false
+  gem 'capybara'
 
   gem 'factory_girl_rails', "~> 4.0"
 
@@ -113,4 +114,3 @@ group(:development, :test) do
   # gem 'redcarpet'
   gem 'test-unit'
 end
-
