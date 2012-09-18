@@ -1169,11 +1169,16 @@ ul.slugtree {
 
 .expander {
   position:relative;
-  background-image:url("../images/toggle_shrank.png");
+  background-image:url("../images/icons/grcicons/chevronright-blue.png");
   float:left;
   display: inline-block;
-  width:18px;
-  height:18px;
+  -moz-background-size:16px 16px;
+             -ie-background-size:16px 16px;
+              -o-background-size:16px 16px;
+         -webkit-background-size:16px 16px;
+                 background-size:16px 16px;
+  width: 16px;
+  height: 16px;
   padding: 0 0 0 0;
   margin:6px 0 0 0;
   cursor:pointer;
@@ -1206,7 +1211,7 @@ ul.slugtree {
 }
 
 .toggleExpanded {
-    background-image: url("../images/toggle_expanded.png");
+    background-image: url("../images/icons/grcicons/chevronleft-down.png");
 }
 
 /* Form Items */

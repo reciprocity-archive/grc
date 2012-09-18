@@ -7,7 +7,7 @@
         %i.gcmsicon-x-grey
     %h1
       Create New Control
-      %span.version v.0.81
+      %span.version v.0.86
   .modal-body
     .alert.alert-info
       %span#alertMessage
@@ -92,9 +92,12 @@
                 "image": false //Button to insert an image. Default true
               });
         .span6
+          %h3 
+            Categories
+            .fltrt 
+              %a.btn.btn-blue.addbtn.fltrt +/- Manage Categories 
           .row-fluid
             .span6
-              %label Categories
               %li.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
                 .controls-group
                   .controls-type Authorization
@@ -105,7 +108,16 @@
                   .controls-type Change Management
                   .controls-subtype 
                   .controls-subgroup Segregation of Duties
-          %br
-          %a.btn.btn-mini.btn-primary +/- Manage Categories
+            .span6
+              %li.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+                .controls-group
+                  .controls-type Authorization
+                  .controls-subtype 
+                  .controls-subgroup Access Control
+              %li.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+                .controls-group
+                  .controls-type Change Management
+                  .controls-subtype 
+                  .controls-subgroup Segregation of Duties
 
   =render :partial => 'design/templates/modalfooter'

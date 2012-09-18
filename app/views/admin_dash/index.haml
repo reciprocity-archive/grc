@@ -43,11 +43,11 @@
               %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
                 %i.gcmsicon-questionmark-grey
               %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
-              %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#programInProgress"}
+              %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#programsInProgress"}
                 %i.gcmsicon-enlarge-grey
           / /.WidgetBoxHeading
           .WidgetBoxContent
-            #programInProgress.toolbar-widget.in
+            #programsInProgress.toolbar-widget.in
               %ul#quickLinks.nav.nav-tabs.nav-stacked.in
                 %li.group
                   %a.btn{:href => "/design/audit-manager"}
@@ -61,7 +61,6 @@
                 
                 %li.group
                   %a.btn{:href => "/design/audit-setup"}
-                    %i.gcmsicon-asterix-black
                     Audit Setup
                 %li.group
                   %a.btn{:href => "/design/audit-control-review"}
@@ -71,7 +70,6 @@
                     Systems Page
                 %li.group
                   %a.btn{:href => "/design/products"}
-                    %i.gcmsicon-asterix-black
                     Products Page
                 %li.group
                   %a.btn{:href => "/programs"}
@@ -248,27 +246,21 @@
                   New/Edit System
               %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#sendauditorinvite"}
-                  %i.gcmsicon-mapping-black>
                   Send Auditor Invite
               %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#auditdefaultscope"}
-                  %i.gcmsicon-mapping-black>
                   Set Audit Default Scope
               %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#confirmModal"}
-                  %i.gcmsicon-mapping-black>
                   Are You Sure?
               %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#basicnewpersonModal"}
-                  %i.gcmsicon-mapping-black>
                   Basic New Person
               %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#newtransactionModal"}
-                  %i.gcmsicon-mapping-black>
                   New Transaction
               %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#createnewProduct"}
-                  %i.gcmsicon-asterix-black
                   New/Edit Product
               %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#mappedcontrols"}
@@ -280,15 +272,12 @@
                 %h5 In progress
               %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#createnewfacility"}
-                  %i.gcmsicon-newfacility-black
                   New Location/Facility
               %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#newentityModal"}
-                  %i.gcmsicon-organization-black
                   New Entity/Org Group
               %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#createnewthreat"}
-                  %i.gcmsicon-threat-black
                   New Threat/Risk
     .singleColumn
       / in progress
