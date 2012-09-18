@@ -1,0 +1,16 @@
+.modal-info
+  .row-fluid
+    .span9
+      %strong Note
+      %span You need to assign relationship to all people in the list.
+    .span3.status
+      %h5
+        Pending:
+        %span#unassignedElements 3
+
+.modal-footer
+  .row-fluid
+    %nav.fltlft.txtlft.span3
+      %a.btn.btn-large.btn-info{"data-dismiss" => "modal", :href => "#comingsoonModal"} Cancel
+    %nav.fltrt.txtrt.span3
+      %a#actionButton.btn.btn-large.btn-success{:href => "#", :disabled => "disabled"} Save

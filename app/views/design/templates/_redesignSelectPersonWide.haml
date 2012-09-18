@@ -28,11 +28,26 @@
                 .modal-search.clearfix              
                   %a#showFilters.btn.btn-primary.btn-mini{:href => "#"}
                     Show Filters
+                  %a#showCategories.btn.btn-primary.btn-mini{:href => "#"}
+                    Show Categories
+
                   .pull-right
                     %input{:type => "text", :placeholder => "Search GRC Directory"}
+                .additional-filters.filter-group
+                  .row-fluid
+                    .span4
+                      %label Name
+                      %input.span12{:type=>"text", :placeholder => "enter name"}
+                    .span4
+                      %label Org. group
+                      %input.span12{:type=>"text", :placeholder => "example: IT"}
+                    .span4
+                      %label Title
+                      %input.span12{:type=>"text", :placeholder => "example: Compliance"}
+
                             
                 .tabbable.tabs-left
-                  %ul.nav.nav-tabs.filter-group
+                  %ul.nav.nav-tabs.category-group
                     %li{:class => "active"}
                       %a{:href => "#category1", :"data-toggle" => "tab" } GRC Directory
                     %li
@@ -50,7 +65,8 @@
                                 %span.company Facebook | Engineering Compliance
                                 %span.name
                                   Alexander Gustaphson
-                                  %small alexander@gustaphson.com
+                                  %small 
+                                    %a{:href => "mailto:alexander@gustaphson.com"} alexander@gustaphson.com
                               .span4.actions                
                                 %a.btn.btn-mini.pull-right.add-me{:href => "#"}
                                   %i.icon-chevron-right
@@ -165,7 +181,7 @@
                     %span.company Google
                     %span.name Joss Rayburn
                   .span3
-                    %span.label.label-warning.popover-trigger Responsible
+                    %span.label.label-danger No relationship
                   .span3.actions                
                     %a.btn.btn-mini.pull-right{:href => "#"}
                       %i.icon-minus-sign
@@ -177,9 +193,9 @@
                       Relationship
                       %strong PENDING
                     %select.span12
-                      %option no relationship
+                      %option{:selected => "selected"} no relationship
                       %option Is Accountable for
-                      %option{:selected => "selected"} Is Responsible for
+                      %option Is Responsible for
                   .span3
                     %label Start Date
                     %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
@@ -192,7 +208,7 @@
                       %span.company Google
                       %span.name Mr. Cool
                     .span3
-                      %span.label.label-warning No relationship
+                      %span.label.label-danger No relationship
                     .span3.actions                
                       %a.btn.btn-mini.pull-right{:href => "#"}
                         %i.icon-minus-sign
@@ -272,7 +288,7 @@
                         %span.company Google
                         %span.name Jeffrey Nyarr
                       .span3
-                        %span.label.label-warning Accountable
+                        %span.label.label-success Accountable
                       .span3.actions                
                         %a.btn.btn-mini.pull-right{:href => "#"}
                           %i.icon-minus-sign
@@ -353,7 +369,7 @@
                           %span.company Google
                           %span.name Jeffrey Nyarr
                         .span3
-                          %span.label.label-warning Accountable
+                          %span.label.label-success Accountable
                         .span3.actions                
                           %a.btn.btn-mini.pull-right{:href => "#"}
                             %i.icon-minus-sign
@@ -375,4 +391,4 @@
                           %label Stop Date
                           %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
 
-  =render :partial => 'design/templates/modalfooter'
+  =render :partial => 'design/templates/modalfooterlists'
