@@ -59,8 +59,7 @@ ActiveRecord::Base.transaction do
   ctl = Control.
     where(:slug => 'REG1-CTL1').
     first_or_create!(
-      {:title => 'Control 1', :description => 'x', :program => prog2,
-      :is_key => true, :fraud_related => false},
+      {:title => 'Control 1', :description => 'x', :program => prog2},
       :without_protection => true)
   (2..SIZE).each do |ind|
     Control.
@@ -151,4 +150,3 @@ ActiveRecord::Base.transaction do
     end
   end
 end
-

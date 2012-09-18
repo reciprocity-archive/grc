@@ -11,7 +11,7 @@ describe Control do
   before :each do
     create_base_objects
     @account = FactoryGirl.create(:account, :email => "a@b.org", :password => "xxxx", :password_confirmation => "xxxx", :role => "admin")
-    @ctl2 = FactoryGirl.create(:control, :title => 'Control 2', :slug => 'REG1-CTL2', :description => 'x', :program => @reg, :is_key => true, :fraud_related => false)
+    @ctl2 = FactoryGirl.create(:control, :title => 'Control 2', :slug => 'REG1-CTL2', :description => 'x', :program => @reg)
   end
 
   it "was not modified by anybody in particular" do
