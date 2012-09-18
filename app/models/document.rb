@@ -1,13 +1,11 @@
 # A Document
 #
 # Can either be linked by a URL or attached from Google Docs.
-#
-# Evidence is associated with a Document Descriptor
 class Document < ActiveRecord::Base
   include AuthoredModel
   VALID_SCHEMES = ['http', 'https']
 
-  attr_accessible :link, :title, :document_descriptor, :good, :reviewed
+  attr_accessible :link, :title
 
   validate :link do
     begin
@@ -27,8 +25,6 @@ class Document < ActiveRecord::Base
   validates :title, :presence => true
 
   has_many :object_documents, :dependent => :destroy
-
-  belongs_to :document_descriptor
 
   is_versioned_ext
 
@@ -56,9 +52,5 @@ class Document < ActiveRecord::Base
 
   def complete?
     !link.nil? && !link.to_s.blank?
-  end
-
-  def descriptor
-    (document_descriptor && document_descriptor.title) || ''
   end
 end

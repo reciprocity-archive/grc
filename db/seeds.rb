@@ -97,11 +97,6 @@ ActiveRecord::Base.transaction do
     where(:control_id => ctl, :system_id => sys, :cycle_id => cycle).
     first_or_create!({}, :without_protection => true)
 
-  # DocumentDescriptor deprecated?
-  #desc = DocumentDescriptor.where(:title => 'ACL').first_or_create!
-  #company_ctl.evidence_descriptors << desc
-  #company_ctl.save
-
   doc = Document.
     where(:link => 'http://doc1.com/', :title => 'Doc 1').
     first_or_create!
@@ -114,9 +109,6 @@ ActiveRecord::Base.transaction do
   bp.system_sections.first_or_create!(:section => co)
   bp.object_people.first_or_create!(
     {:person => person1, :role => 'owner'}, :without_protection => true)
-
-  # BusinessArea deprecated?
-  #biz_area = BusinessArea.where(:title => 'title1').first_or_create!
 
   # Categories
 

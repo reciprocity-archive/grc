@@ -158,15 +158,10 @@ FactoryGirl.define do
     end
   end
 
-  factory :biz_process
-  factory :biz_process_person
-  factory :business_area
   factory :control_section
   factory :control_control
   factory :cycle
   factory :document
-  factory :document_descriptor
   factory :system
   factory :system_control
-  factory :system_person
 end

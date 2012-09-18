@@ -48,14 +48,6 @@ describe Control do
     Version.where(:item_type => "Control", :item_id => @ctl2.id)[1].reify.is_destroyed.should be_true
   end
 
-  it "is associated with descriptor" do
-    @ctl.evidence_descriptors.size.should eq(0)
-    @ctl.evidence_descriptors << @desc
-    @ctl.save
-    @ctl.reload
-    @ctl.evidence_descriptors.size.should eq(1)
-  end
-
   it "versions relationships" do
     pending
     @ctl.authored_update(@account, :evidence_descriptor_ids => [@desc.id])
@@ -67,7 +59,6 @@ describe Control do
     @ctl.authored_update(@account, :evidence_descriptor_ids => [])
     @ctl.reload
 
-    debugger
     # Two versions - one with pre-destroy values, and one with timestamps set
     Version.where(:item_type => "ControlDocumentDescriptor").size.should eq(3)
     #ControlDocumentDescriptor::Version.all.size.should eq(3)
