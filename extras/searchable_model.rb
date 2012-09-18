@@ -4,10 +4,15 @@ module SearchableModel
   end
 
   module ClassMethods
-    def search(q)
-      q = "%#{q}%"
-      t = arel_table
-      where(t[:title].matches(q).or(t[:slug].matches(q)))
+    def fulltext_search(q)
+      if CMS_CONFIG["FULLTEXT"] == "1"
+        ids = search_for_ids(q).to_a
+        where(:id => ids)
+      else
+        t = arel_table
+        q = "%#{q}%"
+        where(t[:title].matches(q).or(t[:slug].matches(q)))
+      end
     end
   end
 end

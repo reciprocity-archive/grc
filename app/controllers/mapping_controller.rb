@@ -162,7 +162,7 @@ class MappingController < ApplicationController
     sections = @program.sections.with_controls
 
     unless @search.blank?
-      sections = sections.search(@search)
+      sections = sections.fulltext_search(@search)
       @ttl = 120 # cache searches for less time so as not to fill up the cache
     end
 
@@ -186,7 +186,7 @@ class MappingController < ApplicationController
     end
 
     unless @search.blank?
-      controls = controls.search(@search)
+      controls = controls.fulltext_search(@search)
       @ttl = 120 # cache searches for less time so as not to fill up the cache
     end
 

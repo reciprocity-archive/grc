@@ -23,6 +23,13 @@ class Section < ActiveRecord::Base
     validate_slug
   end
 
+  define_index do
+    indexes :slug, :sortable => true
+    indexes :title
+    indexes :description
+    has :created_at, :updated_at, :program_id
+  end
+
   has_many :controls, :through => :control_sections
   has_many :control_sections
   belongs_to :program

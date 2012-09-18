@@ -1,6 +1,6 @@
 require 'slugged_model'
 
-# A company control
+# A company / regulation control
 #
 class Control < ActiveRecord::Base
   include AuthoredModel
@@ -22,6 +22,13 @@ class Control < ActiveRecord::Base
 
   validate :slug do
     validate_slug
+  end
+
+  define_index do
+    indexes :slug, :sortable => true
+    indexes :title
+    indexes :description
+    has :created_at, :updated_at, :program_id
   end
 
   belongs_to :program
