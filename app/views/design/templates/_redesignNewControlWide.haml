@@ -95,26 +95,37 @@
           %h3 
             Categories
             .fltrt 
-              %a.btn.btn-blue.addbtn.fltrt +/- Manage Categories 
+              %a.btn.btn-blue.addbtn.fltrt Edit Categories 
           .row-fluid
-            .span6
-              %li.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+            .span4
+              %li.slot.categorySlot.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
                 .controls-group
                   .controls-type Authorization
                   .controls-subtype 
                   .controls-subgroup Access Control
-              %li.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+              %li.slot.categorySlot.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
                 .controls-group
                   .controls-type Change Management
                   .controls-subtype 
                   .controls-subgroup Segregation of Duties
-            .span6
-              %li.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+            .span4
+              %li.slot.categorySlot.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
                 .controls-group
                   .controls-type Authorization
                   .controls-subtype 
                   .controls-subgroup Access Control
-              %li.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+              %li.slot.categorySlot.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+                .controls-group
+                  .controls-type Change Management
+                  .controls-subtype 
+                  .controls-subgroup Segregation of Duties
+            .span4
+              %li.slot.categorySlot.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+                .controls-group
+                  .controls-type Authorization
+                  .controls-subtype 
+                  .controls-subgroup Access Control
+              %li.slot.categorySlot.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
                 .controls-group
                   .controls-type Change Management
                   .controls-subtype 

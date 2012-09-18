@@ -437,6 +437,24 @@ width: 97px;
       @include background-image(linear-gradient(top,  #eeeeee 0%, #f1f1f1 50%, #e1e1e1 100%, #f6f6f6 100%));
     }  
   }
+  &.categorySlot {
+    @include opacity(.7);
+    background-color: #b4e9eb; // Old browsers
+    @include filter-gradient(#b4e9eb, #b4e9eb, vertical); // IE6-9
+    @include background-image(linear-gradient(top,  #b4e9eb 0%,#b4e9eb 100%));
+    @include border-radius(4px);
+    border: 1px solid $borderDefaultHover;
+    margin: 2px 2px 2px 2px;
+    .controls-subgroup {
+      color: black;
+      font-size: 12px;
+      line-height: 12px;
+      margin-bottom:4px;
+    }
+    &:hover {
+      @include opacity(1.0);
+    } 
+  }
   &.selected {
     color:$white;
     background: #43C2C7;
