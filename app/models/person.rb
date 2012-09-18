@@ -18,7 +18,7 @@ class Person < ActiveRecord::Base
     email
   end
 
-  def self.search(q)
+  def self.db_search(q)
     q = "%#{q}%"
     t = arel_table
     where(t[:name].matches(q).

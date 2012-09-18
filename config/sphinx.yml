@@ -1,6 +1,5 @@
 <%
-sphinx_server = SearchableModel.sphinx_servers.sample
-raise 'missing sphinx server' unless sphinx_server
+sphinx_server = SearchableModel.sphinx_servers.sample || {:host => 'localhost', :port => 9312}
 %>
 
 staging:

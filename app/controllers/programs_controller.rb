@@ -106,7 +106,7 @@ class ProgramsController < ApplicationController
   def sections
     @sections = @program.sections.includes(:controls => :implementing_controls)
     if params[:s]
-      @sections = @sections.search(params[:s])
+      @sections = @sections.fulltext_search(params[:s])
     end
     @sections = allowed_objs(@sections.all.sort_by(&:slug_split_for_sort), :read)
     render :layout => nil, :locals => { :sections => @sections }
@@ -115,7 +115,7 @@ class ProgramsController < ApplicationController
   def controls
     @controls = @program.controls.includes(:implementing_controls)
     if params[:s]
-      @controls = @controls.search(params[:s])
+      @controls = @controls.fulltext_search(params[:s])
     end
     @controls = allowed_objs(@controls.all.sort_by(&:slug_split_for_sort), :read)
     render :layout => nil, :locals => { :controls => @controls }
@@ -135,7 +135,7 @@ class ProgramsController < ApplicationController
   def control_sections
     @controls = @program.controls.includes(:sections)
     if params[:s]
-      @controls = @controls.search(params[:s])
+      @controls = @controls.fulltext_search(params[:s])
     end
     @controls = allowed_objs(@controls.all.sort_by(&:slug_split_for_sort), :read)
     render :layout => nil, :locals => { :controls => @controls }

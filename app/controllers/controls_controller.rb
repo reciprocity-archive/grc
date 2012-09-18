@@ -108,7 +108,7 @@ class ControlsController < ApplicationController
   def implemented_controls
     @controls = @control.implemented_controls
     if params[:s]
-      @controls = @controls.search(params[:s])
+      @controls = @controls.fulltext_search(params[:s])
     end
     @controls.all.sort_by(&:slug_split_for_sort)
     render :action => 'controls', :layout => nil, :locals => { :controls => @controls, :prefix => 'Parent of' }
@@ -117,7 +117,7 @@ class ControlsController < ApplicationController
   def implementing_controls
     @controls = @control.implementing_controls
     if params[:s]
-      @controls = @controls.search(params[:s])
+      @controls = @controls.fulltext_search(params[:s])
     end
     @controls.all.sort_by(&:slug_split_for_sort)
     render :action => 'controls', :layout => nil, :locals => { :controls => @controls, :prefix => 'Child of' }

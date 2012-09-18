@@ -25,5 +25,11 @@ module SearchableModel
         where(t[:title].matches(q).or(t[:slug].matches(q)))
       end
     end
+
+    def db_search(q)
+      t = arel_table
+      q = "%#{q}%"
+      where(t[:title].matches(q).or(t[:slug].matches(q)))
+    end
   end
 end
