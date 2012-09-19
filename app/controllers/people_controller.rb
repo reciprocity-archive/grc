@@ -78,6 +78,9 @@ class PeopleController < ApplicationController
           object_person = @object.object_people.new({:person_id => item[:id]}, :without_protection => true)
         end
         object_person.role = item[:role].blank? ? nil : item[:role]
+        if !object_person.new_record?
+          object_person.save
+        end
         new_object_people.push(object_person)
       end
     end

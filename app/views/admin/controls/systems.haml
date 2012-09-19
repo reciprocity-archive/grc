@@ -1,9 +1,0 @@
-.block
-  =render :partial => "admin/controls/secnav"
-
-  -if @cycle
-    =render :template => "base/many2many_nested"
-  -else
-    Must choose a cycle before connecting systems.
-
--render_for :sidebar, :partial => "base/sidebar"

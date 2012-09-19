@@ -1,5 +1,6 @@
 require 'spork'
 require 'simplecov'
+require 'capybara/rspec'
 if ENV['COVERAGE']
   SimpleCov.start do
       add_group 'Models', 'app/models'
@@ -106,7 +107,3 @@ end
 #
 # These instructions should self-destruct in 10 seconds.  If they don't, feel
 # free to delete them.
-
-
-
-

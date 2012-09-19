@@ -1,24 +1,42 @@
 require 'spec_helper'
 
 describe SlugfilterHelper do
+
+  # See http://injecting.by2.be/blog/2010/06/rails3_rspec2_haml.html
+  # needed for using HAML helpers
+  include Haml::Helpers
+  include ActionView::Helpers
+
   before :each do
+    init_haml_helpers
+    @ap1 = FactoryGirl.create(:program, :slug => 'ASLUG1')
+    @ap2 = FactoryGirl.create(:program, :slug => 'ASLUG2')
+    @bp1 = FactoryGirl.create(:program, :slug => 'BSLUG1')
+    @bp2 = FactoryGirl.create(:program, :slug => 'BSLUG2')
+    @as1 = FactoryGirl.create(:section, :slug => 'ASLUG1-ASEC1', :program => @ap1)
+    @as2 = FactoryGirl.create(:section, :slug => 'ASLUG1-ASEC2', :program => @ap1)
+    @bs1 = FactoryGirl.create(:section, :slug => 'BSLUG1-ASEC1', :program => @bp1)
+    @bs2 = FactoryGirl.create(:section, :slug => 'BSLUG1-ASEC2', :program => @bp1)
   end
 
-  def labels(m)
-    m.map {|x| x[:label]}
-  end
+  context "walk_slug_tree" do
+    it "should properly insert resulting blocks"
+    it "should properly generate a slugtree" do
+      result = walk_slug_tree(Program.slugtree([@ap1, @as1, @as2])) do |object, step|
 
-  it "works with distinct slugs" do
-    labels(helper.organize_slugs(%w(s1 s2 s3))).should eq(%w(s1 s2 s3))
-  end
-  it "works with slugs that have more" do
-    labels(helper.organize_slugs(%w(s1 s2 s21))).should eq(%w(s1 s2...))
-    labels(helper.organize_slugs(%w(s1 s2 s21 s22))).should eq(%w(s1 s2...))
-  end
-  it "works with a single slug that has more" do
-    labels(helper.organize_slugs(%w(s2 s21 s22))).should eq(%w(s2... s21 s22))
-  end
-  it "works with a single slug that has more and second level has more" do
-    labels(helper.organize_slugs(%w(s2 s21 s211 s22))).should eq(%w(s2... s21... s22))
+      end
+      result.should have_selector('ul li#content_ASLUG1')
+      result.should have_selector('ul li#content_ASLUG1 ul#children_ASLUG1')
+      result.should have_selector('ul li#content_ASLUG1 ul#children_ASLUG1 li#content_ASLUG1-ASEC1')
+    end
+
+    it "should properly generate a slugtree given depth" do
+      result = walk_slug_tree(Program.slugtree([@ap1, @as1, @as2]), 1) do |object, step|
+        
+      end
+      result.should have_selector('ul li#content_ASLUG1')
+      result.should_not have_selector('ul li#content_ASLUG1 ul#children_ASLUG1')
+      result.should_not have_selector('ul li#content_ASLUG1 ul#children_ASLUG1 li#content_ASLUG1-ASEC1')
+    end
   end
 end

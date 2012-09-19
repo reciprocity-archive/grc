@@ -46,11 +46,8 @@ class MappingController < ApplicationController
       rcontrol = Control.new(
         :title => section.title,
         :slug => section.slug + "-" + ccontrol.slug,
-        :technical => ccontrol.technical,
-        :fraud_related => ccontrol.fraud_related,
         :frequency => ccontrol.frequency,
         :frequency_type => ccontrol.frequency_type,
-        :assertion => ccontrol.assertion,
         :description => "Placeholder"
       )
       rcontrol.program = section.program

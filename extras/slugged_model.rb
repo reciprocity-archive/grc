@@ -2,7 +2,7 @@ module SluggedModel
   def compact_slug
     return slug unless parent
     cslug = slug
-    cslug[parent.slug] = ''
+    cslug[parent.slug] = '' # Substring replacement of parent.slug with ''
     return cslug
   end
 
@@ -27,10 +27,6 @@ module SluggedModel
       st = SlugTree.new("")
       items.each { |item| st.insert(item) }
       st
-    end
-
-    def sort_by_slug(items)
-      items.sort_by &:slug_split_for_sort
     end
   end
 

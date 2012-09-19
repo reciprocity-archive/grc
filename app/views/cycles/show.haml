@@ -18,11 +18,6 @@
       =render :partial => 'cycles/show',
               :layout => 'layouts/widget_box',
               :locals => { :cycle => @cycle }
-  .singleColumn
-    .singleWide.halfHeight
-      =render :partial => 'cycles/old_links',
-              :layout => 'layouts/widget_box',
-              :locals => { :cycle => @cycle }
 
 #edit-cycle-modal.modal.fade
   =form_for @cycle, :url => flow_cycle_path(@cycle), :method => :put, :remote => true, :html => {:class => :form} do |f|

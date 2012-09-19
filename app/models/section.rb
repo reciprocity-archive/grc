@@ -93,16 +93,6 @@ class Section < ActiveRecord::Base
     sections.select { |section| prefix_test.match(section.slug) }
   end
 
-  # All Sections that could be associated with a control (in same program)
-  def self.for_control(control)
-    where(:program_id => control.program_id).order(:slug)
-  end
-
-  # All Sections that could be associated with a system (any company Section)
-  def self.for_system(s)
-    self
-  end
-
   # Whether this Section is associated with a company "program"
   def company?
     program.company?
@@ -110,16 +100,6 @@ class Section < ActiveRecord::Base
 
   def display_name
     "#{slug} - #{title}"
-  end
-
-  # Return ids of related Controls (used by many2many widget)
-  def control_ids
-    controls.map { |c| c.id }
-  end
-
-  # Return ids of related Systems (used by many2many widget)
-  def system_ids
-    systems.map { |s| s.id }
   end
 
   def consolidated_controls

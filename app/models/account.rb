@@ -55,35 +55,15 @@ class Account < ActiveRecord::Base
     ::BCrypt::Password.new(crypted_password) == password
   end
 
-  ##
-  # These methods are for ActiveRecord compatibility to make the
-  # authlogic gem work
-  #
-
   def display_name
     email
   end
-
-  # TODO: Why was this here?  (Commented out on move to AR)
-  #def self.column_names
-  #  []
-  #end
-
-  #def self.with_scope(scope)
-  #  raise "cannot handle scopes" if scope[:find] && scope[:find] != {}
-  #  yield
-  #end
 
   ##
   # Other authlogic configuration
   def self.login_field
     :email
   end
-
-  # Breaks .create()
-  #def self.primary_key
-  #  :id
-  #end
 
   def self.find_by_smart_case_login_field(value)
     self.where(:email => value).first
