@@ -3,9 +3,14 @@
 # Can either be linked by a URL or attached from Google Docs.
 class Document < ActiveRecord::Base
   include AuthoredModel
+
   VALID_SCHEMES = ['http', 'https']
 
   attr_accessible :link, :title
+
+  has_many :object_documents, :dependent => :destroy
+
+  is_versioned_ext
 
   validate :link do
     begin
@@ -23,10 +28,6 @@ class Document < ActiveRecord::Base
     :uniqueness => true, :allow_blank => true
 
   validates :title, :presence => true
-
-  has_many :object_documents, :dependent => :destroy
-
-  is_versioned_ext
 
   def display_name
     title

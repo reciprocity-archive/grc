@@ -11,18 +11,6 @@ class Section < ActiveRecord::Base
 
   attr_accessible :title, :slug, :description, :program
 
-  before_save :upcase_slug
-  before_save :update_parent_id
-
-  validates :title, :slug,
-    :presence => { :message => "needs a value" }
-  validates :slug,
-    :uniqueness => { :message => "must be unique" }
-
-  validate :slug do
-    validate_slug
-  end
-
   define_index do
     indexes :slug, :sortable => true
     indexes :title
@@ -35,7 +23,36 @@ class Section < ActiveRecord::Base
   belongs_to :program
   belongs_to :parent, :class_name => "Section"
 
+  is_versioned_ext
+
+  before_save :upcase_slug
+  before_save :update_parent_id
+
+  validates :title, :slug,
+    :presence => { :message => "needs a value" }
+  validates :slug,
+    :uniqueness => { :message => "must be unique" }
+
+  validate :slug do
+    validate_slug
+  end
+
   scope :with_controls, includes([:parent, {:controls => [:implementing_controls]}])
+
+  def display_name
+    "#{slug} - #{title}"
+  end
+
+  def authorizing_objects
+    aos = Set.new
+    aos.add(self)
+    aos.add(program)
+
+    if (parent)
+      aos.merge(parent.authorizing_objects)
+    end
+    aos
+  end
 
   def update_parent_id
     self.parent = self.class.find_parent_by_slug(slug) if parent_id.nil?
@@ -98,10 +115,6 @@ class Section < ActiveRecord::Base
     program.company?
   end
 
-  def display_name
-    "#{slug} - #{title}"
-  end
-
   def consolidated_controls
     controls.map do |control|
       control.implementing_controls
@@ -119,17 +132,4 @@ class Section < ActiveRecord::Base
       [control] + control.implementing_controls.to_a
     end.flatten
   end
-
-  def authorizing_objects
-    aos = Set.new
-    aos.add(self)
-    aos.add(program)
-
-    if (parent)
-      aos.merge(parent.authorizing_objects)
-    end
-    aos
-  end
-
-  is_versioned_ext
 end

@@ -11,43 +11,6 @@ class CategoriesController < ApplicationController
 
   layout 'dashboard'
 
-  def list_edit
-    @object = params[:object_type].classify.constantize.find(params[:object_id])
-    #@people = Person.where({})
-    render :layout => nil
-  end
-
-  def list_update
-    @object = params[:object_type].classify.constantize.find(params[:object_id])
-
-    new_categorizations = []
-
-    if params[:items]
-      params[:items].each do |_, item|
-        categorization = @object.categorizations.where(:category_id => item[:id]).first
-        if !categorization
-          category = Category.find(item[:id])
-          categorization = @object.categorizations.new(:category => category)
-        end
-        new_categorizations.push(categorization)
-      end
-    end
-
-    @object.categorizations = new_categorizations
-
-    respond_to do |format|
-      if @object.save
-        format.json do
-          render :json => @object.categorizations.all.map { |cat| cat.as_json(:root => nil, :include => { :category => { :methods => :parent_name }}) }
-        end
-        format.html
-      else
-        flash[:error] = "Could not update categorizations"
-        format.html { render :layout => nil }
-      end
-    end
-  end
-
   def new
     @category = Category.new(category_params)
 
@@ -94,6 +57,43 @@ class CategoriesController < ApplicationController
   def destroy
     @category = Category.find(params[:id])
     @category.destroy
+  end
+
+  def list_edit
+    @object = params[:object_type].classify.constantize.find(params[:object_id])
+    #@people = Person.where({})
+    render :layout => nil
+  end
+
+  def list_update
+    @object = params[:object_type].classify.constantize.find(params[:object_id])
+
+    new_categorizations = []
+
+    if params[:items]
+      params[:items].each do |_, item|
+        categorization = @object.categorizations.where(:category_id => item[:id]).first
+        if !categorization
+          category = Category.find(item[:id])
+          categorization = @object.categorizations.new(:category => category)
+        end
+        new_categorizations.push(categorization)
+      end
+    end
+
+    @object.categorizations = new_categorizations
+
+    respond_to do |format|
+      if @object.save
+        format.json do
+          render :json => @object.categorizations.all.map { |cat| cat.as_json(:root => nil, :include => { :category => { :methods => :parent_name }}) }
+        end
+        format.html
+      else
+        flash[:error] = "Could not update categorizations"
+        format.html { render :layout => nil }
+      end
+    end
   end
 
   private

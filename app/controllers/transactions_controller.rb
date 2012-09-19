@@ -12,13 +12,13 @@ class TransactionsController < ApplicationController
 
   layout 'dashboard'
 
-  def edit
-    @transaction = Transaction.find(params[:id])
+  def new
+    @transaction = Transaction.new(transaction_params)
     render :layout => nil
   end
 
-  def new
-    @transaction = Transaction.new(transaction_params)
+  def edit
+    @transaction = Transaction.find(params[:id])
     render :layout => nil
   end
 

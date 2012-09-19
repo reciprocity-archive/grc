@@ -6,13 +6,13 @@ class Person < ActiveRecord::Base
 
   attr_accessible :email, :name, :company, :language
 
-  validates :email, :presence => true
-
   has_many :object_people, :dependent => :destroy
 
   belongs_to :language, :class_name => 'Option', :conditions => { :role => 'person_language' } 
 
   is_versioned_ext
+
+  validates :email, :presence => true
 
   def display_name
     email

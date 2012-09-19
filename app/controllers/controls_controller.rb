@@ -43,20 +43,24 @@ class ControlsController < ApplicationController
 
   layout 'dashboard'
 
-  def edit
-    render :layout => nil
+  def index
+    @controls = allowed_objs(Control.all, :read)
   end
 
   def show
   end
 
-  def tooltip
-    render :layout => nil
-  end
-
   def new
     @control = Control.new(control_params)
 
+    render :layout => nil
+  end
+
+  def edit
+    render :layout => nil
+  end
+
+  def tooltip
     render :layout => nil
   end
 
@@ -90,10 +94,6 @@ class ControlsController < ApplicationController
         format.html { render :layout => nil, :status => 400 }
       end
     end
-  end
-
-  def index
-    @controls = allowed_objs(Control.all, :read)
   end
 
   def sections

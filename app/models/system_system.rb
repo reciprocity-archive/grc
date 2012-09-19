@@ -10,10 +10,10 @@ class SystemSystem < ActiveRecord::Base
   belongs_to :child,
     :foreign_key => 'child_id', :class_name => 'System'
 
+  is_versioned_ext
+
   validate :does_not_link_to_self
   validate :does_not_create_cycles
-
-  is_versioned_ext
 
   def does_not_link_to_self
     if parent_id == child_id

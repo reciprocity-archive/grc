@@ -46,9 +46,6 @@ class ProgramsController < ApplicationController
     @stats = program_stats(@program)
   end
 
-  def import
-  end
-
   def new
     @program = Program.new(program_params)
 
@@ -97,6 +94,9 @@ class ProgramsController < ApplicationController
         format.html { render :layout => nil, :status => 400 }
       end
     end
+  end
+
+  def import
   end
 
   def tooltip

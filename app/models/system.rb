@@ -7,13 +7,6 @@ class System < ActiveRecord::Base
 
   attr_accessible :title, :slug, :description, :infrastructure, :is_biz_process, :type
 
-  before_save :upcase_slug
-
-  validates :title, :slug,
-    :presence => { :message => "needs a value" }
-  validates :slug,
-    :uniqueness => { :message => "must be unique" }
-
   # Many to many with Control
   has_many :system_controls, :dependent => :destroy
   has_many :controls, :through => :system_controls, :order => :slug
@@ -47,6 +40,31 @@ class System < ActiveRecord::Base
 
   is_versioned_ext
 
+  validates :title, :slug,
+    :presence => { :message => "needs a value" }
+  validates :slug,
+    :uniqueness => { :message => "must be unique" }
+
+  before_save :upcase_slug
+
+  def display_name
+    slug
+  end
+
+  def authorizing_objects
+    # FIXME: Make sure this is the right set of objects
+    # to do authorization through.
+    aos = Set.new
+    aos.add(self)
+    #aos.add(program)
+    #
+    #if (parent)
+    #  aos.merge(parent.authorizing_objects)
+    #end
+
+    aos
+  end
+
   # TODO: state(), state_by_process left for reference -- remove after
   # implementing proper object states
 
@@ -74,23 +92,5 @@ class System < ActiveRecord::Base
       end
     end
     return { :state => res[0], :count => count, :bad => bad }
-  end
-
-  def display_name
-    slug
-  end
-
-  def authorizing_objects
-    # FIXME: Make sure this is the right set of objects
-    # to do authorization through.
-    aos = Set.new
-    aos.add(self)
-    #aos.add(program)
-    #
-    #if (parent)
-    #  aos.merge(parent.authorizing_objects)
-    #end
-
-    aos
   end
 end

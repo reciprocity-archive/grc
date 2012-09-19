@@ -29,10 +29,6 @@ class SectionsController < ApplicationController
 
   layout 'dashboard'
 
-  def tooltip
-    render :layout => nil
-  end
-
   def new
     @section = Section.new(section_params)
 
@@ -67,6 +63,10 @@ class SectionsController < ApplicationController
         format.html { render :layout => nil, :status => 400 }
       end
     end
+  end
+
+  def tooltip
+    render :layout => nil
   end
 
   private

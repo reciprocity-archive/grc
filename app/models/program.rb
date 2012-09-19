@@ -10,13 +10,6 @@ class Program < ActiveRecord::Base
 
   attr_accessible :title, :slug, :company, :description
 
-  before_save :upcase_slug
-
-  validates :title, :slug,
-    :presence => { :message => "needs a value" }
-  validates :slug,
-    :uniqueness => { :message => "must be unique" }
-
   has_many :sections, :order => :slug
   has_many :controls, :order => :slug
 
@@ -29,6 +22,13 @@ class Program < ActiveRecord::Base
   has_many :documents, :through => :object_documents
 
   is_versioned_ext
+
+  validates :title, :slug,
+    :presence => { :message => "needs a value" }
+  validates :slug,
+    :uniqueness => { :message => "must be unique" }
+
+  before_save :upcase_slug
 
   def display_name
     slug

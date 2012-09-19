@@ -47,22 +47,66 @@ class DocumentsController < ApplicationController
 
   layout 'dashboard'
 
-  def edit
-    render :layout => nil
-  end
+  # FIXME: No template!
+  #def index
+  #  @documents = Document.all
+  #end
 
   # FIXME: No template
   #def show
-  #end
-  #
-  #def tooltip
-  #  render :layout => nil
   #end
 
   def new
     @document = Document.new(document_params)
     render :layout => nil
   end
+
+  def edit
+    render :layout => nil
+  end
+
+  def create
+    # FIXME: We may not need document descriptor at all, but we still
+    # need deal with mass assignment of it.
+    document_descriptor_id = document_params.delete(:descriptor_id)
+    @document = Document.new(document_params)
+    if document_descriptor_id
+      @document.descriptor = DocumentDescriptor.find(document_descriptor_id)
+    end
+
+    respond_to do |format|
+      if @document.save
+        flash[:notice] = "Successfully created a new document."
+        format.json do
+          render :json => @document.as_json(:root => nil, :methods => [:descriptor, :link_url])
+        end
+        format.html { ajax_refresh }
+      else
+        flash[:error] = "There was an error creating the document."
+        format.html { render :layout => nil, :status => 400 }
+      end
+    end
+  end
+
+  def update
+    respond_to do |format|
+      if @document.authored_update(current_user, document_params)
+        flash[:notice] = "Successfully updated the document."
+        format.json do
+          render :json => @document.as_json(:root => nil, :methods => [:descriptor, :link_url])
+        end
+        format.html { redirect_to flow_document_path(@document) }
+      else
+        flash[:error] = "There was an error updating the document."
+        format.html { render :layout => nil, :status => 400 }
+      end
+    end
+  end
+
+  # FIXME: No template
+  #def destroy
+  #  @document.destroy
+  #end
 
   def list
     @documents = Document.where({})
@@ -120,54 +164,6 @@ class DocumentsController < ApplicationController
       end
     end
   end
-
-  def create
-    # FIXME: We may not need document descriptor at all, but we still
-    # need deal with mass assignment of it.
-    document_descriptor_id = document_params.delete(:descriptor_id)
-    @document = Document.new(document_params)
-    if document_descriptor_id
-      @document.descriptor = DocumentDescriptor.find(document_descriptor_id)
-    end
-
-    respond_to do |format|
-      if @document.save
-        flash[:notice] = "Successfully created a new document."
-        format.json do
-          render :json => @document.as_json(:root => nil, :methods => [:descriptor, :link_url])
-        end
-        format.html { ajax_refresh }
-      else
-        flash[:error] = "There was an error creating the document."
-        format.html { render :layout => nil, :status => 400 }
-      end
-    end
-  end
-
-  def update
-    respond_to do |format|
-      if @document.authored_update(current_user, document_params)
-        flash[:notice] = "Successfully updated the document."
-        format.json do
-          render :json => @document.as_json(:root => nil, :methods => [:descriptor, :link_url])
-        end
-        format.html { redirect_to flow_document_path(@document) }
-      else
-        flash[:error] = "There was an error updating the document."
-        format.html { render :layout => nil, :status => 400 }
-      end
-    end
-  end
-
-  # FIXME: No template!
-  #def index
-  #  @documents = Document.all
-  #end
-
-  # FIXME: No template
-  #def destroy
-  #  @document.destroy
-  #end
 
   private
     def load_document

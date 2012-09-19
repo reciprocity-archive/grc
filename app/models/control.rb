@@ -9,20 +9,9 @@ class Control < ActiveRecord::Base
   include SearchableModel
   include AuthorizedModel
 
-  attr_accessible :title, :slug, :description, :program, :effective_at, :frequency, :frequency_type, :section_ids, :type, :kind, :means, :categories
-
   CATEGORY_TYPE_ID = 100
 
-  before_save :upcase_slug
-
-  validates :slug, :title, :program,
-    :presence => { :message => "needs a value" }
-  validates :slug,
-    :uniqueness => { :message => "must be unique" }
-
-  validate :slug do
-    validate_slug
-  end
+  attr_accessible :title, :slug, :description, :program, :effective_at, :frequency, :frequency_type, :section_ids, :type, :kind, :means, :categories
 
   define_index do
     indexes :slug, :sortable => true
@@ -65,9 +54,16 @@ class Control < ActiveRecord::Base
 
   is_versioned_ext
 
-  def self.category_tree
-    Category.roots.all.map { |c| [c, c.children.all] }
+  validates :slug, :title, :program,
+    :presence => { :message => "needs a value" }
+  validates :slug,
+    :uniqueness => { :message => "must be unique" }
+
+  validate :slug do
+    validate_slug
   end
+
+  before_save :upcase_slug
 
   def display_name
     "#{slug} - #{title}"
@@ -87,5 +83,9 @@ class Control < ActiveRecord::Base
       aos.merge(section.authorizing_objects)
     end
     aos
+  end
+
+  def self.category_tree
+    Category.roots.all.map { |c| [c, c.children.all] }
   end
 end

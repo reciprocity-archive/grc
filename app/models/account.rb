@@ -5,18 +5,12 @@ require 'authorization'
 # have an account.
 class Account < ActiveRecord::Base
   include AuthoredModel
+
   attr_accessor :password, :password_confirmation
 
   attr_accessible :name, :surname, :email, :password, :password_confirmation
 
   belongs_to :person
-
-  before_save :encrypt_password
-  before_save do
-    reset_persistence_token if reset_persistence_token?
-  end
-
-  before_save :create_person_if_necessary
 
   is_versioned_ext
 
@@ -30,6 +24,17 @@ class Account < ActiveRecord::Base
   validates_uniqueness_of    :email,    :case_sensitive => false
   #validates_format_of        :email,    :with => :email_address
   validates_format_of        :role,     :with => /[A-Za-z]/
+
+  before_save :encrypt_password
+  before_save do
+    reset_persistence_token if reset_persistence_token?
+  end
+
+  before_save :create_person_if_necessary
+
+  def display_name
+    email
+  end
 
   def password=(password)
     @password = password
@@ -53,10 +58,6 @@ class Account < ActiveRecord::Base
 
   def valid_password?(password)
     ::BCrypt::Password.new(crypted_password) == password
-  end
-
-  def display_name
-    email
   end
 
   ##

@@ -35,8 +35,46 @@ class PeopleController < ApplicationController
 
   layout 'dashboard'
 
-  #def tooltip
-  #  render :layout => nil
+  def new
+    @person = Person.new(person_params)
+
+    render :layout => nil
+  end
+
+  def edit
+    render :layout => nil
+  end
+
+  def create
+    @person = Person.new(person_params)
+
+    respond_to do |format|
+      if @person.save
+        flash[:notice] = "Successfully created a new person."
+        format.json { render :json => @person.as_json(:root => nil) }
+        format.html { ajax_refresh }
+      else
+        flash[:error] = @person.errors.full_messages
+        format.html { render :layout => nil, :status => 400 }
+      end
+    end
+  end
+
+  def update
+    respond_to do |format|
+      if @person.authored_update(current_user, person_params)
+        flash[:notice] = "Successfully updated the person."
+        format.html { ajax_refresh }
+      else
+        flash[:error] = @person.errors.full_messages
+        format.html { render :layout => nil, :status => 400 }
+      end
+    end
+  end
+
+  # FIXME: No template
+  #def destroy
+  #  @person.destroy
   #end
 
   def list
@@ -99,48 +137,6 @@ class PeopleController < ApplicationController
       end
     end
   end
-
-  def new
-    @person = Person.new(person_params)
-
-    render :layout => nil
-  end
-
-  def edit
-    render :layout => nil
-  end
-
-  def create
-    @person = Person.new(person_params)
-
-    respond_to do |format|
-      if @person.save
-        flash[:notice] = "Successfully created a new person."
-        format.json { render :json => @person.as_json(:root => nil) }
-        format.html { ajax_refresh }
-      else
-        flash[:error] = @person.errors.full_messages
-        format.html { render :layout => nil, :status => 400 }
-      end
-    end
-  end
-
-  def update
-    respond_to do |format|
-      if @person.authored_update(current_user, person_params)
-        flash[:notice] = "Successfully updated the person."
-        format.html { ajax_refresh }
-      else
-        flash[:error] = @person.errors.full_messages
-        format.html { render :layout => nil, :status => 400 }
-      end
-    end
-  end
-
-  # FIXME: No template
-  #def destroy
-  #  @person.destroy
-  #end
 
   private
     def load_person

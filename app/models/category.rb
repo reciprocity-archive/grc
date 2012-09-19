@@ -1,10 +1,10 @@
 class Category < ActiveRecord::Base
   include AuthoredModel
 
+  attr_accessible :name, :scope_id, :parent
+
   scope :ctype, lambda { |sid| where(:scope_id => sid) }
   acts_as_nested_set :scope => :scope_id
-
-  attr_accessible :name, :scope_id, :parent
 
   has_many :categorizations, :dependent => :destroy
   has_many :controls, :through => :categorizations,

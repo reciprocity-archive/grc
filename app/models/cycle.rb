@@ -13,13 +13,13 @@ class Cycle < ActiveRecord::Base
   validates :program, :presence => true
   validates :start_at, :presence => true
 
-  def slug
-    program.slug + "-" + (start_at.strftime("%Y-%m-%d") rescue "-")
-  end
+  is_versioned_ext
 
   def display_name
     program.display_name + " " + (start_at.strftime("%Y-%m-%d") rescue "-")
   end
 
-  is_versioned_ext
+  def slug
+    program.slug + "-" + (start_at.strftime("%Y-%m-%d") rescue "-")
+  end
 end

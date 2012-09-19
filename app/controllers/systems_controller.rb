@@ -12,23 +12,22 @@ class SystemsController < ApplicationController
 
   layout 'dashboard'
 
-  def edit
-    @system = System.find(params[:id])
-
-    render :layout => nil
+  def index
+    @systems = System.all
   end
 
   def show
     @system = System.find(params[:id])
   end
 
-  def tooltip
-    @system = System.find(params[:id])
-    render :layout => '_tooltip', :locals => { :system => @system }
-  end
-
   def new
     @system = System.new(system_params)
+
+    render :layout => nil
+  end
+
+  def edit
+    @system = System.find(params[:id])
 
     render :layout => nil
   end
@@ -81,8 +80,9 @@ class SystemsController < ApplicationController
     end
   end
 
-  def index
-    @systems = System.all
+  def tooltip
+    @system = System.find(params[:id])
+    render :layout => '_tooltip', :locals => { :system => @system }
   end
 
   def subsystems_edit
