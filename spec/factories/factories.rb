@@ -11,7 +11,9 @@ FactoryGirl.define do
     # (including changing of parent)
     #
 
-    "SLUG#{n}"
+
+
+    "SLUG#{n}_#{((Time.now).to_f*1000).to_i}"
   end
 
   sequence(:username) do |n|
