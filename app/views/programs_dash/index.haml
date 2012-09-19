@@ -3,7 +3,7 @@
 -content_for :page_help, 'dashboard'
 
 -content_for :header_buttons do
-  -if current_user.has_role?(:admin) || current_user.has_role?(:superuser)
+  -if current_user.has_role?(:superuser)
     .btn-group
       %a.btn{ :href => admin_dash_path } Admin
 
@@ -26,9 +26,6 @@
       -if has_feature? :BETA
         =render :partial => 'design/templates/riskWidgetGap'
         =render :partial => 'design/templates/riskWidgetRisk'
-    -#.singleWide.halfHeight
-      =render :partial => 'programs_dash/old_links',
-            :layout => 'layouts/widget_box'
   .singleColumn
     -if has_feature? :BETA
       .row-static

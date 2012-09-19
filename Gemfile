@@ -7,6 +7,9 @@ end
 
 RAILS_VERSION = '= 3.2.8'
 
+# Fulltext search
+gem 'thinking-sphinx'
+
 #gem 'gdata-ruby-util', '1.1.2'
 gem 'gdata_19', '~> 1.1.5', :require => 'gdata'
 
@@ -77,6 +80,7 @@ group(:development, :test) do
   gem 'ZenTest'
   gem 'autotest-rails'
   gem 'simplecov', :require => false
+  gem 'capybara'
 
   gem 'factory_girl_rails', "~> 4.0"
 
@@ -113,4 +117,3 @@ group(:development, :test) do
   # gem 'redcarpet'
   gem 'test-unit'
 end
-

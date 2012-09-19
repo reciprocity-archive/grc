@@ -29,9 +29,9 @@ describe ProgramsController do
 
   context "show" do
     before :each do
-      login({}, { :role => 'admin' })
-      @ctl2 = FactoryGirl.create(:control, :title => 'Control 2', :slug => 'CTL2', :description => 'x', :is_key => true, :fraud_related => false, :program => @creg)
-      @ctl3 = FactoryGirl.create(:control, :title => 'Control 3', :slug => 'CTL2-1', :description => 'x', :is_key => true, :fraud_related => false, :parent => @ctl2, :program => @creg)
+      login({}, { :role => 'superuser' })
+      @ctl2 = FactoryGirl.create(:control, :title => 'Control 2', :slug => 'CTL2', :description => 'x', :program => @creg)
+      @ctl3 = FactoryGirl.create(:control, :title => 'Control 3', :slug => 'CTL2-1', :description => 'x', :parent => @ctl2, :program => @creg)
       @sec2 = FactoryGirl.create(:section, :title => 'Section 2', :slug => 'REG1-SEC2', :description => 'x', :program => @reg)
       @sec3 = FactoryGirl.create(:section, :title => 'Section 3', :slug => 'REG1-SEC3', :description => 'x', :program => @reg)
       @sec2.controls << @ctl
@@ -59,7 +59,7 @@ describe ProgramsController do
 
   context "non-CRUD" do
     before :each do
-      login({}, {:role => 'admin'})
+      login({}, {:role => 'superuser'})
     end
 
     context "sections" do

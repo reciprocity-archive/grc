@@ -1,11 +1,12 @@
 require 'spec_helper'
+require 'prawn_monkeypatch'
 
 describe EvidenceHelper do
   before :each do
     @sys = System.create(:title => 'System 1', :slug => 'sys1', :description => 'x', :infrastructure => true)
     @client = double(Gdoc::Client)
     @doc = Gdoc::Document.new("doc1")
-    Tempfile.open('test', Rails.root.join('tmp')) do |water|
+    Tempfile.open('test', Rails.root.join('tmp').to_s) do |water|
       Prawn::Document.generate(water.path) do
         start_new_page
         text "Test document"

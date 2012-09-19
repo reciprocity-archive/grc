@@ -22,23 +22,11 @@ class System < ActiveRecord::Base
   has_many :system_sections, :dependent => :destroy
   has_many :sections, :through => :system_sections, :order => :slug
 
-  # Many to many with BizProcess
-  has_many :biz_process_systems
-  has_many :biz_processes, :through => :biz_process_systems, :order => :slug
-
   # Responsible party
   belongs_to :owner, :class_name => 'Person'
 
-  # Other parties
-  has_many :system_persons
-  has_many :persons, :through => :system_persons
-
   has_many :object_people, :as => :personable, :dependent => :destroy
   has_many :people, :through => :object_people
-
-  # Relevant documentation
-  #has_many :documents, :through => :document_systems
-  has_many :document_systems
 
   has_many :object_documents, :as => :documentable, :dependent => :destroy
   has_many :documents, :through => :object_documents
@@ -59,20 +47,8 @@ class System < ActiveRecord::Base
 
   is_versioned_ext
 
-  # Which systems can be attached to a control
-  def self.for_control(c)
-    order(:slug) #c.systems
-  end
-
-  # Which systems can be attached to a control objective
-  def self.for_section(co)
-    order(:slug)
-  end
-
-  # Which systems can be attached to a biz process
-  def system_controls_by_process(bp)
-    system_controls.where(:control_id => bp.controls)
-  end
+  # TODO: state(), state_by_process left for reference -- remove after
+  # implementing proper object states
 
   # Rolled up state by biz process
   def state_by_process(bp)
@@ -102,21 +78,6 @@ class System < ActiveRecord::Base
 
   def display_name
     slug
-  end
-
-  # Return ids of related Controls (used by many2many widget)
-  def control_ids
-    controls.map { |c| c.id }
-  end
-
-  # Return ids of related Biz Processes (used by many2many widget)
-  def biz_process_ids
-    biz_processes.map { |bp| bp.id }
-  end
-
-  # Return ids of related Sections (used by many2many widget)
-  def section_ids
-    sections.map { |co| co.id }
   end
 
   def authorizing_objects

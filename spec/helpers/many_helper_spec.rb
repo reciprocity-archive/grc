@@ -3,8 +3,8 @@ require 'spec_helper'
 describe ManyHelper do
   before :each do
     @reg = FactoryGirl.create(:program, :title => 'Reg 1', :slug => 'reg1', :company => true)
-    @ctl1 = FactoryGirl.create(:control, :title => 'Control 1', :slug => 'reg1-ctl1', :description => 'x', :program => @reg, :is_key => true, :fraud_related => false)
-    @ctl2 = FactoryGirl.create(:control, :title => 'Control 2', :slug => 'reg1-ctl2', :description => 'x', :program => @reg, :is_key => true, :fraud_related => false)
+    @ctl1 = FactoryGirl.create(:control, :title => 'Control 1', :slug => 'reg1-ctl1', :description => 'x', :program => @reg)
+    @ctl2 = FactoryGirl.create(:control, :title => 'Control 2', :slug => 'reg1-ctl2', :description => 'x', :program => @reg)
     @sys = FactoryGirl.create(:system, :title => 'System 1', :slug => 'sys1', :description => 'x', :infrastructure => true)
     @sc = FactoryGirl.create(:system_control, :control => @ctl2, :system => @sys, :state => :green)
     helper.set_rspec(self)

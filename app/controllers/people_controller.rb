@@ -10,10 +10,10 @@ class PeopleController < ApplicationController
                                         :destroy]
 
   access_control :acl do
-    allow :superuser, :admin
+    allow :superuser
 
     actions :new, :create do
-      allow :create_person
+      allow :create, :create_person
     end
 
     actions :list do
@@ -21,15 +21,15 @@ class PeopleController < ApplicationController
     end
 
     actions :list_update, :list_edit do
-      allow :update_person
+      allow :update, :update_person
     end
 
     actions :edit, :update do
-      allow :update_person, :of => :person
+      allow :update, :update_person, :of => :person
     end
 
     actions :destroy do
-      allow :delete_person, :of => :person
+      allow :delete, :delete_person, :of => :person
     end
   end
 
@@ -78,6 +78,9 @@ class PeopleController < ApplicationController
           object_person = @object.object_people.new({:person_id => item[:id]}, :without_protection => true)
         end
         object_person.role = item[:role].blank? ? nil : item[:role]
+        if !object_person.new_record?
+          object_person.save
+        end
         new_object_people.push(object_person)
       end
     end

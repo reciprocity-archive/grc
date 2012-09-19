@@ -1,6 +1,6 @@
 require 'slugged_model'
 
-# A company control
+# A company / regulation control
 #
 class Control < ActiveRecord::Base
   include AuthoredModel
@@ -9,7 +9,7 @@ class Control < ActiveRecord::Base
   include SearchableModel
   include AuthorizedModel
 
-  attr_accessible :title, :slug, :description, :program, :technical, :assertion, :effective_at, :is_key, :fraud_related, :frequency, :frequency_type, :business_area_id, :section_ids, :type, :kind, :means, :categories
+  attr_accessible :title, :slug, :description, :program, :effective_at, :frequency, :frequency_type, :section_ids, :type, :kind, :means, :categories
 
   CATEGORY_TYPE_ID = 100
 
@@ -24,28 +24,20 @@ class Control < ActiveRecord::Base
     validate_slug
   end
 
+  define_index do
+    indexes :slug, :sortable => true
+    indexes :title
+    indexes :description
+    has :created_at, :updated_at, :program_id
+  end
+
   belongs_to :program
 
   belongs_to :parent, :class_name => 'Control'
 
-  # Business area classification
-  belongs_to :business_area
-
-  # Many to many with BizProcess
-  has_many :biz_process_controls
-  has_many :biz_processes, :through => :biz_process_controls
-
   # Many to many with System
   has_many :system_controls, :dependent => :destroy
   has_many :systems, :through => :system_controls
-
-  # The types of evidence (Documents) that may be attached to this control
-  # during an audit.
-  has_many :evidence_descriptors, :class_name => 'DocumentDescriptor', :through => :control_document_descriptors
-  has_many :control_document_descriptors
-
-  # The result of an audit test
-  belongs_to :test_result
 
   # Which sections are implemented by this one.  A company
   # control may implement several sections.
@@ -73,44 +65,12 @@ class Control < ActiveRecord::Base
 
   is_versioned_ext
 
-  # All non-company section controls
-  def self.all_non_company
-    joins(:section).
-      where(:sections => { :company => false }).
-      order(:slug)
-  end
-
   def self.category_tree
     Category.roots.all.map { |c| [c, c.children.all] }
   end
 
-  # All controls that may be attached to a system (must be
-  # company control)
-  def self.for_system(s)
-    all
-  end
-
   def display_name
     "#{slug} - #{title}"
-  end
-
-  def system_ids
-    systems.map { |s| s.id }
-  end
-
-  # IDs of related Biz Processes (used by many2many widget)
-  def biz_process_ids
-    biz_processes.map { |bp| bp.id }
-  end
-
-  # IDs of related Sections (used by many2many widget)
-  def implemented_section_ids
-    sections.map { |c| c.id }
-  end
-
-  # IDs of related evidence descriptors (used by many2many widget)
-  def evidence_descriptor_ids
-    evidence_descriptors.map { |e| e.id }
   end
 
   # Return all objects that allow operations on this object
@@ -127,28 +87,5 @@ class Control < ActiveRecord::Base
       aos.merge(section.authorizing_objects)
     end
     aos
-  end
-
-  class ControlCycle
-    def initialize(scs)
-      @scs = scs
-    end
-
-    def system_ids
-      @scs.map &:system_id
-    end
-
-    def self.model_name
-      ControlCycle
-    end
-    def self.param_key
-      :control
-    end
-  end
-
-  def system_controls_for_cycle(cycle)
-    scs = system_controls
-    scs = scs.where(:cycle_id => cycle.id) if cycle
-    ControlCycle.new(scs)
   end
 end

@@ -1,8 +1,0 @@
-.group
-  =f.label :section_id
-  =f.collection_select :section_id, :collection => filtered_sections, :id, :display_name, {:include_blank => true}, {:class => :association}
-
-=f.hidden_field :biz_process_id, :value => @biz_process.id
-
-.group.navform.wat-cf
-  =f.submit pat(:save), :class => :button

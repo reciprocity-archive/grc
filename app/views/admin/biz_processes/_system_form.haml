@@ -1,8 +1,0 @@
-.group
-  =f.label :system_id
-  =f.collection_select :system_id, :collection => System.all, :id, :display_name, {:include_blank => true}, {:class => :collection}
-
-=f.hidden_field :biz_process_id, :value => @biz_process.id
-
-.group.navform.wat-cf
-  =f.submit pat(:save), :class => :button

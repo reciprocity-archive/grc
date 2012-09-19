@@ -13,10 +13,10 @@ class DocumentsController < ApplicationController
                                           :destroy]
 
   access_control :acl do
-    allow :superuser, :admin, :analyst
+    allow :superuser
 
     actions :create, :new do
-      allow :create_document
+      allow :create, :create_document
     end
 
     actions :show do
@@ -29,19 +29,19 @@ class DocumentsController < ApplicationController
     #end
 
     actions :edit, :update do
-      allow :update_document, :of => :document
+      allow :update, :update_document, :of => :document
     end
 
     actions :destroy do
-      allow :delete_document, :of => :document
+      allow :destroy, :delete_document, :of => :document
     end
 
     actions :list do
-      allow :read_document
+      allow :read, :read_document
     end
 
     actions :list_update, :list_edit do
-      allow :update_document
+      allow :update, :update_document
     end
   end
 
@@ -122,7 +122,13 @@ class DocumentsController < ApplicationController
   end
 
   def create
+    # FIXME: We may not need document descriptor at all, but we still
+    # need deal with mass assignment of it.
+    document_descriptor_id = document_params.delete(:descriptor_id)
     @document = Document.new(document_params)
+    if document_descriptor_id
+      @document.descriptor = DocumentDescriptor.find(document_descriptor_id)
+    end
 
     respond_to do |format|
       if @document.save

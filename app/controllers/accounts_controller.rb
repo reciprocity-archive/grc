@@ -10,14 +10,14 @@ class AccountsController < ApplicationController
                                          :update]
 
   access_control :acl do
-    allow :superuser, :admin, :analyst
+    allow :superuser
 
     actions :new, :create do
-      allow :create_account
+      allow :create, :create_account
     end
 
     actions :edit, :update do
-      allow :update_account, :of => :account
+      allow :update, :update_account, :of => :account
     end
   end
 

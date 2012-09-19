@@ -26,7 +26,7 @@ describe DocumentsController do
 
   context "list_edit" do
     it "should show the right objects" do
-      login({}, {:role => :admin})
+      login({}, {:role => :superuser})
       get 'list_edit', {
         :object_type => 'program',
         :object_id => @program.id,
@@ -36,6 +36,15 @@ describe DocumentsController do
   end
 
   context "list_update" do
-    it "should properly add new documents"
+    it "should properly add new documents" do
+      login({}, {:role => :superuser})
+      post 'list_update', {
+        :object_type => 'program',
+        :object_id => @program.id,
+        :items => {1 => {:id => @object.id}}
+      }
+      response.should be_success
+      @program.documents.should include @object
+    end
   end
 end

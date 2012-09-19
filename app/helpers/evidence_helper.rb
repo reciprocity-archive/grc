@@ -1,3 +1,5 @@
+require 'prawn_monkeypatch'
+
 module EvidenceHelper
   include ApplicationHelper
 
@@ -12,14 +14,14 @@ module EvidenceHelper
   # The PDF is then uploaded with the title prefixed with +Evidence+.
   def capture_evidence(doc, system)
     gclient = get_gdata_client
-    Tempfile.open('evidence', Rails.root.join('tmp')) do |temp|
+    Tempfile.open('evidence', Rails.root.join('tmp').to_s) do |temp|
       body = gclient.download(doc, 'pdf')
       # TODO: stream the body
       temp.syswrite(body)
       temp.close
       date = display_time(Date.today)
       user = current_user.name
-      Tempfile.open('watermark', Rails.root.join('tmp')) do |water|
+      Tempfile.open('watermark', Rails.root.join('tmp').to_s) do |water|
         Prawn::Document.generate(water.path, :template => temp.path) do
           go_to_page(page_count)
           start_new_page

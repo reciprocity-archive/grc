@@ -22,9 +22,9 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user_session, :current_user
 
-  # By default allow only superuser and admin access.  This is relaxed in specific controllers.
+  # By default allow only superuser access.  This is relaxed in specific controllers.
   access_control :acl do
-    allow :admin, :superuser
+    allow :superuser
   end
 
   rescue_from Acl9::AccessDenied do
@@ -43,8 +43,8 @@ class ApplicationController < ActionController::Base
   end
 
   def render_unauthenticated
-      flash[:notice] = "You must be logged in to access this page"
-    render :template => 'welcome/login', :status => 401
+    flash[:notice] = "You must be logged in to access this page"
+    render :template => 'error/unauthenticated', :layout => 'welcome', :status => 401
   end
 
   private
@@ -82,16 +82,6 @@ class ApplicationController < ActionController::Base
       return false
     end
 
-  end
-
-  # Pre-filter for requiring the user to not be logged in
-  def require_no_user
-    if current_user
-      store_location
-      flash[:notice] = "You must be logged out to access this page"
-      redirect_to root_url
-      return false
-    end
   end
 
   # Memoize current request location so that we can return to it after a redirect
