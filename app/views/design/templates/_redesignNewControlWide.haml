@@ -7,7 +7,7 @@
         %i.gcmsicon-x-grey
     %h1
       Create New Control
-      %span.version v.0.0.1
+      %span.version v.0.86
   .modal-body
     .alert.alert-info
       %span#alertMessage
@@ -15,62 +15,120 @@
     %form
       .row-fluid
         .span4
+          %label Title
+          %input.span12{:type => "text", :placeholder => "Enter title"}
+          %span.help-inline 
+        .span2
           %label Program
           %select.span12
             %option Program Title 1
             %option Program Title 2
             %option Program Title 3
-        .span4
-          %label Control Means
-          %select.span12
-            %option Manual
-            %option Manual with Segregation of Duties
-            %option Automated
-        .span2
-          %label Type
-          %select.span12
-            %option Regulation
-            %option Company
-        .span2
-          %label Kind
-          %select.span12
-            %option Reactive
-            %option Administrative
-            %option Detective
-            %option Preventative
-          
-      .row-fluid
-        .span8
-          %label Title
-          %input.span12{:type => "text", :placeholder => "Enter title"}
-        .span2
-          %label Code
-          %input.span12{:type => "text", :placeholder => "TO 16 CHARACTERS"}
-        .span2
-          %label Version
-          %input.span12{:type => "text", :placeholder => "1.1.1"}
-      .row-fluid
-        .span8
-          %label Description/Note
-          %textarea.span12.double{:placeholder => "Enter note/description here", :rows => "3"}
-        .span4
+        .span6
           .row-fluid
+            .span6
+              %label Code (optional)
+              %input.span12{:type => "text", :placeholder => "Autofill code"}
+            .span6
+              %label Version
+              %input.span12{:type => "text", :placeholder => "1.1.1"}
+      .row-fluid
+        .span6
+          %label Description
+          %textarea.span12.double{:placeholder => "Enter description here", :rows => "3"}
+        .span6
+          .row-fluid 
             .span6
               %label Effective Date
-              %input.span12{:type => "text", :placeholder => "MM/DD/YYYY"}
+              %input.span12#datepicker-control-effectivedate.date{:type => "text",  :placeholder => "MM/DD/YYYY"}
+              :javascript
+                $('#datepicker-control-effectivedate').datepicker();
+              %label Type
+              %select.span12
+                %option Regulation
+                %option Company
             .span6
               %label Stop Date    
-              %input.span12{:type => "text", :placeholder => "MM/DD/YYYY"}
-          .row-fluid
-            .span12
-              %label Direct Link
-              %input.span12{:type => "text", :placeholder => "http://www.examplelink.com/"}
-
+              %input.span12#datepicker-control-stopdate.date{:type => "text",  :placeholder => "MM/DD/YYYY"}
+              :javascript
+                $('#datepicker-control-stopdate').datepicker();
+              %label Kind 
+              %select.span12
+                %option Reactive
+                %option Administrative
+                %option Detective
+                %option Preventative
       .row-fluid
-        .span12
-          %label Categories
-          %span.label Access Control &gt; Authorization
-          %span.label Change Management &gt; Segregation of Duties
-          %a.btn.btn-mini.btn-primary +/- Manage Categories
+        .span6
+          %label Direct Link
+          %input.span12{:type => "text", :placeholder => "http://www.examplelink.com/"}
+          %span.help-inline &nbsp;
+        .span6
+          .row-fluid 
+            .span6
+              %label Control Means
+              %select.span12
+                %option Manual
+                %option Manual with Segregation of Duties
+                %option Automated
+            .span6
+              %label Verify Control
+              %select.span12
+                %option Continuous
+                %option Ad-hoc
+                %option - 
+                %option Monthly
+                %option Quarterly
+                %option Annually
+      .row-fluid
+        .span6      
+          %label.subtitle 
+            Evidence Instructions
+          .row-fluid
+            %textarea.span12.double{:placeholder => "Enter in a description that a system owner would follow to collect evidence for this control.", :rows => "3"}
+            %span.help-inline &nbsp;
+            :javascript
+              $('#wysihtml5').wysihtml5({
+                "image": false //Button to insert an image. Default true
+              });
+        .span6
+          %h3 
+            Categories
+            .fltrt 
+              %a.btn.btn-blue.addbtn.fltrt Edit Categories 
+          .row-fluid
+            .span4
+              %li.slot.categorySlot.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+                .controls-group
+                  .controls-type Authorization
+                  .controls-subtype 
+                  .controls-subgroup Access Control
+              %li.slot.categorySlot.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+                .controls-group
+                  .controls-type Change Management
+                  .controls-subtype 
+                  .controls-subgroup Segregation of Duties
+            .span4
+              %li.slot.categorySlot.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+                .controls-group
+                  .controls-type Authorization
+                  .controls-subtype 
+                  .controls-subgroup Access Control
+              %li.slot.categorySlot.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+                .controls-group
+                  .controls-type Change Management
+                  .controls-subtype 
+                  .controls-subgroup Segregation of Duties
+            .span4
+              %li.slot.categorySlot.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+                .controls-group
+                  .controls-type Authorization
+                  .controls-subtype 
+                  .controls-subgroup Access Control
+              %li.slot.categorySlot.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+                .controls-group
+                  .controls-type Change Management
+                  .controls-subtype 
+                  .controls-subgroup Segregation of Duties
 
   =render :partial => 'design/templates/modalfooter'

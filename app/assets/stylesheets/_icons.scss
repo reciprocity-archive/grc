@@ -1,19 +1,10 @@
-.gcmsicon-questionmark-grey {
-  background-image: url("../images/icons/icon-questmark-grey.png");
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  margin:0;
-  padding:0;
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
-}
+
 
 .gcmsicon-expandAll-grey {
   background-image: url("../images/expandAll.png");
   display: inline-block;
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   margin:0;
   padding:0;
   background-position: 0px 0px;
@@ -23,8 +14,8 @@
 .gcmsicon-shrinkAll-grey {
   background-image: url("../images/shrinkAll.png");
   display: inline-block;
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   margin:0;
   padding:0;
   background-position: 0px 0px;
@@ -36,7 +27,7 @@
   background-image: url("../images/icons/icon-itemarrow.png");
   display: inline-block;
   position:relative;
-  width: 18px;
+  width: 16px;
   height: 29px;
   margin:2px 5px 0 0;
   padding:0;
@@ -51,266 +42,103 @@
 .gcmsicon-blank {
   background-image: none;
   display: inline-block;
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   margin:0;
   padding:0;
   background-position: 0px 0px;
   background-repeat: no-repeat;
 }
 
-.gcmsicon-arrowleft-black {
-  background-image: url("../images/icons/icon-arrowleft-black.png");
+
+.gcmsicon-arrowright-white, .gcmsicon-arrowright-grey  {
+  background-image: url("../images/icons/grcicons/gear.png");
   display: inline-block;
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   margin:0;
   padding:0;
   background-position: 0px 0px;
   background-repeat: no-repeat;
 }
 
-.gcmsicon-arrowright-black {
-  background-image: url("../images/icons/icon-arrowright-black.png");
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  margin:0;
-  padding:0;
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
-}
 
-.gcmsicon-arrowright-white {
-  background-image: url("../images/icons/icon-arrowright-white.png");
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  margin:0;
-  padding:0;
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
-}
-
-.gcmsicon-arrowright-grey {
-  background-image: url("../images/icons/icon-arrowright-grey.png");
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  margin:0;
-  padding:0;
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
-}
-
-.gcmsicon-questionmark-grey {
-  background-image: url("../images/icons/icon-questmark-grey.png");
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  margin:0;
-  padding:0;
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
-}
-
-.gcmsicon-enlarge-grey {
-  background-image: url("../images/icons/icon-enlarge-grey.png");
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  margin:0;
-  padding:0;
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
-}
-
-.gcmsicon-x-grey {
-  background-image: url("../images/icons/icon-x-grey.png");
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  margin:0;
-  padding:0;
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
-}
-.gcmsicon-edit-grey {
-  background-image: url("../images/icons/icon-edit-grey.png");
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  margin:0;
-  padding:0;
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
-}
-.gcmsicon-edit-white {
-  background-image: url("../images/icons/icon-edit-white.png");
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  margin:0;
-  padding:0;
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
-}
-.gcmsicon-newfacility-white {
-  background-image: url("../images/icons/icon-newfacility-black.png");
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  margin:0;
-  padding:0;
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
-}
-.gcmsicon-newfacility-black {
-  background-image: url("../images/icons/icon-newfacility-black.png");
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  margin:0;
-  padding:0;
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
-}
-.gcmsicon-organization-white {
-  background-image: url("../images/icons/icon-organization-white.png");
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  margin:0;
-  padding:0;
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
-}
-.gcmsicon-organization-black {
-  background-image: url("../images/icons/icon-organization-black.png");
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  margin:0;
-  padding:0;
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
-}
 .gcmsicon-gears-white {
-  background-image: url("../images/icons/icon-gears-white.png");
+  background-image: url("../images/icons/grcicons/gear.png");
   display: inline-block;
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   margin:0;
   padding:0;
   background-position: 0px 0px;
   background-repeat: no-repeat;
 }
 .gcmsicon-gears-black {
-  background-image: url("../images/icons/icon-gears-black.png");
+  background-image: url("../images/icons/grcicons/gear.png");
   display: inline-block;
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   margin:0;
   padding:0;
   background-position: 0px 0px;
   background-repeat: no-repeat;
 }
 .gcmsicon-asterix-white {
-  background-image: url("../images/icons/icon-asterix-white.png");
+  background-image: url("../images/icons/grcicons/gear.png");
   display: inline-block;
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   margin:0;
   padding:0;
   background-position: 0px 0px;
   background-repeat: no-repeat;
 }
 .gcmsicon-asterix-black {
-  background-image: url("../images/icons/icon-asterix-black.png");
+  background-image: url("../images/icons/grcicons/gear.png");
   display: inline-block;
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   margin:0;
   padding:0;
   background-position: 0px 0px;
   background-repeat: no-repeat;
 }
-.gcmsicon-threat-white {
-  background-image: url("../images/icons/icon-threat-white.png");
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  margin:0;
-  padding:0;
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
-}
-.gcmsicon-threat-black {
-  background-image: url("../images/icons/icon-threat-black.png");
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  margin:0;
-  padding:0;
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
-}
-.gcmssmallicon-dash-white {
-  background-image: url("../images/icons/icon-dash-white.png");
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  margin:0;
-  padding:0;
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
-}
-.gcmssmallicon-blue-expand {
-  background-image: url("../images/icons/icon-blue-expand.png");
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  margin:0;
-  padding:0;
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
-}
-.gcmsicon-hidden-blue{
-  background-image: url("../images/toggle_shrank.png");
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  margin:0;
-  padding:0;
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
-}
+
 .calendar {
   background-image: url("../images/icons/icon-calendar.png");
   background-position: 94% 75%;
   background-repeat: no-repeat;
 }
-.gcmsicon-square-white {
-  background-image: url("../images/icons/icon-square-white.png");
-}
-.gcmsicon-play-white {
-  background-image: url("../images/icons/icon-play-white.png");
-}
-.gcmsicon-back-white {
-  background-image: url("../images/icons/icon-back-white.png");
-}
+
 .gcmsicon-mapping-white {
-  background-image: url("../images/icons/icon-mapping-white.png");
+  text-align:center;
+  background-image: url("../images/icons/grcicons/regmapper.png");
+  -moz-background-size:18px 18px;
+             -ie-background-size:18px 18px;
+              -o-background-size:18px 18px;
+         -webkit-background-size:18px 18px;
+                 background-size:18px 18px;
+  display: inline-block;
+  width: 18px;
+  height: 18px;
 }
+
 .gcmsicon-import-white {
-  background-image: url("../images/icons/icon-import-white.png");
+  background-image: url("../images/icons/grcicons/import.png");
+  -moz-background-size:16px 16px;
+             -ie-background-size:16px 16px;
+              -o-background-size:16px 16px;
+         -webkit-background-size:16px 16px;
+                 background-size:16px 16px;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
 }
+
 .gcmsicon-play-black {
   background-image: url("../images/icons/icon-play-black.png");
 }
-.gcmsicon-back-black {
-  background-image: url("../images/icons/icon-back-black.png");
-}
+
 .gcmsicon-mapping-black {
   background-image: url("../images/icons/icon-mapping-black.png");
 }
@@ -321,13 +149,182 @@
   background-image: url("../images/icons/icon-back-black.png");
 }
 
+
 [class^="gcmsicon-"], [class*=" gcmsicon-"] {
   display: inline-block;
+  
   width: 18px;
   height: 18px;
+  -moz-background-size:18px 18px;
+             -ie-background-size:18px 18px;
+              -o-background-size:16px 18px;
+         -webkit-background-size:18px 18px;
+                 background-size:18px 18px;
+
   line-height: 18px;
   vertical-align: top;
-  margin:0px 2px 0px 2px;
   background-position: 0px 0px;
   background-repeat: no-repeat;
 }
+
+.gcmsicon-enlarge-grey {
+  background-image: url("../images/icons/grcicons/chevrondown.png");
+    -moz-background-size:16px 16px;
+             -ie-background-size:16px 16px;
+              -o-background-size:16px 16px;
+         -webkit-background-size:16px 16px;
+                 background-size:16px 16px;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin:0;
+  padding:0;
+  background-position: 0px 0px;
+  background-repeat: no-repeat;
+}
+.gcmssmallicon-blue-expand {
+  background-image: url("../images/icons/grcicons/chevronleft-blue.png");
+  display: inline-block;
+ -moz-background-size:16px 16px;
+             -ie-background-size:16px 16px;
+              -o-background-size:16px 16px;
+         -webkit-background-size:16px 16px;
+                 background-size:16px 16px;
+  width: 16px;
+  height: 16px;
+  margin:0;
+  padding:0;
+  background-position: 0px 0px;
+  background-repeat: no-repeat;
+}
+
+.gcmsicon-hidden-blue{
+  background-image: url("../images/icons/grcicons/chevronup.png");
+  display: inline-block;
+  -moz-background-size:16px 16px;
+             -ie-background-size:16px 16px;
+              -o-background-size:16px 16px;
+         -webkit-background-size:16px 16px;
+                 background-size:16px 16px;
+  width: 16px;
+  height: 16px;
+  margin:0;
+  padding:0;
+  background-position: 0px 0px;
+  background-repeat: no-repeat;
+}
+
+
+.gcmsicon-x-grey {
+display: inline-block;
+  background-image: url("../images/icons/grcicons/close.png");
+  -moz-background-size:16px 16px;
+             -ie-background-size:16px 16px;
+              -o-background-size:16px 16px;
+         -webkit-background-size:16px 16px;
+                 background-size:16px 16px;
+  width: 16px;
+  height: 16px;
+  background-position: 0px 0px;
+  background-repeat: no-repeat;
+}
+
+.gcmsicon-questionmark-grey {
+  background-image: url("../images/icons/grcicons/help.png");
+   -moz-background-size:16px 16px;
+             -ie-background-size:16px 16px;
+              -o-background-size:16px 16px;
+         -webkit-background-size:16px 16px;
+                 background-size:16px 16px;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-position: 0px 0px;
+  background-repeat: no-repeat;
+}
+
+
+.gcmsicon-edit-grey {
+  background-image: url("../images/icons/grcicons/edit.png");
+  display: inline-block;
+  -moz-background-size:16px 16px;
+             -ie-background-size:16px 16px;
+              -o-background-size:16px 16px;
+         -webkit-background-size:16px 16px;
+                 background-size:16px 16px;
+  width: 16px;
+  height: 16px;
+  background-position: 0px 0px;
+  background-repeat: no-repeat;
+}
+.gcmsicon-edit-white {
+  background-image: url("../images/icons/icon-edit-white.png");
+}
+
+/* ARROWS */
+
+
+.gcmsicon-arrowleft-black {
+  background-image: url("../images/icons/grcicons/arrowleft.png");
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  -moz-background-size:16px 16px;
+             -ie-background-size:16px 16px;
+              -o-background-size:16px 16px;
+         -webkit-background-size:16px 16px;
+                 background-size:16px 16px;
+  background-position: 0px 0px;
+  background-repeat: no-repeat;
+}
+
+.gcmsicon-arrowright-black {
+  background-image: url("../images/icons/grcicons/arrowright.png");
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  -moz-background-size:16px 16px;
+             -ie-background-size:16px 16px;
+              -o-background-size:16px 16px;
+         -webkit-background-size:16px 16px;
+                 background-size:16px 16px;
+  background-position: 0px 0px;
+  background-repeat: no-repeat;
+}
+
+/* 18 pixel icons, mostly for buttons */
+
+
+
+.gcmsicon-back-black{
+  background-image: url("../images/icons/grcicons/arrowleft.png");
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  -moz-background-size:18px 18px;
+             -ie-background-size:18px 18px;
+              -o-background-size:16px 18px;
+         -webkit-background-size:18px 18px;
+                 background-size:18px 18px;
+  background-position: 0px 0px;
+  background-repeat: no-repeat;
+}
+
+
+.gcmsicon-play-white {
+  background-image: url("../images/icons/grcicons/arrowright-white.png");
+  -moz-background-size:18px 18px;
+             -ie-background-size:18px 18px;
+              -o-background-size:18px 18px;
+         -webkit-background-size:18px 18px;
+                 background-size:18px 18px;
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin:0;
+  padding:0;
+  background-position: 0px 0px;
+  background-repeat: no-repeat;
+}
+
+

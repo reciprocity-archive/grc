@@ -19,6 +19,13 @@
 }
 
 .modal-body {
+  .tab-content {
+    margin:0;
+  }
+  
+  .btn.new {
+    margin-top:8px;
+  }
 
   padding: 10px;
   overflow-y: auto;
@@ -31,6 +38,15 @@
   }
   :-moz-placeholder {
     color: $lightGray;
+  }
+  
+  h4 {
+    font-size:18px;
+    color:$darkGray;
+    line-height:36px;
+    height:36px;
+    margin:0px;
+    font-weight:normal;
   }
   
   label {
@@ -59,7 +75,7 @@
   }
   
   .scope {
-    padding:0 6px;
+    padding:1px 6px 5px;
     background:$lightestGray;
     border:1px solid darken($lightestGray,10%);
     @include border-radius();
@@ -71,7 +87,7 @@
   }
   
   .audit {
-    padding:0 6px;
+    padding:1px 6px 5px;
     background:$auditBgndColor;
     border:1px solid darken($auditBgndColor,10%);
     @include border-radius();
@@ -119,4 +135,161 @@
   .btn-primary {
     display:inline-block;
   }
+}
+
+// various modal items
+
+.people-list {
+  max-height:350px;
+  &.short {
+    height:267px;
+  }  
+  overflow:auto;
+  li {
+    .additional {
+      display:none;
+    }
+    border:1px solid $borderDefault;
+    background:#f0f0f0;
+    border-bottom:none;
+    &:hover {
+     background:#fff;
+    }
+    &:first-child {
+      // border-top:none;
+    }
+    &:last-child {
+      border-bottom:1px solid $borderDefault;
+    }
+    padding:4px 8px;
+    .name {
+      margin:0;
+      padding:0;
+      font-size:16px;
+      font-weight:normal;
+      color:#111;
+      small {
+        font-size:11px;
+        font-weight:normal;
+        color:$mediumGray;
+      }
+    }
+    .company {
+      display:block;
+      font-size:12px;
+      font-weight:normal;
+      color:#999;
+    }
+    .btn-mini {
+      margin-left:8px;
+    }
+    label {
+      strong {
+        color:$errorColor;
+      }
+    }
+    input.date {
+      font-size:10px;
+    }
+    span.label {
+      display:block;
+      margin-top:10px;
+      text-align:center;
+      font-size:13px;
+      &.label-danger {
+        background:$errorColor;
+      }
+      
+    }
+    .btn-solid {
+      height:22px;
+      line-height:18px;
+      margin-left:0;
+    }
+    .actions {
+      .btn {
+        height:20px;
+        margin-top:4px;
+        i {
+          margin-top:3px;
+        }
+      }
+    }
+  }
+}
+
+.filter-block {
+  .search-list input {
+    margin-bottom:0 !important;
+    margin-right:-4px;
+  }
+  .nav-tabs {
+    margin:6px 0 0 0;
+    border:none;
+    li {
+      margin-bottom:0;
+      float:none;
+      &.active {
+        a {
+          background:#eee;
+          @include border-radius(0);
+          color:$black;
+        }
+      }
+      a {
+        margin-right:0;
+        &:hover {
+          background:$white;          
+          color:$darkGray;
+          border-right:1px solid $white;
+          @include border-radius(0);
+        }      
+      }
+    }
+  }
+}
+
+.modal-search {
+  @include border-radius(4px 4px 0 0);
+  border:1px solid $borderDefault;
+  padding:6px;
+  background:$lightestGray;
+  input {
+    font-size:12px;
+    height:18px;
+    line-height:18px;
+    padding-top:0;
+    padding-bottom:0;
+  }
+  .btn-mini {
+    margin:0;
+  }
+}
+
+.additional-filters {
+  border-left:1px solid $borderDefault;
+  border-right:1px solid $borderDefault;
+  border-bottom:1px solid $borderDefault;
+  background:$lightestGray;
+  padding:0 6px 6px 6px;
+  input {
+    font-size:12px;
+    height:20px;
+    line-height:20px;
+    padding-top:0;
+    padding-bottom:0;
+    min-height:0px !important;
+  }
+
+  label {
+    font-weight:normal;
+  }
+}
+
+
+// JS class
+
+.filter-group,
+.category-group {
+  display:none;
 }

@@ -46,11 +46,9 @@ jQuery(function ($) {
   renderExternalTmpl({ name: 'mappedcontrols', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'mappedcontrolsfull', selector: '#templates', data: {} });
   
-  renderExternalTmpl({ name: 'newprogram', selector: '#templates', data: {} });
   // new modals START
   renderExternalTmpl({ name: 'redesignNewProgram', selector: '#templates', data: {} });
-  renderExternalTmpl({ name: 'redesignNewProgramWide', selector: '#templates', data: {} });
-  renderExternalTmpl({ name: 'redesignNewProgramWide2', selector: '#templates', data: {} });
+  renderExternalTmpl({ name: 'redesignSelectPersonWide', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'redesignNewControlWide', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'redesignNewSectionWide', selector: '#templates', data: {} });
 
@@ -151,6 +149,127 @@ jQuery(function ($) {
   for (i=0;i<=5;i++) {
     $('#tooltip' + i).tooltip();
   }
+
+  // show/hide widget
+
+  $('body').on('click', '.widget-trigger', function(e) {
+    e.preventDefault();
+    var $this = $(this),
+        $widgetBody = $this.closest(".widget").find(".widget-body"),
+        $icon = $this.find("i");
+
+    if( $this.hasClass("active") ) {
+      $widgetBody.slideUp("fast");
+      $this.removeClass("active");
+      $icon
+        .removeClass("icon-chevron-down")
+        .addClass("icon-chevron-right");
+    } else {
+      $widgetBody.slideDown("fast");
+      $this.addClass("active");
+      $icon
+        .removeClass("icon-chevron-right")
+        .addClass("icon-chevron-down");
+    }
+
+  });
+
+  // show/hide list item
+
+  $('body').on('click', '.list-trigger', function(e) {
+    e.preventDefault();
+    var $this = $(this),
+        $listBody = $this.closest(".wlist-title").next(),
+        $icon = $this.find("i");
+
+    if( $this.hasClass("active") ) {
+      $listBody.slideUp("fast");
+      $this.removeClass("active");
+      $icon
+        .removeClass("icon-chevron-down")
+        .addClass("icon-chevron-right");
+    } else {
+      $listBody.slideDown("fast");
+      $this.addClass("active");
+      $icon
+        .removeClass("icon-chevron-right")
+        .addClass("icon-chevron-down");
+    }
+
+  });
+
+  // nicer hover
+
+  $('body').on('mouseenter', '.people-list li', function(e) {
+    $(this).find(".additional").slideDown("fast");
+  });
+
+  $('body').on('mouseleave', '.people-list li', function(e) {
+    $(this).find(".additional").slideUp("fast");
+  });
+
+
+  // add item in target list
+
+  $('body').on('click', '.add-me', function(e) {
+    
+    e.preventDefault();
+    
+    var $this = $(this),
+        $icon = $this.find("i"),
+        $itemToAdd = $this.closest("li"),
+        $name = $itemToAdd.find(".name").html(),
+        $company = $itemToAdd.find(".company").html(),        
+        $target = $this.closest(".modal-body").find(".target"),
+        $unassignedItems = $("#unassignedElements");
+        $unassignedValue = parseInt($unassignedItems.html());
+    
+    $icon
+      .removeClass("icon-chevron-right")
+      .addClass("icon-ok")
+    $target
+      .prepend('<li class="new-item"><div class="row-fluid"><div class="span6"><span class="company">' + $company + '</span><span class="name">'+ $name +'</span></div><div class="span3"><span class="label label-danger">No relationship</span></div><div class="span3 actions"><a href="#" class="btn btn-mini pull-right"><i class="icon-minus-sign"></i></a><a href="#" class="btn btn-mini pull-right"><i class="icon-pencil"></i></a></div></div><div class="row-fluid additional"><div class="span6"><label>Relationship <strong>PENDING</strong></label><select class="span12"><option>No relationship</option><option>Is Accountable</option><option>Is Responsible</option></select></div><div class="span3"><label>Start Date</label><input class="span12" type="text" placeholder="MM/DD/YYYY"></div><div class="span3"><label>Stop Date</label><input class="span12" type="text" placeholder="MM/DD/YYYY"></div></div></li>')
+      .find("li.new-item").hide().fadeIn('slow').removeClass("new-item");  
+    $unassignedItems
+      .html($unassignedValue + 1).fadeIn();
+  });
+
+  // show filters in modals
+  
+  $('body').on('click', '#showFilters', function(e) {
+    e.preventDefault();
+    var $this = $(this),
+        $filters = $this.closest(".modal-body").find(".filter-group"),
+        $searchableLists = $this.closest(".modal-body").find(".filter-block .people-list");
+        
+    if( $this.hasClass("active") ) {
+      $filters.hide();
+      $this.removeClass("active");        
+      $searchableLists.removeClass("short");
+    } else {
+      $filters.show();
+      $this.addClass("active");
+      $searchableLists.addClass("short");
+    }      
+  });
+
+  $('body').on('click', '#showCategories', function(e) {
+    e.preventDefault();
+    var $this = $(this),
+        $filters = $this.closest(".modal-body").find(".category-group"),
+        $searchableLists = $this.closest(".modal-body").find(".filter-block .people-list");
+        
+    if( $this.hasClass("active") ) {
+      $filters.hide();
+      $this.removeClass("active");        
+      $searchableLists.removeClass("short");
+    } else {
+      $filters.show();
+      $this.addClass("active");
+      $searchableLists.addClass("short");
+    }      
+  });
+
 
   // status js
   var userHasPriviledge = true;

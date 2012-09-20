@@ -43,12 +43,15 @@
               %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
                 %i.gcmsicon-questionmark-grey
               %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
-              %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#programInProgress"}
+              %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#programsInProgress"}
                 %i.gcmsicon-enlarge-grey
           / /.WidgetBoxHeading
           .WidgetBoxContent
-            #programInProgress.toolbar-widget.in
+            #programsInProgress.toolbar-widget.in
               %ul#quickLinks.nav.nav-tabs.nav-stacked.in
+                %li.group
+                  %a.btn{:href => "/design/redesignPageTemplate"}
+                    Redesigned Page Template
                 %li.group
                   %a.btn{:href => "/design/audit-manager"}
                     Audit Manager
@@ -61,7 +64,6 @@
                 
                 %li.group
                   %a.btn{:href => "/design/audit-setup"}
-                    %i.gcmsicon-asterix-black
                     Audit Setup
                 %li.group
                   %a.btn{:href => "/design/audit-control-review"}
@@ -71,7 +73,6 @@
                     Systems Page
                 %li.group
                   %a.btn{:href => "/design/products"}
-                    %i.gcmsicon-asterix-black
                     Products Page
                 %li.group
                   %a.btn{:href => "/programs"}
@@ -220,21 +221,14 @@
           #programInProgress.toolbar-widget.in
             %ul#quickLinks.nav.nav-tabs.nav-stacked.in
               %li.group
-                %a.btn{"data-toggle" => "modal", :href => "#redesignNewProgram"}
-                  Redesign: New Program
-              %li.group
-                %a.btn{"data-toggle" => "modal", :href => "#redesignNewProgramWide"}
-                  Redesign: New Program (Wide)
-              %li.group
-                %a.btn{"data-toggle" => "modal", :href => "#redesignNewProgramWide2"}
-                  Redesign: New Program 2 (Wide)
-              %li.group
-                %a.btn{"data-toggle" => "modal", :href => "#redesignNewControlWide"}
-                  Redesign: New Control (Wide)
-              %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#redesignNewSectionWide"}
                   Redesign: New Section (Wide)
-
+              %li.group
+                %a.btn{"data-toggle" => "modal", :href => "#redesignSelectPersonWide"}
+                  Redesign: Select person (Wide)
+              %li.group
+                %a.btn{"data-toggle" => "modal", :href => "#newreference"}
+                  New Reference
               %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#newcontrolModal"}
                   New Control
@@ -243,7 +237,7 @@
                   New/Edit Audit Cycle
               %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#newprogramModal"}
-                  New Program
+                  Old New Program - Mail Merge?
               %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#newsectionModal"}
                   New Section
@@ -255,31 +249,21 @@
                   New/Edit System
               %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#sendauditorinvite"}
-                  %i.gcmsicon-mapping-black>
                   Send Auditor Invite
               %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#auditdefaultscope"}
-                  %i.gcmsicon-mapping-black>
                   Set Audit Default Scope
               %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#confirmModal"}
-                  %i.gcmsicon-mapping-black>
                   Are You Sure?
               %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#basicnewpersonModal"}
-                  %i.gcmsicon-mapping-black>
                   Basic New Person
               %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#newtransactionModal"}
-                  %i.gcmsicon-mapping-black>
                   New Transaction
               %li.group
-                %a.btn{"data-toggle" => "modal", :href => "#newsystemModal"}
-                  %i.gcmsicon-asterix-black
-                  New/Edit System/Biz Process
-              %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#createnewProduct"}
-                  %i.gcmsicon-asterix-black
                   New/Edit Product
               %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#mappedcontrols"}
@@ -291,16 +275,40 @@
                 %h5 In progress
               %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#createnewfacility"}
-                  %i.gcmsicon-newfacility-black
                   New Location/Facility
               %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#newentityModal"}
-                  %i.gcmsicon-organization-black
                   New Entity/Org Group
               %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#createnewthreat"}
-                  %i.gcmsicon-threat-black
                   New Threat/Risk
+    .singleColumn
+      / in progress
+      #Programs.WidgetBox.singleWide
+        .WidgetBoxHeading
+          .WidgetTitle In-Progress x2 Modals
+          %nav
+            %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+              %i.gcmsicon-questionmark-grey
+            %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
+            %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#programInProgressRedesign"}
+              %i.gcmsicon-enlarge-grey
+        / /.WidgetBoxHeading
+        .WidgetBoxContent
+          #programInProgressRedesign.toolbar-widget.in
+            %ul#quickLinks.nav.nav-tabs.nav-stacked.in
+              %li.group
+                %a.btn{"data-toggle" => "modal", :href => "#redesignNewProgram"}
+                  Redesign: New Program
+              %li.group
+                %a.btn{"data-toggle" => "modal", :href => "#redesignNewControlWide"}
+                  Redesign: New Control
+              %li.group
+                %a.btn{"data-toggle" => "modal", :href => "#redesignNewSectionWide"}
+                  Redesign: New Section
+              %li.group
+                %a.btn{"data-toggle" => "modal", :href => "#newsystemModal"}
+                  New/Edit System/Biz Process
             
   .doubleColumn
     .fullHeight
