@@ -38,21 +38,19 @@
                 =render :partial => 'design/templates/grcmenu'
           .headerright
             .btn-toolbar.fltrt.toolbar-nav
-              -if controller.controller_name == 'programs_dash'
+              .btn-group
+                -path = request.fullpath.gsub(/BETA=[^&]*&?/, '').sub(/[?&]$/, '')
+                -path += path.include?('?') ? '&' : '?'
+                -if has_feature? :BETA
+                  %a.btn.btn-warning{ :href => "#{path}BETA=0" } Hide
+                -else
+                  %a.btn.btn-success{ :href => "#{path}BETA=1" } Show Demo
+              -if controller.controller_name != 'programs_dash'
                 .btn-group
-                  -path = request.fullpath.gsub(/BETA=[^&]*&?/, '').sub(/[?&]$/, '')
-                  -path += path.include?('?') ? '&' : '?'
-                  -if has_feature? :BETA
-                    %a.btn.btn-warning{ :href => "#{path}BETA=0" } Hide
-                  -else
-                    %a.btn.btn-success{ :href => "#{path}BETA=1" } Show Demo
-              -if has_feature? :BETA
-                -if controller.controller_name != 'programs_dash'
-                  .btn-group
-                    -# should find their site path back, jvg hack
-                    %a.btn{ :onclick => 'history.back(); return false;'  }
-                      %i.gcmsicon-back-black
-                      Back
+                  -# should find their site path back, jvg hack
+                  %a.btn{ :onclick => 'history.back(); return false;'  }
+                    %i.gcmsicon-back-black
+                    Back
               -help_path = yield(:page_help)
               -if !help_path.blank?
                 .btn-group
