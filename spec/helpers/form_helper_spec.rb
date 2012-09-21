@@ -75,4 +75,90 @@ describe FormHelper do
       end
     end
   end
+
+  context "wrapped_* helpers" do
+    before :each do
+      init_haml_helpers
+      create_base_objects
+    end
+
+    it "wraps textarea" do
+      form_for(@reg) do |f|
+        message = wrapped_text_area(f, :span4, :title)
+        message.should have_selector("div.span4")
+        message.should have_selector("div.span4 > textarea")
+        message.should have_selector("div.span4 > label")
+        message.should have_selector("div.span4 > span.help-inline")
+      end
+    end
+
+    it "wraps text field" do
+      form_for(@reg) do |f|
+        message = wrapped_text_field(f, :span4, :title)
+        message.should have_selector("div.span4")
+        message.should have_selector("div.span4 > input[type='text']")
+        message.should have_selector("div.span4 > label")
+        message.should have_selector("div.span4 > span.help-inline")
+      end
+    end
+
+    it "wraps date field" do
+      form_for(@reg) do |f|
+        f.object.start_date = Date.new(2003, 1, 2)
+        message = wrapped_date_field(f, :span4, :start_date)
+        message.should have_selector("div.span4")
+        message.should have_selector("div.span4 > input[type='text']")
+        message.should have_selector("div.span4 > label")
+        message.should have_selector("div.span4 > span.help-inline")
+        message.should have_selector("div.span4 > input[value='01/02/2003']")
+      end
+    end
+
+    it "wraps select" do
+      form_for(@reg) do |f|
+        message = wrapped_select(f, :span4, :kind, [['A', 'a'], ['B', 'b']])
+        message.should have_selector("div.span4")
+        message.should have_selector("div.span4 > select")
+        message.should have_selector("div.span4 > select > option")
+        message.should have_selector("div.span4 > select > option[value='b']")
+        message.should have_selector("div.span4 > select > option[value='a']")
+        message.should have_selector("div.span4 > label")
+        message.should have_selector("div.span4 > span.help-inline")
+      end
+    end
+
+    it "allows a custom label with :label_name option" do
+      form_for(@reg) do |f|
+        message = wrapped_text_field(f, :span4, :title, :label_name => 'custom')
+        message.should have_selector("div.span4 > label")
+        message.should have_content("custom")
+      end
+    end
+
+    it "doesn't throw an exception if the method doesn't exist" do
+      form_for(@reg) do |f|
+        message = wrapped_text_field(f, :span4, :blah)
+        message.should have_selector("div.span4")
+      end
+    end
+  end
+
+  context "parse_date_param" do
+    it "transforms date-formatted string to Date object" do
+      params = { :field => '01/02/2003' }.with_indifferent_access
+      parse_date_param(params, :field)
+      params[:field].should be_a(Date)
+      params[:field].should eq(Date.new(2003, 1, 2))
+    end
+  end
+
+  context "parse_option_param" do
+    it "transforms option id to Option instance" do
+      @opt1 = FactoryGirl.create(:option, :role => 'x', :title => 'X')
+      params = { :field_id => @opt1.id }.with_indifferent_access
+      parse_option_param(params, 'field')
+      params[:field].should be_a(Option)
+      params[:field].should eq(@opt1)
+    end
+  end
 end

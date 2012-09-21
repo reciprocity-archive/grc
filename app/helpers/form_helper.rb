@@ -55,7 +55,8 @@ module FormHelper
     wrapped_input(:text_field, f, span_class, name, *args)
   end
 
-  def wrapped_date_field(f, span_class, name, options)
+  def wrapped_date_field(f, span_class, name, options=nil)
+    options ||= {}
     if !options.has_key?(:value) && f.object.respond_to?(name)
       value = f.object.send(name)
       options[:value] = value && value.strftime('%m/%d/%Y')
