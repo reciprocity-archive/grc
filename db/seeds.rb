@@ -75,7 +75,7 @@ ActiveRecord::Base.transaction do
   cycle = Cycle.
     where(:program_id => prog1).
     first_or_create!(
-      {:program_id => prog1, :start_at => '2011-01-01', :complete => false},
+      {:program => prog1, :start_at => '2011-01-01', :complete => false},
       :without_protection => true)
 
   # People
@@ -147,7 +147,7 @@ ActiveRecord::Base.transaction do
     :control_means => ['Manual', 'Manual with Segregation of Duties', 'Automated'],
     :document_type => ['URL', 'PDF', 'Text', 'Excel', 'Word'],
     :document_status => [:active, :deprecated],
-    :document_year => (1980..2012).to_a.reverse,
+    :document_year => (1980..2012).to_a.map(&:to_s).reverse,
     :language => [],
     #:program_type => ['Regulation', 'Company'],
     :program_kind => ['Not Applicable'],
