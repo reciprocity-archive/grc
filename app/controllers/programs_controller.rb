@@ -42,7 +42,6 @@ class ProgramsController < ApplicationController
   layout 'dashboard'
 
   def show
-    #@program = Program.find(params[:id])
     @stats = program_stats(@program)
   end
 
@@ -53,10 +52,6 @@ class ProgramsController < ApplicationController
   end
 
   def edit
-    if @program.previous_version
-      @program = @program.previous_version
-    end
-
     render :layout => nil
   end
 
@@ -178,6 +173,12 @@ class ProgramsController < ApplicationController
       program_params = params[:program] || {}
       if program_params[:type]
         program_params[:company] = (program_params.delete(:type) == 'company')
+      end
+      %w(start_date stop_date audit_start_date).each do |field|
+        parse_date_param(program_params, field)
+      end
+      %w(kind audit_frequency audit_duration).each do |field|
+        parse_option_param(program_params, field)
       end
       program_params
     end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120917181642) do
+ActiveRecord::Schema.define(:version => 20120920060228) do
 
   create_table "accounts", :force => true do |t|
     t.string   "username"
@@ -73,20 +73,23 @@ ActiveRecord::Schema.define(:version => 20120917181642) do
   add_index "control_sections", ["section_id"], :name => "index_control_control_objectives_on_control_objective_id"
 
   create_table "controls", :force => true do |t|
-    t.string   "title",                         :null => false
-    t.string   "slug",                          :null => false
+    t.string   "title",                     :null => false
+    t.string   "slug",                      :null => false
     t.text     "description"
-    t.integer  "frequency"
-    t.integer  "frequency_type", :default => 1
-    t.datetime "effective_at"
     t.integer  "program_id"
     t.integer  "modified_by_id"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
     t.integer  "parent_id"
     t.integer  "type_id"
     t.integer  "kind_id"
     t.integer  "means_id"
+    t.string   "version"
+    t.datetime "start_date"
+    t.datetime "stop_date"
+    t.string   "url"
+    t.text     "documentation_description"
+    t.integer  "verify_frequency_id"
   end
 
   add_index "controls", ["program_id"], :name => "index_controls_on_regulation_id"
@@ -157,15 +160,23 @@ ActiveRecord::Schema.define(:version => 20120917181642) do
   end
 
   create_table "programs", :force => true do |t|
-    t.string   "title",                             :null => false
-    t.string   "slug",                              :null => false
+    t.string   "title",                                 :null => false
+    t.string   "slug",                                  :null => false
     t.text     "description"
-    t.boolean  "company",        :default => false, :null => false
+    t.boolean  "company",            :default => false, :null => false
     t.integer  "modified_by_id"
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
-    t.integer  "frequency_type", :default => 1
-    t.integer  "frequency",      :default => 1
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
+    t.string   "version"
+    t.datetime "start_date"
+    t.datetime "stop_date"
+    t.string   "url"
+    t.string   "organization"
+    t.text     "scope"
+    t.integer  "kind_id"
+    t.datetime "audit_start_date"
+    t.integer  "audit_frequency_id"
+    t.integer  "audit_duration_id"
   end
 
   add_index "programs", ["slug"], :name => "index_programs_on_slug", :unique => true

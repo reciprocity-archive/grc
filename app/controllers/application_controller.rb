@@ -8,6 +8,7 @@
 class ApplicationController < ActionController::Base
   include ApplicationHelper
   include AuthorizationHelper
+  include FormHelper
 
   before_filter :require_user
   before_filter :filter_set

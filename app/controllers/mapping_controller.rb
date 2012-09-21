@@ -46,9 +46,16 @@ class MappingController < ApplicationController
       rcontrol = Control.new(
         :title => section.title,
         :slug => section.slug + "-" + ccontrol.slug,
-        :frequency => ccontrol.frequency,
-        :frequency_type => ccontrol.frequency_type,
-        :description => "Placeholder"
+        :description => "Placeholder",
+        #:program => ccontrol.program,
+        :type => ccontrol.type,
+        :kind => ccontrol.kind,
+        :means => ccontrol.means,
+        :start_date => ccontrol.start_date,
+        :stop_date => ccontrol.stop_date,
+        :url => ccontrol.url,
+        :verify_frequency => ccontrol.verify_frequency,
+        :documentation_description => ccontrol.documentation_description
       )
       rcontrol.program = section.program
       rcontrol.save

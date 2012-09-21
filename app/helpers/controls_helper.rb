@@ -5,11 +5,11 @@ module ControlsHelper
       # TODO: Validate the user has access to add controls to the program
       control_params[:program] = Program.where(:id => control_params.delete(:program_id)).first
     end
-    %w(type kind means).each do |field|
-      value_id = control_params.delete(field + '_id')
-      if value_id.present?
-        control_params[field] = Option.find(value_id)
-      end
+    %w(type kind means verify_frequency).each do |field|
+      parse_option_param(control_params, field)
+    end
+    %w(start_date stop_date).each do |field|
+      parse_date_param(control_params, field)
     end
     %w(category).each do |field|
       value_ids = control_params.delete(field + '_ids')

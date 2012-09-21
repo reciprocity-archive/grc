@@ -12,30 +12,32 @@ describe Control do
     create_base_objects
     @account = FactoryGirl.create(:account, :email => "a@b.org", :password => "xxxx", :password_confirmation => "xxxx", :role => "admin")
     @ctl2 = FactoryGirl.create(:control, :title => 'Control 2', :slug => 'REG1-CTL2', :description => 'x', :program => @reg)
+    @opt_verify_freq1 = FactoryGirl.create(:option, :role => 'verify_frequency', :title => 'Frequency 1')
+    @opt_verify_freq2 = FactoryGirl.create(:option, :role => 'verify_frequency', :title => 'Frequency 2')
   end
 
   it "was not modified by anybody in particular" do
     @ctl.modified_by.should eq(nil)
-    @ctl.frequency.should eq(nil)
+    @ctl.verify_frequency.should eq(nil)
   end
 
   it "is creates versions when modified by someone" do
-    @ctl.authored_update(@account, :frequency => 11)
+    @ctl.authored_update(@account, :verify_frequency => @opt_verify_freq1)
     @ctl.reload
-    @ctl.frequency.should eq(11)
+    @ctl.verify_frequency_id.should eq(@opt_verify_freq1.id)
     @ctl.modified_by.should eq(@account)
     @ctl.versions.size.should eq(1)
     @ctl.versions[0].reify.modified_by_id.should eq(nil)
 
-    @ctl.authored_update(@account, :frequency => 12)
+    @ctl.authored_update(@account, :verify_frequency => @opt_verify_freq2)
     @ctl.reload
-    @ctl.frequency.should eq(12)
+    @ctl.verify_frequency_id.should eq(@opt_verify_freq2.id)
     @ctl.modified_by.should eq(@account)
     @ctl.versions.size.should eq(2)
     @ctl.versions[1].reify.modified_by_id.should eq(@account.id)
-    @ctl.versions[1].reify.frequency.should eq(11)
+    @ctl.versions[1].reify.verify_frequency_id.should eq(@opt_verify_freq1.id)
     @ctl.versions[0].reify.modified_by_id.should eq(nil)
-    @ctl.versions[0].reify.frequency.should eq(nil)
+    @ctl.versions[0].reify.verify_frequency_id.should eq(nil)
   end
 
   it "creates a version when deleted" do

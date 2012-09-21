@@ -5,76 +5,41 @@
     Edit control
 
 .row-fluid
-  .span8
+  =wrapped_text_field f, :span4, :title, :placeholder => 'Enter title'
+  =wrapped_select f, :span2, :program_id, Program.all.map { |p| [p.slug, p.id] }, :selected => f.object.program_id
+  .span6
     .row-fluid
-      .span3{ :class => error_class(f, :program) }
-        -if defined? create_company_control
-          -programs = Program.where(:company => true)
-        -elsif defined? create_reg_control
-          -programs = Program.where(:company => false)
-        -else
-          -programs = Program.all
-        =f.label :program_id
-        =f.collection_select :program_id, programs, :id, :slug, { :include_blank => true }, { :class => 'input-small' }
-        =error_messages_inline(f, :program)
+      =wrapped_text_field f, :span6, :slug, :label_name => 'Code (optional)', :placeholder => 'Autofill code'
+      =wrapped_text_field f, :span6, :version, :placeholder => '1.1.1'
 
-      .span3{ :class => error_class(f, :slug) }
-        =f.label :slug, "Code"
-        =f.text_field :slug, :class => 'inputtext-small'
-        =error_messages_inline(f, :slug)
-
-      .span3{ :class => error_class(f, :effective_at) }
-        %label{:for => "control-effective_at"} Effective Date
-        .date{"data-date" => "02-12-12", "data-date-format" => "dd-mm-yy"}
-          %input#control-effective_at.input-mini{:size => "16", :type => "text", :name => 'control[effective_at]', :value => f.object.effective_at && f.object.effective_at.strftime('%Y-%m-%d'), :'data-toggle' => 'datepicker'}
-            %span.add-on
-              %i.calendar
-        =error_messages_inline(f, :effective_at)
-
-      .span3.disabled{ :class => error_class(f, :version) }
-        %label{:for => "control-version"} Version
-        %input#control-version.input-supermini{:name => 'control[version]', :placeholder => "SOX", :type => "text"}
-        =error_messages_inline(f, :version)
-
+.row-fluid
+  =wrapped_text_area f, :span6, :description, :class => 'double', :placeholder => 'Enter description here'
+  .span6
     .row-fluid
-      .span3{ :class => error_class(f, :type) }
-        %label{:for => 'control-type'} Type
-        %select#control-type.input-small{:name => 'control[type_id]', :value => nil}
-          %option(value='') Select Type
-          -Option.options_for(:control_type).each do |o|
-            %option{ :value => o.id, :selected => (o.id == f.object.type_id) }=o.title
-        =error_messages_inline(f, :type)
-
-      .span3{ :class => error_class(f, :kind) }
-        %label{:for => 'control-kind'} Kind
-        %select#control-kind.input-small{:name => 'control[kind_id]', :value => nil}
-          %option(value='') Select Kind
-          -Option.options_for(:control_kind).each do |o|
-            %option{ :value => o.id, :selected => (o.id == f.object.kind_id) }=o.title
-        =error_messages_inline(f, :kind)
-
-      .span6{ :class => error_class(f, :means) }
-        %label{:for => 'control-means'} Means of Operation
-        %select#control-means.span12{:name => 'control[means_id]', :value => nil}
-          %option(value='') Select Option
-          -Option.options_for(:control_means).each do |o|
-            %option{ :value => o.id, :selected => (o.id == f.object.means_id) }=o.title
-        =error_messages_inline(f, :means)
-
+      =wrapped_date_field f, :span6, :start_date, :class => 'date', :label_name => 'Effective Date', :placeholder => 'MM/DD/YYYY'
+      =wrapped_date_field f, :span6, :stop_date, :class => 'date', :label_name => 'Stop Date', :placeholder => 'MM/DD/YYYY'
     .row-fluid
-      .span9{ :class => error_class(f, :title) }
-        %label{:for => 'control-title'} Title
-        %input#control-title.span12{:placeholder => "Title Goes Here", :type => "text", :name => 'control[title]', :value => f.object.title}
-        =error_messages_inline(f, :title)
+      -#=wrapped_select(f, :span6, :type_id, ['Regulation', 'Company'], :selected => f.object.company? ? 'Company' : 'Regulation', :)
+      =wrapped_select(f, :span6, :kind_id, Option.options_for(:control_kind).map { |o| [o.title, o.id] }, :selected => (f.object.respond_to?(:kind_id) ? f.object.kind_id : nil))
 
-      .span3.disabled{ :class => error_class(f, :status) }
-        %label{:for => 'control-status'} Status
-        %select#control-status.input-small{:name => 'control[status]', :value => nil}
-          %option Deprecated
-          %option Open
-        =error_messages_inline(f, :status)
+.row-fluid
+  =wrapped_text_field f, :span6, :url, :label_name => 'Direct Link', :placeholder => 'http://www.example.com/'
+  .span6
+    .row-fluid
+      =wrapped_select(f, :span6, :means_id, Option.options_for(:control_means).map { |o| [o.title, o.id] }, :selected => (f.object.respond_to?(:means_id) ? f.object.means_id : nil))
+      =wrapped_select(f, :span6, :verify_frequency_id, Option.options_for(:verify_frequency).map { |o| [o.title, o.id] }, :selected => (f.object.respond_to?(:verify_frequency_id) ? f.object.verify_frequency_id : nil), :label_name => 'Confirmation Frequency')
 
-  #categorylist.span4.well{ :class => error_class(f, :categories) }
+.row-fluid
+  .span6{ :class => error_class(f, :documentation_description) }
+    %label.subtitle
+      Documentation Description
+      %a.fltrt.underline
+    .row-fluid
+      %textarea#wysihtml5d.span12{:name => 'control[documentation_description]', :placeholder => "One-sentence explanation of the applicability of this program, used in mail merge templates.", :rows => "3", }=f.object.documentation_description
+      =error_messages_inline(f, :documentation_description)
+
+  %br
+  #categorylist.span6.well{ :class => error_class(f, :categories) }
     %label{:for => 'control-categories'} Categories
     -category_list = Control.category_tree
     %select{:multiple => "multiple", :name => 'control[category_ids][]'}
@@ -84,19 +49,9 @@
             %option{ :value => subcategory.id, :selected => (f.object.category_ids.include?(subcategory.id)) }=subcategory.name
     =error_messages_inline(f, :categories)
 
-.row-fluid
-  %label{:for => "control-description"} Description
-.row-fluid
-  .span12.well{ :class => error_class(f, :description) }
-    %textarea#control-description.span12{:placeholder => "", :rows => "4", :name => 'control[description]', :value => f.object.description}=f.object.description
-    =error_messages_inline(f, :description)
-
-%br
-.row-fluid
-  .span12.disabled{ :class => error_class(f, :url) }
-    %label{:for => 'control-url'} URL
-    %input#control-url.span12{:placeholder => "http://", :type => "text", :name => 'control[url]', :value => nil}
-    =error_messages_inline(f, :url)
+:javascript
+  //$('#wysihtml5').wysihtml5({ image: false }); //Button to insert an image. Default true
+  $('#control_start_date, #control_stop_date').datepicker();
 
 -if !f.object.new_record?
   =render :partial => 'shared/object_info', :locals => { :object => f.object, :approved => false }

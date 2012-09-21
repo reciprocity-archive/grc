@@ -107,6 +107,7 @@
 
       if (new_target) {
         $target = $('<div id="' + modal_id + '" class="modal hide"></div>');
+        $target.addClass($this.attr('data-modal-class'));
         $this.attr('data-target', '#' + modal_id);
       }
 

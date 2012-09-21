@@ -4,11 +4,10 @@
 class Program < ActiveRecord::Base
   include AuthoredModel
   include SluggedModel
-  include FrequentModel
   include SearchableModel
   include AuthorizedModel
 
-  attr_accessible :title, :slug, :company, :description
+  attr_accessible :title, :slug, :company, :description, :start_date, :stop_date, :audit_start_date, :audit_frequency, :audit_duration, :organization, :url, :scope, :kind, :version
 
   has_many :sections, :order => :slug
   has_many :controls, :order => :slug
@@ -20,6 +19,12 @@ class Program < ActiveRecord::Base
 
   has_many :object_documents, :as => :documentable, :dependent => :destroy
   has_many :documents, :through => :object_documents
+
+  belongs_to :type, :class_name => 'Option', :conditions => { :role => 'program_type' }
+  belongs_to :kind, :class_name => 'Option', :conditions => { :role => 'program_kind' }
+
+  belongs_to :audit_frequency, :class_name => 'Option', :conditions => { :role => 'audit_frequency' }
+  belongs_to :audit_duration, :class_name => 'Option', :conditions => { :role => 'audit_duration' }
 
   is_versioned_ext
 

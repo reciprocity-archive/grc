@@ -70,8 +70,7 @@ ActiveRecord::Base.transaction do
   company_ctl = Control.
     where(:slug => 'COM-CTL1').
     first_or_create!(
-      {:title => 'Company Control 1', :description => 'x', :program => prog1,
-      :is_key => true, :fraud_related => false},
+      {:title => 'Company Control 1', :description => 'x', :program => prog1},
       :without_protection => true)
   cycle = Cycle.
     where(:program_id => prog1).
@@ -134,14 +133,45 @@ ActiveRecord::Base.transaction do
   # Options
 
   options = {
-    :control_type => [],
-    :control_kind => ["Reactive", "Directive", "Detective", "Preventative"],
-    :control_means => ["Manual", "Manual with Segregation of Duties", "Automated"],
-    :system_type => ["Infrastructure"],
-    :document_type => [],
+    :audit_frequency => [
+      'Continuous', 'Ad-Hoc', 'Hourly', 'Daily', 'Weekly',
+      'Monthly', 'Quarterly', 'Semi-Annual', 'Annual', 'Bi-Annual'],
+    :verify_frequency => [
+      'Continuous', 'Ad-Hoc', 'Hourly', 'Daily', 'Weekly',
+      'Monthly', 'Quarterly', 'Semi-Annual', 'Annual', 'Bi-Annual'],
+    :audit_duration => [
+      '1 Week', '2 Weeks', '1 Month', '2 Months', '3 Months',
+      '4 Months', '6 Months', '1 Year'],
+    #:control_type => ['Regulation', 'Company'],
+    :control_kind => ['Reactive', 'Directive', 'Detective', 'Preventative'],
+    :control_means => ['Manual', 'Manual with Segregation of Duties', 'Automated'],
+    :document_type => ['URL', 'PDF', 'Text', 'Excel', 'Word'],
     :document_status => [:active, :deprecated],
     :document_year => (1980..2012).to_a.reverse,
-    :language => []
+    :language => [],
+    #:program_type => ['Regulation', 'Company'],
+    :program_kind => ['Not Applicable'],
+    #:system_type => ['System', 'Business Process'],
+    :system_kind => ['Infrastructure'],
+    :product_type => ['Appliance', 'Desktop Software', 'SaaS'],
+    :product_kind => ['Not Applicable'],
+    :entity_type => [
+      'Division', 'Functional Group', 'Business Unit', 'Legal Entity'],
+    :entity_kind => ['Not Applicable'],
+    :location_type => [
+      'Headquarters', 'Regional Office', 'Sales Office',
+      'Data Center', 'Colo Data Center', 'Vendor Worksite',
+      'Contract Manufacturer', 'Distribution Center'],
+    :location_kind => [
+      'Building', 'Machine Room', 'Kitchen', 'Workshop', 'Office',
+      'HazMat Storage', 'Maintenance Facility', 'Parking Garage', 'Lab'],
+    :threat_type => ['Insider Threat', 'Outsider Threat'],
+    :asset_type => [
+      'Ledger Accounts', 'User Data', 'Personal Identifiable Info',
+      'Source Code', 'Patents', 'Client List', 'Employee List'],
+    :reference_type => [
+      'Website', 'Screenshot', 'Simple Text', 'Document',
+      'Numeric Data', 'Database'],
   }
 
   options.each do |k, opts|

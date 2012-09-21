@@ -166,4 +166,5 @@ FactoryGirl.define do
   factory :document
   factory :system
   factory :system_control
+  factory :option
 end

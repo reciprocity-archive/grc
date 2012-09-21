@@ -5,13 +5,12 @@ require 'slugged_model'
 class Control < ActiveRecord::Base
   include AuthoredModel
   include SluggedModel
-  include FrequentModel
   include SearchableModel
   include AuthorizedModel
 
   CATEGORY_TYPE_ID = 100
 
-  attr_accessible :title, :slug, :description, :program, :effective_at, :frequency, :frequency_type, :section_ids, :type, :kind, :means, :categories
+  attr_accessible :title, :slug, :description, :program, :section_ids, :type, :kind, :means, :categories, :verify_frequency, :url, :start_date, :stop_date, :version, :documentation_description
 
   define_index do
     indexes :slug, :sortable => true
@@ -51,6 +50,7 @@ class Control < ActiveRecord::Base
   belongs_to :type, :class_name => 'Option', :conditions => { :role => 'control_type' }
   belongs_to :kind, :class_name => 'Option', :conditions => { :role => 'control_kind' }
   belongs_to :means, :class_name => 'Option', :conditions => { :role => 'control_means' }
+  belongs_to :verify_frequency, :class_name => 'Option', :conditions => { :role => 'verify_frequency' }
 
   is_versioned_ext
 
