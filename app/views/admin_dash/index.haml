@@ -24,7 +24,7 @@
   .singleColumn
     .WidgetBox
       .WidgetBoxHeading
-        .WidgetTitle Toggle Demo Features
+        .WidgetTitle Demo Status
       .WidgetBoxContent.fltnone
         -path = request.fullpath.gsub(/BETA=[^&]*&?/, '').sub(/[?&]$/, '')
         -path += path.include?('?') ? '&' : '?'
@@ -33,12 +33,8 @@
             Demo features are currently on. 
             %br 
             They will be outlined in orange where possible. 
-          %hr
-          %a.btn.btn-large.btn-warning{ :href => "#{path}BETA=0" } disable Demo features
         -else
-          %label Demo features are currently off.
-          %hr
-          %a.btn.btn-large.btn-success{ :href => "#{path}BETA=1" } enable Demo features
+          %label Demo features are currently off. 
     .singleColumn
       -if has_feature? :BETA
       
@@ -125,9 +121,6 @@
                 %a.btn{"data-toggle" => "modal", :href => "#auditCycleModal"}
                   New/Edit Audit Cycle
               %li.group
-                %a.btn{"data-toggle" => "modal", :href => "#newprogramModal"}
-                  Old New Program - Mail Merge?
-              %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#newsectionModal"}
                   New Section
               %li.group
@@ -152,9 +145,6 @@
                 %a.btn{"data-toggle" => "modal", :href => "#newtransactionModal"}
                   New Transaction
               %li.group
-                %a.btn{"data-toggle" => "modal", :href => "#createnewProduct"}
-                  New/Edit Product
-              %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#mappedcontrols"}
                   Empty Mapping (Reg Mapper)
               %li.group
@@ -173,7 +163,8 @@
       / in progress
       #Programs.WidgetBox.singleWide.demoItem
         .WidgetBoxHeading
-          .WidgetTitle To Be Implemented
+          .WidgetTitle 
+            To Be Implemented (Too Long)
           %nav
             %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
               %i.gcmsicon-questionmark-grey
@@ -191,12 +182,14 @@
                 %a.btn{"data-toggle" => "modal", :href => "#redesignNewControlWide"}
                   New Control (Handed Off)
               %li.group
+                %a.btn{"data-toggle" => "modal", :href => "#createnewProduct"}
+                  New/Edit Product
+              %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#redesignNewSectionWide"}
-                  Redesign: New Section
+                  New/Edit Section
               %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#newsystemModal"}
                   New/Edit System/Biz Process
-
               %li.group
                 %a.btn.btn-blue{"data-toggle" => "modal", :href => "#redesignSelectPersonWide"}
                   Redesign: Select person (Wide)
