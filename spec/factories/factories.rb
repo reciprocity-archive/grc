@@ -160,11 +160,18 @@ FactoryGirl.define do
     end
   end
 
+  factory :system do
+    title 'Factory System'
+    slug
+    description 'x'
+    infrastructure false
+  end
+
   factory :control_section
   factory :control_control
   factory :cycle
   factory :document
-  factory :system
   factory :system_control
+  factory :system_system
   factory :option
 end
