@@ -48,7 +48,7 @@ jQuery(function ($) {
   
   // new modals START
   renderExternalTmpl({ name: 'redesignNewProgram', selector: '#templates', data: {} });
-  renderExternalTmpl({ name: 'redesignSelectPersonWide', selector: '#templates', data: {} });
+  renderExternalTmpl({ name: 'redesignSelectPerson', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'redesignNewControlWide', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'redesignNewSectionWide', selector: '#templates', data: {} });
 
@@ -269,6 +269,43 @@ jQuery(function ($) {
       $searchableLists.addClass("short");
     }      
   });
+
+
+    $('body').on('click', '#showGRCDirectory', function(e) {
+    e.preventDefault();
+    var $this = $(this),
+        $filters = $this.closest(".modal-body").find(".category-group"),
+        $searchableLists = $this.closest(".modal-body").find(".filter-block .people-list");
+        
+    if( $this.hasClass("active") ) {
+      //$filters.hide();
+      //$this.removeClass("active");        
+      //$searchableLists.removeClass("short");
+    } else {
+      $filters.show();
+      $this.addClass("active");
+      $searchableLists.addClass("short");
+    }      
+  });
+
+$('body').on('click', '#showCompanyDirectory', function(e) {
+    e.preventDefault();
+    var $this = $(this),
+        $filters = $this.closest(".modal-body").find(".filter-group"),
+        $searchableLists = $this.closest(".modal-body").find(".filter-block .people-list");
+        
+    if( $this.hasClass("active") ) {
+      //$filters.hide();
+      //$this.removeClass("active");        
+      //$searchableLists.removeClass("short");
+    } else {
+      $filters.show();
+      $this.addClass("active");
+      $searchableLists.addClass("short");
+    }      
+  });
+showCompanyDirectory
+
 
 
   // status js
