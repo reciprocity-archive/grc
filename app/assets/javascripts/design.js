@@ -46,9 +46,14 @@ jQuery(function ($) {
   renderExternalTmpl({ name: 'mappedcontrols', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'mappedcontrolsfull', selector: '#templates', data: {} });
   
+  // Selectors 
+  renderExternalTmpl({ name: 'selectorPerson', selector: '#templates', data: {} });
+  renderExternalTmpl({ name: 'selectorReference', selector: '#templates', data: {} });
+  renderExternalTmpl({ name: 'selectorSystem', selector: '#templates', data: {} });
+
   // new modals START
   renderExternalTmpl({ name: 'redesignNewProgram', selector: '#templates', data: {} });
-  renderExternalTmpl({ name: 'redesignSelectPerson', selector: '#templates', data: {} });
+  
   renderExternalTmpl({ name: 'redesignNewControlWide', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'redesignNewSectionWide', selector: '#templates', data: {} });
 
@@ -244,9 +249,6 @@ jQuery(function ($) {
     $icon
       .removeClass("grcicon-chevron-right")
       .addClass("grcicon-check-green")
-
-    //.prepend('<li class="new-item"><div class="row-fluid"><div class="span6"><span class="company">' + $company + '</span><span class="name">'+ $name +'</span></div><div class="span3"><span class="label label-danger">No relationship</span></div><div class="span3 actions"><a href="#" class="btn btn-mini pull-right"><i class="icon-minus-sign"></i></a><a href="#" class="btn btn-mini pull-right"><i class="icon-pencil"></i></a></div></div><div class="row-fluid additional"><div class="span6"><label>Relationship <strong>PENDING</strong></label><select class="span12"><option>No relationship</option><option>Is Accountable</option><option>Is Responsible</option></select></div><div class="span3"><label>Start Date</label><input class="span12" type="text" placeholder="MM/DD/YYYY"></div><div class="span3"><label>Stop Date</label><input class="span12" type="text" placeholder="MM/DD/YYYY"></div></div></li>')
-      
     $target
       .prepend('<li class="new-item"> <div class="row-fluid"> <div class="span6"> <span class="company">' + $company + '</span> <span class="name">'+ $name +'</span> </div> <div class="span6 actions">  <a class="widgetbtn pull-right" id="removeMe" href="#"> <i class="icon-minus-sign"></i> </a> <a class="widgetbtn pull-right" href="#"> <i class="gcmsicon-edit-grey"></i> </a> <div class="btn-group inline"> <a class="span7 btn btn-danger btn-mini dropdown-toggle nominheight fltrt" data-toggle="dropdown"> Select Relationship <span class="caret"></span> </a> <ul class="dropdown-menu"> <li> <a href="#" id="makeAccountable"> is Accountable for </a> </li> <li> <a href="#" id="makeResponsible"> is Responsible for </a> </li> </ul> </div></div> </div> <div class="row-fluid additional"> <div class="span4"></div> <div class="span4"> <label>Start Date (Optional)</label> <input class="span12 date" id="datepicker-stopdate-rd" placeholder="MM/DD/YYYY" type="text"> </div> <div class="span4"> <label>Stop Date (Optional)</label> <input class="span12 date" id="datepicker-stopdate-rd" placeholder="MM/DD/YYYY" type="text"> </div> </div> </li>')
       .find("li.new-item").hide().fadeIn('slow').removeClass("new-item");  
