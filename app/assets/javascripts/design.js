@@ -120,6 +120,7 @@ jQuery(function ($) {
     $('#confirmModal').modal('show');
   });
 
+
   $('#myModal').on('hidden', function () {
     // do something…
   })
@@ -230,6 +231,7 @@ jQuery(function ($) {
     
     e.preventDefault();
     
+    $(this).addClass("halfopacity");
     var $this = $(this),
         $icon = $this.find("i"),
         $itemToAdd = $this.closest("li"),
@@ -246,7 +248,7 @@ jQuery(function ($) {
     //.prepend('<li class="new-item"><div class="row-fluid"><div class="span6"><span class="company">' + $company + '</span><span class="name">'+ $name +'</span></div><div class="span3"><span class="label label-danger">No relationship</span></div><div class="span3 actions"><a href="#" class="btn btn-mini pull-right"><i class="icon-minus-sign"></i></a><a href="#" class="btn btn-mini pull-right"><i class="icon-pencil"></i></a></div></div><div class="row-fluid additional"><div class="span6"><label>Relationship <strong>PENDING</strong></label><select class="span12"><option>No relationship</option><option>Is Accountable</option><option>Is Responsible</option></select></div><div class="span3"><label>Start Date</label><input class="span12" type="text" placeholder="MM/DD/YYYY"></div><div class="span3"><label>Stop Date</label><input class="span12" type="text" placeholder="MM/DD/YYYY"></div></div></li>')
       
     $target
-      .prepend('<li class="new-item"> <div class="row-fluid"> <div class="span6"> <span class="company">' + $company + '</span> <span class="name">'+ $name +'</span> </div> <div class="span6 actions"> <div class="btn-group inline"> <a class="span7 btn btn-danger btn-mini dropdown-toggle nominheight" data-toggle="dropdown"> Select Relationship <span class="caret"></span> </a> <ul class="dropdown-menu"> <li> <a href="#" id="makeAccountable"> is Accountable for </a> </li> <li> <a href="#" id="makeResponsible"> is Responsible for </a> </li> </ul> </div> <a class="btn btn-mini pull-right" href="#"> <i class="icon-minus-sign"></i> </a> <a class="btn btn-mini pull-right" href="#"> <i class="gcmsicon-edit-grey"></i> </a> </div> </div> <div class="row-fluid additional"> <div class="span4"></div> <div class="span4"> <label>Start Date (Optional)</label> <input class="span12 date" id="datepicker-stopdate-rd" placeholder="MM/DD/YYYY" type="text"> </div> <div class="span4"> <label>Stop Date (Optional)</label> <input class="span12 date" id="datepicker-stopdate-rd" placeholder="MM/DD/YYYY" type="text"> </div> </div> </li>')
+      .prepend('<li class="new-item"> <div class="row-fluid"> <div class="span6"> <span class="company">' + $company + '</span> <span class="name">'+ $name +'</span> </div> <div class="span6 actions">  <a class="widgetbtn pull-right" id="removeMe" href="#"> <i class="icon-minus-sign"></i> </a> <a class="widgetbtn pull-right" href="#"> <i class="gcmsicon-edit-grey"></i> </a> <div class="btn-group inline"> <a class="span7 btn btn-danger btn-mini dropdown-toggle nominheight fltrt" data-toggle="dropdown"> Select Relationship <span class="caret"></span> </a> <ul class="dropdown-menu"> <li> <a href="#" id="makeAccountable"> is Accountable for </a> </li> <li> <a href="#" id="makeResponsible"> is Responsible for </a> </li> </ul> </div></div> </div> <div class="row-fluid additional"> <div class="span4"></div> <div class="span4"> <label>Start Date (Optional)</label> <input class="span12 date" id="datepicker-stopdate-rd" placeholder="MM/DD/YYYY" type="text"> </div> <div class="span4"> <label>Stop Date (Optional)</label> <input class="span12 date" id="datepicker-stopdate-rd" placeholder="MM/DD/YYYY" type="text"> </div> </div> </li>')
       .find("li.new-item").hide().fadeIn('slow').removeClass("new-item");  
     $unassignedItems
       .html($unassignedValue + 1).fadeIn();
@@ -256,25 +258,30 @@ jQuery(function ($) {
 
   $('body').on('click', '#makeAccountable', function(e) {
     e.preventDefault();
-
-    $(this).closest(".btn-group").find(".dropdown-toggle").html("Accountable");
+    $(this).closest(".btn-group").find(".dropdown-toggle").html("is Accountable");
     $(this).closest(".btn-group").find(".dropdown-toggle").removeClass('btn-warning');
-     $(this).closest(".btn-group").find(".dropdown-toggle").addClass('btn-success');
+    $(this).closest(".btn-group").find(".dropdown-toggle").addClass('btn-success');
 
-     $(this).closest(".btn-group").find(".dropdown-toggle").addClass('halfopacity');
+    $(this).closest(".btn-group").find(".dropdown-toggle").addClass('halfopacity');
     $(this).closest(".btn-group").find(".dropdown-toggle").removeClass('btn-info');
-    return false;
+    
   });
 
   $('body').on('click', '#makeResponsible', function(e) {
     e.preventDefault();
-    $(this).closest(".btn-group").find(".dropdown-toggle").html("Responsible");
+    $(this).closest(".btn-group").find(".dropdown-toggle").html("is Responsible");
     $(this).closest(".btn-group").find(".dropdown-toggle").removeClass('btn-warning');
-     $(this).closest(".btn-group").find(".dropdown-toggle").removeClass('btn-success');
+    $(this).closest(".btn-group").find(".dropdown-toggle").addClass('btn-success');
 
-     $(this).closest(".btn-group").find(".dropdown-toggle").addClass('halfopacity');
+    $(this).closest(".btn-group").find(".dropdown-toggle").addClass('halfopacity');
     $(this).closest(".btn-group").find(".dropdown-toggle").addClass('btn-info');
 
+  });
+
+
+  $(document).on("click", "#removeMe", function(event){
+    event.preventDefault();
+    $(this).closest('li').slideUp("slow", function() { jQuery(this).remove(); });
   });
   
   $('body').on('click', '#showFilters', function(e) {

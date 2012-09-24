@@ -30,7 +30,7 @@
                 .modal-search.clearfix  
                   .btn-group.closed 
                     %a#filterButton.btn.dropdown-toggle{"data-toggle" => "dropdown"}
-                      Select Directory
+                      GRC Directory
                       %span.caret
                     %ul.dropdown-menu
                       %li
@@ -56,15 +56,7 @@
 
                             
                 .tabbable.tabs-left
-                  %ul.nav.nav-tabs.category-group
-                    %li{:class => "active"}
-                      %a{:href => "#category1", :"data-toggle" => "tab" } Category/Group 1
-                    %li
-                      %a{:href => "#category2", :"data-toggle" => "tab" } Category/Group 2
-
                   .tab-content
-
-                
                     #category1.tab-pane.active
                       .people-list.short
                         %ul.source
@@ -74,8 +66,6 @@
                                 %span.company Facebook | Engineering Compliance
                                 %span.name
                                   Alexander Gustaphson
-                                  %small 
-                                    %a{:href => "mailto:alexander@gustaphson.com"} alexander@gustaphson.com
                               .span4.actions                
                                 %a.btn.btn-mini.pull-right.add-me{:href => "#"}
                                   %i.grcicon-chevron-right
@@ -185,9 +175,13 @@
                   .span6
                     %span.company Google
                     %span.name Joss Rayburn
-                  .span6.actions   
+                  .span6.actions          
+                    %a#removeMe.widgetbtn.pull-right{:href => "#"}
+                      %i.icon-minus-sign
+                    %a.widgetbtn.pull-right{:href => "#"}
+                      %i.gcmsicon-edit-grey
                     .btn-group.inline
-                      %a.span7.btn.btn-success.btn-mini.dropdown-toggle.nominheight.halfopacity{"data-toggle" => "dropdown"}
+                      %a.span7.btn.btn-success.btn-mini.dropdown-toggle.nominheight.halfopacity.fltrt{"data-toggle" => "dropdown"}
                         Accountable
                       %ul.dropdown-menu
                         %li
@@ -195,11 +189,7 @@
                             is Accountable for
                         %li
                           %a#makeResponsible{:href => "#"}
-                            is Responsible for              
-                    %a.btn.btn-mini.pull-right{:href => "#"}
-                      %i.icon-minus-sign
-                    %a.btn.btn-mini.pull-right{:href => "#"}
-                      %i.gcmsicon-edit-grey
+                            is Responsible for  
                 .row-fluid.additional
                   .span4
                   .span4
@@ -218,20 +208,20 @@
                     %span.company Google
                     %span.name Jamie James
                   .span6.actions   
+                    %a#removeMe.widgetbtn.pull-right{:href => "#"}
+                      %i.icon-minus-sign
+                    %a.widgetbtn.pull-right{:href => "#"}
+                      %i.gcmsicon-edit-grey
                     .btn-group.inline
-                      %a.span7.btn.btn-info.btn-mini.dropdown-toggle.nominheight.halfopacity{"data-toggle" => "dropdown"}
-                        Responsible 
+                      %a.span7.btn.btn-success.btn-mini.dropdown-toggle.nominheight.halfopacity.fltrt{"data-toggle" => "dropdown"}
+                        Accountable
                       %ul.dropdown-menu
                         %li
                           %a#makeAccountable{:href => "#"}
                             is Accountable for
                         %li
                           %a#makeResponsible{:href => "#"}
-                            is Responsible for              
-                    %a.btn.btn-mini.pull-right{:href => "#"}
-                      %i.icon-minus-sign
-                    %a.btn.btn-mini.pull-right{:href => "#"}
-                      %i.gcmsicon-edit-grey
+                            is Responsible for 
                 .row-fluid.additional
                   .span4
                   .span4
@@ -249,9 +239,13 @@
                   .span6
                     %span.company Google
                     %span.name Joss Rayburn
-                  .span6.actions   
+                  .span6.actions 
+                    %a#removeMe.widgetbtn.pull-right{:href => "#"}
+                      %i.icon-minus-sign
+                    %a.widgetbtn.pull-right{:href => "#"}
+                      %i.gcmsicon-edit-grey
                     .btn-group.inline
-                      %a.span7.btn.btn-danger.btn-mini.dropdown-toggle.nominheight{"data-toggle" => "dropdown"}
+                      %a.span7.btn.btn-danger.btn-mini.dropdown-toggle.nominheight.halfopacity.fltrt{"data-toggle" => "dropdown"}
                         Select Relationship 
                         %span.caret
                       %ul.dropdown-menu
@@ -260,11 +254,7 @@
                             is Accountable for
                         %li
                           %a#makeResponsible{:href => "#"}
-                            is Responsible for            
-                    %a.btn.btn-mini.pull-right{:href => "#"}
-                      %i.icon-minus-sign
-                    %a.btn.btn-mini.pull-right{:href => "#"}
-                      %i.gcmsicon-edit-grey
+                            is Responsible for 
                 .row-fluid.additional
                   .span4  
                   .span4
