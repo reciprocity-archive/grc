@@ -28,8 +28,8 @@
             .row-fluid
               .span12
                 .modal-search.clearfix  
-                  .btn-group.closed
-                    %a.btn.btn-blue.dropdown-toggle{"data-toggle" => "dropdown"}
+                  .btn-group.closed 
+                    %a#filterButton.btn.dropdown-toggle{"data-toggle" => "dropdown"}
                       Select Directory
                       %span.caret
                     %ul.dropdown-menu
@@ -66,7 +66,7 @@
 
                 
                     #category1.tab-pane.active
-                      .people-list
+                      .people-list.short
                         %ul.source
                           %li
                             .row-fluid
@@ -124,7 +124,7 @@
 
                     #category2.tab-pane
 
-                      .people-list
+                      .people-list.short
                         %ul.source
                           %li
                             .row-fluid
@@ -178,7 +178,7 @@
                                   %i.gcmsicon-edit-grey
         .span6
           %h4 Roles for this system
-          .people-list
+          .people-list.currentlist
             %ul.target
               %li
                 .row-fluid
@@ -186,15 +186,15 @@
                     %span.company Google
                     %span.name Joss Rayburn
                   .span6.actions   
-                    .btn-group.inline.closed
-                      %a.span8.btn.btn-mini.btn-success.dropdown-toggle{"data-toggle" => "dropdown"}
+                    .btn-group.inline
+                      %a.span7.btn.btn-success.btn-mini.dropdown-toggle.nominheight.halfopacity{"data-toggle" => "dropdown"}
                         Accountable
                       %ul.dropdown-menu
                         %li
-                          %a#showFilters{:href => "#"}
+                          %a#makeAccountable{:href => "#"}
                             is Accountable for
                         %li
-                          %a#showCategories{:href => "#"}
+                          %a#makeResponsible{:href => "#"}
                             is Responsible for              
                     %a.btn.btn-mini.pull-right{:href => "#"}
                       %i.icon-minus-sign
@@ -204,25 +204,29 @@
                   .span4
                   .span4
                     %label Start Date (Optional)
-                    %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
+                    %input.span12.date#datepicker-startdate-jossrayburn{:type => "text", :placeholder => "MM/DD/YYYY"}
+                    :javascript
+                      $('#datepicker-startdate-jossrayburn').datepicker();
                   .span4
                     %label Stop Date (Optional)
-                    %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
+                    %input.span12.date#datepicker-stopdate-jossrayburn{:type => "text", :placeholder => "MM/DD/YYYY"}
+                    :javascript
+                      $('#datepicker-stopdate-jossrayburn').datepicker();
               %li
                 .row-fluid
                   .span6
                     %span.company Google
-                    %span.name Joss Rayburn
+                    %span.name Jamie James
                   .span6.actions   
-                    .btn-group.inline.closed
-                      %a.span8.btn.btn-mini.btn-info.dropdown-toggle{"data-toggle" => "dropdown"}
+                    .btn-group.inline
+                      %a.span7.btn.btn-info.btn-mini.dropdown-toggle.nominheight.halfopacity{"data-toggle" => "dropdown"}
                         Responsible 
                       %ul.dropdown-menu
                         %li
-                          %a#showFilters{:href => "#"}
+                          %a#makeAccountable{:href => "#"}
                             is Accountable for
                         %li
-                          %a#showCategories{:href => "#"}
+                          %a#makeResponsible{:href => "#"}
                             is Responsible for              
                     %a.btn.btn-mini.pull-right{:href => "#"}
                       %i.icon-minus-sign
@@ -232,37 +236,45 @@
                   .span4
                   .span4
                     %label Start Date (Optional)
-                    %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
+                    %input.span12.date#datepicker-startdate-jj{:type => "text", :placeholder => "MM/DD/YYYY"}
+                    :javascript
+                      $('#datepicker-startdate-jj').datepicker();
                   .span4
                     %label Stop Date (Optional)
-                    %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
+                    %input.span12.date#datepicker-stopdate-jj{:type => "text", :placeholder => "MM/DD/YYYY"}
+                    :javascript
+                      $('#datepicker-stopdate-jj').datepicker();
               %li
                 .row-fluid
                   .span6
                     %span.company Google
                     %span.name Joss Rayburn
                   .span6.actions   
-                    .btn-group.inline.closed
-                      %a.span7.btn.btn-mini.btn-danger.dropdown-toggle{"data-toggle" => "dropdown"}
-                        Select Relationship
+                    .btn-group.inline
+                      %a.span7.btn.btn-danger.btn-mini.dropdown-toggle.nominheight{"data-toggle" => "dropdown"}
+                        Select Relationship 
+                        %span.caret
                       %ul.dropdown-menu
                         %li
-                          %a#showFilters{:href => "#"}
+                          %a#makeAccountable{:href => "#"}
                             is Accountable for
                         %li
-                          %a#showCategories{:href => "#"}
+                          %a#makeResponsible{:href => "#"}
                             is Responsible for            
                     %a.btn.btn-mini.pull-right{:href => "#"}
                       %i.icon-minus-sign
                     %a.btn.btn-mini.pull-right{:href => "#"}
                       %i.gcmsicon-edit-grey
                 .row-fluid.additional
-                  .span4
-                    Joss Rayburn is responsible for the LDAP System.  Responsible Parties can: View and Edit any information related to this system. This relationship is pending approval.
+                  .span4  
                   .span4
                     %label Start Date (Optional)
-                    %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
+                    %input.span12.date#datepicker-stopdate-rd{:type => "text", :placeholder => "MM/DD/YYYY"}
+                    :javascript
+                      $('#datepicker-stopdate-rd').datepicker();
                   .span4
                     %label Stop Date (Optional)
-                    %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
+                    %input.span12.date#datepicker-stopdate-rd{:type => "text", :placeholder => "MM/DD/YYYY"}
+                    :javascript
+                      $('#datepicker-stopdate-rd').datepicker();
   =render :partial => 'design/templates/modalfooterlists'

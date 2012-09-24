@@ -87,6 +87,13 @@
       }
     }
   }
+
+  .currentlist {
+    padding:0px 0px 0px 0px;
+    //background:#f8f9f8;
+    //border:1px solid darken($lightestGray,10%);
+    @include border-radius();
+  }
   
   .audit {
     padding:1px 6px 5px;
@@ -142,23 +149,30 @@
 // various modal items
 
 .people-list {
-  max-height:350px;
+  height:323px;
+  border:1px solid darken($lightestGray,10%);
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+overflow-x:hidden;
+  overflow-y:auto;
   &.short {
-    height:267px;
+    height:282px;
+  } 
+  &.shortest {
+    height:231px;
   }  
-  overflow:auto;
   li {
     .additional {
       display:none;
     }
-    border:1px solid $borderDefault;
+    border-top:1px solid $borderDefault;
     background:#f0f0f0;
     border-bottom:none;
     &:hover {
      background:#fff;
     }
     &:first-child {
-      // border-top:none;
+      border-top:none;
     }
     &:last-child {
       border-bottom:1px solid $borderDefault;
@@ -183,7 +197,9 @@
       color:#999;
     }
     .btn-mini {
-      margin-left:8px;
+      margin:4px 4px 0px 4px;
+      height:13px;
+
     }
     label {
       strong {
@@ -254,6 +270,7 @@
 .modal-search {
   @include border-radius(4px 4px 0 0);
   border:1px solid $borderDefault;
+  border-bottom:1px;
   padding:6px;
   background:$lightestGray;
   input {
@@ -271,7 +288,6 @@
 .additional-filters {
   border-left:1px solid $borderDefault;
   border-right:1px solid $borderDefault;
-  border-bottom:1px solid $borderDefault;
   background:$lightestGray;
   padding:0 6px 6px 6px;
   input {
