@@ -304,7 +304,6 @@ $('body').on('click', '#showCompanyDirectory', function(e) {
       $searchableLists.addClass("short");
     }      
   });
-showCompanyDirectory
 
 
 
