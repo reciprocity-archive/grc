@@ -25,6 +25,7 @@ jQuery(function ($) {
   }
 
   //ACTUALLY renderout templates
+
   renderExternalTmpl({ name: 'help', selector: '#templates', data: {} });
 
   renderExternalTmpl({ name: 'confirm', selector: '#templates', data: {} });
@@ -58,10 +59,10 @@ jQuery(function ($) {
   
   renderExternalTmpl({ name: 'redesignNewControlWide', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'redesignNewSectionWide', selector: '#templates', data: {} });
-
+  renderExternalTmpl({ name: 'redesignNewOrg', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'redesignNewProduct', selector: '#templates', data: {} });
-
   renderExternalTmpl({ name: 'redesignNewSystem', selector: '#templates', data: {} });
+
 
   // new modals END
   renderExternalTmpl({ name: 'newpersonBasic', selector: '#templates', data: {} });

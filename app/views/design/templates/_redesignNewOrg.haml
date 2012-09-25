@@ -1,0 +1,57 @@
+#redesignNewOrg.modal.modal-wide.hide.fade
+  .modal-header
+    %nav
+      %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+        %i.gcmsicon-questionmark-grey
+      %a.widgetbtn{"data-dismiss" => "modal", :href => "#"}
+        %i.gcmsicon-x-grey
+    %h1 
+      Create New Organization
+      %span.version v.0.23
+  .modal-body
+    .alert.alert-info
+      %span#alertMessage
+      / %button.close{:type => "button", :"data-dismiss" => "alert"} ×
+    %form
+      .row-fluid
+        .span6
+          %label Title
+          %input.span12{:type => "text", :placeholder => "Enter title"}
+          %span.help-inline 
+        .span6
+          .row-fluid
+            .span6
+              %label Code (optional)
+              %input.span12{:type => "text", :placeholder => "Autofill code"}
+            .span6
+              %label Version
+              %input.span12{:type => "text", :placeholder => "1.1.1"}
+      .row-fluid
+        .span6
+          %label Description
+          %textarea.span12.double{:placeholder => "Enter description here", :rows => "3"}
+        .span6
+          .row-fluid 
+            .span6
+              %label Type
+              %select.span12
+                %option Regulation
+                %option Company
+            .span6
+              %label Kind
+              %select.span12
+                %option --
+                %option Company
+      .row-fluid
+        .span6
+          %label 
+            Direct URL for Organization (optional)
+          %input.span12{:type => "text", :placeholder => "http://www.examplelink.com/"}
+          %span.help-inline &nbsp;
+        .span6
+          %label{:for => "select01"} 
+            Compliance Certification Status
+          %select#select01.span12.forminputsuccess
+            %option OK - with issues
+            %option Open
+  =render :partial => 'design/templates/modalfooter'

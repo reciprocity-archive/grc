@@ -9,7 +9,13 @@
   .modal-body
     %p We are working on it!
   .modal-footer
-    %a.close{"data-dismiss" => "modal", "data-toggle" => "modal", :href => "#comingsoonModal"} Close
+    .row-fluid
+      %nav.fltlft.txtlft.span3
+        
+      .toolbar-widget.span6
+        
+      %nav.fltrt.txtrt.span3
+        %a#actionButton.btn.btn-large.btn-success.btn-primary{:href => "#"} Close
 / End coming soon Modal
 / Record Modal
 #recordModal.modal.hide.fade
@@ -25,4 +31,10 @@
     .progress.progress-striped.active
       .bar{:style => "width: 40%;"}
   .modal-footer
-    %a.close{"data-dismiss" => "modal", "data-toggle" => "modal", :href => "#comingsoonModal"} Close
+    .row-fluid
+      %nav.fltlft.txtlft.span3
+        
+      .toolbar-widget.span6
+        
+      %nav.fltrt.txtrt.span3
+        %a#actionButton.btn.btn-large.btn-success.btn-primary{:href => "#"} Close
