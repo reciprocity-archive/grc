@@ -31,9 +31,15 @@
   border:2px solid #EA7301;
 }
 
+.demoText {
+//text-decoration: line-through;
+  color:#EA7301;
+}
+
 .grcbutton {
   font-size:16px;
 }
+
 
 
 #grcbuttonStable {
@@ -1065,7 +1071,7 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
   position: absolute;
   top: 100%;
   left: 0;
-  z-index: 2000;
+  z-index: 1000;
   display: none;
   float: left;
   min-width: 160px;

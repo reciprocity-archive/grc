@@ -83,16 +83,10 @@
                 %li.group
                   %a.btn{:href => "/mapping/show/1"}
                     Reg Mapper
-
-      
-      
-
     /third column
     .singleColumn
       
       / Start of widget
-      
-
 .row-static
   .singleColumn
     .singleWide
@@ -176,27 +170,53 @@
           #programInProgressRedesign.toolbar-widget.in
             %ul#quickLinks.nav.nav-tabs.nav-stacked.in
               %li.group
-                %a.btn{"data-toggle" => "modal", :href => "#redesignNewProgram"}
-                  New Program (Handed Off)
-              %li.group
-                %a.btn{"data-toggle" => "modal", :href => "#redesignNewControlWide"}
-                  New Control (Handed Off)
-              %li.group
-                %a.btn{"data-toggle" => "modal", :href => "#createnewProduct"}
+                %a.btn{"data-toggle" => "modal", :href => "#redesignNewProduct"}
                   New/Edit Product
               %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#redesignNewSectionWide"}
                   New/Edit Section
               %li.group
-                %a.btn{"data-toggle" => "modal", :href => "#newsystemModal"}
-                  New/Edit System/Biz Process
+                %a.btn{"data-toggle" => "modal", :href => "#redesignNewSystem"}
+                  New/Edit System
               %li.row-fluid
-                %a.span4.btn{"data-toggle" => "modal", :href => "#selectorPerson"}
+                %label Selectors
+              %li.row-fluid
+                %a.span6.btn{"data-toggle" => "modal", :href => "#selectorPerson"}
                   Select person
-                %a.span4.btn{"data-toggle" => "modal", :href => "#selectorReference"}
+                %a.span6.btn{"data-toggle" => "modal", :href => "#selectorReference"}
                   Select ref
-                %a.span4.btn{"data-toggle" => "modal", :href => "#selectorSystem"}
+              %li.row-fluid
+                %a.span6.btn{"data-toggle" => "modal", :href => "#selectorSystem"}
                   Select system
+                %a.span6.btn{"data-toggle" => "modal", :href => "#selectorCategory"}
+                  Select category
+              %li.row-fluid
+                %label Are you sure?
+              %li.row-fluid
+                %a.span6.btn{"data-toggle" => "modal", :href => "#confirmModal"}
+                  Y/N Dialog
+                %a.span6.btn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                  Coming Soon
+      #Programs.WidgetBox.singleWide.demoItem
+        .WidgetBoxHeading
+          .WidgetTitle 
+            Implemented
+          %nav
+            %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+              %i.gcmsicon-questionmark-grey
+            %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
+            %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#programInProgressRedesign"}
+              %i.gcmsicon-enlarge-grey
+        / /.WidgetBoxHeading
+        .WidgetBoxContent
+          #programInProgressRedesign.toolbar-widget.in
+            %ul#quickLinks.nav.nav-tabs.nav-stacked.in
+              %li.group
+                %a.btn{"data-toggle" => "modal", :href => "#redesignNewProgram"}
+                  New Program 
+              %li.group
+                %a.btn{"data-toggle" => "modal", :href => "#redesignNewControlWide"}
+                  New Control
 
             
   .doubleColumn

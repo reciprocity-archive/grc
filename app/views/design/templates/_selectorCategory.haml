@@ -1,4 +1,4 @@
-#selectorReference.modal.modal-wide.hide.fade
+#selectorCategory.modal.modal-wide.hide.fade
   .modal-header
     %nav
       %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
@@ -6,8 +6,8 @@
       %a.widgetbtn{"data-dismiss" => "modal", :href => "#"}
         %i.gcmsicon-x-grey
     %h1
-      Select Reference
-      %span.version v.0.10
+      Select Category
+      %span.version v.0.81
   .modal-body
     .alert.alert-info
       %span#alertMessage
@@ -17,11 +17,11 @@
         .span6
 
           %h4
-            Add Reference
+            Add Category
             .fltrt
               %a.btn.btn-blue.addbtn.fltrt.new{:href => "#"}
                 %i.icon-user.icon-white              
-                Create Reference
+                Create Category
 
           .filter-block
           
@@ -30,15 +30,15 @@
                 .modal-search.clearfix  
                   .btn-group.closed 
                     %a#filterButton.btn.dropdown-toggle{"data-toggle" => "dropdown"}
-                      GRC Directory
+                      GRC Categories
                       %span.caret
                     %ul.dropdown-menu
                       %li
                         %a#showCompanyDirectory{:href => "#"}
-                          Company Directory
+                          Custom Categories
                       %li
                         %a#showGRCDirectory{:href => "#"}
-                          GRC Directory
+                          GRC Categories
 
                     .pull-right
                       %input{:type => "text", :placeholder => "Search GRC Directory"}
@@ -63,9 +63,9 @@
                           %li
                             .row-fluid
                               .span8
-                                %span.company Scan
+                                %span.company Facebook | Engineering Compliance
                                 %span.name
-                                  Evidence
+                                  Alexander Gustaphson
                               .span4.actions                
                                 %a.btn.btn-mini.pull-right.add-me{:href => "#"}
                                   %i.grcicon-chevron-right
@@ -74,7 +74,7 @@
                           %li
                             .row-fluid
                               .span8
-                                %span.company PDF
+                                %span.company Google
                                 %span.name David Buick
                               .span4.actions                
                                 %a.btn.btn-mini.pull-right.add-me{:href => "#"}
@@ -84,7 +84,7 @@
                           %li
                             .row-fluid
                               .span8
-                                %span.company PDF
+                                %span.company Google
                                 %span.name Niki Lauda
                               .span4.actions                
                                 %a.btn.btn-mini.pull-right.add-me{:href => "#"}
@@ -94,7 +94,7 @@
                           %li
                             .row-fluid
                               .span8
-                                %span.company PDF
+                                %span.company Google
                                 %span.name Daniel Harms
                               .span4.actions                
                                 %a.btn.btn-mini.pull-right.add-me{:href => "#"}
@@ -104,7 +104,7 @@
                           %li
                             .row-fluid
                               .span8
-                                %span.company PDF
+                                %span.company Google
                                 %span.name David Buick
                               .span4.actions                
                                 %a.btn.btn-mini.pull-right.add-me{:href => "#"}
@@ -129,7 +129,7 @@
                           %li
                             .row-fluid
                               .span8
-                                %span.company PDF
+                                %span.company Google
                                 %span.name David Buick
                               .span4.actions                
                                 %a.btn.btn-mini.pull-right.add-me{:href => "#"}
@@ -139,7 +139,7 @@
                           %li
                             .row-fluid
                               .span8
-                                %span.company PDF
+                                %span.company Google
                                 %span.name Niki Lauda
                               .span4.actions                
                                 %a.btn.btn-mini.pull-right.add-me{:href => "#"}
@@ -149,7 +149,7 @@
                           %li
                             .row-fluid
                               .span8
-                                %span.company PDF
+                                %span.company Google
                                 %span.name Daniel Harms
                               .span4.actions                
                                 %a.btn.btn-mini.pull-right.add-me{:href => "#"}
@@ -159,7 +159,7 @@
                           %li
                             .row-fluid
                               .span8
-                                %span.company PDF
+                                %span.company Google
                                 %span.name David Buick
                               .span4.actions                
                                 %a.btn.btn-mini.pull-right.add-me{:href => "#"}
@@ -167,14 +167,14 @@
                                 %a.btn.btn-mini.pull-right{:href => "#"}
                                   %i.gcmsicon-edit-grey
         .span6
-          %h4 Associated References
+          %h4 Roles for this system
           .people-list.currentlist
             %ul.target
               %li
                 .row-fluid
                   .span6
-                    %span.company PDF
-                    %span.name Business Plans
+                    %span.company Google
+                    %span.name Joss Rayburn
                   .span6.actions          
                     %a#removeMe.widgetbtn.pull-right{:href => "#"}
                       %i.icon-minus-sign
@@ -205,8 +205,8 @@
               %li
                 .row-fluid
                   .span6
-                    %span.company PDF
-                    %span.name Document
+                    %span.company Google
+                    %span.name Jamie James
                   .span6.actions   
                     %a#removeMe.widgetbtn.pull-right{:href => "#"}
                       %i.icon-minus-sign
@@ -237,8 +237,8 @@
               %li
                 .row-fluid
                   .span6
-                    %span.company PDF
-                    %span.name Document
+                    %span.company Google
+                    %span.name Joss Rayburn
                   .span6.actions 
                     %a#removeMe.widgetbtn.pull-right{:href => "#"}
                       %i.icon-minus-sign
