@@ -1,11 +1,14 @@
-#confirmModal.modal.hide.fade
+#confirmModal.modal.modal-small.hide.fade
   .modal-header
     %nav
       %a.widgetbtn{"data-dismiss" => "modal", :href => "#"}
         %i.gcmsicon-x-grey
     %h1 Confirm_Delete
   .modal-body
-    %p Are you sure you want to delete this record?
+    %h4 Are you sure you want to delete this record?
+    %p 
+      This delete affects 45 items. 
+      %a See a complete list
   .modal-footer
     .row-fluid
       %nav.fltlft.txtlft.span3

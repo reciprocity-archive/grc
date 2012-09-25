@@ -41,18 +41,18 @@
           .row-fluid 
             .span6
               %label Effective Date
-              %input.span12#datepicker-program-effectivedate.date{:type => "text",  :placeholder => "MM/DD/YYYY"}
+              %input.span12#datepicker-section-effectivedate.date{:type => "text",  :placeholder => "MM/DD/YYYY"}
               :javascript
-                $('#datepicker-program-effectivedate').datepicker();
+                $('#datepicker-section-effectivedate').datepicker();
               %label Type
               %select.span12
                 %option Regulation
                 %option Company
             .span6
               %label Stop Date    
-              %input.span12#datepicker-program-stopdate.date{:type => "text",  :placeholder => "MM/DD/YYYY"}
+              %input.span12#datepicker-section-stopdate.date{:type => "text",  :placeholder => "MM/DD/YYYY"}
               :javascript
-                $('#datepicker-program-stopdate').datepicker();
+                $('#datepicker-section-stopdate').datepicker();
               %label Kind 
               %select.span12
                 %option Not Applicable
