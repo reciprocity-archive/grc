@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120925204334) do
+ActiveRecord::Schema.define(:version => 20120926205733) do
 
   create_table "accounts", :force => true do |t|
     t.string   "username"
@@ -192,6 +192,34 @@ ActiveRecord::Schema.define(:version => 20120925204334) do
   end
 
   add_index "programs", ["slug"], :name => "index_programs_on_slug", :unique => true
+
+  create_table "relationship_types", :id => false, :force => true do |t|
+    t.string   "relationship_type"
+    t.string   "description"
+    t.string   "forward_short_description"
+    t.string   "backward_short_description"
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+  end
+
+  add_index "relationship_types", ["relationship_type"], :name => "index_relationship_types_on_relationship_type", :unique => true
+
+  create_table "relationships", :force => true do |t|
+    t.integer  "source_id",            :null => false
+    t.string   "source_type",          :null => false
+    t.integer  "destination_id",       :null => false
+    t.string   "destination_type",     :null => false
+    t.integer  "modified_by_id"
+    t.string   "relationship_type_id"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
+
+  add_index "relationships", ["destination_id"], :name => "index_relationships_on_destination_id"
+  add_index "relationships", ["destination_type"], :name => "index_relationships_on_destination_type"
+  add_index "relationships", ["relationship_type_id"], :name => "index_relationships_on_relationship_type_id"
+  add_index "relationships", ["source_id"], :name => "index_relationships_on_source_id"
+  add_index "relationships", ["source_type"], :name => "index_relationships_on_source_type"
 
   create_table "sections", :force => true do |t|
     t.string   "title",                             :null => false

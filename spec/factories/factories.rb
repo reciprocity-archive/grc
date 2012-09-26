@@ -20,6 +20,10 @@ FactoryGirl.define do
     "User#{n}"
   end
 
+  sequence(:title) do |n|
+    "Title#{n}"
+  end
+
   sequence(:email) do |n|
     "user#{n}@example.com"
   end
@@ -167,6 +171,11 @@ FactoryGirl.define do
     infrastructure false
   end
 
+  factory :product do
+    slug
+    title
+  end
+  
   factory :control_section
   factory :control_control
   factory :cycle
@@ -174,4 +183,6 @@ FactoryGirl.define do
   factory :system_control
   factory :system_system
   factory :option
+  factory :relationship_type
+  factory :relationship
 end

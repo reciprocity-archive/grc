@@ -6,6 +6,7 @@ class Program < ActiveRecord::Base
   include SluggedModel
   include SearchableModel
   include AuthorizedModel
+  include RelatedModel
 
   attr_accessible :title, :slug, :company, :description, :start_date, :stop_date, :audit_start_date, :audit_frequency, :audit_duration, :organization, :url, :scope, :kind, :version
 
@@ -34,6 +35,26 @@ class Program < ActiveRecord::Base
     :uniqueness => { :message => "must be unique" }
 
   before_save :upcase_slug
+
+  #
+  # Various relationship-related helpers
+  #
+  def add_relevant_to(product)
+    Relationship.create(:source => self, :destination => product, :relationship_type_id => 'within_scope_of')
+  end
+
+  def relevant_to_products
+    Product.within_scope_of(self)
+  end
+
+  def relevant_to
+    relevant_to_products
+  end
+
+  def self.relevant_to(product)
+    related_to_destination('within_scope_of', product)
+  end
+
 
   def display_name
     slug
