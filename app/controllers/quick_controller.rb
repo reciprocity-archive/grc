@@ -62,4 +62,12 @@ class QuickController < ApplicationController
     end
     @systems = allowed_objs(@systems.all, :read)
   end
+
+  def products
+    @products = Product
+    if params[:s]
+      @products = @products.fulltext_search(params[:s])
+    end
+    @products = allowed_objs(@products.all, :read)
+  end
 end

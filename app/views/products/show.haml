@@ -1,0 +1,28 @@
+-@title = "GRC Product: #{@product.title}"
+
+-content_for :header do
+  %ol#breadcrumb
+    %li Products
+    %li=@product.slug
+  .location#pageTitle=@product.title
+
+-content_for :page_help, 'product'
+
+-content_for :subheader_extras do
+  %h1.fltrt.highlighted Product
+
+-content_for :subheader_plus do
+  %a.navbarplus.fltrt{ :href => new_flow_product_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect' }
+
+.row-static
+  .doubleColumn
+    .doubleWide.fullHeight
+      =render :partial => 'products/main',
+              :layout => 'layouts/widget_box',
+              :locals => { :product => @product }
+
+  .singleColumn
+    .singleWide.fullHeight
+      =render :partial => 'products/show',
+              :layout => 'layouts/widget_box',
+              :locals => { :product => @product }

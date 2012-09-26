@@ -1,0 +1,13 @@
+-if @products.empty?
+  .no-results
+    No results found
+-else
+  %ul.nav.nav-tabs.nav-stacked
+    -@products.each do |product|
+      %li.group
+        %a{ :href => flow_product_path(product), :'data-popover-href' => tooltip_flow_product_path(product), :'data-popover-trigger' => 'sticky-hover' }
+          %h3=product.slug
+          %p.oneline
+            %strong=product.title
+            &nbsp;
+            =product.description

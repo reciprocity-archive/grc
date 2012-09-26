@@ -1,0 +1,33 @@
+-content_for :modal_title do
+  -if f.object.new_record?
+    Create a new product
+  -else
+    Edit product
+
+.row-fluid
+  .span1{ :class => error_class(f, :slug) }
+    =f.label :slug, "Code"
+    =f.text_field :slug, :class => 'input-supermini'
+    =error_messages_inline(f, :slug)
+
+  .span4{ :class => error_class(f, :title) }
+    =f.label :title
+    =f.text_field :title, :class => 'input-large'
+    =error_messages_inline(f, :title)
+
+  .span2.disabled{ :class => error_class(f, :version) }
+    =f.label :version
+    =f.text_field :version, :class => 'input-supermini'
+    =error_messages_inline(f, :version)
+
+%br
+.row-fluid
+  .span12
+    =f.label :description, "Description"
+.row-fluid
+  .span12.well{ :class => error_class(f, :description) }
+    =f.text_area :description
+.row-fluid
+  .span12
+    =error_messages_inline(f, :description)
+
