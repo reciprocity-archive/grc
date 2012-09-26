@@ -1,4 +1,11 @@
 class CreateObjectDocuments < ActiveRecord::Migration
+  class BizProcessDocument < ActiveRecord::Base
+  end
+  class DocumentSystem < ActiveRecord::Base
+  end
+  class DocumentSystemControl < ActiveRecord::Base
+  end
+
   def change
     create_table :object_documents do |t|
       t.string :role

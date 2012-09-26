@@ -1,4 +1,9 @@
 class CreateObjectPeople < ActiveRecord::Migration
+  class BizProcessPerson < ActiveRecord::Base
+  end
+  class SystemPerson < ActiveRecord::Base
+  end
+
   def change
     create_table :object_people do |t|
       t.string :role

@@ -1,4 +1,7 @@
 class CopyBizProcessesToSystems < ActiveRecord::Migration
+  class BizProcess < ActiveRecord::Base
+  end
+
   def up
     System.reset_column_information
 
