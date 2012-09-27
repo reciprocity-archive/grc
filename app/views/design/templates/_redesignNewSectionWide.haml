@@ -32,30 +32,12 @@
               %input.span12{:type => "text", :placeholder => "Autofill code"}
             .span6
               %label Version
-              %input.span12{:type => "text", :placeholder => "1.1.1"}
+              %input.span12{:type => "text", :placeholder => "1.0"}
       .row-fluid
         .span6
           %label Description
           %textarea.span12.double{:placeholder => "Enter description here", :rows => "3"}
         .span6
-          .row-fluid 
-            .span6
-              %label Effective Date
-              %input.span12#datepicker-section-effectivedate.date{:type => "text",  :placeholder => "MM/DD/YYYY"}
-              :javascript
-                $('#datepicker-section-effectivedate').datepicker();
-              %label Type
-              %select.span12
-                %option Regulation
-                %option Company
-            .span6
-              %label Stop Date    
-              %input.span12#datepicker-section-stopdate.date{:type => "text",  :placeholder => "MM/DD/YYYY"}
-              :javascript
-                $('#datepicker-section-stopdate').datepicker();
-              %label Kind 
-              %select.span12
-                %option Not Applicable
       .row-fluid
         .span3
           %label Organization
