@@ -21,17 +21,14 @@
           %span.help-inline 
         .span2
           %label Program
-          %select.span12
-            %option Program Title 1
-            %option Program Title 2
-            %option Program Title 3
+          %input.span12{:type => "text", :placeholder => "Auto selected", :disabled => "disabled"}
         .span6
           .row-fluid
             .span6
               %label Code (optional)
               %input.span12{:type => "text", :placeholder => "Autofill code"}
             .span6
-              %label Version
+              %label Version (optional)
               %input.span12{:type => "text", :placeholder => "1.0"}
       .row-fluid
         .span6
@@ -39,11 +36,7 @@
           %textarea.span12.double{:placeholder => "Enter description here", :rows => "3"}
         .span6
       .row-fluid
-        .span3
-          %label Organization
-          %input.span12{:type => "text", :placeholder => "Organization for this program"}
-          %span.help-inline &nbsp;
-        .span3
+        .span6
           %label Direct Link
           %input.span12{:type => "text", :placeholder => "http://www.examplelink.com/"}
           %span.help-inline &nbsp;
