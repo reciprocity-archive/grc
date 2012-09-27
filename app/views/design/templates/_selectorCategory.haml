@@ -67,9 +67,9 @@
                                 %span.name
                                   Alexander Gustaphson
                               .span4.actions                
-                                %a.btn.btn-mini.pull-right.add-me{:href => "#"}
+                                %a.widgetbtn.pull-right.add-me{:href => "#"}
                                   %i.grcicon-chevron-right
-                                %a.btn.btn-mini.pull-right{:href => "#"}
+                                %a.widgetbtn.pull-right{:href => "#"}
                                   %i.gcmsicon-edit-grey
                           %li
                             .row-fluid
@@ -77,9 +77,9 @@
                                 %span.company Google
                                 %span.name David Buick
                               .span4.actions                
-                                %a.btn.btn-mini.pull-right.add-me{:href => "#"}
+                                %a.widgetbtn.pull-right.add-me{:href => "#"}
                                   %i.grcicon-chevron-right 
-                                %a.btn.btn-mini.pull-right{:href => "#"}
+                                %a.widgetbtn.pull-right{:href => "#"}
                                   %i.gcmsicon-edit-grey
                           %li
                             .row-fluid
@@ -87,9 +87,9 @@
                                 %span.company Google
                                 %span.name Niki Lauda
                               .span4.actions                
-                                %a.btn.btn-mini.pull-right.add-me{:href => "#"}
+                                %a.widgetbtn.pull-right.add-me{:href => "#"}
                                   %i.grcicon-chevron-right
-                                %a.btn.btn-mini.pull-right{:href => "#"}
+                                %a.widgetbtn.pull-right{:href => "#"}
                                   %i.gcmsicon-edit-grey
                           %li
                             .row-fluid
@@ -97,9 +97,9 @@
                                 %span.company Google
                                 %span.name Daniel Harms
                               .span4.actions                
-                                %a.btn.btn-mini.pull-right.add-me{:href => "#"}
+                                %a.widgetbtn.pull-right.add-me{:href => "#"}
                                   %i.grcicon-chevron-right
-                                %a.btn.btn-mini.pull-right{:href => "#"}
+                                %a.widgetbtn.pull-right{:href => "#"}
                                   %i.gcmsicon-edit-grey
                           %li
                             .row-fluid
@@ -107,9 +107,9 @@
                                 %span.company Google
                                 %span.name David Buick
                               .span4.actions                
-                                %a.btn.btn-mini.pull-right.add-me{:href => "#"}
+                                %a.widgetbtn.pull-right.add-me{:href => "#"}
                                   %i.grcicon-chevron-right 
-                                %a.btn.btn-mini.pull-right{:href => "#"}
+                                %a.widgetbtn.pull-right{:href => "#"}
                                   %i.gcmsicon-edit-grey
 
                     #category2.tab-pane
@@ -122,9 +122,9 @@
                                 %span.company Motorola
                                 %span.name Moto Rola
                               .span4.actions                
-                                %a.btn.btn-mini.pull-right.add-me{:href => "#"}
+                                %a.widgetbtn.pull-right.add-me{:href => "#"}
                                   %i.grcicon-chevron-right
-                                %a.btn.btn-mini.pull-right{:href => "#"}
+                                %a.widgetbtn.pull-right{:href => "#"}
                                   %i.gcmsicon-edit-grey
                           %li
                             .row-fluid
@@ -132,9 +132,9 @@
                                 %span.company Google
                                 %span.name David Buick
                               .span4.actions                
-                                %a.btn.btn-mini.pull-right.add-me{:href => "#"}
+                                %a.widgetbtn.pull-right.add-me{:href => "#"}
                                   %i.grcicon-chevron-right 
-                                %a.btn.btn-mini.pull-right{:href => "#"}
+                                %a.widgetbtn.pull-right{:href => "#"}
                                   %i.gcmsicon-edit-grey
                           %li
                             .row-fluid
@@ -142,9 +142,9 @@
                                 %span.company Google
                                 %span.name Niki Lauda
                               .span4.actions                
-                                %a.btn.btn-mini.pull-right.add-me{:href => "#"}
+                                %a.widgetbtn.pull-right.add-me{:href => "#"}
                                   %i.grcicon-chevron-right 
-                                %a.btn.btn-mini.pull-right{:href => "#"}
+                                %a.widgetbtn.pull-right{:href => "#"}
                                   %i.gcmsicon-edit-grey
                           %li
                             .row-fluid
@@ -152,9 +152,9 @@
                                 %span.company Google
                                 %span.name Daniel Harms
                               .span4.actions                
-                                %a.btn.btn-mini.pull-right.add-me{:href => "#"}
+                                %a.widgetbtn.pull-right.add-me{:href => "#"}
                                   %i.grcicon-chevron-right 
-                                %a.btn.btn-mini.pull-right{:href => "#"}
+                                %a.widgetbtn.pull-right{:href => "#"}
                                   %i.gcmsicon-edit-grey
                           %li
                             .row-fluid
@@ -162,9 +162,9 @@
                                 %span.company Google
                                 %span.name David Buick
                               .span4.actions                
-                                %a.btn.btn-mini.pull-right.add-me{:href => "#"}
+                                %a.widgetbtn.pull-right.add-me{:href => "#"}
                                   %i.grcicon-chevron-right 
-                                %a.btn.btn-mini.pull-right{:href => "#"}
+                                %a.widgetbtn.pull-right{:href => "#"}
                                   %i.gcmsicon-edit-grey
         .span6
           %h4 Roles for this system
@@ -175,9 +175,7 @@
                   .span6
                     %span.company Google
                     %span.name Joss Rayburn
-                  .span6.actions          
-                    %a#removeMe.widgetbtn.pull-right{:href => "#"}
-                      %i.icon-minus-sign
+                  .span6.actions
                     %a.widgetbtn.pull-right{:href => "#"}
                       %i.gcmsicon-edit-grey
                     .btn-group.inline
@@ -191,7 +189,11 @@
                           %a#makeResponsible{:href => "#"}
                             is Responsible for  
                 .row-fluid.additional
-                  .span4
+                  .span3.statustextgreen
+                    -#Draft 
+                    -#Pending
+                    Active
+                    -#Deprecated
                   .span4
                     %label Start Date (Optional)
                     %input.span12.date#datepicker-startdate-jossrayburn{:type => "text", :placeholder => "MM/DD/YYYY"}
@@ -202,6 +204,9 @@
                     %input.span12.date#datepicker-stopdate-jossrayburn{:type => "text", :placeholder => "MM/DD/YYYY"}
                     :javascript
                       $('#datepicker-stopdate-jossrayburn').datepicker();
+                  .span1
+                    %a#removeMe.widgetbtn.pull-right{:href => "#"}
+                      %i.icon-minus-sign
               %li
                 .row-fluid
                   .span6
@@ -223,7 +228,11 @@
                           %a#makeResponsible{:href => "#"}
                             is Responsible for 
                 .row-fluid.additional
-                  .span4
+                  .span3.statustextblue
+                    -#Draft 
+                    Pending
+                    -#Active
+                    -#Deprecated
                   .span4
                     %label Start Date (Optional)
                     %input.span12.date#datepicker-startdate-jj{:type => "text", :placeholder => "MM/DD/YYYY"}
@@ -256,7 +265,11 @@
                           %a#makeResponsible{:href => "#"}
                             is Responsible for 
                 .row-fluid.additional
-                  .span4  
+                  .span3.statustextred
+                    -#Draft 
+                    -#Pending
+                    -#Active
+                    Deprecated 
                   .span4
                     %label Start Date (Optional)
                     %input.span12.date#datepicker-stopdate-rd{:type => "text", :placeholder => "MM/DD/YYYY"}

@@ -243,7 +243,6 @@ jQuery(function ($) {
     
     e.preventDefault();
     
-    $(this).addClass("halfopacity");
     var $this = $(this),
         $icon = $this.find("i"),
         $itemToAdd = $this.closest("li"),
@@ -252,7 +251,10 @@ jQuery(function ($) {
         $target = $this.closest(".modal-body").find(".target"),
         $unassignedItems = $("#unassignedElements");
         $unassignedValue = parseInt($unassignedItems.html());
-    
+    $this
+      .removeClass("widgetbtn addme")
+      .addClass("widgetbtnoff");
+
     $icon
       .removeClass("grcicon-chevron-right")
       .addClass("grcicon-check-green")
