@@ -6,6 +6,7 @@
  *= require spin.min
  *= require tmpl
  *= require_self
+ *= require can.jquery-1.0.7
  */
 
 // Initialize delegated event handlers

@@ -1,6 +1,6 @@
 CmsRails::Application.routes.draw do
 
-  resources :programs, :as => 'flow_programs', :only => [:show, :new, :edit, :create, :update, :destroy] do
+  resources :programs, :as => 'flow_programs', :only => [:index, :show, :new, :edit, :create, :update, :destroy] do
     member do
       get 'tooltip'
       get 'import'

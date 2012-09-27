@@ -1,5 +1,7 @@
 -@title = "GRC Product: #{@product.title}"
 
+=javascript_include_tag 'impact.js'
+
 -content_for :header do
   %ol#breadcrumb
     %li Products
@@ -24,5 +26,8 @@
   .singleColumn
     .singleWide.fullHeight
       =render :partial => 'products/show',
+              :layout => 'layouts/widget_box',
+              :locals => { :product => @product }
+      =render :partial => 'products/impact',
               :layout => 'layouts/widget_box',
               :locals => { :product => @product }

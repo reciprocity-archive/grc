@@ -41,6 +41,14 @@ class ProgramsController < ApplicationController
 
   layout 'dashboard'
 
+  def index
+    @programs = Program
+    if params[:relevant_to]
+      @programs = @programs.relevant_to(Product.find(params[:relevant_to]))
+    end
+    @programs = @programs.all
+  end
+
   def show
     @stats = program_stats(@program)
   end

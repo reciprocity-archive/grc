@@ -1,0 +1,14 @@
+[
+  <% @programs.each_with_index do |program, index| %>
+  {
+    "program" : {
+      "id": <%= program.id.to_json.html_safe %>,
+      "slug": <%= program.slug.to_json.html_safe %>,
+      "title": <%= program.title.to_json.html_safe %>
+    }
+  }
+  <% unless index == @programs.count - 1%>
+  ,
+  <% end %>
+  <% end %>
+]

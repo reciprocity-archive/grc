@@ -1,0 +1,19 @@
+<ul class="nav nav-tabs nav-stacked">
+<% if (this.length) { %>
+  <% this.forEach(function(program) { %>
+    <% program = program.program %>
+    <li class="group">
+      <a href="/programs/<%=program.id%>" data-popover-href="/programs/<%= program.id %>/tooltip" data-popover-trigger="sticky-hover">
+        <h3><%= program.slug %></h3>
+        <p class="oneline">
+          <%= program.title %>
+        </p>
+      </a>
+    </li>
+  <% }) %>
+<% } else { %>
+<li>
+No programs impacted.
+</li>
+<% } %>
+</ul>

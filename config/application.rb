@@ -17,6 +17,16 @@ CMS_CONFIG["FULLTEXT"] = ENV["FULLTEXT"] if ENV["FULLTEXT"]
 
 require 'rails/all'
 
+#
+# HACK: Load sprockets, and then delete the .ejs engine.
+# This keeps sprockets from trying (and failing) to compile the
+# ejs templates on the server.
+#
+require 'sprockets'
+module ::Sprockets
+  @engines.delete('.ejs')
+end
+
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
   Bundler.require(*Rails.groups(:assets => %w(development test)))
@@ -82,4 +92,3 @@ begin
 rescue LoadError
   puts "no application-local, or caught exception"
 end
-
