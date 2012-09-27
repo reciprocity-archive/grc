@@ -6,6 +6,13 @@
 .tabbable#impact
   %ul.nav.nav-tabs
     %li=link_to 'Programs', '#programs', :data => { :toggle => 'tab', :href => '#' }
+    %li=link_to 'Products', '#products', :data => { :toggle => 'tab', :href => '#' }
   .tab-content
     #programs.tab-pane
+      %h2#title
+        Relevant Programs
+        %a.btn.btn-blue.add-btn.fltrt Edit List
+      #description Programs which are relevant to this product.
+    #products.tab-pane
+      #description Other Products which have an impact on this product.
 
