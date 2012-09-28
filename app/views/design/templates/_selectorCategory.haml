@@ -7,7 +7,7 @@
         %i.gcmsicon-x-grey
     %h1
       Select Category
-      %span.version v.0.81
+      %span.version v.0.91
   .modal-body
     .alert.alert-info
       %span#alertMessage
@@ -190,6 +190,7 @@
                             is Responsible for  
                 .row-fluid.additional
                   .span3.statustextgreen
+                    %label &nbsp;
                     -#Draft 
                     -#Pending
                     Active
@@ -204,17 +205,16 @@
                     %input.span12.date#datepicker-stopdate-jossrayburn{:type => "text", :placeholder => "MM/DD/YYYY"}
                     :javascript
                       $('#datepicker-stopdate-jossrayburn').datepicker();
-                  .span1
+                  .span1.actions
+                    %label &nbsp;
                     %a#removeMe.widgetbtn.pull-right{:href => "#"}
                       %i.icon-minus-sign
               %li
                 .row-fluid
                   .span6
                     %span.company Google
-                    %span.name Jamie James
-                  .span6.actions   
-                    %a#removeMe.widgetbtn.pull-right{:href => "#"}
-                      %i.icon-minus-sign
+                    %span.name Pending Lady Smith
+                  .span6.actions
                     %a.widgetbtn.pull-right{:href => "#"}
                       %i.gcmsicon-edit-grey
                     .btn-group.inline
@@ -226,58 +226,66 @@
                             is Accountable for
                         %li
                           %a#makeResponsible{:href => "#"}
-                            is Responsible for 
+                            is Responsible for  
                 .row-fluid.additional
                   .span3.statustextblue
+                    %label &nbsp;
                     -#Draft 
                     Pending
                     -#Active
                     -#Deprecated
                   .span4
                     %label Start Date (Optional)
-                    %input.span12.date#datepicker-startdate-jj{:type => "text", :placeholder => "MM/DD/YYYY"}
+                    %input.span12.date#datepicker-startdate-jossrayburn{:type => "text", :placeholder => "MM/DD/YYYY"}
                     :javascript
-                      $('#datepicker-startdate-jj').datepicker();
+                      $('#datepicker-startdate-jossrayburn').datepicker();
                   .span4
                     %label Stop Date (Optional)
-                    %input.span12.date#datepicker-stopdate-jj{:type => "text", :placeholder => "MM/DD/YYYY"}
+                    %input.span12.date#datepicker-stopdate-jossrayburn{:type => "text", :placeholder => "MM/DD/YYYY"}
                     :javascript
-                      $('#datepicker-stopdate-jj').datepicker();
+                      $('#datepicker-stopdate-jossrayburn').datepicker();
+                  .span1.actions
+                    %label &nbsp;
+                    %a#removeMe.widgetbtn.pull-right{:href => "#"}
+                      %i.icon-minus-sign
               %li
                 .row-fluid
                   .span6
                     %span.company Google
-                    %span.name Joss Rayburn
-                  .span6.actions 
-                    %a#removeMe.widgetbtn.pull-right{:href => "#"}
-                      %i.icon-minus-sign
+                    %span.name Fired Guy Pierce
+                  .span6.actions
                     %a.widgetbtn.pull-right{:href => "#"}
                       %i.gcmsicon-edit-grey
                     .btn-group.inline
-                      %a.span7.btn.btn-danger.btn-mini.dropdown-toggle.nominheight.halfopacity.fltrt{"data-toggle" => "dropdown"}
-                        Select Relationship 
-                        %span.caret
+                      %a.span7.btn.btn-success.btn-mini.dropdown-toggle.nominheight.halfopacity.fltrt{"data-toggle" => "dropdown"}
+                        Accountable
                       %ul.dropdown-menu
                         %li
                           %a#makeAccountable{:href => "#"}
                             is Accountable for
                         %li
                           %a#makeResponsible{:href => "#"}
-                            is Responsible for 
+                            is Responsible for  
                 .row-fluid.additional
                   .span3.statustextred
+                    %label &nbsp;
                     -#Draft 
                     -#Pending
                     -#Active
-                    Deprecated 
+                    Deprecated
                   .span4
                     %label Start Date (Optional)
-                    %input.span12.date#datepicker-stopdate-rd{:type => "text", :placeholder => "MM/DD/YYYY"}
+                    %input.span12.date#datepicker-startdate-jossrayburn{:type => "text", :placeholder => "MM/DD/YYYY"}
                     :javascript
-                      $('#datepicker-stopdate-rd').datepicker();
+                      $('#datepicker-startdate-jossrayburn').datepicker();
                   .span4
                     %label Stop Date (Optional)
-                    %input.span12.date#datepicker-stopdate-rd{:type => "text", :placeholder => "MM/DD/YYYY"}
+                    %input.span12.date#datepicker-stopdate-jossrayburn{:type => "text", :placeholder => "MM/DD/YYYY"}
                     :javascript
-                      $('#datepicker-stopdate-rd').datepicker();
+                      $('#datepicker-stopdate-jossrayburn').datepicker();
+                  .span1.actions
+                    %label &nbsp;
+                    %a#removeMe.widgetbtn.pull-right{:href => "#"}
+                      %i.icon-minus-sign
+              
   =render :partial => 'design/templates/modalfooterlists'
