@@ -1,6 +1,6 @@
 # System to Control many to many
 class SystemControl < ActiveRecord::Base
-  include AuthoredModel
+  include GrcModel
   include StateModel
 
   attr_accessible :control, :system, :cycle

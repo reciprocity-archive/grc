@@ -3,7 +3,7 @@ require 'slugged_model'
 # A company / regulation control
 #
 class Control < ActiveRecord::Base
-  include AuthoredModel
+  include GrcModel
   include SluggedModel
   include SearchableModel
   include AuthorizedModel

@@ -1,6 +1,6 @@
 # A system to be audited
 class System < ActiveRecord::Base
-  include AuthoredModel
+  include GrcModel
   include SluggedModel
   include SearchableModel
   include AuthorizedModel

@@ -2,7 +2,7 @@
 #
 # The top of the Program -> CO -> Control hierarchy
 class Program < ActiveRecord::Base
-  include AuthoredModel
+  include GrcModel
   include SluggedModel
   include SearchableModel
   include AuthorizedModel

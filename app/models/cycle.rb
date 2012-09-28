@@ -3,7 +3,7 @@
 # Used to group evidence for a particular audit of a program
 # start_at is the audit period start date.  If missing, this is a continuous process.
 class Cycle < ActiveRecord::Base
-  include AuthoredModel
+  include GrcModel
 
   attr_accessible :program, :start_at, :complete
 

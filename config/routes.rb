@@ -104,7 +104,7 @@ CmsRails::Application.routes.draw do
 
   # get "dev/index"
 
-  if CmsRails::Application.sso_callback_url
+  if !Rails.env.test? && CmsRails::Application.sso_callback_url
     match 'sso/new' => 'sso#new', :as => 'login'
     match CmsRails::Application.sso_callback_url => "sso#callback"
     match 'sso/destroy' => 'sso#destroy', :as => 'logout'
