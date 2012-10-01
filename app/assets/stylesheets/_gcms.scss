@@ -7,6 +7,19 @@
 /* Changes made to bootstrap code instead of overwriting
  */
 
+  .audit {
+    padding:5px;
+    margin-top:4px;
+    background:$auditBgndColor;
+    border:1px solid darken($auditBgndColor,10%);
+    @include border-radius();
+    label {
+      color:#2a909c;
+      &.subtitle {
+        font-weight:bold;
+      }
+    }  
+  }
 
 // Minimum width for spans under pressure
 
@@ -1586,7 +1599,7 @@ margin-top:5px;
 
   @include transition(border linear 0.2s, box-shadow linear 0.2s);
 
-  @include opacity(0.9);
+  @include opacity(0.9);w
 
   &:hover {
     @include opacity(1);

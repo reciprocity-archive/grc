@@ -74,6 +74,7 @@ jQuery(function ($) {
   renderExternalTmpl({ name: 'redesignNewOrg', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'redesignNewProduct', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'redesignNewSystem', selector: '#templates', data: {} });
+  renderExternalTmpl({ name: 'redesignNewBizProcess', selector: '#templates', data: {} });
 
 
   // new modals END
