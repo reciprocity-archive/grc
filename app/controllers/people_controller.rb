@@ -72,10 +72,15 @@ class PeopleController < ApplicationController
     end
   end
 
-  # FIXME: No template
-  #def destroy
-  #  @person.destroy
-  #end
+  def destroy
+    @person = Person.find(params[:id])
+    @person.destroy
+    flash[:notice] = "Person deleted"
+    respond_to do |format|
+      format.html { redirect_to programs_dash_path }
+      format.json { render :json => @person.as_json(:root => nil) }
+    end
+  end
 
   def list
     @people = Person.where({})

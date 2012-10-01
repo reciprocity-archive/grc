@@ -31,6 +31,7 @@
       .row-fluid
         %nav.fltlft.txtlft.span3
           =f.submit pat(:cancel), :type => 'reset', :class => 'btn btn-large btn-info'
+          %a.btn.btn-large.btn-warning{:href => flow_cycle_path(@cycle), :'data-toggle' => 'form-destroy', :'data-remote' => 'remote', :'data-method' => 'delete'} Delete
         %nav.fltrt.txtrt.span3  
           =f.submit pat(:save), :class => 'btn btn-large btn-success'
         

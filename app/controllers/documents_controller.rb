@@ -103,10 +103,15 @@ class DocumentsController < ApplicationController
     end
   end
 
-  # FIXME: No template
-  #def destroy
-  #  @document.destroy
-  #end
+  def destroy
+    @document = Document.find(params[:id])
+    @document.destroy
+    flash[:notice] = "Document deleted"
+    respond_to do |format|
+      format.html { redirect_to programs_dash_path }
+      format.json { render :json => @document.as_json(:root => nil) }
+    end
+  end
 
   def list
     @documents = Document.where({})

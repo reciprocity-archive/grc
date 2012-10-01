@@ -61,6 +61,16 @@ class AccountsController < ApplicationController
     end
   end
 
+  def destroy
+    @account = Account.find(params[:id])
+    @account.destroy
+    flash[:notice] = "Account deleted"
+    respond_to do |format|
+      format.html { redirect_to programs_dash_path }
+      format.json { render :json => @account.as_json(:root => nil) }
+    end
+  end
+
   private
 
   def load_account

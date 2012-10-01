@@ -12,6 +12,7 @@ describe PeopleController do
     it_behaves_like "an authorized create"
     it_behaves_like "an authorized new"
     it_behaves_like "an authorized update", ['edit', 'update']
+    it_behaves_like "an authorized delete"
     it_behaves_like "an authorized action", ['list'], 'read_person'
     it_behaves_like "an authorized action", ['list_update', 'list_edit'], 'update_person'
   end

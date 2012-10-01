@@ -30,6 +30,7 @@ describe ControlsController do
     it_behaves_like "an authorized new"
     it_behaves_like "an authorized index"
     it_behaves_like "an authorized edit"
+    it_behaves_like "an authorized delete"
     it_behaves_like "an authorized update", ['update']
     it_behaves_like "an authorized read", ['show',
                                            'tooltip',

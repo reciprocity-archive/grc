@@ -24,6 +24,7 @@ describe ProgramsController do
                                            'control_sections',
                                            'category_controls']
     it_behaves_like "an authorized update", ['edit', 'update']
+    it_behaves_like "an authorized delete"
     it_behaves_like "an authorized action", ['import'], 'update_program'
   end
 

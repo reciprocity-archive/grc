@@ -16,6 +16,7 @@
 # it_behaves_like "an authorized create"
 # it_behaves_like "an authorized new"
 # it_behaves_like "an authorized index"
+# it_behaves_like "an authorized delete"
 # it_behaves_like "an authorized read", [<action1>, <action2>] # actions are optional, defaults to 'show'
 # it_behaves_like "an authorized update", [<action1>, <action2>] # actions are optional, defaults to 'edit'
 # it_behaves_like "an authorized action", [<action1>, <action2>], <ability> # Tests basic authorization for any action
@@ -322,49 +323,43 @@ shared_examples_for "an authorized update" do |actions|
   end
 end
 
-shared_examples_for "an authorized delete" do |actions|
-  if !actions
-    actions = ['destroy']
-  end
+shared_examples_for "an authorized delete" do
+  actions = ['destroy']
 
   context "not logged in" do
     actions.each do |action|
-      if described_class.action_methods.include? action
-        it "is unauthorized for: #{action}" do
-          get action, :id => @object.id
-          response.should be_unauthenticated
-        end
+      it "is unauthorized for: #{action}" do
+        delete action, :id => @object.id
+        response.should be_unauthenticated
+        @object.class.where(:id => @object.id).count.should == 1
       end
     end
   end
 
-  context "logged in w/o delete" do
+  context "logged in w/o superuser" do
     before :each do
       login({}, {})
     end
 
     actions.each do |action|
-      if described_class.action_methods.include? action
-        it "is unauthorized for: #{action}" do
-          get action, :id => @object.id
-          response.should be_unauthorized
-        end
+      it "is unauthorized for: #{action}" do
+        delete action, :id => @object.id
+        response.should be_unauthorized
+        @object.class.where(:id => @object.id).count.should == 1
       end
     end
   end
 
-  context "logged in w/ delete" do
+  context "logged in w/ superuser" do
     before :each do
-      login({}, {:role => 'delete_' + @model.table_name.singularize})
+      login({}, {:role => 'superuser'})
     end
     actions.each do |action|
-      if described_class.action_methods.include? action
-        it "updates for: #{action}" do
-          object_id = @object.id
-          put action, :id => @object.id
-          response.should be_success_or_redirect
-          @model.where(:id => object_id).count.should eq(0)
-        end
+      it "updates for: #{action}" do
+        delete action, :id => @object.id
+        response.should be_success_or_redirect
+        assigns(@object.class.table_name.singularize.to_sym).should eq(@object)
+        @object.class.where(:id => @object.id).count.should == 0
       end
     end
   end

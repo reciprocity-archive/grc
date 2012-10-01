@@ -96,6 +96,16 @@ class ControlsController < ApplicationController
     end
   end
 
+  def destroy
+    @control = Control.find(params[:id])
+    @control.destroy
+    flash[:notice] = "Control deleted"
+    respond_to do |format|
+      format.html { redirect_to flow_program_path(@control.program) }
+      format.json { render :json => @control.as_json(:root => nil) }
+    end
+  end
+
   def sections
     @sections =
       @control.sections.all +

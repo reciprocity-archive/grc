@@ -65,6 +65,16 @@ class SectionsController < ApplicationController
     end
   end
 
+  def destroy
+    @section = Section.find(params[:id])
+    @section.destroy
+    flash[:notice] = "Section deleted"
+    respond_to do |format|
+      format.html { redirect_to flow_program_path(@section.program) }
+      format.json { render :json => @section.as_json(:root => nil) }
+    end
+  end
+
   def tooltip
     render :layout => nil
   end

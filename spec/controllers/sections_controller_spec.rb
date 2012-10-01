@@ -18,5 +18,6 @@ describe SectionsController do
     it_behaves_like "an authorized new"
     it_behaves_like "an authorized read", ['tooltip']
     it_behaves_like "an authorized update", ['edit', 'update']
+    it_behaves_like "an authorized delete"
   end
 end

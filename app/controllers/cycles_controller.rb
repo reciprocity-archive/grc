@@ -55,6 +55,16 @@ class CyclesController < ApplicationController
     end
   end
 
+  def destroy
+    @cycle = Cycle.find(params[:id])
+    @cycle.destroy
+    flash[:notice] = "Cycle deleted"
+    respond_to do |format|
+      format.html { redirect_to flow_program_path(@cycle.program) }
+      format.json { render :json => @cycle.as_json(:root => nil) }
+    end
+  end
+
   private
     def load_cycle
       @cycle = Cycle.find(params[:id])
