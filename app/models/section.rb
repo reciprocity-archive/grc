@@ -4,7 +4,7 @@ require 'slugged_model'
 #
 # The slug of a Section has to have the slug of the parent as prefix.
 class Section < ActiveRecord::Base
-  include GrcModel
+  include CommonModel
   include SluggedModel
   include SearchableModel
   include AuthorizedModel

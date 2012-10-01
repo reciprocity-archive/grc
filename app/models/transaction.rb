@@ -1,5 +1,5 @@
 class Transaction < ActiveRecord::Base
-  include GrcModel
+  include CommonModel
   include SluggedModel
 
   attr_accessible :system, :title, :description
