@@ -1,4 +1,4 @@
-#basicnewpersonModal.modal.hide.fade
+#basicnewpersonModal.modal.modal-wide.hide.fade
   .modal-header
     %nav
       %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
@@ -9,17 +9,18 @@
   .modal-body
     %form.form-inline
       .row-fluid
-        .span3.control-group
+        .span4.control-group
           %label{:for => "inputError"} Name
           %input#inputError.span12.forminputsuccess{:placeholder => "Enter Name", :type => "text"}/
           %br/
           %span.help-inline
-        .span3.control-group
+        .span4.control-group
           %label{:for => "inputError"} Email
           %input#inputError.span12.forminputsuccess{:placeholder => "e.g.: name@company.com", :type => "text"}/
           %br/
           %span.help-inline
-        .span3.control-group
+        .span1
+        .span2.control-group
           %label{:for => "select01"} Language
           %br/
           .controls
@@ -31,22 +32,10 @@
               %option 5
           %br/
           %span.help-inline
-        .span3.control-group
-          .controls.fltrt
-            %label{:for => "select02"} Status
-            %br/
-            %select#select02.span12.forminputstatus
-              %option Deprecated
-              %option 2
-              %option 3
-              %option 4
-              %option 5
-          %br/
-          %span.help-inline
       .row-fluid
         .span12.control-group
-          %label{:for => "inputError"} Company
+          %label{:for => "inputError"} Company (optional)
           %input#inputError.span12.forminputsuccess{:placeholder => "Enter Company Name", :type => "text"}/
           %br/
           %span.help-inline
-  =render :partial => 'design/templates/modalfooter'
+  =render :partial => 'design/templates/modaljustfooter'
