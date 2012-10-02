@@ -3,10 +3,11 @@
  *= require jquery
  *= require jquery-ui
  *= require bootstrap
+ *= require can.jquery-1.0.7
  *= require spin.min
  *= require tmpl
  *= require_self
- *= require can.jquery-1.0.7
+ *= require impact
  */
 
 // Initialize delegated event handlers
