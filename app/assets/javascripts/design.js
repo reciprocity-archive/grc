@@ -24,22 +24,10 @@ jQuery(function ($) {
     }
   }
 
-  var renderExternalWidget = function(item) {
-    var file = '/design/templates/widgets/' + item.name;
-    if ($(item.selector).length > 0) {
-      $.when($.get(file)).done(function(tmplData) {
-        $(item.selector).append(tmplData)
-      });
-    }
-  }
-
-
-  renderExternalTmpl({ name: 'impactscope', selector: '#templates', data: {} });
 
   //ACTUALLY renderout templates
 
   renderExternalTmpl({ name: 'help', selector: '#templates', data: {} });
-
   renderExternalTmpl({ name: 'confirm', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'comingsoon', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'newasset', selector: '#templates', data: {} });
@@ -64,11 +52,13 @@ jQuery(function ($) {
   renderExternalTmpl({ name: 'selectorReference', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'selectorSystem', selector: '#templates', data: {} });
 
+  renderExternalTmpl({ name: 'selectorBiz2System', selector: '#templates', data: {} });
+  renderExternalTmpl({ name: 'selectorBiz2Product', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'selectorCategory', selector: '#templates', data: {} });
+  renderExternalTmpl({ name: 'selectorControl', selector: '#templates', data: {} });
 
   // new modals START
   renderExternalTmpl({ name: 'redesignNewProgram', selector: '#templates', data: {} });
-  
   renderExternalTmpl({ name: 'redesignNewControlWide', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'redesignNewSectionWide', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'redesignNewOrg', selector: '#templates', data: {} });
@@ -79,15 +69,10 @@ jQuery(function ($) {
 
   // new modals END
   renderExternalTmpl({ name: 'newpersonBasic', selector: '#templates', data: {} });
-
   renderExternalTmpl({ name: 'newtransaction', selector: '#templates', data: {} });
-
   renderExternalTmpl({ name: 'auditdefaultscope', selector: '#templates', data: {} });
-
   renderExternalTmpl({ name: 'sendauditorinvite', selector: '#templates', data: {} });
-
   renderExternalTmpl({ name: 'neauditscheduleitem', selector: '#templates', data: {} });
-
   renderExternalTmpl({ name: 'auditmeetingnotice', selector: '#templates', data: {} });
 
 
@@ -96,8 +81,8 @@ jQuery(function ($) {
   renderExternalTmpl({ name: 'exampleregulations', selector: '#Regulation', data: {} });
   renderExternalTmpl({ name: 'exampleauditorrequests', selector: '#requests', data: {} });
   renderExternalTmpl({ name: 'examplesysproc', selector: '#sysproc', data: {} });
-
   renderExternalTmpl({ name: 'examplecombo', selector: '#Combo', data: {} });
+  renderExternalTmpl({ name: 'exampleSampledata', selector: '#sampleData', data: {} });
   renderExternalTmpl({ name: 'auditstatus', selector: '#auditstatus', data: {} });
 
   $(document).on("click", "#expand_all", function(event) {
@@ -262,20 +247,42 @@ jQuery(function ($) {
         $name = $itemToAdd.find(".name").html(),
         $company = $itemToAdd.find(".company").html(),        
         $target = $this.closest(".modal-body").find(".target"),
-        $unassignedItems = $("#unassignedElements");
+        $unassignedItems = $("#unassignedElements"),
         $unassignedValue = parseInt($unassignedItems.html());
+
+        var $additionalinfo = "";
+    if ( $this.closest(".modal-body").find("#currentList").hasClass('category-list') ) {
+      //Nothing
+      //Pending approval, nothing in additional info
+      var $item2add = '<h6 class="itemstatus">Added</h6>';
+    } else if ($this.closest(".modal-body").find("#currentList").hasClass('people-list')) {
+      //We gave relationships
+      //Pending approval, start-stop
+      var $item2add = '<div class="btn-group inline"> <a class="span7 btn btn-danger btn-mini dropdown-toggle nominheight fltrt" data-toggle="dropdown"> Select Relationship <span class="caret"></span> </a> <ul class="dropdown-menu"> <li> <a href="#" id="makeAccountable"> is Accountable for </a> </li> <li> <a href="#" id="makeResponsible"> is Responsible for </a> </li> </ul> </div>';
+      var $additionalinfo = '<div class="row-fluid additional"> <div class="span4"></div> <div class="span4"> <label>Start Date (Optional)</label> <input class="span12 date" id="datepicker-stopdate-rd" placeholder="MM/DD/YYYY" type="text"> </div> <div class="span4"> <label>Stop Date (Optional)</label> <input class="span12 date" id="datepicker-stopdate-rd" placeholder="MM/DD/YYYY" type="text"> </div>';
+    } else if ($this.closest(".modal-body").find("#currentList").hasClass('reference-list')) {
+      //Will have assignment items, nothing now.
+      //Pending approval, no start-stop
+       var $item2add = '<h6 class="itemstatus">Added</h6>';
+    } else if ($this.closest(".modal-body").find("#currentList").hasClass('system-list')) {
+      //Will have assignment items, nothing now.
+      //Pending approval, no start-stop
+       var $item2add = '<h6 class="itemstatus">Added</h6>';
+    }
     $this
       .removeClass("widgetbtn addme")
-      .addClass("widgetbtnoff");
-
+      .addClass("widgetbtnoff"); //remove icon square around checkmark (not a button anymore)
     $icon
       .removeClass("grcicon-chevron-right")
       .addClass("grcicon-check-green")
     $target
-      .prepend('<li class="new-item"> <div class="row-fluid"> <div class="span6"> <span class="company">' + $company + '</span> <span class="name">'+ $name +'</span> </div> <div class="span6 actions">  <a class="widgetbtn pull-right" id="removeMe" href="#"> <i class="icon-minus-sign"></i> </a> <a class="widgetbtn pull-right" href="#"> <i class="gcmsicon-edit-grey"></i> </a> <div class="btn-group inline"> <a class="span7 btn btn-danger btn-mini dropdown-toggle nominheight fltrt" data-toggle="dropdown"> Select Relationship <span class="caret"></span> </a> <ul class="dropdown-menu"> <li> <a href="#" id="makeAccountable"> is Accountable for </a> </li> <li> <a href="#" id="makeResponsible"> is Responsible for </a> </li> </ul> </div></div> </div> <div class="row-fluid additional"> <div class="span4"></div> <div class="span4"> <label>Start Date (Optional)</label> <input class="span12 date" id="datepicker-stopdate-rd" placeholder="MM/DD/YYYY" type="text"> </div> <div class="span4"> <label>Stop Date (Optional)</label> <input class="span12 date" id="datepicker-stopdate-rd" placeholder="MM/DD/YYYY" type="text"> </div> </div> </li>')
+      .prepend('<li class="new-item"> <div class="row-fluid"> <div class="span6"> <span class="company">' + $company + '</span> <span class="name">'+ $name +'</span> </div> <div class="span6 actions">  <a class="widgetbtn pull-right" id="removeMe" href="#"> <i class="icon-minus-sign"></i> </a> <a class="widgetbtn pull-right" href="#"> <i class="gcmsicon-edit-grey"></i> </a> ' + $item2add + '</div> </div>' + $additionalinfo +' </div> </li>')
       .find("li.new-item").hide().fadeIn('slow').removeClass("new-item");  
     $unassignedItems
       .html($unassignedValue + 1).fadeIn();
+
+    $(".itemstatus").effect("pulsate", { times:3 }, 800);
+    $(".itemstatus").removeClass("itemstatus");
   });
 
   // show filters in modals

@@ -64,7 +64,6 @@
                 %li.group
                   %a.btn{:href => "/design/audit-dashboard"}
                     Audit Dashboard
-                
                 %li.group
                   %a.btn{:href => "/design/audit-setup"}
                     Audit Setup
@@ -75,14 +74,14 @@
                   %a.btn{:href => "/systems"}
                     Systems Page
                 %li.group
-                  %a.btn{:href => "/design/products"}
-                    Products Page
+                  %a.btn{:href => "/design/product"}
+                    Product Page
                 %li.group
-                  %a.btn{:href => "/programs"}
-                    Programs Page
+                  %a.btn{:href => "/design/importregs"}
+                    Importing Regulation Data
                 %li.group
-                  %a.btn{:href => "/mapping/show/1"}
-                    Reg Mapper
+                  %a.btn{:href => "/design/importcontrols"}
+                    Importing Controls
     /third column
     .singleColumn
       
@@ -136,8 +135,8 @@
               %li.row-fluid
                 %label Widgets
               %li.row-fluid
-                %a.btn{"data-toggle" => "modal", :href => "#impactscopewidget"}
-                  Impact Scope
+                %a.btn{:href => "/design/products"}
+                  Impact Scope (view on Product)
     .singleColumn
       / in progress
       #Programs.WidgetBox.singleWide.demoItem
@@ -164,6 +163,9 @@
                 %a.btn{"data-toggle" => "modal", :href => "#redesignNewProduct"}
                   New/Edit Product
               %li.group
+                %a.btn{"data-toggle" => "modal", :href => "#redesignNewCategory"}
+                  New/Edit Category NEW!
+              %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#redesignNewSectionWide"}
                   New/Edit Section
               %li.group
@@ -179,14 +181,27 @@
                 %label Selectors
               %li.row-fluid
                 %a.span6.btn{"data-toggle" => "modal", :href => "#selectorPerson"}
-                  Select person
+                  Select Person
                 %a.span6.btn{"data-toggle" => "modal", :href => "#selectorReference"}
-                  Select ref
+                  Select Reference
               %li.row-fluid
                 %a.span6.btn{"data-toggle" => "modal", :href => "#selectorSystem"}
-                  Select system
+                  Select System
                 %a.span6.btn{"data-toggle" => "modal", :href => "#selectorCategory"}
-                  Select category
+                  Select Category
+              %li.row-fluid
+                %a.span6.btn{"data-toggle" => "modal", :href => "#selectorSystem"}
+                  Add System to System
+                %a.span6.btn{"data-toggle" => "modal", :href => "#selectorBiz2System"}
+                  Link Biz Object to System
+              %li.row-fluid
+                %a.span6.btn{"data-toggle" => "modal", :href => "#selectorControl"}
+                  Add Controls to System
+                %a.span6.btn{"data-toggle" => "modal", :href => "#selectorSystem"}
+                  Add System to Controls
+              %li.row-fluid
+                %a.span6.btn{"data-toggle" => "modal", :href => "#selectorBizProduct"}
+                  Link Biz Object to Product
               %li.row-fluid
                 %label Are you sure?
               %li.row-fluid

@@ -7,7 +7,7 @@
         %i.gcmsicon-x-grey
     %h1
       Select Category
-      %span.version v.0.91
+      %span.version v 0.97
   .modal-body
     .alert.alert-info
       %span#alertMessage
@@ -15,40 +15,22 @@
     %form
       .row-fluid
         .span6
-
           %h4
             Add Category
-            .fltrt
-              %a.btn.btn-blue.addbtn.fltrt.new{:href => "#"}
-                %i          
-                Create Category
+            .widgetbtn.widgetbtnselector{"data-dismiss" => "modal", :href => "#"}
+              %i.gcmsicon-add
+            .WidgetBoxHeading.pull-right
+              %input{:type => "text", :placeholder => "Search Categories"}
 
           .filter-block
           
             .row-fluid
               .span12
-                .modal-search.clearfix  
-                  .btn-group.closed 
-
-                    .pull-right
-                      %input{:type => "text", :placeholder => "Search Categories"}
-                .additional-filters.filter-group
-                  .row-fluid
-                    .span4
-                      %label Name
-                      %input.span12{:type=>"text", :placeholder => "enter name"}
-                    .span4
-                      %label Org. group
-                      %input.span12{:type=>"text", :placeholder => "example: IT"}
-                    .span4
-                      %label Title
-                      %input.span12{:type=>"text", :placeholder => "example: Compliance"}
-
-                            
+                 
                 .tabbable.tabs-left
                   .tab-content
                     #category1.tab-pane.active
-                      .people-list.short
+                      #currentList.category-list
                         %ul.source
                           %li
                             .row-fluid
@@ -101,63 +83,9 @@
                                 %a.widgetbtn.pull-right{:href => "#"}
                                   %i.gcmsicon-edit-grey
 
-                    #category2.tab-pane
-
-                      .people-list.short
-                        %ul.source
-                          %li
-                            .row-fluid
-                              .span8
-                                %span.company Motorola
-                                %span.name Moto Rola
-                              .span4.actions                
-                                %a.widgetbtn.pull-right.add-me{:href => "#"}
-                                  %i.grcicon-chevron-right
-                                %a.widgetbtn.pull-right{:href => "#"}
-                                  %i.gcmsicon-edit-grey
-                          %li
-                            .row-fluid
-                              .span8
-                                %span.company Google
-                                %span.name David Buick
-                              .span4.actions                
-                                %a.widgetbtn.pull-right.add-me{:href => "#"}
-                                  %i.grcicon-chevron-right 
-                                %a.widgetbtn.pull-right{:href => "#"}
-                                  %i.gcmsicon-edit-grey
-                          %li
-                            .row-fluid
-                              .span8
-                                %span.company Google
-                                %span.name Niki Lauda
-                              .span4.actions                
-                                %a.widgetbtn.pull-right.add-me{:href => "#"}
-                                  %i.grcicon-chevron-right 
-                                %a.widgetbtn.pull-right{:href => "#"}
-                                  %i.gcmsicon-edit-grey
-                          %li
-                            .row-fluid
-                              .span8
-                                %span.company Google
-                                %span.name Daniel Harms
-                              .span4.actions                
-                                %a.widgetbtn.pull-right.add-me{:href => "#"}
-                                  %i.grcicon-chevron-right 
-                                %a.widgetbtn.pull-right{:href => "#"}
-                                  %i.gcmsicon-edit-grey
-                          %li
-                            .row-fluid
-                              .span8
-                                %span.company Google
-                                %span.name David Buick
-                              .span4.actions                
-                                %a.widgetbtn.pull-right.add-me{:href => "#"}
-                                  %i.grcicon-chevron-right 
-                                %a.widgetbtn.pull-right{:href => "#"}
-                                  %i.gcmsicon-edit-grey
         .span6
           %h4 Categories for this system
-          .people-list.currentlist
+          #targetList.category-list
             %ul.target
               %li
                 .row-fluid
@@ -165,84 +93,29 @@
                     %span.company Access Control
                     %span.name Access Management
                   .span6.actions
-                .row-fluid.additional
-                  .span3.statustextgreen
-                    %label &nbsp;
-                    -#Draft 
-                    -#Pending
-                    Active
-                    -#Deprecated
-                  .span4
-                    %label Start Date (Optional)
-                    %input.span12.date#datepicker-startdate-jossrayburn{:type => "text", :placeholder => "MM/DD/YYYY"}
-                    :javascript
-                      $('#datepicker-startdate-jossrayburn').datepicker();
-                  .span4
-                    %label Stop Date (Optional)
-                    %input.span12.date#datepicker-stopdate-jossrayburn{:type => "text", :placeholder => "MM/DD/YYYY"}
-                    :javascript
-                      $('#datepicker-stopdate-jossrayburn').datepicker();
-                  .span1.actions
-                    %label &nbsp;
                     %a#removeMe.widgetbtn.pull-right{:href => "#"}
                       %i.icon-minus-sign
+                    %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#redesignNewCategory"}
+                      %i.gcmsicon-edit-grey 
               %li
                 .row-fluid
                   .span6
                     %span.company Access Control
                     %span.name Authorization
                   .span6.actions
-                    %a.widgetbtn.pull-right{:href => "#"}
-                      %i.gcmsicon-edit-grey 
-                .row-fluid.additional
-                  .span3.statustextblue
-                    %label &nbsp;
-                    -#Draft 
-                    Pending
-                    -#Active
-                    -#Deprecated
-                  .span4
-                    %label Start Date (Optional)
-                    %input.span12.date#datepicker-startdate-jossrayburn{:type => "text", :placeholder => "MM/DD/YYYY"}
-                    :javascript
-                      $('#datepicker-startdate-jossrayburn').datepicker();
-                  .span4
-                    %label Stop Date (Optional)
-                    %input.span12.date#datepicker-stopdate-jossrayburn{:type => "text", :placeholder => "MM/DD/YYYY"}
-                    :javascript
-                      $('#datepicker-stopdate-jossrayburn').datepicker();
-                  .span1.actions
-                    %label &nbsp;
                     %a#removeMe.widgetbtn.pull-right{:href => "#"}
                       %i.icon-minus-sign
+                    %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#redesignNewCategory"}
+                      %i.gcmsicon-edit-grey 
               %li
                 .row-fluid
                   .span6
                     %span.company Access Control
                     %span.name Authentication
                   .span6.actions
-                    %a.widgetbtn.pull-right{:href => "#"}
-                      %i.gcmsicon-edit-grey 
-                .row-fluid.additional
-                  .span3.statustextred
-                    %label &nbsp;
-                    -#Draft 
-                    -#Pending
-                    -#Active
-                    Deprecated
-                  .span4
-                    %label Start Date (Optional)
-                    %input.span12.date#datepicker-startdate-jossrayburn{:type => "text", :placeholder => "MM/DD/YYYY"}
-                    :javascript
-                      $('#datepicker-startdate-jossrayburn').datepicker();
-                  .span4
-                    %label Stop Date (Optional)
-                    %input.span12.date#datepicker-stopdate-jossrayburn{:type => "text", :placeholder => "MM/DD/YYYY"}
-                    :javascript
-                      $('#datepicker-stopdate-jossrayburn').datepicker();
-                  .span1.actions
-                    %label &nbsp;
                     %a#removeMe.widgetbtn.pull-right{:href => "#"}
                       %i.icon-minus-sign
+                    %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#redesignNewCategory"}
+                      %i.gcmsicon-edit-grey 
               
-  =render :partial => 'design/templates/modalfooterlists'
+  =render :partial => 'design/templates/modalfooter', :locals => { :shownote => false, :showcreated => false, :showrevs => false }

@@ -38,4 +38,4 @@
           %input#inputError.span12.forminputsuccess{:placeholder => "Enter Company Name", :type => "text"}/
           %br/
           %span.help-inline
-  =render :partial => 'design/templates/modaljustfooter'
+  =render :partial => 'design/templates/modalfooter', :locals => { :shownote => false, :showcreated => true, :showrevs => true }, :locals => { :shownote => false, :showcreated => false, :showrevs => false }

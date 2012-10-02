@@ -60,4 +60,4 @@
           %span.help-inline
         .span3.form-inline.control-group
           %a.btn.btn-large.btn-success{"data-dismiss" => "modal", :href => "#comingsoonModal"} Attach
-  =render :partial => 'design/templates/modaljustfooter'
+  =render :partial => 'design/templates/modalfooter', :locals => { :shownote => false, :showcreated => true, :showrevs => true }

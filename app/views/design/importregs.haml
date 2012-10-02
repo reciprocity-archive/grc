@@ -1,0 +1,168 @@
+-@title = "GRC: Products"
+
+-content_for :header do
+  %ol#breadcrumb
+    %li.last
+      %a{:href => "programs.htm"} PROGRAMS / IMPORTING
+  #pageTitle.location Sarbanes-Oxley Setup
+
+-content_for :page_help, 'changeme'
+
+-content_for :subheader_extras do
+  %h1#pageType.fltrt.highlighted Importing Regulation Data
+
+.row-fluid
+  / .RegsandControls
+  #RegsandControls.span12.WidgetBox.fullHeight.demoItem
+    .WidgetBoxHeading
+      .fltrt
+        %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+          %i.gcmsicon-questionmark-grey
+        %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+          %i.gcmsicon-edit-grey
+        %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
+      .WidgetTitle.doublewidth Regulation Data Preview
+    / /.WidgetBoxHeading
+    .WidgetBoxContent
+      %ul#quicklinks.nav.nav-tabs
+        %li
+          %a{"data-toggle" => "tab", :href => "#Spreadsheet"} Spreadsheet
+        %li.active
+          %a{"data-toggle" => "tab", :href => "#Treeview"} Tree-view
+      .tab-content
+        #Spreadsheet.tab-pane Spreadsheet
+        #Treeview.tab-pane.active
+
+        .row-fluid
+          .span6
+            %h4 Compliance Program
+            .row-fluid   
+              .span10.control-group
+                %label{:for => ""} Program/Regulation
+                %input.span12{:placeholder => "PCI-DDS", :type => "text"}/
+                %br/
+                
+              .span2
+                %label{:for => "control-code"} Version  
+                %input#control-code.span12{:disabled => "disabled", :placeholder => "1.2", :type => "text"}
+                
+            .row-fluid   
+              .span12.control-group
+                %label{:for => ""} Source Title
+                %input.span12{:placeholder => "Payment Card Industry (PCI) Data Security Standard (DSS)", :type => "text"}/
+                
+            .row-fluid   
+              .span12.control-group
+                %label{:for => ""} Source URL
+                %input.span12{:placeholder => "example.com/PCI", :type => "text"}/
+                
+            .row-fluid
+              .span12.control-group
+                %label{:for => ""} Description
+            .row-fluid{"control-group" => ""}
+              .span12.well
+                %textarea#control-description3.span12.forminputsuccess{:placeholder => "", :rows => "4"}
+                  :preserve
+                    Hendrerit dolus nullus nimis pneum abico quibus, vulputate, macto, autem vulputate. Qui, sagaciter letalis eum quae interdico iriure, eum. Praesent, jus importunus capio abdo velit genitus. Luptatum zelus meus illum, eros capto nulla in augue ymo quod ibidem.
+                :javascript
+                  $('#control-description3').wysihtml5({
+                    "image": false //Button to insert an image. Default true
+                  });
+            .row-fluid
+
+              .span5
+                %label{:for => "control-code"} Name of uploaded file  
+                %input#control-code.span12{:disabled => "disabled", :placeholder => "1.2", :type => "text"}
+                
+              .span3
+                %label{:for => "control-code"} Doc Date  
+                #docdate.date{"data-date" => "02-12-12", "data-date-format" => "dd-mm-yy"}
+                  %input.span12.calendar{:size => "16", :type => "text", :value => "02-12-12"}/
+                :javascript
+                  $('#docdate').datepicker();
+              .span2
+                %label{:for => "control-code"} Version  
+                %input#control-code.span12{:disabled => "disabled", :placeholder => "1.2", :type => "text"}
+                
+              .span2
+                %label{:for => "control-code"} Pages  
+                %input#control-code.span12{:disabled => "disabled", :placeholder => "89", :type => "text"}
+                
+
+          .span6
+            %h4 Transcription Process
+            .row-fluid
+              .span3
+                %label{:for => "control-code"} Date 
+                #docdate.date{"data-date" => "02-12-12", "data-date-format" => "dd-mm-yy"}
+                  %input.span12.calendar{:size => "16", :type => "text", :value => "02-12-12"}/
+                :javascript
+                  $('#docdate').datepicker();
+              .span5
+                %label{:for => "control-code"} Transcriber Name  
+                %input#control-code.span12{:disabled => "disabled", :placeholder => "", :type => "text"}
+                
+              .span4
+                %label{:for => "control-code"} Email  
+                %input#control-code.span12{:disabled => "disabled", :placeholder => "", :type => "text"}
+                
+            .row-fluid
+              .span3
+                %label{:for => "control-code"} Date 
+                #docdate.date{"data-date" => "02-12-12", "data-date-format" => "dd-mm-yy"}
+                  %input.span12.calendar{:size => "16", :type => "text", :value => "02-12-12"}/
+                :javascript
+                  $('#docdate').datepicker();
+              .span5
+                %label{:for => "control-code"} Transcriber Reviewer  
+                %input#control-code.span12{:disabled => "disabled", :placeholder => "", :type => "text"}
+                
+              .span4
+                %label{:for => "control-code"} Email  
+                %input#control-code.span12{:disabled => "disabled", :placeholder => "", :type => "text"}
+            %br
+            .well
+              %h4 Final Reviewer
+              .row-fluid
+                .span3
+                  %label{:for => "control-code"} Date 
+                  #docdate.date{"data-date" => "02-12-12", "data-date-format" => "dd-mm-yy"}
+                    %input.span12.calendar{:size => "16", :type => "text", :value => "02-12-12"}/
+                  :javascript
+                    $('#docdate').datepicker();
+                .span5
+                  %label{:for => "control-code"} Transcriber Reviewer  
+                  %input#control-code.span12{:disabled => "disabled", :placeholder => "", :type => "text"}
+                  
+                .span4
+                  %label{:for => "control-code"} Email  
+                  %input#control-code.span12{:disabled => "disabled", :placeholder => "", :type => "text"}
+                  
+
+        %h4 Sample Data
+        .well
+          #sampleData 
+            -#Import Here
+                 
+        .row-fluid
+          %hr.hr-widget
+        .row-fluid
+          .span3
+            %label Name of Original Source Document
+            %input.span12{:type=>"text", :placeholder => "FISMA 2.0"}
+          .span2
+            %label URL of Original Source Document
+            %input.span12{:type=>"text", :placeholder => "www.fisma.org/reference/fisma-2.0"}
+          .span2
+            %label Review By
+            %input.span12{:type=>"text", :placeholder => "Analyst Rodger Banks"}
+          .span2.form-inline.control-group.date
+            %label{:for => "control-effectivedate"} Effective Date
+            %br/
+            #dp3.date{"data-date" => "02-12-12", "data-date-format" => "dd-mm-yy"}
+              %input.span10.calendar{:size => "16", :type => "text", :value => "02-12-12"}/
+            :javascript
+              $('#dp3').datepicker();
+          .span3
+
+            %a.span12#actionButton.btn.btn-large.btn-success.btn-primary{:href => "#", :style => "margin-top:9px;"} Finish Importing Data

@@ -63,6 +63,8 @@
 }
 
 
+
+
 .gcmsicon-gears-white {
   background-image: url("../images/icons/grcicons/gear.png");
   display: inline-block;
@@ -105,8 +107,8 @@
 }
 
 .calendar {
-  background-image: url("../images/icons/icon-calendar.png");
-  background-position: 94% 75%;
+  background-image: url("../images/icons/icon-calendar-inline.png");
+  background-position: 94% 55%;
   background-repeat: no-repeat;
 }
 
@@ -248,7 +250,7 @@
 
 
 .gcmsicon-x-grey {
-display: inline-block;
+  display: inline-block;
   background-image: url("../images/icons/grcicons/close.png");
   -moz-background-size:16px 16px;
              -ie-background-size:16px 16px;
@@ -259,6 +261,22 @@ display: inline-block;
   height: 16px;
   background-position: 0px 0px;
   background-repeat: no-repeat;
+}
+
+.gcmsicon-add {
+
+  display: inline-block;
+  background-image: url("../images/icons/grcicons/add.png");
+ -moz-background-size:16px 16px;
+             -ie-background-size:16px 16px;
+              -o-background-size:16px 16px;
+         -webkit-background-size:16px 16px;
+                 background-size:16px 16px;
+  width: 16px;
+  height: 16px;
+  background-position: 0px 0px;
+  background-repeat: no-repeat;
+
 }
 
 .gcmsicon-questionmark-grey {

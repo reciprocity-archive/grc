@@ -169,7 +169,7 @@
 
 // various modal items
 
-.people-list {
+.people-list, .system-list, .category-list, .reference-list{
   height:323px;
   border:1px solid darken($lightestGray,10%);
   border-bottom-left-radius: 4px;
@@ -211,7 +211,7 @@
         color:$mediumGray;
       }
     }
-    .company {
+    .company, .system, .object {
       display:block;
       font-size:12px;
       font-weight:normal;
