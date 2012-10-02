@@ -24,17 +24,6 @@ jQuery(function ($) {
     }
   }
 
-  var renderExternalWidget = function(item) {
-    var file = '/design/templates/widgets/' + item.name;
-    if ($(item.selector).length > 0) {
-      $.when($.get(file)).done(function(tmplData) {
-        $(item.selector).append(tmplData)
-      });
-    }
-  }
-
-
-  renderExternalTmpl({ name: 'impactscope', selector: '#templates', data: {} });
 
   //ACTUALLY renderout templates
 
