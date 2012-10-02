@@ -100,7 +100,7 @@ class SystemsController < ApplicationController
       format.json { render :json => @system.as_json(:root => nil) }
       format.html do
         render :layout => nil, :template => 'shared/delete_confirm',
-          :locals => { :url => flow_system_path(@system), :models => @model_stats, :relationships => @relationship_stats }
+          :locals => { :model => @system, :url => flow_system_path(@system), :models => @model_stats, :relationships => @relationship_stats }
       end
     end
   end

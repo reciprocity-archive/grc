@@ -78,7 +78,7 @@ class SectionsController < ApplicationController
       format.json { render :json => @section.as_json(:root => nil) }
       format.html do
         render :layout => nil, :template => 'shared/delete_confirm',
-          :locals => { :url => flow_section_path(@section), :models => @model_stats, :relationships => @relationship_stats }
+          :locals => { :model => @section, :url => flow_section_path(@section), :models => @model_stats, :relationships => @relationship_stats }
       end
     end
   end

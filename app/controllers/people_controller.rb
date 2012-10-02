@@ -81,7 +81,7 @@ class PeopleController < ApplicationController
       format.json { render :json => @person.as_json(:root => nil) }
       format.html do
         render :layout => nil, :template => 'shared/delete_confirm',
-          :locals => { :url => flow_person_path(@person), :models => @model_stats, :relationships => @relationship_stats }
+          :locals => { :model => @person, :url => flow_person_path(@person), :models => @model_stats, :relationships => @relationship_stats }
       end
     end
   end

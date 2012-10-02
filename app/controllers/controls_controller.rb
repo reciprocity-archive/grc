@@ -112,7 +112,7 @@ class ControlsController < ApplicationController
       format.json { render :json => @control.as_json(:root => nil) }
       format.html do
         render :layout => nil, :template => 'shared/delete_confirm',
-          :locals => { :url => flow_control_path(@control), :models => @model_stats, :relationships => @relationship_stats }
+          :locals => { :model => @control, :url => flow_control_path(@control), :models => @model_stats, :relationships => @relationship_stats }
       end
     end
   end
