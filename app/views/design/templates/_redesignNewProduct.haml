@@ -1,4 +1,4 @@
-#redesignNewSectionWide.modal.modal-wide.hide.fade
+#redesignNewProduct.modal.modal-wide.hide.fade
   .modal-header
     %nav
       %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
@@ -6,7 +6,7 @@
       %a.widgetbtn{"data-dismiss" => "modal", :href => "#"}
         %i.gcmsicon-x-grey
     %h1 
-      New/Edit Section
+      Create New Product
       %span.version v.0.23
 
   .modal-body
@@ -15,13 +15,10 @@
       / %button.close{:type => "button", :"data-dismiss" => "alert"} ×
     %form
       .row-fluid
-        .span4
+        .span6
           %label Title
           %input.span12{:type => "text", :placeholder => "Enter title"}
           %span.help-inline 
-        .span2
-          %label Program
-          %input.span12{:type => "text", :placeholder => "Auto selected", :disabled => "disabled"}
         .span6
           .row-fluid
             .span6
@@ -35,13 +32,27 @@
           %label Description
           %textarea.span12.double{:placeholder => "Enter description here", :rows => "3"}
         .span6
+          .row-fluid 
+            .span6
+              %label Effective Date
+              %input.span12#datepicker-program-effectivedate.date{:type => "text",  :placeholder => "MM/DD/YYYY"}
+              :javascript
+                $('#datepicker-program-effectivedate').datepicker();
+              %label Type
+              %select.span12
+                %option Regulation
+                %option Company
+            .span6
+              %label Stop Date    
+              %input.span12#datepicker-program-stopdate.date{:type => "text",  :placeholder => "MM/DD/YYYY"}
+              :javascript
+                $('#datepicker-program-stopdate').datepicker();
       .row-fluid
         .span6
-          %label Direct Link
+          %label Direct URL for Product (optional)
           %input.span12{:type => "text", :placeholder => "http://www.examplelink.com/"}
           %span.help-inline &nbsp;
         
         .span6
-
 
   =render :partial => 'design/templates/modalfooter'

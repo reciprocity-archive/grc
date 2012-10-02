@@ -1,4 +1,4 @@
-#redesignSelectPersonWide.modal.modal-wide.hide.fade
+#redesignSelectPerson.modal.modal-wide.hide.fade
   .modal-header
     %nav
       %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
@@ -21,23 +21,23 @@
             .fltrt
               %a.btn.btn-blue.addbtn.fltrt.new{:href => "#"}
                 %i.icon-user.icon-white              
-                + New Person
+                Add Person
 
           .filter-block
           
             .row-fluid
               .span12
                 .modal-search.clearfix  
-                  .btn-group.closed
-                    %a.btn.btn-blue.dropdown-toggle{"data-toggle" => "dropdown"}
-                      Select Directory
+                  .btn-group.closed 
+                    %a#filterButton.btn.dropdown-toggle{"data-toggle" => "dropdown"}
+                      GRC Directory
                       %span.caret
                     %ul.dropdown-menu
                       %li
-                        %a#showFilters{:href => "#"}
+                        %a#showCompanyDirectory{:href => "#"}
                           Company Directory
                       %li
-                        %a#showCategories{:href => "#"}
+                        %a#showGRCDirectory{:href => "#"}
                           GRC Directory
 
                     .pull-right
@@ -56,17 +56,9 @@
 
                             
                 .tabbable.tabs-left
-                  %ul.nav.nav-tabs.category-group
-                    %li{:class => "active"}
-                      %a{:href => "#category1", :"data-toggle" => "tab" } Category/Group 1
-                    %li
-                      %a{:href => "#category2", :"data-toggle" => "tab" } Category/Group 2
-
                   .tab-content
-
-                
                     #category1.tab-pane.active
-                      .people-list
+                      .people-list.short
                         %ul.source
                           %li
                             .row-fluid
@@ -74,12 +66,10 @@
                                 %span.company Facebook | Engineering Compliance
                                 %span.name
                                   Alexander Gustaphson
-                                  %small 
-                                    %a{:href => "mailto:alexander@gustaphson.com"} alexander@gustaphson.com
                               .span4.actions                
-                                %a.btn.btn-mini.pull-right.add-me{:href => "#"}
+                                %a.widgetbtn.pull-right.add-me{:href => "#"}
                                   %i.grcicon-chevron-right
-                                %a.btn.btn-mini.pull-right{:href => "#"}
+                                %a.widgetbtn.pull-right{:href => "#"}
                                   %i.gcmsicon-edit-grey
                           %li
                             .row-fluid
@@ -87,9 +77,9 @@
                                 %span.company Google
                                 %span.name David Buick
                               .span4.actions                
-                                %a.btn.btn-mini.pull-right.add-me{:href => "#"}
+                                %a.widgetbtn.pull-right.add-me{:href => "#"}
                                   %i.grcicon-chevron-right 
-                                %a.btn.btn-mini.pull-right{:href => "#"}
+                                %a.widgetbtn.pull-right{:href => "#"}
                                   %i.gcmsicon-edit-grey
                           %li
                             .row-fluid
@@ -97,9 +87,9 @@
                                 %span.company Google
                                 %span.name Niki Lauda
                               .span4.actions                
-                                %a.btn.btn-mini.pull-right.add-me{:href => "#"}
+                                %a.widgetbtn.pull-right.add-me{:href => "#"}
                                   %i.grcicon-chevron-right
-                                %a.btn.btn-mini.pull-right{:href => "#"}
+                                %a.widgetbtn.pull-right{:href => "#"}
                                   %i.gcmsicon-edit-grey
                           %li
                             .row-fluid
@@ -107,9 +97,9 @@
                                 %span.company Google
                                 %span.name Daniel Harms
                               .span4.actions                
-                                %a.btn.btn-mini.pull-right.add-me{:href => "#"}
+                                %a.widgetbtn.pull-right.add-me{:href => "#"}
                                   %i.grcicon-chevron-right
-                                %a.btn.btn-mini.pull-right{:href => "#"}
+                                %a.widgetbtn.pull-right{:href => "#"}
                                   %i.gcmsicon-edit-grey
                           %li
                             .row-fluid
@@ -117,14 +107,14 @@
                                 %span.company Google
                                 %span.name David Buick
                               .span4.actions                
-                                %a.btn.btn-mini.pull-right.add-me{:href => "#"}
+                                %a.widgetbtn.pull-right.add-me{:href => "#"}
                                   %i.grcicon-chevron-right 
-                                %a.btn.btn-mini.pull-right{:href => "#"}
+                                %a.widgetbtn.pull-right{:href => "#"}
                                   %i.gcmsicon-edit-grey
 
                     #category2.tab-pane
 
-                      .people-list
+                      .people-list.short
                         %ul.source
                           %li
                             .row-fluid
@@ -132,9 +122,9 @@
                                 %span.company Motorola
                                 %span.name Moto Rola
                               .span4.actions                
-                                %a.btn.btn-mini.pull-right.add-me{:href => "#"}
+                                %a.widgetbtn.pull-right.add-me{:href => "#"}
                                   %i.grcicon-chevron-right
-                                %a.btn.btn-mini.pull-right{:href => "#"}
+                                %a.widgetbtn.pull-right{:href => "#"}
                                   %i.gcmsicon-edit-grey
                           %li
                             .row-fluid
@@ -142,9 +132,9 @@
                                 %span.company Google
                                 %span.name David Buick
                               .span4.actions                
-                                %a.btn.btn-mini.pull-right.add-me{:href => "#"}
+                                %a.widgetbtn.pull-right.add-me{:href => "#"}
                                   %i.grcicon-chevron-right 
-                                %a.btn.btn-mini.pull-right{:href => "#"}
+                                %a.widgetbtn.pull-right{:href => "#"}
                                   %i.gcmsicon-edit-grey
                           %li
                             .row-fluid
@@ -152,9 +142,9 @@
                                 %span.company Google
                                 %span.name Niki Lauda
                               .span4.actions                
-                                %a.btn.btn-mini.pull-right.add-me{:href => "#"}
+                                %a.widgetbtn.pull-right.add-me{:href => "#"}
                                   %i.grcicon-chevron-right 
-                                %a.btn.btn-mini.pull-right{:href => "#"}
+                                %a.widgetbtn.pull-right{:href => "#"}
                                   %i.gcmsicon-edit-grey
                           %li
                             .row-fluid
@@ -162,9 +152,9 @@
                                 %span.company Google
                                 %span.name Daniel Harms
                               .span4.actions                
-                                %a.btn.btn-mini.pull-right.add-me{:href => "#"}
+                                %a.widgetbtn.pull-right.add-me{:href => "#"}
                                   %i.grcicon-chevron-right 
-                                %a.btn.btn-mini.pull-right{:href => "#"}
+                                %a.widgetbtn.pull-right{:href => "#"}
                                   %i.gcmsicon-edit-grey
                           %li
                             .row-fluid
@@ -172,97 +162,109 @@
                                 %span.company Google
                                 %span.name David Buick
                               .span4.actions                
-                                %a.btn.btn-mini.pull-right.add-me{:href => "#"}
+                                %a.widgetbtn.pull-right.add-me{:href => "#"}
                                   %i.grcicon-chevron-right 
-                                %a.btn.btn-mini.pull-right{:href => "#"}
+                                %a.widgetbtn.pull-right{:href => "#"}
                                   %i.gcmsicon-edit-grey
         .span6
           %h4 Roles for this system
-          .people-list
+          .people-list.currentlist
             %ul.target
               %li
                 .row-fluid
                   .span6
                     %span.company Google
                     %span.name Joss Rayburn
-                  .span6.actions   
-                    .btn-group.inline.closed
-                      %a.span8.btn.btn-mini.btn-success.dropdown-toggle{"data-toggle" => "dropdown"}
+                  .span6.actions          
+                    %a#removeMe.widgetbtn.pull-right{:href => "#"}
+                      %i.icon-minus-sign
+                    %a.widgetbtn.pull-right{:href => "#"}
+                      %i.gcmsicon-edit-grey
+                    .btn-group.inline
+                      %a.span7.btn.btn-success.btn-mini.dropdown-toggle.nominheight.halfopacity.fltrt{"data-toggle" => "dropdown"}
                         Accountable
                       %ul.dropdown-menu
                         %li
-                          %a#showFilters{:href => "#"}
+                          %a#makeAccountable{:href => "#"}
                             is Accountable for
                         %li
-                          %a#showCategories{:href => "#"}
-                            is Responsible for              
-                    %a.btn.btn-mini.pull-right{:href => "#"}
-                      %i.icon-minus-sign
-                    %a.btn.btn-mini.pull-right{:href => "#"}
-                      %i.gcmsicon-edit-grey
+                          %a#makeResponsible{:href => "#"}
+                            is Responsible for  
                 .row-fluid.additional
                   .span4
                   .span4
                     %label Start Date (Optional)
-                    %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
+                    %input.span12.date#datepicker-startdate-jossrayburn{:type => "text", :placeholder => "MM/DD/YYYY"}
+                    :javascript
+                      $('#datepicker-startdate-jossrayburn').datepicker();
                   .span4
                     %label Stop Date (Optional)
-                    %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
+                    %input.span12.date#datepicker-stopdate-jossrayburn{:type => "text", :placeholder => "MM/DD/YYYY"}
+                    :javascript
+                      $('#datepicker-stopdate-jossrayburn').datepicker();
+              %li
+                .row-fluid
+                  .span6
+                    %span.company Google
+                    %span.name Jamie James
+                  .span6.actions   
+                    %a#removeMe.widgetbtn.pull-right{:href => "#"}
+                      %i.icon-minus-sign
+                    %a.widgetbtn.pull-right{:href => "#"}
+                      %i.gcmsicon-edit-grey
+                    .btn-group.inline
+                      %a.span7.btn.btn-success.btn-mini.dropdown-toggle.nominheight.halfopacity.fltrt{"data-toggle" => "dropdown"}
+                        Accountable
+                      %ul.dropdown-menu
+                        %li
+                          %a#makeAccountable{:href => "#"}
+                            is Accountable for
+                        %li
+                          %a#makeResponsible{:href => "#"}
+                            is Responsible for 
+                .row-fluid.additional
+                  .span4
+                  .span4
+                    %label Start Date (Optional)
+                    %input.span12.date#datepicker-startdate-jj{:type => "text", :placeholder => "MM/DD/YYYY"}
+                    :javascript
+                      $('#datepicker-startdate-jj').datepicker();
+                  .span4
+                    %label Stop Date (Optional)
+                    %input.span12.date#datepicker-stopdate-jj{:type => "text", :placeholder => "MM/DD/YYYY"}
+                    :javascript
+                      $('#datepicker-stopdate-jj').datepicker();
               %li
                 .row-fluid
                   .span6
                     %span.company Google
                     %span.name Joss Rayburn
-                  .span6.actions   
-                    .btn-group.inline.closed
-                      %a.span8.btn.btn-mini.btn-info.dropdown-toggle{"data-toggle" => "dropdown"}
-                        Responsible 
+                  .span6.actions 
+                    %a#removeMe.widgetbtn.pull-right{:href => "#"}
+                      %i.icon-minus-sign
+                    %a.widgetbtn.pull-right{:href => "#"}
+                      %i.gcmsicon-edit-grey
+                    .btn-group.inline
+                      %a.span7.btn.btn-danger.btn-mini.dropdown-toggle.nominheight.halfopacity.fltrt{"data-toggle" => "dropdown"}
+                        Select Relationship 
+                        %span.caret
                       %ul.dropdown-menu
                         %li
-                          %a#showFilters{:href => "#"}
+                          %a#makeAccountable{:href => "#"}
                             is Accountable for
                         %li
-                          %a#showCategories{:href => "#"}
-                            is Responsible for              
-                    %a.btn.btn-mini.pull-right{:href => "#"}
-                      %i.icon-minus-sign
-                    %a.btn.btn-mini.pull-right{:href => "#"}
-                      %i.gcmsicon-edit-grey
+                          %a#makeResponsible{:href => "#"}
+                            is Responsible for 
                 .row-fluid.additional
-                  .span4
+                  .span4  
                   .span4
                     %label Start Date (Optional)
-                    %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
+                    %input.span12.date#datepicker-stopdate-rd{:type => "text", :placeholder => "MM/DD/YYYY"}
+                    :javascript
+                      $('#datepicker-stopdate-rd').datepicker();
                   .span4
                     %label Stop Date (Optional)
-                    %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
-              %li
-                .row-fluid
-                  .span6
-                    %span.company Google
-                    %span.name Joss Rayburn
-                  .span6.actions   
-                    .btn-group.inline.closed
-                      %a.span7.btn.btn-mini.btn-danger.dropdown-toggle{"data-toggle" => "dropdown"}
-                        Select Relationship
-                      %ul.dropdown-menu
-                        %li
-                          %a#showFilters{:href => "#"}
-                            is Accountable for
-                        %li
-                          %a#showCategories{:href => "#"}
-                            is Responsible for            
-                    %a.btn.btn-mini.pull-right{:href => "#"}
-                      %i.icon-minus-sign
-                    %a.btn.btn-mini.pull-right{:href => "#"}
-                      %i.gcmsicon-edit-grey
-                .row-fluid.additional
-                  .span4
-                    Joss Rayburn is responsible for the LDAP System.  Responsible Parties can: View and Edit any information related to this system. This relationship is pending approval.
-                  .span4
-                    %label Start Date (Optional)
-                    %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
-                  .span4
-                    %label Stop Date (Optional)
-                    %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
+                    %input.span12.date#datepicker-stopdate-rd{:type => "text", :placeholder => "MM/DD/YYYY"}
+                    :javascript
+                      $('#datepicker-stopdate-rd').datepicker();
   =render :partial => 'design/templates/modalfooterlists'

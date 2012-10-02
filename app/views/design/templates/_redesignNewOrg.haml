@@ -1,4 +1,4 @@
-#redesignNewSectionWide.modal.modal-wide.hide.fade
+#redesignNewOrg.modal.modal-wide.hide.fade
   .modal-header
     %nav
       %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
@@ -6,22 +6,18 @@
       %a.widgetbtn{"data-dismiss" => "modal", :href => "#"}
         %i.gcmsicon-x-grey
     %h1 
-      New/Edit Section
+      Create New Organization
       %span.version v.0.23
-
   .modal-body
     .alert.alert-info
       %span#alertMessage
       / %button.close{:type => "button", :"data-dismiss" => "alert"} ×
     %form
       .row-fluid
-        .span4
+        .span6
           %label Title
           %input.span12{:type => "text", :placeholder => "Enter title"}
           %span.help-inline 
-        .span2
-          %label Program
-          %input.span12{:type => "text", :placeholder => "Auto selected", :disabled => "disabled"}
         .span6
           .row-fluid
             .span6
@@ -35,13 +31,23 @@
           %label Description
           %textarea.span12.double{:placeholder => "Enter description here", :rows => "3"}
         .span6
+          .row-fluid 
+            .span6
+              %label Type
+              %select.span12
+                %option Regulation
+                %option Company
+            .span6
       .row-fluid
         .span6
-          %label Direct Link
+          %label 
+            Direct URL for Org Group (optional)
           %input.span12{:type => "text", :placeholder => "http://www.examplelink.com/"}
           %span.help-inline &nbsp;
-        
         .span6
-
-
+          %label{:for => "select01"} 
+            Compliance Certification Status
+          %select#select01.span12.forminputsuccess
+            %option OK - with issues
+            %option Open
   =render :partial => 'design/templates/modalfooter'
