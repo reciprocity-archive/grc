@@ -1,19 +1,39 @@
-<ul class="nav nav-tabs nav-stacked">
-<% if (this.length) { %>
-  <% this.forEach(function(program) { %>
-    <% program = program.program %>
-    <li class="group">
-      <a href="/programs/<%=program.id%>" data-popover-href="/programs/<%= program.id %>/tooltip" data-popover-trigger="sticky-hover">
-        <h3><%= program.slug %></h3>
-        <p class="oneline">
-          <%= program.title %>
-        </p>
-      </a>
-    </li>
-  <% }) %>
-<% } else { %>
-<li>
-No programs impacted.
-</li>
-<% } %>
-</ul>
+  <% if (this.length) { %>
+    <% this.forEach(function(program) { %>
+      <% program = program.program %>
+      <div class= "row-fluid">
+        <ul class="span12">
+          <li class="controlSlot">
+            <a href="/programs/<%=program.id%>" data-popover-href="/programs/<%= program.id %>/tooltip" data-popover-trigger="sticky-hover">
+              <span class="controls-group">
+              </span>
+              <div class="row-fluid nominheight">
+                <div class="span2 nominheight">
+                  <span class="controls-subgroup">
+                    <%= program.slug %>
+                  </span>
+                </div>
+                <div class="span6 nominheight">
+                  <span class="controls-subgroup">
+                    <%= program.title %>
+                  </span>
+                </div>
+              </div>
+              <div class="row-fluid nominheight">
+                <div class="span4 nominheight">
+                </div>
+                <div class="span4 nominheight">
+                </div>
+                <div class="span4 nominheight">
+                </div>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+    <% }) %>
+  <% } else { %>
+  <li>
+  No programs impacted.
+  </li>
+  <% } %>

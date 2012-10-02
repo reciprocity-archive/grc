@@ -1,18 +1,35 @@
 -content_for :widget_title do
-  Impact/Scope
+  Impact / Scope
 
 -content_for :widget_help, 'product_impact'
-
-.tabbable#impact
-  %ul.nav.nav-tabs
-    %li=link_to 'Programs', '#programs', :data => { :toggle => 'tab', :href => '#' }
-    %li=link_to 'Products', '#products', :data => { :toggle => 'tab', :href => '#' }
-  .tab-content
-    #programs.tab-pane
-      %h2#title
-        Relevant Programs
-        %a.btn.btn-blue.add-btn.fltrt Edit List
-      #description Programs which are relevant to this product.
-    #products.tab-pane
-      #description Other Products which have an impact on this product.
-
+#impactScopeInfo.open
+  /Button Filters
+  .button-set
+    .row-fluid
+      .span4
+        .span12.btn{:href => ""}
+          Programs
+      .span4
+        .span12.btn{:href => ""}
+          -
+      .span4
+        .span12.btn{:href => ""}
+  .button-set
+    .row-fluid
+      .span4
+        .span12.btn{:href => ""}
+      .span4
+        .span12.btn{:href => ""}
+          -
+      .span4
+        .span12.btn{:href => ""}
+  %hr.hr-widget
+  / TABS
+  .row-fluid
+    .span12
+      %h4
+        Applicable Regulations
+        %a.btn.btn-blue.addbtn.fltrt Edit List
+  .row-fluid
+    .span12.audit
+      .subtitle Regulations or programs that are directly applicable to this program.
