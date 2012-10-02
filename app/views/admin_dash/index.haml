@@ -108,9 +108,7 @@
         .WidgetBoxContent
           #programInProgress.toolbar-widget.in
             %ul#quickLinks.nav.nav-tabs.nav-stacked.in
-              %li.group
-                %a.btn{"data-toggle" => "modal", :href => "#newreference"}
-                  New Reference
+              
               %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#auditCycleModal"}
                   New/Edit Audit Cycle
@@ -156,7 +154,9 @@
         .WidgetBoxContent
           #programInProgressRedesign.toolbar-widget.in
             %ul#quickLinks.nav.nav-tabs.nav-stacked.in
-
+              %li.group
+                %a.btn{"data-toggle" => "modal", :href => "#newreference"}
+                  New Reference
               %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#basicnewpersonModal"}
                   New/Edit Person
