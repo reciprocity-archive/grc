@@ -20,7 +20,7 @@
             Add Reference
             .fltrt
               %a.btn.btn-blue.addbtn.fltrt.new{:href => "#"}
-                %i.icon-user.icon-white              
+                %i           
                 Create Reference
 
           .filter-block
@@ -29,19 +29,8 @@
               .span12
                 .modal-search.clearfix  
                   .btn-group.closed 
-                    %a#filterButton.btn.dropdown-toggle{"data-toggle" => "dropdown"}
-                      GRC Directory
-                      %span.caret
-                    %ul.dropdown-menu
-                      %li
-                        %a#showCompanyDirectory{:href => "#"}
-                          Company Directory
-                      %li
-                        %a#showGRCDirectory{:href => "#"}
-                          GRC Directory
-
                     .pull-right
-                      %input{:type => "text", :placeholder => "Search GRC Directory"}
+                      %input{:type => "text", :placeholder => "Search References"}
                 .additional-filters.filter-group
                   .row-fluid
                     .span4
@@ -182,14 +171,14 @@
                       %i.gcmsicon-edit-grey
                     .btn-group.inline
                       %a.span7.btn.btn-success.btn-mini.dropdown-toggle.nominheight.halfopacity.fltrt{"data-toggle" => "dropdown"}
-                        Accountable
+                        Working Draft
                       %ul.dropdown-menu
                         %li
                           %a#makeAccountable{:href => "#"}
-                            is Accountable for
+                            Final Report
                         %li
                           %a#makeResponsible{:href => "#"}
-                            is Responsible for  
+                            Working Draft  
                 .row-fluid.additional
                   .span4
                   .span4
@@ -214,14 +203,14 @@
                       %i.gcmsicon-edit-grey
                     .btn-group.inline
                       %a.span7.btn.btn-success.btn-mini.dropdown-toggle.nominheight.halfopacity.fltrt{"data-toggle" => "dropdown"}
-                        Accountable
+                        Final Report
                       %ul.dropdown-menu
                         %li
                           %a#makeAccountable{:href => "#"}
-                            is Accountable for
+                            Final Report
                         %li
                           %a#makeResponsible{:href => "#"}
-                            is Responsible for 
+                            Working Draft 
                 .row-fluid.additional
                   .span4
                   .span4
@@ -251,10 +240,10 @@
                       %ul.dropdown-menu
                         %li
                           %a#makeAccountable{:href => "#"}
-                            is Accountable for
+                            Final Report
                         %li
                           %a#makeResponsible{:href => "#"}
-                            is Responsible for 
+                            Working Draft 
                 .row-fluid.additional
                   .span4  
                   .span4

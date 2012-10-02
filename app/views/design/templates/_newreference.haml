@@ -13,20 +13,20 @@
         .span6
           .span12.control-group
             %label{:for => "inputError"} Title
-            %input#inputError.span12.forminputsuccess{:placeholder => "Complete Title Goes Here", :type => "text"}/
+            %input#inputError.span12{:placeholder => "Complete Title Goes Here", :type => "text"}/
             %br/
             %span.help-inline
         .span3.form-inline.control-group
           .form-inline.control-group
             %label{:for => "control-code"} Year
             %br/
-            %input#control-code.inputtext-small.forminputsuccess{:placeholder => "2012", :type => "text"}/
+            %input#control-code.inputtext-small{:placeholder => "2012", :type => "text"}/
             %span.help-inline
         .span3.form-inline.control-group
           %label{:for => "select01"} Type
           %br/
           .controls
-            %select#select01.input-small.forminputsuccess
+            %select#select01.input-small
               %option PDF
               %option 22
               %option 3
@@ -38,7 +38,7 @@
         .span6
           %label{:for => "select01"} Description
           %br/
-          %textarea#control-description.span12.forminputsuccess{:placeholder => "", :rows => "4"}
+          %textarea#control-description.span12{:placeholder => "", :rows => "4"}
             :preserve
               Hendrerit dolus nullus nimis pneum abico quibus, vulputate, macto, autem vulputate. Qui, sagaciter letalis eum quae interdico iriure, eum. Praesent, jus importunus capio abdo velit genitus. Luptatum zelus meus illum, eros capto nulla in augue ymo quod ibidem.
           :javascript
@@ -49,13 +49,13 @@
         .span3.form-inline.control-group
           %label{:for => "select01"} Language
           %br/
-          %input#control-version.inputtext-small.forminputsuccess{:placeholder => "English", :type => "text"}/
+          %input#control-version.inputtext-small{:placeholder => "English", :type => "text"}/
           %span.help-inline
       / end row
       .row-fluid
         .span6.control-group
           %label{:for => "inputError"} URL
-          %input#inputError.span12.forminputsuccess{:placeholder => "Complete Title Goes Here", :type => "text"}/
+          %input#inputError.span12{:placeholder => "Complete Title Goes Here", :type => "text"}/
           %br/
           %span.help-inline
         .span3.form-inline.control-group
