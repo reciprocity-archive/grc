@@ -20,7 +20,7 @@
             Add Category
             .fltrt
               %a.btn.btn-blue.addbtn.fltrt.new{:href => "#"}
-                %i.icon-user.icon-white              
+                %i          
                 Create Category
 
           .filter-block
@@ -29,19 +29,9 @@
               .span12
                 .modal-search.clearfix  
                   .btn-group.closed 
-                    %a#filterButton.btn.dropdown-toggle{"data-toggle" => "dropdown"}
-                      GRC Categories
-                      %span.caret
-                    %ul.dropdown-menu
-                      %li
-                        %a#showCompanyDirectory{:href => "#"}
-                          Custom Categories
-                      %li
-                        %a#showGRCDirectory{:href => "#"}
-                          GRC Categories
 
                     .pull-right
-                      %input{:type => "text", :placeholder => "Search GRC Directory"}
+                      %input{:type => "text", :placeholder => "Search Categories"}
                 .additional-filters.filter-group
                   .row-fluid
                     .span4
@@ -63,9 +53,8 @@
                           %li
                             .row-fluid
                               .span8
-                                %span.company Facebook | Engineering Compliance
-                                %span.name
-                                  Alexander Gustaphson
+                                %span.company Access Control
+                                %span.name Access Management
                               .span4.actions                
                                 %a.widgetbtn.pull-right.add-me{:href => "#"}
                                   %i.grcicon-chevron-right
@@ -74,9 +63,9 @@
                           %li
                             .row-fluid
                               .span8
-                                %span.company Google
-                                %span.name David Buick
-                              .span4.actions                
+                                %span.company Access Control
+                                %span.name Change Management 
+                              .span4.actions              
                                 %a.widgetbtn.pull-right.add-me{:href => "#"}
                                   %i.grcicon-chevron-right 
                                 %a.widgetbtn.pull-right{:href => "#"}
@@ -84,8 +73,18 @@
                           %li
                             .row-fluid
                               .span8
-                                %span.company Google
-                                %span.name Niki Lauda
+                                %span.company Category
+                                %span.name Business Continuity 
+                              .span4.actions       
+                                %a.widgetbtn.pull-right.add-me{:href => "#"}
+                                  %i.grcicon-chevron-right
+                                %a.widgetbtn.pull-right{:href => "#"}
+                                  %i.gcmsicon-edit-grey
+                          %li
+                            .row-fluid
+                              .span8
+                                %span.company Category
+                                %span.name Governance
                               .span4.actions                
                                 %a.widgetbtn.pull-right.add-me{:href => "#"}
                                   %i.grcicon-chevron-right
@@ -94,18 +93,8 @@
                           %li
                             .row-fluid
                               .span8
-                                %span.company Google
-                                %span.name Daniel Harms
-                              .span4.actions                
-                                %a.widgetbtn.pull-right.add-me{:href => "#"}
-                                  %i.grcicon-chevron-right
-                                %a.widgetbtn.pull-right{:href => "#"}
-                                  %i.gcmsicon-edit-grey
-                          %li
-                            .row-fluid
-                              .span8
-                                %span.company Google
-                                %span.name David Buick
+                                %span.company Category
+                                %span.name Security Policy
                               .span4.actions                
                                 %a.widgetbtn.pull-right.add-me{:href => "#"}
                                   %i.grcicon-chevron-right 
@@ -167,27 +156,15 @@
                                 %a.widgetbtn.pull-right{:href => "#"}
                                   %i.gcmsicon-edit-grey
         .span6
-          %h4 Roles for this system
+          %h4 Categories for this system
           .people-list.currentlist
             %ul.target
               %li
                 .row-fluid
                   .span6
-                    %span.company Google
-                    %span.name Joss Rayburn
+                    %span.company Access Control
+                    %span.name Access Management
                   .span6.actions
-                    %a.widgetbtn.pull-right{:href => "#"}
-                      %i.gcmsicon-edit-grey
-                    .btn-group.inline
-                      %a.span7.btn.btn-success.btn-mini.dropdown-toggle.nominheight.halfopacity.fltrt{"data-toggle" => "dropdown"}
-                        Accountable
-                      %ul.dropdown-menu
-                        %li
-                          %a#makeAccountable{:href => "#"}
-                            is Accountable for
-                        %li
-                          %a#makeResponsible{:href => "#"}
-                            is Responsible for  
                 .row-fluid.additional
                   .span3.statustextgreen
                     %label &nbsp;
@@ -212,21 +189,11 @@
               %li
                 .row-fluid
                   .span6
-                    %span.company Google
-                    %span.name Pending Lady Smith
+                    %span.company Access Control
+                    %span.name Authorization
                   .span6.actions
                     %a.widgetbtn.pull-right{:href => "#"}
-                      %i.gcmsicon-edit-grey
-                    .btn-group.inline
-                      %a.span7.btn.btn-success.btn-mini.dropdown-toggle.nominheight.halfopacity.fltrt{"data-toggle" => "dropdown"}
-                        Accountable
-                      %ul.dropdown-menu
-                        %li
-                          %a#makeAccountable{:href => "#"}
-                            is Accountable for
-                        %li
-                          %a#makeResponsible{:href => "#"}
-                            is Responsible for  
+                      %i.gcmsicon-edit-grey 
                 .row-fluid.additional
                   .span3.statustextblue
                     %label &nbsp;
@@ -251,21 +218,11 @@
               %li
                 .row-fluid
                   .span6
-                    %span.company Google
-                    %span.name Fired Guy Pierce
+                    %span.company Access Control
+                    %span.name Authentication
                   .span6.actions
                     %a.widgetbtn.pull-right{:href => "#"}
-                      %i.gcmsicon-edit-grey
-                    .btn-group.inline
-                      %a.span7.btn.btn-success.btn-mini.dropdown-toggle.nominheight.halfopacity.fltrt{"data-toggle" => "dropdown"}
-                        Accountable
-                      %ul.dropdown-menu
-                        %li
-                          %a#makeAccountable{:href => "#"}
-                            is Accountable for
-                        %li
-                          %a#makeResponsible{:href => "#"}
-                            is Responsible for  
+                      %i.gcmsicon-edit-grey 
                 .row-fluid.additional
                   .span3.statustextred
                     %label &nbsp;
