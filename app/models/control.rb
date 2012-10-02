@@ -3,7 +3,7 @@ require 'slugged_model'
 # A company / regulation control
 #
 class Control < ActiveRecord::Base
-  include AuthoredModel
+  include CommonModel
   include SluggedModel
   include SearchableModel
   include AuthorizedModel
@@ -37,15 +37,6 @@ class Control < ActiveRecord::Base
 
   has_many :implementing_controls, :through => :implementing_control_controls, :source => :control
   has_many :implementing_control_controls, :class_name => "ControlControl", :foreign_key => "implemented_control_id"
-
-  has_many :object_people, :as => :personable, :dependent => :destroy
-  has_many :people, :through => :object_people
-
-  has_many :object_documents, :as => :documentable, :dependent => :destroy
-  has_many :documents, :through => :object_documents
-
-  has_many :categorizations, :as => :categorizable, :dependent => :destroy
-  has_many :categories, :through => :categorizations
 
   belongs_to :type, :class_name => 'Option', :conditions => { :role => 'control_type' }
   belongs_to :kind, :class_name => 'Option', :conditions => { :role => 'control_kind' }

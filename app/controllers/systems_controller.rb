@@ -6,8 +6,28 @@
 class SystemsController < ApplicationController
   include ApplicationHelper
 
+  before_filter :load_system, :only => [:show,
+                                         :edit,
+                                         :tooltip,
+                                         :update,
+                                         :delete,
+                                         :destroy]
+
+
   access_control :acl do
     allow :superuser
+
+    actions :new, :create do
+      allow :create, :create_system
+    end
+
+    actions :tooltip do
+      allow :read, :read_system, :of => :system
+    end
+
+    actions :edit, :update do
+      allow :update, :update_system, :of => :system
+    end
   end
 
   layout 'dashboard'
@@ -66,9 +86,26 @@ class SystemsController < ApplicationController
     end
   end
 
-  def destroy
-    @system = System.find(params[:id])
+  def delete
+    @model_stats = []
+    @relationship_stats = []
+    @model_stats << [ 'System Control', @system.system_controls.count ]
+    @model_stats << [ 'System Section', @system.system_sections.count ]
+    @relationship_stats << [ 'Sub Systems', @system.sub_systems.count ]
+    @relationship_stats << [ 'Super Systems', @system.super_systems.count ]
+    @relationship_stats << [ 'Document', @system.documents.count ]
+    @relationship_stats << [ 'Category', @system.categories.count ]
+    @relationship_stats << [ 'Person', @system.people.count ]
+    respond_to do |format|
+      format.json { render :json => @system.as_json(:root => nil) }
+      format.html do
+        render :layout => nil, :template => 'shared/delete_confirm',
+          :locals => { :model => @system, :url => flow_system_path(@system), :models => @model_stats, :relationships => @relationship_stats }
+      end
+    end
+  end
 
+  def destroy
     respond_to do |format|
       if @system.destroy
         flash[:notice] = "System deleted"
@@ -180,5 +217,9 @@ class SystemsController < ApplicationController
       end
 
       system_params
+    end
+
+    def load_system
+      @system = System.find(params[:id])
     end
 end

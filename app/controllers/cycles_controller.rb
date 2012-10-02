@@ -4,7 +4,9 @@
 
 class CyclesController < ApplicationController
   before_filter :load_cycle, :only => [:show,
-                                       :update]
+                                       :update,
+                                       :delete,
+                                       :destroy]
 
   access_control :acl do
     allow :superuser
@@ -52,6 +54,28 @@ class CyclesController < ApplicationController
         flash[:error] = @cycle.errors.full_messages
         format.html { render :layout => nil, :status => 400 }
       end
+    end
+  end
+
+  def delete
+    @model_stats = []
+    @relationship_stats = []
+
+    respond_to do |format|
+      format.json { render :json => @cycle.as_json(:root => nil) }
+      format.html do
+        render :layout => nil, :template => 'shared/delete_confirm',
+          :locals => { :model => @cycle, :url => flow_cycle_path(@control), :models => @model_stats, :relationships => @relationship_stats }
+      end
+    end
+  end
+
+  def destroy
+    @cycle.destroy
+    flash[:notice] = "Cycle deleted"
+    respond_to do |format|
+      format.html { redirect_to flow_program_path(@cycle.program) }
+      format.json { render :json => @cycle.as_json(:root => nil) }
     end
   end
 

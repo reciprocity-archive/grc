@@ -5,6 +5,9 @@
       - f.object.errors.full_messages.each do |msg|
         %li= msg
 
+-if !f.object.new_record?
+  -content_for :modal_delete_path, flow_account_path(f.object)
+
 .group
   =f.label :name
   =f.text_field :name, :class => :text_field

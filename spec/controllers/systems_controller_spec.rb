@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'base_objects'
 require 'authorized_controller'
 
-describe SectionsController do
+describe SystemsController do
   include BaseObjects
 
   context "authorization" do
@@ -10,8 +10,8 @@ describe SectionsController do
       create_base_objects
 
       # For use by authorized_controller tests
-      @model = Section
-      @object = @sec
+      @model = System
+      @object = @sys
     end
 
     it_behaves_like "an authorized create"

@@ -9,14 +9,20 @@ CmsRails::Application.routes.draw do
       get 'section_controls'
       get 'control_sections'
       get 'category_controls'
+      get 'delete'
     end
   end
 
-  resources :cycles, :as => 'flow_cycles', :only => [:show, :create, :update]
+  resources :cycles, :as => 'flow_cycles', :only => [:show, :create, :update, :destroy] do
+    member do
+      get 'delete'
+    end
+  end
 
   resources :sections, :as => 'flow_sections', :only => [:new, :edit, :create, :update, :destroy] do
     member do
       get 'tooltip'
+      get 'delete'
     end
   end
 
@@ -26,6 +32,7 @@ CmsRails::Application.routes.draw do
       get 'sections'
       get 'implemented_controls'
       get 'implementing_controls'
+      get 'delete'
     end
   end
 
@@ -38,6 +45,13 @@ CmsRails::Application.routes.draw do
       get 'controls_list'
       get 'controls_edit'
       post 'controls_update'
+      get 'delete'
+    end
+  end
+
+  resources :transactions, :as => 'flow_transactions', :only => [:new, :edit, :create, :update, :destroy] do
+    member do
+      get 'delete'
     end
   end
 
@@ -47,14 +61,20 @@ CmsRails::Application.routes.draw do
     end
   end
 
-  resources :transactions, :as => 'flow_transactions', :only => [:new, :edit, :create, :update, :destroy]
+  resources :accounts, :as => 'flow_accounts' do
+    member do
+      get 'delete'
+    end
+  end
 
-  resources :accounts, :as => 'flow_accounts'
   resources :people, :as => 'flow_people' do
     collection do
       get 'list'
       get 'list_edit'
       post 'list_update'
+    end
+    member do
+      get 'delete'
     end
   end
 
@@ -64,6 +84,9 @@ CmsRails::Application.routes.draw do
       get 'list_edit'
       post 'list_update'
     end
+    member do
+      get 'delete'
+    end
   end
 
   resources :categories, :as => 'flow_categories' do
@@ -71,6 +94,9 @@ CmsRails::Application.routes.draw do
       get 'list'
       get 'list_edit'
       post 'list_update'
+    end
+    member do
+      get 'delete'
     end
   end
 
@@ -111,7 +137,7 @@ CmsRails::Application.routes.draw do
 
   # get "dev/index"
 
-  if CmsRails::Application.sso_callback_url
+  if !Rails.env.test? && CmsRails::Application.sso_callback_url
     match 'sso/new' => 'sso#new', :as => 'login'
     match CmsRails::Application.sso_callback_url => "sso#callback"
     match 'sso/destroy' => 'sso#destroy', :as => 'logout'

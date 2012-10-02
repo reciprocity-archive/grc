@@ -10,6 +10,7 @@ class DocumentsController < ApplicationController
                                           :show,
                                           :tooltip,
                                           :update,
+                                          :delete,
                                           :destroy]
 
   access_control :acl do
@@ -103,10 +104,27 @@ class DocumentsController < ApplicationController
     end
   end
 
-  # FIXME: No template
-  #def destroy
-  #  @document.destroy
-  #end
+  def delete
+    @model_stats = []
+    @relationship_stats = []
+
+    respond_to do |format|
+      format.json { render :json => @document.as_json(:root => nil) }
+      format.html do
+        render :layout => nil, :template => 'shared/delete_confirm',
+          :locals => { :model => @document, :url => flow_document_path(@control), :models => @model_stats, :relationships => @relationship_stats }
+      end
+    end
+  end
+
+  def destroy
+    @document.destroy
+    flash[:notice] = "Document deleted"
+    respond_to do |format|
+      format.html { redirect_to programs_dash_path }
+      format.json { render :json => @document.as_json(:root => nil) }
+    end
+  end
 
   def list
     @documents = Document.where({})

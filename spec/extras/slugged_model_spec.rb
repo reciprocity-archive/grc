@@ -2,14 +2,14 @@ require 'spec_helper'
 
 describe SluggedModel do
   before :each do
-    @ap1 = FactoryGirl.create(:program, :slug => 'ASLUG1')
-    @ap2 = FactoryGirl.create(:program, :slug => 'ASLUG2')
-    @bp1 = FactoryGirl.create(:program, :slug => 'BSLUG1')
-    @bp2 = FactoryGirl.create(:program, :slug => 'BSLUG2')
-    @as1 = FactoryGirl.create(:section, :slug => 'ASLUG1-ASEC1', :program => @ap1)
-    @as2 = FactoryGirl.create(:section, :slug => 'ASLUG1-ASEC2', :program => @ap1)
-    @bs1 = FactoryGirl.create(:section, :slug => 'BSLUG1-ASEC1', :program => @bp1)
-    @bs2 = FactoryGirl.create(:section, :slug => 'BSLUG1-ASEC2', :program => @bp1)
+    @ap1 = FactoryGirl.create(:program, :slug => 'FASLUG1')
+    @ap2 = FactoryGirl.create(:program, :slug => 'FASLUG2')
+    @bp1 = FactoryGirl.create(:program, :slug => 'FBSLUG1')
+    @bp2 = FactoryGirl.create(:program, :slug => 'FBSLUG2')
+    @as1 = FactoryGirl.create(:section, :slug => 'FASLUG1-ASEC1', :program => @ap1)
+    @as2 = FactoryGirl.create(:section, :slug => 'FASLUG1-ASEC2', :program => @ap1)
+    @bs1 = FactoryGirl.create(:section, :slug => 'FBSLUG1-ASEC1', :program => @bp1)
+    @bs2 = FactoryGirl.create(:section, :slug => 'FBSLUG1-ASEC2', :program => @bp1)
   end
 
   context "compact_slug" do
@@ -47,13 +47,13 @@ describe SluggedModel do
   context "ClassMethods" do
     context "slugfilter" do
       it "should properly filter" do
-        r = Program.slugfilter('A')
+        r = Program.slugfilter('FA')
         r.count.should eq(2)
         r.all.should eq([@ap1, @ap2])
-        r = Program.slugfilter('B')
+        r = Program.slugfilter('FB')
         r.count.should eq(2)
         r.all.should eq([@bp1, @bp2])
-        r = Program.slugfilter('')
+        r = Program.slugfilter('F')
 
         r.count.should eq(4)
         r.all.should eq([@ap1, @ap2, @bp1, @bp2])

@@ -17,7 +17,7 @@
       %a.btn.btn-large.btn-info{:'data-dismiss' => 'modal-reset', :href => '#' } Cancel
       -delete_path = yield_content!(:modal_delete_path)
       -if !delete_path.blank?
-        %a.disabled.btn.btn-large.btn-warning{:href => delete_path, :'data-toggle' => 'form-destroy', :'data-remote' => 'remote', :'data-method' => 'delete'} Delete
+        %a.btn.btn-large.btn-warning{:href => delete_path, :'data-toggle' => 'modal-ajax-form'} Delete
     .toolbar-widget.span6.disabled
       %a.btn{:href => "#", :'data-toggle' => 'version-prev'}
         %i.gcmsicon-arrowleft-black

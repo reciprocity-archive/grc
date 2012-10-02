@@ -14,7 +14,9 @@ class ControlsController < ApplicationController
                                          :update,
                                          :sections,
                                          :implemented_controls,
-                                         :implementing_controls]
+                                         :implementing_controls,
+                                         :delete,
+                                         :destroy]
 
 
   access_control :acl do
@@ -93,6 +95,34 @@ class ControlsController < ApplicationController
         flash[:error] = "There was an error updating the control"
         format.html { render :layout => nil, :status => 400 }
       end
+    end
+  end
+
+  def delete
+    @model_stats = []
+    @relationship_stats = []
+    @model_stats << [ 'System Control', @control.system_controls.count ]
+    @relationship_stats << [ 'Section', @control.control_sections.count ]
+    @relationship_stats << [ 'Implemented Control', @control.implemented_controls.count ]
+    @relationship_stats << [ 'Implementing Control', @control.implementing_controls.count ]
+    @relationship_stats << [ 'Document', @control.documents.count ]
+    @relationship_stats << [ 'Category', @control.categories.count ]
+    @relationship_stats << [ 'Person', @control.people.count ]
+    respond_to do |format|
+      format.json { render :json => @control.as_json(:root => nil) }
+      format.html do
+        render :layout => nil, :template => 'shared/delete_confirm',
+          :locals => { :model => @control, :url => flow_control_path(@control), :models => @model_stats, :relationships => @relationship_stats }
+      end
+    end
+  end
+
+  def destroy
+    @control.destroy
+    flash[:notice] = "Control deleted"
+    respond_to do |format|
+      format.html { redirect_to flow_program_path(@control.program) }
+      format.json { render :json => @control.as_json(:root => nil) }
     end
   end
 

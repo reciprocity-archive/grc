@@ -1,8 +1,7 @@
 .group
   =f.label :program_id
   -if !f.object.new_record?
-    =link_to f.object.program.display_name,
-      edit_program_path(f.object.program)
+    =f.object.program.display_name
   -else
     =f.collection_select :program_id, Program.all, :id, :display_name, {}, {:class => :collection, :multiple => false}
   %span.description Program being audited

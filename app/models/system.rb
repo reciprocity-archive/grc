@@ -1,6 +1,6 @@
 # A system to be audited
 class System < ActiveRecord::Base
-  include AuthoredModel
+  include CommonModel
   include SluggedModel
   include SearchableModel
   include AuthorizedModel
@@ -17,12 +17,6 @@ class System < ActiveRecord::Base
 
   # Responsible party
   belongs_to :owner, :class_name => 'Person'
-
-  has_many :object_people, :as => :personable, :dependent => :destroy
-  has_many :people, :through => :object_people
-
-  has_many :object_documents, :as => :documentable, :dependent => :destroy
-  has_many :documents, :through => :object_documents
 
   has_many :sub_system_systems, :dependent => :destroy,
     :class_name => 'SystemSystem', :foreign_key => 'parent_id'

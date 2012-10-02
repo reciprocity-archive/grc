@@ -73,10 +73,6 @@ FactoryGirl.define do
     email
   end
 
-  factory :object_person do
-    role "default"
-  end
-
   factory :section do
     title 'Section'
     slug
@@ -176,13 +172,70 @@ FactoryGirl.define do
     title
   end
   
-  factory :control_section
-  factory :control_control
-  factory :cycle
-  factory :document
-  factory :system_control
-  factory :system_system
-  factory :option
   factory :relationship_type
   factory :relationship
+
+  factory :control_section do
+    control
+    section
+  end
+
+  factory :control_control do
+    control
+    implemented_control { |c| c.association(:control) }
+  end
+
+  factory :category
+  factory :categorization do
+    category
+    categorizable { |c| c.association(:system) }
+  end
+
+  factory :cycle do
+    complete false
+    start_at '2012-01-01'
+    program { |c| c.association(:program) }
+  end
+
+  factory :document do
+    title 'document'
+  end
+
+  factory :system_control do
+    system
+    control
+  end
+
+  factory :system_section do
+    system
+    section
+  end
+
+  factory :object_document do
+    document
+    documentable { |c| c.association(:system) }
+  end
+
+  factory :system_system do
+    parent { |c| c.association(:system) }
+    child { |c| c.association(:system) }
+  end
+
+  factory :transaction do
+    title 'transaction x'
+    description 'x'
+  end
+
+  factory :option do
+    description 'x'
+    title 'option x'
+    role 'default'
+  end
+
+  factory :object_person do
+    role "default"
+    personable { |c| c.association(:system) }
+    person
+  end
+
 end

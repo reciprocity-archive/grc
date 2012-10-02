@@ -4,6 +4,9 @@
   -else
     Edit Program
 
+-if !f.object.new_record?
+  -content_for :modal_delete_path, flow_program_path(f.object)
+
 .row-fluid
   =wrapped_text_field f, :span6, :title, :placeholder => 'Enter title'
   .span6
