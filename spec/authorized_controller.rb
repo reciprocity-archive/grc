@@ -356,6 +356,13 @@ shared_examples_for "an authorized delete" do
     end
     actions.each do |action|
       it "updates for: #{action}" do
+        get 'delete', :id => @object.id, :format => :json
+        response.should be_success_or_redirect
+        assigns(@object.class.table_name.singularize.to_sym).should eq(@object)
+        assigns(:model_stats).should_not be_nil
+        assigns(:relationship_stats).should_not be_nil
+        @object.class.where(:id => @object.id).count.should == 1
+
         delete action, :id => @object.id
         response.should be_success_or_redirect
         assigns(@object.class.table_name.singularize.to_sym).should eq(@object)

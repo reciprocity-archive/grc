@@ -7,6 +7,7 @@ class PeopleController < ApplicationController
 
   before_filter :load_person, :only => [:edit,
                                         :update,
+                                        :delete,
                                         :destroy]
 
   access_control :acl do
@@ -72,8 +73,20 @@ class PeopleController < ApplicationController
     end
   end
 
+  def delete
+    @model_stats = []
+    @relationship_stats = []
+
+    respond_to do |format|
+      format.json { render :json => @person.as_json(:root => nil) }
+      format.html do
+        render :layout => nil, :template => 'shared/delete_confirm',
+          :locals => { :url => flow_person_path(@person), :models => @model_stats, :relationships => @relationship_stats }
+      end
+    end
+  end
+
   def destroy
-    @person = Person.find(params[:id])
     @person.destroy
     flash[:notice] = "Person deleted"
     respond_to do |format|

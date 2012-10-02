@@ -15,6 +15,8 @@ class ProgramsController < ApplicationController
                                          :tooltip,
                                          :edit,
                                          :update,
+                                         :delete,
+                                         :destroy,
                                          :sections,
                                          :controls,
                                          :section_controls,
@@ -91,8 +93,25 @@ class ProgramsController < ApplicationController
     end
   end
 
+  def delete
+    @model_stats = []
+    @relationship_stats = []
+    @model_stats << [ 'Section', @program.sections.count ]
+    @model_stats << [ 'Control', @program.controls.count ]
+    @model_stats << [ 'Cycle', @program.cycles.count ]
+    @relationship_stats << [ 'Document', @program.documents.count ]
+    @relationship_stats << [ 'Category', @program.categories.count ]
+    @relationship_stats << [ 'Person', @program.people.count ]
+    respond_to do |format|
+      format.json { render :json => @program.as_json(:root => nil) }
+      format.html do
+        render :layout => nil, :template => 'shared/delete_confirm',
+          :locals => { :url => flow_program_path(@control), :models => @model_stats, :relationships => @relationship_stats }
+      end
+    end
+  end
+
   def destroy
-    @program = Program.find(params[:id])
     @program.destroy
     flash[:notice] = "Program deleted"
     respond_to do |format|

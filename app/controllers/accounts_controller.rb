@@ -7,7 +7,9 @@ class AccountsController < ApplicationController
 
   before_filter :load_account, :only => [:tooltip,
                                          :edit,
-                                         :update]
+                                         :update,
+                                         :delete,
+                                         :destroy]
 
   access_control :acl do
     allow :superuser
@@ -61,8 +63,20 @@ class AccountsController < ApplicationController
     end
   end
 
+  def delete
+    @model_stats = []
+    @relationship_stats = []
+
+    respond_to do |format|
+      format.json { render :json => @account.as_json(:root => nil) }
+      format.html do
+        render :layout => nil, :template => 'shared/delete_confirm',
+          :locals => { :url => flow_account_path(@control), :models => @model_stats, :relationships => @relationship_stats }
+      end
+    end
+  end
+
   def destroy
-    @account = Account.find(params[:id])
     @account.destroy
     flash[:notice] = "Account deleted"
     respond_to do |format|

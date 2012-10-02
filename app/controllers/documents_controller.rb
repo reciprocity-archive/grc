@@ -10,6 +10,7 @@ class DocumentsController < ApplicationController
                                           :show,
                                           :tooltip,
                                           :update,
+                                          :delete,
                                           :destroy]
 
   access_control :acl do
@@ -103,8 +104,20 @@ class DocumentsController < ApplicationController
     end
   end
 
+  def delete
+    @model_stats = []
+    @relationship_stats = []
+
+    respond_to do |format|
+      format.json { render :json => @document.as_json(:root => nil) }
+      format.html do
+        render :layout => nil, :template => 'shared/delete_confirm',
+          :locals => { :url => flow_document_path(@control), :models => @model_stats, :relationships => @relationship_stats }
+      end
+    end
+  end
+
   def destroy
-    @document = Document.find(params[:id])
     @document.destroy
     flash[:notice] = "Document deleted"
     respond_to do |format|

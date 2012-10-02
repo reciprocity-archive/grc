@@ -9,6 +9,8 @@ class SectionsController < ApplicationController
 
   before_filter :load_section, :only => [:edit,
                                         :update,
+                                        :delete,
+                                        :destroy,
                                         :tooltip]
 
   access_control :acl do
@@ -65,8 +67,23 @@ class SectionsController < ApplicationController
     end
   end
 
+  def delete
+    @model_stats = []
+    @relationship_stats = []
+    @relationship_stats << [ 'Control', @section.control_sections.count ]
+    @relationship_stats << [ 'Document', @section.documents.count ]
+    @relationship_stats << [ 'Category', @section.categories.count ]
+    @relationship_stats << [ 'Person', @section.people.count ]
+    respond_to do |format|
+      format.json { render :json => @section.as_json(:root => nil) }
+      format.html do
+        render :layout => nil, :template => 'shared/delete_confirm',
+          :locals => { :url => flow_section_path(@section), :models => @model_stats, :relationships => @relationship_stats }
+      end
+    end
+  end
+
   def destroy
-    @section = Section.find(params[:id])
     @section.destroy
     flash[:notice] = "Section deleted"
     respond_to do |format|

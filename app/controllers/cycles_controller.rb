@@ -4,7 +4,9 @@
 
 class CyclesController < ApplicationController
   before_filter :load_cycle, :only => [:show,
-                                       :update]
+                                       :update,
+                                       :delete,
+                                       :destroy]
 
   access_control :acl do
     allow :superuser
@@ -55,8 +57,20 @@ class CyclesController < ApplicationController
     end
   end
 
+  def delete
+    @model_stats = []
+    @relationship_stats = []
+
+    respond_to do |format|
+      format.json { render :json => @cycle.as_json(:root => nil) }
+      format.html do
+        render :layout => nil, :template => 'shared/delete_confirm',
+          :locals => { :url => flow_cycle_path(@control), :models => @model_stats, :relationships => @relationship_stats }
+      end
+    end
+  end
+
   def destroy
-    @cycle = Cycle.find(params[:id])
     @cycle.destroy
     flash[:notice] = "Cycle deleted"
     respond_to do |format|
