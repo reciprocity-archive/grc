@@ -45,16 +45,12 @@ class Control < ActiveRecord::Base
 
   is_versioned_ext
 
-  validates :slug, :title, :program,
+  validates :title, :program,
     :presence => { :message => "needs a value" }
-  validates :slug,
-    :uniqueness => { :message => "must be unique" }
 
   validate :slug do
-    validate_slug
+    validate_slug_parent
   end
-
-  before_save :upcase_slug
 
   def display_name
     "#{slug} - #{title}"

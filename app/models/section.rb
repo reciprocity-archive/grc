@@ -28,13 +28,11 @@ class Section < ActiveRecord::Base
   before_save :upcase_slug
   before_save :update_parent_id
 
-  validates :title, :slug,
+  validates :title,
     :presence => { :message => "needs a value" }
-  validates :slug,
-    :uniqueness => { :message => "must be unique" }
 
   validate :slug do
-    validate_slug
+    validate_slug_parent
   end
 
   scope :with_controls, includes([:parent, {:controls => [:implementing_controls]}])

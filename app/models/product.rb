@@ -19,12 +19,8 @@ class Product < ActiveRecord::Base
 
   is_versioned_ext
 
-  validates :title, :slug,
+  validates :title,
     :presence => { :message => "needs a value" }
-  validates :slug,
-    :uniqueness => { :message => "must be unique" }
-
-  before_save :upcase_slug
 
   #
   # Various relationship-related helpers

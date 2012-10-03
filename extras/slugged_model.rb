@@ -8,6 +8,15 @@ module SluggedModel
 
   def self.included(model)
     model.extend(ClassMethods)
+
+    model.class_eval do
+      validates :slug, :presence => { :message => "needs a value"}
+      validates :slug,
+        :uniqueness => { :message => "must be unique" }
+      before_validation :generate_random_slug_if_needed
+      before_save :upcase_slug
+      after_save :generate_human_slug_if_needed
+    end
   end
 
   def slug_split_for_sort
@@ -80,7 +89,39 @@ private
     self.slug = slug.present? ? slug.upcase : nil
   end
 
-  def validate_slug
+  def generate_random_slug_if_needed
+    @needs_slug = false
+    if self.slug == nil
+      @needs_slug = true
+
+      new_slug = ''
+
+      if self.has_attribute?(:parent_id) && !self.parent.nil?
+        new_slug += self.parent.slug + '-'
+      end
+      new_slug += self.class.to_s + '-' + (Time.now.to_r*1000000).to_i.to_s(32) + '-' + Random.rand(1000000000).to_s(32)
+      self.slug = new_slug
+    end
+    true
+  end
+  def generate_human_slug_if_needed
+    if @needs_slug
+      self.without_versioning do
+        new_slug = ''
+        if self.has_attribute?(:parent_id) && !self.parent.nil?
+          new_slug += self.parent.slug + '-'
+        end
+        new_slug += self.class.to_s + '-%04d' % id
+        self.slug = new_slug
+
+        # HACK: Shouldn't recurse, but still a bit scary.
+        self.save
+      end
+    end
+    true
+  end
+
+  def validate_slug_parent
     upcase_slug
     return unless parent
     if slug && slug.starts_with?(parent.slug)

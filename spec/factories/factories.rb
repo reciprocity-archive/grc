@@ -172,8 +172,12 @@ FactoryGirl.define do
     title
   end
   
-  factory :relationship_type
-  factory :relationship
+  factory :relationship_type do
+  end
+  factory :relationship do
+    source { |c| c.association(:program) }
+    destination { |c| c.association(:product) }
+  end
 
   factory :control_section do
     control

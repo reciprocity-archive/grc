@@ -12,7 +12,7 @@
   =wrapped_select f, :span2, :program_id, Program.all.map { |p| [p.slug, p.id] }, :selected => f.object.program_id
   .span6
     .row-fluid
-      =wrapped_text_field f, :span6, :slug, :label_name => 'Code (optional)', :placeholder => 'Autofill code'
+      =wrapped_text_field f, :span6, :slug, :label_name => 'Code (autofill)', :placeholder => 'CONTROL-XXXX'
       =wrapped_text_field f, :span6, :version, :placeholder => '1.1.1'
 
 .row-fluid

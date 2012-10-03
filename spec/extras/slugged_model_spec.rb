@@ -27,6 +27,22 @@ describe SluggedModel do
     end
   end
 
+  context "generate" do
+    it "should generate an ID when one isn't given" do
+      p = Program.create(:title => 'Test Program')
+      p.slug.should eq('PROGRAM-%04d' % p.id)
+    end
+
+    it "should generate a slug with the correct name when there is a parent" do
+      p = FactoryGirl.create(:program)
+      s = Section.create({:title => 'parent', :program => p}, :without_protection => true)
+      s2 = Section.create({:title => 'child', :parent => s, :program => p}, :without_protection => true)
+
+      s2.slug.should eq(s.slug + '-SECTION-%04d' % s2.id)
+    end
+
+  end
+
   context "SlugTree" do
     context "initialize" do
       it "should initialize properly" do

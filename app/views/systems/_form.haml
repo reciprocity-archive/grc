@@ -9,8 +9,8 @@
 
 .row-fluid
   .span2{ :class => error_class(f, :slug) }
-    =f.label :slug, "Code"
-    =f.text_field :slug, :class => 'span12'
+    =f.label :slug, "Code (autofill)"
+    =f.text_field :slug, :class => 'span12', :placeholder => 'SYSTEM-XXXX'
     =error_messages_inline(f, :slug)
 
   .span2.disabled{ :class => error_class(f, :version) }

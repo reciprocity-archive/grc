@@ -6,8 +6,8 @@
 
 .row-fluid
   .span1{ :class => error_class(f, :slug) }
-    =f.label :slug, "Code"
-    =f.text_field :slug, :class => 'input-supermini'
+    =f.label :slug, "Code (autofill)"
+    =f.text_field :slug, :class => 'input-supermini', :placeholder => 'PRODUCT-XXXX'
     =error_messages_inline(f, :slug)
 
   .span4{ :class => error_class(f, :title) }
@@ -30,4 +30,3 @@
 .row-fluid
   .span12
     =error_messages_inline(f, :description)
-
