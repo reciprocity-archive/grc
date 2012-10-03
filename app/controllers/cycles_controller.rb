@@ -65,7 +65,7 @@ class CyclesController < ApplicationController
       format.json { render :json => @cycle.as_json(:root => nil) }
       format.html do
         render :layout => nil, :template => 'shared/delete_confirm',
-          :locals => { :model => @cycle, :url => flow_cycle_path(@control), :models => @model_stats, :relationships => @relationship_stats }
+          :locals => { :model => @cycle, :url => flow_cycle_path(@cycle), :models => @model_stats, :relationships => @relationship_stats }
       end
     end
   end

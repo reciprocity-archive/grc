@@ -5,7 +5,7 @@
     Edit system or business process
 
 -if !f.object.new_record?
-  -content_for :modal_delete_path, flow_system_path(f.object)
+  -content_for :modal_delete_path, delete_flow_system_path(f.object)
 
 .row-fluid
   .span2{ :class => error_class(f, :slug) }

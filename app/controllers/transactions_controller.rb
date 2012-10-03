@@ -4,6 +4,10 @@
 
 # Handle Transactions
 class TransactionsController < ApplicationController
+  before_filter :load_transaction, :only => [:edit,
+                                       :update,
+                                       :delete,
+                                       :destroy]
   include ApplicationHelper
 
   access_control :acl do
@@ -18,7 +22,6 @@ class TransactionsController < ApplicationController
   end
 
   def edit
-    @transaction = Transaction.find(params[:id])
     render :layout => nil
   end
 
@@ -40,8 +43,6 @@ class TransactionsController < ApplicationController
   end
 
   def update
-    @transaction = Transaction.find(params[:id])
-
     respond_to do |format|
       if @transaction.authored_update(current_user, transaction_params)
         flash[:notice] = "Successfully updated the transaction."
@@ -56,12 +57,31 @@ class TransactionsController < ApplicationController
     end
   end
 
+  def delete
+    @model_stats = []
+    @relationship_stats = []
+    respond_to do |format|
+      format.json { render :json => @transaction.as_json(:root => nil) }
+      format.html do
+        render :layout => nil, :template => 'shared/delete_confirm',
+          :locals => { :model => @transaction, :url => flow_transaction_path(@transaction), :models => @model_stats, :relationships => @relationship_stats }
+      end
+    end
+  end
+
   def destroy
-    @transaction = Transaction.find(params[:id])
     @transaction.destroy
+    flash[:notice] = "Transaction deleted"
+    respond_to do |format|
+      format.html { redirect_to flow_system_path(@transaction.system) }
+      format.json { render :json => @transaction.as_json(:root => nil) }
+    end
   end
 
   private
+    def load_transaction
+      @transaction = Transaction.find(params[:id])
+    end
 
     def transaction_params
       transaction_params = params[:transaction] || {}

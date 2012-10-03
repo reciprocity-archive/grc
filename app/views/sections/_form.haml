@@ -5,7 +5,7 @@
     Edit regulation section
 
 -if !f.object.new_record?
-  -content_for :modal_delete_path, flow_section_path(f.object)
+  -content_for :modal_delete_path, delete_flow_section_path(f.object)
 
 .row-fluid
   .span2{:class => error_class(f, :program)}

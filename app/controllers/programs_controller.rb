@@ -114,7 +114,7 @@ class ProgramsController < ApplicationController
       format.json { render :json => @program.as_json(:root => nil) }
       format.html do
         render :layout => nil, :template => 'shared/delete_confirm',
-          :locals => { :model => @program, :url => flow_program_path(@control), :models => @model_stats, :relationships => @relationship_stats }
+          :locals => { :model => @program, :url => flow_program_path(@program), :models => @model_stats, :relationships => @relationship_stats }
       end
     end
   end

@@ -71,7 +71,7 @@ class AccountsController < ApplicationController
       format.json { render :json => @account.as_json(:root => nil) }
       format.html do
         render :layout => nil, :template => 'shared/delete_confirm',
-          :locals => { :model => @account, :url => flow_account_path(@control), :models => @model_stats, :relationships => @relationship_stats }
+          :locals => { :model => @account, :url => flow_account_path(@account), :models => @model_stats, :relationships => @relationship_stats }
       end
     end
   end

@@ -8,11 +8,13 @@
   %h4 Are you sure you want to delete this record?
   %p
     Deleting
-    =model.title
+    =model.display_name
     will delete
-    =(models.map { |name, count| "#{count} #{name.pluralize}" }).join(", ")
+    -to_delete = (models.reject {|name, count| count == 0}.map { |name, count| "#{count} #{name.pluralize}" }).join(", ")
+    =to_delete.blank? ? "nothing" : to_delete
     and unlink from
-    =(relationships.map { |name, count| "#{count} #{name.pluralize}" }).join(", ")
+    -to_unlink = (relationships.reject {|name, count| count == 0}.map { |name, count| "#{count} #{name.pluralize}" }).join(", ")
+    =to_unlink.blank? ? "nothing" : to_unlink
 
 .modal-footer
   .row-fluid

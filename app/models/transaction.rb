@@ -7,4 +7,8 @@ class Transaction < ActiveRecord::Base
   belongs_to :system
 
   is_versioned_ext
+
+  def display_name
+    title
+  end
 end

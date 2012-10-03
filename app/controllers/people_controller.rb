@@ -76,6 +76,7 @@ class PeopleController < ApplicationController
   def delete
     @model_stats = []
     @relationship_stats = []
+    @relationship_stats << [ 'Object', @person.object_people.count ]
 
     respond_to do |format|
       format.json { render :json => @person.as_json(:root => nil) }

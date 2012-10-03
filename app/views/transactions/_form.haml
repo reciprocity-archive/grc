@@ -5,7 +5,7 @@
     Edit Auditable Population
 
 -if !f.object.new_record?
-  -content_for :modal_delete_path, flow_transaction_path(f.object)
+  -content_for :modal_delete_path, delete_flow_transaction_path(f.object)
 
 =f.hidden_field :system_id
 
