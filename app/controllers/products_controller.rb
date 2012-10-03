@@ -15,6 +15,23 @@ class ProductsController < ApplicationController
     # FIXME: Implement real authorization
 
     allow :superuser
+
+    actions :index do
+      allow :read, :read_product
+    end
+
+    actions :new, :create do
+      allow :create, :create_product
+    end
+
+    actions :edit, :update do
+      allow :update, :update_product, :of => :product
+    end
+
+    actions :show, :tooltip do
+      allow :read, :read_product, :of => :product
+    end
+
   end
 
   layout 'dashboard'
