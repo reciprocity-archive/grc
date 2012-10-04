@@ -92,14 +92,19 @@ private
   def generate_random_slug_if_needed
     @needs_slug = false
     if self.slug == nil
-      @needs_slug = true
+      if id.present? #!self.new_record?
+        slug_suffix = '%04d' % id
+      else
+        @needs_slug = true
+        slug_suffix = (Time.now.to_r*1000000).to_i.to_s(32) + '-' + Random.rand(1000000000).to_s(32)
+      end
 
       new_slug = ''
 
       if self.has_attribute?(:parent_id) && !self.parent.nil?
         new_slug += self.parent.slug + '-'
       end
-      new_slug += self.class.to_s + '-' + (Time.now.to_r*1000000).to_i.to_s(32) + '-' + Random.rand(1000000000).to_s(32)
+      new_slug += self.class.to_s + '-' + slug_suffix
       self.slug = new_slug
     end
     true

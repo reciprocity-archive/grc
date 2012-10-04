@@ -40,7 +40,7 @@ class ProductsController < ApplicationController
   end
 
   def new
-    @product = Product.new(params[:product])
+    @product = Product.new(product_params)
     render :layout => nil
   end
 
@@ -49,7 +49,7 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @product = Product.new(params[:product])
+    @product = Product.new(product_params)
 
     respond_to do |format|
       if @product.save
@@ -68,7 +68,7 @@ class ProductsController < ApplicationController
     end
 
     respond_to do |format|
-      if @product.authored_update(current_user, params[:product])
+      if @product.authored_update(current_user, product_params)
         flash[:notice] = "Successfully updated the product."
         format.html { redirect_to flow_product_path(@product) }
       else
@@ -91,7 +91,7 @@ class ProductsController < ApplicationController
     def product_params
       product_params = params[:product] || {}
       %w(type).each do |field|
-        parse_option_param(program_params, field)
+        parse_option_param(product_params, field)
       end
       product_params
     end
