@@ -54,61 +54,26 @@
 
       %h3 Sample Data
       .well
-        #Combo.tab-pane.active
-          %ul.slugtree
-            %li{:id => "content_PCI.A.1.4"}
-              .row-fluid
-                .span12
-                  .collapsed.slot.regulationslot.toggle.span9{"data-target" => "#demo1", "data-toggle" => "collapse"}
-                    %span.prefix> PCI.A.1.4
-                    Enable processes to provide for timely forensic investigation in the event of a ...
-                    .expander
-                  .attached.progress-large.span3
-                    .bar.progressbar-success{"data-percentage" => "100", :style => "float: left; width: 100%; "}
-                #demo1.row-fluid-slotcontent.collapse
-                  .span9
-                    Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
-            %li{:id => "content_PCI.A.1.4"}
-              .row-fluid
-                .span12
-                  .collapsed.slot.regulationslot.toggle.span9{"data-target" => "#demo2", "data-toggle" => "collapse"}
-                    %span.prefix> PCI.A.1.4
-                    Enable processes to provide for timely forensic investigation in the event of a ...
-                    .expander
-                  .attached.progress-large.active.span3
-                    .bar.progressbar-danger{"data-percentage" => "100", :style => "float: right; width: 100%; "}
-                #demo2.row-fluid-slotcontent.collapse
-                  .span9
-                    Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
-            %li{:id => "content_PCI.A.1.4"}
-              .row-fluid
-                .span12
-                  .collapsed.slot.regulationslot.toggle.span9{"data-target" => "#demo3", "data-toggle" => "collapse"}
-                    %span.prefix> PCI.A.1.4
-                    Enable processes to provide for timely forensic investigation...
-                    .expander
-                  .attached.progress-large.active.span3
-                    .bar.progressbar-warning{"data-percentage" => "100", :style => "float: right; width: 100%; "}
-                #demo3.row-fluid-slotcontent.collapse
-                  .span9
-                    Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.   
+        #sampleData 
+          -#Import Here
+               
       .row-fluid
         %hr.hr-widget
       .row-fluid
         .span3
           %label Name of Original Source Document
           %input.span12{:type=>"text", :placeholder => "FISMA 2.0"}
-        .span3
+        .span2
           %label URL of Original Source Document
           %input.span12{:type=>"text", :placeholder => "www.fisma.org/reference/fisma-2.0"}
         .span2
           %label Review By
           %input.span12{:type=>"text", :placeholder => "Analyst Rodger Banks"}
-        .span1.form-inline.control-group.date
+        .span2.form-inline.control-group.date
           %label{:for => "control-effectivedate"} Effective Date
           %br/
           #dp3.date{"data-date" => "02-12-12", "data-date-format" => "dd-mm-yy"}
-            %input.span12.calendar{:size => "16", :type => "text", :value => "02-12-12"}/
+            %input.span10.calendar{:size => "16", :type => "text", :value => "02-12-12"}/
           :javascript
             $('#dp3').datepicker();
         .span3

@@ -87,6 +87,11 @@ jQuery(function ($) {
   renderExternalTmpl({ name: 'examplesysproc', selector: '#sysproc', data: {} });
 
   renderExternalTmpl({ name: 'examplecombo', selector: '#Combo', data: {} });
+
+
+  renderExternalTmpl({ name: 'exampleSampledata', selector: '#sampleData', data: {} });
+
+
   renderExternalTmpl({ name: 'auditstatus', selector: '#auditstatus', data: {} });
 
   $(document).on("click", "#expand_all", function(event) {
