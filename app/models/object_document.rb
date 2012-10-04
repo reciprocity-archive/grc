@@ -1,7 +1,7 @@
 class ObjectDocument < ActiveRecord::Base
   include AuthoredModel
 
-  attr_accessible :document, :documentable, :role, :notes
+  attr_accessible :document, :documentable, :role, :notes, :start_date, :stop_date
 
   belongs_to :document
   belongs_to :documentable, :polymorphic => true

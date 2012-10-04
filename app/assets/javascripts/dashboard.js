@@ -4,6 +4,7 @@
  *= require jquery-ui
  *= require bootstrap
  *= require can.jquery-1.0.7
+ *= require selector
  *= require spin.min
  *= require tmpl
  *= require_self
@@ -27,7 +28,7 @@ jQuery(function($) {
     var $this = $(this);
 
     if (!$this.data('datepicker'))
-      $(this).datepicker({changeMonth: true, changeYear: true, dateFormat: 'yy-mm-dd'});
+      $(this).datepicker({changeMonth: true, changeYear: true, dateFormat: 'dd/mm/yy'});
   });
 
   // Setup program-select inputs to prefill slug field
@@ -153,6 +154,14 @@ jQuery(function($) {
       data = $.extend({}, $this.data('context') || {}, $this.data());
       $(target).tmpl_mergeitems([data]);
     }
+  });
+
+  $('body').on('click', '[data-toggle="dropdown-select-list"] > li > a', function(e) {
+    console.debug('asdfasdf');
+    var value = $(this).data('value');
+    $(this).closest('ul').siblings('input').val(value);
+    $(this).closest('ul').siblings('a').text(value[0].toUpperCase() + value.substr(1));
+    e.preventDefault();
   });
 });
 

@@ -36,6 +36,10 @@ class PeopleController < ApplicationController
 
   layout 'dashboard'
 
+  def index
+    render :json => Person.all
+  end
+
   def new
     @person = Person.new(person_params)
 
@@ -52,7 +56,7 @@ class PeopleController < ApplicationController
     respond_to do |format|
       if @person.save
         flash[:notice] = "Successfully created a new person."
-        format.json { render :json => @person.as_json(:root => nil) }
+        format.json { render :json => @person.as_json }
         format.html { ajax_refresh }
       else
         flash[:error] = @person.errors.full_messages
@@ -65,6 +69,7 @@ class PeopleController < ApplicationController
     respond_to do |format|
       if @person.authored_update(current_user, person_params)
         flash[:notice] = "Successfully updated the person."
+        format.json { render :json => @person.as_json }
         format.html { ajax_refresh }
       else
         flash[:error] = @person.errors.full_messages
@@ -132,9 +137,12 @@ class PeopleController < ApplicationController
       params[:items].each do |_, item|
         object_person = @object.object_people.where(:person_id => item[:id]).first
         if !object_person
-          object_person = @object.object_people.new({:person_id => item[:id]}, :without_protection => true)
+          person = Person.find(item[:id])
+          object_person = @object.object_people.new({:person => person})
         end
         object_person.role = item[:role].blank? ? nil : item[:role]
+        object_person.start_date = item[:start_date].blank? ? nil : item[:start_date]
+        object_person.stop_date = item[:stop_date].blank? ? nil : item[:stop_date]
         if !object_person.new_record?
           object_person.save
         end
@@ -152,6 +160,7 @@ class PeopleController < ApplicationController
         format.html
       else
         flash[:error] = "Could not update associated people"
+        format.json { render :json => { :errors => @object.object_people.reduce({}) { |memo, op| memo[op.person.id] = op.errors.as_json if !op.errors.empty?; memo } }, :status => 400 }
         format.html { render :layout => nil }
       end
     end

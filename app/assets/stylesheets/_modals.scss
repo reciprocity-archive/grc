@@ -84,7 +84,7 @@
       height:86px;
     }
   }
-  
+
   .scope {
     padding:1px 6px 5px;
     background:$lightestGray;
@@ -102,6 +102,18 @@
     //background:#f8f9f8;
     //border:1px solid darken($lightestGray,10%);
     @include border-radius();
+
+    .added {
+      background-color: #ccffcc;
+    }
+
+    .removed {
+      background-color: #ffaaaa;
+    }
+
+    .added.member-failure {
+      background-color: #ffaaaa;
+    }
   }
   
   .audit {

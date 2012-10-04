@@ -12,6 +12,16 @@
 .modal-body
   =yield
 
+.modal-info
+  .row-fluid
+    .span9
+      %strong Note:
+      %span You need to assign relationship to all people in the list.
+    .span3.status
+      %h5
+        Relationship Selections Pending:
+        %span#unassignedElements 3
+
 .modal-footer
   .row-fluid
     %nav.fltlft.txtlft.span3

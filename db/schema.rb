@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121004180923) do
+ActiveRecord::Schema.define(:version => 20121004204518) do
 
   create_table "accounts", :force => true do |t|
     t.string   "username"
@@ -123,6 +123,8 @@ ActiveRecord::Schema.define(:version => 20121004180923) do
     t.integer  "modified_by_id"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
+    t.datetime "start_date"
+    t.datetime "stop_date"
   end
 
   add_index "object_documents", ["documentable_type", "documentable_id"], :name => "index_object_documents_on_documentable_type_and_documentable_id"
@@ -136,6 +138,8 @@ ActiveRecord::Schema.define(:version => 20121004180923) do
     t.integer  "modified_by_id"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.datetime "start_date"
+    t.datetime "stop_date"
   end
 
   add_index "object_people", ["personable_type", "personable_id"], :name => "index_object_people_on_personable_type_and_personable_id"

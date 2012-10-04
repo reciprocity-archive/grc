@@ -48,15 +48,17 @@
 
     'listform': function($target, $trigger, option) {
       var list_target = $trigger.data('list-target');
-      $target.modal_form(option);
+      $target.modal_selector(option);
 
       // Close the modal and rewrite the target list
       $target.on('ajax:json', function(e, data, xhr) {
-        if (list_target == 'refresh') {
+        console.debug('listform ajax:json');
+        if (data.errors) {
+        } else if (list_target == 'refresh') {
           refresh_page();
         } else if (list_target) {
           $(list_target).tmpl_setitems(data);
-          $target.modal_form('hide');
+          $target.modal_selector('hide');
         }
       });
     },
@@ -67,8 +69,26 @@
 
       // Close the modal and append to the target list
       $target.on('ajax:json', function(e, data, xhr) {
-        if (list_target) {
+        console.debug('listnewform ajax:json');
+        if (data.errors) {
+        } else if (list_target) {
           $(list_target).tmpl_additem(data);
+          $target.modal_form('hide');
+        }
+      });
+    },
+
+    'listeditform': function($target, $trigger, option) {
+      console.debug('listedit');
+      $target.modal_form(option);
+      var list_target = $trigger.data('list-target');
+
+      // Close the modal and append to the target list
+      $target.on('ajax:json', function(e, data, xhr) {
+        console.debug("listeditform ajax:json");
+        if (data.errors) {
+        } else if (list_target) {
+          $(list_target).tmpl_mergeitems([data]);
           $target.modal_form('hide');
         }
       });
@@ -79,7 +99,9 @@
       $target.modal_form(option);
 
       $target.on('ajax:json', function(e, data, xhr) {
-        if (form_target == 'refresh') {
+        console.debug('form ajax:json');
+        if (data.errors) {
+        } else if (form_target == 'refresh') {
           refresh_page();
         } else if (form_target == 'redirect') {
           window.location.assign(xhr.getResponseHeader('location'));
@@ -89,7 +111,7 @@
   };
 
   $(function() {
-    $('body').on('click.modal-ajax.data-api', '[data-toggle="modal-ajax"], [data-toggle="modal-ajax-form"], [data-toggle="modal-ajax-listform"], [data-toggle="modal-ajax-listnewform"]', function(e) {
+    $('body').on('click.modal-ajax.data-api', '[data-toggle="modal-ajax"], [data-toggle="modal-ajax-form"], [data-toggle="modal-ajax-listform"], [data-toggle="modal-ajax-listnewform"], [data-toggle="modal-ajax-listeditform"]', function(e) {
 
       var $this = $(this)
         , toggle_type = $(this).data('toggle')
@@ -129,6 +151,7 @@
         if (toggle_type == 'modal-ajax-form') modal_type = 'form';
         if (toggle_type == 'modal-ajax-listform') modal_type = 'listform';
         if (toggle_type == 'modal-ajax-listnewform') modal_type = 'listnewform';
+        if (toggle_type == 'modal-ajax-listeditform') modal_type = 'listeditform';
         if (toggle_type == 'modal-ajax') modal_type = 'modal';
         if (!modal_type) modal_type = 'modal';
       }

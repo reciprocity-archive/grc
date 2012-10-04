@@ -6,18 +6,20 @@
    * =============================== */
 
   var ModalForm = function ( element, options ) {
+    console.debug('ModalForm()');
 
     this.options = options;
     this.$element = $(element);
 
-    this.$element
-      .on('keypress', 'form', $.proxy(this.keypress_submit, this))
-      .on('click.modal-form.close', '[data-dismiss="modal"]', $.proxy(this.hide, this))
-      .on('click.modal-form.reset', 'input[type=reset], [data-dismiss="modal-reset"]', $.proxy(this.reset, this))
-      .on('click.modal-form.submit', 'input[type=submit], [data-toggle="modal-submit"]', $.proxy(this.submit, this))
-      .on('click.modal-form.destroy', '[data-toggle="form-destroy"]', $.proxy(this.destroy, this))
-      .on('shown.modal-form', $.proxy(this.focus_first_input, this))
-      .on('loaded.modal-form', $.proxy(this.focus_first_input, this))
+    this.init();
+    //this.$element
+    //  .on('keypress', 'form', $.proxy(this.keypress_submit, this))
+    //  .on('click.modal-form.close', '[data-dismiss="modal"]', $.proxy(this.hide, this))
+    //  .on('click.modal-form.reset', 'input[type=reset], [data-dismiss="modal-reset"]', $.proxy(this.reset, this))
+    //  .on('click.modal-form.submit', 'input[type=submit], [data-toggle="modal-submit"]', $.proxy(this.submit, this))
+    //  .on('click.modal-form.destroy', '[data-toggle="form-destroy"]', $.proxy(this.destroy, this))
+    //  .on('shown.modal-form', $.proxy(this.focus_first_input, this))
+    //  .on('loaded.modal-form', $.proxy(this.focus_first_input, this))
   }
 
   /* NOTE: MODAL_FORM EXTENDS BOOTSTRAP-MODAL.js
@@ -27,11 +29,24 @@
 
     constructor: ModalForm
 
+  , init: function() {
+      console.debug('ModalForm.init');
+      this.$element
+        .on('keypress', 'form', $.proxy(this.keypress_submit, this))
+        .on('click.modal-form.close', '[data-dismiss="modal"]', $.proxy(this.hide, this))
+        .on('click.modal-form.reset', 'input[type=reset], [data-dismiss="modal-reset"]', $.proxy(this.reset, this))
+        .on('click.modal-form.submit', 'input[type=submit], [data-toggle="modal-submit"]', $.proxy(this.submit, this))
+        .on('click.modal-form.destroy', '[data-toggle="form-destroy"]', $.proxy(this.destroy, this))
+        .on('shown.modal-form', $.proxy(this.focus_first_input, this))
+        .on('loaded.modal-form', $.proxy(this.focus_first_input, this));
+    }
+
   , $form: function() {
       return this.$element.find('form').first();
     }
 
   , submit: function(e) {
+      console.debug("ModalForm#submit");
       this.$form().submit();
     }
 
@@ -65,8 +80,8 @@
 
   , destroy: function(e) {
       // Bail if button is disabled
-      if ($(e.target).is('.disabled'))
-        return false;
+      //if ($(e.target).is('.disabled'))
+      //  return false;
     }
   });
 
@@ -105,12 +120,19 @@
   $(function() {
     // Default form complete handler
     $('body').on('ajax:complete', function(e, xhr, status) {
-      var data, data_k;
+      console.debug("modal-form ajax:complete");
+      console.debug(e, xhr, xhr.responseText);
+      var data = null, data_k;
       try {
-        // Parse and dispatch JSON object
         data = JSON.parse(xhr.responseText);
-        $(e.target).trigger('ajax:json', [data, xhr]);
       } catch (exc) {
+        //console.debug('exc', exc);
+      }
+
+      if (data) {
+        // Parse and dispatch JSON object
+        $(e.target).trigger('ajax:json', [data, xhr]);
+      } else {
         // Dispatch as html
         $(e.target).trigger('ajax:html', [xhr.responseText, xhr]);
       }
@@ -149,6 +171,7 @@
     });
 
     $('body').on('ajax:flash', function(e, flash) {
+      console.debug("modal-form ajax:flash");
       var $target, $flash_holder// = this.$element.find('.flash')
         , type, ucase_type
         , messages, message, message_i
@@ -189,10 +212,11 @@
     });
 
     $('body').on('ajax:html', '.modal > form', function(e, html, xhr) {
+      console.debug("modal-form ajax:html");
       $(this).find('.modal-body').html(html);
     });
 
-    $('body').on('ajax:json', function(e, data, xhr) {
-    });
+    //$('body').on('ajax:json', function(e, data, xhr) {
+    //});
   });
 }(window.jQuery);

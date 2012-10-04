@@ -2146,7 +2146,7 @@ body .container {
   }
 }
 
-.member-failure {
+.member-failure, .target li.member-failure {
   background-color: $failureBgndColor;
   border-color: $failureBorderColor;
 }

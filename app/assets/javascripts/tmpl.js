@@ -24,6 +24,7 @@
         return func;
     } catch (e) {
       err = e.message;
+      console.error(e)
       return "< % ERROR: " + err + " % >";
     }
   }
@@ -39,6 +40,7 @@
          .split("\t").join("'")
          .replace(/<%=(.+?)%>/g, "',$1,'")
          .replace(/&lt;%=(.+?)%&gt;/g, "',$1,'")
+         .replace(/%3C%=(.+?)%%3E/g, "',$1,'")
          .split("<%").join("');")
          .split("%>").join("p.push('")
       + "');}return p.join('');";
@@ -72,6 +74,7 @@
     return this.each(function() {
       var $this = $(this)
         , $output = $($.tmpl.render_items($this, list));
+      //$output.addClass('added');
       ($this.is('ul') ? $this : $this.find('> ul')).append($output);
     });
   };
@@ -86,6 +89,7 @@
           $el = $this.find('> [data-id="' + data.id + '"]');
         if (!$el.length) {
           $el = $($.tmpl.render_items($this, [data]));
+          //$el.addClass('added');
           $this.append($el);
         }
 

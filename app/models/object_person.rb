@@ -1,7 +1,7 @@
 class ObjectPerson < ActiveRecord::Base
   include AuthoredModel
 
-  attr_accessible :person, :personable, :notes
+  attr_accessible :person, :personable, :notes, :start_date, :stop_date
 
   belongs_to :person
   belongs_to :personable, :polymorphic => true
