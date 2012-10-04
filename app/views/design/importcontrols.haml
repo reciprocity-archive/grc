@@ -1,0 +1,118 @@
+-@title = "GRC: Products"
+
+-content_for :header do
+  %ol#breadcrumb
+    %li.last
+      %a{:href => "programs.htm"} PROGRAMS / IMPORTING
+  #pageTitle.location Program Setup
+
+-content_for :page_help, 'changeme'
+
+-content_for :subheader_extras do
+  %h1#pageType.fltrt.highlighted Importing Controls
+
+
+.row-fluid
+  / .RegsandControls
+  #RegsandControls.span12.WidgetBox.fullHeight
+    .WidgetBoxHeading
+      .fltrt
+        %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+          %i.gcmsicon-questionmark-grey
+        %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+          %i.gcmsicon-edit-grey
+        %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
+      .WidgetTitle.doublewidth Regulation Data Preview
+    / /.WidgetBoxHeading
+    .WidgetBoxContent
+      .row-fluid
+        .span4.control-group
+          %label{:for => ""} Title of Product
+          %input.span12{:placeholder => "http://www.thisisaurl.com/thisurl", :type => "text"}/
+          %br/
+          %span.help-inline
+        .span1
+          %label{:for => "control-code"} Version  
+          %input#control-code.span12{:disabled => "disabled", :placeholder => "1.2", :type => "text"}
+          %span.help-inline
+        .span1
+        .span6.well
+          .row-fluid
+            .span4
+              %label{:for => ""} File to Upload
+              %input.span12{:placeholder => "Click to browse for file", :type => "text"}/
+            .span2
+              %label{:for => ""} &nbsp;
+              %a.btn.btn-blue.addbtn
+                Upload File
+            .span1
+            .span5.fltrt
+              %label{:for => ""} Prepare your information
+              %a.btn.btn-info.addbtn
+                Download Template for Data Entry
+            %span.help-inline
+
+      %h3 Sample Data
+      .well
+        #Combo.tab-pane.active
+          %ul.slugtree
+            %li{:id => "content_PCI.A.1.4"}
+              .row-fluid
+                .span12
+                  .collapsed.slot.regulationslot.toggle.span9{"data-target" => "#demo1", "data-toggle" => "collapse"}
+                    %span.prefix> PCI.A.1.4
+                    Enable processes to provide for timely forensic investigation in the event of a ...
+                    .expander
+                  .attached.progress-large.span3
+                    .bar.progressbar-success{"data-percentage" => "100", :style => "float: left; width: 100%; "}
+                #demo1.row-fluid-slotcontent.collapse
+                  .span9
+                    Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
+            %li{:id => "content_PCI.A.1.4"}
+              .row-fluid
+                .span12
+                  .collapsed.slot.regulationslot.toggle.span9{"data-target" => "#demo2", "data-toggle" => "collapse"}
+                    %span.prefix> PCI.A.1.4
+                    Enable processes to provide for timely forensic investigation in the event of a ...
+                    .expander
+                  .attached.progress-large.active.span3
+                    .bar.progressbar-danger{"data-percentage" => "100", :style => "float: right; width: 100%; "}
+                #demo2.row-fluid-slotcontent.collapse
+                  .span9
+                    Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
+            %li{:id => "content_PCI.A.1.4"}
+              .row-fluid
+                .span12
+                  .collapsed.slot.regulationslot.toggle.span9{"data-target" => "#demo3", "data-toggle" => "collapse"}
+                    %span.prefix> PCI.A.1.4
+                    Enable processes to provide for timely forensic investigation...
+                    .expander
+                  .attached.progress-large.active.span3
+                    .bar.progressbar-warning{"data-percentage" => "100", :style => "float: right; width: 100%; "}
+                #demo3.row-fluid-slotcontent.collapse
+                  .span9
+                    Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.   
+      .row-fluid
+        %hr.hr-widget
+      .row-fluid
+        .span3
+          %label Name of Original Source Document
+          %input.span12{:type=>"text", :placeholder => "FISMA 2.0"}
+        .span3
+          %label URL of Original Source Document
+          %input.span12{:type=>"text", :placeholder => "www.fisma.org/reference/fisma-2.0"}
+        .span2
+          %label Review By
+          %input.span12{:type=>"text", :placeholder => "Analyst Rodger Banks"}
+        .span1.form-inline.control-group.date
+          %label{:for => "control-effectivedate"} Effective Date
+          %br/
+          #dp3.date{"data-date" => "02-12-12", "data-date-format" => "dd-mm-yy"}
+            %input.span12.calendar{:size => "16", :type => "text", :value => "02-12-12"}/
+          :javascript
+            $('#dp3').datepicker();
+        .span3
+
+          %a.span12#actionButton.btn.btn-large.btn-success.btn-primary{:href => "#", :style => "margin-top:9px;"} Import Controls and Link Program
+
+  -#=render :partial => 'design/widgets/impactscope'
