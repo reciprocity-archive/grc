@@ -55,9 +55,10 @@ CmsRails::Application.routes.draw do
     end
   end
 
-  resources :products, :as => 'flow_products', :only => [:index, :show, :new, :edit, :create, :update] do
+  resources :products, :as => 'flow_products', :only => [:index, :show, :new, :edit, :create, :update, :destroy] do
     member do
       get 'tooltip'
+      get 'delete'
     end
   end
 

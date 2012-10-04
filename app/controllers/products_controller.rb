@@ -9,7 +9,9 @@ class ProductsController < ApplicationController
   before_filter :load_product, :only => [:show,
                                          :edit,
                                          :update,
-                                         :tooltip]
+                                         :tooltip,
+                                         :delete,
+                                         :destroy]
 
   access_control :acl do
     # FIXME: Implement real authorization
@@ -75,6 +77,30 @@ class ProductsController < ApplicationController
         flash[:error] = "There was an error updating the product."
         format.html { render :layout => nil, :status => 400 }
       end
+    end
+  end
+
+  def delete
+    @model_stats = []
+    @relationship_stats = []
+
+    @relationship_stats << ['Relevant Program', @product.within_scope_of.count]
+
+    respond_to do |format|
+      format.json { render :json => @product.as_json(:root => nil) }
+      format.html do
+        render :layout => nil, :template => 'shared/delete_confirm',
+          :locals => { :model => @product, :url => flow_product_path(@product), :models => @model_stats, :relationships => @relationship_stats }
+      end
+    end
+  end
+
+  def destroy
+    @product.destroy
+    flash[:notice] = "Product deleted"
+    respond_to do |format|
+      format.html { redirect_to programs_dash_path }
+      format.json { render :json => product.as_json(:root => nil) }
     end
   end
 

@@ -13,8 +13,8 @@
 module RelatedModel
   def self.included(model)
     model.class_eval do
-      has_many :source_relationships, :as => :source, :class_name =>'Relationship'
-      has_many :destination_relationships, :as => :destination, :class_name => 'Relationship'
+      has_many :source_relationships, :as => :source, :class_name =>'Relationship', :dependent => :destroy
+      has_many :destination_relationships, :as => :destination, :class_name => 'Relationship', :dependent => :destroy
     end
     model.extend(ClassMethods)
   end

@@ -20,6 +20,7 @@ describe ProductsController do
                                            'tooltip']
     it_behaves_like "an authorized update", ['edit', 'update']
     it_behaves_like "an authorized action", [], 'update_product'
+    it_behaves_like "an authorized delete"
   end
 
   context "update" do

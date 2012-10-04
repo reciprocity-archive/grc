@@ -65,5 +65,21 @@ describe PaperTrail do
       op1.person_id.should == person.id
       op1.personable_id.should == control.id
     end
+
+    it "should log deletion of dependent relationships" do
+      program = FactoryGirl.create(:program)
+      product = FactoryGirl.create(:product)
+      maker_of = FactoryGirl.create(:relationship_type, :relationship_type => 'maker_of',
+                                :description => 'The source is the maker of the destination',
+                                :forward_short_description => 'is the maker of',
+                                :backward_short_description => 'is made by')
+      rel = FactoryGirl.create(:relationship, :source => program, :destination => product, :relationship_type_id => 'maker_of')
+      program.destroy
+      product.destination_relationships.count.should eq(0)
+      rel1 = Version.find_by_item_id_and_item_type(rel.id, "Relationship").reify
+      rel1.live?.should be_false
+      rel1.source_id.should eq(program.id)
+      rel1.destination_id.should eq(product.id)
+    end
   end
 end
