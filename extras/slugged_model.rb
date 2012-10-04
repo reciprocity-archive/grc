@@ -16,6 +16,7 @@ module SluggedModel
       before_validation :generate_random_slug_if_needed
       before_save :upcase_slug
       after_save :generate_human_slug_if_needed
+      after_rollback :revert_generated_slug_if_needed
     end
   end
 
@@ -124,6 +125,14 @@ private
       end
     end
     true
+  end
+
+  def revert_generated_slug_if_needed
+    # In the case of a validation failure or some other save failure, revert the
+    # slug back to nil if it was auto-generated.
+    if @needs_slug
+      self.slug = nil
+    end
   end
 
   def validate_slug_parent

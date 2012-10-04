@@ -41,6 +41,11 @@ describe SluggedModel do
       s2.slug.should eq(s.slug + '-SECTION-%04d' % s2.id)
     end
 
+    it "should undo the generated slug in the case of a validation failure" do
+      p = Program.new
+      p.save
+      p.slug.should eq(nil)
+    end
   end
 
   context "SlugTree" do
