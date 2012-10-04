@@ -50,8 +50,6 @@ $(document).ready(function() {
         $active_tab = $tabs.first()
       }
 
-      console.log($active_tab)
-
       // Need to remove the active class because otherwise the
       // tab code thinks it's already loaded.
       $active_tab.removeClass('active')

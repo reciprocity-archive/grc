@@ -14,7 +14,7 @@
         .span12
           .modal-search.clearfix
             .btn-group.closed
-              %a#filterButton.btn.dropdown-toggle{"data-toggle" => "dropdown"}
+              -#%a#filterButton.btn.dropdown-toggle{"data-toggle" => "dropdown"}
                 GRC Directory
                 %span.caret
               -#%ul.dropdown-menu
@@ -26,7 +26,7 @@
                     GRC Directory
 
               .pull-right
-                %input{:type => "text", :placeholder => "Search GRC Directory"}
+                %input.widgetsearch{:type => "text", :placeholder => "Search GRC Directory"}
           -#.additional-filters.filter-group
             .row-fluid
               .span4
@@ -60,7 +60,7 @@
     %h4 Roles for this system
 
     .people-list.currentlist
-      %script{ :type => 'text/html', :'data-role' => 'Select Role' }
+      %script{ :type => 'text/html', :'data-role' => '', :'data-start_date' => '', :'data-stop_date' => '' }
         %li{ :'data-id' => '<%= person.id %>', :'data-name' => '<%= person.name %>', :'data-company' => '<%= person.company %>' }
           .row-fluid
             .span6
@@ -74,8 +74,8 @@
                 %i.gcmsicon-edit-grey
               .btn-group.inline
                 %a.span7.btn.btn-success.btn-mini.dropdown-toggle.nominheight.halfopacity.fltrt{"data-toggle" => "dropdown"}
-                  <%= role[0].toUpperCase() + role.substr(1) %>
-                %input{ :type => 'hidden', :name => 'items[<%= person.id %>][role]' }
+                  <%= (role && role.length > 0) ? role[0].toUpperCase() + role.substr(1) : "Select Role" %>
+                %input{ :type => 'hidden', :name => 'items[<%= person.id %>][role]', :value => '<%= role %>' }
                 %ul.dropdown-menu{ :'data-toggle' => 'dropdown-select-list' }
                   %li
                     %a#makeAccountable{ :'data-value' => 'accountable', :href => '#' }
@@ -88,10 +88,10 @@
             .span4
             .span4
               %label Start Date (Optional)
-              %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY", :name => 'items[<%= person.id %>][start_date]', :'data-toggle' => 'datepicker', :value => '<%= person.start_date %>'}
+              %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY", :name => 'items[<%= person.id %>][start_date]', :'data-toggle' => 'datepicker', :value => '<%= this.format_date(start_date) %>'}
             .span4
               %label Stop Date (Optional)
-              %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY", :name => 'items[<%= person.id %>][stop_date]', :'data-toggle' => 'datepicker', :value => '<%= person.stop_date %>'}
+              %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY", :name => 'items[<%= person.id %>][stop_date]', :'data-toggle' => 'datepicker', :value => '<%= this.format_date(stop_date) %>'}
 
       %ul.target{ :'data-list-data-href' => flow_object_people_path(:object_type => object.class.name, :object_id => object.id) }
 

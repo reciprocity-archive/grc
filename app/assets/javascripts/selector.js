@@ -40,7 +40,6 @@
         $.each(data.errors, function(id, errors) {
           var $added_item = $target.find('[data-id="' + id + '"]');
           $added_item.addClass('member-failure');
-          console.debug('error: ', id, errors, this);
           $.each(errors, function(key, error) {
             var $input = $added_item.find('[name="items[' + id + '][' + key + ']"]');
             // Find nearest sibling .help-inline
@@ -49,7 +48,6 @@
               $help_inline = $input.parent().siblings('.help-inline');
             }
             $help_inline.text(error);
-            //console.debug($input, $help_inline);
           });
         });
       }

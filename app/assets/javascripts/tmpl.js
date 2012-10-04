@@ -8,7 +8,7 @@
 
   "use strict"; // jshint ;_;
 
-  $.tmpl = function(str, data) {
+  $.tmpl = function(str, data, context) {
     var err, func, strFunc;
 
     try {
@@ -18,13 +18,14 @@
         $.tmpl.cache[str] = func;
       }
 
-      if (data)
-        return func(data);
-      else
+      if (data) {
+        return func.apply(context, [data]);
+        //return func(data);
+      } else {
         return func;
+      }
     } catch (e) {
       err = e.message;
-      console.error(e)
       return "< % ERROR: " + err + " % >";
     }
   }
@@ -47,12 +48,28 @@
     return new Function("obj", strFunc);
   }
 
-  $.fn.tmpl = function(data) {
+  $.tmpl.context = {
+    format_date: function(date_string) {
+      var date;
+      if (date_string && date_string.length > 0) {
+        date = new Date(date_string);
+        return [
+          (date.getMonth() + 1), '/',
+          date.getDate(), '/',
+          date.getFullYear()].join("");
+      } else {
+        return '';
+      }
+    }
+  }
+
+  $.fn.tmpl = function(data, context) {
+    context = $.extend({}, context || {}, $.tmpl.context);
     if (this.is('[type="text/html"]')) {
       // Parse and render this element as a template
-      return $.tmpl(this.html(), data);
+      return $.tmpl(this.html(), data, context);
     } else {
-      return this.html($.tmpl.apply(this, arguments));
+      return this.html($.tmpl.apply(this, [data, context]));
     }
   };
 

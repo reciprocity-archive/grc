@@ -52,7 +52,6 @@
 
       // Close the modal and rewrite the target list
       $target.on('ajax:json', function(e, data, xhr) {
-        console.debug('listform ajax:json');
         if (data.errors) {
         } else if (list_target == 'refresh') {
           refresh_page();
@@ -69,7 +68,6 @@
 
       // Close the modal and append to the target list
       $target.on('ajax:json', function(e, data, xhr) {
-        console.debug('listnewform ajax:json');
         if (data.errors) {
         } else if (list_target) {
           $(list_target).tmpl_additem(data);
@@ -79,13 +77,11 @@
     },
 
     'listeditform': function($target, $trigger, option) {
-      console.debug('listedit');
       $target.modal_form(option);
       var list_target = $trigger.data('list-target');
 
       // Close the modal and append to the target list
       $target.on('ajax:json', function(e, data, xhr) {
-        console.debug("listeditform ajax:json");
         if (data.errors) {
         } else if (list_target) {
           $(list_target).tmpl_mergeitems([data]);
@@ -99,7 +95,6 @@
       $target.modal_form(option);
 
       $target.on('ajax:json', function(e, data, xhr) {
-        console.debug('form ajax:json');
         if (data.errors) {
         } else if (form_target == 'refresh') {
           refresh_page();

@@ -6,7 +6,6 @@
    * =============================== */
 
   var ModalForm = function ( element, options ) {
-    console.debug('ModalForm()');
 
     this.options = options;
     this.$element = $(element);
@@ -30,7 +29,6 @@
     constructor: ModalForm
 
   , init: function() {
-      console.debug('ModalForm.init');
       this.$element
         .on('keypress', 'form', $.proxy(this.keypress_submit, this))
         .on('click.modal-form.close', '[data-dismiss="modal"]', $.proxy(this.hide, this))
@@ -46,7 +44,6 @@
     }
 
   , submit: function(e) {
-      console.debug("ModalForm#submit");
       this.$form().submit();
     }
 
@@ -120,8 +117,6 @@
   $(function() {
     // Default form complete handler
     $('body').on('ajax:complete', function(e, xhr, status) {
-      console.debug("modal-form ajax:complete");
-      console.debug(e, xhr, xhr.responseText);
       var data = null, data_k;
       try {
         data = JSON.parse(xhr.responseText);
@@ -171,7 +166,6 @@
     });
 
     $('body').on('ajax:flash', function(e, flash) {
-      console.debug("modal-form ajax:flash");
       var $target, $flash_holder// = this.$element.find('.flash')
         , type, ucase_type
         , messages, message, message_i
@@ -212,7 +206,6 @@
     });
 
     $('body').on('ajax:html', '.modal > form', function(e, html, xhr) {
-      console.debug("modal-form ajax:html");
       $(this).find('.modal-body').html(html);
     });
 

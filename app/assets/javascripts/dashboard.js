@@ -28,7 +28,7 @@ jQuery(function($) {
     var $this = $(this);
 
     if (!$this.data('datepicker'))
-      $(this).datepicker({changeMonth: true, changeYear: true, dateFormat: 'dd/mm/yy'});
+      $(this).datepicker({changeMonth: true, changeYear: true, dateFormat: 'mm/dd/yy'});
   });
 
   // Setup program-select inputs to prefill slug field
@@ -105,6 +105,22 @@ jQuery(function($) {
     }
   });
 
+  $('body').on('focus', '.modal .filter-block .widgetsearch', function(e) {
+    $(this).bind('keypress', function(e) {
+      if (e.which == 13) {
+        // If this input is within a form, don't submit the form
+        e.preventDefault();
+
+        var $this = $(this)
+          , $list = $this.closest('.filter-block').find('ul[data-list-data-href]')
+          , href = $list.data('list-data-href') + '?' + $.param({ s: $this.val() });
+        $.get(href, function(data) {
+          $list.tmpl_setitems(data);
+        });
+      }
+    });
+  });
+
   // Initialize Quick Search handlers
   $('body').on('keypress', '.modal nav > .widgetsearch', function (e) {
     if (e.which == 13) {
@@ -157,7 +173,6 @@ jQuery(function($) {
   });
 
   $('body').on('click', '[data-toggle="dropdown-select-list"] > li > a', function(e) {
-    console.debug('asdfasdf');
     var value = $(this).data('value');
     $(this).closest('ul').siblings('input').val(value);
     $(this).closest('ul').siblings('a').text(value[0].toUpperCase() + value.substr(1));

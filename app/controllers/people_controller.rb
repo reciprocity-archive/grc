@@ -37,7 +37,11 @@ class PeopleController < ApplicationController
   layout 'dashboard'
 
   def index
-    render :json => Person.all
+    @objects = Person
+    if params[:s]
+      @objects = @objects.db_search(params[:s])
+    end
+    render :json => @objects.all
   end
 
   def new
@@ -140,9 +144,11 @@ class PeopleController < ApplicationController
           person = Person.find(item[:id])
           object_person = @object.object_people.new({:person => person})
         end
+        parse_date_param(item, :start_date)
+        parse_date_param(item, :stop_date)
         object_person.role = item[:role].blank? ? nil : item[:role]
-        object_person.start_date = item[:start_date].blank? ? nil : item[:start_date]
-        object_person.stop_date = item[:stop_date].blank? ? nil : item[:stop_date]
+        object_person.start_date = item[:start_date]
+        object_person.stop_date = item[:stop_date]
         if !object_person.new_record?
           object_person.save
         end
