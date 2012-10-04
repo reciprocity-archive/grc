@@ -2,34 +2,44 @@
   Impact / Scope
 
 -content_for :widget_help, 'product_impact'
-#impactScopeInfo.open
+#impact.open
   /Button Filters
   .button-set
     .row-fluid
-      .span4
-        .span12.btn{:href => ""}
-          Programs
-      .span4
-        .span12.btn{:href => ""}
-          -
-      .span4
-        .span12.btn{:href => ""}
-  .button-set
-    .row-fluid
-      .span4
-        .span12.btn{:href => ""}
-      .span4
-        .span12.btn{:href => ""}
-          -
-      .span4
-        .span12.btn{:href => ""}
+      %ul
+        %li.btn.span4
+          %a.span12{:href => "#impact-programs-pane",
+            "data-toggle" => 'tab',
+            "data-source" => url_for(:action => 'index', :controller => :programs, :relevant_to => @product.id),
+            "data-dest" => '#impact-programs-dest',
+            "data-template" => '/assets/impact/programs.ejs',
+            "data-refresh-time" => 60 }
+            Programs
+        %li.btn.span4
+          %a.span12
+        %li.btn.span4
+          %a.span12{:href => "#impact-products-pane",
+            "data-toggle" => 'tab' }
+            Products
+        %li.btn.span4
+          %a.span12
+        %li.btn.span4
+          %a.span12
+        %li.btn.span4
+          %a.span12
   %hr.hr-widget
   / TABS
-  .row-fluid
-    .span12
-      %h4
-        Applicable Regulations
-        %a.btn.btn-blue.addbtn.fltrt Edit List
-  .row-fluid
-    .span12.audit
-      .subtitle Regulations or programs that are directly applicable to this program.
+  .tab-content
+    #impact-programs-pane.tab-pane
+      .row-fluid
+        .span12
+          %h4
+            Applicable Regulations
+            %a.btn.btn-blue.addbtn.fltrt Edit List
+      .row-fluid
+        .span12.audit
+          .subtitle Regulations or programs that are directly applicable to this program.
+      .row-fluid#impact-programs-dest
+    #impact-products-pane.tab-pane
+      .row-fluid
+        Here is the products pane
