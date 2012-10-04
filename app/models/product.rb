@@ -7,7 +7,7 @@ class Product < ActiveRecord::Base
   include AuthorizedModel
   include RelatedModel
 
-  attr_accessible :title, :slug, :description, :url, :version, :type
+  attr_accessible :title, :slug, :description, :url, :version, :type, :start_date, :stop_date
 
   has_many :object_people, :as => :personable, :dependent => :destroy
   has_many :people, :through => :object_people
