@@ -4,6 +4,7 @@ CmsRails::Application.routes.draw do
     member do
       get 'tooltip'
       get 'import'
+      get 'export'
       get 'sections'
       get 'controls'
       get 'section_controls'

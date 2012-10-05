@@ -2,6 +2,8 @@
 # Copyright:: Google Inc. 2012
 # License:: Apache 2.0
 
+require 'csv'
+
 # Browse programs
 class ProgramsController < ApplicationController
   include ApplicationHelper
@@ -12,6 +14,7 @@ class ProgramsController < ApplicationController
   # need.
   before_filter :load_program, :only => [:show,
                                          :import,
+                                         :export,
                                          :tooltip,
                                          :edit,
                                          :update,
@@ -38,7 +41,8 @@ class ProgramsController < ApplicationController
 
     allow :update, :update_program, :of => :program, :to => [:edit,
                                                     :update,
-                                                    :import]
+                                                    :import,
+                                                    :export]
   end
 
   layout 'dashboard'
@@ -97,6 +101,24 @@ class ProgramsController < ApplicationController
       else
         flash[:error] = "There was an error updating the program"
         format.html { render :layout => nil, :status => 400 }
+      end
+    end
+  end
+
+  def export
+    respond_to do |format|
+      format.csv do
+        self.response.headers['Content-Type'] = 'text/csv'
+        headers['Content-Disposition'] = "attachment; filename=\"#{@program.slug}.csv\""
+        self.response_body = Enumerator.new do |out|
+          out << CSV.generate_line(%w(Type Code Title Description Company Version Start Stop Kind Audit-Start Audit-Frequency Audit-Duration Created Updated))
+          out << CSV.generate_line(["Program", @program.slug, @program.title, @program.description, @program.company?, @program.version, @program.start_date, @program.stop_date, @program.kind, @program.audit_start_date, @program.audit_frequency, @program.audit_duration, @program.created_at, @program.updated_at ])
+          out << CSV.generate_line([])
+          out << CSV.generate_line(%w(Code Title Description Notes Created Updated))
+          @program.sections.each do |s|
+            out << CSV.generate_line([s.slug, s.title, s.description, s.notes, s.created_at, s.updated_at])
+          end
+        end
       end
     end
   end

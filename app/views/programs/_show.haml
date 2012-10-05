@@ -22,6 +22,9 @@
         %a.span12.btn.btn-warning{ :href => '#create-cycle-modal', :'data-toggle' => 'modal-form' }
           %i.gcmsicon-play-white
           Start Audit
+      %a.span12.btn.btn-warning{ :href => export_flow_program_path(program, :format => :csv), :target => '_blank' }
+        %i.gcmsicon-play-white
+        Export
     
 
 .information
