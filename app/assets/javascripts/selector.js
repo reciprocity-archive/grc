@@ -34,8 +34,6 @@
       var $target = this.$target();
 
       if (data.errors) {
-        //e.stopImmediatePropagation();
-        //e.stopPropagation();
         // Walk error object and insert error messages
         $.each(data.errors, function(id, errors) {
           var $added_item = $target.find('[data-id="' + id + '"]');
@@ -68,8 +66,29 @@
   , $source: function() { return this.$element.find('.source'); }
   , $target: function() { return this.$element.find('.target'); }
 
+  , mark_item_selected: function($el) {
+      $el.
+        find('[data-toggle="selector-list-select"]').
+          removeClass('widgetbtn').
+          addClass('widgetbtnoff').
+          find('i').
+            removeClass('grcicon-chevron-right').
+            addClass('grcicon-check-green');
+    }
+
+  , mark_item_unselected: function($el) {
+      $el.
+        find('[data-toggle="selector-list-select"]').
+          removeClass('widgetbtnoff').
+          addClass('widgetbtn').
+          find('i').
+            removeClass('grcicon-check-green').
+            addClass('grcicon-chevron-right');
+    }
+
   , load_lists: function(e) {
-      var $source = this.$source()
+      var self = this
+        , $source = this.$source()
         , $target = this.$target()
         , source_url = $source.data('list-data-href')
         , target_url = $target.data('list-data-href');
@@ -80,9 +99,7 @@
           var $el = $(el)
             , $added_item = $target.find('[data-id="' + $el.data('id') + '"]');
           if ($added_item.length > 0) {
-            $el.find('i.grcicon-chevron-right').
-              removeClass('grcicon-chevron-right').
-              addClass('grcicon-check-green');
+            self.mark_item_selected($el);
           }
         });
       });
@@ -94,9 +111,7 @@
           var $el = $(el)
             , $added_item = $source.find('[data-id="' + $el.data('id') + '"]');
           if ($added_item.length > 0) {
-            $added_item.find('i.grcicon-chevron-right').
-              removeClass('grcicon-chevron-right').
-              addClass('grcicon-check-green');
+            self.mark_item_selected($added_item);
           }
         });
       });
@@ -124,16 +139,15 @@
         , $target = this.$target()
         , $added_item
         ;
-      $target.tmpl_mergeitems([{ id: data.id, person: data }]);
 
-      $item.find('i').
-        removeClass('grcicon-chevron-right').
-        addClass('grcicon-check-green');
+      this.mark_item_selected($item);
 
       $added_item = $target.find('[data-id="' + data.id + '"]');
       if ($added_item.is('.removed')) {
         $added_item.removeClass('removed');
-      } else {
+      } else if ($added_item.length == 0) {
+        $target.tmpl_mergeitems([{ id: data.id, person: data }]);
+        $added_item = $target.find('[data-id="' + data.id + '"]');
         $added_item.addClass('added');
       }
     }
@@ -153,11 +167,8 @@
       }
 
       // Reset 'add' icon in source list
-      this.$source().
-        find('[data-id="' + $item.data('id') + '"]').
-        find('i').
-          removeClass('grcicon-check-green').
-          addClass('grcicon-chevron-right');
+      this.mark_item_unselected(
+        this.$source().find('[data-id="' + $item.data('id') + '"]'));
     }
   });
 

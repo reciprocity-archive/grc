@@ -50,9 +50,9 @@
                           %span.company <%= person.company %>
                           %span.name <%= person.name %>
                         .span4.actions
-                          %a.btn.btn-mini.pull-right.add-me{:href => "#", :'data-toggle' => 'selector-list-select'}
+                          %a.widgetbtn.pull-right.add-me{:href => "#", :'data-toggle' => 'selector-list-select'}
                             %i.grcicon-chevron-right
-                          %a.btn.btn-mini.pull-right{:href => edit_flow_person_path('<%=person.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-list-target' => '#listPersonList, #listObjectPersonList' }
+                          %a.widgetbtn.pull-right{:href => edit_flow_person_path('<%=person.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-list-target' => '#listPersonList, #listObjectPersonList' }
                             %i.gcmsicon-edit-grey
                   %ul.source{ :'data-list-data-href' => flow_people_url }
 
@@ -63,15 +63,15 @@
       %script{ :type => 'text/html', :'data-role' => '', :'data-start_date' => '', :'data-stop_date' => '' }
         %li{ :'data-id' => '<%= person.id %>', :'data-name' => '<%= person.name %>', :'data-company' => '<%= person.company %>' }
           .row-fluid
-            .span6
+            .span4
               %span.company <%= person.company %>
               %span.name <%= person.name %>
-            .span6.actions
+              %a.widgetbtn{ :href => edit_flow_person_path('<%=person.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-list-target' => '#listPersonList, #listObjectPersonList' }
+                %i.gcmsicon-edit-grey
+            .span8.actions
               %input{ :type => 'hidden', :name => 'items[<%= person.id %>][id]', :value => '<%= person.id %>' }
               %a.widgetbtn.pull-right{ :href => '#', :'data-toggle' => 'selector-list-remove' }
                 %i.icon-minus-sign
-              %a.widgetbtn.pull-right{ :href => edit_flow_person_path('<%=person.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-list-target' => '#listPersonList, #listObjectPersonList' }
-                %i.gcmsicon-edit-grey
               .btn-group.inline
                 %a.span7.btn.btn-success.btn-mini.dropdown-toggle.nominheight.halfopacity.fltrt{"data-toggle" => "dropdown"}
                   <%= (role && role.length > 0) ? role[0].toUpperCase() + role.substr(1) : "Select Role" %>
