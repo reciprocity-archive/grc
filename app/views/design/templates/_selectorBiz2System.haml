@@ -1,4 +1,4 @@
-#selectorSystem.modal.modal-wide.hide.fade
+#selectorBiz2System.modal.modal-wide.hide.fade
   .modal-header
     %nav
       %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
@@ -6,8 +6,8 @@
       %a.widgetbtn{"data-dismiss" => "modal", :href => "#"}
         %i.gcmsicon-x-grey
     %h1
-      Select System
-      %span.version v.0.91
+      Select Business Object
+      %span.version v.0.10
   .modal-body
     .alert.alert-info
       %span#alertMessage
@@ -17,11 +17,11 @@
         .span6
 
           %h4
-            Add System
+            Add Business Object
             .fltrt
               %a.btn.btn-blue.addbtn.fltrt.new{:href => "#"}
                 %i          
-                Create System
+                Create Business Object
 
           .filter-block
           
@@ -101,13 +101,13 @@
                                 %a.widgetbtn.pull-right{:href => "#"}
                                   %i.gcmsicon-edit-grey
         .span6
-          %h4 Categories for this system
+          %h4 Objects for this system
           .system-list.currentlist
             %ul.target
               %li
                 .row-fluid
                   .span6
-                    %span.system System Company
+                    %span.system Sub-System Company
                     %span.name System 1
                   .span6.actions
                 .row-fluid.additional

@@ -53,6 +53,10 @@ jQuery(function ($) {
   renderExternalTmpl({ name: 'selectorReference', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'selectorSystem', selector: '#templates', data: {} });
 
+  renderExternalTmpl({ name: 'selectorBiz2System', selector: '#templates', data: {} });
+
+  renderExternalTmpl({ name: 'selectorBiz2Product', selector: '#templates', data: {} });
+
   renderExternalTmpl({ name: 'selectorCategory', selector: '#templates', data: {} });
 
   // new modals START
