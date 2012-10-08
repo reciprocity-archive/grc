@@ -26,7 +26,7 @@
 
   .span2.disabled.fltrt{ :class => error_class(f, :status) }
     %label Status
-    %input.span12{:placeholder => "Deprecated", :type => "text"}
+    %input.span12{:placeholder => "Deprecated", :type => "text", :disabled => 'disabled'}
 
 .row-fluid
   .span12{ :class => error_class(f, :company) }
@@ -36,6 +36,3 @@
     %br
 
 %br
-
--if !f.object.new_record?
-  =render :partial => 'shared/object_info', :locals => { :object => f.object, :approved => false }

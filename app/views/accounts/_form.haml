@@ -34,6 +34,3 @@
 .group
   =f.label :role
   =f.select :role, access_control_roles
-
--if !f.object.new_record?
-  =render :partial => 'shared/object_info', :locals => { :object => f.object, :approved => false }

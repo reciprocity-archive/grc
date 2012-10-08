@@ -21,17 +21,17 @@
 
   .span2{:class => error_class(f, :slug)}
     %label{:for => "section-code"} Code (autofill)
-    %input#section-code.inputtext-small{:placeholder => "SECTION-XXXX", :type => "text", :value => f.object.slug, :name => 'section[slug]'}
+    %input#section-code.span12{:placeholder => "SECTION-XXXX", :type => "text", :value => f.object.slug, :name => 'section[slug]'}
     =error_messages_inline(f, :slug)
 
   .span1.disabled{:class => error_class(f, :version)}
     %label{:for => "section-version"} Version
-    %input#section-version.input-supermini{:placeholder => "SOX", :type => "text", :value => nil, :name => 'section[version]'}
+    %input#section-version.input-supermini{:placeholder => "SOX", :type => "text", :value => nil, :name => 'section[version]', :disabled => 'disabled'}
     =error_messages_inline(f, :version)
 
   .span7.disabled{:class => error_class(f, :status)}
     %label{:for => "section-status"} Status
-    %select#section-status.input-small{ :name => 'section[status]', :value => nil }
+    %select#section-status.input-small{ :name => 'section[status]', :value => nil, :disabled => 'disabled' }
       %option Deprecated
       %option Open
     =error_messages_inline(f, :status)
@@ -52,8 +52,5 @@
 .row-fluid
   .span12.disabled{:class => error_class(f, :url)}
     %label{:for => "section-url"} URL for this section (optional)
-    %input#section-link.span12{:placeholder => "http://", :type => "text", :value => nil, :name => 'section[url]'}
+    %input#section-link.span12{:placeholder => "http://", :type => "text", :value => nil, :name => 'section[url]', :disabled => 'disabled'}
     =error_messages_inline(f, :url)
-
--if !f.object.new_record?
-  =render :partial => 'shared/object_info', :locals => { :object => f.object, :approved => false }

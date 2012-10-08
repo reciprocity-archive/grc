@@ -15,7 +15,7 @@
 
   .span2.disabled{ :class => error_class(f, :version) }
     =f.label :version
-    =f.text_field :version, :class => 'input-supermini'
+    =f.text_field :version, :class => 'input-supermini', :disabled => true
     =error_messages_inline(f, :version)
 
   .span3
@@ -50,6 +50,3 @@
 .row-fluid
   .span12
     =error_messages_inline(f, :description)
-
--if !f.object.new_record?
-  =render :partial => 'shared/object_info', :locals => { :object => f.object, :approved => false }

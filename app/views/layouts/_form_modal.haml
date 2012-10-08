@@ -11,6 +11,9 @@
 .modal-body.cleanlabels.compact-rows
   =yield
 
+.modal-info
+  =render :partial => 'shared/object_info', :locals => { :object => f.object }
+
 .modal-footer
   .row-fluid
     %nav.fltlft.txtlft.span3
@@ -18,15 +21,18 @@
       -delete_path = yield_content!(:modal_delete_path)
       -if !delete_path.blank?
         %a.btn.btn-large.btn-warning{:href => delete_path, :'data-toggle' => 'modal-ajax-form'} Delete
-    .toolbar-widget.span6.disabled
-      %a.btn{:href => "#", :'data-toggle' => 'version-prev'}
-        %i.gcmsicon-arrowleft-black
-      %span.btnwell
-        Showing Most Recent of
-        %strong=f.object.versions.count
-        Revisions
-      %a.btn{:href => "#", :'data-toggle' => 'version-next'}
-        %i.gcmsicon-arrowright-black
+    -if has_feature?(:BETA) && !f.object.new_record?
+      .toolbar-widget.span6.demoText
+        %a.btn{:href => "#", :'data-toggle' => 'version-prev'}
+          %i.gcmsicon-arrowleft-black
+        %span.btnwell
+          Showing Most Recent of
+          %strong=f.object.versions.count
+          Revisions
+        %a.btn{:href => "#", :'data-toggle' => 'version-next'}
+          %i.gcmsicon-arrowright-black
     %nav.fltrt.txtrt.span3
-      %a.btn.btn-large.btn-warning{:'data-toggle' => 'modal-submit', :href => '#' } Save
-      %a.btn.btn-large.btn-success.disabled{:'data-toggle' => 'modal-approve', :href => '#', :disabled => 'disabled'} Approve
+      %a.btn.btn-large.btn-success{:'data-toggle' => 'modal-submit', :href => '#' } Save
+      -approve_path = yield_content!(:modal_approve_path)
+      -if !approve_path.blank?
+        %a.btn.btn-large.btn-success.disabled{:'data-toggle' => 'modal-approve', :href => '#', :disabled => 'disabled'} Approve

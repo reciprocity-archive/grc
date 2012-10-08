@@ -55,6 +55,3 @@
 :javascript
   //$('#wysihtml5').wysihtml5({ image: false }); //Button to insert an image. Default true
   $('#control_start_date, #control_stop_date').datepicker();
-
--if !f.object.new_record?
-  =render :partial => 'shared/object_info', :locals => { :object => f.object, :approved => false }

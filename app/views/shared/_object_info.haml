@@ -1,21 +1,35 @@
-.row-fluid.nominheight
-  .span3.nominheight
-    %label.fltlft
-      %strong> Created
-      \: #{object.created_at.strftime("%m/%d/%y")}
-  .span3.nominheight
-    %label.fltlft
-      %strong> Updated
-      \: #{object.updated_at.strftime("%m/%d/%y")}
-  .span3.nominheight
-    %label.fltrt
-      %strong> Last Editor
-      \: #{object.modified_by && (object.modified_by.name || object.modified_by.username || object.modified_by.email)}
-  .span3.nominheight
-    %label.fltrt
-      %strong> Approved
-      \:
-      -if approved
-        %span.statustextgreen Approved
-      -else
-        %span.statustextred Not Approved
+-state = false #f.object.approved?
+
+.row-fluid
+  -if !object.new_record?
+    .span2
+      %strong Created:
+      %span #{object.created_at.strftime("%m/%d/%y")}
+    .span2
+      %strong Updated:
+      %span.updatedDate #{object.updated_at.strftime("%m/%d/%y")}
+    .span2
+      %strong Last Editor:
+      %span #{object.modified_by && (object.modified_by.name || object.modified_by.username || object.modified_by.email)}
+    -if has_feature?(:BETA)
+      .span3.demoText
+        %strong Approved by:
+        -if state == 'approved'
+          %span.statustextgreen Approved
+        -else
+          %span.statustextred Not Approved
+    -else
+      .span3
+    .span3.status
+      %h5
+        Status:
+        %span.statusValue Active
+  -else
+    .span2
+      %strong Creator:
+      %span #{current_user.name || current_user.username || current_user.email}
+    .span7
+    .span3.status
+      %h5
+        Status:
+        %span.statusValue Draft
