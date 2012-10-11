@@ -48,7 +48,7 @@
                 .tabbable.tabs-left
                   .tab-content
                     #System1.tab-pane.active
-                      .people-list.short
+                      #currentList.system-list.short
                         %ul.source
                           %li
                             .row-fluid
@@ -102,7 +102,7 @@
                                   %i.gcmsicon-edit-grey
         .span6
           %h4 Objects for this system
-          .system-list.currentlist
+          .system-list.targetlist
             %ul.target
               %li
                 .row-fluid
@@ -145,4 +145,4 @@
                     %a#removeMe.widgetbtn.pull-right{:href => "#"}
                       %i.icon-minus-sign
               
-  =render :partial => 'design/templates/modalfooterlists'
+  =render :partial => 'design/templates/modalfooter'

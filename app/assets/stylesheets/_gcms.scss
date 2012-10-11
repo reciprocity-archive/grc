@@ -298,6 +298,7 @@ width: 97px;
 // TODO: use instead? .halfHeight > .WidgetBoxContent
 .halfHeight > .WidgetBox > .WidgetBoxContent {
   height:265px;
+
 }
 
 // TODO: use instead? .fullHeight > .WidgetBoxContent
@@ -317,10 +318,6 @@ width: 97px;
 /* Required `height` setting to trigger overflow scrolling in tab content */
 .fullHeight > .WidgetBox > .WidgetBoxContent .tab-pane {
   max-height: 535px;
-}
-
-.halfHeight > .WidgetBox > .WidgetBoxContent .tab-pane {
-  max-height: 215px;
 }
 
 /*
