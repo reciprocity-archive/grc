@@ -31,5 +31,10 @@ module SearchableModel
       q = "%#{q}%"
       where(t[:title].matches(q).or(t[:slug].matches(q)))
     end
+
+    if CMS_CONFIG["FULLTEXT"].blank?
+      def define_index
+      end
+    end
   end
 end
