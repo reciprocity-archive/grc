@@ -7,7 +7,7 @@
         %i.gcmsicon-x-grey
     %h1
       Select Reference
-      %span.version v.0.10
+      %span.version v.85
   .modal-body
     .alert.alert-info
       %span#alertMessage
@@ -167,9 +167,9 @@
                   .span6.actions          
                     %a#removeMe.widgetbtn.pull-right{:href => "#"}
                       %i.icon-minus-sign
-                    %a.widgetbtn.pull-right{:href => "#"}
+                    %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#newreference"}
                       %i.gcmsicon-edit-grey
-                    .btn-group.inline
+                    -#.btn-group.inline
                       %a.span7.btn.btn-success.btn-mini.dropdown-toggle.nominheight.halfopacity.fltrt{"data-toggle" => "dropdown"}
                         Working Draft
                       %ul.dropdown-menu
@@ -190,9 +190,9 @@
                   .span6.actions   
                     %a#removeMe.widgetbtn.pull-right{:href => "#"}
                       %i.icon-minus-sign
-                    %a.widgetbtn.pull-right{:href => "#"}
+                    %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#newreference"}
                       %i.gcmsicon-edit-grey
-                    .btn-group.inline
+                    -#.btn-group.inline
                       %a.span7.btn.btn-success.btn-mini.dropdown-toggle.nominheight.halfopacity.fltrt{"data-toggle" => "dropdown"}
                         Final Report
                       %ul.dropdown-menu
@@ -213,9 +213,9 @@
                   .span6.actions 
                     %a#removeMe.widgetbtn.pull-right{:href => "#"}
                       %i.icon-minus-sign
-                    %a.widgetbtn.pull-right{:href => "#"}
+                    %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#newreference"}
                       %i.gcmsicon-edit-grey
-                    .btn-group.inline
+                    -#.btn-group.inline
                       %a.span7.btn.btn-danger.btn-mini.dropdown-toggle.nominheight.halfopacity.fltrt{"data-toggle" => "dropdown"}
                         Select Relationship 
                         %span.caret
@@ -229,4 +229,4 @@
                 .row-fluid.additional
                   .span4  
                   .span8
-  =render :partial => 'design/templates/modalfooterlists'
+  =render :partial => 'design/templates/modalfooter'
