@@ -265,19 +265,18 @@ jQuery(function ($) {
 
     if ( $this.closest(".modal-body").find("#currentList").hasClass('category-list') ) {
       //Category lists do not have relationships
-      var $item2add = '<h6>JUST ADDED</h6>';
+      var $item2add = '<h6 class="itemstatus">JUST ADDED</h6>';
     } else if ($this.closest(".modal-body").find("#currentList").hasClass('people-list')) {
       //We gave relationships
       var $item2add = '<div class="btn-group inline"> <a class="span7 btn btn-danger btn-mini dropdown-toggle nominheight fltrt" data-toggle="dropdown"> Select Relationship <span class="caret"></span> </a> <ul class="dropdown-menu"> <li> <a href="#" id="makeAccountable"> is Accountable for </a> </li> <li> <a href="#" id="makeResponsible"> is Responsible for </a> </li> </ul> </div>';
     } else if ($this.closest(".modal-body").find("#currentList").hasClass('reference-list')) {
-       var $item2add = '<h6>JUST ADDED</h6>';
+       var $item2add = '<h6 class="itemstatus">JUST ADDED</h6>';
     } else if ($this.closest(".modal-body").find("#currentList").hasClass('system-list')) {
-       var $item2add = '<h6>JUST ADDED</h6>';
+       var $item2add = '<h6 class="itemstatus">JUST ADDED</h6>';
     }
     $this
       .removeClass("widgetbtn addme")
       .addClass("widgetbtnoff"); //remove icon square around checkmark (not a button anymore)
-
     $icon
       .removeClass("grcicon-chevron-right")
       .addClass("grcicon-check-green")
@@ -286,6 +285,9 @@ jQuery(function ($) {
       .find("li.new-item").hide().fadeIn('slow').removeClass("new-item");  
     $unassignedItems
       .html($unassignedValue + 1).fadeIn();
+
+    $(".itemstatus").effect("pulsate", { times:3 }, 800);
+    $(".itemstatus").removeClass("itemstatus");
   });
 
   // show filters in modals
