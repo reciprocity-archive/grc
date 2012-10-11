@@ -1,4 +1,4 @@
-#selectorCategory.modal.modal-wide.hide.fade
+#selectorBiz2System.modal.modal-wide.hide.fade
   .modal-header
     %nav
       %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
@@ -6,8 +6,8 @@
       %a.widgetbtn{"data-dismiss" => "modal", :href => "#"}
         %i.gcmsicon-x-grey
     %h1
-      Select Category
-      %span.version v.92
+      Select Business Object
+      %span.version v.0.10
   .modal-body
     .alert.alert-info
       %span#alertMessage
@@ -17,11 +17,11 @@
         .span6
 
           %h4
-            Add Category
+            Add Business Object
             .fltrt
               %a.btn.btn-blue.addbtn.fltrt.new{:href => "#"}
                 %i          
-                Create Category
+                Create Business Object
 
           .filter-block
           
@@ -31,11 +31,11 @@
                   .btn-group.closed 
 
                     .pull-right
-                      %input{:type => "text", :placeholder => "Search Categories"}
+                      %input{:type => "text", :placeholder => "Search Systems"}
                 .additional-filters.filter-group
                   .row-fluid
                     .span4
-                      %label Name
+                      %label System Name
                       %input.span12{:type=>"text", :placeholder => "enter name"}
                     .span4
                       %label Org. group
@@ -47,14 +47,14 @@
                             
                 .tabbable.tabs-left
                   .tab-content
-                    #category1.tab-pane.active
-                      #currentList.category-list.short
+                    #System1.tab-pane.active
+                      .people-list.short
                         %ul.source
                           %li
                             .row-fluid
                               .span8
-                                %span.company Access Control
-                                %span.name Access Management
+                                %span.system System Company
+                                %span.name System 1
                               .span4.actions                
                                 %a.widgetbtn.pull-right.add-me{:href => "#"}
                                   %i.grcicon-chevron-right
@@ -63,8 +63,8 @@
                           %li
                             .row-fluid
                               .span8
-                                %span.company Access Control
-                                %span.name Change Management 
+                                %span.system System Company
+                                %span.name System 2
                               .span4.actions              
                                 %a.widgetbtn.pull-right.add-me{:href => "#"}
                                   %i.grcicon-chevron-right 
@@ -73,8 +73,8 @@
                           %li
                             .row-fluid
                               .span8
-                                %span.company Category
-                                %span.name Business Continuity 
+                                %span.system System Company
+                                %span.name System 3
                               .span4.actions       
                                 %a.widgetbtn.pull-right.add-me{:href => "#"}
                                   %i.grcicon-chevron-right
@@ -83,8 +83,8 @@
                           %li
                             .row-fluid
                               .span8
-                                %span.company Category
-                                %span.name Governance
+                                %span.system System Company
+                                %span.name System 4
                               .span4.actions                
                                 %a.widgetbtn.pull-right.add-me{:href => "#"}
                                   %i.grcicon-chevron-right
@@ -93,79 +93,36 @@
                           %li
                             .row-fluid
                               .span8
-                                %span.company Category
-                                %span.name Security Policy
-                              .span4.actions                
-                                %a.widgetbtn.pull-right.add-me{:href => "#"}
-                                  %i.grcicon-chevron-right 
-                                %a.widgetbtn.pull-right{:href => "#"}
-                                  %i.gcmsicon-edit-grey
-
-                    #category2.tab-pane
-
-                      .people-list.short
-                        %ul.source
-                          %li
-                            .row-fluid
-                              .span8
-                                %span.company Motorola
-                                %span.name Moto Rola
-                              .span4.actions                
-                                %a.widgetbtn.pull-right.add-me{:href => "#"}
-                                  %i.grcicon-chevron-right
-                                %a.widgetbtn.pull-right{:href => "#"}
-                                  %i.gcmsicon-edit-grey
-                          %li
-                            .row-fluid
-                              .span8
-                                %span.company Google
-                                %span.name David Buick
-                              .span4.actions                
-                                %a.widgetbtn.pull-right.add-me{:href => "#"}
-                                  %i.grcicon-chevron-right 
-                                %a.widgetbtn.pull-right{:href => "#"}
-                                  %i.gcmsicon-edit-grey
-                          %li
-                            .row-fluid
-                              .span8
-                                %span.company Google
-                                %span.name Niki Lauda
-                              .span4.actions                
-                                %a.widgetbtn.pull-right.add-me{:href => "#"}
-                                  %i.grcicon-chevron-right 
-                                %a.widgetbtn.pull-right{:href => "#"}
-                                  %i.gcmsicon-edit-grey
-                          %li
-                            .row-fluid
-                              .span8
-                                %span.company Google
-                                %span.name Daniel Harms
-                              .span4.actions                
-                                %a.widgetbtn.pull-right.add-me{:href => "#"}
-                                  %i.grcicon-chevron-right 
-                                %a.widgetbtn.pull-right{:href => "#"}
-                                  %i.gcmsicon-edit-grey
-                          %li
-                            .row-fluid
-                              .span8
-                                %span.company Google
-                                %span.name David Buick
+                                %span.system System Company
+                                %span.name System 5
                               .span4.actions                
                                 %a.widgetbtn.pull-right.add-me{:href => "#"}
                                   %i.grcicon-chevron-right 
                                 %a.widgetbtn.pull-right{:href => "#"}
                                   %i.gcmsicon-edit-grey
         .span6
-          %h4 Categories for this system
-          #targetList.category-list
+          %h4 Objects for this system
+          .system-list.currentlist
             %ul.target
               %li
                 .row-fluid
-                  .span6
-                    %span.company Access Control
-                    %span.name Access Management
+                  .span6  
+                    %span.system Sub-System Company
+                    %span.name System 1
                   .span6.actions
-                    %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#redesignNewCategory"}
+                .row-fluid.additional
+                  .span11
+                  .span1.actions
+                    %label &nbsp;
+                    %a#removeMe.widgetbtn.pull-right{:href => "#"}
+                      %i.icon-minus-sign
+              %li
+                .row-fluid
+                  .span6
+                    %span.system System Company
+                    %span.name System 2
+                  .span6.actions
+                    %a.widgetbtn.pull-right{:href => "#"}
                       %i.gcmsicon-edit-grey 
                 .row-fluid.additional
                   .span11
@@ -176,24 +133,10 @@
               %li
                 .row-fluid
                   .span6
-                    %span.company Access Control
-                    %span.name Authorization
+                    %span.system System Company
+                    %span.name System 3
                   .span6.actions
-                    %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#redesignNewCategory"}
-                      %i.gcmsicon-edit-grey 
-                .row-fluid.additional
-                  .span11
-                  .span1.actions
-                    %label &nbsp;
-                    %a#removeMe.widgetbtn.pull-right{:href => "#"}
-                      %i.icon-minus-sign
-              %li
-                .row-fluid
-                  .span6
-                    %span.company Access Control
-                    %span.name Authentication
-                  .span6.actions
-                    %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#redesignNewCategory"}
+                    %a.widgetbtn.pull-right{:href => "#"}
                       %i.gcmsicon-edit-grey 
                 .row-fluid.additional
                   .span11
@@ -202,4 +145,4 @@
                     %a#removeMe.widgetbtn.pull-right{:href => "#"}
                       %i.icon-minus-sign
               
-  =render :partial => 'design/templates/modalfooter'
+  =render :partial => 'design/templates/modalfooterlists'
