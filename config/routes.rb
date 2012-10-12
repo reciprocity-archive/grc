@@ -1,6 +1,6 @@
 CmsRails::Application.routes.draw do
 
-  resources :programs, :as => 'flow_programs', :only => [:index, :show, :new, :edit, :create, :update, :destroy] do
+  resources :programs, :as => 'flow_programs', :only => [:show, :new, :edit, :create, :update, :destroy] do
     collection do
       get 'import'
       post 'import'
@@ -67,6 +67,22 @@ CmsRails::Application.routes.draw do
     end
   end
 
+  resources :org_groups, :as => 'flow_org_groups', :only => [:index, :show, :new, :edit, :create, :update, :destroy] do
+    member do
+      get 'delete'
+      get 'tooltip'
+      get 'delete'
+    end
+  end
+
+  resources :locations, :as => 'flow_locations', :only => [:index, :show, :new, :edit, :create, :update, :destroy] do
+    member do
+      get 'delete'
+      get 'tooltip'
+      get 'delete'
+    end
+  end
+
   resources :accounts, :as => 'flow_accounts' do
     member do
       get 'delete'
@@ -107,6 +123,7 @@ CmsRails::Application.routes.draw do
     end
   end
 
+  match 'relationships' => 'programs#related'
   match 'programs_dash' => 'programs_dash#index'
   match 'quick/programs' => 'quick#programs'
   match 'quick/sections' => 'quick#sections'

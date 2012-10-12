@@ -1,0 +1,31 @@
+[
+  <% @results.each_with_index do |result, result_index| %>
+  {
+    "relationship_type" : {
+      "id" : <%= result[:relationship_type_id].to_json.html_safe %>,
+      "title" : <%= result[:relationship_title].to_json.html_safe %>,
+      "description" : <%= result[:relationship_description].to_json.html_safe %>,
+      "edit_url" : <%= result[:edit_url].to_json.html_safe %>
+    },
+    "related_objects" : [
+      <% result[:objects].each_with_index do |obj, index| %>
+        {
+          "url" : <%= (obj.class.table_name + "/1").to_json.html_safe %>,
+          "object": {
+            "type": <%= obj.class.to_s.to_json.html_safe %>,
+            "id": <%= obj.id.to_json.html_safe %>,
+            "slug" : <%= obj.slug.to_json.html_safe %>,
+            "title" : <%= obj.title.to_json.html_safe %>
+          }
+        }
+        <% if index != (result[:objects].count - 1)%>
+        ,
+        <% end %>
+      <% end %>
+    ]
+  }
+  <% if result_index != (@results.count - 1)%>
+  ,
+  <% end %>
+  <% end %>
+]

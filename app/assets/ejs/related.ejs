@@ -1,0 +1,110 @@
+<%#
+  Overall structure:
+
+  Relationship 1 (forward)
+    Relationship 1 (foward) type information
+    Relationship 1 (forward) objects
+  Relationship 1 (backward)
+    Relationship 1 (backward) type information
+    Relationship 1 (backward) objects
+
+  Example data:
+    [
+      {
+        "relationship_type" : {
+          "id" : "product_within_scope_of_program",
+          "title": "Products in scope of this program",
+          "description" : "Products that are within the scope of a program. This means that they need to pay attention to the program's appropriate sections and controls.",
+          "edit_url" : "relationships/foo?bar"
+        },
+        "related_objects" : [
+          {
+            "url" : "products/1",
+            "object": {
+              "type": "product",
+              "id": 1,
+              "slug" : "FOO1",
+              "title" : "A product"
+              }
+          },
+          {
+            "url" : "products/2",
+            "object": {
+              "type": "product",
+              "id": 1,
+              "slug" : "FOO1",
+              "title" : "A product"
+              }
+          }
+        ]
+      }
+    ]
+%>
+
+<%
+if (this.length) {
+  // Each relationship type
+  this.forEach(function(rel_data) {
+    // Add descriptive header
+    var rel_info = rel_data.relationship_type
+%>
+  <div class="row-fluid">
+    <h4 class="span12">
+      <%= rel_info.title %>
+      <a class="btn btn-blue addbtn fltrt" href="<%=rel_info.edit_url%>">Edit</a>
+    </h4>
+    <div class="row-fluid">
+      <div class="span12 audit subtitle">
+        <%= rel_info.description %>
+      </div>
+    </div>
+<%
+    // Iterate through all objects
+    var related_objects = rel_data.related_objects
+    if (related_objects.length) {
+      // Iterate through results
+      related_objects.forEach(function (object_info) {
+        // Set up the row, populate it with information.
+        var object = object_info.object
+%>
+    <div class= "row-fluid">
+      <ul class="span12">
+        <li class="controlSlot">
+          <a href="/<%= object_info.url %>" data-popover-href="/<%= object_info.url %>/tooltip" data-popover-trigger="sticky-hover">
+            <span class="controls-group">
+            </span>
+            <div class="row-fluid nominheight">
+              <div class="span4 nominheight">
+                <span class="controls-subgroup">
+                  <%= object.slug %>
+                </span>
+              </div>
+              <div class="span8 nominheight">
+                <span class="controls-subgroup">
+                  <%= object.title %>
+                </span>
+              </div>
+            </div>
+          </a>
+          <%#
+            Here, there should be type-specific summary data. It would
+            be nice if this were generated in a generic way rather than
+            being pushed up as a blob of text from the server.
+          %>
+        </li>
+      </ul>
+    </div>
+<%
+      })
+    } else {
+      // Do something useful with no results
+%>
+    <div>No results</div>
+<%
+    }
+%>
+  </div>
+<%
+  })
+}
+%>

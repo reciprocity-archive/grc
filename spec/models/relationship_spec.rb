@@ -6,8 +6,8 @@ describe Relationship do
     @product = FactoryGirl.create(:product)
     @maker_of = FactoryGirl.create(:relationship_type, :relationship_type => 'maker_of',
                               :description => 'The source is the maker of the destination',
-                              :forward_short_description => 'is the maker of',
-                              :backward_short_description => 'is made by')
+                              :forward_phrase => 'is the maker of',
+                              :backward_phrase => 'is made by')
     @rel = FactoryGirl.create(:relationship, :source => @program, :destination => @product, :relationship_type => @maker_of)
   end
 

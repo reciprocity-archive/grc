@@ -84,7 +84,7 @@ class ProductsController < ApplicationController
     @model_stats = []
     @relationship_stats = []
 
-    @relationship_stats << ['Relevant Program', @product.within_scope_of.count]
+    # FIXME: Automatically generate relationship stats
 
     respond_to do |format|
       format.json { render :json => @product.as_json(:root => nil) }

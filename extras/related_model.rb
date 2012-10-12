@@ -39,5 +39,15 @@ module RelatedModel
         :relationship_type_id => relationship_type_id
       })
     end
+
+    def valid_relationships
+      @valid_relationships
+    end
+
+    def related_models
+      @valid_relationships.reduce(Set.new) do |models, vr|
+        models.add(vr[:related_model])
+      end
+    end
   end
 end

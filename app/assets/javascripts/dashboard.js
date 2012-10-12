@@ -8,8 +8,8 @@
  *= require spin.min
  *= require tmpl
  *= require_self
- *= require impact
  *= require jquery.remotipart
+ *= require related
  */
 
 // Initialize delegated event handlers

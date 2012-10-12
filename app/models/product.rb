@@ -25,22 +25,24 @@ class Product < ActiveRecord::Base
   #
   # Various relationship-related helpers
   #
-  def add_within_scope_of(program)
-    Relationship.create(:source => program, :destination => self, :relationship_type_id => 'within_scope_of')
-  end
-
-  def within_scope_of_programs
-    Program.relevant_to(self)
-  end
-
-  def within_scope_of
-    within_scope_of_programs
-  end
-
-  def self.within_scope_of(program)
-    related_to_source(program, 'within_scope_of')
-  end
-
+  
+  @valid_relationships = [
+    { :relationship_type => :org_group_has_province_over_product,
+      :related_model => OrgGroup,
+      :related_model_endpoint => :source},
+    { :relationship_type =>:product_is_affiliated_with_product,
+      :related_model => Product,
+      :related_model_endpoint => :both},
+    { :relationship_type =>:product_is_dependent_on_location,
+      :related_model => Location,
+      :related_model_endpoint => :destination},
+    { :relationship_type =>:product_is_dependent_on_product,
+      :related_model => Product,
+      :related_model_endpoint => :both},
+    { :relationship_type => :program_is_relevant_to_product,
+      :related_model => Program,
+      :related_model_endpoint => :source}
+  ]
 
   def display_name
     slug

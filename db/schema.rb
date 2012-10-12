@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121004204518) do
+ActiveRecord::Schema.define(:version => 20121011220119) do
 
   create_table "accounts", :force => true do |t|
     t.string   "username"
@@ -114,6 +114,18 @@ ActiveRecord::Schema.define(:version => 20121004204518) do
     t.datetime "updated_at",     :null => false
   end
 
+  create_table "locations", :force => true do |t|
+    t.string   "slug"
+    t.string   "title"
+    t.text     "description"
+    t.string   "url"
+    t.integer  "modified_by_id"
+    t.datetime "start_date"
+    t.datetime "stop_date"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
   create_table "object_documents", :force => true do |t|
     t.string   "role"
     t.text     "notes"
@@ -149,6 +161,18 @@ ActiveRecord::Schema.define(:version => 20121004204518) do
     t.string   "title",          :null => false
     t.text     "description"
     t.integer  "modified_by_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "org_groups", :force => true do |t|
+    t.string   "slug"
+    t.string   "title"
+    t.text     "description"
+    t.string   "url"
+    t.integer  "modified_by_id"
+    t.datetime "start_date"
+    t.datetime "stop_date"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
@@ -202,10 +226,10 @@ ActiveRecord::Schema.define(:version => 20121004204518) do
   create_table "relationship_types", :id => false, :force => true do |t|
     t.string   "relationship_type"
     t.string   "description"
-    t.string   "forward_short_description"
-    t.string   "backward_short_description"
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+    t.string   "forward_phrase"
+    t.string   "backward_phrase"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
 
   add_index "relationship_types", ["relationship_type"], :name => "index_relationship_types_on_relationship_type", :unique => true

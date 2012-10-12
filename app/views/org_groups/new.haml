@@ -1,0 +1,7 @@
+-model_name = controller_name.singularize
+-instance = instance_variable_get("@" + model_name)
+
+=form_for instance, :url => method("flow_#{controller_name}_path").call, :method => :post, :remote => true do |f|
+  =render :partial => 'shared/form_model',
+          :layout  => 'layouts/form_modal',
+          :locals  => { :f => f }

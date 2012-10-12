@@ -30,12 +30,27 @@ $(document).ready(function() {
     $dest.scrollTop(0);
     $(spinner.el).css({ width: '100px', height: '100px', left: '50px', top: '50px' });
 
-    // FIXME: Handle data retrieval failure cleanly
-    $.getJSON(source, function(data) {
+
+    var successCallback = function(data) {
       // Empty and add data to the result node
       $dest.empty()
       $dest.append(can.view(template, data))
       $tab.data('last-loaded', Date.now())
+    }
+
+    var errorCallback = function(xhr, status, error) {
+      // Server error, display some debugging information.
+      $dest.empty()
+      $dest.append("Error: " + xhr.status + ":" + error)
+      $tab.data('last-loaded', Date.now())
+    }
+
+    $.ajax({
+      url: source,
+      dataType: 'json',
+      data: undefined,
+      success: successCallback,
+      error: errorCallback
     })
   }
 
@@ -58,5 +73,5 @@ $(document).ready(function() {
   }
 
   // Set up tab handlers and load the default tab(programs)
-  setup_ajax_tab('#impact')
+  setup_ajax_tab('#related')
 })

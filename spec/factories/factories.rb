@@ -172,6 +172,14 @@ FactoryGirl.define do
     title
   end
   
+  factory :org_group do
+    title
+  end
+
+  factory :location do
+    title
+  end
+
   factory :relationship_type do
   end
   factory :relationship do

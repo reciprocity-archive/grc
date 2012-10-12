@@ -26,26 +26,6 @@ class Program < ActiveRecord::Base
   validates :title,
     :presence => { :message => "needs a value" }
 
-  #
-  # Various relationship-related helpers
-  #
-  def add_relevant_to(product)
-    Relationship.create(:source => self, :destination => product, :relationship_type_id => 'within_scope_of')
-  end
-
-  def relevant_to_products
-    Product.within_scope_of(self)
-  end
-
-  def relevant_to
-    relevant_to_products
-  end
-
-  def self.relevant_to(product)
-    related_to_destination('within_scope_of', product)
-  end
-
-
   def display_name
     slug
   end

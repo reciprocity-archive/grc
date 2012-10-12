@@ -4,8 +4,8 @@ describe RelationshipType do
   before :each do
     @maker_of = FactoryGirl.create(:relationship_type, :relationship_type => 'maker_of',
                               :description => 'The source is the maker of the destination',
-                              :forward_short_description => 'is the maker of',
-                              :backward_short_description => 'is made by')
+                              :forward_phrase => 'is the maker of',
+                              :backward_phrase => 'is made by')
   end
 
   it 'find should work with string primary key' do

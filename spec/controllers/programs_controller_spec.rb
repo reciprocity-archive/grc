@@ -28,26 +28,6 @@ describe ProgramsController do
     it_behaves_like "an authorized action", ['import'], 'update_program'
   end
 
-  context "index" do
-    before :each do
-      login({}, {:role => 'superuser'})
-    end
-
-    it 'should return all programs' do
-      get 'index', :format => :json
-      assigns(:programs).count.should eq(2)
-    end
-    it 'should filter by relevant_to when provided' do
-      program1 = FactoryGirl.create(:program)
-      program2 = FactoryGirl.create(:program)
-      product = FactoryGirl.create(:product)
-      product.add_within_scope_of(program2)
-      get 'index', :format => :json, :relevant_to => product.id
-      assigns(:programs).count.should eq(1)
-      assigns(:programs).should eq([program2])
-    end
-  end
-
   context "show" do
     before :each do
       login({}, { :role => 'superuser' })
