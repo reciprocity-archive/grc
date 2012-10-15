@@ -13,6 +13,11 @@ gem 'thinking-sphinx'
 #gem 'gdata-ruby-util', '1.1.2'
 gem 'gdata_19', '~> 1.1.5', :require => 'gdata'
 
+platforms :jruby do
+  gem 'jruby-rack', '= 1.1.9'
+end
+
+
 platforms :ruby do
   group :development, :test do
     gem 'sqlite3'
