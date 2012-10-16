@@ -123,6 +123,12 @@ CmsRails::Application.routes.draw do
     end
   end
 
+  resources :relationships do
+    collection do
+      get 'related_objects'
+    end
+  end
+
   match 'relationships' => 'programs#related'
   match 'programs_dash' => 'programs_dash#index'
   match 'quick/programs' => 'quick#programs'

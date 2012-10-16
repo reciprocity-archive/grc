@@ -179,4 +179,184 @@ ActiveRecord::Base.transaction do
       Option.where(:role => k.to_s, :title => opt).first_or_create!
     end
   end
+
+  # Create the default relationship types
+  DefaultRelationshipTypes.create_only
+
+  # Create business objects - org groups, products, locations
+  # And relationships to other objects
+
+  org = OrgGroup.
+    where(:slug => 'ORGGROUP-SEED1').
+    first_or_create!({
+        :slug => 'ORGGROUP-SEED1',
+        :title => "Org Group 1", :description => 'An org group'},
+      :without_protection => true
+    )
+
+  org2 = OrgGroup.
+    where(:slug => 'ORGGROUP-SEED2').
+    first_or_create!({
+        :slug => 'ORGGROUP-SEED2',
+        :title => "Org Group 2", :description => 'Another org group'},
+      :without_protection => true
+    )
+
+  prod = Product.
+    where(:slug => 'PRODUCT-SEED1').
+    first_or_create!({
+        :slug => 'PRODUCT-SEED1',
+        :title => "Product 1", :description => 'A Product'},
+      :without_protection => true
+    )
+
+  prod2 = Product.
+    where(:slug => 'PRODUCT-SEED2').
+    first_or_create!({
+        :slug => 'PRODUCT-SEED2',
+        :title => "Product 2", :description => 'Another Product'},
+      :without_protection => true
+    )
+
+  prod3 = Product.
+    where(:slug => 'PRODUCT-SEED3').
+    first_or_create!({
+        :slug => 'PRODUCT-SEED3',
+        :title => "Product 3", :description => 'Dependent product'},
+      :without_protection => true
+    )
+
+  loc = Location.
+    where(:slug => 'LOCATION-SEED1').
+    first_or_create!({
+        :slug => 'LOCATION-SEED1',
+        :title => "Location 1", :description => 'A Location'},
+      :without_protection => true
+    )
+
+  loc2 = Location.
+    where(:slug => 'LOCATION-SEED2').
+    first_or_create!({
+        :slug => 'LOCATION-SEED2',
+        :title => "Location 2", :description => 'Another location'},
+      :without_protection => true
+    )
+
+  Relationship.
+    where(:relationship_type_id => 'org_group_has_province_over_location',
+      :source_type => org.class.to_s,
+      :source_id => org.id,
+      :destination_type => loc.class.to_s,
+      :destination_id => loc.id).
+    first_or_create!({
+        :relationship_type_id => 'org_group_has_province_over_location',
+        :source => org,
+        :destination => loc},
+      :without_protection => true
+    )
+
+  Relationship.
+    where(:relationship_type_id => 'org_group_is_affiliated_with_org_group',
+      :source_type => org.class.to_s,
+      :source_id => org.id,
+      :destination_type => org2.class.to_s,
+      :destination_id => org2.id).
+    first_or_create!({
+        :relationship_type_id => 'org_group_is_affiliated_with_org_group',
+        :source => org,
+        :destination => org2},
+      :without_protection => true
+    )
+
+  Relationship.
+    where(:relationship_type_id => 'org_group_is_dependent_on_location',
+      :source_type => org.class.to_s,
+      :source_id => org.id,
+      :destination_type => loc2.class.to_s,
+      :destination_id => loc2.id).
+    first_or_create!({
+        :relationship_type_id => 'org_group_is_dependent_on_location',
+        :source => org,
+        :destination => loc2},
+      :without_protection => true
+    )
+
+  Relationship.
+    where(:relationship_type_id => 'org_group_has_province_over_product',
+      :source_type => org.class.to_s,
+      :source_id => org.id,
+      :destination_type => prod.class.to_s,
+      :destination_id => prod.id).
+    first_or_create!({
+        :relationship_type_id => 'org_group_has_province_over_product',
+        :source => org,
+        :destination => prod},
+      :without_protection => true
+    )
+
+  Relationship.
+    where(:relationship_type_id => 'program_is_relevant_to_org_group',
+      :source_type => prog1.class.to_s,
+      :source_id => prog1.id,
+      :destination_type => org.class.to_s,
+      :destination_id => org.id).
+    first_or_create!({
+        :relationship_type_id => 'program_is_relevant_to_org_group',
+        :source => prog1,
+        :destination => org},
+      :without_protection => true
+    )
+
+  Relationship.
+    where(:relationship_type_id => 'product_is_affiliated_with_product',
+      :source_type => prod.class.to_s,
+      :source_id => prod.id,
+      :destination_type => prod2.class.to_s,
+      :destination_id => prod2.id).
+    first_or_create!({
+        :relationship_type_id => 'product_is_affiliated_with_product',
+        :source => prod,
+        :destination => prod2},
+      :without_protection => true
+    )
+
+  Relationship.
+    where(:relationship_type_id => 'product_is_dependent_on_location',
+      :source_type => prod.class.to_s,
+      :source_id => prod.id,
+      :destination_type => loc.class.to_s,
+      :destination_id => loc.id).
+    first_or_create!({
+        :relationship_type_id => 'product_is_dependent_on_location',
+        :source => prod,
+        :destination => loc},
+      :without_protection => true
+    )
+
+  Relationship.
+    where(:relationship_type_id => 'product_is_dependent_on_product',
+      :source_type => prod3.class.to_s,
+      :source_id => prod3.id,
+      :destination_type => prod.class.to_s,
+      :destination_id => prod.id).
+    first_or_create!({
+        :relationship_type_id => 'product_is_dependent_on_product',
+        :source => prod3,
+        :destination => prod},
+      :without_protection => true
+    )
+
+  Relationship.
+    where(:relationship_type_id => 'program_is_relevant_to_product',
+      :source_type => prog1.class.to_s,
+      :source_id => prog1.id,
+      :destination_type => prod.class.to_s,
+      :destination_id => prod.id).
+    first_or_create!({
+        :relationship_type_id => 'program_is_relevant_to_product',
+        :source => prog1,
+        :destination => prod},
+      :without_protection => true
+    )
+
 end

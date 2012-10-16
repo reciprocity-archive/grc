@@ -10,7 +10,7 @@
     "related_objects" : [
       <% result[:objects].each_with_index do |obj, index| %>
         {
-          "url" : <%= (obj.class.table_name + "/1").to_json.html_safe %>,
+          "url" : <%= "#{obj.class.table_name}/#{obj.id}".to_json.html_safe %>,
           "object": {
             "type": <%= obj.class.to_s.to_json.html_safe %>,
             "id": <%= obj.id.to_json.html_safe %>,

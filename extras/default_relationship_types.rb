@@ -5,7 +5,7 @@ module DefaultRelationshipTypes
       :relationship_type => 'location_is_dependent_on_location',
       :description => "Locations can be dependent on each other.",
       :forward_phrase =>"dependent on",
-      :backward_phrase => "that require"
+      :backward_phrase => "necessary for"
     },
     {
       :relationship_type => 'org_group_has_province_over_location',
@@ -29,7 +29,7 @@ module DefaultRelationshipTypes
       :relationship_type => 'org_group_is_dependent_on_location',
       :description => "Org groups can be dependent on locations.",
       :forward_phrase =>"dependent on",
-      :backward_phrase => "that require"
+      :backward_phrase => "necessary for"
     },
     {
       :relationship_type => 'product_is_affiliated_with_product',
@@ -41,13 +41,13 @@ module DefaultRelationshipTypes
       :relationship_type => 'product_is_dependent_on_location',
       :description => "Products can be dependent on locations.",
       :forward_phrase =>"dependent on",
-      :backward_phrase => "that require"
+      :backward_phrase => "necessary for"
     },
     {
       :relationship_type => 'product_is_dependent_on_product',
       :description => "Products can be dependent on products.",
       :forward_phrase =>"dependent on",
-      :backward_phrase => "that require"
+      :backward_phrase => "necessary for"
     },
     {
       :relationship_type => 'program_is_relevant_to_location',
@@ -69,10 +69,17 @@ module DefaultRelationshipTypes
     }
   ]
 
-  def self.create
+  def self.create_and_update
     RELATIONSHIP_TYPES.each do |rt|
       record = RelationshipType.find_or_create_by_relationship_type(rt[:relationship_type])
       record.update_attributes(rt, :without_protection => true)
+      record.save
+    end
+  end
+
+  def self.create_only
+    RELATIONSHIP_TYPES.each do |rt|
+      record = RelationshipType.first_or_create!(rt, :without_protection => true)
       record.save
     end
   end
