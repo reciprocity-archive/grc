@@ -1,0 +1,28 @@
+Warnings:
+
+-@messages.each do |m|
+  %p{ :class => 'label-warning' }
+    =m
+
+Errors:
+
+-@errors.keys.each do |slug|
+  %p{ :class => 'member-failure' }
+    =slug
+    =":"
+    =@errors[slug].join(", ")
+
+%p{ :class => 'member-success' }
+  Created:
+
+  =@creates.join(", ")
+
+%p{ :class => 'member-success' }
+  Updated:
+
+  =@updates.join(", ")
+
+-if params[:confirm].blank?
+  =submit_tag "Import", :name => 'confirm'
+-else
+  Import done.

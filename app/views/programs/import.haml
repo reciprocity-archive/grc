@@ -2,11 +2,9 @@
 
 -content_for :header do
   %ol#breadcrumb
-    %li=link_to @program.slug, flow_program_path(@program)
     %li Import
-  .location#pageTitle Import regulations for #{@program.title}
+  .location#pageTitle Import Program
 
 .row-static
   =render :partial => 'programs/import',
-          :layout => 'layouts/widget_box',
-          :locals => { :program => @program }
+          :layout => 'layouts/widget_box'

@@ -1,0 +1,7 @@
+Type,Bogus1,Code,Title,Description,Company,Version,Start,Stop,Kind,Audit-Start,Audit-Frequency,Audit-Duration
+Program,aaa,REG1,Reg 1,new description 1,false,,,,,,,
+
+Code,Title,Bogus2,Description
+REG1-SEC1,SEC 1,aaa,new description x
+REG1-SEC2,SEC 2,bbb,new description y
+REG1-SEC3-BAD,,bbb,new description z

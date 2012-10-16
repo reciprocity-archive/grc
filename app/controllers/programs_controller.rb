@@ -9,11 +9,14 @@ class ProgramsController < ApplicationController
   include ApplicationHelper
   include ProgramsHelper
 
+  PROGRAM_MAP = Hash[*%w(Type type Code slug Title title Description description Company company Version version Start start_date Stop stop_date Kind kind Audit-Start audit_start_date Audit-Frequency audit_frequency Audit-Duration audit_duration Created created_at Updated updated_at)]
+
+  SECTION_MAP = Hash[*%w(Code slug Title title Description description Notes notes Created created_at Updated updated_at)]
+
   # FIXME: Decide if the :section, controls, etc.
   # methods should be moved, and what access controls they
   # need.
   before_filter :load_program, :only => [:show,
-                                         :import,
                                          :export,
                                          :tooltip,
                                          :edit,
@@ -111,12 +114,17 @@ class ProgramsController < ApplicationController
         self.response.headers['Content-Type'] = 'text/csv'
         headers['Content-Disposition'] = "attachment; filename=\"#{@program.slug}.csv\""
         self.response_body = Enumerator.new do |out|
-          out << CSV.generate_line(%w(Type Code Title Description Company Version Start Stop Kind Audit-Start Audit-Frequency Audit-Duration Created Updated))
-          out << CSV.generate_line(["Program", @program.slug, @program.title, @program.description, @program.company?, @program.version, @program.start_date, @program.stop_date, @program.kind, @program.audit_start_date, @program.audit_frequency, @program.audit_duration, @program.created_at, @program.updated_at ])
+          out << CSV.generate_line(PROGRAM_MAP.keys)
+          keys = PROGRAM_MAP.keys
+          keys.shift
+          values = keys.map { |key| @program.send(PROGRAM_MAP[key]) }
+          values.unshift("Program")
+          out << CSV.generate_line(values)
           out << CSV.generate_line([])
-          out << CSV.generate_line(%w(Code Title Description Notes Created Updated))
+          out << CSV.generate_line(SECTION_MAP.keys)
           @program.sections.each do |s|
-            out << CSV.generate_line([s.slug, s.title, s.description, s.notes, s.created_at, s.updated_at])
+            values = SECTION_MAP.keys.map { |key| s.send(SECTION_MAP[key]) }
+            out << CSV.generate_line(values)
           end
         end
       end
@@ -151,6 +159,105 @@ class ProgramsController < ApplicationController
   end
 
   def import
+    upload = params["upload"]
+    if upload
+      file = upload.read
+      import = read_import(CSV.parse(file))
+      @messages = import[:messages]
+      do_import(import, params[:confirm].blank?)
+      @errors = import[:errors]
+      @creates = import[:creates]
+      @updates = import[:updates]
+      render 'import_result', :layout => false
+    end
+  end
+
+  def do_import(import, check_only)
+    import[:errors] = {}
+    import[:updates] = []
+    import[:creates] = []
+    attrs = import[:program]
+    attrs.delete(nil)
+    attrs.delete("created_at")
+    attrs.delete("updated_at")
+    slug = attrs["slug"]
+    if slug.blank?
+      import[:messages] << "missing program slug" unless key
+    else
+      @program = Program.find_by_slug(slug)
+      if @program
+        @program.assign_attributes(attrs, :without_protection => true)
+        import[:updates] << slug
+      else
+        @program = Program.new
+        @program.assign_attributes(attrs, :without_protection => true)
+        import[:creates] << slug
+      end
+      import[:errors][slug] = @program.errors.full_messages unless @program.valid?
+      @program.save unless check_only
+    end
+
+    import[:sections].each do |attrs|
+      attrs.delete(nil)
+      slug = attrs["slug"]
+      if slug.blank?
+        import[:messages] << "missing program slug" unless key
+      else
+        section = Section.find_by_slug(slug)
+        if section
+          section.assign_attributes(attrs, :without_protection => true)
+          import[:updates] << slug
+        else
+          section = Section.new
+          section.assign_attributes(attrs, :without_protection => true)
+          section.program = @program
+          import[:creates] << slug
+        end
+        import[:errors][slug] = section.errors.full_messages unless section.valid?
+        section.save unless check_only
+      end
+    end
+  end
+
+  def read_import(rows)
+    import = { :messages => [] }
+
+    raise "There must be at least 3 input lines" unless rows.size >= 4
+
+    program_headers = rows.shift.map do |heading|
+      if heading == "Type"
+        key = 'type'
+      else
+        key = PROGRAM_MAP[heading]
+        import[:messages] << "invalid program heading #{heading}" unless key
+      end
+      key
+    end
+
+    program_values = rows.shift
+
+    raise "First column must be Type" unless program_headers.shift == "type"
+    raise "Type must be Program" unless program_values.shift == "Program"
+
+    import[:program] = Hash[*program_headers.zip(program_values).flatten]
+
+    raise "There must be an empty separator row" unless rows.shift == []
+
+    section_headers = rows.shift.map do |heading|
+      key = SECTION_MAP[heading]
+      import[:messages] << "invalid section heading #{heading}" unless key
+      key
+    end
+
+    import[:sections] = rows.map do |section_values|
+      Hash[*section_headers.zip(section_values).flatten]
+    end
+
+    import
+  end
+
+  def perform_import(rows, actual)
+    puts rows.size
   end
 
   def tooltip
