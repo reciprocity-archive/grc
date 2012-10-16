@@ -28,7 +28,6 @@ jQuery(function ($) {
   //ACTUALLY renderout templates
 
   renderExternalTmpl({ name: 'help', selector: '#templates', data: {} });
-
   renderExternalTmpl({ name: 'confirm', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'comingsoon', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'newasset', selector: '#templates', data: {} });
@@ -264,15 +263,21 @@ jQuery(function ($) {
         $unassignedValue = parseInt($unassignedItems.html());
 
     if ( $this.closest(".modal-body").find("#currentList").hasClass('category-list') ) {
-      //Category lists do not have relationships
-      var $item2add = '<h6 class="itemstatus">JUST ADDED</h6>';
+      //Nothing
+      //Pending approval, nothing in additional info
+      var $item2add = '<h6 class="itemstatus">Added</h6>';
     } else if ($this.closest(".modal-body").find("#currentList").hasClass('people-list')) {
       //We gave relationships
+      //Pending approval, start-stop
       var $item2add = '<div class="btn-group inline"> <a class="span7 btn btn-danger btn-mini dropdown-toggle nominheight fltrt" data-toggle="dropdown"> Select Relationship <span class="caret"></span> </a> <ul class="dropdown-menu"> <li> <a href="#" id="makeAccountable"> is Accountable for </a> </li> <li> <a href="#" id="makeResponsible"> is Responsible for </a> </li> </ul> </div>';
     } else if ($this.closest(".modal-body").find("#currentList").hasClass('reference-list')) {
-       var $item2add = '<h6 class="itemstatus">JUST ADDED</h6>';
+      //Will have assignment items, nothing now.
+      //Pending approval, no start-stop
+       var $item2add = '<h6 class="itemstatus">Added</h6>';
     } else if ($this.closest(".modal-body").find("#currentList").hasClass('system-list')) {
-       var $item2add = '<h6 class="itemstatus">JUST ADDED</h6>';
+      //Will have assignment items, nothing now.
+      //Pending approval, no start-stop
+       var $item2add = '<h6 class="itemstatus">Added</h6>';
     }
     $this
       .removeClass("widgetbtn addme")

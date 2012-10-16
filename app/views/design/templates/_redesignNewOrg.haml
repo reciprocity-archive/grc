@@ -50,4 +50,4 @@
           %select#select01.span12.forminputsuccess
             %option OK - with issues
             %option Open
-  =render :partial => 'design/templates/modalfooter'
+  =render :partial => 'design/templates/modalfooter', :locals => { :shownote => false, :showcreated => true, :showrevs => true }

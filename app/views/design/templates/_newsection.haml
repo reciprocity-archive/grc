@@ -70,4 +70,4 @@
           %input#inputError.span12.forminputsuccess{:placeholder => "http://www.thisisaurl.com/thisurl", :type => "text"}/
           %br/
           %span.help-inline
-  =render :partial => 'design/templates/modalfooter'
+  =render :partial => 'design/templates/modalfooter', :locals => { :shownote => false, :showcreated => true, :showrevs => true }
