@@ -250,7 +250,7 @@
 
 
 .gcmsicon-x-grey {
-display: inline-block;
+  display: inline-block;
   background-image: url("../images/icons/grcicons/close.png");
   -moz-background-size:16px 16px;
              -ie-background-size:16px 16px;
@@ -264,6 +264,8 @@ display: inline-block;
 }
 
 .gcmsicon-add {
+
+  display: inline-block;
   background-image: url("../images/icons/grcicons/add.png");
  -moz-background-size:16px 16px;
              -ie-background-size:16px 16px;
