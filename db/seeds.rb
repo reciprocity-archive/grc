@@ -242,6 +242,22 @@ ActiveRecord::Base.transaction do
       :without_protection => true
     )
 
+  market = Market.
+    where(:slug => 'MARKET-SEED1').
+    first_or_create!({
+        :slug => 'MARKET-SEED1',
+        :title => "Market 1", :description => 'A Market'},
+      :without_protection => true
+    )
+
+  market2 = Market.
+    where(:slug => 'MARKET-SEED2').
+    first_or_create!({
+        :slug => 'MARKET-SEED2',
+        :title => "Market 2", :description => 'Another market'},
+      :without_protection => true
+    )
+
   Relationship.
     where(:relationship_type_id => 'org_group_has_province_over_location',
       :source_type => org.class.to_s,
@@ -356,6 +372,58 @@ ActiveRecord::Base.transaction do
         :relationship_type_id => 'program_is_relevant_to_product',
         :source => prog1,
         :destination => prod},
+      :without_protection => true
+    )
+
+  Relationship.
+    where(:relationship_type_id => 'market_contains_a_market',
+      :source_type => market.class.to_s,
+      :source_id => market.id,
+      :destination_type => market2.class.to_s,
+      :destination_id => market2.id).
+    first_or_create!({
+        :relationship_type_id => 'market_contains_a_market',
+        :source => market,
+        :destination => market2},
+      :without_protection => true
+    )
+
+  Relationship.
+    where(:relationship_type_id => 'market_is_dependent_on_location',
+      :source_type => market.class.to_s,
+      :source_id => market.id,
+      :destination_type => loc.class.to_s,
+      :destination_id => loc.id).
+    first_or_create!({
+        :relationship_type_id => 'market_is_dependent_on_location',
+        :source => market,
+        :destination => loc},
+      :without_protection => true
+    )
+
+  Relationship.
+    where(:relationship_type_id => 'org_group_has_province_over_market',
+      :source_type => org.class.to_s,
+      :source_id => org.id,
+      :destination_type => market.class.to_s,
+      :destination_id => market.id).
+    first_or_create!({
+        :relationship_type_id => 'org_group_has_province_over_market',
+        :source => org,
+        :destination => market},
+      :without_protection => true
+    )
+
+  Relationship.
+    where(:relationship_type_id => 'product_is_sold_into_market',
+      :source_type => prod.class.to_s,
+      :source_id => prod.id,
+      :destination_type => market.class.to_s,
+      :destination_id => market.id).
+    first_or_create!({
+        :relationship_type_id => 'product_is_sold_into_market',
+        :source => prod,
+        :destination => market},
       :without_protection => true
     )
 

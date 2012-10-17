@@ -39,6 +39,9 @@ class Product < ActiveRecord::Base
     { :relationship_type =>:product_is_dependent_on_product,
       :related_model => Product,
       :related_model_endpoint => :both},
+    { :relationship_type =>:product_is_sold_into_market,
+      :related_model => Market,
+      :related_model_endpoint => :destination},
     { :relationship_type => :program_is_relevant_to_product,
       :related_model => Program,
       :related_model_endpoint => :source}

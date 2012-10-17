@@ -75,7 +75,15 @@ CmsRails::Application.routes.draw do
     end
   end
 
-  resources :locations, :as => 'flow_locations', :only => [:index, :show, :new, :edit, :create, :update, :destroy] do
+  resources :locations, :as => 'flow_locations', :only => [:show, :new, :edit, :create, :update, :destroy] do
+    member do
+      get 'delete'
+      get 'tooltip'
+      get 'delete'
+    end
+  end
+
+  resources :markets, :as => 'flow_markets', :only => [:show, :new, :edit, :create, :update, :destroy] do
     member do
       get 'delete'
       get 'tooltip'

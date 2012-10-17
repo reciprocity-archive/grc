@@ -1,4 +1,4 @@
-class Location < ActiveRecord::Base
+class Market < ActiveRecord::Base
   include AuthoredModel
   include SluggedModel
   include SearchableModel
@@ -16,20 +16,17 @@ class Location < ActiveRecord::Base
     :presence => { :message => "needs a value" }
 
   @valid_relationships = [
-    { :relationship_type => :location_is_dependent_on_location,
-      :related_model => Location,
+    { :relationship_type =>:market_contains_a_market,
+      :related_model => Market,
       :related_model_endpoint => :both},
     { :relationship_type => :market_is_dependent_on_location,
-      :related_model => Market,
-      :related_model_endpoint => :source},
-     { :relationship_type => :org_group_has_province_over_location,
+      :related_model => Location,
+      :related_model_endpoint => :destination},
+    { :relationship_type => :org_group_has_province_over_market,
       :related_model => OrgGroup,
       :related_model_endpoint => :source},
-    { :relationship_type => :org_group_is_dependent_on_location,
-      :related_model => OrgGroup,
-      :related_model_endpoint => :source},
-    { :relationship_type =>:program_is_relevant_to_location,
-      :related_model => Program,
+    { :relationship_type => :product_is_sold_into_market,
+      :related_model => Product,
       :related_model_endpoint => :source}
   ]
 
