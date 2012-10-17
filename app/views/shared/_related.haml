@@ -9,7 +9,7 @@
       %ul
         -models.each do |model|
           -table_name = model.table_name
-          %li.btn.span4
+          %li.btn.tab-btn.span4
             %a.span12{:href => "#related-#{table_name}-pane",
               "data-toggle" => 'tab',
               "data-source" => url_for(:action => 'related_objects',

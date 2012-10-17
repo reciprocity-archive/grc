@@ -48,14 +48,16 @@ if (this.length) {
     // Add descriptive header
     var rel_info = rel_data.relationship_type
 %>
-  <div class="row-fluid">
-    <h4 class="span12">
+  <div class="itemswell">
+    <h4 class="nominheight">
       <%= rel_info.title %>
       <a class="btn btn-blue addbtn fltrt" href="<%=rel_info.edit_url%>">Edit</a>
     </h4>
     <div class="row-fluid">
-      <div class="span12 audit subtitle">
-        <%= rel_info.description %>
+      <div class="span12 captionbox">
+        <div class= "subtitle">
+          <%= rel_info.description %>
+        </div>
       </div>
     </div>
 <%
@@ -71,12 +73,23 @@ if (this.length) {
       <ul class="span12">
         <li class="controlSlot">
           <a href="/<%= object_info.url %>" data-popover-href="/<%= object_info.url %>/tooltip" data-popover-trigger="sticky-hover">
-            <span class="controls-group">
-            </span>
+<!--            <div class="row-fluid nominheight">
+              <div class="span6 nominheight">
+                <span class="controls-group">
+                United Kingdom
+                </span>
+              </div>
+              <div class="span6 nominheight">
+                <span class="btn minibtn pull-right">
+                Review
+                </span>
+              </div>
+            </div>
+-->
             <div class="row-fluid nominheight">
               <div class="span4 nominheight">
                 <span class="controls-subgroup">
-                  <%= object.slug %>
+                  <strong><%= object.slug %></strong>
                 </span>
               </div>
               <div class="span8 nominheight">
@@ -85,12 +98,10 @@ if (this.length) {
                 </span>
               </div>
             </div>
+            <div class="row-fluid nominheight summary">
+              No summary data
+            </div>
           </a>
-          <%#
-            Here, there should be type-specific summary data. It would
-            be nice if this were generated in a generic way rather than
-            being pushed up as a blob of text from the server.
-          %>
         </li>
       </ul>
     </div>

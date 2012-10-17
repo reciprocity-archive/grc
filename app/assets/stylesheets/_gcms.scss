@@ -1750,6 +1750,18 @@ margin-top:5px;
   vertical-align:text-top;
 }
 
+.tab-btn {
+  padding: 0px;
+  margin-right: 25px;
+}
+
+li a {
+  color: $textColor;
+}
+.btn a {
+  color: $textColor;
+}
+
 /* Uses TB's max-height to our advantage for spacing
 /*
 /* ex: impact/scope category groups */
