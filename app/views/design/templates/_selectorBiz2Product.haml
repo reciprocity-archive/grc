@@ -29,7 +29,6 @@
               .span12
                 .modal-search.clearfix  
                   .btn-group.closed 
-
                     .pull-right
                       %input{:type => "text", :placeholder => "Search Systems"}
                 .additional-filters.filter-group
@@ -42,9 +41,7 @@
                       %input.span12{:type=>"text", :placeholder => "example: IT"}
                     .span4
                       %label Title
-                      %input.span12{:type=>"text", :placeholder => "example: Compliance"}
-
-                            
+                      %input.span12{:type=>"text", :placeholder => "example: Compliance"}          
                 .tabbable.tabs-left
                   .tab-content
                     #System1.tab-pane.active
@@ -145,4 +142,4 @@
                     %a#removeMe.widgetbtn.pull-right{:href => "#"}
                       %i.icon-minus-sign
               
-  =render :partial => 'design/templates/modalfooter', :locals => { :shownote => false, :showcreated => true, :showrevs => true }, :showlist => 0
+  =render :partial => 'design/templates/modalfooter', :locals => { :shownote => false, :showcreated => false, :showrevs => false }
