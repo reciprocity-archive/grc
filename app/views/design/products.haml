@@ -9,14 +9,14 @@
 -content_for :page_help, 'changeme'
 
 -content_for :subheader_extras do
-  %h1#pageType.fltrt.highlighted Product
+  %h1#pageType.pull-right.highlighted Product
 
 .row-static
   .doubleColumn
     / .RegsandControls
     #RegsandControls.WidgetBox.fullHeight.doubleWide
       .WidgetBoxHeading
-        .fltrt
+        .pull-right
           %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
             %i.gcmsicon-questionmark-grey
           %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
@@ -25,7 +25,7 @@
         .WidgetTitle.doublewidth Regulation and Controls
       / /.WidgetBoxHeading
       .WidgetBoxContent
-        .fltrt
+        .pull-right
           %img{:alt => "Expand All", :src => "/images/expandAll.png"}/
           %img{:alt => "Shrink All", :src => "/images/shrinkAll.png"}/
         %ul#quicklinks.nav.nav-tabs
@@ -132,7 +132,7 @@
                   .bar.progressbar-warning{"data-percentage" => "35", :style => "float: right; width: 0%; "}
                 .row-fluid
                   .span6 Mar 1
-                  .span6.fltrt.txtrt June 31
+                  .span6.pull-right.txtrt June 31
               .span6
                 %label Requests
                 .progress.progress-striped.active
@@ -143,7 +143,7 @@
           / /* For discussion with Dan http://www.minddust.com/bootstrap-progressbar-demo/ *?
           #programinformation.row-fluid
             .span12
-              .span4.form-inline.control-group.fltrt
+              .span4.form-inline.control-group.pull-right
                 %label Code
                 %input{:disabled => "disabled", :placeholder => "SOX", :style => "margin: 0px; width: 45%;", :type => "text"}/
               .span8
@@ -170,7 +170,7 @@
             .span12
               %h3
                 References
-                %a.btn.btn-blue.addbtn.fltrt{"data-toggle" => "modal", :href => "#referenceSelectorModal"} Edit
+                %a.btn.btn-blue.addbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"} Edit
               %ul#referenceList
                 %li.controlSlot
                   %span.controls-group PDF
@@ -185,7 +185,7 @@
             .span12
               %h3
                 People
-                %a.btn.btn-blue.addbtn.fltrt{"data-toggle" => "modal", :href => "#peopleSelectorModal"} Edit
+                %a.btn.btn-blue.addbtn.pull-right{"data-toggle" => "modal", :href => "#peopleSelectorModal"} Edit
               %ul#peopleList
                 %li.controlSlot
                   %span.controls-group JRayburn@google.com
@@ -198,11 +198,11 @@
         %hr.hr-widget/
         .row-fluid.nominheight
           .span6.nominheight
-            %label.fltlft{:for => "control-effectivedate"}
+            %label.pull-left{:for => "control-effectivedate"}
               %strong> Created
               \: 03/15/2012 19:16
-          .span6.nominheight.fltrt
-            %label.fltrt{:for => "control-verificationdate"}
+          .span6.nominheight.pull-right
+            %label.pull-right{:for => "control-verificationdate"}
               %strong> Updated
               \: 04/12/2012 14:32
       / end of widget

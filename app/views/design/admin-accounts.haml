@@ -9,7 +9,7 @@
 -content_for :page_help, 'admin_accounts'
 
 -content_for :subheader_extras do
-  %h1#pageType.fltrt.highlighted Accounts and Roles
+  %h1#pageType.pull-right.highlighted Accounts and Roles
 
 .row-static
   .doubleColumn
@@ -23,7 +23,7 @@
         %ul.slugtree
           %li.row-fluid{:id => "content_PCI.A.0"}
             .collapsed.slot.regulationslot.span12.toggle{"data-target" => "#examplecontrols0", "data-toggle" => "collapse"}
-              %a.widgetbtn.fltrt{:href => "controls.htm", :style => "position:relative; top:-3px; margin-left:4px;"}
+              %a.widgetbtn.pull-right{:href => "controls.htm", :style => "position:relative; top:-3px; margin-left:4px;"}
                 %i.gcmsicon-arrowright-grey
               .expander
               %span.prefix PCI.A.1
@@ -49,7 +49,7 @@
           .span12
             .span6
               %h3 Program Managers
-            .span6.fltrt
+            .span6.pull-right
               %input.input-medium{:id => "", :placeholder => "Program Manager", :type => "text"}/
         .row-fluid
           .span12
@@ -60,7 +60,7 @@
           .span12
             .span6
               %h3 External Auditors
-            .span6.fltrt
+            .span6.pull-right
               %input.input-medium{:id => "", :placeholder => "External Auditor", :type => "text"}/
         .row-fluid
           .span12
@@ -71,7 +71,7 @@
           .span12
             .span6
               %h3 Analyst
-            .span6.fltrt
+            .span6.pull-right
               %input.input-medium{:id => "", :placeholder => "Analyst", :type => "text"}/
         .row-fluid
           .span12

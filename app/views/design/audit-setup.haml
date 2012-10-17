@@ -9,14 +9,14 @@
 -content_for :page_help, 'changeme'
 
 -content_for :subheader_extras do
-  %h1#pageType.fltrt.highlighted Audit Setup
+  %h1#pageType.pull-right.highlighted Audit Setup
 
 .row-static
   .doubleColumn
     / .RegsandControls
     #RegsandControls.WidgetBox.fullHeight.doubleWide
       .WidgetBoxHeading
-        .fltrt
+        .pull-right
           %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
             %i.gcmsicon-questionmark-grey
           %a.widgettextbtn{"data-toggle" => "modal", :href => "#newsectionModal"} Edit Regulations
@@ -34,8 +34,8 @@
             %a{"data-toggle" => "tab", :href => "#xRegulation"} Regulation Sections
           %li.active
             %a{"data-toggle" => "tab", :href => "#xControls"} Controls
-          %li.fltrt
-            .progress.fltrt{:style => "width:160px;"}
+          %li.pull-right
+            .progress.pull-right{:style => "width:160px;"}
               .bar.progressbar-success{"data-percentage" => "5", :style => "float: left; width: 0%; "} 5%
               .bar.progressbar-danger{"data-percentage" => "58", :style => "float: right; width: 0%; "} 58%
               .bar.progressbar-warning{"data-percentage" => "35", :style => "float: right; width: 0%; "} 35%
@@ -89,7 +89,7 @@
                 %li.accordion-toggle{"data-toggle" => "collapse", :href => "#demo16", :id => "content_PCI.1.1.5"}
                   .expander
                   %a{:href => "#"}/
-                  .greyOut.fltrt
+                  .greyOut.pull-right
                     %i.gcmssmallicon-dash-white
                   = succeed "130k" do
                     %span.prefix Item 1
@@ -101,7 +101,7 @@
               %li.accordion-toggle{"data-toggle" => "collapse", :href => "#demo15", :id => "content_PCI.1.1.5"}
                 .expander
                 %a{:href => "#"}/
-                .greyOut.fltrt
+                .greyOut.pull-right
                   %i.gcmssmallicon-dash-white
                 = succeed "20k" do
                   %span.prefix Item 2
@@ -131,16 +131,16 @@
               Systems
             .span6
               .row-fluid
-                .span2.fltrt
-                .span4.fltrt
+                .span2.pull-right
+                .span4.pull-right
                   %label.fltnone
                     %strong Verified
                   .badge.badge-success.fltnone 197
-                .span3.fltrt
+                .span3.pull-right
                   %label.fltnone
                     %strong Pend
                   .badge.badge-warning.fltnone 33
-                .span3.fltrt
+                .span3.pull-right
                   %label.fltnone
                     %strong Out
                   .badge.badge-important.fltnone 9
@@ -205,19 +205,19 @@
             %hr.hr-widget/
             .row-fluid.nominheight
               .span3.nominheight
-                %label.fltlft{:for => "control-effectivedate"}
+                %label.pull-left{:for => "control-effectivedate"}
                   %strong> Products
                   \: 3
               .span3.nominheight
-                %label.fltlft{:for => "control-effectivedate"}
+                %label.pull-left{:for => "control-effectivedate"}
                   %strong> Biz Areas
                   \: 2
               .span3.nominheight
-                %label.fltlft{:for => "control-effectivedate"}
+                %label.pull-left{:for => "control-effectivedate"}
                   %strong> Biz Process
                   \: 9
               .span3.nominheight
-                %label.fltlft{:for => "control-effectivedate"}
+                %label.pull-left{:for => "control-effectivedate"}
                   %strong> Systems
                   \: 239
       / end ipactscope

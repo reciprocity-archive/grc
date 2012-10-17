@@ -1,3 +1,5 @@
+
+
 .modal {
   max-height: 720px;
   width: 720px;
@@ -144,11 +146,12 @@
 }
 
 .modal-info {
-  background:#f0f0f0;
-  border-top:1px solid $borderDefault;
-  padding:10px 10px 0 10px;
-  font-size:11px;
-  color:#999;
+  background: #E1E1E2;
+  border-top: 1px solid #E1E1E1;
+  padding: 3px 20px 5px 20px;
+  font-size: 11px;
+  color: #777;
+  height:16px;
   .status {
     text-align:right;
     strong {
@@ -158,7 +161,20 @@
       color:#333;
     }
   }
+
 }
+
+
+  .object-info { 
+    text-align: justify; 
+  }
+  .object-info > span { 
+    display: inline-block; 
+  }
+  .object-info > span.force-wrap { 
+    width: 100%; 
+  }​
+  
 
 .modal-footer {
   padding:10px;

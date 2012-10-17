@@ -9,7 +9,7 @@
 -content_for :page_help, 'changeme'
 
 -content_for :subheader_extras do
-  %h1#pageType.fltrt.highlighted Auditor Dashboard
+  %h1#pageType.pull-right.highlighted Auditor Dashboard
 
 -content_for :header_buttons do
   .btn-group.last
@@ -20,7 +20,7 @@
     / .RegsandControls
     .WidgetBox.fullHeight.doubleWide
       .WidgetBoxHeading
-        .fltrt
+        .pull-right
           /
             <a href="#comingsoonModal" class="widgetbtn" data-toggle="modal"><i class="gcmsicon-questionmark-grey"></i></a>
             <a href="#newsectionModal" data-toggle="modal"  class="widgettextbtn">Edit Regulations</a>
@@ -33,7 +33,7 @@
           .span7
           .span2.well
             .fltnone Requests
-          .span3.well.fltrt
+          .span3.well.pull-right
             .fltnone Target Systems
         .row-fluid
           .span7
@@ -80,7 +80,7 @@
             .span12
               %h3
                 References
-                %a.btn.btn-blue.addbtn.fltrt{"data-toggle" => "modal", :href => "#referenceSelectorModal"} Edit
+                %a.btn.btn-blue.addbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"} Edit
               %ul#referenceList
                 %li.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
                   .controls-group
@@ -97,7 +97,7 @@
             .span12
               %h3
                 Responsible Parties
-                %a.btn.btn-blue.addbtn.fltrt{"data-toggle" => "modal", :href => "#peopleSelectorModal"} Edit
+                %a.btn.btn-blue.addbtn.pull-right{"data-toggle" => "modal", :href => "#peopleSelectorModal"} Edit
               %ul#peopleList
                 %li.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
                   .controls-group

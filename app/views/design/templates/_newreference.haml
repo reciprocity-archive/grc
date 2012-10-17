@@ -5,59 +5,90 @@
         %i.gcmsicon-questionmark-grey
       %a.widgetbtn{"data-dismiss" => "modal", :href => "#"}
         %i.gcmsicon-x-grey
-    %h1 Create New Reference
+    %h1 
+      Create New Reference
+      %span.version v 0.91
   .modal-body
     %form.form-inline
       / start row
       .row-fluid
-        .span6
+        .span4
           .span12.control-group
             %label{:for => "inputError"} Title
-            %input#inputError.span12{:placeholder => "Complete Title Goes Here", :type => "text"}/
+            %input#inputError.span12{:placeholder => "Enter the title of this reference", :type => "text"}/
             %br/
             %span.help-inline
-        .span3.form-inline.control-group
-          .form-inline.control-group
-            %label{:for => "control-code"} Year
-            %br/
-            %input#control-code.inputtext-small{:placeholder => "2012", :type => "text"}/
-            %span.help-inline
-        .span3.form-inline.control-group
-          %label{:for => "select01"} Type
-          %br/
+        .span2.control-group
+          %label{:for => "selectyear"}Year
           .controls
-            %select#select01.input-small
+            %select.span12#selectyear
+              %option 2012
+              %option 2011
+              %option 2010
+              %option 2009
+              %option 2008
+          %span.help-inline
+        .span2.control-group
+          %label{:for => "selectlanguage"}Language
+          .controls
+            %select.span12#selectlanguage
+              %option English
+              %option French
+              %option German
+              %option Muppet
+          %span.help-inline
+        .span2.control-group
+          %label{:for => "selectedkind"}Reference Kind
+          .controls
+            %select.span12#selectedkind
+              %option -
+              %option Website
+              %option Screenshot
+              %option Simple Text
+              %option Document
+              %option Numeric Data
+              %option Database       
+          %span.help-inline
+        .span2.control-group
+          %label{:for => "selectdoctype"} DocType
+          .controls
+            %select.span12#selectdoctype
+              %option -
+              %option URL
               %option PDF
-              %option 22
-              %option 3
-              %option 4
-              %option 5
-          %br/
+              %option Image
+              %option Text
+              %option Excel
+              %option Word
           %span.help-inline
       .row-fluid
-        .span6
+        .span12
           %label{:for => "select01"} Description
-          %br/
-          %textarea#control-description.span12{:placeholder => "", :rows => "4"}
-            :preserve
-              Hendrerit dolus nullus nimis pneum abico quibus, vulputate, macto, autem vulputate. Qui, sagaciter letalis eum quae interdico iriure, eum. Praesent, jus importunus capio abdo velit genitus. Luptatum zelus meus illum, eros capto nulla in augue ymo quod ibidem.
-          :javascript
-            $('#control-description').wysihtml5({
-              "image": false //Button to insert an image. Default true
-            });
-          %span.help-inline.description
-        .span3.form-inline.control-group
-          %label{:for => "select01"} Language
-          %br/
-          %input#control-version.inputtext-small{:placeholder => "English", :type => "text"}/
-          %span.help-inline
+          .row-fluid
+            .span12.well
+              %textarea#reference-description.span12{:placeholder => "", :rows => "4"}
+                :preserve
+                  Hendrerit dolus nullus nimis pneum abico quibus, vulputate, macto, autem vulputate. Qui, sagaciter letalis eum quae interdico iriure, eum. Praesent, jus importunus capio abdo velit genitus. Luptatum zelus meus illum, eros capto nulla in augue ymo quod ibidem.
+              -#:javascript
+                $('#reference-description').wysihtml5({
+                  "image": false //Button to insert an image. Default true
+                });
+              %span.help-inline.description
+        
       / end row
       .row-fluid
-        .span6.control-group
+        .span12.control-group
           %label{:for => "inputError"} URL
-          %input#inputError.span12{:placeholder => "Complete Title Goes Here", :type => "text"}/
+          %input#inputError.span12{:placeholder => "Enter URL to document", :type => "text"}/
           %br/
           %span.help-inline
-        .span3.form-inline.control-group
-          %a.btn.btn-large.btn-success{"data-dismiss" => "modal", :href => "#comingsoonModal"} Attach
+        -#.span6
+          %label{:for => "select01"} File 
+          .row-fluid.form-inline.control-group
+            .span12.well
+              .span4
+              .span4
+                %a.span12.btn.btn-large.btn-info{"data-dismiss" => "modal", :href => "#comingsoonModal"} Attach
+              .span4
+          
   =render :partial => 'design/templates/modalfooter', :locals => { :shownote => false, :showcreated => true, :showrevs => true }

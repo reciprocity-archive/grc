@@ -1,4 +1,4 @@
-#selectorBiz2System.modal.modal-wide.hide.fade
+#selectorThreat2Biz.modal.modal-wide.hide.fade
   .modal-header
     %nav
       %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
@@ -6,8 +6,8 @@
       %a.widgetbtn{"data-dismiss" => "modal", :href => "#"}
         %i.gcmsicon-x-grey
     %h1
-      Link %Link-to-type% to link to this System
-      %span.version v 0.32
+      Link Risky Attribute to this %biz object%
+      %span.version v 0.33
   .modal-body
     .alert.alert-info
       %span#alertMessage
@@ -15,23 +15,24 @@
     %form
       .row-fluid
         .span6
-
           %h4
-            Select %Link-to-type% to link
+            Select Risky Attribute
+            .widgetbtn.widgetbtnselector{"data-dismiss" => "modal", :href => "#"}
+              %i.gcmsicon-add
             .WidgetBoxHeading.pull-right
-              %input{:type => "text", :placeholder => "Search %Link-to-type%s"}
-          
+              %input{:type => "text", :placeholder => "Search Threats"}
+
           .filter-block
           
             .row-fluid
               .tabbable.tabs-left
-                -#%ul.nav.nav-tabs
+                %ul.nav.nav-tabs
                   %li.active 
                     %a{:href => "#bizobj1", "data-toggle" => "tab"}
-                      Biz Object 1
+                      Threat Objects
                   %li 
                     %a{:href => "#bizobj2", "data-toggle" => "tab"}
-                      Biz Object 2
+                      Threat Items
                 .tab-content
                   #bizobj1.tab-pane.active
                     #currentList1.system-list
@@ -80,38 +81,48 @@
                               %a.widgetbtn.pull-right{:href => "#"}
                                 %i.gcmsicon-edit-grey
         .span6
-          %h4 %Link-to-type%s linked to this System
-          .system-list.currentlist
+          %h4 Risky Attributes of this %biz object%
+          .system-list.targetlist
             %ul.target
               %li
                 .row-fluid
-                  .span6  
+                  .span6
                     %span.system Sub-System Company
                     %span.name System 1
                   .span6.actions
+                .row-fluid.additional
+                  .span11
+                  .span1.actions
+                    %label &nbsp;
                     %a#removeMe.widgetbtn.pull-right{:href => "#"}
                       %i.icon-minus-sign
-                    %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#redesignNewCategory"}
-                      %i.gcmsicon-edit-grey 
               %li
                 .row-fluid
                   .span6
                     %span.system System Company
                     %span.name System 2
                   .span6.actions
+                    %a.widgetbtn.pull-right{:href => "#"}
+                      %i.gcmsicon-edit-grey 
+                .row-fluid.additional
+                  .span11
+                  .span1.actions
+                    %label &nbsp;
                     %a#removeMe.widgetbtn.pull-right{:href => "#"}
                       %i.icon-minus-sign
-                    %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#redesignNewCategory"}
-                      %i.gcmsicon-edit-grey 
               %li
                 .row-fluid
                   .span6
                     %span.system System Company
                     %span.name System 3
                   .span6.actions
+                    %a.widgetbtn.pull-right{:href => "#"}
+                      %i.gcmsicon-edit-grey 
+                .row-fluid.additional
+                  .span11
+                  .span1.actions
+                    %label &nbsp;
                     %a#removeMe.widgetbtn.pull-right{:href => "#"}
                       %i.icon-minus-sign
-                    %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#redesignNewCategory"}
-                      %i.gcmsicon-edit-grey 
               
   =render :partial => 'design/templates/modalfooter', :locals => { :shownote => false, :showcreated => false, :showrevs => false }

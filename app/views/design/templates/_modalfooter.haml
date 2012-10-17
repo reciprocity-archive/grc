@@ -1,48 +1,49 @@
-.modal-info
-  -if showcreated == true
-    .row-fluid
-      .span9
-        %strong Created:
-        %span 4/1/11
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        %strong Updated:
-        %span#updatedDate 4/1/11
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        %strong Last Editor:
-        %span Joss Rayburn
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        %strong.demoText Approved by:
-        %span.demoText P. Taylor
-      .span3.status
-        %h5
-          Status:
-          %span#statusValue Draft
-  -if shownote  == true
-    .row-fluid
-      .span9
-        %strong Note:
-        %span You need to assign relationship to all people in the list.
-      .span3.status
-        %h5
-          Relationship Selections Pending:
-          %span#unassignedElements 3  
+-if (shownote == true || showcreated == true)
+  .modal-info
+    -if showcreated == true
+      .row-fluid.object-info
+        %span
+          %strong Created:
+          %span 09/13/12
+        %span
+          %strong Updated:
+          %span.updatedDate 10/02/12
+        %span
+          %strong Last Editor:
+          %span root@t.com
+        %span.status
+          %h5
+            Status:
+            %span.statusValue Active
+        %span.force-wrap
+    -if shownote  == true
+      .row-fluid.object-info
+        .span9
+          %strong Note:
+          %span You need to assign relationship to all people in the list.
+        .span3.status
+          %h5
+            Relationship Selections Pending:
+            %span#unassignedElements 3  
 .modal-footer
   -if showrevs == true
     .row-fluid
-      %nav.fltlft.txtlft.span3
+      %nav.pull-left.txtlft.span3
         %a.btn.btn-large.btn-info{"data-dismiss" => "modal", :href => "#"} Cancel
         %a.btn.btn-large.btn-warning{"data-dismiss" => "modal", :href => "#"} Delete
-      .toolbar-widget.span6.demoItem
-        %a.btn{:href => "#"}
+      .toolbar-widget.span6
+        -#%a.btn{:href => "#"}
           %i.gcmsicon-arrowleft-black
-        %span.btnwell Showing Most Recent of 3 Revisions
-        %a.btn{:href => "#"}
+        %a View Edit History
+        -#%span.btnwell Showing Most Recent of 3 Revisions
+        -#%a.btn{:href => "#"}
           %i.gcmsicon-arrowright-black
-      %nav.fltrt.txtrt.span3
+      %nav.pull-right.txtrt.span3
         %a#actionButton.btn.btn-large.btn-success.btn-primary{:href => "#", "data-dismiss" => "modal"} Save
   -else
     .row-fluid
-      %nav.fltlft.txtlft.span3
+      %nav.pull-left.txtlft.span3
         %a.btn.btn-large.btn-info{"data-dismiss" => "modal", :href => "#"} Cancel
-      %nav.fltrt.txtrt.span3
+      .span6
+      %nav.pull-right.txtrt.span3
         %a#actionButton.btn.btn-large.btn-success{:href => "#", "data-dismiss" => "modal"} Save
