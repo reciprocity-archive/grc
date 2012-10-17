@@ -7,7 +7,7 @@
         %i.gcmsicon-x-grey
     %h1
       Select Business Object
-      %span.version v.0.10
+      %span.version v 0.23
   .modal-body
     .alert.alert-info
       %span#alertMessage
@@ -15,36 +15,31 @@
     %form
       .row-fluid
         .span6
-
           %h4
             Add Business Object
-            .fltrt
-              %a.btn.btn-blue.addbtn.fltrt.new{:href => "#"}
-                %i          
-                Create Business Object
+            .widgetbtn.widgetbtnselector{"data-dismiss" => "modal", :href => "#"}
+              %i.gcmsicon-add
+            .WidgetBoxHeading.pull-right
+              %input{:type => "text", :placeholder => "Search Business Objects"}
 
           .filter-block
           
             .row-fluid
               .span12
-                .modal-search.clearfix  
-                  .btn-group.closed 
-
-                    .pull-right
-                      %input{:type => "text", :placeholder => "Search Systems"}
-                .additional-filters.filter-group
-                  .row-fluid
-                    .span4
-                      %label System Name
-                      %input.span12{:type=>"text", :placeholder => "enter name"}
-                    .span4
-                      %label Org. group
-                      %input.span12{:type=>"text", :placeholder => "example: IT"}
-                    .span4
-                      %label Title
-                      %input.span12{:type=>"text", :placeholder => "example: Compliance"}
-
                             
+                .modal-search.clearfix  
+                  .additional-filters.filter-group
+                    .row-fluid
+                      .span4
+                        %label System Name
+                        %input.span12{:type=>"text", :placeholder => "enter name"}
+                      .span4
+                        %label Org. group
+                        %input.span12{:type=>"text", :placeholder => "example: IT"}
+                      .span4
+                        %label Title
+                        %input.span12{:type=>"text", :placeholder => "example: Compliance"}
+
                 .tabbable.tabs-left
                   .tab-content
                     #System1.tab-pane.active
@@ -101,7 +96,7 @@
                                 %a.widgetbtn.pull-right{:href => "#"}
                                   %i.gcmsicon-edit-grey
         .span6
-          %h4 Objects for this system
+          %h4 Objects for this System
           .system-list.targetlist
             %ul.target
               %li
@@ -145,4 +140,4 @@
                     %a#removeMe.widgetbtn.pull-right{:href => "#"}
                       %i.icon-minus-sign
               
-  =render :partial => 'design/templates/modalfooter', :locals => { :shownote => false, :showcreated => true, :showrevs => true }
+  =render :partial => 'design/templates/modalfooter', :locals => { :shownote => false, :showcreated => false, :showrevs => false }

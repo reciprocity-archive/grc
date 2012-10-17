@@ -1,4 +1,4 @@
-#selectorReference.modal.modal-wide.hide.fade
+#selectorSystem.modal.modal-wide.hide.fade
   .modal-header
     %nav
       %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
@@ -6,8 +6,8 @@
       %a.widgetbtn{"data-dismiss" => "modal", :href => "#"}
         %i.gcmsicon-x-grey
     %h1
-      Select Reference
-      %span.version v0.89
+      Select Control
+      %span.version v0.10
   .modal-body
     .alert.alert-info
       %span#alertMessage
@@ -15,29 +15,27 @@
     %form
       .row-fluid
         .span6
-
           %h4
-            Add Reference
+            Add Control
             .widgetbtn.pull-right.widgetbtnselector{"data-dismiss" => "modal", :href => "#"}
               %i.gcmsicon-add
             .WidgetBoxHeading.pull-right
-              %input{:type => "text", :placeholder => "Search References"}
+              %input{:type => "text", :placeholder => "Search Controls"}
 
           .filter-block
           
             .row-fluid
               .span12
-                            
                 .tabbable.tabs-left
                   .tab-content
-                    #category1.tab-pane.active
-                      #currentList.reference-list
+                    #System1.tab-pane.active
+                      #currentList.system-list.short
                         %ul.source
                           %li
                             .row-fluid
                               .span8
-                                %span.company Scan
-                                %span.name Evidence
+                                %span.system System Company
+                                %span.name System 1
                               .span4.actions                
                                 %a.widgetbtn.pull-right.add-me{:href => "#"}
                                   %i.grcicon-chevron-right
@@ -46,9 +44,9 @@
                           %li
                             .row-fluid
                               .span8
-                                %span.company PDF
-                                %span.name David Buick
-                              .span4.actions                
+                                %span.system System Company
+                                %span.name System 2
+                              .span4.actions              
                                 %a.widgetbtn.pull-right.add-me{:href => "#"}
                                   %i.grcicon-chevron-right 
                                 %a.widgetbtn.pull-right{:href => "#"}
@@ -56,8 +54,18 @@
                           %li
                             .row-fluid
                               .span8
-                                %span.company PDF
-                                %span.name Niki Lauda
+                                %span.system System Company
+                                %span.name System 3
+                              .span4.actions       
+                                %a.widgetbtn.pull-right.add-me{:href => "#"}
+                                  %i.grcicon-chevron-right
+                                %a.widgetbtn.pull-right{:href => "#"}
+                                  %i.gcmsicon-edit-grey
+                          %li
+                            .row-fluid
+                              .span8
+                                %span.system System Company
+                                %span.name System 4
                               .span4.actions                
                                 %a.widgetbtn.pull-right.add-me{:href => "#"}
                                   %i.grcicon-chevron-right
@@ -66,68 +74,46 @@
                           %li
                             .row-fluid
                               .span8
-                                %span.company PDF
-                                %span.name Daniel Harms
-                              .span4.actions                
-                                %a.widgetbtn.pull-right.add-me{:href => "#"}
-                                  %i.grcicon-chevron-right
-                                %a.widgetbtn.pull-right{:href => "#"}
-                                  %i.gcmsicon-edit-grey
-                          %li
-                            .row-fluid
-                              .span8
-                                %span.company PDF
-                                %span.name David Buick
+                                %span.system System Company
+                                %span.name System 5
                               .span4.actions                
                                 %a.widgetbtn.pull-right.add-me{:href => "#"}
                                   %i.grcicon-chevron-right 
                                 %a.widgetbtn.pull-right{:href => "#"}
                                   %i.gcmsicon-edit-grey
-
-                    
         .span6
-          %h4 Associated References
-          .people-list.currentlist
+          %h4 Controls for this system
+          .system-list.targetList
             %ul.target
               %li
                 .row-fluid
                   .span6
-                    %span.company PDF
-                    %span.name Business Plans
-                  .span6.actions          
+                    %span.system System Company
+                    %span.name System 1
+                  .span6.actions
                     %a#removeMe.widgetbtn.pull-right{:href => "#"}
                       %i.icon-minus-sign
-                    %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#newreference"}
-                      %i.gcmsicon-edit-grey
-                    %h6.statustextgreen PENDING 
-                .row-fluid.additional
-                  .span4
-                  .span8
+                    %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#redesignNewCategory"}
+                      %i.gcmsicon-edit-grey 
               %li
                 .row-fluid
                   .span6
-                    %span.company PDF
-                    %span.name Document
-                  .span6.actions   
+                    %span.system System Company
+                    %span.name System 2
+                  .span6.actions
                     %a#removeMe.widgetbtn.pull-right{:href => "#"}
                       %i.icon-minus-sign
-                    %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#newreference"}
-                      %i.gcmsicon-edit-grey
-                    %h6.statustextred ERROR 
-                .row-fluid.additional
-                  .span4
-                  .span8
+                    %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#redesignNewCategory"}
+                      %i.gcmsicon-edit-grey 
               %li
                 .row-fluid
                   .span6
-                    %span.company PDF
-                    %span.name Document
-                  .span6.actions 
+                    %span.system System Company
+                    %span.name System 3
+                  .span6.actions
                     %a#removeMe.widgetbtn.pull-right{:href => "#"}
                       %i.icon-minus-sign
-                    %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#newreference"}
-                      %i.gcmsicon-edit-grey
-                .row-fluid.additional
-                  .span4  
-                  .span8
-  =render :partial => 'design/templates/modalfooter', :locals => { :shownote => false, :showcreated => false, :showrevs => false }
+                    %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#redesignNewCategory"}
+                      %i.gcmsicon-edit-grey 
+              
+  =render :partial => 'design/templates/modalfooter', :locals => { :shownote => false, :showcreated => true, :showrevs => true }, :locals => { :shownote => false, :showcreated => false, :showrevs => false }

@@ -7,41 +7,27 @@
         %i.gcmsicon-x-grey
     %h1
       Select Person
-      %span.version v.81
+      %span.version v0.89
   .modal-body
     .alert.alert-info
       %span#alertMessage
       %button.close{:type => "button", :"data-dismiss" => "alert"} ×
     %form
       .row-fluid
-        .span6
+        .span5
 
           %h4
-            Add People
-            .fltrt
-              %a.btn.btn-blue.addbtn.fltrt.new{:href => "#"}
-                %i.icon-user.icon-white              
-                Add Person
+            Add Person
+            .widgetbtn.widgetbtnselector{"data-dismiss" => "modal", :href => "#"}
+              %i.gcmsicon-add
+            .WidgetBoxHeading.pull-right
+              %input{:type => "text", :placeholder => "Search Person"}
+
 
           .filter-block
           
             .row-fluid
               .span12
-                .modal-search.clearfix  
-                  .btn-group.closed 
-                    %a#filterButton.btn.dropdown-toggle{"data-toggle" => "dropdown"}
-                      GRC Directory
-                      %span.caret
-                    %ul.dropdown-menu
-                      %li
-                        %a#showCompanyDirectory{:href => "#"}
-                          Company Directory
-                      %li
-                        %a#showGRCDirectory{:href => "#"}
-                          GRC Directory
-
-                    .pull-right
-                      %input{:type => "text", :placeholder => "Search GRC Directory"}
                 .additional-filters.filter-group
                   .row-fluid
                     .span4
@@ -58,7 +44,7 @@
                 .tabbable.tabs-left
                   .tab-content
                     #category1.tab-pane.active
-                      .people-list.short
+                      .people-list
                         %ul.source
                           %li
                             .row-fluid
@@ -166,7 +152,7 @@
                                   %i.grcicon-chevron-right 
                                 %a.widgetbtn.pull-right{:href => "#"}
                                   %i.gcmsicon-edit-grey
-        .span6
+        .span7
           %h4 Roles for this system
           .people-list.currentlist
             %ul.target
@@ -176,6 +162,8 @@
                     %span.company Google
                     %span.name Joss Rayburn
                   .span6.actions
+                    %a#removeMe.widgetbtn.pull-right{:href => "#"}
+                      %i.icon-minus-sign
                     %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#newperson"}
                       %i.gcmsicon-edit-grey
                     .btn-group.inline
@@ -205,16 +193,14 @@
                     %input.span12.date#datepicker-stopdate-jossrayburn{:type => "text", :placeholder => "MM/DD/YYYY"}
                     :javascript
                       $('#datepicker-stopdate-jossrayburn').datepicker();
-                  .span1.actions
-                    %label &nbsp;
-                    %a#removeMe.widgetbtn.pull-right{:href => "#"}
-                      %i.icon-minus-sign
               %li
                 .row-fluid
                   .span6
                     %span.company Google
                     %span.name Pending Lady Smith
                   .span6.actions
+                    %a#removeMe.widgetbtn.pull-right{:href => "#"}
+                      %i.icon-minus-sign
                     %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#newperson"}
                       %i.gcmsicon-edit-grey
                     .btn-group.inline
@@ -244,16 +230,14 @@
                     %input.span12.date#datepicker-stopdate-jossrayburn{:type => "text", :placeholder => "MM/DD/YYYY"}
                     :javascript
                       $('#datepicker-stopdate-jossrayburn').datepicker();
-                  .span1.actions
-                    %label &nbsp;
-                    %a#removeMe.widgetbtn.pull-right{:href => "#"}
-                      %i.icon-minus-sign
               %li
                 .row-fluid
                   .span6
                     %span.company Google
                     %span.name Fired Guy Pierce
                   .span6.actions
+                    %a#removeMe.widgetbtn.pull-right{:href => "#"}
+                      %i.icon-minus-sign
                     %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#newperson"}
                       %i.gcmsicon-edit-grey
                     .btn-group.inline
@@ -283,8 +267,4 @@
                     %input.span12.date#datepicker-stopdate-jossrayburn{:type => "text", :placeholder => "MM/DD/YYYY"}
                     :javascript
                       $('#datepicker-stopdate-jossrayburn').datepicker();
-                  .span1.actions
-                    %label &nbsp;
-                    %a#removeMe.widgetbtn.pull-right{:href => "#"}
-                      %i.icon-minus-sign
-  =render :partial => 'design/templates/modalfooter', :locals => { :shownote => false, :showcreated => true, :showrevs => true }, :locals => { :shownote => false, :showcreated => true, :showrevs => false}
+  =render :partial => 'design/templates/modalfooter', :locals => { :shownote => false, :showcreated => false, :showrevs => false }

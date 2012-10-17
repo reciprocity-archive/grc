@@ -7,7 +7,7 @@
         %i.gcmsicon-x-grey
     %h1
       Select System
-      %span.version v.91
+      %span.version v0.92
   .modal-body
     .alert.alert-info
       %span#alertMessage
@@ -15,40 +15,22 @@
     %form
       .row-fluid
         .span6
-
           %h4
             Add System
-            .fltrt
-              %a.btn.btn-blue.addbtn.fltrt.new{:href => "#"}
-                %i          
-                Create System
+            .widgetbtn.pull-right.widgetbtnselector{"data-dismiss" => "modal", :href => "#"}
+              %i.gcmsicon-add
+            .WidgetBoxHeading.pull-right
+              %input{:type => "text", :placeholder => "Search Systems"}
 
           .filter-block
           
             .row-fluid
               .span12
-                .modal-search.clearfix  
-                  .btn-group.closed 
-
-                    .pull-right
-                      %input{:type => "text", :placeholder => "Search Systems"}
-                .additional-filters.filter-group
-                  .row-fluid
-                    .span4
-                      %label System Name
-                      %input.span12{:type=>"text", :placeholder => "enter name"}
-                    .span4
-                      %label Org. group
-                      %input.span12{:type=>"text", :placeholder => "example: IT"}
-                    .span4
-                      %label Title
-                      %input.span12{:type=>"text", :placeholder => "example: Compliance"}
-
                             
                 .tabbable.tabs-left
                   .tab-content
                     #System1.tab-pane.active
-                      #currentList.system-list.short
+                      #currentList.system-list
                         %ul.source
                           %li
                             .row-fluid
@@ -101,7 +83,7 @@
                                 %a.widgetbtn.pull-right{:href => "#"}
                                   %i.gcmsicon-edit-grey
         .span6
-          %h4 Categories for this system
+          %h4 Sub-systems for this system
           .system-list.targetList
             %ul.target
               %li
@@ -110,39 +92,29 @@
                     %span.system System Company
                     %span.name System 1
                   .span6.actions
-                .row-fluid.additional
-                  .span11
-                  .span1.actions
-                    %label &nbsp;
                     %a#removeMe.widgetbtn.pull-right{:href => "#"}
                       %i.icon-minus-sign
+                    %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#redesignNewCategory"}
+                      %i.gcmsicon-edit-grey 
               %li
                 .row-fluid
                   .span6
                     %span.system System Company
                     %span.name System 2
                   .span6.actions
-                    %a.widgetbtn.pull-right{:href => "#"}
-                      %i.gcmsicon-edit-grey 
-                .row-fluid.additional
-                  .span11
-                  .span1.actions
-                    %label &nbsp;
                     %a#removeMe.widgetbtn.pull-right{:href => "#"}
                       %i.icon-minus-sign
+                    %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#redesignNewCategory"}
+                      %i.gcmsicon-edit-grey 
               %li
                 .row-fluid
                   .span6
                     %span.system System Company
                     %span.name System 3
                   .span6.actions
-                    %a.widgetbtn.pull-right{:href => "#"}
-                      %i.gcmsicon-edit-grey 
-                .row-fluid.additional
-                  .span11
-                  .span1.actions
-                    %label &nbsp;
                     %a#removeMe.widgetbtn.pull-right{:href => "#"}
                       %i.icon-minus-sign
+                    %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#redesignNewCategory"}
+                      %i.gcmsicon-edit-grey 
               
   =render :partial => 'design/templates/modalfooter', :locals => { :shownote => false, :showcreated => true, :showrevs => true }, :locals => { :shownote => false, :showcreated => false, :showrevs => false }

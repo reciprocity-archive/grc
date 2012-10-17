@@ -58,6 +58,8 @@ jQuery(function ($) {
 
   renderExternalTmpl({ name: 'selectorCategory', selector: '#templates', data: {} });
 
+  renderExternalTmpl({ name: 'selectorControl', selector: '#templates', data: {} });
+
   // new modals START
   renderExternalTmpl({ name: 'redesignNewProgram', selector: '#templates', data: {} });
   
@@ -262,6 +264,7 @@ jQuery(function ($) {
         $unassignedItems = $("#unassignedElements"),
         $unassignedValue = parseInt($unassignedItems.html());
 
+        var $additionalinfo = "";
     if ( $this.closest(".modal-body").find("#currentList").hasClass('category-list') ) {
       //Nothing
       //Pending approval, nothing in additional info
@@ -270,6 +273,7 @@ jQuery(function ($) {
       //We gave relationships
       //Pending approval, start-stop
       var $item2add = '<div class="btn-group inline"> <a class="span7 btn btn-danger btn-mini dropdown-toggle nominheight fltrt" data-toggle="dropdown"> Select Relationship <span class="caret"></span> </a> <ul class="dropdown-menu"> <li> <a href="#" id="makeAccountable"> is Accountable for </a> </li> <li> <a href="#" id="makeResponsible"> is Responsible for </a> </li> </ul> </div>';
+      var $additionalinfo = '<div class="row-fluid additional"> <div class="span4"></div> <div class="span4"> <label>Start Date (Optional)</label> <input class="span12 date" id="datepicker-stopdate-rd" placeholder="MM/DD/YYYY" type="text"> </div> <div class="span4"> <label>Stop Date (Optional)</label> <input class="span12 date" id="datepicker-stopdate-rd" placeholder="MM/DD/YYYY" type="text"> </div>';
     } else if ($this.closest(".modal-body").find("#currentList").hasClass('reference-list')) {
       //Will have assignment items, nothing now.
       //Pending approval, no start-stop
@@ -286,7 +290,7 @@ jQuery(function ($) {
       .removeClass("grcicon-chevron-right")
       .addClass("grcicon-check-green")
     $target
-      .prepend('<li class="new-item"> <div class="row-fluid"> <div class="span6"> <span class="company">' + $company + '</span> <span class="name">'+ $name +'</span> </div> <div class="span6 actions">  <a class="widgetbtn pull-right" id="removeMe" href="#"> <i class="icon-minus-sign"></i> </a> <a class="widgetbtn pull-right" href="#"> <i class="gcmsicon-edit-grey"></i> </a> ' + $item2add + '</div> </div> <div class="row-fluid additional"> <div class="span4"></div> <div class="span4"> <label>Start Date (Optional)</label> <input class="span12 date" id="datepicker-stopdate-rd" placeholder="MM/DD/YYYY" type="text"> </div> <div class="span4"> <label>Stop Date (Optional)</label> <input class="span12 date" id="datepicker-stopdate-rd" placeholder="MM/DD/YYYY" type="text"> </div> </div> </li>')
+      .prepend('<li class="new-item"> <div class="row-fluid"> <div class="span6"> <span class="company">' + $company + '</span> <span class="name">'+ $name +'</span> </div> <div class="span6 actions">  <a class="widgetbtn pull-right" id="removeMe" href="#"> <i class="icon-minus-sign"></i> </a> <a class="widgetbtn pull-right" href="#"> <i class="gcmsicon-edit-grey"></i> </a> ' + $item2add + '</div> </div>' + $additionalinfo +' </div> </li>')
       .find("li.new-item").hide().fadeIn('slow').removeClass("new-item");  
     $unassignedItems
       .html($unassignedValue + 1).fadeIn();
