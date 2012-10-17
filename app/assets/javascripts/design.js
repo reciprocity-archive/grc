@@ -53,16 +53,12 @@ jQuery(function ($) {
   renderExternalTmpl({ name: 'selectorSystem', selector: '#templates', data: {} });
 
   renderExternalTmpl({ name: 'selectorBiz2System', selector: '#templates', data: {} });
-
   renderExternalTmpl({ name: 'selectorBiz2Product', selector: '#templates', data: {} });
-
   renderExternalTmpl({ name: 'selectorCategory', selector: '#templates', data: {} });
-
   renderExternalTmpl({ name: 'selectorControl', selector: '#templates', data: {} });
 
   // new modals START
   renderExternalTmpl({ name: 'redesignNewProgram', selector: '#templates', data: {} });
-  
   renderExternalTmpl({ name: 'redesignNewControlWide', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'redesignNewSectionWide', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'redesignNewOrg', selector: '#templates', data: {} });
@@ -73,15 +69,10 @@ jQuery(function ($) {
 
   // new modals END
   renderExternalTmpl({ name: 'newpersonBasic', selector: '#templates', data: {} });
-
   renderExternalTmpl({ name: 'newtransaction', selector: '#templates', data: {} });
-
   renderExternalTmpl({ name: 'auditdefaultscope', selector: '#templates', data: {} });
-
   renderExternalTmpl({ name: 'sendauditorinvite', selector: '#templates', data: {} });
-
   renderExternalTmpl({ name: 'neauditscheduleitem', selector: '#templates', data: {} });
-
   renderExternalTmpl({ name: 'auditmeetingnotice', selector: '#templates', data: {} });
 
 
@@ -90,13 +81,8 @@ jQuery(function ($) {
   renderExternalTmpl({ name: 'exampleregulations', selector: '#Regulation', data: {} });
   renderExternalTmpl({ name: 'exampleauditorrequests', selector: '#requests', data: {} });
   renderExternalTmpl({ name: 'examplesysproc', selector: '#sysproc', data: {} });
-
   renderExternalTmpl({ name: 'examplecombo', selector: '#Combo', data: {} });
-
-
   renderExternalTmpl({ name: 'exampleSampledata', selector: '#sampleData', data: {} });
-
-
   renderExternalTmpl({ name: 'auditstatus', selector: '#auditstatus', data: {} });
 
   $(document).on("click", "#expand_all", function(event) {

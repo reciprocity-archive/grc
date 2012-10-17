@@ -1,4 +1,4 @@
-#selectorSystem.modal.modal-wide.hide.fade
+#selectorControl.modal.modal-wide.hide.fade
   .modal-header
     %nav
       %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
@@ -17,7 +17,7 @@
         .span6
           %h4
             Add Control
-            .widgetbtn.pull-right.widgetbtnselector{"data-dismiss" => "modal", :href => "#"}
+            .widgetbtn.widgetbtnselector{"data-dismiss" => "modal", :href => "#"}
               %i.gcmsicon-add
             .WidgetBoxHeading.pull-right
               %input{:type => "text", :placeholder => "Search Controls"}
@@ -116,4 +116,4 @@
                     %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#redesignNewCategory"}
                       %i.gcmsicon-edit-grey 
               
-  =render :partial => 'design/templates/modalfooter', :locals => { :shownote => false, :showcreated => true, :showrevs => true }, :locals => { :shownote => false, :showcreated => false, :showrevs => false }
+  =render :partial => 'design/templates/modalfooter', :locals => { :shownote => false, :showcreated => false, :showrevs => false }
