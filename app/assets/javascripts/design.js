@@ -59,6 +59,8 @@ jQuery(function ($) {
 
   // new modals START
   renderExternalTmpl({ name: 'redesignNewProgram', selector: '#templates', data: {} });
+
+  renderExternalTmpl({ name: 'redesignNewCategory', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'redesignNewControlWide', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'redesignNewSectionWide', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'redesignNewOrg', selector: '#templates', data: {} });
