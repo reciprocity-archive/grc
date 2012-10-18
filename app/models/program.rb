@@ -26,6 +26,22 @@ class Program < ActiveRecord::Base
   validates :title,
     :presence => { :message => "needs a value" }
 
+  #
+  # Various relationship-related helpers
+  #
+
+  @valid_relationships = [
+    { :relationship_type =>:program_is_relevant_to_location,
+      :related_model => Location,
+      :related_model_endpoint => :destination},
+    { :relationship_type => :program_is_relevant_to_org_group,
+      :related_model => OrgGroup,
+      :related_model_endpoint => :destination},
+    { :relationship_type => :program_is_relevant_to_product,
+      :related_model => Product,
+      :related_model_endpoint => :destination}
+  ]
+
   def display_name
     slug
   end

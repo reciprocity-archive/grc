@@ -3,6 +3,8 @@
 # Normally an owner or otherwise responsbile for an audit function.
 class Person < ActiveRecord::Base
   include AuthoredModel
+  include AuthorizedModel
+  include RelatedModel
 
   attr_accessible :email, :name, :company, :language
 
