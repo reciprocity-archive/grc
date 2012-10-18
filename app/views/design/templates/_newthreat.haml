@@ -11,26 +11,27 @@
       .span2.form-inline.control-group
         %label{:for => "control-program"} Code
         %br/
-        %input#control-program.inputtext-small.forminputsuccess{:placeholder => "BUILD-43", :type => "text"}/
+        %input#control-program.span12.forminputsuccess{:placeholder => "BUILD-43", :type => "text"}/
         %br/
         %span.help-inline
-      .span4.form-inline.control-group
+      .span2.form-inline.control-group
         %label{:for => "control-code"} Name
         %br/
-        %input#control-code.input.forminputsuccess{:placeholder => "", :type => "text", :value => "Building"}/
+        %input#control-code.span12.forminputsuccess{:placeholder => "", :type => "text", :value => "Building"}/
         %br/
         %span.help-inline
       .span2.form-inline.control-group
         %label{:for => "control-version"} Version
         %br/
-        %input#control-version.input-supermini.forminputsuccess{:placeholder => "4.3", :type => "text"}/
+        %input#control-version.span12.forminputsuccess{:placeholder => "4.3", :type => "text"}/
         %br/
         %span.help-inline
-      .span4.form-inline.control-group.fltrt
+      .span2
+      .span2.form-inline.control-group
         %label{:for => "select01"} Type
         %br/
-        .controls
-          %select#select01.inputtext-small
+        .controls.span12
+          %select#select01.span12
             %option List Table
             %option 2
             %option 3
@@ -38,4 +39,16 @@
             %option 5
         %br/
         %span.help-inline
-  =render :partial => 'design/templates/modalfooter', :locals => { :shownote => false, :showcreated => true, :showrevs => true }
+      .span2.form-inline.control-group
+        %label{:for => "select01"} Kind
+        %br/
+        .controls.span12
+          %select#select01.span12
+            %option List Table
+            %option 2
+            %option 3
+            %option 4
+            %option 5
+        %br/
+        %span.help-inline
+  =render :partial => 'design/templates/modalfooter', :locals => { :shownote => false, :showcreated => false, :showrevs => false }
