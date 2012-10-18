@@ -1,4 +1,4 @@
-#selectorBiz2System.modal.modal-wide.hide.fade
+#selectorThreat2Biz.modal.modal-wide.hide.fade
   .modal-header
     %nav
       %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
@@ -6,7 +6,7 @@
       %a.widgetbtn{"data-dismiss" => "modal", :href => "#"}
         %i.gcmsicon-x-grey
     %h1
-      Select Business Object
+      Select Threat
       %span.version v 0.23
   .modal-body
     .alert.alert-info
@@ -16,11 +16,11 @@
       .row-fluid
         .span6
           %h4
-            Add Business Object
+            Add Threat
             .widgetbtn.widgetbtnselector{"data-dismiss" => "modal", :href => "#"}
               %i.gcmsicon-add
             .WidgetBoxHeading.pull-right
-              %input{:type => "text", :placeholder => "Search Business Objects"}
+              %input{:type => "text", :placeholder => "Search Threats"}
 
           .filter-block
           
@@ -29,10 +29,10 @@
                 %ul.nav.nav-tabs
                   %li.active 
                     %a{:href => "#bizobj1", "data-toggle" => "tab"}
-                      Biz Object 1
+                      Threat Objects
                   %li 
                     %a{:href => "#bizobj2", "data-toggle" => "tab"}
-                      Biz Object 2
+                      Threat Items
                 .tab-content
                   #bizobj1.tab-pane.active
                     #currentList1.system-list
@@ -81,7 +81,7 @@
                               %a.widgetbtn.pull-right{:href => "#"}
                                 %i.gcmsicon-edit-grey
         .span6
-          %h4 Objects for this System
+          %h4 Threats for this Business Object
           .system-list.targetlist
             %ul.target
               %li

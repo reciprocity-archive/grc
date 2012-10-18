@@ -7,7 +7,7 @@
         %i.gcmsicon-x-grey
     %h1
       Select Business Object
-      %span.version v 0.10
+      %span.version v 0.23
   .modal-body
     .alert.alert-info
       %span#alertMessage
@@ -26,77 +26,61 @@
           .filter-block
           
             .row-fluid
-              .span12
-                .modal-search.clearfix  
-                  .btn-group.closed 
-                    .pull-right
-                      %input{:type => "text", :placeholder => "Search Systems"}
-                .additional-filters.filter-group
-                  .row-fluid
-                    .span4
-                      %label System Name
-                      %input.span12{:type=>"text", :placeholder => "enter name"}
-                    .span4
-                      %label Org. group
-                      %input.span12{:type=>"text", :placeholder => "example: IT"}
-                    .span4
-                      %label Title
-                      %input.span12{:type=>"text", :placeholder => "example: Compliance"}          
-                .tabbable.tabs-left
-                  .tab-content
-                    #System1.tab-pane.active
-                      .people-list.short
-                        %ul.source
-                          %li
-                            .row-fluid
-                              .span8
-                                %span.system System Company
-                                %span.name System 1
-                              .span4.actions                
-                                %a.widgetbtn.pull-right.add-me{:href => "#"}
-                                  %i.grcicon-chevron-right
-                                %a.widgetbtn.pull-right{:href => "#"}
-                                  %i.gcmsicon-edit-grey
-                          %li
-                            .row-fluid
-                              .span8
-                                %span.system System Company
-                                %span.name System 2
-                              .span4.actions              
-                                %a.widgetbtn.pull-right.add-me{:href => "#"}
-                                  %i.grcicon-chevron-right 
-                                %a.widgetbtn.pull-right{:href => "#"}
-                                  %i.gcmsicon-edit-grey
-                          %li
-                            .row-fluid
-                              .span8
-                                %span.system System Company
-                                %span.name System 3
-                              .span4.actions       
-                                %a.widgetbtn.pull-right.add-me{:href => "#"}
-                                  %i.grcicon-chevron-right
-                                %a.widgetbtn.pull-right{:href => "#"}
-                                  %i.gcmsicon-edit-grey
-                          %li
-                            .row-fluid
-                              .span8
-                                %span.system System Company
-                                %span.name System 4
-                              .span4.actions                
-                                %a.widgetbtn.pull-right.add-me{:href => "#"}
-                                  %i.grcicon-chevron-right
-                                %a.widgetbtn.pull-right{:href => "#"}
-                                  %i.gcmsicon-edit-grey
-                          %li
-                            .row-fluid
-                              .span8
-                                %span.system System Company
-                                %span.name System 5
-                              .span4.actions                
-                                %a.widgetbtn.pull-right.add-me{:href => "#"}
-                                  %i.grcicon-chevron-right 
-                                %a.widgetbtn.pull-right{:href => "#"}
-                                  %i.gcmsicon-edit-grey
+              .tabbable.tabs-left
+                %ul.nav.nav-tabs
+                  %li.active 
+                    %a{:href => "#bizobj1", "data-toggle" => "tab"}
+                      Biz Object 1
+                  %li 
+                    %a{:href => "#bizobj2", "data-toggle" => "tab"}
+                      Biz Object 2
+                .tab-content
+                  #bizobj1.tab-pane.active
+                    #currentList1.system-list
+                      %ul.source
+                        %li
+                          .row-fluid
+                            .span8
+                              %span.system System Company
+                              %span.name System 1
+                            .span4.actions                
+                              %a.widgetbtn.pull-right.add-me{:href => "#"}
+                                %i.grcicon-chevron-right
+                              %a.widgetbtn.pull-right{:href => "#"}
+                                %i.gcmsicon-edit-grey
+                        %li
+                          .row-fluid
+                            .span8
+                              %span.system System Company
+                              %span.name System 2
+                            .span4.actions              
+                              %a.widgetbtn.pull-right.add-me{:href => "#"}
+                                %i.grcicon-chevron-right 
+                              %a.widgetbtn.pull-right{:href => "#"}
+                                %i.gcmsicon-edit-grey
+                        %li
+                          .row-fluid
+                            .span8
+                              %span.system System Company
+                              %span.name System 3
+                            .span4.actions       
+                              %a.widgetbtn.pull-right.add-me{:href => "#"}
+                                %i.grcicon-chevron-right
+                              %a.widgetbtn.pull-right{:href => "#"}
+                                %i.gcmsicon-edit-grey
+                  #bizobj2.tab-pane
+                    #currentList2.system-list
+                      %ul.source
+                        %li
+                          .row-fluid
+                            .span8
+                              %span.system System Company
+                              %span.name System 1
+                            .span4.actions                
+                              %a.widgetbtn.pull-right.add-me{:href => "#"}
+                                %i.grcicon-chevron-right
+                              %a.widgetbtn.pull-right{:href => "#"}
+                                %i.gcmsicon-edit-grey
         .span6
           %h4 Objects for this system
           .system-list.currentlist

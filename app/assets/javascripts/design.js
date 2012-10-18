@@ -36,8 +36,6 @@ jQuery(function ($) {
   renderExternalTmpl({ name: 'newsystem', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'newcontrol', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'auditcycle', selector: '#templates', data: {} });
-  renderExternalTmpl({ name: 'peopleselector', selector: '#templates', data: {} });
-  renderExternalTmpl({ name: 'referenceselector', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'newperson', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'newreference', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'newentity', selector: '#templates', data: {} });
@@ -51,15 +49,15 @@ jQuery(function ($) {
   renderExternalTmpl({ name: 'selectorPerson', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'selectorReference', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'selectorSystem', selector: '#templates', data: {} });
-
   renderExternalTmpl({ name: 'selectorBiz2System', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'selectorBiz2Product', selector: '#templates', data: {} });
+  
+  renderExternalTmpl({ name: 'selectorThreat2Biz', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'selectorCategory', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'selectorControl', selector: '#templates', data: {} });
 
   // new modals START
   renderExternalTmpl({ name: 'redesignNewProgram', selector: '#templates', data: {} });
-
   renderExternalTmpl({ name: 'redesignNewCategory', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'redesignNewControlWide', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'redesignNewSectionWide', selector: '#templates', data: {} });
@@ -68,7 +66,6 @@ jQuery(function ($) {
   renderExternalTmpl({ name: 'redesignNewSystem', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'redesignNewBizProcess', selector: '#templates', data: {} });
 
-
   // new modals END
   renderExternalTmpl({ name: 'newpersonBasic', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'newtransaction', selector: '#templates', data: {} });
@@ -76,7 +73,6 @@ jQuery(function ($) {
   renderExternalTmpl({ name: 'sendauditorinvite', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'neauditscheduleitem', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'auditmeetingnotice', selector: '#templates', data: {} });
-
 
   //<!-- Content templates ->
   renderExternalTmpl({ name: 'examplecontrols', selector: '#Controls', data: {} });
