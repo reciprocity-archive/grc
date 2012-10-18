@@ -5,5 +5,7 @@
   %ul.nav.nav-tabs.nav-stacked
     -@accounts.each do |account|
       %li
+        %a.widgetbtn.fltrt{ :'data-form-target' => "refresh", :'data-modal-reset' => "reset", :'data-toggle' => "modal-ajax-form", :href => edit_flow_account_path(account), :'data-target' => "#ajax-modal-people-3-edit" }
+          %i.gcmsicon-edit-grey
         =link_to '#' do #flow_account_path(account), 'data-popover-href' => tooltip_flow_account_path(account)
           =account.name || account.username || account.email

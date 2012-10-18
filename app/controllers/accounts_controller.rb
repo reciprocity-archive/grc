@@ -43,6 +43,7 @@ class AccountsController < ApplicationController
     respond_to do |format|
       if @account.save
         flash[:notice] = "Successfully created a new account."
+        format.json { render :json => @account.as_json(:root => nil), :location => flow_account_path(@account) }
         format.html { ajax_refresh }
       else
         flash[:error] = @account.errors.full_messages
@@ -52,9 +53,13 @@ class AccountsController < ApplicationController
   end
 
   def update
+    role = params[:account].delete(:role)
+    @account.role = role
+
     respond_to do |format|
       if @account.authored_update(current_user, params[:account])
         flash[:notice] = "Successfully updated the account."
+        format.json { render :json => @account.as_json(:root => nil), :location => flow_account_path(@account) }
         format.html { ajax_refresh }
       else
         flash[:error] = @account.errors.full_messages
