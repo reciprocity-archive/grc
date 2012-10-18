@@ -5,7 +5,9 @@
         %i.gcmsicon-questionmark-grey
       %a.widgetbtn{"data-dismiss" => "modal", :href => "#"}
         %i.gcmsicon-x-grey
-    %h1 Create New Reference
+    %h1 
+      Create New Reference
+      %span.version v 0.90
   .modal-body
     %form.form-inline
       / start row
@@ -58,6 +60,13 @@
           %input#inputError.span12{:placeholder => "Complete Title Goes Here", :type => "text"}/
           %br/
           %span.help-inline
-        .span3.form-inline.control-group
-          %a.btn.btn-large.btn-success{"data-dismiss" => "modal", :href => "#comingsoonModal"} Attach
-  =render :partial => 'design/templates/modalfooter', :locals => { :shownote => false, :showcreated => true, :showrevs => true }
+        .span6
+          %label{:for => "select01"} File 
+          .row-fluid.form-inline.control-group
+            .span12.well
+              .span4
+              .span4
+                %a.span12.btn.btn-large.btn-info{"data-dismiss" => "modal", :href => "#comingsoonModal"} Attach
+              .span4
+          
+  =render :partial => 'design/templates/modalfooter', :locals => { :shownote => false, :showcreated => false, :showrevs => false }
