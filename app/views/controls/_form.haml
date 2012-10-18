@@ -52,6 +52,5 @@
             %option{ :value => subcategory.id, :selected => (f.object.category_ids.include?(subcategory.id)) }=subcategory.name
     =error_messages_inline(f, :categories)
 
-:javascript
-  //$('#wysihtml5').wysihtml5({ image: false }); //Button to insert an image. Default true
-  $('#control_start_date, #control_stop_date').datepicker();
+-#:javascript
+  $('#wysihtml5').wysihtml5({ image: false }); //Button to insert an image. Default true

@@ -44,6 +44,5 @@
       =wrapped_select f, :span4, :audit_frequency_id, Option.options_for(:audit_frequency).map { |o| [o.title, o.id] }, :selected => (f.object.respond_to?(:audit_frequency_id) ? f.object.audit_frequency_id : nil), :label_name => 'Frequency'
       =wrapped_select f, :span4, :audit_duration_id, Option.options_for(:audit_duration).map { |o| [o.title, o.id] }, :selected => (f.object.respond_to?(:audit_duration_id) ? f.object.audit_duration_id : nil), :label_name => 'Duration'
 
-:javascript
-  //$('#wysihtml5').wysihtml5({ image: false }); //Button to insert an image. Default true
-  $('#program_start_date, #program_stop_date, #program_audit_start_date').datepicker();
+-#:javascript
+  $('#wysihtml5').wysihtml5({ image: false }); //Button to insert an image. Default true

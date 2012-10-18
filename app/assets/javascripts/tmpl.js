@@ -109,7 +109,6 @@
     return this.each(function() {
       var $this = $(this)
         , $output = $($.tmpl.render_items($this, list));
-      //$output.addClass('added');
       ($this.is('ul') ? $this : $this.find('> ul')).append($output);
     });
   };
@@ -124,7 +123,6 @@
           $el = $this.find('> [data-id="' + data.id + '"]');
         if (!$el.length) {
           $el = $($.tmpl.render_items($this, [data]));
-          //$el.addClass('added');
           $this.append($el);
         }
 

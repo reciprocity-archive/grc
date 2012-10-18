@@ -46,8 +46,10 @@
         .on('ajax:json', $.proxy(this.handle_response, this))
         .on('list-load-item', '.source', $.proxy(this.load_option, this))
         .on('list-add-item',  '.source', $.proxy(this.add_option, this))
+        .on('list-update-item', '.source', $.proxy(this.update_option, this))
         .on('list-load-item', '.target', $.proxy(this.load_selected_option, this))
         .on('list-add-item',  '.target', $.proxy(this.add_selected_option, this))
+        .on('list-update-item', '.target', $.proxy(this.update_selected_option, this))
         .on('sync-lists', $.proxy(this.sync_lists, this))
 
       // Wait for initial modal 'loaded' event
@@ -202,19 +204,54 @@
         $added_item.addClass('added');
         $added_item.find('.state').text('added');
       }
+      this.$element.trigger('sync-lists');
+    }
+
+  , update_option: function(e, item) {
+      var $updated_item
+        , $source = this.$source()
+        , data = this.mappers[this.mapper].options_add_item(item)
+        ;
+
+      $updated_item = $source.find('[data-id="' + data.id + '"]');
+      if ($updated_item.length > 0) {
+        $updated_item.replaceWith($.tmpl.render_items($source, [item]));
+
+        this.$element.trigger('sync-lists');
+      }
+    }
+
+  , update_selected_option: function(e, item) {
+      var $updated_item
+        , $new_item
+        , $target = this.$target()
+        , data, join_id
+        , added, removed
+        ;
+
+      $updated_item = $target.find('[data-object-id="' + item.id + '"]');
+      if ($updated_item.length > 0) {
+        join_id = $updated_item.attr('data-id');
+        data = this.mappers[this.mapper].current_add_item(item, join_id);
+
+        added = $updated_item.hasClass('added');
+        removed = $updated_item.hasClass('removed');
+
+        $new_item = $($.tmpl.render_items($target, [data]));
+        $updated_item = $updated_item.replaceWith($new_item);
+
+        if (added)
+          $new_item.addClass('added').find('.state').text('added');
+        if (removed) {
+          $new_item.addClass('removed').find('.state').text('removed');
+          $new_item.find('._destroy').val('destroy');
+        }
+
+        this.$element.trigger('sync-lists');
+      }
     }
 
   , submit: function(e) {
-      /*var $els = this.$element.find('.removed').find('input, select, textarea');
-      $els.each(function(i, el) {
-        var $el = $(el)
-          , name = $el.attr('name');
-        if (name) {
-          $el.attr('data-name', name);
-          $el.attr('name', null);
-        }
-      });*/
-
       this.$target().find('.member-failure').removeClass('member-failure');
       $.fn.modal_form.Constructor.prototype.submit.apply(this, [e]);
     }
@@ -239,7 +276,6 @@
       if ($item.is('.added')) {
         $item.remove();
       } else if ($item.is('.changed')) {
-        //$item.removeClass('changed');
         $item.addClass('removed');
         $item.find('.state').text('removed');
         $item.find('._destroy').val('destroy');

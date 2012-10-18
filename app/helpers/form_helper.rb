@@ -61,6 +61,7 @@ module FormHelper
       value = f.object.send(name)
       options[:value] = value && value.strftime('%m/%d/%Y')
     end
+    options[:'data-toggle'] ||= 'datepicker'
     wrapped_input(:text_field, f, span_class, name, options)
   end
 

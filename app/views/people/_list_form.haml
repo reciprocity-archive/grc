@@ -94,6 +94,3 @@
               %input.span12.date{:type => "text", :placeholder => "MM/DD/YYYY", :name => 'items[<%= person.id %>][stop_date]', :'data-toggle' => 'datepicker', :value => '<%= this.format_date(stop_date) %>'}
 
       %ul.target{ :'data-list-data-href' => flow_object_people_path(:object_type => object.class.name, :object_id => object.id) }
-
-:javascript
-  $('.date').datepicker();

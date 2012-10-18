@@ -102,13 +102,20 @@
 
     'listeditform': function($target, $trigger, option) {
       $target.modal_form(option);
-      var list_target = $trigger.data('list-target');
+      var list_target = $trigger.data('list-target')
+        , selector_target = $trigger.data('selector-target')
+        ;
 
       // Close the modal and append to the target list
       $target.on('ajax:json', function(e, data, xhr) {
         if (data.errors) {
-        } else if (list_target) {
-          $(list_target).tmpl_mergeitems([data]);
+        } else {
+          if (list_target) {
+            $(list_target).tmpl_mergeitems([data]);
+          }
+          if (selector_target) {
+            $(selector_target).trigger('list-update-item', data);
+          }
           $target.modal_form('hide');
         }
       });
