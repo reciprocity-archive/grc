@@ -8,6 +8,7 @@ require 'csv'
 class ProgramsController < ApplicationController
   include ApplicationHelper
   include ProgramsHelper
+  include ImportHelper
 
   PROGRAM_MAP = Hash[*%w(Type type Code slug Title title Description description Company company Version version Start start_date Stop stop_date Kind kind Audit-Start audit_start_date Audit-Frequency audit_frequency Audit-Duration audit_duration Created created_at Updated updated_at)]
 
@@ -229,7 +230,7 @@ class ProgramsController < ApplicationController
 
     raise "There must be at least 3 input lines" unless rows.size >= 4
 
-    program_headers = rows.shift.map do |heading|
+    program_headers = trim_array(rows.shift).map do |heading|
       if heading == "Type"
         key = 'type'
       else
@@ -246,9 +247,9 @@ class ProgramsController < ApplicationController
 
     import[:program] = Hash[*program_headers.zip(program_values).flatten]
 
-    raise "There must be an empty separator row" unless rows.shift == []
+    raise "There must be an empty separator row" unless trim_array(rows.shift) == []
 
-    section_headers = rows.shift.map do |heading|
+    section_headers = trim_array(rows.shift).map do |heading|
       key = SECTION_MAP[heading]
       import[:messages] << "invalid section heading #{heading}" unless key
       key
