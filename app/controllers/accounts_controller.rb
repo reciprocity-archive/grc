@@ -53,8 +53,10 @@ class AccountsController < ApplicationController
   end
 
   def update
-    role = params[:account].delete(:role)
-    @account.role = role
+    if params[:account]
+      role = params[:account].delete(:role)
+      @account.role = role
+    end
 
     respond_to do |format|
       if @account.authored_update(current_user, params[:account])

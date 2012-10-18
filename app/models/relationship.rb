@@ -18,7 +18,6 @@ class Relationship < ActiveRecord::Base
     if base_query.nil?
       base_query = self
     end
-pp params
     objects = base_query
 
     if params[:relationship_type].present?
