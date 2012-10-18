@@ -34,6 +34,16 @@ class MarketsController < ApplicationController
 
   layout 'dashboard'
 
+  def index
+    @markets = Market
+    if params[:s]
+      @markets = @markets.db_search(params[:s])
+    end
+    @markets = allowed_objs(@markets.all, :read)
+
+    render :json => @markets
+  end
+
   def show
   end
 
@@ -52,6 +62,7 @@ class MarketsController < ApplicationController
     respond_to do |format|
       if @market.save
         flash[:notice] = "Successfully created a new org group."
+        format.json { render :json => @market.as_json(:root => nil), :location => flow_market_path(@market) }
         format.html { redirect_to flow_market_path(@market) }
       else
         flash[:error] = "There was an error creating the org group."
@@ -68,6 +79,7 @@ class MarketsController < ApplicationController
     respond_to do |format|
       if @market.authored_update(current_user, market_params)
         flash[:notice] = "Successfully updated the org group."
+        format.json { render :json => @market.as_json(:root => nil), :location => flow_market_path(@market) }
         format.html { redirect_to flow_market_path(@market) }
       else
         flash[:error] = "There was an error updating the org group."

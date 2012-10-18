@@ -1,0 +1,110 @@
+-content_for :modal_title do
+  %h1=context[:title]
+
+%script#relationship_selected{ :type => 'text/html', :'data-type' => '', :'data-start_date' => '', :'data-stop_date' => '' }
+  %li{ :'data-id' => '<%= id %>', :'data-object-id' => '<%= object.id %>', :'data-name' => '<%= object.name %>', :'data-company' => '<%= object.company %>' }
+    .row-fluid
+      .span6
+        %span.company <%= object.slug %>
+        %span.name <%= object.title %>
+      .span6.actions
+        %input{ :type => 'hidden', :name => 'items[<%= id %>][id]', :value => '<% if (id.toString().substr(0,3) != "new") { %><%= id %><% } %>'.html_safe }
+        %input{ :type => 'hidden', :name => 'items[<%= id %>][relationship_type]', :value => context[:relationship_type] }
+        %input{ :type => 'hidden', :name => 'items[<%= id %>][related_type]', :value => context[:related_type] }
+        %input{ :type => 'hidden', :name => 'items[<%= id %>][related_id]', :value => '<%= object.id %>' }
+        %input{ :type => 'hidden', :name => 'items[<%= id %>][related_side]', :value => context[:related_side] }
+        %input{ :type => 'hidden', :name => 'items[<%= id %>][object_id]', :value => context[:object_id] }
+        %input{ :type => 'hidden', :name => 'items[<%= id %>][object_type]', :value => context[:object_type] }
+        %input._destroy{ :type => 'hidden', :name => 'items[<%= id %>][_destroy]', :value => '' }
+
+        %a.widgetbtn.pull-right{ :href => '#', :'data-toggle' => 'selector-list-remove' }
+          %i.icon-minus-sign
+        %a.widgetbtn.pull-right{ :href => url_for(:action => :edit, :controller => context[:related_type].underscore.pluralize, :id => '<%=object.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-list-target' => '' }
+          %i.gcmsicon-edit-grey
+        %span.state
+
+%script#relationship_program_option{ :type => 'text/html', :'data-prefix' => 'program' }
+  %li{ :'data-id' => '<%= program.id %>', :'data-title' => '<%= program.title %>', :'data-slug' => '<%= program.slug %>' }
+    .row-fluid
+      .span8
+        %span.company <%= program.slug %>
+        %span.name <%= program.title %>
+      .span4.actions
+        %a.widgetbtn.pull-right.add-me{:href => "#", :'data-toggle' => 'selector-list-select'}
+          %i.grcicon-chevron-right
+        %a.widgetbtn.pull-right{:href => edit_flow_program_path('<%=program.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-list-target' => '#listPersonList, #listObjectPersonList' }
+          %i.gcmsicon-edit-grey
+
+%script#relationship_product_option{ :type => 'text/html', :'data-prefix' => 'product' }
+  %li{ :'data-id' => '<%= product.id %>', :'data-title' => '<%= product.title %>', :'data-slug' => '<%= product.slug %>' }
+    .row-fluid
+      .span8
+        %span.company <%= product.slug %>
+        %span.name <%= product.title %>
+      .span4.actions
+        %a.widgetbtn.pull-right.add-me{:href => "#", :'data-toggle' => 'selector-list-select'}
+          %i.grcicon-chevron-right
+        %a.widgetbtn.pull-right{:href => edit_flow_product_path('<%=product.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-list-target' => '#listPersonList, #listObjectPersonList' }
+          %i.gcmsicon-edit-grey
+
+%script#relationship_org_group_option{ :type => 'text/html', :'data-prefix' => 'org_group' }
+  %li{ :'data-id' => '<%= org_group.id %>', :'data-title' => '<%= org_group.title %>', :'data-slug' => '<%= org_group.slug %>' }
+    .row-fluid
+      .span8
+        %span.company <%= org_group.slug %>
+        %span.name <%= org_group.title %>
+      .span4.actions
+        %a.widgetbtn.pull-right.add-me{:href => "#", :'data-toggle' => 'selector-list-select'}
+          %i.grcicon-chevron-right
+        %a.widgetbtn.pull-right{:href => edit_flow_org_group_path('<%=org_group.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-list-target' => '#listPersonList, #listObjectPersonList' }
+          %i.gcmsicon-edit-grey
+
+%script#relationship_location_option{ :type => 'text/html', :'data-prefix' => 'location' }
+  %li{ :'data-id' => '<%= location.id %>', :'data-title' => '<%= location.title %>', :'data-slug' => '<%= location.slug %>' }
+    .row-fluid
+      .span8
+        %span.company <%= location.slug %>
+        %span.name <%= location.title %>
+      .span4.actions
+        %a.widgetbtn.pull-right.add-me{:href => "#", :'data-toggle' => 'selector-list-select'}
+          %i.grcicon-chevron-right
+        %a.widgetbtn.pull-right{:href => edit_flow_location_path('<%=location.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-list-target' => '#listPersonList, #listObjectPersonList' }
+          %i.gcmsicon-edit-grey
+
+%script#relationship_market_option{ :type => 'text/html', :'data-prefix' => 'market' }
+  %li{ :'data-id' => '<%= market.id %>', :'data-title' => '<%= market.title %>', :'data-slug' => '<%= market.slug %>' }
+    .row-fluid
+      .span8
+        %span.company <%= market.slug %>
+        %span.name <%= market.title %>
+      .span4.actions
+        %a.widgetbtn.pull-right.add-me{:href => "#", :'data-toggle' => 'selector-list-select'}
+          %i.grcicon-chevron-right
+        %a.widgetbtn.pull-right{:href => edit_flow_market_path('<%=market.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-list-target' => '#listPersonList, #listObjectPersonList' }
+          %i.gcmsicon-edit-grey
+
+
+.row-fluid
+  .span6
+    %h4
+      =context[:source_title]
+      %a.btn.btn-blue.addbtn.fltrt.new{ :href => context[:option_new_url], :'data-toggle' => 'modal-ajax-listnewform', :'data-selector-target' => '.source, .target' }
+        %i.icon-user.icon-white
+        =context[:source_new_title]
+    .filter-block
+      .row-fluid
+        .span12
+          .modal-search.clearfix
+            .btn-group.closed
+              .pull-right
+                %input.widgetsearch{:type => "text", :placeholder => context[:source_search_text]}
+          .tabbable.tabs-left
+            .tab-content
+              #category1.tab-pane.active
+                .people-list.short
+                  %ul.source{ :'data-list-data-href' => context[:options_url], :'data-template-id' => "relationship_#{context[:related_type].underscore}_option" }
+  .span6
+    %h4
+      =context[:target_title]
+    .people-list.currentlist
+      %ul.target{ :'data-list-data-href' => context[:selected_url], :'data-template-id' => "relationship_selected" }

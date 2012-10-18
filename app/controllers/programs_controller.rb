@@ -50,6 +50,17 @@ class ProgramsController < ApplicationController
 
   layout 'dashboard'
 
+  def index
+    @programs = Program
+    if params[:relevant_to]
+      @programs = @programs.relevant_to(Product.find(params[:relevant_to]))
+    end
+    if params[:s]
+      @programs = @programs.db_search(params[:s])
+    end
+    @programs = allowed_objs(@programs.all, :read)
+  end
+
   def show
     @stats = program_stats(@program)
   end
@@ -70,6 +81,7 @@ class ProgramsController < ApplicationController
     respond_to do |format|
       if @program.save
         flash[:notice] = "Program was created successfully."
+        format.json { render :json => @program.as_json(:root => false), :location => flow_program_path(@program) }
         format.html do
           redirect_to flow_program_path(@program)
         end
@@ -92,6 +104,7 @@ class ProgramsController < ApplicationController
     respond_to do |format|
       if @program.authored_update(current_user, program_params)
         flash[:notice] = 'Program was successfully updated.'
+        format.json { render :json => @program.as_json(:root => nil) }
         format.html { ajax_refresh }
       else
         flash[:error] = "There was an error updating the program"

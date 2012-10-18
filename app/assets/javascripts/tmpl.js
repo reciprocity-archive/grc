@@ -74,10 +74,28 @@
   };
 
   $.tmpl.render_items = function($list, list) {
-    var $tmpl = $list.siblings('script[type="text/html"]').add($list.find('> script[type="text/html"]'))
-      , defaults = $.extend({}, $tmpl.data('context'), $tmpl.data(), $list.data('context'), $list.data())
-      , output = [];
+    var $tmpl = null
+      , defaults = {}
+      , output = []
+      , prefix = null
+      ;
+
+    if ($list.data('template-id')) {
+      $tmpl = $('#' + $list.data('template-id'));
+    } else {
+      $tmpl = $list.siblings('script[type="text/html"]').add($list.find('> script[type="text/html"]'))
+    }
+
+    prefix = $tmpl.data('prefix');
+
+    defaults = $.extend(defaults, $tmpl.data('context'), $tmpl.data(), $list.data('context'), $list.data());
+
     $.each(list, function(i, data) {
+      var new_data = {};
+      if (prefix && !data[prefix]) {
+        new_data[prefix] = data
+        data = new_data
+      }
       output.push($tmpl.tmpl($.extend(defaults, data)));
     });
     return output.join('');

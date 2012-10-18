@@ -180,6 +180,10 @@ FactoryGirl.define do
     title
   end
 
+  factory :market do
+    title
+  end
+
   factory :relationship_type do
   end
   factory :relationship do

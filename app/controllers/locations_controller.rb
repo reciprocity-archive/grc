@@ -34,6 +34,16 @@ class LocationsController < ApplicationController
 
   layout 'dashboard'
 
+  def index
+    @locations = Location
+    if params[:s]
+      @locations = @locations.db_search(params[:s])
+    end
+    @locations = allowed_objs(@locations.all, :read)
+
+    render :json => @locations
+  end
+
   def show
   end
 
@@ -52,6 +62,7 @@ class LocationsController < ApplicationController
     respond_to do |format|
       if @location.save
         flash[:notice] = "Successfully created a new org group."
+        format.json { render :json => @location.as_json(:root => nil), :location => flow_location_path(@location)  }
         format.html { redirect_to flow_location_path(@location) }
       else
         flash[:error] = "There was an error creating the org group."
@@ -68,6 +79,7 @@ class LocationsController < ApplicationController
     respond_to do |format|
       if @location.authored_update(current_user, location_params)
         flash[:notice] = "Successfully updated the org group."
+        format.json { render :json => @location.as_json(:root => nil), :location => flow_location_path(@location) }
         format.html { redirect_to flow_location_path(@location) }
       else
         flash[:error] = "There was an error updating the org group."

@@ -1,6 +1,6 @@
 CmsRails::Application.routes.draw do
 
-  resources :programs, :as => 'flow_programs', :only => [:show, :new, :edit, :create, :update, :destroy] do
+  resources :programs, :as => 'flow_programs', :only => [:index, :show, :new, :edit, :create, :update, :destroy] do
     collection do
       get 'import'
       post 'import'
@@ -75,7 +75,7 @@ CmsRails::Application.routes.draw do
     end
   end
 
-  resources :locations, :as => 'flow_locations', :only => [:show, :new, :edit, :create, :update, :destroy] do
+  resources :locations, :as => 'flow_locations', :only => [:index, :show, :new, :edit, :create, :update, :destroy] do
     member do
       get 'delete'
       get 'tooltip'
@@ -83,7 +83,7 @@ CmsRails::Application.routes.draw do
     end
   end
 
-  resources :markets, :as => 'flow_markets', :only => [:show, :new, :edit, :create, :update, :destroy] do
+  resources :markets, :as => 'flow_markets', :only => [:index, :show, :new, :edit, :create, :update, :destroy] do
     member do
       get 'delete'
       get 'tooltip'
@@ -131,13 +131,14 @@ CmsRails::Application.routes.draw do
     end
   end
 
-  resources :relationships do
+  resources :relationships, :as => 'flow_relationships', :only => [:index, :create] do
     collection do
       get 'related_objects'
+      get 'list_edit'
+      get 'related'
     end
   end
 
-  match 'relationships' => 'programs#related'
   match 'programs_dash' => 'programs_dash#index'
   match 'quick/programs' => 'quick#programs'
   match 'quick/sections' => 'quick#sections'

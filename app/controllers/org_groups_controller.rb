@@ -38,6 +38,16 @@ class OrgGroupsController < ApplicationController
 
   layout 'dashboard'
 
+  def index
+    @org_groups = OrgGroup
+    if params[:s]
+      @org_groups = @org_groups.db_search(params[:s])
+    end
+    @org_groups = allowed_objs(@org_groups.all, :read)
+
+    render :json => @org_groups
+  end
+
   def show
   end
 
@@ -56,6 +66,9 @@ class OrgGroupsController < ApplicationController
     respond_to do |format|
       if @org_group.save
         flash[:notice] = "Successfully created a new org group."
+        format.json do
+          render :json => @org_group.as_json(:root => nil), :location => flow_org_group_path(@org_group)
+        end
         format.html { redirect_to flow_org_group_path(@org_group) }
       else
         flash[:error] = "There was an error creating the org group."
@@ -72,6 +85,7 @@ class OrgGroupsController < ApplicationController
     respond_to do |format|
       if @org_group.authored_update(current_user, org_group_params)
         flash[:notice] = "Successfully updated the org group."
+        format.json { render :json => @org_group.as_json(:root => nil), :location => flow_org_group_path(@org_group) }
         format.html { redirect_to flow_org_group_path(@org_group) }
       else
         flash[:error] = "There was an error updating the org group."

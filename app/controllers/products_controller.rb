@@ -38,6 +38,16 @@ class ProductsController < ApplicationController
 
   layout 'dashboard'
 
+  def index
+    @products = Product
+    if params[:s]
+      @products = @products.db_search(params[:s])
+    end
+    @products = allowed_objs(@products.all, :read)
+
+    render :json => @products
+  end
+
   def show
   end
 
@@ -56,6 +66,7 @@ class ProductsController < ApplicationController
     respond_to do |format|
       if @product.save
         flash[:notice] = "Successfully created a new product."
+        format.json { render :json => @product.as_json(:root => nil), :location => flow_product_path(@product) }
         format.html { redirect_to flow_product_path(@product) }
       else
         flash[:error] = "There was an error creating the product."
@@ -72,6 +83,7 @@ class ProductsController < ApplicationController
     respond_to do |format|
       if @product.authored_update(current_user, product_params)
         flash[:notice] = "Successfully updated the product."
+        format.json { render :json => @product.as_json(:root => nil), :location => flow_product_path(@product) }
         format.html { redirect_to flow_product_path(@product) }
       else
         flash[:error] = "There was an error updating the product."

@@ -51,7 +51,7 @@ if (this.length) {
   <div class="itemswell">
     <h4 class="nominheight">
       <%= rel_info.title %>
-      <a class="btn btn-blue addbtn fltrt" href="<%=rel_info.edit_url%>">Edit</a>
+      <a class="btn btn-blue addbtn fltrt" href="<%=rel_info.edit_url%>" data-toggle="modal-ajax-relationship-selector" data-modal-reset="reset" data-tab-target="#related-objects-<%=rel_info.id%>" data-modal-class="modal-wide">Edit</a>
     </h4>
     <div class="row-fluid">
       <div class="span12 captionbox">
@@ -60,6 +60,8 @@ if (this.length) {
         </div>
       </div>
     </div>
+    <div class="row-fluid">
+      <ul class="span12" id="related-objects-<%= rel_info.id %>">
 <%
     // Iterate through all objects
     var related_objects = rel_data.related_objects
@@ -69,8 +71,6 @@ if (this.length) {
         // Set up the row, populate it with information.
         var object = object_info.object
 %>
-    <div class= "row-fluid">
-      <ul class="span12">
         <li class="controlSlot">
           <a href="/<%= object_info.url %>" data-popover-href="/<%= object_info.url %>/tooltip" data-popover-trigger="sticky-hover">
 <!--            <div class="row-fluid nominheight">
@@ -103,8 +103,6 @@ if (this.length) {
             </div>
           </a>
         </li>
-      </ul>
-    </div>
 <%
       })
     } else {
@@ -116,6 +114,8 @@ if (this.length) {
 <%
     }
 %>
+      </ul>
+    </div>
   </div>
 <%
   })

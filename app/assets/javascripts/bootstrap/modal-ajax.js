@@ -46,6 +46,22 @@
       $target.modal(option);
     },
 
+    'relationshipsform': function($target, $trigger, option) {
+      var list_target = $trigger.data('list-target');
+      $target.modal_relationship_selector(option);
+
+      // Close the modal and rewrite the target list
+      $target.on('ajax:json', function(e, data, xhr) {
+        if (data.errors) {
+        } else if (list_target == 'refresh') {
+          refresh_page();
+        } else if (list_target) {
+          $(list_target).tmpl_setitems(data);
+          $target.modal_relationship_selector('hide');
+        }
+      });
+    },
+
     'listform': function($target, $trigger, option) {
       var list_target = $trigger.data('list-target');
       $target.modal_selector(option);
@@ -64,13 +80,21 @@
 
     'listnewform': function($target, $trigger, option) {
       $target.modal_form(option);
-      var list_target = $trigger.data('list-target');
+      var list_target = $trigger.data('list-target')
+        , selector_target = $trigger.data('selector-target')
+        ;
 
       // Close the modal and append to the target list
       $target.on('ajax:json', function(e, data, xhr) {
         if (data.errors) {
-        } else if (list_target) {
-          $(list_target).tmpl_additem(data);
+        } else {
+          if (list_target) {
+            $(list_target).tmpl_additem(data)
+          }
+          if (selector_target) {
+            $(selector_target).trigger('list-add-item', data);
+          }
+          //$(tablist_target).trigger('list-add-item', data);
           $target.modal_form('hide');
         }
       });
@@ -106,7 +130,7 @@
   };
 
   $(function() {
-    $('body').on('click.modal-ajax.data-api', '[data-toggle="modal-ajax"], [data-toggle="modal-ajax-form"], [data-toggle="modal-ajax-listform"], [data-toggle="modal-ajax-listnewform"], [data-toggle="modal-ajax-listeditform"]', function(e) {
+    $('body').on('click.modal-ajax.data-api', '[data-toggle="modal-ajax"], [data-toggle="modal-ajax-form"], [data-toggle="modal-ajax-listform"], [data-toggle="modal-ajax-listnewform"], [data-toggle="modal-ajax-relationship-selector"], [data-toggle="modal-ajax-listeditform"]', function(e) {
 
       var $this = $(this)
         , toggle_type = $(this).data('toggle')
@@ -148,6 +172,7 @@
         if (toggle_type == 'modal-ajax-listnewform') modal_type = 'listnewform';
         if (toggle_type == 'modal-ajax-listeditform') modal_type = 'listeditform';
         if (toggle_type == 'modal-ajax') modal_type = 'modal';
+        if (toggle_type == 'modal-ajax-relationship-selector') modal_type = 'relationshipsform';
         if (!modal_type) modal_type = 'modal';
       }
 
