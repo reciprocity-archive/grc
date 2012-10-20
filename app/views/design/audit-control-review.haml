@@ -11,14 +11,14 @@
 -content_for :page_help, 'changeme'
 
 -content_for :subheader_extras do
-  %h1#pageType.fltrt.highlighted Control Review
+  %h1#pageType.pull-right.highlighted Control Review
 
 .row-static
   .doubleColumn
     / .Widget
     #RegsandControls.WidgetBox.fullHeight
       .WidgetBoxHeading
-        .fltrt
+        .pull-right
           %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
             %i.gcmsicon-questionmark-grey
           %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
@@ -104,7 +104,7 @@
             .span12
               %h3
                 References
-                %a.btn.btn-blue.addbtn.fltrt{"data-toggle" => "modal", :href => "#referenceSelectorModal"} Edit
+                %a.btn.btn-blue.addbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"} Edit
               %ul#referenceList
                 %li.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
                   .controls-group
@@ -116,7 +116,7 @@
             .span12
               %h3
                 People
-                %a.btn.btn-blue.addbtn.fltrt{"data-toggle" => "modal", :href => "#peopleSelectorModal"} Edit
+                %a.btn.btn-blue.addbtn.pull-right{"data-toggle" => "modal", :href => "#peopleSelectorModal"} Edit
               %ul#peopleList
                 %li.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#peopleSelectorModal"}
                   .controls-group
@@ -127,11 +127,11 @@
         / close enlarge div
         .row-fluid.nominheight
           .span6.nominheight
-            %label.fltlft{:for => "control-effectivedate"}
+            %label.pull-left{:for => "control-effectivedate"}
               %strong> Created
               \: 03/15/2012 19:16
-          .span6.nominheight.fltrt
-            %label.fltlft{:for => "control-verificationdate"}
+          .span6.nominheight.pull-right
+            %label.pull-left{:for => "control-verificationdate"}
               %strong> Updated
               \: 04/12/2012 14:32
       / end of widget

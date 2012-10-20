@@ -1,3 +1,5 @@
+
+
 .modal {
   max-height: 720px;
   width: 720px;
@@ -146,7 +148,20 @@
       color:#333;
     }
   }
+
 }
+
+
+  .object-info { 
+    text-align: justify; 
+  }
+  .object-info > span { 
+    display: inline-block; 
+  }
+  .object-info > span.force-wrap { 
+    width: 100%; 
+  }​
+  
 
 .modal-footer {
   padding:10px;
