@@ -31,11 +31,12 @@
       %nav.pull-left.txtlft.span3
         %a.btn.btn-large.btn-info{"data-dismiss" => "modal", :href => "#"} Cancel
         %a.btn.btn-large.btn-warning{"data-dismiss" => "modal", :href => "#"} Delete
-      .toolbar-widget.span6.demoItem
-        %a.btn{:href => "#"}
+      .toolbar-widget.span6
+        -#%a.btn{:href => "#"}
           %i.gcmsicon-arrowleft-black
-        %span.btnwell Showing Most Recent of 3 Revisions
-        %a.btn{:href => "#"}
+        %a.btn{"data-dismiss" => "modal", :href => "#"}View Edit History
+        -#%span.btnwell Showing Most Recent of 3 Revisions
+        -#%a.btn{:href => "#"}
           %i.gcmsicon-arrowright-black
       %nav.pull-right.txtrt.span3
         %a#actionButton.btn.btn-large.btn-success.btn-primary{:href => "#", "data-dismiss" => "modal"} Save
