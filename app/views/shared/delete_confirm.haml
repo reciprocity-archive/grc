@@ -23,4 +23,4 @@
     .span6
     %nav.fltrt.txtrt.span3
       -#=link_to "Delete", url, { :method => :delete, :class => 'btn btn-large btn-warning' }
-      %a.btn.btn-large.btn-warning{ :href => url, :'data-remote' => 'remote', :'data-method' => 'delete' } Delete
+      %a.btn.btn-large.btn-warning{ :href => url + '.json', :'data-remote' => 'remote', :'data-method' => 'delete' } Delete

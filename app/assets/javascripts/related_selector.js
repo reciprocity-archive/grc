@@ -47,14 +47,22 @@
         .on('list-load-item', '.source', $.proxy(this.load_option, this))
         .on('list-add-item',  '.source', $.proxy(this.add_option, this))
         .on('list-update-item', '.source', $.proxy(this.update_option, this))
+        .on('list-delete-item', '.source', $.proxy(this.delete_option, this))
         .on('list-load-item', '.target', $.proxy(this.load_selected_option, this))
         .on('list-add-item',  '.target', $.proxy(this.add_selected_option, this))
         .on('list-update-item', '.target', $.proxy(this.update_selected_option, this))
+        .on('list-delete-item', '.target', $.proxy(this.delete_selected_option, this))
+        .on('delete-object', $.proxy(this.delete_object, this))
         .on('sync-lists', $.proxy(this.sync_lists, this))
 
       // Wait for initial modal 'loaded' event
       this.$element
         .on('loaded', $.proxy(this.load_lists, this));
+    }
+
+  , delete_object: function(e, data, xhr) {
+      this.$source().trigger('list-delete-item', data);
+      this.$target().trigger('list-delete-item', data);
     }
 
   , handle_response: function(e, data, xhr) {
@@ -249,6 +257,26 @@
 
         this.$element.trigger('sync-lists');
       }
+    }
+
+  , delete_option: function(e, item) {
+      var $item
+        , $source = this.$source()
+        //, data = this.mappers[this.mapper].options_add_item(item)
+        ;
+
+      $item = $source.find('[data-id="' + item.id + '"]');
+      $item.remove();
+    }
+
+  , delete_selected_option: function(e, item) {
+      var $item
+        , $target = this.$target()
+        //, data = this.mappers[this.mapper].current_add_item(item, join_id)
+        ;
+
+      $item = $target.find('[data-object-id="' + item.id + '"]');
+      $item.remove();
     }
 
   , submit: function(e) {

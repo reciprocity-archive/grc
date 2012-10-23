@@ -87,27 +87,27 @@ class RelationshipsController < ApplicationController
     if params[:items].present?
       errors, objects = {}, {}
       params[:items].keys.each do |id|
-        item_errors, item_object = create_relationship(params[:items][id])
+        item_errors, item_object = create_or_update_relationship(params[:items][id])
         errors[id] = item_errors if item_errors
         objects[id] = item_object
       end
+      if errors.empty?
+        render :json => objects.values.compact, :status => 200
+      else
+        render :json => { :errors => errors, :objects => objects }, :status => 400
+      end
     else
-      item_errors, item_object = create_relationship(params[:relationship])
-      errors = item_errors
-      objects = [item_object]
-    end
-
-    puts '****'
-    puts errors
-    puts objects
-    if errors.empty?
-      render :json => objects.values.compact, :status => 200
-    else
-      render :json => { :errors => errors, :objects => objects }, status => 400
+      errors, object = create_or_update_relationship(params[:relationship])
+      if errors && errors.empty?
+        render :json => object, :status => 200
+      else
+        render :json => { :errors => errors }, :status => 400
+      end
     end
   end
 
-  def create_relationship(params)
+  def create_or_update_relationship(params)
+    params ||= {}
     if params[:id].present? && params[:_destroy] == 'destroy'
       relationship = Relationship.find(params[:id])
       relationship.destroy

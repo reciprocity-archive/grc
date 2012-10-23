@@ -48,13 +48,14 @@
 
     'relationshipsform': function($target, $trigger, option) {
       var list_target = $trigger.data('list-target');
-      $target.modal_relationship_selector(option);
+      $target.modal_relationship_selector(option, $trigger);
 
       // Close the modal and rewrite the target list
       $target.on('ajax:json', function(e, data, xhr) {
         if (data.errors) {
         } else if (list_target == 'refresh') {
           refresh_page();
+
         } else if (list_target) {
           $(list_target).tmpl_setitems(data);
           $target.modal_relationship_selector('hide');
@@ -64,7 +65,7 @@
 
     'listform': function($target, $trigger, option) {
       var list_target = $trigger.data('list-target');
-      $target.modal_selector(option);
+      $target.modal_selector(option, $trigger);
 
       // Close the modal and rewrite the target list
       $target.on('ajax:json', function(e, data, xhr) {
@@ -79,7 +80,7 @@
     },
 
     'listnewform': function($target, $trigger, option) {
-      $target.modal_form(option);
+      $target.modal_form(option, $trigger);
       var list_target = $trigger.data('list-target')
         , selector_target = $trigger.data('selector-target')
         ;
@@ -101,7 +102,7 @@
     },
 
     'listeditform': function($target, $trigger, option) {
-      $target.modal_form(option);
+      $target.modal_form(option, $trigger);
       var list_target = $trigger.data('list-target')
         , selector_target = $trigger.data('selector-target')
         ;
@@ -121,14 +122,33 @@
       });
     },
 
+    'deleteform': function($target, $trigger, option) {
+      var $proxy_target = $trigger.closest('.modal');
+      $target.modal_form(option, $trigger);
+
+      $target.on('ajax:json', function(e, data, xhr) {
+        if (data.errors) {
+        } else {
+          $target.modal_form('hide');
+          if ($proxy_target.length > 0) {
+            $proxy_target.trigger('delete-object', [data, xhr]);
+            $proxy_target.modal_form('hide');
+          } else {
+            window.location.assign(xhr.getResponseHeader('location'));
+          }
+        }
+      });
+    },
+
     'form': function($target, $trigger, option) {
       var form_target = $trigger.data('form-target');
-      $target.modal_form(option);
+      $target.modal_form(option, $trigger);
 
       $target.on('ajax:json', function(e, data, xhr) {
         if (data.errors) {
         } else if (form_target == 'refresh') {
-          refresh_page();
+          //refresh_page();
+          window.location.assign(xhr.getResponseHeader('location'));
         } else if (form_target == 'redirect') {
           window.location.assign(xhr.getResponseHeader('location'));
         }
@@ -137,7 +157,7 @@
   };
 
   $(function() {
-    $('body').on('click.modal-ajax.data-api', '[data-toggle="modal-ajax"], [data-toggle="modal-ajax-form"], [data-toggle="modal-ajax-listform"], [data-toggle="modal-ajax-listnewform"], [data-toggle="modal-ajax-relationship-selector"], [data-toggle="modal-ajax-listeditform"]', function(e) {
+    $('body').on('click.modal-ajax.data-api', '[data-toggle="modal-ajax"], [data-toggle="modal-ajax-form"], [data-toggle="modal-ajax-listform"], [data-toggle="modal-ajax-listnewform"], [data-toggle="modal-ajax-relationship-selector"], [data-toggle="modal-ajax-listeditform"], [data-toggle="modal-ajax-deleteform"]', function(e) {
 
       var $this = $(this)
         , toggle_type = $(this).data('toggle')
@@ -180,6 +200,7 @@
         if (toggle_type == 'modal-ajax-listeditform') modal_type = 'listeditform';
         if (toggle_type == 'modal-ajax') modal_type = 'modal';
         if (toggle_type == 'modal-ajax-relationship-selector') modal_type = 'relationshipsform';
+        if (toggle_type == 'modal-ajax-deleteform') modal_type = 'deleteform';
         if (!modal_type) modal_type = 'modal';
       }
 
