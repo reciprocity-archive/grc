@@ -23,6 +23,12 @@
 .row-static
   .doubleColumn
     .doubleWide.fullHeight
+      =render :partial => "shared/graph",
+              :layout => 'layouts/widget_box',
+              :locals => { model_name.to_sym => instance,
+                :instance => instance}
+
+    .doubleWide.fullHeight
       =render :partial => "#{controller_name}/main",
               :layout => 'layouts/widget_box',
               :locals => { model_name.to_sym => instance }

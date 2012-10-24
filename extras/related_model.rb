@@ -19,6 +19,158 @@ module RelatedModel
     model.extend(ClassMethods)
   end
 
+  def related_edges
+    # Returns a list of all relationship edges going to/from this node.
+    # An edge consists of {:source, :destination, :type}
+
+    # First, normal 'relationships'
+    edges = []
+    source_relationships.each do |rel|
+      edge = {
+        :source => self,
+        :destination => rel.destination,
+        :type => rel.relationship_type_id
+      }
+      edges.push(edge)
+    end
+
+    destination_relationships.each do |rel|
+      edge = {
+        :source => rel.source,
+        :destination => self,
+        :type => rel.relationship_type_id
+      }
+      edges.push(edge)
+    end
+
+    # Next, ObjectPerson
+    ops = ObjectPerson.where(:personable_id => self.id,
+                             :personable_type => self.class.to_s)
+
+    ops.each do |op|
+      edge = {
+        :source => op.person,
+        :destination => self,
+        :type => op.role
+      }
+      edges.push(edge)
+    end
+
+    if self.methods.include? :custom_edges
+      edges.concat(self.custom_edges)
+    end
+
+    edges
+  end
+
+  def traverse_related(direction = :both, &block)
+    # Traverse all relationships from an object.
+    # Use the block passed in to determine whether you are allowed to traverse
+    # to that object. If so, add that object to the result set and recurse.
+    # Once done, return the set of all objects visited.
+
+    def make_node(obj)
+      {
+        :type => obj.class.to_s.underscore,
+        :node => obj,
+        :link => Rails.application.routes.url_helpers.method("flow_#{obj.class.to_s.underscore}_path").call(obj.id)
+      }
+    end
+
+    # Collect all relationships including this object
+    objs = Set.new([self])
+    nodes = [make_node(self)]
+    obj_to_node_id = {
+      self => 0
+    }
+    links = []
+
+
+    result_set = Set.new
+
+    while objs.length > 0 do
+      new_objs = Set.new
+      objs.each do |obj|
+        edges = obj.related_edges
+        edges.each do |edge|
+          if (edge[:source] == obj) && ([:forward, :both].include? direction)
+            if !block_given? || yield(edge, :forward)
+              if result_set.add?(edge[:destination])
+                new_objs.add(edge[:destination])
+                nodes.push(make_node(edge[:destination]))
+                obj_to_node_id[edge[:destination]] = nodes.length - 1
+                links.push({
+                  :source => obj_to_node_id[edge[:source]],
+                  :target => obj_to_node_id[edge[:destination]],
+                  :edge => edge
+                })
+              end
+            end
+          elsif [:backward, :both].include? direction
+            if !block_given? || yield(edge, :backward)
+              if result_set.add?(edge[:source])
+                new_objs.add(edge[:source])
+                nodes.push(make_node(edge[:source]))
+                obj_to_node_id[edge[:source]] = nodes.length - 1
+                links.push({
+                    :source => obj_to_node_id[edge[:source]],
+                    :target => obj_to_node_id[edge[:destination]],
+                    :edge => edge
+                  })
+              end
+            end
+          end
+        end
+      end
+      objs = new_objs
+    end
+    
+    return {
+      :nodes => nodes,
+      :links => links
+    }
+  end
+
+  #def traverse_related(direction = :both, &block)
+  #  # Traverse all relationships from an object.
+  #  # Use the block passed in to determine whether you are allowed to traverse
+  #  # to that object. If so, add that object to the result set and recurse.
+  #  # Once done, return the set of all objects visited.
+  #
+  #  # Collect all relationships including this object
+  #
+  #  objs = Set.new([self])
+  #
+  #  result_set = Set.new
+  #
+  #  while objs.length > 0 do
+  #    new_objs = Set.new
+  #    objs.each do |obj|
+  #      if [:forward, :both].include? direction
+  #        obj.source_relationships.each do |rel|
+  #          if !block_given? || yield(rel, rel.destination, :destination)
+  #            if result_set.add?(rel.destination)
+  #              new_objs.add(rel.destination)
+  #            end
+  #          end
+  #        end
+  #      end
+  #
+  #      if [:backward, :both].include? direction
+  #        obj.destination_relationships.each do |rel|
+  #          if !block_given? || yield(rel, rel.source, :source)
+  #            if result_set.add?(rel.source)
+  #              new_objs.add(rel.source)
+  #            end
+  #          end
+  #        end
+  #      end
+  #    end
+  #    objs = new_objs
+  #  end
+  #  return result_set
+  #end
+
   module ClassMethods
     def related_to_source(object, relationship_type_id)
       object_type = object.class.to_s

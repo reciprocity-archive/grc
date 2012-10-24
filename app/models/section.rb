@@ -8,6 +8,7 @@ class Section < ActiveRecord::Base
   include SluggedModel
   include SearchableModel
   include AuthorizedModel
+  include RelatedModel
 
   attr_accessible :title, :slug, :description, :program
 
@@ -36,6 +37,39 @@ class Section < ActiveRecord::Base
   end
 
   scope :with_controls, includes([:parent, {:controls => [:implementing_controls]}])
+
+  def custom_edges
+    # Returns a list of additional edges that aren't returned by the default method.
+
+    edges = []
+    if parent
+      edge = {
+        :source => parent,
+        :destination => self,
+        :type => :section_includes_section
+      }
+      edges.push(edge)
+    end
+
+    if program
+      edge = {
+        :source => program,
+        :destination => self,
+        :type => :program_includes_section
+      }
+      edges.push(edge)
+    end
+
+    controls.each do |control|
+      edge = {
+        :source => self,
+        :destination => control,
+        :type => :section_implemented_by_control
+      }
+      edges.push(edge)
+    end
+    edges
+  end
 
   def display_name
     "#{slug} - #{title}"

@@ -276,6 +276,18 @@ class RelationshipsController < ApplicationController
     end
   end
 
+  def graph
+    obj_type = params[:otype]
+    obj_id = params[:oid]
+
+    obj = obj_type.constantize.find(obj_id)
+    graph_data = obj.traverse_related
+
+    respond_to do |format|
+      format.json { render :json => graph_data }
+    end
+  end
+
   private
 
     def load_product

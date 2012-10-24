@@ -10,7 +10,9 @@
  *= require tmpl
  *= require_self
  *= require jquery.remotipart
+ *= require d3.v2
  *= require related
+ *= require related_graph
  */
 
 // Initialize delegated event handlers

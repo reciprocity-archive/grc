@@ -42,6 +42,29 @@ class Program < ActiveRecord::Base
       :related_model_endpoint => :destination}
   ]
 
+  def custom_edges
+    # Returns a list of additional edges that aren't returned by the default method.
+    edges = []
+    sections.each do |section|
+      edge = {
+        :source => self,
+        :destination => section,
+        :type => :program_includes_section
+      }
+      edges.push(edge)
+    end
+
+    controls.each do |control|
+      edge = {
+        :source => self,
+        :destination => control,
+        :type => :program_includes_control
+      }
+      edges.push(edge)
+    end
+    edges
+  end
+
   def display_name
     slug
   end

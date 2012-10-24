@@ -1,0 +1,6 @@
+-content_for :widget_title do
+  Related Graph
+
+-content_for :widget_help, 'related_graph'
+#related_graph{"data-source" => graph_flow_relationships_path(:oid => instance.id,
+    :otype => instance.class.to_s)}

@@ -7,6 +7,7 @@ class Control < ActiveRecord::Base
   include SluggedModel
   include SearchableModel
   include AuthorizedModel
+  include RelatedModel
 
   CATEGORY_TYPE_ID = 100
 
@@ -54,6 +55,67 @@ class Control < ActiveRecord::Base
 
   def display_name
     "#{slug} - #{title}"
+  end
+
+  def custom_edges
+    # Returns a list of additional edges that aren't returned by the default method.
+
+    edges = []
+    if parent
+      edge = {
+        :source => parent,
+        :destination => self,
+        :type => :control_includes_control
+      }
+      edges.push(edge)
+    end
+
+    if program
+      edge = {
+        :source => program,
+        :destination => self,
+        :type => :program_includes_control
+      }
+      edges.push(edge)
+    end
+
+    systems.each do |system|
+      edge = {
+        :source => self,
+        :destination => system,
+        :type => :control_implemented_by_system
+      }
+      edges.push(edge)
+    end
+
+    sections.each do |section|
+      edge = {
+        :source => section,
+        :destination => self,
+        :type => :section_implemented_by_control
+      }
+      edges.push(edge)
+    end
+
+    implemented_controls.each do |control|
+      edge = {
+        :source => control,
+        :destination => self,
+        :type => :control_implemented_by_control
+      }
+      edges.push(edge)
+    end
+
+    implementing_controls.each do |control|
+      edge = {
+        :source => self,
+        :destination => control,
+        :type => :control_implemented_by_control
+      }
+      edges.push(edge)
+    end
+
+    edges
   end
 
   # Return all objects that allow operations on this object

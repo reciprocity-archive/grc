@@ -136,6 +136,7 @@ CmsRails::Application.routes.draw do
       get 'related_objects'
       get 'list_edit'
       get 'related'
+      get 'graph'
     end
   end
 

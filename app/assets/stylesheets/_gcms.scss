@@ -2258,3 +2258,35 @@ body .container {
     @include background-image(linear-gradient(top,  #dddddd 0%, #eef4ed 70%, #edebe6 100%, #f6f6f6 100%));
   }
 }
+
+/* For the related graph, SVG styling */
+svg {
+  g.node circle {
+    stroke: red;
+    fill: blue;
+  }
+  g.node circle.root {
+    stroke: red;
+    fill: red;
+    r: 10;
+  }
+
+  marker {
+    fill: $lightGray;
+  }
+
+  line.link {
+    stroke: $lightGray;
+    stroke-width: 3;
+    marker-end:url(#directional)
+  }
+  g text {
+    font-family: $font-family;
+    font-size: 11px;
+    fill: $textColor;
+  }
+  #tooltip {
+    fill: black;
+    font-size: 10px;
+  }
+}
