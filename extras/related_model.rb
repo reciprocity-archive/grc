@@ -51,7 +51,7 @@ module RelatedModel
       edge = {
         :source => op.person,
         :destination => self,
-        :type => op.role
+        :type => "person_#{op.role}_of_#{self.class.to_s.underscore}"
       }
       edges.push(edge)
     end
@@ -61,6 +61,26 @@ module RelatedModel
     end
 
     edges
+  end
+
+  def traverse_related_ability(ability)
+    traverse_related do |edge, direction|
+      type = edge[:type].to_sym
+      ability = ability.to_sym
+      puts "#{edge.inspect},#{direction}, #{ability}"
+      abilities = DefaultRelationshipTypes::RELATIONSHIP_ABILITIES[type]
+      if !abilities
+        abilities = DefaultRelationshipTypes::RELATIONSHIP_ABILITIES[:default]
+      end
+
+      traverse = false
+      if abilities[ability]
+        if (abilities[ability] == :both) || (direction == abilities[ability])
+          traverse = true
+        end
+      end
+      traverse
+    end
   end
 
   def traverse_related(direction = :both, &block)
@@ -86,7 +106,7 @@ module RelatedModel
     links = []
 
 
-    result_set = Set.new
+    result_set = Set.new([self])
 
     while objs.length > 0 do
       new_objs = Set.new
@@ -106,7 +126,7 @@ module RelatedModel
                 })
               end
             end
-          elsif [:backward, :both].include? direction
+          elsif (edge[:destination] == obj) && ([:backward, :both].include? direction)
             if !block_given? || yield(edge, :backward)
               if result_set.add?(edge[:source])
                 new_objs.add(edge[:source])

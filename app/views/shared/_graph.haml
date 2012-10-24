@@ -2,5 +2,22 @@
   Related Graph
 
 -content_for :widget_help, 'related_graph'
-#related_graph{"data-source" => graph_flow_relationships_path(:oid => instance.id,
-    :otype => instance.class.to_s)}
+
+-abilities = ['', :full_read, :meta_read, :edit]
+#related-graph
+  .button-set
+    .row-fluid
+      %ul
+        -abilities.each do |ability|
+          %li.btn.tab-btn.span3
+            %a.span12{:href => "#graph-#{ability}-pane",
+              "data-toggle" => 'tab',
+              "data-source" => graph_flow_relationships_path(:oid => instance.id,
+                :otype => instance.class.to_s,
+                :ability => ability),
+              "data-refresh-time" => 60 }
+              #{ability.to_s.titleize}
+
+  .tab-content
+    -abilities.each do |ability|
+      .tab-pane{:id => "graph-#{ability}-pane"}

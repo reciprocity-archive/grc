@@ -279,9 +279,16 @@ class RelationshipsController < ApplicationController
   def graph
     obj_type = params[:otype]
     obj_id = params[:oid]
+    ability = params[:ability]
 
     obj = obj_type.constantize.find(obj_id)
-    graph_data = obj.traverse_related
+
+    if ability && ability != ''
+      puts "Ability: #{ability}"
+      graph_data = obj.traverse_related_ability(ability)
+    else
+      graph_data = obj.traverse_related
+    end
 
     respond_to do |format|
       format.json { render :json => graph_data }

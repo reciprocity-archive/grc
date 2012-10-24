@@ -5,7 +5,8 @@
 class PeopleController < ApplicationController
   include ApplicationHelper
 
-  before_filter :load_person, :only => [:edit,
+  before_filter :load_person, :only => [:show,
+                                        :edit,
                                         :update,
                                         :delete,
                                         :destroy]
@@ -42,6 +43,9 @@ class PeopleController < ApplicationController
       @objects = @objects.db_search(params[:s])
     end
     render :json => @objects.all
+  end
+
+  def show
   end
 
   def new

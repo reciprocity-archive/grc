@@ -222,7 +222,7 @@ ActiveRecord::Base.transaction do
     where(:slug => 'PRODUCT-SEED3').
     first_or_create!({
         :slug => 'PRODUCT-SEED3',
-        :title => "Product 3", :description => 'Dependent product'},
+        :title => "Product 3", :description => 'Required product'},
       :without_protection => true
     )
 

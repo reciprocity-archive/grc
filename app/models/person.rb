@@ -16,6 +16,23 @@ class Person < ActiveRecord::Base
 
   validates :email, :presence => true
 
+  @valid_relationships = []
+
+  def custom_edges
+    # Returns a list of additional edges that aren't returned by the default method.
+    edges = []
+    object_people.each do |op|
+      edge = {
+        :source => self,
+        :destination => op.personable,
+        :type => "person_#{op.role}_of_#{op.personable.class.to_s.underscore}"
+      }
+      edges.push(edge)
+    end
+
+    edges
+  end
+
   def display_name
     email
   end
