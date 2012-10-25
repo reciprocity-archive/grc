@@ -1,16 +1,90 @@
-Warnings:
+.row-fluid
+  .span6
+    %h4 Compliance Program
+    .row-fluid   
+      .span10.control-group
+        %label{:for => "slug"} Program/Regulation
+        %input#slug.span12{:disabled => "disabled", :value => @program.slug, :type => "text"}/
+        %br/
+        
+      .span2
+        %label{:for => "version"} Version  
+        %input#version.span12{:disabled => "disabled", :value => @program.version, :type => "text"}
+        
+    .row-fluid   
+      .span12.control-group
+        %label{:for => ""} Source Title
+        %input.span12{:disabled => "disabled", :value => @program.title, :type => "text"}/
+        
+    .row-fluid   
+      .span12.control-group
+        %label{:for => "url"} Source URL
+        %input#url.span12{:disabled => "disabled", :value => @program.url, :type => "text"}/
+        
+    .row-fluid
+      .span12.control-group
+        %label{:for => "description"} Description
+    .row-fluid{"control-group" => ""}
+      .span12.well
+        %textarea#description.span12.forminputsuccess{:placeholder => "", :rows => "4"}
+          =@program.description
+        :javascript
+          $('#control-description3').wysihtml5({
+            "image": false //Button to insert an image. Default true
+          });
+    .row-fluid
 
--@messages.each do |m|
-  %p{ :class => 'label-warning' }
-    =m
+      .span5
+        %label{:for => "control-code"} Name of uploaded file  
+        %input#control-code.span12{:disabled => "disabled", :value => params["upload"].original_filename, :type => "text"}
+        
+      .span3
+        %label{:for => "control-code"} Doc Date  
+        #docdate.date{"data-date" => "TBD", "data-date-format" => "dd-mm-yy"}
+          %input.span12.calendar{:size => "16", :type => "text", :value => "TBD"}/
+        :javascript
+          $('#docdate').datepicker();
+      .span2
+        %label{:for => "control-code"} Version  
+        %input#control-code.span12{:disabled => "disabled", :placeholder => "TBD", :type => "text"}
+        
+      .span2
+        %label{:for => "control-code"} Pages  
+        %input#control-code.span12{:disabled => "disabled", :placeholder => "TBD", :type => "text"}
 
-Errors:
 
--@errors.keys.each do |slug|
-  %p{ :class => 'member-failure' }
-    =slug
-    =":"
-    =@errors[slug].join(", ")
+%h4 Sample Data
+.well
+  #sampleData
+    %table.ggrc-table
+      %tr
+        %th Code
+        %th Title
+        %th Description
+        %th Notes
+      -@sections.first(10).each do |sec|
+        %tr
+          %td=sec.slug
+          %td=sec.title
+          %td=sec.description
+          %td=sec.notes
+
+
+%div
+  Warnings:
+
+  -@messages.each do |m|
+    %p{ :class => 'label-warning' }
+      =m
+
+%div
+  Errors:
+
+  -@errors.keys.each do |slug|
+    %p{ :class => 'member-failure' }
+      =slug
+      =":"
+      =@errors[slug].join(", ")
 
 %p{ :class => 'member-success' }
   Created:
@@ -22,7 +96,11 @@ Errors:
 
   =@updates.join(", ")
 
+
 -if params[:confirm].blank?
-  =submit_tag "Import", :name => 'confirm'
+  =submit_tag "Finish Importing", :class => %w(btn btn-large btn-success btn-primary), :name => 'confirm'
 -else
-  Import done.
+  Import of
+  =link_to @program.title, flow_program_path(@program)
+  is done.
+

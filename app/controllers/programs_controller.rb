@@ -216,6 +216,7 @@ class ProgramsController < ApplicationController
       @program.save unless check_only
     end
 
+    @sections = []
     import[:sections].each do |attrs|
       attrs.delete(nil)
       slug = attrs["slug"]
@@ -232,6 +233,7 @@ class ProgramsController < ApplicationController
           section.program = @program
           import[:creates] << slug
         end
+        @sections << section
         import[:errors][slug] = section.errors.full_messages unless section.valid?
         section.save unless check_only
       end
