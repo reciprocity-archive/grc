@@ -178,6 +178,17 @@ class ProgramsController < ApplicationController
     end
   end
 
+  def handle_option(attrs, name, messages)
+    name_s = name.to_s
+    if attrs[name_s]
+      value = Option.where(:role => name, :title => attrs[name_s]).first
+      if value.nil?
+        messages << "Unknown #{name_s} option '#{attrs[name_s]}'"
+      end
+      attrs[name_s] = value
+    end
+  end
+
   def do_import(import, check_only)
     import[:errors] = {}
     import[:updates] = []
@@ -186,6 +197,8 @@ class ProgramsController < ApplicationController
     attrs.delete(nil)
     attrs.delete("created_at")
     attrs.delete("updated_at")
+    handle_option(attrs, :audit_duration, import[:messages])
+    handle_option(attrs, :audit_frequency, import[:messages])
     slug = attrs["slug"]
     if slug.blank?
       import[:messages] << "missing program slug" unless key

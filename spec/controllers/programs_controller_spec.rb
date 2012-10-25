@@ -63,9 +63,14 @@ describe ProgramsController do
       login({}, { :role => 'superuser' })
     end
     it "should export" do
+      @reg.audit_duration = Option.create(:title => "1 Week", :role => 'audit_duration')
+      @reg.audit_frequency = Option.create(:title => "Often", :role => 'audit_frequency')
+      @reg.save
       get 'export', :id => @reg.id, :format => :csv
       # program titles, 1 program, blank line, section titles, 1 section
       response.body.split("\n").size.should == 5
+      (response.body =~ /1 Week/).should_not be_nil
+      (response.body =~ /Often/).should_not be_nil
     end
   end
 
@@ -75,10 +80,25 @@ describe ProgramsController do
     end
 
     it "should prepare import" do
+      Option.create(:title => "1 Fortnight", :role => 'audit_duration')
+      Option.create(:title => "Soonish", :role => 'audit_frequency')
       post 'import', :upload => fixture_file_upload("/REG1.csv")
       assigns(:messages).should == [
         "invalid program heading Bogus1",
         "invalid section heading Bogus2"
+      ]
+      assigns(:errors).should == { "REG1-SEC3-BAD" => ["Title needs a value"] }
+      assigns(:creates).should == [ "REG1-SEC2", "REG1-SEC3-BAD" ]
+      assigns(:updates).should == [ "REG1", "REG1-SEC1"]
+    end
+
+    it "should prepare import with missing option" do
+      post 'import', :upload => fixture_file_upload("/REG1.csv")
+      assigns(:messages).should == [
+        "invalid program heading Bogus1",
+        "invalid section heading Bogus2",
+        "Unknown audit_duration option '1 Fortnight'",
+        "Unknown audit_frequency option 'Soonish'"
       ]
       assigns(:errors).should == { "REG1-SEC3-BAD" => ["Title needs a value"] }
       assigns(:creates).should == [ "REG1-SEC2", "REG1-SEC3-BAD" ]
