@@ -43,8 +43,9 @@ $(document).ready(function() {
       // $dest defaults to the pane if we don't specify an explicit data destination
       , $dest = $($tab.data('dest') || $pane)
       , source = $tab.data('source')
+      , full = $tab.data('full')
       , template = $tab.data('template')
-      ;
+
     // Show a spinner in our destination while we're loading
     var spinner = new Spinner({ }).spin();
     $dest.html(spinner.el);
@@ -52,12 +53,45 @@ $(document).ready(function() {
     $dest.scrollTop(0);
     $(spinner.el).css({ width: '100px', height: '100px', left: '50px', top: '50px' });
 
+    var fullData = undefined
+    var abilityData = undefined
+    var fullDataCallback = function(json) {
+      fullData = json
+      if (fullData && abilityData) {
+        gotAllDataCallback()
+      }
+    }
 
-    var successCallback = function(json) {
+    var abilityDataCallback = function(json) {
+      abilityData = json
+      if (fullData && abilityData) {
+        gotAllDataCallback()
+      }
+    }
+
+    var gotAllDataCallback = function() {
+      // Process all the data, and set the appropriate classes for the
+      // nodes/links we want to highlight
+
+      // Create a link-based map to say which nodes we want to highlight
+      var link_map = {}
+
+      fullData.nodes.forEach(function(node) {
+        link_map[node.link] = {
+          'full' : true,
+          'ability' : false
+        }
+      })
+
+      abilityData.nodes.forEach(function(node) {
+        link_map[node.link]['ability'] = true
+      })
+
       // Empty and add data to the result node
       // Use D3 to render the graph
-      console.log(json)
       $dest.empty()
+
+
 
       var width = 500,
           height = 500
@@ -69,16 +103,13 @@ $(document).ready(function() {
         .linkDistance(50)
         .size([width, height])
 
-      console.log(d3.select($dest[0]))
       var svg = d3.select($dest[0]).append("svg")
-
-      console.log('svg', svg)
 
       svg.append('text').attr('id', 'graph-tooltip')
 
       force
-        .nodes(json.nodes)
-        .links(json.links)
+        .nodes(fullData.nodes)
+        .links(fullData.links)
         .start()
 
       var setupNodeTooltip = function(d, i) {
@@ -91,6 +122,23 @@ $(document).ready(function() {
         })
       }
 
+      var setNodeAbilityClass = function(d, i) {
+        if (link_map[d.link].ability) {
+          // Add a class to indicate that this is in the selected graph
+          var old_class = $(this).attr('class')
+          $(this).attr('class', old_class + ' ability')
+        }
+      }
+
+      var setLinkAbilityClass = function(d, i) {
+        if (link_map[d.source.link].ability &&
+            link_map[d.target.link].ability) {
+          // Add a class to indicate that this is in the selected graph
+          var old_class = $(this).attr('class')
+          $(this).attr('class', old_class + ' ability')
+        }
+      }
+
       var setupLinkTooltip = function(d, i) {
         $(this).popover({
           'title' : 'Link',
@@ -101,38 +149,38 @@ $(document).ready(function() {
 
       var mouseClick = function() {
         var $this = $(this)
-        var node = json.nodes[$this.data('node')]
+        var node = fullData.nodes[$this.data('node')]
         window.location.href = node.link
       }
 
 
       svg.append("svg:defs").selectAll("marker")
-          .data(["directional", "symmetrical"])
+          .data(["ability", "default"])
         .enter().append("svg:marker")
           .attr("id", String)
           .attr("viewBox", "0 -5 10 10")
           .attr("refX", 15)
           .attr("refY", 0)
-          .attr("markerWidth", 4)
-          .attr("markerHeight", 4)
+          .attr("markerWidth", 3)
+          .attr("markerHeight", 3)
           .attr("orient", "auto")
         .append("svg:path")
           .attr("d", "M0,-5L10,0L0,5");
 
 
       var link = svg.selectAll("line.link")
-          .data(json.links)
+          .data(fullData.links)
         .enter().append("line")
           .attr("class", "link")
           .each(setupLinkTooltip)
+          .each(setLinkAbilityClass)
 
       var node = svg.selectAll("g.node")
-          .data(json.nodes)
+          .data(fullData.nodes)
         .enter().append("g")
           .attr("class", "node")
           .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
           .attr("data-node", function(d) { return d.index })
-          //.on("mousemove", mouseOver)
           .on("click", mouseClick)
           .call(force.drag)
 
@@ -152,6 +200,7 @@ $(document).ready(function() {
               }
             })
           .each(setupNodeTooltip)
+          .each(setNodeAbilityClass)
       node.append('text')
           .text(function(d) {
             return d.node[d.type].slug
@@ -167,8 +216,7 @@ $(document).ready(function() {
             .attr("x2", function(d) { return d.target.x; })
             .attr("y2", function(d) { return d.target.y; });
 
-        node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
-;
+        node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")" })
       })
     }
 
@@ -180,10 +228,17 @@ $(document).ready(function() {
     }
 
     $.ajax({
+      url: full,
+      dataType: 'json',
+      data: undefined,
+      success: fullDataCallback,
+      error: errorCallback
+    })
+    $.ajax({
       url: source,
       dataType: 'json',
       data: undefined,
-      success: successCallback,
+      success: abilityDataCallback,
       error: errorCallback
     })
   }
@@ -192,10 +247,7 @@ $(document).ready(function() {
   function setup_ajax_tab(container) {
     $tabs = $(container).find('li')
 
-    console.log($tabs)
-
     if ($tabs.length) {
-      console.log('Tabs!')
       $tabs.find('a').on('show', ajax_show_handler)
       $(container).find('.tab-pane').on('redraw', ajax_redraw_handler);
       var $active_tab = $tabs.filter('.active')
