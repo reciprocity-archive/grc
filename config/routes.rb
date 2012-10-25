@@ -109,6 +109,7 @@ CmsRails::Application.routes.draw do
   end
 
   resources :object_people, :as => 'flow_object_people', :only => [:index, :create]
+
   resources :documents, :as => 'flow_documents' do
     collection do
       get 'list'
@@ -119,6 +120,8 @@ CmsRails::Application.routes.draw do
       get 'delete'
     end
   end
+
+  resources :object_documents, :as => 'flow_object_documents', :only => [:index, :create]
 
   resources :categories, :as => 'flow_categories' do
     collection do

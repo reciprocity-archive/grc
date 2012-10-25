@@ -105,7 +105,7 @@
       });
 
       $.getJSON(target_url, function(data, status, xhr) {
-        var items = $.map(data, function(item, i) { return item.object_person });
+        var items = $.map(data, function(item, i) { return item.object_person || item.object_document });
         $target.tmpl_setitems(items);
         $target.find('[data-id]').each(function(i, el) {
           var $el = $(el)
@@ -146,7 +146,7 @@
       if ($added_item.is('.removed')) {
         $added_item.removeClass('removed');
       } else if ($added_item.length == 0) {
-        $target.tmpl_mergeitems([{ id: data.id, person: data }]);
+        $target.tmpl_mergeitems([{ id: data.id, person: data, document: data }]);
         $added_item = $target.find('[data-id="' + data.id + '"]');
         $added_item.addClass('added');
       }

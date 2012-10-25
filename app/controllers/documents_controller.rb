@@ -48,10 +48,13 @@ class DocumentsController < ApplicationController
 
   layout 'dashboard'
 
-  # FIXME: No template!
-  #def index
-  #  @documents = Document.all
-  #end
+  def index
+    @objects = Document
+    if params[:s]
+      @objects = @objects.db_search(params[:s])
+    end
+    render :json => @objects.all
+  end
 
   # FIXME: No template
   #def show
