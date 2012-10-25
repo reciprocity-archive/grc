@@ -97,7 +97,7 @@ CmsRails::Application.routes.draw do
     end
   end
 
-  resources :people, :as => 'flow_people', :only => [:show] do
+  resources :people, :as => 'flow_people', :only => [:show, :new, :create, :edit, :update, :destroy] do
     collection do
       get 'list'
       get 'list_edit'
