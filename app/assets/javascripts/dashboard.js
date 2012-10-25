@@ -4,7 +4,6 @@
  *= require jquery-ui
  *= require bootstrap
  *= require can.jquery-1.0.7
- *= require selector
  *= require related_selector
  *= require spin.min
  *= require tmpl

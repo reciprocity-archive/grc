@@ -65,7 +65,7 @@
 
     'listform': function($target, $trigger, option) {
       var list_target = $trigger.data('list-target');
-      $target.modal_selector(option, $trigger);
+      $target.modal_relationship_selector(option, $trigger);
 
       // Close the modal and rewrite the target list
       $target.on('ajax:json', function(e, data, xhr) {
@@ -74,7 +74,7 @@
           refresh_page();
         } else if (list_target) {
           $(list_target).tmpl_setitems(data);
-          $target.modal_selector('hide');
+          $target.modal_relationship_selector('hide');
         }
       });
     },

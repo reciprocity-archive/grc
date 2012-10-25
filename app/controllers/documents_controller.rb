@@ -24,10 +24,9 @@ class DocumentsController < ApplicationController
       allow :read, :read_document, :of => :document
     end
 
-    # FIXME: no template!
-    #actions :index do
-    #  allow :read_document
-    #end
+    actions :index do
+      allow :read_document
+    end
 
     actions :edit, :update do
       allow :update, :update_document, :of => :document
@@ -35,14 +34,6 @@ class DocumentsController < ApplicationController
 
     actions :destroy do
       allow :destroy, :delete_document, :of => :document
-    end
-
-    actions :list do
-      allow :read, :read_document
-    end
-
-    actions :list_update, :list_edit do
-      allow :update, :update_document
     end
   end
 
@@ -82,7 +73,7 @@ class DocumentsController < ApplicationController
       if @document.save
         flash[:notice] = "Successfully created a new document."
         format.json do
-          render :json => @document.as_json(:root => nil, :methods => [:descriptor, :link_url])
+          render :json => @document.as_json(:root => nil, :methods => [:descriptor, :link_url]), :location => nil
         end
         format.html { ajax_refresh }
       else
@@ -97,7 +88,7 @@ class DocumentsController < ApplicationController
       if @document.authored_update(current_user, document_params)
         flash[:notice] = "Successfully updated the document."
         format.json do
-          render :json => @document.as_json(:root => nil, :methods => [:descriptor, :link_url])
+          render :json => @document.as_json(:root => nil, :methods => [:descriptor, :link_url]), :location => nil
         end
         format.html { redirect_to flow_document_path(@document) }
       else
@@ -127,63 +118,6 @@ class DocumentsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to programs_dash_path }
       format.json { render :json => @document.as_json(:root => nil) }
-    end
-  end
-
-  def list
-    @documents = Document.where({})
-    if params[:s] && !params[:s].blank?
-      @documents = @documents.where(:title => params[:s])
-    end
-    respond_to do |format|
-      format.html { render :layout => nil }
-      format.json do
-        render :json => @documents.as_json(:root => nil, :methods => [:descriptor, :link_url])
-      end
-    end
-  end
-
-  def list_edit
-    if !params[:object_type] || !params[:object_id]
-      return 400
-    end
-    @object = params[:object_type].classify.constantize.find(params[:object_id])
-    #@documents = Document.where({})
-    render :layout => nil
-  end
-
-  def list_update
-    if !params[:object_type] || !params[:object_id]
-      return 400
-    end
-
-    @object = params[:object_type].classify.constantize.find(params[:object_id])
-
-    new_object_documents = []
-
-    if params[:items]
-      params[:items].each do |_, item|
-        object_document = @object.object_documents.where(:document_id => item[:id]).first
-        if !object_document
-          document = Document.find(item[:id])
-          object_document = @object.object_documents.new(:document => document)
-        end
-        new_object_documents.push(object_document)
-      end
-    end
-
-    @object.object_documents = new_object_documents
-
-    respond_to do |format|
-      if @object.save
-        format.json do
-          render :json => @object.object_documents.all.map { |od| od.as_json_with_role_and_document(:root => nil, :methods => [:descriptor, :link_url]) }
-        end
-        format.html
-      else
-        flash[:error] = "Could not update attached documents"
-        format.html { render :layout => nil }
-      end
     end
   end
 

@@ -46,7 +46,13 @@ class ControlsController < ApplicationController
   layout 'dashboard'
 
   def index
+    @controls = Control
+    if params[:s].present?
+      @controls = @controls.db_search(params[:s])
+    end
     @controls = allowed_objs(Control.all, :read)
+
+    render :json => @controls
   end
 
   def show

@@ -78,6 +78,8 @@
       , defaults = {}
       , output = []
       , prefix = null
+      , mappings = null
+      , member = null
       ;
 
     if ($list.data('template-id')) {
@@ -87,11 +89,39 @@
     }
 
     prefix = $tmpl.data('prefix');
+    mappings = $tmpl.data('mappings');
+    member = $tmpl.data('member');
 
     defaults = $.extend(defaults, $tmpl.data('context'), $tmpl.data(), $list.data('context'), $list.data());
 
     $.each(list, function(i, data) {
-      var new_data = {};
+      var new_data = {}
+        , i
+        , split_mappings, from_key, to_key
+        , split_member, member_key
+        ;
+
+      if (member) {
+        split_member = member.split(',');
+        for (i in split_member) {
+          member_key = split_member[i];
+          if (data.hasOwnProperty(member_key)) {
+            new_data = data[member_key];
+            data = new_data;
+            break;
+          }
+        }
+      }
+      if (mappings) {
+        split_mappings = mappings.split(',');
+        for (i in split_mappings) {
+          from_key = split_mappings[i].split(':')[0];
+          to_key = split_mappings[i].split(':')[1];
+          if (data.hasOwnProperty(from_key)) {
+            data[to_key] = data[from_key];
+          }
+        }
+      }
       if (prefix && !data[prefix]) {
         new_data[prefix] = data
         data = new_data

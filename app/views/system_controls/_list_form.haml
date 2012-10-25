@@ -1,0 +1,54 @@
+-content_for :modal_title do
+  %h1 Add Control
+
+%script#control_option{ :type => 'text/html', :'data-prefix' => 'control' }
+  %li{ :'data-id' => '<%= control.id %>', :'data-title' => '<%= control.title %>', :'data-slug' => '<%= control.slug %>' }
+    .row-fluid
+      .span8
+        %span.company <%= control.slug %>
+        %span.name <%= control.title %>
+      .span4.actions
+        %a.widgetbtn.pull-right.add-me{:href => "#", :'data-toggle' => 'selector-list-select'}
+          %i.grcicon-chevron-right
+        %a.widgetbtn.pull-right{:href => edit_flow_control_path('<%=control.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-list-target' => '' }
+          %i.gcmsicon-edit-grey
+
+%script#control_selected{ :type => 'text/html', :'data-mappings' => 'child:control,object:control', :'data-member' => 'system_control' }
+  %li{ :'data-id' => '<%= id %>', :'data-object-id' => '<%= control.id %>' }
+    .row-fluid
+      .span6
+        %span.company <%= control.slug %>
+        %span.name <%= control.title %>
+      .span6.actions
+        %input{ :type => 'hidden', :name => 'items[<%= id %>][id]', :value => '<% if (id.toString().substr(0,3) != "new") { %><%= id %><% } %>'.html_safe }
+        %input{ :type => 'hidden', :name => 'items[<%= id %>][system_id]', :value => object.id }
+        %input{ :type => 'hidden', :name => 'items[<%= id %>][control_id]', :value => '<%= control.id %>' }
+        %input._destroy{ :type => 'hidden', :name => 'items[<%= id %>][_destroy]', :value => '' }
+        %a.widgetbtn.pull-right{ :href => '#', :'data-toggle' => 'selector-list-remove' }
+          %i.icon-minus-sign
+        %a.widgetbtn.pull-right{ :href => edit_flow_control_path('<%=control.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-list-target' => '' }
+          %i.gcmsicon-edit-grey
+
+.row-fluid
+  .span6
+    %h4
+      Controls
+      %a.widgetbtn.widgetbtnselector{ :href => new_flow_control_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-list-target' => '.source, .target' }
+        %i.gcmsicon-add
+      .pull-right
+        %input.widgetsearch{:type => "text", :placeholder => "Search Controls"}
+
+    .filter-block
+      .row-fluid
+        .span12
+          .tabbable.tabs-left
+            .tab-content
+              #category1.tab-pane.active
+                .people-list.short
+                  %ul.source{ :'data-list-data-href' => flow_controls_url(:format => :json), :'data-template-id' => 'control_option' }
+  .span6
+    %h4
+      Controls for this system
+    .people-list.currentlist
+      %ul.target{ :'data-list-data-href' => flow_system_controls_path(:system_id => object.id, :format => :json), :'data-list-target' => '#listCurrentList', :'data-template-id' => 'control_selected'}
+

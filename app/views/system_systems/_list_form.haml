@@ -1,0 +1,54 @@
+-content_for :modal_title do
+  %h1 Edit Sub-Systems
+
+%script#subsystem_option{ :type => 'text/html', :'data-prefix' => 'system' }
+  %li{ :'data-id' => '<%= system.id %>', :'data-title' => '<%= system.title %>', :'data-slug' => '<%= system.slug %>' }
+    .row-fluid
+      .span8
+        %span.company <%= system.slug %>
+        %span.name <%= system.title %>
+      .span4.actions
+        %a.widgetbtn.pull-right.add-me{:href => "#", :'data-toggle' => 'selector-list-select'}
+          %i.grcicon-chevron-right
+        %a.widgetbtn.pull-right{:href => edit_flow_system_path('<%=system.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-list-target' => '' }
+          %i.gcmsicon-edit-grey
+
+%script#subsystem_selected{ :type => 'text/html', :'data-mappings' => 'child:system,object:system', :'data-member' => 'system_system' }
+  %li{ :'data-id' => '<%= id %>', :'data-object-id' => '<%= system.id %>' }
+    .row-fluid
+      .span6
+        %span.company <%= system.slug %>
+        %span.name <%= system.title %>
+      .span6.actions
+        %input{ :type => 'hidden', :name => 'items[<%= id %>][id]', :value => '<% if (id.toString().substr(0,3) != "new") { %><%= id %><% } %>'.html_safe }
+        %input{ :type => 'hidden', :name => 'items[<%= id %>][parent_id]', :value => object.id }
+        %input{ :type => 'hidden', :name => 'items[<%= id %>][child_id]', :value => '<%= system.id %>' }
+        %input._destroy{ :type => 'hidden', :name => 'items[<%= id %>][_destroy]', :value => '' }
+        %a.widgetbtn.pull-right{ :href => '#', :'data-toggle' => 'selector-list-remove' }
+          %i.icon-minus-sign
+        %a.widgetbtn.pull-right{ :href => edit_flow_system_path('<%=system.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-list-target' => '' }
+          %i.gcmsicon-edit-grey
+
+.row-fluid
+  .span6
+    %h4
+      Sub-systems
+      %a.widgetbtn.widgetbtnselector{ :href => new_flow_system_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-list-target' => '.source, .target' }
+        %i.gcmsicon-add
+      .pull-right
+        %input.widgetsearch{:type => "text", :placeholder => "Search Systems"}
+
+    .filter-block
+      .row-fluid
+        .span12
+          .tabbable.tabs-left
+            .tab-content
+              #category1.tab-pane.active
+                .people-list.short
+                  %ul.source{ :'data-list-data-href' => flow_systems_url, :'data-template-id' => 'subsystem_option' }
+  .span6
+    %h4
+      Sub-systems
+    .people-list.currentlist
+      %ul.target{ :'data-list-data-href' => flow_system_systems_path(:parent_id => object.id, :format => :json), :'data-list-target' => '#listCurrentList', :'data-template-id' => 'subsystem_selected'}
+

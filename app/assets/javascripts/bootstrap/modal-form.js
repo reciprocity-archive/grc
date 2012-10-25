@@ -35,12 +35,16 @@
 
   , delete_object: function(e, data, xhr) {
       // If this modal is contained within another modal, pass the event onward
-      var $trigger_modal = this.$trigger.closest('.modal');
+      var $trigger_modal = this.$trigger.closest('.modal')
+        , redirect_url
+        ;
       if ($trigger_modal.length > 0) {
         $trigger_modal.trigger('delete-object', [data, xhr]);
-      } else {
-        //Otherwise redirect
+      } else if (xhr && xhr.getResponseHeader('location')) {
+        // Otherwise redirect if possible
         window.location.assign(xhr.getResponseHeader('location'));
+      } else {
+        // Otherwise refresh the page
       }
     }
 

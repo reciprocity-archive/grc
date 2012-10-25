@@ -105,7 +105,7 @@ class ProgramsController < ApplicationController
     respond_to do |format|
       if @program.authored_update(current_user, program_params)
         flash[:notice] = 'Program was successfully updated.'
-        format.json { render :json => @program.as_json(:root => nil) }
+        format.json { render :json => @program.as_json(:root => nil), :location => flow_program_path(@program) }
         format.html { ajax_refresh }
       else
         flash[:error] = "There was an error updating the program"
@@ -160,7 +160,7 @@ class ProgramsController < ApplicationController
     flash[:notice] = "Program deleted"
     respond_to do |format|
       format.html { redirect_to programs_dash_path }
-      format.json { render :json => @program.as_json(:root => nil) }
+      format.json { render :json => @program.as_json(:root => nil), :location => programs_dash_path }
     end
   end
 

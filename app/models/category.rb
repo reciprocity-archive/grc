@@ -19,4 +19,10 @@ class Category < ActiveRecord::Base
   def as_json(options={})
     super(options.merge(:methods => :parent_name))
   end
+
+  def self.db_search(q)
+    q = "%#{q}%"
+    t = arel_table
+    where(t[:name].matches(q))
+  end
 end
