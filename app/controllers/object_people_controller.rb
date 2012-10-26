@@ -4,22 +4,28 @@ class ObjectPeopleController < BaseMappingsController
     allow :superuser
 
     actions :index do
-      allow :read, :read_person
+      allow :read, :read_object_person
+    end
+
+    actions :create do
+      allow :create, :create_object_person
     end
 
     actions :list_edit, :create do
-      allow :update, :update_person
+      allow :update, :update_object_person
     end
   end
 
   def index
-    @objects = ObjectPerson
+    @object_people = ObjectPerson
     if params[:object_id].present?
-      @objects = @objects.where(
+      @object_people = @object_people.where(
         :personable_type => params[:object_type],
         :personable_id => params[:object_id])
     end
-    render :json => @objects, :include => :person
+    @object_people = allowed_objs(@object_people.all, :read)
+
+    render :json => @object_people, :include => :person
   end
 
   private

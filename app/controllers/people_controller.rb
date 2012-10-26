@@ -13,6 +13,10 @@ class PeopleController < ApplicationController
   access_control :acl do
     allow :superuser
 
+    actions :index do
+      allow :read, :read_person
+    end
+
     actions :new, :create do
       allow :create, :create_person
     end
@@ -29,11 +33,13 @@ class PeopleController < ApplicationController
   layout 'dashboard'
 
   def index
-    @objects = Person
+    @people = Person
     if params[:s]
-      @objects = @objects.db_search(params[:s])
+      @people = @people.db_search(params[:s])
     end
-    render :json => @objects.all
+    @people = allowed_objs(@people.all, :read)
+
+    render :json => @people
   end
 
   def new

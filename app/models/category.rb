@@ -12,6 +12,10 @@ class Category < ActiveRecord::Base
 
   is_versioned_ext
 
+  def display_name
+    name
+  end
+
   def parent_name
     parent && parent.name
   end

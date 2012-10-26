@@ -13,12 +13,14 @@
         %a.widgetbtn.pull-right{ :href => edit_flow_document_path('<%=document.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
           %i.gcmsicon-edit-grey
 
+%script#document_option_data{ :type => 'text/html' }
+  %span.company <%= document.link_url %>
+  %span.name <%= document.title %>
+
 %script#object_document_selected{ :type => 'text/html', :'data-mappings' => 'object:document', :'data-member' => 'object_document' }
   %li{ :'data-id' => '<%= id %>', :'data-object-id' => '<%= document.id %>', :'data-title' => '<%= document.title %>', :'data-link_url' => '<%= document.link_url %>', :'data-descriptor' => '<%= document.descriptor %>' }
     .row-fluid
-      .span8
-        %span.company <%= document.link_url %>
-        %span.name <%= document.title %>
+      .span8.object_info{ :'data-template-id' => 'document_option_data' }
       .span4.actions
         %input{ :type => 'hidden', :name => 'items[<%= id %>][id]', :value => '<% if (id.toString().substr(0,3) != "new") { %><%= id %><% } %>'.html_safe }
         %input{ :type => 'hidden', :name => 'items[<%= id %>][documentable_type]', :value => object.class.name }

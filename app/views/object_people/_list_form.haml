@@ -13,16 +13,14 @@
         %a.widgetbtn.pull-right{:href => edit_flow_person_path('<%=person.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
           %i.gcmsicon-edit-grey
 
-%script#object_person_selected_data{ :type => 'text/html' }
+%script#person_option_data{ :type => 'text/html' }
   %span.company <%= person.company %>
   %span.name <%= person.name %>
 
 %script#object_person_selected{ :type => 'text/html', :'data-mappings' => 'object:person', :'data-member' => 'object_person', :'data-role' => 'accountable', :'data-start_date' => '', :'data-stop_date' => '' }
   %li{ :'data-id' => '<%= id %>', :'data-object-id' => '<%= person.id %>' }
     .row-fluid
-      .span6.object_info{ :'data-template-id' => 'object_person_selected_data' }
-        -#%span.company <%= person.company %>
-        -#%span.name <%= person.name %>
+      .span6.object_info{ :'data-template-id' => 'person_option_data' }
       .span6.actions
         %input{ :type => 'hidden', :name => 'items[<%= id %>][id]', :value => '<% if (id.toString().substr(0,3) != "new") { %><%= id %><% } %>'.html_safe }
         %input{ :type => 'hidden', :name => 'items[<%= id %>][personable_type]', :value => object.class.name }

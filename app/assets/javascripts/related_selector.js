@@ -28,11 +28,6 @@
   , init: function() {
       this.mapper = 'relationships';
 
-      // Fetch required parameters from data attributes
-      //$.extend(this.options, {
-      //  this.source_type = this.$element.
-      //});
-
       this.current_objects = [];
       this.options_objects = [];
 
@@ -166,7 +161,6 @@
 
       $target.tmpl_additem(
         this.mappers[this.mapper].current_load_item(item));
-      //$loaded_item = $target.find('[data-object-id="' + item.id + '"]');
     }
 
   , next_random_id: function() {
@@ -230,28 +224,15 @@
       if ($updated_item.length > 0) {
         join_id = $updated_item.attr('data-id');
         data = this.mappers[this.mapper].current_add_item(item, join_id);
-
-        added = $updated_item.hasClass('added');
-        removed = $updated_item.hasClass('removed');
-
-        $new_item = $($.tmpl.render_items($target, [data]));
-        $updated_item = $updated_item.replaceWith($new_item);
-
-        if (added)
-          $new_item.addClass('added').find('.state').text('added');
-        if (removed) {
-          $new_item.addClass('removed').find('.state').text('removed');
-          $new_item.find('._destroy').val('destroy');
-        }
-
-        this.$element.trigger('sync-lists');
+        $new_item = $.tmpl.render_items($updated_item.find('.object_info'), [data]);
+        $updated_item.find('.object_info').html($new_item);
       }
+      return
     }
 
   , delete_option: function(e, item) {
       var $item
         , $source = this.$source()
-        //, data = this.mappers[this.mapper].options_add_item(item)
         ;
 
       $item = $source.find('[data-id="' + item.id + '"]');
@@ -261,7 +242,6 @@
   , delete_selected_option: function(e, item) {
       var $item
         , $target = this.$target()
-        //, data = this.mappers[this.mapper].current_add_item(item, join_id)
         ;
 
       $item = $target.find('[data-object-id="' + item.id + '"]');

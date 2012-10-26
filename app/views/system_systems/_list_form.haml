@@ -10,15 +10,17 @@
       .span4.actions
         %a.widgetbtn.pull-right.add-me{:href => "#", :'data-toggle' => 'selector-list-select'}
           %i.grcicon-chevron-right
-        %a.widgetbtn.pull-right{:href => edit_flow_system_path('<%=system.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-list-target' => '' }
+        %a.widgetbtn.pull-right{:href => edit_flow_system_path('<%=system.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
           %i.gcmsicon-edit-grey
+
+%script#subsystem_option_data{ :type => 'text/html' }
+  %span.company <%= system.slug %>
+  %span.name <%= system.title %>
 
 %script#subsystem_selected{ :type => 'text/html', :'data-mappings' => 'child:system,object:system', :'data-member' => 'system_system' }
   %li{ :'data-id' => '<%= id %>', :'data-object-id' => '<%= system.id %>' }
     .row-fluid
-      .span6
-        %span.company <%= system.slug %>
-        %span.name <%= system.title %>
+      .span6.object_info{ :'data-template-id' => 'subsystem_option_data' }
       .span6.actions
         %input{ :type => 'hidden', :name => 'items[<%= id %>][id]', :value => '<% if (id.toString().substr(0,3) != "new") { %><%= id %><% } %>'.html_safe }
         %input{ :type => 'hidden', :name => 'items[<%= id %>][parent_id]', :value => object.id }
@@ -26,14 +28,14 @@
         %input._destroy{ :type => 'hidden', :name => 'items[<%= id %>][_destroy]', :value => '' }
         %a.widgetbtn.pull-right{ :href => '#', :'data-toggle' => 'selector-list-remove' }
           %i.icon-minus-sign
-        %a.widgetbtn.pull-right{ :href => edit_flow_system_path('<%=system.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-list-target' => '' }
+        %a.widgetbtn.pull-right{ :href => edit_flow_system_path('<%=system.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
           %i.gcmsicon-edit-grey
 
 .row-fluid
   .span6
     %h4
       Sub-systems
-      %a.widgetbtn.widgetbtnselector{ :href => new_flow_system_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-list-target' => '.source, .target' }
+      %a.widgetbtn.widgetbtnselector{ :href => new_flow_system_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-selector-target' => '.source, .target' }
         %i.gcmsicon-add
       .pull-right
         %input.widgetsearch{:type => "text", :placeholder => "Search Systems"}

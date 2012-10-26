@@ -25,7 +25,7 @@ class DocumentsController < ApplicationController
     end
 
     actions :index do
-      allow :read_document
+      allow :read, :read_document
     end
 
     actions :edit, :update do
@@ -40,11 +40,13 @@ class DocumentsController < ApplicationController
   layout 'dashboard'
 
   def index
-    @objects = Document
+    @documents = Document
     if params[:s]
-      @objects = @objects.db_search(params[:s])
+      @documents = @documents.db_search(params[:s])
     end
-    render :json => @objects.all
+    @documents = allowed_objs(@documents.all, :read)
+
+    render :json => @documents
   end
 
   # FIXME: No template

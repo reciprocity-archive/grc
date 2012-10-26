@@ -10,15 +10,17 @@
       .span4.actions
         %a.widgetbtn.pull-right.add-me{:href => "#", :'data-toggle' => 'selector-list-select'}
           %i.grcicon-chevron-right
-        %a.widgetbtn.pull-right{:href => edit_flow_control_path('<%=control.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-list-target' => '' }
+        %a.widgetbtn.pull-right{:href => edit_flow_control_path('<%=control.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target', :'data-modal-class' => 'modal-wide' }
           %i.gcmsicon-edit-grey
+
+%script#control_option_data{ :type => 'text/html' }
+  %span.company <%= control.slug %>
+  %span.name <%= control.title %>
 
 %script#control_selected{ :type => 'text/html', :'data-mappings' => 'child:control,object:control', :'data-member' => 'system_control' }
   %li{ :'data-id' => '<%= id %>', :'data-object-id' => '<%= control.id %>' }
     .row-fluid
-      .span6
-        %span.company <%= control.slug %>
-        %span.name <%= control.title %>
+      .span6.object_info{ :'data-template-id' => 'control_option_data' }
       .span6.actions
         %input{ :type => 'hidden', :name => 'items[<%= id %>][id]', :value => '<% if (id.toString().substr(0,3) != "new") { %><%= id %><% } %>'.html_safe }
         %input{ :type => 'hidden', :name => 'items[<%= id %>][system_id]', :value => object.id }
@@ -26,14 +28,14 @@
         %input._destroy{ :type => 'hidden', :name => 'items[<%= id %>][_destroy]', :value => '' }
         %a.widgetbtn.pull-right{ :href => '#', :'data-toggle' => 'selector-list-remove' }
           %i.icon-minus-sign
-        %a.widgetbtn.pull-right{ :href => edit_flow_control_path('<%=control.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-list-target' => '' }
+        %a.widgetbtn.pull-right{ :href => edit_flow_control_path('<%=control.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target', :'data-modal-class' => 'modal-wide' }
           %i.gcmsicon-edit-grey
 
 .row-fluid
   .span6
     %h4
       Controls
-      %a.widgetbtn.widgetbtnselector{ :href => new_flow_control_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-list-target' => '.source, .target' }
+      %a.widgetbtn.widgetbtnselector{ :href => new_flow_control_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-selector-target' => '.source, .target', :'data-modal-class' => 'modal-wide' }
         %i.gcmsicon-add
       .pull-right
         %input.widgetsearch{:type => "text", :placeholder => "Search Controls"}

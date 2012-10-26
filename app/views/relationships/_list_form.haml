@@ -1,12 +1,14 @@
 -content_for :modal_title do
   %h1=context[:title]
 
+%script#relationship_option_data{ :type => 'text/html' }
+  %span.company <%= object.slug %>
+  %span.name <%= object.title %>
+
 %script#relationship_selected{ :type => 'text/html', :'data-member' => 'relationship', :'data-type' => '', :'data-start_date' => '', :'data-stop_date' => '' }
   %li{ :'data-id' => '<%= id %>', :'data-object-id' => '<%= object.id %>', :'data-name' => '<%= object.name %>', :'data-company' => '<%= object.company %>' }
     .row-fluid
-      .span6
-        %span.company <%= object.slug %>
-        %span.name <%= object.title %>
+      .span6.object_info{ :'data-template-id' => 'relationship_option_data' }
       .span6.actions
         %input{ :type => 'hidden', :name => 'items[<%= id %>][id]', :value => '<% if (id.toString().substr(0,3) != "new") { %><%= id %><% } %>'.html_safe }
         %input{ :type => 'hidden', :name => 'items[<%= id %>][relationship_type]', :value => context[:relationship_type] }

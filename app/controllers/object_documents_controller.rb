@@ -4,22 +4,28 @@ class ObjectDocumentsController < BaseMappingsController
     allow :superuser
 
     actions :index do
-      allow :read, :read_document
+      allow :read, :read_object_document
+    end
+
+    actions :create do
+      allow :create, :create_object_document
     end
 
     actions :list_edit, :create do
-      allow :update, :update_document
+      allow :update, :update_object_document
     end
   end
 
   def index
-    @objects = ObjectDocument
+    @object_documents = ObjectDocument
     if params[:object_id]
-      @objects = @objects.where(
+      @object_documents = @object_documents.where(
         :documentable_type => params[:object_type],
         :documentable_id => params[:object_id])
     end
-    render :json => @objects, :include => :document
+    @object_documents = allowed_objs(@object_documents.all, :read)
+
+    render :json => @object_documents, :include => :document
   end
 
   private

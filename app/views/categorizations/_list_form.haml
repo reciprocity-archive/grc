@@ -13,12 +13,14 @@
         %a.widgetbtn.pull-right{:href => edit_flow_category_path('<%=category.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-list-target' => '' }
           %i.gcmsicon-edit-grey
 
+%script#category_option_data{ :type => 'text/html' }
+  %span.company <%= category.parent_name %>
+  %span.name <%= category.name %>
+
 %script#categorization_selected{ :type => 'text/html', :'data-mappings' => 'object:category', :'data-member' => 'categorization' }
   %li{ :'data-id' => '<%= id %>', :'data-object-id' => '<%= category.id %>' }
     .row-fluid
-      .span6
-        %span.company <%= category.parent_name %>
-        %span.name <%= category.name %>
+      .span6.object_info{ :'data-template-id' => 'category_option_data' }
       .span6.actions
         %input{ :type => 'hidden', :name => 'items[<%= id %>][id]', :value => '<% if (id.toString().substr(0,3) != "new") { %><%= id %><% } %>'.html_safe }
         %input{ :type => 'hidden', :name => 'items[<%= id %>][categorizable_type]', :value => object.class.name }

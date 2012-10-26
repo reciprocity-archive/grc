@@ -83,8 +83,8 @@ class ProductsController < ApplicationController
     respond_to do |format|
       if @product.authored_update(current_user, product_params)
         flash[:notice] = "Successfully updated the product."
-        format.json { render :json => @product.as_json(:root => nil), :location => flow_product_path(@product) }
         format.html { redirect_to flow_product_path(@product) }
+        format.json { render :json => @product.as_json(:root => nil), :location => flow_product_path(@product) }
       else
         flash[:error] = "There was an error updating the product."
         format.html { render :layout => nil, :status => 400 }

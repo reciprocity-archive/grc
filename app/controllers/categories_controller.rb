@@ -63,9 +63,28 @@ class CategoriesController < ApplicationController
     end
   end
 
+  def delete
+    @category = Category.find(params[:id])
+    @model_stats = []
+    @relationship_stats = []
+
+    respond_to do |format|
+      format.json { render :json => @category.as_json(:root => nil) }
+      format.html do
+        render :layout => nil, :template => 'shared/delete_confirm',
+          :locals => { :model => @category, :url => flow_category_path(@category), :models => @model_stats, :relationships => @relationship_stats }
+      end
+    end
+  end
+
   def destroy
     @category = Category.find(params[:id])
     @category.destroy
+    flash[:notice] = "Category deleted"
+    respond_to do |format|
+      format.html { redirect_to programs_dash_path }
+      format.json { render :json => @category.as_json(:root => nil) }
+    end
   end
 
   private
