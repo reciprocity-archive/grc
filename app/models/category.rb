@@ -12,11 +12,21 @@ class Category < ActiveRecord::Base
 
   is_versioned_ext
 
+  def display_name
+    name
+  end
+
   def parent_name
     parent && parent.name
   end
 
   def as_json(options={})
     super(options.merge(:methods => :parent_name))
+  end
+
+  def self.db_search(q)
+    q = "%#{q}%"
+    t = arel_table
+    where(t[:name].matches(q))
   end
 end

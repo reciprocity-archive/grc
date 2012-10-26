@@ -4,7 +4,6 @@
  *= require jquery-ui
  *= require bootstrap
  *= require can.jquery-1.0.7
- *= require selector
  *= require related_selector
  *= require spin.min
  *= require tmpl
@@ -109,14 +108,14 @@ jQuery(function($) {
     }
   });
 
-  $('body').on('focus', '.modal .filter-block .widgetsearch', function(e) {
+  $('body').on('focus', '.modal .widgetsearch', function(e) {
     $(this).bind('keypress', function(e) {
       if (e.which == 13) {
         // If this input is within a form, don't submit the form
         e.preventDefault();
 
         var $this = $(this)
-          , $list = $this.closest('.filter-block').find('ul[data-list-data-href]')
+          , $list = $this.closest('.modal').find('ul.source[data-list-data-href]')
           , href = $list.data('list-data-href') + '?' + $.param({ s: $this.val() });
         $.get(href, function(data) {
           $list.tmpl_setitems(data);

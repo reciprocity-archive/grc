@@ -43,13 +43,19 @@ CmsRails::Application.routes.draw do
   resources :systems, :as => 'flow_systems', :only => [:index, :show, :new, :edit, :create, :update, :destroy] do
     member do
       get 'tooltip'
-      get 'subsystems_list'
-      get 'subsystems_edit'
-      post 'subsystems_update'
-      get 'controls_list'
-      get 'controls_edit'
-      post 'controls_update'
       get 'delete'
+    end
+  end
+
+  resources :system_systems, :as => 'flow_system_systems', :only => [:index, :create] do
+    collection do
+      get 'list_edit'
+    end
+  end
+
+  resources :system_controls, :as => 'flow_system_controls', :only => [:index, :create] do
+    collection do
+      get 'list_edit'
     end
   end
 
@@ -97,37 +103,39 @@ CmsRails::Application.routes.draw do
     end
   end
 
-  resources :people, :as => 'flow_people', :only => [:show, :new, :create, :edit, :update, :destroy] do
-    collection do
-      get 'list'
-      get 'list_edit'
-      post 'list_update'
-    end
+  resources :people, :as => 'flow_people', :only => [:index, :show, :new, :create, :edit, :update, :destroy] do
     member do
       get 'delete'
     end
   end
 
-  resources :object_people, :as => 'flow_object_people', :only => [:index, :create]
-  resources :documents, :as => 'flow_documents' do
+  resources :object_people, :as => 'flow_object_people', :only => [:index, :create] do
     collection do
-      get 'list'
       get 'list_edit'
-      post 'list_update'
     end
+  end
+
+  resources :documents, :as => 'flow_documents' do
     member do
       get 'delete'
+    end
+  end
+
+  resources :object_documents, :as => 'flow_object_documents', :only => [:index, :create] do
+    collection do
+      get 'list_edit'
     end
   end
 
   resources :categories, :as => 'flow_categories' do
-    collection do
-      get 'list'
-      get 'list_edit'
-      post 'list_update'
-    end
     member do
       get 'delete'
+    end
+  end
+
+  resources :categorizations, :as => 'flow_categorizations', :only => [:index, :create] do
+    collection do
+      get 'list_edit'
     end
   end
 

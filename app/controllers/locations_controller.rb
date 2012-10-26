@@ -108,7 +108,7 @@ class LocationsController < ApplicationController
     flash[:notice] = "location deleted"
     respond_to do |format|
       format.html { redirect_to programs_dash_path }
-      format.json { render :json => location.as_json(:root => nil) }
+      format.json { render :json => @location.as_json(:root => nil), :location => programs_dash_path }
     end
   end
 

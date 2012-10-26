@@ -20,18 +20,13 @@
       relationships: {
         options_load_item: function(o) { return o; }
       , options_add_item: function(o) { return o; }
-      , current_load_item: function(o) { return o.relationship; }
+      , current_load_item: function(o) { return o; }
       , current_add_item: function(o, id) { return { id: id, object: o } }
       }
   }
 
   , init: function() {
       this.mapper = 'relationships';
-
-      // Fetch required parameters from data attributes
-      //$.extend(this.options, {
-      //  this.source_type = this.$element.
-      //});
 
       this.current_objects = [];
       this.options_objects = [];
@@ -47,9 +42,12 @@
         .on('list-load-item', '.source', $.proxy(this.load_option, this))
         .on('list-add-item',  '.source', $.proxy(this.add_option, this))
         .on('list-update-item', '.source', $.proxy(this.update_option, this))
+        .on('list-delete-item', '.source', $.proxy(this.delete_option, this))
         .on('list-load-item', '.target', $.proxy(this.load_selected_option, this))
         .on('list-add-item',  '.target', $.proxy(this.add_selected_option, this))
         .on('list-update-item', '.target', $.proxy(this.update_selected_option, this))
+        .on('list-delete-item', '.target', $.proxy(this.delete_selected_option, this))
+        .on('delete-object', $.proxy(this.delete_object, this))
         .on('sync-lists', $.proxy(this.sync_lists, this))
 
       // Wait for initial modal 'loaded' event
@@ -57,12 +55,17 @@
         .on('loaded', $.proxy(this.load_lists, this));
     }
 
+  , delete_object: function(e, data, xhr) {
+      this.$source().trigger('list-delete-item', data);
+      this.$target().trigger('list-delete-item', data);
+    }
+
   , handle_response: function(e, data, xhr) {
       var $target = this.$target();
       if (data.errors) {
         // Walk error object and insert error messages
         $.each(data.errors, function(id, errors) {
-          var $added_item = $target.find('[data-object-id="' + id + '"]');
+          var $added_item = $target.find('[data-id="' + id + '"]');
           $added_item.addClass('member-failure');
           $.each(errors, function(key, error) {
             var $input = $added_item.find('[name="items[' + id + '][' + key + ']"]');
@@ -74,22 +77,10 @@
             $help_inline.text(error);
           });
         });
+      } else {
+        $(this.options.tabTarget).trigger('redraw');
+        this.$element.modal_relationship_selector('hide');
       }
-
-      //if (data.errors) {
-        var $els = this.$element.find('.removed').find('input, select, textarea');
-        $els.each(function(i, el) {
-          var $el = $(el)
-            , name = $el.attr('data-name');
-          if (name) {
-            $el.attr('name', name);
-            $el.attr('data-name', null);
-          }
-        });
-      //}
-
-      $(this.options.tabTarget).trigger('redraw');
-      this.$element.modal_selector('hide');
     }
 
   , $source: function() { return this.$element.find('.source'); }
@@ -170,7 +161,6 @@
 
       $target.tmpl_additem(
         this.mappers[this.mapper].current_load_item(item));
-      //$loaded_item = $target.find('[data-object-id="' + item.id + '"]');
     }
 
   , next_random_id: function() {
@@ -197,6 +187,7 @@
       $added_item = $target.find('[data-object-id="' + item.id + '"]');
       if ($added_item.is('.removed')) {
         $added_item.removeClass('removed');
+        $added_item.find('._destroy').val('');
         $added_item.find('.state').text('');
       } else if ($added_item.length == 0) {
         $target.tmpl_additem(data);
@@ -233,22 +224,28 @@
       if ($updated_item.length > 0) {
         join_id = $updated_item.attr('data-id');
         data = this.mappers[this.mapper].current_add_item(item, join_id);
-
-        added = $updated_item.hasClass('added');
-        removed = $updated_item.hasClass('removed');
-
-        $new_item = $($.tmpl.render_items($target, [data]));
-        $updated_item = $updated_item.replaceWith($new_item);
-
-        if (added)
-          $new_item.addClass('added').find('.state').text('added');
-        if (removed) {
-          $new_item.addClass('removed').find('.state').text('removed');
-          $new_item.find('._destroy').val('destroy');
-        }
-
-        this.$element.trigger('sync-lists');
+        $new_item = $.tmpl.render_items($updated_item.find('.object_info'), [data]);
+        $updated_item.find('.object_info').html($new_item);
       }
+      return
+    }
+
+  , delete_option: function(e, item) {
+      var $item
+        , $source = this.$source()
+        ;
+
+      $item = $source.find('[data-id="' + item.id + '"]');
+      $item.remove();
+    }
+
+  , delete_selected_option: function(e, item) {
+      var $item
+        , $target = this.$target()
+        ;
+
+      $item = $target.find('[data-object-id="' + item.id + '"]');
+      $item.remove();
     }
 
   , submit: function(e) {

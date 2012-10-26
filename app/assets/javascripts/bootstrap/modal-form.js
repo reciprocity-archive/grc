@@ -5,20 +5,13 @@
   /* MODAL_FORM PUBLIC CLASS DEFINITION
    * =============================== */
 
-  var ModalForm = function ( element, options ) {
+  var ModalForm = function ( element, options, trigger ) {
 
     this.options = options;
     this.$element = $(element);
+    this.$trigger = $(trigger);
 
     this.init();
-    //this.$element
-    //  .on('keypress', 'form', $.proxy(this.keypress_submit, this))
-    //  .on('click.modal-form.close', '[data-dismiss="modal"]', $.proxy(this.hide, this))
-    //  .on('click.modal-form.reset', 'input[type=reset], [data-dismiss="modal-reset"]', $.proxy(this.reset, this))
-    //  .on('click.modal-form.submit', 'input[type=submit], [data-toggle="modal-submit"]', $.proxy(this.submit, this))
-    //  .on('click.modal-form.destroy', '[data-toggle="form-destroy"]', $.proxy(this.destroy, this))
-    //  .on('shown.modal-form', $.proxy(this.focus_first_input, this))
-    //  .on('loaded.modal-form', $.proxy(this.focus_first_input, this))
   }
 
   /* NOTE: MODAL_FORM EXTENDS BOOTSTRAP-MODAL.js
@@ -34,9 +27,25 @@
         .on('click.modal-form.close', '[data-dismiss="modal"]', $.proxy(this.hide, this))
         .on('click.modal-form.reset', 'input[type=reset], [data-dismiss="modal-reset"]', $.proxy(this.reset, this))
         .on('click.modal-form.submit', 'input[type=submit], [data-toggle="modal-submit"]', $.proxy(this.submit, this))
-        .on('click.modal-form.destroy', '[data-toggle="form-destroy"]', $.proxy(this.destroy, this))
         .on('shown.modal-form', $.proxy(this.focus_first_input, this))
-        .on('loaded.modal-form', $.proxy(this.focus_first_input, this));
+        .on('loaded.modal-form', $.proxy(this.focus_first_input, this))
+        .on('delete-object', $.proxy(this.delete_object, this))
+        ;
+    }
+
+  , delete_object: function(e, data, xhr) {
+      // If this modal is contained within another modal, pass the event onward
+      var $trigger_modal = this.$trigger.closest('.modal')
+        , redirect_url
+        ;
+      if ($trigger_modal.length > 0) {
+        $trigger_modal.trigger('delete-object', [data, xhr]);
+      } else if (xhr && xhr.getResponseHeader('location')) {
+        // Otherwise redirect if possible
+        window.location.assign(xhr.getResponseHeader('location'));
+      } else {
+        // Otherwise refresh the page
+      }
     }
 
   , $form: function() {
@@ -58,7 +67,6 @@
 
   , reset: function(e) {
       this.$form()[0].reset();
-      //$(e.target).closest('form')[0].reset();
       this.hide(e);
     }
 
@@ -74,20 +82,14 @@
       if ($first_input.length > 0)
         setTimeout(function() { $first_input.get(0).focus(); }, 100);
     }
-
-  , destroy: function(e) {
-      // Bail if button is disabled
-      //if ($(e.target).is('.disabled'))
-      //  return false;
-    }
   });
 
-  $.fn.modal_form = function(option) {
+  $.fn.modal_form = function(option, trigger) {
     return this.each(function() {
       var $this = $(this)
         , data = $this.data('modal_form')
         , options = $.extend({}, $.fn.modal_form.defaults, $this.data(), typeof option == 'object' && option);
-      if (!data) $this.data('modal_form', (data = new ModalForm(this, options)));
+      if (!data) $this.data('modal_form', (data = new ModalForm(this, options, trigger)));
       if (typeof option == 'string') data[option]();
       else if (options.show) data.show();
     });

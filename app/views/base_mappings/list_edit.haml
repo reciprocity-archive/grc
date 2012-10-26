@@ -1,0 +1,4 @@
+=form_for model_name.underscore.to_sym, :url => form_url, :method => :post, :remote => true do |f|
+  =render :partial => 'list_form',
+          :layout  => 'layouts/list_modal',
+          :locals  => form_context

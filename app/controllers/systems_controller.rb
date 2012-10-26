@@ -33,7 +33,11 @@ class SystemsController < ApplicationController
   layout 'dashboard'
 
   def index
-    @systems = System.all
+    @systems = System
+    if params[:s].present?
+      @systems = @systems.db_search(params[:s])
+    end
+    render :json => @systems.all
   end
 
   def show
@@ -76,7 +80,7 @@ class SystemsController < ApplicationController
       if @system.authored_update(current_user, system_params)
         flash[:notice] = "Successfully updated the system."
         format.json do
-          render :json => @system.as_json(:root => nil)
+          render :json => @system.as_json(:root => nil), :location => flow_system_path(@system)
         end
         format.html { redirect_to flow_system_path(@system) }
       else
@@ -110,6 +114,7 @@ class SystemsController < ApplicationController
       if @system.destroy
         flash[:notice] = "System deleted"
         format.html { ajax_refresh }
+        format.json { render :json => @system.as_json(:root => nil), :location => flow_system_path(@system) }
       else
         flash[:error] = "Failed to delete system"
         format.html { ajax_refresh }
@@ -120,82 +125,6 @@ class SystemsController < ApplicationController
   def tooltip
     @system = System.find(params[:id])
     render :layout => '_tooltip', :locals => { :system => @system }
-  end
-
-  def subsystems_edit
-    @system = System.find(params[:id])
-    @systems = System.where({})
-    render :layout => nil
-  end
-
-  def subsystems_update
-    @system = System.find(params[:id])
-
-    new_system_systems = []
-
-    if params[:items]
-      params[:items].each do |_, item|
-        # Do whatever is needed with item-forms
-        system_system = @system.sub_system_systems.where(:child_id => item[:id]).first
-        if !system_system
-          child = System.find(item[:id])
-          system_system = @system.sub_system_systems.new(:child => child)
-        end
-        new_system_systems.push(system_system)
-      end
-    end
-
-    @system.sub_system_systems = new_system_systems
-
-    respond_to do |format|
-      if @system.save
-        format.json do
-          render :json => @system.sub_systems.all.map { |s| s.as_json(:root => nil) }
-        end
-        format.html
-      else
-        flash[:error] = "Could not update subsystems"
-        format.html { render :layout => nil }
-      end
-    end
-  end
-
-  def controls_edit
-    @system = System.find(params[:id])
-    @controls = Control.where({})
-    render :layout => nil
-  end
-
-  def controls_update
-    @system = System.find(params[:id])
-
-    new_system_controls = []
-
-    if params[:items]
-      params[:items].each do |_, item|
-        # Do whatever is needed with item-forms
-        system_control = @system.system_controls.where(:control_id => item[:id]).first
-        if !system_control
-          control = Control.find(item[:id])
-          system_control = @system.system_controls.new(:control => control)
-        end
-        new_system_controls.push(system_control)
-      end
-    end
-
-    @system.system_controls = new_system_controls
-
-    respond_to do |format|
-      if @system.save
-        format.json do
-          render :json => @system.controls.all.map { |c| c.as_json(:root => nil) }
-        end
-        format.html
-      else
-        flash[:error] = "Could not update subsystems"
-        format.html { render :layout => nil }
-      end
-    end
   end
 
   private

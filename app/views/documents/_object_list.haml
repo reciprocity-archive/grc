@@ -2,7 +2,7 @@
 
 %h3
   References
-  %a.btn.btn-blue.addbtn.fltrt{:href => list_edit_flow_documents_path(:object_type => object.class.name, :object_id => object.id), :'data-toggle' => 'modal-ajax-listform', :'data-modal-reset' => 'reset', :'data-list-target' => '#referenceList' } Edit List
+  %a.btn.btn-blue.addbtn.fltrt{:href => list_edit_flow_object_documents_path(:object_type => object.class.name, :object_id => object.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#referenceList', :'data-modal-class' => 'modal-wide' } Edit List
 
 %script{ :type => 'text/html', :data => { :document => '' }}
   %li.controlSlot{ :'data-id' => '<%= document.id %>' }

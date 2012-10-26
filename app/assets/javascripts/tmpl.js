@@ -20,7 +20,6 @@
 
       if (data) {
         return func.apply(context, [data]);
-        //return func(data);
       } else {
         return func;
       }
@@ -73,11 +72,29 @@
     }
   };
 
+  $.fn.recursive_tmpl = function(data, context) {
+    context = $.extend({}, context || {}, $.tmpl.context);
+    var $html;
+    if (this.is('[type="text/html"]')) {
+      // Parse and render this element as a template
+      $html = $('<div>' + $.tmpl(this.html(), data, context) + '</div>');
+      $html.find('[data-template-id]').each(function() {
+        var inner_tmpl = $('#' + $(this).attr('data-template-id')).html()
+          , inner_html = $.tmpl(inner_tmpl, data, context)
+          ;
+        $(this).html(inner_html);
+      });
+      return $html.html();
+    } else {
+      $html = $($.tmpl.apply(this, [data, context]));
+      return this.html($html);
+    }
+  };
+
   $.tmpl.render_items = function($list, list) {
     var $tmpl = null
       , defaults = {}
       , output = []
-      , prefix = null
       ;
 
     if ($list.data('template-id')) {
@@ -86,19 +103,63 @@
       $tmpl = $list.siblings('script[type="text/html"]').add($list.find('> script[type="text/html"]'))
     }
 
-    prefix = $tmpl.data('prefix');
-
     defaults = $.extend(defaults, $tmpl.data('context'), $tmpl.data(), $list.data('context'), $list.data());
 
     $.each(list, function(i, data) {
-      var new_data = {};
-      if (prefix && !data[prefix]) {
-        new_data[prefix] = data
-        data = new_data
-      }
-      output.push($tmpl.tmpl($.extend(defaults, data)));
+      data = $.tmpl.render_data($list, data);
+      output.push($tmpl.recursive_tmpl($.extend(defaults, data)));
     });
     return output.join('');
+  };
+
+  $.tmpl.render_data = function($dest, data) {
+    // $dest: destination parent element
+    $($dest.parents('[data-template-id]').andSelf().get().reverse()).each(function(i) {
+      console.debug('building data:', i, data);
+      var $tmpl = $('#' + $(this).data('template-id'));
+      data = $.tmpl.render_data_for_template($tmpl, data);
+    });
+    return data;
+  };
+
+  $.tmpl.render_data_for_template = function($tmpl, data) {
+    var $tmpl, new_data = {}
+      , i
+      , mappings, split_mappings, from_key, to_key
+      , member, split_member, member_key
+      , prefix
+      ;
+
+    prefix = $tmpl.data('prefix');
+    mappings = $tmpl.data('mappings');
+    member = $tmpl.data('member');
+
+    if (member) {
+      split_member = member.split(',');
+      for (i in split_member) {
+        member_key = split_member[i];
+        if (data.hasOwnProperty(member_key)) {
+          new_data = data[member_key];
+          data = new_data;
+          break;
+        }
+      }
+    }
+    if (mappings) {
+      split_mappings = mappings.split(',');
+      for (i in split_mappings) {
+        from_key = split_mappings[i].split(':')[0];
+        to_key = split_mappings[i].split(':')[1];
+        if (data.hasOwnProperty(from_key)) {
+          data[to_key] = data[from_key];
+        }
+      }
+    }
+    if (prefix && !data[prefix]) {
+      new_data[prefix] = data
+      data = new_data
+    }
+    return data;
   };
 
   $.fn.tmpl_additem = function(data) {
@@ -108,7 +169,8 @@
   $.fn.tmpl_additems = function(list) {
     return this.each(function() {
       var $this = $(this)
-        , $output = $($.tmpl.render_items($this, list));
+        , $output;
+      $output = $($.tmpl.render_items($this, list));
       ($this.is('ul') ? $this : $this.find('> ul')).append($output);
     });
   };

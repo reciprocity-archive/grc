@@ -11,6 +11,14 @@ class CategoriesController < ApplicationController
 
   layout 'dashboard'
 
+  def index
+    @categories = Category.where(Category.arel_table[:parent_id].not_eq(nil))
+    if params[:s]
+      @categories = @categories.db_search(params[:s])
+    end
+    render :json => @categories.all.as_json
+  end
+
   def new
     @category = Category.new(category_params)
 
@@ -31,7 +39,7 @@ class CategoriesController < ApplicationController
     respond_to do |format|
       if @category.save
         flash[:notice] = "Successfully created a new category."
-        format.json { render :json => @category.as_json(:root => nil) }
+        format.json { render :json => @category.as_json(:root => nil), :location => nil }
         format.html { ajax_refresh }
       else
         flash[:error] = @category.errors.full_messages
@@ -46,6 +54,7 @@ class CategoriesController < ApplicationController
     respond_to do |format|
       if @category.authored_update(current_user, category_params)
         flash[:notice] = "Successfully updated the category."
+        format.json { render :json => @category.as_json(:root => nil), :location => nil }
         format.html { ajax_refresh }
       else
         flash[:error] = @category.errors.full_messages
@@ -54,45 +63,27 @@ class CategoriesController < ApplicationController
     end
   end
 
+  def delete
+    @category = Category.find(params[:id])
+    @model_stats = []
+    @relationship_stats = []
+
+    respond_to do |format|
+      format.json { render :json => @category.as_json(:root => nil) }
+      format.html do
+        render :layout => nil, :template => 'shared/delete_confirm',
+          :locals => { :model => @category, :url => flow_category_path(@category), :models => @model_stats, :relationships => @relationship_stats }
+      end
+    end
+  end
+
   def destroy
     @category = Category.find(params[:id])
     @category.destroy
-  end
-
-  def list_edit
-    @object = params[:object_type].classify.constantize.find(params[:object_id])
-    #@people = Person.where({})
-    render :layout => nil
-  end
-
-  def list_update
-    @object = params[:object_type].classify.constantize.find(params[:object_id])
-
-    new_categorizations = []
-
-    if params[:items]
-      params[:items].each do |_, item|
-        categorization = @object.categorizations.where(:category_id => item[:id]).first
-        if !categorization
-          category = Category.find(item[:id])
-          categorization = @object.categorizations.new(:category => category)
-        end
-        new_categorizations.push(categorization)
-      end
-    end
-
-    @object.categorizations = new_categorizations
-
+    flash[:notice] = "Category deleted"
     respond_to do |format|
-      if @object.save
-        format.json do
-          render :json => @object.categorizations.all.map { |cat| cat.as_json(:root => nil, :include => { :category => { :methods => :parent_name }}) }
-        end
-        format.html
-      else
-        flash[:error] = "Could not update categorizations"
-        format.html { render :layout => nil }
-      end
+      format.html { redirect_to programs_dash_path }
+      format.json { render :json => @category.as_json(:root => nil) }
     end
   end
 

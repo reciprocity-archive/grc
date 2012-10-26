@@ -14,16 +14,12 @@ class PeopleController < ApplicationController
   access_control :acl do
     allow :superuser
 
-    actions :new, :create do
-      allow :create, :create_person
-    end
-
-    actions :list do
+    actions :index do
       allow :read, :read_person
     end
 
-    actions :list_update, :list_edit do
-      allow :update, :update_person
+    actions :new, :create do
+      allow :create, :create_person
     end
 
     actions :edit, :update do
@@ -38,11 +34,13 @@ class PeopleController < ApplicationController
   layout 'dashboard'
 
   def index
-    @objects = Person
+    @people = Person
     if params[:s]
-      @objects = @objects.db_search(params[:s])
+      @people = @people.db_search(params[:s])
     end
-    render :json => @objects.all
+    @people = allowed_objs(@people.all, :read)
+
+    render :json => @people
   end
 
   def show
@@ -64,7 +62,7 @@ class PeopleController < ApplicationController
     respond_to do |format|
       if @person.save
         flash[:notice] = "Successfully created a new person."
-        format.json { render :json => @person.as_json }
+        format.json { render :json => @person.as_json(:root => nil), :location => nil }
         format.html { ajax_refresh }
       else
         flash[:error] = @person.errors.full_messages
@@ -77,7 +75,7 @@ class PeopleController < ApplicationController
     respond_to do |format|
       if @person.authored_update(current_user, person_params)
         flash[:notice] = "Successfully updated the person."
-        format.json { render :json => @person.as_json }
+        format.json { render :json => @person.as_json(:root => nil), :location => nil }
         format.html { ajax_refresh }
       else
         flash[:error] = @person.errors.full_messages
@@ -106,73 +104,6 @@ class PeopleController < ApplicationController
     respond_to do |format|
       format.html { redirect_to programs_dash_path }
       format.json { render :json => @person.as_json(:root => nil) }
-    end
-  end
-
-  def list
-    @people = Person.where({})
-    if params[:s] && !params[:s].blank?
-      @people = @people.where(:name => params[:s])
-    end
-    respond_to do |format|
-      format.html { render :layout => nil }
-      format.json do
-        render :json => @people.as_json(:root => nil)
-      end
-    end
-  end
-
-  def list_edit
-    if !params[:object_type] || !params[:object_id]
-      return 400
-    end
-
-    @object = params[:object_type].classify.constantize.find(params[:object_id])
-    #@people = Person.where({})
-    render :layout => nil
-  end
-
-  def list_update
-    if !params[:object_type] || !params[:object_id]
-      return 400
-    end
-
-    @object = params[:object_type].classify.constantize.find(params[:object_id])
-
-    new_object_people = []
-
-    if params[:items]
-      params[:items].each do |_, item|
-        object_person = @object.object_people.where(:person_id => item[:id]).first
-        if !object_person
-          person = Person.find(item[:id])
-          object_person = @object.object_people.new({:person => person})
-        end
-        parse_date_param(item, :start_date)
-        parse_date_param(item, :stop_date)
-        object_person.role = item[:role].blank? ? nil : item[:role]
-        object_person.start_date = item[:start_date]
-        object_person.stop_date = item[:stop_date]
-        if !object_person.new_record?
-          object_person.save
-        end
-        new_object_people.push(object_person)
-      end
-    end
-
-    @object.object_people = new_object_people
-
-    respond_to do |format|
-      if @object.save
-        format.json do
-          render :json => @object.object_people.all.map { |op| op.as_json_with_role_and_person(:root => nil) }
-        end
-        format.html
-      else
-        flash[:error] = "Could not update associated people"
-        format.json { render :json => { :errors => @object.object_people.reduce({}) { |memo, op| memo[op.person.id] = op.errors.as_json if !op.errors.empty?; memo } }, :status => 400 }
-        format.html { render :layout => nil }
-      end
     end
   end
 

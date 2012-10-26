@@ -114,7 +114,7 @@ class OrgGroupsController < ApplicationController
     flash[:notice] = "org_group deleted"
     respond_to do |format|
       format.html { redirect_to programs_dash_path }
-      format.json { render :json => org_group.as_json(:root => nil) }
+      format.json { render :json => @org_group.as_json(:root => nil), :location => programs_dash_path }
     end
   end
 

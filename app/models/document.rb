@@ -54,4 +54,11 @@ class Document < ActiveRecord::Base
   def complete?
     !link.nil? && !link.to_s.blank?
   end
+
+  def self.db_search(q)
+    q = "%#{q}%"
+    t = arel_table
+    where(t[:title].matches(q).
+      or(t[:link].matches(q)))
+  end
 end
