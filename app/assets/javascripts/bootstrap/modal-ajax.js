@@ -14,7 +14,15 @@
       , '</div>'
       , '<div class="modal-body"></div>'
       , '<div class="modal-footer">'
-      , '  <a class="close" href="#" data-dismiss="modal">Close</a>'
+      , '  <div class="row-fluid">'
+      , '    <nav class="fltlft txtlft span3">'
+      , '      <a class="btn btn-large btn-info" data-dismiss="modal">Cancel</a>'
+      , '    </nav>'
+      , '    <div class="span6"></div>'
+      , '    <nav class="fltrt txtrt span3">'
+      , '      <a class="btn btn-large btn-warning" data-dismiss="modal">Close</a>'
+      , '    </nav>'
+      , '  </div>'
       , '</div>'
       ];
     return $(template.join('\n'))
