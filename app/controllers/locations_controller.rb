@@ -127,6 +127,9 @@ class LocationsController < ApplicationController
       %w(type).each do |field|
         parse_option_param(location_params, field)
       end
+      %w(start_date stop_date).each do |field|
+        parse_date_param(product_params, field)
+      end
       location_params
     end
 end

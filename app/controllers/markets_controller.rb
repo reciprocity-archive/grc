@@ -127,6 +127,9 @@ class MarketsController < ApplicationController
       %w(type).each do |field|
         parse_option_param(market_params, field)
       end
+      %w(start_date stop_date).each do |field|
+        parse_date_param(product_params, field)
+      end
       market_params
     end
 end
