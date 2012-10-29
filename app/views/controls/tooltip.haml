@@ -1,27 +1,27 @@
-.popover-title
-  %h3.oneline=@control.title
+-content_for :tooltip_title do
+  %h3.oneline
+    @control.title Information
 
-.popover-content
-  .cleanlabels
-    .row-fluid
-      .span4
-        %label Code
-        %p=@control.slug
-      .span8
-        %label Title
-        %p=@control.title
+.cleanlabels
+  .row-fluid
+    .span4
+      %label Code
+      %p=@control.slug
+    .span8
+      %label Title
+      %p=@control.title
 
-    %br/
-    .row-fluid
-      .span12
-        %label Description
-        %p=@control.description
+  %br/
+  .row-fluid
+    .span12
+      %label Description
+      %p=@control.description
 
-    %br/
-    .row-fluid
-      .span6
-        %label Version
-        %p ---
-      .span6
-        %label Deprecated
-        %p ---
+  %br/
+  .row-fluid
+    .span6
+      %label Version
+      %p ---
+    .span6
+      %label Deprecated
+      %p ---

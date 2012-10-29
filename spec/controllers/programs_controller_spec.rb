@@ -43,6 +43,7 @@ describe ProgramsController do
     end
 
     it "gets the correct stats" do
+      pending "@stats not actually used except in tests"
       get 'show', :id => @reg.id
       stats = assigns(:stats)
       stats[:sections_count].should eq(3)
