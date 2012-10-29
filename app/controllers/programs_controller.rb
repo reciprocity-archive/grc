@@ -14,10 +14,13 @@ class ProgramsController < ApplicationController
 
   SECTION_MAP = Hash[*%w(Code slug Title title Description description Notes notes Created created_at Updated updated_at)]
 
+  CONTROL_MAP = Hash[*%w(Code slug Title title Description description Type type Kind kind Means means Version version Start start_date Stop stop_date URL url Documentation documentation_description Verify-Frequency verify_frequency Created created_at Updated updated_at)]
+
   # FIXME: Decide if the :section, controls, etc.
   # methods should be moved, and what access controls they
   # need.
   before_filter :load_program, :only => [:show,
+                                         :export_controls,
                                          :export,
                                          :tooltip,
                                          :edit,
@@ -45,6 +48,8 @@ class ProgramsController < ApplicationController
 
     allow :update, :update_program, :of => :program, :to => [:edit,
                                                     :update,
+                                                    :import_controls,
+                                                    :export_controls,
                                                     :import,
                                                     :export]
   end
@@ -114,6 +119,27 @@ class ProgramsController < ApplicationController
     end
   end
 
+  def export_controls
+    respond_to do |format|
+      format.csv do
+        self.response.headers['Content-Type'] = 'text/csv'
+        headers['Content-Disposition'] = "attachment; filename=\"#{@program.slug}-controls.csv\""
+        self.response_body = Enumerator.new do |out|
+          out << CSV.generate_line(%w(Type Code))
+          values = %w(Code).map { |key| @program.send(PROGRAM_MAP[key]) }
+          values.unshift("Controls")
+          out << CSV.generate_line(values)
+          out << CSV.generate_line([])
+          out << CSV.generate_line(CONTROL_MAP.keys)
+          @program.controls.each do |s|
+            values = CONTROL_MAP.keys.map { |key| s.send(CONTROL_MAP[key]) }
+            out << CSV.generate_line(values)
+          end
+        end
+      end
+    end
+  end
+
   def export
     respond_to do |format|
       format.csv do
@@ -164,6 +190,20 @@ class ProgramsController < ApplicationController
     end
   end
 
+  def import_controls
+    upload = params["upload"]
+    if upload
+      file = upload.read
+      import = read_import_controls(CSV.parse(file))
+      @messages = import[:messages]
+      do_import_controls(import, params[:confirm].blank?)
+      @errors = import[:errors]
+      @creates = import[:creates]
+      @updates = import[:updates]
+      render 'import_controls_result', :layout => false
+    end
+  end
+
   def import
     upload = params["upload"]
     if upload
@@ -178,14 +218,59 @@ class ProgramsController < ApplicationController
     end
   end
 
-  def handle_option(attrs, name, messages)
+  def handle_option(attrs, name, messages, role = nil)
     name_s = name.to_s
+    role ||= name
     if attrs[name_s]
-      value = Option.where(:role => name, :title => attrs[name_s]).first
+      value = Option.where(:role => role, :title => attrs[name_s]).first
       if value.nil?
-        messages << "Unknown #{name_s} option '#{attrs[name_s]}'"
+        messages << "Unknown #{role} option '#{attrs[name_s]}'"
       end
       attrs[name_s] = value
+    end
+  end
+
+  def do_import_controls(import, check_only)
+    import[:errors] = {}
+    import[:updates] = []
+    import[:creates] = []
+    attrs = import[:program]
+    slug = attrs['slug']
+    if slug.blank?
+      import[:messages] << "missing program slug"
+    else
+      @program = Program.find_by_slug(slug)
+    end
+
+    @controls = []
+    import[:controls].each do |attrs|
+      attrs.delete(nil)
+      slug = attrs['slug']
+      handle_option(attrs, :type, import[:messages], :control_type)
+      handle_option(attrs, :kind, import[:messages], :control_kind)
+      handle_option(attrs, :means, import[:messages], :control_means)
+      handle_option(attrs, :verify_frequency, import[:messages])
+      Rails.logger.info "XXX"
+      Rails.logger.info attrs
+      attrs.delete('created_at')
+      attrs.delete('updated_at')
+      if slug.blank?
+        import[:messages] << "missing control slug"
+      else
+        control = Control.find_by_slug(slug)
+        if control
+          control.assign_attributes(attrs, :without_protection => true)
+          import[:updates] << slug
+        else
+          control = Control.new
+          control.assign_attributes(attrs, :without_protection => true)
+          control.program = @program
+          import[:creates] << slug
+        end
+        @controls << control
+        import[:errors][slug] = control.errors.full_messages unless control.valid?
+        control.save unless check_only
+      end
     end
   end
 
@@ -195,11 +280,11 @@ class ProgramsController < ApplicationController
     import[:creates] = []
     attrs = import[:program]
     attrs.delete(nil)
-    attrs.delete("created_at")
-    attrs.delete("updated_at")
+    attrs.delete('created_at')
+    attrs.delete('updated_at')
     handle_option(attrs, :audit_duration, import[:messages])
     handle_option(attrs, :audit_frequency, import[:messages])
-    slug = attrs["slug"]
+    slug = attrs['slug']
     if slug.blank?
       import[:messages] << "missing program slug" unless key
     else
@@ -219,9 +304,11 @@ class ProgramsController < ApplicationController
     @sections = []
     import[:sections].each do |attrs|
       attrs.delete(nil)
-      slug = attrs["slug"]
+      slug = attrs['slug']
+      attrs.delete('created_at')
+      attrs.delete('updated_at')
       if slug.blank?
-        import[:messages] << "missing program slug" unless key
+        import[:messages] << "missing section slug" unless key
       else
         section = Section.find_by_slug(slug)
         if section
@@ -238,6 +325,43 @@ class ProgramsController < ApplicationController
         section.save unless check_only
       end
     end
+  end
+
+  def read_import_controls(rows)
+    import = { :messages => [] }
+
+    raise "There must be at least 3 input lines" unless rows.size >= 4
+
+    program_headers = trim_array(rows.shift).map do |heading|
+      if heading == "Type"
+        key = 'type'
+      else
+        key = PROGRAM_MAP[heading]
+        import[:messages] << "invalid program heading #{heading}" unless key
+      end
+      key
+    end
+
+    program_values = rows.shift
+
+    raise "First column must be Type" unless program_headers.shift == "type"
+    raise "Type must be Controls" unless program_values.shift == "Controls"
+
+    import[:program] = Hash[*program_headers.zip(program_values).flatten]
+
+    raise "There must be an empty separator row" unless trim_array(rows.shift) == []
+
+    control_headers = trim_array(rows.shift).map do |heading|
+      key = CONTROL_MAP[heading]
+      import[:messages] << "invalid control heading #{heading}" unless key
+      key
+    end
+
+    import[:controls] = rows.map do |control_values|
+      Hash[*control_headers.zip(control_values).flatten]
+    end
+
+    import
   end
 
   def read_import(rows)

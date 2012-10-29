@@ -10,7 +10,7 @@ class Section < ActiveRecord::Base
   include AuthorizedModel
   include RelatedModel
 
-  attr_accessible :title, :slug, :description, :program
+  attr_accessible :title, :slug, :description, :program, :notes
 
   define_index do
     indexes :slug, :sortable => true

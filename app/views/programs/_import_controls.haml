@@ -1,0 +1,12 @@
+-content_for :widget_title do
+  Import Controls
+
+-content_for :widget_help, 'import_controls'
+
+=form_tag '', :class => 'import', :multipart => true, :remote => true, :'data-type' => 'html', :'data-update-target' => '#results-container' do
+  %label(for="file") File to Upload
+  =file_field_tag "upload"
+  =submit_tag "Check Import", :class => %w(btn btn-large btn-success btn-primary)
+
+  %div
+    %div#results-container

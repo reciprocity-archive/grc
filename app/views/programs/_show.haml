@@ -14,6 +14,10 @@
         %i.gcmsicon-import-white
         Import Regs
     .span4
+      %a.span12.btn.btn-warning{ :href => import_controls_flow_programs_path }
+        %i.gcmsicon-import-white
+        Import Controls
+    .span4
       %a.span12.btn.btn-warning{ :href => mapping_program_path(program) }
         %i.gcmsicon-mapping-white
         Reg Mapper    
@@ -25,6 +29,9 @@
       %a.span12.btn.btn-warning{ :href => export_flow_program_path(program, :format => :csv), :target => '_blank' }
         %i.gcmsicon-play-white
         Export
+      %a.span12.btn.btn-warning{ :href => export_controls_flow_program_path(program, :format => :csv), :target => '_blank' }
+        %i.gcmsicon-play-white
+        Export Controls
     
 
 .information

@@ -1,0 +1,83 @@
+.row-fluid
+  .span6
+    %h4 Compliance Program
+    .row-fluid   
+      .span10.control-group
+        %label{:for => "slug"} Program/Regulation
+        %input#slug.span12{:disabled => "disabled", :value => @program.slug, :type => "text"}/
+        %br/
+        
+      .span2
+        %label{:for => "version"} Version  
+        %input#version.span12{:disabled => "disabled", :value => @program.version, :type => "text"}
+    .row-fluid
+
+      .span5
+        %label{:for => "control-code"} Name of uploaded file  
+        %input#control-code.span12{:disabled => "disabled", :value => params["upload"].original_filename, :type => "text"}
+
+%h4 Sample Data
+.well
+  #sampleData
+    %table.ggrc-table
+      %tr
+        %th Code
+        %th Title
+        %th Description
+        %th Kind
+        %th Means
+        %th Version
+        %th Start
+        %th Stop
+        %th URL
+        %th Documentation
+        %th Verify-Frequency
+      -@controls.first(10).each do |c|
+        %tr
+          %td=c.slug
+          %td=c.title
+          %td=c.description
+          %td=c.kind
+          %td=c.means
+          %td=c.version
+          %td=c.start_date
+          %td=c.stop_date
+          %td=c.url
+          %td=c.documentation_description
+          %td=c.verify_frequency
+
+
+%div
+  Warnings:
+
+  -@messages.each do |m|
+    %p{ :class => 'label-warning' }
+      =m
+
+%div
+  Errors:
+
+  -@errors.keys.each do |slug|
+    %p{ :class => 'member-failure' }
+      =slug
+      =":"
+      =@errors[slug].join(", ")
+
+%p{ :class => 'member-success' }
+  Created:
+
+  =@creates.join(", ")
+
+%p{ :class => 'member-success' }
+  Updated:
+
+  =@updates.join(", ")
+
+
+-if params[:confirm].blank?
+  =submit_tag "Finish Importing", :class => %w(btn btn-large btn-success btn-primary), :name => 'confirm'
+-else
+  Import of
+  =link_to @program.title, flow_program_path(@program)
+  controls is done.
+

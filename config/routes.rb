@@ -2,11 +2,14 @@ CmsRails::Application.routes.draw do
 
   resources :programs, :as => 'flow_programs', :only => [:index, :show, :new, :edit, :create, :update, :destroy] do
     collection do
+      get 'import_controls'
+      post 'import_controls'
       get 'import'
       post 'import'
     end
     member do
       get 'tooltip'
+      get 'export_controls'
       get 'export'
       get 'sections'
       get 'controls'
