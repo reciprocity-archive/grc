@@ -45,4 +45,8 @@ class ObjectDocumentsController < BaseMappingsController
       related_object = object_params[:documentable_type].constantize.find(object_params[:documentable_id])
       relation.documentable = related_object
     end
+
+    def default_as_json_options
+      { :include => :document }
+    end
 end

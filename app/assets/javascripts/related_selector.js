@@ -145,7 +145,7 @@
 
       $target.find('[data-object-id]').each(function(i, el) {
         var $el = $(el)
-          , $added_item = $source.find('[data-id="' + $el.data('id') + '"]');
+          , $added_item = $source.find('[data-id="' + $el.data('object-id') + '"]');
         if ($added_item.length > 0) {
           self.mark_item_selected($added_item);
         }

@@ -4,13 +4,13 @@
   Categories
   %a.btn.btn-blue.addbtn.fltrt{:href => list_edit_flow_categorizations_path(:object_type => object.class.name, :object_id => object.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#categoryList', :'data-modal-class' => 'modal-wide' } Edit List
 
-%script{ :type => 'text/html', :data => { :category => '' }}
+%script#category_list_item{ :type => 'text/html', :'data-member' => 'categorization' }
   %li.controlSlot{ :'data-id' => '<%= category.id %>' }
     .controls-group
       .controls-type <%= category.parent_name %>
       .controls-subgroup <%= category.name || '&nbsp;' %>
 
-%ul#categoryList
+%ul#categoryList{ :'data-template-id' => 'category_list_item' }
   -object.categorizations.all.each do |object_item|
     -item = object_item.category
     %li.controlSlot{ :'data-id' => item.id }

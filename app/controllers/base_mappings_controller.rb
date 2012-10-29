@@ -10,14 +10,14 @@ class BaseMappingsController < ApplicationController
         objects[id] = item_object
       end
       if errors.empty?
-        render :json => objects.values.compact, :status => 200
+        render :json => create_objects_as_json(objects.values.compact), :status => 200
       else
-        render :json => { :errors => errors, :objects => objects }, :status => 400
+        render :json => { :errors => errors, :objects => create_objects_as_json(objects) }, :status => 400
       end
     else
       errors, object = create_or_update_object(params[model_name.underscore])
       if errors.nil? || errors.empty?
-        render :json => object || {}, :status => 200
+        render :json => create_object_as_json(object) || {}, :status => 200
       else
         render :json => { :errors => errors }, :status => 400
       end
@@ -83,5 +83,25 @@ class BaseMappingsController < ApplicationController
 
     def update_object(object, params)
       object.update_attributes(object_params(params))
+    end
+
+    def default_as_json_options
+      {}
+    end
+
+    def objects_as_json(objects, args=nil)
+      objects.as_json(default_as_json_options.merge(args || {}))
+    end
+
+    def object_as_json(object, args=nil)
+      object.as_json(default_as_json_options.merge(args || {}))
+    end
+
+    def create_objects_as_json(objects)
+      objects_as_json(objects)
+    end
+
+    def create_object_as_json(object)
+      object_as_json(object)
     end
 end

@@ -11,7 +11,8 @@ class CategorizationsController < BaseMappingsController
         :categorizable_type => params[:object_type],
         :categorizable_id => params[:object_id])
     end
-    render :json => @objects, :include => :category
+    render :json => @objects,
+      :include => { :category => { :methods => :parent_name } }
   end
 
   private
@@ -30,5 +31,9 @@ class CategorizationsController < BaseMappingsController
       relation.category = Category.find(object_params[:category_id])
       related_object = object_params[:categorizable_type].constantize.find(object_params[:categorizable_id])
       relation.categorizable = related_object
+    end
+
+    def default_as_json_options
+      { :include => { :category => { :methods => :parent_name } } }
     end
 end

@@ -115,7 +115,6 @@
   $.tmpl.render_data = function($dest, data) {
     // $dest: destination parent element
     $($dest.parents('[data-template-id]').andSelf().get().reverse()).each(function(i) {
-      console.debug('building data:', i, data);
       var $tmpl = $('#' + $(this).data('template-id'));
       data = $.tmpl.render_data_for_template($tmpl, data);
     });

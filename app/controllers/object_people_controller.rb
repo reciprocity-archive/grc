@@ -52,4 +52,8 @@ class ObjectPeopleController < BaseMappingsController
       parse_date_param(object_params, :stop_date)
       relation.stop_date = object_params[:stop_date]
     end
+
+    def default_as_json_options
+      { :include => :person }
+    end
 end

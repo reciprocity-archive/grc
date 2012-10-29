@@ -4,14 +4,14 @@
   References
   %a.btn.btn-blue.addbtn.fltrt{:href => list_edit_flow_object_documents_path(:object_type => object.class.name, :object_id => object.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#referenceList', :'data-modal-class' => 'modal-wide' } Edit List
 
-%script{ :type => 'text/html', :data => { :document => '' }}
+%script#reference_list_item{ :type => 'text/html', :'data-member' => 'object_document'}
   %li.controlSlot{ :'data-id' => '<%= document.id %>' }
     .controls-group
       %a.widgetbtn.fltrt{ :href => flow_documents_path + '/<%= document.id %>/edit', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh' }
         %i.gcmsicon-edit-grey
       .controls-subgroup <%= document.title || document.link_url || '&nbsp;' %>
 
-%ul#referenceList
+%ul#referenceList{ :'data-template-id' => 'reference_list_item' }
   -object.object_documents.all.each do |object_item|
     -item = object_item.document
     %li.controlSlot{ :'data-id' => item.id }
