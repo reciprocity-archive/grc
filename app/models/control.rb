@@ -60,59 +60,29 @@ class Control < ActiveRecord::Base
   def custom_edges
     # Returns a list of additional edges that aren't returned by the default method.
 
-    edges = []
+    edges = Set.new
     if parent
-      edge = {
-        :source => parent,
-        :destination => self,
-        :type => :control_includes_control
-      }
-      edges.push(edge)
+      edges.add(Edge.new(parent, self, :control_includes_control))
     end
 
     if program
-      edge = {
-        :source => program,
-        :destination => self,
-        :type => :program_includes_control
-      }
-      edges.push(edge)
+      edges.add(Edge.new(program, self, :program_includes_control))
     end
 
     systems.each do |system|
-      edge = {
-        :source => self,
-        :destination => system,
-        :type => :control_implemented_by_system
-      }
-      edges.push(edge)
+      edges.add(Edge.new(self, system, :control_implemented_by_system))
     end
 
     sections.each do |section|
-      edge = {
-        :source => section,
-        :destination => self,
-        :type => :section_implemented_by_control
-      }
-      edges.push(edge)
+      edges.add(Edge.new(section, self, :section_implemented_by_control))
     end
 
     implemented_controls.each do |control|
-      edge = {
-        :source => control,
-        :destination => self,
-        :type => :control_implemented_by_control
-      }
-      edges.push(edge)
+      edges.add(Edge.new(control, self, :control_implemented_by_control))
     end
 
     implementing_controls.each do |control|
-      edge = {
-        :source => self,
-        :destination => control,
-        :type => :control_implemented_by_control
-      }
-      edges.push(edge)
+      edges.add(Edge.new(self, control, :control_implemented_by_control))
     end
 
     edges

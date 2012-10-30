@@ -44,50 +44,26 @@ class System < ActiveRecord::Base
     # Returns a list of additional edges that aren't returned by the default method.
     # FIXME: A LOT of these do not exist in the current design doc.
 
-    edges = []
+    edges = Set.new
 
     if !owner.nil?
-      edge = {
-        :source => owner,
-        :destination => self,
-        :type => :person_owns_system
-      }
+      edges.add(Edge.new(owner, self, :person_owns_system))
     end
 
     sections.each do |section|
-      edge = {
-        :source => section,
-        :destination => self,
-        :type => :section_implemented_by_system
-      }
-      edges.push(edge)
+      edges.add(Edge.new(section, self, :section_implemented_by_system))
     end
     
     controls.each do |control|
-      edge = {
-        :source => control,
-        :destination => self,
-        :type => :control_implemented_by_system
-      }
-      edges.push(edge)
+      edges.add(Edge.new(control, self, :control_implemented_by_system))
     end
 
     super_systems.each do |system|
-      edge = {
-        :source => system,
-        :destination => self,
-        :type => :system_contains_system
-      }
-      edges.push(edge)
+      edges.add(Edge.new(system, self, :system_contains_system))
     end
 
     sub_systems.each do |system|
-      edge = {
-        :source => self,
-        :destination => system,
-        :type => :system_contains_system
-      }
-      edges.push(edge)
+      edges.add(Edge.new(self, system, :system_contains_system))
     end
 
     edges

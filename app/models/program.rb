@@ -44,23 +44,13 @@ class Program < ActiveRecord::Base
 
   def custom_edges
     # Returns a list of additional edges that aren't returned by the default method.
-    edges = []
+    edges = Set.new
     sections.each do |section|
-      edge = {
-        :source => self,
-        :destination => section,
-        :type => :program_includes_section
-      }
-      edges.push(edge)
+      edges.add(Edge.new(self, section, :program_includes_section))
     end
 
     controls.each do |control|
-      edge = {
-        :source => self,
-        :destination => control,
-        :type => :program_includes_control
-      }
-      edges.push(edge)
+      edges.add(Edge.new(self, control, :program_includes_control))
     end
     edges
   end

@@ -3,23 +3,23 @@
 
 -content_for :widget_help, 'related_graph'
 
--abilities = ['', :full_read, :meta_read, :edit]
+-ability_sets = ['', 'full_read', 'full_read-meta_read', 'edit']
 #related-graph
   .button-set
     .row-fluid
       %ul
-        -abilities.each do |ability|
+        -ability_sets.each do |ability_set|
           %li.btn.tab-btn.span3
-            %a.span12{:href => "#graph-#{ability}-pane",
+            %a.span12{:href => "#graph-#{ability_set}-pane",
               "data-toggle" => 'tab',
               "data-source" => graph_flow_relationships_path(:oid => instance.id,
                 :otype => instance.class.to_s,
-                :ability => ability),
+                :abilities => ability_set),
               "data-full" => graph_flow_relationships_path(:oid => instance.id,
                 :otype => instance.class.to_s),
               "data-refresh-time" => 60 }
-              #{ability.to_s.titleize}
+              #{ability_set.to_s.titleize}
 
   .tab-content
-    -abilities.each do |ability|
-      .tab-pane{:id => "graph-#{ability}-pane"}
+    -ability_sets.each do |ability_set|
+      .tab-pane{:id => "graph-#{ability_set}-pane"}

@@ -41,32 +41,17 @@ class Section < ActiveRecord::Base
   def custom_edges
     # Returns a list of additional edges that aren't returned by the default method.
 
-    edges = []
+    edges = Set.new
     if parent
-      edge = {
-        :source => parent,
-        :destination => self,
-        :type => :section_includes_section
-      }
-      edges.push(edge)
+      edges.add(Edge.new(parent, self, :section_includes_section))
     end
 
     if program
-      edge = {
-        :source => program,
-        :destination => self,
-        :type => :program_includes_section
-      }
-      edges.push(edge)
+      edges.add(Edge.new(program, self, :program_includes_section))
     end
 
     controls.each do |control|
-      edge = {
-        :source => self,
-        :destination => control,
-        :type => :section_implemented_by_control
-      }
-      edges.push(edge)
+      edges.add(Edge.new(self, control, :section_implemented_by_control))
     end
     edges
   end

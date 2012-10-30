@@ -20,14 +20,9 @@ class Person < ActiveRecord::Base
 
   def custom_edges
     # Returns a list of additional edges that aren't returned by the default method.
-    edges = []
+    edges = Set.new
     object_people.each do |op|
-      edge = {
-        :source => self,
-        :destination => op.personable,
-        :type => "person_#{op.role}_of_#{op.personable.class.to_s.underscore}"
-      }
-      edges.push(edge)
+      edges.add(Edge.new(self, op.personable, "person_#{op.role}_of_#{op.personable.class.to_s.underscore}"))
     end
 
     edges

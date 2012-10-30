@@ -76,7 +76,11 @@ class RelationshipsController < BaseMappingsController
     obj.class.valid_relationships.each do |vr|
       if vr[:related_model].to_s == related_model
         result = {}
+
+        puts "Valid Relationships"
+        puts "#{vr.inspect}"
         relationship_type = RelationshipType.find_by_relationship_type(vr[:relationship_type])
+        puts "Relationship_type: #{relationship_type.inspect}"
 
         if (vr[:related_model_endpoint].to_s == "both") and
           (related_model == obj_type) and
@@ -182,13 +186,14 @@ class RelationshipsController < BaseMappingsController
   def graph
     obj_type = params[:otype]
     obj_id = params[:oid]
-    ability = params[:ability]
+    abilities = params[:abilities]
 
     obj = obj_type.constantize.find(obj_id)
 
-    if ability && ability != ''
-      puts "Ability: #{ability}"
-      graph_data = obj.traverse_related_ability(ability)
+    if abilities && abilities != ''
+      # Split abilities using |
+      allowed_abilities = abilities.split('-').map {|a| a.to_sym}
+      graph_data = obj.ability_graph(allowed_abilities)
     else
       graph_data = obj.traverse_related
     end
