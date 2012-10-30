@@ -1,26 +1,29 @@
 .row-fluid
+  %hr.hr-widget
+
+.row-fluid
   .span6
     %h4 Compliance Program
-    .row-fluid   
+    .row-fluid
       .span10.control-group
         %label{:for => "slug"} Program/Regulation
         %input#slug.span12{:disabled => "disabled", :value => @program.slug, :type => "text"}/
         %br/
-        
+
       .span2
-        %label{:for => "version"} Version  
+        %label{:for => "version"} Version
         %input#version.span12{:disabled => "disabled", :value => @program.version, :type => "text"}
-        
-    .row-fluid   
+
+    .row-fluid
       .span12.control-group
         %label{:for => ""} Source Title
         %input.span12{:disabled => "disabled", :value => @program.title, :type => "text"}/
-        
-    .row-fluid   
+
+    .row-fluid
       .span12.control-group
         %label{:for => "url"} Source URL
         %input#url.span12{:disabled => "disabled", :value => @program.url, :type => "text"}/
-        
+
     .row-fluid
       .span12.control-group
         %label{:for => "description"} Description
@@ -35,39 +38,53 @@
     .row-fluid
 
       .span5
-        %label{:for => "control-code"} Name of uploaded file  
+        %label{:for => "control-code"} Name of uploaded file
         %input#control-code.span12{:disabled => "disabled", :value => params["upload"].original_filename, :type => "text"}
-        
+
       .span3
-        %label{:for => "control-code"} Doc Date  
+        %label{:for => "control-code"} Doc Date
         #docdate.date{"data-date" => "TBD", "data-date-format" => "dd-mm-yy"}
           %input.span12.calendar{:size => "16", :type => "text", :value => "TBD"}/
         :javascript
           $('#docdate').datepicker();
       .span2
-        %label{:for => "control-code"} Version  
+        %label{:for => "control-code"} Version
         %input#control-code.span12{:disabled => "disabled", :placeholder => "TBD", :type => "text"}
-        
+
       .span2
-        %label{:for => "control-code"} Pages  
+        %label{:for => "control-code"} Pages
         %input#control-code.span12{:disabled => "disabled", :placeholder => "TBD", :type => "text"}
 
+.row-fluid
+  %hr.hr-widget
 
-%h4 Sample Data
-.well
-  #sampleData
+.row-fluid
+  %h4 Sample Data
+
+.row-fluid
+  #sampleData.span12.well
     %table.ggrc-table
-      %tr
-        %th Code
-        %th Title
-        %th Description
-        %th Notes
-      -@sections.first(10).each do |sec|
+      %thead
         %tr
-          %td=sec.slug
-          %td=sec.title
-          %td=sec.description
-          %td=sec.notes
+          %th Code
+          %th Title
+          %th Description
+          %th Notes
+      %tbody
+        -columns = %w(slug title description notes)
+        -@sections.each_with_index do |sec, i|
+          %tr{ :class => (i % 2 == 0 ? :odd : :even) }
+            -columns.each do |column_name|
+              %td{ :class => ( (@errors[i].present? && @errors[i][column_name].present?) ? 'member-failure' : ((@warnings[i].present? && @warnings[i][column_name].present?) ? 'member-warning' : '' ) ) }
+                =sec.send(column_name)
+                -if @errors[i].present? && @errors[i][column_name].present?
+                  .help-inline=@errors[i][column_name].join(', ')
+                -if @warnings[i].present? && @warnings[i][column_name].present?
+                  .help-inline=@warnings[i][column_name].join(', ')
+
+    Showing 1 to #{@sections.size} of #{@sections.size} entries
+    %br/
+    #{@creates.size} created, #{@updates.size} updated
 
 
 %div
@@ -77,30 +94,17 @@
     %p{ :class => 'label-warning' }
       =m
 
-%div
-  Errors:
+.row-fluid
+  %hr.hr-widget
 
-  -@errors.keys.each do |slug|
-    %p{ :class => 'member-failure' }
-      =slug
-      =":"
-      =@errors[slug].join(", ")
-
-%p{ :class => 'member-success' }
-  Created:
-
-  =@creates.join(", ")
-
-%p{ :class => 'member-success' }
-  Updated:
-
-  =@updates.join(", ")
-
-
--if params[:confirm].blank?
-  =submit_tag "Finish Importing", :class => %w(btn btn-large btn-success btn-primary), :name => 'confirm'
--else
-  Import of
-  =link_to @program.title, flow_program_path(@program)
-  is done.
+.row-fluid
+  -if params[:confirm].blank?
+    .span9
+    .span3
+      =submit_tag "Finish Importing", :class => %w(span12 btn btn-large btn-success btn-primary), :name => 'confirm'
+  -else
+    .span12
+      Import of
+      =link_to @program.title, flow_program_path(@program)
+      is done.
 

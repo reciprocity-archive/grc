@@ -197,6 +197,7 @@ class ProgramsController < ApplicationController
       import = read_import_controls(CSV.parse(file))
       @messages = import[:messages]
       do_import_controls(import, params[:confirm].blank?)
+      @warnings = import[:warnings]
       @errors = import[:errors]
       @creates = import[:creates]
       @updates = import[:updates]
@@ -211,6 +212,7 @@ class ProgramsController < ApplicationController
       import = read_import(CSV.parse(file))
       @messages = import[:messages]
       do_import(import, params[:confirm].blank?)
+      @warnings = import[:warnings]
       @errors = import[:errors]
       @creates = import[:creates]
       @updates = import[:updates]
@@ -234,7 +236,10 @@ class ProgramsController < ApplicationController
     import[:errors] = {}
     import[:updates] = []
     import[:creates] = []
+    import[:warnings] = {}
+
     attrs = import[:program]
+
     slug = attrs['slug']
     if slug.blank?
       import[:messages] << "missing program slug"
@@ -243,34 +248,40 @@ class ProgramsController < ApplicationController
     end
 
     @controls = []
-    import[:controls].each do |attrs|
+    import[:controls].each_with_index do |attrs, i|
+      import[:warnings][i] = HashWithIndifferentAccess.new
+
       attrs.delete(nil)
-      slug = attrs['slug']
+      attrs.delete('created_at')
+      attrs.delete('updated_at')
+
       handle_option(attrs, :type, import[:messages], :control_type)
       handle_option(attrs, :kind, import[:messages], :control_kind)
       handle_option(attrs, :means, import[:messages], :control_means)
       handle_option(attrs, :verify_frequency, import[:messages])
-      Rails.logger.info "XXX"
-      Rails.logger.info attrs
-      attrs.delete('created_at')
-      attrs.delete('updated_at')
+
+      slug = attrs['slug']
+
       if slug.blank?
-        import[:messages] << "missing control slug"
+        import[:warnings][i][:slug] ||= []
+        import[:warnings][i][:slug] << "missing control slug"
+        control = nil
       else
         control = Control.find_by_slug(slug)
-        if control
-          control.assign_attributes(attrs, :without_protection => true)
-          import[:updates] << slug
-        else
-          control = Control.new
-          control.assign_attributes(attrs, :without_protection => true)
-          control.program = @program
-          import[:creates] << slug
-        end
-        @controls << control
-        import[:errors][slug] = control.errors.full_messages unless control.valid?
-        control.save unless check_only
       end
+
+      if control
+        control.assign_attributes(attrs, :without_protection => true)
+        import[:updates] << slug
+      else
+        control = Control.new
+        control.assign_attributes(attrs, :without_protection => true)
+        control.program = @program
+        import[:creates] << slug
+      end
+      @controls << control
+      import[:errors][i] = control.errors unless control.valid?
+      control.save unless check_only
     end
   end
 
@@ -278,15 +289,20 @@ class ProgramsController < ApplicationController
     import[:errors] = {}
     import[:updates] = []
     import[:creates] = []
+    import[:warnings] = {}
+
     attrs = import[:program]
     attrs.delete(nil)
     attrs.delete('created_at')
     attrs.delete('updated_at')
+
     handle_option(attrs, :audit_duration, import[:messages])
     handle_option(attrs, :audit_frequency, import[:messages])
+
     slug = attrs['slug']
+
     if slug.blank?
-      import[:messages] << "missing program slug" unless key
+      import[:messages] << "missing program slug"
     else
       @program = Program.find_by_slug(slug)
       if @program
@@ -302,28 +318,35 @@ class ProgramsController < ApplicationController
     end
 
     @sections = []
-    import[:sections].each do |attrs|
+    import[:sections].each_with_index do |attrs, i|
+      import[:warnings][i] = HashWithIndifferentAccess.new
+
       attrs.delete(nil)
-      slug = attrs['slug']
       attrs.delete('created_at')
       attrs.delete('updated_at')
+
+      slug = attrs['slug']
+
       if slug.blank?
-        import[:messages] << "missing section slug" unless key
+        import[:warnings][i][:slug] ||= []
+        import[:warnings][i][:slug] << "missing section slug"
+        section = nil
       else
         section = Section.find_by_slug(slug)
-        if section
-          section.assign_attributes(attrs, :without_protection => true)
-          import[:updates] << slug
-        else
-          section = Section.new
-          section.assign_attributes(attrs, :without_protection => true)
-          section.program = @program
-          import[:creates] << slug
-        end
-        @sections << section
-        import[:errors][slug] = section.errors.full_messages unless section.valid?
-        section.save unless check_only
       end
+
+      if section
+        section.assign_attributes(attrs, :without_protection => true)
+        import[:updates] << slug
+      else
+        section = Section.new
+        section.assign_attributes(attrs, :without_protection => true)
+        section.program = @program
+        import[:creates] << slug
+      end
+      @sections << section
+      import[:errors][i] = section.errors unless section.valid?
+      section.save unless check_only
     end
   end
 

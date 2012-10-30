@@ -1,50 +1,61 @@
 .row-fluid
+  %hr.hr-widget
+
+.row-fluid
   .span6
     %h4 Compliance Program
-    .row-fluid   
+    .row-fluid
       .span10.control-group
         %label{:for => "slug"} Program/Regulation
         %input#slug.span12{:disabled => "disabled", :value => @program.slug, :type => "text"}/
         %br/
-        
+
       .span2
-        %label{:for => "version"} Version  
+        %label{:for => "version"} Version
         %input#version.span12{:disabled => "disabled", :value => @program.version, :type => "text"}
     .row-fluid
 
       .span5
-        %label{:for => "control-code"} Name of uploaded file  
+        %label{:for => "control-code"} Name of uploaded file
         %input#control-code.span12{:disabled => "disabled", :value => params["upload"].original_filename, :type => "text"}
 
-%h4 Sample Data
-.well
-  #sampleData
+.row-fluid
+  %hr.hr-widget
+
+.row-fluid
+  %h4 Sample Data
+
+.row-fluid
+  #sampleData.span12.well
     %table.ggrc-table
-      %tr
-        %th Code
-        %th Title
-        %th Description
-        %th Kind
-        %th Means
-        %th Version
-        %th Start
-        %th Stop
-        %th URL
-        %th Documentation
-        %th Verify-Frequency
-      -@controls.first(10).each do |c|
+      %thead
         %tr
-          %td=c.slug
-          %td=c.title
-          %td=c.description
-          %td=c.kind
-          %td=c.means
-          %td=c.version
-          %td=c.start_date
-          %td=c.stop_date
-          %td=c.url
-          %td=c.documentation_description
-          %td=c.verify_frequency
+          %th Code
+          %th Title
+          %th Description
+          %th Kind
+          %th Means
+          %th Version
+          %th Start
+          %th Stop
+          %th URL
+          %th Documentation
+          %th Verify-Frequency
+      %tbody
+        -columns = %w(slug title description kind means version start_date stop_date url documentation_description verify_frequency)
+        -@controls.each_with_index do |c, i|
+          %tr{ :class => (i % 2 == 0 ? :odd : :even) }
+            -columns.each do |column_name|
+              %td{ :class => ( (@errors[i].present? && @errors[i][column_name].present?) ? 'member-failure' : ((@warnings[i].present? && @warnings[i][column_name].present?) ? 'member-warning' : '' ) ) }
+                =c.send(column_name)
+                -if @errors[i].present? && @errors[i][column_name].present?
+                  .help-inline=@errors[i][column_name].join(', ')
+                -if @warnings[i].present? && @warnings[i][column_name].present?
+                  .help-inline=@warnings[i][column_name].join(', ')
+
+    Showing 1 to #{@controls.size} of #{@controls.size} entries
+    %br/
+    #{@creates.size} created, #{@updates.size} updated
 
 
 %div
@@ -54,30 +65,17 @@
     %p{ :class => 'label-warning' }
       =m
 
-%div
-  Errors:
+.row-fluid
+  %hr.hr-widget
 
-  -@errors.keys.each do |slug|
-    %p{ :class => 'member-failure' }
-      =slug
-      =":"
-      =@errors[slug].join(", ")
-
-%p{ :class => 'member-success' }
-  Created:
-
-  =@creates.join(", ")
-
-%p{ :class => 'member-success' }
-  Updated:
-
-  =@updates.join(", ")
-
-
--if params[:confirm].blank?
-  =submit_tag "Finish Importing", :class => %w(btn btn-large btn-success btn-primary), :name => 'confirm'
--else
-  Import of
-  =link_to @program.title, flow_program_path(@program)
-  controls is done.
+.row-fluid
+  -if params[:confirm].blank?
+    .span9
+    .span3
+      =submit_tag "Finish Importing", :class => %w(span12 btn btn-large btn-success btn-primary), :name => 'confirm'
+  -else
+    .span12
+      Import of
+      =link_to @program.title, flow_program_path(@program)
+      controls is done.
 
