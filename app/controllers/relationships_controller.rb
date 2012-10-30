@@ -195,7 +195,7 @@ class RelationshipsController < BaseMappingsController
       allowed_abilities = abilities.split('-').map {|a| a.to_sym}
       graph_data = obj.ability_graph(allowed_abilities)
     else
-      graph_data = obj.traverse_related
+      graph_data = obj.ability_graph([:all])
     end
 
     respond_to do |format|

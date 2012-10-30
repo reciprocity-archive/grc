@@ -75,104 +75,104 @@ module RelatedModel
     edges
   end
 
-  def traverse_related(direction = :both, &block)
-    # Traverse all relationships from an object.
-    # Use the block passed in to determine whether you are allowed to traverse
-    # to that object. If so, add that object to the result set and recurse.
-    # Once done, return the set of all objects visited.
-
-    def make_node(obj)
-      {
-        :type => obj.class.to_s.underscore,
-        :node => obj,
-        :link => Rails.application.routes.url_helpers.method("flow_#{obj.class.to_s.underscore}_path").call(obj.id)
-      }
-    end
-
-    # Collect all relationships including this object
-    objs = Set.new([self])
-    nodes = [make_node(self)]
-
-    obj_to_node_id = {
-      self => 0
-    }
-    links = []
-
-    result_set = Set.new([self])
-
-    while objs.length > 0 do
-      new_objs = Set.new
-      objs.each do |obj|
-        edges = obj.related_edges
-        edges.each do |edge|
-          # Iterate through all edges
-          if (edge.source == obj) && ([:forward, :both].include? direction)
-            # Traverse forward along the link if that's the direction we're going
-
-            if !block_given? || yield(edge, :forward)
-              # If we don't have a block or the block returns true, we're going
-              # to traverse to the other endpoint
-              if result_set.add?(edge.destination)
-                # If we haven't visited the other endpoint yet.
-                # FIXME: This doesn't properly handle adding multiple edges that
-                # traverse to the same endpoint.
-
-                # Add this to the list of nodes to traverse outwards from
-                new_objs.add(edge.destination)
-
-                # Add this to the list of nodes we have visited.
-                nodes.push(make_node(edge.destination))
-                obj_to_node_id[edge.destination] = nodes.length - 1
-
-                # Add this link
-                links.push({
-                  :source => obj_to_node_id[edge.source],
-                  :target => obj_to_node_id[edge.destination],
-                  :edge => edge
-                })
-              else
-                # FIXME: Add to the list of links IF it doesn't exist already in the graph
-              end
-            end
-          elsif (edge.destination == obj) && ([:backward, :both].include? direction)
-           # Traverse forward along the link if that's the direction we're going
-
-           if !block_given? || yield(edge, :backward)
-              # If we don't have a block or the block returns true, we're going
-              # to traverse to the other endpoint
-              if result_set.add?(edge.source)
-                # If we haven't visited the other endpoint yet.
-                # FIXME: This doesn't properly handle adding multiple edges that
-                # traverse to the same endpoint.
-
-                # Add this to the list of nodes to traverse outwards from
-                new_objs.add(edge.source)
-
-               # Add this to the list of nodes we have visited.
-                nodes.push(make_node(edge.source))
-                obj_to_node_id[edge.source] = nodes.length - 1
-
-                # Add this link
-                links.push({
-                    :source => obj_to_node_id[edge.source],
-                    :target => obj_to_node_id[edge.destination],
-                    :edge => edge
-                  })
-              else
-                # FIXME: Add to the list of links IF it doesn't exist already in the graph
-              end
-            end
-          end
-        end
-      end
-      objs = new_objs
-    end
-    
-    return {
-      :nodes => nodes,
-      :links => links
-    }
-  end
+  #def traverse_related(direction = :both, &block)
+  #  # Traverse all relationships from an object.
+  #  # Use the block passed in to determine whether you are allowed to traverse
+  #  # to that object. If so, add that object to the result set and recurse.
+  #  # Once done, return the set of all objects visited.
+  #
+  #  def make_node(obj)
+  #    {
+  #      :type => obj.class.to_s.underscore,
+  #      :node => obj,
+  #      :link => Rails.application.routes.url_helpers.method("flow_#{obj.class.to_s.underscore}_path").call(obj.id)
+  #    }
+  #  end
+  #
+  #  # Collect all relationships including this object
+  #  objs = Set.new([self])
+  #  nodes = [make_node(self)]
+  #
+  #  obj_to_node_id = {
+  #    self => 0
+  #  }
+  #  links = []
+  #
+  #  result_set = Set.new([self])
+  #
+  #  while objs.length > 0 do
+  #    new_objs = Set.new
+  #    objs.each do |obj|
+  #      edges = obj.related_edges
+  #      edges.each do |edge|
+  #        # Iterate through all edges
+  #        if (edge.source == obj) && ([:forward, :both].include? direction)
+  #          # Traverse forward along the link if that's the direction we're going
+  #
+  #          if !block_given? || yield(edge, :forward)
+  #            # If we don't have a block or the block returns true, we're going
+  #            # to traverse to the other endpoint
+  #            if result_set.add?(edge.destination)
+  #              # If we haven't visited the other endpoint yet.
+  #              # FIXME: This doesn't properly handle adding multiple edges that
+  #              # traverse to the same endpoint.
+  #
+  #              # Add this to the list of nodes to traverse outwards from
+  #              new_objs.add(edge.destination)
+  #
+  #              # Add this to the list of nodes we have visited.
+  #              nodes.push(make_node(edge.destination))
+  #              obj_to_node_id[edge.destination] = nodes.length - 1
+  #
+  #              # Add this link
+  #              links.push({
+  #                :source => obj_to_node_id[edge.source],
+  #                :target => obj_to_node_id[edge.destination],
+  #                :edge => edge
+  #              })
+  #            else
+  #              # FIXME: Add to the list of links IF it doesn't exist already in the graph
+  #            end
+  #          end
+  #        elsif (edge.destination == obj) && ([:backward, :both].include? direction)
+  #         # Traverse forward along the link if that's the direction we're going
+  #
+  #         if !block_given? || yield(edge, :backward)
+  #            # If we don't have a block or the block returns true, we're going
+  #            # to traverse to the other endpoint
+  #            if result_set.add?(edge.source)
+  #              # If we haven't visited the other endpoint yet.
+  #              # FIXME: This doesn't properly handle adding multiple edges that
+  #              # traverse to the same endpoint.
+  #
+  #              # Add this to the list of nodes to traverse outwards from
+  #              new_objs.add(edge.source)
+  #
+  #             # Add this to the list of nodes we have visited.
+  #              nodes.push(make_node(edge.source))
+  #              obj_to_node_id[edge.source] = nodes.length - 1
+  #
+  #              # Add this link
+  #              links.push({
+  #                  :source => obj_to_node_id[edge.source],
+  #                  :target => obj_to_node_id[edge.destination],
+  #                  :edge => edge
+  #                })
+  #            else
+  #              # FIXME: Add to the list of links IF it doesn't exist already in the graph
+  #            end
+  #          end
+  #        end
+  #      end
+  #    end
+  #    objs = new_objs
+  #  end
+  #
+  #  return {
+  #    :nodes => nodes,
+  #    :links => links
+  #  }
+  #end
 
   def ability_graph(allowed_abilities)
     graph_data = {:objs => Set.new([self]),
@@ -244,13 +244,14 @@ module RelatedModel
         edge_abilities = DefaultRelationshipTypes::RELATIONSHIP_ABILITIES[:default]
       end
 
+      # Ability :all is a special case used for traversing the entire graph
       ability_directions = edge_abilities[ability]
-      if !ability_directions
+      if !ability_directions && !ability == :all
         # Does not allow traversal for this ability, continue
         next
       end
 
-      if (ability_directions == :both) || (ability_directions == direction)
+      if (ability_directions == :both) || (ability_directions == direction) || (ability == :all)
         # This is a valid edge. Add it
         result_set[:edges].add(edge)
 
@@ -259,7 +260,6 @@ module RelatedModel
           # Recurse through this node if we just added it
           other.ability_graph_recurse(result_set, ability)
         end
-        puts result_set
       end
     end
     result_set
