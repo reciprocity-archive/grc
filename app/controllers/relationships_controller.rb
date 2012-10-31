@@ -77,10 +77,7 @@ class RelationshipsController < BaseMappingsController
       if vr[:related_model].to_s == related_model
         result = {}
 
-        puts "Valid Relationships"
-        puts "#{vr.inspect}"
         relationship_type = RelationshipType.find_by_relationship_type(vr[:relationship_type])
-        puts "Relationship_type: #{relationship_type.inspect}"
 
         if (vr[:related_model_endpoint].to_s == "both") and
           (related_model == obj_type) and

@@ -19,67 +19,16 @@ module Authorization
     role_to_ability = {
       :superuser => [:all],
       :user => [],
-
-      # Non-global roles
-      :owner => [:create, :read, :update, :delete],
-      :viewer => [:read]
+      :reader => [:read]
     }
     return role_to_ability[role] || [role]
   end
 
-  # Get a list of all abilities that a role gives
-  def self.abilities_from_roles(roles)
-    # Iterate through all of the roles and look up the
-    # allowed abilities
-    abilities = Set.new
-    roles.each do |role|
-      abilities.add(role) # Role name is also an ability
-      abilities.merge(lookup_abilities(role))
-    end
-    abilities
-  end
-
   # Given an account and/or object
-  def self.roles(account_or_person = nil, object = nil)
+  def self.roles(account = nil)
+    # This returns roles associated SPECIFICALLY with an account.
     roles = Set.new
-
-
-    # If you have an account, turn it into a person
-    if account_or_person
-      if (account_or_person.class == Account)
-        # FIXME: In the future this will come from a separate table, and there
-        # could be more than one.
-        account = account_or_person
-        person = account.person
-
-        # FIXME: whitelist account roles to the accepted list.
-        roles.add(account.role.to_sym)
-      elsif account_or_person.class == Person
-        person = account_or_person
-      end
-    end
-
-    # Okay, at this point we should have a person.
-    if person
-      object_roles = person.object_people
-
-      # Get the list of all objects that might allow authorization
-      # Get the ancestors for this object
-      # Get the intersection of the two lists to determine
-      # what roles are available on this object for the account
-      if (object)
-        auth_objects = object.authorizing_objects
-      else
-        auth_objects = []
-      end
-
-      object_roles.each do |object_role|
-        if auth_objects.include? object_role.personable
-          roles.add(object_role.role.to_sym)
-        end
-      end
-    end
-
+    roles.add(account.role.to_sym)
     roles
   end
 
@@ -96,16 +45,23 @@ module Authorization
     abilities
   end
 
-  def self.abilities(account_or_person, object)
-    roles = roles(account_or_person, object)
-    return abilities_from_roles(roles)
-  end
-
   def self.allowed?(ability, account_or_person, object, &block)
+    # Do basic account-level authorization through baked account roles.
+    # i.e., if your account type gives you abilities, check those first.
+    account_abilities = Set.new
+    if (account_or_person.class == Account)
+      account_abilities = abilities_from_roles(roles(account_or_person))
+      person = account_or_person.person
+    else
+      person = account_or_person
+    end
     ability = ability.to_sym
 
-    ability_list = Authorization::abilities(account_or_person, object)
-    if ability_list.include?(ability) || ability_list.include?(:all)
+    # Note: In the case of much of our tests, we don't have a person, just
+    # a passed in role. Hence the person && in the if statement below.
+    if ((account_abilities.include? :all) ||
+        (account_abilities.include? ability) ||
+        (person && person.object_via_ability?(object, ability)))
       if block_given?
         yield
       end

@@ -22,7 +22,7 @@ class Person < ActiveRecord::Base
     # Returns a list of additional edges that aren't returned by the default method.
     edges = Set.new
     object_people.each do |op|
-      edges.add(Edge.new(self, op.personable, "person_#{op.role}_of_#{op.personable.class.to_s.underscore}"))
+      edges.add(Edge.new(self, op.personable, "person_#{op.role}_for_#{op.personable.class.to_s.underscore}"))
     end
 
     edges
@@ -41,9 +41,5 @@ class Person < ActiveRecord::Base
 
   def abilities(object = nil)
     Authorization::abilities(self, object)
-  end
-
-  def allowed?(ability, object = nil, &block)
-    Authorization::allowed?(ability, self, object, &block)
   end
 end

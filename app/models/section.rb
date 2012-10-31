@@ -60,17 +60,6 @@ class Section < ActiveRecord::Base
     "#{slug} - #{title}"
   end
 
-  def authorizing_objects
-    aos = Set.new
-    aos.add(self)
-    aos.add(program)
-
-    if (parent)
-      aos.merge(parent.authorizing_objects)
-    end
-    aos
-  end
-
   def update_parent_id
     self.parent = self.class.find_parent_by_slug(slug) if parent_id.nil?
   end

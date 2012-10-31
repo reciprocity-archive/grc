@@ -41,7 +41,7 @@ describe ControlsController do
 
   context "related" do
     before :each do
-      login({}, {:role => 'read_control'})
+      login({}, {:role => 'superuser'})
       create_base_objects
 
       @ctl2 = FactoryGirl.create(:control, :title => 'Control 2', :slug => 'CTL2', :description => 'x', :program => @creg)

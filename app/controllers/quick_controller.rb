@@ -3,9 +3,9 @@ class QuickController < ApplicationController
 
   # FIXME: Do real access control pending refactoring
   #
-  #access_control :acl do
-  #  allow logged_in # Filtering is done in the controllers/queries
-  #end
+  access_control :acl do
+    allow logged_in # Filtering is done in the controllers/queries
+  end
 
   def programs
     @programs = Program

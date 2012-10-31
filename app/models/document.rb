@@ -3,6 +3,8 @@
 # Can either be linked by a URL or attached from Google Docs.
 class Document < ActiveRecord::Base
   include AuthoredModel
+  include AuthorizedModel
+  include RelatedModel
 
   VALID_SCHEMES = ['http', 'https']
 

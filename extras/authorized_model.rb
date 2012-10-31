@@ -11,13 +11,6 @@ module AuthorizedModel
     Authorization::allowed?(ability, account_or_person, self, &block)
   end
 
-  def abilities(account_or_person = nil)
-    # Get the abilities from the current user on this object
-    # See if the ability is in the set - if so, return true
-    # otherwise return false.
-    Authorization::abilities(account_or_person, self)
-  end
-
   # Add implicit authorization checks to standard CRUD operations
   # on the model.
 

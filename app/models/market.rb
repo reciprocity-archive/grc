@@ -33,9 +33,4 @@ class Market < ActiveRecord::Base
   def display_name
     slug
   end
-
-  def authorizing_objects
-    # FIXME
-    Set.new([self])
-  end
 end

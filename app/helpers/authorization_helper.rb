@@ -5,15 +5,12 @@ module AuthorizationHelper
   end
 
   def allowed_objs(objects, ability)
-    # FIXME: Until we audit all of the controllers/roles
-    # to determine object visibility, allow all objects to
-    # be seen for all abilities.
-    objects
-    #objects.reduce([]) do |filtered, object|
-    #  object.allowed?(ability, @current_user) do
-    #    filtered.append(object)
-    #  end
-    #  filtered
-    #end
+    objects.reduce([]) do |filtered, object|
+      #@current_user.allowed?(ability, object) do
+      object.allowed?(ability, @current_user) do
+        filtered.append(object)
+      end
+      filtered
+    end
   end
 end

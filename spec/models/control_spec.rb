@@ -76,15 +76,6 @@ describe Control do
     @ctl.control_document_descriptors.first.evidence_descriptor.should eq(@desc)
   end
 
-  it "gets all authorizing objects" do
-    pending
-    #FIXME: Readd this test when we decide what to do with slug names
-    # Should have 3 immediate parent sections, each with an ancestor and shared program, for a total
-    # of 9, plus the control's program and the control itself for 11
-    control = FactoryGirl.create(:control_with_ancestor_sections, ancestor_depth: 2, section_count: 3)
-    control.authorizing_objects.count.should eq(11)
-  end
-
   it "gets the parent persons" do
     # Get all of the parent persons from all of the sections/programs
     program = FactoryGirl.create(:program, :with_people)

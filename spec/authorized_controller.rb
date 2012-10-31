@@ -219,7 +219,7 @@ shared_examples_for "an authorized index" do
 
   context "logged in with read" do
     before :each do
-      login({}, {:role => :read})
+      login({}, {:role => :reader})
     end
 
     it "should be authorized w/ read for: index" do

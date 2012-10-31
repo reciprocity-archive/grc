@@ -21,9 +21,8 @@ class SystemsController < ApplicationController
       allow :create, :create_system
     end
 
-    actions :tooltip do
-      allow :read, :read_system, :of => :system
-    end
+    allow :read, :read_system, :of => :system, :to => [:show,
+                                                       :tooltip]
 
     actions :edit, :update do
       allow :update, :update_system, :of => :system

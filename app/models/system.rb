@@ -73,20 +73,6 @@ class System < ActiveRecord::Base
     slug
   end
 
-  def authorizing_objects
-    # FIXME: Make sure this is the right set of objects
-    # to do authorization through.
-    aos = Set.new
-    aos.add(self)
-    #aos.add(program)
-    #
-    #if (parent)
-    #  aos.merge(parent.authorizing_objects)
-    #end
-
-    aos
-  end
-
   # TODO: state(), state_by_process left for reference -- remove after
   # implementing proper object states
 

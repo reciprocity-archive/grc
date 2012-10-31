@@ -88,22 +88,6 @@ class Control < ActiveRecord::Base
     edges
   end
 
-  # Return all objects that allow operations on this object
-  def authorizing_objects
-    aos = Set.new
-    aos.add(self)
-    aos.add(program)
-
-    implementing_controls.each do |control|
-      aos.merge(control.authorizing_objects)
-    end
-
-    sections.each do |section|
-      aos.merge(section.authorizing_objects)
-    end
-    aos
-  end
-
   def self.category_tree
     Category.roots.all.map { |c| [c, c.children.all] }
   end

@@ -20,9 +20,8 @@ class SectionsController < ApplicationController
       allow :create, :create_section
     end
 
-    actions :tooltip do
-      allow :read, :read_section, :of => :section
-    end
+    allow :read, :read_section, :of => :system, :to => [:show,
+                                                        :tooltip]
 
     actions :edit, :update do
       allow :update, :update_section, :of => :section
