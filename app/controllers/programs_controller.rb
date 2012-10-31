@@ -193,7 +193,7 @@ class ProgramsController < ApplicationController
   def import_controls
     upload = params["upload"]
     if upload
-      file = upload.read
+      file = upload.read.force_encoding('utf-8')
       import = read_import_controls(CSV.parse(file))
       @messages = import[:messages]
       do_import_controls(import, params[:confirm].blank?)
@@ -208,7 +208,7 @@ class ProgramsController < ApplicationController
   def import
     upload = params["upload"]
     if upload
-      file = upload.read
+      file = upload.read.force_encoding('utf-8')
       import = read_import(CSV.parse(file))
       @messages = import[:messages]
       do_import(import, params[:confirm].blank?)
