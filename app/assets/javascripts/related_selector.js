@@ -47,12 +47,17 @@
         .on('list-add-item',  '.target', $.proxy(this.add_selected_option, this))
         .on('list-update-item', '.target', $.proxy(this.update_selected_option, this))
         .on('list-delete-item', '.target', $.proxy(this.delete_selected_option, this))
+        .on('change', '.target', $.proxy(this.change_selected_fields, this))
         .on('delete-object', $.proxy(this.delete_object, this))
         .on('sync-lists', $.proxy(this.sync_lists, this))
 
       // Wait for initial modal 'loaded' event
       this.$element
         .on('loaded', $.proxy(this.load_lists, this));
+    }
+
+  , change_selected_fields: function(e) {
+      // FIXME: Mark items as 'pending'
     }
 
   , delete_object: function(e, data, xhr) {
@@ -193,7 +198,7 @@
         $target.tmpl_additem(data);
         $added_item = $target.find('[data-object-id="' + data.object.id + '"]');
         $added_item.addClass('added');
-        $added_item.find('.state').text('added');
+        $added_item.find('.state').text('added').addClass('statustextgreen');
       }
       this.$element.trigger('sync-lists');
     }
@@ -267,24 +272,25 @@
 
   , handle_remove: function(e) {
       e.preventDefault();
-      var $item = $(e.currentTarget).closest('li');
+      var $item = $(e.currentTarget).closest('li')
+        , $option_item = this.$source().find('[data-id="' + $item.attr('data-object-id') + '"]')
+        ;
 
       // Add/remove class to highlight removed items
       if ($item.is('.added')) {
         $item.remove();
       } else if ($item.is('.changed')) {
         $item.addClass('removed');
-        $item.find('.state').text('removed');
+        $item.find('.state').text('removed').addClass('statustextred');
         $item.find('._destroy').val('destroy');
       } else {
-        $item.find('.state').text('removed');
+        $item.find('.state').text('removed').addClass('statustextred');
         $item.find('._destroy').val('destroy');
         $item.addClass('removed');
       }
 
       // Reset 'add' icon in source list
-      this.mark_item_unselected(
-        this.$source().find('[data-id="' + $item.attr('data-object-id') + '"]'));
+      this.mark_item_unselected($option_item);
     }
   });
 

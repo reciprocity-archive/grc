@@ -113,7 +113,7 @@ class SystemsController < ApplicationController
       if @system.destroy
         flash[:notice] = "System deleted"
         format.html { ajax_refresh }
-        format.json { render :json => @system.as_json(:root => nil), :location => flow_system_path(@system) }
+        format.json { render :json => @system.as_json(:root => nil), :location => programs_dash_path }
       else
         flash[:error] = "Failed to delete system"
         format.html { ajax_refresh }

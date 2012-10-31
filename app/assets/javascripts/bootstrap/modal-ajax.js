@@ -155,8 +155,7 @@
       $target.on('ajax:json', function(e, data, xhr) {
         if (data.errors) {
         } else if (form_target == 'refresh') {
-          //refresh_page();
-          window.location.assign(xhr.getResponseHeader('location'));
+          refresh_page();
         } else if (form_target == 'redirect') {
           window.location.assign(xhr.getResponseHeader('location'));
         }

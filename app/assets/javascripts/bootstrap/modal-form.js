@@ -45,6 +45,7 @@
         window.location.assign(xhr.getResponseHeader('location'));
       } else {
         // Otherwise refresh the page
+        window.location.assign(window.location.href.replace(/#.*/, ''));
       }
     }
 

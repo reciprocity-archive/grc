@@ -176,10 +176,19 @@ jQuery(function($) {
   });
 
   $('body').on('click', '[data-toggle="dropdown-select-list"] > li > a', function(e) {
-    var value = $(this).data('value');
-    $(this).closest('ul').siblings('input').val(value);
-    $(this).closest('ul').siblings('a').text(value[0].toUpperCase() + value.substr(1));
+    var $this = $(this)
+      , value = $(this).data('value')
+      ;
+    $this.closest('ul').siblings('input').val(value);
+    $this.closest('ul').siblings('a').text(value[0].toUpperCase() + value.substr(1));
+    $this.trigger('change');
     e.preventDefault();
+  });
+
+  $('body').on('click', '[data-toggle="collapse-additional"]', function(e) {
+    if (!e.isDefaultPrevented()) {
+      $(this).siblings('.additional').slideToggle();
+    }
   });
 });
 

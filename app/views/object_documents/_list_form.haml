@@ -1,5 +1,7 @@
 -content_for :modal_title do
-  %h1 Add Reference
+  %h1 Select References
+
+-content_for :modal_help, :select_references
 
 %script#document_option{ :type => 'text/html', :'data-prefix' => 'document' }
   %li{ :'data-id' => '<%= document.id %>', :'data-title' => '<%= document.title %>', :'data-link_url' => '<%= document.link_url %>', :'data-descriptor' => '<%= document.descriptor %>' }
@@ -20,8 +22,8 @@
 %script#object_document_selected{ :type => 'text/html', :'data-mappings' => 'object:document', :'data-member' => 'object_document' }
   %li{ :'data-id' => '<%= id %>', :'data-object-id' => '<%= document.id %>' }
     .row-fluid
-      .span8.object_info{ :'data-template-id' => 'document_option_data' }
-      .span4.actions
+      .span6.object_info{ :'data-template-id' => 'document_option_data' }
+      .span6.actions
         %input{ :type => 'hidden', :name => 'items[<%= id %>][id]', :value => '<% if (id.toString().substr(0,3) != "new") { %><%= id %><% } %>'.html_safe }
         %input{ :type => 'hidden', :name => 'items[<%= id %>][documentable_type]', :value => object.class.name }
         %input{ :type => 'hidden', :name => 'items[<%= id %>][documentable_id]', :value => object.id }
@@ -31,12 +33,13 @@
           %i.icon-minus-sign
         %a.widgetbtn.pull-right{:href => edit_flow_document_path('<%=document.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
           %i.gcmsicon-edit-grey
+        %h6.state
 
 .row-fluid
   .span6
     %h4
       Add Reference
-      %a.widgetbtn.widgetbtnselector{ :href => new_flow_document_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-list-target' => '.source, .target' }
+      %a.widgetbtn.widgetbtnselector{ :href => new_flow_document_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-selector-target' => '.source, .target' }
         %i.gcmsicon-add
       .pull-right
         %input.widgetsearch{:type => "text", :placeholder => "Search References"}

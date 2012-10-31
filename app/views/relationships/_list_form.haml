@@ -23,7 +23,7 @@
           %i.icon-minus-sign
         %a.widgetbtn.pull-right{ :href => url_for(:action => :edit, :controller => context[:related_type].underscore.pluralize, :id => '<%=object.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
           %i.gcmsicon-edit-grey
-        %span.state
+        %h6.state
 
 %script#relationship_program_option{ :type => 'text/html', :'data-prefix' => 'program' }
   %li{ :'data-id' => '<%= program.id %>', :'data-title' => '<%= program.title %>', :'data-slug' => '<%= program.slug %>' }

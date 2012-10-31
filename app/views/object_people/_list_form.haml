@@ -1,5 +1,7 @@
 -content_for :modal_title do
-  %h1 Add Person
+  %h1 Select People
+
+-content_for :modal_help, :select_people
 
 %script#person_option{ :type => 'text/html', :'data-prefix' => 'person' }
   %li{ :'data-id' => '<%= person.id %>', :'data-name' => '<%= person.name %>', :'data-company' => '<%= person.company %>' }
@@ -19,31 +21,36 @@
 
 %script#object_person_selected{ :type => 'text/html', :'data-mappings' => 'object:person', :'data-member' => 'object_person', :'data-role' => 'accountable', :'data-start_date' => '', :'data-stop_date' => '' }
   %li{ :'data-id' => '<%= id %>', :'data-object-id' => '<%= person.id %>' }
-    .row-fluid
-      .span6.object_info{ :'data-template-id' => 'person_option_data' }
-      .span6.actions
-        %input{ :type => 'hidden', :name => 'items[<%= id %>][id]', :value => '<% if (id.toString().substr(0,3) != "new") { %><%= id %><% } %>'.html_safe }
-        %input{ :type => 'hidden', :name => 'items[<%= id %>][personable_type]', :value => object.class.name }
-        %input{ :type => 'hidden', :name => 'items[<%= id %>][personable_id]', :value => object.id }
-        %input{ :type => 'hidden', :name => 'items[<%= id %>][person_id]', :value => '<%= person.id %>' }
-        %input._destroy{ :type => 'hidden', :name => 'items[<%= id %>][_destroy]', :value => '' }
-        %a.widgetbtn.pull-right{ :href => '#', :'data-toggle' => 'selector-list-remove' }
-          %i.icon-minus-sign
-        %a.widgetbtn.pull-right{ :href => edit_flow_person_path('<%=person.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
-          %i.gcmsicon-edit-grey
-        .btn-group.inline
-          %a.span7.btn.btn-success.btn-mini.dropdown-toggle.nominheight.halfopacity.pull-right{"data-toggle" => "dropdown"}
-            <%= (role && role.length > 0) ? role[0].toUpperCase() + role.substr(1) : "Select Role" %>
-          %input{ :type => 'hidden', :name => 'items[<%= id %>][role]', :value => '<%= role %>' }
-          %ul.dropdown-menu{ :'data-toggle' => 'dropdown-select-list' }
-            %li
-              %a#makeAccountable{ :'data-value' => 'accountable', :href => '#' }
-                is Accountable for
-            %li
-              %a#makeResponsible{ :'data-value' => 'responsible', :href => '#' }
-                is Responsible for
-        %span.help-inline
-    .row-fluid
+    .row-fluid{ :'data-toggle' => 'collapse-additional' }
+      .span4.object_info{ :'data-template-id' => 'person_option_data' }
+      .span8.actions
+        .row-fluid
+          .span3
+            %h6.state
+          .span6
+            .btn-group.inline
+              %a.span12.btn.btn-success.btn-mini.dropdown-toggle.nominheight.halfopacity.pull-right{"data-toggle" => "dropdown"}
+                <%= (role && role.length > 0) ? role[0].toUpperCase() + role.substr(1) : "Select Role" %>
+              %input{ :type => 'hidden', :name => 'items[<%= id %>][role]', :value => '<%= role %>' }
+              %ul.dropdown-menu{ :'data-toggle' => 'dropdown-select-list' }
+                %li
+                  %a#makeAccountable{ :'data-value' => 'accountable', :href => '#' }
+                    is Accountable for
+                %li
+                  %a#makeResponsible{ :'data-value' => 'responsible', :href => '#' }
+                    is Responsible for
+            %span.help-inline
+          .span3
+            %input{ :type => 'hidden', :name => 'items[<%= id %>][id]', :value => '<% if (id.toString().substr(0,3) != "new") { %><%= id %><% } %>'.html_safe }
+            %input{ :type => 'hidden', :name => 'items[<%= id %>][personable_type]', :value => object.class.name }
+            %input{ :type => 'hidden', :name => 'items[<%= id %>][personable_id]', :value => object.id }
+            %input{ :type => 'hidden', :name => 'items[<%= id %>][person_id]', :value => '<%= person.id %>' }
+            %input._destroy{ :type => 'hidden', :name => 'items[<%= id %>][_destroy]', :value => '' }
+            %a.widgetbtn.pull-right{ :href => '#', :'data-toggle' => 'selector-list-remove' }
+              %i.icon-minus-sign
+            %a.widgetbtn.pull-right{ :href => edit_flow_person_path('<%=person.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
+              %i.gcmsicon-edit-grey
+    .row-fluid.additional
       .span4
       .span4
         %label Start Date (Optional)
@@ -58,9 +65,6 @@
       Add Person
       %a.widgetbtn.widgetbtnselector{ :href => new_flow_person_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-selector-target' => '.source, .target' }
         %i.gcmsicon-add
-      -#%a.btn.btn-blue.addbtn.fltrt.new{ :href => new_flow_person_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-list-target' => '.source, .target' }
-        %i.icon-user.icon-white
-        New Person
       .pull-right
         %input.widgetsearch{:type => "text", :placeholder => "Search Person"}
 
@@ -98,6 +102,6 @@
                 .people-list.short
                   %ul.source{ :'data-list-data-href' => flow_people_url, :'data-template-id' => 'person_option' }
   .span7
-    %h4 Roles for this system
+    %h4 Roles for this #{object.class.name.titleize.downcase}
     .people-list.currentlist
       %ul.target{ :'data-list-data-href' => flow_object_people_path(:object_type => object.class.name, :object_id => object.id), :'data-template-id' => 'object_person_selected' }

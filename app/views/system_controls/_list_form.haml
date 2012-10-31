@@ -1,5 +1,7 @@
 -content_for :modal_title do
-  %h1 Add Control
+  %h1 Select Controls
+
+-content_for :modal_help, :select_controls
 
 %script#control_option{ :type => 'text/html', :'data-prefix' => 'control' }
   %li{ :'data-id' => '<%= control.id %>', :'data-title' => '<%= control.title %>', :'data-slug' => '<%= control.slug %>' }
@@ -30,11 +32,12 @@
           %i.icon-minus-sign
         %a.widgetbtn.pull-right{ :href => edit_flow_control_path('<%=control.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target', :'data-modal-class' => 'modal-wide' }
           %i.gcmsicon-edit-grey
+        %h6.state
 
 .row-fluid
   .span6
     %h4
-      Controls
+      Add Control
       %a.widgetbtn.widgetbtnselector{ :href => new_flow_control_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-selector-target' => '.source, .target', :'data-modal-class' => 'modal-wide' }
         %i.gcmsicon-add
       .pull-right
@@ -52,5 +55,5 @@
     %h4
       Controls for this system
     .people-list.currentlist
-      %ul.target{ :'data-list-data-href' => flow_system_controls_path(:system_id => object.id, :format => :json), :'data-list-target' => '#listCurrentList', :'data-template-id' => 'control_selected'}
+      %ul.target{ :'data-list-data-href' => flow_system_controls_path(:system_id => object.id, :format => :json), :'data-selector-target' => '.source, .target', :'data-template-id' => 'control_selected'}
 
