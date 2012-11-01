@@ -75,6 +75,16 @@ module RelatedModel
     edges
   end
 
+  class Timer
+    def initialize
+      @start = DateTime.now.to_f
+    end
+
+    def delta
+      DateTime.now.to_f - @start
+    end
+  end
+
   def ability_graph(allowed_abilities)
     # This is the recursive version. Commented out
     # in deference to the (generally faster) non-recursive version.
@@ -94,50 +104,61 @@ module RelatedModel
       :edges => Set.new
     }
     
+    objs = Set.new([self])
+    edges = Set.new
+
     # FIXME: Optimize this so we're not generating the full graph that's used to
     # generate the ability graph each time, this can be REALLY slow.
     allowed_abilities.each do |ability|
-      objs = graph_data[:objs].clone
-      objs.each do |obj|
+      cur_objs = objs.clone
+      cur_objs.each do |obj|
         result = obj.ability_graph_preload(ability)
-        graph_data[:objs].merge(result[:objs])
-        graph_data[:edges].merge(result[:edges])
+        objs.merge(result[:objs])
+        edges.merge(result[:edges])
       end
     end
 
-    d3_graph = {
-      :nodes => [],
-      :links => []
-    }
 
+    nodes = []
     # Add node data, and create the lookup table of obj => node index
     obj_to_node_id = {}
-    graph_data[:objs].each do |obj|
-      if obj.methods.include? :slug
-        name = obj.slug
+    objs.each do |obj|
+      # FIXME: This is because Person doesn't have a slug, and
+      # display_name doesn't work here (it's often too long)
+      if obj.class == Person
+        name = obj.email
       else
-        name = obj.display_name
+        name = obj.slug
       end
-      d3_graph[:nodes].push({
-        :type => obj.class.to_s.underscore,
+
+      class_name = obj.class.to_s.underscore
+      #class_name = "foo"
+      name = "bar"
+
+      nodes.push({
+        :type => class_name,
         :node => {
           :name => name
         },
-        :link => Rails.application.routes.url_helpers.method("flow_#{obj.class.to_s.underscore}_path").call(obj.id)
+        :link => Rails.application.routes.url_helpers.method("flow_#{class_name}_path").call(obj.id)
       })
 
-      obj_to_node_id[obj] = d3_graph[:nodes].length - 1
+      obj_to_node_id[obj] = nodes.length - 1
     end
 
-    graph_data[:edges].each do |edge|
-      d3_graph[:links].push({
+    links = []
+    edges.each do |edge|
+      links.push({
           :source => obj_to_node_id[edge.source],
           :target => obj_to_node_id[edge.destination],
           :type => edge.type
         })
     end
 
-    d3_graph
+    {
+      :nodes => nodes,
+      :links => links
+    }
   end
 
   def ability_graph_preload(ability)
