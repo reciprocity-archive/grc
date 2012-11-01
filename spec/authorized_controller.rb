@@ -184,7 +184,7 @@ shared_examples_for "an authorized read" do |actions|
 
   context "logged in with read" do
     before :each do
-      login({}, {:role => 'read_' + @model.table_name.singularize})
+      login({}, {:role => 'read'})
     end
     actions.each do |action|
       if described_class.action_methods.include? action

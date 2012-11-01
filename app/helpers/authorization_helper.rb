@@ -5,6 +5,6 @@ module AuthorizationHelper
   end
 
   def allowed_objs(objects, ability)
-    @current_user.person.objects_via_ability(objects, ability)
+    Authorization::allowed_objects(ability, @current_user, objects)
   end
 end

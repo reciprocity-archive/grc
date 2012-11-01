@@ -114,6 +114,10 @@ module DefaultRelationshipTypes
   # NOTE: Make sure you also see the dynamically generated relationship abilities
   # below.
   RELATIONSHIP_ABILITIES = {
+    :control_implemented_by_control => {
+      :read => :forward,
+      :meta_read => :backward
+    },
     :control_implemented_by_system => {
       :read => :forward,
       :meta_read => :backward

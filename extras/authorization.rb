@@ -70,4 +70,29 @@ module Authorization
       false
     end
   end
+
+  def self.allowed_objects(ability, account_or_person, objects)
+    # Do basic account-level authorization through baked account roles.
+    # i.e., if your account type gives you abilities, check those first.
+    account_abilities = Set.new
+    if (account_or_person.class == Account)
+      account_abilities = abilities_from_roles(roles(account_or_person))
+      person = account_or_person.person
+    else
+      person = account_or_person
+    end
+
+    ability = ability.to_sym
+
+    # If you've got magical account level abilities and you have that ability,
+    # assume that you're allowed to do it on all of the objects.
+    # FIXME: Think through this logic for cases which are not :all.
+    if account_abilities.include?(:all) || account_abilities.include?(ability)
+      return objects
+    end
+
+    # If you don't have a magic account, figure out what you're allowed to see via
+    # the graph traversal.
+    return person.objects_via_ability(objects, ability)
+  end
 end
