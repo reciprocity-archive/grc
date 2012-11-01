@@ -113,9 +113,16 @@ module RelatedModel
     # Add node data, and create the lookup table of obj => node index
     obj_to_node_id = {}
     graph_data[:objs].each do |obj|
+      if obj.methods.include? :slug
+        name = obj.slug
+      else
+        name = obj.display_name
+      end
       d3_graph[:nodes].push({
         :type => obj.class.to_s.underscore,
-        :node => obj,
+        :node => {
+          :name => name
+        },
         :link => Rails.application.routes.url_helpers.method("flow_#{obj.class.to_s.underscore}_path").call(obj.id)
       })
 
@@ -126,7 +133,7 @@ module RelatedModel
       d3_graph[:links].push({
           :source => obj_to_node_id[edge.source],
           :target => obj_to_node_id[edge.destination],
-          :edge => edge
+          :type => edge.type
         })
     end
 
@@ -190,18 +197,12 @@ module RelatedModel
       graph[obj].each do |edge|
         if (traverse_edge?(obj, edge, ability))
           if edges.add?(edge)
-            new_objs.push(edge.source)
-            new_objs.push(edge.destination)
+            if edge.source != obj
+              new_objs.push(edge.source)
+            else
+              new_objs.push(edge.destination)
+            end
           end
-        end
-        # Determine the direction
-        # Get the other node
-        if edge.source == obj
-          other = edge.destination
-          direction = :forward
-        else
-          other = edge.source
-          direction = :backward
         end
       end
     end

@@ -113,12 +113,10 @@ $(document).ready(function() {
         .start()
 
       var setupNodeTooltip = function(d, i) {
-        var data = d.node[d.type]
-        var dname = data.slug || data.name || data.email
         $(this).popover({
-          'title' : dname,
+          'title' : d.node.name,
           'trigger' : 'hover',
-          'content' : d.type + '<br/>' + (data.description || '')
+          'content' : d.type + '<br/>' + (d.node.description || '')
         })
       }
 
@@ -143,7 +141,7 @@ $(document).ready(function() {
         $(this).popover({
           'title' : 'Link',
           'trigger' : 'hover',
-          'content' : d.edge.type
+          'content' : d.type
         })
       }
 
@@ -203,9 +201,7 @@ $(document).ready(function() {
           .each(setNodeAbilityClass)
       node.append('text')
           .text(function(d) {
-            return d.node[d.type].slug
-              || d.node[d.type].name
-              || d.node[d.type].email
+            return d.node.name
             })
             .attr('x', 7)
             .attr('y', 5)
