@@ -39,6 +39,9 @@ class AccountsController < ApplicationController
     role = params[:account].delete(:role)
     @account = Account.new(params[:account])
     @account.role = role
+    if params[:disable_password] == 'yes'
+      @account.disable_password!
+    end
 
     respond_to do |format|
       if @account.save

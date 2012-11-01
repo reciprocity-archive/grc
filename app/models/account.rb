@@ -58,6 +58,8 @@ class Account < ActiveRecord::Base
 
   def valid_password?(password)
     ::BCrypt::Password.new(crypted_password) == password
+  rescue ::BCrypt::Errors::InvalidHash
+    false
   end
 
   ##
@@ -119,7 +121,12 @@ class Account < ActiveRecord::Base
       or(t[:email].matches(q)))
   end
 
+  def disable_password!
+    self.crypted_password = 'no'
+  end
+
   private
+
     def reset_persistence_token?
       persistence_token.blank?
     end
