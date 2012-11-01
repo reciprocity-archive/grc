@@ -132,8 +132,6 @@ module RelatedModel
       end
 
       class_name = obj.class.to_s.underscore
-      #class_name = "foo"
-      name = "bar"
 
       nodes.push({
         :type => class_name,
