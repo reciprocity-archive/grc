@@ -112,9 +112,14 @@ module FormHelper
   end
 
   def parse_option_param(params, field)
-    value_id = params.delete(field + '_id')
-    if value_id.present?
-      params[field] = Option.find(value_id)
+    field_key = field + '_id'
+    if params.has_key?(field_key)
+      value_id = params.delete(field_key)
+      if value_id.present?
+        params[field] = Option.find(value_id)
+      else
+        params[field] = nil
+      end
     end
   end
 end

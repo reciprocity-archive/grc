@@ -12,42 +12,13 @@
     .span12{ :class => error_class(f, :title) }
       =f.label :title
       =f.text_field :title, :class => 'span12', :placeholder => 'Document Title'
-      /%label Title
-      /%input.span12{:placeholder => "Complete Title Goes Here", :type => "text"}
-  .span2
-    %label Year
-    %select.span12
-      %option 2012
-      %option 2011
-      %option 2010
-      %option 2009
-      %option 2008
-  .span2
-    %label Language
-    %select.span12
-      %option English
-      %option German
-      %option Spanish
-      %option French
-      %option Dutch
-  .span2
-    %label Type
-    %select.span12
-      %option PDF
-      %option Word
-      %option Spreadsheet
-      %option Website
-  .span2
-    %label Status
-    %select.span12.forminputstatus
-      %option Current
-      %option Deprecated
-      %option Approved
+  =wrapped_select(f, :span2, :year_id, Option.options_for(:document_year).map { |o| [o.title, o.id] }, :selected => (f.object.respond_to?(:year_id) ? f.object.year_id : nil), :include_blank => true)
+  =wrapped_select(f, :span2, :language_id, Option.options_for(:language).map { |o| [o.title, o.id] }, :selected => (f.object.respond_to?(:language_id) ? f.object.language_id : nil), :include_blank => true)
+  =wrapped_select(f, :span2, :kind_id, Option.options_for(:reference_type).map { |o| [o.title, o.id] }, :selected => (f.object.respond_to?(:kind_id) ? f.object.kind_id : nil), :include_blank => true)
+  =wrapped_select(f, :span2, :type_id, Option.options_for(:document_type).map { |o| [o.title, o.id] }, :selected => (f.object.respond_to?(:type_id) ? f.object.type_id : nil), :include_blank => true)
 
 .row-fluid
-  .span12
-    %label Description
-    %textarea.span12{:placeholder => "", :rows => "4"}
+  =wrapped_text_area f, :span12, :description, :class => 'double', :placeholder => 'Enter description here'
 
 .row-fluid
   .span12{ :class => error_class(f, :link) }

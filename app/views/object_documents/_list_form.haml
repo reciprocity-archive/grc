@@ -4,10 +4,10 @@
 -content_for :modal_help, :select_references
 
 %script#document_option{ :type => 'text/html', :'data-prefix' => 'document' }
-  %li{ :'data-id' => '<%= document.id %>', :'data-title' => '<%= document.title %>', :'data-link_url' => '<%= document.link_url %>', :'data-descriptor' => '<%= document.descriptor %>' }
+  %li{ :'data-id' => '<%= document.id %>', :'data-title' => '<%= document.title %>', :'data-document_type' => '<%= document.document_type %>' }
     .row-fluid
       .span6
-        %span.company <%= document.link_url || document.descriptor %>
+        %span.company <%= document.document_type || '&nbsp;' %>
         %span.name <%= document.title %>
       .span6.actions
         %a.widgetbtn.pull-right{ :href => '#', :'data-toggle' => 'selector-list-select' }
@@ -16,7 +16,7 @@
           %i.gcmsicon-edit-grey
 
 %script#document_option_data{ :type => 'text/html' }
-  %span.company <%= document.link_url %>
+  %span.company <%= document.document_type || '&nbsp;' %>
   %span.name <%= document.title %>
 
 %script#object_document_selected{ :type => 'text/html', :'data-mappings' => 'object:document', :'data-member' => 'object_document' }

@@ -8,9 +8,14 @@ class Document < ActiveRecord::Base
 
   VALID_SCHEMES = ['http', 'https']
 
-  attr_accessible :link, :title
+  attr_accessible :link, :title, :description, :type, :kind, :language, :year
 
   has_many :object_documents, :dependent => :destroy
+
+  belongs_to :type, :class_name => 'Option', :conditions => { :role => 'document_type' }
+  belongs_to :kind, :class_name => 'Option', :conditions => { :role => 'reference_type' }
+  belongs_to :year, :class_name => 'Option', :conditions => { :role => 'document_year' }
+  belongs_to :language, :class_name => 'Option', :conditions => { :role => 'language' }
 
   is_versioned_ext
 
@@ -51,6 +56,10 @@ class Document < ActiveRecord::Base
 
   def link_url
     link && link.to_s
+  end
+
+  def document_type
+    type && type.title
   end
 
   def complete?

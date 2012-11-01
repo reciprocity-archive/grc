@@ -25,7 +25,7 @@ class ObjectDocumentsController < BaseMappingsController
     end
     @object_documents = allowed_objs(@object_documents.all, :read)
 
-    render :json => @object_documents, :include => :document
+    render :json => @object_documents, :include => { :document => { :methods => 'document_type' } }
   end
 
   private
@@ -47,6 +47,6 @@ class ObjectDocumentsController < BaseMappingsController
     end
 
     def default_as_json_options
-      { :include => :document }
+      { :include => { :document => { :methods => 'document_type' } } }
     end
 end
