@@ -180,6 +180,47 @@ class RelationshipsController < BaseMappingsController
     end
   end
 
+  def d3_format(objs, edges)
+    nodes = []
+    # Add node data, and create the lookup table of obj => node index
+    obj_to_node_id = {}
+    objs.each do |obj|
+      # FIXME: This is because Person doesn't have a slug, and
+      # display_name doesn't work here (it's often too long)
+      if obj.class == Person
+        name = obj.email
+      else
+        name = obj.slug
+      end
+
+      class_name = obj.class.to_s.underscore
+
+      nodes.push({
+        :type => class_name,
+        :node => {
+          :name => name
+        },
+        :link => Rails.application.routes.url_helpers.method("flow_#{class_name}_path").call(obj.id)
+      })
+
+      obj_to_node_id[obj] = nodes.length - 1
+    end
+
+    links = []
+    edges.each do |edge|
+      links.push({
+          :source => obj_to_node_id[edge.source],
+          :target => obj_to_node_id[edge.destination],
+          :type => edge.type
+        })
+    end
+
+    {
+      :nodes => nodes,
+      :links => links
+    }
+  end
+
   def graph
     obj_type = params[:otype]
     obj_id = params[:oid]
@@ -196,7 +237,7 @@ class RelationshipsController < BaseMappingsController
     end
 
     respond_to do |format|
-      format.json { render :json => graph_data }
+      format.json { render :json => d3_format(graph_data[:objs], graph_data[:edges]) }
     end
   end
 

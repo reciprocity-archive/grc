@@ -1,5 +1,8 @@
 # RelatedModel mixin
 #
+# Many mixins that exist for managing relationships, and especially the relationship
+# traversal functions that are used in the context of authorization
+#
 # Creates some useful scoping functions that allow you to
 # create scopes for relationships with very little code. Example usage:
 #
@@ -10,6 +13,7 @@
 #   related_to_source(object, 'manager_of')}
 # }
 #
+
 module RelatedModel
   def self.included(model)
     model.class_eval do
@@ -85,40 +89,7 @@ module RelatedModel
     end
   end
 
-  def ability_graph(allowed_abilities)
-    # This is the recursive version. Commented out
-    # in deference to the (generally faster) non-recursive version.
-    #graph_data = {:objs => Set.new([self]),
-    #              :edges => Set.new}
-    #
-    #allowed_abilities.each do |ability|
-    #  objs = graph_data[:objs].clone
-    #  objs.each do |obj|
-    #    graph_data = obj.ability_graph_recurse(graph_data, ability)
-    #  end
-    #end
-    #
-
-    graph_data = {
-      :objs => Set.new([self]),
-      :edges => Set.new
-    }
-    
-    objs = Set.new([self])
-    edges = Set.new
-
-    # FIXME: Optimize this so we're not generating the full graph that's used to
-    # generate the ability graph each time, this can be REALLY slow.
-    allowed_abilities.each do |ability|
-      cur_objs = objs.clone
-      cur_objs.each do |obj|
-        result = obj.ability_graph_preload(ability)
-        objs.merge(result[:objs])
-        edges.merge(result[:edges])
-      end
-    end
-
-
+  def d3_format(objs, edges)
     nodes = []
     # Add node data, and create the lookup table of obj => node index
     obj_to_node_id = {}
@@ -156,6 +127,45 @@ module RelatedModel
     {
       :nodes => nodes,
       :links => links
+    }
+  end
+
+  def ability_graph(allowed_abilities)
+    # This is the recursive version. Commented out
+    # in deference to the (generally faster) non-recursive version.
+    #graph_data = {:objs => Set.new([self]),
+    #              :edges => Set.new}
+    #
+    #allowed_abilities.each do |ability|
+    #  objs = graph_data[:objs].clone
+    #  objs.each do |obj|
+    #    graph_data = obj.ability_graph_recurse(graph_data, ability)
+    #  end
+    #end
+    #
+
+    graph_data = {
+      :objs => Set.new([self]),
+      :edges => Set.new
+    }
+    
+    objs = Set.new([self])
+    edges = Set.new
+
+    # FIXME: Optimize this so we're not generating the full graph that's used to
+    # generate the ability graph each time, this can be REALLY slow.
+    allowed_abilities.each do |ability|
+      cur_objs = objs.clone
+      cur_objs.each do |obj|
+        result = obj.ability_graph_preload(ability)
+        objs.merge(result[:objs])
+        edges.merge(result[:edges])
+      end
+    end
+
+    {
+      :objs => objs,
+      :edges => edges
     }
   end
 
@@ -308,20 +318,9 @@ module RelatedModel
     # Given an ability, see if we can traverse to the given object
     # FIXME: Do an optimized version of this which is faster. Right now,
     # just use the full graph generation and search for the node in it.
+ 
     result = ability_graph([ability])
-    found_object = result[:nodes].detect do |obj|
-      if obj[:node].eql? object
-        true
-      else
-        false
-      end
-    end
-
-    if found_object.nil?
-      false
-    else
-      true
-    end
+    result[:objs].include?(object)
   end
 
   def objects_via_ability(objects, ability)
