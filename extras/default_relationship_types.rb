@@ -152,21 +152,6 @@ module DefaultRelationshipTypes
     :org_group_is_dependent_on_location => {
       :meta_read => :both
     },
-    #:person_owner_of_location => {
-    #  :read => :forward,
-    #  :meta_read => :backward,
-    #  :edit => :forward
-    #},
-    #:person_owner_of_program => {
-    #  :read => :forward,
-    #  :meta_read => :backward,
-    #  :edit => :forward
-    #},
-    #:person_owner_of_system => {
-    #  :read => :forward,
-    #  :meta_read => :backward,
-    #  :edit => :forward
-    #},
     :product_is_affiliated_with_product => {
       :meta_read => :both
     },
@@ -203,6 +188,11 @@ module DefaultRelationshipTypes
       :meta_read => :backward,
       :edit => :forward
     },
+    :section_includes_section => {
+      :read => :forward,
+      :meta_read => :backward,
+      :edit => :forward
+    },
     :system_contains_system => {
       :read => :forward,
       :meta_read => :backward,
@@ -215,7 +205,7 @@ module DefaultRelationshipTypes
 
   PERSONABLE = [Program, Section, Control, System,
                 OrgGroup, Product, Location]
-  ['accountable','responsible'].each do |role|
+  ['accountable','responsible', 'owner'].each do |role|
     PERSONABLE.each do |model|
       rtype = "person_#{role}_for_#{model.to_s.downcase}"
       RELATIONSHIP_ABILITIES[rtype.to_sym] = {

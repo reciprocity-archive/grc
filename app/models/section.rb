@@ -56,6 +56,28 @@ class Section < ActiveRecord::Base
     edges
   end
 
+  def self.custom_all_edges
+    # Returns a list of additional edges that aren't returned by the default method.
+
+    edges = Set.new
+
+    includes(:parent, :program, :controls).each do |s|
+      if s.parent
+        edges.add(Edge.new(s.parent, s, :section_includes_section))
+      end
+
+      if s.program
+        edges.add(Edge.new(s.program, s, :program_includes_section))
+      end
+
+      s.controls.each do |control|
+        edges.add(Edge.new(s, control, :section_implemented_by_control))
+      end
+    end
+    
+    edges
+  end
+
   def display_name
     "#{slug} - #{title}"
   end

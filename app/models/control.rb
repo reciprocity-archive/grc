@@ -88,6 +88,38 @@ class Control < ActiveRecord::Base
     edges
   end
 
+  def self.custom_all_edges
+    # Returns a list of additional edges that aren't returned by the default method.
+    edges = Set.new
+    includes(:parent, :program, :systems, :sections, :implemented_controls, :implementing_controls).each do |c|
+      if c.parent
+        edges.add(Edge.new(c.parent, c, :control_includes_control))
+      end
+
+      if c.program
+        edges.add(Edge.new(c.program, c, :program_includes_control))
+      end
+
+      c.systems.each do |system|
+        edges.add(Edge.new(c, system, :control_implemented_by_system))
+      end
+
+      c.sections.each do |section|
+        edges.add(Edge.new(section, c, :section_implemented_by_control))
+      end
+
+      c.implemented_controls.each do |control|
+        edges.add(Edge.new(control, c, :control_implemented_by_control))
+      end
+
+      c.implementing_controls.each do |control|
+        edges.add(Edge.new(c, control, :control_implemented_by_control))
+      end
+    end
+
+    edges
+  end
+
   def self.category_tree
     Category.roots.all.map { |c| [c, c.children.all] }
   end

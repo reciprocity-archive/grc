@@ -22,7 +22,20 @@ class Person < ActiveRecord::Base
     # Returns a list of additional edges that aren't returned by the default method.
     edges = Set.new
     object_people.each do |op|
-      edges.add(Edge.new(self, op.personable, "person_#{op.role}_for_#{op.personable.class.to_s.underscore}"))
+      edges.add(Edge.new(self, op.personable, "person_#{op.role}_for_#{op.personable_type.to_s.underscore}"))
+    end
+
+    edges
+  end
+
+  def self.custom_all_edges
+    # Returns a list of additional edges that aren't returned by the default method.
+    edges = Set.new
+
+    includes(:object_people).each do |p|
+      p.object_people.each do |op|
+        edges.add(Edge.new(p, op.personable, "person_#{op.role}_for_#{op.personable_type.to_s.underscore}"))
+      end
     end
 
     edges

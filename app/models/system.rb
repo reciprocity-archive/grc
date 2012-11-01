@@ -10,12 +10,12 @@ class System < ActiveRecord::Base
 
   # Many to many with Control
   has_many :system_controls, :dependent => :destroy
-  has_many :controls, :through => :system_controls, :order => :slug
+  has_many :controls, :through => :system_controls#, :order => :slug
 
   # FIXME: Is this still used, or is it deprecated?
   # Many to many with Section
   has_many :system_sections, :dependent => :destroy
-  has_many :sections, :through => :system_sections, :order => :slug
+  has_many :sections, :through => :system_sections#, :order => :slug
 
   # Responsible party
   # FIXME: Is this deprecated now? Should we use ObjectPerson?
@@ -64,6 +64,37 @@ class System < ActiveRecord::Base
 
     sub_systems.each do |system|
       edges.add(Edge.new(self, system, :system_contains_system))
+    end
+
+    edges
+  end
+
+  def self.custom_all_edges
+    # Returns a list of additional edges that aren't returned by the default method.
+    # FIXME: A LOT of these do not exist in the current design doc.
+
+    edges = Set.new
+
+    includes(:owner, :sections, :controls, :super_systems, :sub_systems).each do |s|
+      if !s.owner.nil?
+        edges.add(Edge.new(s.owner, s, :person_owns_system))
+      end
+
+      s.sections.each do |section|
+        edges.add(Edge.new(section, s, :section_implemented_by_system))
+      end
+
+      s.controls.each do |control|
+        edges.add(Edge.new(control, s, :control_implemented_by_system))
+      end
+
+      s.super_systems.each do |system|
+        edges.add(Edge.new(system, s, :system_contains_system))
+      end
+
+      s.sub_systems.each do |system|
+        edges.add(Edge.new(s, system, :system_contains_system))
+      end
     end
 
     edges

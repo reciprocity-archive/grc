@@ -76,14 +76,28 @@ module RelatedModel
   end
 
   def ability_graph(allowed_abilities)
-    graph_data = {:objs => Set.new([self]),
-                  :edges => Set.new}
+    # This is the recursive version. Commented out
+    # in deference to the (generally faster) non-recursive version.
+    #graph_data = {:objs => Set.new([self]),
+    #              :edges => Set.new}
+    #
+    #allowed_abilities.each do |ability|
+    #  objs = graph_data[:objs].clone
+    #  objs.each do |obj|
+    #    graph_data = obj.ability_graph_recurse(graph_data, ability)
+    #  end
+    #end
+    #
+
+    graph_data = {
+      :objs => Set.new,
+      :edges => Set.new
+    }
     
     allowed_abilities.each do |ability|
-      objs = graph_data[:objs].clone
-      objs.each do |obj|
-        graph_data = obj.ability_graph_recurse(graph_data, ability)
-      end
+      result = ability_graph_preload(ability)
+      graph_data[:objs].merge(result[:objs])
+      graph_data[:edges].merge(result[:edges])
     end
 
     d3_graph = {
@@ -112,6 +126,120 @@ module RelatedModel
     end
 
     d3_graph
+  end
+
+  def ability_graph_preload(ability)
+    # Generate the ability graph by preloading the entire graph, and then
+    # doing a filtered traverse. Should be faster due to the reduced number of queries.
+    objs = Set.new
+    edges = Set.new
+
+    # Get a list of all models that we want to use as nodes
+    # Hack - get a list of all tables, then delete the ones we don't
+    # care.
+    models = ActiveRecord::Base.connection.tables.map {|t| t.camelcase.singularize}
+    models.delete("SchemaMigration")
+
+    # ObjectPerson is weird - it's a related_model, but isn't valid here.
+    # I don't remember why I made it a related model.
+    models.delete("ObjectPerson")
+    models = models.map {|m| m.constantize}
+
+    models.each do |model|
+      if model.methods.include? :all_related_edges
+        new_edges = model.all_related_edges
+        new_objs = model.all
+        objs.merge(new_objs)
+        edges.merge(new_edges)
+      end
+    end
+
+    # Now that we have all nodes/edges, we need to make the graph
+    # traversable so we can generate the subtree for this object
+    graph = {}
+
+    # Initialize the graph with one per object
+    objs.each do |obj|
+      graph[obj] = Set.new
+    end
+
+    edges.each do |edge|
+      # Add the edges
+      graph[edge.source].add(edge)
+      graph[edge.destination].add(edge)
+    end
+
+    # Now we have a traversable data structure. Look up this node
+    # in the data structure and walk the tree
+
+    objs = Set.new
+    edges = Set.new
+
+    new_objs = [self]
+    while new_objs.length > 0
+      obj = new_objs.pop
+      if !objs.add(obj)
+        next
+      end
+
+      graph[obj].each do |edge|
+        if (traverse_edge?(obj, edge, ability))
+          if edges.add?(edge)
+            new_objs.push(edge.source)
+            new_objs.push(edge.destination)
+          end
+        end
+        # Determine the direction
+        # Get the other node
+        if edge.source == obj
+          other = edge.destination
+          direction = :forward
+        else
+          other = edge.source
+          direction = :backward
+        end
+      end
+    end
+
+    {
+      :objs => objs,
+      :edges => edges
+    }
+  end
+
+  def traverse_edge?(obj, edge, ability)
+    # Get the other node
+    if edge.source == obj
+      other = edge.destination
+      direction = :forward
+    else
+      other = edge.source
+      direction = :backward
+    end
+
+    ability = ability.to_sym
+
+    # Okay, we have an edge with an endpoint that isn't in our set yet.
+    # Check to see if it has the right ability
+    type = edge.type.to_sym
+    edge_abilities = DefaultRelationshipTypes::RELATIONSHIP_ABILITIES[type]
+
+    if !edge_abilities
+      #raise "Unknown edge type #{type}"
+      puts "Unknown edge type #{type}"
+      edge_abilities = DefaultRelationshipTypes::RELATIONSHIP_ABILITIES[:default]
+    end
+
+    # Ability :all is a special case used for traversing the entire graph
+    ability_directions = edge_abilities[ability]
+    if !ability_directions && !ability == :all
+      # Does not allow traversal for this ability, continue
+      return false
+    end
+
+    if (ability_directions == :both) || (ability_directions == direction) || (ability == :all)
+      return true
+    end
   end
 
   def ability_graph_recurse(result_set, ability)
@@ -216,6 +344,38 @@ module RelatedModel
       @valid_relationships.reduce(Set.new) do |models, vr|
         models.add(vr[:related_model])
       end
+    end
+
+    def all_related_edges
+      # Get all of the related edges for this model
+
+      # Returns a list of all relationship edges going to/from this node.
+      # An edge consists of {:source, :destination, :type}
+
+      source_rels = Relationship.where(:source_type => self.to_s)
+      dest_rels = Relationship.where(:destination_type => self.to_s)
+      op_rels = ObjectPerson.where(:personable_type => self.to_s)
+
+      edges = Set.new
+
+      source_rels.each do |rel|
+        edge = Edge.new(rel.source, rel.destination,rel.relationship_type_id)
+        edges.add(edge)
+      end
+      dest_rels.each do |rel|
+        edge = Edge.new(rel.source, rel.destination,rel.relationship_type_id)
+        edges.add(edge)
+      end
+      op_rels.each do |op|
+        edge = Edge.new(op.person, op.personable, "person_#{op.role}_for_#{self.to_s.underscore}")
+        edges.add(edge)
+      end
+
+      if self.methods.include? :custom_all_edges
+        edges.merge(self.custom_all_edges)
+      end
+
+      edges
     end
   end
 end

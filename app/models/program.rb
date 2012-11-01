@@ -55,6 +55,21 @@ class Program < ActiveRecord::Base
     edges
   end
 
+  def self.custom_all_edges
+    # Returns a list of additional edges that aren't returned by the default method.
+    edges = Set.new
+    includes(:sections, :controls).each do |p|
+      p.sections.each do |section|
+        edges.add(Edge.new(p, section, :program_includes_section))
+      end
+
+      p.controls.each do |control|
+        edges.add(Edge.new(p, control, :program_includes_control))
+      end
+    end
+    edges
+  end
+
   def display_name
     slug
   end
