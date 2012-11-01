@@ -26,8 +26,8 @@
             %option 5
         %br/
         %span.help-inline
-      .span2.form-inline.control-group.fltrt
-        .controls.fltrt
+      .span2.form-inline.control-group.pull-right
+        .controls.pull-right
           %label{:for => "select02"} Status
           %br/
           %select#select02.inputtext-small
@@ -61,9 +61,9 @@
     / end row
   .modal-footer
     .row-fluid
-      %nav.fltlft.txtlft.span3
+      %nav.pull-left.txtlft.span3
         %a.btn.btn-large.btn-info{"data-dismiss" => "modal", :href => "#comingsoonModal"} Cancel
         %a.btn.btn-large.btn-warning{"data-dismiss" => "modal", :href => "#comingsoonModal"} Delete
       .toolbar-widget.span6
-      %nav.fltrt.txtrt.span3
+      %nav.pull-right.txtrt.span3
         %a.close{"data-dismiss" => "modal", :href => "#comingsoonModal"} Save

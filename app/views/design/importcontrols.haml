@@ -9,14 +9,14 @@
 -content_for :page_help, 'changeme'
 
 -content_for :subheader_extras do
-  %h1#pageType.fltrt.highlighted Importing Controls
+  %h1#pageType.pull-right.highlighted Importing Controls
 
 
 .row-fluid
   / .RegsandControls
   #RegsandControls.span12.WidgetBox.fullHeight.demoItem
     .WidgetBoxHeading
-      .fltrt
+      .pull-right
         %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
           %i.gcmsicon-questionmark-grey
         %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
@@ -46,7 +46,7 @@
               %a.btn.btn-blue.addbtn
                 Upload File
             .span1
-            .span5.fltrt
+            .span5.pull-right
               %label{:for => ""} Prepare your information
               %a.btn.btn-info.addbtn
                 Download Template for Data Entry

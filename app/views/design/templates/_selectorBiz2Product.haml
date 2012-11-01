@@ -6,8 +6,8 @@
       %a.widgetbtn{"data-dismiss" => "modal", :href => "#"}
         %i.gcmsicon-x-grey
     %h1
-      Select Business Object
-      %span.version v 0.10
+      Link %Link-to-type% to link to this Product
+      %span.version v 0.32
   .modal-body
     .alert.alert-info
       %span#alertMessage
@@ -17,91 +17,70 @@
         .span6
 
           %h4
-            Add Business Object
-            .fltrt
-              %a.btn.btn-blue.addbtn.fltrt.new{:href => "#"}
-                %i          
-                Create Business Object
-
+            Select %Link-to-type% to link
+            .WidgetBoxHeading.pull-right
+              %input{:type => "text", :placeholder => "Search %Link-to-type%s"}
+          
           .filter-block
           
             .row-fluid
-              .span12
-                .modal-search.clearfix  
-                  .btn-group.closed 
-
-                    .pull-right
-                      %input{:type => "text", :placeholder => "Search Systems"}
-                .additional-filters.filter-group
-                  .row-fluid
-                    .span4
-                      %label System Name
-                      %input.span12{:type=>"text", :placeholder => "enter name"}
-                    .span4
-                      %label Org. group
-                      %input.span12{:type=>"text", :placeholder => "example: IT"}
-                    .span4
-                      %label Title
-                      %input.span12{:type=>"text", :placeholder => "example: Compliance"}
-
-                            
-                .tabbable.tabs-left
-                  .tab-content
-                    #System1.tab-pane.active
-                      .people-list.short
-                        %ul.source
-                          %li
-                            .row-fluid
-                              .span8
-                                %span.system System Company
-                                %span.name System 1
-                              .span4.actions                
-                                %a.widgetbtn.pull-right.add-me{:href => "#"}
-                                  %i.grcicon-chevron-right
-                                %a.widgetbtn.pull-right{:href => "#"}
-                                  %i.gcmsicon-edit-grey
-                          %li
-                            .row-fluid
-                              .span8
-                                %span.system System Company
-                                %span.name System 2
-                              .span4.actions              
-                                %a.widgetbtn.pull-right.add-me{:href => "#"}
-                                  %i.grcicon-chevron-right 
-                                %a.widgetbtn.pull-right{:href => "#"}
-                                  %i.gcmsicon-edit-grey
-                          %li
-                            .row-fluid
-                              .span8
-                                %span.system System Company
-                                %span.name System 3
-                              .span4.actions       
-                                %a.widgetbtn.pull-right.add-me{:href => "#"}
-                                  %i.grcicon-chevron-right
-                                %a.widgetbtn.pull-right{:href => "#"}
-                                  %i.gcmsicon-edit-grey
-                          %li
-                            .row-fluid
-                              .span8
-                                %span.system System Company
-                                %span.name System 4
-                              .span4.actions                
-                                %a.widgetbtn.pull-right.add-me{:href => "#"}
-                                  %i.grcicon-chevron-right
-                                %a.widgetbtn.pull-right{:href => "#"}
-                                  %i.gcmsicon-edit-grey
-                          %li
-                            .row-fluid
-                              .span8
-                                %span.system System Company
-                                %span.name System 5
-                              .span4.actions                
-                                %a.widgetbtn.pull-right.add-me{:href => "#"}
-                                  %i.grcicon-chevron-right 
-                                %a.widgetbtn.pull-right{:href => "#"}
-                                  %i.gcmsicon-edit-grey
+              .tabbable.tabs-left
+                -#%ul.nav.nav-tabs
+                  %li.active 
+                    %a{:href => "#bizobj1", "data-toggle" => "tab"}
+                      Biz Object 1
+                  %li 
+                    %a{:href => "#bizobj2", "data-toggle" => "tab"}
+                      Biz Object 2
+                .tab-content
+                  #bizobj1.tab-pane.active
+                    #currentList1.system-list
+                      %ul.source
+                        %li
+                          .row-fluid
+                            .span8
+                              %span.system System Company
+                              %span.name System 1
+                            .span4.actions                
+                              %a.widgetbtn.pull-right.add-me{:href => "#"}
+                                %i.grcicon-chevron-right
+                              %a.widgetbtn.pull-right{:href => "#"}
+                                %i.gcmsicon-edit-grey
+                        %li
+                          .row-fluid
+                            .span8
+                              %span.system System Company
+                              %span.name System 2
+                            .span4.actions              
+                              %a.widgetbtn.pull-right.add-me{:href => "#"}
+                                %i.grcicon-chevron-right 
+                              %a.widgetbtn.pull-right{:href => "#"}
+                                %i.gcmsicon-edit-grey
+                        %li
+                          .row-fluid
+                            .span8
+                              %span.system System Company
+                              %span.name System 3
+                            .span4.actions       
+                              %a.widgetbtn.pull-right.add-me{:href => "#"}
+                                %i.grcicon-chevron-right
+                              %a.widgetbtn.pull-right{:href => "#"}
+                                %i.gcmsicon-edit-grey
+                  #bizobj2.tab-pane
+                    #currentList2.system-list
+                      %ul.source
+                        %li
+                          .row-fluid
+                            .span8
+                              %span.system System Company
+                              %span.name System 1
+                            .span4.actions                
+                              %a.widgetbtn.pull-right.add-me{:href => "#"}
+                                %i.grcicon-chevron-right
+                              %a.widgetbtn.pull-right{:href => "#"}
+                                %i.gcmsicon-edit-grey
         .span6
-          %h4 Objects for this system
+          %h4 %Link-to-type%s linked to this Product
           .system-list.currentlist
             %ul.target
               %li
@@ -110,39 +89,29 @@
                     %span.system Sub-System Company
                     %span.name System 1
                   .span6.actions
-                .row-fluid.additional
-                  .span11
-                  .span1.actions
-                    %label &nbsp;
                     %a#removeMe.widgetbtn.pull-right{:href => "#"}
                       %i.icon-minus-sign
+                    %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#redesignNewCategory"}
+                      %i.gcmsicon-edit-grey 
               %li
                 .row-fluid
                   .span6
                     %span.system System Company
                     %span.name System 2
                   .span6.actions
-                    %a.widgetbtn.pull-right{:href => "#"}
-                      %i.gcmsicon-edit-grey 
-                .row-fluid.additional
-                  .span11
-                  .span1.actions
-                    %label &nbsp;
                     %a#removeMe.widgetbtn.pull-right{:href => "#"}
                       %i.icon-minus-sign
+                    %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#redesignNewCategory"}
+                      %i.gcmsicon-edit-grey 
               %li
                 .row-fluid
                   .span6
                     %span.system System Company
                     %span.name System 3
                   .span6.actions
-                    %a.widgetbtn.pull-right{:href => "#"}
-                      %i.gcmsicon-edit-grey 
-                .row-fluid.additional
-                  .span11
-                  .span1.actions
-                    %label &nbsp;
                     %a#removeMe.widgetbtn.pull-right{:href => "#"}
                       %i.icon-minus-sign
+                    %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#redesignNewCategory"}
+                      %i.gcmsicon-edit-grey 
               
-  =render :partial => 'design/templates/modalfooter', :locals => { :shownote => false, :showcreated => true, :showrevs => true }, :showlist => 0
+  =render :partial => 'design/templates/modalfooter', :locals => { :shownote => false, :showcreated => false, :showrevs => false }

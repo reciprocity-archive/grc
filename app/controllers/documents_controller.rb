@@ -46,7 +46,7 @@ class DocumentsController < ApplicationController
     end
     @documents = allowed_objs(@documents.all, :read)
 
-    render :json => @documents
+    render :json => @documents, :methods => [:document_type]
   end
 
   # FIXME: No template
@@ -75,7 +75,7 @@ class DocumentsController < ApplicationController
       if @document.save
         flash[:notice] = "Successfully created a new document."
         format.json do
-          render :json => @document.as_json(:root => nil, :methods => [:descriptor, :link_url]), :location => nil
+          render :json => @document.as_json(:root => nil, :methods => [:document_type]), :location => nil
         end
         format.html { ajax_refresh }
       else
@@ -90,7 +90,7 @@ class DocumentsController < ApplicationController
       if @document.authored_update(current_user, document_params)
         flash[:notice] = "Successfully updated the document."
         format.json do
-          render :json => @document.as_json(:root => nil, :methods => [:descriptor, :link_url]), :location => nil
+          render :json => @document.as_json(:root => nil, :methods => [:document_type]), :location => nil
         end
         format.html { redirect_to flow_document_path(@document) }
       else
@@ -130,6 +130,9 @@ class DocumentsController < ApplicationController
 
     def document_params
       document_params = params[:document] || {}
+      %w(type kind year language).each do |field|
+        parse_option_param(document_params, field)
+      end
       document_params
     end
 end

@@ -16,7 +16,7 @@
           .well
             %h3
               System-Control Owners
-              %a.btn.btn-blue.addbtn.fltrt{"data-toggle" => "modal", :href => "#referenceSelectorModal"} View Email
+              %a.btn.btn-blue.addbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"} View Email
             %ul#systemcontrolowners.clearfix
               %li.controlSlot.ui-draggable
                 .arrowcontrols-group.row-fluid.nominheight
@@ -86,8 +86,8 @@
       / end span6
   .modal-footer
     .row-fluid
-      %nav.fltlft.txtlft.span3
+      %nav.pull-left.txtlft.span3
         %a.btn.btn-large.btn-info{"data-dismiss" => "modal", :href => "#comingsoonModal"} Cancel
       .toolbar-widget.span6
-      %nav.fltrt.txtrt.span3
+      %nav.pull-right.txtrt.span3
         %a.btn.btn-large.btn-warning{"data-dismiss" => "modal", :href => "#comingsoonModal"} Send Notice

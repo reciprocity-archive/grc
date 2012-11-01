@@ -87,7 +87,10 @@ describe ProgramsController do
         "invalid program heading Bogus1",
         "invalid section heading Bogus2"
       ]
-      assigns(:errors).should == { "REG1-SEC3-BAD" => ["Title needs a value"] }
+      puts assigns(:errors)
+      assigns(:errors).should include 2
+      assigns(:errors)[2].should include :title
+      assigns(:errors)[2][:title].should == ["needs a value"]
       assigns(:creates).should == [ "REG1-SEC2", "REG1-SEC3-BAD" ]
       assigns(:updates).should == [ "REG1", "REG1-SEC1"]
     end
@@ -100,7 +103,9 @@ describe ProgramsController do
         "Unknown audit_duration option '1 Fortnight'",
         "Unknown audit_frequency option 'Soonish'"
       ]
-      assigns(:errors).should == { "REG1-SEC3-BAD" => ["Title needs a value"] }
+      assigns(:errors).should include 2
+      assigns(:errors)[2].should include :title
+      assigns(:errors)[2][:title].should == ["needs a value"]
       assigns(:creates).should == [ "REG1-SEC2", "REG1-SEC3-BAD" ]
       assigns(:updates).should == [ "REG1", "REG1-SEC1"]
     end

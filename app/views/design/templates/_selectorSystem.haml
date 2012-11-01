@@ -23,10 +23,8 @@
               %input{:type => "text", :placeholder => "Search Systems"}
 
           .filter-block
-          
             .row-fluid
-              .span12
-                            
+              .span12     
                 .tabbable.tabs-left
                   .tab-content
                     #System1.tab-pane.active
@@ -117,4 +115,4 @@
                     %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#redesignNewCategory"}
                       %i.gcmsicon-edit-grey 
               
-  =render :partial => 'design/templates/modalfooter', :locals => { :shownote => false, :showcreated => true, :showrevs => true }, :locals => { :shownote => false, :showcreated => false, :showrevs => false }
+  =render :partial => 'design/templates/modalfooter', :locals => { :shownote => false, :showcreated => false, :showrevs => false }
