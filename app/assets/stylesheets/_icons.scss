@@ -21,7 +21,7 @@
   background-position: 0px 0px;
   background-repeat: no-repeat;
 }
-
+/* Obsolete - commented out 11/26 for removal 12/26 
 .itemarrow {
   opacity:.5;
   background-image: url("../images/icons/icon-itemarrow.png");
@@ -33,11 +33,11 @@
   padding:0;
   background-position: 0px 0px;
   background-repeat: no-repeat;
-  /*float:left;*/
+  
   &:hover {
     opacity:1;
   }
-}
+} */
 
 .gcmsicon-blank {
   background-image: none;
@@ -61,9 +61,6 @@
   background-position: 0px 0px;
   background-repeat: no-repeat;
 }
-
-
-
 
 .gcmsicon-gears-white {
   background-image: url("../images/icons/grcicons/gear.png");
@@ -184,6 +181,23 @@
   background-position: 0px 0px;
   background-repeat: no-repeat;
 }
+
+.gcmsicon-enddot {
+  background-image: url("../images/icons/grcicons/enddot.png");
+    -moz-background-size:16px 16px;
+             -ie-background-size:16px 16px;
+              -o-background-size:16px 16px;
+         -webkit-background-size:16px 16px;
+                 background-size:16px 16px;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin:0;
+  padding:0;
+  background-position: 0px 0px;
+  background-repeat: no-repeat;
+}
+
 .gcmssmallicon-blue-expand {
   background-image: url("../images/icons/grcicons/chevronleft-blue.png");
   display: inline-block;
@@ -262,9 +276,37 @@
   background-repeat: no-repeat;
 }
 
+.gcmsicon-more {
+  display: inline-block;
+  background-image: url("../images/icons/grcicons/more.png");
+  -moz-background-size:16px 16px;
+             -ie-background-size:16px 16px;
+              -o-background-size:16px 16px;
+         -webkit-background-size:16px 16px;
+                 background-size:16px 16px;
+  width: 16px;
+  height: 16px;
+  background-position: 0px 0px;
+  background-repeat: no-repeat;
+}
+
 .gcmsicon-add {
   display: inline-block;
   background-image: url("../images/icons/grcicons/add.png");
+ -moz-background-size:16px 16px;
+             -ie-background-size:16px 16px;
+              -o-background-size:16px 16px;
+         -webkit-background-size:16px 16px;
+                 background-size:16px 16px;
+  width: 16px;
+  height: 16px;
+  background-position: 0px 0px;
+  background-repeat: no-repeat;
+}
+
+.gcmsicon-link {
+  display: inline-block;
+  background-image: url("../images/icons/grcicons/link.png");
  -moz-background-size:16px 16px;
              -ie-background-size:16px 16px;
               -o-background-size:16px 16px;

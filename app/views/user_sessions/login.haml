@@ -1,17 +1,24 @@
 .container.graphpaper
   %header
-    %h1 Login
 
-    .flash!=[:error, :warning, :notice].map { |type| content_tag(:div, flash[type], :class => "message #{type}") if flash[type] }.join
+    .row-fluid
+      .span4
+      #LoginBox.span4.WidgetBox
+        .WidgetBoxHeading
+          .WidgetTitle Login to GRC
+        .WidgetBoxContent
+          .flash!=[:error, :warning, :notice].map { |type| content_tag(:div, flash[type], :class => "message #{type}") if flash[type] }.join
 
-    =form_for :user_session, :url => user_sessions_create_path, :html => { :class => :form } do |f|
-      =f.label :email
-      =f.text_field :email, :class => :text_field
-      %br
-      =f.label :password
-      =f.password_field :password, :class => :text_field
-      %br
-      =f.check_box :remember_me
-      =f.label :remember_me
-      %br
-      =f.submit "Login"
+          =form_for :user_session, :url => user_sessions_create_path, :html => { :class => :form } do |f|
+            =f.label :email
+            =f.text_field :email, :class => ".span12"
+            %br
+            =f.label :password
+            =f.password_field :password, :class => ".span12"
+            %br
+            =f.check_box :remember_me
+            %span remember me
+            //=f.submit "Login"
+
+            %button.btn.btn-success.pull-right{:type => "submit"} Login
+      .span4

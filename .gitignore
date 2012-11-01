@@ -22,3 +22,5 @@ public/assets
 cms.war
 Gemfile.lock
 /coverage/
+
+public/images/icons/grcicons/icons.psd

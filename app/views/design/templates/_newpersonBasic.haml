@@ -3,7 +3,7 @@
     %nav
       %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
         %i.gcmsicon-questionmark-grey
-      %a.widgetbtn{"data-dismiss" => "modal", :href => "#"}
+      %a.widgetbtn#closeSecondModal{:href => "#"}
         %i.gcmsicon-x-grey
     %h1 Create New Person
   .modal-body
@@ -38,4 +38,4 @@
           %input#inputError.span12.forminputsuccess{:placeholder => "Enter Company Name", :type => "text"}/
           %br/
           %span.help-inline
-  =render :partial => 'design/templates/modalfooter', :locals => { :shownote => false, :showcreated => true, :showrevs => true }, :locals => { :shownote => false, :showcreated => false, :showrevs => false }
+  =render :partial => 'design/templates/modalfooter', :locals => { :shownote => false, :showcreated => true, :showrevs => true}

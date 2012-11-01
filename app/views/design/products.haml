@@ -1,177 +1,192 @@
 -@title = "GRC: Product"
-
+ 
 -content_for :header do
   %ol#breadcrumb
     %li.last
       %a{:href => "programs.htm"} PRODUCT
-  #pageTitle.location Sarbanes-Oxley
+  #pageTitle.location Google Wallet
 
 -content_for :page_help, 'changeme'
 
 -content_for :subheader_extras do
   %h1#pageType.pull-right.highlighted Product
 
+-content_for :subheader_plus do
+  %a.navbarplus.fltrt{ :href => "#comingsoonModal", "data-toggle" => "modal" }
+  
 .row-static
   .doubleColumn
-    / .RegsandControls
     #RegsandControls.WidgetBox.fullHeight.doubleWide
       .WidgetBoxHeading
         .pull-right
           %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
             %i.gcmsicon-questionmark-grey
-          %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+          -#%a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
             %i.gcmsicon-edit-grey
           %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
-        .WidgetTitle.doublewidth Regulation and Controls
-      / /.WidgetBoxHeading
+        .WidgetTitle.doublewidth Sub-Products, Processes and Controls
+
       .WidgetBoxContent
-        .pull-right
-          %img{:alt => "Expand All", :src => "/images/expandAll.png"}/
-          %img{:alt => "Shrink All", :src => "/images/shrinkAll.png"}/
-        %ul#quicklinks.nav.nav-tabs
+        
+        -#%ul#quicklinks.nav.nav-tabs
           %li
             %a{"data-toggle" => "tab", :href => "#Regulation"} Regulation
           %li
             %a{"data-toggle" => "tab", :href => "#Controls"} Controls
           %li.active
             %a{"data-toggle" => "tab", :href => "#Combo"} Combo
-        .tab-content
+        -#.tab-content
           #Regulation.tab-pane Regulations
           #Controls.tab-pane Controls
           #Combo.tab-pane.active
-            %ul.slugtree
-              %li{:id => "content_PCI.A.1.4"}
-                .row-fluid
-                  .span12
-                    .collapsed.slot.regulationslot.toggle.span9{"data-target" => "#demo1", "data-toggle" => "collapse"}
-                      %span.prefix> PCI.A.1.4
-                      Enable processes to provide for timely forensic investigation in the event of a ...
-                      .expander
-                    .attached.progress-large.span3
-                      .bar.progressbar-success{"data-percentage" => "100", :style => "float: left; width: 100%; "}
-                  #demo1.row-fluid-slotcontent.collapse
-                    .span9
-                      Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
-              %li{:id => "content_PCI.A.1.4"}
-                .row-fluid
-                  .span12
-                    .collapsed.slot.regulationslot.toggle.span9{"data-target" => "#demo2", "data-toggle" => "collapse"}
-                      %span.prefix> PCI.A.1.4
-                      Enable processes to provide for timely forensic investigation in the event of a ...
-                      .expander
-                    .attached.progress-large.active.span3
-                      .bar.progressbar-danger{"data-percentage" => "100", :style => "float: right; width: 100%; "}
-                  #demo2.row-fluid-slotcontent.collapse
-                    .span9
-                      Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
-              %li{:id => "content_PCI.A.1.4"}
-                .row-fluid
-                  .span12
-                    .collapsed.slot.regulationslot.toggle.span9{"data-target" => "#demo3", "data-toggle" => "collapse"}
-                      %span.prefix> PCI.A.1.4
-                      Enable processes to provide for timely forensic investigation...
-                      .expander
-                    .attached.progress-large.active.span3
-                      .bar.progressbar-warning{"data-percentage" => "100", :style => "float: right; width: 100%; "}
-                  #demo3.row-fluid-slotcontent.collapse
-                    .span9
-                      Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
-              / end example
-        / /.Class Content
-      / /.WidgetBoxContent
-    / /.RegsandControls
-  / close span8
-  .singleColumn
-    #programwidget.WidgetBox
+        #sampleprogramsections
+          -# Import this text
+          
+
+    .doubleColumn               
+      -#productComplianceSchedule.WidgetBox
+        .WidgetBoxHeading
+          %nav
+            %a.widgettextbtn{"data-toggle" => "modal", :href => "#"} Add Item
+          .WidgetTitle Compliance Schedule
+        .WidgetBoxContent
+          .row-fluid.nominheight
+            .span6.nominheight
+            .span6.nominheight
+              .span4.nominheight
+                %label.fltnone Start
+              .span4.nominheight
+                %label.fltnone Finish
+              .span4.nominheight
+                %label.fltnone Status
+          %ul#ComplianceList.in
+            %li.controlSlot.ui-draggable.row-fluid.nominheight.statusred{"data-toggle" => "modal", :href => "#"}
+              .span6.nominheight
+                %span.prefix Fit and Proper Review
+                .expander
+              .span6.badges.nominheight
+                .span4.nominheight
+                  .badge.badge-info 01/15/12
+                .span4.nominheight
+                  .badge.badge-info 01/15/13
+                .span4.nominheight
+                  .badge.badge-important Late
+            %li.controlSlot.ui-draggable.row-fluid.nominheight.statusyellow{"data-toggle" => "modal", :href => "#"}
+              .span6.nominheight
+                %span.prefix Fit and Proper Review
+                .expander
+              .span6.badges.nominheight
+                .span4.nominheight
+                  .badge.badge-info 01/15/12
+                .span4.nominheight
+                  .badge.badge-info 01/15/13
+                .span4.nominheight
+                  .badge.badge-warning In-Progress
+            %li.controlSlot.ui-draggable.row-fluid.nominheight.statusgreen{"data-toggle" => "modal", :href => "#"}
+              .span6.nominheight
+                %span.prefix Fit and Proper Review
+                .expander
+              .span6.badges.nominheight
+                .span4.nominheight
+                  .badge.badge-info 01/15/12
+                .span4.nominheight
+                  .badge.badge-info 01/15/13
+                .span4.nominheight
+                  .badge.badge-success   Complete
+              
+  .singleColumn 
+    #productActions.WidgetBox
       .WidgetBoxHeading
-        .WidgetTitle Program
+        .WidgetTitle Product Actions
+      .WidgetBoxContent.information
+        .toolbar-widget
+          .row-fluid
+            .span2
+              %a.span12.btn.btn-warning{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                New
+            .span5
+              %a.span12.btn.btn-warning{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                Request Audit
+            .span5
+              %a.span12.btn.btn-warning{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                Relationship Map
+
+    #productInfo.WidgetBox
+      .WidgetBoxHeading
+        .WidgetTitle Product Info
         %nav
           %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
             %i.gcmsicon-questionmark-grey
-          %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
-            %i.gcmsicon-edit-grey
-          %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#generalInfo"}
+          %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#productInfoContent"}
             %i.gcmsicon-enlarge-grey
-      .WidgetBoxContent.information
-        .toolbar-widget
-          / Make buttons slightly darker and washed out
+      .WidgetBoxContent.information.collapse.in
+        .well 
+          %label 
+            Status
+            .pull-right 
+              %span.statustextgreen 85 
+              %span /
+              %span.statustextyellow 5 
+              %span /
+              %span.statustextred 10 
+          .progress.progress-striped.active
+            .bar.progressbar-success{"data-percentage" => "85", :style => "float: left; width: 0%; "}
+            .bar.progressbar-danger{"data-percentage" => "10", :style => "float: right; width: 0%; "}
+            .bar.progressbar-warning{"data-percentage" => "5", :style => "float: right; width: 0%; "}
+        -#.toolbar-widget.well
           %a.btn.btn-warning{"data-toggle" => "modal", :href => "#comingsoonModal"}
-            %i.gcmsicon-import-white
-            Import Regs
-          %a.btn.btn-warning{:href => "regmapper.htm"}
-            %i.gcmsicon-mapping-white
-            Reg Mapper
-          %a.btn.btn-warning{"data-toggle" => "modal", :href => "#comingsoonModal"}
-            %i.gcmsicon-play-white
-            Start Audit
-        / /* For discussion with Dan http://www.minddust.com/bootstrap-progressbar-demo/ *?
-        #generalInfo.row-fluid.in
-          .span12
-            %hr.hr-widget/
-            .row-fluid
-              .span6
-                %label Regulation Linking
-                .progress.progress-striped.active
-                  .bar.progressbar-success{"data-percentage" => "85", :style => "float: left; width: 0%; "}
-                  .bar.progressbar-danger{"data-percentage" => "10", :style => "float: right; width: 0%; "}
-                  .bar.progressbar-warning{"data-percentage" => "5", :style => "float: right; width: 0%; "}
-                %label Control Verification
-                .progress.progress-striped.active
-                  .bar.progressbar-success{"data-percentage" => "38", :style => "float: left; width: 0%; "}
-                  .bar.progressbar-danger{"data-percentage" => "10", :style => "float: right; width: 0%; "}
-                  .bar.progressbar-warning{"data-percentage" => "35", :style => "float: right; width: 0%; "}
-                %label Control Approval
-                .progress.progress-striped.active
-                  .bar.progressbar-success{"data-percentage" => "85", :style => "float: left; width: 0%; "}
-                  .bar.progressbar-danger{"data-percentage" => "10", :style => "float: right; width: 0%; "}
-                  .bar.progressbar-warning{"data-percentage" => "5", :style => "float: right; width: 0%; "}
-                %label Time
-                .progress.progress-striped.active
-                  .bar.progressbar-success{"data-percentage" => "38", :style => "float: left; width: 0%; "}
-                  .bar.progressbar-danger{"data-percentage" => "10", :style => "float: right; width: 0%; "}
-                  .bar.progressbar-warning{"data-percentage" => "35", :style => "float: right; width: 0%; "}
+            New Version
+        
+        #productInfoContent.collapse.in
+          %hr.hr-widget
+          .row-fluid
+            .span12
+              %h3.toggle{"data-target" => "#productAbout", "data-toggle" => "collapse"}
+                .expander
+                About
+                %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                  %i.gcmsicon-edit-grey
+              #productAbout.collapse
                 .row-fluid
-                  .span6 Mar 1
-                  .span6.pull-right.txtrt June 31
-              .span6
-                %label Requests
-                .progress.progress-striped.active
-                  .bar.progressbar-success{"data-percentage" => "85", :style => "float: left; width: 0%; "}
-                  .bar.progressbar-danger{"data-percentage" => "10", :style => "float: right; width: 0%; "}
-                  .bar.progressbar-warning{"data-percentage" => "5", :style => "float: right; width: 0%; "}
-          %hr.hr-widget/
-          / /* For discussion with Dan http://www.minddust.com/bootstrap-progressbar-demo/ *?
-          #programinformation.row-fluid
-            .span12
-              .span4.form-inline.control-group.pull-right
-                %label Code
-                %input{:disabled => "disabled", :placeholder => "SOX", :style => "margin: 0px; width: 45%;", :type => "text"}/
-              .span8
-                %label Short Title
-                %input{:disabled => "disabled", :placeholder => "Sarbanes-Oxley", :style => "margin: 0px; width: 45%;", :type => "text"}/
+                  .span12
+                    .span3
+                      %label Code
+                      %input.span12{:disabled => "disabled", :placeholder => "ABC", :type => "text"}/
+                    .span3
+                      %label Version
+                      %input.span12{:disabled => "disabled", :placeholder => "1.0", :type => "text"}/
+                    .span3
+                      %label Type
+                      %input.span12{:disabled => "disabled", :placeholder => "SaaS", :type => "text"}/
+                    .span3
+                .row-fluid
+                  .span12
+                    %label Description
+                    %textarea#textarea{:disabled => "disabled", :placeholder => "", :rows => "3", :style => "margin: 0px; width: 98%; height: 73px; "} PCI DDS applies whenever Cardholder account data and Authentication Data is Stored, Processed or Transmitted. Examples Include: For more See Page 7 of document. Using h6 makes the label caps.
+                .row-fluid
+                  .span12
+                    %label Direct Link
+                    %input.span12{:disabled => "disabled", :placeholder => " ", :type => "text"}/
+                .row-fluid
+                  .span12
+                    .span4
+                      %label Effective Date
+                      %input.span12{:disabled => "disabled", :placeholder => "", :type => "text"}/
+                    .span4
+                      %label Stop Date
+                      %input.span12{:disabled => "disabled", :placeholder => "", :type => "text"}/
+                    .span4
+                      %label Status
+                      %input.span12{:disabled => "disabled", :placeholder => "OK", :type => "text"}/
+          %hr.hr-widget
           .row-fluid
             .span12
-              %label Full Title
-              %input{:disabled => "disabled", :placeholder => "Sarbanes-Oxley Long Title", :style => "margin: 0px; width: 97%;", :type => "text"}/
-          .row-fluid
-            .span12
-              %label Type
-              %input{:disabled => "disabled", :placeholder => "Regulation", :style => "margin: 0px; width: 97%;", :type => "text"}/
-          .row-fluid
-            .span12
-              %label Version
-              %input{:disabled => "disabled", :placeholder => "1.2", :style => "margin: 0px; width: 97%;", :type => "text"}/
-          .row-fluid
-            .span12
-              %label Scope / Applicability of this Program
-              %textarea#textarea{:disabled => "disabled", :placeholder => "", :rows => "3", :style => "margin: 0px; width: 98%; height: 73px; "} PCI DDS applies whenever Cardholder account data and Authentication Data is Stored, Processed or Transmitted. Examples Include: For more See Page 7 of document. Using h6 makes the label caps.
-          %hr.hr-widget/
-          .row-fluid
-            .span12
-              %h3
+              %h3.toggle{"data-target" => "#productReferences", "data-toggle" => "collapse"}
+                .expander
                 References
-                %a.btn.btn-blue.addbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"} Edit
-              %ul#referenceList
+                %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                  %i.gcmsicon-link
+              %ul#productReferences.collapse
                 %li.controlSlot
                   %span.controls-group PDF
                   %br/
@@ -180,13 +195,15 @@
                   %span.controls-group PDF
                   %br/
                   %span.controls-subgroup Privacy Report 2012
-          %hr.hr-widget/
+          %hr.hr-widget
           .row-fluid
             .span12
-              %h3
+              %h3.toggle{"data-target" => "#productPeople", "data-toggle" => "collapse"}
+                .expander
                 People
-                %a.btn.btn-blue.addbtn.pull-right{"data-toggle" => "modal", :href => "#peopleSelectorModal"} Edit
-              %ul#peopleList
+                %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                  %i.gcmsicon-link
+              %ul#productPeople.collapse
                 %li.controlSlot
                   %span.controls-group JRayburn@google.com
                   %br/
@@ -195,17 +212,17 @@
                   %span.controls-group rpoder@google.com
                   %br/
                   %span.controls-subgroup Ron Poder
-        %hr.hr-widget/
-        .row-fluid.nominheight
-          .span6.nominheight
-            %label.pull-left{:for => "control-effectivedate"}
-              %strong> Created
-              \: 03/15/2012 19:16
-          .span6.nominheight.pull-right
-            %label.pull-right{:for => "control-verificationdate"}
-              %strong> Updated
-              \: 04/12/2012 14:32
+          %hr.hr-widget
+          .row-fluid.nominheight
+            .span6.nominheight
+              %label.pull-left{:for => "control-effectivedate"}
+                %strong> Created
+                \: 03/15/2012 19:16
+            .span6.nominheight.pull-right
+              %label.pull-right{:for => "control-verificationdate"}
+                %strong> Updated
+                \: 04/12/2012 14:32
       / end of widget
     / end of span
-    =render :partial => 'design/widgets/impactscope'
+    =render :partial => 'design/widgets/related'
     / end of span

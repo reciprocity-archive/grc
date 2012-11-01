@@ -3,6 +3,12 @@
 
 -content_for :widget_help, 'program_cycles'
 
+-if has_feature? :BETA
+  .fltnone
+    %a.btn.btn-large.btn-inverse.demoItem{ :href => '/design/audit-manager' }
+      Audit Manager
+  %br
+
 %ul.nav.nav-tabs.nav-stacked
   -program.cycles.order("start_at DESC").each do |cycle|
     %li.group

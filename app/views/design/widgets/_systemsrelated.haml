@@ -1,6 +1,6 @@
-#impactscopewidget.WidgetBox
+#systemsrelated.WidgetBox
   .WidgetBoxHeading
-    .WidgetTitle Impact / Scope
+    .WidgetTitle Related
     %nav
       %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
         %i.gcmsicon-questionmark-grey
@@ -13,26 +13,37 @@
       .button-set
         .row-fluid
           .span4
-            .span12.btn.btn-info{:href => ""}
-              Org Groups
+            .span12.btn{:href => ""}
+              Programs
           .span4
             .span12.btn.halfopacity{:href => ""}
-              Products
+              Org Groups 
           .span4
             .span12.btn.halfopacity{:href => ""}
-              Facilities
+              Projects
           
       .button-set
         .row-fluid
           .span4
             .span12.btn{:href => ""}
-              Data Assets
+              Risks
           .span4
             .span12.btn.halfopacity{:href => ""}
               Products
           .span4
             .span12.btn.halfopacity{:href => ""}
               Markets 
+      .button-set
+        .row-fluid
+          .span4
+            .span12.btn.halfopacity{:href => ""}
+              Processes
+          .span4
+            .span12.btn.halfopacity{:href => ""}
+              Data Assets
+          .span4
+            .span12.btn.halfopacity{:href => ""}
+              Facilities
       %hr.hr-widget
       / TABS
       .row-fluid
@@ -40,30 +51,26 @@
           .row-fluid.nominheight
             .span12.nominheight
               %h4.nominheight
-                Org Groups
+                Facilities
                 -#%a.btn.btn-blue.minibtn.pull-right Edit List
+                %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                  %i.gcmsicon-link
           .row-fluid
             .span12.captionbox
-              .subtitle Org groups that have implemented this Control (2)
+              .subtitle Facilities that implement this Business Process
           .row-fluid
             %ul.span12
               %li.controlSlot
                 .row-fluid.nominheight
                   .span6.nominheight
-                    %span.controls-group GWT
+                    %span.controls-group Buildings
                   .span6.nominheight
-                    -#%a.btn.minibtn.pull-right Review
+                    %a.btn.minibtn.pull-right Review
                 .row-fluid.nominheight
-                  .span12.nominheight
-                    %span.controls-subgroup Google Corp IT Team
-              %li.controlSlot
-                .row-fluid.nominheight
-                  .span6.nominheight
-                    %span.controls-group FIN
-                  .span6.nominheight
-                    -#%a.btn.minibtn.pull-right Review
-                .row-fluid.nominheight
-                  .span12.nominheight
-                    %span.controls-subgroup Google Data Center Team
+                  .span3.nominheight
+                    %span.controls-subgroup
+                      %strong CCA
+                  .span9.nominheight
+                    %span.controls-subgroup SFO Campus Building
      
   / end of span

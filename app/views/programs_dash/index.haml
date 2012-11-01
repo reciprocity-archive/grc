@@ -1,5 +1,5 @@
 -@title = "Dashboard"
-
+ 
 -content_for :page_help, 'dashboard'
 
 -content_for :header_buttons do
@@ -20,7 +20,7 @@
               :layout => 'layouts/widget_box',
               :locals => { :programs => @programs }
   .singleColumn
-    .singleWide.halfHeight
+    .singleWide.fullHeight
       =render :partial => 'quick/find',
             :layout => 'layouts/widget_box'
       -if has_feature? :BETA
@@ -93,4 +93,19 @@
       %li
         %a{ :href => '#comingsoon-modal', :'data-toggle' => 'modal', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
           Data Asset
-
+      -if has_feature? :BETA
+        %li.demoItem
+          %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
+            Person
+        %li.demoItem
+          %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
+            Reference
+        %li.demoItem
+          %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
+            Business Object
+        %li.demoItem
+          %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
+            Threat
+        %li.demoItem
+          %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
+            Vulnerability

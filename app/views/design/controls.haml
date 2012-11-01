@@ -1,0 +1,230 @@
+-@title = "GRC: Controls"
+ 
+-content_for :header do
+  %ol#breadcrumb
+    %li.last
+      %a{:href => "#"} COMPANY CONTROLS | ACCESS CONTROL | AUTHORIZATION
+  #pageTitle.location Authorization process for information processing facilities
+
+-content_for :page_help, 'changeme'
+
+-content_for :subheader_extras do
+  %h1#pageType.pull-right.highlighted Control
+
+-content_for :subheader_plus do
+  %a.navbarplus.fltrt{ :href => "#comingsoonModal", "data-toggle" => "modal" }
+  
+.row-static
+  .doubleColumn
+    #RegsandControls.WidgetBox.fullHeight.doubleWide
+      .WidgetBoxHeading
+        .pull-right
+          %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+            %i.gcmsicon-questionmark-grey
+          -#%a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+            %i.gcmsicon-edit-grey
+          %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
+        .WidgetTitle.doublewidth Control Implementation
+      .WidgetBoxContent
+        
+        %ul#quicklinks.nav.nav-tabs
+          %li.active
+            %a{"data-toggle" => "tab", :href => "#controls-sysbizproc"} Sys/Biz Processes
+          %li
+            %a{"data-toggle" => "tab", :href => "#controls-linked"} Linked Controls
+          %li
+            %a{"data-toggle" => "tab", :href => "#controls-progsec"} Program Sections
+          %li
+            %a{"data-toggle" => "tab", :href => "#controls-risks"} Risks
+
+        
+        .tab-content
+          .tab-pane#controls-sysbizproc.active
+            -# TAB SYS BIZ PROCESS
+            .row-fluid
+              .span12.captionbox
+                %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+                  %i.gcmsicon-link
+                %h4
+                  Systems or Processes that implement this Control
+
+            #sampleprocesses
+          .tab-pane#controls-linked
+            -# TAB LINKED CONTROLS
+            .row-fluid
+              .span12.captionbox
+                %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+                  %i.gcmsicon-link
+                %h4
+                  Other Controls linked to this Control
+            #samplelinkedcontrols
+          .tab-pane#controls-progsec
+            -# PROGRAM SECTIONS
+            .row-fluid
+              .span12.captionbox
+                %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+                  %i.gcmsicon-link
+                %h4
+                  Program or Policy Sections that mandate this Control
+                
+            #sampleprogramsections
+          .tab-pane#controls-risks
+            -# PROGRAM RISKS
+            .row-fluid
+              .span12.captionbox
+                %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+                  %i.gcmsicon-link
+                %h4
+                  Risks mitigated by this Control
+                
+            #samplerisks
+              
+    
+  .singleColumn
+    #productInfo.WidgetBox
+      .WidgetBoxHeading
+        .WidgetTitle Control Actions
+      .WidgetBoxContent.information
+        .toolbar-widget
+          .row-fluid
+            .span6
+              %a.span12.btn.btn-warning{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                New Version
+            .span6
+              %a.span12.btn.btn-warning{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                Relationship Map
+    #productInfo.WidgetBox
+      .WidgetBoxHeading
+        .WidgetTitle Control Info
+        %nav
+          %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+            %i.gcmsicon-questionmark-grey
+          -#%a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+            %i.gcmsicon-edit-grey
+          %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#productInfoContent"}
+            %i.gcmsicon-enlarge-grey
+      .WidgetBoxContent.information.collapse.in
+        .well 
+          %label 
+            Status
+            .pull-right 
+              %span.statustextgreen 35 
+              %span /
+              %span.statustextyellow 55 
+              %span /
+              %span.statustextred 10 
+          .progress.progress-striped.active
+            .bar.progressbar-success{"data-percentage" => "35", :style => "float: left; width: 0%; "}
+            .bar.progressbar-danger{"data-percentage" => "10", :style => "float: right; width: 0%; "}
+            .bar.progressbar-warning{"data-percentage" => "55", :style => "float: right; width: 0%; "}
+        -#.toolbar-widget.well
+          %a.btn.btn-warning{"data-toggle" => "modal", :href => "#comingsoonModal"}
+            New Version
+        
+        #productInfoContent.collapse.in
+          %hr.hr-widget
+          .row-fluid
+            .span12
+              %h3.toggle{"data-target" => "#productAbout", "data-toggle" => "collapse"}
+                .expander
+                About
+                %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+                  %i.gcmsicon-edit-grey
+                -#%a.btn.btn-blue.minibtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"} Edit
+              #productAbout.collapse
+                .row-fluid
+                  .span12
+                    .span3
+                      %label Code
+                      %input.span12{:disabled => "disabled", :placeholder => "ABC", :type => "text"}/
+                    .span3
+                      %label Version
+                      %input.span12{:disabled => "disabled", :placeholder => "1.0", :type => "text"}/
+                    .span3
+                      %label Type
+                      %input.span12{:disabled => "disabled", :placeholder => "Company", :type => "text"}/
+                    .span3
+                      %label Kind
+                      %input.span12{:disabled => "disabled", :placeholder => "---", :type => "text"}/
+                .row-fluid
+                  .span8
+                    %label Means of Opeartion
+                    %input.span12{:disabled => "disabled", :placeholder => "Manual w/ Segregation of Duties", :type => "text"}/
+                  .span4
+                    %label Confirm Frequency
+                    %input.span12{:disabled => "disabled", :placeholder => "Quarterly", :type => "text"}
+                .row-fluid
+                  .span12
+                    %label Description
+                    %textarea#textarea.span12{:disabled => "disabled", :placeholder => "", :rows => "3", :style => "height: 135px; "} PCI DDS applies whenever Cardholder account data and Authentication Data is Stored, Processed or Transmitted. Examples Include: For more See Page 7 of document. Using h6 makes the label caps.
+                .row-fluid
+                  .span12
+                    %label Direct Link
+                    %input.span12{:disabled => "disabled", :placeholder => " ", :type => "text"}/
+                .row-fluid
+                  .span12
+                    .span4
+                      %label Effective Date
+                      %input.span12{:disabled => "disabled", :placeholder => "", :type => "text"}/
+                    .span4
+                      %label Stop Date
+                      %input.span12{:disabled => "disabled", :placeholder => "", :type => "text"}/
+                    .span4
+                      %label Status
+                      %input.span12{:disabled => "disabled", :placeholder => "OK", :type => "text"}/
+          %hr.hr-widget
+          .row-fluid
+            .span12
+              %h3.toggle{"data-target" => "#productCategories", "data-toggle" => "collapse"}
+                .expander
+                Categories
+                %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+                  %i.gcmsicon-link
+              %ul#productCategories.collapse
+                %li.controlSlot
+                  %span.controls-group Category
+                  %br/
+                  %span.controls-subgroup Access Control
+                %li.controlSlot
+                  %span.controls-group Category
+                  %br/
+                  %span.controls-subgroup Risky Attribute
+          %hr.hr-widget
+          .row-fluid
+            .span12
+              %h3.toggle{"data-target" => "#productReferences", "data-toggle" => "collapse"}
+                .expander
+                References
+                %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+                  %i.gcmsicon-link
+              %ul#productReferences.collapse
+                %li.controlSlot
+                  %span.controls-group PDF
+                  %br/
+                  %span.controls-subgroup Privacy Report 2011
+                %li.controlSlot
+                  %span.controls-group PDF
+                  %br/
+                  %span.controls-subgroup Privacy Report 2012
+          %hr.hr-widget
+          .row-fluid
+            .span12
+              %h3.toggle{"data-target" => "#productPeople", "data-toggle" => "collapse"}
+                .expander
+                People
+                %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+                  %i.gcmsicon-link
+              %ul#productPeople.collapse
+                %li.controlSlot
+                  %span.controls-group JRayburn@google.com
+                  %br/
+                  %span.controls-subgroup Joss Rayburn
+                %li.controlSlot
+                  %span.controls-group rpoder@google.com
+                  %br/
+                  %span.controls-subgroup Ron Poder
+          %hr.hr-widget
+      / end of widget
+    / end of span
+    =render :partial => 'design/widgets/impactscope'
+    / end of span
