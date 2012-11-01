@@ -207,14 +207,26 @@ module RelatedModel
     }
   end
 
-  def traverse_edge?(obj, edge, ability)
+  def traverse_edge?(obj, edge, ability, traverse_forward = true)
+    # If we are not traversing forward, we want to look in the opposite direction in the lookup table
+    # from the direction we are traversing. This is for the object_via_ability_fast
+    # traversal.
+
     # Get the other node
     if edge.source == obj
       other = edge.destination
-      direction = :forward
+      if traverse_forward
+        direction = :forward
+      else
+        direction = :backward
+      end
     else
       other = edge.source
-      direction = :backward
+      if traverse_forward
+        direction = :backward
+      else
+        direction = :forward
+      end
     end
 
     ability = ability.to_sym
@@ -237,9 +249,11 @@ module RelatedModel
       return false
     end
 
+
     if (ability_directions == :both) || (ability_directions == direction) || (ability == :all)
       return true
     end
+    return false
   end
 
   def ability_graph_recurse(result_set, ability)
@@ -252,37 +266,7 @@ module RelatedModel
         next
       end
 
-      # Get the other node
-      if edge.source == self
-        other = edge.destination
-        direction = :forward
-      else
-        other = edge.source
-        direction = :backward
-      end
-
-      ability = ability.to_sym
-
-      # Okay, we have an edge with an endpoint that isn't in our set yet.
-      # Check to see if it has the right ability
-      type = edge.type.to_sym
-      edge_abilities = DefaultRelationshipTypes::RELATIONSHIP_ABILITIES[type]
-
-      if !edge_abilities
-        #raise "Unknown edge type #{type}"
-        puts "Unknown edge type #{type}"
-        edge_abilities = DefaultRelationshipTypes::RELATIONSHIP_ABILITIES[:default]
-      end
-
-      # Ability :all is a special case used for traversing the entire graph
-      ability_directions = edge_abilities[ability]
-      if !ability_directions && !ability == :all
-        # Does not allow traversal for this ability, continue
-        next
-      end
-
-      if (ability_directions == :both) || (ability_directions == direction) || (ability == :all)
-        # This is a valid edge. Add it
+      if traverse_edge?(self, edge, ability)
         result_set[:edges].add(edge)
 
         # Add the other object to the nodes list if it's not already there
@@ -312,6 +296,21 @@ module RelatedModel
       false
     else
       true
+    end
+  end
+
+  def objects_via_ability(objects, ability)
+    # Return the subset of these objects that can be reached via
+    # the ability graph for this ability.
+
+    graph = ability_graph_preload(ability)
+
+    objects.reduce([]) do |filtered, object|
+      # See if the object is in the resulting nodes
+      if graph[:objs].include?(object)
+        filtered.append(object)
+      end
+      filtered
     end
   end
 

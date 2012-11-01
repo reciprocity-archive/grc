@@ -5,12 +5,6 @@ module AuthorizationHelper
   end
 
   def allowed_objs(objects, ability)
-    objects.reduce([]) do |filtered, object|
-      #@current_user.allowed?(ability, object) do
-      object.allowed?(ability, @current_user) do
-        filtered.append(object)
-      end
-      filtered
-    end
+    @current_user.person.objects_via_ability(objects, ability)
   end
 end
