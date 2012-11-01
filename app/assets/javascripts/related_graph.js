@@ -248,7 +248,8 @@ $(document).ready(function() {
       $(container).find('.tab-pane').on('redraw', ajax_redraw_handler);
       var $active_tab = $tabs.filter('.active')
       if (!$active_tab.length) {
-        $active_tab = $tabs.first()
+        // Uncomment this to autoload the first tab by default
+        //$active_tab = $tabs.first()
       }
 
       // Need to remove the active class because otherwise the
