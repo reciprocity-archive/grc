@@ -158,7 +158,7 @@ module RelatedModel
     models = models.map {|m| m.constantize}
 
     models.each do |model|
-      if model.methods.include? :all_related_edges
+      if model.respond_to? :all_related_edges
         new_edges = model.all_related_edges
         new_objs = model.all
         objs.merge(new_objs)
@@ -353,9 +353,9 @@ module RelatedModel
       # Returns a list of all relationship edges going to/from this node.
       # An edge consists of {:source, :destination, :type}
 
-      source_rels = Relationship.where(:source_type => self.to_s)
-      dest_rels = Relationship.where(:destination_type => self.to_s)
-      op_rels = ObjectPerson.where(:personable_type => self.to_s)
+      source_rels = Relationship.includes(:source, :destination).where(:source_type => self.to_s)
+      dest_rels = Relationship.includes(:source, :destination).where(:destination_type => self.to_s)
+      op_rels = ObjectPerson.includes(:person, :personable).where(:personable_type => self.to_s)
 
       edges = Set.new
 
