@@ -90,14 +90,19 @@ module RelatedModel
     #
 
     graph_data = {
-      :objs => Set.new,
+      :objs => Set.new([self]),
       :edges => Set.new
     }
     
+    # FIXME: Optimize this so we're not generating the full graph that's used to
+    # generate the ability graph each time, this can be REALLY slow.
     allowed_abilities.each do |ability|
-      result = ability_graph_preload(ability)
-      graph_data[:objs].merge(result[:objs])
-      graph_data[:edges].merge(result[:edges])
+      objs = graph_data[:objs].clone
+      objs.each do |obj|
+        result = obj.ability_graph_preload(ability)
+        graph_data[:objs].merge(result[:objs])
+        graph_data[:edges].merge(result[:edges])
+      end
     end
 
     d3_graph = {
