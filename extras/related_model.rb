@@ -1,9 +1,9 @@
 # RelatedModel mixin
 #
 # Many mixins that exist for managing relationships, and especially the relationship
-# traversal functions that are used in the context of authorization
+# traversal functions that are used in the context of authorization.
 #
-# Creates some useful scoping functions that allow you to
+# Also creates some useful scoping functions that allow you to
 # create scopes for relationships with very little code. Example usage:
 #
 # In your model:
@@ -24,6 +24,9 @@ module RelatedModel
   end
 
   class Edge
+    # Simple utility class that allows me to use edges in Sets. Specifically,
+    # Has an eql? function for that purpose.
+    #
     attr_accessor :source
     attr_accessor :destination
     attr_accessor :type
@@ -63,7 +66,8 @@ module RelatedModel
       edges.add(edge)
     end
 
-    # Next, ObjectPerson
+    # Next, ObjectPerson relationships - these are common enough that
+    # we look for them here instead of in custom_edges
     ops = ObjectPerson.where(:personable_id => self.id,
                              :personable_type => self.class.to_s)
 
@@ -72,13 +76,17 @@ module RelatedModel
       edges.add(edge)
     end
 
-    if self.methods.include? :custom_edges
+    # Include non-standard edge types via the custom_edges method of the
+    # model if it is implemented - generally, those that are hardcoded
+    # into the schema.
+    if self.methods.respond_to? :custom_edges
       edges.merge(self.custom_edges)
     end
 
     edges
   end
 
+  # Handy timer class used when performance optimizing.
   class Timer
     def initialize
       @start = DateTime.now.to_f
@@ -89,48 +97,14 @@ module RelatedModel
     end
   end
 
-  def d3_format(objs, edges)
-    nodes = []
-    # Add node data, and create the lookup table of obj => node index
-    obj_to_node_id = {}
-    objs.each do |obj|
-      # FIXME: This is because Person doesn't have a slug, and
-      # display_name doesn't work here (it's often too long)
-      if obj.class == Person
-        name = obj.email
-      else
-        name = obj.slug
-      end
-
-      class_name = obj.class.to_s.underscore
-
-      nodes.push({
-        :type => class_name,
-        :node => {
-          :name => name
-        },
-        :link => Rails.application.routes.url_helpers.method("flow_#{class_name}_path").call(obj.id)
-      })
-
-      obj_to_node_id[obj] = nodes.length - 1
-    end
-
-    links = []
-    edges.each do |edge|
-      links.push({
-          :source => obj_to_node_id[edge.source],
-          :target => obj_to_node_id[edge.destination],
-          :type => edge.type
-        })
-    end
-
-    {
-      :nodes => nodes,
-      :links => links
-    }
-  end
-
   def ability_graph(allowed_abilities)
+    # Generates a graph of nodes and edges that can be traversed from this
+    # node using the list of allowed abilities.
+    # The allowed_abilities list applies the abilities in order.
+    # e.g. if you pass in [:read, :meta_read], it gets the graph for the
+    # :read ability first, then, for each nodes reachable via :read, includes the
+    # graph reachable via the :meta_read ability
+
     # This is the recursive version. Commented out
     # in deference to the (generally faster) non-recursive version.
     #graph_data = {:objs => Set.new([self]),
@@ -144,20 +118,17 @@ module RelatedModel
     #end
     #
 
-    graph_data = {
-      :objs => Set.new([self]),
-      :edges => Set.new
-    }
-    
     objs = Set.new([self])
     edges = Set.new
 
     # FIXME: Optimize this so we're not generating the full graph that's used to
-    # generate the ability graph each time, this can be REALLY slow.
+    # generate the ability graph each time, this can be REALLY slow, especially in
+    # the case of multiple abilities, where we're generating it for each node
+    # in the first ability's result set.
     allowed_abilities.each do |ability|
       cur_objs = objs.clone
       cur_objs.each do |obj|
-        result = obj.ability_graph_preload(ability)
+        result = obj.ability_graph_preload(ability) # Uses "preload" version which gets full graph first.
         objs.merge(result[:objs])
         edges.merge(result[:edges])
       end
@@ -211,8 +182,8 @@ module RelatedModel
     end
 
     # Now we have a traversable data structure. Look up this node
-    # in the data structure and walk the tree
-
+    # in the data structure and walk the tree, adding nodes and edges
+    # we find to the result set.
     objs = Set.new
     edges = Set.new
 
@@ -243,6 +214,8 @@ module RelatedModel
   end
 
   def traverse_edge?(obj, edge, ability, traverse_forward = true)
+    # Determine if we are allowed to traverse this edge, given the provided ability.
+
     # If we are not traversing forward, we want to look in the opposite direction in the lookup table
     # from the direction we are traversing. This is for the object_via_ability_fast
     # traversal.
@@ -266,26 +239,31 @@ module RelatedModel
 
     ability = ability.to_sym
 
-    # Okay, we have an edge with an endpoint that isn't in our set yet.
-    # Check to see if it has the right ability
+    # Look up the abilities associated with this relationship type.
     type = edge.type.to_sym
     edge_abilities = DefaultRelationshipTypes::RELATIONSHIP_ABILITIES[type]
 
     if !edge_abilities
+      # Unknown ability types are generally bad, as this means that the edge
+      # won't be traversed, ever.
       #raise "Unknown edge type #{type}"
       puts "Unknown edge type #{type}"
       edge_abilities = DefaultRelationshipTypes::RELATIONSHIP_ABILITIES[:default]
     end
 
-    # Ability :all is a special case used for traversing the entire graph
+    if ability == :all
+      return true
+    end
+
+    # Bail if we don't have the ability listed at all.
     ability_directions = edge_abilities[ability]
-    if !ability_directions && !ability == :all
+    if !ability_directions
       # Does not allow traversal for this ability, continue
       return false
     end
 
-
-    if (ability_directions == :both) || (ability_directions == direction) || (ability == :all)
+    # Return true if we match traversal directions in the lookup table.
+    if (ability_directions == :both) || (ability_directions == direction)
       return true
     end
     return false
@@ -394,6 +372,8 @@ module RelatedModel
         edges.add(edge)
       end
 
+      # In addition to the standard relationships, include all of the
+      # non-standard edges that are baked into the models.
       if self.methods.include? :custom_all_edges
         edges.merge(self.custom_all_edges)
       end
