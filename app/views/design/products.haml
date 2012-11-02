@@ -76,15 +76,28 @@
                   #demo3.row-fluid-slotcontent.collapse
                     .span9
                       Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
-              / end example
-        / /.Class Content
-      / /.WidgetBoxContent
-    / /.RegsandControls
-  / close span8
+
   .singleColumn
-    #programwidget.WidgetBox
+
+    #productInfo.WidgetBox
+      
+      .WidgetBoxContent.information
+        %label Owner Actions
+        .toolbar-widget.well
+          .row-fluid
+            .span4
+              %a.span12.btn.btn-info{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                New Version
+            .span4  
+              %a.span12.btn.btn-warning{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                Request Audit
+            .span4
+              %a.span12.btn.btn-danger{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                Delete
+
+    #productInfo.WidgetBox
       .WidgetBoxHeading
-        .WidgetTitle Program
+        .WidgetTitle Product Info
         %nav
           %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
             %i.gcmsicon-questionmark-grey
@@ -93,109 +106,94 @@
           %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#generalInfo"}
             %i.gcmsicon-enlarge-grey
       .WidgetBoxContent.information
-        .toolbar-widget
-          / Make buttons slightly darker and washed out
+        #productStatus.well
+          %label 
+            Status
+            .pull-right 
+              %span.statustextgreen 85 
+              %span /
+              %span.statustextyellow 5 
+              %span /
+              %span.statustextred 10 
+          .progress.progress-striped.active
+            .bar.progressbar-success{"data-percentage" => "85", :style => "float: left; width: 0%; "}
+            .bar.progressbar-danger{"data-percentage" => "10", :style => "float: right; width: 0%; "}
+            .bar.progressbar-warning{"data-percentage" => "5", :style => "float: right; width: 0%; "}
+        -#.toolbar-widget.well
           %a.btn.btn-warning{"data-toggle" => "modal", :href => "#comingsoonModal"}
-            %i.gcmsicon-import-white
-            Import Regs
-          %a.btn.btn-warning{:href => "regmapper.htm"}
-            %i.gcmsicon-mapping-white
-            Reg Mapper
-          %a.btn.btn-warning{"data-toggle" => "modal", :href => "#comingsoonModal"}
-            %i.gcmsicon-play-white
-            Start Audit
-        / /* For discussion with Dan http://www.minddust.com/bootstrap-progressbar-demo/ *?
-        #generalInfo.row-fluid.in
-          .span12
-            %hr.hr-widget/
-            .row-fluid
-              .span6
-                %label Regulation Linking
-                .progress.progress-striped.active
-                  .bar.progressbar-success{"data-percentage" => "85", :style => "float: left; width: 0%; "}
-                  .bar.progressbar-danger{"data-percentage" => "10", :style => "float: right; width: 0%; "}
-                  .bar.progressbar-warning{"data-percentage" => "5", :style => "float: right; width: 0%; "}
-                %label Control Verification
-                .progress.progress-striped.active
-                  .bar.progressbar-success{"data-percentage" => "38", :style => "float: left; width: 0%; "}
-                  .bar.progressbar-danger{"data-percentage" => "10", :style => "float: right; width: 0%; "}
-                  .bar.progressbar-warning{"data-percentage" => "35", :style => "float: right; width: 0%; "}
-                %label Control Approval
-                .progress.progress-striped.active
-                  .bar.progressbar-success{"data-percentage" => "85", :style => "float: left; width: 0%; "}
-                  .bar.progressbar-danger{"data-percentage" => "10", :style => "float: right; width: 0%; "}
-                  .bar.progressbar-warning{"data-percentage" => "5", :style => "float: right; width: 0%; "}
-                %label Time
-                .progress.progress-striped.active
-                  .bar.progressbar-success{"data-percentage" => "38", :style => "float: left; width: 0%; "}
-                  .bar.progressbar-danger{"data-percentage" => "10", :style => "float: right; width: 0%; "}
-                  .bar.progressbar-warning{"data-percentage" => "35", :style => "float: right; width: 0%; "}
-                .row-fluid
-                  .span6 Mar 1
-                  .span6.pull-right.txtrt June 31
-              .span6
-                %label Requests
-                .progress.progress-striped.active
-                  .bar.progressbar-success{"data-percentage" => "85", :style => "float: left; width: 0%; "}
-                  .bar.progressbar-danger{"data-percentage" => "10", :style => "float: right; width: 0%; "}
-                  .bar.progressbar-warning{"data-percentage" => "5", :style => "float: right; width: 0%; "}
-          %hr.hr-widget/
-          / /* For discussion with Dan http://www.minddust.com/bootstrap-progressbar-demo/ *?
-          #programinformation.row-fluid
-            .span12
-              .span4.form-inline.control-group.pull-right
-                %label Code
-                %input{:disabled => "disabled", :placeholder => "SOX", :style => "margin: 0px; width: 45%;", :type => "text"}/
-              .span8
-                %label Short Title
-                %input{:disabled => "disabled", :placeholder => "Sarbanes-Oxley", :style => "margin: 0px; width: 45%;", :type => "text"}/
+            New Version
+          
+        %hr.hr-widget
           .row-fluid
             .span12
-              %label Full Title
-              %input{:disabled => "disabled", :placeholder => "Sarbanes-Oxley Long Title", :style => "margin: 0px; width: 97%;", :type => "text"}/
-          .row-fluid
-            .span12
-              %label Type
-              %input{:disabled => "disabled", :placeholder => "Regulation", :style => "margin: 0px; width: 97%;", :type => "text"}/
-          .row-fluid
-            .span12
-              %label Version
-              %input{:disabled => "disabled", :placeholder => "1.2", :style => "margin: 0px; width: 97%;", :type => "text"}/
-          .row-fluid
-            .span12
-              %label Scope / Applicability of this Program
-              %textarea#textarea{:disabled => "disabled", :placeholder => "", :rows => "3", :style => "margin: 0px; width: 98%; height: 73px; "} PCI DDS applies whenever Cardholder account data and Authentication Data is Stored, Processed or Transmitted. Examples Include: For more See Page 7 of document. Using h6 makes the label caps.
-          %hr.hr-widget/
-          .row-fluid
-            .span12
-              %h3
-                References
+              %h3.toggle{"data-target" => "#productAbout", "data-toggle" => "collapse"}
+                .expander
+                About
                 %a.btn.btn-blue.addbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"} Edit
-              %ul#referenceList
-                %li.controlSlot
-                  %span.controls-group PDF
-                  %br/
-                  %span.controls-subgroup Privacy Report 2011
-                %li.controlSlot
-                  %span.controls-group PDF
-                  %br/
-                  %span.controls-subgroup Privacy Report 2012
-          %hr.hr-widget/
-          .row-fluid
-            .span12
-              %h3
-                People
-                %a.btn.btn-blue.addbtn.pull-right{"data-toggle" => "modal", :href => "#peopleSelectorModal"} Edit
-              %ul#peopleList
-                %li.controlSlot
-                  %span.controls-group JRayburn@google.com
-                  %br/
-                  %span.controls-subgroup Joss Rayburn
-                %li.controlSlot
-                  %span.controls-group rpoder@google.com
-                  %br/
-                  %span.controls-subgroup Ron Poder
-        %hr.hr-widget/
+              #productAbout.collapse
+                .row-fluid
+                  .span12
+                    .span3
+                      %label Code
+                      %input.span12{:disabled => "disabled", :placeholder => "ABC", :type => "text"}/
+                    .span3
+                      %label Version
+                      %input.span12{:disabled => "disabled", :placeholder => "1.0", :type => "text"}/
+                    .span3
+                      %label Year
+                      %input.span12{:disabled => "disabled", :placeholder => "2012", :type => "text"}/
+                    .span3
+                      %label Kind
+                      %input.span12{:disabled => "disabled", :placeholder => "---", :type => "text"}/
+                .row-fluid
+                  .span12
+                    %label Full Title
+                    %input{:disabled => "disabled", :placeholder => "Sarbanes-Oxley Long Title", :style => "margin: 0px; width: 97%;", :type => "text"}/
+                .row-fluid
+                  .span12
+                    %label Type
+                    %input{:disabled => "disabled", :placeholder => "Regulation", :style => "margin: 0px; width: 97%;", :type => "text"}/
+                .row-fluid
+                  .span12
+                    %label Version
+                    %input{:disabled => "disabled", :placeholder => "1.2", :style => "margin: 0px; width: 97%;", :type => "text"}/
+                .row-fluid
+                  .span12
+                    %label Scope / Applicability of this Program
+                    %textarea#textarea{:disabled => "disabled", :placeholder => "", :rows => "3", :style => "margin: 0px; width: 98%; height: 73px; "} PCI DDS applies whenever Cardholder account data and Authentication Data is Stored, Processed or Transmitted. Examples Include: For more See Page 7 of document. Using h6 makes the label caps.
+        %hr.hr-widget
+        .row-fluid
+          .span12
+            %h3.toggle{"data-target" => "#productReferences", "data-toggle" => "collapse"}
+              .expander
+              References
+              %a.btn.btn-blue.addbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"} Edit
+            %ul#productReferences.collapse
+              %li.controlSlot
+                %span.controls-group PDF
+                %br/
+                %span.controls-subgroup Privacy Report 2011
+              %li.controlSlot
+                %span.controls-group PDF
+                %br/
+                %span.controls-subgroup Privacy Report 2012
+        %hr.hr-widget
+        .row-fluid
+          .span12
+            %h3.toggle{"data-target" => "#productPeople", "data-toggle" => "collapse"}
+              .expander
+              People
+              %a.btn.btn-blue.addbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"} Edit
+            %ul#productPeople.collapse
+              %li.controlSlot
+                %span.controls-group JRayburn@google.com
+                %br/
+                %span.controls-subgroup Joss Rayburn
+              %li.controlSlot
+                %span.controls-group rpoder@google.com
+                %br/
+                %span.controls-subgroup Ron Poder
+        %hr.hr-widget
         .row-fluid.nominheight
           .span6.nominheight
             %label.pull-left{:for => "control-effectivedate"}
