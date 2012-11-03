@@ -76,7 +76,57 @@
                   #demo3.row-fluid-slotcontent.collapse
                     .span9
                       Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
-
+    .doubleColumn               
+      #productComplianceSchedule.WidgetBox
+        .WidgetBoxHeading
+          %nav
+            %a.widgettextbtn{"data-toggle" => "modal", :href => "#"} Add Item
+          .WidgetTitle Compliance Schedule
+        .WidgetBoxContent
+          .row-fluid.nominheight
+            .span6.nominheight
+            .span6.nominheight
+              .span4.nominheight
+                %label.fltnone Start
+              .span4.nominheight
+                %label.fltnone Finish
+              .span4.nominheight
+                %label.fltnone Status
+          %ul#ComplianceList.in
+            %li.controlSlot.ui-draggable.row-fluid.nominheight.statusred{"data-toggle" => "modal", :href => "#"}
+              .span6.nominheight
+                %span.prefix Fit and Proper Review
+                .expander
+              .span6.badges.nominheight
+                .span4.nominheight
+                  .badge.badge-info 01/15/12
+                .span4.nominheight
+                  .badge.badge-info 01/15/13
+                .span4.nominheight
+                  .badge.badge-important Late
+            %li.controlSlot.ui-draggable.row-fluid.nominheight.statusyellow{"data-toggle" => "modal", :href => "#"}
+              .span6.nominheight
+                %span.prefix Fit and Proper Review
+                .expander
+              .span6.badges.nominheight
+                .span4.nominheight
+                  .badge.badge-info 01/15/12
+                .span4.nominheight
+                  .badge.badge-info 01/15/13
+                .span4.nominheight
+                  .badge.badge-warning In-Progress
+            %li.controlSlot.ui-draggable.row-fluid.nominheight.statusgreen{"data-toggle" => "modal", :href => "#"}
+              .span6.nominheight
+                %span.prefix Fit and Proper Review
+                .expander
+              .span6.badges.nominheight
+                .span4.nominheight
+                  .badge.badge-info 01/15/12
+                .span4.nominheight
+                  .badge.badge-info 01/15/13
+                .span4.nominheight
+                  .badge.badge-success   Complete
+              
   .singleColumn
 
     #productInfo.WidgetBox
