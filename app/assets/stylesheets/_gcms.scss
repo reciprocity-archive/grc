@@ -551,21 +551,6 @@ width: 97px;
 }
 
 
-.statusblue {
-  background:#40bac0;
-}
-
-.statusred {
-  color:#444 !important;
-  background: #f8ccb8; /* Old browsers */
-  @include background-image(linear-gradient(top,  #f8ccb8 0%, #f9bea3 100%));
-}
-
-.statusorange {
-  color:#444 !important;
-  background: #ffd8ab; /* Old browsers */
-  @include background-image(linear-gradient(top,  #ffd8ab 0%, #ffd8ab 100%));
-}
 
 .statustextred {
   color:#C00;
@@ -581,16 +566,34 @@ width: 97px;
   color:#bc9808;
 }
 
+
+.statusblue {
+  background:#40bac0;
+}
+
+
+.statusorange {
+  color:#444 !important;
+  background: #ffd8ab; /* Old browsers */
+  @include background-image(linear-gradient(top,  #ffd8ab 0%, #ffd8ab 100%));
+}
+
 .statusyellow {
   color:#444 !important;
-  background: rgb(255,227,153); /* Old browsers */
+  background: transparentize(#ffff00, .95) !important;  /* Old browsers */
   @include background-image(linear-gradient(top,  rgba(255,227,153,1) 0%, rgba(237,237,147,1) 100%));
 }
 
 .statusgreen {
   color:#444 !important;
-  background: #b5fbc8; /* Old browsers */
+  background: transparentize(#00ff00, .95) !important; /* Old browsers */
   @include background-image(linear-gradient(top,  #b5fbc8 0%, #a0fcb9 100%));
+}
+
+.statusred {
+  color:#444 !important;
+  background: transparentize(#ff0000, .95)  !important; /* Old browsers */
+  @include background-image(linear-gradient(top,  rgba(255,227,153,1) 0%, rgba(237,237,147,1) 100%));
 }
 
 .regulationslot_content {
