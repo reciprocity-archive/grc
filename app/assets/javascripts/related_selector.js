@@ -277,20 +277,29 @@
         ;
 
       // Add/remove class to highlight removed items
-      if ($item.is('.added')) {
-        $item.remove();
-      } else if ($item.is('.changed')) {
-        $item.addClass('removed');
-        $item.find('.state').text('removed').addClass('statustextred');
-        $item.find('._destroy').val('destroy');
-      } else {
-        $item.find('.state').text('removed').addClass('statustextred');
-        $item.find('._destroy').val('destroy');
-        $item.addClass('removed');
-      }
+      if ($item.is('.removed')) {
+        // Undo the remove operation
+        $item.removeClass('removed');
+        $item.find('.state').text('').removeClass('statustextred');
+        $item.find('._destroy').val('');
 
-      // Reset 'add' icon in source list
-      this.mark_item_unselected($option_item);
+        this.mark_item_selected($option_item);
+      } else {
+        if ($item.is('.added')) {
+          $item.remove();
+        } else if ($item.is('.changed')) {
+          $item.addClass('removed');
+          $item.find('.state').text('removed').addClass('statustextred');
+          $item.find('._destroy').val('destroy');
+        } else {
+          $item.find('.state').text('removed').addClass('statustextred');
+          $item.find('._destroy').val('destroy');
+          $item.addClass('removed');
+        }
+
+        // Reset 'add' icon in source list
+        this.mark_item_unselected($option_item);
+      }
     }
   });
 
