@@ -22,60 +22,129 @@
           %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
             %i.gcmsicon-edit-grey
           %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
-        .WidgetTitle.doublewidth Regulation and Controls
+        .WidgetTitle.doublewidth Sub-Products, Processes and Controls
       / /.WidgetBoxHeading
       .WidgetBoxContent
-        .pull-right
-          %img{:alt => "Expand All", :src => "/images/expandAll.png"}/
-          %img{:alt => "Shrink All", :src => "/images/shrinkAll.png"}/
-        %ul#quicklinks.nav.nav-tabs
+        
+        -#%ul#quicklinks.nav.nav-tabs
           %li
             %a{"data-toggle" => "tab", :href => "#Regulation"} Regulation
           %li
             %a{"data-toggle" => "tab", :href => "#Controls"} Controls
           %li.active
             %a{"data-toggle" => "tab", :href => "#Combo"} Combo
-        .tab-content
+        -#.tab-content
           #Regulation.tab-pane Regulations
           #Controls.tab-pane Controls
           #Combo.tab-pane.active
-            %ul.slugtree
-              %li{:id => "content_PCI.A.1.4"}
-                .row-fluid
-                  .span12
-                    .collapsed.slot.regulationslot.toggle.span9{"data-target" => "#demo1", "data-toggle" => "collapse"}
-                      %span.prefix> PCI.A.1.4
-                      Enable processes to provide for timely forensic investigation in the event of a ...
-                      .expander
-                    .attached.progress-large.span3
-                      .bar.progressbar-success{"data-percentage" => "100", :style => "float: left; width: 100%; "}
-                  #demo1.row-fluid-slotcontent.collapse
-                    .span9
-                      Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
-              %li{:id => "content_PCI.A.1.4"}
-                .row-fluid
-                  .span12
-                    .collapsed.slot.regulationslot.toggle.span9{"data-target" => "#demo2", "data-toggle" => "collapse"}
-                      %span.prefix> PCI.A.1.4
-                      Enable processes to provide for timely forensic investigation in the event of a ...
-                      .expander
-                    .attached.progress-large.active.span3
-                      .bar.progressbar-danger{"data-percentage" => "100", :style => "float: right; width: 100%; "}
-                  #demo2.row-fluid-slotcontent.collapse
-                    .span9
-                      Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
-              %li{:id => "content_PCI.A.1.4"}
-                .row-fluid
-                  .span12
-                    .collapsed.slot.regulationslot.toggle.span9{"data-target" => "#demo3", "data-toggle" => "collapse"}
-                      %span.prefix> PCI.A.1.4
-                      Enable processes to provide for timely forensic investigation...
-                      .expander
-                    .attached.progress-large.active.span3
-                      .bar.progressbar-warning{"data-percentage" => "100", :style => "float: right; width: 100%; "}
-                  #demo3.row-fluid-slotcontent.collapse
-                    .span9
-                      Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
+        %ul.slugtree
+          %li
+            .row-fluid
+              .span12.collapsed.slot.regulationslot.toggle{"data-target" => "#demo1", "data-toggle" => "collapse"}
+                %span.prefix Some Product
+                .expander
+              #demo1.row-fluid-slotcontent.collapse
+                %ul
+                  %li#columnheaders
+                    %ul
+                      %li
+                        .row-fluid.nominheight
+                          .span12.well.nominheight
+                            .row-fluid.nominheight.slotheader
+                              .span6.nominheight 
+                                %label Process or System with Controls
+                              .span3.nominheight
+                                %label Owner
+                              .span3.nominheight 
+                                %label Control Verification
+                  %li
+                    %ul
+                      %li
+                        .row-fluid
+                          #slot.span12
+                            .span12.slot.regulationslot.toggle{"data-target" => "#demo1-1", "data-toggle" => "collapse"}
+                              %span.prefix Proc-1
+                              Enable processes to provide for timely forensic investigation in the event of a ...
+                              .expander
+                        .row-fluid
+                          #demo1-1.collapse
+                            Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
+                      %li
+                        .row-fluid
+                          #slot.span12
+                            .span12.slot.regulationslot.toggle{"data-target" => "#demo1-2", "data-toggle" => "collapse"}
+                              %span.prefix Proc-2
+                              Enable processes to provide for timely forensic investigation in the event of a ...
+                              .expander
+                        .row-fluid
+                          #demo1-2.collapse
+                            Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
+                        %ul
+                          %li
+                            .row-fluid
+                              #slot.span12
+                                .span12.slot.regulationslot.toggle{"data-target" => "#demo2-1", "data-toggle" => "collapse"}
+                                  %span.prefix Proc-2-1
+                                  Enable processes to provide for timely forensic investigation in the event of a ...
+                                  .expander
+                            .row-fluid
+                              #demo2-1.collapse
+                                Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
+                          %ul
+                            %li
+                              .row-fluid
+                                #slot.span12
+                                  .span12.slot.regulationslot.toggle{"data-target" => "#demo2-2", "data-toggle" => "collapse"}
+                                    %span.prefix Proc-2-2
+                                    Enable processes to provide for timely forensic investigation in the event of a ...
+                                    .expander
+                              .row-fluid
+                                #demo2-2.collapse
+                                  Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
+                            %ul
+                              %li
+                                .row-fluid
+                                  #slot.span12
+                                    .span12.slot.regulationslot.toggle{"data-target" => "#demo2-3", "data-toggle" => "collapse"}
+                                      %span.prefix Proc-2-3
+                                      Enable processes to provide for timely forensic investigation in the event of a ...
+                                      .expander
+                                .row-fluid
+                                  #demo2-3.collapse
+                                    Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
+                              %ul
+                                %li
+                                  .row-fluid
+                                    #slot.span12
+                                      .span12.slot.regulationslot.toggle{"data-target" => "#demo2-4", "data-toggle" => "collapse"}
+                                        %span.prefix Proc-2-4
+                                        Enable processes to provide for timely forensic investigation in the event of a ...
+                                        .expander
+                                  .row-fluid
+                                    #demo2-4.collapse
+                                      Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
+            %li
+              .row-fluid
+                #slot.span12
+                  .span12.slot.regulationslot.toggle{"data-target" => "#demo3", "data-toggle" => "collapse"}
+                    %span.prefix Yet Another Product
+                    Enable processes to provide for timely forensic investigation in the event of a ...
+                    .expander
+              .row-fluid
+                #demo3.collapse
+                  Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
+          -#%li
+            .row-fluid
+              .span12
+                .collapsed.slot.regulationslot.toggle.span9{"data-target" => "#demo2", "data-toggle" => "collapse"}
+                  %span.prefix PCI.A.1.4
+                  Enable processes to provide for timely forensic investigation in the event of a ...
+                  .expander
+                .attached.progress-large.active.span3
+                  .bar.progressbar-danger{"data-percentage" => "100", :style => "float: right; width: 100%; "}
+              #demo2.row-fluid-slotcontent.collapse
+                .span9
+                  Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
     .doubleColumn               
       #productComplianceSchedule.WidgetBox
         .WidgetBoxHeading
@@ -153,10 +222,10 @@
             %i.gcmsicon-questionmark-grey
           %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
             %i.gcmsicon-edit-grey
-          %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#generalInfo"}
+          %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#productInfoContent"}
             %i.gcmsicon-enlarge-grey
-      .WidgetBoxContent.information
-        #productStatus.well
+      #productInfoContent.WidgetBoxContent.information.collapse.in
+        #productStatus.well 
           %label 
             Status
             .pull-right 

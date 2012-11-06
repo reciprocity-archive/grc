@@ -1191,9 +1191,29 @@ ul.slugtree ul ul > li {
 
 /* Change to Indent Within - Could be more elegant */
 ul.slugtree ul ul > li > div > div > .slot {
-  padding-left:18px;
+  padding-left:12px;
 }
 ul.slugtree ul ul ul > li > div > div > .slot {
+  padding-left:30px;
+}
+ul.slugtree ul ul ul ul > li > div > div > .slot {
+  padding-left:42px;
+}
+ul.slugtree ul ul ul ul ul > li > div > div > .slot {
+  padding-left:54px;
+}
+ul.slugtree ul ul ul ul ul ul > li > div > div > .slot {
+  padding-left:66px;
+}
+ul.slugtree ul ul ul ul ul ul ul > li > div > div > .slot {
+  padding-left:78px;
+}
+
+/* Change to Indent Within - Could be more elegant */
+ul.slugtree ul ul > li > div > div > .slotheader {
+  padding-left:34px;
+}
+ul.slugtree ul ul ul > li > div > div > .slotheader {
   padding-left:30px;
 }
 ul.slugtree ul ul ul ul > li > div > div > .slot {
