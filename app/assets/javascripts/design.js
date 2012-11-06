@@ -66,6 +66,8 @@ jQuery(function ($) {
   renderExternalTmpl({ name: 'redesignNewSystem', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'redesignNewBizProcess', selector: '#templates', data: {} });
 
+  renderExternalTmpl({ name: 'showSecondModal', selector: '#templates', data: {} });
+
   // new modals END
   renderExternalTmpl({ name: 'newpersonBasic', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'newtransaction', selector: '#templates', data: {} });
@@ -476,6 +478,45 @@ function toggleGovernance() {
   });
 
 }
+
+$(document).on("click", "#openSecondModal", function(event) {
+    
+      $('#openSecondModal').toggle(function() {
+
+          firstmodal = $(this).closest('.modal');
+          secondmodal = $('#basicnewpersonModal');
+
+          secondmodal.css({"margin-left": "+=1050px"});
+          secondmodal.modal('show').fadeIn('slow');
+             
+          firstmodal.animate({ left: parseInt(firstmodal.css('left'),1200) == -300 ? firstmodal.outerWidth() : -300 });
+          firstmodal.addClass('halfopacity');
+          secondmodal.animate({ left: parseInt(firstmodal.css('left'),1200) == -300 ? firstmodal.outerWidth() : -300 });
+
+       // $(this).hide();
+        //alert($(this).attr("id") );
+       // rememberme = $(this).closest('.modal');
+
+        //$(this).closest('.modal').animate({"left": "-=500px"}, 1200, function() {
+                   // $('#basicnewpersonModal').modal('show');
+                    //$('#newpersonModal').slideDown(500);
+              //});
+        }, function(firstmodal) {
+          alert(adasda);
+              secondmodal.css({"margin-left": "-=1050px"});
+              secondmodal.modal('show').fadeOut('slow');
+                 
+              firstmodal.animate({ right: parseInt(firstmodal.css('right'),1200) == -300 ? firstmodal.outerWidth() : -300 });
+              firstmodal.addClass('halfopacity');
+              secondmodal.animate({ right: parseInt(firstmodal.css('right'),1200) == -300 ? firstmodal.outerWidth() : -300 });
+
+        });
+
+  });
+
+
+
+
 
 jQuery(function($) {
   if ($.cookie('toggle_governance') == '1')
