@@ -438,8 +438,8 @@ width: 97px;
   margin-top: 2px;
   padding: 0px 5px 0px 5px;
   overflow: hidden;
-  text-overflow: ellipsis;
   white-space: nowrap;
+  text-overflow: ellipsis;
   @include box-sizing(border-box);
   &:hover {
     cursor: pointer;
@@ -540,15 +540,34 @@ width: 97px;
   }
 
   .btn {
-    /*float: right;*/
     margin-top: -4px;
     //TODO: needed?
     margin-left: 6px;
     //TODO: needed?
     margin-right: 6px;
   }
-  
+
+  .slottitle {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .slotowner {
+
+  }
+  .slotactions {
+
+  }
 }
+
+.slotcontent {
+  padding:5px 5px 0px 5px;
+}
+.slotcontentactions {
+  float:right;
+  padding:5px;
+}
+
 
 
 
@@ -666,9 +685,6 @@ width: 97px;
   }
 }
 
-a.slot {
-  color:#666;
-}
 
 .txtindent1 {
   text-indent: .5em;
@@ -1194,40 +1210,22 @@ ul.slugtree ul ul > li > div > div > .slot {
   padding-left:12px;
 }
 ul.slugtree ul ul ul > li > div > div > .slot {
-  padding-left:30px;
+  padding-left:24px;
 }
 ul.slugtree ul ul ul ul > li > div > div > .slot {
-  padding-left:42px;
+  padding-left:36px;
 }
 ul.slugtree ul ul ul ul ul > li > div > div > .slot {
-  padding-left:54px;
+  padding-left:48px;
 }
 ul.slugtree ul ul ul ul ul ul > li > div > div > .slot {
-  padding-left:66px;
+  padding-left:60px;
 }
 ul.slugtree ul ul ul ul ul ul ul > li > div > div > .slot {
-  padding-left:78px;
+  padding-left:72px;
 }
 
-/* Change to Indent Within - Could be more elegant */
-ul.slugtree ul ul > li > div > div > .slotheader {
-  padding-left:34px;
-}
-ul.slugtree ul ul ul > li > div > div > .slotheader {
-  padding-left:30px;
-}
-ul.slugtree ul ul ul ul > li > div > div > .slot {
-  padding-left:42px;
-}
-ul.slugtree ul ul ul ul ul > li > div > div > .slot {
-  padding-left:54px;
-}
-ul.slugtree ul ul ul ul ul ul > li > div > div > .slot {
-  padding-left:66px;
-}
-ul.slugtree ul ul ul ul ul ul ul > li > div > div > .slot {
-  padding-left:78px;
-}
+
 
 ul.slugtree {
   position: relative;
@@ -1312,10 +1310,10 @@ ul.slugtree {
 
 /* Hack for modal invite auditors */
 .span6 > .prefix {
-  font-size:15px;
+  font-size:14px;
   line-height:22px;
   font-weight: bold;
-  margin-left: 12px;
+  margin-left: 4px;
   margin-right: 6px;
 }
 
@@ -1784,6 +1782,10 @@ margin-top:5px;
 
 li a {
   color: $textColor;
+  &.slotowner {
+  font-size:11px;
+  color: #11BFC5;
+  }
 }
 .btn a {
   color: $textColor;

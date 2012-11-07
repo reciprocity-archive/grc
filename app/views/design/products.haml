@@ -41,8 +41,12 @@
           %li
             .row-fluid
               .span12.collapsed.slot.regulationslot.toggle{"data-target" => "#demo1", "data-toggle" => "collapse"}
-                %span.prefix Some Product
-                .expander
+                .slottitle.span11
+                  .expander
+                  %span.prefix Proc-1
+                  Enable processes to provide for timely forensic investigation in the event of 1 of many emergencies or other long text
+                .slotactions.span1
+                  .btn.btn-blue.btn-mini.pull-right . . .
               #demo1.row-fluid-slotcontent.collapse
                 %ul
                   %li#columnheaders
@@ -51,9 +55,9 @@
                         .row-fluid.nominheight
                           .span12.well.nominheight
                             .row-fluid.nominheight.slotheader
-                              .span6.nominheight 
+                              .span7.nominheight 
                                 %label Process or System with Controls
-                              .span3.nominheight
+                              .span2.nominheight
                                 %label Owner
                               .span3.nominheight 
                                 %label Control Verification
@@ -61,35 +65,47 @@
                     %ul
                       %li
                         .row-fluid
-                          #slot.span12
-                            .span12.slot.regulationslot.toggle{"data-target" => "#demo1-1", "data-toggle" => "collapse"}
+                          .slot.span12.regulationslot.toggle{"data-target" => "#demo1-1", "data-toggle" => "collapse"}
+                            .slottitle.span9
+                              .expander
                               %span.prefix Proc-1
                               Enable processes to provide for timely forensic investigation in the event of a ...
-                              .expander
-                        .row-fluid
-                          #demo1-1.collapse
+                            .slotowner.span2
+                              %a.slotowner Rick Astley
+                            .slotactions.span1
+                              .btn.btn-blue.btn-mini.pull-right . . .
+                        .row-fluid#demo1-1.collapse
+                          .slotcontent.span12
+                            .pull-right
+                              %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                                %i.gcmsicon-questionmark-grey
+                              %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                                %i.gcmsicon-questionmark-grey
+                              %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                                %i.gcmsicon-questionmark-grey
                             Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
+                            
                       %li
                         .row-fluid
-                          #slot.span12
-                            .span12.slot.regulationslot.toggle{"data-target" => "#demo1-2", "data-toggle" => "collapse"}
-                              %span.prefix Proc-2
-                              Enable processes to provide for timely forensic investigation in the event of a ...
+                          .slot.span12.regulationslot.toggle{"data-target" => "#demo2-1", "data-toggle" => "collapse"}
+                            .slottitle.span9
                               .expander
-                        .row-fluid
-                          #demo1-2.collapse
+                              %span.prefix Proc-2
+                              A secondary processes to provide for timely forensic investigation in the event of a ...
+                            .slotowner.span2
+                              %a.slotowner Rod Sterling
+                            .slotactions.span1
+                              .btn.btn-blue.btn-mini.pull-right . . .
+                        .row-fluid#demo2-1.collapse
+                          .slotcontent.span12
+                            .pull-right
+                              %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                                %i.gcmsicon-questionmark-grey
+                              %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                                %i.gcmsicon-questionmark-grey
+                              %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                                %i.gcmsicon-questionmark-grey
                             Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
-                        %ul
-                          %li
-                            .row-fluid
-                              #slot.span12
-                                .span12.slot.regulationslot.toggle{"data-target" => "#demo2-1", "data-toggle" => "collapse"}
-                                  %span.prefix Proc-2-1
-                                  Enable processes to provide for timely forensic investigation in the event of a ...
-                                  .expander
-                            .row-fluid
-                              #demo2-1.collapse
-                                Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
                           %ul
                             %li
                               .row-fluid
@@ -201,7 +217,7 @@
     #productInfo.WidgetBox
       
       .WidgetBoxContent.information
-        %label Owner Actions
+        %label Actions
         .toolbar-widget.well
           .row-fluid
             .span4
