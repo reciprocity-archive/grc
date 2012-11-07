@@ -7,7 +7,7 @@
 %script#reference_list_item{ :type => 'text/html', :'data-member' => 'object_document'}
   %li.controlSlot{ :'data-id' => '<%= document.id %>' }
     .controls-group
-      %a.widgetbtn.fltrt{ :href => flow_documents_path + '/<%= document.id %>/edit', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh' }
+      %a.widgetbtn.fltrt{ :href => flow_documents_path + '/<%= document.id %>/edit', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide' }
         %i.gcmsicon-edit-grey
       .controls-type <%= document.document_type || '&nbsp;' %>
       .controls-subgroup <%= document.title || '&nbsp;' %>
@@ -17,7 +17,7 @@
     -item = object_item.document
     %li.controlSlot{ :'data-id' => item.id }
       .controls-group
-        %a.widgetbtn.fltrt{ :href => edit_flow_document_path(item), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh' }
+        %a.widgetbtn.fltrt{ :href => edit_flow_document_path(item), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide' }
           %i.gcmsicon-edit-grey
         .controls-type=item.document_type || '&nbsp;'.html_safe
         .controls-subgroup=item.title || item.document_type || '&nbsp;'.html_safe
