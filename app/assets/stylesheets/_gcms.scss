@@ -679,7 +679,8 @@ a.slot {
 
 .location {
   color:#5c5c5c;
-  display: table;
+  display: block;
+  overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
