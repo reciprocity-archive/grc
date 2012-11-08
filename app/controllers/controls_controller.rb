@@ -127,8 +127,9 @@ class ControlsController < ApplicationController
     @control.destroy
     flash[:notice] = "Control deleted"
     respond_to do |format|
-      format.html { redirect_to flow_program_path(@control.program) }
-      format.json { render :json => @control.as_json(:root => nil) }
+      location = flow_program_path(@control.program)
+      format.html { redirect_to location }
+      format.json { render :json => @control.as_json(:root => nil), :location => location }
     end
   end
 
