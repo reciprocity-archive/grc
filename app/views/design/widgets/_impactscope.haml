@@ -1,6 +1,6 @@
 #impactscopewidget.WidgetBox
   .WidgetBoxHeading
-    .WidgetTitle Related Objects
+    .WidgetTitle Related
     %nav
       %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
         %i.gcmsicon-questionmark-grey
@@ -13,25 +13,37 @@
       .button-set
         .row-fluid
           .span4
-            .span12.btn{:href => ""}
+            .span12.btn.btn-info{:href => ""}
               Reg Programs
           .span4
             .span12.btn.halfopacity{:href => ""}
-              Facilities
-          .span4
-            .span12.btn.halfopacity{:href => ""}
-              Org Groups
-      .button-set
-        .row-fluid
-          .span4
-            .span12.btn{:href => ""}
-              Risk Attributes
-          .span4
-            .span12.btn.halfopacity{:href => ""}
-              Markets
+              Org Groups 
           .span4
             .span12.btn.halfopacity{:href => ""}
               Products
+          
+      .button-set
+        .row-fluid
+          .span4
+            .span12.btn.btn-warning{:href => ""}
+              Risk Attributes
+          .span4
+            .span12.btn.halfopacity{:href => ""}
+              Data Assets
+          .span4
+            .span12.btn.halfopacity{:href => ""}
+              Markets 
+      .button-set
+        .row-fluid
+          .span4
+            -#.span12.btn.halfopacity{:href => ""}
+              
+          .span4
+            .span12.btn.halfopacity{:href => ""}
+              Projects
+          .span4
+            .span12.btn.halfopacity{:href => ""}
+              Facilities
       %hr.hr-widget
       / TABS
       .row-fluid
