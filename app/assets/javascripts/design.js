@@ -114,8 +114,6 @@ jQuery(function ($) {
     $(this).children(".expander").toggleClass("toggleExpanded");
   });*/
 
-
-
   $(document).on("click", ".expandAll", function(event) {
     // $("h3.trigger").toggleClass("active").next().slideToggle("fast");
     $(this).children("i").toggleClass("gcmssmallicon-blue-expand");
@@ -130,10 +128,15 @@ jQuery(function ($) {
     $('#confirmModal').modal('show');
   });
 
-
-  $('#myModal').on('hidden', function () {
-    // do something…
-  })
+/* no worky 
+  $(document).on("click", ".sluggroup", function(event){
+    //alert("here");
+   // $('.riskWidget').each(function(i){
+    var $this = $(this);
+    $('.sluggroup').removeClass('selected');
+    $this.addClass('selected');
+  });
+*/
 
   $(document).on("click", ".greyOut", function(event){
     $(this).closest('.singlecontrolSlot').remove();
