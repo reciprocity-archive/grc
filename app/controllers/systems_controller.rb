@@ -36,7 +36,17 @@ class SystemsController < ApplicationController
     if params[:s].present?
       @systems = @systems.db_search(params[:s])
     end
-    render :json => @systems.all
+
+    @systems = @systems.all
+
+    if params[:as_subsystems_for].present?
+      super_system_id = params[:as_subsystems_for].to_i
+      if super_system_id.present?
+        @systems = @systems.select { |s| s.id != super_system_id }
+      end
+    end
+
+    render :json => @systems
   end
 
   def show
