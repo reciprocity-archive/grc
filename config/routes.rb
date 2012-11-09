@@ -20,7 +20,7 @@ CmsRails::Application.routes.draw do
     end
   end
 
-  resources :cycles, :as => 'flow_cycles', :only => [:show, :create, :update, :destroy] do
+  resources :cycles, :as => 'flow_cycles', :only => [:show, :new, :edit, :create, :update, :destroy] do
     member do
       get 'delete'
     end

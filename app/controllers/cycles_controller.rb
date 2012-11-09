@@ -4,6 +4,7 @@
 
 class CyclesController < ApplicationController
   before_filter :load_cycle, :only => [:show,
+                                       :edit,
                                        :update,
                                        :delete,
                                        :destroy]
@@ -11,7 +12,7 @@ class CyclesController < ApplicationController
   access_control :acl do
     allow :superuser
 
-    actions :create do
+    actions :new, :create do
       allow :create, :create_cycle
     end
 
@@ -19,7 +20,7 @@ class CyclesController < ApplicationController
       allow :read, :read_cycle, :of => :cycle
     end
 
-    actions :update do
+    actions :edit, :update do
       allow :update, :update_cycle, :of => :cycle
     end
   end
@@ -29,10 +30,18 @@ class CyclesController < ApplicationController
   def show
   end
 
-  def create
-    program_id = cycle_params.delete(:program_id)
+  def new
     @cycle = Cycle.new(cycle_params)
-    @cycle.program = Program.find(program_id)
+
+    render :layout => nil
+  end
+
+  def edit
+    render :layout => nil
+  end
+
+  def create
+    @cycle = Cycle.new(cycle_params)
 
     respond_to do |format|
       if @cycle.save
@@ -86,6 +95,14 @@ class CyclesController < ApplicationController
 
     def cycle_params
       cycle_params = params[:cycle] || {}
+      program_id = cycle_params.delete(:program_id)
+      if program_id.present?
+        program = Program.where(:id => program_id).first
+        if program.present?
+          cycle_params[:program] = program
+        end
+      end
+      parse_date_param(cycle_params, :start_at)
       cycle_params
     end
 end

@@ -1,37 +1,38 @@
 -content_for :header do
   %ol#breadcrumb
-    %li
-      %a{ :href => flow_program_path(@cycle.program) } #{@cycle.program.title}
-    %li AUDIT CYCLE
-  .location#pageTitle Audit Cycle for #{@cycle.program.title}
+    %li AUDIT
+  .location#pageTitle #{@cycle.program.title} Audit
 
 -content_for :page_help, 'cycle'
 
 -content_for :subheader_extras do
-  .btn-group.fltrt
-    %a.btn.btn-warning{ :'data-toggle' => 'modal-form', :href => '#edit-cycle-modal' }
-      Edit Cycle
+  %h1.fltrt.highlighted#pageType Audit Manager
 
 .row-static
   .doubleColumn
     .doubleWide.halfHeight
-      =render :partial => 'cycles/show',
+      =render :partial => 'cycles/main',
               :layout => 'layouts/widget_box',
               :locals => { :cycle => @cycle }
 
-#edit-cycle-modal.modal.fade
-  =form_for @cycle, :url => flow_cycle_path(@cycle), :method => :put, :remote => true, :html => {:class => :form} do |f|
-    .modal-header
-      %a.close{ "data-dismiss" => "modal" } x
-      %h1 Edit Audit Cycle
-    .modal-body
-      =render :partial => 'cycles/form',
-              :locals  => { :f => f }
-    .modal-footer
-      .row-fluid
-        %nav.fltlft.txtlft.span3
-          =f.submit pat(:cancel), :type => 'reset', :class => 'btn btn-large btn-info'
-          %a.btn.btn-large.btn-warning{:href => flow_cycle_path(@cycle), :'data-toggle' => 'form-destroy', :'data-remote' => 'remote', :'data-method' => 'delete'} Delete
-        %nav.fltrt.txtrt.span3  
-          =f.submit pat(:save), :class => 'btn btn-large btn-success'
-        
+      .singleColumn
+        =render :partial => 'cycles/scope',
+                :layout => 'layouts/widget_box',
+                :locals => { :cycle => @cycle }
+
+      .singleColumn
+        =render :partial => 'cycles/workflows',
+                :layout => 'layouts/widget_box',
+                :locals => { :cycle => @cycle }
+
+  .singleColumn
+    .fullHeight
+      =render :partial => 'cycles/info',
+              :layout => 'layouts/widget_box',
+              :locals => { :cycle => @cycle }
+
+    .halfHeight
+      =render :partial => 'cycles/schedule',
+              :layout => 'layouts/widget_box',
+              :locals => { :cycle => @cycle }
+

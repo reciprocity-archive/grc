@@ -36,7 +36,7 @@
         Reg Mapper
     .span4
       -if !program.company?
-        %a.span12.btn.btn-warning{ :href => '#create-cycle-modal', :'data-toggle' => 'modal-form' }
+        %a.span12.btn.btn-warning{ :href => new_flow_cycle_path(:'cycle[program_id]' => program.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
           %i.gcmsicon-play-white
           Start Audit
 
@@ -63,23 +63,6 @@
     .span12
       %label Description
       %textarea#textarea.span12{:disabled => "disabled"}=program.description
-
-  #create-cycle-modal.modal.hide.fade
-    -cycle = Cycle.new()
-    -cycle.program = program
-    =form_for cycle, :url => flow_cycles_path, :method => :post, :remote => true, :html => {:class => :form} do |f|
-      .modal-header
-        %a.close{ "data-dismiss" => "modal" } x
-        %h1 Edit Audit Cycle
-      .modal-body
-        =render :partial => 'cycles/form',
-                :locals  => { :f => f }
-      .modal-footer
-        .row-fluid
-          %nav.fltlft.txtlft.span3
-            =f.submit pat(:cancel), :type => 'reset', :class => 'btn btn-large btn-info'
-          %nav.fltrt.txtrt.span3
-            =f.submit pat(:save), :class => 'btn btn-large btn-success'
 
 %hr
 

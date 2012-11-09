@@ -1,7 +1,8 @@
 -content_for :widget_title do
-  Audit Cycle
+  Audit Status
 
--content_for :widget_help, 'cycle_info'
+-content_for :widget_buttons do
+  %input.widgetsearch{ :type => 'text', :placeholder => 'Search' }
 
 .nav.nav-tabs.nav-stacked
   %p

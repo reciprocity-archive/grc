@@ -1,0 +1,4 @@
+=form_for @cycle, :url => flow_cycles_path, :method => :post, :remote => true do |f|
+  =render :partial => 'form',
+          :layout  => 'layouts/form_modal',
+          :locals  => { :f => f }

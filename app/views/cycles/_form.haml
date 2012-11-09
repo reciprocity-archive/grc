@@ -1,6 +1,16 @@
+-content_for :modal_title do
+  -if f.object.new_record?
+    Create New Audit Cycle
+  -else
+    Edit Audit Cycle
+
+-if !f.object.new_record?
+  -content_for :modal_delete_path, delete_flow_cycle_path(f.object)
+
 .group
-  =f.label :program_id
-  -if !f.object.new_record?
+  -if f.object.program_id.present?
+    =f.label :program_id
+    =f.hidden_field :program_id
     =f.object.program.display_name
   -else
     =f.collection_select :program_id, Program.all, :id, :display_name, {}, {:class => :collection, :multiple => false}
