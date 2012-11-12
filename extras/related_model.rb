@@ -79,7 +79,7 @@ module RelatedModel
     # Include non-standard edge types via the custom_edges method of the
     # model if it is implemented - generally, those that are hardcoded
     # into the schema.
-    if self.methods.respond_to? :custom_edges
+    if self.respond_to? :custom_edges
       edges.merge(self.custom_edges)
     end
 

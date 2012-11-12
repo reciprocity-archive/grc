@@ -42,7 +42,11 @@
           .headerright
             .btn-toolbar.fltrt.toolbar-nav
               .btn-group
-                -path = request.fullpath.gsub(/BETA=[^&]*&?/, '').sub(/[?&]$/, '')
+                -if controller_name == 'design'
+                  -path = programs_dash_path
+                -else
+                  -path = request.fullpath
+                -path = path.gsub(/BETA=[^&]*&?/, '').sub(/[?&]$/, '')
                 -path += path.include?('?') ? '&' : '?'
                 -if has_feature? :BETA
                   %a.btn.btn-warning{ :href => "#{path}BETA=0" } Hide

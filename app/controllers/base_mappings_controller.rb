@@ -14,13 +14,15 @@ class BaseMappingsController < ApplicationController
       else
         render :json => { :errors => errors, :objects => create_objects_as_json(objects) }, :status => 400
       end
-    else
-      errors, object = create_or_update_object(params[model_name.underscore])
+    elsif params[object_name]
+      errors, object = create_or_update_object(params[object_name])
       if errors.nil? || errors.empty?
         render :json => create_object_as_json(object) || {}, :status => 200
       else
         render :json => { :errors => errors }, :status => 400
       end
+    else
+      render :json => {}, :status => 200
     end
   end
 
@@ -43,6 +45,10 @@ class BaseMappingsController < ApplicationController
 
     def list_form_context
       {}
+    end
+
+    def object_name
+      model_name.underscore
     end
 
     def model_name
