@@ -1360,6 +1360,30 @@ ul.slugtree {
   }
 }
 
+.enddot {
+  position:relative;
+  background-image: url("../images/icons/grcicons/enddot.png");
+  float:left;
+  display: inline-block;
+  -moz-background-size:16px 16px;
+             -ie-background-size:16px 16px;
+              -o-background-size:16px 16px;
+         -webkit-background-size:16px 16px;
+                 background-size:16px 16px;
+  width: 16px;
+  height: 16px;
+  padding: 0 0 0 0;
+  margin:6px 0 0 0;
+  cursor:pointer;
+  &.in {
+    /* for firefox, safari, chrome, etc. */
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    /* for ie */
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
+  }
+}
+
 #auditstatuscolumns {
   padding:0 8px 0 8px;
 }
