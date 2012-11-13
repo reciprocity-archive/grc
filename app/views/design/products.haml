@@ -21,7 +21,7 @@
         .pull-right
           %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
             %i.gcmsicon-questionmark-grey
-          %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+          -#%a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
             %i.gcmsicon-edit-grey
           %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
         .WidgetTitle.doublewidth Sub-Products, Processes and Controls
@@ -42,32 +42,29 @@
         %ul
           %li
             .row-fluid
-              .slot.span12.regulationslot.toggle{"data-target" => "#demo1", "data-toggle" => "collapse"}
-                .slottitle.span11
+              .slot.span12.regulationslot
+                .slottitle.span11.toggle{"data-target" => "#demo1", "data-toggle" => "collapse"}
                   .expander
                   %span.prefix Product Group 
                   Enable processes to provide for timely forensic investigation in the event of 1 of many emergencies or other long text
                 .slotactions.span1
-                  .btn.btn-blue.btn-mini.pull-right . . .
+                  .btn.btn-blue.btn-mini.pull-right.toggle{"data-target" => "#demo1-summary", "data-toggle" => "collapse"} . . .
+              #demo1-summary.row-fluid.collapse
+                .span12.infowell.nominheight
+                  "Hi I am a general description or some such info box that you requested to see. You can't edit me. You can just enjoy the beautiful knowledge I pour into your ocular cavities. Learn my friend. Learn. Or if you don't want to just glaze over and scan down until you see the information you truly wanted." -Abraham Lincoln
               #demo1.row-fluid.collapse
                 %ul
-                  %li#columnheaders
-                    %ul
-                      %li
-                        .row-fluid.nominheight
-                          .span12.infowell.nominheight
-                            "Hi I am a general description or some such info box that you requested to see. You can't edit me. You can just enjoy the beautiful knowledge I pour into your ocular cavities. Learn my friend. Learn. Or if you don't want to just glaze over and scan down until you see the information you truly wanted." -Abraham Lincoln
                   %li
-                    %ul
+                    %ul.slotlist
                       %li
                         .row-fluid
-                          .slot.span12.regulationslot.toggle{"data-target" => "#demo1-1", "data-toggle" => "collapse"}
-                            .slottitle.span9
+                          .slot.span12.regulationslot
+                            .slottitle.span9.toggle{"data-target" => "#demo1-1", "data-toggle" => "collapse"}
                               .expander
                               %span.prefix Proc-1
                               Enable processes to provide for timely forensic investigation in the event of a ...
                             .slotowner.span2
-                              %a.slotowner Rick Astley
+                              %a.slotowner{:href => "http://www.youtube.com/watch?v=oHg5SJYRHA0"} Rick Astley
                             .slotactions.span1
                               .btn.btn-blue.btn-mini.pull-right . . .
                         .row-fluid#demo1-1.collapse
@@ -123,67 +120,47 @@
                               .row-fluid#demo2-2.collapse
                                 .slotcontent
                                   Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
-                              %ul
-                                %li
-                                  .row-fluid
-                                    .slot.span12.regulationslot.statusred.toggle{"data-target" => "#demo2-3", "data-toggle" => "collapse"}
-                                      %span.prefix Control Owner
-                                      Enable processes to provide for timely forensic investigation in the event of a ...
-                                      .expander
-                                  .row-fluid#demo2-3.collapse
-                                    .slotcontent
-                                      Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
-                                  %ul
-                                    %li
-                                      %ul
-                                        %li
-                                          .row-fluid
-                                            .slot.span12.regulationslot.statusgreen.toggle{"data-target" => "#demo2-4-c1", "data-toggle" => "collapse"}
-                                              %span.prefix Proc-2-4 Control 1 
-                                              Enable processes to provide for timely forensic investigation in the event of a ...
-                                              .expander
-                                          .row-fluid#demo2-4-c1.collapse
-                                            .slotcontent
-                                              Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
-                                        %li
-                                          .row-fluid
-                                            .slot.span12.regulationslot.statusgreen.toggle{"data-target" => "#demo2-4-c2", "data-toggle" => "collapse"}
-                                              %span.prefix Proc-2-4 Control 2
-                                              Enable processes to provide for timely forensic investigation in the event of a ...
-                                              .expander
-                                          .row-fluid#demo2-4-c2.collapse
-                                            .slotcontent
-                                              Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
-                                        %li
-                                          .row-fluid
-                                            .slot.span12.regulationslot.statusgreen.toggle{"data-target" => "#demo2-4-c3", "data-toggle" => "collapse"}
-                                              %span.prefix Proc-2-4 Control 3
-                                              Enable processes to provide for timely forensic investigation in the event of a ...
-                                              .expander
-                                          .row-fluid#demo2-4-c3.collapse
-                                            .slotcontent
-                                              Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
-            %li
-              .row-fluid
-                .slot.span12.regulationslot.toggle{"data-target" => "#demo3", "data-toggle" => "collapse"}
-                  .slottitle.span9
-                    .expander
-                    %span.prefix New-1
-                    A THIRD processes to provide for timely forensic investigation in the event of a ...
-                  .slotowner.span2
-                    %a.slotowner Rod Sterling
-                  .slotactions.span1
-                    .btn.btn-blue.btn-mini.pull-right . . .
-              .row-fluid#demo3.collapse
-                .slotcontent.span12
-                  .pull-right
-                    %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
-                      %i.gcmsicon-edit-grey
-                    %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
-                      %i.gcmsicon-add
-                    %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
-                      %i.gcmsicon-arrowright-black
-                  Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
+                                %ul
+                                  %li
+                                    .row-fluid
+                                      .slot.span12.regulationslot.statusred.toggle{"data-target" => "#demo2-3", "data-toggle" => "collapse"}
+                                        %span.prefix Control Owner
+                                        Enable processes to provide for timely forensic investigation in the event of a ...
+                                        .expander
+                                    .row-fluid#demo2-3.collapse
+                                      .slotcontent
+                                        Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
+                                    %ul
+                                      %li
+                                        %ul
+                                          %li
+                                            .row-fluid
+                                              .slot.span12.regulationslot.statusgreen.toggle{"data-target" => "#demo2-4-c1", "data-toggle" => "collapse"}
+                                                %span.prefix Proc-2-4 Control 1 
+                                                Enable processes to provide for timely forensic investigation in the event of a ...
+                                                .expander
+                                            .row-fluid#demo2-4-c1.collapse
+                                              .slotcontent
+                                                Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
+                                          %li
+                                            .row-fluid
+                                              .slot.span12.regulationslot.statusgreen.toggle{"data-target" => "#demo2-4-c2", "data-toggle" => "collapse"}
+                                                %span.prefix Proc-2-4 Control 2
+                                                Enable processes to provide for timely forensic investigation in the event of a ...
+                                                .expander
+                                            .row-fluid#demo2-4-c2.collapse
+                                              .slotcontent
+                                                Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
+                                          %li
+                                            .row-fluid
+                                              .slot.span12.regulationslot.statusgreen.toggle{"data-target" => "#demo2-4-c3", "data-toggle" => "collapse"}
+                                                %span.prefix Proc-2-4 Control 3
+                                                Enable processes to provide for timely forensic investigation in the event of a ...
+                                                .expander
+                                            .row-fluid#demo2-4-c3.collapse
+                                              .slotcontent
+                                                Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
+            
           -#%li
             .row-fluid
               .span12
