@@ -482,6 +482,10 @@ function toggleGovernance() {
 
 }
 
+
+/* Hack to show a prototype of stacked modal slideout/in */
+/* Specific to two modals currently and ignores bootstrap modal functionality (ie I think they use a toggle) */
+
 $(document).on("click", "#openSecondModal", function(event) {
     
 
