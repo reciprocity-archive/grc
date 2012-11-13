@@ -1,4 +1,4 @@
--@title = "GRC: Products"
+-@title = "GRC: Control Import"
 
 -content_for :header do
   %ol#breadcrumb
@@ -16,12 +16,12 @@
   / .RegsandControls
   #RegsandControls.span12.WidgetBox.fullHeight.demoItem
     .WidgetBoxHeading
-      -#.pull-right
+      .pull-right
         %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
           %i.gcmsicon-questionmark-grey
-        %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+        -#%a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
           %i.gcmsicon-edit-grey
-        %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
+        -#%input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
       .WidgetTitle.doublewidth Control Import Preview
     / /.WidgetBoxHeading
     .WidgetBoxContent

@@ -11,9 +11,11 @@
 -content_for :subheader_extras do
   %h1#pageType.pull-right.highlighted Product
 
+-content_for :subheader_plus do
+  %a.navbarplus.fltrt{ :href => "#comingsoonModal", "data-toggle" => "modal" }
+  
 .row-static
   .doubleColumn
-    / .RegsandControls
     #RegsandControls.WidgetBox.fullHeight.doubleWide
       .WidgetBoxHeading
         .pull-right
@@ -23,7 +25,7 @@
             %i.gcmsicon-edit-grey
           %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
         .WidgetTitle.doublewidth Sub-Products, Processes and Controls
-      / /.WidgetBoxHeading
+
       .WidgetBoxContent
         
         -#%ul#quicklinks.nav.nav-tabs
@@ -76,7 +78,7 @@
                                   %i.gcmsicon-edit-grey
                               %li
                                 %a.btn.btn-mini.halfopacity{"data-toggle" => "modal", :href => "#comingsoonModal"}
-                                  %i.gcmsicon-add
+                                  %i.gcmsicon-link
                               %li
                                 %a.btn.btn-mini.halfopacity{"data-toggle" => "modal", :href => "#comingsoonModal"}
                                   %i.gcmsicon-arrowright-black
@@ -104,7 +106,7 @@
                                     %i.gcmsicon-edit-grey
                                 %li
                                   %a.btn.btn-mini.halfopacity{"data-toggle" => "modal", :href => "#comingsoonModal"}
-                                    %i.gcmsicon-add
+                                    %i.gcmsicon-link
                                 %li
                                   %a.btn.btn-mini.halfopacity{"data-toggle" => "modal", :href => "#comingsoonModal"}
                                     %i.gcmsicon-arrowright-black
@@ -257,10 +259,10 @@
               %a.span12.btn.btn-info{"data-toggle" => "modal", :href => "#comingsoonModal"}
                 New
             .span5
-              %a.span12.btn.btn-warning{"data-toggle" => "modal", :href => "#comingsoonModal"}
+              %a.span12.btn.btn-info{"data-toggle" => "modal", :href => "#comingsoonModal"}
                 Request Audit
             .span5
-              %a.span12.btn.btn-danger{"data-toggle" => "modal", :href => "#comingsoonModal"}
+              %a.span12.btn.btn-info{"data-toggle" => "modal", :href => "#comingsoonModal"}
                 Relationship Map
 
     #productInfo.WidgetBox
@@ -273,8 +275,8 @@
             %i.gcmsicon-edit-grey
           %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#productInfoContent"}
             %i.gcmsicon-enlarge-grey
-      #productInfoContent.WidgetBoxContent.information.collapse.in
-        #productStatus.well 
+      .WidgetBoxContent.information.collapse.in
+        .well 
           %label 
             Status
             .pull-right 
@@ -290,8 +292,9 @@
         -#.toolbar-widget.well
           %a.btn.btn-warning{"data-toggle" => "modal", :href => "#comingsoonModal"}
             New Version
-          
-        %hr.hr-widget
+        
+        #productInfoContent.collapse.in
+          %hr.hr-widget
           .row-fluid
             .span12
               %h3.toggle{"data-target" => "#productAbout", "data-toggle" => "collapse"}
@@ -329,48 +332,48 @@
                   .span12
                     %label Scope / Applicability of this Program
                     %textarea#textarea{:disabled => "disabled", :placeholder => "", :rows => "3", :style => "margin: 0px; width: 98%; height: 73px; "} PCI DDS applies whenever Cardholder account data and Authentication Data is Stored, Processed or Transmitted. Examples Include: For more See Page 7 of document. Using h6 makes the label caps.
-        %hr.hr-widget
-        .row-fluid
-          .span12
-            %h3.toggle{"data-target" => "#productReferences", "data-toggle" => "collapse"}
-              .expander
-              References
-              %a.btn.btn-blue.addbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"} Edit
-            %ul#productReferences.collapse
-              %li.controlSlot
-                %span.controls-group PDF
-                %br/
-                %span.controls-subgroup Privacy Report 2011
-              %li.controlSlot
-                %span.controls-group PDF
-                %br/
-                %span.controls-subgroup Privacy Report 2012
-        %hr.hr-widget
-        .row-fluid
-          .span12
-            %h3.toggle{"data-target" => "#productPeople", "data-toggle" => "collapse"}
-              .expander
-              People
-              %a.btn.btn-blue.addbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"} Edit
-            %ul#productPeople.collapse
-              %li.controlSlot
-                %span.controls-group JRayburn@google.com
-                %br/
-                %span.controls-subgroup Joss Rayburn
-              %li.controlSlot
-                %span.controls-group rpoder@google.com
-                %br/
-                %span.controls-subgroup Ron Poder
-        %hr.hr-widget
-        .row-fluid.nominheight
-          .span6.nominheight
-            %label.pull-left{:for => "control-effectivedate"}
-              %strong> Created
-              \: 03/15/2012 19:16
-          .span6.nominheight.pull-right
-            %label.pull-right{:for => "control-verificationdate"}
-              %strong> Updated
-              \: 04/12/2012 14:32
+          %hr.hr-widget
+          .row-fluid
+            .span12
+              %h3.toggle{"data-target" => "#productReferences", "data-toggle" => "collapse"}
+                .expander
+                References
+                %a.btn.btn-blue.addbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"} Edit
+              %ul#productReferences.collapse
+                %li.controlSlot
+                  %span.controls-group PDF
+                  %br/
+                  %span.controls-subgroup Privacy Report 2011
+                %li.controlSlot
+                  %span.controls-group PDF
+                  %br/
+                  %span.controls-subgroup Privacy Report 2012
+          %hr.hr-widget
+          .row-fluid
+            .span12
+              %h3.toggle{"data-target" => "#productPeople", "data-toggle" => "collapse"}
+                .expander
+                People
+                %a.btn.btn-blue.addbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"} Edit
+              %ul#productPeople.collapse
+                %li.controlSlot
+                  %span.controls-group JRayburn@google.com
+                  %br/
+                  %span.controls-subgroup Joss Rayburn
+                %li.controlSlot
+                  %span.controls-group rpoder@google.com
+                  %br/
+                  %span.controls-subgroup Ron Poder
+          %hr.hr-widget
+          .row-fluid.nominheight
+            .span6.nominheight
+              %label.pull-left{:for => "control-effectivedate"}
+                %strong> Created
+                \: 03/15/2012 19:16
+            .span6.nominheight.pull-right
+              %label.pull-right{:for => "control-verificationdate"}
+                %strong> Updated
+                \: 04/12/2012 14:32
       / end of widget
     / end of span
     =render :partial => 'design/widgets/impactscope'
