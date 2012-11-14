@@ -23,6 +23,8 @@ class Program < ActiveRecord::Base
 
   is_versioned_ext
 
+  before_save :assign_company_boolean_from_program_kind
+
   validates :title,
     :presence => { :message => "needs a value" }
 
@@ -72,5 +74,10 @@ class Program < ActiveRecord::Base
 
   def display_name
     slug
+  end
+
+  def assign_company_boolean_from_program_kind
+    self.company = !(self.kind && self.kind.title == 'Regulation')
+    true
   end
 end

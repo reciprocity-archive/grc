@@ -54,7 +54,7 @@
         %label Type
         %select.span12{:disabled => "disabled" }
           %option{ :selected => 'selected' }
-            =program.company? ? 'Company' : 'Regulation'
+            =program.kind && program.kind.title
   .row-fluid
     .span12
       %label Full Title
