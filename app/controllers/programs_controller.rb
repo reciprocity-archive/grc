@@ -192,31 +192,41 @@ class ProgramsController < ApplicationController
 
   def import_controls
     upload = params["upload"]
-    if upload
-      file = upload.read.force_encoding('utf-8')
-      import = read_import_controls(CSV.parse(file))
-      @messages = import[:messages]
-      do_import_controls(import, params[:confirm].blank?)
-      @warnings = import[:warnings]
-      @errors = import[:errors]
-      @creates = import[:creates]
-      @updates = import[:updates]
-      render 'import_controls_result', :layout => false
+    if request.post?
+      begin
+        file = upload.read.force_encoding('utf-8')
+        import = read_import_controls(CSV.parse(file))
+        @messages = import[:messages]
+        do_import_controls(import, params[:confirm].blank?)
+        @warnings = import[:warnings]
+        @errors = import[:errors]
+        @creates = import[:creates]
+        @updates = import[:updates]
+        render 'import_controls_result', :layout => false
+      rescue => e
+        log_backtrace(e)
+        render 'import_error', :layout => false
+      end
     end
   end
 
   def import
     upload = params["upload"]
-    if upload
-      file = upload.read.force_encoding('utf-8')
-      import = read_import(CSV.parse(file))
-      @messages = import[:messages]
-      do_import(import, params[:confirm].blank?)
-      @warnings = import[:warnings]
-      @errors = import[:errors]
-      @creates = import[:creates]
-      @updates = import[:updates]
-      render 'import_result', :layout => false
+    if request.post?
+      begin
+        file = upload.read.force_encoding('utf-8')
+        import = read_import(CSV.parse(file))
+        @messages = import[:messages]
+        do_import(import, params[:confirm].blank?)
+        @warnings = import[:warnings]
+        @errors = import[:errors]
+        @creates = import[:creates]
+        @updates = import[:updates]
+        render 'import_result', :layout => false
+      rescue => e
+        log_backtrace(e)
+        render 'import_error', :layout => false
+      end
     end
   end
 

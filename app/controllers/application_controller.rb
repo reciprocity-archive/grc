@@ -168,4 +168,21 @@ class ApplicationController < ActionController::Base
       response.status = 278
     end
   end
+
+  def log_backtrace(e)
+    # http://stackoverflow.com/questions/228441/how-do-i-log-the-entire-trace-back-of-a-ruby-exception-using-the-default-rails-l
+    if backtrace = e.backtrace
+      gem_home = ENV['GEM_HOME']
+      rvm_home = ENV['MY_RUBY_HOME']
+      backtrace = backtrace.map do |line|
+        line = line.sub(gem_home, '$GEM_HOME') if gem_home.present?
+        line = line.sub(rvm_home, '$MY_RUBY_HOME') if rvm_home.present?
+        line = line.sub(Rails.root.to_s, '')
+      end
+    end
+
+    logger.error(
+      "\n\n#{e.class} (#{e.message}):\n    " +
+      backtrace.join("\n    ") + "\n\n" )
+  end
 end

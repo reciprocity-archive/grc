@@ -1,0 +1,10 @@
+-default_message = "Something went wrong: verify the file is in the correct format."
+-message = default_message if local_assigns[:message].nil?
+
+.row-fluid
+  %hr.hr-widget
+
+.row-fluid
+  .span6
+    %h4
+      =message
