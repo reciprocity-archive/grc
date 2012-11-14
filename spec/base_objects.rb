@@ -1,7 +1,9 @@
 module BaseObjects
   def create_base_objects
-    @creg = FactoryGirl.create(:program, :title => 'Company', :slug => 'COM1', :company => true)
-    @reg = FactoryGirl.create(:program, :title => 'Reg 1', :slug => 'REG1', :company => false)
+    @opt_reg = FactoryGirl.create(:option, :title => 'Regulation', :role => 'program_kind')
+    @opt_com = FactoryGirl.create(:option, :title => 'Company Policy', :role => 'program_kind')
+    @creg = FactoryGirl.create(:program, :title => 'Company', :slug => 'COM1', :kind => @opt_com)
+    @reg = FactoryGirl.create(:program, :title => 'Reg 1', :slug => 'REG1', :kind => @opt_reg)
     @ctl = FactoryGirl.create(:control, :title => 'Control 1', :slug => 'REG1-CTL1', :description => 'x', :program => @reg)
     @cycle = FactoryGirl.create(:cycle, :program => @reg, :start_at => '2011-01-01')
     @sec = FactoryGirl.create(:section, :title => 'Section 1', :slug => 'REG1-SEC1', :description => 'x', :program => @reg)
