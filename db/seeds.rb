@@ -148,7 +148,7 @@ ActiveRecord::Base.transaction do
     :document_type => ['URL', 'PDF', 'Text', 'Excel', 'Word'],
     :document_status => [:active, :deprecated],
     :document_year => (1980..2012).to_a.map(&:to_s).reverse,
-    :language => [],
+    :language => ['English'],
     :program_kind => ['Regulation', 'Company Policy', 'Operational Group Policy', 'Data Asset Policy'],
     #:system_type => ['System', 'Business Process'],
     :system_kind => ['Infrastructure'],

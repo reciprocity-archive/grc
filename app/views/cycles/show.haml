@@ -15,6 +15,7 @@
               :layout => 'layouts/widget_box',
               :locals => { :cycle => @cycle }
 
+    -if has_feature?(:beta)
       .singleColumn
         =render :partial => 'cycles/scope',
                 :layout => 'layouts/widget_box',
@@ -31,6 +32,7 @@
               :layout => 'layouts/widget_box',
               :locals => { :cycle => @cycle }
 
+  -if has_feature?(:beta)
     .halfHeight
       =render :partial => 'cycles/schedule',
               :layout => 'layouts/widget_box',
