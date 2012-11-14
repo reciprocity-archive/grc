@@ -10,11 +10,11 @@ class ProgramsController < ApplicationController
   include ProgramsHelper
   include ImportHelper
 
-  PROGRAM_MAP = Hash[*%w(Type type Code slug Title title Description description Company company Version version Start start_date Stop stop_date Kind kind Audit-Start audit_start_date Audit-Frequency audit_frequency Audit-Duration audit_duration Created created_at Updated updated_at)]
+  PROGRAM_MAP = Hash[*%w(Type type Program\ Code slug Program\ Title title Program\ Description description Company company Version version Start start_date Stop stop_date Kind kind Audit\ Start audit_start_date Audit\ Frequency audit_frequency Audit\ Duration audit_duration Created created_at Updated updated_at)]
 
-  SECTION_MAP = Hash[*%w(Code slug Title title Description description Notes notes Created created_at Updated updated_at)]
+  SECTION_MAP = Hash[*%w(Section\ Code slug Section\ Title title Section\ Description description Section\ Notes notes Created created_at Updated updated_at)]
 
-  CONTROL_MAP = Hash[*%w(Code slug Title title Description description Type type Kind kind Means means Version version Start start_date Stop stop_date URL url Documentation documentation_description Verify-Frequency verify_frequency Created created_at Updated updated_at)]
+  CONTROL_MAP = Hash[*%w(Control\ Code slug Control\ Title title Control\ Description description Type type Kind kind Means means Version version Start start_date Stop stop_date URL url Documentation documentation_description Verify\ Frequency verify_frequency Created created_at Updated updated_at)]
 
   # FIXME: Decide if the :section, controls, etc.
   # methods should be moved, and what access controls they
