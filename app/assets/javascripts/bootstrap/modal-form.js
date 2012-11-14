@@ -17,11 +17,11 @@
   /* NOTE: MODAL_FORM EXTENDS BOOTSTRAP-MODAL.js
    * ========================================== */
 
-  ModalForm.prototype = $.extend({}, $.fn.modal.Constructor.prototype, {
+  ModalForm.prototype = new $.fn.modal.Constructor(); 
 
-    constructor: ModalForm
+  $.extend(ModalForm.prototype, {
 
-  , init: function() {
+    init: function() {
       this.$element
         .on('keypress', 'form', $.proxy(this.keypress_submit, this))
         .on('click.modal-form.close', '[data-dismiss="modal"]', $.proxy(this.hide, this))
