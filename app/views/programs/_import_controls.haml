@@ -4,9 +4,12 @@
 -content_for :widget_help, 'import_controls'
 
 =form_tag '', :class => 'import', :multipart => true, :remote => true, :'data-type' => 'html', :'data-update-target' => '#results-container' do
-  %label(for="file") File to Upload
-  =file_field_tag "upload"
-  =submit_tag "Check Import", :class => %w(btn btn-large btn-success btn-primary)
 
-  %div
-    %div#results-container
+  %label(for="file") File to Upload
+  .row-fluid
+    .span8
+      =file_field_tag "upload", :class => 'span12 btn'
+    .span4
+      =submit_tag "Upload and Review", :class => 'span12 btn btn-success btn-primary pull-right'
+
+  #results-container

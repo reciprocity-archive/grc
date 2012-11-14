@@ -29,7 +29,7 @@
         %label{:for => "description"} Description
     .row-fluid{"control-group" => ""}
       .span12.well
-        %textarea#description.span12.forminputsuccess{:placeholder => "", :rows => "4"}
+        %textarea#description.span12{:disabled => "disabled",:placeholder => "", :rows => "4"}
           =@program.description
         :javascript
           $('#control-description3').wysihtml5({
@@ -44,8 +44,8 @@
       .span3
         %label{:for => "control-code"} Doc Date
         #docdate.date{"data-date" => "TBD", "data-date-format" => "dd-mm-yy"}
-          %input.span12.calendar{:size => "16", :type => "text", :value => "TBD"}/
-        :javascript
+          %input.span12.calendar{:disabled => "disabled",:size => "16", :type => "text", :value => "TBD"}/
+        -#:javascript
           $('#docdate').datepicker();
       .span2
         %label{:for => "control-code"} Version
