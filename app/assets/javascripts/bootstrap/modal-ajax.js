@@ -163,6 +163,55 @@
     }
   };
 
+
+  var arrangeBackgroundModals = function(modals, referenceModal) {
+    modals = $(modals).not(referenceModal);
+    if(modals.length < 1) return;
+
+    var _top = parseInt($(referenceModal)[0].offsetTop);
+    modals.css({
+        "height" : function() {
+          return parseInt($(this).find(".modal-header").height()) + 4;
+        }
+      , "overflow" : "hidden"
+      , "top" : function(i) {
+        return _top - (modals.length - i) * (parseInt($(this).find(".modal-header").height()) + 4);
+      }
+      , "margin-top" : 0
+    });
+
+  }
+
+  var arrangeTopModal = function(modals, modal) {
+    modal.css("top", (50 + (modals.length - 1) * 5) + "%");    
+  }
+
+  var _modal_show = $.fn.modal.Constructor.prototype.show;
+  $.fn.modal.Constructor.prototype.show = function() {
+
+    _modal_show.apply(this, arguments);
+
+    $(".modal-backdrop").css("z-index", function(i) {
+      return 1040 + i * 20;
+    });
+    
+    var modals = $(".modal:visible");
+    modals.css("z-index", function(i) {return 1050 + i * 20;});
+
+    arrangeTopModal(modals, this.$element);
+    arrangeBackgroundModals(modals, this.$element);
+  };
+
+  var _modal_hide = $.fn.modal.Constructor.prototype.hide;
+  $.fn.modal.Constructor.prototype.hide = function() {
+    _modal_hide.apply(this, arguments);
+    var modals = $(".modal:visible");
+    var lastModal = modals.last();
+    lastModal.css({"height" : "", "overflow" : "", top : "", "margin-top" : ""});
+    arrangeTopModal(modals, lastModal);
+    arrangeBackgroundModals(modals, lastModal);
+  };
+
   $(function() {
     $('body').on('click.modal-ajax.data-api', '[data-toggle="modal-ajax"], [data-toggle="modal-ajax-form"], [data-toggle="modal-ajax-listform"], [data-toggle="modal-ajax-listnewform"], [data-toggle="modal-ajax-relationship-selector"], [data-toggle="modal-ajax-listeditform"], [data-toggle="modal-ajax-deleteform"]', function(e) {
 
