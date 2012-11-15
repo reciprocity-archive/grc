@@ -13,12 +13,12 @@ class HelpController < ApplicationController
     @help.content = params[:help]['content']
     respond_to do |format|
       if @help.save
-        format.js do
+        format.json do
           flash[:notice] = "Help was saved successfully."
           render :json => @help
         end
       else
-        format.js do
+        format.json do
           render :json => {:error => "could not save"}
         end
       end

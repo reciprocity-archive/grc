@@ -322,13 +322,14 @@ function clear_selection(el, keep_search) {
 }
 
 jQuery(function($) {
-  $('body').on('ajax:success',
-               'form[data-remote][data-update-target]', function(e, data, status, xhr) { $($(this).data('update-target')).html(data) });
+  $('body').on('ajax:success', 'form[data-remote][data-update-target]', function(e, data, status, xhr) {
+    $($(this).data('update-target')).html(data)
+  });
 });
 
 jQuery(function($) {
-  $('body').on('ajax:success',
-               '#helpedit form', function(e, data, status, xhr) {
-                 console.log(arguments);
-                 $(this).closest('.modal').find('.modal-body p').html(data.help.content) });
+  $('body').on('ajax:success', '#helpedit form', function(e, data, status, xhr) {
+    $(this).closest('.modal')
+      .find('.modal-body p').html(data.help.content);
+  });
 });
