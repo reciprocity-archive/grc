@@ -88,10 +88,7 @@ jQuery(document).ready(function($) {
 $(document).ajaxComplete(function(event, request){
   var flash = $.parseJSON(request.getResponseHeader('X-Flash-Messages'));
   if (!flash) return;
-  if (flash.notice) { $('.flash > .notice').html(flash.notice); }
-  else $('.flash > .notice').html('');
-  if (flash.error) { $('.flash > .error').html(flash.error); }
-  else $('.flash > .error').html('');
-  if(flash.warning) { $('.flash > .warning').html(flash.error); }
-  else $('.flash > .warning').html('');
+  $(['notice', 'error', 'warning']).each(function(i, prop) {
+    $('.flash > .' + prop).html(flash[prop] || '');
+  });
 });
