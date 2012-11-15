@@ -325,3 +325,10 @@ jQuery(function($) {
   $('body').on('ajax:success',
                'form[data-remote][data-update-target]', function(e, data, status, xhr) { $($(this).data('update-target')).html(data) });
 });
+
+jQuery(function($) {
+  $('body').on('ajax:success',
+               '#helpedit form', function(e, data, status, xhr) {
+                 console.log(arguments);
+                 $(this).closest('.modal').find('.modal-body p').html(data.help.content) });
+});

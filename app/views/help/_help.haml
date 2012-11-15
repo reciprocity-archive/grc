@@ -1,0 +1,17 @@
+.help
+  %a.widgetbtn.fltrt{:'data-toggle' => 'collapse', :href => '#helpedit'}
+    %i.gcmsicon-edit-grey
+  -if @help && !@help.content.blank?
+    -content_for :modal_title do
+      =@help_slug.humanize
+      Help
+    =@help.content
+  -else
+    =render :partial => "#{@help_slug}"
+
+#helpedit.collapse
+  =form_for @help, :url => update_help_path, :method => :post, :remote => true do |f|
+    =f.label :help_content
+    =f.text_area :content
+    =f.hidden_field :slug
+    =f.submit :save, :class => :button

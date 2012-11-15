@@ -180,6 +180,7 @@ CmsRails::Application.routes.draw do
   post "mapping/create_ccontrol" => 'mapping#create_ccontrol', :as => 'mapping_create_ccontrol'
 
   match 'help/:slug' => 'help#show', :as => :help
+  post 'help' => 'help#edit', :as => :update_help
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -20,6 +20,10 @@ FactoryGirl.define do
     "User#{n}"
   end
 
+  sequence(:content) do |n|
+    "Content#{n}"
+  end
+
   sequence(:title) do |n|
     "Title#{n}"
   end
@@ -182,6 +186,11 @@ FactoryGirl.define do
 
   factory :market do
     title
+  end
+
+  factory :help do
+    slug
+    content
   end
 
   factory :relationship_type do
