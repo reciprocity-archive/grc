@@ -43,10 +43,14 @@
           %li
             .row-fluid
               .slot.span12.regulationslot
-                .slottitle.span11.toggle{"data-target" => "#demo1", "data-toggle" => "collapse"}
+                .slottitle.span8.toggle{"data-target" => "#demo1", "data-toggle" => "collapse"}
                   .expander
                   %span.prefix Product Group 
-                  Enable processes to provide for timely forensic investigation in the event of 1 of many emergencies or other long text
+                  Example of a product group with multiple columns ...
+                .slotcolumn.span2
+                  .btn.btn-mini Full Audit
+                .slotowner.span1
+                  %a.slotowner GRC
                 .slotactions.span1
                   .btn.btn-blue.btn-mini.pull-right.toggle{"data-target" => "#demo1-summary", "data-toggle" => "collapse"} . . .
               #demo1-summary.row-fluid.collapse
@@ -59,14 +63,19 @@
                       %li
                         .row-fluid
                           .slot.span12.regulationslot
-                            .slottitle.span9.toggle{"data-target" => "#demo1-1", "data-toggle" => "collapse"}
+                            .slottitle.span8.toggle{"data-target" => "#demo1-1", "data-toggle" => "collapse"}
                               .enddot
                               %span.prefix Proc-1
                               Enable processes to provide for timely forensic investigation in the event of a ...
-                            .slotowner.span2
+                            .slotcolumn.span2
+                              .btn.btn-mini Data Integrity
+                            .slotowner.span1
                               %a.slotowner{:href => "http://www.youtube.com/watch?v=oHg5SJYRHA0"} Rick Astley
                             .slotactions.span1
-                              .btn.btn-blue.btn-mini.pull-right . . .
+                              .btn.btn-blue.btn-mini.pull-right{"data-target" => "#demo1-1-summary", "data-toggle" => "collapse"}  . . .
+                        #demo1-1-summary.row-fluid.collapse
+                          .span12.infowell.nominheight
+                            More info goes here.
                         .row-fluid#demo1-1.collapse
                           .slotcontent.span12
                             %ul.contentactions.pull-right
@@ -86,16 +95,21 @@
                       %li
                         .row-fluid
                           .slot.span12.regulationslot
-                            .slottitle.span9.toggle{"data-target" => "#demo2-1", "data-toggle" => "collapse"}
+                            .slottitle.span8.toggle{"data-target" => "#demo2-1", "data-toggle" => "collapse"}
                               .expander
                               %span.prefix Proc-2
                               A secondary processes to provide for timely forensic investigation in the event of a ...
-                            .slotowner.span2
+                            .slotcolumn.span2
+                              .btn.btn-mini Annual Contracts
+                            .slotowner.span1
                               %a.slotowner Rod Sterling
                             .slotactions.span1
                               .btn.btn-blue.btn-mini.pull-right.toggle{"data-target" => "#demo2-1-content", "data-toggle" => "collapse"} . . .
+                        #demo2-1-content.row-fluid.collapse
+                          .span12.infowell.nominheight
+                            More info goes here.
                         .row-fluid#demo2-1.collapse
-                          #demo2-1-content.collapse.in
+                          #demo2-1.collapse.in
                             .slotcontent.span12
                               %ul.contentactions.pull-right
                                 %li
@@ -113,13 +127,19 @@
                           %ul.slotlist
                             %li
                               .row-fluid
-                                .slot.span12.regulationslot.toggle{"data-target" => "#demo2-2", "data-toggle" => "collapse"}
-                                  %span.prefix Proc-2-1 Additional description.
-                                  This is an example of no further items on a bar. Therefore, no more spans/columns.
-                                  .expander
-                              .row-fluid#demo2-2.collapse
-                                .slotcontent
+                                .slot.span12.regulationslot
+                                  .slottitle.span9.toggle{"data-target" => "#demo2-1-1", "data-toggle" => "collapse"}
+                                    .expander
+                                    %span.prefix Proc-2-1
+                                    A secondary processes to provide for timely forensic investigation in the event of a ...
+                                  .slotowner.span2
+                                    %a.slotowner Rod Sterling
+                                  .slotactions.span1
+                                    .btn.btn-blue.btn-mini.pull-right.toggle{"data-target" => "#demo2-1-1-summary", "data-toggle" => "collapse"} . . .
+                              #demo2-1-1-summary.row-fluid.collapse
+                                .span12.infowell.nominheight
                                   Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
+                              #demo2-1-1.collapse
                                 %ul
                                   %li
                                     .row-fluid
