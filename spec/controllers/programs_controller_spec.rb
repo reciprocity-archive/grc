@@ -82,38 +82,34 @@ describe ProgramsController do
     it "should prepare import" do
       Option.create(:title => "1 Fortnight", :role => 'audit_duration')
       Option.create(:title => "Soonish", :role => 'audit_frequency')
-      post 'import', :upload => fixture_file_upload("/REG1.csv")
+      post 'import', :id => @reg.id, :upload => fixture_file_upload("/REG1.csv")
       assigns(:messages).should == [
         "invalid program heading Bogus1",
         "invalid section heading Bogus2"
       ]
-      puts assigns(:errors)
       assigns(:errors).should include 2
       assigns(:errors)[2].should include :title
       assigns(:errors)[2][:title].should == ["needs a value"]
       assigns(:creates).should == [ "REG1-SEC2", "REG1-SEC3-BAD" ]
-      assigns(:updates).should == [ "REG1", "REG1-SEC1"]
+      assigns(:updates).should == [ "REG1-SEC1"]
     end
 
     it "should prepare import with missing option" do
-      post 'import', :upload => fixture_file_upload("/REG1.csv")
+      post 'import', :id => @reg.id, :upload => fixture_file_upload("/REG1.csv")
       assigns(:messages).should == [
         "invalid program heading Bogus1",
-        "invalid section heading Bogus2",
-        "Unknown audit_duration option '1 Fortnight'",
-        "Unknown audit_frequency option 'Soonish'"
+        "invalid section heading Bogus2"
       ]
       assigns(:errors).should include 2
       assigns(:errors)[2].should include :title
       assigns(:errors)[2][:title].should == ["needs a value"]
       assigns(:creates).should == [ "REG1-SEC2", "REG1-SEC3-BAD" ]
-      assigns(:updates).should == [ "REG1", "REG1-SEC1"]
+      assigns(:updates).should == [ "REG1-SEC1"]
     end
 
     it "should do import" do
-      post 'import', :upload => fixture_file_upload("/REG1.csv"), :confirm => "true"
+      post 'import', :id => @reg.id, :upload => fixture_file_upload("/REG1.csv"), :confirm => "true"
       Section.find_by_slug("REG1-SEC1").description.should == "new description x"
-      Program.find_by_slug("REG1").description.should == "new description 1"
     end
   end
 

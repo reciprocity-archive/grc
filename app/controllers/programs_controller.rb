@@ -14,7 +14,7 @@ class ProgramsController < ApplicationController
 
   SECTION_MAP = Hash[*%w(Section\ Code slug Section\ Title title Section\ Description description Section\ Notes notes Created created_at Updated updated_at)]
 
-  CONTROL_MAP = Hash[*%w(Control\ Code slug Control\ Title title Control\ Description description Type type Kind kind Means means Version version Start start_date Stop stop_date URL url Documentation documentation_description Verify\ Frequency verify_frequency Created created_at Updated updated_at)]
+  CONTROL_MAP = Hash[*%w(Control\ Code slug Title title Description description Type type Kind kind Means means Version version Start start_date Stop stop_date URL url Documentation documentation_description Verify-Frequency verify_frequency Created created_at Updated updated_at)]
 
   # FIXME: Decide if the :section, controls, etc.
   # methods should be moved, and what access controls they
@@ -22,6 +22,8 @@ class ProgramsController < ApplicationController
   before_filter :load_program, :only => [:show,
                                          :export_controls,
                                          :export,
+                                         :import_controls,
+                                         :import,
                                          :tooltip,
                                          :edit,
                                          :update,
@@ -126,7 +128,7 @@ class ProgramsController < ApplicationController
         headers['Content-Disposition'] = "attachment; filename=\"#{@program.slug}-controls.csv\""
         self.response_body = Enumerator.new do |out|
           out << CSV.generate_line(%w(Type Code))
-          values = %w(Code).map { |key| @program.send(PROGRAM_MAP[key]) }
+          values = %w(Program\ Code).map { |key| @program.send(PROGRAM_MAP[key]) }
           values.unshift("Controls")
           out << CSV.generate_line(values)
           out << CSV.generate_line([])
@@ -190,9 +192,13 @@ class ProgramsController < ApplicationController
     end
   end
 
+  def render_import_error(message=nil)
+    render 'import_error', :layout => false, :locals => { :message => message }
+  end
+
   def import_controls
     upload = params["upload"]
-    if request.post?
+    if upload.present?
       begin
         file = upload.read.force_encoding('utf-8')
         import = read_import_controls(CSV.parse(file))
@@ -203,16 +209,21 @@ class ProgramsController < ApplicationController
         @creates = import[:creates]
         @updates = import[:updates]
         render 'import_controls_result', :layout => false
+      rescue CSV::MalformedCSVError, ArgumentError => e
+        log_backtrace(e)
+        render_import_error("Not a recognized file.")
       rescue => e
         log_backtrace(e)
-        render 'import_error', :layout => false
+        render_import_error
       end
+    elsif request.post?
+      render_import_error("Please select a file.")
     end
   end
 
   def import
     upload = params["upload"]
-    if request.post?
+    if upload.present?
       begin
         file = upload.read.force_encoding('utf-8')
         import = read_import(CSV.parse(file))
@@ -223,10 +234,15 @@ class ProgramsController < ApplicationController
         @creates = import[:creates]
         @updates = import[:updates]
         render 'import_result', :layout => false
+      rescue CSV::MalformedCSVError, ArgumentError => e
+        log_backtrace(e)
+        render_import_error("Not a recognized file.")
       rescue => e
         log_backtrace(e)
-        render 'import_error', :layout => false
+        render_import_error
       end
+    elsif request.post?
+      render_import_error("Please select a file.")
     end
   end
 
@@ -248,15 +264,6 @@ class ProgramsController < ApplicationController
     import[:creates] = []
     import[:warnings] = {}
 
-    attrs = import[:program]
-
-    slug = attrs['slug']
-    if slug.blank?
-      import[:messages] << "missing program slug"
-    else
-      @program = Program.find_by_slug(slug)
-    end
-
     @controls = []
     import[:controls].each_with_index do |attrs, i|
       import[:warnings][i] = HashWithIndifferentAccess.new
@@ -264,8 +271,8 @@ class ProgramsController < ApplicationController
       attrs.delete(nil)
       attrs.delete('created_at')
       attrs.delete('updated_at')
+      attrs.delete('type')
 
-      handle_option(attrs, :type, import[:messages], :control_type)
       handle_option(attrs, :kind, import[:messages], :control_kind)
       handle_option(attrs, :means, import[:messages], :control_means)
       handle_option(attrs, :verify_frequency, import[:messages])
@@ -300,32 +307,6 @@ class ProgramsController < ApplicationController
     import[:updates] = []
     import[:creates] = []
     import[:warnings] = {}
-
-    attrs = import[:program]
-    attrs.delete(nil)
-    attrs.delete('created_at')
-    attrs.delete('updated_at')
-
-    handle_option(attrs, :audit_duration, import[:messages])
-    handle_option(attrs, :audit_frequency, import[:messages])
-
-    slug = attrs['slug']
-
-    if slug.blank?
-      import[:messages] << "missing program slug"
-    else
-      @program = Program.find_by_slug(slug)
-      if @program
-        @program.assign_attributes(attrs, :without_protection => true)
-        import[:updates] << slug
-      else
-        @program = Program.new
-        @program.assign_attributes(attrs, :without_protection => true)
-        import[:creates] << slug
-      end
-      import[:errors][slug] = @program.errors.full_messages unless @program.valid?
-      @program.save unless check_only
-    end
 
     @sections = []
     import[:sections].each_with_index do |attrs, i|
@@ -403,7 +384,7 @@ class ProgramsController < ApplicationController
     raise "There must be at least 3 input lines" unless rows.size >= 4
 
     program_headers = trim_array(rows.shift).map do |heading|
-      if heading == "Type"
+      if heading == "Program Type"
         key = 'type'
       else
         key = PROGRAM_MAP[heading]
@@ -414,7 +395,7 @@ class ProgramsController < ApplicationController
 
     program_values = rows.shift
 
-    raise "First column must be Type" unless program_headers.shift == "type"
+    raise "First column must be Program Type" unless program_headers.shift == "type"
     raise "Type must be Program" unless program_values.shift == "Program"
 
     import[:program] = Hash[*program_headers.zip(program_values).flatten]

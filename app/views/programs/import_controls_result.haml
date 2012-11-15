@@ -13,11 +13,6 @@
       .span2
         %label{:for => "version"} Version
         %input#version.span12{:disabled => "disabled", :value => @program.version, :type => "text"}
-    .row-fluid
-
-      .span5
-        %label{:for => "control-code"} Name of uploaded file
-        %input#control-code.span12{:disabled => "disabled", :value => params["upload"].original_filename, :type => "text"}
 
 .row-fluid
   %hr.hr-widget

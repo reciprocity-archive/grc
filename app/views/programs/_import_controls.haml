@@ -7,9 +7,13 @@
 
   %label(for="file") File to Upload
   .row-fluid
-    .span8
+    .span6
       =file_field_tag "upload", :class => 'span12 btn'
-    .span4
+    .span3
       =submit_tag "Upload and Review", :class => 'span12 btn btn-success btn-primary pull-right'
+    .span3
+      -if CMS_CONFIG["CONTROL_IMPORT_TEMPLATE"].present?
+        %a{ :href => CMS_CONFIG["CONTROL_IMPORT_TEMPLATE"], :target => '_blank' }
+          View Import Template
 
   #results-container

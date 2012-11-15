@@ -5,9 +5,6 @@
     %li Import
   .location#pageTitle Import Program
 
-.row-fluid
-  .span2
-  .span8
-
-    =render :partial => 'programs/import', :layout => 'layouts/widget_box'
-  .span2
+.row-static
+  =render :partial => 'programs/import',
+          :layout => 'layouts/widget_box'

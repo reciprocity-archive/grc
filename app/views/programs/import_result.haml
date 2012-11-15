@@ -14,47 +14,6 @@
         %label{:for => "version"} Version
         %input#version.span12{:disabled => "disabled", :value => @program.version, :type => "text"}
 
-    .row-fluid
-      .span12.control-group
-        %label{:for => ""} Source Title
-        %input.span12{:disabled => "disabled", :value => @program.title, :type => "text"}/
-
-    .row-fluid
-      .span12.control-group
-        %label{:for => "url"} Source URL
-        %input#url.span12{:disabled => "disabled", :value => @program.url, :type => "text"}/
-
-    .row-fluid
-      .span12.control-group
-        %label{:for => "description"} Description
-    .row-fluid{"control-group" => ""}
-      .span12.well
-        %textarea#description.span12{:disabled => "disabled",:placeholder => "", :rows => "4"}
-          =@program.description
-        :javascript
-          $('#control-description3').wysihtml5({
-            "image": false //Button to insert an image. Default true
-          });
-    .row-fluid
-
-      .span5
-        %label{:for => "control-code"} Name of uploaded file
-        %input#control-code.span12{:disabled => "disabled", :value => params["upload"].original_filename, :type => "text"}
-
-      .span3
-        %label{:for => "control-code"} Doc Date
-        #docdate.date{"data-date" => "TBD", "data-date-format" => "dd-mm-yy"}
-          %input.span12.calendar{:disabled => "disabled",:size => "16", :type => "text", :value => "TBD"}/
-        -#:javascript
-          $('#docdate').datepicker();
-      .span2
-        %label{:for => "control-code"} Version
-        %input#control-code.span12{:disabled => "disabled", :placeholder => "TBD", :type => "text"}
-
-      .span2
-        %label{:for => "control-code"} Pages
-        %input#control-code.span12{:disabled => "disabled", :placeholder => "TBD", :type => "text"}
-
 .row-fluid
   %hr.hr-widget
 

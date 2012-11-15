@@ -14,6 +14,8 @@ module SluggedModel
       validates :slug,
         :uniqueness => { :message => "must be unique" }
       before_validation :generate_random_slug_if_needed
+      after_validation :revert_generated_slug_if_needed
+      before_save :generate_random_slug_if_needed
       before_save :upcase_slug
       after_save :generate_human_slug_if_needed
       after_rollback :revert_generated_slug_if_needed
