@@ -4,6 +4,9 @@
 
 require 'csv'
 
+class ImportException < Exception
+end
+
 # Browse programs
 class ProgramsController < ApplicationController
   include ApplicationHelper
@@ -212,9 +215,11 @@ class ProgramsController < ApplicationController
       rescue CSV::MalformedCSVError, ArgumentError => e
         log_backtrace(e)
         render_import_error("Not a recognized file.")
+      rescue ImportException => e
+        render_import_error("Could not import file: #{e.to_s}")
       rescue => e
         log_backtrace(e)
-        render_import_error
+        render_import_error(e.class)
       end
     elsif request.post?
       render_import_error("Please select a file.")
@@ -237,6 +242,8 @@ class ProgramsController < ApplicationController
       rescue CSV::MalformedCSVError, ArgumentError => e
         log_backtrace(e)
         render_import_error("Not a recognized file.")
+      rescue ImportException => e
+        render_import_error("Could not import file: #{e.to_s}")
       rescue => e
         log_backtrace(e)
         render_import_error
@@ -344,7 +351,7 @@ class ProgramsController < ApplicationController
   def read_import_controls(rows)
     import = { :messages => [] }
 
-    raise "There must be at least 3 input lines" unless rows.size >= 4
+    raise ImportException.new("There must be at least 3 input lines") unless rows.size >= 4
 
     program_headers = trim_array(rows.shift).map do |heading|
       if heading == "Type"
@@ -358,12 +365,12 @@ class ProgramsController < ApplicationController
 
     program_values = rows.shift
 
-    raise "First column must be Type" unless program_headers.shift == "type"
-    raise "Type must be Controls" unless program_values.shift == "Controls"
+    raise ImportException.new("First column must be Type") unless program_headers.shift == "type"
+    raise ImportException.new("Type must be Controls") unless program_values.shift == "Controls"
 
     import[:program] = Hash[*program_headers.zip(program_values).flatten]
 
-    raise "There must be an empty separator row" unless trim_array(rows.shift) == []
+    raise ImportException.new("There must be an empty separator row") unless trim_array(rows.shift) == []
 
     control_headers = trim_array(rows.shift).map do |heading|
       key = CONTROL_MAP[heading]
@@ -381,7 +388,7 @@ class ProgramsController < ApplicationController
   def read_import(rows)
     import = { :messages => [] }
 
-    raise "There must be at least 3 input lines" unless rows.size >= 4
+    raise ImportException.new("There must be at least 3 input lines") unless rows.size >= 4
 
     program_headers = trim_array(rows.shift).map do |heading|
       if heading == "Program Type"
@@ -395,12 +402,12 @@ class ProgramsController < ApplicationController
 
     program_values = rows.shift
 
-    raise "First column must be Program Type" unless program_headers.shift == "type"
-    raise "Type must be Program" unless program_values.shift == "Program"
+    raise ImportException.new("First column must be Type") unless program_headers.shift == "type"
+    raise ImportException.new("Type must be Program") unless program_values.shift == "Program"
 
     import[:program] = Hash[*program_headers.zip(program_values).flatten]
 
-    raise "There must be an empty separator row" unless trim_array(rows.shift) == []
+    raise ImportException.new("There must be an empty separator row") unless trim_array(rows.shift) == []
 
     section_headers = trim_array(rows.shift).map do |heading|
       key = SECTION_MAP[heading]
