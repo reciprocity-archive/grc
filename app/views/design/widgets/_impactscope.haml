@@ -1,6 +1,6 @@
 #impactscopewidget.WidgetBox
   .WidgetBoxHeading
-    .WidgetTitle Related
+    .WidgetTitle Impact / Scope
     %nav
       %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
         %i.gcmsicon-questionmark-grey
@@ -13,37 +13,26 @@
       .button-set
         .row-fluid
           .span4
-            .span12.btn{:href => ""}
-              Reg Programs
+            .span12.btn.btn-info{:href => ""}
+              Org Groups
           .span4
             .span12.btn.halfopacity{:href => ""}
-              Org Groups 
+              Products
           .span4
             .span12.btn.halfopacity{:href => ""}
-              Data Assets
+              Facilities
           
       .button-set
         .row-fluid
           .span4
             .span12.btn{:href => ""}
-              Risky Attributes
+              Data Assets
           .span4
             .span12.btn.halfopacity{:href => ""}
               Products
           .span4
             .span12.btn.halfopacity{:href => ""}
               Markets 
-      .button-set
-        .row-fluid
-          .span4
-            -#.span12.btn.halfopacity{:href => ""}
-              
-          .span4
-            .span12.btn.halfopacity{:href => ""}
-              Projects
-          .span4
-            .span12.btn.halfopacity{:href => ""}
-              Facilities
       %hr.hr-widget
       / TABS
       .row-fluid
@@ -51,123 +40,30 @@
           .row-fluid.nominheight
             .span12.nominheight
               %h4.nominheight
-                Applicable Regulations
+                Org Groups
                 %a.btn.btn-blue.minibtn.pull-right Edit List
           .row-fluid
             .span12.captionbox
-              .subtitle Regulations or programs that are directly applicable to this program.
+              .subtitle Org groups that have implemented this Control (2)
           .row-fluid
             %ul.span12
               %li.controlSlot
                 .row-fluid.nominheight
                   .span6.nominheight
-                    %span.controls-group United Kingdoms
+                    %span.controls-group GWT
                   .span6.nominheight
                     %a.btn.minibtn.pull-right Review
                 .row-fluid.nominheight
-                  .span3.nominheight
-                    %span.controls-subgroup
-                      %strong CCA
-                  .span9.nominheight
-                    %span.controls-subgroup UK Consumer Credit Act
+                  .span12.nominheight
+                    %span.controls-subgroup Google Corp IT Team
+              %li.controlSlot
                 .row-fluid.nominheight
-                  .span12.infowell.nominheight
-                    .row-fluid.nominheight
-                      .span4.nominheight
-                        %strong 239
-                        Objects
-                      .span4.nominheight
-                        %strong 22
-                        Required
-                      .span4.nominheight
-                        .progress.active
-                          .bar.progressbar-success{"data-percentage" => "38", :style => "float: left; width: 0%; "}
-                          .bar.progressbar-danger{"data-percentage" => "10", :style => "float: right; width: 0%; "}
-                          .bar.progressbar-warning{"data-percentage" => "35", :style => "float: right; width: 0%; "}
-            .row-fluid
-              %ul.span12
-                %li.controlSlot
-                  .row-fluid.nominheight
-                    .span6.nominheight
-                      %span.controls-group United Kingdoms
-                    .span6.nominheight
-                      %a.btn.minibtn.pull-right Review
-                  .row-fluid.nominheight
-                    .span3.nominheight
-                      %span.controls-subgroup
-                        %strong CCA
-                    .span9.nominheight
-                      %span.controls-subgroup UK Consumer Credit Act
-                  .row-fluid.nominheight
-                    .span12.infowell.nominheight
-                      .row-fluid.nominheight
-                        .span4.nominheight
-                          %strong 239
-                          Objects
-                        .span4.nominheight
-                          %strong 22
-                          Required
-                        .span4.nominheight
-                          .progress.active
-                            .bar.progressbar-success{"data-percentage" => "38", :style => "float: left; width: 0%; "}
-                            .bar.progressbar-danger{"data-percentage" => "10", :style => "float: right; width: 0%; "}
-                            .bar.progressbar-warning{"data-percentage" => "35", :style => "float: right; width: 0%; "}
+                  .span6.nominheight
+                    %span.controls-group FIN
+                  .span6.nominheight
+                    %a.btn.minibtn.pull-right Review
+                .row-fluid.nominheight
+                  .span12.nominheight
+                    %span.controls-subgroup Google Data Center Team
      
-      .row-fluid
-        .span12.nominheight.itemswell
-          .row-fluid.nominheight
-            .span12.nominheight
-              %h4.nominheight
-                More Regulations
-                %a.btn.btn-blue.minibtn.pull-right Edit List
-          .row-fluid
-            .span12.captionbox
-              .subtitle 2nd group of regulations or programs that are directly applicable to this program.
-          .row-fluid
-            %ul.span12
-              %li.controlSlot
-                .row-fluid.nominheight
-                  .span6.nominheight
-                    %span.controls-group United Kingdoms
-                  .span6.nominheight
-                    %a.btn.minibtn.pull-right Review
-                .row-fluid.nominheight
-                  .span3.nominheight
-                    %span.controls-subgroup
-                      %strong CCA
-                  .span9.nominheight
-                    %span.controls-subgroup UK Consumer Credit Act
-                .row-fluid.nominheight
-                  .span12.infowell.nominheight
-                    .row-fluid.nominheight
-                      .span4.nominheight
-                        %strong 239
-                        Objects
-                      .span4.nominheight
-                        %strong 22
-                        Required
-                      .span4.nominheight
-                        .progress.active
-                          .bar.progressbar-success{"data-percentage" => "38", :style => "float: left; width: 0%; "}
-                          .bar.progressbar-danger{"data-percentage" => "10", :style => "float: right; width: 0%; "}
-                          .bar.progressbar-warning{"data-percentage" => "35", :style => "float: right; width: 0%; "}
-        / OTHER CONTENT
-        -#%hr.hr-widget/
-        -#.row-fluid.nominheight
-          .span3.nominheight
-            %label.pull-left{:for => "control-effectivedate"}
-              %strong> Products
-              \: 3
-          .span3.nominheight
-            %label.pull-left{:for => "control-effectivedate"}
-              %strong> Biz Areas
-              \: 2
-          .span3.nominheight
-            %label.pull-left{:for => "control-effectivedate"}
-              %strong> Biz Process
-              \: 9
-          .span3.nominheight
-            %label.pull-left{:for => "control-effectivedate"}
-              %strong> Systems
-              \: 239
   / end of span

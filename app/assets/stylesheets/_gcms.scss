@@ -732,10 +732,10 @@ nav {
   display:inline-block;
 }
 
-/*
+/* Reduces bootstrap's bottom padding which had an adverse effect on the visual look of tab'd widgets */
 .nav{
   margin-bottom:7px;
-}*/
+}
 
 .modal-header > nav {
   padding:5px;

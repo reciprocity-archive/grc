@@ -85,6 +85,13 @@ jQuery(function ($) {
   renderExternalTmpl({ name: 'exampleSampledata', selector: '#sampleData', data: {} });
   renderExternalTmpl({ name: 'auditstatus', selector: '#auditstatus', data: {} });
 
+
+  renderExternalTmpl({ name: 'exampleprocesses', selector: '#sampleprocesses', data: {} });
+
+
+  renderExternalTmpl({ name: 'examplerisks', selector: '#samplerisks', data: {} });
+
+
   $(document).on("click", "#expand_all", function(event) {
     //$('.row-fluid-slotcontent').show("fast");
     $('.row-fluid-slotcontent').addClass("in");
