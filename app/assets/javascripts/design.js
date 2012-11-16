@@ -87,9 +87,12 @@ jQuery(function ($) {
 
 
   renderExternalTmpl({ name: 'exampleprocesses', selector: '#sampleprocesses', data: {} });
-
-
   renderExternalTmpl({ name: 'examplerisks', selector: '#samplerisks', data: {} });
+
+
+  renderExternalTmpl({ name: 'examplelinkedcontrols', selector: '#samplelinkedcontrols', data: {} });
+  renderExternalTmpl({ name: 'exampleprogramsections', selector: '#sampleprogramsections', data: {} });
+
 
 
   $(document).on("click", "#expand_all", function(event) {

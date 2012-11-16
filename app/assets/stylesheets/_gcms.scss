@@ -2121,11 +2121,12 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 
 
 
+/* This set the placement of tab'd content status in the correct place on the widget*/
+
 .tab-content {
-  margin:5px;
+  margin:0px;
 }
 
-/* This set the placement of tab'd content status in the correct place on the widget*/
 .widgetStatus {
   width:300px;
   display:inline;
