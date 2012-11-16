@@ -104,7 +104,7 @@ describe FormHelper do
 
     it "wraps date field" do
       form_for(@reg) do |f|
-        f.object.start_date = Date.new(2003, 1, 2)
+        f.object.start_date = Date.new(2003, 1, 2).to_time_in_current_zone
         message = wrapped_date_field(f, :span4, :start_date)
         message.should have_selector("div.span4")
         message.should have_selector("div.span4 > input[type='text']")
