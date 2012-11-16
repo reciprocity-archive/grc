@@ -7,14 +7,14 @@
   %a.widgetbtn{:href => edit_flow_cycle_path(cycle), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :title => 'Edit Audit Cycle'}
     %i.gcmsicon-edit-grey
 
-.row-fluid
--if has_feature?(:beta)
-  .span6
-    %a.span12.btn.btn-warning.actionbutton
-      Audit Dashboard
-  .span6
-    %a.span12.btn.btn-warning.actionbutton
-      Invite Auditors
+-if has_feature?(:BETA)
+  .row-fluid
+    .span6
+      %a.span12.btn.btn-warning.actionbutton
+        Audit Dashboard
+    .span6
+      %a.span12.btn.btn-warning.actionbutton
+        Invite Auditors
 
 %hr.hr-widget
 
