@@ -10,8 +10,14 @@
     =render :partial => "#{@help_slug}"
 
 #helpedit.collapse
-  =form_for @help, :url => update_help_path, :method => :post, :remote => true do |f|
-    =f.label :help_content
-    =f.text_area :content
-    =f.hidden_field :slug
-    =f.submit :save, :class => :button
+  .row-fluid
+    .well
+      =form_for @help, :url => update_help_path, :method => :post, :remote => true do |f|
+        =f.label :help_content
+        =f.text_area :content, :class => 'span12'
+        .row-fluid
+          .span12
+            =f.submit :Save, :class => 'btn btn-warning pull-right'
+            .btn.btn-info.pull-right Clear
+            
+        =f.hidden_field :slug
