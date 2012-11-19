@@ -3,16 +3,7 @@
 # License:: Apache 2.0
 
 # HandleSystems
-class SystemsController < ApplicationController
-  include ApplicationHelper
-
-  before_filter :load_system, :only => [:show,
-                                         :edit,
-                                         :tooltip,
-                                         :update,
-                                         :delete,
-                                         :destroy]
-
+class SystemsController < BaseObjectsController
 
   access_control :acl do
     allow :superuser
@@ -30,6 +21,9 @@ class SystemsController < ApplicationController
   end
 
   layout 'dashboard'
+
+  # TODO BASE OBJECTS
+  # - use abstracted methods to handle 'index' cases
 
   def index
     @systems = System
@@ -49,94 +43,26 @@ class SystemsController < ApplicationController
     render :json => @systems
   end
 
-  def show
-    @system = System.find(params[:id])
-  end
-
-  def new
-    @system = System.new(system_params)
-
-    render :layout => nil
-  end
-
-  def edit
-    @system = System.find(params[:id])
-
-    render :layout => nil
-  end
-
-  def create
-    @system = System.new(system_params)
-
-    respond_to do |format|
-      if @system.save
-        flash[:notice] = "Successfully created a new system."
-        format.json do
-          render :json => @system.as_json(:root => nil), :location => flow_system_path(@system)
-        end
-        format.html { redirect_to flow_system_path(@system) }
-      else
-        flash[:error] = "There was an error creating the system"
-        format.html { render :layout => nil, :status => 400 }
-      end
-    end
-  end
-
-  def update
-    @system = System.find(params[:id])
-
-    respond_to do |format|
-      if @system.authored_update(current_user, system_params)
-        flash[:notice] = "Successfully updated the system."
-        format.json do
-          render :json => @system.as_json(:root => nil), :location => flow_system_path(@system)
-        end
-        format.html { redirect_to flow_system_path(@system) }
-      else
-        flash[:error] = "There was an error updating the system"
-        format.html { render :layout => nil, :status => 400 }
-      end
-    end
-  end
-
-  def delete
-    @model_stats = []
-    @relationship_stats = []
-    @model_stats << [ 'System Control', @system.system_controls.count ]
-    @model_stats << [ 'System Section', @system.system_sections.count ]
-    @relationship_stats << [ 'Sub Systems', @system.sub_systems.count ]
-    @relationship_stats << [ 'Super Systems', @system.super_systems.count ]
-    @relationship_stats << [ 'Document', @system.documents.count ]
-    @relationship_stats << [ 'Category', @system.categories.count ]
-    @relationship_stats << [ 'Person', @system.people.count ]
-    respond_to do |format|
-      format.json { render :json => @system.as_json(:root => nil) }
-      format.html do
-        render :layout => nil, :template => 'shared/delete_confirm',
-          :locals => { :model => @system, :url => flow_system_path(@system), :models => @model_stats, :relationships => @relationship_stats }
-      end
-    end
-  end
-
-  def destroy
-    respond_to do |format|
-      if @system.destroy
-        flash[:notice] = "System deleted"
-        format.html { ajax_refresh }
-        format.json { render :json => @system.as_json(:root => nil), :location => programs_dash_path }
-      else
-        flash[:error] = "Failed to delete system"
-        format.html { ajax_refresh }
-      end
-    end
-  end
-
-  def tooltip
-    @system = System.find(params[:id])
-    render :layout => '_tooltip', :locals => { :system => @system }
-  end
-
   private
+
+    def delete_model_stats
+      [ [ 'System Control', @system.system_controls.count ],
+        [ 'System Section', @system.system_sections.count ]
+      ]
+    end
+
+    def delete_relationship_stats
+      [ [ 'Sub Systems', @system.sub_systems.count ],
+        [ 'Super Systems', @system.super_systems.count ],
+        [ 'Document', @system.documents.count ],
+        [ 'Category', @system.categories.count ],
+        [ 'Person', @system.people.count ]
+      ]
+    end
+
+    def post_destroy_path
+      programs_dash_path
+    end
 
     def system_params
       system_params = params[:system] || {}
@@ -155,9 +81,5 @@ class SystemsController < ApplicationController
       end
 
       system_params
-    end
-
-    def load_system
-      @system = System.find(params[:id])
     end
 end

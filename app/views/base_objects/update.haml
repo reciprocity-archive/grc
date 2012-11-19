@@ -1,0 +1,2 @@
+=fields_for object do |f|
+  =render :partial => 'form', :locals => form_context.merge(:f => f)

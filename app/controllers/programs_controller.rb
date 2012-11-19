@@ -8,8 +8,7 @@ class ImportException < Exception
 end
 
 # Browse programs
-class ProgramsController < ApplicationController
-  include ApplicationHelper
+class ProgramsController < BaseObjectsController
   include ProgramsHelper
   include ImportHelper
 
@@ -22,16 +21,10 @@ class ProgramsController < ApplicationController
   # FIXME: Decide if the :section, controls, etc.
   # methods should be moved, and what access controls they
   # need.
-  before_filter :load_program, :only => [:show,
-                                         :export_controls,
+  before_filter :load_program, :only => [:export_controls,
                                          :export,
                                          :import_controls,
                                          :import,
-                                         :tooltip,
-                                         :edit,
-                                         :update,
-                                         :delete,
-                                         :destroy,
                                          :sections,
                                          :controls,
                                          :section_controls,
@@ -70,58 +63,6 @@ class ProgramsController < ApplicationController
       @programs = @programs.db_search(params[:s])
     end
     @programs = allowed_objs(@programs.all, :read)
-  end
-
-  def show
-    @stats = program_stats(@program)
-  end
-
-  def new
-    @program = Program.new(program_params)
-
-    render :layout => nil
-  end
-
-  def edit
-    render :layout => nil
-  end
-
-  def create
-    @program = Program.new(program_params)
-
-    respond_to do |format|
-      if @program.save
-        flash[:notice] = "Program was created successfully."
-        format.json { render :json => @program.as_json(:root => false), :location => flow_program_path(@program) }
-        format.html do
-          redirect_to flow_program_path(@program)
-        end
-      else
-        flash[:error] = "There was an error creating the program"
-        format.html do
-          if request.xhr?
-            render :layout => nil, :status => 400
-          end
-        end
-      end
-    end
-  end
-
-  def update
-    if !params[:program]
-      return 400
-    end
-
-    respond_to do |format|
-      if @program.authored_update(current_user, program_params)
-        flash[:notice] = 'Program was successfully updated.'
-        format.json { render :json => @program.as_json(:root => nil), :location => flow_program_path(@program) }
-        format.html { ajax_refresh }
-      else
-        flash[:error] = "There was an error updating the program"
-        format.html { render :layout => nil, :status => 400 }
-      end
-    end
   end
 
   def export_controls
@@ -165,33 +106,6 @@ class ProgramsController < ApplicationController
           end
         end
       end
-    end
-  end
-
-  def delete
-    @model_stats = []
-    @relationship_stats = []
-    @model_stats << [ 'Section', @program.sections.count ]
-    @model_stats << [ 'Control', @program.controls.count ]
-    @model_stats << [ 'Cycle', @program.cycles.count ]
-    @relationship_stats << [ 'Document', @program.documents.count ]
-    @relationship_stats << [ 'Category', @program.categories.count ]
-    @relationship_stats << [ 'Person', @program.people.count ]
-    respond_to do |format|
-      format.json { render :json => @program.as_json(:root => nil) }
-      format.html do
-        render :layout => nil, :template => 'shared/delete_confirm',
-          :locals => { :model => @program, :url => flow_program_path(@program), :models => @model_stats, :relationships => @relationship_stats }
-      end
-    end
-  end
-
-  def destroy
-    @program.destroy
-    flash[:notice] = "Program deleted"
-    respond_to do |format|
-      format.html { redirect_to programs_dash_path }
-      format.json { render :json => @program.as_json(:root => nil), :location => programs_dash_path }
     end
   end
 
@@ -426,10 +340,6 @@ class ProgramsController < ApplicationController
     puts rows.size
   end
 
-  def tooltip
-    render :layout => '_tooltip', :locals => { :program => @program }
-  end
-
   def sections
     @sections = @program.sections.includes(:controls => :implementing_controls)
     if params[:s]
@@ -496,6 +406,20 @@ class ProgramsController < ApplicationController
   end
 
   private
+
+    def delete_model_stats
+      [ [ 'Section', @program.sections.count ],
+        [ 'Control', @program.controls.count ],
+        [ 'Cycle', @program.cycles.count ]
+      ]
+    end
+
+    def delete_relationship_stats
+      [ [ 'Document', @program.documents.count ],
+        [ 'Category', @program.categories.count ],
+        [ 'Person', @program.people.count ]
+      ]
+    end
 
     def load_program
       @program = Program.find(params[:id])

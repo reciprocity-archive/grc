@@ -3,15 +3,8 @@
 # License:: Apache 2.0
 
 # Browse sections
-class SectionsController < ApplicationController
-  include ApplicationHelper
+class SectionsController < BaseObjectsController
   include ProgramsHelper
-
-  before_filter :load_section, :only => [:edit,
-                                        :update,
-                                        :delete,
-                                        :destroy,
-                                        :tooltip]
 
   access_control :acl do
     allow :superuser
@@ -30,74 +23,22 @@ class SectionsController < ApplicationController
 
   layout 'dashboard'
 
-  def new
-    @section = Section.new(section_params)
-
-    render :layout => nil
-  end
-
-  def edit
-    render :layout => nil
-  end
-
-  def create
-    @section = Section.new(section_params)
-
-    respond_to do |format|
-      if @section.save
-        flash[:notice] = "Successfully created a new section"
-        format.html { ajax_refresh }
-      else
-        flash[:error] = "There was an error creating the section."
-        format.html { render :layout => nil, :status => 400 }
-      end
-    end
-  end
-
-  def update
-    respond_to do |format|
-      if @section.authored_update(current_user, section_params)
-        flash[:notice] = "Successfully updated the section!"
-        format.html { ajax_refresh }
-      else
-        flash[:error] = "There was an error updating the control"
-        format.html { render :layout => nil, :status => 400 }
-      end
-    end
-  end
-
-  def delete
-    @model_stats = []
-    @relationship_stats = []
-    @relationship_stats << [ 'Control', @section.control_sections.count ]
-    @relationship_stats << [ 'Document', @section.documents.count ]
-    @relationship_stats << [ 'Category', @section.categories.count ]
-    @relationship_stats << [ 'Person', @section.people.count ]
-    respond_to do |format|
-      format.json { render :json => @section.as_json(:root => nil) }
-      format.html do
-        render :layout => nil, :template => 'shared/delete_confirm',
-          :locals => { :model => @section, :url => flow_section_path(@section), :models => @model_stats, :relationships => @relationship_stats }
-      end
-    end
-  end
-
-  def destroy
-    @section.destroy
-    flash[:notice] = "Section deleted"
-    respond_to do |format|
-      format.html { redirect_to flow_program_path(@section.program) }
-      format.json { render :json => @section.as_json(:root => nil) }
-    end
-  end
-
-  def tooltip
-    render :layout => nil
-  end
-
   private
-    def load_section
-      @section = Section.find(params[:id])
+
+    def delete_relationship_stats
+      [ [ 'Control', @section.control_sections.count ],
+        [ 'Document', @section.documents.count ],
+        [ 'Category', @section.categories.count ],
+        [ 'Person', @section.people.count ]
+      ]
+    end
+
+    def object_path
+      flow_program_path(@section.program)
+    end
+
+    def post_destroy_path
+      flow_program_path(@section.program)
     end
 
     def section_params
