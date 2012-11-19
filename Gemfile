@@ -91,6 +91,12 @@ group(:development, :test) do
 
   gem 'factory_girl_rails', "~> 4.0"
 
+  gem 'therubyracer' # javascript runtime.  At least one is required by the Jasmine gem
+                    # but which one you pick is up to you.
+  gem 'jasminerice'
+  gem 'guard-jasmine'
+  gem 'jasmine-jquery-rails'
+
   # To get a detailed overview about what queries get issued and how long they take
   # have a look at rails_metrics. Once you bundled it, you can run
   #
