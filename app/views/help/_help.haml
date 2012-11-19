@@ -7,7 +7,12 @@
       Help
     %p=@help.content
   -else
-    =render :partial => "#{@help_slug}"
+    -begin
+      =render :partial => "#{@help_slug}"
+    -rescue
+      -content_for :modal_title do
+        GRC Help
+      %p This content is coming soon.  We are working on it.
 
 #helpedit.collapse
   .row-fluid
@@ -18,6 +23,5 @@
         .row-fluid
           .span12
             =f.submit :Save, :class => 'btn btn-warning pull-right'
-            .btn.btn-info.pull-right Clear
-            
+
         =f.hidden_field :slug
