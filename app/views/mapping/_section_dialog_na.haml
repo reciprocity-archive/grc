@@ -38,6 +38,6 @@
   .modal-footer
     .row-fluid
       %nav.fltlft
-        =f.submit pat(:cancel), :type => 'reset', :class => 'btn btn-large btn-info'
+        %a.btn.btn-large.btn-info{:'data-dismiss' => 'modal-reset', :href => '#' } Cancel
       %nav.fltrt
-        =f.submit pat(:save), :class => 'btn btn-large btn-success'
+        %a.btn.btn-large.btn-success{:'data-toggle' => 'modal-submit', :href => '#' } Save
