@@ -145,7 +145,7 @@ class ProgramsController < BaseObjectsController
     if upload.present?
       begin
         file = upload.read.force_encoding('utf-8')
-        import = read_import(CSV.parse(file))
+        import = read_import_sections(CSV.parse(file))
         @messages = import[:messages]
         do_import(import, params[:confirm].blank?)
         @warnings = import[:warnings]
@@ -267,77 +267,41 @@ class ProgramsController < BaseObjectsController
 
     raise ImportException.new("There must be at least 3 input lines") unless rows.size >= 4
 
-    program_headers = trim_array(rows.shift).map do |heading|
-      if heading == "Type"
-        key = 'type'
-      else
-        key = PROGRAM_MAP[heading]
-        import[:messages] << "invalid program heading #{heading}" unless key
-      end
-      key
-    end
+    program_headers = read_import_headers(import, PROGRAM_MAP, "program", rows)
 
     program_values = rows.shift
 
-    raise ImportException.new("First column must be Type") unless program_headers.shift == "type"
-    raise ImportException.new("Type must be Controls") unless program_values.shift == "Controls"
-
     import[:program] = Hash[*program_headers.zip(program_values).flatten]
+
+    validate_import_type(import[:program], "Controls")
+    validate_import_slug(import[:program], "Program", @program.slug)
 
     raise ImportException.new("There must be an empty separator row") unless trim_array(rows.shift) == []
 
-    control_headers = trim_array(rows.shift).map do |heading|
-      key = CONTROL_MAP[heading]
-      import[:messages] << "invalid control heading #{heading}" unless key
-      key
-    end
-
-    import[:controls] = rows.map do |control_values|
-      Hash[*control_headers.zip(control_values).flatten]
-    end
+    read_import(import, CONTROL_MAP, "control", rows)
 
     import
   end
 
-  def read_import(rows)
+  def read_import_sections(rows)
     import = { :messages => [] }
 
     raise ImportException.new("There must be at least 3 input lines") unless rows.size >= 4
 
-    program_headers = trim_array(rows.shift).map do |heading|
-      if heading == "Program Type"
-        key = 'type'
-      else
-        key = PROGRAM_MAP[heading]
-        import[:messages] << "invalid program heading #{heading}" unless key
-      end
-      key
-    end
+    program_headers = read_import_headers(import, PROGRAM_MAP, "program", rows)
 
     program_values = rows.shift
 
-    raise ImportException.new("First column must be Type") unless program_headers.shift == "type"
-    raise ImportException.new("Type must be Program") unless program_values.shift == "Program"
-
     import[:program] = Hash[*program_headers.zip(program_values).flatten]
+
+    validate_import_type(import[:program], "Program")
+    validate_import_slug(import[:program], "Program", @program.slug)
 
     raise ImportException.new("There must be an empty separator row") unless trim_array(rows.shift) == []
 
-    section_headers = trim_array(rows.shift).map do |heading|
-      key = SECTION_MAP[heading]
-      import[:messages] << "invalid section heading #{heading}" unless key
-      key
-    end
-
-    import[:sections] = rows.map do |section_values|
-      Hash[*section_headers.zip(section_values).flatten]
-    end
+    read_import(import, SECTION_MAP, "section", rows)
 
     import
-  end
-
-  def perform_import(rows, actual)
-    puts rows.size
   end
 
   def sections

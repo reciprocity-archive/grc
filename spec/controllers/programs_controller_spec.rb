@@ -85,8 +85,8 @@ describe ProgramsController do
       Option.create(:title => "Soonish", :role => 'audit_frequency')
       post 'import', :id => @reg.id, :upload => fixture_file_upload("/REG1.csv")
       assigns(:messages).should == [
-        "invalid program heading Bogus1",
-        "invalid section heading Bogus2"
+        "Invalid program heading Bogus1",
+        "Invalid section heading Bogus2"
       ]
       assigns(:errors).should include 2
       assigns(:errors)[2].should include :title
@@ -98,8 +98,8 @@ describe ProgramsController do
     it "should prepare import with missing option" do
       post 'import', :id => @reg.id, :upload => fixture_file_upload("/REG1.csv")
       assigns(:messages).should == [
-        "invalid program heading Bogus1",
-        "invalid section heading Bogus2"
+        "Invalid program heading Bogus1",
+        "Invalid section heading Bogus2"
       ]
       assigns(:errors).should include 2
       assigns(:errors)[2].should include :title
