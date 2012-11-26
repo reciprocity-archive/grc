@@ -31,13 +31,13 @@ class Control < ActiveRecord::Base
   # Which sections are implemented by this one.  A company
   # control may implement several sections.
   has_many :sections, :through => :control_sections
-  has_many :control_sections
+  has_many :control_sections, :dependent => :destroy
 
   has_many :implemented_controls, :through => :control_controls
-  has_many :control_controls
+  has_many :control_controls, :dependent => :destroy
 
   has_many :implementing_controls, :through => :implementing_control_controls, :source => :control
-  has_many :implementing_control_controls, :class_name => "ControlControl", :foreign_key => "implemented_control_id"
+  has_many :implementing_control_controls, :class_name => "ControlControl", :foreign_key => "implemented_control_id", :dependent => :destroy
 
   belongs_to :type, :class_name => 'Option', :conditions => { :role => 'control_type' }
   belongs_to :kind, :class_name => 'Option', :conditions => { :role => 'control_kind' }
