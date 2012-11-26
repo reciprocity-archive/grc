@@ -376,6 +376,19 @@ width: 97px;
 }
 
 
+/* NAVS */
+
+.nav-tabs > li > a {
+  padding-top: 9px;
+  padding-bottom: 6px;
+  line-height: 16px;
+  font-size:14px;
+  border: 1px solid transparent;
+  -webkit-border-radius: 4px 4px 0 0;
+  -moz-border-radius: 4px 4px 0 0;
+  border-radius: 4px 4px 0 0;
+}
+
 // ----- TABS ----- //
 
 .nav-tabs > .active > a, .nav-tabs > .active > a:hover {
@@ -384,11 +397,13 @@ width: 97px;
   background-color: #43C2C7;
   border: 1px solid #43C2C7;
   border-bottom-color: transparent;
+
+  font-weight:bold;
 }
 
 .nav-tabs {
   /*margin-bottom: 2px;*/
-  border-bottom: 10px solid #43C2C7;
+  border-bottom: 8px solid #43C2C7;
   li {
     a:hover {
       background:lighten(#43C2C7,15%);
@@ -568,6 +583,11 @@ width: 97px;
   }
 }
 
+/* Sub area slot */
+h3.toggle {
+  cursor:pointer;
+}
+
 /* This defines the styles of the full-content slots hide/show on toggle */
 /* A TB span12 sets padding for general content */
 .slotcontent {
@@ -721,6 +741,8 @@ width: 97px;
 }
 
 
+
+
 /* BUTTONS */
 
 nav {
@@ -730,7 +752,7 @@ nav {
 
 /* Reduces bootstrap's bottom padding which had an adverse effect on the visual look of tab'd widgets */
 .nav{
-  margin-bottom:7px;
+  margin-bottom:5px;
 }
 
 .modal-header > nav {
@@ -782,7 +804,7 @@ nav {
 
 #pageType {
   margin-right:7px;
-  
+
   font-size: 28px;
   font-weight: bold;
 }
@@ -1757,7 +1779,7 @@ margin-top:5px;
 
   @include transition(border linear 0.2s, box-shadow linear 0.2s);
 
-  @include opacity(0.9);w
+  @include opacity(0.6);
 
   &:hover {
     @include opacity(1);

@@ -78,14 +78,29 @@
   .span9
     #headers
       .WidgetBox
+        .WidgetBoxHeading
+          .WidgetTitle.doublewidth Headers
         .WidgetBoxContent
-          .well #pageTitle
           #pageTitle Header 1 - This is the Page Title. Bold, 28px, #666. 
           %h1.highlighted Hightlighted - This is the Page Type. Bold, 28px, #0D868C (highlighted)
           %h2 Header 2
           %h3 Header 3
           %h4 Header 4
           %h5 Header 5
+
+          .infowell #pageTitle
+          .well Most h-classes are using child-selectors and therefore the above is overwritten. Pagetype uses an h1 and should be converted to #pagetype or .pagetype
+
+    #buttons
+      .WidgetBox
+        .WidgetBoxHeading
+          .WidgetTitle.doublewidth Buttons
+        .WidgetBoxContent
+          %a.btn.btn-blue.addbtn I'm an add-button
+          %a.btn.btn-blue.minibtn I'm a mini-button 
+
+          .infowell .btn .btn-color addbtn vs minibtn
+          .well Addbtn is depreciated for minibtn in almost every case. Regmapper needs to be reviewed before addbtn can be removed from css as it was created for this page originally.
 
 
     #widgets.WidgetBox.fullHeight.doubleWide
@@ -146,26 +161,15 @@
                   Risks mitigated by this Control
                 
             #samplerisks
-              
     
-    #widgets.WidgetBox
-      .WidgetBoxContent.information
-        %label Control Actions
-        .toolbar-widget.well
-          .row-fluid
-            .span6
-              %a.span12.btn.btn-info{"data-toggle" => "modal", :href => "#comingsoonModal"}
-                New Version
-            .span6
-              %a.span12.btn.btn-info{"data-toggle" => "modal", :href => "#comingsoonModal"}
-                Relationship Map
+
     #productInfo.WidgetBox
       .WidgetBoxHeading
-        .WidgetTitle Control Info
+        .WidgetTitle Sub areas
         %nav
           %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
             %i.gcmsicon-questionmark-grey
-          %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+          -#%a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
             %i.gcmsicon-edit-grey
           %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#productInfoContent"}
             %i.gcmsicon-enlarge-grey
@@ -193,8 +197,9 @@
             .span12
               %h3.toggle{"data-target" => "#productAbout", "data-toggle" => "collapse"}
                 .expander
-                About
-                %a.btn.btn-blue.addbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"} Edit
+                Sub Content Area
+                %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+                  %i.gcmsicon-edit-grey
               #productAbout.collapse
                 .row-fluid
                   .span12
@@ -227,54 +232,8 @@
                     %label Scope / Applicability of this Program
                     %textarea#textarea{:disabled => "disabled", :placeholder => "", :rows => "3", :style => "margin: 0px; width: 98%; height: 73px; "} PCI DDS applies whenever Cardholder account data and Authentication Data is Stored, Processed or Transmitted. Examples Include: For more See Page 7 of document. Using h6 makes the label caps.
           %hr.hr-widget
-          .row-fluid
-            .span12
-              %h3.toggle{"data-target" => "#productCategories", "data-toggle" => "collapse"}
-                .expander
-                Categories
-                %a.btn.btn-blue.addbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"} Edit
-              %ul#productCategories.collapse
-                %li.controlSlot
-                  %span.controls-group Category
-                  %br/
-                  %span.controls-subgroup Access Control
-                %li.controlSlot
-                  %span.controls-group Category
-                  %br/
-                  %span.controls-subgroup Risky Attribute
-          %hr.hr-widget
-          .row-fluid
-            .span12
-              %h3.toggle{"data-target" => "#productReferences", "data-toggle" => "collapse"}
-                .expander
-                References
-                %a.btn.btn-blue.addbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"} Edit
-              %ul#productReferences.collapse
-                %li.controlSlot
-                  %span.controls-group PDF
-                  %br/
-                  %span.controls-subgroup Privacy Report 2011
-                %li.controlSlot
-                  %span.controls-group PDF
-                  %br/
-                  %span.controls-subgroup Privacy Report 2012
-          %hr.hr-widget
-          .row-fluid
-            .span12
-              %h3.toggle{"data-target" => "#productPeople", "data-toggle" => "collapse"}
-                .expander
-                People
-                %a.btn.btn-blue.addbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"} Edit
-              %ul#productPeople.collapse
-                %li.controlSlot
-                  %span.controls-group JRayburn@google.com
-                  %br/
-                  %span.controls-subgroup Joss Rayburn
-                %li.controlSlot
-                  %span.controls-group rpoder@google.com
-                  %br/
-                  %span.controls-subgroup Ron Poder
-          %hr.hr-widget
+
+
       / end of widget
     / end of span
     =render :partial => 'design/widgets/impactscope'

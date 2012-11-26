@@ -1,10 +1,16 @@
 %ul
   %li
-    .row-fluid
-      .slot.span12.regulationslot.statusred.toggle{"data-target" => "#Risk-4-c1", "data-toggle" => "collapse"}
-        %span.prefix Risk-1
-        Simplify the slots with less buttons.
-        .enddot
+    .slot.span12.controlSlot.statusred.toggle{"data-target" => "#Risk-4-c1", "data-toggle" => "collapse"}
+      .enddot
+      .group
+        .row-fluid.nominheight
+          .span6.nominheight
+            %span.controls-group GWT
+          .span6.nominheight
+            -#%a.btn.minibtn.pull-right Review
+        .row-fluid.nominheight
+          .span12.nominheight
+            %span.controls-subgroup Google Corp IT Team
     .row-fluid#Risk-4-c1.collapse
       .slotcontent
         I would prefer to remove the [...] more button in these cases and only have the full slot button. While we are technically looking at more data, the dot lets them know there is no hierchal data to be shown. Otherwise, this slot and the 3 following should all have that blue button as well. Visually messy.

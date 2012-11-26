@@ -43,7 +43,7 @@
             -# TAB SYS BIZ PROCESS
             .row-fluid
               .span12.captionbox
-                %a.btn.btn-blue.addbtn.pull-right Edit List
+                %a.btn.btn-blue.minibtn.pull-right Edit List
                 %h4
                   Systems or Processes that implement this Control
 
@@ -52,7 +52,7 @@
             -# TAB LINKED CONTROLS
             .row-fluid
               .span12.captionbox
-                %a.btn.btn-blue.addbtn.pull-right Edit List
+                %a.btn.btn-blue.minibtn.pull-right Edit List
                 %h4
                   Other Controls linked to this Control
             #samplelinkedcontrols
@@ -60,16 +60,16 @@
             -# PROGRAM SECTIONS
             .row-fluid
               .span12.captionbox
-                %a.btn.btn-blue.addbtn.pull-right Edit List
+                -#%a.btn.btn-blue.minibtn.pull-right Edit List
                 %h4
                   Program or Policy Sections that mandate this Control
                 
             #sampleprogramsections
           .tab-pane#controls-risks
-            -# PROGRAM SECTIONS
+            -# PROGRAM RISKS
             .row-fluid
               .span12.captionbox
-                %a.btn.btn-blue.addbtn.pull-right Edit List
+                %a.btn.btn-blue.minibtn.pull-right Edit List
                 %h4
                   Risks mitigated by this Control
                 
@@ -78,15 +78,16 @@
     
   .singleColumn
     #productInfo.WidgetBox
+      .WidgetBoxHeading
+        .WidgetTitle Control Actions
       .WidgetBoxContent.information
-        %label Control Actions
-        .toolbar-widget.well
+        .toolbar-widget
           .row-fluid
             .span6
-              %a.span12.btn.btn-info{"data-toggle" => "modal", :href => "#comingsoonModal"}
+              %a.span12.btn.btn-warning{"data-toggle" => "modal", :href => "#comingsoonModal"}
                 New Version
             .span6
-              %a.span12.btn.btn-info{"data-toggle" => "modal", :href => "#comingsoonModal"}
+              %a.span12.btn.btn-warning{"data-toggle" => "modal", :href => "#comingsoonModal"}
                 Relationship Map
     #productInfo.WidgetBox
       .WidgetBoxHeading
@@ -94,7 +95,7 @@
         %nav
           %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
             %i.gcmsicon-questionmark-grey
-          %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+          -#%a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
             %i.gcmsicon-edit-grey
           %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#productInfoContent"}
             %i.gcmsicon-enlarge-grey
@@ -123,7 +124,9 @@
               %h3.toggle{"data-target" => "#productAbout", "data-toggle" => "collapse"}
                 .expander
                 About
-                %a.btn.btn-blue.addbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"} Edit
+                %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+                  %i.gcmsicon-edit-grey
+                -#%a.btn.btn-blue.minibtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"} Edit
               #productAbout.collapse
                 .row-fluid
                   .span12
@@ -161,7 +164,8 @@
               %h3.toggle{"data-target" => "#productCategories", "data-toggle" => "collapse"}
                 .expander
                 Categories
-                %a.btn.btn-blue.addbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"} Edit
+                %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+                  %i.gcmsicon-edit-grey
               %ul#productCategories.collapse
                 %li.controlSlot
                   %span.controls-group Category
@@ -177,7 +181,8 @@
               %h3.toggle{"data-target" => "#productReferences", "data-toggle" => "collapse"}
                 .expander
                 References
-                %a.btn.btn-blue.addbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"} Edit
+                %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+                  %i.gcmsicon-edit-grey
               %ul#productReferences.collapse
                 %li.controlSlot
                   %span.controls-group PDF
@@ -193,7 +198,8 @@
               %h3.toggle{"data-target" => "#productPeople", "data-toggle" => "collapse"}
                 .expander
                 People
-                %a.btn.btn-blue.addbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"} Edit
+                %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+                  %i.gcmsicon-edit-grey
               %ul#productPeople.collapse
                 %li.controlSlot
                   %span.controls-group JRayburn@google.com
