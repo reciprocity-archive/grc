@@ -720,10 +720,6 @@ width: 97px;
   text-overflow: ellipsis;
 }
 
-#pageType {
-  margin-right:7px;
-}
-
 
 /* BUTTONS */
 
@@ -782,6 +778,15 @@ nav {
   color:$textColor;
   text-align: left;
 }
+
+
+#pageType {
+  margin-right:7px;
+  
+  font-size: 28px;
+  font-weight: bold;
+}
+
 
 .smallerWidgetBoxHeading input {
   width: 70px;

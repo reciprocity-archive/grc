@@ -1,0 +1,281 @@
+-@title = "GRC: Style Guide"
+ 
+%link(rel="stylesheet" type="text/css" href="styleguide.css")
+
+-content_for :header do
+  %ol#breadcrumb
+    %li.last
+      %a{:href => "#"} Visual & Syntax Style Guide
+  #pageTitle.location Design - Dev Only
+
+-content_for :page_help, 'Nope.'
+
+-content_for :subheader_extras do
+  %h1#pageType.pull-right.highlighted Styleguide
+
+-content_for :subheader_plus do
+  %a.navbarplus.fltrt{ :href => "#comingsoonModal", "data-toggle" => "modal" }
+  
+.row-fluid
+  .span3.bs-docs-sidebar
+    %ul.nav.nav-list.bs-docs-sidenav.affix
+      %li.active
+        %a{:href => "#headers"}
+          %i.icon-chevron-right
+          Headers
+      %li
+        %a{:href => "#widgets"}
+          %i.icon-chevron-right
+          Icons
+      %li
+        %a{:href => "#buttonDropdowns"}
+          %i.icon-chevron-right
+          Buttons
+      %li
+        %a{:href => "#navs"}
+          %i.icon-chevron-right
+          Navs
+      %li
+        %a{:href => "#navbar"}
+          %i.icon-chevron-right
+          Widget
+      %li
+        %a{:href => "#breadcrumbs"}
+          %i.icon-chevron-right
+          Modals
+      %li
+        %a{:href => "#pagination"}
+          %i.icon-chevron-right
+          Pagination
+      %li
+        %a{:href => "#labels-badges"}
+          %i.icon-chevron-right
+          Labels and badges
+      %li
+        %a{:href => "#typography"}
+          %i.icon-chevron-right
+          Typography
+      %li
+        %a{:href => "#thumbnails"}
+          %i.icon-chevron-right
+          Thumbnails
+      %li
+        %a{:href => "#alerts"}
+          %i.icon-chevron-right
+          Alerts
+      %li
+        %a{:href => "#progress"}
+          %i.icon-chevron-right
+          Progress bars
+      %li
+        %a{:href => "#media"}
+          %i.icon-chevron-right
+          Media object
+      %li
+        %a{:href => "#misc"}
+          %i.icon-chevron-right
+          Misc
+  .span9
+    #headers
+      .WidgetBox
+        .WidgetBoxContent
+          .well #pageTitle
+          #pageTitle Header 1 - This is the Page Title. Bold, 28px, #666. 
+          %h1.highlighted Hightlighted - This is the Page Type. Bold, 28px, #0D868C (highlighted)
+          %h2 Header 2
+          %h3 Header 3
+          %h4 Header 4
+          %h5 Header 5
+
+
+    #widgets.WidgetBox.fullHeight.doubleWide
+      .WidgetBoxHeading
+        .pull-right
+          %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+            %i.gcmsicon-questionmark-grey
+          -#%a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+            %i.gcmsicon-edit-grey
+          %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
+        .WidgetTitle.doublewidth Widget Title (.widgettitle)
+      .WidgetBoxContent
+        
+        %ul#quicklinks.nav.nav-tabs
+          %li.active
+            %a{"data-toggle" => "tab", :href => "#controls-sysbizproc"} Sys/Biz Processes
+          %li
+            %a{"data-toggle" => "tab", :href => "#controls-linked"} Linked Controls
+          %li
+            %a{"data-toggle" => "tab", :href => "#controls-progsec"} Program Sections
+          %li
+            %a{"data-toggle" => "tab", :href => "#controls-risks"} Risks
+
+        
+        .tab-content
+          .tab-pane#controls-sysbizproc.active
+            -# TAB SYS BIZ PROCESS
+            .row-fluid
+              .span12.captionbox
+                %a.btn.btn-blue.addbtn.pull-right Edit List
+                %h4
+                  Systems or Processes that implement this Control
+
+            #sampleprocesses
+          .tab-pane#controls-linked
+            -# TAB LINKED CONTROLS
+            .row-fluid
+              .span12.captionbox
+                %a.btn.btn-blue.addbtn.pull-right Edit List
+                %h4
+                  Other Controls linked to this Control
+            #samplelinkedcontrols
+          .tab-pane#controls-progsec
+            -# PROGRAM SECTIONS
+            .row-fluid
+              .span12.captionbox
+                %a.btn.btn-blue.addbtn.pull-right Edit List
+                %h4
+                  Program or Policy Sections that mandate this Control
+                
+            #sampleprogramsections
+          .tab-pane#controls-risks
+            -# PROGRAM SECTIONS
+            .row-fluid
+              .span12.captionbox
+                %a.btn.btn-blue.addbtn.pull-right Edit List
+                %h4
+                  Risks mitigated by this Control
+                
+            #samplerisks
+              
+    
+    #widgets.WidgetBox
+      .WidgetBoxContent.information
+        %label Control Actions
+        .toolbar-widget.well
+          .row-fluid
+            .span6
+              %a.span12.btn.btn-info{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                New Version
+            .span6
+              %a.span12.btn.btn-info{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                Relationship Map
+    #productInfo.WidgetBox
+      .WidgetBoxHeading
+        .WidgetTitle Control Info
+        %nav
+          %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+            %i.gcmsicon-questionmark-grey
+          %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+            %i.gcmsicon-edit-grey
+          %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#productInfoContent"}
+            %i.gcmsicon-enlarge-grey
+      .WidgetBoxContent.information.collapse.in
+        .well 
+          %label 
+            Status
+            .pull-right 
+              %span.statustextgreen 35 
+              %span /
+              %span.statustextyellow 55 
+              %span /
+              %span.statustextred 10 
+          .progress.progress-striped.active
+            .bar.progressbar-success{"data-percentage" => "35", :style => "float: left; width: 0%; "}
+            .bar.progressbar-danger{"data-percentage" => "10", :style => "float: right; width: 0%; "}
+            .bar.progressbar-warning{"data-percentage" => "55", :style => "float: right; width: 0%; "}
+        -#.toolbar-widget.well
+          %a.btn.btn-warning{"data-toggle" => "modal", :href => "#comingsoonModal"}
+            New Version
+        
+        #productInfoContent.collapse.in
+          %hr.hr-widget
+          .row-fluid
+            .span12
+              %h3.toggle{"data-target" => "#productAbout", "data-toggle" => "collapse"}
+                .expander
+                About
+                %a.btn.btn-blue.addbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"} Edit
+              #productAbout.collapse
+                .row-fluid
+                  .span12
+                    .span3
+                      %label Code
+                      %input.span12{:disabled => "disabled", :placeholder => "ABC", :type => "text"}/
+                    .span3
+                      %label Version
+                      %input.span12{:disabled => "disabled", :placeholder => "1.0", :type => "text"}/
+                    .span3
+                      %label Year
+                      %input.span12{:disabled => "disabled", :placeholder => "2012", :type => "text"}/
+                    .span3
+                      %label Kind
+                      %input.span12{:disabled => "disabled", :placeholder => "---", :type => "text"}/
+                .row-fluid
+                  .span12
+                    %label Full Title
+                    %input{:disabled => "disabled", :placeholder => "Sarbanes-Oxley Long Title", :style => "margin: 0px; width: 97%;", :type => "text"}/
+                .row-fluid
+                  .span12
+                    %label Type
+                    %input{:disabled => "disabled", :placeholder => "Regulation", :style => "margin: 0px; width: 97%;", :type => "text"}/
+                .row-fluid
+                  .span12
+                    %label Version
+                    %input{:disabled => "disabled", :placeholder => "1.2", :style => "margin: 0px; width: 97%;", :type => "text"}/
+                .row-fluid
+                  .span12
+                    %label Scope / Applicability of this Program
+                    %textarea#textarea{:disabled => "disabled", :placeholder => "", :rows => "3", :style => "margin: 0px; width: 98%; height: 73px; "} PCI DDS applies whenever Cardholder account data and Authentication Data is Stored, Processed or Transmitted. Examples Include: For more See Page 7 of document. Using h6 makes the label caps.
+          %hr.hr-widget
+          .row-fluid
+            .span12
+              %h3.toggle{"data-target" => "#productCategories", "data-toggle" => "collapse"}
+                .expander
+                Categories
+                %a.btn.btn-blue.addbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"} Edit
+              %ul#productCategories.collapse
+                %li.controlSlot
+                  %span.controls-group Category
+                  %br/
+                  %span.controls-subgroup Access Control
+                %li.controlSlot
+                  %span.controls-group Category
+                  %br/
+                  %span.controls-subgroup Risky Attribute
+          %hr.hr-widget
+          .row-fluid
+            .span12
+              %h3.toggle{"data-target" => "#productReferences", "data-toggle" => "collapse"}
+                .expander
+                References
+                %a.btn.btn-blue.addbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"} Edit
+              %ul#productReferences.collapse
+                %li.controlSlot
+                  %span.controls-group PDF
+                  %br/
+                  %span.controls-subgroup Privacy Report 2011
+                %li.controlSlot
+                  %span.controls-group PDF
+                  %br/
+                  %span.controls-subgroup Privacy Report 2012
+          %hr.hr-widget
+          .row-fluid
+            .span12
+              %h3.toggle{"data-target" => "#productPeople", "data-toggle" => "collapse"}
+                .expander
+                People
+                %a.btn.btn-blue.addbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"} Edit
+              %ul#productPeople.collapse
+                %li.controlSlot
+                  %span.controls-group JRayburn@google.com
+                  %br/
+                  %span.controls-subgroup Joss Rayburn
+                %li.controlSlot
+                  %span.controls-group rpoder@google.com
+                  %br/
+                  %span.controls-subgroup Ron Poder
+          %hr.hr-widget
+      / end of widget
+    / end of span
+    =render :partial => 'design/widgets/impactscope'
+    / end of span
