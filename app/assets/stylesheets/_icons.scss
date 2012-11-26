@@ -21,7 +21,7 @@
   background-position: 0px 0px;
   background-repeat: no-repeat;
 }
-
+/* Obsolete - commented out 11/26 for removal 12/26 
 .itemarrow {
   opacity:.5;
   background-image: url("../images/icons/icon-itemarrow.png");
@@ -33,11 +33,11 @@
   padding:0;
   background-position: 0px 0px;
   background-repeat: no-repeat;
-  /*float:left;*/
+  
   &:hover {
     opacity:1;
   }
-}
+} */
 
 .gcmsicon-blank {
   background-image: none;

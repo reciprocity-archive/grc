@@ -64,7 +64,7 @@
           %i.icon-chevron-right
           Alerts
       %li
-        %a{:href => "#progress"}
+        %a{:href => "#progressbar"}
           %i.icon-chevron-right
           Progress bars
       %li
@@ -96,8 +96,30 @@
         .WidgetBoxHeading
           .WidgetTitle.doublewidth Buttons
         .WidgetBoxContent
-          %a.btn.btn-blue.addbtn I'm an add-button
-          %a.btn.btn-blue.minibtn I'm a mini-button 
+          .well
+            %h5 Misc Buttons
+            %hr
+            %a.btn.btn-blue.addbtn I'm an add-button
+            %a.btn.btn-blue.minibtn I'm a mini-button 
+
+          .well
+            %h5 Modal Buttons
+            %hr
+
+            .row-fluid
+              %nav.pull-left.txtlft.span3
+                %a.btn.btn-large.btn-info{"data-dismiss" => "modal", :href => "#"} Cancel
+                %a.btn.btn-large.btn-warning{"data-dismiss" => "modal", :href => "#"} Delete
+              .toolbar-widget.span6
+                -#%a.btn{:href => "#"}
+                  %i.gcmsicon-arrowleft-black
+                %a View Edit History
+                -#%span.btnwell Showing Most Recent of 3 Revisions
+                -#%a.btn{:href => "#"}
+                  %i.gcmsicon-arrowright-black
+              %nav.pull-right.txtrt.span3
+                %a#actionButton.btn.btn-large.btn-success.btn-primary{:href => "#", "data-dismiss" => "modal"} Approve
+                %a#actionButton.btn.btn-large.btn-success.btn-primary{:href => "#", "data-dismiss" => "modal"} Save
 
           .infowell .btn .btn-color addbtn vs minibtn
           .well Addbtn is depreciated for minibtn in almost every case. Regmapper needs to be reviewed before addbtn can be removed from css as it was created for this page originally.
@@ -175,8 +197,8 @@
             %i.gcmsicon-enlarge-grey
       .WidgetBoxContent.information.collapse.in
         .well 
-          %label 
-            Status
+          %label#progressbar
+            Progress Bar
             .pull-right 
               %span.statustextgreen 35 
               %span /
