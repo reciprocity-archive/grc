@@ -27,6 +27,21 @@
         =render :partial => 'design/templates/riskWidgetGap'
         =render :partial => 'design/templates/riskWidgetRisk'
   .singleColumn
+    .btn-group.closed
+      %a.span2.btn.btn-warning.dropdown-toggle{ :'data-toggle' => 'dropdown' }
+        %i.gcmsicon-import-white
+        Im/Export
+        %span.caret
+      %ul.dropdown-menu
+        %li.divider
+        %li
+          %a{ :href => import_flow_systems_path }
+            Import Systems
+        %li.divider
+        %li
+          %a{ :href => export_flow_systems_path(:format => :csv), :target => '_blank' }
+            Export Systems
+  .singleColumn
     -if has_feature? :BETA
       .row-static
         .singleColumn
@@ -78,3 +93,4 @@
       %li
         %a{ :href => '#comingsoon-modal', :'data-toggle' => 'modal', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
           Data Asset
+

@@ -36,4 +36,8 @@ module ImportHelper
       Hash[*headers.zip(values).flatten]
     end
   end
+
+  def render_import_error(message=nil)
+    render '/error/import_error', :layout => false, :locals => { :message => message }
+  end
 end

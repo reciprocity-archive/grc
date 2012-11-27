@@ -46,6 +46,11 @@ CmsRails::Application.routes.draw do
       get 'tooltip'
       get 'delete'
     end
+    collection do
+      get 'import'
+      post 'import'
+      get 'export'
+    end
   end
 
   resources :system_systems, :as => 'flow_system_systems', :only => [:index, :create] do

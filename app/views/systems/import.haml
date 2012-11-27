@@ -1,0 +1,10 @@
+-content_for :page_help, 'import'
+
+-content_for :header do
+  %ol#breadcrumb
+    %li Import
+  .location#pageTitle Import Systems
+
+.row-static
+  =render :partial => 'systems/import',
+          :layout => 'layouts/widget_box'

@@ -1,0 +1,47 @@
+.row-fluid
+  %hr.hr-widget
+
+.row-fluid
+  %h4 Sample Data
+
+.row-fluid
+  #sampleData.span12.well
+    %table.ggrc-table
+      %thead
+        %tr
+          %th Code
+          %th Title
+          %th Description
+          %th Infrastructure
+      %tbody
+        -columns = %w(slug title description infrastructure)
+        -@systems.each_with_index do |sec, i|
+          %tr{ :class => (i % 2 == 0 ? :odd : :even) }
+            -columns.each do |column_name|
+              %td{ :class => ( (@errors[i].present? && @errors[i][column_name].present?) ? 'member-failure' : ((@warnings[i].present? && @warnings[i][column_name].present?) ? 'member-warning' : '' ) ) }
+                =sec.send(column_name)
+                -if @errors[i].present? && @errors[i][column_name].present?
+                  .help-inline=@errors[i][column_name].join(', ')
+                -if @warnings[i].present? && @warnings[i][column_name].present?
+                  .help-inline=@warnings[i][column_name].join(', ')
+
+    Showing 1 to #{@systems.size} of #{@systems.size} entries
+    %br/
+    #{@creates.size} created, #{@updates.size} updated
+
+
+%div
+  Warnings:
+
+  -@messages.each do |m|
+    %p{ :class => 'label-warning' }
+      =m
+
+.row-fluid
+  %hr.hr-widget
+
+.row-fluid
+  -if params[:confirm].blank?
+    .span9
+    .span3
+      =submit_tag "Finish Importing", :class => %w(span12 btn btn-large btn-success btn-primary), :name => 'confirm'

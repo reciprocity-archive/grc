@@ -109,10 +109,6 @@ class ProgramsController < BaseObjectsController
     end
   end
 
-  def render_import_error(message=nil)
-    render 'import_error', :layout => false, :locals => { :message => message }
-  end
-
   def import_controls
     upload = params["upload"]
     if upload.present?
