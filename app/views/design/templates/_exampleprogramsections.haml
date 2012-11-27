@@ -1,28 +1,159 @@
 %ul
-  %li
-    .row-fluid
-      .slot.span12.regulationslot.statusred.toggle{"data-target" => "#Risk-4-c1", "data-toggle" => "collapse"}
-        %span.prefix Risk-1
-        Simplify the slots with less buttons.
-        .enddot
-    .row-fluid#Risk-4-c1.collapse
-      .slotcontent
-        I would prefer to remove the [...] more button in these cases and only have the full slot button. While we are technically looking at more data, the dot lets them know there is no hierchal data to be shown. Otherwise, this slot and the 3 following should all have that blue button as well. Visually messy.
-  %li
-    .row-fluid
-      .slot.span12.regulationslot.statusred.toggle{"data-target" => "#Risk-4-c2", "data-toggle" => "collapse"}
-        %span.prefix Risk-29
-        Also without a [...] button.
-        .enddot
-    .row-fluid#Risk-4-c2.collapse
-      .slotcontent
-        Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
-  %li
-    .row-fluid
-      .slot.span12.regulationslot.statusred.toggle{"data-target" => "#Risk-4-c3", "data-toggle" => "collapse"}
-        %span.prefix Risk-88
-        Enable processes to provide for timely forensic investigation in the event of a ...
-        .enddot
-    .row-fluid#Risk-4-c3.collapse
-      .slotcontent
-        Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
+          %li
+            .row-fluid
+              .slot.span12.regulationslot
+                .slottitle.span8.toggle{"data-target" => "#demo1", "data-toggle" => "collapse"}
+                  .expander
+                  %span.prefix Product Group 
+                  Example of a product group with multiple columns ...
+                .slotcolumn.span2
+                  .btn.btn-mini Full Audit
+                .slotowner.span1
+                  %a.slotowner GRC
+                .slotactions.pull-right
+                  %a.btn.btn-mini{"data-target" => "#demo1-summary", "data-toggle" => "collapse"}
+                    %i.gcmsicon-more
+              #demo1-summary.row-fluid.collapse
+                .span12.infowell.nominheight
+                  "Hi I am a general description or some such info box that you requested to see. You can't edit me. You can just enjoy the beautiful knowledge I pour into your ocular cavities. Learn my friend. Learn. Or if you don't want to just glaze over and scan down until you see the information you truly wanted." -Abraham Lincoln
+              #demo1.row-fluid.collapse
+                %ul
+                  %li
+                    %ul.slotlist
+                      %li
+                        .row-fluid
+                          .slot.span12.regulationslot.statusgreen
+                            .slottitle.span8.toggle{"data-target" => "#demo1-1-summary", "data-toggle" => "collapse"}
+                              .enddot
+                              %span.prefix Proc-1
+                              Enable processes to provide for timely forensic investigation in the event of a ...
+                            .slotcolumn.span2
+                              .btn.btn-mini Data Integrity
+                            .slotowner.span1
+                              %a.slotowner{:href => "http://www.youtube.com/watch?v=oHg5SJYRHA0"} Rick Astley
+                            .slotactions.pull-right
+                              %a.btn.btn-mini{"data-target" => "#demo1-1-summary", "data-toggle" => "collapse"}
+                                %i.gcmsicon-more
+                        #demo1-1-summary.row-fluid.collapse
+                          .span12.nominheight
+                            .slotcontent.span12
+                              %ul.contentactions.pull-right
+                                %li
+                                  %a.btn.btn-mini.halfopacity{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                                    %i.gcmsicon-edit-grey
+                                %li
+                                  %a.btn.btn-mini.halfopacity{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                                    %i.gcmsicon-link
+                                %li
+                                  %a.btn.btn-mini.halfopacity{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                                    %i.gcmsicon-arrowright-black
+                              Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider. Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider. Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
+
+                              Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
+                        .row-fluid#demo1-1.collapse
+                          .slotcontent.span12
+                            
+                              
+                      %li
+                        .row-fluid
+                          .slot.span12.regulationslot
+                            .slottitle.span8.toggle{"data-target" => "#demo2-1", "data-toggle" => "collapse"}
+                              .expander
+                              %span.prefix Proc-2
+                              A secondary processes to provide for timely forensic investigation in the event of a ...
+                            .slotcolumn.span2
+                              .btn.btn-mini Annual Contracts
+                            .slotowner.span1
+                              %a.slotowner Rod Sterling
+                            .slotactions.pull-right
+                              %a.btn.btn-mini{"data-target" => "#demo2-1-content", "data-toggle" => "collapse"}
+                                %i.gcmsicon-more
+                        #demo2-1-content.row-fluid.collapse
+                          .slotcontent.span12.infowell.nominheight
+                            %ul.contentactions.pull-right
+                              %li
+                                %a.btn.btn-mini.halfopacity{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                                  %i.gcmsicon-edit-grey
+                              %li
+                                %a.btn.btn-mini.halfopacity{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                                  %i.gcmsicon-link
+                              %li
+                                %a.btn.btn-mini.halfopacity{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                                  %i.gcmsicon-arrowright-black
+                            Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider. Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider. Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
+
+                            Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
+                        .row-fluid#demo2-1.collapse   
+                          %ul.slotlist
+                            %li
+                              .row-fluid
+                                .slot.span12.regulationslot
+                                  .slottitle.span10.toggle{"data-target" => "#demo2-1-1", "data-toggle" => "collapse"}
+                                    .expander
+                                    %span.prefix Proc-2-1
+                                    A secondary processes to provide for timely forensic investigation in the event of a ...
+                                  .slotowner.span1
+                                    %a.slotowner Rod Sterling
+                                  .slotactions.pull-right
+                                    %a.btn.btn-mini{"data-target" => "#demo2-1-1-summary", "data-toggle" => "collapse"}
+                                      %i.gcmsicon-more
+                              #demo2-1-1-summary.row-fluid.collapse
+                                .span12.infowell.nominheight
+                                  Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
+                              #demo2-1-1.collapse
+                                %ul
+                                  %li
+                                    .row-fluid
+                                      .slot.span12.regulationslot.statusred.toggle{"data-target" => "#demo2-3", "data-toggle" => "collapse"}
+                                        .slottitle.span11
+                                          .enddot
+                                          %span.prefix End of Line - no hierchal data
+                                          In this situation the entire slot and the [...] more button do the same thing. 
+                                         
+                                        .slotactions.pull-right.pull-right
+                                          %a.btn.btn-mini{"data-target" => "#demo2-3", "data-toggle" => "collapse"}
+                                            %i.gcmsicon-more
+                                    .row-fluid#demo2-3.collapse
+                                      .slotcontent
+                                        That is, to show the data contained within the slot content.
+                                    %ul
+                                      %li
+                                        %ul
+                                          %li
+                                            .row-fluid
+                                              .slot.span12.regulationslot.statusgreen.toggle{"data-target" => "#demo2-4-c1", "data-toggle" => "collapse"}
+                                                %span.prefix Proc-2-1 Control 1 
+                                                Simplify the slots with less buttons.
+                                                .expander
+                                            .row-fluid#demo2-4-c1.collapse
+                                              .slotcontent
+                                                I would prefer to remove the [...] more button in these cases and only have the full slot button. While we are technically looking at more data, the dot lets them know there is no hierchal data to be shown. Otherwise, this slot and the 3 following should all have that blue button as well. Visually messy.
+                                              %ul
+                                                %li
+                                                  .row-fluid
+                                                    .slot.span12.regulationslot.toggle{"data-target" => "#demo-control1", "data-toggle" => "collapse"}
+                                                      %span.prefix Control 1 
+                                                      Simplify the slots with less buttons.
+                                                      .enddot
+                                                  .row-fluid#demo-control1.collapse
+                                                    .slotcontent
+                                                      Single Control    
+
+                                          %li
+                                            .row-fluid
+                                              .slot.span12.regulationslot.statusgreen.toggle{"data-target" => "#demo2-4-c2", "data-toggle" => "collapse"}
+                                                %span.prefix Proc-2-1 Control 2
+                                                Also without a [...] button.
+                                                .enddot
+                                            .row-fluid#demo2-4-c2.collapse
+                                              .slotcontent
+                                                Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
+                                          %li
+                                            .row-fluid
+                                              .slot.span12.regulationslot.statusgreen.toggle{"data-target" => "#demo2-4-c3", "data-toggle" => "collapse"}
+                                                %span.prefix Proc-2-1 Control 3
+                                                Enable processes to provide for timely forensic investigation in the event of a ...
+                                                .enddot
+                                            .row-fluid#demo2-4-c3.collapse
+                                              .slotcontent
+                                                Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.

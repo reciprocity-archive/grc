@@ -52,7 +52,9 @@
             .span12.nominheight
               %h4.nominheight
                 Applicable Regulations
-                %a.btn.btn-blue.minibtn.pull-right Edit List
+                -#%a.btn.btn-blue.minibtn.pull-right Edit List
+                %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                  %i.gcmsicon-link
           .row-fluid
             .span12.captionbox
               .subtitle Regulations or programs that are directly applicable to this program.
@@ -119,7 +121,9 @@
             .span12.nominheight
               %h4.nominheight
                 More Regulations
-                %a.btn.btn-blue.minibtn.pull-right Edit List
+                %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                  %i.gcmsicon-link
+                -#%a.btn.btn-blue.minibtn.pull-right Edit List
           .row-fluid
             .span12.captionbox
               .subtitle 2nd group of regulations or programs that are directly applicable to this program.

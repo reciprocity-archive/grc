@@ -24,7 +24,7 @@
           %i.icon-chevron-right
           Headers
       %li
-        %a{:href => "#widgets"}
+        %a{:href => "#icons"}
           %i.icon-chevron-right
           Icons
       %li
@@ -32,9 +32,9 @@
           %i.icon-chevron-right
           Buttons
       %li
-        %a{:href => "#navs"}
+        %a{:href => "#tabs"}
           %i.icon-chevron-right
-          Navs
+          Tabs
       %li
         %a{:href => "#navbar"}
           %i.icon-chevron-right
@@ -125,7 +125,44 @@
           .well Addbtn is depreciated for minibtn in almost every case. Regmapper needs to be reviewed before addbtn can be removed from css as it was created for this page originally.
 
 
-    #widgets.WidgetBox.fullHeight.doubleWide
+
+    #icons
+      .WidgetBox
+        .WidgetBoxHeading
+          .WidgetTitle.doublewidth Icons
+        .WidgetBoxContent
+          %h3 Widget Icons
+          %ul
+            %li
+              %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                %i.gcmsicon-questionmark-grey
+          -#%a.widgetbtn{"data-toggle" 
+          %h3 Content Icons
+          %ul
+            %li
+              %a.btn.btn-mini.halfopacity{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                %i.gcmsicon-more
+              More Button - opens up description and additional action buttons for an item (slot)
+            %li
+              %a.btn.btn-mini.halfopacity{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                %i.gcmsicon-edit-grey
+              Edit Button - Should open a modal pop-up or in extreme cases go to the object's page.
+            %li
+              %a.btn.btn-mini.halfopacity{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                %i.gcmsicon-link
+              Link Button.
+            %li
+              %a.btn.btn-mini.halfopacity{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                %i.gcmsicon-arrowright-black
+              Go Button - Opens up this object's page.
+
+          
+          .infowell .btn .btn-color addbtn vs minibtn
+          .well Icons are created 32x32 pixels and sized down to 16x16 in the UI. This allows retina and higher-resolution mobile devices to look better.
+
+
+
+    #tabs.WidgetBox.fullHeight.doubleWide
       .WidgetBoxHeading
         .pull-right
           %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
@@ -133,7 +170,7 @@
           -#%a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
             %i.gcmsicon-edit-grey
           %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
-        .WidgetTitle.doublewidth Widget Title (.widgettitle)
+        .WidgetTitle.doublewidth Tabs
       .WidgetBoxContent
         
         %ul#quicklinks.nav.nav-tabs

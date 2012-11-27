@@ -52,7 +52,7 @@
                 .slotowner.span1
                   %a.slotowner GRC
                 .slotactions.pull-right
-                  %a.btn.btn-mini.halfopacity{"data-target" => "#demo1-summary", "data-toggle" => "collapse"}
+                  %a.btn.btn-mini{"data-target" => "#demo1-summary", "data-toggle" => "collapse"}
                     %i.gcmsicon-more
               #demo1-summary.row-fluid.collapse
                 .span12.infowell.nominheight
@@ -73,7 +73,7 @@
                             .slotowner.span1
                               %a.slotowner{:href => "http://www.youtube.com/watch?v=oHg5SJYRHA0"} Rick Astley
                             .slotactions.pull-right
-                              %a.btn.btn-mini.halfopacity{"data-target" => "#demo1-1-summary", "data-toggle" => "collapse"}
+                              %a.btn.btn-mini{"data-target" => "#demo1-1-summary", "data-toggle" => "collapse"}
                                 %i.gcmsicon-more
                         #demo1-1-summary.row-fluid.collapse
                           .span12.nominheight
@@ -107,7 +107,7 @@
                             .slotowner.span1
                               %a.slotowner Rod Sterling
                             .slotactions.pull-right
-                              %a.btn.btn-mini.halfopacity{"data-target" => "#demo2-1-content", "data-toggle" => "collapse"}
+                              %a.btn.btn-mini{"data-target" => "#demo2-1-content", "data-toggle" => "collapse"}
                                 %i.gcmsicon-more
                         #demo2-1-content.row-fluid.collapse
                           .slotcontent.span12.infowell.nominheight
@@ -136,7 +136,7 @@
                                   .slotowner.span1
                                     %a.slotowner Rod Sterling
                                   .slotactions.pull-right
-                                    %a.btn.btn-mini.halfopacity{"data-target" => "#demo2-1-1-summary", "data-toggle" => "collapse"}
+                                    %a.btn.btn-mini{"data-target" => "#demo2-1-1-summary", "data-toggle" => "collapse"}
                                       %i.gcmsicon-more
                               #demo2-1-1-summary.row-fluid.collapse
                                 .span12.infowell.nominheight
@@ -152,7 +152,7 @@
                                           In this situation the entire slot and the [...] more button do the same thing. 
                                          
                                         .slotactions.pull-right.pull-right
-                                          %a.btn.btn-mini.halfopacity{"data-target" => "#demo2-3", "data-toggle" => "collapse"}
+                                          %a.btn.btn-mini{"data-target" => "#demo2-3", "data-toggle" => "collapse"}
                                             %i.gcmsicon-more
                                     .row-fluid#demo2-3.collapse
                                       .slotcontent
@@ -264,20 +264,20 @@
               
   .singleColumn
 
-    #productInfo.WidgetBox
-      
+    #productActions.WidgetBox
+      .WidgetBoxHeading
+        .WidgetTitle Product Actions
       .WidgetBoxContent.information
-        %label Actions
-        .toolbar-widget.well
+        .toolbar-widget
           .row-fluid
             .span2
-              %a.span12.btn.btn-info{"data-toggle" => "modal", :href => "#comingsoonModal"}
+              %a.span12.btn.btn-warning{"data-toggle" => "modal", :href => "#comingsoonModal"}
                 New
             .span5
-              %a.span12.btn.btn-info{"data-toggle" => "modal", :href => "#comingsoonModal"}
+              %a.span12.btn.btn-warning{"data-toggle" => "modal", :href => "#comingsoonModal"}
                 Request Audit
             .span5
-              %a.span12.btn.btn-info{"data-toggle" => "modal", :href => "#comingsoonModal"}
+              %a.span12.btn.btn-warning{"data-toggle" => "modal", :href => "#comingsoonModal"}
                 Relationship Map
 
     #productInfo.WidgetBox
@@ -315,7 +315,8 @@
               %h3.toggle{"data-target" => "#productAbout", "data-toggle" => "collapse"}
                 .expander
                 About
-                %a.btn.btn-blue.addbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"} Edit
+                %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                  %i.gcmsicon-edit-grey
               #productAbout.collapse
                 .row-fluid
                   .span12
@@ -326,34 +327,36 @@
                       %label Version
                       %input.span12{:disabled => "disabled", :placeholder => "1.0", :type => "text"}/
                     .span3
-                      %label Year
-                      %input.span12{:disabled => "disabled", :placeholder => "2012", :type => "text"}/
+                      %label Type
+                      %input.span12{:disabled => "disabled", :placeholder => "SaaS", :type => "text"}/
                     .span3
-                      %label Kind
-                      %input.span12{:disabled => "disabled", :placeholder => "---", :type => "text"}/
                 .row-fluid
                   .span12
-                    %label Full Title
-                    %input{:disabled => "disabled", :placeholder => "Sarbanes-Oxley Long Title", :style => "margin: 0px; width: 97%;", :type => "text"}/
-                .row-fluid
-                  .span12
-                    %label Type
-                    %input{:disabled => "disabled", :placeholder => "Regulation", :style => "margin: 0px; width: 97%;", :type => "text"}/
-                .row-fluid
-                  .span12
-                    %label Version
-                    %input{:disabled => "disabled", :placeholder => "1.2", :style => "margin: 0px; width: 97%;", :type => "text"}/
-                .row-fluid
-                  .span12
-                    %label Scope / Applicability of this Program
+                    %label Description
                     %textarea#textarea{:disabled => "disabled", :placeholder => "", :rows => "3", :style => "margin: 0px; width: 98%; height: 73px; "} PCI DDS applies whenever Cardholder account data and Authentication Data is Stored, Processed or Transmitted. Examples Include: For more See Page 7 of document. Using h6 makes the label caps.
+                .row-fluid
+                  .span12
+                    %label Direct Link
+                    %input.span12{:disabled => "disabled", :placeholder => " ", :type => "text"}/
+                .row-fluid
+                  .span12
+                    .span4
+                      %label Effective Date
+                      %input.span12{:disabled => "disabled", :placeholder => "", :type => "text"}/
+                    .span4
+                      %label Stop Date
+                      %input.span12{:disabled => "disabled", :placeholder => "", :type => "text"}/
+                    .span4
+                      %label Status
+                      %input.span12{:disabled => "disabled", :placeholder => "OK", :type => "text"}/
           %hr.hr-widget
           .row-fluid
             .span12
               %h3.toggle{"data-target" => "#productReferences", "data-toggle" => "collapse"}
                 .expander
                 References
-                %a.btn.btn-blue.addbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"} Edit
+                %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                  %i.gcmsicon-link
               %ul#productReferences.collapse
                 %li.controlSlot
                   %span.controls-group PDF
@@ -369,7 +372,8 @@
               %h3.toggle{"data-target" => "#productPeople", "data-toggle" => "collapse"}
                 .expander
                 People
-                %a.btn.btn-blue.addbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"} Edit
+                %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                  %i.gcmsicon-link
               %ul#productPeople.collapse
                 %li.controlSlot
                   %span.controls-group JRayburn@google.com
