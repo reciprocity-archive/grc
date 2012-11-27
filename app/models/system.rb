@@ -132,4 +132,8 @@ class System < ActiveRecord::Base
     end
     return { :state => res[0], :count => count, :bad => bad }
   end
+
+  def default_slug_prefix
+    is_biz_process? ? 'PROCESS' : 'SYSTEM'
+  end
 end

@@ -88,8 +88,13 @@ module SluggedModel
   end
 
 private
+
   def upcase_slug
     self.slug = slug.present? ? slug.upcase : nil
+  end
+
+  def default_slug_prefix
+    self.class.to_s
   end
 
   def generate_random_slug_if_needed
@@ -107,11 +112,12 @@ private
       if self.has_attribute?(:parent_id) && !self.parent.nil?
         new_slug += self.parent.slug + '-'
       end
-      new_slug += self.class.to_s + '-' + slug_suffix
+      new_slug += default_slug_prefix + '-' + slug_suffix
       self.slug = new_slug
     end
     true
   end
+
   def generate_human_slug_if_needed
     if @needs_slug
       self.without_versioning do
@@ -119,7 +125,7 @@ private
         if self.has_attribute?(:parent_id) && !self.parent.nil?
           new_slug += self.parent.slug + '-'
         end
-        new_slug += self.class.to_s + '-%04d' % id
+        new_slug += default_slug_prefix + '-%04d' % id
         self.slug = new_slug
 
         # HACK: Shouldn't recurse, but still a bit scary.
