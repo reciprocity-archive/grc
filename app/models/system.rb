@@ -6,7 +6,7 @@ class System < ActiveRecord::Base
   include AuthorizedModel
   include RelatedModel
 
-  attr_accessible :title, :slug, :description, :infrastructure, :is_biz_process, :type
+  attr_accessible :title, :slug, :description, :url, :version, :infrastructure, :is_biz_process, :type, :start_date, :stop_date
 
   # Many to many with Control
   has_many :system_controls, :dependent => :destroy
@@ -53,7 +53,7 @@ class System < ActiveRecord::Base
     sections.each do |section|
       edges.add(Edge.new(section, self, :section_implemented_by_system))
     end
-    
+
     controls.each do |control|
       edges.add(Edge.new(control, self, :control_implemented_by_system))
     end

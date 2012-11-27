@@ -169,10 +169,11 @@ class SystemsController < BaseObjectsController
     def system_params
       system_params = params[:system] || {}
       %w(type).each do |field|
-        value = system_params.delete(field + '_id')
-        if value.present?
-          system_params[field] = Option.find(value)
-        end
+        parse_option_param(system_params, field)
+      end
+
+      %w(start_date stop_date).each do |field|
+        parse_date_param(system_params, field)
       end
 
       # Fixup legacy boolean

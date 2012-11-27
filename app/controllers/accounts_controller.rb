@@ -22,8 +22,9 @@ class AccountsController < BaseObjectsController
 
   private
 
-    def update_object
-      role = object_params.delete(:role)
+    def update_object(account_params=nil)
+      account_params = object_params
+      role = account_params.delete(:role)
       object.role = role if role.present?
 
       super

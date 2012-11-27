@@ -106,7 +106,8 @@ module FormHelper
   end
 
   def parse_date_param(params, field)
-    if params[field].present? && params[field].match(/\d{1,2}\/\d{1,2}\/\d{4}/)
+    if params[field].present? && params[field].respond_to?(:match) &&
+        params[field].match(/\d{1,2}\/\d{1,2}\/\d{4}/)
       params[field] = Date.strptime(params[field], '%m/%d/%Y')
     end
   end

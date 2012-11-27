@@ -310,8 +310,8 @@ class BaseObjectsController < ApplicationController
       end
     end
 
-    def update_object
-      object.assign_attributes(object_params)
+    def update_object(params=nil)
+      object.assign_attributes(params || object_params)
     end
 
     def save_object
@@ -319,8 +319,9 @@ class BaseObjectsController < ApplicationController
     end
 
     def update_and_save_object
-      update_object
-      object.authored_update(current_user, object_params)
+      params = object_params
+      update_object(params)
+      object.authored_update(current_user, params)
     end
 
     def delete_model_stats

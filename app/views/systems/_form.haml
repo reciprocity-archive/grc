@@ -1,52 +1,34 @@
 -content_for :modal_title do
   -if f.object.new_record?
-    Create a new system or business process
+    Create a new #{f.object.is_biz_process? ? 'business process' : 'system'}
   -else
-    Edit system or business process
+    Edit #{f.object.is_biz_process? ? 'business process' : 'system'}
 
 -if !f.object.new_record?
   -content_for :modal_delete_path, delete_flow_system_path(f.object)
 
 .row-fluid
-  .span2{ :class => error_class(f, :slug) }
-    =f.label :slug, "Code (autofill)"
-    =f.text_field :slug, :class => 'span12', :placeholder => 'SYSTEM-XXXX'
-    =error_messages_inline(f, :slug)
-
-  .span2.disabled{ :class => error_class(f, :version) }
-    =f.label :version
-    =f.text_field :version, :class => 'input-supermini', :disabled => true
-    =error_messages_inline(f, :version)
-
-  .span3
-
-  .span2{ :class => error_class(f, :is_biz_process) }
-    =f.label 'System or Process'
-    %select.span12{ :name => 'system[is_biz_process]' }
-      %option{ :value => '0', :selected => f.object.is_biz_process || 'selected' } System
-      %option{ :value => '1', :selected => f.object.is_biz_process && 'selected' } Biz Process
-    =error_messages_inline(f, :is_biz_process)
-
-  .span3{ :class => error_class(f, :type) }
-    =f.label 'Type'
-    %select.span12{ :name => 'system[type_id]' }
-      %option(value='') Select Option
-      -Option.options_for(:system_type).each do |o|
-        %option{ :value => o.id, :selected => (o.id == f.object.type_id) }=o.title
-    =error_messages_inline(f, :type)
+  =wrapped_text_field f, :span6, :title, :placeholder => 'Enter title'
+  .span6
+    .row-fluid
+      =wrapped_text_field f, :span6, :slug, :label_name => 'Code (autofill)', :placeholder => 'SYSTEM-XXXX'
+      =wrapped_text_field f, :span6, :version, :placeholder => '1.1.1'
+.row-fluid
+  =wrapped_text_area f, :span6, :description, :class => 'double', :placeholder => 'Enter description here'
+  .span6
+    .row-fluid
+      =wrapped_date_field f, :span6, :start_date, :class => 'date', :label_name => 'Effective Date', :placeholder => 'MM/DD/YYYY'
+      =wrapped_date_field f, :span6, :stop_date, :class => 'date', :label_name => 'Stop Date', :placeholder => 'MM/DD/YYYY'
+    .row-fluid
+      .span6
+        =f.label 'Type'
+        %select.span12{ :name => 'system[is_biz_process]' }
+          %option{ :value => '0', :selected => f.object.is_biz_process || 'selected' } System
+          %option{ :value => '1', :selected => f.object.is_biz_process && 'selected' } Business Process
+        =error_messages_inline(f, :is_biz_process)
+      =wrapped_select f, :span6, :type_id, Option.options_for(:system_type).map { |o| [o.title, o.id] }, :selected => (f.object.respond_to?(:type_id) ? f.object.type_id : nil), :include_blank => true, :label_name => 'Type'
 
 .row-fluid
-  .span12{ :class => error_class(f, :title) }
-    =f.label :title
-    =f.text_field :title, :class => 'span12'
-    =error_messages_inline(f, :title)
+  =wrapped_text_field f, :span6, :url, :label_name => 'Direct URL (optional)', :placeholder => 'http://www.example.com/'
 
-.row-fluid
-  .span12
-    =f.label :description, "Description"
-.row-fluid
-  .span12.well{ :class => error_class(f, :description) }
-    =f.text_area :description
-.row-fluid
-  .span12
-    =error_messages_inline(f, :description)
+%br

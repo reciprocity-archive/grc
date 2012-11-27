@@ -4,7 +4,7 @@
 -content_for :widget_help, 'system_info'
 
 -content_for :widget_buttons do
-  %a.widgetbtn{:href => edit_flow_system_path(system), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :title => 'Edit System'}
+  %a.widgetbtn{:href => edit_flow_system_path(system), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide', :title => 'Edit System'}
     %i.gcmsicon-edit-grey
 
 .information

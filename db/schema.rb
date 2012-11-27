@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121115004659) do
+ActiveRecord::Schema.define(:version => 20121120005746) do
 
   create_table "accounts", :force => true do |t|
     t.string   "username"
@@ -332,6 +332,10 @@ ActiveRecord::Schema.define(:version => 20121115004659) do
     t.datetime "updated_at",                        :null => false
     t.boolean  "is_biz_process", :default => false
     t.integer  "type_id"
+    t.datetime "start_date"
+    t.datetime "stop_date"
+    t.string   "url"
+    t.string   "version"
   end
 
   add_index "systems", ["slug"], :name => "index_systems_on_slug", :unique => true
