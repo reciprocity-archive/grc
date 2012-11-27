@@ -20,6 +20,10 @@
   .span3.bs-docs-sidebar
     %ul.nav.nav-list.bs-docs-sidenav.affix
       %li.active
+        %a{:href => "#general"}
+          %i.icon-chevron-right
+          General
+      %li
         %a{:href => "#headers"}
           %i.icon-chevron-right
           Headers
@@ -28,7 +32,7 @@
           %i.icon-chevron-right
           Icons
       %li
-        %a{:href => "#buttonDropdowns"}
+        %a{:href => "#buttons"}
           %i.icon-chevron-right
           Buttons
       %li
@@ -36,21 +40,13 @@
           %i.icon-chevron-right
           Tabs
       %li
-        %a{:href => "#navbar"}
+        %a{:href => "#subareas"}
           %i.icon-chevron-right
-          Widget
+          Sub Areas
       %li
-        %a{:href => "#breadcrumbs"}
+        %a{:href => "#modals"}
           %i.icon-chevron-right
           Modals
-      %li
-        %a{:href => "#pagination"}
-          %i.icon-chevron-right
-          Pagination
-      %li
-        %a{:href => "#labels-badges"}
-          %i.icon-chevron-right
-          Labels and badges
       %li
         %a{:href => "#typography"}
           %i.icon-chevron-right
@@ -76,25 +72,56 @@
           %i.icon-chevron-right
           Misc
   .span9
+    #general
+      .WidgetBox
+        .WidgetBoxHeading
+          .WidgetTitle.doublewidth General
+        .WidgetBoxContent
+
+          This style guide is a set of standards for the design and programming of gGRC. 
+          %br
+          %br
+          The goal is uniformity in style and formatting as well as elegant syntax across the application. However, this is a work in progress and not currently for release to the public. Additionally, this page is using the actual JS/HTML/CSS of the git repository - so it can be used to compare and contrast versus the life app. 
+
+          %br
+          %br
+          If a subject is not covered and should be, please submit it to 
+          %a{:href => "mailto:geffen@google.com"} 
+            geffen@google.com
+
+          %br
+          %br
+            Thanks!
+
+          %h3 Margins & Padding
+          .well
+            %h5 Widget Margins
+            15 pixels between each widget
+            %h5 Content Padding
+            5 pixels on every side around content (once)
+          .warningwell
+            Some implemented pages uses hard coded values and therefore look inconsistent. We should update to a sass variable and use across the board.
+
+
     #headers
       .WidgetBox
         .WidgetBoxHeading
           .WidgetTitle.doublewidth Headers
         .WidgetBoxContent
           #pageTitle Header 1 - This is the Page Title. Bold, 28px, #666. 
-          %h1.highlighted Hightlighted - This is the Page Type. Bold, 28px, #0D868C (highlighted)
+          %h1.highlighted This is the Page Type. Bold, 28px, #0D868C (highlighted)
           %h2 Header 2
           %h3 Header 3
           %h4 Header 4
           %h5 Header 5
 
           .infowell #pageTitle
-          .well Most h-classes are using child-selectors and therefore the above is overwritten. Pagetype uses an h1 and should be converted to #pagetype or .pagetype
+          .warningwell Highlighted appears to actually enlarge text! FIX! Most h-classes are using child-selectors and therefore the above is overwritten. Pagetype uses an h1 and should be converted to #pagetype or .pagetype
 
     #buttons
       .WidgetBox
         .WidgetBoxHeading
-          .WidgetTitle.doublewidth Buttons
+          .WidgetTitle.doublewidth Text Buttons
         .WidgetBoxContent
           .well
             %h5 Misc Buttons
@@ -122,27 +149,53 @@
                 %a#actionButton.btn.btn-large.btn-success.btn-primary{:href => "#", "data-dismiss" => "modal"} Save
 
           .infowell .btn .btn-color addbtn vs minibtn
-          .well Addbtn is depreciated for minibtn in almost every case. Regmapper needs to be reviewed before addbtn can be removed from css as it was created for this page originally.
-
+          .well Addbtn is depreciated for minibtn in almost every case. 
+          .warningwell  Regmapper needs to be reviewed before addbtn can be removed from css as it was created for this page originally.
+          
 
 
     #icons
       .WidgetBox
         .WidgetBoxHeading
-          .WidgetTitle.doublewidth Icons
+          .WidgetTitle.doublewidth Icons & Image Buttons
         .WidgetBoxContent
           %h3 Widget Icons
-          %ul
+
+          .well Icons are created 32x32 pixels and sized down to 16x16 in the UI. This allows retina and higher-resolution mobile devices to look better.
+
+          .warningwell I am unhappy with the alignment of text after these icons. Its inconsistent, sometimes high sometimes low. While none of them technically have text aligned with them in the app I would like to standardize this.
+          %ul.captionbox
             %li
-              %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+              %a.widgetbtn{"data-toggle" => "modal", :href => "#"}
                 %i.gcmsicon-questionmark-grey
+              Help button - should be on every widget and opens a modal with an edit (Crowdsourcing help)
+            %li
+              %a.widgetbtn{"data-toggle" => "modal", :href => "#"}
+                %i.gcmsicon-edit-grey
+              Edit button - This is only on widgets that do not have subareas with edit buttons. Possibly fully obsolete.
+            %li
+              %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#"}
+                %i.gcmsicon-enlarge-grey
+              Show/Hide button - Shows widget content or hides the widget (animated to a single header bar unless content flagged to always show)
+            %li
+              %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
+              While not an icon or button listed here for completion. Should always be present for filterable widgets.
+          .infowell
+            a.widgetbtn > i.gcmsicon-iconname
+          .warningwell
+            Because of non-opensource icons in twitter bootstrap, icons have had a few revisions to make them honest. However, this has left a lot of messy naming conventions in the css. All icons should be simplified to icon-name soon.
           -#%a.widgetbtn{"data-toggle" 
           %h3 Content Icons
-          %ul
+          %ul.captionbox
             %li
-              %a.btn.btn-mini.halfopacity{"data-toggle" => "modal", :href => "#comingsoonModal"}
+              %a.btn.btn-mini.btn-blue{"data-toggle" => "modal", :href => "#comingsoonModal"}
                 %i.gcmsicon-more
-              More Button - opens up description and additional action buttons for an item (slot)
+              More Button - opens up a description and shows additional action buttons for a content item (slot). Color is in flux.
+          .infowell
+            a.btn.btn-mini.btn-blue
+          %h3 Content Action Icons
+          %ul.captionbox
+            
             %li
               %a.btn.btn-mini.halfopacity{"data-toggle" => "modal", :href => "#comingsoonModal"}
                 %i.gcmsicon-edit-grey
@@ -155,11 +208,11 @@
               %a.btn.btn-mini.halfopacity{"data-toggle" => "modal", :href => "#comingsoonModal"}
                 %i.gcmsicon-arrowright-black
               Go Button - Opens up this object's page.
-
+          .infowell
+            a.btn.btn-mini.halfopacity > i.gcmsicon-iconname
+          .warningwell
+            These use .halfopacity - a css style that lowers the opacity and raises it on hover. 
           
-          .infowell .btn .btn-color addbtn vs minibtn
-          .well Icons are created 32x32 pixels and sized down to 16x16 in the UI. This allows retina and higher-resolution mobile devices to look better.
-
 
 
     #tabs.WidgetBox.fullHeight.doubleWide
@@ -175,13 +228,13 @@
         
         %ul#quicklinks.nav.nav-tabs
           %li.active
-            %a{"data-toggle" => "tab", :href => "#controls-sysbizproc"} Sys/Biz Processes
+            %a{"data-toggle" => "tab", :href => "#controls-sysbizproc"} Tab 1
           %li
-            %a{"data-toggle" => "tab", :href => "#controls-linked"} Linked Controls
+            %a{"data-toggle" => "tab", :href => "#controls-linked"} Tab 2
           %li
-            %a{"data-toggle" => "tab", :href => "#controls-progsec"} Program Sections
+            %a{"data-toggle" => "tab", :href => "#controls-progsec"} Tab 3
           %li
-            %a{"data-toggle" => "tab", :href => "#controls-risks"} Risks
+            %a{"data-toggle" => "tab", :href => "#controls-risks"} Tab 4
 
         
         .tab-content
@@ -191,7 +244,7 @@
               .span12.captionbox
                 %a.btn.btn-blue.addbtn.pull-right Edit List
                 %h4
-                  Systems or Processes that implement this Control
+                  Currently loads in Sys Biz Proc
 
             #sampleprocesses
           .tab-pane#controls-linked
@@ -200,7 +253,7 @@
               .span12.captionbox
                 %a.btn.btn-blue.addbtn.pull-right Edit List
                 %h4
-                  Other Controls linked to this Control
+                  Currently loads in Controls
             #samplelinkedcontrols
           .tab-pane#controls-progsec
             -# PROGRAM SECTIONS
@@ -208,7 +261,7 @@
               .span12.captionbox
                 %a.btn.btn-blue.addbtn.pull-right Edit List
                 %h4
-                  Program or Policy Sections that mandate this Control
+                  Currently loads in Sys Biz Proc
                 
             #sampleprogramsections
           .tab-pane#controls-risks
@@ -217,12 +270,11 @@
               .span12.captionbox
                 %a.btn.btn-blue.addbtn.pull-right Edit List
                 %h4
-                  Risks mitigated by this Control
+                  Currently loads in Risks
                 
             #samplerisks
     
-
-    #productInfo.WidgetBox
+    #progressbar.WidgetBox
       .WidgetBoxHeading
         .WidgetTitle Sub areas
         %nav
@@ -234,7 +286,7 @@
             %i.gcmsicon-enlarge-grey
       .WidgetBoxContent.information.collapse.in
         .well 
-          %label#progressbar
+          %label
             Progress Bar
             .pull-right 
               %span.statustextgreen 35 
@@ -246,9 +298,46 @@
             .bar.progressbar-success{"data-percentage" => "35", :style => "float: left; width: 0%; "}
             .bar.progressbar-danger{"data-percentage" => "10", :style => "float: right; width: 0%; "}
             .bar.progressbar-warning{"data-percentage" => "55", :style => "float: right; width: 0%; "}
+        .infowell
+          Progress bars are used throughout the site to show status in a quick look. They are animateable and can contain tooltiups to explain what each color area means.
+        .warningwell
+          NEEDS UPDATE The design decision on tooltips, what is shown, when/where/why, etc - is vague. Already the app has a few different versions.
         -#.toolbar-widget.well
           %a.btn.btn-warning{"data-toggle" => "modal", :href => "#comingsoonModal"}
             New Version
+
+
+    #typography.WidgetBox
+      .WidgetBoxHeading
+        .WidgetTitle Typography
+        %nav
+      .WidgetBoxContent.information.collapse.in
+        %h3 PT Sans is the web-font used
+        PT Sans
+        SIL Open Font License, 1.1
+        .infowell
+          %a{:href => "http://www.google.com/webfonts/specimen/PT+Sans"}
+            http://www.google.com/webfonts/specimen/PT+Sans
+
+        .warningwell
+          NEEDS UPDATE I see that a number of pages load in the webfont directly from Google. While this works there is some browser delay and it should be local.
+        -#.toolbar-widget.well
+          %a.btn.btn-warning{"data-toggle" => "modal", :href => "#comingsoonModal"}
+            New Version
+
+
+    #subareas.WidgetBox
+      .WidgetBoxHeading
+        .WidgetTitle Sub areas
+        %nav
+          %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+            %i.gcmsicon-questionmark-grey
+          -#%a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+            %i.gcmsicon-edit-grey
+          %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#productInfoContent"}
+            %i.gcmsicon-enlarge-grey
+      .WidgetBoxContent.information.collapse.in
+        
         
         #productInfoContent.collapse.in
           %hr.hr-widget
@@ -293,7 +382,16 @@
           %hr.hr-widget
 
 
-      / end of widget
-    / end of span
+
+    #modals
+
+    #typography
+
+    #thumbnails
+
+    #media
+
+    #misc
+
     =render :partial => 'design/widgets/impactscope'
     / end of span
