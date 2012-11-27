@@ -340,9 +340,10 @@ width: 97px;
   overflow-x:hidden;
 
   border-color: #97abc2;
+  /* removed on 11/24 to delete on 12/24
   .btn {
     line-height:18px;
-  }
+  } */
 }
 
 .accordion-group {
@@ -563,11 +564,9 @@ width: 97px;
   }
 
   .btn {
+    /* Necessary for slot btn alignment */
     margin-top: -4px;
-    //TODO: needed?
-    margin-left: 6px;
-    //TODO: needed?
-    margin-right: 6px;
+    margin-left:10px;
   }
 
   .slottitle {
@@ -984,6 +983,12 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
   color: $white !important;
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.29);
   -webkit-font-smoothing: antialiased;
+}
+
+.btn-mini {
+  padding: 2px 2px;
+  font-size: 11px;
+  line-height: 14px;
 }
 
 /*  GCMS Welcome */
