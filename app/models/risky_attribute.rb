@@ -1,5 +1,4 @@
 class RiskyAttribute < ActiveRecord::Base
-  # attr_accessible :title, :body
   include AuthoredModel
   include SluggedModel
   include SearchableModel
@@ -23,5 +22,9 @@ class RiskyAttribute < ActiveRecord::Base
 
   @valid_relationships = [
   ]
+
+  def display_name
+    slug
+  end
 
 end
