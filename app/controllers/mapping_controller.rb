@@ -5,7 +5,7 @@ class MappingController < ApplicationController
   respond_to :html, :json
   skip_after_filter :flash_to_headers, :only => [:buttons]
 
-  cache_sweeper :section_sweeper, :only => [:map_rcontrol, :map_ccontrol]
+  cache_sweeper :section_sweeper, :only => [:map_rcontrol, :map_ccontrol, :update]
   cache_sweeper :control_sweeper, :only => [:map_rcontrol, :map_ccontrol]
 
   def show
