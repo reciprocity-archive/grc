@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121120005746) do
+ActiveRecord::Schema.define(:version => 20121128072726) do
 
   create_table "accounts", :force => true do |t|
     t.string   "username"
@@ -274,6 +274,18 @@ ActiveRecord::Schema.define(:version => 20121120005746) do
   add_index "relationships", ["relationship_type_id"], :name => "index_relationships_on_relationship_type_id"
   add_index "relationships", ["source_id"], :name => "index_relationships_on_source_id"
   add_index "relationships", ["source_type"], :name => "index_relationships_on_source_type"
+
+  create_table "risky_attributes", :force => true do |t|
+    t.string   "slug"
+    t.string   "title"
+    t.text     "description"
+    t.string   "url"
+    t.integer  "modified_by_id"
+    t.datetime "start_date"
+    t.datetime "stop_date"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
 
   create_table "sections", :force => true do |t|
     t.string   "title",                             :null => false
