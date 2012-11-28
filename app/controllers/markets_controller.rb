@@ -3,7 +3,7 @@
 # License:: Apache 2.0
 
 # Handle markets
-class MarketsController < BaseObjectsController
+class MarketsController < BusinessObjectsController
 
   access_control :acl do
     # FIXME: Implement real authorization

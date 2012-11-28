@@ -1,0 +1,3 @@
+class BusinessObjectsController < BaseObjectsController
+
+end

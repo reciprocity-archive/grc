@@ -29,13 +29,13 @@
                 :instance => instance}
 
     .doubleWide.fullHeight
-      =render :partial => "#{controller_name}/main",
+      =render :partial => "main",
               :layout => 'layouts/widget_box',
               :locals => { model_name.to_sym => instance }
 
   .singleColumn
     .singleWide.fullHeight
-      =render :partial => "#{controller_name}/info",
+      =render :partial => "info",
               :layout => 'layouts/widget_box',
               :locals => { model_name.to_sym => instance }
       =render :partial => 'shared/related',

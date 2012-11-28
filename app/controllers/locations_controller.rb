@@ -3,7 +3,7 @@
 # License:: Apache 2.0
 
 # Handle locations
-class LocationsController < BaseObjectsController
+class LocationsController < BusinessObjectsController
 
   access_control :acl do
     # FIXME: Implement real authorization

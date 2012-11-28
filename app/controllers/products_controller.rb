@@ -3,7 +3,7 @@
 # License:: Apache 2.0
 
 # Handle Products
-class ProductsController < BaseObjectsController
+class ProductsController < BusinessObjectsController
 
   access_control :acl do
     # FIXME: Implement real authorization

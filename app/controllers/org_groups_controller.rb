@@ -3,7 +3,7 @@
 # License:: Apache 2.0
 
 # Handle Org Groups
-class OrgGroupsController < BaseObjectsController
+class OrgGroupsController < BusinessObjectsController
 
   access_control :acl do
     # FIXME: Implement real authorization
