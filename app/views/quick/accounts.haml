@@ -8,4 +8,4 @@
         %a.widgetbtn.fltrt{ :'data-form-target' => "refresh", :'data-modal-reset' => "reset", :'data-toggle' => "modal-ajax-form", :href => edit_flow_account_path(account), :'data-target' => "#ajax-modal-people-3-edit" }
           %i.gcmsicon-edit-grey
         =link_to '#' do
-          =account.name.presence || account.email.presence
+          =account.display_name
