@@ -67,6 +67,9 @@ class ProgramsController < BaseObjectsController
 
   def export_controls
     respond_to do |format|
+      format.html do
+        render :layout => 'export_modal', :locals => { :program => @program }
+      end
       format.csv do
         self.response.headers['Content-Type'] = 'text/csv'
         headers['Content-Disposition'] = "attachment; filename=\"#{@program.slug}-controls.csv\""
@@ -88,6 +91,9 @@ class ProgramsController < BaseObjectsController
 
   def export
     respond_to do |format|
+      format.html do
+        render :layout => 'export_modal', :locals => { :program => @program }
+      end
       format.csv do
         self.response.headers['Content-Type'] = 'text/csv'
         headers['Content-Disposition'] = "attachment; filename=\"#{@program.slug}.csv\""

@@ -39,7 +39,7 @@
             Import Systems
         %li.divider
         %li
-          %a{ :href => export_flow_systems_path(:format => :csv), :target => '_blank' }
+          %a{ :href => export_flow_systems_path(:format => :html), :'data-toggle' => 'modal-ajax' }
             Export Systems
   .singleColumn
     -if has_feature? :BETA

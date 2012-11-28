@@ -53,6 +53,9 @@ class SystemsController < BaseObjectsController
 
   def export
     respond_to do |format|
+      format.html do
+        render :layout => 'export_modal'
+      end
       format.csv do
         self.response.headers['Content-Type'] = 'text/csv'
         headers['Content-Disposition'] = "attachment; filename=\"SYSTEMS.csv\""
