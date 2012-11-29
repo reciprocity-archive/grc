@@ -52,8 +52,12 @@ describe SystemsController do
       assigns(:creates).should == [ 'SYS2' ]
       assigns(:updates).should == [ 'SYS1' ]
       assigns(:errors).should == {}
-      System.find_by_slug('SYS1').title.should == 'System 1'
-      System.find_by_slug('SYS1').infrastructure.should be_true
+      sys1 = System.find_by_slug('SYS1')
+      sys1.title.should == 'System 1'
+      sys1.infrastructure.should be_true
+      sys1.object_people.size.should == 1
+      sys1.object_people[0].role.should == 'engineer'
+      sys1.object_people[0].person.email.should == 'a@t.com'
       System.find_by_slug('SYS2').infrastructure.should be_false
     end
   end

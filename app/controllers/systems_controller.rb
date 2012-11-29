@@ -11,7 +11,7 @@ end
 class SystemsController < BaseObjectsController
   include ImportHelper
 
-  SYSTEM_MAP = Hash[*%w(System\ Code slug Title title Description description Infrastructure infrastructure Owner owner Created created_at Updated updated_at)]
+  SYSTEM_MAP = Hash[*%w(System\ Code slug Title title Description description Infrastructure infrastructure Owner owner Engineering\ Contact engineer Executive\ Owner executive Created created_at Updated updated_at)]
 
   access_control :acl do
     allow :superuser
@@ -62,7 +62,19 @@ class SystemsController < BaseObjectsController
         self.response_body = Enumerator.new do |out|
           out << CSV.generate_line(SYSTEM_MAP.keys)
           System.all.each do |s|
-            values = SYSTEM_MAP.keys.map { |key| s.send(SYSTEM_MAP[key]) }
+            values = SYSTEM_MAP.keys.map do |key|
+              field = SYSTEM_MAP[key]
+              case field
+              when 'engineer'
+                object_person = s.object_people.detect {|x| x.role == 'engineer'}
+                object_person ? object_person.person.email : ''
+              when 'executive'
+                object_person = s.object_people.detect {|x| x.role == 'executive'}
+                object_person ? object_person.person.email : ''
+              else
+                s.send(field)
+              end
+            end
             out << CSV.generate_line(values)
           end
         end
@@ -110,9 +122,10 @@ class SystemsController < BaseObjectsController
       attrs.delete(nil)
       attrs.delete('created_at')
       attrs.delete('updated_at')
-      if attrs['owner'].present?
-        attrs['owner'] = Person.find_or_create_by_email!({:email => attrs['owner']})
-      end
+
+      handle_import_person(attrs, 'owner', import[:warnings][i])
+      handle_import_person(attrs, 'engineer', import[:warnings][i])
+      handle_import_person(attrs, 'executive', import[:warnings][i])
 
       slug = attrs['slug']
 
@@ -124,13 +137,17 @@ class SystemsController < BaseObjectsController
         system = System.find_by_slug(slug)
       end
 
-      if system
-        system.assign_attributes(attrs, :without_protection => true)
-        import[:updates] << slug
-      else
-        system = System.new
-        system.assign_attributes(attrs, :without_protection => true)
+      system ||= System.new
+
+      handle_import_object_person(system, attrs, 'engineer')
+      handle_import_object_person(system, attrs, 'executive')
+
+      system.assign_attributes(attrs, :without_protection => true)
+
+      if system.new_record?
         import[:creates] << slug
+      else
+        import[:updates] << slug
       end
       @systems << system
       import[:errors][i] = system.errors unless system.valid?

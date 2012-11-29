@@ -40,4 +40,28 @@ module ImportHelper
   def render_import_error(message=nil)
     render '/error/import_error', :layout => false, :locals => { :message => message }
   end
+
+  def handle_import_person(attrs, key, warning)
+    if attrs[key].present?
+      if attrs[key].include?('@')
+        attrs[key] = Person.find_or_create_by_email!({:email => attrs[key]})
+      else
+        warning[key.to_sym] << "invalid email"
+      end
+    end
+  end
+
+  def handle_import_object_person(object, attrs, key)
+    person = attrs.delete(key)
+    existing = object.object_people.detect {|x| x.role == key}
+
+    if existing && existing.person != person
+      existing.destroy
+    end
+
+    if person
+      object.object_people.new({:role => key, :person => person}, :without_protection => true)
+    end
+  end
+
 end

@@ -16,7 +16,7 @@ class ProgramsController < BaseObjectsController
 
   SECTION_MAP = Hash[*%w(Section\ Code slug Section\ Title title Section\ Description description Section\ Notes notes Created created_at Updated updated_at)]
 
-  CONTROL_MAP = Hash[*%w(Control\ Code slug Title title Description description Type type Kind kind Means means Version version Start start_date Stop stop_date URL url Documentation documentation_description Verify-Frequency verify_frequency Created created_at Updated updated_at)]
+  CONTROL_MAP = Hash[*%w(Control\ Code slug Title title Description description Type type Kind kind Means means Version version Start start_date Stop stop_date URL url Documentation documentation_description Verify-Frequency verify_frequency Executive\ Owner executive Created created_at Updated updated_at)]
 
   # FIXME: Decide if the :section, controls, etc.
   # methods should be moved, and what access controls they
@@ -81,7 +81,16 @@ class ProgramsController < BaseObjectsController
           out << CSV.generate_line([])
           out << CSV.generate_line(CONTROL_MAP.keys)
           @program.controls.each do |s|
-            values = CONTROL_MAP.keys.map { |key| s.send(CONTROL_MAP[key]) }
+            values = CONTROL_MAP.keys.map do |key|
+              field = CONTROL_MAP[key]
+              case field
+              when 'executive'
+                object_person = s.object_people.detect {|x| x.role == 'executive'}
+                object_person ? object_person.person.email : ''
+              else
+                s.send(field)
+              end
+            end
             out << CSV.generate_line(values)
           end
         end
@@ -204,6 +213,8 @@ class ProgramsController < BaseObjectsController
       attrs.delete('updated_at')
       attrs.delete('type')
 
+      handle_import_person(attrs, 'executive', import[:warnings][i])
+
       handle_option(attrs, :kind, import[:messages], :control_kind)
       handle_option(attrs, :means, import[:messages], :control_means)
       handle_option(attrs, :verify_frequency, import[:messages])
@@ -218,14 +229,17 @@ class ProgramsController < BaseObjectsController
         control = Control.find_by_slug(slug)
       end
 
-      if control
-        control.assign_attributes(attrs, :without_protection => true)
-        import[:updates] << slug
-      else
-        control = Control.new
-        control.assign_attributes(attrs, :without_protection => true)
+      control ||= Control.new
+
+      handle_import_object_person(control, attrs, 'executive')
+
+      control.assign_attributes(attrs, :without_protection => true)
+
+      if control.new_record?
         control.program = @program
         import[:creates] << slug
+      else
+        import[:updates] << slug
       end
       @controls << control
       import[:errors][i] = control.errors unless control.valid?
