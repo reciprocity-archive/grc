@@ -77,7 +77,9 @@ class Program < ActiveRecord::Base
   end
 
   def assign_company_boolean_from_program_kind
-    self.company = !(self.kind && self.kind.title == 'Regulation')
+    if !changed_attributes.include?('company')
+      self.company = !(self.kind && self.kind.title == 'Regulation')
+    end
     true
   end
 end

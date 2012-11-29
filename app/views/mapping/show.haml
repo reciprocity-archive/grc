@@ -26,7 +26,7 @@
     .singleWide.halfHeight#rcontrol_list
       =render :partial => 'control_list',
               :layout => 'layouts/widget_box',
-              :locals => { :controls => @rcontrols, :title_prefix => 'Reg', :control_type => 'regulation' }
+              :locals => { :controls => @rcontrols, :title_prefix => 'Reg', :program => @program, :control_type => 'regulation' }
 
     .singleWide.maxhalfHeight
       =render :partial => 'selected_control',
@@ -37,7 +37,7 @@
     .singleWide.halfHeight#ccontrol_list
       =render :partial => 'control_list',
               :layout => 'layouts/widget_box',
-              :locals => { :controls => @ccontrols, :title_prefix => 'Company', :control_type => 'company' }
+              :locals => { :controls => @ccontrols, :title_prefix => 'Company', :program => @program, :control_type => 'company' }
 
     .singleWide.maxhalfHeight
       =render :partial => 'selected_control',
@@ -51,35 +51,3 @@
   function update_map_buttons() {
     update_map_buttons_with_path('#{mapping_buttons_path(:format => "json")}');
   }
-
-#create-rcontrol-modal.modal.hide.fade
-  -control = Control.new(:program => @program)
-  =form_for control, :url => mapping_create_rcontrol_path, :method => :post, :remote => true, :html => {:class => :form} do |f|
-    .modal-header
-      %a.close{"data-dismiss" => "modal"} x
-      %h1 Create a new regulation control
-    .modal-body
-      =render :partial => 'controls/form', :locals  => { :f => f, :create_reg_control => true }
-    .modal-footer
-      .row-fluid
-        %nav.fltlft.txtlft.span3
-          =f.submit pat(:cancel), :type => 'reset', :class => 'btn btn-large btn-info'
-        %nav.fltrt.txtrt.span3  
-          =f.submit pat(:save), :class => 'btn btn-large btn-success'
-
-
-
-#create-ccontrol-modal.modal.hide.fade
-  -control = Control.new
-  =form_for control, :url => mapping_create_ccontrol_path, :method => :post, :remote => true, :html => {:class => :form} do |f|
-    .modal-header
-      %a.close{"data-dismiss" => "modal"} x
-      %h1 Create a new company control
-    .modal-body
-      =render :partial => 'controls/form', :locals  => { :f => f, :create_company_control => true }
-    .modal-footer
-      .row-fluid
-        %nav.fltlft.txtlft.span3
-          =f.submit pat(:cancel), :type => 'reset', :class => 'btn btn-large btn-info'
-        %nav.fltrt.txtrt.span3  
-          =f.submit pat(:save), :class => 'btn btn-large btn-success'

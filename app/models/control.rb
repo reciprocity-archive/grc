@@ -46,7 +46,7 @@ class Control < ActiveRecord::Base
 
   is_versioned_ext
 
-  validates :title, :program,
+  validates :title, :program, :program_id,
     :presence => { :message => "needs a value" }
 
   validate :slug do
