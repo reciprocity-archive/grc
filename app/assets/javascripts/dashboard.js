@@ -321,11 +321,25 @@ function clear_selection(el, keep_search) {
   update_map_buttons();
 }
 
+// This is only used by import to redirect on successful import
+// - this cannot use other response headers because it is proxied through
+//   an iframe to achieve AJAX file upload (using remoteipart)
 jQuery(function($) {
-  $('body').on('ajax:success', 'form[data-remote][data-update-target]', function(e, data, status, xhr) {
-    $($(this).data('update-target')).html(data)
+  $('body').on('ajax:success', 'form.import', function(e, data, status, xhr) {
+    if (xhr.getResponseHeader('Content-Type') == 'application/json') {
+      window.location.assign($.parseJSON(data).location);
+    }
   });
 });
+
+jQuery(function($) {
+  $('body').on('ajax:success', 'form[data-remote][data-update-target]', function(e, data, status, xhr) {
+    if (xhr.getResponseHeader('Content-Type') == 'text/html') {
+      $($(this).data('update-target')).html(data);
+    }
+  });
+});
+
 
 jQuery(function($) {
   $('body').on('ajax:success', '#helpedit form', function(e, data, status, xhr) {
