@@ -1,5 +1,5 @@
 /*!
- * GCMS v.0234
+ * GCMS v.112012
  *
  * Early CSS work by Joseph Van Geffen, using Twitter Bootstrap
  */
@@ -453,6 +453,26 @@ width: 97px;
   }
 }
 
+.doubleslot {
+  border: 1px solid $borderDefault;
+  display:inline-block;  
+  float:left;
+  height:38px;
+  line-height:14px;
+  margin-top: 2px;
+  padding: 4px 5px 5px 5px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  @include box-sizing(border-box);
+  .controls-subgroup {
+      color: black;
+      font-size: 12px;
+      line-height: 12px;
+      margin-bottom:4px;
+    }
+}
+
 .slot {
   border: 1px solid $borderDefault;
   display:inline-block;  
@@ -465,67 +485,48 @@ width: 97px;
   white-space: nowrap;
   text-overflow: ellipsis;
   @include box-sizing(border-box);
+
+  background: $white; /* Old browsers */
+  @include background-image(linear-gradient(top,  $white 0%, #eef4ed 70%, #edebe6 100%, #f6f6f6 100%));
+
   &:hover {
     cursor: pointer;
     text-decoration:none;
-  }
-  &.subsystemslot {
+    background: #eeeeee; /* Old browsers */
+    border: 1px solid $borderDefaultHover;
+    @include background-image(linear-gradient(top,  #eeeeee 0%, #f1f1f1 50%, #e1e1e1 100%, #f6f6f6 100%));
+    }
+  &.systemslot {
     background-color: #fffbe9; // Old browsers
     @include filter-gradient(#fffbe9, #f9f8cf, vertical); // IE6-9
     @include background-image(linear-gradient(top,  #fffbe9 0%,#f9f8cf 100%));
+  }
 
-    &:hover {
-      border: 1px solid $borderDefaultHover;
-    }
-  }
   &.regulationslot {
-    background: $white; /* Old browsers */
-    @include background-image(linear-gradient(top,  $white 0%, #eef4ed 70%, #edebe6 100%, #f6f6f6 100%));
-    &:hover {
-      background: #eeeeee; /* Old browsers */
-      border: 1px solid $borderDefaultHover;
-      @include background-image(linear-gradient(top,  #eeeeee 0%, #f1f1f1 50%, #e1e1e1 100%, #f6f6f6 100%));
-    }
-  }
-  &.greenslot {
     background-color: #e9fff0;
     @include filter-gradient(#e9fff0, #cff9e3, vertical);
-    @include background-image(linear-gradient(top,  #e9fff0 0%,#cff9e3 100%));
-    &:hover {
-      background: #eeeeee; /* Old browsers */
-      border: 1px solid $borderDefaultHover;
-      @include background-image(linear-gradient(top,  #eeeeee 0%, #f1f1f1 50%, #e1e1e1 100%, #f6f6f6 100%));
-    }
+    @include background-image(linear-gradient(top,  #e9fff0 0%,#cff9e3 100%)); 
   }
-  &.purpleslot {
+  &.riskyslot {
     background-color: #f3e9ff;
     @include filter-gradient(#f3e9ff, #e7cff9, vertical);
     @include background-image(linear-gradient(top,  #f3e9ff 0%,#e7cff9 100%));
-    &:hover {
-      background: #eeeeee; /* Old browsers */
-      border: 1px solid $borderDefaultHover;
-      @include background-image(linear-gradient(top,  #eeeeee 0%, #f1f1f1 50%, #e1e1e1 100%, #f6f6f6 100%));
-    }
   }
-  &.redslot {
+  &.riskslot {
     background-color: #ffe9f0;
     @include filter-gradient(#ffe9f0, #f9cfd7, vertical);
     @include background-image(linear-gradient(top,  #ffe9f0 0%,#f9cfd7 100%));
-    &:hover {
-      background: #eeeeee; /* Old browsers */
-      border: 1px solid $borderDefaultHover;
-      @include background-image(linear-gradient(top,  #eeeeee 0%, #f1f1f1 50%, #e1e1e1 100%, #f6f6f6 100%));
-    }
   }
   &.controlslot {
     background-color: #eafbff; // Old browsers
     @include filter-gradient(#eafbff, #cfebf9, vertical); // IE6-9
-    @include background-image(linear-gradient(top,  #eafbff 0%,#cfebf9 100%));
-    &:hover {
-      background: #eeeeee; /* Old browsers */
-      border: 1px solid $borderDefaultHover;
-      @include background-image(linear-gradient(top,  #eeeeee 0%, #f1f1f1 50%, #e1e1e1 100%, #f6f6f6 100%));
-    }  
+    @include background-image(linear-gradient(top,  #eafbff 0%,#cfebf9 100%)); 
+    @include border-radius(4px);
+  }
+  &.processslot {
+    background-color: #eafbff; // Old browsers
+    @include filter-gradient(#eafbff, #cfebf9, vertical); // IE6-9
+    @include background-image(linear-gradient(top,  #eafbff 0%,#cfebf9 100%)); 
   }
   &.categorySlot {
     @include opacity(.7);
@@ -1387,7 +1388,7 @@ ul.slugtree {
   width: 16px;
   height: 16px;
   padding: 0 0 0 0;
-  margin:6px 0 0 0;
+  margin: 6px 0 0 0;
   cursor:pointer;
   &.in {
     /* for firefox, safari, chrome, etc. */
@@ -1411,34 +1412,46 @@ ul.slugtree {
   width: 16px;
   height: 16px;
   padding: 0 0 0 0;
-  margin:6px 0 0 0;
+  margin: 6px 0 0 0;
   cursor:pointer;
   &.risk {
     background-image: url("../images/icons/grcicons/enddot-risk.png");
   }
 }
 
+.doubleslot {
+  .enddot {
+    margin: 6px 4px 4px 0;
+  }
+  .slotowner {
+    line-height:30px;
+  }
+  .slotactions {
+    line-height:27px;
+  }
+}
+
 #auditstatuscolumns {
-  padding:0 8px 0 8px;
+  padding: 0 8px 0 8px;
 }
 
 /* Hack for modal invite auditors */
 .span6 > .prefix {
-  font-size:14px;
-  line-height:22px;
+  font-size: 14px;
+  line-height: 22px;
   font-weight: bold;
   margin-left: 4px;
   margin-right: 6px;
 }
 
 .span4 > .prefix {
-  font-size:15px;
-  line-height:15px;
+  font-size: 15px;
+  line-height: 15px;
   font-weight: bold;
 }
 
 .toggleExpanded {
-    background-image: url("../images/icons/grcicons/chevronleft-down.png");
+  background-image: url("../images/icons/grcicons/chevronleft-down.png");
 }
 
 /* Form Items */
