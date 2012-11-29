@@ -64,4 +64,12 @@ module ImportHelper
     end
   end
 
+  def handle_import_category(object, attrs, key)
+    category = attrs.delete(key)
+
+    if category.present?
+      categories = category.split(',').map {|category| Category.find_or_create_by_name({:name => category})}
+      object.categories = categories
+    end
+  end
 end

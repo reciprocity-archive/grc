@@ -57,6 +57,7 @@ describe SystemsController do
       sys1.infrastructure.should be_true
       sys1.object_people.size.should == 1
       sys1.object_people[0].role.should == 'engineer'
+      sys1.categories.should == [Category.find_by_name('cat1')]
       sys1.object_people[0].person.email.should == 'a@t.com'
       System.find_by_slug('SYS2').infrastructure.should be_false
     end

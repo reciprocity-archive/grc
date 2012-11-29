@@ -11,7 +11,7 @@ end
 class SystemsController < BaseObjectsController
   include ImportHelper
 
-  SYSTEM_MAP = Hash[*%w(System\ Code slug Title title Description description Infrastructure infrastructure Owner owner Engineering\ Contact engineer Executive\ Owner executive Created created_at Updated updated_at)]
+  SYSTEM_MAP = Hash[*%w(System\ Code slug Title title Description description Infrastructure infrastructure Owner owner Engineering\ Contact engineer Category category Created created_at Updated updated_at)]
 
   access_control :acl do
     allow :superuser
@@ -68,9 +68,8 @@ class SystemsController < BaseObjectsController
               when 'engineer'
                 object_person = s.object_people.detect {|x| x.role == 'engineer'}
                 object_person ? object_person.person.email : ''
-              when 'executive'
-                object_person = s.object_people.detect {|x| x.role == 'executive'}
-                object_person ? object_person.person.email : ''
+              when 'category'
+                (s.categories.map {|x| x.name}).join(',')
               else
                 s.send(field)
               end
@@ -125,7 +124,6 @@ class SystemsController < BaseObjectsController
 
       handle_import_person(attrs, 'owner', import[:warnings][i])
       handle_import_person(attrs, 'engineer', import[:warnings][i])
-      handle_import_person(attrs, 'executive', import[:warnings][i])
 
       slug = attrs['slug']
 
@@ -140,7 +138,7 @@ class SystemsController < BaseObjectsController
       system ||= System.new
 
       handle_import_object_person(system, attrs, 'engineer')
-      handle_import_object_person(system, attrs, 'executive')
+      handle_import_category(system, attrs, 'category')
 
       system.assign_attributes(attrs, :without_protection => true)
 
