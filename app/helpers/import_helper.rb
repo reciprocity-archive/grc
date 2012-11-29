@@ -72,4 +72,29 @@ module ImportHelper
       object.categories = categories
     end
   end
+
+  def parse_document_reference(ref_string)
+    ref_string.split("\n").map do |ref|
+      ref =~ /(.*)\[(\S+)(:?.*)\](.*)/
+      link = $2
+      if link.start_with?('//')
+        link = "file:" + link
+      end
+      { :description => $1 + $4, :link => link, :title => ($3.present? ? $3 : link).strip }
+    end
+  end
+
+  def handle_import_document_reference(object, attrs, key, warnings)
+    ref_string = attrs.delete(key)
+    if ref_string.present?
+      documents = parse_document_reference(ref_string).map do |ref|
+        begin
+          Document.find_or_create_by_link!(ref)
+        rescue
+          warning[key.to_sym] << "invalid reference URL"
+        end
+      end
+      object.documents = documents
+    end
+  end
 end

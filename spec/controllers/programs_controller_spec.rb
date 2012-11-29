@@ -125,9 +125,7 @@ describe ProgramsController do
       post 'import_controls', :id => @reg.id, :upload => fixture_file_upload("/CONTROLS.csv"), :confirm => "true"
       ctl = Control.find_by_slug("CTL1")
       ctl.description.should == "This is Control 1"
-      ctl.object_people.size.should == 1
-      ctl.object_people[0].role.should == 'executive'
-      ctl.object_people[0].person.email.should == 'a@t.com'
+      ctl.documents.should == [Document.find_by_link('file://file/xyz')]
     end
   end
 
@@ -143,7 +141,6 @@ describe ProgramsController do
       get 'export_controls', :id => @creg.id, :format => :csv
       # system titles, system data
       response.body.split("\n").size.should == 6
-      response.body.should match(@person.email)
     end
   end
 
