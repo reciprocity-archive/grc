@@ -1,0 +1,14 @@
+ <div class="span12">
+	<div class="span12 slot controlslot" data-toggle="collapse" data-target="content_{{id}}">
+    	<a class="widgetbtn fltrt" href="/controls/{{id}}" title="View Control">
+    		<i class="gcmsicon-arrowright-grey"></i>
+    	</a>
+		<div class="expander"></div>
+		<span class="prefix">{{prefix}} {{slug}}</span>
+		{{title}} 
+		{{#unless title}} {{description}} {{/unless}}
+	</div>
+</div>
+<div class="row-fluid-slotcontent collapse" id="content_{{id}}">
+	<p>{{description}}</p>
+</div>

@@ -3,10 +3,11 @@
  *= require jquery
  *= require jquery-ui
  *= require bootstrap
- *= require can.jquery-1.0.7
  *= require related_selector
  *= require spin.min
  *= require tmpl
+ *= require can.custom
+ *= require controls_app
  *= require_self
  *= require jquery.remotipart
  *= require d3.v2
