@@ -74,7 +74,7 @@ class ProgramsController < BaseObjectsController
         self.response.headers['Content-Type'] = 'text/csv'
         headers['Content-Disposition'] = "attachment; filename=\"#{@program.slug}-controls.csv\""
         self.response_body = Enumerator.new do |out|
-          out << CSV.generate_line(%w(Type Code))
+          out << CSV.generate_line(%w(Type Program\ Code))
           values = %w(Program\ Code).map { |key| @program.send(PROGRAM_MAP[key]) }
           values.unshift("Controls")
           out << CSV.generate_line(values)

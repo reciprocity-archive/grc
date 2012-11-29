@@ -18,10 +18,21 @@
   %hr.hr-widget
 
 .row-fluid
-  %h4 Sample Data
+  %h4 Data to Import
 
 .row-fluid
   #sampleData.span12.well
+    -if @messages.present?
+      -@messages.each do |m|
+        %p{ :class => 'label-warning' }
+          =m
+      %br
+
+    -if @errors.any?
+      %p.label-warning
+        See specific errors below
+      %br
+
     %table.ggrc-table
       %thead
         %tr
@@ -53,13 +64,6 @@
     #{@creates.size} created, #{@updates.size} updated
 
 
-%div
-  Warnings:
-
-  -@messages.each do |m|
-    %p{ :class => 'label-warning' }
-      =m
-
 .row-fluid
   %hr.hr-widget
 
@@ -67,7 +71,10 @@
   -if params[:confirm].blank?
     .span9
     .span3
-      =submit_tag "Finish Importing", :class => %w(span12 btn btn-large btn-success btn-primary), :name => 'confirm'
+      -if @errors.any? || @messages.any?
+        =submit_tag "Correct Errors Before Proceeding", :class => %w(span12 btn btn-large btn-warning btn-primary), :name => 'confirm', :disabled => true
+      -else
+        =submit_tag "Finish Importing", :class => %w(span12 btn btn-large btn-success btn-primary), :name => 'confirm'
   -else
     .span12
       Import of
