@@ -592,6 +592,10 @@
                                 Textual description here.)
 
               
+          .infowell
+            Color is set by the type of slot, ie. - riskyslot, riskslot, controlslot, processslot, etc (class)
+          .warningwell
+            Slot height is set not dynamic - so there is a different class for two lines (doubleslot - see below)
           %hr.hr-widget
 
           %ul
@@ -612,7 +616,10 @@
                     .slotactions.pull-right
                       %a.btn.btn-mini.btn-blue{"data-target" => "#Threat-1-summary", "data-toggle" => "collapse"}
                         %i.gcmsicon-more
-
+          .infowell
+            Height set by .doubleslot and the line-height/margins/padding of slotowner and slotaction styled by being inside doubleslot
+          .warningwell
+            Enddot vs expander needs colorizing for other slot types
     #misc
 
     =render :partial => 'design/widgets/impactscope'
