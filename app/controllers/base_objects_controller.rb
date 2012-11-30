@@ -57,10 +57,9 @@ class BaseObjectsController < ApplicationController
 
   def create
     set_object(new_object)
-    update_object
 
     respond_to do |format|
-      if save_object
+      if update_and_save_object
         location = post_create_path
 
         flash[:notice] = create_success_message
