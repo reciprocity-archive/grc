@@ -34,6 +34,8 @@ jQuery(function($) {
       $(this).datepicker({changeMonth: true, changeYear: true, dateFormat: 'mm/dd/yy'});
   });
 
+  /* FIXME: This was removed because it's inconsistent with the new slug
+       object-name-prefix paradigm.  (E.g. controls having slug of CONTROL-X).
   // Setup program-select inputs to prefill slug field
   $('body').on('change', 'select[name$="[program_id]"]', function(e) {
     var $this = $(this)
@@ -44,6 +46,7 @@ jQuery(function($) {
 
     $slugfield.val([$option.text()].concat(slugsteps.slice(1)).join("-"));
   });
+  */
 
   // Turn the arrow when tree node content is shown
   $('body').on('click', '[data-toggle="collapse"]', function(e) {
