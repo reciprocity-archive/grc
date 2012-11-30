@@ -51,16 +51,16 @@ module ImportHelper
     end
   end
 
-  def handle_import_object_person(object, attrs, key)
+  def handle_import_object_person(object, attrs, key, role)
     person = attrs.delete(key)
-    existing = object.object_people.detect {|x| x.role == key}
+    existing = object.object_people.detect {|x| x.role == role}
 
     if existing && existing.person != person
       existing.destroy
     end
 
     if person
-      object.object_people.new({:role => key, :person => person}, :without_protection => true)
+      object.object_people.new({:role => role, :person => person}, :without_protection => true)
     end
   end
 

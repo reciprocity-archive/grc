@@ -55,11 +55,13 @@ describe SystemsController do
       sys1 = System.find_by_slug('SYS1')
       sys1.title.should == 'System 1'
       sys1.infrastructure.should be_true
-      sys1.object_people.size.should == 1
-      sys1.object_people[0].role.should == 'engineer'
+      sys2 = System.find_by_slug('SYS2')
+      sys1.object_people.size.should == 0
+      sys2.object_people.size.should == 1
+      sys2.object_people[0].role.should == 'accountable'
+      sys2.object_people[0].person.email.should == 'b@t.com'
       sys1.categories.should == [Category.find_by_name('cat1')]
-      sys1.object_people[0].person.email.should == 'a@t.com'
-      System.find_by_slug('SYS2').infrastructure.should be_false
+      sys2.infrastructure.should be_false
     end
   end
 end
