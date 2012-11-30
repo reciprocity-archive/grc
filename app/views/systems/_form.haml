@@ -26,7 +26,7 @@
           %option{ :value => '0', :selected => f.object.is_biz_process || 'selected' } System
           %option{ :value => '1', :selected => f.object.is_biz_process && 'selected' } Business Process
         =error_messages_inline(f, :is_biz_process)
-      =wrapped_select f, :span6, :type_id, Option.options_for(:system_type).map { |o| [o.title, o.id] }, :selected => (f.object.respond_to?(:type_id) ? f.object.type_id : nil), :include_blank => true, :label_name => 'Type'
+      =wrapped_select f, :span6, :type_id, Option.options_for(:system_type).map { |o| [o.title, o.id] }, :selected => (f.object.respond_to?(:type_id) ? f.object.type_id : nil), :include_blank => true, :label_name => 'Kind'
 
 .row-fluid
   =wrapped_text_field f, :span6, :url, :label_name => 'Direct URL (optional)', :placeholder => 'http://www.example.com/'
