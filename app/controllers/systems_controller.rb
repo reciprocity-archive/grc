@@ -170,12 +170,9 @@ class SystemsController < BaseObjectsController
       ]
     end
 
-    def delete_relationship_stats
+    def extra_delete_relationship_stats
       [ [ 'Sub Systems', @system.sub_systems.count ],
         [ 'Super Systems', @system.super_systems.count ],
-        [ 'Document', @system.documents.count ],
-        [ 'Category', @system.categories.count ],
-        [ 'Person', @system.people.count ]
       ]
     end
 

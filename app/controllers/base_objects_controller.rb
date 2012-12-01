@@ -327,8 +327,52 @@ class BaseObjectsController < ApplicationController
       []
     end
 
-    def delete_relationship_stats
+    def extra_delete_relationship_stats
       []
+    end
+
+    def delete_relationship_stats
+      objects =
+        common_delete_relationship_stats.to_a +
+        extra_delete_relationship_stats.to_a
+
+      objects.group_by(&:first).map do |object_type, instances|
+        count = instances.map(&:second).map do |objs|
+          if objs.kind_of?(Array)
+            objs.flatten.size
+          elsif objs.kind_of?(Fixnum)
+            objs
+          else
+            1 # Don't know what this object is
+          end
+        end.sum
+        [ object_type, count ]
+      end
+    end
+
+    def common_delete_relationship_stats
+      # People
+      object_people = ObjectPerson.
+        where(
+          :personable_type => object.class.name,
+          :personable_id => object.id)
+
+      # Documents
+      object_documents = ObjectDocument.
+        where(
+          :documentable_type => object.class.name,
+          :documentable_id => object.id)
+
+      categorizations = Categorization.
+        where(
+          :categorizable_type => object.class.name,
+          :categorizable_id => object.id)
+
+      # Relationships
+      [ [ 'Person', object_people.count ],
+        [ 'Document', object_documents.count ],
+        [ 'Category', categorizations.count ]
+      ] + Relationship.related_objects_for_delete(object).to_a
     end
 
     def self.no_base_action(*actions)

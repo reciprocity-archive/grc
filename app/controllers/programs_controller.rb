@@ -401,13 +401,6 @@ class ProgramsController < BaseObjectsController
       ]
     end
 
-    def delete_relationship_stats
-      [ [ 'Document', @program.documents.count ],
-        [ 'Category', @program.categories.count ],
-        [ 'Person', @program.people.count ]
-      ]
-    end
-
     def load_program
       @program = Program.find(params[:id])
     end

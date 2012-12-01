@@ -52,10 +52,11 @@ class DocumentsController < BaseObjectsController
     def update_object_as_json
       super(:methods => [:descriptor, :link_url])
     end
-    #  object.as_json(:root => nil, :methods => [:descriptor, :link_url])
 
-    def delete_relationship_stats
-      [ [ 'Object', @document.object_documents.count ] ]
+    def extra_delete_relationship_stats
+      ObjectDocument.where(:document_id => @document.id).all.map do |od|
+        [od.documentable_type, od.documentable]
+      end
     end
 
     def document_params

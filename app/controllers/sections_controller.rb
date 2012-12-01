@@ -25,11 +25,8 @@ class SectionsController < BaseObjectsController
 
   private
 
-    def delete_relationship_stats
+    def extra_delete_relationship_stats
       [ [ 'Control', @section.control_sections.count ],
-        [ 'Document', @section.documents.count ],
-        [ 'Category', @section.categories.count ],
-        [ 'Person', @section.people.count ]
       ]
     end
 

@@ -40,8 +40,10 @@ class PeopleController < BaseObjectsController
 
   private
 
-    def delete_relationship_stats
-      [ [ 'Object', @person.object_people.count ] ]
+    def extra_delete_relationship_stats
+      ObjectPerson.where(:person_id => @person.id).all.map do |op|
+        [op.personable_type, op.personable]
+      end
     end
 
     def person_params

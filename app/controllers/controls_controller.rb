@@ -86,13 +86,10 @@ class ControlsController < BaseObjectsController
       ]
     end
 
-    def delete_relationship_stats
+    def extra_delete_relationship_stats
       [ [ 'Section', @control.control_sections.count ],
         [ 'Implemented Control', @control.implemented_controls.count ],
         [ 'Implementing Control', @control.implementing_controls.count ],
-        [ 'Document', @control.documents.count ],
-        [ 'Category', @control.categories.count ],
-        [ 'Person', @control.people.count ]
       ]
     end
 
