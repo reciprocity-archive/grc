@@ -144,11 +144,11 @@ describe FormHelper do
   end
 
   context "parse_date_param" do
-    it "transforms date-formatted string to Date object" do
+    it "transforms date-formatted string to Time object" do
       params = { :field => '01/02/2003' }.with_indifferent_access
       parse_date_param(params, :field)
-      params[:field].should be_a(Date)
-      params[:field].should eq(Date.new(2003, 1, 2))
+      params[:field].should be_a(Time)
+      params[:field].should eq(Time.new(2003, 1, 2))
     end
   end
 
