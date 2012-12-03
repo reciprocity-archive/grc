@@ -25,6 +25,8 @@ jQuery(function ($) {
   }
 
 
+
+
   //ACTUALLY renderout templates
 
   renderExternalTmpl({ name: 'help', selector: '#templates', data: {} });
@@ -170,9 +172,15 @@ jQuery(function ($) {
       $('#programinformationUnlocked').tab('show');
   });
 
-  for (i=0;i<=5;i++) {
+  for (i=0;i<=50;i++) {
     $('#tooltip' + i).tooltip();
   }
+
+  
+  $('div[#^="summary"]').on('hidden', function () {
+      $this.closest('div[#^="more"]').collapse('hide');
+})
+
 
   // show/hide widget
 
