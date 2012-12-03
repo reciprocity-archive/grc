@@ -1,29 +1,30 @@
-$default-border-radius: 4px;
+// defaults
 
-// SASS variables
+  $default-border-radius: 4px;
 
-$linkColor : #43c2c7;
-$textColor: #666;
-$failureBgndColor: #FFC8C8;
-$failureColor: #B94A48;
-$failureBorderColor: #B94A48;
-$successBgndColor: #EAFFE6;
-$borderDefault: #e1e1e1;
-$borderDefaultHover: #3badb3;
-$auditBgndColor:#c9f4f9;
-$errorColor:#ee0000;
-$font-family: 'PT Sans', Helvetica, Arial, Tahoma, Verdana, sans-serif;
+// variables
 
+  $linkColor : #43c2c7;
+  $textColor: #666;
+  $failureBgndColor: #FFC8C8;
+  $failureColor: #B94A48;
+  $failureBorderColor: #B94A48;
+  $successBgndColor: #EAFFE6;
+  $borderDefault: #e1e1e1;
+  $borderDefaultHover: #3badb3;
+  $auditBgndColor:#c9f4f9;
+  $errorColor:#ee0000;
+  $font-family: 'PT Sans', Helvetica, Arial, Tahoma, Verdana, sans-serif;
 
 // helper variables (it seems it is duplicated, but it is good to keep semantically correct var names)
 
-$darkGray: #666;
-$lightGray: #ccc;
-$mediumGray: #999;
-$lightestGray: #f3f3f3;
-$white: #fff;
-$black: #000;
-$red: #ff0000;
+  $darkGray: #666;
+  $lightGray: #ccc;
+  $mediumGray: #999;
+  $lightestGray: #f3f3f3;
+  $white: #fff;
+  $black: #000;
+  $red: #ff0000;
 
 // widgets
 
@@ -34,10 +35,9 @@ $red: #ff0000;
   $widgetInnerBorder: 1px solid $lightestGray;
   $bgndWidget: $white;
   $bgndDefault: $mediumGray;
-  $bgndGovernance: #0a57bf;
+  $bgndGovernance: #7A99C1;
   $bgndRisk: #d34827;
   $bgndCompliance: #008d00;
-
   $bgndProduct: #e6e0f6;
   $bgndSystem: #d5eff3;
   $bgndControl: #f4e4e0;
@@ -46,16 +46,16 @@ $red: #ff0000;
 
 // placeholders
 
-// Lighten placeholder text from bootstrap defaults
-// These rules must be separate, see http://stackoverflow.com/questions/2610497/change-an-inputs-html5-placeholder-color-with-css
+  // Lighten placeholder text from bootstrap defaults
+  // These rules must be separate, see http://stackoverflow.com/questions/2610497/change-an-inputs-html5-placeholder-color-with-css
 
-::-webkit-input-placeholder {
-  color: $lightGray;
-}
+  ::-webkit-input-placeholder {
+    color: $lightGray;
+  }
 
-:-moz-placeholder {
-  color: $lightGray;
-}
+  :-moz-placeholder {
+    color: $lightGray;
+  }
 
 // clearfix
 
