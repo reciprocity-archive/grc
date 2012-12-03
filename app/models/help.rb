@@ -5,5 +5,5 @@ class Help < ActiveRecord::Base
 
   is_versioned_ext
 
-  attr_accessible :content, :slug
+  attr_accessible :title, :content, :slug
 end

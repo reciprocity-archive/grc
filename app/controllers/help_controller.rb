@@ -10,6 +10,7 @@ class HelpController < ApplicationController
     slug = params[:help]['slug']
     @help = Help.find_by_slug(slug) ||
       Help.new(:slug => slug)
+    @help.title = params[:help]['title']
     @help.content = params[:help]['content']
     respond_to do |format|
       if @help.save
