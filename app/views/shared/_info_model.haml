@@ -39,6 +39,13 @@
 
 .row-fluid
   .span12
+    =render :partial => 'documents/object_list',
+            :locals  => { :object => instance }
+
+%hr.hr-widget
+
+.row-fluid
+  .span12
     =render :partial => 'people/object_list',
             :locals  => { :object => instance }
 

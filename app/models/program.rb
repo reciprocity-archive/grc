@@ -10,10 +10,10 @@ class Program < ActiveRecord::Base
 
   attr_accessible :title, :slug, :company, :description, :start_date, :stop_date, :audit_start_date, :audit_frequency, :audit_duration, :organization, :url, :scope, :kind, :version
 
-  has_many :sections, :order => :slug
-  has_many :controls, :order => :slug
+  has_many :sections, :order => :slug, :dependent => :destroy
+  has_many :controls, :order => :slug, :dependent => :destroy
 
-  has_many :cycles
+  has_many :cycles, :dependent => :destroy
 
   belongs_to :type, :class_name => 'Option', :conditions => { :role => 'program_type' }
   belongs_to :kind, :class_name => 'Option', :conditions => { :role => 'program_kind' }
@@ -77,7 +77,9 @@ class Program < ActiveRecord::Base
   end
 
   def assign_company_boolean_from_program_kind
-    self.company = !(self.kind && self.kind.title == 'Regulation')
+    if !changed_attributes.include?('company')
+      self.company = !(self.kind && self.kind.title == 'Regulation')
+    end
     true
   end
 end

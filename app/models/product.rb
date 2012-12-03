@@ -1,5 +1,3 @@
-# Product
-#
 class Product < ActiveRecord::Base
   include AuthoredModel
   include SluggedModel

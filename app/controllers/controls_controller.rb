@@ -3,20 +3,13 @@
 # License:: Apache 2.0
 
 # Handle Controls
-class ControlsController < ApplicationController
-  include ApplicationHelper
+class ControlsController < BaseObjectsController
   include ControlsHelper
   include AuthorizationHelper
 
-  before_filter :load_control, :only => [:show,
-                                         :edit,
-                                         :tooltip,
-                                         :update,
-                                         :sections,
+  before_filter :load_control, :only => [:sections,
                                          :implemented_controls,
-                                         :implementing_controls,
-                                         :delete,
-                                         :destroy]
+                                         :implementing_controls]
 
 
   access_control :acl do
@@ -48,89 +41,11 @@ class ControlsController < ApplicationController
   def index
     @controls = Control
     if params[:s].present?
-      @controls = @controls.db_search(params[:s])
+      @controls = @controls.fulltext_search(params[:s])
     end
     @controls = allowed_objs(@controls.all, :read)
 
     render :json => @controls
-  end
-
-  def show
-  end
-
-  def new
-    @control = Control.new(control_params)
-
-    render :layout => nil
-  end
-
-  def edit
-    render :layout => nil
-  end
-
-  def tooltip
-    render :layout => nil
-  end
-
-  def create
-    @control = Control.new(control_params)
-
-    respond_to do |format|
-      if @control.save
-        flash[:notice] = "Successfully created a new control"
-        format.json do
-          render :json => @control.as_json(:root => nil), :location => flow_control_path(@control)
-        end
-        format.html { redirect_to flow_control_path(@control) }
-      else
-        flash[:error] = "There was an error creating the control."
-        format.html { render :layout => nil, :status => 400 }
-      end
-    end
-  end
-
-  def update
-    respond_to do |format|
-      if @control.authored_update(current_user, control_params)
-        flash[:notice] = "Successfully updated the control!"
-        format.json do
-          render :json => @control.as_json(:root => nil), :location => flow_control_path(@control)
-        end
-        format.html { redirect_to flow_control_path(@control) }
-      else
-        flash[:error] = "There was an error updating the control"
-        format.html { render :layout => nil, :status => 400 }
-      end
-    end
-  end
-
-  def delete
-    @model_stats = []
-    @relationship_stats = []
-    @model_stats << [ 'System Control', @control.system_controls.count ]
-    @relationship_stats << [ 'Section', @control.control_sections.count ]
-    @relationship_stats << [ 'Implemented Control', @control.implemented_controls.count ]
-    @relationship_stats << [ 'Implementing Control', @control.implementing_controls.count ]
-    @relationship_stats << [ 'Document', @control.documents.count ]
-    @relationship_stats << [ 'Category', @control.categories.count ]
-    @relationship_stats << [ 'Person', @control.people.count ]
-    respond_to do |format|
-      format.json { render :json => @control.as_json(:root => nil) }
-      format.html do
-        render :layout => nil, :template => 'shared/delete_confirm',
-          :locals => { :model => @control, :url => flow_control_path(@control), :models => @model_stats, :relationships => @relationship_stats }
-      end
-    end
-  end
-
-  def destroy
-    @control.destroy
-    flash[:notice] = "Control deleted"
-    respond_to do |format|
-      location = flow_program_path(@control.program)
-      format.html { redirect_to location }
-      format.json { render :json => @control.as_json(:root => nil), :location => location }
-    end
   end
 
   def sections
@@ -161,7 +76,24 @@ class ControlsController < ApplicationController
   end
 
   private
+
     def load_control
       @control = Control.find(params[:id])
+    end
+
+    def delete_model_stats
+      [ [ 'System Control', @control.system_controls.count ]
+      ]
+    end
+
+    def extra_delete_relationship_stats
+      [ [ 'Section', @control.control_sections.count ],
+        [ 'Implemented Control', @control.implemented_controls.count ],
+        [ 'Implementing Control', @control.implementing_controls.count ],
+      ]
+    end
+
+    def post_destroy_path
+      flow_program_path(@control.program)
     end
 end

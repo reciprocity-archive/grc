@@ -8,8 +8,7 @@ class ImportException < Exception
 end
 
 # Browse programs
-class ProgramsController < ApplicationController
-  include ApplicationHelper
+class ProgramsController < BaseObjectsController
   include ProgramsHelper
   include ImportHelper
 
@@ -17,21 +16,15 @@ class ProgramsController < ApplicationController
 
   SECTION_MAP = Hash[*%w(Section\ Code slug Section\ Title title Section\ Description description Section\ Notes notes Created created_at Updated updated_at)]
 
-  CONTROL_MAP = Hash[*%w(Control\ Code slug Title title Description description Type type Kind kind Means means Version version Start start_date Stop stop_date URL url Documentation documentation_description Verify-Frequency verify_frequency Created created_at Updated updated_at)]
+  CONTROL_MAP = Hash[*%w(Control\ Code slug Title title Description description Type type Kind kind Means means Version version Start start_date Stop stop_date URL url Documentation documentation_description Verify-Frequency verify_frequency References references Created created_at Updated updated_at)]
 
   # FIXME: Decide if the :section, controls, etc.
   # methods should be moved, and what access controls they
   # need.
-  before_filter :load_program, :only => [:show,
-                                         :export_controls,
+  before_filter :load_program, :only => [:export_controls,
                                          :export,
                                          :import_controls,
                                          :import,
-                                         :tooltip,
-                                         :edit,
-                                         :update,
-                                         :delete,
-                                         :destroy,
                                          :sections,
                                          :controls,
                                          :section_controls,
@@ -72,72 +65,33 @@ class ProgramsController < ApplicationController
     @programs = allowed_objs(@programs.all, :read)
   end
 
-  def show
-    @stats = program_stats(@program)
-  end
-
-  def new
-    @program = Program.new(program_params)
-
-    render :layout => nil
-  end
-
-  def edit
-    render :layout => nil
-  end
-
-  def create
-    @program = Program.new(program_params)
-
-    respond_to do |format|
-      if @program.save
-        flash[:notice] = "Program was created successfully."
-        format.json { render :json => @program.as_json(:root => false), :location => flow_program_path(@program) }
-        format.html do
-          redirect_to flow_program_path(@program)
-        end
-      else
-        flash[:error] = "There was an error creating the program"
-        format.html do
-          if request.xhr?
-            render :layout => nil, :status => 400
-          end
-        end
-      end
-    end
-  end
-
-  def update
-    if !params[:program]
-      return 400
-    end
-
-    respond_to do |format|
-      if @program.authored_update(current_user, program_params)
-        flash[:notice] = 'Program was successfully updated.'
-        format.json { render :json => @program.as_json(:root => nil), :location => flow_program_path(@program) }
-        format.html { ajax_refresh }
-      else
-        flash[:error] = "There was an error updating the program"
-        format.html { render :layout => nil, :status => 400 }
-      end
-    end
-  end
-
   def export_controls
     respond_to do |format|
+      format.html do
+        render :layout => 'export_modal', :locals => { :program => @program }
+      end
       format.csv do
         self.response.headers['Content-Type'] = 'text/csv'
         headers['Content-Disposition'] = "attachment; filename=\"#{@program.slug}-controls.csv\""
         self.response_body = Enumerator.new do |out|
-          out << CSV.generate_line(%w(Type Code))
+          out << CSV.generate_line(%w(Type Program\ Code))
           values = %w(Program\ Code).map { |key| @program.send(PROGRAM_MAP[key]) }
           values.unshift("Controls")
           out << CSV.generate_line(values)
           out << CSV.generate_line([])
           out << CSV.generate_line(CONTROL_MAP.keys)
           @program.controls.each do |s|
-            values = CONTROL_MAP.keys.map { |key| s.send(CONTROL_MAP[key]) }
+            values = CONTROL_MAP.keys.map do |key|
+              field = CONTROL_MAP[key]
+              case field
+              when 'references'
+                s.documents.map do |doc|
+                  "#{doc.description} [#{doc.link} #{doc.title}]"
+                end.join("\n")
+              else
+                s.send(field)
+              end
+            end
             out << CSV.generate_line(values)
           end
         end
@@ -147,6 +101,9 @@ class ProgramsController < ApplicationController
 
   def export
     respond_to do |format|
+      format.html do
+        render :layout => 'export_modal', :locals => { :program => @program }
+      end
       format.csv do
         self.response.headers['Content-Type'] = 'text/csv'
         headers['Content-Disposition'] = "attachment; filename=\"#{@program.slug}.csv\""
@@ -168,37 +125,6 @@ class ProgramsController < ApplicationController
     end
   end
 
-  def delete
-    @model_stats = []
-    @relationship_stats = []
-    @model_stats << [ 'Section', @program.sections.count ]
-    @model_stats << [ 'Control', @program.controls.count ]
-    @model_stats << [ 'Cycle', @program.cycles.count ]
-    @relationship_stats << [ 'Document', @program.documents.count ]
-    @relationship_stats << [ 'Category', @program.categories.count ]
-    @relationship_stats << [ 'Person', @program.people.count ]
-    respond_to do |format|
-      format.json { render :json => @program.as_json(:root => nil) }
-      format.html do
-        render :layout => nil, :template => 'shared/delete_confirm',
-          :locals => { :model => @program, :url => flow_program_path(@program), :models => @model_stats, :relationships => @relationship_stats }
-      end
-    end
-  end
-
-  def destroy
-    @program.destroy
-    flash[:notice] = "Program deleted"
-    respond_to do |format|
-      format.html { redirect_to programs_dash_path }
-      format.json { render :json => @program.as_json(:root => nil), :location => programs_dash_path }
-    end
-  end
-
-  def render_import_error(message=nil)
-    render 'import_error', :layout => false, :locals => { :message => message }
-  end
-
   def import_controls
     upload = params["upload"]
     if upload.present?
@@ -211,7 +137,11 @@ class ProgramsController < ApplicationController
         @errors = import[:errors]
         @creates = import[:creates]
         @updates = import[:updates]
-        render 'import_controls_result', :layout => false
+        if params[:confirm].present? && !@errors.any? && !@messages.any?
+          render :json => { :location => flow_program_path(@program) }
+        else
+          render 'import_controls_result', :layout => false
+        end
       rescue CSV::MalformedCSVError, ArgumentError => e
         log_backtrace(e)
         render_import_error("Not a recognized file.")
@@ -231,14 +161,18 @@ class ProgramsController < ApplicationController
     if upload.present?
       begin
         file = upload.read.force_encoding('utf-8')
-        import = read_import(CSV.parse(file))
+        import = read_import_sections(CSV.parse(file))
         @messages = import[:messages]
         do_import(import, params[:confirm].blank?)
         @warnings = import[:warnings]
         @errors = import[:errors]
         @creates = import[:creates]
         @updates = import[:updates]
-        render 'import_result', :layout => false
+        if params[:confirm].present? && !@errors.any? && !@messages.any?
+          render :json => { :location => flow_program_path(@program) }
+        else
+          render 'import_result', :layout => false
+        end
       rescue CSV::MalformedCSVError, ArgumentError => e
         log_backtrace(e)
         render_import_error("Not a recognized file.")
@@ -294,14 +228,17 @@ class ProgramsController < ApplicationController
         control = Control.find_by_slug(slug)
       end
 
-      if control
-        control.assign_attributes(attrs, :without_protection => true)
-        import[:updates] << slug
-      else
-        control = Control.new
-        control.assign_attributes(attrs, :without_protection => true)
+      control ||= Control.new
+
+      handle_import_document_reference(control, attrs, 'references', import[:warnings][i])
+
+      control.assign_attributes(attrs, :without_protection => true)
+
+      if control.new_record?
         control.program = @program
         import[:creates] << slug
+      else
+        import[:updates] << slug
       end
       @controls << control
       import[:errors][i] = control.errors unless control.valid?
@@ -353,81 +290,41 @@ class ProgramsController < ApplicationController
 
     raise ImportException.new("There must be at least 3 input lines") unless rows.size >= 4
 
-    program_headers = trim_array(rows.shift).map do |heading|
-      if heading == "Type"
-        key = 'type'
-      else
-        key = PROGRAM_MAP[heading]
-        import[:messages] << "invalid program heading #{heading}" unless key
-      end
-      key
-    end
+    program_headers = read_import_headers(import, PROGRAM_MAP, "program", rows)
 
     program_values = rows.shift
 
-    raise ImportException.new("First column must be Type") unless program_headers.shift == "type"
-    raise ImportException.new("Type must be Controls") unless program_values.shift == "Controls"
-
     import[:program] = Hash[*program_headers.zip(program_values).flatten]
+
+    validate_import_type(import[:program], "Controls")
+    validate_import_slug(import[:program], "Program", @program.slug)
 
     raise ImportException.new("There must be an empty separator row") unless trim_array(rows.shift) == []
 
-    control_headers = trim_array(rows.shift).map do |heading|
-      key = CONTROL_MAP[heading]
-      import[:messages] << "invalid control heading #{heading}" unless key
-      key
-    end
-
-    import[:controls] = rows.map do |control_values|
-      Hash[*control_headers.zip(control_values).flatten]
-    end
+    read_import(import, CONTROL_MAP, "control", rows)
 
     import
   end
 
-  def read_import(rows)
+  def read_import_sections(rows)
     import = { :messages => [] }
 
     raise ImportException.new("There must be at least 3 input lines") unless rows.size >= 4
 
-    program_headers = trim_array(rows.shift).map do |heading|
-      if heading == "Program Type"
-        key = 'type'
-      else
-        key = PROGRAM_MAP[heading]
-        import[:messages] << "invalid program heading #{heading}" unless key
-      end
-      key
-    end
+    program_headers = read_import_headers(import, PROGRAM_MAP, "program", rows)
 
     program_values = rows.shift
 
-    raise ImportException.new("First column must be Type") unless program_headers.shift == "type"
-    raise ImportException.new("Type must be Program") unless program_values.shift == "Program"
-
     import[:program] = Hash[*program_headers.zip(program_values).flatten]
+
+    validate_import_type(import[:program], "Program")
+    validate_import_slug(import[:program], "Program", @program.slug)
 
     raise ImportException.new("There must be an empty separator row") unless trim_array(rows.shift) == []
 
-    section_headers = trim_array(rows.shift).map do |heading|
-      key = SECTION_MAP[heading]
-      import[:messages] << "invalid section heading #{heading}" unless key
-      key
-    end
-
-    import[:sections] = rows.map do |section_values|
-      Hash[*section_headers.zip(section_values).flatten]
-    end
+    read_import(import, SECTION_MAP, "section", rows)
 
     import
-  end
-
-  def perform_import(rows, actual)
-    puts rows.size
-  end
-
-  def tooltip
-    render :layout => '_tooltip', :locals => { :program => @program }
   end
 
   def sections
@@ -496,6 +393,13 @@ class ProgramsController < ApplicationController
   end
 
   private
+
+    def delete_model_stats
+      [ [ 'Section', @program.sections.count ],
+        [ 'Control', @program.controls.count ],
+        [ 'Cycle', @program.cycles.count ]
+      ]
+    end
 
     def load_program
       @program = Program.find(params[:id])

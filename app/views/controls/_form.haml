@@ -1,15 +1,27 @@
+-only_company = params[:company] == 'true'
+-only_regulation = params[:company] == 'false'
+
 -content_for :modal_title do
+  -object_type_name = 'control'
+  -object_type_name = 'company control' if only_company
+  -object_type_name = 'regulation control' if only_regulation
   -if f.object.new_record?
-    Create a new control
+    Create a new #{object_type_name}
   -else
-    Edit control
+    Edit #{object_type_name}
 
 -if !f.object.new_record?
   -content_for :modal_delete_path, delete_flow_control_path(f.object)
 
 .row-fluid
   =wrapped_text_field f, :span4, :title, :placeholder => 'Enter title'
-  =wrapped_select f, :span2, :program_id, Program.all.map { |p| [p.slug, p.id] }, :selected => f.object.program_id
+  -programs = Program
+  -programs = programs.where(:company => true) if only_company
+  -programs = programs.where(:company => false) if only_regulation
+  -programs = programs.all
+  -# Ensure the specified program is included?
+  -#programs.unshift(f.object.program) if f.object.program && !programs.include?(f.object.program)
+  =wrapped_select f, :span2, :program_id, programs.map { |p| [p.slug, p.id] }, :selected => f.object.program_id, :include_blank => true
   .span6
     .row-fluid
       =wrapped_text_field f, :span6, :slug, :label_name => 'Code (autofill)', :placeholder => 'CONTROL-XXXX'

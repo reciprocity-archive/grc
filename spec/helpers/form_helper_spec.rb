@@ -104,7 +104,7 @@ describe FormHelper do
 
     it "wraps date field" do
       form_for(@reg) do |f|
-        f.object.start_date = Date.new(2003, 1, 2)
+        f.object.start_date = Date.new(2003, 1, 2).to_time_in_current_zone
         message = wrapped_date_field(f, :span4, :start_date)
         message.should have_selector("div.span4")
         message.should have_selector("div.span4 > input[type='text']")
@@ -144,11 +144,11 @@ describe FormHelper do
   end
 
   context "parse_date_param" do
-    it "transforms date-formatted string to Date object" do
+    it "transforms date-formatted string to Time object" do
       params = { :field => '01/02/2003' }.with_indifferent_access
       parse_date_param(params, :field)
-      params[:field].should be_a(Date)
-      params[:field].should eq(Date.new(2003, 1, 2))
+      params[:field].should be_a(Time)
+      params[:field].should eq(Date.new(2003, 1, 2).to_time_in_current_zone)
     end
   end
 

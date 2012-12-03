@@ -46,6 +46,11 @@ CmsRails::Application.routes.draw do
       get 'tooltip'
       get 'delete'
     end
+    collection do
+      get 'import'
+      post 'import'
+      get 'export'
+    end
   end
 
   resources :system_systems, :as => 'flow_system_systems', :only => [:index, :create] do
@@ -91,6 +96,14 @@ CmsRails::Application.routes.draw do
   end
 
   resources :markets, :as => 'flow_markets', :only => [:index, :show, :new, :edit, :create, :update, :destroy] do
+    member do
+      get 'delete'
+      get 'tooltip'
+      get 'delete'
+    end
+  end
+
+  resources :risky_attributes, :as => 'flow_risky_attributes', :only => [:index, :show, :new, :edit, :create, :update, :destroy] do
     member do
       get 'delete'
       get 'tooltip'
@@ -176,8 +189,6 @@ CmsRails::Application.routes.draw do
   get "mapping/selected_control/:control_id" => 'mapping#selected_control', :as => :mapping_selected_control
   match 'mapping/sections/:program_id' => 'mapping#find_sections', :as => :mapping_sections
   match 'mapping/controls/:program_id/:control_type' => 'mapping#find_controls', :as => :mapping_controls
-  post "mapping/create_rcontrol" => 'mapping#create_rcontrol', :as => 'mapping_create_rcontrol'
-  post "mapping/create_ccontrol" => 'mapping#create_ccontrol', :as => 'mapping_create_ccontrol'
 
   match 'help/:slug' => 'help#show', :as => :help
   post 'help' => 'help#edit', :as => :update_help

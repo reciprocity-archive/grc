@@ -7,11 +7,9 @@
   %a.widgettextbtn(onclick='clear_selection(this)')
     Reset
   -if control_type == 'regulation'
-    %a.widgettextbtn{ :href => '#create-rcontrol-modal', :data => { :toggle => 'modal-form', :control_type => control_type }}
-      New
+    %a.btn.widgettextbtn{ :href => new_flow_control_path(:'control[program_id]' => @program.id, :company => false), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide', :title => 'Create New Regulation Control' } New
   -else
-    %a.widgettextbtn{ :href => '#create-ccontrol-modal', :data => { :toggle => 'modal-form', :control_type => control_type }}
-      New
+    %a.btn.widgettextbtn{ :href => new_flow_control_path(:'control[program_id]' => @program.id, :company => true), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide', :title => 'Create New Company Control' } New
 
   %input.ui-corner-all.widgetsearch-tocontent(type='text' placeholder='Search')
 

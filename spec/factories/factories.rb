@@ -188,6 +188,10 @@ FactoryGirl.define do
     title
   end
 
+  factory :risky_attribute do
+    title
+  end
+
   factory :help do
     slug
     content

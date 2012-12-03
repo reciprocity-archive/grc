@@ -1,35 +1,36 @@
 -state = false #f.object.approved?
 
-.row-fluid
+.row-fluid.object-info
   -if !object.new_record?
-    .span2
+    %span
       %strong Created:
       %span #{object.created_at && object.created_at.strftime("%m/%d/%y")}
-    .span2
+    %span
       %strong Updated:
       %span.updatedDate #{object.updated_at && object.updated_at.strftime("%m/%d/%y")}
-    .span2
+    %span
       %strong Last Editor:
-      %span #{object.modified_by && (object.modified_by.name || object.modified_by.username || object.modified_by.email)}
+      %span #{object.modified_by.nil? ? 'unknown' : object.modified_by.display_name}
     -if has_feature?(:BETA)
-      .span3.demoText
+      %span.demoText
         %strong Approved by:
         -if state == 'approved'
           %span.statustextgreen Approved
         -else
           %span.statustextred Not Approved
     -else
-      .span3
-    .span3.status
+      %span
+    %span.status
       %h5
         Status:
         %span.statusValue Active
   -else
-    .span2
+    %span
       %strong Creator:
-      %span #{current_user.name || current_user.username || current_user.email}
-    .span7
-    .span3.status
+      %span #{current_user.display_name}
+    %span
+    %span.status
       %h5
         Status:
         %span.statusValue Draft
+  %span.force-wrap

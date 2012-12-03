@@ -1,0 +1,33 @@
+.modal-header
+  %nav
+    -help_path = yield_content!(:modal_help)
+    -if !help_path.blank?
+      %a.widgetbtn{ :href => "/help/#{help_path}", :'data-toggle' => 'modal-ajax', :title => "Help - What is this?"}
+        %i.gcmsicon-questionmark-grey
+    %a.widgetbtn{ :'data-dismiss' => 'modal', :href => '#'}
+      %i.gcmsicon-x-grey
+  %h1=yield_content!(:modal_title) || "&nbsp;".html_safe
+
+.modal-body.cleanlabels.compact-rows
+  =yield
+  -detail = yield_content!(:export_detail)
+  -if detail.present?
+    =detail
+  -else
+    -# Default export details
+    %p
+      When opening the CSV, settings should be:
+      %dl
+        %dt Separated by
+        %dd Comma
+        %dt Text Delimiter
+        %dd " (double quotation mark).
+
+.modal-footer
+  .row-fluid
+    %nav.fltlft.txtlft.span3
+      %a.btn.btn-large.btn-info{:'data-dismiss' => 'modal', :href => '#' } Cancel
+    .span6
+    %nav.fltrt.txtrt.span3
+      %a.btn.btn-large.btn-success{ :href => yield_content!(:export_url), :target => '_blank' } Export
+      %a.btn.btn-large.btn-success{ :'data-dismiss' => 'modal', :href => '#' } Done

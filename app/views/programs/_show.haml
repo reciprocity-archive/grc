@@ -25,10 +25,10 @@
               Import Controls
           %li.divider
           %li
-            %a{ :href => export_flow_program_path(program, :format => :csv), :target => '_blank' }
+            %a{ :href => export_flow_program_path(program, :format => :html), :'data-toggle' => 'modal-ajax' }
               Export Regs
           %li
-            %a{ :href => export_controls_flow_program_path(program, :format => :csv), :target => '_blank' }
+            %a{ :href => export_controls_flow_program_path(program, :format => :html), :'data-toggle' => 'modal-ajax' }
               Export Controls
     .span4
       %a.span12.btn.btn-warning{ :href => mapping_program_path(program) }

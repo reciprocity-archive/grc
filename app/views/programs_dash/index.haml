@@ -27,6 +27,21 @@
         =render :partial => 'design/templates/riskWidgetGap'
         =render :partial => 'design/templates/riskWidgetRisk'
   .singleColumn
+    .btn-group.closed
+      %a.span2.btn.btn-warning.dropdown-toggle{ :'data-toggle' => 'dropdown' }
+        %i.gcmsicon-import-white
+        Im/Export
+        %span.caret
+      %ul.dropdown-menu
+        %li.divider
+        %li
+          %a{ :href => import_flow_systems_path }
+            Import Systems
+        %li.divider
+        %li
+          %a{ :href => export_flow_systems_path(:format => :html), :'data-toggle' => 'modal-ajax' }
+            Export Systems
+  .singleColumn
     -if has_feature? :BETA
       .row-static
         .singleColumn
@@ -44,7 +59,7 @@
         %a{ :href => new_flow_program_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
           Program or Policy
       %li
-        %a{ :href => '#comingsoon-modal', :'data-toggle' => 'modal', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
+        %a{ :href => new_flow_risky_attribute_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
           Risky Attribute
       %li
         %a{ :href => '#comingsoon-modal', :'data-toggle' => 'modal', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
@@ -57,7 +72,7 @@
         %a{ :href => new_flow_system_path(:'system[is_biz_process]' => 1), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
           Business Process
       %li
-        %a{ :href => new_flow_system_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect' }
+        %a{ :href => new_flow_system_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
           System
       %li.divider
       %li
@@ -78,3 +93,4 @@
       %li
         %a{ :href => '#comingsoon-modal', :'data-toggle' => 'modal', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
           Data Asset
+

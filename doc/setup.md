@@ -29,7 +29,7 @@ After the Ruby version has installed, setup the gemset for CMS using:
 
 #### Problems?
 
-If you have problems building Ruby 1.9.3, make sure you have the dependencies described in `rvm requirements`.  If on OSX, use Xcode 4.1 (Xcode 4.2 uses LLVM, which in turn breaks everything.)
+If you have problems building Ruby 1.9.3, make sure you have the dependencies described in `rvm requirements`.  Homebrew (http://mxcl.github.com/homebrew/) may help with this.  To install the `mysql` gem, you may need to `brew install mysql`.
 
 You may need to reinstall using `rvm pkg install openssl` and/or `rvm pkg install readline` if you have problems with the `linecache19` or `ruby-debug19` gems later on.
 
@@ -49,6 +49,19 @@ Setup gems
 CMS uses Bundler (`Gemfile` and `Gemfile.lock`) to manage Gems and dependencies.  Install bundler into your CMS gemset using:
 
     gem install bundler
+
+The CMS `Gemfile` references `Gemfile.local`, which you should create with the following template:
+
+    source 'http://rubygems.org'
+
+    group(:development, :test) do
+      platform :ruby do
+        # Add helpful local gems here, e.g. 'autotest' or 'heroku'
+        #gem 'heroku', :git => 'https://github.com/heroku/heroku.git'
+        #gem 'autotest'
+      end
+    end
+
 
 And install the gems required for CMS using the command below.  (The `--path=.bundle` is optional, but causes bundler to install gems into the `.bundle` local directory.)
 

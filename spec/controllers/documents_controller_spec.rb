@@ -13,7 +13,7 @@ describe DocumentsController do
     it_behaves_like "an authorized index"
     it_behaves_like "an authorized create"
     it_behaves_like "an authorized new"
-    it_behaves_like "an authorized read", ['show']
+    #it_behaves_like "an authorized read", ['show']
     it_behaves_like "an authorized update", ['edit', 'update']
     it_behaves_like "an authorized delete"
   end

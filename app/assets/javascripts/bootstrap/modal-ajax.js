@@ -1,3 +1,5 @@
+//= require bootstrap-modal
+
 !function($) {
 
   "use strict"; // jshint ;_;

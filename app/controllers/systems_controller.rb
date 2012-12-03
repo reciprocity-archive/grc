@@ -2,22 +2,21 @@
 # Copyright:: Google Inc. 2012
 # License:: Apache 2.0
 
+require 'csv'
+
+class ImportException < Exception
+end
+
 # HandleSystems
-class SystemsController < ApplicationController
-  include ApplicationHelper
+class SystemsController < BaseObjectsController
+  include ImportHelper
 
-  before_filter :load_system, :only => [:show,
-                                         :edit,
-                                         :tooltip,
-                                         :update,
-                                         :delete,
-                                         :destroy]
-
+  SYSTEM_MAP = Hash[*%w(System\ Code slug Title title Description description Infrastructure infrastructure Owner owner Category category Created created_at Updated updated_at)]
 
   access_control :acl do
     allow :superuser
 
-    actions :new, :create do
+    actions :new, :create, :import do
       allow :create, :create_system
     end
 
@@ -30,6 +29,9 @@ class SystemsController < ApplicationController
   end
 
   layout 'dashboard'
+
+  # TODO BASE OBJECTS
+  # - use abstracted methods to handle 'index' cases
 
   def index
     @systems = System
@@ -49,102 +51,143 @@ class SystemsController < ApplicationController
     render :json => @systems
   end
 
-  def show
-    @system = System.find(params[:id])
-  end
-
-  def new
-    @system = System.new(system_params)
-
-    render :layout => nil
-  end
-
-  def edit
-    @system = System.find(params[:id])
-
-    render :layout => nil
-  end
-
-  def create
-    @system = System.new(system_params)
-
+  def export
     respond_to do |format|
-      if @system.save
-        flash[:notice] = "Successfully created a new system."
-        format.json do
-          render :json => @system.as_json(:root => nil), :location => flow_system_path(@system)
-        end
-        format.html { redirect_to flow_system_path(@system) }
-      else
-        flash[:error] = "There was an error creating the system"
-        format.html { render :layout => nil, :status => 400 }
-      end
-    end
-  end
-
-  def update
-    @system = System.find(params[:id])
-
-    respond_to do |format|
-      if @system.authored_update(current_user, system_params)
-        flash[:notice] = "Successfully updated the system."
-        format.json do
-          render :json => @system.as_json(:root => nil), :location => flow_system_path(@system)
-        end
-        format.html { redirect_to flow_system_path(@system) }
-      else
-        flash[:error] = "There was an error updating the system"
-        format.html { render :layout => nil, :status => 400 }
-      end
-    end
-  end
-
-  def delete
-    @model_stats = []
-    @relationship_stats = []
-    @model_stats << [ 'System Control', @system.system_controls.count ]
-    @model_stats << [ 'System Section', @system.system_sections.count ]
-    @relationship_stats << [ 'Sub Systems', @system.sub_systems.count ]
-    @relationship_stats << [ 'Super Systems', @system.super_systems.count ]
-    @relationship_stats << [ 'Document', @system.documents.count ]
-    @relationship_stats << [ 'Category', @system.categories.count ]
-    @relationship_stats << [ 'Person', @system.people.count ]
-    respond_to do |format|
-      format.json { render :json => @system.as_json(:root => nil) }
       format.html do
-        render :layout => nil, :template => 'shared/delete_confirm',
-          :locals => { :model => @system, :url => flow_system_path(@system), :models => @model_stats, :relationships => @relationship_stats }
+        render :layout => 'export_modal'
+      end
+      format.csv do
+        self.response.headers['Content-Type'] = 'text/csv'
+        headers['Content-Disposition'] = "attachment; filename=\"SYSTEMS.csv\""
+        self.response_body = Enumerator.new do |out|
+          out << CSV.generate_line(SYSTEM_MAP.keys)
+          System.all.each do |s|
+            values = SYSTEM_MAP.keys.map do |key|
+              field = SYSTEM_MAP[key]
+              case field
+              when 'owner'
+                object_person = s.object_people.detect {|x| x.role == 'accountable'}
+                object_person ? object_person.person.email : ''
+              when 'category'
+                (s.categories.map {|x| x.name}).join(',')
+              else
+                s.send(field)
+              end
+            end
+            out << CSV.generate_line(values)
+          end
+        end
       end
     end
   end
 
-  def destroy
-    respond_to do |format|
-      if @system.destroy
-        flash[:notice] = "System deleted"
-        format.html { ajax_refresh }
-        format.json { render :json => @system.as_json(:root => nil), :location => programs_dash_path }
+  def import
+    upload = params["upload"]
+    if upload.present?
+      begin
+        file = upload.read.force_encoding('utf-8')
+        import = read_import_systems(CSV.parse(file))
+        @messages = import[:messages]
+        do_import(import, params[:confirm].blank?)
+        @warnings = import[:warnings]
+        @errors = import[:errors]
+        @creates = import[:creates]
+        @updates = import[:updates]
+        render 'import_result', :layout => false
+      rescue CSV::MalformedCSVError, ArgumentError => e
+        log_backtrace(e)
+        render_import_error("Not a recognized file.")
+      rescue ImportException => e
+        render_import_error("Could not import file: #{e.to_s}")
+      rescue => e
+        log_backtrace(e)
+        render_import_error
+      end
+    elsif request.post?
+      render_import_error("Please select a file.")
+    end
+  end
+
+  def do_import(import, check_only)
+    import[:errors] = {}
+    import[:updates] = []
+    import[:creates] = []
+    import[:warnings] = {}
+
+    @systems = []
+    import[:systems].each_with_index do |attrs, i|
+      import[:warnings][i] = HashWithIndifferentAccess.new
+
+      attrs.delete(nil)
+      attrs.delete('created_at')
+      attrs.delete('updated_at')
+
+      handle_import_person(attrs, 'owner', import[:warnings][i])
+
+      slug = attrs['slug']
+
+      if slug.blank?
+        import[:warnings][i][:slug] ||= []
+        import[:warnings][i][:slug] << "missing system slug"
+        system = nil
       else
-        flash[:error] = "Failed to delete system"
-        format.html { ajax_refresh }
+        system = System.find_by_slug(slug)
       end
+
+      system ||= System.new
+
+      handle_import_object_person(system, attrs, 'owner', 'accountable')
+      handle_import_category(system, attrs, 'category')
+
+      system.assign_attributes(attrs, :without_protection => true)
+
+      if system.new_record?
+        import[:creates] << slug
+      else
+        import[:updates] << slug
+      end
+      @systems << system
+      import[:errors][i] = system.errors unless system.valid?
+      system.save unless check_only
     end
   end
 
-  def tooltip
-    @system = System.find(params[:id])
-    render :layout => '_tooltip', :locals => { :system => @system }
+  def read_import_systems(rows)
+    import = { :messages => [] }
+
+    raise ImportException.new("There must be at least 2 input lines") unless rows.size >= 2
+
+    read_import(import, SYSTEM_MAP, "system", rows)
+
+    import
   end
 
   private
 
+    def delete_model_stats
+      [ [ 'System Control', @system.system_controls.count ],
+        [ 'System Section', @system.system_sections.count ]
+      ]
+    end
+
+    def extra_delete_relationship_stats
+      [ [ 'Sub Systems', @system.sub_systems.count ],
+        [ 'Super Systems', @system.super_systems.count ],
+      ]
+    end
+
+    def post_destroy_path
+      programs_dash_path
+    end
+
     def system_params
       system_params = params[:system] || {}
       %w(type).each do |field|
-        value = system_params.delete(field + '_id')
-        if value.present?
-          system_params[field] = Option.find(value)
-        end
+        parse_option_param(system_params, field)
+      end
+
+      %w(start_date stop_date).each do |field|
+        parse_date_param(system_params, field)
       end
 
       # Fixup legacy boolean
@@ -155,9 +198,5 @@ class SystemsController < ApplicationController
       end
 
       system_params
-    end
-
-    def load_system
-      @system = System.find(params[:id])
     end
 end

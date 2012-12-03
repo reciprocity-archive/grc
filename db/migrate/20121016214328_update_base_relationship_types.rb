@@ -1,5 +1,7 @@
 class UpdateBaseRelationshipTypes < ActiveRecord::Migration
   def up
+    RelationshipType.reset_column_information
+
     new_relationship_types = [
       # Relationship types are in alphabetical order!
       {

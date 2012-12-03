@@ -6,7 +6,7 @@ class Document < ActiveRecord::Base
   include AuthorizedModel
   include RelatedModel
 
-  VALID_SCHEMES = ['http', 'https']
+  VALID_SCHEMES = ['http', 'https', 'file']
 
   attr_accessible :link, :title, :description, :type, :kind, :language, :year
 

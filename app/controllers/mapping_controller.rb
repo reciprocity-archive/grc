@@ -5,7 +5,7 @@ class MappingController < ApplicationController
   respond_to :html, :json
   skip_after_filter :flash_to_headers, :only => [:buttons]
 
-  cache_sweeper :section_sweeper, :only => [:map_rcontrol, :map_ccontrol]
+  cache_sweeper :section_sweeper, :only => [:map_rcontrol, :map_ccontrol, :update]
   cache_sweeper :control_sweeper, :only => [:map_rcontrol, :map_ccontrol]
 
   def show
@@ -198,34 +198,6 @@ class MappingController < ApplicationController
       format.html do
         render :partial => 'control_list_content',
                :locals => { :controls => controls.all, :control_type => params[:control_type] }
-      end
-    end
-  end
-
-  def create_ccontrol
-    @control = Control.new(control_params)
-
-    respond_to do |format|
-      if @control.save
-        flash[:notice] = "Successfully created a new company control"
-        format.html { ajax_refresh }
-      else
-        flash[:error] = "There was an error creating the control."
-        format.html { render :layout => nil, :status => 400 }
-      end
-    end
-  end
-
-  def create_rcontrol
-    @control = Control.new(control_params)
-
-    respond_to do |format|
-      if @control.save
-        flash[:notice] = "Successfully created a new regulation control"
-        format.html { ajax_refresh }
-      else
-        flash[:error] = "There was an error creating the control."
-        format.html { render :layout => nil, :status => 400 }
       end
     end
   end

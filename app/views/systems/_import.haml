@@ -1,0 +1,19 @@
+-content_for :widget_title do
+  Import Regulation
+
+-content_for :widget_help, 'import'
+
+=form_tag '', :class => 'import', :multipart => true, :remote => true, :'data-type' => 'html', :'data-update-target' => '#results-container' do
+
+  %label(for="file") File to Upload
+  .row-fluid
+    .span6
+      =file_field_tag "upload", :class => 'span12 btn'
+    .span3
+      =submit_tag "Upload and Review", :class => 'span12 btn btn-success btn-primary pull-right'
+    .span3
+      -if CMS_CONFIG["SYSTEM_IMPORT_TEMPLATE"].present?
+        %a{ :href => CMS_CONFIG["SYSTEM_IMPORT_TEMPLATE"], :target => '_blank' }
+          View Import Template
+
+  #results-container

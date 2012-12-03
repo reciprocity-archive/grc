@@ -42,7 +42,8 @@ CmsRails::Application.configure do
 
   # Enable threaded mode
   unless File.basename($0) == "rake"
-    config.threadsafe!
+    # config.threadsafe!
+    # TODO(miron) - check compatibility with MySQL.  MySQL adapter doesn't seem to yield, causing deadlocks.
   end
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to

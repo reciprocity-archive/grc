@@ -33,6 +33,8 @@ describe ProgramsController do
       login({}, { :role => 'superuser' })
       @ctl2 = FactoryGirl.create(:control, :title => 'Control 2', :slug => 'CTL2', :description => 'x', :program => @creg)
       @ctl3 = FactoryGirl.create(:control, :title => 'Control 3', :slug => 'CTL2-1', :description => 'x', :parent => @ctl2, :program => @creg)
+      @person = FactoryGirl.create(:person)
+      @ctl3.object_people.create({:person => @person, :role => 'executive'}, :without_protection => true)
       @sec2 = FactoryGirl.create(:section, :title => 'Section 2', :slug => 'REG1-SEC2', :description => 'x', :program => @reg)
       @sec3 = FactoryGirl.create(:section, :title => 'Section 3', :slug => 'REG1-SEC3', :description => 'x', :program => @reg)
       @sec2.controls << @ctl
@@ -43,6 +45,7 @@ describe ProgramsController do
     end
 
     it "gets the correct stats" do
+      pending "@stats not actually used except in tests"
       get 'show', :id => @reg.id
       stats = assigns(:stats)
       stats[:sections_count].should eq(3)
@@ -74,7 +77,7 @@ describe ProgramsController do
     end
   end
 
-  context "check_import" do
+  context "import program/sections" do
     before :each do
       login({}, { :role => 'superuser' })
     end
@@ -84,8 +87,8 @@ describe ProgramsController do
       Option.create(:title => "Soonish", :role => 'audit_frequency')
       post 'import', :id => @reg.id, :upload => fixture_file_upload("/REG1.csv")
       assigns(:messages).should == [
-        "invalid program heading Bogus1",
-        "invalid section heading Bogus2"
+        "Invalid program heading Bogus1",
+        "Invalid section heading Bogus2"
       ]
       assigns(:errors).should include 2
       assigns(:errors)[2].should include :title
@@ -97,8 +100,8 @@ describe ProgramsController do
     it "should prepare import with missing option" do
       post 'import', :id => @reg.id, :upload => fixture_file_upload("/REG1.csv")
       assigns(:messages).should == [
-        "invalid program heading Bogus1",
-        "invalid section heading Bogus2"
+        "Invalid program heading Bogus1",
+        "Invalid section heading Bogus2"
       ]
       assigns(:errors).should include 2
       assigns(:errors)[2].should include :title
@@ -110,6 +113,34 @@ describe ProgramsController do
     it "should do import" do
       post 'import', :id => @reg.id, :upload => fixture_file_upload("/REG1.csv"), :confirm => "true"
       Section.find_by_slug("REG1-SEC1").description.should == "new description x"
+    end
+  end
+
+  context "import controls" do
+    before :each do
+      login({}, { :role => 'superuser' })
+    end
+
+    it "should do import" do
+      post 'import_controls', :id => @reg.id, :upload => fixture_file_upload("/CONTROLS.csv"), :confirm => "true"
+      ctl = Control.find_by_slug("CTL1")
+      ctl.description.should == "This is Control 1"
+      ctl.documents.should == [Document.find_by_link('file://file/xyz')]
+    end
+  end
+
+  context "export controls" do
+    before :each do
+      login({}, { :role => 'superuser' })
+      @ctl2 = FactoryGirl.create(:control, :title => 'Control 2', :slug => 'CTL2', :description => 'x', :program => @creg)
+      @ctl3 = FactoryGirl.create(:control, :title => 'Control 3', :slug => 'CTL2-1', :description => 'x', :parent => @ctl2, :program => @creg)
+      @person = FactoryGirl.create(:person)
+      @ctl3.object_people.create({:person => @person, :role => 'executive'}, :without_protection => true)
+    end
+    it "should export" do
+      get 'export_controls', :id => @creg.id, :format => :csv
+      # system titles, system data
+      response.body.split("\n").size.should == 6
     end
   end
 

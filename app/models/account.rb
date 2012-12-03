@@ -33,7 +33,7 @@ class Account < ActiveRecord::Base
   before_save :create_person_if_necessary
 
   def display_name
-    email
+    name.presence || email.presence
   end
 
   def password=(password)

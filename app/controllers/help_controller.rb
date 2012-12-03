@@ -32,15 +32,9 @@ class HelpController < ApplicationController
     respond_to do |format|
       format.html do
         if request.xhr?
-          begin
-            render :partial => 'help', :layout  => 'help_modal'
-          rescue
-            render :partial => 'default', :layout  => 'help_modal'
-          end
+          render :partial => 'help', :layout  => 'help_modal'
         else
-          begin
-            render '_help', :layout => 'dashboard'
-          end
+          render '_help', :layout => 'dashboard'
         end
       end
     end

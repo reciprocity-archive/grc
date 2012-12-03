@@ -12,7 +12,7 @@
   %h1.fltrt.highlighted=@system.is_biz_process ? 'Biz Process' : 'System'
 
 -content_for :subheader_plus do
-  %a.navbarplus.fltrt{ :href => new_flow_system_path(:'system[is_biz_process]' => @system.is_biz_process), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect' }
+  %a.navbarplus.fltrt{ :href => new_flow_system_path(:'system[is_biz_process]' => @system.is_biz_process), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
 
 .row-static
   .doubleColumn
@@ -28,7 +28,7 @@
       =render :partial => 'systems/transactions',
               :layout => 'layouts/widget_box',
               :locals => { :system => @system }
-      
+
   .singleColumn
     .fullHeight
       =render :partial => 'systems/show',

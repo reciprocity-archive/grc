@@ -13,6 +13,29 @@ class Relationship < ActiveRecord::Base
   scope :manages, where(:relationship_type_id => 'manager_of')
 
 
+  def self.related_objects_for_delete(object)
+    object_type = object.class.name
+    object_id = object.id
+
+    table = arel_table
+
+    src_query = table[:source_type].eq(object_type).and(table[:source_id].eq(object.id))
+    dst_query = table[:destination_type].eq(object_type).and(table[:destination_id].eq(object.id))
+
+    objects = {}
+
+    where(src_query).all.each do |rel|
+      objects[rel.destination_type] ||= []
+      objects[rel.destination_type] << rel.destination
+    end
+
+    where(dst_query).all.each do |rel|
+      objects[rel.source_type] ||= []
+      objects[rel.source_type] << rel.source
+    end
+
+    objects
+  end
 
   def self.index_query(params, base_query=nil)
     if base_query.nil?

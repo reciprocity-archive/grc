@@ -1,0 +1,4 @@
+=form_for object, :url => form_url, :method => :put, :remote => true do |f|
+  =render :partial => 'form',
+          :layout  => 'layouts/form_modal',
+          :locals  => form_context.merge(:f => f)
