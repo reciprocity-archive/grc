@@ -171,6 +171,12 @@
       border-top:$widgetBorder;
     }
 
+    .widget-toolbar {
+      .btn {
+        min-height:0;
+      }
+    }
+
     .list-trigger {
       margin:5px 5px 0 5px;
       padding:1px 0 1px 1px;
