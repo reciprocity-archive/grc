@@ -148,7 +148,7 @@ describe FormHelper do
       params = { :field => '01/02/2003' }.with_indifferent_access
       parse_date_param(params, :field)
       params[:field].should be_a(Time)
-      params[:field].should eq(Time.new(2003, 1, 2))
+      params[:field].should eq(Date.new(2003, 1, 2).to_time_in_current_zone)
     end
   end
 
