@@ -147,6 +147,17 @@
                       %label Kind
                       %input.span12{:disabled => "disabled", :placeholder => "---", :type => "text"}/
                 .row-fluid
+                  .span12
+                    .span3
+                      %label Fraud-Related
+                      %input.span12{:disabled => "disabled", :placeholder => "No", :type => "text"}/
+                    .span3
+                      %label Significance
+                      %input.span12{:disabled => "disabled", :placeholder => "Key", :type => "text"}/
+                    .span6
+                      %label Satisfies the following Assertions
+                      %input.span12{:disabled => "disabled", :placeholder => "Completeness, Occcurance", :type => "text"}/
+                .row-fluid
                   .span8
                     %label Means of Opeartion
                     %input.span12{:disabled => "disabled", :placeholder => "Manual w/ Segregation of Duties", :type => "text"}/
@@ -157,6 +168,10 @@
                   .span12
                     %label Description
                     %textarea#textarea.span12{:disabled => "disabled", :placeholder => "", :rows => "3", :style => "height: 135px; "} PCI DDS applies whenever Cardholder account data and Authentication Data is Stored, Processed or Transmitted. Examples Include: For more See Page 7 of document. Using h6 makes the label caps.
+                .row-fluid
+                  .span12
+                    %label Notes
+                    %textarea#notes.span12{:disabled => "disabled", :placeholder => "", :rows => "3", :style => "height: 135px; "} ...
                 .row-fluid
                   .span12
                     %label Direct Link
