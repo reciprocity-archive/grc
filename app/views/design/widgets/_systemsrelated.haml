@@ -1,0 +1,76 @@
+#systemsrelated.WidgetBox
+  .WidgetBoxHeading
+    .WidgetTitle Related
+    %nav
+      %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+        %i.gcmsicon-questionmark-grey
+      %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
+      %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#impactScopeInfo"}
+        %i.gcmsicon-enlarge-grey
+  .WidgetBoxContent.information
+    #impactScopeInfo.collapse.in
+      /Button Filters
+      .button-set
+        .row-fluid
+          .span4
+            .span12.btn{:href => ""}
+              Programs
+          .span4
+            .span12.btn.halfopacity{:href => ""}
+              Org Groups 
+          .span4
+            .span12.btn.halfopacity{:href => ""}
+              Projects
+          
+      .button-set
+        .row-fluid
+          .span4
+            .span12.btn{:href => ""}
+              Risks
+          .span4
+            .span12.btn.halfopacity{:href => ""}
+              Products
+          .span4
+            .span12.btn.halfopacity{:href => ""}
+              Markets 
+      .button-set
+        .row-fluid
+          .span4
+            .span12.btn.halfopacity{:href => ""}
+              Processes
+          .span4
+            .span12.btn.halfopacity{:href => ""}
+              Data Assets
+          .span4
+            .span12.btn.halfopacity{:href => ""}
+              Facilities
+      %hr.hr-widget
+      / TABS
+      .row-fluid
+        .span12.nominheight.itemswell
+          .row-fluid.nominheight
+            .span12.nominheight
+              %h4.nominheight
+                Facilities
+                -#%a.btn.btn-blue.minibtn.pull-right Edit List
+                %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                  %i.gcmsicon-link
+          .row-fluid
+            .span12.captionbox
+              .subtitle Facilities that implement this Business Process
+          .row-fluid
+            %ul.span12
+              %li.controlSlot
+                .row-fluid.nominheight
+                  .span6.nominheight
+                    %span.controls-group Buildings
+                  .span6.nominheight
+                    %a.btn.minibtn.pull-right Review
+                .row-fluid.nominheight
+                  .span3.nominheight
+                    %span.controls-subgroup
+                      %strong CCA
+                  .span9.nominheight
+                    %span.controls-subgroup SFO Campus Building
+     
+  / end of span

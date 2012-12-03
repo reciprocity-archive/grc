@@ -175,11 +175,14 @@ jQuery(function ($) {
   for (i=0;i<=50;i++) {
     $('#tooltip' + i).tooltip();
   }
-
+//div[class*='tocolor-']
   
-  $('div[#^="summary"]').on('hidden', function () {
-      $this.closest('div[#^="more"]').collapse('hide');
+  $("div[class*='-summary']").on('click', function () {
+    alert("ping");
+      $this.closest("div[class*='-more']").collapse('hide');
 })
+
+
 
 
   // show/hide widget
@@ -502,7 +505,7 @@ function toggleGovernance() {
 
 
 /* Hack to show a prototype of stacked modal slideout/in */
-/* Specific to two modals currently and ignores bootstrap modal functionality (ie I think they use a toggle) */
+/* Specific to two modals currently and ignores bootstrap modal functionality (ie I think they use a toggle)
 
 $(document).on("click", "#openSecondModal", function(event) {
     
@@ -537,8 +540,8 @@ $(document).on("click", "#closeSecondModal", function(event) {
 
 });
 
-
-
+//THE ABOVE SHOULD BE IMPLEMENTED VIA BRAD'S SOLUTION
+ */
 
 jQuery(function($) {
   if ($.cookie('toggle_governance') == '1')
