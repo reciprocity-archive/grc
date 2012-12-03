@@ -528,10 +528,10 @@ width: 97px;
   
   }
   &.controlslot {
-    background-color: #eafbff; // Old browsers
-    @include filter-gradient(#eafbff, #cfebf9, vertical); // IE6-9
-    @include background-image(linear-gradient(top,  #eafbff 0%,#cfebf9 100%)); 
-    @include border-radius(5px);
+    background-color: #eaedff; // Old browsers
+    @include filter-gradient(#eaedff, #cfe0f9, vertical); // IE6-9
+    @include background-image(linear-gradient(top,  #eaedff 0%,#cfe0f9 100%)); 
+    //@include border-radius(5px);
   }
   &.processslot {
     background-color: #eafbff; // Old browsers

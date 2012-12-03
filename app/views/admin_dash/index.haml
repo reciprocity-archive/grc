@@ -39,6 +39,23 @@
       -if has_feature? :BETA
       
         / in progress
+        #StyleGuide.WidgetBox.singleWide.demoItem
+          .WidgetBoxHeading
+            .WidgetTitle Style Guide
+            %nav
+              %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                %i.gcmsicon-questionmark-grey
+              %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
+              %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#programsInProgress"}
+                %i.gcmsicon-enlarge-grey
+          / /.WidgetBoxHeading
+          .WidgetBoxContent
+            #programsInProgress.toolbar-widget.in
+              %ul#quickLinks.nav.nav-tabs.nav-stacked.in
+                %li.group
+                  %a.btn{:href => "/design/styleguide"}
+                    Style Guide (First Draft)
+
         #Programs.WidgetBox.singleWide.demoItem
           .WidgetBoxHeading
             .WidgetTitle In-Progress Pages
@@ -52,6 +69,9 @@
           .WidgetBoxContent
             #programsInProgress.toolbar-widget.in
               %ul#quickLinks.nav.nav-tabs.nav-stacked.in
+                %li.group
+                  %a.btn{:href => "/design/systems"}
+                    Systems Page
                 %li.group
                   %a.btn{:href => "/design/products"}
                     Product Page
