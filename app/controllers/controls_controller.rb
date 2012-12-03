@@ -11,6 +11,7 @@ class ControlsController < BaseObjectsController
                                          :implemented_controls,
                                          :implementing_controls]
 
+  cache_sweeper :control_sweeper, :only => [:create, :update, :destroy]
 
   access_control :acl do
     allow :superuser

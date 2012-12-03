@@ -31,6 +31,9 @@ class ProgramsController < BaseObjectsController
                                          :control_sections,
                                          :category_controls]
 
+  cache_sweeper :section_sweeper, :only => [:destroy, :import]
+  cache_sweeper :control_sweeper, :only => [:destroy, :import_controls]
+
   access_control :acl do
     allow :superuser
 
