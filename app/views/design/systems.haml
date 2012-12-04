@@ -45,24 +45,24 @@
             %hr.hr-widget
             .row-fluid
               .span12
-                %h3.toggle{"data-target" => "#productCategories", "data-toggle" => "collapse"}
+                %h3.toggle{"data-target" => "#dataGenerated", "data-toggle" => "collapse"}
                   .expander.in
                   Data Generated
                   %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
                     %i.gcmsicon-edit-grey
-                %ul#productCategories.collapse.in
+                %ul#dataGenerated.collapse.in
                   %li.controlSlot
                     %span.controls-subgroup 
                       ads data, customer data, campaign data, impression and click data
             %hr.hr-widget
             .row-fluid
               .span12
-                %h3.toggle{"data-target" => "#productReferences", "data-toggle" => "collapse"}
+                %h3.toggle{"data-target" => "#dataProcessed", "data-toggle" => "collapse"}
                   .expander.in
                   Data Processed
                   %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
                     %i.gcmsicon-edit-grey
-                %ul#productReferences.collapse.in
+                %ul#dataProcessed.collapse.in
                   %li.controlSlot
                     %span.controls-subgroup 
                       ADR receives data from MDB/Escanner regarding the network assets on the network.
@@ -85,7 +85,7 @@
   .singleColumn
     #productInfo.WidgetBox
       .WidgetBoxHeading
-        .WidgetTitle Control Actions
+        .WidgetTitle System Actions
       .WidgetBoxContent.information
         .toolbar-widget
           .row-fluid
@@ -97,7 +97,7 @@
                 Relationship Map
     #productInfo.WidgetBox
       .WidgetBoxHeading
-        .WidgetTitle Control Info
+        .WidgetTitle System Info
         %nav
           %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
             %i.gcmsicon-questionmark-grey
