@@ -91,52 +91,22 @@
                       Textual description here.)
                   
                   
-  %li
-    .row-fluid
-      .slot.span12.systemslot
-        .slottitle.span8.toggle{"data-target" => "#gwallet-2-summary", "data-toggle" => "collapse"}
-          .expander
-          %span.prefix Google Wallet Expedite
-          This is a general system slot.
-        .slotcolumn.span2
-          .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
-        .slotowner.span1
-          %a.slotowner{:href => "http://www.youtube.com/watch?v=oHg5SJYRHA0"} Rick Astley
-        .slotactions.pull-right
-          %a.btn.btn-mini.btn-blue.halfopacity{"data-target" => "#gwallet-2-more", "data-toggle" => "collapse"}
-            %i.gcmsicon-more
-    #gwallet-2-more.row-fluid.collapse
-      -# This is more info.
-      .span12.morewell.statusblue.nominheight
-        .slotcontent.span12
-          %ul.contentactions.pull-right
-            %li
-              %a#tooltip40.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Edit this object", "data-toggle" => "modal", :href => "#comingsoonModal"}
-                %i.gcmsicon-edit-grey
-            %li
-              %a#tooltip39.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Link objects to this object", "data-toggle" => "modal", :href => "#comingsoonModal"}
-                %i.gcmsicon-link
-            %li
-              %a#tooltip38.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", "data-toggle" => "modal", :href => "#comingsoonModal"}
-                %i.gcmsicon-arrowright-black
-          General textual infromation and description on this System; Google Wallet.    
-    #gwallet-2-summary.collapse          
-      %ul.slotlist
         %li
           .row-fluid
-            .slot.span12.processslot
-              .slottitle.span8.toggle{"data-target" => "#Process-2-summary", "data-toggle" => "collapse"}
+            .slot.span12.systemslot
+              .slottitle.span8.toggle{"data-target" => "#gwallet-2-summary", "data-toggle" => "collapse"}
                 .expander
-                %span.prefix gWallet Expedite Process
-                This is a process slot.
+                %span.prefix Google Wallet Expedite
+                This is a general system slot.
               .slotcolumn.span2
                 .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
               .slotowner.span1
                 %a.slotowner{:href => "http://www.youtube.com/watch?v=oHg5SJYRHA0"} Rick Astley
               .slotactions.pull-right
-                %a.btn.btn-mini.btn-blue.halfopacity{"data-target" => "#Process-2-more", "data-toggle" => "collapse"}
+                %a.btn.btn-mini.btn-blue.halfopacity{"data-target" => "#gwallet-2-more", "data-toggle" => "collapse"}
                   %i.gcmsicon-more
-          #Process-2-more.row-fluid.collapse
+          #gwallet-2-more.row-fluid.collapse
+            -# This is more info.
             .span12.morewell.statusblue.nominheight
               .slotcontent.span12
                 %ul.contentactions.pull-right
@@ -149,24 +119,24 @@
                   %li
                     %a#tooltip38.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", "data-toggle" => "modal", :href => "#comingsoonModal"}
                       %i.gcmsicon-arrowright-black
-                Textual description here.)
-          #Process-2-summary.collapse
-            %ul
+                General textual infromation and description on this System; Google Wallet.    
+          #gwallet-2-summary.collapse          
+            %ul.slotlist
               %li
                 .row-fluid
-                  .slot.span12.controlslot
-                    .slottitle.span8.toggle{"data-target" => "#Control-2-more", "data-toggle" => "collapse"}
-                      .enddot
-                      %span.prefix Control 1
-                      This is a control slot.
+                  .slot.span12.processslot
+                    .slottitle.span8.toggle{"data-target" => "#Process-2-summary", "data-toggle" => "collapse"}
+                      .expander
+                      %span.prefix gWallet Expedite Process
+                      This is a process slot.
                     .slotcolumn.span2
                       .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
                     .slotowner.span1
                       %a.slotowner{:href => "http://www.youtube.com/watch?v=oHg5SJYRHA0"} Rick Astley
                     .slotactions.pull-right
-                      %a.btn.btn-mini.btn-blue.halfopacity{"data-target" => "#Control-2-more", "data-toggle" => "collapse"}
+                      %a.btn.btn-mini.btn-blue.halfopacity{"data-target" => "#Process-2-more", "data-toggle" => "collapse"}
                         %i.gcmsicon-more
-                #Control-2-more.row-fluid.collapse
+                #Process-2-more.row-fluid.collapse
                   .span12.morewell.statusblue.nominheight
                     .slotcontent.span12
                       %ul.contentactions.pull-right
@@ -180,4 +150,34 @@
                           %a#tooltip38.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", "data-toggle" => "modal", :href => "#comingsoonModal"}
                             %i.gcmsicon-arrowright-black
                       Textual description here.)
-                  
+                #Process-2-summary.collapse
+                  %ul
+                    %li
+                      .row-fluid
+                        .slot.span12.controlslot
+                          .slottitle.span8.toggle{"data-target" => "#Control-2-more", "data-toggle" => "collapse"}
+                            .enddot
+                            %span.prefix Control 1
+                            This is a control slot.
+                          .slotcolumn.span2
+                            .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
+                          .slotowner.span1
+                            %a.slotowner{:href => "http://www.youtube.com/watch?v=oHg5SJYRHA0"} Rick Astley
+                          .slotactions.pull-right
+                            %a.btn.btn-mini.btn-blue.halfopacity{"data-target" => "#Control-2-more", "data-toggle" => "collapse"}
+                              %i.gcmsicon-more
+                      #Control-2-more.row-fluid.collapse
+                        .span12.morewell.statusblue.nominheight
+                          .slotcontent.span12
+                            %ul.contentactions.pull-right
+                              %li
+                                %a#tooltip40.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Edit this object", "data-toggle" => "modal", :href => "#comingsoonModal"}
+                                  %i.gcmsicon-edit-grey
+                              %li
+                                %a#tooltip39.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Link objects to this object", "data-toggle" => "modal", :href => "#comingsoonModal"}
+                                  %i.gcmsicon-link
+                              %li
+                                %a#tooltip38.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", "data-toggle" => "modal", :href => "#comingsoonModal"}
+                                  %i.gcmsicon-arrowright-black
+                            Textual description here.)
+                        

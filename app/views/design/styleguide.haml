@@ -146,7 +146,7 @@
 
           .infowell .btn .btn-color addbtn vs minibtn
           .well Addbtn is depreciated for minibtn in almost every case. 
-          .warningwell  Regmapper needs to be reviewed before addbtn can be removed from css as it was created for this page originally.
+          .warningwell  Regmapper needs to be reviewed before addbtn can be removed from css as it was created for this page originally. ALSO, KINDA HUGE: Create block level buttons—those that span the full width of a parent— by adding .btn-block - we have consistently put span12. eww.
           
 
 
@@ -173,10 +173,6 @@
               %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#"}
                 %i.gcmsicon-enlarge-grey
               Show/Hide button - Shows widget content or hides the widget (animated to a single header bar unless content flagged to always show)
-            %li
-              %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#"}
-                %i.icon-minus-side
-              Remove icon usually in selectors.
             %li
               %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
               While not an icon or button listed here for completion. Should always be present for filterable widgets.
@@ -208,6 +204,11 @@
               %a.btn.btn-mini.halfopacity{"data-toggle" => "modal", :href => "#comingsoonModal"}
                 %i.gcmsicon-arrowright-black
               Go Button - Opens up this object's page.
+
+            %li
+              %a.btn.btn-mini.halfopacity{"data-toggle" => "collapse", :href => "#"}
+                %i.icon-minus-sign
+              Remove icon, usually in selectors (lists).
           .infowell
             a.btn.btn-mini.halfopacity > i.gcmsicon-iconname
           .warningwell
@@ -321,7 +322,7 @@
             http://www.google.com/webfonts/specimen/PT+Sans
 
         .warningwell
-          NEEDS UPDATE I see that a number of pages load in the webfont directly from Google. While this works there is some browser delay and it should be local.
+          NEEDS UPDATE I see that a number of pages load in the webfont directly from Google. While this works there is some browser delay and it should be local. Additionally, we never had a round of font tests; we should have 3 or 4 compete against each other and vote one in.
         -#.toolbar-widget.well
           %a.btn.btn-warning{"data-toggle" => "modal", :href => "#comingsoonModal"}
             New Version
@@ -381,6 +382,8 @@
                     %label Scope / Applicability of this Program
                     %textarea#textarea{:disabled => "disabled", :placeholder => "", :rows => "3", :style => "margin: 0px; width: 98%; height: 73px; "} PCI DDS applies whenever Cardholder account data and Authentication Data is Stored, Processed or Transmitted. Examples Include: For more See Page 7 of document. Using h6 makes the label caps.
           %hr.hr-widget
+          .warningwell
+            The edit (or link) subaction button beside the closed subarea should probably be hidden until that area is opened. Otherwise they know not what they do.
 
 
 
@@ -405,8 +408,8 @@
                 .slot.span12.programslot.selected 
                   .slottitle.span8.toggle{"data-target" => "#programslot2", "data-toggle" => "collapse"}
                     .expander
-                    %span.prefix Program Slot
-                    This is a generic content slot, possibly for a group. No coloring, nothing.
+                    %span.prefix Expander Group
+                    This is an item that owns others. Currently expanders (chevron) are only one color.
                   .span2.slotcolumn
                     .halfopacity.span12.nominheight.btn.btn-slotcolumn Full Audit
                   .slotowner.span1
@@ -466,19 +469,19 @@
                     
                           %li
                             .row-fluid
-                              .slot.span12.regulationslot.statusgreen.toggle{"data-target" => "#demo2-4-c2", "data-toggle" => "collapse"}
+                              .slot.span12.processslot.toggle{"data-target" => "#demo2-4-c2", "data-toggle" => "collapse"}
                                 %span.prefix Proc-2-1 Control 2
                                 Also without a [...] button.
-                                .enddot
+                                .enddot.process
                             .row-fluid#demo2-4-c2.collapse
                               .slotcontent
                                 Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
                           %li
                             .row-fluid
-                              .slot.span12.regulationslot.statusgreen.toggle{"data-target" => "#demo2-4-c3", "data-toggle" => "collapse"}
+                              .slot.span12.processslot.toggle{"data-target" => "#demo2-4-c3", "data-toggle" => "collapse"}
                                 %span.prefix Proc-2-1 Control 3
                                 Enable processes to provide for timely forensic investigation in the event of a ...
-                                .enddot
+                                .enddot.process
                             .row-fluid#demo2-4-c3.collapse
                               .slotcontent
                                 Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
@@ -493,15 +496,15 @@
                               .slottitle.span8.toggle{"data-target" => "#programslot2-1-summary", "data-toggle" => "collapse"}
                                 .expander
                                 %span.prefix Program
-                                This is a regulation slot, non group etc
+                                This is a program slot, non group etc - has no coloring
                               .slotcolumn.span2
                                 .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
                               .slotowner.span1
                                 %a.slotowner{:href => "http://www.youtube.com/watch?v=oHg5SJYRHA0"} Rick Astley
                               .slotactions.pull-right
-                                %a.btn.btn-mini.btn-blue.halfopacity{"data-target" => "#programslot2-1-summary", "data-toggle" => "collapse"}
+                                %a.btn.btn-mini.btn-blue.halfopacity{"data-target" => "#programslot2-1-more", "data-toggle" => "collapse"}
                                   %i.gcmsicon-more
-                          #programslot2-1-summary.row-fluid.collapse
+                          #programslot2-1-more.row-fluid.collapse
                             .span12.morewell.statusgreen.nominheight
                               .slotcontent.span12
                                 %ul.contentactions.pull-right
@@ -517,7 +520,7 @@
                                 Textual description here.)
 
 
-                    %ul
+                    %ul#programslot2-1-summary.collapse
                       %li
                         %ul.slotlist      
                           %li
@@ -526,7 +529,7 @@
                                 .row-fluid
                                   .slot.span12.regulationslot
                                     .slottitle.span8.toggle{"data-target" => "#regulationslot-1-summary", "data-toggle" => "collapse"}
-                                      .enddot
+                                      .enddot.regulation
                                       %span.prefix Regulation
                                       This is a regulation slot.
                                     .slotcolumn.span2
@@ -555,7 +558,7 @@
                                 .row-fluid
                                   .slot.span12.processslot
                                     .slottitle.span8.toggle{"data-target" => "#Process-1-summary", "data-toggle" => "collapse"}
-                                      .expander
+                                      .enddot.process
                                       %span.prefix Process
                                       This is a system slot.
                                     .slotcolumn.span2
@@ -582,7 +585,7 @@
                                 #Process-1-summary.collapse
                                   %ul
                                     %li
-                                      .row-fluid.eightyopacity
+                                      .row-fluid
                                         .slot.span12.controlslot
                                           .slottitle.span8.toggle{"data-target" => "#Control-1-summary", "data-toggle" => "collapse"}
                                             .expander
@@ -599,7 +602,7 @@
                                         
                                         %ul
                                           %li
-                                            .row-fluid.eightyopacity
+                                            .row-fluid
                                               .slot.span12.controlslot
                                                 .slottitle.span8.toggle{"data-target" => "#Control2a-1-summary", "data-toggle" => "collapse"}
                                                   .enddot
@@ -627,7 +630,7 @@
                                                         %i.gcmsicon-arrowright-black
                                                   Textual description here.)
                                     %li
-                                      .row-fluid.eightyopacity
+                                      .row-fluid
                                         .slot.span12.controlslot
                                           .slottitle.span8.toggle{"data-target" => "#Control-2-summary", "data-toggle" => "collapse"}
                                             .enddot
@@ -658,7 +661,7 @@
                                 .row-fluid
                                   .slot.span12.systemslot
                                     .slottitle.span8.toggle{"data-target" => "#system-1-summary", "data-toggle" => "collapse"}
-                                      .enddot
+                                      .enddot.system
                                       %span.prefix System
                                       This is a system slot.
                                     .slotcolumn.span2
@@ -686,7 +689,7 @@
                                 .row-fluid
                                   .slot.span12.riskslot
                                     .slottitle.span8.toggle{"data-target" => "#Threat-1-summary", "data-toggle" => "collapse"}
-                                      .enddot
+                                      .enddot.risk
                                       %span.prefix Risk 
                                       This is a risk slot.
                                     .slotcolumn.span2
@@ -714,7 +717,7 @@
                                 .row-fluid
                                   .slot.span12.riskyslot
                                     .slottitle.span8.toggle{"data-target" => "#tooltiptest-1-summary", "data-toggle" => "collapse"}
-                                      .enddot
+                                      .enddot.risk
                                       %span.prefix Risky Attribute
                                       This is a risky slot.
                                     .slotcolumn.span2
@@ -753,7 +756,7 @@
                 .doubleslot.span12.toggle{"data-target" => "#Threat-1-summary", "data-toggle" => "collapse"}
                   .row-fluid
                     .slottitle.span8
-                      .enddot
+                      .enddot.risk
                       %span.controls-group Double line Title
                       %br
                       This is a general description. Done by line-height and br.
@@ -767,7 +770,7 @@
           .infowell
             Height set by .doubleslot and the line-height/margins/padding of slotowner and slotaction styled by being inside doubleslot
           .warningwell
-            Enddot vs expander needs colorizing for other slot types
+            Enddot vs expander are colorized for other slot types but use a redundant class on enddot. Make it a child selector of the slot.
     #misc
 
     =render :partial => 'design/widgets/impactscope'
