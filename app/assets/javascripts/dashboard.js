@@ -6,8 +6,10 @@
  *= require related_selector
  *= require spin.min
  *= require tmpl
- *= require can.custom
- *= require controls_app
+ *= require can.jquery-all
+ *= require mustache_helper
+ *= require apps/controls
+ *= require apps/mapping
  *= require_self
  *= require jquery.remotipart
  *= require d3.v2

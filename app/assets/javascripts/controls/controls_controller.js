@@ -1,5 +1,5 @@
-//= require control
-//= require can.custom
+//= require controls/control
+//= require can.jquery-all
 
 (function($) {
 
@@ -7,22 +7,23 @@
 	    //Static
 	    defaults: {
 		    arity: 2
-		    , list : "list.mustache"
-		    , show : "show.mustache"
+		    , list : "/controls/list.mustache"
+		    , show : "/controls/show.mustache"
 		    , model : CMS.Models.Control
+		    , parent_id : ""
 		    //, list_model : CMS.Models.Control.List
 	    }
 	    , properties : []
 	}, {
 	    init : function() {
 			if(this.options.arity > 1) {
-			    this.fetch_list();
+			    this.fetch_list(this.options.id);
 			} else {
 			    this.fetch_one(this.options.id);
 			}
 	    }
-	    , fetch_list : function() {
-			this.options.model.findAll({}, this.proxy("draw_list"));
+	    , fetch_list : function(parent_id) {
+			this.options.model.findAll({ id : parent_id }, this.proxy("draw_list"));
 	    }
 	    , draw_list : function(list) {
 	    	if(this.list) {

@@ -1,0 +1,35 @@
+<div class="row-fluid">
+  <a class="span9 slot regulationslot toggle selector collapsed" data-remote="true" href="/mapping/selected_section/{{id}}">
+    <span class="prefix">{{slug}}</span>
+    {{title}}
+  </a>
+  <a class="attached controllistRM span3 status{{#if linked_controls.length}}yellow{{/if}}{{^linked_controls.length}}{{#if na}}yellow{{else}}red {{/if}}{{/linked_controls.length}}" href="/mapping_section_dialog/{{id}}">
+    {{#if linked_controls.length}}
+    <span>
+      <strong>{{linked_controls.length}}</strong>
+      : 
+    </span><ul class="spannomargin" title="{{join 'slug' linked_controls}}">
+      {{#linked_controls}}
+        <li>
+          {{slug}}
+        </li>
+      {{/linked_controls}}
+    </ul>
+    {{else}}
+        {{#if na}}
+          N/A
+        {{else}}
+          <strong>0</strong>
+        {{/if}}
+    {{/if}}
+  </a>
+</div>
+{{#if children}}
+  <ul id="children_{{slug}}">
+    {{#children}}
+    <li id="content_{{slug}}" {{data 'model'}}>
+    {{> /sections/slug_node.mustache}}
+    </li>
+    {{/children}}
+  </ul>
+{{/if}}

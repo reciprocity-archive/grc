@@ -70,6 +70,7 @@
           $(list_target).tmpl_setitems(data);
           $target.modal_relationship_selector('hide');
         }
+
       });
     },
 

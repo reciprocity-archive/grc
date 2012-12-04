@@ -1,0 +1,12 @@
+<ul class="slugtree" data-href="/mapping/sections/{{id}}.html">
+    <li id="content_">
+    <ul id="children_">
+    {{#children}}
+      <li id="content_{{slug}}" {{data "model"}}>
+      {{> /sections/slug_node.mustache}}
+  </li>
+  {{/children}}
+  </ul>
+
+  </li>
+</ul>
