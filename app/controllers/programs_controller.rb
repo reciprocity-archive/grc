@@ -364,7 +364,14 @@ class ProgramsController < BaseObjectsController
       @sections = @sections.fulltext_search(params[:s])
     end
     @sections = allowed_objs(@sections.all.sort_by(&:slug_split_for_sort), :read)
-    render :layout => nil, :locals => { :sections => @sections }
+    respond_to do |format|
+      format.html do
+        render :layout => nil, :locals => { :sections => @sections } 
+      end
+      format.json do 
+        render :json => @sections, :methods => :linked_controls
+      end
+    end
   end
 
   def controls
@@ -373,7 +380,14 @@ class ProgramsController < BaseObjectsController
       @controls = @controls.fulltext_search(params[:s])
     end
     @controls = allowed_objs(@controls.all.sort_by(&:slug_split_for_sort), :read)
-    render :layout => nil, :locals => { :controls => @controls }
+    respond_to do |format|
+      format.html do
+          render :layout => nil, :locals => { :controls => @controls }
+      end
+      format.json do 
+        render :json => @controls
+      end
+    end
   end
 
   def section_controls
