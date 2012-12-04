@@ -16,7 +16,7 @@ class ProgramsController < BaseObjectsController
 
   SECTION_MAP = Hash[*%w(Section\ Code slug Section\ Title title Section\ Description description Section\ Notes notes Created created_at Updated updated_at)]
 
-  CONTROL_MAP = Hash[*%w(Control\ Code slug Title title Description description Type type Kind kind Means means Version version Start start_date Stop stop_date URL url Documentation documentation_description Verify-Frequency verify_frequency References references Created created_at Updated updated_at)]
+  CONTROL_MAP = Hash[*%w(Control\ Code slug Title title Description description Type type Kind kind Means means Version version Start start_date Stop stop_date URL url Link:Systems systems Link:Categories categories Documentation documentation_description Verify-Frequency verify_frequency References references Link:People;Operator operator Created created_at Updated updated_at)]
 
   # FIXME: Decide if the :section, controls, etc.
   # methods should be moved, and what access controls they
@@ -84,6 +84,13 @@ class ProgramsController < BaseObjectsController
             values = CONTROL_MAP.keys.map do |key|
               field = CONTROL_MAP[key]
               case field
+              when 'categories'
+                (s.categories.map {|x| x.name}).join(',')
+              when 'systems'
+                (s.systems.map {|x| x.slug}).join(',')
+              when 'operator'
+                object_person = s.object_people.detect {|x| x.role == 'operator'}
+                object_person ? object_person.person.email : ''
               when 'references'
                 s.documents.map do |doc|
                   "#{doc.description} [#{doc.link} #{doc.title}]"
@@ -217,6 +224,7 @@ class ProgramsController < BaseObjectsController
       handle_option(attrs, :kind, import[:messages], :control_kind)
       handle_option(attrs, :means, import[:messages], :control_means)
       handle_option(attrs, :verify_frequency, import[:messages])
+      handle_import_person(attrs, 'operator', import[:warnings][i])
 
       slug = attrs['slug']
 
@@ -231,6 +239,9 @@ class ProgramsController < BaseObjectsController
       control ||= Control.new
 
       handle_import_document_reference(control, attrs, 'references', import[:warnings][i])
+      handle_import_object_person(control, attrs, 'operator', 'operator')
+      handle_import_category(control, attrs, 'categories', Control::CATEGORY_TYPE_ID)
+      handle_import_systems(control, attrs, 'systems')
 
       control.assign_attributes(attrs, :without_protection => true)
 

@@ -51,6 +51,7 @@ module ImportHelper
     end
   end
 
+  # NOTE: This depends on person having been looked up and the person object put in attrs[key]
   def handle_import_object_person(object, attrs, key, role)
     person = attrs.delete(key)
     existing = object.object_people.detect {|x| x.role == role}
@@ -64,12 +65,36 @@ module ImportHelper
     end
   end
 
-  def handle_import_category(object, attrs, key)
+  def handle_import_category(object, attrs, key, category_scope_id)
     category = attrs.delete(key)
 
     if category.present?
-      categories = category.split(',').map {|category| Category.find_or_create_by_name({:name => category})}
+      categories = category.split(',').map {|category| Category.find_or_create_by_name({:name => category, :scope_id => category_scope_id})}
       object.categories = categories
+    end
+  end
+
+  def handle_import_systems(object, attrs, key)
+    systems_string = attrs.delete(key)
+
+    if systems_string.present?
+      systems = systems_string.split(',').map do |slug|
+        system = System.find_or_create_by_slug({:slug => slug, :title => :slug, :infrastructure => false})
+        system
+      end
+      object.systems = systems
+    end
+  end
+
+  def handle_import_documents(object, attrs, key)
+    documents_string = attrs.delete(key)
+
+    if documents_string.present?
+      documents = parse_document_reference(documents_string).map do |attrs|
+        doc = Document.find_or_create_by_link(attrs)
+        doc
+      end
+      object.documents = documents
     end
   end
 

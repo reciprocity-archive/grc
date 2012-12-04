@@ -6,6 +6,8 @@ class System < ActiveRecord::Base
   include AuthorizedModel
   include RelatedModel
 
+  CATEGORY_TYPE_ID = 101
+
   attr_accessible :title, :slug, :description, :url, :version, :infrastructure, :is_biz_process, :type, :start_date, :stop_date
 
   # Many to many with Control

@@ -119,6 +119,7 @@ describe ProgramsController do
   context "import controls" do
     before :each do
       login({}, { :role => 'superuser' })
+      @sys5 = FactoryGirl.create(:system, :title => 'System 1', :slug => 'SYS5', :description => 'x')
     end
 
     it "should do import" do
@@ -126,6 +127,12 @@ describe ProgramsController do
       ctl = Control.find_by_slug("CTL1")
       ctl.description.should == "This is Control 1"
       ctl.documents.should == [Document.find_by_link('file://file/xyz')]
+      ctl.object_people.size.should == 1
+      op = ctl.object_people.first
+      op.role.should == 'operator'
+      op.person.email.should == 'a@b.com'
+      Control.find_by_slug('CTL2').categories.map {|x| x.name}.should == ['cat1']
+      Control.find_by_slug('CTL2').systems.should == [System.find_by_slug('SYS2'), @sys5]
     end
   end
 
