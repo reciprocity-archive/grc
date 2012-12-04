@@ -95,6 +95,8 @@ jQuery(function ($) {
   renderExternalTmpl({ name: 'examplelinkedcontrols', selector: '#samplelinkedcontrols', data: {} });
   renderExternalTmpl({ name: 'exampleprogramsections', selector: '#sampleprogramsections', data: {} });
 
+  renderExternalTmpl({ name: 'examplesystems', selector: '#samplesystems', data: {} });
+
 
 
   $(document).on("click", "#expand_all", function(event) {
