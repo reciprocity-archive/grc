@@ -37,4 +37,9 @@ namespace :import do
       help.save!
     end
   end
+
+  desc "Delete existing help data and import default help from seed file"
+  task :help_seed, [:filename] => [:environment] do |t, args|
+    Rake::Task["import:help"].invoke("#{Rails.root}/db/help_seed.yml")
+  end
 end
