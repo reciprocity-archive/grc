@@ -189,6 +189,8 @@
               More Button - opens up a description and shows additional action buttons for a content item (slot). Color is in flux.
           .infowell
             a.btn.btn-mini.btn-blue
+          .warningwell 
+            More button hides other mores to keep the screen less complicated. To this goal, all more collapses ID need to end with '-more'.
           %h3 Content Action Icons
           %ul.captionbox
             
@@ -557,7 +559,7 @@
                               %li
                                 .row-fluid
                                   .slot.span12.processslot
-                                    .slottitle.span8.toggle{"data-target" => "#Process-1-summary", "data-toggle" => "collapse"}
+                                    .slottitle.span8.toggle{"data-target" => "#Process-21-more", "data-toggle" => "collapse"}
                                       .enddot.process
                                       %span.prefix Process
                                       This is a system slot.
@@ -566,9 +568,9 @@
                                     .slotowner.span1
                                       %a.slotowner{:href => "http://www.youtube.com/watch?v=oHg5SJYRHA0"} Rick Astley
                                     .slotactions.pull-right
-                                      %a.btn.btn-mini.btn-blue.halfopacity{"data-target" => "#Process-1-more", "data-toggle" => "collapse"}
+                                      %a.btn.btn-mini.btn-blue.halfopacity{"data-target" => "#Process-21-more", "data-toggle" => "collapse"}
                                         %i.gcmsicon-more
-                                #Process-1-more.row-fluid.collapse
+                                #Process-21-more.row-fluid.collapse
                                   .span12.morewell.statusblue.nominheight
                                     .slotcontent.span12
                                       %ul.contentactions.pull-right

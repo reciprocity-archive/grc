@@ -164,7 +164,6 @@ jQuery(function ($) {
     $('#referenceList').append("<li class='controlSlot'><a href='#'><div class='circle fltrt'><i class='gcmssmallicon-dash-white'></i></div></a><span class='controls-group'>Reference Type</span><br /><span class='controls-subgroup'>Reference Item</span></li>");
   });
 
-  //$(".collapse").collapse();
   $('#quicklinks a:last').tab('show');
 
   $('#myLock a').click(function (e) {
@@ -177,10 +176,29 @@ jQuery(function ($) {
     $('#tooltip' + i).tooltip();
   }
   
+//if includes a xpander we need to toggle it.
 $('body').on('click', '.gcmsicon-more', function(e) {
   //bootstrap data toggle opens this one up, but ...
   
   e.preventDefault();
+
+  //var title = $("em").attr("data-target");
+
+  var $this = $(this),
+    slotcontent = $this.closest(".slot").find(".slottitle").attr("data-target"),
+    $thisexpander = $this.closest(".slot").find(".expander");
+
+    if (! $thisexpander.hasClass('in')) {
+
+      $thisexpander.addClass('in');
+      $(slotcontent).collapse('show');
+    } else if ($thisexpander) {
+      //$thisexpander.removeClass('in');
+      //$(slotcontent).collapse('hide');
+
+    }
+
+
 
   $("[id$=-more]").each(function(i){
       var el = $(this);

@@ -1450,7 +1450,7 @@ ul.slugtree {
   width: 16px;
   height: 16px;
   padding: 0 0 0 0;
-  margin: 6px 0 0 0;
+  margin: 6px 4px 0 0;
   cursor:pointer;
   &.in {
     /* for firefox, safari, chrome, etc. */
@@ -1484,6 +1484,9 @@ ul.slugtree {
   }
   &.regulation {
     background-image: url("../images/icons/grcicons/enddot-regulation.png");
+  }
+  &.control {
+    background-image: url("../images/icons/grcicons/enddot-control.png");
   }
 }
 
@@ -1596,6 +1599,12 @@ margin-top:5px;
   margin-bottom: 0px;
   font-size: 13px;
   line-height: 13px;
+}
+.juke-left {
+  margin-right:7px;
+}
+.juke-down {
+  margin-top:6px;
 }
 
 .morewell {
