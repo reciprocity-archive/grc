@@ -585,7 +585,9 @@ width: 97px;
     text-overflow: ellipsis;
   }
   .slotowner {
-
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
   .slotactions {
 
@@ -1002,6 +1004,15 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
   color: $white !important;
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.29);
   -webkit-font-smoothing: antialiased;
+}
+
+.btn-lightgreen {
+  background-color: hsl(182, 84%, 42%) !important;
+  @include background-image(linear-gradient(top, #aecebf, #a4d3bd));
+  color: $black !important;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.29);
+  -webkit-font-smoothing: antialiased;
+
 }
 
 .btn-mini {

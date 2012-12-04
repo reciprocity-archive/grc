@@ -179,13 +179,12 @@ jQuery(function ($) {
   }
 //div[class*='tocolor-']
   
-  $("div[class*='-summary']").on('click', function () {
-    alert("ping");
-      $this.closest("div[class*='-more']").collapse('hide');
-})
-
-
-
+$('body').on('click', '.gcmsicon-more', function(e) {
+     e.preventDefault();
+     //Idea is to close all other mores when this latest one opens. Triggering off a toggle so messy right now.
+  $("[id*='-more']").removeClass("in");
+  //$(this).addClass("in");
+});
 
   // show/hide widget
 

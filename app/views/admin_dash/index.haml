@@ -159,16 +159,16 @@
               %i.gcmsicon-questionmark-grey
             %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
             %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#newEditItems"}
-              %i.gcmsicon-enlarge-grey.gcmssmallicon-blue-expand
+              %i.gcmsicon-enlarge-grey
         / /.WidgetBoxHeading
         .WidgetBoxContent
-          %ul#newEdit.nav.nav-tabs.nav-stacked.in
+          -#%ul#newEdit.nav.nav-tabs.nav-stacked.in
             %li.group
               %label Rapid Prototypes
             %li.group
               %a.btn{"data-toggle" => "modal", :href => "#showSecondModal"}
                 Show Second Modal
-          #newEditItems.toolbar-widget.collapse
+          #newEditItems.toolbar-widget
             %ul#newEdit.nav.nav-tabs.nav-stacked.in
               %li.group
                 %label General
