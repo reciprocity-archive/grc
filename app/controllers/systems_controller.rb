@@ -11,7 +11,7 @@ end
 class SystemsController < BaseObjectsController
   include ImportHelper
 
-  SYSTEM_MAP = Hash[*%w(System\ Code slug Title title Description description Link:References references Infrastructure infrastructure Link:People;Process\ Owner process_owner Link:People;Owner owner Link:Categories categories Effective\ Date start_date Created created_at Updated updated_at)]
+  SYSTEM_MAP = Hash[*%w(System\ Code slug Title title Description description Link:References references Infrastructure infrastructure Link:People;Process\ Owner process_owner Link:People;Owner owner Link:Categories categories Link:Org\ Group org_groups Effective\ Date start_date Created created_at Updated updated_at)]
 
   access_control :acl do
     allow :superuser
@@ -73,6 +73,9 @@ class SystemsController < BaseObjectsController
                 object_person ? object_person.person.email : ''
               when 'categories'
                 (s.categories.map {|x| x.name}).join(',')
+              when 'org_groups'
+                rels = Relationship.where(:relationship_type_id => :system_is_a_process_for_org_group, :source_id => s, :source_type => System.name)
+                rels.map {|x| x.destination.slug}.join(',')
               when 'references'
                 s.documents.map do |d|
                   "#{d.description} [#{d.link} #{d.title}]"
@@ -147,6 +150,7 @@ class SystemsController < BaseObjectsController
       handle_import_object_person(system, attrs, 'owner', 'owner')
       handle_import_object_person(system, attrs, 'process_owner', 'process_owner')
       handle_import_category(system, attrs, 'categories', System::CATEGORY_TYPE_ID)
+      org_groups = attrs.delete('org_groups')
       handle_import_documents(system, attrs, 'references')
 
       system.assign_attributes(attrs, :without_protection => true)
@@ -159,6 +163,7 @@ class SystemsController < BaseObjectsController
       @systems << system
       import[:errors][i] = system.errors unless system.valid?
       system.save unless check_only
+      handle_import_relationships(system, org_groups, OrgGroup, :system_is_a_process_for_org_group) unless check_only
     end
   end
 

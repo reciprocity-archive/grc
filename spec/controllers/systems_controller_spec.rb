@@ -65,6 +65,10 @@ describe SystemsController do
       sys2.object_people.size.should == 1
       sys2.object_people[0].role.should == 'owner'
       sys2.object_people[0].person.email.should == 'b@t.com'
+      rels = Relationship.where(:source_id => sys2, :source_type => System.name)
+      rels.size.should == 1
+      rels[0].destination.slug.should == 'ORG1'
+      rels[0].destination.class.should == OrgGroup
       sys1.categories.should == [Category.find_by_name('cat1')]
       sys2.infrastructure.should be_false
     end

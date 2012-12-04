@@ -79,10 +79,22 @@ module ImportHelper
 
     if systems_string.present?
       systems = systems_string.split(',').map do |slug|
-        system = System.find_or_create_by_slug({:slug => slug, :title => :slug, :infrastructure => false})
+        system = System.find_or_create_by_slug({:slug => slug, :title => slug, :infrastructure => false})
         system
       end
       object.systems = systems
+    end
+  end
+
+  def handle_import_relationships(object, related_string, related_class, relationship_type)
+    if related_string.present?
+      relateds = related_string.split(',').each do |slug|
+        related = related_class.find_or_create_by_slug({:slug => slug, :title => slug})
+        attrs = {:source_id => object.id, :source_type => object.class.name, :destination_id => related.id, :destination_type => related_class.name, :relationship_type_id => relationship_type}
+        unless Relationship.exists?(attrs)
+          Relationship.create!(attrs)
+        end
+      end
     end
   end
 
