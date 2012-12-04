@@ -14,22 +14,28 @@
 -content_for :subheader_plus do
   %a.navbarplus.fltrt{ :href => "#comingsoonModal", "data-toggle" => "modal" }
 
-.row-fluid.fluid-layout
-  .span8
-    #RegsandControls.widget.governance
-      .widget-head
-        .widget-actions
+.row-static
+  .doubleColumn
+    #RegsandControls2.WidgetBox.fullHeight.doubleWide
+      .WidgetBoxHeading
+        .pull-right
           %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
             %i.gcmsicon-questionmark-grey
-          %input.widgetsearch{:placeholder => "Search", :type => "text"}  
-        %h2 Sub-Products, Processes and Controls
-      .widget-body
+          %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
+        .WidgetTitle.doublewidth Sub-Products, Processes and Controls
+
+      .WidgetBoxContent    
         #sampleprogramsections
-  .span4.sidebar
-    #productActions.widget.governance
-      .widget-head
-        %h2 Product Actions
-      .widget-body
+        
+          
+
+              
+  .singleColumn 
+
+    #productActions.WidgetBox
+      .WidgetBoxHeading
+        .WidgetTitle Product Actions
+      .WidgetBoxContent
         .widget-toolbar      
           .row-fluid
             .span2
@@ -41,99 +47,7 @@
             .span5
               %a.span12.btn.btn-warning{"data-toggle" => "modal", :href => "#comingsoonModal"}
                 Relationship Map
-    .widget.governance
-      .widget-head
-        %h2 Product Info
-      .widget-body
-        %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    .widget.governance
-      .widget-head
-        %h2 Related
-      .widget-body
-        %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-  
 
-.row-static
-  .doubleColumn
-    #RegsandControls2.WidgetBox.fullHeight.doubleWide
-      .WidgetBoxHeading
-        .pull-right
-          %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
-            %i.gcmsicon-questionmark-grey
-          -#%a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
-            %i.gcmsicon-edit-grey
-          %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
-        .WidgetTitle.doublewidth Sub-Products, Processes and Controls
-
-      .WidgetBoxContent
-        
-        -#%ul#quicklinks.nav.nav-tabs
-          %li
-            %a{"data-toggle" => "tab", :href => "#Regulation"} Regulation
-          %li
-            %a{"data-toggle" => "tab", :href => "#Controls"} Controls
-          %li.active
-            %a{"data-toggle" => "tab", :href => "#Combo"} Combo
-        -#.tab-content
-          #Regulation.tab-pane Regulations
-          #Controls.tab-pane Controls
-          #Combo.tab-pane.active
-        #sampleprogramsections
-          -# Import this text
-          
-
-    .doubleColumn               
-      -#productComplianceSchedule.WidgetBox
-        .WidgetBoxHeading
-          %nav
-            %a.widgettextbtn{"data-toggle" => "modal", :href => "#"} Add Item
-          .WidgetTitle Compliance Schedule
-        .WidgetBoxContent
-          .row-fluid.nominheight
-            .span6.nominheight
-            .span6.nominheight
-              .span4.nominheight
-                %label.fltnone Start
-              .span4.nominheight
-                %label.fltnone Finish
-              .span4.nominheight
-                %label.fltnone Status
-          %ul#ComplianceList.in
-            %li.controlSlot.ui-draggable.row-fluid.nominheight.statusred{"data-toggle" => "modal", :href => "#"}
-              .span6.nominheight
-                %span.prefix Fit and Proper Review
-                .expander
-              .span6.badges.nominheight
-                .span4.nominheight
-                  .badge.badge-info 01/15/12
-                .span4.nominheight
-                  .badge.badge-info 01/15/13
-                .span4.nominheight
-                  .badge.badge-important Late
-            %li.controlSlot.ui-draggable.row-fluid.nominheight.statusyellow{"data-toggle" => "modal", :href => "#"}
-              .span6.nominheight
-                %span.prefix Fit and Proper Review
-                .expander
-              .span6.badges.nominheight
-                .span4.nominheight
-                  .badge.badge-info 01/15/12
-                .span4.nominheight
-                  .badge.badge-info 01/15/13
-                .span4.nominheight
-                  .badge.badge-warning In-Progress
-            %li.controlSlot.ui-draggable.row-fluid.nominheight.statusgreen{"data-toggle" => "modal", :href => "#"}
-              .span6.nominheight
-                %span.prefix Fit and Proper Review
-                .expander
-              .span6.badges.nominheight
-                .span4.nominheight
-                  .badge.badge-info 01/15/12
-                .span4.nominheight
-                  .badge.badge-info 01/15/13
-                .span4.nominheight
-                  .badge.badge-success   Complete
-              
-  .singleColumn 
 
     #productInfo.WidgetBox
       .WidgetBoxHeading
