@@ -465,8 +465,8 @@ width: 97px;
   border: 1px solid $borderDefault;
   display:inline-block;  
   float:left;
-  height:38px;
-  line-height:14px;
+  height:35px;
+  line-height:12px;
   margin-top: 2px;
   padding: 4px 5px 5px 5px;
   overflow: hidden;
@@ -1013,7 +1013,7 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
 .btn-slotcolumn {
   padding: 2px 2px;
   font-size: 11px;
-  line-height: 30px;
+  line-height: 32px;
 }
 
 /*  GCMS Welcome */
@@ -1474,11 +1474,14 @@ ul.slugtree {
   .enddot {
     margin: 6px 4px 4px 0;
   }
+  .btn-slotcolumn{
+    margin: -6px 0 0 0;
+  }
   .slotowner {
-    line-height:30px;
+    line-height:26px;
   }
   .slotactions {
-    line-height:27px;
+    line-height:22px;
   }
 }
 

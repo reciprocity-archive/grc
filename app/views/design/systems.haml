@@ -1,4 +1,4 @@
--@title = "GRC: Controls"
+-@title = "GRC: Systems"
  
 -content_for :header do
   %ol#breadcrumb
@@ -9,7 +9,7 @@
 -content_for :page_help, 'changeme'
 
 -content_for :subheader_extras do
-  %h1#pageType.pull-right.highlighted Control
+  %h1#pageType.pull-right.highlighted Business Process
 
 -content_for :subheader_plus do
   %a.navbarplus.fltrt{ :href => "#comingsoonModal", "data-toggle" => "modal" }
@@ -26,7 +26,7 @@
           %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
         .WidgetTitle.doublewidth Sub-Systems & Controls
       .WidgetBoxContent
-        #sampleprogramsections
+        #samplesystems
         
     .singleColumn
       #transactions.WidgetBox
@@ -45,54 +45,39 @@
             %hr.hr-widget
             .row-fluid
               .span12
-                %h3.toggle{"data-target" => "#productCategories", "data-toggle" => "collapse"}
-                  .expander
+                %h3.toggle{"data-target" => "#dataGenerated", "data-toggle" => "collapse"}
+                  .expander.in
                   Data Generated
                   %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
                     %i.gcmsicon-edit-grey
-                %ul#productCategories.collapse
+                %ul#dataGenerated.collapse.in
                   %li.controlSlot
-                    %span.controls-group Category
-                    %br/
-                    %span.controls-subgroup Access Control
-                  %li.controlSlot
-                    %span.controls-group Category
-                    %br/
-                    %span.controls-subgroup Risky Attribute
+                    %span.controls-subgroup 
+                      ads data, customer data, campaign data, impression and click data
             %hr.hr-widget
             .row-fluid
               .span12
-                %h3.toggle{"data-target" => "#productReferences", "data-toggle" => "collapse"}
-                  .expander
+                %h3.toggle{"data-target" => "#dataProcessed", "data-toggle" => "collapse"}
+                  .expander.in
                   Data Processed
                   %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
                     %i.gcmsicon-edit-grey
-                %ul#productReferences.collapse
+                %ul#dataProcessed.collapse.in
                   %li.controlSlot
-                    %span.controls-group PDF
-                    %br/
-                    %span.controls-subgroup Privacy Report 2011
-                  %li.controlSlot
-                    %span.controls-group PDF
-                    %br/
-                    %span.controls-subgroup Privacy Report 2012
+                    %span.controls-subgroup 
+                      ADR receives data from MDB/Escanner regarding the network assets on the network.
             %hr.hr-widget
             .row-fluid
               .span12
                 %h3.toggle{"data-target" => "#productPeople", "data-toggle" => "collapse"}
-                  .expander
+                  .expander.in
                   Data Stored
                   %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
                     %i.gcmsicon-edit-grey
-                %ul#productPeople.collapse
+                %ul#productPeople.collapse.in
                   %li.controlSlot
-                    %span.controls-group JRayburn@google.com
-                    %br/
-                    %span.controls-subgroup Joss Rayburn
-                  %li.controlSlot
-                    %span.controls-group rpoder@google.com
-                    %br/
-                    %span.controls-subgroup Ron Poder
+                    %span.controls-subgroup 
+                      Network asset data (including status) for suppliers - Juniper, In!nera & Celestica
             %hr.hr-widget
     .singleColumn
       =render :partial => 'design/widgets/systemsrelated'           
@@ -100,7 +85,7 @@
   .singleColumn
     #productInfo.WidgetBox
       .WidgetBoxHeading
-        .WidgetTitle Control Actions
+        .WidgetTitle System Actions
       .WidgetBoxContent.information
         .toolbar-widget
           .row-fluid
@@ -112,7 +97,7 @@
                 Relationship Map
     #productInfo.WidgetBox
       .WidgetBoxHeading
-        .WidgetTitle Control Info
+        .WidgetTitle System Info
         %nav
           %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
             %i.gcmsicon-questionmark-grey
@@ -143,12 +128,12 @@
           .row-fluid
             .span12
               %h3.toggle{"data-target" => "#productAbout", "data-toggle" => "collapse"}
-                .expander
+                .expander.in
                 About
                 %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
                   %i.gcmsicon-edit-grey
                 -#%a.btn.btn-blue.minibtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"} Edit
-              #productAbout.collapse
+              #productAbout.collapse.in
                 .row-fluid
                   .span12
                     .span3
@@ -164,6 +149,17 @@
                       %label Kind
                       %input.span12{:disabled => "disabled", :placeholder => "---", :type => "text"}/
                 .row-fluid
+                  .span12
+                    .span3
+                      %label Fraud-Related
+                      %input.span12{:disabled => "disabled", :placeholder => "No", :type => "text"}/
+                    .span3
+                      %label Significance
+                      %input.span12{:disabled => "disabled", :placeholder => "Key", :type => "text"}/
+                    .span6
+                      %label Satisfies the following Assertions
+                      %input.span12{:disabled => "disabled", :placeholder => "Completeness, Occcurance", :type => "text"}/
+                .row-fluid
                   .span8
                     %label Means of Opeartion
                     %input.span12{:disabled => "disabled", :placeholder => "Manual w/ Segregation of Duties", :type => "text"}/
@@ -174,6 +170,10 @@
                   .span12
                     %label Description
                     %textarea#textarea.span12{:disabled => "disabled", :placeholder => "", :rows => "3", :style => "height: 135px; "} PCI DDS applies whenever Cardholder account data and Authentication Data is Stored, Processed or Transmitted. Examples Include: For more See Page 7 of document. Using h6 makes the label caps.
+                .row-fluid
+                  .span12
+                    %label Notes
+                    %textarea#notes.span12{:disabled => "disabled", :placeholder => "", :rows => "3", :style => "height: 135px; "} ...
                 .row-fluid
                   .span12
                     %label Direct Link
