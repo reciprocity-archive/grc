@@ -169,7 +169,6 @@ jQuery(function ($) {
 
   $('#myLock a').click(function (e) {
       e.preventDefault();
-      alert("here");
       $('#programinformationLocked').tab('hide');
       $('#programinformationUnlocked').tab('show');
   });
@@ -177,13 +176,23 @@ jQuery(function ($) {
   for (i=0;i<=50;i++) {
     $('#tooltip' + i).tooltip();
   }
-//div[class*='tocolor-']
   
 $('body').on('click', '.gcmsicon-more', function(e) {
-     e.preventDefault();
-     //Idea is to close all other mores when this latest one opens. Triggering off a toggle so messy right now.
-  $("[id*='-more']").removeClass("in");
-  //$(this).addClass("in");
+  //bootstrap data toggle opens this one up, but ...
+  
+  e.preventDefault();
+
+  $("[id$=-more]").each(function(i){
+      var el = $(this);
+      if (el.hasClass("in")) {
+        //its open close it!  
+        el.collapse('hide');
+      } else { 
+        //its already closed, relax. 
+        // We have an isue with items on their way to closing and you clicked another, so checking for animating...
+        el.filter(":animated").toggleClass("in");
+      }
+  });
 });
 
   // show/hide widget
@@ -382,11 +391,6 @@ $('body').on('click', '.gcmsicon-more', function(e) {
         $companyfilters = $this.closest(".modal-body").find(".filter-group"),
         $searchableLists = $this.closest(".modal-body").find(".filter-block .people-list");
         
-    //if( $this.hasClass("active") ) {
-      //$filters.hide();
-      //$this.removeClass("active");        
-      //$searchableLists.removeClass("short");
-    //} else {
       $categoryfilters.show();
       $companyfilters.hide();
       $this.addClass("active");
