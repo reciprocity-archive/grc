@@ -2446,7 +2446,11 @@ body .container {
 }
 
 
-/* Almost certainly legacy - this was used to create a grid before we adopted bootstrap (OR to overwrite bootstrap when it was being messy)
+/* Certainly legacy - this was used to create a grid before we adopted bootstrap (OR to overwrite bootstrap when it was being messy)
+
+However, we can't remove this until the slots in question are refactored to row-fluids. 
+*/
+
 .regulationslot {
   width:75%;
 }
@@ -2454,7 +2458,7 @@ body .container {
 .controllist {
   width:24%;
 }
-*/
+
 
 // footer 
 .gcms-footer {
