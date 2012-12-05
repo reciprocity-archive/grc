@@ -2425,6 +2425,21 @@ body .container {
   padding:0;
   background-position: 0px 0px;
   background-repeat: no-repeat;
+  &.system {
+    background-image: url("../images/icons/navbar-plus-system.png");
+  }
+  &.product {
+    background-image: url("../images/icons/navbar-plus-product.png");
+  }
+  &.process {
+    background-image: url("../images/icons/navbar-plus-process.png");
+  }
+  &.regulation {
+    background-image: url("../images/icons/navbar-plus-process.png");
+  }
+  &.control {
+    background-image: url("../images/icons/navbar-plus-control.png");
+  }
   &:hover {
     background-image: url("../images/navbarplus_on.png");
   }
