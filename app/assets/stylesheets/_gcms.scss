@@ -1012,27 +1012,11 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
 
 .btn-lightgreen {
   background:lighten(#aecebf, 5%);
+  -webkit-font-smoothing: antialiased;
   &:hover {
     background:darken(#aecebf, 10%);
   }
 }
-
-
-/*
-
-
-.btn-lightgreen {
-  background-color: hsl(182, 84%, 42%);
-  @include background-image(linear-gradient(top, #aecebf, #a4d3bd));
-  color: $black !important;
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.29);
-  -webkit-font-smoothing: antialiased;
-  &:hover {
-    @include background-image(linear-gradient(top, darken(#aecebf, 5%), darken(#a4d3bd, 5%));
-  }
-}
-
-*/
 
 .btn-mini {
   padding: 2px 2px;
