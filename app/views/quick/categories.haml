@@ -1,0 +1,11 @@
+-if @categories.empty?
+  .no-results
+    No results found
+-else
+  %ul.nav.nav-tabs.nav-stacked
+    -@categories.each do |category|
+      %li
+        %a.widgetbtn.fltrt{ :'data-form-target' => "refresh", :'data-modal-reset' => "reset", :'data-toggle' => "modal-ajax-form", :href => edit_flow_category_path(category), :'data-target' => "#ajax-modal-categories-3-edit" }
+          %i.gcmsicon-edit-grey
+        =link_to '#' do
+          =category.display_name

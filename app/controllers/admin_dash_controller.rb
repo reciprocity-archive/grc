@@ -14,5 +14,7 @@ class AdminDashController < ApplicationController
   def index
     @accounts = allowed_objs(Account.all, :read)
     @people = allowed_objs(Person.all, :read)
+    @categories = allowed_objs(Category.all, :read)
+    @options = allowed_objs(Option.all, :read)
   end
 end
