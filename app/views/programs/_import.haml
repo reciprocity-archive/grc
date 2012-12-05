@@ -12,8 +12,8 @@
     .span3
       =submit_tag "Upload and Review", :class => 'span12 btn btn-success btn-primary pull-right'
     .span3
-      -if CMS_CONFIG["SECTION_IMPORT_TEMPLATE"].present?
-        %a{ :href => CMS_CONFIG["SECTION_IMPORT_TEMPLATE"], :target => '_blank' }
-          View Import Template
+      -if CMS_CONFIG["SECTION_IMPORT_HELP_LINK"].present?
+        %a{ :href => CMS_CONFIG["SECTION_IMPORT_HELP_LINK"], :target => '_blank' }
+          View Help
 
   #results-container
