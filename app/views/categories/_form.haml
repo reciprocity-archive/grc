@@ -14,10 +14,12 @@
       %select(name='category[parent_id]')
         -Category.where(:parent_id => nil).each do |category|
           %option{ :value => category.id }=category.name
-  .span1
   .span7
     .span12{ :class => error_class(f, :name) }
       =f.label :name, 'Category Name'
       =f.text_field :name, :class => 'span12', :placeholder => 'Category Name'
-
+  .span1
+    .span12{ :class => error_class(f, :required) }
+      =f.label :required, 'Required'
+      =f.check_box :required
 %br

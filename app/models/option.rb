@@ -1,7 +1,7 @@
 class Option < ActiveRecord::Base
   include AuthoredModel
 
-  attr_accessible :role, :title, :description
+  attr_accessible :role, :title, :description, :required
 
   def to_s
     title

@@ -16,8 +16,12 @@
     .span12{ :class => error_class(f, :title) }
       =f.label :title, 'Title'
       =f.text_field :title, :class => 'span12', :placeholder => 'Title'
-  .span6
+  .span4
     .span12{ :class => error_class(f, :description) }
       =f.label :description, 'Description'
       =f.text_field :description, :class => 'span12', :placeholder => 'Description'
+  .span2
+    .span12{ :class => error_class(f, :required) }
+      =f.label :required, 'Required'
+      =f.check_box :required
 %br
