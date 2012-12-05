@@ -10,12 +10,9 @@
         Help
     %p=@help.content
   -else
-    -begin
-      =render :partial => "#{@help_slug}"
-    -rescue
-      -content_for :modal_title do
-        GRC Help
-      %p This content is coming soon.  We are working on it.
+    -content_for :modal_title do
+      GRC Help
+    %p This content is coming soon.  We are working on it.
 
 #helpedit.collapse
   .row-fluid
