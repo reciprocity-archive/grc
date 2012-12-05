@@ -253,6 +253,10 @@ class ProgramsController < BaseObjectsController
       end
       @controls << control
       import[:errors][i] = control.errors unless control.valid?
+      if control.program_id != @program.id
+        import[:errors][i] ||= ActiveModel::Errors.new(control)
+        import[:errors][i].add(:slug, "already used in another program")
+      end
       control.save unless check_only
     end
   end
@@ -292,6 +296,10 @@ class ProgramsController < BaseObjectsController
       end
       @sections << section
       import[:errors][i] = section.errors unless section.valid?
+      if section.program_id != @program.id
+        import[:errors][i] ||= ActiveModel::Errors.new(section)
+        import[:errors][i].add(:slug, "already used in another program")
+      end
       section.save unless check_only
     end
   end

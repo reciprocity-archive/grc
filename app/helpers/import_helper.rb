@@ -113,11 +113,12 @@ module ImportHelper
   def parse_document_reference(ref_string)
     ref_string.split("\n").map do |ref|
       ref =~ /(.*)\[(\S+)(:?.*)\](.*)/
-      link = $2
+      link = $2.nil? ? '' : $2
       if link.start_with?('//')
         link = "file:" + link
       end
-      { :description => $1 + $4, :link => link, :title => ($3.present? ? $3 : link).strip }
+      { :description => ($1.nil? ? '' : $1) + ($4.nil? ? '' : $4),
+        :link => link, :title => ($3.present? ? $3 : link).strip }
     end
   end
 
@@ -128,9 +129,11 @@ module ImportHelper
         begin
           Document.find_or_create_by_link!(ref)
         rescue
-          warning[key.to_sym] << "invalid reference URL"
+          warnings[key.to_sym] ||= []
+          warnings[key.to_sym] << "invalid reference URL"
+          nil
         end
-      end
+      end.compact
       object.documents = documents
     end
   end
