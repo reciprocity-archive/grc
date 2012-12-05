@@ -7,7 +7,7 @@
         %i.gcmsicon-x-grey
     %h1
       Create New Control
-      %span.version v.0.86
+      %span.version v.0.9
   .modal-body
     .alert.alert-info
       %span#alertMessage
@@ -26,16 +26,49 @@
             %option Program Title 3
         .span6
           .row-fluid
-            .span6
+            .span4
               %label Code (optional)
               %input.span12{:type => "text", :placeholder => "Autofill code"}
-            .span6
+            .span2
               %label Version
               %input.span12{:type => "text", :placeholder => "1.0"}
+            .span3
+              %label Fraud-related
+              %select.span12
+                %option -
+                %option Yes
+                %option No
+            .span3
+              %label Significance
+              %select.span12
+                %option -
+                %option Yes
+                %option No
+
       .row-fluid
-        .span6
+        .span3
           %label Description
           %textarea.span12.double{:placeholder => "Enter description here", :rows => "3"}
+        .span3
+          %label Assertions (multiple choice)
+          %select{:multiple => "multiple"}
+            %optgroup{:label => "Transactions"}
+              %option Occurrence
+              %option Completeness              
+              %option Accuracy              
+              %option Cutoff
+              %option Classification
+            %optgroup{:label => "Accounts balances"}
+              %option Existence
+              %option Rights and Obligations              
+              %option Completeness
+              %option Valuation and Allocation
+            %optgroup{:label => "Presentation and disclosure"}
+              %option Occurrence
+              %option Rights and Obligations              
+              %option Completeness
+              %option Classification and Understandability
+              %option Accuracy and Valuation
         .span6
           .row-fluid 
             .span6
@@ -81,7 +114,7 @@
                 %option Quarterly
                 %option Annually
       .row-fluid
-        .span6      
+        .span4      
           %label.subtitle 
             Evidence Instructions
           .row-fluid
@@ -91,6 +124,11 @@
               $('#wysihtml5').wysihtml5({
                 "image": false //Button to insert an image. Default true
               });
+        .span2
+          %label.subtitle
+            Notes
+          .row-fluid  
+            %textarea.span12.double{:placeholder => "Enter notes here", :rows => "3"}
         .span6
           %h3 
             Categories
