@@ -181,6 +181,7 @@ class SystemsController < BaseObjectsController
       end
       @systems << system
       import[:errors][i] = system.errors unless system.valid?
+      system.infrastructure = false if system.infrastructure.nil?
       system.save unless check_only
       handle_import_relationships(system, org_groups, OrgGroup, :system_is_a_process_for_org_group) unless check_only
     end

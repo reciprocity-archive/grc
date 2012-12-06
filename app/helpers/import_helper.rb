@@ -96,6 +96,7 @@ module ImportHelper
 
     unless systems_string.nil?
       slugs = strip_split(systems_string)
+      slugs = slugs.map {|x| x.upcase}
       systems = slugs.map do |slug|
         system = System.find_or_create_by_slug({:slug => slug, :title => slug, :infrastructure => false})
         system
@@ -115,6 +116,7 @@ module ImportHelper
 
     unless systems_string.nil?
       slugs = strip_split(systems_string)
+      slugs = slugs.map {|x| x.upcase}
       systems = slugs.map do |slug|
         system = System.find_or_create_by_slug({:slug => slug, :title => slug, :infrastructure => false})
         system
@@ -124,8 +126,10 @@ module ImportHelper
   end
 
   def handle_import_relationships(object, related_string, related_class, relationship_type)
+    return unless object.id
     if related_string.present?
       slugs = strip_split(related_string)
+      slugs = slugs.map {|x| x.upcase}
       relateds = slugs.each do |slug|
         related = related_class.find_or_create_by_slug({:slug => slug, :title => slug})
         attrs = {:source_id => object.id, :source_type => object.class.name, :destination_id => related.id, :destination_type => related_class.name, :relationship_type_id => relationship_type}
