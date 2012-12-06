@@ -26,13 +26,22 @@
             %option Program Title 3
         .span6
           .row-fluid
-            .span6
+            .span3
               %label Code (optional)
               %input.span12{:type => "text", :placeholder => "Autofill code"}
-            .span6
-              %label Version
+            .span1
+              %label Ver.
               %input.span12{:type => "text", :placeholder => "1.0"}
-
+            .span4
+              %label Effective Date
+              %input.span12#datepicker-control-effectivedate.date{:type => "text",  :placeholder => "MM/DD/YYYY"}
+              :javascript
+                $('#datepicker-control-effectivedate').datepicker();
+            .span4
+              %label Stop Date    
+              %input.span12#datepicker-control-stopdate.date{:type => "text",  :placeholder => "MM/DD/YYYY"}
+              :javascript
+                $('#datepicker-control-stopdate').datepicker();
       .row-fluid
         .span6
           %label Description
@@ -40,25 +49,26 @@
         .span6
           .row-fluid 
             .span6
-              %label Effective Date
-              %input.span12#datepicker-control-effectivedate.date{:type => "text",  :placeholder => "MM/DD/YYYY"}
-              :javascript
-                $('#datepicker-control-effectivedate').datepicker();
               %label Type
               %select.span12
                 %option Regulation
                 %option Company
+              %label Fraud-related
+              %select.span12
+                %option No
+                %option Yes
             .span6
-              %label Stop Date    
-              %input.span12#datepicker-control-stopdate.date{:type => "text",  :placeholder => "MM/DD/YYYY"}
-              :javascript
-                $('#datepicker-control-stopdate').datepicker();
               %label Kind 
               %select.span12
                 %option Reactive
                 %option Administrative
                 %option Detective
                 %option Preventative
+              %label Significance
+              %select.span12
+                %option Non-Key
+                %option Yes
+                %option No
       .row-fluid
         .span6
           %label Direct Link
@@ -66,13 +76,13 @@
           %span.help-inline &nbsp;
         .span6
           .row-fluid 
-            .span3
+            .span6
               %label Control Means
               %select.span12
                 %option Manual
-                %option Manual w/ Sggt
+                %option Manual with sagregation of duties
                 %option Automated
-            .span3
+            .span6
               %label Verify Control
               %select.span12
                 %option Continuous
@@ -81,20 +91,6 @@
                 %option Monthly
                 %option Quarterly
                 %option Annually
-            .span3
-              %label Significance
-              %select.span12
-                %option Non-Key
-                %option Yes
-                %option No
-            .span3
-              %label Fraud-related
-              %select.span12
-                %option -
-                %option Yes
-                %option No
-                
-                
       .row-fluid
         .span3      
           %label.subtitle 
