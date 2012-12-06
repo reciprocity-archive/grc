@@ -28,13 +28,9 @@
               %label Version
               %input.span12{:type => "text", :placeholder => "1.0"}
       .row-fluid
-        .span3
+        .span6
           %label Description
           %textarea.span12.double{:placeholder => "Enter description here", :rows => "3"}
-        .span3
-          %label Notes
-          %textarea.span12.double{:placeholder => "Enter notes here", :rows => "3"}
-
         .span6
           .row-fluid 
             .span6
@@ -55,8 +51,13 @@
         .span6
           %label Direct URL for Product (optional)
           %input.span12{:type => "text", :placeholder => "http://www.examplelink.com/"}
-          %span.help-inline &nbsp;
-        
+          %span.help-inline &nbsp;      
         .span6
+      .row-fluid
+        .span6
+          %label Notes
+          %textarea.span12.double{:placeholder => "Enter notes here", :rows => "3"}
+        
+
 
   =render :partial => 'design/templates/modalfooter', :locals => { :shownote => false, :showcreated => true, :showrevs => true }
