@@ -7,7 +7,7 @@
         %i.gcmsicon-x-grey
     %h1 
       Create New System
-      %span.version v.0.23
+      %span.version v.0.3
 
   .modal-body
     .alert.alert-info
@@ -28,9 +28,13 @@
               %label Version
               %input.span12{:type => "text", :placeholder => "1.0"}
       .row-fluid
-        .span6
+        .span3
           %label Description
           %textarea.span12.double{:placeholder => "Enter description here", :rows => "3"}
+        .span3
+          %label Notes
+          %textarea.span12.double{:placeholder => "Enter notes here", :rows => "3"}
+
         .span6
           .row-fluid 
             .span6
