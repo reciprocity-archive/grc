@@ -128,11 +128,19 @@ describe ProgramsController do
       ctl.description.should == "This is Control 1"
       ctl.documents.should == [Document.find_by_link('file://file/xyz')]
       ctl.object_people.size.should == 1
+      ctl.key_control?.should be_false
+      ctl.active?.should be_false
+      ctl.fraud_related?.should be_false
+
       op = ctl.object_people.first
       op.role.should == 'operator'
       op.person.email.should == 'a@b.com'
-      Control.find_by_slug('CTL2').categories.map {|x| x.name}.should == ['cat1']
-      Control.find_by_slug('CTL2').systems.should == [System.find_by_slug('SYS2'), @sys5]
+      ctl2 = Control.find_by_slug('CTL2')
+      ctl2.categories.map {|x| x.name}.should == ['cat1']
+      ctl2.systems.should == [System.find_by_slug('SYS2'), @sys5]
+      ctl2.key_control?.should be_true
+      ctl2.active?.should be_true
+      ctl2.fraud_related?.should be_true
     end
   end
 

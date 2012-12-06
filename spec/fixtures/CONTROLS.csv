@@ -2,6 +2,6 @@ Type,Program Code
 Controls,REG1
 
 
-Control Code,Title,Description,References,Link:Categories,Link:Systems,Link:People;Operator
+Control Code,Title,Description,References,Link:Categories,Link:Systems,Link:People;Operator,Key Control,Active,Fraud Related
 CTL1,Control 1,This is Control 1,abc [//file/xyz title] def,,,a@b.com
-CTL2,Control 2,This is Control 2,,cat1,"SYS2,SYS5"
+CTL2,Control 2,This is Control 2,,cat1,"SYS2,SYS5",,true,yes,1

@@ -28,7 +28,7 @@ describe SystemsController do
     it "should export" do
       get 'export', :id => @sys.id, :format => :csv
       # system titles, system data
-      response.body.split("\n").size.should == 2
+      response.body.split("\n").size.should == 6
     end
   end
 

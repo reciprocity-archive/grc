@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121128072726) do
+ActiveRecord::Schema.define(:version => 20121206195047) do
 
   create_table "accounts", :force => true do |t|
     t.string   "username"
@@ -90,6 +90,9 @@ ActiveRecord::Schema.define(:version => 20121128072726) do
     t.string   "url"
     t.text     "documentation_description"
     t.integer  "verify_frequency_id"
+    t.boolean  "fraud_related"
+    t.boolean  "key_control"
+    t.boolean  "active"
   end
 
   add_index "controls", ["program_id"], :name => "index_controls_on_regulation_id"

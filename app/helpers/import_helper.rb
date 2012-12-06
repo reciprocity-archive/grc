@@ -49,12 +49,13 @@ module ImportHelper
     render '/error/import_error', :layout => false, :locals => { :message => message }
   end
 
-  def handle_import_person(attrs, key, warning)
+  def handle_import_person(attrs, key, warnings)
     if attrs[key].present?
       if attrs[key].include?('@')
         attrs[key] = Person.find_or_create_by_email!({:email => attrs[key]})
       else
-        warning[key.to_sym] << "invalid email"
+        warnings[key.to_sym] ||= []
+        warnings[key.to_sym] << "invalid email"
       end
     end
   end
@@ -78,7 +79,7 @@ module ImportHelper
 
     if category.present?
       categories = category.split(',').map {|category| Category.find_or_create_by_name({:name => category, :scope_id => category_scope_id})}
-      object.categories = categories
+      object.categories = object.categories + categories
     end
   end
 
@@ -91,6 +92,12 @@ module ImportHelper
         system
       end
       object.systems = systems
+    end
+  end
+
+  def handle_boolean(attrs, key)
+    if attrs.has_key?(key)
+      attrs[key] = (attrs[key] == 'yes' || attrs[key] == '1' || attrs[key] == 'true')
     end
   end
 

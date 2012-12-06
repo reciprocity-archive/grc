@@ -60,10 +60,10 @@ class SystemsController < BaseObjectsController
         self.response.headers['Content-Type'] = 'text/csv'
         headers['Content-Disposition'] = "attachment; filename=\"SYSTEMS.csv\""
         self.response_body = Enumerator.new do |out|
-          out << ""
-          out << ""
-          out << ""
-          out << ""
+          out << CSV.generate_line([])
+          out << CSV.generate_line([])
+          out << CSV.generate_line([])
+          out << CSV.generate_line([])
           out << CSV.generate_line(SYSTEM_MAP.keys)
           System.all.each do |s|
             values = SYSTEM_MAP.keys.map do |key|
