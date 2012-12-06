@@ -2,12 +2,12 @@
 
 
 
-System Code,Title,Infrastructure,Description,Link:People;Owner,Link:Categories,Effective Date,Link:References,Link:Org Group,Append:Notes
+System Code,Title,Infrastructure,Description,Link:People;Owner,Link:Categories,Effective Date,Link:References,Link:Org Group,Append:Notes,Link:System;Sub System
 SYS1,System 1,true,This is System 1,,cat1,2012-02-01,"a description [http://www.site.com/ A Title]
 a description 2 [http://www.site2.com/ A Title 2]"
 SYS2,System 2,false,This is System 2,b@t.com,desc2 [http://www.site.com/ Another title],,,ORG1,"note 1
 ---
   note 2  
 
-"
+","SYS1,SYSX"
 SYS3,System 3,false,This is System 3,b@t.com,

@@ -33,7 +33,15 @@ module ImportHelper
     headers = read_import_headers(import, import_map, object_name, rows)
 
     import[object_name.pluralize.to_sym] = rows.map do |values|
-      Hash[*headers.zip(values).flatten]
+      row = {}
+      headers.zip(values).each do |k, v|
+        if row.has_key?(k)
+          row[k] = "#{row[k]},#{v}"
+        else
+          row[k] = v
+        end
+      end
+      row
     end
   end
 
@@ -77,12 +85,24 @@ module ImportHelper
   def handle_import_systems(object, attrs, key)
     systems_string = attrs.delete(key)
 
-    if systems_string.present?
+    unless systems_string.nil?
       systems = systems_string.split(',').map do |slug|
         system = System.find_or_create_by_slug({:slug => slug, :title => slug, :infrastructure => false})
         system
       end
       object.systems = systems
+    end
+  end
+
+  def handle_import_sub_systems(object, attrs, key)
+    systems_string = attrs.delete(key)
+
+    unless systems_string.nil?
+      systems = systems_string.split(',').map do |slug|
+        system = System.find_or_create_by_slug({:slug => slug, :title => slug, :infrastructure => false})
+        system
+      end
+      object.sub_systems = systems
     end
   end
 

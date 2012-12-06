@@ -72,6 +72,7 @@ describe SystemsController do
       sys1.categories.should == [Category.find_by_name('cat1')]
       sys2.infrastructure.should be_false
       sys2.description.should == "This is System 2\n---\nnote 1\n---\nnote 2"
+      sys2.sub_systems.map {|x| x.slug}.sort.should == %w(SYS1 SYSX)
     end
   end
 end

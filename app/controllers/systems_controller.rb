@@ -11,7 +11,7 @@ end
 class SystemsController < BaseObjectsController
   include ImportHelper
 
-  SYSTEM_MAP = Hash[*%w(System\ Code slug Title title Description description Link:References references Infrastructure infrastructure Link:People;Process\ Owner process_owner Link:People;Owner owner Link:Categories categories Append:Notes append_notes Link:Org\ Group org_groups Effective\ Date start_date Created created_at Updated updated_at)]
+  SYSTEM_MAP = Hash[*%w(System\ Code slug Title title Description description Link:References references Infrastructure infrastructure Link:People;Process\ Owner process_owner Link:People;Owner owner Link:Categories categories Append:Notes append_notes Link:System;Sub\ System sub_systems Link:Org\ Group org_groups Effective\ Date start_date Created created_at Updated updated_at)]
 
   access_control :acl do
     allow :superuser
@@ -77,6 +77,8 @@ class SystemsController < BaseObjectsController
                 object_person ? object_person.person.email : ''
               when 'categories'
                 (s.categories.map {|x| x.name}).join(',')
+              when 'sub_systems'
+                (s.sub_systems.map {|x| x.slug}).join(',')
               when 'append_notes'
                 ""
               when 'org_groups'
@@ -156,6 +158,7 @@ class SystemsController < BaseObjectsController
       handle_import_object_person(system, attrs, 'owner', 'owner')
       handle_import_object_person(system, attrs, 'process_owner', 'process_owner')
       handle_import_category(system, attrs, 'categories', System::CATEGORY_TYPE_ID)
+      handle_import_sub_systems(system, attrs, 'sub_systems')
       org_groups = attrs.delete('org_groups')
       handle_import_documents(system, attrs, 'references')
 
