@@ -71,7 +71,7 @@
                 %option No
       .row-fluid
         .span6
-          %label Direct Link
+          %label Direct Link (optional)
           %input.span12{:type => "text", :placeholder => "http://www.examplelink.com/"}
           %span.help-inline &nbsp;
         .span6
@@ -94,7 +94,7 @@
       .row-fluid
         .span3      
           %label.subtitle 
-            Evidence Instructions
+            Verification note (optional)
           .row-fluid
             %textarea.span12.double{:placeholder => "Enter in a description that a system owner would follow to collect evidence for this control.", :rows => "3"}
             %span.help-inline &nbsp;
@@ -104,11 +104,11 @@
               });
         .span3
           %label.subtitle
-            Notes
+            Notes (optional)
           .row-fluid  
             %textarea.span12.double{:placeholder => "Enter notes here", :rows => "3"}
         .span3
-          %label Assertions (multiple choice)
+          %label Assertions (optional, multi-choice)
           %select{:multiple => "multiple"}
             %optgroup{:label => "Transactions"}
               %option Occurrence
@@ -132,18 +132,7 @@
             %i.gcmsicon-edit-grey
           %label Categories
           .row-fluid
-            .span6
-              %li.slot.categorySlot.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
-                .controls-group
-                  .controls-type Authorization
-                  .controls-subtype 
-                  .controls-subgroup Access Control
-              %li.slot.categorySlot.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
-                .controls-group
-                  .controls-type Change Management
-                  .controls-subtype 
-                  .controls-subgroup Segregation of Duties
-            .span6
+            .span12
               %li.slot.categorySlot.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
                 .controls-group
                   .controls-type Authorization
