@@ -33,15 +33,9 @@ class Program < ActiveRecord::Base
   #
 
   @valid_relationships = [
-    { :relationship_type =>:program_is_relevant_to_location,
-      :related_model => Location,
-      :related_model_endpoint => :destination},
-    { :relationship_type => :program_is_relevant_to_org_group,
-      :related_model => OrgGroup,
-      :related_model_endpoint => :destination},
-    { :relationship_type => :program_is_relevant_to_product,
-      :related_model => Product,
-      :related_model_endpoint => :destination}
+    { :to   => Location, :via => :program_is_relevant_to_location },
+    { :to   => OrgGroup, :via => :program_is_relevant_to_org_group },
+    { :to   => Product,  :via => :program_is_relevant_to_product }
   ]
 
   def custom_edges
