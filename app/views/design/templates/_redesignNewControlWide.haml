@@ -127,11 +127,10 @@
               %option Completeness
               %option Classification and Understandability
               %option Accuracy and Valuation
-        .span3
-          %h3 
-            Categories
-            .pull-right 
-              %a.btn.btn-blue.btn-mini.addbtn.pull-right Edit Categories 
+        .span3.modal-categories
+          %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+            %i.gcmsicon-edit-grey
+          %label Categories
           .row-fluid
             .span6
               %li.slot.categorySlot.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}

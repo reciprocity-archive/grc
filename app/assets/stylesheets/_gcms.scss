@@ -2556,3 +2556,13 @@ However, we can't remove this until the slots in question are refactored to row-
     @include background-image(linear-gradient(top,  #dddddd 0%, #eef4ed 70%, #edebe6 100%, #f6f6f6 100%));
   }
 }
+
+.modal-categories {
+  .controlSlot {
+    padding-bottom:0;
+  }
+  .controls-subgroup {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
