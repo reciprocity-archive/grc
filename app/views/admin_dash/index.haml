@@ -70,6 +70,9 @@
             #programsInProgress.toolbar-widget.in
               %ul#quickLinks.nav.nav-tabs.nav-stacked.in
                 %li.group
+                  %a.btn{"data-toggle" => "modal", :href => "#redesignNewControlWide"}
+                    New Control
+                %li.group
                   %a.btn{:href => "/design/systems"}
                     Systems Page
                 %li.group
@@ -252,9 +255,6 @@
               %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#redesignNewProgram"}
                   New Program 
-              %li.group
-                %a.btn{"data-toggle" => "modal", :href => "#redesignNewControlWide"}
-                  New Control
 
   .singleColumn
     =render :partial => 'admin_dash/accounts',

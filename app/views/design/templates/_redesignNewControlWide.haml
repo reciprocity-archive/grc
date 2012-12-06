@@ -26,49 +26,17 @@
             %option Program Title 3
         .span6
           .row-fluid
-            .span4
+            .span6
               %label Code (optional)
               %input.span12{:type => "text", :placeholder => "Autofill code"}
-            .span2
+            .span6
               %label Version
               %input.span12{:type => "text", :placeholder => "1.0"}
-            .span3
-              %label Fraud-related
-              %select.span12
-                %option -
-                %option Yes
-                %option No
-            .span3
-              %label Significance
-              %select.span12
-                %option -
-                %option Yes
-                %option No
 
       .row-fluid
-        .span3
+        .span6
           %label Description
           %textarea.span12.double{:placeholder => "Enter description here", :rows => "3"}
-        .span3
-          %label Assertions (multiple choice)
-          %select{:multiple => "multiple"}
-            %optgroup{:label => "Transactions"}
-              %option Occurrence
-              %option Completeness              
-              %option Accuracy              
-              %option Cutoff
-              %option Classification
-            %optgroup{:label => "Accounts balances"}
-              %option Existence
-              %option Rights and Obligations              
-              %option Completeness
-              %option Valuation and Allocation
-            %optgroup{:label => "Presentation and disclosure"}
-              %option Occurrence
-              %option Rights and Obligations              
-              %option Completeness
-              %option Classification and Understandability
-              %option Accuracy and Valuation
         .span6
           .row-fluid 
             .span6
@@ -98,13 +66,13 @@
           %span.help-inline &nbsp;
         .span6
           .row-fluid 
-            .span6
+            .span3
               %label Control Means
               %select.span12
                 %option Manual
-                %option Manual with Segregation of Duties
+                %option Manual w/ Sggt
                 %option Automated
-            .span6
+            .span3
               %label Verify Control
               %select.span12
                 %option Continuous
@@ -113,8 +81,22 @@
                 %option Monthly
                 %option Quarterly
                 %option Annually
+            .span3
+              %label Significance
+              %select.span12
+                %option Non-Key
+                %option Yes
+                %option No
+            .span3
+              %label Fraud-related
+              %select.span12
+                %option -
+                %option Yes
+                %option No
+                
+                
       .row-fluid
-        .span4      
+        .span3      
           %label.subtitle 
             Evidence Instructions
           .row-fluid
@@ -124,18 +106,38 @@
               $('#wysihtml5').wysihtml5({
                 "image": false //Button to insert an image. Default true
               });
-        .span2
+        .span3
           %label.subtitle
             Notes
           .row-fluid  
             %textarea.span12.double{:placeholder => "Enter notes here", :rows => "3"}
-        .span6
+        .span3
+          %label Assertions (multiple choice)
+          %select{:multiple => "multiple"}
+            %optgroup{:label => "Transactions"}
+              %option Occurrence
+              %option Completeness              
+              %option Accuracy              
+              %option Cutoff
+              %option Classification
+            %optgroup{:label => "Accounts balances"}
+              %option Existence
+              %option Rights and Obligations              
+              %option Completeness
+              %option Valuation and Allocation
+            %optgroup{:label => "Presentation and disclosure"}
+              %option Occurrence
+              %option Rights and Obligations              
+              %option Completeness
+              %option Classification and Understandability
+              %option Accuracy and Valuation
+        .span3
           %h3 
             Categories
             .pull-right 
-              %a.btn.btn-blue.addbtn.pull-right Edit Categories 
+              %a.btn.btn-blue.btn-mini.addbtn.pull-right Edit Categories 
           .row-fluid
-            .span4
+            .span6
               %li.slot.categorySlot.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
                 .controls-group
                   .controls-type Authorization
@@ -146,7 +148,7 @@
                   .controls-type Change Management
                   .controls-subtype 
                   .controls-subgroup Segregation of Duties
-            .span4
+            .span6
               %li.slot.categorySlot.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
                 .controls-group
                   .controls-type Authorization
@@ -157,16 +159,7 @@
                   .controls-type Change Management
                   .controls-subtype 
                   .controls-subgroup Segregation of Duties
-            .span4
-              %li.slot.categorySlot.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
-                .controls-group
-                  .controls-type Authorization
-                  .controls-subtype 
-                  .controls-subgroup Access Control
-              %li.slot.categorySlot.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
-                .controls-group
-                  .controls-type Change Management
-                  .controls-subtype 
-                  .controls-subgroup Segregation of Duties
+
+
 
   =render :partial => 'design/templates/modalfooter', :locals => { :shownote => false, :showcreated => true, :showrevs => true }
