@@ -77,11 +77,16 @@ module ImportHelper
     end
   end
 
-  def handle_import_category(object, attrs, key, category_scope_id)
-    category = attrs.delete(key)
+  def strip_split(str)
+      str.split(',').map {|x| x.strip}.reject {|x| x.blank?}
+  end
 
-    if category.present?
-      categories = category.split(',').map {|category| Category.find_or_create_by_name({:name => category, :scope_id => category_scope_id})}
+  def handle_import_category(object, attrs, key, category_scope_id)
+    category_string = attrs.delete(key)
+
+    if category_string.present?
+      names = strip_split(category_string)
+      categories = names.map {|category| Category.find_or_create_by_name({:name => category, :scope_id => category_scope_id})}
       object.categories = object.categories + categories
     end
   end
@@ -90,7 +95,8 @@ module ImportHelper
     systems_string = attrs.delete(key)
 
     unless systems_string.nil?
-      systems = systems_string.split(',').map do |slug|
+      slugs = strip_split(systems_string)
+      systems = slugs.map do |slug|
         system = System.find_or_create_by_slug({:slug => slug, :title => slug, :infrastructure => false})
         system
       end
@@ -108,7 +114,8 @@ module ImportHelper
     systems_string = attrs.delete(key)
 
     unless systems_string.nil?
-      systems = systems_string.split(',').map do |slug|
+      slugs = strip_split(systems_string)
+      systems = slugs.map do |slug|
         system = System.find_or_create_by_slug({:slug => slug, :title => slug, :infrastructure => false})
         system
       end
@@ -118,7 +125,8 @@ module ImportHelper
 
   def handle_import_relationships(object, related_string, related_class, relationship_type)
     if related_string.present?
-      relateds = related_string.split(',').each do |slug|
+      slugs = strip_split(related_string)
+      relateds = slugs.each do |slug|
         related = related_class.find_or_create_by_slug({:slug => slug, :title => slug})
         attrs = {:source_id => object.id, :source_type => object.class.name, :destination_id => related.id, :destination_type => related_class.name, :relationship_type_id => relationship_type}
         unless Relationship.exists?(attrs)
