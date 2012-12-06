@@ -136,7 +136,7 @@ class RelationshipsController < BaseMappingsController
                   :object_id => obj.id,
                   :object_type => obj.class.to_s,
                   :relationship_type => vr[:relationship_type],
-                  :related_side => 'source',
+                  :related_side => vr[:related_model_endpoint],
                   :related_model => related_model)
 
             rels = related_is_source.select do |rel|
@@ -161,7 +161,7 @@ class RelationshipsController < BaseMappingsController
                   :object_id => obj.id,
                   :object_type => obj.class.to_s,
                   :relationship_type => vr[:relationship_type],
-                  :related_side => 'both',
+                  :related_side => vr[:related_model_endpoint],
                   :related_model => related_model)
 
             rels = related_is_dest.select do |rel|

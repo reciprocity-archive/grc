@@ -28,7 +28,8 @@ class Product < ActiveRecord::Base
     { :from => OrgGroup, :via => :org_group_has_province_over_product },
     { :both => Product,  :via => :product_is_affiliated_with_product },
     { :to   => Location, :via => :product_is_dependent_on_location },
-    { :both => Product,  :via => :product_is_dependent_on_product },
+    { :to   => Product,  :via => :product_is_dependent_on_product },
+    { :from => Product,  :via => :product_is_dependent_on_product },
     { :to   => Market,   :via => :product_is_sold_into_market },
     { :from => Program,  :via => :program_is_relevant_to_product }
   ]
