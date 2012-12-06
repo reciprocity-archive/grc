@@ -407,7 +407,7 @@ width: 97px;
   border: 1px solid #43C2C7;
   border-bottom-color: transparent;
 
-  font-weight:bold;
+  font-weight:normal;
 }
 
 .nav-tabs {
@@ -921,6 +921,9 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
 }
 
 .navbar {
+  border-bottom:3px solid #ccc;
+  
+  
   .brand {
     display: inline-block;
     float: left;
@@ -966,6 +969,7 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
   min-width:251px;
   float: left;
   margin-left: 0px;
+  padding-top:2px;
 }
 
 .headercenter {

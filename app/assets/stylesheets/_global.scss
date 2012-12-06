@@ -1,9 +1,13 @@
 
 body {
-  background: url("/images/navbkgd.png") left top repeat-x, url("../images/bkgd.gif") left top repeat;
+  background: url("/images/bgnd.png") repeat 0 0;
   padding-top: 129px; /* 129px to make the container go all the way to the bottom of the topbar */
   font-family: $font-family;
   height:100%;
+}
+
+.navbar {
+  background:#fff;
 }
 
 //HACK - we should increase widget size and margins slightly instead of this padding

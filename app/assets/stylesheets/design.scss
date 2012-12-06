@@ -11,7 +11,7 @@
   .WidgetBox {
     .WidgetBoxHeading {
       background: #2c4361;
-      @include background-image(linear-gradient(top, #7a99c1, #2c4361));    
+      @include background-image(linear-gradient(top, #7a99c1, #2c4361));
       border-color: #444444 #444444 #2c4361;
       text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.56);
       -webkit-font-smoothing: antialiased;
