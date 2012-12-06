@@ -79,6 +79,7 @@ class ProgramsController < BaseObjectsController
           values.unshift("Controls")
           out << CSV.generate_line(values)
           out << CSV.generate_line([])
+          out << CSV.generate_line([])
           out << CSV.generate_line(CONTROL_MAP.keys)
           @program.controls.each do |s|
             values = CONTROL_MAP.keys.map do |key|
@@ -121,6 +122,7 @@ class ProgramsController < BaseObjectsController
           values = keys.map { |key| @program.send(PROGRAM_MAP[key]) }
           values.unshift("Program")
           out << CSV.generate_line(values)
+          out << CSV.generate_line([])
           out << CSV.generate_line([])
           out << CSV.generate_line(SECTION_MAP.keys)
           @program.sections.each do |s|
@@ -307,7 +309,7 @@ class ProgramsController < BaseObjectsController
   def read_import_controls(rows)
     import = { :messages => [] }
 
-    raise ImportException.new("There must be at least 3 input lines") unless rows.size >= 4
+    raise ImportException.new("There must be at least 5 input lines") unless rows.size >= 5
 
     program_headers = read_import_headers(import, PROGRAM_MAP, "program", rows)
 
@@ -318,7 +320,8 @@ class ProgramsController < BaseObjectsController
     validate_import_type(import[:program], "Controls")
     validate_import_slug(import[:program], "Program", @program.slug)
 
-    raise ImportException.new("There must be an empty separator row") unless trim_array(rows.shift) == []
+    rows.shift
+    rows.shift
 
     read_import(import, CONTROL_MAP, "control", rows)
 
@@ -328,7 +331,7 @@ class ProgramsController < BaseObjectsController
   def read_import_sections(rows)
     import = { :messages => [] }
 
-    raise ImportException.new("There must be at least 3 input lines") unless rows.size >= 4
+    raise ImportException.new("There must be at least 5 input lines") unless rows.size >= 5
 
     program_headers = read_import_headers(import, PROGRAM_MAP, "program", rows)
 
@@ -339,7 +342,8 @@ class ProgramsController < BaseObjectsController
     validate_import_type(import[:program], "Program")
     validate_import_slug(import[:program], "Program", @program.slug)
 
-    raise ImportException.new("There must be an empty separator row") unless trim_array(rows.shift) == []
+    rows.shift
+    rows.shift
 
     read_import(import, SECTION_MAP, "section", rows)
 

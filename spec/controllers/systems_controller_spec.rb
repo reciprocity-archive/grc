@@ -71,6 +71,7 @@ describe SystemsController do
       rels[0].destination.class.should == OrgGroup
       sys1.categories.should == [Category.find_by_name('cat1')]
       sys2.infrastructure.should be_false
+      sys2.description.should == "This is System 2\n---\nnote 1\n---\nnote 2"
     end
   end
 end

@@ -1,6 +1,7 @@
 Type,Bogus1,Program Code,Program Title,Program Description,Company,Version,Start,Stop,Kind,Audit Start,Audit Frequency,"Audit Duration"
 Program,aaa,REG1,Reg 1,new description 1,false,,,,,,Soonish,1 Fortnight
-,
+This is ignored
+
 Section Code,Section Title,Bogus2,Section Description
 REG1-SEC1,SEC 1,aaa,new description x
 REG1-SEC2,SEC 2,bbb,new description y

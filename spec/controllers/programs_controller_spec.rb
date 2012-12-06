@@ -70,8 +70,8 @@ describe ProgramsController do
       @reg.audit_frequency = Option.create(:title => "Often", :role => 'audit_frequency')
       @reg.save
       get 'export', :id => @reg.id, :format => :csv
-      # program titles, 1 program, blank line, section titles, 1 section
-      response.body.split("\n").size.should == 5
+      # program titles, 1 program, 2 blank lines, section titles, 1 section
+      response.body.split("\n").size.should == 6
       (response.body =~ /1 Week/).should_not be_nil
       (response.body =~ /Often/).should_not be_nil
     end
@@ -147,7 +147,7 @@ describe ProgramsController do
     it "should export" do
       get 'export_controls', :id => @creg.id, :format => :csv
       # system titles, system data
-      response.body.split("\n").size.should == 6
+      response.body.split("\n").size.should == 7
     end
   end
 
