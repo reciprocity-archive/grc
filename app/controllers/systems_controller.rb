@@ -164,8 +164,8 @@ class SystemsController < BaseObjectsController
 
       append_notes = attrs.delete('append_notes')
       if append_notes
-        splits = (attrs['description'] || system.description).split("\n---\n").map {|x| x.strip}
-        new_splits = append_notes.split("\n---\n").map {|x| x.strip}
+        splits = (attrs['description'] || system.description || "").split("\n---\n").map {|x| x.strip}
+        new_splits = (append_notes ||"").split("\n---\n").map {|x| x.strip}
         new_splits.each do |split|
           splits << split unless splits.include?(split)
         end

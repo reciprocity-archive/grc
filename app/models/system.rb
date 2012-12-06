@@ -138,4 +138,33 @@ class System < ActiveRecord::Base
   def default_slug_prefix
     is_biz_process? ? 'PROCESS' : 'SYSTEM'
   end
+
+  def categories_display
+    categories.map {|x| x.name}.join(',')
+  end
+
+  def sub_systems_display
+    sub_systems.map {|x| x.slug}.join(',')
+  end
+
+  def org_groups_display
+    rels = Relationship.where(:relationship_type_id => :system_is_a_process_for_org_group, :source_id => self, :source_type => System.name)
+    rels.map {|x| x.destination.slug}.join(',')
+  end
+
+  def references_display
+    documents.map do |d|
+      "#{d.description} [#{d.link} #{d.title}]"
+    end.join("\n")
+  end
+
+  def owner_display
+    p = object_people.detect {|x| x.role == 'owner'}
+    p ? p.person.email : ''
+  end
+
+  def process_owner_display
+    p = object_people.detect {|x| x.role == 'process_owner'}
+    p ? p.person.email : ''
+  end
 end

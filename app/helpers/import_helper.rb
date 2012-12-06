@@ -50,10 +50,13 @@ module ImportHelper
   end
 
   def handle_import_person(attrs, key, warnings)
-    if attrs[key].present?
+    unless attrs[key].nil?
       if attrs[key].include?('@')
         attrs[key] = Person.find_or_create_by_email!({:email => attrs[key]})
+      elsif attrs[key] == ""
+        attrs[key] = nil
       else
+        attrs[key] = nil
         warnings[key.to_sym] ||= []
         warnings[key.to_sym] << "invalid email"
       end
