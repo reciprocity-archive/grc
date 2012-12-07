@@ -8,7 +8,7 @@ class System < ActiveRecord::Base
 
   CATEGORY_TYPE_ID = 101
 
-  attr_accessible :title, :slug, :description, :url, :version, :infrastructure, :is_biz_process, :type, :start_date, :stop_date
+  attr_accessible :title, :slug, :description, :url, :version, :infrastructure, :is_biz_process, :type, :start_date, :stop_date, :notes
 
   # Many to many with Control
   has_many :system_controls, :dependent => :destroy
