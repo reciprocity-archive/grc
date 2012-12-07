@@ -41,6 +41,7 @@ module ImportHelper
           row[k] = v
         end
       end
+      row['slug'] = row['slug'].upcase if row.has_key?('slug')
       row
     end
   end
