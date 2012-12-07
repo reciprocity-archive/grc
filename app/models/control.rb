@@ -10,8 +10,17 @@ class Control < ActiveRecord::Base
   include RelatedModel
 
   CATEGORY_TYPE_ID = 100
+  CATEGORY_ASSERTION_TYPE_ID = 102
 
   attr_accessible :title, :slug, :description, :program, :section_ids, :type, :kind, :means, :categories, :verify_frequency, :url, :start_date, :stop_date, :version, :documentation_description
+
+  def general_categories
+    categories.ctype(CATEGORY_TYPE_ID)
+  end
+
+  def assertion_categories
+    categories.ctype(CATEGORY_ASSERTION_TYPE_ID)
+  end
 
   define_index do
     indexes :slug, :sortable => true

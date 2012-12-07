@@ -11,7 +11,7 @@ end
 class SystemsController < BaseObjectsController
   include ImportHelper
 
-  SYSTEM_MAP = Hash[*%w(System\ Code slug Title title Description description Infrastructure infrastructure Owner owner Category category Created created_at Updated updated_at)]
+  SYSTEM_MAP = Hash[*%w(System\ Code slug Title title Description description Link:References references Infrastructure infrastructure Link:People;Process\ Owner process_owner Link:People;Owner owner Link:Categories categories Append:Notes append_notes Link:System;Sub\ System sub_systems Link:Org\ Group org_groups Effective\ Date start_date Created created_at Updated updated_at)]
 
   access_control :acl do
     allow :superuser
@@ -60,16 +60,34 @@ class SystemsController < BaseObjectsController
         self.response.headers['Content-Type'] = 'text/csv'
         headers['Content-Disposition'] = "attachment; filename=\"SYSTEMS.csv\""
         self.response_body = Enumerator.new do |out|
+          out << CSV.generate_line([])
+          out << CSV.generate_line([])
+          out << CSV.generate_line([])
+          out << CSV.generate_line([])
           out << CSV.generate_line(SYSTEM_MAP.keys)
           System.all.each do |s|
             values = SYSTEM_MAP.keys.map do |key|
               field = SYSTEM_MAP[key]
               case field
               when 'owner'
-                object_person = s.object_people.detect {|x| x.role == 'accountable'}
+                object_person = s.object_people.detect {|x| x.role == 'owner'}
                 object_person ? object_person.person.email : ''
-              when 'category'
+              when 'process_owner'
+                object_person = s.object_people.detect {|x| x.role == 'process_owner'}
+                object_person ? object_person.person.email : ''
+              when 'categories'
                 (s.categories.map {|x| x.name}).join(',')
+              when 'sub_systems'
+                (s.sub_systems.map {|x| x.slug}).join(',')
+              when 'append_notes'
+                ""
+              when 'org_groups'
+                rels = Relationship.where(:relationship_type_id => :system_is_a_process_for_org_group, :source_id => s, :source_type => System.name)
+                rels.map {|x| x.destination.slug}.join(',')
+              when 'references'
+                s.documents.map do |d|
+                  "#{d.description} [#{d.link} #{d.title}]"
+                end.join("\n")
               else
                 s.send(field)
               end
@@ -123,6 +141,7 @@ class SystemsController < BaseObjectsController
       attrs.delete('updated_at')
 
       handle_import_person(attrs, 'owner', import[:warnings][i])
+      handle_import_person(attrs, 'process_owner', import[:warnings][i])
 
       slug = attrs['slug']
 
@@ -136,8 +155,22 @@ class SystemsController < BaseObjectsController
 
       system ||= System.new
 
-      handle_import_object_person(system, attrs, 'owner', 'accountable')
-      handle_import_category(system, attrs, 'category')
+      handle_import_object_person(system, attrs, 'owner', 'owner')
+      handle_import_object_person(system, attrs, 'process_owner', 'process_owner')
+      handle_import_category(system, attrs, 'categories', System::CATEGORY_TYPE_ID)
+      handle_import_sub_systems(system, attrs, 'sub_systems')
+      org_groups = attrs.delete('org_groups')
+      handle_import_documents(system, attrs, 'references')
+
+      append_notes = attrs.delete('append_notes')
+      if append_notes
+        splits = (attrs['description'] || system.description || "").split("\n---\n").map {|x| x.strip}
+        new_splits = (append_notes ||"").split("\n---\n").map {|x| x.strip}
+        new_splits.each do |split|
+          splits << split unless splits.include?(split)
+        end
+        attrs['description'] = splits.join("\n---\n")
+      end
 
       system.assign_attributes(attrs, :without_protection => true)
 
@@ -148,14 +181,21 @@ class SystemsController < BaseObjectsController
       end
       @systems << system
       import[:errors][i] = system.errors unless system.valid?
+      system.infrastructure = false if system.infrastructure.nil?
       system.save unless check_only
+      handle_import_relationships(system, org_groups, OrgGroup, :system_is_a_process_for_org_group) unless check_only
     end
   end
 
   def read_import_systems(rows)
     import = { :messages => [] }
 
-    raise ImportException.new("There must be at least 2 input lines") unless rows.size >= 2
+    raise ImportException.new("There must be at least 5 input lines") unless rows.size >= 5
+
+    rows.shift
+    rows.shift
+    rows.shift
+    rows.shift
 
     read_import(import, SYSTEM_MAP, "system", rows)
 

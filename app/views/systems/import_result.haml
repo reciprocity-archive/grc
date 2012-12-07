@@ -5,16 +5,23 @@
   %h4 Sample Data
 
 .row-fluid
-  #sampleData.span12.well
+  #sampleData.span12.well{:style => 'overflow: scroll'}
     %table.ggrc-table
       %thead
         %tr
-          %th Code
+          %th System Code
           %th Title
           %th Description
           %th Infrastructure
+          %th Start Date
+          %th Owner
+          %th Process Owner
+          %th Categories
+          %th Sub Systems
+          %th Org Groups
+          %th References
       %tbody
-        -columns = %w(slug title description infrastructure)
+        -columns = %w(slug title description infrastructure start_date owner_display process_owner_display categories_display sub_systems_display org_groups_display references_display)
         -@systems.each_with_index do |sec, i|
           %tr{ :class => (i % 2 == 0 ? :odd : :even) }
             -columns.each do |column_name|
