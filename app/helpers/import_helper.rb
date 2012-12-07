@@ -41,7 +41,7 @@ module ImportHelper
           row[k] = v
         end
       end
-      row['slug'] = row['slug'].upcase if row.has_key?('slug')
+      row['slug'] = row['slug'].upcase if row.has_key?('slug') && !row['slug'].nil?
       row
     end
   end
@@ -161,8 +161,8 @@ module ImportHelper
         link = "file:" + link
       end
       { :description => ($1.nil? ? '' : $1) + ($4.nil? ? '' : $4),
-        :link => link, :title => ($3.present? ? $3 : link).strip }
-    end
+        :link => link, :title => $3.present? ? $3.strip : link }
+    end.reject {|x| x[:link].blank?}
   end
 
   def handle_import_document_reference(object, attrs, key, warnings)
