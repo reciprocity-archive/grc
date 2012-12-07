@@ -84,3 +84,21 @@ td {
 .inline {
   display:inline !important;
 }
+
+
+// broad definition of items, with assigned colors
+// i- prefix is there to avoid collision with other color definitions
+.item {
+  @include border-radius();
+  @include background-image($gradientColor);
+  border:1px solid $borderDefault;
+  padding:0 4px;
+  line-height:20px;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  font-weight:bold;
+  font-size:13px;
+  &.i-control {
+    @include border-and-gradient($bgndControl);
+  }
+}

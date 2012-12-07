@@ -1,0 +1,54 @@
+// PBC List Styles
+
+.pbc-header {
+  border:1px solid $borderDefault;
+  background:#f0f0f0;
+  padding:2px 10px;
+  margin-bottom:4px;
+  .row-fluid {
+    [class*="span"] {
+      min-height:0;
+      color:#888;
+      font-size:11px;
+      font-weight:bold;
+      padding-top:2px;
+      &:last-child {
+       text-align:right; 
+      }
+    }
+  }
+}
+
+ul.pbc-responses {
+  li {
+    border:1px solid $borderDefault;
+    padding:10px 10px 0 10px;
+    @include border-radius();
+    .pbc-actions {
+      .btn {
+        float:right;
+        clear:both;
+        margin-bottom:6px;
+      }
+    }
+  }
+}
+
+.pbc-control {
+  .item {
+    margin-right:26px;
+    margin-bottom:14px;
+  }
+}
+
+.pbc-status {
+  p {
+    margin-top:2px;
+    font-size:12px;
+    &.subtle {
+      color:#999;
+      font-size:11px;
+      margin-top:-6px;
+    }
+  }
+}

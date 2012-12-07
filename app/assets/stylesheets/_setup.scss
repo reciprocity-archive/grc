@@ -1,6 +1,7 @@
 // defaults
 
   $default-border-radius: 4px;
+  $gradientColor:linear-gradient(top, #ffffff, #eeeeee);
 
 // variables
 
@@ -41,6 +42,7 @@
   $bgndProduct: #e6e0f6;
   $bgndSystem: #d5eff3;
   $bgndControl: #f4e4e0;
+
 
 // SASS mixins
 
@@ -102,3 +104,8 @@
   filter: progid:dximagetransform.microsoft.gradient(startColorstr='#fffbb450', endColorstr='#fff89406', GradientType=0);
 }
 
+@mixin border-and-gradient($color) {
+  @include background-image(linear-gradient(top, lighten($color, 5%), darken($color, 5%)));
+  border:1px solid darken($color,10%);
+  color:darken($color,50%);
+}
