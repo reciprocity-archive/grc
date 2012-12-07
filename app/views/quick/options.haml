@@ -2,10 +2,12 @@
   .no-results
     No results found
 -else
-  %ul.nav.nav-tabs.nav-stacked
-    -@options.each do |option|
-      %li
-        %a.widgetbtn.fltrt{ :'data-form-target' => "refresh", :'data-modal-reset' => "reset", :'data-toggle' => "modal-ajax-form", :href => edit_flow_option_path(option), :'data-target' => "#ajax-modal-options-3-edit" }
-          %i.gcmsicon-edit-grey
-        =link_to '#' do
-          =option.title
+  -@options.sort_by(&:role).group_by(&:role).each do |role, options_for_role|
+    %h4=role.humanize.titleize
+    %ul.nav.nav-tabs.nav-stacked
+      -options_for_role.sort_by(&:title).each do |option|
+        %li
+          %a.widgetbtn.fltrt{ :'data-form-target' => "refresh", :'data-modal-reset' => "reset", :'data-toggle' => "modal-ajax-form", :href => edit_flow_option_path(option), :'data-target' => "#ajax-modal-options-3-edit" }
+            %i.gcmsicon-edit-grey
+          =link_to '#' do
+            =option.title
