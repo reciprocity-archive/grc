@@ -25,6 +25,8 @@ jQuery(function ($) {
   }
 
 
+
+
   //ACTUALLY renderout templates
 
   renderExternalTmpl({ name: 'help', selector: '#templates', data: {} });
@@ -66,6 +68,8 @@ jQuery(function ($) {
   renderExternalTmpl({ name: 'redesignNewSystem', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'redesignNewBizProcess', selector: '#templates', data: {} });
 
+  renderExternalTmpl({ name: 'showSecondModal', selector: '#templates', data: {} });
+
   // new modals END
   renderExternalTmpl({ name: 'newpersonBasic', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'newtransaction', selector: '#templates', data: {} });
@@ -82,6 +86,16 @@ jQuery(function ($) {
   renderExternalTmpl({ name: 'examplecombo', selector: '#Combo', data: {} });
   renderExternalTmpl({ name: 'exampleSampledata', selector: '#sampleData', data: {} });
   renderExternalTmpl({ name: 'auditstatus', selector: '#auditstatus', data: {} });
+
+
+  renderExternalTmpl({ name: 'exampleprocesses', selector: '#sampleprocesses', data: {} });
+  renderExternalTmpl({ name: 'examplerisks', selector: '#samplerisks', data: {} });
+
+
+  renderExternalTmpl({ name: 'examplelinkedcontrols', selector: '#samplelinkedcontrols', data: {} });
+  renderExternalTmpl({ name: 'exampleprogramsections', selector: '#sampleprogramsections', data: {} });
+
+
 
   $(document).on("click", "#expand_all", function(event) {
     //$('.row-fluid-slotcontent').show("fast");
@@ -112,8 +126,6 @@ jQuery(function ($) {
     $(this).children(".expander").toggleClass("toggleExpanded");
   });*/
 
-
-
   $(document).on("click", ".expandAll", function(event) {
     // $("h3.trigger").toggleClass("active").next().slideToggle("fast");
     $(this).children("i").toggleClass("gcmssmallicon-blue-expand");
@@ -128,10 +140,15 @@ jQuery(function ($) {
     $('#confirmModal').modal('show');
   });
 
-
-  $('#myModal').on('hidden', function () {
-    // do something…
-  })
+/* no worky 
+  $(document).on("click", ".sluggroup", function(event){
+    //alert("here");
+   // $('.riskWidget').each(function(i){
+    var $this = $(this);
+    $('.sluggroup').removeClass('selected');
+    $this.addClass('selected');
+  });
+*/
 
   $(document).on("click", ".greyOut", function(event){
     $(this).closest('.singlecontrolSlot').remove();
@@ -155,9 +172,18 @@ jQuery(function ($) {
       $('#programinformationUnlocked').tab('show');
   });
 
-  for (i=0;i<=5;i++) {
+  for (i=0;i<=50;i++) {
     $('#tooltip' + i).tooltip();
   }
+//div[class*='tocolor-']
+  
+  $("div[class*='-summary']").on('click', function () {
+    alert("ping");
+      $this.closest("div[class*='-more']").collapse('hide');
+})
+
+
+
 
   // show/hide widget
 
@@ -476,6 +502,46 @@ function toggleGovernance() {
   });
 
 }
+
+
+/* Hack to show a prototype of stacked modal slideout/in */
+/* Specific to two modals currently and ignores bootstrap modal functionality (ie I think they use a toggle)
+
+$(document).on("click", "#openSecondModal", function(event) {
+    
+
+          firstmodal = $(this).closest('.modal');
+          secondmodal = $('#basicnewpersonModal');
+
+          secondmodal.css({"margin-left": "+=1050px"});
+          secondmodal.modal('show').fadeIn('slow');
+             
+          firstmodal.animate({ left: parseInt(firstmodal.css('left'),1200) == -300 ? firstmodal.outerWidth() : -300 });
+          firstmodal.addClass('halfopacity');
+          secondmodal.animate({ left: parseInt(firstmodal.css('left'),1200) == -300 ? firstmodal.outerWidth() : -300 });
+
+
+  });
+
+
+$(document).on("click", "#closeSecondModal", function(event) {
+
+
+          secondmodal = $(this).closest('.modal');
+          firstmodal = $('#showSecondModal');
+
+              secondmodal.modal('hide').fadeOut('slow');
+
+              secondmodal.css({"margin-left": "-=1050px"});
+                 
+              firstmodal.animate({ left: parseInt(firstmodal.css('left'),1200) == 750 ? firstmodal.outerWidth() : 750 });
+              firstmodal.removeClass('halfopacity');
+              //secondmodal.animate({ left: parseInt(firstmodal.css('left'),1200) == 600 ? firstmodal.outerWidth() : 600 });
+
+});
+
+//THE ABOVE SHOULD BE IMPLEMENTED VIA BRAD'S SOLUTION
+ */
 
 jQuery(function($) {
   if ($.cookie('toggle_governance') == '1')

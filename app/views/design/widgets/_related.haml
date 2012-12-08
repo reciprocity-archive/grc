@@ -1,0 +1,177 @@
+#impactscopewidget.WidgetBox
+  .WidgetBoxHeading
+    .WidgetTitle Related
+    %nav
+      %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+        %i.gcmsicon-questionmark-grey
+      %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
+      %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#impactScopeInfo"}
+        %i.gcmsicon-enlarge-grey
+  .WidgetBoxContent.information
+    #impactScopeInfo.collapse.in
+      /Button Filters
+      .button-set
+        .row-fluid
+          .span4
+            .span12.btn{:href => ""}
+              Reg Programs
+          .span4
+            .span12.btn.halfopacity{:href => ""}
+              Org Groups 
+          .span4
+            .span12.btn.halfopacity{:href => ""}
+              Data Assets
+          
+      .button-set
+        .row-fluid
+          .span4
+            .span12.btn{:href => ""}
+              Risky Attributes
+          .span4
+            .span12.btn.halfopacity{:href => ""}
+              Products
+          .span4
+            .span12.btn.halfopacity{:href => ""}
+              Markets 
+      .button-set
+        .row-fluid
+          .span4
+            -#.span12.btn.halfopacity{:href => ""}
+              
+          .span4
+            .span12.btn.halfopacity{:href => ""}
+              Projects
+          .span4
+            .span12.btn.halfopacity{:href => ""}
+              Facilities
+      %hr.hr-widget
+      / TABS
+      .row-fluid
+        .span12.nominheight.itemswell
+          .row-fluid.nominheight
+            .span12.nominheight
+              %h4.nominheight
+                Applicable Regulations
+                -#%a.btn.btn-blue.minibtn.pull-right Edit List
+                %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                  %i.gcmsicon-link
+          .row-fluid
+            .span12.captionbox
+              .subtitle Regulations or programs that are directly applicable to this program.
+          .row-fluid
+            %ul.span12
+              %li.controlSlot
+                .row-fluid.nominheight
+                  .span6.nominheight
+                    %span.controls-group United Kingdoms
+                  .span6.nominheight
+                    %a.btn.minibtn.pull-right Review
+                .row-fluid.nominheight
+                  .span3.nominheight
+                    %span.controls-subgroup
+                      %strong CCA
+                  .span9.nominheight
+                    %span.controls-subgroup UK Consumer Credit Act
+                .row-fluid.nominheight
+                  .span12.infowell.nominheight
+                    .row-fluid.nominheight
+                      .span4.nominheight
+                        %strong 239
+                        Objects
+                      .span4.nominheight
+                        %strong 22
+                        Required
+                      .span4.nominheight
+                        .progress.active
+                          .bar.progressbar-success{"data-percentage" => "38", :style => "float: left; width: 0%; "}
+                          .bar.progressbar-danger{"data-percentage" => "10", :style => "float: right; width: 0%; "}
+                          .bar.progressbar-warning{"data-percentage" => "35", :style => "float: right; width: 0%; "}
+            .row-fluid
+              %ul.span12
+                %li.controlSlot
+                  .row-fluid.nominheight
+                    .span6.nominheight
+                      %span.controls-group United Kingdoms
+                    .span6.nominheight
+                      %a.btn.minibtn.pull-right Review
+                  .row-fluid.nominheight
+                    .span3.nominheight
+                      %span.controls-subgroup
+                        %strong CCA
+                    .span9.nominheight
+                      %span.controls-subgroup UK Consumer Credit Act
+                  .row-fluid.nominheight
+                    .span12.infowell.nominheight
+                      .row-fluid.nominheight
+                        .span4.nominheight
+                          %strong 239
+                          Objects
+                        .span4.nominheight
+                          %strong 22
+                          Required
+                        .span4.nominheight
+                          .progress.active
+                            .bar.progressbar-success{"data-percentage" => "38", :style => "float: left; width: 0%; "}
+                            .bar.progressbar-danger{"data-percentage" => "10", :style => "float: right; width: 0%; "}
+                            .bar.progressbar-warning{"data-percentage" => "35", :style => "float: right; width: 0%; "}
+     
+      .row-fluid
+        .span12.nominheight.itemswell
+          .row-fluid.nominheight
+            .span12.nominheight
+              %h4.nominheight
+                More Regulations
+                %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                  %i.gcmsicon-link
+                -#%a.btn.btn-blue.minibtn.pull-right Edit List
+          .row-fluid
+            .span12.captionbox
+              .subtitle 2nd group of regulations or programs that are directly applicable to this program.
+          .row-fluid
+            %ul.span12
+              %li.controlSlot
+                .row-fluid.nominheight
+                  .span6.nominheight
+                    %span.controls-group United Kingdoms
+                  .span6.nominheight
+                    %a.btn.minibtn.pull-right Review
+                .row-fluid.nominheight
+                  .span3.nominheight
+                    %span.controls-subgroup
+                      %strong CCA
+                  .span9.nominheight
+                    %span.controls-subgroup UK Consumer Credit Act
+                .row-fluid.nominheight
+                  .span12.infowell.nominheight
+                    .row-fluid.nominheight
+                      .span4.nominheight
+                        %strong 239
+                        Objects
+                      .span4.nominheight
+                        %strong 22
+                        Required
+                      .span4.nominheight
+                        .progress.active
+                          .bar.progressbar-success{"data-percentage" => "38", :style => "float: left; width: 0%; "}
+                          .bar.progressbar-danger{"data-percentage" => "10", :style => "float: right; width: 0%; "}
+                          .bar.progressbar-warning{"data-percentage" => "35", :style => "float: right; width: 0%; "}
+        / OTHER CONTENT
+        -#%hr.hr-widget/
+        -#.row-fluid.nominheight
+          .span3.nominheight
+            %label.pull-left{:for => "control-effectivedate"}
+              %strong> Products
+              \: 3
+          .span3.nominheight
+            %label.pull-left{:for => "control-effectivedate"}
+              %strong> Biz Areas
+              \: 2
+          .span3.nominheight
+            %label.pull-left{:for => "control-effectivedate"}
+              %strong> Biz Process
+              \: 9
+          .span3.nominheight
+            %label.pull-left{:for => "control-effectivedate"}
+              %strong> Systems
+              \: 239
+  / end of span

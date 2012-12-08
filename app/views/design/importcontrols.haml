@@ -1,15 +1,15 @@
--@title = "GRC: Products"
+-@title = "GRC: Control Import"
 
 -content_for :header do
   %ol#breadcrumb
     %li.last
       %a{:href => "programs.htm"} PROGRAMS / IMPORTING
-  #pageTitle.location Program Setup
+  #pageTitle.location Importing Controls for %Name%
 
 -content_for :page_help, 'changeme'
 
 -content_for :subheader_extras do
-  %h1#pageType.pull-right.highlighted Importing Controls
+  %h1#pageType.pull-right.highlighted Control Import
 
 
 .row-fluid
@@ -19,23 +19,23 @@
       .pull-right
         %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
           %i.gcmsicon-questionmark-grey
-        %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+        -#%a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
           %i.gcmsicon-edit-grey
-        %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
-      .WidgetTitle.doublewidth Regulation Data Preview
+        -#%input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
+      .WidgetTitle.doublewidth Control Import Preview
     / /.WidgetBoxHeading
     .WidgetBoxContent
       .row-fluid
         .span4.control-group
-          %label{:for => ""} Title of Product
-          %input.span12{:placeholder => "http://www.thisisaurl.com/thisurl", :type => "text"}/
+          %label{:for => ""} Program/Regulation
+          %input.span12{:placeholder => "Program or Regulation Name", :type => "text"}/
           %br/
           %span.help-inline
-        .span1
+        -#.span1
           %label{:for => "control-code"} Version  
           %input#control-code.span12{:disabled => "disabled", :placeholder => "1.2", :type => "text"}
           %span.help-inline
-        .span1
+        .span2
         .span6.well
           .row-fluid
             .span4
@@ -78,4 +78,4 @@
             $('#dp3').datepicker();
         .span3
 
-          %a.span12#actionButton.btn.btn-large.btn-success.btn-primary{:href => "#", :style => "margin-top:9px;"} Import Controls and Link Program
+          %a.span12#actionButton.btn.btn-large.btn-success.btn-primary{:href => "#", :style => "margin-top:9px;"} Import Controls

@@ -1,4 +1,4 @@
--@title = "GRC: Products"
+-@title = "GRC: Importing Regulation Data"
 
 -content_for :header do
   %ol#breadcrumb
@@ -18,19 +18,19 @@
       .pull-right
         %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
           %i.gcmsicon-questionmark-grey
-        %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+        -#%a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
           %i.gcmsicon-edit-grey
-        %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
+        -#%input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
       .WidgetTitle.doublewidth Regulation Data Preview
     / /.WidgetBoxHeading
     .WidgetBoxContent
-      %ul#quicklinks.nav.nav-tabs
+      -#%ul#quicklinks.nav.nav-tabs
         %li
           %a{"data-toggle" => "tab", :href => "#Spreadsheet"} Spreadsheet
         %li.active
           %a{"data-toggle" => "tab", :href => "#Treeview"} Tree-view
       .tab-content
-        #Spreadsheet.tab-pane Spreadsheet
+        -##Spreadsheet.tab-pane Spreadsheet
         #Treeview.tab-pane.active
 
         .row-fluid

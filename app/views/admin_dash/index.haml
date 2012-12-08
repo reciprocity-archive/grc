@@ -2,7 +2,7 @@
   %ol#breadcrumb
     %li ADMIN
   .location#pageTitle Sys Admin Dashboard
-
+ 
 -content_for :page_help, 'admin'
 
 -content_for :subheader_extras do
@@ -53,14 +53,14 @@
             #programsInProgress.toolbar-widget.in
               %ul#quickLinks.nav.nav-tabs.nav-stacked.in
                 %li.group
-                  %a.btn{:href => "/design/redesignPageTemplate"}
-                    Redesigned Page Template
+                  %a.btn{:href => "/design/products"}
+                    Product Page
+                %li.group
+                  %a.btn{:href => "/design/controls"}
+                    Controls Page
                 %li.group
                   %a.btn{:href => "/design/audit-manager"}
                     Audit Manager
-                %li.group
-                  %a.btn{:href => "/controls"}
-                    Controls Page
                 %li.group
                   %a.btn{:href => "/design/audit-dashboard"}
                     Audit Dashboard
@@ -70,12 +70,7 @@
                 %li.group
                   %a.btn{:href => "/design/audit-control-review"}
                     Audit Controls Review
-                %li.group
-                  %a.btn{:href => "/systems"}
-                    Systems Page
-                %li.group
-                  %a.btn{:href => "/design/product"}
-                    Product Page
+                
                 %li.group
                   %a.btn{:href => "/design/importregs"}
                     Importing Regulation Data
@@ -107,7 +102,6 @@
         .WidgetBoxContent
           #programInProgress.toolbar-widget.in
             %ul#quickLinks.nav.nav-tabs.nav-stacked.in
-              
               %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#auditCycleModal"}
                   New/Edit Audit Cycle
@@ -129,7 +123,6 @@
               %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#createnewfacility"}
                   New Location/Facility
-              
               %li.row-fluid
                 %label Widgets
               %li.row-fluid
@@ -140,20 +133,28 @@
       #Programs.WidgetBox.singleWide.demoItem
         .WidgetBoxHeading
           .WidgetTitle 
-            To Be Implemented (Too Long)
+            Approved Modals
           %nav
             %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
               %i.gcmsicon-questionmark-grey
             %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
-            %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#programInProgressRedesign"}
-              %i.gcmsicon-enlarge-grey
+            %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#newEditItems"}
+              %i.gcmsicon-enlarge-grey.gcmssmallicon-blue-expand
         / /.WidgetBoxHeading
         .WidgetBoxContent
-          #programInProgressRedesign.toolbar-widget.in
-            %ul#quickLinks.nav.nav-tabs.nav-stacked.in
+          %ul#newEdit.nav.nav-tabs.nav-stacked.in
+            %li.group
+              %label Rapid Prototypes
+            %li.group
+              %a.btn{"data-toggle" => "modal", :href => "#showSecondModal"}
+                Show Second Modal
+          #newEditItems.toolbar-widget.collapse
+            %ul#newEdit.nav.nav-tabs.nav-stacked.in
+              %li.group
+                %label General
               %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#newreference"}
-                  New Reference
+                  New/Edit Reference
               %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#basicnewpersonModal"}
                   New/Edit Person
@@ -162,7 +163,7 @@
                   New/Edit Product
               %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#redesignNewCategory"}
-                  New/Edit Category NEW!
+                  New/Edit Category
               %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#redesignNewSectionWide"}
                   New/Edit Section
@@ -174,7 +175,7 @@
                   New/Edit System
               %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#redesignNewOrg"}
-                  New Organization
+                  New/Edit Organization
               %li.row-fluid
                 %label Selectors
               %li.row-fluid
@@ -201,7 +202,7 @@
                 %a.span6.btn{"data-toggle" => "modal", :href => "#selectorBiz2Product"}
                   Link Biz Object to Product
                 %a.span6.btn{"data-toggle" => "modal", :href => "#selectorThreat2Biz"}
-                  Link Threat to Biz Object
+                  Link Risky Attribute
               
               %li.row-fluid
                 %a.span6.btn{"data-toggle" => "modal", :href => "#newthreat"}
@@ -214,7 +215,7 @@
                   Y/N Dialog
                 %a.span6.btn{"data-toggle" => "modal", :href => "#comingsoonModal"}
                   Coming Soon
-      #Programs.WidgetBox.singleWide.demoItem
+      #Implemented.WidgetBox.singleWide
         .WidgetBoxHeading
           .WidgetTitle 
             Implemented
@@ -222,11 +223,11 @@
             %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
               %i.gcmsicon-questionmark-grey
             %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
-            %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#programInProgressRedesign"}
-              %i.gcmsicon-enlarge-grey
+            %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#ImplementedItems"}
+              %i.gcmsicon-enlarge-grey.gcmssmallicon-blue-expand
         / /.WidgetBoxHeading
         .WidgetBoxContent
-          #programInProgressRedesign.toolbar-widget.in
+          #ImplementedItems.toolbar-widget.collapse
             %ul#quickLinks.nav.nav-tabs.nav-stacked.in
               %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#redesignNewProgram"}
@@ -235,9 +236,8 @@
                 %a.btn{"data-toggle" => "modal", :href => "#redesignNewControlWide"}
                   New Control
 
-            
-  .doubleColumn
-    .fullHeight
-      =render :partial => 'admin_dash/accounts',
+  .singleColumn
+    =render :partial => 'admin_dash/accounts',
               :layout => 'layouts/widget_box',
-              :locals => { :accounts => @accounts, :people => @people }
+              :locals => { :accounts => @accounts, :people => @people }        
+  
