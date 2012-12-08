@@ -56,11 +56,7 @@ class QuickController < ApplicationController
   end
 
   def categories
-    @categories = Category
-    if params[:s].present?
-      @categories = @categories.db_search(params[:s])
-    end
-    @categories = allowed_objs(@categories.all, :read)
+    @root_categories = allowed_objs(Category.roots, :read)
   end
 
   def options
