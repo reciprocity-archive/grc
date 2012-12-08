@@ -88,6 +88,7 @@ td {
 
 // broad definition of items, with assigned colors
 // i- prefix is there to avoid collision with other color definitions
+
 .item {
   @include border-radius();
   @include background-image($gradientColor);
