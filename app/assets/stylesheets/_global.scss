@@ -113,5 +113,16 @@ td {
   }
   &.i-process {
     @include border-and-gradient($bgndProcess);
+    p.full-view {
+      white-space:normal;
+      overflow:visible;
+      font-weight:normal;
+      font-size:12px;
+      margin-right:30px;
+      line-height:14px;
+    }
+  }
+  &.error {
+    border:2px solid $errorColor;
   }
 }
