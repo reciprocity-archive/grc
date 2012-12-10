@@ -19,6 +19,7 @@
   }
 }
 
+
 ul.pbc-responses {
   li {
     border:1px solid $borderDefault;
@@ -32,6 +33,20 @@ ul.pbc-responses {
       }
     }
   }
+  
+  ul.items-list {
+    margin-bottom:10px;
+    li {
+      padding:6px;
+      margin-bottom:4px;
+      .row-fluid {
+        [class*="span"] {
+          min-height:0;
+        }
+      }
+    }
+  }
+  
 }
 
 .pbc-control {
