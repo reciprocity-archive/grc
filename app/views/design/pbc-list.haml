@@ -102,29 +102,78 @@
                   %strong Requested:
                   04/22/12
               .span1.pbc-item.pbc-actions
-                %a.btn.btn-mini.btn-blue
-                  %i.gcmsicon-more
                 %a.btn.btn-mini
                   %i.gcmsicon-edit-grey
                 %a.btn.btn-mini
-                  %i.gcmsicon-link
+                  %i.gcmsicon-add
             .row-fluid
               %ul.items-list
                 %li.item.i-process
                   .row-fluid
+                    .span5
+                      %input.span12{:type => "text", :placeholder => "Enter process name"}
                     .span4
+                      .row-fluid
+                        .span6
+                          %input.span12{:type => "text", :placeholder => "Add a document name"}
+                        .span6
+                          %input.span12{:type => "text", :placeholder => "Add document URL"}
+                    .span3
+                      %input.span12{:type => "text", :placeholder => "Add a person"}
+                  .row-fluid
+                    .span6
+                      %label
+                        %strong Process Description
+                      %textarea.span12{:rows => "2", :placeholder => "Enter process description"}
+                    .span6
+                      %label
+                        %strong Process Notes
+                      %textarea.span12{:rows => "2", :placeholder => "Enter process note"}
+                %li.item.i-process
+                  .row-fluid
+                    .span5
                       Proc-89 Accounts Security Policy Review
-                    .span2
+                    .span4
                       %a{:href => "#"} Document Policy
+                      %a.btn.btn-nano
+                        %i.gcmsicon-edit-grey
+                      %a.btn.btn-nano
+                        %i.gcmsicon-add
+                      .row-fluid
+                        .span6
+                          %input.span12{:type => "text", :placeholder => "Add a document name"}
+                        .span6
+                          %input.span12{:type => "text", :placeholder => "Add document URL"}
+                    .span3
+                      %a{:href => "#"} Dan Waterson (Responsible Party)
+                  .row-fluid
+                    .span6
+                      %label
+                        %strong Process Description
+                      %p.full-view
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    .span6
+                      %label
+                        %strong Process Notes
+                      %p.full-view
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                %li.item.i-process
+                  .row-fluid
+                    .span5
+                      Proc-89 Accounts Security Policy Review
+                    .span4
+                      %a{:href => "#"} Document Policy
+                      %a.btn.btn-nano
+                        %i.gcmsicon-edit-grey
                       %br
                       %a{:href => "#"} Document Policy 2
-                    .span2
-                      %a{:href => "#"} Dan Waterson
+                      %a.btn.btn-nano
+                        %i.gcmsicon-edit-grey
+                      %a.btn.btn-nano
+                        %i.gcmsicon-add
+
                     .span3
-                      %a{:href => "#"} Responsible Party
-                    .span1
-                      %a.btn.btn-mini.btn-blue.pull-right
-                        %i.gcmsicon-more
+                      %a{:href => "#"} Dan Waterson (Responsible Party)
                   .row-fluid
                     .span6
                       %label
@@ -136,114 +185,3 @@
                         %strong Process Notes
                       %p.full-view
                         Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                %li.item.i-process
-                  .row-fluid
-                    .span4
-                      Proc-89 Accounts Security Policy Review
-                    .span2
-                      %a{:href => "#"} Document Policy
-                    .span2
-                      %a{:href => "#"} Dan Waterson
-                    .span3
-                      %a{:href => "#"} Responsible Party
-                    .span1
-                      %a.btn.btn-mini.btn-blue.pull-right
-                        %i.gcmsicon-more
-                  .row-fluid
-                    .span6
-                      %label
-                        %strong Process Description
-                      %p.full-view
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    .span6
-                      %label
-                        %strong Process Notes
-                      %p.full-view
-                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          %li
-            .row-fluid
-              .span3.pbc-item.pbc-control
-                %a.btn.btn-mini.pull-right
-                  %i.gcmsicon-link                
-                .item.i-control.error
-                  Con-334 Contol Title
-                %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-              .span2.pbc-item.pbc-request
-                %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-              .span2.pbc-item.pbc-test
-                %p Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-              .span2.pbc-item.pbc-notes
-                %p Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-              .span2.pbc-item.pbc-status
-                %select.span12
-                  %option Completed
-                %p
-                  %strong Company:
-                  Joss Rayburn
-                %select.span12
-                  %option Completed
-                %p
-                  %strong Auditor:
-                  Paul harvey
-                %p.subtle
-                  %strong Requested:
-                  04/22/12
-              .span1.pbc-item.pbc-actions
-                %a.btn.btn-mini.btn-blue
-                  %i.gcmsicon-more
-                %a.btn.btn-mini
-                  %i.gcmsicon-edit-grey
-                %a.btn.btn-mini
-                  %i.gcmsicon-link
-            .row-fluid
-              %ul.items-list
-                %li.item.i-process
-                  .row-fluid
-                    .span4
-                      Proc-89 Accounts Security Policy Review
-                    .span2
-                      %a{:href => "#"} Document Policy
-                      %br
-                      %a{:href => "#"} Document Policy 2
-                    .span2
-                      %a{:href => "#"} Dan Waterson
-                    .span3
-                      %a{:href => "#"} Responsible Party
-                    .span1
-                      %a.btn.btn-mini.btn-blue.pull-right
-                        %i.gcmsicon-more
-                  .row-fluid
-                    .span6
-                      %label
-                        %strong Process Description
-                      %p.full-view
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    .span6
-                      %label
-                        %strong Process Notes
-                      %p.full-view
-                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                %li.item.i-process
-                  .row-fluid
-                    .span4
-                      Proc-89 Accounts Security Policy Review
-                    .span2
-                      %a{:href => "#"} Document Policy
-                    .span2
-                      %a{:href => "#"} Dan Waterson
-                    .span3
-                      %a{:href => "#"} Responsible Party
-                    .span1
-                      %a.btn.btn-mini.btn-blue.pull-right
-                        %i.gcmsicon-more
-                  .row-fluid
-                    .span6
-                      %label
-                        %strong Process Description
-                      %p.full-view
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    .span6
-                      %label
-                        %strong Process Notes
-                      %p.full-view
-                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.                    
