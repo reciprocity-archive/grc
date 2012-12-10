@@ -99,7 +99,21 @@ td {
   white-space:nowrap;
   font-weight:bold;
   font-size:13px;
+  [class*="span"] {
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    a {
+      text-decoration:underline;
+      font-weight:normal;
+    }
+  }
   &.i-control {
     @include border-and-gradient($bgndControl);
   }
+  &.i-process {
+    @include border-and-gradient($bgndProcess);
+  }
+
+
 }
