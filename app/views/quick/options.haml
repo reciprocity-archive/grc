@@ -2,6 +2,9 @@
   .no-results
     No results found
 -else
+  %a.btn.btn-warning{ :href => export_flow_options_path(:format => :csv) }
+    %i.gcmsicon-import-white
+    Export
   -@options.sort_by(&:role).group_by(&:role).each do |role, options_for_role|
     %h4=role.humanize.titleize
     %ul.nav.nav-tabs.nav-stacked

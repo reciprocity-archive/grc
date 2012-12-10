@@ -2,6 +2,9 @@
   .no-results
     No results found
 -else
+  %a.btn.btn-warning{ :href => export_flow_categories_path(:format => :csv) }
+    %i.gcmsicon-import-white
+    Export
   %ul.nav.nav-tabs.nav-stacked
     -@root_categories.sort_by(&:display_name).each do |root_category|
       %li

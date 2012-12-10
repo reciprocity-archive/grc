@@ -145,11 +145,17 @@ CmsRails::Application.routes.draw do
     member do
       get 'delete'
     end
+    collection do
+      get 'export'
+    end
   end
 
   resources :options, :as => 'flow_options' do
     member do
       get 'delete'
+    end
+    collection do
+      get 'export'
     end
   end
 
