@@ -70,3 +70,10 @@ ul.pbc-responses {
     }
   }
 }
+
+.widget-filters {
+  border-top:1px solid #ffffff;
+  padding:10px;
+  background:#f0f0f0;
+  @include box-shadow(inset 0px 0 4px #ccc);  
+}
