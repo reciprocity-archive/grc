@@ -11,19 +11,51 @@
 -content_for :subheader_extras do
   %h1#pageType.pull-right.highlighted PBC List
 
--content_for :subheader_plus do
-  %a.navbarplus.control.pull-right{ :href => "#comingsoonModal", "data-toggle" => "modal" }
-
 .row-fluid.fluid-layout
   .span12
     .widget.governance
       .widget-head
         .widget-actions
-          %input.widgetsearch{:type => "text", :placeholder => "Search"}
+          %a.btn.btn-mini{:href => "#"}
+            %i.gcmsicon-edit-grey
+          %a.btn.btn-mini{:href => "#"}
+            %i.gcmsicon-questionmark-grey
         %h2
-          PBC Request
+          PBC Request List
       .widget-filters
-        Filters go here
+        .row-fluid
+          .span5
+            .row-fluid
+              .span4
+                %label Audit Firm
+                %h4 Ernst &amp; Young
+              .span4
+                %label Audit Contact
+                %h4 Paul Harvey
+              .span4
+                %label List Import Date
+                %h4 06/10/12
+          .span6
+            .filters-box
+              .row-fluid
+                .span4
+                  %label
+                    Status
+                  %input.span12{:type => "text"}
+                .span3
+                  %label
+                    Person
+                  %input.span12{:type => "text"}
+                .span3
+                  %label 
+                    Date (on or after)
+                  %input.span12{:type => "text"}
+                .span2
+                  %label &nbsp;
+                  %button.btn.btn-blue.span12 Filter
+          .span1
+            %a.span12.btn.new-item{:href => "#"}
+              Add New
       .widget-body
         .pbc-header
           .row-fluid
@@ -81,9 +113,10 @@
                 %li.item.i-process
                   .row-fluid
                     .span4
-                      .expander
                       Proc-89 Accounts Security Policy Review
                     .span2
+                      %a{:href => "#"} Document Policy
+                      %br
                       %a{:href => "#"} Document Policy
                     .span2
                       %a{:href => "#"} Dan Waterson
@@ -95,7 +128,6 @@
                 %li.item.i-process
                   .row-fluid
                     .span4
-                      .expander
                       Proc-89 Accounts Security Policy Review
                     .span2
                       %a{:href => "#"} Document Policy
