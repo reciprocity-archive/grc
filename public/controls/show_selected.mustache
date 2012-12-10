@@ -1,4 +1,3 @@
- <div class="description" id="selected_{{type}}" oid="23">
   <div class="content">
   	{{#model}}
     <div>
@@ -10,7 +9,8 @@
     <div>
       {{description}}
     </div>
-    {{else}}
+    {{/model}}
+    {{^model}}
     	Nothing selected
     {{/model}}
   </div>

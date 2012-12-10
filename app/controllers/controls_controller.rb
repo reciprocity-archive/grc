@@ -64,7 +64,14 @@ class ControlsController < BaseObjectsController
       @controls = @controls.fulltext_search(params[:s])
     end
     @controls.all.sort_by(&:slug_split_for_sort)
-    render :action => 'controls', :layout => nil, :locals => { :controls => @controls, :prefix => 'Parent of' }
+    respond_to do |format|
+      format.html do
+        render :action => 'controls', :layout => nil, :locals => { :controls => @controls, :prefix => 'Parent of' }
+      end
+      format.json do 
+        render :json => @controls, :methods => :implemented_controls
+      end
+    end
   end
 
   def implementing_controls

@@ -1,8 +1,8 @@
-<ul class="slugtree" data-href="/mapping/sections/{{id}}.html">
+<ul class="slugtree">
     <li id="content_">
     <ul id="children_">
     {{#children}}
-      <li id="content_{{slug}}" {{data "model"}}>
+      <li id="content_{{slug}}" {{data "model"}} data-model="true">
       {{> /sections/slug_node.mustache}}
   </li>
   {{/children}}

@@ -37,9 +37,9 @@ CMS.Models.Section("CMS.Models.SectionSlug", {
 		}
 
 		function treeify(list, pid) {
-			var ret = filter_out(list, function(s) { return s.section.parent_id == pid });
+			var ret = filter_out(list, function(s) { return s.parent_id == pid });
 			can.$(ret).each(function() {
-				this.section.children = treeify(list, this.section.id);
+				this.children = treeify(list, this.id);
 			});
 			return ret;
 		}

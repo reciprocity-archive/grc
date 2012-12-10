@@ -10,7 +10,7 @@
 		    , list : "/controls/list.mustache"
 		    , show : "/controls/show.mustache"
 		    , model : CMS.Models.Control
-		    , parent_id : ""
+		    , id : null
 		    //, list_model : CMS.Models.Control.List
 	    }
 	    , properties : []
@@ -19,11 +19,32 @@
 			if(this.options.arity > 1) {
 			    this.fetch_list(this.options.id);
 			} else {
-			    this.fetch_one(this.options.id);
+				var el = this.element;
+				this.options.observer = new can.Observe();
+
+				//this should be in the controller def as "{observer} model"
+				// but CanJS is throwing errors when I try to do that.  --BM
+			    this.options.observer.bind("model", function(ev, newVal, oldVal) {
+	    			el.attr("oid", newVal ? newVal.id : "");
+	    		});
+
+
+				if(this.options.id) {
+				    this.fetch_one(this.options.id);
+				} else {
+					this.draw_one(null)
+				}
 			}
 	    }
-	    , fetch_list : function(parent_id) {
-			this.options.model.findAll({ id : parent_id }, this.proxy("draw_list"));
+	    , update : function(opt) {
+	    	this._super(opt);
+	    	if(this.options.arity === 1 && this.options.instance !== this.options.observer.model) {
+	    		this.draw_one(this.options.instance);
+	    		this.element.attr("oid", can.getObject("id", this.options.instance) || "");
+	    	}
+	    }
+	    , fetch_list : function() {
+			this.options.model.findAll({ id : this.options.id }, this.proxy("draw_list"));
 	    }
 	    , draw_list : function(list) {
 	    	if(this.list) {
@@ -35,27 +56,37 @@
 	    	}
 	    }
 	    , fetch_one : function(id) {
-			this.options.model.findOne({ id : id }, this.proxy("draw_one", this.element));
+			this.options.model.findOne({ id : (id || this.options.id) }, this.proxy("draw_one"));
 	    }
-	    , draw_one : function(control, el) {
-	    	if(this.list) {
-	    		this.update_item(control);
+	    , draw_one : function(control) {
+	    	if(typeof this.options.observer.model !== "undefined") {
+	    		this.options.observer.attr("model", control);
 	    	} else {
-				var v = can.view(this.options.show, control);
-				el.length ? el.html(v) : this.element.append(v);
+	    		this.options.observer.attr("model", control);
+				var v = can.view(this.options.show, this.options.observer);
+				this.element.html(v);
 			}
 	    }
-	    , update_item : function(item) {
-	    	var that = this;
-	    	for(var i = 0; i < this.list.length; i++) {
-	    		if(this.list[i].id === item.id) {
-	    			$(this.Class.properties).each(function(index, prop) {
-		    			that.list[i].attr(prop, item.attr(prop));
-	    			});
+	    , ". update" : function(el, ev, data) {
+	    	this.update(data);
+	    }
+	    , setSelected : function(obj) {
+	    	if(this.options.arity > 1) {
+	    		if(!obj instanceof this.options.model) {
+	    			obj = $(this.list).filter(function() {
+	    				var id = obj.id || obj;
+	    				return id && this.id === id;
+	    			}).first();
 	    		}
+
+	    		$(this.list).each(function() {
+	    			this.attr("selected", $(obj)[0] === this );
+	    		});
 	    	}
 	    }
-
+	    , ".selector click" : function(el, ev) {
+	    	this.setSelected(el.closest("[data-model]").data("model"));
+	    }
 
     });
 

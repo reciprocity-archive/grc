@@ -276,36 +276,7 @@ jQuery(function($) {
   });
 });
 
-function update_map_buttons_with_path(path) {
-  var section_id = $("#selected_sections").attr('oid') || "";
-  var rcontrol_id = $("#selected_rcontrol").attr('oid') || "";
-  var ccontrol_id = $("#selected_ccontrol").attr('oid') || "";
-  var qstr = '?' + $.param({section: section_id, rcontrol: rcontrol_id, ccontrol: ccontrol_id});
 
-  var rmap = $('#rmap');
-  var cmap = $('#cmap');
-
-  rmap.attr('disabled', !(section_id && (rcontrol_id || ccontrol_id)));
-  if (!(section_id && (rcontrol_id || ccontrol_id))) {
-    rmap.children().eq(0).text('Map section to control');
-  }
-  cmap.attr('disabled', !(rcontrol_id && ccontrol_id));
-  if (!(rcontrol_id && ccontrol_id)) {
-    cmap.children().eq(0).text('Map control to control');
-  }
-
-  if ((section_id && (rcontrol_id || ccontrol_id)) || (rcontrol_id && ccontrol_id)) {
-    $.getJSON(path + qstr,
-      function(data){
-        var rmap_text = $(rmap.children()[0]);
-        var cmap_text = $(cmap.children()[0]);
-        rmap_text.text(data[0] ? 'Unmap' : 'Map section to control')
-        rmap.attr('href', rmap.attr('href').split('?')[0] + qstr + (data[0] ? '&u=1' : ""));
-        cmap_text.text(data[1] ? 'Unmap' : 'Map control to control')
-        cmap.attr('href', cmap.attr('href').split('?')[0] + qstr + (data[1] ? '&u=1' : ""));
-      });
-  }
-}
 
 function clear_selection(el, keep_search) {
   var $box = $(el).closest('.WidgetBox');
@@ -320,8 +291,8 @@ function clear_selection(el, keep_search) {
     }
   }
 
-  description_el = $(el).closest('.WidgetBox').parent().next().find('.WidgetBoxContent .description .content')
-  $(description_el).replaceWith('Nothing selected.');
+  //description_el = $(el).closest('.WidgetBox').parent().next().find('.WidgetBoxContent .description .content')
+  //$(description_el).replaceWith('Nothing selected.');
   $box.parent().next().find('.WidgetBoxContent .description').attr('oid', '');
 
   update_map_buttons();

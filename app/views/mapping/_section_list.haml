@@ -4,7 +4,7 @@
 -content_for :widget_help, 'mapping_sections'
 
 -content_for :widget_buttons do
-  %a.widgettextbtn(onclick='clear_selection(this)')
+  %a.widgettextbtn.clearselection{:href => "javascript://"}
     Reset
 
   %input.ui-corner-all.widgetsearch-tocontent(type='text' placeholder='Search')

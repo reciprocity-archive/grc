@@ -1,14 +1,17 @@
 <div class="row-fluid">
-  <a class="span9 slot regulationslot toggle selector collapsed" data-remote="true" href="/mapping/selected_section/{{id}}">
+  {{#withclass 'selected:selected span9 slot regulationslot toggle selector collapsed'}}
+  <a href="javascript://">
     <span class="prefix">{{slug}}</span>
     {{title}}
   </a>
+  {{/withclass}}
   <a class="attached controllistRM span3 status{{#if linked_controls.length}}yellow{{/if}}{{^linked_controls.length}}{{#if na}}yellow{{else}}red {{/if}}{{/linked_controls.length}}" href="/mapping_section_dialog/{{id}}">
     {{#if linked_controls.length}}
-    <span>
+    <ul class="spannomargin" title="{{join 'slug' linked_controls}}">
+    <li>
       <strong>{{linked_controls.length}}</strong>
       : 
-    </span><ul class="spannomargin" title="{{join 'slug' linked_controls}}">
+    </li>
       {{#linked_controls}}
         <li>
           {{slug}}
@@ -27,7 +30,7 @@
 {{#if children}}
   <ul id="children_{{slug}}">
     {{#children}}
-    <li id="content_{{slug}}" {{data 'model'}}>
+    <li id="content_{{slug}}" {{data 'model'}} data-model="true">
     {{> /sections/slug_node.mustache}}
     </li>
     {{/children}}

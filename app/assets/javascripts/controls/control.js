@@ -18,13 +18,19 @@ can.Model("CMS.Models.Control", {
 				}
 				this.removeAttr("control");
 			}
+			this.attr("selected", false);
 		}
     });
 
 // This creates a subclass of the Control model
 CMS.Models.Control("CMS.Models.ImplementedControl", {
 	findAll : "GET /controls/{id}/implemented_controls.json"
-}, {});
+}, {
+	init : function() {
+		this._super();
+		if(!this.children) this.children = this.implemented_controls;
+	}
+});
 
 // This creates a subclass of the Control model
 CMS.Models.Control("CMS.Models.RegControl", {

@@ -5,5 +5,8 @@
       	{{> /controls/show.mustache}}
      </li>
     </div>
+    {{#children}}
+    {{> /controls/tree.mustache}}
+    {{/children}}
  {{/this}}
 </ul>

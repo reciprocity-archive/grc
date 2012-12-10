@@ -4,7 +4,7 @@
 -content_for :widget_help, (control_type == 'regulation' ? 'mapping_rcontrols' : 'mapping_ccontrols' )
 
 -content_for :widget_buttons do
-  %a.widgettextbtn(onclick='clear_selection(this)')
+  %a.widgettextbtn.clearselection{ :href => "javascript://"}
     Reset
   -if control_type == 'regulation'
     %a.btn.widgettextbtn{ :href => new_flow_control_path(:'control[program_id]' => @program.id, :company => false), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide', :title => 'Create New Regulation Control' } New

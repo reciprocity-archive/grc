@@ -1,0 +1,14 @@
+<div>
+	<span class="prefix">
+	  {{prefix}}
+	</span>
+	{{title}}
+</div>
+<textarea disabled="disabled" style="width: 98%; height: 70px;">{{description}}</textarea>
+<ul id="children_{{slug}}">
+	{{#children}}
+	<li id="content_{{slug}}">
+		{{> /sections/show_selected_children.mustache}}
+	</li>
+	{{/children}}
+</ul>
