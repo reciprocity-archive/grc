@@ -21,7 +21,7 @@
   %h4 Data to Import
 
 .row-fluid
-  #sampleData.span12.well
+  #sampleData.span12.well{:style => 'overflow: scroll'}
     -if @messages.present?
       -@messages.each do |m|
         %p{ :class => 'label-warning' }
@@ -39,16 +39,25 @@
           %th Code
           %th Title
           %th Description
+          %th Type
           %th Kind
           %th Means
           %th Version
           %th Start
           %th Stop
           %th URL
+          %th Systems
+          %th Categories
+          %th Assertions
           %th Documentation
           %th Verify-Frequency
+          %th References
+          %th Operator
+          %th Key Control
+          %th Active
+          %th Fraud Related
       %tbody
-        -columns = %w(slug title description kind means version start_date stop_date url documentation_description verify_frequency)
+        -columns = %w(slug title description type kind means version start_date stop_date url systems_display categories_display assertions_display documentation_description verify_frequency references_display operator_display key_control active fraud_related)
         -@controls.each_with_index do |c, i|
           %tr{ :class => (i % 2 == 0 ? :odd : :even) }
             -columns.each do |column_name|

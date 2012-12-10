@@ -129,6 +129,29 @@ class Control < ActiveRecord::Base
     edges
   end
 
+  def systems_display
+    systems.map {|x| x.slug}.join(',')
+  end
+
+  def categories_display
+    categories.ctype(CATEGORY_TYPE_ID).map {|x| x.slug}.join(',')
+  end
+
+  def assertions_display
+    categories.ctype(CATEGORY_ASSERTION_TYPE_ID).map {|x| x.slug}.join(',')
+  end
+
+  def references_display
+    documents.map do |d|
+      "#{d.description} [#{d.link} #{d.title}]"
+    end.join("\n")
+  end
+
+  def operator_display
+    p = object_people.detect {|x| x.role == 'owner'}
+    p ? p.person.email : ''
+  end
+
   def self.category_tree
     Category.roots.all.map { |c| [c, c.children.all] }
   end
