@@ -16,10 +16,10 @@
     .span12
       .span4
         %label Code
-        %input.inputtext-small{:type => "text", :disabled => "disabled", :value => product.slug}
+        %input.span12{:type => "text", :disabled => "disabled", :value => product.slug}
       .span4
         %label Type
-        %input.inputtext-small{:disabled => "disabled", :type => "text", :value => product.type && product.type.title}
+        %input.span12{:disabled => "disabled", :type => "text", :value => product.type && product.type.title}
   .row-fluid
     .span12
       %label Full Title
@@ -27,7 +27,7 @@
   .row-fluid
     .span4
       %label Version
-      %input.inputtext-small{:disabled => "disabled", :type => "text"}
+      %input.span12{:disabled => "disabled", :type => "text"}
   .row-fluid
     .span12
       %label Description
