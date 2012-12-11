@@ -71,8 +71,10 @@ can.Model.Cacheable("CMS.Models.Section", {
 			lcs.push(new CMS.Models.ImplementingControl(this.linked_controls[i].serialize()));
 		}
 		var cs = new can.Model.List();
-		for(i = 0; i < this.children.length ; i ++) {
-			cs.push(new this.constructor(this.children[i].serialize()));
+		if(this.children) {
+			for(i = 0; i < this.children.length ; i ++) {
+				cs.push(new this.constructor(this.children[i].serialize()));
+			}
 		}
 		this.attr("linked_controls", lcs);
 		this.attr("children", cs);
