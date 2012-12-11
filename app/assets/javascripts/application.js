@@ -38,6 +38,16 @@ jQuery(document).ready(function($) {
   });
 });
 
+jQuery(document).ready(function($) {
+  $('body').on('mouseover', '[rel=tooltip]', function(e) {
+    if (!$(e.currentTarget).data('tooltip')) {
+      $(e.currentTarget)
+        .tooltip()
+        .triggerHandler(e);
+    }
+  });
+});
+
 // Setup for Popovers
 jQuery(document).ready(function($) {
   var defaults = {

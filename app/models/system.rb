@@ -42,6 +42,10 @@ class System < ActiveRecord::Base
   validates :title,
     :presence => { :message => "needs a value" }
 
+  @valid_relationships = [
+    { :from => Product,  :via => :product_has_process },
+  ]
+
   def custom_edges
     # Returns a list of additional edges that aren't returned by the default method.
     # FIXME: A LOT of these do not exist in the current design doc.

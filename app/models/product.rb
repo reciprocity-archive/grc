@@ -31,10 +31,27 @@ class Product < ActiveRecord::Base
     { :to   => Product,  :via => :product_is_dependent_on_product },
     { :from => Product,  :via => :product_is_dependent_on_product },
     { :to   => Market,   :via => :product_is_sold_into_market },
-    { :from => Program,  :via => :program_is_relevant_to_product }
+    { :from => Program,  :via => :program_is_relevant_to_product },
+    { :to   => System,   :via => :product_has_process }
   ]
 
   def display_name
     slug
+  end
+
+  def systems
+    Relationship.where(
+      :source_type => 'Product', :source_id => id,
+      :destination_type => 'System',
+      :relationship_type_id => 'product_has_process'
+    ).includes(:destination).map(&:destination)
+  end
+
+  def dependent_products
+    Relationship.where(
+      :source_type => 'Product', :source_id => id,
+      :destination_type => 'Product',
+      :relationship_type_id => 'product_is_dependent_on_product'
+    ).includes(:destination).map(&:destination)
   end
 end

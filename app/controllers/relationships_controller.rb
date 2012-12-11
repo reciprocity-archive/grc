@@ -283,6 +283,10 @@ class RelationshipsController < BaseMappingsController
       relationship.relationship_type = RelationshipType.where(
         :relationship_type => params[:relationship_type]).first
 
+      if relationship.relationship_type.nil?
+        relationship.relationship_type_id = params[:relationship_type]
+      end
+
       if params[:related_side].present?
         related_type = params[:related_type].constantize
         related = related_type.find(params[:related_id])
