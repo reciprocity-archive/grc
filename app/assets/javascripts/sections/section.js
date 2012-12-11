@@ -1,26 +1,66 @@
-can.Model("CMS.Models.Section", {
+//= require can.jquery-all
+//= require controls/control
+//= require models/cacheable
+
+can.Model.Cacheable("CMS.Models.Section", {
 	findAll : "GET /sections.json"
+	, map_rcontrol : function(params, section) {
+		return can.ajax({
+			url : "/mapping/map_rcontrol"
+			, data : params
+			, type : "post"
+			, dataType : "json"
+			, success : function() {
+				if(section) {
+					if(params.u) {
+						//unmap
+						can.each(section.linked_controls, function(val, i) {
+							if((params.rcontrol != null ? params.rcontrol : params.ccontrol) === val.id) {
+								section.linked_controls.splice(i, 1);
+							}
+						});
+					} else {
+						//map
+						section.linked_controls.push(
+							new CMS.Models.ImplementingControl(
+							(params.rcontrol ? CMS.Models.RegControl : CMS.Models.CompanyControl).findInCacheById(params.rcontrol).serialize()
+							));
+					}
+					section.updated();
+				}
+			}
+		});
+	}
 }, {
 
 	init : function() {
-
-			if(this.section) {
-				var attrs = this.section._attrs();
-				for(var i in attrs) {
-					if(attrs.hasOwnProperty(i)) {
-						this.attr(i, this.section[i]);
-					}
+		if(this.section) {
+			var attrs = this.section._attrs();
+			for(var i in attrs) {
+				if(attrs.hasOwnProperty(i)) {
+					this.attr(i, this.section[i]);
 				}
-				this.removeAttr("section");
 			}
+			this.removeAttr("section");
+		}
+		this._super();
 
-			var lcs = new can.Model.List();
-			for(var i = 0; i < this.linked_controls.length ; i ++) {
-				lcs.push(new CMS.Models.RegControl(this.linked_controls[i]._attrs()));
-			}
-			this.attr("linked_controls", lcs);
-
+		var lcs = new can.Model.List();
+		for(var i = 0; i < this.linked_controls.length ; i ++) {
+			lcs.push(new CMS.Models.RegControl(this.linked_controls[i].serialize()));
+		}
+		var cs = new can.Model.List();
+		for(i = 0; i < this.children.length ; i ++) {
+			cs.push(new this.constructor(this.children[i].serialize()));
+		}
+		this.attr("linked_controls", lcs);
+		this.attr("children", cs);
 	}
+
+	, map_rcontrol : function(params) {
+		return this.constructor.map_rcontrol(can.extend({}, params, {section : this.id}), this);
+	}
+
 
 });
 

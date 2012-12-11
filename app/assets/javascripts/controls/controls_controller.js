@@ -51,7 +51,7 @@
 
 	    	} else {
 	    		this.list = list;
-	    		var x = can.view(this.options.list, $.extend(list, { show : this.options.show }));
+	    		var x = can.view(this.options.list, $.extend(this.list, { show : this.options.show }));
 		        this.element.html(x);
 	    	}
 	    }
@@ -90,4 +90,4 @@
 
     });
 
-})(jQuery)
+})(can.$);

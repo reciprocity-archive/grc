@@ -385,7 +385,7 @@ class ProgramsController < BaseObjectsController
           render :layout => nil, :locals => { :controls => @controls }
       end
       format.json do 
-        render :json => @controls
+        render :json => @controls, :methods => :implementing_controls
       end
     end
   end
