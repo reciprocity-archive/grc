@@ -19,6 +19,7 @@ module ImportHelper
 
   def read_import_headers(import, import_map, object_name, rows)
     trim_array(rows.shift).map do |heading|
+      heading = heading.strip
       if heading == "Type"
         key = 'type'
       else
