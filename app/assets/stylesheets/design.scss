@@ -51,16 +51,22 @@
     .widget-filters {
       border-top:1px solid #ffffff;
       padding:10px;
-      background:#f0f0f0;
-      @include box-shadow(inset 0px 0 4px #ccc);
+      background:#ffffff;
+      @include box-shadow(inset 0px 0 4px #eee);
       .filters-box {
-        background:#777;
-        color:$white;
+        input.date {
+          margin-top:2px;
+        }
+        .title-row {
+          padding-bottom:0;
+          min-height:0;
+        }
+        background:#ccc;
         padding:0 10px 10px 10px;
         @include border-radius();
-        @include box-shadow(inset 0px 0 4px #555);
+        @include box-shadow(inset 0px 0 4px #bbb);
         label {
-          color:$white;
+          color:#333;
           text-shadow:none;
         }
       }

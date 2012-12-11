@@ -24,7 +24,7 @@
           PBC Request List
       .widget-filters
         .row-fluid
-          .span5
+          .span4
             .row-fluid
               .span4
                 %label Audit Firm
@@ -35,27 +35,42 @@
               .span4
                 %label List Import Date
                 %h4 06/10/12
-          .span6
+          .span8
             .filters-box
               .row-fluid
-                .span4
+                .span12.title-row
                   %label
-                    Status
-                  %input.span12{:type => "text"}
+                    %strong Filter Requests
+              .row-fluid
                 .span3
                   %label
+                    Request Type
+                  %select.span12
+                    %option{:selected => "selected"} Documentation
+                    %option Interview
+                    %option Population
+                .span3
+                  %label
+                    Status
+                  %select.span12
+                    %option{:selected => "selected"} Draft
+                    %option Waiting Compliance
+                    %option Waiting Auditors
+                    %option Completed
+                .span2
+                  %label
                     Person
-                  %input.span12{:type => "text"}
+                  %select.span12
+                    %option - Any -
                 .span3
                   %label 
                     Date (on or after)
-                  %input.span12{:type => "text"}
-                .span2
+                    %input.span12#datepicker-control-date.date{:type => "text",  :placeholder => "MM/DD/YYYY"}
+                    :javascript
+                      $('#datepicker-control-date').datepicker();
+                .span1
                   %label &nbsp;
-                  %button.btn.btn-blue.span12 Filter
-          .span1
-            %a.span12.btn.new-item{:href => "#"}
-              Add New
+                  %button.btn.span12 Clear
       .widget-body
         .pbc-header
           .row-fluid
@@ -75,6 +90,13 @@
         %ul.pbc-responses
           %li
             .row-fluid
+              .span12
+                %h3.pbc-title
+                  Request
+                  %a.btn.btn-mini
+                    %i.gcmsicon-add
+                  
+            .row-fluid
               .span3.pbc-item.pbc-control
                 %a.btn.btn-mini.pull-right
                   %i.gcmsicon-link                
@@ -89,109 +111,99 @@
                 %p Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
               .span2.pbc-item.pbc-status
                 %select.span12
+                  %option{:selected => "selected"} Draft
+                  %option Open - Waiting Compliance
+                  %option Open - Waiting Auditors
                   %option Completed
                 %p
                   %strong Company:
                   Joss Rayburn
-                %select.span12
-                  %option Completed
-                %p
-                  %strong Auditor:
-                  Paul harvey
                 %p.subtle
                   %strong Requested:
                   04/22/12
               .span1.pbc-item.pbc-actions
                 %a.btn.btn-mini
                   %i.gcmsicon-edit-grey
-                %a.btn.btn-mini
-                  %i.gcmsicon-add
-            .row-fluid
-              %ul.items-list
-                %li.item.i-process
-                  .row-fluid
-                    .span5
-                      %input.span12{:type => "text", :placeholder => "Enter process name"}
-                    .span4
-                      .row-fluid
-                        .span6
-                          %input.span12{:type => "text", :placeholder => "Add a document name"}
-                        .span6
-                          %input.span12{:type => "text", :placeholder => "Add document URL"}
-                    .span3
-                      %input.span12{:type => "text", :placeholder => "Add a person"}
-                  .row-fluid
-                    .span6
-                      %label
-                        %strong Process Description
-                      %textarea.span12{:rows => "2", :placeholder => "Enter process description"}
-                    .span6
-                      %label
-                        %strong Process Notes
-                      %textarea.span12{:rows => "2", :placeholder => "Enter process note"}
-                %li.item.i-process
-                  .row-fluid
-                    .span5
-                      Proc-89 Accounts Security Policy Review
-                    .span4
-                      %a{:href => "#"} Document Policy
-                      %a.btn.btn-nano
-                        %i.gcmsicon-edit-grey
-                      %a.btn.btn-nano
-                        %i.gcmsicon-add
-                      .row-fluid
-                        .span6
-                          %input.span12{:type => "text", :placeholder => "Add a document name"}
-                        .span6
-                          %input.span12{:type => "text", :placeholder => "Add document URL"}
-                    .span3
-                      %a{:href => "#"} Dan Waterson (Responsible Party)
-                      %a.btn.btn-nano
-                        %i.gcmsicon-edit-grey
-                      %a.btn.btn-nano
-                        %i.gcmsicon-add
-                      
-                  .row-fluid
-                    .span6
-                      %label
-                        %strong Process Description
-                      %p.full-view
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    .span6
-                      %label
-                        %strong Process Notes
-                      %p.full-view
-                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                %li.item.i-process
-                  .row-fluid
-                    .span5
-                      Proc-89 Accounts Security Policy Review
-                    .span4
-                      %a{:href => "#"} Document Policy
-                      %a.btn.btn-nano
-                        %i.gcmsicon-edit-grey
-                      %br
-                      %a{:href => "#"} Document Policy 2
-                      %a.btn.btn-nano
-                        %i.gcmsicon-edit-grey
-                      %a.btn.btn-nano
-                        %i.gcmsicon-add
-
-                    .span3
-                      %a{:href => "#"} Dan Waterson (Responsible Party)
-                      %a.btn.btn-nano
-                        %i.gcmsicon-edit-grey
-                      %a.btn.btn-nano
-                        %i.gcmsicon-add
-                      
-                  .row-fluid
-                    .span6
-                      %label
-                        %strong Process Description
-                      %p.full-view
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    .span6
-                      %label
-                        %strong Process Notes
-                      %p.full-view
-                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            .row-fluid            
+              .span12 
+                %h3.pbc-title
+                  Responses
+                  %a.btn.btn-mini
+                    %i.gcmsicon-add
+                %ul.items-list
+                  %li.item.i-process
+                    .row-fluid
+                      .span11
+                        %input.span12{:type => "text", :placeholder => "Enter process name"}
+                      .span1.pbc-item.pbc-actions
+                        %a.btn.btn-mini
+                          %i.gcmsicon-edit-grey
+                    .row-fluid
+                      .span6
+                        %label
+                          %strong Process Description
+                        %textarea.span12{:rows => "1", :placeholder => "Enter process description"}
+                        %label
+                          %strong Process Notes
+                        %textarea.span12{:rows => "1", :placeholder => "Enter process notes"}
+                      .span3
+                        %label
+                          %strong Documents
+                        %ul.pbc-item-list
+                          %li
+                            %a.btn.btn-nano
+                              %i.gcmsicon-add
+                            %a{:href => "#"}  Add new document                          
+                      .span3
+                        %label
+                          %strong People
+                        %ul.pbc-item-list
+                          %li
+                            %a.btn.btn-nano
+                              %i.gcmsicon-add
+                            %a{:href => "#"}  Add new person
+                  %li.item.i-process
+                    .row-fluid
+                      .span11
+                        Proc-89 Accounts Security Policy Review
+                      .span1.pbc-item.pbc-actions
+                        %a.btn.btn-mini
+                          %i.gcmsicon-edit-grey
+                    .row-fluid
+                      .span6
+                        %label
+                          %strong Process Description
+                        %p.full-view
+                          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        %label
+                          %strong Process Notes
+                        %p.full-view
+                          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      .span3
+                        %label
+                          %strong Documents
+                        %ul.pbc-item-list
+                          %li
+                            %a.btn.btn-nano.pull-right
+                              %i.gcmsicon-edit-grey
+                            %a{:href => "#"} Document Policy
+                          %li
+                            %a.btn.btn-nano.pull-right
+                              %i.gcmsicon-edit-grey
+                            %a{:href => "#"} Document Policy 2
+                          %li
+                            %a.btn.btn-nano
+                              %i.gcmsicon-add
+                            %a{:href => "#"}  Add new document                            
+                      .span3
+                        %label
+                          %strong People
+                        %ul.pbc-item-list
+                          %li
+                            %a.btn.btn-nano.pull-right
+                              %i.gcmsicon-edit-grey
+                            %a{:href => "#"} Dan Waterson (Responsible Party)
+                          %li
+                            %a.btn.btn-nano
+                              %i.gcmsicon-add
+                            %a{:href => "#"}  Add new person

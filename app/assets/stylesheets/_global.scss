@@ -146,3 +146,11 @@ td {
     border:2px solid $errorColor;
   }
 }
+
+input.date {
+  background-image:url(/images/icons/icon-calendar-inline.png);
+  background-repeat:no-repeat;
+  background-position:6px 5px;
+  padding-left:26px;
+  cursor:pointer;
+}
