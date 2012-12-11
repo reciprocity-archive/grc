@@ -26,12 +26,12 @@ class CategoriesController < BaseObjectsController
         self.response.headers['Content-Type'] = 'text/csv'
         headers['Content-Disposition'] = "attachment; filename=\"categories.csv\""
         self.response_body = Enumerator.new do |out|
-          out << CSV.generate_line(Category.attribute_names)
+          out << CSV.generate_line(Category.attribute_names_for_csv)
 
           Category.roots.sort_by(&:display_name).each do |root_category|
-            out << CSV.generate_line(root_category.attributes.values)
-            root_category.children.sort_by(&:display_name).each do |category|
-              out << CSV.generate_line(category.attributes.values)
+            out << root_category.as_csv
+            root_category.descendants.sort_by(&:display_name).each do |category|
+              out << category.as_csv
             end
           end
         end
