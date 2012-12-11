@@ -169,6 +169,7 @@ class SystemsController < BaseObjectsController
         new_splits.each do |split|
           splits << split unless splits.include?(split)
         end
+        splits = splits.map {|x| x.force_encoding('utf-8')} #FIXME encoding issue on some inputs
         attrs['description'] = splits.join("\n---\n")
       end
 
