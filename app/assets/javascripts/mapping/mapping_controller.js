@@ -3,6 +3,23 @@
 //= require controls/control
 
 (function(namespace, $) {
+function mapunmap(unmap) {
+  return function(section, rcontrol, ccontrol) {
+      var params = {
+        ccontrol : (ccontrol ? ccontrol.id : "")
+      };
+      if(unmap)
+        params.u = "1";
+      if(rcontrol) params.rcontrol = rcontrol.id;
+      if(section) params.section = section.id;
+
+      var dfd = section ? 
+        section.map_rcontrol(params)
+        : rcontrol.map_ccontrol(params);
+      dfd.then(can.proxy(this.updateButtons, this));
+  }  
+}
+
 
 can.Control("CMS.Controllers.Mapping", {
 	//static
@@ -18,21 +35,14 @@ can.Control("CMS.Controllers.Mapping", {
     var rcontrol = $("#selected_rcontrol").control(namespace.CMS.Controllers.Controls).options.instance;
     var ccontrol = $("#selected_ccontrol").control(namespace.CMS.Controllers.Controls).options.instance;
 
-    if(el.is($("#rmap"))) {
-      var params = {
-        rcontrol : (rcontrol ? rcontrol.id : "")
-        , ccontrol : (ccontrol ? ccontrol.id : "")
-      };
-      if (el.hasClass("unmap")) 
-        params.u = "1";
-      section.map_rcontrol(params).then(can.proxy(this.updateButtons, this));
-    } else {
-      var params = {ccontrol : (ccontrol ? ccontrol.id : "")};
-      if (el.hasClass("unmap")) 
-        params.u = "1";
-      rcontrol.map_ccontrol(params).then(can.proxy(this.updateButtons, this));;
+    if(el.is($("#cmap"))) {
+      section = null;
     }
-  }
+    this[el.is(".unmapbtn") ? "unmap" : "map"](section, rcontrol, ccontrol); 
+  }  
+
+  , unmap : function() { mapunmap(true).apply(this, arguments); }
+  , map : function() { mapunmap(false).apply(this, arguments); }
 
   , "#rcontrol_list .regulationslot click" : function(el, ev) {
     CMS.Controllers.Controls.Instances.SelectedRegControl.update({ instance : el.closest("[data-model]").data("model") });
@@ -77,9 +87,9 @@ can.Control("CMS.Controllers.Mapping", {
           var cunmap = rcontrol && ccontrol ? $(rcontrol.implementing_controls).filter(function() { return this.id === ccontrol.id}).length : false;
 
           rmap_text.text(runmap ? 'Unmap' : 'Map section to control')
-          rmap[runmap ? 'addClass' : "removeClass"]("unmap");
+          rmap[runmap ? 'addClass' : "removeClass"]("unmapbtn");
           cmap_text.text(cunmap ? 'Unmap' : 'Map control to control')
-          cmap[cunmap ? 'addClass' : "removeClass"]("unmap");
+          cmap[cunmap ? 'addClass' : "removeClass"]("unmapbtn");
     }
   }
     , ".clearselection click" : function(el, ev) {

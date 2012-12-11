@@ -5,7 +5,7 @@
     {{title}}
   </a>
   {{/withclass}}
-  <a class="attached controllistRM span3 status{{#if linked_controls.length}}yellow{{/if}}{{^linked_controls.length}}{{#if na}}yellow{{else}}red {{/if}}{{/linked_controls.length}}" href="/mapping_section_dialog/{{id}}">
+  <a class="attached controllistRM span3 status{{#if linked_controls.length}}yellow {{/if}}{{^linked_controls.length}}{{#if na}}yellow {{else}}red {{/if}}{{/linked_controls.length}}" href="/mapping_section_dialog/{{id}}">
     {{#if linked_controls.length}}
     <ul class="spannomargin" title="{{join 'slug' linked_controls}}">
     <li>

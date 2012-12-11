@@ -106,5 +106,32 @@
 			+ content.substr(index + 1);
 	});
 
+	var controlslugs = function() {
+		var slugs = [];
+		slugs.push(this.slug);
+		can.each(this.implementing_controls, function(val) {
+			slugs.push.apply(slugs, controlslugs.call(this));
+		});
+		return slugs;
+	}
+
+	var countcontrols = function() {
+		var slugs = [];
+		can.each(this.linked_controls, function() {
+			slugs.push.apply(slugs, controlslugs.apply(this)); 
+		});
+		return slugs.length;
+	}
+
+	Mustache.registerHelper("controlscount", countcontrols);
+
+	Mustache.registerHelper("controlslugs", function() {
+		var slugs = [];
+		can.each(this.linked_controls, function() {
+			slugs.push.apply(slugs, controlslugs.apply(this)); 
+		});
+		return slugs.join(" ");
+	});
+
 
 })(this, jQuery, can);

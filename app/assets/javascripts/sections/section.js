@@ -12,19 +12,38 @@ can.Model.Cacheable("CMS.Models.Section", {
 			, dataType : "json"
 			, success : function() {
 				if(section) {
+					var flatctls = [];
+					var linkedctl = new CMS.Models.ImplementingControl(
+						(params.rcontrol ? 
+							CMS.Models.RegControl.findInCacheById(params.rcontrol) 
+							: CMS.Models.CompanyControl.findInCacheById(params.ccontrol))
+						.serialize()
+						);
+					var addctls = function(ctl) {
+						flatctls.push(ctl);
+						can.each(ctl.implementing_controls, addctls);
+					}
+					addctls(linkedctl);
+					var ctlids = can.map(flatctls, function(ctl) { return ctl.id });
+
 					if(params.u) {
 						//unmap
-						can.each(section.linked_controls, function(val, i) {
-							if((params.rcontrol != null ? params.rcontrol : params.ccontrol) === val.id) {
+						for(var i = section.linked_controls.length - 1; i >= 0; i--) {
+							if(can.inArray(section.linked_controls[i].id, ctlids) >= 0)
+							{
 								section.linked_controls.splice(i, 1);
 							}
-						});
+						}
 					} else {
 						//map
-						section.linked_controls.push(
-							new CMS.Models.ImplementingControl(
-							(params.rcontrol ? CMS.Models.RegControl : CMS.Models.CompanyControl).findInCacheById(params.rcontrol).serialize()
-							));
+						can.each(section.linked_controls, function() {
+							var i = can.inArray(this.id, ctlids);
+							if(i >= 0) {
+								flatctls.splice(i, 1);
+								ctlids.splice(i, 1);
+							}
+						});
+						section.linked_controls.push.apply(section.linked_controls, flatctls);
 					}
 					section.updated();
 				}
@@ -47,7 +66,9 @@ can.Model.Cacheable("CMS.Models.Section", {
 
 		var lcs = new can.Model.List();
 		for(var i = 0; i < this.linked_controls.length ; i ++) {
-			lcs.push(new CMS.Models.RegControl(this.linked_controls[i].serialize()));
+			//Reusing the ImplementingControl model here instead of RegControl or Control because
+			// we don't want to cache it -- it makes things a bit screwy if I do. --BM
+			lcs.push(new CMS.Models.ImplementingControl(this.linked_controls[i].serialize()));
 		}
 		var cs = new can.Model.List();
 		for(i = 0; i < this.children.length ; i ++) {
