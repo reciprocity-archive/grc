@@ -9,6 +9,9 @@
 
 	var programId = namespace.location.pathname.substr(window.location.pathname.lastIndexOf("/") + 1);
 
+  if(!/\/mapping/.test(window.location.pathname))
+    return;
+
 	// The following uncommented line is equivalent to doing its preceding commented line, but we have a jQuery CanJS helpers option added:
     //CMS.Controllers.Controls.Instances = { Control : new CMS.Controllers.Controls('#controls', { arity : 2 })};
     $(function() {

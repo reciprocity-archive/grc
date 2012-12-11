@@ -11,7 +11,7 @@ $(function() {
     	Control : $("#controls").cms_controllers_controls({ 
     		arity : 2 
     		, id : controlId
-    		, model : CMS.Models.ImplementedControl
+    		, model : (/^\d+$/.test(controlId) ? CMS.Models.ImplementedControl : CMS.Models.Control)
     		, list : "/controls/tree.mustache"
     	}).control(CMS.Controllers.Controls)};
 });
