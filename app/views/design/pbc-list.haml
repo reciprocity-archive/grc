@@ -24,7 +24,11 @@
           PBC Request List
       .widget-filters
         .row-fluid
-          .span4
+          .span5.widget-labels
+            .row-fluid
+              .span12
+                %label Title
+                %h4 Lorem Ipsum Dolor Sit Amet
             .row-fluid
               .span4
                 %label Audit Firm
@@ -35,7 +39,7 @@
               .span4
                 %label List Import Date
                 %h4 06/10/12
-          .span8
+          .span7
             .filters-box
               .row-fluid
                 .span12.title-row
@@ -72,6 +76,14 @@
                   %label &nbsp;
                   %button.btn.span12 Clear
       .widget-body
+        
+        .row-fluid
+          .span12
+            %h3.pbc-title
+              Request
+              %a.btn.btn-mini
+                %i.gcmsicon-add
+      
         .pbc-header
           .row-fluid
             .span3
@@ -88,14 +100,7 @@
               Actions
                       
         %ul.pbc-responses
-          %li.main-item
-            .row-fluid
-              .span12
-                %h3.pbc-title
-                  Request
-                  %a.btn.btn-mini
-                    %i.gcmsicon-add
-                  
+          %li.main-item                
             .row-fluid
               .span3.pbc-item.pbc-control
                 %a.btn.btn-mini.pull-right
@@ -104,6 +109,10 @@
                   Con-334 Contol Title
                 %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
               .span2.pbc-item.pbc-request
+                %select.span12
+                  %option{:selected => "selected"} Documentation
+                  %option Interview
+                  %option Population
                 %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
               .span2.pbc-item.pbc-test
                 %p Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
@@ -131,7 +140,7 @@
                   %a.btn.btn-mini
                     %i.gcmsicon-add
                 %ul.items-list
-                  %li.item.i-process
+                  %li.item.i-response
                     .row-fluid
                       .span11
                         %input.span12{:type => "text", :placeholder => "Enter process name"}
@@ -148,24 +157,24 @@
                         %textarea.span12{:rows => "1", :placeholder => "Enter process notes"}
                       .span3
                         %label
-                          %strong Documents
-                        %ul.pbc-item-list
-                          %li
-                            %a.btn.btn-nano
-                              %i.gcmsicon-add
-                            %a{:href => "#"}  Add new document                          
-                      .span3
-                        %label
                           %strong People
                         %ul.pbc-item-list
                           %li
                             %a.btn.btn-nano
                               %i.gcmsicon-add
                             %a{:href => "#"}  Add new person
-                  %li.item.i-process
+                      .span3
+                        %label
+                          %strong Documents
+                        %ul.pbc-item-list
+                          %li
+                            %a.btn.btn-nano
+                              %i.gcmsicon-add
+                            %a{:href => "#"}  Add new document                          
+                  %li.item.i-response
                     .row-fluid
                       .span11
-                        Proc-89 Accounts Security Policy Review
+                        Response: Proc-89 Accounts Security Policy Review
                       .span1.pbc-item.pbc-actions
                         %a.btn.btn-mini
                           %i.gcmsicon-edit-grey
@@ -179,6 +188,18 @@
                           %strong Process Notes
                         %p.full-view
                           Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      .span3
+                        %label
+                          %strong People
+                        %ul.pbc-item-list
+                          %li
+                            %a.btn.btn-nano.pull-right
+                              %i.gcmsicon-edit-grey
+                            %a{:href => "#"} Dan Waterson (Responsible Party)
+                          %li
+                            %a.btn.btn-nano
+                              %i.gcmsicon-add
+                            %a{:href => "#"}  Add new person
                       .span3
                         %label
                           %strong Documents
@@ -195,22 +216,10 @@
                             %a.btn.btn-nano
                               %i.gcmsicon-add
                             %a{:href => "#"}  Add new document                            
-                      .span3
-                        %label
-                          %strong People
-                        %ul.pbc-item-list
-                          %li
-                            %a.btn.btn-nano.pull-right
-                              %i.gcmsicon-edit-grey
-                            %a{:href => "#"} Dan Waterson (Responsible Party)
-                          %li
-                            %a.btn.btn-nano
-                              %i.gcmsicon-add
-                            %a{:href => "#"}  Add new person
-                  %li.item.i-process
+                  %li.item.i-response
                     .row-fluid
                       .span11
-                        Proc-87 Population Request Type Process
+                        Response: Proc-87 Population Request Type Process
                       .span1.pbc-item.pbc-actions
                         %a.btn.btn-mini
                           %i.gcmsicon-edit-grey
@@ -249,10 +258,10 @@
                               %i.gcmsicon-edit-grey
                             %a{:href => "#"} Sample Description
 
-                  %li.item.i-process
+                  %li.item.i-response
                     .row-fluid
                       .span11
-                        Proc-90 Interview Request Type Process
+                        Response: Proc-90 Interview Request Type Process
                       .span1.pbc-item.pbc-actions
                         %a.btn.btn-mini
                           %i.gcmsicon-edit-grey

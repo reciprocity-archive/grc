@@ -141,6 +141,9 @@ td {
   &.i-process {
     @include border-and-gradient($bgndProcess);
   }
+  &.i-response {
+    @include border-and-gradient($bgndProcess);
+  }
   &.error {
     border:2px solid $errorColor;
   }

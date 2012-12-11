@@ -53,6 +53,15 @@
       padding:10px;
       background:#ffffff;
       @include box-shadow(inset 0px 0 4px #eee);
+      
+      .widget-labels {
+        label {
+          margin-bottom:0;
+        }
+        h4 {
+          margin-top:-1px;
+        }
+      }
       .filters-box {
         input.date {
           margin-top:2px;

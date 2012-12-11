@@ -23,6 +23,18 @@
   padding-bottom:8px;
 }
 
+.pbc-request {
+  select {
+    min-height:0 !important;
+    padding:2px;
+    float:none;
+    height:auto;
+  }
+  p {
+    margin-top:14px;
+  }
+}
+
 ul.pbc-responses {
   li {
     border:1px solid $borderDefault;
