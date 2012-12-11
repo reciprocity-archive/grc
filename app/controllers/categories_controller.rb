@@ -20,6 +20,25 @@ class CategoriesController < BaseObjectsController
     render :json => @categories.all.as_json
   end
 
+  def export
+    respond_to do |format|
+      format.csv do
+        self.response.headers['Content-Type'] = 'text/csv'
+        headers['Content-Disposition'] = "attachment; filename=\"categories.csv\""
+        self.response_body = Enumerator.new do |out|
+          out << CSV.generate_line(Category.attribute_names)
+
+          Category.roots.sort_by(&:display_name).each do |root_category|
+            out << CSV.generate_line(root_category.attributes.values)
+            root_category.children.sort_by(&:display_name).each do |category|
+              out << CSV.generate_line(category.attributes.values)
+            end
+          end
+        end
+      end
+    end
+  end
+
   private
 
     def new_object

@@ -15,12 +15,23 @@
 #
 
 module RelatedModel
+  @relatable_models = nil
+
   def self.included(model)
     model.class_eval do
       has_many :source_relationships, :as => :source, :class_name =>'Relationship', :dependent => :destroy
       has_many :destination_relationships, :as => :destination, :class_name => 'Relationship', :dependent => :destroy
     end
     model.extend(ClassMethods)
+
+    if model.ancestors.include?(ActiveRecord::Base)
+      @relatable_models = [] if @relatable_models.nil?
+      @relatable_models.push(model)
+    end
+  end
+
+  def self.relatable_models
+    @relatable_models
   end
 
   class Edge
@@ -338,11 +349,29 @@ module RelatedModel
     end
 
     def valid_relationships
-      @valid_relationships
+      (@valid_relationships || []).map do |rel|
+        #puts rel.inspect
+        model = rel[:both] || rel[:to] || rel[:from]
+        if model.present?
+          model = model.to_s if model.kind_of?(Symbol)
+          model = model.camelcase.constantize if model.kind_of?(String)
+
+          endpoint = :source if rel[:from].present?
+          endpoint = :both if rel[:both].present?
+          endpoint = :destination if rel[:to].present?
+          {
+            :relationship_type => rel[:via],
+            :related_model => model,
+            :related_model_endpoint => endpoint
+          }
+        else
+          rel
+        end
+      end
     end
 
     def related_models
-      @valid_relationships.reduce(Set.new) do |models, vr|
+      valid_relationships.reduce(Set.new) do |models, vr|
         models.add(vr[:related_model])
       end
     end

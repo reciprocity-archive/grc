@@ -23,29 +23,35 @@ class Product < ActiveRecord::Base
   #
   # Various relationship-related helpers
   #
-  
+
   @valid_relationships = [
-    { :relationship_type => :org_group_has_province_over_product,
-      :related_model => OrgGroup,
-      :related_model_endpoint => :source},
-    { :relationship_type =>:product_is_affiliated_with_product,
-      :related_model => Product,
-      :related_model_endpoint => :both},
-    { :relationship_type =>:product_is_dependent_on_location,
-      :related_model => Location,
-      :related_model_endpoint => :destination},
-    { :relationship_type =>:product_is_dependent_on_product,
-      :related_model => Product,
-      :related_model_endpoint => :both},
-    { :relationship_type =>:product_is_sold_into_market,
-      :related_model => Market,
-      :related_model_endpoint => :destination},
-    { :relationship_type => :program_is_relevant_to_product,
-      :related_model => Program,
-      :related_model_endpoint => :source}
+    { :from => OrgGroup, :via => :org_group_has_province_over_product },
+    { :both => Product,  :via => :product_is_affiliated_with_product },
+    { :to   => Location, :via => :product_is_dependent_on_location },
+    { :to   => Product,  :via => :product_is_dependent_on_product },
+    { :from => Product,  :via => :product_is_dependent_on_product },
+    { :to   => Market,   :via => :product_is_sold_into_market },
+    { :from => Program,  :via => :program_is_relevant_to_product },
+    { :to   => System,   :via => :product_has_process }
   ]
 
   def display_name
     slug
+  end
+
+  def systems
+    Relationship.where(
+      :source_type => 'Product', :source_id => id,
+      :destination_type => 'System',
+      :relationship_type_id => 'product_has_process'
+    ).includes(:destination).map(&:destination)
+  end
+
+  def dependent_products
+    Relationship.where(
+      :source_type => 'Product', :source_id => id,
+      :destination_type => 'Product',
+      :relationship_type_id => 'product_is_dependent_on_product'
+    ).includes(:destination).map(&:destination)
   end
 end

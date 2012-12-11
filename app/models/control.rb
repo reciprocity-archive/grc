@@ -8,7 +8,8 @@ class Control < ActiveRecord::Base
   include SearchableModel
   include AuthorizedModel
   include RelatedModel
-
+  include SanitizableAttributes
+  
   CATEGORY_TYPE_ID = 100
   CATEGORY_ASSERTION_TYPE_ID = 102
 
@@ -55,13 +56,15 @@ class Control < ActiveRecord::Base
 
   is_versioned_ext
 
+  sanitize_attributes :description, :documentation_description
+
   validates :title, :program, :program_id,
     :presence => { :message => "needs a value" }
 
   validate :slug do
     validate_slug_parent
   end
-
+  
   def display_name
     "#{slug} - #{title}"
   end

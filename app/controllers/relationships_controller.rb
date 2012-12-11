@@ -136,7 +136,7 @@ class RelationshipsController < BaseMappingsController
                   :object_id => obj.id,
                   :object_type => obj.class.to_s,
                   :relationship_type => vr[:relationship_type],
-                  :related_side => 'source',
+                  :related_side => vr[:related_model_endpoint],
                   :related_model => related_model)
 
             rels = related_is_source.select do |rel|
@@ -161,7 +161,7 @@ class RelationshipsController < BaseMappingsController
                   :object_id => obj.id,
                   :object_type => obj.class.to_s,
                   :relationship_type => vr[:relationship_type],
-                  :related_side => 'both',
+                  :related_side => vr[:related_model_endpoint],
                   :related_model => related_model)
 
             rels = related_is_dest.select do |rel|
@@ -282,6 +282,10 @@ class RelationshipsController < BaseMappingsController
     def update_object(relationship, params)
       relationship.relationship_type = RelationshipType.where(
         :relationship_type => params[:relationship_type]).first
+
+      if relationship.relationship_type.nil?
+        relationship.relationship_type_id = params[:relationship_type]
+      end
 
       if params[:related_side].present?
         related_type = params[:related_type].constantize

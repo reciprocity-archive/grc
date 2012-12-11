@@ -239,5 +239,8 @@
   .singleColumn
     =render :partial => 'admin_dash/accounts',
               :layout => 'layouts/widget_box',
-              :locals => { :accounts => @accounts, :people => @people }        
-  
+              :locals => { :accounts => @accounts, :people => @people }
+  .singleColumn
+    =render :partial => 'admin_dash/categories',
+              :layout => 'layouts/widget_box',
+              :locals => { :categories => @categories, :options => @options }

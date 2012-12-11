@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121206195047) do
+ActiveRecord::Schema.define(:version => 20121207022900) do
 
   create_table "accounts", :force => true do |t|
     t.string   "username"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(:version => 20121206195047) do
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
     t.integer  "modified_by_id"
+    t.boolean  "required"
   end
 
   create_table "categorizations", :force => true do |t|
@@ -127,6 +128,7 @@ ActiveRecord::Schema.define(:version => 20121206195047) do
     t.string   "content"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "title"
   end
 
   create_table "locations", :force => true do |t|
@@ -190,6 +192,7 @@ ActiveRecord::Schema.define(:version => 20121206195047) do
     t.integer  "modified_by_id"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.boolean  "required"
   end
 
   create_table "org_groups", :force => true do |t|
@@ -351,6 +354,7 @@ ActiveRecord::Schema.define(:version => 20121206195047) do
     t.datetime "stop_date"
     t.string   "url"
     t.string   "version"
+    t.text     "notes"
   end
 
   add_index "systems", ["slug"], :name => "index_systems_on_slug", :unique => true

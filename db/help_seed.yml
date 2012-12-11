@@ -1,0 +1,165 @@
+---
+- !ruby/object:Help
+  attributes:
+    slug: quick_find
+    content: "On Quick Find, you can: search by short-code or title keywords,
+      hover over results to help identify the item you want,
+      click the item to explore the item."
+    created_at: 2012-12-03 20:31:08.984696000 Z
+    updated_at: 2012-12-03 23:13:00.870422000 Z
+    title: Help for Quick Find
+- !ruby/object:Help
+  attributes:
+    slug: programs_list
+    content: "Hover over items to help identify the program you want to examine.
+      Click an item to view complete information about the program."
+    created_at: 2012-12-03 20:31:08.984696000 Z
+    updated_at: 2012-12-03 23:13:00.870422000 Z
+    title: Help for Program Listing
+- !ruby/object:Help
+  attributes:
+    slug: admin
+    content: "Here you can add new accounts and people to the system."
+    created_at: 2012-12-03 20:31:08.984696000 Z
+    updated_at: 2012-12-03 23:13:00.870422000 Z
+    title: Help for Admin Dashboard
+- !ruby/object:Help
+  attributes:
+    slug: admin_accounts
+    content: "Here you can list the accounts and people using the system."
+    created_at: 2012-12-03 20:31:08.984696000 Z
+    updated_at: 2012-12-03 23:13:00.870422000 Z
+    title: Help for Accounts
+- !ruby/object:Help
+  attributes:
+    slug: control
+    content: "This is the page for a single, specific control."
+    created_at: 2012-12-03 20:31:08.984696000 Z
+    updated_at: 2012-12-03 23:13:00.870422000 Z
+    title: Help for Control Page
+- !ruby/object:Help
+  attributes:
+    slug: control_info
+    content: "This is detailed information about this control."
+    created_at: 2012-12-03 20:31:08.984696000 Z
+    updated_at: 2012-12-03 23:13:00.870422000 Z
+    title: Help for Control Info
+- !ruby/object:Help
+  attributes:
+    slug: cycle
+    content: "This page contains details about a single audit cycle."
+    created_at: 2012-12-03 20:31:08.984696000 Z
+    updated_at: 2012-12-03 23:13:00.870422000 Z
+    title: Help for Audit Cycle Page
+- !ruby/object:Help
+  attributes:
+    slug: cycle_info
+    content: "This is detailed information about the audit cycle."
+    created_at: 2012-12-03 20:31:08.984696000 Z
+    updated_at: 2012-12-03 23:13:00.870422000 Z
+    title: Help for Audit Cycle Info
+- !ruby/object:Help
+  attributes:
+    slug: dashboard
+    content: "This is the GRC Dashboard. Here you have an overview of the state of the system, and options to navigate for more detail."
+    created_at: 2012-12-03 20:31:08.984696000 Z
+    updated_at: 2012-12-03 23:13:00.870422000 Z
+    title: Help for GRC Dashboard
+- !ruby/object:Help
+  attributes:
+    slug: import
+    content: "This page allows you to import data"
+    created_at: 2012-12-03 20:31:08.984696000 Z
+    updated_at: 2012-12-03 23:13:00.870422000 Z
+    title: Help for Program Import
+- !ruby/object:Help
+  attributes:
+    slug: mapping
+    content: "This page helps you connect sections of external regulations to internal company controls."
+    created_at: 2012-12-03 20:31:08.984696000 Z
+    updated_at: 2012-12-03 23:13:00.870422000 Z
+    title: Help for Regulation Mapping
+- !ruby/object:Help
+  attributes:
+    slug: mapping_ccontrols
+    content: "These are company controls which may be mapped to multiple regulation controls."
+    created_at: 2012-12-03 20:31:08.984696000 Z
+    updated_at: 2012-12-03 23:13:00.870422000 Z
+    title: Help for Mapping Company Controls
+- !ruby/object:Help
+  attributes:
+    slug: mapping_rcontrols
+    content: "These are regulation-specific controls which map to regulations (on the left)."
+    created_at: 2012-12-03 20:31:08.984696000 Z
+    updated_at: 2012-12-03 23:13:00.870422000 Z
+    title: Help for Mapping Regulation Controls
+- !ruby/object:Help
+  attributes:
+    slug: mapping_sections
+    content: "These are regulations from non-company programs."
+    created_at: 2012-12-03 20:31:08.984696000 Z
+    updated_at: 2012-12-03 23:13:00.870422000 Z
+    title: Help for Mapping Sections
+- !ruby/object:Help
+  attributes:
+    slug: program
+    content: "This is the main view for a regulation or company program."
+    created_at: 2012-12-03 20:31:08.984696000 Z
+    updated_at: 2012-12-03 23:13:00.870422000 Z
+    title: Help for Program Detail Page
+- !ruby/object:Help
+  attributes:
+    slug: program_controls
+    content: "You can see regulation sections and attached controls here."
+    created_at: 2012-12-03 20:31:08.984696000 Z
+    updated_at: 2012-12-03 23:13:00.870422000 Z
+    title: Help for Program Regulations and Controls
+- !ruby/object:Help
+  attributes:
+    slug: program_cycles
+    content: "This is a list of audits either pending or completed on this program. Click an item to see the individual audit's page."
+    created_at: 2012-12-03 20:31:08.984696000 Z
+    updated_at: 2012-12-03 23:13:00.870422000 Z
+    title: Help for Program Audit Cycles
+- !ruby/object:Help
+  attributes:
+    slug: program_info
+    content: "Here you can see detailed information about the program and navigate to mapping, import, and audit pages."
+    created_at: 2012-12-03 20:31:08.984696000 Z
+    updated_at: 2012-12-03 23:13:00.870422000 Z
+    title: Help for Program Info
+- !ruby/object:Help
+  attributes:
+    slug: system
+    content: "This is the main view for a system."
+    created_at: 2012-12-03 20:31:08.984696000 Z
+    updated_at: 2012-12-03 23:13:00.870422000 Z
+    title: Help for System Page
+- !ruby/object:Help
+  attributes:
+    slug: system_info
+    content: "This widget contains detailed information for a system."
+    created_at: 2012-12-03 20:31:08.984696000 Z
+    updated_at: 2012-12-03 23:13:00.870422000 Z
+    title: Help for System Info Widget
+- !ruby/object:Help
+  attributes:
+    slug: system_sub_systems
+    content: "This is a hierarchical list of systems which this system depends on and controls associated with this system and sub-systems."
+    created_at: 2012-12-03 20:31:08.984696000 Z
+    updated_at: 2012-12-03 23:13:00.870422000 Z
+    title: Help for Sub-systems and Controls
+- !ruby/object:Help
+  attributes:
+    slug: system_super_systems
+    content: "This widgets lists systems which depend on this system."
+    created_at: 2012-12-03 20:31:08.984696000 Z
+    updated_at: 2012-12-03 23:13:00.870422000 Z
+    title: Help for System Dependents
+- !ruby/object:Help
+  attributes:
+    slug: system_transactions
+    content: "This is a list of transactions associated with the system."
+    created_at: 2012-12-03 20:31:08.984696000 Z
+    updated_at: 2012-12-03 23:13:00.870422000 Z
+    title: Help for System Transactions

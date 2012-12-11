@@ -6,6 +6,8 @@
  *= require bootstrap/sticky-popover
  *= require bootstrap/modal-form
  *= require bootstrap/modal-ajax
+ *= require wysihtml5-0.3.0_rc2
+ *= require bootstrap-wysihtml5-0.0.2
  *= require_self
  */
 
@@ -28,6 +30,16 @@ jQuery(document).ready(function($) {
 jQuery(document).ready(function($) {
   // Listeners for initial tooltip mouseovers
   $('body').on('mouseover', '[data-toggle="tooltip"]', function(e) {
+    if (!$(e.currentTarget).data('tooltip')) {
+      $(e.currentTarget)
+        .tooltip()
+        .triggerHandler(e);
+    }
+  });
+});
+
+jQuery(document).ready(function($) {
+  $('body').on('mouseover', '[rel=tooltip]', function(e) {
     if (!$(e.currentTarget).data('tooltip')) {
       $(e.currentTarget)
         .tooltip()
