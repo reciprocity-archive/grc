@@ -55,6 +55,18 @@ class QuickController < ApplicationController
     @people = allowed_objs(@people.all, :read)
   end
 
+  def categories
+    @root_categories = allowed_objs(Category.roots, :read)
+  end
+
+  def options
+    @options = Option
+    if params[:s].present?
+      @options = @options.db_search(params[:s])
+    end
+    @options = allowed_objs(@options.all, :read)
+  end
+
   def systems
     @systems = System
     if params[:s].present?

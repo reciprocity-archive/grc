@@ -1,0 +1,16 @@
+  <div class="content">
+  	{{#model}}
+    <div>
+      <span class="prefix">
+        {{prefix}}
+      </span>
+      {{title}}
+    </div>
+    <div>
+      {{description}}
+    </div>
+    {{/model}}
+    {{^model}}
+    	Nothing selected
+    {{/model}}
+  </div>

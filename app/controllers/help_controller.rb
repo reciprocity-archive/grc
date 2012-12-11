@@ -10,9 +10,10 @@ class HelpController < ApplicationController
     slug = params[:help]['slug']
     @help = Help.find_by_slug(slug) ||
       Help.new(:slug => slug)
+    @help.title = params[:help]['title']
     @help.content = params[:help]['content']
     respond_to do |format|
-      if @help.save
+      if CMS_CONFIG["ALLOW_HELP_EDIT"] && @help.save
         format.json do
           flash[:notice] = "Help was saved successfully."
           render :json => @help

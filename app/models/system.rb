@@ -8,7 +8,7 @@ class System < ActiveRecord::Base
 
   CATEGORY_TYPE_ID = 101
 
-  attr_accessible :title, :slug, :description, :url, :version, :infrastructure, :is_biz_process, :type, :start_date, :stop_date
+  attr_accessible :title, :slug, :description, :url, :version, :infrastructure, :is_biz_process, :type, :start_date, :stop_date, :notes
 
   # Many to many with Control
   has_many :system_controls, :dependent => :destroy
@@ -41,6 +41,10 @@ class System < ActiveRecord::Base
 
   validates :title,
     :presence => { :message => "needs a value" }
+
+  @valid_relationships = [
+    { :from => Product,  :via => :product_has_process },
+  ]
 
   def custom_edges
     # Returns a list of additional edges that aren't returned by the default method.

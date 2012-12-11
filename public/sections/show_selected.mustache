@@ -1,0 +1,15 @@
+  <div class="clearfix"></div>
+  <div class="content">
+    <ul class="sectiontree">
+    <li id="content_">
+      <ul id="children_">
+  	  {{#model}}
+        <li id="content_{{slug}}">
+          {{> /sections/show_selected_children.mustache}}
+        </li>
+    {{/model}}
+    {{^model}}
+    	Nothing selected
+    {{/model}}
+    </ul
+  </div>

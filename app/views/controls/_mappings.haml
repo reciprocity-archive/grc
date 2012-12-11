@@ -11,9 +11,9 @@
   %ul.nav.nav-tabs
     %li=link_to 'Regulation Sections', '#regulations', :data => { :toggle => 'tab', :'tab-href' => sections_flow_control_path(control) }
     -if control.program.company?
-      %li=link_to 'Controls', '#controls', :data => { :toggle => 'tab', :'tab-href' => implemented_controls_flow_control_path(control) }
+      %li=link_to 'Controls', '#controls', :data => { :toggle => 'tab' }
     -else
-      %li=link_to 'Controls', '#controls', :data => { :toggle => 'tab', :'tab-href' => implementing_controls_flow_control_path(control) }
+      %li=link_to 'Controls', '#controls', :data => { :toggle => 'tab' }
   .tab-content{ :style => 'position: relative; overflow: visible;' }
     #regulations.tab-pane
     #controls.tab-pane

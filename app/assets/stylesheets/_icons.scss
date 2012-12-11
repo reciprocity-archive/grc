@@ -1,5 +1,4 @@
 
-
 .gcmsicon-expandAll-grey {
   background-image: url("../images/expandAll.png");
   display: inline-block;
@@ -112,11 +111,7 @@
 .gcmsicon-mapping-white {
   text-align:center;
   background-image: url("../images/icons/grcicons/regmapper.png");
-  -moz-background-size:18px 18px;
-             -ie-background-size:18px 18px;
-              -o-background-size:18px 18px;
-         -webkit-background-size:18px 18px;
-                 background-size:18px 18px;
+  @include background-size(18px 18px);               
   display: inline-block;
   width: 18px;
   height: 18px;

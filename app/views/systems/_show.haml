@@ -16,13 +16,13 @@
     .span12
       .span4
         %label Code
-        %input.inputtext-small{:type => "text", :disabled => "disabled", :value => system.slug}
+        %input.span12{:type => "text", :disabled => "disabled", :value => system.slug}
       .span4
         %label Type
-        %input.inputtext-small{:disabled => "disabled", :type => "text", :value => system.type && system.type.title}
+        %input.span12{:disabled => "disabled", :type => "text", :value => system.type && system.type.title}
       .span4
         %label System or Process
-        %input.inputtext-small{:disabled => "disabled", :type => "text", :value => system.is_biz_process? ? 'Process' : 'System'}
+        %input.span12{:disabled => "disabled", :type => "text", :value => system.is_biz_process? ? 'Process' : 'System'}
   .row-fluid
     .span12
       %label Full Title
@@ -30,10 +30,10 @@
   .row-fluid
     .span4
       %label Version
-      %input.inputtext-small{:disabled => "disabled", :type => "text"}
+      %input.span12{:disabled => "disabled", :type => "text"}
     .span4
       %label Status
-      %input.inputtext-small{:disabled => "disabled", :type => "text"}
+      %input.span12{:disabled => "disabled", :type => "text"}
   .row-fluid
     .span12
       %label Description

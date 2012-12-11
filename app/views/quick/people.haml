@@ -5,5 +5,7 @@
   %ul.nav.nav-tabs.nav-stacked
     -@people.each do |person|
       %li.group
+        %a.widgetbtn.fltrt{ :'data-form-target' => "refresh", :'data-modal-reset' => "reset", :'data-toggle' => "modal-ajax-form", :href => edit_flow_person_path(person), :'data-target' => "#ajax-modal-people-3-edit" }
+          %i.gcmsicon-edit-grey
         =link_to '#' do #flow_person_path(person), 'data-popover-href' => tooltip_flow_person_path(person)
           =person.name || person.email

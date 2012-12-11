@@ -1,0 +1,27 @@
+-content_for :modal_title do
+  -if f.object.new_record?
+    Create a new option
+  -else
+    Edit option
+
+-if !f.object.new_record?
+  -content_for :modal_delete_path, delete_flow_option_path(f.object)
+
+.row-fluid
+  .span3
+    .span12{ :class => error_class(f, :role) }
+      =f.label :role, 'Role'
+      =f.text_field :role, :class => 'span12', :placeholder => 'Role'
+  .span3
+    .span12{ :class => error_class(f, :title) }
+      =f.label :title, 'Title'
+      =f.text_field :title, :class => 'span12', :placeholder => 'Title'
+  .span4
+    .span12{ :class => error_class(f, :description) }
+      =f.label :description, 'Description'
+      =f.text_field :description, :class => 'span12', :placeholder => 'Description'
+  .span2
+    .span12{ :class => error_class(f, :required) }
+      =f.label :required, 'Required'
+      =f.check_box :required
+%br

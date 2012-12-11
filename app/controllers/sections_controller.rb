@@ -6,6 +6,8 @@
 class SectionsController < BaseObjectsController
   include ProgramsHelper
 
+  cache_sweeper :section_sweeper, :only => [:create, :update, :destroy]
+
   access_control :acl do
     allow :superuser
 

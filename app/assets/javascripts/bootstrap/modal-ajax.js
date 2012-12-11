@@ -70,6 +70,7 @@
           $(list_target).tmpl_setitems(data);
           $target.modal_relationship_selector('hide');
         }
+
       });
     },
 
@@ -249,6 +250,7 @@
       option = $target.data('modal-help') ? 'toggle' : $.extend({}, $target.data(), $this.data());
 
       e.preventDefault();
+      e.stopPropagation();
 
       modal_type = $this.data('modal-type');
       if (!modal_type) {

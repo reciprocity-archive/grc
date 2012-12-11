@@ -2,7 +2,7 @@
   Selected Sections
 
 -content_for :widget_buttons do
-  =link_to mapping_map_rcontrol_path, :method => :post, :remote => true, :id => :rmap, :class => %w(widgetmapbtn btn-warning) do
+  =link_to "javascript://", :id => :rmap, :class => %w(widgetmapbtn btn-warning) do
     %span Map section to control
     %i.gcmsicon-play-white
 

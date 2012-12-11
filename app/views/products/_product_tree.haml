@@ -1,0 +1,68 @@
+-# locals: product, id_prefix, seen_ids, is_root
+
+-is_root = false if local_assigns[:is_root].nil?
+
+-seen_ids = [] if local_assigns[:seen_ids].nil?
+-id_prefix = "product-#{product.id}" if local_assigns[:id_prefix].nil?
+
+-seen_this = seen_ids.include?(product.id)
+
+-systems = product.systems
+-sub_products = product.dependent_products
+
+-expand_this = (!seen_this && systems.count > 0) || (!seen_this && sub_products.count > 0)
+
+-summary_toggle_target = "#{id_prefix}-summary"
+-objects_toggle_target = "#{id_prefix}-objects"
+
+-main_toggle_target = expand_this ? objects_toggle_target : summary_toggle_target
+
+%li
+  .row-fluid
+    .slot.span12.systemslot
+      .slottitle.span8.toggle{"data-target" => "##{main_toggle_target}", "data-toggle" => "collapse"}
+        -if expand_this
+          .expander
+        -else
+          .enddot
+        %span.prefix=product.slug
+        =product.title
+      -if has_feature? :BETA
+        .slotcolumn.span2
+          .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
+        .slotowner.span1
+          %a.slotowner{:href => "#"} Owner Jim
+      .slotactions.pull-right
+        %a.btn.btn-mini.btn-blue.halfopacity{ "data-target" => "##{summary_toggle_target}", "data-toggle" => "collapse", "rel" => "tooltip", "data-placement" => "left", "title" => "More" }
+          %i.gcmsicon-more
+
+  .row-fluid.collapse{ :id => summary_toggle_target }
+    .span12.morewell.statusblue.nominheight
+      .slotcontent.span12
+        %ul.contentactions.pull-right
+          %li
+            %a.btn.btn-mini.halfopacity{ "rel" => "tooltip", "data-placement" => "left", "title" => "Edit this object", 'data-modal-class' => 'modal-wide', 'data-form-target' => 'refresh', "data-toggle" => "modal-ajax-form", :href => edit_flow_product_path(product.id) }
+              %i.gcmsicon-edit-grey
+          %li
+            %a.btn.btn-mini.halfopacity{ :rel => "tooltip", :'data-placement' => "left", :title => "Link products to this object", :'data-modal-class' => 'modal-wide', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :'data-toggle' => "modal-ajax-relationship-selector", :href => list_edit_flow_relationships_path(:object_id => product.id, :object_type => 'Product', :related_model => 'Product', :related_side => 'destination', :relationship_type => 'product_is_dependent_on_product') }
+              %i.gcmsicon-link
+          %li
+            %a.btn.btn-mini.halfopacity{ :rel => "tooltip", :"data-placement" => "left", :title => "Link processes to this object", :'data-modal-class' => 'modal-wide', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :"data-toggle" => "modal-ajax-relationship-selector", :href => list_edit_flow_relationships_path(:object_id => product.id, :object_type => 'Product', :related_model => 'System', :related_side => 'destination', :relationship_type => 'product_has_process') }
+              %i.gcmsicon-link
+          -if !is_root
+            %li
+              %a.btn.btn-mini.halfopacity{ "rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => flow_product_path(product.id) }
+                %i.gcmsicon-arrowright-black
+        =product.description
+
+  .collapse{ :id => objects_toggle_target }
+
+    -if !seen_this
+      %ul.slotlist
+        -systems.each_with_index do |system, i|
+          =render :partial => 'system_tree', :locals => { :system => system, :id_prefix => "#{id_prefix}-system-#{system.id}" }
+
+      %ul.slotlist
+        -sub_products.each_with_index do |sub_product, i|
+          =render :partial => 'product_tree', :locals => { :product => sub_product, :id_prefix => "#{id_prefix}-sub-product-#{sub_product.id}", :seen_ids => seen_ids + [product.id] }
+

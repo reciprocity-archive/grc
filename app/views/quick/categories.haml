@@ -1,0 +1,21 @@
+-if @root_categories.empty?
+  .no-results
+    No results found
+-else
+  %a.btn.btn-warning{ :href => export_flow_categories_path(:format => :csv) }
+    %i.gcmsicon-import-white
+    Export
+  %ul.nav.nav-tabs.nav-stacked
+    -@root_categories.sort_by(&:display_name).each do |root_category|
+      %li
+        %a.widgetbtn.fltrt{ :'data-form-target' => "refresh", :'data-modal-reset' => "reset", :'data-toggle' => "modal-ajax-form", :href => edit_flow_category_path(root_category), :'data-target' => "#ajax-modal-categories-3-edit" }
+          %i.gcmsicon-edit-grey
+        =link_to '#' do
+          =root_category.display_name
+      -root_category.children.sort_by(&:display_name).each do |category|
+        -# TODO: Predrag said to use inline style for now. Ref. story: #40581877
+        %li{:style => "margin-left:15px"}
+          %a.widgetbtn.fltrt{ :'data-form-target' => "refresh", :'data-modal-reset' => "reset", :'data-toggle' => "modal-ajax-form", :href => edit_flow_category_path(category), :'data-target' => "#ajax-modal-categories-3-edit" }
+            %i.gcmsicon-edit-grey
+          =link_to '#' do
+            =category.display_name

@@ -1,27 +1,31 @@
 .help
-  %a.widgetbtn.fltrt{:'data-toggle' => 'collapse', :href => '#helpedit'}
-    %i.gcmsicon-edit-grey
+  -if CMS_CONFIG["ALLOW_HELP_EDIT"]
+    %a.widgetbtn.fltrt{:'data-toggle' => 'collapse', :href => '#helpedit'}
+      %i.gcmsicon-edit-grey
   -if @help && !@help.content.blank?
     -content_for :modal_title do
-      =@help_slug.humanize
-      Help
+      -if @help.title.present?
+        =@help.title
+      -else
+        =@help_slug.humanize
+        Help
     %p=@help.content
   -else
-    -begin
-      =render :partial => "#{@help_slug}"
-    -rescue
-      -content_for :modal_title do
-        GRC Help
-      %p This content is coming soon.  We are working on it.
+    -content_for :modal_title do
+      GRC Help
+    %p This content is coming soon.  We are working on it.
 
-#helpedit.collapse
-  .row-fluid
-    .well
-      =form_for @help, :url => update_help_path, :method => :post, :remote => true do |f|
-        =f.label :help_content
-        =f.text_area :content, :class => 'span12'
-        .row-fluid
-          .span12
-            =f.submit :Save, :class => 'btn btn-warning pull-right'
 
-        =f.hidden_field :slug
+-if CMS_CONFIG["ALLOW_HELP_EDIT"]
+  #helpedit.collapse
+    .row-fluid
+      .well
+        =form_for @help, :url => update_help_path, :method => :post, :remote => true do |f|
+          =f.label :help_title
+          =f.text_field :title, :class => 'span12'
+          =f.label :help_content
+          =f.text_area :content, :class => 'span12'
+          .row-fluid
+            .span12
+              =f.submit :Save, :class => 'btn btn-warning pull-right'
+          =f.hidden_field :slug

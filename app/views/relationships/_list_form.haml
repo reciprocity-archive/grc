@@ -25,6 +25,18 @@
           %i.gcmsicon-edit-grey
         %h6.state
 
+%script#relationship_system_option{ :type => 'text/html', :'data-prefix' => 'system' }
+  %li{ :'data-id' => '<%= system.id %>', :'data-title' => '<%= system.title %>', :'data-slug' => '<%= system.slug %>' }
+    .row-fluid
+      .span8
+        %span.company <%= system.slug %>
+        %span.name <%= system.title %>
+      .span4.actions
+        %a.widgetbtn.pull-right.add-me{:href => "#", :'data-toggle' => 'selector-list-select'}
+          %i.grcicon-chevron-right
+        %a.widgetbtn.pull-right{:href => edit_flow_system_path('<%=system.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
+          %i.gcmsicon-edit-grey
+
 %script#relationship_program_option{ :type => 'text/html', :'data-prefix' => 'program' }
   %li{ :'data-id' => '<%= program.id %>', :'data-title' => '<%= program.title %>', :'data-slug' => '<%= program.slug %>' }
     .row-fluid

@@ -17,7 +17,7 @@
       =javascript_include_tag 'dashboard'
     =csrf_meta_tag
     -#FIXME: This resource occasionally hangs and prevents page from rendering
-      %link(href='https://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css')
+      -#%link(href='https://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css')
     %link(href='/favicon.ico' rel='icon' type='image/x-icon')
     :javascript
       jQuery(function($) { $('head').append("<link href='https://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'></link>"); });
@@ -35,7 +35,7 @@
                 GRC
               -else
                 Google GRC
-          -if has_feature? :BETA
+          -#-if has_feature? :BETA
             -if controller.controller_name == 'programs_dash'
               .headercenter.fltnone
                 =render :partial => 'design/templates/grcmenu'

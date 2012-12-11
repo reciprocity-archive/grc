@@ -12,94 +12,31 @@
   %h1#pageType.pull-right.highlighted Product
 
 -content_for :subheader_plus do
-  %a.navbarplus.fltrt{ :href => "#comingsoonModal", "data-toggle" => "modal" }
-  
+  %a.navbarplus.product.pull-right{ :href => "#comingsoonModal", "data-toggle" => "modal" }
+
 .row-static
   .doubleColumn
-    #RegsandControls.WidgetBox.fullHeight.doubleWide
+    #RegsandControls2.WidgetBox.fullHeight.doubleWide
       .WidgetBoxHeading
         .pull-right
           %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
             %i.gcmsicon-questionmark-grey
-          -#%a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
-            %i.gcmsicon-edit-grey
           %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
         .WidgetTitle.doublewidth Sub-Products, Processes and Controls
 
-      .WidgetBoxContent
-        
-        -#%ul#quicklinks.nav.nav-tabs
-          %li
-            %a{"data-toggle" => "tab", :href => "#Regulation"} Regulation
-          %li
-            %a{"data-toggle" => "tab", :href => "#Controls"} Controls
-          %li.active
-            %a{"data-toggle" => "tab", :href => "#Combo"} Combo
-        -#.tab-content
-          #Regulation.tab-pane Regulations
-          #Controls.tab-pane Controls
-          #Combo.tab-pane.active
+      .WidgetBoxContent    
         #sampleprogramsections
-          -# Import this text
+        
           
 
-    .doubleColumn               
-      -#productComplianceSchedule.WidgetBox
-        .WidgetBoxHeading
-          %nav
-            %a.widgettextbtn{"data-toggle" => "modal", :href => "#"} Add Item
-          .WidgetTitle Compliance Schedule
-        .WidgetBoxContent
-          .row-fluid.nominheight
-            .span6.nominheight
-            .span6.nominheight
-              .span4.nominheight
-                %label.fltnone Start
-              .span4.nominheight
-                %label.fltnone Finish
-              .span4.nominheight
-                %label.fltnone Status
-          %ul#ComplianceList.in
-            %li.controlSlot.ui-draggable.row-fluid.nominheight.statusred{"data-toggle" => "modal", :href => "#"}
-              .span6.nominheight
-                %span.prefix Fit and Proper Review
-                .expander
-              .span6.badges.nominheight
-                .span4.nominheight
-                  .badge.badge-info 01/15/12
-                .span4.nominheight
-                  .badge.badge-info 01/15/13
-                .span4.nominheight
-                  .badge.badge-important Late
-            %li.controlSlot.ui-draggable.row-fluid.nominheight.statusyellow{"data-toggle" => "modal", :href => "#"}
-              .span6.nominheight
-                %span.prefix Fit and Proper Review
-                .expander
-              .span6.badges.nominheight
-                .span4.nominheight
-                  .badge.badge-info 01/15/12
-                .span4.nominheight
-                  .badge.badge-info 01/15/13
-                .span4.nominheight
-                  .badge.badge-warning In-Progress
-            %li.controlSlot.ui-draggable.row-fluid.nominheight.statusgreen{"data-toggle" => "modal", :href => "#"}
-              .span6.nominheight
-                %span.prefix Fit and Proper Review
-                .expander
-              .span6.badges.nominheight
-                .span4.nominheight
-                  .badge.badge-info 01/15/12
-                .span4.nominheight
-                  .badge.badge-info 01/15/13
-                .span4.nominheight
-                  .badge.badge-success   Complete
               
   .singleColumn 
+
     #productActions.WidgetBox
       .WidgetBoxHeading
         .WidgetTitle Product Actions
-      .WidgetBoxContent.information
-        .toolbar-widget
+      .WidgetBoxContent
+        .widget-toolbar      
           .row-fluid
             .span2
               %a.span12.btn.btn-warning{"data-toggle" => "modal", :href => "#comingsoonModal"}
@@ -110,6 +47,7 @@
             .span5
               %a.span12.btn.btn-warning{"data-toggle" => "modal", :href => "#comingsoonModal"}
                 Relationship Map
+
 
     #productInfo.WidgetBox
       .WidgetBoxHeading
@@ -122,13 +60,13 @@
       .WidgetBoxContent.information.collapse.in
         .well 
           %label 
-            Status
             .pull-right 
               %span.statustextgreen 85 
               %span /
               %span.statustextyellow 5 
               %span /
               %span.statustextred 10 
+            Status
           .progress.progress-striped.active
             .bar.progressbar-success{"data-percentage" => "85", :style => "float: left; width: 0%; "}
             .bar.progressbar-danger{"data-percentage" => "10", :style => "float: right; width: 0%; "}

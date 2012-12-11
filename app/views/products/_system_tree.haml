@@ -1,0 +1,87 @@
+-# locals: system, id_prefix, seen_ids
+
+-seen_ids = [] if local_assigns[:seen_ids].nil?
+-id_prefix = "product-#{product.id}" if local_assigns[:id_prefix].nil?
+
+-seen_this = seen_ids.include?(system.id)
+
+-controls = system.controls
+-sub_systems = system.sub_systems
+
+-expand_this = controls.count > 0 || (!seen_this && sub_systems.count > 0)
+
+-summary_toggle_target = "#{id_prefix}-summary"
+-objects_toggle_target = "#{id_prefix}-objects"
+
+-main_toggle_target = expand_this ? objects_toggle_target : summary_toggle_target
+
+%li
+  .row-fluid
+    .slot.span12.processslot
+      .slottitle.span8.toggle{"data-target" => "##{main_toggle_target}", "data-toggle" => "collapse"}
+        -if expand_this
+          .expander
+        -else
+          .enddot
+        %span.prefix=system.slug
+        =system.title
+      -if has_feature? :BETA
+        .slotcolumn.span2
+          .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
+        .slotowner.span1
+          %a.slotowner{:href => "#"} Owner Joe
+      .slotactions.pull-right
+        %a.btn.btn-mini.btn-blue.halfopacity{ "data-target" => "##{id_prefix}-summary", "data-toggle" => "collapse", "rel" => "tooltip", "data-placement" => "left", "title" => "More" }
+          %i.gcmsicon-more
+
+  .row-fluid.collapse{ :id => summary_toggle_target }
+    .span12.morewell.statusblue.nominheight
+      .slotcontent.span12
+        %ul.contentactions.pull-right
+          %li
+            %a.btn.btn-mini.halfopacity{ :href => list_edit_flow_system_systems_path(:parent_id => system.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :rel => 'tooltip', :title => 'Link systems to this object', :'data-modal-class' => 'modal-wide' }
+              %i.gcmsicon-link
+          %li
+            %a.btn.btn-mini.halfopacity{ :href => list_edit_flow_system_controls_path(:system_id => system.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :rel => 'tooltip', :title => 'Link controls to this object', :'data-modal-class' => 'modal-wide' }
+              %i.gcmsicon-link
+          %li
+            %a.btn.btn-mini.halfopacity{ "rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => flow_system_path(system.id) }
+              %i.gcmsicon-arrowright-black
+        =system.description
+
+  .collapse{ :id => objects_toggle_target }
+
+    %ul.slotlist
+      -controls.each_with_index do |control, i|
+        -control_id_prefix = "#{id_prefix}-control-#{control.id}"
+        -control_summary_target = "#{control_id_prefix}-summary"
+
+        %li
+          .row-fluid
+            .slot.span12.controlslot
+              .slottitle.span8.toggle{ "data-target" => "##{control_summary_target}", "data-toggle" => "collapse", "rel" => "tooltip", "data-placement" => "left", "title" => "More" }
+                .enddot
+                %span.prefix=control.slug
+                =control.title
+              -if has_feature? :BETA
+                .slotcolumn.span2
+                  .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
+                .slotowner.span1
+                  %a.slotowner{:href => "#"} Owner Bob
+              .slotactions.pull-right
+                %a.btn.btn-mini.btn-blue.halfopacity{"data-target" => "##{control_id_prefix}-summary", "data-toggle" => "collapse"}
+                  %i.gcmsicon-more
+          .row-fluid.collapse{ :id => control_summary_target }
+            .span12.morewell.statusblue.nominheight
+              .slotcontent.span12
+                %ul.contentactions.pull-right
+                  %li
+                    %a.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => flow_control_path(control.id) }
+                      %i.gcmsicon-arrowright-black
+                =control.description
+
+    -if !seen_this
+      %ul.slotlist
+        -sub_systems.each_with_index do |sub_system, i|
+          =render :partial => 'system_tree', :locals => { :system => sub_system, :id_prefix => "#{id_prefix}-sub-system-#{sub_system.id}", :seen_ids => seen_ids + [system.id] }
+

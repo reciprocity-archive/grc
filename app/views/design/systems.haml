@@ -1,4 +1,4 @@
--@title = "GRC: Controls"
+-@title = "GRC: Systems"
  
 -content_for :header do
   %ol#breadcrumb
@@ -9,10 +9,10 @@
 -content_for :page_help, 'changeme'
 
 -content_for :subheader_extras do
-  %h1#pageType.pull-right.highlighted Control
+  %h1#pageType.pull-right.highlighted Business Process
 
 -content_for :subheader_plus do
-  %a.navbarplus.fltrt{ :href => "#comingsoonModal", "data-toggle" => "modal" }
+  %a.navbarplus.system.pull-right{ :href => "#comingsoonModal", "data-toggle" => "modal" }
   
 .row-static
   .doubleColumn
@@ -26,7 +26,7 @@
           %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
         .WidgetTitle.doublewidth Sub-Systems & Controls
       .WidgetBoxContent
-        #sampleprogramsections
+        #samplesystems
         
     .singleColumn
       #transactions.WidgetBox
@@ -37,62 +37,57 @@
               %i.gcmsicon-questionmark-grey
             -#%a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
               %i.gcmsicon-edit-grey
+            -#%a.widgetbtn{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+              %i.gcmsicon-link
             %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#transactionsContent"}
               %i.gcmsicon-enlarge-grey
         .WidgetBoxContent.information.collapse.in
-          
+          .row-fluid
+            .span12.captionbox
+              %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+                %i.gcmsicon-link
+              %h4
+                Transactions for this System/Process
           #transactionsContent.collapse.in
             %hr.hr-widget
             .row-fluid
               .span12
-                %h3.toggle{"data-target" => "#productCategories", "data-toggle" => "collapse"}
-                  .expander
+                %a.widgetbtn.pull-right.juke-left{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+                  %i.gcmsicon-edit-grey
+                %h3.toggle{"data-target" => "#dataGenerated", "data-toggle" => "collapse"}
+                  .expander.in
                   Data Generated
-                  %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
-                    %i.gcmsicon-edit-grey
-                %ul#productCategories.collapse
+                  
+                %ul#dataGenerated.collapse.in
                   %li.controlSlot
-                    %span.controls-group Category
-                    %br/
-                    %span.controls-subgroup Access Control
-                  %li.controlSlot
-                    %span.controls-group Category
-                    %br/
-                    %span.controls-subgroup Risky Attribute
+                    %span.controls-subgroup 
+                      ads data, customer data, campaign data, impression and click data
             %hr.hr-widget
             .row-fluid
               .span12
-                %h3.toggle{"data-target" => "#productReferences", "data-toggle" => "collapse"}
-                  .expander
+                %a.widgetbtn.pull-right.juke-left{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+                  %i.gcmsicon-edit-grey
+                %h3.toggle{"data-target" => "#dataProcessed", "data-toggle" => "collapse"}
+                  .expander.in
                   Data Processed
-                  %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
-                    %i.gcmsicon-edit-grey
-                %ul#productReferences.collapse
+                  
+                %ul#dataProcessed.collapse.in
                   %li.controlSlot
-                    %span.controls-group PDF
-                    %br/
-                    %span.controls-subgroup Privacy Report 2011
-                  %li.controlSlot
-                    %span.controls-group PDF
-                    %br/
-                    %span.controls-subgroup Privacy Report 2012
+                    %span.controls-subgroup 
+                      ADR receives data from MDB/Escanner regarding the network assets on the network.
             %hr.hr-widget
             .row-fluid
               .span12
-                %h3.toggle{"data-target" => "#productPeople", "data-toggle" => "collapse"}
-                  .expander
+                %a.widgetbtn.pull-right.juke-left{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+                  %i.gcmsicon-edit-grey
+                %h3.toggle{"data-target" => "#dataStored", "data-toggle" => "collapse"}
+                  .expander.in
                   Data Stored
-                  %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
-                    %i.gcmsicon-edit-grey
-                %ul#productPeople.collapse
+                  
+                %ul#dataStored.collapse.in
                   %li.controlSlot
-                    %span.controls-group JRayburn@google.com
-                    %br/
-                    %span.controls-subgroup Joss Rayburn
-                  %li.controlSlot
-                    %span.controls-group rpoder@google.com
-                    %br/
-                    %span.controls-subgroup Ron Poder
+                    %span.controls-subgroup 
+                      Network asset data (including status) for suppliers - Juniper, In!nera & Celestica
             %hr.hr-widget
     .singleColumn
       =render :partial => 'design/widgets/systemsrelated'           
@@ -100,11 +95,27 @@
   .singleColumn
     #productInfo.WidgetBox
       .WidgetBoxHeading
-        .WidgetTitle Control Actions
+        .WidgetTitle System Actions
       .WidgetBoxContent.information
         .toolbar-widget
           .row-fluid
             .span6
+              -# There currently is an issue with this dropdown being inside the widget and therefore cropped. Can we move bootstrap twitter dropdown menus above (z-index)?
+              .btn-group.closed
+                %a.span12.btn.btn-warning.dropdown-toggle{"data-toggle" => "dropdown"}
+                  %i.gcmsicon-import-white
+                  Im/Export
+                  %span.caret
+                %ul.dropdown-menu
+                  %li.divider
+                  %li
+                    %a{:href => "/systems/import"}
+                      Import Systems
+                  %li.divider
+                  %li
+                    %a{"data-toggle" => "modal-ajax", :href => "/systems/export.html"}
+                      Export Systems
+            -#.span4
               %a.span12.btn.btn-warning{"data-toggle" => "modal", :href => "#comingsoonModal"}
                 New Version
             .span6
@@ -112,7 +123,7 @@
                 Relationship Map
     #productInfo.WidgetBox
       .WidgetBoxHeading
-        .WidgetTitle Control Info
+        .WidgetTitle System Info
         %nav
           %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
             %i.gcmsicon-questionmark-grey
@@ -123,13 +134,13 @@
       .WidgetBoxContent.information.collapse.in
         .well 
           %label 
-            Status
             .pull-right 
               %span.statustextgreen 35 
               %span /
               %span.statustextyellow 55 
               %span /
               %span.statustextred 10 
+            Status
           .progress.progress-striped.active
             .bar.progressbar-success{"data-percentage" => "35", :style => "float: left; width: 0%; "}
             .bar.progressbar-danger{"data-percentage" => "10", :style => "float: right; width: 0%; "}
@@ -142,38 +153,35 @@
           %hr.hr-widget
           .row-fluid
             .span12
+              %a.widgetbtn.pull-right.juke-left{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+                %i.gcmsicon-edit-grey
               %h3.toggle{"data-target" => "#productAbout", "data-toggle" => "collapse"}
-                .expander
+                .expander.in
                 About
-                %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
-                  %i.gcmsicon-edit-grey
-                -#%a.btn.btn-blue.minibtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"} Edit
-              #productAbout.collapse
+              #productAbout.collapse.in
                 .row-fluid
                   .span12
-                    .span3
+                    .span2
                       %label Code
                       %input.span12{:disabled => "disabled", :placeholder => "ABC", :type => "text"}/
-                    .span3
+                    .span2
                       %label Version
                       %input.span12{:disabled => "disabled", :placeholder => "1.0", :type => "text"}/
-                    .span3
-                      %label Type
-                      %input.span12{:disabled => "disabled", :placeholder => "Company", :type => "text"}/
-                    .span3
+                    
+                    .span5
                       %label Kind
-                      %input.span12{:disabled => "disabled", :placeholder => "---", :type => "text"}/
-                .row-fluid
-                  .span8
-                    %label Means of Opeartion
-                    %input.span12{:disabled => "disabled", :placeholder => "Manual w/ Segregation of Duties", :type => "text"}/
-                  .span4
-                    %label Confirm Frequency
-                    %input.span12{:disabled => "disabled", :placeholder => "Quarterly", :type => "text"}
+                      %input.span12{:disabled => "disabled", :placeholder => "Infrastructure", :type => "text"}/
+                    .span3
+                      %label Network Zone
+                      %input.span12{:disabled => "disabled", :placeholder => "Corp", :type => "text"}/
                 .row-fluid
                   .span12
                     %label Description
                     %textarea#textarea.span12{:disabled => "disabled", :placeholder => "", :rows => "3", :style => "height: 135px; "} PCI DDS applies whenever Cardholder account data and Authentication Data is Stored, Processed or Transmitted. Examples Include: For more See Page 7 of document. Using h6 makes the label caps.
+                .row-fluid
+                  .span12
+                    %label Notes
+                    %textarea#notes.span12{:disabled => "disabled", :placeholder => "", :rows => "3", :style => "height: 135px; "} ...
                 .row-fluid
                   .span12
                     %label Direct Link
@@ -188,55 +196,68 @@
                       %input.span12{:disabled => "disabled", :placeholder => "", :type => "text"}/
                     .span4
                       %label Status
-                      %input.span12{:disabled => "disabled", :placeholder => "OK", :type => "text"}/
+                      %input.span12{:disabled => "disabled", :placeholder => "Active", :type => "text"}/
           %hr.hr-widget
           .row-fluid
             .span12
+              %a.widgetbtn.pull-right.juke-left{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+                %i.gcmsicon-link
               %h3.toggle{"data-target" => "#productCategories", "data-toggle" => "collapse"}
                 .expander
                 Categories
-                %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
-                  %i.gcmsicon-link
+                
               %ul#productCategories.collapse
                 %li.controlSlot
-                  %span.controls-group Category
+                  %a.widgetbtn.pull-right.juke-down
+                    %i.gcmsicon-edit-grey
+                  %span.controls-group SOX Category
                   %br/
-                  %span.controls-subgroup Access Control
-                %li.controlSlot
+                  %span.controls-subgroup Core
+                -#%li.controlSlot
                   %span.controls-group Category
                   %br/
                   %span.controls-subgroup Risky Attribute
           %hr.hr-widget
           .row-fluid
             .span12
+              %a.widgetbtn.pull-right.juke-left{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+                %i.gcmsicon-link
               %h3.toggle{"data-target" => "#productReferences", "data-toggle" => "collapse"}
                 .expander
                 References
-                %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
-                  %i.gcmsicon-link
+                
               %ul#productReferences.collapse
                 %li.controlSlot
+                  %a.widgetbtn.pull-right.juke-down
+                    %i.gcmsicon-edit-grey
                   %span.controls-group PDF
                   %br/
                   %span.controls-subgroup Privacy Report 2011
                 %li.controlSlot
+                  %a.widgetbtn.pull-right.juke-down
+                    %i.gcmsicon-edit-grey
                   %span.controls-group PDF
                   %br/
                   %span.controls-subgroup Privacy Report 2012
           %hr.hr-widget
           .row-fluid
             .span12
+              %a.widgetbtn.pull-right.juke-left{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+                %i.gcmsicon-link
               %h3.toggle{"data-target" => "#productPeople", "data-toggle" => "collapse"}
                 .expander
                 People
-                %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
-                  %i.gcmsicon-link
+              
               %ul#productPeople.collapse
                 %li.controlSlot
+                  %a.widgetbtn.pull-right
+                    %i.gcmsicon-edit-grey
                   %span.controls-group JRayburn@google.com
                   %br/
                   %span.controls-subgroup Joss Rayburn
                 %li.controlSlot
+                  %a.widgetbtn.pull-right
+                    %i.gcmsicon-edit-grey
                   %span.controls-group rpoder@google.com
                   %br/
                   %span.controls-subgroup Ron Poder
