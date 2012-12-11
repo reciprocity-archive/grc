@@ -5,8 +5,6 @@
 /*
  *= require dashboard
  *= require jquery.cookie
- *= require wysihtml5-0.3.0_rc2
- *= require bootstrap-wysihtml5-0.0.2
  *= require bootstrap-datepicker
  */
 

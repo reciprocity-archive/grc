@@ -6,6 +6,8 @@
  *= require bootstrap/sticky-popover
  *= require bootstrap/modal-form
  *= require bootstrap/modal-ajax
+ *= require wysihtml5-0.3.0_rc2
+ *= require bootstrap-wysihtml5-0.0.2
  *= require_self
  */
 

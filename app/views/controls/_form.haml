@@ -28,7 +28,7 @@
       =wrapped_text_field f, :span6, :version, :placeholder => '1.1.1'
 
 .row-fluid
-  =wrapped_text_area f, :span6, :description, :class => 'double', :placeholder => 'Enter description here'
+  =wrapped_text_area f, :span6, :description, :class => 'double wysihtml5', :id => "text1", :placeholder => 'Enter description here'
   .span6
     .row-fluid
       =wrapped_date_field f, :span6, :start_date, :class => 'date', :label_name => 'Effective Date', :placeholder => 'MM/DD/YYYY'
@@ -46,12 +46,8 @@
 
 .row-fluid
   .span6{ :class => error_class(f, :documentation_description) }
-    %label.subtitle
-      Documentation Description
-      %a.fltrt.underline
     .row-fluid
-      %textarea#wysihtml5d.span12{:name => 'control[documentation_description]', :placeholder => "One-sentence explanation of the applicability of this program, used in mail merge templates.", :rows => "3", }=f.object.documentation_description
-      =error_messages_inline(f, :documentation_description)
+      =wrapped_text_area(f, :span12, :documentation_description, :placeholder => "One-sentence explanation of the applicability of this program, used in mail merge templates.", :rows => "3", :class => "wysihtml5")
 
   %br
   #categorylist.span6.well{ :class => error_class(f, :categories) }
@@ -64,5 +60,7 @@
             %option{ :value => subcategory.id, :selected => (f.object.category_ids.include?(subcategory.id)) }=subcategory.name
     =error_messages_inline(f, :categories)
 
--#:javascript
-  $('#wysihtml5').wysihtml5({ image: false }); //Button to insert an image. Default true
+:javascript
+  $('.wysihtml5').each(function() {
+    $(this).wysihtml5({ image: false, html: true, 'font-styles': false });
+  });
