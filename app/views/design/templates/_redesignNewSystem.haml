@@ -7,7 +7,7 @@
         %i.gcmsicon-x-grey
     %h1 
       Create New System
-      %span.version v.0.23
+      %span.version v.0.3
 
   .modal-body
     .alert.alert-info
@@ -47,12 +47,25 @@
               %input.span12#datepicker-program-stopdate.date{:type => "text",  :placeholder => "MM/DD/YYYY"}
               :javascript
                 $('#datepicker-program-stopdate').datepicker();
+              %label Network Zone
+              %select.span12
+                %option Not Available
+                %option Corp
+                %option Prod
+                %option Service Provider  
+
+
       .row-fluid
         .span6
           %label Direct URL for Product (optional)
           %input.span12{:type => "text", :placeholder => "http://www.examplelink.com/"}
-          %span.help-inline &nbsp;
-        
+          %span.help-inline &nbsp;      
         .span6
+      .row-fluid
+        .span6
+          %label Notes
+          %textarea.span12.double{:placeholder => "Enter notes here", :rows => "3"}
+        
+
 
   =render :partial => 'design/templates/modalfooter', :locals => { :shownote => false, :showcreated => true, :showrevs => true }

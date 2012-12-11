@@ -1,29 +1,36 @@
-$default-border-radius: 4px;
+// defaults
 
-// SASS variables
+  $default-border-radius: 4px;
+  $gradientColor:linear-gradient(top, #ffffff, #eeeeee);
 
-$linkColor : #43c2c7;
-$textColor: #666;
-$failureBgndColor: #FFC8C8;
-$failureColor: #B94A48;
-$failureBorderColor: #B94A48;
-$successBgndColor: #EAFFE6;
-$borderDefault: #e1e1e1;
-$borderDefaultHover: #3badb3;
-$auditBgndColor:#c9f4f9;
-$errorColor:#ee0000;
-$font-family: 'PT Sans', Helvetica, Arial, Tahoma, Verdana, sans-serif;
+// variables
 
+  $linkColor : #43c2c7;
+  $textColor: #666;
+  $failureBgndColor: #FFC8C8;
+  $failureColor: #B94A48;
+  $failureBorderColor: #B94A48;
+  $successBgndColor: #EAFFE6;
+  $borderDefault: #e1e1e1;
+  $borderDark: #999;
+  $borderDefaultHover: #3badb3;
+  $auditBgndColor:#c9f4f9;
+  $errorColor:#ee0000;
+
+  //The first font is loaded from Google Web Fonts inside layouts/dashboard.haml
+  $font-family: 'PT Sans', Helvetica, Arial, Tahoma, Verdana, sans-serif;
 
 // helper variables (it seems it is duplicated, but it is good to keep semantically correct var names)
 
-$darkGray: #666;
-$lightGray: #ccc;
-$mediumGray: #999;
-$lightestGray: #f3f3f3;
-$white: #fff;
-$black: #000;
-$red: #ff0000;
+  $darkGray: #666;
+  $lightGray: #ccc;
+  $mediumGray: #999;
+  $lightestGray: #f3f3f3;
+  $white: #fff;
+  $black: #000;
+  $red: #ff0000;
+  $green:#5aa026;
+
 
 // widgets
 
@@ -34,28 +41,29 @@ $red: #ff0000;
   $widgetInnerBorder: 1px solid $lightestGray;
   $bgndWidget: $white;
   $bgndDefault: $mediumGray;
-  $bgndGovernance: #0a57bf;
+  $bgndGovernance: #7A99C1;
   $bgndRisk: #d34827;
   $bgndCompliance: #008d00;
-
   $bgndProduct: #e6e0f6;
   $bgndSystem: #d5eff3;
   $bgndControl: #f4e4e0;
+  $bgndProcess: #cfebf9;
+
 
 // SASS mixins
 
 // placeholders
 
-// Lighten placeholder text from bootstrap defaults
-// These rules must be separate, see http://stackoverflow.com/questions/2610497/change-an-inputs-html5-placeholder-color-with-css
+  // Lighten placeholder text from bootstrap defaults
+  // These rules must be separate, see http://stackoverflow.com/questions/2610497/change-an-inputs-html5-placeholder-color-with-css
 
-::-webkit-input-placeholder {
-  color: $lightGray;
-}
+  ::-webkit-input-placeholder {
+    color: $lightGray;
+  }
 
-:-moz-placeholder {
-  color: $lightGray;
-}
+  :-moz-placeholder {
+    color: $lightGray;
+  }
 
 // clearfix
 
@@ -102,3 +110,14 @@ $red: #ff0000;
   filter: progid:dximagetransform.microsoft.gradient(startColorstr='#fffbb450', endColorstr='#fff89406', GradientType=0);
 }
 
+// one place to create and define whole 'slot' from one color definition
+
+@mixin border-and-gradient($color) {
+  @include background-image(linear-gradient(top, lighten($color, 5%), darken($color, 5%)));
+  border:1px solid darken($color,10%);
+  color:darken($color,50%);
+}
+
+@mixin icon(){
+  //
+}

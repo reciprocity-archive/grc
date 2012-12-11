@@ -9,6 +9,7 @@
 
 @import "jquery-ui";
 @import "bootstrap";
+//@import "bootstrap-responsive";
 @import "compass/css3";
 @import "bootstrap-wysihtml5-0.0.2";
 
@@ -40,3 +41,9 @@
 
   // tables
   @import "tables";
+
+
+  // new page structure and elements
+  @import "page-structure";
+
+

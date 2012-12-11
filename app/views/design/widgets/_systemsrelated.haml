@@ -13,36 +13,36 @@
       .button-set
         .row-fluid
           .span4
-            .span12.btn{:href => ""}
+            %a.span12.btn.btn-lightgreen{:href => "#"}
               Programs
           .span4
-            .span12.btn.halfopacity{:href => ""}
+            %a.span12.btn.halfopacity{:href => "#"}
               Org Groups 
           .span4
-            .span12.btn.halfopacity{:href => ""}
+            %a.span12.btn.halfopacity{:href => "#"}
               Projects
           
       .button-set
         .row-fluid
           .span4
-            .span12.btn{:href => ""}
+            %a.span12.btn.btn-lightgreen{:href => "#"}
               Risks
           .span4
-            .span12.btn.halfopacity{:href => ""}
+            %a.span12.btn.halfopacity{:href => "#"}
               Products
           .span4
-            .span12.btn.halfopacity{:href => ""}
+            %a.span12.btn.halfopacity{:href => "#"}
               Markets 
       .button-set
         .row-fluid
           .span4
-            .span12.btn.halfopacity{:href => ""}
+            %a.span12.btn.halfopacity{:href => "#"}
               Processes
           .span4
-            .span12.btn.halfopacity{:href => ""}
+            %a.span12.btn.halfopacity{:href => "#"}
               Data Assets
           .span4
-            .span12.btn.halfopacity{:href => ""}
+            %a.span12.btn.halfopacity{:href => "#"}
               Facilities
       %hr.hr-widget
       / TABS
@@ -53,11 +53,12 @@
               %h4.nominheight
                 Facilities
                 -#%a.btn.btn-blue.minibtn.pull-right Edit List
-                %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#comingsoonModal"}
-                  %i.gcmsicon-link
+                
           .row-fluid
             .span12.captionbox
-              .subtitle Facilities that implement this Business Process
+              %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                %i.gcmsicon-link
+              %h4 Facilities that implement this Business Process
           .row-fluid
             %ul.span12
               %li.controlSlot
@@ -65,7 +66,7 @@
                   .span6.nominheight
                     %span.controls-group Buildings
                   .span6.nominheight
-                    %a.btn.minibtn.pull-right Review
+                    
                 .row-fluid.nominheight
                   .span3.nominheight
                     %span.controls-subgroup

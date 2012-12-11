@@ -98,7 +98,6 @@ box-shadow: rgba(255, 255, 255, 0.199219) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0
 color: white;
 display: inline-block;
 float: none;
-font-family: 'PT Sans', Helvetica, Arial, Tahoma, Verdana, sans-serif;
 font-size: 16px;
 height: 18px;
 line-height: 18px;
@@ -298,8 +297,6 @@ width: 97px;
   position:relative;
 }
 
-
-
 /* Height attributes that should be applied to WidgetBox only */
 
 /* Goal is to specify height outside of the widgetbox */
@@ -316,27 +313,15 @@ width: 97px;
 
 .fullHeight > .WidgetBox > .WidgetBoxContent {
   position:relative;
-  min-height:265px;
+  min-height:100px;
   max-height:550px;
-  // TODO: decide which .WidgetBox descendent should be scrollable
-  //overflow-y:auto;
-  //overflow-x:hidden;*/
 }
 
 /* Required `height` setting to trigger overflow scrolling in tab content */
 .fullHeight > .WidgetBox > .WidgetBoxContent .tab-pane {
-  max-height: 535px;
+  //max-height: 535px;
 }
 
-/*
-.singleWide > .WidgetBox > .WidgetBoxContent {
-  width:346px;
-}
-
-.doubleWide > .WidgetBox > .WidgetBoxContent {
-  width:720px;
-}
-*/
 
 .WidgetBoxContent {
   background: #f5f5f5;
@@ -407,7 +392,7 @@ width: 97px;
   border: 1px solid #43C2C7;
   border-bottom-color: transparent;
 
-  font-weight:bold;
+  font-weight:normal;
 }
 
 .nav-tabs {
@@ -465,8 +450,8 @@ width: 97px;
   border: 1px solid $borderDefault;
   display:inline-block;  
   float:left;
-  height:38px;
-  line-height:14px;
+  height:35px;
+  line-height:12px;
   margin-top: 2px;
   padding: 4px 5px 5px 5px;
   overflow: hidden;
@@ -528,10 +513,10 @@ width: 97px;
   
   }
   &.controlslot {
-    background-color: #eafbff; // Old browsers
-    @include filter-gradient(#eafbff, #cfebf9, vertical); // IE6-9
-    @include background-image(linear-gradient(top,  #eafbff 0%,#cfebf9 100%)); 
-    @include border-radius(5px);
+    background-color: #eaedff; // Old browsers
+    @include filter-gradient(#eaedff, #cfe0f9, vertical); // IE6-9
+    @include background-image(linear-gradient(top,  #eaedff 0%,#cfe0f9 100%)); 
+    //@include border-radius(5px);
   }
   &.processslot {
     background-color: #eafbff; // Old browsers
@@ -585,7 +570,9 @@ width: 97px;
     text-overflow: ellipsis;
   }
   .slotowner {
-
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
   .slotactions {
 
@@ -905,6 +892,10 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
     border-top: 1px solid #eee;
     border-bottom: 1px solid $white;
   }
+  .btn {
+    min-height:0 !important;
+  }
+
 }
 
 .hr-widget {
@@ -915,6 +906,9 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
 }
 
 .navbar {
+  border-bottom:3px solid #ccc;
+  
+  
   .brand {
     display: inline-block;
     float: left;
@@ -960,6 +954,7 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
   min-width:251px;
   float: left;
   margin-left: 0px;
+  padding-top:2px;
 }
 
 .headercenter {
@@ -1004,16 +999,32 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
   -webkit-font-smoothing: antialiased;
 }
 
+.btn-lightgreen {
+  background:lighten(#aecebf, 5%);
+  -webkit-font-smoothing: antialiased;
+  &:hover {
+    background:darken(#aecebf, 10%);
+  }
+}
+
 .btn-mini {
   padding: 2px 2px;
   font-size: 11px;
   line-height: 14px;
 }
 
+.btn-nano {
+  padding: 1px;
+  font-size: 9px;
+  line-height: 10px;
+  margin-bottom:3px;
+}
+
+
 .btn-slotcolumn {
   padding: 2px 2px;
   font-size: 11px;
-  line-height: 30px;
+  line-height: 32px;
 }
 
 /*  GCMS Welcome */
@@ -1281,6 +1292,7 @@ $generalindent: 14px;
 ul.slotlist li > div .slot {
   padding-left:$slugindent;
 }
+
 ul.slotlist li > div .slotcontent {
   padding-left:$slugindent + $generalindent;
 }
@@ -1288,34 +1300,7 @@ ul.slotlist li > div .slotcontent {
 ul.slotlist ul li > div .slot {
   padding-left:$slugindent * 2 ;
 }
-ul.slotlist ul li > div .slotcontent {
-  padding-left:$slugindent * 2 + $generalindent;
-}
 
-ul.slotlist ul ul li > div .slot {
-  padding-left:$slugindent * 3 ;
-}
-ul.slotlist ul ul li > div .slotcontent {
-  padding-left:$slugindent * 3 + $generalindent;
-}
-
-ul.slotlist ul ul ul li > div .slot {
-  padding-left:$slugindent * 4 ;
-}
-ul.slotlist ul ul ul li > div .slotcontent {
-  padding-left:$slugindent * 4 + $generalindent;
-}
-
-ul.slotlist li > div .slot {
-  padding-left:$slugindent;
-}
-ul.slotlist li > div .slotcontent {
-  padding-left:$slugindent + $generalindent;
-}
-
-ul.slotlist ul li > div .slot {
-  padding-left:$slugindent * 2 ;
-}
 ul.slotlist ul li > div .slotcontent {
   padding-left:$slugindent * 2 + $generalindent;
 }
@@ -1337,6 +1322,7 @@ ul.slotlist ul ul ul li > div .slotcontent {
 ul.slotlist ul ul ul ul li > div .slot {
   padding-left:$slugindent * 5 ;
 }
+
 ul.slotlist ul ul ul ul li > div .slotcontent {
   padding-left:$slugindent * 5 + $generalindent;
 }
@@ -1344,14 +1330,15 @@ ul.slotlist ul ul ul ul li > div .slotcontent {
 ul.slotlist ul ul ul ul ul li > div .slot {
   padding-left:$slugindent * 6 ;
 }
+
 ul.slotlist ul ul ul ul ul li > div .slotcontent {
   padding-left:$slugindent * 6 + $generalindent;
 }
 
-
 ul.slotlist ul ul ul ul ul ul li > div .slot {
   padding-left:$slugindent * 7 ;
 }
+
 ul.slotlist ul ul ul ul ul ul li > div .slotcontent {
   padding-left:$slugindent * 7 + 22;
 }
@@ -1463,7 +1450,7 @@ ul.slugtree {
   width: 16px;
   height: 16px;
   padding: 0 0 0 0;
-  margin: 6px 0 0 0;
+  margin: 6px 4px 0 0;
   cursor:pointer;
   &.in {
     /* for firefox, safari, chrome, etc. */
@@ -1492,17 +1479,29 @@ ul.slugtree {
   &.risk {
     background-image: url("../images/icons/grcicons/enddot-risk.png");
   }
+  &.system {
+    background-image: url("../images/icons/grcicons/enddot-system.png");
+  }
+  &.regulation {
+    background-image: url("../images/icons/grcicons/enddot-regulation.png");
+  }
+  &.control {
+    background-image: url("../images/icons/grcicons/enddot-control.png");
+  }
 }
 
 .doubleslot {
   .enddot {
     margin: 6px 4px 4px 0;
   }
+  .btn-slotcolumn{
+    margin: -6px 0 0 0;
+  }
   .slotowner {
-    line-height:30px;
+    line-height:26px;
   }
   .slotactions {
-    line-height:27px;
+    line-height:22px;
   }
 }
 
@@ -1600,6 +1599,12 @@ margin-top:5px;
   margin-bottom: 0px;
   font-size: 13px;
   line-height: 13px;
+}
+.juke-left {
+  margin-right:7px;
+}
+.juke-down {
+  margin-top:6px;
 }
 
 .morewell {
@@ -2051,7 +2056,7 @@ h4 > .btn, .minibtn {
 textarea {
   resize:vertical;
   max-height:300px;
-  height:70px !important;
+  // height:70px !important;
   .slugtree & {
     height:100px;
   }
@@ -2420,14 +2425,30 @@ body .container {
   padding:0;
   background-position: 0px 0px;
   background-repeat: no-repeat;
+  &.system {
+    background-image: url("../images/icons/navbar-plus-system.png");
+  }
+  &.product {
+    background-image: url("../images/icons/navbar-plus-product.png");
+  }
+  &.process {
+    background-image: url("../images/icons/navbar-plus-process.png");
+  }
+  &.regulation {
+    background-image: url("../images/icons/navbar-plus-process.png");
+  }
+  &.control {
+    background-image: url("../images/icons/navbar-plus-control.png");
+  }
   &:hover {
     background-image: url("../images/navbarplus_on.png");
   }
 }
 
 
-/* Almost certainly legacy - this was used to create a grid before we adopted bootstrap (OR to overwrite bootstrap when it was being messy)
+/* Certainly legacy - this was used to create a grid before we adopted bootstrap (OR to overwrite bootstrap when it was being messy)
 
+However, we can't remove this until the slots in question are refactored to row-fluids. 
 */
 
 .regulationslot {
@@ -2530,5 +2551,15 @@ body .container {
 .row-fluid-alternating-background-colors {
   > .row-fluid:nth-child(even) {
     @include background-image(linear-gradient(top,  #dddddd 0%, #eef4ed 70%, #edebe6 100%, #f6f6f6 100%));
+  }
+}
+
+.modal-categories {
+  .controlSlot {
+    padding-bottom:0;
+  }
+  .controls-subgroup {
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 }

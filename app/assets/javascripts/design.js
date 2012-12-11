@@ -93,6 +93,8 @@ jQuery(function ($) {
   renderExternalTmpl({ name: 'examplelinkedcontrols', selector: '#samplelinkedcontrols', data: {} });
   renderExternalTmpl({ name: 'exampleprogramsections', selector: '#sampleprogramsections', data: {} });
 
+  renderExternalTmpl({ name: 'examplesystems', selector: '#samplesystems', data: {} });
+
 
 
   $(document).on("click", "#expand_all", function(event) {
@@ -160,12 +162,10 @@ jQuery(function ($) {
     $('#referenceList').append("<li class='controlSlot'><a href='#'><div class='circle fltrt'><i class='gcmssmallicon-dash-white'></i></div></a><span class='controls-group'>Reference Type</span><br /><span class='controls-subgroup'>Reference Item</span></li>");
   });
 
-  //$(".collapse").collapse();
   $('#quicklinks a:last').tab('show');
 
   $('#myLock a').click(function (e) {
       e.preventDefault();
-      alert("here");
       $('#programinformationLocked').tab('hide');
       $('#programinformationUnlocked').tab('show');
   });
@@ -173,15 +173,43 @@ jQuery(function ($) {
   for (i=0;i<=50;i++) {
     $('#tooltip' + i).tooltip();
   }
-//div[class*='tocolor-']
   
-  $("div[class*='-summary']").on('click', function () {
-    alert("ping");
-      $this.closest("div[class*='-more']").collapse('hide');
-})
+//if includes a xpander we need to toggle it.
+$('body').on('click', '.gcmsicon-more', function(e) {
+  //bootstrap data toggle opens this one up, but ...
+  
+  e.preventDefault();
+
+  //var title = $("em").attr("data-target");
+
+  var $this = $(this),
+    slotcontent = $this.closest(".slot").find(".slottitle").attr("data-target"),
+    $thisexpander = $this.closest(".slot").find(".expander");
+
+    if (! $thisexpander.hasClass('in')) {
+
+      $thisexpander.addClass('in');
+      $(slotcontent).collapse('show');
+    } else if ($thisexpander) {
+      //$thisexpander.removeClass('in');
+      //$(slotcontent).collapse('hide');
+
+    }
 
 
 
+  $("[id$=-more]").each(function(i){
+      var el = $(this);
+      if (el.hasClass("in")) {
+        //its open close it!  
+        el.collapse('hide');
+      } else { 
+        //its already closed, relax. 
+        // We have an isue with items on their way to closing and you clicked another, so checking for animating...
+        el.filter(":animated").toggleClass("in");
+      }
+  });
+});
 
   // show/hide widget
 
@@ -379,11 +407,6 @@ jQuery(function ($) {
         $companyfilters = $this.closest(".modal-body").find(".filter-group"),
         $searchableLists = $this.closest(".modal-body").find(".filter-block .people-list");
         
-    //if( $this.hasClass("active") ) {
-      //$filters.hide();
-      //$this.removeClass("active");        
-      //$searchableLists.removeClass("short");
-    //} else {
       $categoryfilters.show();
       $companyfilters.hide();
       $this.addClass("active");

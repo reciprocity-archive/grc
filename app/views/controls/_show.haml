@@ -16,21 +16,21 @@
     .span12
       .span4
         %label Code
-        %input.inputtext-small{:type => "text", :disabled => "disabled", :value => control.slug}
+        %input.span12{:type => "text", :disabled => "disabled", :value => control.slug}
       .span4
         %label Effective Date
-        %input.inputtext-small{:type => "text", :disabled => "disabled", :value => control.start_date && control.start_date.strftime("%m/%d/%y")}
+        %input.span12{:type => "text", :disabled => "disabled", :value => control.start_date && control.start_date.strftime("%m/%d/%y")}
   .row-fluid
     .span12
       .span4
         %label Type
-        %input.inputtext-small{:disabled => "disabled", :type => "text", :value => control.type && control.type.title}
+        %input.span12{:disabled => "disabled", :type => "text", :value => control.type && control.type.title}
       .span4
         %label Kind
-        %input.inputtext-small{:disabled => "disabled", :type => "text", :value => control.kind && control.kind.title}
+        %input.span12{:disabled => "disabled", :type => "text", :value => control.kind && control.kind.title}
       .span4
         %label Means of Operation
-        %input.inputtext-small{:disabled => "disabled", :type => "text", :value => control.means && control.means.title}
+        %input.span12{:disabled => "disabled", :type => "text", :value => control.means && control.means.title}
   .row-fluid
     .span12
       %label Full Title
@@ -38,10 +38,10 @@
   .row-fluid
     .span4
       %label Version
-      %input.inputtext-small{:disabled => "disabled", :type => "text"}
+      %input.span12{:disabled => "disabled", :type => "text"}
     .span4
       %label Status
-      %input.inputtext-small{:disabled => "disabled", :type => "text"}
+      %input.span12{:disabled => "disabled", :type => "text"}
   .row-fluid
     .span12
       %label Description
