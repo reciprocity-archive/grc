@@ -98,7 +98,6 @@ box-shadow: rgba(255, 255, 255, 0.199219) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0
 color: white;
 display: inline-block;
 float: none;
-font-family: 'PT Sans', Helvetica, Arial, Tahoma, Verdana, sans-serif;
 font-size: 16px;
 height: 18px;
 line-height: 18px;
@@ -298,8 +297,6 @@ width: 97px;
   position:relative;
 }
 
-
-
 /* Height attributes that should be applied to WidgetBox only */
 
 /* Goal is to specify height outside of the widgetbox */
@@ -316,27 +313,15 @@ width: 97px;
 
 .fullHeight > .WidgetBox > .WidgetBoxContent {
   position:relative;
-  min-height:265px;
+  min-height:100px;
   max-height:550px;
-  // TODO: decide which .WidgetBox descendent should be scrollable
-  //overflow-y:auto;
-  //overflow-x:hidden;*/
 }
 
 /* Required `height` setting to trigger overflow scrolling in tab content */
 .fullHeight > .WidgetBox > .WidgetBoxContent .tab-pane {
-  max-height: 535px;
+  //max-height: 535px;
 }
 
-/*
-.singleWide > .WidgetBox > .WidgetBoxContent {
-  width:346px;
-}
-
-.doubleWide > .WidgetBox > .WidgetBoxContent {
-  width:720px;
-}
-*/
 
 .WidgetBoxContent {
   background: #f5f5f5;

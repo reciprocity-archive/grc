@@ -36,6 +36,20 @@
         -else
           %label Demo features are currently off. 
     .singleColumn
+      #productInfo.WidgetBox
+        .WidgetBoxHeading
+          .WidgetTitle Imp/Export Actions
+        .WidgetBoxContent.information
+          .toolbar-widget
+            .row-fluid
+              .span6
+                %a.span12.btn.btn-warning{:href => "/systems/import"}
+                  Import Systems
+              .span6
+                %a.span12.btn.btn-warning{"data-toggle" => "modal-ajax", :href => "/systems/export.html"}
+                  Export Systems
+
+    .singleColumn
       -if has_feature? :BETA
       
         / in progress
