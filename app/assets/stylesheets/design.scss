@@ -54,11 +54,11 @@
       background:#f0f0f0;
       @include box-shadow(inset 0px 0 4px #ccc);
       .filters-box {
-        background:$darkGray;
+        background:#777;
         color:$white;
         padding:0 10px 10px 10px;
         @include border-radius();
-        @include box-shadow(inset 0px 0 4px #444);
+        @include box-shadow(inset 0px 0 4px #555);
         label {
           color:$white;
           text-shadow:none;
