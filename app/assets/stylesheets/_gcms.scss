@@ -790,7 +790,7 @@ nav {
   color: #aaa;
   font-size: 11px;
   line-height: 1;
-  margin-right: 7px;
+  margin-right: 9px;
   text-align: right;
 }
 
@@ -863,8 +863,8 @@ nav {
   list-style: none;
 }
 
-.userInfo-nav {
-margin: 2px 0 0 0;
+.userInfo-nav{
+margin: 3px 0px 0 0;
 padding: 0 0 0 0;
 }
 
@@ -908,7 +908,6 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
 .navbar {
   border-bottom:3px solid #ccc;
   
-  
   .brand {
     display: inline-block;
     float: left;
@@ -925,7 +924,7 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
 .navbar-secondinner {
   height:54px;
   padding: 4px 0 0 5px;
-  //Arial this large looks too padded, lets ue a Google Font for Headers.
+  //Arial this large looks too padded, lets use a Google Font for Headers.
   font-family: 'Titillium Web', Arial, Helvetica;
 }
 
@@ -945,15 +944,15 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
 .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {
   // Forced size, not responsive
   width: 1120px;
-  padding:0 15px 0 15px;
+  padding: 0 15px 0 15px;
 }
 
 .headerleft {
-  max-width:502px;
-  min-width:251px;
+  max-width: 502px;
+  min-width: 251px;
   float: left;
   margin-left: 0px;
-  padding-top:2px;
+  padding-top: 2px;
 }
 
 .headercenter {
