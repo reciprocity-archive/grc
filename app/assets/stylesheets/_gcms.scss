@@ -1477,15 +1477,27 @@ ul.slugtree {
   &.risk {
     background-image: url("../images/grcicons/enddot-risk.png");
   }
+  &.decline {
+    background-image: url("../images/grcicons/enddot-risk.png");
+  }
   &.system {
     background-image: url("../images/grcicons/enddot-system.png");
   }
   &.regulation {
     background-image: url("../images/grcicons/enddot-regulation.png");
   }
+  &.accept {
+    background-image: url("../images/grcicons/enddot-regulation.png");
+  }
+
   &.control {
     background-image: url("../images/grcicons/enddot-control.png");
   }
+  &.default {
+    background-image: url("../images/grcicons/enddot-default.png");
+  }
+  
+  
 }
 
 .doubleslot {

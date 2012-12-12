@@ -24,27 +24,43 @@
           PBC Request List
       .widget-filters
         .row-fluid
-          .span5.widget-titles
+          .span4.widget-titles
             .row-fluid
-              .span12
+              .span6
+                %label Program
+                %h4 SOX Sarbanes Oxley
+              .span6
                 %label Title
-                %h4 Lorem ipsum Audit
+                %h4 EY Google SOX PBC List
             .row-fluid
               .span4
                 %label Audit Firm
                 %h4 Ernst &amp; Young
               .span4
-                %label Audit Contact
+                %label Audit Lead
                 %h4 Paul Harvey
               .span4
                 %label List Import Date
                 %h4 06/10/12
-          .span7
+          .span2
             .filters-box
               .row-fluid
                 .span12.title-row
                   %label
-                    %strong Filter Requests
+                    %strong Sort By
+              .row-fluid                
+                .span12
+                  %label
+                    Choose
+                  %select.span12
+                    %option{:selected => "selected"} Control Code
+                    %option Request Date
+          .span6
+            .filters-box
+              .row-fluid
+                .span12.title-row
+                  %label
+                    %strong Filter by
               .row-fluid
                 .span3
                   %label
@@ -74,17 +90,36 @@
                       $('#datepicker-control-date').datepicker();
                 .span1
                   %label &nbsp;
-                  %button.btn.span12 Clear
+                  %button.btn.span12
+                    %i.grcicon-remove
       .widget-body
         .row-fluid
           .span12
             %h3.pbc-title
-              Request
               %a.btn.btn-mini
                 %i.grcicon-add
+              Requests
                       
         %ul.pbc-responses
           %li.main-item
+            .pbc-request-title-area
+              .item
+                .row-fluid
+                  .span2
+                    SOX-CON-1
+                  .span7
+                    Goog-Con-23
+                    &nbsp;&nbsp;
+                    Physically Protect Stored Data
+                  .span3
+                    %a.btn.btn-mini
+                      %i.enddot.default
+                    %a.btn.btn-mini
+                      %i.enddot.default
+                    %a.btn.btn-mini
+                      %i.enddot.accept
+                    %a.btn.btn-mini
+                      %i.enddot.decline
             .row-fluid.pbc-header
               .span3
                 Control and Description from PBC
@@ -106,6 +141,11 @@
                   Con-334 Contol Title
                 %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
               .span2.pbc-item.pbc-request
+                %select.span12
+                  %option{:selected => "selected"} Documentation
+                  %option Open - Interview
+                  %option Open - Population
+                  %option Completed
                 %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
               .span2.pbc-item.pbc-test
                 %p Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
@@ -120,220 +160,10 @@
                 %p
                   %strong Company:
                   Joss Rayburn
-                %p.subtle
-                  %strong Requested:
-                  04/22/12
-              .span1.pbc-item.pbc-actions
-                %a.btn.btn-mini
-                  %i.grcicon-edit-grey
-            .row-fluid            
-              .span12 
-                %h3.pbc-title
-                  Responses
-                  %a.btn.btn-mini
-                    %i.grcicon-add
-                %ul.items-list
-                  %li.item.i-process
-                    .row-fluid
-                      .span11
-                        %input.span12{:type => "text", :placeholder => "Enter process name"}
-                      .span1.pbc-item.pbc-actions
-                        %a.btn.btn-mini
-                          %i.grcicon-edit-grey
-                    .row-fluid
-                      .span6
-                        %label
-                          %strong Process Description
-                        %textarea.span12{:rows => "1", :placeholder => "Enter process description"}
-                        %label
-                          %strong Process Notes
-                        %textarea.span12{:rows => "1", :placeholder => "Enter process notes"}
-                      .span3
-                        %label
-                          %strong People
-                        %ul.pbc-item-list
-                          %li
-                            %a.btn.btn-nano
-                              %i.grcicon-add
-                            %a{:href => "#"}  Add new person
-                      .span3
-                        %label
-                          %strong Documents
-                        %ul.pbc-item-list
-                          %li
-                            %a.btn.btn-nano
-                              %i.grcicon-add
-                            %a{:href => "#"}  Add new document                          
-                  %li.item.i-process
-                    .row-fluid
-                      .span11
-                        Proc-89 Accounts Security Policy Review
-                      .span1.pbc-item.pbc-actions
-                        %a.btn.btn-mini
-                          %i.grcicon-edit-grey
-                    .row-fluid
-                      .span6
-                        %label
-                          %strong Process Description
-                        %p.full-view
-                          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        %label
-                          %strong Process Notes
-                        %p.full-view
-                          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                      .span3
-                        %label
-                          %strong People
-                        %ul.pbc-item-list
-                          %li
-                            %a.btn.btn-nano.pull-right
-
-                              %i.grcicon-edit-grey
-                            %a{:href => "#"} Dan Waterson (Responsible Party)
-                          %li
-                            %a.btn.btn-nano
-                              %i.grcicon-add
-                            %a{:href => "#"}  Add new person
-                      .span3
-                        %label
-                          %strong Documents
-                        %ul.pbc-item-list
-                          %li
-                            %a.btn.btn-nano.pull-right
-                              %i.grcicon-edit-grey
-                            %a{:href => "#"} Document Policy
-                          %li
-                            %a.btn.btn-nano.pull-right
-                              %i.grcicon-edit-grey
-                            %a{:href => "#"} Document Policy 2
-                          %li
-                            %a.btn.btn-nano
-                              %i.grcicon-add
-                            %a{:href => "#"}  Add new document                            
-                  %li.item.i-process
-                    .row-fluid
-                      .span11
-                        Proc-87 Population Request Type Process
-                      .span1.pbc-item.pbc-actions
-                        %a.btn.btn-mini
-                          %i.grcicon-edit-grey
-                    .row-fluid
-                      .span6
-                        %label
-                          %strong Process Description
-                        %p.full-view
-                          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        %label
-                          %strong Process Notes
-                        %p.full-view
-                          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                      .span3
-                        %label
-                          %strong People
-                        %ul.pbc-item-list
-                          %li
-                            %a.btn.btn-nano.pull-right
-                              %i.grcicon-edit-grey
-                            %a{:href => "#"} Dan Waterson (Responsible Party)
-                          %li
-                            %a.btn.btn-nano
-                              %i.grcicon-add
-                            %a{:href => "#"}  Add new person
-                      .span3
-                        %label
-                          %strong Description
-                        %ul.pbc-item-list
-                          %li
-                            %a.btn.btn-nano.pull-right
-                              %i.grcicon-edit-grey
-                            %a{:href => "#"} Population Description
-                          %li
-                            %a.btn.btn-nano.pull-right
-                              %i.grcicon-edit-grey
-                            %a{:href => "#"} Sample Description
-
-                  %li.item.i-process
-                    .row-fluid
-                      .span11
-                        Proc-90 Interview Request Type Process
-                      .span1.pbc-item.pbc-actions
-                        %a.btn.btn-mini
-                          %i.grcicon-edit-grey
-                    .row-fluid
-                      .span6
-                        %label
-                          %strong Process Description
-                        %p.full-view
-                          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        %label
-                          %strong Process Notes
-                        %p.full-view
-                          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                      .span3
-                        %label
-                          %strong People
-                        %ul.pbc-item-list
-                          %li
-                            %a.btn.btn-nano.pull-right
-                              %i.grcicon-edit-grey
-                            %a{:href => "#"} Dan Waterson (Responsible Party)
-                          %li
-                            %a.btn.btn-nano
-                              %i.grcicon-add
-                            %a{:href => "#"}  Add new person
-                      .span3
-                        %label
-                          %strong Meeting Events
-                        %ul.pbc-item-list
-                          %li
-                            %a.btn.btn-nano.pull-right
-                              %i.grcicon-edit-grey
-                            %a{:href => "#"} 2012-10-11 - First Interview
-                          %li
-                            %a.btn.btn-nano.pull-right
-                              %i.grcicon-edit-grey
-                            %a{:href => "#"} 2012-12-01 - Last Interview
-                          %li
-                            %a.btn.btn-nano
-                              %i.grcicon-add
-                            %a{:href => "#"}  Add new meeting event                  
-          %li.main-item
-            .row-fluid.pbc-header
-              .span3
-                Control and Description from PBC
-              .span2
-                Request
-              .span2
-                Test
-              .span2
-                Notes
-              .span2
-                Status
-              .span1
-                &nbsp;
-            .row-fluid
-              .span3.pbc-item.pbc-control
-                %a.btn.btn-mini.pull-right
-                  %i.grcicon-link                
-                .item.i-control
-                  Con-334 Contol Title
-                %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-              .span2.pbc-item.pbc-request
-                %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-              .span2.pbc-item.pbc-test
-                %p Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-              .span2.pbc-item.pbc-notes
-                %textarea.span12{:rows => "4"}
-                  Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.  
-              .span2.pbc-item.pbc-status
-                %select.span12
-                  %option{:selected => "selected"} Draft
-                  %option Open - Waiting Compliance
-                  %option Open - Waiting Auditors
-                  %option Completed
-                %p
-                  %strong Company:
+                  %br
+                  %strong Auditor:
                   Joss Rayburn
+
                 %p.subtle
                   %strong Requested:
                   04/22/12
@@ -510,4 +340,4 @@
                           %li
                             %a.btn.btn-nano
                               %i.grcicon-add
-                            %a{:href => "#"}  Add new meeting event                  
+                            %a{:href => "#"}  Add new meeting event

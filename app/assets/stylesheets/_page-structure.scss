@@ -13,8 +13,45 @@
   }
 }
 
+.pbc-request,
+.pbc-status {
+  select {
+    display:block;
+    float:none;
+    margin-bottom:14px !important;
+    padding:2px;
+    height:auto !important;
+    min-height:auto !important;
+  }
+}
+
+.pbc-request-title-area {
+  .item {
+    margin-bottom:8px;
+    padding:4px 6px;
+    [class*="span"] {
+      min-height:0;
+    }
+  }
+  .btn {
+    margin-left:5px;
+    margin-right:5px;
+  }
+  .enddot {
+    background-color:$white;
+    margin-top:0;
+  }
+}
+
 .pbc-title {
-  padding-bottom:8px;
+  border:1px solid $borderDefault;
+  @include border-radius();
+  margin-bottom:4px;
+  padding:2px 10px;
+  .btn {
+    float:right;
+    margin-top:2px;
+  }
 }
 
 ul.pbc-responses {
