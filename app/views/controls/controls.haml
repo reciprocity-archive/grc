@@ -12,6 +12,6 @@
           %span.prefix
             =prefix
             =item.slug
-          =item.title || item.description
+          =item.title || strip_tags(item.description)
       .row-fluid-slotcontent.collapse{ :id => content_id }
-        %p=raw item.description
+        =raw item.description

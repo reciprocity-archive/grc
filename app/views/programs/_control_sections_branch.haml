@@ -8,7 +8,7 @@
           /-if !system.description.blank?
           .expander{ :class => expanded && 'in' }
           %span.prefix=item.slug
-          =item.title || item.description
+          =item.title || strip_tags(item.description)
         -#.controllist.attached.span3{ :class => "statusblue" }
           dunno
       .row-fluid-slotcontent

@@ -16,7 +16,7 @@
             .span12.slot.controlslot{ :'data-toggle' => 'collapse', :'data-target' => "##{content_id}" }
               .expander
               %span.prefix=item.slug
-              =item.title || item.description
+              =item.title || strip_tags(item.description)
         .row-fluid-slotcontent.collapse{ :id => content_id }
           .span12
             =raw item.description
