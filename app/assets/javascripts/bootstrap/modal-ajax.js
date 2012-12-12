@@ -9,7 +9,7 @@
       [ '<div class="modal-header">'
       , '  <nav>'
       , '    <a class="widgetbtn" href="#" data-dismiss="modal">'
-      , '      <i class="gcmsicon-x-grey"></i>'
+      , '      <i class="grcicon-x-grey"></i>'
       , '    </a>'
       , '  </nav>'
       , '  <h1>Loading...</h1>'

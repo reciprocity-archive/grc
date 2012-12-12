@@ -46,6 +46,15 @@
     background:$bgndWidget;
     border:1px solid darken($bgndDefault, 10%);
 
+    .widget-titles {
+      label {
+        margin:0;
+      }
+      h4 {
+        margin:0 0 8px 0;
+      }
+    }
+
     .widget-filters {
       border-top:1px solid #ffffff;
       padding:10px;

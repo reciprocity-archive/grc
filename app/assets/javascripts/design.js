@@ -111,8 +111,8 @@ jQuery(function ($) {
 
   /*Checkbutton in modals widget function*/
   $(document).on("click", ".checkbutton", function(event) {
-    $(this).children("i").toggleClass("gcmsicon-blank");
-    $(this).children("i").toggleClass("gcmsicon-x-grey");
+    $(this).children("i").toggleClass("grcicon-blank");
+    $(this).children("i").toggleClass("grcicon-x-grey");
   });
 
   /*Toggle widget function*/
@@ -175,7 +175,7 @@ jQuery(function ($) {
   }
   
 //if includes a xpander we need to toggle it.
-$('body').on('click', '.gcmsicon-more', function(e) {
+$('body').on('click', '.grcicon-more', function(e) {
   //bootstrap data toggle opens this one up, but ...
   
   e.preventDefault();
@@ -326,7 +326,7 @@ $('body').on('click', '.gcmsicon-more', function(e) {
       .removeClass("grcicon-chevron-right")
       .addClass("grcicon-check-green")
     $target
-      .prepend('<li class="new-item"> <div class="row-fluid"> <div class="span6"> <span class="company">' + $company + '</span> <span class="name">'+ $name +'</span> </div> <div class="span6 actions">  <a class="widgetbtn pull-right" id="removeMe" href="#"> <i class="icon-minus-sign"></i> </a> <a class="widgetbtn pull-right" href="#"> <i class="gcmsicon-edit-grey"></i> </a> ' + $item2add + '</div> </div>' + $additionalinfo +' </div> </li>')
+      .prepend('<li class="new-item"> <div class="row-fluid"> <div class="span6"> <span class="company">' + $company + '</span> <span class="name">'+ $name +'</span> </div> <div class="span6 actions">  <a class="widgetbtn pull-right" id="removeMe" href="#"> <i class="grcicon-remove"></i> </a> <a class="widgetbtn pull-right" href="#"> <i class="grcicon-edit-grey"></i> </a> ' + $item2add + '</div> </div>' + $additionalinfo +' </div> </li>')
       .find("li.new-item").hide().fadeIn('slow').removeClass("new-item");  
     $unassignedItems
       .html($unassignedValue + 1).fadeIn();

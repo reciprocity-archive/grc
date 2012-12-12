@@ -20,7 +20,7 @@
       -#%link(href='https://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css')
     %link(href='/favicon.ico' rel='icon' type='image/x-icon')
     :javascript
-      jQuery(function($) { $('head').append("<link href='https://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'></link>"); });
+      jQuery(function($) { $('head').append("<link href='https://fonts.googleapis.com/css?family=Titillium+Web' rel='stylesheet' type='text/css'></link>"); });
 
   %body{ :class => "#{has_feature?(:BETA) ? 'BETA' : ''}" }
     .navbar.navbar-fixed-top
@@ -56,7 +56,7 @@
                 .btn-group
                   -# should find their site path back, jvg hack
                   %a.btn{ :onclick => 'history.back(); return false;'  }
-                    %i.gcmsicon-back-black
+                    %i.grcicon-back-black
                     Back
               -help_path = yield(:page_help)
               -if !help_path.blank?

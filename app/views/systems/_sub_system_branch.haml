@@ -7,7 +7,7 @@
         .span12.slot.subsystemslot{ :'data-toggle' => 'collapse', :'data-target' => "#content_system_#{system.id}" }
           .expander{ :class => expanded && 'in' }
           %a.widgetbtn.fltrt{ :href => flow_system_path(system) }
-            %i.gcmsicon-arrowright-grey
+            %i.grcicon-arrowright-grey
           %span.prefix=system.slug
           =system.title || system.description
       .row-fluid-slotcontent.collapse{ :id => "content_system_#{system.id}" }
@@ -20,7 +20,7 @@
             .span12.slot.controlslot{ :'data-toggle' => 'collapse', :'data-target' => "#content_item_#{item.id}" }
               .expander
               %a.widgetbtn.fltrt{ :href => flow_control_path(item) }
-                %i.gcmsicon-arrowright-grey
+                %i.grcicon-arrowright-grey
               %span.prefix=item.slug
               =item.title || item.description
           .row-fluid-slotcontent.collapse{ :id => "content_item_#{item.id}" }

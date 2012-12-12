@@ -3,9 +3,9 @@
     -help_path = yield_content!(:modal_help)
     -if !help_path.blank?
       %a.widgetbtn{ :href => "/help/#{help_path}", :'data-toggle' => 'modal-ajax', :title => "Help - What is this?"}
-        %i.gcmsicon-questionmark-grey
+        %i.grcicon-questionmark-grey
     %a.widgetbtn{ :'data-dismiss' => 'modal', :href => '#'}
-      %i.gcmsicon-x-grey
+      %i.grcicon-x-grey
   %h1=yield_content!(:modal_title) || "&nbsp;".html_safe
 
 .modal-body.cleanlabels.compact-rows
@@ -24,13 +24,13 @@
     -if has_feature?(:BETA) && !f.object.new_record?
       .toolbar-widget.span6.demoText
         %a.btn{:href => "#", :'data-toggle' => 'version-prev'}
-          %i.gcmsicon-arrowleft-black
+          %i.grcicon-arrowleft-black
         %span.btnwell
           Showing Most Recent of
           %strong=f.object.versions.count
           Revisions
         %a.btn{:href => "#", :'data-toggle' => 'version-next'}
-          %i.gcmsicon-arrowright-black
+          %i.grcicon-arrowright-black
     %nav.fltrt.txtrt.span3
       %a.btn.btn-large.btn-success{:'data-toggle' => 'modal-submit', :href => '#' } Save
       -approve_path = yield_content!(:modal_approve_path)

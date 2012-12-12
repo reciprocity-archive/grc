@@ -32,7 +32,7 @@
           %a.slotowner{:href => "#"} Owner Joe
       .slotactions.pull-right
         %a.btn.btn-mini.btn-blue.halfopacity{ "data-target" => "##{id_prefix}-summary", "data-toggle" => "collapse", "rel" => "tooltip", "data-placement" => "left", "title" => "More" }
-          %i.gcmsicon-more
+          %i.grcicon-more
 
   .row-fluid.collapse{ :id => summary_toggle_target }
     .span12.morewell.statusblue.nominheight
@@ -40,13 +40,13 @@
         %ul.contentactions.pull-right
           %li
             %a.btn.btn-mini.halfopacity{ :href => list_edit_flow_system_systems_path(:parent_id => system.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :rel => 'tooltip', :title => 'Link systems to this object', :'data-modal-class' => 'modal-wide' }
-              %i.gcmsicon-link
+              %i.grcicon-link
           %li
             %a.btn.btn-mini.halfopacity{ :href => list_edit_flow_system_controls_path(:system_id => system.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :rel => 'tooltip', :title => 'Link controls to this object', :'data-modal-class' => 'modal-wide' }
-              %i.gcmsicon-link
+              %i.grcicon-link
           %li
             %a.btn.btn-mini.halfopacity{ "rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => flow_system_path(system.id) }
-              %i.gcmsicon-arrowright-black
+              %i.grcicon-arrowright-black
         =system.description
 
   .collapse{ :id => objects_toggle_target }
@@ -70,14 +70,14 @@
                   %a.slotowner{:href => "#"} Owner Bob
               .slotactions.pull-right
                 %a.btn.btn-mini.btn-blue.halfopacity{"data-target" => "##{control_id_prefix}-summary", "data-toggle" => "collapse"}
-                  %i.gcmsicon-more
+                  %i.grcicon-more
           .row-fluid.collapse{ :id => control_summary_target }
             .span12.morewell.statusblue.nominheight
               .slotcontent.span12
                 %ul.contentactions.pull-right
                   %li
                     %a.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => flow_control_path(control.id) }
-                      %i.gcmsicon-arrowright-black
+                      %i.grcicon-arrowright-black
                 =control.description
 
     -if !seen_this

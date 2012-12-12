@@ -13,7 +13,7 @@
       .slot.singlecontrolSlot
         .expander
         %a.widgetbtn.fltrt{ :href => flow_transactions_path + '/<%= id %>/edit', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh' }
-          %i.gcmsicon-edit-grey
+          %i.grcicon-edit-grey
         %span.prefix <%= title %>
       .row-fluid-slotcontent.collapse{ :id => "transaction-<%= id %>" }
         .span13
@@ -29,7 +29,7 @@
         .slot.singlecontrolSlot
           .expander
           %a.widgetbtn.fltrt{ :href => edit_flow_transaction_path(item), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh' }
-            %i.gcmsicon-edit-grey
+            %i.grcicon-edit-grey
           %span.prefix=item.title
         .row-fluid-slotcontent.collapse{ :id => "transaction-#{item.id}" }
           .span13

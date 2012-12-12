@@ -17,14 +17,18 @@
       .widget-head
         .widget-actions
           %a.btn.btn-mini{:href => "#"}
-            %i.gcmsicon-edit-grey
+            %i.grcicon-edit-grey
           %a.btn.btn-mini{:href => "#"}
-            %i.gcmsicon-questionmark-grey
+            %i.grcicon-questionmark-grey
         %h2
           PBC Request List
       .widget-filters
         .row-fluid
-          .span4
+          .span5.widget-titles
+            .row-fluid
+              .span12
+                %label Title
+                %h4 Lorem ipsum Audit
             .row-fluid
               .span4
                 %label Audit Firm
@@ -35,7 +39,7 @@
               .span4
                 %label List Import Date
                 %h4 06/10/12
-          .span8
+          .span7
             .filters-box
               .row-fluid
                 .span12.title-row
@@ -72,6 +76,12 @@
                   %label &nbsp;
                   %button.btn.span12 Clear
       .widget-body
+        .row-fluid
+          .span12
+            %h3.pbc-title
+              Request
+              %a.btn.btn-mini
+                %i.grcicon-add
         .pbc-header
           .row-fluid
             .span3
@@ -90,16 +100,9 @@
         %ul.pbc-responses
           %li.main-item
             .row-fluid
-              .span12
-                %h3.pbc-title
-                  Request
-                  %a.btn.btn-mini
-                    %i.gcmsicon-add
-                  
-            .row-fluid
               .span3.pbc-item.pbc-control
                 %a.btn.btn-mini.pull-right
-                  %i.gcmsicon-link                
+                  %i.grcicon-link                
                 .item.i-control
                   Con-334 Contol Title
                 %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
@@ -123,13 +126,13 @@
                   04/22/12
               .span1.pbc-item.pbc-actions
                 %a.btn.btn-mini
-                  %i.gcmsicon-edit-grey
+                  %i.grcicon-edit-grey
             .row-fluid            
               .span12 
                 %h3.pbc-title
                   Responses
                   %a.btn.btn-mini
-                    %i.gcmsicon-add
+                    %i.grcicon-add
                 %ul.items-list
                   %li.item.i-process
                     .row-fluid
@@ -137,7 +140,7 @@
                         %input.span12{:type => "text", :placeholder => "Enter process name"}
                       .span1.pbc-item.pbc-actions
                         %a.btn.btn-mini
-                          %i.gcmsicon-edit-grey
+                          %i.grcicon-edit-grey
                     .row-fluid
                       .span6
                         %label
@@ -148,27 +151,27 @@
                         %textarea.span12{:rows => "1", :placeholder => "Enter process notes"}
                       .span3
                         %label
-                          %strong Documents
-                        %ul.pbc-item-list
-                          %li
-                            %a.btn.btn-nano
-                              %i.gcmsicon-add
-                            %a{:href => "#"}  Add new document                          
-                      .span3
-                        %label
                           %strong People
                         %ul.pbc-item-list
                           %li
                             %a.btn.btn-nano
-                              %i.gcmsicon-add
+                              %i.grcicon-add
                             %a{:href => "#"}  Add new person
+                      .span3
+                        %label
+                          %strong Documents
+                        %ul.pbc-item-list
+                          %li
+                            %a.btn.btn-nano
+                              %i.grcicon-add
+                            %a{:href => "#"}  Add new document                          
                   %li.item.i-process
                     .row-fluid
                       .span11
                         Proc-89 Accounts Security Policy Review
                       .span1.pbc-item.pbc-actions
                         %a.btn.btn-mini
-                          %i.gcmsicon-edit-grey
+                          %i.grcicon-edit-grey
                     .row-fluid
                       .span6
                         %label
@@ -179,41 +182,42 @@
                           %strong Process Notes
                         %p.full-view
                           Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      .span3
+                        %label
+                          %strong People
+                        %ul.pbc-item-list
+                          %li
+                            %a.btn.btn-nano.pull-right
+
+                              %i.grcicon-edit-grey
+                            %a{:href => "#"} Dan Waterson (Responsible Party)
+                          %li
+                            %a.btn.btn-nano
+                              %i.grcicon-add
+                            %a{:href => "#"}  Add new person
                       .span3
                         %label
                           %strong Documents
                         %ul.pbc-item-list
                           %li
                             %a.btn.btn-nano.pull-right
-                              %i.gcmsicon-edit-grey
+                              %i.grcicon-edit-grey
                             %a{:href => "#"} Document Policy
                           %li
                             %a.btn.btn-nano.pull-right
-                              %i.gcmsicon-edit-grey
+                              %i.grcicon-edit-grey
                             %a{:href => "#"} Document Policy 2
                           %li
                             %a.btn.btn-nano
-                              %i.gcmsicon-add
+                              %i.grcicon-add
                             %a{:href => "#"}  Add new document                            
-                      .span3
-                        %label
-                          %strong People
-                        %ul.pbc-item-list
-                          %li
-                            %a.btn.btn-nano.pull-right
-                              %i.gcmsicon-edit-grey
-                            %a{:href => "#"} Dan Waterson (Responsible Party)
-                          %li
-                            %a.btn.btn-nano
-                              %i.gcmsicon-add
-                            %a{:href => "#"}  Add new person
                   %li.item.i-process
                     .row-fluid
                       .span11
                         Proc-87 Population Request Type Process
                       .span1.pbc-item.pbc-actions
                         %a.btn.btn-mini
-                          %i.gcmsicon-edit-grey
+                          %i.grcicon-edit-grey
                     .row-fluid
                       .span6
                         %label
@@ -230,11 +234,11 @@
                         %ul.pbc-item-list
                           %li
                             %a.btn.btn-nano.pull-right
-                              %i.gcmsicon-edit-grey
+                              %i.grcicon-edit-grey
                             %a{:href => "#"} Dan Waterson (Responsible Party)
                           %li
                             %a.btn.btn-nano
-                              %i.gcmsicon-add
+                              %i.grcicon-add
                             %a{:href => "#"}  Add new person
                       .span3
                         %label
@@ -242,11 +246,11 @@
                         %ul.pbc-item-list
                           %li
                             %a.btn.btn-nano.pull-right
-                              %i.gcmsicon-edit-grey
+                              %i.grcicon-edit-grey
                             %a{:href => "#"} Population Description
                           %li
                             %a.btn.btn-nano.pull-right
-                              %i.gcmsicon-edit-grey
+                              %i.grcicon-edit-grey
                             %a{:href => "#"} Sample Description
 
                   %li.item.i-process
@@ -255,7 +259,7 @@
                         Proc-90 Interview Request Type Process
                       .span1.pbc-item.pbc-actions
                         %a.btn.btn-mini
-                          %i.gcmsicon-edit-grey
+                          %i.grcicon-edit-grey
                     .row-fluid
                       .span6
                         %label
@@ -272,11 +276,11 @@
                         %ul.pbc-item-list
                           %li
                             %a.btn.btn-nano.pull-right
-                              %i.gcmsicon-edit-grey
+                              %i.grcicon-edit-grey
                             %a{:href => "#"} Dan Waterson (Responsible Party)
                           %li
                             %a.btn.btn-nano
-                              %i.gcmsicon-add
+                              %i.grcicon-add
                             %a{:href => "#"}  Add new person
                       .span3
                         %label
@@ -284,13 +288,13 @@
                         %ul.pbc-item-list
                           %li
                             %a.btn.btn-nano.pull-right
-                              %i.gcmsicon-edit-grey
+                              %i.grcicon-edit-grey
                             %a{:href => "#"} 2012-10-11 - First Interview
                           %li
                             %a.btn.btn-nano.pull-right
-                              %i.gcmsicon-edit-grey
+                              %i.grcicon-edit-grey
                             %a{:href => "#"} 2012-12-01 - Last Interview
                           %li
                             %a.btn.btn-nano
-                              %i.gcmsicon-add
+                              %i.grcicon-add
                             %a{:href => "#"}  Add new meeting event                  

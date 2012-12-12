@@ -1,105 +1,38 @@
+/* 
+   Icons are used in a number of places and resolution sizes. 
+   Images are saved at 32pixels, scaled to 16pixels for .widgetbtn, and further scaled for .btn-nano and similar ...
+ */
 
-.gcmsicon-expandAll-grey {
+[class^="grcicon-"], [class^="grcicon-"] {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  @include background-size(16px 16px); 
+  vertical-align: top; //necessary or button with icon embedded will sometimes be to tall.
+  background-position: 0px 0px;
+  background-repeat: no-repeat;
+}
+
+.grcicon-expandAll-grey {
   background-image: url("../images/expandAll.png");
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  margin:0;
-  padding:0;
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
 }
 
-.gcmsicon-shrinkAll-grey {
+.grcicon-shrinkAll-grey {
   background-image: url("../images/shrinkAll.png");
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  margin:0;
-  padding:0;
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
 }
-/* Obsolete - commented out 11/26 for removal 12/26 
-.itemarrow {
-  opacity:.5;
-  background-image: url("../images/icons/icon-itemarrow.png");
-  display: inline-block;
-  position:relative;
-  width: 16px;
-  height: 29px;
-  margin:2px 5px 0 0;
-  padding:0;
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
-  
-  &:hover {
-    opacity:1;
-  }
-} */
 
-.gcmsicon-blank {
+/* Blank can be required to set a button to the correct size */
+.grcicon-blank {
   background-image: none;
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  margin:0;
-  padding:0;
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
 }
 
-
-.gcmsicon-arrowright-white, .gcmsicon-arrowright-grey  {
-  background-image: url("../images/icons/grcicons/gear.png");
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  margin:0;
-  padding:0;
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
+.grcicon-arrowright-white, .grcicon-arrowright-grey  {
+  background-image: url("../images/grcicons/gear.png");
 }
 
-.gcmsicon-gears-white {
-  background-image: url("../images/icons/grcicons/gear.png");
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  margin:0;
-  padding:0;
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
-}
-.gcmsicon-gears-black {
-  background-image: url("../images/icons/grcicons/gear.png");
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  margin:0;
-  padding:0;
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
-}
-.gcmsicon-asterix-white {
-  background-image: url("../images/icons/grcicons/gear.png");
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  margin:0;
-  padding:0;
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
-}
-.gcmsicon-asterix-black {
-  background-image: url("../images/icons/grcicons/gear.png");
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  margin:0;
-  padding:0;
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
+.grcicon-gears {
+  background-image: url("../images/grcicons/gear.png");
 }
 
 .calendar {
@@ -108,307 +41,98 @@
   background-repeat: no-repeat;
 }
 
-.gcmsicon-mapping-white {
-  text-align:center;
-  background-image: url("../images/icons/grcicons/regmapper.png");
-  @include background-size(18px 18px);               
-  display: inline-block;
-  width: 18px;
-  height: 18px;
+.grcicon-mapping-white {
+  background-image: url("../images/grcicons/regmapper.png");
 }
 
-.gcmsicon-import-white {
-  background-image: url("../images/icons/grcicons/import.png");
-  -moz-background-size:16px 16px;
-             -ie-background-size:16px 16px;
-              -o-background-size:16px 16px;
-         -webkit-background-size:16px 16px;
-                 background-size:16px 16px;
-  display: inline-block;
-  width: 16px;
-  height: 16px;
+.grcicon-import-white {
+  background-image: url("../images/grcicons/import.png");
 }
 
-.gcmsicon-play-black {
+.grcicon-play-black {
   background-image: url("../images/icons/icon-play-black.png");
 }
 
-.gcmsicon-mapping-black {
+.grcicon-mapping-black {
   background-image: url("../images/icons/icon-mapping-black.png");
 }
-.gcmsicon-import-black {
+.grcicon-import-black {
   background-image: url("../images/icons/icon-import-black.png");
 }
-.gcmsicon-back-black {
+.grcicon-back-black {
   background-image: url("../images/icons/icon-back-black.png");
 }
 
-
-[class^="gcmsicon-"], [class*=" gcmsicon-"] {
-  display: inline-block;
-  
-  width: 18px;
-  height: 18px;
-  -moz-background-size:18px 18px;
-             -ie-background-size:18px 18px;
-              -o-background-size:16px 18px;
-         -webkit-background-size:18px 18px;
-                 background-size:18px 18px;
-
-  line-height: 18px;
-  vertical-align: top;
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
+.grcicon-enlarge-grey {
+  background-image: url("../images/grcicons/chevrondown.png");
 }
 
-.gcmsicon-enlarge-grey {
-  background-image: url("../images/icons/grcicons/chevrondown.png");
-    -moz-background-size:16px 16px;
-             -ie-background-size:16px 16px;
-              -o-background-size:16px 16px;
-         -webkit-background-size:16px 16px;
-                 background-size:16px 16px;
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  margin:0;
-  padding:0;
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
-}
-
-.gcmsicon-enddot {
-  background-image: url("../images/icons/grcicons/enddot.png");
-    -moz-background-size:16px 16px;
-             -ie-background-size:16px 16px;
-              -o-background-size:16px 16px;
-         -webkit-background-size:16px 16px;
-                 background-size:16px 16px;
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  margin:0;
-  padding:0;
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
-}
 
 .gcmssmallicon-blue-expand {
-  background-image: url("../images/icons/grcicons/chevronleft-blue.png");
-  display: inline-block;
- -moz-background-size:16px 16px;
-             -ie-background-size:16px 16px;
-              -o-background-size:16px 16px;
-         -webkit-background-size:16px 16px;
-                 background-size:16px 16px;
-  width: 16px;
-  height: 16px;
-  margin:0;
-  padding:0;
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
+  background-image: url("../images/grcicons/chevronleft-blue.png");
 }
 
 .grcicon-check-green{
-  background-image: url("../images/icons/grcicons/check-green.png");
-  display: inline-block;
- -moz-background-size:16px 16px;
-             -ie-background-size:16px 16px;
-              -o-background-size:16px 16px;
-         -webkit-background-size:16px 16px;
-                 background-size:16px 16px;
-  width: 16px;
-  height: 16px;
-  margin:0;
-  padding:0;
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
+  background-image: url("../images/grcicons/check-green.png");
 }
 
 .grcicon-chevron-right{
-  background-image: url("../images/icons/grcicons/chevronright.png");
-  display: inline-block;
-  -moz-background-size:16px 16px;
-             -ie-background-size:16px 16px;
-              -o-background-size:16px 16px;
-         -webkit-background-size:16px 16px;
-                 background-size:16px 16px;
-  width: 16px;
-  height: 16px;
-  margin:0;
-  padding:0;
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
+  background-image: url("../images/grcicons/chevronright.png");
 }
 
-.gcmsicon-hidden-blue{
-  background-image: url("../images/icons/grcicons/chevronup.png");
-  display: inline-block;
-  -moz-background-size:16px 16px;
-             -ie-background-size:16px 16px;
-              -o-background-size:16px 16px;
-         -webkit-background-size:16px 16px;
-                 background-size:16px 16px;
-  width: 16px;
-  height: 16px;
-  margin:0;
-  padding:0;
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
+.grcicon-hidden-blue{
+  background-image: url("../images/grcicons/chevronup.png");
 }
 
-.gcmsicon-x-grey {
-  display: inline-block;
-  background-image: url("../images/icons/grcicons/close.png");
-  -moz-background-size:16px 16px;
-             -ie-background-size:16px 16px;
-              -o-background-size:16px 16px;
-         -webkit-background-size:16px 16px;
-                 background-size:16px 16px;
-  width: 16px;
-  height: 16px;
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
+.grcicon-x-grey {
+  background-image: url("../images/grcicons/close.png");
 }
 
-.gcmsicon-more {
-  display: inline-block;
-  background-image: url("../images/icons/grcicons/more.png");
-  -moz-background-size:16px 16px;
-             -ie-background-size:16px 16px;
-              -o-background-size:16px 16px;
-         -webkit-background-size:16px 16px;
-                 background-size:16px 16px;
-  width: 16px;
-  height: 16px;
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
+.grcicon-more {
+  background-image: url("../images/grcicons/more.png");
 }
 
-.gcmsicon-add {
-  display: inline-block;
-  background-image: url("../images/icons/grcicons/add.png");
- -moz-background-size:16px 16px;
-             -ie-background-size:16px 16px;
-              -o-background-size:16px 16px;
-         -webkit-background-size:16px 16px;
-                 background-size:16px 16px;
-  width: 16px;
-  height: 16px;
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
+.grcicon-add {
+  background-image: url("../images/grcicons/add.png");
 }
 
-.gcmsicon-link {
-  display: inline-block;
-  background-image: url("../images/icons/grcicons/link.png");
- -moz-background-size:16px 16px;
-             -ie-background-size:16px 16px;
-              -o-background-size:16px 16px;
-         -webkit-background-size:16px 16px;
-                 background-size:16px 16px;
-  width: 16px;
-  height: 16px;
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
+// replace .grcicon-remove
+
+.grcicon-remove {
+  background-image: url("../images/grcicons/remove.png");
 }
 
-.gcmsicon-questionmark-grey {
-  background-image: url("../images/icons/grcicons/help.png");
-   -moz-background-size:16px 16px;
-             -ie-background-size:16px 16px;
-              -o-background-size:16px 16px;
-         -webkit-background-size:16px 16px;
-                 background-size:16px 16px;
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
+.grcicon-link {
+  background-image: url("../images/grcicons/link.png");
 }
 
-
-.gcmsicon-edit-grey {
-  background-image: url("../images/icons/grcicons/edit.png");
-  display: inline-block;
-  -moz-background-size:16px 16px;
-             -ie-background-size:16px 16px;
-              -o-background-size:16px 16px;
-         -webkit-background-size:16px 16px;
-                 background-size:16px 16px;
-  width: 16px;
-  height: 16px;
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
+.grcicon-questionmark-grey {
+  background-image: url("../images/grcicons/help.png");
 }
-.gcmsicon-edit-white {
+
+.grcicon-edit-grey {
+  background-image: url("../images/grcicons/edit.png");
+}
+
+.grcicon-edit-white {
   background-image: url("../images/icons/icon-edit-white.png");
 }
 
 /* ARROWS */
 
-
-.gcmsicon-arrowleft-black {
-  background-image: url("../images/icons/grcicons/arrowleft.png");
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  -moz-background-size:16px 16px;
-             -ie-background-size:16px 16px;
-              -o-background-size:16px 16px;
-         -webkit-background-size:16px 16px;
-                 background-size:16px 16px;
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
+.grcicon-arrowleft-black {
+  background-image: url("../images/grcicons/arrowleft.png");
 }
 
-.gcmsicon-arrowright-black {
-  background-image: url("../images/icons/grcicons/arrowright.png");
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  -moz-background-size:16px 16px;
-             -ie-background-size:16px 16px;
-              -o-background-size:16px 16px;
-         -webkit-background-size:16px 16px;
-                 background-size:16px 16px;
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
+.grcicon-arrowright-black {
+  background-image: url("../images/grcicons/arrowright.png");
 }
 
 /* 18 pixel icons, mostly for buttons */
 
-
-
-.gcmsicon-back-black{
-  background-image: url("../images/icons/grcicons/arrowleft.png");
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  -moz-background-size:18px 18px;
-             -ie-background-size:18px 18px;
-              -o-background-size:16px 18px;
-         -webkit-background-size:18px 18px;
-                 background-size:18px 18px;
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
+.grcicon-back-black{
+  background-image: url("../images/grcicons/arrowleft.png");
 }
-
-
-.gcmsicon-play-white {
-  background-image: url("../images/icons/grcicons/arrowright-white.png");
-  -moz-background-size:18px 18px;
-             -ie-background-size:18px 18px;
-              -o-background-size:18px 18px;
-         -webkit-background-size:18px 18px;
-                 background-size:18px 18px;
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  margin:0;
-  padding:0;
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
+.grcicon-play-white {
+  background-image: url("../images/grcicons/arrowright-white.png");
 }
-
-

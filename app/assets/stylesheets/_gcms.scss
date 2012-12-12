@@ -925,7 +925,8 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
 .navbar-secondinner {
   height:54px;
   padding: 4px 0 0 5px;
-  /* background-color: $white; */
+  //Arial this large looks too padded, lets ue a Google Font for Headers.
+  font-family: 'Titillium Web', Arial, Helvetica;
 }
 
 .fixed-top .inner,
@@ -942,9 +943,7 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
 }
 
 .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {
-  // TODO: 'SOON' ??
-  // max-width: 1120px;
-  // min-width: 1004px;
+  // Forced size, not responsive
   width: 1120px;
   padding:0 15px 0 15px;
 }
@@ -1099,7 +1098,7 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
       left: 0;
       margin-top: -10px;
       border-top: 10px solid transparent;
-      border-right: 10px solid #43C2C7;
+      border-right: 10px solid #385780;
       border-bottom: 10px solid transparent;
     }
   }
@@ -1119,10 +1118,10 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
     .arrow {
       top: 50%;
       right: 0;
-      margin-top: -5px;
-      border-top: 5px solid transparent;
-      border-bottom: 5px solid transparent;
-      border-left: 5px solid #43C2C7;
+      margin-top: -10px;
+      border-top: 10px solid transparent;
+      border-bottom: 10px solid transparent;
+      border-left: 10px solid #385780;
     }
   }
   .arrow {
@@ -1136,7 +1135,7 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
   width: 350px;
   padding: 3px;
   overflow: hidden;
-  background: #43C2C7;
+  background: #385780;
   @include border-radius(3px);
   @include box-shadow(0 3px 7px rgba(0, 0, 0, 0.3));
 }
@@ -1439,7 +1438,7 @@ ul.slugtree {
 
 .expander {
   position:relative;
-  background-image:url("../images/icons/grcicons/chevronright-blue.png");
+  background-image:url("../images/grcicons/chevronright-blue.png");
   float:left;
   display: inline-block;
   -moz-background-size:16px 16px;
@@ -1463,7 +1462,7 @@ ul.slugtree {
 
 .enddot {
   position:relative;
-  background-image: url("../images/icons/grcicons/enddot.png");
+  background-image: url("../images/grcicons/enddot.png");
   float:left;
   display: inline-block;
   -moz-background-size:16px 16px;
@@ -1477,16 +1476,16 @@ ul.slugtree {
   margin: 6px 0 0 0;
   cursor:pointer;
   &.risk {
-    background-image: url("../images/icons/grcicons/enddot-risk.png");
+    background-image: url("../images/grcicons/enddot-risk.png");
   }
   &.system {
-    background-image: url("../images/icons/grcicons/enddot-system.png");
+    background-image: url("../images/grcicons/enddot-system.png");
   }
   &.regulation {
-    background-image: url("../images/icons/grcicons/enddot-regulation.png");
+    background-image: url("../images/grcicons/enddot-regulation.png");
   }
   &.control {
-    background-image: url("../images/icons/grcicons/enddot-control.png");
+    background-image: url("../images/grcicons/enddot-control.png");
   }
 }
 
@@ -1525,7 +1524,7 @@ ul.slugtree {
 }
 
 .toggleExpanded {
-  background-image: url("../images/icons/grcicons/chevronleft-down.png");
+  background-image: url("../images/grcicons/chevronleft-down.png");
 }
 
 /* Form Items */
@@ -1601,10 +1600,16 @@ margin-top:5px;
   line-height: 13px;
 }
 .juke-left {
-  margin-right:7px;
+
+  // Commented out because it was for some custom placement but is being used everywhere.
+
+  //margin-right:7px;
 }
 .juke-down {
-  margin-top:6px;
+
+  // Commented out because it was for some custom placement but is being used everywhere.
+  
+  //margin-top:6px;
 }
 
 .morewell {

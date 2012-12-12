@@ -34,7 +34,7 @@
           %a.slotowner{:href => "#"} Owner Jim
       .slotactions.pull-right
         %a.btn.btn-mini.btn-blue.halfopacity{ "data-target" => "##{summary_toggle_target}", "data-toggle" => "collapse", "rel" => "tooltip", "data-placement" => "left", "title" => "More" }
-          %i.gcmsicon-more
+          %i.grcicon-more
 
   .row-fluid.collapse{ :id => summary_toggle_target }
     .span12.morewell.statusblue.nominheight
@@ -42,17 +42,17 @@
         %ul.contentactions.pull-right
           %li
             %a.btn.btn-mini.halfopacity{ "rel" => "tooltip", "data-placement" => "left", "title" => "Edit this object", 'data-modal-class' => 'modal-wide', 'data-form-target' => 'refresh', "data-toggle" => "modal-ajax-form", :href => edit_flow_product_path(product.id) }
-              %i.gcmsicon-edit-grey
+              %i.grcicon-edit-grey
           %li
             %a.btn.btn-mini.halfopacity{ :rel => "tooltip", :'data-placement' => "left", :title => "Link products to this object", :'data-modal-class' => 'modal-wide', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :'data-toggle' => "modal-ajax-relationship-selector", :href => list_edit_flow_relationships_path(:object_id => product.id, :object_type => 'Product', :related_model => 'Product', :related_side => 'destination', :relationship_type => 'product_is_dependent_on_product') }
-              %i.gcmsicon-link
+              %i.grcicon-link
           %li
             %a.btn.btn-mini.halfopacity{ :rel => "tooltip", :"data-placement" => "left", :title => "Link processes to this object", :'data-modal-class' => 'modal-wide', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :"data-toggle" => "modal-ajax-relationship-selector", :href => list_edit_flow_relationships_path(:object_id => product.id, :object_type => 'Product', :related_model => 'System', :related_side => 'destination', :relationship_type => 'product_has_process') }
-              %i.gcmsicon-link
+              %i.grcicon-link
           -if !is_root
             %li
               %a.btn.btn-mini.halfopacity{ "rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => flow_product_path(product.id) }
-                %i.gcmsicon-arrowright-black
+                %i.grcicon-arrowright-black
         =product.description
 
   .collapse{ :id => objects_toggle_target }
