@@ -51,7 +51,8 @@
 
 	    	} else {
 	    		this.list = list;
-	    		var x = can.view(this.options.list, $.extend(this.list, { show : this.options.show }));
+	    		this.options.observer = new can.Observe({list : this.list, show : this.options.show });
+	    		var x = can.view(this.options.list, this.options.observer);
 		        this.element.html(x);
 	    	}
 	    }
