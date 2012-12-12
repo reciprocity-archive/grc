@@ -16,7 +16,7 @@
     .widget.governance
       .widget-head
         .widget-actions
-          %a.btn.btn-mini{:href => "#"}
+          %a.btn.btn-mini{"data-toggle" => "modal", :href => "#pbcListEdit"}
             %i.grcicon-edit-grey
           %a.btn.btn-mini{:href => "#"}
             %i.grcicon-questionmark-grey
@@ -96,7 +96,7 @@
         .row-fluid
           .span12
             %h3.pbc-title                    
-              %a.btn.btn-mini
+              %a.btn.btn-mini{"data-toggle" => "modal", :href => "#newRequest"}
                 %i.grcicon-add
               .request-states
                 %span.letter-group
@@ -181,13 +181,13 @@
                   %strong Requested:
                   04/22/12
               .span1.pbc-item.pbc-actions
-                %a.btn.btn-mini
+                %a.btn.btn-mini{"data-toggle" => "modal", :href => "#newRequest"}
                   %i.grcicon-edit-grey
             .row-fluid            
               .span12 
                 %h3.pbc-title
                   Responses
-                  %a.btn.btn-mini
+                  %a.btn.btn-mini{"data-toggle" => "modal", :href => "#newResponse"}
                     %i.grcicon-add
                 %ul.items-list
                   %li.item.i-process
@@ -219,12 +219,10 @@
                               %i.grcicon-add
                             %a{:href => "#"}  Add new document
                       .span1.pbc-item.pbc-actions
-                        %a.btn.btn-mini
+                        %a.btn.btn-mini{"data-toggle" => "modal", :href => "#newResponse"}
                           %i.grcicon-edit-grey
                         %a.btn.btn-mini
                           %i.grcicon-arrowright-grey
-
-
                   %li.item.i-process
                     .row-fluid
                       .span12
@@ -245,7 +243,6 @@
                         %ul.pbc-item-list
                           %li
                             %a.btn.btn-nano.pull-right
-
                               %i.grcicon-edit-grey
                             %a{:href => "#"} Dan Waterson (Responsible Party)
                           %li
@@ -269,11 +266,10 @@
                               %i.grcicon-add
                             %a{:href => "#"}  Add new document                            
                       .span1.pbc-item.pbc-actions
-                        %a.btn.btn-mini
+                        %a.btn.btn-mini{"data-toggle" => "modal", :href => "#newResponse"}
                           %i.grcicon-edit-grey
                         %a.btn.btn-mini
                           %i.grcicon-arrowright-grey
-
                   %li.item.i-process
                     .row-fluid
                       .span12
@@ -313,11 +309,10 @@
                               %i.grcicon-edit-grey
                             %a{:href => "#"} Sample Description
                       .span1.pbc-item.pbc-actions
-                        %a.btn.btn-mini
+                        %a.btn.btn-mini{"data-toggle" => "modal", :href => "#newResponse"}
                           %i.grcicon-edit-grey
                         %a.btn.btn-mini
                           %i.grcicon-arrowright-grey
-
                   %li.item.i-process
                     .row-fluid
                       .span12
@@ -362,7 +357,6 @@
                             %a{:href => "#"}  Add new meeting event
                       .span1.pbc-item.pbc-actions
                         %a.btn.btn-mini
-                          %i.grcicon-edit-grey
+                          %i.grcicon-edit-grey{"data-toggle" => "modal", :href => "#newResponse"}
                         %a.btn.btn-mini
                           %i.grcicon-arrowright-grey
-

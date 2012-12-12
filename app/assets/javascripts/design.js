@@ -65,7 +65,9 @@ jQuery(function ($) {
   renderExternalTmpl({ name: 'redesignNewProduct', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'redesignNewSystem', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'redesignNewBizProcess', selector: '#templates', data: {} });
-
+  renderExternalTmpl({ name: 'pbcListEdit', selector: '#templates', data: {} });
+  renderExternalTmpl({ name: 'newRequest', selector: '#templates', data: {} });
+  renderExternalTmpl({ name: 'newResponse', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'showSecondModal', selector: '#templates', data: {} });
 
   // new modals END
