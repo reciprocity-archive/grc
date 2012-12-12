@@ -24,7 +24,11 @@
           PBC Request List
       .widget-filters
         .row-fluid
-          .span4
+          .span5.widget-titles
+            .row-fluid
+              .span12
+                %label Title
+                %h4 Lorem ipsum Audit
             .row-fluid
               .span4
                 %label Audit Firm
@@ -35,7 +39,7 @@
               .span4
                 %label List Import Date
                 %h4 06/10/12
-          .span8
+          .span7
             .filters-box
               .row-fluid
                 .span12.title-row
@@ -72,6 +76,12 @@
                   %label &nbsp;
                   %button.btn.span12 Clear
       .widget-body
+        .row-fluid
+          .span12
+            %h3.pbc-title
+              Request
+              %a.btn.btn-mini
+                %i.gcmsicon-add
         .pbc-header
           .row-fluid
             .span3
@@ -89,13 +99,7 @@
                       
         %ul.pbc-responses
           %li.main-item
-            .row-fluid
-              .span12
-                %h3.pbc-title
-                  Request
-                  %a.btn.btn-mini
-                    %i.gcmsicon-add
-                  
+              
             .row-fluid
               .span3.pbc-item.pbc-control
                 %a.btn.btn-mini.pull-right
@@ -148,20 +152,20 @@
                         %textarea.span12{:rows => "1", :placeholder => "Enter process notes"}
                       .span3
                         %label
-                          %strong Documents
-                        %ul.pbc-item-list
-                          %li
-                            %a.btn.btn-nano
-                              %i.gcmsicon-add
-                            %a{:href => "#"}  Add new document                          
-                      .span3
-                        %label
                           %strong People
                         %ul.pbc-item-list
                           %li
                             %a.btn.btn-nano
                               %i.gcmsicon-add
                             %a{:href => "#"}  Add new person
+                      .span3
+                        %label
+                          %strong Documents
+                        %ul.pbc-item-list
+                          %li
+                            %a.btn.btn-nano
+                              %i.gcmsicon-add
+                            %a{:href => "#"}  Add new document                          
                   %li.item.i-process
                     .row-fluid
                       .span11
@@ -181,6 +185,18 @@
                           Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                       .span3
                         %label
+                          %strong People
+                        %ul.pbc-item-list
+                          %li
+                            %a.btn.btn-nano.pull-right
+                              %i.gcmsicon-edit-grey
+                            %a{:href => "#"} Dan Waterson (Responsible Party)
+                          %li
+                            %a.btn.btn-nano
+                              %i.gcmsicon-add
+                            %a{:href => "#"}  Add new person
+                      .span3
+                        %label
                           %strong Documents
                         %ul.pbc-item-list
                           %li
@@ -195,18 +211,6 @@
                             %a.btn.btn-nano
                               %i.gcmsicon-add
                             %a{:href => "#"}  Add new document                            
-                      .span3
-                        %label
-                          %strong People
-                        %ul.pbc-item-list
-                          %li
-                            %a.btn.btn-nano.pull-right
-                              %i.gcmsicon-edit-grey
-                            %a{:href => "#"} Dan Waterson (Responsible Party)
-                          %li
-                            %a.btn.btn-nano
-                              %i.gcmsicon-add
-                            %a{:href => "#"}  Add new person
                   %li.item.i-process
                     .row-fluid
                       .span11
@@ -226,18 +230,6 @@
                           Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                       .span3
                         %label
-                          %strong People
-                        %ul.pbc-item-list
-                          %li
-                            %a.btn.btn-nano.pull-right
-                              %i.gcmsicon-edit-grey
-                            %a{:href => "#"} Dan Waterson (Responsible Party)
-                          %li
-                            %a.btn.btn-nano
-                              %i.gcmsicon-add
-                            %a{:href => "#"}  Add new person
-                      .span3
-                        %label
                           %strong Description
                         %ul.pbc-item-list
                           %li
@@ -248,7 +240,18 @@
                             %a.btn.btn-nano.pull-right
                               %i.gcmsicon-edit-grey
                             %a{:href => "#"} Sample Description
-
+                      .span3
+                        %label
+                          %strong People
+                        %ul.pbc-item-list
+                          %li
+                            %a.btn.btn-nano.pull-right
+                              %i.gcmsicon-edit-grey
+                            %a{:href => "#"} Dan Waterson (Responsible Party)
+                          %li
+                            %a.btn.btn-nano
+                              %i.gcmsicon-add
+                            %a{:href => "#"}  Add new person
                   %li.item.i-process
                     .row-fluid
                       .span11
