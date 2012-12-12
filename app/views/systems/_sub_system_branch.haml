@@ -12,7 +12,7 @@
           =system.title || system.description
       .row-fluid-slotcontent.collapse{ :id => "content_system_#{system.id}" }
         .span12
-          =system.description
+          =raw system.description
     %ul
       =walk_slug_tree(Program.slugtree(system.controls)) do |item, step|
         .row-fluid
@@ -25,7 +25,7 @@
               =item.title || item.description
           .row-fluid-slotcontent.collapse{ :id => "content_item_#{item.id}" }
             .span9
-              =item.description
+              =raw item.description
       -subsystems = system.sub_systems.all
       -if subsystems.count > 0
         %li

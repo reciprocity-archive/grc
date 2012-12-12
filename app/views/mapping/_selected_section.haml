@@ -20,8 +20,8 @@
               =item.slug
             =item.title
           -if !item.description.blank?
-            %textarea(disabled='disabled' style='width: 98%')
-              =item.description
+            =raw item.description
+              
     -else
       Nothing selected.
 

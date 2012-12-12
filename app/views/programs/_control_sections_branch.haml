@@ -14,7 +14,7 @@
       .row-fluid-slotcontent
         .span12
           -#.collapse{ :id => "content_#{system.id}" }
-          =item.description
+          =raw item.description
     %ul.collapse{ :class => expanded && 'in', :id => "content_system_#{item.id}" }
       =walk_slug_tree(Program.slugtree(item.implemented_controls)) do |item, step|
         .row-fluid
@@ -38,7 +38,7 @@
           .row-fluid-slotcontent
             .span9
               .collapse{ :id => "content_item_#{item.id}" }
-                =item.description
+                =raw item.description
       -#subsystems = system.id == 3 ? [System.find(2), System.find(4)] : []
       -#if subsections.count > 0
         %li
