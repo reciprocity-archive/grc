@@ -2,9 +2,9 @@
   .modal-header
     %nav
       %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
-        %i.gcmsicon-questionmark-grey
+        %i.grcicon-questionmark-grey
       %a.widgetbtn{"data-dismiss" => "modal", :href => "#"}
-        %i.gcmsicon-x-grey
+        %i.grcicon-x-grey
     %h1
       Select Reference
       %span.version v 0.90
@@ -19,7 +19,7 @@
           %h4
             Add Reference
             .widgetbtn.widgetbtnselector{"data-dismiss" => "modal", :href => "#"}
-              %i.gcmsicon-add
+              %i.grcicon-add
             .WidgetBoxHeading.pull-right
               %input{:type => "text", :placeholder => "Search References"}
 
@@ -42,7 +42,7 @@
                                 %a.widgetbtn.pull-right.add-me{:href => "#"}
                                   %i.grcicon-chevron-right
                                 %a.widgetbtn.pull-right{:href => "#"}
-                                  %i.gcmsicon-edit-grey
+                                  %i.grcicon-edit-grey
                           %li
                             .row-fluid
                               .span8
@@ -52,7 +52,7 @@
                                 %a.widgetbtn.pull-right.add-me{:href => "#"}
                                   %i.grcicon-chevron-right 
                                 %a.widgetbtn.pull-right{:href => "#"}
-                                  %i.gcmsicon-edit-grey
+                                  %i.grcicon-edit-grey
                           %li
                             .row-fluid
                               .span8
@@ -62,7 +62,7 @@
                                 %a.widgetbtn.pull-right.add-me{:href => "#"}
                                   %i.grcicon-chevron-right
                                 %a.widgetbtn.pull-right{:href => "#"}
-                                  %i.gcmsicon-edit-grey
+                                  %i.grcicon-edit-grey
                           %li
                             .row-fluid
                               .span8
@@ -72,7 +72,7 @@
                                 %a.widgetbtn.pull-right.add-me{:href => "#"}
                                   %i.grcicon-chevron-right
                                 %a.widgetbtn.pull-right{:href => "#"}
-                                  %i.gcmsicon-edit-grey
+                                  %i.grcicon-edit-grey
                           %li
                             .row-fluid
                               .span8
@@ -82,7 +82,7 @@
                                 %a.widgetbtn.pull-right.add-me{:href => "#"}
                                   %i.grcicon-chevron-right 
                                 %a.widgetbtn.pull-right{:href => "#"}
-                                  %i.gcmsicon-edit-grey
+                                  %i.grcicon-edit-grey
 
                     
         .span6
@@ -96,9 +96,9 @@
                     %span.name Business Plans
                   .span6.actions          
                     %a#removeMe.widgetbtn.pull-right{:href => "#"}
-                      %i.icon-minus-sign
+                      %i.grcicon-remove
                     %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#newreference"}
-                      %i.gcmsicon-edit-grey
+                      %i.grcicon-edit-grey
                     %h6.statustextgreen PENDING 
               %li
                 .row-fluid
@@ -107,9 +107,9 @@
                     %span.name Document
                   .span6.actions   
                     %a#removeMe.widgetbtn.pull-right{:href => "#"}
-                      %i.icon-minus-sign
+                      %i.grcicon-remove
                     %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#newreference"}
-                      %i.gcmsicon-edit-grey
+                      %i.grcicon-edit-grey
                     %h6.statustextred ERROR 
               %li
                 .row-fluid
@@ -118,7 +118,7 @@
                     %span.name Document
                   .span6.actions 
                     %a#removeMe.widgetbtn.pull-right{:href => "#"}
-                      %i.icon-minus-sign
+                      %i.grcicon-remove
                     %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#newreference"}
-                      %i.gcmsicon-edit-grey
+                      %i.grcicon-edit-grey
   =render :partial => 'design/templates/modalfooter', :locals => { :shownote => false, :showcreated => false, :showrevs => false }

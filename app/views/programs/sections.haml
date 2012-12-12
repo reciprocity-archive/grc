@@ -3,9 +3,9 @@
     -content_id = "content_#{rand(36**8).to_s(36)}" # unique ID for toggle
     .slot.regulationslot{ :'data-toggle' => 'collapse', :'data-target' => "##{content_id}" }
       -#%a.widgetbtn.fltrt{ :href => flow_section_path(item), :title => 'View Section' }
-        %i.gcmsicon-arrowright-grey
+        %i.grcicon-arrowright-grey
       %a.widgetbtn.fltrt{ :href => edit_flow_section_path(item), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :title => 'Edit Section' }
-        %i.gcmsicon-edit-grey
+        %i.grcicon-edit-grey
       .expander
       %span.prefix=item.slug
       =item.title || item.description
