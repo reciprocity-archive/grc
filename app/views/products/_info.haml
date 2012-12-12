@@ -5,9 +5,9 @@
 
 -content_for :widget_buttons do
   %a.widgetbtn{ :href => edit_flow_product_path(product), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide', :title => 'Edit Product' }
-    %i.gcmsicon-edit-grey
+    %i.grcicon-edit-grey
   %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#productInfoContent"}
-    %i.gcmsicon-enlarge-grey
+    %i.grcicon-enlarge-grey
 
 .information
   -if has_feature? :BETA

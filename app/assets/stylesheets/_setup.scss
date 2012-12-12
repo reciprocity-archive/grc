@@ -18,9 +18,8 @@
   $errorColor:#ee0000;
 
   //The first font is loaded from Google Web Fonts inside layouts/dashboard.haml
-  $font-family: 'PT Sans', Helvetica, Arial, Tahoma, Verdana, sans-serif;
-
-// helper variables (it seems it is duplicated, but it is good to keep semantically correct var names)
+  //Titillium+Web'
+  $font-family: Arial, Helvetica, Tahoma, Verdana, sans-serif;
 
   $darkGray: #666;
   $lightGray: #ccc;

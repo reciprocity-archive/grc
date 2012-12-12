@@ -4,7 +4,7 @@
   .expander
   Categories
   %a.widgetbtn.pull-right.juke-down{:href => list_edit_flow_categorizations_path(:object_type => object.class.name, :object_id => object.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#categoryList', :'data-modal-class' => 'modal-wide' }
-    %i.gcmsicon-link
+    %i.grcicon-link
 
 %script#category_list_item{ :type => 'text/html', :'data-member' => 'categorization' }
   %li.controlSlot{ :'data-id' => '<%= category.id %>' }

@@ -20,9 +20,9 @@
       .WidgetBoxHeading
         .pull-right
           %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
-            %i.gcmsicon-questionmark-grey
+            %i.grcicon-questionmark-grey
           -#%a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
-            %i.gcmsicon-edit-grey
+            %i.grcicon-edit-grey
           %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
         .WidgetTitle.doublewidth Sub-Systems & Controls
       .WidgetBoxContent
@@ -34,18 +34,18 @@
           .WidgetTitle Transactions
           %nav
             %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
-              %i.gcmsicon-questionmark-grey
+              %i.grcicon-questionmark-grey
             -#%a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
-              %i.gcmsicon-edit-grey
+              %i.grcicon-edit-grey
             -#%a.widgetbtn{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
-              %i.gcmsicon-link
+              %i.grcicon-link
             %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#transactionsContent"}
-              %i.gcmsicon-enlarge-grey
+              %i.grcicon-enlarge-grey
         .WidgetBoxContent.information.collapse.in
           .row-fluid
             .span12.captionbox
               %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
-                %i.gcmsicon-link
+                %i.grcicon-link
               %h4
                 Transactions for this System/Process
           #transactionsContent.collapse.in
@@ -53,7 +53,7 @@
             .row-fluid
               .span12
                 %a.widgetbtn.pull-right.juke-left{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
-                  %i.gcmsicon-edit-grey
+                  %i.grcicon-edit-grey
                 %h3.toggle{"data-target" => "#dataGenerated", "data-toggle" => "collapse"}
                   .expander.in
                   Data Generated
@@ -66,7 +66,7 @@
             .row-fluid
               .span12
                 %a.widgetbtn.pull-right.juke-left{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
-                  %i.gcmsicon-edit-grey
+                  %i.grcicon-edit-grey
                 %h3.toggle{"data-target" => "#dataProcessed", "data-toggle" => "collapse"}
                   .expander.in
                   Data Processed
@@ -79,7 +79,7 @@
             .row-fluid
               .span12
                 %a.widgetbtn.pull-right.juke-left{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
-                  %i.gcmsicon-edit-grey
+                  %i.grcicon-edit-grey
                 %h3.toggle{"data-target" => "#dataStored", "data-toggle" => "collapse"}
                   .expander.in
                   Data Stored
@@ -103,7 +103,7 @@
               -# There currently is an issue with this dropdown being inside the widget and therefore cropped. Can we move bootstrap twitter dropdown menus above (z-index)?
               .btn-group.closed
                 %a.span12.btn.btn-warning.dropdown-toggle{"data-toggle" => "dropdown"}
-                  %i.gcmsicon-import-white
+                  %i.grcicon-import-white
                   Im/Export
                   %span.caret
                 %ul.dropdown-menu
@@ -126,11 +126,11 @@
         .WidgetTitle System Info
         %nav
           %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
-            %i.gcmsicon-questionmark-grey
+            %i.grcicon-questionmark-grey
           -#%a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
-            %i.gcmsicon-edit-grey
+            %i.grcicon-edit-grey
           %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#productInfoContent"}
-            %i.gcmsicon-enlarge-grey
+            %i.grcicon-enlarge-grey
       .WidgetBoxContent.information.collapse.in
         .well 
           %label 
@@ -154,7 +154,7 @@
           .row-fluid
             .span12
               %a.widgetbtn.pull-right.juke-left{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
-                %i.gcmsicon-edit-grey
+                %i.grcicon-edit-grey
               %h3.toggle{"data-target" => "#productAbout", "data-toggle" => "collapse"}
                 .expander.in
                 About
@@ -201,7 +201,7 @@
           .row-fluid
             .span12
               %a.widgetbtn.pull-right.juke-left{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
-                %i.gcmsicon-link
+                %i.grcicon-link
               %h3.toggle{"data-target" => "#productCategories", "data-toggle" => "collapse"}
                 .expander
                 Categories
@@ -209,7 +209,7 @@
               %ul#productCategories.collapse
                 %li.controlSlot
                   %a.widgetbtn.pull-right.juke-down
-                    %i.gcmsicon-edit-grey
+                    %i.grcicon-edit-grey
                   %span.controls-group SOX Category
                   %br/
                   %span.controls-subgroup Core
@@ -221,7 +221,7 @@
           .row-fluid
             .span12
               %a.widgetbtn.pull-right.juke-left{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
-                %i.gcmsicon-link
+                %i.grcicon-link
               %h3.toggle{"data-target" => "#productReferences", "data-toggle" => "collapse"}
                 .expander
                 References
@@ -229,13 +229,13 @@
               %ul#productReferences.collapse
                 %li.controlSlot
                   %a.widgetbtn.pull-right.juke-down
-                    %i.gcmsicon-edit-grey
+                    %i.grcicon-edit-grey
                   %span.controls-group PDF
                   %br/
                   %span.controls-subgroup Privacy Report 2011
                 %li.controlSlot
                   %a.widgetbtn.pull-right.juke-down
-                    %i.gcmsicon-edit-grey
+                    %i.grcicon-edit-grey
                   %span.controls-group PDF
                   %br/
                   %span.controls-subgroup Privacy Report 2012
@@ -243,7 +243,7 @@
           .row-fluid
             .span12
               %a.widgetbtn.pull-right.juke-left{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
-                %i.gcmsicon-link
+                %i.grcicon-link
               %h3.toggle{"data-target" => "#productPeople", "data-toggle" => "collapse"}
                 .expander
                 People
@@ -251,13 +251,13 @@
               %ul#productPeople.collapse
                 %li.controlSlot
                   %a.widgetbtn.pull-right
-                    %i.gcmsicon-edit-grey
+                    %i.grcicon-edit-grey
                   %span.controls-group JRayburn@google.com
                   %br/
                   %span.controls-subgroup Joss Rayburn
                 %li.controlSlot
                   %a.widgetbtn.pull-right
-                    %i.gcmsicon-edit-grey
+                    %i.grcicon-edit-grey
                   %span.controls-group rpoder@google.com
                   %br/
                   %span.controls-subgroup Ron Poder
