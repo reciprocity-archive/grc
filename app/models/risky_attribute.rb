@@ -4,6 +4,7 @@ class RiskyAttribute < ActiveRecord::Base
   include SearchableModel
   include AuthorizedModel
   include RelatedModel
+  include SanitizableAttributes
 
   attr_accessible :title, :slug, :description, :url, :version, :type, :start_date, :stop_date
 
@@ -16,6 +17,8 @@ class RiskyAttribute < ActiveRecord::Base
   belongs_to :type, :class_name => 'Option', :conditions => { :role => 'product_type' }
 
   is_versioned_ext
+
+  sanitize_attributes :description
 
   validates :title,
     :presence => { :message => "needs a value" }

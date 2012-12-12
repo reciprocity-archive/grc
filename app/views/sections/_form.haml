@@ -46,7 +46,7 @@
   %label{:for => "section-description"} Text of Section:
 .row-fluid{"control-group" => ""}
   .span12.well{:class => error_class(f, :description)}
-    %textarea#section-description.span12{:placeholder => "", :rows => "4", :name => 'section[description]'}=f.object.description
+    %textarea#section-description.span12.double.wysihtml5{:placeholder => "", :rows => "4", :name => 'section[description]'}=f.object.description
     =error_messages_inline(f, :description)
 
 .row-fluid
@@ -54,3 +54,5 @@
     %label{:for => "section-url"} URL for this section (optional)
     %input#section-link.span12{:placeholder => "http://", :type => "text", :value => nil, :name => 'section[url]', :disabled => 'disabled'}
     =error_messages_inline(f, :url)
+
+=render :partial => "shared/wysihtml5"

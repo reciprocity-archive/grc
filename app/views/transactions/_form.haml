@@ -29,7 +29,9 @@
 .row-fluid
   .span12{ :class => error_class(f, :description) }
     =f.label "Description of Auditable Population Set"
-    =f.text_field :description, :class => 'span12', :placeholder => 'Enter a description for this population set. These is a set of records (often transactions) which an auditor might review during an audit.'
+    =f.text_area :description, :class => 'span12 wysihtml5 double', :placeholder => 'Enter a description for this population set. These is a set of records (often transactions) which an auditor might review during an audit.'
     %br
 
 %br
+
+=render :partial => "shared/wysihtml5"

@@ -5,6 +5,7 @@ class System < ActiveRecord::Base
   include SearchableModel
   include AuthorizedModel
   include RelatedModel
+  include SanitizableAttributes
 
   CATEGORY_TYPE_ID = 101
 
@@ -38,6 +39,8 @@ class System < ActiveRecord::Base
   belongs_to :type, :class_name => 'Option', :conditions => { :role => 'system_type' }
 
   is_versioned_ext
+
+  sanitize_attributes :description
 
   validates :title,
     :presence => { :message => "needs a value" }

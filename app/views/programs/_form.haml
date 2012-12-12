@@ -15,7 +15,7 @@
       =wrapped_text_field f, :span6, :version, :placeholder => '1.1.1'
 
 .row-fluid
-  =wrapped_text_area f, :span6, :description, :class => 'double', :placeholder => 'Enter description here'
+  =wrapped_text_area f, :span6, :description, :class => 'double wysihtml5', :placeholder => 'Enter description here'
   .span6
     .row-fluid
       =wrapped_date_field f, :span6, :start_date, :class => 'date', :label_name => 'Effective Date', :placeholder => 'MM/DD/YYYY'
@@ -44,5 +44,4 @@
       =wrapped_select f, :span4, :audit_frequency_id, Option.options_for(:audit_frequency).map { |o| [o.title, o.id] }, :selected => (f.object.respond_to?(:audit_frequency_id) ? f.object.audit_frequency_id : nil), :label_name => 'Frequency'
       =wrapped_select f, :span4, :audit_duration_id, Option.options_for(:audit_duration).map { |o| [o.title, o.id] }, :selected => (f.object.respond_to?(:audit_duration_id) ? f.object.audit_duration_id : nil), :label_name => 'Duration'
 
--#:javascript
-  $('#wysihtml5').wysihtml5({ image: false }); //Button to insert an image. Default true
+=render :partial => "shared/wysihtml5"
