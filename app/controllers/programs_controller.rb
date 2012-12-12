@@ -250,6 +250,8 @@ class ProgramsController < BaseObjectsController
       handle_import_category(control, attrs, 'assertions', Control::CATEGORY_ASSERTION_TYPE_ID)
       handle_import_systems(control, attrs, 'systems')
 
+      attrs['title'] ||= attrs['description'].split("\n")[0] rescue ""
+
       control.assign_attributes(attrs, :without_protection => true)
 
       if control.new_record?

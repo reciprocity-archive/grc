@@ -19,7 +19,7 @@ module ImportHelper
 
   def read_import_headers(import, import_map, object_name, rows)
     trim_array(rows.shift).map do |heading|
-      heading = heading.strip
+      heading = (heading || "").strip
       if heading == "Type"
         key = 'type'
       else
@@ -52,11 +52,16 @@ module ImportHelper
   end
 
   def handle_import_person(attrs, key, warnings)
-    unless attrs[key].nil?
-      if attrs[key].include?('@')
-        attrs[key] = Person.find_or_create_by_email!({:email => attrs[key]})
-      elsif attrs[key] == ""
+    email = (attrs[key]||"").strip
+
+    unless email.nil?
+      if email.include?('@')
+        attrs[key] = Person.find_or_create_by_email!({:email => email})
+      elsif email == ""
         attrs[key] = nil
+      elsif email !~ / /
+        email = "#{email}@#{ENV['DEFAULT_DOMAIN']}"
+        attrs[key] = Person.find_or_create_by_email!({:email => email})
       else
         attrs[key] = nil
         warnings[key.to_sym] ||= []
