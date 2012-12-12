@@ -95,19 +95,21 @@
       .widget-body
         .row-fluid
           .span12
-            %h3.pbc-title          
-              .request-states
-                .span internal
-                .span external
-                .span.letter-group
-                  .letter D
-                  .letter E
-                .span.letter-group
-                  .letter D
-                  .letter E
-            
+            %h3.pbc-title                    
               %a.btn.btn-mini
                 %i.grcicon-add
+              .request-states
+                %span.letter-group
+                  internal
+                  %br
+                  %span.letter D
+                  %span.letter E
+                %span.letter-group
+                  external              
+                  %br
+                  %span.letter D
+                  %span.letter E
+
               Requests
                       
         %ul.pbc-responses
@@ -126,6 +128,7 @@
                       %i.enddot.default
                     %a.btn.btn-mini
                       %i.enddot.default
+                    &nbsp;
                     %a.btn.btn-mini
                       %i.enddot.accept
                     %a.btn.btn-mini
@@ -189,13 +192,10 @@
                 %ul.items-list
                   %li.item.i-process
                     .row-fluid
-                      .span11
+                      .span12
                         %input.span12{:type => "text", :placeholder => "Enter process name"}
-                      .span1.pbc-item.pbc-actions
-                        %a.btn.btn-mini
-                          %i.grcicon-edit-grey
                     .row-fluid
-                      .span6
+                      .span5
                         %label
                           %strong Process Description
                         %textarea.span12{:rows => "1", :placeholder => "Enter process description"}
@@ -217,16 +217,20 @@
                           %li
                             %a.btn.btn-nano
                               %i.grcicon-add
-                            %a{:href => "#"}  Add new document                          
-                  %li.item.i-process
-                    .row-fluid
-                      .span11
-                        Proc-89 Accounts Security Policy Review
+                            %a{:href => "#"}  Add new document
                       .span1.pbc-item.pbc-actions
                         %a.btn.btn-mini
                           %i.grcicon-edit-grey
+                        %a.btn.btn-mini
+                          %i.grcicon-arrowright-grey
+
+
+                  %li.item.i-process
                     .row-fluid
-                      .span6
+                      .span12
+                        Proc-89 Accounts Security Policy Review
+                    .row-fluid
+                      .span5
                         %label
                           %strong Process Description
                         %p.full-view
@@ -264,15 +268,18 @@
                             %a.btn.btn-nano
                               %i.grcicon-add
                             %a{:href => "#"}  Add new document                            
-                  %li.item.i-process
-                    .row-fluid
-                      .span11
-                        Proc-87 Population Request Type Process
                       .span1.pbc-item.pbc-actions
                         %a.btn.btn-mini
                           %i.grcicon-edit-grey
+                        %a.btn.btn-mini
+                          %i.grcicon-arrowright-grey
+
+                  %li.item.i-process
                     .row-fluid
-                      .span6
+                      .span12
+                        Proc-87 Population Request Type Process
+                    .row-fluid
+                      .span5
                         %label
                           %strong Process Description
                         %p.full-view
@@ -305,16 +312,18 @@
                             %a.btn.btn-nano.pull-right
                               %i.grcicon-edit-grey
                             %a{:href => "#"} Sample Description
-
-                  %li.item.i-process
-                    .row-fluid
-                      .span11
-                        Proc-90 Interview Request Type Process
                       .span1.pbc-item.pbc-actions
                         %a.btn.btn-mini
                           %i.grcicon-edit-grey
+                        %a.btn.btn-mini
+                          %i.grcicon-arrowright-grey
+
+                  %li.item.i-process
                     .row-fluid
-                      .span6
+                      .span12
+                        Proc-90 Interview Request Type Process
+                    .row-fluid
+                      .span5
                         %label
                           %strong Process Description
                         %p.full-view
@@ -351,3 +360,9 @@
                             %a.btn.btn-nano
                               %i.grcicon-add
                             %a{:href => "#"}  Add new meeting event
+                      .span1.pbc-item.pbc-actions
+                        %a.btn.btn-mini
+                          %i.grcicon-edit-grey
+                        %a.btn.btn-mini
+                          %i.grcicon-arrowright-grey
+

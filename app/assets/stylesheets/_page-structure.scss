@@ -26,8 +26,21 @@
 }
 
 .request-states {
+  @include clearfix();
   float:right;
+  line-height:12px;
+  margin-right:80px;
+  min-height:0;
   font-size:11px;
+  .letter-group {
+    float:left;
+    margin-right:10px;
+    color:$textColor;
+    .letter {
+      color:#111;
+      margin-right:22px;
+    }
+  }
 }
 
 .pbc-request-title-area {
@@ -39,8 +52,8 @@
     }
   }
   .btn {
-    margin-left:5px;
-    margin-right:5px;
+    margin-left:0px;
+    margin-right:8px;
   }
   .enddot {
     background-color:$white;
