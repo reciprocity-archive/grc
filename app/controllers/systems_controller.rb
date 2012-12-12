@@ -11,7 +11,7 @@ end
 class SystemsController < BaseObjectsController
   include ImportHelper
 
-  SYSTEM_MAP = Hash[*%w(System\ Code slug Title title Description description Link:References references Infrastructure infrastructure Link:People;Process\ Owner process_owner Link:People;Owner owner Link:Categories categories Append:Notes append_notes Link:System;Sub\ System sub_systems Link:Org\ Group org_groups Effective\ Date start_date Created created_at Updated updated_at)]
+  SYSTEM_MAP = Hash[*%w(System\ Code slug Title title Description description Link:References references Infrastructure infrastructure Link:People;Owner owner Link:Categories categories Append:Notes append_notes Link:System;Sub\ System sub_systems Link:Org\ Group org_groups Effective\ Date start_date Created created_at Updated updated_at)]
 
   access_control :acl do
     allow :superuser
@@ -70,10 +70,7 @@ class SystemsController < BaseObjectsController
               field = SYSTEM_MAP[key]
               case field
               when 'owner'
-                object_person = s.object_people.detect {|x| x.role == 'owner'}
-                object_person ? object_person.person.email : ''
-              when 'process_owner'
-                object_person = s.object_people.detect {|x| x.role == 'process_owner'}
+                object_person = s.object_people.detect {|x| x.role == 'accountable'}
                 object_person ? object_person.person.email : ''
               when 'categories'
                 (s.categories.map {|x| x.name}).join(',')
@@ -141,7 +138,6 @@ class SystemsController < BaseObjectsController
       attrs.delete('updated_at')
 
       handle_import_person(attrs, 'owner', import[:warnings][i])
-      handle_import_person(attrs, 'process_owner', import[:warnings][i])
 
       slug = attrs['slug']
 
@@ -155,7 +151,7 @@ class SystemsController < BaseObjectsController
 
       system ||= System.new
 
-      handle_import_object_person(system, attrs, 'owner', 'owner')
+      handle_import_object_person(system, attrs, 'owner', 'accountable')
       handle_import_object_person(system, attrs, 'process_owner', 'process_owner')
       handle_import_category(system, attrs, 'categories', System::CATEGORY_TYPE_ID)
       handle_import_sub_systems(system, attrs, 'sub_systems')
