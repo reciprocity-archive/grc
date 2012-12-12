@@ -92,9 +92,22 @@ can.Control("CMS.Controllers.Mapping", {
           cmap[cunmap ? 'addClass' : "removeClass"]("unmapbtn");
     }
   }
-    , ".clearselection click" : function(el, ev) {
-      this.updateButtons();
+  , ".clearselection click" : function(el, ev) {
+    this.updateButtons();
+  }
+
+  // Post-submit handler for new control dialog
+  , "#new_control ajax:json" : function(el, ev, data) {
+    if(data.program_id.toString() === this.options.id) {
+      // add this control to the reg controls.
+      // This isn't the best way to go about it, but CanJS/Mustache is currently ornery about accepting new observable list elements
+      //  added with "push" --BM 12/11/2012
+      this.options.reg_list_controller.list = this.options.reg_list_controller.list.concat([new namespace.CMS.Models.RegControl(data)]);
+      this.options.reg_list_controller.options.observer.attr("list", this.options.reg_list_controller.list);
     }
+    this.options.company_list_controller.list = this.options.company_list_controller.list.concat([new namespace.CMS.Models.Control(data)]);
+    this.options.company_list_controller.options.observer.attr("list", this.options.company_list_controller.list);
+  }
 
 });
 
