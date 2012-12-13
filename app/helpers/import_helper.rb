@@ -24,7 +24,19 @@ module ImportHelper
         key = 'type'
       else
         key = import_map[heading]
-        import[:messages] << "Invalid #{object_name} heading #{heading}" unless key
+        if !key
+          found = false
+          prefix = "Invalid #{object_name} headings: "
+          import[:messages].each_with_index do |message, i|
+            if message.starts_with?(prefix)
+              import[:messages][i] = message + ", \"#{heading}\""
+              found = true
+            end
+          end
+          if !found
+            import[:messages] << prefix + "\"#{heading}\""
+          end
+        end
       end
       key
     end

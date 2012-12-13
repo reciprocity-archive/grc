@@ -1,11 +1,25 @@
+-@messages = @messages.reject{|m|m.starts_with?("Invalid system heading")}
+
 .row-fluid
   %hr.hr-widget
 
 .row-fluid
-  %h4 Sample Data
+  %h4 Data to Import
 
 .row-fluid
-  #sampleData.span12.well{:style => 'overflow: scroll'}
+  #sampleData.span12.well{:style => 'overflow: scroll; max-height: 600px;'}
+    -if @messages.present?
+      -@messages.each do |m|
+        %p.label-warning
+          =m
+      %br
+
+    -if @errors.any?
+      %p.label-warning
+        See specific errors below
+      %br
+
+
     %table.ggrc-table
       %thead
         %tr
@@ -36,19 +50,20 @@
     %br/
     #{@creates.size} created, #{@updates.size} updated
 
-
-%div
-  Warnings:
-
-  -@messages.each do |m|
-    %p{ :class => 'label-warning' }
-      =m
-
-.row-fluid
-  %hr.hr-widget
+%br
 
 .row-fluid
   -if params[:confirm].blank?
     .span9
     .span3
-      =submit_tag "Finish Importing", :class => %w(span12 btn btn-large btn-success btn-primary), :name => 'confirm'
+      -if @errors.any?
+        =submit_tag "Correct Errors Before Proceeding", :class => %w(span12 btn btn-large btn-warning btn-primary), :name => 'confirm', :disabled => true
+      -elsif @messages.any?
+        =submit_tag "Proceed With Caution", :class => %w(span12 btn btn-large btn-warning btn-primary), :name => 'confirm'
+      -else
+        =submit_tag "Finish Importing", :class => %w(span12 btn btn-large btn-success btn-primary), :name => 'confirm'
+  -else
+    .span12
+      Import of Systems is done.  Return to the
+      =link_to "Dashboard", programs_dash
+
