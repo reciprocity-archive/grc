@@ -32,15 +32,17 @@
   $.tmpl.cache = {};
   $.tmpl.parse = function(str) {
     var strFunc =
-      "var p=[],print=function(){p.push.apply(p,arguments);};" +
+      "var " +
+      "  escape=function(s){return(typeof(s)=='string'?s.replace('\\'','&#39;').replace('\"','&quot;'):s)}" +
+      ", p=[],print=function(){p.push.apply(p,arguments);};" +
       "with(obj){p.push('" +
       str.replace(/[\r\t\n]/g, " ")
          .replace(/'(?=[^%]*%>)/g, "\t")
          .split("'").join("\\'")
          .split("\t").join("'")
-         .replace(/<%=(.+?)%>/g, "',$1,'")
-         .replace(/&lt;%=(.+?)%&gt;/g, "',$1,'")
-         .replace(/%3C%=(.+?)%%3E/g, "',$1,'")
+         .replace(/<%=(.+?)%>/g, "',escape($1),'")
+         .replace(/&lt;%=(.+?)%&gt;/g, "',escape($1),'")
+         .replace(/%3C%=(.+?)%%3E/g, "',escape($1),'")
          .split("<%").join("');")
          .split("%>").join("p.push('")
       + "');}return p.join('');";
