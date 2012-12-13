@@ -2,7 +2,7 @@ CmsRails::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   config.cache_classes = true
-  config.action_controller.perform_caching = true
+  config.action_controller.perform_caching = false
 
   # Log error messages when you accidentally call methods on nil.
   config.whiny_nils = true
