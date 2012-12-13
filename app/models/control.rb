@@ -143,7 +143,7 @@ class Control < ActiveRecord::Base
   end
 
   def categories_display
-    categories.ctype(CATEGORY_TYPE_ID).map {|x| x.slug}.join(',')
+    categories.ctype(CATEGORY_TYPE_ID).map {|x| x.name}.join(',')
   end
 
   def assertions_display
