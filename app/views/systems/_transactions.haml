@@ -5,7 +5,7 @@
 -content_for :widget_help, 'system_transactions'
 
 -content_for :widget_buttons do
-  %a.widgettextbtn{ :href => new_flow_transaction_path('transaction[system_id]' => system.id), :'data-toggle' => 'modal-ajax-listnewform', :'data-modal-reset' => 'reset', :'data-list-target' => '#transactionsList', :title => 'Create New Transaction' } New
+  %a.widgettextbtn{ :href => new_flow_transaction_path('transaction[system_id]' => system.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-list-target' => '#transactionsList', :title => 'Create New Transaction' } New
 
 .description
   %script(type='text/html' data-title='' data-description='')
