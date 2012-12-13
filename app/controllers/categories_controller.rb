@@ -13,7 +13,15 @@ class CategoriesController < BaseObjectsController
   no_base_action :tooltip
 
   def index
-    @categories = Category.where(Category.arel_table[:parent_id].not_eq(nil))
+    @categories = Category
+    if params[:scope_id].present?
+      @categories = @categories.ctype(params[:scope_id])
+    end
+    if params[:root].present? && params[:root] == '1'
+      @categories = @categories.where(:parent_id => nil)
+    else
+      @categories = @categories.leaves
+    end
     if params[:s]
       @categories = @categories.db_search(params[:s])
     end
@@ -23,14 +31,22 @@ class CategoriesController < BaseObjectsController
   private
 
     def new_object
-      ccats = Category.ctype(Control::CATEGORY_TYPE_ID)
+      if params[:scope_id]
+        ccats = Category.ctype(params[:scope_id])
+      else
+        ccats = Category
+      end
       @category = ccats.new(category_params)
+    end
+
+    def base_form_context
+      super.merge :scope_id => params[:scope_id]
     end
 
     def category_params
       category_params = params[:category] || {}
       parent_id = category_params.delete(:parent_id)
-      if parent_id
+      if parent_id.present?
         category_params[:parent] = Category.find(parent_id)
       end
       category_params

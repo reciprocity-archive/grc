@@ -2,7 +2,7 @@
 
 %h3
   Categories
-  %a.btn.btn-blue.addbtn.fltrt{:href => list_edit_flow_categorizations_path(:object_type => object.class.name, :object_id => object.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#categoryList', :'data-modal-class' => 'modal-wide' } Edit List
+  %a.btn.btn-blue.addbtn.fltrt{:href => list_edit_flow_categorizations_path(:object_type => object.class.name, :object_id => object.id, :scope_id => Control::CATEGORY_TYPE_ID), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#categoryList', :'data-modal-class' => 'modal-wide' } Edit List
 
 %script#category_list_item{ :type => 'text/html', :'data-member' => 'categorization' }
   %li.controlSlot{ :'data-id' => '<%= category.id %>' }

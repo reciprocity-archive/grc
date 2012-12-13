@@ -350,3 +350,19 @@ jQuery(function($) {
       .find('.modal-body p').html(data.help.content);
   });
 });
+
+jQuery(function($) {
+  $('body').on('change', 'select[name="category[scope_id]"]', function(e) {
+    var $this = $(this)
+      , scope_id = $this.val()
+      , $cats = $this.closest('form').find('select[name="category[parent_id]"]')
+      ;
+    $cats.empty();
+    $.get('/categories', { scope_id: scope_id, root: 1 }, function(data) {
+      $.map(data, function(cat, i) {
+        $cats.append('<option value="' + cat.category.id + '">' + cat.category.name + '</option>');
+      });
+    });
+  });
+});
+

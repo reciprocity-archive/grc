@@ -7,12 +7,29 @@
 -if !f.object.new_record?
   -content_for :modal_delete_path, delete_flow_category_path(f.object)
 
+-if f.object.scope_id.present?
+  =f.hidden_field :scope_id, :value => Control::CATEGORY_TYPE_ID
+-else
+  .row-fluid
+    .span4
+      %label Scope
+      %select(name='category[scope_id]')
+        %option{ :value => Control::CATEGORY_TYPE_ID } Control Type
+        %option{ :value => Control::CATEGORY_ASSERTION_TYPE_ID } Control Assertion
+        %option{ :value => System::CATEGORY_TYPE_ID } System Type
+
 .row-fluid
   .span4
     %label Type
     .controls
       %select(name='category[parent_id]')
-        -Category.where(:parent_id => nil).each do |category|
+        -categories = Category.where(:parent_id => nil)
+        -if f.object.scope_id.present?
+          -categories = categories.where(:scope_id => f.object.scope_id)
+        -else
+          - categories = categories.where(:scope_id => Control::CATEGORY_TYPE_ID)
+
+        -categories.each do |category|
           %option{ :value => category.id }=category.name
   .span1
   .span7
