@@ -11,12 +11,16 @@
   .modal-body
     %form
       .row-fluid
-        .span4
-          %label Title
+        .span3
+          %label Audit Cycle
+          .item
+            Sarbanes Oxley 2012
+        .span3
+          %label PBC List Title
           %input.span12{:type => "text", :value => "EY Google SOX PBC List"}
-        .span4
+        .span2
           %label Audit Firm
-          %input.span12{:type => "text", :value => "Ernst &amp; Young"}
+          %input.span12{:type => "text", :value => "Ernst & Young"}
         .span2
           %label Audit Contact
           %input.span12{:type => "text", :value => "Paul Harvey"}
@@ -29,7 +33,8 @@
         .span12
           %label
             Description (Optional)
-          =text_area_tag "pbc-control-description", "", :class => "span12 double wysihtml5", :placeholder => "Enter description here"
+          .wysiwyg-area
+            =text_area_tag "pbc-control-description", "", :class => "span12 double wysihtml5", :placeholder => "Enter description here"
 
   =render :partial => 'design/templates/modalfooter', :locals => { :shownote => false, :showcreated => true, :showrevs => true }
   
