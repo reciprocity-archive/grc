@@ -20,7 +20,7 @@
           %a.widgetbtn.fltrt{ :href => flow_control_path(item), :title => 'View Control' }
             %i.grcicon-arrowright-grey
           %span.prefix=item.slug
-          =item.title || item.description
+          =item.title || strip_tags(item.description)
         .controllist.attached.span3{ :class => "statusblue" }
           -controls = item.implementing_controls
           -if !controls.empty?
@@ -34,4 +34,4 @@
               %strong 0
       .row-fluid-slotcontent.collapse{ :id => content_id }
         .span9
-          =item.description
+          =raw item.description

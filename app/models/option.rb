@@ -1,5 +1,6 @@
 class Option < ActiveRecord::Base
   include AuthoredModel
+  include SanitizableAttributes
 
   attr_accessible :role, :title, :description, :required
 
@@ -10,6 +11,8 @@ class Option < ActiveRecord::Base
   scope :options_for, lambda { |role| where(:role => role) }
 
   is_versioned_ext
+
+  sanitize_attributes :description
 
   def display_name
     title

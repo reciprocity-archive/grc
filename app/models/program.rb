@@ -7,6 +7,7 @@ class Program < ActiveRecord::Base
   include SearchableModel
   include AuthorizedModel
   include RelatedModel
+  include SanitizableAttributes
 
   attr_accessible :title, :slug, :company, :description, :start_date, :stop_date, :audit_start_date, :audit_frequency, :audit_duration, :organization, :url, :scope, :kind, :version
 
@@ -22,6 +23,8 @@ class Program < ActiveRecord::Base
   belongs_to :audit_duration, :class_name => 'Option', :conditions => { :role => 'audit_duration' }
 
   is_versioned_ext
+
+  sanitize_attributes :description
 
   before_save :assign_company_boolean_from_program_kind
 

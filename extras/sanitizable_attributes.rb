@@ -31,7 +31,8 @@ module SanitizableAttributes
   module ClassMethods
     def sanitize_attributes(*attr_names)
       cattr_accessor :sanitizable_attributes
-      self.sanitizable_attributes = attr_names
+      self.sanitizable_attributes ||= []
+      self.sanitizable_attributes += attr_names.to_a
 
       before_validation :sanitize!
     end

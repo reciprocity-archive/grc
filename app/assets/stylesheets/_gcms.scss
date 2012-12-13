@@ -1613,14 +1613,16 @@ margin-top:5px;
 .juke-left {
 
   // Commented out because it was for some custom placement but is being used everywhere.
+  // DR: Returned because it's needed for _object_list button alignments.
 
-  //margin-right:7px;
+  margin-right:7px;
 }
 .juke-down {
 
   // Commented out because it was for some custom placement but is being used everywhere.
-  
-  //margin-top:6px;
+  // DR: Returned because it's needed for _object_list button alignments.
+
+  margin-top:6px;
 }
 
 .morewell {
@@ -2578,4 +2580,14 @@ However, we can't remove this until the slots in question are refactored to row-
     white-space: nowrap;
     text-overflow: ellipsis;
   }
+}
+
+/* FIXME DR: bootstrap collapse bugfix
+   When collapsed elements have expanded height of zero,
+   bootstrap-collapse doesn't trigger transition-end, and
+   this borks the toggling.  To fix, add a 1px-height element
+   inside the .collapse target. */
+.bootstrap-collapse-bugfix {
+  display: block;
+  height: 1px;
 }

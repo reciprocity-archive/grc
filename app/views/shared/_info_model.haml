@@ -33,7 +33,7 @@
   .row-fluid
     .span12
       %label Description
-      %textarea#textarea{:disabled => "disabled", :rows => 3}=instance.description
+      =raw instance.description
 
 %hr.hr-widget
 

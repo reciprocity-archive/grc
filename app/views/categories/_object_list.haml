@@ -1,21 +1,24 @@
 -# locals: object
 
-%h3.toggle{"data-target" => "#categoryList", "data-toggle" => "collapse"}
+%h3.toggle{"data-target" => "#categoryListCollapse", "data-toggle" => "collapse"}
   .expander
   Categories
-  %a.widgetbtn.pull-right.juke-down{:href => list_edit_flow_categorizations_path(:object_type => object.class.name, :object_id => object.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#categoryList', :'data-modal-class' => 'modal-wide' }
+  %a.widgetbtn.pull-right.juke-left{:href => list_edit_flow_categorizations_path(:object_type => object.class.name, :object_id => object.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#categoryList', :'data-modal-class' => 'modal-wide' }
     %i.grcicon-link
 
-%script#category_list_item{ :type => 'text/html', :'data-member' => 'categorization' }
-  %li.controlSlot{ :'data-id' => '<%= category.id %>' }
-    %span.controls-group <%= category.parent_name %>
-    %br
-    %span.controls-subgroup <%= category.name || '&nbsp;' %>
+.collapse#categoryListCollapse
+  .bootstrap-collapse-bugfix
 
-%ul#categoryList.collapse{ :'data-template-id' => 'category_list_item' }
-  -object.categorizations.all.each do |object_item|
-    -item = object_item.category
-    %li.controlSlot{ :'data-id' => item.id }
-      %span.controls-group=item.parent_name
+  %script#category_list_item{ :type => 'text/html', :'data-member' => 'categorization' }
+    %li.controlSlot{ :'data-id' => '<%= category.id %>' }
+      %span.controls-group <%= category.parent_name %>
       %br
-      %span.controls-subgroup=item.name || '&nbsp;'.html_safe
+      %span.controls-subgroup <%= category.name || '&nbsp;' %>
+
+  %ul#categoryList{ :'data-template-id' => 'category_list_item' }
+    -object.categorizations.all.each do |object_item|
+      -item = object_item.category
+      %li.controlSlot{ :'data-id' => item.id }
+        %span.controls-group=item.parent_name
+        %br
+        %span.controls-subgroup=item.name || '&nbsp;'.html_safe

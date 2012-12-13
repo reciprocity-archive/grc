@@ -9,10 +9,10 @@
           %a.widgetbtn.fltrt{ :href => flow_system_path(system) }
             %i.grcicon-arrowright-grey
           %span.prefix=system.slug
-          =system.title || system.description
+          =system.title || strip_tags(system.description)
       .row-fluid-slotcontent.collapse{ :id => "content_system_#{system.id}" }
         .span12
-          =system.description
+          =raw system.description
     %ul
       =walk_slug_tree(Program.slugtree(system.controls)) do |item, step|
         .row-fluid
@@ -22,10 +22,10 @@
               %a.widgetbtn.fltrt{ :href => flow_control_path(item) }
                 %i.grcicon-arrowright-grey
               %span.prefix=item.slug
-              =item.title || item.description
+              =item.title || strip_tags(item.description)
           .row-fluid-slotcontent.collapse{ :id => "content_item_#{item.id}" }
             .span9
-              =item.description
+              =raw item.description
       -subsystems = system.sub_systems.all
       -if subsystems.count > 0
         %li

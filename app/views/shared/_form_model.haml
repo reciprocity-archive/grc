@@ -16,7 +16,7 @@
       =wrapped_text_field f, :span6, :slug, :label_name => 'Code (autofill)', :placeholder => "#{f.object.class.to_s.upcase}-XXXX"
       =wrapped_text_field f, :span6, :version, :placeholder => '1.1.1'
 .row-fluid
-  =wrapped_text_area f, :span6, :description, :class => 'double', :placeholder => 'Enter description here'
+  =wrapped_text_area f, :span6, :description, :class => 'double wysihtml5', :placeholder => 'Enter description here'
   .span6
     .row-fluid
       =wrapped_date_field f, :span6, :start_date, :class => 'date', :label_name => 'Effective Date', :placeholder => 'MM/DD/YYYY'
@@ -28,3 +28,5 @@
   .span6
 
 %br
+
+=render :partial => "shared/wysihtml5"

@@ -20,7 +20,7 @@
 %br
 
 .row-fluid
-  =wrapped_text_area f, :span12, :description, :class => 'double', :placeholder => 'Enter description here'
+  =wrapped_text_area f, :span12, :description, :class => 'double wysihtml5', :placeholder => 'Enter description here'
 
 .row-fluid
   .span12{ :class => error_class(f, :link) }
@@ -29,3 +29,5 @@
     =error_messages_inline(f, :link)
 
 %br
+
+=render :partial => "shared/wysihtml5"

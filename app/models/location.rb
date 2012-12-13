@@ -4,6 +4,7 @@ class Location < ActiveRecord::Base
   include SearchableModel
   include AuthorizedModel
   include RelatedModel
+  include SanitizableAttributes
 
   attr_accessible :title, :slug, :description, :url, :version, :start_date, :stop_date
 
@@ -14,6 +15,8 @@ class Location < ActiveRecord::Base
   has_many :documents, :through => :object_documents
 
   is_versioned_ext
+
+  sanitize_attributes :description
 
   validates :title,
     :presence => { :message => "needs a value" }

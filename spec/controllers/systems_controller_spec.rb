@@ -63,7 +63,7 @@ describe SystemsController do
       sys2 = System.find_by_slug('SYS2')
       sys1.object_people.size.should == 0
       sys2.object_people.size.should == 1
-      sys2.object_people[0].role.should == 'owner'
+      sys2.object_people[0].role.should == 'accountable'
       sys2.object_people[0].person.email.should == 'b@t.com'
       rels = Relationship.where(:source_id => sys2, :source_type => System.name)
       rels.size.should == 1

@@ -16,10 +16,10 @@
             .span12.slot.controlslot{ :'data-toggle' => 'collapse', :'data-target' => "##{content_id}" }
               .expander
               %span.prefix=item.slug
-              =item.title || item.description
+              =item.title || strip_tags(item.description)
         .row-fluid-slotcontent.collapse{ :id => content_id }
           .span12
-            =item.description
+            =raw item.description
 
       =walk_slug_tree(Program.slugtree(item.controls)) do |item, step|
         -content_id = "content_#{rand(36**8).to_s(36)}"
@@ -31,4 +31,4 @@
               =item.title || item.description
         .row-fluid-slotcontent.collapse{ :id => content_id }
           .span12
-            =item.description
+            =raw item.description

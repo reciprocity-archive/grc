@@ -6,7 +6,7 @@
         %i.grcicon-arrowright-grey
       .expander
       %span.prefix=item.slug
-      =item.title || item.description
+      =item.title || strip_tags(item.description)
     -controls = item.linked_controls
     -status_class = (controls.empty? && !item.na?) ? 'statusred' : 'statusyellow'
     %a.controllist.attached{ :class => status_class, :href => mapping_section_dialog_path(item) }
@@ -23,4 +23,4 @@
       -else
         %strong 0
     .row-fluid-slotcontent.collapse{ :id => content_id }
-      %p=item.description
+      =raw item.description

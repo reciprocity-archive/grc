@@ -5,6 +5,7 @@ class System < ActiveRecord::Base
   include SearchableModel
   include AuthorizedModel
   include RelatedModel
+  include SanitizableAttributes
 
   CATEGORY_TYPE_ID = 101
 
@@ -38,6 +39,8 @@ class System < ActiveRecord::Base
   belongs_to :type, :class_name => 'Option', :conditions => { :role => 'system_type' }
 
   is_versioned_ext
+
+  sanitize_attributes :description
 
   validates :title,
     :presence => { :message => "needs a value" }
@@ -163,12 +166,7 @@ class System < ActiveRecord::Base
   end
 
   def owner_display
-    p = object_people.detect {|x| x.role == 'owner'}
-    p ? p.person.email : ''
-  end
-
-  def process_owner_display
-    p = object_people.detect {|x| x.role == 'process_owner'}
+    p = object_people.detect {|x| x.role == 'accountable'}
     p ? p.person.email : ''
   end
 end

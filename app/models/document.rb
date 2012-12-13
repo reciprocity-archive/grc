@@ -5,6 +5,7 @@ class Document < ActiveRecord::Base
   include AuthoredModel
   include AuthorizedModel
   include RelatedModel
+  include SanitizableAttributes
 
   VALID_SCHEMES = ['http', 'https', 'file']
 
@@ -18,6 +19,8 @@ class Document < ActiveRecord::Base
   belongs_to :language, :class_name => 'Option', :conditions => { :role => 'language' }
 
   is_versioned_ext
+
+  sanitize_attributes :description
 
   validate :link do
     begin
