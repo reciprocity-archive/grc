@@ -27,6 +27,15 @@
                 :locals => { :cycle => @cycle }
 
   .singleColumn
+    -if has_feature?(:BETA)
+      =render :partial => 'cycles/pbcimport',
+              :layout => 'layouts/widget_box',
+              :locals => { :cycle => @cycle }
+
+      =render :partial => 'cycles/pbclist',
+              :layout => 'layouts/widget_box',
+              :locals => { :cycle => @cycle }
+
     .fullHeight
       =render :partial => 'cycles/info',
               :layout => 'layouts/widget_box',
