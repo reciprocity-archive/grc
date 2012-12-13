@@ -15,6 +15,14 @@ class TransactionsController < BaseObjectsController
 
   private
 
+    def object_path
+      flow_system_path(@transaction.system)
+    end
+
+    def post_destroy_path
+      flow_system_path(@transaction.system)
+    end
+
     def transaction_params
       transaction_params = params[:transaction] || {}
       if transaction_params[:system_id]
