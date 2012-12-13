@@ -50,7 +50,7 @@
             .tab-content
               #category1.tab-pane.active
                 .people-list
-                  %ul.source{ :'data-list-data-href' => flow_systems_url(:as_subsystems_for => object.id), :'data-template-id' => 'subsystem_option' }
+                  %ul.source{ :'data-list-data-href' => flow_systems_path(:as_subsystems_for => object.id), :'data-template-id' => 'subsystem_option' }
   .span6
     %h4
       Sub-systems for this system

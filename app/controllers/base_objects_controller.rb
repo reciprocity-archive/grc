@@ -176,20 +176,24 @@ class BaseObjectsController < ApplicationController
       }
     end
 
-    def new_form_context
+    def base_form_context
       {}
+    end
+
+    def new_form_context
+      base_form_context
     end
 
     def edit_form_context
-      {}
+      base_form_context
     end
 
     def create_form_context
-      {}
+      base_form_context
     end
 
     def update_form_context
-      {}
+      base_form_context
     end
 
     def create_success_message

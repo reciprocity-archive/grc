@@ -24,7 +24,8 @@ class CategorizationsController < BaseMappingsController
 
     def list_form_context
       super.merge \
-        :object => params[:object_type].constantize.find(params[:object_id])
+        :object => params[:object_type].constantize.find(params[:object_id]),
+        :scope_id => params[:scope_id]
     end
 
     def update_object(relation, object_params)

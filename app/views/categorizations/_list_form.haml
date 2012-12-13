@@ -39,7 +39,7 @@
   .span6
     %h4
       Add Category
-      %a.widgetbtn.widgetbtnselector{ :href => new_flow_category_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-selector-target' => '.source, .target' }
+      %a.widgetbtn.widgetbtnselector{ :href => new_flow_category_path(:scope_id => scope_id), :'data-toggle' => 'modal-ajax-listnewform', :'data-selector-target' => '.source, .target' }
         %i.grcicon-add
       .pull-right
         %input.widgetsearch{:type => "text", :placeholder => "Search Categories"}
@@ -51,12 +51,12 @@
             .tab-content
               #category1.tab-pane.active
                 .people-list
-                  %ul.source{ :'data-list-data-href' => flow_categories_url, :'data-template-id' => 'category_option' }
+                  %ul.source{ :'data-list-data-href' => flow_categories_path(:scope_id => scope_id), :'data-template-id' => 'category_option' }
 
   .span6
     %h4
       Categories for this #{object.class.name.titleize.downcase}
 
     .people-list.currentlist
-      %ul.target{ :'data-list-data-href' => flow_categorizations_path(:object_type => object.class.name, :object_id => object.id), :'data-template-id' => 'categorization_selected' }
+      %ul.target{ :'data-list-data-href' => flow_categorizations_path(:object_type => object.class.name, :object_id => object.id, :scope_id => scope_id), :'data-template-id' => 'categorization_selected' }
 
