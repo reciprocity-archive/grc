@@ -22,7 +22,7 @@
     .slot.span12.systemslot
       .slottitle.span8.toggle{"data-target" => "##{main_toggle_target}", "data-toggle" => "collapse"}
         -if expand_this
-          .expander
+          .expander{ :class => is_root && !expand_this ? 'in' : '' }
         -else
           .enddot
         %span.prefix=product.slug
@@ -36,7 +36,7 @@
         %a.btn.btn-mini.btn-blue.halfopacity{ "data-target" => "##{summary_toggle_target}", "data-toggle" => "collapse", "rel" => "tooltip", "data-placement" => "left", "title" => "More" }
           %i.grcicon-more
 
-  .row-fluid.collapse{ :id => summary_toggle_target }
+  .row-fluid.collapse{ :id => summary_toggle_target, :class => is_root ? 'in' : '' }
     .span12.morewell.statusblue.nominheight
       .slotcontent.span12
         %ul.contentactions.pull-right
