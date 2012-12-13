@@ -22,14 +22,14 @@ function mapunmap(unmap) {
 
 
 can.Control("CMS.Controllers.Mapping", {
-	//static
-	cache : {}
+  //static
+  cache : {}
 }, {
   init : function() {
     this.updateButtons();
   }
 
-	, "#rmap, #cmap click" : function(el, ev) {
+  , "#rmap, #cmap click" : function(el, ev) {
 
     var section = $("#selected_sections").control(namespace.CMS.Controllers.Sections).options.instance;
     var rcontrol = $("#selected_rcontrol").control(namespace.CMS.Controllers.Controls).options.instance;
@@ -102,11 +102,30 @@ can.Control("CMS.Controllers.Mapping", {
       // add this control to the reg controls.
       // This isn't the best way to go about it, but CanJS/Mustache is currently ornery about accepting new observable list elements
       //  added with "push" --BM 12/11/2012
-      this.options.reg_list_controller.list = this.options.reg_list_controller.list.concat([new namespace.CMS.Models.RegControl(data)]);
-      this.options.reg_list_controller.options.observer.attr("list", this.options.reg_list_controller.list);
+      var rctl = this.options.reg_list_controller;
+      rctl.list = rctl.list.concat([new namespace.CMS.Models.RegControl(data)]);
+      rctl.options.observer.attr("list", rctl.list);
     }
-    this.options.company_list_controller.list = this.options.company_list_controller.list.concat([new namespace.CMS.Models.Control(data)]);
-    this.options.company_list_controller.options.observer.attr("list", this.options.company_list_controller.list);
+    var cctl = this.options.company_list_controller;
+    cctl.list = cctl.list.concat([new namespace.CMS.Models.Control(data)]);
+    cctl.options.observer.attr("list", cctl.list);
+  }
+
+  , "a.controllist, a.controllistRM click" : function(el, ev) {
+    var $dialog = $("#mapping_dialog");
+    if(!$dialog.length) {
+      $dialog = $('<div id="mapping_dialog" class="modal hide"></div>')
+        .appendTo(this.element)
+        .draggable({ handle: '.modal-header' });
+    }
+
+    ev.preventDefault();
+    $dialog.html(can.view("/sections/controls_mapping.mustache", el.closest("[data-model]").data("model")));
+    $dialog.modal_form({ backdrop: false }).modal_form('show');
+  }
+
+  , "#mapping_dialog .closebtn click" : function(el) {
+    el.closest("#mapping_dialog").modal_form('hide');
   }
 
 });

@@ -1,0 +1,81 @@
+<div class="modal-header">
+  <a class="close" data-dismiss="modal"> x </a>
+  <h1> Controls Mapped to {{slug}} </h1>
+</div>
+
+<div class="modal-body" data-section-id="{{id}}">
+  {{#if linked_controls.length}}
+  <div class="row-fluid">
+    <div class="span6 control-group">
+      <h3>Regulation Controls</h3>
+    </div>
+    <div class="span6 control-group">
+      <h3>Company Controls</h3>
+    </div>
+  </div>
+  {{#rcontrols this}}
+    {{#foo_controls}}
+    <div class="row-fluid-alternating-background-colors">
+      <div class="row-fluid">
+        <div class="span6 control-group">
+          <ul class="slugtree nav">
+            <li {{data 'model'}} data-model="true">
+              {{> /controls/show_unmap_dialog.mustache}}
+            </li>
+          </ul>
+        </div>
+        <div class="span6 control-group" data-rcontrol-id="{{id}}">
+          <ul class="slugtree nav">
+            {{#implementing_controls}}
+              <li {{data 'model'}} data-model="true">
+              {{> /controls/show_unmap_dialog.mustache}}
+              </li>
+            {{/implementing_controls}}
+          </ul>
+        </div>
+      </div>
+    </div>
+    {{/foo_controls}}
+  {{/rcontrols}}
+  <br>
+  <div class="row-fluid">
+    <label class="cleanlabel" for="section_notes">Note</label>
+  </div>
+  <div class="row-fluid">
+    <div class="span12">
+      <textarea class="span12 note" cols="40" id="section_notes" name="section[notes]" rows="3">{{notes}}</textarea>
+    </div>
+  </div>
+  <br>
+  <div class="row-fluid nominheight">
+    <div class="span3"></div>
+    <div class="span3"></div>
+    <div class="span3"> </div>
+    <div class="span3">
+      <label class="fltrt" for="control-verificationdate"><strong>Approved</strong>:
+        <span class="statustextred">Not Approved</span>
+      </label>
+    </div>
+  </div>
+    {{else}}
+      <div class="span12 well">
+        <input name="section[na]" type="hidden" value="0">
+        <input class="checkbox" id="section_na" name="section[na]" type="checkbox" value="1">
+        <h3 style="display:inline;">
+          &nbsp;No controls implemented for this section
+        </h3>
+      </div>
+    {{/if}}
+  </div>
+
+<div class="modal-footer">
+  <div class="row-fluid">
+    <nav class="fltlft txtlft span3">
+      <input class="btn btn-large btn-info closebtn" name="commit" type="button" value="Cancel">
+    </nav>
+    <nav class="fltrt txtrt span3">
+      <div class="btn btn-large btn-success disabled"> Approve </div>
+    </nav>
+  </div>
+</div>
+
