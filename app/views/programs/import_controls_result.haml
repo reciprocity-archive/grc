@@ -1,3 +1,5 @@
+-@messages = @messages.reject{|m|m.starts_with?("Invalid control heading") || m.starts_with?("Invalid program heading")}
+
 .row-fluid
   %hr.hr-widget
 
@@ -21,7 +23,7 @@
   %h4 Data to Import
 
 .row-fluid
-  #sampleData.span12.well{:style => 'overflow: scroll'}
+  #sampleData.span12.well{:style => 'overflow: scroll; max-height: 600px;'}
     -if @messages.present?
       -@messages.each do |m|
         %p{ :class => 'label-warning' }
@@ -80,8 +82,10 @@
   -if params[:confirm].blank?
     .span9
     .span3
-      -if @errors.any? || @messages.any?
+      -if @errors.any?
         =submit_tag "Correct Errors Before Proceeding", :class => %w(span12 btn btn-large btn-warning btn-primary), :name => 'confirm', :disabled => true
+      -elsif @messages.any?
+        =submit_tag "Proceed With Caution", :class => %w(span12 btn btn-large btn-warning btn-primary), :name => 'confirm'
       -else
         =submit_tag "Finish Importing", :class => %w(span12 btn btn-large btn-success btn-primary), :name => 'confirm'
   -else
