@@ -132,6 +132,7 @@
                 .span4.nominheight
                   .badge.badge-important.fltnone 9
       / end of widget
+
     / end of singlecolumn
     .singleColumn
       / ipactscope
@@ -240,6 +241,66 @@
       / end ipactscope
   / end of doubleColumn
   .singleColumn
+
+    / PBC List Import
+    #importpbclist.WidgetBox
+      .WidgetBoxHeading
+        %nav
+          %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+            %i.grcicon-questionmark-grey
+        .WidgetTitle.doublewidth Import PBC Lists
+
+      .WidgetBoxContent
+    
+        .btn.btn-warning
+          %i.grcicon-import-white
+          Import PBC List    
+    
+    / end of widget
+
+
+    / PBC List
+    #pbclistwidget.WidgetBox
+      .WidgetBoxHeading
+        %nav
+          %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+            %i.grcicon-questionmark-grey
+          %a.widgetbtn{"data-toggle" => "modal", :href => "#pbcListEdit"}
+            %i.grcicon-add
+        .WidgetTitle.doublewidth PBC Lists
+
+      .WidgetBoxContent        
+      
+        .item-titles
+          .row-fluid
+            .span3
+              Date
+            .span4
+              Firm
+            .span5
+              PBC Title
+        %a.item-link{:href => "pbc-list.htm"}
+          .item
+            .row-fluid        
+              .span3
+                03/15/12
+              .span4
+                Ernst & Young
+              .span5
+                EY Google SOX PBC
+        %a.item-link{:href => "pbc-list.htm"}
+          .item
+            .row-fluid        
+              .span3
+                03/05/11
+              .span4
+                Ernst & Young
+              .span5
+                EY SOX 2011
+    / end of widget
+
+
+
     #systeminfowidget.WidgetBox
       .WidgetBoxHeading
         %nav

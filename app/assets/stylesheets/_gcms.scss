@@ -337,6 +337,26 @@ width: 97px;
   .btn {
     line-height:18px;
   } */
+  
+  .item {
+    font-weight:normal;
+    margin-top:4px;
+    padding-top:4px;
+    padding-bottom:4px;
+    [class*="span"] {
+      min-height:0;
+    }    
+  }
+  
+  .item-titles {
+    padding:0 6px;
+    [class*="span"] {
+      min-height:0;
+      font-size:11px;
+      font-weight:bold;
+    }    
+    
+  }
 }
 
 .accordion-group {
