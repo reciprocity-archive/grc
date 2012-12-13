@@ -68,7 +68,7 @@
                   %select.span12
                     %option{:selected => "selected"} Documentation
                     %option Interview
-                    %option Population
+                    %option Population Sample
                 .span3
                   %label
                     Status
@@ -156,9 +156,8 @@
               .span2.pbc-item.pbc-request
                 %select.span12
                   %option{:selected => "selected"} Documentation
-                  %option Open - Interview
-                  %option Open - Population
-                  %option Completed
+                  %option Interview
+                  %option Population Sample
                 %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
               .span2.pbc-item.pbc-test
                 %p Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
@@ -219,10 +218,7 @@
                               %i.grcicon-add
                             %a{:href => "#"}  Add new document
                       .span1.pbc-item.pbc-actions
-                        %a.btn.btn-mini{"data-toggle" => "modal", :href => "#newResponse"}
-                          %i.grcicon-edit-grey
-                        %a.btn.btn-mini
-                          %i.grcicon-arrowright-grey
+                        &nbsp;
                   %li.item.i-process
                     .row-fluid
                       .span12
@@ -266,14 +262,14 @@
                               %i.grcicon-add
                             %a{:href => "#"}  Add new document                            
                       .span1.pbc-item.pbc-actions
-                        %a.btn.btn-mini{"data-toggle" => "modal", :href => "#newResponse"}
+                        %a.btn.btn-mini{"data-toggle" => "modal", :href => "#newResponseDocumentation"}
                           %i.grcicon-edit-grey
                         %a.btn.btn-mini
                           %i.grcicon-arrowright-grey
                   %li.item.i-process
                     .row-fluid
                       .span12
-                        Proc-87 Population Request Type Process
+                        Proc-87 Population Sample Request Type Process
                     .row-fluid
                       .span5
                         %label
@@ -303,13 +299,13 @@
                           %li
                             %a.btn.btn-nano.pull-right
                               %i.grcicon-edit-grey
-                            %a{:href => "#"} Population Description
+                            %a{:href => "#"} Population Sample Description
                           %li
                             %a.btn.btn-nano.pull-right
                               %i.grcicon-edit-grey
                             %a{:href => "#"} Sample Description
                       .span1.pbc-item.pbc-actions
-                        %a.btn.btn-mini{"data-toggle" => "modal", :href => "#newResponse"}
+                        %a.btn.btn-mini{"data-toggle" => "modal", :href => "#newResponsePopulation"}
                           %i.grcicon-edit-grey
                         %a.btn.btn-mini
                           %i.grcicon-arrowright-grey
@@ -357,6 +353,6 @@
                             %a{:href => "#"}  Add new meeting event
                       .span1.pbc-item.pbc-actions
                         %a.btn.btn-mini
-                          %i.grcicon-edit-grey{"data-toggle" => "modal", :href => "#newResponse"}
+                          %i.grcicon-edit-grey{"data-toggle" => "modal", :href => "#newResponseInterview"}
                         %a.btn.btn-mini
                           %i.grcicon-arrowright-grey

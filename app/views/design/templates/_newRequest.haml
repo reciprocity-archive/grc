@@ -7,7 +7,7 @@
         %i.grcicon-x-grey
     %h1
       New/Edit Request
-      %span.version v.0.1
+      %span.version v.0.60
   .modal-body
     .alert.alert-info
       %span#alertMessage
@@ -18,7 +18,11 @@
           %input.span12{:type => "text", :placeholder => "Control Code"}
         .span2
           %label GRC Control Code
-          %input.span12{:type => "text", :placeholder => "Control Code"}
+          %a.btn.btn-mini.pull-right
+            %i.grcicon-edit-grey
+          .item.i-control.has-link
+            Control Code
+
         .span2
           %label Company Contact
           %input.span12{:type => "text", :placeholder => "LDAP ID"}
@@ -26,7 +30,7 @@
           %label Auditor Contact
           %input.span12{:type => "text", :placeholder => "Name"}
         .span2
-          %label Auditor Contact
+          %label Date Requested
           %input#date.span12.date{:type => "text", :placeholder => "MM/DD/YYYY"}
           :javascript
             $('#date').datepicker();
@@ -41,21 +45,25 @@
       .row-fluid
         .span6
           %label
-            PBC Control Description
-            =text_area_tag "pbc-control-description", "", :class => "span12 double wysihtml5", :placeholder => "Enter description here"
+            Control Description from PBC List
+            .wysiwyg-area
+              =text_area_tag "pbcdescription", "", :class => "span12 double wysihtml5", :placeholder => "Enter description here"
         .span6
           %label
             Request
-            =text_area_tag "request", "", :class => "span12 double wysihtml5", :placeholder => "Enter request here"
+            .wysiwyg-area
+              =text_area_tag "request", "", :class => "span12 double wysihtml5", :placeholder => "Enter request here"
       .row-fluid
         .span6
           %label
-            PBC Control Description
-            =text_area_tag "notes", "", :class => "span12 double wysihtml5", :placeholder => "Enter notes here"
+            Notes
+            .wysiwyg-area
+              =text_area_tag "notes", "", :class => "span12 double wysihtml5", :placeholder => "Enter notes here"
         .span6
           %label
             Test
-            =text_area_tag "test", "", :class => "span12 double wysihtml5", :placeholder => "Enter test here"
+            .wysiwyg-area
+              =text_area_tag "test", "", :class => "span12 double wysihtml5", :placeholder => "Enter test here"
 
         
   =render :partial => 'design/templates/modalfooter', :locals => { :shownote => false, :showcreated => true, :showrevs => true }

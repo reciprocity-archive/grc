@@ -144,6 +144,14 @@ td {
   &.error {
     border:2px solid $errorColor;
   }
+  &.has-link {
+    margin-right:24px;
+  }
+}
+
+form .item {
+  padding-top:3px;
+  padding-bottom:3px;
 }
 
 input.date {

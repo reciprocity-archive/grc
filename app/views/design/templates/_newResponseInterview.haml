@@ -1,0 +1,16 @@
+#newResponseInterview.modal.modal-wide.hide.fade
+  .modal-header
+    %nav
+      %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+        %i.grcicon-questionmark-grey
+      %a.widgetbtn{"data-dismiss" => "modal", :href => "#"}
+        %i.grcicon-x-grey
+    %h1
+      Edit Interview Response
+      %span.version v.0.1
+  .modal-body
+    %form
+      WIP
+
+
+  =render :partial => 'design/templates/modalfooter', :locals => { :shownote => false, :showcreated => true, :showrevs => true }

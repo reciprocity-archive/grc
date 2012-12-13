@@ -357,3 +357,13 @@
 .category-group {
   display:none;
 }
+
+// WYSIWYG
+
+.wysiwyg-area {
+  border:1px solid #ccc;
+  @include border-radius();
+  padding:4px;
+  @include background-image(linear-gradient(center top, #ddd, #eee ));  
+}
+
