@@ -25,7 +25,7 @@
       }
     } catch (e) {
       err = e.message;
-      return "< % ERROR: " + err + " % >";
+      return "<span> % ERROR: " + err + " % </span>";
     }
   }
 

@@ -31,7 +31,7 @@
         .slotowner.span1
           %a.slotowner{:href => "#"} Owner Joe
       .slotactions.pull-right
-        %a.btn.btn-mini.btn-blue.halfopacity{ "data-target" => "##{id_prefix}-summary", "data-toggle" => "collapse", "rel" => "tooltip", "data-placement" => "left", "title" => "More" }
+        %a.btn.btn-mini.btn-blue.halfopacity{ "data-target" => "##{summary_toggle_target}", "data-toggle" => "collapse", "rel" => "tooltip", "data-placement" => "left", "title" => "More" }
           %i.grcicon-more
 
   .row-fluid.collapse{ :id => summary_toggle_target }
@@ -69,7 +69,7 @@
                 .slotowner.span1
                   %a.slotowner{:href => "#"} Owner Bob
               .slotactions.pull-right
-                %a.btn.btn-mini.btn-blue.halfopacity{"data-target" => "##{control_id_prefix}-summary", "data-toggle" => "collapse"}
+                %a.btn.btn-mini.btn-blue.halfopacity{"data-target" => "##{control_summary_target}", "data-toggle" => "collapse"}
                   %i.grcicon-more
           .row-fluid.collapse{ :id => control_summary_target }
             .span12.morewell.statusblue.nominheight

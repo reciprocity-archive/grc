@@ -9,7 +9,9 @@ class ControlsController < BaseObjectsController
 
   before_filter :load_control, :only => [:sections,
                                          :implemented_controls,
-                                         :implementing_controls]
+                                         :implementing_controls,
+                                         :systems,
+                                         :risks]
 
   cache_sweeper :control_sweeper, :only => [:create, :update, :destroy]
 
@@ -68,7 +70,7 @@ class ControlsController < BaseObjectsController
       format.html do
         render :action => 'controls', :layout => nil, :locals => { :controls => @controls, :prefix => 'Parent of' }
       end
-      format.json do 
+      format.json do
         render :json => @controls, :methods => :implemented_controls
       end
     end
@@ -81,6 +83,21 @@ class ControlsController < BaseObjectsController
     end
     @controls.all.sort_by(&:slug_split_for_sort)
     render :action => 'controls', :layout => nil, :locals => { :controls => @controls, :prefix => 'Child of' }
+  end
+
+  def systems
+    @systems = @control.systems
+    if params[:s]
+      @systems = @systems.fulltext_search(params[:s])
+    end
+    @systems = @systems.all
+
+    render :action => 'systems', :layout => nil, :locals => { :systems => @systems, :control => @control }
+  end
+
+  def risks
+    @risks = []
+    render :action => 'risks', :layout => nil, :locals => { :risks => @risks }
   end
 
   private

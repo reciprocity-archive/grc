@@ -37,6 +37,8 @@ CmsRails::Application.routes.draw do
       get 'sections'
       get 'implemented_controls'
       get 'implementing_controls'
+      get 'systems'
+      get 'risks'
       get 'delete'
     end
   end

@@ -2,6 +2,13 @@
 //= require controls/controls_controller
 (function(namespace, $) {
 
+// Explicitly short circuit until handling of implemented/implementing controls
+// is complete.
+return;
+
+if (!/\/controls/.test(window.location.pathname))
+  return;
+
 var controlId = namespace.location.pathname.substr(window.location.pathname.lastIndexOf("/") + 1);
 
 $(function() {

@@ -17,12 +17,7 @@
 .row-static
   .doubleColumn
     .doubleWide.halfHeight
-      =render :partial => 'controls/text',
-              :layout => 'layouts/widget_box',
-              :locals => { :control => @control }
-
-    .doubleWide.halfHeight
-      =render :partial => 'controls/mappings',
+      =render :partial => 'controls/main',
               :layout => 'layouts/widget_box',
               :locals => { :control => @control }
 

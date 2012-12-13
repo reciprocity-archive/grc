@@ -1,26 +1,31 @@
-%ul.slugtree
+-# locals: sections
+
+.row-fluid
+  .span12.captionbox
+    %h4
+      Program or Policy Sections that mandate this Control
+
+%ul.slotlist
   =walk_slug_tree(Program.slugtree(sections)) do |item, step|
     -content_id = "content_#{rand(36**8).to_s(36)}" # unique ID for toggle
-    .slot.regulationslot{ :'data-toggle' => 'collapse', :'data-target' => "##{content_id}" }
-      -#%a.widgetbtn.fltrt{ :href => flow_section_path(item), :title => 'View Section' }
-        %i.grcicon-arrowright-grey
-      .expander
-      %span.prefix=item.slug
-      =item.title || strip_tags(item.description)
-    -controls = item.linked_controls
-    -status_class = (controls.empty? && !item.na?) ? 'statusred' : 'statusyellow'
-    %a.controllist.attached{ :class => status_class, :href => mapping_section_dialog_path(item) }
+    .row-fluid
+      .slot.span12.regulationslot
+        .slottitle.span8.toggle{"data-target" => "##{content_id}", "data-toggle" => "collapse"}
+          .expander
+          %span.prefix
+            =item.slug
+          =item.title || strip_tags(item.description)
+        -if has_feature? :BETA
+          .span2.slotcolumn
+            .halfopacity.span12.nominheight.btn.btn-slotcolumn Full Audit
+          .slotowner.span1
+            %a.slotowner GRC
+        .slotactions.pull-right
+          %a#tooltip11.btn.btn-mini.btn-blue{"rel" => "tooltip", "data-placement" => "left", "title" => "More", "data-target" => "##{content_id}", "data-toggle" => "collapse"}
+            %i.grcicon-more
 
-      -controls = item.linked_controls
-      -if !controls.empty?
-        %ul{ :title => controls.map(&:slug).join(", ") }
-          %li
-            %strong #{controls.size}:
-          -controls.each do |control|
-            %li=control.slug
-      -elsif item.na?
-        N/A
-      -else
-        %strong 0
-    .row-fluid-slotcontent.collapse{ :id => content_id }
-      =raw item.description
+      .row-fluid.collapse{ :id => content_id }
+        .span12.morewell.nominheight
+          .slotcontent.span12
+            %ul.contentactions.pull-right
+            =raw item.description
