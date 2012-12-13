@@ -7,45 +7,73 @@
   %a.widgetbtn{ :href => edit_flow_control_path(control), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide', :title => 'Edit Control' }
     %i.grcicon-edit-grey
 
-.information
-  .toolbar-widget
+%hr.hr-widget
 
-  %hr.hr-widget
+.row-fluid
+  .span12
+    %h3.toggle{"data-target" => "#about", "data-toggle" => "collapse"}
+      .expander
+      About
+      %a.widgetbtn.pull-right.juke-left{ :href => edit_flow_control_path(control), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide', :title => 'Edit Control' }
+        %i.grcicon-edit-grey
 
-  .row-fluid
-    .span12
-      .span4
-        %label Code
-        %input.span12{:type => "text", :disabled => "disabled", :value => control.slug}
-      .span4
-        %label Effective Date
-        %input.span12{:type => "text", :disabled => "disabled", :value => control.start_date && control.start_date.strftime("%m/%d/%y")}
-  .row-fluid
-    .span12
-      .span4
-        %label Type
-        %input.span12{:disabled => "disabled", :type => "text", :value => control.type && control.type.title}
-      .span4
-        %label Kind
-        %input.span12{:disabled => "disabled", :type => "text", :value => control.kind && control.kind.title}
-      .span4
-        %label Means of Operation
-        %input.span12{:disabled => "disabled", :type => "text", :value => control.means && control.means.title}
-  .row-fluid
-    .span12
-      %label Full Title
-      %input.span12{:disabled => "disabled", :type => "text", :value => control.title}
-  .row-fluid
-    .span4
-      %label Version
-      %input.span12{:disabled => "disabled", :type => "text"}
-    .span4
-      %label Status
-      %input.span12{:disabled => "disabled", :type => "text"}
-  .row-fluid
-    .span12
-      %label Description
-      =raw control.description
+    #about.collapse
+      .row-fluid
+        .span12
+          .span3
+            %label Code
+            %input.span12{:type => "text", :disabled => "disabled", :value => control.slug}
+          .span3
+            %label Version
+            %input.span12{:disabled => "disabled", :type => "text", :value => control.version}
+          .span3
+            %label Type
+            %input.span12{:disabled => "disabled", :type => "text", :value => control.type && control.type.title}
+          .span3
+            %label Kind
+            %input.span12{:disabled => "disabled", :type => "text", :value => control.kind && control.kind.title}
+      .row-fluid
+        .span12
+          .span3
+            %label Fraud-related
+            %input.span12{:disabled => "disabled", :type => "text", :value => control.fraud_related ? 'Yes' : 'No'}
+          .span3
+            %label Significance
+            %input.span12{:disabled => "disabled", :type => "text", :value => control.key_control ? 'Key' : 'Non-key'}
+          .span6
+            %label Assertions
+            %input.span12{:disabled => "disabled", :type => "text", :value => control.assertions.map(&:name).join(', ')}
+      .row-fluid
+        .span12
+          .span8
+            %label Means of Operation
+            %input.span12{:disabled => "disabled", :type => "text", :value => control.means && control.means.title}
+          .span4
+            %label Confirm Frequency
+            %input.span12{:disabled => "disabled", :type => "text", :value => control.verify_frequency && control.verify_frequency.title}
+      .row-fluid
+        .span12
+          %label Description
+          .well=raw control.description
+      .row-fluid
+        .span12
+          %label Notes
+          .well=raw control.notes
+      .row-fluid
+        .span12
+          %label Direct Link
+          %input.span12{:disabled => "disabled", :type => "text", :value => control.url}
+      .row-fluid
+        .span12
+          .span4
+            %label Effective Date
+            %input.span12{:type => "text", :disabled => "disabled", :value => control.start_date && control.start_date.strftime("%m/%d/%y")}
+          .span4
+            %label Stop Date
+            %input.span12{:type => "text", :disabled => "disabled", :value => control.stop_date && control.stop_date.strftime("%m/%d/%y")}
+          .span4
+            %label Status
+            %input.span12{:type => "text", :disabled => "disabled", :value => control.active ? 'Active' : 'Inactive'}
 
 %hr.hr-widget
 

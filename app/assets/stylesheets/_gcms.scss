@@ -764,7 +764,7 @@ nav {
   padding:5px;
 }
 
-#categorylist {
+#assertionlist, #categorylist {
   min-height:169px;
 }
 
@@ -2501,7 +2501,7 @@ However, we can't remove this until the slots in question are refactored to row-
   @include opacity(0.4);
 }
 
-#categorylist {
+#assertionlist, #categorylist {
   select {
     width: 100%;
     height: 142px;

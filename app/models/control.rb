@@ -13,7 +13,7 @@ class Control < ActiveRecord::Base
   CATEGORY_TYPE_ID = 100
   CATEGORY_ASSERTION_TYPE_ID = 102
 
-  attr_accessible :title, :slug, :description, :program, :section_ids, :type, :kind, :means, :categories, :verify_frequency, :url, :start_date, :stop_date, :version, :documentation_description
+  attr_accessible :title, :slug, :description, :program, :section_ids, :type, :kind, :means, :categories, :verify_frequency, :url, :start_date, :stop_date, :version, :documentation_description, :notes, :assertions, :fraud_related, :key_control
 
   def general_categories
     categories.ctype(CATEGORY_TYPE_ID)
@@ -54,9 +54,15 @@ class Control < ActiveRecord::Base
   belongs_to :means, :class_name => 'Option', :conditions => { :role => 'control_means' }
   belongs_to :verify_frequency, :class_name => 'Option', :conditions => { :role => 'verify_frequency' }
 
+  has_many :categorizations, :as => :categorizable, :dependent => :destroy
+  has_many :categories, :through => :categorizations, :conditions => { :scope_id => Control::CATEGORY_TYPE_ID }
+
+  has_many :assertations, :class_name => 'Categorization', :as => :categorizable, :dependent => :destroy
+  has_many :assertions, :through => :assertations, :source => :category, :conditions => { :scope_id => Control::CATEGORY_ASSERTION_TYPE_ID }
+
   is_versioned_ext
 
-  sanitize_attributes :description, :documentation_description
+  sanitize_attributes :description, :documentation_description, :notes
 
   validates :title, :program, :program_id,
     :presence => { :message => "needs a value" }
@@ -156,6 +162,10 @@ class Control < ActiveRecord::Base
   end
 
   def self.category_tree
-    Category.roots.all.map { |c| [c, c.children.all] }
+    Category.ctype(CATEGORY_TYPE_ID).roots.all.map { |c| [c, c.children.all] }
+  end
+
+  def self.assertion_tree
+    Category.ctype(CATEGORY_ASSERTION_TYPE_ID).roots.all.map { |c| [c, c.children.all] }
   end
 end

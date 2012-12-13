@@ -38,6 +38,9 @@ class System < ActiveRecord::Base
 
   belongs_to :type, :class_name => 'Option', :conditions => { :role => 'system_type' }
 
+  has_many :categorizations, :as => :categorizable, :dependent => :destroy
+  has_many :categories, :through => :categorizations, :conditions => { :scope_id => System::CATEGORY_TYPE_ID }
+
   is_versioned_ext
 
   sanitize_attributes :description
