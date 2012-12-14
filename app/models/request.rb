@@ -7,6 +7,7 @@ class Request < ActiveRecord::Base
 
   belongs_to :pbc_list
   belongs_to :control
+  belongs_to :type, :class_name => 'Option', :conditions => { :role => 'request_type' }
 
   is_versioned_ext
 
