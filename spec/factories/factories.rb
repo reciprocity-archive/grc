@@ -268,6 +268,7 @@ FactoryGirl.define do
   end
 
   factory :pbc_list do
+    title 'title x'
     audit_cycle { |c| c.association(:cycle) }
   end
 
