@@ -153,7 +153,7 @@ $.each({
     return can.map(
       $(ctls_list).filter( 
         function() {
-          return can.inArray(this.id, implementing_control_ids)
+          return $.inArray(this.id, implementing_control_ids) < 0;
         })
       , function(ctl) { return options.fn({ foo_controls : namespace.CMS.Models[val].findInCacheById(ctl.id) }); }
     )

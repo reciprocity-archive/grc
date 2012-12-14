@@ -44,7 +44,7 @@
       }
     }
     , fetch_list : function() {
-      this.options.model.findAll({ id : this.options.id }, this.proxy("draw_list"));
+      this.find_all_deferred = this.options.model.findAll({ id : this.options.id }, this.proxy("draw_list"));
     }
     , draw_list : function(list) {
       if(this.list) {
