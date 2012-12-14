@@ -27,7 +27,12 @@ can.Control("CMS.Controllers.Mapping", {
   cache : {}
 }, {
   init : function() {
-    $.when(
+    this.link_lists();
+    this.updateButtons();
+  }
+
+  , link_lists : function() {
+      $.when(
         this.options.company_list_controller.find_all_deferred
         , this.options.reg_list_controller.find_all_deferred
         , this.options.section_list_controller.find_all_deferred
@@ -67,16 +72,15 @@ can.Control("CMS.Controllers.Mapping", {
 
       });
 
-    this.updateButtons();
   }
 
   , "#rmap, #cmap click" : function(el, ev) {
-
+    var that = this;
     var section = $("#selected_sections").control(namespace.CMS.Controllers.Sections).options.instance;
     var rcontrol = $("#selected_rcontrol").control(namespace.CMS.Controllers.Controls).options.instance;
     var ccontrol = $("#selected_ccontrol").control(namespace.CMS.Controllers.Controls).options.instance;
 
-    if(el.is($("#cmap"))) {
+    if(el.is("#cmap")) {
       section = null;
     }
     var dfd = this[el.is(".unmapbtn") ? "unmap" : "map"](section, rcontrol, ccontrol); 
@@ -84,6 +88,18 @@ can.Control("CMS.Controllers.Mapping", {
     dfd.then(function() { 
       that.options.section_list_controller.draw_list(); //manual update because section model doesn't contain "real" rcontrol model
     });
+
+    if(!rcontrol && el.is("#rmap")) {
+      dfd.then($.proxy(this.options.reg_list_controller, "fetch_list"))
+      .then(function() {
+        that.options.reg_list_controller.find_all_deferred.then(function(list) {
+          //assume that the newly added reg is the last one.  Cheap hack.  We could instead copy the original list
+          // and diff it against the new one.
+          section.attr("linked_controls", section.linked_controls.concat([list[list.length - 1]]));
+        })
+        .then($.proxy(that, "link_lists"));
+      });
+    }
   }  
 
   , unmap : function() { return mapunmap(true).apply(this, arguments); }
@@ -130,6 +146,12 @@ can.Control("CMS.Controllers.Mapping", {
           var runmap = section && rcontrol ? $(section.linked_controls).filter(function() { return this.id  === rcontrol.id}).length : false;
               runmap || (runmap = section && !rcontrol && ccontrol ? $(section.linked_controls).filter(function() { return this.id === ccontrol.id}).length : false);
           var cunmap = rcontrol && ccontrol ? $(rcontrol.implementing_controls).filter(function() { return this.id === ccontrol.id}).length : false;
+
+          // We don't know how we'd unmap a ccontrol directly from a section, because there's an auto-generated
+          //  rcontrol associated with it.  So don't allow it.
+          if(section && !rcontrol && runmap) {
+            rmap.attr("disabled", true);
+          }
 
           rmap_text.text(runmap ? 'Unmap' : 'Map section to control')
           rmap[runmap ? 'addClass' : "removeClass"]("unmapbtn");
