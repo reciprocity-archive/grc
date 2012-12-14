@@ -25,24 +25,6 @@
   }
 }
 
-.request-states {
-  @include clearfix();
-  float:right;
-  line-height:12px;
-  margin-right:80px;
-  min-height:0;
-  font-size:11px;
-  .letter-group {
-    float:left;
-    margin-right:10px;
-    color:$textColor;
-    .letter {
-      color:#111;
-      margin-right:22px;
-    }
-  }
-}
-
 .pbc-request-title-area {
   .item {
     @include border-radius(4px 4px 0 0);
@@ -89,7 +71,6 @@ ul.pbc-responses {
     }
     &.main-item {
       border:1px solid $borderDark;
-      padding:0;
     }
   }
   
