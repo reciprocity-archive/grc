@@ -176,6 +176,18 @@ CmsRails::Application.routes.draw do
     end
   end
 
+  resources :pbc_lists, :as => 'flow_pbc_lists', :only => [:show, :new, :create, :edit, :update, :destroy] do
+    member do
+      get 'delete'
+    end
+  end
+
+  resources :requests, :as => 'flow_requests', :only => [:new, :create, :edit, :update, :destroy] do
+    member do
+      get 'delete'
+    end
+  end
+
   match 'programs_dash' => 'programs_dash#index'
   match 'quick/programs' => 'quick#programs'
   match 'quick/sections' => 'quick#sections'

@@ -89,6 +89,7 @@ module FormHelper
     options = args.extract_options!
 
     label_name = options.delete(:label_name)
+    wrapper_div_class = options.delete(:wrapper_div_class)
 
     input_options = {}
     input_options[:class] = ['span12', options[:class]]
@@ -98,10 +99,20 @@ module FormHelper
 
     classes = [span_class, error_class(f, name)]
 
-    content_tag :div, :class => classes.compact do
-      f.label(name, label_name) +
-        f.send(builder_name, name, *(args << options.merge(input_options))) +
-        error_messages_inline(f, name)
+    if wrapper_div_class.present?
+      content_tag :div, :class => classes.compact do
+        concat f.label(name, label_name)
+        concat(content_tag(:div, :class => wrapper_div_class) do
+          f.send(builder_name, name, *(args << options.merge(input_options))) +
+          error_messages_inline(f, name)
+        end)
+      end
+    else
+      content_tag :div, :class => classes.compact do
+        f.label(name, label_name) +
+          f.send(builder_name, name, *(args << options.merge(input_options))) +
+          error_messages_inline(f, name)
+      end
     end
   end
 

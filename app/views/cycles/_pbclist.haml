@@ -4,7 +4,7 @@
 -content_for :widget_help, 'cycle_pbclist'
 
 -content_for :widget_buttons do
-  %a.widgetbtn{"data-toggle" => "modal", :href => "#pbcListEdit"}
+  %a.widgetbtn{ :href => new_flow_pbc_list_path(:'pbc_list[audit_cycle_id]' => cycle.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide'}
     %i.grcicon-add
 
 .item-titles
@@ -15,21 +15,11 @@
       Firm
     .span5
       PBC Title
-%a.item-link{:href => "/design/pbc-list"}
-  .item
-    .row-fluid        
-      .span3
-        03/15/12
-      .span4
-        Ernst & Young
-      .span5
-        EY Google SOX PBC
-%a.item-link{:href => "/design/pbc-list"}
-  .item
-    .row-fluid        
-      .span3
-        03/05/11
-      .span4
-        Ernst & Young
-      .span5
-        EY SOX 2011
+
+-cycle.pbc_lists.each do |pbc_list|
+  %a.item-link{ :href => flow_pbc_list_path(pbc_list.id) }
+    .item
+      .row-fluid
+        .span3=pbc_list.list_import_date && pbc_list.list_import_date.strftime('%m/%d/%Y')
+        .span4=pbc_list.audit_firm
+        .span5=pbc_list.title

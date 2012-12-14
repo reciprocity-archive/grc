@@ -1,0 +1,97 @@
+-#requests = pbc_list.requests
+
+.row-fluid
+  .span12
+    %h3.pbc-title
+      %a.btn.btn-mini{ :href => new_flow_request_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide'}
+        %i.grcicon-add
+      .request-states
+        %span.letter-group
+          internal
+          %br
+          %span.letter D
+          %span.letter E
+        %span.letter-group
+          external
+          %br
+          %span.letter D
+          %span.letter E
+
+      Requests
+
+%ul.pbc-responses
+  -#requests.each do |request|
+  -[1].each do |request|
+    %li.main-item
+      .pbc-request-title-area
+        .item
+          .row-fluid
+            .span2
+              SOX-CON-1
+            .span7
+              Goog-Con-23
+              &nbsp;&nbsp;
+              Physically Protect Stored Data
+            .span3
+              %a.btn.btn-mini
+                %i.enddot.default
+              %a.btn.btn-mini
+                %i.enddot.default
+              &nbsp;
+              %a.btn.btn-mini
+                %i.enddot.accept
+              %a.btn.btn-mini
+                %i.enddot.decline
+      .row-fluid.pbc-header
+        .span3
+          Control and Description from PBC
+        .span2
+          Request
+        .span2
+          Test
+        .span2
+          Notes
+        .span2
+          Status
+        .span1
+          &nbsp;
+      .row-fluid
+        .span3.pbc-item.pbc-control
+          %a.btn.btn-mini.pull-right
+            %i.grcicon-link
+          .item.i-control
+            Con-334 Contol Title
+          %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        .span2.pbc-item.pbc-request
+          %select.span12
+            %option{:selected => "selected"} Documentation
+            %option Interview
+            %option Population Sample
+          %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        .span2.pbc-item.pbc-test
+          %p Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        .span2.pbc-item.pbc-notes
+          %p Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        .span2.pbc-item.pbc-status
+          %select.span12
+            %option{:selected => "selected"} Draft
+            %option Open - Waiting Compliance
+            %option Open - Waiting Auditors
+            %option Completed
+          %p
+            %strong Company:
+            Joss Rayburn
+            %br
+            %strong Auditor:
+            Joss Rayburn
+
+          %p.subtle
+            %strong Requested:
+            04/22/12
+        .span1.pbc-item.pbc-actions
+          %a.btn.btn-mini{"data-toggle" => "modal", :href => "#newRequest"}
+            %i.grcicon-edit-grey
+
+      .row-fluid
+        =render :partial => "responses", :locals => { :pbc_list => pbc_list, :request => request }
+

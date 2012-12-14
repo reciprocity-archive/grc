@@ -1,0 +1,83 @@
+.widget-head
+  .widget-actions
+    %a.btn.btn-mini{ :href => edit_flow_pbc_list_path(pbc_list.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide'}
+      %i.grcicon-edit-grey
+    %a.btn.btn-mini{:href => "/help/pbc_list", :'data-toggle' => 'modal-ajax', :title => "Help - What is this?"}
+      %i.grcicon-questionmark-grey
+  %h2
+    PBC Request List
+.widget-filters
+  .row-fluid
+    .span4.widget-titles
+      .row-fluid
+        .span6
+          %label Program
+          %h4=pbc_list.audit_cycle.program.title
+        .span6
+          %label Title
+          %h4=pbc_list.title
+      .row-fluid
+        .span4
+          %label Audit Firm
+          %h4=pbc_list.audit_firm
+        .span4
+          %label Audit Lead
+          %h4=pbc_list.audit_lead
+        .span4
+          %label List Import Date
+          %h4=pbc_list.list_import_date && pbc_list.list_import_date.strftime('%m/%d/%Y')
+
+    .span2
+      .filters-box
+        .row-fluid
+          .span12.title-row
+            %label
+              %strong Sort By
+        .row-fluid
+          .span12
+            %label
+              Choose
+            %select.span12
+              %option{:selected => "selected"} Control Code
+              %option Request Date
+    .span6
+      .filters-box
+        .row-fluid
+          .span12.title-row
+            %label
+              %strong Filter by
+        .row-fluid
+          .span3
+            %label
+              Request Type
+            %select.span12
+              %option{:selected => "selected"} Documentation
+              %option Interview
+              %option Population Sample
+          .span3
+            %label
+              Status
+            %select.span12
+              %option{:selected => "selected"} Draft
+              %option Waiting Compliance
+              %option Waiting Auditors
+              %option Completed
+          .span2
+            %label
+              Person
+            %select.span12
+              %option - Any -
+          .span3
+            %label
+              Date (on or after)
+              %input.span12#datepicker-control-date.date{:type => "text",  :placeholder => "MM/DD/YYYY"}
+              :javascript
+                $('#datepicker-control-date').datepicker();
+          .span1
+            %label &nbsp;
+            %button.btn.span12
+              %i.grcicon-remove
+
+.widget-body
+  =render :partial => "requests", :locals => { :pbc_list => pbc_list }
+

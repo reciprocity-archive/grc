@@ -10,6 +10,8 @@ class Cycle < ActiveRecord::Base
   # The program being audited
   belongs_to :program
 
+  has_many :pbc_lists, :foreign_key => :audit_cycle_id
+
   validates :program, :presence => true
   validates :start_at, :presence => true
 

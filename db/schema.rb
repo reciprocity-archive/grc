@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121213182318) do
+ActiveRecord::Schema.define(:version => 20121214004932) do
 
   create_table "accounts", :force => true do |t|
     t.string   "username"
@@ -208,6 +208,20 @@ ActiveRecord::Schema.define(:version => 20121213182318) do
     t.datetime "updated_at",     :null => false
   end
 
+  create_table "pbc_lists", :force => true do |t|
+    t.integer  "audit_cycle_id"
+    t.string   "title"
+    t.string   "audit_firm"
+    t.string   "audit_lead"
+    t.text     "description"
+    t.datetime "list_import_date"
+    t.string   "status"
+    t.text     "notes"
+    t.integer  "modified_by_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
   create_table "people", :force => true do |t|
     t.string   "email",          :null => false
     t.string   "name"
@@ -281,6 +295,24 @@ ActiveRecord::Schema.define(:version => 20121213182318) do
   add_index "relationships", ["relationship_type_id"], :name => "index_relationships_on_relationship_type_id"
   add_index "relationships", ["source_id"], :name => "index_relationships_on_source_id"
   add_index "relationships", ["source_type"], :name => "index_relationships_on_source_type"
+
+  create_table "requests", :force => true do |t|
+    t.integer  "pbc_list_id"
+    t.integer  "type_id"
+    t.integer  "control_id"
+    t.string   "pbc_control_code"
+    t.text     "pbc_control_desc"
+    t.text     "request"
+    t.text     "test"
+    t.text     "notes"
+    t.string   "company_responsible"
+    t.string   "auditor_responsible"
+    t.datetime "date_requested"
+    t.string   "status"
+    t.integer  "modified_by_id"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
 
   create_table "risky_attributes", :force => true do |t|
     t.string   "slug"
