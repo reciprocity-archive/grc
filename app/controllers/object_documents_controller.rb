@@ -47,6 +47,6 @@ class ObjectDocumentsController < BaseMappingsController
     end
 
     def default_as_json_options
-      { :include => { :document => { :methods => 'document_type' } } }
+      { :include => { :document => { :methods => [:document_type, :link_url] } } }
     end
 end

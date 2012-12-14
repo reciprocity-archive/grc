@@ -15,10 +15,10 @@
     %li.controlSlot{ :'data-id' => '<%= document.id %>' }
       %a.widgetbtn.pull-right.juke-down{ :href => flow_documents_path + '/<%= document.id %>/edit', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide' }
         %i.grcicon-edit-grey
-      %a.reference{:href => '<%= document.link %>', :target => "_blank"}
+      %a.reference{:href => '<%= document.link_url %>', :target => "_blank"}
         %span.controls-group <%= document.document_type || '&nbsp;' %>
         %br
-        %span.controls-subgroup <%= document.title || '&nbsp;' %>
+        %span.controls-subgroup{ :title => '<%= document.link_url %>' } <%= document.title || '&nbsp;' %>
 
   %ul#referenceList{ :'data-template-id' => 'reference_list_item' }
     -all_object_documents.each do |object_item|
@@ -26,8 +26,8 @@
       %li.controlSlot{ :'data-id' => item.id }
         %a.widgetbtn.pull-right.juke-down{ :href => edit_flow_document_path(item), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide' }
           %i.grcicon-edit-grey
-        %a.reference{:href => item.link, :target => "_blank"}
+        %a.reference{:href => item.link_url, :target => "_blank"}
           %span.controls-group=item.document_type || '&nbsp;'.html_safe
           %br
-          %span.controls-subgroup{:title => item.link}=item.title || item.document_type || '&nbsp;'.html_safe
-          
+          %span.controls-subgroup{:title => item.link_url}=item.title || item.document_type || '&nbsp;'.html_safe
+
