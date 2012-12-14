@@ -1,9 +1,9 @@
--#requests = pbc_list.requests
+-requests = pbc_list.requests
 
 .row-fluid
   .span12
     %h3.pbc-title
-      %a.btn.btn-mini{ :href => new_flow_request_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide'}
+      %a.btn.btn-mini{ :href => new_flow_request_path(:'request[pbc_list_id]' => pbc_list.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide'}
         %i.grcicon-add
       .request-states
         %span.letter-group
@@ -20,8 +20,7 @@
       Requests
 
 %ul.pbc-responses
-  -#requests.each do |request|
-  -[1].each do |request|
+  -requests.each do |request|
     %li.main-item
       .pbc-request-title-area
         .item
@@ -60,18 +59,18 @@
           %a.btn.btn-mini.pull-right
             %i.grcicon-link
           .item.i-control
-            Con-334 Contol Title
-          %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            =request.pbc_control_code
+          %p=raw request.pbc_control_desc
         .span2.pbc-item.pbc-request
           %select.span12
             %option{:selected => "selected"} Documentation
             %option Interview
             %option Population Sample
-          %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          %p=raw request.request
         .span2.pbc-item.pbc-test
-          %p Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          %p=raw request.test
         .span2.pbc-item.pbc-notes
-          %p Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          %p=raw request.notes
         .span2.pbc-item.pbc-status
           %select.span12
             %option{:selected => "selected"} Draft
@@ -80,16 +79,16 @@
             %option Completed
           %p
             %strong Company:
-            Joss Rayburn
+            =request.company_responsible
             %br
             %strong Auditor:
-            Joss Rayburn
+            =request.auditor_responsible
 
           %p.subtle
             %strong Requested:
-            04/22/12
+            =request.date_requested && request.date_requested.strftime('%m/%d/%Y')
         .span1.pbc-item.pbc-actions
-          %a.btn.btn-mini{"data-toggle" => "modal", :href => "#newRequest"}
+          %a.btn.btn-mini{ :href => edit_flow_request_path(request.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide'}
             %i.grcicon-edit-grey
 
       .row-fluid

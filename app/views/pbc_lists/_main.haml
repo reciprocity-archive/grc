@@ -27,6 +27,7 @@
           %label List Import Date
           %h4=pbc_list.list_import_date && pbc_list.list_import_date.strftime('%m/%d/%Y')
 
+    -filters_disabled = pbc_list.requests.count == 0
     .span2
       .filters-box
         .row-fluid
@@ -37,7 +38,7 @@
           .span12
             %label
               Choose
-            %select.span12
+            %select.span12{ :disabled => filters_disabled }
               %option{:selected => "selected"} Control Code
               %option Request Date
     .span6
@@ -50,14 +51,14 @@
           .span3
             %label
               Request Type
-            %select.span12
+            %select.span12{ :disabled => filters_disabled }
               %option{:selected => "selected"} Documentation
               %option Interview
               %option Population Sample
           .span3
             %label
               Status
-            %select.span12
+            %select.span12{ :disabled => filters_disabled }
               %option{:selected => "selected"} Draft
               %option Waiting Compliance
               %option Waiting Auditors
@@ -65,12 +66,12 @@
           .span2
             %label
               Person
-            %select.span12
+            %select.span12{ :disabled => filters_disabled }
               %option - Any -
           .span3
             %label
               Date (on or after)
-              %input.span12#datepicker-control-date.date{:type => "text",  :placeholder => "MM/DD/YYYY"}
+              %input.span12#datepicker-control-date.date{:type => "text",  :placeholder => "MM/DD/YYYY", :disabled => filters_disabled }
               :javascript
                 $('#datepicker-control-date').datepicker();
           .span1

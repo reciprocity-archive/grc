@@ -267,4 +267,11 @@ FactoryGirl.define do
     person
   end
 
+  factory :pbc_list do
+    audit_cycle { |c| c.association(:cycle) }
+  end
+
+  factory :request do
+    pbc_list { |c| c.association(:pbc_list) }
+  end
 end

@@ -32,14 +32,26 @@ class RequestsController < BaseObjectsController
       flow_pbc_list_path(object.pbc_list_id)
     end
 
-    def pbc_list_params
-      pbc_list_params = params[:pbc_list] || {}
+    def post_destroy_path
+      flow_pbc_list_path(object.pbc_list_id)
+    end
+
+    def request_params
+      request_params = params[:request] || {}
+
+      pbc_list_id = request_params.delete(:pbc_list_id)
+      if pbc_list_id.present?
+        pbc_list = PbcList.where(:id => pbc_list_id).first
+        if pbc_list.present?
+          request_params[:pbc_list] = pbc_list
+        end
+      end
       #%w(type).each do |field|
-      #  parse_option_param(pbc_list_params, field)
+      #  parse_option_param(request_params, field)
       #end
-      #%w(list_import_date).each do |field|
-      #  parse_date_param(pbc_list_params, field)
-      #end
-      pbc_list_params
+      %w(date_requested).each do |field|
+        parse_date_param(request_params, field)
+      end
+      request_params
     end
 end

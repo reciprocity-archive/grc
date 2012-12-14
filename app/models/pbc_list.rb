@@ -7,6 +7,8 @@ class PbcList < ActiveRecord::Base
 
   belongs_to :audit_cycle, :class_name => 'Cycle'
 
+  has_many :requests
+
   is_versioned_ext
 
   sanitize_attributes :description, :notes
