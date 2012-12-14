@@ -24,6 +24,25 @@
     min-height:auto !important;
   }
 }
+.pbc-response-actions {
+  .btn {
+    margin-top:0px !important;
+    margin-bottom:4px;
+    float:right;
+  }
+}
+
+.pbc-counter {
+  margin-top:4px;
+  display:block;
+  color:$textColor;
+  i {
+    @include opacity(0.5);
+  }
+  &.empty {
+    @include opacity(0.3);
+  }
+}
 
 .pbc-request-title-area {
   .item {

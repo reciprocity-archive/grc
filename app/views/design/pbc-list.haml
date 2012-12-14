@@ -96,7 +96,7 @@
         .row-fluid
           .span12
             %h3.pbc-title                    
-              %a.btn.btn-mini{"data-toggle" => "modal", :href => "#newRequest"}
+              %a#tooltip14.btn.btn-mini{"rel" => "tooltip", "data-placement" => "left", "title" => "Add New Request","data-toggle" => "modal", :href => "#newRequest"}
                 %i.grcicon-add
               Requests                    
         %ul.pbc-responses
@@ -148,19 +148,30 @@
                   %strong Requested:
                   04/22/12
               .span1.pbc-item.pbc-actions
-                %a.btn.btn-mini{"data-toggle" => "modal", :href => "#newRequest"}
+                %a#tooltip12.btn.btn-mini{"rel" => "tooltip", "data-placement" => "left", "title" => "Edit Request", "data-toggle" => "modal", :href => "#newRequest"}
                   %i.grcicon-edit-grey
+
             .row-fluid            
               .span12 
                 %h3.pbc-title
                   Responses
-                  %a.btn.btn-mini{"data-toggle" => "modal", :href => "#newResponse"}
+                  %a#tooltip11.btn.btn-mini{"data-toggle" => "modal", :href => "#newResponse"}
                     %i.grcicon-add
                 %ul.items-list
                   %li.item.i-process
                     .row-fluid
-                      .span12
+                      .span5
                         %input.span12{:type => "text", :placeholder => "Enter process name"}
+                      .span3
+                        %span.pbc-counter.empty
+                          %i.grcicon-person
+                          0
+                      .span3
+                        %span.pbc-counter.empty
+                          %i.grcicon-document
+                          0
+                      .span1
+                        &nbsp;
                     .row-fluid
                       .span5
                         %label
@@ -189,9 +200,20 @@
                         &nbsp;
                   %li.item.i-process
                     .row-fluid
-                      .span12
+                      .span5
                         Proc-89 Accounts Security Policy Review
-                    .row-fluid
+                      .span3
+                        %span.pbc-counter
+                          %i.grcicon-person
+                          1
+                      .span3
+                        %span.pbc-counter
+                          %i.grcicon-document
+                          2
+                      .span1.pbc-response-actions
+                        %a#tooltip11.btn.btn-mini{"rel" => "tooltip", "data-placement" => "left", "title" => "More", "data-target" => "#pbc-response-1", "data-toggle" => "collapse"}
+                          %i.grcicon-more
+                    #pbc-response-1.row-fluid.collapse
                       .span5
                         %label
                           %strong Process Description
@@ -236,9 +258,20 @@
                           %i.grcicon-arrowright-grey
                   %li.item.i-process
                     .row-fluid
-                      .span12
+                      .span5
                         Proc-87 Population Sample Request Type Process
-                    .row-fluid
+                      .span3
+                        %span.pbc-counter
+                          %i.grcicon-person
+                          1
+                      .span3
+                        %span.pbc-counter
+                          %i.grcicon-populationsample
+                          2
+                      .span1.pbc-response-actions
+                        %a#tooltip11.btn.btn-mini{"rel" => "tooltip", "data-placement" => "left", "title" => "More", "data-target" => "#pbc-response-2", "data-toggle" => "collapse"}
+                          %i.grcicon-more
+                    #pbc-response-2.row-fluid.collapse
                       .span5
                         %label
                           %strong Process Description
@@ -262,7 +295,7 @@
                             %a{:href => "#"}  Add new person
                       .span3
                         %label
-                          %strong Description
+                          %strong Population Samples
                         %ul.pbc-item-list
                           %li
                             %a.btn.btn-nano.pull-right
@@ -279,9 +312,20 @@
                           %i.grcicon-arrowright-grey
                   %li.item.i-process
                     .row-fluid
-                      .span12
+                      .span5
                         Proc-90 Interview Request Type Process
-                    .row-fluid
+                      .span3
+                        %span.pbc-counter.empty
+                          %i.grcicon-person
+                          0
+                      .span3
+                        %span.pbc-counter
+                          %i.grcicon-calendar
+                          1
+                      .span1.pbc-response-actions
+                        %a#tooltip11.btn.btn-mini{"rel" => "tooltip", "data-placement" => "left", "title" => "More", "data-target" => "#pbc-response-3", "data-toggle" => "collapse"}
+                          %i.grcicon-more
+                    #pbc-response-3.row-fluid.collapse
                       .span5
                         %label
                           %strong Process Description
@@ -296,10 +340,6 @@
                           %strong People
                         %ul.pbc-item-list
                           %li
-                            %a.btn.btn-nano.pull-right
-                              %i.grcicon-edit-grey
-                            %a{:href => "#"} Dan Waterson (Responsible Party)
-                          %li
                             %a.btn.btn-nano
                               %i.grcicon-add
                             %a{:href => "#"}  Add new person
@@ -311,10 +351,6 @@
                             %a.btn.btn-nano.pull-right
                               %i.grcicon-edit-grey
                             %a{:href => "#"} 2012-10-11 - First Interview
-                          %li
-                            %a.btn.btn-nano.pull-right
-                              %i.grcicon-edit-grey
-                            %a{:href => "#"} 2012-12-01 - Last Interview
                           %li
                             %a.btn.btn-nano
                               %i.grcicon-add
