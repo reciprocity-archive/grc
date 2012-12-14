@@ -212,6 +212,12 @@ can.Control("CMS.Controllers.Mapping", {
     });
   }
 
+  , "#section_na click" : function(el, ev) {
+    var section = namespace.CMS.Models.SectionSlug.findInCacheById(el.closest("[data-section-id]").data("section-id"));
+    section.attr("na", el.attr("checked") ? 1 : 0);
+    section.save();
+  }
+
 });
 
 can.Control("CMS.Controllers.MappingWidgets", {}, {
