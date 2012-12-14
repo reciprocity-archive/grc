@@ -47,14 +47,12 @@
       this.find_all_deferred = this.options.model.findAll({ id : this.options.id }, this.proxy("draw_list"));
     }
     , draw_list : function(list) {
-      if(this.list) {
-
-      } else {
+      if(list) {
         this.list = list;
+      } 
         this.options.observer = new can.Observe({list : this.list, show : this.options.show });
         var x = can.view(this.options.list, this.options.observer);
         this.element.html(x);
-      }
     }
     , fetch_one : function(id) {
       this.options.model.findOne({ id : (id || this.options.id) }, this.proxy("draw_one"));
