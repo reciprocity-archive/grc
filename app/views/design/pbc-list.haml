@@ -101,37 +101,41 @@
               Requests                    
         %ul.pbc-responses
           %li.main-item
-            .row-fluid.pbc-header
-              .span3
-                Control and Description from PBC
-              .span2
-                Request
-              .span2
-                Test
-              .span2
-                Notes
-              .span2
-                Status
-              .span1
-                &nbsp;
-            .row-fluid
+            .row-fluid.pbc-item-head
               .span3.pbc-item.pbc-control
                 %a.btn.btn-mini.pull-right
                   %i.grcicon-link                
                 .item.i-control
                   Con-334 Contol Title
-                %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-              .span2.pbc-item.pbc-request
+              .span2.pbc-request
                 %select.span12
                   %option{:selected => "selected"} Documentation
                   %option Interview
                   %option Population Sample
+              .span2
+                &nbsp;
+              .span2
+                &nbsp;
+              .span2
+                &nbsp;
+              .span1.pbc-response-actions
+                %a#tooltip16.btn.btn-blue.btn-mini{"rel" => "tooltip", "data-placement" => "left", "title" => "More", "data-target" => "#pbc-request-1,#pbc-request-1a", "data-toggle" => "collapse"}
+                  %i.grcicon-more
+            #pbc-request-1.row-fluid.collapse
+              .span3.pbc-item.pbc-control
+                %h5 PBC Control Description
+                %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+              .span2.pbc-item.pbc-request
+                %h5 Request
                 %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
               .span2.pbc-item.pbc-test
+                %h5 Test
                 %p Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
               .span2.pbc-item.pbc-notes
+                %h5 Notes
                 %p Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
               .span2.pbc-item.pbc-status
+                %h5 Status
                 %select.span12
                   %option{:selected => "selected"} Draft
                   %option Open - Waiting Compliance
@@ -151,7 +155,7 @@
                 %a#tooltip12.btn.btn-mini{"rel" => "tooltip", "data-placement" => "left", "title" => "Edit Request", "data-toggle" => "modal", :href => "#newRequest"}
                   %i.grcicon-edit-grey
 
-            .row-fluid            
+            #pbc-request-1a.row-fluid.collapse
               .span12 
                 %h3.pbc-title
                   Responses

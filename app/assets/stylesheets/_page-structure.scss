@@ -18,9 +18,9 @@
   select {
     display:block;
     float:none;
-    margin-bottom:14px !important;
+//    margin-bottom:14px !important;
     padding:2px;
-    height:auto !important;
+    height:23px !important;
     min-height:auto !important;
   }
 }
@@ -73,6 +73,12 @@
   .btn {
     float:right;
     margin-top:2px;
+  }
+}
+
+.pbc-item-head {
+  [class*="span"] {
+   padding-bottom:0;
   }
 }
 
