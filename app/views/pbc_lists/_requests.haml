@@ -5,44 +5,11 @@
     %h3.pbc-title
       %a.btn.btn-mini{ :href => new_flow_request_path(:'request[pbc_list_id]' => pbc_list.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide'}
         %i.grcicon-add
-      -if has_feature? :BETA
-        .request-states
-          %span.letter-group
-            internal
-            %br
-            %span.letter D
-            %span.letter E
-          %span.letter-group
-            external
-            %br
-            %span.letter D
-            %span.letter E
-
       Requests
 
 %ul.pbc-responses
   -requests.each do |request|
     %li.main-item
-      .pbc-request-title-area
-        .item
-          .row-fluid
-            .span2
-              SOX-CON-1
-            .span7
-              Goog-Con-23
-              &nbsp;&nbsp;
-              Physically Protect Stored Data
-            -if has_feature? :BETA
-              .span3
-                %a.btn.btn-mini
-                  %i.enddot.default
-                %a.btn.btn-mini
-                  %i.enddot.default
-                &nbsp;
-                %a.btn.btn-mini
-                  %i.enddot.accept
-                %a.btn.btn-mini
-                  %i.enddot.decline
       .row-fluid.pbc-header
         .span3
           Control and Description from PBC
