@@ -14,13 +14,12 @@
 	    , properties : []
 	}, {
 	    draw_list : function(list) {
-	    	if(this.list) {
-
-	    	} else {
+	    	if(list) {
 	    		this.list = list;
-	    		var x = can.view(this.options.list, {children : list , "id" : this.options.id });
-		        this.element.html(x);
 	    	}
+    		var x = can.view(this.options.list, {children : this.list , "id" : this.options.id });
+	        this.element.html(x);
+
 	    }
 	    , setSelected : function(obj) {
 	    	if(this.options.arity > 1) {

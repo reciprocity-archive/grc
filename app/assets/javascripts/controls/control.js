@@ -26,6 +26,37 @@ can.Model.Cacheable("CMS.Models.Control", {
 		this._super();
 	}
 
+	, bind_section : function(section) {
+		var that = this;
+		this.bind("change.section" + section.id, function(ev, attr, how, newVal, oldVal) {
+			if(attr !== 'implementing_controls')
+				return;
+
+			var oldValIds = can.map(can.makeArray(oldVal), function(val) { return val.id; });
+
+			if(newVal.length > oldVal.length) {
+				can.each(newVal, function(el) {
+					if($.inArray(el.id, oldValIds) < 0) {
+						section.attr("linked_controls", section.linked_controls.concat([CMS.Models.Control.findInCacheById(el.id)]));
+					}
+				});
+			} else {
+				var lcs = section.linked_controls.slice(0);
+				can.each(oldVal, function(el) {
+					if($.inArray(el, newVal) < 0) {
+						lcs.splice($.inArray(el, lcs), 1);
+					}
+				});
+				section.attr(
+					"linked_controls"
+					, lcs
+				);
+			}
+		});
+	}
+	, unbind_section : function(section) {
+		this.unbind("change.section" + section.id);
+	}
 });
 
 // This creates a subclass of the Control model
@@ -69,20 +100,21 @@ CMS.Models.Control("CMS.Models.RegControl", {
 			, dataType : "json"
 			, success : function() {
 				if(control) {
+					var ics;
 					if(params.u) {
 						//unmap
-						can.each(control.implementing_controls, function(val, i) {
-							if(params.ccontrol === val.id) {
-								control.implementing_controls.splice(i, 1);
+						ics = new can.Model.List();
+						can.each(control.implementing_controls, function(ctl) {
+							if(ctl.id !== params.ccontrol)
+							{
+								ics.push(ctl);
 							}
 						});
 					} else {
 						//map
-						control.implementing_controls.push(
-							new CMS.Models.ImplementingControl(
-								CMS.Models.Control.findInCacheById(params.ccontrol).serialize()
-								));
+						ics = control.implementing_controls.concat([CMS.Models.Control.findInCacheById(params.ccontrol)]);
 					}
+					control.attr("implementing_controls", ics);
 					control.updated();
 				}
 			}

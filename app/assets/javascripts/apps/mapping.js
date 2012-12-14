@@ -61,6 +61,7 @@
           id : programId
           , reg_list_controller : namespace.CMS.Controllers.Controls.Instances.RegControls
           , company_list_controller : namespace.CMS.Controllers.Controls.Instances.CompanyControls
+          , section_list_controller : namespace.CMS.Controllers.Sections.Instances.Section
         }).control();
     });
 
