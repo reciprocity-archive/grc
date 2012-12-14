@@ -4,15 +4,16 @@
  */
 
 [class^="grcicon-"], [class^="grcicon-"] {
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  line-height: 16px;
-  @include background-size(16px 16px); 
-  vertical-align: top; //necessary or button with icon embedded will sometimes be to tall.
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    @include background-size(16px 16px); 
+    vertical-align: top; //necessary or button with icon embedded will sometimes be to tall.
+    background-position: 0px 0px;
+    background-repeat: no-repeat;
 }
+
 
 .grcicon-expandAll-grey {
   background-image: url("../images/expandAll.png");
@@ -22,13 +23,22 @@
   background-image: url("../images/shrinkAll.png");
 }
 
+
+.grcicon-sortDown {
+  background-image: url("../images/grcicons/sortDown.png");
+}
+
+.grcicon-sortUp {
+  background-image: url("../images/grcicons/sortUp.png");
+}
+
 /* Blank can be required to set a button to the correct size */
 .grcicon-blank {
   background-image: none;
 }
 
 .grcicon-arrowright-white, .grcicon-arrowright-grey  {
-  background-image: url("../images/grcicons/gear.png");
+  background-image: url("../images/grcicons/arrowright.png");
 }
 
 .grcicon-gears {

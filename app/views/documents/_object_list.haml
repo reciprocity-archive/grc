@@ -1,8 +1,10 @@
 -# locals: object
+-all_object_documents = object.object_documents.all
 
 %h3.toggle{"data-target" => "#referenceListCollapse", "data-toggle" => "collapse"}
   .expander
   References
+  %span="(#{all_object_documents.count})" unless all_object_documents.count.zero?
   %a.widgetbtn.pull-right.juke-left{:href => list_edit_flow_object_documents_path(:object_type => object.class.name, :object_id => object.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#referenceList', :'data-modal-class' => 'modal-wide' }
     %i.grcicon-link
 
@@ -13,16 +15,19 @@
     %li.controlSlot{ :'data-id' => '<%= document.id %>' }
       %a.widgetbtn.pull-right.juke-down{ :href => flow_documents_path + '/<%= document.id %>/edit', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide' }
         %i.grcicon-edit-grey
-      %span.controls-group <%= document.document_type || '&nbsp;' %>
-      %br
-      %span.controls-subgroup <%= document.title || '&nbsp;' %>
+      %a.reference{:href => '<%= document.link %>', :target => "_blank"}
+        %span.controls-group <%= document.document_type || '&nbsp;' %>
+        %br
+        %span.controls-subgroup <%= document.title || '&nbsp;' %>
 
   %ul#referenceList{ :'data-template-id' => 'reference_list_item' }
-    -object.object_documents.all.each do |object_item|
+    -all_object_documents.each do |object_item|
       -item = object_item.document
       %li.controlSlot{ :'data-id' => item.id }
         %a.widgetbtn.pull-right.juke-down{ :href => edit_flow_document_path(item), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide' }
           %i.grcicon-edit-grey
-        %span.controls-group=item.document_type || '&nbsp;'.html_safe
-        %br
-        %span.controls-subgroup=item.title || item.document_type || '&nbsp;'.html_safe
+        %a.reference{:href => item.link, :target => "_blank"}
+          %span.controls-group=item.document_type || '&nbsp;'.html_safe
+          %br
+          %span.controls-subgroup{:title => item.link}=item.title || item.document_type || '&nbsp;'.html_safe
+          

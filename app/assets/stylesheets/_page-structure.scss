@@ -1,26 +1,78 @@
 // PBC List Styles
 
 .pbc-header {
-  border:1px solid $borderDefault;
-  background:#f0f0f0;
-  padding:2px 10px;
-  margin-bottom:4px;
-  .row-fluid {
-    [class*="span"] {
-      min-height:0;
-      color:#888;
-      font-size:11px;
-      font-weight:bold;
-      padding-top:2px;
-      &:last-child {
-       text-align:right; 
-      }
+  [class*="span"] {
+    min-height:0;
+    color:#333;
+    font-size:11px;
+    font-weight:bold;
+    padding-bottom:10px;
+    &:last-child {
+     text-align:right; 
     }
   }
 }
 
+.pbc-request,
+.pbc-status {
+  select {
+    display:block;
+    float:none;
+    margin-bottom:14px !important;
+    padding:2px;
+    height:auto !important;
+    min-height:auto !important;
+  }
+}
+
+.request-states {
+  @include clearfix();
+  float:right;
+  line-height:12px;
+  margin-right:80px;
+  min-height:0;
+  font-size:11px;
+  .letter-group {
+    float:left;
+    margin-right:10px;
+    color:$textColor;
+    .letter {
+      color:#111;
+      margin-right:22px;
+    }
+  }
+}
+
+.pbc-request-title-area {
+  .item {
+    @include border-radius(4px 4px 0 0);
+    border:none;
+    border-bottom:1px solid #ccc;
+    margin-bottom:8px;
+    padding:4px 6px;
+    [class*="span"] {
+      min-height:0;
+    }
+  }
+  .btn {
+    margin-left:0px;
+    margin-right:8px;
+  }
+  .enddot {
+    background-color:$white;
+    margin-top:0;
+  }
+}
+
 .pbc-title {
-  padding-bottom:8px;
+  border:1px solid $borderDefault;
+  @include border-radius();
+  margin-bottom:4px;
+  padding:2px 10px;
+  .btn {
+    float:right;
+    margin-top:2px;
+  }
 }
 
 ul.pbc-responses {
@@ -37,6 +89,7 @@ ul.pbc-responses {
     }
     &.main-item {
       border:1px solid $borderDark;
+      padding:0;
     }
   }
   
@@ -109,3 +162,10 @@ ul.pbc-responses {
   }
 }
 
+.pbc-person {
+  color:#999;
+}
+
+.pbc-email {
+  font-weight:normal;
+}

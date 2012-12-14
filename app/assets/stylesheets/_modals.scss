@@ -1,4 +1,14 @@
 
+h5.in-modal {
+  line-height:28px;
+  padding-top:10px;
+  color:#888;
+  font-size:11px;
+  .btn {
+    margin-right:4px;
+    margin-top:2px;
+  }
+}
 
 .modal {
   max-height: 720px;
@@ -357,3 +367,13 @@
 .category-group {
   display:none;
 }
+
+// WYSIWYG
+
+.wysiwyg-area {
+  border:1px solid #ccc;
+  @include border-radius();
+  padding:4px;
+  @include background-image(linear-gradient(center top, #ddd, #eee ));  
+}
+

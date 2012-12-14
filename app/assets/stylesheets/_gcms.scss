@@ -337,6 +337,26 @@ width: 97px;
   .btn {
     line-height:18px;
   } */
+  
+  .item {
+    font-weight:normal;
+    margin-top:4px;
+    padding-top:4px;
+    padding-bottom:4px;
+    [class*="span"] {
+      min-height:0;
+    }    
+  }
+  
+  .item-titles {
+    padding:0 6px;
+    [class*="span"] {
+      min-height:0;
+      font-size:11px;
+      font-weight:bold;
+    }    
+    
+  }
 }
 
 .accordion-group {
@@ -790,7 +810,7 @@ nav {
   color: #aaa;
   font-size: 11px;
   line-height: 1;
-  margin-right: 7px;
+  margin-right: 9px;
   text-align: right;
 }
 
@@ -863,8 +883,8 @@ nav {
   list-style: none;
 }
 
-.userInfo-nav {
-margin: 2px 0 0 0;
+.userInfo-nav{
+margin: 3px 0px 0 0;
 padding: 0 0 0 0;
 }
 
@@ -908,7 +928,6 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
 .navbar {
   border-bottom:3px solid #ccc;
   
-  
   .brand {
     display: inline-block;
     float: left;
@@ -925,7 +944,7 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
 .navbar-secondinner {
   height:54px;
   padding: 4px 0 0 5px;
-  //Arial this large looks too padded, lets ue a Google Font for Headers.
+  //Arial this large looks too padded, lets use a Google Font for Headers.
   font-family: 'Titillium Web', Arial, Helvetica;
 }
 
@@ -945,15 +964,15 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
 .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {
   // Forced size, not responsive
   width: 1120px;
-  padding:0 15px 0 15px;
+  padding: 0 15px 0 15px;
 }
 
 .headerleft {
-  max-width:502px;
-  min-width:251px;
+  max-width: 502px;
+  min-width: 251px;
   float: left;
   margin-left: 0px;
-  padding-top:2px;
+  padding-top: 2px;
 }
 
 .headercenter {
@@ -1478,15 +1497,27 @@ ul.slugtree {
   &.risk {
     background-image: url("../images/grcicons/enddot-risk.png");
   }
+  &.decline {
+    background-image: url("../images/grcicons/enddot-risk.png");
+  }
   &.system {
     background-image: url("../images/grcicons/enddot-system.png");
   }
   &.regulation {
     background-image: url("../images/grcicons/enddot-regulation.png");
   }
+  &.accept {
+    background-image: url("../images/grcicons/enddot-regulation.png");
+  }
+
   &.control {
     background-image: url("../images/grcicons/enddot-control.png");
   }
+  &.default {
+    background-image: url("../images/grcicons/enddot-default.png");
+  }
+  
+  
 }
 
 .doubleslot {

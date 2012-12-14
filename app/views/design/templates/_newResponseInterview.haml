@@ -1,0 +1,93 @@
+#newResponseInterview.modal.modal-wide.hide.fade
+  .modal-header
+    %nav
+      %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+        %i.grcicon-questionmark-grey
+      %a.widgetbtn{"data-dismiss" => "modal", :href => "#"}
+        %i.grcicon-x-grey
+    %h1
+      PBC Response - Interview
+      %span.version v 0.4
+  .modal-body
+    %form
+      .row-fluid
+        .span4        
+          %label Title
+          %input.span12{:type => "text", :value => "Accounts Security Policy Review Process"}
+        .span2
+          %label Code (optional)
+          %input.span12{:type => "text", :value => "Auto-Create"}
+        .span2
+          %label Type
+          %select.span12
+            %option Process
+            %option System
+        .span2
+          %label Kind (optional)
+          %select.span12
+            %option Infrastructure
+        .span2                        
+          %label Network Zone (optional)
+          %select.span12
+            %option N/A
+      .row-fluid
+        .span6
+          %label
+            System/Process Description
+          .wysiwyg-area
+            =text_area_tag "spdescription", "", :class => "span12 double wysihtml5", :placeholder => "Enter description here"
+        .span6
+          %label
+            System/Process Notes
+          .wysiwyg-area
+            =text_area_tag "spnotes", "", :class => "span12 double wysihtml5", :placeholder => "Enter description here"
+      .row-fluid
+        .span6
+          %h5.in-modal
+            %a.btn.btn-mini.pull-right
+              %i.grcicon-link
+            Responsible Parties
+          .item 
+            %a.btn.btn-mini.pull-right
+              %i.grcicon-edit-grey
+            %span.pbc-person
+              Daniel Waterson
+            %br
+            %span.pbc-email
+              %a{:href => "mailto:daniel@longcompanyname.com"} daniel@longcompanyname.com
+          .item 
+            %a.btn.btn-mini.pull-right
+              %i.grcicon-edit-grey
+            %span.pbc-person
+              Alex Mountain
+            %br
+            %span.pbc-email
+              %a{:href => "mailto:alexandermountain@longcompanyname.com"} alexandermountain@longcompanyname.com
+
+        .span6
+          %h5.in-modal
+            %a.btn.btn-mini.pull-right
+              %i.grcicon-link
+            Meeting Event
+          .item 
+            %a.btn.btn-mini.pull-right
+              %i.grcicon-edit-grey
+            %span.pbc-person
+              2012/10/11
+            %br
+            %span.pbc-email
+              %a{:href => "#"} First Interview
+          .item 
+            %a.btn.btn-mini.pull-right
+              %i.grcicon-edit-grey
+            %span.pbc-person
+              2012/11/11
+            %br
+            %span.pbc-email
+              %a{:href => "#"} Final Thoughts Meeting
+
+
+
+  =render :partial => 'design/templates/modalfooter', :locals => { :shownote => false, :showcreated => true, :showrevs => true }
+
+=render :partial => "shared/wysihtml5"

@@ -89,6 +89,7 @@ td {
 // broad definition of items, with assigned colors
 // i- prefix is there to avoid collision with other color definitions
 
+
 .item {
   @include border-radius();
   @include background-image($gradientColor);
@@ -144,6 +145,28 @@ td {
   &.error {
     border:2px solid $errorColor;
   }
+  &.has-link {
+    margin-right:24px;
+  }
+}
+
+a.item-link {
+  .item {
+    color:$textColor;
+  }
+  &:hover {
+    .item {
+      border:1px solid $textColor;
+      color:#111;
+    }
+  }
+}
+
+
+form .item {
+  padding-top:3px;
+  padding-bottom:3px;
+  margin-bottom:2px;
 }
 
 input.date {
@@ -152,4 +175,13 @@ input.date {
   background-position:6px 5px;
   padding-left:26px;
   cursor:pointer;
+}
+
+a.reference {
+  &:hover {
+    .controls-subgroup {
+      color:#369 !important;
+      text-decoration:underline;  
+    } 
+  }
 }
