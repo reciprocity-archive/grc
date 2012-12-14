@@ -4,6 +4,18 @@
 
 can.Model.Cacheable("CMS.Models.Section", {
   findAll : "GET /sections.json"
+  , update : function(id, section) {
+    var param = {};
+    can.each(section, function(val, key) {
+      param["section[" + key + "]"] = val;
+    });
+    return $.ajax({
+      type : "PUT"
+      , url : "/mapping/update/" + id + ".json"
+      , dataType : "json"
+      , data : param
+    });
+  }
   , map_rcontrol : function(params, section) {
     return can.ajax({
       url : "/mapping/map_rcontrol"
