@@ -45,6 +45,9 @@
 
 .pbc-request-title-area {
   .item {
+    @include border-radius(4px 4px 0 0);
+    border:none;
+    border-bottom:1px solid #ccc;
     margin-bottom:8px;
     padding:4px 6px;
     [class*="span"] {
@@ -86,6 +89,7 @@ ul.pbc-responses {
     }
     &.main-item {
       border:1px solid $borderDark;
+      padding:0;
     }
   }
   

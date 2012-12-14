@@ -176,3 +176,12 @@ input.date {
   padding-left:26px;
   cursor:pointer;
 }
+
+a.reference {
+  &:hover {
+    .controls-subgroup {
+      color:#369 !important;
+      text-decoration:underline;  
+    } 
+  }
+}
