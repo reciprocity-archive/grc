@@ -34,6 +34,9 @@
     .span4
       %label Status
       %input.span12{:disabled => "disabled", :type => "text"}
+    .span4
+      %label Network Zone
+      %input.span12{:disabled => "disabled", :type => "text", :value => system.network_zone && system.network_zone.title}
   .row-fluid
     .span12
       %label Description

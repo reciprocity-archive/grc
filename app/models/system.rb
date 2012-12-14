@@ -9,7 +9,7 @@ class System < ActiveRecord::Base
 
   CATEGORY_TYPE_ID = 101
 
-  attr_accessible :title, :slug, :description, :url, :version, :infrastructure, :is_biz_process, :type, :start_date, :stop_date, :notes
+  attr_accessible :title, :slug, :description, :url, :version, :infrastructure, :is_biz_process, :type, :start_date, :stop_date, :notes, :network_zone_id
 
   # Many to many with Control
   has_many :system_controls, :dependent => :destroy
@@ -37,6 +37,7 @@ class System < ActiveRecord::Base
   has_many :transactions
 
   belongs_to :type, :class_name => 'Option', :conditions => { :role => 'system_type' }
+  belongs_to :network_zone, :class_name => 'Option', :conditions => { :role => 'network_zone' }
 
   has_many :categorizations, :as => :categorizable, :dependent => :destroy
   has_many :categories, :through => :categorizations, :conditions => { :scope_id => System::CATEGORY_TYPE_ID }
