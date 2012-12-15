@@ -60,9 +60,9 @@ can.Control("CMS.Controllers.Mapping", {
           var controls = new can.Model.List();
           can.each(ctls_list, function(ctl) {
             if(can.inArray(ctl.id, implementing_control_ids) < 0) {
-              var ctl = CMS.Models.RegControl.findInCacheById(ctl.id);
-              controls.push(ctl);
-              ctl.bind_section(section); 
+              var rctl = CMS.Models.RegControl.findInCacheById(ctl.id);
+              controls.push(rctl);
+              rctl.bind_section(section); 
             } else {
               controls.push(CMS.Models.Control.findInCacheById(ctl.id));
             }
