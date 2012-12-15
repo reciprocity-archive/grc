@@ -9,7 +9,7 @@
 
 %ul.pbc-responses
   -requests.each do |request|
-    %li.main-item
+    %li.main-item{ html_data_attributes(request, "data-filter-", [ ["type", "type.display_name"], "status", ["date-requested", "date_requested.to_date"], ["control-code", "control.slug"], ["person", "persons_resposibile"] ]) }
       .row-fluid.pbc-header
         .span3
           Control and Description from PBC

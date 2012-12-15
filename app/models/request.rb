@@ -19,5 +19,8 @@ class Request < ActiveRecord::Base
   def display_name
     pbc_control_code
   end
-end
 
+  def persons_resposibile
+    [company_responsible, auditor_responsible].compact.join(",")
+  end
+end
