@@ -158,14 +158,16 @@
             #pbc-request-1a.row-fluid.collapse
               .span12 
                 %h3.pbc-title
-                  Responses
+                  Responses (Documentation)
                   %a#tooltip11.btn.btn-mini{"data-toggle" => "modal", :href => "#newResponse"}
                     %i.grcicon-add
                 %ul.items-list
                   %li.item.i-process
                     .row-fluid
-                      .span5
-                        %input.span12{:type => "text", :placeholder => "Enter process name"}
+                      .span5.pbc-add-response
+                        %a#tooltip12.btn.btn-mini{"rel" => "tooltip", "data-placement" => "top", "title" => "Add new system/process", :href => "#"}
+                          %i.grcicon-add
+                        %input.span11{:type => "text", :placeholder => "Type to search systems/processes"}
                       .span3
                         %span.pbc-counter.empty
                           %i.grcicon-person
@@ -175,32 +177,6 @@
                           %i.grcicon-document
                           0
                       .span1
-                        &nbsp;
-                    .row-fluid
-                      .span5
-                        %label
-                          %strong Process Description
-                        %textarea.span12{:rows => "1", :placeholder => "Enter process description"}
-                        %label
-                          %strong Process Notes
-                        %textarea.span12{:rows => "1", :placeholder => "Enter process notes"}
-                      .span3
-                        %label
-                          %strong People
-                        %ul.pbc-item-list
-                          %li
-                            %a.btn.btn-nano
-                              %i.grcicon-add
-                            %a{:href => "#"}  Add new person
-                      .span3
-                        %label
-                          %strong Documents
-                        %ul.pbc-item-list
-                          %li
-                            %a.btn.btn-nano
-                              %i.grcicon-add
-                            %a{:href => "#"}  Add new document
-                      .span1.pbc-item.pbc-actions
                         &nbsp;
                   %li.item.i-process
                     .row-fluid
