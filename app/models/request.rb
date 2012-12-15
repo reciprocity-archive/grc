@@ -9,6 +9,8 @@ class Request < ActiveRecord::Base
   belongs_to :control
   belongs_to :type, :class_name => 'Option', :conditions => { :role => 'request_type' }
 
+  has_many :responses
+
   is_versioned_ext
 
   sanitize_attributes :pbc_control_desc, :request, :test, :notes
