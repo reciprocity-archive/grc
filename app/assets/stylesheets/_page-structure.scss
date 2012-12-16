@@ -71,15 +71,54 @@
   }
 }
 
-.pbc-title {
+.pbc-request-zone {
   border:1px solid $borderDefault;
   @include border-radius(4px 4px 0 0);
   margin-bottom:4px;
-  padding:2px 10px;
+  padding:0 10px;
+  [class*="span"] {
+   padding-bottom:0;
+   min-height:0;
+  }
+  .letter {
+    margin:0 8px 0 8px;
+    font-weight:bold;
+    color:#999;
+    font-size:11px;
+    display:inline-block;
+    line-height:14px;
+  }
+  .word {
+    font-size:10px;
+    color:#666;
+    display:block;
+    margin-left:8px;
+    line-height:14px;
+  }
+  .pbc-add {
+    .btn {
+      float:right;
+      margin-top:5px;
+    }
+  }
+  .pbc-main-title {
+    h3 {
+      margin-top:2px;
+    }
+  }
+}
+
+.pbc-title {
+  border:1px solid $borderDefault;
+  @include clearfix();
+  @include border-radius(4px);
+  padding:7px 4px 4px 10px;
+  margin-bottom:4px;
   .btn {
     float:right;
-    margin-top:2px;
+    margin-top:0;
   }
+  
 }
 
 .pbc-item-head {
@@ -101,7 +140,9 @@ ul.pbc-responses {
       }
     }
     &.main-item {
-      border:1px solid $borderDark;
+      border:1px solid #ddd;
+      background:#fcfcfc;
+      @include border-radius(0);
     }
   }
   
@@ -180,4 +221,19 @@ ul.pbc-responses {
 
 .pbc-email {
   font-weight:normal;
+}
+
+.pbc-ca-title {
+  background:#eee;
+  border:1px solid #ddd;
+  padding:6px 6px;
+  @include border-radius(4px 4px 0 0);
+  .row-fluid {
+    [class*="span"] {
+      min-height:0;
+    }
+  }
+  .expander {
+    margin:1px 6px 0 0;
+  }
 }
