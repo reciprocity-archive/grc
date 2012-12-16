@@ -3,7 +3,24 @@
 %h3.pbc-title
   Responses
   %a.btn.btn-mini{"data-toggle" => "modal", :href => "#newResponse"}
-    %i.grcicon-add
+    %i.grcicon-add{ "data-target" => "#pbc-new-response", "data-toggle" => "collapse" }
+%ul#pbc-new-response.items-list.collapse
+  %li.item.i-process
+    .row-fluid
+      .span5.pbc-add-response
+        %a#tooltip12.btn.btn-mini{ :href => new_flow_system_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide', "rel" => "tooltip", "data-placement" => "top", "title" => "Add new system/process" }
+          %i.grcicon-add
+        %input#pbc-system-search.span11{:type => "text", :placeholder => "Type to search systems/processes"}
+      .span3
+        %span.pbc-counter.empty
+          %i.grcicon-person
+          0
+      .span3
+        %span.pbc-counter.empty
+          %i.grcicon-document
+          0
+      .span1
+        &nbsp;
 %ul.items-list
   -#responses.each do |response|
   -[].each do |response|
@@ -175,3 +192,37 @@
           %a.btn.btn-mini
             %i.grcicon-arrowright-grey
 
+:javascript
+  $(function() {
+    $("#pbc-system-search").autocomplete({
+      source: function( request, response ) {
+        $.ajax({
+          url: "/quick/systems.json",
+          dataType: "json",
+          data: {
+            s: request.term
+          },
+          success: function( data ) {
+            response( $.map( data, function( item ) {
+              return {
+                label: item.system.slug + ' ' + item.system.title,
+                value: item.system.id
+              }
+            }));
+          }
+        });
+      },
+      select: function( event, ui ) {
+        alert(this.value);
+        // log( ui.item ?
+        //   "Selected: " + ui.item.label :
+        //   "Nothing selected, input was " + this.value);
+      },
+      open: function() {
+        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+      },
+      close: function() {
+        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+      }
+    });
+  });

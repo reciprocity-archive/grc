@@ -73,6 +73,11 @@ class QuickController < ApplicationController
       @systems = @systems.db_search(params[:s])
     end
     @systems = allowed_objs(@systems.all, :read)
+
+    respond_to do |format|
+      format.html
+      format.json { render :json => @systems }
+    end
   end
 
   def products
