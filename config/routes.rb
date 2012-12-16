@@ -41,6 +41,9 @@ CmsRails::Application.routes.draw do
       get 'risks'
       get 'delete'
     end
+    collection do
+      get 'list_select'
+    end
   end
 
   resources :systems, :as => 'flow_systems', :only => [:index, :show, :new, :edit, :create, :update, :destroy] do
@@ -183,6 +186,12 @@ CmsRails::Application.routes.draw do
   end
 
   resources :requests, :as => 'flow_requests', :only => [:new, :create, :edit, :update, :destroy] do
+    member do
+      get 'delete'
+    end
+  end
+
+  resources :responses, :as => 'flow_responses', :only => [:create, :destroy] do
     member do
       get 'delete'
     end

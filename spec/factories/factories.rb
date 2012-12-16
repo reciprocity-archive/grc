@@ -275,4 +275,9 @@ FactoryGirl.define do
   factory :request do
     pbc_list { |c| c.association(:pbc_list) }
   end
+
+  factory :response do
+    request { |c| c.association(:request) }
+    system { |c| c.association(:system) }
+  end
 end
