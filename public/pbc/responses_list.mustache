@@ -1,0 +1,123 @@
+{{! this item is the new response target}}
+  <li class="item i-process">
+    <div class="row-fluid">
+      <div class="span11">
+        <input class="span12" name="name" type="text" placeholder="Enter process name" {{ (el) -> $(el).pbc_autocomplete(); }}></input>
+      </div>
+      <div class="span1 pbc-item pbc-actions">
+        <a "btn btn-mini" href="javscript://">
+          <i class="grcicon-edit-grey"></i>
+        </a>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span6">
+        <label for="process_description">
+          <strong>Process Description</strong>
+        </label>
+        <textarea name="process_description" class="span12" rows="1" placeholder="Enter process description"></textarea>
+        <label for="process_notes">
+          <strong>Process Notes</strong>
+        <textarea name="process_notes" class="span12" rows="1" placeholder="Enter process notes"></textarea>
+      </div>
+      <div class="span3">
+        <label for="people_list">
+          <strong>People</strong>
+        </label>
+        <ul class="pbc-item-list" name="people_list">
+          <li>
+            <a class="btn btn-nano add_person" href="javascript://">
+              <i class="grcicon-add"></i>
+            </a>
+            <a href="javascript://" class="add_person">Add new person</a>
+          </li>
+        </ul>
+      </div>
+      <div class="span3">
+        <label for="documents_list">
+          <strong>Documents</strong>
+        </label>
+        <ul class="pbc-item-list" name="documents_list">
+          <li>
+            <a class=" btn btn-nano add_document" href="javascript://">
+              <i class="grcicon-add"></i>
+            </a>
+            <a href="javascript://" class="add_document">Add new document</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </li>
+  {{! these are the existing ones }}
+  {{#list}}
+  <li class="item i-process" {{data 'model'}} data-model="true" data-id="{{id}}">
+    <div class="row-fluid">
+      <div class="span11">
+        {{system.title}}
+      </div>
+      <div class="span1 pbc-item pbc-actions">
+        <a class="btn btn-mini" href="javascript://">
+          <i class="grcicon-edit-grey"></i>
+        </a>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span6">
+        <label>
+          <strong>Process Description</strong>
+        </label>
+        <p class="full-view">
+          {{system.description}}
+        </p>
+        <label>
+          <strong>Process Notes</strong>
+        </label>
+        <p class="full-view">
+          {{system.notes}}
+        </p>
+      </div>
+      <div class="span3">
+        <label>
+          <strong>People</strong>
+        </label>
+        <ul class="pbc-item-list">
+          {{#people}}
+          <li>
+            <a class="btn btn-nano pull-right edit_person" href="javascript://">
+              <i class="grcicon-edit-grey"></i>
+            </a>
+            <a href="javascript://" class="edit-person">Dan Waterson (Responsible Party)</a>
+          </li>
+          {{/people}}
+          <li>
+            <a class="btn btn-nano add_person" href="javascript://">
+              <i class="grcicon-add"></i>
+            </a>
+            <a href="javascript://" class="add_person">Add new person</a>
+          </li>
+        </ul>
+      </div>
+      <div class="span3">
+        <label>
+          <strong>Documents</strong>
+        </label>
+        <ul class="pbc-item-list">
+          {{#documents}}
+          <li {{data 'model'}} data-model="true">
+            <a class="btn btn-nano pull-right" href="javascript://">
+              <i class="grcicon-edit-grey"></i>
+            </a>
+            <a href="javascript://">{{title}}</a>
+          </li>
+          {{/documents}}
+          <li {{data 'model'}} data-model="true">
+            <a class="btn btn-nano" href="javascript://">
+              <i class="grcicon-add"></i>
+            </a>
+            <a href="javascript://">Add new document</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </li>
+  {{/list}}

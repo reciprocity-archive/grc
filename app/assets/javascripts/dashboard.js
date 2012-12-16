@@ -10,6 +10,7 @@
  *= require mustache_helper
  *= require apps/controls
  *= require apps/mapping
+ *= require apps/pbc
  *= require_self
  *= require jquery.remotipart
  *= require d3.v2
