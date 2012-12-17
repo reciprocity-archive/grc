@@ -47,7 +47,7 @@
             <a class="btn btn-nano pull-right edit_person" href="javascript://">
               <i class="grcicon-edit-grey"></i>
             </a>
-            <a href="javascript://" class="edit-person">{{name}} ({{role}})</a>
+            <a href="javascript://" class="edit-person">{{person.name}} {{#role}}({{.}}){{/role}}</a>
           </li>
           {{/system.object_people}}
           <li>
@@ -63,14 +63,14 @@
           <strong>Documents</strong>
         </label>
         <ul class="pbc-item-list">
-          {{#system.documents}}
+          {{#system.object_documents}}
           <li {{data 'model'}} data-model="true">
             <a class="btn btn-nano pull-right" href="javascript://">
               <i class="grcicon-edit-grey"></i>
             </a>
-            <a href="javascript://">{{title}}</a>
+            <a href="javascript://">{{document.title}}</a>
           </li>
-          {{/system.documents}}
+          {{/system.object_documents}}
           <li>
             <a class="widgetbtn pull-right" data-list-target="#referenceList" data-modal-class="modal-wide" data-modal-reset="reset" data-toggle="modal-ajax-relationship-selector" href="/object_documents/list_edit?object_id={{system.id}}&amp;object_type=System">
               <i class="grcicon-link"></i>
