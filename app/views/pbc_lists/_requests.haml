@@ -7,9 +7,10 @@
         %i.grcicon-add
       Requests
 
-%ul.pbc-responses
+=#next line was %ul.pbc-responses but this is the list of requests --BM
+%ul.pbc-requests 
   -requests.each do |request|
-    %li.main-item{ html_data_attributes(request, "data-filter-", [ ["type", "type.display_name"], "status", ["date-requested", "date_requested.to_date"], ["control-code", "control.slug"], ["person", "persons_resposibile"] ]) }
+    %li.main-item{ html_data_attributes(request, "data-filter-", [ ["type", "type.display_name"], "status", ["date-requested", "date_requested.to_date"], ["control-code", "control.slug"], ["person", "persons_resposibile"], "id" ]) }
       .row-fluid.pbc-header
         .span3
           Control and Description from PBC
@@ -60,6 +61,6 @@
           %a.btn.btn-mini{ :href => edit_flow_request_path(request.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide'}
             %i.grcicon-edit-grey
 
-      .row-fluid
+      .row-fluid.pbc-responses-container
         =render :partial => "responses", :locals => { :pbc_list => pbc_list, :request => request }
 

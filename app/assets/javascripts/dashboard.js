@@ -10,6 +10,7 @@
  *= require mustache_helper
  *= require apps/controls
  *= require apps/mapping
+ *= require apps/pbc
  *= require_self
  *= require jquery.remotipart
  *= require d3.v2
@@ -259,23 +260,6 @@ function init_mapping() {
         $dialog.load($dialog.data('href'));
     });
 }
-
-jQuery(function($) {
-  var $dialog = $('<div id="mapping_dialog" class="modal hide"></div>').appendTo('body');
-  $dialog.draggable({ handle: '.modal-header' });
-  $('#regulations, #controls, #section_list').on('click', 'a.controllist, a.controllistRM', function(e) {
-    e.preventDefault();
-    $dialog.data('href', $(this).attr('href'));
-    $dialog.load($(this).attr('href'), function() {
-      $dialog.modal_form({ backdrop: false }).modal_form('show');
-    });
-  });
-
-  $dialog.on('ajax:success', '.unmapbtn', function(evt, data, status, xhr) {
-    $dialog.load($dialog.data('href'));
-  });
-});
-
 
 
 function clear_selection(el, keep_search) {

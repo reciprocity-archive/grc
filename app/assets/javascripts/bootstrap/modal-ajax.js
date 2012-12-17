@@ -161,6 +161,8 @@
           refresh_page();
         } else if (form_target == 'redirect') {
           window.location.assign(xhr.getResponseHeader('location'));
+        } else {
+          $target.modal_form('hide');
         }
       });
     }

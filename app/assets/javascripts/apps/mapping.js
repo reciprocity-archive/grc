@@ -56,7 +56,13 @@
               }).control()
           });
 
-      can.getObject("CMS.Controllers.Mapping.Instances", namespace, true).Mapping = $(document.body).cms_controllers_mapping({}).control();
+      can.getObject("CMS.Controllers.Mapping.Instances", namespace, true).Mapping 
+        = $(document.body).cms_controllers_mapping({
+          id : programId
+          , reg_list_controller : namespace.CMS.Controllers.Controls.Instances.RegControls
+          , company_list_controller : namespace.CMS.Controllers.Controls.Instances.CompanyControls
+          , section_list_controller : namespace.CMS.Controllers.Sections.Instances.Section
+        }).control();
     });
 
 })(this, can.$);

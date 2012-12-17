@@ -11,7 +11,7 @@ end
 class SystemsController < BaseObjectsController
   include ImportHelper
 
-  SYSTEM_MAP = Hash[*%w(System\ Code slug Title title Description description Link:References references Infrastructure infrastructure Link:People;Owner owner Link:Categories categories Append:Notes append_notes Link:System;Sub\ System sub_systems Link:Org\ Group org_groups Effective\ Date start_date Created created_at Updated updated_at)]
+  SYSTEM_MAP = Hash[*%w(System\ Code slug Title title Description description Link:References references Infrastructure infrastructure Link:People;Owner owner Link:Categories categories Append:Notes append_notes Link:System;Sub\ System sub_systems Link:Org\ Group org_groups Effective\ Date start_date Created created_at Updated updated_at Network\ Zone network_zone)]
 
   access_control :acl do
     allow :superuser
@@ -158,6 +158,8 @@ class SystemsController < BaseObjectsController
       org_groups = attrs.delete('org_groups')
       handle_import_documents(system, attrs, 'references')
 
+      handle_option(attrs, 'network_zone', import[:warnings], :network_zone)
+      
       append_notes = attrs.delete('append_notes')
       if append_notes
         splits = (attrs['description'] || system.description || "").split("\n---\n").map {|x| x.strip}

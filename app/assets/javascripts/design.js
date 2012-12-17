@@ -6,6 +6,7 @@
  *= require dashboard
  *= require jquery.cookie
  *= require bootstrap-datepicker
+ *= require apps/pbc
  */
 
 jQuery(function ($) {

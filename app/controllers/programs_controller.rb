@@ -201,17 +201,6 @@ class ProgramsController < BaseObjectsController
     end
   end
 
-  def handle_option(attrs, name, messages, role = nil)
-    role ||= name.to_sym
-    if attrs[name]
-      value = Option.where(:role => role, :title => attrs[name]).first
-      if value.nil?
-        messages << "Unknown #{role} option '#{attrs[name]}'"
-      end
-      attrs[name] = value
-    end
-  end
-
   def do_import_controls(import, check_only)
     import[:errors] = {}
     import[:updates] = []
