@@ -54,4 +54,10 @@ class RequestsController < BaseObjectsController
       end
       request_params
     end
+
+    def extra_delete_relationship_stats
+      [
+        [ 'Response', @requests.responses.count ]
+      ]
+    end
 end

@@ -7,7 +7,7 @@ class PbcList < ActiveRecord::Base
 
   belongs_to :audit_cycle, :class_name => 'Cycle'
 
-  has_many :requests
+  has_many :requests, :dependent => :destroy
 
   is_versioned_ext
 

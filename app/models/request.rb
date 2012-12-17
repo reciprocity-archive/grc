@@ -9,7 +9,7 @@ class Request < ActiveRecord::Base
   belongs_to :control
   belongs_to :type, :class_name => 'Option', :conditions => { :role => 'request_type' }
 
-  has_many :responses
+  has_many :responses, :dependent => :destroy
 
   is_versioned_ext
 
