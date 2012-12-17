@@ -52,6 +52,10 @@ class ResponsesController < BaseObjectsController
 
   private
 
+    def object_as_json(args=nil)
+      object.as_json_with_system(:root => nil)
+    end
+
     def objects_as_json
       objects.map {|object| object.as_json_with_system }.as_json
     end
