@@ -22,7 +22,7 @@ class Request < ActiveRecord::Base
     pbc_control_code
   end
 
-  def persons_resposibile
+  def persons_responsible
     [company_responsible, auditor_responsible].compact.join(",")
   end
 end

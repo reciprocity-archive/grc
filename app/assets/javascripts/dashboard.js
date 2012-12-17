@@ -326,3 +326,71 @@ jQuery(function($) {
   });
 });
 
+jQuery(function($) {
+  $('body').on('change', '[data-toggle="filter-requests"]', function(e) {
+    var $this = $(this)
+      , filter_target = $this.data('filter-target')
+      , filter_func = function() { return true; }
+      ;
+
+    $('[data-toggle="filter-requests"]').each(function(i, elem) {
+      var $elem = $(elem)
+        , filter_attr = $elem.data('filter-attribute')
+        , filter_value = $elem.val()
+        , old_filter_func = filter_func
+        ;
+
+      if ($elem.val() == 'any' || $elem.val() == '')
+        return;
+
+      if (filter_attr == 'type' || filter_attr == 'status') {
+        filter_func = function($el) {
+          return (
+            ($el.data('filter-' + filter_attr) == filter_value) &&
+            old_filter_func($el));
+        }
+      } else if (filter_attr == 'date-requested') {
+        filter_func = function($el) {
+          return (
+            ($el.data('filter-' + filter_attr) &&
+             (Date.parse($el.data('filter-' + filter_attr)) >= Date.parse($elem.val()))) &&
+            old_filter_func($el));
+        }
+      } else if (filter_attr == 'person') {
+        filter_func = function($el) {
+          return (
+            (new RegExp('[^,]' + $elem.val() + '[,$]').test($el.data('filter-' + filter_attr))) &&
+            old_filter_func($el));
+        }
+      }
+    });
+
+    $(filter_target).each(function(i, elem) {
+      var $elem = $(elem)
+        ;
+
+      if (!filter_func($elem)) {
+        $elem.slideUp('fast');
+      } else {
+        $elem.slideDown('fast');
+      }
+    });
+
+  });
+});
+
+jQuery(function($) {
+  $('body').on('click', 'button[data-toggle="filter-reset"]', function(e) {
+    var $this = $(this)
+      , filter_reset_target = $this.data('filter-reset-target')
+      ;
+
+    $(filter_reset_target).each(function(i, elem) {
+      var $elem = $(elem)
+        ;
+
+      $elem.val('any');
+      $elem.change();
+    });
+  });
+});

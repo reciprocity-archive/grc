@@ -8,76 +8,81 @@
     PBC Request List
 .widget-filters
   .row-fluid
-    .span4.widget-titles
-      .row-fluid
-        .span6
-          %label Program
-          %h4=pbc_list.audit_cycle.program.title
-        .span6
-          %label Title
-          %h4=pbc_list.title
-      .row-fluid
-        .span4
-          %label Audit Firm
-          %h4=pbc_list.audit_firm
-        .span4
-          %label Audit Lead
-          %h4=pbc_list.audit_lead
-        .span4
-          %label List Import Date
-          %h4=pbc_list.list_import_date && pbc_list.list_import_date.strftime('%m/%d/%Y')
+    .span3.widget-titles
+      %label Program
+      %h4=pbc_list.audit_cycle.program.title
+    .span3.widget-titles
+      %label Title
+      %h4=pbc_list.title
+    .span2.widget-titles
+      %label Audit Firm
+      %h4=pbc_list.audit_firm
+    .span2.widget-titles
+      %label Audit Lead
+      %h4=pbc_list.audit_lead
+    .span2.widget-titles
+      %label List Import Date
+      %h4=pbc_list.list_import_date && pbc_list.list_import_date.strftime('%m/%d/%Y')
+  .row-fluid
+    .span9
+      %label Description
+      .rtf
+        =raw pbc_list.description
 
+  .row-fluid
     -filters_disabled = pbc_list.requests.count == 0
-    .span2
-      .filters-box
+    .span3
+      .filters-box.sort-by
         .row-fluid
-          .span12.title-row
+          .span9
             %label
-              %strong Sort By
-        .row-fluid
-          .span12
-            %label
-              Choose
+              Sort by
             %select.span12{ :disabled => filters_disabled }
               %option{:selected => "selected"} Control Code
               %option Request Date
-    .span6
-      .filters-box
-        .row-fluid
-          .span12.title-row
+          .span3
             %label
-              %strong Filter by
+              &nbsp;
+            .btn-group
+              %a.btn.btn-mini.active
+                %i.grcicon-sortUp
+              %a.btn.btn-mini
+                %i.grcicon-sortDown
+    .span9
+      .filters-box
         .row-fluid
           .span3
             %label
               Request Type
-            %select.span12{ :disabled => filters_disabled }
-              %option{:selected => "selected"} Documentation
+            %select.span12{ :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'type', :'data-filter-target' => '#requests > li' }
+              %option{ :value => 'any', :selected => 'selected' } - Any -
+              %option Documentation
               %option Interview
               %option Population Sample
           .span3
             %label
               Status
-            %select.span12{ :disabled => filters_disabled }
-              %option{:selected => "selected"} Draft
+            %select.span12{ :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'status', :'data-filter-target' => '#requests > li' }
+              %option{ :value => 'any', :selected => 'selected' } - Any -
+              %option Draft
               %option Waiting Compliance
               %option Waiting Auditors
               %option Completed
-          .span2
-            %label
-              Person
-            %select.span12{ :disabled => filters_disabled }
-              %option - Any -
           .span3
             %label
+              Person
+            %select.span12{ :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'person', :'data-filter-target' => '#requests > li' }
+              %option{ :value => 'any', :selected => 'selected' } - Any -
+          .span2
+            %label
               Date (on or after)
-              %input.span12#datepicker-control-date.date{:type => "text",  :placeholder => "MM/DD/YYYY", :disabled => filters_disabled }
+              %input.span12#datepicker-control-date.date{:type => "text",  :placeholder => "MM/DD/YYYY", :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'date-requested', :'data-filter-target' => '#requests > li' }
               :javascript
                 $('#datepicker-control-date').datepicker();
           .span1
             %label &nbsp;
-            %button.btn.span12
-              %i.grcicon-remove
+            %button.btn.span12{ :'data-toggle' => 'filter-reset', :'data-filter-reset-target' => '[data-toggle="filter-requests"]' }
+              %i.grcicon-x-grey
 
 .widget-body
   =render :partial => "requests", :locals => { :pbc_list => pbc_list }

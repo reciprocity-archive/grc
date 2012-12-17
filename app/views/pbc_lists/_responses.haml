@@ -3,10 +3,11 @@
 -new_response_id = "request-#{request.id}-response-new"
 -response_list_id = "request-#{request.id}-responses"
 
-%h3.pbc-title
+%h4.pbc-title
   Responses (Documentation)
   %a.btn.btn-mini{"data-toggle" => "modal", :href => "#newResponse"}
     %i.grcicon-add{ "data-target" => "##{new_response_id}", "data-toggle" => "collapse" }
+
 %ul.items-list.collapse{ :id => new_response_id }
   %li.item.i-process
     .row-fluid

@@ -2,17 +2,19 @@
 -model_title = model_name.titleize
 -instance = instance_variable_get("@" + model_name)
 
--@title = "GRC #{model_title}: #{instance.title}"
+-@title = "GRC: PBC List"
 
 -content_for :header do
   %ol#breadcrumb
-    %li AUDIT
-  .location#pageTitle=#instance.audit_cycle.program.title
+    %li.last AUDIT
+  #pageTitle.location
+    =instance.audit_cycle.program.title
+    Audit
 
 -content_for :page_help, 'pbc_list'
 
 -content_for :subheader_extras do
-  %h1.pull-right.highlighted PBC List
+  %h1#pageType.pull-right.highlighted PBC List
 
 .row-fluid.fluid-layout
   .span12
