@@ -12,3 +12,9 @@ can.Model.Cacheable("CMS.Models.Person", {
 });
 
 })(this, can);
+
+can.Model.Cacheable("CMS.Models.ObjectPerson", {
+    root_object : "object_person"
+}, {
+
+});

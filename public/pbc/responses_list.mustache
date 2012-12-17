@@ -28,7 +28,7 @@
           <strong>Process Description</strong>
         </label>
         <p class="full-view">
-          {{system.description}}
+          {{{system.description}}}
         </p>
         <label>
           <strong>Process Notes</strong>
@@ -42,19 +42,19 @@
           <strong>People</strong>
         </label>
         <ul class="pbc-item-list">
-          {{#system.people}}
-          <li>
+          {{#system.object_people}}
+          <li {{data 'model'}} data-model="true">
             <a class="btn btn-nano pull-right edit_person" href="javascript://">
               <i class="grcicon-edit-grey"></i>
             </a>
-            <a href="javascript://" class="edit-person">{{name}} {{! figure out where the following text comes from }} (Responsible Party)</a>
+            <a href="javascript://" class="edit-person">{{name}} ({{role}})</a>
           </li>
-          {{/system.people}}
+          {{/system.object_people}}
           <li>
-            <a class="btn btn-nano add_person" href="javascript://">
-              <i class="grcicon-add"></i>
-            </a>
-            <a href="javascript://" class="add_person">Add new person</a>
+          <a class="widgetbtn pull-right juke-left" data-list-target="#personList" data-modal-class="modal-wide" data-modal-reset="reset" data-toggle="modal-ajax-relationship-selector" href="/object_people/list_edit?object_id={{system.id}}&amp;object_type=System" data-target="#ajax-modal-object_people-list_edit?object_id={{system.id}}&amp;object_type=System">
+            <i class="grcicon-link"></i>
+            Add new person
+          </a>
           </li>
         </ul>
       </div>
@@ -71,11 +71,13 @@
             <a href="javascript://">{{title}}</a>
           </li>
           {{/system.documents}}
-          <li {{data 'model'}} data-model="true">
-            <a class="btn btn-nano" href="javascript://">
-              <i class="grcicon-add"></i>
+          <li>
+            <a class="widgetbtn pull-right" data-list-target="#referenceList" data-modal-class="modal-wide" data-modal-reset="reset" data-toggle="modal-ajax-relationship-selector" href="/object_documents/list_edit?object_id={{system.id}}&amp;object_type=System">
+              <i class="grcicon-link"></i>
             </a>
-            <a href="javascript://">Add new document</a>
+            <a data-list-target="#referenceList" data-modal-class="modal-wide" data-modal-reset="reset" data-toggle="modal-ajax-relationship-selector" href="/object_documents/list_edit?object_id={{system.id}}&amp;object_type=System">
+              Add new document
+            </a>
           </li>
         </ul>
       </div>
