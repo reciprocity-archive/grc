@@ -50,6 +50,17 @@ $(function() {
     });
 
     $(".pbc-system-search").pbc_autocomplete();
+
+    $('body').on('modal:success', '.pbc-add-response > a', function(e, data) {
+      var $this = $(this)
+        , resp = new CMS.Models.Response()
+        ;
+      resp.attr({
+        request_id: $(e.target).closest("[data-filter-id]").data("filter-id")
+        , system_id: data.id
+      });
+      resp.save();
+    })
 });
 
 })(this, can.$);

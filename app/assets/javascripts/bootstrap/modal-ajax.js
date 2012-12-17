@@ -163,6 +163,7 @@
           window.location.assign(xhr.getResponseHeader('location'));
         } else {
           $target.modal_form('hide');
+          $trigger.trigger('modal:success', data);
         }
       });
     }
