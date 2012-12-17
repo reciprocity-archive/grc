@@ -43,18 +43,27 @@
                 %label List Import Date
                 %h4 06/10/12
           .span2
-            .filters-box
+            .filters-box.sort-by
               .row-fluid
                 .span12.title-row
                   %label
                     %strong Sort By
               .row-fluid                
-                .span12
+                .span8
                   %label
                     Choose
                   %select.span12
                     %option{:selected => "selected"} Control Code
                     %option Request Date
+                .span4
+                  %label
+                    &nbsp;
+                  .btn-group
+                    %a.btn.btn-mini.active
+                      %i.grcicon-sortUp
+                    %a.btn.btn-mini
+                      %i.grcicon-sortDown                             
+
           .span6
             .filters-box
               .row-fluid

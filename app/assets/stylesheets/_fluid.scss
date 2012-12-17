@@ -38,6 +38,17 @@
           text-shadow:none;
         }
       }
+      .sort-by {
+        select {
+          font-size:11px;
+          padding-left:0px;
+        }
+        .btn {
+          padding-top:5px;
+          padding-bottom:5px;
+          border:1px solid #fff;
+        }
+      }
     }
 
     .widget-head {    
