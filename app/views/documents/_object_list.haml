@@ -4,9 +4,9 @@
 %h3.toggle{"data-target" => "#referenceListCollapse", "data-toggle" => "collapse"}
   .expander
   References
-  %span="(#{all_object_documents.count})" unless all_object_documents.count.zero?
+  %span.grc-badge=all_object_documents.count unless all_object_documents.count.zero?
   %a.widgetbtn.pull-right.juke-left{:href => list_edit_flow_object_documents_path(:object_type => object.class.name, :object_id => object.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#referenceList', :'data-modal-class' => 'modal-wide' }
-    %i.grcicon-link
+    %i.grcicon-edit-grey
 
 .collapse#referenceListCollapse
   .bootstrap-collapse-bugfix

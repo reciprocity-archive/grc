@@ -185,3 +185,12 @@ a.reference {
     } 
   }
 }
+
+.grc-badge {
+  font-size:0.7em;
+  padding:0 0.4em;
+  font-weight:normal;
+  background:#999;
+  @include border-radius();
+  color:#fff;
+}

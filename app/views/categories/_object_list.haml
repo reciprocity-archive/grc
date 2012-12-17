@@ -4,9 +4,9 @@
 %h3.toggle{"data-target" => "#categoryListCollapse", "data-toggle" => "collapse"}
   .expander
   Categories
-  %span="(#{all_object_categorizations.count})" unless all_object_categorizations.count.zero?
+  %span.grc-badge=all_object_categorizations.count unless all_object_categorizations.count.zero?
   %a.widgetbtn.pull-right.juke-left{:href => list_edit_flow_categorizations_path(:object_type => object.class.name, :object_id => object.id, :scope_id => Control::CATEGORY_TYPE_ID), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#categoryList', :'data-modal-class' => 'modal-wide' }
-    %i.grcicon-link
+    %i.grcicon-edit-grey
 
 .collapse#categoryListCollapse
   .bootstrap-collapse-bugfix
