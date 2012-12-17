@@ -42,7 +42,7 @@ class System < ActiveRecord::Base
   has_many :categorizations, :as => :categorizable, :dependent => :destroy
   has_many :categories, :through => :categorizations, :conditions => { :scope_id => System::CATEGORY_TYPE_ID }
 
-  has_many :responses
+  has_many :responses, :dependent => :destroy
 
   is_versioned_ext
 

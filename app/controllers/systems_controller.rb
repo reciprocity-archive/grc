@@ -205,7 +205,8 @@ class SystemsController < BaseObjectsController
 
     def delete_model_stats
       [ [ 'System Control', @system.system_controls.count ],
-        [ 'System Section', @system.system_sections.count ]
+        [ 'System Section', @system.system_sections.count ],
+        [ 'Response', @system.responses.count ]
       ]
     end
 
