@@ -24,7 +24,7 @@ can.Control("CMS.Controllers.Responses", {
     }
     , "{model} created" : function(Model, ev, response) {
         if(response.request_id === this.options.id) {  
-            this.observer.attr("list", this.list.concat([response]));
+            this.options.observer.attr("list", this.list = this.list.concat([response]));
         }
     }
 });

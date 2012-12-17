@@ -18,9 +18,9 @@ $.widget(
             , select: function( event, ui ) {
                 var resp = new CMS.Models.Response();
                 resp.attr({
-                    program_id : $(event.target).closest(".pbc-request").data("filter-id")
-                    , system_id : event.target.data("item.autocomplete").id }
-                    );
+                    request_id : $(event.target).closest("[data-filter-id]").data("filter-id")
+                    , system_id : ui.item.value 
+                });
                 resp.save();
                 return false;
             }
@@ -36,12 +36,6 @@ $.widget(
                 .data( "item.autocomplete", item )
                 .append( "<a>" + item.label + "</a>" )
                 .appendTo( ul );
-        }
-        , _create : function() {
-            if(!this.options.source) {
-                this.options.source = this.__proto__.source;
-            }
-            $.ui.autocomplete.prototype._create.apply(this, arguments);
         }
     }
 );

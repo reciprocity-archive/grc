@@ -4,7 +4,8 @@
 
 can.Model.Cacheable("CMS.Models.System", {
     root_object : "system"
-    , findAll : "GET /pbc/systems?responseid={id}" 
+    , findAll : "GET /systems.json?responseid={id}" 
+    , findOne : "GET /systems/{id}.json" 
     , search : function(request, response) {
         return $.ajax({
             type : "get"

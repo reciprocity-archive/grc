@@ -10,11 +10,16 @@ can.Model.Cacheable("CMS.Models.Response", {
             system_id : params.system_id
             , request_id : params.request_id
         }}
-        return $.ajax({
-            type : "POST"
-            , url : "/responses"
-            , dataType : "json"
-            , data : _params
+        return $.when(
+            $.ajax({
+                type : "POST"
+                , url : "/responses.json"
+                , dataType : "json"
+                , data : _params
+            }),
+            CMS.Models.System.findOne({ id : params.system_id })
+        ).then(function(response, system) {
+            response.system = system;
         });
     }
 
