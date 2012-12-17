@@ -15,4 +15,8 @@ class Response < ActiveRecord::Base
   def display_name
     "#{request.pbc_control_code} - #{system.title}"
   end
+
+  def as_json_with_system(options={})
+    as_json(options.merge(:include => { :system => { :include => [:people, :documents] } }))
+  end
 end

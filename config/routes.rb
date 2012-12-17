@@ -191,7 +191,7 @@ CmsRails::Application.routes.draw do
     end
   end
 
-  resources :responses, :as => 'flow_responses', :only => [:create, :destroy] do
+  resources :responses, :as => 'flow_responses', :only => [:index, :create, :destroy] do
     member do
       get 'delete'
     end
