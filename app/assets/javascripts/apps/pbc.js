@@ -16,12 +16,15 @@ $.widget(
                 return false;
             }
             , select: function( event, ui ) {
-                var resp = new CMS.Models.Response();
+                var $this = $(this)
+                  , resp = new CMS.Models.Response();
                 resp.attr({
                     request_id : $(event.target).closest("[data-filter-id]").data("filter-id")
                     , system_id : ui.item.value 
                 });
-                resp.save();
+                resp.
+                  save().
+                  then(function(){ $this.val(""); });
                 return false;
             }
             , open: function() {
@@ -46,7 +49,7 @@ $(function() {
         $(ev.currentTarget).find(".pbc-responses").cms_controllers_responses({id : $(ev.currentTarget).closest("[data-filter-id]").data("filter-id")});
     });
 
-    $("#pbc-system-search").pbc_autocomplete();
+    $(".pbc-system-search").pbc_autocomplete();
 });
 
 })(this, can.$);

@@ -9,7 +9,7 @@ can.Model.Cacheable("CMS.Models.System", {
     , search : function(request, response) {
         return $.ajax({
             type : "get"
-            , url : "/quick/systems.json"
+            , url : "/systems.json"
             , dataType : "json"
             , data : {s : request.term}
             , success : function(data) {

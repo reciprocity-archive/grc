@@ -1,16 +1,19 @@
 -# responses = request.responses
 
+-new_response_id = "request-#{request.id}-response-new"
+-response_list_id = "request-#{request.id}-responses"
+
 %h3.pbc-title
   Responses (Documentation)
   %a.btn.btn-mini{"data-toggle" => "modal", :href => "#newResponse"}
-    %i.grcicon-add{ "data-target" => "#pbc-new-response", "data-toggle" => "collapse" }
-%ul#pbc-new-response.items-list.collapse
+    %i.grcicon-add{ "data-target" => "##{new_response_id}", "data-toggle" => "collapse" }
+%ul.items-list.collapse{ :id => new_response_id }
   %li.item.i-process
     .row-fluid
       .span5.pbc-add-response
         %a#tooltip12.btn.btn-mini{ :href => new_flow_system_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide', "rel" => "tooltip", "data-placement" => "top", "title" => "Add new system/process" }
           %i.grcicon-add
-        %input#pbc-system-search.span11{:type => "text", :placeholder => "Type to search systems/processes"}
+        %input.pbc-system-search.span11{:type => "text", :placeholder => "Type to search systems/processes"}
       .span3
         %span.pbc-counter.empty
           %i.grcicon-person
@@ -21,173 +24,4 @@
           0
       .span1
         &nbsp;
-%ul.items-list.pbc-responses 
-  -#responses.each do |response|
-  -[].each do |response|
-    %li.item.i-process
-      .row-fluid
-        .span12
-          %input.span12{:type => "text", :placeholder => "Enter process name"}
-      .row-fluid
-        .span5
-          %label
-            %strong Process Description
-          %textarea.span12{:rows => "1", :placeholder => "Enter process description"}
-          %label
-            %strong Process Notes
-          %textarea.span12{:rows => "1", :placeholder => "Enter process notes"}
-        .span3
-          %label
-            %strong People
-          %ul.pbc-item-list
-            %li
-              %a.btn.btn-nano
-                %i.grcicon-add
-              %a{:href => "#"}  Add new person
-        .span3
-          %label
-            %strong Documents
-          %ul.pbc-item-list
-            %li
-              %a.btn.btn-nano
-                %i.grcicon-add
-              %a{:href => "#"}  Add new document
-        .span1.pbc-item.pbc-actions
-          &nbsp;
-    %li.item.i-process
-      .row-fluid
-        .span12
-          Proc-89 Accounts Security Policy Review
-      .row-fluid
-        .span5
-          %label
-            %strong Process Description
-          %p.full-view
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          %label
-            %strong Process Notes
-          %p.full-view
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        .span3
-          %label
-            %strong People
-          %ul.pbc-item-list
-            %li
-              %a.btn.btn-nano.pull-right
-                %i.grcicon-edit-grey
-              %a{:href => "#"} Dan Waterson (Responsible Party)
-            %li
-              %a.btn.btn-nano
-                %i.grcicon-add
-              %a{:href => "#"}  Add new person
-        .span3
-          %label
-            %strong Documents
-          %ul.pbc-item-list
-            %li
-              %a.btn.btn-nano.pull-right
-                %i.grcicon-edit-grey
-              %a{:href => "#"} Document Policy
-            %li
-              %a.btn.btn-nano.pull-right
-                %i.grcicon-edit-grey
-              %a{:href => "#"} Document Policy 2
-            %li
-              %a.btn.btn-nano
-                %i.grcicon-add
-              %a{:href => "#"}  Add new document
-        .span1.pbc-item.pbc-actions
-          %a.btn.btn-mini{"data-toggle" => "modal", :href => "#newResponseDocumentation"}
-            %i.grcicon-edit-grey
-          %a.btn.btn-mini
-            %i.grcicon-arrowright-grey
-    %li.item.i-process
-      .row-fluid
-        .span12
-          Proc-87 Population Sample Request Type Process
-      .row-fluid
-        .span5
-          %label
-            %strong Process Description
-          %p.full-view
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          %label
-            %strong Process Notes
-          %p.full-view
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        .span3
-          %label
-            %strong People
-          %ul.pbc-item-list
-            %li
-              %a.btn.btn-nano.pull-right
-                %i.grcicon-edit-grey
-              %a{:href => "#"} Dan Waterson (Responsible Party)
-            %li
-              %a.btn.btn-nano
-                %i.grcicon-add
-              %a{:href => "#"}  Add new person
-        .span3
-          %label
-            %strong Description
-          %ul.pbc-item-list
-            %li
-              %a.btn.btn-nano.pull-right
-                %i.grcicon-edit-grey
-              %a{:href => "#"} Population Sample Description
-            %li
-              %a.btn.btn-nano.pull-right
-                %i.grcicon-edit-grey
-              %a{:href => "#"} Sample Description
-        .span1.pbc-item.pbc-actions
-          %a.btn.btn-mini{"data-toggle" => "modal", :href => "#newResponsePopulation"}
-            %i.grcicon-edit-grey
-          %a.btn.btn-mini
-            %i.grcicon-arrowright-grey
-    %li.item.i-process
-      .row-fluid
-        .span12
-          Proc-90 Interview Request Type Process
-      .row-fluid
-        .span5
-          %label
-            %strong Process Description
-          %p.full-view
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          %label
-            %strong Process Notes
-          %p.full-view
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        .span3
-          %label
-            %strong People
-          %ul.pbc-item-list
-            %li
-              %a.btn.btn-nano.pull-right
-                %i.grcicon-edit-grey
-              %a{:href => "#"} Dan Waterson (Responsible Party)
-            %li
-              %a.btn.btn-nano
-                %i.grcicon-add
-              %a{:href => "#"}  Add new person
-        .span3
-          %label
-            %strong Meeting Events
-          %ul.pbc-item-list
-            %li
-              %a.btn.btn-nano.pull-right
-                %i.grcicon-edit-grey
-              %a{:href => "#"} 2012-10-11 - First Interview
-            %li
-              %a.btn.btn-nano.pull-right
-                %i.grcicon-edit-grey
-              %a{:href => "#"} 2012-12-01 - Last Interview
-            %li
-              %a.btn.btn-nano
-                %i.grcicon-add
-              %a{:href => "#"}  Add new meeting event
-        .span1.pbc-item.pbc-actions
-          %a.btn.btn-mini
-            %i.grcicon-edit-grey{"data-toggle" => "modal", :href => "#newResponseInterview"}
-          %a.btn.btn-mini
-            %i.grcicon-arrowright-grey
+%ul.items-list.pbc-responses{ :id => response_list_id }

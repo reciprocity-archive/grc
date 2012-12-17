@@ -14,7 +14,7 @@ can.Control("CMS.Controllers.Responses", {
         this.fetch_list();
     }
     , fetch_list : function() {
-        this.options.model.findAll({ id : this.options.id }, this.proxy("draw_list"));
+        this.options.model.findAll({ request_id : this.options.id }, this.proxy("draw_list"));
     }
     , draw_list : function(list) {
         if(list) {
