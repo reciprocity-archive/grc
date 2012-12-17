@@ -104,8 +104,11 @@
       .widget-body
         .pbc-request-zone
           .row-fluid
-            .span9.pbc-main-title
+            .span7.pbc-main-title
               %h3 Requests
+            .span2
+              %span.word.pull-right
+                %strong CA Status:
             .span1
               %span.word internal
               %span.letter D
@@ -128,14 +131,14 @@
                   Goog-Con-23
                   Physically Protect Stored Data
                 .span1
-                  %a.btn.btn-mini
+                  %a#tooltip-internal-design.btn.btn-mini{"rel" => "tooltip", "data-placement" => "top", "title" => "Internal: Test of Design","data-toggle" => "modal", :href => "#"}
                     %i.grcicon-blank
-                  %a.btn.btn-mini
+                  %a#tooltip-internal-efficiency.btn.btn-mini{"rel" => "tooltip", "data-placement" => "top", "title" => "Internal: Test of Efficiency","data-toggle" => "modal", :href => "#"}
                     %i.grcicon-blank
                 .span1
-                  %a.btn.btn-mini.btn-success
+                  %a#tooltip-external-design.btn.btn-mini.btn-success{"rel" => "tooltip", "data-placement" => "top", "title" => "External: Test of Design","data-toggle" => "modal", :href => "#"}
                     %i.grcicon-check-white
-                  %a.btn.btn-mini.btn-warning
+                  %a#tooltip-external-efficiency.btn.btn-mini.btn-warning{"rel" => "tooltip", "data-placement" => "top", "title" => "External: Test of Efficiency","data-toggle" => "modal", :href => "#"}
                     %i.grcicon-x-white
 
             #pbc-requests-1.pbc-ca-content.collapse
@@ -171,7 +174,7 @@
                       %h5 Notes
                       %p Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                     .span2.pbc-item.pbc-status
-                      %h5 Status
+                      %h5 Request Status
                       %select.span12
                         %option{:selected => "selected"} Draft
                         %option Open - Waiting Compliance
