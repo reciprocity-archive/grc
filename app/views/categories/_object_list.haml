@@ -11,7 +11,9 @@
 .collapse#categoryListCollapse
   .bootstrap-collapse-bugfix
 
-  %script#category_list_item{ :type => 'text/html', :'data-member' => 'categorization' }
+
+  -# commented since it is not working
+  -#%script#category_list_item{ :type => 'text/html', :'data-member' => 'categorization' }
     %li.controlSlot{ :'data-id' => '<%= category.id %>' }
       %span.controls-group <%= category.parent_name %>
       %br
