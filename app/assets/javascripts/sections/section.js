@@ -3,7 +3,8 @@
 //= require models/cacheable
 
 can.Model.Cacheable("CMS.Models.Section", {
-  findAll : "GET /sections.json"
+  root_object : "section"
+  , findAll : "GET /sections.json"
   , update : function(id, section) {
     var param = {};
     can.each(section, function(val, key) {
@@ -69,15 +70,16 @@ can.Model.Cacheable("CMS.Models.Section", {
 }, {
 
   init : function() {
-    if(this.section) {
-      var attrs = this.section._attrs();
-      for(var i in attrs) {
-        if(attrs.hasOwnProperty(i)) {
-          this.attr(i, this.section[i]);
-        }
-      }
-      this.removeAttr("section");
-    }
+    // covered in Cacheable now
+    // if(this.section) {
+    //   var attrs = this.section._attrs();
+    //   for(var i in attrs) {
+    //     if(attrs.hasOwnProperty(i)) {
+    //       this.attr(i, this.section[i]);
+    //     }
+    //   }
+    //   this.removeAttr("section");
+    // }
     this._super();
 
     var lcs = new can.Model.List();

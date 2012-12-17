@@ -4,7 +4,8 @@
 (function(ns, can) {
 
 can.Model.Cacheable("CMS.Models.Person", {
-    findAll : function(params) {
+    root_object : "person"
+    , findAll : function(params) {
         var dfd = new $.Deferred();
         dfd.resolve([{
             id : 1

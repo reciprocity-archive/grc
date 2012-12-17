@@ -42,14 +42,14 @@
           <strong>People</strong>
         </label>
         <ul class="pbc-item-list">
-          {{#people}}
+          {{#system.people}}
           <li>
             <a class="btn btn-nano pull-right edit_person" href="javascript://">
               <i class="grcicon-edit-grey"></i>
             </a>
             <a href="javascript://" class="edit-person">{{name}} {{! figure out where the following text comes from }} (Responsible Party)</a>
           </li>
-          {{/people}}
+          {{/system.people}}
           <li>
             <a class="btn btn-nano add_person" href="javascript://">
               <i class="grcicon-add"></i>
@@ -63,14 +63,14 @@
           <strong>Documents</strong>
         </label>
         <ul class="pbc-item-list">
-          {{#documents}}
+          {{#system.documents}}
           <li {{data 'model'}} data-model="true">
             <a class="btn btn-nano pull-right" href="javascript://">
               <i class="grcicon-edit-grey"></i>
             </a>
             <a href="javascript://">{{title}}</a>
           </li>
-          {{/documents}}
+          {{/system.documents}}
           <li {{data 'model'}} data-model="true">
             <a class="btn btn-nano" href="javascript://">
               <i class="grcicon-add"></i>

@@ -3,21 +3,23 @@
 (function(namespace, $){
 can.Model.Cacheable("CMS.Models.Control", {
 	// static properties
-	findAll : "GET /controls.json"
+    root_object : "control"
+	, findAll : "GET /controls.json"
 	, findOne : "GET /controls/{id}.json"
 }
 , {
 // prototype properties
 	init : function() {
-		if(this.control) {
-			var attrs = this.control._attrs();
-			for(var i in attrs) {
-				if(attrs.hasOwnProperty(i)) {
-					this.attr(i, this.control[i]);
-				}
-			}
-			this.removeAttr("control");
-		}
+        // This block now covered in the Cacheable model
+		// if(this.control) {
+		// 	var attrs = this.control._attrs();
+		// 	for(var i in attrs) {
+		// 		if(attrs.hasOwnProperty(i)) {
+		// 			this.attr(i, this.control[i]);
+		// 		}
+		// 	}
+		// 	this.removeAttr("control");
+		// }
 		this.attr({
 			"content_id" : Math.floor(Math.random() * 10000000)
 			, "type" : "company"

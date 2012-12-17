@@ -1,7 +1,7 @@
 -# responses = request.responses
 
 %h3.pbc-title
-  Responses
+  Responses (Documentation)
   %a.btn.btn-mini{"data-toggle" => "modal", :href => "#newResponse"}
     %i.grcicon-add{ "data-target" => "#pbc-new-response", "data-toggle" => "collapse" }
 %ul#pbc-new-response.items-list.collapse
@@ -191,23 +191,3 @@
             %i.grcicon-edit-grey{"data-toggle" => "modal", :href => "#newResponseInterview"}
           %a.btn.btn-mini
             %i.grcicon-arrowright-grey
-
-:javascript
-  $(function() {
-    $("#pbc-system-search").autocomplete({
-      source: CMS.Models.System.search
-    ,
-      select: function( event, ui ) {
-        alert(this.value);
-        // log( ui.item ?
-        //   "Selected: " + ui.item.label :
-        //   "Nothing selected, input was " + this.value);
-      },
-      open: function() {
-        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
-      },
-      close: function() {
-        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
-      }
-    });
-  });
