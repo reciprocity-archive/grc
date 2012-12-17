@@ -29,62 +29,63 @@
       .rtf
         =raw pbc_list.description
 
-  .row-fluid
-    -filters_disabled = pbc_list.requests.count == 0
-    .span3
-      .filters-box.sort-by
-        .row-fluid
-          .span9
-            %label
-              Sort by
-            %select.span12{ :disabled => filters_disabled }
-              %option{:selected => "selected"} Control Code
-              %option Request Date
-          .span3
-            %label
-              &nbsp;
-            .btn-group
-              %a.btn.btn-mini.active
-                %i.grcicon-sortUp
-              %a.btn.btn-mini
-                %i.grcicon-sortDown
-    .span9
-      .filters-box
-        .row-fluid
-          .span3
-            %label
-              Request Type
-            %select.span12{ :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'type', :'data-filter-target' => '#requests > li' }
-              %option{ :value => 'any', :selected => 'selected' } - Any -
-              %option Documentation
-              %option Interview
-              %option Population Sample
-          .span3
-            %label
-              Status
-            %select.span12{ :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'status', :'data-filter-target' => '#requests > li' }
-              %option{ :value => 'any', :selected => 'selected' } - Any -
-              %option Draft
-              %option Waiting Compliance
-              %option Waiting Auditors
-              %option Completed
-          .span3
-            %label
-              Person
-            %select.span12{ :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'person', :'data-filter-target' => '#requests > li' }
-              %option{ :value => 'any', :selected => 'selected' } - Any -
-              -pbc_list.requests.all.map { |req| [req.company_responsible.presence, req.auditor_responsible.presence] }.flatten.compact.uniq.sort.each do |name|
-                %option=name
-          .span2
-            %label
-              Date (on or after)
-              %input.span12#datepicker-control-date.date{:type => "text",  :placeholder => "MM/DD/YYYY", :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'date-requested', :'data-filter-target' => '#requests > li' }
-              :javascript
-                $('#datepicker-control-date').datepicker();
-          .span1
-            %label &nbsp;
-            %button.btn.span12{ :'data-toggle' => 'filter-reset', :'data-filter-reset-target' => '[data-toggle="filter-requests"]' }
-              %i.grcicon-x-grey
+  -filters_disabled = pbc_list.requests.count == 0
+  -if !filters_disabled
+    .row-fluid
+      .span3
+        .filters-box.sort-by
+          .row-fluid
+            .span9
+              %label
+                Sort by
+              %select.span12{ :disabled => filters_disabled }
+                %option{:selected => "selected"} Control Code
+                %option Request Date
+            .span3
+              %label
+                &nbsp;
+              .btn-group
+                %a.btn.btn-mini.active
+                  %i.grcicon-sortUp
+                %a.btn.btn-mini
+                  %i.grcicon-sortDown
+      .span9
+        .filters-box
+          .row-fluid
+            .span3
+              %label
+                Request Type
+              %select.span12{ :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'type', :'data-filter-target' => '.pbc-requests > li' }
+                %option{ :value => 'any', :selected => 'selected' } - Any -
+                %option Documentation
+                %option Interview
+                %option Population Sample
+            .span3
+              %label
+                Status
+              %select.span12{ :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'status', :'data-filter-target' => '.pbc-requests > li' }
+                %option{ :value => 'any', :selected => 'selected' } - Any -
+                %option Draft
+                %option Waiting Compliance
+                %option Waiting Auditors
+                %option Completed
+            .span3
+              %label
+                Person
+              %select.span12{ :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'person', :'data-filter-target' => '.pbc-requests > li' }
+                %option{ :value => 'any', :selected => 'selected' } - Any -
+                -pbc_list.requests.all.map { |req| [req.company_responsible.presence, req.auditor_responsible.presence] }.flatten.compact.uniq.sort.each do |name|
+                  %option=name
+            .span2
+              %label
+                Date (on or after)
+                %input.span12#datepicker-control-date.date{:type => "text",  :placeholder => "MM/DD/YYYY", :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'date-requested', :'data-filter-target' => '.pbc-requests > li' }
+                :javascript
+                  $('#datepicker-control-date').datepicker();
+            .span1
+              %label &nbsp;
+              %button.btn.span12{ :'data-toggle' => 'filter-reset', :'data-filter-reset-target' => '[data-toggle="filter-requests"]' }
+                %i.grcicon-x-grey
 
 .widget-body
   =render :partial => "requests", :locals => { :pbc_list => pbc_list }
