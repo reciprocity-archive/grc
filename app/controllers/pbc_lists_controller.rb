@@ -52,8 +52,8 @@ class PbcListsController < BaseObjectsController
     end
 
     def delete_model_stats
-      [ [ 'Request', @pbc_list.requests.count ],
-        [ 'Response', @pbc_list.requests.responses.count ]
+      [
+        [ 'Request', @pbc_list.requests.count ]
       ]
     end
 end
