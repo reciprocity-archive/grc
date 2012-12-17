@@ -41,7 +41,7 @@
                 %a.btn.btn-mini.pull-right{:href => flow_controls_path(:list_select => 1), :'data-toggle' => 'modal-ajax-single-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#referenceList', :'data-modal-class' => 'modal-slim' }
                   %i.grcicon-link
                 .item.i-control
-                  =request.pbc_control_code
+                  =request.control && request.control.slug || "&nbsp;".html_safe
               .span3.pbc-request
                 .item
                   Request Type: Documentation

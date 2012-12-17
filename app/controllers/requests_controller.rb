@@ -46,6 +46,15 @@ class RequestsController < BaseObjectsController
           request_params[:pbc_list] = pbc_list
         end
       end
+
+      control_id = request_params.delete(:control_id)
+      if control_id.present?
+        control = Control.where(:id => control_id).first
+        if control.present?
+          request_params[:control] = control
+        end
+      end
+
       #%w(type).each do |field|
       #  parse_option_param(request_params, field)
       #end
