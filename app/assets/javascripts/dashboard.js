@@ -353,13 +353,15 @@ jQuery(function($) {
         filter_func = function($el) {
           return (
             ($el.data('filter-' + filter_attr) &&
-             (Date.parse($el.data('filter-' + filter_attr)) >= Date.parse($elem.val()))) &&
+             // We use "+ ' UTC'" to avoid strange timezone conversions
+             // due to differing date formats
+             (Date.parse($el.data('filter-' + filter_attr) + ' UTC') >= Date.parse($elem.val() + ' UTC'))) &&
             old_filter_func($el));
         }
       } else if (filter_attr == 'person') {
         filter_func = function($el) {
           return (
-            (new RegExp('[^,]' + $elem.val() + '[,$]').test($el.data('filter-' + filter_attr))) &&
+            (new RegExp('(^|,)' + $elem.val() + '(,|$)').test($el.data('filter-' + filter_attr))) &&
             old_filter_func($el));
         }
       }
