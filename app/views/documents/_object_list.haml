@@ -11,10 +11,9 @@
 .collapse#referenceListCollapse
   .bootstrap-collapse-bugfix
 
-  %script#reference_list_item{ :type => 'text/html', :'data-member' => 'object_document'}
+  -# removed since it is not working
+  -#%script#reference_list_item{ :type => 'text/html', :'data-member' => 'object_document'}
     %li.controlSlot{ :'data-id' => '<%= document.id %>' }
-      %a.widgetbtn.pull-right.juke-down{ :href => flow_documents_path + '/<%= document.id %>/edit', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide' }
-        %i.grcicon-edit-grey
       %a.reference{:href => '<%= document.link_url %>', :target => "_blank"}
         %span.controls-group <%= document.document_type || '&nbsp;' %>
         %br
@@ -24,8 +23,6 @@
     -all_object_documents.each do |object_item|
       -item = object_item.document
       %li.controlSlot{ :'data-id' => item.id }
-        %a.widgetbtn.pull-right.juke-down{ :href => edit_flow_document_path(item), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide' }
-          %i.grcicon-edit-grey
         %a.reference{:href => item.link_url, :target => "_blank"}
           %span.controls-group=item.document_type || '&nbsp;'.html_safe
           %br
