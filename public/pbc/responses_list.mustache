@@ -82,11 +82,14 @@
         </ul>
       </div>
       <div class="span1 pbc-item pbc-actions">
-        <a class="btn btn-mini" data-toggle="modal" href="#newResponseDocumentation">
+        <a class="btn btn-mini system-edit" data-toggle="modal-ajax-form" href="/systems/{{system.id}}/edit" data-modal-reset="reset" data-model-class="modal-wide" title="Edit System">
           <i class="grcicon-edit-grey"></i>
         </a>
-        <a class="btn btn-mini">
-          <i "grcicon-arrowright-grey"></i>
+        <a class="btn btn-mini" href="/systems/{{system.id}}">
+          <i class="grcicon-arrowright-grey"></i>
+        </a>
+        <a class="btn btn-mini" href="/responses/{{id}}/delete" data-toggle="modal-ajax-deleteform" title="Delete response" rel="tooltip" data-placement="left">
+          <i class="grcicon-x-grey"></i>
         </a>
       </div>
     </div>

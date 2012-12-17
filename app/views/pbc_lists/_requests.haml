@@ -38,7 +38,7 @@
           %li.main-item
             .row-fluid.pbc-item-head
               .span3.pbc-item.pbc-control
-                %a.btn.btn-mini.pull-right
+                %a.btn.btn-mini.pull-right{:href => flow_controls_path(:list_select => 1), :'data-toggle' => 'modal-ajax-single-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#referenceList', :'data-modal-class' => 'modal-slim' }
                   %i.grcicon-link
                 .item.i-control
                   =request.pbc_control_code

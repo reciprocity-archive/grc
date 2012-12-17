@@ -41,9 +41,6 @@ CmsRails::Application.routes.draw do
       get 'risks'
       get 'delete'
     end
-    collection do
-      get 'list_select'
-    end
   end
 
   resources :systems, :as => 'flow_systems', :only => [:index, :show, :new, :edit, :create, :update, :destroy] do

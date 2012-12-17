@@ -67,7 +67,8 @@
     }
 
   , reset: function(e) {
-      this.$form()[0].reset();
+      var form = this.$form()[0];
+      form && form.reset();
       this.hide(e);
     }
 

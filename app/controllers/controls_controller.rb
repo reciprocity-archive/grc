@@ -48,7 +48,11 @@ class ControlsController < BaseObjectsController
     end
     @controls = allowed_objs(@controls.all, :read)
 
-    render :json => @controls
+    if params[:list_select].present?
+      render :partial => 'list_select', :layout => 'layouts/list_modal', :locals => {}
+    else
+      render :json => @controls
+    end
   end
 
   def sections
