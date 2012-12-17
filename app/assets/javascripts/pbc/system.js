@@ -25,6 +25,8 @@ can.Model.Cacheable("CMS.Models.System", {
 }, {
 
     init : function() {
+        this._super();
+
         var people = new can.Model.List();
         var docs = new can.Model.List();
 

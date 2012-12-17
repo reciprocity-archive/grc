@@ -60,7 +60,17 @@ $(function() {
         , system_id: data.id
       });
       resp.save();
-    })
+    });
+
+    $('body').on('modal:success', 'a.system-edit', function(e, data) {
+      var $this = $(this)
+        , response_id = $this.closest('li[data-id]').data('id')
+        , response = CMS.Models.Response.findInCacheById(response_id)
+        , system_id = response.attr('system_id')
+        , system = CMS.Models.System.findInCacheById(response.attr('system_id'))
+        ;
+      system.attr(data);
+    });
 });
 
 })(this, can.$);
