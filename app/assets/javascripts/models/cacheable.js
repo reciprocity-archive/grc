@@ -5,7 +5,7 @@ can.Model("can.Model.Cacheable", {
   init : function() {
     this.bind("created", function(ev, new_obj) {
       if(new_obj.id) {
-        can.getObject("cache", this, true)[new_obj.id] = new_obj;
+        can.getObject("cache", new_obj.constructor, true)[new_obj.id] = new_obj;
       }
     });
   }
