@@ -24,38 +24,32 @@
           PBC Request List
       .widget-filters
         .row-fluid
-          .span4.widget-titles
-            .row-fluid
-              .span6
-                %label Program
-                %h4 SOX Sarbanes Oxley
-              .span6
-                %label Title
-                %h4 EY Google SOX PBC List
-            .row-fluid
-              .span4
-                %label Audit Firm
-                %h4 Ernst &amp; Young
-              .span4
-                %label Audit Lead
-                %h4 Paul Harvey
-              .span4
-                %label List Import Date
-                %h4 06/10/12
-          .span2
+          .span3.widget-titles
+            %label Program
+            %h4 SOX Sarbanes Oxley
+          .span3.widget-titles
+            %label Title
+            %h4 EY Google SOX PBC List
+          .span2.widget-titles
+            %label Audit Firm
+            %h4 Ernst &amp; Young
+          .span2.widget-titles
+            %label Audit Lead
+            %h4 Paul Harvey
+          .span2.widget-titles
+            %label List Import Date
+            %h4 06/10/12
+        .row-fluid
+          .span3
             .filters-box.sort-by
               .row-fluid
-                .span12.title-row
+                .span9
                   %label
-                    %strong Sort By
-              .row-fluid                
-                .span8
-                  %label
-                    Choose
+                    Sort by
                   %select.span12
                     %option{:selected => "selected"} Control Code
                     %option Request Date
-                .span4
+                .span3
                   %label
                     &nbsp;
                   .btn-group
@@ -63,13 +57,8 @@
                       %i.grcicon-sortUp
                     %a.btn.btn-mini
                       %i.grcicon-sortDown                             
-
-          .span6
+          .span9
             .filters-box
-              .row-fluid
-                .span12.title-row
-                  %label
-                    %strong Filter by
               .row-fluid
                 .span3
                   %label
@@ -83,15 +72,15 @@
                     Status
                   %select.span12
                     %option{:selected => "selected"} Draft
-                    %option Waiting Compliance
-                    %option Waiting Auditors
+                    %option Open - Waiting Compliance
+                    %option Open - Waiting Auditors
                     %option Completed
-                .span2
+                .span3
                   %label
                     Person
                   %select.span12
                     %option - Any -
-                .span3
+                .span2
                   %label 
                     Date (on or after)
                     %input.span12#datepicker-control-date.date{:type => "text",  :placeholder => "MM/DD/YYYY"}
@@ -129,9 +118,9 @@
                   Physically Protect Stored Data
                 .span1
                   %a.btn.btn-mini
-                    %i.grcicon-add
+                    %i.grcicon-blank
                   %a.btn.btn-mini
-                    %i.grcicon-add
+                    %i.grcicon-blank
                 .span1
                   %a.btn.btn-mini.btn-success
                     %i.grcicon-check-white
