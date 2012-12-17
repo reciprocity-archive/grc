@@ -4,9 +4,9 @@
     -help_path = yield_content!(:modal_help)
     -if !help_path.blank?
       %a.widgetbtn{ :href => "/help/#{help_path}", :'data-toggle' => 'modal-ajax', :title => "Help - What is this?"}
-        %i.gcmsicon-questionmark-grey
+        %i.grcicon-questionmark-grey
     %a.widgetbtn{ :'data-dismiss' => 'modal', :href => '#'}
-      %i.gcmsicon-x-grey
+      %i.grcicon-x-grey
   =yield_content!(:modal_title) || 'Add Object'
 
 .modal-body

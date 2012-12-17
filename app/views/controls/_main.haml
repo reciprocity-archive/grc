@@ -1,0 +1,20 @@
+-content_for :widget_title do
+  Control Implementation
+
+-content_for :widget_help, 'control_main'
+
+.tabbable
+  %ul.nav.nav-tabs
+    %li=link_to 'Sys/Biz Processes', '#systems', :data => { :toggle => 'tab', :'tab-href' => systems_flow_control_path(control) }
+    -if control.program.company?
+      %li=link_to 'Linked Controls', '#controls', :data => { :toggle => 'tab', :'tab-href' => implemented_controls_flow_control_path(control) }
+    -else
+      %li=link_to 'Linked Controls', '#controls', :data => { :toggle => 'tab', :'tab-href' => implementing_controls_flow_control_path(control) }
+    %li=link_to 'Program Sections', '#regulations', :data => { :toggle => 'tab', :'tab-href' => sections_flow_control_path(control) }
+    %li=link_to 'Risks', '#risks', :data => { :toggle => 'tab', :'tab-href' => risks_flow_control_path(control) }
+
+  .tab-content
+    #systems.tab-pane
+    #controls.tab-pane
+    #regulations.tab-pane
+    #risks.tab-pane

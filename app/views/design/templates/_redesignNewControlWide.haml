@@ -2,12 +2,12 @@
   .modal-header
     %nav
       %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
-        %i.gcmsicon-questionmark-grey
+        %i.grcicon-questionmark-grey
       %a.widgetbtn{"data-dismiss" => "modal", :href => "#"}
-        %i.gcmsicon-x-grey
+        %i.grcicon-x-grey
     %h1
       Create New Control
-      %span.version v.0.86
+      %span.version v.0.9
   .modal-body
     .alert.alert-info
       %span#alertMessage
@@ -26,12 +26,22 @@
             %option Program Title 3
         .span6
           .row-fluid
-            .span6
+            .span3
               %label Code (optional)
               %input.span12{:type => "text", :placeholder => "Autofill code"}
-            .span6
-              %label Version
+            .span1
+              %label Ver.
               %input.span12{:type => "text", :placeholder => "1.0"}
+            .span4
+              %label Effective Date
+              %input.span12#datepicker-control-effectivedate.date{:type => "text",  :placeholder => "MM/DD/YYYY"}
+              :javascript
+                $('#datepicker-control-effectivedate').datepicker();
+            .span4
+              %label Stop Date    
+              %input.span12#datepicker-control-stopdate.date{:type => "text",  :placeholder => "MM/DD/YYYY"}
+              :javascript
+                $('#datepicker-control-stopdate').datepicker();
       .row-fluid
         .span6
           %label Description
@@ -39,28 +49,29 @@
         .span6
           .row-fluid 
             .span6
-              %label Effective Date
-              %input.span12#datepicker-control-effectivedate.date{:type => "text",  :placeholder => "MM/DD/YYYY"}
-              :javascript
-                $('#datepicker-control-effectivedate').datepicker();
               %label Type
               %select.span12
                 %option Regulation
                 %option Company
+              %label Fraud-related
+              %select.span12
+                %option No
+                %option Yes
             .span6
-              %label Stop Date    
-              %input.span12#datepicker-control-stopdate.date{:type => "text",  :placeholder => "MM/DD/YYYY"}
-              :javascript
-                $('#datepicker-control-stopdate').datepicker();
               %label Kind 
               %select.span12
                 %option Reactive
                 %option Administrative
                 %option Detective
                 %option Preventative
+              %label Significance
+              %select.span12
+                %option Non-Key
+                %option Yes
+                %option No
       .row-fluid
         .span6
-          %label Direct Link
+          %label Direct Link (optional)
           %input.span12{:type => "text", :placeholder => "http://www.examplelink.com/"}
           %span.help-inline &nbsp;
         .span6
@@ -69,7 +80,7 @@
               %label Control Means
               %select.span12
                 %option Manual
-                %option Manual with Segregation of Duties
+                %option Manual with sagregation of duties
                 %option Automated
             .span6
               %label Verify Control
@@ -81,9 +92,9 @@
                 %option Quarterly
                 %option Annually
       .row-fluid
-        .span6      
+        .span3      
           %label.subtitle 
-            Evidence Instructions
+            Verification note (optional)
           .row-fluid
             %textarea.span12.double{:placeholder => "Enter in a description that a system owner would follow to collect evidence for this control.", :rows => "3"}
             %span.help-inline &nbsp;
@@ -91,13 +102,37 @@
               $('#wysihtml5').wysihtml5({
                 "image": false //Button to insert an image. Default true
               });
-        .span6
-          %h3 
-            Categories
-            .pull-right 
-              %a.btn.btn-blue.addbtn.pull-right Edit Categories 
+        .span3
+          %label.subtitle
+            Notes (optional)
+          .row-fluid  
+            %textarea.span12.double{:placeholder => "Enter notes here", :rows => "3"}
+        .span3
+          %label Assertions (optional, multi-choice)
+          %select{:multiple => "multiple"}
+            %optgroup{:label => "Transactions"}
+              %option Occurrence
+              %option Completeness              
+              %option Accuracy              
+              %option Cutoff
+              %option Classification
+            %optgroup{:label => "Accounts balances"}
+              %option Existence
+              %option Rights and Obligations              
+              %option Completeness
+              %option Valuation and Allocation
+            %optgroup{:label => "Presentation and disclosure"}
+              %option Occurrence
+              %option Rights and Obligations              
+              %option Completeness
+              %option Classification and Understandability
+              %option Accuracy and Valuation
+        .span3.modal-categories
+          %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+            %i.grcicon-edit-grey
+          %label Categories
           .row-fluid
-            .span4
+            .span12
               %li.slot.categorySlot.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
                 .controls-group
                   .controls-type Authorization
@@ -108,27 +143,7 @@
                   .controls-type Change Management
                   .controls-subtype 
                   .controls-subgroup Segregation of Duties
-            .span4
-              %li.slot.categorySlot.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
-                .controls-group
-                  .controls-type Authorization
-                  .controls-subtype 
-                  .controls-subgroup Access Control
-              %li.slot.categorySlot.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
-                .controls-group
-                  .controls-type Change Management
-                  .controls-subtype 
-                  .controls-subgroup Segregation of Duties
-            .span4
-              %li.slot.categorySlot.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
-                .controls-group
-                  .controls-type Authorization
-                  .controls-subtype 
-                  .controls-subgroup Access Control
-              %li.slot.categorySlot.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
-                .controls-group
-                  .controls-type Change Management
-                  .controls-subtype 
-                  .controls-subgroup Segregation of Duties
+
+
 
   =render :partial => 'design/templates/modalfooter', :locals => { :shownote => false, :showcreated => true, :showrevs => true }

@@ -4,6 +4,7 @@ class Location < ActiveRecord::Base
   include SearchableModel
   include AuthorizedModel
   include RelatedModel
+  include SanitizableAttributes
 
   attr_accessible :title, :slug, :description, :url, :version, :start_date, :stop_date
 
@@ -15,25 +16,17 @@ class Location < ActiveRecord::Base
 
   is_versioned_ext
 
+  sanitize_attributes :description
+
   validates :title,
     :presence => { :message => "needs a value" }
 
   @valid_relationships = [
-    { :relationship_type => :location_is_dependent_on_location,
-      :related_model => Location,
-      :related_model_endpoint => :both},
-    { :relationship_type => :market_is_dependent_on_location,
-      :related_model => Market,
-      :related_model_endpoint => :source},
-     { :relationship_type => :org_group_has_province_over_location,
-      :related_model => OrgGroup,
-      :related_model_endpoint => :source},
-    { :relationship_type => :org_group_is_dependent_on_location,
-      :related_model => OrgGroup,
-      :related_model_endpoint => :source},
-    { :relationship_type =>:program_is_relevant_to_location,
-      :related_model => Program,
-      :related_model_endpoint => :source}
+    { :both => Location, :via => :location_is_dependent_on_location },
+    { :from => Market,   :via => :market_is_dependent_on_location },
+    { :from => OrgGroup, :via => :org_group_has_province_over_location },
+    { :from => OrgGroup, :via => :org_group_is_dependent_on_location },
+    { :from => Program,  :via => :program_is_relevant_to_location }
   ]
 
   def display_name

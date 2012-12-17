@@ -11,7 +11,7 @@ module ControlsHelper
     %w(start_date stop_date).each do |field|
       parse_date_param(control_params, field)
     end
-    %w(category).each do |field|
+    %w(category assertion).each do |field|
       value_ids = control_params.delete(field + '_ids')
       values = []
       if value_ids.respond_to?(:each)

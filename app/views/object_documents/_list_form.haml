@@ -13,7 +13,7 @@
         %a.widgetbtn.pull-right{ :href => '#', :'data-toggle' => 'selector-list-select' }
           %i.grcicon-chevron-right
         %a.widgetbtn.pull-right{ :href => edit_flow_document_path('<%=document.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target', :'data-modal-class' => 'modal-wide' }
-          %i.gcmsicon-edit-grey
+          %i.grcicon-edit-grey
 
 %script#document_option_data{ :type => 'text/html' }
   %span.company <%= document.document_type || '&nbsp;' %>
@@ -30,9 +30,9 @@
         %input{ :type => 'hidden', :name => 'items[<%= id %>][document_id]', :value => '<%= document.id %>' }
         %input._destroy{ :type => 'hidden', :name => 'items[<%= id %>][_destroy]', :value => '' }
         %a.widgetbtn.pull-right.add-me{:href => "#", :'data-toggle' => 'selector-list-remove'}
-          %i.icon-minus-sign
+          %i.grcicon-remove
         %a.widgetbtn.pull-right{:href => edit_flow_document_path('<%=document.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target', :'data-modal-class' => 'modal-wide' }
-          %i.gcmsicon-edit-grey
+          %i.grcicon-edit-grey
         %h6.state
 
 .row-fluid
@@ -40,7 +40,7 @@
     %h4
       Add Reference
       %a.widgetbtn.widgetbtnselector{ :href => new_flow_document_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-selector-target' => '.source, .target', :'data-modal-class' => 'modal-wide' }
-        %i.gcmsicon-add
+        %i.grcicon-add
       .pull-right
         %input.widgetsearch{:type => "text", :placeholder => "Search References"}
 

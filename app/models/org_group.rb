@@ -4,6 +4,7 @@ class OrgGroup < ActiveRecord::Base
   include SearchableModel
   include AuthorizedModel
   include RelatedModel
+  include SanitizableAttributes
 
   attr_accessible :title, :slug, :description, :url, :version, :start_date, :stop_date
 
@@ -15,28 +16,18 @@ class OrgGroup < ActiveRecord::Base
 
   is_versioned_ext
 
+  sanitize_attributes :description
+
   validates :title,
     :presence => { :message => "needs a value" }
 
   @valid_relationships = [
-    { :relationship_type =>:org_group_has_province_over_location,
-      :related_model => Location,
-      :related_model_endpoint => :destination},
-    { :relationship_type => :org_group_has_province_over_market,
-      :related_model => Market,
-      :related_model_endpoint => :destination},
-    { :relationship_type =>:org_group_has_province_over_product,
-      :related_model => Product,
-      :related_model_endpoint => :destination},
-    { :relationship_type => :org_group_is_affiliated_with_org_group,
-      :related_model => OrgGroup,
-      :related_model_endpoint => :both},
-    { :relationship_type => :org_group_is_dependent_on_location,
-      :related_model => Location,
-      :related_model_endpoint => :destination},
-    { :relationship_type => :program_is_relevant_to_org_group,
-      :related_model => Program,
-      :related_model_endpoint => :source}
+    { :to   => Location, :via => :org_group_has_province_over_location },
+    { :to   => Market,   :via => :org_group_has_province_over_market },
+    { :to   => Product,  :via => :org_group_has_province_over_product },
+    { :both => OrgGroup, :via => :org_group_is_affiliated_with_org_group },
+    { :to   => Location, :via => :org_group_is_dependent_on_location },
+    { :from => Program,  :via => :program_is_relevant_to_org_group }
   ]
 
   def display_name

@@ -13,7 +13,7 @@
         %a.widgetbtn.pull-right.add-me{:href => "#", :'data-toggle' => 'selector-list-select'}
           %i.grcicon-chevron-right
         %a.widgetbtn.pull-right{:href => edit_flow_person_path('<%=person.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
-          %i.gcmsicon-edit-grey
+          %i.grcicon-edit-grey
 
 %script#person_option_data{ :type => 'text/html' }
   %span.company <%= person.company %>
@@ -47,9 +47,9 @@
             %input{ :type => 'hidden', :name => 'items[<%= id %>][person_id]', :value => '<%= person.id %>' }
             %input._destroy{ :type => 'hidden', :name => 'items[<%= id %>][_destroy]', :value => '' }
             %a.widgetbtn.pull-right{ :href => '#', :'data-toggle' => 'selector-list-remove' }
-              %i.icon-minus-sign
+              %i.grcicon-remove
             %a.widgetbtn.pull-right{ :href => edit_flow_person_path('<%=person.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
-              %i.gcmsicon-edit-grey
+              %i.grcicon-edit-grey
     .row-fluid.additional
       .span4
       .span4
@@ -64,7 +64,7 @@
     %h4
       Add Person
       %a.widgetbtn.widgetbtnselector{ :href => new_flow_person_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-selector-target' => '.source, .target' }
-        %i.gcmsicon-add
+        %i.grcicon-add
       .pull-right
         %input.widgetsearch{:type => "text", :placeholder => "Search Person"}
 

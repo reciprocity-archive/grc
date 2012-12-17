@@ -9,6 +9,7 @@ class Section < ActiveRecord::Base
   include SearchableModel
   include AuthorizedModel
   include RelatedModel
+  include SanitizableAttributes
 
   attr_accessible :title, :slug, :description, :program, :notes
 
@@ -25,6 +26,8 @@ class Section < ActiveRecord::Base
   belongs_to :parent, :class_name => "Section"
 
   is_versioned_ext
+
+  sanitize_attributes :description
 
   before_save :upcase_slug
   before_save :update_parent_id

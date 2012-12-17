@@ -1,7 +1,7 @@
 class Category < ActiveRecord::Base
   include AuthoredModel
 
-  attr_accessible :name, :scope_id, :parent
+  attr_accessible :name, :scope_id, :parent, :required
 
   scope :ctype, lambda { |sid| where(:scope_id => sid) }
   acts_as_nested_set :scope => :scope_id
@@ -20,8 +20,24 @@ class Category < ActiveRecord::Base
     parent && parent.name
   end
 
+  def ancestor_names
+    ancestors.map(&:display_name).join(",")
+  end
+
   def as_json(options={})
     super(options.merge(:methods => :parent_name))
+  end
+
+  def as_csv
+    row_values = []
+    self.class.attribute_names_for_csv.each do |attr|
+      row_values << self.send(attr)
+    end
+    CSV.generate_line(row_values)
+  end
+
+  def self.attribute_names_for_csv
+    ["ancestor_names"] + Category.attribute_names - ["lft", "rgt", "id", "parent_id"]
   end
 
   def self.db_search(q)

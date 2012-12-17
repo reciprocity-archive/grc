@@ -4,6 +4,7 @@ class RiskyAttribute < ActiveRecord::Base
   include SearchableModel
   include AuthorizedModel
   include RelatedModel
+  include SanitizableAttributes
 
   attr_accessible :title, :slug, :description, :url, :version, :type, :start_date, :stop_date
 
@@ -17,28 +18,18 @@ class RiskyAttribute < ActiveRecord::Base
 
   is_versioned_ext
 
+  sanitize_attributes :description
+
   validates :title,
     :presence => { :message => "needs a value" }
 
   @valid_relationships = [
-    { :relationship_type => :risky_attribute_is_an_attribute_of_org_group,
-      :related_model => OrgGroup,
-      :related_model_endpoint => :source },
-    { :relationship_type => :risky_attribute_is_an_attribute_of_product,
-      :related_model => Product,
-      :related_model_endpoint => :source },
-    { :relationship_type => :risky_attribute_is_an_attribute_of_location,
-      :related_model => Location,
-      :related_model_endpoint => :source },
-    #{ :relationship_type => :risky_attribute_is_an_attribute_of_project,
-    #  :related_model => Project,
-    #  :related_model_endpoint => :source },
-    { :relationship_type => :risky_attribute_is_an_attribute_of_market,
-      :related_model => Market,
-      :related_model_endpoint => :source },
-    #{ :relationship_type => :risky_attribute_is_an_attribute_of_data_asset,
-    #  :related_model => DataAsset,
-    #  :related_model_endpoint => :source },
+    { :from => OrgGroup,  :via => :risky_attribute_is_an_attribute_of_org_group },
+    { :from => Product,   :via => :risky_attribute_is_an_attribute_of_product },
+    { :from => Location,   :via => :risky_attribute_is_an_attribute_of_location },
+    #{ :from => Project,   :via => :risky_attribute_is_an_attribute_of_project },
+    { :from => Market,   :via => :risky_attribute_is_an_attribute_of_market },
+    #{ :from => DataAsset, :via => :risky_attribute_is_an_attribute_of_data_asset },
   ]
 
   def display_name

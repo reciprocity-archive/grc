@@ -7,22 +7,23 @@
 -if !f.object.new_record?
   -content_for :modal_delete_path, delete_flow_cycle_path(f.object)
 
-.group
-  -if f.object.program_id.present?
-    =f.label :program_id
-    =f.hidden_field :program_id
-    =f.object.program.display_name
-  -else
-    =f.collection_select :program_id, Program.all, :id, :display_name, {}, {:class => :collection, :multiple => false}
-  %span.description Program being audited
+.row-fluid
+  .span4
+    -if f.object.program_id.present?
+      =f.label :program_id
+      =f.hidden_field :program_id
+      =f.object.program.display_name
+    -else
+      =f.collection_select :program_id, Program.all, :id, :display_name, {}, {:class => :collection, :multiple => false}
+    %br
+    %span.description Program being audited
 
-.group
-  =f.label :start_at
-  =f.text_field :start_at, :class => :text_field, :'data-toggle' => 'datepicker'
-  %span.description Audit period start date in the format yyyy-mm-dd.  Page up/down to select month, control up/down/left/right to select day. Enter to apply.
+  =wrapped_date_field f, :span3, :start_at, :class => 'date', :label_name => 'Audit Start Date', :placeholder => 'MM/DD/YYYY'
 
-.group
-  =f.label :complete
-  =f.check_box :complete, :class => :check_box
-  %span.description Was this audit cycle completed?
+  .span1
+  .span4
+    =f.label :complete
+    =f.check_box :complete, :class => :check_box
+    %br
+    %span.description Was this audit cycle completed?
 

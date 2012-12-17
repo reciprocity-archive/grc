@@ -1,36 +1,81 @@
 %ul
   %li
     .row-fluid
-      .slot.span12.regulationslot.statusyellow.toggle{"data-target" => "#Link-4-c1", "data-toggle" => "collapse"}
-        .row-fluid
-          .span12
-            %span.prefix Linked Control 1
-            Simplify the slots with less buttons.
-            .enddot
-        .row-fluid
-          .span3
-            123
-          .span9
-            A lot more text.
-
-    .row-fluid#Link-4-c1.collapse
-      .slotcontent
-        I would prefer to remove the [...] more button in these cases and only have the full slot button. While we are technically looking at more data, the dot lets them know there is no hierchal data to be shown. Otherwise, this slot and the 3 following should all have that blue button as well. Visually messy.
-  %li
-    .row-fluid
-      .slot.span12.regulationslot.statusyellow.toggle{"data-target" => "#Link-4-c2", "data-toggle" => "collapse"}
-        %span.prefix Linked Control 2
-        Also without a [...] button.
-        .enddot
-    .row-fluid#Link-4-c2.collapse
-      .slotcontent
-        Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
-  %li
-    .row-fluid
-      .slot.span12.regulationslot.statusyellow.toggle{"data-target" => "#Link-4-c3", "data-toggle" => "collapse"}
-        %span.prefix Linked Control 3
-        Enable processes to provide for timely forensic investigation in the event of a ...
-        .enddot
-    .row-fluid#Link-4-c3.collapse
-      .slotcontent
-        Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
+      .slot.span12.controlslot 
+        .slottitle.span8.toggle{"data-target" => "#linkedcontrols", "data-toggle" => "collapse"}
+          .expander
+          %span.prefix Linked Group
+          This is a generic content slot being used for a group of link items. Notice the sublte gradient to show its a top level
+        .span2.slotcolumn
+          .halfopacity.span12.nominheight.btn.btn-slotcolumn Full Audit
+        .slotowner.span1
+          %a.slotowner GRC
+        .slotactions.pull-right
+          %a#tooltip11.btn.btn-mini.btn-blue{"rel" => "tooltip", "data-placement" => "left", "title" => "More", "data-target" => "#linkedcontrols-summary", "data-toggle" => "collapse"}
+            %i.grcicon-more
+      #linkedcontrols-summary.row-fluid.collapse
+        .span12.morewell.nominheight
+          .slotcontent.span12
+            %ul.contentactions.pull-right
+              %li
+                %a#tooltip24.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Edit this object", "data-toggle" => "modal", :href => "#comingsoonModal"}
+                  %i.grcicon-edit-grey
+              %li
+                %a#tooltip25.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Link objects to this object", "data-toggle" => "modal", :href => "#comingsoonModal"}
+                  %i.grcicon-link
+              %li
+                %a#tooltip26.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", "data-toggle" => "modal", :href => "#comingsoonModal"}
+                  %i.grcicon-arrowright-black
+            "Hi I am a general description or some such info box that you requested to see. You can't edit me. You can just enjoy the beautiful knowledge I pour into your ocular cavities. Learn my friend. Learn. Or if you don't want to just glaze over and scan down until you see the information you truly wanted." -Abraham Lincoln
+      #linkedcontrols.row-fluid.collapse
+        %ul
+          %li
+            %ul.slotlist
+              %li
+                .row-fluid
+                  .doubleslot.span12.statusred.toggle{"data-target" => "#linkedcontrols-1-summary", "data-toggle" => "collapse"}
+                    .row-fluid
+                      .slottitle.span8
+                        .enddot.link
+                        %span.controls-group Linked Type
+                        %br
+                        This is a link slot
+                      .slotcolumn.span2
+                        .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
+                      .slotowner.span1
+                        %a.slotowner{:href => "http://www.youtube.com/watch?v=oHg5SJYRHA0"} Rick Astley
+                      .slotactions.pull-right
+                        %a.btn.btn-mini.btn-blue{"data-target" => "#linkedcontrols-1-summary", "data-toggle" => "collapse"}
+                          %i.grcicon-more
+              %li
+                .row-fluid
+                  .doubleslot.span12.statusred.toggle{"data-target" => "#linkedcontrols-1-summary", "data-toggle" => "collapse"}
+                    .row-fluid
+                      .slottitle.span8
+                        .enddot.link
+                        %span.controls-group Linked Type
+                        %br
+                        This is a link slot
+                      .slotcolumn.span2
+                        .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
+                      .slotowner.span1
+                        %a.slotowner{:href => "http://www.youtube.com/watch?v=oHg5SJYRHA0"} Rick Astley
+                      .slotactions.pull-right
+                        %a.btn.btn-mini.btn-blue{"data-target" => "#linkedcontrols-1-summary", "data-toggle" => "collapse"}
+                          %i.grcicon-more
+              %li
+                .row-fluid
+                  .doubleslot.span12.statusred.toggle{"data-target" => "#linkedcontrols-1-summary", "data-toggle" => "collapse"}
+                    .row-fluid
+                      .slottitle.span8
+                        .enddot.link
+                        %span.controls-group Linked Type
+                        %br
+                        This is a link slot
+                      .slotcolumn.span2
+                        .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
+                      .slotowner.span1
+                        %a.slotowner{:href => "http://www.youtube.com/watch?v=oHg5SJYRHA0"} Rick Astley
+                      .slotactions.pull-right
+                        %a.btn.btn-mini.btn-blue{"data-target" => "#linkedcontrols-1-summary", "data-toggle" => "collapse"}
+                          %i.grcicon-more

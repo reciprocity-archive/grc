@@ -9,7 +9,7 @@
       [ '<div class="modal-header">'
       , '  <nav>'
       , '    <a class="widgetbtn" href="#" data-dismiss="modal">'
-      , '      <i class="gcmsicon-x-grey"></i>'
+      , '      <i class="grcicon-x-grey"></i>'
       , '    </a>'
       , '  </nav>'
       , '  <h1>Loading...</h1>'
@@ -70,6 +70,7 @@
           $(list_target).tmpl_setitems(data);
           $target.modal_relationship_selector('hide');
         }
+
       });
     },
 
@@ -160,6 +161,8 @@
           refresh_page();
         } else if (form_target == 'redirect') {
           window.location.assign(xhr.getResponseHeader('location'));
+        } else {
+          $target.modal_form('hide');
         }
       });
     }
@@ -249,6 +252,7 @@
       option = $target.data('modal-help') ? 'toggle' : $.extend({}, $target.data(), $this.data());
 
       e.preventDefault();
+      e.stopPropagation();
 
       modal_type = $this.data('modal-type');
       if (!modal_type) {

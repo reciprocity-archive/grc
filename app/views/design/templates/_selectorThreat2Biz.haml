@@ -2,9 +2,9 @@
   .modal-header
     %nav
       %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
-        %i.gcmsicon-questionmark-grey
+        %i.grcicon-questionmark-grey
       %a.widgetbtn{"data-dismiss" => "modal", :href => "#"}
-        %i.gcmsicon-x-grey
+        %i.grcicon-x-grey
     %h1
       Link Risky Attribute to this %biz object%
       %span.version v 0.33
@@ -18,7 +18,7 @@
           %h4
             Select Risky Attribute
             .widgetbtn.widgetbtnselector{"data-dismiss" => "modal", :href => "#"}
-              %i.gcmsicon-add
+              %i.grcicon-add
             .WidgetBoxHeading.pull-right
               %input{:type => "text", :placeholder => "Search Threats"}
 
@@ -46,7 +46,7 @@
                               %a.widgetbtn.pull-right.add-me{:href => "#"}
                                 %i.grcicon-chevron-right
                               %a.widgetbtn.pull-right{:href => "#"}
-                                %i.gcmsicon-edit-grey
+                                %i.grcicon-edit-grey
                         %li
                           .row-fluid
                             .span8
@@ -56,7 +56,7 @@
                               %a.widgetbtn.pull-right.add-me{:href => "#"}
                                 %i.grcicon-chevron-right 
                               %a.widgetbtn.pull-right{:href => "#"}
-                                %i.gcmsicon-edit-grey
+                                %i.grcicon-edit-grey
                         %li
                           .row-fluid
                             .span8
@@ -66,7 +66,7 @@
                               %a.widgetbtn.pull-right.add-me{:href => "#"}
                                 %i.grcicon-chevron-right
                               %a.widgetbtn.pull-right{:href => "#"}
-                                %i.gcmsicon-edit-grey
+                                %i.grcicon-edit-grey
                   #bizobj2.tab-pane
                     #currentList2.system-list
                       %ul.source
@@ -79,7 +79,7 @@
                               %a.widgetbtn.pull-right.add-me{:href => "#"}
                                 %i.grcicon-chevron-right
                               %a.widgetbtn.pull-right{:href => "#"}
-                                %i.gcmsicon-edit-grey
+                                %i.grcicon-edit-grey
         .span6
           %h4 Risky Attributes of this %biz object%
           .system-list.targetlist
@@ -95,7 +95,7 @@
                   .span1.actions
                     %label &nbsp;
                     %a#removeMe.widgetbtn.pull-right{:href => "#"}
-                      %i.icon-minus-sign
+                      %i.grcicon-remove
               %li
                 .row-fluid
                   .span6
@@ -103,13 +103,13 @@
                     %span.name System 2
                   .span6.actions
                     %a.widgetbtn.pull-right{:href => "#"}
-                      %i.gcmsicon-edit-grey 
+                      %i.grcicon-edit-grey 
                 .row-fluid.additional
                   .span11
                   .span1.actions
                     %label &nbsp;
                     %a#removeMe.widgetbtn.pull-right{:href => "#"}
-                      %i.icon-minus-sign
+                      %i.grcicon-remove
               %li
                 .row-fluid
                   .span6
@@ -117,12 +117,12 @@
                     %span.name System 3
                   .span6.actions
                     %a.widgetbtn.pull-right{:href => "#"}
-                      %i.gcmsicon-edit-grey 
+                      %i.grcicon-edit-grey 
                 .row-fluid.additional
                   .span11
                   .span1.actions
                     %label &nbsp;
                     %a#removeMe.widgetbtn.pull-right{:href => "#"}
-                      %i.icon-minus-sign
+                      %i.grcicon-remove
               
   =render :partial => 'design/templates/modalfooter', :locals => { :shownote => false, :showcreated => false, :showrevs => false }

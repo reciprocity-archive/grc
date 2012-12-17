@@ -1,0 +1,19 @@
+-content_for :widget_title do
+  Categories & Options
+
+-content_for :widget_help, 'admin_categories'
+
+-content_for :widget_buttons do
+  %a.btn.widgettextbtn{ :href => new_flow_category_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :title => 'Create New Category' } Add Category
+  %a.btn.widgettextbtn{ :href => new_flow_option_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :title => 'Create New Option' } Add Option
+
+-#-content_for :widget_buttons do
+  %input.ui-corner-all.widgetsearch.clear-value(type='text' placeholder='Search')
+
+.tabbable#quick_find
+  %ul.nav.nav-tabs
+    %li=link_to 'Categories', '#categories', :data => { :'tab-href' => quick_categories_path, :toggle => 'tab' }
+    %li=link_to 'Options', '#options', :data => { :'tab-href' => quick_options_path, :toggle => 'tab' }
+  .tab-content
+    #categories.tab-pane
+    #options.tab-pane

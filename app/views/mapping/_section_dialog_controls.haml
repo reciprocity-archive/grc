@@ -2,9 +2,9 @@
   .modal-header
     %nav
       %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
-        %i.gcmsicon-questionmark-grey
+        %i.grcicon-questionmark-grey
       %a.widgetbtn{"data-dismiss" => "modal", :href => "#comingsoonModal"}
-        %i.gcmsicon-x-grey
+        %i.grcicon-x-grey
     %h1 Controls Mapped to this Section
     %h3 #{section.slug}
 
@@ -30,7 +30,7 @@
                         -
                         =control.title
                       %br
-                      %textarea.span12(rows='4')=control.description
+                      =raw control.description
 
           .span6.control-group
             %ul.slugtree.nav
@@ -45,7 +45,7 @@
                           -
                           =ccontrol.title
                         %br
-                        %textarea.span12(rows='4')=ccontrol.description
+                        =raw ccontrol.description
     %br
 
     .row-fluid

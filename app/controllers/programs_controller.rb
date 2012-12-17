@@ -31,6 +31,9 @@ class ProgramsController < BaseObjectsController
                                          :control_sections,
                                          :category_controls]
 
+  cache_sweeper :section_sweeper, :only => [:destroy, :import]
+  cache_sweeper :control_sweeper, :only => [:destroy, :import_controls]
+
   access_control :acl do
     allow :superuser
 
@@ -198,17 +201,6 @@ class ProgramsController < BaseObjectsController
     end
   end
 
-  def handle_option(attrs, name, messages, role = nil)
-    role ||= name.to_sym
-    if attrs[name]
-      value = Option.where(:role => role, :title => attrs[name]).first
-      if value.nil?
-        messages << "Unknown #{role} option '#{attrs[name]}'"
-      end
-      attrs[name] = value
-    end
-  end
-
   def do_import_controls(import, check_only)
     import[:errors] = {}
     import[:updates] = []
@@ -363,7 +355,14 @@ class ProgramsController < BaseObjectsController
       @sections = @sections.fulltext_search(params[:s])
     end
     @sections = allowed_objs(@sections.all.sort_by(&:slug_split_for_sort), :read)
-    render :layout => nil, :locals => { :sections => @sections }
+    respond_to do |format|
+      format.html do
+        render :layout => nil, :locals => { :sections => @sections } 
+      end
+      format.json do 
+        render :json => @sections, :methods => :linked_controls
+      end
+    end
   end
 
   def controls
@@ -372,7 +371,14 @@ class ProgramsController < BaseObjectsController
       @controls = @controls.fulltext_search(params[:s])
     end
     @controls = allowed_objs(@controls.all.sort_by(&:slug_split_for_sort), :read)
-    render :layout => nil, :locals => { :controls => @controls }
+    respond_to do |format|
+      format.html do
+          render :layout => nil, :locals => { :controls => @controls }
+      end
+      format.json do 
+        render :json => @controls, :methods => :implementing_controls
+      end
+    end
   end
 
   def section_controls

@@ -5,55 +5,70 @@
 
 -content_for :widget_buttons do
   %a.widgetbtn{ :href => edit_flow_product_path(product), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide', :title => 'Edit Product' }
-    %i.gcmsicon-edit-grey
+    %i.grcicon-edit-grey
+  %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#productInfoContent"}
+    %i.grcicon-enlarge-grey
 
 .information
-  .toolbar-widget
+  -if has_feature? :BETA
+    .well
+      %label
+        .pull-right
+          %span.statustextgreen 85
+          %span /
+          %span.statustextyellow 5
+          %span /
+          %span.statustextred 10
+        Status
+      .progress.progress-striped.active
+        .bar.progressbar-success{"data-percentage" => "85", :style => "float: left; width: 0%; "}
+        .bar.progressbar-danger{"data-percentage" => "10", :style => "float: right; width: 0%; "}
+        .bar.progressbar-warning{"data-percentage" => "5", :style => "float: right; width: 0%; "}
 
-  %hr.hr-widget
+  #productInfoContent.collapse.in
+    %hr.hr-widget
 
-  .row-fluid
-    .span12
+    .row-fluid
+      .span12
+        .span4
+          %label Code
+          %input.span12{:type => "text", :disabled => "disabled", :value => product.slug}
+        .span4
+          %label Type
+          %input.span12{:disabled => "disabled", :type => "text", :value => product.type && product.type.title}
+    .row-fluid
+      .span12
+        %label Full Title
+        %input.span12{:disabled => "disabled", :type => "text", :value => product.title}
+    .row-fluid
       .span4
-        %label Code
-        %input.inputtext-small{:type => "text", :disabled => "disabled", :value => product.slug}
-      .span4
-        %label Type
-        %input.inputtext-small{:disabled => "disabled", :type => "text", :value => product.type && product.type.title}
-  .row-fluid
-    .span12
-      %label Full Title
-      %input.span12{:disabled => "disabled", :type => "text", :value => product.title}
-  .row-fluid
-    .span4
-      %label Version
-      %input.inputtext-small{:disabled => "disabled", :type => "text"}
-  .row-fluid
-    .span12
-      %label Description
-      %textarea#textarea{:disabled => "disabled", :rows => 3}=product.description
+        %label Version
+        %input.span12{:disabled => "disabled", :type => "text"}
+    .row-fluid
+      .span12
+        %label Description
+        =raw product.description
 
-%hr.hr-widget
+    %hr.hr-widget
 
-.row-fluid
-  .span12
-    =render :partial => 'documents/object_list',
-            :locals  => { :object => product }
+    .row-fluid
+      .span12
+        =render :partial => 'documents/object_list',
+                :locals  => { :object => product }
 
-%hr.hr-widget
+    %hr.hr-widget
 
-.row-fluid
-  .span12
-    =render :partial => 'people/object_list',
-            :locals  => { :object => product }
+    .row-fluid
+      .span12
+        =render :partial => 'people/object_list',
+                :locals  => { :object => product }
 
-%hr.hr-widget
+    %hr.hr-widget
 
-.row-fluid
-  .span6.nominheight
-    %label.fltlft
-      %strong> Created: #{product.created_at.strftime("%m/%d/%y")}
-  .span6.nominheight
-    %label.fltrt
-      %strong> Updated: #{product.updated_at.strftime("%m/%d/%y")}
-
+    .row-fluid
+      .span6.nominheight
+        %label.fltlft
+          %strong> Created: #{product.created_at.strftime("%m/%d/%y")}
+      .span6.nominheight
+        %label.fltrt
+          %strong> Updated: #{product.updated_at.strftime("%m/%d/%y")}

@@ -29,13 +29,13 @@
           %th Infrastructure
           %th Start Date
           %th Owner
-          %th Process Owner
           %th Categories
           %th Sub Systems
           %th Org Groups
           %th References
+          %th Network Zone
       %tbody
-        -columns = %w(slug title description infrastructure start_date owner_display categories_display sub_systems_display org_groups_display references_display)
+        -columns = %w(slug title description infrastructure start_date owner_display categories_display sub_systems_display org_groups_display references_display network_zone)
         -@systems.each_with_index do |sec, i|
           %tr{ :class => (i % 2 == 0 ? :odd : :even) }
             -columns.each do |column_name|

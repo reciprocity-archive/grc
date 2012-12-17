@@ -2,9 +2,9 @@
   Selected Sections
 
 -content_for :widget_buttons do
-  =link_to mapping_map_rcontrol_path, :method => :post, :remote => true, :id => :rmap, :class => %w(widgetmapbtn btn-warning) do
+  =link_to "javascript://", :id => :rmap, :class => %w(widgetmapbtn btn-warning) do
     %span Map section to control
-    %i.gcmsicon-play-white
+    %i.grcicon-play-white
 
 #selected_sections.description{:oid => section ? section.id : ""}
   .clearfix
@@ -20,8 +20,8 @@
               =item.slug
             =item.title
           -if !item.description.blank?
-            %textarea(disabled='disabled' style='width: 98%')
-              =item.description
+            =raw item.description
+              
     -else
       Nothing selected.
 

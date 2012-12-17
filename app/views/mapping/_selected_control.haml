@@ -3,9 +3,9 @@
 
 -content_for :widget_buttons do
   -if map_button_id
-    =link_to map_button_path, :method => :post, :remote => true, :id => map_button_id, :class => %w(widgetmapbtn btn-warning) do
+    =link_to "javascript://", :id => map_button_id, :class => %w(widgetmapbtn btn-warning) do
       %span Map control to control
-      %i.gcmsicon-play-white
+      %i.grcicon-play-white
 
 .description{:id => "selected_#{control_type}", :oid => control ? control.id : ""}
   .content
@@ -15,7 +15,7 @@
           =control.slug
         =control.title
       %div
-        =control.description
+        =raw control.description
     -else
       Nothing selected.
 

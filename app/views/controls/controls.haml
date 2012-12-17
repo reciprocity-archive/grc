@@ -1,17 +1,36 @@
--# Requires 'controls' and 'prefix'
+-# locals: controls, prefix
 
-%ul.slugtree
+.row-fluid
+  .span12.captionbox
+    %h4
+      Other controls linked to this control
+
+%ul.slotlist
   =walk_slug_tree(Program.slugtree(controls)) do |item, step|
+    -content_id = "content_#{rand(36**8).to_s(36)}" # unique ID for toggle
+
     .row-fluid
-      -content_id = "content_#{rand(36**8).to_s(36)}" # unique ID for toggle
-      .span12
-        .span12.slot.controlslot{ :'data-toggle' => 'collapse', :'data-target' => "##{content_id}" }
-          %a.widgetbtn.fltrt{ :href => flow_control_path(item), :title => 'View Control' }
-            %i.gcmsicon-arrowright-grey
+      .slot.span12.controlslot
+        .slottitle.span8.toggle{"data-target" => "##{content_id}", "data-toggle" => "collapse"}
           .expander
           %span.prefix
             =prefix
             =item.slug
-          =item.title || item.description
-      .row-fluid-slotcontent.collapse{ :id => content_id }
-        %p=item.description
+          =item.title || strip_tags(item.description)
+        -if has_feature? :BETA
+          .span2.slotcolumn
+            .halfopacity.span12.nominheight.btn.btn-slotcolumn Full Audit
+          .slotowner.span1
+            %a.slotowner GRC
+        .slotactions.pull-right
+          %a#tooltip11.btn.btn-mini.btn-blue{"rel" => "tooltip", "data-placement" => "left", "title" => "More", "data-target" => "##{content_id}", "data-toggle" => "collapse"}
+            %i.grcicon-more
+
+      .row-fluid.collapse{ :id => content_id }
+        .span12.morewell.nominheight
+          .slotcontent.span12
+            %ul.contentactions.pull-right
+              %li
+                %a.btn.btn-mini.halfopacity{ "rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => flow_control_path(item.id) }
+                  %i.grcicon-arrowright-black
+            =raw item.description

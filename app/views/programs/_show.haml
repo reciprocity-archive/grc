@@ -5,14 +5,14 @@
 
 -content_for :widget_buttons do
   %a.widgetbtn{:href => edit_flow_program_path(program), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide',:title => 'Edit Program'}
-    %i.gcmsicon-edit-grey
+    %i.grcicon-edit-grey
 
 .button-set
   .row-fluid
     .span4
       .btn-group.closed
         %a.span12.btn.btn-warning.dropdown-toggle{ :'data-toggle' => 'dropdown' }
-          %i.gcmsicon-import-white
+          %i.grcicon-import-white
           Im/Export
           %span.caret
         %ul.dropdown-menu
@@ -32,12 +32,12 @@
               Export Controls
     .span4
       %a.span12.btn.btn-warning{ :href => mapping_program_path(program) }
-        %i.gcmsicon-mapping-white
+        %i.grcicon-mapping-white
         Reg Mapper
     .span4
       -if !program.company?
-        %a.span12.btn.btn-warning{ :href => new_flow_cycle_path(:'cycle[program_id]' => program.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-          %i.gcmsicon-play-white
+        %a.span12.btn.btn-warning{ :href => new_flow_cycle_path(:'cycle[program_id]' => program.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect' }
+          %i.grcicon-play-white
           Start Audit
 
 
@@ -62,7 +62,7 @@
   .row-fluid
     .span12
       %label Description
-      %textarea#textarea.span12{:disabled => "disabled"}=program.description
+      =raw program.description
 
 %hr
 

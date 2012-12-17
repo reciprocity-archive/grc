@@ -1,7 +1,44 @@
 -content_for :modal_title do
-  %h1 Select Controls
+  -if params[:system_id].present?
+    %h1 Select Controls
+  -else
+    %h1 Select Systems
 
--content_for :modal_help, :select_controls
+-if params[:system_id].present?
+  -content_for :modal_help, :select_system_controls
+-else
+  -content_for :modal_help, :select_control_systems
+
+%script#system_option{ :type => 'text/html', :'data-prefix' => 'system' }
+  %li{ :'data-id' => '<%= system.id %>', :'data-title' => '<%= system.title %>', :'data-slug' => '<%= system.slug %>' }
+    .row-fluid
+      .span8
+        %span.company <%= system.slug %>
+        %span.name <%= system.title %>
+      .span4.actions
+        %a.widgetbtn.pull-right.add-me{:href => "#", :'data-toggle' => 'selector-list-select'}
+          %i.grcicon-chevron-right
+        %a.widgetbtn.pull-right{:href => edit_flow_system_path('<%=system.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target', :'data-modal-class' => 'modal-wide' }
+          %i.grcicon-edit-grey
+
+%script#system_option_data{ :type => 'text/html' }
+  %span.company <%= system.slug %>
+  %span.name <%= system.title %>
+
+%script#system_selected{ :type => 'text/html', :'data-mappings' => 'child:system,object:system', :'data-member' => 'system_control' }
+  %li{ :'data-id' => '<%= id %>', :'data-object-id' => '<%= system.id %>' }
+    .row-fluid
+      .span6.object_info{ :'data-template-id' => 'system_option_data' }
+      .span6.actions
+        %input{ :type => 'hidden', :name => 'items[<%= id %>][id]', :value => '<% if (id.toString().substr(0,3) != "new") { %><%= id %><% } %>'.html_safe }
+        %input{ :type => 'hidden', :name => 'items[<%= id %>][control_id]', :value => object.id }
+        %input{ :type => 'hidden', :name => 'items[<%= id %>][system_id]', :value => '<%= system.id %>' }
+        %input._destroy{ :type => 'hidden', :name => 'items[<%= id %>][_destroy]', :value => '' }
+        %a.widgetbtn.pull-right{ :href => '#', :'data-toggle' => 'selector-list-remove' }
+          %i.grcicon-remove
+        %a.widgetbtn.pull-right{ :href => edit_flow_system_path('<%=system.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target', :'data-modal-class' => 'modal-wide' }
+          %i.grcicon-edit-grey
+        %h6.state
 
 %script#control_option{ :type => 'text/html', :'data-prefix' => 'control' }
   %li{ :'data-id' => '<%= control.id %>', :'data-title' => '<%= control.title %>', :'data-slug' => '<%= control.slug %>' }
@@ -13,7 +50,7 @@
         %a.widgetbtn.pull-right.add-me{:href => "#", :'data-toggle' => 'selector-list-select'}
           %i.grcicon-chevron-right
         %a.widgetbtn.pull-right{:href => edit_flow_control_path('<%=control.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target', :'data-modal-class' => 'modal-wide' }
-          %i.gcmsicon-edit-grey
+          %i.grcicon-edit-grey
 
 %script#control_option_data{ :type => 'text/html' }
   %span.company <%= control.slug %>
@@ -29,31 +66,55 @@
         %input{ :type => 'hidden', :name => 'items[<%= id %>][control_id]', :value => '<%= control.id %>' }
         %input._destroy{ :type => 'hidden', :name => 'items[<%= id %>][_destroy]', :value => '' }
         %a.widgetbtn.pull-right{ :href => '#', :'data-toggle' => 'selector-list-remove' }
-          %i.icon-minus-sign
+          %i.grcicon-remove
         %a.widgetbtn.pull-right{ :href => edit_flow_control_path('<%=control.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target', :'data-modal-class' => 'modal-wide' }
-          %i.gcmsicon-edit-grey
+          %i.grcicon-edit-grey
         %h6.state
 
-.row-fluid
-  .span6
-    %h4
-      Add Control
-      %a.widgetbtn.widgetbtnselector{ :href => new_flow_control_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-selector-target' => '.source, .target', :'data-modal-class' => 'modal-wide' }
-        %i.gcmsicon-add
-      .pull-right
-        %input.widgetsearch{:type => "text", :placeholder => "Search Controls"}
+-if params[:system_id].present?
+  .row-fluid
+    .span6
+      %h4
+        Add Control
+        %a.widgetbtn.widgetbtnselector{ :href => new_flow_control_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-selector-target' => '.source, .target', :'data-modal-class' => 'modal-wide' }
+          %i.grcicon-add
+        .pull-right
+          %input.widgetsearch{:type => "text", :placeholder => "Search Controls"}
 
-    .filter-block
-      .row-fluid
-        .span12
-          .tabbable.tabs-left
-            .tab-content
-              #category1.tab-pane.active
-                .people-list
-                  %ul.source{ :'data-list-data-href' => flow_controls_path(:format => :json), :'data-template-id' => 'control_option' }
-  .span6
-    %h4
-      Controls for this system
-    .people-list.currentlist
-      %ul.target{ :'data-list-data-href' => flow_system_controls_path(:system_id => object.id, :format => :json), :'data-selector-target' => '.source, .target', :'data-template-id' => 'control_selected'}
+      .filter-block
+        .row-fluid
+          .span12
+            .tabbable.tabs-left
+              .tab-content
+                #category1.tab-pane.active
+                  .people-list
+                    %ul.source{ :'data-list-data-href' => flow_controls_path(:format => :json), :'data-template-id' => 'control_option' }
+    .span6
+      %h4
+        Controls for this system
+      .people-list.currentlist
+        %ul.target{ :'data-list-data-href' => flow_system_controls_path(:system_id => object.id, :format => :json), :'data-selector-target' => '.source, .target', :'data-template-id' => 'control_selected'}
+-else
+  .row-fluid
+    .span6
+      %h4
+        Add System
+        %a.widgetbtn.widgetbtnselector{ :href => new_flow_system_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-selector-target' => '.source, .target', :'data-modal-class' => 'modal-wide' }
+          %i.grcicon-add
+        .pull-right
+          %input.widgetsearch{:type => "text", :placeholder => "Search Systems"}
+
+      .filter-block
+        .row-fluid
+          .span12
+            .tabbable.tabs-left
+              .tab-content
+                #category1.tab-pane.active
+                  .people-list
+                    %ul.source{ :'data-list-data-href' => flow_systems_path(:format => :json), :'data-template-id' => 'system_option' }
+    .span6
+      %h4
+        Systems implementing this control
+      .people-list.currentlist
+        %ul.target{ :'data-list-data-href' => flow_system_controls_path(:control_id => object.id, :format => :json), :'data-selector-target' => '.source, .target', :'data-template-id' => 'system_selected'}
 

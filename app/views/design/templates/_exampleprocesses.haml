@@ -1,38 +1,81 @@
 %ul
   %li
     .row-fluid
-      .slot.span12.regulationslot.statusgreen.toggle{"data-target" => "#demo2-4-c1", "data-toggle" => "collapse"}
-        %span.prefix Proc-42
-        Proc-41 Product Policies Annual Review Products
-        .enddot
-        %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
-          %i.gcmsicon-arrowright-black
-    .row-fluid#demo2-4-c1.collapse
-      .slotcontent
-        Google has established a Code of Conduct and requires that all employeesSystem/ mandatory training on
-        Business Process Dialog
-        the Code and its implementation. Google’s Global Ethics and Compliance team monitors compliance with
-        the Google Code of Conduct training and other mandatory training programs. The Code of Conduct
-        training includes employee responsibilities for the protection of information. The HR Handbook sets forth
-  %li
-    .row-fluid
-      .slot.span12.regulationslot.statusgreen.toggle{"data-target" => "#demo2-4-c2", "data-toggle" => "collapse"}
-        %span.prefix Proc-29
-        Also without a [...] button.
-        .enddot
-        %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
-          %i.gcmsicon-arrowright-black
-    .row-fluid#demo2-4-c2.collapse
-      .slotcontent
-        Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
-  %li
-    .row-fluid
-      .slot.span12.regulationslot.statusgreen.toggle{"data-target" => "#demo2-4-c3", "data-toggle" => "collapse"}
-        %span.prefix Proc-88
-        Enable processes to provide for timely forensic investigation in the event of a ...
-        .enddot
-        %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
-          %i.gcmsicon-arrowright-black
-    .row-fluid#demo2-4-c3.collapse
-      .slotcontent
-        Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
+      .slot.span12.processslot 
+        .slottitle.span8.toggle{"data-target" => "#demoprocs", "data-toggle" => "collapse"}
+          .expander
+          %span.prefix Process Group
+          This is a generic content slot being used for a group of proc items. Notice the sublte gradient to show its a top level
+        .span2.slotcolumn
+          .halfopacity.span12.nominheight.btn.btn-slotcolumn Full Audit
+        .slotowner.span1
+          %a.slotowner GRC
+        .slotactions.pull-right
+          %a#tooltip11.btn.btn-mini.btn-blue{"rel" => "tooltip", "data-placement" => "left", "title" => "More", "data-target" => "#demoprocs-summary", "data-toggle" => "collapse"}
+            %i.grcicon-more
+      #demoprocs-summary.row-fluid.collapse
+        .span12.morewell.nominheight
+          .slotcontent.span12
+            %ul.contentactions.pull-right
+              %li
+                %a#tooltip33.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Edit this object", "data-toggle" => "modal", :href => "#comingsoonModal"}
+                  %i.grcicon-edit-grey
+              %li
+                %a#tooltip34.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Link objects to this object", "data-toggle" => "modal", :href => "#comingsoonModal"}
+                  %i.grcicon-link
+              %li
+                %a#tooltip35.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", "data-toggle" => "modal", :href => "#comingsoonModal"}
+                  %i.grcicon-arrowright-black
+            "Hi I am a general description or some such info box that you requested to see. You can't edit me. You can just enjoy the beautiful knowledge I pour into your ocular cavities. Learn my friend. Learn. Or if you don't want to just glaze over and scan down until you see the information you truly wanted." -Abraham Lincoln
+      #demoprocs.row-fluid.collapse
+        %ul
+          %li
+            %ul.slotlist
+              %li
+                .row-fluid
+                  .doubleslot.span12.statusred.toggle{"data-target" => "#demoprocs-1-summary", "data-toggle" => "collapse"}
+                    .row-fluid
+                      .slottitle.span8
+                        .enddot.proc
+                        %span.controls-group Proced Type
+                        %br
+                        This is a proc slot
+                      .slotcolumn.span2
+                        .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
+                      .slotowner.span1
+                        %a.slotowner{:href => "http://www.youtube.com/watch?v=oHg5SJYRHA0"} Rick Astley
+                      .slotactions.pull-right
+                        %a.btn.btn-mini.btn-blue{"data-target" => "#demoprocs-1-summary", "data-toggle" => "collapse"}
+                          %i.grcicon-more
+              %li
+                .row-fluid
+                  .doubleslot.span12.statusred.toggle{"data-target" => "#demoprocs-1-summary", "data-toggle" => "collapse"}
+                    .row-fluid
+                      .slottitle.span8
+                        .enddot.proc
+                        %span.controls-group Proced Type
+                        %br
+                        This is a proc slot
+                      .slotcolumn.span2
+                        .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
+                      .slotowner.span1
+                        %a.slotowner{:href => "http://www.youtube.com/watch?v=oHg5SJYRHA0"} Rick Astley
+                      .slotactions.pull-right
+                        %a.btn.btn-mini.btn-blue{"data-target" => "#demoprocs-1-summary", "data-toggle" => "collapse"}
+                          %i.grcicon-more
+              %li
+                .row-fluid
+                  .doubleslot.span12.statusred.toggle{"data-target" => "#demoprocs-1-summary", "data-toggle" => "collapse"}
+                    .row-fluid
+                      .slottitle.span8
+                        .enddot.proc
+                        %span.controls-group Proced Type
+                        %br
+                        This is a proc slot
+                      .slotcolumn.span2
+                        .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
+                      .slotowner.span1
+                        %a.slotowner{:href => "http://www.youtube.com/watch?v=oHg5SJYRHA0"} Rick Astley
+                      .slotactions.pull-right
+                        %a.btn.btn-mini.btn-blue{"data-target" => "#demoprocs-1-summary", "data-toggle" => "collapse"}
+                          %i.grcicon-more

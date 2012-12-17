@@ -4,8 +4,8 @@ module ProgramsHelper
     stats = {}
     stats[:sections_count] = Section.where(:program_id => program.id).count()
     stats[:sections_done_count] = Section.joins(:controls).where(:program_id => program.id).count(:distinct => true)
-    stats[:sections_undone_count] = Section.where(:program_id => program.id).count() - stats[:sections_done_count]
-    stats[:sections_na_count] = 0
+    stats[:sections_na_count] = Section.where(:program_id => program.id, :na => true).count()
+    stats[:sections_undone_count] = Section.where(:program_id => program.id).count() - stats[:sections_done_count] - stats[:sections_na_count]
 
     if stats[:sections_count] > 0
       stats[:sections_done_percentage] = 100.0 * stats[:sections_done_count] / stats[:sections_count]

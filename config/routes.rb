@@ -37,6 +37,8 @@ CmsRails::Application.routes.draw do
       get 'sections'
       get 'implemented_controls'
       get 'implementing_controls'
+      get 'systems'
+      get 'risks'
       get 'delete'
     end
   end
@@ -145,6 +147,18 @@ CmsRails::Application.routes.draw do
     member do
       get 'delete'
     end
+    collection do
+      get 'export'
+    end
+  end
+
+  resources :options, :as => 'flow_options' do
+    member do
+      get 'delete'
+    end
+    collection do
+      get 'export'
+    end
   end
 
   resources :categorizations, :as => 'flow_categorizations', :only => [:index, :create] do
@@ -169,6 +183,8 @@ CmsRails::Application.routes.draw do
   match 'quick/biz_processes' => 'quick#biz_processes'
   match 'quick/accounts' => 'quick#accounts'
   match 'quick/people' => 'quick#people'
+  match 'quick/categories' => 'quick#categories'
+  match 'quick/options' => 'quick#options'
   match 'quick/systems' => 'quick#systems'
   match 'quick/products' => 'quick#products'
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121206195047) do
+ActiveRecord::Schema.define(:version => 20121213182318) do
 
   create_table "accounts", :force => true do |t|
     t.string   "username"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(:version => 20121206195047) do
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
     t.integer  "modified_by_id"
+    t.boolean  "required"
   end
 
   create_table "categorizations", :force => true do |t|
@@ -93,6 +94,7 @@ ActiveRecord::Schema.define(:version => 20121206195047) do
     t.boolean  "fraud_related"
     t.boolean  "key_control"
     t.boolean  "active"
+    t.text     "notes"
   end
 
   add_index "controls", ["program_id"], :name => "index_controls_on_regulation_id"
@@ -127,6 +129,7 @@ ActiveRecord::Schema.define(:version => 20121206195047) do
     t.string   "content"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "title"
   end
 
   create_table "locations", :force => true do |t|
@@ -190,6 +193,7 @@ ActiveRecord::Schema.define(:version => 20121206195047) do
     t.integer  "modified_by_id"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.boolean  "required"
   end
 
   create_table "org_groups", :force => true do |t|
@@ -337,20 +341,22 @@ ActiveRecord::Schema.define(:version => 20121206195047) do
   end
 
   create_table "systems", :force => true do |t|
-    t.string   "title",                             :null => false
-    t.string   "slug",                              :null => false
-    t.boolean  "infrastructure",                    :null => false
+    t.string   "title",                              :null => false
+    t.string   "slug",                               :null => false
+    t.boolean  "infrastructure",                     :null => false
     t.text     "description"
     t.integer  "owner_id"
     t.integer  "modified_by_id"
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
-    t.boolean  "is_biz_process", :default => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+    t.boolean  "is_biz_process",  :default => false
     t.integer  "type_id"
     t.datetime "start_date"
     t.datetime "stop_date"
     t.string   "url"
     t.string   "version"
+    t.text     "notes"
+    t.integer  "network_zone_id"
   end
 
   add_index "systems", ["slug"], :name => "index_systems_on_slug", :unique => true
