@@ -15,8 +15,12 @@ $.widget(
             return false;
         }
         , select: function( event, ui ) {
-            //keep the logic out of the view. Send an event so something else
-
+            var resp = new CMS.Models.Response();
+            resp.attr({
+                program_id : $(event.target).closest(".pbc-request").data("filter-id")
+                , system_id : event.target.id }
+                );
+            resp.save();
             return false;
         }
         , _renderItem : function( ul, item ) {
@@ -30,6 +34,12 @@ $.widget(
                 this.options.source = this.__proto__.source;
             }
             $.ui.autocomplete.prototype._create.apply(this, arguments);
+        }
+        , open: function() {
+            $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+        }
+        , close: function() {
+            $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
         }
     }
 );

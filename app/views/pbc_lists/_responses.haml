@@ -195,23 +195,8 @@
 :javascript
   $(function() {
     $("#pbc-system-search").autocomplete({
-      source: function( request, response ) {
-        $.ajax({
-          url: "/quick/systems.json",
-          dataType: "json",
-          data: {
-            s: request.term
-          },
-          success: function( data ) {
-            response( $.map( data, function( item ) {
-              return {
-                label: item.system.slug + ' ' + item.system.title,
-                value: item.system.id
-              }
-            }));
-          }
-        });
-      },
+      source: CMS.Models.System.search
+    ,
       select: function( event, ui ) {
         alert(this.value);
         // log( ui.item ?

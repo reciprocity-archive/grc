@@ -1,68 +1,29 @@
-{{! this item is the new response target}}
-  <li class="item i-process">
-    <div class="row-fluid">
-      <div class="span11">
-        <input class="span12" name="name" type="text" placeholder="Enter process name" {{ (el) -> $(el).pbc_autocomplete(); }}></input>
-      </div>
-      <div class="span1 pbc-item pbc-actions">
-        <a "btn btn-mini" href="javscript://">
-          <i class="grcicon-edit-grey"></i>
-        </a>
-      </div>
-    </div>
-    <div class="row-fluid">
-      <div class="span6">
-        <label for="process_description">
-          <strong>Process Description</strong>
-        </label>
-        <textarea name="process_description" class="span12" rows="1" placeholder="Enter process description"></textarea>
-        <label for="process_notes">
-          <strong>Process Notes</strong>
-        <textarea name="process_notes" class="span12" rows="1" placeholder="Enter process notes"></textarea>
-      </div>
-      <div class="span3">
-        <label for="people_list">
-          <strong>People</strong>
-        </label>
-        <ul class="pbc-item-list" name="people_list">
-          <li>
-            <a class="btn btn-nano add_person" href="javascript://">
-              <i class="grcicon-add"></i>
-            </a>
-            <a href="javascript://" class="add_person">Add new person</a>
-          </li>
-        </ul>
-      </div>
-      <div class="span3">
-        <label for="documents_list">
-          <strong>Documents</strong>
-        </label>
-        <ul class="pbc-item-list" name="documents_list">
-          <li>
-            <a class=" btn btn-nano add_document" href="javascript://">
-              <i class="grcicon-add"></i>
-            </a>
-            <a href="javascript://" class="add_document">Add new document</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </li>
-  {{! these are the existing ones }}
   {{#list}}
   <li class="item i-process" {{data 'model'}} data-model="true" data-id="{{id}}">
     <div class="row-fluid">
-      <div class="span11">
+      <div class="span5">
         {{system.title}}
       </div>
+      <div class="span3">
+        <span class="pbc-counter">
+          <i class="grcicon-person"></i>
+          {{system.people.length}}
+        </span>
+      </div>
+      <div class="span3">
+        <span class="pbc-counter">
+          <i class="grcicon-document"></i>
+          {{system.documents.length}}
+        </span>
+      </div>
       <div class="span1 pbc-item pbc-actions">
-        <a class="btn btn-mini" href="javascript://">
-          <i class="grcicon-edit-grey"></i>
+        <a class="btn btn-mini" rel="tooltip" data-placement="left" title="More" data-target="#pbc-response-{{id}}" data-toggle="collapse" href="javascript://">
+          <i class="grcicon-more"></i>
         </a>
       </div>
     </div>
-    <div class="row-fluid">
-      <div class="span6">
+    <div id="pbc-response-{{id}}" class="row-fluid collapse">
+      <div class="span5">
         <label>
           <strong>Process Description</strong>
         </label>
@@ -86,7 +47,7 @@
             <a class="btn btn-nano pull-right edit_person" href="javascript://">
               <i class="grcicon-edit-grey"></i>
             </a>
-            <a href="javascript://" class="edit-person">Dan Waterson (Responsible Party)</a>
+            <a href="javascript://" class="edit-person">{{name}} {{! figure out where the following text comes from }} (Responsible Party)</a>
           </li>
           {{/people}}
           <li>
@@ -117,6 +78,14 @@
             <a href="javascript://">Add new document</a>
           </li>
         </ul>
+      </div>
+      <div class="span1 pbc-item pbc-actions">
+        <a class="btn btn-mini" data-toggle="modal" href="#newResponseDocumentation">
+          <i class="grcicon-edit-grey"></i>
+        </a>
+        <a class="btn btn-mini">
+          <i "grcicon-arrowright-grey"></i>
+        </a>
       </div>
     </div>
   </li>

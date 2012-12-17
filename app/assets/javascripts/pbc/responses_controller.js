@@ -20,7 +20,12 @@ can.Control("CMS.Controllers.Responses", {
         if(list) {
             this.list = list;
         }
-        this.element.html(can.view(this.options.list, new can.Observe({list : this.list})));
+        this.element.html(can.view(this.options.list, this.options.observer = new can.Observe({list : this.list})));
+    }
+    , "{model} created" : function(Model, ev, response) {
+        if(response.request_id === this.options.id) {  
+            this.observer.attr("list", this.list.concat([response]));
+        }
     }
 });
 
