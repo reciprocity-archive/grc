@@ -217,3 +217,13 @@ a.reference {
     font-size:11px;
   }
 }
+
+li.add-new-item {
+  i {
+    @include opacity(0.5);
+  }
+  a {
+    color:#069;
+    font-size:12px;
+  }
+}

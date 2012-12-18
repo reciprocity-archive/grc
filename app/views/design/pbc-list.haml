@@ -104,7 +104,7 @@
       .widget-body
         .pbc-request-zone
           .row-fluid
-            .span7.pbc-main-title
+            .span6.pbc-main-title
               %h3 Requests
             .span2
               %span.word.pull-right
@@ -117,9 +117,28 @@
               %span.word external
               %span.letter D
               %span.letter E
-            .span1.pbc-add
-              %a#tooltip14.btn.btn-mini{"rel" => "tooltip", "data-placement" => "left", "title" => "Add New Request","data-toggle" => "modal", :href => "#newRequest"}
-                %i.grcicon-add
+            .span2.pbc-add
+              .btn-group
+                #a{:'data-toggle'=>"dropdown", :href => "#", :class => "btn btn-mini btn-success dropdown-toggle"}
+                  + Add New Request
+                  %span.caret
+                %ul.dropdown-menu.pull-right
+                  %li.add-new-item
+                    %a{:href => "#"} 
+                      %i.grcicon-document
+                      Documentation Request
+                  %li.add-new-item
+                    %a{:href => "#"}
+                      %i.grcicon-populationsample
+                      Population Sample Request
+                  %li.add-new-item
+                    %a{:href => "#"}
+                      %i.grcicon-calendar
+                      Interview Request
+
+            
+              -#%a#tooltip14.btn.btn-mini{"rel" => "tooltip", "data-placement" => "left", "title" => "Add New Request","data-toggle" => "modal", :href => "#newRequest"}
+                -#%i.grcicon-add
         %ul.pbc-control-assessments
           %li.pbc-ca-item
             .pbc-ca-title
@@ -266,7 +285,7 @@
                                     .span3
                                       %a.btn.btn-mini.btn-primary.span12{:href => "#"}
                                         %strong Save
-                                %li
+                                %li.add-new
                                   %a{:href => "#"}  + Add new person
                             .span3
                               %label
@@ -280,8 +299,8 @@
                                   %a.btn.btn-nano.pull-right
                                     %i.grcicon-x-grey
                                   %a{:href => "#"} Document Policy 2
-                                %li
-                                  %a{:href => "#"}  Add new document                            
+                                %li.add-new
+                                  %a{:href => "#"} + Add new document                            
                             .span1.pbc-item.pbc-actions
                               %a.btn.btn-mini{"data-toggle" => "modal", :href => "#newResponseDocumentation"}
                                 %i.grcicon-edit-grey
