@@ -47,11 +47,11 @@
             <a class="btn btn-nano pull-right edit_person" href="javascript://">
               <i class="grcicon-edit-grey"></i>
             </a>
-            <a href="javascript://" class="edit-person">{{name}} ({{role}})</a>
+            <a href="javascript://" class="edit-person">{{person.name}} {{#role}}({{.}}){{/role}}</a>
           </li>
           {{/system.object_people}}
           <li>
-          <a class="widgetbtn pull-right juke-left" data-list-target="#personList" data-modal-class="modal-wide" data-modal-reset="reset" data-toggle="modal-ajax-relationship-selector" href="/object_people/list_edit?object_id={{system.id}}&amp;object_type=System" data-target="#ajax-modal-object_people-list_edit?object_id={{system.id}}&amp;object_type=System">
+          <a class="btn btn-mini pull-right juke-left" href="/people?list_select=1" data-toggle='modal-ajax-single-selector' data-modal-reset='reset' data-modal-class='modal-slim'>
             <i class="grcicon-link"></i>
             Add new person
           </a>
@@ -63,19 +63,17 @@
           <strong>Documents</strong>
         </label>
         <ul class="pbc-item-list">
-          {{#system.documents}}
+          {{#system.object_documents}}
           <li {{data 'model'}} data-model="true">
             <a class="btn btn-nano pull-right" href="javascript://">
               <i class="grcicon-edit-grey"></i>
             </a>
-            <a href="javascript://">{{title}}</a>
+            <a href="javascript://">{{document.title}}</a>
           </li>
-          {{/system.documents}}
+          {{/system.object_documents}}
           <li>
-            <a class="widgetbtn pull-right" data-list-target="#referenceList" data-modal-class="modal-wide" data-modal-reset="reset" data-toggle="modal-ajax-relationship-selector" href="/object_documents/list_edit?object_id={{system.id}}&amp;object_type=System">
+            <a class="btn btn-mini pull-right juke-left" href="/documents?list_select=1" data-toggle='modal-ajax-single-selector' data-modal-reset='reset' data-modal-class='modal-slim'>
               <i class="grcicon-link"></i>
-            </a>
-            <a data-list-target="#referenceList" data-modal-class="modal-wide" data-modal-reset="reset" data-toggle="modal-ajax-relationship-selector" href="/object_documents/list_edit?object_id={{system.id}}&amp;object_type=System">
               Add new document
             </a>
           </li>

@@ -13,15 +13,16 @@
         %i.grcicon-add
 
 %ul.pbc-control-assessments#requests
-  -requests.each do |request|
-    %li.pbc-ca-item{ html_data_attributes(request, "data-filter-", [ ["type", "type.display_name"], "status", ["date-requested", "date_requested.to_date"], ["control-code", "control.slug"], ["person", "persons_responsible"], "id" ]) }
+  -requests.all.group_by(&:control_id).each do |_, request_group|
+    %li.pbc-ca-item
+      /{ html_data_attributes(request, "data-filter-", [ ["type", "type.display_name"], "status", ["date-requested", "date_requested.to_date"], ["control-code", "control.slug"], ["person", "persons_responsible"], "id" ]) }
       .pbc-ca-title
         .row-fluid
           .span2{"data-target" => "#pbc-requests-1", "data-toggle" => "collapse"}
             -#.expander
-            %strong=request.pbc_control_code
+            %strong=request_group.first.pbc_control_code
           .span7
-            =strip_tags(request.pbc_control_desc)
+            =strip_tags(request_group.first.pbc_control_desc)
           -#.span1
             %a.btn.btn-mini
               %i.grcicon-blank
@@ -35,62 +36,63 @@
 
       .pbc-ca-content
         %ul.pbc-requests
-          %li.main-item
-            .row-fluid.pbc-item-head
-              .span3.pbc-item.pbc-control
-                %a.btn.btn-mini.pull-right{:href => flow_controls_path(:list_select => 1), :'data-toggle' => 'modal-ajax-single-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#referenceList', :'data-modal-class' => 'modal-slim' }
-                  %i.grcicon-link
-                .item.i-control
-                  =request.pbc_control_code
-              .span3.pbc-request
-                .item
-                  Request Type: Documentation
-                  -#%select.span12
-                    %option{:selected => "selected"} Documentation
-                    %option Interview
-                    %option Population Sample
-              .span3
-                &nbsp;
-              .span2
-                &nbsp;
-              .span1.pbc-response-actions
-                -#%a#tooltip16.btn.btn-blue.btn-mini{"rel" => "tooltip", "data-placement" => "left", "title" => "More", "data-target" => "#pbc-request-1,#pbc-request-1a", "data-toggle" => "collapse"}
-                  %i.grcicon-more
-            .row-fluid
-              .span3.pbc-item.pbc-control
-                %h5 PBC Control Description
-                %p=raw request.pbc_control_desc
-              .span2.pbc-item.pbc-request
-                %h5 Request
-                %p=raw request.request
-              .span2.pbc-item.pbc-test
-                %h5 Test
-                %p=raw request.test
-              .span2.pbc-item.pbc-notes
-                %h5 Notes
-                %p=raw request.notes
-              .span2.pbc-item.pbc-status
-                %h5 Status
-                %select.span12
-                  %option{:selected => "selected"} Draft
-                  %option Open - Waiting Compliance
-                  %option Open - Waiting Auditors
-                  %option Completed
-                %p
-                  %strong Company:
-                  =request.company_responsible
-                  %br
-                  %strong Auditor:
-                  =request.auditor_responsible
+          -request_group.each do |request|
+            %li.main-item{ html_data_attributes(request, "data-filter-", [ ["type", "type.display_name"], "status", ["date-requested", "date_requested.to_date"], ["control-code", "control.slug"], ["person", "persons_responsible"], "id" ]) }
+              .row-fluid.pbc-item-head
+                .span3.pbc-item.pbc-control
+                  %a.btn.btn-mini.pull-right{:href => flow_controls_path(:list_select => 1), :'data-toggle' => 'modal-ajax-single-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#referenceList', :'data-modal-class' => 'modal-slim' }
+                    %i.grcicon-link
+                  .item.i-control
+                    =request.control && request.control.slug || "&nbsp;".html_safe
+                .span3.pbc-request
+                  .item
+                    Request Type: Documentation
+                    -#%select.span12
+                      %option{:selected => "selected"} Documentation
+                      %option Interview
+                      %option Population Sample
+                .span3
+                  &nbsp;
+                .span2
+                  &nbsp;
+                .span1.pbc-response-actions
+                  %a#tooltip16.btn.btn-blue.btn-mini{"rel" => "tooltip", "data-placement" => "left", "title" => "More", "data-target" => "#pbc-request-1,#pbc-request-1a", "data-toggle" => "collapse"}
+                    %i.grcicon-more
+              .row-fluid
+                .span3.pbc-item.pbc-control
+                  %h5 PBC Control Description
+                  %p=raw request.pbc_control_desc
+                .span2.pbc-item.pbc-request
+                  %h5 Request
+                  %p=raw request.request
+                .span2.pbc-item.pbc-test
+                  %h5 Test
+                  %p=raw request.test
+                .span2.pbc-item.pbc-notes
+                  %h5 Notes
+                  %p=raw request.notes
+                .span2.pbc-item.pbc-status
+                  %h5 Status
+                  %select.span12
+                    %option{:selected => "selected"} Draft
+                    %option Open - Waiting Compliance
+                    %option Open - Waiting Auditors
+                    %option Completed
+                  %p
+                    %strong Company:
+                    =request.company_responsible
+                    %br
+                    %strong Auditor:
+                    =request.auditor_responsible
 
-                %p.subtle
-                  %strong Requested:
-                  =request.date_requested && request.date_requested.strftime('%m/%d/%Y')
-              .span1.pbc-item.pbc-actions
-                %a.btn.btn-mini{ :href => edit_flow_request_path(request.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide'}
-                  %i.grcicon-edit-grey
+                  %p.subtle
+                    %strong Requested:
+                    =request.date_requested && request.date_requested.strftime('%m/%d/%Y')
+                .span1.pbc-item.pbc-actions
+                  %a.btn.btn-mini{ :href => edit_flow_request_path(request.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide'}
+                    %i.grcicon-edit-grey
 
-            .row-fluid.pbc-responses-container
-              .span12
-                =render :partial => "responses", :locals => { :pbc_list => pbc_list, :request => request }
+              .row-fluid.pbc-responses-container
+                .span12
+                  =render :partial => "responses", :locals => { :pbc_list => pbc_list, :request => request }
 

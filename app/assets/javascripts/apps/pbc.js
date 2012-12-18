@@ -71,6 +71,21 @@ $(function() {
         ;
       system.attr(data);
     });
+
+    $('body').on('modal:select', '.pbc-control > a', function(e, control_data) {
+      var $this = $(this)
+        , request_id = $this.closest('li[data-filter-id]').data('filter-id')
+        ;
+
+      $.post(
+        '/requests/' + request_id,
+        { _method: 'put'
+        , 'request[control_id]': control_data.id
+        }, function(data) {
+          // FIXME: Brad, fix this if/when Requests are live-bound
+          $this.closest('.pbc-control').find('.item').text(control_data.slug);
+      });
+    });
 });
 
 })(this, can.$);

@@ -17,7 +17,9 @@ can.Model("can.Model.Cacheable", {
   , newInstance : function(args) {
     var cache = can.getObject("cache", this, true);
     if(args && args.id && cache[args.id]) {
-      cache[args.id].attr(args);
+      //cache[args.id].attr(args, false); //CanJS has bugs in recursive merging 
+                                          // (merging -- adding properties from an object without removing existing ones 
+                                          //  -- doesn't work in nested objects).  So we're just going to not merge properties.
       return cache[args.id];
     } else {
       return can.Model.Cacheable.prototype.__proto__.constructor.newInstance.apply(this, arguments);

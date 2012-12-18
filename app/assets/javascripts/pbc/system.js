@@ -25,19 +25,20 @@ can.Model.Cacheable("CMS.Models.System", {
 }, {
 
     init : function() {
-        this._super();
+        this._super && this._super();
+        var that = this;
+        can.each({
+            "Person" : "people"
+            , "Document" : "documents"
+            , "ObjectPerson" : "object_people"
+            , "ObjectDocument" : "object_documents"}
+        , function(collection, model) {
+            var list = new can.Model.List();
 
-        var people = new can.Model.List();
-        var docs = new can.Model.List();
-
-        can.each(this.people, function(person) {
-            people.push(new CMS.Models.Person(person.serialize()));
+            can.each(that[collection], function(obj) {
+                list.push(new CMS.Models[model](obj.serialize()));
+            });
+            that.attr(collection, list);
         });
-        can.each(this.documents, function(doc) {
-            docs.push(new CMS.Models.Document(doc.serialize()));
-        });
-
-        this.attr("people", people);
-        this.attr("documents", docs);
     }
 });

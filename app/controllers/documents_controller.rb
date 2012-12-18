@@ -39,8 +39,11 @@ class DocumentsController < BaseObjectsController
       @documents = @documents.db_search(params[:s])
     end
     @documents = allowed_objs(@documents.all, :read)
-
-    render :json => @documents, :methods => [:document_type]
+    if params[:list_select].present?
+      render :partial => 'list_select', :layout => 'layouts/list_modal', :locals => {}
+    else
+      render :json => @documents, :methods => [:document_type]
+    end
   end
 
   private

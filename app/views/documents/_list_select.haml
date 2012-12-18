@@ -1,0 +1,35 @@
+-content_for :modal_title do
+  %h1 Select References
+
+-content_for :modal_help, :select_reference
+
+%script#document_option{ :type => 'text/html', :'data-prefix' => 'document' }
+  %li{ :'data-id' => '<%= document.id %>', :'data-title' => '<%= document.title %>', :'data-document_type' => '<%= document.document_type %>' }
+    .row-fluid
+      .span6.object_info{ :'data-template-id' => 'document_option_data' }
+      .span6.actions
+        %a.widgetbtn.pull-right{ :href => edit_flow_document_path('<%=document.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target', :'data-modal-class' => 'modal-wide' }
+          %i.grcicon-edit-grey
+
+%script#document_option_data{ :type => 'text/html' }
+  %span.company <%= document.document_type || '&nbsp;' %>
+  %span.name <%= document.title %>
+
+.row-fluid
+  .span12
+    %h4
+      Select Reference
+      %a.widgetbtn.widgetbtnselector{ :href => new_flow_document_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-selector-target' => '.source' }
+        %i.grcicon-add
+      .pull-right
+        %input.widgetsearch{:type => "text", :placeholder => "Search References"}
+
+    .filter-block
+      .row-fluid
+        .span12
+          .tabbable.tabs-left
+            .tab-content
+              #category1.tab-pane.active
+                .people-list
+                  %ul.source{ :'data-list-data-href' => flow_documents_path, :'data-template-id' => 'document_option' }
+
