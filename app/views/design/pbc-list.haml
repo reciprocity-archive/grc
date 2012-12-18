@@ -135,10 +135,6 @@
                     %a{:href => "#"}
                       %i.grcicon-calendar
                       Interview Request
-
-            
-              -#%a#tooltip14.btn.btn-mini{"rel" => "tooltip", "data-placement" => "left", "title" => "Add New Request","data-toggle" => "modal", :href => "#newRequest"}
-                -#%i.grcicon-add
         %ul.pbc-control-assessments
           %li.pbc-ca-item
             .pbc-ca-title
@@ -238,7 +234,7 @@
                             .span1
                               &nbsp;
                         %li.item.i-process
-                          .row-fluid
+                          .row-fluid.trigger{:"data-target" => "#pbc-response-1", :"data-toggle" => "collapse"}
                             .span5
                               Proc-89 Accounts Security Policy Review
                             .span3
@@ -308,7 +304,7 @@
                               %a.btn.btn-mini
                                 %i.grcicon-arrowright-grey
                         %li.item.i-process
-                          .row-fluid
+                          .row-fluid.trigger{:"data-target" => "#pbc-response-2", :"data-toggle" => "collapse"}
                             .span5
                               Proc-87 Population Sample Request Type Process
                             .span3
@@ -362,7 +358,7 @@
                               %a.btn.btn-mini
                                 %i.grcicon-arrowright-grey
                         %li.item.i-process
-                          .row-fluid
+                          .row-fluid.trigger{:"data-target" => "#pbc-response-3", :"data-toggle" => "collapse"}
                             .span5
                               Proc-90 Interview Request Type Process
                             .span3
