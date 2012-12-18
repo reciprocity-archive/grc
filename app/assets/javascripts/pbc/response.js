@@ -15,8 +15,6 @@ can.Model.Cacheable("CMS.Models.Response", {
                 , url : "/responses.json"
                 , dataType : "json"
                 , data : _params
-            }).then(function(item) {
-
             })
     }
 

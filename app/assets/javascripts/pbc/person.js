@@ -16,16 +16,43 @@ can.Model.Cacheable("CMS.Models.Person", {
         //         obj.attr(attr, newVal);
         //     }
         // });
+
     }
 });
 
 
 can.Model.Cacheable("CMS.Models.ObjectPerson", {
     root_object : "object_person"
+    , create : function(params) {
+        var _params = {
+            object_person : {
+                personable_id : params.system_id
+                , person_id : params.person_id
+                , role : params.role
+                , personable_type : "System"
+            }
+        };
+        return $.ajax({
+            type : "POST"
+            , "url" : "/object_people.json"
+            , dataType : "json"
+            , data : _params
+        });
+    }
 }, {
     init : function() {
-        this._super && this._super();
-        this.attr("person", CMS.Models.Person.findInCacheById(this.person_id)); 
+        var _super = this._super;
+        function reinit() {
+            typeof _super === "function" && _super.call(this);
+            this.attr(
+                "person"
+                , CMS.Models.Person.findInCacheById(this.person_id) 
+                || new CMS.Models.Person(this.person && this.person.serialize ? this.person.serialize() : this.person)); 
+        }
+
+        this.bind("created", can.proxy(reinit, this));
+
+        reinit.call(this);
     }
 });
 
