@@ -203,3 +203,17 @@ a.reference {
     background:#ccc;
   }
 }
+
+.inline-editing {
+  padding-top:5px !important;
+  padding-bottom:3px !important;  
+  .btn {
+    text-decoration:none !important;
+    padding-top:6px !important;
+    padding-bottom:6px !important;
+    margin-top:0 !important;
+  }
+  .select {
+    font-size:11px;
+  }
+}

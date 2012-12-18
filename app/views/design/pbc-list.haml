@@ -246,10 +246,26 @@
                               %label
                                 %strong People
                               %ul.pbc-item-list
-                                %li.inline-editing
+                                %li
                                   %a.btn.btn-nano.pull-right
                                     %i.grcicon-x-grey
                                   %a{:href => "#"} Dan Waterson (Responsible Party)
+                                %li.inline-editing
+                                  .row-fluid
+                                    .span6
+                                      %input{:type => "text", :class => "span12", :placeholder => "LDAP ID"}
+                                    .span6
+                                      %input{:type => "text", :class => "span12", :placeholder => "Name"}
+                                  .row-fluid
+                                    .span6
+                                      %select.span12
+                                        %option Choose Role
+                                        %option Responsible Party
+                                    .span3
+                                      %a.btn.btn-mini.span12{:href => "#"} Cancel
+                                    .span3
+                                      %a.btn.btn-mini.btn-primary.span12{:href => "#"}
+                                        %strong Save
                                 %li
                                   %a{:href => "#"}  + Add new person
                             .span3
