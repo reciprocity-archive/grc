@@ -104,4 +104,25 @@ module ApplicationHelper
 
     result
   end
+
+  # Bad Dan
+  def control_assessment_button_class(bit)
+    if bit == false
+      'btn-warning'
+    elsif bit == true
+      'btn-success'
+    else
+      ''
+    end
+  end
+
+  def control_assessment_button_icon(bit)
+    if bit == false
+      'grcicon-x-white'
+    elsif bit == true
+      'grcicon-check-white'
+    else
+      'grcicon-blank'
+    end
+  end
 end

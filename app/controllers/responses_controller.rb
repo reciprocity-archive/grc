@@ -1,4 +1,4 @@
-# Handle PBC Lists
+# Handle Responses
 class ResponsesController < BaseObjectsController
 
   access_control :acl do

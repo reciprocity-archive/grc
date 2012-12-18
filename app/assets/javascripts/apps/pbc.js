@@ -45,7 +45,8 @@ $.widget(
 $.widget.bridge("pbc_autocomplete", $.pbc.autocomplete);
 
 $(function() {
-    $(document.body).on("click", ".pbc-responses-container", function(ev) {
+    // Trigger controller load when collapsed container is expanded
+    $(document.body).on("show", ".pbc-responses-container", function(ev) {
         $(ev.currentTarget).find(".pbc-responses").cms_controllers_responses({id : $(ev.currentTarget).closest("[data-filter-id]").data("filter-id")});
     });
 
@@ -84,6 +85,9 @@ $(function() {
         }, function(data) {
           // FIXME: Brad, fix this if/when Requests are live-bound
           $this.closest('.pbc-control').find('.item').text(control_data.slug);
+
+          // FIXME: Brad - we may want to eventually avoid refreshing the page here.
+          window.location.assign(window.location.href.replace(/#.*/, ''));
       });
     });
 });
