@@ -6,6 +6,12 @@ body {
   height:100%;
 }
 
+h3 {
+  font-size:16px;
+  font-weight:normal;
+  color:#444;
+}
+
 .navbar {
   background:#fff;
 }
@@ -189,8 +195,11 @@ a.reference {
 .grc-badge {
   font-size:0.7em;
   padding:0 0.4em;
-  font-weight:normal;
-  background:#999;
+  font-weight:bold;
+  background:#777;
   @include border-radius();
   color:#fff;
+  &.no-object {
+    background:#ccc;
+  }
 }
