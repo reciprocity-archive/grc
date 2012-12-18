@@ -1,28 +1,26 @@
 -# locals: object
+-all_object_people = object.object_people.all
 
 %h3.toggle{"data-target" => "#personListCollapse", "data-toggle" => "collapse"}
   .expander
   People
+  %span{:class => "grc-badge #{all_object_people.count.zero? ? "no-object" : ""}"}=all_object_people.count
   %a.widgetbtn.pull-right.juke-left{:href => list_edit_flow_object_people_path(:object_type => object.class.name, :object_id => object.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#personList', :'data-modal-class' => 'modal-wide' }
-    %i.grcicon-link
+    %i.grcicon-edit-grey
 
 .collapse#personListCollapse
   .bootstrap-collapse-bugfix
 
   %script#person_list_item{ :type => 'text/html', :'data-member' => 'object_person' }
     %li.controlSlot{ :'data-id' => '<%= person.id %>' }
-      %a.widgetbtn.pull-right.juke-down{ :href => flow_people_path + '/<%= person.id %>/edit', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh' }
-        %i.grcicon-edit-grey
       %span.controls-group <%= role %>
       %br
       %span.controls-subgroup <%= person.name || '&nbsp' %>
 
   %ul#personList{ :'data-template-id' => 'person_list_item' }
-    -object.object_people.all.each do |object_item|
+    -all_object_people.each do |object_item|
       -item = object_item.person
       %li.controlSlot{ :'data-id' => item.id }
-        %a.widgetbtn.pull-right.juke-down{ :href => edit_flow_person_path(item), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh' }
-          %i.grcicon-edit-grey
         %span.controls-group=object_item.role
         %br
         %span.controls-subgroup=item.name || '&nbsp;'.html_safe

@@ -4,17 +4,16 @@
 %h3.toggle{"data-target" => "#referenceListCollapse", "data-toggle" => "collapse"}
   .expander
   References
-  %span="(#{all_object_documents.count})" unless all_object_documents.count.zero?
+  %span{:class => "grc-badge #{all_object_documents.count.zero? ? "no-object" : ""}"}=all_object_documents.count
   %a.widgetbtn.pull-right.juke-left{:href => list_edit_flow_object_documents_path(:object_type => object.class.name, :object_id => object.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#referenceList', :'data-modal-class' => 'modal-wide' }
-    %i.grcicon-link
+    %i.grcicon-edit-grey
 
 .collapse#referenceListCollapse
   .bootstrap-collapse-bugfix
 
+
   %script#reference_list_item{ :type => 'text/html', :'data-member' => 'object_document'}
     %li.controlSlot{ :'data-id' => '<%= document.id %>' }
-      %a.widgetbtn.pull-right.juke-down{ :href => flow_documents_path + '/<%= document.id %>/edit', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide' }
-        %i.grcicon-edit-grey
       %a.reference{:href => '<%= document.link_url %>', :target => "_blank"}
         %span.controls-group <%= document.document_type || '&nbsp;' %>
         %br
@@ -24,8 +23,6 @@
     -all_object_documents.each do |object_item|
       -item = object_item.document
       %li.controlSlot{ :'data-id' => item.id }
-        %a.widgetbtn.pull-right.juke-down{ :href => edit_flow_document_path(item), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide' }
-          %i.grcicon-edit-grey
         %a.reference{:href => item.link_url, :target => "_blank"}
           %span.controls-group=item.document_type || '&nbsp;'.html_safe
           %br

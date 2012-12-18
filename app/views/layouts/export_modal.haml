@@ -26,8 +26,8 @@
 .modal-footer
   .row-fluid
     %nav.fltlft.txtlft.span3
-      %a.btn.btn-large.btn-info{:'data-dismiss' => 'modal', :href => '#' } Cancel
+      %a.btn.btn-large{:'data-dismiss' => 'modal', :href => '#' } Cancel
     .span6
     %nav.fltrt.txtrt.span3
-      %a.btn.btn-large.btn-success{ :href => yield_content!(:export_url), :target => '_blank' } Export
-      %a.btn.btn-large.btn-success{ :'data-dismiss' => 'modal', :href => '#' } Done
+      %a.btn.btn-large.btn-primary{ :href => yield_content!(:export_url), :target => '_blank' } Export
+      %a.btn.btn-large.btn-primary{ :'data-dismiss' => 'modal', :href => '#' } Done
