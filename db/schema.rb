@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121218001125) do
+ActiveRecord::Schema.define(:version => 20121218003659) do
 
   create_table "accounts", :force => true do |t|
     t.string   "username"
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(:version => 20121218001125) do
     t.integer  "modified_by_id"
   end
 
-  create_table "control_assesments", :force => true do |t|
+  create_table "control_assessments", :force => true do |t|
     t.integer  "pbc_list_id"
     t.integer  "control_id"
     t.string   "control_version"
@@ -62,8 +62,8 @@ ActiveRecord::Schema.define(:version => 20121218001125) do
     t.datetime "updated_at",      :null => false
   end
 
-  add_index "control_assesments", ["control_id"], :name => "index_control_assesments_on_control_id"
-  add_index "control_assesments", ["pbc_list_id"], :name => "index_control_assesments_on_pbc_list_id"
+  add_index "control_assessments", ["control_id"], :name => "index_control_assessments_on_control_id"
+  add_index "control_assessments", ["pbc_list_id"], :name => "index_control_assessments_on_pbc_list_id"
 
   create_table "control_controls", :force => true do |t|
     t.integer  "control_id",             :null => false
@@ -315,7 +315,6 @@ ActiveRecord::Schema.define(:version => 20121218001125) do
   create_table "requests", :force => true do |t|
     t.integer  "pbc_list_id"
     t.integer  "type_id"
-    t.integer  "control_id"
     t.string   "pbc_control_code"
     t.text     "pbc_control_desc"
     t.text     "request"
@@ -326,9 +325,12 @@ ActiveRecord::Schema.define(:version => 20121218001125) do
     t.datetime "date_requested"
     t.string   "status"
     t.integer  "modified_by_id"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+    t.integer  "control_assessment_id"
   end
+
+  add_index "requests", ["control_assessment_id"], :name => "index_requests_on_control_assessment_id"
 
   create_table "responses", :force => true do |t|
     t.integer  "request_id"

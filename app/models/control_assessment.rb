@@ -3,6 +3,8 @@ class ControlAssessment < ActiveRecord::Base
   include AuthorizedModel
   include SanitizableAttributes
 
+  has_many :requests, :dependent => :nullify
+
   belongs_to :pbc_list
   belongs_to :control
 
@@ -12,8 +14,7 @@ class ControlAssessment < ActiveRecord::Base
 
   sanitize_attributes :notes
 
-  validates :pbc_list, :control
-    :presence => { :message => "needs a value" }
+  validates_presence_of :pbc_list, :control
 
   def display_name
     control.display_name

@@ -6,9 +6,10 @@ class Request < ActiveRecord::Base
   attr_accessible :pbc_list, :type, :control, :pbc_control_code, :pbc_control_desc, :request, :test, :notes, :company_responsible, :auditor_responsible, :date_requested, :status
 
   belongs_to :pbc_list
-  belongs_to :control
+  belongs_to :control_assessment
   belongs_to :type, :class_name => 'Option', :conditions => { :role => 'request_type' }
 
+  has_one :control, :through => :control_assessment
   has_many :responses, :dependent => :destroy
 
   is_versioned_ext

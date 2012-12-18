@@ -13,7 +13,7 @@
         %i.grcicon-add
 
 %ul.pbc-control-assessments#requests
-  -requests.all.group_by(&:control_id).each do |_, request_group|
+  -requests.all.group_by(&:control_assessment_id).each do |_, request_group|
     %li.pbc-ca-item
       /{ html_data_attributes(request, "data-filter-", [ ["type", "type.display_name"], "status", ["date-requested", "date_requested.to_date"], ["control-code", "control.slug"], ["person", "persons_responsible"], "id" ]) }
       .pbc-ca-title
