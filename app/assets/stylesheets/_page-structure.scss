@@ -118,7 +118,16 @@
     float:right;
     margin-top:0;
   }
-  
+  &.title-response {
+    @include border-and-gradient(darken($bgndProcess,10%));
+    i.response-desc {
+      @include opacity(0.5);
+    }
+    .btn {
+      border-color:#ffffff;
+      margin-top:-3px;
+    }
+  }
 }
 
 .pbc-item-head {
@@ -147,7 +156,8 @@ ul.pbc-requests {
   }
   
   ul.items-list {
-    //margin-bottom:10px;
+    margin-left:10px;
+    
     li {
       padding:6px 6px 2px 6px;
       margin-bottom:4px;

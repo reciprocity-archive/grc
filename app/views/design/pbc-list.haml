@@ -215,9 +215,10 @@
 
                   #pbc-request-1a.row-fluid.collapse
                     .span12 
-                      %h4.pbc-title
-                        Responses (Documentation)
-                        %a#tooltip11.btn.btn-mini{"data-toggle" => "modal", :href => "#newResponse"}
+                      %h4.pbc-title.title-response
+                        %i#responsedesc.grcicon-document{"rel" => "tooltip", "data-placement" => "top", "title" => "Documentation Response"}
+                        Responses 
+                        %a#tooltip11.btn.btn-mini{"rel" => "tooltip", "data-placement" => "top", "title" => "Add response", "data-toggle" => "modal", :href => "#newResponseDocumentation"}
                           %i.grcicon-add
                       %ul.items-list
                         %li.item.i-process
