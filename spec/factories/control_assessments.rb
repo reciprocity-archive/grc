@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :control_assessment do
-    pbc_list nil
-    control nil
+    pbc_list { |c| c.association(:pbc_list) }
+    control { |c| c.association(:control) }
     control_version "MyString"
     internal_tod false
     internal_toe false

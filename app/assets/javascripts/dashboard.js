@@ -55,7 +55,17 @@ jQuery(function($) {
 
   // Turn the arrow when tree node content is shown
   $('body').on('click', '[data-toggle="collapse"]', function(e) {
-    $(this).find('.expander').eq(0).toggleClass('in');
+    var $this = $(this)
+      , $expander = $this.find('.expander').eq(0)
+      , $target = $($this.data('target'))
+      ;
+
+    setTimeout(function() {
+      if ($target.hasClass('in'))
+        $expander.addClass('in');
+      else
+        $expander.removeClass('in');
+    }, 100);
   });
 
   // When clicking a slot-link, don't toggle collapse
@@ -403,6 +413,7 @@ jQuery(function($) {
     var $this = $(this)
       , $title = $this.closest('.js-list-container-title')
       , $span = $title.find('span')
+      , $expander = $title.find('.expander').eq(0)
       ;
 
     $span.text(data.length);
@@ -411,6 +422,9 @@ jQuery(function($) {
     else
       $span.addClass('no-object');
 
-    $($title.data('target')).collapse('show');
+    if (!$expander.hasClass('in')) {
+      $($title.data('target')).collapse('show');
+      $expander.addClass('in');
+    }
   });
 });
