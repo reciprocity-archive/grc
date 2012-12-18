@@ -20,7 +20,7 @@
         .row-fluid
           .span2{"data-target" => "#pbc-requests-1", "data-toggle" => "collapse"}
             -#.expander
-            %strong=request_group.first.pbc_control_code
+            %strong=request_group.first.pbc_control_code.presence || "&nbsp;".html_safe
           .span7
             =strip_tags(request_group.first.pbc_control_desc)
           -#.span1

@@ -1,7 +1,7 @@
 -# locals: object
 -all_object_categorizations = object.categorizations.all
 
-%h3.toggle{"data-target" => "#categoryListCollapse", "data-toggle" => "collapse"}
+%h3.toggle.js-list-container-title{"data-target" => "#categoryListCollapse", "data-toggle" => "collapse"}
   .expander
   Categories
   %span{:class => "grc-badge #{all_object_categorizations.count.zero? ? "no-object" : ""}"}=all_object_categorizations.count

@@ -74,12 +74,14 @@
       // Close the modal and rewrite the target list
       $target.on('ajax:json', function(e, data, xhr) {
         if (data.errors) {
-        } else if (list_target == 'refresh') {
-          refresh_page();
-
-        } else if (list_target) {
-          $(list_target).tmpl_setitems(data);
-          $target.modal_relationship_selector('hide');
+        } else {
+          if (list_target == 'refresh') {
+            refresh_page();
+          } else if (list_target) {
+            $(list_target).tmpl_setitems(data);
+            $target.modal_relationship_selector('hide');
+          }
+          $trigger.trigger('modal:success', [data]);
         }
 
       });

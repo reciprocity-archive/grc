@@ -397,3 +397,20 @@ jQuery(function($) {
     });
   });
 });
+
+jQuery(function($) {
+  $('body').on('modal:success', '.js-list-container-title > a', function(e, data) {
+    var $this = $(this)
+      , $title = $this.closest('.js-list-container-title')
+      , $span = $title.find('span')
+      ;
+
+    $span.text(data.length);
+    if (data.length > 0)
+      $span.removeClass('no-object');
+    else
+      $span.addClass('no-object');
+
+    $($title.data('target')).collapse('show');
+  });
+});

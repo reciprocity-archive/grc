@@ -1,7 +1,7 @@
 -# locals: object
 -all_object_documents = object.object_documents.all
 
-%h3.toggle{"data-target" => "#referenceListCollapse", "data-toggle" => "collapse"}
+%h3.toggle.js-list-container-title{"data-target" => "#referenceListCollapse", "data-toggle" => "collapse"}
   .expander
   References
   %span{:class => "grc-badge #{all_object_documents.count.zero? ? "no-object" : ""}"}=all_object_documents.count
