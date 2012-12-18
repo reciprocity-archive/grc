@@ -1,4 +1,4 @@
-# Handle PBC Lists
+# Handle Requests
 class RequestsController < BaseObjectsController
 
   access_control :acl do
@@ -50,8 +50,15 @@ class RequestsController < BaseObjectsController
       control_id = request_params.delete(:control_id)
       if control_id.present?
         control = Control.where(:id => control_id).first
-        if control.present?
-          request_params[:control] = control
+        pbc_list = request_params[:pbc_list] || @request.pbc_list
+        if control && pbc_list
+          control_assessment = ControlAssessment.where(
+            :pbc_list_id => pbc_list.id,
+            :control_id => control.id).first
+          control_assessment ||= ControlAssessment.new(
+            :pbc_list => pbc_list,
+            :control => control)
+          request_params[:control_assessment] = control_assessment
         end
       end
 

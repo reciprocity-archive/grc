@@ -13,30 +13,32 @@
         %i.grcicon-add
 
 %ul.pbc-control-assessments#requests
-  -requests.all.group_by(&:control_assessment_id).each do |_, request_group|
+  -pbc_list.control_assessments.all.each do |control_assessment|
+    -control_assessment_collapse_id = "control_assessment-#{control_assessment.id}"
     %li.pbc-ca-item
       /{ html_data_attributes(request, "data-filter-", [ ["type", "type.display_name"], "status", ["date-requested", "date_requested.to_date"], ["control-code", "control.slug"], ["person", "persons_responsible"], "id" ]) }
       .pbc-ca-title
         .row-fluid
-          .span2{"data-target" => "#pbc-requests-1", "data-toggle" => "collapse"}
-            -#.expander
-            %strong=request_group.first.pbc_control_code.presence || "&nbsp;".html_safe
+          .span2{"data-target" => "##{control_assessment_collapse_id}", "data-toggle" => "collapse"}
+            .expander
+            %strong=(control_assessment && control_assessment.control.slug) || "(No Control Selected)".html_safe
           .span7
-            =strip_tags(request_group.first.pbc_control_desc)
-          -#.span1
-            %a.btn.btn-mini
-              %i.grcicon-blank
-            %a.btn.btn-mini
-              %i.grcicon-blank
-          -#.span1
-            %a.btn.btn-mini.btn-success
-              %i.grcicon-check-white
-            %a.btn.btn-mini.btn-warning
-              %i.grcicon-x-white
+            =control_assessment && control_assessment.control.title
+          .span1
+            %a.btn.btn-mini{ :rel => "tooltip", :'data-placement' => "top", :title => "Internal: Test of Design", :class => control_assessment_button_class(control_assessment.internal_tod), :'data-remote' => true, :'data-method' => 'post', :href => rotate_flow_control_assessment_path(control_assessment, :'control_assessment[internal_tod]' => 'toggle') }
+              %i{ :class => control_assessment_button_icon(control_assessment.internal_tod) }
+            %a.btn.btn-mini{ :rel => "tooltip", :'data-placement' => "top", :title => "Internal: Test of Implementation", :class => control_assessment_button_class(control_assessment.internal_toe), :'data-remote' => true, :'data-method' => 'post', :href => rotate_flow_control_assessment_path(control_assessment, :'control_assessment[internal_toe]' => 'toggle') }
+              %i{ :class => control_assessment_button_icon(control_assessment.internal_toe) }
+          .span1
+            %a.btn.btn-mini{ :rel => "tooltip", :'data-placement' => "top", :title => "External: Test of Design", :class => control_assessment_button_class(control_assessment.external_tod), :'data-remote' => true, :'data-method' => 'post', :href => rotate_flow_control_assessment_path(control_assessment, :'control_assessment[external_tod]' => 'toggle') }
+              %i{ :class => control_assessment_button_icon(control_assessment.external_tod) }
+            %a.btn.btn-mini{ :rel => "tooltip", :'data-placement' => "top", :title => "External: Test of Implementation", :class => control_assessment_button_class(control_assessment.external_toe), :'data-remote' => true, :'data-method' => 'post', :href => rotate_flow_control_assessment_path(control_assessment, :'control_assessment[external_toe]' => 'toggle') }
+              %i{ :class => control_assessment_button_icon(control_assessment.external_toe) }
 
-      .pbc-ca-content
+      .pbc-ca-content.collapse{ :id => control_assessment_collapse_id }
         %ul.pbc-requests
-          -request_group.each do |request|
+          -control_assessment.requests.each do |request|
+            -request_collapse_class = "control_assessment-#{control_assessment.id}-request-#{request.id}"
             %li.main-item{ html_data_attributes(request, "data-filter-", [ ["type", "type.display_name"], "status", ["date-requested", "date_requested.to_date"], ["control-code", "control.slug"], ["person", "persons_responsible"], "id" ]) }
               .row-fluid.pbc-item-head
                 .span3.pbc-item.pbc-control
@@ -56,9 +58,9 @@
                 .span2
                   &nbsp;
                 .span1.pbc-response-actions
-                  %a#tooltip16.btn.btn-blue.btn-mini{"rel" => "tooltip", "data-placement" => "left", "title" => "More", "data-target" => "#pbc-request-1,#pbc-request-1a", "data-toggle" => "collapse"}
+                  %a#tooltip16.btn.btn-blue.btn-mini{"rel" => "tooltip", "data-placement" => "left", "title" => "More", "data-target" => ".#{request_collapse_class}", "data-toggle" => "collapse"}
                     %i.grcicon-more
-              .row-fluid
+              .row-fluid.collapse{ :class => request_collapse_class }
                 .span3.pbc-item.pbc-control
                   %h5 PBC Control Description
                   %p=raw request.pbc_control_desc
@@ -92,7 +94,7 @@
                   %a.btn.btn-mini{ :href => edit_flow_request_path(request.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide'}
                     %i.grcicon-edit-grey
 
-              .row-fluid.pbc-responses-container
+              .row-fluid.pbc-responses-container.collapse{ :class => request_collapse_class }
                 .span12
                   =render :partial => "responses", :locals => { :pbc_list => pbc_list, :request => request }
 

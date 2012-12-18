@@ -194,6 +194,12 @@ CmsRails::Application.routes.draw do
     end
   end
 
+  resources :control_assessments, :as => 'flow_control_assessments', :only => [] do
+    member do
+      post 'rotate'
+    end
+  end
+
   match 'programs_dash' => 'programs_dash#index'
   match 'quick/programs' => 'quick#programs'
   match 'quick/sections' => 'quick#sections'

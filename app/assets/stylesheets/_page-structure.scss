@@ -131,7 +131,7 @@ ul.pbc-requests {
   li {
     border:1px solid $borderDefault;
     padding:10px 10px 0 10px;
-    margin-bottom:4px;
+    //margin-bottom:4px;
     @include border-radius();
     .pbc-actions {
       .btn {
@@ -147,7 +147,7 @@ ul.pbc-requests {
   }
   
   ul.items-list {
-    margin-bottom:10px;
+    //margin-bottom:10px;
     li {
       padding:6px 6px 2px 6px;
       margin-bottom:4px;
@@ -221,6 +221,10 @@ ul.pbc-requests {
 
 .pbc-email {
   font-weight:normal;
+}
+
+.pbc-ca-item {
+  margin-top: 4px;
 }
 
 .pbc-ca-title {

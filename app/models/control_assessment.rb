@@ -19,4 +19,13 @@ class ControlAssessment < ActiveRecord::Base
   def display_name
     control.display_name
   end
+
+  def rotate_value!(field)
+    next_value = case self.send(field)
+      when nil then false
+      when false then true
+      else nil
+    end
+    update_attributes(field => next_value)
+  end
 end
