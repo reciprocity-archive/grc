@@ -81,7 +81,7 @@ class RelationshipsController < BaseMappingsController
 
         if (vr[:related_model_endpoint].to_s == "both") and
           (related_model == obj_type) and
-          (relationship_type.forward_phrase == relationship_type.backward_phrase)
+          (relationship_type.present? && relationship_type.forward_phrase == relationship_type.backward_phrase)
           # A symmetric relationship is where the related model is the same model
           # as the object, and the forwards and backwards descriptions are the same.
           # In that case, we combine both the source and destination results.
@@ -100,7 +100,7 @@ class RelationshipsController < BaseMappingsController
 
           # First add the related_is_source set
           rels = related_is_source.select do |rel|
-            rel.relationship_type == relationship_type
+            rel.relationship_type_id == vr[:relationship_type]
           end
 
           objects = Set.new
@@ -110,7 +110,7 @@ class RelationshipsController < BaseMappingsController
 
           # Also add the related_is_dest set.
           rels = related_is_dest.select do |rel|
-            rel.relationship_type == relationship_type
+            rel.relationship_type_id == vr[:relationship_type]
           end
 
           rels.each do |rel|
@@ -140,7 +140,7 @@ class RelationshipsController < BaseMappingsController
                   :related_model => related_model)
 
             rels = related_is_source.select do |rel|
-              rel.relationship_type == relationship_type
+              rel.relationship_type_id == vr[:relationship_type]
             end
             @results.push({
               :relationship_type_id => vr[:relationship_type],
@@ -165,7 +165,7 @@ class RelationshipsController < BaseMappingsController
                   :related_model => related_model)
 
             rels = related_is_dest.select do |rel|
-              rel.relationship_type == relationship_type
+              rel.relationship_type_id == vr[:relationship_type]
             end
             @results.push({
               :relationship_type_id => vr[:relationship_type],
