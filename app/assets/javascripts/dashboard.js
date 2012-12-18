@@ -343,39 +343,3 @@ if(!/\/mapping/.test(window.location.href)) {
   });
 }
 
-jQuery(function($) {
-  $('body').on('click', 'button[data-toggle="filter-reset"]', function(e) {
-    var $this = $(this)
-      , filter_reset_target = $this.data('filter-reset-target')
-      ;
-
-    $(filter_reset_target).each(function(i, elem) {
-      var $elem = $(elem)
-        ;
-
-      $elem.val('any');
-      $elem.change();
-    });
-  });
-});
-
-jQuery(function($) {
-  $('body').on('modal:success', '.js-list-container-title > a', function(e, data) {
-    var $this = $(this)
-      , $title = $this.closest('.js-list-container-title')
-      , $span = $title.find('span')
-      , $expander = $title.find('.expander').eq(0)
-      ;
-
-    $span.text(data.length);
-    if (data.length > 0)
-      $span.removeClass('no-object');
-    else
-      $span.addClass('no-object');
-
-    if (!$expander.hasClass('in')) {
-      $($title.data('target')).collapse('show');
-      $expander.addClass('in');
-    }
-  });
-});
