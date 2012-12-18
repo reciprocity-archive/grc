@@ -1,0 +1,251 @@
+/* 
+   Icons are used in a number of places and resolution sizes. 
+   Images are saved at 32pixels, scaled to 16pixels for .widgetbtn, and further scaled for .btn-nano and similar ...
+ */
+
+[class^="grcicon-"] {
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    //@include background-size(256px 256px); 
+    //@include background-size(128px 128px); 
+    vertical-align: top; //necessary or button with icon embedded will sometimes be to tall.
+    display:inline-block; 
+    overflow:hidden; 
+    background-repeat: no-repeat;
+    background-image: url(../images/grc-sprite.png);
+}
+
+
+
+
+.grcicon-expandAll-grey {
+  background-image: url("../images/expandAll.png");
+}
+
+.grcicon-shrinkAll-grey {
+  background-image: url("../images/shrinkAll.png");
+}
+
+
+.grcicon-sortDown {
+  background-image: url("../images/grcicons/sortDown.png");
+}
+
+.grcicon-sortUp {
+  background-image: url("../images/grcicons/sortUp.png");
+}
+
+/* Blank can be required to set a button to the correct size */
+.grcicon-blank {
+  background-image: none;
+}
+
+.grcicon-arrowright-white, .grcicon-arrowright-grey  {
+  background-image: url("../images/grcicons/arrowright.png");
+}
+
+.grcicon-gears {
+  background-image: url("../images/grcicons/gear.png");
+}
+
+.calendar {
+  background-image: url("../images/icons/icon-calendar-inline.png");
+  background-position: 94% 55%;
+  background-repeat: no-repeat;
+}
+
+.grcicon-mapping-white {
+  background-image: url("../images/grcicons/regmapper.png");
+}
+
+.grcicon-import-white {
+  background-image: url("../images/grcicons/import.png");
+}
+
+.grcicon-play-black {
+  background-image: url("../images/icons/icon-play-black.png");
+}
+
+.grcicon-mapping-black {
+  background-image: url("../images/icons/icon-mapping-black.png");
+}
+.grcicon-import-black {
+  background-image: url("../images/icons/icon-import-black.png");
+}
+.grcicon-back-black {
+  background-image: url("../images/icons/icon-back-black.png");
+}
+
+.grcicon-enlarge-grey {
+  background-image: url("../images/grcicons/chevrondown.png");
+}
+
+
+.gcmssmallicon-blue-expand {
+  background-image: url("../images/grcicons/chevronleft-blue.png");
+}
+
+.grcicon-check-green {
+  background-image: url("../images/grcicons/check-green.png");
+}
+
+.grcicon-chevron-right {
+  background-image: url("../images/grcicons/chevronright.png");
+}
+
+.grcicon-hidden-blue {
+  background-image: url("../images/grcicons/chevronup.png");
+}
+
+
+.grcicon-more {
+  background-image: url("../images/grcicons/more.png");
+}
+
+.grcicon-add {
+  background-image: url("../images/grcicons/add.png");
+}
+
+// replace .grcicon-remove
+
+.grcicon-remove {
+  background-image: url("../images/grcicons/remove.png");
+}
+
+.grcicon-link {
+  background-image: url("../images/grcicons/link.png");
+}
+
+.grcicon-questionmark-grey {
+  background-image: url("../images/grcicons/help.png");
+}
+
+.grcicon-edit-grey {
+  background-image: url("../images/grcicons/edit.png");
+}
+
+.grcicon-edit-white {
+  background-image: url("../images/icons/icon-edit-white.png");
+}
+
+/* ARROWS */
+
+.grcicon-arrowleft-black {
+  background-image: url("../images/grcicons/arrowleft.png");
+}
+
+.grcicon-arrowright-black {
+  background-image: url("../images/grcicons/arrowright.png");
+}
+
+/* 18 pixel icons, mostly for buttons */
+
+.grcicon-back-black{
+  background-image: url("../images/grcicons/arrowleft.png");
+}
+.grcicon-play-white {
+  background-image: url("../images/grcicons/arrowright-white.png");
+}
+
+
+.grcicon-x-grey {
+  //background-image: url("../images/grcicons/close.png");
+}
+
+.sprite {display:inline-block; overflow:hidden; background-repeat: no-repeat;background-image:url(grc-sprite.png);}
+
+.add {width:16px; height:16px; background-position: -76px -92px}
+.arrowdown {width:16px; height:16px; background-position: -76px -74px}
+.arrowdown-white {width:18px; height:18px; background-position: -2px -102px}
+.arrowleft {width:18px; height:18px; background-position: -2px -82px}
+.arrowright {width:16px; height:16px; background-position: -76px -56px}
+.arrowright-white {width:18px; height:18px; background-position: -2px -62px}
+.arrowright-white-38 {width:18px; height:18px; background-position: -2px -62px}
+.check {width:16px; height:16px; background-position: -76px -20px}
+.check-green {width:16px; height:16px; background-position: -76px -38px}
+.chevrondown {width:16px; height:16px; background-position: -58px -110px}
+.chevrondown-blue {width:16px; height:16px; background-position: -76px -2px}
+.chevronleft {width:16px; height:16px; background-position: -58px -74px}
+.chevronleft-blue {width:16px; height:16px; background-position: -58px -92px}
+.chevronright {width:16px; height:16px; background-position: -58px -38px}
+.chevronright-blue {width:16px; height:16px; background-position: -58px -56px}
+.chevronup {width:16px; height:16px; background-position: -58px -2px}
+.chevronup-blue {width:16px; height:16px; background-position: -58px -20px}
+.grcicon-x-grey {width:16px; height:16px; background-position: -40px -110px}
+.edit {width:16px; height:16px; background-position: -40px -92px}
+.enddot {width:16px; height:16px; background-position: -22px -110px}
+.enddot-control {width:16px; height:16px; background-position: -40px -74px}
+.enddot-default {width:16px; height:16px; background-position: -40px -56px}
+.enddot-regulation {width:16px; height:16px; background-position: -40px -38px}
+.enddot-risk {width:16px; height:16px; background-position: -40px -20px}
+.enddot-system {width:16px; height:16px; background-position: -40px -2px}
+.gear {width:18px; height:18px; background-position: -2px -42px}
+.help {width:16px; height:16px; background-position: -22px -92px}
+.import {width:18px; height:18px; background-position: -2px -22px}
+.link {width:16px; height:16px; background-position: -22px -74px}
+.more {width:16px; height:16px; background-position: -22px -56px}
+.regmapper {width:18px; height:18px; background-position: -2px -2px}
+.remove {width:16px; height:16px; background-position: -22px -38px}
+.sortDown {width:16px; height:16px; background-position: -22px -20px}
+.sortUp {width:16px; height:16px; background-position: -22px -2px}
+
+//For the HD/Retina
+
+
+@media 
+(-webkit-min-device-pixel-ratio: 1.5), 
+(min-resolution: 144dpi){ 
+    /* Retina-specific stuff here */
+        
+   [class^="grcicon-"] {
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    //@include background-size(100%); 
+    //@include background-size(128px 128px); 
+    vertical-align: top; //necessary or button with icon embedded will sometimes be to tall.
+    display:inline-block; 
+    overflow:hidden; 
+    background-repeat: no-repeat;
+    background-image: url(../images/grc-sprite@2x.png);
+  }
+
+
+  .add {width:32px; height:32px; background-position: -152px -184px}
+  .arrowdown {width:32px; height:32px; background-position: -152px -148px}
+  .arrowdown-white {width:36px; height:36px; background-position: -4px -204px}
+  .arrowleft {width:36px; height:36px; background-position: -4px -164px}
+  .arrowright {width:32px; height:32px; background-position: -152px -112px}
+  .arrowright-white {width:36px; height:36px; background-position: -4px -124px}
+  .arrowright-white-38 {width:36px; height:36px; background-position: -4px -124px}
+  .check {width:32px; height:32px; background-position: -152px -40px}
+  .check-green {width:32px; height:32px; background-position: -152px -76px}
+  .chevrondown {width:32px; height:32px; background-position: -116px -220px}
+  .chevrondown-blue {width:32px; height:32px; background-position: -152px -4px}
+  .chevronleft {width:32px; height:32px; background-position: -116px -148px}
+  .chevronleft-blue {width:32px; height:32px; background-position: -116px -184px}
+  .chevronright {width:32px; height:32px; background-position: -116px -76px}
+  .chevronright-blue {width:32px; height:32px; background-position: -116px -112px}
+  .chevronup {width:32px; height:32px; background-position: -116px -4px}
+  .chevronup-blue {width:32px; height:32px; background-position: -116px -40px}
+  .grcicon-x-grey {width:32px; height:32px; background-position: -80px -220px}
+  .edit {width:32px; height:32px; background-position: -80px -184px}
+  .enddot {width:32px; height:32px; background-position: -44px -220px}
+  .enddot-control {width:32px; height:32px; background-position: -80px -148px}
+  .enddot-default {width:32px; height:32px; background-position: -80px -112px}
+  .enddot-regulation {width:32px; height:32px; background-position: -80px -76px}
+  .enddot-risk {width:32px; height:32px; background-position: -80px -40px}
+  .enddot-system {width:32px; height:32px; background-position: -80px -4px}
+  .gear {width:36px; height:36px; background-position: -4px -84px}
+  .help {width:32px; height:32px; background-position: -44px -184px}
+  .import {width:36px; height:36px; background-position: -4px -44px}
+  .link {width:32px; height:32px; background-position: -44px -148px}
+  .more {width:32px; height:32px; background-position: -44px -112px}
+  .regmapper {width:36px; height:36px; background-position: -4px -4px}
+  .remove {width:32px; height:32px; background-position: -44px -76px}
+  .sortDown {width:32px; height:32px; background-position: -44px -40px}
+  .sortUp {width:32px; height:32px; background-position: -44px -4px}
+
+}
+

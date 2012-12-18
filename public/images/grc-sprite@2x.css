@@ -1,0 +1,48 @@
+/* ----------------------------------------------------
+   created with http://www.texturepacker.com 
+   ----------------------------------------------------
+   $TexturePacker:SmartUpdate:d4e7477d34608426c3fad570a576e82e$
+   ----------------------------------------------------
+
+   usage: <span class="{-spritename-} sprite"></span>
+
+   replace {-spritename-} with the sprite you like to use
+
+*/
+
+.sprite {display:inline-block; overflow:hidden; background-repeat: no-repeat;background-image:url(grc-sprite@2x.png);}
+
+.add {width:32px; height:32px; background-position: -152px -184px}
+.arrowdown {width:32px; height:32px; background-position: -152px -148px}
+.arrowdown-white {width:36px; height:36px; background-position: -4px -204px}
+.arrowleft {width:36px; height:36px; background-position: -4px -164px}
+.arrowright {width:32px; height:32px; background-position: -152px -112px}
+.arrowright-white {width:36px; height:36px; background-position: -4px -124px}
+.arrowright-white-38 {width:36px; height:36px; background-position: -4px -124px}
+.check {width:32px; height:32px; background-position: -152px -40px}
+.check-green {width:32px; height:32px; background-position: -152px -76px}
+.chevrondown {width:32px; height:32px; background-position: -116px -220px}
+.chevrondown-blue {width:32px; height:32px; background-position: -152px -4px}
+.chevronleft {width:32px; height:32px; background-position: -116px -148px}
+.chevronleft-blue {width:32px; height:32px; background-position: -116px -184px}
+.chevronright {width:32px; height:32px; background-position: -116px -76px}
+.chevronright-blue {width:32px; height:32px; background-position: -116px -112px}
+.chevronup {width:32px; height:32px; background-position: -116px -4px}
+.chevronup-blue {width:32px; height:32px; background-position: -116px -40px}
+.close {width:32px; height:32px; background-position: -80px -220px}
+.edit {width:32px; height:32px; background-position: -80px -184px}
+.enddot {width:32px; height:32px; background-position: -44px -220px}
+.enddot-control {width:32px; height:32px; background-position: -80px -148px}
+.enddot-default {width:32px; height:32px; background-position: -80px -112px}
+.enddot-regulation {width:32px; height:32px; background-position: -80px -76px}
+.enddot-risk {width:32px; height:32px; background-position: -80px -40px}
+.enddot-system {width:32px; height:32px; background-position: -80px -4px}
+.gear {width:36px; height:36px; background-position: -4px -84px}
+.help {width:32px; height:32px; background-position: -44px -184px}
+.import {width:36px; height:36px; background-position: -4px -44px}
+.link {width:32px; height:32px; background-position: -44px -148px}
+.more {width:32px; height:32px; background-position: -44px -112px}
+.regmapper {width:36px; height:36px; background-position: -4px -4px}
+.remove {width:32px; height:32px; background-position: -44px -76px}
+.sortDown {width:32px; height:32px; background-position: -44px -40px}
+.sortUp {width:32px; height:32px; background-position: -44px -4px}
