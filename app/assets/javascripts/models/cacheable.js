@@ -5,14 +5,14 @@ can.Model("can.Model.Cacheable", {
   init : function() {
     this.bind("created", function(ev, new_obj) {
       if(new_obj.id) {
-        can.getObject("cache", this, true)[new_obj.id] = new_obj;
+        can.getObject("cache", new_obj.constructor, true)[new_obj.id] = new_obj;
       }
     });
   }
 
-	, findInCacheById : function(id) {
-		return can.getObject("cache", this, true)[id];
-	}	
+  , findInCacheById : function(id) {
+    return can.getObject("cache", this, true)[id];
+  }  
 
   , newInstance : function(args) {
     var cache = can.getObject("cache", this, true);
@@ -27,7 +27,7 @@ can.Model("can.Model.Cacheable", {
   }
 
 }, {
-	init : function() {
+  init : function() {
     var obj_name = this.constructor.root_object;
     if(typeof obj_name !== "undefined" && this[obj_name]) {
         for(var i in this[obj_name].serialize()) {
@@ -38,7 +38,11 @@ can.Model("can.Model.Cacheable", {
         this.removeAttr(obj_name);
     }
 
-		var cache = can.getObject("cache", this.constructor, true);
+    var cache = can.getObject("cache", this.constructor, true);
     cache[this.id] = this;
-	}
+  }
+  , addElementToChildList : function(attrName, new_element) {
+      this[attrName].push(new_element);
+      this._triggerChange(attrName, "set", this[attrName], this[attrName].slice(0, this[attrName].length - 1));
+  }
 });

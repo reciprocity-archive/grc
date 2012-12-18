@@ -1,9 +1,13 @@
 //= require can.jquery-all
 //= require pbc/responses_controller
+//= require pbc/modals_controller
 //= require pbc/system
 
 (function(namespace, $) {
-    
+   
+    if(namespace.location.pathname.indexOf("/pbc_lists") < 0) 
+        return;
+
 $.widget(
     "pbc.autocomplete"
     , $.ui.autocomplete
@@ -90,6 +94,7 @@ $(function() {
           window.location.assign(window.location.href.replace(/#.*/, ''));
       });
     });
+    $(document.body).cms_controllers_pbc_modals({});
 });
 
 })(this, can.$);

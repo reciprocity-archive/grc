@@ -7,13 +7,13 @@
       <div class="span3">
         <span class="pbc-counter">
           <i class="grcicon-person"></i>
-          {{system.people.length}}
+          {{system.object_people.length}}
         </span>
       </div>
       <div class="span3">
         <span class="pbc-counter">
           <i class="grcicon-document"></i>
-          {{system.documents.length}}
+          {{system.object_documents.length}}
         </span>
       </div>
       <div class="span1 pbc-item pbc-actions">
@@ -50,11 +50,13 @@
             <a href="javascript://" class="edit-person">{{person.name}} {{#role}}({{.}}){{/role}}</a>
           </li>
           {{/system.object_people}}
-          <li>
-          <a class="btn btn-mini pull-right juke-left" href="/people?list_select=1" data-toggle='modal-ajax-single-selector' data-modal-reset='reset' data-modal-class='modal-slim'>
-            <i class="grcicon-link"></i>
-            Add new person
-          </a>
+          <li data-system-id="{{system.id}}">
+            <a class="add-person btn btn-mini pull-right" data-list-target="#referenceList" data-modal-class="modal-slim" data-modal-reset="reset" data-toggle="modal-ajax-single-selector" href="/people?list_select=1">
+              <i class="grcicon-link"></i>
+            </a>
+              <a class="add-person" data-list-target="#referenceList" data-modal-class="modal-slim" data-modal-reset="reset" data-toggle="modal-ajax-single-selector" href="/people?list_select=1">
+              Add new person
+            </a>
           </li>
         </ul>
       </div>
@@ -71,9 +73,11 @@
             <a href="javascript://">{{document.title}}</a>
           </li>
           {{/system.object_documents}}
-          <li>
-            <a class="btn btn-mini pull-right juke-left" href="/documents?list_select=1" data-toggle='modal-ajax-single-selector' data-modal-reset='reset' data-modal-class='modal-slim'>
+          <li data-system-id="{{system.id}}">
+            <a class="add-document btn btn-mini pull-right" data-list-target="#referenceList" data-modal-class="modal-slim" data-modal-reset="reset" data-toggle="modal-ajax-single-selector" href="/documents?list_select=1">
               <i class="grcicon-link"></i>
+            </a>
+            <a class="add-document" data-list-target="#referenceList" data-modal-class="modal-slim" data-modal-reset="reset" data-toggle="modal-ajax-single-selector" href="/documents?list_select=1">
               Add new document
             </a>
           </li>

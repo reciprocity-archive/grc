@@ -6,6 +6,8 @@
 can.Control("CMS.Controllers.Responses", {
     defaults : {
         model : namespace.CMS.Models.Response
+        , system_model : namespace.CMS.Models.System
+        , object_person_model : namespace.CMS.Models.ObjectPerson
         , list : "/pbc/responses_list.mustache"
         , id : null //The ID of the parent request
     }
@@ -24,9 +26,10 @@ can.Control("CMS.Controllers.Responses", {
     }
     , "{model} created" : function(Model, ev, response) {
         if(response.request_id === this.options.id) {  
-            this.options.observer.attr("list", this.list = this.list.concat([response]));
+            can.Model.Cacheable.prototype.addElementToChildList.call(this.options.observer, "list", response);
         }
     }
+
 });
 
 })(this, can.$);

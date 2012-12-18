@@ -39,7 +39,7 @@ can.Model.Cacheable("CMS.Models.Control", {
 			if(newVal.length > oldVal.length) {
 				can.each(newVal, function(el) {
 					if($.inArray(el.id, oldValIds) < 0) {
-						section.attr("linked_controls", section.linked_controls.concat([CMS.Models.Control.findInCacheById(el.id)]));
+						section.addElementToChildList("linked_controls", CMS.Models.Control.findInCacheById(el.id));
 					}
 				});
 			} else {
@@ -107,17 +107,21 @@ CMS.Models.Control("CMS.Models.RegControl", {
 						//unmap
 						ics = new can.Model.List();
 						can.each(control.implementing_controls, function(ctl) {
+                            //TODO : Put removal functionality into the Cacheable, in the vein of addElementToChildList,
+                            //  and update this code to simply remove the unmap code.
+                            //We are needing to manually trigger changes in Model.List due to CanJS being unable to 
+                            //  trigger template changes for lists automatically.
 							if(ctl.id !== params.ccontrol)
 							{
 								ics.push(ctl);
 							}
-						});
-					} else {
-						//map
-						ics = control.implementing_controls.concat([CMS.Models.Control.findInCacheById(params.ccontrol)]);
-					}
-					control.attr("implementing_controls", ics);
-					control.updated();
+        					control.attr("implementing_controls", ics);
+        					control.updated();
+                        });
+                    } else {
+                        //map
+                        control.addElementToChildList("implementing_controls", CMS.Models.Control.findInCacheById(params.ccontrol));
+                    }
 				}
 			}
 		});

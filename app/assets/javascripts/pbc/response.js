@@ -25,7 +25,13 @@ can.Model.Cacheable("CMS.Models.Response", {
     init : function() {
         this._super();
 
-        this.attr("system", new CMS.Models.System(this.system ? this.system.serialize() : {}));
+        function reinit() {
+            this.attr("system", new CMS.Models.System(this.system ? this.system.serialize() : {}));
+        }
+
+        this.bind("created", can.proxy(reinit, this));
+
+        reinit.call(this);
     }
 
 });

@@ -90,12 +90,16 @@ can.Control("CMS.Controllers.Mapping", {
     });
 
     if(!rcontrol && el.is("#rmap")) {
+      var notice, reg_slug;
+      dfd.then(function(resp, status, xhr) {
+        notice = /.*Created regulation control ([^.]+).*/.exec(xhr.getResponseHeader("X-Flash-Notice"));
+        if(notice) 
+          reg_slug = notice[1];
+      })
       dfd.then($.proxy(this.options.reg_list_controller, "fetch_list"))
       .then(function() {
         that.options.reg_list_controller.find_all_deferred.then(function(list) {
-          //assume that the newly added reg is the last one.  Cheap hack.  We could instead copy the original list
-          // and diff it against the new one.
-          section.attr("linked_controls", section.linked_controls.concat([list[list.length - 1]]));
+          section.addElementToChildList("linked_controls", can.filter(can.makeArray(list), function(item) { return item.slug === reg_slug })[0]);
         })
         .then($.proxy(that, "link_lists"));
       });
@@ -170,12 +174,10 @@ can.Control("CMS.Controllers.Mapping", {
       // This isn't the best way to go about it, but CanJS/Mustache is currently ornery about accepting new observable list elements
       //  added with "push" --BM 12/11/2012
       var rctl = this.options.reg_list_controller;
-      rctl.list = rctl.list.concat([new namespace.CMS.Models.RegControl(data)]);
-      rctl.options.observer.attr("list", rctl.list);
+      can.Model.Cacheable.prototype.addElementToChildList.call(rctl.options.observer, "list", new namespace.CMS.Models.RegControl(data));
     }
     var cctl = this.options.company_list_controller;
-    cctl.list = cctl.list.concat([new namespace.CMS.Models.Control(data)]);
-    cctl.options.observer.attr("list", cctl.list);
+    can.Model.Cacheable.prototype.addElementToChildList.call(cctl.options.observer, "list", new namespace.CMS.Models.Control(data));
   }
 
   , "a.controllist, a.controllistRM click" : function(el, ev) {
