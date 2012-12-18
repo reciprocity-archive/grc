@@ -11,6 +11,14 @@
 .collapse#categoryListCollapse
   .bootstrap-collapse-bugfix
 
+
+
+  %script#category_list_item{ :type => 'text/html', :'data-member' => 'categorization' }
+    %li.controlSlot{ :'data-id' => '<%= category.id %>' }
+      %span.controls-group <%= category.parent_name %>
+      %br
+      %span.controls-subgroup <%= category.name || '&nbsp;' %>
+
   %ul#categoryList{ :'data-template-id' => 'category_list_item' }
     -all_object_categorizations.each do |object_item|
       -item = object_item.category

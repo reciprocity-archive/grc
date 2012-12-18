@@ -11,6 +11,14 @@
 .collapse#referenceListCollapse
   .bootstrap-collapse-bugfix
 
+
+  %script#reference_list_item{ :type => 'text/html', :'data-member' => 'object_document'}
+    %li.controlSlot{ :'data-id' => '<%= document.id %>' }
+      %a.reference{:href => '<%= document.link_url %>', :target => "_blank"}
+        %span.controls-group <%= document.document_type || '&nbsp;' %>
+        %br
+        %span.controls-subgroup{ :title => '<%= document.link_url %>' } <%= document.title || '&nbsp;' %>
+
   %ul#referenceList{ :'data-template-id' => 'reference_list_item' }
     -all_object_documents.each do |object_item|
       -item = object_item.document

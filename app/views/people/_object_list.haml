@@ -11,6 +11,12 @@
 .collapse#personListCollapse
   .bootstrap-collapse-bugfix
 
+  %script#person_list_item{ :type => 'text/html', :'data-member' => 'object_person' }
+    %li.controlSlot{ :'data-id' => '<%= person.id %>' }
+      %span.controls-group <%= role %>
+      %br
+      %span.controls-subgroup <%= person.name || '&nbsp' %>
+
   %ul#personList{ :'data-template-id' => 'person_list_item' }
     -all_object_people.each do |object_item|
       -item = object_item.person
