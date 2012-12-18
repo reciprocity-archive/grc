@@ -1,0 +1,41 @@
+-content_for :modal_title do
+  %h1 Select Person
+
+-content_for :modal_help, :select_person
+
+%script#person_option{ :type => 'text/html', :'data-prefix' => 'person' }
+  %li{ :'data-id' => '<%= person.id %>', :'data-name' => '<%= person.name %>', :'data-company' => '<%= person.company %>' }
+    .row-fluid
+      .span8.object_info{ :'data-template-id' => 'person_option_data' }
+        -#%span.company <%= person.company %>
+        -#%span.name <%= person.name %>
+      .span4.actions
+        %a.widgetbtn.pull-right{:href => edit_flow_person_path('<%=person.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
+          %i.grcicon-edit-grey
+
+%script#person_option_data{ :type => 'text/html' }
+  %span.company <%= person.company %>
+  %span.name <%= person.name %>
+
+.row-fluid
+  .span12
+    %h4
+      Select Person
+      %a.widgetbtn.widgetbtnselector{ :href => new_flow_person_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-selector-target' => '.source' }
+        %i.grcicon-add
+      .pull-right
+        %input.widgetsearch{:type => "text", :placeholder => "Search Person"}
+
+    .filter-block
+      .row-fluid
+        .span12
+          .tabbable.tabs-left
+            .tab-content
+              #category1.tab-pane.active
+                .people-list
+                  %ul.source{ :'data-list-data-href' => flow_people_path, :'data-template-id' => 'person_option' }
+  -#.span7
+    %h4 Roles for this #{object.class.name.titleize.downcase}
+    .people-list.currentlist
+      %ul.target{ :'data-list-data-href' => flow_object_people_path(:object_type => object.class.name, :object_id => object.id), :'data-template-id' => 'object_person_selected' }
+

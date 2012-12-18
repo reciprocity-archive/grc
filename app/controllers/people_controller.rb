@@ -35,7 +35,11 @@ class PeopleController < BaseObjectsController
     end
     @people = allowed_objs(@people.all, :read)
 
-    render :json => @people
+    if params[:list_select].present?
+      render :partial => 'list_select', :layout => 'layouts/list_modal', :locals => {}
+    else
+      render :json => @people
+    end
   end
 
   private
