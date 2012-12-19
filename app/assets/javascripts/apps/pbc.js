@@ -57,6 +57,27 @@ $(function() {
 
     $(".pbc-system-search").pbc_autocomplete();
 
+    // Using rotate_flow_control_assessment route
+    $('body').on('ajax:success', 'a.rotate_control_assessment', function(data) {
+      var $this = $(this)
+        , $icon = $this.find('i')
+        ;
+
+      if ($this.hasClass('btn-success')) {
+        // success state -> blank state
+        $this.removeClass('btn-success');
+        $icon.removeClass('grcicon-check-white').addClass('grcicon-blank');
+      } else if ($this.hasClass('btn-warning')) {
+        // failure state -> success state
+        $this.removeClass('btn-warning').addClass('btn-success');
+        $icon.removeClass('grcicon-x-white').addClass('grcicon-check-white');
+      } else {
+        // blank state -> failure state
+        $this.addClass('btn-warning');
+        $icon.removeClass('grcicon-blank').addClass('grcicon-x-white');
+      }
+    });
+
     $(document.body).cms_controllers_pbc_modals({});
 });
 
