@@ -39,6 +39,7 @@ can.Model.Cacheable("CMS.Models.ObjectPerson", {
             , data : _params
         });
     }
+    , destroy : "DELETE /object_people.json"
 }, {
     init : function() {
         var _super = this._super;

@@ -44,8 +44,8 @@
         <ul class="pbc-item-list">
           {{#system.object_people}}
           <li {{data 'model'}} data-model="true">
-            <a class="btn btn-nano pull-right edit_person" href="javascript://">
-              <i class="grcicon-edit-grey"></i>
+            <a class="btn btn-nano pull-right remove_person" href="javascript://">
+              <i class="grcicon-x-grey"></i>
             </a>
             <a href="javascript://" class="edit-person">{{person.name}} {{#role}}({{.}}){{/role}}</a>
           </li>
@@ -67,8 +67,8 @@
         <ul class="pbc-item-list">
           {{#system.object_documents}}
           <li {{data 'model'}} data-model="true">
-            <a class="btn btn-nano pull-right" href="javascript://">
-              <i class="grcicon-edit-grey"></i>
+            <a class="btn btn-nano pull-right remove_document" href="javascript://">
+              <i class="grcicon-x-grey"></i>
             </a>
             <a href="javascript://">{{document.title}}</a>
           </li>

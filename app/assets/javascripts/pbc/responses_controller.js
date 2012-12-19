@@ -31,6 +31,12 @@ can.Control("CMS.Controllers.Responses", {
             can.Model.Cacheable.prototype.addElementToChildList.call(this.options.observer, "list", response);
         }
     }
+    , ".remove_person click" : function(el, ev) {
+        el.closest("[data-model]").data("model").destroy();
+    }
+    , ".remove_document click" : function(el, ev) {
+        el.closest("[data-model]").data("model").destroy();
+    }
 
 });
 

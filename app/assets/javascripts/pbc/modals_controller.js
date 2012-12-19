@@ -26,7 +26,7 @@ can.Control("CMS.Controllers.PBCModals", {
         new CMS.Models.ObjectDocument({
             document_id : el.data("id")
             , system_id : this.selected_system_id
-            , role : 'documentation'
+            , role : 'General Doc'
         })
         .save();
     } 
