@@ -45,8 +45,8 @@ can.Model("can.Model.Cacheable", {
     cache[this.id] = this;
   }
   , addElementToChildList : function(attrName, new_element) {
-      this[attrName].push(new_element);
-      this._triggerChange(attrName, "set", this[attrName], this[attrName].slice(0, this[attrName].length - 1));
+    this[attrName].push(new_element);
+    this._triggerChange(attrName, "set", this[attrName], this[attrName].slice(0, this[attrName].length - 1));
   }
   , removeElementFromChildList : function(attrName, old_element, all_instances) {
     for(var i = this[attrName].length - 1 ; i >= 0; i--) {
@@ -55,6 +55,6 @@ can.Model("can.Model.Cacheable", {
         if(!all_instances) break;
       }
     }
-      this._triggerChange(attrName, "set", this[attrName], this[attrName].slice(0, this[attrName].length - 1));
+    this._triggerChange(attrName, "set", this[attrName], this[attrName].slice(0, this[attrName].length - 1));
   }
 });
