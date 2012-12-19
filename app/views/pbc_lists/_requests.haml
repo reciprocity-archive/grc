@@ -39,7 +39,7 @@
           .span2{"data-target" => "##{control_assessment_collapse_id}", "data-toggle" => "collapse"}
             .expander
             %strong=(control_assessment && control_assessment.control.slug) || "(No Control Selected)".html_safe
-          .span7
+          .span6
             =control_assessment && control_assessment.control.title
           -if control_assessment.present?
             .span1
