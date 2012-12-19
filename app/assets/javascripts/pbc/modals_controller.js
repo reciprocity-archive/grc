@@ -6,7 +6,7 @@
 can.Control("CMS.Controllers.PBCModals", {
     defaults : {}
 }, {
-    ".add-person, .add-document click" : function(el, ev) {
+    ".add-document click" : function(el, ev) {
         this.selected_system_id = el.closest("[data-system-id]").data("system-id");
     }
 

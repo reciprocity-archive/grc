@@ -8,6 +8,9 @@ can.Model("can.Model.Cacheable", {
         can.getObject("cache", new_obj.constructor, true)[new_obj.id] = new_obj;
       }
     });
+    this.bind("destroyed", function(ev, old_obj) {
+      delete can.getObject("cache", old_obj.constructor, true)[old_obj.id];
+    });
   }
 
   , findInCacheById : function(id) {
@@ -43,6 +46,15 @@ can.Model("can.Model.Cacheable", {
   }
   , addElementToChildList : function(attrName, new_element) {
       this[attrName].push(new_element);
+      this._triggerChange(attrName, "set", this[attrName], this[attrName].slice(0, this[attrName].length - 1));
+  }
+  , removeElementFromChildList : function(attrName, old_element, all_instances) {
+    for(var i = this[attrName].length - 1 ; i >= 0; i--) {
+      if(this[attrName][i]===old_element) {
+        this[attrName].splice(i, 1);
+        if(!all_instances) break;
+      }
+    }
       this._triggerChange(attrName, "set", this[attrName], this[attrName].slice(0, this[attrName].length - 1));
   }
 });

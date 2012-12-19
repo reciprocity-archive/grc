@@ -33,11 +33,25 @@ can.Model.Cacheable("CMS.Models.System", {
                 sys.addElementToChildList("people", obj_person.person);
             }
         });
+        CMS.Models.ObjectPerson.bind("destroyed", function(ev, obj_person) {
+            var sys = that.findInCacheById(obj_person.personable_id); //"this" is Cacheable.  WTF?
+            if(sys) {
+                sys.removeElementFromChildList("object_people", obj_person);
+                sys.removeElementFromChildList("people", obj_person.person);
+            }
+        });
         CMS.Models.ObjectDocument.bind("created", function(ev, obj_doc) {
             var sys = that.findInCacheById(obj_doc.documentable_id); //"this" is Cacheable.  WTF?
             if(sys) {
                 sys.addElementToChildList("object_documents", obj_doc);
                 sys.addElementToChildList("documents", obj_doc.document);
+            }
+        });
+        CMS.Models.ObjectDocument.bind("destroyed", function(ev, obj_doc) {
+            var sys = that.findInCacheById(obj_doc.documentable_id); //"this" is Cacheable.  WTF?
+            if(sys) {
+                sys.removeElementFromChildList("object_documents", obj_doc);
+                sys.removeElementFromChildList("documents", obj_doc.document);
             }
         });
     }
