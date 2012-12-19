@@ -34,6 +34,13 @@ class BaseMappingsController < ApplicationController
     end
   end
 
+  def destroy
+    object = model_class.find(params[:id])
+    object.destroy
+
+    render :text => ''
+  end
+
   private
 
     def list_edit_context
