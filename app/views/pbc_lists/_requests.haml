@@ -96,10 +96,8 @@
                 .span2.pbc-item.pbc-status
                   %h5 Status of Request
                   %select.span12
-                    %option{:selected => "selected"} Draft
-                    %option Open - Waiting Compliance
-                    %option Open - Waiting Auditors
-                    %option Completed
+                    -Request.statuses.each do |status|
+                      %option{ :selected => request.status == status }=status
                   %p
                     %strong Company:
                     =request.company_responsible

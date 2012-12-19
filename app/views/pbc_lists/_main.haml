@@ -65,10 +65,8 @@
                 Status
               %select.span12{ :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'status' }
                 %option{ :value => 'any', :selected => 'selected' } - Any -
-                %option Draft
-                %option Waiting Compliance
-                %option Waiting Auditors
-                %option Completed
+                -Request.statuses.each do |status|
+                  %option=status
             .span3
               %label
                 Person

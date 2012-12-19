@@ -9,6 +9,13 @@ class Request < ActiveRecord::Base
     3 => "Interview"
   }
 
+  STATUSES = [
+    "Draft",
+    "Waiting Compliance",
+    "Waiting Auditors",
+    "Completed"
+  ]
+
   attr_accessible :pbc_list, :type_id, :control_assessment, :pbc_control_code, :pbc_control_desc, :request, :test, :notes, :company_responsible, :auditor_responsible, :date_requested, :status
 
   belongs_to :pbc_list
@@ -31,6 +38,10 @@ class Request < ActiveRecord::Base
 
   def self.types
     TYPES
+  end
+
+  def self.statuses
+    STATUSES
   end
 
   def type_name

@@ -23,7 +23,7 @@
   =wrapped_text_field f, :span2, :company_responsible, :placeholder => 'LDAP ID', :label_name => 'Company Contact'
   =wrapped_text_field f, :span2, :auditor_responsible, :placeholder => 'Name', :label_name => 'Auditor Contact'
   =wrapped_date_field f, :span2, :date_requested, :class => 'date', :placeholder => 'MM/DD/YYYY', :label_name => 'Date Requested'
-  =wrapped_select f, :span2, :status, ['Draft', 'Waiting Compliance', 'Waiting Auditors', 'Completed'], :selected => (f.object.status), :label_name => 'Status'
+  =wrapped_select f, :span2, :status, Request.statuses, :selected => (f.object.status), :label_name => 'Status'
 
 .row-fluid
   =wrapped_text_area f, :span6, :pbc_control_desc, :class => 'double wysihtml5', :placeholder => 'Enter description here', :wrapper_div_class => 'wysiwyg-area', :label_name => 'Control Description from PBC List'
