@@ -29,6 +29,14 @@
     height:23px !important;
     min-height:auto !important;
   }
+  h6 {
+    padding-top:2px;
+    margin-top:1px;
+    color:#999;
+    i {
+      @include opacity(0.5);
+    }
+  }
 }
 .pbc-response-actions {
   .btn {
@@ -155,8 +163,7 @@ ul.pbc-requests {
     }
   }
   
-  ul.items-list {
-    
+  ul.items-list {    
     li {
       padding:6px 6px 2px 6px;
       margin-bottom:4px;

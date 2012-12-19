@@ -112,11 +112,7 @@
 // one place to create and define whole 'slot' from one color definition
 
 @mixin border-and-gradient($color) {
-  @include background-image(linear-gradient(top, lighten($color, 5%), darken($color, 5%)));
-  border:1px solid darken($color,10%);
+  @include background-image(linear-gradient(top, lighten($color, 1%), darken($color, 1%)));
+  border:1px solid darken($color,5%);
   color:darken($color,50%);
-}
-
-@mixin icon(){
-  //
 }
