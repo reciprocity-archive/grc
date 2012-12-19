@@ -34,7 +34,11 @@ class Request < ActiveRecord::Base
   end
 
   def type_name
-    TYPES[type_id] if type_id.present?
+    if type_id.present?
+      TYPES[type_id]
+    else
+      TYPES[1]
+    end
   end
 
   def display_name
