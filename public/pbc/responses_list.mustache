@@ -5,13 +5,13 @@
         {{system.title}}
       </div>
       <div class="span3">
-        <span class="pbc-counter">
+        <span class="pbc-counter{{^system.object_people.length}} empty{{/system.object_people.length}}">
           <i class="grcicon-person"></i>
           {{system.object_people.length}}
         </span>
       </div>
       <div class="span3">
-        <span class="pbc-counter">
+        <span class="pbc-counter{{^system.object_documents.length}} empty{{/system.object_documents.length}}">
           <i class="grcicon-document"></i>
           {{system.object_documents.length}}
         </span>
