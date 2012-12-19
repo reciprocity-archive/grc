@@ -405,6 +405,23 @@ jQuery(function($) {
       }
     });
   });
+
+  $("body").on("change", ".pbc-requests .main-item", function(ev) {
+    if($(ev.target).parents().is(".pbc-status")) {
+      var status = $(ev.target).val();
+      $.ajax({
+        url : "/requests/" + $(ev.currentTarget).data("filter-id") + ".json"
+        , type : "put"
+        , dataType : "json"
+        , data : {
+          status : status
+        }
+      })
+      .then(function() {
+        $(ev.currentTarget).attr("data-filter-status", status).data("filter-status", status);
+      });
+    }
+  });
 });
 
 jQuery(function($) {
