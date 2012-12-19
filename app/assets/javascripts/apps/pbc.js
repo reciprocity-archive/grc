@@ -51,7 +51,8 @@ $.widget.bridge("pbc_autocomplete", $.pbc.autocomplete);
 $(function() {
     // Trigger controller load when collapsed container is expanded
     $(document.body).on("show", ".pbc-responses-container", function(ev) {
-        $(ev.currentTarget).find(".pbc-responses").cms_controllers_responses({id : $(ev.currentTarget).closest("[data-filter-id]").data("filter-id")});
+        var filter_element = $(ev.currentTarget).closest("[data-filter-id]")
+        $(ev.currentTarget).find(".pbc-responses").cms_controllers_responses({id : filter_element.data("filter-id"), type_id : filter_element.data("filter-type-id"), type_name : filter_element.data("filter-type-name")});
     });
 
     $(".pbc-system-search").pbc_autocomplete();

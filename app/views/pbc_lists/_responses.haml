@@ -4,7 +4,7 @@
 -response_list_id = "request-#{request.id}-responses"
 
 %h4.pbc-title
-  Responses (Documentation)
+  ="Responses (#{request.type_name})"
   %a.btn.btn-mini{"data-toggle" => "modal", :href => "#newResponse"}
     %i.grcicon-add{ "data-target" => "##{new_response_id}", "data-toggle" => "collapse" }
 

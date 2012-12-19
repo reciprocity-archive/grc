@@ -3,11 +3,18 @@ class Request < ActiveRecord::Base
   include AuthorizedModel
   include SanitizableAttributes
 
-  attr_accessible :pbc_list, :type, :control_assessment, :pbc_control_code, :pbc_control_desc, :request, :test, :notes, :company_responsible, :auditor_responsible, :date_requested, :status
+  TYPES = {
+    1 => "Documentation",
+    2 => "Population Sample",
+    3 => "Interview"
+  }
+
+  attr_accessible :pbc_list, :type_id, :control_assessment, :pbc_control_code, :pbc_control_desc, :request, :test, :notes, :company_responsible, :auditor_responsible, :date_requested, :status
 
   belongs_to :pbc_list
   belongs_to :control_assessment
-  belongs_to :type, :class_name => 'Option', :conditions => { :role => 'request_type' }
+  # removed option type for now, just use hardcoded values (it would cause problems with sync between servers, JS...)
+  # belongs_to :type, :class_name => 'Option', :conditions => { :role => 'request_type' }
 
   has_one :control, :through => :control_assessment
   has_many :responses, :dependent => :destroy
@@ -21,6 +28,14 @@ class Request < ActiveRecord::Base
 
   after_save :after_save_detect_orphaned_control_assessment
   after_destroy :after_destroy_detect_orphaned_control_assessment
+
+  def self.types
+    TYPES
+  end
+
+  def type_name
+    TYPES[type_id] if type_id.present?
+  end
 
   def display_name
     pbc_control_code

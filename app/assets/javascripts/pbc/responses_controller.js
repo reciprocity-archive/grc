@@ -10,6 +10,8 @@ can.Control("CMS.Controllers.Responses", {
         , object_person_model : namespace.CMS.Models.ObjectPerson
         , list : "/pbc/responses_list.mustache"
         , id : null //The ID of the parent request
+        , type_id : null // type_id from request
+        , type_name : null // type_name from request
     }
 }, {
     init : function() {
@@ -22,7 +24,7 @@ can.Control("CMS.Controllers.Responses", {
         if(list) {
             this.list = list;
         }
-        this.element.html(can.view(this.options.list, this.options.observer = new can.Observe({list : this.list})));
+        this.element.html(can.view(this.options.list, this.options.observer = new can.Observe({list : this.list, type_id : this.options.type_id, type_name : this.options.type_name})));
     }
     , "{model} created" : function(Model, ev, response) {
         if(response.request_id === this.options.id) {  
