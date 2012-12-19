@@ -57,44 +57,6 @@ $(function() {
 
     $(".pbc-system-search").pbc_autocomplete();
 
-    $('body').on('modal:success', '.pbc-add-response > a', function(e, data) {
-      var $this = $(this)
-        , resp = new CMS.Models.Response()
-        ;
-      resp.attr({
-        request_id: $(e.target).closest("[data-filter-id]").data("filter-id")
-        , system_id: data.id
-      });
-      resp.save();
-    });
-
-    $('body').on('modal:success', 'a.system-edit', function(e, data) {
-      var $this = $(this)
-        , response_id = $this.closest('li[data-id]').data('id')
-        , response = CMS.Models.Response.findInCacheById(response_id)
-        , system_id = response.attr('system_id')
-        , system = CMS.Models.System.findInCacheById(response.attr('system_id'))
-        ;
-      system.attr(data);
-    });
-
-    $('body').on('modal:select', '.pbc-control > a', function(e, control_data) {
-      var $this = $(this)
-        , request_id = $this.closest('li[data-filter-id]').data('filter-id')
-        ;
-
-      $.post(
-        '/requests/' + request_id,
-        { _method: 'put'
-        , 'request[control_id]': control_data.id
-        }, function(data) {
-          // FIXME: Brad, fix this if/when Requests are live-bound
-          $this.closest('.pbc-control').find('.item').text(control_data.slug);
-
-          // FIXME: Brad - we may want to eventually avoid refreshing the page here.
-          window.location.assign(window.location.href.replace(/#.*/, ''));
-      });
-    });
     $(document.body).cms_controllers_pbc_modals({});
 });
 

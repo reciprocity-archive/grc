@@ -64,6 +64,9 @@ can.Control("CMS.Controllers.PBCModals", {
         }, function(data) {
           // FIXME: Brad, fix this if/when Requests are live-bound
           $this.closest('.pbc-control').find('.item').text(control_data.slug);
+
+          // FIXME: Brad - we may want to eventually avoid refreshing the page here.
+          window.location.assign(window.location.href.replace(/#.*/, ''));
       });
     }
 });

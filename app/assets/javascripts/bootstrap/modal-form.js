@@ -55,6 +55,9 @@
 
   , submit: function(e) {
       this.$form().submit();
+
+      if (e.type == 'click')
+        e.preventDefault();
     }
 
   , keypress_submit: function(e) {
