@@ -125,4 +125,30 @@ module ApplicationHelper
       'grcicon-blank'
     end
   end
+
+  def request_type_icon(type_name)
+    case type_name
+    when 'Documentation' then
+      'grcicon-document'
+    when 'Population Sample' then
+      'grcicon-populationsample'
+    when 'Interview' then
+      'grcicon-calendar'
+    else
+      'grcicon-document'
+    end
+  end
+
+  def sorted_requests_with_control_assessments(requests)
+    requests.
+      group_by(&:control_assessment_id).
+      map do |id, requests|
+        [id, requests.first.control_assessment, requests]
+      end.
+      sort_by do |_, control_assessment, _|
+        key = control_assessment.nil? ? '' : control_assessment.control.slug
+        # Magical sort respecting numbers
+        key.split(/(\d+)/).map { |s| [s.to_i, s] }
+      end
+  end
 end

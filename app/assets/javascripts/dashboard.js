@@ -337,11 +337,13 @@ jQuery(function($) {
   });
 });
 
+// Filters on PBC List
 jQuery(function($) {
   $('body').on('change', '[data-toggle="filter-requests"]', function(e) {
     var $this = $(this)
-      , filter_target = $this.data('filter-target')
+      , filter_target = '.pbc-requests > li'
       , filter_func = function() { return true; }
+      , target_container = '.pbc-control-assessments > li'
       ;
 
     $('[data-toggle="filter-requests"]').each(function(i, elem) {
@@ -378,24 +380,37 @@ jQuery(function($) {
       }
     });
 
-    $(filter_target).each(function(i, elem) {
-      var $elem = $(elem)
+    // For each container element, hide it if it contains no unfiltered elements
+    $(target_container).each(function(i, container) {
+      var $container = $(container)
+        , has_visible_item = false
         ;
 
-      if (!filter_func($elem)) {
-        $elem.slideUp('fast');
+      $container.find(filter_target).each(function(i, elem) {
+        var $elem = $(elem)
+          ;
+
+        if (!filter_func($elem)) {
+          $elem.slideUp('fast');
+        } else {
+          has_visible_item = true;
+          $elem.slideDown('fast');
+        }
+      });
+
+      if (!has_visible_item) {
+        $container.slideUp('fast');
       } else {
-        $elem.slideDown('fast');
+        $container.slideDown('fast');
       }
     });
-
   });
 });
 
 jQuery(function($) {
   $('body').on('click', 'button[data-toggle="filter-reset"]', function(e) {
     var $this = $(this)
-      , filter_reset_target = $this.data('filter-reset-target')
+      , filter_reset_target = '[data-toggle="filter-requests"]'
       ;
 
     $(filter_reset_target).each(function(i, elem) {
@@ -409,6 +424,7 @@ jQuery(function($) {
 });
 
 jQuery(function($) {
+  // Used in object_list sidebars (References, People, Categories)
   $('body').on('modal:success', '.js-list-container-title > a', function(e, data) {
     var $this = $(this)
       , $title = $this.closest('.js-list-container-title')
@@ -426,5 +442,91 @@ jQuery(function($) {
       $($title.data('target')).collapse('show');
       $expander.addClass('in');
     }
+  });
+});
+
+// Sorting on PBC List
+jQuery(function($) {
+  var sort_elements, compare_values
+    , extract_control_code, sort_by_control_code
+    , extract_request_date, sort_by_request_date
+    , trigger_sort
+    ;
+
+  // Compare arrays specially
+  compare_values = function(a, b) {
+    var i;
+    if ($.isArray(a) && $.isArray(b)) {
+      for (i=0; i<a.length; i++) {
+        result = compare_values(a[i], b[i]);
+        if (result != 0)
+          return result;
+      }
+      return (a.length == b.length ? 0 : (a.length < b.length ? -1 : 1));
+    } else {
+      return (a == b ? 0 : (a < b) ? -1 : 1)
+    }
+  }
+
+  // Not a pretty sort function
+  sort_elements = function($els, key_func, reversed) {
+    comparison_func = function(a, b) {
+      return compare_values(key_func(a), key_func(b));
+    }
+    var els = $els.toArray().sort(comparison_func);
+    if (reversed)
+      els = els.reverse();
+    return $(els);
+  }
+
+  extract_control_code = function(li) {
+    var code_string = $(li).data('sort-control-code');
+    if (!code_string)
+      return [];
+    else
+      // Split around numbers so CTL5 < CTL10
+      return $.map(
+        code_string.split(/(\d+)/),
+        function(x) { return isNaN(parseInt(x)) ? x : parseInt(x) })
+  }
+
+  sort_by_control_code = function(reversed) {
+    var $ul = $('ul.pbc-control-assessments');
+    $ul.html(sort_elements($ul.find('> li'), extract_control_code, reversed));
+  }
+
+  extract_request_date = function(li) {
+    var date_string = $(li).data('filter-date-requested') || '0';
+    // We use "+ ' UTC'" to avoid strange timezone conversions
+    // due to differing date formats
+    return Date.parse(date_string + ' UTC');
+  }
+
+  sort_by_request_date = function(reversed) {
+    $('ul.pbc-control-assessments > li').each(function(i) {
+      var $ul = $(this).find('ul.pbc-requests:last');
+      $ul.html(sort_elements($ul.find('> li'), extract_request_date, reversed));
+    });
+  }
+
+  trigger_sort = function() {
+    var sort_type, reversed;
+    sort_type = $('#sortTypeSelect').val();
+    reversed = $('#sortDirectionReverse').hasClass('active');
+
+    if (sort_type == 'Control Code')
+      sort_by_control_code(reversed);
+    else if (sort_type == 'Request Date')
+      sort_by_request_date(reversed);
+  };
+
+  $('body').on('click', '#sortDirectionForward, #sortDirectionReverse', function(e) {
+    $('#sortDirectionForward, #sortDirectionReverse').removeClass('active');
+    $(this).addClass('active');
+    trigger_sort();
+  });
+
+  $('body').on('change', '#sortTypeSelect', function(e) {
+    trigger_sort();
   });
 });

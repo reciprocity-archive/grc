@@ -27,15 +27,13 @@
           -Request.types.each do |type_id, type_name|
             %li.add-new-item
               %a{ :href => new_flow_request_path(:'request[pbc_list_id]' => pbc_list.id, :'request[type_id]' => type_id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide'}
-                %i.grcicon-document
+                %i{ :class => request_type_icon(type_name) }
                 =type_name
 
 %ul.pbc-control-assessments#requests
-  -requests.group_by(&:control_assessment_id).each do |control_assessment_id, requests|
-    -control_assessment = requests.first.control_assessment
+  -sorted_requests_with_control_assessments(requests).each do |control_assessment_id, control_assessment, requests|
     -control_assessment_collapse_id = "control_assessment-#{control_assessment_id || 'null'}"
-    %li.pbc-ca-item
-      /{ html_data_attributes(request, "data-filter-", [ ["type", "type.display_name"], "status", ["date-requested", "date_requested.to_date"], ["control-code", "control.slug"], ["person", "persons_responsible"], "id" ]) }
+    %li.pbc-ca-item{ :'data-type' => 'ControlAssessment', :'data-id' => control_assessment_id, 'data-sort-control-code' => control_assessment && control_assessment.control.slug }
       .pbc-ca-title
         .row-fluid
           .span2{"data-target" => "##{control_assessment_collapse_id}", "data-toggle" => "collapse"}
@@ -67,13 +65,9 @@
                   .item.i-control
                     =request.control && request.control.slug || "&nbsp;".html_safe
                 .span3.pbc-request
-                  .item
-                    Request Type:
-                    = request.type_name
-                    -#%select.span12
-                      %option{:selected => "selected"} Documentation
-                      %option Interview
-                      %option Population Sample
+                  %h6
+                    %i{ :class => request_type_icon(request.type_name) }
+                    =request.type_name
                 .span3
                   &nbsp;
                 .span2
@@ -95,7 +89,7 @@
                   %h5 Notes
                   %p=raw request.notes
                 .span2.pbc-item.pbc-status
-                  %h5 Status
+                  %h5 Status of Request
                   %select.span12
                     %option{:selected => "selected"} Draft
                     %option Open - Waiting Compliance
