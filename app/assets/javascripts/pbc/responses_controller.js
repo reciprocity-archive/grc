@@ -37,7 +37,60 @@ can.Control("CMS.Controllers.Responses", {
     , ".remove_document click" : function(el, ev) {
         el.closest("[data-model]").data("model").destroy();
     }
+    , ".toggle-add-person click" : function(el, ev) {
+        el.prev(".inline-add-person").removeClass("hide").find(".input-ldap").focus();
+        el.addClass("hide");
+    }
+    , ".cancel-add-person click" : function(el, ev) {
+        var $li = el.closest(".inline-add-person");
 
+        $li.next(".toggle-add-person").removeClass("hide");
+        $li.addClass("hide");
+    }
+    , ".add-person:not(.disabled) click" : function(el, ev) {
+        var $form = el.closest("form")
+        , $inputs = can.makeArray($form.get(0).elements)
+        , params = {};
+        
+        can.each($inputs, function(input){
+            params[$(input).attr("name")] = $(input).val();
+        });
+
+        var dfd;
+        if(!params.id) {
+            dfd = new CMS.Models.Person(params).save();
+        } else {
+            dfd = new $.Deferred().resolve(params);
+        }
+        dfd.then(function(pp){
+            new CMS.Models.ObjectPerson({
+                person_id : pp.id
+                , system_id : el.closest("[data-system-id]").data("system-id")
+                , role : params.role
+            })
+            .save()
+            .then(function(){
+                $form[0].reset();
+                $form.find(".cancel-add-person").click();
+            });
+        });
+    } 
+    , ".inline-add-person keydown" : function(el, ev) {
+        if(el.find(".input-ldap").val() === ""
+            || el.find(".input-role").val() === "") {
+            el.find(".add-person").addClass("disabled");
+        } else {
+            el.find(".add-person").removeClass("disabled");
+        }
+    }
+    , ".inline-add-person change" : function(el, ev) {
+        if(el.find(".input-ldap").val() === ""
+            || el.find(".input-role").val() === "") {
+            el.find(".add-person").addClass("disabled");
+        } else {
+            el.find(".add-person").removeClass("disabled");
+        }
+    }
 });
 
 })(this, can.$);

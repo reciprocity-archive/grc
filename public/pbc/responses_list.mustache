@@ -50,11 +50,40 @@
             <a href="javascript://" class="edit-person">{{person.name}} {{#role}}({{.}}){{/role}}</a>
           </li>
           {{/system.object_people}}
-          <li data-system-id="{{system.id}}">
-            <a class="add-person btn btn-mini pull-right" data-list-target="#referenceList" data-modal-class="modal-slim" data-modal-reset="reset" data-toggle="modal-ajax-single-selector" href="/people?list_select=1">
+          <li class="inline-editing inline-add-person hide" data-system-id="{{system.id}}">
+            <form>
+              <div class="row-fluid">
+                <div class="span6">
+                  <input class="span12 input-ldap" name="ldap" placeholder="LDAP ID" type="text" {{ (el) -> el.pbc_autocomplete_people() }}>
+                </div>
+                <div class="span6">
+                  <input class="span12 input-name" name="name" placeholder="Name" type="text">
+                </div>
+                <input type="hidden" name="id" class="input-id">
+              </div>
+              <div class="row-fluid">
+                <div class="span6">
+                  <select name="role" class="span12 input-role">
+                    <option value="">Choose Role</option>
+                    <option value="responsible">Responsible Party</option>
+                  </select>
+                </div>
+                <div class="span3">
+                  <a class="btn btn-mini span12 cancel-add-person" href="javascript://">Cancel</a>
+                </div>
+                <div class="span3">
+                  <a class="btn btn-mini btn-primary span12 add-person disabled" href="javascript://">
+                    <strong>Save</strong>
+                  </a>
+                </div>
+              </div>
+            </form>
+          </li>
+          <li class="toggle-add-person">
+            <a class="btn btn-mini pull-right" href="javascript://">
               <i class="grcicon-link"></i>
             </a>
-              <a class="add-person" data-list-target="#referenceList" data-modal-class="modal-slim" data-modal-reset="reset" data-toggle="modal-ajax-single-selector" href="/people?list_select=1">
+              <a href="javascript://">
               Add new person
             </a>
           </li>

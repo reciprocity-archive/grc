@@ -9,17 +9,7 @@ can.Control("CMS.Controllers.PBCModals", {
     ".add-person, .add-document click" : function(el, ev) {
         this.selected_system_id = el.closest("[data-system-id]").data("system-id");
     }
-    , ".people-list li click" : function(el, ev) {
-        if(el.closest(".documents-list").length) return; //people-list describes some CSS, also functions as identifying collection of people if it is not documents-list
-        var that = this
-        , sys_id = this.selected_system_id;
-        new CMS.Models.ObjectPerson({
-            person_id : el.data("id")
-            , system_id : this.selected_system_id
-            , role : 'responsible'
-        })
-        .save();
-    } 
+
     , ".documents-list li click" : function(el, ev) {
         var that = this
         , sys_id = this.selected_system_id;

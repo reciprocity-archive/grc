@@ -6,7 +6,37 @@
 can.Model.Cacheable("CMS.Models.Person", {
     root_object : "person"
     , findAll : "GET /people.json"
-    , create : "POST /people.json"
+    , create : function(params) {
+        var _params = {
+            person : {
+                name : params.name
+                , email : params.ldap
+                , company_id : params.company_id
+            }
+        };
+        return $.ajax({
+            type : "POST"
+            , "url" : "/people.json"
+            , dataType : "json"
+            , data : _params
+        });
+    }
+    , search : function(request, response) {
+        return $.ajax({
+            type : "get"
+            , url : "/people.json"
+            , dataType : "json"
+            , data : {s : request.term}
+            , success : function(data) {
+                response($.map( data, function( item ) {
+                  return can.extend({}, item.person, {
+                    label: item.person.email
+                    , value: item.person.id
+                  });
+                }));
+            }
+        });
+    }
 }, {
     init : function () {
         this._super && this._super();
