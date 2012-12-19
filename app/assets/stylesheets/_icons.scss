@@ -1,3 +1,86 @@
+/*
+  WYSIWYG HTML5 Replacement Icons 
+*/
+
+.icon-list {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    @include background-size(16px 16px); 
+    vertical-align: top; //necessary or button with icon embedded will sometimes be to tall.
+    background-position: 0px 0px;
+    background-repeat: no-repeat;
+
+    background-image: url("../images/grcicons/list.png");
+}
+
+.icon-th-list {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    @include background-size(16px 16px); 
+    vertical-align: top; //necessary or button with icon embedded will sometimes be to tall.
+    background-position: 0px 0px;
+    background-repeat: no-repeat;
+
+    background-image: url("../images/grcicons/orderedlist.png");
+}
+
+.icon-indent-right   {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    @include background-size(16px 16px); 
+    vertical-align: top; //necessary or button with icon embedded will sometimes be to tall.
+    background-position: 0px 0px;
+    background-repeat: no-repeat;
+
+    background-image: url("../images/grcicons/alignright.png");
+}
+
+.icon-indent-left   {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    @include background-size(16px 16px); 
+    vertical-align: top; //necessary or button with icon embedded will sometimes be to tall.
+    background-position: 0px 0px;
+    background-repeat: no-repeat;
+
+    background-image: url("../images/grcicons/alignleft.png");
+}
+
+
+.icon-share {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    @include background-size(16px 16px); 
+    vertical-align: top; //necessary or button with icon embedded will sometimes be to tall.
+    background-position: 0px 0px;
+    background-repeat: no-repeat;
+
+    background-image: url("../images/grcicons/share.png");
+}
+
+.icon-pencil {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  @include background-size(16px 16px); 
+  vertical-align: top; //necessary or button with icon embedded will sometimes be to tall.
+  background-position: 0px 0px;
+  background-repeat: no-repeat;
+
+  background-image: url("../images/grcicons/edit.png");
+}
+
 /* 
    Icons are used in a number of places and resolution sizes. 
    Images are saved at 32pixels, scaled to 16pixels for .widgetbtn, and further scaled for .btn-nano and similar ...
@@ -136,7 +219,7 @@
   background-image: url("../images/grcicons/help.png");
 }
 
-.grcicon-edit-grey {
+.grcicon-edit-grey{
   background-image: url("../images/grcicons/edit.png");
 }
 

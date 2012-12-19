@@ -8,7 +8,7 @@
     height: 16px;
     line-height: 16px;
     //@include background-size(256px 256px); 
-    //@include background-size(128px 128px); 
+    @include background-size(128px 128px); 
     vertical-align: top; //necessary or button with icon embedded will sometimes be to tall.
     display:inline-block; 
     overflow:hidden; 
@@ -202,7 +202,7 @@
     width: 32px;
     height: 32px;
     line-height: 32px;
-    //@include background-size(100%); 
+    @include background-size(128px 128px); 
     //@include background-size(128px 128px); 
     vertical-align: top; //necessary or button with icon embedded will sometimes be to tall.
     display:inline-block; 
