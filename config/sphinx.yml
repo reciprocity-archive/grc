@@ -2,6 +2,14 @@
 sphinx_server = SearchableModel.sphinx_servers.sample || {:host => 'localhost', :port => 9312}
 %>
 
+development:
+  address: "<%= sphinx_server[:host] %>"
+  port: "<%= sphinx_server[:port] %>"
+  bin_path: "../sphinx/src"
+  enable_star: 1
+  min_prefix_len: 3
+  dict: "keywords"
+
 staging:
   address: "<%= sphinx_server[:host] %>"
   port: "<%= sphinx_server[:port] %>"
