@@ -10,12 +10,16 @@
 
 =f.hidden_field :pbc_list_id
 =f.hidden_field :type_id
+=hidden_field_tag "request[control_id]", f.object.control && f.object.control.id
 
 .row-fluid
-  =wrapped_text_field f, :span2, :pbc_control_code, :placeholder => 'Control Code', :label_name => 'PBC Control Code'
-  .span2
-    %label GRC Control Code
-    .item.i-control.has-link FIXME
+  =wrapped_text_field f, :span2, :pbc_control_code, :placeholder => 'Control Code', :label_name => 'Control Code from PBC'
+  .span2.pbc-control-select
+    %label gGRC Control Code
+    %a.btn.btn-mini.pull-right{:href => flow_controls_path(:list_select => 1), :'data-toggle' => 'modal-ajax-single-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#referenceList', :'data-modal-class' => 'modal-slim' }
+      %i.grcicon-link
+    .item.i-control.has-link.oneline
+      =f.object.control && f.object.control.slug || "&nbsp;".html_safe
   =wrapped_text_field f, :span2, :company_responsible, :placeholder => 'LDAP ID', :label_name => 'Company Contact'
   =wrapped_text_field f, :span2, :auditor_responsible, :placeholder => 'Name', :label_name => 'Auditor Contact'
   =wrapped_date_field f, :span2, :date_requested, :class => 'date', :placeholder => 'MM/DD/YYYY', :label_name => 'Date Requested'

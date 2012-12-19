@@ -69,4 +69,11 @@ can.Control("CMS.Controllers.PBCModals", {
           window.location.assign(window.location.href.replace(/#.*/, ''));
       });
     }
+
+    , '.pbc-control-select > a modal:select' : function(el, e, control_data) {
+      var $this = $(el)
+
+      $this.closest('.pbc-control-select').find('.item').text(control_data.slug);
+      $("#request_control_id").val(control_data.id)
+    }
 });
