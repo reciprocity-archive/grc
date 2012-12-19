@@ -36,10 +36,10 @@
     %li.pbc-ca-item{ :'data-type' => 'ControlAssessment', :'data-id' => control_assessment_id, 'data-sort-control-code' => control_assessment && control_assessment.control.slug }
       .pbc-ca-title
         .row-fluid
-          .span2{"data-target" => "##{control_assessment_collapse_id}", "data-toggle" => "collapse"}
+          .span3{"data-target" => "##{control_assessment_collapse_id}", "data-toggle" => "collapse"}
             .expander
-            %strong=(control_assessment && control_assessment.control.slug) || "(No Control Selected)".html_safe
-          .span6
+            %strong=(control_assessment && control_assessment.control.slug) || "(Control not selected or recognized)".html_safe
+          .span5
             =control_assessment && control_assessment.control.title
           -if control_assessment.present?
             .span1
@@ -63,7 +63,12 @@
                   %a.btn.btn-mini.pull-right{:href => flow_controls_path(:list_select => 1), :'data-toggle' => 'modal-ajax-single-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#referenceList', :'data-modal-class' => 'modal-slim' }
                     %i.grcicon-link
                   .item.i-control
-                    =request.control && request.control.slug || "&nbsp;".html_safe
+                    -if request.control.present?
+                      =request.control && request.control.slug
+                    -elsif request.pbc_control_code.present?
+                      ="#{request.pbc_control_code} [Code not recognized]"
+                    -else
+                      No control selected
                 .span3.pbc-request
                   %h6
                     %i{ :class => request_type_icon(request.type_name) }
