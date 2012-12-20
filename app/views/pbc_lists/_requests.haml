@@ -20,7 +20,7 @@
       .span4 &nbsp;
     .span2.pbc-add
       .btn-group
-        #a{:'data-toggle'=>"dropdown", :href => "#", :class => "btn btn-mini btn-success dropdown-toggle"}
+        %a{:'data-toggle'=>"dropdown", :href => "#", :class => "btn btn-mini btn-success dropdown-toggle"}
           + Add New Request
           %span.caret
         %ul.dropdown-menu.pull-right
@@ -39,8 +39,8 @@
           .span3{"data-target" => "##{control_assessment_collapse_id}", "data-toggle" => "collapse"}
             .expander
             %strong=(control_assessment && control_assessment.control.slug) || "(Control not selected or recognized)".html_safe
-          .span5
-            =control_assessment && control_assessment.control.title
+          .span5{"data-target" => "##{control_assessment_collapse_id}", "data-toggle" => "collapse"}
+            =control_assessment && control_assessment.control.title || "&nbsp;".html_safe
           -if control_assessment.present?
             .span1
               %a.btn.btn-mini.rotate_control_assessment{ :rel => "tooltip", :'data-placement' => "top", :title => "Internal: Test of Design", :class => control_assessment_button_class(control_assessment.internal_tod), :'data-remote' => true, :'data-method' => 'post', :href => rotate_flow_control_assessment_path(control_assessment, :'control_assessment[internal_tod]' => 'toggle') }
@@ -75,8 +75,10 @@
                     =request.type_name
                 .span3
                   &nbsp;
-                .span2
-                  &nbsp;
+                .span2.pbc-status
+                  %select.span12
+                    -Request.statuses.each do |status|
+                      %option{ :selected => request.status == status }=status
                 .span1.pbc-response-actions
                   %a#tooltip16.btn.btn-blue.btn-mini{"rel" => "tooltip", "data-placement" => "left", "title" => "More", "data-target" => ".#{request_collapse_class}", "data-toggle" => "collapse"}
                     %i.grcicon-more
@@ -94,8 +96,8 @@
                   %h5 Notes
                   %p=raw request.notes
                 .span2.pbc-item.pbc-status
-                  %h5 Status of Request
-                  %select.span12
+                  -#%h5 Status of Request
+                  -#%select.span12
                     -Request.statuses.each do |status|
                       %option{ :selected => request.status == status }=status
                   %p
