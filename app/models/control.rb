@@ -157,7 +157,7 @@ class Control < ActiveRecord::Base
   end
 
   def operator_display
-    p = object_people.detect {|x| x.role == 'owner'}
+    p = object_people.detect {|x| x.role == 'operator'}
     p ? p.person.email : ''
   end
 

@@ -73,6 +73,12 @@ describe SystemsController do
       sys2.infrastructure.should be_false
       sys2.description.should == "This is System 2\n---\nnote 1\n---\nnote 2"
       sys2.sub_systems.map {|x| x.slug}.sort.should == %w(SYS1 SYSX)
+
+      post 'import', :upload => fixture_file_upload("/SYS.csv"), :confirm => true
+      sys2.reload
+      sys2.object_people.size.should == 1
+      sys2.object_people[0].role.should == 'accountable'
+      sys2.object_people[0].person.email.should == 'b@t.com'
     end
   end
 end
