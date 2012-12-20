@@ -406,7 +406,9 @@ jQuery(function($) {
       }
     });
   });
+});
 
+jQuery(function($) {
   $("body").on("change", ".pbc-requests .main-item", function(ev) {
     if($(ev.target).parents().is(".pbc-status")) {
       var status = $(ev.target).val();
