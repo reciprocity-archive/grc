@@ -29,6 +29,9 @@ $.widget(
                 resp.
                   save().
                   then(function(){ $this.val(""); });
+
+                $this.closest('.collapse').collapse('hide');
+                $this.val('');
                 return false;
             }
             , open: function() {

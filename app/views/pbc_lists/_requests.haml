@@ -33,7 +33,7 @@
 %ul.pbc-control-assessments#requests
   -sorted_requests_with_control_assessments(requests).each do |control_assessment_id, control_assessment, requests|
     -control_assessment_collapse_id = "control_assessment-#{control_assessment_id || 'null'}"
-    %li.pbc-ca-item{ :'data-type' => 'ControlAssessment', :'data-id' => control_assessment_id, 'data-sort-control-code' => control_assessment && control_assessment.control.slug }
+    %li.pbc-ca-item{ :'data-type' => 'ControlAssessment', :'data-id' => control_assessment_id, :'data-control-id' => control_assessment && control_assessment.control_id, 'data-sort-control-code' => control_assessment && control_assessment.control.slug }
       .pbc-ca-title
         .row-fluid
           .span3{"data-target" => "##{control_assessment_collapse_id}", "data-toggle" => "collapse"}

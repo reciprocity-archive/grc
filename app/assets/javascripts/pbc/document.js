@@ -45,6 +45,13 @@ can.Model.Cacheable("CMS.Models.Document", {
         //         obj.attr(attr, newVal);
         //     }
         // });
+
+        var that = this;
+
+        this.each(function(value, name) {
+          if (value === null)
+            that.removeAttr(name);
+        });
     }
 
 });
@@ -73,11 +80,18 @@ can.Model.Cacheable("CMS.Models.ObjectDocument", {
     init : function() {
         var _super = this._super;
         function reinit() {
+            var that = this;
+
             typeof _super === "function" && _super.call(this);
             this.attr(
                 "document"
                 , CMS.Models.Document.findInCacheById(this.document_id) 
                 || new CMS.Models.Document(this.document && this.document.serialize ? this.document.serialize() : this.document)); 
+
+            this.each(function(value, name) {
+              if (value === null)
+              that.removeAttr(name);
+            });
         }
 
         this.bind("created", can.proxy(reinit, this));
