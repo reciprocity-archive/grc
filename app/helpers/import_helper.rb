@@ -204,12 +204,13 @@ module ImportHelper
     end
   end
 
-  def handle_option(attrs, name, messages, role = nil)
+  def handle_option(attrs, name, warnings, role = nil)
     role ||= name.to_sym
     if attrs[name]
       value = Option.where(:role => role, :title => attrs[name]).first
       if value.nil?
-        messages << "Unknown #{role} option '#{attrs[name]}'"
+        warnings[name.to_sym] ||= []
+        warnings[name.to_sym] << "Unknown #{role} option '#{attrs[name]}'"
       end
       attrs[name] = value
     end
