@@ -48,11 +48,7 @@ class DocumentsController < BaseObjectsController
 
   private
 
-    def create_object_as_json
-      super(:methods => [:descriptor, :link_url])
-    end
-
-    def update_object_as_json
+    def object_as_json(args=nil)
       super(:methods => [:descriptor, :link_url])
     end
 
