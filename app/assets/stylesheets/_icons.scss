@@ -54,10 +54,11 @@
 .grcicon-gears              { background-position:-3px -58px; }
 .grcicon-play-white         { background-position:-3px -88px; }
 
-.btn-nano {
+.btn-nano { // for nano icons, add -2px for background position values
   .grcicon-x-grey           { background-position:-42px -112px;}
   .grcicon-edit-grey        { background-position:-42px -94px; }
   .grcicon-link             { background-position:-24px -76px; }
+  .grcicon-add              { background-position:-106px -237px; }
 }
 
 
