@@ -123,7 +123,7 @@ jQuery(function ($) {
 
   /*Toggle widget function*/
   $(document).on("click", ".accordion-toggle", function(event) {
-    $(this).children("i").toggleClass("gcmssmallicon-blue-expand");
+    $(this).children("i").toggleClass("grcicon-blue-expand");
   });
 
   /*Toggle slot function*/
@@ -134,7 +134,7 @@ jQuery(function ($) {
 
   $(document).on("click", ".expandAll", function(event) {
     // $("h3.trigger").toggleClass("active").next().slideToggle("fast");
-    $(this).children("i").toggleClass("gcmssmallicon-blue-expand");
+    $(this).children("i").toggleClass("grcicon-blue-expand");
   });
 
   //Handle remove buttons
