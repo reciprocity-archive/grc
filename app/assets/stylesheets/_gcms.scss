@@ -1479,47 +1479,6 @@ ul.slugtree {
   }
 }
 
-.enddot {
-  position:relative;
-  background-image: url("../images/grcicons/enddot.png");
-  float:left;
-  display: inline-block;
-  -moz-background-size:16px 16px;
-             -ie-background-size:16px 16px;
-              -o-background-size:16px 16px;
-         -webkit-background-size:16px 16px;
-                 background-size:16px 16px;
-  width: 16px;
-  height: 16px;
-  padding: 0 0 0 0;
-  margin: 6px 0 0 0;
-  cursor:pointer;
-  &.risk {
-    background-image: url("../images/grcicons/enddot-risk.png");
-  }
-  &.decline {
-    background-image: url("../images/grcicons/enddot-risk.png");
-  }
-  &.system {
-    background-image: url("../images/grcicons/enddot-system.png");
-  }
-  &.regulation {
-    background-image: url("../images/grcicons/enddot-regulation.png");
-  }
-  &.accept {
-    background-image: url("../images/grcicons/enddot-regulation.png");
-  }
-
-  &.control {
-    background-image: url("../images/grcicons/enddot-control.png");
-  }
-  &.default {
-    background-image: url("../images/grcicons/enddot-default.png");
-  }
-  
-  
-}
-
 .doubleslot {
   .enddot {
     margin: 6px 4px 4px 0;
