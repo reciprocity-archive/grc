@@ -110,8 +110,8 @@ module ImportHelper
 
     if category_string.present?
       names = strip_split(category_string)
-      categories = names.map {|category| Category.find_or_create_by_name({:name => category, :scope_id => category_scope_id})}
-      object.categories = object.categories + categories
+      categories = names.map {|category| Category.find_or_create_by_name_and_scope_id({:name => category, :scope_id => category_scope_id})}
+      object.categories = (object.categories + categories).uniq
     end
   end
 
