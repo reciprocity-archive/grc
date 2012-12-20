@@ -414,7 +414,9 @@ jQuery(function($) {
         , type : "put"
         , dataType : "json"
         , data : {
-          status : status
+          request : {
+            status : status
+          }
         }
       })
       .then(function() {
