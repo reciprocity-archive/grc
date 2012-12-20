@@ -69,6 +69,7 @@ jQuery(function($) {
   });
 
   // When clicking a slot-link, don't toggle collapse
+  // FIXME: We should avoid hacks like this
   $('body').on('click', '.slot > a', function(e) {
     e.stopPropagation();
   });
