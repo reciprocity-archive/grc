@@ -11,20 +11,24 @@
         </span>
       </div>
       <div class="span3">
+        {{#if_equals type_name 'Documentation'}}
         <span class="pbc-counter{{^system.object_documents.length}} empty{{/system.object_documents.length}}">
-          {{#if_equals type_name 'Documentation'}}
           <i class="grcicon-document"></i>
           {{system.object_documents.length}}
-          {{/if_equals}}
-          {{#if_equals type_name 'Population Sample'}}
+        </span>
+        {{/if_equals}}
+        {{#if_equals type_name 'Population Sample'}}
+        <span class="pbc-counter empty">
           <i class="grcicon-populationsample"></i>
           0
-          {{/if_equals}}
-          {{#if_equals type_name 'Interview'}}
+        </span>
+        {{/if_equals}}
+        {{#if_equals type_name 'Interview'}}
+        <span class="pbc-counter empty">
           <i class="grcicon-calendar"></i>
           0
-          {{/if_equals}}
         </span>
+        {{/if_equals}}
       </div>
       <div class="span1 pbc-item pbc-actions">
         <a class="btn btn-mini" rel="tooltip" data-placement="left" title="More" data-target="#pbc-response-{{id}}" data-toggle="collapse" href="javascript://">
