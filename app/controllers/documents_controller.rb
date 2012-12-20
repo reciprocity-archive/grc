@@ -42,7 +42,7 @@ class DocumentsController < BaseObjectsController
     if params[:list_select].present?
       render :partial => 'list_select', :layout => 'layouts/list_modal', :locals => {}
     else
-      render :json => @documents, :methods => [:document_type]
+      render :json => @documents, :methods => [:document_type, :link_url]
     end
   end
 

@@ -67,6 +67,24 @@ $.widget(
   }});
 $.widget.bridge("pbc_autocomplete_people", $.pbc.autocomplete_people);
 
+$.widget(
+  "pbc.autocomplete_documents"
+  , $.pbc.autocomplete
+  , { options : {
+      source : CMS.Models.Document.search
+      , select :  function(event, ui) { 
+        $(event.target).closest(".inline-editing").find(".input-link").val(ui.item.link_url); 
+        $(event.target).val(ui.item.title); 
+        $(event.target).closest('.inline-editing').find(".input-id").val(ui.item.id); 
+        return false;
+      } 
+      , search : function(event) {
+        $(event.target).closest('.inline-editing').find(".input-id").val(""); 
+        $(event.target).closest(".inline-editing").find(".input-link").val(""); 
+      } 
+  }});
+$.widget.bridge("pbc_autocomplete_documents", $.pbc.autocomplete_documents);
+
 $(function() {
     // Trigger controller load when collapsed container is expanded
     $(document.body).on("show", ".pbc-responses-container", function(ev) {
