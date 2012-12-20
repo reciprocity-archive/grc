@@ -4,15 +4,19 @@
  */
 
 [class^="grcicon-"] {
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    line-height: 16px;
-    vertical-align: top; //necessary or button with icon embedded will sometimes be to tall.
-    background-image: url("/images/grcicons/grc-sprite-all.png");    
-    background-position: -2000px -2000px; // blank default state 
-    background-repeat: no-repeat;
-    @include background-size(256px 256px);
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  vertical-align: top; //necessary or button with icon embedded will sometimes be to tall.
+  background-image: url("/images/grcicons/grc-sprite-all.png");    
+  background-position: -2000px -2000px; // blank default state 
+  background-repeat: no-repeat;
+  @include background-size(256px 256px);
+  .btn-nano & {
+    width:12px;
+    height:12px;
+  }
 }
 
 .grcicon-sortUp             { background-position:-22px -2px; }
@@ -49,6 +53,13 @@
 .grcicon-import-white       { background-position:-3px -28px; }
 .grcicon-gears              { background-position:-3px -58px; }
 .grcicon-play-white         { background-position:-3px -88px; }
+
+.btn-nano {
+  .grcicon-x-grey           { background-position:-42px -112px;}
+  .grcicon-edit-grey        { background-position:-42px -94px; }
+  .grcicon-link             { background-position:-24px -76px; }
+}
+
 
 .calendar {
   background-image: url("../images/icons/icon-calendar-inline.png");
