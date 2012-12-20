@@ -14,14 +14,16 @@
         <span class="pbc-counter{{^system.object_documents.length}} empty{{/system.object_documents.length}}">
           {{#if_equals type_name 'Documentation'}}
           <i class="grcicon-document"></i>
+          {{system.object_documents.length}}
           {{/if_equals}}
           {{#if_equals type_name 'Population Sample'}}
           <i class="grcicon-populationsample"></i>
+          0
           {{/if_equals}}
           {{#if_equals type_name 'Interview'}}
           <i class="grcicon-calendar"></i>
+          0
           {{/if_equals}}
-          {{system.object_documents.length}}
         </span>
       </div>
       <div class="span1 pbc-item pbc-actions">
@@ -36,13 +38,13 @@
           <strong>Process Description</strong>
         </label>
         <p class="full-view">
-          {{{system.description || ''}}}
+          {{{system.description}}}
         </p>
         <label>
           <strong>Process Notes</strong>
         </label>
         <p class="full-view">
-          {{system.notes || ''}}
+          {{system.notes}}
         </p>
       </div>
       <div class="span3">
@@ -55,7 +57,7 @@
             <a class="btn btn-nano pull-right remove_person" href="javascript://">
               <i class="grcicon-x-grey"></i>
             </a>
-            <a href="javascript://" class="edit-person">{{person.name || ''}} {{#role}}({{.}}){{/role}}</a>
+            <a href="javascript://" class="edit-person">{{person.name}} {{#role}}({{.}}){{/role}}</a>
           </li>
           {{/system.object_people}}
           <li class="inline-editing inline-add-person hide" data-system-id="{{system.id}}">

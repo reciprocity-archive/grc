@@ -47,6 +47,12 @@ can.Model.Cacheable("CMS.Models.Person", {
         //     }
         // });
 
+        var that = this;
+
+        this.each(function(value, name) {
+          if (value === null)
+            that.removeAttr(name);
+        });
     }
 });
 
@@ -74,11 +80,18 @@ can.Model.Cacheable("CMS.Models.ObjectPerson", {
     init : function() {
         var _super = this._super;
         function reinit() {
+            var that = this;
+
             typeof _super === "function" && _super.call(this);
             this.attr(
                 "person"
                 , CMS.Models.Person.findInCacheById(this.person_id) 
                 || new CMS.Models.Person(this.person && this.person.serialize ? this.person.serialize() : this.person)); 
+
+            this.each(function(value, name) {
+              if (value === null)
+              that.removeAttr(name);
+            });
         }
 
         this.bind("created", can.proxy(reinit, this));

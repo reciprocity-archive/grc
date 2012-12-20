@@ -25,7 +25,7 @@ can.Model.Cacheable("CMS.Models.System", {
     }
     , init : function() {
         this._super && this._super();
-        var that = this;
+
         CMS.Models.ObjectPerson.bind("created", function(ev, obj_person) {
             var sys = that.findInCacheById(obj_person.personable_id); //"this" is Cacheable.  WTF?
             if(sys) {
@@ -75,5 +75,9 @@ can.Model.Cacheable("CMS.Models.System", {
             that.attr(collection, list);
         });
 
+        this.each(function(value, name) {
+          if (value === null)
+            that.removeAttr(name);
+        });
     }
 });

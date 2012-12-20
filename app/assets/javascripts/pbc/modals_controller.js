@@ -23,6 +23,7 @@ can.Control("CMS.Controllers.PBCModals", {
 
     , '.pbc-add-response > a modal:success' : function(el, e, data) {
       var $this = $(el)
+        , $input = $this.closest('.pbc-add-response').find('.pbc-system-search')
         , resp = new CMS.Models.Response()
         ;
       resp.attr({
@@ -30,6 +31,9 @@ can.Control("CMS.Controllers.PBCModals", {
         , system_id: data.id
       });
       resp.save();
+
+      $input.val('');
+      $this.closest('.collapse').collapse('hide');
     }
 
     , 'a.system-edit modal:success' : function(el, e, data) {
@@ -55,13 +59,13 @@ can.Control("CMS.Controllers.PBCModals", {
           // FIXME: Brad, fix this if/when Requests are live-bound
           $this.closest('.pbc-control').find('.item').text(control_data.slug);
             //find this control
-            var $ca = $(".pbc-control-assessments .pbc-ca-item[data-type=ControlAssessment][data-id=" + control_data.id + "]");
+            var $ca = $(".pbc-control-assessments .pbc-ca-item[data-type=ControlAssessment][data-control-id=" + control_data.id + "]");
 
             // case 1: control exists -- no action needed
             if(!$ca.length) {
               // case 2: control does not exist
               $(".pbc-control-assessments").append(can.view("/pbc/control_assessment.mustache", control_data));
-              $ca = $(".pbc-control-assessments .pbc-ca-item[data-id=" + control_data.id + "]");
+              $ca = $(".pbc-control-assessments .pbc-ca-item[data-control-id=" + control_data.id + "]");
             }
             el.closest(".pbc-requests > .main-item").detach().appendTo($ca.find(".pbc-requests"));
             $ca.find(".pbc-ca-title .expander, .pbc-ca-content").addClass("in")
