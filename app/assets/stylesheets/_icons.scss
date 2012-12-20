@@ -89,3 +89,20 @@
     background-position:-40px -56px;
   }
 }
+
+.expander {
+  position:relative;
+  background-image:url("/images/grcicons/grc-sprite-all.png");
+  float:left;
+  display: inline-block;
+  @include background-size(256px 256px);
+  width: 16px;
+  height: 16px;
+  padding: 0 0 0 0;
+  margin: 6px 4px 0 0;
+  background-position:-56px -56px;
+  cursor:pointer;
+  &.in {
+    background-position:-74px -1px;
+  }
+}
