@@ -15,8 +15,6 @@
     @include background-size(256px 256px);
 }
 
-// correct icon sprites
-
 .grcicon-sortUp             { background-position:-22px -2px; }
 .grcicon-sortDown           { background-position:-22px -22px; }
 .grcicon-questionmark-grey  { background-position:-22px -92px; }
@@ -70,6 +68,7 @@
   margin: 6px 0 0 0;
   cursor:pointer;
   background-position:-22px -110px;
+  
   &.process {
     background-position:-22px -110px;
   }

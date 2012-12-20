@@ -4,6 +4,6 @@
       No descriptors attached
   -sc.control.evidence_descriptors.each do |desc|
     =link_to url_for(:action => :new_gdoc, :system_id => sc.system.id, :control_id => sc.control.id, :descriptor_id => desc.id, :format => :html), :title => desc.description, :class => "button", :remote => true do
-      %img.tree{:src => "/images/grcicons/add.png"}
+      Add
       =desc.title
     
