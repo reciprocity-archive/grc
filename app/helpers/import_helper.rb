@@ -87,8 +87,13 @@ module ImportHelper
     person = attrs.delete(key)
     existing = object.object_people.detect {|x| x.role == role}
 
-    if existing && existing.person != person
-      existing.destroy
+    if existing
+      if existing.person != person
+        existing.destroy
+      else
+        # Already there
+        return
+      end
     end
 
     if person
@@ -120,7 +125,7 @@ module ImportHelper
         system = System.find_or_create_by_slug({:slug => slug, :title => slug, :infrastructure => false})
         system
       end
-      object.systems = systems
+      object.systems = systems.uniq
     end
   end
 
@@ -140,7 +145,7 @@ module ImportHelper
         system = System.find_or_create_by_slug({:slug => slug, :title => slug, :infrastructure => false})
         system
       end
-      object.sub_systems = systems
+      object.sub_systems = systems.uniq
     end
   end
 
