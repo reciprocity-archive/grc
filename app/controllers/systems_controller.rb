@@ -158,7 +158,7 @@ class SystemsController < BaseObjectsController
       org_groups = attrs.delete('org_groups')
       handle_import_documents(system, attrs, 'references')
 
-      handle_option(attrs, 'network_zone', import[:warnings], :network_zone)
+      handle_option(attrs, 'network_zone', import[:warnings][i], :network_zone)
       
       append_notes = attrs.delete('append_notes')
       if append_notes
