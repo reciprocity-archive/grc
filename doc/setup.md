@@ -141,7 +141,7 @@ You have RVM, right?  Do this:
     cp config/database.yml{.dist,}
 
     # Initialize database
-    bundle exec rake db:migrate
+    bundle exec rake db:schema:load
     bundle exec rake db:seed
 
     # Run tests and cross fingers
