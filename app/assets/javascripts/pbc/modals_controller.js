@@ -54,10 +54,20 @@ can.Control("CMS.Controllers.PBCModals", {
         }, function(data) {
           // FIXME: Brad, fix this if/when Requests are live-bound
           $this.closest('.pbc-control').find('.item').text(control_data.slug);
+            //find this control
+            var $ca = $(".pbc-control-assessments .pbc-ca-item[data-type=ControlAssessment][data-id=" + control_data.id + "]");
 
-          // FIXME: Brad - we may want to eventually avoid refreshing the page here.
-          window.location.assign(window.location.href.replace(/#.*/, ''));
-      });
+            // case 1: control exists -- no action needed
+            if(!$ca.length) {
+              // case 2: control does not exist
+              $(".pbc-control-assessments").append(can.view("/pbc/control_assessment.mustache", control_data));
+              $ca = $(".pbc-control-assessments .pbc-ca-item[data-id=" + control_data.id + "]");
+            }
+            el.closest(".pbc-requests > .main-item").detach().appendTo($ca.find(".pbc-requests"));
+            $ca.find(".pbc-ca-title .expander, .pbc-ca-content").addClass("in")
+            // sweep for newly empty control assessments and delete.
+            $(".pbc-control-assessments .pbc-ca-item:not(:has(.main-item))").remove();
+        });
     }
 
     , '.pbc-control-select > a modal:select' : function(el, e, control_data) {

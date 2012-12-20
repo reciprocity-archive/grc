@@ -1,0 +1,33 @@
+<li class="pbc-ca-item" data-id="{{id}}" data-sort-control-code="{{slug}}" data-type="ControlAssessment">
+    <div class="pbc-ca-title">
+      <div class="row-fluid">
+        <div class="span3" data-target="#control_assessment-{{id}}" data-toggle="collapse">
+          <div class="expander in"></div>
+          <strong>{{slug}}</strong>
+        </div>
+        <div class="span5">
+          {{title}}
+        </div>
+        <div class="span1">
+          <a class="btn btn-mini rotate_control_assessment" data-method="post" data-placement="top" data-remote="" href="/control_assessments/{{id}}/rotate?control_assessment%5Binternal_tod%5D=toggle" rel="tooltip" title="Internal: Test of Design">
+            <i class="grcicon-blank"></i>
+          </a>
+          <a class="btn btn-mini rotate_control_assessment" data-method="post" data-placement="top" data-remote="" href="/control_assessments/{{id}}/rotate?control_assessment%5Binternal_toe%5D=toggle" rel="tooltip" title="Internal: Test of Implementation">
+            <i class="grcicon-blank"></i>
+          </a>
+        </div>
+        <div class="span1">
+          <a class="btn btn-mini rotate_control_assessment" data-method="post" data-placement="top" data-remote="" href="/control_assessments/{{id}}/rotate?control_assessment%5Bexternal_tod%5D=toggle" rel="tooltip" title="External: Test of Design">
+            <i class="grcicon-blank"></i>
+          </a>
+          <a class="btn btn-mini rotate_control_assessment" data-method="post" data-placement="top" data-remote="" href="/control_assessments/{{id}}/rotate?control_assessment%5Bexternal_toe%5D=toggle" rel="tooltip" title="External: Test of Implementation">
+            <i class="grcicon-blank"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="pbc-ca-content in collapse" id="control_assessment-{{id}}" style="height: auto;">
+      <ul class="pbc-requests">
+      </ul>
+    </div>
+  </li>
