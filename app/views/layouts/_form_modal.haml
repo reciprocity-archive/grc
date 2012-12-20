@@ -35,4 +35,4 @@
       %a.btn.btn-large.btn-primary{:'data-toggle' => 'modal-submit', :href => '#' } Save
       -approve_path = yield_content!(:modal_approve_path)
       -if !approve_path.blank?
-        %a.btn.btn-large.btn-success.disabled{:'data-toggle' => 'modal-approve', :href => '#', :disabled => 'disabled'} Approve
+        %a.btn.btn-large.btn-success.btn-primary.disabled{:'data-toggle' => 'modal-approve', :href => '#', :disabled => 'disabled'} Approve
