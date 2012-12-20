@@ -135,11 +135,13 @@ td {
   }
   .btn-nano {
     i {
-      @include background-size(12px 12px);
+//      @include background-size(12px 12px);
       width:12px;
       height:12px;
+      margin-top:-3px;
+      margin-left:-3px;
     }
-    margin-bottom:6px;
+//    margin-bottom:6px;
   }
 
   &.i-control {
