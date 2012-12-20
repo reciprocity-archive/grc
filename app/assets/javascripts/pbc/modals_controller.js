@@ -46,6 +46,24 @@ can.Control("CMS.Controllers.PBCModals", {
       system.attr(data);
     }
 
+    , ".delete-reponse click" : function(el, ev) {
+      this.selected_response_id = el.closest("[data-id]").data("id");
+    }
+
+    , "a[data-method=delete] click" : function(el, ev) {
+      var modal = el.closest(".modal")
+      , options = modal.data("modal_form").options;
+
+      el.addClass("disabled");
+
+      CMS.Models.Response.findInCacheById(options.id).destroy()
+        .then(function() {
+          modal.modal_form("hide");
+        });
+      ev.preventDefault();
+      ev.stopPropagation();
+    }
+
     , '.pbc-control > a modal:select' : function(el, e, control_data) {
       var $this = $(el)
         , request_id = $this.closest('li[data-filter-id]').data('filter-id')

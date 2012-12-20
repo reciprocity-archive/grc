@@ -19,7 +19,7 @@ can.Model.Cacheable("CMS.Models.Response", {
     }
 
     , findAll : "GET /responses.json"
-
+    , destroy : "DELETE /responses/{id}.json"
 }, {
 
     init : function() {
