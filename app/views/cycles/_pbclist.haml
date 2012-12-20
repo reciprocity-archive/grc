@@ -20,6 +20,6 @@
   %a.item-link{ :href => flow_pbc_list_path(pbc_list.id) }
     .item
       .row-fluid
-        .span3=pbc_list.list_import_date && pbc_list.list_import_date.strftime('%m/%d/%Y')
-        .span4=pbc_list.audit_firm
-        .span5=pbc_list.title
+        .span3=(pbc_list.list_import_date && pbc_list.list_import_date.strftime('%m/%d/%Y')) || '&nbsp'.html_safe
+        .span4=pbc_list.audit_firm || '&nbsp;'.html_safe
+        .span5=pbc_list.title || '&nbsp;'.html_safe

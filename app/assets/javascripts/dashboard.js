@@ -357,7 +357,7 @@ jQuery(function($) {
       if ($elem.val() == 'any' || $elem.val() == '')
         return;
 
-      if (filter_attr == 'type' || filter_attr == 'status') {
+      if (filter_attr == 'type-name' || filter_attr == 'status') {
         filter_func = function($el) {
           return (
             ($el.data('filter-' + filter_attr) == filter_value) &&
