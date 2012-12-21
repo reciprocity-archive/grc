@@ -23,4 +23,34 @@ class Option < ActiveRecord::Base
     t = arel_table
     where(t[:role].matches(q))
   end
+
+  ROLES = [
+    "asset_type",
+    "audit_duration",
+    "audit_frequency",
+    # "control_type",
+    "control_kind",
+    "control_means",
+    "document_status",
+    "document_type",
+    "document_year",
+    "entity_kind",
+    "entity_type",
+    "language",
+    "location_kind",
+    "location_type",
+    "network_zone",
+    "person_language",
+    "product_kind",
+    "product_type",
+    "program_kind",
+    "program_type",
+    "reference_type",
+    "request_type",
+    # "system_type",
+    "system_kind",
+    "threat_type",
+    "verify_frequency",
+    "verify_frequency"
+  ]
 end

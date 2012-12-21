@@ -87,8 +87,13 @@ module ImportHelper
     person = attrs.delete(key)
     existing = object.object_people.detect {|x| x.role == role}
 
-    if existing && existing.person != person
-      existing.destroy
+    if existing
+      if existing.person != person
+        existing.destroy
+      else
+        # Already there
+        return
+      end
     end
 
     if person
@@ -105,8 +110,8 @@ module ImportHelper
 
     if category_string.present?
       names = strip_split(category_string)
-      categories = names.map {|category| Category.find_or_create_by_name({:name => category, :scope_id => category_scope_id})}
-      object.categories = object.categories + categories
+      categories = names.map {|category| Category.find_or_create_by_name_and_scope_id({:name => category, :scope_id => category_scope_id})}
+      object.categories = (object.categories + categories).uniq
     end
   end
 
@@ -120,7 +125,7 @@ module ImportHelper
         system = System.find_or_create_by_slug({:slug => slug, :title => slug, :infrastructure => false})
         system
       end
-      object.systems = systems
+      object.systems = systems.uniq
     end
   end
 
@@ -140,7 +145,7 @@ module ImportHelper
         system = System.find_or_create_by_slug({:slug => slug, :title => slug, :infrastructure => false})
         system
       end
-      object.sub_systems = systems
+      object.sub_systems = systems.uniq
     end
   end
 
@@ -199,12 +204,13 @@ module ImportHelper
     end
   end
 
-  def handle_option(attrs, name, messages, role = nil)
+  def handle_option(attrs, name, warnings, role = nil)
     role ||= name.to_sym
     if attrs[name]
       value = Option.where(:role => role, :title => attrs[name]).first
       if value.nil?
-        messages << "Unknown #{role} option '#{attrs[name]}'"
+        warnings[name.to_sym] ||= []
+        warnings[name.to_sym] << "Unknown #{role} option '#{attrs[name]}'"
       end
       attrs[name] = value
     end

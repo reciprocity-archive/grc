@@ -1,9 +1,9 @@
 -# locals: object
 -all_object_documents = object.object_documents.all
 
-.row-fluid
+.row-fluid.js-list-container-title
   .span10
-    %h3.toggle.js-list-container-title{"data-target" => "#referenceListCollapse", "data-toggle" => "collapse"}
+    %h3.toggle{"data-target" => "#referenceListCollapse", "data-toggle" => "collapse"}
       .expander
       References
       %span{:class => "grc-badge #{all_object_documents.count.zero? ? "no-object" : ""}"}=all_object_documents.count
@@ -13,7 +13,6 @@
 
 .collapse#referenceListCollapse
   .bootstrap-collapse-bugfix
-
 
   %script#reference_list_item{ :type => 'text/html', :'data-member' => 'object_document'}
     %li.controlSlot{ :'data-id' => '<%= document.id %>' }

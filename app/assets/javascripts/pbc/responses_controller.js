@@ -34,6 +34,11 @@ can.Control("CMS.Controllers.Responses", {
             can.Model.Cacheable.prototype.addElementToChildList.call(this.options.observer, "list", response);
         }
     }
+    , "{model} destroyed" : function(Model, ev, response) {
+        if(response.request_id === this.options.id) {  
+            can.Model.Cacheable.prototype.removeElementFromChildList.call(this.options.observer, "list", response);
+        }
+    }
     , ".remove_person, .remove_document click" : function(el, ev) {
         el.closest("[data-model]").data("model").destroy();
     }

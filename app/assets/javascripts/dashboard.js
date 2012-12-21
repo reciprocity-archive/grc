@@ -56,7 +56,8 @@ jQuery(function($) {
   // Turn the arrow when tree node content is shown
   $('body').on('click', '[data-toggle="collapse"]', function(e) {
     var $this = $(this)
-      , $expander = $this.find('.expander').eq(0)
+      , $expander_container = $this.closest(':has(.expander)')
+      , $expander = $expander_container.find('.expander').eq(0)
       , $target = $($this.data('target'))
       ;
 
@@ -357,7 +358,7 @@ jQuery(function($) {
       if ($elem.val() == 'any' || $elem.val() == '')
         return;
 
-      if (filter_attr == 'type' || filter_attr == 'status') {
+      if (filter_attr == 'type-name' || filter_attr == 'status') {
         filter_func = function($el) {
           return (
             ($el.data('filter-' + filter_attr) == filter_value) &&
@@ -447,7 +448,7 @@ jQuery(function($) {
 
 jQuery(function($) {
   // Used in object_list sidebars (References, People, Categories)
-  $('body').on('modal:success', '.js-list-container-title > a', function(e, data) {
+  $('body').on('modal:success', '.js-list-container-title a', function(e, data) {
     var $this = $(this)
       , $title = $this.closest('.js-list-container-title')
       , $span = $title.find('span')
@@ -461,8 +462,7 @@ jQuery(function($) {
       $span.addClass('no-object');
 
     if (!$expander.hasClass('in')) {
-      $($title.data('target')).collapse('show');
-      $expander.addClass('in');
+      $expander.click();
     }
   });
 });

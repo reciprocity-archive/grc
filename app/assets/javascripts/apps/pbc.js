@@ -44,7 +44,7 @@ $.widget(
         , _renderItem : function( ul, item ) {
             return $( "<li class='something'>" )
                 .data( "item.autocomplete", item )
-                .append( "<a>" + item.label + "</a>" )
+                .append( "<a>"+ item.name + " (" + item.label + ")</a>" )
                 .appendTo( ul );
         }
 
@@ -59,7 +59,7 @@ $.widget(
       source : CMS.Models.Person.search
       , select :  function(event, ui) { 
         $(event.target).closest(".inline-editing").find(".input-name").val(ui.item.name); 
-        $(event.target).val(ui.item.email); 
+        $(event.target).closest(".inline-editing").find(".input-ldap").val(ui.item.email); 
         $(event.target).closest('.inline-editing').find(".input-id").val(ui.item.id); 
         return false;
       } 

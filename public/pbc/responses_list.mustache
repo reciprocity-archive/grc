@@ -71,7 +71,7 @@
                   <input class="span12 input-ldap" name="ldap" placeholder="LDAP ID" type="text" {{ (el) -> el.pbc_autocomplete_people() }}>
                 </div>
                 <div class="span6">
-                  <input class="span12 input-name" name="name" placeholder="Name" type="text">
+                  <input class="span12 input-name" name="name" placeholder="Name" type="text" {{ (el) -> el.pbc_autocomplete_people() }}>
                 </div>
                 <input type="hidden" name="id" class="input-id">
               </div>
@@ -173,7 +173,7 @@
         <a class="btn btn-mini" href="/systems/{{system.id}}">
           <i class="grcicon-arrowright-grey"></i>
         </a>
-        <a class="btn btn-mini" href="/responses/{{id}}/delete" data-toggle="modal-ajax-deleteform" title="Delete response" rel="tooltip" data-placement="left">
+        <a class="btn btn-mini delete-response" href="/responses/{{id}}/delete" data-toggle="modal-ajax-form" title="Delete response" rel="tooltip" data-placement="left" data-id="{{id}}">
           <i class="grcicon-x-grey"></i>
         </a>
       </div>
