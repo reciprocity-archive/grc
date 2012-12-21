@@ -51,7 +51,7 @@
         %label Code
         %input.span12{:disabled => "disabled", :type => "text", :value => program.slug }
       .span8
-        %label Type
+        %label Kind
         %select.span12{:disabled => "disabled" }
           %option{ :selected => 'selected' }
             =program.kind && program.kind.title
