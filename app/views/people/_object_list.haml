@@ -1,9 +1,9 @@
 -# locals: object
 -all_object_people = object.object_people.all
 
-.row-fluid
+.row-fluid.js-list-container-title
   .span10
-    %h3.toggle.js-list-container-title{"data-target" => "#personListCollapse", "data-toggle" => "collapse"}
+    %h3.toggle{"data-target" => "#personListCollapse", "data-toggle" => "collapse"}
       .expander
       People
       %span{:class => "grc-badge #{all_object_people.count.zero? ? "no-object" : ""}"}=all_object_people.count
