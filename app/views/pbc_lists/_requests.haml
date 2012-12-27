@@ -60,6 +60,8 @@
             %li.main-item{ html_data_attributes(request, "data-filter-", [ ["type-id", "type_id"], ["type-name", "type_name"], "status", ["date-requested", "date_requested.to_date"], ["control-code", "control.slug"], ["person", "persons_responsible"], "id" ]) }
               .row-fluid.pbc-item-head
                 .span3.pbc-item.pbc-control
+                  .request-icon
+                    %i{"rel" => "tooltip", "data-placement" => "top", "title" => "#{request.type_name} Request", "class" => request_type_icon(request.type_name) }
                   %a.btn.btn-mini.pull-right{:href => flow_controls_path(:list_select => 1), :'data-toggle' => 'modal-ajax-single-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#referenceList', :'data-modal-class' => 'modal-slim' }
                     %i.grcicon-link
                   .item.i-control
@@ -70,16 +72,13 @@
                     -else
                       No control selected
                 .span3.pbc-request{ "data-target" => ".#{request_collapse_class}", "data-toggle" => "collapse"}
-                  %h6
-                    %i{ :class => request_type_icon(request.type_name) }
-                    =request.type_name
-                .span3{ "data-target" => ".#{request_collapse_class}", "data-toggle" => "collapse"}
+                .span2{ "data-target" => ".#{request_collapse_class}", "data-toggle" => "collapse"}
                   &nbsp;
                 .span2.pbc-status
                   %select.span12
                     -Request.statuses.each do |status|
                       %option{ :selected => request.status == status }=status
-                .span1.pbc-response-actions
+                .span2.pbc-response-actions
                   %a#tooltip16.btn.btn-blue.btn-mini{"rel" => "tooltip", "data-placement" => "left", "title" => "More", "data-target" => ".#{request_collapse_class}", "data-toggle" => "collapse"}
                     %i.grcicon-more
               .row-fluid.collapse{ :class => request_collapse_class }
@@ -96,17 +95,13 @@
                   %h5 Notes
                   %p=raw request.notes
                 .span2.pbc-item.pbc-status
-                  -#%h5 Status of Request
-                  -#%select.span12
-                    -Request.statuses.each do |status|
-                      %option{ :selected => request.status == status }=status
+                  %h5 Contacts
                   %p
                     %strong Company:
                     =request.company_responsible
                     %br
                     %strong Auditor:
                     =request.auditor_responsible
-
                   %p.subtle
                     %strong Requested:
                     =request.date_requested && request.date_requested.strftime('%m/%d/%Y')

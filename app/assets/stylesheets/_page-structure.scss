@@ -200,6 +200,7 @@ ul.pbc-requests {
 .pbc-control {
   .item {
     margin-right:26px;
+    margin-left:24px;
     margin-bottom:14px;
   }
 }
@@ -259,4 +260,13 @@ ul.pbc-requests {
   .expander {
     margin:1px 6px 0 0;
   }
+}
+
+.request-icon {
+  @include opacity(0.3);
+  padding-top:3px;
+  float:left;
+  &:hover {
+    @include opacity(0.5);
+  };
 }
