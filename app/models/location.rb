@@ -22,7 +22,8 @@ class Location < ActiveRecord::Base
     :presence => { :message => "needs a value" }
 
   @valid_relationships = [
-    { :both => Location, :via => :location_is_dependent_on_location },
+    { :to   => Location, :via => :location_is_dependent_on_location },
+    { :from => Location, :via => :location_is_dependent_on_location },
     { :from => Market,   :via => :market_is_dependent_on_location },
     { :from => OrgGroup, :via => :org_group_has_province_over_location },
     { :from => OrgGroup, :via => :org_group_is_dependent_on_location },

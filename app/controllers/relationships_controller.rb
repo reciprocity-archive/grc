@@ -36,10 +36,10 @@ class RelationshipsController < BaseMappingsController
       relationships_with_object = @objects.includes(:destination, :source).map do |o|
         obj = o.as_json
         if o.source_type == params[:object_type] &&
-            o.source_id == params[:object_id]
-          related = o.source.as_json(:root => false)
-        else
+            o.source_id == params[:object_id].to_i
           related = o.destination.as_json(:root => false)
+        else
+          related = o.source.as_json(:root => false)
         end
         obj["relationship"]["object"] = related
         obj
@@ -52,7 +52,6 @@ class RelationshipsController < BaseMappingsController
   def related_objects
     obj_type = params[:otype]
     obj_id = params[:oid]
-    obj_end = params[:obj_end]
     related_model = params[:related_model]
     obj = obj_type.constantize.find(obj_id)
 
@@ -77,16 +76,17 @@ class RelationshipsController < BaseMappingsController
       if vr[:related_model].to_s == related_model
         result = {}
 
-        relationship_type = RelationshipType.find_by_relationship_type(vr[:relationship_type])
+        #relationship_type = RelationshipType.find_by_relationship_type(vr[:relationship_type])
+        relationship_type = DefaultRelationshipTypes.types[vr[:relationship_type]]
 
         if (vr[:related_model_endpoint].to_s == "both") and
           (related_model == obj_type) and
-          (relationship_type.forward_phrase == relationship_type.backward_phrase)
+          (relationship_type[:symmetric])
           # A symmetric relationship is where the related model is the same model
           # as the object, and the forwards and backwards descriptions are the same.
           # In that case, we combine both the source and destination results.
           if !relationship_type.nil?
-            relationship_title = "#{related_model.to_s.pluralize.titleize} #{relationship_type.forward_phrase} this #{obj.class.to_s.titleize}"
+            relationship_title = "#{related_model.to_s.pluralize.titleize} #{relationship_type[:forward_phrase]} this #{obj.class.to_s.titleize}"
           else
             relationship_title = "#{vr[:relationship_type]}:source"
           end
@@ -95,12 +95,12 @@ class RelationshipsController < BaseMappingsController
                 :object_id => obj.id,
                 :object_type => obj.class.to_s,
                 :relationship_type => vr[:relationship_type],
-                :related_side => 'destination',
+                :related_side => vr[:related_model_endpoint],
                 :related_model => related_model)
 
           # First add the related_is_source set
           rels = related_is_source.select do |rel|
-            rel.relationship_type == relationship_type
+            rel.relationship_type_id == relationship_type[:relationship_type]
           end
 
           objects = Set.new
@@ -110,7 +110,7 @@ class RelationshipsController < BaseMappingsController
 
           # Also add the related_is_dest set.
           rels = related_is_dest.select do |rel|
-            rel.relationship_type == relationship_type
+            rel.relationship_type_id == relationship_type[:relationship_type]
           end
 
           rels.each do |rel|
@@ -120,14 +120,14 @@ class RelationshipsController < BaseMappingsController
           @results.push({
             :relationship_type_id => vr[:relationship_type],
             :relationship_title => relationship_title,
-            :relationship_description => relationship_type ? relationship_type.description : "Unknown relationship type",
+            :relationship_description => relationship_type ? relationship_type[:description] : "Unknown relationship type",
             :edit_url => edit_url,
             :objects => objects,
           })
         else
           if ["source", "both"].include? vr[:related_model_endpoint].to_s
             if !relationship_type.nil?
-              relationship_title = "#{related_model.to_s.pluralize.titleize} #{relationship_type.forward_phrase} this #{obj.class.to_s.titleize}"
+              relationship_title = "#{related_model.to_s.pluralize.titleize} #{relationship_type[:forward_phrase]} this #{obj.class.to_s.titleize}"
             else
               relationship_title = "#{vr[:relationship_type]}:source"
             end
@@ -140,19 +140,19 @@ class RelationshipsController < BaseMappingsController
                   :related_model => related_model)
 
             rels = related_is_source.select do |rel|
-              rel.relationship_type == relationship_type
+              rel.relationship_type_id == relationship_type[:relationship_type]
             end
             @results.push({
               :relationship_type_id => vr[:relationship_type],
               :relationship_title => relationship_title,
-              :relationship_description => relationship_type ? relationship_type.description : "Unknown relationship type",
+              :relationship_description => relationship_type ? relationship_type[:description] : "Unknown relationship type",
               :edit_url => edit_url,
               :objects => rels.map {|rel| rel.source},
             })
           end
           if ["destination", "both"].include? vr[:related_model_endpoint].to_s
             if !relationship_type.nil?
-              relationship_title = "#{related_model.to_s.pluralize.titleize} #{relationship_type.backward_phrase} this #{obj.class.to_s.titleize}"
+              relationship_title = "#{related_model.to_s.pluralize.titleize} #{relationship_type[:backward_phrase]} this #{obj.class.to_s.titleize}"
             else
               relationship_title = "#{vr[:relationship_type]}:dest"
             end
@@ -165,12 +165,12 @@ class RelationshipsController < BaseMappingsController
                   :related_model => related_model)
 
             rels = related_is_dest.select do |rel|
-              rel.relationship_type == relationship_type
+              rel.relationship_type_id == relationship_type[:relationship_type]
             end
             @results.push({
               :relationship_type_id => vr[:relationship_type],
               :relationship_title => relationship_title,
-              :relationship_description => relationship_type ? relationship_type.description : "Unknown relationship type",
+              :relationship_description => relationship_type ? relationship_type[:description] : "Unknown relationship type",
               :edit_url => edit_url,
               :objects => rels.map {|rel| rel.destination},
             })
@@ -280,12 +280,13 @@ class RelationshipsController < BaseMappingsController
     end
 
     def update_object(relationship, params)
-      relationship.relationship_type = RelationshipType.where(
-        :relationship_type => params[:relationship_type]).first
+      #relationship.relationship_type_id = DefaultRelationshipTypes.types[params[:relationship_type]]
+      #relationship.relationship_type = RelationshipType.where(
+      #  :relationship_type => params[:relationship_type]).first
 
-      if relationship.relationship_type.nil?
+      #if relationship.relationship_type.nil?
         relationship.relationship_type_id = params[:relationship_type]
-      end
+      #end
 
       if params[:related_side].present?
         related_type = params[:related_type].constantize

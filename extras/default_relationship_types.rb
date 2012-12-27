@@ -49,7 +49,8 @@ module DefaultRelationshipTypes
       :relationship_type => 'org_group_is_affiliated_with_org_group',
       :description => "Org groups can be affiliated with each other.",
       :forward_phrase =>"affiliated with",
-      :backward_phrase => "affiliated with"
+      :backward_phrase => "affiliated with",
+      :symmetric => true
     },
     {
       :relationship_type => 'org_group_is_dependent_on_location',
@@ -58,10 +59,17 @@ module DefaultRelationshipTypes
       :backward_phrase => "necessary for"
     },
     {
+      :relationship_type => 'product_has_process',
+      :description => "Products have processes.",
+      :forward_phrase =>"has process",
+      :backward_phrase => "is a process of"
+    },
+    {
       :relationship_type => 'product_is_affiliated_with_product',
       :description => "Products can be affiliated with each other.",
       :forward_phrase =>"affiliated with",
-      :backward_phrase => "affiliated with"
+      :backward_phrase => "affiliated with",
+      :symmetric => true
     },
     {
       :relationship_type => 'product_is_dependent_on_location',
@@ -100,6 +108,14 @@ module DefaultRelationshipTypes
       :backward_phrase => "within scope of"
     }
   ]
+
+  def self.types
+    types = HashWithIndifferentAccess.new
+    RELATIONSHIP_TYPES.each do |rt|
+      types[rt[:relationship_type]] = rt
+    end
+    types
+  end
 
   def self.create_and_update
     # This will update existing relationships, useful if you have changed some of the
