@@ -2319,7 +2319,17 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
   font-size: 12px;
 }
 
+/* Necessary to fix mis-aligns in import inputs */
 
+
+select, input[type="file"] {
+  height: auto !important;
+
+}
+
+#upload {
+  position:relative;
+}
 
 /* This set the placement of tab'd content status in the correct place on the widget*/
 
