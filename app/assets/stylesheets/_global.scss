@@ -229,4 +229,12 @@ li.add-new-item {
     padding:1px;
     line-height:12px;
   }
+  &.btn-alert {
+    @include background-image(linear-gradient(top, lighten(#e00, 5%), darken(#e00, 5%)));
+    color:#fff;
+    &:hover {
+      background:lighten(#e00, 5%);
+      @include background-image(linear-gradient(top, darken(#e00, 5%), lighten(#e00, 5%)));
+    }
+  }
 }

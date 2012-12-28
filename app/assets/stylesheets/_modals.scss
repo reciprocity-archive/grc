@@ -37,6 +37,9 @@ h5.in-modal {
   span.version {
     display:none;
   }
+  &.modal-alert {
+    @include background-image(linear-gradient(top,  #555 0%, #444 100%));
+  }
 }
 
 .modal-body {

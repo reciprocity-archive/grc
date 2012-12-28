@@ -1,4 +1,4 @@
-.modal-header
+.modal-header.modal-alert
   %nav
     %a.widgetbtn{ :'data-dismiss' => 'modal', :href => '#'}
       %i.grcicon-x-grey
@@ -21,4 +21,4 @@
       %a.btn.btn-large{:'data-dismiss' => 'modal', :href => '#' } Cancel
     .span6
     %nav.fltrt.txtrt.span3
-      %a.btn.btn-large.btn-primary{ :href => url + '.json', :'data-remote' => 'remote', :'data-method' => 'delete' } Delete
+      %a.btn.btn-large.btn-alert{ :href => url + '.json', :'data-remote' => 'remote', :'data-method' => 'delete' } Delete
