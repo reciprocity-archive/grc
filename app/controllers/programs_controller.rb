@@ -402,16 +402,9 @@ class ProgramsController < BaseObjectsController
   end
 
   def category_controls
-    @category_tree = Category.roots.all.map do |category|
-      branches = category.children.all.map do |subcategory|
-        controls = subcategory.controls.where(:program_id => @program.id).all
-        if !controls.empty?
-          [subcategory, controls]
-        end
-      end.compact
-      if !branches.empty?
-        [category, branches]
-      end
+    categories = Category.ctype(Control::CATEGORY_TYPE_ID).roots.all
+    @category_tree = categories.map do |category|
+      category_controls_tree(@program, category)
     end.compact
 
     uncategorized_controls = Control.
@@ -422,13 +415,29 @@ class ProgramsController < BaseObjectsController
       all
 
     if !uncategorized_controls.empty?
-      @category_tree.push([nil, uncategorized_controls])
+      @category_tree.push([nil, nil, uncategorized_controls])
     end
 
-    render :layout => nil, :locals => { }
+    render :layout => nil
   end
 
   private
+
+    # Construct the category controls tree
+    #   - if neither the current category nor descendants contains controls
+    #     then return nil
+    #   - else return [category, category_controls_tree(category), controls]
+    def category_controls_tree(program, category)
+      controls = category.controls.where(:program_id => program).all
+      children = category.children.all.map do |subcategory|
+        category_controls_tree(program, subcategory)
+      end.compact
+      if controls.size > 0 || children.size > 0
+        [category, children, controls]
+      else
+        nil
+      end
+    end
 
     def delete_model_stats
       [ [ 'Section', @program.sections.count ],

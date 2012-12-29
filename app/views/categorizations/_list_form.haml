@@ -7,7 +7,7 @@
   %li{ :'data-id' => '<%= category.id %>', :'data-name' => '<%= category.name %>', :'data-parent_name' => '<%= category.parent_name %>' }
     .row-fluid
       .span8
-        %span.company <%= category.parent_name %>
+        %span.company <%= category.parent_name || '&nbsp;' %>
         %span.name <%= category.name %>
       .span4.actions
         %a.widgetbtn.pull-right.add-me{:href => "#", :'data-toggle' => 'selector-list-select'}
@@ -16,7 +16,7 @@
           %i.grcicon-edit-grey
 
 %script#category_option_data{ :type => 'text/html' }
-  %span.company <%= category.parent_name %>
+  %span.company <%= category.parent_name || '&nbsp;' %>
   %span.name <%= category.name %>
 
 %script#categorization_selected{ :type => 'text/html', :'data-mappings' => 'object:category', :'data-member' => 'categorization' }

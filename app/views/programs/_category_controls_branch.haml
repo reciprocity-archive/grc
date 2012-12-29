@@ -1,22 +1,31 @@
+-# Requires category, children, controls
+
 -subcategory_content_id = "content_#{rand(36**8).to_s(36)}"
+
 %li
   .row-fluid{ :'data-toggle' => 'collapse', :'data-target' => "##{subcategory_content_id}" }
     .span12
-      .span12.slot.controlslot
+      .span12.slot.categoryslot
         .expander
-        %span.prefix=subcategory ? subcategory.name : 'Uncategorized Controls'
-  %ul.collapse{ :id => subcategory_content_id }
-    -controls.each do |control|
-      -control_content_id = "content_#{rand(36**8).to_s(36)}"
-      %li
-        .row-fluid{ :'data-toggle' => 'collapse', :'data-target' => "##{control_content_id}" }
-          .span12
-            .span12.slot.controlslot
-              .expander
-              %a.widgetbtn.fltrt{ :href => flow_control_path(control), :title => 'View Control' }
-                %i.grcicon-arrowright-grey
-              %span.prefix=control.slug
-              =control.title
-        .row-fluid-slotcontent.collapse{ :id => control_content_id }
-          .span9
-            =raw control.description
+        %span.prefix=category ? category.name : 'Uncategorized Controls'
+  -if controls && controls.size > 0
+    %ul.collapse{ :id => subcategory_content_id }
+      -controls.each do |control|
+        -control_content_id = "content_#{rand(36**8).to_s(36)}"
+        %li
+          .row-fluid{ :'data-toggle' => 'collapse', :'data-target' => "##{control_content_id}" }
+            .span12
+              .span12.slot.controlslot
+                .expander
+                %a.widgetbtn.fltrt{ :href => flow_control_path(control), :title => 'View Control' }
+                  %i.grcicon-arrowright-grey
+                %span.prefix=control.slug
+                =control.title
+          .row-fluid-slotcontent.collapse{ :id => control_content_id }
+            .span9
+              =raw control.description
+  -if children && children.size > 0
+    %ul
+      -children.each do |subcategory, subchildren, subcontrols|
+        =render :partial => 'category_controls_branch',
+                :locals => { :category => subcategory, :children => subchildren, :controls => subcontrols }

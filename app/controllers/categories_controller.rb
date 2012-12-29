@@ -19,7 +19,8 @@ class CategoriesController < BaseObjectsController
     end
     if params[:root].present? && params[:root] == '1'
       @categories = @categories.where(:parent_id => nil)
-    else
+    end
+    if params[:leaves].present? && params[:leaves] == '1'
       @categories = @categories.leaves
     end
     if params[:s]
@@ -48,6 +49,16 @@ class CategoriesController < BaseObjectsController
   end
 
   private
+
+    def delete_model_stats
+      [ [ 'Sub-category', @category.descendants.count ]
+      ]
+    end
+
+    def extra_delete_relationship_stats
+      [ [ 'Control', @category.self_and_descendants.map(&:controls).map(&:all).flatten.uniq.count ]
+      ]
+    end
 
     def new_object
       if params[:scope_id]

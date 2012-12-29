@@ -341,6 +341,7 @@ jQuery(function($) {
       ;
     $cats.empty();
     $.get('/categories', { scope_id: scope_id, root: 1 }, function(data) {
+      $cats.append("<option value=''>&lt;New root object&gt;</option>");
       $.map(data, function(cat, i) {
         $cats.append('<option value="' + cat.category.id + '">' + cat.category.name + '</option>');
       });

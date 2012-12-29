@@ -65,22 +65,20 @@
 
   #assertionlist.span3.well{ :class => error_class(f, :assertions) }
     %label{:for => 'control-assertions'} Assertions
-    -category_list = Control.assertion_tree
+    -assertion_list = Category.ctype(Control::CATEGORY_ASSERTION_TYPE_ID).order('lft ASC').all
     %select{:multiple => "multiple", :name => 'control[assertion_ids][]'}
-      -category_list.each do |category, subcategories|
-        %optgroup{ :label => category.name }
-          -subcategories.each do |subcategory|
-            %option{ :value => subcategory.id, :selected => (f.object.assertion_ids.include?(subcategory.id)) }=subcategory.name
+      -assertion_list.each do |category|
+        %option{ :value => category.id, :selected => (f.object.assertion_ids.include?(category.id)) }
+          #{('&nbsp;&nbsp;&nbsp;' * category.depth).html_safe}#{category.name}
     =error_messages_inline(f, :assertions)
 
   #categorylist.span3.well{ :class => error_class(f, :categories) }
     %label{:for => 'control-categories'} Categories
-    -category_list = Control.category_tree
+    -category_tree = Category.ctype(Control::CATEGORY_TYPE_ID).order('lft ASC').all
     %select{:multiple => "multiple", :name => 'control[category_ids][]'}
-      -category_list.each do |category, subcategories|
-        %optgroup{ :label => category.name }
-          -subcategories.each do |subcategory|
-            %option{ :value => subcategory.id, :selected => (f.object.category_ids.include?(subcategory.id)) }=subcategory.name
+      -category_tree.each do |category|
+        %option{ :value => category.id, :selected => (f.object.category_ids.include?(category.id)) }
+          #{('&nbsp;&nbsp;&nbsp;' * category.depth).html_safe}#{category.name}
     =error_messages_inline(f, :categories)
 
 .row-fluid

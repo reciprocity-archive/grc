@@ -1,14 +1,22 @@
 -expanded = false #unless local_assigns.has_key?(:expanded)
 
 =walk_slug_tree(Program.slugtree(sections)) do |item, step|
+  -consolidated_controls = item.consolidated_controls
+  -controls = item.controls.all
+  -expand_this = consolidated_controls.size > 0 || controls.size > 0
+  -toggle_target = expand_this ? "content_system_#{item.id}" : ''
+
   %li.system-node
     .row-fluid
       .span12
-        .span12.slot.regulationslot{ :'data-toggle' => 'collapse', :'data-target' => "#content_system_#{item.id}" }
-          .expander{ :class => expanded && 'in' }
+        .span12.slot.regulationslot{ :'data-toggle' => 'collapse', :'data-target' => "##{toggle_target}" }
+          -if expand_this
+            .expander{ :class => expanded && 'in' }
+          -else
+            .enddot
           %span.prefix=item.slug
           =item.title
-    %ul.collapse{ :class => expanded && 'in', :id => "content_system_#{item.id}" }
+    %ul.collapse{ :class => expanded && 'in', :id => "#{toggle_target}" }
       =walk_slug_tree(Program.slugtree(item.consolidated_controls)) do |item, step|
         -content_id = "content_#{rand(36**8).to_s(36)}"
         .row-fluid

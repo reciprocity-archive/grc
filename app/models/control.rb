@@ -161,11 +161,4 @@ class Control < ActiveRecord::Base
     p ? p.person.email : ''
   end
 
-  def self.category_tree
-    Category.ctype(CATEGORY_TYPE_ID).roots.all.map { |c| [c, c.children.all] }
-  end
-
-  def self.assertion_tree
-    Category.ctype(CATEGORY_ASSERTION_TYPE_ID).roots.all.map { |c| [c, c.children.all] }
-  end
 end

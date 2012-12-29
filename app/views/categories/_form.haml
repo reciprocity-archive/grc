@@ -23,6 +23,7 @@
     %label Type
     .controls
       %select(name='category[parent_id]')
+        %option{ :value => '' } &lt;New root object&gt;
         -categories = Category.where(:parent_id => nil)
         -if f.object.scope_id.present?
           -categories = categories.where(:scope_id => f.object.scope_id)

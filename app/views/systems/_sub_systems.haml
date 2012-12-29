@@ -12,5 +12,5 @@
   %a.btn.widgettextbtn{ :href => list_edit_flow_system_controls_path(:system_id => system.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :title => 'Edit Controls', :'data-modal-class' => 'modal-wide' }
     Edit Controls
 
-%ul.slugtree
+%ul.slotlist
   =render :partial => 'sub_system_branch', :locals => { :systems => [system] }
