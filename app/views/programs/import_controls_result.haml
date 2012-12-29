@@ -41,7 +41,6 @@
           %th Code
           %th Title
           %th Description
-          %th Type
           %th Kind
           %th Means
           %th Version
@@ -59,7 +58,7 @@
           %th Active
           %th Fraud Related
       %tbody
-        -columns = %w(slug title description type kind means version start_date stop_date url systems_display categories_display assertions_display documentation_description verify_frequency references_display operator_display key_control active fraud_related)
+        -columns = %w(slug title description kind means version start_date stop_date url systems_display categories_display assertions_display documentation_description verify_frequency references_display operator_display key_control active fraud_related)
         -@controls.each_with_index do |c, i|
           %tr{ :class => (i % 2 == 0 ? :odd : :even) }
             -columns.each do |column_name|

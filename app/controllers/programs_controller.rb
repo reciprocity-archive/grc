@@ -16,7 +16,7 @@ class ProgramsController < BaseObjectsController
 
   SECTION_MAP = Hash[*%w(Section\ Code slug Section\ Title title Section\ Description description Section\ Notes notes Created created_at Updated updated_at)]
 
-  CONTROL_MAP = Hash[*%w(Control\ Code slug Title title Description description Type type Kind kind Means means Version version Start start_date Stop stop_date URL url Link:Systems systems Link:Categories categories Link:Assertions assertions Documentation documentation_description Frequency verify_frequency References references Link:People;Operator operator Key\ Control key_control Active active Fraud\ Related fraud_related Created created_at Updated updated_at)]
+  CONTROL_MAP = Hash[*%w(Control\ Code slug Title title Description description Kind kind Means means Version version Start start_date Stop stop_date URL url Link:Systems systems Link:Categories categories Link:Assertions assertions Documentation documentation_description Frequency verify_frequency References references Link:People;Operator operator Key\ Control key_control Active active Fraud\ Related fraud_related Created created_at Updated updated_at)]
 
   # FIXME: Decide if the :section, controls, etc.
   # methods should be moved, and what access controls they
@@ -217,7 +217,6 @@ class ProgramsController < BaseObjectsController
 
       handle_option(attrs, 'kind', import[:warnings][i], :control_kind)
       handle_option(attrs, 'means', import[:warnings][i], :control_means)
-      handle_option(attrs, 'type', import[:warnings][i], :control_type)
       handle_option(attrs, 'verify_frequency', import[:warnings][i])
       handle_boolean(attrs, 'key_control')
       handle_boolean(attrs, 'fraud_related')

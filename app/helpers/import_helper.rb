@@ -20,22 +20,18 @@ module ImportHelper
   def read_import_headers(import, import_map, object_name, rows)
     trim_array(rows.shift).map do |heading|
       heading = (heading || "").strip
-      if heading == "Type"
-        key = 'type'
-      else
-        key = import_map[heading]
-        if !key
-          found = false
-          prefix = "Invalid #{object_name} headings: "
-          import[:messages].each_with_index do |message, i|
-            if message.starts_with?(prefix)
-              import[:messages][i] = message + ", \"#{heading}\""
-              found = true
-            end
+      key = import_map[heading]
+      if !key
+        found = false
+        prefix = "Invalid #{object_name} headings: "
+        import[:messages].each_with_index do |message, i|
+          if message.starts_with?(prefix)
+            import[:messages][i] = message + ", \"#{heading}\""
+            found = true
           end
-          if !found
-            import[:messages] << prefix + "\"#{heading}\""
-          end
+        end
+        if !found
+          import[:messages] << prefix + "\"#{heading}\""
         end
       end
       key
