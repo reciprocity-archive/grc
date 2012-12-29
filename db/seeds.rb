@@ -6,6 +6,7 @@ ActiveRecord::Base.transaction do
   # Categories
 
   # Control categories
+
   control_categories = [
     ["Access Control", ["Access Management", "Authorization", "Authentication"]],
     ["Change Management", ["Segregation of Duties", "Configuration Management"]],
@@ -20,6 +21,19 @@ ActiveRecord::Base.transaction do
     option_names.each do |name|
       scats.where(:name => name).first_or_create!
     end
+  end
+
+  # Control assertions
+
+  control_assertions = [
+    "Accuracy", "Classification", "Completeness", "Cutoff", "Existence",
+    "Occurrence", "Rights and Obligations", "Valuation and Allocation",
+    "Understandability"
+  ]
+
+  acats = Category.ctype(Control::CATEGORY_ASSERTION_TYPE_ID)
+  control_assertions.each do |name|
+    acats.where(:name => name).first_or_create!
   end
 
   # Options

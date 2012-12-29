@@ -1,5 +1,5 @@
 -# locals: object
--all_object_categorizations = object.categorizations.all
+-all_object_categorizations = object.categorizations.includes(:category).where(:categories => { :scope_id => Control::CATEGORY_TYPE_ID }).all
 
 .row-fluid.js-list-container-title
   .span10
