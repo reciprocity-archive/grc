@@ -24,6 +24,7 @@
   select {
     display:block;
     float:none;
+    width:150px;
 //    margin-bottom:14px !important;
     padding:2px;
     height:23px !important;
@@ -269,4 +270,15 @@ ul.pbc-requests {
   &:hover {
     @include opacity(0.5);
   };
+}
+
+.control-icons {
+  padding-top:3px;
+  i {
+    @include opacity(0.5);
+    margin-left:10px;
+    &:hover {
+      @include opacity(1);
+    }
+  }
 }

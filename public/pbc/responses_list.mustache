@@ -68,7 +68,7 @@
             <form>
               <div class="row-fluid">
                 <div class="span6">
-                  <input class="span12 input-ldap" name="ldap" placeholder="LDAP ID" type="text" {{ (el) -> el.pbc_autocomplete_people() }}>
+                  <input class="span12 input-ldap" name="ldap" placeholder="Email" type="text" {{ (el) -> el.pbc_autocomplete_people() }}>
                 </div>
                 <div class="span6">
                   <input class="span12 input-name" name="name" placeholder="Name" type="text" {{ (el) -> el.pbc_autocomplete_people() }}>
@@ -86,18 +86,15 @@
                   <a class="btn btn-mini span12 cancel-add-person" href="javascript://">Cancel</a>
                 </div>
                 <div class="span3">
-                  <a class="btn btn-mini btn-primary span12 add-person disabled" href="javascript://">
+                  <a class="btn btn-mini span12 add-person disabled" href="javascript://">
                     <strong>Save</strong>
                   </a>
                 </div>
               </div>
             </form>
           </li>
-          <li class="toggle-add-person">
-            <a class="btn btn-mini pull-right" href="javascript://">
-              <i class="grcicon-link"></i>
-            </a>
-              <a href="javascript://">
+          <li class="toggle-add-person add-new">
+            <a href="javascript://">
               Add new person
             </a>
           </li>
@@ -146,19 +143,13 @@
               </div>
             </form>
           </li>
-          <li class="toggle-add-document" data-system-id="{{system.id}}">
-            <a class="btn btn-mini pull-right" href="javascript://">
-              <i class="grcicon-link"></i>
-            </a>
+          <li class="toggle-add-document add-new" data-system-id="{{system.id}}">
             <a href="javascript://">
               Add new document
             </a>
           </li>
         {{else}}
-          <li data-system-id="{{system.id}}">
-            <a class="btn btn-mini pull-right disabled" href="javascript://">
-              <i class="grcicon-link"></i>
-            </a>
+          <li class="add-new" data-system-id="{{system.id}}">
             <a class="disabled" href="javascript://">
               Add new {{type_name}}
             </a>

@@ -14,8 +14,12 @@
       Date
     .span4
       Firm
-    .span5
+    .span4
       PBC Title
+    .span1{"rel" => "tooltip", "data-placement" => "top", "title" => "Number of control assessments", :style => "text-align:center" }="#"
+      
+
+
 
 -cycle.pbc_lists.each do |pbc_list|
   %a.item-link{ :href => flow_pbc_list_path(pbc_list.id) }
@@ -23,4 +27,5 @@
       .row-fluid
         .span3=(pbc_list.list_import_date && pbc_list.list_import_date.strftime('%m/%d/%Y')) || '&nbsp'.html_safe
         .span4=pbc_list.audit_firm || '&nbsp;'.html_safe
-        .span5=pbc_list.title || '&nbsp;'.html_safe
+        .span4=pbc_list.title || '&nbsp;'.html_safe
+        .span1{:style => "text-align:center"}="6"
