@@ -270,3 +270,14 @@ ul.pbc-requests {
     @include opacity(0.5);
   };
 }
+
+.control-icons {
+  padding-top:3px;
+  i {
+    @include opacity(0.5);
+    margin-left:10px;
+    &:hover {
+      @include opacity(1);
+    }
+  }
+}
