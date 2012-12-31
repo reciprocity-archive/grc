@@ -44,6 +44,13 @@ class RelationshipsController < BaseMappingsController
         obj["relationship"]["object"] = related
         obj
       end
+    else
+      relationships_with_object = @objects.includes(:source, :destination).map do |o|
+        obj = o.as_json
+        obj["relationship"]["source"] = o.source.as_json(:root => false)
+        obj["relationship"]["destination"] = o.destination.as_json(:root => false)
+        obj
+      end
     end
 
     render :json => relationships_with_object
@@ -78,6 +85,7 @@ class RelationshipsController < BaseMappingsController
 
         #relationship_type = RelationshipType.find_by_relationship_type(vr[:relationship_type])
         relationship_type = DefaultRelationshipTypes.types[vr[:relationship_type]]
+        relationship_type_id = relationship_type ? relationship_type[:relationship_type] : vr[:relationship_type]
 
         if (vr[:related_model_endpoint].to_s == "both") and
           (related_model == obj_type) and
@@ -100,7 +108,7 @@ class RelationshipsController < BaseMappingsController
 
           # First add the related_is_source set
           rels = related_is_source.select do |rel|
-            rel.relationship_type_id == relationship_type[:relationship_type]
+            rel.relationship_type_id == relationship_type_id
           end
 
           objects = Set.new
@@ -110,7 +118,7 @@ class RelationshipsController < BaseMappingsController
 
           # Also add the related_is_dest set.
           rels = related_is_dest.select do |rel|
-            rel.relationship_type_id == relationship_type[:relationship_type]
+            rel.relationship_type_id == relationship_type_id
           end
 
           rels.each do |rel|
@@ -140,7 +148,7 @@ class RelationshipsController < BaseMappingsController
                   :related_model => related_model)
 
             rels = related_is_source.select do |rel|
-              rel.relationship_type_id == relationship_type[:relationship_type]
+              rel.relationship_type_id == relationship_type_id
             end
             @results.push({
               :relationship_type_id => vr[:relationship_type],
@@ -165,7 +173,7 @@ class RelationshipsController < BaseMappingsController
                   :related_model => related_model)
 
             rels = related_is_dest.select do |rel|
-              rel.relationship_type_id == relationship_type[:relationship_type]
+              rel.relationship_type_id == relationship_type_id
             end
             @results.push({
               :relationship_type_id => vr[:relationship_type],
