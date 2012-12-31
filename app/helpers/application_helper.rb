@@ -139,6 +139,17 @@ module ApplicationHelper
     end
   end
 
+  def request_type_count(requests, type_name)
+    case type_name
+    when 'Documentation' then
+      requests.count { |r| r.type_id.blank? || r.type_id == 1 }
+    when 'Population Sample' then
+      requests.count { |r| r.type_id == 2 }
+    when 'Interview' then
+      requests.count { |r| r.type_id == 3 }
+    end
+  end
+
   def sorted_requests_with_control_assessments(requests)
     requests.
       group_by(&:control_assessment_id).
