@@ -41,7 +41,7 @@
             %strong=(control_assessment && control_assessment.control.slug) || "(Control not selected or recognized)".html_safe
           .span2{"data-target" => "##{control_assessment_collapse_id}", "data-toggle" => "collapse"}
             =control_assessment && control_assessment.control.title || "&nbsp;".html_safe
-          .span4
+          .span4{"data-target" => "##{control_assessment_collapse_id}", "data-toggle" => "collapse"}
             .control-icons
               %h6
                 %i{"rel" => "tooltip", "data-placement" => "top", "title" => "Documentation Request", "class" => "grcicon-document"}
