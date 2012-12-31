@@ -27,7 +27,8 @@ class OrgGroup < ActiveRecord::Base
     { :to   => Product,  :via => :org_group_has_province_over_product },
     { :both => OrgGroup, :via => :org_group_is_affiliated_with_org_group },
     { :to   => Location, :via => :org_group_is_dependent_on_location },
-    { :from => Program,  :via => :program_is_relevant_to_org_group }
+    { :from => Program,  :via => :program_is_relevant_to_org_group },
+    { :to   => RiskyAttribute, :via => :org_group_has_risky_attribute },
   ]
 
   def display_name

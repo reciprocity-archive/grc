@@ -24,12 +24,10 @@ class RiskyAttribute < ActiveRecord::Base
     :presence => { :message => "needs a value" }
 
   @valid_relationships = [
-    { :from => OrgGroup,  :via => :risky_attribute_is_an_attribute_of_org_group },
-    { :from => Product,   :via => :risky_attribute_is_an_attribute_of_product },
-    { :from => Location,   :via => :risky_attribute_is_an_attribute_of_location },
-    #{ :from => Project,   :via => :risky_attribute_is_an_attribute_of_project },
-    { :from => Market,   :via => :risky_attribute_is_an_attribute_of_market },
-    #{ :from => DataAsset, :via => :risky_attribute_is_an_attribute_of_data_asset },
+    { :from => OrgGroup,  :via => :org_group_has_risky_attribute },
+    { :from => Product,   :via => :product_has_risky_attribute },
+    { :from => Location,  :via => :location_has_risky_attribute },
+    { :from => Market,    :via => :market_has_risky_attribute },
   ]
 
   def display_name
