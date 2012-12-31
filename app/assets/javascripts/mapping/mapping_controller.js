@@ -242,6 +242,12 @@ can.Control("CMS.Controllers.Mapping", {
     section.save();
   }
 
+  , "#section_notes change" : function(el, ev) {
+    var section = namespace.CMS.Models.SectionSlug.findInCacheById(el.closest("[data-section-id]").data("section-id"));
+    section.attr("notes", el.val());
+    section.save();
+  }
+
 });
 
 can.Control("CMS.Controllers.MappingWidgets", {}, {
