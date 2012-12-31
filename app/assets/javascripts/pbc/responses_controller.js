@@ -93,33 +93,33 @@ can.Control("CMS.Controllers.Responses", {
     , ".inline-add-person keydown" : function(el, ev) {
         if(el.find(".input-ldap").val() === ""
             || el.find(".input-role").val() === "") {
-            el.find(".add-person").addClass("disabled");
+            el.find(".add-person").addClass("disabled").removeClass("btn-primary");
         } else {
-            el.find(".add-person").removeClass("disabled");
+            el.find(".add-person").removeClass("disabled").addClass("btn-primary");
         }
     }
     , ".inline-add-person change" : function(el, ev) {
         if(el.find(".input-ldap").val() === ""
             || el.find(".input-role").val() === "") {
-            el.find(".add-person").addClass("disabled");
+            el.find(".add-person").addClass("disabled").removeClass("btn-primary");
         } else {
-            el.find(".add-person").removeClass("disabled");
+            el.find(".add-person").removeClass("disabled").addClass("btn-primary");
         }
     }
     , ".inline-add-document keydown" : function(el, ev) {
         if(el.find(".input-title").val() === ""
             || el.find(".input-role").val() === "") {
-            el.find(".add-document").addClass("disabled");
+            el.find(".add-document").addClass("disabled").removeClass("btn-primary");
         } else {
-            el.find(".add-document").removeClass("disabled");
+            el.find(".add-document").removeClass("disabled").addClass("btn-primary");
         }
     }
     , ".inline-add-document change" : function(el, ev) {
         if(el.find(".input-title").val() === ""
             || el.find(".input-role").val() === "") {
-            el.find(".add-document").addClass("disabled");
+            el.find(".add-document").addClass("disabled").removeClass("btn-primary");
         } else {
-            el.find(".add-document").removeClass("disabled");
+            el.find(".add-document").removeClass("disabled").addClass("btn-primary");
         }
     }
 });
