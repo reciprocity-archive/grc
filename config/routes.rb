@@ -179,6 +179,7 @@ CmsRails::Application.routes.draw do
   resources :pbc_lists, :as => 'flow_pbc_lists', :only => [:show, :new, :create, :edit, :update, :destroy] do
     member do
       get 'delete'
+      match 'import'
     end
   end
 

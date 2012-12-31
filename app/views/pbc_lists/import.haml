@@ -1,0 +1,10 @@
+-content_for :page_help, 'pbc_list_import'
+
+-content_for :header do
+  %ol#breadcrumb
+    %li Import
+  .location#pageTitle Import PBC list
+
+.row-static
+  =render :partial => 'pbc_lists/import',
+          :layout => 'layouts/widget_box'

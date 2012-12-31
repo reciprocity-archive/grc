@@ -1,0 +1,63 @@
+.row-fluid
+  %hr.hr-widget
+
+.row-fluid
+  %h4 Data to Import
+
+.row-fluid
+  #sampleData.span12.well{:style => 'overflow: scroll; max-height: 600px;'}
+    -if @messages.present?
+      -@messages.each do |m|
+        %p.label-warning
+          =m
+      %br
+
+    -if @errors.any?
+      %p.label-warning
+        See specific errors below
+      %br
+
+    %table.ggrc-table
+      %thead
+        %tr
+          %th Type
+          %th PBC Control Code
+          %th PBC Control Description
+          %th Request
+          %th Notes
+          %th Test
+          %th Company Responsibile
+          %th Auditor Responsibile
+          %th Date Requested
+      %tbody
+        -columns = %w(type_name pbc_control_code pbc_control_desc request notes test company_responsible auditor_responsible date_requested)
+        -@requests.each_with_index do |req, i|
+          %tr{ :class => (i % 2 == 0 ? :odd : :even) }
+            -columns.each do |column_name|
+              %td{ :class => ( (@errors[i].present? && @errors[i][column_name].present?) ? 'member-failure' : ((@warnings[i].present? && @warnings[i][column_name].present?) ? 'member-warning' : '' ) ) }
+                =req.send(column_name)
+                -if @errors[i].present? && @errors[i][column_name].present?
+                  .help-inline=@errors[i][column_name].join(', ')
+                -if @warnings[i].present? && @warnings[i][column_name].present?
+                  .help-inline=@warnings[i][column_name].join(', ')
+
+    Showing 1 to #{@requests.size} of #{@requests.size} entries
+
+%br
+
+.row-fluid
+  -if params[:confirm].blank?
+    .span9
+    .span3
+      -if @errors.any?
+        =submit_tag "Correct Errors Before Proceeding", :class => %w(span12 btn btn-large btn-warning btn-primary), :name => 'confirm', :disabled => true
+      -elsif @messages.any?
+        =submit_tag "Proceed With Caution", :class => %w(span12 btn btn-large btn-warning btn-primary), :name => 'confirm'
+      -else
+        =submit_tag "Finish Importing", :class => %w(span12 btn btn-large btn-success btn-primary), :name => 'confirm'
+  -else
+    .span12
+      Import of
+      =link_to "PBC List Requests", flow_pbc_list_path(@pbc_list)
+      is done.
+
