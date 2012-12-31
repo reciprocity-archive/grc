@@ -96,6 +96,14 @@ jQuery(document).ready(function($) {
       popover && popover.hide();
     });
   });
+
+  // Close all popovers on custom event
+  $('body').on('kill-all-popovers', function(e) {
+    // FIXME: This may be incompatible with bootstrap popover assumptions...
+    // This is when the triggering element has been removed from the DOM
+    // so we have to kill the popover elements themselves.
+    $('.popover').remove();
+  });
 });
 
 $(document).ajaxComplete(function(event, request){

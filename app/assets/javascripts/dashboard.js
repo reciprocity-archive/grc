@@ -173,6 +173,7 @@ jQuery(function($) {
         , $tab = $this.closest('.WidgetBox').find('ul.nav-tabs > li.active > a')
         , href = with_params($tab.data('tab-href'), $.param({ s: $this.val() }));
       $tab.trigger('show', href);
+      $tab.trigger('kill-all-popovers');
     }
   });
   $('body').on('keypress', 'nav > .widgetsearch-tocontent', function (e) {
