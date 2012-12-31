@@ -48,8 +48,9 @@
 .row-fluid
   -if params[:confirm].blank?
     .span8
-    .span1
       =link_to "Cancel", flow_pbc_list_path(@pbc_list), :class => "btn btn-large"
+    .span1
+      &nbsp;
     .span3
       -if @errors.any?
         =submit_tag "Correct Errors Before Proceeding", :class => %w(span12 btn btn-large btn-warning btn-primary), :name => 'confirm', :disabled => true
