@@ -28,4 +28,4 @@
         .span3=(pbc_list.list_import_date && pbc_list.list_import_date.strftime('%m/%d/%Y')) || '&nbsp'.html_safe
         .span4=pbc_list.audit_firm || '&nbsp;'.html_safe
         .span4=pbc_list.title || '&nbsp;'.html_safe
-        .span1{:style => "text-align:center"}="6"
+        .span1{:style => "text-align:center"}=pbc_list.control_assessments.count
