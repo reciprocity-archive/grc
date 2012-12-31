@@ -81,7 +81,7 @@
                     -else
                       No control selected
                 .span3.pbc-request{ "data-target" => ".#{request_collapse_class}", "data-toggle" => "collapse"}
-                  %h6 
+                  %h6.pbc-request-count
                     =pluralize(request.responses.count, "response")
                 .span1{ "data-target" => ".#{request_collapse_class}", "data-toggle" => "collapse"}
                   &nbsp;

@@ -32,11 +32,13 @@ can.Control("CMS.Controllers.Responses", {
     , "{model} created" : function(Model, ev, response) {
         if(response.request_id === this.options.id) {  
             can.Model.Cacheable.prototype.addElementToChildList.call(this.options.observer, "list", response);
+            this.element.closest(".main-item").find(".pbc-request-count").html(this.list.length + " " + (this.list.length - 1 ? "Responses" : "Response"));
         }
     }
     , "{model} destroyed" : function(Model, ev, response) {
         if(response.request_id === this.options.id) {  
             can.Model.Cacheable.prototype.removeElementFromChildList.call(this.options.observer, "list", response);
+            this.element.closest(".main-item").find(".pbc-request-count").html(this.list.length + " " + (this.list.length - 1 ? "Responses" : "Response"));
         }
     }
     , ".remove_person, .remove_document click" : function(el, ev) {
