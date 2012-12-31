@@ -113,6 +113,14 @@ CmsRails::Application.routes.draw do
     end
   end
 
+  resources :risks, :as => 'flow_risks', :only => [:index, :show, :new, :edit, :create, :update, :destroy] do
+    member do
+      get 'delete'
+      get 'tooltip'
+      get 'delete'
+    end
+  end
+
   resources :accounts, :as => 'flow_accounts' do
     member do
       get 'delete'
