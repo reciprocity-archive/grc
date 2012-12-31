@@ -162,4 +162,13 @@ module ApplicationHelper
         key.split(/(\d+)/).map { |s| [s.to_i, s] }
       end
   end
+
+  def days_ago_in_words(from_date)
+    distance_in_days = (from_date.to_date - Time.zone.now.to_date).abs.to_i
+    if distance_in_days == 0
+      "today"
+    else
+      pluralize(distance_in_days, "day")
+    end
+  end
 end
