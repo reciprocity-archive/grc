@@ -180,6 +180,7 @@ CmsRails::Application.routes.draw do
     member do
       get 'delete'
       match 'import'
+      match 'export'
     end
   end
 

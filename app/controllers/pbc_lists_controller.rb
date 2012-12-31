@@ -84,6 +84,27 @@ class PbcListsController < BaseObjectsController
     end
   end
 
+  def export
+    @pbc_list = PbcList.find(params[:id])
+
+    respond_to do |format|
+      format.html do
+        render :layout => 'export_modal', :locals => { :pbc_list => @pbc_list }
+      end
+      format.csv do
+        self.response.headers['Content-Type'] = 'text/csv'
+        headers['Content-Disposition'] = "attachment; filename=\"#{@pbc_list.display_name}.csv\""
+        self.response_body = Enumerator.new do |out|
+          out << CSV.generate_line(PBC_REQUEST_MAP.keys)
+          @pbc_list.requests.each do |req|
+            values = PBC_REQUEST_MAP.keys.map { |key| req.send(PBC_REQUEST_MAP[key]) if req.respond_to?(PBC_REQUEST_MAP[key]) }
+            out << CSV.generate_line(values)
+          end
+        end
+      end
+    end
+  end
+
   private
 
     def do_import(import, check_only)
@@ -133,7 +154,6 @@ class PbcListsController < BaseObjectsController
 
         request.save unless check_only
       end
-      # raise @requests.to_yaml
     end
 
     def post_destroy_path
