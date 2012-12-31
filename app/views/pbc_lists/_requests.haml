@@ -45,11 +45,11 @@
             .control-icons
               %h6
                 %i{"rel" => "tooltip", "data-placement" => "top", "title" => "Documentation Request", "class" => "grcicon-document"}
-                0
+                = request_type_count(requests, "Documentation")
                 %i{"rel" => "tooltip", "data-placement" => "top", "title" => "Population Request", "class" => "grcicon-populationsample"}
-                4
+                = request_type_count(requests, "Population Sample")
                 %i{"rel" => "tooltip", "data-placement" => "top", "title" => "Documentation Request", "class" => "grcicon-calendar"}
-                5
+                = request_type_count(requests, "Interview")
           -if control_assessment.present?
             .span1
               %a.btn.btn-mini.rotate_control_assessment{ :rel => "tooltip", :'data-placement' => "top", :title => "Internal: Test of Design", :class => control_assessment_button_class(control_assessment.internal_tod), :'data-remote' => true, :'data-method' => 'post', :href => rotate_flow_control_assessment_path(control_assessment, :'control_assessment[internal_tod]' => 'toggle') }
