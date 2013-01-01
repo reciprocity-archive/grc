@@ -92,7 +92,7 @@ can.Control("CMS.Controllers.Mapping", {
     if(!rcontrol && el.is("#rmap")) {
       var notice, reg_slug;
       dfd.then(function(resp, status, xhr) {
-        notice = /.*Created regulation control ([^.]+).*/.exec(xhr.getResponseHeader("X-Flash-Notice"));
+        notice = /.*Created regulation control (.+)\. Mapped regulation control\. */.exec(xhr.getResponseHeader("X-Flash-Notice"));
         if(notice) 
           reg_slug = notice[1];
       })
