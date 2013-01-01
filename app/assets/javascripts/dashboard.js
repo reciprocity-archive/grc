@@ -128,6 +128,18 @@ jQuery(function($) {
     }
   });
 
+  //After the modal template has loaded from the server, but before the
+  //  data has loaded to populate into the body, show a spinner
+  $("body").on("loaded", ".modal.modal-slim", function(e) {
+    $(e.target).find(".modal-body .source").html(
+          $(new Spinner().spin().el)
+            .css({
+              width: '100px', height: '100px',
+              left: '50px', top: '50px'
+            })
+      )
+  });
+
   function with_params(href, params) {
     if (href.charAt(href.length - 1) === '?')
       return href + params;
