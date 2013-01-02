@@ -29,7 +29,7 @@
           =error_messages_inline(f, :is_biz_process)
         -else
           .item
-            =f.object.is_biz_process == 1 ? "Business Process" : "System"
+            =f.object.is_biz_process? ? "Business Process" : "System"
       =wrapped_select f, :span6, :network_zone_id, Option.options_for(:network_zone).map { |o| [o.title, o.id] }, :selected => (f.object.respond_to?(:network_zone_id) ? f.object.network_zone_id : nil), :include_blank => true, :label_name => 'Network Zone'
       -# =wrapped_select f, :span6, :type_id, Option.options_for(:system_type).map { |o| [o.title, o.id] }, :selected => (f.object.respond_to?(:type_id) ? f.object.type_id : nil), :include_blank => true, :label_name => 'Kind'
 
