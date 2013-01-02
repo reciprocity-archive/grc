@@ -18,11 +18,11 @@
       , '<div class="modal-footer">'
       , '  <div class="row-fluid">'
       , '    <nav class="fltlft txtlft span3">'
-      , '      <a class="btn btn-large" data-dismiss="modal">Cancel</a>'
+      , '      <a class="btn btn-large btn-info" data-dismiss="modal">Cancel</a>'
       , '    </nav>'
       , '    <div class="span6"></div>'
       , '    <nav class="fltrt txtrt span3">'
-      , '      <a class="btn btn-large btn-primary" data-dismiss="modal">Close</a>'
+      , '      <a class="btn btn-large btn-warning" data-dismiss="modal">Close</a>'
       , '    </nav>'
       , '  </div>'
       , '</div>'
@@ -189,16 +189,19 @@
 
     var _top = parseInt($(referenceModal)[0].offsetTop);
     modals.css({
-        "height" : function() {
+        "overflow" : "hidden"
+      , "height" : function() {
           return parseInt($(this).find(".modal-header").height()) + 4;
         }
-      , "overflow" : "hidden"
       , "top" : function(i) {
         return _top - (modals.length - i) * (parseInt($(this).find(".modal-header").height()) + 4);
       }
       , "margin-top" : 0
+    })
+    modals.off("scroll.modalajax");
+    modals.on("scroll.modalajax", function() { 
+        $(this).scrollTop(0); //fix for Chrome rendering bug when resizing block elements containing CSS sprites.
     });
-
   }
 
   var arrangeTopModal = function(modals, modal) {
@@ -207,23 +210,62 @@
 
   var _modal_show = $.fn.modal.Constructor.prototype.show;
   $.fn.modal.Constructor.prototype.show = function() {
+    var that = this;
+    var $el = this.$element;
+    var shownevents;
+    if(shownevents = $el.data("events").shown
+        && $(shownevents).filter(function() { 
+            return $.inArray("arrange", this.namespace.split(".")) > -1; 
+        }).length < 1) {
+          $el.on("shown.arrange", function(ev) {
+            if(ev.target === ev.currentTarget)
+                reconfigureModals.call(that);
+          });
+    }
 
     _modal_show.apply(this, arguments);
+    //reconfigureModals.call(this);   //handled by modal shown event firing.
+  };
 
-    $(".modal-backdrop").css("z-index", function(i) {
+  var reconfigureModals = function() {
+
+    var modal_backdrops = $(".modal-backdrop").css("z-index", function(i) {
       return 1040 + i * 20;
     });
-    
+
     var modals = $(".modal:visible");
-    modals.css("z-index", function(i) {return 1050 + i * 20;});
+    modals.each(function(i) {
+        var parent = this.parentNode;
+        if(parent !== document.body)
+        { 
+            modal_backdrops
+            .eq(i)
+            .detach()
+            .appendTo(parent);
+        }
+    });
+    modal_backdrops.slice(modals.length).remove();
+
+    modals.not(this.$element).css("z-index", function(i) {return 1050 + i * 20;});
+    this.$element.css("z-index", 1050 + (modals.length - 1) * 20)
 
     arrangeTopModal(modals, this.$element);
     arrangeBackgroundModals(modals, this.$element);
-  };
+  }
 
   var _modal_hide = $.fn.modal.Constructor.prototype.hide;
-  $.fn.modal.Constructor.prototype.hide = function() {
+  $.fn.modal.Constructor.prototype.hide = function(ev) {
+    if(ev && (ev.currentTarget !== ev.target))
+        return;  //We already hid one
+
     _modal_hide.apply(this, arguments);
+
+    var animated =
+        $(".modal").filter(":animated");
+    if(animated.length) {
+        animated.stop(true, true);
+    }
+
     var modals = $(".modal:visible");
     var lastModal = modals.last();
     lastModal.css({"height" : "", "overflow" : "", top : "", "margin-top" : ""});
@@ -254,8 +296,9 @@
         $this.attr('data-target', '#' + modal_id);
       }
 
-      $target.on('hidden', function() {
-        $target.remove();
+      $target.on('hidden', function(ev) {
+        if(ev.target === ev.currentTarget)
+            $target.remove();
       });
 
       if (new_target || $this.data('modal-reset') == 'reset') {
