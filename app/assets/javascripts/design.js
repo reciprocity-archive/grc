@@ -56,6 +56,8 @@ jQuery(function ($) {
   renderExternalTmpl({ name: 'selectorCategory', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'selectorControl', selector: '#templates', data: {} });
 
+  renderExternalTmpl({ name: 'success', selector: '#templates', data: {} });
+
   // new modals START
   renderExternalTmpl({ name: 'redesignNewProgram', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'redesignNewCategory', selector: '#templates', data: {} });

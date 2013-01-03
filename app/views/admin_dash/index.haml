@@ -202,12 +202,6 @@
               %i.grcicon-enlarge-grey
         / /.WidgetBoxHeading
         .WidgetBoxContent
-          -#%ul#newEdit.nav.nav-tabs.nav-stacked.in
-            %li.group
-              %label Rapid Prototypes
-            %li.group
-              %a.btn{"data-toggle" => "modal", :href => "#showSecondModal"}
-                Show Second Modal
           #newEditItems.toolbar-widget
             %ul#newEdit.nav.nav-tabs.nav-stacked.in
               %li.group
@@ -233,6 +227,9 @@
               %li.group
                 %a.btn{"data-toggle" => "modal", :href => "#redesignNewOrg"}
                   New/Edit Organization
+              %li.group
+                %a.btn{"data-toggle" => "modal", :href => "#successModal"}
+                  Success
               %li.row-fluid
                 %label Selectors
               %li.row-fluid
