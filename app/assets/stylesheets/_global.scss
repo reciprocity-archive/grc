@@ -41,7 +41,17 @@ a {
 p {
   font-family: $font-family;
   color:$textColor;
+  &.disabled-text {
+    color:$disabledTextColor;
+  }
 }
+
+span {
+  &.disabled-text {
+    color:$disabledTextColor;
+  }
+}
+
 
 td {
   vertical-align:top;

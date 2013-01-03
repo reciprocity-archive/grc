@@ -38,7 +38,7 @@
         .row-fluid
           .span2{"data-target" => "##{control_assessment_collapse_id}", "data-toggle" => "collapse"}
             .expander
-            %strong=(control_assessment && control_assessment.control.slug) || "(Control not selected or recognized)".html_safe
+            %strong=(control_assessment && control_assessment.control.slug) || "(Missing Control)".html_safe
           .span2{"data-target" => "##{control_assessment_collapse_id}", "data-toggle" => "collapse"}
             =control_assessment && control_assessment.control.title || "&nbsp;".html_safe
           .span4{"data-target" => "##{control_assessment_collapse_id}", "data-toggle" => "collapse"}
@@ -96,27 +96,51 @@
               .row-fluid.collapse{ :class => request_collapse_class }
                 .span3.pbc-item.pbc-control
                   %h5 PBC Control Description
-                  %p=raw request.pbc_control_desc
+                  -if request.pbc_control_desc.present?
+                    %p=raw request.pbc_control_desc
+                  -else
+                    %p.disabled-text PBC control description not available
                 .span2.pbc-item.pbc-request
                   %h5 Request
-                  %p=raw request.request
+                  -if request.request.present?
+                    %p=raw request.request
+                  -else
+                    %p.disabled-text Request description not available
                 .span2.pbc-item.pbc-test
                   %h5 Test
-                  %p=raw request.test
+                  -if request.test.present?
+                    %p=raw request.test
+                  -else
+                    %p.disabled-text Test description not available
                 .span2.pbc-item.pbc-notes
                   %h5 Notes
-                  %p=raw request.notes
+                  -if request.notes.present?
+                    %p=raw request.notes
+                  -else
+                    %p.disabled-text Notes not available
+
+
+
                 .span2.pbc-item.pbc-status
                   %h5 Responsible Parties
                   %p
                     %strong Company:
-                    =request.company_responsible
+                    -if request.company_responsible.present?
+                      =request.company_responsible
+                    -else
+                      %span.disabled-text Unknown company 
                     %br
                     %strong Auditor:
-                    =request.auditor_responsible
+                    -if request.auditor_responsible.present?
+                      =request.auditor_responsible
+                    -else
+                      %span.disabled-text Unknown auditor
                   %p.subtle
                     %strong Requested:
-                    =request.date_requested && request.date_requested.strftime('%m/%d/%Y')
+                    -if request.date_requested.present?
+                      =request.date_requested && request.date_requested.strftime('%m/%d/%Y')
+                    -else
+                      %span.disabled-text Unknown date
                 .span1.pbc-item.pbc-actions
                   %a.btn.btn-mini{ :href => edit_flow_request_path(request.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide'}
                     %i.grcicon-edit-grey
