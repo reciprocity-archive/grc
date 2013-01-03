@@ -10,7 +10,7 @@
     %ul.nav.nav-tabs.nav-stacked
       -options_for_role.sort_by(&:title).each do |option|
         %li
-          %a.widgetbtn.fltrt{ :'data-form-target' => "refresh", :'data-modal-reset' => "reset", :'data-toggle' => "modal-ajax-form", :href => edit_flow_option_path(option), :'data-target' => "#ajax-modal-options-3-edit" }
+          %a.widgetbtn.fltrt{ :'data-form-target' => "refresh", :'data-delete-target' => "refresh", :'data-modal-reset' => "reset", :'data-toggle' => "modal-ajax-form", :href => edit_flow_option_path(option) }
             %i.grcicon-edit-grey
           =link_to '#' do
             =option.title

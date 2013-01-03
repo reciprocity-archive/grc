@@ -37,6 +37,15 @@
     </div>
     {{/foo_controls}}
   {{/rcontrols}}
+  {{else}}
+    <div class="span12 well">
+      <input name="section[na]" type="hidden" value="0">
+      <input class="checkbox" id="section_na" name="section[na]" type="checkbox" value="1" {{#na}}checked="checked"{{/na}}>
+      <h3 style="display:inline;">
+        &nbsp;No controls implemented for this section
+      </h3>
+    </div>
+  {{/if}}
   <br>
   <div class="row-fluid">
     <label class="cleanlabel" for="section_notes">Note</label>
@@ -57,24 +66,15 @@
       </label>
     </div>
   </div>
-    {{else}}
-      <div class="span12 well">
-        <input name="section[na]" type="hidden" value="0">
-        <input class="checkbox" id="section_na" name="section[na]" type="checkbox" value="1" {{#na}}checked="checked"{{/na}}>
-        <h3 style="display:inline;">
-          &nbsp;No controls implemented for this section
-        </h3>
-      </div>
-    {{/if}}
   </div>
 
 <div class="modal-footer">
   <div class="row-fluid">
     <nav class="fltlft txtlft span3">
-      <input class="btn btn-large btn-info closebtn" name="commit" type="button" value="Cancel">
+      <!-- <input class="btn btn-large btn-info closebtn" name="commit" type="button" value="Cancel"> -->
     </nav>
     <nav class="fltrt txtrt span3">
-      <div class="btn btn-large btn-success disabled"> Approve </div>
+      <div class="btn btn-large closebtn btn-success"> Done </div>
     </nav>
   </div>
 </div>

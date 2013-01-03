@@ -92,7 +92,7 @@ can.Control("CMS.Controllers.Mapping", {
     if(!rcontrol && el.is("#rmap")) {
       var notice, reg_slug;
       dfd.then(function(resp, status, xhr) {
-        notice = /.*Created regulation control ([^.]+).*/.exec(xhr.getResponseHeader("X-Flash-Notice"));
+        notice = /.*Created regulation control (.+)\. Mapped regulation control\. */.exec(xhr.getResponseHeader("X-Flash-Notice"));
         if(notice) 
           reg_slug = notice[1];
       })
@@ -239,6 +239,12 @@ can.Control("CMS.Controllers.Mapping", {
   , "#section_na click" : function(el, ev) {
     var section = namespace.CMS.Models.SectionSlug.findInCacheById(el.closest("[data-section-id]").data("section-id"));
     section.attr("na", el.attr("checked") ? 1 : 0);
+    section.save();
+  }
+
+  , "#section_notes change" : function(el, ev) {
+    var section = namespace.CMS.Models.SectionSlug.findInCacheById(el.closest("[data-section-id]").data("section-id"));
+    section.attr("notes", el.val());
     section.save();
   }
 

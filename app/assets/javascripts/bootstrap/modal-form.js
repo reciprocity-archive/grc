@@ -36,16 +36,23 @@
   , delete_object: function(e, data, xhr) {
       // If this modal is contained within another modal, pass the event onward
       var $trigger_modal = this.$trigger.closest('.modal')
-        , redirect_url
+        , delete_target
         ;
+
       if ($trigger_modal.length > 0) {
         $trigger_modal.trigger('delete-object', [data, xhr]);
-      } else if (xhr && xhr.getResponseHeader('location')) {
-        // Otherwise redirect if possible
-        window.location.assign(xhr.getResponseHeader('location'));
       } else {
-        // Otherwise refresh the page
-        window.location.assign(window.location.href.replace(/#.*/, ''));
+        delete_target = this.$trigger.data('delete-target');
+        if (delete_target == 'refresh') {
+          // Refresh the page
+          window.location.assign(window.location.href.replace(/#.*/, ''));
+        } else if (xhr && xhr.getResponseHeader('location')) {
+          // Otherwise redirect if possible
+          window.location.assign(xhr.getResponseHeader('location'));
+        } else {
+          // Otherwise refresh the page
+          window.location.assign(window.location.href.replace(/#.*/, ''));
+        }
       }
     }
 
