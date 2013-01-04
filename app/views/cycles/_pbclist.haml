@@ -1,5 +1,5 @@
 -content_for :widget_title do
-  PBC Lists
+  PBC List
 
 -content_for :widget_help, 'cycle_pbclist'
 
@@ -8,24 +8,17 @@
     %a.widgetbtn{ :href => new_flow_pbc_list_path(:'pbc_list[audit_cycle_id]' => cycle.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide'}
       %i.grcicon-add
 
-.item-titles
-  .row-fluid
-    .span3
-      Date
-    .span4
-      Firm
-    .span4
-      PBC Title
-    .span1{"rel" => "tooltip", "data-placement" => "top", "title" => "Number of control assessments", :style => "text-align:center" }="#"
-      
-
-
-
 -cycle.pbc_lists.each do |pbc_list|
+  %h5
+    %span=pbc_list.control_assessments.count
+    Requests
   %a.item-link{ :href => flow_pbc_list_path(pbc_list.id) }
-    .item
-      .row-fluid
-        .span3=(pbc_list.list_import_date && pbc_list.list_import_date.strftime('%m/%d/%Y')) || '&nbsp'.html_safe
-        .span4=pbc_list.audit_firm || '&nbsp;'.html_safe
-        .span4=pbc_list.title || '&nbsp;'.html_safe
-        .span1{:style => "text-align:center"}=pbc_list.control_assessments.count
+    .progress.progress-higher
+      .bar.bar-danger{"rel" => "tooltip", "data-placement" => "top", "title" => "Draft (10)", "data-percentage" => "10"}
+      .bar.bar-warning{"rel" => "tooltip", "data-placement" => "top", "title" => "Open - Waiting Auditors (15)", "data-percentage" => "15"}
+      .bar.bar-warning{"rel" => "tooltip", "data-placement" => "top", "title" => "Open - Waiting Compliance (45)", "data-percentage" => "45"}
+      .bar.bar-success{"rel" => "tooltip", "data-placement" => "top", "title" => "Completed (30)", "data-percentage" => "30"}
+  
+  %a.btn.btn-mini.pull-right{ :href => flow_pbc_list_path(pbc_list.id), :style => "margin-top:6px" }
+    &nbsp; View PBC List
+    %i.grcicon-arrowright
