@@ -20,7 +20,7 @@
           %span.statustextred Not Approved
     -else
       %span
-    %span.status
+    -#%span.status
       %h5
         Status:
         %span.statusValue Active
@@ -29,7 +29,7 @@
       %strong Creator:
       %span #{current_user.display_name}
     %span
-    %span.status
+    -#%span.status
       %h5
         Status:
         %span.statusValue Draft
