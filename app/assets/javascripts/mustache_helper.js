@@ -1,5 +1,12 @@
 (function(namespace, $, can) {
 
+//chrome likes to cache AJAX requests for Mustaches.
+$.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
+  if ( /\.mustache$/.test(options.url) ) {
+    options.url += "?r=" + Math.random();
+  }
+});
+
   Mustache.registerHelper("join", function() {
     var prop, context = this, ret, options = arguments[arguments.length - 1];
 
