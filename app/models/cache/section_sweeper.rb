@@ -21,6 +21,10 @@ class SectionSweeper < ActionController::Caching::Sweeper
       section = section.section
     end
 
+    # This can happen if deleting the section first.  The cache will expire, and the cached
+    # values are inaccessible anyway.
+    return if section.nil?
+
     program_id = section.program.nil? ? section.program_id : section.program.id
     # only expire non-search fragments
     expire_fragment(:controller => 'mapping', :action => 'show',
