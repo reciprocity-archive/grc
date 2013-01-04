@@ -6,15 +6,18 @@
 
 -content_for :header do
   %ol#breadcrumb
-    %li.last AUDIT
+    %li PROGRAMS
+    %li=instance.audit_cycle.program.title
+    %li AUDITS
+    %li Audit Name
+    %li.last PBC List
   #pageTitle.location
-    =instance.audit_cycle.program.title
-    Audit
+    PBC List Title
 
 -content_for :page_help, 'pbc_list'
 
 -content_for :subheader_extras do
-  %h1#pageType.pull-right.highlighted PBC List
+  -#%h1#pageType.pull-right.highlighted PBC List
 
 .row-fluid.fluid-layout
   .span12

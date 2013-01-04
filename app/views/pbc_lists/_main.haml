@@ -9,19 +9,19 @@
     %a.btn.btn-mini{:href => "/help/pbc_list", :'data-toggle' => 'modal-ajax', :title => "Help - What is this?"}
       %i.grcicon-questionmark-grey
   %h2
-    PBC Request List
+    &nbsp;
 .widget-filters
   .row-fluid
-    .span3.widget-titles
+    -#.span3.widget-titles
       %label Program
       %h4=pbc_list.audit_cycle.program.title
-    .span3.widget-titles
+    -#.span3.widget-titles
       %label Title
       %h4=pbc_list.title
-    .span2.widget-titles
+    .span3.widget-titles
       %label Audit Firm
       %h4=pbc_list.audit_firm
-    .span2.widget-titles
+    .span3.widget-titles
       %label Audit Lead
       %h4=pbc_list.audit_lead
     .span2.widget-titles
