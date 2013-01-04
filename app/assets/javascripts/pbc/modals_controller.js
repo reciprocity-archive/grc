@@ -65,8 +65,7 @@ can.Control("CMS.Controllers.PBCModals", {
     }
 
     , '.pbc-control > a modal:select' : function(el, e, control_data) {
-      var $this = $(el)
-        , request_id = $this.closest('li[data-filter-id]').data('filter-id')
+        var request_id = el.closest('li[data-filter-id]').data('filter-id')
         ;
 
       $.post(
@@ -75,20 +74,40 @@ can.Control("CMS.Controllers.PBCModals", {
         , 'request[control_id]': control_data.id
         }, function(data) {
           // FIXME: Brad, fix this if/when Requests are live-bound
-          $this.closest('.pbc-control').find('.item').text(control_data.slug);
+          el.closest('.pbc-control').find('.item').text(control_data.slug);
             //find this control
             var $ca = $(".pbc-control-assessments .pbc-ca-item[data-type=ControlAssessment][data-control-id=" + control_data.id + "]");
+            var type_name = el.closest('li[data-filter-type-name]').data("filter-type-name");
 
             // case 1: control exists -- no action needed
             if(!$ca.length) {
               // case 2: control does not exist
-              $(".pbc-control-assessments").append(can.view("/pbc/control_assessment.mustache", control_data));
+              $(".pbc-control-assessments").append(
+                can.view(
+                    "/pbc/control_assessment.mustache"
+                    , $.extend({}, control_data, { type_name : type_name})
+                ));
               $ca = $(".pbc-control-assessments .pbc-ca-item[data-control-id=" + control_data.id + "]");
             }
+            var $oldParent = el.closest(".pbc-ca-item");
             el.closest(".pbc-requests > .main-item").detach().appendTo($ca.find(".pbc-requests"));
-            $ca.find(".pbc-ca-title .expander, .pbc-ca-content").addClass("in")
+            //$ca.find(".pbc-ca-title .expander").addClass("in");
+            var content = $ca.find(".pbc-ca-content");
+            content.collapse("show");
+            $ca.find("[data-toggle=#" + content.attr("id") + "]").addClass("in");
             // sweep for newly empty control assessments and delete.
             $(".pbc-control-assessments .pbc-ca-item:not(:has(.main-item))").remove();
+
+            var filtersmap = {
+                "Documentation" : ".grcicon-document"
+                , "Population Sample" : ".grcicon-populationsample"
+                , "Interview" : ".grcicon-calendar"
+            };
+
+            var targetTextNode = $ca.find(".pbc-ca-title " + filtersmap[type_name])[0].nextSibling;
+            targetTextNode.nodeValue = [" ", parseInt(targetTextNode.nodeValue) + 1, " "].join("");
+            targetTextNode =  $oldParent.find(".pbc-ca-title " + filtersmap[type_name])[0].nextSibling;
+            targetTextNode.nodeValue = [" ", parseInt(targetTextNode.nodeValue) - 1, " "].join("");
         });
     }
 

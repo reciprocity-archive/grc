@@ -1,14 +1,26 @@
 <li class="pbc-ca-item" data-control-id="{{id}}" data-sort-control-code="{{slug}}" data-type="ControlAssessment">
     <div class="pbc-ca-title">
       <div class="row-fluid">
-        <div class="span3" data-target="#control_assessment-{{id}}" data-toggle="collapse">
-          <div class="expander in"></div>
+        <div class="span2" data-target="#control_assessment-{{id}}" data-toggle="collapse">
+          <div class="expander"></div>
           <strong>{{slug}}</strong>
         </div>
-        <div class="span5">
+        <div class="span2" data-target="#control_assessment-{{id}}" data-toggle="collapse">
           {{title}}
         </div>
-        <div class="span1">
+        <div class="span4" data-target="#control_assessment-{{id}}" data-toggle="collapse">
+          <div class="control-icons">
+            <h6>
+              <i class="grcicon-document" data-placement="top" rel="tooltip" title="Documentation Request"></i>
+              0
+              <i class="grcicon-populationsample" data-placement="top" rel="tooltip" title="Population Request"></i>
+              0
+              <i class="grcicon-calendar" data-placement="top" rel="tooltip" title="Meeting Request"></i>
+              0
+            </h6>
+          </div>
+        </div>
+        <div class="span1" data-target="#control_assessment-{{id}}" data-toggle="collapse">
           <a class="btn btn-mini rotate_control_assessment" data-method="post" data-placement="top" data-remote="" href="/control_assessments/{{id}}/rotate?control_assessment%5Binternal_tod%5D=toggle" rel="tooltip" title="Internal: Test of Design">
             <i class="grcicon-blank"></i>
           </a>
@@ -16,7 +28,7 @@
             <i class="grcicon-blank"></i>
           </a>
         </div>
-        <div class="span1">
+        <div class="span1" data-target="#control_assessment-{{id}}" data-toggle="collapse">
           <a class="btn btn-mini rotate_control_assessment" data-method="post" data-placement="top" data-remote="" href="/control_assessments/{{id}}/rotate?control_assessment%5Bexternal_tod%5D=toggle" rel="tooltip" title="External: Test of Design">
             <i class="grcicon-blank"></i>
           </a>
@@ -26,7 +38,7 @@
         </div>
       </div>
     </div>
-    <div class="pbc-ca-content in collapse" id="control_assessment-{{id}}" style="height: auto;">
+    <div class="pbc-ca-content collapse" id="control_assessment-{{id}}">
       <ul class="pbc-requests">
       </ul>
     </div>
