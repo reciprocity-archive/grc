@@ -77,4 +77,14 @@ class Request < ActiveRecord::Base
   def after_destroy_detect_orphaned_control_assessment
     maybe_destroy_orphaned_control_assessment(control_assessment_id)
   end
+
+  def self.status_counts(requests)
+    counts = Hash[requests.group_by(&:status).map{|x| [x[0], x[1].size]}]
+    counts['Draft'] += counts.delete(nil)
+
+    # Ensure each status is included
+    self.statuses.each { |s| counts[s] ||= 0 }
+
+    counts
+  end
 end

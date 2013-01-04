@@ -10,15 +10,16 @@
 
 -cycle.pbc_lists.each do |pbc_list|
   %h5
-    %span=pbc_list.control_assessments.count
+    %span=pbc_list.requests.count
     Requests
   %a.item-link{ :href => flow_pbc_list_path(pbc_list.id) }
+    -status_counts, status_percentages = pbc_list.request_stats
     .progress.progress-higher
-      .bar.bar-danger{"rel" => "tooltip", "data-placement" => "top", "title" => "Draft (10)", "data-percentage" => "10"}
-      .bar.bar-warning{"rel" => "tooltip", "data-placement" => "top", "title" => "Open - Waiting Auditors (15)", "data-percentage" => "15"}
-      .bar.bar-warning{"rel" => "tooltip", "data-placement" => "top", "title" => "Open - Waiting Compliance (45)", "data-percentage" => "45"}
-      .bar.bar-success{"rel" => "tooltip", "data-placement" => "top", "title" => "Completed (30)", "data-percentage" => "30"}
-  
+      .bar.bar-danger{:rel => "tooltip", :'data-placement' => "top", :title => "Draft (#{status_counts['Draft']})", :'data-percentage' => status_percentages['Draft']}
+      .bar.bar-info{:rel => "tooltip", :'data-placement' => "top", :title => "Waiting Auditors (#{status_counts['Waiting Auditors']})", :'data-percentage' => status_percentages['Waiting Auditors']}
+      .bar.bar-warning{:rel => "tooltip", :'data-placement' => "top", :title => "Waiting Compliance (#{status_counts['Waiting Compliance']})", :'data-percentage' => status_percentages['Waiting Compliance']}
+      .bar.bar-success{:rel => "tooltip", :'data-placement' => "top", :title => "Completed (#{status_counts['Completed']})", :'data-percentage' => status_percentages['Completed']}
+
   %a.btn.btn-mini.pull-right{ :href => flow_pbc_list_path(pbc_list.id), :style => "margin-top:6px" }
     &nbsp; View PBC List
     %i.grcicon-arrowright

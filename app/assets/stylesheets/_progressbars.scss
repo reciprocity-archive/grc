@@ -16,29 +16,40 @@
     }
   }
 
-  .bar-success {
+  .bar {
+    float:left;
+   }
+
+  .progressbar-info, .bar-info {
+    background-color: #0D90D1;
+    @include background-image(linear-gradient(top, #149BDF, #0480BE));
+    //@include background-image(linear-gradient(top, #62c462, #57a957));
+    @include opacity(0.8);
+    &:hover {
+      @include opacity(1.0);
+      border:1px solid darken(#0D90D1,15%);
+    }
+  }
+  .progressbar-success, .bar-success {
     background-color: #5eb95e;
     @include background-image(linear-gradient(top, #62c462, #57a957));
     @include opacity(0.8);
-    float:left;
     &:hover {
       @include opacity(1.0);
       border:1px solid darken(#5eb95e,15%);
     }
   }
-  .bar-danger {
+  .progressbar-danger, .bar-danger {
     background-color: #dd514c;
     @include background-image(linear-gradient(top, #ee5f5b, #c43c35));
     @include opacity(0.8);
-    float:left;
     &:hover {
       @include opacity(1.0);
       border:1px solid darken(#dd514c,15%);
     }
   }
-  .bar-warning {
+  .progressbar-warning, .bar-warning {
     background-color: #faa732;
-    float:left;
     @include background-image(linear-gradient(top, #fbb450, #f89406));
     @include opacity(0.8);
     &:hover {

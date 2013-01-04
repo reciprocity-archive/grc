@@ -20,4 +20,14 @@ class PbcList < ActiveRecord::Base
   def display_name
     title
   end
+
+  def request_stats
+    counts = Request.status_counts(self.requests.all)
+    total = counts.values.sum
+    percentages = {}
+    counts.each do |k, v|
+      percentages[k] = (100.0 * v) / total
+    end
+    [counts, percentages]
+  end
 end
