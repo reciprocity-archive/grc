@@ -80,11 +80,11 @@ class Request < ActiveRecord::Base
 
   def self.status_counts(requests)
     counts = Hash[requests.group_by(&:status).map{|x| [x[0], x[1].size]}]
-    counts['Draft'] += counts.delete(nil)
 
     # Ensure each status is included
     self.statuses.each { |s| counts[s] ||= 0 }
 
+    counts['Draft'] += counts.delete(nil)
     counts
   end
 end
