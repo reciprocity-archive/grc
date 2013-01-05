@@ -57,8 +57,8 @@
         </label>
         <ul class="pbc-item-list">
           {{#system.object_people}}
-          <li {{data 'model'}} data-model="true" class="dropdown">
-            <a class="btn btn-nano pull-right remove_person" href="javascript://" title="{{person.email}}">
+          <li {{data 'model'}} data-model="true" class="dropdown" title="{{person.email}}">
+            <a class="btn btn-nano pull-right remove_person" href="javascript://">
               <i class="grcicon-x-grey"></i>
             </a>
             {{person.name}} 
