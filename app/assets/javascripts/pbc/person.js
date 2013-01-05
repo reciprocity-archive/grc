@@ -75,6 +75,22 @@ can.Model.Cacheable("CMS.Models.ObjectPerson", {
             , data : _params
         });
     }
+    , update : function(id, object) {
+        var _params = {
+            object_person : {
+                personable_id : object.personable_id
+                , person_id : object.person_id
+                , role : object.role
+                , personable_type : object.personable_type
+            }
+        };
+        return $.ajax({
+            type : "PUT"
+            , "url" : "/object_people/" + id + ".json"
+            , dataType : "json"
+            , data : _params
+        });
+    }
     , destroy : "DELETE /object_people/{id}.json"
 }, {
     init : function() {

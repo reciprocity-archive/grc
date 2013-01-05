@@ -125,7 +125,7 @@ CmsRails::Application.routes.draw do
     end
   end
 
-  resources :object_people, :as => 'flow_object_people', :only => [:index, :create, :destroy] do
+  resources :object_people, :as => 'flow_object_people', :only => [:index, :create, :update, :destroy] do
     collection do
       get 'list_edit'
     end
