@@ -58,14 +58,11 @@ $.widget(
   , { options : {
       source : CMS.Models.Person.search
       , select :  function(event, ui) { 
-        $(event.target).closest(".inline-editing").find(".input-name").val(ui.item.name); 
-        $(event.target).closest(".inline-editing").find(".input-ldap").val(ui.item.email); 
-        $(event.target).closest('.inline-editing').find(".input-id").val(ui.item.id); 
+        $(event.target).trigger("personSelected", ui.item);
         return false;
       } 
       , search : function(event) {
-        $(event.target).closest('.inline-editing').find(".input-id").val(""); 
-        $(event.target).closest(".inline-editing").find(".input-name").val(""); 
+        
       } 
   }});
 $.widget.bridge("pbc_autocomplete_people", $.pbc.autocomplete_people);

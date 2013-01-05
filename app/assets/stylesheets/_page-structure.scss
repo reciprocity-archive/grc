@@ -282,3 +282,16 @@ ul.pbc-requests {
     }
   }
 }
+
+.pbc-responses .edit-person-role {
+    border-top-width: 0px;
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+    background: none;
+    border: none;
+    line-height: 12px;
+    height: 20px;
+    text-decoration: underline;
+    padding: 0;
+    width: auto;
+}
