@@ -87,6 +87,20 @@
       this.setSelected(el.closest("[data-model]").data("model"));
     }
 
+    , filter : function(str) {
+      if(str != null) {
+        this.options.filter = str.toUpperCase();
+      }
+      var that = this;
+      this.element.find("[data-model]").each(function() {
+        var $this = $(this);
+        if(!that.options.filter || $this.find(".regulationslot").text().toUpperCase().indexOf(that.options.filter) > 1)
+          $this.show();
+        else
+          $this.hide();
+      });
+    }
+
   });
 
 })(can.$);

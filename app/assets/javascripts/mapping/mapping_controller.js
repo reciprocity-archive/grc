@@ -263,6 +263,19 @@ can.Control("CMS.Controllers.MappingWidgets", {}, {
     });
   }
 
+  , ".widgetsearch-tocontent keydown" : function(el, ev) {
+    var controllers = this.element.find(".cms_controllers_controls, .cms_controllers_sections").controls(namespace.CMS.Controllers.Controls);
+    $(controllers).each(function() {
+      var that = this;
+      setTimeout(function() {
+        if(that.options.arity > 1) {
+          that.filter(el.val());
+        }
+      }, 1);
+    });
+    ev.stopPropagation();
+  }
+
 });
 
 })(this, can.$);
