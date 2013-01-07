@@ -126,4 +126,13 @@ can.Control("CMS.Controllers.PBCModals", {
       $this.closest('.pbc-control-select').find('.item').text(control_data.slug);
       $("#request_control_id").val(control_data.id)
     }
+
+    , ".btn[href='#newResponse'] click" : function(el, ev) {
+        $(el).hide();
+    }
+
+    , ".items-list hide" : function(el, ev) {
+        $("[data-target='#" + $(el).attr("id") + "']").closest("[data-toggle=modal]").show()
+    }
+
 });
