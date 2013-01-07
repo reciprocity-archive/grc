@@ -2,7 +2,7 @@
     <div class="pbc-ca-title">
       <div class="row-fluid">
         <div class="span2" data-target="#control_assessment-{{id}}" data-toggle="collapse">
-          <div class="expander"></div>
+          <div class="expander in"></div>
           <strong>{{slug}}</strong>
         </div>
         <div class="span2" data-target="#control_assessment-{{id}}" data-toggle="collapse">
@@ -10,6 +10,8 @@
         </div>
         <div class="span4" data-target="#control_assessment-{{id}}" data-toggle="collapse">
           <div class="control-icons">
+          &nbsp;
+          {{!
             <h6>
               <i class="grcicon-document" data-placement="top" rel="tooltip" title="Documentation Request"></i>
               0
@@ -18,6 +20,7 @@
               <i class="grcicon-calendar" data-placement="top" rel="tooltip" title="Meeting Request"></i>
               0
             </h6>
+          }}
           </div>
         </div>
         <div class="span1" data-target="#control_assessment-{{id}}" data-toggle="collapse">

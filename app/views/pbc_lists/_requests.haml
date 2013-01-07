@@ -37,19 +37,22 @@
       .pbc-ca-title
         .row-fluid
           .span2{"data-target" => "##{control_assessment_collapse_id}", "data-toggle" => "collapse"}
-            .expander
+            .expander.in
             %strong=(control_assessment && control_assessment.control.slug) || "(Missing Control)".html_safe
           .span2{"data-target" => "##{control_assessment_collapse_id}", "data-toggle" => "collapse"}
             =control_assessment && control_assessment.control.title || "&nbsp;".html_safe
           .span4{"data-target" => "##{control_assessment_collapse_id}", "data-toggle" => "collapse"}
-            .control-icons
-              %h6
-                %i{"rel" => "tooltip", "data-placement" => "top", "title" => "Documentation Request", "class" => "grcicon-document"}
-                = request_type_count(requests, "Documentation")
-                %i{"rel" => "tooltip", "data-placement" => "top", "title" => "Population Request", "class" => "grcicon-populationsample"}
-                = request_type_count(requests, "Population Sample")
-                %i{"rel" => "tooltip", "data-placement" => "top", "title" => "Meeting Request", "class" => "grcicon-calendar"}
-                = request_type_count(requests, "Interview")
+            &nbsp;
+            -# Story 41602953 called for the request counts being removed from the CA header due to confusing re-use of icons.
+            -# Saving here for historical record & in case we decide to restore them later --BM
+            -#.control-icons
+            -#  %h6
+            -#    %i{"rel" => "tooltip", "data-placement" => "top", "title" => "Documentation Request", "class" => "grcicon-document"}
+            -#    = request_type_count(requests, "Documentation")
+            -#    %i{"rel" => "tooltip", "data-placement" => "top", "title" => "Population Request", "class" => "grcicon-populationsample"}
+            -#    = request_type_count(requests, "Population Sample")
+            -#    %i{"rel" => "tooltip", "data-placement" => "top", "title" => "Meeting Request", "class" => "grcicon-calendar"}
+            -#    = request_type_count(requests, "Interview")
           -if control_assessment.present?
             .span1
               %a.btn.btn-mini.rotate_control_assessment{ :rel => "tooltip", :'data-placement' => "top", :title => "Internal: Test of Design", :class => control_assessment_button_class(control_assessment.internal_tod), :'data-remote' => true, :'data-method' => 'post', :href => rotate_flow_control_assessment_path(control_assessment, :'control_assessment[internal_tod]' => 'toggle') }

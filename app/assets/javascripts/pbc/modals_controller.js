@@ -6,7 +6,12 @@
 can.Control("CMS.Controllers.PBCModals", {
     defaults : {}
 }, {
-    ".add-document click" : function(el, ev) {
+    init : function() {
+        var content = $(".pbc-ca-content");
+        content.collapse();
+    }
+
+    , ".add-document click" : function(el, ev) {
         this.selected_system_id = el.closest("[data-system-id]").data("system-id");
     }
 
@@ -93,11 +98,14 @@ can.Control("CMS.Controllers.PBCModals", {
             el.closest(".pbc-requests > .main-item").detach().appendTo($ca.find(".pbc-requests"));
             //$ca.find(".pbc-ca-title .expander").addClass("in");
             var content = $ca.find(".pbc-ca-content");
-            content.collapse("show");
+            content.collapse().collapse("show");
             $ca.find("[data-toggle=#" + content.attr("id") + "]").addClass("in");
             // sweep for newly empty control assessments and delete.
             $(".pbc-control-assessments .pbc-ca-item:not(:has(.main-item))").remove();
 
+            /*
+            Due to request counts being removed by story 41602953, this code is not currently
+             working or needed.  If request counts are restored, uncomment this block.  --BM
             var filtersmap = {
                 "Documentation" : ".grcicon-document"
                 , "Population Sample" : ".grcicon-populationsample"
@@ -108,6 +116,7 @@ can.Control("CMS.Controllers.PBCModals", {
             targetTextNode.nodeValue = [" ", parseInt(targetTextNode.nodeValue) + 1, " "].join("");
             targetTextNode =  $oldParent.find(".pbc-ca-title " + filtersmap[type_name])[0].nextSibling;
             targetTextNode.nodeValue = [" ", parseInt(targetTextNode.nodeValue) - 1, " "].join("");
+            */
         });
     }
 
