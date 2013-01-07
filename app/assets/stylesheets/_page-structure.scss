@@ -283,7 +283,8 @@ ul.pbc-requests {
   }
 }
 
-.pbc-responses .edit-person-role {
+.pbc-responses {
+  .edit-person-role, .edit-document-role {
     border-top-width: 0px;
     -webkit-appearance: textfield;
     -moz-appearance: textfield;
@@ -294,4 +295,5 @@ ul.pbc-requests {
     text-decoration: underline;
     padding: 0;
     width: auto;
+  }
 }

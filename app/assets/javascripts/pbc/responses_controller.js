@@ -3,17 +3,19 @@
 
 (function(namespace, $) {
 
-function object_person_event(el, ev, data) {
-    var that = this;
-    this.create_object_relation(
-        "person"
-        , el.closest("[data-system-id]").data("system-id")
-        , can.extend(data, {role : "responsible"})
-        )
-    .then(function() {
-        el.find("form")[0].reset();
-        that.restore_add_link(el, ev);        
-    });
+function object_event(type) {
+    return function(el, ev, data) {
+        var that = this;
+        this.create_object_relation(
+            type
+            , el.closest("[data-system-id]").data("system-id")
+            , can.extend(data, { role : type==="person" ? "responsible" : "general" } )
+            )
+        .then(function() {
+            el.find("form")[0].reset();
+            that.restore_add_link(el, ev);        
+        });
+    }
 }
 
 can.Control("CMS.Controllers.Responses", {
@@ -65,17 +67,16 @@ can.Control("CMS.Controllers.Responses", {
         el.prev(".inline-add-document").removeClass("hide").find(".input-title").focus();
         el.addClass("hide");
     }
-    , ".cancel-add-document click" : function(el, ev) {
-        this.restore_add_link.call(this, el, ev);
-    }
     , restore_add_link : function(el) {
         var $li = el.closest(".inline-add-person, .inline-add-document");
 
         $li.next(".toggle-add-person, .toggle-add-document").removeClass("hide");
         $li.addClass("hide");        
     }
-    , ".inline-add-person personSelected" : object_person_event
-    , ".inline-add-person modal:success" : object_person_event
+    , ".inline-add-person personSelected" : object_event("person")
+    , ".inline-add-person modal:success" : object_event("person")
+    , ".inline-add-document documentSelected" : object_event("document")
+    , ".inline-add-document modal:success" : object_event("document")
     , create_object_relation : function(type, system_id, params) {
         var that = this
         , dfd;
@@ -102,55 +103,17 @@ can.Control("CMS.Controllers.Responses", {
         });
     }
 
-    , ".add-document:not(.disabled) click" : function(el, ev) {
-        var $form = el.closest("form")
-        , $inputs = can.makeArray($form.get(0).elements)
-        , params = {}
-        , that = this;
-        
-        can.each($inputs, function(input){
-            params[$(input).attr("name")] = $(input).val();
-        });
-
-        this.create_object_relation(
-            "document"
-            , el.closest("[data-system-id]").data("system-id")
-            , params
-            )
-        .then(function(){
-            $form[0].reset();
-            $form.find(".cancel-add-document").click();
-        });
-    } 
-
-    , ".inline-add-person keydown" : function(el, ev) {
+    , ".inline-add-person, .inline-add-document keydown" : function(el, ev) {
         if(ev.which === $.ui.keyCode.ESCAPE) {
             this.restore_add_link(el);
         }
     }
-    , ".edit-person-role change" : function(el, ev) {
+    , ".edit-person-role, .edit-document-role change" : function(el, ev) {
         var role = el.val()
         , model = el.closest("[data-model]").data("model");
 
         model.attr("role", role);
         model.save();
-    }
-
-    , ".inline-add-document keydown" : function(el, ev) {
-        if(el.find(".input-title").val() === ""
-            || el.find(".input-role").val() === "") {
-            el.find(".add-document").addClass("disabled").removeClass("btn-primary");
-        } else {
-            el.find(".add-document").removeClass("disabled").addClass("btn-primary");
-        }
-    }
-    , ".inline-add-document change" : function(el, ev) {
-        if(el.find(".input-title").val() === ""
-            || el.find(".input-role").val() === "") {
-            el.find(".add-document").addClass("disabled").removeClass("btn-primary");
-        } else {
-            el.find(".add-document").removeClass("disabled").addClass("btn-primary");
-        }
     }
 });
 
