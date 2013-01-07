@@ -255,7 +255,7 @@
 
   var _modal_hide = $.fn.modal.Constructor.prototype.hide;
   $.fn.modal.Constructor.prototype.hide = function(ev) {
-    if(ev && (ev.currentTarget !== ev.target))
+    if(ev && (ev.modalHidden))
         return;  //We already hid one
 
     _modal_hide.apply(this, arguments);
@@ -271,6 +271,7 @@
     lastModal.css({"height" : "", "overflow" : "", top : "", "margin-top" : ""});
     arrangeTopModal(modals, lastModal);
     arrangeBackgroundModals(modals, lastModal);
+    ev.modal_hidden = true; //mark that we've hidden one
   };
 
   $(function() {
