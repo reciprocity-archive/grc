@@ -159,7 +159,10 @@ module ApplicationHelper
       sort_by do |_, control_assessment, _|
         key = control_assessment.nil? ? '' : control_assessment.control.slug
         # Magical sort respecting numbers
-        key.split(/(\d+)/).map { |s| [s.to_i, s] }
+        key = key.split(/(\d+)/).map { |s| [s.to_i, s] }
+        # No-controls go last instead of first.
+        if key.empty? then key = [[+1.0/0.0, '']] end
+        key
       end
   end
 
