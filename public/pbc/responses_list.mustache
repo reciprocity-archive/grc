@@ -100,7 +100,7 @@
             <a class="btn btn-nano pull-right remove_document" href="javascript://">
               <i class="grcicon-x-grey"></i>
             </a>
-            {{document.title}} 
+            <a href="{{document.link_url}}" target="_blank">{{document.title}}</a>
             (<select class="edit-document-role">
               <option value="general" {{#if_equals role 'general'}}selected="true"{{/if_equals}}>General Doc</option>
             </select>)
