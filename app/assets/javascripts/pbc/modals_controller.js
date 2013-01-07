@@ -127,11 +127,12 @@ can.Control("CMS.Controllers.PBCModals", {
       $("#request_control_id").val(control_data.id)
     }
 
-    , ".btn[href='#newResponse'] click" : function(el, ev) {
-        $(el).hide();
+    , ".items-list[id$=new] shown" : function(el, ev) {
+        $("[data-target='#" + $(el).attr("id") + "']").closest("[data-toggle=modal]").hide()
+        $(el).find("input[type=text]:first").focus();
     }
 
-    , ".items-list hide" : function(el, ev) {
+    , ".items-list[id$=new] hidden" : function(el, ev) {
         $("[data-target='#" + $(el).attr("id") + "']").closest("[data-toggle=modal]").show()
     }
 
