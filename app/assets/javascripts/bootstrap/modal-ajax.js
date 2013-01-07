@@ -271,7 +271,7 @@
     lastModal.css({"height" : "", "overflow" : "", top : "", "margin-top" : ""});
     arrangeTopModal(modals, lastModal);
     arrangeBackgroundModals(modals, lastModal);
-    ev.modal_hidden = true; //mark that we've hidden one
+    if(ev) ev.modal_hidden = true; //mark that we've hidden one
   };
 
   $(function() {
