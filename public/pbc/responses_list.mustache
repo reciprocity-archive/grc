@@ -57,7 +57,7 @@
         </label>
         <ul class="pbc-item-list">
           {{#system.object_people}}
-          <li {{data 'model'}} data-model="true" class="dropdown" title="{{person.email}}">
+          <li {{data 'model'}} data-model="true" title="{{person.email}}">
             <a class="btn btn-nano pull-right remove_person" href="javascript://">
               <i class="grcicon-x-grey"></i>
             </a>
@@ -96,7 +96,7 @@
         <ul class="pbc-item-list">
           {{#if_equals type_name 'Documentation'}}
           {{#system.object_documents}}
-          <li {{data 'model'}} data-model="true">
+          <li {{data 'model'}} data-model="true" title="{{document.link_url}}">
             <a class="btn btn-nano pull-right remove_document" href="javascript://">
               <i class="grcicon-x-grey"></i>
             </a>
