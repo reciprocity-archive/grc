@@ -34,24 +34,7 @@
   -filters_disabled = pbc_list.requests.count == 0
   -if !filters_disabled
     .row-fluid
-      .span3
-        .filters-box.sort-by
-          .row-fluid
-            .span9
-              %label
-                Sort by
-              %select.span12#sortTypeSelect{ :disabled => filters_disabled }
-                %option{:selected => "selected"} Control Code
-                %option Request Date
-            .span3
-              %label
-                &nbsp;
-              .btn-group
-                %a.btn.btn-mini#sortDirectionForward.active
-                  %i.grcicon-sortUp
-                %a.btn.btn-mini#sortDirectionReverse
-                  %i.grcicon-sortDown
-      .span9
+      .span12
         .filters-box
           .row-fluid
             .span3
