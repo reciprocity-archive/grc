@@ -22,7 +22,7 @@
       =f.object.control && f.object.control.slug || "&nbsp;".html_safe
   =wrapped_text_field f, :span2, :company_responsible, :placeholder => 'Email', :label_name => 'Company Contact'
   =wrapped_text_field f, :span2, :auditor_responsible, :placeholder => 'Name', :label_name => 'Auditor Contact'
-  =wrapped_date_field f, :span2, :date_requested, :class => 'date', :placeholder => 'MM/DD/YYYY', :label_name => 'Date Requested'
+  =wrapped_date_field f, :span2, :date_requested, :class => 'date', :placeholder => 'MM/DD/YYYY', :label_name => 'Date Requested', :value => Time.zone.now.strftime('%m/%d/%Y')
   =wrapped_select f, :span2, :status, Request.statuses, :selected => (f.object.status), :label_name => 'Status of Request'
 
 .row-fluid
