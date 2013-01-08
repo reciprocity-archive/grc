@@ -1,6 +1,7 @@
 //= require can.jquery-all
 //= require sections/section
 //= require controls/control
+//= require controls/controls_controller
 
 (function(namespace, $) {
 function mapunmap(unmap) {
