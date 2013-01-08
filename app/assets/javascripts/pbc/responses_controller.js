@@ -39,10 +39,20 @@ can.Control("CMS.Controllers.Responses", {
         this.options.model.findAll({ request_id : this.options.id }, this.proxy("draw_list"));
     }
     , draw_list : function(list) {
+        var that = this;
         if(list) {
             this.list = list;
         }
-        this.element.html(can.view(this.options.list, this.options.observer = new can.Observe({list : this.list, type_id : this.options.type_id, type_name : this.options.type_name})));
+
+        can.view(
+            this.options.list
+            , this.options.observer = new can.Observe({
+                list : this.list
+                , type_id : this.options.type_id
+                , type_name : this.options.type_name})
+            , function(frag) {
+                that.element.html(frag);
+            });
     }
     , "{model} created" : function(Model, ev, response) {
         if(response.request_id === this.options.id) {  
