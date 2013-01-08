@@ -84,7 +84,7 @@ class Request < ActiveRecord::Base
     # Ensure each status is included
     self.statuses.each { |s| counts[s] ||= 0 }
 
-    counts['Draft'] += counts.delete(nil)
+    counts['Draft'] += counts.delete(nil).to_i
     counts
   end
 end
