@@ -3,6 +3,10 @@
 describe("CMS.Controllers.MappingWidgets", function() {
 
     beforeEach(function() {
+        spyOn(CMS.Controllers.Controls.prototype, "fetch_list");
+        spyOn(CMS.Controllers.Controls.prototype, "fetch_one"); //spy out this to prevent errors
+        spyOn(CMS.Controllers.Controls.prototype, "draw_list");
+        spyOn(CMS.Controllers.Controls.prototype, "draw_one"); //spy out this to prevent errors
         affix("#mapping").cms_controllers_mapping_widgets();
     });
 
@@ -18,7 +22,6 @@ describe("CMS.Controllers.MappingWidgets", function() {
         });
 
         it("unsets instance from selected widget", function() {
-            spyOn(CMS.Controllers.Controls.prototype, "draw_one"); //spy out this to prevent errors
             spyOn(CMS.Controllers.Controls.prototype, "update");
 
             $("#mapping").affix(".clearselection").affix("div").cms_controllers_controls({ arity : 1 });
@@ -31,7 +34,6 @@ describe("CMS.Controllers.MappingWidgets", function() {
 
     it(".widgetsearch-tocontent keydown [triggers filter]", function() {
         $("#mapping").affix("input.widgetsearch-tocontent[type=text]").val("foo");
-        spyOn(CMS.Controllers.Controls.prototype, "draw_list");
         $("#mapping").affix("div").cms_controllers_controls({ arity : 2 });
         spyOn(CMS.Controllers.Controls.prototype, "filter").andCallThrough();
 
