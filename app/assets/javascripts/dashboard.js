@@ -1,6 +1,7 @@
 /*
  *= require application
  *= require jquery
+ *= require fastfix
  *= require jquery-ui
  *= require bootstrap
  *= require related_selector
@@ -18,51 +19,6 @@
  *= require related
  *= require related_graph
  */
-
-//jQuery event speedup thanks to the Bitovi guys
-// http://bitovi.com/blog/2012/04/faster-jquery-event-fix.html
-if(Object.defineProperty) {
-  Object.defineProperty(jQuery.Event.prototype, "relatedTarget",{
-    get : function(){
-      var original = this.originalEvent,
-      value =  (original.relatedTarget ||
-                original.fromElement === this.target ? 
-                  original.toElement : 
-                  original.fromElement);
-      Object.defineProperty(this, "relatedTarget",{
-        value: value
-      });
-      return value;
-    }  
-  });
-
-  Object.defineProperty(jQuery.Event.prototype, "pageX",{ 
-    get : function(){
-      var original = this.originalEvent
-        , eventDoc = this.target.ownerDocument || document
-        , doc = eventDoc.documentElement
-        , body = eventDoc.body
-        , value = original.clientX + ( doc && doc.scrollLeft || body && body.scrollLeft || 0 ) - ( doc && doc.clientLeft || body && body.clientLeft || 0 ) ;
-      Object.defineProperty(this, "pageX",{
-        value: value
-      });
-      return value;
-    }
-  });
-    Object.defineProperty(jQuery.Event.prototype, "pageY",{ 
-    get : function(){
-      var original = this.originalEvent
-        , eventDoc = this.target.ownerDocument || document
-        , doc = eventDoc.documentElement
-        , body = eventDoc.body
-        , value = original.clientY + ( doc && doc.scrollTop || body && body.scrollTop || 0 ) - ( doc && doc.clientTop || body && body.clientTop || 0 ) ;
-      Object.defineProperty(this, "pageY",{
-        value: value
-      });
-      return value;
-    }
-  });
-}
 
 // Initialize delegated event handlers
 jQuery(function($) {
