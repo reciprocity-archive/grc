@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130108103758) do
+ActiveRecord::Schema.define(:version => 20130108230424) do
 
   create_table "accounts", :force => true do |t|
     t.string   "username"
@@ -123,6 +123,12 @@ ActiveRecord::Schema.define(:version => 20130108103758) do
     t.integer  "modified_by_id"
     t.datetime "created_at",                        :null => false
     t.datetime "updated_at",                        :null => false
+    t.string   "title"
+    t.string   "audit_firm"
+    t.string   "audit_lead"
+    t.text     "description"
+    t.string   "status"
+    t.text     "notes"
   end
 
   add_index "cycles", ["program_id"], :name => "index_cycles_on_regulation_id"
@@ -226,16 +232,9 @@ ActiveRecord::Schema.define(:version => 20130108103758) do
 
   create_table "pbc_lists", :force => true do |t|
     t.integer  "audit_cycle_id"
-    t.string   "title"
-    t.string   "audit_firm"
-    t.string   "audit_lead"
-    t.text     "description"
-    t.datetime "list_import_date"
-    t.string   "status"
-    t.text     "notes"
     t.integer  "modified_by_id"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "people", :force => true do |t|

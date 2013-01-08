@@ -4,8 +4,6 @@
       Import Requests
     %a.btn.btn-mini{ :href => export_flow_pbc_list_path(pbc_list), :'data-toggle' => 'modal-ajax' }
       Export Requests
-    %a.btn.btn-mini{ :href => edit_flow_pbc_list_path(pbc_list.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide'}
-      %i.grcicon-edit-grey
     %a.btn.btn-mini{:href => "/help/pbc_list", :'data-toggle' => 'modal-ajax', :title => "Help - What is this?"}
       %i.grcicon-questionmark-grey
   %h2
@@ -20,18 +18,18 @@
       %h4=pbc_list.title
     .span3.widget-titles
       %label Audit Firm
-      %h4=pbc_list.audit_firm
+      %h4=pbc_list.audit_cycle.audit_firm
     .span3.widget-titles
       %label Audit Lead
-      %h4=pbc_list.audit_lead
+      %h4=pbc_list.audit_cycle.audit_lead
     .span2.widget-titles
-      %label List Import Date
-      %h4=pbc_list.list_import_date && pbc_list.list_import_date.strftime('%m/%d/%Y')
+      %label Audit Start Date
+      %h4=pbc_list.audit_cycle.start_at && pbc_list.audit_cycle.start_at.strftime('%m/%d/%Y')
   .row-fluid
     .span9
       %label Description
       .rtf
-        =raw pbc_list.description
+        =raw pbc_list.audit_cycle.description
 
   -filters_disabled = pbc_list.requests.count == 0
   -if !filters_disabled

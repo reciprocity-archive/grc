@@ -76,7 +76,7 @@
                     %i{"rel" => "tooltip", "data-placement" => "top", "title" => "#{request.type_name} Request", "class" => request_type_icon(request.type_name) }
                   %a.btn.btn-mini.pull-right{:href => flow_controls_path(:list_select => 1), :'data-toggle' => 'modal-ajax-single-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#referenceList', :'data-modal-class' => 'modal-slim' }
                     %i.grcicon-link
-                  .item.i-control
+                  .item.i-control.oneline
                     -if request.control.present?
                       =request.control && request.control.slug
                     -elsif request.pbc_control_code.present?

@@ -160,25 +160,6 @@ class PbcListsController < BaseObjectsController
       flow_cycle_path(object.audit_cycle_id)
     end
 
-    def pbc_list_params
-      pbc_list_params = params[:pbc_list] || {}
-
-      audit_cycle_id = pbc_list_params.delete(:audit_cycle_id)
-      if audit_cycle_id.present?
-        audit_cycle = Cycle.where(:id => audit_cycle_id).first
-        if audit_cycle.present?
-          pbc_list_params[:audit_cycle] = audit_cycle
-        end
-      end
-      #%w(type).each do |field|
-      #  parse_option_param(pbc_list_params, field)
-      #end
-      %w(list_import_date).each do |field|
-        parse_date_param(pbc_list_params, field)
-      end
-      pbc_list_params
-    end
-
     def delete_model_stats
       [
         [ 'Request', @pbc_list.requests.count ]

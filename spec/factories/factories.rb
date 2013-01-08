@@ -221,6 +221,7 @@ FactoryGirl.define do
   end
 
   factory :cycle do
+    title 'title x'
     complete false
     start_at '2012-01-01'
     program { |c| c.association(:program) }
@@ -268,7 +269,6 @@ FactoryGirl.define do
   end
 
   factory :pbc_list do
-    title 'title x'
     audit_cycle { |c| c.association(:cycle) }
   end
 
