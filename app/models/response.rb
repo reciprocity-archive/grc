@@ -12,6 +12,9 @@ class Response < ActiveRecord::Base
   belongs_to :sample_worksheet_document, :class_name => "Document"
   belongs_to :sample_evidence_document, :class_name => "Document"
 
+  has_many :object_people, :as => :personable, :dependent => :destroy
+  has_many :people, :through => :object_people
+
   is_versioned_ext
 
   validates :request, :system,
