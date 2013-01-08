@@ -2,10 +2,15 @@ class Response < ActiveRecord::Base
   include AuthoredModel
   include AuthorizedModel
 
-  attr_accessible :request, :system, :status
+  attr_accessible :request, :system, :status, :population, :samples,
+    :population_document, :sample_worksheet_document, :sample_evidence_document
 
   belongs_to :request
   belongs_to :system
+
+  belongs_to :population_document, :class_name => "Document"
+  belongs_to :sample_worksheet_document, :class_name => "Document"
+  belongs_to :sample_evidence_document, :class_name => "Document"
 
   is_versioned_ext
 

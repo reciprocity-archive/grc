@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121218003659) do
+ActiveRecord::Schema.define(:version => 20130108103758) do
 
   create_table "accounts", :force => true do |t|
     t.string   "username"
@@ -337,8 +337,13 @@ ActiveRecord::Schema.define(:version => 20121218003659) do
     t.integer  "system_id"
     t.string   "status"
     t.integer  "modified_by_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.integer  "population_document_id"
+    t.integer  "population"
+    t.integer  "sample_worksheet_document_id"
+    t.integer  "samples"
+    t.integer  "sample_evidence_document_id"
   end
 
   create_table "risky_attributes", :force => true do |t|
