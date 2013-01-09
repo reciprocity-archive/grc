@@ -2,7 +2,7 @@ module SluggedModel
   def compact_slug
     return slug unless parent
     cslug = slug
-    cslug[parent.slug] = '' # Substring replacement of parent.slug with ''
+    cslug[parent.slug] = '' if cslug[parent.slug] # Substring replacement of parent.slug with ''
     return cslug
   end
 
