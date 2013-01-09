@@ -30,6 +30,7 @@ class Request < ActiveRecord::Base
 
   sanitize_attributes :pbc_control_desc, :request, :test, :notes
 
+  validates_presence_of :pbc_control_code
   validates :pbc_list,
     :presence => { :message => "needs a value" }
 
