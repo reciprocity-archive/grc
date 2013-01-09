@@ -127,13 +127,13 @@
                 .span2.pbc-item.pbc-status
                   %h5 Responsible Parties
                   %p
-                    %strong Company:
+                    %strong Internal contact email:
                     -if request.company_responsible.present?
                       =request.company_responsible
                     -else
                       %span.disabled-text Unknown company 
                     %br
-                    %strong Auditor:
+                    %strong Auditor contact email:
                     -if request.auditor_responsible.present?
                       =request.auditor_responsible
                     -else
