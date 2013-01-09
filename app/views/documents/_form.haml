@@ -12,7 +12,7 @@
     .span12{ :class => error_class(f, :title) }
       =f.label :title
       =f.text_field :title, :class => 'span12', :placeholder => 'Enter the title of this reference'
-  =wrapped_select(f, :span2, :year_id, Option.options_for(:document_year).map { |o| [o.title, o.id] }, :selected => (f.object.respond_to?(:year_id) ? f.object.year_id : nil), :include_blank => true)
+  =wrapped_select(f, :span2, :year_id, Option.options_for(:document_year).ordered_by_title_desc.map { |o| [o.title, o.id] }, :selected => (f.object.respond_to?(:year_id) ? f.object.year_id : nil), :include_blank => true)
   =wrapped_select(f, :span2, :language_id, Option.options_for(:language).map { |o| [o.title, o.id] }, :selected => (f.object.respond_to?(:language_id) ? f.object.language_id : nil), :include_blank => true)
   =wrapped_select(f, :span2, :kind_id, Option.options_for(:reference_type).map { |o| [o.title, o.id] }, :selected => (f.object.respond_to?(:kind_id) ? f.object.kind_id : nil), :include_blank => true, :label_name => 'Reference Kind')
   =wrapped_select(f, :span2, :type_id, Option.options_for(:document_type).map { |o| [o.title, o.id] }, :selected => (f.object.respond_to?(:type_id) ? f.object.type_id : nil), :include_blank => true, :label_name => 'DocType')
