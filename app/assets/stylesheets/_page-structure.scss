@@ -48,7 +48,16 @@
 }
 .pbc-response-process {
   padding: 10px;
-  background-color: #d8d8d8;
+  background-color: darken($bgndProcess,10%);
+  border:1px solid darken($bgndProcess,20%);
+  margin-bottom:8px;
+  @include border-radius(4px);
+  label {
+    color:darken($bgndProcess,60%);
+  }
+  p.full-view {
+    color:#333;
+  }
 }
 
 .pbc-response-info {

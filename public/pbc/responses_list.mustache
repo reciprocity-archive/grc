@@ -2,6 +2,7 @@
   <li class="item i-process" {{data 'model'}} data-model="true" data-id="{{id}}">
     <div class="row-fluid" data-target="#pbc-response-{{id}}" data-toggle="collapse">
       <div class="span4">
+        <div class="expander"></div>
         Response using Process:
         {{system.title}}
       </div>
@@ -34,11 +35,11 @@
       <div class="span5">
         &nbsp;
       </div>
-      <div class="span1 pbc-item pbc-actions">
-        <a class="btn btn-mini" rel="tooltip" data-placement="left" title="More" data-target="#pbc-response-{{id}}" data-toggle="collapse" href="javascript://">
-          <i class="grcicon-more"></i>
+      <div class="span1 pbc-actions">
+        <a class="btn btn-mini delete-response" style="margin-top:0" href="/responses/{{id}}/delete" data-toggle="modal-ajax-form" title="Delete response" rel="tooltip" data-placement="left" data-id="{{id}}">
+          <i class="grcicon-x-grey"></i>
         </a>
-      </div>
+      </div>    
     </div>
     <div id="pbc-response-{{id}}" class="row-fluid collapse">
       {{#system}}
@@ -84,22 +85,17 @@
               </li>
               <li class="toggle-add-document add-new">
                 <a href="javascript://">
-                  Add new document
+                  + Add new document
                 </a>
               </li>
               {{else}}
               <li class="add-new">
                 <a class="disabled" href="javascript://">
-                  Add new {{type_name}}
+                  + Add new {{type_name}}
                 </a>
               </li>
               {{/if_equals}}
             </ul>
-          </div>
-          <div class="span1 pbc-item pbc-actions">
-            <a class="btn btn-mini delete-response" href="/responses/{{id}}/delete" data-toggle="modal-ajax-form" title="Delete response" rel="tooltip" data-placement="left" data-id="{{id}}">
-              <i class="grcicon-x-grey"></i>
-            </a>
           </div>
         </div>
       </div>
