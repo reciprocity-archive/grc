@@ -43,26 +43,28 @@ class MappingController < ApplicationController
         return
       end
       ccontrol = Control.find(params[:ccontrol])
-      rcontrol = Control.new(
-        :title => section.title,
-        :slug => section.slug + "-" + ccontrol.slug,
-        :description => "Placeholder",
-        #:program => ccontrol.program,
-        :type => ccontrol.type,
-        :kind => ccontrol.kind,
-        :means => ccontrol.means,
-        :start_date => ccontrol.start_date,
-        :stop_date => ccontrol.stop_date,
-        :url => ccontrol.url,
-        :verify_frequency => ccontrol.verify_frequency,
-        :documentation_description => ccontrol.documentation_description
-      )
+
+      rcontrol_slug = section.slug + "-" + ccontrol.slug
+      rcontrol = Control.where(:slug => rcontrol_slug).first_or_initialize(
+          :title => section.title,
+          :slug => rcontrol_slug,
+          :description => "Placeholder",
+          #:program => ccontrol.program,
+          :type => ccontrol.type,
+          :kind => ccontrol.kind,
+          :means => ccontrol.means,
+          :start_date => ccontrol.start_date,
+          :stop_date => ccontrol.stop_date,
+          :url => ccontrol.url,
+          :verify_frequency => ccontrol.verify_frequency,
+          :documentation_description => ccontrol.documentation_description
+        )
       rcontrol.program = section.program
       rcontrol.save
 
       rcontrol_id = rcontrol.id
-      ControlControl.create(:implemented_control => rcontrol,
-                            :control => ccontrol)
+      ControlControl.where(:implemented_control_id => rcontrol,
+                            :control_id => ccontrol).first_or_create
       notice = notice + "Created regulation control #{rcontrol.slug}. "
     else
       rcontrol = Control.find(rcontrol_id)
@@ -75,8 +77,8 @@ class MappingController < ApplicationController
       }
       notice = notice + "Unmapped regulation control. "
     else
-      ControlSection.create(:section => section,
-                            :control => rcontrol)
+      ControlSection.where(:section_id => section,
+                            :control_id => rcontrol).first_or_create
       notice = notice + "Mapped regulation control. "
     end
 
