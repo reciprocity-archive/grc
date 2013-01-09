@@ -7,17 +7,16 @@
 -content_for :header do
   %ol#breadcrumb
     %li PROGRAMS
-    %li=instance.audit_cycle.program.title
-    %li AUDITS
-    %li Audit Name
-    %li.last PBC List
+    %li=link_to instance.audit_cycle.program.title, flow_program_path(instance.audit_cycle.program_id)
+    %li AUDIT
+    %li.last=link_to instance.audit_cycle.title, flow_cycle_path(instance.audit_cycle_id)
   #pageTitle.location
-    PBC List Title
+    #{instance.audit_cycle.title} PBC List
 
 -content_for :page_help, 'pbc_list'
 
 -content_for :subheader_extras do
-  -#%h1#pageType.pull-right.highlighted PBC List
+  %h1#pageType.pull-right.highlighted PBC List
 
 .row-fluid.fluid-layout
   .span12
