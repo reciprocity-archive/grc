@@ -10,13 +10,8 @@
 .row-fluid
   .span2{:class => error_class(f, :program)}
     %label{:for => "section-program_id"} Program
-    %select#section-program_id.input-small{:name => "section[program_id]", :placeholder => "SOX", :type => "text"}
-      %option{:value => ""}
-      -Program.all.each do |program|
-        -if f.object.program_id == program.id
-          %option{:value => program.id, :selected => true}=program.slug
-        -else
-          %option{:value => program.id}=program.slug
+    %input#section-program_id{:name => "section[program_id]", :type => "hidden", :value => f.object.program_id}
+    =f.object.program.slug
     =error_messages_inline(f, :program)
 
   .span2{:class => error_class(f, :slug)}
