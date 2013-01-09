@@ -83,11 +83,12 @@
                       ="#{request.pbc_control_code} [Code not recognized]"
                     -else
                       No control selected
-                .span3.pbc-request{ "data-target" => ".#{request_collapse_class}", "data-toggle" => "collapse"}
+                .span2.pbc-request{ "data-target" => ".#{request_collapse_class}", "data-toggle" => "collapse"}
                   %h6.pbc-request-count
                     =pluralize(request.responses.count, "response")
-                .span1{ "data-target" => ".#{request_collapse_class}", "data-toggle" => "collapse"}
-                  &nbsp;
+                .span2{ "data-target" => ".#{request_collapse_class}", "data-toggle" => "collapse", :title => 'Date Requested'}
+                  %label
+                    =request.date_requested && request.date_requested.strftime('%m/%d/%Y')
                 .span4.pbc-status
                   %label.pull-left Status of Request:&nbsp; 
                   %select
