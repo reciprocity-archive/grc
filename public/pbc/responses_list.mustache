@@ -67,7 +67,7 @@
                 <form>
                   <div class="row-fluid">
                     <div class="span10">
-                      <input class="span12 input-title" name="title" placeholder="Doc title or URL" type="text" {{ (el) -> el.pbc_autocomplete_people() }}>
+                      <input class="span12 input-title" name="title" placeholder="LDAP or name" type="text" {{ (el) -> el.pbc_autocomplete_people() }}>
                     </div>
                     <div class="span2">
                       <a class="btn btn-mini span12 add-person" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/people/new" data-target="#ajax-modal-people-new">
@@ -100,18 +100,18 @@
               <li class="inline-editing inline-add-meeting hide" data-system-id="{{system.id}}">
                 <form>
                   <div class="row-fluid">
-                    <div class="span10">
-                      <input class="span12 input-title" name="title" placeholder="Doc title or URL" type="text">
+                    <div class="span6">
+                      <input class="span12 input-date" name="date" placeholder="choose a meeting date and time" type="text" {{ (el) -> $(el).datepicker(); }}>
                     </div>
                     <div class="span2">
-                      <a class="btn btn-mini span12 add-document" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/documents/new" data-target="#ajax-modal-documents-new">
+                      <a class="btn btn-mini span12 add-meeting">
                         <i class="grcicon-add"></i>
                       </a>
                     </div>
                   </div>
                 </form>
               </li>
-              <li class="add-new">
+              <li class="toggle-add-meeting">
                 <a class="disabled" href="javascript://">
                   + Add new meeting
                 </a>
