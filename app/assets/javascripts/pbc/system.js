@@ -16,8 +16,9 @@ can.Model.Cacheable("CMS.Models.System", {
             , data : {s : request.term}
             , success : function(data) {
                 response($.map( data, function( item ) {
+                  var system_or_process = item.system.is_biz_process ? 'Process' : 'System';
                   return {
-                    label: item.system.slug + ' ' + item.system.title,
+                    label: item.system.slug + ' ' + item.system.title + ' (' + system_or_process + ')',
                     value: item.system.id
                   }
                 }));
@@ -81,5 +82,16 @@ can.Model.Cacheable("CMS.Models.System", {
           if (value === null)
             that.removeAttr(name);
         });
+    }
+    , system_or_process: function() {
+      console.debug(this);
+      if (this.attr('is_biz_process'))
+        return 'process';
+      else
+        return 'system';
+    }
+    , system_or_process_capitalized: function() {
+      var str = this.system_or_process();
+      return str.charAt(0).toUpperCase() + str.slice(1);
     }
 });
