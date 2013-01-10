@@ -43,7 +43,7 @@
             %strong{:style => "margin-right:10px"}Filter by:
           %label.inline
             Request Type
-          %select.span3{ :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'type-name' }
+          %select.span2{ :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'type-name' }
             %option{ :value => 'any', :selected => 'selected' } - Any -
             %option Documentation
             %option Interview
@@ -51,21 +51,21 @@
 
           %label.inline
             Status
-          %select.span3{ :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'status' }
+          %select.span2{ :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'status' }
             %option{ :value => 'any', :selected => 'selected' } - Any -
             -Request.statuses.each do |status|
               %option=status
 
           %label.inline
             Responsible Parties
-          %select.span3{ :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'person' }
+          %select.span2{ :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'person' }
             %option{ :value => 'any', :selected => 'selected' } - Any -
             -pbc_list.requests.all.map { |req| [req.company_responsible.presence, req.auditor_responsible.presence] }.flatten.compact.uniq.sort.each do |name|
               %option=name
 
           %label.inline
             On or After
-          %input.span3#datepicker-control-date.date{:type => "text",  :placeholder => "MM/DD/YYYY", :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'date-requested' }
+          %input.span2#datepicker-control-date.date{:type => "text",  :placeholder => "MM/DD/YYYY", :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'date-requested' }
           :javascript
             $('#datepicker-control-date').datepicker();
         .span1

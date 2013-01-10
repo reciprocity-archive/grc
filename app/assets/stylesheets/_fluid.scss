@@ -46,7 +46,8 @@
         }
         select {
           float:left;
-          width:auto;
+          //Width can not be auto or select will over-rule span and break columns
+          //width:auto;
           margin-left:4px;
           margin-right:12px;
         }
