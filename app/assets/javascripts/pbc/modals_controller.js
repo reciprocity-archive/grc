@@ -79,8 +79,11 @@ can.Control("CMS.Controllers.PBCModals", {
         , 'request[control_id]': control_data.id
         }, function(data) {
           // FIXME: Brad, fix this if/when Requests are live-bound
-          el.closest('.pbc-control').find('.item').text(control_data.slug);
-            //find this control
+          var $this = el.closest('.pbc-control').find('.item');
+          $this.text(control_data.slug);
+          $this.removeClass("error");
+          $this.addClass("i-control");
+            //find this control AND REMOVE ITS ERROR
             var $ca = $(".pbc-control-assessments .pbc-ca-item[data-type=ControlAssessment][data-control-id=" + control_data.id + "]");
             var type_name = el.closest('li[data-filter-type-name]').data("filter-type-name");
 
@@ -93,6 +96,8 @@ can.Control("CMS.Controllers.PBCModals", {
                     , $.extend({}, control_data, { type_name : type_name})
                 ));
               $ca = $(".pbc-control-assessments .pbc-ca-item[data-control-id=" + control_data.id + "]");
+
+              
             }
             var $oldParent = el.closest(".pbc-ca-item");
             el.closest(".pbc-requests > .main-item").detach().appendTo($ca.find(".pbc-requests"));
@@ -124,6 +129,7 @@ can.Control("CMS.Controllers.PBCModals", {
       var $this = $(el)
 
       $this.closest('.pbc-control-select').find('.item').text(control_data.slug);
+
       $("#request_control_id").val(control_data.id)
     }
 
