@@ -6,33 +6,7 @@
         Response using Process:
         {{system.title}}
       </div>
-      <div class="span1">
-        <span class="pbc-counter{{^system.object_people.length}} empty{{/system.object_people.length}}">
-          <i class="grcicon-person"></i>
-          {{system.object_people.length}}
-        </span>
-      </div>
-      <div class="span1">
-        {{#if_equals type_name 'Documentation'}}
-        <span class="pbc-counter{{^system.object_documents.length}} empty{{/system.object_documents.length}}">
-          <i class="grcicon-document"></i>
-          {{system.object_documents.length}}
-        </span>
-        {{/if_equals}}
-        {{#if_equals type_name 'Population Sample'}}
-        <span class="pbc-counter empty">
-          <i class="grcicon-populationsample"></i>
-          0
-        </span>
-        {{/if_equals}}
-        {{#if_equals type_name 'Interview'}}
-        <span class="pbc-counter empty">
-          <i class="grcicon-calendar"></i>
-          0
-        </span>
-        {{/if_equals}}
-      </div>
-      <div class="span5">
+      <div class="span7">
         &nbsp;
       </div>
       <div class="span1 pbc-actions">
@@ -56,24 +30,75 @@
             <label>
               <strong>{{type_name}}</strong>
             </label>
+            {{#if_equals type_name 'Documentation'}}
+              <ul class="pbc-item-list">
+                {{> /pbc/documents_list.mustache}}
+                <li class="toggle-add-document add-new disabled">
+                  <a href="javascript://">
+                    + Add new document
+                  </a>
+                </li>
+              </ul>
+            {{/if_equals}}
+            {{#if_equals type_name 'Interview'}}
+            <div>
+              Meeting participants including interviewees
+            </div>
             <ul class="pbc-item-list">
-              {{#if_equals type_name 'Documentation'}}
-              {{#system.object_documents}}
-              <li {{data 'model'}} data-model="true" title="{{document.link_url}}">
-                <a class="btn btn-nano pull-right remove_document" href="javascript://">
+              {{#object_people}}
+              <li {{data 'model'}} data-model="true" title="{{person.email}}">
+                <div class="span5">
+                  {{person.name}}
+                </div>
+                <div class="span6">
+                  (<select class="edit-person-role">
+                    <option value="attending" {{#if_equals role 'attending'}}selected="true"{{/if_equals}}>Attending</option>
+                  </select>)
+                </div>
+                <a class="btn btn-nano pull-right remove_person span1" href="javascript://">
                   <i class="grcicon-x-grey"></i>
                 </a>
-                <a href="{{document.link_url}}" target="_blank">{{document.title}} {{^document.title}}{{document.link_url}}{{/document.title}}</a>
-                (<select class="edit-document-role">
-                  <option value="general" {{#if_equals role 'general'}}selected="true"{{/if_equals}}>General Doc</option>
-                </select>)
               </li>
-              {{/system.object_documents}}
-              <li class="inline-editing inline-add-document hide" data-system-id="{{system.id}}">
+              {{/object_people}}
+              <li class="inline-editing inline-add-person hide" data-system-id="{{system.id}}">
                 <form>
                   <div class="row-fluid">
                     <div class="span10">
-                      <input class="span12 input-title" name="title" placeholder="Doc title or URL" type="text" {{ (el) -> el.pbc_autocomplete_documents() }}>
+                      <input class="span12 input-title" name="title" placeholder="Doc title or URL" type="text" {{ (el) -> el.pbc_autocomplete_people() }}>
+                    </div>
+                    <div class="span2">
+                      <a class="btn btn-mini span12 add-person" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/people/new" data-target="#ajax-modal-people-new">
+                        <i class="grcicon-add"></i>
+                      </a>
+                    </div>
+                  </div>
+                </form>
+              </li>
+              <li class="toggle-add-person add-new disabled">
+                <a href="javascript://">
+                  + Add new participant
+                </a>
+              </li>
+            </ul>
+            <div>
+              Meetings
+            </div>
+            <ul class="pbc-item-list">
+              {{#meetings}}
+              <li {{data 'model'}} data-model="true">
+                <div class="span11">
+                  {{meeting.title}}
+                </div>
+                <a class="btn btn-nano pull-right remove_person span1" href="javascript://">
+                  <i class="grcicon-x-grey"></i>
+                </a>
+              </li>
+              {{/meetings}}
+              <li class="inline-editing inline-add-meeting hide" data-system-id="{{system.id}}">
+                <form>
+                  <div class="row-fluid">
+                    <div class="span10">
+                      <input class="span12 input-title" name="title" placeholder="Doc title or URL" type="text">
                     </div>
                     <div class="span2">
                       <a class="btn btn-mini span12 add-document" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/documents/new" data-target="#ajax-modal-documents-new">
@@ -83,19 +108,42 @@
                   </div>
                 </form>
               </li>
-              <li class="toggle-add-document add-new">
-                <a href="javascript://">
-                  + Add new document
-                </a>
-              </li>
-              {{else}}
               <li class="add-new">
                 <a class="disabled" href="javascript://">
-                  + Add new {{type_name}}
+                  + Add new meeting
                 </a>
               </li>
-              {{/if_equals}}
             </ul>
+            {{/if_equals}}
+            {{#if_equals type_name 'Population Sample'}}
+              <div>Population document</div>
+              <ul class="pbc-item-list">
+                <li>
+                  <div class="span11">None selected</div>
+                  <a class="btn btn-nano pull-right edit-sample-doc span1" href="javascript://">
+                    <i class="grcicon-edit-grey"></i>
+                  </a>
+                </li>
+              </ul>
+              <div>Sample worksheet document</div>
+              <ul class="pbc-item-list">
+                <li>
+                  <div class="span11">None selected</div>
+                  <a class="btn btn-nano pull-right edit-sample-doc span1" href="javascript://">
+                    <i class="grcicon-edit-grey"></i>
+                  </a>
+                </li>
+              </ul>
+              <div>Sample evidence document</div>
+              <ul class="pbc-item-list">
+                <li>
+                  <div class="span11">None selected</div>
+                  <a class="btn btn-nano pull-right edit-sample-doc span1" href="javascript://">
+                    <i class="grcicon-edit-grey"></i>
+                  </a>
+                </li>
+              </ul>
+            {{/if_equals}}
           </div>
         </div>
       </div>

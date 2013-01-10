@@ -39,10 +39,10 @@
         <ul class="pbc-item-list">
           {{#object_people}}
           <li {{data 'model'}} data-model="true" title="{{person.email}}">
-            <div class="span5">
-              {{person.name}}
+            <div class="span7">
+              {{person.name}} {{^person.name}}&nbsp;{{/person.name}}
             </div>
-            <div class="span6">
+            <div class="span4">
               (<select class="edit-person-role">
                 <option value="responsible" {{#if_equals role 'responsible'}}selected="true"{{/if_equals}}>Responsible</option>
                 <option value="accountable" {{#if_equals role 'accountable'}}selected="true"{{/if_equals}}>Accountable</option>
@@ -77,31 +77,7 @@
           <strong>References</strong>
         </label>
         <ul class="pbc-item-list">
-          {{#object_documents}}
-          <li {{data 'model'}} data-model="true" title="{{document.link_url}}">
-            <a class="btn btn-nano pull-right remove_document" href="javascript://">
-              <i class="grcicon-x-grey"></i>
-            </a>
-            <a href="{{document.link_url}}" target="_blank">{{document.title}} {{^document.title}}{{document.link_url}}{{/document.title}}</a>
-            (<select class="edit-document-role">
-              <option value="general" {{#if_equals role 'general'}}selected="true"{{/if_equals}}>General Doc</option>
-            </select>)
-          </li>
-          {{/object_documents}}
-          <li class="inline-editing inline-add-document hide" data-system-id="{{id}}">
-            <form>
-              <div class="row-fluid">
-                <div class="span10">
-                  <input class="span12 input-title" name="title" placeholder="Doc title or URL" type="text" {{ (el) -> el.pbc_autocomplete_documents() }}>
-                </div>
-                <div class="span2">
-                  <a class="btn btn-mini span12 add-document" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/documents/new" data-target="#ajax-modal-documents-new">
-                    <i class="grcicon-add"></i>
-                  </a>
-                </div>
-              </div>
-            </form>
-          </li>
+          {{> /pbc/documents_list.mustache}}
           <li class="toggle-add-document add-new" data-system-id="{{id}}">
             <a href="javascript://">
               + Add new reference

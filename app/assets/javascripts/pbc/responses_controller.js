@@ -69,11 +69,11 @@ can.Control("CMS.Controllers.Responses", {
     , ".remove_person, .remove_document click" : function(el, ev) {
         el.closest("[data-model]").data("model").destroy();
     }
-    , ".toggle-add-person click" : function(el, ev) {
+    , ".toggle-add-person:not(.disabled) click" : function(el, ev) {
         el.prev(".inline-add-person").removeClass("hide").find(".input-ldap").focus();
         el.addClass("hide");
     }
-    , ".toggle-add-document click" : function(el, ev) {
+    , ".toggle-add-document:not(.disabled) click" : function(el, ev) {
         el.prev(".inline-add-document").removeClass("hide").find(".input-title").focus();
         el.addClass("hide");
     }
