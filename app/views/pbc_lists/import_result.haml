@@ -30,12 +30,16 @@
           %th Auditor Responsibile
           %th Date Requested
       %tbody
-        -columns = %w(type_name pbc_control_code pbc_control_desc request notes test company_responsible auditor_responsible date_requested)
+        -columns = %w(type_id|type_name pbc_control_code pbc_control_desc request notes test company_responsible auditor_responsible date_requested)
         -@requests.each_with_index do |req, i|
           %tr{ :class => (i % 2 == 0 ? :odd : :even) }
             -columns.each do |column_name|
+              -if column_name.include?('|')
+                -column_name, display_name = column_name.split('|')
+              -else
+                -display_name = column_name
               %td{ :class => ( (@errors[i].present? && @errors[i][column_name].present?) ? 'member-failure' : ((@warnings[i].present? && @warnings[i][column_name].present?) ? 'member-warning' : '' ) ) }
-                =req.send(column_name)
+                =req.send(display_name)
                 -if @errors[i].present? && @errors[i][column_name].present?
                   .help-inline=@errors[i][column_name].join(', ')
                 -if @warnings[i].present? && @warnings[i][column_name].present?

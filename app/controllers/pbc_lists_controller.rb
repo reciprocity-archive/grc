@@ -128,7 +128,7 @@ class PbcListsController < BaseObjectsController
         # determine what's internal type_id for given type_name
         # if not found use id from first request type
         type_name = attrs.delete('type_name')
-        type_id = Request.types.rassoc(type_name).try(:first) || Request.types.first.first
+        type_id = Request.types.rassoc(type_name).try(:first)
 
         # try to find control with pbc_control_code
         pbc_control_code = attrs["pbc_control_code"]
