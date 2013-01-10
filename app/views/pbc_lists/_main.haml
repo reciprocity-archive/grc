@@ -37,37 +37,36 @@
       .span12
         .filters-box
           .row-fluid
-            .span3
+            .span11
               %label
                 Request Type
-              %select.span12{ :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'type-name' }
+              %select{ :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'type-name' }
                 %option{ :value => 'any', :selected => 'selected' } - Any -
                 %option Documentation
                 %option Interview
                 %option Population Sample
-            .span3
+
               %label
                 Status
-              %select.span12{ :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'status' }
+              %select{ :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'status' }
                 %option{ :value => 'any', :selected => 'selected' } - Any -
                 -Request.statuses.each do |status|
                   %option=status
-            .span3
+
               %label
                 Responsible Parties
-              %select.span12{ :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'person' }
+              %select{ :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'person' }
                 %option{ :value => 'any', :selected => 'selected' } - Any -
                 -pbc_list.requests.all.map { |req| [req.company_responsible.presence, req.auditor_responsible.presence] }.flatten.compact.uniq.sort.each do |name|
                   %option=name
-            .span2
+
               %label
                 Date (on or after)
-                %input.span12#datepicker-control-date.date{:type => "text",  :placeholder => "MM/DD/YYYY", :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'date-requested' }
-                :javascript
-                  $('#datepicker-control-date').datepicker();
+              %input.span12#datepicker-control-date.date{:type => "text",  :placeholder => "MM/DD/YYYY", :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'date-requested' }
+              :javascript
+                $('#datepicker-control-date').datepicker();
             .span1
-              %label &nbsp;
-              %button.btn.span12{ :'data-toggle' => 'filter-reset' }
+              %button.btn.span12{ :'data-toggle' => 'filter-reset' , :rel => "tooltip", :"data-position" => "top", :title => "Reset filters" }
                 %i.grcicon-x-grey
 
 .widget-body

@@ -23,8 +23,7 @@
       @include box-shadow(inset 0px 0 4px #eee);
       .filters-box {
         background:#eee;
-        padding:0 10px 5px 10px;
-        @include border-radius();
+        padding:5px 10px 5px 10px;
         @include box-shadow(inset 0px 0 4px #bbb);
         input.date {
           margin-top:2px;
@@ -34,8 +33,22 @@
           min-height:0;
         }
         label {
-          color:#333;
-          text-shadow:none;
+          float:left;
+          color:#999;
+          text-shadow:0 1px 1px $white;
+          line-height:18px;
+        }
+        select {
+          float:left;
+          width:auto;
+          margin-left:4px;
+          margin-right:12px;
+        }
+        input.date {
+          float:left;
+          width:auto;
+          margin-top:0;
+          margin-left:4px;
         }
       }
       .sort-by {
