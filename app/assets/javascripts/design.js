@@ -85,7 +85,7 @@ jQuery(function ($) {
   //<!-- Content templates ->
   renderExternalTmpl({ name: 'examplecontrols', selector: '#Controls', data: {} });
   renderExternalTmpl({ name: 'exampleregulations', selector: '#Regulation', data: {} });
-  renderExternalTmpl({ name: 'exampleauditorrequests', selector: '#requests', data: {} });
+  renderExternalTmpl({ name: 'exampleauditorrequests', selector: '#exampleauditorrequests', data: {} });
   renderExternalTmpl({ name: 'examplesysproc', selector: '#sysproc', data: {} });
   renderExternalTmpl({ name: 'examplecombo', selector: '#Combo', data: {} });
   renderExternalTmpl({ name: 'exampleSampledata', selector: '#sampleData', data: {} });
