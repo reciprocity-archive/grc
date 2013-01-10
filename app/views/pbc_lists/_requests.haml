@@ -88,7 +88,7 @@
                     =pluralize(request.responses.count, "response")
                 .span2{ "data-target" => ".#{request_collapse_class}", "data-toggle" => "collapse", :title => 'Date Requested'}
                   %label
-                    =request.date_requested && request.date_requested.strftime('%m/%d/%Y')
+                    %span{"rel" => "tooltip", "data-placement" => "top", "title" => "Date Requested"}=request.date_requested && request.date_requested.strftime('%m/%d/%Y')
                 .span4.pbc-status
                   %label.pull-left Status of Request:&nbsp; 
                   %select
