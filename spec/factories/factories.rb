@@ -274,10 +274,19 @@ FactoryGirl.define do
 
   factory :request do
     pbc_list { |c| c.association(:pbc_list) }
+    request 'default text'
   end
 
   factory :response do
     request { |c| c.association(:request) }
     system { |c| c.association(:system) }
+  end
+
+  factory :population_sample do
+    response { |c| c.association(:response) }
+  end
+
+  factory :meeting do
+    response { |c| c.association(:response) }
   end
 end

@@ -8,12 +8,14 @@ class Response < ActiveRecord::Base
   belongs_to :request
   belongs_to :system
 
-  belongs_to :population_document, :class_name => "Document"
-  belongs_to :sample_worksheet_document, :class_name => "Document"
-  belongs_to :sample_evidence_document, :class_name => "Document"
+  has_one :population_sample
+  has_many :meetings
 
   has_many :object_people, :as => :personable, :dependent => :destroy
   has_many :people, :through => :object_people
+
+  has_many :object_documents, :as => :documentable, :dependent => :destroy
+  has_many :documents, :through => :object_documents
 
   is_versioned_ext
 

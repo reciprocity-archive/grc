@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130108230424) do
+ActiveRecord::Schema.define(:version => 20130110001641) do
 
   create_table "accounts", :force => true do |t|
     t.string   "username"
@@ -178,6 +178,15 @@ ActiveRecord::Schema.define(:version => 20130108230424) do
     t.datetime "updated_at",     :null => false
   end
 
+  create_table "meetings", :force => true do |t|
+    t.integer  "response_id"
+    t.datetime "start_at"
+    t.string   "calendar_url"
+    t.integer  "modified_by_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
   create_table "object_documents", :force => true do |t|
     t.string   "role"
     t.text     "notes"
@@ -245,6 +254,18 @@ ActiveRecord::Schema.define(:version => 20130108230424) do
     t.datetime "updated_at",     :null => false
     t.integer  "language_id"
     t.string   "company"
+  end
+
+  create_table "population_samples", :force => true do |t|
+    t.integer  "response_id"
+    t.integer  "population_document_id"
+    t.integer  "population"
+    t.integer  "sample_worksheet_document_id"
+    t.integer  "samples"
+    t.integer  "sample_evidence_document_id"
+    t.integer  "modified_by_id"
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
   end
 
   create_table "products", :force => true do |t|
@@ -336,13 +357,8 @@ ActiveRecord::Schema.define(:version => 20130108230424) do
     t.integer  "system_id"
     t.string   "status"
     t.integer  "modified_by_id"
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
-    t.integer  "population_document_id"
-    t.integer  "population"
-    t.integer  "sample_worksheet_document_id"
-    t.integer  "samples"
-    t.integer  "sample_evidence_document_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "risky_attributes", :force => true do |t|

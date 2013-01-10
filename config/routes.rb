@@ -196,6 +196,18 @@ CmsRails::Application.routes.draw do
     end
   end
 
+  resources :population_samples, :as => 'flow_population_samples', :only => [:index, :create, :update, :destroy] do
+    member do
+      get 'delete'
+    end
+  end
+
+  resources :meetings, :as => 'flow_meetings', :only => [:index, :new, :create, :edit, :update, :destroy] do
+    member do
+      get 'delete'
+    end
+  end
+
   resources :control_assessments, :as => 'flow_control_assessments', :only => [] do
     member do
       post 'rotate'
