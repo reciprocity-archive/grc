@@ -144,6 +144,9 @@
     float:right;
     margin-top:0;
   }
+  &.response-title-bar {
+    @include border-and-gradient($bgndProcess);
+  }
   &.title-response {
     @include border-and-gradient(darken($bgndProcess,10%));
     i.response-desc {
