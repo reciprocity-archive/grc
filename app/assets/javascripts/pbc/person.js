@@ -62,10 +62,10 @@ can.Model.Cacheable("CMS.Models.ObjectPerson", {
     , create : function(params) {
         var _params = {
             object_person : {
-                personable_id : params.system_id
+                personable_id : params.xable_id
                 , person_id : params.person_id
                 , role : params.role
-                , personable_type : "System"
+                , personable_type : params.xable_type
             }
         };
         return $.ajax({

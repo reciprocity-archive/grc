@@ -25,6 +25,6 @@ class Response < ActiveRecord::Base
   end
 
   def as_json_with_system(options={})
-    as_json(options.merge(:include => { :system => { :include => [:people, { :documents => { :methods => :link_url }} , :object_people, :object_documents] } }))
+    as_json(options.merge(:include => { :system => { :include => [:people, { :documents => { :methods => :link_url }} , :object_people, :object_documents] } , :object_people => { :include => :person } , :people => {} }))
   end
 end

@@ -8,7 +8,7 @@ function object_event(type) {
         var that = this;
         this.create_object_relation(
             type
-            , el.closest("[data-system-id]").data("system-id")
+            , el.closest("[data-model]").data("model")
             , can.extend(data, { role : type==="person" ? "responsible" : "general" } )
             )
         .then(function() {
@@ -87,7 +87,7 @@ can.Control("CMS.Controllers.Responses", {
     , ".inline-add-person modal:success" : object_event("person")
     , ".inline-add-document documentSelected" : object_event("document")
     , ".inline-add-document modal:success" : object_event("document")
-    , create_object_relation : function(type, system_id, params) {
+    , create_object_relation : function(type, xable, params) {
         var that = this
         , dfd;
 
@@ -105,7 +105,8 @@ can.Control("CMS.Controllers.Responses", {
             //  deferred operation before resolving the other done callbacks.
             var object_model = that.options["object_" + type + "_model"];
             var obj = new object_model({
-                system_id : system_id
+                xable_id : xable.id
+                , xable_type : xable instanceof CMS.Models.Response ? "Response" : "System"
                 , role : params.role
             });
             obj.attr(type + "_id", pp.id);
