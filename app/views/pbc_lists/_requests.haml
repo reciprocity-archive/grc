@@ -133,13 +133,12 @@
                   
                   -if request.control.present?
                     .item.i-control.oneline
-                      
                       =request.control && request.control.slug
                   -elsif request.pbc_control_code.present?
                     .item.error.oneline
                       ="#{request.pbc_control_code} [Code not recognized]"
                   -else
-                    .item.i-control.oneline
+                    .item.error.oneline
                       No control selected
                 .span2.pbc-request{ "data-target" => ".#{request_collapse_class}", "data-toggle" => "collapse"}
                   %h6.pbc-request-count
