@@ -157,7 +157,7 @@ module ApplicationHelper
         [id, requests.first.control_assessment, requests]
       end.
       sort_by do |_, control_assessment, _|
-        key = control_assessment.nil? ? '' : control_assessment.control.slug
+        key = (control_assessment.nil? || control_assessment.control.nil?) ? '' : control_assessment.control.slug
         # Magical sort respecting numbers
         key = key.split(/(\d+)/).map { |s| [s.to_i, s] }
         # No-controls go last instead of first.
