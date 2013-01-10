@@ -32,6 +32,10 @@ FactoryGirl.define do
     "user#{n}@example.com"
   end
 
+  sequence(:link) do |n|
+    "http://example.com/#{n}"
+  end
+
   factory :program do
     ignore do
       num_people 3
@@ -229,6 +233,7 @@ FactoryGirl.define do
 
   factory :document do
     title 'document'
+    link
   end
 
   factory :system_control do
