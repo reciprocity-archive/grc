@@ -17,6 +17,14 @@
           {{object_documents.length}}
         </span>
       </div>
+      <div class="span4 pbc-process-controls">
+        <a class="btn btn-mini" href="/systems/{{id}}" title="View System/Process" rel="tooltip" data-placement="top">
+          <i class="grcicon-arrowright-grey"></i>
+        </a>
+        <a class="btn btn-mini system-edit" data-toggle="modal-ajax-form" href="/systems/{{id}}/edit" data-modal-reset="reset" data-model-class="modal-wide" title="Edit System/Process" rel="tooltip" data-placement="top">
+          <i class="grcicon-edit-grey"></i>
+        </a>
+      </div>
 
     </div>
     <div class="row-fluid">
@@ -34,7 +42,7 @@
           {{notes}}
         </p>
       </div>
-      <div class="span5">
+      <div class="span6">
         <label>
           <strong>People</strong>
         </label>
@@ -86,14 +94,6 @@
             </a>
           </li>
         </ul>
-      </div>
-      <div class="span1 pbc-item pbc-actions">
-        <a class="btn btn-mini system-edit" data-toggle="modal-ajax-form" href="/systems/{{id}}/edit" data-modal-reset="reset" data-model-class="modal-wide" title="Edit System/Process" rel="tooltip" data-placement="left">
-          <i class="grcicon-edit-grey"></i>
-        </a>
-        <a class="btn btn-mini" href="/systems/{{id}}" title="View System/Process" rel="tooltip" data-placement="left">
-          <i class="grcicon-arrowright-grey"></i>
-        </a>
       </div>
     </div>
   </div>
