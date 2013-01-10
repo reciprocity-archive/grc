@@ -1,6 +1,7 @@
 /*
  *= require application
  *= require jquery
+ *= require fastfix
  *= require jquery-ui
  *= require bootstrap
  *= require related_selector
@@ -128,6 +129,18 @@ jQuery(function($) {
     }
   });
 
+  //After the modal template has loaded from the server, but before the
+  //  data has loaded to populate into the body, show a spinner
+  $("body").on("loaded", ".modal.modal-slim", function(e) {
+    $(e.target).find(".modal-body .source").html(
+          $(new Spinner().spin().el)
+            .css({
+              width: '100px', height: '100px',
+              left: '50px', top: '50px'
+            })
+      )
+  });
+
   function with_params(href, params) {
     if (href.charAt(href.length - 1) === '?')
       return href + params;
@@ -173,6 +186,7 @@ jQuery(function($) {
         , $tab = $this.closest('.WidgetBox').find('ul.nav-tabs > li.active > a')
         , href = with_params($tab.data('tab-href'), $.param({ s: $this.val() }));
       $tab.trigger('show', href);
+      $tab.trigger('kill-all-popovers');
     }
   });
   $('body').on('keypress', 'nav > .widgetsearch-tocontent', function (e) {

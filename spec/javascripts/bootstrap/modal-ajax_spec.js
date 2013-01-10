@@ -2,17 +2,24 @@
 
 describe("AJAXy Modals", function() {
 
-  var $modal1, $modal2;
+  var $modal1, $modal2, m1shown, m2shown;
   beforeEach(function() {
-      $modal1 = affix("#m1.modal");
+      m1shown = false;
+      m2shown = false;
+      $modal1 = affix("#m1.modal.fade").bind("shown", function() { m1shown = true; });
       $modal1.affix(".modal-header, .modal-body, .modal-buttons");
-      $modal2 = affix("#m2.modal");
+      $modal2 = affix("#m2.modal.fade").bind("shown", function() { m2shown = true; });
       $modal2.affix(".modal-header, .modal-body, .modal-buttons");
       $modal1.add($modal2).find(".modal-header").text("foo");
       $modal1.add($modal2).find(".modal-body").text("bar");
 
       $modal1.modal({show : true, backdrop : true});
-      $modal2.modal({show : true, backdrop : true});
+      waitsFor(function() {
+        return m1shown;
+      }, 1000);
+      runs(function() {
+          $modal2.modal({show : true, backdrop : true});    
+      });
   });
 
   afterEach(function() {
@@ -22,11 +29,17 @@ describe("AJAXy Modals", function() {
   describe("#show aspect", function() {
     it("reorders the z-index of the modals and modal backdrops", function() {
 
-      expect($(".modal-backdrop").length).toBe(2);
-      expect($(".modal-backdrop:first").css("z-index")).toBe("1040");
-      expect($(".modal-backdrop:eq(1)").css("z-index")).toBe("1060");
-      expect($modal1.css("z-index")).toBe("1050");
-      expect($modal2.css("z-index")).toBe("1070");
+      waitsFor(function() {
+        return m2shown;
+      }, 1000);
+
+      runs(function() {
+          expect($(".modal-backdrop").length).toBe(2);
+          expect($(".modal-backdrop:first").css("z-index")).toBe("1040");
+          expect($(".modal-backdrop:eq(1)").css("z-index")).toBe("1060");
+          expect($modal1.css("z-index")).toBe("1050");
+          expect($modal2.css("z-index")).toBe("1070");
+      });
     });
     it("shrinks the height of the first modal to be just over the height of its header", function(){
       expect($modal1.height()).toBe($modal1.find(".modal-header").height() + 4);

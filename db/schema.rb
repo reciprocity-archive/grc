@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121230183134) do
+ActiveRecord::Schema.define(:version => 20130110001641) do
 
   create_table "accounts", :force => true do |t|
     t.string   "username"
@@ -123,6 +123,12 @@ ActiveRecord::Schema.define(:version => 20121230183134) do
     t.integer  "modified_by_id"
     t.datetime "created_at",                        :null => false
     t.datetime "updated_at",                        :null => false
+    t.string   "title"
+    t.string   "audit_firm"
+    t.string   "audit_lead"
+    t.text     "description"
+    t.string   "status"
+    t.text     "notes"
   end
 
   add_index "cycles", ["program_id"], :name => "index_cycles_on_regulation_id"
@@ -168,6 +174,15 @@ ActiveRecord::Schema.define(:version => 20121230183134) do
     t.integer  "modified_by_id"
     t.datetime "start_date"
     t.datetime "stop_date"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "meetings", :force => true do |t|
+    t.integer  "response_id"
+    t.datetime "start_at"
+    t.string   "calendar_url"
+    t.integer  "modified_by_id"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
@@ -226,16 +241,9 @@ ActiveRecord::Schema.define(:version => 20121230183134) do
 
   create_table "pbc_lists", :force => true do |t|
     t.integer  "audit_cycle_id"
-    t.string   "title"
-    t.string   "audit_firm"
-    t.string   "audit_lead"
-    t.text     "description"
-    t.datetime "list_import_date"
-    t.string   "status"
-    t.text     "notes"
     t.integer  "modified_by_id"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "people", :force => true do |t|
@@ -246,6 +254,18 @@ ActiveRecord::Schema.define(:version => 20121230183134) do
     t.datetime "updated_at",     :null => false
     t.integer  "language_id"
     t.string   "company"
+  end
+
+  create_table "population_samples", :force => true do |t|
+    t.integer  "response_id"
+    t.integer  "population_document_id"
+    t.integer  "population"
+    t.integer  "sample_worksheet_document_id"
+    t.integer  "samples"
+    t.integer  "sample_evidence_document_id"
+    t.integer  "modified_by_id"
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
   end
 
   create_table "products", :force => true do |t|

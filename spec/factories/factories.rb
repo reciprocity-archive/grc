@@ -32,6 +32,10 @@ FactoryGirl.define do
     "user#{n}@example.com"
   end
 
+  sequence(:link) do |n|
+    "http://example.com/#{n}"
+  end
+
   factory :program do
     ignore do
       num_people 3
@@ -192,6 +196,10 @@ FactoryGirl.define do
     title
   end
 
+  factory :risk do
+    title
+  end
+
   factory :help do
     slug
     content
@@ -221,6 +229,7 @@ FactoryGirl.define do
   end
 
   factory :cycle do
+    title 'title x'
     complete false
     start_at '2012-01-01'
     program { |c| c.association(:program) }
@@ -228,6 +237,7 @@ FactoryGirl.define do
 
   factory :document do
     title 'document'
+    link
   end
 
   factory :system_control do
@@ -268,16 +278,24 @@ FactoryGirl.define do
   end
 
   factory :pbc_list do
-    title 'title x'
     audit_cycle { |c| c.association(:cycle) }
   end
 
   factory :request do
     pbc_list { |c| c.association(:pbc_list) }
+    request 'default text'
   end
 
   factory :response do
     request { |c| c.association(:request) }
     system { |c| c.association(:system) }
+  end
+
+  factory :population_sample do
+    response { |c| c.association(:response) }
+  end
+
+  factory :meeting do
+    response { |c| c.association(:response) }
   end
 end

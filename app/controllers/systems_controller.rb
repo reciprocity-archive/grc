@@ -108,7 +108,11 @@ class SystemsController < BaseObjectsController
         @errors = import[:errors]
         @creates = import[:creates]
         @updates = import[:updates]
-        render 'import_result', :layout => false
+        if params[:confirm].present? && !@errors.any? && !@messages.any?
+          render :json => { :location => programs_dash_path }
+        else
+          render 'import_result', :layout => false
+        end
       rescue CSV::MalformedCSVError, ArgumentError => e
         log_backtrace(e)
         render_import_error("Not a recognized file.")

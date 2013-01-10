@@ -14,7 +14,7 @@ class RiskyAttribute < ActiveRecord::Base
   has_many :object_documents, :as => :documentable, :dependent => :destroy
   has_many :documents, :through => :object_documents
 
-  belongs_to :type, :class_name => 'Option', :conditions => { :role => 'product_type' }
+  #belongs_to :type, :class_name => 'Option', :conditions => { :role => 'product_type' }
 
   is_versioned_ext
 

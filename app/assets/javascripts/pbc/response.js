@@ -1,10 +1,12 @@
 //= require can.jquery-all
 //= require pbc/system
 
-can.Model.Cacheable("CMS.Models.Response", {
+//Response isn't technically a System, but subclassing makes it much easier to do the binding of 
+// created/destroeyd listeners on ObjectDocuments and ObjectPeople, which both classes use.
+CMS.Models.System("CMS.Models.Response", {
 
     root_object : "response"
-
+    , xable_type : "Response"
     , create : function(params) {
         var _params = { response : {
             system_id : params.system_id

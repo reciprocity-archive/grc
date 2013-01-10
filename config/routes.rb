@@ -133,7 +133,7 @@ CmsRails::Application.routes.draw do
     end
   end
 
-  resources :object_people, :as => 'flow_object_people', :only => [:index, :create, :destroy] do
+  resources :object_people, :as => 'flow_object_people', :only => [:index, :create, :update, :destroy] do
     collection do
       get 'list_edit'
     end
@@ -187,6 +187,8 @@ CmsRails::Application.routes.draw do
   resources :pbc_lists, :as => 'flow_pbc_lists', :only => [:show, :new, :create, :edit, :update, :destroy] do
     member do
       get 'delete'
+      match 'import'
+      match 'export'
     end
   end
 
@@ -197,6 +199,18 @@ CmsRails::Application.routes.draw do
   end
 
   resources :responses, :as => 'flow_responses', :only => [:index, :create, :destroy] do
+    member do
+      get 'delete'
+    end
+  end
+
+  resources :population_samples, :as => 'flow_population_samples', :only => [:index, :create, :update, :destroy] do
+    member do
+      get 'delete'
+    end
+  end
+
+  resources :meetings, :as => 'flow_meetings', :only => [:index, :new, :create, :edit, :update, :destroy] do
     member do
       get 'delete'
     end

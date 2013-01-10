@@ -139,6 +139,17 @@ module ApplicationHelper
     end
   end
 
+  def request_type_count(requests, type_name)
+    case type_name
+    when 'Documentation' then
+      requests.count { |r| r.type_id.blank? || r.type_id == 1 }
+    when 'Population Sample' then
+      requests.count { |r| r.type_id == 2 }
+    when 'Interview' then
+      requests.count { |r| r.type_id == 3 }
+    end
+  end
+
   def sorted_requests_with_control_assessments(requests)
     requests.
       group_by(&:control_assessment_id).
@@ -146,9 +157,21 @@ module ApplicationHelper
         [id, requests.first.control_assessment, requests]
       end.
       sort_by do |_, control_assessment, _|
-        key = control_assessment.nil? ? '' : control_assessment.control.slug
+        key = (control_assessment.nil? || control_assessment.control.nil?) ? '' : control_assessment.control.slug
         # Magical sort respecting numbers
-        key.split(/(\d+)/).map { |s| [s.to_i, s] }
+        key = key.split(/(\d+)/).map { |s| [s.to_i, s] }
+        # No-controls go last instead of first.
+        if key.empty? then key = [[+1.0/0.0, '']] end
+        key
       end
+  end
+
+  def days_ago_in_words(from_date)
+    distance_in_days = (from_date.to_date - Time.zone.now.to_date).abs.to_i
+    if distance_in_days == 0
+      "today"
+    else
+      pluralize(distance_in_days, "day")
+    end
   end
 end

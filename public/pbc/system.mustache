@@ -1,0 +1,97 @@
+  <div class="span8 pbc-response-process">
+    <div class="row-fluid">
+      <div class="span6">
+        General System Information
+      </div>
+      <div class="span1">
+        <span class="pbc-counter {{^object_people.length}} empty{{/object_people.length}}">
+          <i class="grcicon-person"></i>
+          {{object_people.length}}
+        </span>
+      </div>
+      <div class="span1">
+        <span class="pbc-counter {{^object_documents.length}} empty{{/object_documents.length}}">
+          <i class="grcicon-document"></i>
+          {{object_documents.length}}
+        </span>
+      </div>
+
+    </div>
+    <div class="row-fluid">
+      <div class="span6">
+        <label>
+          <strong>Description</strong>
+        </label>
+        <p class="full-view">
+          {{{description}}}
+        </p>
+        <label>
+          <strong>Notes</strong>
+        </label>
+        <p class="full-view">
+          {{notes}}
+        </p>
+      </div>
+      <div class="span5">
+        <label>
+          <strong>People</strong>
+        </label>
+        <ul class="pbc-item-list">
+          {{#object_people}}
+          <li {{data 'model'}} data-model="true" title="{{person.email}}">
+            <div class="span7">
+              {{person.name}} {{^person.name}}&nbsp;{{/person.name}}
+            </div>
+            <div class="span4">
+              (<select class="edit-person-role">
+                <option value="responsible" {{#if_equals role 'responsible'}}selected="true"{{/if_equals}}>Responsible</option>
+                <option value="accountable" {{#if_equals role 'accountable'}}selected="true"{{/if_equals}}>Accountable</option>
+              </select>)
+            </div>
+            <a class="btn btn-nano pull-right remove_person span1" href="javascript://">
+              <i class="grcicon-x-grey"></i>
+            </a>
+          </li>
+          {{/object_people}}
+          <li class="inline-editing inline-add-person hide" data-system-id="{{id}}">
+            <form>
+              <div class="row-fluid">
+                <div class="span10">
+                  <input class="span12 input-ldap" name="ldap" placeholder="Email or name" type="text" {{ (el) -> el.pbc_autocomplete_people() }}>
+                </div>
+                <div class="span2">
+                  <a class="btn btn-mini span12 add-person" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/people/new" data-target="#ajax-modal-people-new">
+                    <i class="grcicon-add"></i>
+                  </a>
+                </div>
+              </div>
+            </form>
+          </li>
+          <li class="toggle-add-person add-new">
+            <a href="javascript://">
+              + Add new person
+            </a>
+          </li>
+        </ul>
+        <label>
+          <strong>References</strong>
+        </label>
+        <ul class="pbc-item-list">
+          {{> /pbc/documents_list.mustache}}
+          <li class="toggle-add-document add-new" data-system-id="{{id}}">
+            <a href="javascript://">
+              + Add new reference
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="span1 pbc-item pbc-actions">
+        <a class="btn btn-mini system-edit" data-toggle="modal-ajax-form" href="/systems/{{id}}/edit" data-modal-reset="reset" data-model-class="modal-wide" title="Edit System">
+          <i class="grcicon-edit-grey"></i>
+        </a>
+        <a class="btn btn-mini" href="/systems/{{id}}">
+          <i class="grcicon-arrowright-grey"></i>
+        </a>
+      </div>
+    </div>
+  </div>

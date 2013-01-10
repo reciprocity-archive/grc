@@ -1,55 +1,40 @@
 .widget-head
   .widget-actions
-    %a.btn.btn-mini{ :href => edit_flow_pbc_list_path(pbc_list.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide'}
-      %i.grcicon-edit-grey
+    %a.btn.btn-mini{ :href => import_flow_pbc_list_path(pbc_list) }
+      Import Requests
+    %a.btn.btn-mini{ :href => export_flow_pbc_list_path(pbc_list), :'data-toggle' => 'modal-ajax' }
+      Export Requests
     %a.btn.btn-mini{:href => "/help/pbc_list", :'data-toggle' => 'modal-ajax', :title => "Help - What is this?"}
       %i.grcicon-questionmark-grey
   %h2
-    PBC Request List
+    &nbsp;
 .widget-filters
   .row-fluid
-    .span3.widget-titles
+    -#.span3.widget-titles
       %label Program
       %h4=pbc_list.audit_cycle.program.title
-    .span3.widget-titles
+    -#.span3.widget-titles
       %label Title
       %h4=pbc_list.title
-    .span2.widget-titles
+    .span3.widget-titles
       %label Audit Firm
-      %h4=pbc_list.audit_firm
-    .span2.widget-titles
+      %h4=pbc_list.audit_cycle.audit_firm
+    .span3.widget-titles
       %label Audit Lead
-      %h4=pbc_list.audit_lead
+      %h4=pbc_list.audit_cycle.audit_lead
     .span2.widget-titles
-      %label List Import Date
-      %h4=pbc_list.list_import_date && pbc_list.list_import_date.strftime('%m/%d/%Y')
+      %label Audit Start Date
+      %h4=pbc_list.audit_cycle.start_at && pbc_list.audit_cycle.start_at.strftime('%m/%d/%Y')
   .row-fluid
     .span9
       %label Description
       .rtf
-        =raw pbc_list.description
+        =raw pbc_list.audit_cycle.description
 
   -filters_disabled = pbc_list.requests.count == 0
   -if !filters_disabled
     .row-fluid
-      .span3
-        .filters-box.sort-by
-          .row-fluid
-            .span9
-              %label
-                Sort by
-              %select.span12#sortTypeSelect{ :disabled => filters_disabled }
-                %option{:selected => "selected"} Control Code
-                %option Request Date
-            .span3
-              %label
-                &nbsp;
-              .btn-group
-                %a.btn.btn-mini#sortDirectionForward.active
-                  %i.grcicon-sortUp
-                %a.btn.btn-mini#sortDirectionReverse
-                  %i.grcicon-sortDown
-      .span9
+      .span12
         .filters-box
           .row-fluid
             .span3
@@ -69,7 +54,7 @@
                   %option=status
             .span3
               %label
-                Person
+                Responsible Parties
               %select.span12{ :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'person' }
                 %option{ :value => 'any', :selected => 'selected' } - Any -
                 -pbc_list.requests.all.map { |req| [req.company_responsible.presence, req.auditor_responsible.presence] }.flatten.compact.uniq.sort.each do |name|

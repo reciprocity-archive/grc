@@ -1,6 +1,7 @@
 //= require can.jquery-all
 //= require sections/section
 //= require controls/control
+//= require controls/controls_controller
 
 (function(namespace, $) {
 function mapunmap(unmap) {
@@ -92,7 +93,7 @@ can.Control("CMS.Controllers.Mapping", {
     if(!rcontrol && el.is("#rmap")) {
       var notice, reg_slug;
       dfd.then(function(resp, status, xhr) {
-        notice = /.*Created regulation control ([^.]+).*/.exec(xhr.getResponseHeader("X-Flash-Notice"));
+        notice = /.*Created regulation control (.+)\. Mapped regulation control\. */.exec(xhr.getResponseHeader("X-Flash-Notice"));
         if(notice) 
           reg_slug = notice[1];
       })
@@ -242,6 +243,12 @@ can.Control("CMS.Controllers.Mapping", {
     section.save();
   }
 
+  , "#section_notes change" : function(el, ev) {
+    var section = namespace.CMS.Models.SectionSlug.findInCacheById(el.closest("[data-section-id]").data("section-id"));
+    section.attr("notes", el.val());
+    section.save();
+  }
+
 });
 
 can.Control("CMS.Controllers.MappingWidgets", {}, {
@@ -255,6 +262,19 @@ can.Control("CMS.Controllers.MappingWidgets", {}, {
         this.setSelected(null);
       }
     });
+  }
+
+  , ".widgetsearch-tocontent keydown" : function(el, ev) {
+    var controllers = this.element.find(".cms_controllers_controls, .cms_controllers_sections").controls(namespace.CMS.Controllers.Controls);
+    $(controllers).each(function() {
+      var that = this;
+      setTimeout(function() {
+        if(that.options.arity > 1) {
+          that.filter(el.val());
+        }
+      }, 1);
+    });
+    ev.stopPropagation();
   }
 
 });

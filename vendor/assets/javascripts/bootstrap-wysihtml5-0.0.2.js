@@ -30,7 +30,7 @@
 
 		"link": 	"<li>" 
 						
-						+ "<div class='bootstrap-wysihtml5-insert-link-modal modal hide fade'>"
+						+ "<div class='bootstrap-wysihtml5-insert-link-modal modal hide'>"
 							+ "<div class='modal-header'>"
 							+ "<a class='close' data-dismiss='modal'>×</a>"
 							  + "<h3>Insert Link</h3>"

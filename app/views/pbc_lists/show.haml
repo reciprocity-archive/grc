@@ -6,10 +6,12 @@
 
 -content_for :header do
   %ol#breadcrumb
-    %li.last AUDIT
+    %li PROGRAMS
+    %li=link_to instance.audit_cycle.program.title, flow_program_path(instance.audit_cycle.program_id)
+    %li AUDIT
+    %li.last=link_to instance.audit_cycle.title, flow_cycle_path(instance.audit_cycle_id)
   #pageTitle.location
-    =instance.audit_cycle.program.title
-    Audit
+    #{instance.audit_cycle.title} PBC List
 
 -content_for :page_help, 'pbc_list'
 

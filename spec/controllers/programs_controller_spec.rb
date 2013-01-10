@@ -187,4 +187,22 @@ describe ProgramsController do
       it "should show the right sections"
     end
   end
+
+  context "complex delete" do
+    before :each do
+      login({}, {:role => 'superuser'})
+      @section = FactoryGirl.create(:section, :program => @reg)
+      @control = FactoryGirl.create(:control, :program => @reg)
+      @control_section = FactoryGirl.create(:control_section, :control => @control, :section => @section)
+    end
+
+    it "should delete a complex program object graph" do
+      delete 'destroy', :id => @reg.id, :format => 'json'
+      response.should be_success
+      Program.exists?(:id => @reg.id).should be_false
+      Section.exists?(:id => @section.id).should be_false
+      Control.exists?(:id => @control.id).should be_false
+      ControlSection.exists?(:id => @control_section.id).should be_false
+    end
+  end
 end

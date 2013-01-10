@@ -46,6 +46,23 @@
     float:right;
   }
 }
+.pbc-response-process {
+  padding: 10px;
+  background-color: darken($bgndProcess,10%);
+  border:1px solid darken($bgndProcess,20%);
+  margin-bottom:8px;
+  @include border-radius(4px);
+  label {
+    color:darken($bgndProcess,60%);
+  }
+  p.full-view {
+    color:#333;
+  }
+}
+
+.pbc-response-info {
+  padding: 10px default;
+}
 
 .pbc-counter {
   margin-top:4px;
@@ -280,5 +297,20 @@ ul.pbc-requests {
     &:hover {
       @include opacity(1);
     }
+  }
+}
+
+.pbc-responses {
+  .edit-person-role, .edit-document-role {
+    border-top-width: 0px;
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+    background: none;
+    border: none;
+    line-height: 12px;
+    height: 20px;
+    text-decoration: underline;
+    padding: 0;
+    width: auto;
   }
 }

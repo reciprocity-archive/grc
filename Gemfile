@@ -8,7 +8,7 @@ end
 RAILS_VERSION = '= 3.2.8'
 
 # Fulltext search
-gem 'thinking-sphinx'
+gem 'thinking-sphinx', '~> 2.0.14'
 
 gem 'remotipart'
 
@@ -91,8 +91,7 @@ group(:development, :test) do
 
   gem 'factory_girl_rails', "~> 4.0"
 
-  gem 'therubyracer' # javascript runtime.  At least one is required by the Jasmine gem
-                    # but which one you pick is up to you.
+  gem 'therubyracer', "~> 0.10.2"
   gem 'jasminerice'
   gem 'guard-jasmine'
   gem 'jasmine-jquery-rails'
