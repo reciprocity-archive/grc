@@ -98,18 +98,18 @@
                   %a#tooltip16.btn.btn-blue.btn-mini{"rel" => "tooltip", "data-placement" => "left", "title" => "More", "data-target" => ".#{request_collapse_class}", "data-toggle" => "collapse"}
                     %i.grcicon-more
               .row-fluid.collapse{ :class => request_collapse_class }
-                .span3.pbc-item.pbc-control
-                  %h5 PBC Control Description
-                  -if request.pbc_control_desc.present?
-                    %p=raw request.pbc_control_desc
-                  -else
-                    %p.disabled-text PBC control description not available
-                .span2.pbc-item.pbc-request
+                .span3.pbc-item.pbc-request
                   %h5 Request
                   -if request.request.present?
                     %p=raw request.request
                   -else
                     %p.disabled-text Request description not available
+                .span2.pbc-item.pbc-control
+                  %h5 PBC Control Description
+                  -if request.pbc_control_desc.present?
+                    %p=raw request.pbc_control_desc
+                  -else
+                    %p.disabled-text PBC control description not available
                 .span2.pbc-item.pbc-test
                   %h5 Test
                   -if request.test.present?
