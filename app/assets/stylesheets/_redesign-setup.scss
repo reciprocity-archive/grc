@@ -3,7 +3,23 @@
 // colors
 
   $headerBgnd: #3f4145;
+  $menuLink: #d7dce8;
+  $screenBgnd: #323438;
 
   $white: #fff;
+  $black: #000;
 
 // mixins
+
+  @mixin reset-list() {
+    margin:0;
+    padding:0;
+    list-style:none;
+  }
+  
+  // temporary mixin - should be removed once redesign is complete
+
+  @mixin new-icons() {
+    @include background-size(160px 160px);
+    background-image: url("/images/grcicons/icons.png");    
+  }

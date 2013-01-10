@@ -1,14 +1,49 @@
 .header-bar {
   background: $headerBgnd;
+  a {
+    color:$white;
+    text-decoration:none;
+  }
   .logo {
-      line-height:30px;
+    line-height:30px;
   }
   .menu {
     @include clearfix();
+    @include reset-list();
     float:right;
     li {
       float:left;
       color: $white;
+      line-height:30px;
+      font-size:11px;
+      font-weight:bold;
+      text-transform:uppercase;
+      text-shadow: 0 1px 0 $black;
+      &.user {
+        text-transform:lowercase;
+      }
+      &.screen {
+        background:$screenBgnd;
+      }
+      i {
+        margin: 7px 6px 0 0;
+        @include opacity(0.6);
+        @include transition(opacity ease-in-out 0.3s);
+      }
+      a {
+        display:block;
+        color:$menuLink;
+        @include transition(color ease-in-out 0.3s, background ease-in-out 0.3s);
+        line-height:30px;
+        padding: 0 10px;
+        &:hover {
+          background: $black;
+          color:$white;
+          i {
+            @include opacity(1);
+          }
+        }
+      }
     }
   }
 }

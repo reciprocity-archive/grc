@@ -3,6 +3,7 @@
    Images are saved at 32pixels, scaled to 16pixels for .widgetbtn, and further scaled for .btn-nano and similar ...
  */
 
+
 [class^="grcicon-"] {
   display: inline-block;
   width: 16px;
@@ -18,6 +19,28 @@
     height:12px;
   }
 }
+
+.grcicon-admin {
+  @include new-icons();
+  background-position:-64px -16px;
+}
+.grcicon-dashboard {
+  @include new-icons();
+  background-position:-16px -16px;
+}
+.grcicon-desktop {
+  @include new-icons();
+  background-position:-32px -16px;
+}
+.grcicon-help {
+  @include new-icons();
+  background-position:-48px -16px;
+}
+.grcicon-user {
+  @include new-icons();
+  background-position:-16px -16px;
+}
+
 
 .grcicon-sortUp             { background-position:-22px -2px; }
 .grcicon-sortDown           { background-position:-22px -22px; }
