@@ -1,5 +1,7 @@
 require 'spec_helper'
 
+include ApplicationHelper
+
 describe Relationship do
   before :each do
     @program = FactoryGirl.create(:program)
@@ -27,6 +29,19 @@ describe Relationship do
       rel = FactoryGirl.create(:relationship, :source => @program, :destination => @product, :relationship_type_id => 'is_related_to')
       rel.source.should eq(@program)
       rel.destination.should eq(@product)
+    end
+  end
+
+  context 'validation' do
+    it 'should not use an invalid relationship type' do
+      types = DefaultRelationshipTypes.types.keys
+      all_models do |m|
+        if m.respond_to?(:valid_relationships)
+          m.valid_relationships.each do |r|
+            types.should include(r[:relationship_type].to_s)
+          end
+        end
+      end
     end
   end
 end
