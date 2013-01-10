@@ -1,3 +1,14 @@
+class MultiEmailValidator < ActiveModel::EachValidator
+  EMAIL_RE = /([^@\s]+)(?:@((?:[-a-z0-9]+\.)+[a-z]{2,}))/i
+  EMAILS_RE = /\A\s*#{EMAIL_RE}(?:\s*[, ]\s*#{EMAIL_RE})*\Z/i
+
+  def validate_each(record, attribute, value)
+    unless value =~ EMAILS_RE #/\A([^@\s]+)(?:@((?:[-a-z0-9]+\.)+[a-z]{2,}))?\z/i
+      record.errors[attribute] << (options[:message] || "must be one or more emails")
+    end
+  end
+end
+
 class Request < ActiveRecord::Base
   include AuthoredModel
   include AuthorizedModel
@@ -30,9 +41,12 @@ class Request < ActiveRecord::Base
 
   sanitize_attributes :pbc_control_desc, :request, :test, :notes
 
-  validates_presence_of :pbc_control_code, :request
+  validates_presence_of :request
   validates :pbc_list,
     :presence => { :message => "needs a value" }
+  validates :company_responsible, :auditor_responsible,
+    :allow_blank => true,
+    :multi_email => true
 
   after_save :after_save_detect_orphaned_control_assessment
   after_destroy :after_destroy_detect_orphaned_control_assessment
