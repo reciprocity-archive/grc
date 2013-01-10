@@ -58,10 +58,27 @@
       .header-content
         .container-fluid
           .row-fluid
-            .span8
-              main header info
-            .span4
-              header import/export
+            .span6
+              .breadcrumbs
+                %ul.breadcrumb-list
+                  %li
+                    %a{:href => '#'}
+                      PROGRAMS
+                  %li
+                    %a{:href => '#'}
+                      Reg 1
+                  %li
+                    %a{:href => '#'}
+                      AUDITS
+                  %li
+                    %a{:href => '#'}
+                      Audit Name
+                  %li
+                    PBC List
+              %h1
+                Q2 Sewere Controls List
+            .span6
+              &nbsp;
 
     -#.navbar.navbar-fixed-top
       .navbar-inner#pageheader
