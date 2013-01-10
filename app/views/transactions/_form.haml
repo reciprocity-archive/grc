@@ -11,11 +11,11 @@
 
 .row-fluid
 
-  .span5{ :class => error_class(f, :title) }
+  .span10{ :class => error_class(f, :title) }
     =f.label :title
     =f.text_field :title, :class => 'span12', :placeholder => 'Title'
 
-  .span5
+  -#.span5
     %label Approximate Record Count
     %input.span12{ :type => 'text', :placeholder => 'Enter approximate record count' }
 
