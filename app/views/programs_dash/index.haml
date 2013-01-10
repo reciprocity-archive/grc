@@ -8,10 +8,12 @@
       %a.btn{ :href => admin_dash_path } Admin
 
 -content_for :header do
-  %ol#breadcrumb
-    %li
-      DASHBOARD
-  .location#pageTitle Dashboard
+  .breadcrumbs
+    %ul.breadcrumb-list
+      %li
+        DASHBOARD
+  %h1
+    Dashboard
 
 .row-static
   .singleColumn

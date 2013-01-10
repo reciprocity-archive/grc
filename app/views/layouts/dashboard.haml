@@ -43,10 +43,12 @@
                   %a{:href => programs_dash_path}
                     %i.grcicon-dashboard
                     Dashboard
-                %li
-                  %a{:href => '#'}
-                    %i.grcicon-help
-                    Help
+                -help_path = yield(:page_help)
+                -if !help_path.blank?
+                  %li
+                    %a{:href => "/help/#{help_path}", :'data-toggle' => 'modal-ajax'}
+                      %i.grcicon-help
+                      Help
                 %li
                   %a{:href => '#'}
                     %i.grcicon-admin
@@ -54,7 +56,8 @@
                 %li.user
                   %a{:href => '#'}
                     %i.grcicon-user
-                    root@t.com
+                    %strong=current_user.name || current_user.email
+                  -#%a{:href => logout_path} Logout
                 %li.screen
                   %a{:href => '#'}
                     %i.grcicon-desktop
@@ -64,24 +67,7 @@
         .container-fluid
           .row-fluid
             .span6
-              .breadcrumbs
-                %ul.breadcrumb-list
-                  %li
-                    %a{:href => '#'}
-                      PROGRAMS
-                  %li
-                    %a{:href => '#'}
-                      Reg 1
-                  %li
-                    %a{:href => '#'}
-                      AUDITS
-                  %li
-                    %a{:href => '#'}
-                      Audit Name
-                  %li
-                    PBC List
-              %h1
-                Q2 Sewere Controls List
+              =yield :header
             .span6
               &nbsp;
 
@@ -101,38 +87,24 @@
                 -if controller_name == 'design'
                   -path = programs_dash_path
                 -else
-                  -path = request.fullpath
-                  
-                  
-                majko?
+                  -path = request.fullpath                
                 -path = path.gsub(/BETA=[^&]*&?/, '').sub(/[?&]$/, '')
                 -path += path.include?('?') ? '&' : '?'
                 -if has_feature? :BETA
                   %a.btn.btn-warning{ :href => "#{path}BETA=0" } Hide Demo
                 -else
                   %a.btn.btn-success{ :href => "#{path}BETA=1" } Show Demo
-              -if controller.controller_name != 'programs_dash'
-                .btn-group
-                  -# should find their site path back, jvg hack
-                  %a.btn{ :onclick => 'history.back(); return false;'  }
-                    %i.grcicon-back-black
-                    Back
-              -help_path = yield(:page_help)
-              -if !help_path.blank?
-                .btn-group
-                  %a.btn{ :href => "/help/#{help_path}", :'data-toggle' => 'modal-ajax' } Help
               =yield :header_buttons
       .navbar-secondinner
         .row-static.container
           .headerleft
-            =yield :header
+
           .headerright
             =yield :subheader_plus
             .btn-toolbar.fltrt.userInfo-nav
               #userInfo
                 Welcome
-                %strong=current_user.name || current_user.email
-                %a{:href => logout_path} Logout
+                
               =yield :subheader_extras
 
     .container.graphpaper
