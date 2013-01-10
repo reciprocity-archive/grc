@@ -133,7 +133,7 @@
                 .span2.pbc-request{ "data-target" => ".#{request_collapse_class}", "data-toggle" => "collapse"}
                   %h6.pbc-request-count
                     =pluralize(request.responses.count, "response")
-                .span3{ "data-target" => ".#{request_collapse_class}", "data-toggle" => "collapse", :title => 'Date Requested'}
+                .span3{ "data-target" => ".#{request_collapse_class}", "data-toggle" => "collapse" }
                   %label
                     %span{"rel" => "tooltip", "data-placement" => "top", "title" => "Date Requested"}=request.date_requested && request.date_requested.strftime('%m/%d/%Y')
                 .span4.pbc-status
