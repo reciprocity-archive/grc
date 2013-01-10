@@ -54,7 +54,7 @@
                   %option=status
             .span3
               %label
-                Person
+                Responsible Parties
               %select.span12{ :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'person' }
                 %option{ :value => 'any', :selected => 'selected' } - Any -
                 -pbc_list.requests.all.map { |req| [req.company_responsible.presence, req.auditor_responsible.presence] }.flatten.compact.uniq.sort.each do |name|
