@@ -1,7 +1,9 @@
   <div class="span8 pbc-response-process">
     <div class="row-fluid">
       <div class="span6">
-        General System Information
+        <span rel="tooltip" data-placement="top" title="Process Title">
+          {{{title}}}
+        </span>
       </div>
       <div class="span1">
         <span class="pbc-counter {{^object_people.length}} empty{{/object_people.length}}">
@@ -39,10 +41,10 @@
         <ul class="pbc-item-list">
           {{#object_people}}
           <li {{data 'model'}} data-model="true" title="{{person.email}}">
-            <div class="span7">
+            <div class="span5">
               {{person.name}} {{^person.name}}&nbsp;{{/person.name}}
             </div>
-            <div class="span4">
+            <div class="span6">
               (<select class="edit-person-role">
                 <option value="responsible" {{#if_equals role 'responsible'}}selected="true"{{/if_equals}}>Responsible</option>
                 <option value="accountable" {{#if_equals role 'accountable'}}selected="true"{{/if_equals}}>Accountable</option>
