@@ -19,8 +19,8 @@ class PbcListsController < BaseObjectsController
     Request request
     Notes notes
     Test test
-    Company\ Contact\ Email company_responsible
-    Auditor\ Contact\ Email auditor_responsible
+    Internal\ Contact company_responsible
+    Auditor\ Contact auditor_responsible
     Date\ Requested date_requested
     Request\ Id\ (auto-created) request_id
     status status
