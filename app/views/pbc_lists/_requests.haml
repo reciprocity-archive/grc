@@ -2,7 +2,7 @@
 
 .pbc-request-zone
   .row-fluid
-    .span6.pbc-main-title
+    .span4.pbc-main-title
       %h3 Requests
     -if requests.any?(&:control_assessment_id)
       .span2
@@ -21,7 +21,14 @@
         &nbsp;
     -else
       .span4 &nbsp;
+
     .span2.pbc-add
+      %a.btn.btn-mini.accordion-toggle.toggle.pull-right{:'data-toggle'=>"collapse", :href => "#widget-filters"}
+        Show/Hide Filter
+
+    .span2.pbc-add
+      
+
       .btn-group
         %a{:'data-toggle'=>"dropdown", :href => "#", :class => "btn btn-mini btn-success dropdown-toggle"}
           + Add New Request
@@ -33,7 +40,7 @@
                 %i{ :class => request_type_icon(type_name) }
                 =type_name
 
-.widget-filters
+#widget-filters.widget-filters.collapse
   -filters_disabled = pbc_list.requests.count == 0
   -if !filters_disabled
     .row-fluid
@@ -80,13 +87,14 @@
     %li.pbc-ca-item{ :'data-type' => 'ControlAssessment', :'data-id' => control_assessment_id, :'data-control-id' => control_assessment && control_assessment.control && control_assessment.control_id, 'data-sort-control-code' => control_assessment && control_assessment.control && control_assessment.control.slug }
       .pbc-ca-title
         .row-fluid
-          .span2{"data-target" => "##{control_assessment_collapse_id}", "data-toggle" => "collapse"}
+          .span4{"data-target" => "##{control_assessment_collapse_id}", "data-toggle" => "collapse"}
             .expander.in
             -#Using deprecated HTML code here; unsure how to pass a css style in an equal statement
-            %strong=(control_assessment && control_assessment.control && control_assessment.control.slug) || "<font color='red'>(Missing Control)</font>".html_safe
-          .span2{"data-target" => "##{control_assessment_collapse_id}", "data-toggle" => "collapse"}
-            =control_assessment && control_assessment.control && control_assessment.control.title || "&nbsp;".html_safe
+            Request with Control:
+            %strong= (control_assessment && control_assessment.control && control_assessment.control.slug) || "<font color='red'>(Missing Control)</font>".html_safe
           .span4{"data-target" => "##{control_assessment_collapse_id}", "data-toggle" => "collapse"}
+            =control_assessment && control_assessment.control && control_assessment.control.title || "&nbsp;".html_safe
+          .span2{"data-target" => "##{control_assessment_collapse_id}", "data-toggle" => "collapse"}
             &nbsp;
             -# Story 41602953 called for the request counts being removed from the CA header due to confusing re-use of icons.
             -# Saving here for historical record & in case we decide to restore them later --BM
@@ -125,7 +133,7 @@
                   
                   -if request.control.present?
                     .item.i-control.oneline
-                      Request with Control: 
+                      
                       =request.control && request.control.slug
                   -elsif request.pbc_control_code.present?
                     .item.error.oneline
