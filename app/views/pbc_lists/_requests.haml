@@ -93,11 +93,11 @@
           .span4{"data-target" => "##{control_assessment_collapse_id}", "data-toggle" => "collapse"}
             .expander.in
             -#Using deprecated HTML code here; unsure how to pass a css style in an equal statement
-            Request with Control:
+            Requests with Control:
             %strong= (control_assessment && control_assessment.control && control_assessment.control.slug) || "<font color='red'>(Missing Control)</font>".html_safe
-          .span4{"data-target" => "##{control_assessment_collapse_id}", "data-toggle" => "collapse"}
+          .span6{"data-target" => "##{control_assessment_collapse_id}", "data-toggle" => "collapse"}
             =control_assessment && control_assessment.control && control_assessment.control.title || "&nbsp;".html_safe
-          .span2{"data-target" => "##{control_assessment_collapse_id}", "data-toggle" => "collapse"}
+          -#.span2{"data-target" => "##{control_assessment_collapse_id}", "data-toggle" => "collapse"}
             &nbsp;
             -# Story 41602953 called for the request counts being removed from the CA header due to confusing re-use of icons.
             -# Saving here for historical record & in case we decide to restore them later --BM
