@@ -84,7 +84,6 @@ can.Model.Cacheable("CMS.Models.System", {
         });
     }
     , system_or_process: function() {
-      console.debug(this);
       if (this.attr('is_biz_process'))
         return 'process';
       else
