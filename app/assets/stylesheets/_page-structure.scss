@@ -98,10 +98,8 @@
 }
 
 .pbc-request-zone {
-  border:1px solid $borderDefault;
-  @include border-radius(4px 4px 0 0);
   margin-bottom:4px;
-  padding:0 10px;
+  padding:0;
   [class*="span"] {
    padding-bottom:0;
    min-height:0;
@@ -130,6 +128,7 @@
   .pbc-main-title {
     h3 {
       margin-top:2px;
+      font-weight:bold;
     }
   }
 }

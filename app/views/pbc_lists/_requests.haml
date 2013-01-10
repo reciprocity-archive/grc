@@ -6,16 +6,19 @@
       %h3 Requests
     -if requests.any?(&:control_assessment_id)
       .span2
-        %span.word.pull-right
+        -#%span.word.pull-right
           %strong CA Status:
+        &nbsp;
       .span1
-        %span.word internal
-        %span.letter D
-        %span.letter E
+        -#%span.word internal
+        -#%span.letter D
+        -#%span.letter E
+        &nbsp;
       .span1
-        %span.word external
-        %span.letter D
-        %span.letter E
+        -#%span.word external
+        -#%span.letter D
+        -#%span.letter E
+        &nbsp;
     -else
       .span4 &nbsp;
     .span2.pbc-add
@@ -29,6 +32,47 @@
               %a{ :href => new_flow_request_path(:'request[pbc_list_id]' => pbc_list.id, :'request[type_id]' => type_id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide'}
                 %i{ :class => request_type_icon(type_name) }
                 =type_name
+
+.widget-filters
+  -filters_disabled = pbc_list.requests.count == 0
+  -if !filters_disabled
+    .row-fluid
+      .span12
+        .filters-box
+          .row-fluid
+            .span11
+              %label
+                Request Type
+              %select{ :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'type-name' }
+                %option{ :value => 'any', :selected => 'selected' } - Any -
+                %option Documentation
+                %option Interview
+                %option Population Sample
+
+              %label
+                Status
+              %select{ :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'status' }
+                %option{ :value => 'any', :selected => 'selected' } - Any -
+                -Request.statuses.each do |status|
+                  %option=status
+
+              %label
+                Responsible Parties
+              %select{ :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'person' }
+                %option{ :value => 'any', :selected => 'selected' } - Any -
+                -pbc_list.requests.all.map { |req| [req.company_responsible.presence, req.auditor_responsible.presence] }.flatten.compact.uniq.sort.each do |name|
+                  %option=name
+
+              %label
+                Date (on or after)
+              %input.span12#datepicker-control-date.date{:type => "text",  :placeholder => "MM/DD/YYYY", :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'date-requested' }
+              :javascript
+                $('#datepicker-control-date').datepicker();
+            .span1
+              %button.btn.span12{ :'data-toggle' => 'filter-reset' , :rel => "tooltip", :"data-position" => "top", :title => "Reset filters" }
+                %i.grcicon-x-grey
+
+
 
 %ul.pbc-control-assessments#requests
   -sorted_requests_with_control_assessments(requests).each do |control_assessment_id, control_assessment, requests|
