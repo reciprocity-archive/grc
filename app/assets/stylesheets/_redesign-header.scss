@@ -1,0 +1,14 @@
+.header-bar {
+  background: $headerBgnd;
+  .logo {
+      line-height:30px;
+  }
+  .menu {
+    @include clearfix();
+    float:right;
+    li {
+      float:left;
+      color: $white;
+    }
+  }
+}

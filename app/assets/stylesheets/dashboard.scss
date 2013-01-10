@@ -8,10 +8,18 @@
 // Required external stylesheets
 
 @import "jquery-ui";
+
 @import "bootstrap";
-//@import "bootstrap-responsive";
+@import "bootstrap-responsive";
+
 @import "compass/css3";
 @import "bootstrap-wysihtml5-0.0.2";
+
+@import "redesign-setup";
+@import "redesign-layout";
+@import "redesign-header";
+
+/*
 
 // editable styles start here
 
@@ -52,3 +60,6 @@
 
   // fluid-layout styles
   @import "fluid";
+
+
+*/

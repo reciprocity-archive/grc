@@ -23,7 +23,34 @@
       jQuery(function($) { $('head').append("<link href='https://fonts.googleapis.com/css?family=Titillium+Web' rel='stylesheet' type='text/css'></link>"); });
 
   %body{ :class => "#{has_feature?(:BETA) ? 'BETA' : ''}" }
-    .navbar.navbar-fixed-top
+
+    %header.header
+      .header-bar
+        .container-fluid
+          .row-fluid
+            .span4
+              .logo
+                %a{:href => root_path}
+                  Google GRC
+            .span8
+              %ul.menu
+                %li
+                  Dashboard
+                %li
+                  Help
+                %li
+                  Admin Area
+                
+            
+      .header-content
+        .container-fluid
+          .row-fluid
+            .span8
+              main header info
+            .span4
+              header import/export
+
+    -#.navbar.navbar-fixed-top
       .navbar-inner#pageheader
         .row-static.container
           .headerleft
