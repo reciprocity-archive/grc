@@ -19,21 +19,13 @@
       font-weight:bold;
       text-transform:uppercase;
       text-shadow: 0 1px 0 $black;
-      &.user {
-        text-transform:lowercase;
-      }
-      &.screen {
-        background:$screenBgnd;
-      }
       i {
         margin: 7px 6px 0 0;
         @include opacity(0.6);
-        @include transition(opacity ease-in-out 0.3s);
       }
       a {
         display:block;
         color:$menuLink;
-        @include transition(color ease-in-out 0.3s, background ease-in-out 0.3s);
         line-height:30px;
         padding: 0 10px;
         &:hover {
@@ -41,6 +33,29 @@
           color:$white;
           i {
             @include opacity(1);
+          }
+        }
+      }
+      &.user {
+        text-transform:lowercase;
+      }
+      &.screen {
+        background:$screenBgnd;
+      }
+      &.active {
+        text-shadow: none;
+        i {
+          @include opacity(0.8);
+        }
+        a {
+          color:$black;
+          background: $white;
+          &:hover {
+            background: $white;
+            color:$black;
+            i {
+              @include opacity(0.8);
+            }
           }
         }
       }

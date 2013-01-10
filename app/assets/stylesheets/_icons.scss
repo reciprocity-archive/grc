@@ -23,22 +23,37 @@
 .grcicon-admin {
   @include new-icons();
   background-position:-64px -16px;
+  .active & {
+    background-position:-64px 0;
+  }
 }
 .grcicon-dashboard {
   @include new-icons();
   background-position:-16px -16px;
+  .active & {
+    background-position:-16px 0;
+  }
 }
 .grcicon-desktop {
   @include new-icons();
   background-position:-32px -16px;
+  .active & {
+    background-position:-32px 0;
+  }
 }
 .grcicon-help {
   @include new-icons();
   background-position:-48px -16px;
+  .active & {
+    background-position:-48px 0;
+  }
 }
 .grcicon-user {
   @include new-icons();
-  background-position:-16px -16px;
+  background-position:0 -16px;
+  .active & {
+    background-position:0 0;
+  }
 }
 
 
