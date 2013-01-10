@@ -16,17 +16,17 @@
     -#.span3.widget-titles
       %label Title
       %h4=pbc_list.title
-    .span3.widget-titles
+    .span4.widget-titles
       %label Audit Firm
       %h4=pbc_list.audit_cycle.audit_firm
-    .span3.widget-titles
+    .span4.widget-titles
       %label Audit Lead
       %h4=pbc_list.audit_cycle.audit_lead
-    .span2.widget-titles
+    .span4.widget-titles
       %label Audit Start Date
       %h4=pbc_list.audit_cycle.start_at && pbc_list.audit_cycle.start_at.strftime('%m/%d/%Y')
   .row-fluid
-    .span9
+    .span12
       %label Description
       .rtf
         =raw pbc_list.audit_cycle.description

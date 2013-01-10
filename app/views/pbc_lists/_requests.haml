@@ -37,42 +37,40 @@
   -filters_disabled = pbc_list.requests.count == 0
   -if !filters_disabled
     .row-fluid
-      .span12
-        .filters-box
-          .row-fluid
-            .span11
-              %label
-                %strong{:style => "margin-right:10px"}Filter by:
-              %label
-                Request Type
-              %select{ :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'type-name' }
-                %option{ :value => 'any', :selected => 'selected' } - Any -
-                %option Documentation
-                %option Interview
-                %option Population Sample
+      .span12.filters-box
+        .span11
+          %label
+            %strong{:style => "margin-right:10px"}Filter by:
+          %label.inline
+            Request Type
+          %select.span3{ :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'type-name' }
+            %option{ :value => 'any', :selected => 'selected' } - Any -
+            %option Documentation
+            %option Interview
+            %option Population Sample
 
-              %label
-                Status
-              %select{ :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'status' }
-                %option{ :value => 'any', :selected => 'selected' } - Any -
-                -Request.statuses.each do |status|
-                  %option=status
+          %label.inline
+            Status
+          %select.span3{ :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'status' }
+            %option{ :value => 'any', :selected => 'selected' } - Any -
+            -Request.statuses.each do |status|
+              %option=status
 
-              %label
-                Responsible Parties
-              %select{ :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'person' }
-                %option{ :value => 'any', :selected => 'selected' } - Any -
-                -pbc_list.requests.all.map { |req| [req.company_responsible.presence, req.auditor_responsible.presence] }.flatten.compact.uniq.sort.each do |name|
-                  %option=name
+          %label.inline
+            Responsible Parties
+          %select.span3{ :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'person' }
+            %option{ :value => 'any', :selected => 'selected' } - Any -
+            -pbc_list.requests.all.map { |req| [req.company_responsible.presence, req.auditor_responsible.presence] }.flatten.compact.uniq.sort.each do |name|
+              %option=name
 
-              %label
-                Date (on or after)
-              %input.span12#datepicker-control-date.date{:type => "text",  :placeholder => "MM/DD/YYYY", :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'date-requested' }
-              :javascript
-                $('#datepicker-control-date').datepicker();
-            .span1
-              %button.btn.span12{ :'data-toggle' => 'filter-reset' , :rel => "tooltip", :"data-position" => "top", :title => "Reset filters" }
-                %i.grcicon-x-grey
+          %label.inline
+            On or After
+          %input.span3#datepicker-control-date.date{:type => "text",  :placeholder => "MM/DD/YYYY", :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'date-requested' }
+          :javascript
+            $('#datepicker-control-date').datepicker();
+        .span1
+          %button.btn.pull-right{ :'data-toggle' => 'filter-reset' , :rel => "tooltip", :"data-position" => "top", :title => "Reset filters" }
+            %i.grcicon-x-grey
 
 
 
@@ -84,7 +82,8 @@
         .row-fluid
           .span2{"data-target" => "##{control_assessment_collapse_id}", "data-toggle" => "collapse"}
             .expander.in
-            %strong=(control_assessment && control_assessment.control && control_assessment.control.slug) || "(Missing Control)".html_safe
+            -#Using deprecated HTML code here; unsure how to pass a css style in an equal statement
+            %strong=(control_assessment && control_assessment.control && control_assessment.control.slug) || "<font color='red'>(Missing Control)</font>".html_safe
           .span2{"data-target" => "##{control_assessment_collapse_id}", "data-toggle" => "collapse"}
             =control_assessment && control_assessment.control && control_assessment.control.title || "&nbsp;".html_safe
           .span4{"data-target" => "##{control_assessment_collapse_id}", "data-toggle" => "collapse"}
@@ -123,12 +122,15 @@
                     %i{"rel" => "tooltip", "data-placement" => "top", "title" => "#{request.type_name} Request", "class" => request_type_icon(request.type_name) }
                   %a.btn.btn-mini.pull-right{:href => flow_controls_path(:list_select => 1), :'data-toggle' => 'modal-ajax-single-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#referenceList', :'data-modal-class' => 'modal-slim' }
                     %i.grcicon-link
-                  .item.i-control.oneline
-                    -if request.control.present?
+                  
+                  -if request.control.present?
+                    .item.i-control.oneline
                       =request.control && request.control.slug
-                    -elsif request.pbc_control_code.present?
+                  -elsif request.pbc_control_code.present?
+                    .item.error.oneline
                       ="#{request.pbc_control_code} [Code not recognized]"
-                    -else
+                  -else
+                    .item.i-control.oneline
                       No control selected
                 .span2.pbc-request{ "data-target" => ".#{request_collapse_class}", "data-toggle" => "collapse"}
                   %h6.pbc-request-count

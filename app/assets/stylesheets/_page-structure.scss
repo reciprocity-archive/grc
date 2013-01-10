@@ -288,6 +288,7 @@ ul.pbc-requests {
 .request-icon {
   @include opacity(0.3);
   padding-top:3px;
+  padding-right:3px;
   float:left;
   &:hover {
     @include opacity(0.5);
