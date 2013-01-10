@@ -32,15 +32,15 @@
 
 %ul.pbc-control-assessments#requests
   -sorted_requests_with_control_assessments(requests).each do |control_assessment_id, control_assessment, requests|
-    -control_assessment_collapse_id = "control_assessment-#{control_assessment && control_assessment.control_id || 'null'}"
-    %li.pbc-ca-item{ :'data-type' => 'ControlAssessment', :'data-id' => control_assessment_id, :'data-control-id' => control_assessment && control_assessment.control_id, 'data-sort-control-code' => control_assessment && control_assessment.control.slug }
+    -control_assessment_collapse_id = "control_assessment-#{control_assessment && control_assessment.control && control_assessment.control_id || 'null'}"
+    %li.pbc-ca-item{ :'data-type' => 'ControlAssessment', :'data-id' => control_assessment_id, :'data-control-id' => control_assessment && control_assessment.control && control_assessment.control_id, 'data-sort-control-code' => control_assessment && control_assessment.control && control_assessment.control.slug }
       .pbc-ca-title
         .row-fluid
           .span2{"data-target" => "##{control_assessment_collapse_id}", "data-toggle" => "collapse"}
             .expander.in
-            %strong=(control_assessment && control_assessment.control.slug) || "(Missing Control)".html_safe
+            %strong=(control_assessment && control_assessment.control && control_assessment.control.slug) || "(Missing Control)".html_safe
           .span2{"data-target" => "##{control_assessment_collapse_id}", "data-toggle" => "collapse"}
-            =control_assessment && control_assessment.control.title || "&nbsp;".html_safe
+            =control_assessment && control_assessment.control && control_assessment.control.title || "&nbsp;".html_safe
           .span4{"data-target" => "##{control_assessment_collapse_id}", "data-toggle" => "collapse"}
             &nbsp;
             -# Story 41602953 called for the request counts being removed from the CA header due to confusing re-use of icons.
