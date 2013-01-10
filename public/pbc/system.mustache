@@ -53,10 +53,10 @@
               {{person.name}} {{^person.name}}&nbsp;{{/person.name}}
             </div>
             <div class="span6">
-              (<select class="edit-person-role">
+              <select class="edit-person-role">
                 <option value="responsible" {{#if_equals role 'responsible'}}selected="true"{{/if_equals}}>Responsible</option>
                 <option value="accountable" {{#if_equals role 'accountable'}}selected="true"{{/if_equals}}>Accountable</option>
-              </select>)
+              </select>
             </div>
             <a class="btn btn-nano pull-right remove_person span1" href="javascript://">
               <i class="grcicon-x-grey"></i>
