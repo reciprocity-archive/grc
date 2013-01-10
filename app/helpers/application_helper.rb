@@ -174,4 +174,15 @@ module ApplicationHelper
       pluralize(distance_in_days, "day")
     end
   end
+
+  def all_models
+    models = ActiveRecord::Base.connection.tables.collect{|t| t.underscore.singularize}
+    models.delete("schema_migration")
+    models.delete("version")
+    models.delete("relationship_type")
+    models.each do |model_name|
+      model = model_name.camelize.constantize
+      yield model
+    end
+  end
 end
