@@ -42,6 +42,8 @@
           .row-fluid
             .span11
               %label
+                %strong{:style => "margin-right:10px"}Filter by:
+              %label
                 Request Type
               %select{ :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'type-name' }
                 %option{ :value => 'any', :selected => 'selected' } - Any -
