@@ -118,6 +118,7 @@
             %li.main-item{ html_data_attributes(request, "data-filter-", [ ["type-id", "type_id"], ["type-name", "type_name"], "status", ["date-requested", "date_requested.to_date"], ["control-code", "control.slug"], ["person", "persons_responsible"], "id" ]) }
               .row-fluid.pbc-item-head
                 .span3.pbc-item.pbc-control
+                  .expander.small-expander{"data-target" => ".#{request_collapse_class}", "data-toggle" => "collapse"}
                   .request-icon
                     %i{"rel" => "tooltip", "data-placement" => "top", "title" => "#{request.type_name} Request", "class" => request_type_icon(request.type_name) }
                   %a.btn.btn-mini.pull-right{:href => flow_controls_path(:list_select => 1), :'data-toggle' => 'modal-ajax-single-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#referenceList', :'data-modal-class' => 'modal-slim' }
@@ -132,7 +133,7 @@
                 .span2.pbc-request{ "data-target" => ".#{request_collapse_class}", "data-toggle" => "collapse"}
                   %h6.pbc-request-count
                     =pluralize(request.responses.count, "response")
-                .span2{ "data-target" => ".#{request_collapse_class}", "data-toggle" => "collapse", :title => 'Date Requested'}
+                .span3{ "data-target" => ".#{request_collapse_class}", "data-toggle" => "collapse", :title => 'Date Requested'}
                   %label
                     %span{"rel" => "tooltip", "data-placement" => "top", "title" => "Date Requested"}=request.date_requested && request.date_requested.strftime('%m/%d/%Y')
                 .span4.pbc-status
@@ -140,9 +141,6 @@
                   %select
                     -Request.statuses.each do |status|
                       %option{ :selected => request.status == status }=status
-                .span1.pbc-response-actions
-                  %a#tooltip16.btn.btn-blue.btn-mini{"rel" => "tooltip", "data-placement" => "left", "title" => "More", "data-target" => ".#{request_collapse_class}", "data-toggle" => "collapse"}
-                    %i.grcicon-more
               .row-fluid.collapse{ :class => request_collapse_class }
                 .span3.pbc-item.pbc-request
                   %h5 Request
