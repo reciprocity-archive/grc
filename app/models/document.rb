@@ -34,10 +34,17 @@ class Document < ActiveRecord::Base
     end
   end
 
+  validate :require_link_or_title
+
+  def require_link_or_title
+    if !(link.present? || title.present?)
+      errors.add(:link, "either link or title is required")
+      errors.add(:title, "either link or title is required")
+    end
+  end
+
   validates :link,
     :uniqueness => true, :allow_blank => true
-
-  validates :title, :presence => true
 
   def display_name
     title

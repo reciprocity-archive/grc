@@ -15,19 +15,16 @@
     }
     , properties : []
   }, {
-    init : function() {
+    setup : function() {
+      typeof this._super === "function" && this._super.apply(this, arguments);
+      this.options.observer = new can.Observe();
+    }
+
+    , init : function() {
       if(this.options.arity > 1) {
         this.fetch_list(this.options.id);
       } else {
         var el = this.element;
-        this.options.observer = new can.Observe();
-
-        //this should be in the controller def as "{observer} model"
-        // but CanJS is throwing errors when I try to do that.  --BM
-        this.options.observer.bind("model", function(ev, newVal, oldVal) {
-          el.attr("oid", newVal ? newVal.id : "");
-        });
-
 
         if(this.options.id) {
           this.fetch_one(this.options.id);
@@ -86,6 +83,28 @@
     , ".selector click" : function(el, ev) {
       this.setSelected(el.closest("[data-model]").data("model"));
     }
+
+    , filter : function(str) {
+      if(str != null) {
+        this.options.filter = str.toUpperCase();
+      }
+      var that = this;
+      this.element.find("[data-model]").each(function() {
+        var $this = $(this);
+        if(!that.options.filter || $this.find(".regulationslot").text().toUpperCase().indexOf(that.options.filter) > 1)
+          $this.show();
+        else
+          $this.hide();
+      });
+    }
+
+    //  Careful you don't try to hook up attribute events to can.Observes until
+    //  they are actually craeted.  If you need to create one (e.g. on a per-instance basis), do it in setup()
+    , "{observer} model" : function(el, ev, newVal, oldVal) {
+      el.attr("oid", newVal ? newVal.id : "");
+    }
+
+
 
   });
 

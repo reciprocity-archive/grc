@@ -26,6 +26,16 @@ class BaseMappingsController < ApplicationController
     end
   end
 
+  def update
+    params[object_name][:id] = params[:id]
+    errors, object = create_or_update_object(params[object_name])
+    if errors.nil? || errors.empty?
+      render :json => update_object_as_json(object) || {}, :status => 200
+    else
+      render :json => { :errors => errors }, :status => 400
+    end
+  end
+
   def list_edit
     respond_to do |format|
       format.html do
@@ -115,6 +125,10 @@ class BaseMappingsController < ApplicationController
     end
 
     def create_object_as_json(object)
+      object_as_json(object)
+    end
+
+    def update_object_as_json(object)
       object_as_json(object)
     end
 end

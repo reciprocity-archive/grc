@@ -28,6 +28,19 @@ can.Model("can.Model.Cacheable", {
       return can.Model.Cacheable.prototype.__proto__.constructor.newInstance.apply(this, arguments);
     }
   }
+  , process_args : function(args, names) {
+    var pargs = {};
+    var obj = pargs;
+    if(this.root_object) {
+      pargs[root_object] = obj;
+    }
+    var src = args.serialize ? args.serialize() : args;
+    names = names || Object.keys(src);
+    for(var i = 0 ; i < names.length ; i++) {
+      obj[names[i]] = src[names[i]];
+    }
+    return pargs;
+  }
 
 }, {
   init : function() {

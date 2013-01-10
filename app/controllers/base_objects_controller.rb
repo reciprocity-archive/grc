@@ -74,6 +74,9 @@ class BaseObjectsController < ApplicationController
         format.html do
           render :layout => nil, :status => 400, :locals => create_context
         end
+        format.json do
+          render :json => create_errors_as_json, :status => 400
+        end
       end
     end
   end
@@ -94,6 +97,9 @@ class BaseObjectsController < ApplicationController
         flash[:error] = update_error_message
         format.html do
           render :layout => nil, :status => 400, :locals => update_context
+        end
+        format.json do
+          render :json => update_errors_as_json, :status => 400
         end
       end
     end
@@ -282,6 +288,18 @@ class BaseObjectsController < ApplicationController
 
     def destroy_object_as_json(args=nil)
       object_as_json(args)
+    end
+
+    def errors_as_json
+      { :errors => object.errors.messages }
+    end
+
+    def create_errors_as_json
+      errors_as_json
+    end
+
+    def update_errors_as_json
+      errors_as_json
     end
 
     def load_object

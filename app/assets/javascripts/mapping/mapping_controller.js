@@ -1,6 +1,7 @@
 //= require can.jquery-all
 //= require sections/section
 //= require controls/control
+//= require controls/controls_controller
 
 (function(namespace, $) {
 function mapunmap(unmap) {
@@ -261,6 +262,19 @@ can.Control("CMS.Controllers.MappingWidgets", {}, {
         this.setSelected(null);
       }
     });
+  }
+
+  , ".widgetsearch-tocontent keydown" : function(el, ev) {
+    var controllers = this.element.find(".cms_controllers_controls, .cms_controllers_sections").controls(namespace.CMS.Controllers.Controls);
+    $(controllers).each(function() {
+      var that = this;
+      setTimeout(function() {
+        if(that.options.arity > 1) {
+          that.filter(el.val());
+        }
+      }, 1);
+    });
+    ev.stopPropagation();
   }
 
 });

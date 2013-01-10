@@ -1,6 +1,8 @@
 -content_for :header do
   %ol#breadcrumb
-    %li AUDIT
+    %li PROGRAMS
+    %li=link_to @cycle.program.title, flow_program_path(@cycle.program_id)
+    %li.last AUDIT
   .location#pageTitle #{@cycle.program.title} Audit
 
 -content_for :page_help, 'cycle'

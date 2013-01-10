@@ -1,6 +1,7 @@
 /*
  *= require application
  *= require jquery
+ *= require fastfix
  *= require jquery-ui
  *= require bootstrap
  *= require related_selector

@@ -60,6 +60,8 @@ class Control < ActiveRecord::Base
   has_many :assertations, :class_name => 'Categorization', :as => :categorizable, :dependent => :destroy
   has_many :assertions, :through => :assertations, :source => :category, :conditions => { :scope_id => Control::CATEGORY_ASSERTION_TYPE_ID }
 
+  has_many :control_assessments, :dependent => :destroy
+
   is_versioned_ext
 
   sanitize_attributes :description, :documentation_description, :notes

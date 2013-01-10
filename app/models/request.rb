@@ -1,3 +1,14 @@
+class MultiEmailValidator < ActiveModel::EachValidator
+  EMAIL_RE = /([^@\s]+)(?:@((?:[-a-z0-9]+\.)+[a-z]{2,}))/i
+  EMAILS_RE = /\A\s*#{EMAIL_RE}(?:\s*[, ]\s*#{EMAIL_RE})*\Z/i
+
+  def validate_each(record, attribute, value)
+    unless value =~ EMAILS_RE #/\A([^@\s]+)(?:@((?:[-a-z0-9]+\.)+[a-z]{2,}))?\z/i
+      record.errors[attribute] << (options[:message] || "must be one or more emails")
+    end
+  end
+end
+
 class Request < ActiveRecord::Base
   include AuthoredModel
   include AuthorizedModel
@@ -30,8 +41,12 @@ class Request < ActiveRecord::Base
 
   sanitize_attributes :pbc_control_desc, :request, :test, :notes
 
+  validates_presence_of :request, :on => :create
   validates :pbc_list,
     :presence => { :message => "needs a value" }
+  validates :company_responsible, :auditor_responsible,
+    :allow_blank => true,
+    :multi_email => true
 
   after_save :after_save_detect_orphaned_control_assessment
   after_destroy :after_destroy_detect_orphaned_control_assessment
@@ -76,5 +91,15 @@ class Request < ActiveRecord::Base
 
   def after_destroy_detect_orphaned_control_assessment
     maybe_destroy_orphaned_control_assessment(control_assessment_id)
+  end
+
+  def self.status_counts(requests)
+    counts = Hash[requests.group_by(&:status).map{|x| [x[0], x[1].size]}]
+
+    # Ensure each status is included
+    self.statuses.each { |s| counts[s] ||= 0 }
+
+    counts['Draft'] += counts.delete(nil).to_i
+    counts
   end
 end

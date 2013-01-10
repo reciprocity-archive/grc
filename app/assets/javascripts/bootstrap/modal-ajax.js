@@ -16,15 +16,6 @@
       , '</div>'
       , '<div class="modal-body"></div>'
       , '<div class="modal-footer">'
-      , '  <div class="row-fluid">'
-      , '    <nav class="fltlft txtlft span3">'
-      , '      <a class="btn btn-large btn-info" data-dismiss="modal">Cancel</a>'
-      , '    </nav>'
-      , '    <div class="span6"></div>'
-      , '    <nav class="fltrt txtrt span3">'
-      , '      <a class="btn btn-large btn-warning" data-dismiss="modal">Close</a>'
-      , '    </nav>'
-      , '  </div>'
       , '</div>'
       ];
     return $(template.join('\n'))
@@ -255,7 +246,7 @@
 
   var _modal_hide = $.fn.modal.Constructor.prototype.hide;
   $.fn.modal.Constructor.prototype.hide = function(ev) {
-    if(ev && (ev.currentTarget !== ev.target))
+    if(ev && (ev.modalHidden))
         return;  //We already hid one
 
     _modal_hide.apply(this, arguments);
@@ -271,6 +262,7 @@
     lastModal.css({"height" : "", "overflow" : "", top : "", "margin-top" : ""});
     arrangeTopModal(modals, lastModal);
     arrangeBackgroundModals(modals, lastModal);
+    if(ev) ev.modal_hidden = true; //mark that we've hidden one
   };
 
   $(function() {

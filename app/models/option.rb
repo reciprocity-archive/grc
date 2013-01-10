@@ -9,6 +9,7 @@ class Option < ActiveRecord::Base
   end
 
   scope :options_for, lambda { |role| where(:role => role) }
+  scope :ordered_by_title_desc, order("#{table_name}.title DESC")
 
   is_versioned_ext
 

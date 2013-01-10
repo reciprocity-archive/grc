@@ -17,4 +17,60 @@ class AdminDashController < ApplicationController
     @root_categories = allowed_objs(Category.roots, :read)
     @options = allowed_objs(Option.all, :read)
   end
+
+  def sre
+  end
+
+  def show_by_option
+    if params[:title].present?
+      option = Option.find_by_title(params[:title])
+    else
+      option = Option.find(params[:id])
+    end
+
+    raise "not found" unless option
+
+    models = ActiveRecord::Base.connection.tables.collect{|t| t.underscore.singularize}
+    models.delete("schema_migration")
+    models.delete("version")
+
+    res = []
+    models.each do |model_name|
+      model = model_name.camelize.constantize
+      model.reflect_on_all_associations.each do |assoc|
+        if assoc.class_name == "Option"
+          model.joins(assoc.name).where(:options => {:id => option.id}).each do |o|
+            res << [model_name, o.id, assoc.name]
+          end
+        end
+      end
+    end
+
+    render :json => res
+  end
+
+  def show_by_category
+    if params[:title].present?
+      category = Category.find_by_title(params[:title])
+    else
+      category = Category.find(params[:id])
+    end
+
+    raise "not found" unless category
+
+    res = Categorization.where(:category_id => category.id).map do |c| 
+      [c.categorizable_type, c.categorizable_id]
+    end
+    render :json => res
+  end
+
+  def show_by_relationship_type
+    relationship_type = params[:title]
+
+    res = Relationship.where(:relationship_type_id => relationship_type).map do |r|
+      [r.source_type, r.source_id, r.destination_type, r.destination_id]
+    end
+    
+    render :json => res
+  end
 end

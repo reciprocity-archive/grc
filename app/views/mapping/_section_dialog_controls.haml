@@ -68,10 +68,12 @@
           \:
           %span.statustextred Not Approved
 
+    =f.hidden_field :na
+
   .modal-footer
     .row-fluid
-      %nav.fltlft.txtlft.span3
-        =f.submit pat(:cancel), :type => 'reset', :class => 'btn btn-large btn-info'
       %nav.fltrt.txtrt.span3
-        .btn.btn-large.btn-success.btn-primary.disabled Approve
+        =f.submit pat(:done), :class => 'btn btn-large btn-info'
+      -#%nav.fltrt.txtrt.span3
+        -#.btn.btn-large.btn-success.btn-primary.disabled Approve
         -#=f.submit pat(:approve), :class => 'btn btn-large btn-success'
