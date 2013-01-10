@@ -4,8 +4,10 @@
 
 -content_for :header_buttons do
   -if current_user.has_role?(:superuser)
-    .btn-group
-      %a.btn{ :href => admin_dash_path } Admin
+    %li
+      %a{:href => admin_dash_path}
+        %i.grcicon-admin
+        Admin Area
 
 -content_for :header do
   .breadcrumbs
