@@ -11,14 +11,18 @@
 
 %ul.nav.nav-tabs.nav-stacked
   -program.cycles.order("start_at DESC").each do |cycle|
-    %li.group
-      %a{ :href => flow_cycle_path(cycle) }
-        -if cycle.complete
-          Complete (started #{time_ago_in_words cycle.start_at} ago)
-        -else
-          -if cycle.start_at == Time.zone.now.to_date
-            Started today
-          -elsif cycle.start_at < Time.zone.now.to_date
-            Started #{days_ago_in_words cycle.start_at} ago
-          -else
-            Starting in #{days_ago_in_words cycle.start_at}
+    %a.item-link{ :href => flow_cycle_path(cycle) }
+      .item
+        .row-fluid
+          .span6
+            %strong=cycle.title
+          .span6
+            -if cycle.complete
+              Complete (started #{time_ago_in_words cycle.start_at} ago)
+            -else
+              -if cycle.start_at == Time.zone.now.to_date
+                Started today
+              -elsif cycle.start_at < Time.zone.now.to_date
+                Started #{days_ago_in_words cycle.start_at} ago
+              -else
+                Starting in #{days_ago_in_words cycle.start_at}
