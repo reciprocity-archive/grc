@@ -8,20 +8,24 @@ end
 class PbcListsController < BaseObjectsController
   include ImportHelper
 
+  PBC_METADATA_MAP = Hash[*%w(
+    Type type
+  )]
+
   PBC_REQUEST_MAP = Hash[*%w(
-    type_id type_name
-    pbc_control_code pbc_control_code
-    pbc_control_desc pbc_control_desc
-    request request
-    notes notes
-    test test
-    company_responsible company_responsible
-    auditor_responsible auditor_responsible
-    date_requested date_requested
-    request_id request_id
+    Request\ Type type_name
+    Control\ Code pbc_control_code
+    Control\ Description pbc_control_desc
+    Request request
+    Notes notes
+    Test test
+    Company\ Contact\ Email company_responsible
+    Auditor\ Contact\ Email auditor_responsible
+    Date\ Requested date_requested
+    Request\ Id\ (auto-created) request_id
     status status
     firm_responsible firm_responsible
-  )]
+  )].merge("" => "")
 
   access_control :acl do
     # FIXME: Implement real authorization
@@ -54,15 +58,9 @@ class PbcListsController < BaseObjectsController
     if upload.present?
       begin
         file = upload.read.force_encoding('utf-8')
-        import = { :messages => [], :pbc_list => @pbc_list }
-        rows = CSV.parse(file)
-
-        raise ImportException.new("There must be at least 2 input lines") unless rows.size >= 2
-
-        read_import(import, PBC_REQUEST_MAP, "request", rows)
-
+        import = read_import_requests(CSV.parse(file))
         @messages = import[:messages]
-        do_import(import, params[:confirm].blank?)
+        do_import_requests(import, params[:confirm].blank?)
         @warnings = import[:warnings]
         @errors = import[:errors]
         if params[:confirm].present? && !@errors.any? && !@messages.any?
@@ -95,6 +93,10 @@ class PbcListsController < BaseObjectsController
         self.response.headers['Content-Type'] = 'text/csv'
         headers['Content-Disposition'] = "attachment; filename=\"#{@pbc_list.display_name}.csv\""
         self.response_body = Enumerator.new do |out|
+          out << CSV.generate_line(%w(Type))
+          out << CSV.generate_line(["PBC Requests"])
+          out << CSV.generate_line([])
+          out << CSV.generate_line([])
           out << CSV.generate_line(PBC_REQUEST_MAP.keys)
           @pbc_list.requests.each do |req|
             values = PBC_REQUEST_MAP.keys.map { |key| req.send(PBC_REQUEST_MAP[key]) if req.respond_to?(PBC_REQUEST_MAP[key]) }
@@ -107,7 +109,7 @@ class PbcListsController < BaseObjectsController
 
   private
 
-    def do_import(import, check_only)
+    def do_import_requests(import, check_only)
       import[:errors] = {}
       import[:warnings] = {}
 
@@ -154,6 +156,26 @@ class PbcListsController < BaseObjectsController
 
         request.save unless check_only
       end
+    end
+
+    def read_import_requests(rows)
+      import = { :messages => [], :pbc_list => @pbc_list }
+
+      raise ImportException.new("There must be at least 5 input lines") unless rows.size >= 5
+
+      pbc_list_headers = read_import_headers(import, PBC_METADATA_MAP, "metadata", rows)
+      pbc_list_values = rows.shift
+
+      import[:metadata] = Hash[*pbc_list_headers.zip(pbc_list_values).flatten]
+
+      validate_import_type(import[:metadata], "PBC Requests")
+
+      rows.shift
+      rows.shift
+
+      read_import(import, PBC_REQUEST_MAP, "request", rows)
+
+      import
     end
 
     def post_destroy_path
