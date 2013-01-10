@@ -31,11 +31,16 @@
             .span4
               .logo
                 %a{:href => root_path}
-                  Google GRC
+                  -if CMS_CONFIG["COMPANY_LOGO"].present?
+                    =image_tag(CMS_CONFIG['COMPANY_LOGO'], :alt => 'GRC', :title => 'GRC')
+                  -elsif has_feature? :BETA
+                    =image_tag('/images/logos/logo.png')
+                  -else
+                    Google GRC                
             .span8
               %ul.menu
-                %li.active
-                  %a{:href => '#'}
+                %li{:class => "#{controller.controller_name != 'programs_dash' ? '' : 'active'}"}
+                  %a{:href => programs_dash_path}
                     %i.grcicon-dashboard
                     Dashboard
                 %li
@@ -80,18 +85,11 @@
             .span6
               &nbsp;
 
-    -#.navbar.navbar-fixed-top
+    .navbar
       .navbar-inner#pageheader
         .row-static.container
           .headerleft
-            %a.brand{:href => root_path}
-              -if CMS_CONFIG["COMPANY_LOGO"].present?
-                =image_tag(CMS_CONFIG['COMPANY_LOGO'], :alt => 'GRC', :title => 'GRC')
-              -elsif has_feature? :BETA
-                =image_tag('/images/logos/google_logo_white.png')
-                GRC
-              -else
-                Google GRC
+
           -#-if has_feature? :BETA
             -if controller.controller_name == 'programs_dash'
               .headercenter.fltnone
@@ -99,10 +97,14 @@
           .headerright
             .btn-toolbar.fltrt.toolbar-nav
               .btn-group
+                
                 -if controller_name == 'design'
                   -path = programs_dash_path
                 -else
                   -path = request.fullpath
+                  
+                  
+                majko?
                 -path = path.gsub(/BETA=[^&]*&?/, '').sub(/[?&]$/, '')
                 -path += path.include?('?') ? '&' : '?'
                 -if has_feature? :BETA
@@ -119,10 +121,6 @@
               -if !help_path.blank?
                 .btn-group
                   %a.btn{ :href => "/help/#{help_path}", :'data-toggle' => 'modal-ajax' } Help
-              -# Show 'Dashboard' unless on dashboard page
-              -if controller.controller_name != 'programs_dash'
-                .btn-group
-                  %a.btn{ :href => programs_dash_path } Dashboard
               =yield :header_buttons
       .navbar-secondinner
         .row-static.container
