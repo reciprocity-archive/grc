@@ -6,7 +6,8 @@
       %h3 
         Requests
         %a.btn.btn-mini.accordion-toggle.toggle{:'data-toggle'=>"collapse", :href => "#widget-filters"}
-          Show/Hide Filter
+          %i.icon-search
+          Show/Hide Filter&nbsp;
     -if requests.any?(&:control_assessment_id)
       .span2
         -#%span.word.pull-right
