@@ -39,6 +39,18 @@
                     Google GRC                
             .span8
               %ul.menu
+                %li.demo
+                  -if controller_name == 'design'
+                    -path = programs_dash_path
+                  -else
+                    -path = request.fullpath                
+                  -path = path.gsub(/BETA=[^&]*&?/, '').sub(/[?&]$/, '')
+                  -path += path.include?('?') ? '&' : '?'
+                  -if has_feature? :BETA
+                    %a.demo-hide{ :href => "#{path}BETA=0" } Hide Demo
+                  -else
+                    %a.demo-show{ :href => "#{path}BETA=1" } Show Demo
+                    
                 %li{:class => "#{controller.controller_name != 'programs_dash' ? '' : 'active'}"}
                   %a{:href => programs_dash_path}
                     %i.grcicon-dashboard
@@ -71,7 +83,6 @@
       .navbar-inner#pageheader
         .row-static.container
           .headerleft
-
           -#-if has_feature? :BETA
             -if controller.controller_name == 'programs_dash'
               .headercenter.fltnone
@@ -79,7 +90,6 @@
           .headerright
             .btn-toolbar.fltrt.toolbar-nav
               .btn-group
-                
                 -if controller_name == 'design'
                   -path = programs_dash_path
                 -else

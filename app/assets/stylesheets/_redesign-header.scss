@@ -59,6 +59,21 @@
           }
         }
       }
+      &.demo {
+        a {
+          background:$screenBgnd;
+          &:hover {
+            background: $black;
+          }
+          &.demo-hide {
+            color:$demoHide;
+          }
+          &.demo-show {
+            color:$demoShow;
+          }
+        }
+      }
+      
     }
   }
 }
