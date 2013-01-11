@@ -70,7 +70,7 @@ ActiveRecord::Base.transaction do
   cycle = Cycle.
     where(:program_id => prog1).
     first_or_create!(
-      {:program => prog1, :start_at => '2011-01-01', :complete => false},
+      {:title => 'Audit 1', :program => prog1, :start_at => '2011-01-01', :complete => false},
       :without_protection => true)
 
   # People
