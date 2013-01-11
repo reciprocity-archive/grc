@@ -32,7 +32,7 @@ can.Model("can.Model.Cacheable", {
     var pargs = {};
     var obj = pargs;
     if(this.root_object) {
-      pargs[root_object] = obj;
+      obj = pargs[this.root_object] = {};
     }
     var src = args.serialize ? args.serialize() : args;
     names = names || Object.keys(src);

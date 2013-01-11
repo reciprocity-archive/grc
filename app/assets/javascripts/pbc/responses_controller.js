@@ -81,16 +81,33 @@ can.Control("CMS.Controllers.Responses", {
         el.prev(".inline-add-meeting").removeClass("hide");
         el.addClass("hide");
     }
+    , ".toggle-edit-population-doc click" : function(el, ev) {
+        el.closest(".pbc-item").next(".inline-edit-population-doc").removeClass("hide").find(".input-title").focus();
+        el.closest(".pbc-item").addClass("hide");
+    }
     , restore_add_link : function(el) {
-        var $li = el.closest(".inline-add-person, .inline-add-document");
+        var $li = el.closest(".inline-add-person, .inline-add-document, .inline-edit-population-doc");
 
         $li.next(".toggle-add-person, .toggle-add-document").removeClass("hide");
+        $li.prev(".pbc-item").removeClass("hide");
         $li.addClass("hide");        
     }
     , ".inline-add-person personSelected" : object_event("person")
     , ".inline-add-person modal:success" : object_event("person")
     , ".inline-add-document documentSelected" : object_event("document")
     , ".inline-add-document modal:success" : object_event("document")
+    , ".inline-edit-population-doc documentSelected" : function(el, ev, data) {
+      var model = el.closest("[data-model]").data("model")
+
+      model.attr(el.data("doc-type") + "_document_id", data.id)
+      model.save().then(this.proxy('restore_add_link', el));
+    }
+    , ".inline-edit-population-doc modal:success" : function(el, ev, data) {
+      var model = el.closest("[data-model]").data("model")
+
+      model.attr(el.data("doc-type") + "_document_id", data.id)
+      model.save().then(this.proxy('restore_add_link', el));
+    }
     , create_object_relation : function(type, xable, params) {
         var that = this
         , dfd;
