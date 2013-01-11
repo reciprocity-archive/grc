@@ -62,11 +62,25 @@
     background-position:-96px 0;
   }
 }
+.grcicon-normal {
+  @include new-icons();
+  background-position:-128px -16px;
+  .active & {
+    background-position:-128px 0;
+  }
+}
 .grcicon-user {
   @include new-icons();
   background-position:0 -16px;
   .active & {
     background-position:0 0;
+  }
+}
+.grcicon-wide {
+  @include new-icons();
+  background-position:-112px -16px;
+  .active & {
+    background-position:-112px 0;
   }
 }
 

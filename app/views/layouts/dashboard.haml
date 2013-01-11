@@ -75,10 +75,19 @@
                       %a{:href =>logout_path, :tabindex =>"-1"}
                         %i.grcicon-logout
                         Logout
-                %li.screen
-                  %a{:href => '#'}
+                %li.screen.dropdown
+                  %a{:href => "#", :class => "dropdown-toggle", :'data-toggle' =>"dropdown", :role =>"button"}
                     %i.grcicon-desktop
                     100%
+                  %ul.dropdown-menu{:'aria-labelledby' => 'drop2', :role =>"menu"}
+                    %li
+                      %a{:href =>logout_path, :tabindex =>"-1"}
+                        %i.grcicon-wide
+                        Wide
+                    %li
+                      %a{:href =>logout_path, :tabindex =>"-1"}
+                        %i.grcicon-normal
+                        Normal
             
       .header-content
         .container-fluid

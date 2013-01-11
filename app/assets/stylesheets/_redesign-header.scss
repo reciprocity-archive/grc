@@ -19,6 +19,26 @@
       font-weight:bold;
       text-transform:uppercase;
       text-shadow: 0 1px 0 $black;
+      .dropdown-menu {
+        @include reset-list();
+        @include border-radius(0);
+        float: none;
+        background: $black;
+        li {
+          float:none;
+          clear: both;
+          a {
+            display:block;
+            color:$menuLink;
+            line-height:30px;
+            padding: 0 10px;
+            &:hover {
+              background: $black;
+              color:$white;
+            }
+          }
+        }
+      }
       i {
         margin: 7px 6px 0 0;
         @include opacity(0.6);
@@ -38,29 +58,13 @@
       }
       &.user {
         text-transform:lowercase;
-        .dropdown-menu {
-          @include reset-list();
-          @include border-radius(0);
-          float: none;
-          background: $black;
-          li {
-            float:none;
-            clear: both;
-            a {
-              display:block;
-              color:$menuLink;
-              line-height:30px;
-              padding: 0 10px;
-              &:hover {
-                background: $black;
-                color:$white;
-              }
-            }
-          }
-        }
       }
       &.screen {
         background:$screenBgnd;
+        .dropdown-menu {
+          left: auto;
+          right: 0;
+        }
       }
       &.active {
         text-shadow: none;
