@@ -17,6 +17,10 @@
     width:12px;
     height:12px;
   }
+  &.process-icon {
+    margin-top:2px;
+    @include opacity(0.5);
+  }
 }
 
 .grcicon-sortUp             { background-position:-22px -2px; }
@@ -29,6 +33,8 @@
 .grcicon-link               { background-position:-130px -235px; }
 .grcicon-reference          { background-position:-130px -235px; }
 .grcicon-search             { background-position:-130px -235px; }
+.grcicon-process            { background-position:-205px -235px; }
+.grcicon-system             { background-position:-180px -235px; }
 .grcicon-arrowright         { background-position:-76px -56px; }
 .grcicon-arrowright-black   { background-position:-76px -56px; }
 .grcicon-arrowright-grey    { background-position:-92px -56px; }

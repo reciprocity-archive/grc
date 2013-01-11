@@ -48,12 +48,13 @@
 }
 .pbc-response-process {
   padding: 10px;
-  background-color: darken($bgndProcess,10%);
-  border:1px solid darken($bgndProcess,20%);
+  background-color: darken(#eee,10%);
+  border:1px solid darken(#eee,20%);
   margin-bottom:8px;
+  margin-top:4px;
   @include border-radius(4px);
   label {
-    color:darken($bgndProcess,60%);
+    color:darken(#eee,40%);
   }
   p.full-view {
     color:#333;
@@ -134,17 +135,17 @@
 }
 
 .pbc-title {
-  border:1px solid $borderDefault;
+  // border:1px solid $borderDefault;
   @include clearfix();
   @include border-radius(4px);
-  padding:7px 4px 4px 10px;
+  padding:0 4px 0 0;
   margin-bottom:4px;
   .btn {
     float:right;
     margin-top:0;
   }
   &.response-title-bar {
-    @include border-and-gradient($bgndProcess);
+    //@include border-and-gradient($bgndProcess);
   }
   &.title-response {
     @include border-and-gradient(darken($bgndProcess,10%));
@@ -307,6 +308,7 @@ ul.pbc-requests {
 }
 
 .pbc-responses {
+  margin-bottom:10px;
   .edit-person-role, .edit-document-role {
     border-top-width: 0px;
     -webkit-appearance: textfield;

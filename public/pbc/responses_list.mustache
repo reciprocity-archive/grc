@@ -1,8 +1,9 @@
   {{#list}}
-  <li class="item i-process" {{data 'model'}} data-model="true" data-id="{{id}}">
+  <li class="item" {{data 'model'}} data-model="true" data-id="{{id}}">
     <div class="row-fluid" data-target="#pbc-response-{{id}}" data-toggle="collapse">
       <div class="span4">
         <div class="expander"></div>
+        <i class="grcicon-{{system.system_or_process}} process-icon"></i>
         Response using {{system.system_or_process_capitalized}}:
         <span style="color:#333">
           {{system.title}}
