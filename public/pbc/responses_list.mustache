@@ -52,6 +52,7 @@
               <li {{data 'model'}} data-model="true" title="{{person.email}}">
                 <div class="span5">
                   {{person.name}}
+                  &nbsp;
                 </div>
                 <div class="span6">
                   <select class="edit-person-role">
@@ -98,21 +99,7 @@
                 </a>
               </li>
               {{/meetings}}
-              <li class="inline-editing inline-add-meeting hide" data-system-id="{{system.id}}">
-                <form>
-                  <div class="row-fluid">
-                    <div class="span6">
-                      <input class="span12 input-date" name="date" placeholder="choose a meeting date and time" type="text" {{ (el) -> $(el).datepicker(); }}>
-                    </div>
-                    <div class="span2">
-                      <a class="btn btn-mini span12 add-meeting">
-                        <i class="grcicon-add"></i>
-                      </a>
-                    </div>
-                  </div>
-                </form>
-              </li>
-              <li class="toggle-add-meeting">
+              <li class="add-meeting add-new">
                 <a class="span12" data-modal-reset="reset" data-toggle="modal-ajax-form" data-modal-class="modal-wide" href="/meetings/new?meeting[response_id]={{id}}">
                   + Add new meeting
                 </a>

@@ -121,7 +121,9 @@ can.Control("CMS.Controllers.Responses", {
     , "input[name=population], input[name=samples] keydown" : function(el, ev) {
       el.closest(".sample-widget").find(".save-population, .save-samples").text("Save").removeClass("disabled");
     }
-
+    , ".add-meeting modal:success" : function(el, ev, data) {
+      el.closest("[data-model]").data("model").addElementToChildList("meetings", new can.Observe(data));
+    } 
     , create_object_relation : function(type, xable, params) {
         var that = this
         , dfd;

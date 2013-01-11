@@ -22,7 +22,7 @@
 
     %br
 
-    %a.btn.btn-success{ :href => '#' } Create calendar event
+    %a.btn.btn-success{ :target => "_blank", :href => %{http://www.google.com/calendar/event?action=TEMPLATE&text=New%20Event&dates=#{DateTime.now.utc.strftime "%Y%m%dT%H%M%SZ"}/#{Time.now.+(3600).utc.strftime "%Y%m%dT%H%M%SZ"}&details=Add%20a%20description%20here.&trp=false&sprop=website:#{request.url}&sprop=name:#{request.domain}} } Create calendar event
 
     %br
     %br
