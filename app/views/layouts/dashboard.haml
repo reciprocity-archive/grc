@@ -47,9 +47,13 @@
                   -path = path.gsub(/BETA=[^&]*&?/, '').sub(/[?&]$/, '')
                   -path += path.include?('?') ? '&' : '?'
                   -if has_feature? :BETA
-                    %a.demo-hide{ :href => "#{path}BETA=0" } Hide Demo
+                    %a.demo-hide{ :href => "#{path}BETA=0" }
+                      %i.grcicon-demo
+                      Hide Demo
                   -else
-                    %a.demo-show{ :href => "#{path}BETA=1" } Show Demo
+                    %a.demo-show{ :href => "#{path}BETA=1" }
+                      %i.grcicon-demo
+                      Show Demo
                     
                 %li{:class => "#{controller.controller_name != 'programs_dash' ? '' : 'active'}"}
                   %a{:href => programs_dash_path}
