@@ -62,10 +62,10 @@ can.Model.Cacheable("CMS.Models.ObjectDocument", {
     , create : function(params) {
         var _params = {
             object_document : {
-                documentable_id : params.system_id
+                documentable_id : params.xable_id
                 , document_id : params.document_id
                 , role : params.role
-                , documentable_type : "System"
+                , documentable_type : params.xable_type
             }
         };
         return $.ajax({

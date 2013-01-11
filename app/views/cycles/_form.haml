@@ -17,10 +17,10 @@
   =f.hidden_field :program_id
 
 .row-fluid
-  =wrapped_text_field f, :span3, :title, :placeholder => 'Enter title', :label_name => 'Audit Title'
+  =wrapped_text_field f, :span3, :title, :placeholder => 'Enter title', :label_name => 'Audit Title', :value => f.object.title.presence || (f.object.program.nil? ? '' : "#{f.object.program.title} Audit / #{Date.today.year}")
   =wrapped_text_field f, :span2, :audit_firm, :placeholder => '', :label_name => 'Audit Firm'
   =wrapped_text_field f, :span2, :audit_lead, :placeholder => '', :label_name => 'Audit Contact'
-  =wrapped_date_field f, :span2, :start_at, :class => 'date', :label_name => 'Audit Start Date', :placeholder => 'MM/DD/YYYY', :value => Time.zone.now.strftime('%m/%d/%Y')
+  =wrapped_date_field f, :span2, :start_at, :class => 'date', :label_name => 'Audit Start Date', :placeholder => 'MM/DD/YYYY', :value => f.object.start_at.present? ? f.object.start_at.strftime('%m/%d/%Y') : Time.zone.now.strftime('%m/%d/%Y')
   .span3
     =f.label :complete
     =f.check_box :complete, :class => :check_box

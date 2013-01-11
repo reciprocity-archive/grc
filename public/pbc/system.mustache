@@ -1,4 +1,4 @@
-  <div class="span8 pbc-response-process">
+  <div class="span8 pbc-response-process" data-model="true" {{data 'model'}}>
     <div class="row-fluid">
       <div class="span6">
         <span rel="tooltip" data-placement="top" title="Process Title">
@@ -13,15 +13,15 @@
       </div>
       <div class="span1">
         <span class="pbc-counter {{^object_documents.length}} empty{{/object_documents.length}}">
-          <i class="grcicon-document"></i>
+          <i class="grcicon-reference"></i>
           {{object_documents.length}}
         </span>
       </div>
       <div class="span4 pbc-process-controls">
-        <a class="btn btn-mini" href="/systems/{{id}}" title="View System/Process" rel="tooltip" data-placement="top">
+        <a class="btn btn-mini" href="/systems/{{id}}" title="View {{system_or_process_capitalized}}" rel="tooltip" data-placement="top">
           <i class="grcicon-arrowright-grey"></i>
         </a>
-        <a class="btn btn-mini system-edit" data-toggle="modal-ajax-form" href="/systems/{{id}}/edit" data-modal-reset="reset" data-model-class="modal-wide" title="Edit System/Process" rel="tooltip" data-placement="top">
+        <a class="btn btn-mini system-edit" data-toggle="modal-ajax-form" href="/systems/{{id}}/edit" data-modal-reset="reset" data-model-class="modal-wide" title="Edit {{system_or_process_capitalized}}" rel="tooltip" data-placement="top">
           <i class="grcicon-edit-grey"></i>
         </a>
       </div>
@@ -48,15 +48,15 @@
         </label>
         <ul class="pbc-item-list">
           {{#object_people}}
-          <li {{data 'model'}} data-model="true" title="{{person.email}}">
+          <li {{data 'model'}} data-model="true" rel="tooltip" data-placement="top" title="{{person.email}}{{^person.email}}No link{{/person.email}}">
             <div class="span5">
               {{person.name}} {{^person.name}}&nbsp;{{/person.name}}
             </div>
             <div class="span6">
-              (<select class="edit-person-role">
+              <select class="edit-person-role">
                 <option value="responsible" {{#if_equals role 'responsible'}}selected="true"{{/if_equals}}>Responsible</option>
                 <option value="accountable" {{#if_equals role 'accountable'}}selected="true"{{/if_equals}}>Accountable</option>
-              </select>)
+              </select>
             </div>
             <a class="btn btn-nano pull-right remove_person span1" href="javascript://">
               <i class="grcicon-x-grey"></i>

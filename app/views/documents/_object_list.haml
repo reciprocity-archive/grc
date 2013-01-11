@@ -16,17 +16,30 @@
 
   %script#reference_list_item{ :type => 'text/html', :'data-member' => 'object_document'}
     %li.controlSlot{ :'data-id' => '<%= document.id %>' }
+      <% if (document.link_url && document.link_url.length > 0) { %>
       %a.reference{:href => '<%= document.link_url %>', :target => "_blank"}
         %span.controls-group <%= document.document_type || '&nbsp;' %>
         %br
         %span.controls-subgroup{ :title => '<%= document.link_url %>' } <%= document.title || '&nbsp;' %>
+      <% } else { %>
+      %span.reference
+        %span.controls-group <%= document.document_type || '&nbsp;' %>
+        %br
+        %span.controls-subgroup{ :title => '<%= document.link_url %>' } <%= document.title || '&nbsp;' %>
+      <% } %>
 
   %ul#referenceList{ :'data-template-id' => 'reference_list_item' }
     -all_object_documents.each do |object_item|
       -item = object_item.document
       %li.controlSlot{ :'data-id' => item.id }
-        %a.reference{:href => item.link_url, :target => "_blank"}
-          %span.controls-group=item.document_type || '&nbsp;'.html_safe
-          %br
-          %span.controls-subgroup{:title => item.link_url}=item.title || item.document_type || '&nbsp;'.html_safe
+        -if item.link_url.present?
+          %a.reference{:href => item.link_url, :target => "_blank"}
+            %span.controls-group=item.document_type || '&nbsp;'.html_safe
+            %br
+            %span.controls-subgroup{:title => item.link_url}=item.title || item.document_type || '&nbsp;'.html_safe
+        -else
+          %span.reference
+            %span.controls-group=item.document_type || '&nbsp;'.html_safe
+            %br
+            %span.controls-subgroup{:title => item.link_url}=item.title || item.document_type || '&nbsp;'.html_safe
 

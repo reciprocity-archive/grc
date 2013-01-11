@@ -151,6 +151,7 @@ td {
     @include border-and-gradient($bgndProcess);
   }
   &.error {
+    @include border-and-gradient($bgndError);
     border:2px solid $errorColor;
   }
   &.has-link {

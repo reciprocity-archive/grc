@@ -280,6 +280,7 @@ FactoryGirl.define do
   factory :request do
     pbc_list { |c| c.association(:pbc_list) }
     request 'default text'
+    type_id 1
   end
 
   factory :response do

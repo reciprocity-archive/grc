@@ -11,25 +11,26 @@
 .pbc-info-plate
   .row-fluid
     -#.span3.widget-titles
-      %label Program
-      %h4=pbc_list.audit_cycle.program.title
+      %h5 Program
+      =pbc_list.audit_cycle.program.title
     -#.span3.widget-titles
-      %label Title
-      %h4=pbc_list.title
-    .span3.widget-titles
-      %label Audit Firm
-      %h4=pbc_list.audit_cycle.audit_firm
-    .span3.widget-titles
-      %label Audit Lead
-      %h4=pbc_list.audit_cycle.audit_lead
-    .span2.widget-titles
-      %label Audit Start Date
-      %h4=pbc_list.audit_cycle.start_at && pbc_list.audit_cycle.start_at.strftime('%m/%d/%Y')
+      %h5 Title
+      %label=pbc_list.title
+    .span4.widget-titles
+      %h5 Audit Firm
+      %label=pbc_list.audit_cycle.audit_firm
+    .span4.widget-titles
+      %h5 Audit Lead
+      %label=pbc_list.audit_cycle.audit_lead
+    .span4.widget-titles
+      %h5 Audit Start Date
+      %label=pbc_list.audit_cycle.start_at && pbc_list.audit_cycle.start_at.strftime('%m/%d/%Y')
+  %br
   .row-fluid
-    .span9
-      %label Description
+    .span12
+      %h5 Description
       .rtf
-        =raw pbc_list.audit_cycle.description
+        %label=raw pbc_list.audit_cycle.description
 
 .widget-body
   =render :partial => "requests", :locals => { :pbc_list => pbc_list }

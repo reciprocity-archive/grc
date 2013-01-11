@@ -77,6 +77,10 @@ can.Control("CMS.Controllers.Responses", {
         el.prev(".inline-add-document").removeClass("hide").find(".input-title").focus();
         el.addClass("hide");
     }
+    , ".toggle-add-meeting:not(.disabled) click" : function(el, ev) {
+        el.prev(".inline-add-meeting").removeClass("hide");
+        el.addClass("hide");
+    }
     , restore_add_link : function(el) {
         var $li = el.closest(".inline-add-person, .inline-add-document");
 
