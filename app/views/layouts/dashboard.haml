@@ -66,10 +66,15 @@
                       %i.grcicon-help
                       Help
                 =yield :header_buttons
-                %li.user
-                  %a{:href => logout_path, :rel =>"tooltip", :'data-placement' => "bottom", :title => "Logout"}
+                %li.user.dropdown
+                  %a{:href => "#", :class => "dropdown-toggle", :'data-toggle' =>"dropdown", :role =>"button"}
                     %i.grcicon-user
                     %strong=current_user.name || current_user.email
+                  %ul.dropdown-menu{:'aria-labelledby' => 'drop1', :role =>"menu"}
+                    %li
+                      %a{:href =>logout_path, :tabindex =>"-1"}
+                        %i.grcicon-logout
+                        Logout
                 %li.screen
                   %a{:href => '#'}
                     %i.grcicon-desktop
@@ -92,7 +97,7 @@
               .headercenter.fltnone
                 =render :partial => 'design/templates/grcmenu'
           .headerright
-            .btn-toolbar.fltrt.toolbar-nav
+            -#.btn-toolbar.fltrt.toolbar-nav
               .btn-group
                 -if controller_name == 'design'
                   -path = programs_dash_path

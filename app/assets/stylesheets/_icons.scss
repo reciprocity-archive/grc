@@ -55,6 +55,13 @@
     background-position:-48px 0;
   }
 }
+.grcicon-logout {
+  @include new-icons();
+  background-position:-96px -16px;
+  .active & {
+    background-position:-96px 0;
+  }
+}
 .grcicon-user {
   @include new-icons();
   background-position:0 -16px;

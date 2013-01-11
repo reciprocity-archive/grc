@@ -38,6 +38,26 @@
       }
       &.user {
         text-transform:lowercase;
+        .dropdown-menu {
+          @include reset-list();
+          @include border-radius(0);
+          float: none;
+          background: $black;
+          li {
+            float:none;
+            clear: both;
+            a {
+              display:block;
+              color:$menuLink;
+              line-height:30px;
+              padding: 0 10px;
+              &:hover {
+                background: $black;
+                color:$white;
+              }
+            }
+          }
+        }
       }
       &.screen {
         background:$screenBgnd;
