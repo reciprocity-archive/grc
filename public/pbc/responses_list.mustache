@@ -90,7 +90,7 @@
               {{#meetings}}
               <li {{data 'model'}} data-model="true">
                 <div class="span11">
-                  {{meeting.title}}
+                  <a href="{{calendar_url}}">{{calendar_url}}</a>
                 </div>
                 <a class="btn btn-nano pull-right remove_person span1" href="javascript://">
                   <i class="grcicon-x-grey"></i>
@@ -112,7 +112,7 @@
                 </form>
               </li>
               <li class="toggle-add-meeting">
-                <a class="disabled" href="javascript://">
+                <a class="span12" data-modal-reset="reset" data-toggle="modal-ajax-form" data-modal-class="modal-wide" href="/meetings/new?meeting[response_id]={{id}}">
                   + Add new meeting
                 </a>
               </li>
