@@ -124,7 +124,7 @@
                 <label>Population with Sample Requests</label>
                 <div data-model="true" {{data 'model'}}>
                   <div class="row-fluid">
-                  <ul class="pbc-item-list span10">
+                  <ul class="pbc-item-list span9">
                     <li class="pbc-item">
                       <div class="span11">
                         {{#if population_document.link_url}}
@@ -153,13 +153,18 @@
                       </form>
                     </li>
                   </ul>
-                  <div class="span2">
-                    <input class="span9 fltrt pull-right" name="" type="text"></input>
+                  <div class="span3 row-fluid sample-widget">
+                    <span class="span5">
+                      <input class="" name="population" type="text" value="{{population}}"></input>
+                    </span>
+                    <a href="javacript://" class="save-population span7 btn-mini btn disabled">
+                      Saved
+                    </a>
                   </div>
                 </div>
                   <label>Sample Worksheet</label>
                   <div class="row-fluid">
-                    <ul class="pbc-item-list span10">
+                    <ul class="pbc-item-list span9">
                       <li class="pbc-item">
                         <div class="span11">
                           {{#if sample_worksheet_document.link_url}}
@@ -188,8 +193,13 @@
                         </form>
                       </li>
                     </ul>
-                    <div class="span2">
-                      <input class="span9 fltrt pull-right" name="" type="text"></input>
+                    <div class="span3 row-fluid sample-widget">
+                      <span class="span5">
+                        <input class="" name="samples" type="text" value="{{samples}}"></input>
+                      </span>
+                      <a href="javacript://" class="save-samples span7 btn-mini btn disabled">
+                        Saved
+                      </a>
                     </div>
                   </div>
                   <label>Sample Evidence Collection</label>
