@@ -31,8 +31,6 @@
         Show/Hide Filter
 
     .span4.pbc-add
-      
-
       .btn-group
         %a{:'data-toggle'=>"dropdown", :href => "#", :class => "btn btn-mini btn-success dropdown-toggle"}
           + Add New Request
@@ -83,8 +81,6 @@
           %button.btn.pull-right{ :'data-toggle' => 'filter-reset' , :rel => "tooltip", :"data-position" => "top", :title => "Reset filters" }
             %i.grcicon-x-grey
 
-
-
 %ul.pbc-control-assessments#requests
   -sorted_requests_with_control_assessments(requests).each do |control_assessment_id, control_assessment, requests|
     -control_assessment_collapse_id = "control_assessment-#{control_assessment && control_assessment.control && control_assessment.control_id || 'null'}"
@@ -96,7 +92,7 @@
             -#Using deprecated HTML code here; unsure how to pass a css style in an equal statement
             Requests with Control:
             %strong= (control_assessment && control_assessment.control && control_assessment.control.slug) || "<font color='red'>(Missing Control)</font>".html_safe
-          .span6{"data-target" => "##{control_assessment_collapse_id}", "data-toggle" => "collapse"}
+          .span3{"data-target" => "##{control_assessment_collapse_id}", "data-toggle" => "collapse"}
             =control_assessment && control_assessment.control && control_assessment.control.title || "&nbsp;".html_safe
           -#.span2{"data-target" => "##{control_assessment_collapse_id}", "data-toggle" => "collapse"}
             &nbsp;
@@ -112,17 +108,21 @@
             -#    = request_type_count(requests, "Interview")
           -if control_assessment.present?
             .span1
+              &nbsp;
+            .span2
               %a.btn.btn-mini.rotate_control_assessment.pull-right{ :rel => "tooltip", :'data-placement' => "top", :title => "Internal: Test of Effectiveness", :class => control_assessment_button_class(control_assessment.internal_toe), :'data-remote' => true, :'data-method' => 'post', :href => rotate_flow_control_assessment_path(control_assessment, :'control_assessment[internal_toe]' => 'toggle') }
                 %i{ :class => control_assessment_button_icon(control_assessment.internal_toe) }
-
               %a.btn.btn-mini.rotate_control_assessment.pull-right{ :rel => "tooltip", :'data-placement' => "top", :title => "Internal: Test of Design", :class => control_assessment_button_class(control_assessment.internal_tod), :'data-remote' => true, :'data-method' => 'post', :href => rotate_flow_control_assessment_path(control_assessment, :'control_assessment[internal_tod]' => 'toggle') }
                 %i{ :class => control_assessment_button_icon(control_assessment.internal_tod) }
-              
-            .span1
+              %label.pull-right
+                Internal CA:&nbsp;
+            .span2
               %a.btn.btn-mini.rotate_control_assessment.pull-right{ :rel => "tooltip", :'data-placement' => "top", :title => "External: Test of Effectiveness", :class => control_assessment_button_class(control_assessment.external_toe), :'data-remote' => true, :'data-method' => 'post', :href => rotate_flow_control_assessment_path(control_assessment, :'control_assessment[external_toe]' => 'toggle') }
                 %i{ :class => control_assessment_button_icon(control_assessment.external_toe) }
               %a.btn.btn-mini.rotate_control_assessment.pull-right{ :rel => "tooltip", :'data-placement' => "top", :title => "External: Test of Design", :class => control_assessment_button_class(control_assessment.external_tod), :'data-remote' => true, :'data-method' => 'post', :href => rotate_flow_control_assessment_path(control_assessment, :'control_assessment[external_tod]' => 'toggle') }
                 %i{ :class => control_assessment_button_icon(control_assessment.external_tod) }
+              %label.pull-right
+                External CA:&nbsp;
               
 
       .pbc-ca-content.collapse{ :id => control_assessment_collapse_id }
