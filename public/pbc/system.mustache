@@ -48,7 +48,7 @@
         </label>
         <ul class="pbc-item-list">
           {{#object_people}}
-          <li {{data 'model'}} data-model="true" title="{{person.email}}">
+          <li {{data 'model'}} data-model="true" rel="tooltip" data-placement="top" title="{{person.email}}{{^person.email}}No link{{/person.email}}">
             <div class="span5">
               {{person.name}} {{^person.name}}&nbsp;{{/person.name}}
             </div>
