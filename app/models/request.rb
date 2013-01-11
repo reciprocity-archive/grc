@@ -67,7 +67,17 @@ class Request < ActiveRecord::Base
   end
 
   def display_name
-    pbc_control_code
+    if pbc_control_code.present?
+      pbc_control_code
+    elsif control.present?
+      control.slug
+    else
+      "request"
+    end
+  end
+
+  def display_name_for_delete
+    "request"
   end
 
   def persons_responsible
