@@ -133,11 +133,8 @@
               .row-fluid.pbc-item-head
                 .span4.pbc-item.pbc-control
                   .expander.small-expander{"data-target" => ".#{request_collapse_class}", "data-toggle" => "collapse"}
-                  .request-icon
-                    %i{"rel" => "tooltip", "data-placement" => "top", "title" => "#{request.type_name} Request", "class" => request_type_icon(request.type_name) }
                   %a.btn.btn-mini.pull-right{:href => flow_controls_path(:list_select => 1), :'data-toggle' => 'modal-ajax-single-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#referenceList', :'data-modal-class' => 'modal-slim' }
                     %i.grcicon-link
-                  
                   -if request.control.present?
                     .item.i-control.oneline
                       =request.control && request.control.slug
@@ -148,6 +145,8 @@
                     .item.error.oneline
                       No control selected
                 .span2.pbc-request{ "data-target" => ".#{request_collapse_class}", "data-toggle" => "collapse"}
+                  .request-icon
+                    %i{"rel" => "tooltip", "data-placement" => "top", "title" => "#{request.type_name} Request", "class" => request_type_icon(request.type_name) }
                   %h6.pbc-request-count
                     =pluralize(request.responses.count, "response")
                 .span2{ "data-target" => ".#{request_collapse_class}", "data-toggle" => "collapse" }
