@@ -152,7 +152,14 @@ class PbcListsController < BaseObjectsController
         request.date_requested = Time.zone.now.beginning_of_day if request.date_requested.blank?
         @requests << request
 
-        import[:errors][i] = request.errors unless request.valid?
+        unless request.valid?
+          if request.type_id.blank?
+            request.errors.delete(:type_id)
+            request.errors.add(:type_id, "invalid value, allowed values are: #{Request.types.values.to_sentence}")
+          end
+
+          import[:errors][i] = request.errors
+        end
 
         request.save unless check_only
       end
