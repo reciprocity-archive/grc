@@ -76,6 +76,10 @@ class Request < ActiveRecord::Base
     end
   end
 
+  def display_name_for_delete
+    "request"
+  end
+
   def persons_responsible
     [company_responsible, auditor_responsible].compact.join(",")
   end
