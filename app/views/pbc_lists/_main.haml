@@ -8,67 +8,29 @@
       %i.grcicon-questionmark-grey
   %h2
     &nbsp;
-.widget-filters
+.pbc-info-plate
   .row-fluid
     -#.span3.widget-titles
-      %label Program
-      %h4=pbc_list.audit_cycle.program.title
+      %h5 Program
+      =pbc_list.audit_cycle.program.title
     -#.span3.widget-titles
-      %label Title
-      %h4=pbc_list.title
-    .span3.widget-titles
-      %label Audit Firm
-      %h4=pbc_list.audit_cycle.audit_firm
-    .span3.widget-titles
-      %label Audit Lead
-      %h4=pbc_list.audit_cycle.audit_lead
-    .span2.widget-titles
-      %label Audit Start Date
-      %h4=pbc_list.audit_cycle.start_at && pbc_list.audit_cycle.start_at.strftime('%m/%d/%Y')
+      %h5 Title
+      %label=pbc_list.title
+    .span4.widget-titles
+      %h5 Audit Firm
+      %label=pbc_list.audit_cycle.audit_firm
+    .span4.widget-titles
+      %h5 Audit Lead
+      %label=pbc_list.audit_cycle.audit_lead
+    .span4.widget-titles
+      %h5 Audit Start Date
+      %label=pbc_list.audit_cycle.start_at && pbc_list.audit_cycle.start_at.strftime('%m/%d/%Y')
+  %br
   .row-fluid
-    .span9
-      %label Description
+    .span12
+      %h5 Description
       .rtf
-        =raw pbc_list.audit_cycle.description
-
-  -filters_disabled = pbc_list.requests.count == 0
-  -if !filters_disabled
-    .row-fluid
-      .span12
-        .filters-box
-          .row-fluid
-            .span3
-              %label
-                Request Type
-              %select.span12{ :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'type-name' }
-                %option{ :value => 'any', :selected => 'selected' } - Any -
-                %option Documentation
-                %option Interview
-                %option Population Sample
-            .span3
-              %label
-                Status
-              %select.span12{ :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'status' }
-                %option{ :value => 'any', :selected => 'selected' } - Any -
-                -Request.statuses.each do |status|
-                  %option=status
-            .span3
-              %label
-                Responsible Parties
-              %select.span12{ :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'person' }
-                %option{ :value => 'any', :selected => 'selected' } - Any -
-                -pbc_list.requests.all.map { |req| [req.company_responsible.presence, req.auditor_responsible.presence] }.flatten.compact.uniq.sort.each do |name|
-                  %option=name
-            .span2
-              %label
-                Date (on or after)
-                %input.span12#datepicker-control-date.date{:type => "text",  :placeholder => "MM/DD/YYYY", :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'date-requested' }
-                :javascript
-                  $('#datepicker-control-date').datepicker();
-            .span1
-              %label &nbsp;
-              %button.btn.span12{ :'data-toggle' => 'filter-reset' }
-                %i.grcicon-x-grey
+        %label=raw pbc_list.audit_cycle.description
 
 .widget-body
   =render :partial => "requests", :locals => { :pbc_list => pbc_list }

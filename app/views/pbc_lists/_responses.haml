@@ -3,16 +3,16 @@
 -new_response_id = "request-#{request.id}-response-new"
 -response_list_id = "request-#{request.id}-responses"
 
-%h4.pbc-title
+%h4.pbc-title.response-title-bar
   ="Responses (#{request.type_name})"
   %a.btn.btn-mini{"data-toggle" => "modal", :href => "#newResponse"}
-    %i.grcicon-add{ "data-target" => "##{new_response_id}", "data-toggle" => "collapse" }
+    %i.grcicon-add{ "data-target" => "##{new_response_id}", "data-toggle" => "collapse", "rel" => "tooltip", "data-placement" => "left", "title" => "Add new response" }
 
 %ul.items-list.collapse{ :id => new_response_id }
   %li.item.i-process
     .row-fluid
       .span5.pbc-add-response
-        %a#tooltip12.btn.btn-mini{ :href => new_flow_system_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-modal-class' => 'modal-wide', "rel" => "tooltip", "data-placement" => "top", "title" => "Add new system/process" }
+        %a#tooltip12.btn.btn-mini{ :href => new_flow_system_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-modal-class' => 'modal-wide', "rel" => "tooltip", "data-placement" => "top", "title" => "Add new response" }
           %i.grcicon-add
         %input.pbc-system-search.span11{:type => "text", :placeholder => "Type to search systems/processes"}
       .span3

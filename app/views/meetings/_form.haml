@@ -1,0 +1,36 @@
+-content_for :modal_title do
+  -if f.object.new_record?
+    Create a calendar event
+  -else
+    Edit calendar event
+
+-if !f.object.new_record?
+  -content_for :modal_delete_path, delete_flow_meeting_path(f.object)
+
+.row-fluid
+  .span12
+    %h2
+      Link a calendar event to this Response
+
+.row-fluid
+  .span4
+    %ol
+      %li 1. Create your calendar event
+      %li 2. Click on 'Public Event' at bottom of page
+      %li 3. Copy embedded URL
+      %li 4. Return to gGRC and paste in link below
+
+    %br
+
+    %a.btn.btn-success{ :href => '#' } Create calendar event
+
+    %br
+    %br
+
+    =f.hidden_field :response_id
+    =wrapped_text_field f, :span12, :calendar_url, :placeholder => 'URL for calendar event', :label_name => 'Paste in link here'
+  .span1
+  .span6
+    %img{ :src => '/images/calendar_link_example.jpg' }
+
+%br

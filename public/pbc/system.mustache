@@ -1,7 +1,9 @@
-  <div class="span8 pbc-response-process">
+  <div class="span8 pbc-response-process" data-model="true" {{data 'model'}}>
     <div class="row-fluid">
       <div class="span6">
-        General System Information
+        <span rel="tooltip" data-placement="top" title="Process Title">
+          {{{title}}}
+        </span>
       </div>
       <div class="span1">
         <span class="pbc-counter {{^object_people.length}} empty{{/object_people.length}}">
@@ -11,9 +13,17 @@
       </div>
       <div class="span1">
         <span class="pbc-counter {{^object_documents.length}} empty{{/object_documents.length}}">
-          <i class="grcicon-document"></i>
+          <i class="grcicon-reference"></i>
           {{object_documents.length}}
         </span>
+      </div>
+      <div class="span4 pbc-process-controls">
+        <a class="btn btn-mini" href="/systems/{{id}}" title="View System/Process" rel="tooltip" data-placement="top">
+          <i class="grcicon-arrowright-grey"></i>
+        </a>
+        <a class="btn btn-mini system-edit" data-toggle="modal-ajax-form" href="/systems/{{id}}/edit" data-modal-reset="reset" data-model-class="modal-wide" title="Edit {{system_or_process_capitalized}}" rel="tooltip" data-placement="top">
+          <i class="grcicon-edit-grey"></i>
+        </a>
       </div>
 
     </div>
@@ -32,21 +42,21 @@
           {{notes}}
         </p>
       </div>
-      <div class="span5">
+      <div class="span6">
         <label>
           <strong>People</strong>
         </label>
         <ul class="pbc-item-list">
           {{#object_people}}
           <li {{data 'model'}} data-model="true" title="{{person.email}}">
-            <div class="span7">
+            <div class="span5">
               {{person.name}} {{^person.name}}&nbsp;{{/person.name}}
             </div>
-            <div class="span4">
-              (<select class="edit-person-role">
+            <div class="span6">
+              <select class="edit-person-role">
                 <option value="responsible" {{#if_equals role 'responsible'}}selected="true"{{/if_equals}}>Responsible</option>
                 <option value="accountable" {{#if_equals role 'accountable'}}selected="true"{{/if_equals}}>Accountable</option>
-              </select>)
+              </select>
             </div>
             <a class="btn btn-nano pull-right remove_person span1" href="javascript://">
               <i class="grcicon-x-grey"></i>
@@ -84,14 +94,6 @@
             </a>
           </li>
         </ul>
-      </div>
-      <div class="span1 pbc-item pbc-actions">
-        <a class="btn btn-mini system-edit" data-toggle="modal-ajax-form" href="/systems/{{id}}/edit" data-modal-reset="reset" data-model-class="modal-wide" title="Edit System">
-          <i class="grcicon-edit-grey"></i>
-        </a>
-        <a class="btn btn-mini" href="/systems/{{id}}">
-          <i class="grcicon-arrowright-grey"></i>
-        </a>
       </div>
     </div>
   </div>

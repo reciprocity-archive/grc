@@ -16,16 +16,26 @@
       }
     }
 
+    .pbc-info-plate {
+      padding:10px 10px 0 10px;
+      .rtf {
+        font-size:11px;
+        line-height:13px;
+        padding-bottom:10px;
+      } 
+    }
+
+    .main-item {
+        padding-left:16px;
+      
+    }
+
     .widget-filters {
-      border-top:1px solid #ffffff;
-      padding:10px;
       background:#ffffff;
-      @include box-shadow(inset 0px 0 4px #eee);
       .filters-box {
-        background:#eee;
-        padding:0 10px 5px 10px;
-        @include border-radius();
-        @include box-shadow(inset 0px 0 4px #bbb);
+        background:#dddddd;
+        padding:5px 10px 5px 10px;
+        @include box-shadow(inset 0px 0 2px #bbb);
         input.date {
           margin-top:2px;
         }
@@ -34,8 +44,23 @@
           min-height:0;
         }
         label {
-          color:#333;
-          text-shadow:none;
+          float:left;
+          color:#666;
+          text-shadow:0 1px 1px $white;
+          line-height:18px;
+        }
+        select {
+          float:left;
+          //Width can not be auto or select will over-rule span and break columns
+          //width:auto;
+          margin-left:4px;
+          margin-right:12px;
+        }
+        input.date {
+          float:left;
+          width:115px;
+          margin-top:0;
+          margin-left:4px;
         }
       }
       .sort-by {
@@ -43,11 +68,6 @@
           padding:5px;
           border:1px solid #fff;
         }
-      }
-      .rtf {
-        font-size:11px;
-        line-height:13px;
-        padding-bottom:10px;
       }
     }
 

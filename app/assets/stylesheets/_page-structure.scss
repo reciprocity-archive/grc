@@ -98,10 +98,8 @@
 }
 
 .pbc-request-zone {
-  border:1px solid $borderDefault;
-  @include border-radius(4px 4px 0 0);
   margin-bottom:4px;
-  padding:0 10px;
+  padding:0;
   [class*="span"] {
    padding-bottom:0;
    min-height:0;
@@ -130,6 +128,7 @@
   .pbc-main-title {
     h3 {
       margin-top:2px;
+      font-weight:bold;
     }
   }
 }
@@ -143,6 +142,9 @@
   .btn {
     float:right;
     margin-top:0;
+  }
+  &.response-title-bar {
+    @include border-and-gradient($bgndProcess);
   }
   &.title-response {
     @include border-and-gradient(darken($bgndProcess,10%));
@@ -192,6 +194,7 @@ ul.pbc-requests {
       }
       ul.pbc-item-list {
         margin-top:4px;
+        margin-bottom:10px;
         li {
           @include clearfix();
           background:rgba(255,255,255,0.7);
@@ -199,6 +202,8 @@ ul.pbc-requests {
           font-size:12px;
           line-height:24px;
           padding:0 6px;
+          font-weight:normal;
+          color:#333;
           &.add-new {
             background:none;
           }
@@ -283,6 +288,7 @@ ul.pbc-requests {
 .request-icon {
   @include opacity(0.3);
   padding-top:3px;
+  padding-right:3px;
   float:left;
   &:hover {
     @include opacity(0.5);
@@ -312,5 +318,13 @@ ul.pbc-requests {
     text-decoration: underline;
     padding: 0;
     width: auto;
+    cursor:pointer;
+  }
+}
+
+.pbc-process-controls {
+  .btn {
+    float:right;
+    margin:0 0 0 6px !important;
   }
 }

@@ -3,7 +3,7 @@
     %li PROGRAMS
     %li=link_to @cycle.program.title, flow_program_path(@cycle.program_id)
     %li.last AUDIT
-  .location#pageTitle #{@cycle.program.title} Audit
+  .location#pageTitle #{@cycle.title}
 
 -content_for :page_help, 'cycle'
 

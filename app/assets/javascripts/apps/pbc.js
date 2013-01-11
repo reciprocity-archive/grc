@@ -44,7 +44,7 @@ $.widget(
         , _renderItem : function( ul, item ) {
             return $( "<li class='something'>" )
                 .data( "item.autocomplete", item )
-                .append( "<a>"+ item.name + " (" + item.label + ")</a>" )
+                .append( "<a>"+ item.label + "</a>" )
                 .appendTo( ul );
         }
 
@@ -63,8 +63,15 @@ $.widget(
       } 
       , search : function(event) {
         
-      } 
-  }});
+      }
+  }
+  , _renderItem : function(ul, item) {
+    return $( "<li class='something'>" )
+        .data( "item.autocomplete", item )
+        .append( "<a>"+ item.name + " (" + item.label + ")</a>" )
+        .appendTo( ul );
+  }
+  });
 $.widget.bridge("pbc_autocomplete_people", $.pbc.autocomplete_people);
 
 $.widget(
