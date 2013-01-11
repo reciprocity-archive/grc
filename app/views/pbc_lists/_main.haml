@@ -7,30 +7,14 @@
     %a.btn.btn-mini{:href => "/help/pbc_list", :'data-toggle' => 'modal-ajax', :title => "Help - What is this?"}
       %i.grcicon-questionmark-grey
   %h2
-    &nbsp;
+    Audit Start Date:
+    =pbc_list.audit_cycle.start_at && pbc_list.audit_cycle.start_at.strftime('%m/%d/%Y')
+    
 .pbc-info-plate
-  .row-fluid
-    -#.span3.widget-titles
-      %h5 Program
-      =pbc_list.audit_cycle.program.title
-    -#.span3.widget-titles
-      %h5 Title
-      %label=pbc_list.title
-    .span4.widget-titles
-      %h5 Audit Firm
-      %label=pbc_list.audit_cycle.audit_firm
-    .span4.widget-titles
-      %h5 Audit Lead
-      %label=pbc_list.audit_cycle.audit_lead
-    .span4.widget-titles
-      %h5 Audit Start Date
-      %label=pbc_list.audit_cycle.start_at && pbc_list.audit_cycle.start_at.strftime('%m/%d/%Y')
-  %br
   .row-fluid
     .span12
       %h5 Description
-      .rtf
-        %label=raw pbc_list.audit_cycle.description
+      .rtf=raw pbc_list.audit_cycle.description
 
 .widget-body
   =render :partial => "requests", :locals => { :pbc_list => pbc_list }
