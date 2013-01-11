@@ -27,6 +27,33 @@ class Response < ActiveRecord::Base
   end
 
   def as_json_with_system(options={})
-    as_json(options.merge(:include => { :system => { :include => [:people, { :documents => { :methods => :link_url }} , :object_people, :object_documents] } , :object_people => { :include => :person } , :people => {}, :population_sample => { :include => { :population_document => { :methods => :link_url }, :sample_worksheet_document => { :methods => :link_url }, :sample_evidence_document => { :methods => :link_url }} }, :meetings => {} }))
+    as_json(options.merge(:include => { 
+      :system => { 
+        :include => [
+          :people, 
+          { 
+            :documents => { :methods => :link_url }
+          }, 
+          :object_people, 
+          :object_documents
+          ] 
+        }, 
+        :object_people => { :include => :person }, 
+        :people => {}, 
+        :population_sample => { 
+          :include => { 
+            :population_document => { :methods => :link_url }, 
+            :sample_worksheet_document => { :methods => :link_url }, 
+            :sample_evidence_document => { :methods => :link_url }
+          } 
+        }, 
+      :meetings => {}, 
+      :object_documents => {
+        :include => { :document => { :methods => :link_url }}
+      }, 
+      :documents => {
+        :methods => :link_url
+      }
+      }))
   end
 end
