@@ -38,23 +38,7 @@
                   -else
                     Google GRC                
             .span8
-              %ul.menu
-                %li.demo
-                  -if controller_name == 'design'
-                    -path = programs_dash_path
-                  -else
-                    -path = request.fullpath                
-                  -path = path.gsub(/BETA=[^&]*&?/, '').sub(/[?&]$/, '')
-                  -path += path.include?('?') ? '&' : '?'
-                  -if has_feature? :BETA
-                    %a.demo-hide{ :href => "#{path}BETA=0" }
-                      %i.grcicon-demo
-                      Hide Demo
-                  -else
-                    %a.demo-show{ :href => "#{path}BETA=1" }
-                      %i.grcicon-demo
-                      Show Demo
-                    
+              %ul.menu    
                 %li{:class => "#{controller.controller_name != 'programs_dash' ? '' : 'active'}"}
                   %a{:href => programs_dash_path}
                     %i.grcicon-dashboard
@@ -75,6 +59,21 @@
                       %a{:href =>logout_path, :tabindex =>"-1"}
                         %i.grcicon-logout
                         Logout
+                %li.demo
+                  -if controller_name == 'design'
+                    -path = programs_dash_path
+                  -else
+                    -path = request.fullpath                
+                  -path = path.gsub(/BETA=[^&]*&?/, '').sub(/[?&]$/, '')
+                  -path += path.include?('?') ? '&' : '?'
+                  -if has_feature? :BETA
+                    %a.demo-hide{ :href => "#{path}BETA=0" }
+                      %i.grcicon-demo
+                      Hide Demo
+                  -else
+                    %a.demo-show{ :href => "#{path}BETA=1" }
+                      %i.grcicon-demo
+                      Show Demo
                 %li.screen.dropdown
                   %a{:href => "#", :class => "dropdown-toggle", :'data-toggle' =>"dropdown", :role =>"button"}
                     %i.grcicon-desktop
