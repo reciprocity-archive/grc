@@ -116,8 +116,12 @@ can.Control("CMS.Controllers.Responses", {
       model.attr(el.closest(".sample-widget").find("input").attr("name"), el.closest(".sample-widget").find("input").val());
       model.save().then(function() { el.text("Saved").addClass("disabled"); });      
     }
-    , "input[name=population], input[name=samples] keydown" : function(el, ev) {
-      el.closest(".sample-widget").find(".save-population, .save-samples").text("Save").removeClass("disabled");
+    , "input[name=population], input[name=samples] keyup" : function(el, ev) {
+      //only allow integers
+      if(parseInt(el.val()).toString() === el.val().trim())
+        el.closest(".sample-widget").find(".save-population, .save-samples").text("Save").removeClass("disabled");
+      else
+        el.closest(".sample-widget").find(".save-population, .save-samples").text("Save").addClass("disabled");
     }
     , ".add-meeting modal:success" : function(el, ev, data) {
       el.closest("[data-model]").data("model").addElementToChildList("meetings", new can.Observe(data));
