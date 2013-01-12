@@ -18,19 +18,21 @@
 
         var that = this;
 
-        this.each(function(value, name) {
-          if (value === null)
-            that.attr(name, "");
-        });
+        can.each(
+          ["population_document", "sample_worksheet_document", "sample_evidence_document"]
+          , function(d) {
+            if(!(that[d] instanceof CMS.Models.Document))
+              that.attr(d, new CMS.Models.Document(that[d] && that[d].serialize ? that[d].serialize() : that[d]));
+          });
+
         function reinit(ev) {
-          can.each(
-            ["population_document", "sample_worksheet_document", "sample_evidence_document"]
-            , function(d) {
-              if(!(that[d] instanceof CMS.Models.Document))
-                that.attr(d, new CMS.Models.Document(that[d] && that[d].serialize ? that[d].serialize() : that[d]));
-            });
+          can.each(that, function(value, name) {
+            if (value === null)
+              that.attr(name, "");
+          });
         }
         reinit();
+        this.bind("updated", reinit)
     }
 
   });
