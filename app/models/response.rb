@@ -23,7 +23,7 @@ class Response < ActiveRecord::Base
     :presence => { :message => "needs a value" }
 
   def display_name
-    "#{request.pbc_control_code} - #{system.title}"
+    "Response using \"#{system.title}\""
   end
 
   def as_json_with_system(options={})
