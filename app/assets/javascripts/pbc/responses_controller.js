@@ -100,14 +100,12 @@ can.Control("CMS.Controllers.Responses", {
       var model = el.closest("[data-model]").data("model")
 
       model.attr(el.data("doc-type") + "_document_id", data.id)
-      model.attr(el.data("doc-type") + "_document").attr(data);
       model.save().then(this.proxy('restore_add_link', el)).then(function() { el.find('form')[0].reset(); });
     }
     , ".inline-edit-population-doc modal:success" : function(el, ev, data) {
       var model = el.closest("[data-model]").data("model")
 
       model.attr(el.data("doc-type") + "_document_id", data.id)
-      model.attr(el.data("doc-type") + "_document").attr(data);
       model.save().then(this.proxy('restore_add_link', el)).then(function() { el.find('form')[0].reset(); });
     }
     , ".save-population, .save-samples click" : function(el, ev) {

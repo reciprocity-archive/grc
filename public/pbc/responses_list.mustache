@@ -114,11 +114,15 @@
                   <ul class="pbc-item-list span9">
                     <li class="pbc-item">
                       <div class="span11">
-                        {{#if population_document.link_url}}
-                        <a href="{{population_document.link_url}}" target="_blank">{{population_document.title}}{{^population_document.title}}{{population_document.link_url}}{{/population_document.title}}</a>
-                        {{else}}
-                        <span>{{population_document.title}}</span>
-                        {{/if}}
+                          {{#if_null population_document}}
+                          <span>&nbsp;</span>
+                          {{else}}
+                            {{#if_null population_document.link_url}}
+                            <span>{{population_document.title}}</span>
+                            {{else}}
+                            <a href="{{population_document.link_url}}" target="_blank">{{population_document.title}}{{^population_document.title}}{{population_document.link_url}}{{/population_document.title}}</a>
+                            {{/if_null}}
+                          {{/if_nuill}}
                         &nbsp;
                       </div>
                       <a class="btn btn-nano pull-right toggle-edit-population-doc span1" href="javascript://">
@@ -154,11 +158,15 @@
                     <ul class="pbc-item-list span9">
                       <li class="pbc-item">
                         <div class="span11">
-                          {{#if sample_worksheet_document.link_url}}
-                          <a href="{{sample_worksheet_document.link_url}}" target="_blank">{{sample_worksheet_document.title}}{{^sample_worksheet_document.title}}{{sample_worksheet_document.link_url}}{{/sample_worksheet_document.title}}</a>
+                          {{#if_null sample_worksheet_document}}
+                          <span>&nbsp;</span>
                           {{else}}
-                          <span>{{sample_worksheet_document.title}}</span>
-                          {{/if}}
+                            {{#if_null sample_worksheet_document.link_url}}
+                            <span>{{sample_worksheet_document.title}}</span>
+                            {{else}}
+                            <a href="{{sample_worksheet_document.link_url}}" target="_blank">{{sample_worksheet_document.title}}{{^sample_worksheet_document.title}}{{sample_worksheet_document.link_url}}{{/sample_worksheet_document.title}}</a>
+                            {{/if_null}}
+                          {{/if_nuill}}
                           &nbsp;
                         </div>
                         <a class="btn btn-nano pull-right toggle-edit-population-doc span1" href="javascript://">
@@ -193,11 +201,15 @@
                   <ul class="pbc-item-list">
                     <li class="pbc-item">
                       <div class="span11">
-                        {{#if sample_evidence_document.link_url}}
-                        <a href="{{sample_evidence_document.link_url}}" target="_blank">{{sample_evidence_document.title}}{{^sample_evidence_document.title}}{{sample_evidence_document.link_url}}{{/sample_evidence_document.title}}</a>
-                        {{else}}
-                        <span>{{sample_evidence_document.title}}</span>
-                        {{/if}}
+                          {{#if_null sample_evidence_document}}
+                          <span>&nbsp;</span>
+                          {{else}}
+                            {{#if_null sample_evidence_document.link_url}}
+                            <span>{{sample_evidence_document.title}}</span>
+                            {{else}}
+                            <a href="{{sample_evidence_document.link_url}}" target="_blank">{{sample_evidence_document.title}}{{^sample_evidence_document.title}}{{sample_evidence_document.link_url}}{{/sample_evidence_document.title}}</a>
+                            {{/if_null}}
+                          {{/if_nuill}}
                         &nbsp;
                       </div>
                       <a class="btn btn-nano pull-right toggle-edit-population-doc span1" href="javascript://">
