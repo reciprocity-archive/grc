@@ -50,7 +50,7 @@ can.Model.Cacheable("CMS.Models.Document", {
 
         this.each(function(value, name) {
           if (value === null)
-            that.removeAttr(name);
+            that.attr(name, undefined);
         });
     }
 

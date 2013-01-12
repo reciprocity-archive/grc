@@ -92,7 +92,7 @@
               {{#meetings}}
               <li {{data 'model'}} data-model="true">
                 <div class="span11">
-                  <a href="{{calendar_url}}">{{calendar_url}}</a>
+                  <a href="{{calendar_url}}" target="_blank">{{calendar_url}}</a>
                 </div>
                 <a class="btn btn-nano pull-right remove_person span1" href="javascript://">
                   <i class="grcicon-x-grey"></i>
@@ -108,17 +108,24 @@
             {{/if_equals}}
             {{#if_equals type_name 'Population Sample'}}
               {{#population_sample}}
-                <label>Population with Sample Requests</label>
+                <div class="row-fluid">
+                  <label class="span9">Population with Sample Requests</label>
+                  <label class="span3">Population</label>
+                </div>
                 <div data-model="true" {{data 'model'}}>
                   <div class="row-fluid">
                   <ul class="pbc-item-list span9">
                     <li class="pbc-item">
                       <div class="span11">
-                        {{#if population_document.link_url}}
-                        <a href="{{population_document.link_url}}" target="_blank">{{population_document.title}}{{^population_document.title}}{{population_document.link_url}}{{/population_document.title}}</a>
-                        {{else}}
-                        <span>{{population_document.title}}</span>
-                        {{/if}}
+                          {{#if_null population_document}}
+                          <span>&nbsp;</span>
+                          {{else}}
+                            {{#if_null population_document.link_url}}
+                            <span>{{population_document.title}}</span>
+                            {{else}}
+                            <a href="{{population_document.link_url}}" target="_blank">{{population_document.title}}{{^population_document.title}}{{population_document.link_url}}{{/population_document.title}}</a>
+                            {{/if_null}}
+                          {{/if_nuill}}
                         &nbsp;
                       </div>
                       <a class="btn btn-nano pull-right toggle-edit-population-doc span1" href="javascript://">
@@ -149,16 +156,23 @@
                     </a>
                   </div>
                 </div>
-                  <label>Sample Worksheet</label>
-                  <div class="row-fluid">
+                <div class="row-fluid">
+                  <label class="span9">Sample Worksheet</label>
+                  <label class="span3">Samples</label>
+                </div>
+                <div class="row-fluid">
                     <ul class="pbc-item-list span9">
                       <li class="pbc-item">
                         <div class="span11">
-                          {{#if sample_worksheet_document.link_url}}
-                          <a href="{{sample_worksheet_document.link_url}}" target="_blank">{{sample_worksheet_document.title}}{{^sample_worksheet_document.title}}{{sample_worksheet_document.link_url}}{{/sample_worksheet_document.title}}</a>
+                          {{#if_null sample_worksheet_document}}
+                          <span>&nbsp;</span>
                           {{else}}
-                          <span>{{sample_worksheet_document.title}}</span>
-                          {{/if}}
+                            {{#if_null sample_worksheet_document.link_url}}
+                            <span>{{sample_worksheet_document.title}}</span>
+                            {{else}}
+                            <a href="{{sample_worksheet_document.link_url}}" target="_blank">{{sample_worksheet_document.title}}{{^sample_worksheet_document.title}}{{sample_worksheet_document.link_url}}{{/sample_worksheet_document.title}}</a>
+                            {{/if_null}}
+                          {{/if_nuill}}
                           &nbsp;
                         </div>
                         <a class="btn btn-nano pull-right toggle-edit-population-doc span1" href="javascript://">
@@ -193,11 +207,15 @@
                   <ul class="pbc-item-list">
                     <li class="pbc-item">
                       <div class="span11">
-                        {{#if sample_evidence_document.link_url}}
-                        <a href="{{sample_evidence_document.link_url}}" target="_blank">{{sample_evidence_document.title}}{{^sample_evidence_document.title}}{{sample_evidence_document.link_url}}{{/sample_evidence_document.title}}</a>
-                        {{else}}
-                        <span>{{sample_evidence_document.title}}</span>
-                        {{/if}}
+                          {{#if_null sample_evidence_document}}
+                          <span>&nbsp;</span>
+                          {{else}}
+                            {{#if_null sample_evidence_document.link_url}}
+                            <span>{{sample_evidence_document.title}}</span>
+                            {{else}}
+                            <a href="{{sample_evidence_document.link_url}}" target="_blank">{{sample_evidence_document.title}}{{^sample_evidence_document.title}}{{sample_evidence_document.link_url}}{{/sample_evidence_document.title}}</a>
+                            {{/if_null}}
+                          {{/if_nuill}}
                         &nbsp;
                       </div>
                       <a class="btn btn-nano pull-right toggle-edit-population-doc span1" href="javascript://">
