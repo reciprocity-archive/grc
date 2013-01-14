@@ -92,13 +92,19 @@ can.Model.Cacheable("CMS.Models.Section", {
     while(oldlinked.length > 0) {
       //nasty hack -- assuming that RegControls are always listed before their respective implementing controls
       var oldrctl = oldlinked.shift();
-      var rctl = CMS.Models.RegControl.findInCacheById(oldrctl.id || oldrctl.control.id);
+      var rctl = null;
+      if(oldrctl instanceof CMS.Models.RegControl || !(oldrctl instanceof CMS.Models.Control) ) 
+        rctl = CMS.Models.RegControl.findInCacheById(oldrctl.id || oldrctl.control.id);
       if(rctl) {
         lcs.push(rctl);
+        rctl.bind_section(this);
         can.each(rctl.implementing_controls, function(ctl) {
+          var firstfound = false;
           lcs.push(CMS.Models.Control.findInCacheById(ctl.id || ctl.control.id));
           oldlinked = can.filter(can.makeArray(oldlinked), function(lctl) {
-            return (lctl.id || lctl.control.id) !== (ctl.id || ctl.control.id);
+            if(firstfound) return true;
+            firstfound = (lctl.id || lctl.control.id) === (ctl.id || ctl.control.id)
+            return !firstfound
           })
         });
       }

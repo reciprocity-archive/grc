@@ -79,9 +79,12 @@ can.Control("CMS.Controllers.Mapping", {
       dfd.then($.proxy(this.options.reg_list_controller, "fetch_list"))
       .then(function() {
         that.options.reg_list_controller.find_all_deferred.then(function(list) {
+          var ccontrol = section.linked_controls[section.linked_controls.length - 1];
+          section.removeElementFromChildList("linked_controls", ccontrol);
           section.addElementToChildList("linked_controls", can.filter(can.makeArray(list), function(item) { return item.slug === reg_slug })[0]);
-        })
-        .then($.proxy(that, "link_lists"));
+          section.addElementToChildList("linked_controls", ccontrol); //adding the reg control in before the ccontrol is necessary because we
+                                                                      // are assuming order when updating linkages
+        });
       });
     }
   }  
