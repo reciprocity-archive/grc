@@ -111,6 +111,7 @@
   .breadcrumbs {
     @include clearfix();
     @include reset-list();
+    text-transform:uppercase;
     margin-top:4px;
     li {
       float:left;
