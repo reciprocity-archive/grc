@@ -39,26 +39,6 @@
                     Google GRC                
             .span8
               %ul.menu    
-                %li{:class => "#{controller.controller_name != 'programs_dash' ? '' : 'active'}"}
-                  %a{:href => programs_dash_path}
-                    %i.grcicon-dashboard
-                    Dashboard
-                -help_path = yield(:page_help)
-                -if !help_path.blank?
-                  %li
-                    %a{:href => "/help/#{help_path}", :'data-toggle' => 'modal-ajax'}
-                      %i.grcicon-help
-                      Help
-                =yield :header_buttons
-                %li.user.dropdown
-                  %a{:href => "#", :class => "dropdown-toggle", :'data-toggle' =>"dropdown", :role =>"button"}
-                    %i.grcicon-user
-                    %strong=current_user.name || current_user.email
-                  %ul.dropdown-menu{:'aria-labelledby' => 'drop1', :role =>"menu"}
-                    %li
-                      %a{:href =>logout_path, :tabindex =>"-1"}
-                        %i.grcicon-logout
-                        Logout
                 %li.demo
                   -if controller_name == 'design'
                     -path = programs_dash_path
@@ -74,6 +54,27 @@
                     %a.demo-show{ :href => "#{path}BETA=1" }
                       %i.grcicon-demo
                       Show Demo
+
+                  %li{:class => "#{controller.controller_name != 'programs_dash' ? '' : 'active'}"}
+                    %a{:href => programs_dash_path}
+                      %i.grcicon-dashboard
+                      Dashboard
+                  -help_path = yield(:page_help)
+                  -if !help_path.blank?
+                    %li
+                      %a{:href => "/help/#{help_path}", :'data-toggle' => 'modal-ajax'}
+                        %i.grcicon-help
+                        Help
+                  =yield :header_buttons
+                %li.user.dropdown
+                  %a{:href => "#", :class => "dropdown-toggle", :'data-toggle' =>"dropdown", :role =>"button"}
+                    %i.grcicon-user
+                    %strong=current_user.name || current_user.email
+                  %ul.dropdown-menu{:'aria-labelledby' => 'drop1', :role =>"menu"}
+                    %li
+                      %a{:href =>logout_path, :tabindex =>"-1"}
+                        %i.grcicon-logout
+                        Logout
                 %li.screen.dropdown
                   %a{:href => "#", :class => "dropdown-toggle", :'data-toggle' =>"dropdown", :role =>"button"}
                     %i.grcicon-desktop
@@ -96,7 +97,7 @@
             .span6
               &nbsp;
 
-    .navbar
+    -#.navbar
       .navbar-inner#pageheader
         .row-static.container
           .headerleft
@@ -118,17 +119,9 @@
                 -else
                   %a.btn.btn-success{ :href => "#{path}BETA=1" } Show Demo
               
-      .navbar-secondinner
-        .row-static.container
-          .headerleft
-
-          .headerright
-            =yield :subheader_plus
-            .btn-toolbar.fltrt.userInfo-nav
-              #userInfo
-                Welcome
+    -#=yield :subheader_plus
                 
-              =yield :subheader_extras
+    -#=yield :subheader_extras
 
     .container.graphpaper
       .row
