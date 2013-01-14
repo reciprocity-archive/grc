@@ -22,7 +22,8 @@
 
     %br
 
-    %a.btn.btn-success{ :target => "_blank", :href => %{http://www.google.com/calendar/event?action=TEMPLATE&text=New%20Event&dates=#{DateTime.now.utc.strftime "%Y%m%dT%H%M%SZ"}/#{Time.now.+(3600).utc.strftime "%Y%m%dT%H%M%SZ"}&details=Add%20a%20description%20here.&trp=false&sprop=website:#{request.url}&sprop=name:#{request.domain}} } Create calendar event
+    - users = f.object.response.people.map do |user| "&add=" + user.email end.join ''
+    %a.btn.btn-success{ :target => "_blank", :href => "http://www.google.com/calendar/event?" + { :action => "TEMPLATE" , :text=> ["hold - audit response using ", f.object.response.system.default_slug_prefix.titlecase, ': ', f.object.response.system.title].join(''), :dates => DateTime.now.utc.strftime("%Y%m%dT%H%M%SZ") + "/" + Time.now.+(3600).utc.strftime("%Y%m%dT%H%M%SZ"), :details=> f.object.response.system.description, :trp => "false", :sprop=> "website:" + request.url, "sprop" => "name:" + request.domain }.to_query() + users } Create calendar event
 
     %br
     %br
