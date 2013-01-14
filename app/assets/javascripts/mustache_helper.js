@@ -175,4 +175,12 @@ Mustache.registerHelper("if_equals", function(val1, val2, options) {
 
 });
 
+Mustache.registerHelper("if_null", function(val1, options) {
+
+    if(val1 == null) return options.fn(this);
+    else return options.inverse(this);
+
+});
+
+
 })(this, jQuery, can);

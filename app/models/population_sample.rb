@@ -16,4 +16,13 @@ class PopulationSample < ActiveRecord::Base
   def display_name
     "#{response.system.title} population sample"
   end
+
+  def as_json(options={})
+    super(options.merge :include => [
+      { :population_document => { :methods => :link_url}},
+      { :sample_worksheet_document => { :methods => :link_url}}, 
+      { :sample_evidence_document => { :methods => :link_url}}
+    ])
+  end
+
 end
