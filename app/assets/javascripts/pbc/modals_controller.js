@@ -142,4 +142,92 @@ can.Control("CMS.Controllers.PBCModals", {
         $("[data-target='#" + $(el).attr("id") + "']").closest("[data-toggle=modal]").show()
     }
 
+    , ".modal input[name=fromdate], .modal input[name=todate], .modal select[name=fromtime], .modal select[name=totime] change" : function(el, ev) {
+      var cal_link = $(el).closest(".modal").find(".create-gcal-event");
+      var form = $(el).closest("form")[0];
+      var href = cal_link.attr("href");
+
+      if(form.fromdate.value === "" || form.todate.value === "")
+        return;
+
+      function rearrange(a) {
+        a.unshift(a.pop());
+        return a;
+      }
+
+      function toUTCTime(date, time) {
+        var offset = new Date(1970, 0, 1, 0, 0, 0).getTime() / 1000 / 60 / 60;
+        var hours = +(time.substr(0,2)) + offset;
+        var minutes = +(time.substr(2,2));
+
+        var offset_minutes = (offset - parseInt(offset)) * 60;
+        if(offset_minutes !== 0) {
+          minutes += offset_minutes;
+          if(minutes > 59) {
+            hours++;
+            minutes -= 60;
+          } else if(minutes < 0) {
+            hours--;
+            minutes += 60;
+          }
+        }
+
+        var year = +(date.substr(0, 4));
+        var month = +(date.substr(4, 2));
+        var days = +(date.substr(6, 2));
+        if(hours > 23) {
+          days++;
+          hours -= 24;
+        } else if(hours < 0) {
+          days--;
+          hours += 24;
+        }
+
+        function getMonthLength(m) {
+          switch(m) {
+          case 9: case 4: case 6: case 11:
+            return 30;
+            break;
+          case 2:
+            return !(year % 400) ? 29 : (!(year % 100) ? 28 : (!(year % 4) ? 29 : 28));
+            break;
+          default:
+            return 31;
+          }
+        }
+
+        if(days < 1) {
+          month--;
+          days += getMonthLength(month);
+        } else if(days > getMonthLength(month)) {
+          days -= getMonthLength(month);
+          month++;
+        }
+
+        if(month > 12) {
+          year++;
+          month -= 12;
+        } else if (month < 1) {
+          year--;
+          month += 12
+        }
+
+        function zeropad(v) {
+          return "" + (v < 10 ? "0" + v : v);
+         }
+
+        return year.toString() + zeropad(month) + zeropad(days) + "T" + zeropad(hours) + zeropad(minutes) + time.substr(4,2) + "Z";
+
+      }
+
+
+      href = href.replace(
+        /dates=[^&]*/
+        , "dates="
+        + toUTCTime(rearrange(form.fromdate.value.split('/')).join(''), form.fromtime.value)
+        + "/"
+        + toUTCTime(rearrange(form.todate.value.split('/')).join(''), form.totime.value)
+        )
+      cal_link.attr("href", href);
+    }
 });
