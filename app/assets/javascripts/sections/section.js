@@ -70,31 +70,15 @@ can.Model.Cacheable("CMS.Models.Section", {
 }, {
 
   init : function() {
-    // covered in Cacheable now
-    // if(this.section) {
-    //   var attrs = this.section._attrs();
-    //   for(var i in attrs) {
-    //     if(attrs.hasOwnProperty(i)) {
-    //       this.attr(i, this.section[i]);
-    //     }
-    //   }
-    //   this.removeAttr("section");
-    // }
+
     this._super();
 
-    var lcs = new can.Model.List();
-    for(var i = 0; i < this.linked_controls.length ; i ++) {
-      //Reusing the ImplementingControl model here instead of RegControl or Control because
-      // we don't want to cache it -- it makes things a bit screwy if I do. --BM
-      lcs.push(new CMS.Models.ImplementingControl(this.linked_controls[i].serialize()));
-    }
     var cs = new can.Model.List();
     if(this.children) {
       for(i = 0; i < this.children.length ; i ++) {
         cs.push(new this.constructor(this.children[i].serialize()));
       }
     }
-    this.attr("linked_controls", lcs);
     this.attr("children", cs);
   }
 
@@ -103,7 +87,23 @@ can.Model.Cacheable("CMS.Models.Section", {
   }
 
   , update_linked_controls : function() {
-    
+    var lcs = new can.Model.List();
+    var oldlinked = this.linked_controls.slice(0);
+    while(oldlinked.length > 0) {
+      //nasty hack -- assuming that RegControls are always listed before their respective implementing controls
+      var oldrctl = oldlinked.shift();
+      var rctl = CMS.Models.RegControl.findInCacheById(oldrctl.id || oldrctl.control.id);
+      if(rctl) {
+        lcs.push(rctl);
+        can.each(rctl.implementing_controls, function(ctl) {
+          lcs.push(CMS.Models.Control.findInCacheById(ctl.id || ctl.control.id));
+          oldlinked = can.filter(can.makeArray(oldlinked), function(lctl) {
+            return (lctl.id || lctl.control.id) !== (ctl.id || ctl.control.id);
+          })
+        });
+      }
+    }    
+    this.attr("linked_controls", lcs);
   }
 
 });
