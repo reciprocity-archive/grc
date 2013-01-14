@@ -1,9 +1,12 @@
 -content_for :page_help, 'import'
 
 -content_for :header do
-  %ol#breadcrumb
-    %li Import
-  .location#pageTitle Import Systems
+  %ul.breadcrumbs
+    %li
+      Import
+    
+  %h1
+    Import Systems
 
 .row-static
   =render :partial => 'systems/import',

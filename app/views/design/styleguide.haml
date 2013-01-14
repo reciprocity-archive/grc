@@ -3,10 +3,12 @@
 %link(rel="stylesheet" type="text/css" href="styleguide.css")
 
 -content_for :header do
-  %ol#breadcrumb
-    %li.last
-      %a{:href => "#"} Visual & Syntax Style Guide
-  #pageTitle.location Design - Dev Only
+  %ul.breadcrumbs
+    %li
+      %a{:href => "#"}
+        Visual & Syntax Style Guide
+  %h1
+    Design - Dev Only
 
 -content_for :page_help, 'Nope.'
 

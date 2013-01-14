@@ -1,10 +1,13 @@
 -@title = "GRC Reg Mapper for: #{@program.title}"
 
 -content_for :header do
-  %ol#breadcrumb
+  %ul.breadcrumbs
     %li=link_to 'Programs', programs_dash_path
-    %li Mapping
-  .location#pageTitle=@program.title
+    %li
+      Mapping
+    
+  %h1
+    =@program.title
 
 -content_for :page_help, 'mapping'
 

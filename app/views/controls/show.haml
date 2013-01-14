@@ -1,10 +1,13 @@
 -@title = "GRC Control: #{@control.title}"
 
 -content_for :header do
-  %ol#breadcrumb
-    %li CONTROLS
+  %ul.breadcrumbs
+    %li
+      CONTROLS
     %li=@control.slug
-  .location#pageTitle=@control.title
+  
+  %h1
+    =@control.title
 
 -content_for :page_help, 'control'
 

@@ -1,9 +1,12 @@
 -content_for :page_help, 'import_controls'
 
 -content_for :header do
-  %ol#breadcrumb
-    %li Import
-  .location#pageTitle Import Controls
+  %ul.breadcrumbs
+    %li
+      Import
+    
+  %h1
+    Import Controls
 
 .row-static
   =render :partial => 'programs/import_controls',

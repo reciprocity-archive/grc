@@ -7,10 +7,13 @@
 -@title = "GRC #{model_title}: #{instance.email}"
 
 -content_for :header do
-  %ol#breadcrumb
-    %li #{model_title}
+  %ul.breadcrumbs
+    %li
+      #{model_title}
     %li= instance.email
-  .location#pageTitle= instance.email
+    
+  %h1
+    = instance.email
 
 -content_for :page_help, model_name
 

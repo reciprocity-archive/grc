@@ -1,9 +1,12 @@
 -content_for :page_help, 'pbc_list_import'
 
 -content_for :header do
-  %ol#breadcrumb
-    %li Import
-  .location#pageTitle Import PBC list
+  %ul.breadcrumbs
+    %li
+      Import
+    
+  %h1
+    Import PBC list
 
 .row-static
   =render :partial => 'pbc_lists/import',

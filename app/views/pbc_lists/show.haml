@@ -5,12 +5,13 @@
 -@title = "GRC: PBC List"
 
 -content_for :header do
-  %ol#breadcrumb
+  %ul.breadcrumbs
     %li=link_to 'PROGRAMS', programs_dash_path
     %li=link_to instance.audit_cycle.program.title, flow_program_path(instance.audit_cycle.program_id)
     %li=link_to 'AUDITS', flow_program_path(instance.audit_cycle.program_id)
-    %li.last= instance.audit_cycle.title
-  #pageTitle.location
+    %li= instance.audit_cycle.title
+    
+  %h1
     PBC List: #{instance.audit_cycle.title}
 
 -content_for :page_help, 'pbc_list'

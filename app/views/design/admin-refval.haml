@@ -1,10 +1,12 @@
 -@title = "GRC: Admin Area"
 
 -content_for :header do
-  %ol#breadcrumb
-    %li.last
-      %a{:href => "programs.htm"} ADMIN AREA
-  #pageTitle.location Sys Admin
+  %ul.breadcrumbs
+    %li
+      %a{:href => "programs.htm"}
+        ADMIN AREA
+  %h1
+    Sys Admin
 
 -content_for :page_help, 'admin_refval'
 
