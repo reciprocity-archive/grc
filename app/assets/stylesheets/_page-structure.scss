@@ -335,3 +335,18 @@ ul.pbc-requests {
     margin:0 0 0 6px !important;
   }
 }
+
+label.request {
+  color:#666;
+  font-weight:bold;
+  font-size:13px;
+  i {
+    margin-top:-1px;
+  }
+  span {
+    font-weight:bold;
+    color:#999;
+    text-transform:uppercase;
+    font-size:11px;
+  }
+}

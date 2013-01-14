@@ -131,8 +131,14 @@
             -request_collapse_class = "control_assessment-#{control_assessment_id || 'null' }-request-#{request.id}"
             %li.main-item{ html_data_attributes(request, "data-filter-", [ ["type-id", "type_id"], ["type-name", "type_name"], "status", ["date-requested", "date_requested.to_date"], ["control-code", "control.slug"], ["person", "persons_responsible"], "id" ]) }
               .row-fluid.pbc-item-head
-                .span4.pbc-item.pbc-control
+                .span3
                   .expander.small-expander{"data-target" => ".#{request_collapse_class}", "data-toggle" => "collapse"}
+                  %label.request
+                    %i{"class" => request_type_icon(request.type_name)}
+                    =request.type_name
+                    Request
+                    %span for
+                .span3.pbc-item.pbc-control
                   %a.btn.btn-mini.pull-right{:href => flow_controls_path(:list_select => 1), :'data-toggle' => 'modal-ajax-single-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#referenceList', :'data-modal-class' => 'modal-slim' }
                     %i.grcicon-link
                   -if request.control.present?
@@ -145,18 +151,21 @@
                     .item.error.oneline
                       No control selected
                 .span2.pbc-request{ "data-target" => ".#{request_collapse_class}", "data-toggle" => "collapse"}
-                  .request-icon
-                    %i{"rel" => "tooltip", "data-placement" => "top", "title" => "#{request.type_name} Request", "class" => request_type_icon(request.type_name) }
                   %h6.pbc-request-count
+                    with
                     =pluralize(request.responses.count, "response")
-                .span2{ "data-target" => ".#{request_collapse_class}", "data-toggle" => "collapse" }
+                .span1{ "data-target" => ".#{request_collapse_class}", "data-toggle" => "collapse" }
                   %label
-                    %span{"rel" => "tooltip", "data-placement" => "top", "title" => "Date Requested"}=request.date_requested && request.date_requested.strftime('%m/%d/%Y')
-                .span4.pbc-status
-                  %label.pull-left Status of Request:&nbsp; 
+                    %span{"rel" => "tooltip", "data-placement" => "top", "title" => "Date Requested", :style => "font-style:italic;color:#aaa;"}=request.date_requested && request.date_requested.strftime('%m/%d/%Y')
+                .span3.pbc-status
+                  %a.btn.btn-mini.pull-right{ :href => edit_flow_request_path(request.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide'}
+                    %i.grcicon-edit-grey
+
+                  %label.pull-left Status:&nbsp;
                   %select
                     -Request.statuses.each do |status|
                       %option{ :selected => request.status == status }=status
+
               .row-fluid.collapse{ :class => request_collapse_class }
                 .span3.pbc-item.pbc-request
                   %h5 Request
@@ -205,9 +214,6 @@
                       =request.date_requested && request.date_requested.strftime('%m/%d/%Y')
                     -else
                       %span.disabled-text Unknown date
-                .span1.pbc-item.pbc-actions
-                  %a.btn.btn-mini{ :href => edit_flow_request_path(request.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide'}
-                    %i.grcicon-edit-grey
 
               .row-fluid.pbc-responses-container.collapse{ :class => request_collapse_class }
                 .span12
