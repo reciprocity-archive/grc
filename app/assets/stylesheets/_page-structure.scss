@@ -1,5 +1,10 @@
 // PBC List Styles
 
+.response-title {
+  cursor:pointer;
+  padding-bottom:6px;
+}
+
 .pbc-header {
   [class*="span"] {
     min-height:0;
