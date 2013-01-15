@@ -30,11 +30,11 @@ platforms :ruby do
   end
 
   group :staging do
-    gem "mysql"
+    gem "mysql2"
   end
 
   group :production do
-    gem "mysql"
+    gem "mysql2"
   end
 end
 
