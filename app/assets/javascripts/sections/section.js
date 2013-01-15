@@ -80,6 +80,12 @@ can.Model.Cacheable("CMS.Models.Section", {
       }
     }
     this.attr("children", cs);
+
+    var that = this;
+    this.each(function(value, name) {
+      if (value === null)
+        that.removeAttr(name);
+    });
   }
 
   , map_rcontrol : function(params) {
