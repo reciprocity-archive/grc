@@ -19,7 +19,7 @@ $(function() {
     		arity : 2 
     		, id : controlId
     		, model : (/^\d+$/.test(controlId) ? CMS.Models.ImplementedControl : CMS.Models.Control)
-    		, list : "/controls/tree.mustache"
+    		, list : "/assets/controls/tree.mustache"
     	}).control(CMS.Controllers.Controls)};
 });
 

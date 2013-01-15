@@ -12,7 +12,7 @@
     </div>
     <div id="pbc-response-{{id}}" class="row-fluid collapse">
       {{#system}}
-        {{> /pbc/system.mustache}}
+        {{> /assets/pbc/system.mustache}}
       {{/system}}
 
       <div class="span4 pbc-response-info">
@@ -33,7 +33,7 @@
             </label>
             {{#if_equals type_name 'Documentation'}}
               <ul class="pbc-item-list">
-                {{> /pbc/documents_list.mustache}}
+                {{> /assets/pbc/documents_list.mustache}}
                 <li class="toggle-add-document add-new">
                   <a href="javascript://">
                     + Add new document

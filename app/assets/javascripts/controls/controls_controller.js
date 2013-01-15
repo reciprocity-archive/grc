@@ -7,8 +7,8 @@
     //Static
     defaults: {
       arity: 2
-      , list : "/controls/list.mustache"
-      , show : "/controls/show.mustache"
+      , list : "/assets/controls/list.mustache"
+      , show : "/assets/controls/show.mustache"
       , model : CMS.Models.Control
       , id : null
       //, list_model : CMS.Models.Control.List
