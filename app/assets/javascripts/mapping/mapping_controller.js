@@ -54,7 +54,7 @@ can.Control("CMS.Controllers.Mapping", {
 
   }
 
-  , "#rmap, #cmap click" : function(el, ev) {
+  , "#rmap:not([disabled]), #cmap:not([disabled]) click" : function(el, ev) {
     var that = this;
     var section = $("#selected_sections").control(namespace.CMS.Controllers.Sections).options.instance;
     var rcontrol = $("#selected_rcontrol").control(namespace.CMS.Controllers.Controls).options.instance;
