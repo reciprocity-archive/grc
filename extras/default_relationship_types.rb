@@ -106,7 +106,31 @@ module DefaultRelationshipTypes
       :description => "Programs that are relevant to this product.",
       :forward_phrase =>"relevant to",
       :backward_phrase => "within scope of"
-    }
+    },
+    {
+      :relationship_type => 'org_group_has_risky_attribute',
+      :description => "Org groups have risky attributes.",
+      :forward_phrase => "with",
+      :backward_phrase =>"of"
+    },
+    {
+      :relationship_type => 'product_has_risky_attribute',
+      :description => "Products have risky attributes.",
+      :forward_phrase => "with",
+      :backward_phrase =>"of"
+    },
+    {
+      :relationship_type => 'location_has_risky_attribute',
+      :description => "Locations have risky attributes.",
+      :forward_phrase => "with",
+      :backward_phrase =>"of"
+    },
+    {
+      :relationship_type => 'market_has_risky_attribute',
+      :description => "Markets have risky attributes.",
+      :forward_phrase => "with",
+      :backward_phrase =>"of"
+    },
   ]
 
   def self.types

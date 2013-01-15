@@ -309,8 +309,9 @@ ActiveRecord::Schema.define(:version => 20130112182737) do
     t.string   "description"
     t.string   "forward_phrase"
     t.string   "backward_phrase"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+    t.boolean  "symmetric",         :default => false
   end
 
   add_index "relationship_types", ["relationship_type"], :name => "index_relationship_types_on_relationship_type", :unique => true
@@ -357,6 +358,18 @@ ActiveRecord::Schema.define(:version => 20130112182737) do
     t.integer  "system_id"
     t.string   "status"
     t.integer  "modified_by_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "risks", :force => true do |t|
+    t.string   "slug"
+    t.string   "title"
+    t.text     "description"
+    t.string   "url"
+    t.integer  "modified_by_id"
+    t.datetime "start_date"
+    t.datetime "stop_date"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end

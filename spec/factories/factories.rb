@@ -196,6 +196,10 @@ FactoryGirl.define do
     title
   end
 
+  factory :risk do
+    title
+  end
+
   factory :help do
     slug
     content
