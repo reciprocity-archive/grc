@@ -590,3 +590,10 @@ jQuery(function($) {
     e.preventDefault();
   });
 });
+
+$(window).load(function(){
+  $('.widget-area').sortable({
+    connectWith: '.widget-area',
+    placeholder: 'drop-placeholder'
+  }).disableSelection();
+});

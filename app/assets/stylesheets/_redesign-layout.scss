@@ -1,0 +1,28 @@
+.drop-placeholder {
+  background:$dropPlaceholder;
+  border:1px dashed $gray;
+  height:35px;
+  line-height:20px;
+  margin-bottom:20px;
+}
+
+.widget {
+  border:1px solid $headerBgnd;
+  @include border-radius(3px);
+  margin-bottom: 20px;
+  .header {
+    background:$widgetHeaderBgnd;
+    color:$gray;
+    padding: 10px;
+    @include border-radius(3px 3px 0 0);
+  }
+  .content {
+    padding: 30px 10px;
+    background:$white;
+  }
+  .footer {
+    background:$headerBgnd;
+    color:$white;
+    padding: 10px;
+  }
+}
