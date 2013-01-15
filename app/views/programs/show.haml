@@ -1,10 +1,10 @@
 -@title = "GRC Program: #{@program.title}"
 
 -content_for :header do
-  .breadcrumbs
-    %ul.breadcrumb-list
-      %li=link_to 'PROGRAMS', programs_dash_path
-      %li=@program.slug
+  %ul.breadcrumbs
+    %li=link_to 'PROGRAMS', programs_dash_path
+    %li=@program.slug
+    
   %h1=@program.title
 
 -content_for :page_help, 'program'

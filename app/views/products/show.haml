@@ -5,6 +5,15 @@
 -@title = "GRC #{model_title}: #{instance.title}"
 
 -content_for :header do
+  %ul.breadcrumbs
+    %li
+      #{model_title}
+    %li= instance.slug
+    
+  %h1
+    =instance.title
+
+-content_for :header do
   %ol#breadcrumb
     %li #{model_title}
     %li= instance.slug

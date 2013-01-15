@@ -108,9 +108,10 @@
     font-size:24px;
     line-height:36px;
   }
-  .breadcrumb-list {
+  .breadcrumbs {
     @include clearfix();
     @include reset-list();
+    text-transform:uppercase;
     margin-top:4px;
     li {
       float:left;
