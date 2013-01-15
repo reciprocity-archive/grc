@@ -22,6 +22,7 @@
       .dropdown-menu {
         @include reset-list();
         @include border-radius(0);
+        min-width:100px;
         float: none;
         background: $black;
         li {

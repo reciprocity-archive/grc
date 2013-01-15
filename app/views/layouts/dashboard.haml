@@ -76,18 +76,23 @@
                         %i.grcicon-logout
                         Logout
                 %li.screen.dropdown
-                  %a{:href => "#", :class => "dropdown-toggle", :'data-toggle' =>"dropdown", :role =>"button"}
+                  %a{:href => "#", :class => "dropdown-toggle screen-size", :'data-toggle' =>"dropdown", :role =>"button"}
                     %i.grcicon-desktop
-                    100%
+                    %span
+                      100%
                   %ul.dropdown-menu{:'aria-labelledby' => 'drop2', :role =>"menu"}
-                    %li
-                      %a{:href =>logout_path, :tabindex =>"-1"}
+                    %li.full-view
+                      %a{:href =>'#', :tabindex =>"-1"}
+                        %i.grcicon-wide
+                        100%
+                    %li.wide-view
+                      %a{:href =>'#', :tabindex =>"-1"}
                         %i.grcicon-wide
                         Wide
-                    %li
-                      %a{:href =>logout_path, :tabindex =>"-1"}
+                    %li.narrow-view
+                      %a{:href =>'#', :tabindex =>"-1"}
                         %i.grcicon-normal
-                        Normal
+                        Narrow
             
       .header-content
         .container-fluid
