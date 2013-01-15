@@ -6,7 +6,8 @@
       %h3 
         Requests
         %a.btn.btn-mini.accordion-toggle.toggle{:'data-toggle'=>"collapse", :href => "#widget-filters"}
-          Show/Hide Filter
+          %i.icon-search
+          Show/Hide Filter&nbsp;
     -if requests.any?(&:control_assessment_id)
       .span2
         -#%span.word.pull-right
@@ -30,8 +31,6 @@
         Show/Hide Filter
 
     .span4.pbc-add
-      
-
       .btn-group
         %a{:'data-toggle'=>"dropdown", :href => "#", :class => "btn btn-mini btn-success dropdown-toggle"}
           + Add New Request
@@ -82,8 +81,6 @@
           %button.btn.pull-right{ :'data-toggle' => 'filter-reset' , :rel => "tooltip", :"data-position" => "top", :title => "Reset filters" }
             %i.grcicon-x-grey
 
-
-
 %ul.pbc-control-assessments#requests
   -sorted_requests_with_control_assessments(requests).each do |control_assessment_id, control_assessment, requests|
     -control_assessment_collapse_id = "control_assessment-#{control_assessment && control_assessment.control && control_assessment.control_id || 'null'}"
@@ -95,7 +92,7 @@
             -#Using deprecated HTML code here; unsure how to pass a css style in an equal statement
             Requests with Control:
             %strong= (control_assessment && control_assessment.control && control_assessment.control.slug) || "<font color='red'>(Missing Control)</font>".html_safe
-          .span6{"data-target" => "##{control_assessment_collapse_id}", "data-toggle" => "collapse"}
+          .span3{"data-target" => "##{control_assessment_collapse_id}", "data-toggle" => "collapse"}
             =control_assessment && control_assessment.control && control_assessment.control.title || "&nbsp;".html_safe
           -#.span2{"data-target" => "##{control_assessment_collapse_id}", "data-toggle" => "collapse"}
             &nbsp;
@@ -111,17 +108,21 @@
             -#    = request_type_count(requests, "Interview")
           -if control_assessment.present?
             .span1
+              &nbsp;
+            .span2
               %a.btn.btn-mini.rotate_control_assessment.pull-right{ :rel => "tooltip", :'data-placement' => "top", :title => "Internal: Test of Effectiveness", :class => control_assessment_button_class(control_assessment.internal_toe), :'data-remote' => true, :'data-method' => 'post', :href => rotate_flow_control_assessment_path(control_assessment, :'control_assessment[internal_toe]' => 'toggle') }
                 %i{ :class => control_assessment_button_icon(control_assessment.internal_toe) }
-
               %a.btn.btn-mini.rotate_control_assessment.pull-right{ :rel => "tooltip", :'data-placement' => "top", :title => "Internal: Test of Design", :class => control_assessment_button_class(control_assessment.internal_tod), :'data-remote' => true, :'data-method' => 'post', :href => rotate_flow_control_assessment_path(control_assessment, :'control_assessment[internal_tod]' => 'toggle') }
                 %i{ :class => control_assessment_button_icon(control_assessment.internal_tod) }
-              
-            .span1
+              %label.pull-right
+                Internal CA:&nbsp;
+            .span2
               %a.btn.btn-mini.rotate_control_assessment.pull-right{ :rel => "tooltip", :'data-placement' => "top", :title => "External: Test of Effectiveness", :class => control_assessment_button_class(control_assessment.external_toe), :'data-remote' => true, :'data-method' => 'post', :href => rotate_flow_control_assessment_path(control_assessment, :'control_assessment[external_toe]' => 'toggle') }
                 %i{ :class => control_assessment_button_icon(control_assessment.external_toe) }
               %a.btn.btn-mini.rotate_control_assessment.pull-right{ :rel => "tooltip", :'data-placement' => "top", :title => "External: Test of Design", :class => control_assessment_button_class(control_assessment.external_tod), :'data-remote' => true, :'data-method' => 'post', :href => rotate_flow_control_assessment_path(control_assessment, :'control_assessment[external_tod]' => 'toggle') }
                 %i{ :class => control_assessment_button_icon(control_assessment.external_tod) }
+              %label.pull-right
+                External CA:&nbsp;
               
 
       .pbc-ca-content.collapse{ :id => control_assessment_collapse_id }
@@ -130,13 +131,16 @@
             -request_collapse_class = "control_assessment-#{control_assessment_id || 'null' }-request-#{request.id}"
             %li.main-item{ html_data_attributes(request, "data-filter-", [ ["type-id", "type_id"], ["type-name", "type_name"], "status", ["date-requested", "date_requested.to_date"], ["control-code", "control.slug"], ["person", "persons_responsible"], "id" ]) }
               .row-fluid.pbc-item-head
-                .span4.pbc-item.pbc-control
+                .span3
                   .expander.small-expander{"data-target" => ".#{request_collapse_class}", "data-toggle" => "collapse"}
-                  .request-icon
-                    %i{"rel" => "tooltip", "data-placement" => "top", "title" => "#{request.type_name} Request", "class" => request_type_icon(request.type_name) }
+                  %label.request
+                    %i{"class" => request_type_icon(request.type_name)}
+                    =request.type_name
+                    Request
+                    %span for
+                .span3.pbc-item.pbc-control
                   %a.btn.btn-mini.pull-right{:href => flow_controls_path(:list_select => 1), :'data-toggle' => 'modal-ajax-single-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#referenceList', :'data-modal-class' => 'modal-slim' }
                     %i.grcicon-link
-                  
                   -if request.control.present?
                     .item.i-control.oneline
                       =request.control && request.control.slug
@@ -148,15 +152,20 @@
                       No control selected
                 .span2.pbc-request{ "data-target" => ".#{request_collapse_class}", "data-toggle" => "collapse"}
                   %h6.pbc-request-count
+                    with
                     =pluralize(request.responses.count, "response")
-                .span2{ "data-target" => ".#{request_collapse_class}", "data-toggle" => "collapse" }
+                .span1{ "data-target" => ".#{request_collapse_class}", "data-toggle" => "collapse" }
                   %label
-                    %span{"rel" => "tooltip", "data-placement" => "top", "title" => "Date Requested"}=request.date_requested && request.date_requested.strftime('%m/%d/%Y')
-                .span4.pbc-status
-                  %label.pull-left Status of Request:&nbsp; 
+                    %span{"rel" => "tooltip", "data-placement" => "top", "title" => "Date Requested", :style => "font-style:italic;color:#aaa;"}=request.date_requested && request.date_requested.strftime('%m/%d/%Y')
+                .span3.pbc-status
+                  %a.btn.btn-mini.pull-right{ :href => edit_flow_request_path(request.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide'}
+                    %i.grcicon-edit-grey
+
+                  %label.pull-left Status:&nbsp;
                   %select
                     -Request.statuses.each do |status|
                       %option{ :selected => request.status == status }=status
+
               .row-fluid.collapse{ :class => request_collapse_class }
                 .span3.pbc-item.pbc-request
                   %h5 Request
@@ -205,9 +214,6 @@
                       =request.date_requested && request.date_requested.strftime('%m/%d/%Y')
                     -else
                       %span.disabled-text Unknown date
-                .span1.pbc-item.pbc-actions
-                  %a.btn.btn-mini{ :href => edit_flow_request_path(request.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide'}
-                    %i.grcicon-edit-grey
 
               .row-fluid.pbc-responses-container.collapse{ :class => request_collapse_class }
                 .span12

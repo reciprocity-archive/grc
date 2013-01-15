@@ -15,15 +15,39 @@
 .row-fluid
   .span4
     %ol
-      %li 1. Create your calendar event
-      %li 2. Click on 'Public Event' at bottom of page
-      %li 3. Copy embedded URL
-      %li 4. Return to gGRC and paste in link below
+      %li 1. Select your start and end times
+      %li 2. Create your calendar event and click SAVE
+      %li 3. Reopen your calendar event
+      %li 4. Click on 'Publish Event' at bottom of page
+      %li 5. Copy embedded URL ('href' attribute)
+      %li 6. Return to gGRC and paste in link below
 
+
+    %form
+      %label From
+      .row-fluid
+        .span6
+          %input.span12{ :type => "text", :name => "fromdate", :value => DateTime.now.strftime("%m/%d/%Y") }
+        .span6
+          %select.span12{ :name => "fromtime" }
+            =(0..86399).step(1800) do |x|
+              %option{ :value => Time.at(x).utc.strftime("%H%M%S"), :selected => Time.now.beginning_of_hour.+(3600) == Time.now.beginning_of_day.+(x) } #{ Time.at(x).utc.strftime("%I:%M %p")}
+            end
+      %label To
+      .row-fluid
+        .span6
+          %input.span12{ :type => "text", :name => "todate", :value =>  DateTime.now.strftime("%m/%d/%Y") }
+        .span6
+          %select.span12{ :name => "totime" }
+            =(0..86399).step(1800) do |x|
+              %option{ :value => Time.at(x).utc.strftime("%H%M%S"), :selected => Time.now.beginning_of_hour.+(7200) == Time.now.beginning_of_day.+(x) } #{ Time.at(x).utc.strftime("%I:%M %p")}
+            end
+    :javascript
+      $("input[name=fromdate], input[name=todate]").datepicker();
     %br
 
-    %a.btn.btn-success{ :href => '#' } Create calendar event
-
+    - users = f.object.response.people.map do |user| "&add=" + user.email end.join ''
+    %a.btn.btn-success.create-gcal-event{ :target => "_blank", :href => "http://www.google.com/calendar/event?" + { :action => "TEMPLATE" , :text=> ["hold - audit response using ", f.object.response.system.default_slug_prefix.titlecase, ': ', f.object.response.system.title].join(''), :dates => DateTime.now.beginning_of_hour.utc.strftime("%Y%m%dT%H%M%SZ") + "/" + Time.now.beginning_of_hour.+(3600).utc.strftime("%Y%m%dT%H%M%SZ"), :details=> f.object.response.system.description, :trp => "false", :sprop=> "website:" + request.url, "sprop" => "name:" + request.domain }.to_query() + users } Create calendar event
     %br
     %br
 
@@ -31,6 +55,6 @@
     =wrapped_text_field f, :span12, :calendar_url, :placeholder => 'URL for calendar event', :label_name => 'Paste in link here'
   .span1
   .span6
-    %img{ :src => '/images/calendar_link_example.jpg' }
+    %img{ :src => '/images/calendar_link_example.jpg', :style => 'margin-top:2em'}
 
 %br

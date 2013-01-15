@@ -35,7 +35,8 @@ class Product < ActiveRecord::Base
     { :from => Product,  :via => :product_is_dependent_on_product },
     { :to   => Market,   :via => :product_is_sold_into_market },
     { :from => Program,  :via => :program_is_relevant_to_product },
-    { :to   => System,   :via => :product_has_process }
+    { :to   => System,   :via => :product_has_process },
+    { :to   => RiskyAttribute, :via => :product_has_risky_attribute },
   ]
 
   def display_name

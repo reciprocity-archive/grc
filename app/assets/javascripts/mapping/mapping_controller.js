@@ -47,35 +47,14 @@ can.Control("CMS.Controllers.Mapping", {
         }); 
 
         can.each(CMS.Models.SectionSlug.cache, function(section, id) {
-          var implementing_control_ids = []
-          , ctls_list = section.linked_controls;
-
-          can.each(ctls_list, function(ctl) {
-            var ctl_model = namespace.CMS.Models.RegControl.findInCacheById(ctl.id);
-            if(ctl_model && ctl_model.implementing_controls && ctl_model.implementing_controls.length) {
-              implementing_control_ids = implementing_control_ids.concat(
-                can.map(ctl_model.implementing_controls, function(ictl) { return ictl.id })
-              );
-            }
-          });
-          var controls = new can.Model.List();
-          can.each(ctls_list, function(ctl) {
-            if(can.inArray(ctl.id, implementing_control_ids) < 0) {
-              var rctl = CMS.Models.RegControl.findInCacheById(ctl.id);
-              controls.push(rctl);
-              rctl.bind_section(section); 
-            } else {
-              controls.push(CMS.Models.Control.findInCacheById(ctl.id));
-            }
-          });
-          section.attr("linked_controls", controls);
+          section.update_linked_controls();
         });
 
       });
 
   }
 
-  , "#rmap, #cmap click" : function(el, ev) {
+  , "#rmap:not([disabled]), #cmap:not([disabled]) click" : function(el, ev) {
     var that = this;
     var section = $("#selected_sections").control(namespace.CMS.Controllers.Sections).options.instance;
     var rcontrol = $("#selected_rcontrol").control(namespace.CMS.Controllers.Controls).options.instance;
@@ -100,9 +79,12 @@ can.Control("CMS.Controllers.Mapping", {
       dfd.then($.proxy(this.options.reg_list_controller, "fetch_list"))
       .then(function() {
         that.options.reg_list_controller.find_all_deferred.then(function(list) {
+          var ccontrol = section.linked_controls[section.linked_controls.length - 1];
+          section.removeElementFromChildList("linked_controls", ccontrol);
           section.addElementToChildList("linked_controls", can.filter(can.makeArray(list), function(item) { return item.slug === reg_slug })[0]);
-        })
-        .then($.proxy(that, "link_lists"));
+          section.addElementToChildList("linked_controls", ccontrol); //adding the reg control in before the ccontrol is necessary because we
+                                                                      // are assuming order when updating linkages
+        });
       });
     }
   }  
@@ -190,7 +172,8 @@ can.Control("CMS.Controllers.Mapping", {
     }
 
     ev.preventDefault();
-    $dialog.html(can.view("/sections/controls_mapping.mustache", el.closest("[data-model]").data("model")));
+    // Not putting in the real model because live binding is having a problem with how we do things.
+    $dialog.html(can.view("/sections/controls_mapping.mustache", el.closest("[data-model]").data("model").serialize()));
     $dialog.modal_form({ backdrop: false }).modal_form('show');
   }
 
@@ -212,28 +195,11 @@ can.Control("CMS.Controllers.Mapping", {
     }
     this.unmap(section, rcontrol, ccontrol)
     .then(function() {
-      var implementing_control_ids = []
-      , ctls_list = _section.linked_controls
-      , lcs = new can.Model.List();
-
-      can.each(ctls_list, function(ctl_model) {
-        if(ctl_model && ctl_model.implementing_controls && ctl_model.implementing_controls.length) {
-          implementing_control_ids = implementing_control_ids.concat(
-            can.map(ctl_model.implementing_controls, function(ictl) { return ictl.id })
-          );
-        }
-      });
-      can.each(ctls_list, function(ctl) {
-        if($.inArray(ctl.id, implementing_control_ids) > -1) {
-          lcs.push(CMS.Models.Control.findInCacheById(ctl.id));
-        } else {
-          lcs.push(CMS.Models.RegControl.findInCacheById(ctl.id));
-        }
-      });
-      _section.attr("linked_controls", lcs);
+      _section.update_linked_controls();
       var $dialog = $("#mapping_dialog");
-      $dialog.html(can.view("/sections/controls_mapping.mustache", _section));
+      $dialog.html(can.view("/sections/controls_mapping.mustache", _section.serialize()));
       that.options.section_list_controller.draw_list();
+
     });
   }
 
