@@ -45,7 +45,6 @@ class Option < ActiveRecord::Base
     "product_kind",
     "product_type",
     "program_kind",
-    "program_type",
     "reference_type",
     "request_type",
     # "system_type",
