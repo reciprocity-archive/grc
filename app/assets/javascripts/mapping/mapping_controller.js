@@ -174,7 +174,7 @@ can.Control("CMS.Controllers.Mapping", {
     ev.preventDefault();
     // Not putting in the real model because live binding is having a problem with how we do things.
     $dialog.html(can.view("/assets/sections/controls_mapping.mustache", el.closest("[data-model]").data("model").serialize()));
-    $dialog.modal_form({ backdrop: false }).modal_form('show');
+    $dialog.modal_form({ backdrop: true }).modal_form('show');
   }
 
   , "#mapping_dialog .closebtn click" : function(el) {
