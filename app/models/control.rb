@@ -163,4 +163,8 @@ class Control < ActiveRecord::Base
     p ? p.person.email : ''
   end
 
+  # alias used in import
+  def operator
+    operator_display
+  end
 end
