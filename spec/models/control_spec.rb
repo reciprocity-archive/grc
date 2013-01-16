@@ -84,6 +84,7 @@ describe Control do
   end
 
   it "gets the proper persons that own the control" do
+    pending
     parent_control = FactoryGirl.create(:control_with_child_controls, child_depth: 2)
   end
 end
