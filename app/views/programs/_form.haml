@@ -35,11 +35,5 @@
     .row-fluid
       %textarea#wysihtml5d.span12{:name => 'program[scope]', :placeholder => "One-sentence explanation of the applicability of this program, used in mail merge templates.", :rows => "3", }=f.object.scope
       =error_messages_inline(f, :scope)
-  .span6.audit
-    %label.subtitle Audit Cycle
-    .row-fluid
-      =wrapped_date_field f, :span12, :audit_start_date, :class => 'date', :label_name => 'Start', :placeholder => 'MM/DD/YYYY'
-      -#=wrapped_select f, :span4, :audit_frequency_id, Option.options_for(:audit_frequency).map { |o| [o.title, o.id] }, :selected => (f.object.respond_to?(:audit_frequency_id) ? f.object.audit_frequency_id : nil), :label_name => 'Frequency'
-      -#=wrapped_select f, :span4, :audit_duration_id, Option.options_for(:audit_duration).map { |o| [o.title, o.id] }, :selected => (f.object.respond_to?(:audit_duration_id) ? f.object.audit_duration_id : nil), :label_name => 'Duration'
 
 =render :partial => "shared/wysihtml5"
