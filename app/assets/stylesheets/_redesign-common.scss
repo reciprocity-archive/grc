@@ -20,6 +20,9 @@ h2 {
   font-weight: bold;
   color:$white;
   @include box-shadow(none);
+  &:focus {
+    @include browserBorder();
+  }
   i {
     margin-top: 1px;
   }

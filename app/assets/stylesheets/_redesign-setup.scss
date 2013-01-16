@@ -23,7 +23,7 @@
   $white: #fff;
   $black: #000;
   $gray: #999;
-  $darkGray: #666;
+  $darkGray: #7c7c7c;
 
 // mixins
 
@@ -31,6 +31,10 @@
     margin:0;
     padding:0;
     list-style:none;
+  }
+  
+  @mixin browserBorder() {
+    outline:0;
   }
   
   // temporary mixin - should be removed once redesign is complete
