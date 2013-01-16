@@ -5337,6 +5337,38 @@ module['can/observe/backup/backup.js'] = (function (can) {
 
 	return can.Observe;
 })(module["can/util/jquery/jquery.js"], module["can/observe/observe.js"], module["can/util/object/object.js"]);
+module["can/control/route/route.js"] = (function(can) {
+	// ## control/route.js  
+	// _Controller route integration._
+	
+	can.Control.processors.route = function( el, event, selector, funcName, controller ) {
+		selector = selector || "";
+		can.route( selector );
+		var batchNum,
+			check = function( ev, attr, how ) {
+				if ( can.route.attr('route') === ( selector ) && 
+					( ev.batchNum === undefined || ev.batchNum !== batchNum ) ) {
+					
+					batchNum = ev.batchNum;
+					
+					var d = can.route.attr();
+					delete d.route;
+					if ( can.isFunction( controller[ funcName ] )) {
+						controller[funcName]( d );
+					} else {
+						controller[controller[funcName]](d);
+					}
+					
+				}
+			};
+		can.route.bind( 'change', check );
+		return function() {
+			can.route.unbind( 'change', check );
+		};
+	};
+
+	return can;
+})(module["can/util/jquery/jquery.js"], module["can/control/control.js"], module["can/route/route.js"]);
 
 window.define = module._define;
 

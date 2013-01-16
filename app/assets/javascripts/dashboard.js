@@ -10,9 +10,7 @@
  *= require tmpl
  *= require can.jquery-all
  *= require mustache_helper
- *= require apps/controls
- *= require apps/mapping
- *= require apps/pbc
+ *= require_tree ./apps
  *= require_self
  *= require jquery.remotipart
  *= require d3.v2
