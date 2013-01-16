@@ -29,23 +29,50 @@ jQuery(document).ready(function($) {
 });
 
 jQuery(document).ready(function($) {
-  // Listeners for initial tooltip mouseovers
-  $('body').on('mouseover', '[data-toggle="tooltip"]', function(e) {
-    if (!$(e.currentTarget).data('tooltip')) {
-      $(e.currentTarget)
-        .tooltip()
-        .triggerHandler(e);
-    }
-  });
-});
+  // Monitor Bootstrap Tooltips to remove the tooltip if the triggering element
+  // becomes hidden or removed.
+  //
+  // * $currentTip needed because tooltips don't fire events until Bootstrap
+  //   2.3.0 and $currentTarget.tooltip('hide') doesn't seem to work when it's
+  //   not in the DOM
+  // * $currentTarget.data('tooltip-monitor') is a flag to ensure only one
+  //   monitor per element
+  function monitorTooltip($currentTarget) {
+    var monitorFn
+      , monitorPeriod = 500
+      , monitorTimeoutId = null
+      , $currentTip;
 
-jQuery(document).ready(function($) {
-  $('body').on('mouseover', '[rel=tooltip]', function(e) {
-    if (!$(e.currentTarget).data('tooltip')) {
-      $(e.currentTarget)
+    if (!$currentTarget.data('tooltip-monitor')) {
+      $currentTip = $currentTarget.data('tooltip').$tip;
+
+      monitorFn = function() {
+        if (!$currentTarget.is(':visible')) {
+          $currentTip.remove();
+          $currentTarget.data('tooltip-monitor', false);
+        } else if ($currentTip.is(':visible')) {
+          monitorTimeoutId = setTimeout(monitorFn, monitorPeriod);
+        } else {
+          $currentTarget.data('tooltip-monitor', false);
+        }
+      };
+
+      monitorTimeoutId = setTimeout(monitorFn, monitorPeriod);
+      $currentTarget.data('tooltip-monitor', true);
+    }
+  };
+
+  // Listeners for initial tooltip mouseovers
+  $('body').on('mouseover', '[data-toggle="tooltip"], [rel=tooltip]', function(e) {
+    var $currentTarget = $(e.currentTarget);
+
+    if (!$currentTarget.data('tooltip')) {
+      $currentTarget
         .tooltip()
         .triggerHandler(e);
     }
+
+    monitorTooltip($currentTarget);
   });
 });
 
