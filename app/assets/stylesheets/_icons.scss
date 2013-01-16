@@ -24,6 +24,13 @@
   }
 }
 
+.grcicon-request {
+  @include new-icons();
+  background-position:-144px -16px;
+  .active & {
+    background-position:-144px -16px;
+  }
+}
 .grcicon-admin {
   @include new-icons();
   background-position:-64px -16px;

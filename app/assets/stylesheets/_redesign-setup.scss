@@ -1,9 +1,8 @@
-// container size
-.container-fluid {
-  margin:0 auto;
-}
-
 // defaults
+  
+  $default-border-radius: 4px;
+  $topBorderRadius: 4px 4px 0 0;
+  $bottomBorderRadius: 0 0 4px 4px;
 
 // colors
 
@@ -16,10 +15,15 @@
   $demoShow: #55ab55;
   $widgetHeaderBgnd: #efefef;
   $dropPlaceholder: #ccc;
+  $subTitle: #111;
 
+  $addBtn: #5ab45a;
+  $addBtnBorder: #399a39;
+  
   $white: #fff;
   $black: #000;
   $gray: #999;
+  $darkGray: #666;
 
 // mixins
 

@@ -18,7 +18,7 @@
       font-size:11px;
       font-weight:bold;
       text-transform:uppercase;
-      text-shadow: 0 1px 0 $black;
+      text-shadow: 0 1px 1px $black;
       .dropdown-menu {
         @include reset-list();
         @include border-radius(0);
@@ -102,13 +102,9 @@
     }
   }
 }
+
 .header-content {
   height:60px;
-  h1 {
-    color:$headerTitle;
-    font-size:24px;
-    line-height:36px;
-  }
   .breadcrumbs {
     @include clearfix();
     @include reset-list();

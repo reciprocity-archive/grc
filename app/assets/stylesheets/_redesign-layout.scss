@@ -1,3 +1,9 @@
+// container size
+.container-fluid {
+  margin:0 auto;
+}
+
+// placeholder for widgets drag and drop
 .drop-placeholder {
   background:$dropPlaceholder;
   border:1px dashed $gray;
@@ -6,15 +12,16 @@
   margin-bottom:20px;
 }
 
+// widgets styles
 .widget {
   border:1px solid $headerBgnd;
-  @include border-radius(3px);
+  @include border-radius();
   margin-bottom: 20px;
   .header {
     background:$widgetHeaderBgnd;
     color:$gray;
     padding: 10px;
-    @include border-radius(3px 3px 0 0);
+    @include border-radius($topBorderRadius);
   }
   .content {
     padding: 30px 10px;
@@ -24,5 +31,14 @@
     background:$headerBgnd;
     color:$white;
     padding: 10px;
+  }
+}
+
+// content style
+.content {
+  padding-top: 20px;
+  background: $white url(/images/bgnd-content.png) repeat-x 0 0;
+  h2 {
+    margin-bottom: 20px;
   }
 }
