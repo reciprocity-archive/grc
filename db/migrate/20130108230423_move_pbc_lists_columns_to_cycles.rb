@@ -12,6 +12,11 @@ class MovePbcListsColumnsToCycles < ActiveRecord::Migration
     Cycle.reset_column_information
 
     Cycle.all.each do |cycle|
+      if cycle.program.nil?
+        cycle.destroy
+        next
+      end
+
       pbc_lists = PbcList.where(:audit_cycle_id => cycle.id).all
       pbc_list = pbc_lists.last
 
