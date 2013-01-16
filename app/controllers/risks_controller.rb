@@ -1,5 +1,5 @@
 # Handle Risks
-class RisksController < BusinessObjectsController
+class RisksController < BaseObjectsController
 
   access_control :acl do
     # FIXME: Implement real authorization

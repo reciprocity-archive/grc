@@ -327,6 +327,10 @@ module RelatedModel
     end
   end
 
+  def has_valid_relationship?(type)
+    self.class.has_valid_relationship?(type)
+  end
+
   module ClassMethods
     def related_to_source(object, relationship_type_id)
       object_type = object.class.to_s
@@ -367,6 +371,12 @@ module RelatedModel
         else
           rel
         end
+      end
+    end
+
+    def has_valid_relationship?(type)
+      valid_relationships.any? do |rel|
+        rel[:relationship_type].to_s == type.to_s
       end
     end
 

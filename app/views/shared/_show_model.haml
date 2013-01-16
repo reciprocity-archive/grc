@@ -1,8 +1,6 @@
 -model_name = controller_name.singularize.underscore
 -model_title = model_name.titleize
--#model = model_name.camelcase.constantize
 -instance = instance_variable_get("@" + model_name)
--#relationships = model.valid_relationships
 
 -@title = "GRC #{model_title}: #{instance.title}"
 
@@ -38,8 +36,7 @@
       =render :partial => "info",
               :layout => 'layouts/widget_box',
               :locals => { model_name.to_sym => instance }
-      =render :partial => 'shared/related',
-              :layout => 'layouts/widget_box',
-              :locals => { :instance => instance } #model_namei.to_sym => instance,
-              #  :models => model.related_models,
-              #  :instance => instance}
+      -if instance.class.respond_to?(:valid_relationships)
+        =render :partial => 'shared/related',
+                :layout => 'layouts/widget_box',
+                :locals => { :instance => instance }

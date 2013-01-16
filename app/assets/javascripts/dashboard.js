@@ -57,7 +57,7 @@ jQuery(function($) {
   // Turn the arrow when tree node content is shown
   $('body').on('click', '[data-toggle="collapse"]', function(e) {
     var $this = $(this)
-      , $expander_container = $this.closest(':has(.expander)')
+      , $expander_container = $this.closest(':has(.expander, .enddot)')
       , $expander = $expander_container.find('.expander').eq(0)
       , $target = $($this.data('target'))
       ;

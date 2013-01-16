@@ -5,6 +5,7 @@ class Location < ActiveRecord::Base
   include AuthorizedModel
   include RelatedModel
   include SanitizableAttributes
+  include BusinessObjectModel
 
   attr_accessible :title, :slug, :description, :url, :version, :start_date, :stop_date
 
@@ -28,6 +29,7 @@ class Location < ActiveRecord::Base
     { :from => OrgGroup, :via => :org_group_has_province_over_location },
     { :from => OrgGroup, :via => :org_group_is_dependent_on_location },
     { :from => Program,  :via => :program_is_relevant_to_location },
+    { :to   => System,   :via => :location_has_process },
     { :to   => RiskyAttribute, :via => :location_has_risky_attribute },
   ]
 
