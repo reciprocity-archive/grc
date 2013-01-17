@@ -10,7 +10,7 @@
     %li=link_to instance.audit_cycle.program.title, flow_program_path(instance.audit_cycle.program_id)
     %li=link_to 'AUDITS', flow_program_path(instance.audit_cycle.program_id)
     %li=link_to instance.audit_cycle.title, flow_cycle_path(instance.audit_cycle)
-    %li=link_to 'PBC List'
+    %li=link_to 'PBC List', flow_pbc_list_path(instance)
     %li.last Import
     
   .location#pageTitle Import PBC list

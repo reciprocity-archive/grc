@@ -2,7 +2,9 @@
 
 -content_for :header do
   %ol#breadcrumb
-    %li Import
+    %li=link_to 'PROGRAMS', programs_dash_path
+    %li=link_to @program.title, flow_program_path(@program)
+    %li.last Import
   .location#pageTitle Import Program or Policy
 
 .row-static
