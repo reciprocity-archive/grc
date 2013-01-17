@@ -6,7 +6,15 @@ class Risk < ActiveRecord::Base
   include RelatedModel
   include SanitizableAttributes
 
-  attr_accessible :title, :slug, :description, :url, :version, :type, :start_date, :stop_date
+  RATINGS = {
+    1 => "Minimal",
+    2 => "Moderate",
+    3 => "Significant",
+    4 => "Major",
+    5 => "Extreme"
+  }
+
+  attr_accessible :title, :slug, :description, :url, :version, :type, :start_date, :stop_date, :likelihood, :likelihood_rating, :threat_vector, :trigger, :preconditions, :financial_impact, :financial_impact_rating, :reputational_impact, :reputational_impact_rating, :operational_impact, :operational_impact_rating
 
   has_many :object_people, :as => :personable, :dependent => :destroy
   has_many :people, :through => :object_people
