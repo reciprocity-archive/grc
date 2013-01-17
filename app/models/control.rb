@@ -9,7 +9,7 @@ class Control < ActiveRecord::Base
   include AuthorizedModel
   include RelatedModel
   include SanitizableAttributes
-  
+
   CATEGORY_TYPE_ID = 100
   CATEGORY_ASSERTION_TYPE_ID = 102
 
@@ -66,15 +66,28 @@ class Control < ActiveRecord::Base
 
   sanitize_attributes :description, :documentation_description, :notes
 
-  validates :title, :program, :program_id,
+  validates :program, :program_id,
     :presence => { :message => "needs a value" }
 
   validate :slug do
     validate_slug_parent
   end
-  
+
+  validate :require_title_or_description
+
+  def require_title_or_description
+    if title.blank? && description.blank?
+      errors.add(:title, "either title or description is required")
+      errors.add(:description, "either title or description is required")
+    end
+  end
+
   def display_name
     "#{slug} - #{title}"
+  end
+
+  def title
+    return read_attribute(:title).presence || description.truncate(60)
   end
 
   def custom_edges
