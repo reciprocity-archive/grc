@@ -1,8 +1,18 @@
+-model_name = controller_name.singularize.underscore
+-model_title = model_name.titleize
+-instance = instance_variable_get("@" + model_name)
+
 -content_for :page_help, 'pbc_list_import'
 
 -content_for :header do
   %ol#breadcrumb
-    %li Import
+    %li=link_to 'PROGRAMS', programs_dash_path
+    %li=link_to instance.audit_cycle.program.title, flow_program_path(instance.audit_cycle.program_id)
+    %li=link_to 'AUDITS', flow_program_path(instance.audit_cycle.program_id)
+    %li=link_to instance.audit_cycle.title, flow_cycle_path(instance.audit_cycle)
+    %li=link_to 'PBC List'
+    %li.last Import
+    
   .location#pageTitle Import PBC list
 
 .row-static
