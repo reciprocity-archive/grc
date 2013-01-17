@@ -76,7 +76,7 @@
             .btn-toolbar.fltrt.userInfo-nav
               #userInfo
                 Welcome
-                %strong=current_user.name || current_user.email
+                %strong=current_user.person.name.presence || current_user.email
                 %a{:href => logout_path} Logout
               =yield :subheader_extras
 
