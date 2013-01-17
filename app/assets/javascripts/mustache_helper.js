@@ -182,5 +182,14 @@ Mustache.registerHelper("if_null", function(val1, options) {
 
 });
 
+Mustache.registerHelper("firstof", function() {
+  var args = can.makeArray(arguments).slice(0, arguments.length - 1);
+  for(var i = 0; i < args.length; i++) {
+    var v = args[i];
+    if(v != null) return v;
+  }
+  return "";
+});
+
 
 })(this, jQuery, can);

@@ -121,7 +121,7 @@
                             {{#if_null population_document.link_url}}
                             <span>{{population_document.title}}</span>
                             {{else}}
-                            <a href="{{population_document.link_url}}" target="_blank">{{population_document.title}}{{^population_document.title}}{{population_document.link_url}}{{/population_document.title}}</a>
+                            <a href="{{population_document.link_url}}" target="_blank">{{firstof population_document.title population_document.link_url}}</a>
                             {{/if_null}}
                           {{/if_nuill}}
                         &nbsp;
@@ -168,7 +168,7 @@
                             {{#if_null sample_worksheet_document.link_url}}
                             <span>{{sample_worksheet_document.title}}</span>
                             {{else}}
-                            <a href="{{sample_worksheet_document.link_url}}" target="_blank">{{sample_worksheet_document.title}}{{^sample_worksheet_document.title}}{{sample_worksheet_document.link_url}}{{/sample_worksheet_document.title}}</a>
+                            <a href="{{sample_worksheet_document.link_url}}" target="_blank">{{firstof sample_worksheet_document.title sample_worksheet_document.link_url}}</a>
                             {{/if_null}}
                           {{/if_nuill}}
                           &nbsp;
@@ -211,7 +211,7 @@
                             {{#if_null sample_evidence_document.link_url}}
                             <span>{{sample_evidence_document.title}}</span>
                             {{else}}
-                            <a href="{{sample_evidence_document.link_url}}" target="_blank">{{sample_evidence_document.title}}{{^sample_evidence_document.title}}{{sample_evidence_document.link_url}}{{/sample_evidence_document.title}}</a>
+                            <a href="{{sample_evidence_document.link_url}}" target="_blank">{{firstof sample_evidence_document.title sample_evidence_document.link_url}}</a>
                             {{/if_null}}
                           {{/if_nuill}}
                         &nbsp;
