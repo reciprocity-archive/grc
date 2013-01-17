@@ -269,7 +269,6 @@ li.add-new-item {
   ul {
     color:#666;
     margin-top:6px;
-    margin-bottom:10px;
     list-style-type:disc;
     list-style-position:inside;
     li {
@@ -302,6 +301,8 @@ li.add-new-item {
       margin-left:20px;
       margin-bottom:10px;
     }
-
+  }
+  blockquote {
+    border:none;
   }
 } 
