@@ -81,11 +81,11 @@
 
 .container-fluid
   .row-fluid
-    .span4
+    .span6
       =render :partial => 'programs/list',
               :layout => 'layouts/widget_box',
               :locals => { :programs => @programs }
-    .span8
+    .span6
       =render :partial => 'quick/find',
             :layout => 'layouts/widget_box'
       -if has_feature? :BETA
