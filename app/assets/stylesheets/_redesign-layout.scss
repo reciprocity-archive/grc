@@ -43,6 +43,9 @@
   .content {
     padding:5px 10px;
     background:$white;
+    max-height: 300px;
+    overflow: hidden;
+    overflow-y: auto;
   }
   .footer {
     background:$widgetFooteBgnd;

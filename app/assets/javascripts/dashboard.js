@@ -119,7 +119,7 @@ jQuery(function($) {
   // Clear the .widgetsearch box when tab is changed
   $('body').on('show', '.tabbable ul.nav-tabs > li > a', function(e) {
     if (e.relatedTarget) {
-      $input = $(this).closest('.WidgetBox').find('.widgetsearch');
+      $input = $(this).closest('.widget').find('.widgetsearch');
       if ($input.val()) {
         $input.val("");
         $(e.relatedTarget).trigger('show', 'reset');
@@ -178,10 +178,10 @@ jQuery(function($) {
       });
     }
   });
-  $('body').on('keypress', '.WidgetBox nav > .widgetsearch', function (e) {
+  $('body').on('keypress', '.widget .widgetsearch', function (e) {
     if (e.which == 13) {
       var $this = $(this)
-        , $tab = $this.closest('.WidgetBox').find('ul.nav-tabs > li.active > a')
+        , $tab = $this.closest('.widget').find('ul.nav-tabs > li.active > a')
         , href = with_params($tab.data('tab-href'), $.param({ s: $this.val() }));
       $tab.trigger('show', href);
       $tab.trigger('kill-all-popovers');
