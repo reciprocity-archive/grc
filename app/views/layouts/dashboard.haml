@@ -100,7 +100,7 @@
             .span6
               =yield :header
             .span6
-              &nbsp;
+              =yield :subheader_extras
               
 
     -#.navbar
@@ -126,8 +126,6 @@
                   %a.btn.btn-success{ :href => "#{path}BETA=1" } Show Demo
               
     =yield :subheader_plus
-                
-    =yield :subheader_extras
 
     %section.content
       .flash!=[:error, :warning, :notice].map { |type| content_tag(:div, flash[type], :class => type) if flash[type] }.join

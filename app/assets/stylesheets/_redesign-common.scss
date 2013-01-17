@@ -43,4 +43,16 @@ h2 {
       color:$white;
     }
   }
+  .open & {
+    &.btn-add {
+      color:$white;
+      background: $addBtn;
+      @include background-image(linear-gradient(center top, lighten($addBtn, 5%) 5%, darken($addBtn, 5%) 100% ));
+      text-shadow: 1px 1px 1px #296029;
+      border: 1px solid $addBtnBorder;
+      &:hover {
+        color:$white;
+      }
+    }
+  }
 }

@@ -1,9 +1,10 @@
 .footer {
-  background: $gray;
-  height: 30px;
+  background: $widgetHeaderBgnd;
+  height: 40px;
+  text-align: center;
   p {
     margin: 0;
-    line-height: 30px;
+    line-height: 40px;
     color:$headerTitle;
     font-size: 12px;
   }

@@ -17,8 +17,8 @@
     Dashboard
 
 -content_for :subheader_extras do
-  .btn-group.closed.fltrt
-    %a.btn.btn-blue.dropdown-toggle{ :'data-toggle' => 'dropdown' }
+  .btn-group.pull-right
+    %a.btn.btn-add.dropdown-toggle{ :'data-toggle' => 'dropdown' }
       New Business Object
       %span.caret
     %ul.dropdown-menu
@@ -79,20 +79,19 @@
           %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
             Vulnerability
 
-.row-static
-  .singleColumn
-    .fullHeight
+.container-fluid
+  .row-fluid
+    .span4
       =render :partial => 'programs/list',
               :layout => 'layouts/widget_box',
               :locals => { :programs => @programs }
-  .doubleColumn
-    .fullHeight
+    .span8
       =render :partial => 'quick/find',
             :layout => 'layouts/widget_box'
       -if has_feature? :BETA
         =render :partial => 'design/templates/riskWidgetGap'
         =render :partial => 'design/templates/riskWidgetRisk'
-  .singleColumn
+    .span4
     -if has_feature? :BETA
       .row-static
         .singleColumn
