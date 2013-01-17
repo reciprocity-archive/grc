@@ -1,3 +1,8 @@
+//= require can.jquery-all
+
+(function(can, $){
+
+
 can.Control("CMS.Controllers.ProgramRoutes", {
   //Static
 
@@ -26,3 +31,5 @@ can.Control("CMS.Controllers.ProgramRoutes", {
     can.route.attr(d);
   }
 });
+
+})(window.can, window.can.$);
