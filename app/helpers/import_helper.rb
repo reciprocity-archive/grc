@@ -41,7 +41,8 @@ module ImportHelper
   def read_import(import, import_map, object_name, rows)
     headers = read_import_headers(import, import_map, object_name, rows)
 
-    import[object_name.pluralize.to_sym] = rows.map do |values|
+    non_empty_rows = rows.find_all { |r| (r.reject &:blank?).any? }
+    import[object_name.pluralize.to_sym] = non_empty_rows.map do |values|
       row = {}
       headers.zip(values).each do |k, v|
         if row.has_key?(k)

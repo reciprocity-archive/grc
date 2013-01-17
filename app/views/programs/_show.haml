@@ -35,10 +35,9 @@
         %i.grcicon-mapping-white
         Reg Mapper
     .span4
-      -if !program.company?
-        %a.span12.btn.btn-warning{ :href => new_flow_cycle_path(:'cycle[program_id]' => program.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect' }
-          %i.grcicon-play-white
-          Start Audit
+      %a.span12.btn.btn-warning{ :href => new_flow_cycle_path(:'cycle[program_id]' => program.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect' }
+        %i.grcicon-play-white
+        Start Audit
 
 
 .information

@@ -1,5 +1,5 @@
 # Handle RiskyAttributes
-class RiskyAttributesController < BusinessObjectsController
+class RiskyAttributesController < BaseObjectsController
 
   access_control :acl do
     # FIXME: Implement real authorization

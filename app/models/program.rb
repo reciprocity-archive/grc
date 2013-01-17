@@ -16,7 +16,6 @@ class Program < ActiveRecord::Base
 
   has_many :cycles, :dependent => :destroy
 
-  #belongs_to :type, :class_name => 'Option', :conditions => { :role => 'program_type' }
   belongs_to :kind, :class_name => 'Option', :conditions => { :role => 'program_kind' }
 
   belongs_to :audit_frequency, :class_name => 'Option', :conditions => { :role => 'audit_frequency' }

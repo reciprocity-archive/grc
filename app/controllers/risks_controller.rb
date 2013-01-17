@@ -1,5 +1,5 @@
 # Handle Risks
-class RisksController < BusinessObjectsController
+class RisksController < BaseObjectsController
 
   access_control :acl do
     # FIXME: Implement real authorization
@@ -25,6 +25,26 @@ class RisksController < BusinessObjectsController
   end
 
   layout 'dashboard'
+
+  def index
+    @risks = Risk
+    if params[:s].present?
+      @risks = @risks.db_search(params[:s])
+    end
+
+    @risks = @risks.all
+
+    respond_to do |format|
+      format.html do
+        if params[:quick]
+          render :partial => 'quick'
+        end
+      end
+      format.json do
+        render :json => @risks
+      end
+    end
+  end
 
   private
 

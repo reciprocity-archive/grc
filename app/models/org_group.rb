@@ -5,6 +5,7 @@ class OrgGroup < ActiveRecord::Base
   include AuthorizedModel
   include RelatedModel
   include SanitizableAttributes
+  include BusinessObjectModel
 
   attr_accessible :title, :slug, :description, :url, :version, :start_date, :stop_date
 
@@ -28,6 +29,7 @@ class OrgGroup < ActiveRecord::Base
     { :both => OrgGroup, :via => :org_group_is_affiliated_with_org_group },
     { :to   => Location, :via => :org_group_is_dependent_on_location },
     { :from => Program,  :via => :program_is_relevant_to_org_group },
+    { :to   => System,   :via => :org_group_has_process },
     { :to   => RiskyAttribute, :via => :org_group_has_risky_attribute },
   ]
 

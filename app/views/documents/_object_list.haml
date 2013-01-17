@@ -20,12 +20,12 @@
       %a.reference{:href => '<%= document.link_url %>', :target => "_blank"}
         %span.controls-group <%= document.document_type || '&nbsp;' %>
         %br
-        %span.controls-subgroup{ :title => '<%= document.link_url %>' } <%= document.title || '&nbsp;' %>
+        %span.controls-subgroup{ :title => '<%= document.link_url %>' } <%= document.title || document.link_url || '&nbsp;' %>
       <% } else { %>
       %span.reference
         %span.controls-group <%= document.document_type || '&nbsp;' %>
         %br
-        %span.controls-subgroup{ :title => '<%= document.link_url %>' } <%= document.title || '&nbsp;' %>
+        %span.controls-subgroup{ :title => '<%= document.link_url %>' } <%= document.title || document.link_url || '&nbsp;' %>
       <% } %>
 
   %ul#referenceList{ :'data-template-id' => 'reference_list_item' }
@@ -36,10 +36,10 @@
           %a.reference{:href => item.link_url, :target => "_blank"}
             %span.controls-group=item.document_type || '&nbsp;'.html_safe
             %br
-            %span.controls-subgroup{:title => item.link_url}=item.title || item.document_type || '&nbsp;'.html_safe
+            %span.controls-subgroup{:title => item.link_url}=item.title.presence || item.link_url || '&nbsp;'.html_safe
         -else
           %span.reference
             %span.controls-group=item.document_type || '&nbsp;'.html_safe
             %br
-            %span.controls-subgroup{:title => item.link_url}=item.title || item.document_type || '&nbsp;'.html_safe
+            %span.controls-subgroup{:title => item.link_url}=item.title.presence || item.link_url || '&nbsp;'.html_safe
 

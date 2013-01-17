@@ -167,6 +167,11 @@
           window.location.assign(xhr.getResponseHeader('location'));
         } else {
           $target.modal_form('hide');
+          var dirty = $($trigger.data("dirty").split(",")).map(function(i, val) {
+            return '[href="' + val.trim() + '"]';
+          }).get().join(",");
+          $(dirty).data('tab-loaded', false).filter(".active [href]").trigger("show");
+          $trigger.trigger("routeparam", $trigger.data("route"));
           $trigger.trigger('modal:success', data);
         }
       });

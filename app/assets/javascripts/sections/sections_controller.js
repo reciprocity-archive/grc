@@ -7,7 +7,7 @@
     CMS.Controllers.Controls("CMS.Controllers.Sections", {
 	    //Static
 	    defaults: {
-		    list : "/sections/slug_tree.mustache"
+		    list : "/assets/sections/slug_tree.mustache"
 		    , model : CMS.Models.SectionSlug
 		    , id : ""
 	    }

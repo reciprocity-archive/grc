@@ -97,6 +97,18 @@
         %a.widgetbtn.pull-right{:href => edit_flow_market_path('<%=market.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
           %i.grcicon-edit-grey
 
+%script#relationship_risky_attribute_option{ :type => 'text/html', :'data-prefix' => 'risky_attribute' }
+  %li{ :'data-id' => '<%= risky_attribute.id %>', :'data-title' => '<%= risky_attribute.title %>', :'data-slug' => '<%= risky_attribute.slug %>' }
+    .row-fluid
+      .span8
+        %span.company <%= risky_attribute.slug %>
+        %span.name <%= risky_attribute.title %>
+      .span4.actions
+        %a.widgetbtn.pull-right.add-me{:href => "#", :'data-toggle' => 'selector-list-select'}
+          %i.grcicon-chevron-right
+        %a.widgetbtn.pull-right{:href => edit_flow_risky_attribute_path('<%=risky_attribute.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
+          %i.grcicon-edit-grey
+
 
 .row-fluid
   .span6

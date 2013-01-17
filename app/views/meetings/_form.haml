@@ -8,12 +8,9 @@
   -content_for :modal_delete_path, delete_flow_meeting_path(f.object)
 
 .row-fluid
-  .span12
-    %h2
+  .span6
+    %h4
       Link a calendar event to this Response
-
-.row-fluid
-  .span4
     %ol
       %li 1. Select your start and end times
       %li 2. Create your calendar event and click SAVE
@@ -22,22 +19,21 @@
       %li 5. Copy embedded URL ('href' attribute)
       %li 6. Return to gGRC and paste in link below
 
-
     %form
       %label From
       .row-fluid
-        .span6
+        .span4
           %input.span12{ :type => "text", :name => "fromdate", :value => DateTime.now.strftime("%m/%d/%Y") }
-        .span6
+        .span4
           %select.span12{ :name => "fromtime" }
             =(0..86399).step(1800) do |x|
               %option{ :value => Time.at(x).utc.strftime("%H%M%S"), :selected => Time.now.beginning_of_hour.+(3600) == Time.now.beginning_of_day.+(x) } #{ Time.at(x).utc.strftime("%I:%M %p")}
             end
       %label To
       .row-fluid
-        .span6
+        .span4
           %input.span12{ :type => "text", :name => "todate", :value =>  DateTime.now.strftime("%m/%d/%Y") }
-        .span6
+        .span4
           %select.span12{ :name => "totime" }
             =(0..86399).step(1800) do |x|
               %option{ :value => Time.at(x).utc.strftime("%H%M%S"), :selected => Time.now.beginning_of_hour.+(7200) == Time.now.beginning_of_day.+(x) } #{ Time.at(x).utc.strftime("%I:%M %p")}
@@ -52,9 +48,8 @@
     %br
 
     =f.hidden_field :response_id
-    =wrapped_text_field f, :span12, :calendar_url, :placeholder => 'URL for calendar event', :label_name => 'Paste in link here'
-  .span1
+    =wrapped_text_field f, :well, :calendar_url, :placeholder => 'URL for calendar event', :label_name => 'Paste in link here'
   .span6
-    %img{ :src => '/images/calendar_link_example.jpg', :style => 'margin-top:2em'}
+    %img{ :src => '/images/calendar_link_example.jpg', :style => 'margin-top:0px'}
 
 %br

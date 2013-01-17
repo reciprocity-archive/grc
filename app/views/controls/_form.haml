@@ -24,8 +24,8 @@
   =wrapped_select f, :span2, :program_id, programs.map { |p| [p.slug, p.id] }, :selected => f.object.program_id, :include_blank => true
   .span6
     .row-fluid
-      =wrapped_text_field f, :span3, :slug, :label_name => 'Code (autofill)', :placeholder => 'CONTROL-XXXX'
-      =wrapped_text_field f, :span1, :version, :placeholder => '1.1.1'
+      =wrapped_text_field f, :span4, :slug, :label_name => 'Code (autofill)', :placeholder => 'CONTROL-XXXX'
+      -#=wrapped_text_field f, :span1, :version, :placeholder => '1.1.1'
       =wrapped_date_field f, :span4, :start_date, :class => 'date', :label_name => 'Effective Date', :placeholder => 'MM/DD/YYYY'
       =wrapped_date_field f, :span4, :stop_date, :class => 'date', :label_name => 'Stop Date', :placeholder => 'MM/DD/YYYY'
 

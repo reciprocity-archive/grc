@@ -3,11 +3,15 @@
     <a class="btn btn-nano pull-right remove_document" href="javascript://">
       <i class="grcicon-x-grey"></i>
     </a>
+    <span>
       {{#if document.link_url}}
-        <a href="{{document.link_url}}" target="_blank">{{document.title}}{{^document.title}}{{document.link_url}}{{/document.title}}</a>
+      <span>
+        <a href="{{document.link_url}}" target="_blank">{{firstof document.title document.link_url}}</a>
+      </span>
       {{else}}
         <span>{{document.title}}</span>
       {{/if}}
+      </span>
       <select class="edit-document-role">
         <option value="general" {{#if_equals role 'general'}}selected="true"{{/if_equals}}>General Doc</option>
       </select>

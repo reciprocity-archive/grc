@@ -10,6 +10,18 @@ module DefaultRelationshipTypes
     #
     # When adding new relationship types, be sure to either add them in a migration.
     {
+      :relationship_type => 'location_has_process',
+      :description => "Locations have processes.",
+      :forward_phrase =>"has process",
+      :backward_phrase => "is a process of"
+    },
+    {
+      :relationship_type => 'location_has_risky_attribute',
+      :description => "Locations have risky attributes.",
+      :forward_phrase => "with",
+      :backward_phrase =>"of"
+    },
+    {
       :relationship_type => 'location_is_dependent_on_location',
       :description => "Locations can be dependent on each other.",
       :forward_phrase =>"dependent on",
@@ -22,10 +34,28 @@ module DefaultRelationshipTypes
       :backward_phrase => "contained by"
     },
     {
+      :relationship_type => 'market_has_process',
+      :description => "Markets have processes.",
+      :forward_phrase =>"has process",
+      :backward_phrase => "is a process of"
+    },
+    {
+      :relationship_type => 'market_has_risky_attribute',
+      :description => "Markets have risky attributes.",
+      :forward_phrase => "with",
+      :backward_phrase =>"of"
+    },
+    {
       :relationship_type => 'market_is_dependent_on_location',
       :description => "Markets can be dependent on a location.",
       :forward_phrase =>"dependent on",
       :backward_phrase => "necessary for"
+    },
+    {
+      :relationship_type => 'org_group_has_process',
+      :description => "Org groups have processes.",
+      :forward_phrase =>"has process",
+      :backward_phrase => "is a process of"
     },
     {
       :relationship_type => 'org_group_has_province_over_location',
@@ -46,6 +76,12 @@ module DefaultRelationshipTypes
       :backward_phrase => "overseen by"
     },
     {
+      :relationship_type => 'org_group_has_risky_attribute',
+      :description => "Org groups have risky attributes.",
+      :forward_phrase => "with",
+      :backward_phrase =>"of"
+    },
+    {
       :relationship_type => 'org_group_is_affiliated_with_org_group',
       :description => "Org groups can be affiliated with each other.",
       :forward_phrase =>"affiliated with",
@@ -63,6 +99,12 @@ module DefaultRelationshipTypes
       :description => "Products have processes.",
       :forward_phrase =>"has process",
       :backward_phrase => "is a process of"
+    },
+    {
+      :relationship_type => 'product_has_risky_attribute',
+      :description => "Products have risky attributes.",
+      :forward_phrase => "with",
+      :backward_phrase =>"of"
     },
     {
       :relationship_type => 'product_is_affiliated_with_product',
@@ -106,30 +148,6 @@ module DefaultRelationshipTypes
       :description => "Programs that are relevant to this product.",
       :forward_phrase =>"relevant to",
       :backward_phrase => "within scope of"
-    },
-    {
-      :relationship_type => 'org_group_has_risky_attribute',
-      :description => "Org groups have risky attributes.",
-      :forward_phrase => "with",
-      :backward_phrase =>"of"
-    },
-    {
-      :relationship_type => 'product_has_risky_attribute',
-      :description => "Products have risky attributes.",
-      :forward_phrase => "with",
-      :backward_phrase =>"of"
-    },
-    {
-      :relationship_type => 'location_has_risky_attribute',
-      :description => "Locations have risky attributes.",
-      :forward_phrase => "with",
-      :backward_phrase =>"of"
-    },
-    {
-      :relationship_type => 'market_has_risky_attribute',
-      :description => "Markets have risky attributes.",
-      :forward_phrase => "with",
-      :backward_phrase =>"of"
     },
   ]
 

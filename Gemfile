@@ -5,7 +5,7 @@ if File.exist? 'Gemfile.local'
   instance_eval(Bundler.read_file('Gemfile.local'), 'Gemfile.local', 1)
 end
 
-RAILS_VERSION = '= 3.2.8'
+RAILS_VERSION = '= 3.2.11'
 
 # Fulltext search
 gem 'thinking-sphinx', '~> 2.0.14'
@@ -30,11 +30,11 @@ platforms :ruby do
   end
 
   group :staging do
-    gem "mysql"
+    gem "mysql2"
   end
 
   group :production do
-    gem "mysql"
+    gem "mysql2"
   end
 end
 

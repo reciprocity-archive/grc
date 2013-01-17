@@ -13,4 +13,4 @@
     Edit Controls
 
 %ul.slotlist
-  =render :partial => 'sub_system_branch', :locals => { :systems => [system] }
+  =render :partial => 'system_tree', :locals => { :system => system, :is_root => true, :is_editable => true }

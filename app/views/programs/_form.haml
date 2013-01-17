@@ -12,7 +12,8 @@
   .span6
     .row-fluid
       =wrapped_text_field f, :span6, :slug, :label_name => 'Code (autofill)', :placeholder => 'PROGRAM-XXXX'
-      =wrapped_text_field f, :span6, :version, :placeholder => '1.1.1'
+      -#=wrapped_text_field f, :span6, :version, :placeholder => '1.1.1'
+      =wrapped_select f, :span6, :kind_id, Option.options_for(:program_kind).map { |o| [o.title, o.id] }, :selected => (f.object.respond_to?(:kind_id) ? f.object.kind_id : nil)
 
 .row-fluid
   =wrapped_text_area f, :span6, :description, :class => 'double wysihtml5', :placeholder => 'Enter description here'
@@ -20,9 +21,6 @@
     .row-fluid
       =wrapped_date_field f, :span6, :start_date, :class => 'date', :label_name => 'Effective Date', :placeholder => 'MM/DD/YYYY'
       =wrapped_date_field f, :span6, :stop_date, :class => 'date', :label_name => 'Stop Date', :placeholder => 'MM/DD/YYYY'
-    .row-fluid
-      -#=wrapped_select f, :span6, :type, [['Regulation', 'regulation'], ['Company', 'company']], :selected => (f.object.company? ? 'company' : 'regulation')
-      =wrapped_select f, :span6, :kind_id, Option.options_for(:program_kind).map { |o| [o.title, o.id] }, :selected => (f.object.respond_to?(:kind_id) ? f.object.kind_id : nil)
 
 .row-fluid
   =wrapped_text_field f, :span3, :organization, :placeholder => 'Organization for this program'
@@ -37,11 +35,5 @@
     .row-fluid
       %textarea#wysihtml5d.span12{:name => 'program[scope]', :placeholder => "One-sentence explanation of the applicability of this program, used in mail merge templates.", :rows => "3", }=f.object.scope
       =error_messages_inline(f, :scope)
-  .span6.audit
-    %label.subtitle Audit Cycle
-    .row-fluid
-      =wrapped_date_field f, :span12, :audit_start_date, :class => 'date', :label_name => 'Start', :placeholder => 'MM/DD/YYYY'
-      -#=wrapped_select f, :span4, :audit_frequency_id, Option.options_for(:audit_frequency).map { |o| [o.title, o.id] }, :selected => (f.object.respond_to?(:audit_frequency_id) ? f.object.audit_frequency_id : nil), :label_name => 'Frequency'
-      -#=wrapped_select f, :span4, :audit_duration_id, Option.options_for(:audit_duration).map { |o| [o.title, o.id] }, :selected => (f.object.respond_to?(:audit_duration_id) ? f.object.audit_duration_id : nil), :label_name => 'Duration'
 
 =render :partial => "shared/wysihtml5"

@@ -5,6 +5,7 @@ class Product < ActiveRecord::Base
   include AuthorizedModel
   include RelatedModel
   include SanitizableAttributes
+  include BusinessObjectModel
 
   attr_accessible :title, :slug, :description, :url, :version, :type, :start_date, :stop_date
 
@@ -43,19 +44,4 @@ class Product < ActiveRecord::Base
     slug
   end
 
-  def systems
-    Relationship.where(
-      :source_type => 'Product', :source_id => id,
-      :destination_type => 'System',
-      :relationship_type_id => 'product_has_process'
-    ).includes(:destination).map(&:destination)
-  end
-
-  def dependent_products
-    Relationship.where(
-      :source_type => 'Product', :source_id => id,
-      :destination_type => 'Product',
-      :relationship_type_id => 'product_is_dependent_on_product'
-    ).includes(:destination).map(&:destination)
-  end
 end
