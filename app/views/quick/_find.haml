@@ -12,11 +12,13 @@
     %li=link_to 'Biz Processes', '#biz_processes', :data => { :'tab-href' => quick_biz_processes_path, :toggle => 'tab' }
     %li=link_to 'Systems', '#systems', :data => { :'tab-href' => quick_systems_path, :toggle => 'tab' }
     %li=link_to 'Products', '#products', :data => { :'tab-href' => quick_products_path, :toggle => 'tab' }
+    %li=link_to 'Risks', '#risks', :data => { :'tab-href' => flow_risks_path(:quick => true), :toggle => 'tab' }
   .tab-content
     #controls.tab-pane
     #biz_processes.tab-pane
     #systems.tab-pane
     #products.tab-pane
+    #risks.tab-pane
 
 -if has_feature? :BETA
   .row-fluid

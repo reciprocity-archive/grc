@@ -1,0 +1,14 @@
+-if @risks.empty?
+  .no-results
+    No results found
+-else
+  %ul.nav.nav-tabs.nav-stacked
+    -@risks.each do |risk|
+      %li.group
+        %a{ :href => flow_risk_path(risk), :'data-popover-href' => tooltip_flow_risk_path(risk), :'data-popover-trigger' => 'sticky-hover' }
+          %h3=risk.slug
+          %p.oneline
+            %strong=risk.title
+            &nbsp;
+            =raw risk.description
+
