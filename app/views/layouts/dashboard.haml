@@ -133,7 +133,18 @@
       .flash!=[:error, :warning, :notice].map { |type| content_tag(:div, flash[type], :class => type) if flash[type] }.join
       =yield
 
-    .gcms-footer
+    %section.footer
+      .container-fluid
+        .row-fluid
+          %span12
+            %p
+              =CMS_CONFIG['COMPANY']
+              Confidential.
+              Copyright &copy;
+              =Time.now.year
+              =CMS_CONFIG['COMPANY']
+            
+    -#.gcms-footer
       .block
         %p
           =CMS_CONFIG['COMPANY']
