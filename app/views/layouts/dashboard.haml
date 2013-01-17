@@ -35,7 +35,7 @@
                 GRC
               -else
                 Google GRC
-          -#-if has_feature? :BETA
+          -if has_feature? :BETA
             -if controller.controller_name == 'programs_dash'
               .headercenter.fltnone
                 =render :partial => 'design/templates/grcmenu'
