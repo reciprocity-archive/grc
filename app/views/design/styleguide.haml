@@ -1,22 +1,75 @@
 -@title = "GRC: Style Guide"
  
-%link(rel="stylesheet" type="text/css" href="styleguide.css")
+//%link(rel="stylesheet" type="text/css" href="styleguide.css")
 
 -content_for :header do
   %ul.breadcrumbs
     %li
-      %a{:href => "#"}
-        Visual & Syntax Style Guide
+      %a{:href => "/design/styleguide"}
+        Style Guide
   %h1
-    Design - Dev Only
+    Visual & Syntax Style Guide
 
 -content_for :page_help, 'Nope.'
 
--content_for :subheader_extras do
-  %h1#pageType.pull-right.highlighted Styleguide
-
 -content_for :subheader_plus do
   %a.navbarplus.fltrt{ :href => "#comingsoonModal", "data-toggle" => "modal" }
+
+
+
+
+
+
+
+.container-fluid
+  .row-fluid
+    %h2{:class =>'pull-left'}
+      Requests (4)
+    %a{:href => '#', :class =>'btn btn-add'}
+      %i.grcicon-request
+      Request
+.container-fluid
+  .row-fluid
+    .span2.widget-area
+      %section.widget
+        %header.header
+          Header
+        %section.content
+          Content
+        %footer.footer
+          Footer
+    
+    .span6.widget-area
+      %section.widget
+        %header.header
+          Header
+        %section.content
+          Content
+        %footer.footer
+          Footer
+      %section.widget
+        %header.header
+          Header
+        %section.content
+          Content
+        %footer.footer
+          Footer
+      %section.widget
+        %header.header
+          Header
+        %section.content
+          Content
+        %footer.footer
+          Footer
+    
+    .span4.widget-area
+      %section.widget
+        %header.header
+          Header
+        %section.content
+          Content
+        %footer.footer
+          Footer
   
 .row-fluid
   .span3.bs-docs-sidebar

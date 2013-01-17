@@ -33,7 +33,7 @@
     list-style:none;
   }
   
-  @mixin browserBorder() {
+  @mixin outline-fix() {
     outline:0;
   }
   

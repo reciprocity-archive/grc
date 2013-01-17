@@ -102,56 +102,6 @@
             .span6
               &nbsp;
               
-    %section.content
-      .container-fluid
-        .row-fluid
-          %h2{:class =>'pull-left'}
-            Requests (4)
-          %a{:href => '#', :class =>'btn btn-add'}
-            %i.grcicon-request
-            Request
-      .container-fluid
-        .row-fluid
-          .span2.widget-area
-            %section.widget
-              %header.header
-                Header
-              %section.content
-                Content
-              %footer.footer
-                Footer
-          
-          .span6.widget-area
-            %section.widget
-              %header.header
-                Header
-              %section.content
-                Content
-              %footer.footer
-                Footer
-            %section.widget
-              %header.header
-                Header
-              %section.content
-                Content
-              %footer.footer
-                Footer
-            %section.widget
-              %header.header
-                Header
-              %section.content
-                Content
-              %footer.footer
-                Footer
-          
-          .span4.widget-area
-            %section.widget
-              %header.header
-                Header
-              %section.content
-                Content
-              %footer.footer
-                Footer
 
     -#.navbar
       .navbar-inner#pageheader
@@ -175,14 +125,12 @@
                 -else
                   %a.btn.btn-success{ :href => "#{path}BETA=1" } Show Demo
               
-    -#=yield :subheader_plus
+    =yield :subheader_plus
                 
-    -#=yield :subheader_extras
+    =yield :subheader_extras
 
-    .container.graphpaper
-      .row
-        .span12
-          .flash!=[:error, :warning, :notice].map { |type| content_tag(:div, flash[type], :class => type) if flash[type] }.join
+    %section.content
+      .flash!=[:error, :warning, :notice].map { |type| content_tag(:div, flash[type], :class => type) if flash[type] }.join
       =yield
 
     .gcms-footer

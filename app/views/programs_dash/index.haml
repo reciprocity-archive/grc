@@ -12,29 +12,10 @@
 -content_for :header do
   %ul.breadcrumbs
     %li
-      DASHBOARD
+      &nbsp;
   %h1
     Dashboard
 
-.row-static
-  .singleColumn
-    .fullHeight
-      =render :partial => 'programs/list',
-              :layout => 'layouts/widget_box',
-              :locals => { :programs => @programs }
-  .doubleColumn
-    .fullHeight
-      =render :partial => 'quick/find',
-            :layout => 'layouts/widget_box'
-      -if has_feature? :BETA
-        =render :partial => 'design/templates/riskWidgetGap'
-        =render :partial => 'design/templates/riskWidgetRisk'
-  .singleColumn
-    -if has_feature? :BETA
-      .row-static
-        .singleColumn
-          =render :partial => 'design/templates/govWidgetCot'
-          =render :partial => 'design/templates/govWidgetProducts'
 -content_for :subheader_extras do
   .btn-group.closed.fltrt
     %a.btn.btn-blue.dropdown-toggle{ :'data-toggle' => 'dropdown' }
@@ -97,3 +78,24 @@
         %li.demoItem
           %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
             Vulnerability
+
+.row-static
+  .singleColumn
+    .fullHeight
+      =render :partial => 'programs/list',
+              :layout => 'layouts/widget_box',
+              :locals => { :programs => @programs }
+  .doubleColumn
+    .fullHeight
+      =render :partial => 'quick/find',
+            :layout => 'layouts/widget_box'
+      -if has_feature? :BETA
+        =render :partial => 'design/templates/riskWidgetGap'
+        =render :partial => 'design/templates/riskWidgetRisk'
+  .singleColumn
+    -if has_feature? :BETA
+      .row-static
+        .singleColumn
+          =render :partial => 'design/templates/govWidgetCot'
+          =render :partial => 'design/templates/govWidgetProducts'
+
