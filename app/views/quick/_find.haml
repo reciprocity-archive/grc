@@ -2,11 +2,22 @@
   Quick Find
 
 -content_for :widget_buttons do
-  %input.ui-corner-all.widgetsearch.clear-value(type='text' placeholder='Search')
+  %section.filter
+    %form{:action => '#', :class =>'form-inline'}
+      %input.ui-corner-all.widgetsearch.clear-value(type='text' placeholder='Search')
+      %button{:type =>'submit', :class =>'btn'}
+        %i.grcicon-search-black
+  
 
 -content_for :widget_help, 'quick_find'
 
-.tabbable#quick_find
+-content_for :widget_footer do
+  -if has_feature? :BETA
+    %p.pull-right
+      %strong 254
+      of 500
+
+#quick_find.tabbable.tabs-left
   %ul.nav.nav-tabs
     %li=link_to 'Controls', '#controls', :data => { :'tab-href' => quick_controls_path, :toggle => 'tab' }
     %li=link_to 'Biz Processes', '#biz_processes', :data => { :'tab-href' => quick_biz_processes_path, :toggle => 'tab' }
@@ -19,11 +30,3 @@
     #systems.tab-pane
     #products.tab-pane
     #risks.tab-pane
-
--if has_feature? :BETA
-  .row-fluid
-    .span6
-    .span6
-      %label.fltrt
-        %strong 254
-        of 500

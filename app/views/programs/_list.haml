@@ -34,10 +34,10 @@
           .progress.progress-striped.active
             .barTitle.fltlft No controls
 
--if has_feature? :BETA
-  .row-fluid
-    .span6
-    .span6
-      %label.fltrt
-        %strong 254
-        of 500
+
+-content_for :widget_footer do
+  -if has_feature? :BETA
+    %p.pull-right
+      %strong 254
+      of 500
+      

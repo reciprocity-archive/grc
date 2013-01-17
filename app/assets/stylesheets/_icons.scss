@@ -66,6 +66,13 @@
     background-position:-48px 0;
   }
 }
+.grcicon-help-black {
+  @include new-icons();
+  background-position:-48px 0;
+  .active & {
+    background-position:-48px 0;
+  }
+}
 .grcicon-logout {
   @include new-icons();
   background-position:-96px -16px;
@@ -92,6 +99,13 @@
   background-position:-112px -16px;
   .active & {
     background-position:-112px 0;
+  }
+}
+.grcicon-search-black {
+  @include new-icons();
+  background-position:0 -32px;
+  .active & {
+    background-position:0 -32;
   }
 }
 

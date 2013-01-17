@@ -15,22 +15,44 @@
 // widgets styles
 .widget {
   border:1px solid $headerBgnd;
-  @include border-radius();
   margin-bottom: 20px;
+  background:$white;
   .header {
-    background:$widgetHeaderBgnd;
-    color:$gray;
-    padding: 10px;
-    @include border-radius($topBorderRadius);
+    background:$headerTitle;
+    color:$white;
+    padding:5px 10px;
+    h2 {
+      font-size: 15px;
+      line-height: 24px;
+      font-weight: normal;
+      color: $white;
+      margin-right: 0;
+      display: inline;
+    }
+  }
+  .filter {
+    padding:10px;
+    background: $widgetFooteBgnd;
+    .form-inline {
+      margin-bottom: 0;
+    }
+    input {
+      margin-bottom: 0;
+    }
   }
   .content {
-    padding: 30px 10px;
+    padding:5px 10px;
     background:$white;
   }
   .footer {
-    background:$headerBgnd;
-    color:$white;
-    padding: 10px;
+    background:$widgetFooteBgnd;
+    color:$headerTitle;
+    padding:5px 10px;
+    height: 20px;
+    p {
+      margin: 0;
+      line-height: 20px;
+    }
   }
 }
 
