@@ -23,11 +23,11 @@ class OrgGroup < ActiveRecord::Base
     :presence => { :message => "needs a value" }
 
   @valid_relationships = [
-    { :to   => Location, :via => :org_group_has_province_over_location },
+    { :to   => Facility, :via => :org_group_has_province_over_facility },
     { :to   => Market,   :via => :org_group_has_province_over_market },
     { :to   => Product,  :via => :org_group_has_province_over_product },
     { :both => OrgGroup, :via => :org_group_is_affiliated_with_org_group },
-    { :to   => Location, :via => :org_group_is_dependent_on_location },
+    { :to   => Facility, :via => :org_group_is_dependent_on_facility },
     { :from => Program,  :via => :program_is_relevant_to_org_group },
     { :to   => System,   :via => :org_group_has_process },
     { :to   => RiskyAttribute, :via => :org_group_has_risky_attribute },

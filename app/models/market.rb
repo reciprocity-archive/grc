@@ -25,7 +25,7 @@ class Market < ActiveRecord::Base
   @valid_relationships = [
     { :to   => Market,   :via => :market_contains_a_market },
     { :from => Market,   :via => :market_contains_a_market },
-    { :to   => Location, :via => :market_is_dependent_on_location },
+    { :to   => Facility, :via => :market_is_dependent_on_facility },
     { :from => OrgGroup, :via => :org_group_has_province_over_market },
     { :from => Product,  :via => :product_is_sold_into_market },
     { :to   => RiskyAttribute, :via => :market_has_risky_attribute },

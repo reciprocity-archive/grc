@@ -103,7 +103,7 @@ ActiveRecord::Base.transaction do
   bp.object_people.first_or_create!(
     {:person => person1, :role => 'owner'}, :without_protection => true)
 
-    # Create business objects - org groups, products, locations
+    # Create business objects - org groups, products, facilities
     # And relationships to other objects
 
     org = OrgGroup.
@@ -146,19 +146,19 @@ ActiveRecord::Base.transaction do
         :without_protection => true
       )
 
-    loc = Location.
-      where(:slug => 'LOCATION-SEED1').
+    loc = Facility.
+      where(:slug => 'FACILITY-SEED1').
       first_or_create!({
-          :slug => 'LOCATION-SEED1',
-          :title => "Location 1", :description => 'A Location'},
+          :slug => 'FACILITY-SEED1',
+          :title => "Facility 1", :description => 'A Facility'},
         :without_protection => true
       )
 
-    loc2 = Location.
-      where(:slug => 'LOCATION-SEED2').
+    loc2 = Facility.
+      where(:slug => 'FACILITY-SEED2').
       first_or_create!({
-          :slug => 'LOCATION-SEED2',
-          :title => "Location 2", :description => 'Another location'},
+          :slug => 'FACILITY-SEED2',
+          :title => "Facility 2", :description => 'Another facility'},
         :without_protection => true
       )
 
@@ -179,13 +179,13 @@ ActiveRecord::Base.transaction do
       )
 
     Relationship.
-      where(:relationship_type_id => 'org_group_has_province_over_location',
+      where(:relationship_type_id => 'org_group_has_province_over_facility',
         :source_type => org.class.to_s,
         :source_id => org.id,
         :destination_type => loc.class.to_s,
         :destination_id => loc.id).
       first_or_create!({
-          :relationship_type_id => 'org_group_has_province_over_location',
+          :relationship_type_id => 'org_group_has_province_over_facility',
           :source => org,
           :destination => loc},
         :without_protection => true
@@ -205,13 +205,13 @@ ActiveRecord::Base.transaction do
       )
 
     Relationship.
-      where(:relationship_type_id => 'org_group_is_dependent_on_location',
+      where(:relationship_type_id => 'org_group_is_dependent_on_facility',
         :source_type => org.class.to_s,
         :source_id => org.id,
         :destination_type => loc2.class.to_s,
         :destination_id => loc2.id).
       first_or_create!({
-          :relationship_type_id => 'org_group_is_dependent_on_location',
+          :relationship_type_id => 'org_group_is_dependent_on_facility',
           :source => org,
           :destination => loc2},
         :without_protection => true
@@ -257,13 +257,13 @@ ActiveRecord::Base.transaction do
       )
 
     Relationship.
-      where(:relationship_type_id => 'product_is_dependent_on_location',
+      where(:relationship_type_id => 'product_is_dependent_on_facility',
         :source_type => prod.class.to_s,
         :source_id => prod.id,
         :destination_type => loc.class.to_s,
         :destination_id => loc.id).
       first_or_create!({
-          :relationship_type_id => 'product_is_dependent_on_location',
+          :relationship_type_id => 'product_is_dependent_on_facility',
           :source => prod,
           :destination => loc},
         :without_protection => true
@@ -309,13 +309,13 @@ ActiveRecord::Base.transaction do
       )
 
     Relationship.
-      where(:relationship_type_id => 'market_is_dependent_on_location',
+      where(:relationship_type_id => 'market_is_dependent_on_facility',
         :source_type => market.class.to_s,
         :source_id => market.id,
         :destination_type => loc.class.to_s,
         :destination_id => loc.id).
       first_or_create!({
-          :relationship_type_id => 'market_is_dependent_on_location',
+          :relationship_type_id => 'market_is_dependent_on_facility',
           :source => market,
           :destination => loc},
         :without_protection => true

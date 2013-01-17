@@ -73,16 +73,16 @@
         %a.widgetbtn.pull-right{:href => edit_flow_org_group_path('<%=org_group.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
           %i.grcicon-edit-grey
 
-%script#relationship_location_option{ :type => 'text/html', :'data-prefix' => 'location' }
-  %li{ :'data-id' => '<%= location.id %>', :'data-title' => '<%= location.title %>', :'data-slug' => '<%= location.slug %>' }
+%script#relationship_facility_option{ :type => 'text/html', :'data-prefix' => 'facility' }
+  %li{ :'data-id' => '<%= facility.id %>', :'data-title' => '<%= facility.title %>', :'data-slug' => '<%= facility.slug %>' }
     .row-fluid
       .span8
-        %span.company <%= location.slug %>
-        %span.name <%= location.title %>
+        %span.company <%= facility.slug %>
+        %span.name <%= facility.title %>
       .span4.actions
         %a.widgetbtn.pull-right.add-me{:href => "#", :'data-toggle' => 'selector-list-select'}
           %i.grcicon-chevron-right
-        %a.widgetbtn.pull-right{:href => edit_flow_location_path('<%=location.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
+        %a.widgetbtn.pull-right{:href => edit_flow_facility_path('<%=facility.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
           %i.grcicon-edit-grey
 
 %script#relationship_market_option{ :type => 'text/html', :'data-prefix' => 'market' }

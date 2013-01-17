@@ -26,7 +26,7 @@ class RiskyAttribute < ActiveRecord::Base
   @valid_relationships = [
     { :from => OrgGroup,  :via => :org_group_has_risky_attribute },
     { :from => Product,   :via => :product_has_risky_attribute },
-    { :from => Location,  :via => :location_has_risky_attribute },
+    { :from => Facility,  :via => :facility_has_risky_attribute },
     { :from => Market,    :via => :market_has_risky_attribute },
   ]
 

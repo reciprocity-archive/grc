@@ -2,8 +2,8 @@
 # Copyright:: Google Inc. 2012
 # License:: Apache 2.0
 
-# Handle locations
-class LocationsController < BusinessObjectsController
+# Handle facilities
+class FacilitiesController < BusinessObjectsController
 
   access_control :acl do
     # FIXME: Implement real authorization
@@ -11,15 +11,15 @@ class LocationsController < BusinessObjectsController
     allow :superuser
 
     actions :new, :create do
-      allow :create, :create_location
+      allow :create, :create_facility
     end
 
     actions :edit, :update do
-      allow :update, :update_location, :of => :location
+      allow :update, :update_facility, :of => :facility
     end
 
     actions :show, :tooltip do
-      allow :read, :read_location, :of => :location
+      allow :read, :read_facility, :of => :facility
     end
 
   end
@@ -28,14 +28,14 @@ class LocationsController < BusinessObjectsController
 
   private
 
-    def location_params
-      location_params = params[:location] || {}
+    def facility_params
+      facility_params = params[:facility] || {}
       %w(type).each do |field|
-        parse_option_param(location_params, field)
+        parse_option_param(facility_params, field)
       end
       %w(start_date stop_date).each do |field|
-        parse_date_param(location_params, field)
+        parse_date_param(facility_params, field)
       end
-      location_params
+      facility_params
     end
 end

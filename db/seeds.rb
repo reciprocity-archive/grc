@@ -63,11 +63,11 @@ ActiveRecord::Base.transaction do
     :entity_type => [
       'Division', 'Functional Group', 'Business Unit', 'Legal Entity'],
     :entity_kind => ['Not Applicable'],
-    :location_type => [
+    :facility_type => [
       'Headquarters', 'Regional Office', 'Sales Office',
       'Data Center', 'Colo Data Center', 'Vendor Worksite',
       'Contract Manufacturer', 'Distribution Center'],
-    :location_kind => [
+    :facility_kind => [
       'Building', 'Machine Room', 'Kitchen', 'Workshop', 'Office',
       'HazMat Storage', 'Maintenance Facility', 'Parking Garage', 'Lab'],
     :threat_type => ['Insider Threat', 'Outsider Threat'],
