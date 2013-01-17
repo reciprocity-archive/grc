@@ -877,7 +877,7 @@ nav {
 /* Breadcrumb */
 
 #breadcrumb, #breadcrumb li {
-  margin: 0;
+  margin: 0 0 4px 0;
   padding: 0;
   display: inline; /* Horizontal list */
   list-style: none;
@@ -892,6 +892,17 @@ padding: 0 0 0 0;
 
 ol#breadcrumb > li:after { content: ' /' }
 ol#breadcrumb > li:last-child a:after { content: ' ' }
+ol#breadcrumb li {
+  font-size:11px;  
+}
+ol#breadcrumb a {
+  color:#369;
+  text-decoration:underline;
+  &:hover {
+    //text-decoration:none;
+    color:lighten(#369,20%);
+  }
+}
 
 .navigation_area {
   float:right;
@@ -972,7 +983,7 @@ ol#breadcrumb > li:last-child a:after { content: ' ' }
   min-width: 251px;
   float: left;
   margin-left: 0px;
-  padding-top: 2px;
+  //padding-top: 2px;
 }
 
 .headercenter {
