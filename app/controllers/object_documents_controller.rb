@@ -25,7 +25,7 @@ class ObjectDocumentsController < BaseMappingsController
     end
     @object_documents = allowed_objs(@object_documents.all, :read)
 
-    render :json => @object_documents, :include => { :document => { :methods => 'document_type' } }
+    render :json => @object_documents, :include => { :document => { :methods => [:document_type, :link_url] } }
   end
 
   private
