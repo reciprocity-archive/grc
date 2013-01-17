@@ -63,7 +63,7 @@
             %li
               %a.btn.btn-mini.halfopacity{ "rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => url_for(:id => instance.id, :action => :show, :controller => model_underscore.pluralize, :only_path => true) }
                 %i.grcicon-arrowright-black
-        =raw instance.description
+        =display_as_html instance.description
 
   .collapse{ :id => objects_toggle_target }
 

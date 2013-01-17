@@ -33,4 +33,4 @@
           %span.prefix=item.title
         .row-fluid-slotcontent.collapse{ :id => "transaction-#{item.id}" }
           .span13
-            =raw item.description
+            =display_as_html item.description

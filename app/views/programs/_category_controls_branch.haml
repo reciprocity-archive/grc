@@ -23,7 +23,7 @@
                 =control.title
           .row-fluid-slotcontent.collapse{ :id => control_content_id }
             .span9
-              =raw control.description
+              =display_as_html control.description
   -if children && children.size > 0
     %ul
       -children.each do |subcategory, subchildren, subcontrols|

@@ -185,4 +185,10 @@ module ApplicationHelper
       yield model
     end
   end
+
+  # Treat content as HTML and pack it accordingly.
+  # Be careful what you pass as content!
+  def display_as_html(content)
+    content_tag :div, content.html_safe, :class => "rtf"
+  end
 end

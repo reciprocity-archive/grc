@@ -14,7 +14,7 @@
   .row-fluid
     .span12
       %h5 Description
-      .rtf=raw pbc_list.audit_cycle.description
+      =display_as_html pbc_list.audit_cycle.description
 
 .widget-body
   =render :partial => "requests", :locals => { :pbc_list => pbc_list }
