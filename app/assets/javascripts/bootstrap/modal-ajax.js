@@ -1,4 +1,5 @@
 //= require bootstrap-modal
+//= require can.jquery-all
 
 !function($) {
 
@@ -39,7 +40,7 @@
   }
 
   function refresh_page() {
-    window.location.assign(window.location.href.replace(/#.*/, ''));
+    setTimeout(can.proxy(window.location.reload, window.location), 10);
   }
 
   var handlers = {
@@ -66,13 +67,13 @@
       $target.on('ajax:json', function(e, data, xhr) {
         if (data.errors) {
         } else {
+          $trigger.trigger('modal:success', [data]);
           if (list_target == 'refresh') {
             refresh_page();
           } else if (list_target) {
             $(list_target).tmpl_setitems(data);
             $target.modal_relationship_selector('hide');
           }
-          $trigger.trigger('modal:success', [data]);
         }
 
       });

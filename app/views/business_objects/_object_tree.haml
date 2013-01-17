@@ -25,7 +25,7 @@
 -has_dependence_relationship = instance.has_valid_relationship?(dependence_relationship_type)
 -has_process_relationship = instance.has_valid_relationship?(process_relationship_type)
 
-%li
+%li{ :'data-object-id' => instance.id }
   .row-fluid
     .slot.span12.systemslot
       .slottitle.span8.toggle{"data-target" => "##{main_toggle_target}", "data-toggle" => "collapse"}
