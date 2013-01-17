@@ -13,6 +13,7 @@ class QuickController < ApplicationController
       @programs = @programs.db_search(params[:s])
     end
     @programs = allowed_objs(@programs.all.sort_by(&:slug_split_for_sort), :read)
+    render_html_or_json_array(@programs)
   end
 
   def sections
@@ -21,6 +22,7 @@ class QuickController < ApplicationController
       @sections = @sections.fulltext_search(params[:s])
     end
     @sections = allowed_objs(@sections.all.sort_by(&:slug_split_for_sort), :read)
+    render_html_or_json_array(@sections)
   end
 
   def controls
@@ -29,6 +31,7 @@ class QuickController < ApplicationController
       @controls = @controls.fulltext_search(params[:s])
     end
     @controls = allowed_objs(@controls.all.sort_by(&:slug_split_for_sort), :read)
+    render_html_or_json_array(@controls)
   end
 
   def biz_processes
@@ -37,6 +40,7 @@ class QuickController < ApplicationController
       @biz_processes = @biz_processes.db_search(params[:s])
     end
     @biz_processes = allowed_objs(@biz_processes.all, :read)
+    render_html_or_json_array(@biz_processes)
   end
 
   def accounts
@@ -45,6 +49,7 @@ class QuickController < ApplicationController
       @accounts = @accounts.db_search(params[:s])
     end
     @accounts = allowed_objs(@accounts.all, :read)
+    render_html_or_json_array(@accounts)
   end
 
   def people
@@ -53,10 +58,12 @@ class QuickController < ApplicationController
       @people = @people.db_search(params[:s])
     end
     @people = allowed_objs(@people.all, :read)
+    render_html_or_json_array(@people)
   end
 
   def categories
     @root_categories = allowed_objs(Category.roots, :read)
+    render_html_or_json_array(@categories)
   end
 
   def options
@@ -65,6 +72,7 @@ class QuickController < ApplicationController
       @options = @options.db_search(params[:s])
     end
     @options = allowed_objs(@options.all, :read)
+    render_html_or_json_array(@options)
   end
 
   def systems
@@ -73,11 +81,7 @@ class QuickController < ApplicationController
       @systems = @systems.db_search(params[:s])
     end
     @systems = allowed_objs(@systems.all, :read)
-
-    respond_to do |format|
-      format.html
-      format.json { render :json => @systems }
-    end
+    render_html_or_json_array(@systems)
   end
 
   def products
@@ -86,5 +90,6 @@ class QuickController < ApplicationController
       @products = @products.fulltext_search(params[:s])
     end
     @products = allowed_objs(@products.all, :read)
+    render_html_or_json_array(@products)
   end
 end

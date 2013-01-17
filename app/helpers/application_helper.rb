@@ -191,4 +191,19 @@ module ApplicationHelper
   def display_as_html(content)
     content_tag :div, (content.presence || "").html_safe, :class => "rtf"
   end
+
+  def render_html_or_json_array(objs)
+    respond_to do |format|
+      format.html do
+        render
+      end
+      format.json do
+        if params[:full]
+          render :json => objs
+        else
+          render :json => objs.map {|o| o.id }
+        end
+      end
+    end
+  end
 end

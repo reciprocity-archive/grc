@@ -177,6 +177,9 @@ class MappingController < ApplicationController
         render :partial => 'section_list',
                :locals => { :sections => sections.all }
       end
+      format.json do
+        render :json => sections.map {|o| o.id}
+      end
     end
   end
 
@@ -200,6 +203,9 @@ class MappingController < ApplicationController
       format.html do
         render :partial => 'control_list_content',
                :locals => { :controls => controls.all, :control_type => params[:control_type] }
+      end
+      format.json do
+        render :json => controls.map {|o| o.id}
       end
     end
   end
