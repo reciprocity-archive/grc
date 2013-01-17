@@ -87,7 +87,7 @@ class Control < ActiveRecord::Base
   end
 
   def title
-    return read_attribute(:title).presence || description.truncate(60)
+    return read_attribute(:title).presence || (description || "").truncate(60)
   end
 
   def custom_edges

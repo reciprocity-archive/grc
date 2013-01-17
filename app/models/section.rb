@@ -92,7 +92,7 @@ class Section < ActiveRecord::Base
   end
 
   def title
-    return read_attribute(:title).presence || description.truncate(60)
+    return read_attribute(:title).presence || (description || "").truncate(60)
   end
 
   def update_parent_id
