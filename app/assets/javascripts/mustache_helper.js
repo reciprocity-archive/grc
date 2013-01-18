@@ -169,7 +169,8 @@ $.each({
 });
 
 Mustache.registerHelper("if_equals", function(val1, val2, options) {
-
+    if(typeof val1 === "function") val1 = val1.call(this);
+    if(typeof val2 === "function") val2 = val2.call(this);
     if(val1 == val2) return options.fn(this);
     else return options.inverse(this);
 
@@ -177,29 +178,46 @@ Mustache.registerHelper("if_equals", function(val1, val2, options) {
 
 Mustache.registerHelper("if_null", function(val1, options) {
 
+    if(typeof val1 === "function") val1 = val1.call(this);
     if(val1 == null) return options.fn(this);
     else return options.inverse(this);
 
 });
 
-Mustache.registerHelper("firstexist", function() {
-  var args = can.makeArray(arguments).slice(0, arguments.length - 1);
-  for(var i = 0; i < args.length; i++) {
-    var v = args[i];
-    if(v != null) return v;
-  }
-  return "";
+can.each(["firstexist", "firstnonempty"], function(fname) {
+  Mustache.registerHelper(fname, function() {
+    var args = can.makeArray(arguments).slice(0, arguments.length - 1);
+    for(var i = 0; i < args.length; i++) {
+      if(typeof v === "function") v = v.call(this);
+      var v = args[i];
+      if(v != null && (fname === "firstexist" || !!(v.toString().trim()))) return v;
+    }
+    return "";
+  });
 });
 
-Mustache.registerHelper("firstnonempty", function() {
-  var args = can.makeArray(arguments).slice(0, arguments.length - 1);
-  for(var i = 0; i < args.length; i++) {
-    var v = args[i];
-    if(v != null && !!(v.toString().trim())) return v;
-  }
-  return "";
+/*
+Thought I was being clever but this doesn't work as expected. --BM
+Mustache.registerHelper("pack", function() {
+  var options = arguments[arguments.length - 1];
+  var objects = can.makeArray(arguments).slice(0, arguments.length - 1);
+  var pack = new can.Observe();
+  can.each(objects, function(obj, i) {
+    if(obj instanceof can.Observe) {
+      obj.bind("change", function(attr, how, newVal, oldVal) {
+        pack.attr(attr, newVal);
+      });
+      objects[i] = obj.serialize();
+    }
+  });
+  pack.packed = pack; //CanJS bug workaround
+  objects.unshift(pack);
+  options.hash && objects.push(options.hash);
+  can.extend.apply(can, objects);
+  var retval = options.fn(pack);
+  return retval;
 });
-
+*/
 
 
 })(this, jQuery, can);
