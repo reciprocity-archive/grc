@@ -17,7 +17,9 @@ can.Control("CMS.Controllers.ProductRoutes", {
     .andSelf()
     .each(function() {
       //walking up the chain to make sure that each one is visible.
-      $(this).closest("[data-object-id]").find("[id$='-" + $(this).data("object-id") + "-objects']").collapse().collapse("show").find(".expander").addClass("in");
+      var $el = $(this).closest("[data-object-id]");
+      $el.find("[id$='-" + $(this).data("object-id") + "-objects']").collapse().collapse("show");
+      $el.find(".expander").eq(0).addClass("in");
     })
 
     can.each(ids, function(id) {
