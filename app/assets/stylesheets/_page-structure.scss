@@ -410,3 +410,13 @@ label.request {
     text-align:center;
   }
 }
+
+// Widgets additions
+
+.information {
+  &.information-common {
+    span.info-item {
+      color:#111;
+    }
+  }
+}
