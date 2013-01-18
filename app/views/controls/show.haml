@@ -4,7 +4,7 @@
   %ol#breadcrumb
     %li CONTROLS
     %li=@control.slug
-  .location#pageTitle=@control.title
+  .location#pageTitle=strip_tags(@control.title)
 
 -content_for :page_help, 'control'
 
