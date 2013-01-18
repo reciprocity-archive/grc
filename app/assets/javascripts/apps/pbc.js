@@ -89,9 +89,15 @@ $.widget(
       }
   }
   , _renderItem : function(ul, item) {
+    var label;
+    if (item.title) {
+      label = "" + item.title + (item.link_url ? " (" + item.link_url + ")" : "");
+    } else {
+      label = item.link_url;
+    }
     return $( "<li class='something'>" )
         .data( "item.autocomplete", item )
-        .append( "<a>"+ item.label + " (" + item.link_url + ")</a>" )
+        .append( "<a>" + label + "</a>" )
         .appendTo( ul );
   }
   });
