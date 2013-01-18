@@ -1,9 +1,11 @@
 -content_for :page_help, 'import'
 
 -content_for :header do
+
   %ul.breadcrumbs
-    %li
-      Import
+    %li=link_to 'PROGRAMS', programs_dash_path
+    %li=link_to @program.title, flow_program_path(@program)
+    %li Import
     
   %h1
     Import Program or Policy

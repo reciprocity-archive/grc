@@ -14,12 +14,12 @@
     =f.object.program.slug
     =error_messages_inline(f, :program)
 
-  .span2{:class => error_class(f, :slug)}
+  .span3{:class => error_class(f, :slug)}
     %label{:for => "section-code"} Code (autofill)
     %input#section-code.span12{:placeholder => "SECTION-XXXX", :type => "text", :value => f.object.slug, :name => 'section[slug]'}
     =error_messages_inline(f, :slug)
 
-  .span1.disabled{:class => error_class(f, :version)}
+  -#.span1.disabled{:class => error_class(f, :version)}
     %label{:for => "section-version"} Version
     %input#section-version.input-supermini{:placeholder => "SOX", :type => "text", :value => nil, :name => 'section[version]', :disabled => 'disabled'}
     =error_messages_inline(f, :version)

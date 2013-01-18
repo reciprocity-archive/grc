@@ -92,7 +92,9 @@ describe ProgramsController do
       ]
       assigns(:errors).should include 2
       assigns(:errors)[2].should include :title
-      assigns(:errors)[2][:title].should == ["needs a value"]
+      assigns(:errors)[2][:title].should == ["either title or description is required"]
+      assigns(:errors)[2].should include :description
+      assigns(:errors)[2][:description].should == ["either title or description is required"]
       assigns(:creates).should == [ "REG1-SEC2", "REG1-SEC3-BAD" ]
       assigns(:updates).should == [ "REG1-SEC1"]
     end
@@ -105,7 +107,9 @@ describe ProgramsController do
       ]
       assigns(:errors).should include 2
       assigns(:errors)[2].should include :title
-      assigns(:errors)[2][:title].should == ["needs a value"]
+      assigns(:errors)[2][:title].should == ["either title or description is required"]
+      assigns(:errors)[2].should include :description
+      assigns(:errors)[2][:description].should == ["either title or description is required"]
       assigns(:creates).should == [ "REG1-SEC2", "REG1-SEC3-BAD" ]
       assigns(:updates).should == [ "REG1-SEC1"]
     end

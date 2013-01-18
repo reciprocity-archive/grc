@@ -27,7 +27,7 @@
               =item.title || strip_tags(item.description)
         .row-fluid-slotcontent.collapse{ :id => content_id }
           .span12
-            =raw item.description
+            =display_as_html item.description
 
       =walk_slug_tree(Program.slugtree(item.controls)) do |item, step|
         -content_id = "content_#{rand(36**8).to_s(36)}"
@@ -39,4 +39,4 @@
               =item.title || item.description
         .row-fluid-slotcontent.collapse{ :id => content_id }
           .span12
-            =raw item.description
+            =display_as_html item.description

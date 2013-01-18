@@ -397,7 +397,14 @@ class ProgramsController < BaseObjectsController
       @controls = @controls.fulltext_search(params[:s])
     end
     @controls = allowed_objs(@controls.all.sort_by(&:slug_split_for_sort), :read)
-    render :layout => nil, :locals => { :controls => @controls }
+    respond_to do |format|
+      format.html do
+        render :layout => nil, :locals => { :controls => @controls }
+      end
+      format.json do
+        render :json => @controls.map {|o| o.id}
+      end
+    end
   end
 
   def category_controls

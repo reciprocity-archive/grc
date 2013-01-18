@@ -252,3 +252,57 @@ li.add-new-item {
     }
   }
 }
+
+
+// RTF
+.widget .rtf,
+.rtf {
+  color:#666;
+  font-size:13px;
+  line-height:16px;
+  padding-bottom:10px;
+  p {
+    margin-top:6px;
+    color:#666;
+
+  }
+  ul {
+    color:#666;
+    margin-top:6px;
+    list-style-type:disc;
+    list-style-position:inside;
+    li {
+      border:none;
+      margin:0;
+      padding:0;
+    }
+    ul,ol {
+      margin-left:20px;
+      margin-bottom:10px;
+    }
+    ul {
+      list-style-type:circle;
+      ul {
+        list-style-type:square;
+      }
+    }
+  }
+  ol {
+    margin-top:6px;  
+    color:#666;
+    list-style-position:inside;
+    list-style-type:decimal;
+    li {
+      margin:0;
+      border:none;
+      padding:0;
+    }
+    ul,ol {
+      margin-left:20px;
+      margin-bottom:10px;
+    }
+  }
+  blockquote {
+    border:none;
+  }
+} 

@@ -20,7 +20,7 @@
               =item.slug
             =item.title
           -if !item.description.blank?
-            =raw item.description
+            =display_as_html item.description
               
     -else
       Nothing selected.

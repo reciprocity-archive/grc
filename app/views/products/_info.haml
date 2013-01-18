@@ -40,14 +40,14 @@
       .span12
         %label Full Title
         %input.span12{:disabled => "disabled", :type => "text", :value => product.title}
-    .row-fluid
+    -#.row-fluid
       .span4
         %label Version
         %input.span12{:disabled => "disabled", :type => "text"}
     .row-fluid
       .span12
         %label Description
-        =raw product.description
+        =display_as_html product.description
 
     %hr.hr-widget
 

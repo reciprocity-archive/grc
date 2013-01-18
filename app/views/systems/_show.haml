@@ -8,6 +8,25 @@
     %i.grcicon-edit-grey
 
 .information
+  -if has_feature?(:BETA)
+    -status_counts, status_percentages = [[5,9,2,4], [25,45,10,20]]
+    %label
+      .pull-right
+        %span.statustextred=status_counts[0]
+        %span /
+        %span.statustextblue=status_counts[1]
+        %span /
+        %span.statustextyellow=status_counts[2]
+        %span /
+        %span.statustextgreen=status_counts[3]
+      Status
+    %span.item-link
+      .progress.progress-higher
+        .bar.bar-danger{:rel => "tooltip", :'data-placement' => "top", :title => "One (#{status_counts[0]})", :'data-percentage' => status_percentages[0]}
+        .bar.bar-info{:rel => "tooltip", :'data-placement' => "top", :title => "Two (#{status_counts[1]})", :'data-percentage' => status_percentages[1]}
+        .bar.bar-warning{:rel => "tooltip", :'data-placement' => "top", :title => "Three (#{status_counts[2]})", :'data-percentage' => status_percentages[2]}
+        .bar.bar-success{:rel => "tooltip", :'data-placement' => "top", :title => "Four (#{status_counts[3]})", :'data-percentage' => status_percentages[3]}
+
   .toolbar-widget
 
   %hr.hr-widget
@@ -28,19 +47,19 @@
       %label Full Title
       %input.span12{:disabled => "disabled", :type => "text", :value => system.title}
   .row-fluid
-    .span4
+    -#.span4
       %label Version
       %input.span12{:disabled => "disabled", :type => "text"}
-    .span4
+    .span6
       %label Status
       %input.span12{:disabled => "disabled", :type => "text"}
-    .span4
+    .span6
       %label Network Zone
       %input.span12{:disabled => "disabled", :type => "text", :value => system.network_zone && system.network_zone.title}
   .row-fluid
     .span12
       %label Description
-      =raw system.description
+      =display_as_html system.description
 
 %hr.hr-widget
 

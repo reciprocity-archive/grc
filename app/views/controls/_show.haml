@@ -23,16 +23,16 @@
     #about.collapse
       .row-fluid
         .span12
-          .span3
+          .span4
             %label Code
             %input.span12{:type => "text", :disabled => "disabled", :value => control.slug}
-          .span3
+          -#.span3
             %label Version
             %input.span12{:disabled => "disabled", :type => "text", :value => control.version}
-          .span3
+          .span4
             %label Type
             %input.span12{:disabled => "disabled", :type => "text", :value => control.type && control.type.title}
-          .span3
+          .span4
             %label Kind
             %input.span12{:disabled => "disabled", :type => "text", :value => control.kind && control.kind.title}
       .row-fluid
@@ -57,11 +57,11 @@
       .row-fluid
         .span12
           %label Description
-          .well=raw control.description
+          .well=display_as_html control.description
       .row-fluid
         .span12
           %label Notes
-          .well=raw control.notes
+          .well=display_as_html control.notes
       .row-fluid
         .span12
           %label Direct Link

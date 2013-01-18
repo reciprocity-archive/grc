@@ -35,7 +35,7 @@ class Program < ActiveRecord::Base
   #
 
   @valid_relationships = [
-    { :to   => Location, :via => :program_is_relevant_to_location },
+    { :to   => Facility, :via => :program_is_relevant_to_facility },
     { :to   => OrgGroup, :via => :program_is_relevant_to_org_group },
     { :to   => Product,  :via => :program_is_relevant_to_product }
   ]

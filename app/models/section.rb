@@ -32,8 +32,14 @@ class Section < ActiveRecord::Base
   before_save :upcase_slug
   before_save :update_parent_id
 
-  validates :title,
-    :presence => { :message => "needs a value" }
+  validate :require_title_or_description
+
+  def require_title_or_description
+    if title.blank? && description.blank?
+      errors.add(:title, "either title or description is required")
+      errors.add(:description, "either title or description is required")
+    end
+  end
 
   validate :slug do
     validate_slug_parent
@@ -77,12 +83,16 @@ class Section < ActiveRecord::Base
         edges.add(Edge.new(s, control, :section_implemented_by_control))
       end
     end
-    
+
     edges
   end
 
   def display_name
     "#{slug} - #{title}"
+  end
+
+  def title
+    return read_attribute(:title).presence || (description || "").truncate(60)
   end
 
   def update_parent_id

@@ -8,7 +8,7 @@ class Account < ActiveRecord::Base
 
   attr_accessor :password, :password_confirmation
 
-  attr_accessible :name, :surname, :email, :password, :password_confirmation
+  attr_accessible :email, :password, :password_confirmation
 
   belongs_to :person
 
@@ -33,7 +33,7 @@ class Account < ActiveRecord::Base
   before_save :create_person_if_necessary
 
   def display_name
-    name.presence || email.presence
+    person.name.presence || email.presence
   end
 
   def password=(password)
@@ -116,8 +116,7 @@ class Account < ActiveRecord::Base
   def self.db_search(q)
     q = "%#{q}%"
     t = arel_table
-    where(t[:name].matches(q).
-      or(t[:username].matches(q)).
+    where(t[:username].matches(q).
       or(t[:email].matches(q)))
   end
 

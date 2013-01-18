@@ -5,4 +5,4 @@ This is ignored
 Section Code,Section Title,Bogus2,Section Description
 REG1-SEC1,SEC 1,aaa,new description x
 REG1-SEC2,SEC 2,bbb,new description y
-REG1-SEC3-BAD,,bbb,new description z
+REG1-SEC3-BAD,,bbb,

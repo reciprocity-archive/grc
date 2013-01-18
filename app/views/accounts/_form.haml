@@ -10,8 +10,6 @@
 -content_for :modal_help, :create_account
 
 .row-fluid
-  =wrapped_text_field f, :span3, :name, :placeholder => 'Enter name'
-  =wrapped_text_field f, :span3, :surname, :placeholder => 'Enter surname'
   =wrapped_text_field f, :span6, :email, :placeholder => 'user@google.com'
 .row-fluid
   -if !CmsRails::Application.sso_callback_url

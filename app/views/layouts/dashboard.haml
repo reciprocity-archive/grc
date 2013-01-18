@@ -103,27 +103,11 @@
               =yield :subheader_extras
               
 
-    -#.navbar
-      .navbar-inner#pageheader
-        .row-static.container
-          .headerleft
-          -#-if has_feature? :BETA
-            -if controller.controller_name == 'programs_dash'
-              .headercenter.fltnone
-                =render :partial => 'design/templates/grcmenu'
-          .headerright
-            -#.btn-toolbar.fltrt.toolbar-nav
-              .btn-group
-                -if controller_name == 'design'
-                  -path = programs_dash_path
-                -else
-                  -path = request.fullpath                
-                -path = path.gsub(/BETA=[^&]*&?/, '').sub(/[?&]$/, '')
-                -path += path.include?('?') ? '&' : '?'
-                -if has_feature? :BETA
-                  %a.btn.btn-warning{ :href => "#{path}BETA=0" } Hide Demo
-                -else
-                  %a.btn.btn-success{ :href => "#{path}BETA=1" } Show Demo
+
+    -if has_feature? :BETA
+      -if controller.controller_name == 'programs_dash'
+        .headercenter.fltnone
+          =render :partial => 'design/templates/grcmenu'
               
     =yield :subheader_plus
 
@@ -142,15 +126,6 @@
               =Time.now.year
               =CMS_CONFIG['COMPANY']
             
-    -#.gcms-footer
-      .block
-        %p
-          =CMS_CONFIG['COMPANY']
-          Confidential.
-          Copyright &copy;
-          =Time.now.year
-          =CMS_CONFIG['COMPANY']
-
     #templates
       #help-modal.modal.hide.fade
         .modal-header

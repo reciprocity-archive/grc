@@ -170,25 +170,25 @@
                 .span3.pbc-item.pbc-request
                   %h5 Request
                   -if request.request.present?
-                    %p=raw request.request
+                    =display_as_html request.request
                   -else
                     %p.disabled-text Request description not available
                 .span2.pbc-item.pbc-control
                   %h5 PBC Control Description
                   -if request.pbc_control_desc.present?
-                    %p=raw request.pbc_control_desc
+                    =display_as_html request.pbc_control_desc
                   -else
                     %p.disabled-text PBC control description not available
                 .span2.pbc-item.pbc-test
                   %h5 Test
                   -if request.test.present?
-                    %p=raw request.test
+                    =display_as_html request.test
                   -else
                     %p.disabled-text Test description not available
                 .span2.pbc-item.pbc-notes
                   %h5 Notes
                   -if request.notes.present?
-                    %p=raw request.notes
+                    =display_as_html request.notes
                   -else
                     %p.disabled-text Notes not available
 

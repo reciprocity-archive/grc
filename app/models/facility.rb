@@ -1,4 +1,4 @@
-class Location < ActiveRecord::Base
+class Facility < ActiveRecord::Base
   include AuthoredModel
   include SluggedModel
   include SearchableModel
@@ -23,14 +23,14 @@ class Location < ActiveRecord::Base
     :presence => { :message => "needs a value" }
 
   @valid_relationships = [
-    { :to   => Location, :via => :location_is_dependent_on_location },
-    { :from => Location, :via => :location_is_dependent_on_location },
-    { :from => Market,   :via => :market_is_dependent_on_location },
-    { :from => OrgGroup, :via => :org_group_has_province_over_location },
-    { :from => OrgGroup, :via => :org_group_is_dependent_on_location },
-    { :from => Program,  :via => :program_is_relevant_to_location },
-    { :to   => System,   :via => :location_has_process },
-    { :to   => RiskyAttribute, :via => :location_has_risky_attribute },
+    { :to   => Facility, :via => :facility_is_dependent_on_facility },
+    { :from => Facility, :via => :facility_is_dependent_on_facility },
+    { :from => Market,   :via => :market_is_dependent_on_facility },
+    { :from => OrgGroup, :via => :org_group_has_province_over_facility },
+    { :from => OrgGroup, :via => :org_group_is_dependent_on_facility },
+    { :from => Program,  :via => :program_is_relevant_to_facility },
+    { :to   => System,   :via => :facility_has_process },
+    { :to   => RiskyAttribute, :via => :facility_has_risky_attribute },
   ]
 
   def display_name

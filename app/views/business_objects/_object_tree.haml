@@ -25,7 +25,7 @@
 -has_dependence_relationship = instance.has_valid_relationship?(dependence_relationship_type)
 -has_process_relationship = instance.has_valid_relationship?(process_relationship_type)
 
-%li
+%li{ :'data-object-id' => instance.id }
   .row-fluid
     .slot.span12.systemslot
       .slottitle.span8.toggle{"data-target" => "##{main_toggle_target}", "data-toggle" => "collapse"}
@@ -63,7 +63,7 @@
             %li
               %a.btn.btn-mini.halfopacity{ "rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => url_for(:id => instance.id, :action => :show, :controller => model_underscore.pluralize, :only_path => true) }
                 %i.grcicon-arrowright-black
-        =raw instance.description
+        =display_as_html instance.description
 
   .collapse{ :id => objects_toggle_target }
 

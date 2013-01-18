@@ -10,20 +10,20 @@ module DefaultRelationshipTypes
     #
     # When adding new relationship types, be sure to either add them in a migration.
     {
-      :relationship_type => 'location_has_process',
-      :description => "Locations have processes.",
+      :relationship_type => 'facility_has_process',
+      :description => "Facilities have processes.",
       :forward_phrase =>"has process",
       :backward_phrase => "is a process of"
     },
     {
-      :relationship_type => 'location_has_risky_attribute',
-      :description => "Locations have risky attributes.",
+      :relationship_type => 'facility_has_risky_attribute',
+      :description => "Facilities have risky attributes.",
       :forward_phrase => "with",
       :backward_phrase =>"of"
     },
     {
-      :relationship_type => 'location_is_dependent_on_location',
-      :description => "Locations can be dependent on each other.",
+      :relationship_type => 'facility_is_dependent_on_facility',
+      :description => "Facilities can be dependent on each other.",
       :forward_phrase =>"dependent on",
       :backward_phrase => "necessary for"
     },
@@ -46,8 +46,8 @@ module DefaultRelationshipTypes
       :backward_phrase =>"of"
     },
     {
-      :relationship_type => 'market_is_dependent_on_location',
-      :description => "Markets can be dependent on a location.",
+      :relationship_type => 'market_is_dependent_on_facility',
+      :description => "Markets can be dependent on a facility.",
       :forward_phrase =>"dependent on",
       :backward_phrase => "necessary for"
     },
@@ -58,8 +58,8 @@ module DefaultRelationshipTypes
       :backward_phrase => "is a process of"
     },
     {
-      :relationship_type => 'org_group_has_province_over_location',
-      :description => "Org groups have province over locations.",
+      :relationship_type => 'org_group_has_province_over_facility',
+      :description => "Org groups have province over facilities.",
       :forward_phrase =>"with province over",
       :backward_phrase => "overseen by"
     },
@@ -89,8 +89,8 @@ module DefaultRelationshipTypes
       :symmetric => true
     },
     {
-      :relationship_type => 'org_group_is_dependent_on_location',
-      :description => "Org groups can be dependent on locations.",
+      :relationship_type => 'org_group_is_dependent_on_facility',
+      :description => "Org groups can be dependent on facilities.",
       :forward_phrase =>"dependent on",
       :backward_phrase => "necessary for"
     },
@@ -114,8 +114,8 @@ module DefaultRelationshipTypes
       :symmetric => true
     },
     {
-      :relationship_type => 'product_is_dependent_on_location',
-      :description => "Products can be dependent on locations.",
+      :relationship_type => 'product_is_dependent_on_facility',
+      :description => "Products can be dependent on facilities.",
       :forward_phrase =>"dependent on",
       :backward_phrase => "necessary for"
     },
@@ -132,8 +132,8 @@ module DefaultRelationshipTypes
       :backward_phrase => "targeted by"
     },
     {
-      :relationship_type => 'program_is_relevant_to_location',
-      :description => "Programs that are relevant to this location.",
+      :relationship_type => 'program_is_relevant_to_facility',
+      :description => "Programs that are relevant to this facility.",
       :forward_phrase =>"relevant to",
       :backward_phrase => "within scope of"
     },
@@ -206,7 +206,7 @@ module DefaultRelationshipTypes
       :read => :forward,
       :meta_read => :backward
     },
-    :location_is_dependent_on_location => {
+    :facility_is_dependent_on_facility => {
       :read => :forward,
       :meta_read => :backward,
     },
@@ -215,10 +215,10 @@ module DefaultRelationshipTypes
       :meta_read => :backward,
       :edit => :forward
     },
-    :market_is_dependent_on_location => {
+    :market_is_dependent_on_facility => {
       :meta_read => :both
     },
-    :org_group_has_province_over_location => {
+    :org_group_has_province_over_facility => {
       :read => :forward,
       :meta_read => :backward,
       :edit => :forward
@@ -237,13 +237,13 @@ module DefaultRelationshipTypes
       :read => :forward,
       :meta_read => :backward,
     },
-    :org_group_is_dependent_on_location => {
+    :org_group_is_dependent_on_facility => {
       :meta_read => :both
     },
     :product_is_affiliated_with_product => {
       :meta_read => :both
     },
-    :product_is_dependent_on_location => {
+    :product_is_dependent_on_facility => {
       :meta_read => :both
     },
     :product_is_dependent_on_product => {
@@ -262,7 +262,7 @@ module DefaultRelationshipTypes
       :meta_read => :backward,
       :edit => :forward
     },
-    :program_is_relevant_to_location => {
+    :program_is_relevant_to_facility => {
       :meta_read => :both
     },
     :program_is_relevant_to_org_group => {
@@ -294,7 +294,7 @@ module DefaultRelationshipTypes
   }
 
   PERSONABLE = [Program, Section, Control, System,
-                OrgGroup, Product, Location]
+                OrgGroup, Product, Facility]
   ['accountable','responsible', 'owner'].each do |role|
     PERSONABLE.each do |model|
       rtype = "person_#{role}_for_#{model.to_s.downcase}"

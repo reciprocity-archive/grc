@@ -1,9 +1,10 @@
 -content_for :page_help, 'import'
 
 -content_for :header do
+
   %ul.breadcrumbs
-    %li
-      Import
+    %li=link_to 'ADMIN', admin_dash_path
+    %li= 'Import Systems'    
     
   %h1
     Import Systems

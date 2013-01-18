@@ -184,7 +184,7 @@ FactoryGirl.define do
     title
   end
 
-  factory :location do
+  factory :facility do
     title
   end
 

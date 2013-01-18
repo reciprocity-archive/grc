@@ -57,7 +57,7 @@
             %li
               %a.btn.btn-mini.halfopacity{ "rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => flow_system_path(system.id) }
                 %i.grcicon-arrowright-black
-        =raw system.description
+        =display_as_html system.description
 
   .collapse{ :id => objects_toggle_target }
 
@@ -88,7 +88,7 @@
                   %li
                     %a.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => flow_control_path(control.id) }
                       %i.grcicon-arrowright-black
-                =raw control.description
+                =display_as_html control.description
 
     -if !seen_this
       %ul.slotlist
