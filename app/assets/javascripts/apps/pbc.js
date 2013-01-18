@@ -66,9 +66,10 @@ $.widget(
       }
   }
   , _renderItem : function(ul, item) {
+    var label = item.name ? item.name + " (" + item.label + ")" : item.label;
     return $( "<li class='something'>" )
         .data( "item.autocomplete", item )
-        .append( "<a>"+ item.name + " (" + item.label + ")</a>" )
+        .append( "<a>" + label + "</a>" )
         .appendTo( ul );
   }
   });
