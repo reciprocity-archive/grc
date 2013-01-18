@@ -182,7 +182,7 @@ Mustache.registerHelper("if_null", function(val1, options) {
 
 });
 
-Mustache.registerHelper("firstof", function() {
+Mustache.registerHelper("firstexist", function() {
   var args = can.makeArray(arguments).slice(0, arguments.length - 1);
   for(var i = 0; i < args.length; i++) {
     var v = args[i];
@@ -190,6 +190,16 @@ Mustache.registerHelper("firstof", function() {
   }
   return "";
 });
+
+Mustache.registerHelper("firstnonempty", function() {
+  var args = can.makeArray(arguments).slice(0, arguments.length - 1);
+  for(var i = 0; i < args.length; i++) {
+    var v = args[i];
+    if(v != null && !!(v.toString().trim())) return v;
+  }
+  return "";
+});
+
 
 
 })(this, jQuery, can);

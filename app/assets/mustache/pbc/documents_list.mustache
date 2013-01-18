@@ -1,12 +1,12 @@
   {{#object_documents}}
-  <li {{data 'model'}} data-model="true" rel="tooltip" data-placement="top" title="{{document.link_url}}{{^document.link_url}}No link{{/document.link_url}}">
+  <li {{data 'model'}} data-model="true" rel="tooltip" data-placement="top" title="{{firstnonempty document.link_url 'No link'}}">
     <a class="btn btn-nano pull-right remove_document" href="javascript://">
       <i class="grcicon-x-grey"></i>
     </a>
     <span>
       {{#if document.link_url}}
       <span>
-        <a href="{{document.link_url}}" target="_blank">{{firstof document.title document.link_url}}</a>
+        <a href="{{document.link_url}}" target="_blank">{{firstnonempty document.title document.link_url}}</a>
       </span>
       {{else}}
         <span>{{document.title}}</span>
