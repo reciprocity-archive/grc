@@ -98,7 +98,41 @@
           }
         }
       }
-      
+      &.gov {
+        a {
+          background: $gov;
+          color:$white;
+          &:hover {
+            background: $govActive;
+          }
+          &.active {
+            background: $govActive;
+            color:$menuLink;
+          }
+        }
+      }
+      &.risk {
+        a {
+          background: $risk;
+          color:$white;
+          &:hover {
+            background: $riskActive;
+          }
+          &.active {
+            background: $riskActive;
+            color:$menuLink;
+          }
+        }
+      }
+      &.compliance {
+        background: $darkGray;
+        a {
+          &:hover {
+            background: $darkGray;
+            color:$menuLink;
+          }
+        }
+      }
     }
   }
 }

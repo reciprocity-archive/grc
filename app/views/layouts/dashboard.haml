@@ -38,7 +38,15 @@
                   -else
                     Google GRC                
             .span8
-              %ul.menu    
+              %ul.menu
+                -if has_feature? :BETA
+                  -if controller.controller_name == 'programs_dash'
+                    %li.gov
+                      %a#grcbutton-governance{:href => "#"} Governance
+                    %li.risk
+                      %a#grcbutton-risk{:href => "#"} Risk
+                    %li.compliance
+                      %a#grcbuttonStable Compliance
                 %li.demo
                   -if controller_name == 'design'
                     -path = programs_dash_path
@@ -104,7 +112,7 @@
               
 
 
-    -if has_feature? :BETA
+    -#-if has_feature? :BETA
       -if controller.controller_name == 'programs_dash'
         .headercenter.fltnone
           =render :partial => 'design/templates/grcmenu'
