@@ -8,7 +8,10 @@
   %ol#breadcrumb
     %li #{model_title}
     %li= instance.slug
-  .location#pageTitle=instance.title
+  .location#pageTitle
+    =instance.slug
+    \: 
+    =instance.title
 
 -content_for :page_help, model_name
 
