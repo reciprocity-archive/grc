@@ -85,16 +85,16 @@
     }
 
     , filter : function(str) {
-      if(str != null) {
-        this.options.filter = str.toUpperCase();
-      }
       var that = this;
-      this.element.find("[data-model]").each(function() {
-        var $this = $(this);
-        if(!that.options.filter || $this.find(".regulationslot").text().toUpperCase().indexOf(that.options.filter) > 1)
-          $this.show();
-        else
-          $this.hide();
+      this.options.model.findAll({ id : this.options.id, s : str}).then(function(data) {
+        var ids = can.map(data, function(v) { return v.id });
+        that.element.find("[data-model]").each(function() {
+          var $this = $(this);
+          if(can.inArray($this.data("model").id, ids) > - 1)
+            $this.show();
+          else
+            $this.hide();
+        });
       });
     }
 
