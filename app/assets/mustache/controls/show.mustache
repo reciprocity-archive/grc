@@ -5,8 +5,7 @@
     	</a>
 		<div class="expander"></div>
 		<span class="prefix">{{prefix}} {{slug}}</span>
-		{{title}} 
-		{{#unless title}} {{description}} {{/unless}}
+		{{firstnonempty title description}}
 	</div>
 </div>
 <div class="row-fluid-slotcontent collapse" id="content_{{id}}">

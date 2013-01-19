@@ -1,4 +1,8 @@
 //= require mapping/mapping_controller
+//= require controls/control
+//= require sections/section
+//= require sections/sections_controller
+//= require controls/controls_controller
 
 describe("CMS.Controllers.MappingWidgets", function() {
 
@@ -35,17 +39,44 @@ describe("CMS.Controllers.MappingWidgets", function() {
     it(".widgetsearch-tocontent keydown [triggers filter]", function() {
         $("#mapping").affix("input.widgetsearch-tocontent[type=text]").val("foo");
         $("#mapping").affix("div").cms_controllers_controls({ arity : 2 });
-        spyOn(CMS.Controllers.Controls.prototype, "filter").andCallThrough();
+        spyOn(CMS.Controllers.Controls.prototype, "filter");
 
         var ev = new $.Event("keydown");
         ev.which = 79;
         $("#mapping .widgetsearch-tocontent").trigger(ev);
 
         waitsFor(function() {
-            return $("#mapping .cms_controllers_controls").control().options.filter;
+            return $("#mapping .cms_controllers_controls").control().filter.callCount > 0;
         }, 1000, "waiting for filter to be set");
         runs(function() {
             expect(CMS.Controllers.Controls.prototype.filter).toHaveBeenCalledWith("foo");
         });
     });
+});
+
+describe("Mapping perf test", function() {
+
+  it("Loads all in a reasonable amount of time, 5000ms or less", function() {
+    var sections = affix("#sections")
+    , rcontrols = affix("#rcontrols")
+    , ccontrols = affix("#ccontrols")
+    , stime = Date.now();
+    spyOn(CMS.Controllers.Controls.prototype, "draw_list").andCallThrough();
+    spyOn(CMS.Controllers.Sections.prototype, "draw_list").andCallThrough();
+
+    sections.cms_controllers_controls({ id : 1 });
+    rcontrols.cms_controllers_controls({ id : 1, model : CMS.Models.RegControl });
+    ccontrols.cms_controllers_sections({ id : 1, model : CMS.Models.SectionSlug });
+
+    waitsFor(function() {
+      return CMS.Controllers.Controls.prototype.draw_list.callCount >= 2 && CMS.Controllers.Sections.prototype.draw_list.callCount >= 1;
+    }, 5000);
+
+    runs(function(){
+      var elapsed = Date.now() - stime;
+      expect(elapsed).toBeLessThan(5000);
+      jasmine.log("Actual time:", elapsed, "ms");
+    });
+  });
+
 });
