@@ -54,9 +54,19 @@ describe("CMS.Controllers.MappingWidgets", function() {
     });
 });
 
+$(document).ajaxError(function(ev, xhr) {
+  var mesg = "An unknown error occurred calling the REST services.";
+  if(xhr.status === 401) {
+    mesg = "You are not logged in";
+  } 
+  if(jasmine.currentEnv_.currentSpec) {
+    jasmine.currentEnv_.currentSpec.fail(new Error(mesg));
+  }
+})
 describe("Mapping perf test", function() {
 
   it("Loads all in a reasonable amount of time, 5000ms or less", function() {
+
     var sections = affix("#sections")
     , rcontrols = affix("#rcontrols")
     , ccontrols = affix("#ccontrols")
