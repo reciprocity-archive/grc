@@ -63,10 +63,11 @@ describe("Mapping perf test", function() {
     , stime = Date.now();
     spyOn(CMS.Controllers.Controls.prototype, "draw_list").andCallThrough();
     spyOn(CMS.Controllers.Sections.prototype, "draw_list").andCallThrough();
+    var sparams = can.deparam(window.location.search.substr(1));
 
-    sections.cms_controllers_controls({ id : 1 });
-    rcontrols.cms_controllers_controls({ id : 1, model : CMS.Models.RegControl });
-    ccontrols.cms_controllers_sections({ id : 1, model : CMS.Models.SectionSlug });
+    sections.cms_controllers_controls({ id : sparams.mapping_id || 1 });
+    rcontrols.cms_controllers_controls({ id : sparams.mapping_id || 1, model : CMS.Models.RegControl });
+    ccontrols.cms_controllers_sections({ id : sparams.mapping_id || 1, model : CMS.Models.SectionSlug });
 
     waitsFor(function() {
       return CMS.Controllers.Controls.prototype.draw_list.callCount >= 2 && CMS.Controllers.Sections.prototype.draw_list.callCount >= 1;
