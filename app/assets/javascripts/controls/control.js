@@ -4,7 +4,7 @@
 can.Model.Cacheable("CMS.Models.Control", {
 	// static properties
     root_object : "control"
-	, findAll : "GET /controls.json"
+	, findAll : "GET /controls.json?company=true"
 	, findOne : "GET /controls/{id}.json"
 }
 , {
