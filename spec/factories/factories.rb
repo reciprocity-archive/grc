@@ -188,6 +188,14 @@ FactoryGirl.define do
     title
   end
 
+  factory :project do
+    title
+  end
+
+  factory :data_asset do
+    title
+  end
+
   factory :market do
     title
   end
