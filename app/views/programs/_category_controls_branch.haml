@@ -20,7 +20,7 @@
                 %a.widgetbtn.fltrt{ :href => flow_control_path(control), :title => 'View Control' }
                   %i.grcicon-arrowright-grey
                 %span.prefix=control.slug
-                =control.title
+                =strip_tags(control.title)
           .row-fluid-slotcontent.collapse{ :id => control_content_id }
             .span9
               =display_as_html control.description

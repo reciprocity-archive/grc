@@ -234,11 +234,12 @@ can.Control("CMS.Controllers.MappingWidgets", {}, {
     var controllers = this.element.find(".cms_controllers_controls, .cms_controllers_sections").controls(namespace.CMS.Controllers.Controls);
     $(controllers).each(function() {
       var that = this;
-      setTimeout(function() {
+      if(that.search_timeout) clearTimeout(that.search_timeout);
+      that.search_timeout = setTimeout(function() {
         if(that.options.arity > 1) {
           that.filter(el.val());
         }
-      }, 1);
+      }, 300);
     });
     ev.stopPropagation();
   }

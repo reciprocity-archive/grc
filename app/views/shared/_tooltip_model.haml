@@ -5,18 +5,23 @@
 -content_for :tooltip_title do
   %h3 #{model_title} Information
 
-=instance.title
-\|
-=instance.slug
-
-%h3 Description
-
-.item
+%h4 
+  =model_title
+  \:
+  =instance.title
+  \|
+  =instance.slug
+%br
+%h4 Description
+.rtf
   =display_as_html instance.description
 
-.item
-  Created:
-  =display_time(instance.created_at)
-.item
-  Updated:
-  =display_time(instance.updated_at)
+
+.tooltip-footer
+  .row-fluid
+    .span6
+      %strong Created:
+      =display_time(instance.created_at)
+    .span6
+      %strong Updated:
+      =display_time(instance.updated_at)

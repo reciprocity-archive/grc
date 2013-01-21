@@ -12,4 +12,9 @@ class Meeting < ActiveRecord::Base
   def display_name
     "#{response.system.title} meeting"
   end
+
+  def calendar_url=(url)
+    self[:calendar_url] = url.gsub "action=TEMPLATE&tmeid=", "action=VIEW&eid="
+  end
+
 end

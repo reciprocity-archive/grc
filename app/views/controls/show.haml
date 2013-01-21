@@ -7,7 +7,7 @@
     %li=@control.slug
   
   %h1
-    =@control.title
+    =strip_tags(@control.title)
 
 -content_for :page_help, 'control'
 

@@ -75,7 +75,7 @@ can.Model.Cacheable("CMS.Models.Section", {
 
     var cs = new can.Model.List();
     if(this.children) {
-      for(i = 0; i < this.children.length ; i ++) {
+      for(var i = 0; i < this.children.length ; i ++) {
         cs.push(new this.constructor(this.children[i].serialize()));
       }
     }

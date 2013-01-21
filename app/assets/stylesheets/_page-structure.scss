@@ -351,3 +351,72 @@ label.request {
     font-size:11px;
   }
 }
+
+// Risks
+
+.risk-level {
+  float:right;
+  background:#fff;
+  @include border-radius();
+  border:1px solid #eee;
+  padding:0 6px;
+  line-height:20px;
+  margin-top:12px;
+  &.risk-level-1 {
+    color:darken($green,5%);
+  }
+  &.risk-level-2 {
+    color:$green;
+  }
+  &.risk-level-3 {
+    color:$orange;
+  }
+  &.risk-level-4 {
+    color:darken($red,5%);
+  }
+  &.risk-level-5 {
+    color:$red;
+  }
+
+
+}
+
+.risk-content {
+  h4 {
+    border-top:1px solid #ddd;
+    padding-top:10px;
+    margin-bottom:6px;
+    font-weight:normal;
+    color:#111;
+  }
+  .rtf {
+    margin-bottom:6px;
+  }
+}
+
+
+// Tooltips
+
+.tooltip-footer {
+  padding:6px;
+  border-top:1px solid #ddd;
+  color:#666;
+  font-size:11px;
+  .row-fluid {
+    margin-bottom:0 !important;
+    padding-bottom:0  !important;
+  }
+  [class*="span"] {
+    text-align:center;
+  }
+}
+
+// Widgets additions
+
+.information {
+  &.information-common {
+    span.info-item {
+      color:#111;
+    }
+  }
+}

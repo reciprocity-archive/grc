@@ -678,8 +678,7 @@ h3.toggle {
   background: #EFEFEF;
 }
 
-.cleanlabels .row-fluid [class*="span"],
-.information .row-fluid [class*="span"] {
+.cleanlabels .row-fluid [class*="span"] {
   min-height:28px;
 }
 
@@ -1753,11 +1752,6 @@ margin-top:5px;
 
 .forminputstatus {
   background-color: #e6feff !important;
-}
-
-/* This widget isn't full of content slots, so lets add some padding to make the input boxes look less cramped */
-.information {
-  /* padding:10px; */
 }
 
 /* Tab bar buttons */

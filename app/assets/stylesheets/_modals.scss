@@ -376,7 +376,17 @@ h5.in-modal {
 .wysiwyg-area {
   border:1px solid #ccc;
   @include border-radius();
+  @include clearfix();
   padding:4px;
   @include background-image(linear-gradient(center top, #ddd, #eee ));  
+  &.extended {
+    margin-top:10px;
+    select {
+      float:right;
+      font-size:11px;
+      width:auto;
+      @include border-radius();
+    }
+  }
 }
 

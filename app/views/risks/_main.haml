@@ -3,72 +3,40 @@
 
 -content_for :widget_help, "risk_main"
 
-.row-fluid
-  .span12.well
-    =display_as_html risk.description
+.risk-content
+  .row-fluid
+    .span6
+      %h3 Causes
+    .span6
+      %h3 Impacts
 
-.row-fluid
-  .span6
-    %h3 Causes
+  .row-fluid
+    .span6
+      .risk-level{ :class=> "risk-level-#{risk.likelihood_rating}"} #{risk.likelihood_rating} - #{Risk::RATINGS[risk.likelihood_rating]}
+      %h4 Likelihood
+      =display_as_html risk.likelihood
+    .span6
+      .risk-level{ :class=> "risk-level-#{risk.financial_impact_rating}"} #{risk.financial_impact_rating} - #{Risk::RATINGS[risk.financial_impact_rating]}
+      %h4 Company-wide Financial Impact
+      =display_as_html risk.financial_impact
+  .row-fluid
+    .span6
+      %h4 Threat Vector
+      =display_as_html risk.threat_vector
+    .span6
+      .risk-level{ :class=> "risk-level-#{risk.reputational_impact_rating}"} #{risk.reputational_impact_rating} - #{Risk::RATINGS[risk.reputational_impact_rating]}
+      %h4 Company-wide Reputational Impact
+      =display_as_html risk.reputational_impact
+  .row-fluid
+    .span6
+      %h4 Trigger/Immediate /Proximate Cause
+      =display_as_html risk.trigger
+    .span6
+      .risk-level{ :class=> "risk-level-#{risk.operational_impact_rating}"} #{risk.operational_impact_rating} - #{Risk::RATINGS[risk.operational_impact_rating]}
+      %h4 Company-wide Operational Impact
+      =display_as_html risk.operational_impact
 
-    .row-fluid
-      .span8
-        %h4 Likelihood
-      .span4
-        .item #{risk.likelihood_rating} - #{Risk::RATINGS[risk.likelihood_rating]}
-    .row-fluid
-      .span12.well
-        =display_as_html risk.likelihood
-
-    .row-fluid
-      .span8
-        %h4 Threat Vector
-    .row-fluid
-      .span12.well
-        =display_as_html risk.threat_vector
-
-    .row-fluid
-      .span8
-        %h4 Trigger/Immediate /Proximate Cause
-    .row-fluid
-      .span12.well
-        =display_as_html risk.trigger
-
-    .row-fluid
-      .span8
-        %h4 Pre-conditions / Contributory Causes
-    .row-fluid
-      .span12.well
-        =display_as_html risk.preconditions
-
-  .span6
-    %h3 Impacts
-
-
-    .row-fluid
-      .span8
-        %h4 Company-wide Financial Impact
-      .span4
-        .item #{risk.financial_impact_rating} - #{Risk::RATINGS[risk.financial_impact_rating]}
-    .row-fluid
-      .span12.well
-        =display_as_html risk.financial_impact
-
-    .row-fluid
-      .span8
-        %h4 Company-wide Reputational Impact
-      .span4
-        .item #{risk.reputational_impact_rating} - #{Risk::RATINGS[risk.reputational_impact_rating]}
-    .row-fluid
-      .span12.well
-        =display_as_html risk.reputational_impact
-
-    .row-fluid
-      .span8
-        %h4 Company-wide Operational Impact
-      .span4
-        .item #{risk.operational_impact_rating} - #{Risk::RATINGS[risk.operational_impact_rating]}
-    .row-fluid
-      .span12.well
-        =display_as_html risk.operational_impact
-
+  .row-fluid
+    .span12
+      %h4 Pre-conditions / Contributory Causes
+      =display_as_html risk.preconditions

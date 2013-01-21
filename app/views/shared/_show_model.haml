@@ -10,7 +10,10 @@
       #{model_title}
     %li= instance.slug
     
-  %h1=instance.title
+  %h1
+    =instance.slug
+    \: 
+    =instance.title
 
 -content_for :page_help, model_name
 

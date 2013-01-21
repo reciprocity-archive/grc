@@ -90,6 +90,7 @@
   , focus_first_input: function() {
       var $first_input = this.$element
         .find('input[type="text"], input[type="checkbox"], select, textarea')
+        .not('[placeholder*=autofill], label:contains(autofill) + *, [disabled]')
         .first();
       if ($first_input.length > 0)
         setTimeout(function() { $first_input.get(0).focus(); }, 100);

@@ -16,22 +16,22 @@
                 :title => "Edit #{model_title}" }
     %i.grcicon-edit-grey
 
-.information
+.information.information-common
   .toolbar-widget
 
   %hr.hr-widget
 
   .row-fluid
-    .span12
-      .span4
-        %label Code
-        %input.span12{:type => "text", :disabled => "disabled", :value => instance.slug}
-  .row-fluid
-    .span12
+    .span8
       %label Title
-      %input.span12{:disabled => "disabled", :type => "text", :value => instance.title}
+      %span.info-item=instance.title
+    .span4
+      %label Code
+      %span.info-item=instance.slug
+
   .row-fluid
     .span12
+      %br
       %label Description
       =display_as_html instance.description
 
