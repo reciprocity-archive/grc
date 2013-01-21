@@ -100,37 +100,34 @@
       }
       &.gov {
         a {
-          background: $gov;
-          color:$white;
+          background: $govActive;
+          color:$menuLink;
           &:hover {
-            background: $govActive;
+            color:$white;
           }
           &.active {
-            background: $govActive;
-            color:$menuLink;
+            background: $gov;
+            color:$white;
           }
         }
       }
       &.risk {
         a {
-          background: $risk;
-          color:$white;
+          background: $riskActive;
+          color:$menuLink;
           &:hover {
-            background: $riskActive;
+            color:$white;
           }
           &.active {
-            background: $riskActive;
-            color:$menuLink;
+            background: $risk;
+            color:$white;
           }
         }
       }
       &.compliance {
-        background: $darkGray;
         a {
-          &:hover {
-            background: $darkGray;
-            color:$menuLink;
-          }
+          background: $green;
+          color:$white;
         }
       }
     }
