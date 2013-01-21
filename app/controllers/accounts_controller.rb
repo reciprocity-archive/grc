@@ -18,7 +18,7 @@ class AccountsController < BaseObjectsController
 
   layout 'dashboard'
 
-  no_base_action :index, :show, :tooltip
+  no_base_action :show, :tooltip
 
   private
 

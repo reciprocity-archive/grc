@@ -21,7 +21,7 @@
               :locals => { :programs => @programs }
   .doubleColumn
     .fullHeight
-      =render :partial => 'quick/find',
+      =render :partial => 'quick_find',
             :layout => 'layouts/widget_box'
       -if has_feature? :BETA
         =render :partial => 'design/templates/riskWidgetGap'

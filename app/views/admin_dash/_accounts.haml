@@ -8,8 +8,8 @@
 
 .tabbable#quick_find
   %ul.nav.nav-tabs
-    %li=link_to 'Accounts', '#accounts', :data => { :'tab-href' => quick_accounts_path, :toggle => 'tab' }
-    %li=link_to 'People', '#people', :data => { :'tab-href' => quick_people_path, :toggle => 'tab' }
+    %li=link_to 'Accounts', '#accounts', :data => { :'tab-href' => flow_accounts_path(:quick => true), :toggle => 'tab' }
+    %li=link_to 'People', '#people', :data => { :'tab-href' => flow_people_path(:quick => true), :toggle => 'tab' }
   .tab-content
     #accounts.tab-pane
     #people.tab-pane

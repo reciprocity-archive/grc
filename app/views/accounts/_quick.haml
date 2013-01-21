@@ -1,0 +1,11 @@
+-if @accounts.empty?
+  .no-results
+    No results found
+-else
+  %ul.nav.nav-tabs.nav-stacked
+    -@accounts.each do |account|
+      %li
+        %a.widgetbtn.fltrt{ :'data-form-target' => "refresh", :'data-delete-target' => "refresh", :'data-modal-reset' => "reset", :'data-toggle' => "modal-ajax-form", :href => edit_flow_account_path(account) }
+          %i.grcicon-edit-grey
+        =link_to '#' do
+          =account.display_name

@@ -26,7 +26,13 @@ class CategoriesController < BaseObjectsController
     if params[:s]
       @categories = @categories.db_search(params[:s])
     end
-    render :json => @categories.all.as_json
+
+    if params[:quick]
+      @root_categories = allowed_objs(Category.roots, :read)
+      render :partial => 'quick'
+    else
+      render :json => @categories.all.as_json
+    end
   end
 
   def export
