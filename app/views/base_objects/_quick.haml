@@ -1,0 +1,20 @@
+-model_name = controller_name.singularize
+-model_title = controller_name.singularize.titleize
+-instances = instance_variable_get('@' + model_name.pluralize)
+
+-if instances.empty?
+  .no-results
+    No results found
+-else
+  %ul.nav.nav-tabs.nav-stacked
+    -instances.each do |instance|
+      -instance_path = self.send("flow_#{model_name}_path", instance)
+      -instance_tooltip_path = self.send("tooltip_flow_#{model_name}_path", instance)
+      %li.group
+        %a{ :href => instance_path, :'data-popover-href' => instance_tooltip_path, :'data-popover-trigger' => 'sticky-hover' }
+          %h3=instance.slug
+          %p.oneline
+            %strong=instance.title
+            &nbsp;
+            =display_as_html instance.description
+
