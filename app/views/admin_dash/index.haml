@@ -25,10 +25,11 @@
 .container-fluid
   .row-fluid
     .span4
-      .widget
-        .WidgetBoxHeading
-          .WidgetTitle Demo Status
-        .WidgetBoxContent.fltnone
+      %section.widget
+        %header.header
+          %h2
+            Demo Status
+        %section.content
           -path = request.fullpath.gsub(/BETA=[^&]*&?/, '').sub(/[?&]$/, '')
           -path += path.include?('?') ? '&' : '?'
           -if has_feature? :BETA
@@ -38,27 +39,27 @@
               They will be outlined in orange where possible. 
           -else
             %label Demo features are currently off. 
-      .widget
-        #productInfo.WidgetBox
-          .WidgetBoxHeading
-            .WidgetTitle Imp/Export Actions
-          .WidgetBoxContent.information
-            .toolbar-widget
-              .row-fluid
-                .span6
-                  %a.span12.btn.btn-warning{:href => "/systems/import"}
-                    Import Systems
-                .span6
-                  %a.span12.btn.btn-warning{"data-toggle" => "modal-ajax", :href => "/systems/export.html"}
-                    Export Systems
+      %section#productInfo.widget
+        %header.header
+          %h2
+            Imp/Export Actions
+        %section.content.information
+          .toolbar-widget
+            .row-fluid
+              .span6
+                %a.span12.btn.btn-warning{:href => "/systems/import"}
+                  Import Systems
+              .span6
+                %a.span12.btn.btn-warning{"data-toggle" => "modal-ajax", :href => "/systems/export.html"}
+                  Export Systems
   
-      .widget
+      %section#StyleGuide.widget
         -if has_feature? :BETA
         
           / in progress
-          #StyleGuide.WidgetBox.singleWide.demoItem
-            .WidgetBoxHeading
-              .WidgetTitle Style Guide
+          %header.header.demoItem
+            %h2
+              Style Guide
               %nav
                 %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
                   %i.grcicon-questionmark-grey
@@ -66,91 +67,90 @@
                 %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#programsInProgress"}
                   %i.grcicon-enlarge-grey
             / /.WidgetBoxHeading
-            .WidgetBoxContent
-              #programsInProgress.toolbar-widget.in
-                %ul#quickLinks.nav.nav-tabs.nav-stacked.in
-                  %li.group
-                    %a.btn{:href => "/design/styleguide"}
-                      Style Guide (First Draft)
+          %section.content
+            #programsInProgress.toolbar-widget.in
+              %ul#quickLinks.nav.nav-tabs.nav-stacked.in
+                %li.group
+                  %a.btn{:href => "/design/styleguide"}
+                    Style Guide (First Draft)
   
-          #Programs.WidgetBox.singleWide.demoItem
-            .WidgetBoxHeading
-              .WidgetTitle In-Progress
-              %nav
-                %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
-                  %i.grcicon-questionmark-grey
-                %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
-                %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#programsInProgress"}
-                  %i.grcicon-enlarge-grey
-            / /.WidgetBoxHeading
-            .WidgetBoxContent
-              #programsInProgress.toolbar-widget.in
-                %ul#quickLinks.nav.nav-tabs.nav-stacked.in
-                  %li.group
-                    %a.btn{:href => "/design/pbc-list"}
-                      PBC List
-                  %li.group
-                    %a.btn{"data-toggle" => "modal", :href => "#newRequest"}
-                      New Request
-                  %li.group
-                    %a.btn{"data-toggle" => "modal", :href => "#pbcListEdit"}
-                      Edit PBC List
-  
-                  %li.group
-                    %a.btn{"data-toggle" => "modal", :href => "#newResponseDocumentation"}
-                      Edit Response (Documentation)
-                  %li.group
-                    %a.btn{"data-toggle" => "modal", :href => "#newResponseInterview"}
-                      Edit Response (Interview)
-                  %li.group
-                    %a.btn{"data-toggle" => "modal", :href => "#newResponsePopulation"}
-                      Edit Response (Population)
-  
-                  %li.group
-                    %a.btn{"data-toggle" => "modal", :href => "#redesignNewSystem"}
-                      New/Edit System
-                  %li.group
-                    %a.btn{"data-toggle" => "modal", :href => "#redesignNewControlWide"}
-                      New Control
-                  %li.group
-                    %a.btn{:href => "/design/systems"}
-                      Systems Page
-                  %li.group
-                    %a.btn{:href => "/design/products"}
-                      Product Page
-                  %li.group
-                    %a.btn{:href => "/design/controls"}
-                      Controls Page
-                  %li.group
-                    %a.btn{:href => "/design/audit-manager"}
-                      Audit Manager
-                  %li.group
-                    %a.btn{:href => "/design/audit-dashboard"}
-                      Audit Dashboard
-                  %li.group
-                    %a.btn{:href => "/design/audit-setup"}
-                      Audit Setup
-                  %li.group
-                    %a.btn{:href => "/design/audit-control-review"}
-                      Audit Controls Review
-                  
-                  %li.group
-                    %a.btn{:href => "/design/importregs"}
-                      Importing Regulation Data
-                  %li.group
-                    %a.btn{:href => "/design/importcontrols"}
-                      Importing Controls      
+      %section#Programs.WidgetBox.demoItem.widget
+        %section.header
+          %h2
+            In-Progress
+            %nav
+              %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                %i.grcicon-questionmark-grey
+              %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
+              %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#programsInProgress"}
+                %i.grcicon-enlarge-grey
+          / /.WidgetBoxHeading
+        %section.content
+          #programsInProgress.toolbar-widget.in
+            %ul#quickLinks.nav.nav-tabs.nav-stacked.in
+              %li.group
+                %a.btn{:href => "/design/pbc-list"}
+                  PBC List
+              %li.group
+                %a.btn{"data-toggle" => "modal", :href => "#newRequest"}
+                  New Request
+              %li.group
+                %a.btn{"data-toggle" => "modal", :href => "#pbcListEdit"}
+                  Edit PBC List
 
-    =render :partial => 'admin_dash/accounts',
-      :layout => 'layouts/widget_box',
-      :locals => { :accounts => @accounts, :people => @people }
+              %li.group
+                %a.btn{"data-toggle" => "modal", :href => "#newResponseDocumentation"}
+                  Edit Response (Documentation)
+              %li.group
+                %a.btn{"data-toggle" => "modal", :href => "#newResponseInterview"}
+                  Edit Response (Interview)
+              %li.group
+                %a.btn{"data-toggle" => "modal", :href => "#newResponsePopulation"}
+                  Edit Response (Population)
+
+              %li.group
+                %a.btn{"data-toggle" => "modal", :href => "#redesignNewSystem"}
+                  New/Edit System
+              %li.group
+                %a.btn{"data-toggle" => "modal", :href => "#redesignNewControlWide"}
+                  New Control
+              %li.group
+                %a.btn{:href => "/design/systems"}
+                  Systems Page
+              %li.group
+                %a.btn{:href => "/design/products"}
+                  Product Page
+              %li.group
+                %a.btn{:href => "/design/controls"}
+                  Controls Page
+              %li.group
+                %a.btn{:href => "/design/audit-manager"}
+                  Audit Manager
+              %li.group
+                %a.btn{:href => "/design/audit-dashboard"}
+                  Audit Dashboard
+              %li.group
+                %a.btn{:href => "/design/audit-setup"}
+                  Audit Setup
+              %li.group
+                %a.btn{:href => "/design/audit-control-review"}
+                  Audit Controls Review
+              
+              %li.group
+                %a.btn{:href => "/design/importregs"}
+                  Importing Regulation Data
+              %li.group
+                %a.btn{:href => "/design/importcontrols"}
+                  Importing Controls      
 
     -if has_feature? :BETA
       .span4
+      
         / in progress
-        #Programs.WidgetBox.singleWide.demoItem
-          .WidgetBoxHeading
-            .WidgetTitle WIP : Modals & Widgets
+        %section#Programs.widget.WidgetBox.demoItem
+          %section.header
+            %h2
+              WIP : Modals & Widgets
             %nav
               %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
                 %i.grcicon-questionmark-grey
@@ -158,7 +158,7 @@
               %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#programInProgress"}
                 %i.grcicon-enlarge-grey
           / /.WidgetBoxHeading
-          .WidgetBoxContent
+          %section.content
             #programInProgress.toolbar-widget.in
               %ul#quickLinks.nav.nav-tabs.nav-stacked.in
                 %li.group
@@ -187,11 +187,17 @@
                 %li.row-fluid
                   %a.btn{:href => "/design/products"}
                     Impact Scope (view on Product)
+                  
+        =render :partial => 'admin_dash/accounts',
+          :layout => 'layouts/widget_box',
+          :locals => { :accounts => @accounts, :people => @people }
+            
+          
       .span4
         / in progress
-        #Programs.WidgetBox.singleWide.demoItem
-          .WidgetBoxHeading
-            .WidgetTitle 
+        %section#Programs.widget.demoItem
+          %section.header
+            %h2
               Approved Modals
             %nav
               %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
@@ -200,7 +206,7 @@
               %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#newEditItems"}
                 %i.grcicon-enlarge-grey
           / /.WidgetBoxHeading
-          .WidgetBoxContent
+          %section.content
             -#%ul#newEdit.nav.nav-tabs.nav-stacked.in
               %li.group
                 %label Rapid Prototypes
@@ -271,9 +277,10 @@
                     Y/N Dialog
                   %a.span6.btn{"data-toggle" => "modal", :href => "#comingsoonModal"}
                     Coming Soon
-        #Implemented.WidgetBox.singleWide
-          .WidgetBoxHeading
-            .WidgetTitle 
+        
+        %section#Implemented.widget
+          %section.header
+            %h2
               Implemented
             %nav
               %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
@@ -282,14 +289,12 @@
               %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#ImplementedItems"}
                 %i.grcicon-enlarge-grey.grcicon-blue-expand
           / /.WidgetBoxHeading
-          .WidgetBoxContent
+          %section.content
             #ImplementedItems.toolbar-widget.collapse
               %ul#quickLinks.nav.nav-tabs.nav-stacked.in
                 %li.group
                   %a.btn{"data-toggle" => "modal", :href => "#redesignNewProgram"}
                     New Program 
-  
-    .span4
       
     .span4
       =render :partial => 'admin_dash/categories',
