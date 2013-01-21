@@ -105,6 +105,22 @@ CmsRails::Application.routes.draw do
     end
   end
 
+  resources :projects, :as => 'flow_projects', :only => [:index, :show, :new, :edit, :create, :update, :destroy] do
+    member do
+      get 'delete'
+      get 'tooltip'
+      get 'delete'
+    end
+  end
+
+  resources :data_assets, :as => 'flow_data_assets', :only => [:index, :show, :new, :edit, :create, :update, :destroy] do
+    member do
+      get 'delete'
+      get 'tooltip'
+      get 'delete'
+    end
+  end
+
   resources :risky_attributes, :as => 'flow_risky_attributes', :only => [:index, :show, :new, :edit, :create, :update, :destroy] do
     member do
       get 'delete'

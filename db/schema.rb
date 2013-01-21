@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130117193353) do
+ActiveRecord::Schema.define(:version => 20130118215736) do
 
   create_table "accounts", :force => true do |t|
     t.string   "username"
@@ -130,6 +130,18 @@ ActiveRecord::Schema.define(:version => 20130117193353) do
   end
 
   add_index "cycles", ["program_id"], :name => "index_cycles_on_regulation_id"
+
+  create_table "data_assets", :force => true do |t|
+    t.string   "slug"
+    t.string   "title"
+    t.text     "description"
+    t.string   "url"
+    t.integer  "modified_by_id"
+    t.datetime "start_date"
+    t.datetime "stop_date"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
 
   create_table "documents", :force => true do |t|
     t.string   "title"
@@ -301,6 +313,18 @@ ActiveRecord::Schema.define(:version => 20130117193353) do
   end
 
   add_index "programs", ["slug"], :name => "index_programs_on_slug", :unique => true
+
+  create_table "projects", :force => true do |t|
+    t.string   "slug"
+    t.string   "title"
+    t.text     "description"
+    t.string   "url"
+    t.integer  "modified_by_id"
+    t.datetime "start_date"
+    t.datetime "stop_date"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
 
   create_table "relationship_types", :id => false, :force => true do |t|
     t.string   "relationship_type"
