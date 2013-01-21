@@ -19,12 +19,12 @@
       can.extend(
       	can.getObject("CMS.Controllers.Controls.Instances", namespace, true)
       	, { 
-      		RegControls : $("#rcontrol_list .WidgetBoxContent").cms_controllers_controls({ 
+      		RegControls : $("#rcontrol_list .content").cms_controllers_controls({ 
       			arity : 2 
       			, list: "/assets/controls/list_mapping.mustache"
       			, model : CMS.Models.RegControl
       			, id : programId }).control()
-      		, CompanyControls : $("#ccontrol_list .WidgetBoxContent").cms_controllers_controls({ 
+      		, CompanyControls : $("#ccontrol_list .content").cms_controllers_controls({ 
       			arity : 2
       			, list: "/assets/controls/list_mapping.mustache"
       			, model : CMS.Models.CompanyControl }).control()
@@ -47,7 +47,7 @@
         can.extend(
           can.getObject("CMS.Controllers.Sections.Instances", namespace, true)
           , {
-            Section : $("#section_list .WidgetBoxContent").cms_controllers_sections({
+            Section : $("#section_list .content").cms_controllers_sections({
 			 	      id : programId
 				      }).control()
             , SelectedSection : $("#selected_sections").cms_controllers_sections({
