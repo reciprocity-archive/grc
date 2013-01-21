@@ -15,23 +15,22 @@
 -content_for :subheader_plus do
   %a.navbarplus.fltrt{ :href => new_flow_system_path(:'system[is_biz_process]' => @system.is_biz_process), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
 
-.row-static
-  .doubleColumn
-    .maxHalfHeight
-      =render :partial => 'systems/sub_systems',
-              :layout => 'layouts/widget_box',
-              :locals => { :system => @system }
-    .singleColumn.maxHalfHeight
-      =render :partial => 'systems/super_systems',
-              :layout => 'layouts/widget_box',
-              :locals => { :system => @system }
-    .singleColumn.maxHalfHeight
+.container-fluid
+.row-fluid
+  .span8
+    =render :partial => 'systems/sub_systems',
+            :layout => 'layouts/widget_box',
+            :locals => { :system => @system }
+               
+    =render :partial => 'systems/super_systems',
+            :layout => 'layouts/widget_box',
+            :locals => { :system => @system }
+    .span4
       =render :partial => 'systems/transactions',
               :layout => 'layouts/widget_box',
               :locals => { :system => @system }
 
-  .singleColumn
-    .fullHeight
-      =render :partial => 'systems/show',
-              :layout => 'layouts/widget_box',
-              :locals => { :system => @system }
+  .span4
+    =render :partial => 'systems/show',
+            :layout => 'layouts/widget_box',
+            :locals => { :system => @system }

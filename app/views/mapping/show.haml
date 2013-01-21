@@ -14,35 +14,35 @@
 -content_for :subheader_extras do
   %h1.fltrt.highlighted Regulation to Control Mapping
 
-.row-static
-  .singleColumn
-    .singleWide.halfHeight#section_list
-      =render :partial => 'section_list',
-              :layout => 'layouts/widget_box',
-              :locals => { :sections => @program.sections.includes(:parent, :controls => :implementing_controls) }
-    .singleWide.maxhalfHeight
+.container-fluid
+  .row-fluid
+    .span4
+      #section_list
+        =render :partial => 'section_list',
+                :layout => 'layouts/widget_box',
+                :locals => { :sections => @program.sections.includes(:parent, :controls => :implementing_controls) }
+
       =render :partial => 'selected_section',
               :layout => 'layouts/widget_box',
               :locals => {:section => nil}
- 
-  .singleColumn
-    .singleWide.halfHeight#rcontrol_list
-      =render :partial => 'control_list',
-              :layout => 'layouts/widget_box',
-              :locals => { :controls => @rcontrols, :title_prefix => 'Reg', :program => @program, :control_type => 'regulation' }
-
-    .singleWide.maxhalfHeight
+   
+    .span4
+      #rcontrol_list
+        =render :partial => 'control_list',
+                :layout => 'layouts/widget_box',
+                :locals => { :controls => @rcontrols, :title_prefix => 'Reg', :program => @program, :control_type => 'regulation' }
+  
+      
       =render :partial => 'selected_control',
               :layout => 'layouts/widget_box',
               :locals => {:control => nil, :control_type => 'rcontrol', :map_button_id => :cmap, :map_button_path => mapping_map_ccontrol_path }
+  
+    .span4
+      #ccontrol_list
+        =render :partial => 'control_list',
+                :layout => 'layouts/widget_box',
+                :locals => { :controls => @ccontrols, :title_prefix => 'Company', :program => @program, :control_type => 'company' }
 
-  .singleColumn
-    .singleWide.halfHeight#ccontrol_list
-      =render :partial => 'control_list',
-              :layout => 'layouts/widget_box',
-              :locals => { :controls => @ccontrols, :title_prefix => 'Company', :program => @program, :control_type => 'company' }
-
-    .singleWide.maxhalfHeight
       =render :partial => 'selected_control',
               :layout => 'layouts/widget_box',
               :locals => {:control => nil, :control_type => 'ccontrol', :map_button_id => nil }

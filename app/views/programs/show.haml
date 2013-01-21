@@ -15,19 +15,17 @@
 -content_for :subheader_plus do
   %a.navbarplus.fltrt{ :href => new_flow_program_path, :'data-toggle' => 'modal-ajax-form', :'data-form-target' => 'redirect', :'data-modal-reset' => 'reset', :'data-modal-class' => 'modal-wide' }
 
-.row-static
-  .doubleColumn
-    .doubleWide.fullHeight
+.container-fluid
+  .row-fluid
+    .span8
       =render :partial => 'programs/controls',
               :layout => 'layouts/widget_box',
               :locals => { :program => @program }
-  .singleColumn
-    .singleWide.fullHeight
+    .span4
       =render :partial => 'programs/show',
               :layout => 'layouts/widget_box',
               :locals => { :program => @program }
-    .singleWide.halfHeight
-
+  
       -if (@program.cycles.length != 0)  
         =render :partial => 'programs/audit_cycles',
                 :layout => 'layouts/widget_box',

@@ -13,439 +13,440 @@
 -content_for :subheader_extras do
   %h1#pageType.pull-right.highlighted Audit Manager
 
-.row-static
-  .doubleColumn
-    / .RegsandControls
-    .WidgetBox.fullHeight.doubleWide
-      .WidgetBoxHeading
-        .pull-right
-          %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}
-          /
-            <a href="#comingsoonModal" class="widgetbtn" data-toggle="modal"><i class="grcicon-questionmark-grey"></i></a>
-            <a href="#newsectionModal" data-toggle="modal"  class="widgettextbtn">Edit Regulations</a>
-            <a href="#newsectionModal" data-toggle="modal"  class="widgettextbtn">Edit Controls</a>
-            <input type="text" placeholder="Search" class="ui-corner-all widgetsearch">
-        .WidgetTitle.doublewidth Audit Status
-      / /.WidgetBoxHeading
-      .WidgetBoxContent
-        #auditstatuscolumns
-          .row-fluid
-            .span6
-            .span6
-              .row-fluid
-                .span3 Requests
-                .span1
-                .span3 Tests
-                .span1
-                .span2
-                  .txtcenter.nominheight Internal
-                  .rowfluid.nominheight
-                    .span12.nominheight
-                      .span6.badge.badge-clear.nominheight D
-                      .span6.badge.badge-clear.nominheight E
-                .span2.txtcenter
-                  .txtcenter.nominheight External
-                  .rowfluid.nominheight
-                    .span12.nominheight
-                      .span6.badge.badge-clear.nominheight D
-                      .span6.badge.badge-clear.nominheight E
-        .row-fluid
-          .span12.nominheight
-            .span6.nominheight
-              %span.prefix SOX-CON-1
-              Goog-Con-23 Physically Protect Stored Data
-            .span6.nominheight
-              .row-fluid.nominheight
-                .span3.progress.progress-striped.active.nominheight
-                  .bar.progressbar-success{"data-percentage" => "7", :style => "float: left; width: 0%; "}
-                  .bar.progressbar-danger{"data-percentage" => "58", :style => "float: right; width: 0%; "}
-                  .bar.progressbar-warning{"data-percentage" => "35", :style => "float: right; width: 0%; "}
-                .span1.nominheight
-                .span3.progress.active.nominheight
-                  .bar.progressbar-success{"data-percentage" => "7", :style => "float: left; width: 0%; "}
-                  .bar.progressbar-danger{"data-percentage" => "58", :style => "float: right; width: 0%; "}
-                  .bar.progressbar-warning{"data-percentage" => "35", :style => "float: right; width: 0%; "}
-                .span1.nominheight
-                .span2
-                  .rowfluid.nominheight
-                    .span12.nominheight
-                      .span6.badge.badge-warning.nominheight 1
-                      .span6.badge.badge-warning.nominheight 0
-                .span2
-                  .rowfluid.nominheight
-                    .span12.nominheight
-                      .span6.badge.badge-important.nominheight 1
-                      .span6.badge.badge-success.nominheight 0
-        #auditstatus
-          / CONTENT VIA JSRENDER
-      / /.WidgetBoxContent
-    / /.RegsandControls
-    .singleColumn
-      #companycontrolwidget.WidgetBox
+.container-fluid
+  .row-fluid
+    .span8
+      / .RegsandControls
+      .WidgetBox
         .WidgetBoxHeading
-          %nav
-            %a.widgettextbtn{"data-toggle" => "modal", :href => "#auditdefaultscope"} Set Scope
-          .WidgetTitle.doublewidth Default Scope of Audit
+          .pull-right
+            %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}
+            /
+              <a href="#comingsoonModal" class="widgetbtn" data-toggle="modal"><i class="grcicon-questionmark-grey"></i></a>
+              <a href="#newsectionModal" data-toggle="modal"  class="widgettextbtn">Edit Regulations</a>
+              <a href="#newsectionModal" data-toggle="modal"  class="widgettextbtn">Edit Controls</a>
+              <input type="text" placeholder="Search" class="ui-corner-all widgetsearch">
+          .WidgetTitle Audit Status
+        / /.WidgetBoxHeading
         .WidgetBoxContent
-          .row-fluid.FLTNONE.nominheight
-            .controls-group.span6.nominheight
-            .span6.nominheight
-              .span4.nominheight
-                %label.fltnone Current
-              .span4.nominheight
-                %label.fltnone Pending
-              .span4.nominheight
-                %label.fltnone Out
-          %ul#TransactionList.in
-            %li.controlSlot.ui-draggable.row-fluid.nominheight{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
-              .controls-group.span6.nominheight
-                .controls-type PC-2
-                .controls-subtype
-                .controls-subgroup Traffic Team
-              .span6.badges.nominheight
-                .span4.nominheight
-                  .badge.badge-success.fltnone 1/3
-                .span4.nominheight
-                  .badge.badge-warning.fltnone 33
-                .span4.nominheight
-                  .badge.badge-important.fltnone 9
-            %li.controlSlot.ui-draggable.row-fluid.nominheight{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
-              .controls-group.span6.nominheight
-                .controls-type PC-2
-                .controls-subtype
-                .controls-subgroup Enterprise Apps
-              .span6.badges.nominheight
-                .span4.nominheight
-                  .badge.badge-success.fltnone 1/3
-                .span4.nominheight
-                  .badge.badge-warning.fltnone 33
-                .span4.nominheight
-                  .badge.badge-important.fltnone 9
-            %li.controlSlot.ui-draggable.row-fluid.nominheight{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
-              .controls-group.span6.nominheight
-                .controls-type PC-2
-                .controls-subtype
-                .controls-subgroup More Team Stuff
-              .span6.badges.nominheight
-                .span4.nominheight
-                  .badge.badge-success.fltnone 1/3
-                .span4.nominheight
-                  .badge.badge-warning.fltnone 33
-                .span4.nominheight
-                  .badge.badge-important.fltnone 9
-      / end of widget
-
-    / end of singlecolumn
-    .singleColumn
-      / ipactscope
-      #impactscopewidget.WidgetBox
-        .WidgetBoxHeading
-          .WidgetTitle Workflows
-          %nav
-            .btn-group
-              %a.widgettextbtn{"data-toggle" => "modal", :href => "#auditmeetingnotice"} All Owners
-              %a.widgettextbtn{"data-toggle" => "modal", :href => "#auditmeetingnotice"} All Status
-              %a.widgettextbtn{"data-toggle" => "modal", :href => "#auditmeetingnotice"} All Types
-            / %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}
-        .WidgetBoxContent.information
-          %ul#quicklinks.nav.nav-tabs
-            %li
-              %a{"data-toggle" => "tab", :href => "#Regulation"} Requests
-            %li
-              %a{"data-toggle" => "tab", :href => "#Controls"} Tests
-            %li.active
-              %a{"data-toggle" => "tab", :href => "#Meetings"} Meetings
-          .tab-content
-            #Regulation.tab-pane
-              / content imported via jsrender
-            #Controls.tab-pane
-              / content imported via jsrender
-            #Meetings.tab-pane.active
-              / content imported via jsrender
-              / TABS
-              #impactScopeInfo.row-fluid.in
-                .span12
-                  %ul
+          #auditstatuscolumns
+            .row-fluid
+              .span6
+              .span6
+                .row-fluid
+                  .span3 Requests
+                  .span1
+                  .span3 Tests
+                  .span1
+                  .span2
+                    .txtcenter Internal
+                    .rowfluid
+                      .span12
+                        .span6.badge.badge-clear D
+                        .span6.badge.badge-clear E
+                  .span2.txtcenter
+                    .txtcenter External
+                    .rowfluid
+                      .span12
+                        .span6.badge.badge-clear D
+                        .span6.badge.badge-clear E
+          .row-fluid
+            .span12
+              .span6
+                %span.prefix SOX-CON-1
+                Goog-Con-23 Physically Protect Stored Data
+              .span6
+                .row-fluid
+                  .span3.progress.progress-striped.active
+                    .bar.progressbar-success{"data-percentage" => "7", :style => "float: left; width: 0%; "}
+                    .bar.progressbar-danger{"data-percentage" => "58", :style => "float: right; width: 0%; "}
+                    .bar.progressbar-warning{"data-percentage" => "35", :style => "float: right; width: 0%; "}
+                  .span1
+                  .span3.progress.active
+                    .bar.progressbar-success{"data-percentage" => "7", :style => "float: left; width: 0%; "}
+                    .bar.progressbar-danger{"data-percentage" => "58", :style => "float: right; width: 0%; "}
+                    .bar.progressbar-warning{"data-percentage" => "35", :style => "float: right; width: 0%; "}
+                  .span1
+                  .span2
+                    .rowfluid
+                      .span12
+                        .span6.badge.badge-warning 1
+                        .span6.badge.badge-warning 0
+                  .span2
+                    .rowfluid
+                      .span12
+                        .span6.badge.badge-important 1
+                        .span6.badge.badge-success 0
+          #auditstatus
+            / CONTENT VIA JSRENDER
+        / /.WidgetBoxContent
+      / /.RegsandControls
+      .singleColumn
+        #companycontrolwidget.WidgetBox
+          .WidgetBoxHeading
+            %nav
+              %a.widgettextbtn{"data-toggle" => "modal", :href => "#auditdefaultscope"} Set Scope
+            .WidgetTitle Default Scope of Audit
+          .WidgetBoxContent
+            .row-fluid.FLTNONE
+              .controls-group.span6
+              .span6
+                .span4
+                  %label Current
+                .span4
+                  %label Pending
+                .span4
+                  %label Out
+            %ul#TransactionList.in
+              %li.controlSlot.ui-draggable.row-fluid{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+                .controls-group.span6
+                  .controls-type PC-2
+                  .controls-subtype
+                  .controls-subgroup Traffic Team
+                .span6.badges
+                  .span4
+                    .badge.badge-success 1/3
+                  .span4
+                    .badge.badge-warning 33
+                  .span4
+                    .badge.badge-important 9
+              %li.controlSlot.ui-draggable.row-fluid{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+                .controls-group.span6
+                  .controls-type PC-2
+                  .controls-subtype
+                  .controls-subgroup Enterprise Apps
+                .span6.badges
+                  .span4
+                    .badge.badge-success 1/3
+                  .span4
+                    .badge.badge-warning 33
+                  .span4
+                    .badge.badge-important 9
+              %li.controlSlot.ui-draggable.row-fluid{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+                .controls-group.span6
+                  .controls-type PC-2
+                  .controls-subtype
+                  .controls-subgroup More Team Stuff
+                .span6.badges
+                  .span4
+                    .badge.badge-success 1/3
+                  .span4
+                    .badge.badge-warning 33
+                  .span4
+                    .badge.badge-important 9
+        / end of widget
+  
+      / end of singlecolumn
+      .singleColumn
+        / ipactscope
+        #impactscopewidget.WidgetBox
+          .WidgetBoxHeading
+            .WidgetTitle Workflows
+            %nav
+              .btn-group
+                %a.widgettextbtn{"data-toggle" => "modal", :href => "#auditmeetingnotice"} All Owners
+                %a.widgettextbtn{"data-toggle" => "modal", :href => "#auditmeetingnotice"} All Status
+                %a.widgettextbtn{"data-toggle" => "modal", :href => "#auditmeetingnotice"} All Types
+              / %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}
+          .WidgetBoxContent.information
+            %ul#quicklinks.nav.nav-tabs
+              %li
+                %a{"data-toggle" => "tab", :href => "#Regulation"} Requests
+              %li
+                %a{"data-toggle" => "tab", :href => "#Controls"} Tests
+              %li.active
+                %a{"data-toggle" => "tab", :href => "#Meetings"} Meetings
+            .tab-content
+              #Regulation.tab-pane
+                / content imported via jsrender
+              #Controls.tab-pane
+                / content imported via jsrender
+              #Meetings.tab-pane.active
+                / content imported via jsrender
+                / TABS
+                #impactScopeInfo.row-fluid.in
+                  .span12
+                    %ul
+                      %li#content_.singlecontrolSlot
+                        %ul#children_
+                          %li.toggle{"data-toggle" => "collapse", :href => "#demo16", :id => "content_PCI.1.1.5"}
+                            .expander
+                            %a{:href => "#"}/
+                            .greyOut.pull-right
+                              %i.gcmssmallicon-dash-white
+                            %span.prefix Meeting 1
+                            %a.pull-right.badge.badge-warning.span3{"data-toggle" => "modal", :href => "#comingsoonModal"} Scheduled
+                    .row-fluid-slotcontent
+                      #demo16.collapse.out{:style => "height: 0px; "} Ea, quae humo wisi usitas eu dolore, interdico, modo utinam sudo ventosus. Quibus nunc ex ullamcorper quia persto. Et, dignissim dolore jus gilvus, premo. Nibh at quadrum occuro lobortis, macto duis uxor feugait obruo consequat nimis commodo vel nulla. Premo torqueo refero, letatio aliquip vel minim dolor inhibeo hendrerit. Amet huic vel, capto sed rusticus qui opto opes esca incassum ut regula. Blandit nibh iriure saepius ut duis camur facilisi eros illum occuro, quia letatio.
                     %li#content_.singlecontrolSlot
                       %ul#children_
-                        %li.toggle{"data-toggle" => "collapse", :href => "#demo16", :id => "content_PCI.1.1.5"}
+                        %li.toggle{"data-toggle" => "collapse", :href => "#demo15", :id => "content_PCI.1.1.5"}
                           .expander
                           %a{:href => "#"}/
                           .greyOut.pull-right
                             %i.gcmssmallicon-dash-white
-                          %span.prefix Meeting 1
-                          %a.pull-right.badge.badge-warning.span3.nominheight{"data-toggle" => "modal", :href => "#comingsoonModal"} Scheduled
-                  .row-fluid-slotcontent
-                    #demo16.collapse.out{:style => "height: 0px; "} Ea, quae humo wisi usitas eu dolore, interdico, modo utinam sudo ventosus. Quibus nunc ex ullamcorper quia persto. Et, dignissim dolore jus gilvus, premo. Nibh at quadrum occuro lobortis, macto duis uxor feugait obruo consequat nimis commodo vel nulla. Premo torqueo refero, letatio aliquip vel minim dolor inhibeo hendrerit. Amet huic vel, capto sed rusticus qui opto opes esca incassum ut regula. Blandit nibh iriure saepius ut duis camur facilisi eros illum occuro, quia letatio.
-                  %li#content_.singlecontrolSlot
-                    %ul#children_
-                      %li.toggle{"data-toggle" => "collapse", :href => "#demo15", :id => "content_PCI.1.1.5"}
-                        .expander
-                        %a{:href => "#"}/
-                        .greyOut.pull-right
-                          %i.gcmssmallicon-dash-white
-                        %span.prefix Meeting 2
-                        %a.badge.badge-success.pull-right.span3.nominheight{"data-toggle" => "modal", :href => "#comingsoonModal"} Completed
-                  .row-fluid-slotcontent
-                    #demo15.collapse.out{:style => "height: 0px; "} Shine sharpest juicy best well pleasure treat revolutionary sleek. Comes aromatic introducing distinct, grown, made luxury rich, drink, sporty how cholesterol that, can. Product deeply odor best full savor clinically incredible. Vibrant high valuable blast pleasure believe shine. Inside hearty fights quick all, goodness aromatic flexible one ultra. Fights high-tech, what delivers like revolutionary cause really triple can't customer, grown. Ordinary keeps roasted really savor yours announcing compact now intense healthy, stimulates think.
-                  %li#content_.singlecontrolSlot
-                    %ul#children_
-                      %li.toggle{"data-toggle" => "collapse", :href => "#demo23", :id => "content_PCI.1.1.5"}
-                        .expander
-                        %a{:href => "#"}/
-                        .greyOut.pull-right
-                          %i.gcmssmallicon-dash-white
-                        %span.prefix Meeting 3
-                        %a.pull-right.badge.badge-important.span3.nominheight{"data-toggle" => "modal", :href => "#comingsoonModal"} Outstanding
-                  .row-fluid-slotcontent
-                    #demo23.collapse.out{:style => "height: 0px; "} Ea, quae humo wisi usitas eu dolore, interdico, modo utinam sudo ventosus. Quibus nunc ex ullamcorper quia persto. Et, dignissim dolore jus gilvus, premo. Nibh at quadrum occuro lobortis, macto duis uxor feugait obruo consequat nimis commodo vel nulla. Premo torqueo refero, letatio aliquip vel minim dolor inhibeo hendrerit. Amet huic vel, capto sed rusticus qui opto opes esca incassum ut regula. Blandit nibh iriure saepius ut duis camur facilisi eros illum occuro, quia letatio.
-                  %li#content_.singlecontrolSlot
-                    %ul#children_
-                      %li.toggle{"data-toggle" => "collapse", :href => "#demo24", :id => "content_PCI.1.1.5"}
-                        .expander
-                        %a{:href => "#"}/
-                        .greyOut.pull-right
-                          %i.gcmssmallicon-dash-white
-                        %span.prefix Meeting 4
-                        %a.pull-right.badge.badge-important.span3.nominheight{"data-toggle" => "modal", :href => "#comingsoonModal"} Outstanding
-                  .row-fluid-slotcontent
-                    #demo24.collapse.out{:style => "height: 0px; "} Ea, quae humo wisi usitas eu dolore, interdico, modo utinam sudo ventosus. Quibus nunc ex ullamcorper quia persto. Et, dignissim dolore jus gilvus, premo. Nibh at quadrum occuro lobortis, macto duis uxor feugait obruo consequat nimis commodo vel nulla. Premo torqueo refero, letatio aliquip vel minim dolor inhibeo hendrerit. Amet huic vel, capto sed rusticus qui opto opes esca incassum ut regula. Blandit nibh iriure saepius ut duis camur facilisi eros illum occuro, quia letatio.
-                  %li#content_.singlecontrolSlot
-                    %ul#children_
-                      %li.toggle{"data-toggle" => "collapse", :href => "#demo25", :id => "content_PCI.1.1.5"}
-                        .expander
-                        %a{:href => "#"}/
-                        .greyOut.pull-right
-                          %i.gcmssmallicon-dash-white
-                        %span.prefix Meeting 5
-                        %a.pull-right.badge.badge-important.span3.nominheight{"data-toggle" => "modal", :href => "#comingsoonModal"} Outstanding
-                  .row-fluid-slotcontent
-                    #demo25.collapse.out{:style => "height: 0px; "} Ea, quae humo wisi usitas eu dolore, interdico, modo utinam sudo ventosus. Quibus nunc ex ullamcorper quia persto. Et, dignissim dolore jus gilvus, premo. Nibh at quadrum occuro lobortis, macto duis uxor feugait obruo consequat nimis commodo vel nulla. Premo torqueo refero, letatio aliquip vel minim dolor inhibeo hendrerit. Amet huic vel, capto sed rusticus qui opto opes esca incassum ut regula. Blandit nibh iriure saepius ut duis camur facilisi eros illum occuro, quia letatio.
-          / OTHER CONTENT
-          %hr.hr-widget/
-          .row-fluid.nominheight
-            .span3.nominheight
-              %label.pull-left{:for => "control-effectivedate"}
-                %strong> Products
-                \: 3
-            .span3.nominheight
-              %label.pull-left{:for => "control-effectivedate"}
-                %strong> Biz Areas
-                \: 2
-            .span3.nominheight
-              %label.pull-left{:for => "control-effectivedate"}
-                %strong> Biz Process
-                \: 9
-            .span3.nominheight
-              %label.pull-left{:for => "control-effectivedate"}
-                %strong> Systems
-                \: 239
-      / end ipactscope
-  / end of doubleColumn
-  .singleColumn
-
-    / PBC List Import
-    #importpbclist.WidgetBox
-      .WidgetBoxHeading
-        %nav
-          %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
-            %i.grcicon-questionmark-grey
-        .WidgetTitle.doublewidth Import PBC Lists
-
-      .WidgetBoxContent
-    
-        .btn.btn-warning
-          %i.grcicon-import-white
-          Import PBC List
-    / end of widget
-
-
-    / PBC List
-    #pbclistwidget.WidgetBox
-      .WidgetBoxHeading
-        %nav
-          %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
-            %i.grcicon-questionmark-grey
-          %a.widgetbtn{"data-toggle" => "modal", :href => "#pbcListEdit"}
-            %i.grcicon-add
-        .WidgetTitle.doublewidth PBC Lists
-
-      .WidgetBoxContent        
+                          %span.prefix Meeting 2
+                          %a.badge.badge-success.pull-right.span3{"data-toggle" => "modal", :href => "#comingsoonModal"} Completed
+                    .row-fluid-slotcontent
+                      #demo15.collapse.out{:style => "height: 0px; "} Shine sharpest juicy best well pleasure treat revolutionary sleek. Comes aromatic introducing distinct, grown, made luxury rich, drink, sporty how cholesterol that, can. Product deeply odor best full savor clinically incredible. Vibrant high valuable blast pleasure believe shine. Inside hearty fights quick all, goodness aromatic flexible one ultra. Fights high-tech, what delivers like revolutionary cause really triple can't customer, grown. Ordinary keeps roasted really savor yours announcing compact now intense healthy, stimulates think.
+                    %li#content_.singlecontrolSlot
+                      %ul#children_
+                        %li.toggle{"data-toggle" => "collapse", :href => "#demo23", :id => "content_PCI.1.1.5"}
+                          .expander
+                          %a{:href => "#"}/
+                          .greyOut.pull-right
+                            %i.gcmssmallicon-dash-white
+                          %span.prefix Meeting 3
+                          %a.pull-right.badge.badge-important.span3{"data-toggle" => "modal", :href => "#comingsoonModal"} Outstanding
+                    .row-fluid-slotcontent
+                      #demo23.collapse.out{:style => "height: 0px; "} Ea, quae humo wisi usitas eu dolore, interdico, modo utinam sudo ventosus. Quibus nunc ex ullamcorper quia persto. Et, dignissim dolore jus gilvus, premo. Nibh at quadrum occuro lobortis, macto duis uxor feugait obruo consequat nimis commodo vel nulla. Premo torqueo refero, letatio aliquip vel minim dolor inhibeo hendrerit. Amet huic vel, capto sed rusticus qui opto opes esca incassum ut regula. Blandit nibh iriure saepius ut duis camur facilisi eros illum occuro, quia letatio.
+                    %li#content_.singlecontrolSlot
+                      %ul#children_
+                        %li.toggle{"data-toggle" => "collapse", :href => "#demo24", :id => "content_PCI.1.1.5"}
+                          .expander
+                          %a{:href => "#"}/
+                          .greyOut.pull-right
+                            %i.gcmssmallicon-dash-white
+                          %span.prefix Meeting 4
+                          %a.pull-right.badge.badge-important.span3{"data-toggle" => "modal", :href => "#comingsoonModal"} Outstanding
+                    .row-fluid-slotcontent
+                      #demo24.collapse.out{:style => "height: 0px; "} Ea, quae humo wisi usitas eu dolore, interdico, modo utinam sudo ventosus. Quibus nunc ex ullamcorper quia persto. Et, dignissim dolore jus gilvus, premo. Nibh at quadrum occuro lobortis, macto duis uxor feugait obruo consequat nimis commodo vel nulla. Premo torqueo refero, letatio aliquip vel minim dolor inhibeo hendrerit. Amet huic vel, capto sed rusticus qui opto opes esca incassum ut regula. Blandit nibh iriure saepius ut duis camur facilisi eros illum occuro, quia letatio.
+                    %li#content_.singlecontrolSlot
+                      %ul#children_
+                        %li.toggle{"data-toggle" => "collapse", :href => "#demo25", :id => "content_PCI.1.1.5"}
+                          .expander
+                          %a{:href => "#"}/
+                          .greyOut.pull-right
+                            %i.gcmssmallicon-dash-white
+                          %span.prefix Meeting 5
+                          %a.pull-right.badge.badge-important.span3{"data-toggle" => "modal", :href => "#comingsoonModal"} Outstanding
+                    .row-fluid-slotcontent
+                      #demo25.collapse.out{:style => "height: 0px; "} Ea, quae humo wisi usitas eu dolore, interdico, modo utinam sudo ventosus. Quibus nunc ex ullamcorper quia persto. Et, dignissim dolore jus gilvus, premo. Nibh at quadrum occuro lobortis, macto duis uxor feugait obruo consequat nimis commodo vel nulla. Premo torqueo refero, letatio aliquip vel minim dolor inhibeo hendrerit. Amet huic vel, capto sed rusticus qui opto opes esca incassum ut regula. Blandit nibh iriure saepius ut duis camur facilisi eros illum occuro, quia letatio.
+            / OTHER CONTENT
+            %hr.hr-widget/
+            .row-fluid
+              .span3
+                %label.pull-left{:for => "control-effectivedate"}
+                  %strong> Products
+                  \: 3
+              .span3
+                %label.pull-left{:for => "control-effectivedate"}
+                  %strong> Biz Areas
+                  \: 2
+              .span3
+                %label.pull-left{:for => "control-effectivedate"}
+                  %strong> Biz Process
+                  \: 9
+              .span3
+                %label.pull-left{:for => "control-effectivedate"}
+                  %strong> Systems
+                  \: 239
+        / end ipactscope
+    / end of doubleColumn
+    .span4
+  
+      / PBC List Import
+      #importpbclist.WidgetBox
+        .WidgetBoxHeading
+          %nav
+            %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+              %i.grcicon-questionmark-grey
+          .WidgetTitle Import PBC Lists
+  
+        .WidgetBoxContent
       
-        .item-titles
+          .btn.btn-warning
+            %i.grcicon-import-white
+            Import PBC List
+      / end of widget
+  
+  
+      / PBC List
+      #pbclistwidget.WidgetBox
+        .WidgetBoxHeading
+          %nav
+            %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+              %i.grcicon-questionmark-grey
+            %a.widgetbtn{"data-toggle" => "modal", :href => "#pbcListEdit"}
+              %i.grcicon-add
+          .WidgetTitle PBC Lists
+  
+        .WidgetBoxContent        
+        
+          .item-titles
+            .row-fluid
+              .span3
+                Date
+              .span4
+                Firm
+              .span5
+                PBC Title
+          %a.item-link{:href => "pbc-list.htm"}
+            .item
+              .row-fluid        
+                .span3
+                  03/15/12
+                .span4
+                  Ernst & Young
+                .span5
+                  EY Google SOX PBC
+          %a.item-link{:href => "pbc-list.htm"}
+            .item
+              .row-fluid        
+                .span3
+                  03/05/11
+                .span4
+                  Ernst & Young
+                .span5
+                  EY SOX 2011
+      / end of widget
+  
+  
+  
+      #systeminfowidget.WidgetBox
+        .WidgetBoxHeading
+          %nav
+            %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+              %i.grcicon-questionmark-grey
+            %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#auditInfo"}
+              %i.grcicon-enlarge-grey
+          .WidgetTitle Audit Info
+        .WidgetBoxContent
           .row-fluid
+            .span6
+              %label{:for => "select01"} Audit Type
+              .controls
+                %select#select01.span12
+                  %option Internal Only
+                  %option External Only
+                  %option Internal & External
+            .span6
+              %label Audit Status
+              .controls
+                %select#select01.span12
+                  %option Pre-Audit Setup
+                  %option Pre-Audit Review
+                  %option Auditor Test of Design
+                  %option Auditor Test of Effects
+                  %option Final Report
+                  %option Approved
+          .row-fluid
+            .span6
+            .span6
+              %label Audit Firm
+              %input#control-version.span12{:disabled => "disabled", :placeholder => "", :type => "text", :value => "Ernst and Young"}/
+          .row-fluid
+            .span12
+              / start column
+              %label Audit Settings
+              %ul#systemcontrolowners.clearfix
+                %li.controlSlot.ui-draggable
+                  .arrowcontrols-group.row-fluid
+                    .span12
+                      %a.checkbutton{"data-dismiss" => "modal", :href => "#comingsoonModal"}
+                        %i.grcicon-x-grey
+                      %span.slotlabel External Auditor can see Internal Assessments
+                %li.controlSlot.ui-draggable
+                  .arrowcontrols-group.row-fluid
+                    .span12
+                      %a.checkbutton{"data-dismiss" => "modal", :href => "#comingsoonModal"}
+                        %i.grcicon-x-grey
+                      %span.slotlabel Future Setting
+          %br/
+          .row-fluid
+            .span6
+              %a.span12.btn.btn-warning.actionbutton{:href => "audit-dashboard"} Audit Dashboard
+            .span6
+              %a.span12.btn.btn-warning.actionbutton{"data-toggle" => "modal", :href => "#sendauditorinvite"} Invite Auditors
+          #auditInfo.in
+            %hr.hr-widget/
+            .row-fluid
+              .span12
+                %h3
+                  References
+                  %a.btn.btn-blue.addbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"} Edit
+                %ul#referenceList
+                  %li.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+                    .controls-group
+                      .controls-type 2010
+                      .controls-subtype PDF
+                      .controls-subgroup Privacy Report
+                  %li.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+                    .controls-group
+                      .controls-type 2011
+                      .controls-subtype PDF
+                      .controls-subgroup Privacy Report
+                  %li.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+                    .controls-group
+                      .controls-type 2012
+                      .controls-subtype PDF
+                      .controls-subgroup Privacy Report
+            %hr.hr-widget/
+            .row-fluid
+              .span12
+                %h3
+                  Responsible Parties
+                  %a.btn.btn-blue.addbtn.pull-right{"data-toggle" => "modal", :href => "#peopleSelectorModal"} Edit
+                %ul#peopleList
+                  %li.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#peopleSelectorModal"}
+                    .controls-group
+                      .controls-type Joss Rayburn
+                      .controls-subtype Owner
+                      .controls-subgroup JRayburn@google.com
+                  %li.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#peopleSelectorModal"}
+                    .controls-group
+                      .controls-type Joss Rayburn
+                      .controls-subtype Senior Auditor
+                      .controls-subgroup JRayburn@google.com
+                  %li.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#peopleSelectorModal"}
+                    .controls-group
+                      .controls-type Ron Poder
+                      .controls-subtype Field Auditor
+                      .controls-subgroup rpoder@google.com
+          %hr.hr-widget/
+          .row-fluid
+            .span6
+              %label.pull-left{:for => "control-effectivedate"}
+                %strong> Created
+                \: 03/15/2012 19:16
+            .span6.pull-right
+              %label.pull-right{:for => "control-verificationdate"}
+                %strong> Updated
+                \: 04/12/2012 14:32
+      / end of widget
+      / Audit Schedule
+      #systeminfowidget.WidgetBox
+        .WidgetBoxHeading
+          %nav
+            %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+              %i.grcicon-questionmark-grey
+            %a.widgettextbtn{"data-toggle" => "modal", :href => "#neauditscheduleitem"} New
+          .WidgetTitle Audit Schedule
+        .WidgetBoxContent.information
+          .row-fluid
+            .span2
+              %label &nbsp; Date
             .span3
-              Date
-            .span4
-              Firm
-            .span5
-              PBC Title
-        %a.item-link{:href => "pbc-list.htm"}
-          .item
-            .row-fluid        
-              .span3
-                03/15/12
-              .span4
-                Ernst & Young
-              .span5
-                EY Google SOX PBC
-        %a.item-link{:href => "pbc-list.htm"}
-          .item
-            .row-fluid        
-              .span3
-                03/05/11
-              .span4
-                Ernst & Young
-              .span5
-                EY SOX 2011
-    / end of widget
-
-
-
-    #systeminfowidget.WidgetBox
-      .WidgetBoxHeading
-        %nav
-          %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
-            %i.grcicon-questionmark-grey
-          %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#auditInfo"}
-            %i.grcicon-enlarge-grey
-        .WidgetTitle Audit Info
-      .WidgetBoxContent
-        .row-fluid
-          .span6
-            %label{:for => "select01"} Audit Type
-            .controls
-              %select#select01.span12
-                %option Internal Only
-                %option External Only
-                %option Internal & External
-          .span6
-            %label Audit Status
-            .controls
-              %select#select01.span12
-                %option Pre-Audit Setup
-                %option Pre-Audit Review
-                %option Auditor Test of Design
-                %option Auditor Test of Effects
-                %option Final Report
-                %option Approved
-        .row-fluid
-          .span6
-          .span6
-            %label Audit Firm
-            %input#control-version.span12{:disabled => "disabled", :placeholder => "", :type => "text", :value => "Ernst and Young"}/
-        .row-fluid
-          .span12
-            / start column
-            %label Audit Settings
-            %ul#systemcontrolowners.clearfix
-              %li.controlSlot.ui-draggable
-                .arrowcontrols-group.row-fluid.nominheight
-                  .span12.nominheight
-                    %a.checkbutton{"data-dismiss" => "modal", :href => "#comingsoonModal"}
-                      %i.grcicon-x-grey
-                    %span.slotlabel External Auditor can see Internal Assessments
-              %li.controlSlot.ui-draggable
-                .arrowcontrols-group.row-fluid.nominheight
-                  .span12.nominheight
-                    %a.checkbutton{"data-dismiss" => "modal", :href => "#comingsoonModal"}
-                      %i.grcicon-x-grey
-                    %span.slotlabel Future Setting
-        %br/
-        .row-fluid
-          .span6
-            %a.span12.btn.btn-warning.actionbutton{:href => "audit-dashboard"} Audit Dashboard
-          .span6
-            %a.span12.btn.btn-warning.actionbutton{"data-toggle" => "modal", :href => "#sendauditorinvite"} Invite Auditors
-        #auditInfo.in
-          %hr.hr-widget/
+              %label &nbsp; Phase
+            .span7
+              %label &nbsp; Event
           .row-fluid
-            .span12
-              %h3
-                References
-                %a.btn.btn-blue.addbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"} Edit
-              %ul#referenceList
-                %li.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
-                  .controls-group
-                    .controls-type 2010
-                    .controls-subtype PDF
-                    .controls-subgroup Privacy Report
-                %li.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
-                  .controls-group
-                    .controls-type 2011
-                    .controls-subtype PDF
-                    .controls-subgroup Privacy Report
-                %li.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
-                  .controls-group
-                    .controls-type 2012
-                    .controls-subtype PDF
-                    .controls-subgroup Privacy Report
-          %hr.hr-widget/
-          .row-fluid
-            .span12
-              %h3
-                Responsible Parties
-                %a.btn.btn-blue.addbtn.pull-right{"data-toggle" => "modal", :href => "#peopleSelectorModal"} Edit
-              %ul#peopleList
-                %li.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#peopleSelectorModal"}
-                  .controls-group
-                    .controls-type Joss Rayburn
-                    .controls-subtype Owner
-                    .controls-subgroup JRayburn@google.com
-                %li.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#peopleSelectorModal"}
-                  .controls-group
-                    .controls-type Joss Rayburn
-                    .controls-subtype Senior Auditor
-                    .controls-subgroup JRayburn@google.com
-                %li.controlSlot.ui-draggable{"data-toggle" => "modal", :href => "#peopleSelectorModal"}
-                  .controls-group
-                    .controls-type Ron Poder
-                    .controls-subtype Field Auditor
-                    .controls-subgroup rpoder@google.com
-        %hr.hr-widget/
-        .row-fluid.nominheight
-          .span6.nominheight
-            %label.pull-left{:for => "control-effectivedate"}
-              %strong> Created
-              \: 03/15/2012 19:16
-          .span6.nominheight.pull-right
-            %label.pull-right{:for => "control-verificationdate"}
-              %strong> Updated
-              \: 04/12/2012 14:32
-    / end of widget
-    / Audit Schedule
-    #systeminfowidget.WidgetBox
-      .WidgetBoxHeading
-        %nav
-          %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
-            %i.grcicon-questionmark-grey
-          %a.widgettextbtn{"data-toggle" => "modal", :href => "#neauditscheduleitem"} New
-        .WidgetTitle Audit Schedule
-      .WidgetBoxContent.information
-        .row-fluid
-          .span2
-            %label &nbsp; Date
-          .span3
-            %label &nbsp; Phase
-          .span7
-            %label &nbsp; Event
-        .row-fluid
-          %ul
-            %li.singlecontrolSlot
-              .span2.nominheight 030112
-              .span3.nominheight Pre-Audit
-              .span7.nominheight Audit MOU / Scope Set
-            %li.singlecontrolSlot
-              .span2.nominheight 030112
-              .span3.nominheight Pre-Audit
-              .span7.nominheight Audit MOU / Scope Set
-            %li.singlecontrolSlot
-              .span2.nominheight 030112
-              .span3.nominheight Pre-Audit
-              .span7.nominheight Audit MOU / Scope Set
-            %li.singlecontrolSlot
-              .span2.nominheight 030112
-              .span3.nominheight Pre-Audit
-              .span7.nominheight Audit MOU / Scope Set
-        #programinformation.in
-    / end of widget
+            %ul
+              %li.singlecontrolSlot
+                .span2 030112
+                .span3 Pre-Audit
+                .span7 Audit MOU / Scope Set
+              %li.singlecontrolSlot
+                .span2 030112
+                .span3 Pre-Audit
+                .span7 Audit MOU / Scope Set
+              %li.singlecontrolSlot
+                .span2 030112
+                .span3 Pre-Audit
+                .span7 Audit MOU / Scope Set
+              %li.singlecontrolSlot
+                .span2 030112
+                .span3 Pre-Audit
+                .span7 Audit MOU / Scope Set
+          #programinformation.in
+      / end of widget

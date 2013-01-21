@@ -16,153 +16,154 @@
 -content_for :subheader_plus do
   %a.navbarplus.product.pull-right{ :href => "#comingsoonModal", "data-toggle" => "modal" }
 
-.row-static
-  .doubleColumn
-    #RegsandControls2.WidgetBox.fullHeight.doubleWide
-      .WidgetBoxHeading
-        .pull-right
-          %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
-            %i.grcicon-questionmark-grey
-          %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
-        .WidgetTitle.doublewidth Sub-Products, Processes and Controls
-
-      .WidgetBoxContent    
-        #sampleprogramsections
-        
+.container-fluid
+  .row-fluid
+    .span8
+      #RegsandControls2.WidgetBox
+        .WidgetBoxHeading
+          .pull-right
+            %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+              %i.grcicon-questionmark-grey
+            %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
+          .WidgetTitle.doublewidth Sub-Products, Processes and Controls
+  
+        .WidgetBoxContent    
+          #sampleprogramsections
           
-
-              
-  .singleColumn 
-
-    #productActions.WidgetBox
-      .WidgetBoxHeading
-        .WidgetTitle Product Actions
-      .WidgetBoxContent
-        .widget-toolbar      
-          .row-fluid
-            .span2
-              %a.span12.btn.btn-warning{"data-toggle" => "modal", :href => "#comingsoonModal"}
-                New
-            .span5
-              %a.span12.btn.btn-warning{"data-toggle" => "modal", :href => "#comingsoonModal"}
-                Request Audit
-            .span5
-              %a.span12.btn.btn-warning{"data-toggle" => "modal", :href => "#comingsoonModal"}
-                Relationship Map
-
-
-    #productInfo.WidgetBox
-      .WidgetBoxHeading
-        .WidgetTitle Product Info
-        %nav
-          %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
-            %i.grcicon-questionmark-grey
-          %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#productInfoContent"}
-            %i.grcicon-enlarge-grey
-      .WidgetBoxContent.information.collapse.in
-        .well 
-          %label 
-            .pull-right 
-              %span.statustextgreen 85 
-              %span /
-              %span.statustextyellow 5 
-              %span /
-              %span.statustextred 10 
-            Status
-          .progress.progress-striped.active
-            .bar.progressbar-success{"data-percentage" => "85", :style => "float: left; width: 0%; "}
-            .bar.progressbar-danger{"data-percentage" => "10", :style => "float: right; width: 0%; "}
-            .bar.progressbar-warning{"data-percentage" => "5", :style => "float: right; width: 0%; "}
-        -#.toolbar-widget.well
-          %a.btn.btn-warning{"data-toggle" => "modal", :href => "#comingsoonModal"}
-            New Version
-        
-        #productInfoContent.collapse.in
-          %hr.hr-widget
-          .row-fluid
-            .span12
-              %h3.toggle{"data-target" => "#productAbout", "data-toggle" => "collapse"}
-                .expander
-                About
-                %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#comingsoonModal"}
-                  %i.grcicon-edit-grey
-              #productAbout.collapse
-                .row-fluid
-                  .span12
-                    .span3
-                      %label Code
-                      %input.span12{:disabled => "disabled", :placeholder => "ABC", :type => "text"}/
-                    .span3
-                      %label Version
-                      %input.span12{:disabled => "disabled", :placeholder => "1.0", :type => "text"}/
-                    .span3
-                      %label Type
-                      %input.span12{:disabled => "disabled", :placeholder => "SaaS", :type => "text"}/
-                    .span3
-                .row-fluid
-                  .span12
-                    %label Description
-                    %textarea#textarea{:disabled => "disabled", :placeholder => "", :rows => "3", :style => "margin: 0px; width: 98%; height: 73px; "} PCI DDS applies whenever Cardholder account data and Authentication Data is Stored, Processed or Transmitted. Examples Include: For more See Page 7 of document. Using h6 makes the label caps.
-                .row-fluid
-                  .span12
-                    %label Direct Link
-                    %input.span12{:disabled => "disabled", :placeholder => " ", :type => "text"}/
-                .row-fluid
-                  .span12
-                    .span4
-                      %label Effective Date
-                      %input.span12{:disabled => "disabled", :placeholder => "", :type => "text"}/
-                    .span4
-                      %label Stop Date
-                      %input.span12{:disabled => "disabled", :placeholder => "", :type => "text"}/
-                    .span4
-                      %label Status
-                      %input.span12{:disabled => "disabled", :placeholder => "OK", :type => "text"}/
-          %hr.hr-widget
-          .row-fluid
-            .span12
-              %h3.toggle{"data-target" => "#productReferences", "data-toggle" => "collapse"}
-                .expander
-                References
-                %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#comingsoonModal"}
-                  %i.grcicon-link
-              %ul#productReferences.collapse
-                %li.controlSlot
-                  %span.controls-group PDF
-                  %br/
-                  %span.controls-subgroup Privacy Report 2011
-                %li.controlSlot
-                  %span.controls-group PDF
-                  %br/
-                  %span.controls-subgroup Privacy Report 2012
-          %hr.hr-widget
-          .row-fluid
-            .span12
-              %h3.toggle{"data-target" => "#productPeople", "data-toggle" => "collapse"}
-                .expander
-                People
-                %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#comingsoonModal"}
-                  %i.grcicon-link
-              %ul#productPeople.collapse
-                %li.controlSlot
-                  %span.controls-group JRayburn@google.com
-                  %br/
-                  %span.controls-subgroup Joss Rayburn
-                %li.controlSlot
-                  %span.controls-group rpoder@google.com
-                  %br/
-                  %span.controls-subgroup Ron Poder
-          %hr.hr-widget
-          .row-fluid.nominheight
-            .span6.nominheight
-              %label.pull-left{:for => "control-effectivedate"}
-                %strong> Created
-                \: 03/15/2012 19:16
-            .span6.nominheight.pull-right
-              %label.pull-right{:for => "control-verificationdate"}
-                %strong> Updated
-                \: 04/12/2012 14:32
-      / end of widget
-    / end of span
-    =render :partial => 'design/widgets/related'
-    / end of span
+            
+  
+                
+    .span4
+  
+      #productActions.WidgetBox
+        .WidgetBoxHeading
+          .WidgetTitle Product Actions
+        .WidgetBoxContent
+          .widget-toolbar      
+            .row-fluid
+              .span2
+                %a.span12.btn.btn-warning{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                  New
+              .span5
+                %a.span12.btn.btn-warning{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                  Request Audit
+              .span5
+                %a.span12.btn.btn-warning{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                  Relationship Map
+  
+  
+      #productInfo.WidgetBox
+        .WidgetBoxHeading
+          .WidgetTitle Product Info
+          %nav
+            %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+              %i.grcicon-questionmark-grey
+            %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#productInfoContent"}
+              %i.grcicon-enlarge-grey
+        .WidgetBoxContent.information.collapse.in
+          .well 
+            %label 
+              .pull-right 
+                %span.statustextgreen 85 
+                %span /
+                %span.statustextyellow 5 
+                %span /
+                %span.statustextred 10 
+              Status
+            .progress.progress-striped.active
+              .bar.progressbar-success{"data-percentage" => "85", :style => "float: left; width: 0%; "}
+              .bar.progressbar-danger{"data-percentage" => "10", :style => "float: right; width: 0%; "}
+              .bar.progressbar-warning{"data-percentage" => "5", :style => "float: right; width: 0%; "}
+          -#.toolbar-widget.well
+            %a.btn.btn-warning{"data-toggle" => "modal", :href => "#comingsoonModal"}
+              New Version
+          
+          #productInfoContent.collapse.in
+            %hr.hr-widget
+            .row-fluid
+              .span12
+                %h3.toggle{"data-target" => "#productAbout", "data-toggle" => "collapse"}
+                  .expander
+                  About
+                  %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                    %i.grcicon-edit-grey
+                #productAbout.collapse
+                  .row-fluid
+                    .span12
+                      .span3
+                        %label Code
+                        %input.span12{:disabled => "disabled", :placeholder => "ABC", :type => "text"}/
+                      .span3
+                        %label Version
+                        %input.span12{:disabled => "disabled", :placeholder => "1.0", :type => "text"}/
+                      .span3
+                        %label Type
+                        %input.span12{:disabled => "disabled", :placeholder => "SaaS", :type => "text"}/
+                      .span3
+                  .row-fluid
+                    .span12
+                      %label Description
+                      %textarea#textarea{:disabled => "disabled", :placeholder => "", :rows => "3", :style => "margin: 0px; width: 98%; height: 73px; "} PCI DDS applies whenever Cardholder account data and Authentication Data is Stored, Processed or Transmitted. Examples Include: For more See Page 7 of document. Using h6 makes the label caps.
+                  .row-fluid
+                    .span12
+                      %label Direct Link
+                      %input.span12{:disabled => "disabled", :placeholder => " ", :type => "text"}/
+                  .row-fluid
+                    .span12
+                      .span4
+                        %label Effective Date
+                        %input.span12{:disabled => "disabled", :placeholder => "", :type => "text"}/
+                      .span4
+                        %label Stop Date
+                        %input.span12{:disabled => "disabled", :placeholder => "", :type => "text"}/
+                      .span4
+                        %label Status
+                        %input.span12{:disabled => "disabled", :placeholder => "OK", :type => "text"}/
+            %hr.hr-widget
+            .row-fluid
+              .span12
+                %h3.toggle{"data-target" => "#productReferences", "data-toggle" => "collapse"}
+                  .expander
+                  References
+                  %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                    %i.grcicon-link
+                %ul#productReferences.collapse
+                  %li.controlSlot
+                    %span.controls-group PDF
+                    %br/
+                    %span.controls-subgroup Privacy Report 2011
+                  %li.controlSlot
+                    %span.controls-group PDF
+                    %br/
+                    %span.controls-subgroup Privacy Report 2012
+            %hr.hr-widget
+            .row-fluid
+              .span12
+                %h3.toggle{"data-target" => "#productPeople", "data-toggle" => "collapse"}
+                  .expander
+                  People
+                  %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                    %i.grcicon-link
+                %ul#productPeople.collapse
+                  %li.controlSlot
+                    %span.controls-group JRayburn@google.com
+                    %br/
+                    %span.controls-subgroup Joss Rayburn
+                  %li.controlSlot
+                    %span.controls-group rpoder@google.com
+                    %br/
+                    %span.controls-subgroup Ron Poder
+            %hr.hr-widget
+            .row-fluid
+              .span6
+                %label.pull-left{:for => "control-effectivedate"}
+                  %strong> Created
+                  \: 03/15/2012 19:16
+              .span6.pull-right
+                %label.pull-right{:for => "control-verificationdate"}
+                  %strong> Updated
+                  \: 04/12/2012 14:32
+        / end of widget
+      / end of span
+      =render :partial => 'design/widgets/related'
+      / end of span

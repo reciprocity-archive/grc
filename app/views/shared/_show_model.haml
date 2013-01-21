@@ -23,21 +23,19 @@
 -content_for :subheader_plus do
   %a.navbarplus.fltrt{ :href => method("new_flow_#{model_name}_path").call(), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide'}
 
-.row-static
-  .doubleColumn
-    .doubleWide.fullHeight
+.container-fluid
+  .row-fluid
+    .span8
       -#=render :partial => "shared/graph",
               :layout => 'layouts/widget_box',
               :locals => { model_name.to_sym => instance,
                 :instance => instance}
-
-    .doubleWide.fullHeight
+  
       =render :partial => "main",
               :layout => 'layouts/widget_box',
               :locals => { model_name.to_sym => instance }
-
-  .singleColumn
-    .singleWide.fullHeight
+  
+    .span4
       =render :partial => "info",
               :layout => 'layouts/widget_box',
               :locals => { model_name.to_sym => instance }

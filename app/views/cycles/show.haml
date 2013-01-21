@@ -13,9 +13,9 @@
 -content_for :subheader_extras do
   %h1.fltrt.highlighted#pageType Audit Manager
 
-.row-static
-  .doubleColumn
-    .doubleWide.halfHeight
+.container-fluid
+  .row-fluid
+    .span8
       =render :partial => 'cycles/main',
               :layout => 'layouts/widget_box',
               :locals => { :cycle => @cycle }
@@ -30,25 +30,23 @@
         =render :partial => 'cycles/workflows',
                 :layout => 'layouts/widget_box',
                 :locals => { :cycle => @cycle }
-
-  .singleColumn
-    -if has_feature?(:BETA)
-      =render :partial => 'cycles/pbcimport',
+  
+    .span4
+      -if has_feature?(:BETA)
+        =render :partial => 'cycles/pbcimport',
+                :layout => 'layouts/widget_box',
+                :locals => { :cycle => @cycle }
+  
+      =render :partial => 'cycles/pbclist',
               :layout => 'layouts/widget_box',
               :locals => { :cycle => @cycle }
-
-    =render :partial => 'cycles/pbclist',
-            :layout => 'layouts/widget_box',
-            :locals => { :cycle => @cycle }
-
-    .fullHeight
+  
       =render :partial => 'cycles/info',
               :layout => 'layouts/widget_box',
               :locals => { :cycle => @cycle }
-
-    -if has_feature?(:BETA)
-      .halfHeight
+  
+      -if has_feature?(:BETA)
         =render :partial => 'cycles/schedule',
                 :layout => 'layouts/widget_box',
                 :locals => { :cycle => @cycle }
-
+  

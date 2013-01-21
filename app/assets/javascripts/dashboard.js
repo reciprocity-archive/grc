@@ -190,7 +190,7 @@ jQuery(function($) {
   $('body').on('keypress', 'nav > .widgetsearch-tocontent', function (e) {
     if (e.which == 13) {
       var $this = $(this)
-        , $box = $this.closest('.WidgetBox').find('.WidgetBoxContent')
+        , $box = $this.closest('.widget').find('.content')
         , $child = $($box.children()[0])
         , href = with_params($child.data('href'), $.param({ s: $this.val() }));
       $box.load(href, function() { clear_selection($this[0], true); });
@@ -297,7 +297,7 @@ function init_mapping() {
 
 
 function clear_selection(el, keep_search) {
-  var $box = $(el).closest('.WidgetBox');
+  var $box = $(el).closest('.widget');
 
   $box.find('.selected').removeClass('selected');
 
@@ -311,7 +311,7 @@ function clear_selection(el, keep_search) {
 
   //description_el = $(el).closest('.WidgetBox').parent().next().find('.WidgetBoxContent .description .content')
   //$(description_el).replaceWith('Nothing selected.');
-  $box.parent().next().find('.WidgetBoxContent .description').attr('oid', '');
+  $box.parent().next().find('.content .description').attr('oid', '');
 
   update_map_buttons();
 }

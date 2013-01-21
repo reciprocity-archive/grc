@@ -13,30 +13,31 @@
 -content_for :subheader_extras do
   %h1#pageType.pull-right.highlighted References &amp; Validations
 
-.row-static
-  .doubleColumn
-    / Start of widget
-    #companycontrolwidget.WidgetBox
-      .WidgetBoxHeading
-        %nav
-          %a.widgettextbtn{"data-toggle" => "modal", :href => "#"} Edit
-        .WidgetTitle.doublewidth References
-      .WidgetBoxContent
-        %hr.hr-widget/
-        .row-fluid.nominheight
+.container-fluid
+  .row-fluid
+    .span8
+      / Start of widget
+      #companycontrolwidget.WidgetBox
+        .WidgetBoxHeading
+          %nav
+            %a.widgettextbtn{"data-toggle" => "modal", :href => "#"} Edit
+          .WidgetTitle References
+        .WidgetBoxContent
           %hr.hr-widget/
-          %a.pull-right.btn.btn-large.btn-info{"data-dismiss" => "modal", :href => "#comingsoonModal"} View
-    / end of widget
-  .singleColumn
-    / Start of widget
-    #companycontrolwidget.WidgetBox
-      .WidgetBoxHeading
-        %nav
-          %a.widgettextbtn{"data-toggle" => "modal", :href => "#"} Edit
-        .WidgetTitle.doublewidth Validations
-      .WidgetBoxContent
-        %hr.hr-widget/
-        .row-fluid.nominheight
+          .row-fluid
+            %hr.hr-widget/
+            %a.pull-right.btn.btn-large.btn-info{"data-dismiss" => "modal", :href => "#comingsoonModal"} View
+      / end of widget
+    .span4
+      / Start of widget
+      #companycontrolwidget.WidgetBox
+        .WidgetBoxHeading
+          %nav
+            %a.widgettextbtn{"data-toggle" => "modal", :href => "#"} Edit
+          .WidgetTitle Validations
+        .WidgetBoxContent
           %hr.hr-widget/
-          %a.pull-right.btn.btn-large.btn-info{"data-dismiss" => "modal", :href => "#comingsoonModal"} Settings
-    / end of widget
+          .row-fluid
+            %hr.hr-widget/
+            %a.pull-right.btn.btn-large.btn-info{"data-dismiss" => "modal", :href => "#comingsoonModal"} Settings
+      / end of widget

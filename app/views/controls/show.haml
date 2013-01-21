@@ -17,19 +17,17 @@
 -content_for :subheader_plus do
   %a.navbarplus.fltrt{ :href => new_flow_control_path('control[program_id]' => @control.program_id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
 
-.row-static
-  .doubleColumn
-    .doubleWide.halfHeight
+.container-fluid
+  .row-fluid
+    .span8
       =render :partial => 'controls/main',
               :layout => 'layouts/widget_box',
               :locals => { :control => @control }
-
-  .singleColumn
-    .singleWide.fullHeight
+  
+    .span4
       =render :partial => 'controls/show',
               :layout => 'layouts/widget_box',
               :locals => { :control => @control }
-
-    -if has_feature? :BETA
-      .singleWide.halfHeight
+  
+      -if has_feature? :BETA
         =render :partial => 'shared/impact_scope'
