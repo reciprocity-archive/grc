@@ -6,6 +6,8 @@ class Risk < ActiveRecord::Base
   include RelatedModel
   include SanitizableAttributes
 
+  CATEGORY_TYPE_ID = 103
+
   RATINGS = {
     1 => "Minimal",
     2 => "Moderate",
@@ -30,6 +32,10 @@ class Risk < ActiveRecord::Base
   has_many :control_risks, :dependent => :destroy
   has_many :controls, :through => :risk_risky_attributes
 
+  # Categories
+  has_many :categorizations, :as => :categorizable, :dependent => :destroy
+  has_many :categories, :through => :categorizations, :conditions => { :scope_id => Risk::CATEGORY_TYPE_ID }
+
   is_versioned_ext
 
   sanitize_attributes :description
@@ -40,5 +46,4 @@ class Risk < ActiveRecord::Base
   def display_name
     slug
   end
-
 end

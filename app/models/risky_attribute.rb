@@ -6,7 +6,9 @@ class RiskyAttribute < ActiveRecord::Base
   include RelatedModel
   include SanitizableAttributes
 
-  attr_accessible :title, :slug, :description, :url, :version, :type, :start_date, :stop_date
+  TYPE_STRINGS = %w(Org\ Group Product Facility Market Project Data\ Asset Process System)
+
+  attr_accessible :title, :slug, :description, :url, :version, :type_string, :start_date, :stop_date
 
   has_many :object_people, :as => :personable, :dependent => :destroy
   has_many :people, :through => :object_people
@@ -31,6 +33,10 @@ class RiskyAttribute < ActiveRecord::Base
     { :from => Facility,  :via => :facility_has_risky_attribute },
     { :from => Market,    :via => :market_has_risky_attribute },
   ]
+
+  def self.type_strings
+    TYPE_STRINGS
+  end
 
   def display_name
     slug

@@ -62,7 +62,8 @@ class CategoriesController < BaseObjectsController
     end
 
     def extra_delete_relationship_stats
-      [ [ 'Control', @category.self_and_descendants.map(&:controls).map(&:all).flatten.uniq.count ]
+      [ [ 'Control', @category.self_and_descendants.map(&:controls).map(&:all).flatten.uniq.count ],
+        [ 'Risk', @category.self_and_descendants.map(&:risks).map(&:all).flatten.uniq.count ]
       ]
     end
 

@@ -1,5 +1,6 @@
--# locals: object
--all_object_categorizations = object.categorizations.includes(:category).where(:categories => { :scope_id => Control::CATEGORY_TYPE_ID }).all
+-# locals: object, scope_id
+
+-all_object_categorizations = object.categorizations.includes(:category).where(:categories => { :scope_id => scope_id }).all
 
 .row-fluid.js-list-container-title
   .span10
@@ -8,7 +9,7 @@
       Categories
       %span{:class => "grc-badge #{all_object_categorizations.count.zero? ? "no-object" : ""}"}=all_object_categorizations.count
   .span2
-    %a.widgetbtn.pull-right.juke-left{:href => list_edit_flow_categorizations_path(:object_type => object.class.name, :object_id => object.id, :scope_id => Control::CATEGORY_TYPE_ID), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#categoryList', :'data-modal-class' => 'modal-wide' }
+    %a.widgetbtn.pull-right.juke-left{:href => list_edit_flow_categorizations_path(:object_type => object.class.name, :object_id => object.id, :scope_id => scope_id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#categoryList', :'data-modal-class' => 'modal-wide' }
       %i.grcicon-edit-grey
 
 .collapse#categoryListCollapse

@@ -30,9 +30,6 @@ class RiskyAttributesController < BaseObjectsController
 
     def risky_attribute_params
       risky_attribute_params = params[:risky_attribute] || {}
-      %w(type).each do |field|
-        parse_option_param(risky_attribute_params, field)
-      end
       %w(start_date stop_date).each do |field|
         parse_date_param(risky_attribute_params, field)
       end

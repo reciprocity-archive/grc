@@ -50,9 +50,6 @@ class RisksController < BaseObjectsController
 
     def risk_params
       risk_params = params[:risk] || {}
-      %w(type).each do |field|
-        parse_option_param(risk_params, field)
-      end
       %w(start_date stop_date).each do |field|
         parse_date_param(risk_params, field)
       end
