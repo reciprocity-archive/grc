@@ -223,17 +223,6 @@ CmsRails::Application.routes.draw do
   end
 
   match 'programs_dash' => 'programs_dash#index'
-  match 'quick/programs' => 'quick#programs'
-  match 'quick/sections' => 'quick#sections'
-  match 'quick/controls' => 'quick#controls'
-  match 'quick/biz_processes' => 'quick#biz_processes'
-  match 'quick/accounts' => 'quick#accounts'
-  match 'quick/people' => 'quick#people'
-  match 'quick/categories' => 'quick#categories'
-  match 'quick/options' => 'quick#options'
-  match 'quick/systems' => 'quick#systems'
-  match 'quick/products' => 'quick#products'
-
   match 'admin_dash' => 'admin_dash#index'
 
   # Catch-all for beta views
