@@ -9,5 +9,6 @@
 
   %input.ui-corner-all.widgetsearch-tocontent(type='text' placeholder='Search')
 
--cache({:action => 'show', :action_suffix => "sections_#{@search}"}, :expires_in => @ttl || 300) do
+.spinner
+-#cache({:action => 'show', :action_suffix => "sections_#{@search}"}, :expires_in => @ttl || 300) do
   =render :partial => 'section_list_content', :locals => { :sections => sections }

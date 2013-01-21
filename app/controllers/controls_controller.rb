@@ -46,6 +46,9 @@ class ControlsController < BaseObjectsController
     if params[:s].present?
       @controls = @controls.fulltext_search(params[:s])
     end
+    if params[:company].present?
+      @controls = @controls.joins(:program).where(Program.arel_table[:company].eq(true))
+    end
     @controls = allowed_objs(@controls.all, :read)
 
     if params[:list_select].present?

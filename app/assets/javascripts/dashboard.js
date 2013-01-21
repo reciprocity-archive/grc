@@ -21,6 +21,15 @@
 // Initialize delegated event handlers
 jQuery(function($) {
 
+  // Display spinners included in initial page load
+  $('.spinner').each(function() {
+    var spinner = new Spinner({ }).spin();
+    $(this).html(spinner.el);
+    // Scroll up so spinner doesn't get pushed out of visibility
+    $(this).scrollTop(0);
+    $(spinner.el).css({ width: '100px', height: '100px', left: '50px', top: '50px' });
+  });
+
   // Before submitting, remove any disabled form elements
   $('body').on('submit', 'form[data-remote]', function(e, xhr, req) {
     $(this)
