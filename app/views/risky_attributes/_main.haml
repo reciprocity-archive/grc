@@ -1,11 +1,20 @@
--# locals: control, risks
+-model_name = controller_name.singularize
+-model_title = controller_name.singularize.titleize
+-instance = instance_variable_get("@" + model_name)
+-content_for :widget_title do
+  #{model_name.pluralize.titleize}, Processes, Controls
+
+-content_for :widget_help, "#{model_name}_main"
+
+-#content_for :widget_buttons do
+  %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
 
 .row-fluid
   .span12.captionbox
-    %a.widgetbtn.pull-right{ :href => list_edit_flow_control_risks_path(:control_id => control.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :rel => 'tooltip', :title => 'Link risks to this control', :'data-modal-class' => 'modal-wide' }
+    %a.widgetbtn.pull-right{ :href => list_edit_flow_risk_risky_attributes_path(:risky_attribute_id => risky_attribute.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :rel => 'tooltip', :title => 'Link risks to this attribute', :'data-modal-class' => 'modal-wide' }
       %i.grcicon-link
     %h4
-      Risks mitigated by this Control
+      Risks associated with this Attribute
 
 %ul.slotlist
   -risks.each_with_index do |risk, i|

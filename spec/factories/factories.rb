@@ -208,6 +208,16 @@ FactoryGirl.define do
     title
   end
 
+  factory :control_risk do
+    control
+    risk
+  end
+
+  factory :risk_risky_attribute do
+    risk
+    risky_attribute
+  end
+
   factory :help do
     slug
     content

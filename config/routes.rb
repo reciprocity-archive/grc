@@ -137,6 +137,18 @@ CmsRails::Application.routes.draw do
     end
   end
 
+  resources :control_risks, :as => 'flow_control_risks', :only => [:index, :create] do
+    collection do
+      get 'list_edit'
+    end
+  end
+
+  resources :risk_risky_attributes, :as => 'flow_risk_risky_attributes', :only => [:index, :create] do
+    collection do
+      get 'list_edit'
+    end
+  end
+
   resources :accounts, :as => 'flow_accounts' do
     member do
       get 'delete'

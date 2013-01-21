@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130118215736) do
+ActiveRecord::Schema.define(:version => 20130121194912) do
 
   create_table "accounts", :force => true do |t|
     t.string   "username"
@@ -74,6 +74,14 @@ ActiveRecord::Schema.define(:version => 20130118215736) do
   add_index "control_controls", ["control_id", "implemented_control_id"], :name => "index_control_controls_uniqueness", :unique => true
   add_index "control_controls", ["control_id"], :name => "index_control_controls_on_control_id"
   add_index "control_controls", ["implemented_control_id"], :name => "index_control_controls_on_implemented_control_id"
+
+  create_table "control_risks", :force => true do |t|
+    t.integer  "control_id",     :null => false
+    t.integer  "risk_id",        :null => false
+    t.integer  "modified_by_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
 
   create_table "control_sections", :force => true do |t|
     t.integer  "control_id",     :null => false
@@ -382,6 +390,14 @@ ActiveRecord::Schema.define(:version => 20130118215736) do
     t.integer  "modified_by_id"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+  end
+
+  create_table "risk_risky_attributes", :force => true do |t|
+    t.integer  "risk_id",            :null => false
+    t.integer  "risky_attribute_id", :null => false
+    t.integer  "modified_by_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
   create_table "risks", :force => true do |t|

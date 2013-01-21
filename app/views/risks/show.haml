@@ -1,0 +1,51 @@
+-model_name = controller_name.singularize.underscore
+-model_title = model_name.titleize
+-instance = instance_variable_get("@" + model_name)
+
+-@title = "GRC #{model_title}: #{instance.title}"
+
+-content_for :header do
+  %ol#breadcrumb
+    %li #{model_title}
+    %li= instance.slug
+  .location#pageTitle
+    =instance.slug
+    \: 
+    =instance.title
+
+-content_for :page_help, model_name
+
+-content_for :subheader_extras do
+  %h1.fltrt.highlighted #{model_title}
+
+-content_for :subheader_plus do
+  %a.navbarplus.fltrt{ :href => method("new_flow_#{model_name}_path").call(), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide'}
+
+.row-static
+  .doubleColumn
+    .doubleWide.fullHeight
+      -#=render :partial => "shared/graph",
+              :layout => 'layouts/widget_box',
+              :locals => { model_name.to_sym => instance,
+                :instance => instance}
+
+    .doubleWide.fullHeight
+      =render :partial => "main",
+              :layout => 'layouts/widget_box',
+              :locals => { model_name.to_sym => instance }
+
+  .singleColumn
+    .singleWide.fullHeight
+      =render :partial => "info",
+              :layout => 'layouts/widget_box',
+              :locals => { model_name.to_sym => instance }
+
+      =render :partial => "risky_attributes",
+              :layout => 'layouts/widget_box',
+              :locals => { model_name.to_sym => instance, :risky_attributes => instance.risky_attributes }
+
+      -if instance.class.respond_to?(:valid_relationships)
+        =render :partial => 'shared/related',
+                :layout => 'layouts/widget_box',
+                :locals => { :instance => instance }
+

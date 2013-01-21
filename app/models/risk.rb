@@ -22,6 +22,14 @@ class Risk < ActiveRecord::Base
   has_many :object_documents, :as => :documentable, :dependent => :destroy
   has_many :documents, :through => :object_documents
 
+  # Many to many with RiskyAttribute
+  has_many :risk_risky_attributes, :dependent => :destroy
+  has_many :risky_attributes, :through => :risk_risky_attributes
+
+  # Many to many with Control
+  has_many :control_risks, :dependent => :destroy
+  has_many :controls, :through => :risk_risky_attributes
+
   is_versioned_ext
 
   sanitize_attributes :description

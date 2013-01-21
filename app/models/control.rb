@@ -49,6 +49,10 @@ class Control < ActiveRecord::Base
   has_many :implementing_controls, :through => :implementing_control_controls, :source => :control
   has_many :implementing_control_controls, :class_name => "ControlControl", :foreign_key => "implemented_control_id", :dependent => :destroy
 
+  # Many to many with Risk
+  has_many :control_risks, :dependent => :destroy
+  has_many :risks, :through => :control_risks
+
   belongs_to :type, :class_name => 'Option', :conditions => { :role => 'control_type' }
   belongs_to :kind, :class_name => 'Option', :conditions => { :role => 'control_kind' }
   belongs_to :means, :class_name => 'Option', :conditions => { :role => 'control_means' }

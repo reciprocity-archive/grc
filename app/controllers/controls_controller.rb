@@ -105,8 +105,13 @@ class ControlsController < BaseObjectsController
   end
 
   def risks
-    @risks = []
-    render :action => 'risks', :layout => nil, :locals => { :risks => @risks }
+    @risks = @control.risks
+    if params[:s]
+      @risks = @risks.fulltext_search(params[:s])
+    end
+    @risks = @risks.all
+
+    render :action => 'risks', :layout => nil, :locals => { :risks => @risks, :control => @control }
   end
 
   private
