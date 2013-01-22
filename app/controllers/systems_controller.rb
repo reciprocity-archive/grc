@@ -151,7 +151,7 @@ class SystemsController < BaseObjectsController
       attrs.delete('created_at')
       attrs.delete('updated_at')
 
-      handle_import_person(attrs, 'owner', import[:warnings][i])
+      handle_import_person(attrs, 'owner', import[:warnings][i], "owner_display")
 
       slug = attrs['slug']
 
@@ -173,6 +173,7 @@ class SystemsController < BaseObjectsController
       handle_import_documents(system, attrs, 'references')
 
       handle_option(attrs, 'network_zone', import[:warnings][i], :network_zone)
+      handle_date(attrs, 'start_date', import[:warnings][i])
       
       append_notes = attrs.delete('append_notes')
       if append_notes

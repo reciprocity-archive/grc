@@ -60,8 +60,10 @@ module ImportHelper
     render '/error/import_error', :layout => false, :locals => { :message => message }
   end
 
-  def handle_import_person(attrs, key, warnings)
+  # if warning_key is set warnings will be assigned to this key instead of actual key
+  def handle_import_person(attrs, key, warnings, warning_key = nil)
     email = (attrs[key]||"").strip
+    warning_key ||= key
 
     unless email.nil?
       if email.include?('@')
@@ -73,8 +75,8 @@ module ImportHelper
         attrs[key] = Person.find_or_create_by_email!({:email => email})
       else
         attrs[key] = nil
-        warnings[key.to_sym] ||= []
-        warnings[key.to_sym] << "invalid email"
+        warnings[warning_key.to_sym] ||= []
+        warnings[warning_key.to_sym] << "invalid email"
       end
     end
   end
@@ -210,6 +212,18 @@ module ImportHelper
         warnings[name.to_sym] << "Unknown #{role} option '#{attrs[name]}'"
       end
       attrs[name] = value
+    end
+  end
+
+  # makes sure that date attribute is parsable by Rails
+  def handle_date(attrs, key, warnings)
+    if attrs.has_key?(key) && attrs[key].present?
+      begin
+        Date.parse(attrs[key])
+      rescue => e
+        warnings[key.to_sym] ||= []
+        warnings[key.to_sym] << "#{e}, use YYYY-MM-DD format"
+      end
     end
   end
 end
