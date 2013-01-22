@@ -119,36 +119,37 @@
         .WidgetBoxHeading
           .WidgetTitle.doublewidth Text Buttons
         .WidgetBoxContent
-          .well
-            %h5 Misc Buttons
-            %hr
-            %a.btn.btn-blue.addbtn I'm an add-button
-            %a.btn.btn-blue.minibtn I'm a mini-button 
-
-          .well
-            %h5 Modal Buttons
-            %hr
-
-            .row-fluid
-              %nav.pull-left.txtlft.span3
-                %a.btn.btn-large.btn-info{"data-dismiss" => "modal", :href => "#"} Cancel
-                %a.btn.btn-large.btn-warning{"data-dismiss" => "modal", :href => "#"} Delete
-              .toolbar-widget.span6
-                -#%a.btn{:href => "#"}
-                  %i.grcicon-arrowleft-black
-                %a View Edit History
-                -#%span.btnwell Showing Most Recent of 3 Revisions
-                -#%a.btn{:href => "#"}
-                  %i.grcicon-arrowright-black
-              %nav.pull-right.txtrt.span3
-                %a#actionButton.btn.btn-large.btn-success.btn-primary{:href => "#", "data-dismiss" => "modal"} Approve
-                %a#actionButton.btn.btn-large.btn-success.btn-primary{:href => "#", "data-dismiss" => "modal"} Save
-
-          .infowell .btn .btn-color addbtn vs minibtn
-          .well Addbtn is depreciated for minibtn in almost every case. 
-          .warningwell  Regmapper needs to be reviewed before addbtn can be removed from css as it was created for this page originally. ALSO, KINDA HUGE: Create block level buttons—those that span the full width of a parent— by adding .btn-block - we have consistently put span12. eww.
-          
-
+          .row-fluid
+            .span12
+              %h5 Standard Buttons
+              %a.btn.btn-large Standard button
+              %a.btn.btn-large.btn-primary Primary button
+              %a.btn Standard button
+              %a.btn.btn-primary Primary button
+              %a.btn.btn-mini Standard button
+              %a.btn.btn-primary.btn-mini Primary button
+              %br
+              %br
+          .row-fluid
+            .span12
+              %h5 .disabled
+              %a.btn.btn-large.disabled Standard button
+              %a.btn.btn-large.btn-primary.disabled Primary button
+              %a.btn.disabled Standard button
+              %a.btn.btn-primary.disabled Primary button
+              %a.btn.btn-mini.disabled Standard button
+              %a.btn.btn-primary.btn-mini.disabled Primary button
+              %br
+              %br
+          .row-fluid
+            .span12
+              %h5 .pending-ajax
+              %a.btn.btn-large.disabled.pending-ajax Standard button
+              %a.btn.btn-large.btn-primary.disabled.pending-ajax Primary button
+              %a.btn.disabled.pending-ajax Standard button
+              %a.btn.btn-primary.disabled.pending-ajax Primary button
+              %a.btn.btn-mini.disabled.pending-ajax Standard button
+              %a.btn.btn-primary.btn-mini.disabled.pending-ajax Primary button
 
     #icons
       .WidgetBox
