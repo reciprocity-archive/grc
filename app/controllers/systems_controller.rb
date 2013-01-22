@@ -151,7 +151,7 @@ class SystemsController < BaseObjectsController
       attrs.delete('created_at')
       attrs.delete('updated_at')
 
-      handle_import_person(attrs, 'owner', import[:warnings][i])
+      handle_import_person(attrs, 'owner', import[:warnings][i], "owner_display")
 
       slug = attrs['slug']
 
