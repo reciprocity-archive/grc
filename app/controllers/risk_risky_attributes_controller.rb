@@ -41,4 +41,8 @@ class RiskRiskyAttributesController < BaseMappingsController
       object.risk_id = object_params[:risk_id]
       object.risky_attribute_id = object_params[:risky_attribute_id]
     end
+
+    def default_as_json_options
+      { :include => [:risk, :risky_attribute] }
+    end
 end

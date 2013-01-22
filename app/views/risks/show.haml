@@ -24,13 +24,11 @@
 .row-static
   .doubleColumn
     .doubleWide.fullHeight
-      -#=render :partial => "shared/graph",
-              :layout => 'layouts/widget_box',
-              :locals => { model_name.to_sym => instance,
-                :instance => instance}
-
-    .doubleWide.fullHeight
       =render :partial => "main",
+              :layout => 'layouts/widget_box',
+              :locals => { model_name.to_sym => instance }
+
+      =render :partial => "business_objects",
               :layout => 'layouts/widget_box',
               :locals => { model_name.to_sym => instance }
 
@@ -42,10 +40,4 @@
 
       =render :partial => "risky_attributes",
               :layout => 'layouts/widget_box',
-              :locals => { model_name.to_sym => instance, :risky_attributes => instance.risky_attributes }
-
-      -if instance.class.respond_to?(:valid_relationships)
-        =render :partial => 'shared/related',
-                :layout => 'layouts/widget_box',
-                :locals => { :instance => instance }
-
+              :locals => { model_name.to_sym => instance }

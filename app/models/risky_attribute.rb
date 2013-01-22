@@ -42,4 +42,10 @@ class RiskyAttribute < ActiveRecord::Base
     slug
   end
 
+  def attributed_objects
+    Relationship.where(
+      :destination_type => self.class.name,
+      :destination_id => id,
+    ).includes(:source).map(&:source)
+  end
 end
