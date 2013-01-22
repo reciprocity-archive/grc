@@ -91,6 +91,7 @@ ActiveRecord::Base.transaction do
   Program.find_or_create_by_slug!({
     :slug => 'COMPANY',
     :title => 'Company Controls',
-    :company => true
+    :company => true,
+    :kind => Option.options_for(:program_kind).find_by_title('Company Controls')
   })
 end
