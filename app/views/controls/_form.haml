@@ -21,7 +21,13 @@
   -programs = programs.all
   -# Ensure the specified program is included?
   -#programs.unshift(f.object.program) if f.object.program && !programs.include?(f.object.program)
-  =wrapped_select f, :span2, :program_id, programs.map { |p| [p.slug, p.id] }, :selected => f.object.program_id, :include_blank => true
+  -if f.object.new_record? && f.object.program_id.present?
+    .span2
+      =f.label 'Program'
+      =f.hidden_field :program_id
+      =f.object.program.slug
+  -else
+    =wrapped_select f, :span2, :program_id, programs.map { |p| [p.slug, p.id] }, :selected => f.object.program_id, :include_blank => true
   .span6
     .row-fluid
       =wrapped_text_field f, :span4, :slug, :label_name => 'Code (autofill)', :placeholder => 'CONTROL-XXXX'
