@@ -58,6 +58,8 @@ can.Control("CMS.Controllers.Responses", {
         if(response.request_id === this.options.id) {  
             can.Model.Cacheable.prototype.addElementToChildList.call(this.options.observer, "list", response);
             this.element.closest(".main-item").find(".pbc-request-count").html(this.list.length + " " + (this.list.length - 1 ? "Responses" : "Response"));
+            $("#pbc-response-" + response.id).collapse().collapse("show");
+            $(document.body).scrollTop($("#pbc-response-" + response.id).offset().top);
         }
     }
     , "{model} destroyed" : function(Model, ev, response) {
