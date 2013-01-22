@@ -86,7 +86,7 @@
               :layout => 'layouts/widget_box',
               :locals => { :programs => @programs }
     .span6
-      =render :partial => 'quick/find',
+      =render :partial => 'quick_find',
             :layout => 'layouts/widget_box'
       -if has_feature? :BETA
         =render :partial => 'design/templates/riskWidgetGap'
