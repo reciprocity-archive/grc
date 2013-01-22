@@ -13,12 +13,6 @@
   %h1
     =instance.title
 
--content_for :header do
-  %ol#breadcrumb
-    %li #{model_title}
-    %li= instance.slug
-  .location#pageTitle=instance.title
-
 -content_for :page_help, model_name
 
 -content_for :subheader_extras do
@@ -38,6 +32,11 @@
       =render :partial => "main",
               :layout => 'layouts/widget_box',
               :locals => { model_name.to_sym => instance }
+                
+      =render :partial => "risks",
+              :layout => 'layouts/widget_box',
+              :locals => { model_name.to_sym => instance }
+              
   
     .span4
       -if has_feature? :BETA
@@ -50,13 +49,3 @@
       =render :partial => 'shared/related',
               :layout => 'layouts/widget_box',
               :locals => { :instance => instance }
-
-.container-fluid
-  .row-fluid
-    .span8
-      =render :partial => "risks",
-              :layout => 'layouts/widget_box',
-              :locals => { model_name.to_sym => instance }
-
-
-
