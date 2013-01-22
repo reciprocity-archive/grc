@@ -22,7 +22,7 @@
     :javascript
       jQuery(function($) { $('head').append("<link href='https://fonts.googleapis.com/css?family=Titillium+Web' rel='stylesheet' type='text/css'></link>"); });
 
-  %body{ :class => "#{has_feature?(:BETA) ? 'BETA' : ''}" }
+  %body{ :class => "#{has_feature?(:BETA) ? 'BETA' : ''}", :'data-target' => '.bs-docs-sidebar', :'data-spy' => 'scroll'}
 
     %header.header
       .header-bar
