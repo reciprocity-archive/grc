@@ -38,7 +38,7 @@
     {{/foo_controls}}
   {{/rcontrols}}
   {{else}}
-    <div class="span12 well">
+    <div class="span8 well">
       <input name="section[na]" type="hidden" value="0">
       <input class="checkbox" id="section_na" name="section[na]" type="checkbox" value="1" {{#na}}checked="checked"{{/na}}>
       <h3 style="display:inline;">
@@ -46,7 +46,7 @@
       </h3>
     </div>
   {{/if}}
-  <br>
+  <br style="clear:both">
   <div class="row-fluid">
     <label class="cleanlabel" for="section_notes">Note</label>
   </div>
@@ -61,9 +61,11 @@
     <div class="span3"></div>
     <div class="span3"> </div>
     <div class="span3">
+    {{!
       <label class="fltrt" for="control-verificationdate"><strong>Approved</strong>:
         <span class="statustextred">Not Approved</span>
       </label>
+    }} &nbsp;
     </div>
   </div>
   </div>
