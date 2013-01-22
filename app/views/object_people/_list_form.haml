@@ -100,7 +100,7 @@
             .tab-content
               #category1.tab-pane.active
                 .people-list
-                  %ul.source{ :'data-list-data-href' => flow_people_path, :'data-template-id' => 'person_option' }
+                  %ul.source{ :'data-list-data-href' => flow_people_path(:format => :json), :'data-template-id' => 'person_option' }
   .span7
     %h4 Roles for this #{object.class.name.titleize.downcase}
     .people-list.currentlist
