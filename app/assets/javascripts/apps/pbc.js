@@ -47,7 +47,6 @@ $.widget(
                 .append( "<a>"+ item.label + "</a>" )
                 .appendTo( ul );
         }
-
     }
 );
 $.widget.bridge("pbc_autocomplete", $.pbc.autocomplete);
@@ -59,6 +58,7 @@ $.widget(
       source : CMS.Models.Person.search
       , select :  function(event, ui) { 
         $(event.target).trigger("personSelected", ui.item);
+        $(this).data("pbcAutocomplete_people")._value("");
         return false;
       } 
       , search : function(event) {
