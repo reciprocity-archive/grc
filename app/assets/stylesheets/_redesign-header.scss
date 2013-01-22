@@ -137,32 +137,6 @@
 
 .header-content {
   height:60px;
-  .breadcrumbs {
-    @include clearfix();
-    @include reset-list();
-    text-transform:uppercase;
-    margin-top:4px;
-    li {
-      float:left;
-      font-size:11px;
-      margin-right:3px;
-      color:$gray;
-      a {
-        color:$link;
-      }
-      &:after {
-        content:' /';
-      }
-      &:last-child {
-        &:after {
-          content:'';
-        }
-        a {
-          color:$gray;
-        }
-      }
-    }
-  }
   .btn-group {
     margin-top: 27px;
   }
@@ -171,6 +145,33 @@
     .title {
       padding: 0 7px 6px 7px;
       font-weight: bold;
+    }
+  }
+}
+
+.breadcrumbs {
+  @include clearfix();
+  @include reset-list();
+  text-transform:uppercase;
+  margin-top:4px;
+  li {
+    float:left;
+    font-size:11px;
+    margin-right:3px;
+    color:$gray;
+    a {
+      color:$link;
+    }
+    &:after {
+      content:' /';
+    }
+    &:last-child {
+      &:after {
+        content:'';
+      }
+      a {
+        color:$gray;
+      }
     }
   }
 }

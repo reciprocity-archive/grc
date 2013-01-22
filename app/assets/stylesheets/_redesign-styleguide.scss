@@ -60,3 +60,16 @@
     @include opacity(0.25);
   }
 }
+
+.styleguide-content {
+  textarea {
+    width: 80%;
+    height: 150px;
+    color: $black;
+    font-size: 14px;
+  }
+}
+
+.real-example {
+  margin-bottom: 20px;
+}

@@ -12,6 +12,20 @@ h2 {
   margin-right: 8px;
 }
 
+h3 {
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: bold;
+  color: $subTitle;
+}
+
+h4 {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: normal;
+  color: $subTitle;
+}
+
 
 // buttons
 .btn {

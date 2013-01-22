@@ -27,14 +27,144 @@
         %li
           %a{:href => "#breadcrumb"}
             %i.icon-chevron-right
-            Misc
+            Breadcrumbs
+        %li
+          %a{:href => "#icons"}
+            %i.icon-chevron-right
+            Icons
     
-    .span9
-      #headers
-        %h1 Main title
-
-
-
+    .span9.styleguide-content
+      %section#headers.widget
+        %section.header
+          %h2
+            Headers
+        %section.content
+          .real-example
+            %h1
+              h1. Main title - Lorem ipsum dolor sit amet.
+            %h2
+              h2. Subtitle - Lorem ipsum dolor sit amet
+          %p
+            style for h1 is: Bold, 24px, #444
+            %br/
+            style for h2 is: Bold, 20px, #111
+            
+      %section#breadcrumb.widget
+        %section.header
+          %h2
+            Breadcrumbs
+        %section.content
+          .real-example
+            %ul.breadcrumbs
+              %li
+                %a
+                  Breadcrumb
+              %li
+                %a
+                  Breadcrumb inner
+              
+          %p
+            %strong Example:
+          
+          %textarea
+            :escaped
+              %ul.breadcrumbs
+                %li
+                  %a
+                    Breadcrumb
+                %li
+                  %a
+                    Breadcrumb inner
+                
+          %p
+            <span class="label label-info">Note!</span>
+            Do not put class on last %li element. It is solved from CSS.
+            
+      %section#icons.widget
+        %section.header
+          %h2
+            Icons
+        %section.content
+          .real-example
+            .btn.btn-add
+              %i.grcicon-add-new
+            .btn.btn-add
+              %i.grcicon-admin
+            .btn.btn-add
+              %i.grcicon-dashboard
+            .btn.btn-add
+              %i.grcicon-demo
+            .btn.btn-add
+              %i.grcicon-desktop
+            .btn.btn-add
+              %i.grcicon-help
+            .btn.btn-add
+              %i.grcicon-logout
+            .btn.btn-add
+              %i.grcicon-normal
+            .btn.btn-add
+              %i.grcicon-user
+            .btn.btn-add
+              %i.grcicon-wide
+            .btn.btn-add
+              %i.grcicon-search-circle
+            %br/
+            %br/
+            .btn.btn-add
+              %i.grcicon-add-new-black
+            .btn.btn-add
+              %i.grcicon-admin-black
+            .btn.btn-add
+              %i.grcicon-dashboard-black
+            .btn.btn-add
+              %i.grcicon-demo-black
+            .btn.btn-add
+              %i.grcicon-desktop-black
+            .btn.btn-add
+              %i.grcicon-help-black
+            .btn.btn-add
+              %i.grcicon-logout-black
+            .btn.btn-add
+              %i.grcicon-normal-black
+            .btn.btn-add
+              %i.grcicon-user-black
+            .btn.btn-add
+              %i.grcicon-wide-black
+            .btn.btn-add
+              %i.grcicon-search-black
+              
+          %p
+            %strong Example:
+          
+          %textarea
+            :escaped
+              %i.grcicon-add-new
+              %i.grcicon-admin
+              %i.grcicon-dashboard
+              %i.grcicon-demo
+              %i.grcicon-desktop
+              %i.grcicon-help
+              %i.grcicon-logout
+              %i.grcicon-normal
+              %i.grcicon-user
+              %i.grcicon-wide
+              %i.grcicon-search-circle
+              %i.grcicon-add-new-black
+              %i.grcicon-admin-black
+              %i.grcicon-dashboard-black
+              %i.grcicon-demo-black
+              %i.grcicon-desktop-black
+              %i.grcicon-help-black
+              %i.grcicon-logout-black
+              %i.grcicon-normal-black
+              %i.grcicon-user-black
+              %i.grcicon-wide-black
+              %i.grcicon-search-black
+              
+          %p
+            <span class="label label-info">Note!</span>
+            As you can see on real example there is green button surrounding icons. That is just for example purpose so you can see white icons also.
+        
 .container-fluid
   .row-fluid
     %h2{:class =>'pull-left'}
