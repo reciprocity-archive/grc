@@ -1,0 +1,44 @@
+-content_for :widget_title do
+  Quick Find
+
+-content_for :widget_buttons do
+  %input.ui-corner-all.widgetsearch.clear-value(type='text' placeholder='Search')
+
+-content_for :widget_help, 'quick_find'
+
+.tabbable#quick_find
+  %ul.nav.nav-tabs
+    %li=link_to 'Controls', '#controls', :data => { :'tab-href' => flow_controls_path(:quick => true), :toggle => 'tab' }
+    %li=link_to 'Biz Processes', '#biz_processes', :data => { :'tab-href' => flow_systems_path(:quick => true, :is_biz_process => true), :toggle => 'tab' }
+    %li=link_to 'Systems', '#systems', :data => { :'tab-href' => flow_systems_path(:quick => true), :toggle => 'tab' }
+    %li=link_to 'Products', '#products', :data => { :'tab-href' => flow_products_path(:quick => true), :toggle => 'tab' }
+    %li=link_to 'Risks', '#risks', :data => { :'tab-href' => flow_risks_path(:quick => true), :toggle => 'tab' }
+    %li=link_to 'Risky Attributes', '#risky_attributes', :data => { :'tab-href' => flow_risky_attributes_path(:quick => true), :toggle => 'tab' }
+    %li=link_to 'Org Groups', '#org_groups', :data => { :'tab-href' => flow_org_groups_path(:quick => true), :toggle => 'tab' }
+    %li=link_to 'Facilities', '#facilities', :data => { :'tab-href' => flow_facilities_path(:quick => true), :toggle => 'tab' }
+    %li=link_to 'Markets', '#markets', :data => { :'tab-href' => flow_markets_path(:quick => true), :toggle => 'tab' }
+    %li=link_to 'Data Assets', '#data_assets', :data => { :'tab-href' => flow_data_assets_path(:quick => true), :toggle => 'tab' }
+    %li=link_to 'Projects', '#projects', :data => { :'tab-href' => flow_projects_path(:quick => true), :toggle => 'tab' }
+    %li=link_to 'Programs', '#programs', :data => { :'tab-href' => flow_programs_path(:quick => true), :toggle => 'tab' }
+
+  .tab-content
+    #controls.tab-pane
+    #biz_processes.tab-pane
+    #systems.tab-pane
+    #products.tab-pane
+    #risks.tab-pane
+    #risky_attributes.tab-pane
+    #org_groups.tab-pane
+    #facilities.tab-pane
+    #markets.tab-pane
+    #projects.tab-pane
+    #data_assets.tab-pane
+    #programs.tab-pane
+
+-if has_feature? :BETA
+  .row-fluid
+    .span6
+    .span6
+      %label.fltrt
+        %strong 254
+        of 500

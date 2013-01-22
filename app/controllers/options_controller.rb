@@ -15,7 +15,12 @@ class OptionsController < BaseObjectsController
     if params[:s]
       @options = @options.db_search(params[:s])
     end
-    render :json => @options.all.as_json
+
+    if params[:quick]
+      render :partial => 'quick'
+    else
+      render :json => @options.all.as_json
+    end
   end
 
   def export

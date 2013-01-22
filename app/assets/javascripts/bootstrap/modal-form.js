@@ -31,7 +31,18 @@
         .on('loaded.modal-form', $.proxy(this.focus_first_input, this))
         .on('delete-object', $.proxy(this.delete_object, this))
         ;
+      function oneclick() {
+        $(this).trigger("click");
+        $(this).attr("href", "#").on("ajax:complete", function() { $(this).one("click", oneclick); });    
+      }
+      $('a.preventdoubleclick', this.$element).one('click', oneclick);
     }
+
+  , doNothing: function(e) {
+    e.stopImmediatePropagation();
+    e.stopPropagation();
+    e.preventDefault();
+  }
 
   , delete_object: function(e, data, xhr) {
       // If this modal is contained within another modal, pass the event onward
@@ -61,8 +72,22 @@
     }
 
   , submit: function(e) {
-      this.$form().submit();
+      var $form = this.$form(),
+      that = this,
+      origText = $("[data-toggle=modal-submit]", $form)
+        .addClass("disabled pending-ajax")
+        .attr("disabled", true)
+        .text();
 
+      $form.on("ajax:beforeSend", function(ev, _xhr){
+        that.xhr = _xhr;
+      }).on("ajax:complete", function(ev, xhr2) {
+        if(xhr2 === that.xhr) {
+          delete that.xhr;
+          $("[data-toggle=modal-submit]", ev.target).removeAttr("disabled").removeClass("disabled pending-ajax").text(origText);
+        }
+      });
+      $form.submit();
       if (e.type == 'click')
         e.preventDefault();
     }

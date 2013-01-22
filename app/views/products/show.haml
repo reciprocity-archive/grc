@@ -50,4 +50,13 @@
       =render :partial => 'shared/related',
               :layout => 'layouts/widget_box',
               :locals => { :instance => instance }
-  
+
+.container-fluid
+  .row-fluid
+    .span8
+      =render :partial => "risks",
+              :layout => 'layouts/widget_box',
+              :locals => { model_name.to_sym => instance }
+
+
+

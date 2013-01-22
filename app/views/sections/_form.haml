@@ -34,7 +34,7 @@
 .row-fluid
   .span12{:class => error_class(f, :title)}
     %label{:for => "section-title"} Title
-    %input#section-title.span12{:placeholder => "Title", :type => "text", :value => f.object.title, :name => 'section[title]'}
+    %input#section-title.span12{:placeholder => "Title", :type => "text", :value => f.object[:title], :name => 'section[title]'}
     =error_messages_inline(f, :title)
 
 .row-fluid

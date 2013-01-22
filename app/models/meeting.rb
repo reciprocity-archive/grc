@@ -13,8 +13,8 @@ class Meeting < ActiveRecord::Base
     "#{response.system.title} meeting"
   end
 
-  def calendar_url=(url)
-    self[:calendar_url] = url.gsub "action=TEMPLATE&tmeid=", "action=VIEW&eid="
+  def calendar_url
+    self[:calendar_url].gsub "action=TEMPLATE&tmeid=", "action=VIEW&eid="
   end
 
 end

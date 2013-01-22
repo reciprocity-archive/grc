@@ -26,7 +26,7 @@
           %a#tooltip11.btn.btn-mini.btn-blue{"rel" => "tooltip", "data-placement" => "left", "title" => "More", "data-target" => "##{content_id}", "data-toggle" => "collapse"}
             %i.grcicon-more
 
-      .row-fluid.collapse{ :id => content_id }
+      .row-fluid.collapse{ :id => content_id, :'data-id' => item.id }
         .span12.morewell.nominheight
           .slotcontent.span12
             %ul.contentactions.pull-right

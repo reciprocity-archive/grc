@@ -46,10 +46,15 @@ class ControlsController < BaseObjectsController
     if params[:s].present?
       @controls = @controls.fulltext_search(params[:s])
     end
+    if params[:company].present?
+      @controls = @controls.joins(:program).where(Program.arel_table[:company].eq(true))
+    end
     @controls = allowed_objs(@controls.all, :read)
 
     if params[:list_select].present?
       render :partial => 'list_select', :layout => 'layouts/list_select_modal', :locals => {}
+    elsif params[:quick]
+      render :partial => 'quick'
     else
       render :json => @controls
     end
@@ -100,8 +105,13 @@ class ControlsController < BaseObjectsController
   end
 
   def risks
-    @risks = []
-    render :action => 'risks', :layout => nil, :locals => { :risks => @risks }
+    @risks = @control.risks
+    if params[:s]
+      @risks = @risks.fulltext_search(params[:s])
+    end
+    @risks = @risks.all
+
+    render :action => 'risks', :layout => nil, :locals => { :risks => @risks, :control => @control }
   end
 
   private

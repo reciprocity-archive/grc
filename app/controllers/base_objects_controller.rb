@@ -17,6 +17,11 @@ class BaseObjectsController < ApplicationController
     set_objects(object_set)
 
     respond_to do |format|
+      format.html do
+        if params[:quick]
+          render :partial => 'quick'
+        end
+      end
       format.json do
         render :json => objects_as_json
       end

@@ -32,6 +32,14 @@ module BusinessObjectModel
     ).includes(:destination).map(&:destination)
   end
 
+  def risky_attributes
+    Relationship.where(
+      :source_type => self.class.name,
+      :source_id => id,
+      :relationship_type_id => "#{self.class.name.underscore}_has_risky_attribute"
+    ).includes(:destination).map(&:destination)
+  end
+
   module ClassMethods
   end
 

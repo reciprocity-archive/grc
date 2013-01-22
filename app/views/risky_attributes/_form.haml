@@ -1,0 +1,34 @@
+-model_name = controller_name.singularize
+-model_title = model_name.titleize
+-content_for :modal_title do
+  -if f.object.new_record?
+    Create a new #{model_title}
+  -else
+    Edit #{model_title}
+
+-if !f.object.new_record?
+  -content_for :modal_delete_path, method("delete_flow_#{model_name}_path").call(f.object)
+
+.row-fluid
+  =wrapped_text_field f, :span6, :title, :placeholder => 'Enter title'
+  .span6
+    .row-fluid
+      =wrapped_text_field f, :span12, :slug, :label_name => 'Code (autofill)', :placeholder => "#{f.object.class.to_s.upcase}-XXXX"
+      -#=wrapped_text_field f, :span6, :version, :placeholder => '1.1.1'
+.row-fluid
+  =wrapped_text_area f, :span6, :description, :class => 'double wysihtml5', :placeholder => 'Enter description here'
+  .span6
+    .row-fluid
+      =wrapped_date_field f, :span6, :start_date, :class => 'date', :label_name => 'Effective Date', :placeholder => 'MM/DD/YYYY'
+      =wrapped_date_field f, :span6, :stop_date, :class => 'date', :label_name => 'Stop Date', :placeholder => 'MM/DD/YYYY'
+    .row-fluid
+      =wrapped_select f, :span6, :type_string, RiskyAttribute.type_strings, :selected => (f.object.type_string), :label_name => 'Type', :include_blank => true
+
+.row-fluid
+  =wrapped_text_field f, :span6, :url, :label_name => 'Direct URL (optional)', :placeholder => 'http://www.example.com/'
+
+  .span6
+
+%br
+
+=render :partial => "shared/wysihtml5"

@@ -21,6 +21,15 @@
 // Initialize delegated event handlers
 jQuery(function($) {
 
+  // Display spinners included in initial page load
+  $('.spinner').each(function() {
+    var spinner = new Spinner({ }).spin();
+    $(this).html(spinner.el);
+    // Scroll up so spinner doesn't get pushed out of visibility
+    $(this).scrollTop(0);
+    $(spinner.el).css({ width: '100px', height: '100px', left: '50px', top: '50px' });
+  });
+
   // Before submitting, remove any disabled form elements
   $('body').on('submit', 'form[data-remote]', function(e, xhr, req) {
     $(this)
@@ -111,7 +120,7 @@ jQuery(function($) {
 
       $(pane).load(href, function(data, status, xhr) {
         $tab.data('tab-loaded', true);
-        $(this).html(data);
+        $(this).html(data).trigger("loaded", xhr, data);
       });
     }
   });
@@ -592,4 +601,22 @@ if(!/\/mapping/.test(window.location.href)) {
     });
   });
 }
+
+//make buttons non-clickable when saving
+jQuery(function($) {
+  $(window).on("click change", "a, input, select", function(ev) {
+    if(ev.ajax) {// binding of an ajax to a click is something we do manually
+      $(ev.target).addClass("disabled pending-ajax").attr("disabled", true);
+      ev.ajax.then(function() {
+        $(ev.target).removeAttr("disabled").removeClass("disabled pending-ajax");
+      }, function() {
+        $(ev.target).removeAttr("disabled").removeClass("disabled pending-ajax");
+      });
+    }
+  });
+});
+
+
+
+
 

@@ -1,0 +1,76 @@
+-# locals: instance, id_prefix, seen_ids, is_root
+
+-model_underscore = instance.class.name.underscore
+
+-is_root = false if local_assigns[:is_root].nil?
+
+-seen_ids = [] if local_assigns[:seen_ids].nil?
+-id_prefix = "risks-widget-instance-#{instance.id}" if local_assigns[:id_prefix].nil?
+
+-seen_this = seen_ids.include?(instance.id)
+
+-sub_objects = instance.dependent_self_objects
+-risky_attributes = instance.risky_attributes
+
+-expand_this = (!seen_this && sub_objects.count > 0) || (!seen_this && risky_attributes.count > 0)
+
+-summary_toggle_target = "#{id_prefix}-summary"
+-objects_toggle_target = "#{id_prefix}-objects"
+
+-main_toggle_target = expand_this ? objects_toggle_target : summary_toggle_target
+
+-dependence_relationship_type = "#{model_underscore}_is_dependent_on_#{model_underscore}"
+-risky_attribute_relationship_type = "#{model_underscore}_has_risky_attribute"
+
+-has_dependence_relationship = instance.has_valid_relationship?(dependence_relationship_type)
+-has_risky_attribute_relationship = instance.has_valid_relationship?(risky_attribute_relationship_type)
+
+%li{ :'data-object-id' => instance.id }
+  .row-fluid
+    .slot.span12.systemslot
+      .slottitle.span8.toggle{"data-target" => "##{main_toggle_target}", "data-toggle" => "collapse"}
+        -if expand_this
+          .expander{ :class => is_root && !expand_this ? 'in' : '' }
+        -else
+          .enddot
+        %span.prefix=instance.slug
+        =instance.title
+      -if has_feature? :BETA
+        .slotcolumn.span2
+          .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
+        .slotowner.span1
+          %a.slotowner{:href => "#"} Owner Jim
+      .slotactions.pull-right
+        %a.btn.btn-mini.btn-blue.halfopacity{ "data-target" => "##{summary_toggle_target}", "data-toggle" => "collapse", "rel" => "tooltip", "data-placement" => "left", "title" => "More" }
+          %i.grcicon-more
+
+  .row-fluid.collapse{ :id => summary_toggle_target, :class => is_root ? 'in' : '' }
+    .span12.morewell.statusblue.nominheight
+      .slotcontent.span12
+        %ul.contentactions.pull-right
+          %li
+            %a.btn.btn-mini.halfopacity{ "rel" => "tooltip", "data-placement" => "left", "title" => "Edit this object", 'data-modal-class' => 'modal-wide', 'data-form-target' => 'refresh', "data-toggle" => "modal-ajax-form", :href => url_for(:id => instance.id, :action => :edit, :controller => model_underscore.pluralize, :only_path => true) }
+              %i.grcicon-edit-grey
+          -if has_risky_attribute_relationship
+            %li
+              %a.btn.btn-mini.halfopacity{ :rel => "tooltip", :"data-placement" => "left", :title => "Link risky attributes to this object", :'data-modal-class' => 'modal-wide', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :"data-toggle" => "modal-ajax-relationship-selector", :href => list_edit_flow_relationships_path(:object_id => instance.id, :object_type => instance.class.name, :related_model => 'RiskyAttribute', :related_side => 'destination', :relationship_type => risky_attribute_relationship_type) }
+                %i.grcicon-link
+          -if !is_root
+            %li
+              %a.btn.btn-mini.halfopacity{ "rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => url_for(:id => instance.id, :action => :show, :controller => model_underscore.pluralize, :only_path => true) }
+                %i.grcicon-arrowright-black
+        =display_as_html instance.description
+
+  .collapse{ :id => objects_toggle_target }
+
+    -if !seen_this
+
+      -if has_risky_attribute_relationship
+        %ul.slotlist
+          -risky_attributes.each_with_index do |risky_attribute, i|
+            =render :partial => 'risky_attribute_tree', :locals => { :risky_attribute => risky_attribute, :id_prefix => "#{id_prefix}-risky_attribute-#{risky_attribute.id}" }
+
+      -if has_dependence_relationship
+        %ul.slotlist
+          -sub_objects.each_with_index do |sub_object, i|
+            =render :partial => 'risk_object_tree', :locals => { :instance => sub_object, :id_prefix => "#{id_prefix}-sub-object-#{sub_object.id}", :seen_ids => seen_ids + [instance.id] }

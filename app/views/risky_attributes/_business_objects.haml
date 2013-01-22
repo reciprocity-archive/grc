@@ -1,0 +1,13 @@
+-# locals: risky_attribute
+-model_name = controller_name.singularize
+-model_title = controller_name.singularize.titleize
+
+-content_for :widget_title do
+  Business Objects with this Risky Attribute
+
+-content_for :widget_help, "#{model_name}_business_objects"
+
+%ul.slotlist
+  -risky_attribute.attributed_objects.each do |object|
+    =render :partial => "attributed_object",
+            :locals => { :instance => object }

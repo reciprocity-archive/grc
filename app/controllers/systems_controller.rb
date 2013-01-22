@@ -35,6 +35,7 @@ class SystemsController < BaseObjectsController
 
   def index
     @systems = System
+    @systems = @systems.where(:is_biz_process => true) if params[:is_biz_process]
     if params[:s].present?
       @systems = @systems.db_search(params[:s])
     end
@@ -48,7 +49,16 @@ class SystemsController < BaseObjectsController
       end
     end
 
-    render :json => @systems
+    respond_to do |format|
+      format.html do
+        if params[:quick]
+          render :partial => 'quick'
+        end
+      end
+      format.json do
+        render :json => @systems
+      end
+    end
   end
 
   def export

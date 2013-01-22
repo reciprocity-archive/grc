@@ -12,8 +12,8 @@
 
 .tabbable#quick_find
   %ul.nav.nav-tabs
-    %li=link_to 'Categories', '#categories', :data => { :'tab-href' => quick_categories_path, :toggle => 'tab' }
-    %li=link_to 'Options', '#options', :data => { :'tab-href' => quick_options_path, :toggle => 'tab' }
+    %li=link_to 'Categories', '#categories', :data => { :'tab-href' => flow_categories_path(:quick => true), :toggle => 'tab' }
+    %li=link_to 'Options', '#options', :data => { :'tab-href' => flow_options_path(:quick => true), :toggle => 'tab' }
   .tab-content
     #categories.tab-pane
     #options.tab-pane

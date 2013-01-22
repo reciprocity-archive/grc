@@ -26,7 +26,13 @@ class CategoriesController < BaseObjectsController
     if params[:s]
       @categories = @categories.db_search(params[:s])
     end
-    render :json => @categories.all.as_json
+
+    if params[:quick]
+      @root_categories = allowed_objs(Category.roots, :read)
+      render :partial => 'quick'
+    else
+      render :json => @categories.all.as_json
+    end
   end
 
   def export
@@ -56,7 +62,8 @@ class CategoriesController < BaseObjectsController
     end
 
     def extra_delete_relationship_stats
-      [ [ 'Control', @category.self_and_descendants.map(&:controls).map(&:all).flatten.uniq.count ]
+      [ [ 'Control', @category.self_and_descendants.map(&:controls).map(&:all).flatten.uniq.count ],
+        [ 'Risk', @category.self_and_descendants.map(&:risks).map(&:all).flatten.uniq.count ]
       ]
     end
 

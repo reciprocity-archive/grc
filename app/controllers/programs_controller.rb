@@ -66,6 +66,10 @@ class ProgramsController < BaseObjectsController
       @programs = @programs.db_search(params[:s])
     end
     @programs = allowed_objs(@programs.all, :read)
+
+    if params[:quick]
+      render :partial => 'quick'
+    end
   end
 
   def export_controls

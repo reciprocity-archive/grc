@@ -1,0 +1,42 @@
+-# locals: risk
+
+-model_name = controller_name.singularize
+-model_title = controller_name.singularize.titleize
+-instance = instance_variable_get("@" + model_name)
+-content_for :widget_title do
+  Attributes linked to this Risk
+
+-content_for :widget_help, "#{model_name}_risky_attributes"
+
+-content_for :widget_buttons do
+  -#%input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
+  %a.widgetbtn{:href => list_edit_flow_risk_risky_attributes_path(:risk_id => instance.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#risky_attributeList', :'data-modal-class' => 'modal-wide' }
+    %i.grcicon-edit-grey
+
+-risky_attributes = instance.risky_attributes
+
+-#.row-fluid.js-list-container-title
+  .span10
+    %h3.toggle{"data-target" => "#riskyAttributeListCollapse", "data-toggle" => "collapse"}
+      .expander
+      Risky Attributes
+      %span{:class => "grc-badge #{risky_attributes.count.zero? ? "no-object" : ""}"}=risky_attributes.count
+  .span2
+    %a.widgetbtn.pull-right.juke-left{:href => list_edit_flow_risk_risky_attributes_path(:risk_id => instance.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#risky_attributeList', :'data-modal-class' => 'modal-wide' }
+      %i.grcicon-edit-grey
+
+.collapse.in#riskyAttributeListCollapse
+  .bootstrap-collapse-bugfix
+
+  %script#risky_attribute_list_item{ :type => 'text/html', :'data-member' => 'risk_risky_attribute' }
+    %li.controlSlot{ :'data-id' => '<%= risky_attribute.id %>' }
+      %span.controls-group <%= risky_attribute.type_string %>
+      %br
+      %span.controls-subgroup <%= risky_attribute.title || '&nbsp;' %>
+
+  %ul#risky_attributeList{ :'data-template-id' => 'risky_attribute_list_item' }
+    -risky_attributes.each do |item|
+      %li.controlSlot{ :'data-id' => item.id }
+        %span.controls-group=item.type_string
+        %br
+        %span.controls-subgroup=item.title || '&nbsp;'.html_safe

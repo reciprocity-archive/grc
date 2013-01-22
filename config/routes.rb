@@ -105,6 +105,22 @@ CmsRails::Application.routes.draw do
     end
   end
 
+  resources :projects, :as => 'flow_projects', :only => [:index, :show, :new, :edit, :create, :update, :destroy] do
+    member do
+      get 'delete'
+      get 'tooltip'
+      get 'delete'
+    end
+  end
+
+  resources :data_assets, :as => 'flow_data_assets', :only => [:index, :show, :new, :edit, :create, :update, :destroy] do
+    member do
+      get 'delete'
+      get 'tooltip'
+      get 'delete'
+    end
+  end
+
   resources :risky_attributes, :as => 'flow_risky_attributes', :only => [:index, :show, :new, :edit, :create, :update, :destroy] do
     member do
       get 'delete'
@@ -118,6 +134,18 @@ CmsRails::Application.routes.draw do
       get 'delete'
       get 'tooltip'
       get 'delete'
+    end
+  end
+
+  resources :control_risks, :as => 'flow_control_risks', :only => [:index, :create] do
+    collection do
+      get 'list_edit'
+    end
+  end
+
+  resources :risk_risky_attributes, :as => 'flow_risk_risky_attributes', :only => [:index, :create] do
+    collection do
+      get 'list_edit'
     end
   end
 
@@ -223,17 +251,6 @@ CmsRails::Application.routes.draw do
   end
 
   match 'programs_dash' => 'programs_dash#index'
-  match 'quick/programs' => 'quick#programs'
-  match 'quick/sections' => 'quick#sections'
-  match 'quick/controls' => 'quick#controls'
-  match 'quick/biz_processes' => 'quick#biz_processes'
-  match 'quick/accounts' => 'quick#accounts'
-  match 'quick/people' => 'quick#people'
-  match 'quick/categories' => 'quick#categories'
-  match 'quick/options' => 'quick#options'
-  match 'quick/systems' => 'quick#systems'
-  match 'quick/products' => 'quick#products'
-
   match 'admin_dash' => 'admin_dash#index'
 
   # Catch-all for beta views

@@ -1,0 +1,61 @@
+-# locals: risky_attribute, id_prefix, seen_ids
+
+-model_underscore = 'risky_attribute'
+
+-is_root = false if local_assigns[:is_root].nil?
+-is_editable = false if local_assigns[:is_editable].nil?
+
+-seen_ids = [] if local_assigns[:seen_ids].nil?
+-id_prefix = "object-#{risky_attribute.id}" if local_assigns[:id_prefix].nil?
+
+-seen_this = seen_ids.include?(risky_attribute.id)
+
+-risks = risky_attribute.risks
+
+-expand_this = risks.count > 0
+
+-summary_toggle_target = "#{id_prefix}-summary"
+-objects_toggle_target = "#{id_prefix}-objects"
+
+-main_toggle_target = expand_this ? objects_toggle_target : summary_toggle_target
+
+%li
+  .row-fluid
+    .slot.span12.processslot
+      .slottitle.span8.toggle{"data-target" => "##{main_toggle_target}", "data-toggle" => "collapse"}
+        -if expand_this
+          .expander{ :class => is_root && !expand_this ? 'in' : '' }
+        -else
+          .enddot
+        %span.prefix=risky_attribute.slug
+        =risky_attribute.title
+      -if has_feature? :BETA
+        .slotcolumn.span2
+          .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
+        .slotowner.span1
+          %a.slotowner{:href => "#"} Owner Joe
+      .slotactions.pull-right
+        %a.btn.btn-mini.btn-blue.halfopacity{ "data-target" => "##{summary_toggle_target}", "data-toggle" => "collapse", "rel" => "tooltip", "data-placement" => "left", "title" => "More" }
+          %i.grcicon-more
+
+  .row-fluid.collapse{ :id => summary_toggle_target, :class => is_root ? 'in' : '' }
+    .span12.morewell.statusblue.nominheight
+      .slotcontent.span12
+        %ul.contentactions.pull-right
+          -if is_editable
+            %li
+              %a.btn.btn-mini.halfopacity{ "rel" => "tooltip", "data-placement" => "left", "title" => "Edit this object", 'data-modal-class' => 'modal-wide', 'data-form-target' => 'refresh', "data-toggle" => "modal-ajax-form", :href => url_for(:id => risky_attribute.id, :action => :edit, :controller => model_underscore.pluralize, :only_path => true) }
+                %i.grcicon-edit-grey
+          %li
+            %a.btn.btn-mini.halfopacity{ :href => list_edit_flow_risk_risky_attributes_path(:risky_attribute_id => risky_attribute.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :rel => 'tooltip', :title => 'Link risks to this risky attribute', :'data-modal-class' => 'modal-wide' }
+              %i.grcicon-link
+            %li
+              %a.btn.btn-mini.halfopacity{ "rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => flow_risky_attribute_path(risky_attribute.id) }
+                %i.grcicon-arrowright-black
+        =display_as_html risky_attribute.description
+
+  .collapse{ :id => objects_toggle_target }
+
+    %ul.slotlist
+      -risks.each_with_index do |risk, i|
+        =render :partial => 'risk_tree', :locals => { :risk => risk, :id_prefix => "#{id_prefix}-risk-#{risk.id}" }

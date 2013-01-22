@@ -9,6 +9,8 @@ class Category < ActiveRecord::Base
   has_many :categorizations, :dependent => :destroy
   has_many :controls, :through => :categorizations,
     :source => :categorizable, :source_type => 'Control'
+  has_many :risks, :through => :categorizations,
+    :source => :categorizable, :source_type => 'Risk'
 
   is_versioned_ext
 

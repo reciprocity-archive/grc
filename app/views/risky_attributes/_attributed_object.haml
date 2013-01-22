@@ -1,0 +1,50 @@
+-# locals: instance, id_prefix, seen_ids, is_root
+-#instance = risky_attribute
+-model_underscore = instance.class.name.underscore
+
+-is_root = false if local_assigns[:is_root].nil?
+
+-seen_ids = [] if local_assigns[:seen_ids].nil?
+-id_prefix = "instance-#{instance.class.name.underscore}-#{instance.id}" if local_assigns[:id_prefix].nil?
+
+-seen_this = seen_ids.include?(instance.id)
+
+-expand_this = false #(!seen_this && sub_objects.count > 0)
+
+-summary_toggle_target = "#{id_prefix}-summary"
+-objects_toggle_target = "#{id_prefix}-objects"
+
+-main_toggle_target = expand_this ? objects_toggle_target : summary_toggle_target
+
+%li{ :'data-object-id' => instance.id }
+  .row-fluid
+    .slot.span12.systemslot
+      .slottitle.span8.toggle{"data-target" => "##{main_toggle_target}", "data-toggle" => "collapse"}
+        -if expand_this
+          .expander{ :class => is_root && !expand_this ? 'in' : '' }
+        -else
+          .enddot
+        %span.prefix=instance.slug
+        =instance.title
+      -if has_feature? :BETA
+        .slotcolumn.span2
+          .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
+        .slotowner.span1
+          %a.slotowner{:href => "#"} Owner Jim
+      .slotactions.pull-right
+        %a.btn.btn-mini.btn-blue.halfopacity{ "data-target" => "##{summary_toggle_target}", "data-toggle" => "collapse", "rel" => "tooltip", "data-placement" => "left", "title" => "More" }
+          %i.grcicon-more
+
+  .row-fluid.collapse{ :id => summary_toggle_target, :class => is_root ? 'in' : '' }
+    .span12.morewell.statusblue.nominheight
+      .slotcontent.span12
+        %ul.contentactions.pull-right
+          %li
+            %a.btn.btn-mini.halfopacity{ "rel" => "tooltip", "data-placement" => "left", "title" => "Edit this object", 'data-modal-class' => 'modal-wide', 'data-form-target' => 'refresh', "data-toggle" => "modal-ajax-form", :href => url_for(:id => instance.id, :action => :edit, :controller => model_underscore.pluralize, :only_path => true) }
+              %i.grcicon-edit-grey
+          -if !is_root
+            %li
+              %a.btn.btn-mini.halfopacity{ "rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => url_for(:id => instance.id, :action => :show, :controller => model_underscore.pluralize, :only_path => true) }
+                %i.grcicon-arrowright-black
+        =display_as_html instance.description
+

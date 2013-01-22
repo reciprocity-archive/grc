@@ -188,6 +188,14 @@ FactoryGirl.define do
     title
   end
 
+  factory :project do
+    title
+  end
+
+  factory :data_asset do
+    title
+  end
+
   factory :market do
     title
   end
@@ -198,6 +206,16 @@ FactoryGirl.define do
 
   factory :risk do
     title
+  end
+
+  factory :control_risk do
+    control
+    risk
+  end
+
+  factory :risk_risky_attribute do
+    risk
+    risky_attribute
   end
 
   factory :help do

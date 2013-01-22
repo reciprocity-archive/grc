@@ -9,7 +9,7 @@
         .expander
         %span.prefix=category ? category.name : 'Uncategorized Controls'
   -if controls && controls.size > 0
-    %ul.collapse{ :id => subcategory_content_id }
+    %ul.collapse{ :id => subcategory_content_id, :'data-id' => category ? category.id : "0", :'data-object-type' => "category" }
       -controls.each do |control|
         -control_content_id = "content_#{rand(36**8).to_s(36)}"
         %li
@@ -21,7 +21,7 @@
                   %i.grcicon-arrowright-grey
                 %span.prefix=control.slug
                 =strip_tags(control.title)
-          .row-fluid-slotcontent.collapse{ :id => control_content_id }
+          .row-fluid-slotcontent.collapse{ :id => control_content_id, :'data-id' => control.id  }
             .span9
               =display_as_html control.description
   -if children && children.size > 0
