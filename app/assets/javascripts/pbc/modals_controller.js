@@ -51,11 +51,11 @@ can.Control("CMS.Controllers.PBCModals", {
       system.attr(data);
     }
 
-    , ".delete-reponse click" : function(el, ev) {
+    , ".delete-response click" : function(el, ev) {
       this.selected_response_id = el.closest("[data-id]").data("id");
     }
 
-    , "a[data-method=delete] click" : function(el, ev) {
+    , "a[data-method=delete][href*=responses] click" : function(el, ev) {
       var modal = el.closest(".modal")
       , options = modal.data("modal_form").options;
 
