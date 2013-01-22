@@ -40,6 +40,16 @@ class Program < ActiveRecord::Base
     { :to   => Product,  :via => :program_is_relevant_to_product }
   ]
 
+  def company_controls?
+    self.kind && self.kind.title == 'Company Controls'
+  end
+
+  def self.all_company_controls_first
+    programs = self.includes(:kind)
+    programs = programs.select {|p| p.company_controls?} +
+      programs.reject {|p| p.company_controls?}
+  end
+
   def custom_edges
     # Returns a list of additional edges that aren't returned by the default method.
     edges = Set.new
