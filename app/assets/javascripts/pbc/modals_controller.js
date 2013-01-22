@@ -18,7 +18,7 @@ can.Control("CMS.Controllers.PBCModals", {
     , ".documents-list li click" : function(el, ev) {
         var that = this
         , sys_id = this.selected_system_id;
-        new CMS.Models.ObjectDocument({
+        ev.ajax = new CMS.Models.ObjectDocument({
             document_id : el.data("id")
             , system_id : this.selected_system_id
             , role : 'General Doc'
@@ -61,7 +61,7 @@ can.Control("CMS.Controllers.PBCModals", {
 
       el.addClass("disabled");
 
-      CMS.Models.Response.findInCacheById(options.id).destroy()
+      ev.ajax = CMS.Models.Response.findInCacheById(options.id).destroy()
         .then(function() {
           modal.modal_form("hide");
         });
@@ -73,7 +73,7 @@ can.Control("CMS.Controllers.PBCModals", {
         var request_id = el.closest('li[data-filter-id]').data('filter-id')
         ;
 
-      $.post(
+      e.ajax = $.post(
         '/requests/' + request_id,
         { _method: 'put'
         , 'request[control_id]': control_data.id

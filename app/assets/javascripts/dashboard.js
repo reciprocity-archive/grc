@@ -602,3 +602,21 @@ if(!/\/mapping/.test(window.location.href)) {
   });
 }
 
+//make buttons non-clickable when saving
+jQuery(function($) {
+  $(window).on("click change", "a, input, select", function(ev) {
+    if(ev.ajax) {// binding of an ajax to a click is something we do manually
+      $(ev.target).addClass("disabled pending-ajax").attr("disabled", true);
+      ev.ajax.then(function() {
+        $(ev.target).removeAttr("disabled").removeClass("disabled pending-ajax");
+      }, function() {
+        $(ev.target).removeAttr("disabled").removeClass("disabled pending-ajax");
+      });
+    }
+  });
+});
+
+
+
+
+

@@ -6,7 +6,7 @@
 function object_event(type) {
     return function(el, ev, data) {
         var that = this;
-        this.create_object_relation(
+        ev.ajax = this.create_object_relation(
             type
             , el.closest("[data-model]").data("model")
             , can.extend(data, { role : type==="person" ? "responsible" : "general" } )
@@ -100,13 +100,13 @@ can.Control("CMS.Controllers.Responses", {
       var model = el.closest("[data-model]").data("model")
 
       model.attr(el.data("doc-type") + "_document_id", data.id)
-      model.save().then(this.proxy('restore_add_link', el)).then(function() { el.find('form')[0].reset(); });
+      ev.ajax = model.save().then(this.proxy('restore_add_link', el)).then(function() { el.find('form')[0].reset(); });
     }
     , ".inline-edit-population-doc modal:success" : function(el, ev, data) {
       var model = el.closest("[data-model]").data("model")
 
       model.attr(el.data("doc-type") + "_document_id", data.id)
-      model.save().then(this.proxy('restore_add_link', el)).then(function() { el.find('form')[0].reset(); });
+      ev.ajax = model.save().then(this.proxy('restore_add_link', el)).then(function() { el.find('form')[0].reset(); });
     }
     , ".save-population, .save-samples click" : function(el, ev) {
       ev.preventDefault();
@@ -114,7 +114,7 @@ can.Control("CMS.Controllers.Responses", {
     , ".save-population:not(.disabled), .save-samples:not(.disabled) click" : function(el, ev) {
       var model = el.closest("[data-model]").data("model")
       model.attr(el.closest(".sample-widget").find("input").attr("name"), el.closest(".sample-widget").find("input").val());
-      model.save().then(function() { el.text("Saved").addClass("disabled"); });      
+      ev.ajax = model.save().then(function() { el.text("Saved").addClass("disabled"); });      
     }
     , "input[name=population], input[name=samples] keyup" : function(el, ev) {
       //only allow integers
@@ -163,7 +163,7 @@ can.Control("CMS.Controllers.Responses", {
         , model = el.closest("[data-model]").data("model");
 
         model.attr("role", role);
-        model.save();
+        ev.ajax = model.save();
     }
 });
 

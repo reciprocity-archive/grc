@@ -32,7 +32,8 @@
         %a.btn{:href => "#", :'data-toggle' => 'version-next'}
           %i.grcicon-arrowright-black
     %nav.fltrt.txtrt.span3
-      %a.btn.btn-large.btn-primary{:'data-toggle' => 'modal-submit', :href => '#' } Save
+      %a.btn.btn-large.btn-primary.preventdoubleclick{:'data-toggle' => 'modal-submit' } Save 
       -approve_path = yield_content!(:modal_approve_path)
       -if !approve_path.blank?
         %a.btn.btn-large.btn-success.btn-primary.disabled{:'data-toggle' => 'modal-approve', :href => '#', :disabled => 'disabled'} Approve
+

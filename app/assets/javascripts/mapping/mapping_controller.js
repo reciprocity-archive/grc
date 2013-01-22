@@ -63,7 +63,7 @@ can.Control("CMS.Controllers.Mapping", {
     if(el.is("#cmap")) {
       section = null;
     }
-    var dfd = this[el.is(".unmapbtn") ? "unmap" : "map"](section, rcontrol, ccontrol); 
+    var dfd = ev.ajax = this[el.is(".unmapbtn") ? "unmap" : "map"](section, rcontrol, ccontrol); 
     var that = this;
     dfd.then(function() { 
       that.options.section_list_controller.draw_list(); //manual update because section model doesn't contain "real" rcontrol model
@@ -181,7 +181,7 @@ can.Control("CMS.Controllers.Mapping", {
     el.closest("#mapping_dialog").modal_form('hide');
   }
 
-  , "#mapping_dialog .unmapbtn click" : function(el) {
+  , "#mapping_dialog .unmapbtn click" : function(el, ev) {
     var thiscontrol = el.data("id")
     , _section = namespace.CMS.Models.SectionSlug.findInCacheById(el.closest("[data-section-id]").data("section-id"))
     , that = this
@@ -193,26 +193,25 @@ can.Control("CMS.Controllers.Mapping", {
       rcontrol = namespace.CMS.Models.RegControl.findInCacheById(thiscontrol);
       section = _section;
     }
-    this.unmap(section, rcontrol, ccontrol)
-    .then(function() {
-      _section.update_linked_controls();
-      var $dialog = $("#mapping_dialog");
-      $dialog.html(can.view("/assets/sections/controls_mapping.mustache", _section.serialize()));
-      that.options.section_list_controller.draw_list();
-
-    });
+    ev.ajax = this.unmap(section, rcontrol, ccontrol)
+      .then(function() {
+        _section.update_linked_controls();
+        var $dialog = $("#mapping_dialog");
+        $dialog.html(can.view("/assets/sections/controls_mapping.mustache", _section.serialize()));
+        that.options.section_list_controller.draw_list();
+      });
   }
 
   , "#section_na click" : function(el, ev) {
     var section = namespace.CMS.Models.SectionSlug.findInCacheById(el.closest("[data-section-id]").data("section-id"));
     section.attr("na", el.attr("checked") ? 1 : 0);
-    section.save();
+    ev.ajax = section.save();
   }
 
   , "#section_notes change" : function(el, ev) {
     var section = namespace.CMS.Models.SectionSlug.findInCacheById(el.closest("[data-section-id]").data("section-id"));
     section.attr("notes", el.val());
-    section.save();
+    ev.ajax = section.save();
   }
 
 });
