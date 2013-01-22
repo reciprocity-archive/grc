@@ -30,7 +30,7 @@ class Risk < ActiveRecord::Base
 
   # Many to many with Control
   has_many :control_risks, :dependent => :destroy
-  has_many :controls, :through => :risk_risky_attributes
+  has_many :controls, :through => :control_risks
 
   # Categories
   has_many :categorizations, :as => :categorizable, :dependent => :destroy

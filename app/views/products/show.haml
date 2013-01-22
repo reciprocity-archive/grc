@@ -31,6 +31,11 @@
               :layout => 'layouts/widget_box',
               :locals => { model_name.to_sym => instance }
 
+    .doubleWide.fullHeight
+      =render :partial => "risks",
+              :layout => 'layouts/widget_box',
+              :locals => { model_name.to_sym => instance }
+
   .singleColumn
     -if has_feature? :BETA
       =render :partial => "actions",
