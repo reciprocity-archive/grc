@@ -2,8 +2,7 @@
 
 -content_for :header do
   %ol#breadcrumb
-    %li=link_to 'PROGRAMS', programs_dash_path
-    %li.last=@program.title
+    %li.last=link_to 'PROGRAMS', programs_dash_path
   .location#pageTitle=@program.title
 
 -content_for :page_help, 'program'

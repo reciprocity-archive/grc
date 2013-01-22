@@ -18,7 +18,7 @@
   -programs = Program
   -programs = programs.where(:company => true) if only_company
   -programs = programs.where(:company => false) if only_regulation
-  -programs = programs.all
+  -programs = programs.all_company_controls_first
   -# Ensure the specified program is included?
   -#programs.unshift(f.object.program) if f.object.program && !programs.include?(f.object.program)
   -if f.object.new_record? && f.object.program_id.present?
@@ -27,7 +27,7 @@
       =f.hidden_field :program_id
       =f.object.program.slug
   -else
-    =wrapped_select f, :span2, :program_id, programs.map { |p| [p.slug, p.id] }, :selected => f.object.program_id, :include_blank => true
+    =wrapped_select f, :span2, :program_id, programs.map { |p| [p.slug, p.id] }, :selected => f.object.program_id, :include_blank => false
   .span6
     .row-fluid
       =wrapped_text_field f, :span4, :slug, :label_name => 'Code (autofill)', :placeholder => 'CONTROL-XXXX'
