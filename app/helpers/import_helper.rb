@@ -212,4 +212,16 @@ module ImportHelper
       attrs[name] = value
     end
   end
+
+  # makes sure that date attribute is parsable by Rails
+  def handle_date(attrs, key, warnings)
+    if attrs.has_key?(key) && attrs[key].present?
+      begin
+        Date.parse(attrs[key])
+      rescue => e
+        warnings[key.to_sym] ||= []
+        warnings[key.to_sym] << "#{e}, use YYYY-MM-DD format"
+      end
+    end
+  end
 end
