@@ -6,7 +6,7 @@
 
 -content_for :widget_help, 'quick_find'
 
-.tabbable#quick_find
+#quick_find.tabbable.tabs-left
   %ul.nav.nav-tabs
     %li=link_to 'Controls', '#controls', :data => { :'tab-href' => flow_controls_path(:quick => true), :toggle => 'tab' }
     %li=link_to 'Biz Processes', '#biz_processes', :data => { :'tab-href' => flow_systems_path(:quick => true, :is_biz_process => true), :toggle => 'tab' }

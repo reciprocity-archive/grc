@@ -26,6 +26,20 @@ h4 {
   color: $subTitle;
 }
 
+// progress bar
+.bar {
+  float:left;
+  &.bar-success {
+    @include gradient-vertical(lighten($addBtn, 15%), $addBtn);
+  }
+  &.bar-danger {
+    @include gradient-vertical(lighten($orange, 15%), $orange);
+  }
+  &.bar-warning {
+    @include gradient-vertical(lighten($red, 15%), $red);
+  }
+}
+
 
 // buttons
 .btn {

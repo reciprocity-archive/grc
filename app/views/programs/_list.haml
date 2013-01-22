@@ -3,37 +3,46 @@
 
 -content_for :widget_help, 'programs_list'
 
-%ul.nav.nav-tabs.nav-stacked
+%ul.items
   -@programs.each do |program|
-    %li.group
+    %li.main
       -stats = program_stats(program)
       /%a{ :href => flow_program_path(program), :'data-popover-href' => tooltip_flow_program_path(program), :'data-popover-trigger' => 'sticky-hover', :'data-placement' => 'right'}
       %a{ :href => flow_program_path(program), :data => { :'original-title' => 'Program Information', :'content' => render(:template => 'programs/tooltip', :locals => { :program => program }), :placement => 'right', :'popover-trigger' => 'sticky-hover'} }
         %h3=program.title
-        -if stats[:sections_count] > 0
-          .barTitle.fltlft
-            Regulation Linking
-            .barCount.fltrt=stats[:sections_count]
-          .progress.progress-striped.active
-            .bar.progressbar-success.hidefont.fltlft{ :'data-percentage' => stats[:sections_done_percentage], :'data-toggle' => 'tooltip', :'title' => "#{stats[:sections_done_count]} Done" } #{stats[:sections_done_count]}%
-            .bar.progressbar-danger.hidefont.fltrt{ :'data-percentage' => stats[:sections_na_percentage], :'data-toggle' => 'tooltip', :'title' => "#{stats[:sections_na_count]} N/A" } #{stats[:sections_na_count]}%
-            .bar.progressbar-warning.hidefont.fltrt{ :'data-percentage' => stats[:sections_undone_percentage], :'data-toggle' => 'tooltip', :'title' => "#{stats[:sections_undone_count]} Pending" } #{stats[:sections_undone_count]}%
-        -else
-          .progress.progress-striped.active
-            .barTitle.fltlft No sections
-
-        -if stats[:controls_count] > 0
-          .barTitle.fltlft
-            Control compliance
-            %span.barCount.fltrt=stats[:controls_count]
-          .progress.progress-striped.active
-            .bar.progressbar-success.hidefont.fltlft{ :'data-percentage' => stats[:controls_complying_percentage], :'data-toggle' => 'tooltip', :'title' => "#{stats[:controls_complying_count]} Complying" } #{stats[:controls_complying_count]}%
-            .bar.progressbar-danger.hidefont.fltrt{ :'data-percentage' => stats[:controls_pending_percentage], :'data-toggle' => 'tooltip', :'title' => "#{stats[:controls_pending_count]} Pending" } #{stats[:controls_pending_count]}%
-            .bar.progressbar-warning.hidefont.fltrt{ :'data-percentage' => stats[:controls_approved_percentage], :'data-toggle' => 'tooltip', :'title' => "#{stats[:controls_approved_count]} Approved"} #{stats[:controls_approved_count]}%
-        -else
-          .progress.progress-striped.active
-            .barTitle.fltlft No controls
-
+        .row-fluid
+          .span6
+            -if stats[:sections_count] > 0
+              %h4
+                Regulation Linking
+                %span
+                  (#{stats[:sections_count]})
+              .progress
+                .bar.bar-success{ :'data-percentage' => stats[:sections_done_percentage], :'data-toggle' => 'tooltip', :'title' => "#{stats[:sections_done_count]} Done" } #{stats[:sections_done_count]}%
+                .bar.bar-danger{ :'data-percentage' => stats[:sections_na_percentage], :'data-toggle' => 'tooltip', :'title' => "#{stats[:sections_na_count]} N/A" } #{stats[:sections_na_count]}%
+                .bar.bar-warning{ :'data-percentage' => stats[:sections_undone_percentage], :'data-toggle' => 'tooltip', :'title' => "#{stats[:sections_undone_count]} Pending" } #{stats[:sections_undone_count]}%
+            -else
+              %h4
+                No sections
+            
+              .progress
+            
+          .span6
+            -if stats[:controls_count] > 0
+              %h4
+                Control compliance
+                %span
+                  (#{stats[:controls_count]})
+                  
+              .progress
+                .bar.bar-success{ :'data-percentage' => stats[:controls_complying_percentage], :'data-toggle' => 'tooltip', :'title' => "#{stats[:controls_complying_count]} Complying" } #{stats[:controls_complying_count]}%
+                .bar.bar-danger{ :'data-percentage' => stats[:controls_pending_percentage], :'data-toggle' => 'tooltip', :'title' => "#{stats[:controls_pending_count]} Pending" } #{stats[:controls_pending_count]}%
+                .bar.bar-warning{ :'data-percentage' => stats[:controls_approved_percentage], :'data-toggle' => 'tooltip', :'title' => "#{stats[:controls_approved_count]} Approved"} #{stats[:controls_approved_count]}%
+            -else
+              %h4
+                No controls
+              
+              .progress.progress-striped.active
 
 -content_for :widget_footer do
   -if has_feature? :BETA

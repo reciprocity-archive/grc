@@ -57,6 +57,24 @@
       line-height: 20px;
     }
   }
+  .items {
+    @include reset-list();
+    li.main {
+      h4 {
+        font-size: 12px;
+      }
+      a {
+        color: $headerTitle;
+        text-decoration: none;
+      }
+      padding-bottom: 22px;
+      border-bottom: 1px solid $gray;
+      margin-bottom: 15px;
+      .progress {
+        margin: 0;
+      }
+    }
+  }
 }
 
 // content style
