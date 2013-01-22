@@ -167,12 +167,18 @@
         } else if (form_target == 'redirect') {
           window.location.assign(xhr.getResponseHeader('location'));
         } else {
+          var dirty;
           $target.modal_form('hide');
           if($trigger.data("dirty")) {
             var dirty = $($trigger.data("dirty").split(",")).map(function(i, val) {
               return '[href="' + val.trim() + '"]';
             }).get().join(",");
-            $(dirty).data('tab-loaded', false).filter(".active [href]").trigger("show");
+            $(dirty).data('tab-loaded', false);
+          }
+          if(dirty) {
+            var $active = $(dirty).filter(".active [href]");
+            $active.closest(".active").removeClass("active");
+            $active.click();
           }
           $trigger.trigger("routeparam", $trigger.data("route"));
           $trigger.trigger('modal:success', data);

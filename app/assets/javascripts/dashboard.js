@@ -120,7 +120,7 @@ jQuery(function($) {
 
       $(pane).load(href, function(data, status, xhr) {
         $tab.data('tab-loaded', true);
-        $(this).html(data);
+        $(this).html(data).trigger("loaded", xhr, data);
       });
     }
   });
