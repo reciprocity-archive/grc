@@ -63,7 +63,8 @@ can.Control("CMS.Controllers.Mapping", {
     if(el.is("#cmap")) {
       section = null;
     }
-    var dfd = ev.ajax = this[el.is(".unmapbtn") ? "unmap" : "map"](section, rcontrol, ccontrol); 
+    var dfd = this[el.is(".unmapbtn") ? "unmap" : "map"](section, rcontrol, ccontrol); 
+    this.bindXHRToButton(dfd, el);
     var that = this;
     dfd.then(function() { 
       that.options.section_list_controller.draw_list(); //manual update because section model doesn't contain "real" rcontrol model
@@ -193,25 +194,27 @@ can.Control("CMS.Controllers.Mapping", {
       rcontrol = namespace.CMS.Models.RegControl.findInCacheById(thiscontrol);
       section = _section;
     }
-    ev.ajax = this.unmap(section, rcontrol, ccontrol)
-      .then(function() {
-        _section.update_linked_controls();
-        var $dialog = $("#mapping_dialog");
-        $dialog.html(can.view("/assets/sections/controls_mapping.mustache", _section.serialize()));
-        that.options.section_list_controller.draw_list();
-      });
+    this.bindXHRToButton(
+      this.unmap(section, rcontrol, ccontrol)
+        .then(function() {
+          _section.update_linked_controls();
+          var $dialog = $("#mapping_dialog");
+          $dialog.html(can.view("/assets/sections/controls_mapping.mustache", _section.serialize()));
+          that.options.section_list_controller.draw_list();
+        }),
+      el);
   }
 
   , "#section_na click" : function(el, ev) {
     var section = namespace.CMS.Models.SectionSlug.findInCacheById(el.closest("[data-section-id]").data("section-id"));
     section.attr("na", el.attr("checked") ? 1 : 0);
-    ev.ajax = section.save();
+    this.bindXHRToButton(section.save(), el);
   }
 
   , "#section_notes change" : function(el, ev) {
     var section = namespace.CMS.Models.SectionSlug.findInCacheById(el.closest("[data-section-id]").data("section-id"));
     section.attr("notes", el.val());
-    ev.ajax = section.save();
+    this.bindXHRToButton(section.save(), el);
   }
 
 });
