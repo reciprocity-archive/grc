@@ -60,10 +60,13 @@ module ImportHelper
     render '/error/import_error', :layout => false, :locals => { :message => message }
   end
 
-  # if warning_key is set warnings will be assigned to this key instead of actual key
-  def handle_import_person(attrs, key, warnings, warning_key = nil)
+  # if option warning_key is set warnings will be assigned to this key instead of actual key
+  def handle_import_person(attrs, key, warnings, options = {})
+    defaults = { :warning_key => key, :warning_message => "invalid email" }
+    options = defaults.merge(options)
+
     email = (attrs[key]||"").strip
-    warning_key ||= key
+    warning_key = options[:warning_key]
 
     unless email.nil?
       if email.include?('@')
@@ -76,7 +79,7 @@ module ImportHelper
       else
         attrs[key] = nil
         warnings[warning_key.to_sym] ||= []
-        warnings[warning_key.to_sym] << "invalid email"
+        warnings[warning_key.to_sym] << options[:warning_message]
       end
     end
   end

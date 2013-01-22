@@ -62,11 +62,15 @@
         -@controls.each_with_index do |c, i|
           %tr{ :class => (i % 2 == 0 ? :odd : :even) }
             -columns.each do |column_name|
+              -has_errors = @errors[i].present? && @errors[i][column_name].present?
+              -has_warnings = @warnings[i].present? && @warnings[i][column_name].present?
               %td{ :class => ( (@errors[i].present? && @errors[i][column_name].present?) ? 'member-failure' : ((@warnings[i].present? && @warnings[i][column_name].present?) ? 'member-warning' : '' ) ) }
-                =c.send(column_name)
-                -if @errors[i].present? && @errors[i][column_name].present?
+                -# make a special case for operator column which should only display error/warning not possible existing value
+                -unless column_name == "operator" && (has_errors || has_warnings)
+                  =c.send(column_name)
+                -if has_errors
                   .help-inline=@errors[i][column_name].join(', ')
-                -if @warnings[i].present? && @warnings[i][column_name].present?
+                -if has_warnings
                   .help-inline=@warnings[i][column_name].join(', ')
 
     Showing 1 to #{@controls.size} of #{@controls.size} entries
