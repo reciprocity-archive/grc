@@ -7,7 +7,7 @@ class Meeting < ActiveRecord::Base
 
   is_versioned_ext
 
-  validates_presence_of :response
+  validates_presence_of :response, :calendar_url
 
   def display_name
     "#{response.system.title} meeting"

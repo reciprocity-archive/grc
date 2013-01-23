@@ -23,7 +23,7 @@ h3 {
 
 // Welcome ID overwrites body so there isn't a navbar. Could also be called 'loggedOut'
 #welcome {
-  background: url("../images/bkgd.gif") left top repeat;
+  background: url("/images/bkgd.gif") left top repeat;
   font-family: $font-family;
   height:100%;
 }
@@ -243,6 +243,10 @@ li.add-new-item {
     padding:1px;
     line-height:12px;
   }
+  &.btn-mini {
+    padding-left:4px;
+    padding-right:4px;
+  }
   &.btn-alert {
     @include background-image(linear-gradient(top, lighten(#e00, 5%), darken(#e00, 5%)));
     color:#fff;
@@ -250,6 +254,19 @@ li.add-new-item {
       background:lighten(#e00, 5%);
       @include background-image(linear-gradient(top, darken(#e00, 5%), lighten(#e00, 5%)));
     }
+  }
+  &.disabled {
+    background:#eee;
+    border-color:#ccc;
+    color:#666;
+    @include text-shadow(0 1px 1px #fff);
+    &:hover {
+      background:#eee;
+    }
+  }
+  &.disabled.pending-ajax {
+    padding-left:24px;
+    background: #eee url("/images/ajax-loader.gif") no-repeat 4px center;
   }
 }
 

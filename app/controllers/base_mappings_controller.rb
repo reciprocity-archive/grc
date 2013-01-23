@@ -99,7 +99,7 @@ class BaseMappingsController < ApplicationController
         if object.save
           [nil, object]
         else
-          [object.errors.full_messages, object]
+          [object.errors.messages, object]
         end
       end
     end

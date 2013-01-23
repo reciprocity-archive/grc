@@ -74,11 +74,18 @@
           $added_item.addClass('member-failure');
           $.each(errors, function(key, error) {
             var $input = $added_item.find('[name="items[' + id + '][' + key + ']"]');
+
+            // Handle special case for "base" error messages
+            if ($input.length == 0 && key == "base")
+              $input = $added_item.find('[name]').first();
+
             // Find nearest sibling .help-inline
             var $help_inline = $input.siblings('.help-inline');
-            if ($help_inline.length == 0) {
+            if ($help_inline.length == 0)
               $help_inline = $input.parent().siblings('.help-inline');
-            }
+            if ($help_inline.length == 0)
+              $help_inline = $input.parent().parent().siblings('.help-inline');
+
             $help_inline.text(error);
           });
         });

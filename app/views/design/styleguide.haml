@@ -16,6 +16,7 @@
   %a.navbarplus.fltrt{ :href => "#comingsoonModal", "data-toggle" => "modal" }
 
 
+
 .container-fluid
   .row-fluid
     .span3.bs-docs-sidebar
@@ -426,6 +427,47 @@
   
   
       #tabs.WidgetBox.fullHeight.doubleWide
+
+
+    #buttons
+      .WidgetBox
+        .WidgetBoxHeading
+          .WidgetTitle.doublewidth Text Buttons
+        .WidgetBoxContent
+          .row-fluid
+            .span12
+              %h5 Standard Buttons
+              %a.btn.btn-large Standard button
+              %a.btn.btn-large.btn-primary Primary button
+              %a.btn Standard button
+              %a.btn.btn-primary Primary button
+              %a.btn.btn-mini Standard button
+              %a.btn.btn-primary.btn-mini Primary button
+              %br
+              %br
+          .row-fluid
+            .span12
+              %h5 .disabled
+              %a.btn.btn-large.disabled Standard button
+              %a.btn.btn-large.btn-primary.disabled Primary button
+              %a.btn.disabled Standard button
+              %a.btn.btn-primary.disabled Primary button
+              %a.btn.btn-mini.disabled Standard button
+              %a.btn.btn-primary.btn-mini.disabled Primary button
+              %br
+              %br
+          .row-fluid
+            .span12
+              %h5 .pending-ajax
+              %a.btn.btn-large.disabled.pending-ajax Standard button
+              %a.btn.btn-large.btn-primary.disabled.pending-ajax Primary button
+              %a.btn.disabled.pending-ajax Standard button
+              %a.btn.btn-primary.disabled.pending-ajax Primary button
+              %a.btn.btn-mini.disabled.pending-ajax Standard button
+              %a.btn.btn-primary.btn-mini.disabled.pending-ajax Primary button
+
+    #icons
+      .WidgetBox
         .WidgetBoxHeading
           .pull-right
             %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}

@@ -18,12 +18,13 @@ can.Control("CMS.Controllers.PBCModals", {
     , ".documents-list li click" : function(el, ev) {
         var that = this
         , sys_id = this.selected_system_id;
-        ev.ajax = new CMS.Models.ObjectDocument({
+        this.bindXHRToButton(
+          new CMS.Models.ObjectDocument({
             document_id : el.data("id")
             , system_id : this.selected_system_id
             , role : 'General Doc'
-        })
-        .save();
+          }).save()
+          , el);
     } 
 
     , '.pbc-add-response > a modal:success' : function(el, e, data) {
@@ -61,10 +62,12 @@ can.Control("CMS.Controllers.PBCModals", {
 
       el.addClass("disabled");
 
-      ev.ajax = CMS.Models.Response.findInCacheById(options.id).destroy()
+      this.bindXHRToButton(
+        CMS.Models.Response.findInCacheById(options.id).destroy()
         .then(function() {
           modal.modal_form("hide");
-        });
+        })
+        , el);
       ev.preventDefault();
       ev.stopPropagation();
     }
@@ -73,7 +76,7 @@ can.Control("CMS.Controllers.PBCModals", {
         var request_id = el.closest('li[data-filter-id]').data('filter-id')
         ;
 
-      e.ajax = $.post(
+      var xhr = $.post(
         '/requests/' + request_id,
         { _method: 'put'
         , 'request[control_id]': control_data.id
@@ -123,6 +126,7 @@ can.Control("CMS.Controllers.PBCModals", {
             targetTextNode.nodeValue = [" ", parseInt(targetTextNode.nodeValue) - 1, " "].join("");
             */
         });
+        this.bindXHRToButton(xhr, el);
     }
 
     , '.pbc-control-select > a modal:select' : function(el, e, control_data) {

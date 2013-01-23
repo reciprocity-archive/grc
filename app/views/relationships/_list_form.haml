@@ -7,6 +7,7 @@
 
 %script#relationship_selected{ :type => 'text/html', :'data-member' => 'relationship', :'data-type' => '', :'data-start_date' => '', :'data-stop_date' => '' }
   %li{ :'data-id' => '<%= id %>', :'data-object-id' => '<%= object.id %>', :'data-name' => '<%= object.name %>', :'data-company' => '<%= object.company %>' }
+    .row-fluid.help-inline
     .row-fluid
       .span6.object_info{ :'data-template-id' => 'relationship_option_data' }
       .span6.actions

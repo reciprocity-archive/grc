@@ -271,7 +271,7 @@ class RelationshipsController < BaseMappingsController
           :source_search_text => "Search #{params[:related_model].pluralize}",
           :target_title => "#{params[:related_model].pluralize} linked to this #{params[:object_type]}",
           :option_new_url => url_for(:action => :new, :controller => params[:related_model].underscore.pluralize, :only_path => true),
-          :options_url => url_for(:action => :index, :controller => params[:related_model].underscore.pluralize, :only_path => true),
+          :options_url => url_for(:action => :index, :controller => params[:related_model].underscore.pluralize, :format => :json, :only_path => true),
           :selected_url => flow_relationships_path(list_form_params)
         }
       }

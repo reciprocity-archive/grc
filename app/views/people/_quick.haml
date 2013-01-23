@@ -8,4 +8,4 @@
         %a.widgetbtn.fltrt{ :'data-form-target' => "refresh", :'data-delete-target' => "refresh", :'data-modal-reset' => "reset", :'data-toggle' => "modal-ajax-form", :href => edit_flow_person_path(person) }
           %i.grcicon-edit-grey
         =link_to '#' do #flow_person_path(person), 'data-popover-href' => tooltip_flow_person_path(person)
-          =person.name.present? ? person.name : person.email
+          =person.name.presence || person.email.presence || "&nbsp;".html_safe

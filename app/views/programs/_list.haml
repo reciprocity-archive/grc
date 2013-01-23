@@ -4,7 +4,11 @@
 -content_for :widget_help, 'programs_list'
 
 %ul.items
-  -@programs.each do |program|
+  -@programs.select {|p|p.company_controls?}.each do |program|
+    %li.main
+      %a{ :href => flow_program_path(program), :data => { :'original-title' => 'Program Information', :'content' => render(:template => 'programs/tooltip', :locals => { :program => program }), :placement => 'right', :'popover-trigger' => 'sticky-hover'} }
+        %h3=program.title
+  -@programs.reject {|p|p.company_controls?}.each do |program|
     %li.main
       -stats = program_stats(program)
       /%a{ :href => flow_program_path(program), :'data-popover-href' => tooltip_flow_program_path(program), :'data-popover-trigger' => 'sticky-hover', :'data-placement' => 'right'}

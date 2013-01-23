@@ -40,6 +40,8 @@
           .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
         .slotowner.span1
           %a.slotowner{:href => "#"} Owner Jim
+      -else
+        .span3{"data-target" => "##{main_toggle_target}", "data-toggle" => "collapse"}
       .slotactions.pull-right
         %a.btn.btn-mini.btn-blue.halfopacity{ "data-target" => "##{summary_toggle_target}", "data-toggle" => "collapse", "rel" => "tooltip", "data-placement" => "left", "title" => "More" }
           %i.grcicon-more

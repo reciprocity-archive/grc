@@ -55,7 +55,7 @@ ActiveRecord::Base.transaction do
     :document_status => [:active, :deprecated],
     :document_year => (1980..2012).to_a.map(&:to_s).reverse,
     :language => ['English'],
-    :program_kind => ['Regulation', 'Company Policy', 'Operational Group Policy', 'Data Asset Policy'],
+    :program_kind => ['Regulation', 'Company Policy', 'Operational Group Policy', 'Data Asset Policy', 'Company Controls'],
     #:system_type => ['System', 'Business Process'],
     :system_kind => ['Infrastructure'],
     :product_type => ['Appliance', 'Desktop Software', 'SaaS'],
@@ -88,4 +88,10 @@ ActiveRecord::Base.transaction do
   # Create the default relationship types
   DefaultRelationshipTypes.create_only
 
+  Program.find_or_create_by_slug!({
+    :slug => 'COMPANY',
+    :title => 'Company Controls',
+    :company => true,
+    :kind => Option.options_for(:program_kind).find_by_title('Company Controls')
+  })
 end

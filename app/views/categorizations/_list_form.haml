@@ -21,6 +21,7 @@
 
 %script#categorization_selected{ :type => 'text/html', :'data-mappings' => 'object:category', :'data-member' => 'categorization' }
   %li{ :'data-id' => '<%= id %>', :'data-object-id' => '<%= category.id %>' }
+    .row-fluid.help-inline
     .row-fluid
       .span6.object_info{ :'data-template-id' => 'category_option_data' }
       .span6.actions
@@ -51,7 +52,7 @@
             .tab-content
               #category1.tab-pane.active
                 .people-list
-                  %ul.source{ :'data-list-data-href' => flow_categories_path(:scope_id => scope_id), :'data-template-id' => 'category_option' }
+                  %ul.source{ :'data-list-data-href' => flow_categories_path(:scope_id => scope_id, :format => :json), :'data-template-id' => 'category_option' }
 
   .span6
     %h4

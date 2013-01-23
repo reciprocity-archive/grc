@@ -20,6 +20,8 @@
             .halfopacity.span12.nominheight.btn.btn-slotcolumn Full Audit
           .slotowner.span1
             %a.slotowner GRC
+        -else
+          .span3{"data-target" => "##{content_id}", "data-toggle" => "collapse"}
         .slotactions.pull-right
           %a#tooltip11.btn.btn-mini.btn-blue{"rel" => "tooltip", "data-placement" => "left", "title" => "More", "data-target" => "##{content_id}", "data-toggle" => "collapse"}
             %i.grcicon-more

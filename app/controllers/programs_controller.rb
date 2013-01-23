@@ -225,7 +225,7 @@ class ProgramsController < BaseObjectsController
       handle_boolean(attrs, 'key_control')
       handle_boolean(attrs, 'fraud_related')
       handle_boolean(attrs, 'active')
-      handle_import_person(attrs, 'operator', import[:warnings][i])
+      handle_import_person(attrs, 'operator', import[:warnings][i], :warning_message => "Warning: unrecognized value. This field should be an LDAP id or an email. Data will be ignored if import proceeds.")
 
       slug = attrs['slug']
 

@@ -15,15 +15,16 @@ class Account < ActiveRecord::Base
   is_versioned_ext
 
   # Validations
-  validates_presence_of      :email, :role
+  validates_presence_of      :role
   validates_presence_of      :password,                          :if => :password_required
   validates_presence_of      :password_confirmation,             :if => :password_required
   validates_length_of        :password, :minimum => 4, :maximum => 40,   :if => :password_required
   validates_confirmation_of  :password,                          :if => :password_required
-  validates_length_of        :email,    :minimum => 3, :maximum => 100
-  validates_uniqueness_of    :email,    :case_sensitive => false
-  #validates_format_of        :email,    :with => :email_address
   validates_format_of        :role,     :with => /[A-Za-z]/
+
+  validates                  :email, :presence => true, :email => true
+  validates_length_of        :email, :minimum => 3, :maximum => 100
+  validates_uniqueness_of    :email, :case_sensitive => false
 
   before_save :encrypt_password
   before_save do

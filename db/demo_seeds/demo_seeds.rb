@@ -53,6 +53,20 @@ ActiveRecord::Base.transaction do
       {:title => 'Control 1', :description => 'x', :program => prog2},
       :without_protection => true)
 
+  company = Program.find_by_slug('COMPANY')
+  ctl = Control.find_or_create_by_slug!({
+    :slug => 'COMPANY-EVIL',
+    :title => 'Be less evil',
+    :description => 'Reduce the quantity and quality of evil',
+    :program => company
+  })
+
+  ctl = Control.
+    where(:slug => 'REG1-CTL1').
+    first_or_create!(
+      {:title => 'Control 1', :description => 'x', :program => prog2},
+      :without_protection => true)
+
   ctl.categories << Category.where(:name => 'Authorization').first
   ctl.save
 

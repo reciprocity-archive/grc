@@ -27,6 +27,7 @@
 
 %script#risk_selected{ :type => 'text/html', :'data-mappings' => 'child:risk,object:risk', :'data-member' => 'risk_risky_attribute' }
   %li{ :'data-id' => '<%= id %>', :'data-object-id' => '<%= risk.id %>' }
+    .row-fluid.help-inline
     .row-fluid
       .span6.object_info{ :'data-template-id' => 'risk_option_data' }
       .span6.actions
@@ -58,6 +59,7 @@
 
 %script#risky_attribute_selected{ :type => 'text/html', :'data-mappings' => 'child:risky_attribute,object:risky_attribute', :'data-member' => 'risk_risky_attribute' }
   %li{ :'data-id' => '<%= id %>', :'data-object-id' => '<%= risky_attribute.id %>' }
+    .row-fluid.help-inline
     .row-fluid
       .span6.object_info{ :'data-template-id' => 'risky_attribute_option_data' }
       .span6.actions
