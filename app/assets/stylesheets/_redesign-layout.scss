@@ -29,6 +29,16 @@
       margin-right: 0;
       display: inline;
     }
+    .btn-mini {
+      i {
+        @include opacity(0.4);
+      }
+      &:hover {
+        i {
+          @include opacity(1);
+        }
+      }
+    }
   }
   .filter {
     padding:10px;

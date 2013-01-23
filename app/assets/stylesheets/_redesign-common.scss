@@ -2,6 +2,10 @@ h1 {
   color:$headerTitle;
   font-size:24px;
   line-height:36px;
+  span {
+    color: $gray;
+    font-weight: normal;
+  }
 }
 
 h2 {
@@ -24,6 +28,9 @@ h4 {
   line-height: 20px;
   font-weight: normal;
   color: $subTitle;
+  span {
+    color: $gray;
+  }
 }
 
 // progress bar
