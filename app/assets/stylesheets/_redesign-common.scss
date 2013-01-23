@@ -91,7 +91,8 @@ h4 {
 // removing outline on anchor element
 .nav-tabs,
 .menu,
-.btn {
+.btn,
+.program-list {
   a {
     @include outline-fix();
   }

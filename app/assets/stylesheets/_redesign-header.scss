@@ -158,6 +158,13 @@
       &.open {
         a {
           @include box-shadow(none);
+          color: $black;
+          i {
+            @include opacity(1);
+          }
+          .caret {
+            @include opacity(1);
+          }
         }
       }
       &.btn-group {
@@ -183,6 +190,11 @@
             margin: 0;
             text-transform: none;
             display: block;
+            @include transition(none);
+            &:hover {
+              color: $white;
+              @include transition(none);
+            }
           }
         }
       }
