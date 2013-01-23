@@ -47,9 +47,6 @@ h4 {
   font-weight: bold;
 
   @include box-shadow(none);
-  &:focus {
-    @include outline-fix();
-  }
   i {
     margin-top: 1px;
   }
@@ -81,5 +78,14 @@ h4 {
         color:$white;
       }
     }
+  }
+}
+
+// removing outline on anchor element
+.nav-tabs,
+.menu,
+.btn {
+  a {
+    @include outline-fix();
   }
 }
