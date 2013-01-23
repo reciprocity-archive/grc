@@ -14,7 +14,7 @@ class Person < ActiveRecord::Base
 
   is_versioned_ext
 
-  validates :email, :presence => true, :multi_email => true
+  validates :email, :presence => true, :email => true
     
 
   @valid_relationships = []

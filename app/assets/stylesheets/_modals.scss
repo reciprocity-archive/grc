@@ -43,20 +43,17 @@ h5.in-modal {
 }
 
 .modal-body {
+  padding: 10px;
+  overflow-y: scroll;
   .tab-content {
     margin:0;
   }
-  
   .btn.new {
     margin-top:8px;
   }
-
-  padding: 10px;
-  overflow-y: auto;
   .alert {
     display:none;
   }
-
   ::-webkit-input-placeholder {
     color: $lightGray;
   }
