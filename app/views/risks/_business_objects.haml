@@ -48,4 +48,5 @@
                 %li
                   %a.btn.btn-mini.halfopacity{ "rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => send("flow_#{object.class.name.underscore}_path", object.id) }
                     %i.grcicon-arrowright-black
-              =object.description
+              =raw object.description
+              
