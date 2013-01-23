@@ -37,4 +37,4 @@
               %li
                 %a.btn.btn-mini.halfopacity{ "rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => flow_system_path(system.id) }
                   %i.grcicon-arrowright-black
-            =system.description
+            =display_as_html system.description
