@@ -21,6 +21,7 @@
 
 %script#object_person_selected{ :type => 'text/html', :'data-mappings' => 'object:person', :'data-member' => 'object_person', :'data-role' => 'accountable', :'data-start_date' => '', :'data-stop_date' => '' }
   %li{ :'data-id' => '<%= id %>', :'data-object-id' => '<%= person.id %>' }
+    .row-fluid.help-inline
     .row-fluid{ :'data-toggle' => 'collapse-additional' }
       .span4.object_info{ :'data-template-id' => 'person_option_data' }
       .span8.actions
