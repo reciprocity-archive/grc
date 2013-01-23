@@ -178,6 +178,34 @@
     background-position:0 -32px;
   }
 }
+.grcicon-edit-new {
+  @include new-icons();
+  background-position:-48px -32px;
+  .active & {
+    background-position:-48px -48px;
+  }
+}
+.grcicon-audit {
+  @include new-icons();
+  background-position:-16px -32px;
+  .active & {
+    background-position:-16px -48px;
+  }
+}
+.grcicon-imp-exp {
+  @include new-icons();
+  background-position:-64px -32px;
+  .active & {
+    background-position:-64px -48px;
+  }
+}
+.grcicon-reg-map {
+  @include new-icons();
+  background-position:-32px -32px;
+  .active & {
+    background-position:-32px -48px;
+  }
+}
 
 
 .grcicon-sortUp             { background-position:-22px -2px; }

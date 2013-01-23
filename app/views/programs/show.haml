@@ -13,15 +13,38 @@
 -content_for :page_help, 'program'
 
 -content_for :subheader_extras do
-  %ul
+  %ul.program-list.pull-right
     %li
-      1
+      %a{:href => '#'}
+        %i.grcicon-edit-new
+        Edit
+    %li.btn-group
+      %a.dropdown-toggle{:href => '#', :'data-toggle' => 'dropdown'}
+        %i.grcicon-imp-exp
+        Import/Export
+      %ul.dropdown-menu
+        %li.divider
+        %li
+          %a{:href => '#'}
+            Import Regs
+        %li
+          %a{:href => '#'}
+            Import Controls
+        %li.divider
+        %li
+          %a{:href => '#'}
+            Export Regs
+        %li
+          %a{:href => '#'}
+            Export Controls
     %li
-      2
+      %a{:href => '#'}
+        %i.grcicon-reg-map
+        Reg Mapper
     %li
-      3
-    %li
-      4
+      %a{:href => '#'}
+        %i.grcicon-audit
+        Start Audit
 
 -content_for :subheader_plus do
   %a.navbarplus.fltrt{ :href => new_flow_program_path, :'data-toggle' => 'modal-ajax-form', :'data-form-target' => 'redirect', :'data-modal-reset' => 'reset', :'data-modal-class' => 'modal-wide' }
