@@ -29,6 +29,7 @@
         .on('click.modal-form.submit', 'input[type=submit], [data-toggle="modal-submit"]', $.proxy(this.submit, this))
         .on('shown.modal-form', $.proxy(this.focus_first_input, this))
         .on('loaded.modal-form', $.proxy(this.focus_first_input, this))
+        .on('loaded.modal-form', function(ev) { $("a[data-wysihtml5-command], a[data-wysihtml5-action]", ev.target).attr('tabindex', "-1"); })
         .on('delete-object', $.proxy(this.delete_object, this))
         ;
       function oneclick() {
