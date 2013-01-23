@@ -84,7 +84,9 @@ group(:development, :test) do
 
   gem 'rspec-rails'
   gem 'spork', '~> 0.9.0.rc'
-  gem 'ZenTest'
+  # Don't update to ZenTest 4.8.4 because it breaks rubygems
+  # https://github.com/seattlerb/zentest/issues/28
+  gem 'ZenTest', '< 4.8.4'
   gem 'autotest-rails'
   gem 'simplecov', :require => false
   gem 'capybara'
