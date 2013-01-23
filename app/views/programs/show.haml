@@ -15,7 +15,7 @@
 -content_for :subheader_extras do
   %ul.program-list.pull-right
     %li
-      %a{:href => '#'}
+      %a{:href => edit_flow_program_path(@program), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide',:title => 'Edit Program'}
         %i.grcicon-edit-new
         Edit
     %li.btn-group
@@ -25,27 +25,30 @@
         %span.caret
       %ul.dropdown-menu
         %li.divider
+        -unless @program.company_controls?
+          %li
+            %a{:href => import_flow_program_path(@program)}
+              Import Regs
         %li
-          %a{:href => '#'}
-            Import Regs
-        %li
-          %a{:href => '#'}
+          %a{:href => import_controls_flow_program_path(@program)}
             Import Controls
         %li.divider
+        -unless @program.company_controls?
+          %li
+            %a{:href => export_flow_program_path(@program, :format => :html), :'data-toggle' => 'modal-ajax'}
+              Export Regs
         %li
-          %a{:href => '#'}
-            Export Regs
-        %li
-          %a{:href => '#'}
+          %a{:href => export_controls_flow_program_path(@program, :format => :html), :'data-toggle' => 'modal-ajax'}
             Export Controls
-    %li
-      %a{:href => '#'}
-        %i.grcicon-reg-map
-        Reg Mapper
-    %li
-      %a{:href => '#'}
-        %i.grcicon-audit
-        Start Audit
+    -unless @program.company_controls?
+      %li
+        %a{:href => mapping_program_path(@program)}
+          %i.grcicon-reg-map
+          Reg Mapper
+      %li
+        %a{:href => new_flow_cycle_path(:'cycle[program_id]' => @program.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect'}
+          %i.grcicon-audit
+          Start Audit
 
 -content_for :subheader_plus do
   %a.navbarplus.fltrt{ :href => new_flow_program_path, :'data-toggle' => 'modal-ajax-form', :'data-form-target' => 'redirect', :'data-modal-reset' => 'reset', :'data-modal-class' => 'modal-wide' }
