@@ -27,11 +27,15 @@ can.Control("CMS.Controllers.ProgramRoutes", {
           var $categories = $("[data-object-type=category]").filter(function() {
             return can.inArray($(this).data("id").toString(), that.lastCreatedCategories) > -1 ;
           }).collapse().collapse("show");
+          $categories.each(function() {
+            $("[data-target=#" + this.id + "]").find(".expander").addClass("in");
+          });
           widget = $categories.find("[data-id=" + this.lastCreatedId + "]");
         } else {
           widget = el.find("[data-id=" + this.lastCreatedId + "]");
         }
         widget.collapse().collapse("show");
+        $("[data-target=#" + widget.attr("id") + "]").find(".expander").addClass("in");
         var box = widget.closest(".WidgetBoxContent");
         box.offset() && $(document.body).scrollTop(box.offset().top);
         setTimeout(function() {
