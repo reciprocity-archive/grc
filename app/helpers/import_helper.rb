@@ -218,14 +218,20 @@ module ImportHelper
     end
   end
 
-  # makes sure that date attribute is parsable by Rails
+  # makes sure that date attribute is parsable by Rails, and if needed convert it from US date.
   def handle_date(attrs, key, warnings)
     if attrs.has_key?(key) && attrs[key].present?
       begin
+        # check if it's US looking date
+        if attrs[key].respond_to?(:match) && attrs[key].match(/\d{1,2}\/\d{1,2}\/\d{4}/)
+          attrs[key] = Date.strptime(attrs[key], '%m/%d/%Y').to_s # converts to YYYY-MM-DD
+        end
+
+        # try to parse it as Rails will
         Date.parse(attrs[key])
       rescue => e
         warnings[key.to_sym] ||= []
-        warnings[key.to_sym] << "#{e}, use YYYY-MM-DD format"
+        warnings[key.to_sym] << "#{e}, use YYYY-MM-DD or MM/DD/YYYY format"
       end
     end
   end
