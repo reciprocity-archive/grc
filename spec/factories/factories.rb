@@ -316,5 +316,6 @@ FactoryGirl.define do
 
   factory :meeting do
     response { |c| c.association(:response) }
+    calendar_url 'http://example.com/calendar?action=TEMPLATE&tmeid=abcdef'
   end
 end
