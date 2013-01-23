@@ -7,10 +7,19 @@
 -content_for :widget_help, 'program_controls'
 
 -content_for :widget_buttons do
-  -unless @program.company_controls?
-    %a.btn.widgettextbtn{ :href => new_flow_section_path(:'section[program_id]' => program.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-dirty' => '#regulations, #combo', :'data-route' => "tab=regulations", :title => 'Create New Section' } Add Section
-    %a.btn.widgettextbtn{ :href => new_flow_control_path(:'control[program_id]' => program.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-dirty' => '#category_controls, #combo', :'data-route' => "tab=category_controls", :'data-modal-class' => 'modal-wide', :title => 'Create New Control' } Add Control
-  %input.ui-corner-all.widgetsearch.clear-value(type='text' placeholder='Search')
+  .filter
+    -unless @program.company_controls?
+      .row-fluid
+        .span6
+          %input.ui-corner-all.widgetsearch.clear-value(type='text' placeholder='Search')
+        .span6
+          .pull-right
+            %a.btn.btn-add{ :href => new_flow_section_path(:'section[program_id]' => program.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-dirty' => '#regulations, #combo', :'data-route' => "tab=regulations", :title => 'Create New Section' }
+              %i.grcicon-add-new
+              Section
+            %a.btn.btn-add{ :href => new_flow_control_path(:'control[program_id]' => program.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-dirty' => '#category_controls, #combo', :'data-route' => "tab=category_controls", :'data-modal-class' => 'modal-wide', :title => 'Create New Control' }
+              %i.grcicon-add-new
+              Control
 
 .tabbable
   -#.span3.fltrt
