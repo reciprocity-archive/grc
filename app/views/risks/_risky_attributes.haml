@@ -29,14 +29,14 @@
   .bootstrap-collapse-bugfix
 
   %script#risky_attribute_list_item{ :type => 'text/html', :'data-member' => 'risk_risky_attribute' }
-    %li.controlSlot{ :'data-id' => '<%= risky_attribute.id %>' }
+    %a.controlSlot{ :'data-id' => '<%= risky_attribute.id %>', :href => flow_risky_attribute_path("<%=risky_attribute.id%>"), :'data-popover-href' => tooltip_flow_risky_attribute_path("<%=risky_attribute.id%>"), :'data-popover-trigger' => 'sticky-hover' }
       %span.controls-group <%= risky_attribute.type_string %>
       %br
       %span.controls-subgroup <%= risky_attribute.title || '&nbsp;' %>
 
   %ul#risky_attributeList{ :'data-template-id' => 'risky_attribute_list_item' }
     -risky_attributes.each do |item|
-      %li.controlSlot{ :'data-id' => item.id }
+      %a.controlSlot{ :'data-id' => item.id, :href => flow_risky_attribute_path(item.id), :'data-popover-href' => tooltip_flow_risky_attribute_path(item.id), :'data-popover-trigger' => 'sticky-hover' }
         %span.controls-group=item.type_string
         %br
         %span.controls-subgroup=item.title || '&nbsp;'.html_safe
