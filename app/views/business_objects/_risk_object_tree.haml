@@ -11,6 +11,7 @@
 
 -sub_objects = instance.dependent_self_objects
 -risky_attributes = instance.risky_attributes
+-pp sub_objects.count, risky_attributes.count
 
 -expand_this = (!seen_this && sub_objects.count > 0) || (!seen_this && risky_attributes.count > 0)
 
@@ -19,7 +20,7 @@
 
 -main_toggle_target = expand_this ? objects_toggle_target : summary_toggle_target
 
--dependence_relationship_type = "#{model_underscore}_is_dependent_on_#{model_underscore}"
+-dependence_relationship_type = "#{model_underscore}_relies_upon_#{model_underscore}"
 -risky_attribute_relationship_type = "#{model_underscore}_has_risky_attribute"
 
 -has_dependence_relationship = instance.has_valid_relationship?(dependence_relationship_type)

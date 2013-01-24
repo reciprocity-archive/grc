@@ -15,9 +15,6 @@ class Person < ActiveRecord::Base
   is_versioned_ext
 
   validates :email, :presence => true, :email => true
-    
-
-  @valid_relationships = []
 
   def custom_edges
     # Returns a list of additional edges that aren't returned by the default method.

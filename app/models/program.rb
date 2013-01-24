@@ -30,16 +30,6 @@ class Program < ActiveRecord::Base
   validates :title,
     :presence => { :message => "needs a value" }
 
-  #
-  # Various relationship-related helpers
-  #
-
-  @valid_relationships = [
-    { :to   => Facility, :via => :program_is_relevant_to_facility },
-    { :to   => OrgGroup, :via => :program_is_relevant_to_org_group },
-    { :to   => Product,  :via => :program_is_relevant_to_product }
-  ]
-
   def company_controls?
     self.kind && self.kind.title == 'Company Controls'
   end
