@@ -3,6 +3,12 @@
 //= require pbc/system
 //= require pbc/person
 
+(function(can, $) {
+
+function zeropad(v) {
+  return "" + (v < 10 ? "0" + v : v);
+ }
+
 can.Control("CMS.Controllers.PBCModals", {
     defaults : {}
 }, {
@@ -151,6 +157,13 @@ can.Control("CMS.Controllers.PBCModals", {
     }
 
     , ".modal[id*=meetings-new] loaded" : function(el, ev) {
+      var n = new Date(Date.now() + 3600000);
+      $(el).find("input[name=fromdate]").val(zeropad(n.getMonth() + 1) + "/" + zeropad(n.getDate()) + "/" + n.getFullYear());
+      $(el).find("select[name=fromtime]").val(zeropad(n.getHours()) + "0000");
+      n = new Date(n.getTime() + 3600000);
+      $(el).find("input[name=todate]").val(zeropad(n.getMonth() + 1) + "/" + zeropad(n.getDate()) + "/" + n.getFullYear());
+      $(el).find("select[name=totime]").val(zeropad(n.getHours()) + "0000");
+
       this.generate_calendar_href($(el).find("input[name=fromdate]"), ev);    
     } 
 
@@ -224,10 +237,6 @@ can.Control("CMS.Controllers.PBCModals", {
           month += 12
         }
 
-        function zeropad(v) {
-          return "" + (v < 10 ? "0" + v : v);
-         }
-
         return year.toString() + zeropad(month) + zeropad(days) + "T" + zeropad(hours) + zeropad(minutes) + time.substr(4,2) + "Z";
 
       }
@@ -243,3 +252,5 @@ can.Control("CMS.Controllers.PBCModals", {
       cal_link.attr("href", href);
     }
 });
+
+})(window.can, can.$);
