@@ -3,46 +3,6 @@
 
 -content_for :widget_help, 'program_info'
 
--content_for :widget_buttons do
-  %a.widgetbtn{:href => edit_flow_program_path(program), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide',:title => 'Edit Program'}
-    %i.grcicon-edit-grey
-
-.button-set
-  .row-fluid
-    .span4
-      .btn-group.closed
-        %a.span12.btn.btn-warning.dropdown-toggle{ :'data-toggle' => 'dropdown' }
-          %i.grcicon-import-white
-          Im/Export
-          %span.caret
-        %ul.dropdown-menu
-          %li.divider
-          -unless @program.company_controls?
-            %li
-              %a{ :href => import_flow_program_path(program) }
-                Import Regs
-          %li
-            %a{ :href => import_controls_flow_program_path(program) }
-              Import Controls
-          %li.divider
-          -unless @program.company_controls?
-            %li
-              %a{ :href => export_flow_program_path(program, :format => :html), :'data-toggle' => 'modal-ajax' }
-                Export Regs
-          %li
-            %a{ :href => export_controls_flow_program_path(program, :format => :html), :'data-toggle' => 'modal-ajax' }
-              Export Controls
-    -unless @program.company_controls?
-      .span4
-        %a.span12.btn.btn-warning{ :href => mapping_program_path(program) }
-          %i.grcicon-mapping-white
-          Reg Mapper
-      .span4
-        %a.span12.btn.btn-warning{ :href => new_flow_cycle_path(:'cycle[program_id]' => program.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect' }
-          %i.grcicon-play-white
-          Start Audit
-
-
 .information
 
   %hr.hr-widget
