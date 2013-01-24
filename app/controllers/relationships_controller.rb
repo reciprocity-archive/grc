@@ -258,6 +258,15 @@ class RelationshipsController < BaseMappingsController
 
     def list_form_context
       object = params[:object_type].constantize.find(params[:object_id])
+      # FIXME: Abstraction violation
+      if params[:related_model] == 'RiskyAttribute'
+        option_new_url = url_for(:action => :new, :controller => params[:related_model].underscore.pluralize, :force_type_string => true, :'risky_attribute[type_string]' => params[:object_type], :only_path => true)
+        options_url = url_for(:action => :index, :controller => params[:related_model].underscore.pluralize, :type_string => params[:object_type], :format => :json, :only_path => true)
+      else
+        option_new_url = url_for(:action => :new, :controller => params[:related_model].underscore.pluralize, :only_path => true)
+        options_url = url_for(:action => :index, :controller => params[:related_model].underscore.pluralize, :format => :json, :only_path => true)
+      end
+
       {
         :object => object,
         :context => {
@@ -270,8 +279,8 @@ class RelationshipsController < BaseMappingsController
           :source_title => "Select #{params[:related_model]} to link",
           :source_search_text => "Search #{params[:related_model].pluralize}",
           :target_title => "#{params[:related_model].pluralize} linked to this #{params[:object_type]}",
-          :option_new_url => url_for(:action => :new, :controller => params[:related_model].underscore.pluralize, :only_path => true),
-          :options_url => url_for(:action => :index, :controller => params[:related_model].underscore.pluralize, :format => :json, :only_path => true),
+          :option_new_url => option_new_url,
+          :options_url => options_url,
           :selected_url => flow_relationships_path(list_form_params)
         }
       }

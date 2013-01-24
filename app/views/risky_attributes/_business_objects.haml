@@ -3,12 +3,12 @@
 -model_title = controller_name.singularize.titleize
 
 -content_for :widget_title do
-  Business Objects with this Risky Attribute
+  #{risky_attribute.type_string.pluralize.titleize} with this Risky Attribute
 
 -content_for :widget_help, "#{model_name}_business_objects"
 
 -content_for :widget_buttons do
-  %a.widgetbtn{ :rel => "tooltip", :"data-placement" => "left", :title => "Link risky attributes to this object", :'data-modal-class' => 'modal-wide', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :"data-toggle" => "modal-ajax-relationship-selector", :href => list_edit_flow_relationships_path(:object_id => risky_attribute.id, :object_type => risky_attribute.class.name, :related_model => risky_attribute.type_string, :related_side => 'source', :relationship_type => "#{risky_attribute.type_string.underscore}_has_risky_attribute") }
+  %a.widgetbtn{ :rel => "tooltip", :"data-placement" => "left", :title => "Link this object to risky attributes", :'data-modal-class' => 'modal-wide', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :"data-toggle" => "modal-ajax-relationship-selector", :href => list_edit_flow_relationships_path(:object_id => risky_attribute.id, :object_type => risky_attribute.class.name, :related_model => risky_attribute.type_string, :related_side => 'source', :relationship_type => "#{risky_attribute.type_string.underscore}_has_risky_attribute") }
     %i.grcicon-link
 
 %ul.slotlist
