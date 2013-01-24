@@ -289,7 +289,7 @@ module DefaultRelationshipTypes
       :forward_phrase => "relies upon",
       :reverse_phrase => "supports",
       :forward_description => "This product relies upon the following products",
-      :reverse_description => "This product relies upon the following products."
+      :reverse_description => "This product supports the following products."
     },
     :product_relies_upon_system => {
       :source_type => "Product",

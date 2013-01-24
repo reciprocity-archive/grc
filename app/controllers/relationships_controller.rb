@@ -135,7 +135,7 @@ class RelationshipsController < BaseMappingsController
         else
           if ["source", "both"].include? vr[:related_model_endpoint].to_s
             if !relationship_type.nil?
-              relationship_title = "#{obj.class.to_s.titleize} #{relationship_type[:forward_phrase]} #{related_model.to_s.pluralize.titleize}"
+              relationship_title = "#{obj.class.to_s.titleize} #{relationship_type[:reverse_phrase]} #{related_model.to_s.pluralize.titleize}"
             else
               relationship_title = "#{vr[:relationship_type]}:source"
             end
@@ -153,14 +153,14 @@ class RelationshipsController < BaseMappingsController
             @results.push({
               :relationship_type_id => vr[:relationship_type],
               :relationship_title => relationship_title,
-              :relationship_description => relationship_type ? relationship_type[:forward_description] : "Unknown relationship type",
+              :relationship_description => relationship_type ? relationship_type[:reverse_description] : "Unknown relationship type",
               :edit_url => edit_url,
               :objects => rels.map {|rel| rel.source},
             })
           end
           if ["destination", "both"].include? vr[:related_model_endpoint].to_s
             if !relationship_type.nil?
-              relationship_title = "#{obj.class.to_s.titleize} #{relationship_type[:reverse_phrase]} #{related_model.to_s.pluralize.titleize}"
+              relationship_title = "#{obj.class.to_s.titleize} #{relationship_type[:forward_phrase]} #{related_model.to_s.pluralize.titleize}"
             else
               relationship_title = "#{vr[:relationship_type]}:dest"
             end
@@ -178,7 +178,7 @@ class RelationshipsController < BaseMappingsController
             @results.push({
               :relationship_type_id => vr[:relationship_type],
               :relationship_title => relationship_title,
-              :relationship_description => relationship_type ? relationship_type[:reverse_description] : "Unknown relationship type",
+              :relationship_description => relationship_type ? relationship_type[:forward_description] : "Unknown relationship type",
               :edit_url => edit_url,
               :objects => rels.map {|rel| rel.destination},
             })
