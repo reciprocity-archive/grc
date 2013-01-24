@@ -69,7 +69,7 @@ module ImportHelper
     warning_key = options[:warning_key]
 
     unless email.nil?
-      if email.include?('@')
+      if email =~ /^#{EmailValidator::EMAIL_RE}$/
         attrs[key] = Person.find_or_create_by_email!({:email => email})
       elsif email == ""
         attrs[key] = nil
