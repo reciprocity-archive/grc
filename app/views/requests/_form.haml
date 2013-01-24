@@ -10,7 +10,6 @@
 
 =f.hidden_field :pbc_list_id
 =f.hidden_field :type_id
-=hidden_field_tag "request[control_id]", f.object.control && f.object.control.id
 
 .row-fluid
   =wrapped_text_field f, :span2, :pbc_control_code, :placeholder => 'Control Code', :label_name => 'Control Code from PBC'
@@ -18,8 +17,10 @@
     %label gGRC Control Code
     %a.btn.btn-mini.pull-right{:href => flow_controls_path(:list_select => 1), :'data-toggle' => 'modal-ajax-single-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#referenceList', :'data-modal-class' => 'modal-slim' }
       %i.grcicon-link
+    -control = f.object.control_assessment && f.object.control_assessment.control
+    =hidden_field_tag "request[control_id]", control && control.id
     .item.i-control.has-link.oneline
-      =f.object.control && f.object.control.slug || "&nbsp;".html_safe
+      =control && control.slug || "&nbsp;".html_safe
   =wrapped_text_field f, :span2, :company_responsible, :placeholder => 'Internal contact email', :label_name => 'Internal Contact'
   =wrapped_text_field f, :span2, :auditor_responsible, :placeholder => 'Auditor contact email', :label_name => 'Auditor Contact'
   =wrapped_date_field f, :span2, :date_requested, :class => 'date', :placeholder => 'MM/DD/YYYY', :label_name => 'Date Requested', :value => f.object.date_requested.present? ? f.object.date_requested.strftime('%m/%d/%Y') : Time.zone.now.strftime('%m/%d/%Y')
