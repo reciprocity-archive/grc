@@ -24,6 +24,6 @@
         N/A
       -else
         %strong 0
-    .row-fluid-slotcontent.collapse{ :id => content_id }
+    .row-fluid-slotcontent.collapse{ :id => content_id, :'data-id' => item.id }
       -#%a.btn.btn-blue.addbtn.fltrt{ :href => edit_flow_section_path(item), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :title => 'Edit Section' } Edit
       =display_as_html item.description

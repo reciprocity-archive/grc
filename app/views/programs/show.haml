@@ -68,3 +68,7 @@
         =render :partial => 'programs/audit_cycles',
                 :layout => 'layouts/widget_box',
                 :locals => { :program => @program }
+
+      =render :partial => 'shared/related',
+              :layout => 'layouts/widget_box',
+              :locals => { :instance => @program, :widget_title => "Impact/Scope of Program" }

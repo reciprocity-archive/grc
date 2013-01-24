@@ -22,15 +22,6 @@ class Project < ActiveRecord::Base
   validates :title,
     :presence => { :message => "needs a value" }
 
-  #@valid_relationships = [
-  #  { :to   => Project,   :via => :project_contains_a_project },
-  #  { :from => Project,   :via => :project_contains_a_project },
-  #  { :to   => Facility, :via => :project_is_dependent_on_facility },
-  #  { :from => OrgGroup, :via => :org_group_has_province_over_project },
-  #  { :from => Product,  :via => :product_is_sold_into_project },
-  #  { :to   => RiskyAttribute, :via => :project_has_risky_attribute },
-  #]
-
   def display_name
     slug
   end

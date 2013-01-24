@@ -24,22 +24,6 @@ class Product < ActiveRecord::Base
   validates :title,
     :presence => { :message => "needs a value" }
 
-  #
-  # Various relationship-related helpers
-  #
-
-  @valid_relationships = [
-    { :from => OrgGroup, :via => :org_group_has_province_over_product },
-    { :both => Product,  :via => :product_is_affiliated_with_product },
-    { :to   => Facility, :via => :product_is_dependent_on_facility },
-    { :to   => Product,  :via => :product_is_dependent_on_product },
-    { :from => Product,  :via => :product_is_dependent_on_product },
-    { :to   => Market,   :via => :product_is_sold_into_market },
-    { :from => Program,  :via => :program_is_relevant_to_product },
-    { :to   => System,   :via => :product_has_process },
-    { :to   => RiskyAttribute, :via => :product_has_risky_attribute },
-  ]
-
   def display_name
     slug
   end

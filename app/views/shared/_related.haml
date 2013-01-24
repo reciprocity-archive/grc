@@ -1,8 +1,10 @@
+-widget_title = "Related" if local_assigns[:widget_title].nil?
+
 -models = related_objects(instance)
 -#left_models, right_models = arranged_related_objects(instance)
 
 -content_for :widget_title do
-  Related
+  =widget_title
 
 -content_for :widget_help, 'related'
 #related.open
@@ -11,19 +13,19 @@
     .row-fluid
       %ul
         -models.each do |model|
-          -table_name = model.table_name
+          -table_name = model.underscore.pluralize #.table_name
           %li.btn.tab-btn.span4
             %a.span12{:href => "#related-#{table_name}-pane",
               "data-toggle" => 'tab',
               "data-source" => related_objects_flow_relationships_path(:oid => instance.id,
                 :otype => instance.class.to_s,
-                :related_model => model.to_s),
-              "data-template" => "/assets/related.ejs",
+                :related_model => model),
+              "data-template" => "/assets/related.mustache",
               "data-refresh-time" => 60 }
               #{table_name.titleize}
   %hr.hr-widget
   / TABS
   .tab-content
     -models.each do |model|
-      .tab-pane{:id => "related-#{model.table_name}-pane"}
-        Data for #{model.table_name.titleize}
+      .tab-pane{:id => "related-#{model.underscore.pluralize}-pane"}
+        Data for #{model.titleize}

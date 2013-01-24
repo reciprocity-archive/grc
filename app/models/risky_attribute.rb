@@ -27,13 +27,6 @@ class RiskyAttribute < ActiveRecord::Base
   validates :title,
     :presence => { :message => "needs a value" }
 
-  @valid_relationships = [
-    { :from => OrgGroup,  :via => :org_group_has_risky_attribute },
-    { :from => Product,   :via => :product_has_risky_attribute },
-    { :from => Facility,  :via => :facility_has_risky_attribute },
-    { :from => Market,    :via => :market_has_risky_attribute },
-  ]
-
   def self.type_strings
     TYPE_STRINGS
   end

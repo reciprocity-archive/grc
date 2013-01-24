@@ -98,6 +98,30 @@
         %a.widgetbtn.pull-right{:href => edit_flow_market_path('<%=market.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
           %i.grcicon-edit-grey
 
+%script#relationship_data_asset_option{ :type => 'text/html', :'data-prefix' => 'data_asset' }
+  %li{ :'data-id' => '<%= data_asset.id %>', :'data-title' => '<%= data_asset.title %>', :'data-slug' => '<%= data_asset.slug %>' }
+    .row-fluid
+      .span8
+        %span.company <%= data_asset.slug %>
+        %span.name <%= data_asset.title %>
+      .span4.actions
+        %a.widgetbtn.pull-right.add-me{:href => "#", :'data-toggle' => 'selector-list-select'}
+          %i.grcicon-chevron-right
+        %a.widgetbtn.pull-right{:href => edit_flow_data_asset_path('<%=data_asset.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
+          %i.grcicon-edit-grey
+
+%script#relationship_project_option{ :type => 'text/html', :'data-prefix' => 'project' }
+  %li{ :'data-id' => '<%= project.id %>', :'data-title' => '<%= project.title %>', :'data-slug' => '<%= project.slug %>' }
+    .row-fluid
+      .span8
+        %span.company <%= project.slug %>
+        %span.name <%= project.title %>
+      .span4.actions
+        %a.widgetbtn.pull-right.add-me{:href => "#", :'data-toggle' => 'selector-list-select'}
+          %i.grcicon-chevron-right
+        %a.widgetbtn.pull-right{:href => edit_flow_project_path('<%=project.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
+          %i.grcicon-edit-grey
+
 %script#relationship_risky_attribute_option{ :type => 'text/html', :'data-prefix' => 'risky_attribute' }
   %li{ :'data-id' => '<%= risky_attribute.id %>', :'data-title' => '<%= risky_attribute.title %>', :'data-slug' => '<%= risky_attribute.slug %>' }
     .row-fluid

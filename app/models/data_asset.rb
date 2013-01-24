@@ -22,15 +22,6 @@ class DataAsset < ActiveRecord::Base
   validates :title,
     :presence => { :message => "needs a value" }
 
-  #@valid_relationships = [
-  #  { :to   => DataAsset,   :via => :data_asset_contains_a_data_asset },
-  #  { :from => DataAsset,   :via => :data_asset_contains_a_data_asset },
-  #  { :to   => Facility, :via => :data_asset_is_dependent_on_facility },
-  #  { :from => OrgGroup, :via => :org_group_has_province_over_data_asset },
-  #  { :from => Product,  :via => :product_is_sold_into_data_asset },
-  #  { :to   => RiskyAttribute, :via => :data_asset_has_risky_attribute },
-  #]
-
   def display_name
     slug
   end

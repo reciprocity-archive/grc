@@ -22,6 +22,7 @@
   $.extend(ModalForm.prototype, {
 
     init: function() {
+      var that = this;
       this.$element
         .on('keypress', 'form', $.proxy(this.keypress_submit, this))
         .on('click.modal-form.close', '[data-dismiss="modal"]', $.proxy(this.hide, this))
@@ -29,14 +30,19 @@
         .on('click.modal-form.submit', 'input[type=submit], [data-toggle="modal-submit"]', $.proxy(this.submit, this))
         .on('shown.modal-form', $.proxy(this.focus_first_input, this))
         .on('loaded.modal-form', $.proxy(this.focus_first_input, this))
-        .on('loaded.modal-form', function(ev) { $("a[data-wysihtml5-command], a[data-wysihtml5-action]", ev.target).attr('tabindex', "-1"); })
+        .on('loaded.modal-form', function(ev) { 
+          $("a[data-wysihtml5-command], a[data-wysihtml5-action]", ev.target).attr('tabindex', "-1"); 
+          $('a.preventdoubleclick', ev.target).one('click', oneclick);
+        })
         .on('delete-object', $.proxy(this.delete_object, this))
         ;
       function oneclick() {
-        $(this).trigger("click");
-        $(this).attr("href", "#").on("ajax:complete", function() { $(this).one("click", oneclick); });    
+        //$(this).trigger("click");
+        var that = this;
+        $(document).on("ajax:complete", function() { 
+          $(that).off(".noclick").one("click", oneclick); 
+        }).on("click.noclick", that.doNothing);    
       }
-      $('a.preventdoubleclick', this.$element).one('click', oneclick);
     }
 
   , doNothing: function(e) {

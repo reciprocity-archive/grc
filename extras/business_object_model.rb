@@ -28,7 +28,7 @@ module BusinessObjectModel
     Relationship.where(
       :source_type => self.class.name, :source_id => id,
       :destination_type => self.class.name,
-      :relationship_type_id => "#{self.class.name.underscore}_is_dependent_on_#{self.class.name.underscore}"
+      :relationship_type_id => "#{self.class.name.underscore}_relies_upon_#{self.class.name.underscore}"
     ).includes(:destination).map(&:destination)
   end
 

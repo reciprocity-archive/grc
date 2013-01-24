@@ -9,25 +9,35 @@ can.Control("CMS.Controllers.ProgramRoutes", {
 }, {
   //Prototype
 
-  "{can.route} change" : function(el, ev, param, how, newval, oldval) {
+  "{can.route} tab" : function(el, ev, value, oldval) {
     //regulations, category_controls, combo are the possible values.  Each is a tab ID.
-    if(param === "tab")
-      $("a[href=#" + newval + "]").click();
+    if(value !== oldval)
+      $("a[href=#" + value + "]").click();
   }
 
-  , ".tab-pane loaded" : function() {
+  , ".tab-pane loaded" : function(el, ev) {
     var that = this;
 
     if(this.show) {
       if(!isNaN(parseInt(this.show))) {
         $("[data-id=" + this.show + "]").collapse().collapse("show");
       } else if(this.show === "new") {
-        var $categories = $("[data-object-type=category]").filter(function() {
-          return can.inArray($(this).data("id").toString(), that.lastCreatedCategories) > -1 ;
-        }).collapse().collapse("show");
-        var widget = $categories.find("[data-id=" + this.lastCreatedId + "]").collapse().collapse("show");
+        var widget;
+        if(el.is("#category_controls")) {
+          var $categories = $("[data-object-type=category]").filter(function() {
+            return can.inArray($(this).data("id").toString(), that.lastCreatedCategories) > -1 ;
+          }).collapse().collapse("show");
+          $categories.each(function() {
+            $("[data-target=#" + this.id + "]").find(".expander").addClass("in");
+          });
+          widget = $categories.find("[data-id=" + this.lastCreatedId + "]");
+        } else {
+          widget = el.find("[data-id=" + this.lastCreatedId + "]");
+        }
+        widget.collapse().collapse("show");
+        $("[data-target=#" + widget.attr("id") + "]").find(".expander").addClass("in");
         var box = widget.closest(".WidgetBoxContent");
-        $(document.body).scrollTop(box.offset().top);
+        box.offset() && $(document.body).scrollTop(box.offset().top);
         setTimeout(function() {
           box.scrollTop(widget.offset().top);
         }, 300);
@@ -44,13 +54,15 @@ can.Control("CMS.Controllers.ProgramRoutes", {
   , " ajax:beforeSend" : function(el, ev, xhr, settings) {
     var that = this,
       data = can.deparam(settings.data);
-    if(settings.type === "POST" && data.control) {
-      this.show = "new";
-      this.lastCreatedCategories = data.control.category_ids || ["0"];
-      xhr.done(function(d) {
-        that.lastCreatedId = d.id;
-      })
-   }
+    if(settings.type === "POST") {
+      if(data.control || data.section) {
+        this.show = "new";
+        this.lastCreatedCategories = data.control ? (data.control.category_ids || ["0"]) : [];
+        xhr.done(function(d) {
+          that.lastCreatedId = d.id;
+        });
+      }
+    }
   }
 
   , " routeparam" : function(el, ev, data) {

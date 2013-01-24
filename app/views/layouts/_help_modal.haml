@@ -1,6 +1,6 @@
 .modal-header
   %nav
-    %a.widgetbtn{ :'data-dismiss' => 'modal', :href => '#'}
+    %a.widgetbtn{ :'data-dismiss' => 'modal', :href => 'javascript://'}
       %i.grcicon-x-grey
   %h1=yield_content!(:modal_title) || "Help"
 
@@ -11,4 +11,4 @@
   .row-fluid
     .span9
     %nav.fltrt.txtrt.span3
-      %a.btn.btn-large.btn-primary{"data-dismiss" => "modal", :href => "#"} Close
+      %a.btn.btn-large.btn-primary{"data-dismiss" => "modal", :href => 'javascript://'} Close

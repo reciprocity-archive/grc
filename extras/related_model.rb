@@ -353,25 +353,28 @@ module RelatedModel
     end
 
     def valid_relationships
-      (@valid_relationships || []).map do |rel|
-        #puts rel.inspect
-        model = rel[:both] || rel[:to] || rel[:from]
+      return DefaultRelationshipTypes.types.map do |name, rel|
+        if rel[:source_type] == self.name
+          model = rel[:target_type]
+          endpoint = :source
+        elsif rel[:target_type] == self.name
+          model = rel[:source_type]
+          endpoint = :destination
+        end
+        if rel[:symmetric]
+          endpoint = :both
+        end
+
         if model.present?
           model = model.to_s if model.kind_of?(Symbol)
-          model = model.camelcase.constantize if model.kind_of?(String)
-
-          endpoint = :source if rel[:from].present?
-          endpoint = :both if rel[:both].present?
-          endpoint = :destination if rel[:to].present?
+          model = "System" if model == "Process"
           {
-            :relationship_type => rel[:via],
+            :relationship_type => name,
             :related_model => model,
             :related_model_endpoint => endpoint
           }
-        else
-          rel
         end
-      end
+      end.compact
     end
 
     def has_valid_relationship?(type)
