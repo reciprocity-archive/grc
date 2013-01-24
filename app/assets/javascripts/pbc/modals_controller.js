@@ -147,6 +147,14 @@ can.Control("CMS.Controllers.PBCModals", {
     }
 
     , ".modal input[name=fromdate], .modal input[name=todate], .modal select[name=fromtime], .modal select[name=totime] change" : function(el, ev) {
+      this.generate_calendar_href(el, ev);
+    }
+
+    , ".modal[id*=meetings-new] loaded" : function(el, ev) {
+      this.generate_calendar_href($(el).find("input[name=fromdate]"), ev);    
+    } 
+
+    , generate_calendar_href : function(el, ev) { 
       var cal_link = $(el).closest(".modal").find(".create-gcal-event");
       var form = $(el).closest("form")[0];
       var href = cal_link.attr("href");
