@@ -18,7 +18,7 @@
               "data-source" => related_objects_flow_relationships_path(:oid => instance.id,
                 :otype => instance.class.to_s,
                 :related_model => model.to_s),
-              "data-template" => "/assets/related.ejs",
+              "data-template" => "/assets/related.mustache",
               "data-refresh-time" => 60 }
               #{table_name.titleize}
   %hr.hr-widget

@@ -219,5 +219,10 @@ Mustache.registerHelper("pack", function() {
 });
 */
 
+Mustache.registerHelper("is_beta", function(){
+  var options = arguments[arguments.length - 1];
+  if($(document.body).hasClass('BETA')) return options.fn(this);
+  else return options.inverse(this);
+});
 
 })(this, jQuery, can);

@@ -1,0 +1,80 @@
+{{#this}}
+  <div class="itemswell">
+    {{#with relationship_type}}
+    <h4 class="nominheight">
+      {{ title }}
+      <a class="widgetbtn pull-right" href="{{edit_url}}" data-toggle="modal-ajax-relationship-selector" data-modal-reset="reset" data-tab-target="#related-objects-{{id}}" data-modal-class="modal-wide"><i class="grcicon-link"></i></a>
+    </h4>
+    <div class="row-fluid">
+      <div class="span12 captionbox">
+        <div class= "subtitle">
+          {{ description }}
+        </div>
+      </div>
+    </div>
+    {{/with}}
+    <div class="row-fluid">
+      <ul class="span12" id="related-objects-{{relationship_type.id}}">
+    {{#related_objects}}
+        <li class="controlSlot">
+          <a href="/{{ url }}" data-popover-href="/{{ url }}/tooltip" data-popover-trigger="sticky-hover">
+            {{#is_beta}}
+            <div class="row-fluid nominheight">
+              <div class="span6 nominheight">
+                <span class="controls-group">
+                United Kingdom
+                </span>
+              </div>
+              <div class="span6 nominheight">
+                <span class="btn minibtn pull-right">
+                Review
+                </span>
+              </div>
+            </div>
+            {{/is_beta}}
+            <div class="row-fluid nominheight">
+              <div class="span4 nominheight oneline">
+                <span class="controls-subgroup">
+                  <strong>{{ object.slug }}</strong>
+                </span>
+              </div>
+              <div class="span8 nominheight">
+                <span class="controls-subgroup">
+                  {{ object.title }}
+                </span>
+              </div>
+            </div>
+            {{#is_beta}}
+            <div class="row-fluid nominheight summary">
+              <div class="span12 infowell nominheight">
+                <div class="row-fluid nominheight">
+                  <div class="span4 nominheight">
+                    <strong>239</strong>
+                    Objects
+                  </div>
+                  <div class="span4 nominheight">
+                    <strong>22</strong>
+                    Required
+                  </div>
+                  <div class="span4 nominheight">
+                    <div class="progress active">
+                      <div class="bar progressbar-success" data-percentage="38" style="float: left; width: 38%;"></div>
+                      <div class="bar progressbar-danger" data-percentage="10" style="float: right; width: 10%;"></div>
+                      <div class="bar progressbar-warning" data-percentage="35" style="float: right; width: 35%;"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {{/is_beta}}
+          </a>
+        </li>
+    {{else}}
+    <div class="row-fluid">
+      <div class="controlSlot">No results</div>
+    </div>
+    {{/related_objects}}
+      </ul>
+    </div>
+  </div>
+{{/this}}
