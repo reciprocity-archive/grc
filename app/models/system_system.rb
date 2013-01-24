@@ -17,13 +17,13 @@ class SystemSystem < ActiveRecord::Base
 
   def does_not_link_to_self
     if parent_id == child_id
-      errors.add(:base, "System cannot be its own sub-system")
+      errors.add(:base, "System cannot rely on itself.")
     end
   end
 
   def does_not_create_cycles
     if has_cycle_to_parent?
-      errors.add(:base, "Creates cycle in system graph")
+      errors.add(:base, "Cannot link to Systems that rely on this System.")
     end
   end
 
