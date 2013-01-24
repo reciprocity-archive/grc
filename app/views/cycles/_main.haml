@@ -7,7 +7,7 @@
 .nav.nav-tabs.nav-stacked
   %p
     -if cycle.complete
-      Complete (started #{time_ago_in_words cycle.start_at})
+      Complete (started #{days_ago_in_words cycle.start_at})
     -else
       -if cycle.start_at == Time.zone.now.to_date
         Started today
