@@ -13,11 +13,11 @@
 -content_for :page_help, 'program'
 
 -content_for :subheader_extras do
-  %ul.program-list.pull-right
+  %ul.actions.pull-right
     %li
       %a{:href => edit_flow_program_path(@program), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide',:title => 'Edit Program'}
         %i.grcicon-edit-new
-        Edit
+        Edit Program
     %li.btn-group
       %a.dropdown-toggle{:href => '#', :'data-toggle' => 'dropdown'}
         %i.grcicon-imp-exp

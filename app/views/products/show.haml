@@ -11,12 +11,18 @@
     %li= instance.slug
     
   %h1
+    %span
+      #{model_title}:
     =instance.title
 
 -content_for :page_help, model_name
 
 -content_for :subheader_extras do
-  %h1.fltrt.highlighted #{model_title}
+  %ul.actions.pull-right
+    %li
+      %a{ :href => edit_flow_product_path(instance), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide', :title => 'Edit Product' }
+        %i.grcicon-edit-new
+        Edit #{model_title}
 
 -content_for :subheader_plus do
   %a.navbarplus.fltrt{ :href => method("new_flow_#{model_name}_path").call(), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide'}
