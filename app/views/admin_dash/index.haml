@@ -53,9 +53,8 @@
                 %a.span12.btn.btn-warning{"data-toggle" => "modal-ajax", :href => "/systems/export.html"}
                   Export Systems
   
-      %section#StyleGuide.widget
-        -if has_feature? :BETA
-        
+      -if has_feature? :BETA
+        %section#StyleGuide.widget
           / in progress
           %header.header.demoItem
             %h2
@@ -74,74 +73,75 @@
                   %a.btn{:href => "/design/styleguide"}
                     Style Guide (First Draft)
   
-      %section#Programs.WidgetBox.demoItem.widget
-        %section.header
-          %h2
-            In-Progress
-            %nav
-              %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
-                %i.grcicon-questionmark-grey
-              %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
-              %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#programsInProgress"}
-                %i.grcicon-enlarge-grey
-          / /.WidgetBoxHeading
-        %section.content
-          #programsInProgress.toolbar-widget.in
-            %ul#quickLinks.nav.nav-tabs.nav-stacked.in
-              %li.group
-                %a.btn{:href => "/design/pbc-list"}
-                  PBC List
-              %li.group
-                %a.btn{"data-toggle" => "modal", :href => "#newRequest"}
-                  New Request
-              %li.group
-                %a.btn{"data-toggle" => "modal", :href => "#pbcListEdit"}
-                  Edit PBC List
-
-              %li.group
-                %a.btn{"data-toggle" => "modal", :href => "#newResponseDocumentation"}
-                  Edit Response (Documentation)
-              %li.group
-                %a.btn{"data-toggle" => "modal", :href => "#newResponseInterview"}
-                  Edit Response (Interview)
-              %li.group
-                %a.btn{"data-toggle" => "modal", :href => "#newResponsePopulation"}
-                  Edit Response (Population)
-
-              %li.group
-                %a.btn{"data-toggle" => "modal", :href => "#redesignNewSystem"}
-                  New/Edit System
-              %li.group
-                %a.btn{"data-toggle" => "modal", :href => "#redesignNewControlWide"}
-                  New Control
-              %li.group
-                %a.btn{:href => "/design/systems"}
-                  Systems Page
-              %li.group
-                %a.btn{:href => "/design/products"}
-                  Product Page
-              %li.group
-                %a.btn{:href => "/design/controls"}
-                  Controls Page
-              %li.group
-                %a.btn{:href => "/design/audit-manager"}
-                  Audit Manager
-              %li.group
-                %a.btn{:href => "/design/audit-dashboard"}
-                  Audit Dashboard
-              %li.group
-                %a.btn{:href => "/design/audit-setup"}
-                  Audit Setup
-              %li.group
-                %a.btn{:href => "/design/audit-control-review"}
-                  Audit Controls Review
-              
-              %li.group
-                %a.btn{:href => "/design/importregs"}
-                  Importing Regulation Data
-              %li.group
-                %a.btn{:href => "/design/importcontrols"}
-                  Importing Controls      
+      -if has_feature? :BETA
+        %section#Programs.WidgetBox.demoItem.widget
+          %section.header
+            %h2
+              In-Progress
+              %nav
+                %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                  %i.grcicon-questionmark-grey
+                %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
+                %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#programsInProgress"}
+                  %i.grcicon-enlarge-grey
+            / /.WidgetBoxHeading
+          %section.content
+            #programsInProgress.toolbar-widget.in
+              %ul#quickLinks.nav.nav-tabs.nav-stacked.in
+                %li.group
+                  %a.btn{:href => "/design/pbc-list"}
+                    PBC List
+                %li.group
+                  %a.btn{"data-toggle" => "modal", :href => "#newRequest"}
+                    New Request
+                %li.group
+                  %a.btn{"data-toggle" => "modal", :href => "#pbcListEdit"}
+                    Edit PBC List
+  
+                %li.group
+                  %a.btn{"data-toggle" => "modal", :href => "#newResponseDocumentation"}
+                    Edit Response (Documentation)
+                %li.group
+                  %a.btn{"data-toggle" => "modal", :href => "#newResponseInterview"}
+                    Edit Response (Interview)
+                %li.group
+                  %a.btn{"data-toggle" => "modal", :href => "#newResponsePopulation"}
+                    Edit Response (Population)
+  
+                %li.group
+                  %a.btn{"data-toggle" => "modal", :href => "#redesignNewSystem"}
+                    New/Edit System
+                %li.group
+                  %a.btn{"data-toggle" => "modal", :href => "#redesignNewControlWide"}
+                    New Control
+                %li.group
+                  %a.btn{:href => "/design/systems"}
+                    Systems Page
+                %li.group
+                  %a.btn{:href => "/design/products"}
+                    Product Page
+                %li.group
+                  %a.btn{:href => "/design/controls"}
+                    Controls Page
+                %li.group
+                  %a.btn{:href => "/design/audit-manager"}
+                    Audit Manager
+                %li.group
+                  %a.btn{:href => "/design/audit-dashboard"}
+                    Audit Dashboard
+                %li.group
+                  %a.btn{:href => "/design/audit-setup"}
+                    Audit Setup
+                %li.group
+                  %a.btn{:href => "/design/audit-control-review"}
+                    Audit Controls Review
+                
+                %li.group
+                  %a.btn{:href => "/design/importregs"}
+                    Importing Regulation Data
+                %li.group
+                  %a.btn{:href => "/design/importcontrols"}
+                    Importing Controls      
 
     -if has_feature? :BETA
       .span4
