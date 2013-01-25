@@ -77,11 +77,17 @@
         color: $headerTitle;
         text-decoration: none;
       }
-      padding-bottom: 22px;
-      border-bottom: 1px solid $gray;
-      margin-bottom: 15px;
+      padding:10px 0;
+      border-bottom: 1px solid $lightGray;
       .progress {
         margin: 0;
+      }
+      &:hover {
+        @include background-image(linear-gradient(left, $white, $lightGray, $white));
+        border-bottom: 1px solid darken($lightGray,10%);
+        h3 {
+          color:#369;
+        }
       }
     }
   }
