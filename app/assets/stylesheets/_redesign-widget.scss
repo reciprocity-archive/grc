@@ -9,6 +9,7 @@
   .header {
     background:$widgetHeader;
     @include transition(background-color 0.2s);
+    @include border-radius($topBorderRadius);
     color:$white;
     padding:5px 10px;
     h2 {
@@ -61,9 +62,14 @@
   }
   .items {
     @include reset-list();
+    h3 {
+      font-weight:normal;
+      font-size:16px;
+    }
     li.main {
       h4 {
         font-size: 12px;
+        color:#666;
       }
       a {
         color: $headerTitle;
