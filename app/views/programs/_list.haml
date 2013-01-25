@@ -1,5 +1,6 @@
 -content_for :widget_title do
   Programs
+  %span.badge=@programs.count
 
 -content_for :widget_help, 'programs_list'
 
@@ -47,11 +48,3 @@
                 No controls
               
               .progress.progress-striped.active
-
--content_for :widget_footer do
-  -if has_feature? :BETA
-    %footer.footer
-      %p.pull-right
-        %strong 254
-        of 500
-      

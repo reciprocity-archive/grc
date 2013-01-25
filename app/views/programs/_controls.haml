@@ -23,12 +23,7 @@
               Control
 
 .tabbable
-  -#.span3.fltrt
-    %a.widgetbtn.shrinkAll
-      %img{ :src => '/images/shrinkAll.png', :alt => 'Shrink All', :title => 'Shrink All' }
-    %a.widgetbtn.expandAll
-      %img{ :src => '/images/expandAll.png', :alt => 'Expand All', :title => 'Expand All' }
-
+  
   %ul.nav.nav-tabs
     -unless @program.company_controls?
       %li.active=link_to 'Regulations', '#regulations', :data => { :toggle => 'tab', :'tab-href' => sections_flow_program_path(program) }
