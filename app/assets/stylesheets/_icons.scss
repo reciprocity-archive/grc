@@ -200,6 +200,10 @@
     background-position:-16px -48px;
   }
 }
+.grcicon-audit-white {
+  @include new-icons();
+  background-position:-16px -48px;
+}
 .grcicon-imp-exp {
   @include new-icons();
   background-position:-64px -32px;
@@ -213,6 +217,10 @@
   .active & {
     background-position:-32px -48px;
   }
+}
+.grcicon-reg-map-white {
+  @include new-icons();
+  background-position:-32px -48px;
 }
 
 
