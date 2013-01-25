@@ -1,15 +1,15 @@
--# locals: control, risks
+-# locals: instance
 
 .row-fluid
   .span12.captionbox
-    %a.widgetbtn.pull-right{ :href => list_edit_flow_control_risks_path(:control_id => control.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :rel => 'tooltip', :title => 'Link risks to this control', :'data-modal-class' => 'modal-wide' }
+    %a.widgetbtn.pull-right{ :href => list_edit_flow_control_risks_path(:risk_id => instance.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :rel => 'tooltip', :'data-placement' => 'left', :title => 'Link controls to this risk', :'data-modal-class' => 'modal-wide' }
       %i.grcicon-link
     %h4
-      Risks mitigated by this Control
+      Controls mitigating this Risk
 
 %ul.slotlist
-  -risks.each_with_index do |risk, i|
-    -id_prefix = "risk-#{i}"
+  -instance.controls.each_with_index do |control, i|
+    -id_prefix = "control-#{i}"
     -summary_toggle_target = "#{id_prefix}-summary"
 
     %li
@@ -17,8 +17,8 @@
         .slot.span12.processslot
           .slottitle.span8.toggle{"data-target" => "##{summary_toggle_target}", "data-toggle" => "collapse"}
             .expander
-            %span.prefix=risk.slug
-            =risk.title
+            %span.prefix=control.slug
+            =control.title
           -if has_feature? :BETA
             .slotcolumn.span2
               .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
@@ -35,6 +35,7 @@
           .slotcontent.span12
             %ul.contentactions.pull-right
               %li
-                %a.btn.btn-mini.halfopacity{ "rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => flow_risk_path(risk.id) }
+                %a.btn.btn-mini.halfopacity{ "rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => flow_control_path(control.id) }
                   %i.grcicon-arrowright-black
-            =display_as_html risk.description
+            =display_as_html control.description
+

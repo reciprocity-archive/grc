@@ -1,12 +1,10 @@
--# locals: risk
+-# locals: instance
 
--model_name = controller_name.singularize
--model_title = controller_name.singularize.titleize
--instance = instance_variable_get("@" + model_name)
--content_for :widget_title do
-  Business Objects impacted by this Risk
 
--content_for :widget_help, "#{model_name}_business_objects"
+.row-fluid
+  .span12.captionbox
+    %h4
+      Business Objects impacted by this Risk
 
 -instance.risky_attributes.each_with_index do |risky_attribute, i|
   -id_prefix = "risky_attribute-#{i}"
