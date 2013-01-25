@@ -3,10 +3,31 @@
 ul.tree {
   @include reset-list();
   li.main {
+    @include clearfix();
     border-bottom:1px solid $lightGray;
-    line-height:28px;
+    cursor:pointer;
+    line-height:32px;
+    padding:0 6px;
     &:last-child {
       border-bottom:none;
     }
+    .code {
+      font-weight:bold;
+    }
+    .info {
+      color:$text;
+    }
+    &:hover {
+      background:lighten(#ccf1ff,5%);
+      border-color:darken(#ccf1ff,10%);
+    }
+  }
+  .tree-content {
+    margin-left:24px;
+  }
+  p {
+    font-size:11px;
+    line-height:14px;
+    color:$text;
   }
 }
