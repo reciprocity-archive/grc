@@ -11,6 +11,8 @@
     %li= instance.slug
     
   %h1
+    %span
+      #{model_title}:
     =instance.slug
     \: 
     =instance.title
@@ -18,25 +20,27 @@
 -content_for :page_help, model_name
 
 -content_for :subheader_extras do
-  %h1.fltrt.highlighted #{model_title}
+  %ul.actions.pull-right
+    %li
+      %a{ :href => method("edit_flow_#{model_name}_path").call(instance), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide', :title => "Edit #{model_title}" }
+        %i.grcicon-edit-new
+        Edit #{model_title}
 
 -content_for :subheader_plus do
   %a.navbarplus.fltrt{ :href => method("new_flow_#{model_name}_path").call(), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide'}
 
-.row-static
-  .doubleColumn
-    .doubleWide.fullHeight
+.container-fluid
+  .row-fluid
+    .span8
       =render :partial => "main",
               :layout => 'layouts/widget_box',
               :locals => { model_name.to_sym => instance, :risks => instance.risks }
-
-      %ul.slotlist
-        =render :partial => "business_objects",
-              :layout => 'layouts/widget_box',
-              :locals => { model_name.to_sym => instance }
-
-  .singleColumn
-    .singleWide.fullHeight
+  
+      =render :partial => "business_objects",
+            :layout => 'layouts/widget_box',
+            :locals => { model_name.to_sym => instance }
+  
+    .span4
       =render :partial => "info",
               :layout => 'layouts/widget_box',
               :locals => { model_name.to_sym => instance }
