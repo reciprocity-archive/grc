@@ -9,7 +9,6 @@
   .header {
     background:$widgetHeader;
     @include transition(background-color 0.2s);
-    @include border-radius($topBorderRadius);
     color:$white;
     padding:5px 10px;
     h2 {

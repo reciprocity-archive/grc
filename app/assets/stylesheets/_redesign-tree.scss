@@ -17,9 +17,30 @@ ul.tree {
     .info {
       color:$text;
     }
+    .buttons {
+      float:right;
+      @include opacity(0.2);
+      @include transition(opacity 0.4s);
+      line-height:16px;
+      padding-top:4px;
+      .btn {
+        padding-left:3px;
+        padding-right:3px;
+        i {
+          margin-top:0;
+        }
+      }
+    }
     &:hover {
-      background:lighten(#ccf1ff,5%);
+      background:lighten(#ccf1ff,8%);
       border-color:darken(#ccf1ff,10%);
+      .showhide {
+        @include opacity(1);
+      }
+      .buttons {
+        @include opacity(1);
+      }
+
     }
   }
   .tree-content {
