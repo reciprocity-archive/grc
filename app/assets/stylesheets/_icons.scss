@@ -211,6 +211,13 @@
     background-position:-64px -48px;
   }
 }
+.grcicon-imp-exp-white {
+  @include new-icons();
+  background-position:-64px -48px;
+  .active & {
+    background-position:-64px -48px;
+  }
+}
 .grcicon-reg-map {
   @include new-icons();
   background-position:-32px -32px;
