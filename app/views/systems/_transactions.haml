@@ -5,7 +5,13 @@
 -content_for :widget_help, 'system_transactions'
 
 -content_for :widget_buttons do
-  %a.widgettextbtn{ :href => new_flow_transaction_path('transaction[system_id]' => system.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :title => 'Create New Transaction' } New
+  .filter
+    .row-fluid
+      .span12
+        .pull-right
+          %a.btn.btn-add{ :href => new_flow_transaction_path('transaction[system_id]' => system.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :title => 'Create New Transaction' }
+            %i.grcicon-add-new
+            New
 
 .description
   %script(type='text/html' data-title='' data-description='')
