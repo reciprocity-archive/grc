@@ -259,12 +259,14 @@ class RelationshipsController < BaseMappingsController
     def list_form_context
       object = params[:object_type].constantize.find(params[:object_id])
       # FIXME: Abstraction violation
+      related_model = params[:related_model]
+      related_model = "System" if related_model == "Process"
       if params[:related_model] == 'RiskyAttribute'
-        option_new_url = url_for(:action => :new, :controller => params[:related_model].underscore.pluralize, :force_type_string => true, :'risky_attribute[type_string]' => params[:object_type], :only_path => true)
-        options_url = url_for(:action => :index, :controller => params[:related_model].underscore.pluralize, :type_string => params[:object_type], :format => :json, :only_path => true)
+        option_new_url = url_for(:action => :new, :controller => related_model.underscore.pluralize, :force_type_string => true, :'risky_attribute[type_string]' => params[:object_type], :only_path => true)
+        options_url = url_for(:action => :index, :controller => related_model.underscore.pluralize, :type_string => params[:object_type], :format => :json, :only_path => true)
       else
-        option_new_url = url_for(:action => :new, :controller => params[:related_model].underscore.pluralize, :only_path => true)
-        options_url = url_for(:action => :index, :controller => params[:related_model].underscore.pluralize, :format => :json, :only_path => true)
+        option_new_url = url_for(:action => :new, :controller => related_model.underscore.pluralize, :only_path => true)
+        options_url = url_for(:action => :index, :controller => related_model.underscore.pluralize, :format => :json, :only_path => true)
       end
 
       {
@@ -272,7 +274,7 @@ class RelationshipsController < BaseMappingsController
         :context => {
           :object_type => params[:object_type],
           :object_id => params[:object_id],
-          :related_type => params[:related_model],
+          :related_type => related_model,
           :related_side => params[:related_side],
           :relationship_type => params[:relationship_type],
           :title => "Link #{params[:related_model]} to this #{params[:object_type]}",
