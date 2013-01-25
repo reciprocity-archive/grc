@@ -4,7 +4,8 @@
  */
 
 
-[class^="grcicon-"] {
+[class^="grcicon-"],
+.showhide {
   display: inline-block;
   width: 16px;
   height: 16px;
@@ -326,5 +327,20 @@
   }
   &.small-expander {
     margin: 3px 4px 0 -2px;
+  }
+}
+
+.showhide {
+  @include new-icons();
+  background-position:0 -64px;
+  cursor:pointer;
+  @include opacity(0.5);
+  @include transition(opacity 0.4s);
+  &:hover {
+    @include opacity(0.8);
+  }
+  &.active {
+    background-position:-16px -64px;
+    @include opacity(1);
   }
 }

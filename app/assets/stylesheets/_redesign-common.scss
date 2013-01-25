@@ -58,7 +58,7 @@ h4 {
     margin-top: 1px;
   }
   &:hover {
-    @include box-shadow(inset 0 0 3px $darkGray);
+    @include box-shadow(inset 0 0 2px rgba(0,0,0,0.3));
   }
   &.btn-add {
     color:$white;
@@ -96,4 +96,11 @@ h4 {
   a {
     @include outline-fix();
   }
+}
+
+// show hide
+
+.showhide {
+  float:left;
+  margin-top:8px;
 }
