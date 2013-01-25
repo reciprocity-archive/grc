@@ -185,6 +185,13 @@
     background-position:-48px -48px;
   }
 }
+.grcicon-edit-new-white {
+  @include new-icons();
+  background-position:-48px -48px;
+  .active & {
+    background-position:-48px -48px;
+  }
+}
 .grcicon-audit {
   @include new-icons();
   background-position:-16px -32px;
