@@ -7,12 +7,11 @@
       Mapping
     
   %h1
+    %span
+      Regulation to Control Mapping:
     =@program.title
 
 -content_for :page_help, 'mapping'
-
--content_for :subheader_extras do
-  %h1.fltrt.highlighted Regulation to Control Mapping
 
 .container-fluid
   .row-fluid
@@ -21,12 +20,19 @@
         =render :partial => 'section_list',
                 :layout => 'layouts/widget_box',
                 :locals => { :sections => @program.sections.includes(:parent, :controls => :implementing_controls) }
-   
+                
+      =render :partial => 'selected_section',
+              :layout => 'layouts/widget_box',
+              :locals => {:section => nil}
     .span4
       #rcontrol_list
         =render :partial => 'control_list',
                 :layout => 'layouts/widget_box',
                 :locals => { :controls => @rcontrols, :title_prefix => 'Reg', :program => @program, :control_type => 'regulation' }
+                  
+      =render :partial => 'selected_control',
+              :layout => 'layouts/widget_box',
+              :locals => {:control => nil, :control_type => 'rcontrol', :map_button_id => :cmap, :map_button_path => mapping_map_ccontrol_path }
   
     .span4
       #ccontrol_list
@@ -34,22 +40,9 @@
                 :layout => 'layouts/widget_box',
                 :locals => { :controls => @ccontrols, :title_prefix => 'Company', :program => @program, :control_type => 'company' }
                 
-  .row-fluid
-    .span4
-      =render :partial => 'selected_section',
-              :layout => 'layouts/widget_box',
-              :locals => {:section => nil}
-      
-    .span4
-      =render :partial => 'selected_control',
-              :layout => 'layouts/widget_box',
-              :locals => {:control => nil, :control_type => 'rcontrol', :map_button_id => :cmap, :map_button_path => mapping_map_ccontrol_path }
-    
-    .span4
       =render :partial => 'selected_control',
               :layout => 'layouts/widget_box',
               :locals => {:control => nil, :control_type => 'ccontrol', :map_button_id => nil }
-              
     
   :javascript
     $(document).ready(function(){

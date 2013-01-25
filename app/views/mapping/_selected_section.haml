@@ -2,9 +2,13 @@
   Selected Sections
 
 -content_for :widget_buttons do
-  =link_to "javascript://", :id => :rmap, :class => %w(widgetmapbtn btn-warning) do
-    %span Map section to control
-    %i.grcicon-play-white
+  .filter
+    .row-fluid
+      .span12
+        .pull-right
+          =link_to "javascript://", :id => :rmap, :class => %w(widgetmapbtn btn btn-warning) do
+            %span Map section to control
+            %i.grcicon-demo
 
 #selected_sections.description{:oid => section ? section.id : ""}
   .clearfix
