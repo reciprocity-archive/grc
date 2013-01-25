@@ -307,7 +307,7 @@ module RelatedModel
     # Given an ability, see if we can traverse to the given object
     # FIXME: Do an optimized version of this which is faster. Right now,
     # just use the full graph generation and search for the node in it.
- 
+
     result = ability_graph([ability])
     result[:objs].include?(object)
   end
@@ -352,29 +352,33 @@ module RelatedModel
       })
     end
 
-    def valid_relationships
-      return DefaultRelationshipTypes.types.map do |name, rel|
-        if rel[:source_type] == self.name
-          model = rel[:target_type]
-          endpoint = :source
-        elsif rel[:target_type] == self.name
-          model = rel[:source_type]
-          endpoint = :destination
-        end
-        if rel[:symmetric]
-          endpoint = :both
-        end
+    def valid_relationship_hash(name, model, endpoint)
+      model = model.to_s if model.kind_of?(Symbol)
+      model = "System" if model == "Process"
+      {
+        :relationship_type => name,
+        :related_model => model,
+        :related_model_endpoint => endpoint
+      }
+    end
 
-        if model.present?
-          model = model.to_s if model.kind_of?(Symbol)
-          model = "System" if model == "Process"
-          {
-            :relationship_type => name,
-            :related_model => model,
-            :related_model_endpoint => endpoint
-          }
+    def valid_relationships
+      valid_relationships = []
+      DefaultRelationshipTypes.types.each do |name, rel|
+        if rel[:source_type] == self.name && rel[:target_type] == self.name &&  rel[:symmetric]
+          valid_relationships.push(
+            valid_relationship_hash(name, rel[:source_type], :both))
         end
-      end.compact
+        if rel[:source_type] == self.name && !rel[:symmetric]
+          valid_relationships.push(
+            valid_relationship_hash(name, rel[:target_type], :destination))
+        end
+        if rel[:target_type] == self.name && !rel[:symmetric]
+          valid_relationships.push(
+            valid_relationship_hash(name, rel[:source_type], :source))
+        end
+      end
+      valid_relationships
     end
 
     def has_valid_relationship?(type)

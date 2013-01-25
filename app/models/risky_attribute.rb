@@ -6,7 +6,7 @@ class RiskyAttribute < ActiveRecord::Base
   include RelatedModel
   include SanitizableAttributes
 
-  TYPE_STRINGS = %w(Org\ Group Product Facility Market Project Data\ Asset Process System)
+  TYPE_STRINGS = %w(OrgGroup Product Facility Market Project DataAsset Process System)
 
   attr_accessible :title, :slug, :description, :url, :version, :type_string, :start_date, :stop_date
 
@@ -24,11 +24,22 @@ class RiskyAttribute < ActiveRecord::Base
 
   sanitize_attributes :description
 
-  validates :title,
+  validates :title, :type_string,
     :presence => { :message => "needs a value" }
+  validate :type_string_cannot_change_if_relationships_exist
 
   def self.type_strings
     TYPE_STRINGS
+  end
+
+  def type_string_cannot_change_if_relationships_exist
+    if changed_attributes['type_string'].present? && !can_change_type_string?
+      errors.add(:type_string, "Cannot change Type when Relationships exist")
+    end
+  end
+
+  def can_change_type_string?
+    new_record? || attributed_objects.count == 0
   end
 
   def display_name

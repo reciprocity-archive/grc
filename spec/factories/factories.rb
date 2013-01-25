@@ -202,6 +202,7 @@ FactoryGirl.define do
 
   factory :risky_attribute do
     title
+    type_string 'Product'
   end
 
   factory :risk do

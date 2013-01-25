@@ -18,7 +18,7 @@
             %strong=cycle.title
           .span6
             -if cycle.complete
-              Complete (started #{time_ago_in_words cycle.start_at} ago)
+              Complete (started #{days_ago_in_words cycle.start_at} ago)
             -else
               -if cycle.start_at == Time.zone.now.to_date
                 Started today

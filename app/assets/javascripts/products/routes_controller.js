@@ -27,7 +27,7 @@ can.Control("CMS.Controllers.ProductRoutes", {
     })
   }
 
-  , "a[href*='relationship_type=product_is_dependent_on_product'] modal:success" : function(el, ev, data) {
+  , "a[href*='relationship_type=product_relies_upon_product'] modal:success" : function(el, ev, data) {
     var parent = el.closest("[data-object-id]")
     , parentid = parent.data("object-id")
     , list = parent.find(".slotlist:eq(1)")

@@ -26,6 +26,33 @@ class RiskyAttributesController < BaseObjectsController
 
   layout 'dashboard'
 
+  def index
+    object_set = model_class
+    if params[:s].present?
+      if object_set.respond_to?(:fulltext_search)
+        object_set = object_set.fulltext_search(params[:s])
+      else
+        object_set = object_set.db_search(params[:s])
+      end
+    end
+    if params[:type_string].present?
+      object_set = object_set.where(:type_string => params[:type_string])
+    end
+    object_set = allowed_objs(object_set.all, :read)
+    set_objects(object_set)
+
+    respond_to do |format|
+      format.html do
+        if params[:quick]
+          render :partial => 'quick'
+        end
+      end
+      format.json do
+        render :json => objects_as_json
+      end
+    end
+  end
+
   private
 
     def risky_attribute_params

@@ -23,6 +23,7 @@
 
     init: function() {
       var that = this;
+      var $form;
       this.$element
         .on('keypress', 'form', $.proxy(this.keypress_submit, this))
         .on('click.modal-form.close', '[data-dismiss="modal"]', $.proxy(this.hide, this))
@@ -32,17 +33,19 @@
         .on('loaded.modal-form', $.proxy(this.focus_first_input, this))
         .on('loaded.modal-form', function(ev) { 
           $("a[data-wysihtml5-command], a[data-wysihtml5-action]", ev.target).attr('tabindex', "-1"); 
-          $('a.preventdoubleclick', ev.target).one('click', oneclick);
+          $form = that.$form();
         })
         .on('delete-object', $.proxy(this.delete_object, this))
         ;
-      function oneclick() {
-        //$(this).trigger("click");
-        var that = this;
-        $(document).on("ajax:complete", function() { 
-          $(that).off(".noclick").one("click", oneclick); 
-        }).on("click.noclick", that.doNothing);    
-      }
+
+      $(document).on("ajax:complete", function(ev, xhr2) {
+        if(xhr2 === that.xhr) {
+          delete that.xhr;
+          $("[data-toggle=modal-submit]", $form).removeAttr("disabled").removeClass("disabled pending-ajax").each(function() {  $(this).text($(this).data("origText")); });
+          $form.data("submitpending", false);
+        }
+      });
+
     }
 
   , doNothing: function(e) {
@@ -79,22 +82,21 @@
     }
 
   , submit: function(e) {
-      var $form = this.$form(),
-      that = this,
-      origText = $("[data-toggle=modal-submit]", $form)
-        .addClass("disabled pending-ajax")
-        .attr("disabled", true)
-        .text();
+      var $form = this.$form()
+      , that = this;
+      
+      if(!$form.data("submitpending")) {
+        $("[data-toggle=modal-submit]", $form)
+          .each(function() { $(this).data("origText", $(this).text()); })
+          .addClass("disabled pending-ajax")
+          .attr("disabled", true);
 
-      $form.on("ajax:beforeSend", function(ev, _xhr){
-        that.xhr = _xhr;
-      }).on("ajax:complete", function(ev, xhr2) {
-        if(xhr2 === that.xhr) {
-          delete that.xhr;
-          $("[data-toggle=modal-submit]", ev.target).removeAttr("disabled").removeClass("disabled pending-ajax").text(origText);
-        }
-      });
-      $form.submit();
+        $form.data("submitpending", true)
+        .one("ajax:beforeSend", function(ev, _xhr){
+          that.xhr = _xhr;
+        })
+        .submit();
+      }
       if (e.type == 'click')
         e.preventDefault();
     }

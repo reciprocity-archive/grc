@@ -135,7 +135,7 @@ class RelationshipsController < BaseMappingsController
         else
           if ["source", "both"].include? vr[:related_model_endpoint].to_s
             if !relationship_type.nil?
-              relationship_title = "#{obj.class.to_s.titleize} #{relationship_type[:forward_phrase]} #{related_model.to_s.pluralize.titleize}"
+              relationship_title = "#{obj.class.to_s.titleize} #{relationship_type[:reverse_phrase]} #{related_model.to_s.pluralize.titleize}"
             else
               relationship_title = "#{vr[:relationship_type]}:source"
             end
@@ -153,14 +153,14 @@ class RelationshipsController < BaseMappingsController
             @results.push({
               :relationship_type_id => vr[:relationship_type],
               :relationship_title => relationship_title,
-              :relationship_description => relationship_type ? relationship_type[:forward_description] : "Unknown relationship type",
+              :relationship_description => relationship_type ? relationship_type[:reverse_description] : "Unknown relationship type",
               :edit_url => edit_url,
               :objects => rels.map {|rel| rel.source},
             })
           end
           if ["destination", "both"].include? vr[:related_model_endpoint].to_s
             if !relationship_type.nil?
-              relationship_title = "#{obj.class.to_s.titleize} #{relationship_type[:reverse_phrase]} #{related_model.to_s.pluralize.titleize}"
+              relationship_title = "#{obj.class.to_s.titleize} #{relationship_type[:forward_phrase]} #{related_model.to_s.pluralize.titleize}"
             else
               relationship_title = "#{vr[:relationship_type]}:dest"
             end
@@ -178,7 +178,7 @@ class RelationshipsController < BaseMappingsController
             @results.push({
               :relationship_type_id => vr[:relationship_type],
               :relationship_title => relationship_title,
-              :relationship_description => relationship_type ? relationship_type[:reverse_description] : "Unknown relationship type",
+              :relationship_description => relationship_type ? relationship_type[:forward_description] : "Unknown relationship type",
               :edit_url => edit_url,
               :objects => rels.map {|rel| rel.destination},
             })
@@ -258,20 +258,31 @@ class RelationshipsController < BaseMappingsController
 
     def list_form_context
       object = params[:object_type].constantize.find(params[:object_id])
+      # FIXME: Abstraction violation
+      related_model = params[:related_model]
+      related_model = "System" if related_model == "Process"
+      if params[:related_model] == 'RiskyAttribute'
+        option_new_url = url_for(:action => :new, :controller => related_model.underscore.pluralize, :force_type_string => true, :'risky_attribute[type_string]' => params[:object_type], :only_path => true)
+        options_url = url_for(:action => :index, :controller => related_model.underscore.pluralize, :type_string => params[:object_type], :format => :json, :only_path => true)
+      else
+        option_new_url = url_for(:action => :new, :controller => related_model.underscore.pluralize, :only_path => true)
+        options_url = url_for(:action => :index, :controller => related_model.underscore.pluralize, :format => :json, :only_path => true)
+      end
+
       {
         :object => object,
         :context => {
           :object_type => params[:object_type],
           :object_id => params[:object_id],
-          :related_type => params[:related_model],
+          :related_type => related_model,
           :related_side => params[:related_side],
           :relationship_type => params[:relationship_type],
           :title => "Link #{params[:related_model]} to this #{params[:object_type]}",
           :source_title => "Select #{params[:related_model]} to link",
           :source_search_text => "Search #{params[:related_model].pluralize}",
           :target_title => "#{params[:related_model].pluralize} linked to this #{params[:object_type]}",
-          :option_new_url => url_for(:action => :new, :controller => params[:related_model].underscore.pluralize, :only_path => true),
-          :options_url => url_for(:action => :index, :controller => params[:related_model].underscore.pluralize, :format => :json, :only_path => true),
+          :option_new_url => option_new_url,
+          :options_url => options_url,
           :selected_url => flow_relationships_path(list_form_params)
         }
       }
