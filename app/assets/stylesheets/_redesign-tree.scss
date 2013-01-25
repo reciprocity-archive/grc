@@ -1,0 +1,12 @@
+// widget tree structure
+
+ul.tree {
+  @include reset-list();
+  li.main {
+    border-bottom:1px solid $lightGray;
+    line-height:28px;
+    &:last-child {
+      border-bottom:none;
+    }
+  }
+}

@@ -33,8 +33,15 @@
           %a{:href => "#icons"}
             %i.icon-chevron-right
             Icons
+
+        %li
+          %a{:href => "#list"}
+            %i.icon-chevron-right
+            List
+
     
     .span9.styleguide-content
+
       %section#headers.widget
         %section.header
           %h2
@@ -165,6 +172,30 @@
           %p
             <span class="label label-info">Note!</span>
             As you can see on real example there is green button surrounding icons. That is just for example purpose so you can see white icons also.
+
+      %section#list.widget
+        %section.header
+          %h2
+            Object Tree List
+        %section.content
+          
+          %ul.tree
+            %li.main
+              .row-fluid
+                .span12
+                  .expander
+                  Aloha
+            %li.main
+              .row-fluid
+                .span12
+                  .expander
+                  Aloha 2
+            %li.main
+              .row-fluid
+                .span12
+                  .expander
+                  Aloha 3
+
         
 .container-fluid
   .row-fluid
