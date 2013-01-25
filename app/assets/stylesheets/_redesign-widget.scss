@@ -1,0 +1,131 @@
+
+// widgets styles
+.widget {
+  border:1px solid $widgetBorder;
+  margin-bottom: 20px;
+  background:$white;
+  @include transition(box-shadow 0.2s,border-color 0.2s);
+  @include border-radius($topBorderRadius);
+  .header {
+    background:$widgetHeader;
+    @include transition(background-color 0.2s);
+    @include border-radius($topBorderRadius);
+    color:$white;
+    padding:5px 10px;
+    h2 {
+      @include transition(color 0.2s);
+      font-size: 15px;
+      font-weight:normal;
+      line-height: 24px;
+      color: $widgetTitle;
+      margin-right: 0;
+      display: inline;
+      @include text-shadow(0 1px 1px $white);
+    }
+    .btn-mini {
+      i {
+        @include opacity(0.4);
+      }
+      &:hover {
+        i {
+          @include opacity(1);
+        }
+      }
+    }
+  }
+  .filter {
+    padding:10px;
+    background: $widgetFooteBgnd;
+    .form-inline {
+      margin-bottom: 0;
+    }
+    input {
+      margin-bottom: 0;
+    }
+  }
+  .content {
+    padding:5px 10px;
+    background:$white;
+    max-height: 300px;
+    overflow: hidden;
+    overflow-y: auto;
+  }
+  .footer {
+    background:$widgetFooteBgnd;
+    color:$headerTitle;
+    padding:5px 10px;
+    height: 20px;
+    p {
+      margin: 0;
+      line-height: 20px;
+    }
+  }
+  .items {
+    @include reset-list();
+    h3 {
+      font-weight:normal;
+      font-size:16px;
+    }
+    li.main {
+      h4 {
+        font-size: 12px;
+        color:#666;
+      }
+      a {
+        color: $headerTitle;
+        text-decoration: none;
+      }
+      padding:10px 0;
+      border-bottom: 1px solid $lightGray;
+      .progress {
+        margin: 0;
+      }
+      &:hover {
+        @include background-image(linear-gradient(left, $white, $lightGray, $white));
+        border-bottom: 1px solid darken($lightGray,10%);
+        h3 {
+          color:#369;
+        }
+      }
+    }
+  }
+  .tabbable {
+    position: relative;
+    .expand-controll {
+      position: absolute;
+      top: 5px;
+      right: 0;
+      a {
+        display: inline-block;
+        cursor: pointer;
+        text-decoration: none;
+        margin-left: 10px;
+        font-size: 11px;
+        line-height: 16px;
+        color: $gray;
+        @include transition(color 0.2s ease-in-out);
+        i {
+          @include opacity(0.4);
+          @include transition(opacity 0.2s ease-in-out);
+        }
+        &:hover {
+          color: $black;
+          i {
+            @include opacity(1);
+          }
+        }
+      }
+    }
+  }
+  &:hover {
+    @include box-shadow(0 0 2px $gray);
+    border-color:darken($widgetBorder, 20%);
+    .header {
+      background-color:darken($widgetHeader, 5%);
+      h2 {
+        color:#111;
+      }
+    }
+  }
+}
+
