@@ -17,7 +17,15 @@
 -content_for :page_help, 'pbc_list'
 
 -content_for :subheader_extras do
-  -#%h1#pageType.pull-right.highlighted PBC List
+  %ul.actions.pull-right
+    %li
+      %a{ :href => import_flow_pbc_list_path(@pbc_list) }
+        %i.grcicon-imp-exp
+        Import Requests
+    %li
+      %a{ :href => export_flow_pbc_list_path(@pbc_list), :'data-toggle' => 'modal-ajax' }
+        %i.grcicon-export
+        Export Requests
 
 .container-fluid
   .row-fluid.fluid-layout

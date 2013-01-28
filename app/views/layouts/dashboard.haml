@@ -24,7 +24,7 @@
 
   %body{ :class => "#{has_feature?(:BETA) ? 'BETA' : ''}", :'data-target' => '.bs-docs-sidebar', :'data-spy' => 'scroll'}
 
-    %header.header
+    %header.header.main
       .header-bar
         .container-fluid
           .row-fluid
@@ -156,7 +156,7 @@
                         %i.grcicon-normal
                         Narrow
             
-      .header-content
+      .header-content{:'data-spy' => 'affix', :'data-offset-top' => '25'}
         .container-fluid
           .row-fluid
             .span6
@@ -173,7 +173,7 @@
               
     =yield :subheader_plus
 
-    %section.content
+    %section.content{:'data-spy' => 'affix', :'data-offset-top' => '25'}
       .flash!=[:error, :warning, :notice].map { |type| content_tag(:div, flash[type], :class => type) if flash[type] }.join
       =yield
 

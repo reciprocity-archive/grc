@@ -8,19 +8,20 @@
 -content_for :page_help, 'admin'
 
 -content_for :subheader_extras do
-  .btn-group.pull-right
-    %a.btn.btn-add.dropdown-toggle{ :'data-toggle' => 'dropdown' }
-      %i.grcicon-add-new
-      New Object
-    %ul.dropdown-menu
-      %li.divider
-      %li.title Create New ...
-      %li
-        %a{ :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :href => new_flow_account_path }
-          Account
-      %li
-        %a{ :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :href => new_flow_person_path }
-          Person
+  %ul.actions.pull-right
+    %li.btn-group
+      %a.dropdown-toggle{:href => '#', :'data-toggle' => 'dropdown' }
+        %i.grcicon-add-new-black
+        New Object
+      %ul.dropdown-menu
+        %li.divider
+        %li.title Create New ...
+        %li
+          %a{ :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :href => new_flow_account_path }
+            Account
+        %li
+          %a{ :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :href => new_flow_person_path }
+            Person
 
 .container-fluid
   .row-fluid

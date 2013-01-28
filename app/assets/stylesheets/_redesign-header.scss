@@ -1,3 +1,6 @@
+.header.main {
+  height: 60px;
+}
 .header-bar {
   background: $headerBgnd;
   position: fixed;
@@ -172,6 +175,25 @@
 .header-content {
   height:60px;
   margin-top: 30px;
+  background: $white;
+  z-index: 1001;
+  &.affix {
+    position: fixed;
+    top: 30px;
+    margin-top: 0px;
+    height: 36px;
+    @include box-shadow(0 3px 6px -1px rgba(0, 0, 0, 0.2));
+    .breadcrumbs {
+      display: none;
+    }
+    h1 {
+      line-height: 32px;
+      font-size:20px;
+    }
+    .actions {
+      margin-top: 10px;
+    }
+  }
   .btn-group {
     margin-top: 27px;
   }
@@ -233,6 +255,14 @@
               color: $white;
               @include transition(none);
             }
+          }
+        }
+      }
+      &:last-child {
+        &.btn-group {
+          .dropdown-menu {
+            right: 0;
+            left: auto;
           }
         }
       }

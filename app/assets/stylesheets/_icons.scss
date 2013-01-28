@@ -226,6 +226,14 @@
     background-position:-64px -48px;
   }
 }
+.grcicon-export {
+  @include new-icons();
+  background-position:-64px -64px;
+}
+.grcicon-export-white {
+  @include new-icons();
+  background-position:-64px -80px;
+}
 .grcicon-reg-map {
   @include new-icons();
   background-position:-32px -32px;
