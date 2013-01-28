@@ -22,14 +22,21 @@
       @include text-shadow(0 1px 1px $white);
     }
     .btn-mini {
+      margin-left:6px;
+      padding-left:2px;
+      padding-right:2px;
       i {
         @include opacity(0.4);
       }
       &:hover {
+        border-color:$white;
         i {
           @include opacity(1);
         }
       }
+    }
+    a.help {
+     margin-top:10px; 
     }
   }
   .filter {

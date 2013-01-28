@@ -6,12 +6,12 @@
   %header.header
     %h2
       =yield_content!(:widget_title)
-    %a.pull-right{:href => "#", :title => "Help - What is this?"}
-      /%i.grcicon-x-grey
       -help_path = yield_content!(:widget_help)
-      -if !help_path.blank?
-        %a.pull-right.btn.btn-mini{:href => "/help/#{help_path}", :'data-toggle' => 'modal-ajax', :title => "Help - What is this?"}
-          %i.grcicon-help-black
+    %a.remove{:href => "#", :class => "btn btn-mini pull-right", :rel => "tooltip", :title => "Remove widget", :'data-placement'=>"left"}
+      %i.grcicon-x-grey
+    -if !help_path.blank?
+      %a.pull-right.btn.btn-mini{:href => "/help/#{help_path}", :'data-toggle' => 'modal-ajax', :rel => "tooltip", :title => "Help - What is this?", :'data-placement'=>"left"}
+        %i.grcicon-help-black      
           
   =yield_content!(:widget_buttons)
       
