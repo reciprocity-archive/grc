@@ -355,4 +355,18 @@
     background-position:-16px -64px;
     @include opacity(1);
   }
+  .widget & {
+    margin-top:4px;
+    margin-right:8px;
+    @include border-radius();
+    background-color:$white;
+    background-position:-112px -32px;
+    &.active {
+      @include opacity(0.5);
+      background-position:-80px -32px;
+    }
+    &:hover {
+      @include opacity(1);
+    }
+  }
 }
