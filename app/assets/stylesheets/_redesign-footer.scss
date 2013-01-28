@@ -16,8 +16,15 @@
       text-align: left;
       a {
         line-height: 40px;
-        color:$headerTitle;
+        color: $link;
         font-size: 12px;
+        text-decoration: underline;
+        &:hover {
+          text-decoration: none;
+        }
+        i {
+          margin: 10px 4px 0 0;
+        }
       }
     }
   }
