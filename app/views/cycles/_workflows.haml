@@ -2,10 +2,14 @@
   Workflows
 
 -content_for :widget_buttons do
-  %a.widgettextbtn{ :href => '#' }
-    All Owners
-  %a.widgettextbtn{ :href => '#' }
-    All States
-  %a.widgettextbtn{ :href => '#' }
-    All Types
+  .filter
+    .row-fluid
+      .span12
+        .pull-right
+          %a.btn.btn-info{ :href => '#' }
+            All Owners
+          %a.btn.btn-info{ :href => '#' }
+            All States
+          %a.btn.btn-info{ :href => '#' }
+            All Types
 

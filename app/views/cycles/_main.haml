@@ -2,7 +2,10 @@
   Audit Status
 
 -content_for :widget_buttons do
-  %input.widgetsearch{ :type => 'text', :placeholder => 'Search' }
+  .filter
+    .row-fluid
+      .span12
+        %input.widgetsearch{ :type => 'text', :placeholder => 'Search' }
 
 .nav.nav-tabs.nav-stacked
   %p

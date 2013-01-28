@@ -2,12 +2,16 @@
   %section.header
     %h2
       Impact / Scope
+    %a.pull-right.btn.btn-mini{"data-toggle" => "modal", :href => "#comingsoonModal"}
+      %i.grcicon-help-black
     %nav
-      %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
-        %i.grcicon-questionmark-grey
-      %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
       %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#impactScopeInfo"}
         %i.grcicon-enlarge-grey
+  .filter
+    .row-fluid
+      .span12
+        %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}
+        
   %section.content.information
     / TABS
     .row-fluid

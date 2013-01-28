@@ -19,9 +19,10 @@
 -content_for :subheader_extras do
   -#%h1#pageType.pull-right.highlighted PBC List
 
-.row-fluid.fluid-layout
-  .span12
-    .widget.governance
-      =render :partial => "main",
-              :locals => { :pbc_list => instance }
+.container-fluid
+  .row-fluid.fluid-layout
+    .span12
+      .widget.governance
+        =render :partial => "main",
+                :locals => { :pbc_list => instance }
 
