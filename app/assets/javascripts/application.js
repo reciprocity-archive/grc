@@ -123,7 +123,21 @@ jQuery(document).ready(function($) {
     e.preventDefault();
     var $this = $(this),
         $widget = $this.closest(".widget");
-    $widget.fadeOut();
+    $widget.fadeOut();  
+  });
+
+  // Show/hide widget content
+  $('body').on('click', '.widget .showhide', function(e) {
+    var $this = $(this),
+        $content = $this.closest(".widget").find(".content")
+    
+    if($this.hasClass("active")) {
+      $content.slideUp();
+      $this.removeClass("active");
+    } else {
+      $content.slideDown();
+      $this.addClass("active");
+    }
     
   });
 
