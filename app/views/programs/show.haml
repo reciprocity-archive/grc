@@ -55,15 +55,15 @@
 
 .container-fluid
   .row-fluid
-    .span8
-      =render :partial => 'programs/controls',
-              :layout => 'layouts/widget_box',
-              :locals => { :program => @program }
-    .span4
+    .span3
       =render :partial => 'programs/show',
               :layout => 'layouts/widget_box',
               :locals => { :program => @program, :widget_class => 'secondary'}
-  
+    .span6
+      =render :partial => 'programs/controls',
+              :layout => 'layouts/widget_box',
+              :locals => { :program => @program }
+    .span3
       -if (@program.cycles.length != 0)  
         =render :partial => 'programs/audit_cycles',
                 :layout => 'layouts/widget_box',
