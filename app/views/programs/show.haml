@@ -62,7 +62,7 @@
     .span4
       =render :partial => 'programs/show',
               :layout => 'layouts/widget_box',
-              :locals => { :program => @program }
+              :locals => { :program => @program, :widget_class => 'secondary'}
   
       -if (@program.cycles.length != 0)  
         =render :partial => 'programs/audit_cycles',

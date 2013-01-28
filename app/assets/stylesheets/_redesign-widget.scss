@@ -40,7 +40,7 @@
     }
   }
   .filter {
-    padding:10px;
+    padding:7px 10px;
     background: $widgetFooteBgnd;
     .form-inline {
       margin-bottom: 0;
@@ -52,7 +52,7 @@
   .content {
     padding:5px 10px;
     background:$white;
-    max-height: 300px;
+    //max-height: 300px;
     overflow: hidden;
     overflow-y: auto;
   }
@@ -145,6 +145,15 @@
       a {
         display: block;
         color: $black;
+      }
+    }
+  }
+  &.secondary {
+    border-color:$white;
+    .header {
+      background:$white;
+      h2 {
+        color:$infoWidgetHeader;
       }
     }
   }
