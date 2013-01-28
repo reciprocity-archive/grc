@@ -25,15 +25,14 @@
 
 .container-fluid
   .row-fluid
+    .span3
+      =render :partial => 'controls/show',
+              :layout => 'layouts/widget_box',
+              :locals => { :control => @control, :widget_class => 'secondary' }
     .span8
       =render :partial => 'controls/main',
               :layout => 'layouts/widget_box',
               :locals => { :control => @control }
-  
-    .span4
-      =render :partial => 'controls/show',
-              :layout => 'layouts/widget_box',
-              :locals => { :control => @control }
-  
       -if has_feature? :BETA
         =render :partial => 'shared/impact_scope'
+              
