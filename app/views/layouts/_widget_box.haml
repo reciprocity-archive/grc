@@ -4,6 +4,7 @@
 
 %section{ :class => "widget #{widget_class}"}
   %header.header
+    .showhide.active{:rel => "tooltip", :title => "open/close widget", :'data-placement' => "right"}
     %h2
       =yield_content!(:widget_title)
       -help_path = yield_content!(:widget_help)

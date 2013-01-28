@@ -149,9 +149,10 @@
     }
   }
   &.secondary {
+    background:transparent;
     border-color:$white;
     .header {
-      background:$white;
+      background:transparent;
       h2 {
         color:$infoWidgetHeader;
       }
