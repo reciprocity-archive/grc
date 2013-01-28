@@ -6,12 +6,18 @@
     %li
       AUDIT
   %h1
+    %span
+      Audit Manager:
     #{@cycle.title}
 
 -content_for :page_help, 'cycle'
 
 -content_for :subheader_extras do
-  %h1.fltrt.highlighted#pageType Audit Manager
+  %ul.actions.pull-right
+    %li
+      %a.widgetbtn{:href => edit_flow_cycle_path(@cycle), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :title => 'Edit Audit Cycle'}
+        %i.grcicon-edit-new
+        Edit Audit
 
 .container-fluid
   .row-fluid
