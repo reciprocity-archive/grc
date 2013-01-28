@@ -1,16 +1,18 @@
 -content_for :widget_title do
   Audit Info
 
--content_for :widget_help, 'cycle_info'
+-content_for :widget_buttons do
+  -if has_feature?(:BETA)
+    .filter
+      .row-fluid
+        .span12
+          .pull-right
+            %a.btn.btn-warning.actionbutton
+              Audit Dashboard
+            %a.btn.btn-warning.actionbutton
+              Invite Auditors
 
--if has_feature?(:BETA)
-  .row-fluid
-    .span6
-      %a.span12.btn.btn-warning.actionbutton
-        Audit Dashboard
-    .span6
-      %a.span12.btn.btn-warning.actionbutton
-        Invite Auditors
+-content_for :widget_help, 'cycle_info'
 
 .row-fluid
   .span6

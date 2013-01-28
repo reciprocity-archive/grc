@@ -31,7 +31,11 @@
 
 .container-fluid
   .row-fluid
-    .span8
+    .span3
+      =render :partial => "info",
+              :layout => 'layouts/widget_box',
+              :locals => { model_name.to_sym => instance, :widget_class => 'secondary' }
+    .span6
       =render :partial => "main",
               :layout => 'layouts/widget_box',
               :locals => { model_name.to_sym => instance }
@@ -40,11 +44,7 @@
               :layout => 'layouts/widget_box',
               :locals => { model_name.to_sym => instance }
   
-    .span4
-      =render :partial => "info",
-              :layout => 'layouts/widget_box',
-              :locals => { model_name.to_sym => instance }
-  
+    .span3
       =render :partial => "risky_attributes",
               :layout => 'layouts/widget_box',
               :locals => { model_name.to_sym => instance }

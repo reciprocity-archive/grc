@@ -29,7 +29,11 @@
 
 .container-fluid
   .row-fluid
-    .span8
+    .span3
+      =render :partial => "info",
+              :layout => 'layouts/widget_box',
+              :locals => { model_name.to_sym => instance }
+    .span6
       -#=render :partial => "shared/graph",
               :layout => 'layouts/widget_box',
               :locals => { model_name.to_sym => instance,
@@ -42,16 +46,13 @@
       =render :partial => "risks",
               :layout => 'layouts/widget_box',
               :locals => { model_name.to_sym => instance }
-              
-  
-    .span4
+                
       -if has_feature? :BETA
         =render :partial => "actions",
               :layout => 'layouts/widget_box',
-              :locals => { model_name.to_sym => instance }
-      =render :partial => "info",
-              :layout => 'layouts/widget_box',
-              :locals => { model_name.to_sym => instance }
+              :locals => { model_name.to_sym => instance }        
+              
+    .span3
       =render :partial => 'shared/related',
               :layout => 'layouts/widget_box',
               :locals => { :instance => instance }
