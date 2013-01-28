@@ -2,13 +2,6 @@
  
 -content_for :page_help, 'dashboard'
 
--content_for :header_buttons do
-  -if current_user.has_role?(:superuser)
-    %li
-      %a{:href => admin_dash_path}
-        %i.grcicon-admin
-        Admin Area
-
 -content_for :header do
   %ul.breadcrumbs
     %li
