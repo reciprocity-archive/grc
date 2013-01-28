@@ -191,11 +191,9 @@
                 -path += path.include?('?') ? '&' : '?'
                 -if has_feature? :BETA
                   %a.demo-hide{ :href => "#{path}BETA=0" }
-                    %i.grcicon-demo-stop
                     Hide Demo
                 -else
                   %a.demo-show{ :href => "#{path}BETA=1" }
-                    %i.grcicon-demo-black
                     Show Demo
           .span4
             %p
