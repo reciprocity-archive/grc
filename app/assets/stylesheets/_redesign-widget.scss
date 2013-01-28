@@ -22,6 +22,7 @@
       @include text-shadow(0 1px 1px $white);
     }
     .btn-mini {
+      margin-left:6px;
       i {
         @include opacity(0.4);
       }
@@ -30,6 +31,9 @@
           @include opacity(1);
         }
       }
+    }
+    a.help {
+     margin-top:10px; 
     }
   }
   .filter {
