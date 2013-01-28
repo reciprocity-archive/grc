@@ -25,7 +25,11 @@
 
 .container-fluid
   .row-fluid
-    .span8
+    .span3
+      =render :partial => 'systems/show',
+              :layout => 'layouts/widget_box',
+              :locals => { :system => @system, :widget_class => 'secondary' }
+    .span6
       =render :partial => 'systems/sub_systems',
               :layout => 'layouts/widget_box',
               :locals => { :system => @system }
@@ -41,11 +45,7 @@
                   :locals => { :system => @system }
   
   
-    .span4
-      =render :partial => 'systems/show',
-              :layout => 'layouts/widget_box',
-              :locals => { :system => @system }
-  
+    .span3
       =render :partial => 'shared/related',
               :layout => 'layouts/widget_box',
               :locals => { :instance => @system }

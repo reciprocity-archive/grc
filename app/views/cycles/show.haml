@@ -21,38 +21,30 @@
 
 .container-fluid
   .row-fluid
-    .span8
+    .span3
+      =render :partial => 'cycles/info',
+              :layout => 'layouts/widget_box',
+              :locals => { :cycle => @cycle, :widget_class => 'secondary' }
+                
+      =render :partial => 'cycles/pbclist',
+              :layout => 'layouts/widget_box',
+              :locals => { :cycle => @cycle, :widget_class => 'secondary' }        
+              
+    .span9
       =render :partial => 'cycles/main',
               :layout => 'layouts/widget_box',
               :locals => { :cycle => @cycle }
 
       -if has_feature?(:BETA)
-        .singleColumn
-          =render :partial => 'cycles/scope',
-                  :layout => 'layouts/widget_box',
-                  :locals => { :cycle => @cycle }
+        =render :partial => 'cycles/scope',
+                :layout => 'layouts/widget_box',
+                :locals => { :cycle => @cycle }
 
-      .singleColumn
         =render :partial => 'cycles/workflows',
                 :layout => 'layouts/widget_box',
                 :locals => { :cycle => @cycle }
-  
-    .span4
-      -if has_feature?(:BETA)
-        =render :partial => 'cycles/pbcimport',
-                :layout => 'layouts/widget_box',
-                :locals => { :cycle => @cycle }
-  
-      =render :partial => 'cycles/pbclist',
-              :layout => 'layouts/widget_box',
-              :locals => { :cycle => @cycle }
-  
-      =render :partial => 'cycles/info',
-              :layout => 'layouts/widget_box',
-              :locals => { :cycle => @cycle }
-  
-      -if has_feature?(:BETA)
+                
         =render :partial => 'cycles/schedule',
                 :layout => 'layouts/widget_box',
                 :locals => { :cycle => @cycle }
-  
+                
