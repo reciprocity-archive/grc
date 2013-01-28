@@ -149,12 +149,15 @@
     }
   }
   &.secondary {
-    background:transparent;
+    background:$white;
     border-color:$white;
     .header {
-      background:transparent;
+      background:$white;
       h2 {
         color:$infoWidgetHeader;
+      }
+      .showhide {
+        display:none;
       }
     }
   }
