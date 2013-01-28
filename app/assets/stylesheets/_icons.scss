@@ -81,6 +81,14 @@
     background-position:-80px -16px;
   }
 }
+.grcicon-demo-stop {
+  @include new-icons();
+  background-position:-128px -32px;
+}
+.grcicon-demo-stop-white {
+  @include new-icons();
+  background-position:-128px -48px;
+}
 .grcicon-desktop {
   @include new-icons();
   background-position:-32px -16px;
