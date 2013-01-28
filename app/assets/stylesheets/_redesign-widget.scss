@@ -10,7 +10,7 @@
     background:$widgetHeader;
     @include transition(background-color 0.2s);
     color:$white;
-    padding:5px;
+    padding:5px 10px;
     h2 {
       @include transition(color 0.2s);
       font-size: 15px;
@@ -40,7 +40,7 @@
     }
   }
   .filter {
-    padding:7px 5px;
+    padding:7px 10px;
     background: $widgetFooteBgnd;
     .form-inline {
       margin-bottom: 0;
@@ -50,7 +50,7 @@
     }
   }
   .content {
-    padding:5px;
+    padding:5px 10px;
     background:$white;
     //max-height: 300px;
     overflow: hidden;
@@ -148,7 +148,7 @@
       }
     }
   }
-  &.widget-info {
+  &.secondary {
     border-color:$white;
     .header {
       background:$white;
