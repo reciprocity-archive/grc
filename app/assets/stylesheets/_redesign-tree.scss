@@ -8,6 +8,10 @@ ul.tree {
     cursor:pointer;
     line-height:32px;
     padding:0 6px;
+    span.secondary {
+      color:$gray;
+      font-size:11px;
+    }
     &:last-child {
       border-bottom:none;
     }

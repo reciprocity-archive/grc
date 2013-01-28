@@ -42,8 +42,6 @@
       =render :partial => "risks",
               :layout => 'layouts/widget_box',
               :locals => { model_name.to_sym => instance }
-              
-  
     .span4
       -if has_feature? :BETA
         =render :partial => "actions",

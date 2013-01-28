@@ -119,7 +119,7 @@ jQuery(document).ready(function($) {
   });
 
   // Remove widgets
-  $('body').on('click', '.widget .remove', function(e) {
+  $('body').on('click', '.widget .header .remove', function(e) {
     e.preventDefault();
     var $this = $(this),
         $widget = $this.closest(".widget");

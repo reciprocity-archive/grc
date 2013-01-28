@@ -246,6 +246,16 @@
   background-position:-80px -48px;
 }
 
+.grcicon-goto {
+  @include new-icons();
+  background-position:-144px -32px;
+}
+.grcicon-goto-white {
+  @include new-icons();
+  background-position:-144px -48px;
+}
+
+
 
 .grcicon-sortUp             { background-position:-22px -2px; }
 .grcicon-sortDown           { background-position:-22px -22px; }
@@ -363,7 +373,7 @@
     background-position:-16px -64px;
     @include opacity(1);
   }
-  .widget & {
+  .widget .header & {
     margin-top:4px;
     margin-right:8px;
     @include border-radius();
