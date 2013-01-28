@@ -24,23 +24,64 @@
       font-weight:bold;
       text-transform:uppercase;
       text-shadow: 0 1px 1px $black;
+      &.add-object {
+        .btn-group {
+          .dropdown-toggle {
+            @include box-shadow(none);
+            @include border-radius(0);
+            cursor: pointer;
+          }
+        }
+      }
       .dropdown-menu {
-        @include reset-list();
-        @include border-radius(0);
-        min-width:100px;
-        float: none;
-        background: $black;
+        margin-top: 6px;
+        text-transform: none;
         li {
           float:none;
           clear: both;
+          text-transform: none;
+          font-size: 12px;
+          &.title {
+            padding: 0 7px 6px 7px;
+            font-weight: bold;
+            color: $black;
+            text-shadow: none;
+            line-height:20px;
+          }
           a {
             display:block;
-            color:$menuLink;
-            line-height:30px;
-            padding: 0 10px;
+            line-height:20px;
+            padding: 0 15px;
+            background: none;
+            text-shadow: none;
+            color: $black;
             &:hover {
-              background: $black;
+              background: $blue;
               color:$white;
+              text-shadow: none;
+            }
+          }
+        }
+      }
+      &.dropdown-black {
+        .dropdown-menu {
+          @include reset-list();
+          @include border-radius(0);
+          min-width:100px;
+          float: none;
+          background: $black;
+          li {
+            float:none;
+            clear: both;
+            a {
+              display:block;
+              color:$menuLink;
+              line-height:30px;
+              padding: 0 10px;
+              &:hover {
+                background: $black;
+                color:$white;
+              }
             }
           }
         }
@@ -48,6 +89,9 @@
       i {
         margin: 7px 6px 0 0;
         @include opacity(0.6);
+        &.grcicon-carot-white {
+          margin-right: 0;
+        }
       }
       a {
         display:block;
@@ -86,21 +130,6 @@
             i {
               @include opacity(0.8);
             }
-          }
-        }
-      }
-      &.demo {
-        margin-left: 15px;
-        a {
-          background:$screenBgnd;
-          &:hover {
-            background: $black;
-          }
-          &.demo-hide {
-            color:$demoHide;
-          }
-          &.demo-show {
-            color:$demoShow;
           }
         }
       }
@@ -152,6 +181,9 @@
       padding: 0 7px 6px 7px;
       font-weight: bold;
     }
+  }
+  .demo {
+    margin-top: 27px;
   }
   .actions {
     @include clearfix();

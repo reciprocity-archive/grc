@@ -47,21 +47,69 @@
                       %a#grcbutton-risk{:href => "#"} Risk
                     %li.compliance
                       %a#grcbuttonStable Compliance
-                %li.demo
-                  -if controller_name == 'design'
-                    -path = programs_dash_path
-                  -else
-                    -path = request.fullpath                
-                  -path = path.gsub(/BETA=[^&]*&?/, '').sub(/[?&]$/, '')
-                  -path += path.include?('?') ? '&' : '?'
-                  -if has_feature? :BETA
-                    %a.demo-hide{ :href => "#{path}BETA=0" }
-                      %i.grcicon-demo
-                      Hide Demo
-                  -else
-                    %a.demo-show{ :href => "#{path}BETA=1" }
-                      %i.grcicon-demo
-                      Show Demo
+                %li.add-object
+                  .btn-group
+                    %a.dropdown-toggle{ :'data-toggle' => 'dropdown' }
+                      %i.grcicon-add-new
+                      Object
+                      %i.grcicon-carot-white
+                    %ul.dropdown-menu
+                      %li.divider
+                      %li.title Create New ...
+                      %li
+                        %a{ :href => new_flow_program_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
+                          Program or Policy
+                      %li
+                        %a{ :href => new_flow_risky_attribute_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
+                          Risky Attribute
+                      %li
+                        %a{ :href => new_flow_risk_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
+                          Risk
+                      %li
+                        %a{ :href => new_flow_control_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
+                          Control
+                      %li.divider
+                      %li
+                        %a{ :href => new_flow_system_path(:'system[is_biz_process]' => 1), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
+                          Business Process
+                      %li
+                        %a{ :href => new_flow_system_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
+                          System
+                      %li.divider
+                      %li
+                        %a{ :href => new_flow_org_group_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
+                          Org Group
+                      %li
+                        %a{ :href => new_flow_product_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
+                          Product
+                      %li
+                        %a{ :href => new_flow_project_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
+                          Project
+                      %li
+                        %a{ :href => new_flow_facility_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
+                          Facility
+                      %li
+                        %a{ :href => new_flow_market_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
+                          Market
+                      %li
+                        %a{ :href => new_flow_data_asset_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
+                          Data Asset
+                      -if has_feature? :BETA
+                        %li.demoItem
+                          %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
+                            Person
+                        %li.demoItem
+                          %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
+                            Reference
+                        %li.demoItem
+                          %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
+                            Business Object
+                        %li.demoItem
+                          %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
+                            Threat
+                        %li.demoItem
+                          %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
+                            Vulnerability
 
                   %li{:class => "#{controller.controller_name != 'programs_dash' ? '' : 'active'}"}
                     %a{:href => programs_dash_path}
@@ -73,21 +121,24 @@
                       %a{:href => "/help/#{help_path}", :'data-toggle' => 'modal-ajax'}
                         %i.grcicon-help
                         Help
-                  =yield :header_buttons
-                %li.user.dropdown
+                %li.user.dropdown.dropdown-black
                   %a{:href => "#", :class => "dropdown-toggle", :'data-toggle' =>"dropdown", :role =>"button"}
                     %i.grcicon-user
                     %strong=current_user.email
+                    %i.grcicon-carot-white
                   %ul.dropdown-menu{:'aria-labelledby' => 'drop1', :role =>"menu"}
                     %li
                       %a{:href =>logout_path, :tabindex =>"-1"}
                         %i.grcicon-logout
                         Logout
-                %li.screen.dropdown
+                    %li
+                      =yield :header_buttons
+                %li.screen.dropdown.dropdown-black
                   %a{:href => "#", :class => "dropdown-toggle screen-size", :'data-toggle' =>"dropdown", :role =>"button"}
                     %i.grcicon-desktop
                     %span
                       100%
+                    %i.grcicon-carot-white
                   %ul.dropdown-menu{:'aria-labelledby' => 'drop2', :role =>"menu"}
                     %li.full-view
                       %a{:href =>'#', :tabindex =>"-1"}
@@ -126,7 +177,22 @@
     %section.footer
       .container-fluid
         .row-fluid
-          %span12
+          .span8
+            %ul.bottom-nav
+              %li
+                -if controller_name == 'design'
+                  -path = programs_dash_path
+                -else
+                  -path = request.fullpath                
+                -path = path.gsub(/BETA=[^&]*&?/, '').sub(/[?&]$/, '')
+                -path += path.include?('?') ? '&' : '?'
+                -if has_feature? :BETA
+                  %a.demo-hide{ :href => "#{path}BETA=0" }
+                    Hide Demo
+                -else
+                  %a.demo-show{ :href => "#{path}BETA=1" }
+                    Show Demo
+          .span4
             %p
               =CMS_CONFIG['COMPANY']
               Confidential.
