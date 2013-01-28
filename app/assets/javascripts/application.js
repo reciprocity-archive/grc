@@ -118,6 +118,15 @@ jQuery(document).ready(function($) {
     }
   });
 
+  // Remove widgets
+  $('body').on('click', '.widget .remove', function(e) {
+    e.preventDefault();
+    var $this = $(this),
+        $widget = $this.closest(".widget");
+    $widget.fadeOut();
+    
+  });
+
   // Close other popovers when one is shown
   $('body').on('show.popover', function(e) {
     $('[data-sticky_popover]').each(function() {
