@@ -229,6 +229,14 @@
   @include new-icons();
   background-position:-32px -48px;
 }
+.grcicon-carot {
+  @include new-icons();
+  background-position:-80px -32px;
+}
+.grcicon-carot-white {
+  @include new-icons();
+  background-position:-80px -48px;
+}
 
 
 .grcicon-sortUp             { background-position:-22px -2px; }

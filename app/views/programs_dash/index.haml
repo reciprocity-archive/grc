@@ -16,68 +16,7 @@
   %h1
     Dashboard
 
--content_for :subheader_extras do
-  .btn-group.pull-right
-    %a.btn.btn-add.dropdown-toggle{ :'data-toggle' => 'dropdown' }
-      %i.grcicon-add-new
-      Add Business Object
-    %ul.dropdown-menu
-      %li.divider
-      %li.title Create New ...
-      %li
-        %a{ :href => new_flow_program_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-          Program or Policy
-      %li
-        %a{ :href => new_flow_risky_attribute_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-          Risky Attribute
-      %li
-        %a{ :href => new_flow_risk_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-          Risk
-      %li
-        %a{ :href => new_flow_control_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-          Control
-      %li.divider
-      %li
-        %a{ :href => new_flow_system_path(:'system[is_biz_process]' => 1), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-          Business Process
-      %li
-        %a{ :href => new_flow_system_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-          System
-      %li.divider
-      %li
-        %a{ :href => new_flow_org_group_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-          Org Group
-      %li
-        %a{ :href => new_flow_product_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-          Product
-      %li
-        %a{ :href => new_flow_project_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-          Project
-      %li
-        %a{ :href => new_flow_facility_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-          Facility
-      %li
-        %a{ :href => new_flow_market_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-          Market
-      %li
-        %a{ :href => new_flow_data_asset_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-          Data Asset
-      -if has_feature? :BETA
-        %li.demoItem
-          %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-            Person
-        %li.demoItem
-          %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-            Reference
-        %li.demoItem
-          %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-            Business Object
-        %li.demoItem
-          %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-            Threat
-        %li.demoItem
-          %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-            Vulnerability
+-#-content_for :subheader_extras do
 
 .container-fluid
   .row-fluid
