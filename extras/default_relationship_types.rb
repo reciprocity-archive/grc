@@ -6,136 +6,136 @@ module DefaultRelationshipTypes
       :target_type => "Process",
       :forward_phrase => "has",
       :reverse_phrase => "is a process for",
-      :forward_description => "This data asset relies upon the following processes",
-      :reverse_description => "This process supports the following data assets"
+      :forward_description => "This data asset relies upon the following processes.",
+      :reverse_description => "This process supports the following data assets."
     },
     :data_asset_has_risky_attribute => {
       :source_type => "DataAsset",
       :target_type => "RiskyAttribute",
       :forward_phrase => "has",
       :reverse_phrase => "is an attribute of",
-      :forward_description => "This data asset has the following attributes",
-      :reverse_description => "This risky attribute is an attribute of the following data assets"
+      :forward_description => "This data asset has the following risky attributes.",
+      :reverse_description => "This risky attribute is an attribute of the following data assets."
     },
     :data_asset_relies_upon_data_asset => {
       :source_type => "DataAsset",
       :target_type => "DataAsset",
       :forward_phrase => "relies upon",
       :reverse_phrase => "supports",
-      :forward_description => "This data asset supports the following data assets",
-      :reverse_description => "This data assets relies upon the following data assets"
+      :forward_description => "This data asset relies upon the following data assets.",
+      :reverse_description => "This data asset supports the following data assets."
     },
     :data_asset_relies_upon_facility => {
       :source_type => "DataAsset",
       :target_type => "Facility",
       :forward_phrase => "relies upon",
       :reverse_phrase => "supports",
-      :forward_description => "This data asset relies upon the following facilities",
-      :reverse_description => "This facility supports the following data assets"
+      :forward_description => "This data asset relies upon the following facilities.",
+      :reverse_description => "This facility supports the following data assets."
     },
     :data_asset_relies_upon_system => {
       :source_type => "DataAsset",
       :target_type => "System",
       :forward_phrase => "relies upon",
       :reverse_phrase => "supports",
-      :forward_description => "This data asset relies upon the following systems",
-      :reverse_description => "This system supports following data assets"
+      :forward_description => "This data asset relies upon the following systems.",
+      :reverse_description => "This system supports the following data assets."
     },
     :facility_has_process => {
       :source_type => "Facility",
       :target_type => "Process",
       :forward_phrase => "has",
       :reverse_phrase => "is a process for",
-      :forward_description => "This facility relies upon the following processes",
-      :reverse_description => "This process supports the following facility"
+      :forward_description => "This facility relies upon the following processes.",
+      :reverse_description => "This process supports the following facilities."
     },
     :facility_has_risky_attribute => {
       :source_type => "Facility",
       :target_type => "RiskyAttribute",
       :forward_phrase => "has",
       :reverse_phrase => "is an attribute of",
-      :forward_description => "This facility has the following attributes",
-      :reverse_description => "This risky attribute is an attribute of the following facilities"
+      :forward_description => "This facility has the following risky attributes.",
+      :reverse_description => "This risky attribute is an attribute of the following facilities."
     },
     :facility_relies_upon_data_asset => {
       :source_type => "Facility",
       :target_type => "DataAsset",
       :forward_phrase => "relies upon",
       :reverse_phrase => "supports",
-      :forward_description => "This facility relies upon the following data assets",
-      :reverse_description => "This data asset supports the following facilities"
+      :forward_description => "This facility relies upon the following data assets.",
+      :reverse_description => "This data asset supports the following facilities."
     },
     :facility_relies_upon_facility => {
       :source_type => "Facility",
       :target_type => "Facility",
       :forward_phrase => "relies upon",
       :reverse_phrase => "supports",
-      :forward_description => "This facility supports the following facilities",
-      :reverse_description => "This facilities relies upon the following facilities"
+      :forward_description => "This facility relies upon the following facilities.",
+      :reverse_description => "This facility supports the following facilities."
     },
     :facility_relies_upon_system => {
       :source_type => "Facility",
       :target_type => "System",
       :forward_phrase => "relies upon",
       :reverse_phrase => "supports",
-      :forward_description => "This facility relies upon the following systems",
-      :reverse_description => "This system supports following facilities"
+      :forward_description => "This facility relies upon the following systems.",
+      :reverse_description => "This system supports the following facilities."
     },
     :market_has_process => {
       :source_type => "Market",
       :target_type => "Process",
       :forward_phrase => "has",
       :reverse_phrase => "is a process for",
-      :forward_description => "This market relies upon the following processes",
-      :reverse_description => "This process supports the following markets"
+      :forward_description => "This market relies upon the following processes.",
+      :reverse_description => "This process supports the following markets."
     },
     :market_has_risky_attribute => {
       :source_type => "Market",
       :target_type => "RiskyAttribute",
       :forward_phrase => "has",
       :reverse_phrase => "is an attribute of",
-      :forward_description => "This market has the following attributes",
-      :reverse_description => "This risky attribute is an attribute of the following markets"
+      :forward_description => "This market has the following risky attributes.",
+      :reverse_description => "This risky attribute is an attribute of the following markets."
     },
     :market_includes_market => {
       :source_type => "Market",
       :target_type => "Market",
       :forward_phrase => "includes",
       :reverse_phrase => "is included in",
-      :forward_description => "This market includes the following markets",
-      :reverse_description => "This market is included in the following markets"
+      :forward_description => "This market includes the following markets.",
+      :reverse_description => "This market is included in the following markets."
     },
     :market_relies_upon_data_asset => {
       :source_type => "Market",
       :target_type => "DataAsset",
       :forward_phrase => "relies upon",
       :reverse_phrase => "supports",
-      :forward_description => "This market relies upon the following data assets",
-      :reverse_description => "This data asset supports the following markets"
+      :forward_description => "This market relies upon the following data assets.",
+      :reverse_description => "This data asset supports the following markets."
     },
     :market_relies_upon_facility => {
       :source_type => "Market",
       :target_type => "Facility",
       :forward_phrase => "relies upon",
       :reverse_phrase => "supports",
-      :forward_description => "This market relies upon the following facilities",
-      :reverse_description => "This facility supports the following markets"
+      :forward_description => "This market relies upon the following facilities.",
+      :reverse_description => "This facility supports the following markets."
     },
     :market_relies_upon_system => {
       :source_type => "Market",
       :target_type => "System",
       :forward_phrase => "relies upon",
       :reverse_phrase => "supports",
-      :forward_description => "This market relies upon the following systems",
-      :reverse_description => "This system supports following markets"
+      :forward_description => "This market relies upon the following systems.",
+      :reverse_description => "This system supports the following markets."
     },
     :org_group_has_risky_attribute => {
       :source_type => "OrgGroup",
       :target_type => "RiskyAttribute",
       :forward_phrase => "has",
       :reverse_phrase => "is an attribute of",
-      :forward_description => "This org group has the following attributes",
-      :reverse_description => "This risky attribute is an attribute of the following org groups"
+      :forward_description => "This org group has the following risky attributes.",
+      :reverse_description => "This risky attribute is an attribute of the following org groups."
     },
     :org_group_is_affiliated_with_org_group => {
       :source_type => "OrgGroup",
@@ -231,24 +231,24 @@ module DefaultRelationshipTypes
       :target_type => "RiskyAttribute",
       :forward_phrase => "has",
       :reverse_phrase => "is an attribute of",
-      :forward_description => "This process has the following attributes",
-      :reverse_description => "This risky attribute is an attribute of the following processes"
+      :forward_description => "This process has the following risky attributes.",
+      :reverse_description => "This risky attribute is an attribute of the following processes."
     },
     :product_has_process => {
       :source_type => "Product",
       :target_type => "Process",
       :forward_phrase => "has",
       :reverse_phrase => "is a process for",
-      :forward_description => "This product relies upon the following processes",
-      :reverse_description => "This process supports the following products"
+      :forward_description => "This product relies upon the following processes.",
+      :reverse_description => "This process supports the following products."
     },
     :product_has_risky_attribute => {
       :source_type => "Product",
       :target_type => "RiskyAttribute",
       :forward_phrase => "has",
       :reverse_phrase => "is an attribute of",
-      :forward_description => "This product has the following attributes",
-      :reverse_description => "This risky attribute is an attribute of the following products"
+      :forward_description => "This product has the following risky attributes.",
+      :reverse_description => "This risky attribute is an attribute of the following products."
     },
     :product_is_affiliated_with_product => {
       :source_type => "Product",
@@ -256,47 +256,47 @@ module DefaultRelationshipTypes
       :symmetric => true,
       :forward_phrase => "is affiliated/collaborates with",
       :reverse_phrase => "is affiliated/collaborates with",
-      :forward_description => "This product is affiliated/collaborates with the following products",
-      :reverse_description => "This product is affiliated/collaborates with the following products"
+      :forward_description => "This product is affiliated/collaborates with the following products.",
+      :reverse_description => "This product is affiliated/collaborates with the following products."
     },
     :product_is_sold_into_market => {
       :source_type => "Product",
       :target_type => "Market",
       :forward_phrase => "is sold into",
       :reverse_phrase => "is a market for",
-      :forward_description => "This product is sold into the following markets",
-      :reverse_description => "This market is a market for the following products"
+      :forward_description => "This product is sold into the following markets.",
+      :reverse_description => "This market is a market for the following products."
     },
     :product_relies_upon_data_asset => {
       :source_type => "Product",
       :target_type => "DataAsset",
       :forward_phrase => "relies upon",
       :reverse_phrase => "supports",
-      :forward_description => "This product relies upon the following data assets",
-      :reverse_description => "This data asset supports the following products"
+      :forward_description => "This product relies upon the following data assets.",
+      :reverse_description => "This data asset supports the following products."
     },
     :product_relies_upon_facility => {
       :source_type => "Product",
       :target_type => "Facility",
       :forward_phrase => "relies upon",
       :reverse_phrase => "supports",
-      :forward_description => "This product relies upon the following facilities",
-      :reverse_description => "This facility supports the following products"
+      :forward_description => "This product relies upon the following facilities.",
+      :reverse_description => "This facility supports the following products."
     },
     :product_relies_upon_product => {
       :source_type => "Product",
       :target_type => "Product",
       :forward_phrase => "relies upon",
       :reverse_phrase => "supports",
-      :forward_description => "This product relies upon the following products",
-      :reverse_description => "This product relies upon the following products."
+      :forward_description => "This product relies upon the following products.",
+      :reverse_description => "This product supports the following products."
     },
     :product_relies_upon_system => {
       :source_type => "Product",
       :target_type => "System",
       :forward_phrase => "relies upon",
       :reverse_phrase => "supports",
-      :forward_description => "This product relies upon the following systems",
+      :forward_description => "This product relies upon the following systems.",
       :reverse_description => "This system supports the following products."
     },
     :program_applies_to_data_asset => {
@@ -336,7 +336,7 @@ module DefaultRelationshipTypes
       :target_type => "Product",
       :forward_phrase => "applies to",
       :reverse_phrase => "is within scope of",
-      :forward_description => "This program/policy applies to the following product.",
+      :forward_description => "This program/policy applies to the following products.",
       :reverse_description => "This product is within scope of the following programs/policies."
     },
     :program_applies_to_project => {
@@ -352,56 +352,56 @@ module DefaultRelationshipTypes
       :target_type => "Process",
       :forward_phrase => "has",
       :reverse_phrase => "is a process for",
-      :forward_description => "This project relies upon the following processes",
-      :reverse_description => "This process supports the following projects"
+      :forward_description => "This project relies upon the following processes.",
+      :reverse_description => "This process supports the following projects."
     },
     :project_has_risky_attribute => {
       :source_type => "Project",
       :target_type => "RiskyAttribute",
       :forward_phrase => "has",
       :reverse_phrase => "is an attribute of",
-      :forward_description => "This project has the following attributes",
-      :reverse_description => "This risky attribute is an attribute of the following projects"
+      :forward_description => "This project has the following risky attributes.",
+      :reverse_description => "This risky attribute is an attribute of the following projects."
     },
     :project_relies_upon_data_asset => {
       :source_type => "Project",
       :target_type => "DataAsset",
       :forward_phrase => "relies upon",
       :reverse_phrase => "supports",
-      :forward_description => "This project relies upon the following data assets",
-      :reverse_description => "This data asset supports the following projects"
+      :forward_description => "This project relies upon the following data assets.",
+      :reverse_description => "This data asset supports the following projects."
     },
     :project_relies_upon_facility => {
       :source_type => "Project",
       :target_type => "Facility",
       :forward_phrase => "relies upon",
       :reverse_phrase => "supports",
-      :forward_description => "This project relies upon the following facilities",
-      :reverse_description => "This facility supports the following projects"
+      :forward_description => "This project relies upon the following facilities.",
+      :reverse_description => "This facility supports the following projects."
     },
     :project_relies_upon_system => {
       :source_type => "Project",
       :target_type => "System",
       :forward_phrase => "relies upon",
       :reverse_phrase => "supports",
-      :forward_description => "This project relies upon the following systems",
-      :reverse_description => "This system supports following projects"
+      :forward_description => "This project relies upon the following systems.",
+      :reverse_description => "This system supports the following projects."
     },
     :project_targets_data_asset => {
       :source_type => "Project",
       :target_type => "DataAsset",
       :forward_phrase => "targets",
       :reverse_phrase => "is targeted by",
-      :forward_description => "This project targets following data assets",
-      :reverse_description => "This data asset is targeted by the following projects"
+      :forward_description => "This project targets the following data assets.",
+      :reverse_description => "This data asset is targeted by the following projects."
     },
     :project_targets_facility => {
       :source_type => "Project",
       :target_type => "Facility",
       :forward_phrase => "targets",
       :reverse_phrase => "is targeted by",
-      :forward_description => "This project targets following facility",
-      :reverse_description => "This facility is targeted by the following projects"
+      :forward_description => "This project targets the following facilities.",
+      :reverse_description => "This facility is targeted by the following projects."
     },
     :project_targets_market => {
       :source_type => "Project",
@@ -409,32 +409,32 @@ module DefaultRelationshipTypes
       :forward_phrase => "targets",
       :reverse_phrase => "is targeted by",
       :forward_description => "This project targets the following markets.",
-      :reverse_description => "This market is targeted by the following projects"
+      :reverse_description => "This market is targeted by the following projects."
     },
     :project_targets_org_group => {
       :source_type => "Project",
       :target_type => "OrgGroup",
       :forward_phrase => "targets",
       :reverse_phrase => "is targeted by",
-      :forward_description => "This project targets following org group",
-      :reverse_description => "This org group is targeted by the following projects"
+      :forward_description => "This project targets the following org groups.",
+      :reverse_description => "This org group is targeted by the following projects."
     },
     :project_targets_product => {
       :source_type => "Project",
       :target_type => "Product",
       :forward_phrase => "targets",
       :reverse_phrase => "is targeted by",
-      :forward_description => "This project targets following products",
-      :reverse_description => "This product is targeted by the following projects"
+      :forward_description => "This project targets the following products.",
+      :reverse_description => "This product is targeted by the following projects."
     },
     :system_has_risky_attribute => {
       :source_type => "System",
       :target_type => "RiskyAttribute",
       :forward_phrase => "has",
       :reverse_phrase => "is an attribute of",
-      :forward_description => "This system has the following attributes",
-      :reverse_description => "This risky attribute is an attribute of the following systems"
-    },
+      :forward_description => "This system has the following risky attributes.",
+      :reverse_description => "This risky attribute is an attribute of the following systems."
+    }
   }
 
   def self.types

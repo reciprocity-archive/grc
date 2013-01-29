@@ -85,8 +85,9 @@ ActiveRecord::Base.transaction do
     end
   end
 
+  # FIXME: RelationshipType table is not currently used
   # Create the default relationship types
-  DefaultRelationshipTypes.create_only
+  #DefaultRelationshipTypes.create_only
 
   Program.find_or_create_by_slug!({
     :slug => 'COMPANY',
