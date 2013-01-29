@@ -21,11 +21,6 @@ ul.tree {
       border:1px solid darken($lightGray,5%);
       border-top:none;
       padding:0;
-      p {
-        line-height:14px;
-        color:$text;
-        font-size:11px;
-      }
     }
     &:hover {
       background:darken($lightGray,5%);
@@ -46,14 +41,32 @@ ul.tree {
      border-bottom:none; 
     }
   }
+  p {
+    line-height:14px;
+    color:$text;
+    font-size:11px;
+  }
+  
 }
 
 .item-identifier {
   position:relative;
+  .item-title {
+    &.active {
+      .showhide {
+        background-position:-16px -64px;
+        @include opacity(1);
+      }
+    }
+  }
+  .showhide {
+    margin-right:6px;
+  }
   .item-actions {
+    line-height:16px;
     position:absolute;
     right:0;
-    top:0;
+    top:3px;
     @include opacity(0.4);
     @include transition(opacity 0.2s);
     .btn-mini {
@@ -62,69 +75,36 @@ ul.tree {
     }
   }
   &:hover {
+    cursor:pointer;
     .item-actions {
       @include opacity(1);
     }
   }
+  .key {
+    color:$subTitle;
+    font-weight:bold;
+  }
+  .addition-info {
+    color:$gray;
+  }
 }
 
-/*
-
-ul.tree {
+ul.elements {
   @include reset-list();
-  li.main {
-    @include clearfix();
-    border-bottom:1px solid $lightGray;
-    cursor:pointer;
-    line-height:32px;
-    padding:0 6px;
-    span.secondary {
-      color:$gray;
-      font-size:11px;
+  margin-left:23px;
+  li {
+    border-top:1px solid $lightGray;
+    line-height:30px;
+    font-size:12px;
+  }
+  .item-title {
+    .showhide {
+      background-position:-112px -32px;
     }
-    &:last-child {
-      border-bottom:none;
-    }
-    .code {
-      font-weight:bold;
-    }
-    .info {
-      color:$text;
-    }
-    .buttons {
-      float:right;
-      @include opacity(0.2);
-      @include transition(opacity 0.4s);
-      line-height:16px;
-      padding-top:4px;
-      .btn {
-        padding-left:3px;
-        padding-right:3px;
-        i {
-          margin-top:0;
-        }
-      }
-    }
-    &:hover {
-      background:lighten(#ccf1ff,8%);
-      border-color:darken(#ccf1ff,10%);
+    &.active {
       .showhide {
-        @include opacity(1);
+        background-position:-96px -32px;
       }
-      .buttons {
-        @include opacity(1);
-      }
-
     }
-  }
-  .tree-content {
-    margin-left:24px;
-  }
-  p {
-    font-size:11px;
-    line-height:14px;
-    color:$text;
   }
 }
-
-*/
