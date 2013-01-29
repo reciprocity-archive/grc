@@ -217,7 +217,7 @@
   $.fn.modal.Constructor.prototype.show = function() {
     var that = this;
     var $el = this.$element;
-    var shownevents;
+    var shownevents, keyevents;
     if(shownevents = $el.data("events").shown
         && $(shownevents).filter(function() { 
             return $.inArray("arrange", this.namespace.split(".")) > -1; 
@@ -226,6 +226,22 @@
             if(ev.target === ev.currentTarget)
                 reconfigureModals.call(that);
           });
+    }
+
+    // prevent form submissions when descendant elements are also modals.
+    if(!(keyevents = $el.data("events").keypress)
+        || $(keyevents).filter(function() { 
+            return $.inArray("preventdoublesubmit", this.namespace.split(".")) > -1; 
+          }).length < 1) {    
+      $el.on('keypress.preventdoublesubmit', function(ev) {
+        if(ev.which === 13) {
+          ev.preventDefault();
+          if(ev.originalEvent) {
+            ev.originalEvent.preventDefault();
+          }
+          return false;
+        }
+      });
     }
 
     _modal_show.apply(this, arguments);

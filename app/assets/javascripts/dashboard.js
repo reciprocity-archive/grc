@@ -160,6 +160,7 @@ jQuery(function($) {
       return href + '?' + params;
   }
 
+  // Handle search on related_selectors
   $('body').on('focus', '.modal .widgetsearch', function(e) {
     $(this).bind('keypress', function(e) {
       if (e.which == 13) {
@@ -171,6 +172,7 @@ jQuery(function($) {
           , href = with_params($list.data('list-data-href'), $.param({ s: $this.val() }));
         $.get(href, function(data) {
           $list.tmpl_setitems(data);
+          $list.closest('.modal').trigger('sync-lists');
         });
       }
     });
