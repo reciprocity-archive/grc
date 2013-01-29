@@ -50,7 +50,7 @@
         </label>
         <ul class="pbc-item-list">
           {{#object_people}}
-          <li {{data 'model'}} data-model="true" rel="tooltip" data-placement="top" title="{{firstnonempty person.email 'No LDAP'}}">
+          <li class="item fade" {{data 'model'}} data-model="true" rel="tooltip" data-placement="top" title="{{firstnonempty person.email 'No LDAP'}}">
             <div class="span5">
               {{firstnonempty person.name person.email}}
             </div>

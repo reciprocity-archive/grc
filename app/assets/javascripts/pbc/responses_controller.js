@@ -1,5 +1,6 @@
 //= require can.jquery-all
 //= require pbc/response
+//= require processors
 
 (function(namespace, $) {
 
@@ -174,6 +175,14 @@ can.Control("CMS.Controllers.Responses", {
 
         model.attr("role", role);
         this.bindXHRToButton(model.save(), ev);
+    }
+    , ".item.fade elementadded" : function(el, ev) {
+      setTimeout(function() {
+        $(el).addClass("in");
+      }, 10);
+    }
+    , ".item.fade elementremoved" : function(el, ev) {
+      console.log("removed an element with text", el.text());
     }
 });
 
