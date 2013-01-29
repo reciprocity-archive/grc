@@ -94,7 +94,17 @@ ul.elements {
   margin-left:23px;
   li {
     border-top:1px solid $lightGray;
-    line-height:28px;
+    line-height:30px;
     font-size:12px;
+  }
+  .item-title {
+    .showhide {
+      background-position:-112px -32px;
+    }
+    &.active {
+      .showhide {
+        background-position:-96px -32px;
+      }
+    }
   }
 }

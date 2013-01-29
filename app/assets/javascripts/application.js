@@ -173,7 +173,7 @@ $(window).load(function(){
   
   $('body').on('click', 'ul.tree .item-title', function(e) {
     var $this = $(this),
-        $content = $this.closest('li.main').find('.item-content');
+        $content = $this.closest('li').find('.item-content');
     
     if($this.hasClass("active")) {
       $content.slideUp('fast');
