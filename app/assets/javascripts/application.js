@@ -140,6 +140,21 @@ jQuery(document).ready(function($) {
     }
     
   });
+  
+  // Open quick find
+  $('body').on('focus', '.quick-search-holder input', function() {
+    var $this = $(this),
+    $quickFind = $this.closest(".quick-search").find(".quick-search-results");
+    $quickFind.fadeIn();
+  });
+  
+  // Remove quick find
+  $('body').on('click', '.quick-search-results .remove', function(e) {
+    e.preventDefault();
+    var $this = $(this),
+        $quickFind = $this.closest(".quick-search-results");
+    $quickFind.fadeOut();
+  });
 
   // Close other popovers when one is shown
   $('body').on('show.popover', function(e) {

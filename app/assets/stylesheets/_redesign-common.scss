@@ -52,7 +52,6 @@ h4 {
 .btn {
   font-size: 13px;
   font-weight: bold;
-
   @include box-shadow(none);
   i {
     margin-top: 1px;

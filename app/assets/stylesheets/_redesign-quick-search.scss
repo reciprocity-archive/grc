@@ -1,0 +1,73 @@
+.quick-search-results {
+  display: none;
+  position: absolute;
+  top: 36px;
+  left: 10px;
+  width: 400px;
+  height: 200px;
+  background: $white;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  @include border-radius(5px);
+  @include box-shadow(0 5px 10px rgba(0, 0, 0, 0.2));
+  color:$black;
+  text-shadow: none;
+  text-transform: none;
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 18px;
+  z-index: 1001;
+  .title {
+    font-weight: bold;
+    padding: 4px 4px 0 4px;
+    margin-bottom: 15px;
+  }
+  .tabs-left {
+    padding: 0 4px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 129px;
+  }
+  .nav-tabs {
+    li {
+      float: none;
+      clear: both;
+      text-shadow: none;
+      text-transform: none;
+      font-size: 12px;
+      font-weight: normal;
+      a {
+        color: $blue;
+        &:hover {
+          color: $black;
+          background: $lightGray;
+        }
+      }
+    }
+  }
+  .tab-pane {
+    ul {
+      li {
+        float: none;
+        clear: both;
+        text-shadow: none;
+        text-transform: none;
+        font-size: 12px;
+        font-weight: normal;
+        color: $black;
+        padding-right: 10px;
+        a {
+          float: none;
+          clear: both;
+        }
+      }
+    }
+  }
+  .quick-find-add {
+    background: $lightGray;
+    height: 34px;
+    @include border-radius(0 0 5px 5px);
+    line-height: 34px;
+    padding: 0 4px;
+    font-weight: bold;
+  }
+}
