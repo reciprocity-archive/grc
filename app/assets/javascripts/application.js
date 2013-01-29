@@ -156,6 +156,15 @@ jQuery(document).ready(function($) {
         $quickFind = $this.closest(".quick-search-results");
     $quickFind.fadeOut();
   });
+  
+  // Equal height for quick find tabs
+  $('body').on('click', '.nav-tabs', function() {
+    var $this = $(this),
+        $tabPaneHeight = $this.closest(".tabs-left").find(".tab-pane.active").height();
+        
+    $this.css('height', $tabPaneHeight);
+    
+  });
 
   // Close other popovers when one is shown
   $('body').on('show.popover', function(e) {
