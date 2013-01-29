@@ -423,15 +423,15 @@
                     %strong=current_user.email
                     %i.grcicon-carot-white
                   %ul.dropdown-menu{:'aria-labelledby' => 'drop1', :role =>"menu"}
-                    %li
-                      %a{:href =>logout_path, :tabindex =>"-1"}
-                        %i.grcicon-logout
-                        Logout
                     -if current_user.has_role?(:superuser)
                       %li
                         %a{:href => admin_dash_path}
                           %i.grcicon-admin
                           Admin Area
+                    %li
+                      %a{:href =>logout_path, :tabindex =>"-1"}
+                        %i.grcicon-logout
+                        Logout
                 %li.screen.dropdown.dropdown-black
                   %a{:href => "#", :class => "dropdown-toggle screen-size", :'data-toggle' =>"dropdown", :role =>"button"}
                     %i.grcicon-desktop
