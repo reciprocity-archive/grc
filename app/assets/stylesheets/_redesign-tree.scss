@@ -2,6 +2,76 @@
 
 ul.tree {
   @include reset-list();
+  li.category {
+    background:$lightGray;
+    margin-bottom:4px;
+    @include border-radius();
+    h3 {
+      border:1px solid darken($lightGray,5%);
+      color:$gray;
+      font-size:11px;
+      text-transform:uppercase;
+      font-weight:normal;
+      padding:0 6px;
+      @include text-shadow(0 1px 1px $white);
+      @include border-radius(4px 4px 0 0);
+    }
+    .content {
+      @include border-radius(0 0 4px 4px);
+      border:1px solid darken($lightGray,5%);
+      border-top:none;
+      padding:0;
+      p {
+        line-height:14px;
+        color:$text;
+        font-size:11px;
+      }
+    }
+    &:hover {
+      background:darken($lightGray,5%);
+      h3 {
+        border:1px solid darken($lightGray,7%);
+        color:darken($gray,10%);
+      }
+      .content {
+        border-color:darken($lightGray,7%);
+      }
+    }
+  }
+  li.main {
+    border-bottom:1px solid $lightGray;
+    line-height:30px;
+    padding:0 6px;
+    &:last-child {
+     border-bottom:none; 
+    }
+  }
+}
+
+.item-identifier {
+  position:relative;
+  .item-actions {
+    position:absolute;
+    right:0;
+    top:0;
+    @include opacity(0.4);
+    @include transition(opacity 0.2s);
+    .btn-mini {
+      padding-left:3px;
+      padding-right:3px;
+    }
+  }
+  &:hover {
+    .item-actions {
+      @include opacity(1);
+    }
+  }
+}
+
+/*
+
+ul.tree {
+  @include reset-list();
   li.main {
     @include clearfix();
     border-bottom:1px solid $lightGray;
@@ -56,3 +126,5 @@ ul.tree {
     color:$text;
   }
 }
+
+*/
