@@ -1,5 +1,21 @@
 // widget tree structure
 
+h3.tab-title {
+  line-height:36px;
+  background:$lightGray;
+  color:#777;
+  font-size:13px;
+  font-weight:normal;
+  padding-left:6px;
+  border-bottom:1px solid darken($lightGray,10%);
+  .btn {
+    margin-top:6px;
+    margin-right:6px;
+    padding-left:3px;
+    padding-right:3px;
+  }
+}
+
 ul.tree {
   @include reset-list();
   li.category {
@@ -76,7 +92,7 @@ ul.tree {
     line-height:16px;
     position:absolute;
     right:0;
-    top:3px;
+    top:4px;
     @include opacity(0.4);
     @include transition(opacity 0.2s);
     .btn-mini {
