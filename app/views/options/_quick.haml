@@ -20,10 +20,8 @@
                   .item-title
                     .row-fluid
                       .span12
-                        .showhide
                         %span.addition-info
-                          =link_to '#' do
-                            =option.title
+                          =option.title
                   .item-actions
                     %a.btn.btn-mini{ :'data-form-target' => "refresh", :'data-delete-target' => "refresh", :'data-modal-reset' => "reset", :'data-toggle' => "modal-ajax-form", :href => edit_flow_option_path(option) }
                       %i.grcicon-edit-grey
