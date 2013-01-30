@@ -158,6 +158,15 @@ jQuery(document).ready(function($) {
   });
   
   // Equal height for quick find tabs
+  $('body').on('click', '.quick-search-holder input', function() {
+    var $this = $(this),
+        $tabPaneHeight = $this.closest(".quick-search").find(".tab-pane.active").height(),
+        $navBar = $this.closest(".quick-search").find(".nav-tabs");
+        
+    $navBar.css('height', $tabPaneHeight);
+    
+  });
+  
   $('body').on('click', '.nav-tabs', function() {
     var $this = $(this),
         $tabPaneHeight = $this.closest(".tabs-left").find(".tab-pane.active").height();
