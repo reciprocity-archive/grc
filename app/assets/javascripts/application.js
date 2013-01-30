@@ -166,7 +166,7 @@ jQuery(document).ready(function($) {
     
   });
   
-  $('body').on('click', '.quick-search-holder .nav-tabs', function() {
+  $('body').on('click', '.quick-search .nav-tabs', function() {
     var $this = $(this),
         $tabPaneHeight = $this.closest(".tabs-left").find(".tab-pane.active").height();
         
