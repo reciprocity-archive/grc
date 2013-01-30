@@ -19,20 +19,22 @@
 %ul.tree
   -program.cycles.order("start_at DESC").each do |cycle|
     %li.main
-      .row-fluid.info-primary
-        .span12
-          .buttons
-            %a{:class => "btn btn-mini", :href => flow_cycle_path(cycle)}
-              %i.grcicon-goto
-          %a{:href => flow_cycle_path(cycle)}=cycle.title
-          &nbsp;
-          %span.secondary
-            -if cycle.complete
-              Complete (started #{days_ago_in_words cycle.start_at} ago)
-            -else
-              -if cycle.start_at == Time.zone.now.to_date
-                Started today
-              -elsif cycle.start_at < Time.zone.now.to_date
-                Started #{days_ago_in_words cycle.start_at} ago
-              -else
-                Starting in #{days_ago_in_words cycle.start_at}
+      .item-identifier
+        .item-title
+          .row-fluid
+            .span12
+              %span.key
+                %a{:href => flow_cycle_path(cycle)}=cycle.title
+              %span.addition-info
+                -if cycle.complete
+                  Complete (started #{days_ago_in_words cycle.start_at} ago)
+                -else
+                  -if cycle.start_at == Time.zone.now.to_date
+                    Started today
+                  -elsif cycle.start_at < Time.zone.now.to_date
+                    Started #{days_ago_in_words cycle.start_at} ago
+                  -else
+                    Starting in #{days_ago_in_words cycle.start_at}
+        .item-actions
+          %a{:href => flow_cycle_path(cycle), :class => "btn btn-mini"}
+            %i.grcicon-goto
