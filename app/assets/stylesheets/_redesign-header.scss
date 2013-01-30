@@ -201,6 +201,13 @@
           }
         }
       }
+      .item-actions {
+        a {
+          &:hover {
+            background: #e6e6e6;
+          }
+        }
+      }
       &.user {
         text-transform:lowercase;
       }
