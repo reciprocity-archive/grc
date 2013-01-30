@@ -59,10 +59,11 @@ ul.tree {
   }
   .item-content {
     display:none;
-    padding:0 40px 12px 0;
+    padding:0 0 12px 0;
   }
   .rtf {
     line-height:14px;
+    padding-right:40px;
     color:$text;
     font-size:11px;
     margin-left:22px;
