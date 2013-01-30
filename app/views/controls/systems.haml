@@ -1,11 +1,10 @@
 -# locals: control, systems
+    
+%h3.tab-title
+  Systems or Processes that implement this Control
+  %a.btn.btn-mini.pull-right{ :href => list_edit_flow_system_controls_path(:control_id => control.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :rel => 'tooltip', :'data-placement' => 'left', :title => 'Link systems to this control', :'data-modal-class' => 'modal-wide' }
+    %i.grcicon-link
 
-.row-fluid
-  .span12.captionbox
-    %a.widgetbtn.pull-right{ :href => list_edit_flow_system_controls_path(:control_id => control.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :rel => 'tooltip', :'data-placement' => 'left', :title => 'Link systems to this control', :'data-modal-class' => 'modal-wide' }
-      %i.grcicon-link
-    %h4
-      Systems or Processes that implement this Control
 
 %ul.tree
   -systems.each_with_index do |system, i|
@@ -18,9 +17,8 @@
               %span.key=system.slug
               %span.additional-info=system.title
             -if has_feature? :BETA
-              .span2
+              .span5
                 %span.label Data Integrity
-              .span3
                 %span.additional-info
                   Owner: Jonathan Myers
         .item-actions
