@@ -126,8 +126,8 @@ jQuery(document).ready(function($) {
     $widget.fadeOut();  
   });
 
-  /* Show/hide widget content
-  $('body').on('click', '.widget .showhide', function(e) {
+  // Show/hide widget content
+  $('body').on('click', '.widget .header .showhide', function(e) {
     var $this = $(this),
         $content = $this.closest(".widget").find(".content")
     
@@ -140,7 +140,6 @@ jQuery(document).ready(function($) {
     }
     
   });
-  */
   
   // Open quick find
   $('body').on('focus', '.quick-search-holder input', function() {
@@ -167,7 +166,7 @@ jQuery(document).ready(function($) {
     
   });
   
-  $('body').on('click', '.nav-tabs', function() {
+  $('body').on('click', '.quick-search-holder .nav-tabs', function() {
     var $this = $(this),
         $tabPaneHeight = $this.closest(".tabs-left").find(".tab-pane.active").height();
         
