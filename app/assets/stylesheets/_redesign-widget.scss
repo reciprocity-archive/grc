@@ -101,6 +101,11 @@
       position: absolute;
       top: 5px;
       right: 0;
+      &.action-below {
+        position: static;
+        margin-bottom: 10px;
+        text-align: right;
+      }
       a {
         display: inline-block;
         cursor: pointer;
