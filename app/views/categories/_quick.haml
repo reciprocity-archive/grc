@@ -15,8 +15,7 @@
               .span12
                 .showhide
                 %span.addition-info
-                  =link_to '#' do
-                    =root_category.display_name
+                  =root_category.display_name
           .item-actions
             %a.btn.btn-mini{ :'data-form-target' => "refresh", :'data-delete-target' => "refresh", :'data-modal-reset' => "reset", :'data-toggle' => "modal-ajax-form", :href => edit_flow_category_path(root_category) }
               %i.grcicon-edit-grey
@@ -30,8 +29,7 @@
                     .row-fluid
                       .span12
                         %span.addition-info
-                          =link_to '#' do
-                            =category.display_name
+                          =category.display_name
                   .item-actions
                     %a.btn.btn-mini{ :'data-form-target' => "refresh", :'data-delete-target' => "refresh", :'data-modal-reset' => "reset", :'data-toggle' => "modal-ajax-form", :href => edit_flow_category_path(category) }
                       %i.grcicon-edit-grey
