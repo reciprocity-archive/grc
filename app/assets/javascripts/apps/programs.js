@@ -4,7 +4,7 @@
 // Explicitly short circuit until handling of implemented/implementing controls
 // is complete.
 
-if (!/\/programs/.test(window.location.pathname))
+if (!/\/programs\b/.test(window.location.pathname))
   return;
 
 $(function() {
