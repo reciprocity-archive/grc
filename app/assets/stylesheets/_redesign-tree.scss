@@ -24,10 +24,19 @@ ul.tree-structure {
     &:last-child {
       border-bottom:none;
     }
+    &:hover {
+      .item-actions {
+        @include opacity(1);
+      }
+    }
+
   }
   p {
     margin:0;
-
+    color:$text;
+    &.code {
+      color:$subTitle;
+    }
   }
   .openclose {
     margin-top:7px;
