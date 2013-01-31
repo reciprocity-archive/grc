@@ -32,7 +32,7 @@
     .span3
       =render :partial => "info",
               :layout => 'layouts/widget_box',
-              :locals => { model_name.to_sym => instance }
+              :locals => { model_name.to_sym => instance, :widget_class => 'secondary' }
     .span6
       -#=render :partial => "shared/graph",
               :layout => 'layouts/widget_box',

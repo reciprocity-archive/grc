@@ -3,47 +3,41 @@
 
 -content_for :widget_help, 'program_info'
 
-.information
-
-  .row-fluid
-    .span12
-      .span4
-        %label Code
-        %input.span12{:disabled => "disabled", :type => "text", :value => program.slug }
-      .span8
-        %label Kind
-        %select.span12{:disabled => "disabled" }
-          %option{ :selected => 'selected' }
-            =program.kind && program.kind.title
-  .row-fluid
-    .span12
-      %label Full Title
-      %input.span12{:disabled => "disabled", :type => "text", :value => program.title }
-  .row-fluid
-    .span12
-      %label Description
+%ul.info-list
+  %li.float-element
+    %label
+      Code
+    %span
+      =program.slug
+  %li.float-element
+    %label
+      Kind
+    %span
+      =program.kind && program.kind.title
+  %li.float-element
+    %label
+      Full Title
+    %span
+      =program.title
+  %li
+    %label
+      Description
+    %span
       =display_as_html program.description
 
-%hr
-
-.row-fluid
-  .span12
+%ul.tree
+  %li.category
     =render :partial => 'documents/object_list',
             :locals  => { :object => program }
-
-%hr
-
-.row-fluid
-  .span12
+  %li.category
     =render :partial => 'people/object_list',
             :locals  => { :object => program }
 
-%hr.hr-widget
-
-.row-fluid
-  .span6.nominheight
-    %label.fltlft
-      %strong> Created: #{program.created_at.strftime("%m/%d/%y")}
-  .span6.nominheight
-    %label.fltrt
-      %strong> Updated: #{program.updated_at.strftime("%m/%d/%y")}
+%section.footer
+  .row-fluid
+    .span6
+      %p.footer-left
+        Created: #{program.created_at.strftime("%m/%d/%y")}
+    .span6
+      %p.footer-right
+        Updated: #{program.updated_at.strftime("%m/%d/%y")}
