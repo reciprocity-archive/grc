@@ -3,76 +3,73 @@
 
 -content_for :widget_help, 'control_info'
 
-.info-content
-  %h3
-    About
-  %ul.info-list
-    %li.float-element
-      %label
-        Code
-      %span
-        =control.slug
-    %li.float-element
-      %label
-        Type
-      %span
-        =control.type && control.type.title
-    %li.float-element
-      %label
-        Kind
-      %span
-        =control.kind && control.kind.title
-    %li.float-element
-      %label
-        Fraud-related
-      %span
-        =control.fraud_related ? 'Yes' : 'No'
-    %li.float-element
-      %label
-        Significance
-      %span
-        =control.key_control ? 'Key' : 'Non-key'
-    %li.float-element
-      %label
-        Assertions
-      %span
-        =control.assertions.map(&:name).join(', ')
-    %li.float-element
-      %label
-        Means of Operation
-      %span
-        =control.means && control.means.title
-    %li.float-element
-      %label
-        Confirm Frequency
-      %span
-        =control.verify_frequency && control.verify_frequency.title
-    %li
-      %label
-        Description
-      =display_as_html control.description
-    %li
-      %label
-        Notes
-      =display_as_html control.notes
-    %li.float-element
-      %label
-        Direct Link
-      %span
-        =link_to control.url do
-          =control.url
-    %li.float-element
-      %label
-        Effective Date
-      %span
-        =control.start_date && control.start_date.strftime("%m/%d/%y")
-    %li.float-element
-      %label
-        Stop Date
-      %span
-        =control.stop_date && control.stop_date.strftime("%m/%d/%y")
+%ul.info-list
+  %li.float-element
+    %label
+      Code
+    %span
+      =control.slug
+  %li.float-element
+    %label
+      Type
+    %span
+      =control.type && control.type.title
+  %li.float-element
+    %label
+      Kind
+    %span
+      =control.kind && control.kind.title
+  %li.float-element
+    %label
+      Fraud-related
+    %span
+      =control.fraud_related ? 'Yes' : 'No'
+  %li.float-element
+    %label
+      Significance
+    %span
+      =control.key_control ? 'Key' : 'Non-key'
+  %li.float-element
+    %label
+      Assertions
+    %span
+      =control.assertions.map(&:name).join(', ')
+  %li.float-element
+    %label
+      Means of Operation
+    %span
+      =control.means && control.means.title
+  %li.float-element
+    %label
+      Confirm Frequency
+    %span
+      =control.verify_frequency && control.verify_frequency.title
+  %li
+    %label
+      Description
+    =display_as_html control.description
+  %li
+    %label
+      Notes
+    =display_as_html control.notes
+  %li.float-element
+    %label
+      Direct Link
+    %span
+      =link_to control.url do
+        =control.url
+  %li.float-element
+    %label
+      Effective Date
+    %span
+      =control.start_date && control.start_date.strftime("%m/%d/%y")
+  %li.float-element
+    %label
+      Stop Date
+    %span
+      =control.stop_date && control.stop_date.strftime("%m/%d/%y")
       
-%ul.tree.info-list
+%ul.tree
   %li.category
     =render :partial => 'categories/object_list',
             :locals  => { :object => control, :scope_id => Control::CATEGORY_TYPE_ID }
