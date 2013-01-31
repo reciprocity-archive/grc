@@ -48,6 +48,23 @@ ul.tree {
         border-color:darken($lightGray,7%);
       }
     }
+    .two-row {
+      .main {
+        @include clearfix();
+        .key {
+          color: $darkGray;
+          font-size: 11px;
+          display: block;
+          line-height: 18px;
+          padding-top: 5px;
+        }
+        .addition-info {
+          display: block;
+          line-height: 18px;
+          padding-bottom: 5px;
+        }
+      }
+    }
   }
   li.main {
     border-bottom:1px solid $lightGray;

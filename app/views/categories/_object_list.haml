@@ -2,29 +2,27 @@
 
 -all_object_categorizations = object.categorizations.includes(:category).where(:categories => { :scope_id => scope_id }).all
 
-.row-fluid.js-list-container-title
-  .span10
-    %h3.toggle{"data-target" => "#categoryListCollapse", "data-toggle" => "collapse"}
-      .expander
-      Categories
-      %span{:class => "grc-badge #{all_object_categorizations.count.zero? ? "no-object" : ""}"}=all_object_categorizations.count
-  .span2
-    %a.widgetbtn.pull-right.juke-left{:href => list_edit_flow_categorizations_path(:object_type => object.class.name, :object_id => object.id, :scope_id => scope_id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#categoryList', :'data-modal-class' => 'modal-wide' }
-      %i.grcicon-edit-grey
+%h3
+  Categories
+  %span{:class => "grc-badge #{all_object_categorizations.count.zero? ? "no-object" : ""}"}=all_object_categorizations.count
+.item-actions
+  %a{:href => list_edit_flow_categorizations_path(:object_type => object.class.name, :object_id => object.id, :scope_id => scope_id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#categoryList', :'data-modal-class' => 'modal-wide'}
+    %i.grcicon-edit-new
 
-.collapse#categoryListCollapse
-  .bootstrap-collapse-bugfix
-
+%section.content
   %script#category_list_item{ :type => 'text/html', :'data-member' => 'categorization' }
     %li.controlSlot{ :'data-id' => '<%= category.id %>' }
       %span.controls-group <%= category.parent_name %>
       %br
       %span.controls-subgroup <%= category.name || '&nbsp;' %>
-
-  %ul#categoryList{ :'data-template-id' => 'category_list_item' }
+      
+  %ul#categoryList.tree.two-row{ :'data-template-id' => 'category_list_item' }
     -all_object_categorizations.each do |object_item|
       -item = object_item.category
-      %li.controlSlot{ :'data-id' => item.id }
-        %span.controls-group=item.parent_name
-        %br
-        %span.controls-subgroup=item.name || '&nbsp;'.html_safe
+      %li.main{ :'data-id' => item.id }
+        .item-identifier
+          .item-title
+            %span.key
+              =item.parent_name
+            %span.addition-info              
+              =item.name || '&nbsp;'.html_safe
