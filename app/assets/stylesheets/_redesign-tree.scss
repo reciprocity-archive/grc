@@ -18,10 +18,53 @@ h3.tab-title {
 
 ul.tree {
   @include reset-list();
+  &.info-list {
+    .item-content {
+      display: block;
+      ul.tree-content {
+        @include reset-list();
+        li {
+          border-bottom: 1px solid #eee;
+          label {
+            font-weight: bold;
+            color: $darkGray;
+          }
+          .rtf {
+            margin-left: 0;
+            ul,
+            ol {
+              margin-bottom: 10px;
+              margin-top: 10px;
+              li {
+                border: none;
+              }
+            }
+          }
+          &.float-element {
+            border-bottom: 1px solid #eee;
+            padding: 6px 0 4px 0;
+            @include clearfix();
+            label {
+              font-weight: bold;
+              color: $darkGray;
+              float: left;
+              width: 35%;
+              margin: 0 10px 0 0;
+            }
+            span {
+              display: inline-block;
+              margin-top: 1px;
+            }
+          }
+        }
+      }
+    }
+  }
   li.category {
     background:$lightGray;
     margin-bottom:4px;
     @include border-radius();
+    position: relative;
     h3 {
       border:1px solid darken($lightGray,5%);
       color:$gray;
@@ -31,6 +74,24 @@ ul.tree {
       padding:0 6px;
       @include text-shadow(0 1px 1px $white);
       @include border-radius(4px 4px 0 0);
+      span {
+        font-weight: bold;
+        color: $darkGray;
+      }
+    }
+    .role {
+      font-size: 11px;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: $green;
+    }
+    .item-actions {
+      line-height:14px;
+      position:absolute;
+      right:4px;
+      top:4px;
+      @include opacity(0.4);
+      @include transition(opacity 0.2s);
     }
     .content {
       @include border-radius(0 0 4px 4px);
@@ -38,19 +99,8 @@ ul.tree {
       border-top:none;
       padding:0;
     }
-    &:hover {
-      background:darken($lightGray,5%);
-      h3 {
-        border:1px solid darken($lightGray,7%);
-        color:darken($gray,10%);
-      }
-      .content {
-        border-color:darken($lightGray,7%);
-      }
-    }
     .two-row {
       .main {
-        @include clearfix();
         .key {
           color: $darkGray;
           font-size: 11px;
@@ -63,6 +113,16 @@ ul.tree {
           line-height: 18px;
           padding-bottom: 5px;
         }
+      }
+    }
+    &:hover {
+      background:darken($lightGray,5%);
+      h3 {
+        border:1px solid darken($lightGray,7%);
+        color:darken($gray,10%);
+      }
+      .content {
+        border-color:darken($lightGray,7%);
       }
     }
   }
@@ -125,13 +185,14 @@ ul.tree {
     }
   }
   .key {
-    color:$subTitle;
+    color: $subTitle;
     font-weight:bold;
+  }
+  p.key {
     font-size:13px;
     line-height:18px;
     display:inline-block;
     margin-top:7px;
-    width:100%;
   }
   .additional-info {
     color:$gray;

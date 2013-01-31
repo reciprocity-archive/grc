@@ -12,42 +12,42 @@
         %li.main
           .item-content
             %ul.tree-content
-              %li
+              %li.float-element
                 %label
                   Code
                 %span
                   =control.slug
-              %li
+              %li.float-element
                 %label
                   Type
                 %span
                   =control.type && control.type.title
-              %li
+              %li.float-element
                 %label
                   Kind
                 %span
                   =control.kind && control.kind.title
-              %li
+              %li.float-element
                 %label
                   Fraud-related
                 %span
                   =control.fraud_related ? 'Yes' : 'No'
-              %li
+              %li.float-element
                 %label
                   Significance
                 %span
                   =control.key_control ? 'Key' : 'Non-key'
-              %li
+              %li.float-element
                 %label
                   Assertions
                 %span
                   =control.assertions.map(&:name).join(', ')
-              %li
+              %li.float-element
                 %label
                   Means of Operation
                 %span
                   =control.means && control.means.title
-              %li
+              %li.float-element
                 %label
                   Confirm Frequency
                 %span
@@ -55,25 +55,23 @@
               %li
                 %label
                   Description
-                .html-box
-                  =display_as_html control.description
+                =display_as_html control.description
               %li
                 %label
                   Notes
-                .html-box
-                  =display_as_html control.notes
-              %li
+                =display_as_html control.notes
+              %li.float-element
                 %label
                   Direct Link
                 %span
                   =link_to control.url do
                     =control.url
-              %li
+              %li.float-element
                 %label
                   Effective Date
                 %span
                   =control.start_date && control.start_date.strftime("%m/%d/%y")
-              %li
+              %li.float-element
                 %label
                   Stop Date
                 %span
