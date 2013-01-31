@@ -16,3 +16,6 @@
       -else
         Starting in #{days_ago_in_words cycle.start_at}
 
+      -if cycle.end_at
+        %br
+        Ends on #{cycle.end_at.strftime("%m/%d/%y")}

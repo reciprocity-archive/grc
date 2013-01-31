@@ -36,6 +36,7 @@ class CyclesController < BaseObjectsController
         end
       end
       parse_date_param(cycle_params, :start_at)
+      parse_date_param(cycle_params, :end_at)
       cycle_params
     end
 
