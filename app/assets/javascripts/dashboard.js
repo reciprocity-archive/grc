@@ -355,7 +355,7 @@ jQuery(function($) {
     $(this).closest('.modal')
       .find('.modal-header h1').html(data.help.title);
     $(this).closest('.modal')
-      .find('.modal-body p').html(data.help.content);
+      .find('.modal-body .help-content').html(data.help.content);
   });
 });
 

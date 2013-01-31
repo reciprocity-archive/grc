@@ -9,7 +9,8 @@
       -else
         =@help_slug.humanize
         Help
-    =display_as_html @help.content
+    .help-content
+      =display_as_html @help.content
   -else
     -content_for :modal_title do
       GRC Help
