@@ -166,18 +166,6 @@ module ImportHelper
     end
   end
 
-  def handle_import_documents(object, attrs, key)
-    documents_string = attrs.delete(key)
-
-    if documents_string.present?
-      documents = parse_document_reference(documents_string).map do |attrs|
-        doc = Document.find_or_create_by_link(attrs)
-        doc
-      end
-      object.documents = documents
-    end
-  end
-
   def parse_document_reference(ref_string)
     ref_string.split("\n").map do |ref|
       ref =~ /(.*)\[(\S+)(:?.*)\](.*)/
@@ -187,19 +175,31 @@ module ImportHelper
       end
       { :description => ($1.nil? ? '' : $1) + ($4.nil? ? '' : $4),
         :link => link, :title => $3.present? ? $3.strip : link }
-    end.reject {|x| x[:link].blank?}
+    end
   end
 
-  def handle_import_document_reference(object, attrs, key, warnings)
+  # if option warning_key is set warnings will be assigned to this key instead of actual key
+  def handle_import_document_reference(object, attrs, key, warnings, options = {})
+    defaults = { :warning_key => key }
+    options = defaults.merge(options)
+
+    warning_key = options[:warning_key]
     ref_string = attrs.delete(key)
+
     if ref_string.present?
       documents = parse_document_reference(ref_string).map do |ref|
-        begin
-          Document.find_or_create_by_link!(ref)
-        rescue
-          warnings[key.to_sym] ||= []
-          warnings[key.to_sym] << "invalid reference URL"
+        if ref[:link].blank?
+          warnings[warning_key.to_sym] ||= []
+          warnings[warning_key.to_sym] << "invalid reference (references must be formatted as follows: \"[www.yoururl.com Reference Title]\")"
           nil
+        else
+          begin
+            Document.find_or_create_by_link!(ref)
+          rescue
+            warnings[warning_key.to_sym] ||= []
+            warnings[warning_key.to_sym] << "invalid reference URL"
+            nil
+          end
         end
       end.compact
       object.documents = documents
