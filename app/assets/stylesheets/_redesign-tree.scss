@@ -16,6 +16,42 @@ h3.tab-title {
   }
 }
 
+ul.tree-structure {
+  @include reset-list();
+  li {
+    line-height:31px;
+    border-bottom:1px solid $lightGray;
+    &:last-child {
+      border-bottom:none;
+    }
+  }
+  p {
+    margin:0;
+
+  }
+  .openclose {
+    margin-top:7px;
+    float:left;
+  }
+  .item-title {
+    margin-left:24px;
+    position:relative;
+  }
+  .item-actions {
+    line-height:16px;
+    position:absolute;
+    right:0;
+    top:4px;
+    @include opacity(0.4);
+    @include transition(opacity 0.2s);
+    .btn-mini {
+      padding-left:2px;
+      padding-right:2px;
+    }
+  }
+  
+}
+
 ul.tree {
   @include reset-list();
   li.category {
@@ -127,11 +163,12 @@ ul.tree {
   .key {
     color:$subTitle;
     font-weight:bold;
+  }
+  p.key {
     font-size:13px;
     line-height:18px;
     display:inline-block;
     margin-top:7px;
-    width:100%;
   }
   .additional-info {
     color:$gray;

@@ -5,7 +5,8 @@
 
 
 [class^="grcicon-"],
-.showhide {
+.showhide,
+.openclose {
   display: inline-block;
   width: 16px;
   height: 16px;
@@ -379,7 +380,8 @@
   }
 }
 
-.showhide {
+.showhide,
+.openclose {
   @include new-icons();
   background-position:0 -64px;
   cursor:pointer;
