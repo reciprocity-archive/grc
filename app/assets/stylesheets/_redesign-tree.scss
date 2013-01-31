@@ -90,48 +90,6 @@ ul.tree-structure {
 
 ul.tree {
   @include reset-list();
-  &.info-list {
-    .item-content {
-      display: block;
-      ul.tree-content {
-        @include reset-list();
-        li {
-          border-bottom: 1px solid #eee;
-          label {
-            font-weight: bold;
-            color: $darkGray;
-          }
-          .rtf {
-            margin-left: 0;
-            ul,
-            ol {
-              margin-bottom: 10px;
-              margin-top: 10px;
-              li {
-                border: none;
-              }
-            }
-          }
-          &.float-element {
-            border-bottom: 1px solid #eee;
-            padding: 6px 0 4px 0;
-            @include clearfix();
-            label {
-              font-weight: bold;
-              color: $darkGray;
-              float: left;
-              width: 35%;
-              margin: 0 10px 0 0;
-            }
-            span {
-              display: inline-block;
-              margin-top: 1px;
-            }
-          }
-        }
-      }
-    }
-  }
   li.category {
     background:$lightGray;
     margin-bottom:4px;
@@ -259,6 +217,10 @@ ul.tree {
   .key {
     color: $subTitle;
     font-weight:bold;
+  }
+  .option {
+    font-size: 11px;
+    font-weight: bold;
   }
   p.key {
     font-size:13px;

@@ -3,7 +3,8 @@
 
 %h3
   References
-  %span{:class => "grc-badge #{all_object_documents.count.zero? ? "no-object" : ""}"}=all_object_documents.count
+  %span{:class => "grc-badge #{all_object_documents.count.zero? ? "no-object" : ""}"}
+    (#{all_object_documents.count})
 .item-actions
   %a{:href => list_edit_flow_object_documents_path(:object_type => object.class.name, :object_id => object.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#referenceList', :'data-modal-class' => 'modal-wide'}
     %i.grcicon-edit-new
@@ -30,16 +31,18 @@
         -if item.link_url.present?
           .item-identifier
             .item-title
-              %span.key
-                =item.document_type || '&nbsp;'.html_safe
               %span.addition-info
                 %a.reference{:href => item.link_url, :target => "_blank"}
-                  =item.title.presence || item.link_url || '&nbsp;'.html_safe
+                  =item.title.presence || item.link_url || ''.html_safe
+              %span.option
+                (#{item.document_type || ''.html_safe})
+                  
         -else
           .item-identifier
             .item-title
-              %span.key
-                =item.document_type || '&nbsp;'.html_safe
               %span.addition-info
-                =item.title.presence || item.link_url || '&nbsp;'.html_safe
+                =item.title.presence || item.link_url || ';'.html_safe
+              %span.option
+                (#{item.document_type || ''.html_safe})
+                
   

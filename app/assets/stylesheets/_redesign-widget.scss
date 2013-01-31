@@ -65,6 +65,7 @@
     p {
       margin: 0;
       line-height: 20px;
+      color: $gray;
       &.footer-right {
         text-align: right;
       }
@@ -170,6 +171,54 @@
       }
       .showhide {
         display:none;
+      }
+    }
+  }
+  .info-content {
+    margin-bottom: 20px;
+    h3 {
+      font-size: 14px;
+      text-transform: uppercase;
+      padding-left: 7px;
+    }
+    .info-list {
+      @include reset-list();
+      li {
+        border-bottom: 1px solid $lightGray;
+        padding: 6px 0 4px 7px;
+        &:last-child {
+          border-bottom: none;
+        }
+        label {
+          font-weight: bold;
+          color: $darkGray;
+        }
+        .rtf {
+          margin-left: 0;
+          margin-bottom: 10px;
+          font-size: 11px;
+          ul,
+          ol {
+            margin-bottom: 10px;
+            margin-top: 10px;
+            li {
+              border: none;
+              padding: 0;
+            }
+          }
+        }
+        &.float-element {
+          @include clearfix();
+          label {
+            float: left;
+            width: 35%;
+            margin: 0 10px 0 0;
+          }
+          span {
+            display: inline-block;
+            margin-top: 1px;
+          }
+        }
       }
     }
   }
