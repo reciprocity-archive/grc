@@ -42,7 +42,7 @@ can.Control("CMS.Controllers.ResizeWidgets", {
   , update_columns : function(container) {
     var $c = $(container)
     , $children = $c.children()
-    , widths = this.options.model.attr(this.options.columns_token).attr($c.attr("id"));
+    , widths = this.getWidthsForSelector($c);
 
     for(var i = 1; i <= this.options.total_columns; i++) {
       $children.removeClass("span" + i);
@@ -82,10 +82,22 @@ can.Control("CMS.Controllers.ResizeWidgets", {
 
   , adjust_column : function(container, border_idx, adjustment) {
     var containers = this.options.model[this.options.columns_token];
-    var col = containers.attr($(container).attr("id"));
-    
-    if(border_idx < 1 || border_idx >= col.length) 
+    var col = this.getWidthsForSelector(container);
+    var adjustment = this.normalizeAdjustment(col, border_idx, adjustment);
+
+    if(!adjustment)
       return;
+
+    col.attr(border_idx, col[border_idx] - adjustment);
+    col.attr(border_idx - 1, col[border_idx - 1] + adjustment);
+    this.options.model.save();
+  }
+
+  , normalizeAdjustment : function(col, border_idx, initial_adjustment) {
+    var adjustment = initial_adjustment;
+
+    if(border_idx < 1 || border_idx >= col.length) 
+      return 0;
 
     //adjustment is +1, border_idx reduced by 1, adjustment should never be a higher number than border_idx width minus 1
     //adjustment is -1, border_idx-1 reduced by 1, adjustment should never be lower than negative( border_idx-1 width minus 1)
@@ -93,21 +105,27 @@ can.Control("CMS.Controllers.ResizeWidgets", {
     adjustment = Math.min(adjustment, col[border_idx] - 1);
     adjustment = Math.max(adjustment, -col[border_idx - 1] + 1);
 
-    col.attr(border_idx, col[border_idx] - adjustment);
-    col.attr(border_idx - 1, col[border_idx - 1] + adjustment);
+    return adjustment;
   }
 
-  , " mousedown" : function(el, ev) {
+  , getWidthsForSelector : function(sel) {
+    return this.options.model.attr(this.options.columns_token).attr($(sel).attr("id"));
+  }
+
+  , " mousedown" : "startResize"
+
+  , startResize : function(el, ev) {
     var that = this;
     var origTarget = ev.originalEvent ? ev.originalEvent.target : ev.target;
     can.each(this.options.containers, function(t) { 
       if ($(t).is(origTarget)) {
         var offset = Math.round((-$(t).offset().left + ev.pageX) / $(t).width() * that.options.total_columns);
-        var widths = that.options.model[that.options.columns_token][$(t).attr("id")].slice(0);
+        var widths = that.getWidthsForSelector(t).slice(0);
         var c_width = that.options.total_columns;
         while(c_width > offset) { //should be >=?
           c_width -= widths.pop();
         }
+        //create the bar that shows where the new split will be
         $("<div>&nbsp;</div>")
         .addClass("width-selector-bar")
         .data("offset", offset)
@@ -115,12 +133,13 @@ can.Control("CMS.Controllers.ResizeWidgets", {
         .data("index", widths.length)
         .css({
           width: "5px"
-          , height : "100%"
+          , height : $(t).height()
           , "background-color" : "black"
           , position : "absolute"
           , left : offset * $(t).width() / that.options.total_columns + $(t).offset().left
-          , top : "10px"
+          , top : $(t).offset().top
         }).appendTo(t);
+        //create an invisible drag target so we don't drag around a ghost of the bar
         $("<div>&nbsp;</div>")
         .attr("draggable", true)
         .addClass("width-selector-drag")
@@ -135,7 +154,10 @@ can.Control("CMS.Controllers.ResizeWidgets", {
     });
   }
 
-  , " mouseup" : function(el, ev) {
+  , " mouseup" : "completeResize"
+  , " dragend" : "completeResize"
+
+  , completeResize : function(el, ev) {
     var $drag = $(".width-selector-drag");
     if($drag.length && $drag.data("target")) {
       var t = $drag.data("target")
@@ -149,17 +171,20 @@ can.Control("CMS.Controllers.ResizeWidgets", {
     $(".width-selector-bar, .width-selector-drag").remove();
   }
 
-  , " dragend" : " mouseup"
 
   //, " dragstart" : function(el, ev)  { ev.preventDefault(); }
 
   , " dragover" : function(el, ev) {
     var $drag = $(".width-selector-drag");
+    var $bar =  $(".width-selector-bar")
     if($drag.length && $drag.data("target")) {
       var t = $drag.data("target")
-      , offset = Math.round((-$(t).offset().left + ev.pageX) / $(t).width() * this.options.total_columns);
-      
-      $(".width-selector-bar")
+      , offset = Math.round((-$(t).offset().left + ev.pageX) / $(t).width() * this.options.total_columns)
+      , adjustment = this.normalizeAdjustment(this.getWidthsForSelector(t), $bar.data("index"), offset - $bar.data("start_offset"));
+
+      offset = $bar.data("start_offset") + adjustment;
+
+      $bar
       .data("offset", offset)
       .css("left", offset * $(t).width() / this.options.total_columns + $(t).offset().left);
       ev.preventDefault();
