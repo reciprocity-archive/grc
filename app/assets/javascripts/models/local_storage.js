@@ -90,7 +90,7 @@
         //create new
         key = [this._shortName, newkey].join(":");
         var item = this.model(can.extend({id : newkey}, params));
-        window.localStorage.setItem(key, JSON.stringify(data));
+        window.localStorage.setItem(key, JSON.stringify(item.serialize()));
 
         def.resolve(item);
         this.created && this.created(item);
@@ -107,9 +107,9 @@
         if(data) {
           data = JSON.parse(data);
           can.extend(data, params);
-          window.localStorage.setItem(key, JSON.stringify(data));
-
           var item = this.model(data);
+
+          window.localStorage.setItem(key, JSON.stringify(item.serialize()));
           def.resolve(item);
           this.updated && this.updated(item);
         } else {

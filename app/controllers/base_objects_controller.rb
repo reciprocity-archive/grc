@@ -147,6 +147,14 @@ class BaseObjectsController < ApplicationController
     render :layout => '_tooltip', :locals => { object_name.to_sym => object }
   end
 
+  def new_object_title
+    object_name.titleize
+  end
+
+  def new_object_path
+    url_for(:action => :new, :only_path => true) if respond_to?(:new)
+  end
+
   private
 
     def show_context

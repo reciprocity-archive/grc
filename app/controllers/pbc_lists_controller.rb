@@ -107,6 +107,9 @@ class PbcListsController < BaseObjectsController
     end
   end
 
+  def new_object_path
+  end
+
   private
 
     def do_import_requests(import, check_only)
