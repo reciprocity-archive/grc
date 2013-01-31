@@ -391,6 +391,10 @@
     background-position:-16px -64px;
     @include opacity(1);
   }
+  &.lastchild {
+    cursor:default;
+    background-position:-48px -64px !important;
+  }
   .widget .header & {
     margin-top:4px;
     margin-right:8px;

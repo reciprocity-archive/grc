@@ -28,6 +28,8 @@ ul.tree-structure {
   p {
     margin:0;
     color:$text;
+    line-height:18px;
+    margin-top:6px;
     &.code {
       color:$subTitle;
     }
@@ -36,6 +38,9 @@ ul.tree-structure {
     margin-top:7px;
     float:left;
     @include opacity(0.4);
+    &.active {
+      @include opacity(1);
+    }
   }
   .item-title {
     margin-left:24px;
@@ -45,6 +50,12 @@ ul.tree-structure {
       .openclose {
         @include opacity(1);
       }
+    }
+    .title {
+      color:#111;
+    }
+    .description {
+      display:none;
     }
   }
   .item-actions {
@@ -60,12 +71,16 @@ ul.tree-structure {
     }
   }
   .item-content {
+    display:none;
     ul.tree-structure {
       margin-left:24px;
       border-top:1px solid $lightGray;
     }
     .openclose {
       background-position:-112px -32px;
+      &.active {
+        background-position:-96px -32px;
+      }
     }
     p {
       color:lighten($text,5%);
