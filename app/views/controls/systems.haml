@@ -12,10 +12,25 @@
       .item-identifier
         .item-title
           .row-fluid
-            .span7
-              .showhide
-              %span.key=system.slug
-              %span.additional-info=system.title
+            .span2
+              %p.key.oneline=system.slug
+            -if has_feature? :BETA
+              .span5
+                %p.additional-info.oneline
+                  %span=system.title
+                  -if system.description != ""
+                    %a.more{:href=>"#"} more...
+                    %br
+                    %span.description=system.description
+            -else
+              .span8
+                %p.additional-info.oneline
+                  %span=system.title
+                  -if system.description != ""
+                    %a.more{:href=>"#"} more...
+                    %br
+                    %span.description=system.description
+          
             -if has_feature? :BETA
               .span5
                 %span.label Data Integrity
