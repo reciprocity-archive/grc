@@ -431,6 +431,10 @@ class ProgramsController < BaseObjectsController
     render :layout => nil
   end
 
+  def new_object_title
+    "Program or Policy"
+  end
+
   private
 
     # Construct the category controls tree
