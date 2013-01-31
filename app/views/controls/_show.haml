@@ -68,15 +68,12 @@
           %input.span12{:disabled => "disabled", :type => "text", :value => control.url}
       .row-fluid
         .span12
-          .span4
+          .span6
             %label Effective Date
             %input.span12{:type => "text", :disabled => "disabled", :value => control.start_date && control.start_date.strftime("%m/%d/%y")}
-          .span4
+          .span6
             %label Stop Date
             %input.span12{:type => "text", :disabled => "disabled", :value => control.stop_date && control.stop_date.strftime("%m/%d/%y")}
-          .span4
-            %label Status
-            %input.span12{:type => "text", :disabled => "disabled", :value => control.active ? 'Active' : 'Inactive'}
 
 %hr.hr-widget
 
