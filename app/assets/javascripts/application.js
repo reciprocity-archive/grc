@@ -146,12 +146,20 @@ jQuery(document).ready(function($) {
 
     var $this = $(this),
         $paragraph = $this.closest("p"),
-        $description = $this.closest("p").find(".description");    
+        $description = $this.closest("div").find(".description");    
     
-    $paragraph.removeClass("oneline");
-    $description.slideDown();
+    $description.fadeIn();
 
   });
+
+  $('body').on('mouseover', 'p.description', function(e) {
+
+    var $this = $(this);
+    
+    $this.removeClass("oneline");
+
+  });
+
 
 
   

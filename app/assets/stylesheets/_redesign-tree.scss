@@ -30,6 +30,7 @@ ul.tree-structure {
     color:$text;
     line-height:18px;
     margin-top:6px;
+    margin-bottom:5px;
     &.code {
       color:$subTitle;
     }
@@ -51,18 +52,22 @@ ul.tree-structure {
         @include opacity(1);
       }
     }
-    .title {
+    .title,
+    .description {
       color:#111;
     }
     .description {
       display:none;
+      &.description-only {
+        display:block;
+      }
     }
   }
   .item-actions {
     line-height:16px;
     position:absolute;
     right:0;
-    top:4px;
+    top:3px;
     @include opacity(0.2);
     @include transition(opacity 0.2s);
     .btn-mini {
