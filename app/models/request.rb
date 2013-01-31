@@ -38,6 +38,10 @@ class Request < ActiveRecord::Base
     :allow_blank => true,
     :multi_email => true
 
+  validation_scope :warnings do |s|
+    s.validate :validates_request_uniqueness
+  end
+
   after_save :after_save_detect_orphaned_control_assessment
   after_destroy :after_destroy_detect_orphaned_control_assessment
 
@@ -99,5 +103,13 @@ class Request < ActiveRecord::Base
 
     counts['Draft'] += counts.delete(nil).to_i
     counts
+  end
+
+  def validates_request_uniqueness
+    r = Request.where(:pbc_list_id => pbc_list_id).
+          where(:pbc_control_code => pbc_control_code).
+          where(:request => request)
+
+    warnings.add :request, "This request string already exists" if r.any?
   end
 end
