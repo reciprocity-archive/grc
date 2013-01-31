@@ -110,10 +110,29 @@ ul.tree {
   .key {
     color:$subTitle;
     font-weight:bold;
-    padding-right:10px;
+    font-size:13px;
+    line-height:18px;
+    display:inline-block;
+    margin-top:7px;
+    width:100%;
   }
   .additional-info {
     color:$gray;
+  }
+  p.additional-info {
+    font-size:13px;
+    line-height:18px;
+    display:inline-block;
+    margin-top:7px;
+    span {
+      &:first-child {
+        color:#111;
+      }
+      &.description {
+        display:none;
+      }
+    }
+    
   }
   span.label {
     font-size:12px;

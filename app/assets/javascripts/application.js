@@ -140,6 +140,20 @@ jQuery(document).ready(function($) {
     }
     
   });
+
+  // Show/hide widget content
+  $('body').on('mouseover', '.item-identifier a.more', function(e) {
+
+    var $this = $(this),
+        $paragraph = $this.closest("p"),
+        $description = $this.closest("p").find(".description");    
+    
+    $paragraph.removeClass("oneline");
+    $description.slideDown();
+
+  });
+
+
   
   // Open quick find
   $('body').on('focus', '.quick-search-holder input', function() {
