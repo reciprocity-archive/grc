@@ -24,12 +24,6 @@ ul.tree-structure {
     &:last-child {
       border-bottom:none;
     }
-    &:hover {
-      .item-actions {
-        @include opacity(1);
-      }
-    }
-
   }
   p {
     margin:0;
@@ -41,24 +35,42 @@ ul.tree-structure {
   .openclose {
     margin-top:7px;
     float:left;
+    @include opacity(0.4);
   }
   .item-title {
     margin-left:24px;
     position:relative;
+    &:hover {
+      .item-actions,
+      .openclose {
+        @include opacity(1);
+      }
+    }
   }
   .item-actions {
     line-height:16px;
     position:absolute;
     right:0;
     top:4px;
-    @include opacity(0.4);
+    @include opacity(0.2);
     @include transition(opacity 0.2s);
     .btn-mini {
       padding-left:2px;
       padding-right:2px;
     }
   }
-  
+  .item-content {
+    ul.tree-structure {
+      margin-left:24px;
+      border-top:1px solid $lightGray;
+    }
+    .openclose {
+      background-position:-112px -32px;
+    }
+    p {
+      color:lighten($text,5%);
+    }
+  }
 }
 
 ul.tree {
