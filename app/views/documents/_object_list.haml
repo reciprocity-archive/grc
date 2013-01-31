@@ -35,7 +35,7 @@
                 %a.reference{:href => item.link_url, :target => "_blank"}
                   =item.title.presence || item.link_url || ''.html_safe
               %span.option
-                (#{item.document_type || ''.html_safe})
+                =item.document_type || ''.html_safe
                   
         -else
           .item-identifier
@@ -43,6 +43,6 @@
               %span.addition-info
                 =item.title.presence || item.link_url || ';'.html_safe
               %span.option
-                (#{item.document_type || ''.html_safe})
+                =item.document_type || ''.html_safe
                 
   
