@@ -3,10 +3,6 @@
 
 -content_for :widget_help, 'product_info'
 
--content_for :widget_buttons do
-  %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#productInfoContent"}
-    %i.grcicon-enlarge-grey
-
 .information
   -if has_feature? :BETA
     .well
