@@ -263,6 +263,16 @@
   @include new-icons();
   background-position:-144px -48px;
 }
+
+.grcicon-goto-left {
+  @include new-icons();
+  background-position:-144px -64px;
+}
+.grcicon-goto-left-white {
+  @include new-icons();
+  background-position:-144px -80px;
+}
+
 .grcicon-search-new {
   @include new-icons();
   background-position:-32px -64px;

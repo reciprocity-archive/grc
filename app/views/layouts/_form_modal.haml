@@ -1,14 +1,13 @@
 .modal-header
-  %nav
-    -help_path = yield_content!(:modal_help)
-    -if !help_path.blank?
-      %a.widgetbtn{ :href => "/help/#{help_path}", :'data-toggle' => 'modal-ajax', :title => "Help - What is this?"}
-        %i.grcicon-questionmark-grey
-    %a.widgetbtn{ :'data-dismiss' => 'modal', :href => '#'}
-      %i.grcicon-x-grey
-  %h1=yield_content!(:modal_title) || "&nbsp;".html_safe
+  -help_path = yield_content!(:modal_help)
+  -if !help_path.blank?
+    %a.btn.btn-mini.pull-right{ :href => "/help/#{help_path}", :'data-toggle' => 'modal-ajax', :title => "Help - What is this?"}
+      %i.grcicon-help-black
+  %a.btn.btn-mini.pull-right{ :'data-dismiss' => 'modal', :href => '#'}
+    %i.grcicon-x-grey
+  %h2=yield_content!(:modal_title) || "&nbsp;".html_safe
 
-.modal-body.cleanlabels.compact-rows
+.modal-body
   =yield
 
 .modal-info
@@ -16,24 +15,27 @@
 
 .modal-footer
   .row-fluid
-    %nav.fltlft.txtlft.span3
-      %a.btn.btn-large{:'data-dismiss' => 'modal-reset', :href => '#' } Cancel
-      -delete_path = yield_content!(:modal_delete_path)
-      -if !delete_path.blank?
-        %a.btn.btn-large{:href => delete_path, :'data-toggle' => 'modal-ajax-deleteform'} Delete
-    -if has_feature?(:BETA) && !f.object.new_record?
-      .toolbar-widget.span6.demoText
-        %a.btn{:href => "#", :'data-toggle' => 'version-prev'}
-          %i.grcicon-arrowleft-black
-        %span.btnwell
-          Showing Most Recent of
-          %strong=f.object.versions.count
-          Revisions
-        %a.btn{:href => "#", :'data-toggle' => 'version-next'}
-          %i.grcicon-arrowright-black
-    %nav.fltrt.txtrt.span3
-      %a.btn.btn-large.btn-primary.preventdoubleclick{:'data-toggle' => 'modal-submit', :href => 'javascript://' } Save 
-      -approve_path = yield_content!(:modal_approve_path)
-      -if !approve_path.blank?
-        %a.btn.btn-large.btn-success.btn-primary.disabled{:'data-toggle' => 'modal-approve', :href => 'javascript://', :disabled => 'disabled'} Approve
+    .span3
+      .deny-buttons
+        %a.btn.btn-warning{:'data-dismiss' => 'modal-reset', :href => '#' } Cancel
+        -delete_path = yield_content!(:modal_delete_path)
+        -if !delete_path.blank?
+          %a.btn.btn-warning{:href => delete_path, :'data-toggle' => 'modal-ajax-deleteform'} Delete
+    .span6
+      -if has_feature?(:BETA) && !f.object.new_record?
+        .version-nav
+          %a.btn{:href => "#", :'data-toggle' => 'version-prev'}
+            %i.grcicon-goto-left
+          %span
+            Showing Most Recent of
+            %strong=f.object.versions.count
+            Revisions
+          %a.btn{:href => "#", :'data-toggle' => 'version-next'}
+            %i.grcicon-goto
+    .span3
+      .confirm-buttons
+        %a.btn.btn-primary.preventdoubleclick{:'data-toggle' => 'modal-submit', :href => 'javascript://' } Save 
+        -approve_path = yield_content!(:modal_approve_path)
+        -if !approve_path.blank?
+          %a.btn.btn-success.btn-primary.disabled{:'data-toggle' => 'modal-approve', :href => 'javascript://', :disabled => 'disabled'} Approve
 
