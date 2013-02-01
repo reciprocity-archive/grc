@@ -42,6 +42,10 @@ class RiskyAttribute < ActiveRecord::Base
     new_record? || attributed_objects.count == 0
   end
 
+  def default_slug_prefix
+    'RA'
+  end
+
   def display_name
     slug
   end
