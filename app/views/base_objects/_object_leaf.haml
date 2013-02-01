@@ -1,0 +1,27 @@
+-# locals: instance, title_attr, description_attr
+
+-title_attr = :title if local_assigns[:title_attr].nil?
+-description_attr = :description if local_assigns[:description_attr].nil?
+
+.expand-on-hover.oneline
+  -if instance.send(title_attr).present? && instance.send(description_attr).present?
+    -# Both title and description
+    %span.title
+      =instance.send(title_attr)
+      %a.more more...
+    .description
+      =display_as_html(instance.send(description_attr))
+  -elsif instance.send(title_attr).present?
+    -# Title only
+    %span.title
+      =instance.send(title_attr)
+  -elsif instance.send(description_attr).present?
+    -# Description only
+    %span.title.description-only
+      =sanitize(instance.send(description_attr), :tags => %w(b i strong em))
+    .description
+      =display_as_html(instance.send(description_attr))
+  -else
+    -# Neither (shouldn't happen)
+    %span.title (No description)
+
