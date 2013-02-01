@@ -1,4 +1,7 @@
 .modal {
+  form {
+    margin: 0;
+  }
   &.modal-wide {
     width:960px;
     margin-left:-480px;
@@ -9,6 +12,7 @@
     @include box-shadow(inset 0 -1px 0 $modalHeaderShadow);
     .btn {
       margin-top: 2px;
+      padding: 2px;
       &:hover,
       &:active {
         border: 1px solid $white;
@@ -16,18 +20,52 @@
     }
     h2 {
       color: $white;
+      text-shadow: 0;
     }
   }
   .modal-body {
     label {
       font-weight: bold;
       font-size: 11px;
-      color: $gray;
+      color: $darkGray;
+    }
+    .wysiwyg-area {
+      border: 1px solid $widgetBorder;
+      @include border-radius($default-border-radius);
+      padding: 4px;
+      background: $lightGray;
+      margin-bottom: 10px;
+      .double {
+        height: 140px;
+      }
+    }
+    .date {
+      padding-left: 26px;
+      @include background-size(160px 160px);
+      background-image: url("/images/grcicons/icons.png");
+      background-repeat: no-repeat;
+      background-position: -80px -64px;
+    }
+  }
+  .modal-info {
+    background: $widgetFooteBgnd;
+    padding: 5px 20px 4px 20px;
+    font-size: 11px;
+    color: $darkGray;
+    .span3 {
+      min-height: auto;
     }
   }
   .modal-footer {
     background: $lightGray;
     text-align: left;
+    .deny-buttons {
+      .btn {
+        &:hover {
+          border: 1px solid $white;
+        }
+      }
+    }
     .version-nav {
       text-align: center;
       font-size: 11px;

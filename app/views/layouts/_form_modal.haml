@@ -17,10 +17,10 @@
   .row-fluid
     .span3
       .deny-buttons
-        %a.btn.btn-warning{:'data-dismiss' => 'modal-reset', :href => '#' } Cancel
+        %a.btn{:'data-dismiss' => 'modal-reset', :href => '#' } Cancel
         -delete_path = yield_content!(:modal_delete_path)
         -if !delete_path.blank?
-          %a.btn.btn-warning{:href => delete_path, :'data-toggle' => 'modal-ajax-deleteform'} Delete
+          %a.btn{:href => delete_path, :'data-toggle' => 'modal-ajax-deleteform'} Delete
     .span6
       -if has_feature?(:BETA) && !f.object.new_record?
         .version-nav

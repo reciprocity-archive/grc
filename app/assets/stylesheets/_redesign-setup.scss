@@ -50,9 +50,9 @@
   $topBarSearchBorder: #282a2c;
   $topBarSearchBgnd: #6a6b6d;
   $green: green;
-  $modalHeader: #44aac8;
-  $modalHeaderBorder: #3097b5;
-  $modalHeaderShadow: #7bcce4;
+  $modalHeader: #0071cc;
+  $modalHeaderBorder: #074fb2;
+  $modalHeaderShadow: #9ac5ff;
 
 // mixins
 
@@ -70,5 +70,5 @@
 
   @mixin new-icons() {
     @include background-size(160px 160px);
-    background-image: url("/images/grcicons/icons.png");    
+    background-image: url("/images/grcicons/icons.png");
   }
