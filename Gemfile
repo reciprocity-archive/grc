@@ -77,6 +77,7 @@ gem 'prawn' # PDF generation
 gem 'paper_trail', '~> 2'
 
 gem 'awesome_nested_set'
+gem 'validation_scopes'
 
 group(:development, :test) do
 

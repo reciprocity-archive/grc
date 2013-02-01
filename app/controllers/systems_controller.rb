@@ -170,7 +170,7 @@ class SystemsController < BaseObjectsController
       handle_import_category(system, attrs, 'categories', System::CATEGORY_TYPE_ID)
       handle_import_sub_systems(system, attrs, 'sub_systems')
       org_groups = attrs.delete('org_groups')
-      handle_import_documents(system, attrs, 'references')
+      handle_import_document_reference(system, attrs, 'references', import[:warnings][i], :warning_key => :references_display)
 
       handle_option(attrs, 'network_zone', import[:warnings][i], :network_zone)
       handle_date(attrs, 'start_date', import[:warnings][i])

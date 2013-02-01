@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130126025345) do
+ActiveRecord::Schema.define(:version => 20130131094829) do
 
   create_table "accounts", :force => true do |t|
     t.string   "username"
@@ -135,6 +135,7 @@ ActiveRecord::Schema.define(:version => 20130126025345) do
     t.text     "description"
     t.string   "status"
     t.text     "notes"
+    t.date     "end_at"
   end
 
   add_index "cycles", ["program_id"], :name => "index_cycles_on_regulation_id"
