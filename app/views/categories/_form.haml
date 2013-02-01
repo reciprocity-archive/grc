@@ -25,14 +25,14 @@
     .controls
       %select(name='category[parent_id]')
         %option{ :value => '' } &lt;New root object&gt;
-        -categories = Category.where(:parent_id => nil)
+        -categories = Category.where(:parent_id => nil).where(Category.arel_table[:id].not_eq(f.object.id))
         -if f.object.scope_id.present?
           -categories = categories.where(:scope_id => f.object.scope_id)
         -else
-          - categories = categories.where(:scope_id => Control::CATEGORY_TYPE_ID)
+          -categories = categories.where(:scope_id => Control::CATEGORY_TYPE_ID)
 
         -categories.each do |category|
-          %option{ :value => category.id }=category.name
+          %option{ :value => category.id, :selected => (category.id == f.object.parent_id) }=category.name
   .span7
     .span12{ :class => error_class(f, :name) }
       =f.label :name, 'Category Name'
