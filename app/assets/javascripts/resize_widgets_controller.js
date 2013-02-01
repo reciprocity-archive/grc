@@ -32,18 +32,19 @@ can.Control("CMS.Controllers.ResizeWidgets", {
   , update : function(newopts) {
     var that = this
     , opts = this.options
-    , widths = this.getWidthsForSelector($(this.element))
+    , widths
     , total_width = 0;
 
     if(!(opts.model[opts.columns_token] instanceof can.Observe)) 
       opts.model.attr(opts.columns_token, new can.Observe(opts.model[opts.columns_token]));
+    widths = this.getWidthsForSelector($(this.element)) || [];
 
     for(var i = 0; i < widths.length; i++) {
       total_width += widths[i];
     }
     if(total_width != this.options.total_columns) {
-      widths = this.divide_evenly($children.length);
-      this.options.model.attr(this.options.columns_token).attr($c.attr("id"), widths);
+      widths = this.divide_evenly($(this.element).children().not(".width-selector-bar, .width-selector-drag").length);
+      this.options.model.attr(this.options.columns_token).attr($(this.element).attr("id"), widths);
       this.options.model.save();
     }
     this.update_columns();
