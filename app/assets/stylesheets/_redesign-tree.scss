@@ -102,9 +102,20 @@ ul.tree-structure {
   }
   &.simple {
     li {
+      padding:4px 0;
       &:hover {
         @include background-image(linear-gradient(left, $white, $lightGray, $white));
         border-color:#ddd;
+      }
+      &.simple-item {
+        line-height:14px;
+        .item-title {
+          margin-left:0;
+        }
+        .additional-info {
+          font-size:11px;
+          color:#999;
+        }
       }
     }
   }
