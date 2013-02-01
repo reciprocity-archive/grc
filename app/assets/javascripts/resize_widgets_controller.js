@@ -30,26 +30,39 @@ can.Control("CMS.Controllers.ResizeWidgets", {
   }
 
   , update : function(newopts) {
-    var that = this;
-    var opts = this.options;
+    var that = this
+    , opts = this.options
+    , widths = this.getWidthsForSelector($(this.element))
+    , total_width = 0;
+
     if(!(opts.model[opts.columns_token] instanceof can.Observe)) 
       opts.model.attr(opts.columns_token, new can.Observe(opts.model[opts.columns_token]));
-    can.isArray(this.options.containers) || (this.options.containers = [this.options.containers]);
-    can.each(this.options.containers, this.proxy('update_columns'));
+
+    for(var i = 0; i < widths.length; i++) {
+      total_width += widths[i];
+    }
+    if(total_width != this.options.total_columns) {
+      widths = this.divide_evenly($children.length);
+      this.options.model.attr(this.options.columns_token).attr($c.attr("id"), widths);
+      this.options.model.save();
+    }
+    this.update_columns();
     this.on();
   }
 
-  , update_columns : function(container) {
-    var $c = $(container)
-    , $children = $c.children()
+  , update_columns : function() {
+    var $c = $(this.element)
+    , $children = $c.children().not(".width-selector-bar, .width-selector-drag")
     , widths = this.getWidthsForSelector($c);
 
-    for(var i = 1; i <= this.options.total_columns; i++) {
+
+    for(i = 1; i <= this.options.total_columns; i++) {
       $children.removeClass("span" + i);
     }
-    if(!widths) {
+    if(!widths || $children.length != widths.length) {
       widths = this.divide_evenly($children.length);
       this.options.model.attr(this.options.columns_token).attr($c.attr("id"), widths);
+      this.options.model.save();
     }
     $children.each(function(i, child) {
       $(child).addClass("span" + widths[i]);
@@ -112,55 +125,66 @@ can.Control("CMS.Controllers.ResizeWidgets", {
     return this.options.model.attr(this.options.columns_token).attr($(sel).attr("id"));
   }
 
+  , getLeftOffset : function(pageX) {
+    var $t = $(this.element);
+    return Math.round((pageX - $t.offset().left - parseInt($t.css("padding-left"))) / $t.width() * this.options.total_columns);
+  }
+
+  , getLeftOffsetAsPixels : function(offset) {
+    var $t = $(this.element);
+    return offset * $t.width() / this.options.total_columns + $t.offset().left + parseInt($t.css("padding-left")) - $(window).scrollLeft();
+  }
+
   , " mousedown" : "startResize"
 
   , startResize : function(el, ev) {
     var that = this;
     var origTarget = ev.originalEvent ? ev.originalEvent.target : ev.target;
-    can.each(this.options.containers, function(t) { 
-      if ($(t).is(origTarget)) {
-        var offset = Math.round((-$(t).offset().left + ev.pageX) / $(t).width() * that.options.total_columns);
-        var widths = that.getWidthsForSelector(t).slice(0);
-        var c_width = that.options.total_columns;
-        while(c_width > offset) { //should be >=?
-          c_width -= widths.pop();
-        }
-        //create the bar that shows where the new split will be
-        $("<div>&nbsp;</div>")
-        .addClass("width-selector-bar")
-        .data("offset", offset)
-        .data("start_offset", offset)
-        .data("index", widths.length)
-        .css({
-          width: "5px"
-          , height : $(t).height()
-          , "background-color" : "black"
-          , position : "absolute"
-          , left : offset * $(t).width() / that.options.total_columns + $(t).offset().left
-          , top : $(t).offset().top
-        }).appendTo(t);
-        //create an invisible drag target so we don't drag around a ghost of the bar
-        $("<div>&nbsp;</div>")
-        .attr("draggable", true)
-        .addClass("width-selector-drag")
-        .data("target", t)
-        .css({
-          left : ev.pageX
-          , top : ev.pageY
-          , position : "absolute"
-        }).appendTo(t);
-        return false;
+    var $t = $(this.element);
+    if ($t.is(origTarget)) {
+      var offset = this.getLeftOffset(ev.pageX);
+      var widths = that.getWidthsForSelector($t).slice(0);
+      var c_width = that.options.total_columns;
+      while(c_width > offset) { //should be >=?
+        c_width -= widths.pop();
       }
-    });
+      //create the bar that shows where the new split will be
+      $("<div>&nbsp;</div>")
+      .addClass("width-selector-bar")
+      .data("offset", offset)
+      .data("start_offset", offset)
+      .data("index", widths.length)
+      .css({
+        width: "5px"
+        , height : $t.height()
+        , "background-color" : "black"
+        , position : "fixed"
+        , left : this.getLeftOffsetAsPixels(offset)
+        , top : $t.offset().top - $(window).scrollTop()
+      }).appendTo($t);
+      //create an invisible drag target so we don't drag around a ghost of the bar
+      $("<div>&nbsp;</div>")
+      .attr("draggable", true)
+      .addClass("width-selector-drag")
+      .css({
+        left : ev.pageX - $(window).scrollLeft() - 1
+        , top : ev.pageY - $(window).scrollTop() - 1
+        , position : "fixed"
+        , width : "3px"
+        , height : "3px"
+        , cursor : "e-resize w-resize"
+      })
+      //.bind("mouseup dragend", this.proxy('completeResize', this.element))
+      //.bind("dragover", this.proxy('recalculate', this.element))
+      .appendTo($t);
+    }
   }
 
-  , " mouseup" : "completeResize"
-  , " dragend" : "completeResize"
 
   , completeResize : function(el, ev) {
     var $drag = $(".width-selector-drag");
-    if($drag.length && $drag.data("target")) {
-      var t = $drag.data("target")
+    if($drag.length) {
+      var t = this.element
       , $bar = $(".width-selector-bar")
       , offset = $bar.data("offset")
       , start_offset = $bar.data("start_offset")
@@ -171,25 +195,29 @@ can.Control("CMS.Controllers.ResizeWidgets", {
     $(".width-selector-bar, .width-selector-drag").remove();
   }
 
+  , " mouseup" : "completeResize"
+  , " dragend" : "completeResize"
 
   //, " dragstart" : function(el, ev)  { ev.preventDefault(); }
 
-  , " dragover" : function(el, ev) {
-    var $drag = $(".width-selector-drag");
-    var $bar =  $(".width-selector-bar")
-    if($drag.length && $drag.data("target")) {
-      var t = $drag.data("target")
-      , offset = Math.round((-$(t).offset().left + ev.pageX) / $(t).width() * this.options.total_columns)
-      , adjustment = this.normalizeAdjustment(this.getWidthsForSelector(t), $bar.data("index"), offset - $bar.data("start_offset"));
+  , " dragover" : "recalculateDrag"
+  , recalculateDrag : function(el, ev) {
+    var $drag = $(this.element).find(".width-selector-drag");
+    var $bar =  $(this.element).find(".width-selector-bar")
+    if($drag.length) {
+      var $t = $(this.element)
+      , offset = this.getLeftOffset(ev.pageX)
+      , adjustment = this.normalizeAdjustment(this.getWidthsForSelector($t), $bar.data("index"), offset - $bar.data("start_offset"));
 
       offset = $bar.data("start_offset") + adjustment;
 
       $bar
       .data("offset", offset)
-      .css("left", offset * $(t).width() / this.options.total_columns + $(t).offset().left);
+      .css("left", this.getLeftOffsetAsPixels(offset));
       ev.preventDefault();
     }
   }
+
 });
 
 })(this.can, this.can.$);

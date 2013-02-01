@@ -3,16 +3,20 @@
 
 // Explicitly short circuit until handling of implemented/implementing controls
 // is complete.
-
-if (!/\/programs_dash\b/.test(window.location.pathname))
-  return;
-
 $(function() {
-    CMS.Controllers.ResizeWidgets.Instances = { 
-      Body : $(document.body)
-              .cms_controllers_resize_widgets({
-                containers : [$("#columns")]
-              }).control(CMS.Controllers.ResizeWidgets)};
+
+  function bindResizer(ev) {
+
+      can.getObject("Instances", CMS.Controllers.ResizeWidgets, true)[this.id] = 
+       $(this)
+        .cms_controllers_resize_widgets({}).control(CMS.Controllers.ResizeWidgets);
+
+  }
+  $(".row-fluid[id][data-resize]").each(bindResizer);//get anything that exists on the page already.
+
+  //Then listen for new ones
+  $(document.body).on("mouseover", ".row-fluid[id][data-resize]:not(.cms_controllers_resize_widgets)", bindResizer);
+
 });
 
 })(this, jQuery);

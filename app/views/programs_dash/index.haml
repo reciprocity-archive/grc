@@ -12,7 +12,7 @@
 -#-content_for :subheader_extras do
 
 .container-fluid
-  #columns.row-fluid
+  #columns.row-fluid{ :'data-resize' => "true" }
     .span6
       =render :partial => 'programs/list',
               :layout => 'layouts/widget_box',
