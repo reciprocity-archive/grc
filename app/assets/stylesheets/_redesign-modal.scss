@@ -1,4 +1,5 @@
 .modal {
+  width:700px;
   form {
     margin: 0;
   }
@@ -7,7 +8,7 @@
     margin-left:-480px;
   }
   .modal-header {
-    background: $modalHeader;
+    @include gradient-vertical(#0088cc, #0055cc);
     border-bottom: 1px solid $modalHeaderBorder;
     @include box-shadow(inset 0 -1px 0 $modalHeaderShadow);
     .btn {
@@ -24,6 +25,10 @@
     }
   }
   .modal-body {
+    input,
+    textarea {
+      @include placeholder($footerBorder);
+    }
     label {
       font-weight: bold;
       font-size: 11px;
@@ -44,7 +49,60 @@
       @include background-size(160px 160px);
       background-image: url("/images/grcicons/icons.png");
       background-repeat: no-repeat;
-      background-position: -80px -64px;
+      background-position: -141px -123px;
+    }
+    .modal-source {
+      h3 {
+        font-size: 16px;
+      }
+      .active {
+        i.grcicon-edit-new {
+          background-position:-48px -32px;
+        }
+      }
+      .role-btn {
+        margin-right: 20px;
+        margin-top: 2px;
+      }
+      .source,
+      .target {
+        @include reset-list();
+        li {
+          border-bottom: 1px solid $lightGray;
+          line-height: 28px;
+          padding: 4px 0;
+          &:last-child {
+            border-bottom: none;
+          }
+          .option {
+            font-weight: bold;
+            font-size: 11px;
+          }
+          .btn-mini {
+            padding-left: 2px;
+            padding-right: 2px;
+          }
+          .btn-group {
+            .btn-mini {
+              padding-left: 5px;
+              padding-right: 5px;
+              font-size: 11px;
+              line-height: 18px;
+              height: 18px
+            }
+          }
+          .state {
+            display: block;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: $green;
+          }
+        }
+      }
+      .target {
+        margin-top: 12px;
+      }
     }
   }
   .modal-info {

@@ -8,12 +8,10 @@
   function preload_content() {
     var template =
       [ '<div class="modal-header">'
-      , '  <nav>'
-      , '    <a class="widgetbtn" href="#" data-dismiss="modal">'
-      , '      <i class="grcicon-x-grey"></i>'
-      , '    </a>'
-      , '  </nav>'
-      , '  <h1>Loading...</h1>'
+      , '  <a class="btn btn-mini pull-right" href="#" data-dismiss="modal">'
+      , '    <i class="grcicon-x-grey"></i>'
+      , '  </a>'
+      , '  <h2>Loading...</h2>'
       , '</div>'
       , '<div class="modal-body"></div>'
       , '<div class="modal-footer">'
