@@ -1,6 +1,9 @@
 // container size
 .container-fluid {
   margin:0 auto;
+  &.resizable {
+    @include transition(width 0.2s);
+  }
 }
 
 // placeholder for widgets drag and drop

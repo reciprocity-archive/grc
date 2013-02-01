@@ -290,27 +290,41 @@ $(window).load(function(){
     placeholder: 'drop-placeholder'
   }).disableSelection();
 
-  // container size
+});
+
+jQuery(document).ready(function($) {
   var containerSize = $('.container-fluid').width(),
       containerWide = 1200,
-      containerNarrow = 960;
+      containerNarrow = 960,
+      containerDelta = $(window).width() - containerSize;
+
   $('.container-fluid').css('width', containerSize);
 
+  $(window).on('resize', function(e) {
+    var width = $(window).width();
+    // Only auto-resize when in 100% mode
+    if ($('body').find('.menu').find('.screen-size span').text().trim() == '100%') {
+      $('.container-fluid').addClass('resizable').css('width', width - containerDelta);
+      $(this).closest('.menu').find('.screen-size span').text('100%');
+    }
+  });
+
   $('body').on('click', '.full-view', function(e) {
-    e.preventDefault();  
-    $('.container-fluid').css('width', containerSize).css('transition', 'width 0.5s').css('-moz-transition', 'width 0.5s').css('-webkit-transition', 'width 0.5s').css('-o-transition', 'width 0.5s');
+    var width = $(window).width();
+    e.preventDefault();
+    $('.container-fluid').addClass('resizable').css('width', width - containerDelta);
     $(this).closest('.menu').find('.screen-size span').text('100%');
   });
 
   $('body').on('click', '.wide-view', function(e) {
     e.preventDefault();
-    $('.container-fluid').css('width', containerWide).css('transition', 'width 0.5s').css('-moz-transition', 'width 0.5s').css('-webkit-transition', 'width 0.5s').css('-o-transition', 'width 0.5s');
+    $('.container-fluid').addClass('resizable').css('width', containerWide);
     $(this).closest('.menu').find('.screen-size span').text('Wide');
   });
 
   $('body').on('click', '.narrow-view', function(e) {
     e.preventDefault();
-    $('.container-fluid').css('width', containerNarrow).css('transition', 'width 0.5s').css('-moz-transition', 'width 0.5s').css('-webkit-transition', 'width 0.5s').css('-o-transition', 'width 0.5s');
+    $('.container-fluid').addClass('resizable').css('width', containerNarrow);
     $(this).closest('.menu').find('.screen-size span').text('Narrow');
   });
 });
