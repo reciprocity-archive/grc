@@ -143,21 +143,45 @@ jQuery(document).ready(function($) {
 
   // Show/hide widget content
   $('body').on('mouseover', 'a.more', function(e) {
-
     var $this = $(this),
         $paragraph = $this.closest("p"),
-        $description = $this.closest("div").find(".description");    
-    
+        $description = $this.closest("div").find(".description");
     $description.fadeIn();
-
+    //$this.closest('div').one('mouseout', function(e) { $description.fadeOut(); });
   });
 
-  $('body').on('mouseover', 'p.description', function(e) {
-
+  /*$('body').on('mouseover', '.tree-structure .description', function(e) {
     var $this = $(this);
-    
     $this.removeClass("oneline");
+    //$this.one('mouseout', function(e) { $this.addClass('oneline'); });
+  });*/
 
+  $('body').on('click', '.expand-on-hover', function(e) {
+    var $this = $(this)
+      , $description = $this.find('.description')
+      ;
+
+    if ($description.length > 0) {
+      $description.toggle();
+    }
+  });
+
+  $('body').on('mouseenter', '.expand-on-hover', function(e) {
+    var $this = $(this)
+      , $title = $this.find('.title')
+      , $description = $this.find('.description')
+      ;
+    if ($description.length > 0) {
+      $this.on('mouseleave.tree-slide', function(e) {
+          $description.hide();
+          $title.show();
+          $this.off('mouseleave.tree-slide');
+      });
+      if ($title.is('.description-only')) {
+        $title.hide();
+      }
+      $description.show();
+    }
   });
 
 
@@ -242,10 +266,10 @@ $(window).load(function(){
 
   // tree-structure
   
-  $('body').on('click', 'ul.tree-structure .item-main', function(e) {
+  $('body').on('click', 'ul.tree-structure .item-main .code, ul.tree-structure .item-main .openclose', function(e) {
     var $this = $(this),
-        $content = $this.closest('li').find('.item-content:first'),
-        $icon = $this.find('.openclose');
+        $content = $this.closest('.item-main').closest('li').find('.item-content:first'),
+        $icon = $this.closest('.item-main').find('.openclose');
     
     if($this.hasClass("active")) {
       $content.slideUp('fast');

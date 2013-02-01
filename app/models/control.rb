@@ -90,10 +90,6 @@ class Control < ActiveRecord::Base
     "#{slug} - #{title}"
   end
 
-  def title
-    return read_attribute(:title).presence || (description || "").truncate(60)
-  end
-
   def custom_edges
     # Returns a list of additional edges that aren't returned by the default method.
 

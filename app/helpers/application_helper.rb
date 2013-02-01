@@ -206,4 +206,39 @@ module ApplicationHelper
       end
     end
   end
+
+  def tree_structure_content(instance, title_attr=:title, description_attr=:description)
+    content_tag(:div, :class => 'expand-on-hover oneline') do
+      if instance.send(title_attr).present? && instance.send(description_attr).present?
+        # Both title and description
+        concat(content_tag(:span, :class => :title) do
+          concat(instance.send(title_attr))
+          content_tag(:a, :class => 'more', :href => '#') do
+            "more ..."
+          end
+        end)
+        concat(content_tag(:div, :class => 'description') do
+          display_as_html instance.send(description_attr)
+        end)
+      elsif instance.send(title_attr).present?
+        # Title only
+        content_tag(:span, :class => :title) do
+          instance.send(title_attr)
+        end
+      elsif instance.send(description_attr).present?
+        # Description only
+        concat(content_tag(:span, :class => 'title description-only') do
+          sanitize(instance.send(description_attr), :tags => %w(b i strong em))
+        end)
+        concat(content_tag(:div, :class => 'description') do
+          display_as_html instance.send(description_attr)
+        end)
+      else
+        # Neither (shouldn't happen)
+        content_tag(:span, :class => :title) do
+          "(No description)"
+        end
+      end
+    end
+  end
 end

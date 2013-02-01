@@ -9,5 +9,5 @@
 -#content_for :widget_buttons do
   %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
 
-%ul.slotlist
+%ul.tree-structure
   =render :partial => 'object_tree', :locals => { :instance => instance, :is_root => true }

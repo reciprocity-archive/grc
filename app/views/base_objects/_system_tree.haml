@@ -21,81 +21,47 @@
 -main_toggle_target = expand_this ? objects_toggle_target : summary_toggle_target
 
 %li
-  .row-fluid
-    .slot.span12.processslot
-      .slottitle.span8.toggle{"data-target" => "##{main_toggle_target}", "data-toggle" => "collapse"}
-        -if expand_this
-          .expander{ :class => is_root && !expand_this ? 'in' : '' }
-        -else
-          .enddot
-        %span.prefix=system.slug
-        =system.title
-      -if has_feature? :BETA
-        .slotcolumn.span2
-          .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
-        .slotowner.span1
-          %a.slotowner{:href => "#"} Owner Joe
-      -else
-        .span3{"data-target" => "##{main_toggle_target}", "data-toggle" => "collapse"}
-      .slotactions.pull-right
-        %a.btn.btn-mini.btn-blue.halfopacity{ "data-target" => "##{summary_toggle_target}", "data-toggle" => "collapse", "rel" => "tooltip", "data-placement" => "left", "title" => "More" }
-          %i.grcicon-more
-
-  .row-fluid.collapse{ :id => summary_toggle_target, :class => is_root ? 'in' : '' }
-    .span12.morewell.statusblue.nominheight
-      .slotcontent.span12
-        %ul.contentactions.pull-right
-          -if is_editable
-            %li
-              %a.btn.btn-mini.halfopacity{ "rel" => "tooltip", "data-placement" => "left", "title" => "Edit this object", 'data-modal-class' => 'modal-wide', 'data-form-target' => 'refresh', "data-toggle" => "modal-ajax-form", :href => url_for(:id => system.id, :action => :edit, :controller => model_underscore.pluralize, :only_path => true) }
-                %i.grcicon-edit-grey
-          %li
-            %a.btn.btn-mini.halfopacity{ :href => list_edit_flow_system_systems_path(:parent_id => system.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :rel => 'tooltip', :title => 'Link systems to this object', :'data-modal-class' => 'modal-wide' }
-              %i.grcicon-link
-          %li
-            %a.btn.btn-mini.halfopacity{ :href => list_edit_flow_system_controls_path(:system_id => system.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :rel => 'tooltip', :title => 'Link controls to this object', :'data-modal-class' => 'modal-wide' }
-              %i.grcicon-link
-          -if !is_root
-            %li
-              %a.btn.btn-mini.halfopacity{ "rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => flow_system_path(system.id) }
-                %i.grcicon-arrowright-black
-        =display_as_html system.description
-
-  .collapse{ :id => objects_toggle_target }
-
-    %ul.slotlist
+  .item-main
+    .openclose{ :class => !expand_this && 'lastchild' }
+    .item-title
+      .row-fluid
+        .span2
+          %p.code.oneline
+            =system.slug
+        .span8
+          =tree_structure_content(system)
+      .item-actions
+        -if is_editable
+          %a.btn.btn-mini.halfopacity{ "rel" => "tooltip", "data-placement" => "left", "title" => "Edit this object", 'data-modal-class' => 'modal-wide', 'data-form-target' => 'refresh', "data-toggle" => "modal-ajax-form", :href => url_for(:id => system.id, :action => :edit, :controller => model_underscore.pluralize, :only_path => true) }
+            %i.grcicon-edit-grey
+        %a.btn.btn-mini.halfopacity{ :href => list_edit_flow_system_systems_path(:parent_id => system.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :rel => 'tooltip', :title => 'Link systems to this object', :'data-modal-class' => 'modal-wide' }
+          %i.grcicon-link
+        %a.btn.btn-mini.halfopacity{ :href => list_edit_flow_system_controls_path(:system_id => system.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :rel => 'tooltip', :title => 'Link controls to this object', :'data-modal-class' => 'modal-wide' }
+          %i.grcicon-link
+        -if !is_root
+          %a.btn.btn-mini.halfopacity{ "rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => flow_system_path(system.id) }
+            %i.grcicon-arrowright-black
+  .item-content
+    %ul.tree-structure
       -controls.each_with_index do |control, i|
         -control_id_prefix = "#{id_prefix}-control-#{control.id}"
         -control_summary_target = "#{control_id_prefix}-summary"
 
         %li
-          .row-fluid
-            .slot.span12.controlslot
-              .slottitle.span8.toggle{ "data-target" => "##{control_summary_target}", "data-toggle" => "collapse", "rel" => "tooltip", "data-placement" => "left", "title" => "More" }
-                .enddot
-                %span.prefix=control.slug
-                =control.title
-              -if has_feature? :BETA
-                .slotcolumn.span2
-                  .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
-                .slotowner.span1
-                  %a.slotowner{:href => "#"} Owner Bob
-              -else
-                .span3{"data-target" => "##{control_summary_target}", "data-toggle" => "collapse"}
-              .slotactions.pull-right
-                %a.btn.btn-mini.btn-blue.halfopacity{"data-target" => "##{control_summary_target}", "data-toggle" => "collapse"}
-                  %i.grcicon-more
-          .row-fluid.collapse{ :id => control_summary_target }
-            .span12.morewell.statusblue.nominheight
-              .slotcontent.span12
-                %ul.contentactions.pull-right
-                  %li
-                    %a.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => flow_control_path(control.id) }
-                      %i.grcicon-arrowright-black
-                =display_as_html control.description
+          .item-main
+            .openclose.lastchild
+            .item-title
+              .row-fluid
+                .span2
+                  %p.code.oneline
+                    =control.slug
+                .span8
+                  =tree_structure_content(control)
+              .item-actions
+                %a.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => flow_control_path(control.id) }
+                  %i.grcicon-arrowright-black
 
     -if !seen_this
-      %ul.slotlist
+      %ul.tree-structure
         -sub_systems.each_with_index do |sub_system, i|
           =render :partial => 'system_tree', :locals => { :system => sub_system, :id_prefix => "#{id_prefix}-sub-system-#{sub_system.id}", :seen_ids => seen_ids + [system.id] }
-
