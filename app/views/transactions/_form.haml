@@ -11,7 +11,7 @@
 
 .row-fluid
 
-  .span10{ :class => error_class(f, :title) }
+  .span12{ :class => error_class(f, :title) }
     =f.label :title
     =f.text_field :title, :class => 'span12', :placeholder => 'Title'
 
@@ -19,7 +19,7 @@
     %label Approximate Record Count
     %input.span12{ :type => 'text', :placeholder => 'Enter approximate record count' }
 
-  .span2
+  -#.span2
     %label Status
     %select.span12.forminputstatus
       %option draft
