@@ -25,6 +25,15 @@ ul.tree-structure {
       border-bottom:none;
     }
   }
+  .progress {
+    line-height:16px;
+    margin:7px 0 0 0;
+  }
+  .tiny-label {
+    font-size:11px;
+    text-align:right;
+    color:$gray;
+  }
   p {
     margin:0;
     color:$text;
@@ -89,6 +98,14 @@ ul.tree-structure {
     }
     p {
       color:lighten($text,5%);
+    }
+  }
+  &.simple {
+    li {
+      &:hover {
+        @include background-image(linear-gradient(left, $white, $lightGray, $white));
+        border-color:#ddd;
+      }
     }
   }
 }
