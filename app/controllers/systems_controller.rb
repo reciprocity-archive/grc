@@ -35,7 +35,11 @@ class SystemsController < BaseObjectsController
 
   def index
     @systems = System
-    @systems = @systems.where(:is_biz_process => true) if params[:is_biz_process]
+    if params[:is_biz_process] == 'false'
+      @systems = @systems.where(:is_biz_process => false)
+    else params[:is_biz_process] == 'true'
+      @systems = @systems.where(:is_biz_process => true)
+    end
     if params[:s].present?
       @systems = @systems.db_search(params[:s])
     end

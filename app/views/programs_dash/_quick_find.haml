@@ -11,7 +11,7 @@
   %ul.nav.nav-tabs
     %li=link_to 'Controls', '#controls', :data => { :'tab-href' => flow_controls_path(:quick => true), :toggle => 'tab' }
     %li=link_to 'Biz Processes', '#biz_processes', :data => { :'tab-href' => flow_systems_path(:quick => true, :is_biz_process => true), :toggle => 'tab' }
-    %li=link_to 'Systems', '#systems', :data => { :'tab-href' => flow_systems_path(:quick => true), :toggle => 'tab' }
+    %li=link_to 'Systems', '#systems', :data => { :'tab-href' => flow_systems_path(:quick => true, :is_biz_process => false), :toggle => 'tab' }
     %li=link_to 'Products', '#products', :data => { :'tab-href' => flow_products_path(:quick => true), :toggle => 'tab' }
     %li=link_to 'Risks', '#risks', :data => { :'tab-href' => flow_risks_path(:quick => true), :toggle => 'tab' }
     %li=link_to 'Risky Attributes', '#risky_attributes', :data => { :'tab-href' => flow_risky_attributes_path(:quick => true), :toggle => 'tab' }

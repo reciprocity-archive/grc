@@ -6,10 +6,14 @@ class CategorizationsController < BaseMappingsController
 
   def index
     @objects = Categorization
-    if params[:object_id]
+    if params[:object_id].present?
       @objects = @objects.where(
         :categorizable_type => params[:object_type],
         :categorizable_id => params[:object_id])
+    end
+    if params[:scope_id].present?
+      @objects = @objects.joins(:category).where(
+        :categories => { :scope_id => params[:scope_id] })
     end
     render :json => @objects,
       :include => { :category => { :methods => :parent_name } }
