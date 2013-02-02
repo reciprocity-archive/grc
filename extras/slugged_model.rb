@@ -87,14 +87,14 @@ module SluggedModel
     super(value.present? ? value.upcase : nil)
   end
 
+  def default_slug_prefix
+    self.class.to_s
+  end
+
 private
 
   def upcase_slug
     self.slug = slug.present? ? slug.upcase : nil
-  end
-
-  def default_slug_prefix
-    self.class.to_s
   end
 
   def generate_random_slug_if_needed
