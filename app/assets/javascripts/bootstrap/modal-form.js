@@ -26,6 +26,7 @@
       var $form;
       this.$element
         .on('keypress', 'form', $.proxy(this.keypress_submit, this))
+        .on('keyup', 'form', $.proxy(this.keyup_escape, this))
         .on('click.modal-form.close', '[data-dismiss="modal"]', $.proxy(this.hide, this))
         .on('click.modal-form.reset', 'input[type=reset], [data-dismiss="modal-reset"]', $.proxy(this.reset, this))
         .on('click.modal-form.submit', 'input[type=submit], [data-toggle="modal-submit"]', $.proxy(this.submit, this))
@@ -110,6 +111,15 @@
       }
     }
 
+  , keyup_escape : function(e) {
+     if($(document.activeElement).is("select, [data-toggle=datepicker]") && e.which === 27) {
+        
+        this.$element.attr("tabindex", -1).focus();
+        e.stopPropagation();
+
+      }
+    }
+
   , reset: function(e) {
       var form = this.$form()[0];
       form && form.reset();
@@ -121,12 +131,12 @@
       this.$element.off('modal_form');
     }
 
-  , focus_first_input: function() {
+  , focus_first_input: function(ev) {
       var $first_input = this.$element
         .find('input[type="text"], input[type="checkbox"], select, textarea')
         .not('[placeholder*=autofill], label:contains(autofill) + *, [disabled]')
         .first();
-      if ($first_input.length > 0)
+      if ($first_input.length > 0 && (!ev || this.$element.is(ev.target)))
         setTimeout(function() { $first_input.get(0).focus(); }, 100);
     }
   });

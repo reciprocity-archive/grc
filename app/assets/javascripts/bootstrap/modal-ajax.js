@@ -243,6 +243,21 @@
         }
       });
     }
+    if(!(keyevents = $el.data("events").keyup)
+        || $(keyevents).filter(function() { 
+            return $.inArray("preventdoubleescape", this.namespace.split(".")) > -1; 
+          }).length < 1) {  
+      $el.on('keyup.preventdoubleescape', function(ev) {
+       if(ev.which === 27 && $(ev.target).closest(".modal").length) {
+          $(ev.target).closest(".modal").attr("tabindex", -1).focus();
+          ev.stopPropagation();
+          ev.originalEvent && ev.originalEvent.stopPropagation();
+          that.hide();
+        }
+      });
+      $el.attr("tabindex") || $el.attr("tabindex", -1);
+      setTimeout(function() { $el.focus(); }, 1);
+    }
 
     _modal_show.apply(this, arguments);
     //reconfigureModals.call(this);   //handled by modal shown event firing.
