@@ -1,3 +1,4 @@
+-quick_result ||= nil
 -if @root_categories.empty?
   .no-results
     No results found
@@ -8,35 +9,40 @@
       Export
   %ul.tree
     -@root_categories.sort_by(&:display_name).each do |root_category|
-      %li.main
-        .item-identifier
-          .item-title
-            .row-fluid
-              .span12
-                .showhide
-                %span.addition-info
-                  =root_category.display_name
-          .item-actions
-            %a.btn.btn-mini{ :'data-form-target' => "refresh", :'data-delete-target' => "refresh", :'data-modal-reset' => "reset", :'data-toggle' => "modal-ajax-form", :href => edit_flow_category_path(root_category) }
+      -if quick_result
+        =render 'base_objects/quick_result', { :item => root_category }
+        -root_category.descendants.sort_by(&:display_name).each do |category|
+          =render 'base_objects/quick_result', { :item => category }
+      -else
+        %li.main
+          .item-identifier
+            .item-title
+              .row-fluid
+                .span12
+                  .showhide
+                  %span.addition-info
+                    =root_category.display_name
+            .item-actions
+              %a.btn.btn-mini{ :'data-form-target' => "refresh", :'data-delete-target' => "refresh", :'data-modal-reset' => "reset", :'data-toggle' => "modal-ajax-form", :href => edit_flow_category_path(root_category) }
+                %i.grcicon-edit-grey
+                
+          .item-content
+            %ul.elements
+              -root_category.descendants.sort_by(&:display_name).each do |category|
+                %li
+                  .item-identifier
+                    .item-title
+                      .row-fluid
+                        .span12
+                          %span.addition-info
+                            =category.display_name
+                    .item-actions
+                      %a.btn.btn-mini{ :'data-form-target' => "refresh", :'data-delete-target' => "refresh", :'data-modal-reset' => "reset", :'data-toggle' => "modal-ajax-form", :href => edit_flow_category_path(category) }
+                        %i.grcicon-edit-grey
+        -#-root_category.descendants.sort_by(&:display_name).each do |category|
+          -# TODO: Predrag said to use inline style for now. Ref. story: #40581877
+          %li{:style => "margin-left:15px"}
+            %a.widgetbtn.fltrt{ :'data-form-target' => "refresh", :'data-delete-target' => "refresh", :'data-modal-reset' => "reset", :'data-toggle' => "modal-ajax-form", :href => edit_flow_category_path(category) }
               %i.grcicon-edit-grey
-              
-        .item-content
-          %ul.elements
-            -root_category.descendants.sort_by(&:display_name).each do |category|
-              %li
-                .item-identifier
-                  .item-title
-                    .row-fluid
-                      .span12
-                        %span.addition-info
-                          =category.display_name
-                  .item-actions
-                    %a.btn.btn-mini{ :'data-form-target' => "refresh", :'data-delete-target' => "refresh", :'data-modal-reset' => "reset", :'data-toggle' => "modal-ajax-form", :href => edit_flow_category_path(category) }
-                      %i.grcicon-edit-grey
-      -#-root_category.descendants.sort_by(&:display_name).each do |category|
-        -# TODO: Predrag said to use inline style for now. Ref. story: #40581877
-        %li{:style => "margin-left:15px"}
-          %a.widgetbtn.fltrt{ :'data-form-target' => "refresh", :'data-delete-target' => "refresh", :'data-modal-reset' => "reset", :'data-toggle' => "modal-ajax-form", :href => edit_flow_category_path(category) }
-            %i.grcicon-edit-grey
-          =link_to '#' do
-            =category.display_name
+            =link_to '#' do
+              =category.display_name

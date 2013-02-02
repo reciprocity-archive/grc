@@ -68,7 +68,7 @@ class ProgramsController < BaseObjectsController
     @programs = allowed_objs(@programs.all, :read)
 
     if params[:quick]
-      render :partial => 'quick'
+      render :partial => 'quick', :locals => { :quick_result => params[:qr]}
     end
   end
 

@@ -38,7 +38,7 @@ class PeopleController < BaseObjectsController
     if params[:list_select].present?
       render :partial => 'list_select', :layout => 'layouts/list_select_modal', :locals => {}
     elsif params[:quick]
-      render :partial => 'quick'
+      render :partial => 'quick', :locals => { :quick_result => params[:qr]}
     else
       render :json => @people
     end

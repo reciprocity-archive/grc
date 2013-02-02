@@ -1,3 +1,4 @@
+-quick_result ||= nil
 -if @options.empty?
   .no-results
     No results found
@@ -6,7 +7,12 @@
     %a{ :href => export_flow_options_path(:format => :csv) }
       %i.grcicon-export
       Export
-      
+  
+  -if quick_result
+    -@options.sort_by(&:role).each do |option|
+      =render 'base_objects/quick_result', { :item => option }
+  -else
+
   -@options.sort_by(&:role).group_by(&:role).each do |role, options_for_role|
     %ul.tree
       %li.category

@@ -1,8 +1,6 @@
 //= require resize_widgets_controller
 (function(namespace, $) {
 
-// Explicitly short circuit until handling of implemented/implementing controls
-// is complete.
 $(function() {
 
   function bindResizer(ev) {

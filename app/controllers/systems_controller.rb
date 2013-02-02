@@ -56,7 +56,7 @@ class SystemsController < BaseObjectsController
     respond_to do |format|
       format.html do
         if params[:quick]
-          render :partial => 'quick'
+          render :partial => 'quick', :locals => { :quick_result => params[:qr]}
         end
       end
       format.json do
