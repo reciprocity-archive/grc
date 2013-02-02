@@ -23,6 +23,11 @@
     h2 {
       color: $white;
       text-shadow: 0;
+      span {
+        display: block;
+        line-height: 18px;
+        font-size: 14px;
+      }
     }
   }
   .modal-body {

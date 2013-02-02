@@ -19,11 +19,10 @@
           %input{ :type => 'hidden', :name => 'items[<%= id %>][object_id]', :value => context[:object_id] }
           %input{ :type => 'hidden', :name => 'items[<%= id %>][object_type]', :value => context[:object_type] }
           %input._destroy{ :type => 'hidden', :name => 'items[<%= id %>][_destroy]', :value => '' }
-  
-          %a.widgetbtn.btn.btn-mini{ :href => '#', :'data-toggle' => 'selector-list-remove' }
-            %i.grcicon-remove
           %a.widgetbtn.btn.btn-mini{ :href => url_for(:action => :edit, :controller => context[:related_type].underscore.pluralize, :id => '<%=object.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
             %i.grcicon-edit-new
+          %a.widgetbtn.btn.btn-mini{ :href => '#', :'data-toggle' => 'selector-list-remove' }
+            %i.grcicon-remove
           %span.state
 
 %script#relationship_system_option{ :type => 'text/html', :'data-prefix' => 'system' }
@@ -35,10 +34,10 @@
         
       .span4.actions
         .pull-right
-          %a.widgetbtn.add-me.btn.btn-mini{:href => "#", :'data-toggle' => 'selector-list-select'}
-            %i.grcicon-chevron-right
           %a.widgetbtn.btn.btn-mini{:href => edit_flow_system_path('<%=system.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
             %i.grcicon-edit-new
+          %a.widgetbtn.add-me.btn.btn-mini{:href => "#", :'data-toggle' => 'selector-list-select'}
+            %i.grcicon-chevron-right
 
 %script#relationship_program_option{ :type => 'text/html', :'data-prefix' => 'program' }
   %li{ :'data-id' => '<%= program.id %>', :'data-title' => '<%= program.title %>', :'data-slug' => '<%= program.slug %>' }
@@ -49,10 +48,10 @@
         
       .span4.actions
         .pull-right
-          %a.widgetbtn.add-me.btn.btn-mini{:href => "#", :'data-toggle' => 'selector-list-select'}
-            %i.grcicon-chevron-right
           %a.widgetbtn.btn.btn-mini{:href => edit_flow_program_path('<%=program.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
             %i.grcicon-edit-new
+          %a.widgetbtn.add-me.btn.btn-mini{:href => "#", :'data-toggle' => 'selector-list-select'}
+            %i.grcicon-chevron-right
 
 %script#relationship_product_option{ :type => 'text/html', :'data-prefix' => 'product' }
   %li{ :'data-id' => '<%= product.id %>', :'data-title' => '<%= product.title %>', :'data-slug' => '<%= product.slug %>' }
@@ -63,10 +62,10 @@
         
       .span4.actions
         .pull-right
-          %a.widgetbtn.add-me.btn.btn-mini{:href => "#", :'data-toggle' => 'selector-list-select'}
-            %i.grcicon-chevron-right
           %a.widgetbtn.btn.btn-mini{:href => edit_flow_product_path('<%=product.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
             %i.grcicon-edit-new
+          %a.widgetbtn.add-me.btn.btn-mini{:href => "#", :'data-toggle' => 'selector-list-select'}
+            %i.grcicon-chevron-right
 
 %script#relationship_org_group_option{ :type => 'text/html', :'data-prefix' => 'org_group' }
   %li{ :'data-id' => '<%= org_group.id %>', :'data-title' => '<%= org_group.title %>', :'data-slug' => '<%= org_group.slug %>' }
@@ -77,10 +76,10 @@
         
       .span4.actions
         .pull-right
-          %a.widgetbtn.btn.btn-mini.add-me{:href => "#", :'data-toggle' => 'selector-list-select'}
-            %i.grcicon-chevron-right
           %a.widgetbtn.btn.btn-mini{:href => edit_flow_org_group_path('<%=org_group.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
             %i.grcicon-edit-new
+          %a.widgetbtn.btn.btn-mini.add-me{:href => "#", :'data-toggle' => 'selector-list-select'}
+            %i.grcicon-chevron-right
 
 %script#relationship_facility_option{ :type => 'text/html', :'data-prefix' => 'facility' }
   %li{ :'data-id' => '<%= facility.id %>', :'data-title' => '<%= facility.title %>', :'data-slug' => '<%= facility.slug %>' }
@@ -91,10 +90,10 @@
         
       .span4.actions
         .pull-right
-          %a.widgetbtn.add-me.btn.btn-mini{:href => "#", :'data-toggle' => 'selector-list-select'}
-            %i.grcicon-chevron-right
           %a.widgetbtn.btn.btn-mini{:href => edit_flow_facility_path('<%=facility.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
             %i.grcicon-edit-new
+          %a.widgetbtn.add-me.btn.btn-mini{:href => "#", :'data-toggle' => 'selector-list-select'}
+            %i.grcicon-chevron-right
 
 %script#relationship_market_option{ :type => 'text/html', :'data-prefix' => 'market' }
   %li{ :'data-id' => '<%= market.id %>', :'data-title' => '<%= market.title %>', :'data-slug' => '<%= market.slug %>' }
@@ -105,10 +104,10 @@
         
       .span4.actions
         .pull-right
-          %a.widgetbtn.add-me.btn.btn-mini{:href => "#", :'data-toggle' => 'selector-list-select'}
-            %i.grcicon-chevron-right
           %a.widgetbtn.btn.btn-mini{:href => edit_flow_market_path('<%=market.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
             %i.grcicon-edit-new
+          %a.widgetbtn.add-me.btn.btn-mini{:href => "#", :'data-toggle' => 'selector-list-select'}
+            %i.grcicon-chevron-right
 
 %script#relationship_data_asset_option{ :type => 'text/html', :'data-prefix' => 'data_asset' }
   %li{ :'data-id' => '<%= data_asset.id %>', :'data-title' => '<%= data_asset.title %>', :'data-slug' => '<%= data_asset.slug %>' }
@@ -119,10 +118,10 @@
         
       .span4.actions
         .pull-right
-          %a.widgetbtn.btn.btn-mini.add-me{:href => "#", :'data-toggle' => 'selector-list-select'}
-            %i.grcicon-chevron-right
           %a.widgetbtn.btn.btn-mini{:href => edit_flow_data_asset_path('<%=data_asset.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
             %i.grcicon-edit-new
+          %a.widgetbtn.btn.btn-mini.add-me{:href => "#", :'data-toggle' => 'selector-list-select'}
+            %i.grcicon-chevron-right
 
 %script#relationship_project_option{ :type => 'text/html', :'data-prefix' => 'project' }
   %li{ :'data-id' => '<%= project.id %>', :'data-title' => '<%= project.title %>', :'data-slug' => '<%= project.slug %>' }
@@ -133,10 +132,10 @@
         
       .span4.actions
         .pull-right
-          %a.widgetbtn.add-me.btn.btn-mini{:href => "#", :'data-toggle' => 'selector-list-select'}
-            %i.grcicon-chevron-right
           %a.widgetbtn.btn.btn-mini{:href => edit_flow_project_path('<%=project.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
             %i.grcicon-edit-new
+          %a.widgetbtn.add-me.btn.btn-mini{:href => "#", :'data-toggle' => 'selector-list-select'}
+            %i.grcicon-chevron-right
 
 %script#relationship_risky_attribute_option{ :type => 'text/html', :'data-prefix' => 'risky_attribute' }
   %li{ :'data-id' => '<%= risky_attribute.id %>', :'data-title' => '<%= risky_attribute.title %>', :'data-slug' => '<%= risky_attribute.slug %>' }
@@ -147,10 +146,10 @@
         
       .span4.actions
         .pull-right
-        %a.widgetbtn.btn.btn-mini.add-me{:href => "#", :'data-toggle' => 'selector-list-select'}
-          %i.grcicon-chevron-right
-        %a.widgetbtn.btn.btn-mini{:href => edit_flow_risky_attribute_path('<%=risky_attribute.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
-          %i.grcicon-edit-new
+          %a.widgetbtn.btn.btn-mini{:href => edit_flow_risky_attribute_path('<%=risky_attribute.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
+            %i.grcicon-edit-new
+          %a.widgetbtn.btn.btn-mini.add-me{:href => "#", :'data-toggle' => 'selector-list-select'}
+            %i.grcicon-chevron-right
 
 
 .row-fluid.modal-source

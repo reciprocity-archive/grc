@@ -1,12 +1,13 @@
 .modal-header
-  %nav
-    -help_path = yield_content!(:modal_help)
+  -help_path = yield_content!(:modal_help)
+  .pull-right
     -if !help_path.blank?
       %a.widgetbtn{ :href => "/help/#{help_path}", :'data-toggle' => 'modal-ajax', :title => "Help - What is this?"}
-        %i.grcicon-questionmark-grey
-    %a.widgetbtn{ :'data-dismiss' => 'modal', :href => '#'}
+        %i.grcicon-help-black
+    %a.widgetbtn.btn.btn-mini{ :'data-dismiss' => 'modal', :href => '#'}
       %i.grcicon-x-grey
-  %h1=yield_content!(:modal_title) || "&nbsp;".html_safe
+  
+  =yield_content!(:modal_title) || "&nbsp;".html_safe
 
 .modal-body.cleanlabels.compact-rows
   =yield
@@ -23,11 +24,25 @@
         %dt Text Delimiter
         %dd " (double quotation mark).
 
+
+
 .modal-footer
   .row-fluid
-    %nav.fltlft.txtlft.span3
-      %a.btn.btn-large{:'data-dismiss' => 'modal', :href => '#' } Cancel
+    .span3
+      .deny-buttons
+        %a.btn{:'data-dismiss' => 'modal', :href => '#' } Cancel
     .span6
-    %nav.fltrt.txtrt.span3
-      %a.btn.btn-large.btn-primary{ :href => yield_content!(:export_url), :target => '_blank' } Export
-      %a.btn.btn-large.btn-primary{ :'data-dismiss' => 'modal', :href => '#' } Done
+      -if has_feature?(:BETA) && !f.object.new_record?
+        .version-nav
+          %a.btn{:href => "#", :'data-toggle' => 'version-prev'}
+            %i.grcicon-goto-left
+          %span
+            Showing Most Recent of
+            %strong=f.object.versions.count
+            Revisions
+          %a.btn{:href => "#", :'data-toggle' => 'version-next'}
+            %i.grcicon-goto
+    .span3
+      .confirm-buttons
+        %a.btn.btn-primary{ :href => yield_content!(:export_url), :target => '_blank' } Export
+        %a.btn.btn-primary{ :'data-dismiss' => 'modal', :href => '#' } Done

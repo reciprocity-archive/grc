@@ -15,8 +15,7 @@
 
 .row-fluid
   .span6
-    .wysiwyg-area.extended
-      =wrapped_text_area f, :span12, :description, :class => 'double wysihtml5 rtftextarea', :placeholder => 'Enter description here'
+    =wrapped_text_area f, :span12, :description, :class => 'double wysihtml5 rtftextarea', :wrapper_div_class => 'wysiwyg-area', :placeholder => 'Enter description here'
   .span6
     &nbsp;
     .row-fluid
@@ -35,39 +34,36 @@
     
 .row-fluid
   .span6
-    .wysiwyg-area.extended
-      =f.label :likelihood
+    =f.label :likelihood
+    .wysiwyg-area
       =f.select :likelihood_rating, Risk::RATINGS.map { |k, v| ["#{k} - #{v}", k] }
       =f.text_area :likelihood, :class => 'span12 double wysihtml5 rtftextarea', :placeholder => ''
   .span6
-    .wysiwyg-area.extended
-      =f.label :financial_impact, "Company-wide Financial Impact"
+    =f.label :financial_impact, "Company-wide Financial Impact"
+    .wysiwyg-area
       =f.select :financial_impact_rating, Risk::RATINGS.map { |k, v| ["#{k} - #{v}", k] }  
       =f.text_area :financial_impact, :class => 'span12 double wysihtml5 rtftextarea', :placeholder => ''
 .row-fluid
   .span6
-    .wysiwyg-area.extended
-      =wrapped_text_area f, :span12, :threat_vector, :class => 'double wysihtml5 rtftextarea', :placeholder => '', :label_name => "Threat Vector"
+    =wrapped_text_area f, :span12, :threat_vector, :class => 'double wysihtml5 rtftextarea', :wrapper_div_class => 'wysiwyg-area', :placeholder => '', :label_name => "Threat Vector"
   .span6
-    .wysiwyg-area.extended
-      =f.label :reputational_impact, "Company-wide Reputational Impact"
+    =f.label :reputational_impact, "Company-wide Reputational Impact"
+    .wysiwyg-area
       =f.select :reputational_impact_rating, Risk::RATINGS.map { |k, v| ["#{k} - #{v}", k] }
       =f.text_area :reputational_impact, :class => 'span12 double wysihtml5 rtftextarea', :placeholder => ''
 
 .row-fluid
   .span6
-    .wysiwyg-area.extended
-      =wrapped_text_area f, :span12, :trigger, :class => 'double wysihtml5 rtftextarea', :placeholder => '', :label_name => "Trigger/Immediate /Proximate Cause"
+    =wrapped_text_area f, :span12, :trigger, :class => 'double wysihtml5 rtftextarea', :wrapper_div_class => 'wysiwyg-area', :placeholder => '', :label_name => "Trigger/Immediate /Proximate Cause"
   .span6
-    .wysiwyg-area.extended
-      =f.label :operational_impact, "Company-wide Operational Impact"
+    =f.label :operational_impact, "Company-wide Operational Impact"
+    .wysiwyg-area
       =f.select :operational_impact_rating, Risk::RATINGS.map { |k, v| ["#{k} - #{v}", k] }
       =f.text_area :operational_impact, :class => 'span12 double wysihtml5 rtftextarea', :placeholder => ''
 
 .row-fluid
   .span6
-    .wysiwyg-area.extended
-      =wrapped_text_area f, :span12, :preconditions, :class => 'double wysihtml5 rtftextarea', :placeholder => '', :label_name => "Pre-conditions / Contributory Causes"
+    =wrapped_text_area f, :span12, :preconditions, :class => 'double wysihtml5 rtftextarea', :wrapper_div_class => 'wysiwyg-area', :placeholder => '', :label_name => "Pre-conditions / Contributory Causes"
 
 %br
 

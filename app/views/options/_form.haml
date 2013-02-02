@@ -20,7 +20,7 @@
 .row-fluid
   .span12{ :class => error_class(f, :description) }
     =f.label :description, 'Description'
-    =f.text_area :description, :class => 'span12 wysihtml5 double', :placeholder => 'Description'
+    =f.text_area :description, :class => 'span12 wysihtml5 double', :wrapper_div_class => 'wysiwyg-area', :placeholder => 'Description'
 %br
 
 =render :partial => "shared/wysihtml5"

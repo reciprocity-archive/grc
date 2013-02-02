@@ -1,6 +1,7 @@
 .modal-header
-  %a.close{"data-dismiss" => "modal"} x
-  %h1 Controls Mapped to #{@section.slug}
+  %a.close.btn.btn-mini.pull-right{"data-dismiss" => "modal"}
+    %i.grcicon-x-grey
+  %h2 Controls Mapped to #{@section.slug}
 
 -ccontrols = @section.consolidated_controls
 -rcontrols = @section.controls
