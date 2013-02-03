@@ -49,6 +49,22 @@
       .double {
         height: 70px;
       }
+      // smaller buttons in wysiwyg editor
+      .btn {
+        padding:0px 5px 2px 5px;
+        font-size:11px;
+        @include opacity(0.5);
+        &:hover {
+          @include opacity(1);
+        }
+      }
+      .help-inline {
+        display:none;
+      }
+      ul.wysihtml5-toolbar > li {
+        margin-bottom:4px;
+        margin-top:4px;
+      }
     }
     .date {
       padding-left: 26px;
