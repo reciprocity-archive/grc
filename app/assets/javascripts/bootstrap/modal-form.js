@@ -39,13 +39,6 @@
         .on('delete-object', $.proxy(this.delete_object, this))
         ;
 
-      $(document).on("ajax:complete", function(ev, xhr2) {
-        if(xhr2 === that.xhr) {
-          delete that.xhr;
-          $("[data-toggle=modal-submit]", $form).removeAttr("disabled").removeClass("disabled pending-ajax").each(function() {  $(this).text($(this).data("origText")); });
-          $form.data("submitpending", false);
-        }
-      });
 
     }
 
@@ -186,8 +179,8 @@
       if (data) {
         // Parse and dispatch JSON object
         $(e.target).trigger('ajax:json', [data, xhr]);
-      } else {
-        // Dispatch as html
+      } else if(xhr.responseText) {
+        // Dispatch as html, if there is html to dispatch.  (no result should not blank out forms)
         $(e.target).trigger('ajax:html', [xhr.responseText, xhr]);
       }
 
@@ -199,6 +192,19 @@
         } else if (xhr.status == 279) {
           // Handle 279 page refresh
           window.location.assign(window.location.href.replace(/#.*/, ''));
+        }
+        else {
+          var modal_form = $(".modal:visible").data("modal_form");
+          if(xhr === modal_form.xhr) {
+            delete modal_form.xhr;
+            $("[data-toggle=modal-submit]", modal_form.$element)
+            .removeAttr("disabled")
+            .removeClass("disabled pending-ajax")
+            .each(function() {  
+              $(this).text($(this).data("origText")); 
+            });
+            $("form", modal_form.$element).data("submitpending", false);
+          }
         }
       }
 
