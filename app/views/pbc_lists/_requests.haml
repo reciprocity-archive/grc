@@ -3,7 +3,7 @@
 
 .row-fluid
   .span10
-    %h3.pull-left
+    %h3.pull-left{:style => "font-weight:normal"}
       Requests &nbsp;
 
     .btn-group
@@ -141,7 +141,7 @@
                             %option{ :selected => request.status == status }=status
                       
                   .item-actions
-                    %a.btn.btn-mini.pull-right{ :href => edit_flow_request_path(request.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide'}
+                    %a.btn.btn-mini.pull-right{ :href => edit_flow_request_path(request.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide', :title => "Edit Request", :rel => "tooltip", :'data-placement' => "left"}
                       %i.grcicon-edit-grey
                   
               .item-content
@@ -309,7 +309,7 @@
                     -else
                       %span.disabled-text Unknown date
 
-              .row-fluid.pbc-responses-container.collapse{ :class => request_collapse_class }
+              .row-fluid.pbc-responses-container{ :class => request_collapse_class }
                 .span12
                   =render :partial => "responses", :locals => { :pbc_list => pbc_list, :request => request }
 
