@@ -1,17 +1,17 @@
 {{#this}}
-  <div class="itemswell">
-    {{#with relationship_type}}
-    <h4 class="nominheight">
-      {{ title }}
-      <a class="widgetbtn pull-right" href="{{edit_url}}" data-toggle="modal-ajax-relationship-selector" data-modal-reset="reset" data-tab-target="#related-objects-{{id}}" data-modal-class="modal-wide"><i class="grcicon-link"></i></a>
-    </h4>
-    <div class="row-fluid">
-      <div class="span12 captionbox">
-        <div class= "subtitle">
-          {{ description }}
-        </div>
+  <ul class="tree">
+    <li class="category">
+      {{#with relationship_type}}
+      <h3>
+        {{ title }}
+        <span class="sub-title">{{ description }}</span>
+      </h3>
+      <div class="item-actions">
+        <a class="widgetbtn pull-right" href="{{edit_url}}" data-toggle="modal-ajax-relationship-selector" data-modal-reset="reset" data-tab-target="#related-objects-{{id}}" data-modal-class="modal-wide"><i class="grcicon-link-new"></i></a>
       </div>
-    </div>
+    </li>
+  </ul>
+  <div class="itemswell">
     {{/with}}
     <div class="row-fluid">
       <ul class="span12" id="related-objects-{{relationship_type.id}}">

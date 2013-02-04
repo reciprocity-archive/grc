@@ -8,7 +8,6 @@
 
 -content_for :widget_help, 'related'
 #related.open
-  /Button Filters
   .button-set
     .row-fluid
       .span12
@@ -24,8 +23,6 @@
                 "data-template" => "/assets/related.mustache",
                 "data-refresh-time" => 60 }
                 #{table_name.titleize}
-  %hr.hr-widget
-  / TABS
   .tab-content
     -models.each do |model|
       .tab-pane{:id => "related-#{model.underscore.pluralize}-pane"}
