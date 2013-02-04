@@ -10,6 +10,7 @@
     .row-fluid
       .span6.object_info{ :'data-template-id' => 'relationship_option_data' }
       .span6.actions
+        %span.state
         .pull-right
           %input{ :type => 'hidden', :name => 'items[<%= id %>][id]', :value => '<% if (id.toString().substr(0,3) != "new") { %><%= id %><% } %>'.html_safe }
           %input{ :type => 'hidden', :name => 'items[<%= id %>][relationship_type]', :value => context[:relationship_type] }
@@ -23,7 +24,6 @@
             %i.grcicon-edit-new
           %a.widgetbtn.btn.btn-mini{ :href => '#', :'data-toggle' => 'selector-list-remove' }
             %i.grcicon-remove
-          %span.state
 
 %script#relationship_system_option{ :type => 'text/html', :'data-prefix' => 'system' }
   %li{ :'data-id' => '<%= system.id %>', :'data-title' => '<%= system.title %>', :'data-slug' => '<%= system.slug %>' }

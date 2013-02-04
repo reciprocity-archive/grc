@@ -32,6 +32,7 @@
     .row-fluid
       .span6.object_info{ :'data-template-id' => 'system_option_data' }
       .span6.actions
+        %span.state
         .pull-right
           %input{ :type => 'hidden', :name => 'items[<%= id %>][id]', :value => '<% if (id.toString().substr(0,3) != "new") { %><%= id %><% } %>'.html_safe }
           %input{ :type => 'hidden', :name => 'items[<%= id %>][control_id]', :value => object.id }
@@ -41,7 +42,6 @@
             %i.grcicon-edit-new
           %a.widgetbtn.btn.btn-mini{ :href => '#', :'data-toggle' => 'selector-list-remove' }
             %i.grcicon-remove
-          %span.state
 
 %script#control_option{ :type => 'text/html', :'data-prefix' => 'control' }
   %li{ :'data-id' => '<%= control.id %>', :'data-title' => '<%= control.title %>', :'data-slug' => '<%= control.slug %>' }
@@ -65,6 +65,7 @@
     .row-fluid
       .span6.object_info{ :'data-template-id' => 'control_option_data' }
       .span6.actions
+        %span.state
         .pull-right
           %input{ :type => 'hidden', :name => 'items[<%= id %>][id]', :value => '<% if (id.toString().substr(0,3) != "new") { %><%= id %><% } %>'.html_safe }
           %input{ :type => 'hidden', :name => 'items[<%= id %>][system_id]', :value => object.id }
@@ -74,7 +75,6 @@
             %i.grcicon-edit-new
           %a.widgetbtn.btn.btn-mini{ :href => '#', :'data-toggle' => 'selector-list-remove' }
             %i.grcicon-remove
-          %span.state
 
 -if params[:system_id].present?
   .row-fluid.modal-source

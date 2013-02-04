@@ -66,6 +66,7 @@
     .row-fluid
       .span6.object_info{ :'data-template-id' => 'control_option_data' }
       .span6.actions
+        %span.state
         .pull-right
           %input{ :type => 'hidden', :name => 'items[<%= id %>][id]', :value => '<% if (id.toString().substr(0,3) != "new") { %><%= id %><% } %>'.html_safe }
           %input{ :type => 'hidden', :name => 'items[<%= id %>][risk_id]', :value => object.id }
@@ -75,7 +76,6 @@
             %i.grcicon-edit-new
           %a.widgetbtn.btn.btn-mini{ :href => '#', :'data-toggle' => 'selector-list-remove' }
             %i.grcicon-remove
-          %span.state
 
 -if params[:risk_id].present?
   .row-fluid.modal-source
