@@ -204,6 +204,13 @@ ul.tree {
      border-bottom:none; 
     }
   }
+  .no-result {
+    text-align: center;
+    font-weight: bold;
+    color: $darkGray;
+    line-height: 20px;
+    font-size: 11px;
+  }
   .item-content {
     display:none;
     padding:0 0 12px 0;
