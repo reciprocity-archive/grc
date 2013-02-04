@@ -221,10 +221,18 @@
 }
 
 .widget-filters {
+  @include background-image(linear-gradient(top, #eee, $white));
+  @include border-radius();
+  border:1px solid #ddd;
+  padding:6px;
+  form.form-inline {
+    margin-bottom:0;
+  }
   select {
     width:auto;
   }
   input {
     width:auto;
   }
+  
 }
