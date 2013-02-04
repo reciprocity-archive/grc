@@ -136,3 +136,12 @@ h4 {
     border:none;
   }
 }
+
+// Date input field - To see date icon just add class .date to input field
+.date {
+  padding-left: 26px;
+  @include background-size(160px 160px);
+  background-image: url("/images/grcicons/icons.png");
+  background-repeat: no-repeat;
+  background-position: -141px -123px;
+}
