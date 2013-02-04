@@ -17,7 +17,7 @@
   =f.hidden_field :program_id
 
 .row-fluid
-  =wrapped_text_field f, :span4, :title, :placeholder => 'Enter title', :label_name => 'Audit Title', :value => f.object.title.presence || (f.object.program.nil? ? '' : "#{Date.today.year} / #{f.object.program.title} Audit")
+  =wrapped_text_field f, :span4, :title, :placeholder => 'Enter title', :label_name => 'Audit Title <span class="required">*</span>'.html_safe, :value => f.object.title.presence || (f.object.program.nil? ? '' : "#{Date.today.year} / #{f.object.program.title} Audit")
   =wrapped_text_field f, :span4, :audit_firm, :placeholder => '', :label_name => 'Audit Firm'
   =wrapped_text_field f, :span4, :audit_lead, :placeholder => '', :label_name => 'Audit Contact'
 .row-fluid

@@ -14,7 +14,7 @@
   -content_for :modal_delete_path, delete_flow_control_path(f.object)
 
 .row-fluid
-  =wrapped_text_field f, :span4, :title, :placeholder => 'Enter title'
+  =wrapped_text_field f, :span4, :title, :placeholder => 'Enter title', :label_name => 'Title <span class="required">*</span>'.html_safe
   -programs = Program
   -programs = programs.where(:company => true) if only_company
   -programs = programs.where(:company => false) if only_regulation
@@ -36,7 +36,7 @@
       =wrapped_date_field f, :span4, :stop_date, :class => 'date', :label_name => 'Stop Date', :placeholder => 'MM/DD/YYYY'
 
 .row-fluid
-  =wrapped_text_area f, :span6, :description, :class => 'double wysihtml5', :wrapper_div_class => 'wysiwyg-area', :id => "text1", :placeholder => 'Enter description here'
+  =wrapped_text_area f, :span6, :description, :class => 'double wysihtml5', :wrapper_div_class => 'wysiwyg-area', :id => "text1", :placeholder => 'Enter description here', :label_name => 'Description <span class="required">*</span>'.html_safe
   .span6
     .row-fluid
       -#=wrapped_select(f, :span6, :type_id, ['Regulation', 'Company'], :selected => f.object.company? ? 'Company' : 'Regulation', :)

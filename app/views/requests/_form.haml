@@ -31,7 +31,7 @@
 
 .row-fluid
   =wrapped_text_area f, :span6, :pbc_control_desc, :class => 'double wysihtml5', :placeholder => 'Enter description here', :wrapper_div_class => 'wysiwyg-area', :label_name => 'Control Description from PBC List'
-  =wrapped_text_area f, :span6, :request, :class => 'double wysihtml5', :placeholder => 'Enter request here', :wrapper_div_class => 'wysiwyg-area'
+  =wrapped_text_area f, :span6, :request, :class => 'double wysihtml5', :placeholder => 'Enter request here', :wrapper_div_class => 'wysiwyg-area', :label_name => 'Request <span class="required">*</span>'.html_safe
 .row-fluid
   =wrapped_text_area f, :span6, :notes, :class => 'double wysihtml5', :placeholder => 'Enter notes here', :wrapper_div_class => 'wysiwyg-area'
   =wrapped_text_area f, :span6, :test, :class => 'double wysihtml5', :placeholder => 'Enter test here', :wrapper_div_class => 'wysiwyg-area'
