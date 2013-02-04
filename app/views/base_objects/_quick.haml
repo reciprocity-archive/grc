@@ -7,17 +7,19 @@
   .no-results
     No results found
 -else
-  %ul.nav.nav-tabs.nav-stacked
+  %ul.nav.nav-tabs.tree-structure.simple.single-row-tabs
     -instances.each do |instance|
       -instance_path = self.send("flow_#{model_name}_path", instance)
       -instance_tooltip_path = self.send("tooltip_flow_#{model_name}_path", instance)
       -if quick_result
         =render 'base_objects/quick_result', { :item => instance }
       -else
-        %li.group
+        %li
           %a{ :href => instance_path, :'data-popover-href' => instance_tooltip_path, :'data-popover-trigger' => 'sticky-hover' }
-            %h3=instance.slug
-            %p.oneline
-              %strong=instance.title
-              &nbsp;
-              =display_as_html instance.description
+            .row-fluid
+              .span12
+                .item-identifier
+                  %span.key
+                    =instance.slug
+                  %span.name
+                    =instance.title
