@@ -15,8 +15,8 @@
             %a{ :href => new_flow_request_path(:'request[pbc_list_id]' => pbc_list.id, :'request[type_id]' => type_id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide'}
               %i{ :class => request_type_icon(type_name) }
               =type_name
-  .span2
-    %a.pull-right.btn.btn-mini.accordion-toggle.toggle{:'data-toggle'=>"collapse", :href => "#filters"}
+  .span2{:style => "position:relative"}
+    %a.pull-right.btn.btn-mini.accordion-toggle.toggle.filter-trigger{:'data-toggle'=>"collapse", :href => "#filters"}
       %i.icon-search
       Show/Hide Filter&nbsp;
 
@@ -25,9 +25,9 @@
     -filters_disabled = pbc_list.requests.count == 0
     -if !filters_disabled
       %form.form-inline
-        %label
+        %label.label-title
           %strong
-            Filter by:
+            Filter by
         %label
           Request Type
         %select{ :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'type-name' }
