@@ -139,7 +139,14 @@ ul.tree {
       @include border-radius(4px 4px 0 0);
       span {
         font-weight: bold;
-        color: $darkGray;
+        &.sub-title {
+          font-weight: normal;
+          font-size: 10px;
+          text-transform: none;
+          display: block;
+          line-height: 14px;
+          padding-bottom: 6px;
+        }
       }
     }
     .role {
