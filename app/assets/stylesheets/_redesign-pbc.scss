@@ -43,3 +43,42 @@ ul.tree-structure.pbc {
     margin-top:8px;
   }
 }
+
+.requests {
+  .item-title {
+    color:$gray;
+    i {
+      margin-top:8px;
+    }
+    .item-actions {
+      padding-top:1px;
+      i {
+        margin-top:0px;
+      }
+    }
+    span.control {
+      font-weight:bold;
+      color:$green;
+      &.error {
+        color:$error;
+      }
+    }
+    span.date {
+      font-style:italic;
+      color:#aaa;
+    }
+  }
+  .btn-controllink {
+    @include opacity(0.5);
+    margin-top:-2px;
+    padding-left:2px;
+    padding-right:2px;
+    i {
+      margin-top:0;
+    }
+    &:hover {
+      @include opacity(1);
+    }
+  }
+  
+}

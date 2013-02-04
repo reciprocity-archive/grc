@@ -128,7 +128,42 @@
                     %i{ :class => control_assessment_button_icon(control_assessment.external_tod) }
                   %span Effectiveness
       .item-content
-
+        %ul.tree-structure.requests
+          -requests.each do |request|
+            -request_collapse_class = "control_assessment-#{control_assessment_id || 'null' }-request-#{request.id}"
+            %li{ html_data_attributes(request, "data-filter-", [ ["type-id", "type_id"], ["type-name", "type_name"], "status", ["date-requested", "date_requested.to_date"], ["control-code", "control.slug"], ["person", "persons_responsible"], "id" ]) }
+              .item-main
+                .openclose
+                .item-title
+                  .row-fluid
+                    .span2
+                      %i{"class" => request_type_icon(request.type_name)}
+                      =request.type_name
+                      request
+                    .span4
+                      for &nbsp;
+                      -if request.control.present?
+                        %span.control.oneline
+                          =request.control && request.control.slug
+                      -elsif request.pbc_control_code.present?
+                        %span.control.error.oneline
+                          ="#{request.pbc_control_code} [Code not recognized]"
+                      -else
+                        %span.control.error.oneline
+                          No control selected
+                      %a.btn.btn-mini.btn-controllink{:href => flow_controls_path(:list_select => 1), :'data-toggle' => 'modal-ajax-single-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#referenceList', :'data-modal-class' => 'modal-slim' }
+                        %i.grcicon-link
+                      &nbsp; with
+                      =pluralize(request.responses.count, "response")
+                    .span2 
+                      %span.date{"rel" => "tooltip", "data-placement" => "top", "title" => "Date Requested"}=request.date_requested && request.date_requested.strftime('%m/%d/%Y')
+                    
+                    
+                  .item-actions
+                    %a.btn.btn-mini.pull-right{ :href => edit_flow_request_path(request.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide'}
+                      %i.grcicon-edit-grey
+                  
+              .item-content
 %br
 %br
 
