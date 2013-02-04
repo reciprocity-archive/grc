@@ -108,7 +108,7 @@
                     .span2
                       %i{"class" => request_type_icon(request.type_name)}
                       %span.request-title=request.type_name
-                    .span4
+                    .span3
                       for &nbsp;
                       -if request.control.present?
                         %span.control.oneline
@@ -128,6 +128,13 @@
                       
                       &nbsp; with
                       =pluralize(request.responses.count, "response")
+                    .span3
+                      .asignee
+                        Asignee
+                        %select
+                          %option Daniel Adams
+                          %option Alexander Contrapolsky
+                          %option Alexander Contrapolsky the Second
                     .span2
                       -if request.date_requested.present?
                         %span.date{"rel" => "tooltip", "data-placement" => "top", "title" => "Date Requested"}=request.date_requested && request.date_requested.strftime('%m/%d/%Y')
@@ -139,6 +146,8 @@
                         %select
                           -Request.statuses.each do |status|
                             %option{ :selected => request.status == status }=status
+
+
                       
                   .item-actions
                     %a.btn.btn-mini.pull-right{ :href => edit_flow_request_path(request.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide', :title => "Edit Request", :rel => "tooltip", :'data-placement' => "left"}
