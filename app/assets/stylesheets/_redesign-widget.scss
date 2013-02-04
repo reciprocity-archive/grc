@@ -39,6 +39,13 @@
      margin-top:10px; 
     }
   }
+  .info {
+    padding:0 6px;
+    color:$text;
+    .rtf {
+      margin:0 20% 10px 0;
+    }
+  }
   .filter {
     padding:6px;
     background: $widgetFooteBgnd;
