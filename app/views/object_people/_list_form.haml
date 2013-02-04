@@ -12,10 +12,10 @@
         
       .span4.actions
         .pull-right
-          %a.widgetbtn.add-me.btn.btn-mini{:href => "#", :'data-toggle' => 'selector-list-select'}
-            %i.grcicon-chevron-right
           %a.widgetbtn.btn.btn-mini{:href => edit_flow_person_path('<%=person.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
             %i.grcicon-edit-new
+          %a.widgetbtn.add-me.btn.btn-mini{:href => "#", :'data-toggle' => 'selector-list-select'}
+            %i.grcicon-chevron-right
 
 %script#person_option_data{ :type => 'text/html' }
   %span.name <%= person.name %>
@@ -27,6 +27,7 @@
     .row-fluid{ :'data-toggle' => 'collapse-additional' }
       .span6.object_info{ :'data-template-id' => 'person_option_data' }
       .span6.actions
+        %span.state
         .pull-right
           %input{ :type => 'hidden', :name => 'items[<%= id %>][id]', :value => '<% if (id.toString().substr(0,3) != "new") { %><%= id %><% } %>'.html_safe }
           %input{ :type => 'hidden', :name => 'items[<%= id %>][personable_type]', :value => object.class.name }
@@ -37,7 +38,6 @@
             %i.grcicon-edit-new
           %a.widgetbtn.btn.btn-mini{ :href => '#', :'data-toggle' => 'selector-list-remove' }
             %i.grcicon-remove
-          %span.state
         
         .pull-right.role-btn
           .btn-group.inline

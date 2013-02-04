@@ -25,6 +25,7 @@
     .row-fluid
       .span6.object_info{ :'data-template-id' => 'document_option_data' }
       .span6.actions
+        %span.state
         .pull-right
           %input{ :type => 'hidden', :name => 'items[<%= id %>][id]', :value => '<% if (id.toString().substr(0,3) != "new") { %><%= id %><% } %>'.html_safe }
           %input{ :type => 'hidden', :name => 'items[<%= id %>][documentable_type]', :value => object.class.name }
@@ -35,7 +36,6 @@
             %i.grcicon-edit-new
           %a.widgetbtn.add-me.btn.btn-mini{:href => "#", :'data-toggle' => 'selector-list-remove'}
             %i.grcicon-remove
-          %span.state
 
 .row-fluid.modal-source
   .span6
