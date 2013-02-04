@@ -88,49 +88,35 @@ can.Control("CMS.Controllers.PBCModals", {
         , 'request[control_id]': control_data.id
         }, function(data) {
           // FIXME: Brad, fix this if/when Requests are live-bound
-          var $this = el.closest('.pbc-control').find('.item');
+          var $this = el.closest('.pbc-control').find('.control');
           $this.text(control_data.slug);
           $this.removeClass("error");
           $this.addClass("i-control");
             //find this control AND REMOVE ITS ERROR
-            var $ca = $(".pbc-control-assessments .pbc-ca-item[data-type=ControlAssessment][data-control-id=" + control_data.id + "]");
+            var $requests = $("#requests");
+            var $ca = $requests.find(".pbc-ca[data-type=ControlAssessment][data-control-id=" + control_data.id + "]");
             var type_name = el.closest('li[data-filter-type-name]').data("filter-type-name");
 
             // case 1: control exists -- no action needed
             if(!$ca.length) {
               // case 2: control does not exist
-              $(".pbc-control-assessments").append(
+              $requests.append(
                 can.view(
                     "/assets/pbc/control_assessment.mustache"
                     , $.extend({}, control_data, { type_name : type_name})
                 ));
-              $ca = $(".pbc-control-assessments .pbc-ca-item[data-control-id=" + control_data.id + "]");
+              $ca = $requests.find(".pbc-ca[data-control-id=" + control_data.id + "]");
 
               
             }
-            var $oldParent = el.closest(".pbc-ca-item");
-            el.closest(".pbc-requests > .main-item").detach().appendTo($ca.find(".pbc-requests"));
+            var $oldParent = el.closest(".pbc-ca");
+            el.closest(".requests > *").detach().appendTo($ca.find(".requests"));
             //$ca.find(".pbc-ca-title .expander").addClass("in");
-            var content = $ca.find(".pbc-ca-content");
-            content.collapse().collapse("show");
-            $ca.find("[data-toggle=#" + content.attr("id") + "]").addClass("in");
+            var content = $ca.children(".item-content");
+            content.show();
+            $ca.children(".item-main").find(".openclose").addClass("active");
             // sweep for newly empty control assessments and delete.
-            $(".pbc-control-assessments .pbc-ca-item:not(:has(.main-item))").remove();
-
-            /*
-            Due to request counts being removed by story 41602953, this code is not currently
-             working or needed.  If request counts are restored, uncomment this block.  --BM
-            var filtersmap = {
-                "Documentation" : ".grcicon-document"
-                , "Population Sample" : ".grcicon-populationsample"
-                , "Interview" : ".grcicon-calendar"
-            };
-
-            var targetTextNode = $ca.find(".pbc-ca-title " + filtersmap[type_name])[0].nextSibling;
-            targetTextNode.nodeValue = [" ", parseInt(targetTextNode.nodeValue) + 1, " "].join("");
-            targetTextNode =  $oldParent.find(".pbc-ca-title " + filtersmap[type_name])[0].nextSibling;
-            targetTextNode.nodeValue = [" ", parseInt(targetTextNode.nodeValue) - 1, " "].join("");
-            */
+            $requests.find(".pbc-ca:not(:has(.requests *))").remove();
         });
         this.bindXHRToButton(xhr, el);
     }

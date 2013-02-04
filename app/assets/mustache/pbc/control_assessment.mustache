@@ -1,48 +1,44 @@
-<li class="pbc-ca-item" data-control-id="{{id}}" data-sort-control-code="{{slug}}" data-type="ControlAssessment">
-    <div class="pbc-ca-title">
-      <div class="row-fluid">
-        <div class="span2" data-target="#control_assessment-{{id}}" data-toggle="collapse">
-          <div class="expander in"></div>
-          <strong>{{slug}}</strong>
-        </div>
-        <div class="span2" data-target="#control_assessment-{{id}}" data-toggle="collapse">
-          {{title}}
-        </div>
-        <div class="span4" data-target="#control_assessment-{{id}}" data-toggle="collapse">
-          <div class="control-icons">
-          &nbsp;
-          {{!
-            <h6>
-              <i class="grcicon-document" data-placement="top" rel="tooltip" title="Documentation Request"></i>
-              0
-              <i class="grcicon-populationsample" data-placement="top" rel="tooltip" title="Population Request"></i>
-              0
-              <i class="grcicon-calendar" data-placement="top" rel="tooltip" title="Meeting Request"></i>
-              0
-            </h6>
-          }}
+<li class="pbc-ca" data-control-id="{{id}}" data-id="{{control_assessment_id}}" data-sort-control-code="{{slug}}" data-type="ControlAssessment">
+    <div class="item-main">
+      <div class="openclose active"></div>
+      <div class="item-title">
+        <div class="row-fluid">
+          <div class="span8">
+            <span class="tiny-title">Requests with Control:</span>
+            <strong>{{slug}}</strong>
+            {{title}}
           </div>
-        </div>
-        <div class="span1" data-target="#control_assessment-{{id}}" data-toggle="collapse">
-          <a class="btn btn-mini rotate_control_assessment" data-method="post" data-placement="top" data-remote="" href="/control_assessments/{{id}}/rotate?control_assessment%5Binternal_tod%5D=toggle" rel="tooltip" title="Internal: Test of Design">
-            <i class="grcicon-blank"></i>
-          </a>
-          <a class="btn btn-mini rotate_control_assessment" data-method="post" data-placement="top" data-remote="" href="/control_assessments/{{id}}/rotate?control_assessment%5Binternal_toe%5D=toggle" rel="tooltip" title="Internal: Test of Implementation">
-            <i class="grcicon-blank"></i>
-          </a>
-        </div>
-        <div class="span1" data-target="#control_assessment-{{id}}" data-toggle="collapse">
-          <a class="btn btn-mini rotate_control_assessment" data-method="post" data-placement="top" data-remote="" href="/control_assessments/{{id}}/rotate?control_assessment%5Bexternal_tod%5D=toggle" rel="tooltip" title="External: Test of Design">
-            <i class="grcicon-blank"></i>
-          </a>
-          <a class="btn btn-mini rotate_control_assessment" data-method="post" data-placement="top" data-remote="" href="/control_assessments/{{id}}/rotate?control_assessment%5Bexternal_toe%5D=toggle" rel="tooltip" title="External: Test of Implementation">
-            <i class="grcicon-blank"></i>
-          </a>
+          <div class="span2">
+            <div class="ca-fields">
+              <a class="btn btn-mini rotate_control_assessment" data-method="post" data-placement="top" data-remote="" href="/control_assessments/{{control_assessment_id}}/rotate?control_assessment%5Binternal_toe%5D=toggle" rel="tooltip" title="Internal: Test of Effectiveness">
+                <i class="grcicon-blank"></i>
+              </a>
+              <span>Design</span>
+              &nbsp;&nbsp;
+              <a class="btn btn-mini rotate_control_assessment" data-method="post" data-placement="top" data-remote="" href="/control_assessments/{{control_assessment_id}}/rotate?control_assessment%5Binternal_tod%5D=toggle" rel="tooltip" title="Internal: Test of Design">
+                <i class="grcicon-blank"></i>
+              </a>
+              <span>Effectiveness</span>
+            </div>
+          </div>
+          <div class="span2">
+            <div class="ca-fields">
+              <a class="btn btn-mini rotate_control_assessment" data-method="post" data-placement="top" data-remote="" href="/control_assessments/{{control_assessment_id}}/rotate?control_assessment%5Bexternal_toe%5D=toggle" rel="tooltip" title="External: Test of Effectiveness">
+                <i class="grcicon-blank"></i>
+              </a>
+              <span>Design</span>
+              &nbsp;&nbsp;
+              <a class="btn btn-mini rotate_control_assessment" data-method="post" data-placement="top" data-remote="" href="/control_assessments/{{control_assessment_id}}/rotate?control_assessment%5Bexternal_tod%5D=toggle" rel="tooltip" title="External: Test of Design">
+                <i class="grcicon-blank"></i>
+              </a>
+              <span>Effectiveness</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="pbc-ca-content collapse" id="control_assessment-{{id}}">
-      <ul class="pbc-requests">
+    <div class="item-content" style="display: block;">
+      <ul class="tree-structure requests">
       </ul>
     </div>
   </li>

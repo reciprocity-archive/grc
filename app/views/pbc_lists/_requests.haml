@@ -68,7 +68,7 @@
 %ul#requests.tree-structure.pbc
   -sorted_requests_with_control_assessments(requests).each do |control_assessment_id, control_assessment, requests|
     -control_assessment_collapse_id = "control_assessment-#{control_assessment && control_assessment.control && control_assessment.control_id || 'null'}"
-    %li{ :'data-type' => 'ControlAssessment', :'data-id' => control_assessment_id, :'data-control-id' => control_assessment && control_assessment.control && control_assessment.control_id, 'data-sort-control-code' => control_assessment && control_assessment.control && control_assessment.control.slug }
+    %li.pbc-ca{ :'data-type' => 'ControlAssessment', :'data-id' => control_assessment_id, :'data-control-id' => control_assessment && control_assessment.control && control_assessment.control_id, 'data-sort-control-code' => control_assessment && control_assessment.control && control_assessment.control.slug }
       .item-main
         .openclose
         .item-title
@@ -108,7 +108,7 @@
                     .span2
                       %i{"class" => request_type_icon(request.type_name)}
                       %span.request-title=request.type_name
-                    .span3
+                    .span3.pbc-control
                       for &nbsp;
                       -if request.control.present?
                         %span.control.oneline
