@@ -26,6 +26,7 @@
       var $form;
       this.$element
         .on('keypress', 'form', $.proxy(this.keypress_submit, this))
+        .on('keyup', 'form', $.proxy(this.keyup_escape, this))
         .on('click.modal-form.close', '[data-dismiss="modal"]', $.proxy(this.hide, this))
         .on('click.modal-form.reset', 'input[type=reset], [data-dismiss="modal-reset"]', $.proxy(this.reset, this))
         .on('click.modal-form.submit', 'input[type=submit], [data-toggle="modal-submit"]', $.proxy(this.submit, this))
@@ -38,13 +39,6 @@
         .on('delete-object', $.proxy(this.delete_object, this))
         ;
 
-      $(document).on("ajax:complete", function(ev, xhr2) {
-        if(xhr2 === that.xhr) {
-          delete that.xhr;
-          $("[data-toggle=modal-submit]", $form).removeAttr("disabled").removeClass("disabled pending-ajax").each(function() {  $(this).text($(this).data("origText")); });
-          $form.data("submitpending", false);
-        }
-      });
 
     }
 
@@ -110,6 +104,15 @@
       }
     }
 
+  , keyup_escape : function(e) {
+     if($(document.activeElement).is("select, [data-toggle=datepicker]") && e.which === 27) {
+        
+        this.$element.attr("tabindex", -1).focus();
+        e.stopPropagation();
+
+      }
+    }
+
   , reset: function(e) {
       var form = this.$form()[0];
       form && form.reset();
@@ -121,12 +124,12 @@
       this.$element.off('modal_form');
     }
 
-  , focus_first_input: function() {
+  , focus_first_input: function(ev) {
       var $first_input = this.$element
         .find('input[type="text"], input[type="checkbox"], select, textarea')
         .not('[placeholder*=autofill], label:contains(autofill) + *, [disabled]')
         .first();
-      if ($first_input.length > 0)
+      if ($first_input.length > 0 && (!ev || this.$element.is(ev.target)))
         setTimeout(function() { $first_input.get(0).focus(); }, 100);
     }
   });
@@ -176,8 +179,8 @@
       if (data) {
         // Parse and dispatch JSON object
         $(e.target).trigger('ajax:json', [data, xhr]);
-      } else {
-        // Dispatch as html
+      } else if(xhr.responseText) {
+        // Dispatch as html, if there is html to dispatch.  (no result should not blank out forms)
         $(e.target).trigger('ajax:html', [xhr.responseText, xhr]);
       }
 
@@ -189,6 +192,19 @@
         } else if (xhr.status == 279) {
           // Handle 279 page refresh
           window.location.assign(window.location.href.replace(/#.*/, ''));
+        }
+        else {
+          var modal_form = $(".modal:visible").data("modal_form");
+          if(xhr === modal_form.xhr) {
+            delete modal_form.xhr;
+            $("[data-toggle=modal-submit]", modal_form.$element)
+            .removeAttr("disabled")
+            .removeClass("disabled pending-ajax")
+            .each(function() {  
+              $(this).text($(this).data("origText")); 
+            });
+            $("form", modal_form.$element).data("submitpending", false);
+          }
         }
       }
 
