@@ -67,6 +67,25 @@ ul.tree-structure.pbc {
       font-style:italic;
       color:#aaa;
     }
+    span.request-title {
+      text-transform:uppercase;
+      color:darken($gray,20%);
+    }
+    .status {
+      position:relative;
+      select {
+        position:absolute;
+        top:4px;
+        left:-7px;
+        display:block;
+        line-height:23px;
+        height:23px;
+        padding:2px;
+        width:auto;
+        border-color:darken($lightGray,15%);
+        @include border-radius();
+      }    
+    }
   }
   .btn-controllink {
     @include opacity(0.5);
@@ -80,5 +99,7 @@ ul.tree-structure.pbc {
       @include opacity(1);
     }
   }
-  
+  .response-main {
+    margin-left:25px;
+  }
 }

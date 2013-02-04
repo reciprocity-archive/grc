@@ -138,8 +138,7 @@
                   .row-fluid
                     .span2
                       %i{"class" => request_type_icon(request.type_name)}
-                      =request.type_name
-                      request
+                      %span.request-title=request.type_name
                     .span4
                       for &nbsp;
                       -if request.control.present?
@@ -155,15 +154,77 @@
                         %i.grcicon-link
                       &nbsp; with
                       =pluralize(request.responses.count, "response")
-                    .span2 
-                      %span.date{"rel" => "tooltip", "data-placement" => "top", "title" => "Date Requested"}=request.date_requested && request.date_requested.strftime('%m/%d/%Y')
-                    
-                    
+                    .span2
+                      -if request.date_requested.present?
+                        %span.date{"rel" => "tooltip", "data-placement" => "top", "title" => "Date Requested"}=request.date_requested && request.date_requested.strftime('%m/%d/%Y')
+                      -else
+                        %span.date Unknown date
+                    .span2
+                      .status
+                        Status:
+                        %select
+                          -Request.statuses.each do |status|
+                            %option{ :selected => request.status == status }=status
+                      
                   .item-actions
                     %a.btn.btn-mini.pull-right{ :href => edit_flow_request_path(request.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide'}
                       %i.grcicon-edit-grey
                   
               .item-content
+                .response-main
+                  .row-fluid
+                    .span3
+                      %h5 Request
+                      -if request.request.present?
+                        =display_as_html request.request
+                      -else
+                        %p.disabled-text Request description not available
+
+                      %h5 Responsible Parties
+                      %p
+                        %strong Internal contact email:
+                        -if request.company_responsible.present?
+                          =request.company_responsible
+                        -else
+                          %span.disabled-text Unknown company 
+                        %br
+                        %strong Auditor contact email:
+                        -if request.auditor_responsible.present?
+                          =request.auditor_responsible
+                        -else
+                          %span.disabled-text Unknown auditor
+
+                    .span3
+                      %h5 PBC Control Description
+                      -if request.pbc_control_desc.present?
+                        =display_as_html request.pbc_control_desc
+                      -else
+                        %p.disabled-text PBC control description not available
+                    .span3
+                      %h5 Test
+                      -if request.test.present?
+                        =display_as_html request.test
+                      -else
+                        %p.disabled-text Test description not available
+                    .span3
+                      %h5 Notes
+                      -if request.notes.present?
+                        =display_as_html request.notes
+                      -else
+                        %p.disabled-text Notes not available
+
+
+                %ul.tree-structure
+                  %li
+                    .item-main
+                      .openclose
+                      .item-title
+                        .row-fluid
+                          .span12
+                            Aloha
+                      .item-content
+                        
+
 %br
 %br
 
