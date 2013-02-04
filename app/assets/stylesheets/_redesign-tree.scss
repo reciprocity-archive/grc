@@ -139,9 +139,10 @@ ul.tree {
       border:1px solid darken($lightGray,5%);
       color:$gray;
       font-size:11px;
+      line-height: 14px;
       text-transform:uppercase;
       font-weight:normal;
-      padding:0 6px;
+      padding:5px 6px;
       @include text-shadow(0 1px 1px $white);
       @include border-radius(4px 4px 0 0);
       span {
@@ -152,7 +153,6 @@ ul.tree {
           text-transform: none;
           display: block;
           line-height: 14px;
-          padding-bottom: 6px;
         }
       }
     }
