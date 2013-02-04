@@ -20,41 +20,40 @@
       %i.icon-search
       Show/Hide Filter&nbsp;
 
-#filters.widget-filters.collapse
-  -filters_disabled = pbc_list.requests.count == 0
-  -if !filters_disabled
-    .row-fluid
-      .span12
-        %form.form-inline
-          %label
-            %strong
-              Filter by:
-          %label
-            Request Type
-          %select{ :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'type-name' }
-            %option{ :value => 'any', :selected => 'selected' } - Any -
-            %option Documentation
-            %option Interview
-            %option Population Sample
-          %label
-            Status
-          %select{ :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'status' }
-            %option{ :value => 'any', :selected => 'selected' } - Any -
-            -Request.statuses.each do |status|
-              %option=status
-          %label
-            Responsible Parties
-          %select{ :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'person' }
-            %option{ :value => 'any', :selected => 'selected' } - Any -
-            -pbc_list.requests.all.map { |req| [req.company_responsible.presence, req.auditor_responsible.presence] }.flatten.compact.uniq.sort.each do |name|
-              %option=name
-          %label
-            On or After
-          %input#datepicker-control-date.date{:type => "text",  :placeholder => "MM/DD/YYYY", :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'date-requested' }
-          :javascript
-            $('#datepicker-control-date').datepicker();
-          %button.btn.pull-right{ :'data-toggle' => 'filter-reset' , :rel => "tooltip", :"data-placement" => "left", :title => "Reset filters" }
-            %i.grcicon-x-grey
+#filters.collapse
+  .widget-filters
+    -filters_disabled = pbc_list.requests.count == 0
+    -if !filters_disabled
+      %form.form-inline
+        %label
+          %strong
+            Filter by:
+        %label
+          Request Type
+        %select{ :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'type-name' }
+          %option{ :value => 'any', :selected => 'selected' } - Any -
+          %option Documentation
+          %option Interview
+          %option Population Sample
+        %label
+          Status
+        %select{ :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'status' }
+          %option{ :value => 'any', :selected => 'selected' } - Any -
+          -Request.statuses.each do |status|
+            %option=status
+        %label
+          Responsible Parties
+        %select{ :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'person' }
+          %option{ :value => 'any', :selected => 'selected' } - Any -
+          -pbc_list.requests.all.map { |req| [req.company_responsible.presence, req.auditor_responsible.presence] }.flatten.compact.uniq.sort.each do |name|
+            %option=name
+        %label
+          On or After
+        %input#datepicker-control-date.date{:type => "text",  :placeholder => "MM/DD/YYYY", :disabled => filters_disabled, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'date-requested' }
+        :javascript
+          $('#datepicker-control-date').datepicker();
+        %button.btn.pull-right{ :'data-toggle' => 'filter-reset' , :rel => "tooltip", :"data-placement" => "left", :title => "Reset filters" }
+          %i.grcicon-x-grey
 
 %section.headline
   .row-fluid
