@@ -13,10 +13,13 @@
 %section.content
 
   %script#person_list_item{ :type => 'text/html', :'data-member' => 'object_person' }
-    %li.controlSlot{ :'data-id' => '<%= person.id %>' }
-      %span.controls-group <%= role %>
-      %br
-      %span.controls-subgroup <%= person.name || '&nbsp' %>
+    %li.controlSlot.main{ :'data-id' => '<%= person.id %>' }
+      .item-identifier
+        .item-title
+          %span.addition-info
+            <%= person.name || '&nbsp' %>
+            %span.role
+              <%= role %>
 
   %ul#personList.tree{ :'data-template-id' => 'person_list_item' }
     -all_object_people.each do |object_item|

@@ -10,7 +10,7 @@
   -content_for :modal_delete_path, method("delete_flow_#{model_name}_path").call(f.object)
 
 .row-fluid
-  =wrapped_text_field f, :span6, :title, :placeholder => 'Enter title'
+  =wrapped_text_field f, :span6, :title, :placeholder => 'Enter title', :label_name => 'Title <span class="required">*</span>'.html_safe
   .span6
     .row-fluid
       =wrapped_text_field f, :span12, :slug, :label_name => 'Code (autofill)', :placeholder => "#{f.object.default_slug_prefix.upcase}-XXXX"

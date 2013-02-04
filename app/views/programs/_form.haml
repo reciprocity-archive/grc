@@ -8,7 +8,7 @@
   -content_for :modal_delete_path, delete_flow_program_path(f.object)
 
 .row-fluid
-  =wrapped_text_field f, :span6, :title, :placeholder => 'Enter title'
+  =wrapped_text_field f, :span6, :title, :placeholder => 'Enter title', :label_name => 'Title <span class="required">*</span>'.html_safe
   .span6
     .row-fluid
       =wrapped_text_field f, :span6, :slug, :label_name => 'Code (autofill)', :placeholder => 'PROGRAM-XXXX'

@@ -13,7 +13,7 @@
     =f.text_field :name, :class => 'span12', :placeholder => 'John Doe'
     %br
   .span3{ :class => error_class(f, :email) }
-    =f.label :email
+    =f.label :email, "Email <span class='required'>*</span>".html_safe
     =f.text_field :email, :class => 'span12', :placeholder => 'john@acme'
     =error_messages_inline(f, :email)
     %br

@@ -38,12 +38,14 @@
 
 .row-fluid.modal-source
   .span6
-    %h3
-      Add System
-      %a.widgetbtn.widgetbtnselector.btn.btn-add{ :href => new_flow_system_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-selector-target' => '.source, .target' }
-        %i.grcicon-add-new
-      .pull-right
-        %input.widgetsearch{:type => "text", :placeholder => "Search Systems"}
+    .row-fluid
+      .span7
+        %h3
+          Add System
+          %a.widgetbtn.widgetbtnselector.btn.btn-add{ :href => new_flow_system_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-selector-target' => '.source, .target' }
+            %i.grcicon-add-new
+      .span5
+        %input.widgetsearch.input-block-level{:type => "text", :placeholder => "Search Systems"}
 
     .filter-block
       .row-fluid

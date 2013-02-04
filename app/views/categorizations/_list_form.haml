@@ -40,12 +40,14 @@
 
 .row-fluid.modal-source
   .span6
-    %h3
-      Add Category
-      %a.widgetbtn.widgetbtnselector.btn.btn-add{ :href => new_flow_category_path(:scope_id => scope_id), :'data-toggle' => 'modal-ajax-listnewform', :'data-selector-target' => '.source, .target', :'data-modal-class' => 'modal-wide'  }
-        %i.grcicon-add-new
-      .pull-right
-        %input.widgetsearch{:type => "text", :placeholder => "Search Categories"}
+    .row-fluid
+      .span7
+        %h3
+          Add Category
+          %a.widgetbtn.widgetbtnselector.btn.btn-add{ :href => new_flow_category_path(:scope_id => scope_id), :'data-toggle' => 'modal-ajax-listnewform', :'data-selector-target' => '.source, .target', :'data-modal-class' => 'modal-wide'  }
+            %i.grcicon-add-new
+      .span5
+        %input.widgetsearch.input-block-level{:type => "text", :placeholder => "Search Categories"}
 
     .filter-block
       .row-fluid

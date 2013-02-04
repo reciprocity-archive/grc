@@ -1,24 +1,27 @@
 .modal-header.modal-alert
-  %nav
-    %a.widgetbtn{ :'data-dismiss' => 'modal', :href => '#'}
-      %i.grcicon-x-grey
-  %h1 Confirm Delete?
+  %a.widgetbtn.pull-right.btn.btn-mini{ :'data-dismiss' => 'modal', :href => '#'}
+    %i.grcicon-x-grey
+  %h2 Confirm Delete?
 
 .modal-body.cleanlabels.compact-rows
-  %h4 Are you sure you want to delete this record?
-  %p
-    Deleting #{model.respond_to?(:display_name_for_delete) ? model.display_name_for_delete : model.display_name}.
-    -to_delete = (models.reject {|name, count| count == 0}.map { |name, count| "#{count} #{name.pluralize(count)}" }).join(", ")
-    This will delete
-    =to_delete.blank? ? "nothing else" : to_delete
-    and unlink from
-    -to_unlink = (relationships.reject {|name, count| count == 0}.map { |name, count| "#{count} #{name.pluralize(count)}" }).join(", ")
-    =to_unlink.blank? ? "no other business objects." : "#{to_unlink}."
+  .centered
+    %h4 Are you sure you want to delete this record?
+    %p
+      Deleting #{model.respond_to?(:display_name_for_delete) ? model.display_name_for_delete : model.display_name}.
+      -to_delete = (models.reject {|name, count| count == 0}.map { |name, count| "#{count} #{name.pluralize(count)}" }).join(", ")
+      This will delete
+      =to_delete.blank? ? "nothing else" : to_delete
+      and unlink from
+      -to_unlink = (relationships.reject {|name, count| count == 0}.map { |name, count| "#{count} #{name.pluralize(count)}" }).join(", ")
+      =to_unlink.blank? ? "no other business objects." : "#{to_unlink}."
+
+
 
 .modal-footer
   .row-fluid
-    %nav.fltlft.txtlft.span3
-      %a.btn.btn-large{:'data-dismiss' => 'modal', :href => '#' } Cancel
     .span6
-    %nav.fltrt.txtrt.span3
-      %a.btn.btn-large.btn-alert{ :href => url + '.json', :'data-remote' => 'remote', :'data-method' => 'delete' } Delete
+      .deny-buttons
+        %a.btn{:'data-dismiss' => 'modal', :href => '#' } Cancel
+    .span6
+      .confirm-buttons
+        %a.btn.btn-danger{ :href => url + '.json', :'data-remote' => 'remote', :'data-method' => 'delete' } Delete

@@ -80,12 +80,14 @@
 -if params[:risk_id].present?
   .row-fluid.modal-source
     .span6
-      %h3
-        Add Control
-        %a.widgetbtn.widgetbtnselector.btn.btn-add{ :href => new_flow_control_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-selector-target' => '.source, .target', :'data-modal-class' => 'modal-wide' }
-          %i.grcicon-add-new
-        .pull-right
-          %input.widgetsearch{:type => "text", :placeholder => "Search Controls"}
+      .row-fluid
+        .span6
+          %h3
+            Add Control
+            %a.widgetbtn.widgetbtnselector.btn.btn-add{ :href => new_flow_control_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-selector-target' => '.source, .target', :'data-modal-class' => 'modal-wide' }
+              %i.grcicon-add-new
+        .span6
+          %input.widgetsearch.input-block-level{:type => "text", :placeholder => "Search Controls"}
 
       .filter-block
         .row-fluid
@@ -103,12 +105,14 @@
 -else
   .row-fluid.modal-source
     .span6
-      %h3
-        Add Risk
-        %a.widgetbtn.widgetbtnselector.btn.btn-add{ :href => new_flow_risk_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-selector-target' => '.source, .target', :'data-modal-class' => 'modal-wide' }
-          %i.grcicon-add-new
-        .pull-right
-          %input.widgetsearch{:type => "text", :placeholder => "Search Risks"}
+      .row-fluid
+        .span7
+          %h3
+            Add Risk
+            %a.widgetbtn.widgetbtnselector.btn.btn-add{ :href => new_flow_risk_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-selector-target' => '.source, .target', :'data-modal-class' => 'modal-wide' }
+              %i.grcicon-add-new
+        .span5
+          %input.widgetsearch.input-block-level{:type => "text", :placeholder => "Search Risks"}
 
       .filter-block
         .row-fluid

@@ -12,10 +12,13 @@
 
 %section.content
   %script#category_list_item{ :type => 'text/html', :'data-member' => 'categorization' }
-    %li.controlSlot{ :'data-id' => '<%= category.id %>' }
-      %span.controls-group <%= category.parent_name %>
-      %br
-      %span.controls-subgroup <%= category.name || '&nbsp;' %>
+    %li.controlSlot.main{ :'data-id' => '<%= category.id %>' }
+      .item-identifier
+        .item-title
+          %span.key
+            <%= category.parent_name %>
+          %span.addition-info              
+            <%= category.name || '&nbsp;' %>
       
   %ul#categoryList.tree.two-row{ :'data-template-id' => 'category_list_item' }
     -all_object_categorizations.each do |object_item|

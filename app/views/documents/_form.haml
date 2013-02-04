@@ -10,7 +10,7 @@
 .row-fluid
   .span4
     .span12{ :class => error_class(f, :title) }
-      =f.label :title
+      =f.label :title, "Title <span class='required'>*</span>".html_safe
       =f.text_field :title, :class => 'span12', :placeholder => 'Enter the title of this reference'
       =error_messages_inline(f, :title)
 
@@ -26,7 +26,7 @@
 
 .row-fluid
   .span12{ :class => error_class(f, :link) }
-    =f.label :link, "URL"
+    =f.label :link, "URL <span class='required'>*</span>".html_safe
     =f.text_field :link, :class => 'span12', :placeholder => 'https://www.example.com/xyz.pdf'
     =error_messages_inline(f, :link)
 

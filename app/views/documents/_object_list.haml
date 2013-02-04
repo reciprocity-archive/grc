@@ -11,17 +11,23 @@
 
 %section.content
   %script#reference_list_item{ :type => 'text/html', :'data-member' => 'object_document'}
-    %li.controlSlot{ :'data-id' => '<%= document.id %>' }
+    %li.controlSlot.main{ :'data-id' => '<%= document.id %>' }
       <% if (document.link_url && document.link_url.length > 0) { %>
-      %a.reference{:href => '<%= document.link_url %>', :target => "_blank"}
-        %span.controls-group <%= document.document_type || '&nbsp;' %>
-        %br
-        %span.controls-subgroup{ :title => '<%= document.link_url %>' } <%= document.title || document.link_url || '&nbsp;' %>
+      .item-identifier
+        .item-title
+          %span.addition-info
+            %a.reference{:href => '<%= document.link_url %>', :target => "_blank"}
+              <%= document.title || document.link_url || '&nbsp;' %>
+          %span.option
+            <%= document.document_type || '&nbsp;' %>
+      
       <% } else { %>
-      %span.reference
-        %span.controls-group <%= document.document_type || '&nbsp;' %>
-        %br
-        %span.controls-subgroup{ :title => '<%= document.link_url %>' } <%= document.title || document.link_url || '&nbsp;' %>
+      .item-identifier
+        .item-title
+          %span.addition-info
+            <%= document.title || document.link_url || '&nbsp;' %>
+          %span.option
+            <%= document.document_type || '&nbsp;' %>
       <% } %>
   
   %ul#referenceList.tree{ :'data-template-id' => 'reference_list_item' }
