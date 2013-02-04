@@ -154,17 +154,16 @@
     }
   }
   .related-button {
-    @include reset-list();
-    @include clearfix();
     li {
-      float:left;
-      width: 24%;
-      margin-right: 3%;
-      margin-bottom: 10px;
-      font-weight: normal;
+      font-size: 11px;
       a {
-        display: block;
         color: $black;
+        padding: 5px 9px;
+      }
+      &.active {
+        a {
+          color: $white;
+        }
       }
     }
   }

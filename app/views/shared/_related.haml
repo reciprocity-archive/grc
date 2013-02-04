@@ -12,10 +12,10 @@
   .button-set
     .row-fluid
       .span12
-        %ul.related-button
+        %ul.related-button.nav.nav-pills
           -models.each do |model|
             -table_name = model.underscore.pluralize #.table_name
-            %li.tab-btn.btn
+            %li.tab-btn
               %a{:href => "#related-#{table_name}-pane",
                 "data-toggle" => 'tab',
                 "data-source" => related_objects_flow_relationships_path(:oid => instance.id,
