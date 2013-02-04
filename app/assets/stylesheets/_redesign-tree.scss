@@ -119,6 +119,13 @@ ul.tree-structure {
       }
     }
   }
+  .rtf {
+    p {
+      line-height:1.2em;
+      font-size:12px;
+      margin-top:0;
+    }
+  }
 }
 
 ul.tree {
@@ -317,5 +324,22 @@ ul.elements {
         background-position:-96px -32px;
       }
     }
+  }
+}
+
+.responses {
+  background:#e8fdd6;
+  margin-left:25px;
+  margin-bottom:20px;
+  border:1px solid #cdecb4;
+  position:relative;
+  .bg-caret {
+    background: url('/images/bgnd-responses.png') no-repeat 0 0;
+    width:13px;
+    height:7px;
+    position:absolute;
+    top:-1px;
+    left:20px;
+    z-index:2;
   }
 }

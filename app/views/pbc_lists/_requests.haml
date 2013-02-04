@@ -149,9 +149,14 @@
                           ="#{request.pbc_control_code} [Code not recognized]"
                       -else
                         %span.control.error.oneline
-                          No control selected
-                      %a.btn.btn-mini.btn-controllink{:href => flow_controls_path(:list_select => 1), :'data-toggle' => 'modal-ajax-single-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#referenceList', :'data-modal-class' => 'modal-slim' }
-                        %i.grcicon-link
+                          UNKNOWN
+                      -if request.control.present?
+                        %a.btn.btn-mini.btn-controllink{:href => flow_controls_path(:list_select => 1), :'data-toggle' => 'modal-ajax-single-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#referenceList', :'data-modal-class' => 'modal-slim' }
+                          %i.grcicon-link-new
+                      -else
+                        %a.btn.btn-mini.btn-danger.btn-controllink{:href => flow_controls_path(:list_select => 1), :'data-toggle' => 'modal-ajax-single-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#referenceList', :'data-modal-class' => 'modal-slim' }
+                          %i.grcicon-link-new-white
+                      
                       &nbsp; with
                       =pluralize(request.responses.count, "response")
                     .span2
@@ -171,7 +176,7 @@
                       %i.grcicon-edit-grey
                   
               .item-content
-                .response-main
+                .request-main
                   .row-fluid
                     .span3
                       %h5 Request
@@ -179,51 +184,43 @@
                         =display_as_html request.request
                       -else
                         %p.disabled-text Request description not available
-
-                      %h5 Responsible Parties
-                      %p
-                        %strong Internal contact email:
-                        -if request.company_responsible.present?
-                          =request.company_responsible
-                        -else
-                          %span.disabled-text Unknown company 
-                        %br
-                        %strong Auditor contact email:
-                        -if request.auditor_responsible.present?
-                          =request.auditor_responsible
-                        -else
-                          %span.disabled-text Unknown auditor
-
-                    .span3
+                    .span2
                       %h5 PBC Control Description
                       -if request.pbc_control_desc.present?
                         =display_as_html request.pbc_control_desc
                       -else
                         %p.disabled-text PBC control description not available
-                    .span3
+                    .span2
                       %h5 Test
                       -if request.test.present?
                         =display_as_html request.test
                       -else
                         %p.disabled-text Test description not available
-                    .span3
+                    .span2
                       %h5 Notes
                       -if request.notes.present?
                         =display_as_html request.notes
                       -else
                         %p.disabled-text Notes not available
-
-
-                %ul.tree-structure
-                  %li
-                    .item-main
-                      .openclose
-                      .item-title
-                        .row-fluid
-                          .span12
-                            Aloha
-                      .item-content
-                        
+                    .span3
+                      %h5 Responsible Parties
+                      .rtf
+                        %p
+                          %strong Internal contact email:
+                          -if request.company_responsible.present?
+                            =request.company_responsible
+                          -else
+                            %span.disabled-text Unknown company 
+                          %br
+                          %strong Auditor contact email:
+                          -if request.auditor_responsible.present?
+                            =request.auditor_responsible
+                          -else
+                            %span.disabled-text Unknown auditor
+                      
+                .responses
+                  .bg-caret
+                  =render :partial => "responses", :locals => { :pbc_list => pbc_list, :request => request }                        
 
 %br
 %br
