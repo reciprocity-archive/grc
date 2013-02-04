@@ -1,17 +1,16 @@
-.widget-head
-  .widget-actions
-    %a.btn.btn-mini{:href => "/help/pbc_list", :'data-toggle' => 'modal-ajax', :title => "Help - What is this?"}
-      %i.grcicon-questionmark-grey
+
+%header.header
   %h2
     Audit Start Date:
     =pbc_list.audit_cycle.start_at && pbc_list.audit_cycle.start_at.strftime('%m/%d/%Y')
+  %a.pull-right.btn.btn-mini{:href => "/help/pbc_list", :'data-toggle' => 'modal-ajax', :title => "Help - What is this?"}
+    %i.grcicon-questionmark-grey
     
-.pbc-info-plate
+%section.info
   .row-fluid
     .span12
       %h5 Description
       =display_as_html pbc_list.audit_cycle.description
 
-.widget-body
+%section.content
   =render :partial => "requests", :locals => { :pbc_list => pbc_list }
-
