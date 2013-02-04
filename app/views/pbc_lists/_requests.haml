@@ -1,49 +1,24 @@
 -requests = pbc_list.requests.all
 
-%h3 
-  Requests
 
-%a.btn.btn-mini.accordion-toggle.toggle{:'data-toggle'=>"collapse", :href => "#widget-filters"}
-  %i.icon-search
-  Show/Hide Filter&nbsp;
+.row-fluid
+  .span10
+    %h3.pull-left
+      Requests &nbsp;
 
-.btn-group
-  %a{:'data-toggle'=>"dropdown", :href => "#", :class => "btn btn-mini btn-success dropdown-toggle"}
-    + Add New Request
-    %span.caret
-  %ul.dropdown-menu
-    -Request.types.each do |type_id, type_name|
-      %li.add-new-item
-        %a{ :href => new_flow_request_path(:'request[pbc_list_id]' => pbc_list.id, :'request[type_id]' => type_id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide'}
-          %i{ :class => request_type_icon(type_name) }
-          =type_name
-
-.pbc-request-zone
-  .row-fluid
-    .span4.pbc-main-title
-    -if requests.any?(&:control_assessment_id)
-      .span2
-        -#%span.word.pull-right
-          %strong CA Status:
-        &nbsp;
-      .span1
-        -#%span.word internal
-        -#%span.letter D
-        -#%span.letter E
-        &nbsp;
-      .span1
-        -#%span.word external
-        -#%span.letter D
-        -#%span.letter E
-        &nbsp;
-    -else
-      .span4 &nbsp;
-
-    -#.span2.pbc-add
-      %a.btn.btn-mini.accordion-toggle.toggle.pull-right{:'data-toggle'=>"collapse", :href => "#widget-filters"}
-        Show/Hide Filter
-
-    .span4.pbc-add
+    .btn-group
+      %a{:'data-toggle'=>"dropdown", :href => "#", :class => "btn btn-mini btn-success dropdown-toggle"}
+        %i.grcicon-add-new
+      %ul.dropdown-menu
+        -Request.types.each do |type_id, type_name|
+          %li.add-new-item
+            %a{ :href => new_flow_request_path(:'request[pbc_list_id]' => pbc_list.id, :'request[type_id]' => type_id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide'}
+              %i{ :class => request_type_icon(type_name) }
+              =type_name
+  .span2
+    %a.pull-right.btn.btn-mini.accordion-toggle.toggle{:'data-toggle'=>"collapse", :href => "#widget-filters"}
+      %i.icon-search
+      Show/Hide Filter&nbsp;
 
 #widget-filters.widget-filters.collapse
   -filters_disabled = pbc_list.requests.count == 0
@@ -222,10 +197,8 @@
                   .bg-caret
                   =render :partial => "responses", :locals => { :pbc_list => pbc_list, :request => request }                        
 
-%br
-%br
 
-%ul.pbc-control-assessments#requests2
+-#%ul.pbc-control-assessments#requests2
   -sorted_requests_with_control_assessments(requests).each do |control_assessment_id, control_assessment, requests|
     -control_assessment_collapse_id = "control_assessment-#{control_assessment && control_assessment.control && control_assessment.control_id || 'null'}"
     %li.pbc-ca-item{ :'data-type' => 'ControlAssessment', :'data-id' => control_assessment_id, :'data-control-id' => control_assessment && control_assessment.control && control_assessment.control_id, 'data-sort-control-code' => control_assessment && control_assessment.control && control_assessment.control.slug }
