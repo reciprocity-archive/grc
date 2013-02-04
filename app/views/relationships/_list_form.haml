@@ -154,12 +154,14 @@
 
 .row-fluid.modal-source
   .span6
-    %h3
-      =context[:source_title]
-      %a.widgetbtn.widgetbtnselector.btn.btn-add{ :href => context[:option_new_url], :'data-toggle' => 'modal-ajax-listnewform', :'data-selector-target' => '.source, .target' }
-        %i.grcicon-add-new
-      .pull-right
-        %input.widgetsearch{:type => "text", :placeholder => context[:source_search_text]}
+    .row-fluid
+      .span7
+        %h3
+          =context[:source_title]
+          %a.widgetbtn.widgetbtnselector.btn.btn-add{ :href => context[:option_new_url], :'data-toggle' => 'modal-ajax-listnewform', :'data-selector-target' => '.source, .target' }
+            %i.grcicon-add-new
+      .span5
+        %input.widgetsearch.input-block-level{:type => "text", :placeholder => context[:source_search_text]}
     .filter-block
       .row-fluid
         .span12

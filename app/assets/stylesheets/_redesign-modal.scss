@@ -131,6 +131,12 @@
         margin-right: 20px;
         margin-top: 2px;
       }
+      input.input-block-level {
+        display: block;
+        width: 100%;
+        @include box-sizing(border-box);
+        min-height: 28px;
+      }
       .source,
       .target {
         @include reset-list();

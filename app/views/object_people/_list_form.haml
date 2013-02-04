@@ -64,12 +64,14 @@
 
 .row-fluid.modal-source
   .span5
-    %h3
-      Add Person
-      %a.widgetbtn.widgetbtnselector.btn.btn-add{ :href => new_flow_person_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-selector-target' => '.source, .target' }
-        %i.grcicon-add-new
-      .pull-right
-        %input.widgetsearch{:type => "text", :placeholder => "Search Person"}
+    .row-fluid
+      .span7
+        %h3
+          Add Person
+          %a.widgetbtn.widgetbtnselector.btn.btn-add{ :href => new_flow_person_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-selector-target' => '.source, .target' }
+            %i.grcicon-add-new
+      .span5
+        %input.widgetsearch.input-block-level{:type => "text", :placeholder => "Search Person"}
 
     .filter-block
       .row-fluid
