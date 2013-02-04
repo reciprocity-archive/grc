@@ -145,3 +145,15 @@ input.date {
   background-repeat: no-repeat;
   background-position: -141px -123px;
 }
+
+.no-result {
+  text-align: center;
+  font-weight: bold;
+  color: $darkGray;
+  line-height: 20px;
+  font-size: 11px;
+  &.object-no-result {
+    font-size: 14px;
+    padding-top: 30px;
+  }
+}

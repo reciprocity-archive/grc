@@ -23,10 +23,23 @@ ul.single-row-tabs {
     padding: 0;
     a {
       padding: 0;
+      border: none;
+      &:hover {
+        background: none;
+        @include border-radius(0);
+        border: none;
+      }
     }
     .item-identifier {
       line-height: 28px;
     }
+  }
+  .no-result {
+    text-align: center;
+    font-weight: bold;
+    color: $darkGray;
+    line-height: 20px;
+    font-size: 11px;
   }
 }
 
@@ -224,13 +237,6 @@ ul.tree {
     &:last-child {
      border-bottom:none; 
     }
-  }
-  .no-result {
-    text-align: center;
-    font-weight: bold;
-    color: $darkGray;
-    line-height: 20px;
-    font-size: 11px;
   }
   .item-content {
     display:none;
