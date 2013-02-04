@@ -16,6 +16,20 @@ h3.tab-title {
   }
 }
 
+ul.single-row-tabs {
+  li {
+    float: none;
+    clear: both;
+    padding: 0;
+    a {
+      padding: 0;
+    }
+    .item-identifier {
+      line-height: 28px;
+    }
+  }
+}
+
 ul.tree-structure {
   @include reset-list();
   li {
