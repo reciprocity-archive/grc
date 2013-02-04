@@ -352,10 +352,10 @@ jQuery(function($) {
 
 jQuery(function($) {
   $('body').on('ajax:success', '#helpedit form', function(e, data, status, xhr) {
-    $(this).closest('.modal')
-      .find('.modal-header h1').html(data.help.title);
-    $(this).closest('.modal')
-      .find('.modal-body .help-content').html(data.help.content);
+    var $modal = $(this).closest('.modal');
+    $modal.find('.modal-header h1').html(data.help.title);
+    $modal.find('.modal-body .help-content').html(data.help.content);
+    $modal.find('.modal-body #helpedit').collapse('hide');
   });
 });
 
