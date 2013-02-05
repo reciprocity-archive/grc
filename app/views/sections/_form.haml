@@ -40,7 +40,7 @@
 .row-fluid
   %label{:for => "section-description"} Text of Section:
 .row-fluid{"control-group" => ""}
-  .span12.well{:class => error_class(f, :description)}
+  .span12.wysiwyg-area{:class => error_class(f, :description)}
     %textarea#section-description.span12.double.wysihtml5{:placeholder => "", :rows => "4", :name => 'section[description]'}=f.object.description
     =error_messages_inline(f, :description)
 

@@ -29,7 +29,7 @@ class CategoriesController < BaseObjectsController
 
     if params[:quick]
       @root_categories = allowed_objs(Category.roots, :read)
-      render :partial => 'quick'
+      render :partial => 'quick', :locals => { :quick_result => params[:qr]}
     else
       render :json => @categories.all.as_json
     end

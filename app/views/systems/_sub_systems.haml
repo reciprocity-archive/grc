@@ -6,11 +6,19 @@
 
 -content_for :widget_help, 'system_sub_systems'
 
+-content_for :widget_id, 'system_sub_systems_widget'
+
 -content_for :widget_buttons do
-  %a.btn.widgettextbtn{ :href => list_edit_flow_system_systems_path(:parent_id => system.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :title => 'Edit Sub-Systems', :'data-modal-class' => 'modal-wide' }
-    Edit Sub-Systems
-  %a.btn.widgettextbtn{ :href => list_edit_flow_system_controls_path(:system_id => system.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :title => 'Edit Controls', :'data-modal-class' => 'modal-wide' }
-    Edit Controls
+  .filter
+    .row-fluid
+      .span12
+        .pull-right
+          %a.btn.btn-info{ :href => list_edit_flow_system_systems_path(:parent_id => system.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :title => 'Edit Sub-Systems', :'data-modal-class' => 'modal-wide' }
+            %i.grcicon-edit-new-white
+            Sub-Systems
+          %a.btn.btn-info{ :href => list_edit_flow_system_controls_path(:system_id => system.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :title => 'Edit Controls', :'data-modal-class' => 'modal-wide' }
+            %i.grcicon-edit-new-white
+            Controls
 
 %ul.slotlist
   =render :partial => 'system_tree', :locals => { :system => system, :is_root => true, :is_editable => true }

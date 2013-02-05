@@ -1,0 +1,31 @@
+.footer {
+  border-top: 1px solid $footerBorder;
+  height: 40px;
+  text-align: center;
+  p {
+    margin: 0;
+    line-height: 40px;
+    color:$headerTitle;
+    font-size: 12px;
+    text-align: right;
+  }
+  .bottom-nav {
+    @include reset-list();
+    margin-top: 4px;
+    li {
+      text-align: left;
+      a {
+        line-height: 40px;
+        color: $link;
+        font-size: 12px;
+        text-decoration: underline;
+        &:hover {
+          text-decoration: none;
+        }
+        i {
+          margin: 10px 4px 0 0;
+        }
+      }
+    }
+  }
+}

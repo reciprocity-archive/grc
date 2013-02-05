@@ -187,9 +187,16 @@ module ApplicationHelper
   end
 
   # Treat content as HTML and pack it accordingly.
+  # If a block is passed, capture and use as a prefix.
   # Be careful what you pass as content!
-  def display_as_html(content)
+  def display_as_html(content, &block)
     content_tag :div, (content.presence || "").html_safe, :class => "rtf"
+    content_tag :div, :class => "rtf" do
+      if block_given?
+        concat(capture(&block))
+      end
+      concat((content.presence || "").html_safe)
+    end
   end
 
   def render_html_or_json_array(objs)
@@ -206,4 +213,5 @@ module ApplicationHelper
       end
     end
   end
+
 end

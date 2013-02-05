@@ -1,0 +1,28 @@
+// container size
+.container-fluid {
+  margin:0 auto;
+  &.resizable {
+    @include transition(width 0.2s);
+  }
+}
+
+// placeholder for widgets drag and drop
+.drop-placeholder {
+  background:$dropPlaceholder;
+  border:1px dashed $gray;
+  height:35px;
+  line-height:20px;
+  margin-bottom:20px;
+}
+
+// content style
+.content {
+  padding-top: 20px;
+  background: $white url(/images/bgnd-content.png) repeat-x 0 0;
+  h2 {
+    margin-bottom: 20px;
+  }
+  &.affix {
+    margin-top: 30px;
+  }
+}

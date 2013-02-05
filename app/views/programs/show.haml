@@ -1,31 +1,69 @@
 -@title = "GRC Program: #{@program.title}"
 
 -content_for :header do
-  %ol#breadcrumb
-    %li.last=link_to 'PROGRAMS', programs_dash_path
-  .location#pageTitle=@program.title
+
+  %ul.breadcrumbs
+    %li=link_to 'PROGRAMS', programs_dash_path
+    %li=@program.title
+    
+  %h1
+    %span
+      Program:
+    =@program.title
 
 -content_for :page_help, 'program'
 
 -content_for :subheader_extras do
-  %h1.fltrt.highlighted Program
+  %ul.actions.pull-right
+    %li
+      %a{:href => edit_flow_program_path(@program), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide',:title => 'Edit Program'}
+        %i.grcicon-edit-new
+        Edit Program
+    %li.btn-group
+      %a.dropdown-toggle{:href => '#', :'data-toggle' => 'dropdown'}
+        %i.grcicon-imp-exp
+        Import/Export
+        %span.caret
+      %ul.dropdown-menu
+        %li.divider
+        -unless @program.company_controls?
+          %li
+            %a{:href => import_flow_program_path(@program)}
+              Import Regs
+        %li
+          %a{:href => import_controls_flow_program_path(@program)}
+            Import Controls
+        %li.divider
+        -unless @program.company_controls?
+          %li
+            %a{:href => export_flow_program_path(@program, :format => :html), :'data-toggle' => 'modal-ajax'}
+              Export Regs
+        %li
+          %a{:href => export_controls_flow_program_path(@program, :format => :html), :'data-toggle' => 'modal-ajax'}
+            Export Controls
+    -unless @program.company_controls?
+      %li
+        %a{:href => mapping_program_path(@program)}
+          %i.grcicon-reg-map
+          Reg Mapper
+      %li
+        %a{:href => new_flow_cycle_path(:'cycle[program_id]' => @program.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect'}
+          %i.grcicon-audit
+          Start Audit
 
 -content_for :subheader_plus do
   %a.navbarplus.fltrt{ :href => new_flow_program_path, :'data-toggle' => 'modal-ajax-form', :'data-form-target' => 'redirect', :'data-modal-reset' => 'reset', :'data-modal-class' => 'modal-wide' }
 
-.row-static
-  .doubleColumn
-    .doubleWide.fullHeight
+.container-fluid
+  #columns.row-fluid{ :'data-resize' => "true" }
+    #middle-column.span8.widget-area
       =render :partial => 'programs/controls',
               :layout => 'layouts/widget_box',
               :locals => { :program => @program }
-  .singleColumn
-    .singleWide.fullHeight
+    #right-column.span4.widget-area
       =render :partial => 'programs/show',
               :layout => 'layouts/widget_box',
-              :locals => { :program => @program }
-    .singleWide.halfHeight
-
+              :locals => { :program => @program, :widget_class => 'secondary'}
       -if (@program.cycles.length != 0)  
         =render :partial => 'programs/audit_cycles',
                 :layout => 'layouts/widget_box',

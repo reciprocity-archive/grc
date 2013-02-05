@@ -68,7 +68,7 @@ class ProgramsController < BaseObjectsController
     @programs = allowed_objs(@programs.all, :read)
 
     if params[:quick]
-      render :partial => 'quick'
+      render :partial => 'quick', :locals => { :quick_result => params[:qr]}
     end
   end
 
@@ -429,6 +429,10 @@ class ProgramsController < BaseObjectsController
     end
 
     render :layout => nil
+  end
+
+  def new_object_title
+    "Program or Policy"
   end
 
   private

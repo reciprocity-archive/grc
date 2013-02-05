@@ -1,11 +1,15 @@
+-quick_result ||= nil
 -if @people.empty?
   .no-results
     No results found
 -else
   %ul.nav.nav-tabs.nav-stacked
     -@people.each do |person|
-      %li.group
-        %a.widgetbtn.fltrt{ :'data-form-target' => "refresh", :'data-delete-target' => "refresh", :'data-modal-reset' => "reset", :'data-toggle' => "modal-ajax-form", :href => edit_flow_person_path(person) }
-          %i.grcicon-edit-grey
-        =link_to '#' do #flow_person_path(person), 'data-popover-href' => tooltip_flow_person_path(person)
-          =person.name.presence || person.email.presence || "&nbsp;".html_safe
+      -if quick_result
+        =render 'base_objects/quick_result', { :item => person }
+      -else
+        %li.group
+          %a.widgetbtn.fltrt{ :'data-form-target' => "refresh", :'data-delete-target' => "refresh", :'data-modal-reset' => "reset", :'data-toggle' => "modal-ajax-form", :href => edit_flow_person_path(person) }
+            %i.grcicon-edit-grey
+          =link_to '#' do #flow_person_path(person), 'data-popover-href' => tooltip_flow_person_path(person)
+            =person.name.presence || person.email.presence || "&nbsp;".html_safe

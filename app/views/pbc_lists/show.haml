@@ -5,23 +5,32 @@
 -@title = "GRC: PBC List"
 
 -content_for :header do
-  %ol#breadcrumb
+  %ul.breadcrumbs
     %li=link_to 'PROGRAMS', programs_dash_path
     %li=link_to instance.audit_cycle.program.title, flow_program_path(instance.audit_cycle.program_id)
     %li=link_to 'AUDITS', flow_program_path(instance.audit_cycle.program_id)
     %li=link_to instance.audit_cycle.title, flow_cycle_path(instance.audit_cycle)
-    %li.last= 'PBC list'
-  #pageTitle.location
+    %li= 'PBC list'    
+  %h1
     #{instance.audit_cycle.title} PBC List
 
 -content_for :page_help, 'pbc_list'
 
 -content_for :subheader_extras do
-  -#%h1#pageType.pull-right.highlighted PBC List
+  %ul.actions.pull-right
+    %li
+      %a{ :href => import_flow_pbc_list_path(@pbc_list) }
+        %i.grcicon-imp-exp
+        Import Requests
+    %li
+      %a{ :href => export_flow_pbc_list_path(@pbc_list), :'data-toggle' => 'modal-ajax' }
+        %i.grcicon-export
+        Export Requests
 
-.row-fluid.fluid-layout
-  .span12
-    .widget.governance
-      =render :partial => "main",
-              :locals => { :pbc_list => instance }
+.container-fluid
+  .row-fluid
+    .span12
+      %section#pbc_list_widget.widget.secondary
+        =render :partial => "main",
+                :locals => { :pbc_list => instance }
 

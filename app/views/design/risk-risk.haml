@@ -1,15 +1,18 @@
 -@title = "GRC: Risk Risk"
 
 -content_for :header do
-  %ol#breadcrumb
-    %li.last
-      %a{:href => "#"} RISK
-  #pageTitle.location Risk
+  %ul.breadcrumbs
+    %li
+      %a{:href => "#"}
+        RISK
+  %h1
+    Risk
 
 -content_for :page_help, 'changeme'
 
 -content_for :subheader_extras do
   %h1#pageType.pull-right.highlighted Risk
 
-.row-static
-  %img.demoItem{:src => '../images/tempScreenGapAnalysis.jpg'}
+.container-fluid
+  .row-fluid
+    %img.demoItem{:src => '../images/tempScreenGapAnalysis.jpg'}

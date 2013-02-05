@@ -1,12 +1,14 @@
 =form_for section, :url => mapping_update_path(section), :remote => true, :class => 'form-inline' do |f|
   .modal-header
-    %nav
-      %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
-        %i.grcicon-questionmark-grey
-      %a.widgetbtn{"data-dismiss" => "modal", :href => "#comingsoonModal"}
+    .pull-right
+      %a.widgetbtn.btn.btn-mini{"data-toggle" => "modal", :href => "#comingsoonModal"}
+        %i.grcicon-help-black
+      %a.widgetbtn.btn.btn-mini{"data-dismiss" => "modal", :href => "#comingsoonModal"}
         %i.grcicon-x-grey
-    %h1 Controls Mapped to this Section
-    %h3 #{section.slug}
+    
+    %h2
+      Controls Mapped to this Section
+      %span #{section.slug}
 
   .modal-body
     .row-fluid
@@ -15,7 +17,7 @@
       .span6.control-group
         %h3 Company Controls
 
-    .row-fluid-alternating-background-colors
+    .row-fluid-alternating-background-colors.modal-source
       -rcontrols.each do |control|
         .row-fluid
           .span6.control-group
@@ -24,7 +26,7 @@
                 .row-fluid
                   .span12
                     .modalSlot.span12
-                      %a.btn.btn-blue.unmapbtn.fltrt{:href => mapping_map_rcontrol_path(:section => section.id, :rcontrol => control.id, :u => 1), :'data-remote' => true, :'data-method' => 'post', :'data-toggle' => 'unmap-rcontrol'} unmap
+                      %a.btn.btn-mini.unmapbtn.fltrt{:href => mapping_map_rcontrol_path(:section => section.id, :rcontrol => control.id, :u => 1), :'data-remote' => true, :'data-method' => 'post', :'data-toggle' => 'unmap-rcontrol'} unmap
                       %span.prefix
                         =control.slug
                         -
@@ -39,23 +41,20 @@
                   .row-fluid
                     .span12
                       .modalSlot.span12
-                        %a.btn.btn-blue.unmapbtn.fltrt{:href => mapping_map_ccontrol_path(:rcontrol => control.id, :ccontrol => ccontrol.id, :u => 1), :'data-remote' => true, :'data-method' => 'post', :'data-toggle' => 'unmap-ccontrol'} unmap
+                        %a.btn.btn-mini.unmapbtn.fltrt{:href => mapping_map_ccontrol_path(:rcontrol => control.id, :ccontrol => ccontrol.id, :u => 1), :'data-remote' => true, :'data-method' => 'post', :'data-toggle' => 'unmap-ccontrol'} unmap
                         %span.prefix
                           =ccontrol.slug
                           -
                           =ccontrol.title
                         %br
                         =display_as_html ccontrol.description
-    %br
-
-    .row-fluid
-      =f.label :notes, "Note", :class => :cleanlabel
+                        
     .row-fluid
       .span12
-        =f.text_area :notes, :class => [:span12, :note], :rows => 3
-    %br
-
-    .row-fluid.nominheight
+        =f.label :notes, "Note", :class => :cleanlabel
+        .wysiwyg-area
+          =f.text_area :notes, :class => [:span12, :note], :rows => 3
+    .row-fluid
       .span3
       .span3
       .span3
@@ -74,8 +73,9 @@
 
   .modal-footer
     .row-fluid
-      %nav.fltrt.txtrt.span3
-        =f.submit pat(:done), :class => 'btn btn-large btn-info'
-      -#%nav.fltrt.txtrt.span3
-        -#.btn.btn-large.btn-success.btn-primary.disabled Approve
-        -#=f.submit pat(:approve), :class => 'btn btn-large btn-success'
+      .span12
+        .confirm-buttons
+          =f.submit pat(:done), :class => 'btn btn-primary'
+          -#.btn.btn-large.btn-success.btn-primary.disabled Approve
+          -#=f.submit pat(:approve), :class => 'btn btn-large btn-success'
+          

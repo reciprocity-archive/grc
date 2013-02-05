@@ -17,7 +17,7 @@ class OptionsController < BaseObjectsController
     end
 
     if params[:quick]
-      render :partial => 'quick'
+      render :partial => 'quick', :locals => { :quick_result => params[:qr]}
     else
       render :json => @options.all.as_json
     end

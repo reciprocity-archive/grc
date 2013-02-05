@@ -1,32 +1,41 @@
 -content_for :widget_title do
   Audit Cycles
+  %span.badge=program.cycles.count
 
 -content_for :widget_help, 'program_cycles'
 
--if has_feature? :BETA
-  .fltnone
-    %a.btn.btn-large.btn-inverse.demoItem{ :href => '/design/audit-manager' }
-      Audit Manager
-  %br
+-content_for :widget_id, "audit_cycles_widget"
 
-%ul.nav.nav-tabs.nav-stacked
+-content_for :widget_buttons do
+  -if has_feature? :BETA
+    .filter
+      .row-fluid
+        .span12
+          .pull-right
+            %a.btn{ :href => '/design/audit-manager' }
+              Audit Manager
+
+
+%ul.tree-structure.simple
   -program.cycles.order("start_at DESC").each do |cycle|
-    %a.item-link{ :href => flow_cycle_path(cycle) }
-      .item
-        .row-fluid
-          .span6
-            %strong=cycle.title
-          .span6
-            -if cycle.complete
-              Complete (started #{days_ago_in_words cycle.start_at} ago)
-            -else
-              -if cycle.start_at == Time.zone.now.to_date
-                Started today
-              -elsif cycle.start_at < Time.zone.now.to_date
-                Started #{days_ago_in_words cycle.start_at} ago
-              -else
-                Starting in #{days_ago_in_words cycle.start_at}
-
-              -if cycle.end_at
-                %br
-                Ends on #{cycle.end_at.strftime("%m/%d/%y")}
+    %li.simple-item
+      %a{:href => flow_cycle_path(cycle)}
+        .item-title
+          .row-fluid
+            .span12
+              %span.key
+                =cycle.title
+              %span.additional-info
+                -if cycle.complete
+                  Complete (started #{days_ago_in_words cycle.start_at} ago)
+                -else
+                  %br
+                  -if cycle.start_at == Time.zone.now.to_date
+                    started today
+                  -elsif cycle.start_at < Time.zone.now.to_date
+                    started #{days_ago_in_words cycle.start_at} ago
+                  -else
+                    starting in #{days_ago_in_words cycle.start_at}
+                  -if cycle.end_at
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    ends on #{cycle.end_at.strftime("%m/%d/%y")}

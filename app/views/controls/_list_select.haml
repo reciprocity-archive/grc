@@ -1,5 +1,5 @@
 -content_for :modal_title do
-  %h1 Select Control
+  Select Control
 
 -content_for :modal_help, :select_control
 
@@ -7,22 +7,22 @@
   %li{ :'data-id' => '<%= control.id %>', :'data-title' => '<%= control.title %>', :'data-slug' => '<%= control.slug %>' }
     .row-fluid
       .span8
-        %span.company <%= control.slug %>
         %span.name <%= control.title %>
+        %span.option <%= control.slug %>
       .span4.actions
         -#%a.widgetbtn.pull-right{:href => edit_flow_control_path('<%=control.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source', :'data-modal-class' => 'modal-wide' }
           %i.grcicon-edit-grey
 
 %script#control_option_data{ :type => 'text/html' }
-  %span.company <%= control.slug %>
   %span.name <%= control.title %>
+  %span.option <%= control.slug %>
 
-.row-fluid
+.row-fluid.modal-source
   .span12
-    %h4
+    %h3
       Select Control
-      %a.widgetbtn.widgetbtnselector{ :href => new_flow_control_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-selector-target' => '.source', :'data-modal-class' => 'modal-wide' }
-        %i.grcicon-add
+      %a.widgetbtn.widgetbtnselector.btn.btn-add{ :href => new_flow_control_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-selector-target' => '.source', :'data-modal-class' => 'modal-wide' }
+        %i.grcicon-add-new
       .pull-right
         %input.widgetsearch{:type => "text", :placeholder => "Search Controls"}
 

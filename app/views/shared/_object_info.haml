@@ -2,13 +2,13 @@
 
 .row-fluid.object-info
   -if !object.new_record?
-    %span
+    .span3
       %strong Created:
       %span #{object.created_at && object.created_at.strftime("%m/%d/%y")}
-    %span
+    .span3
       %strong Updated:
       %span.updatedDate #{object.updated_at && object.updated_at.strftime("%m/%d/%y")}
-    %span
+    .span3
       %strong Last Editor:
       %span #{object.modified_by.nil? ? 'unknown' : object.modified_by.display_name}
     -if has_feature?(:BETA)
@@ -19,16 +19,16 @@
         -else
           %span.statustextred Not Approved
     -else
-      %span
+      .span3
     -#%span.status
       %h5
         Status:
         %span.statusValue Active
   -else
-    %span
+    .span3
       %strong Creator:
       %span #{current_user.display_name}
-    %span
+    .span3
     -#%span.status
       %h5
         Status:

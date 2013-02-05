@@ -5,11 +5,10 @@
     =render :partial => 'category_controls_branch',
             :locals => { :category => category, :children => children, :controls => controls }
 
-.widgetStatus.row-fluid
-  .span5.fltrt
-    %a.btn.btn-blue.addbtn.fltrt{"data-toggle" => "modal", :href => "#"} Showing Controls
-  .span5.fltrt
-    %a.expandAll.widgetbtn.fltrt{:style => "margin-right:5px;"}
-      %i.grcicon-expandAll-grey
-    %a.shrinkAll.widgetbtn.fltrt
-      %i.grcicon-shrinkAll-grey
+.action-items
+  %a.shrinkAll
+    %i.grcicon-normal
+    Shrink All
+  %a.expandAll
+    %i.grcicon-wide
+    Expand All

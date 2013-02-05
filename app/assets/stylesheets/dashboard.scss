@@ -8,10 +8,35 @@
 // Required external stylesheets
 
 @import "jquery-ui";
+
 @import "bootstrap";
-//@import "bootstrap-responsive";
+@import "bootstrap-responsive";
+
 @import "compass/css3";
 @import "bootstrap-wysihtml5-0.0.2";
+
+@import "redesign-setup";
+@import "redesign-common";
+@import "redesign-layout";
+@import "redesign-widget";
+@import "redesign-tree";
+@import "redesign-header";
+@import "redesign-footer";
+@import "redesign-styleguide";
+
+// page specific scss
+@import "redesign-reg-mapper";
+@import "redesign-pbc";
+
+@import "redesign-quick-search";
+@import "redesign-modal";
+
+@import "icons";
+
+
+@import "redesign-responsive";
+
+/*
 
 // editable styles start here
 
@@ -52,3 +77,6 @@
 
   // fluid-layout styles
   @import "fluid";
+
+
+*/

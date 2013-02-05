@@ -1,32 +1,39 @@
 -@title = "GRC Control: #{@control.title}"
 
 -content_for :header do
-  %ol#breadcrumb
-    %li CONTROLS
+  %ul.breadcrumbs
+    %li
+      CONTROLS
     %li=@control.slug
-  .location#pageTitle=strip_tags(@control.title)
+  
+  %h1
+    %span
+      Control:
+    =strip_tags(@control.title)
 
 -content_for :page_help, 'control'
 
 -content_for :subheader_extras do
-  %h1.fltrt.highlighted Control
+  %ul.actions.pull-right
+    %li
+      %a{ :href => edit_flow_control_path(@control), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide', :title => 'Edit Control' }
+        %i.grcicon-edit-new
+        Edit Control
 
 -content_for :subheader_plus do
   %a.navbarplus.fltrt{ :href => new_flow_control_path('control[program_id]' => @control.program_id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
 
-.row-static
-  .doubleColumn
-    .doubleWide.halfHeight
+.container-fluid
+  #controls_columns.row-fluid{ :'data-resize' => "true" }
+    #main_column.span8.widget-area
       =render :partial => 'controls/main',
               :layout => 'layouts/widget_box',
               :locals => { :control => @control }
-
-  .singleColumn
-    .singleWide.fullHeight
+      -if has_feature? :BETA
+        =render :partial => 'shared/impact_scope'
+    #right_column.span4.widget-area
       =render :partial => 'controls/show',
               :layout => 'layouts/widget_box',
-              :locals => { :control => @control }
-
-    -if has_feature? :BETA
-      .singleWide.halfHeight
-        =render :partial => 'shared/impact_scope'
+              :locals => { :control => @control, :widget_class => 'secondary' }
+        
+              

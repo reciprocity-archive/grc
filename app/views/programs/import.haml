@@ -1,12 +1,16 @@
 -content_for :page_help, 'import'
 
 -content_for :header do
-  %ol#breadcrumb
+
+  %ul.breadcrumbs
     %li=link_to 'PROGRAMS', programs_dash_path
     %li=link_to @program.title, flow_program_path(@program)
-    %li.last Import
-  .location#pageTitle Import Program or Policy
+    %li Import
+    
+  %h1
+    Import Program or Policy
 
-.row-static
-  =render :partial => 'programs/import',
-          :layout => 'layouts/widget_box'
+.container-fluid
+  .row-fluid
+    =render :partial => 'programs/import',
+            :layout => 'layouts/widget_box'

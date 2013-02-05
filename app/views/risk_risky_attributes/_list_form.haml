@@ -1,8 +1,8 @@
 -content_for :modal_title do
   -if params[:risk_id].present?
-    %h1 Select Risky Attributes
+    Select Risky Attributes
   -else
-    %h1 Select Risks
+    Select Risks
 
 -if params[:risk_id].present?
   -content_for :modal_help, :select_risk_risky_attributes
@@ -13,75 +13,80 @@
   %li{ :'data-id' => '<%= risk.id %>', :'data-title' => '<%= risk.title %>', :'data-slug' => '<%= risk.slug %>' }
     .row-fluid
       .span8
-        %span.company <%= risk.slug %>
         %span.name <%= risk.title %>
+        %span.option <%= risk.slug %>
       .span4.actions
-        %a.widgetbtn.pull-right.add-me{:href => "#", :'data-toggle' => 'selector-list-select'}
-          %i.grcicon-chevron-right
-        %a.widgetbtn.pull-right{:href => edit_flow_risk_path('<%=risk.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target', :'data-modal-class' => 'modal-wide' }
-          %i.grcicon-edit-grey
+        .pull-right
+          %a.widgetbtn.btn.btn-mini{:href => edit_flow_risk_path('<%=risk.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target', :'data-modal-class' => 'modal-wide' }
+            %i.grcicon-edit-new
+          %a.widgetbtn.btn.btn-mini.add-me{:href => "#", :'data-toggle' => 'selector-list-select'}
+            %i.grcicon-chevron-right
 
 %script#risk_option_data{ :type => 'text/html' }
-  %span.company <%= risk.slug %>
   %span.name <%= risk.title %>
+  %span.option <%= risk.slug %>
 
 %script#risk_selected{ :type => 'text/html', :'data-mappings' => 'child:risk,object:risk', :'data-member' => 'risk_risky_attribute' }
   %li{ :'data-id' => '<%= id %>', :'data-object-id' => '<%= risk.id %>' }
-    .row-fluid.help-inline
     .row-fluid
       .span6.object_info{ :'data-template-id' => 'risk_option_data' }
       .span6.actions
-        %input{ :type => 'hidden', :name => 'items[<%= id %>][id]', :value => '<% if (id.toString().substr(0,3) != "new") { %><%= id %><% } %>'.html_safe }
-        %input{ :type => 'hidden', :name => 'items[<%= id %>][risky_attribute_id]', :value => object.id }
-        %input{ :type => 'hidden', :name => 'items[<%= id %>][risk_id]', :value => '<%= risk.id %>' }
-        %input._destroy{ :type => 'hidden', :name => 'items[<%= id %>][_destroy]', :value => '' }
-        %a.widgetbtn.pull-right{ :href => '#', :'data-toggle' => 'selector-list-remove' }
-          %i.grcicon-remove
-        %a.widgetbtn.pull-right{ :href => edit_flow_risk_path('<%=risk.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target', :'data-modal-class' => 'modal-wide' }
-          %i.grcicon-edit-grey
-        %h6.state
+        %span.state
+        .pull-right
+          %input{ :type => 'hidden', :name => 'items[<%= id %>][id]', :value => '<% if (id.toString().substr(0,3) != "new") { %><%= id %><% } %>'.html_safe }
+          %input{ :type => 'hidden', :name => 'items[<%= id %>][risky_attribute_id]', :value => object.id }
+          %input{ :type => 'hidden', :name => 'items[<%= id %>][risk_id]', :value => '<%= risk.id %>' }
+          %input._destroy{ :type => 'hidden', :name => 'items[<%= id %>][_destroy]', :value => '' }
+          %a.widgetbtn.btn.btn-mini{ :href => edit_flow_risk_path('<%=risk.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target', :'data-modal-class' => 'modal-wide' }
+            %i.grcicon-edit-new
+          %a.widgetbtn.btn.btn-mini{ :href => '#', :'data-toggle' => 'selector-list-remove' }
+            %i.grcicon-remove
 
 %script#risky_attribute_option{ :type => 'text/html', :'data-prefix' => 'risky_attribute' }
   %li{ :'data-id' => '<%= risky_attribute.id %>', :'data-title' => '<%= risky_attribute.title %>', :'data-slug' => '<%= risky_attribute.slug %>' }
     .row-fluid
       .span8
-        %span.company <%= risky_attribute.slug %>
         %span.name <%= risky_attribute.title %>
+        %span.option <%= risky_attribute.slug %>
+        
       .span4.actions
-        %a.widgetbtn.pull-right.add-me{:href => "#", :'data-toggle' => 'selector-list-select'}
-          %i.grcicon-chevron-right
-        %a.widgetbtn.pull-right{:href => edit_flow_risky_attribute_path('<%=risky_attribute.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target', :'data-modal-class' => 'modal-wide' }
-          %i.grcicon-edit-grey
+        .pull-right
+          %a.widgetbtn.btn.btn-mini{:href => edit_flow_risky_attribute_path('<%=risky_attribute.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target', :'data-modal-class' => 'modal-wide' }
+            %i.grcicon-edit-new
+          %a.widgetbtn.btn.btn-mini.add-me{:href => "#", :'data-toggle' => 'selector-list-select'}
+            %i.grcicon-chevron-right
 
 %script#risky_attribute_option_data{ :type => 'text/html' }
-  %span.company <%= risky_attribute.slug %>
   %span.name <%= risky_attribute.title %>
+  %span.option <%= risky_attribute.slug %>
 
 %script#risky_attribute_selected{ :type => 'text/html', :'data-mappings' => 'child:risky_attribute,object:risky_attribute', :'data-member' => 'risk_risky_attribute' }
   %li{ :'data-id' => '<%= id %>', :'data-object-id' => '<%= risky_attribute.id %>' }
-    .row-fluid.help-inline
     .row-fluid
       .span6.object_info{ :'data-template-id' => 'risky_attribute_option_data' }
       .span6.actions
-        %input{ :type => 'hidden', :name => 'items[<%= id %>][id]', :value => '<% if (id.toString().substr(0,3) != "new") { %><%= id %><% } %>'.html_safe }
-        %input{ :type => 'hidden', :name => 'items[<%= id %>][risk_id]', :value => object.id }
-        %input{ :type => 'hidden', :name => 'items[<%= id %>][risky_attribute_id]', :value => '<%= risky_attribute.id %>' }
-        %input._destroy{ :type => 'hidden', :name => 'items[<%= id %>][_destroy]', :value => '' }
-        %a.widgetbtn.pull-right{ :href => '#', :'data-toggle' => 'selector-list-remove' }
-          %i.grcicon-remove
-        %a.widgetbtn.pull-right{ :href => edit_flow_risky_attribute_path('<%=risky_attribute.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target', :'data-modal-class' => 'modal-wide' }
-          %i.grcicon-edit-grey
-        %h6.state
+        %span.state
+        .pull-right
+          %input{ :type => 'hidden', :name => 'items[<%= id %>][id]', :value => '<% if (id.toString().substr(0,3) != "new") { %><%= id %><% } %>'.html_safe }
+          %input{ :type => 'hidden', :name => 'items[<%= id %>][risk_id]', :value => object.id }
+          %input{ :type => 'hidden', :name => 'items[<%= id %>][risky_attribute_id]', :value => '<%= risky_attribute.id %>' }
+          %input._destroy{ :type => 'hidden', :name => 'items[<%= id %>][_destroy]', :value => '' }
+          %a.widgetbtn.btn.btn-mini{ :href => edit_flow_risky_attribute_path('<%=risky_attribute.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target', :'data-modal-class' => 'modal-wide' }
+            %i.grcicon-edit-new
+          %a.widgetbtn.btn.btn-mini{ :href => '#', :'data-toggle' => 'selector-list-remove' }
+            %i.grcicon-remove
 
 -if params[:risk_id].present?
-  .row-fluid
+  .row-fluid.modal-source
     .span6
-      %h4
-        Add Risky Attribute
-        %a.widgetbtn.widgetbtnselector{ :href => new_flow_risky_attribute_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-selector-target' => '.source, .target', :'data-modal-class' => 'modal-wide' }
-          %i.grcicon-add
-        .pull-right
-          %input.widgetsearch{:type => "text", :placeholder => "Search Risky Attributes"}
+      .row-fluid
+        .span7
+          %h3
+            Add Risky Attribute
+            %a.widgetbtn.widgetbtnselector.btn.btn-add{ :href => new_flow_risky_attribute_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-selector-target' => '.source, .target', :'data-modal-class' => 'modal-wide' }
+              %i.grcicon-add-new
+        .span5
+          %input.widgetsearch.input-block-level{:type => "text", :placeholder => "Search Risky Attributes"}
 
       .filter-block
         .row-fluid
@@ -92,19 +97,21 @@
                   .people-list
                     %ul.source{ :'data-list-data-href' => flow_risky_attributes_path(:format => :json), :'data-template-id' => 'risky_attribute_option' }
     .span6
-      %h4
+      %h3
         Risky Attributes for this Risk
       .people-list.currentlist
         %ul.target{ :'data-list-data-href' => flow_risk_risky_attributes_path(:risk_id => object.id, :format => :json), :'data-selector-target' => '.source, .target', :'data-template-id' => 'risky_attribute_selected'}
 -else
-  .row-fluid
+  .row-fluid.modal-source
     .span6
-      %h4
-        Add Risk
-        %a.widgetbtn.widgetbtnselector{ :href => new_flow_risk_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-selector-target' => '.source, .target', :'data-modal-class' => 'modal-wide' }
-          %i.grcicon-add
-        .pull-right
-          %input.widgetsearch{:type => "text", :placeholder => "Search Risks"}
+      .row-fluid
+        .span7
+          %h3
+            Add Risk
+            %a.widgetbtn.widgetbtnselector.btn.btn-add{ :href => new_flow_risk_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-selector-target' => '.source, .target', :'data-modal-class' => 'modal-wide' }
+              %i.grcicon-add-new
+        .span5
+          %input.widgetsearch.input-block-level{:type => "text", :placeholder => "Search Risks"}
 
       .filter-block
         .row-fluid
@@ -115,7 +122,7 @@
                   .people-list
                     %ul.source{ :'data-list-data-href' => flow_risks_path(:format => :json), :'data-template-id' => 'risk_option' }
     .span6
-      %h4
+      %h3
         Risks for this Risky Attribute
       .people-list.currentlist
         %ul.target{ :'data-list-data-href' => flow_risk_risky_attributes_path(:risky_attribute_id => object.id, :format => :json), :'data-selector-target' => '.source, .target', :'data-template-id' => 'risk_selected'}

@@ -5,16 +5,16 @@
 
 %h4.pbc-title.response-title-bar
   ="Responses (#{request.type_name})"
-  %a.btn.btn-mini{"data-toggle" => "modal", :href => "#newResponse"}
-    %i.grcicon-add{ "data-target" => "##{new_response_id}", "data-toggle" => "collapse", "rel" => "tooltip", "data-placement" => "left", "title" => "Add new response" }
+  %a.btn.btn-mini.btn-add{"data-toggle" => "modal", :href => "#newResponse"}
+    %i.grcicon-add-new{ "data-target" => "##{new_response_id}", "data-toggle" => "collapse", "rel" => "tooltip", "data-placement" => "left", "title" => "Add new response" }
 
-%ul.items-list.collapse{ :id => new_response_id }
+%ul.tree-structure.add-response.items-list.collapse{ :id => new_response_id }
   %li.item
     .row-fluid
-      .span4.pbc-add-response
-        %a#tooltip11.btn.btn-mini.pull-right{ :href => new_flow_system_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-modal-class' => 'modal-wide', "rel" => "tooltip", "data-placement" => "top", "title" => "Add new response" }
-          %i.grcicon-add
+      .span3.pbc-add-response.next-each-other
         %input.pbc-system-search{:type => "text", :placeholder => "Type to search systems/processes"}
+        %a#tooltip11.btn.btn-mini.pull-left{ :href => new_flow_system_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-modal-class' => 'modal-wide', "rel" => "tooltip", "data-placement" => "top", "title" => "Add new response" }
+          %i.grcicon-add
       .span1
 
       .span3
@@ -27,4 +27,4 @@
           0
       .span1
         &nbsp;
-%ul.items-list.pbc-responses{ :id => response_list_id }
+%ul.tree-structure.items-list.pbc-responses{ :id => response_list_id }

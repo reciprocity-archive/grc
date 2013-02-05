@@ -3,105 +3,91 @@
 
 -content_for :widget_help, 'control_info'
 
--content_for :widget_buttons do
-  %a.widgetbtn{ :href => edit_flow_control_path(control), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide', :title => 'Edit Control' }
-    %i.grcicon-edit-grey
+-content_for :widget_id, "control_info_widget"
 
-%hr.hr-widget
-
-.row-fluid
-  .span12
-    .row-fluid
-      .span10
-        %h3.toggle{"data-target" => "#about", "data-toggle" => "collapse"}
-          .expander
-          About
-      -#.span2
-        %a.widgetbtn.pull-right.juke-left{ :href => edit_flow_control_path(control), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide', :title => 'Edit Control' }
-          %i.grcicon-edit-grey
-
-    #about.collapse
-      .row-fluid
-        .span12
-          .span4
-            %label Code
-            %input.span12{:type => "text", :disabled => "disabled", :value => control.slug}
-          -#.span3
-            %label Version
-            %input.span12{:disabled => "disabled", :type => "text", :value => control.version}
-          .span4
-            %label Type
-            %input.span12{:disabled => "disabled", :type => "text", :value => control.type && control.type.title}
-          .span4
-            %label Kind
-            %input.span12{:disabled => "disabled", :type => "text", :value => control.kind && control.kind.title}
-      .row-fluid
-        .span12
-          .span3
-            %label Fraud-related
-            %input.span12{:disabled => "disabled", :type => "text", :value => control.fraud_related ? 'Yes' : 'No'}
-          .span3
-            %label Significance
-            %input.span12{:disabled => "disabled", :type => "text", :value => control.key_control ? 'Key' : 'Non-key'}
-          .span6
-            %label Assertions
-            %input.span12{:disabled => "disabled", :type => "text", :value => control.assertions.map(&:name).join(', ')}
-      .row-fluid
-        .span12
-          .span8
-            %label Means of Operation
-            %input.span12{:disabled => "disabled", :type => "text", :value => control.means && control.means.title}
-          .span4
-            %label Confirm Frequency
-            %input.span12{:disabled => "disabled", :type => "text", :value => control.verify_frequency && control.verify_frequency.title}
-      .row-fluid
-        .span12
-          %label Description
-          .well=display_as_html control.description
-      .row-fluid
-        .span12
-          %label Notes
-          .well=display_as_html control.notes
-      .row-fluid
-        .span12
-          %label Direct Link
-          %input.span12{:disabled => "disabled", :type => "text", :value => control.url}
-      .row-fluid
-        .span12
-          .span6
-            %label Effective Date
-            %input.span12{:type => "text", :disabled => "disabled", :value => control.start_date && control.start_date.strftime("%m/%d/%y")}
-          .span6
-            %label Stop Date
-            %input.span12{:type => "text", :disabled => "disabled", :value => control.stop_date && control.stop_date.strftime("%m/%d/%y")}
-
-%hr.hr-widget
-
-.row-fluid
-  .span12
+%ul.info-list
+  %li.float-element
+    %label
+      Code
+    %span
+      =control.slug
+  %li.float-element
+    %label
+      Type
+    %span
+      =control.type && control.type.title
+  %li.float-element
+    %label
+      Kind
+    %span
+      =control.kind && control.kind.title
+  %li.float-element
+    %label
+      Fraud-related
+    %span
+      =control.fraud_related ? 'Yes' : 'No'
+  %li.float-element
+    %label
+      Significance
+    %span
+      =control.key_control ? 'Key' : 'Non-key'
+  %li.float-element
+    %label
+      Assertions
+    %span
+      =control.assertions.map(&:name).join(', ')
+  %li.float-element
+    %label
+      Means of Operation
+    %span
+      =control.means && control.means.title
+  %li.float-element
+    %label
+      Confirm Frequency
+    %span
+      =control.verify_frequency && control.verify_frequency.title
+  %li
+    %label
+      Description
+    =display_as_html control.description
+  %li
+    %label
+      Notes
+    =display_as_html control.notes
+  %li.float-element
+    %label
+      Direct Link
+    %span
+      =link_to control.url do
+        =control.url
+  %li.float-element
+    %label
+      Effective Date
+    %span
+      =control.start_date && control.start_date.strftime("%m/%d/%y")
+  %li.float-element
+    %label
+      Stop Date
+    %span
+      =control.stop_date && control.stop_date.strftime("%m/%d/%y")
+      
+%ul.tree
+  %li.category
     =render :partial => 'categories/object_list',
             :locals  => { :object => control, :scope_id => Control::CATEGORY_TYPE_ID }
-
-%hr.hr-widget
-
-.row-fluid
-  .span12
+            
+  %li.category
     =render :partial => 'documents/object_list',
             :locals  => { :object => control }
-
-%hr.hr-widget
-
-.row-fluid
-  .span12
+  %li.category
     =render :partial => 'people/object_list',
             :locals  => { :object => control }
 
-%hr.hr-widget
-
-.row-fluid
-  .span6.nominheight
-    %label.fltlft
-      %strong> Created: #{control.created_at.strftime("%m/%d/%y")}
-  .span6.nominheight
-    %label.fltrt
-      %strong> Updated: #{control.updated_at.strftime("%m/%d/%y")}
+%section.footer
+  .row-fluid
+    .span6
+      %p.footer-left
+        Created: #{control.created_at.strftime("%m/%d/%y")}
+    .span6
+      %p.footer-right
+        Updated: #{control.updated_at.strftime("%m/%d/%y")}

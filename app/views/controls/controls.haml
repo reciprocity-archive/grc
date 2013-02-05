@@ -1,9 +1,7 @@
 -# locals: controls, prefix
 
-.row-fluid
-  .span12.captionbox
-    %h4
-      Other controls linked to this control
+%h3.tab-title
+  Other controls linked to this control
 
 %ul.slotlist
   =walk_slug_tree(Program.slugtree(controls)) do |item, step|

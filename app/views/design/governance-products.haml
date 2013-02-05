@@ -1,19 +1,21 @@
 -@title = "GRC: Governance"
 
 -content_for :header do
-	%ol#breadcrumb
-		%li.last
-			%a{:href => "#"} Governance
-	#pageTitle.location 
-		Governance
+  %ul.breadcrumbs
+    %li
+      %a{:href => "#"}
+        Governance
+  %h1
+    Governance
 
 -content_for :page_help, 'changeme'
 
 -content_for :subheader_extras do
 	%h1#pageType.pull-right.highlighted Products
 
-.row-static
-	%a.btn.btn-warning{:href => "governance-regreview.haml", :style => "position:relative; top:76px; z-index:55; left:1000px;"} Reg Review
-	
-	%img.demoItem{:src => '../images/tempGovProducts.png'}
-
+.container-fluid
+  .row-fluid
+  	%a.btn.btn-warning{:href => "governance-regreview.haml", :style => "position:relative; top:76px; z-index:55; left:1000px;"} Reg Review
+  	
+  	%img.demoItem{:src => '../images/tempGovProducts.png'}
+  

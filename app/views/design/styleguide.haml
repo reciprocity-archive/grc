@@ -1,118 +1,1019 @@
 -@title = "GRC: Style Guide"
  
-%link(rel="stylesheet" type="text/css" href="styleguide.css")
+//%link(rel="stylesheet" type="text/css" href="styleguide.css")
 
 -content_for :header do
-  %ol#breadcrumb
-    %li.last
-      %a{:href => "#"} Visual & Syntax Style Guide
-  #pageTitle.location Design - Dev Only
+  %ul.breadcrumbs
+    %li
+      %a{:href => "/design/styleguide"}
+        Style Guide
+  %h1
+    Visual & Syntax Style Guide
 
 -content_for :page_help, 'Nope.'
 
--content_for :subheader_extras do
-  %h1#pageType.pull-right.highlighted Styleguide
-
 -content_for :subheader_plus do
   %a.navbarplus.fltrt{ :href => "#comingsoonModal", "data-toggle" => "modal" }
+
+
+
+.container-fluid
+  .row-fluid
+    .span3.bs-docs-sidebar
+      %ul.nav.nav-list.bs-docs-sidenav{:'data-spy' => 'affix', :'data-offset-top' => '25'}
+        %li
+          %a{:href => "#headers"}
+            %i.icon-chevron-right
+            Headers
+        %li
+          %a{:href => "#breadcrumb"}
+            %i.icon-chevron-right
+            Breadcrumbs
+        %li
+          %a{:href => "#icons"}
+            %i.icon-chevron-right
+            Icons
+
+        %li
+          %a{:href => "#list"}
+            %i.icon-chevron-right
+            List
+
+    
+    .span9.styleguide-content
+
+      %section#headers.widget
+        %section.header
+          %h2
+            Headers
+        %section.content
+          .real-example
+            %h1
+              h1. Main title - Lorem ipsum dolor sit amet.
+            %h2
+              h2. Subtitle - Lorem ipsum dolor sit amet
+          %p
+            style for h1 is: Bold, 24px, #444
+            %br/
+            style for h2 is: Bold, 20px, #111
+            
+      %section#breadcrumb.widget
+        %section.header
+          %h2
+            Breadcrumbs
+        %section.content
+          .real-example
+            %ul.breadcrumbs
+              %li
+                %a
+                  Breadcrumb
+              %li
+                %a
+                  Breadcrumb inner
+              
+          %p
+            %strong Example:
+          
+          %textarea
+            :escaped
+              %ul.breadcrumbs
+                %li
+                  %a
+                    Breadcrumb
+                %li
+                  %a
+                    Breadcrumb inner
+                
+          %p
+            <span class="label label-info">Note!</span>
+            Do not put class on last %li element. It is solved from CSS.
+            
+      %section#icons.widget
+        %section.header
+          %h2
+            Icons
+        %section.content
+          .real-example
+            .btn.btn-add
+              %i.grcicon-add-new
+            .btn.btn-add
+              %i.grcicon-admin
+            .btn.btn-add
+              %i.grcicon-dashboard
+            .btn.btn-add
+              %i.grcicon-demo
+            .btn.btn-add
+              %i.grcicon-desktop
+            .btn.btn-add
+              %i.grcicon-help
+            .btn.btn-add
+              %i.grcicon-logout
+            .btn.btn-add
+              %i.grcicon-normal
+            .btn.btn-add
+              %i.grcicon-user
+            .btn.btn-add
+              %i.grcicon-wide
+            .btn.btn-add
+              %i.grcicon-search-circle
+            .btn.btn-add
+              %i.grcicon-audit-white
+            .btn.btn-add
+              %i.grcicon-reg-map-white
+            .btn.btn-add
+              %i.grcicon-edit-new-white
+            .btn.btn-add
+              %i.grcicon-imp-exp-white
+            .btn.btn-add
+              %i.grcicon-export-white
+            .btn.btn-add
+              %i.grcicon-goto-white
+            .btn.btn-add
+              %i.grcicon-search-new-white
+            .btn.btn-add
+              %i.grcicon-carot-white
+            .btn.btn-add
+              %i.grcicon-demo-stop-white
+            %br/
+            %br/
+            .btn.btn-add
+              %i.grcicon-add-new-black
+            .btn.btn-add
+              %i.grcicon-admin-black
+            .btn.btn-add
+              %i.grcicon-dashboard-black
+            .btn.btn-add
+              %i.grcicon-demo-black
+            .btn.btn-add
+              %i.grcicon-desktop-black
+            .btn.btn-add
+              %i.grcicon-help-black
+            .btn.btn-add
+              %i.grcicon-logout-black
+            .btn.btn-add
+              %i.grcicon-normal-black
+            .btn.btn-add
+              %i.grcicon-user-black
+            .btn.btn-add
+              %i.grcicon-wide-black
+            .btn.btn-add
+              %i.grcicon-search-black
+            .btn.btn-add
+              %i.grcicon-audit
+            .btn.btn-add
+              %i.grcicon-reg-map
+            .btn.btn-add
+              %i.grcicon-edit-new
+            .btn.btn-add
+              %i.grcicon-imp-exp
+            .btn.btn-add
+              %i.grcicon-export
+            .btn.btn-add
+              %i.grcicon-goto
+            .btn.btn-add
+              %i.grcicon-search-new
+            .btn.btn-add
+              %i.grcicon-carot
+            .btn.btn-add
+              %i.grcicon-demo-stop
+              
+          %p
+            %strong Example:
+          
+          %textarea
+            :escaped
+              %i.grcicon-add-new
+              %i.grcicon-admin
+              %i.grcicon-dashboard
+              %i.grcicon-demo
+              %i.grcicon-desktop
+              %i.grcicon-help
+              %i.grcicon-logout
+              %i.grcicon-normal
+              %i.grcicon-user
+              %i.grcicon-wide
+              %i.grcicon-search-circle
+              %i.grcicon-add-new-black
+              %i.grcicon-admin-black
+              %i.grcicon-dashboard-black
+              %i.grcicon-demo-black
+              %i.grcicon-desktop-black
+              %i.grcicon-help-black
+              %i.grcicon-logout-black
+              %i.grcicon-normal-black
+              %i.grcicon-user-black
+              %i.grcicon-wide-black
+              %i.grcicon-search-black
+              %i.grcicon-audit-white
+              %i.grcicon-audit
+              %i.grcicon-reg-map-white
+              %i.grcicon-reg-map
+              %i.grcicon-edit-new-white
+              %i.grcicon-edit-new
+              %i.grcicon-imp-exp-white
+              %i.grcicon-imp-exp
+              %i.grcicon-export-white
+              %i.grcicon-export
+              %i.grcicon-goto-white
+              %i.grcicon-goto
+              %i.grcicon-search-new-white
+              %i.grcicon-search-new
+              %i.grcicon-carot-white
+              %i.grcicon-carot
+              %i.grcicon-demo-stop-white
+              %i.grcicon-demo-stop
+              
+          %p
+            <span class="label label-info">Note!</span>
+            As you can see on real example there is green button surrounding icons. That is just for example purpose so you can see white icons also.
+
+
+      %section#list.widget
+        %section.header
+          %h2
+            Improved tree list with variable options
+        %section.content
+          %ul.tree-structure
+            %li
+              .item-main
+                .openclose
+                .item-title
+                  .row-fluid
+                    .span1
+                      %p.code.oneline
+                        %strong
+                          CTR001
+                    .span9
+                      %p.oneline
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                  .item-actions
+                    %a{:href => "#", :class => "btn btn-mini"}
+                      %i.grcicon-goto
+                    %a{:href => "#", :class => "btn btn-mini"}
+                      %i.grcicon-link
+              .item-content
+                %ul.tree-structure
+                  %li
+                    .item-main
+                      .openclose
+                      .item-title
+                        .row-fluid
+                          .span1
+                            %p.code.oneline
+                              %strong
+                                DEEP2
+                          .span9
+                            %p.oneline
+                              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        .item-actions
+                          %a{:href => "#", :class => "btn btn-mini"}
+                            %i.grcicon-goto
+                          %a{:href => "#", :class => "btn btn-mini"}
+                            %i.grcicon-link
+                    .item-content
+                      %ul.tree-structure
+                        %li
+                          .item-main
+                            .openclose
+                            .item-title
+                              .row-fluid
+                                .span1
+                                  %p.code.oneline
+                                    %strong
+                                      DEEP3
+                                .span9
+                                  %p.oneline
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                              .item-actions
+                                %a{:href => "#", :class => "btn btn-mini"}
+                                  %i.grcicon-goto
+                                %a{:href => "#", :class => "btn btn-mini"}
+                                  %i.grcicon-link
+                          .item-content
+                            %ul.tree-structure
+                              %li
+                                .item-main
+                                  .openclose.lastchild
+                                  .item-title
+                                    .row-fluid
+                                      .span1
+                                        %p.code.oneline
+                                          %strong
+                                            CTR1
+                                      .span9
+                                        %p.oneline
+                                          %span.title Just a title
+                                    .item-actions
+                                      %a{:href => "#", :class => "btn btn-mini"}
+                                        %i.grcicon-goto
+                                      %a{:href => "#", :class => "btn btn-mini"}
+                                        %i.grcicon-link
+                                .item-content
+                              %li
+                                .item-main
+                                  .openclose.lastchild
+                                  .item-title
+                                    .row-fluid
+                                      .span1
+                                        %p.code.oneline
+                                          %strong
+                                            CTR2
+                                      .span9
+                                        %p.oneline
+                                          %p.title.oneline 
+                                            Title with Description
+                                            %a.more{:href => "#"} more...
+                                          %p.description Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                    .item-actions
+                                      %a{:href => "#", :class => "btn btn-mini"}
+                                        %i.grcicon-goto
+                                      %a{:href => "#", :class => "btn btn-mini"}
+                                        %i.grcicon-link
+                                .item-content
+                              %li
+                                .item-main
+                                  .openclose.lastchild
+                                  .item-title
+                                    .row-fluid
+                                      .span1
+                                        %p.code.oneline
+                                          %strong
+                                            CTR3
+                                      .span9
+                                        %p.oneline
+                                          %p.description.description-only.oneline Just a description Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                    .item-actions
+                                      %a{:href => "#", :class => "btn btn-mini"}
+                                        %i.grcicon-goto
+                                      %a{:href => "#", :class => "btn btn-mini"}
+                                        %i.grcicon-link
+                                .item-content
+                        %li
+                          .item-main
+                            .openclose.lastchild
+                            .item-title
+                              .row-fluid
+                                .span1
+                                  %p.code.oneline
+                                    %strong
+                                      DEEP3.1
+                                .span9
+                                  %p.oneline
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                              .item-actions
+                                %a{:href => "#", :class => "btn btn-mini"}
+                                  %i.grcicon-goto
+                                %a{:href => "#", :class => "btn btn-mini"}
+                                  %i.grcicon-link
+                          .item-content
+                  %li
+                    .item-main
+                      .openclose.lastchild
+                      .item-title
+                        .row-fluid
+                          .span1
+                            %p.code.oneline
+                              %strong
+                                DEEP2.1
+                          .span9
+                            %p.oneline
+                              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        .item-actions
+                          %a{:href => "#", :class => "btn btn-mini"}
+                            %i.grcicon-goto
+                          %a{:href => "#", :class => "btn btn-mini"}
+                            %i.grcicon-link
+                    .item-content
+            %li
+              .item-main
+                .openclose.lastchild
+                .item-title
+                  .row-fluid
+                    .span1
+                      %p.code.oneline
+                        %strong
+                          RISKYATTR333
+                    .span9
+                      %p.oneline
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                  .item-actions
+                    %a{:href => "#", :class => "btn btn-mini"}
+                      %i.grcicon-goto
+                    %a{:href => "#", :class => "btn btn-mini"}
+                      %i.grcicon-link
+              .item-content
+            %li
+              .item-main
+                .openclose.lastchild
+                .item-title
+                  .row-fluid
+                    .span1
+                      %p.code.oneline
+                        %strong
+                          SYS444
+                    .span9
+                      %p.oneline
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                  .item-actions
+                    %a{:href => "#", :class => "btn btn-mini"}
+                      %i.grcicon-goto
+                    %a{:href => "#", :class => "btn btn-mini"}
+                      %i.grcicon-link
+              .item-content
+            
+
+
+      %section#list.widget
+        %section.header
+          %h2
+            Object Tree List
+        %section.content
+          
+          %ul.tree
+            %li.category
+              %h3
+                Category title
+              %section.content
+                %ul.tree
+                  %li.main
+                    .item-identifier
+                      .item-title.active
+                        .row-fluid
+                          .span12
+                            .showhide
+                            %span.key
+                              CTR-001
+                            %span.addition-info
+                              Control
+                      .item-actions
+                        %a{:href => "#", :class => "btn btn-mini"}
+                          %i.grcicon-goto
+                        %a{:href => "#", :class => "btn btn-mini"}
+                          %i.grcicon-link
+                    .item-content
+                      %ul.elements
+                        %li
+                          .item-identifier
+                            .item-title.active
+                              .row-fluid
+                                .span12
+                                  .showhide
+                                  %span.key
+                                    AAA-012
+                                  %span.addition-info
+                                    Control
+                            .item-actions
+                              %a{:href => "#", :class => "btn btn-mini"}
+                                %i.grcicon-goto
+                              %a{:href => "#", :class => "btn btn-mini"}
+                                %i.grcicon-link
+                          .item-content
+                            %ul.elements
+                              %li
+                                AAA
+                              %li
+                                BBB
+                                %ul.elements
+                                  %li
+                                    AAA
+                                  %li
+                                    BBB
+                                  %li
+                                    CCC
+                                    %ul.elements
+                                      %li
+                                        AAA
+                                      %li
+                                        BBB
+                                      %li
+                                        CCC
+                              %li
+                                CCC
+                        %li
+                          .item-identifier
+                            .item-title.active
+                              .row-fluid
+                                .span12
+                                  .showhide
+                                  %span.key
+                                    BBB-612
+                                  %span.addition-info
+                                    Control
+                            .item-actions
+                              %a{:href => "#", :class => "btn btn-mini"}
+                                %i.grcicon-goto
+                              %a{:href => "#", :class => "btn btn-mini"}
+                                %i.grcicon-link
+                          .item-content
+                            %ul.elements
+                              %li
+                                AAA
+                              %li
+                                BBB
+                                %ul.elements
+                                  %li
+                                    AAA
+                                  %li
+                                    BBB
+                                  %li
+                                    CCC
+                                    %ul.elements
+                                      %li
+                                        AAA
+                                      %li
+                                        BBB
+                                      %li
+                                        CCC
+                        %li
+                          .item-identifier
+                            .item-title.active
+                              .row-fluid
+                                .span12
+                                  .showhide
+                                  %span.key
+                                    CCC-223
+                                  %span.addition-info
+                                    Control
+                            .item-actions
+                              %a{:href => "#", :class => "btn btn-mini"}
+                                %i.grcicon-goto
+                              %a{:href => "#", :class => "btn btn-mini"}
+                                %i.grcicon-link
+                          .item-content
+                            %ul.elements
+                              %li
+                                AAA
+                              %li
+                                BBB
+                                %ul.elements
+                                  %li
+                                    AAA
+                                  %li
+                                    BBB
+                                  %li
+                                    CCC
+                                    %ul.elements
+                                      %li
+                                        AAA
+                                      %li
+                                        BBB
+                                      %li
+                                        CCC
+                      
+                  %li.main
+                    .item-identifier
+                      .item-title.active
+                        .row-fluid
+                          .span12
+                            .showhide
+                            %span.key
+                              CTR-023
+                            %span.addition-info
+                              Control 2
+                      .item-actions
+                        %a{:href => "#", :class => "btn btn-mini"}
+                          %i.grcicon-goto
+                        %a{:href => "#", :class => "btn btn-mini"}
+                          %i.grcicon-link
+                    .item-content
+                      %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                  %li.main
+                    .item-identifier
+                      .item-title.active
+                        .row-fluid
+                          .span12
+                            .showhide
+                            %span.key
+                              PRC-031
+                            %span.addition-info
+                              Process of all Processes
+                      .item-actions
+                        %a{:href => "#", :class => "btn btn-mini"}
+                          %i.grcicon-goto
+                        %a{:href => "#", :class => "btn btn-mini"}
+                          %i.grcicon-link
+                    .item-content
+                      %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+              %li.category
+                %h3
+                  Category title
+                %section.content
+                  %ul.tree
+                    %li.main
+                      .item-identifier
+                        .item-title.active
+                          .row-fluid
+                            .span12
+                              .showhide
+                              %span.key
+                                CTR-001
+                              %span.addition-info
+                                Control
+                        .item-actions
+                          %a{:href => "#", :class => "btn btn-mini"}
+                            %i.grcicon-goto
+                          %a{:href => "#", :class => "btn btn-mini"}
+                            %i.grcicon-link
+                      .item-content
+                        %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    %li.main
+                      .item-identifier
+                        .item-title.active
+                          .row-fluid
+                            .span12
+                              .showhide
+                              %span.key
+                                CTR-023
+                              %span.addition-info
+                                Control 2
+                        .item-actions
+                          %a{:href => "#", :class => "btn btn-mini"}
+                            %i.grcicon-goto
+                          %a{:href => "#", :class => "btn btn-mini"}
+                            %i.grcicon-link
+                      .item-content
+                        %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    %li.main
+                      .item-identifier
+                        .item-title.active
+                          .row-fluid
+                            .span12
+                              .showhide
+                              %span.key
+                                PRC-031
+                              %span.addition-info
+                                Process of all Processes
+                        .item-actions
+                          %a{:href => "#", :class => "btn btn-mini"}
+                            %i.grcicon-goto
+                          %a{:href => "#", :class => "btn btn-mini"}
+                            %i.grcicon-link
+                      .item-content
+                        %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      
+
+          %ul.tree
+            %li.main
+              .item-identifier
+                .item-title.active
+                  .row-fluid
+                    .span12
+                      .showhide
+                      %span.key
+                        CTR-001
+                      %span.addition-info
+                        Control
+                .item-actions
+                  %a{:href => "#", :class => "btn btn-mini"}
+                    %i.grcicon-goto
+                  %a{:href => "#", :class => "btn btn-mini"}
+                    %i.grcicon-link
+              .item-content
+                %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            %li.main
+              .item-identifier
+                .item-title.active
+                  .row-fluid
+                    .span12
+                      .showhide
+                      %span.key
+                        CTR-023
+                      %span.addition-info
+                        Control 2
+                .item-actions
+                  %a{:href => "#", :class => "btn btn-mini"}
+                    %i.grcicon-goto
+                  %a{:href => "#", :class => "btn btn-mini"}
+                    %i.grcicon-link
+              .item-content
+                %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            %li.main
+              .item-identifier
+                .item-title.active
+                  .row-fluid
+                    .span12
+                      .showhide
+                      %span.key
+                        PRC-031
+                      %span.addition-info
+                        Process of all Processes
+                .item-actions
+                  %a{:href => "#", :class => "btn btn-mini"}
+                    %i.grcicon-goto
+                  %a{:href => "#", :class => "btn btn-mini"}
+                    %i.grcicon-link
+              .item-content
+                %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+
+          
+          -#%ul.tree
+            %li.main
+              .showhide
+              .tree-content
+                .row-fluid.info-primary
+                  .span12
+                    .buttons
+                      %a{:class => "btn btn-mini", :href => "#", :rel => "tooltip", :title => "Edit Program"}
+                        %i.grcicon-edit-new
+                      %a{:class => "btn btn-mini", :href => "#", :rel => "tooltip", :title => "Link Sections"}
+                        %i.grcicon-link
+                    %span.code PROD-001
+                    %span.info Samsung Galaxy III
+
+            %li.main
+              .showhide.active
+              .tree-content
+                .row-fluid.info-primary
+                  .span12
+                    .buttons
+                      %a{:class => "btn btn-mini", :href => "#", :rel => "tooltip", :title => "Edit Program"}
+                        %i.grcicon-edit-new
+                      %a{:class => "btn btn-mini", :href => "#", :rel => "tooltip", :title => "Link Sections"}
+                        %i.grcicon-link
+                    %span.code PROD-331
+                    %span.info iPhone5
+                .row-fluid
+                  .span8
+                    %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                  
+
+            %li.main
+              .showhide
+              .tree-content
+                .row-fluid.info-primary
+                  .span12
+                    .buttons
+                      %a{:class => "btn btn-mini", :href => "#", :rel => "tooltip", :title => "Edit Program"}
+                        %i.grcicon-edit-new
+                      %a{:class => "btn btn-mini", :href => "#", :rel => "tooltip", :title => "Link Sections"}
+                        %i.grcicon-link
+                    %span.code PROD-761
+                    %span.info Nokia Lumia 800
+        
+.container-fluid
+  .row-fluid
+    %h2{:class =>'pull-left'}
+      Requests (4)
+    %a{:href => '#', :class =>'btn btn-add'}
+      %i.grcicon-add-new
+      Request
+.container-fluid
+  .row-fluid
+    .span2.widget-area
+      %section.widget
+        %header.header
+          Header
+        %section.content
+          Content
+        %footer.footer
+          Footer
+    
+    .span6.widget-area
+      %section.widget
+        %header.header
+          Header
+        %section.content
+          Content
+        %footer.footer
+          Footer
+      %section.widget
+        %header.header
+          Header
+        %section.content
+          Content
+        %footer.footer
+          Footer
+      %section.widget
+        %header.header
+          Header
+        %section.content
+          Content
+        %footer.footer
+          Footer
+    
+    .span4.widget-area
+      %section.widget
+        %header.header
+          Header
+        %section.content
+          Content
+        %footer.footer
+          Footer
   
-.row-fluid
-  .span3.bs-docs-sidebar
-    %ul.nav.nav-list.bs-docs-sidenav.affix
-      %li.active
-        %a{:href => "#general"}
-          %i.icon-chevron-right
-          General
-      %li
-        %a{:href => "#headers"}
-          %i.icon-chevron-right
-          Headers
-      %li
-        %a{:href => "#icons"}
-          %i.icon-chevron-right
-          Icons
-      %li
-        %a{:href => "#buttons"}
-          %i.icon-chevron-right
-          Buttons
-      %li
-        %a{:href => "#tabs"}
-          %i.icon-chevron-right
-          Tabs
-      %li
-        %a{:href => "#subareas"}
-          %i.icon-chevron-right
-          Sub Areas
-      %li
-        %a{:href => "#modals"}
-          %i.icon-chevron-right
-          Modals
-      %li
-        %a{:href => "#typography"}
-          %i.icon-chevron-right
-          Typography
-      %li
-        %a{:href => "#colors"}
-          %i.icon-chevron-right
-          Colors
-      %li
-        %a{:href => "#progressbar"}
-          %i.icon-chevron-right
-          Progress bars
-      %li
-        %a{:href => "#contentslots"}
-          %i.icon-chevron-right
-          Content Slots
-      %li
-        %a{:href => "#misc"}
-          %i.icon-chevron-right
-          Misc
-  .span9
-    #general
-      .WidgetBox
-        .WidgetBoxHeading
-          .WidgetTitle.doublewidth General
-        .WidgetBoxContent
+.container-fluid
+  .row-fluid
+    .span9
+      #general
+        .WidgetBox
+          .WidgetBoxHeading
+            .WidgetTitle.doublewidth General
+          .WidgetBoxContent
+  
+            This style guide is a set of standards for the design and programming of gGRC. 
+            %br
+            %br
+            The goal is uniformity in style and formatting as well as elegant syntax across the application. However, this is a work in progress and not currently for release to the public. Additionally, this page is using the actual JS/HTML/CSS of the git repository - so it can be used to compare and contrast versus the life app. 
+  
+            %br
+            %br
+            If a subject is not covered and should be, please submit it to 
+            %a{:href => "mailto:geffen@google.com"} 
+              geffen@google.com
+  
+            %br
+            %br
+              Thanks!
+  
+            %h3 Margins & Padding
+            .well
+              %h5 Widget Margins
+              15 pixels between each widget
+              %h5 Content Padding
+              5 pixels on every side around content (once)
+            .warningwell
+              Some implemented pages uses hard coded values and therefore look inconsistent. We should update to a sass variable and use across the board.
+  
+  
+      #headers
+        .WidgetBox
+          .WidgetBoxHeading
+            .WidgetTitle.doublewidth Headers
+          .WidgetBoxContent
+            #pageTitle Header 1 - This is the Page Title. Bold, 28px, #666. 
+            %h1.highlighted This is the Page Type. Bold, 28px, #0D868C (highlighted)
+            %h2 Header 2
+            %h3 Header 3
+            %h4 Header 4
+            %h5 Header 5
+  
+            .infowell #pageTitle
+            .warningwell Highlighted appears to actually enlarge text! FIX! Most h-classes are using child-selectors and therefore the above is overwritten. Pagetype uses an h1 and should be converted to #pagetype or .pagetype
+  
+      #buttons
+        .WidgetBox
+          .WidgetBoxHeading
+            .WidgetTitle.doublewidth Text Buttons
+          .WidgetBoxContent
+            .well
+              %h5 Misc Buttons
+              %hr
+              %a.btn.btn-blue.addbtn I'm an add-button
+              %a.btn.btn-blue.minibtn I'm a mini-button 
+  
+            .well
+              %h5 Modal Buttons
+              %hr
+  
+              .row-fluid
+                %nav.pull-left.txtlft.span3
+                  %a.btn.btn-large.btn-info{"data-dismiss" => "modal", :href => "#"} Cancel
+                  %a.btn.btn-large.btn-warning{"data-dismiss" => "modal", :href => "#"} Delete
+                .toolbar-widget.span6
+                  -#%a.btn{:href => "#"}
+                    %i.grcicon-arrowleft-black
+                  %a View Edit History
+                  -#%span.btnwell Showing Most Recent of 3 Revisions
+                  -#%a.btn{:href => "#"}
+                    %i.grcicon-arrowright-black
+                %nav.pull-right.txtrt.span3
+                  %a#actionButton.btn.btn-large.btn-success.btn-primary{:href => "#", "data-dismiss" => "modal"} Approve
+                  %a#actionButton.btn.btn-large.btn-success.btn-primary{:href => "#", "data-dismiss" => "modal"} Save
+  
+            .infowell .btn .btn-color addbtn vs minibtn
+            .well Addbtn is depreciated for minibtn in almost every case. 
+            .warningwell  Regmapper needs to be reviewed before addbtn can be removed from css as it was created for this page originally. ALSO, KINDA HUGE: Create block level buttons—those that span the full width of a parent— by adding .btn-block - we have consistently put span12. eww.
+            
+  
+  
+      #icons
+        .WidgetBox
+          .WidgetBoxHeading
+            .WidgetTitle.doublewidth Icons & Image Buttons
+          .WidgetBoxContent
+            %h3 Widget Icons
+  
+            .well Icons are created 32x32 pixels and sized down to 16x16 in the UI. This allows retina and higher-resolution mobile devices to look better.
+  
+            .warningwell I am unhappy with the alignment of text after these icons. Its inconsistent, sometimes high sometimes low. While none of them technically have text aligned with them in the app I would like to standardize this.
+            %ul.captionbox
+              %li
+                %a.widgetbtn{"data-toggle" => "modal", :href => "#"}
+                  %i.grcicon-questionmark-grey
+                Help button - should be on every widget and opens a modal with an edit (Crowdsourcing help)
+              %li
+                %a.widgetbtn{"data-toggle" => "modal", :href => "#"}
+                  %i.grcicon-sortDown
+                %a.widgetbtn{"data-toggle" => "modal", :href => "#"}
+                  %i.grcicon-sortUp
+                Sort buttons
+              %li
+                Various icons
+                %a.widgetbtn{:href => "#"}
+                  %i.grcicon-expandAll-grey
+                %a.widgetbtn{:href => "#"}
+                  %i.grcicon-shrinkAll-grey
+                %a.widgetbtn{:href => "#"}
+                  %i.grcicon-person
+                %a.widgetbtn{:href => "#"}
+                  %i.grcicon-document
+                %a.widgetbtn{:href => "#"}
+                  %i.grcicon-populationsample
+                %a.widgetbtn{:href => "#"}
+                  %i.grcicon-calendar
+                %a.widgetbtn{:href => "#"}
+                  %i.grcicon-blank
+                %a.widgetbtn{:href => "#"}
+                  %i.grcicon-arrowright
+                %a.widgetbtn{:href => "#"}
+                  %i.grcicon-arrowright-grey
+                %a.btn.btn-mini.btn-blue{:href => "#"}
+                  %i.grcicon-arrowright-white
+                %a.widgetbtn{:href => "#"}
+                  %i.grcicon-gears
+                %a.widgetbtn{:href => "#"}
+                  %i.grcicon-mapping-white
+                %a.widgetbtn{:href => "#"}
+                  %i.grcicon-import-white
+                %a.widgetbtn{:href => "#"}
+                  %i.grcicon-check-green
+                %a.widgetbtn{:href => "#"}
+                  %i.grcicon-check-black
+                %a.btn.btn-mini.btn-blue{:href => "#"}
+                  %i.grcicon-check-white
+                %a.widgetbtn{:href => "#"}
+                  %i.grcicon-chevron-right
+                %a.widgetbtn{:href => "#"}
+                  %i.grcicon-hidden-blue
+                %a.widgetbtn{:href => "#"}
+                  %i.grcicon-x-grey
+                %a.btn.btn-mini.btn-blue{:href => "#"}
+                  %i.grcicon-x-white
+                %a.widgetbtn{:href => "#"}
+                  %i.grcicon-add
+                %a.widgetbtn{:href => "#"}
+                  %i.grcicon-arrowleft-black
+                %a.widgetbtn{:href => "#"}
+                  %i.grcicon-back-black
+                %a.widgetbtn{:href => "#"}
+                  %i.grcicon-play-white
+  
+              %li
+                %a.widgetbtn{"data-toggle" => "modal", :href => "#"}
+                  %i.grcicon-edit-grey
+                Edit button - This is only on widgets that do not have subareas with edit buttons. Possibly fully obsolete.
+              %li
+                %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#"}
+                  %i.grcicon-enlarge-grey
+                Show/Hide button - Shows widget content or hides the widget (animated to a single header bar unless content flagged to always show)
+              %li
+                %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
+                While not an icon or button listed here for completion. Should always be present for filterable widgets.
+            .infowell
+              a.widgetbtn > i.grcicon-iconname
+            .warningwell
+              Because of non-opensource icons in twitter bootstrap, icons have had a few revisions to make them honest. However, this has left a lot of messy naming conventions in the css. All icons should be simplified to icon-name soon.
+            -#%a.widgetbtn{"data-toggle" 
+            %h3 Content Icons
+            %ul.captionbox
+              %li
+                %a.btn.btn-mini.btn-blue{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                  %i.grcicon-more
+                More Button - opens up a description and shows additional action buttons for a content item (slot). Color is in flux.
+            .infowell
+              a.btn.btn-mini.btn-blue
+            .warningwell 
+              More button hides other mores to keep the screen less complicated. To this goal, all more collapses ID need to end with '-more'.
+            %h3 Content Action Icons
+            %ul.captionbox
+              
+              %li
+                %a.btn.btn-mini.halfopacity{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                  %i.grcicon-edit-grey
+                Edit Button - Should open a modal pop-up or in extreme cases go to the object's page.
+              %li
+                %a.btn.btn-mini.halfopacity{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                  %i.grcicon-link
+                Link Button.
+              %li
+                %a.btn.btn-mini.halfopacity{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                  %i.grcicon-arrowright-black
+                Go Button - Opens up this object's page.
+  
+              %li
+                %a.btn.btn-mini.halfopacity{"data-toggle" => "collapse", :href => "#"}
+                  %i.grcicon-remove
+                Remove icon, usually in selectors (lists).
+            .infowell
+              a.btn.btn-mini.halfopacity > i.grcicon-iconname
+            .warningwell
+              These use .halfopacity - a css style that lowers the opacity and raises it on hover. 
+            
+  
+  
+      #tabs.WidgetBox.fullHeight.doubleWide
 
-          This style guide is a set of standards for the design and programming of gGRC. 
-          %br
-          %br
-          The goal is uniformity in style and formatting as well as elegant syntax across the application. However, this is a work in progress and not currently for release to the public. Additionally, this page is using the actual JS/HTML/CSS of the git repository - so it can be used to compare and contrast versus the life app. 
-
-          %br
-          %br
-          If a subject is not covered and should be, please submit it to 
-          %a{:href => "mailto:geffen@google.com"} 
-            geffen@google.com
-
-          %br
-          %br
-            Thanks!
-
-          %h3 Margins & Padding
-          .well
-            %h5 Widget Margins
-            15 pixels between each widget
-            %h5 Content Padding
-            5 pixels on every side around content (once)
-          .warningwell
-            Some implemented pages uses hard coded values and therefore look inconsistent. We should update to a sass variable and use across the board.
-
-
-    #headers
-      .WidgetBox
-        .WidgetBoxHeading
-          .WidgetTitle.doublewidth Headers
-        .WidgetBoxContent
-          #pageTitle Header 1 - This is the Page Title. Bold, 28px, #666. 
-          %h1.highlighted This is the Page Type. Bold, 28px, #0D868C (highlighted)
-          %h2 Header 2
-          %h3 Header 3
-          %h4 Header 4
-          %h5 Header 5
-
-          .infowell #pageTitle
-          .warningwell Highlighted appears to actually enlarge text! FIX! Most h-classes are using child-selectors and therefore the above is overwritten. Pagetype uses an h1 and should be converted to #pagetype or .pagetype
 
     #buttons
       .WidgetBox
@@ -154,685 +1055,561 @@
     #icons
       .WidgetBox
         .WidgetBoxHeading
-          .WidgetTitle.doublewidth Icons & Image Buttons
+          .pull-right
+            %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+              %i.grcicon-questionmark-grey
+            -#%a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+              %i.grcicon-edit-grey
+            %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
+          .WidgetTitle.doublewidth Tabs
         .WidgetBoxContent
-          %h3 Widget Icons
-
-          .well Icons are created 32x32 pixels and sized down to 16x16 in the UI. This allows retina and higher-resolution mobile devices to look better.
-
-          .warningwell I am unhappy with the alignment of text after these icons. Its inconsistent, sometimes high sometimes low. While none of them technically have text aligned with them in the app I would like to standardize this.
-          %ul.captionbox
-            %li
-              %a.widgetbtn{"data-toggle" => "modal", :href => "#"}
-                %i.grcicon-questionmark-grey
-              Help button - should be on every widget and opens a modal with an edit (Crowdsourcing help)
-            %li
-              %a.widgetbtn{"data-toggle" => "modal", :href => "#"}
-                %i.grcicon-sortDown
-              %a.widgetbtn{"data-toggle" => "modal", :href => "#"}
-                %i.grcicon-sortUp
-              Sort buttons
-            %li
-              Various icons
-              %a.widgetbtn{:href => "#"}
-                %i.grcicon-expandAll-grey
-              %a.widgetbtn{:href => "#"}
-                %i.grcicon-shrinkAll-grey
-              %a.widgetbtn{:href => "#"}
-                %i.grcicon-person
-              %a.widgetbtn{:href => "#"}
-                %i.grcicon-document
-              %a.widgetbtn{:href => "#"}
-                %i.grcicon-populationsample
-              %a.widgetbtn{:href => "#"}
-                %i.grcicon-calendar
-              %a.widgetbtn{:href => "#"}
-                %i.grcicon-blank
-              %a.widgetbtn{:href => "#"}
-                %i.grcicon-arrowright
-              %a.widgetbtn{:href => "#"}
-                %i.grcicon-arrowright-grey
-              %a.btn.btn-mini.btn-blue{:href => "#"}
-                %i.grcicon-arrowright-white
-              %a.widgetbtn{:href => "#"}
-                %i.grcicon-gears
-              %a.widgetbtn{:href => "#"}
-                %i.grcicon-mapping-white
-              %a.widgetbtn{:href => "#"}
-                %i.grcicon-import-white
-              %a.widgetbtn{:href => "#"}
-                %i.grcicon-check-green
-              %a.widgetbtn{:href => "#"}
-                %i.grcicon-check-black
-              %a.btn.btn-mini.btn-blue{:href => "#"}
-                %i.grcicon-check-white
-              %a.widgetbtn{:href => "#"}
-                %i.grcicon-chevron-right
-              %a.widgetbtn{:href => "#"}
-                %i.grcicon-hidden-blue
-              %a.widgetbtn{:href => "#"}
-                %i.grcicon-x-grey
-              %a.btn.btn-mini.btn-blue{:href => "#"}
-                %i.grcicon-x-white
-              %a.widgetbtn{:href => "#"}
-                %i.grcicon-add
-              %a.widgetbtn{:href => "#"}
-                %i.grcicon-arrowleft-black
-              %a.widgetbtn{:href => "#"}
-                %i.grcicon-back-black
-              %a.widgetbtn{:href => "#"}
-                %i.grcicon-play-white
-
-            %li
-              %a.widgetbtn{"data-toggle" => "modal", :href => "#"}
-                %i.grcicon-edit-grey
-              Edit button - This is only on widgets that do not have subareas with edit buttons. Possibly fully obsolete.
-            %li
-              %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#"}
-                %i.grcicon-enlarge-grey
-              Show/Hide button - Shows widget content or hides the widget (animated to a single header bar unless content flagged to always show)
-            %li
-              %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
-              While not an icon or button listed here for completion. Should always be present for filterable widgets.
-          .infowell
-            a.widgetbtn > i.grcicon-iconname
-          .warningwell
-            Because of non-opensource icons in twitter bootstrap, icons have had a few revisions to make them honest. However, this has left a lot of messy naming conventions in the css. All icons should be simplified to icon-name soon.
-          -#%a.widgetbtn{"data-toggle" 
-          %h3 Content Icons
-          %ul.captionbox
-            %li
-              %a.btn.btn-mini.btn-blue{"data-toggle" => "modal", :href => "#comingsoonModal"}
-                %i.grcicon-more
-              More Button - opens up a description and shows additional action buttons for a content item (slot). Color is in flux.
-          .infowell
-            a.btn.btn-mini.btn-blue
-          .warningwell 
-            More button hides other mores to keep the screen less complicated. To this goal, all more collapses ID need to end with '-more'.
-          %h3 Content Action Icons
-          %ul.captionbox
-            
-            %li
-              %a.btn.btn-mini.halfopacity{"data-toggle" => "modal", :href => "#comingsoonModal"}
-                %i.grcicon-edit-grey
-              Edit Button - Should open a modal pop-up or in extreme cases go to the object's page.
-            %li
-              %a.btn.btn-mini.halfopacity{"data-toggle" => "modal", :href => "#comingsoonModal"}
-                %i.grcicon-link
-              Link Button.
-            %li
-              %a.btn.btn-mini.halfopacity{"data-toggle" => "modal", :href => "#comingsoonModal"}
-                %i.grcicon-arrowright-black
-              Go Button - Opens up this object's page.
-
-            %li
-              %a.btn.btn-mini.halfopacity{"data-toggle" => "collapse", :href => "#"}
-                %i.grcicon-remove
-              Remove icon, usually in selectors (lists).
-          .infowell
-            a.btn.btn-mini.halfopacity > i.grcicon-iconname
-          .warningwell
-            These use .halfopacity - a css style that lowers the opacity and raises it on hover. 
           
-
-
-    #tabs.WidgetBox.fullHeight.doubleWide
-      .WidgetBoxHeading
-        .pull-right
-          %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
-            %i.grcicon-questionmark-grey
-          -#%a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
-            %i.grcicon-edit-grey
-          %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
-        .WidgetTitle.doublewidth Tabs
-      .WidgetBoxContent
-        
-        %ul#quicklinks.nav.nav-tabs
-          %li.active
-            %a{"data-toggle" => "tab", :href => "#controls-sysbizproc"} Tab 1
-          %li
-            %a{"data-toggle" => "tab", :href => "#controls-linked"} Tab 2
-          %li
-            %a{"data-toggle" => "tab", :href => "#controls-progsec"} Tab 3
-          %li
-            %a{"data-toggle" => "tab", :href => "#controls-risks"} Tab 4
-
-        
-        .tab-content
-          .tab-pane#controls-sysbizproc.active
-            -# TAB SYS BIZ PROCESS
-            .row-fluid
-              .span12.captionbox
-                %a.btn.btn-blue.addbtn.pull-right Edit List
-                %h4
-                  Currently loads in Sys Biz Proc
-
-            #sampleprocesses
-          .tab-pane#controls-linked
-            -# TAB LINKED CONTROLS
-            .row-fluid
-              .span12.captionbox
-                %a.btn.btn-blue.addbtn.pull-right Edit List
-                %h4
-                  Currently loads in Controls
-            #samplelinkedcontrols
-          .tab-pane#controls-progsec
-            -# PROGRAM SECTIONS
-            .row-fluid
-              .span12.captionbox
-                %a.btn.btn-blue.addbtn.pull-right Edit List
-                %h4
-                  Currently loads in Sys Biz Proc
-                
-            #sampleprogramsections
-          .tab-pane#controls-risks
-            -# PROGRAM SECTIONS
-            .row-fluid
-              .span12.captionbox
-                %a.btn.btn-blue.addbtn.pull-right Edit List
-                %h4
-                  Currently loads in Risks
-                
-            #samplerisks
-    
-    #progressbar.WidgetBox
-      .WidgetBoxHeading
-        .WidgetTitle Sub areas
-        %nav
-          %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
-            %i.grcicon-questionmark-grey
-          -#%a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
-            %i.grcicon-edit-grey
-          %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#productInfoContent"}
-            %i.grcicon-enlarge-grey
-      .WidgetBoxContent.information.collapse.in
-        .well 
-          %label
-            
-            .pull-right 
-              %span.statustextgreen 35 
-              %span /
-              %span.statustextyellow 55 
-              %span /
-              %span.statustextred 10 
-            Progress Bar
-          .progress.progress-striped.active
-            .bar.progressbar-success{"data-percentage" => "35", :style => "float: left; width: 0%; "}
-            .bar.progressbar-danger{"data-percentage" => "10", :style => "float: right; width: 0%; "}
-            .bar.progressbar-warning{"data-percentage" => "55", :style => "float: right; width: 0%; "}
-        .infowell
-          Progress bars are used throughout the site to show status in a quick look. They are animateable and can contain tooltiups to explain what each color area means.
-        .warningwell
-          NEEDS UPDATE The design decision on tooltips, what is shown, when/where/why, etc - is vague. Already the app has a few different versions. Firefox will have an issue with the label and pull-right statuses above the progress bar if you don't have the text AFTER the pull-right.
-        -#.toolbar-widget.well
-          %a.btn.btn-warning{"data-toggle" => "modal", :href => "#comingsoonModal"}
-            New Version
-
-
-    #typography.WidgetBox
-      .WidgetBoxHeading
-        .WidgetTitle Typography
-        %nav
-      .WidgetBoxContent.information.collapse.in
-        %h3 PT Sans is the web-font used
-        PT Sans
-        SIL Open Font License, 1.1
-        .infowell
-          %a{:href => "http://www.google.com/webfonts/specimen/PT+Sans"}
-            http://www.google.com/webfonts/specimen/PT+Sans
-
-        .warningwell
-          NEEDS UPDATE I see that a number of pages load in the webfont directly from Google. While this works there is some browser delay and it should be local. Additionally, we never had a round of font tests; we should have 3 or 4 compete against each other and vote one in.
-        -#.toolbar-widget.well
-          %a.btn.btn-warning{"data-toggle" => "modal", :href => "#comingsoonModal"}
-            New Version
-
-
-    #subareas.WidgetBox
-      .WidgetBoxHeading
-        .WidgetTitle Sub areas
-        %nav
-          %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
-            %i.grcicon-questionmark-grey
-          -#%a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
-            %i.grcicon-edit-grey
-          %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#productInfoContent"}
-            %i.grcicon-enlarge-grey
-      .WidgetBoxContent.information.collapse.in
-        
-        
-        #productInfoContent.collapse.in
-          %hr.hr-widget
-          .row-fluid
-            .span12
-              %h3.toggle{"data-target" => "#productAbout", "data-toggle" => "collapse"}
-                .expander
-                Sub Content Area
-                %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
-                  %i.grcicon-edit-grey
-              #productAbout.collapse
-                .row-fluid
-                  .span12
-                    .span3
-                      %label Code
-                      %input.span12{:disabled => "disabled", :placeholder => "ABC", :type => "text"}/
-                    .span3
-                      %label Version
-                      %input.span12{:disabled => "disabled", :placeholder => "1.0", :type => "text"}/
-                    .span3
-                      %label Year
-                      %input.span12{:disabled => "disabled", :placeholder => "2012", :type => "text"}/
-                    .span3
-                      %label Kind
-                      %input.span12{:disabled => "disabled", :placeholder => "---", :type => "text"}/
-                .row-fluid
-                  .span12
-                    %label Full Title
-                    %input{:disabled => "disabled", :placeholder => "Sarbanes-Oxley Long Title", :style => "margin: 0px; width: 97%;", :type => "text"}/
-                .row-fluid
-                  .span12
-                    %label Type
-                    %input{:disabled => "disabled", :placeholder => "Regulation", :style => "margin: 0px; width: 97%;", :type => "text"}/
-                .row-fluid
-                  .span12
-                    %label Version
-                    %input{:disabled => "disabled", :placeholder => "1.2", :style => "margin: 0px; width: 97%;", :type => "text"}/
-                .row-fluid
-                  .span12
-                    %label Scope / Applicability of this Program
-                    %textarea#textarea{:disabled => "disabled", :placeholder => "", :rows => "3", :style => "margin: 0px; width: 98%; height: 73px; "} PCI DDS applies whenever Cardholder account data and Authentication Data is Stored, Processed or Transmitted. Examples Include: For more See Page 7 of document. Using h6 makes the label caps.
-          %hr.hr-widget
-          .warningwell
-            The edit (or link) subaction button beside the closed subarea should probably be hidden until that area is opened. Otherwise they know not what they do.
-
-
-
-    #modals
-
-    #typography
-
-    #thumbnails
-
-    #contentslots.WidgetBox
-      .WidgetBoxHeading
-        .WidgetTitle Content Slots
-        %nav
-      .WidgetBoxContent.information.collapse.in
-        
-        
-        #contentslotsContent.collapse.in
-          %hr.hr-widget
-          %ul
+          %ul#quicklinks.nav.nav-tabs
+            %li.active
+              %a{"data-toggle" => "tab", :href => "#controls-sysbizproc"} Tab 1
             %li
+              %a{"data-toggle" => "tab", :href => "#controls-linked"} Tab 2
+            %li
+              %a{"data-toggle" => "tab", :href => "#controls-progsec"} Tab 3
+            %li
+              %a{"data-toggle" => "tab", :href => "#controls-risks"} Tab 4
+  
+          
+          .tab-content
+            .tab-pane#controls-sysbizproc.active
+              -# TAB SYS BIZ PROCESS
               .row-fluid
-                .slot.span12.programslot.selected 
-                  .slottitle.span8.toggle{"data-target" => "#programslot2", "data-toggle" => "collapse"}
-                    .expander
-                    %span.prefix Expander Group
-                    This is an item that owns others. Currently expanders (chevron) are only one color.
-                  .span2.slotcolumn
-                    .halfopacity.span12.nominheight.btn.btn-slotcolumn Full Audit
-                  .slotowner.span1
-                    %a.slotowner GRC
-                  .slotactions.pull-right
-                    %a#tooltip11.btn.btn-mini.btn-blue{"rel" => "tooltip", "data-placement" => "left", "title" => "More", "data-target" => "#programslot-summary", "data-toggle" => "collapse"}
-                      %i.grcicon-more
-                #programslot-summary.row-fluid.collapse
-                  .span12.morewell.statusblue.nominheight
-
-                    .slotcontent.span12
-                     
-
-                      %ul.contentactions.pull-right
-                        %li
-                          %a#tooltip1.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Edit this object", "data-toggle" => "modal", :href => "#comingsoonModal"}
-                            %i.grcicon-edit-grey
-                        %li
-                          %a#tooltip2.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Link objects to this object", "data-toggle" => "modal", :href => "#comingsoonModal"}
-                            %i.grcicon-link
-                        %li
-                          %a#tooltip3.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", "data-toggle" => "modal", :href => "#comingsoonModal"}
-                            %i.grcicon-arrowright-black
-
-                      "Hi I am a general description or some such info box that you requested to see. You can't edit me. You can just enjoy the beautiful knowledge I pour into your ocular cavities. Learn my friend. Learn. Or if you don't want to just glaze over and scan down until you see the information you truly wanted." -Abraham Lincoln
-                      %ul.slotlist
-                        %li
-                          .row-fluid
-                            .slot.span12.regulationslot.statusgreen
-                              .slottitle.span8.toggle{"data-target" => "#demo1-1-summary", "data-toggle" => "collapse"}
-                                .enddot
-                                %span.prefix Proc-1
-                                Enable processes to provide for timely forensic investigation in the event of a ...
-                              .slotcolumn.span2
-                                .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
-                              .slotowner.span1
-                                %a.slotowner{:href => "http://www.youtube.com/watch?v=oHg5SJYRHA0"} Rick Astley
-                              .slotactions.pull-right
-                                %a.btn.btn-mini.btn-blue{"data-target" => "#demo1-1-summary", "data-toggle" => "collapse"}
-                                  %i.grcicon-more
-                          #demo1-1-summary.row-fluid.collapse
-                            .span12.nominheight
-                              .slotcontent.span12
-                                %ul.contentactions.pull-right
-                                  %li
-                                    %a.btn.btn-mini.halfopacity{"data-toggle" => "modal", :href => "#comingsoonModal"}
-                                      %i.grcicon-edit-grey
-                                  %li
-                                    %a.btn.btn-mini.halfopacity{"data-toggle" => "modal", :href => "#comingsoonModal"}
-                                      %i.grcicon-link
-                                  %li
-                                    %a.btn.btn-mini.halfopacity{"data-toggle" => "modal", :href => "#comingsoonModal"}
-                                      %i.grcicon-arrowright-black
-                                Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider. Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider. Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
-
-                                Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
-                    
-                          %li
-                            .row-fluid
-                              .slot.span12.processslot.toggle{"data-target" => "#demo2-4-c2", "data-toggle" => "collapse"}
-                                %span.prefix Proc-2-1 Control 2
-                                Also without a [...] button.
-                                .enddot.process
-                            .row-fluid#demo2-4-c2.collapse
-                              .slotcontent
-                                Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
-                          %li
-                            .row-fluid
-                              .slot.span12.processslot.toggle{"data-target" => "#demo2-4-c3", "data-toggle" => "collapse"}
-                                %span.prefix Proc-2-1 Control 3
-                                Enable processes to provide for timely forensic investigation in the event of a ...
-                                .enddot.process
-                            .row-fluid#demo2-4-c3.collapse
-                              .slotcontent
-                                Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
-
-                #programslot2.row-fluid.collapse
-                  %ul
-                    %li
-                      %ul.slotlist
-                        %li
-                          .row-fluid
-                            .slot.span12.programslot
-                              .slottitle.span8.toggle{"data-target" => "#programslot2-1-summary", "data-toggle" => "collapse"}
-                                .expander
-                                %span.prefix Program
-                                This is a program slot, non group etc - has no coloring
-                              .slotcolumn.span2
-                                .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
-                              .slotowner.span1
-                                %a.slotowner{:href => "http://www.youtube.com/watch?v=oHg5SJYRHA0"} Rick Astley
-                              .slotactions.pull-right
-                                %a.btn.btn-mini.btn-blue.halfopacity{"data-target" => "#programslot2-1-more", "data-toggle" => "collapse"}
-                                  %i.grcicon-more
-                          #programslot2-1-more.row-fluid.collapse
-                            .span12.morewell.statusgreen.nominheight
-                              .slotcontent.span12
-                                %ul.contentactions.pull-right
-                                  %li
-                                    %a#tooltip47.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Edit this object", "data-toggle" => "modal", :href => "#comingsoonModal"}
-                                      %i.grcicon-edit-grey
-                                  %li
-                                    %a#tooltip46.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Link objects to this object", "data-toggle" => "modal", :href => "#comingsoonModal"}
-                                      %i.grcicon-link
-                                  %li
-                                    %a#tooltip45.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", "data-toggle" => "modal", :href => "#comingsoonModal"}
-                                      %i.grcicon-arrowright-black
-                                Textual description here.)
-
-
-                    %ul#programslot2-1-summary.collapse
-                      %li
-                        %ul.slotlist      
-                          %li
-                            %ul.slotlist
-                              %li
-                                .row-fluid
-                                  .slot.span12.regulationslot
-                                    .slottitle.span8.toggle{"data-target" => "#regulationslot-1-summary", "data-toggle" => "collapse"}
-                                      .enddot.regulation
-                                      %span.prefix Regulation
-                                      This is a regulation slot.
-                                    .slotcolumn.span2
-                                      .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
-                                    .slotowner.span1
-                                      %a.slotowner{:href => "http://www.youtube.com/watch?v=oHg5SJYRHA0"} Rick Astley
-                                    .slotactions.pull-right
-                                      %a.btn.btn-mini.btn-blue.halfopacity{"data-target" => "#regulationslot-1-summary", "data-toggle" => "collapse"}
-                                        %i.grcicon-more
-                                #regulationslot-1-summary.row-fluid.collapse
-                                  .span12.morewell.statusgreen.nominheight
-                                    .slotcontent.span12
-                                      %ul.contentactions.pull-right
-                                        %li
-                                          %a#tooltip50.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Edit this object", "data-toggle" => "modal", :href => "#comingsoonModal"}
-                                            %i.grcicon-edit-grey
-                                        %li
-                                          %a#tooltip49.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Link objects to this object", "data-toggle" => "modal", :href => "#comingsoonModal"}
-                                            %i.grcicon-link
-                                        %li
-                                          %a#tooltip48.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", "data-toggle" => "modal", :href => "#comingsoonModal"}
-                                            %i.grcicon-arrowright-black
-                                      Textual description here.)
-                              
-                              %li
-                                .row-fluid
-                                  .slot.span12.processslot
-                                    .slottitle.span8.toggle{"data-target" => "#Process-21-more", "data-toggle" => "collapse"}
-                                      .enddot.process
-                                      %span.prefix Process
-                                      This is a system slot.
-                                    .slotcolumn.span2
-                                      .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
-                                    .slotowner.span1
-                                      %a.slotowner{:href => "http://www.youtube.com/watch?v=oHg5SJYRHA0"} Rick Astley
-                                    .slotactions.pull-right
-                                      %a.btn.btn-mini.btn-blue.halfopacity{"data-target" => "#Process-21-more", "data-toggle" => "collapse"}
-                                        %i.grcicon-more
-                                #Process-21-more.row-fluid.collapse
-                                  .span12.morewell.statusblue.nominheight
-                                    .slotcontent.span12
-                                      %ul.contentactions.pull-right
-                                        %li
-                                          %a#tooltip40.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Edit this object", "data-toggle" => "modal", :href => "#comingsoonModal"}
-                                            %i.grcicon-edit-grey
-                                        %li
-                                          %a#tooltip39.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Link objects to this object", "data-toggle" => "modal", :href => "#comingsoonModal"}
-                                            %i.grcicon-link
-                                        %li
-                                          %a#tooltip38.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", "data-toggle" => "modal", :href => "#comingsoonModal"}
-                                            %i.grcicon-arrowright-black
-                                      Textual description here.)
-                                #Process-1-summary.collapse
-                                  %ul
-                                    %li
-                                      .row-fluid
-                                        .slot.span12.controlslot
-                                          .slottitle.span8.toggle{"data-target" => "#Control-1-summary", "data-toggle" => "collapse"}
-                                            .expander
-                                            %span.prefix Control 1
-                                            This is a control slot.
-                                          .slotcolumn.span2
-                                            .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
-                                          .slotowner.span1
-                                            %a.slotowner{:href => "http://www.youtube.com/watch?v=oHg5SJYRHA0"} Rick Astley
-                                          .slotactions.pull-right
-                                            %a#tooltip27.btn.btn-mini{"rel" => "tooltip", "data-placement" => "left", "title" => "Go to this control page", "data-toggle" => "modal", :href => "#comingsoonModal"}
-                                              %i.halfopacity.grcicon-arrowright-black
-                                      #Control-1-summary.row-fluid.collapse
-                                        
-                                        %ul
-                                          %li
-                                            .row-fluid
-                                              .slot.span12.controlslot
-                                                .slottitle.span8.toggle{"data-target" => "#Control2a-1-summary", "data-toggle" => "collapse"}
-                                                  .enddot
-                                                  %span.prefix Control 1A
-                                                  This is a control slot.
-                                                .slotcolumn.span2
-                                                  .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
-                                                .slotowner.span1
-                                                  %a.slotowner{:href => "http://www.youtube.com/watch?v=oHg5SJYRHA0"} Rick Astley
-                                                .slotactions.pull-right
-                                                  %a#tooltip26.btn.btn-mini{"rel" => "tooltip", "data-placement" => "left", "title" => "Go to this control page", "data-toggle" => "modal", :href => "#comingsoonModal"}
-                                                    %i.halfopacity.grcicon-arrowright-black
-                                            -#Control2a-1-summary.row-fluid.collapse
-                                              .span12.morewell.statusblue.nominheight
-                                                .slotcontent.span12
-                                                  %ul.contentactions.pull-right
-                                                    %li
-                                                      %a#tooltip41.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Edit this object", "data-toggle" => "modal", :href => "#comingsoonModal"}
-                                                        %i.grcicon-edit-grey
-                                                    %li
-                                                      %a#tooltip42.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Link objects to this object", "data-toggle" => "modal", :href => "#comingsoonModal"}
-                                                        %i.grcicon-link
-                                                    %li
-                                                      %a#tooltip43.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", "data-toggle" => "modal", :href => "#comingsoonModal"}
-                                                        %i.grcicon-arrowright-black
-                                                  Textual description here.)
-                                    %li
-                                      .row-fluid
-                                        .slot.span12.controlslot
-                                          .slottitle.span8.toggle{"data-target" => "#Control-2-summary", "data-toggle" => "collapse"}
-                                            .enddot.default
-                                            %span.prefix Control 2
-                                            This is a control slot.
-                                          .slotcolumn.span2
-                                            .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
-                                          .slotowner.span1
-                                            %a.slotowner{:href => "http://www.youtube.com/watch?v=oHg5SJYRHA0"} Rick Astley
-                                          .slotactions.pull-right
-                                            %a#tooltip25.btn.btn-mini{"rel" => "tooltip", "data-placement" => "left", "title" => "Go to this control page", "data-toggle" => "modal", :href => "#comingsoonModal"}
-                                              %i.halfopacity.grcicon-arrowright-black
-                                      -#Control-2-summary.row-fluid.collapse
-                                        .span12.morewell.statusblue.nominheight
-                                          .slotcontent.span12
-                                            %ul.contentactions.pull-right
-                                              %li
-                                                %a#tooltip41.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Edit this object", "data-toggle" => "modal", :href => "#comingsoonModal"}
-                                                  %i.grcicon-edit-grey
-                                              %li
-                                                %a#tooltip42.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Link objects to this object", "data-toggle" => "modal", :href => "#comingsoonModal"}
-                                                  %i.grcicon-link
-                                              %li
-                                                %a#tooltip43.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", "data-toggle" => "modal", :href => "#comingsoonModal"}
-                                                  %i.grcicon-arrowright-black
-                                            Textual description here.)
-                              %li
-                                .row-fluid
-                                  .slot.span12.systemslot
-                                    .slottitle.span8.toggle{"data-target" => "#system-1-summary", "data-toggle" => "collapse"}
-                                      .enddot.control
-                                      %span.prefix System
-                                      This is a system slot.
-                                    .slotcolumn.span2
-                                      .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
-                                    .slotowner.span1
-                                      %a.slotowner{:href => "http://www.youtube.com/watch?v=oHg5SJYRHA0"} Rick Astley
-                                    .slotactions.pull-right
-                                      %a.btn.btn-mini.btn-blue.halfopacity{"data-target" => "#system-1-summary", "data-toggle" => "collapse"}
-                                        %i.grcicon-more
-                                #system-1-summary.row-fluid.collapse
-                                  .span12.morewell.statusyellow.nominheight
-                                    .slotcontent.span12
-                                      %ul.contentactions.pull-right
-                                        %li
-                                          %a#tooltip30.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Edit this object", "data-toggle" => "modal", :href => "#comingsoonModal"}
-                                            %i.grcicon-edit-grey
-                                        %li
-                                          %a#tooltip39.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Link objects to this object", "data-toggle" => "modal", :href => "#comingsoonModal"}
-                                            %i.grcicon-link
-                                        %li
-                                          %a#tooltip38.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", "data-toggle" => "modal", :href => "#comingsoonModal"}
-                                            %i.grcicon-arrowright-black
-                                      Textual description here.)
-                              %li
-                                .row-fluid
-                                  .slot.span12.riskslot
-                                    .slottitle.span8.toggle{"data-target" => "#Threat-1-summary", "data-toggle" => "collapse"}
-                                      .enddot.risk
-                                      %span.prefix Risk 
-                                      This is a risk slot.
-                                    .slotcolumn.span2
-                                      .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
-                                    .slotowner.span1
-                                      %a.slotowner{:href => "http://www.youtube.com/watch?v=oHg5SJYRHA0"} Rick Astley
-                                    .slotactions.pull-right
-                                      %a.btn.btn-mini.btn-blue.halfopacity{"data-target" => "#Threat-1-summary", "data-toggle" => "collapse"}
-                                        %i.grcicon-more
-                                #Threat-1-summary.row-fluid.collapse
-                                  .span12.morewell.statusred.nominheight
-                                    .slotcontent.span12
-                                      %ul.contentactions.pull-right
-                                        %li
-                                          %a#tooltip20.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Edit this object", "data-toggle" => "modal", :href => "#comingsoonModal"}
-                                            %i.grcicon-edit-grey
-                                        %li
-                                          %a#tooltip29.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Link objects to this object", "data-toggle" => "modal", :href => "#comingsoonModal"}
-                                            %i.grcicon-link
-                                        %li
-                                          %a#tooltip28.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", "data-toggle" => "modal", :href => "#comingsoonModal"}
-                                            %i.grcicon-arrowright-black
-                                      Textual description here.)
-                              %li
-                                .row-fluid
-                                  .slot.span12.riskyslot
-                                    .slottitle.span8.toggle{"data-target" => "#tooltiptest-1-summary", "data-toggle" => "collapse"}
-                                      .enddot.risk
-                                      %span.prefix Risky Attribute
-                                      This is a risky slot.
-                                    .slotcolumn.span2
-                                      .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
-                                    .slotowner.span1
-                                      %a.slotowner{:href => "http://www.youtube.com/watch?v=oHg5SJYRHA0"} Rick Astley
-                                    .slotactions.pull-right
-                                      %a.btn.btn-mini.btn-blue.halfopacity{"data-target" => "#tooltiptest-1-summary", "data-toggle" => "collapse"}
-                                        %i.grcicon-more
-                                #tooltiptest-1-summary.row-fluid.collapse
-                                  .span12.morewell.statuspurple.nominheight
-                                    .slotcontent.span12
-                                      %ul.contentactions.pull-right
-                                        %li
-                                          %a#tooltip14.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Edit this object", "data-toggle" => "modal", :href => "#comingsoonModal"}
-                                            %i.grcicon-edit-grey
-                                        %li
-                                          %a#tooltip13.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Link objects to this object", "data-toggle" => "modal", :href => "#comingsoonModal"}
-                                            %i.grcicon-link
-                                        %li
-                                          %a#tooltip12.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", "data-toggle" => "modal", :href => "#comingsoonModal"}
-                                            %i.grcicon-arrowright-black
-                                      Threat well no Data Integrity Risky
-
-          %hr
+                .span12.captionbox
+                  %a.btn.btn-blue.addbtn.pull-right Edit List
+                  %h4
+                    Currently loads in Sys Biz Proc
+  
+              #sampleprocesses
+            .tab-pane#controls-linked
+              -# TAB LINKED CONTROLS
+              .row-fluid
+                .span12.captionbox
+                  %a.btn.btn-blue.addbtn.pull-right Edit List
+                  %h4
+                    Currently loads in Controls
+              #samplelinkedcontrols
+            .tab-pane#controls-progsec
+              -# PROGRAM SECTIONS
+              .row-fluid
+                .span12.captionbox
+                  %a.btn.btn-blue.addbtn.pull-right Edit List
+                  %h4
+                    Currently loads in Sys Biz Proc
+                  
+              #sampleprogramsections
+            .tab-pane#controls-risks
+              -# PROGRAM SECTIONS
+              .row-fluid
+                .span12.captionbox
+                  %a.btn.btn-blue.addbtn.pull-right Edit List
+                  %h4
+                    Currently loads in Risks
+                  
+              #samplerisks
+      
+      #progressbar.WidgetBox
+        .WidgetBoxHeading
+          .WidgetTitle Sub areas
+          %nav
+            %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+              %i.grcicon-questionmark-grey
+            -#%a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+              %i.grcicon-edit-grey
+            %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#productInfoContent"}
+              %i.grcicon-enlarge-grey
+        .WidgetBoxContent.information.collapse.in
+          .well 
+            %label
               
+              .pull-right 
+                %span.statustextgreen 35 
+                %span /
+                %span.statustextyellow 55 
+                %span /
+                %span.statustextred 10 
+              Progress Bar
+            .progress.progress-striped.active
+              .bar.progressbar-success{"data-percentage" => "35", :style => "float: left; width: 0%; "}
+              .bar.progressbar-danger{"data-percentage" => "10", :style => "float: right; width: 0%; "}
+              .bar.progressbar-warning{"data-percentage" => "55", :style => "float: right; width: 0%; "}
           .infowell
-            Color is set by the type of slot, ie. - riskyslot, riskslot, controlslot, processslot, etc (class)
+            Progress bars are used throughout the site to show status in a quick look. They are animateable and can contain tooltiups to explain what each color area means.
           .warningwell
-            Slot height is set not dynamic - so there is a different class for two lines (doubleslot - see below)
-          %hr.hr-widget
-
-          %ul
-            %li
-              .row-fluid
-                .doubleslot.span12.toggle{"data-target" => "#Threat-1-summary", "data-toggle" => "collapse"}
+            NEEDS UPDATE The design decision on tooltips, what is shown, when/where/why, etc - is vague. Already the app has a few different versions. Firefox will have an issue with the label and pull-right statuses above the progress bar if you don't have the text AFTER the pull-right.
+          -#.toolbar-widget.well
+            %a.btn.btn-warning{"data-toggle" => "modal", :href => "#comingsoonModal"}
+              New Version
+  
+  
+      #typography.WidgetBox
+        .WidgetBoxHeading
+          .WidgetTitle Typography
+          %nav
+        .WidgetBoxContent.information.collapse.in
+          %h3 PT Sans is the web-font used
+          PT Sans
+          SIL Open Font License, 1.1
+          .infowell
+            %a{:href => "http://www.google.com/webfonts/specimen/PT+Sans"}
+              http://www.google.com/webfonts/specimen/PT+Sans
+  
+          .warningwell
+            NEEDS UPDATE I see that a number of pages load in the webfont directly from Google. While this works there is some browser delay and it should be local. Additionally, we never had a round of font tests; we should have 3 or 4 compete against each other and vote one in.
+          -#.toolbar-widget.well
+            %a.btn.btn-warning{"data-toggle" => "modal", :href => "#comingsoonModal"}
+              New Version
+  
+  
+      #subareas.WidgetBox
+        .WidgetBoxHeading
+          .WidgetTitle Sub areas
+          %nav
+            %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+              %i.grcicon-questionmark-grey
+            -#%a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+              %i.grcicon-edit-grey
+            %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#productInfoContent"}
+              %i.grcicon-enlarge-grey
+        .WidgetBoxContent.information.collapse.in
+          
+          
+          #productInfoContent.collapse.in
+            %hr.hr-widget
+            .row-fluid
+              .span12
+                %h3.toggle{"data-target" => "#productAbout", "data-toggle" => "collapse"}
+                  .expander
+                  Sub Content Area
+                  %a.widgetbtn.pull-right{"data-toggle" => "modal", :href => "#referenceSelectorModal"}
+                    %i.grcicon-edit-grey
+                #productAbout.collapse
                   .row-fluid
-                    .slottitle.span8
-                      .enddot.risk
-                      %span.controls-group Double line Title
-                      %br
-                      This is a general description. Done by line-height and br.
-                    .slotcolumn.span2
-                      .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
+                    .span12
+                      .span3
+                        %label Code
+                        %input.span12{:disabled => "disabled", :placeholder => "ABC", :type => "text"}/
+                      .span3
+                        %label Version
+                        %input.span12{:disabled => "disabled", :placeholder => "1.0", :type => "text"}/
+                      .span3
+                        %label Year
+                        %input.span12{:disabled => "disabled", :placeholder => "2012", :type => "text"}/
+                      .span3
+                        %label Kind
+                        %input.span12{:disabled => "disabled", :placeholder => "---", :type => "text"}/
+                  .row-fluid
+                    .span12
+                      %label Full Title
+                      %input{:disabled => "disabled", :placeholder => "Sarbanes-Oxley Long Title", :style => "margin: 0px; width: 97%;", :type => "text"}/
+                  .row-fluid
+                    .span12
+                      %label Type
+                      %input{:disabled => "disabled", :placeholder => "Regulation", :style => "margin: 0px; width: 97%;", :type => "text"}/
+                  .row-fluid
+                    .span12
+                      %label Version
+                      %input{:disabled => "disabled", :placeholder => "1.2", :style => "margin: 0px; width: 97%;", :type => "text"}/
+                  .row-fluid
+                    .span12
+                      %label Scope / Applicability of this Program
+                      %textarea#textarea{:disabled => "disabled", :placeholder => "", :rows => "3", :style => "margin: 0px; width: 98%; height: 73px; "} PCI DDS applies whenever Cardholder account data and Authentication Data is Stored, Processed or Transmitted. Examples Include: For more See Page 7 of document. Using h6 makes the label caps.
+            %hr.hr-widget
+            .warningwell
+              The edit (or link) subaction button beside the closed subarea should probably be hidden until that area is opened. Otherwise they know not what they do.
+  
+  
+  
+      #modals
+  
+      #typography
+  
+      #thumbnails
+  
+      #contentslots.WidgetBox
+        .WidgetBoxHeading
+          .WidgetTitle Content Slots
+          %nav
+        .WidgetBoxContent.information.collapse.in
+          
+          
+          #contentslotsContent.collapse.in
+            %hr.hr-widget
+            %ul
+              %li
+                .row-fluid
+                  .slot.span12.programslot.selected 
+                    .slottitle.span8.toggle{"data-target" => "#programslot2", "data-toggle" => "collapse"}
+                      .expander
+                      %span.prefix Expander Group
+                      This is an item that owns others. Currently expanders (chevron) are only one color.
+                    .span2.slotcolumn
+                      .halfopacity.span12.nominheight.btn.btn-slotcolumn Full Audit
                     .slotowner.span1
-                      %a.slotowner{:href => "http://www.youtube.com/watch?v=oHg5SJYRHA0"} Rick Astley
+                      %a.slotowner GRC
                     .slotactions.pull-right
-                      %a.btn.btn-mini.btn-blue{"data-target" => "#Threat-1-summary", "data-toggle" => "collapse"}
+                      %a#tooltip11.btn.btn-mini.btn-blue{"rel" => "tooltip", "data-placement" => "left", "title" => "More", "data-target" => "#programslot-summary", "data-toggle" => "collapse"}
                         %i.grcicon-more
-          .infowell
-            Height set by .doubleslot and the line-height/margins/padding of slotowner and slotaction styled by being inside doubleslot
-          .warningwell
-            Enddot vs expander are colorized for other slot types but use a redundant class on enddot. Make it a child selector of the slot.
-    #colors
-
-      %h3 system, product, process, regulation, control
-    =render :partial => 'design/widgets/impactscope'
-    / end of span
+                  #programslot-summary.row-fluid.collapse
+                    .span12.morewell.statusblue.nominheight
+  
+                      .slotcontent.span12
+                       
+  
+                        %ul.contentactions.pull-right
+                          %li
+                            %a#tooltip1.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Edit this object", "data-toggle" => "modal", :href => "#comingsoonModal"}
+                              %i.grcicon-edit-grey
+                          %li
+                            %a#tooltip2.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Link objects to this object", "data-toggle" => "modal", :href => "#comingsoonModal"}
+                              %i.grcicon-link
+                          %li
+                            %a#tooltip3.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", "data-toggle" => "modal", :href => "#comingsoonModal"}
+                              %i.grcicon-arrowright-black
+  
+                        "Hi I am a general description or some such info box that you requested to see. You can't edit me. You can just enjoy the beautiful knowledge I pour into your ocular cavities. Learn my friend. Learn. Or if you don't want to just glaze over and scan down until you see the information you truly wanted." -Abraham Lincoln
+                        %ul.slotlist
+                          %li
+                            .row-fluid
+                              .slot.span12.regulationslot.statusgreen
+                                .slottitle.span8.toggle{"data-target" => "#demo1-1-summary", "data-toggle" => "collapse"}
+                                  .enddot
+                                  %span.prefix Proc-1
+                                  Enable processes to provide for timely forensic investigation in the event of a ...
+                                .slotcolumn.span2
+                                  .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
+                                .slotowner.span1
+                                  %a.slotowner{:href => "http://www.youtube.com/watch?v=oHg5SJYRHA0"} Rick Astley
+                                .slotactions.pull-right
+                                  %a.btn.btn-mini.btn-blue{"data-target" => "#demo1-1-summary", "data-toggle" => "collapse"}
+                                    %i.grcicon-more
+                            #demo1-1-summary.row-fluid.collapse
+                              .span12.nominheight
+                                .slotcontent.span12
+                                  %ul.contentactions.pull-right
+                                    %li
+                                      %a.btn.btn-mini.halfopacity{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                                        %i.grcicon-edit-grey
+                                    %li
+                                      %a.btn.btn-mini.halfopacity{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                                        %i.grcicon-link
+                                    %li
+                                      %a.btn.btn-mini.halfopacity{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                                        %i.grcicon-arrowright-black
+                                  Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider. Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider. Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
+  
+                                  Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
+                      
+                            %li
+                              .row-fluid
+                                .slot.span12.processslot.toggle{"data-target" => "#demo2-4-c2", "data-toggle" => "collapse"}
+                                  %span.prefix Proc-2-1 Control 2
+                                  Also without a [...] button.
+                                  .enddot.process
+                              .row-fluid#demo2-4-c2.collapse
+                                .slotcontent
+                                  Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
+                            %li
+                              .row-fluid
+                                .slot.span12.processslot.toggle{"data-target" => "#demo2-4-c3", "data-toggle" => "collapse"}
+                                  %span.prefix Proc-2-1 Control 3
+                                  Enable processes to provide for timely forensic investigation in the event of a ...
+                                  .enddot.process
+                              .row-fluid#demo2-4-c3.collapse
+                                .slotcontent
+                                  Enable processes to provide for timely forensic investigation in the event of a compromise to any hosted merchant or service provider.
+  
+                  #programslot2.row-fluid.collapse
+                    %ul
+                      %li
+                        %ul.slotlist
+                          %li
+                            .row-fluid
+                              .slot.span12.programslot
+                                .slottitle.span8.toggle{"data-target" => "#programslot2-1-summary", "data-toggle" => "collapse"}
+                                  .expander
+                                  %span.prefix Program
+                                  This is a program slot, non group etc - has no coloring
+                                .slotcolumn.span2
+                                  .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
+                                .slotowner.span1
+                                  %a.slotowner{:href => "http://www.youtube.com/watch?v=oHg5SJYRHA0"} Rick Astley
+                                .slotactions.pull-right
+                                  %a.btn.btn-mini.btn-blue.halfopacity{"data-target" => "#programslot2-1-more", "data-toggle" => "collapse"}
+                                    %i.grcicon-more
+                            #programslot2-1-more.row-fluid.collapse
+                              .span12.morewell.statusgreen.nominheight
+                                .slotcontent.span12
+                                  %ul.contentactions.pull-right
+                                    %li
+                                      %a#tooltip47.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Edit this object", "data-toggle" => "modal", :href => "#comingsoonModal"}
+                                        %i.grcicon-edit-grey
+                                    %li
+                                      %a#tooltip46.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Link objects to this object", "data-toggle" => "modal", :href => "#comingsoonModal"}
+                                        %i.grcicon-link
+                                    %li
+                                      %a#tooltip45.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", "data-toggle" => "modal", :href => "#comingsoonModal"}
+                                        %i.grcicon-arrowright-black
+                                  Textual description here.)
+  
+  
+                      %ul#programslot2-1-summary.collapse
+                        %li
+                          %ul.slotlist      
+                            %li
+                              %ul.slotlist
+                                %li
+                                  .row-fluid
+                                    .slot.span12.regulationslot
+                                      .slottitle.span8.toggle{"data-target" => "#regulationslot-1-summary", "data-toggle" => "collapse"}
+                                        .enddot.regulation
+                                        %span.prefix Regulation
+                                        This is a regulation slot.
+                                      .slotcolumn.span2
+                                        .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
+                                      .slotowner.span1
+                                        %a.slotowner{:href => "http://www.youtube.com/watch?v=oHg5SJYRHA0"} Rick Astley
+                                      .slotactions.pull-right
+                                        %a.btn.btn-mini.btn-blue.halfopacity{"data-target" => "#regulationslot-1-summary", "data-toggle" => "collapse"}
+                                          %i.grcicon-more
+                                  #regulationslot-1-summary.row-fluid.collapse
+                                    .span12.morewell.statusgreen.nominheight
+                                      .slotcontent.span12
+                                        %ul.contentactions.pull-right
+                                          %li
+                                            %a#tooltip50.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Edit this object", "data-toggle" => "modal", :href => "#comingsoonModal"}
+                                              %i.grcicon-edit-grey
+                                          %li
+                                            %a#tooltip49.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Link objects to this object", "data-toggle" => "modal", :href => "#comingsoonModal"}
+                                              %i.grcicon-link
+                                          %li
+                                            %a#tooltip48.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", "data-toggle" => "modal", :href => "#comingsoonModal"}
+                                              %i.grcicon-arrowright-black
+                                        Textual description here.)
+                                
+                                %li
+                                  .row-fluid
+                                    .slot.span12.processslot
+                                      .slottitle.span8.toggle{"data-target" => "#Process-21-more", "data-toggle" => "collapse"}
+                                        .enddot.process
+                                        %span.prefix Process
+                                        This is a system slot.
+                                      .slotcolumn.span2
+                                        .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
+                                      .slotowner.span1
+                                        %a.slotowner{:href => "http://www.youtube.com/watch?v=oHg5SJYRHA0"} Rick Astley
+                                      .slotactions.pull-right
+                                        %a.btn.btn-mini.btn-blue.halfopacity{"data-target" => "#Process-21-more", "data-toggle" => "collapse"}
+                                          %i.grcicon-more
+                                  #Process-21-more.row-fluid.collapse
+                                    .span12.morewell.statusblue.nominheight
+                                      .slotcontent.span12
+                                        %ul.contentactions.pull-right
+                                          %li
+                                            %a#tooltip40.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Edit this object", "data-toggle" => "modal", :href => "#comingsoonModal"}
+                                              %i.grcicon-edit-grey
+                                          %li
+                                            %a#tooltip39.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Link objects to this object", "data-toggle" => "modal", :href => "#comingsoonModal"}
+                                              %i.grcicon-link
+                                          %li
+                                            %a#tooltip38.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", "data-toggle" => "modal", :href => "#comingsoonModal"}
+                                              %i.grcicon-arrowright-black
+                                        Textual description here.)
+                                  #Process-1-summary.collapse
+                                    %ul
+                                      %li
+                                        .row-fluid
+                                          .slot.span12.controlslot
+                                            .slottitle.span8.toggle{"data-target" => "#Control-1-summary", "data-toggle" => "collapse"}
+                                              .expander
+                                              %span.prefix Control 1
+                                              This is a control slot.
+                                            .slotcolumn.span2
+                                              .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
+                                            .slotowner.span1
+                                              %a.slotowner{:href => "http://www.youtube.com/watch?v=oHg5SJYRHA0"} Rick Astley
+                                            .slotactions.pull-right
+                                              %a#tooltip27.btn.btn-mini{"rel" => "tooltip", "data-placement" => "left", "title" => "Go to this control page", "data-toggle" => "modal", :href => "#comingsoonModal"}
+                                                %i.halfopacity.grcicon-arrowright-black
+                                        #Control-1-summary.row-fluid.collapse
+                                          
+                                          %ul
+                                            %li
+                                              .row-fluid
+                                                .slot.span12.controlslot
+                                                  .slottitle.span8.toggle{"data-target" => "#Control2a-1-summary", "data-toggle" => "collapse"}
+                                                    .enddot
+                                                    %span.prefix Control 1A
+                                                    This is a control slot.
+                                                  .slotcolumn.span2
+                                                    .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
+                                                  .slotowner.span1
+                                                    %a.slotowner{:href => "http://www.youtube.com/watch?v=oHg5SJYRHA0"} Rick Astley
+                                                  .slotactions.pull-right
+                                                    %a#tooltip26.btn.btn-mini{"rel" => "tooltip", "data-placement" => "left", "title" => "Go to this control page", "data-toggle" => "modal", :href => "#comingsoonModal"}
+                                                      %i.halfopacity.grcicon-arrowright-black
+                                              -#Control2a-1-summary.row-fluid.collapse
+                                                .span12.morewell.statusblue.nominheight
+                                                  .slotcontent.span12
+                                                    %ul.contentactions.pull-right
+                                                      %li
+                                                        %a#tooltip41.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Edit this object", "data-toggle" => "modal", :href => "#comingsoonModal"}
+                                                          %i.grcicon-edit-grey
+                                                      %li
+                                                        %a#tooltip42.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Link objects to this object", "data-toggle" => "modal", :href => "#comingsoonModal"}
+                                                          %i.grcicon-link
+                                                      %li
+                                                        %a#tooltip43.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", "data-toggle" => "modal", :href => "#comingsoonModal"}
+                                                          %i.grcicon-arrowright-black
+                                                    Textual description here.)
+                                      %li
+                                        .row-fluid
+                                          .slot.span12.controlslot
+                                            .slottitle.span8.toggle{"data-target" => "#Control-2-summary", "data-toggle" => "collapse"}
+                                              .enddot.default
+                                              %span.prefix Control 2
+                                              This is a control slot.
+                                            .slotcolumn.span2
+                                              .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
+                                            .slotowner.span1
+                                              %a.slotowner{:href => "http://www.youtube.com/watch?v=oHg5SJYRHA0"} Rick Astley
+                                            .slotactions.pull-right
+                                              %a#tooltip25.btn.btn-mini{"rel" => "tooltip", "data-placement" => "left", "title" => "Go to this control page", "data-toggle" => "modal", :href => "#comingsoonModal"}
+                                                %i.halfopacity.grcicon-arrowright-black
+                                        -#Control-2-summary.row-fluid.collapse
+                                          .span12.morewell.statusblue.nominheight
+                                            .slotcontent.span12
+                                              %ul.contentactions.pull-right
+                                                %li
+                                                  %a#tooltip41.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Edit this object", "data-toggle" => "modal", :href => "#comingsoonModal"}
+                                                    %i.grcicon-edit-grey
+                                                %li
+                                                  %a#tooltip42.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Link objects to this object", "data-toggle" => "modal", :href => "#comingsoonModal"}
+                                                    %i.grcicon-link
+                                                %li
+                                                  %a#tooltip43.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", "data-toggle" => "modal", :href => "#comingsoonModal"}
+                                                    %i.grcicon-arrowright-black
+                                              Textual description here.)
+                                %li
+                                  .row-fluid
+                                    .slot.span12.systemslot
+                                      .slottitle.span8.toggle{"data-target" => "#system-1-summary", "data-toggle" => "collapse"}
+                                        .enddot.control
+                                        %span.prefix System
+                                        This is a system slot.
+                                      .slotcolumn.span2
+                                        .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
+                                      .slotowner.span1
+                                        %a.slotowner{:href => "http://www.youtube.com/watch?v=oHg5SJYRHA0"} Rick Astley
+                                      .slotactions.pull-right
+                                        %a.btn.btn-mini.btn-blue.halfopacity{"data-target" => "#system-1-summary", "data-toggle" => "collapse"}
+                                          %i.grcicon-more
+                                  #system-1-summary.row-fluid.collapse
+                                    .span12.morewell.statusyellow.nominheight
+                                      .slotcontent.span12
+                                        %ul.contentactions.pull-right
+                                          %li
+                                            %a#tooltip30.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Edit this object", "data-toggle" => "modal", :href => "#comingsoonModal"}
+                                              %i.grcicon-edit-grey
+                                          %li
+                                            %a#tooltip39.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Link objects to this object", "data-toggle" => "modal", :href => "#comingsoonModal"}
+                                              %i.grcicon-link
+                                          %li
+                                            %a#tooltip38.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", "data-toggle" => "modal", :href => "#comingsoonModal"}
+                                              %i.grcicon-arrowright-black
+                                        Textual description here.)
+                                %li
+                                  .row-fluid
+                                    .slot.span12.riskslot
+                                      .slottitle.span8.toggle{"data-target" => "#Threat-1-summary", "data-toggle" => "collapse"}
+                                        .enddot.risk
+                                        %span.prefix Risk 
+                                        This is a risk slot.
+                                      .slotcolumn.span2
+                                        .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
+                                      .slotowner.span1
+                                        %a.slotowner{:href => "http://www.youtube.com/watch?v=oHg5SJYRHA0"} Rick Astley
+                                      .slotactions.pull-right
+                                        %a.btn.btn-mini.btn-blue.halfopacity{"data-target" => "#Threat-1-summary", "data-toggle" => "collapse"}
+                                          %i.grcicon-more
+                                  #Threat-1-summary.row-fluid.collapse
+                                    .span12.morewell.statusred.nominheight
+                                      .slotcontent.span12
+                                        %ul.contentactions.pull-right
+                                          %li
+                                            %a#tooltip20.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Edit this object", "data-toggle" => "modal", :href => "#comingsoonModal"}
+                                              %i.grcicon-edit-grey
+                                          %li
+                                            %a#tooltip29.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Link objects to this object", "data-toggle" => "modal", :href => "#comingsoonModal"}
+                                              %i.grcicon-link
+                                          %li
+                                            %a#tooltip28.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", "data-toggle" => "modal", :href => "#comingsoonModal"}
+                                              %i.grcicon-arrowright-black
+                                        Textual description here.)
+                                %li
+                                  .row-fluid
+                                    .slot.span12.riskyslot
+                                      .slottitle.span8.toggle{"data-target" => "#tooltiptest-1-summary", "data-toggle" => "collapse"}
+                                        .enddot.risk
+                                        %span.prefix Risky Attribute
+                                        This is a risky slot.
+                                      .slotcolumn.span2
+                                        .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
+                                      .slotowner.span1
+                                        %a.slotowner{:href => "http://www.youtube.com/watch?v=oHg5SJYRHA0"} Rick Astley
+                                      .slotactions.pull-right
+                                        %a.btn.btn-mini.btn-blue.halfopacity{"data-target" => "#tooltiptest-1-summary", "data-toggle" => "collapse"}
+                                          %i.grcicon-more
+                                  #tooltiptest-1-summary.row-fluid.collapse
+                                    .span12.morewell.statuspurple.nominheight
+                                      .slotcontent.span12
+                                        %ul.contentactions.pull-right
+                                          %li
+                                            %a#tooltip14.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Edit this object", "data-toggle" => "modal", :href => "#comingsoonModal"}
+                                              %i.grcicon-edit-grey
+                                          %li
+                                            %a#tooltip13.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Link objects to this object", "data-toggle" => "modal", :href => "#comingsoonModal"}
+                                              %i.grcicon-link
+                                          %li
+                                            %a#tooltip12.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", "data-toggle" => "modal", :href => "#comingsoonModal"}
+                                              %i.grcicon-arrowright-black
+                                        Threat well no Data Integrity Risky
+  
+            %hr
+                
+            .infowell
+              Color is set by the type of slot, ie. - riskyslot, riskslot, controlslot, processslot, etc (class)
+            .warningwell
+              Slot height is set not dynamic - so there is a different class for two lines (doubleslot - see below)
+            %hr.hr-widget
+  
+            %ul
+              %li
+                .row-fluid
+                  .doubleslot.span12.toggle{"data-target" => "#Threat-1-summary", "data-toggle" => "collapse"}
+                    .row-fluid
+                      .slottitle.span8
+                        .enddot.risk
+                        %span.controls-group Double line Title
+                        %br
+                        This is a general description. Done by line-height and br.
+                      .slotcolumn.span2
+                        .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
+                      .slotowner.span1
+                        %a.slotowner{:href => "http://www.youtube.com/watch?v=oHg5SJYRHA0"} Rick Astley
+                      .slotactions.pull-right
+                        %a.btn.btn-mini.btn-blue{"data-target" => "#Threat-1-summary", "data-toggle" => "collapse"}
+                          %i.grcicon-more
+            .infowell
+              Height set by .doubleslot and the line-height/margins/padding of slotowner and slotaction styled by being inside doubleslot
+            .warningwell
+              Enddot vs expander are colorized for other slot types but use a redundant class on enddot. Make it a child selector of the slot.
+      #colors
+  
+        %h3 system, product, process, regulation, control
+      =render :partial => 'design/widgets/impactscope'
+      / end of span

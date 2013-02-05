@@ -1,148 +1,167 @@
 -content_for :modal_title do
-  %h1=context[:title]
+  =context[:title]
 
 %script#relationship_option_data{ :type => 'text/html' }
-  %span.company <%= object.slug %>
   %span.name <%= object.title %>
+  %span.option <%= object.slug %>
 
 %script#relationship_selected{ :type => 'text/html', :'data-member' => 'relationship', :'data-type' => '', :'data-start_date' => '', :'data-stop_date' => '' }
   %li{ :'data-id' => '<%= id %>', :'data-object-id' => '<%= object.id %>', :'data-name' => '<%= object.name %>', :'data-company' => '<%= object.company %>' }
-    .row-fluid.help-inline
     .row-fluid
       .span6.object_info{ :'data-template-id' => 'relationship_option_data' }
       .span6.actions
-        %input{ :type => 'hidden', :name => 'items[<%= id %>][id]', :value => '<% if (id.toString().substr(0,3) != "new") { %><%= id %><% } %>'.html_safe }
-        %input{ :type => 'hidden', :name => 'items[<%= id %>][relationship_type]', :value => context[:relationship_type] }
-        %input{ :type => 'hidden', :name => 'items[<%= id %>][related_type]', :value => context[:related_type] }
-        %input{ :type => 'hidden', :name => 'items[<%= id %>][related_id]', :value => '<%= object.id %>' }
-        %input{ :type => 'hidden', :name => 'items[<%= id %>][related_side]', :value => context[:related_side] }
-        %input{ :type => 'hidden', :name => 'items[<%= id %>][object_id]', :value => context[:object_id] }
-        %input{ :type => 'hidden', :name => 'items[<%= id %>][object_type]', :value => context[:object_type] }
-        %input._destroy{ :type => 'hidden', :name => 'items[<%= id %>][_destroy]', :value => '' }
-
-        %a.widgetbtn.pull-right{ :href => '#', :'data-toggle' => 'selector-list-remove' }
-          %i.grcicon-remove
-        %a.widgetbtn.pull-right{ :href => url_for(:action => :edit, :controller => context[:related_type].underscore.pluralize, :id => '<%=object.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
-          %i.grcicon-edit-grey
-        %h6.state
+        %span.state
+        .pull-right
+          %input{ :type => 'hidden', :name => 'items[<%= id %>][id]', :value => '<% if (id.toString().substr(0,3) != "new") { %><%= id %><% } %>'.html_safe }
+          %input{ :type => 'hidden', :name => 'items[<%= id %>][relationship_type]', :value => context[:relationship_type] }
+          %input{ :type => 'hidden', :name => 'items[<%= id %>][related_type]', :value => context[:related_type] }
+          %input{ :type => 'hidden', :name => 'items[<%= id %>][related_id]', :value => '<%= object.id %>' }
+          %input{ :type => 'hidden', :name => 'items[<%= id %>][related_side]', :value => context[:related_side] }
+          %input{ :type => 'hidden', :name => 'items[<%= id %>][object_id]', :value => context[:object_id] }
+          %input{ :type => 'hidden', :name => 'items[<%= id %>][object_type]', :value => context[:object_type] }
+          %input._destroy{ :type => 'hidden', :name => 'items[<%= id %>][_destroy]', :value => '' }
+          %a.widgetbtn.btn.btn-mini{ :href => url_for(:action => :edit, :controller => context[:related_type].underscore.pluralize, :id => '<%=object.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
+            %i.grcicon-edit-new
+          %a.widgetbtn.btn.btn-mini{ :href => '#', :'data-toggle' => 'selector-list-remove' }
+            %i.grcicon-remove
 
 %script#relationship_system_option{ :type => 'text/html', :'data-prefix' => 'system' }
   %li{ :'data-id' => '<%= system.id %>', :'data-title' => '<%= system.title %>', :'data-slug' => '<%= system.slug %>' }
     .row-fluid
       .span8
-        %span.company <%= system.slug %>
         %span.name <%= system.title %>
+        %span.option <%= system.slug %>
+        
       .span4.actions
-        %a.widgetbtn.pull-right.add-me{:href => "#", :'data-toggle' => 'selector-list-select'}
-          %i.grcicon-chevron-right
-        %a.widgetbtn.pull-right{:href => edit_flow_system_path('<%=system.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
-          %i.grcicon-edit-grey
+        .pull-right
+          %a.widgetbtn.btn.btn-mini{:href => edit_flow_system_path('<%=system.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
+            %i.grcicon-edit-new
+          %a.widgetbtn.add-me.btn.btn-mini{:href => "#", :'data-toggle' => 'selector-list-select'}
+            %i.grcicon-chevron-right
 
 %script#relationship_program_option{ :type => 'text/html', :'data-prefix' => 'program' }
   %li{ :'data-id' => '<%= program.id %>', :'data-title' => '<%= program.title %>', :'data-slug' => '<%= program.slug %>' }
     .row-fluid
       .span8
-        %span.company <%= program.slug %>
         %span.name <%= program.title %>
+        %span.option <%= program.slug %>
+        
       .span4.actions
-        %a.widgetbtn.pull-right.add-me{:href => "#", :'data-toggle' => 'selector-list-select'}
-          %i.grcicon-chevron-right
-        %a.widgetbtn.pull-right{:href => edit_flow_program_path('<%=program.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
-          %i.grcicon-edit-grey
+        .pull-right
+          %a.widgetbtn.btn.btn-mini{:href => edit_flow_program_path('<%=program.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
+            %i.grcicon-edit-new
+          %a.widgetbtn.add-me.btn.btn-mini{:href => "#", :'data-toggle' => 'selector-list-select'}
+            %i.grcicon-chevron-right
 
 %script#relationship_product_option{ :type => 'text/html', :'data-prefix' => 'product' }
   %li{ :'data-id' => '<%= product.id %>', :'data-title' => '<%= product.title %>', :'data-slug' => '<%= product.slug %>' }
     .row-fluid
       .span8
-        %span.company <%= product.slug %>
         %span.name <%= product.title %>
+        %span.option <%= product.slug %>
+        
       .span4.actions
-        %a.widgetbtn.pull-right.add-me{:href => "#", :'data-toggle' => 'selector-list-select'}
-          %i.grcicon-chevron-right
-        %a.widgetbtn.pull-right{:href => edit_flow_product_path('<%=product.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
-          %i.grcicon-edit-grey
+        .pull-right
+          %a.widgetbtn.btn.btn-mini{:href => edit_flow_product_path('<%=product.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
+            %i.grcicon-edit-new
+          %a.widgetbtn.add-me.btn.btn-mini{:href => "#", :'data-toggle' => 'selector-list-select'}
+            %i.grcicon-chevron-right
 
 %script#relationship_org_group_option{ :type => 'text/html', :'data-prefix' => 'org_group' }
   %li{ :'data-id' => '<%= org_group.id %>', :'data-title' => '<%= org_group.title %>', :'data-slug' => '<%= org_group.slug %>' }
     .row-fluid
       .span8
-        %span.company <%= org_group.slug %>
         %span.name <%= org_group.title %>
+        %span.option <%= org_group.slug %>
+        
       .span4.actions
-        %a.widgetbtn.pull-right.add-me{:href => "#", :'data-toggle' => 'selector-list-select'}
-          %i.grcicon-chevron-right
-        %a.widgetbtn.pull-right{:href => edit_flow_org_group_path('<%=org_group.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
-          %i.grcicon-edit-grey
+        .pull-right
+          %a.widgetbtn.btn.btn-mini{:href => edit_flow_org_group_path('<%=org_group.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
+            %i.grcicon-edit-new
+          %a.widgetbtn.btn.btn-mini.add-me{:href => "#", :'data-toggle' => 'selector-list-select'}
+            %i.grcicon-chevron-right
 
 %script#relationship_facility_option{ :type => 'text/html', :'data-prefix' => 'facility' }
   %li{ :'data-id' => '<%= facility.id %>', :'data-title' => '<%= facility.title %>', :'data-slug' => '<%= facility.slug %>' }
     .row-fluid
       .span8
-        %span.company <%= facility.slug %>
         %span.name <%= facility.title %>
+        %span.option <%= facility.slug %>
+        
       .span4.actions
-        %a.widgetbtn.pull-right.add-me{:href => "#", :'data-toggle' => 'selector-list-select'}
-          %i.grcicon-chevron-right
-        %a.widgetbtn.pull-right{:href => edit_flow_facility_path('<%=facility.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
-          %i.grcicon-edit-grey
+        .pull-right
+          %a.widgetbtn.btn.btn-mini{:href => edit_flow_facility_path('<%=facility.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
+            %i.grcicon-edit-new
+          %a.widgetbtn.add-me.btn.btn-mini{:href => "#", :'data-toggle' => 'selector-list-select'}
+            %i.grcicon-chevron-right
 
 %script#relationship_market_option{ :type => 'text/html', :'data-prefix' => 'market' }
   %li{ :'data-id' => '<%= market.id %>', :'data-title' => '<%= market.title %>', :'data-slug' => '<%= market.slug %>' }
     .row-fluid
       .span8
-        %span.company <%= market.slug %>
         %span.name <%= market.title %>
+        %span.option <%= market.slug %>
+        
       .span4.actions
-        %a.widgetbtn.pull-right.add-me{:href => "#", :'data-toggle' => 'selector-list-select'}
-          %i.grcicon-chevron-right
-        %a.widgetbtn.pull-right{:href => edit_flow_market_path('<%=market.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
-          %i.grcicon-edit-grey
+        .pull-right
+          %a.widgetbtn.btn.btn-mini{:href => edit_flow_market_path('<%=market.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
+            %i.grcicon-edit-new
+          %a.widgetbtn.add-me.btn.btn-mini{:href => "#", :'data-toggle' => 'selector-list-select'}
+            %i.grcicon-chevron-right
 
 %script#relationship_data_asset_option{ :type => 'text/html', :'data-prefix' => 'data_asset' }
   %li{ :'data-id' => '<%= data_asset.id %>', :'data-title' => '<%= data_asset.title %>', :'data-slug' => '<%= data_asset.slug %>' }
     .row-fluid
       .span8
-        %span.company <%= data_asset.slug %>
         %span.name <%= data_asset.title %>
+        %span.option <%= data_asset.slug %>
+        
       .span4.actions
-        %a.widgetbtn.pull-right.add-me{:href => "#", :'data-toggle' => 'selector-list-select'}
-          %i.grcicon-chevron-right
-        %a.widgetbtn.pull-right{:href => edit_flow_data_asset_path('<%=data_asset.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
-          %i.grcicon-edit-grey
+        .pull-right
+          %a.widgetbtn.btn.btn-mini{:href => edit_flow_data_asset_path('<%=data_asset.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
+            %i.grcicon-edit-new
+          %a.widgetbtn.btn.btn-mini.add-me{:href => "#", :'data-toggle' => 'selector-list-select'}
+            %i.grcicon-chevron-right
 
 %script#relationship_project_option{ :type => 'text/html', :'data-prefix' => 'project' }
   %li{ :'data-id' => '<%= project.id %>', :'data-title' => '<%= project.title %>', :'data-slug' => '<%= project.slug %>' }
     .row-fluid
       .span8
-        %span.company <%= project.slug %>
         %span.name <%= project.title %>
+        %span.option <%= project.slug %>
+        
       .span4.actions
-        %a.widgetbtn.pull-right.add-me{:href => "#", :'data-toggle' => 'selector-list-select'}
-          %i.grcicon-chevron-right
-        %a.widgetbtn.pull-right{:href => edit_flow_project_path('<%=project.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
-          %i.grcicon-edit-grey
+        .pull-right
+          %a.widgetbtn.btn.btn-mini{:href => edit_flow_project_path('<%=project.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
+            %i.grcicon-edit-new
+          %a.widgetbtn.add-me.btn.btn-mini{:href => "#", :'data-toggle' => 'selector-list-select'}
+            %i.grcicon-chevron-right
 
 %script#relationship_risky_attribute_option{ :type => 'text/html', :'data-prefix' => 'risky_attribute' }
   %li{ :'data-id' => '<%= risky_attribute.id %>', :'data-title' => '<%= risky_attribute.title %>', :'data-slug' => '<%= risky_attribute.slug %>' }
     .row-fluid
       .span8
-        %span.company <%= risky_attribute.slug %>
         %span.name <%= risky_attribute.title %>
+        %span.option <%= risky_attribute.slug %>
+        
       .span4.actions
-        %a.widgetbtn.pull-right.add-me{:href => "#", :'data-toggle' => 'selector-list-select'}
-          %i.grcicon-chevron-right
-        %a.widgetbtn.pull-right{:href => edit_flow_risky_attribute_path('<%=risky_attribute.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
-          %i.grcicon-edit-grey
+        .pull-right
+          %a.widgetbtn.btn.btn-mini{:href => edit_flow_risky_attribute_path('<%=risky_attribute.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
+            %i.grcicon-edit-new
+          %a.widgetbtn.btn.btn-mini.add-me{:href => "#", :'data-toggle' => 'selector-list-select'}
+            %i.grcicon-chevron-right
 
 
-.row-fluid
+.row-fluid.modal-source
   .span6
-    %h4
-      =context[:source_title]
-      %a.widgetbtn.widgetbtnselector{ :href => context[:option_new_url], :'data-toggle' => 'modal-ajax-listnewform', :'data-selector-target' => '.source, .target' }
-        %i.grcicon-add
-      .pull-right
-        %input.widgetsearch{:type => "text", :placeholder => context[:source_search_text]}
+    .row-fluid
+      .span7
+        %h3
+          =context[:source_title]
+          %a.widgetbtn.widgetbtnselector.btn.btn-add{ :href => context[:option_new_url], :'data-toggle' => 'modal-ajax-listnewform', :'data-selector-target' => '.source, .target' }
+            %i.grcicon-add-new
+      .span5
+        %input.widgetsearch.input-block-level{:type => "text", :placeholder => context[:source_search_text]}
     .filter-block
       .row-fluid
         .span12
@@ -152,7 +171,7 @@
                 .people-list
                   %ul.source{ :'data-list-data-href' => context[:options_url], :'data-template-id' => "relationship_#{context[:related_type].underscore}_option" }
   .span6
-    %h4
+    %h3
       =context[:target_title]
     .people-list.currentlist
       %ul.target{ :'data-list-data-href' => context[:selected_url], :'data-template-id' => "relationship_selected" }

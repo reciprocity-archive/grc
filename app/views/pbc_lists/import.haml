@@ -5,16 +5,19 @@
 -content_for :page_help, 'pbc_list_import'
 
 -content_for :header do
-  %ol#breadcrumb
+
+  %ul.breadcrumbs
     %li=link_to 'PROGRAMS', programs_dash_path
     %li=link_to instance.audit_cycle.program.title, flow_program_path(instance.audit_cycle.program_id)
     %li=link_to 'AUDITS', flow_program_path(instance.audit_cycle.program_id)
     %li=link_to instance.audit_cycle.title, flow_cycle_path(instance.audit_cycle)
     %li=link_to 'PBC List', flow_pbc_list_path(instance)
-    %li.last Import
+    %li Import
     
-  .location#pageTitle Import PBC list
+  %h1
+    Import PBC list
 
-.row-static
-  =render :partial => 'pbc_lists/import',
-          :layout => 'layouts/widget_box'
+.container-fluid
+  .row-fluid
+    =render :partial => 'pbc_lists/import',
+            :layout => 'layouts/widget_box'

@@ -3,11 +3,7 @@
 
 -content_for :widget_help, 'product_info'
 
--content_for :widget_buttons do
-  %a.widgetbtn{ :href => edit_flow_product_path(product), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide', :title => 'Edit Product' }
-    %i.grcicon-edit-grey
-  %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#productInfoContent"}
-    %i.grcicon-enlarge-grey
+-content_for :widget_id, 'product_info_widget'
 
 .information
   -if has_feature? :BETA
@@ -25,50 +21,58 @@
         .bar.progressbar-danger{"data-percentage" => "10", :style => "float: right; width: 0%; "}
         .bar.progressbar-warning{"data-percentage" => "5", :style => "float: right; width: 0%; "}
 
-  #productInfoContent.collapse.in
-    %hr.hr-widget
+%ul.info-list
+  %li.float-element
+    %label
+      Code
+    %span
+      =product.slug
+  %li.float-element
+    %label
+      Type
+    %span
+      =product.type && product.type.title
+  %li.float-element
+    %label
+      Full Title
+    %span
+      =product.title
+  %li
+    %label
+      Description
+    %span
+      =display_as_html product.description
+  %li.float-element
+    %label
+      Direct Link
+    %span
+      =link_to product.url do
+        =product.url
+  %li.float-element
+    %label
+      Effective Date
+    %span
+      =product.start_date && product.start_date.strftime("%m/%d/%y")
+  %li.float-element
+    %label
+      Stop Date
+    %span
+      =product.stop_date && product.stop_date.strftime("%m/%d/%y")
+      
 
-    .row-fluid
-      .span12
-        .span4
-          %label Code
-          %input.span12{:type => "text", :disabled => "disabled", :value => product.slug}
-        .span4
-          %label Type
-          %input.span12{:disabled => "disabled", :type => "text", :value => product.type && product.type.title}
-    .row-fluid
-      .span12
-        %label Full Title
-        %input.span12{:disabled => "disabled", :type => "text", :value => product.title}
-    -#.row-fluid
-      .span4
-        %label Version
-        %input.span12{:disabled => "disabled", :type => "text"}
-    .row-fluid
-      .span12
-        %label Description
-        =display_as_html product.description
+%ul.tree
+  %li.category
+    =render :partial => 'documents/object_list',
+            :locals  => { :object => product }
+  %li.category
+    =render :partial => 'people/object_list',
+            :locals  => { :object => product }
 
-    %hr.hr-widget
-
-    .row-fluid
-      .span12
-        =render :partial => 'documents/object_list',
-                :locals  => { :object => product }
-
-    %hr.hr-widget
-
-    .row-fluid
-      .span12
-        =render :partial => 'people/object_list',
-                :locals  => { :object => product }
-
-    %hr.hr-widget
-
-    .row-fluid
-      .span6.nominheight
-        %label.fltlft
-          %strong> Created: #{product.created_at.strftime("%m/%d/%y")}
-      .span6.nominheight
-        %label.fltrt
-          %strong> Updated: #{product.updated_at.strftime("%m/%d/%y")}
+%section.footer
+  .row-fluid
+    .span6
+      %p.footer-left
+        Created: #{product.created_at.strftime("%m/%d/%y")}
+    .span6
+      %p.footer-right
+        Updated: #{product.updated_at.strftime("%m/%d/%y")}

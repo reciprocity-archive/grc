@@ -1,12 +1,16 @@
 -content_for :page_help, 'import_controls'
 
 -content_for :header do
-  %ol#breadcrumb
+
+  %ul.breadcrumbs
     %li=link_to 'PROGRAMS', programs_dash_path
     %li=link_to @program.title, flow_program_path(@program)
-    %li.last Import
-  .location#pageTitle Import Controls
+    %li Import
+    
+  %h1
+    Import Controls
 
-.row-static
-  =render :partial => 'programs/import_controls',
-          :layout => 'layouts/widget_box'
+.container-fluid
+  .row-fluid
+    =render :partial => 'programs/import_controls',
+            :layout => 'layouts/widget_box'

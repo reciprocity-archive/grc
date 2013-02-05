@@ -14,7 +14,7 @@
   -content_for :modal_delete_path, delete_flow_control_path(f.object)
 
 .row-fluid
-  =wrapped_text_field f, :span4, :title, :placeholder => 'Enter title'
+  =wrapped_text_field f, :span4, :title, :placeholder => 'Enter title', :label_name => 'Title <span class="required">*</span>'.html_safe
   -programs = Program
   -programs = programs.where(:company => true) if only_company
   -programs = programs.where(:company => false) if only_regulation
@@ -36,7 +36,7 @@
       =wrapped_date_field f, :span4, :stop_date, :class => 'date', :label_name => 'Stop Date', :placeholder => 'MM/DD/YYYY'
 
 .row-fluid
-  =wrapped_text_area f, :span6, :description, :class => 'double wysihtml5', :id => "text1", :placeholder => 'Enter description here'
+  =wrapped_text_area f, :span6, :description, :class => 'double wysihtml5', :wrapper_div_class => 'wysiwyg-area', :id => "text1", :placeholder => 'Enter description here', :label_name => 'Description <span class="required">*</span>'.html_safe
   .span6
     .row-fluid
       -#=wrapped_select(f, :span6, :type_id, ['Regulation', 'Company'], :selected => f.object.company? ? 'Company' : 'Regulation', :)
@@ -67,9 +67,9 @@
 .row-fluid
   .span6{ :class => error_class(f, :documentation_description) }
     .row-fluid
-      =wrapped_text_area(f, :span12, :documentation_description, :placeholder => "One-sentence explanation of the applicability of this program, used in mail merge templates.", :rows => "3", :class => "double wysihtml5")
+      =wrapped_text_area(f, :span12, :documentation_description, :placeholder => "One-sentence explanation of the applicability of this program, used in mail merge templates.", :rows => "3", :class => "double wysihtml5", :wrapper_div_class => 'wysiwyg-area')
 
-  #assertionlist.span3.well{ :class => error_class(f, :assertions) }
+  #assertionlist.span3{ :class => error_class(f, :assertions) }
     %label{:for => 'control-assertions'} Assertions
     -assertion_list = Category.ctype(Control::CATEGORY_ASSERTION_TYPE_ID).order('lft ASC').all
     %select{:multiple => "multiple", :name => 'control[assertion_ids][]'}
@@ -78,7 +78,7 @@
           #{('&nbsp;&nbsp;&nbsp;' * category.depth).html_safe}#{category.name}
     =error_messages_inline(f, :assertions)
 
-  #categorylist.span3.well{ :class => error_class(f, :categories) }
+  #categorylist.span3{ :class => error_class(f, :categories) }
     %label{:for => 'control-categories'} Categories
     -category_tree = Category.ctype(Control::CATEGORY_TYPE_ID).order('lft ASC').all
     %select{:multiple => "multiple", :name => 'control[category_ids][]'}
@@ -90,6 +90,6 @@
 .row-fluid
   .span6{ :class => error_class(f, :notes) }
     .row-fluid
-      =wrapped_text_area(f, :span12, :notes, :placeholder => "Enter notes here", :rows => "3", :class => "double wysihtml5")
+      =wrapped_text_area(f, :span12, :notes, :placeholder => "Enter notes here", :rows => "3", :class => "double wysihtml5", :wrapper_div_class => 'wysiwyg-area')
 
 =render :partial => "shared/wysihtml5"

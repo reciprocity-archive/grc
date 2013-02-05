@@ -1,0 +1,46 @@
+-# locals: instance, title_attr, description_attr
+
+-code_attr = :slug if local_assigns[:code_attr].nil?
+-title_attr = :title if local_assigns[:title_attr].nil?
+-description_attr = :description if local_assigns[:description_attr].nil?
+
+-code = instance.send(code_attr)
+-title = instance.send(title_attr)
+-description = instance.send(description_attr)
+-description_inline = sanitize(description, :tags => [])
+
+.span10
+  -if title.present? && description.present?
+    -# Both title and description
+    .oneline.expand-on-hover
+      %span.code
+        =code
+      %span.title
+        =title
+        %i.description-inline=description_inline
+    .description
+      =display_as_html(description)
+  -elsif title.present?
+    -# Title only
+    .oneline.expandable
+      %span.code
+        =code
+      %span.title
+        =title
+  -elsif description.present?
+    -# Description only
+    .oneline.description-only.expand-on-hover
+      %span.code
+        =code
+      %span.title
+        %i.description-inline=description_inline
+    .description.inhover
+      =display_as_html(description) do
+        %span.code
+          =code
+        %br
+        %br
+  -else
+    -# Neither (shouldn't happen)
+    %span.title (No description)
+

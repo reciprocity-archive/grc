@@ -26,57 +26,32 @@
 -has_process_relationship = instance.has_valid_relationship?(process_relationship_type)
 
 %li{ :'data-object-id' => instance.id }
-  .row-fluid
-    .slot.span12.systemslot
-      .slottitle.span8.toggle{"data-target" => "##{main_toggle_target}", "data-toggle" => "collapse"}
-        -if expand_this
-          .expander{ :class => is_root && !expand_this ? 'in' : '' }
-        -else
-          .enddot
-        %span.prefix=instance.slug
-        =instance.title
-      -if has_feature? :BETA
-        .slotcolumn.span2
-          .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
-        .slotowner.span1
-          %a.slotowner{:href => "#"} Owner Jim
-      -else
-        .span3{"data-target" => "##{main_toggle_target}", "data-toggle" => "collapse"}
-      .slotactions.pull-right
-        %a.btn.btn-mini.btn-blue.halfopacity{ "data-target" => "##{summary_toggle_target}", "data-toggle" => "collapse", "rel" => "tooltip", "data-placement" => "left", "title" => "More" }
-          %i.grcicon-more
-
-  .row-fluid.collapse{ :id => summary_toggle_target, :class => is_root ? 'in' : '' }
-    .span12.morewell.statusblue.nominheight
-      .slotcontent.span12
-        %ul.contentactions.pull-right
-          %li
-            %a.btn.btn-mini.halfopacity{ "rel" => "tooltip", "data-placement" => "left", "title" => "Edit this object", 'data-modal-class' => 'modal-wide', 'data-form-target' => 'refresh', "data-toggle" => "modal-ajax-form", :href => url_for(:id => instance.id, :action => :edit, :controller => model_underscore.pluralize, :only_path => true) }
-              %i.grcicon-edit-grey
-          -if has_dependence_relationship
-            %li
-              %a.btn.btn-mini.halfopacity{ :rel => "tooltip", :'data-placement' => "left", :title => "Link #{instance.class.name.titleize.downcase.pluralize} to this object", :'data-modal-class' => 'modal-wide', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :'data-toggle' => "modal-ajax-relationship-selector", :href => list_edit_flow_relationships_path(:object_id => instance.id, :object_type => instance.class.name, :related_model => instance.class.name, :related_side => 'destination', :relationship_type => dependence_relationship_type) }
-                %i.grcicon-link
-          -if has_process_relationship
-            %li
-              %a.btn.btn-mini.halfopacity{ :rel => "tooltip", :"data-placement" => "left", :title => "Link processes to this object", :'data-modal-class' => 'modal-wide', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :"data-toggle" => "modal-ajax-relationship-selector", :href => list_edit_flow_relationships_path(:object_id => instance.id, :object_type => instance.class.name, :related_model => 'System', :related_side => 'destination', :relationship_type => process_relationship_type) }
-                %i.grcicon-link
-          -if !is_root
-            %li
-              %a.btn.btn-mini.halfopacity{ "rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => url_for(:id => instance.id, :action => :show, :controller => model_underscore.pluralize, :only_path => true) }
-                %i.grcicon-arrowright-black
-        =display_as_html instance.description
-
-  .collapse{ :id => objects_toggle_target }
-
+  .item-main
+    -if !is_root
+      .openclose{ :class => !expand_this && 'lastchild' }
+    .item-title{ :class => is_root && 'active' }
+      .row-fluid
+        =render :partial => 'object_leaf', :locals => { :instance => instance }
+      .item-actions
+        %a.btn.btn-mini.halfopacity{ "rel" => "tooltip", "data-placement" => "left", "title" => "Edit this object", 'data-modal-class' => 'modal-wide', 'data-form-target' => 'refresh', "data-toggle" => "modal-ajax-form", :href => url_for(:id => instance.id, :action => :edit, :controller => model_underscore.pluralize, :only_path => true) }
+          %i.grcicon-edit-new
+        -if has_dependence_relationship
+          %a.btn.btn-mini{ :rel => "tooltip", :'data-placement' => "left", :title => "Link #{instance.class.name.titleize.downcase.pluralize} to this object", :'data-modal-class' => 'modal-wide', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :'data-toggle' => "modal-ajax-relationship-selector", :href => list_edit_flow_relationships_path(:object_id => instance.id, :object_type => instance.class.name, :related_model => instance.class.name, :related_side => 'destination', :relationship_type => dependence_relationship_type) }
+            %i.grcicon-link-new
+        -if has_process_relationship
+          %a.btn.btn-mini{ :rel => "tooltip", :"data-placement" => "left", :title => "Link processes to this object", :'data-modal-class' => 'modal-wide', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :"data-toggle" => "modal-ajax-relationship-selector", :href => list_edit_flow_relationships_path(:object_id => instance.id, :object_type => instance.class.name, :related_model => 'System', :related_side => 'destination', :relationship_type => process_relationship_type) }
+            %i.grcicon-link-new
+        -if !is_root
+          %a.btn.btn-mini{ "rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => url_for(:id => instance.id, :action => :show, :controller => model_underscore.pluralize, :only_path => true) }
+            %i.grcicon-goto
+  .item-content{ :class => is_root && 'in' }
     -if !seen_this
-      -if has_process_relationship
-        %ul.slotlist
+      -if has_process_relationship && systems.count > 0
+        %ul.tree-structure
           -systems.each_with_index do |system, i|
             =render :partial => 'system_tree', :locals => { :system => system, :id_prefix => "#{id_prefix}-system-#{system.id}" }
 
-      -if has_dependence_relationship
-        %ul.slotlist
+      -if has_dependence_relationship && sub_objects.count > 0
+        %ul.tree-structure
           -sub_objects.each_with_index do |sub_object, i|
             =render :partial => 'object_tree', :locals => { :instance => sub_object, :id_prefix => "#{id_prefix}-sub-object-#{sub_object.id}", :seen_ids => seen_ids + [instance.id] }
-

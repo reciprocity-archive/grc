@@ -1,54 +1,51 @@
 -content_for :widget_title do
   Audit Info
 
--content_for :widget_help, 'cycle_info'
+-content_for :widget_id, "cycle_info_widget"
 
 -content_for :widget_buttons do
-  %a.widgetbtn{:href => edit_flow_cycle_path(cycle), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :title => 'Edit Audit Cycle'}
-    %i.grcicon-edit-grey
+  -if has_feature?(:BETA)
+    .filter
+      .row-fluid
+        .span12
+          .pull-right
+            %a.btn.btn-warning.actionbutton
+              Audit Dashboard
+            %a.btn.btn-warning.actionbutton
+              Invite Auditors
 
--if has_feature?(:BETA)
-  .row-fluid
-    .span6
-      %a.span12.btn.btn-warning.actionbutton
-        Audit Dashboard
-    .span6
-      %a.span12.btn.btn-warning.actionbutton
-        Invite Auditors
+-content_for :widget_help, 'cycle_info'
 
-.row-fluid
-  .span6
-    %h5 Audit Firm
-    %label=cycle.audit_firm
-  .span6
-    %h5 Audit Lead
-    %label=cycle.audit_lead
-    
+%ul.info-list
+  %li.float-element
+    %label
+      Audit Firm
+    %span
+      =cycle.audit_firm
+  %li.float-element
+    %label
+      Audit Lead
+    %span
+      =cycle.audit_lead
+  %li
+    %label
+      Description
+    %span
+      =display_as_html cycle.description
 
-
-%hr.hr-widget
-
-.row-fluid
-  .span12
+%ul.tree
+  %li.category
     =render :partial => 'documents/object_list',
             :locals  => { :object => cycle }
-
-%hr.hr-widget
-
-.row-fluid
-  .span12
+  %li.category
     =render :partial => 'people/object_list',
             :locals  => { :object => cycle }
 
-%hr.hr-widget
-
-.row-fluid
-  .span6.nominheight
-    %label.fltlft
-      %strong Created:
-      #{cycle.created_at.strftime("%m/%d/%y")}
-  .span6.nominheight
-    %label.fltrt
-      %strong Updated:
-      #{cycle.updated_at.strftime("%m/%d/%y")}
-
+%section.footer
+  .row-fluid
+    .span6
+      %p.footer-left
+        Created: #{cycle.created_at.strftime("%m/%d/%y")}
+    .span6
+      %p.footer-right
+        Updated: #{cycle.updated_at.strftime("%m/%d/%y")}

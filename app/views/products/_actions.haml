@@ -1,11 +1,18 @@
-.widget-toolbar
-  .row-fluid
-    .span2
-      %a.span12.btn.btn-warning{"data-toggle" => "modal", :href => "#comingsoonModal"}
-        New
-    .span5
-      %a.span12.btn.btn-warning{"data-toggle" => "modal", :href => "#comingsoonModal"}
-        Request Audit
-    .span5
-      %a.span12.btn.btn-warning{"data-toggle" => "modal", :href => "#comingsoonModal"}
-        Relationship Map
+-content_for :widget_title do
+  Actions
+
+-content_for :widget_id, "product_actions_widget"
+
+-content_for :widget_buttons do
+  .filter
+    .row-fluid
+      .pull-right
+        %a.btn.btn-add{"data-toggle" => "modal", :href => "#comingsoonModal"}
+          %i.grcicon-add-new
+          New
+        %a.btn.btn-add{"data-toggle" => "modal", :href => "#comingsoonModal"}
+          %i.grcicon-audit-white
+          Request Audit
+        %a.btn.btn-add{"data-toggle" => "modal", :href => "#comingsoonModal"}
+          %i.grcicon-reg-map-white
+          Relationship Map

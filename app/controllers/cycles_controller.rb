@@ -24,6 +24,9 @@ class CyclesController < BaseObjectsController
 
   no_base_action :index, :tooltip
 
+  def new_object_path
+  end
+
   private
 
     def cycle_params

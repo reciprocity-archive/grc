@@ -3,7 +3,10 @@
    Images are saved at 32pixels, scaled to 16pixels for .widgetbtn, and further scaled for .btn-nano and similar ...
  */
 
-[class^="grcicon-"] {
+
+[class^="grcicon-"],
+.showhide,
+.openclose {
   display: inline-block;
   width: 16px;
   height: 16px;
@@ -22,6 +25,275 @@
     @include opacity(0.5);
   }
 }
+
+.grcicon-add-new {
+  @include new-icons();
+  background-position:-144px -16px;
+  .active & {
+    background-position:-144px -16px;
+  }
+}
+.grcicon-add-new-black {
+  @include new-icons();
+  background-position:-144px 0;
+  .active & {
+    background-position:-144px 0;
+  }
+}
+.grcicon-admin {
+  @include new-icons();
+  background-position:-64px -16px;
+  .active & {
+    background-position:-64px 0;
+  }
+}
+.grcicon-admin-black {
+  @include new-icons();
+  background-position:-64px 0;
+  .active & {
+    background-position:-64px -16px;
+  }
+}
+.grcicon-dashboard {
+  @include new-icons();
+  background-position:-16px -16px;
+  .active & {
+    background-position:-16px 0;
+  }
+}
+.grcicon-dashboard-black {
+  @include new-icons();
+  background-position:-16px 0;
+  .active & {
+    background-position:-16px -16px;
+  }
+}
+.grcicon-demo {
+  @include new-icons();
+  background-position:-80px -16px;
+  .active & {
+    background-position:-80px 0;
+  }
+}
+.grcicon-demo-black {
+  @include new-icons();
+  background-position:-80px 0;
+  .active & {
+    background-position:-80px -16px;
+  }
+}
+.grcicon-demo-stop {
+  @include new-icons();
+  background-position:-128px -32px;
+}
+.grcicon-demo-stop-white {
+  @include new-icons();
+  background-position:-128px -48px;
+}
+.grcicon-desktop {
+  @include new-icons();
+  background-position:-32px -16px;
+  .active & {
+    background-position:-32px 0;
+  }
+}
+.grcicon-desktop-black {
+  @include new-icons();
+  background-position:-32px 0;
+  .active & {
+    background-position:-32px -16px;
+  }
+}
+.grcicon-help {
+  @include new-icons();
+  background-position:-48px -16px;
+  .active & {
+    background-position:-48px 0;
+  }
+}
+.grcicon-help-black {
+  @include new-icons();
+  background-position:-48px 0;
+  .active & {
+    background-position:-48px 0;
+  }
+}
+.grcicon-logout {
+  @include new-icons();
+  background-position:-96px -16px;
+  .active & {
+    background-position:-96px 0;
+  }
+}
+.grcicon-logout-black {
+  @include new-icons();
+  background-position:-96px 0;
+  .active & {
+    background-position:-96px -16px;
+  }
+}
+.grcicon-normal {
+  @include new-icons();
+  background-position:-128px -16px;
+  .active & {
+    background-position:-128px 0;
+  }
+}
+.grcicon-normal-black {
+  @include new-icons();
+  background-position:-128px 0;
+  .active & {
+    background-position:-128px -16px;
+  }
+}
+.grcicon-user {
+  @include new-icons();
+  background-position:0 -16px;
+  .active & {
+    background-position:0 0;
+  }
+}
+.grcicon-user-black {
+  @include new-icons();
+  background-position:0 0;
+  .active & {
+    background-position:0 -16px;
+  }
+}
+.grcicon-wide {
+  @include new-icons();
+  background-position:-112px -16px;
+  .active & {
+    background-position:-112px 0;
+  }
+}
+.grcicon-wide-black {
+  @include new-icons();
+  background-position:-112px 0;
+  .active & {
+    background-position:-112px -16px;
+  }
+}
+.grcicon-search-circle {
+  @include new-icons();
+  background-position:0 -48px;
+  .active & {
+    background-position:0 -48px;
+  }
+}
+.grcicon-search-black {
+  @include new-icons();
+  background-position:0 -32px;
+  .active & {
+    background-position:0 -32px;
+  }
+}
+.grcicon-edit-new {
+  @include new-icons();
+  background-position:-48px -32px;
+  .tree-structure .active & {
+    background-position:-48px -32px;
+  }
+  .active & {
+    background-position:-48px -48px;
+  }
+}
+.grcicon-edit-new-white {
+  @include new-icons();
+  background-position:-48px -48px;
+  .active & {
+    background-position:-48px -48px;
+  }
+}
+.grcicon-audit {
+  @include new-icons();
+  background-position:-16px -32px;
+  .active & {
+    background-position:-16px -48px;
+  }
+}
+.grcicon-audit-white {
+  @include new-icons();
+  background-position:-16px -48px;
+}
+.grcicon-imp-exp {
+  @include new-icons();
+  background-position:-64px -32px;
+  .active & {
+    background-position:-64px -48px;
+  }
+}
+.grcicon-imp-exp-white {
+  @include new-icons();
+  background-position:-64px -48px;
+  .active & {
+    background-position:-64px -48px;
+  }
+}
+.grcicon-export {
+  @include new-icons();
+  background-position:-64px -64px;
+}
+.grcicon-export-white {
+  @include new-icons();
+  background-position:-64px -80px;
+}
+.grcicon-reg-map {
+  @include new-icons();
+  background-position:-32px -32px;
+  .active & {
+    background-position:-32px -48px;
+  }
+}
+.grcicon-reg-map-white {
+  @include new-icons();
+  background-position:-32px -48px;
+}
+.grcicon-carot {
+  @include new-icons();
+  background-position:-80px -32px;
+}
+.grcicon-carot-white {
+  @include new-icons();
+  background-position:-80px -48px;
+}
+
+.grcicon-goto {
+  @include new-icons();
+  background-position:-144px -32px;
+}
+.grcicon-goto-white {
+  @include new-icons();
+  background-position:-144px -48px;
+}
+
+.grcicon-goto-left {
+  @include new-icons();
+  background-position:-144px -64px;
+}
+.grcicon-goto-left-white {
+  @include new-icons();
+  background-position:-144px -80px;
+}
+
+.grcicon-search-new {
+  @include new-icons();
+  background-position:-32px -64px;
+}
+.grcicon-search-new-white {
+  @include new-icons();
+  background-position:-32px -80px;
+}
+.grcicon-link-new {
+  @include new-icons();
+  background-position:-80px -64px;
+}
+.grcicon-link-new-white {
+  @include new-icons();
+  background-position:-80px -80px;
+}
+
+
 
 .grcicon-sortUp             { background-position:-22px -2px; }
 .grcicon-sortDown           { background-position:-22px -22px; }
@@ -126,5 +398,36 @@
   }
   &.small-expander {
     margin: 3px 4px 0 -2px;
+  }
+}
+
+.showhide,
+.openclose {
+  @include new-icons();
+  background-position:0 -64px;
+  cursor:pointer;
+  @include opacity(0.5);
+  @include transition(opacity 0.4s);
+  &.active {
+    background-position:-16px -64px;
+    @include opacity(1);
+  }
+  &.lastchild {
+    cursor:default;
+    background:none !important;
+  }
+  .widget .header & {
+    margin-top:4px;
+    margin-right:8px;
+    @include border-radius();
+    background-color:$white;
+    background-position:-112px -32px;
+    &.active {
+      @include opacity(0.5);
+      background-position:-80px -32px;
+    }
+    &:hover {
+      @include opacity(1);
+    }
   }
 }

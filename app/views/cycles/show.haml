@@ -1,51 +1,49 @@
 -content_for :header do
-  %ol#breadcrumb
-    %li PROGRAMS
+  %ul.breadcrumbs
+    %li
+      PROGRAMS
     %li=link_to @cycle.program.title, flow_program_path(@cycle.program_id)
-    %li.last AUDIT
-  .location#pageTitle #{@cycle.title}
+    %li
+      AUDIT
+  %h1
+    %span
+      Audit Manager:
+    #{@cycle.title}
 
 -content_for :page_help, 'cycle'
 
 -content_for :subheader_extras do
-  %h1.fltrt.highlighted#pageType Audit Manager
+  %ul.actions.pull-right
+    %li
+      %a.widgetbtn{:href => edit_flow_cycle_path(@cycle), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :title => 'Edit Audit Cycle'}
+        %i.grcicon-edit-new
+        Edit Audit
 
-.row-static
-  .doubleColumn
-    .doubleWide.halfHeight
+.container-fluid
+  #cycles_columns.row-fluid{ :'data-resize' => "true" }
+    #main_column.span8.widget-area
       =render :partial => 'cycles/main',
               :layout => 'layouts/widget_box',
               :locals => { :cycle => @cycle }
 
       -if has_feature?(:BETA)
-        .singleColumn
-          =render :partial => 'cycles/scope',
-                  :layout => 'layouts/widget_box',
-                  :locals => { :cycle => @cycle }
+        =render :partial => 'cycles/scope',
+                :layout => 'layouts/widget_box',
+                :locals => { :cycle => @cycle }
 
-      .singleColumn
         =render :partial => 'cycles/workflows',
                 :layout => 'layouts/widget_box',
                 :locals => { :cycle => @cycle }
-
-  .singleColumn
-    -if has_feature?(:BETA)
-      =render :partial => 'cycles/pbcimport',
-              :layout => 'layouts/widget_box',
-              :locals => { :cycle => @cycle }
-
-    =render :partial => 'cycles/pbclist',
-            :layout => 'layouts/widget_box',
-            :locals => { :cycle => @cycle }
-
-    .fullHeight
-      =render :partial => 'cycles/info',
-              :layout => 'layouts/widget_box',
-              :locals => { :cycle => @cycle }
-
-    -if has_feature?(:BETA)
-      .halfHeight
+                
         =render :partial => 'cycles/schedule',
                 :layout => 'layouts/widget_box',
                 :locals => { :cycle => @cycle }
-
+                
+    #right_column.span4.widget-area
+      =render :partial => 'cycles/info',
+              :layout => 'layouts/widget_box',
+              :locals => { :cycle => @cycle, :widget_class => 'secondary' }
+                
+      =render :partial => 'cycles/pbclist',
+              :layout => 'layouts/widget_box',
+              :locals => { :cycle => @cycle, :widget_class => 'secondary' }

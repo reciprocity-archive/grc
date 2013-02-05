@@ -1,11 +1,11 @@
 =form_for section, :url => mapping_update_path(section), :remote => true, :class => 'form-inline' do |f|
   .modal-header
-    %nav
-      %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
-        %i.grcicon-questionmark-grey
-      %a.widgetbtn{"data-dismiss" => "modal", :href => '#'}
+    .pull-right
+      %a.widgetbtn.btn.btn-mini{"data-toggle" => "modal", :href => "#comingsoonModal"}
+        %i.grcicon-help-black
+      %a.widgetbtn.btn.btn-mini{"data-dismiss" => "modal", :href => '#'}
         %i.grcicon-x-grey
-    %h1 Controls Mapped to #{@section.slug}
+    %h2 Controls Mapped to #{@section.slug}
 
   .modal-body
     .row-fluid
@@ -13,16 +13,14 @@
         =f.check_box :na, :class => :checkbox
         %h3(style='display:inline;')
           &nbsp;No controls implemented for this section
-    %br
-
-    .row-fluid
-      =f.label :notes, "Note", :class => :cleanlabel
+          
     .row-fluid
       .span12
-        =f.text_area :notes, :class => [:span12, :note], :rows => 3
-    %br
+        =f.label :notes, "Note", :class => :cleanlabel
+        .wysiwyg-area
+          =f.text_area :notes, :class => [:span12, :note], :rows => 3
 
-    .row-fluid.nominheight
+    .row-fluid
       .span3
       .span3
       .span3
@@ -37,9 +35,12 @@
         /   \:
         /   %span.statustextred Not Approved
 
+
   .modal-footer
     .row-fluid
-      %nav.fltlft
-        %a.btn.btn-large{:'data-dismiss' => 'modal-reset', :href => '#' } Cancel
-      %nav.fltrt
-        %a.btn.btn-large.btn-primary{:'data-toggle' => 'modal-submit', :href => '#' } Save
+      .span6
+        .deny-buttons
+          %a.btn{:'data-dismiss' => 'modal-reset', :href => '#' } Cancel
+      .span6
+        .confirm-buttons
+          %a.btn.btn-primary{:'data-toggle' => 'modal-submit', :href => '#' } Save

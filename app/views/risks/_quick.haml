@@ -1,14 +1,20 @@
+-quick_result ||= nil
 -if @risks.empty?
-  .no-results
+  .no-result.object-no-result
     No results found
 -else
-  %ul.nav.nav-tabs.nav-stacked
+  %ul.nav.nav-tabs.tree-structure.simple.single-row-tabs
     -@risks.each do |risk|
-      %li.group
-        %a{ :href => flow_risk_path(risk), :'data-popover-href' => tooltip_flow_risk_path(risk), :'data-popover-trigger' => 'sticky-hover' }
-          %h3=risk.slug
-          %p.oneline
-            %strong=risk.title
-            &nbsp;
-            =display_as_html risk.description
+      -if quick_result
+        =render 'base_objects/quick_result', { :item => risk }
+      -else
+        %li
+          %a{ :href => flow_risk_path(risk), :'data-popover-href' => tooltip_flow_risk_path(risk), :'data-popover-trigger' => 'sticky-hover' }
+            .row-fluid
+              .span12
+                .item-identifier
+                  %span.key
+                    =risk.slug
+                  %span.name
+                    =risk.title
 

@@ -3,9 +3,7 @@
 
 -content_for :widget_help, 'system_info'
 
--content_for :widget_buttons do
-  %a.widgetbtn{:href => edit_flow_system_path(system), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide', :title => 'Edit System'}
-    %i.grcicon-edit-grey
+-content_for :widget_id, 'system_info_widget'
 
 .information
   -if has_feature?(:BETA)
@@ -27,60 +25,58 @@
         .bar.bar-warning{:rel => "tooltip", :'data-placement' => "top", :title => "Three (#{status_counts[2]})", :'data-percentage' => status_percentages[2]}
         .bar.bar-success{:rel => "tooltip", :'data-placement' => "top", :title => "Four (#{status_counts[3]})", :'data-percentage' => status_percentages[3]}
 
-  .toolbar-widget
-
-  %hr.hr-widget
-
-  .row-fluid
-    .span12
-      .span4
-        %label Code
-        %input.span12{:type => "text", :disabled => "disabled", :value => system.slug}
-      .span4
-        %label Type
-        %input.span12{:disabled => "disabled", :type => "text", :value => system.type && system.type.title}
-      .span4
-        %label System or Process
-        %input.span12{:disabled => "disabled", :type => "text", :value => system.is_biz_process? ? 'Process' : 'System'}
-  .row-fluid
-    .span12
-      %label Full Title
-      %input.span12{:disabled => "disabled", :type => "text", :value => system.title}
-  .row-fluid
-    -#.span4
-      %label Version
-      %input.span12{:disabled => "disabled", :type => "text"}
-    .span6
-      %label Status
-      %input.span12{:disabled => "disabled", :type => "text"}
-    .span6
-      %label Network Zone
-      %input.span12{:disabled => "disabled", :type => "text", :value => system.network_zone && system.network_zone.title}
-  .row-fluid
-    .span12
-      %label Description
+%ul.info-list
+  %li.float-element
+    %label
+      Code
+    %span
+      =system.slug
+  %li.float-element
+    %label
+      Type
+    %span
+      =system.type && system.type.title
+  %li.float-element
+    %label
+      System or Process
+    %span
+      =system.is_biz_process? ? 'Process' : 'System'
+  %li.float-element
+    %label
+      Full Title
+    %span
+      =system.title
+  %li.float-element
+    %label
+      Status
+    %span
+    
+  %li.float-element
+    %label
+      Network Zone
+    %span
+      =system.network_zone && system.network_zone.title
+  %li
+    %label
+      Description
+    %span
       =display_as_html system.description
 
-%hr.hr-widget
-
-.row-fluid
-  .span12
+%ul.tree
+  %li.category
     =render :partial => 'documents/object_list',
             :locals  => { :object => system }
-
-%hr.hr-widget
-
-.row-fluid
-  .span12
+            
+  %li.category
     =render :partial => 'people/object_list',
             :locals  => { :object => system }
 
-%hr.hr-widget
 
-.row-fluid
-  .span6.nominheight
-    %label.fltlft
-      %strong> Created: #{system.created_at.strftime("%m/%d/%y")}
-  .span6.nominheight
-    %label.fltrt
-      %strong> Updated: #{system.updated_at.strftime("%m/%d/%y")}
+%section.footer
+  .row-fluid
+    .span6
+      %p.footer-left
+        Created: #{system.created_at.strftime("%m/%d/%y")}
+    .span6
+      %p.footer-right
+        Updated: #{system.updated_at.strftime("%m/%d/%y")}

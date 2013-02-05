@@ -1,9 +1,7 @@
 -# locals: sections
 
-.row-fluid
-  .span12.captionbox
-    %h4
-      Program or Policy Sections that mandate this Control
+%h3.tab-title
+  Program or Policy Sections that mandate this Control
 
 %ul.slotlist
   =walk_slug_tree(Program.slugtree(sections)) do |item, step|

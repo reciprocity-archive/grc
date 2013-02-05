@@ -1,40 +1,43 @@
 -@title = "GRC: Admin Area"
 
 -content_for :header do
-  %ol#breadcrumb
-    %li.last
-      %a{:href => "programs.htm"} ADMIN AREA
-  #pageTitle.location Sys Admin
+  %ul.breadcrumbs
+    %li
+      %a{:href => "programs.htm"}
+        ADMIN AREA
+  %h1
+    Sys Admin
 
 -content_for :page_help, 'admin_logs'
 
 -content_for :subheader_extras do
   %h1#pageType.pull-right.highlighted Logs
 
-.row-static
-  .doubleColumn
-    / Start of widget
-    #companycontrolwidget.WidgetBox
-      .WidgetBoxHeading
-        %nav
-          %a.widgettextbtn{"data-toggle" => "modal", :href => "#"} Edit
-        .WidgetTitle.doublewidth Logs
-      .WidgetBoxContent
-        %hr.hr-widget/
-        .row-fluid.nominheight
+.container-fluid
+  .row-fluid
+    .span8
+      / Start of widget
+      #companycontrolwidget.WidgetBox
+        .WidgetBoxHeading
+          %nav
+            %a.widgettextbtn{"data-toggle" => "modal", :href => "#"} Edit
+          .WidgetTitle Logs
+        .WidgetBoxContent
           %hr.hr-widget/
-          %a.pull-right.btn.btn-large.btn-info{"data-dismiss" => "modal", :href => "#comingsoonModal"} View
-    / end of widget
-  .singleColumn
-    / Start of widget
-    #companycontrolwidget.WidgetBox
-      .WidgetBoxHeading
-        %nav
-          %a.widgettextbtn{"data-toggle" => "modal", :href => "#"} Edit
-        .WidgetTitle.doublewidth Create a Log Alert
-      .WidgetBoxContent
-        %hr.hr-widget/
-        .row-fluid.nominheight
+          .row-fluid
+            %hr.hr-widget/
+            %a.pull-right.btn.btn-large.btn-info{"data-dismiss" => "modal", :href => "#comingsoonModal"} View
+      / end of widget
+    .span4
+      / Start of widget
+      #companycontrolwidget.WidgetBox
+        .WidgetBoxHeading
+          %nav
+            %a.widgettextbtn{"data-toggle" => "modal", :href => "#"} Edit
+          .WidgetTitle Create a Log Alert
+        .WidgetBoxContent
           %hr.hr-widget/
-          %a.pull-right.btn.btn-large.btn-info{"data-dismiss" => "modal", :href => "#comingsoonModal"} Settings
-    / end of widget
+          .row-fluid
+            %hr.hr-widget/
+            %a.pull-right.btn.btn-large.btn-info{"data-dismiss" => "modal", :href => "#comingsoonModal"} Settings
+      / end of widget

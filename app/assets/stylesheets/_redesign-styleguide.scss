@@ -1,0 +1,75 @@
+/* Redesigned Style Guide */
+
+.bs-docs-sidenav {
+  background-color: $white;
+  @include border-radius();
+  margin: 0;
+  padding: 0;
+  width: 220px;
+  &.affix {
+    position: fixed;
+    top: 85px;
+  }
+  &.affix-bottom {
+    bottom: 270px;
+    position: absolute;
+    top: auto;
+  }
+  li {
+    a {
+      border: 1px solid $sidenavBorder;
+      display: block;
+      margin: 0 0 -1px;
+      padding: 8px 14px;
+      &:hover {
+        background: $sidenavHover;
+        .icon-chevron-right {
+          @include opacity(0.5);
+        }
+      }
+    }
+    &:first-child {
+      a {
+        @include border-radius(4px 4px 0 0);
+      }
+    }
+    &:last-child {
+      a {
+        @include border-radius(0 0 4px 4px);
+      }
+    }
+  }
+  .active {
+    a {
+      border: 0 none;
+      padding: 9px 15px;
+      &:hover {
+        .icon-chevron-right {
+          @include opacity(1);
+        }
+      }
+    }
+    .icon-chevron-right {
+      @include opacity(1);
+    }
+  }
+  .icon-chevron-right {
+    float: right;
+    margin-right: -6px;
+    margin-top: 2px;
+    @include opacity(0.25);
+  }
+}
+
+.styleguide-content {
+  textarea {
+    width: 80%;
+    height: 150px;
+    color: $black;
+    font-size: 14px;
+  }
+}
+
+.real-example {
+  margin-bottom: 20px;
+}

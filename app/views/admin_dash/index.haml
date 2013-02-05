@@ -1,45 +1,50 @@
 -content_for :header do
-  %ol#breadcrumb
-    %li ADMIN
-  .location#pageTitle Sys Admin Dashboard
+  %ul.breadcrumbs
+    %li
+      ADMIN
+  %h1
+    Sys Admin Dashboard
  
 -content_for :page_help, 'admin'
 
 -content_for :subheader_extras do
-  .btn-group.closed.fltrt
-    %a.btn.btn-blue.dropdown-toggle{ :'data-toggle' => 'dropdown' }
-      New Object
-      %span.caret
-    %ul.dropdown-menu
-      %li.divider
-      %li.dropdown-menulabel.txtindent1 Create New ...
-      %li
-        %a{ :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :href => new_flow_account_path }
-          Account
-      %li
-        %a{ :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :href => new_flow_person_path }
-          Person
+  %ul.actions.pull-right
+    %li.btn-group
+      %a.dropdown-toggle{:href => '#', :'data-toggle' => 'dropdown' }
+        %i.grcicon-add-new-black
+        New Object
+      %ul.dropdown-menu
+        %li.divider
+        %li.title Create New ...
+        %li
+          %a{ :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :href => new_flow_account_path }
+            Account
+        %li
+          %a{ :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :href => new_flow_person_path }
+            Person
 
-.row-static
-  .singleColumn
-    .WidgetBox
-      .WidgetBoxHeading
-        .WidgetTitle Demo Status
-      .WidgetBoxContent.fltnone
-        -path = request.fullpath.gsub(/BETA=[^&]*&?/, '').sub(/[?&]$/, '')
-        -path += path.include?('?') ? '&' : '?'
-        -if has_feature? :BETA
-          %label 
-            Demo features are currently on. 
-            %br 
-            They will be outlined in orange where possible. 
-        -else
-          %label Demo features are currently off. 
-    .singleColumn
-      #productInfo.WidgetBox
-        .WidgetBoxHeading
-          .WidgetTitle Imp/Export Actions
-        .WidgetBoxContent.information
+.container-fluid
+  #admin_columns.row-fluid{ :'data-resize' => "true" }
+    #left-column.span4.widget-area
+      %section#status_widget.widget
+        %header.header
+          %h2
+            Demo Status
+        %section.content
+          -path = request.fullpath.gsub(/BETA=[^&]*&?/, '').sub(/[?&]$/, '')
+          -path += path.include?('?') ? '&' : '?'
+          -if has_feature? :BETA
+            %label 
+              Demo features are currently on. 
+              %br 
+              They will be outlined in orange where possible. 
+          -else
+            %label Demo features are currently off. 
+      %section#productInfo.widget
+        %header.header
+          %h2
+            Import/Export Actions
+        %section.content.information
           .toolbar-widget
             .row-fluid
               .span6
@@ -48,39 +53,45 @@
               .span6
                 %a.span12.btn.btn-warning{"data-toggle" => "modal-ajax", :href => "/systems/export.html"}
                   Export Systems
-
-    .singleColumn
+  
       -if has_feature? :BETA
-      
-        / in progress
-        #StyleGuide.WidgetBox.singleWide.demoItem
-          .WidgetBoxHeading
-            .WidgetTitle Style Guide
-            %nav
-              %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
-                %i.grcicon-questionmark-grey
-              %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
-              %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#programsInProgress"}
-                %i.grcicon-enlarge-grey
-          / /.WidgetBoxHeading
-          .WidgetBoxContent
+        %section#StyleGuide.widget
+          / in progress
+          %header.header.demoItem
+            %h2
+              Style Guide
+            %a.pull-right.btn.btn-mini{"data-toggle" => "modal", :href => "#comingsoonModal"}
+              %i.grcicon-help-black
+            
+            %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#programsInProgress"}
+              %i.grcicon-enlarge-grey
+                  
+          .filter
+            %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}
+            
+          %section.content
             #programsInProgress.toolbar-widget.in
               %ul#quickLinks.nav.nav-tabs.nav-stacked.in
                 %li.group
                   %a.btn{:href => "/design/styleguide"}
                     Style Guide (First Draft)
-
-        #Programs.WidgetBox.singleWide.demoItem
-          .WidgetBoxHeading
-            .WidgetTitle In-Progress
-            %nav
-              %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
-                %i.grcicon-questionmark-grey
-              %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
-              %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#programsInProgress"}
-                %i.grcicon-enlarge-grey
-          / /.WidgetBoxHeading
-          .WidgetBoxContent
+  
+      -if has_feature? :BETA
+        %section#Programs.WidgetBox.demoItem.widget
+          %section.header
+            %h2
+              In-Progress
+              
+            %a.pull-right.btn.btn-mini{"data-toggle" => "modal", :href => "#comingsoonModal"}
+              %i.grcicon-help-black
+              
+            %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#programsInProgress"}
+              %i.grcicon-enlarge-grey
+            
+          .filter
+            %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}
+            
+          %section.content
             #programsInProgress.toolbar-widget.in
               %ul#quickLinks.nav.nav-tabs.nav-stacked.in
                 %li.group
@@ -92,7 +103,7 @@
                 %li.group
                   %a.btn{"data-toggle" => "modal", :href => "#pbcListEdit"}
                     Edit PBC List
-
+  
                 %li.group
                   %a.btn{"data-toggle" => "modal", :href => "#newResponseDocumentation"}
                     Edit Response (Documentation)
@@ -102,7 +113,7 @@
                 %li.group
                   %a.btn{"data-toggle" => "modal", :href => "#newResponsePopulation"}
                     Edit Response (Population)
-
+  
                 %li.group
                   %a.btn{"data-toggle" => "modal", :href => "#redesignNewSystem"}
                     New/Edit System
@@ -136,165 +147,173 @@
                     Importing Regulation Data
                 %li.group
                   %a.btn{:href => "/design/importcontrols"}
-                    Importing Controls
-    /third column
-    .singleColumn
-      
-      / Start of widget
-.row-static
-  .singleColumn
-    .singleWide
-      
+                    Importing Controls      
 
-  -if has_feature? :BETA
-    .singleColumn
-      / in progress
-      #Programs.WidgetBox.singleWide.demoItem
-        .WidgetBoxHeading
-          .WidgetTitle WIP : Modals & Widgets
-          %nav
-            %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
-              %i.grcicon-questionmark-grey
-            %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
+    -if has_feature? :BETA
+      #middle-column.span4.widget-area
+      
+        / in progress
+        %section#Programs.widget.WidgetBox.demoItem
+          %section.header
+            %h2
+              WIP : Modals & Widgets
+              
+            %a.pull-right.btn.btn-mini{"data-toggle" => "modal", :href => "#comingsoonModal"}
+              %i.grcicon-help-black
+              
             %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#programInProgress"}
               %i.grcicon-enlarge-grey
-        / /.WidgetBoxHeading
-        .WidgetBoxContent
-          #programInProgress.toolbar-widget.in
-            %ul#quickLinks.nav.nav-tabs.nav-stacked.in
-              %li.group
-                %a.btn{"data-toggle" => "modal", :href => "#auditCycleModal"}
-                  New/Edit Audit Cycle
-              %li.group
-                %a.btn{"data-toggle" => "modal", :href => "#sendauditorinvite"}
-                  Send Auditor Invite
-              %li.group
-                %a.btn{"data-toggle" => "modal", :href => "#auditdefaultscope"}
-                  Set Audit Default Scope
-              %li.group
-                %a.btn{"data-toggle" => "modal", :href => "#newtransactionModal"}
-                  New Transaction
-              %li.group
-                %a.btn{"data-toggle" => "modal", :href => "#mappedcontrols"}
-                  Empty Mapping (Reg Mapper)
-              %li.group
-                %a.btn{"data-toggle" => "modal", :href => "#mappedcontrolsfull"}
-                  Mapped Controls (Reg Mapper)
-              %li.group
-                %a.btn{"data-toggle" => "modal", :href => "#createnewfacility"}
-                  New Facility
-              %li.row-fluid
-                %label Widgets
-              %li.row-fluid
-                %a.btn{:href => "/design/products"}
-                  Impact Scope (view on Product)
-    .singleColumn
-      / in progress
-      #Programs.WidgetBox.singleWide.demoItem
-        .WidgetBoxHeading
-          .WidgetTitle 
-            Approved Modals
-          %nav
-            %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
-              %i.grcicon-questionmark-grey
-            %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
+              
+          .filter
+            %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}  
+            
+          %section.content
+            #programInProgress.toolbar-widget.in
+              %ul#quickLinks.nav.nav-tabs.nav-stacked.in
+                %li.group
+                  %a.btn{"data-toggle" => "modal", :href => "#auditCycleModal"}
+                    New/Edit Audit Cycle
+                %li.group
+                  %a.btn{"data-toggle" => "modal", :href => "#sendauditorinvite"}
+                    Send Auditor Invite
+                %li.group
+                  %a.btn{"data-toggle" => "modal", :href => "#auditdefaultscope"}
+                    Set Audit Default Scope
+                %li.group
+                  %a.btn{"data-toggle" => "modal", :href => "#newtransactionModal"}
+                    New Transaction
+                %li.group
+                  %a.btn{"data-toggle" => "modal", :href => "#mappedcontrols"}
+                    Empty Mapping (Reg Mapper)
+                %li.group
+                  %a.btn{"data-toggle" => "modal", :href => "#mappedcontrolsfull"}
+                    Mapped Controls (Reg Mapper)
+                %li.group
+                  %a.btn{"data-toggle" => "modal", :href => "#createnewfacility"}
+                    New Location/Facility
+                %li.row-fluid
+                  %label Widgets
+                %li.row-fluid
+                  %a.btn{:href => "/design/products"}
+                    Impact Scope (view on Product)
+                  
+        =render :partial => 'admin_dash/accounts',
+          :layout => 'layouts/widget_box',
+          :locals => { :accounts => @accounts, :people => @people }
+            
+          
+      #right-column.span4.widget-area
+        / in progress
+        %section#Programs.widget.demoItem
+          %section.header
+            %h2
+              Approved Modals
+            
+            %a.pull-right.btn.btn-mini{"data-toggle" => "modal", :href => "#comingsoonModal"}
+              %i.grcicon-help-black
+              
             %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#newEditItems"}
               %i.grcicon-enlarge-grey
-        / /.WidgetBoxHeading
-        .WidgetBoxContent
-          -#%ul#newEdit.nav.nav-tabs.nav-stacked.in
-            %li.group
-              %label Rapid Prototypes
-            %li.group
-              %a.btn{"data-toggle" => "modal", :href => "#showSecondModal"}
-                Show Second Modal
-          #newEditItems.toolbar-widget
-            %ul#newEdit.nav.nav-tabs.nav-stacked.in
-              %li.group
-                %label General
-              %li.group
-                %a.btn{"data-toggle" => "modal", :href => "#newreference"}
-                  New/Edit Reference
-              %li.group
-                %a.btn{"data-toggle" => "modal", :href => "#basicnewpersonModal"}
-                  New/Edit Person
-              %li.group
-                %a.btn{"data-toggle" => "modal", :href => "#redesignNewProduct"}
-                  New/Edit Product
-              %li.group
-                %a.btn{"data-toggle" => "modal", :href => "#redesignNewCategory"}
-                  New/Edit Category
-              %li.group
-                %a.btn{"data-toggle" => "modal", :href => "#redesignNewSectionWide"}
-                  New/Edit Section
-              %li.group
-                %a.btn{"data-toggle" => "modal", :href => "#redesignNewBizProcess"}
-                  New/Edit Biz Process
-              %li.group
-                %a.btn{"data-toggle" => "modal", :href => "#redesignNewOrg"}
-                  New/Edit Organization
-              %li.row-fluid
-                %label Selectors
-              %li.row-fluid
-                %a.span6.btn{"data-toggle" => "modal", :href => "#selectorPerson"}
-                  Select Person
-                %a.span6.btn{"data-toggle" => "modal", :href => "#selectorReference"}
-                  Select Reference
-              %li.row-fluid
-                %a.span6.btn{"data-toggle" => "modal", :href => "#selectorSystem"}
-                  Select System
-                %a.span6.btn{"data-toggle" => "modal", :href => "#selectorCategory"}
-                  Select Category
-              %li.row-fluid
-                %a.span6.btn{"data-toggle" => "modal", :href => "#selectorSystem"}
-                  Add System to System
-                %a.span6.btn{"data-toggle" => "modal", :href => "#selectorBiz2System"}
-                  Link Biz Object to System
-              %li.row-fluid
-                %a.span6.btn{"data-toggle" => "modal", :href => "#selectorControl"}
-                  Add Controls to System
-                %a.span6.btn{"data-toggle" => "modal", :href => "#selectorSystem"}
-                  Add System to Controls
-              %li.row-fluid
-                %a.span6.btn{"data-toggle" => "modal", :href => "#selectorBiz2Product"}
-                  Link Biz Object to Product
-                %a.span6.btn{"data-toggle" => "modal", :href => "#selectorThreat2Biz"}
-                  Link Risky Attribute
+                
+          .filter
+            %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}
               
-              %li.row-fluid
-                %a.span6.btn{"data-toggle" => "modal", :href => "#newthreat"}
-                  New Threat/Risk
-              %li.row-fluid
-                %label Are you sure?
+          %section.content
+            -#%ul#newEdit.nav.nav-tabs.nav-stacked.in
+              %li.group
+                %label Rapid Prototypes
+              %li.group
+                %a.btn{"data-toggle" => "modal", :href => "#showSecondModal"}
+                  Show Second Modal
+            #newEditItems.toolbar-widget
+              %ul#newEdit.nav.nav-tabs.nav-stacked.in
+                %li.group
+                  %label General
+                %li.group
+                  %a.btn{"data-toggle" => "modal", :href => "#newreference"}
+                    New/Edit Reference
+                %li.group
+                  %a.btn{"data-toggle" => "modal", :href => "#basicnewpersonModal"}
+                    New/Edit Person
+                %li.group
+                  %a.btn{"data-toggle" => "modal", :href => "#redesignNewProduct"}
+                    New/Edit Product
+                %li.group
+                  %a.btn{"data-toggle" => "modal", :href => "#redesignNewCategory"}
+                    New/Edit Category
+                %li.group
+                  %a.btn{"data-toggle" => "modal", :href => "#redesignNewSectionWide"}
+                    New/Edit Section
+                %li.group
+                  %a.btn{"data-toggle" => "modal", :href => "#redesignNewBizProcess"}
+                    New/Edit Biz Process
+                %li.group
+                  %a.btn{"data-toggle" => "modal", :href => "#redesignNewOrg"}
+                    New/Edit Organization
+                %li.row-fluid
+                  %label Selectors
+                %li.row-fluid
+                  %a.span6.btn{"data-toggle" => "modal", :href => "#selectorPerson"}
+                    Select Person
+                  %a.span6.btn{"data-toggle" => "modal", :href => "#selectorReference"}
+                    Select Reference
+                %li.row-fluid
+                  %a.span6.btn{"data-toggle" => "modal", :href => "#selectorSystem"}
+                    Select System
+                  %a.span6.btn{"data-toggle" => "modal", :href => "#selectorCategory"}
+                    Select Category
+                %li.row-fluid
+                  %a.span6.btn{"data-toggle" => "modal", :href => "#selectorSystem"}
+                    Add System to System
+                  %a.span6.btn{"data-toggle" => "modal", :href => "#selectorBiz2System"}
+                    Link Biz Object to System
+                %li.row-fluid
+                  %a.span6.btn{"data-toggle" => "modal", :href => "#selectorControl"}
+                    Add Controls to System
+                  %a.span6.btn{"data-toggle" => "modal", :href => "#selectorSystem"}
+                    Add System to Controls
+                %li.row-fluid
+                  %a.span6.btn{"data-toggle" => "modal", :href => "#selectorBiz2Product"}
+                    Link Biz Object to Product
+                  %a.span6.btn{"data-toggle" => "modal", :href => "#selectorThreat2Biz"}
+                    Link Risky Attribute
+                
+                %li.row-fluid
+                  %a.span6.btn{"data-toggle" => "modal", :href => "#newthreat"}
+                    New Threat/Risk
+                %li.row-fluid
+                  %label Are you sure?
+  
+                %li.row-fluid
+                  %a.span6.btn{"data-toggle" => "modal", :href => "#confirmModal"}
+                    Y/N Dialog
+                  %a.span6.btn{"data-toggle" => "modal", :href => "#comingsoonModal"}
+                    Coming Soon
+        
+        %section#Implemented.widget
+          %section.header
+            %h2
+              Implemented
+              
+            %a.pull-right.btn.btn-mini{"data-toggle" => "modal", :href => "#comingsoonModal"}
+              %i.grcicon-help-black
 
-              %li.row-fluid
-                %a.span6.btn{"data-toggle" => "modal", :href => "#confirmModal"}
-                  Y/N Dialog
-                %a.span6.btn{"data-toggle" => "modal", :href => "#comingsoonModal"}
-                  Coming Soon
-      #Implemented.WidgetBox.singleWide
-        .WidgetBoxHeading
-          .WidgetTitle 
-            Implemented
-          %nav
-            %a.widgetbtn{"data-toggle" => "modal", :href => "#comingsoonModal"}
-              %i.grcicon-questionmark-grey
-            %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
             %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#ImplementedItems"}
               %i.grcicon-enlarge-grey.grcicon-blue-expand
-        / /.WidgetBoxHeading
-        .WidgetBoxContent
-          #ImplementedItems.toolbar-widget.collapse
-            %ul#quickLinks.nav.nav-tabs.nav-stacked.in
-              %li.group
-                %a.btn{"data-toggle" => "modal", :href => "#redesignNewProgram"}
-                  New Program 
+                
+          .filter
+            %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}
+              
+          %section.content
+            #ImplementedItems.toolbar-widget.collapse
+              %ul#quickLinks.nav.nav-tabs.nav-stacked.in
+                %li.group
+                  %a.btn{"data-toggle" => "modal", :href => "#redesignNewProgram"}
+                    New Program 
+      
 
-  .singleColumn
-    =render :partial => 'admin_dash/accounts',
-              :layout => 'layouts/widget_box',
-              :locals => { :accounts => @accounts, :people => @people }
-  .singleColumn
-    =render :partial => 'admin_dash/categories',
-              :layout => 'layouts/widget_box',
-              :locals => { :categories => @categories, :options => @options }
+    #other-column.span4.widget-area
+      =render :partial => 'admin_dash/categories',
+                :layout => 'layouts/widget_box',
+                :locals => { :categories => @categories, :options => @options }
+	

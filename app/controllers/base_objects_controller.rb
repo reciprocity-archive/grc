@@ -19,7 +19,7 @@ class BaseObjectsController < ApplicationController
     respond_to do |format|
       format.html do
         if params[:quick]
-          render :partial => 'quick'
+          render :partial => 'quick', :locals => { :quick_result => params[:qr] }
         end
       end
       format.json do
@@ -145,6 +145,14 @@ class BaseObjectsController < ApplicationController
 
   def tooltip
     render :layout => '_tooltip', :locals => { object_name.to_sym => object }
+  end
+
+  def new_object_title
+    object_name.titleize
+  end
+
+  def new_object_path
+    url_for(:action => :new, :only_path => true) if respond_to?(:new)
   end
 
   private

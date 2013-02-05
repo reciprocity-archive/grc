@@ -1,16 +1,33 @@
+-quick_result ||= nil
 -if @options.empty?
   .no-results
     No results found
 -else
-  %a.btn.btn-warning{ :href => export_flow_options_path(:format => :csv) }
-    %i.grcicon-import-white
-    Export
+  .action-items.action-below
+    %a{ :href => export_flow_options_path(:format => :csv) }
+      %i.grcicon-export
+      Export
+  
+  -if quick_result
+    -@options.sort_by(&:role).each do |option|
+      =render 'base_objects/quick_result', { :item => option }
+  -else
+
   -@options.sort_by(&:role).group_by(&:role).each do |role, options_for_role|
-    %h4=role.humanize.titleize
-    %ul.nav.nav-tabs.nav-stacked
-      -options_for_role.sort_by(&:title).each do |option|
-        %li
-          %a.widgetbtn.fltrt{ :'data-form-target' => "refresh", :'data-delete-target' => "refresh", :'data-modal-reset' => "reset", :'data-toggle' => "modal-ajax-form", :href => edit_flow_option_path(option) }
-            %i.grcicon-edit-grey
-          =link_to '#' do
-            =option.title
+    %ul.tree
+      %li.category
+        %h3
+          =role.humanize.titleize
+        %section.content
+          %ul.tree
+            -options_for_role.sort_by(&:title).each do |option|
+              %li.main
+                .item-identifier
+                  .item-title
+                    .row-fluid
+                      .span12
+                        %span.addition-info
+                          =option.title
+                  .item-actions
+                    %a.btn.btn-mini{ :'data-form-target' => "refresh", :'data-delete-target' => "refresh", :'data-modal-reset' => "reset", :'data-toggle' => "modal-ajax-form", :href => edit_flow_option_path(option) }
+                      %i.grcicon-edit-grey

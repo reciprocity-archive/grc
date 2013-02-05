@@ -6,25 +6,25 @@
 -content_for :widget_title do
   =widget_title
 
+-content_for :widget_id, "related_widget"
+
 -content_for :widget_help, 'related'
 #related.open
-  /Button Filters
   .button-set
     .row-fluid
-      %ul
-        -models.each do |model|
-          -table_name = model.underscore.pluralize #.table_name
-          %li.btn.tab-btn.span4
-            %a.span12{:href => "#related-#{table_name}-pane",
-              "data-toggle" => 'tab',
-              "data-source" => related_objects_flow_relationships_path(:oid => instance.id,
-                :otype => instance.class.to_s,
-                :related_model => model),
-              "data-template" => "/assets/related.mustache",
-              "data-refresh-time" => 60 }
-              #{table_name.titleize}
-  %hr.hr-widget
-  / TABS
+      .span12
+        %ul.related-button.nav.nav-pills
+          -models.each do |model|
+            -table_name = model.underscore.pluralize #.table_name
+            %li.tab-btn
+              %a{:href => "#related-#{table_name}-pane",
+                "data-toggle" => 'tab',
+                "data-source" => related_objects_flow_relationships_path(:oid => instance.id,
+                  :otype => instance.class.to_s,
+                  :related_model => model),
+                "data-template" => "/assets/related.mustache",
+                "data-refresh-time" => 60 }
+                #{table_name.titleize}
   .tab-content
     -models.each do |model|
       .tab-pane{:id => "related-#{model.underscore.pluralize}-pane"}

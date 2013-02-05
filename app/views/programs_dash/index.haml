@@ -2,86 +2,29 @@
  
 -content_for :page_help, 'dashboard'
 
--content_for :header_buttons do
-  -if current_user.has_role?(:superuser)
-    .btn-group
-      %a.btn{ :href => admin_dash_path } Admin
-
 -content_for :header do
-  %ol#breadcrumb
+  %ul.breadcrumbs
     %li
-      DASHBOARD
-  .location#pageTitle Dashboard
+      &nbsp;
+  %h1
+    Dashboard
 
-.row-static
-  .singleColumn
-    .fullHeight
+-#-content_for :subheader_extras do
+
+.container-fluid
+  #columns.row-fluid{ :'data-resize' => "true" }
+    .span6
       =render :partial => 'programs/list',
               :layout => 'layouts/widget_box',
               :locals => { :programs => @programs }
-  .doubleColumn
-    .fullHeight
+    .span6
       =render :partial => 'quick_find',
             :layout => 'layouts/widget_box'
--content_for :subheader_extras do
-  .btn-group.closed.fltrt
-    %a.btn.btn-blue.dropdown-toggle{ :'data-toggle' => 'dropdown' }
-      New Business Object
-      %span.caret
-    %ul.dropdown-menu
-      %li.divider
-      %li.dropdown-menulabel.txtindent1 Create New ...
-      %li
-        %a{ :href => new_flow_program_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-          Program or Policy
-      %li
-        %a{ :href => new_flow_risky_attribute_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-          Risky Attribute
-      %li
-        %a{ :href => new_flow_risk_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-          Risk
-      %li
-        %a{ :href => new_flow_control_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-          Control
-      %li.divider
-      %li
-        %a{ :href => new_flow_system_path(:'system[is_biz_process]' => 1), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-          Business Process
-      %li
-        %a{ :href => new_flow_system_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-          System
-      %li.divider
-      %li
-        %a{ :href => new_flow_org_group_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-          Org Group
-      %li
-        %a{ :href => new_flow_product_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-          Product
-      %li
-        %a{ :href => new_flow_project_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-          Project
-      %li
-        %a{ :href => new_flow_facility_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-          Facility
-      %li
-        %a{ :href => new_flow_market_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-          Market
-      %li
-        %a{ :href => new_flow_data_asset_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-          Data Asset
       -if has_feature? :BETA
-        %li.demoItem
-          %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-            Person
-        %li.demoItem
-          %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-            Reference
-        %li.demoItem
-          %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-            Business Object
-        %li.demoItem
-          %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-            Threat
-        %li.demoItem
-          %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-            Vulnerability
+        =render :partial => 'design/templates/riskWidgetGap'
+        =render :partial => 'design/templates/riskWidgetRisk'
+    -if has_feature? :BETA
+      .row-fluid
+        .span4
+          =render :partial => 'design/templates/govWidgetCot'
+          =render :partial => 'design/templates/govWidgetProducts'

@@ -1,14 +1,13 @@
 .modal-header
-  %nav
-    %a.widgetbtn{ :'data-dismiss' => 'modal', :href => 'javascript://'}
-      %i.grcicon-x-grey
-  %h1=yield_content!(:modal_title) || "Help"
+  %a.btn.btn-mini.pull-right{ :'data-dismiss' => 'modal', :href => 'javascript://'}
+    %i.grcicon-x-grey
+  %h2=yield_content!(:modal_title) || "Help"
 
 .modal-body
   =yield
 
 .modal-footer
   .row-fluid
-    .span9
-    %nav.fltrt.txtrt.span3
-      %a.btn.btn-large.btn-primary{"data-dismiss" => "modal", :href => 'javascript://'} Close
+    .span12
+      .confirm-buttons
+        %a.btn.btn-primary{"data-dismiss" => "modal", :href => 'javascript://'} Close

@@ -91,10 +91,6 @@ class Section < ActiveRecord::Base
     "#{slug} - #{title}"
   end
 
-  def title
-    return read_attribute(:title).presence || (description || "").truncate(60)
-  end
-
   def update_parent_id
     self.parent = self.class.find_parent_by_slug(slug) if parent_id.nil?
   end

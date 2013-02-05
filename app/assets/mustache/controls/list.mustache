@@ -1,9 +1,9 @@
-<ul class="slugtree nav nav-stacked">
- {{#this}}
- 	<li {{data 'model'}} data-model="true">
-	 	<div class="row-fluid" content_id="{{content_id}}">
-      	{{> /assets/controls/show.mustache}}
-     </li>
-    </div>
- {{/this}}
+<ul class="slugtree items">
+  {{#this}}
+    <li {{data 'model'}} data-model="true" class="main">
+      <div class="row-fluid" content_id="{{content_id}}">
+        {{> /assets/controls/show.mustache}}
+      </div>
+    </li>
+  {{/this}}
 </ul>

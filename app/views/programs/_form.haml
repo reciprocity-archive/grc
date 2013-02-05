@@ -8,7 +8,7 @@
   -content_for :modal_delete_path, delete_flow_program_path(f.object)
 
 .row-fluid
-  =wrapped_text_field f, :span6, :title, :placeholder => 'Enter title'
+  =wrapped_text_field f, :span6, :title, :placeholder => 'Enter title', :label_name => 'Title <span class="required">*</span>'.html_safe
   .span6
     .row-fluid
       =wrapped_text_field f, :span6, :slug, :label_name => 'Code (autofill)', :placeholder => 'PROGRAM-XXXX'
@@ -16,7 +16,7 @@
       =wrapped_select f, :span6, :kind_id, Option.options_for(:program_kind).map { |o| [o.title, o.id] }, :selected => (f.object.respond_to?(:kind_id) ? f.object.kind_id : nil)
 
 .row-fluid
-  =wrapped_text_area f, :span6, :description, :class => 'double wysihtml5', :placeholder => 'Enter description here'
+  =wrapped_text_area f, :span6, :description, :class => 'double wysihtml5', :wrapper_div_class => 'wysiwyg-area', :placeholder => 'Enter description here'
   .span6
     .row-fluid
       =wrapped_date_field f, :span6, :start_date, :class => 'date', :label_name => 'Effective Date', :placeholder => 'MM/DD/YYYY'
@@ -33,7 +33,8 @@
       Scope/Applicability of this Framework or Program
       -#%a.fltrt.underline{"data-toggle" => "modal", :href => "#comingsoonModal"} View as mail merge
     .row-fluid
-      %textarea#wysihtml5d.span12{:name => 'program[scope]', :placeholder => "One-sentence explanation of the applicability of this program, used in mail merge templates.", :rows => "3", }=f.object.scope
+      .wysiwyg-area
+        %textarea#wysihtml5d.span12{:name => 'program[scope]', :placeholder => "One-sentence explanation of the applicability of this program, used in mail merge templates.", :rows => "3", }=f.object.scope
       =error_messages_inline(f, :scope)
 
 =render :partial => "shared/wysihtml5"

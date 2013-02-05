@@ -1,0 +1,173 @@
+h1 {
+  color:$headerTitle;
+  font-size:24px;
+  line-height:36px;
+  span {
+    color: $gray;
+    font-weight: normal;
+  }
+  @include oneline();
+}
+
+h2 {
+  font-size: 20px;
+  line-height: 26px;
+  font-weight: bold;
+  color: $subTitle;
+  margin-right: 8px;
+}
+
+h3 {
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: bold;
+  color: $subTitle;
+}
+
+h4 {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: normal;
+  color: $subTitle;
+  span {
+    color: $gray;
+  }
+}
+
+.centered {
+  text-align: center;
+}
+
+// progress bar
+.bar {
+  float:left;
+  &.bar-success {
+    @include gradient-vertical(lighten($addBtn, 15%), $addBtn);
+  }
+  &.bar-danger {
+    @include gradient-vertical(lighten($orange, 15%), $orange);
+  }
+  &.bar-warning {
+    @include gradient-vertical(lighten($red, 15%), $red);
+  }
+}
+
+
+// buttons
+.btn {
+  font-size: 13px;
+  font-weight: bold;
+  @include box-shadow(none);
+  i {
+    margin-top: 1px;
+  }
+  &:hover {
+    @include box-shadow(inset 0 0 2px rgba(0,0,0,0.3));
+  }
+  &.btn-add {
+    color:$white;
+    background: $addBtn;
+    @include background-image(linear-gradient(center top, lighten($addBtn, 5%) 5%, darken($addBtn, 5%) 100% ));
+    text-shadow: 1px 1px 1px #296029;
+    border: 1px solid $addBtnBorder;
+    &:active {
+      @include box-shadow(inset 0 0 3px $darkGray);
+      @include background-image(linear-gradient(center top, darken($addBtn, 5%) 5%, lighten($addBtn, 5%) 100% ));
+    }
+    &:hover {
+      color:$white;
+    }
+  }
+  .open & {
+    &.btn-add {
+      color:$white;
+      background: $addBtn;
+      @include background-image(linear-gradient(center top, lighten($addBtn, 5%) 5%, darken($addBtn, 5%) 100% ));
+      text-shadow: 1px 1px 1px #296029;
+      border: 1px solid $addBtnBorder;
+      &:hover {
+        color:$white;
+      }
+    }
+  }
+}
+
+// removing outline on anchor element
+.nav-tabs,
+.menu,
+.btn,
+.program-list {
+  a {
+    @include outline-fix();
+  }
+}
+
+// show hide
+
+.showhide {
+  float:left;
+  margin-top:8px;
+}
+
+// one line display of paragraphs
+
+.oneline {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width:100%;
+}
+
+// RTF
+.rtf {
+  margin-bottom: 10px;
+  line-height:1.2em;
+  ul,
+  ol {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    li {
+      border: none !important;
+      padding: 0;
+      line-height:1.2em !important;
+    }
+  }
+  blockquote {
+    border:none;
+  }
+}
+
+// Date input field - To see date icon just add class .date to input field
+input.date {
+  padding-left: 26px;
+  @include background-size(160px 160px);
+  background-image: url("/images/grcicons/icons.png");
+  background-repeat: no-repeat;
+  background-position: -141px -123px;
+}
+
+input.input-block-level {
+  display: block;
+  width: 100%;
+  @include box-sizing(border-box);
+  min-height: 28px;
+}
+
+.no-result {
+  text-align: center;
+  font-weight: bold;
+  color: $darkGray;
+  line-height: 20px;
+  font-size: 11px;
+  &.object-no-result {
+    font-size: 14px;
+    padding-top: 8px;
+  }
+}
+
+
+.pbc .collapse {
+  display:block;
+  overflow:visible;
+  height:auto !important;
+}

@@ -8,6 +8,8 @@
 
 -content_for :widget_help, "#{model_name}_business_objects"
 
+-content_for :widget_id, "#{model_name}_business_objects_widget"
+
 .tabbable
   %ul.nav.nav-tabs
     %li=link_to 'Controls', '#controls', :data => { :toggle => 'tab' }#, :'tab-href' => risks_flow_control_path(control) }

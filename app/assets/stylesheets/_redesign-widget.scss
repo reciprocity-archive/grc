@@ -1,0 +1,304 @@
+
+// widgets styles
+.widget {
+  border:1px solid $widgetBorder;
+  margin-bottom: 20px;
+  background:$white;
+  @include transition(box-shadow 0.2s,border-color 0.2s);
+  @include border-radius($topBorderRadius);
+  .header {
+    background:$widgetHeader;
+    @include transition(background-color 0.2s);
+    color:$white;
+    padding:6px;
+    h2 {
+      @include transition(color 0.2s);
+      font-size: 15px;
+      font-weight:normal;
+      line-height: 24px;
+      color: $widgetTitle;
+      margin-bottom:0;
+      @include text-shadow(0 1px 1px $white);
+      @include oneline();
+    }
+    .btn-mini {
+      margin-left:6px;
+      padding-left:2px;
+      padding-right:2px;
+      i {
+        @include opacity(0.4);
+      }
+      &:hover {
+        border-color:$white;
+        i {
+          @include opacity(1);
+        }
+      }
+    }
+    a.help {
+     margin-top:10px; 
+    }
+    @include row-fluid-fix();
+  }
+  .info {
+    padding:0 6px;
+    color:$text;
+    .rtf {
+      margin:0 20% 10px 0;
+    }
+  }
+  .filter {
+    padding:6px;
+    background: $widgetFooteBgnd;
+    .form-inline {
+      margin-bottom: 0;
+    }
+    input {
+      margin-bottom: 0;
+    }
+    .btn-mini {
+      margin-top: 3px;
+    }
+  }
+  .content {
+    padding:6px;
+    background:$white;
+    //max-height: 300px;
+    overflow: hidden;
+    overflow-y: auto;
+  }
+  .footer {
+    background:$lightGray;
+    color:$headerTitle;
+    padding:6px;
+    height: 20px;
+    border-top: 1px solid $footerBorder;
+    p {
+      margin: 0;
+      line-height: 20px;
+      color: $gray;
+      &.footer-right {
+        text-align: right;
+      }
+      &.footer-left {
+        text-align: left;
+      }
+    }
+  }
+  .items {
+    @include reset-list();
+    h3 {
+      font-weight:normal;
+      font-size:16px;
+    }
+    li.main {
+      h4 {
+        font-size: 12px;
+        color:#666;
+      }
+      a {
+        color: $headerTitle;
+        text-decoration: none;
+      }
+      padding:10px 0;
+      border-bottom: 1px solid $lightGray;
+      .progress {
+        margin: 0;
+      }
+      &:hover {
+        @include background-image(linear-gradient(left, $white, $lightGray, $white));
+        border-bottom: 1px solid darken($lightGray,10%);
+        h3 {
+          color:#369;
+        }
+      }
+    }
+  }
+  .tabbable {
+    position: relative;
+    .action-items {
+      position: absolute;
+      top: 5px;
+      right: 0;
+      &.action-below {
+        position: static;
+        margin-bottom: 10px;
+        text-align: right;
+      }
+      a {
+        display: inline-block;
+        cursor: pointer;
+        text-decoration: none;
+        margin-left: 10px;
+        font-size: 11px;
+        line-height: 16px;
+        color: $gray;
+        @include transition(color 0.2s ease-in-out);
+        i {
+          @include opacity(0.4);
+          @include transition(opacity 0.2s ease-in-out);
+        }
+        &:hover {
+          color: $black;
+          i {
+            @include opacity(1);
+          }
+        }
+      }
+    }
+  }
+  &:hover {
+    @include box-shadow(0 0 2px $gray);
+    border-color:darken($widgetBorder, 20%);
+    .header {
+      background-color:darken($widgetHeader, 5%);
+      h2 {
+        color:#111;
+      }
+    }
+  }
+  .related-button {
+    li {
+      font-size: 11px;
+      a {
+        color: $black;
+        padding: 5px 9px;
+      }
+      &.active {
+        a {
+          color: $white;
+        }
+      }
+    }
+  }
+  &.secondary {
+    background:$white;
+    border-color:$white;
+    .header {
+      background:$white;
+      h2 {
+        color:$infoWidgetHeader;
+      }
+      .showhide {
+        display:none;
+      }
+    }
+  }
+  .info-list {
+    @include reset-list();
+    margin-bottom: 20px;
+    li {
+      border-bottom: 1px solid $lightGray;
+      padding: 6px 0 4px 7px;
+      &:last-child {
+        border-bottom: none;
+      }
+      label {
+        font-weight: bold;
+        color: $darkGray;
+      }
+      .rtf {
+        margin-left: 0;
+        font-size: 11px;
+        ul,
+        ol {
+          li {
+            border: none;
+            padding: 0;
+          }
+        }
+      }
+      &.float-element {
+        @include clearfix();
+        label {
+          float: left;
+          width: 35%;
+          margin: 0 10px 0 0;
+        }
+        span {
+          display: inline-block;
+          margin-top: 1px;
+        }
+      }
+    }
+  }
+  .risk-content {
+    h3 {
+      font-weight: normal;
+      padding-bottom: 5px;
+      color: $headerTitle;
+    }
+    h4 {
+      border-top: 1px solid $lightGray;
+      padding-top: 10px;
+      margin-bottom: 10px;
+      color: $headerTitle;
+    }
+    .rtf {
+      font-size: 12px;
+      color: $text;
+    }
+    .risk-level {
+      float: right;
+      font-size: 11px;
+      font-weight: bold;
+      color: $red;
+      margin-top: 10px;
+    }
+  }
+  ul.single-row-tabs {
+    li {
+      float: none;
+      clear: both;
+      padding: 0;
+      margin: 0;
+      a {
+        padding: 0;
+        border: none;
+        &:hover {
+          background: none;
+          @include border-radius(0);
+          border: none;
+        }
+      }
+    }
+  }
+}
+
+.widget-filters {
+  @include background-image(linear-gradient(top, #eee, $white));
+  @include border-radius(4px 0 4px 4px);
+  border:1px solid #ddd;
+  margin-bottom:10px;
+  padding:6px;
+  form.form-inline {
+    margin-bottom:0;
+  }
+  select {
+    width:auto;
+  }
+  input {
+    width:auto;
+  }
+  label {
+    margin-left:30px;
+    text-transform:uppercase;
+    color:$gray;
+    @include text-shadow(0 1px 1px $white);
+    font-size:11px;
+    &.label-title {
+      margin-left:0;
+    }
+  }
+}
+
+.filter-trigger {
+  position:absolute;
+  bottom:0;
+  right:0;
+  @include border-radius(4px 4px 0 0);
+  &:focus {
+    @include outline-fix();
+  }
+
+}

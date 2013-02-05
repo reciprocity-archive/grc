@@ -1,21 +1,24 @@
 .modal-header
-  %nav
-    =yield_content!(:modal_buttons)
-    -help_path = yield_content!(:modal_help)
+  =yield_content!(:modal_buttons)
+  -help_path = yield_content!(:modal_help)
+  .pull-right
     -if !help_path.blank?
-      %a.widgetbtn{ :href => "/help/#{help_path}", :'data-toggle' => 'modal-ajax', :title => "Help - What is this?"}
-        %i.grcicon-questionmark-grey
-    %a.widgetbtn{ :'data-dismiss' => 'modal', :href => 'javascript://'}
+      %a.btn.btn-mini{:href => "/help/#{help_path}", :'data-toggle' => 'modal-ajax', :title => "Help - What is this?"}
+        %i.grcicon-help-black
+    %a.btn.btn-mini{:'data-dismiss' => 'modal', :href => 'javascript://'}
       %i.grcicon-x-grey
-  =yield_content!(:modal_title) || 'Add Object'
+  
+  %h2=yield_content!(:modal_title) || 'Add Object'
 
 .modal-body
   =yield
 
+
 .modal-footer
   .row-fluid
-    %nav.fltlft.txtlft.span3
-      %a.btn.btn-large{:'data-dismiss' => 'modal-reset', :href => 'javascript://' } Cancel
     .span6
-    %nav.fltrt.txtrt.span3
-      %a.btn.btn-large.btn-primary.preventdoubleclick{:'data-toggle' => 'modal-submit', :href => 'javascript://' } Save
+      .deny-buttons
+        %a.btn{:'data-dismiss' => 'modal-reset', :href => 'javascript://' } Cancel
+    .span6
+      .confirm-buttons
+        %a.btn.btn-primary.preventdoubleclick{:'data-toggle' => 'modal-submit', :href => 'javascript://' } Save 

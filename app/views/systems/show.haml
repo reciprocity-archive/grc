@@ -1,40 +1,51 @@
 -@title = "GRC #{@system.is_biz_process ? 'Biz Process' : 'System'}: #{@system.title}"
 
 -content_for :header do
-  %ol#breadcrumb
+  %ul.breadcrumbs
     %li=@system.is_biz_process ? 'BIZ PROCESSES' : 'SYSTEMS'
     %li=@system.slug
-  .location#pageTitle=@system.title
+    
+  %h1
+    %span
+      =@system.is_biz_process ? 'Biz Process:' : 'System:'
+    =@system.title
 
 -content_for :page_help, 'system'
 
 -content_for :subheader_extras do
-  %h1.fltrt.highlighted=@system.is_biz_process ? 'Biz Process' : 'System'
+  %ul.actions.pull-right
+    %li
+      %a{ :href => edit_flow_system_path(@system), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide', :title => 'Edit System' }
+        %i.grcicon-edit-new
+        Edit
+        =@system.is_biz_process ? 'Biz Process' : 'System'
 
 -content_for :subheader_plus do
   %a.navbarplus.fltrt{ :href => new_flow_system_path(:'system[is_biz_process]' => @system.is_biz_process), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
 
-.row-static
-  .doubleColumn
-    .maxHalfHeight
+.container-fluid
+  #system_columns.row-fluid{ :'data-resize' => "true" }
+    #middle_column.span8.widget-area
       =render :partial => 'systems/sub_systems',
               :layout => 'layouts/widget_box',
               :locals => { :system => @system }
-    .singleColumn.maxHalfHeight
-      =render :partial => 'systems/super_systems',
-              :layout => 'layouts/widget_box',
-              :locals => { :system => @system }
-    .singleColumn.maxHalfHeight
-      =render :partial => 'systems/transactions',
-              :layout => 'layouts/widget_box',
-              :locals => { :system => @system }
-
-  .singleColumn
-    .fullHeight
+      
+      .row-fluid
+        .span6           
+          =render :partial => 'systems/super_systems',
+                  :layout => 'layouts/widget_box',
+                  :locals => { :system => @system }
+        .span6
+          =render :partial => 'systems/transactions',
+                  :layout => 'layouts/widget_box',
+                  :locals => { :system => @system }
+  
+  
+    #right_column.span4.widget-area
       =render :partial => 'systems/show',
               :layout => 'layouts/widget_box',
-              :locals => { :system => @system }
-
+              :locals => { :system => @system, :widget_class => 'secondary' }
+              
       =render :partial => 'shared/related',
               :layout => 'layouts/widget_box',
               :locals => { :instance => @system }

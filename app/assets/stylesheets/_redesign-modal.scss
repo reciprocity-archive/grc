@@ -1,0 +1,216 @@
+.modal {
+  width:700px;
+  margin-left: -350px;
+  form {
+    margin: 0;
+  }
+  &.modal-wide {
+    width:960px;
+    margin-left:-480px;
+  }
+  .modal-header {
+    @include gradient-vertical(#0088cc, #0055cc);
+    border-bottom: 1px solid $modalHeaderBorder;
+    @include box-shadow(inset 0 -1px 0 $modalHeaderShadow);
+    .btn {
+      margin-top: 2px;
+      padding: 2px;
+      &:hover,
+      &:active {
+        border: 1px solid $white;
+      }
+    }
+    h2 {
+      color: $white;
+      text-shadow: 0;
+      span {
+        display: block;
+        line-height: 18px;
+        font-size: 14px;
+      }
+    }
+    &.modal-alert {
+      @include gradient-vertical(darken($darkGray,30%), $black);
+      border-bottom: 1px solid $modalHeaderBorder;
+      @include box-shadow(inset 0 -1px 0 $modalHeaderShadow);
+    }
+  }
+  .modal-body {
+    input,
+    textarea {
+      @include placeholder($footerBorder);
+    }
+    label {
+      font-weight: bold;
+      font-size: 11px;
+      color: $darkGray;
+      .required {
+        color: $red;
+        font-weight: bold;
+      }
+    }
+    h4 {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .field-failure {
+      input {
+        border: 1px solid $red;
+        @include placeholder($lightRed);
+      }
+      label {
+        color: $red;
+      }
+      .help-inline {
+        margin: -8px 0 8px 0;
+        display: block;
+        font-size: 11px;
+        font-weight: bold;
+        color: $red;
+        padding: 0;
+      }
+      .wysiwyg-area {
+        border: 1px solid $red;
+        background: lighten($lightRed,10%);
+        textarea {
+          border: 1px solid $red;
+        }
+      }
+    }
+    .wysiwyg-area {
+      border: 1px solid $widgetBorder;
+      @include border-radius($default-border-radius);
+      padding: 4px;
+      background: $lightGray;
+      margin-bottom: 10px;
+      .double {
+        height: 70px;
+      }
+      select {
+        float: right;
+        width: auto;
+        margin: 4px 0 0 0;
+        height: 22px;
+        line-height: 22px;
+      }
+      // smaller buttons in wysiwyg editor
+      .btn {
+        padding:0px 5px 2px 5px;
+        font-size:11px;
+        @include opacity(0.5);
+        &:hover {
+          @include opacity(1);
+        }
+      }
+      .help-inline {
+        display:none;
+      }
+      ul.wysihtml5-toolbar > li {
+        margin-bottom:4px;
+        margin-top:4px;
+      }
+    }
+    .modal-source {
+      h3 {
+        font-size: 16px;
+      }
+      .active {
+        i.grcicon-edit-new {
+          background-position:-48px -32px;
+        }
+      }
+      .role-btn {
+        margin-right: 20px;
+        margin-top: 2px;
+      }
+      .source,
+      .target {
+        @include reset-list();
+        overflow-x: hidden;
+        overflow-y: auto;
+        height: 325px;
+        padding-right: 10px;
+        li {
+          border-bottom: 1px solid $lightGray;
+          line-height: 28px;
+          padding: 4px 0;
+          &:hover {
+            cursor: pointer;
+            background: lighten($lightGray,3%);
+          }
+          &:last-child {
+            border-bottom: none;
+          }
+          .option {
+            font-weight: bold;
+            font-size: 11px;
+          }
+          .btn-mini {
+            padding-left: 2px;
+            padding-right: 2px;
+          }
+          .btn-group {
+            .btn-mini {
+              padding-left: 5px;
+              padding-right: 5px;
+              font-size: 11px;
+              line-height: 18px;
+              height: 18px
+            }
+          }
+          .state {
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: $green;
+            text-align: right;
+          }
+        }
+      }
+      .target {
+        margin-top: 12px;
+      }
+    }
+  }
+  .modal-info {
+    background: $widgetFooteBgnd;
+    padding: 5px 20px 4px 20px;
+    font-size: 11px;
+    color: $darkGray;
+    .span3 {
+      min-height: auto;
+    }
+  }
+  .modal-footer {
+    background: $lightGray;
+    text-align: left;
+    .deny-buttons {
+      .btn {
+        &:hover {
+          border: 1px solid $white;
+        }
+      }
+    }
+    .version-nav {
+      text-align: center;
+      font-size: 11px;
+      color: $gray;
+      .btn {
+        i {
+          @include opacity(0.4);
+          @include transition(opacity 0.3s ease);
+        }
+        &:hover {
+          border: 1px solid $white;
+          i {
+            @include opacity(1);
+          }
+        }
+      }
+    }
+    .confirm-buttons {
+      text-align: right;
+    }
+  }
+}

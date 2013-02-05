@@ -1,45 +1,55 @@
 -# locals: object
 -all_object_documents = object.object_documents.all
 
-.row-fluid.js-list-container-title
-  .span10
-    %h3.toggle{"data-target" => "#referenceListCollapse", "data-toggle" => "collapse"}
-      .expander
-      References
-      %span{:class => "grc-badge #{all_object_documents.count.zero? ? "no-object" : ""}"}=all_object_documents.count
-  .span2
-    %a.widgetbtn.pull-right.juke-left{:href => list_edit_flow_object_documents_path(:object_type => object.class.name, :object_id => object.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#referenceList', :'data-modal-class' => 'modal-wide' }
-      %i.grcicon-edit-grey
+.js-list-container-title
+  %h3
+    References
+    %span{:class => "grc-badge #{all_object_documents.count.zero? ? "no-object" : ""}"}
+      (#{all_object_documents.count})
+  .item-actions
+    %a{:href => list_edit_flow_object_documents_path(:object_type => object.class.name, :object_id => object.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#referenceList', :'data-modal-class' => 'modal-wide'}
+      %i.grcicon-edit-new
 
-.collapse#referenceListCollapse
-  .bootstrap-collapse-bugfix
-
+%section.content
   %script#reference_list_item{ :type => 'text/html', :'data-member' => 'object_document'}
-    %li.controlSlot{ :'data-id' => '<%= document.id %>' }
+    %li.controlSlot.main{ :'data-id' => '<%= document.id %>' }
       <% if (document.link_url && document.link_url.length > 0) { %>
-      %a.reference{:href => '<%= document.link_url %>', :target => "_blank"}
-        %span.controls-group <%= document.document_type || '&nbsp;' %>
-        %br
-        %span.controls-subgroup{ :title => '<%= document.link_url %>' } <%= document.title || document.link_url || '&nbsp;' %>
+      .item-identifier
+        .item-title
+          %span.addition-info
+            %a.reference{:href => '<%= document.link_url %>', :target => "_blank"}
+              <%= document.title || document.link_url || '&nbsp;' %>
+          %span.option
+            <%= document.document_type || '&nbsp;' %>
+      
       <% } else { %>
-      %span.reference
-        %span.controls-group <%= document.document_type || '&nbsp;' %>
-        %br
-        %span.controls-subgroup{ :title => '<%= document.link_url %>' } <%= document.title || document.link_url || '&nbsp;' %>
+      .item-identifier
+        .item-title
+          %span.addition-info
+            <%= document.title || document.link_url || '&nbsp;' %>
+          %span.option
+            <%= document.document_type || '&nbsp;' %>
       <% } %>
-
-  %ul#referenceList{ :'data-template-id' => 'reference_list_item' }
+  
+  %ul#referenceList.tree{ :'data-template-id' => 'reference_list_item' }
     -all_object_documents.each do |object_item|
       -item = object_item.document
-      %li.controlSlot{ :'data-id' => item.id }
+      %li.main{ :'data-id' => item.id }
         -if item.link_url.present?
-          %a.reference{:href => item.link_url, :target => "_blank"}
-            %span.controls-group=item.document_type || '&nbsp;'.html_safe
-            %br
-            %span.controls-subgroup{:title => item.link_url}=item.title.presence || item.link_url || '&nbsp;'.html_safe
+          .item-identifier
+            .item-title
+              %span.addition-info
+                %a.reference{:href => item.link_url, :target => "_blank"}
+                  =item.title.presence || item.link_url || ''.html_safe
+              %span.option
+                =item.document_type || ''.html_safe
+                  
         -else
-          %span.reference
-            %span.controls-group=item.document_type || '&nbsp;'.html_safe
-            %br
-            %span.controls-subgroup{:title => item.link_url}=item.title.presence || item.link_url || '&nbsp;'.html_safe
-
+          .item-identifier
+            .item-title
+              %span.addition-info
+                =item.title.presence || item.link_url || ';'.html_safe
+              %span.option
+                =item.document_type || ''.html_safe
+                
+  

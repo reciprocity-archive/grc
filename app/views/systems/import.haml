@@ -1,11 +1,15 @@
 -content_for :page_help, 'import'
 
 -content_for :header do
-  %ol#breadcrumb
-    %li=link_to 'ADMIN', admin_dash_path
-    %li.last= 'Import Systems'
-  .location#pageTitle Import Systems
 
-.row-static
-  =render :partial => 'systems/import',
-          :layout => 'layouts/widget_box'
+  %ul.breadcrumbs
+    %li=link_to 'ADMIN', admin_dash_path
+    %li= 'Import Systems'    
+    
+  %h1
+    Import Systems
+
+.container-fluid
+  .row-fluid
+    =render :partial => 'systems/import',
+            :layout => 'layouts/widget_box'

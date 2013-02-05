@@ -56,7 +56,7 @@ class SystemsController < BaseObjectsController
     respond_to do |format|
       format.html do
         if params[:quick]
-          render :partial => 'quick'
+          render :partial => 'quick', :locals => { :quick_result => params[:qr]}
         end
       end
       format.json do
@@ -218,6 +218,26 @@ class SystemsController < BaseObjectsController
     read_import(import, SYSTEM_MAP, "system", rows)
 
     import
+  end
+
+  def new_object_title
+    if object.present? && object.is_biz_process?
+      "Business Process"
+    else
+      "System"
+    end
+  end
+
+  def new_object_path
+    if object.present?
+      if object.is_biz_process?
+        new_flow_system_path(:'system[is_biz_process]' => true)
+      else
+        new_flow_system_path(:'system[is_biz_process]' => false)
+      end
+    else
+      new_flow_system_path
+    end
   end
 
   private

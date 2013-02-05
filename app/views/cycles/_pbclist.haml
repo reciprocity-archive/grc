@@ -3,6 +3,8 @@
 
 -content_for :widget_help, 'cycle_pbclist'
 
+-content_for :widget_id, 'cycle_pbclist_widget'
+
 -content_for :widget_buttons do
   -if cycle.pbc_lists.count == 0
     %a.widgetbtn{ :href => new_flow_pbc_list_path(:'pbc_list[audit_cycle_id]' => cycle.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide'}
@@ -20,6 +22,6 @@
       .bar.bar-warning{:rel => "tooltip", :'data-placement' => "top", :title => "Waiting Compliance (#{status_counts['Waiting Compliance']})", :'data-percentage' => status_percentages['Waiting Compliance']}
       .bar.bar-success{:rel => "tooltip", :'data-placement' => "top", :title => "Completed (#{status_counts['Completed']})", :'data-percentage' => status_percentages['Completed']}
 
-  %a.btn.btn-mini.pull-right{ :href => flow_pbc_list_path(pbc_list.id), :style => "margin-top:6px" }
-    &nbsp; View PBC List
+  %a.btn.pull-right{ :href => flow_pbc_list_path(pbc_list.id) }
+    View PBC List
     %i.grcicon-arrowright

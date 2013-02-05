@@ -1,40 +1,58 @@
 -# locals: control, systems
+    
+%h3.tab-title
+  Systems or Processes that implement this Control
+  %a.btn.btn-mini.pull-right{ :href => list_edit_flow_system_controls_path(:control_id => control.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :rel => 'tooltip', :'data-placement' => 'left', :title => 'Link systems to this control', :'data-modal-class' => 'modal-wide' }
+    %i.grcicon-link-new
 
-.row-fluid
-  .span12.captionbox
-    %a.widgetbtn.pull-right{ :href => list_edit_flow_system_controls_path(:control_id => control.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :rel => 'tooltip', :title => 'Link systems to this control', :'data-modal-class' => 'modal-wide' }
-      %i.grcicon-link
-    %h4
-      Systems or Processes that implement this Control
-
-%ul.slotlist
+%ul.tree-structure
   -systems.each_with_index do |system, i|
-    -id_prefix = "system-#{i}"
-    -summary_toggle_target = "#{id_prefix}-summary"
-
     %li
-      .row-fluid
-        .slot.span12.processslot
-          .slottitle.span8.toggle{"data-target" => "##{summary_toggle_target}", "data-toggle" => "collapse"}
-            .expander
-            %span.prefix=system.slug
-            =system.title
-          -if has_feature? :BETA
-            .slotcolumn.span2
-              .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
-            .slotowner.span1
-              %a.slotowner{:href => "#"} Owner Joe
-          -else
-            .span3{"data-target" => "##{summary_toggle_target}", "data-toggle" => "collapse"}
-          .slotactions.pull-right
-            %a.btn.btn-mini.btn-blue.halfopacity{ "data-target" => "##{summary_toggle_target}", "data-toggle" => "collapse", "rel" => "tooltip", "data-placement" => "left", "title" => "More" }
-              %i.grcicon-more
-
-      .row-fluid.collapse{ :id => summary_toggle_target }
-        .span12.morewell.statusblue.nominheight
-          .slotcontent.span12
-            %ul.contentactions.pull-right
-              %li
-                %a.btn.btn-mini.halfopacity{ "rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => flow_system_path(system.id) }
-                  %i.grcicon-arrowright-black
-            =display_as_html system.description
+      .item-main
+        .item-title
+          .row-fluid
+            .span10
+              .oneline
+                %span.code=system.slug
+                %span.title=system.title
+                %span.description=system.description
+                
+                
+          .item-actions
+            %a{:href => flow_system_path(system.id), :class => "btn btn-mini", :rel => "tooltip" , :'data-placement' => "left", :title => "View Object"}
+              %i.grcicon-goto
+%ul.tree
+  -systems.each_with_index do |system, i|
+    %li.main
+      .item-identifier
+        .item-title
+          .row-fluid
+            .span2
+              %p.key.oneline=system.slug
+            -if has_feature? :BETA
+              .span5
+                %p.additional-info.oneline
+                  %span=system.title
+                  -if system.description != ""
+                    %a.more{:href=>"#"} more...
+                    %br
+                    %span.description=system.description
+            -else
+              .span8
+                %p.additional-info.oneline
+                  %span=system.title
+                  -if system.description != ""
+                    %a.more{:href=>"#"} more...
+                    %br
+                    %span.description=system.description
+          
+            -if has_feature? :BETA
+              .span5
+                %span.label Data Integrity
+                %span.additional-info
+                  Owner: Jonathan Myers
+        .item-actions
+          %a{:href => flow_system_path(system.id), :class => "btn btn-mini", :rel => "tooltip" , :'data-placement' => "left", :title => "View Object"}
+            %i.grcicon-goto
+      .item-content
+        =display_as_html system.description

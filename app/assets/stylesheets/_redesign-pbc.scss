@@ -1,0 +1,231 @@
+.ca-fields {
+  span {
+    font-size:11px;
+    color:$gray;
+  }
+  .btn {
+    margin-left:0;
+    padding-left:1px;
+    padding-right:2px;
+    @include border-radius(20px);
+    border-color:lighten($gray,10%);
+    i {
+      margin-top:0;
+    }
+    &.btn-success {
+      border-color: #51A351;
+    }
+    &.btn-warning {
+      border-color: #F9A732;
+    }
+  }
+}
+
+.headline {
+  text-transform:uppercase;
+  border-bottom:1px solid $lightGray;
+  margin-top:10px;
+  font-size:11px;
+  color:$gray;
+  [class*="span"] {
+    padding-bottom:0;
+    margin-bottom:0;
+    min-height:0;
+  }
+}
+
+span.tiny-title {
+  font-size:13px;
+  color:$gray;
+}
+
+ul.tree-structure.pbc {
+  .openclose {
+    margin-top:8px;
+  }
+}
+
+.requests {
+  .item-title {
+    color:$gray;
+    i {
+      margin-top:8px;
+    }
+    .item-actions {
+      padding-top:1px;
+      i {
+        margin-top:0px;
+      }
+    }
+    span.control {
+      font-weight:bold;
+      color:$green;
+      &.error {
+        color:$error;
+      }
+    }
+    span.date {
+      font-style:italic;
+      color:#aaa;
+    }
+    span.request-title {
+      text-transform:uppercase;
+      color:darken($gray,20%);
+    }
+    .status {
+      position:relative;
+      select {
+        position:absolute;
+        top:4px;
+        left:-7px;
+        display:block;
+        line-height:23px;
+        height:23px;
+        padding:2px;
+        width:auto;
+        border-color:darken($lightGray,15%);
+        @include border-radius();
+      }    
+    }
+    .asignee {
+      position:relative;
+      select {
+        position:absolute;
+        top:4px;
+        left:54px;
+        display:block;
+        line-height:23px;
+        height:23px;
+        padding:2px;
+        width:auto;
+        border-color:darken($lightGray,15%);
+        @include border-radius();
+      }    
+    }
+
+  }
+  .btn-controllink {
+    @include opacity(0.5);
+    margin-top:-2px;
+    padding-left:2px;
+    padding-right:2px;
+    i {
+      margin-top:0;
+    }
+    &:hover {
+      @include opacity(1);
+    }
+  }
+  .request-main {
+    margin-left:25px;
+    margin-top:6px;
+    h5 {
+      margin-bottom:4px;
+    }
+    p {
+      font-size:12px;
+      &.disabled-text {
+        font-size:12px;
+        color:lighten($gray,10%);
+        margin-top:-2px;
+      }
+    }
+    
+  }
+  .rtf {
+    font-size:12px;
+    line-height:16px;
+    color:$text;
+  }
+}
+
+h4.pbc-title {
+  font-weight:bold;
+  line-height:32px;
+  margin-right:10px;
+}
+
+.responses {
+  padding:6px 20px;
+  background:#e8fdd6;
+  margin-left:25px;
+  margin-bottom:20px;
+  border:1px solid #cdecb4;
+  position:relative;
+  .bg-caret {
+    background: url('/images/bgnd-responses.png') no-repeat 0 0;
+    width:13px;
+    height:7px;
+    position:absolute;
+    top:-1px;
+    left:20px;
+    z-index:2;
+  }
+  .item-title {
+    color:#111;
+  }
+  ul.tree-structure {
+    margin-top:8px;
+    border-color:#cdecb4 !important;
+    .pbc-counter {
+      display:inline-block;
+      line-height:28px;
+      i {
+        margin-top:4px;
+      }
+      &.empty {
+        @include opacity(0.3);
+      }
+    }
+    .sample-widget {
+      .input-block-level {
+        margin: 3px 0 0 0;
+      }
+    }
+    &.add-response {
+      border:none !important;
+      li {
+        .next-each-other {
+          @include clearfix();
+          input {
+            float:left;
+            margin-right: 4px;
+          }
+          span {
+            float:left;
+          }
+          .btn {
+            margin-top: 3px;
+          }
+        }
+      }
+    }
+    li {
+      border-color:#cdecb4;
+      .response-items {
+        margin-left:25px;
+      }
+    }
+  }
+  .inner-system {
+    border:1px solid #cdecb4;
+    background:darken(#e8fdd6,5%);
+    @include border-radius();
+    padding:8px 12px;
+    margin-bottom:8px;
+    
+  }
+  .inner-response {
+    border:#e8fdd6;
+    padding:8px 0;
+  }
+  ul.items {
+    @include reset-list();
+    margin-top:4px;
+    li {
+      border:none;
+      line-height:20px;
+      @include clearfix();
+    }
+  }
+}

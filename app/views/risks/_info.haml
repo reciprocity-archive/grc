@@ -7,62 +7,42 @@
 
 -content_for :widget_help, "#{model_name}_info"
 
--content_for :widget_buttons do
-  %a.widgetbtn{ :href => method("edit_flow_#{model_name}_path").call(instance),
-                :'data-toggle' => 'modal-ajax-form',
-                :'data-modal-reset' => 'reset',
-                :'data-form-target' => 'refresh',
-                :'data-modal-class' => 'modal-wide',
-                :title => "Edit #{model_title}" }
-    %i.grcicon-edit-grey
+-content_for :widget_id, "#{model_name}_info_widget"
 
-.information.information-common
-  .toolbar-widget
-
-  %hr.hr-widget
-
-  .row-fluid
-    .span8
-      %label Title
-      %span.info-item=instance.title
-    .span4
-      %label Code
-      %span.info-item=instance.slug
-
-  .row-fluid
-    .span12
-      %br
-      %label Description
+%ul.info-list
+  %li.float-element
+    %label
+      Title
+    %span
+      =instance.title
+  %li.float-element
+    %label
+      Code
+    %span
+      =instance.slug
+  %li
+    %label
+      Description
+    %span
       =display_as_html instance.description
 
-%hr.hr-widget
-
-.row-fluid
-  .span12
+%ul.tree
+  %li.category
     =render :partial => 'categories/object_list',
             :locals  => { :object => instance, :scope_id => Risk::CATEGORY_TYPE_ID }
-
-%hr.hr-widget
-
-.row-fluid
-  .span12
+  %li.category
     =render :partial => 'documents/object_list',
             :locals  => { :object => instance }
-
-%hr.hr-widget
-
-.row-fluid
-  .span12
+  %li.category
     =render :partial => 'people/object_list',
             :locals  => { :object => instance }
 
-%hr.hr-widget
-
-.row-fluid
-  .span6.nominheight
-    %label.fltlft
-      %strong> Created: #{instance.created_at.strftime("%m/%d/%y")}
-  .span6.nominheight
-    %label.fltrt
-      %strong> Updated: #{instance.updated_at.strftime("%m/%d/%y")}
+%section.footer
+  .row-fluid
+    .span6
+      %p.footer-left
+        Created: #{instance.created_at.strftime("%m/%d/%y")}
+    .span6
+      %p.footer-right
+        Updated: #{instance.updated_at.strftime("%m/%d/%y")}
 

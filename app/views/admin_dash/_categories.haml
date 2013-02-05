@@ -3,9 +3,19 @@
 
 -content_for :widget_help, 'admin_categories'
 
+-content_for :widget_id, 'admin_categories_widget'
+
 -content_for :widget_buttons do
-  %a.btn.widgettextbtn{ :href => new_flow_category_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :title => 'Create New Category' } Add Category
-  %a.btn.widgettextbtn{ :href => new_flow_option_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :title => 'Create New Option' } Add Option
+  .filter
+    .row-fluid
+      .span12
+        .pull-right
+          %a.btn.btn-add{:href => new_flow_category_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :title => 'Create New Category' }
+            %i.grcicon-add-new
+            Category
+          %a.btn.btn-add{:href => new_flow_option_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :title => 'Create New Option' }
+            %i.grcicon-add-new
+            Option
 
 -#-content_for :widget_buttons do
   %input.ui-corner-all.widgetsearch.clear-value(type='text' placeholder='Search')
