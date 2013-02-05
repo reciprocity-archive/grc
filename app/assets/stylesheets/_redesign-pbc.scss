@@ -167,6 +167,39 @@ h4.pbc-title {
   ul.tree-structure {
     margin-top:8px;
     border-color:#cdecb4 !important;
+    .pbc-counter {
+      display:inline-block;
+      line-height:28px;
+      i {
+        margin-top:4px;
+      }
+      &.empty {
+        @include opacity(0.3);
+      }
+    }
+    .sample-widget {
+      .input-block-level {
+        margin: 3px 0 0 0;
+      }
+    }
+    &.add-response {
+      border:none !important;
+      li {
+        .next-each-other {
+          @include clearfix();
+          input {
+            float:left;
+            margin-right: 4px;
+          }
+          span {
+            float:left;
+          }
+          .btn {
+            margin-top: 3px;
+          }
+        }
+      }
+    }
     li {
       border-color:#cdecb4;
       .response-items {

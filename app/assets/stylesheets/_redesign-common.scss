@@ -146,6 +146,13 @@ input.date {
   background-position: -141px -123px;
 }
 
+input.input-block-level {
+  display: block;
+  width: 100%;
+  @include box-sizing(border-box);
+  min-height: 28px;
+}
+
 .no-result {
   text-align: center;
   font-weight: bold;
@@ -158,8 +165,10 @@ input.date {
   }
 }
 
+/*
 .collapse {
   display:block;
   overflow:visible;
   height:auto !important;
 }
+*/
