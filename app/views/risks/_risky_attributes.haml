@@ -8,6 +8,8 @@
 
 -content_for :widget_help, "#{model_name}_risky_attributes"
 
+-content_for :widget_help, "#{model_name}_risky_attributes_widget"
+
 -content_for :widget_buttons do
   -#%input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
   %a.widgetbtn{:href => list_edit_flow_risk_risky_attributes_path(:risk_id => instance.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#risky_attributeList', :'data-modal-class' => 'modal-wide' }

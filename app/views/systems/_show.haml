@@ -3,6 +3,8 @@
 
 -content_for :widget_help, 'system_info'
 
+-content_for :widget_id, 'system_info_widget'
+
 .information
   -if has_feature?(:BETA)
     -status_counts, status_percentages = [[5,9,2,4], [25,45,10,20]]

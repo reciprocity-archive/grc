@@ -24,12 +24,12 @@
   %a.navbarplus.fltrt{ :href => new_flow_control_path('control[program_id]' => @control.program_id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
 
 .container-fluid
-  .row-fluid
-    .span3
+  #controls_columns.row-fluid{ :'data-resize' => "true" }
+    #left_column.span3.widget-area
       =render :partial => 'controls/show',
               :layout => 'layouts/widget_box',
               :locals => { :control => @control, :widget_class => 'secondary' }
-    .span9
+    #main_column.span9.widget-area
       =render :partial => 'controls/main',
               :layout => 'layouts/widget_box',
               :locals => { :control => @control }

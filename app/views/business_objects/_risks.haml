@@ -6,5 +6,7 @@
 
 -content_for :widget_help, "#{model_name}_risks"
 
+-content_for :widget_id, "#{model_name}_risks_widget"
+
 %ul.slotlist
   =render :partial => 'risk_object_tree', :locals => { :instance => instance, :is_root => true }

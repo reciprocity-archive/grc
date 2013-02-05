@@ -30,12 +30,12 @@
   %a.navbarplus.fltrt{ :href => method("new_flow_#{model_name}_path").call(), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide'}
 
 .container-fluid
-  .row-fluid
-    .span3
+  #risks_columns.row-fluid{ :'data-resize' => "true" }
+    #left_column.span3.widget-area
       =render :partial => "info",
               :layout => 'layouts/widget_box',
               :locals => { model_name.to_sym => instance, :widget_class => 'secondary' }
-    .span6
+    #middle_column.span6.widget-area
       =render :partial => "main",
               :layout => 'layouts/widget_box',
               :locals => { model_name.to_sym => instance }
@@ -44,7 +44,7 @@
               :layout => 'layouts/widget_box',
               :locals => { model_name.to_sym => instance }
   
-    .span3
+    #right_column.span3.widget-area
       =render :partial => "risky_attributes",
               :layout => 'layouts/widget_box',
               :locals => { model_name.to_sym => instance }

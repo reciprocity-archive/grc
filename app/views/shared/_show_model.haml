@@ -30,22 +30,23 @@
   %a.navbarplus.fltrt{ :href => method("new_flow_#{model_name}_path").call(), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide'}
 
 .container-fluid
-  .row-fluid
-    .span3
+  #show_columns.row-fluid{ :'data-resize' => "true" }
+    #left_column.span3.widget-area
       =render :partial => "info",
               :layout => 'layouts/widget_box',
               :locals => { model_name.to_sym => instance, :widget_class => 'secondary' }
-    .span6
+    #middle_column.span6.widget-area
       -#=render :partial => "shared/graph",
               :layout => 'layouts/widget_box',
               :locals => { model_name.to_sym => instance,
-                :instance => instance}
+                :instance => instance,
+                :widget_id => model_name + "_graph_widget" }
   
       =render :partial => "main",
               :layout => 'layouts/widget_box',
-              :locals => { model_name.to_sym => instance }
+              :locals => { model_name.to_sym => instance, :widget_id => model_name + "_widget" }
   
-    .span3
+    #right_column.span3.widget-area
       -if instance.class.respond_to?(:valid_relationships)
         =render :partial => 'shared/related',
                 :layout => 'layouts/widget_box',

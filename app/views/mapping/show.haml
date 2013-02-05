@@ -14,7 +14,7 @@
 -content_for :page_help, 'mapping'
 
 .container-fluid.reg-mapper
-  .row-fluid
+  #mapping_columns.row-fluid{ :'data-resize' => "true" }
     .span4
       #section_list
         =render :partial => 'section_list',

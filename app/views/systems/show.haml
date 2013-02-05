@@ -24,12 +24,12 @@
   %a.navbarplus.fltrt{ :href => new_flow_system_path(:'system[is_biz_process]' => @system.is_biz_process), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
 
 .container-fluid
-  .row-fluid
-    .span3
+  #system_columns.row-fluid{ :'data-resize' => "true" }
+    #left_column.span3.widget-area
       =render :partial => 'systems/show',
               :layout => 'layouts/widget_box',
               :locals => { :system => @system, :widget_class => 'secondary' }
-    .span6
+    #middle_column.span6.widget-area
       =render :partial => 'systems/sub_systems',
               :layout => 'layouts/widget_box',
               :locals => { :system => @system }
@@ -45,7 +45,7 @@
                   :locals => { :system => @system }
   
   
-    .span3
+    #right_column.span3.widget-area
       =render :partial => 'shared/related',
               :layout => 'layouts/widget_box',
               :locals => { :instance => @system }
