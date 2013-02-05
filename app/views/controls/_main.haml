@@ -5,7 +5,7 @@
 
 -content_for :widget_id, 'control_main_widget'
 
-.tabbable.tabs-left
+.tabbable
   %ul.nav.nav-tabs
     %li=link_to 'Systems/Business Processes', '#systems', :data => { :toggle => 'tab', :'tab-href' => systems_flow_control_path(control) }
     -if control.program.company?
