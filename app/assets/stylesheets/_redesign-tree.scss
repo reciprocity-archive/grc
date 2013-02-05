@@ -26,13 +26,15 @@ ul.single-row-tabs {
     float: none;
     clear: both;
     padding: 0;
-    a {
-      padding: 0;
-      border: none;
-      &:hover {
-        background: none;
-        @include border-radius(0);
+    .item-title {
+      a {
+        padding: 0;
         border: none;
+        &:hover {
+          background: none;
+          @include border-radius(0);
+          border: none;
+        }
       }
     }
     .item-identifier {
