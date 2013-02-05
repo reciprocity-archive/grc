@@ -1,10 +1,7 @@
 -# locals: instance
 
-
-.row-fluid
-  .span12.captionbox
-    %h4
-      Business Objects impacted by this Risk
+%h3.tab-title
+  Business Objects impacted by this Risk
 
 -instance.risky_attributes.each_with_index do |risky_attribute, i|
   -id_prefix = "risky_attribute-#{i}"
@@ -45,6 +42,6 @@
               %ul.contentactions.pull-right
                 %li
                   %a.btn.btn-mini.halfopacity{ "rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => send("flow_#{object.class.name.underscore}_path", object.id) }
-                    %i.grcicon-arrowright-black
+                    %i.grcicon-goto
               =display_as_html object.description
               

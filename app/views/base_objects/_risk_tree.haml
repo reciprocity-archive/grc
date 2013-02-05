@@ -31,7 +31,7 @@
         =risk.title
       -if has_feature? :BETA
         .slotcolumn.span2
-          .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
+          .halfopacity.span12.btn.btn-slotcolumn Data Integrity
         .slotowner.span1
           %a.slotowner{:href => "#"} Owner Joe
       -else
@@ -41,19 +41,19 @@
           %i.grcicon-more
 
   .row-fluid.collapse{ :id => summary_toggle_target, :class => is_root ? 'in' : '' }
-    .span12.morewell.statusblue.nominheight
+    .span12.morewell.statusblue
       .slotcontent.span12
         %ul.contentactions.pull-right
           -if is_editable
             %li
               %a.btn.btn-mini.halfopacity{ "rel" => "tooltip", "data-placement" => "left", "title" => "Edit this object", 'data-modal-class' => 'modal-wide', 'data-form-target' => 'refresh', "data-toggle" => "modal-ajax-form", :href => url_for(:id => risk.id, :action => :edit, :controller => model_underscore.pluralize, :only_path => true) }
-                %i.grcicon-edit-grey
+                %i.grcicon-edit-new
           %li
             %a.btn.btn-mini.halfopacity{ :href => list_edit_flow_control_risks_path(:risk_id => risk.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :rel => 'tooltip', :title => 'Link controls to this risk', :'data-modal-class' => 'modal-wide' }
-              %i.grcicon-link
+              %i.grcicon-link-new
             %li
               %a.btn.btn-mini.halfopacity{ "rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => flow_risk_path(risk.id) }
-                %i.grcicon-arrowright-black
+                %i.grcicon-goto
         =display_as_html risk.description
 
   .collapse{ :id => objects_toggle_target }
@@ -72,7 +72,7 @@
                 =control.title
               -if has_feature? :BETA
                 .slotcolumn.span2
-                  .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
+                  .halfopacity.span12.btn.btn-slotcolumn Data Integrity
                 .slotowner.span1
                   %a.slotowner{:href => "#"} Owner Bob
               -else
@@ -81,10 +81,10 @@
                 %a.btn.btn-mini.btn-blue.halfopacity{"data-target" => "##{control_summary_target}", "data-toggle" => "collapse"}
                   %i.grcicon-more
           .row-fluid.collapse{ :id => control_summary_target }
-            .span12.morewell.statusblue.nominheight
+            .span12.morewell.statusblue
               .slotcontent.span12
                 %ul.contentactions.pull-right
                   %li
                     %a.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => flow_control_path(control.id) }
-                      %i.grcicon-arrowright-black
+                      %i.grcicon-goto
                 =display_as_html control.description
