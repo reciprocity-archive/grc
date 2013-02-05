@@ -133,6 +133,9 @@
       .source,
       .target {
         @include reset-list();
+        overflow-x: hidden;
+        overflow-y: auto;
+        height: 325px;
         li {
           border-bottom: 1px solid $lightGray;
           line-height: 28px;

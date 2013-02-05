@@ -207,24 +207,6 @@ jQuery(document).ready(function($) {
         $quickFind = $this.closest(".quick-search-results");
     $quickFind.fadeOut();
   });
-  
-  // Equal height for quick find tabs
-  $('body').on('click', '.quick-search-holder input', function() {
-    var $this = $(this),
-        $tabPaneHeight = $this.closest(".quick-search").find(".tab-pane.active").height(),
-        $navBar = $this.closest(".quick-search").find(".nav-tabs");
-        
-    $navBar.css('height', $tabPaneHeight);
-    
-  });
-  
-  $('body').on('click', '.quick-search .nav-tabs', function() {
-    var $this = $(this),
-        $tabPaneHeight = $this.closest(".tabs-left").find(".tab-pane.active").height();
-        
-    $this.css('height', $tabPaneHeight);
-    
-  });
 
   // Close other popovers when one is shown
   $('body').on('show.popover', function(e) {
