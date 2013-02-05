@@ -51,7 +51,7 @@
                   .quick-search-holder
                     %button(type='submit')
                       %i.grcicon-search-new-white
-                    %input.ui-corner-all.widgetsearch.clear-value(type='text' placeholder='Type to search...')
+                    %input.ui-corner-all.widgetsearch.clear-value(type='text' placeholder='Type to search/create...')
                   .quick-search-results
                     %a.remove{:href => "#", :class => "btn btn-mini pull-right", :rel => "tooltip", :title => "Remove widget", :'data-placement'=>"left"}
                       %i.grcicon-x-grey
@@ -128,75 +128,7 @@
                             %li.demoItem
                               %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
                                 Vulnerability
-                %li.add-object.black-link
-                  .btn-group
-                    %a.dropdown-toggle{ :'data-toggle' => 'dropdown' }
-                      %i.grcicon-add-new
-                      Object
-                      %i.grcicon-carot-white
-                    %ul.dropdown-menu
-                      %li.divider
-                      %li.title Create New ...
-                      -if controller.respond_to?(:new_object_path) && controller.new_object_path.present?
-                        %li
-                          %a{ :href => controller.new_object_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                            =controller.new_object_title
-                        %li.divider
-                      %li
-                        %a{ :href => new_flow_program_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                          Program or Policy
-                      %li
-                        %a{ :href => new_flow_risky_attribute_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                          Risky Attribute
-                      %li
-                        %a{ :href => new_flow_risk_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                          Risk
-                      %li
-                        %a{ :href => new_flow_control_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                          Control
-                      %li.divider
-                      %li
-                        %a{ :href => new_flow_system_path(:'system[is_biz_process]' => 1), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                          Business Process
-                      %li
-                        %a{ :href => new_flow_system_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                          System
-                      %li.divider
-                      %li
-                        %a{ :href => new_flow_org_group_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                          Org Group
-                      %li
-                        %a{ :href => new_flow_product_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                          Product
-                      %li
-                        %a{ :href => new_flow_project_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                          Project
-                      %li
-                        %a{ :href => new_flow_facility_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                          Facility
-                      %li
-                        %a{ :href => new_flow_market_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                          Market
-                      %li
-                        %a{ :href => new_flow_data_asset_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                          Data Asset
-                      -if has_feature? :BETA
-                        %li.demoItem
-                          %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                            Person
-                        %li.demoItem
-                          %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                            Reference
-                        %li.demoItem
-                          %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                            Business Object
-                        %li.demoItem
-                          %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                            Threat
-                        %li.demoItem
-                          %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                            Vulnerability
-
+                
                 %li.black-link{:class => "#{controller.controller_name != 'programs_dash' ? '' : 'active'}"}
                   %a{:href => programs_dash_path}
                     %i.grcicon-dashboard
