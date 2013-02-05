@@ -412,6 +412,9 @@
   &.lastchild {
     cursor:default;
     background-position:-48px -64px !important;
+    &.active {
+      @include opacity(0.5);
+    }
   }
   .widget .header & {
     margin-top:4px;

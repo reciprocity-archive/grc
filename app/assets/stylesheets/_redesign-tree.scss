@@ -67,9 +67,13 @@ ul.tree-structure {
     line-height:18px;
     margin-top:6px;
     margin-bottom:5px;
-    &.code {
-      color:$subTitle;
-    }
+  }
+  .code {
+    color:$subTitle;
+    background-color:$text;
+    @include border-radius(4px);
+    padding:4px;
+    margin-right:8px;
   }
   .openclose {
     margin-top:7px;
@@ -77,6 +81,11 @@ ul.tree-structure {
     @include opacity(0.4);
     &.active {
       @include opacity(1);
+    }
+    &.lastchild {
+      &.active {
+        @include opacity(0.4);
+      }
     }
   }
   .item-title {
@@ -92,11 +101,28 @@ ul.tree-structure {
     .description {
       color:#111;
     }
+    .title {
+      margin-right:10px;
+    }
+    .oneline {
+      &.out {
+        display:none;
+      }
+    }
+    .description-inline {
+      &.out {
+        display:none;
+      }
+    }
     .description {
       display:none;
+      &.in {
+        display:block;
+      }
       &.description-only {
         display:block;
       }
+      padding-top: 8px;
     }
   }
   .item-actions {
@@ -113,6 +139,9 @@ ul.tree-structure {
   }
   .item-content {
     display:none;
+    &.in {
+      display:block;
+    }
     ul.tree-structure {
       margin-left:24px;
       border-top:1px solid $lightGray;
