@@ -1,13 +1,14 @@
 -# locals: object
 -all_object_documents = object.object_documents.all
 
-%h3
-  References
-  %span{:class => "grc-badge #{all_object_documents.count.zero? ? "no-object" : ""}"}
-    (#{all_object_documents.count})
-.item-actions
-  %a{:href => list_edit_flow_object_documents_path(:object_type => object.class.name, :object_id => object.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#referenceList', :'data-modal-class' => 'modal-wide'}
-    %i.grcicon-edit-new
+.js-list-container-title
+  %h3
+    References
+    %span{:class => "grc-badge #{all_object_documents.count.zero? ? "no-object" : ""}"}
+      (#{all_object_documents.count})
+  .item-actions
+    %a{:href => list_edit_flow_object_documents_path(:object_type => object.class.name, :object_id => object.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#referenceList', :'data-modal-class' => 'modal-wide'}
+      %i.grcicon-edit-new
 
 %section.content
   %script#reference_list_item{ :type => 'text/html', :'data-member' => 'object_document'}
