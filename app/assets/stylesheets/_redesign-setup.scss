@@ -67,6 +67,14 @@
   @mixin outline-fix() {
     outline:0;
   }
+
+  @mixin oneline() {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width:100%;
+  }
+
   
   // temporary mixin - should be removed once redesign is complete
 

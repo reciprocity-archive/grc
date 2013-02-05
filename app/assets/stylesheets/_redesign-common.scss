@@ -6,6 +6,7 @@ h1 {
     color: $gray;
     font-weight: normal;
   }
+  @include oneline();
 }
 
 h2 {
@@ -115,7 +116,6 @@ h4 {
   white-space: nowrap;
   text-overflow: ellipsis;
   width:100%;
-
 }
 
 // RTF
