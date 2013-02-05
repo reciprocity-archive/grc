@@ -31,11 +31,7 @@
 
 .container-fluid
   #risks_columns.row-fluid{ :'data-resize' => "true" }
-    #left_column.span3.widget-area
-      =render :partial => "info",
-              :layout => 'layouts/widget_box',
-              :locals => { model_name.to_sym => instance, :widget_class => 'secondary' }
-    #middle_column.span6.widget-area
+    #middle_column.span8.widget-area
       =render :partial => "main",
               :layout => 'layouts/widget_box',
               :locals => { model_name.to_sym => instance }
@@ -44,7 +40,11 @@
               :layout => 'layouts/widget_box',
               :locals => { model_name.to_sym => instance }
   
-    #right_column.span3.widget-area
+    #right_column.span4.widget-area
+      =render :partial => "info",
+              :layout => 'layouts/widget_box',
+              :locals => { model_name.to_sym => instance, :widget_class => 'secondary' }
+              
       =render :partial => "risky_attributes",
               :layout => 'layouts/widget_box',
               :locals => { model_name.to_sym => instance }

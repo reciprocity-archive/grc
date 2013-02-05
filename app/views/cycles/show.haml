@@ -21,16 +21,7 @@
 
 .container-fluid
   #cycles_columns.row-fluid{ :'data-resize' => "true" }
-    #left_column.span3.widget-area
-      =render :partial => 'cycles/info',
-              :layout => 'layouts/widget_box',
-              :locals => { :cycle => @cycle, :widget_class => 'secondary' }
-                
-      =render :partial => 'cycles/pbclist',
-              :layout => 'layouts/widget_box',
-              :locals => { :cycle => @cycle, :widget_class => 'secondary' }        
-              
-    #main_column.span9.widget-area
+    #main_column.span8.widget-area
       =render :partial => 'cycles/main',
               :layout => 'layouts/widget_box',
               :locals => { :cycle => @cycle }
@@ -48,3 +39,11 @@
                 :layout => 'layouts/widget_box',
                 :locals => { :cycle => @cycle }
                 
+    #right_column.span4.widget-area
+      =render :partial => 'cycles/info',
+              :layout => 'layouts/widget_box',
+              :locals => { :cycle => @cycle, :widget_class => 'secondary' }
+                
+      =render :partial => 'cycles/pbclist',
+              :layout => 'layouts/widget_box',
+              :locals => { :cycle => @cycle, :widget_class => 'secondary' }
