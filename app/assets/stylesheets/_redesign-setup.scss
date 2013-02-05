@@ -75,6 +75,14 @@
     width:100%;
   }
 
+  @mixin row-fluid-fix() {
+    [class*="span"] {
+      padding-bottom:0;
+      margin-bottom:0;
+      min-height:0;
+    }
+  }
+
   
   // temporary mixin - should be removed once redesign is complete
 

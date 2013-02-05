@@ -6,16 +6,19 @@
 
 %section{ :class => "widget #{widget_class}", :id => widget_id }
   %header.header
-    .showhide.active{:rel => "tooltip", :title => "open/close widget", :'data-placement' => "right"}
-    %h2
-      =yield_content!(:widget_title)
-      -help_path = yield_content!(:widget_help)
-    -if has_feature? :BETA
-      %a.remove{:href => "#", :class => "btn btn-mini pull-right", :rel => "tooltip", :title => "Remove widget", :'data-placement'=>"left"}
-        %i.grcicon-x-grey
-    -if !help_path.blank?
-      %a.pull-right.btn.btn-mini{:href => "/help/#{help_path}", :'data-toggle' => 'modal-ajax', :rel => "tooltip", :title => "Help - What is this?", :'data-placement'=>"left"}
-        %i.grcicon-help-black      
+    .row-fluid
+      .span9
+        %h2
+          =yield_content!(:widget_title)
+      
+      .span3
+        -help_path = yield_content!(:widget_help)
+        -if has_feature? :BETA
+          %a.remove{:href => "#", :class => "btn btn-mini pull-right", :rel => "tooltip", :title => "Remove widget", :'data-placement'=>"left"}
+            %i.grcicon-x-grey
+        -if !help_path.blank?
+          %a.pull-right.btn.btn-mini{:href => "/help/#{help_path}", :'data-toggle' => 'modal-ajax', :rel => "tooltip", :title => "Help - What is this?", :'data-placement'=>"left"}
+            %i.grcicon-help-black      
           
   =yield_content!(:widget_buttons)
       

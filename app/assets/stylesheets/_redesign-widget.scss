@@ -17,9 +17,9 @@
       font-weight:normal;
       line-height: 24px;
       color: $widgetTitle;
-      margin-right: 0;
-      display: inline;
+      margin-bottom:0;
       @include text-shadow(0 1px 1px $white);
+      @include oneline();
     }
     .btn-mini {
       margin-left:6px;
@@ -38,6 +38,7 @@
     a.help {
      margin-top:10px; 
     }
+    @include row-fluid-fix();
   }
   .info {
     padding:0 6px;

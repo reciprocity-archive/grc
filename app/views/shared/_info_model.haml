@@ -25,6 +25,12 @@
       Description
     %span
       =display_as_html instance.description
+  %li
+    %label
+      Direct link
+    %span
+      =link_to(instance.url,instance.url,:target => "_blank")
+
 
 %ul.tree
   %li.category

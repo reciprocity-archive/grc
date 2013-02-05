@@ -69,10 +69,13 @@ ul.tree-structure {
     margin-bottom:5px;
   }
   .code {
-    color:$subTitle;
-    background-color:$text;
+    color:$text;
+    background-color:$lightGray;
+    font-weight:bold;
+    font-size:12px;
     @include border-radius(4px);
-    padding:4px;
+    border:1px solid darken($lightGray,5%);
+    padding:4px 0px 4px 4px;
     margin-right:8px;
   }
   .openclose {
