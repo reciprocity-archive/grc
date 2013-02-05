@@ -38,22 +38,23 @@
           %a.btn.btn-mini.halfopacity{ "rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => flow_system_path(system.id) }
             %i.grcicon-arrowright-black
   .item-content
-    %ul.tree-structure
-      -controls.each_with_index do |control, i|
-        -control_id_prefix = "#{id_prefix}-control-#{control.id}"
-        -control_summary_target = "#{control_id_prefix}-summary"
+    -if controls.count > 0
+      %ul.tree-structure
+        -controls.each_with_index do |control, i|
+          -control_id_prefix = "#{id_prefix}-control-#{control.id}"
+          -control_summary_target = "#{control_id_prefix}-summary"
 
-        %li
-          .item-main
-            .openclose.lastchild
-            .item-title
-              .row-fluid
-                =render :partial => 'object_leaf', :locals => { :instance => control }
-              .item-actions
-                %a.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => flow_control_path(control.id) }
-                  %i.grcicon-arrowright-black
+          %li
+            .item-main
+              .openclose.lastchild
+              .item-title
+                .row-fluid
+                  =render :partial => 'object_leaf', :locals => { :instance => control }
+                .item-actions
+                  %a.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => flow_control_path(control.id) }
+                    %i.grcicon-arrowright-black
 
-    -if !seen_this
+    -if !seen_this && sub_systems.count > 0
       %ul.tree-structure
         -sub_systems.each_with_index do |sub_system, i|
           =render :partial => 'system_tree', :locals => { :system => sub_system, :id_prefix => "#{id_prefix}-sub-system-#{sub_system.id}", :seen_ids => seen_ids + [system.id] }
