@@ -424,6 +424,16 @@ ul.elements {
     left:20px;
     z-index:2;
   }
+  ul.tree-structure {
+    margin-top:8px;
+    border-color:#cdecb4 !important;
+    li {
+      border-color:#cdecb4;
+      .response-items {
+        margin-left:25px;
+      }
+    }
+  }
 }
 
 .expand-on-hover {
