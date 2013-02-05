@@ -3,6 +3,7 @@
 .widget {
   border:1px solid $widgetBorder;
   margin-bottom: 20px;
+  overflow-y:auto;
   background:$white;
   @include transition(box-shadow 0.2s,border-color 0.2s);
   @include border-radius($topBorderRadius);

@@ -13,11 +13,11 @@
 
 .container-fluid
   #columns.row-fluid{ :'data-resize' => "true" }
-    .span6
+    #left_column.span6.widget-area
       =render :partial => 'programs/list',
               :layout => 'layouts/widget_box',
               :locals => { :programs => @programs }
-    .span6
+    #right_column.span6.widget-area
       =render :partial => 'quick_find',
             :layout => 'layouts/widget_box'
       -if has_feature? :BETA

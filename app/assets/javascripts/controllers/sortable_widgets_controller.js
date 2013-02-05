@@ -33,7 +33,7 @@ can.Control("CMS.Controllers.SortableWidgets", {
     }
 
     var this_sort = page_sorts.attr($(this.element).attr("id"));
-    if(!this_sort){
+    if(!this_sort || !(this_sort instanceof can.Observe.List)) {
       this_sort = new can.Observe.List();
       page_sorts.attr($(this.element).attr("id"), this_sort);
     }

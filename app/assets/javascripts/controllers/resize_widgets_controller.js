@@ -7,8 +7,10 @@
 can.Control("CMS.Controllers.ResizeWidgets", {
   defaults : {
     columns_token : "columns"
+    , heights_token : "heights"
     , total_columns : 12
     , default_layout : null
+    , page_token : window.location.pathname.substring(1, (window.location.pathname + "/").indexOf("/", 1))
   }
 }, {
 
@@ -25,6 +27,13 @@ can.Control("CMS.Controllers.ResizeWidgets", {
   
   , init : function(el, newopts) {
     this._super && this._super(newopts);
+
+    //set up dragging the bottom border to resize in jQUI
+    $(this.element).find("section[id]").resizable({
+      handles : "s"
+      //, ghost : true
+    });
+
     this.update(newopts);
   }
 
@@ -34,9 +43,14 @@ can.Control("CMS.Controllers.ResizeWidgets", {
 
     if(!(opts.model[opts.columns_token] instanceof can.Observe)) 
       opts.model.attr(opts.columns_token, new can.Observe(opts.model[opts.columns_token]));
+    if(!(opts.model[opts.heights_token] instanceof can.Observe)) 
+      opts.model.attr(opts.heights_token, new can.Observe(opts.model[opts.heights_token]));
+    if(!(opts.model[opts.heights_token][opts.page_token] instanceof can.Observe)) 
+      opts.model.attr(opts.heights_token).attr(opts.page_token, new can.Observe(opts.model[opts.heights_token][opts.page_token]));
 
 
     this.update_columns();
+    this.update_heights();
     this.on();
   }
 
@@ -88,6 +102,36 @@ can.Control("CMS.Controllers.ResizeWidgets", {
     });
   }
 
+  , update_heights : function() {
+    var model = this.options.model
+    , heights = model.attr(this.options.heights_token)
+    , page_heights = heights.attr(this.options.page_token)
+    , that = this
+    , dirty = false
+    , $c = $(this.element).children(".widget-area");
+
+    $c.each(function(i, child) {
+      var $gc = $(child).find("section[id]");
+      $gc.each(function(j, grandchild) {
+        if(page_heights.attr($(grandchild).attr("id"))) {
+          $(grandchild).css("height", page_heights.attr($(grandchild).attr("id")));
+        } else {
+          // missing a height.  redistribute evenly
+          var ht = Math.floor(($(window).height() - $(child).offset().top - 10) / $gc.length);
+          $gc.attr("height", ht);
+          $gc.each(function(i, grandchild) {
+            page_heights.attr($(grandchild).attr("id"), ht);
+          });
+          dirty = true;
+          return false;
+        }
+      });
+    });
+    if(dirty)
+     model.save();
+
+  }
+
   , divide_evenly : function(n) {
     var tc = this.options.total_columns;
     var ret = [];
@@ -121,7 +165,11 @@ can.Control("CMS.Controllers.ResizeWidgets", {
   , "{model} change" : function(el, ev, attr, how, newVal, oldVal) {
     var parts = attr.split(".");
     if(parts.length > 1 && parts[0] === this.options.columns_token && parts[1] === $(this.element).attr("id")) {
-      this.update();
+      this.update_columns();
+      this.options.model.save();
+    }
+    if(parts.length > 1 && parts[0] === this.options.heights_token && $(this.element).has("#" + parts[1])) {
+      this.update_heights();
       this.options.model.save();
     }
   }
@@ -249,6 +297,13 @@ can.Control("CMS.Controllers.ResizeWidgets", {
       .css("left", this.getLeftOffsetAsPixels(offset));
       ev.preventDefault();
     }
+  }
+
+  , " resizestop" : function(el, ev, ui) {
+    this.options.model
+    .attr(this.options.heights_token)
+    .attr(this.options.page_token)
+    .attr($(ui.element).attr("id"), ui.size.height);
   }
 
 });
