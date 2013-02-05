@@ -1,101 +1,101 @@
   <div class="span8 pbc-response-process" data-model="true" {{data 'model'}}>
-    <div class="row-fluid">
-      <div class="span4">
-        <span rel="tooltip" data-placement="top" title="Process Title">
-          {{{title}}}
-        </span>
-      </div>
-      <div class="span2 pbc-process-controls">
-        <a class="btn btn-mini" href="/systems/{{id}}" title="View {{system_or_process_capitalized}}" rel="tooltip" data-placement="top">
-          <i class="grcicon-arrowright-grey"></i>
-        </a>
-        <a class="btn btn-mini system-edit" data-toggle="modal-ajax-form" href="/systems/{{id}}/edit" data-modal-reset="reset" data-model-class="modal-wide" title="Edit {{system_or_process_capitalized}}" rel="tooltip" data-placement="top">
-          <i class="grcicon-edit-grey"></i>
-        </a>
-      </div>
-      <div class="span4">
-        &nbsp;
-      </div>
-      <div class="span1">
-        <span class="pbc-counter {{^object_people.length}} empty{{/object_people.length}}">
-          <i class="grcicon-person"></i>
-          {{object_people.length}}
-        </span>
-      </div>
-      <div class="span1">
-        <span class="pbc-counter {{^object_documents.length}} empty{{/object_documents.length}}">
-          <i class="grcicon-reference"></i>
-          {{object_documents.length}}
-        </span>
-      </div>
-    </div>
-    <div class="row-fluid">
-      <div class="span6">
-        <label>
-          <strong>Description</strong>
-        </label>
-        <div class="rtf">
-          {{{description}}}
+    <div class="inner-system">
+      <div class="row-fluid">
+        <div class="span6">
+          <div class="pull-right">
+            <a class="btn btn-mini" href="/systems/{{id}}" title="View {{system_or_process_capitalized}}" rel="tooltip" data-placement="top">
+              <i class="grcicon-arrowright-grey"></i>
+            </a>
+            <a class="btn btn-mini system-edit" data-toggle="modal-ajax-form" href="/systems/{{id}}/edit" data-modal-reset="reset" data-model-class="modal-wide" title="Edit {{system_or_process_capitalized}}" rel="tooltip" data-placement="top">
+              <i class="grcicon-edit-grey"></i>
+            </a>          
+          </div>
+          <h4>
+            <span rel="tooltip" data-placement="top" title="Process Title">
+              {{{title}}}
+            </span>
+          </h4>
         </div>
-        <label>
-          <strong>Notes</strong>
-        </label>
-        <p class="full-view">
-          {{notes}}
-        </p>
+        <div class="span6">
+          <span class="pbc-counter {{^object_people.length}} empty{{/object_people.length}}">
+            <i class="grcicon-person"></i>
+            {{object_people.length}}
+          </span>
+          <span class="pbc-counter {{^object_documents.length}} empty{{/object_documents.length}}">
+            <i class="grcicon-reference"></i>
+            {{object_documents.length}}
+          </span>
+        </div>
       </div>
-      <div class="span6">
-        <label>
-          <strong>People</strong>
-        </label>
-        <ul class="pbc-item-list">
-          {{#object_people}}
-          <li {{data 'model'}} data-model="true" rel="tooltip" data-placement="top" title="{{firstnonempty person.email 'No LDAP'}}">
-            <div class="span5">
-              {{firstnonempty person.name person.email}}
-            </div>
-            <div class="span6">
-              <select class="edit-person-role">
-                <option value="responsible" {{#if_equals role 'responsible'}}selected="true"{{/if_equals}}>Responsible</option>
-                <option value="accountable" {{#if_equals role 'accountable'}}selected="true"{{/if_equals}}>Accountable</option>
-              </select>
-            </div>
-            <a class="btn btn-nano pull-right remove_person span1" rel="tooltip" title="Remove from {{system_or_process}}" href="javascript://">
-              <i class="grcicon-x-grey"></i>
-            </a>
-          </li>
-          {{/object_people}}
-          <li class="inline-editing inline-add-person hide" data-system-id="{{id}}">
-            <form>
-              <div class="row-fluid">
-                <div class="span10">
-                  <input class="span12 input-ldap" name="ldap" placeholder="Email or name" type="text" {{ (el) -> el.pbc_autocomplete_people() }}>
-                </div>
-                <div class="span2">
-                  <a class="btn btn-mini span12 add-person" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/people/new" data-target="#ajax-modal-people-new">
-                    <i class="grcicon-add"></i>
-                  </a>
-                </div>
+      <div class="row-fluid">
+        <div class="span6">
+          <h5>Description</h5>
+          <div class="rtf">
+            {{{description}}}
+          </div>
+        </div>
+        <div class="span6">
+          <h5>People</h5>
+          <ul class="items pbc-item-list">
+            {{#object_people}}
+            <li {{data 'model'}} data-model="true" rel="tooltip" data-placement="top" title="{{firstnonempty person.email 'No LDAP'}}">
+              <div class="span5">
+                {{firstnonempty person.name person.email}}
               </div>
-            </form>
-          </li>
-          <li class="toggle-add-person add-new">
-            <a href="javascript://">
-              + Add new person
-            </a>
-          </li>
-        </ul>
-        <label>
-          <strong>References</strong>
-        </label>
-        <ul class="pbc-item-list">
-          {{> /assets/pbc/documents_list.mustache}}
-          <li class="toggle-add-document add-new" data-system-id="{{id}}">
-            <a href="javascript://">
-              + Add new reference
-            </a>
-          </li>
-        </ul>
+              <div class="span6">
+                <select class="edit-person-role">
+                  <option value="responsible" {{#if_equals role 'responsible'}}selected="true"{{/if_equals}}>Responsible</option>
+                  <option value="accountable" {{#if_equals role 'accountable'}}selected="true"{{/if_equals}}>Accountable</option>
+                </select>
+              </div>
+              <a class="btn btn-nano pull-right remove_person span1" rel="tooltip" title="Remove from {{system_or_process}}" href="javascript://">
+                <i class="grcicon-x-grey"></i>
+              </a>
+            </li>
+            {{/object_people}}
+            <li class="inline-editing inline-add-person hide" data-system-id="{{id}}">
+              <form>
+                <div class="row-fluid">
+                  <div class="span10">
+                    <input class="span12 input-ldap" name="ldap" placeholder="Email or name" type="text" {{ (el) -> el.pbc_autocomplete_people() }}>
+                  </div>
+                  <div class="span2">
+                    <a class="btn btn-mini span12 add-person" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/people/new" data-target="#ajax-modal-people-new">
+                      <i class="grcicon-add"></i>
+                    </a>
+                  </div>
+                </div>
+              </form>
+            </li>
+            <li class="toggle-add-person add-new">
+              <a href="javascript://">
+                + Add new person
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
+      <div class="row-fluid">
+        <div class="span6">
+          <h5>Notes</h5>
+          <p class="full-view">
+            {{notes}}
+          </p>
+
+        </div>
+        <div class="span6">
+          <h5>References</h5>
+          <ul class="items pbc-item-list">
+            {{> /assets/pbc/documents_list.mustache}}
+            <li class="toggle-add-document add-new" data-system-id="{{id}}">
+              <a href="javascript://">
+                + Add new reference
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
     </div>
+
   </div>

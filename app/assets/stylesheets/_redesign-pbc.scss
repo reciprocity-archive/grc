@@ -184,7 +184,7 @@ h4.pbc-title {
   }
   .inner-response {
     border:#e8fdd6;
-    padding:8px 12px;
+    padding:8px 0;
   }
   ul.items {
     @include reset-list();
@@ -192,6 +192,7 @@ h4.pbc-title {
     li {
       border:none;
       line-height:20px;
+      @include clearfix();
     }
   }
 }
