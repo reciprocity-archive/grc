@@ -65,10 +65,10 @@
       &nbsp; External
 
 
-%ul#requests.tree-structure.pbc
+%ul#requests.tree-structure.pbc.pbc-control-assessments
   -sorted_requests_with_control_assessments(requests).each do |control_assessment_id, control_assessment, requests|
     -control_assessment_collapse_id = "control_assessment-#{control_assessment && control_assessment.control && control_assessment.control_id || 'null'}"
-    %li.pbc-ca{ :'data-type' => 'ControlAssessment', :'data-id' => control_assessment_id, :'data-control-id' => control_assessment && control_assessment.control && control_assessment.control_id, 'data-sort-control-code' => control_assessment && control_assessment.control && control_assessment.control.slug }
+    %li.pbc-ca.pbc-ca-item{ :'data-type' => 'ControlAssessment', :'data-id' => control_assessment_id, :'data-control-id' => control_assessment && control_assessment.control && control_assessment.control_id, 'data-sort-control-code' => control_assessment && control_assessment.control && control_assessment.control.slug }
       .item-main
         .openclose
         .item-title
@@ -96,19 +96,19 @@
                   %a.btn.btn-mini.rotate_control_assessment{ :rel => "tooltip", :'data-placement' => "top", :title => "External: Test of Design", :class => control_assessment_button_class(control_assessment.external_tod), :'data-remote' => true, :'data-method' => 'post', :href => rotate_flow_control_assessment_path(control_assessment, :'control_assessment[external_tod]' => 'toggle') }
                     %i{ :class => control_assessment_button_icon(control_assessment.external_tod) }
                   %span Effectiveness
-      .item-content
-        %ul.tree-structure.requests
+      .item-content.pbc-ca-content
+        %ul.tree-structure.requests.pbc-requests
           -requests.each do |request|
             -request_collapse_class = "control_assessment-#{control_assessment_id || 'null' }-request-#{request.id}"
-            %li{ html_data_attributes(request, "data-filter-", [ ["type-id", "type_id"], ["type-name", "type_name"], "status", ["date-requested", "date_requested.to_date"], ["control-code", "control.slug"], ["person", "persons_responsible"], "id" ]) }
-              .item-main
+            %li.main-item{ html_data_attributes(request, "data-filter-", [ ["type-id", "type_id"], ["type-name", "type_name"], "status", ["date-requested", "date_requested.to_date"], ["control-code", "control.slug"], ["person", "persons_responsible"], "id" ]) }
+              .item-main.pbc-item-head
                 .openclose
                 .item-title
                   .row-fluid
                     .span2
                       %i{"class" => request_type_icon(request.type_name)}
                       %span.request-title=request.type_name
-                    .span3.pbc-control
+                    .span3.pbc-item.pbc-control
                       for &nbsp;
                       -if request.control.present?
                         %span.control.oneline
@@ -156,7 +156,7 @@
               .item-content
                 .request-main
                   .row-fluid
-                    .span3
+                    .span3.pbc-item
                       %h5 Request
                       -if request.request.present?
                         =display_as_html request.request
