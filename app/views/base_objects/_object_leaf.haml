@@ -27,8 +27,6 @@
         =code
       %span.title
         =title
-    .description.description-empty
-      %span (No description)
   -elsif description.present?
     -# Description only
     .oneline.description-only.expand-on-hover
@@ -36,10 +34,12 @@
         =code
       %span.title
         %i.description-inline=description_inline
-    .description
+    .description.inhover
       =display_as_html(description) do
         %span.code
           =code
+        %br
+        %br
   -else
     -# Neither (shouldn't happen)
     %span.title (No description)
