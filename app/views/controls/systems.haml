@@ -5,7 +5,22 @@
   %a.btn.btn-mini.pull-right{ :href => list_edit_flow_system_controls_path(:control_id => control.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :rel => 'tooltip', :'data-placement' => 'left', :title => 'Link systems to this control', :'data-modal-class' => 'modal-wide' }
     %i.grcicon-link
 
-
+%ul.tree-structure
+  -systems.each_with_index do |system, i|
+    %li
+      .item-main
+        .item-title
+          .row-fluid
+            .span10
+              .oneline
+                %span.code=system.slug
+                %span.title=system.title
+                %span.description=system.description
+                
+                
+          .item-actions
+            %a{:href => flow_system_path(system.id), :class => "btn btn-mini", :rel => "tooltip" , :'data-placement' => "left", :title => "View Object"}
+              %i.grcicon-goto
 %ul.tree
   -systems.each_with_index do |system, i|
     %li.main

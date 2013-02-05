@@ -75,7 +75,7 @@ ul.tree-structure {
     font-size:12px;
     @include border-radius(4px);
     border:1px solid darken($lightGray,5%);
-    padding:4px 0px 4px 4px;
+    padding:4px;
     margin-right:8px;
   }
   .openclose {
