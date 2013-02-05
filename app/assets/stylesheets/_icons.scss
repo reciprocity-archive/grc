@@ -191,6 +191,9 @@
 .grcicon-edit-new {
   @include new-icons();
   background-position:-48px -32px;
+  .tree-structure .active & {
+    background-position:-48px -32px;
+  }
   .active & {
     background-position:-48px -48px;
   }
