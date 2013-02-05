@@ -46,12 +46,12 @@
             %i.grcicon-goto
   .item-content{ :class => is_root && 'in' }
     -if !seen_this
-      -if has_process_relationship
+      -if has_process_relationship && systems.count > 0
         %ul.tree-structure
           -systems.each_with_index do |system, i|
             =render :partial => 'system_tree', :locals => { :system => system, :id_prefix => "#{id_prefix}-system-#{system.id}" }
 
-      -if has_dependence_relationship
+      -if has_dependence_relationship && sub_objects.count > 0
         %ul.tree-structure
           -sub_objects.each_with_index do |sub_object, i|
             =render :partial => 'object_tree', :locals => { :instance => sub_object, :id_prefix => "#{id_prefix}-sub-object-#{sub_object.id}", :seen_ids => seen_ids + [instance.id] }
