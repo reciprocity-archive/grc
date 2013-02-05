@@ -15,6 +15,21 @@
   font-weight: normal;
   line-height: 18px;
   z-index: 1001;
+  ul.single-row-tabs {
+    li {
+      .item-title {
+        a {
+          padding: 0;
+          border: none;
+          &:hover {
+            background: none;
+            @include border-radius(0);
+            border: none;
+          }
+        }
+      }
+    }
+  }
   .title {
     font-weight: bold;
     padding: 8px 4px 0 16px;

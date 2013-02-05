@@ -26,17 +26,7 @@ ul.single-row-tabs {
     float: none;
     clear: both;
     padding: 0;
-    .item-title {
-      a {
-        padding: 0;
-        border: none;
-        &:hover {
-          background: none;
-          @include border-radius(0);
-          border: none;
-        }
-      }
-    }
+    margin: 0;
     .item-identifier {
       line-height: 28px;
     }
