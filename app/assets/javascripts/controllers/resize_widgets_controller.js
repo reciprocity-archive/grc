@@ -10,6 +10,7 @@ can.Control("CMS.Controllers.ResizeWidgets", {
     containers : []
     , columns_token : "columns"
     , total_columns : 12
+    , default_layout : null
   }
 }, {
 
@@ -43,7 +44,7 @@ can.Control("CMS.Controllers.ResizeWidgets", {
       total_width += widths[i];
     }
     if(total_width != this.options.total_columns) {
-      widths = this.divide_evenly($(this.element).children().not(".width-selector-bar, .width-selector-drag").length);
+      widths = this.sensible_default($(this.element).children().not(".width-selector-bar, .width-selector-drag").length);
       this.options.model.attr(this.options.columns_token).attr($(this.element).attr("id"), widths);
       this.options.model.save();
     }
@@ -61,7 +62,7 @@ can.Control("CMS.Controllers.ResizeWidgets", {
       $children.removeClass("span" + i);
     }
     if(!widths || $children.length != widths.length) {
-      widths = this.divide_evenly($children.length);
+      widths = this.sensible_default($children.length);
       this.options.model.attr(this.options.columns_token).attr($c.attr("id"), widths);
       this.options.model.save();
     }
@@ -86,6 +87,18 @@ can.Control("CMS.Controllers.ResizeWidgets", {
     }
 
     return ret;
+  }
+
+  , sensible_default : function(n) {
+    switch(n) {
+      case 3:
+      return [3, 6, 3];
+      case 4:
+      return [2, 4, 4, 2];
+      default:
+      return this.divide_evenly(n);
+    }
+
   }
 
   , "{model} change" : function(el, ev, attr, how, newVal, oldVal) {

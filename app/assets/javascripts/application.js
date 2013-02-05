@@ -286,8 +286,9 @@ $(window).load(function(){
 
 
   $('.widget-area').sortable({
-    connectWith: '.widget-area',
-    placeholder: 'drop-placeholder'
+    connectWith: '.widget-area'
+    , placeholder: 'drop-placeholder'
+    , handle : "header, .header"
   }).disableSelection();
 
 });
