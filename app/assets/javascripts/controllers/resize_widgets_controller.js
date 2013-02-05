@@ -1,14 +1,12 @@
 //= require can.jquery-all
 //= require models/local_storage
+//= require models/display_prefs
 
 (function(can, $){
 
-can.Model.LocalStorage("CMS.Models.DisplayPrefs", {}, {});
-
 can.Control("CMS.Controllers.ResizeWidgets", {
   defaults : {
-    containers : []
-    , columns_token : "columns"
+    columns_token : "columns"
     , total_columns : 12
     , default_layout : null
   }
@@ -33,39 +31,58 @@ can.Control("CMS.Controllers.ResizeWidgets", {
   , update : function(newopts) {
     var that = this
     , opts = this.options
-    , widths
-    , total_width = 0;
 
     if(!(opts.model[opts.columns_token] instanceof can.Observe)) 
       opts.model.attr(opts.columns_token, new can.Observe(opts.model[opts.columns_token]));
+
+
+    this.update_columns();
+    this.on();
+  }
+
+  , update_columns : function() {    
+    var $c = $(this.element)
+    , $children = $c.children().not(".width-selector-bar, .width-selector-drag")
+    , widths = this.getWidthsForSelector($c)
+    , widths
+    , total_width = 0;
+
+
     widths = this.getWidthsForSelector($(this.element)) || [];
 
     for(var i = 0; i < widths.length; i++) {
       total_width += widths[i];
     }
     if(total_width != this.options.total_columns) {
-      widths = this.sensible_default($(this.element).children().not(".width-selector-bar, .width-selector-drag").length);
-      this.options.model.attr(this.options.columns_token).attr($(this.element).attr("id"), widths);
-      this.options.model.save();
+      var scraped_cols = [];
+      var scraped_col_total = 0;
+      $children.each(function(i, child) {
+        var classes = $(child).attr("class").split(" ");
+        can.each(classes, function(_class) {
+          var c;
+          if(c = /^span(\d+)$/.exec(_class)) {
+            scraped_cols.push(+c[1]);
+            scraped_col_total += (+c[1]);
+          }
+        });
+      });
     }
-    this.update_columns();
-    this.on();
-  }
 
-  , update_columns : function() {
-    var $c = $(this.element)
-    , $children = $c.children().not(".width-selector-bar, .width-selector-drag")
-    , widths = this.getWidthsForSelector($c);
+    if(!widths || $children.length != widths.length) {
+      if(scraped_col_total === this.options.total_columns) {
+        widths = scraped_cols;
+      } else {
+        widths = this.sensible_default($children.length);
+      }
+      this.options.model.attr(this.options.columns_token).attr($c.attr("id"), widths);
+      this.options.model.save();
+    }  
 
 
     for(i = 1; i <= this.options.total_columns; i++) {
       $children.removeClass("span" + i);
     }
-    if(!widths || $children.length != widths.length) {
-      widths = this.sensible_default($children.length);
-      this.options.model.attr(this.options.columns_token).attr($c.attr("id"), widths);
-      this.options.model.save();
-    }
+
     $children.each(function(i, child) {
       $(child).addClass("span" + widths[i]);
     });
@@ -91,10 +108,10 @@ can.Control("CMS.Controllers.ResizeWidgets", {
 
   , sensible_default : function(n) {
     switch(n) {
+      case 2:
+      return [5, 7];
       case 3:
       return [3, 6, 3];
-      case 4:
-      return [2, 4, 4, 2];
       default:
       return this.divide_evenly(n);
     }
@@ -103,8 +120,10 @@ can.Control("CMS.Controllers.ResizeWidgets", {
 
   , "{model} change" : function(el, ev, attr, how, newVal, oldVal) {
     var parts = attr.split(".");
-    if(parts.length > 1 && parts[0] === this.options.columns_token)
-      this.update_columns($("#" + parts[1]));
+    if(parts.length > 1 && parts[0] === this.options.columns_token && parts[1] === $(this.element).attr("id")) {
+      this.update();
+      this.options.model.save();
+    }
   }
 
   , adjust_column : function(container, border_idx, adjustment) {

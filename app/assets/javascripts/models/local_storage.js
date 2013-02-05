@@ -25,7 +25,7 @@
             if ( data ) {
 
                 // Create our model instance
-                var instance = this.model( JSON.parse( data ));
+                var instance = this.store[params.id] || this.model( JSON.parse( data ));
 
                 // Resolve the deferred with our instance
                 def.resolve( instance );
@@ -53,7 +53,7 @@
               , d = window.localStorage.getItem( k );
 
               if(d) {
-                d = JSON.parse(d);
+                d = that.store[id] || JSON.parse(d);
                 var pkeys = Object.keys(params);
                 if(pkeys.length < 1 || can.filter(pkeys, function(k) {
                   return params[k] !== d[k];
