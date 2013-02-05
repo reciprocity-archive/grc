@@ -56,15 +56,11 @@
 
 .container-fluid
   #columns.row-fluid{ :'data-resize' => "true" }
-    #left-column.span3.widget-area
-      =render :partial => 'programs/show',
-              :layout => 'layouts/widget_box',
-              :locals => { :program => @program, :widget_class => 'secondary'}
-    #middle-column.span6.widget-area
+    #middle-column.span8.widget-area
       =render :partial => 'programs/controls',
               :layout => 'layouts/widget_box',
               :locals => { :program => @program }
-    #right-column.span3.widget-area
+    #right-column.span4.widget-area
       -if (@program.cycles.length != 0)  
         =render :partial => 'programs/audit_cycles',
                 :layout => 'layouts/widget_box',
@@ -74,3 +70,7 @@
         =render :partial => 'shared/related',
                 :layout => 'layouts/widget_box',
                 :locals => { :instance => @program, :widget_title => "Impact/Scope of Program" }
+                
+      =render :partial => 'programs/show',
+              :layout => 'layouts/widget_box',
+              :locals => { :program => @program, :widget_class => 'secondary'}

@@ -25,14 +25,15 @@
 
 .container-fluid
   #controls_columns.row-fluid{ :'data-resize' => "true" }
-    #left_column.span3.widget-area
-      =render :partial => 'controls/show',
-              :layout => 'layouts/widget_box',
-              :locals => { :control => @control, :widget_class => 'secondary' }
-    #main_column.span9.widget-area
+    #main_column.span8.widget-area
       =render :partial => 'controls/main',
               :layout => 'layouts/widget_box',
               :locals => { :control => @control }
       -if has_feature? :BETA
         =render :partial => 'shared/impact_scope'
+    #right_column.span4.widget-area
+      =render :partial => 'controls/show',
+              :layout => 'layouts/widget_box',
+              :locals => { :control => @control, :widget_class => 'secondary' }
+        
               
