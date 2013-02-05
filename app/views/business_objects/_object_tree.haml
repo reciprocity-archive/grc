@@ -27,14 +27,11 @@
 
 %li{ :'data-object-id' => instance.id }
   .item-main
-    .openclose{ :class => !expand_this && 'lastchild' }
-    .item-title
+    -if !is_root
+      .openclose{ :class => !expand_this && 'lastchild' }
+    .item-title{ :class => is_root && 'active' }
       .row-fluid
-        .span2
-          %p.code.oneline
-            =instance.slug
-        .span8
-          =render :partial => 'object_leaf', :locals => { :instance => instance }
+        =render :partial => 'object_leaf', :locals => { :instance => instance }
       .item-actions
         %a.btn.btn-mini.halfopacity{ "rel" => "tooltip", "data-placement" => "left", "title" => "Edit this object", 'data-modal-class' => 'modal-wide', 'data-form-target' => 'refresh', "data-toggle" => "modal-ajax-form", :href => url_for(:id => instance.id, :action => :edit, :controller => model_underscore.pluralize, :only_path => true) }
           %i.grcicon-edit-new
@@ -47,7 +44,7 @@
         -if !is_root
           %a.btn.btn-mini{ "rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => url_for(:id => instance.id, :action => :show, :controller => model_underscore.pluralize, :only_path => true) }
             %i.grcicon-goto
-  .item-content
+  .item-content{ :class => is_root && 'in' }
     -if !seen_this
       -if has_process_relationship
         %ul.tree-structure

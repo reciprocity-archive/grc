@@ -154,6 +154,7 @@
         text-transform:lowercase;
       }
       &.screen {
+        display:none;
         background:$screenBgnd;
         .dropdown-menu {
           left: auto;

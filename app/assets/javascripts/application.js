@@ -142,13 +142,13 @@ jQuery(document).ready(function($) {
   });
 
   // Show/hide widget content
-  $('body').on('mouseover', 'a.more', function(e) {
+  /*$('body').on('mouseover', 'a.more', function(e) {
     var $this = $(this),
         $paragraph = $this.closest("p"),
         $description = $this.closest("div").find(".description");
     $description.fadeIn();
     //$this.closest('div').one('mouseout', function(e) { $description.fadeOut(); });
-  });
+  });*/
 
   /*$('body').on('mouseover', '.tree-structure .description', function(e) {
     var $this = $(this);
@@ -156,17 +156,23 @@ jQuery(document).ready(function($) {
     //$this.one('mouseout', function(e) { $this.addClass('oneline'); });
   });*/
 
-  $('body').on('click', '.expand-on-hover', function(e) {
+  $('body').on('click', '.tree-structure .title, .tree-structure .description', function(e) {
     var $this = $(this)
-      , $description = $this.find('.description')
+      , $leaf = $this.closest('[class*=span]')
+      , $title = $leaf.find('.oneline')
+      , $description = $leaf.find('.description')
       ;
 
     if ($description.length > 0) {
-      $description.toggle();
+      $description.toggleClass('in');
+      $title.find('.description-inline').toggleClass('out');
+      if ($title.is('.description-only')) {
+        $title.toggleClass('out');
+      }
     }
   });
 
-  $('body').on('mouseenter', '.expand-on-hover', function(e) {
+  /*$('body').on('mouseenter', '.expand-on-hover', function(e) {
     var $this = $(this)
       , $title = $this.find('.title')
       , $description = $this.find('.description')
@@ -182,7 +188,7 @@ jQuery(document).ready(function($) {
       }
       $description.show();
     }
-  });
+  });*/
 
 
 
@@ -267,18 +273,23 @@ $(window).load(function(){
   // tree-structure
   
   $('body').on('click', 'ul.tree-structure .item-main .code, ul.tree-structure .item-main .openclose', function(e) {
-    var $this = $(this),
-        $content = $this.closest('.item-main').closest('li').find('.item-content:first'),
-        $icon = $this.closest('.item-main').find('.openclose');
-    
-    if($this.hasClass("active")) {
+    var $this = $(this)
+      , $main = $this.closest('.item-main')
+      , $code = $main.find('.code')
+      , $li = $main.closest('li')
+      , $content = $li.find('> .item-content')
+      //, $content = $this.closest('.item-main').closest('li').find('.item-content:first')
+      , $icon = $this.closest('.item-main').find('.openclose');
+
+    if ($icon.hasClass('active')) {
+    //if($this.hasClass("active")) {
       $content.slideUp('fast');
       $icon.removeClass('active');
-      $this.removeClass("active");
+      //$this.removeClass("active");
     } else {
       $content.slideDown('fast');
       $icon.addClass('active');
-      $this.addClass("active");
+      //$this.addClass("active");
     }
     
   });
