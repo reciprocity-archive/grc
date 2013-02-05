@@ -409,23 +409,6 @@ ul.elements {
   }
 }
 
-.responses {
-  background:#e8fdd6;
-  margin-left:25px;
-  margin-bottom:20px;
-  border:1px solid #cdecb4;
-  position:relative;
-  .bg-caret {
-    background: url('/images/bgnd-responses.png') no-repeat 0 0;
-    width:13px;
-    height:7px;
-    position:absolute;
-    top:-1px;
-    left:20px;
-    z-index:2;
-  }
-}
-
 .expand-on-hover {
   span, i {
     cursor:pointer;  
