@@ -173,101 +173,105 @@
                       </div>
                     </div>
                   </div>
-                  <div class="row-fluid">
-                    <div class="span6">
-                      <h5>Sample Worksheet</h5>
+                  <div data-model="true" {{data 'model'}}>
+                    <div class="row-fluid">
+                      <div class="span6">
+                        <h5>Sample Worksheet</h5>
+                      </div>
+                      <div class="span6">
+                        <h5>Samples</h5>
+                      </div>
                     </div>
-                    <div class="span6">
-                      <h5>Samples</h5>
-                    </div>
-                  </div>
-                  <div class="row-fluid">
-                    <div class="span6">
-                      <ul class="items pbc-item-list">
-                        <li class="pbc-item">
-                          <div class="row-fluid">
-                            <div class="span10">
-                              {{#if_null sample_worksheet_document}}
-                                &nbsp;
-                              {{else}}
-                                {{#if_null sample_worksheet_document.link_url}}
-                                  <span>{{sample_worksheet_document.title}}</span>
-                                {{else}}
-                                  <a href="{{sample_worksheet_document.link_url}}" target="_blank">{{firstnonempty sample_worksheet_document.title sample_worksheet_document.link_url}}</a>
-                                {{/if_null}}
-                              {{/if_null}}
-                            </div>
-                            <div class="span2">
-                              <a class="btn btn-nano pull-right toggle-edit-population-doc" href="javascript://">
-                                <i class="grcicon-edit-grey"></i>
-                              </a>      
-                            </div>
-                          </div>
-                        </li>
-                        <li class="inline-editing inline-edit-population-doc hide" data-doc-type="sample_worksheet">
-                          <form>
+                    <div class="row-fluid">
+                      <div class="span6">
+                        <ul class="items pbc-item-list">
+                          <li class="pbc-item">
                             <div class="row-fluid">
                               <div class="span10">
-                                <input class="input-block-level input-title" name="title" placeholder="Doc title or URL" type="text" {{ (el) -> el.pbc_autocomplete_documents() }}>
+                                {{#if_null sample_worksheet_document}}
+                                  &nbsp;
+                                {{else}}
+                                  {{#if_null sample_worksheet_document.link_url}}
+                                    <span>{{sample_worksheet_document.title}}</span>
+                                  {{else}}
+                                    <a href="{{sample_worksheet_document.link_url}}" target="_blank">{{firstnonempty sample_worksheet_document.title sample_worksheet_document.link_url}}</a>
+                                  {{/if_null}}
+                                {{/if_null}}
                               </div>
                               <div class="span2">
-                                <a class="btn btn-mini add-document" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/documents/new" data-target="#ajax-modal-documents-new">
-                                  <i class="grcicon-add"></i>
-                                </a>
+                                <a class="btn btn-nano pull-right toggle-edit-population-doc" href="javascript://">
+                                  <i class="grcicon-edit-grey"></i>
+                                </a>      
                               </div>
                             </div>
-                          </form>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="span6">
-                      <div class="row-fluid sample-widget">
-                        <div class="span5"><input class="input-block-level" name="samples" type="text" value="{{samples}}"></div>
-                        <div class="span7">
-                          <a href="javascript://" class="save-samples btn-mini btn disabled">
-                            Saved
-                          </a>
-                        </div>
+                          </li>
+                          <li class="inline-editing inline-edit-population-doc hide" data-doc-type="sample_worksheet">
+                            <form>
+                              <div class="row-fluid">
+                                <div class="span10">
+                                  <input class="input-block-level input-title" name="title" placeholder="Doc title or URL" type="text" {{ (el) -> el.pbc_autocomplete_documents() }}>
+                                </div>
+                                <div class="span2">
+                                  <a class="btn btn-mini add-document" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/documents/new" data-target="#ajax-modal-documents-new">
+                                    <i class="grcicon-add"></i>
+                                  </a>
+                                </div>
+                              </div>
+                            </form>
+                          </li>
+                        </ul>
                       </div>
-                    </div>
-                  </div>
-                  <h5>Sample Evidence Collection</h5>
-                  <ul class="items pbc-item-list">
-                    <li class="pbc-item">
-                      <div class="row-fluid">
-                        <div class="span10">
-                          {{#if_null sample_evidence_document}}
-                            &nbsp;
-                          {{else}}
-                            {{#if_null sample_evidence_document.link_url}}
-                              <span>{{sample_evidence_document.title}}</span>
-                            {{else}}
-                              <a href="{{sample_evidence_document.link_url}}" target="_blank">{{firstnonempty sample_evidence_document.title sample_evidence_document.link_url}}</a>
-                            {{/if_null}}
-                          {{/if_null}}
-                        </div>
-                        <div class="span2">
-                          <a class="btn btn-nano pull-right toggle-edit-population-doc" href="javascript://">
-                            <i class="grcicon-edit-grey"></i>
-                          </a>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="inline-editing inline-edit-population-doc hide" data-doc-type="sample_evidence">
-                      <form>
-                        <div class="row-fluid">
-                          <div class="span10">
-                            <input class="input-block-level input-title" name="title" placeholder="Doc title or URL" type="text" {{ (el) -> el.pbc_autocomplete_documents() }}>
-                          </div>
-                          <div class="span2">
-                            <a class="btn btn-mini add-document" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/documents/new" data-target="#ajax-modal-documents-new">
-                              <i class="grcicon-add"></i>
+                      <div class="span6">
+                        <div class="row-fluid sample-widget">
+                          <div class="span5"><input class="input-block-level" name="samples" type="text" value="{{samples}}"></div>
+                          <div class="span7">
+                            <a href="javascript://" class="save-samples btn-mini btn disabled">
+                              Saved
                             </a>
                           </div>
                         </div>
-                      </form>
-                    </li>
-                  </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div data-model="true" {{data 'model'}}>
+                    <h5>Sample Evidence Collection</h5>
+                    <ul class="items pbc-item-list">
+                      <li class="pbc-item">
+                        <div class="row-fluid">
+                          <div class="span10">
+                            {{#if_null sample_evidence_document}}
+                              &nbsp;
+                            {{else}}
+                              {{#if_null sample_evidence_document.link_url}}
+                                <span>{{sample_evidence_document.title}}</span>
+                              {{else}}
+                                <a href="{{sample_evidence_document.link_url}}" target="_blank">{{firstnonempty sample_evidence_document.title sample_evidence_document.link_url}}</a>
+                              {{/if_null}}
+                            {{/if_null}}
+                          </div>
+                          <div class="span2">
+                            <a class="btn btn-nano pull-right toggle-edit-population-doc" href="javascript://">
+                              <i class="grcicon-edit-grey"></i>
+                            </a>
+                          </div>
+                        </div>
+                      </li>
+                      <li class="inline-editing inline-edit-population-doc hide" data-doc-type="sample_evidence">
+                        <form>
+                          <div class="row-fluid">
+                            <div class="span10">
+                              <input class="input-block-level input-title" name="title" placeholder="Doc title or URL" type="text" {{ (el) -> el.pbc_autocomplete_documents() }}>
+                            </div>
+                            <div class="span2">
+                              <a class="btn btn-mini add-document" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/documents/new" data-target="#ajax-modal-documents-new">
+                                <i class="grcicon-add"></i>
+                              </a>
+                            </div>
+                          </div>
+                        </form>
+                      </li>
+                    </ul>
+                  </div>
                 {{/population_sample}}
               {{/if_equals}}
             </div>
