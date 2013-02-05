@@ -15,6 +15,11 @@ h3.tab-title {
     padding-right:3px;
   }
 }
+.nav-tabs {
+  &.single-row-tabs {
+    border-bottom: none;
+  }
+}
 
 ul.single-row-tabs {
   li {

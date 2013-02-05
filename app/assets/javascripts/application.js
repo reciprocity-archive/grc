@@ -215,6 +215,7 @@ jQuery(document).ready(function($) {
         $navBar = $this.closest(".quick-search").find(".nav-tabs");
         
     $navBar.css('height', $tabPaneHeight);
+    $('.nav-tabs.single-row-tabs').css('height', 'auto');
     
   });
   
