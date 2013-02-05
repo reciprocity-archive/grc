@@ -102,7 +102,7 @@
             -request_collapse_class = "control_assessment-#{control_assessment_id || 'null' }-request-#{request.id}"
             %li.main-item{ html_data_attributes(request, "data-filter-", [ ["type-id", "type_id"], ["type-name", "type_name"], "status", ["date-requested", "date_requested.to_date"], ["control-code", "control.slug"], ["person", "persons_responsible"], "id" ]) }
               .item-main.pbc-item-head
-                .openclose{"data-target" => ".#{request_collapse_class}", "data-toggle" => "collapse"}
+                .openclose
                 .item-title
                   .row-fluid
                     .span2
