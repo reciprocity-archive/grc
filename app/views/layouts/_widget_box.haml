@@ -1,8 +1,10 @@
 -widget_class = '' if local_assigns[:widget_class].nil?
 -widget_class_yield = yield_content!(:widget_class)
 -widget_class += " #{widget_class_yield}" if widget_class_yield
+-widget_id_yield = yield_content!(:widget_id)
+-widget_id = widget_id_yield if local_assigns[:widget_id].nil?
 
-%section{ :class => "widget #{widget_class}"}
+%section{ :class => "widget #{widget_class}", :id => widget_id }
   %header.header
     .showhide.active{:rel => "tooltip", :title => "open/close widget", :'data-placement' => "right"}
     %h2
