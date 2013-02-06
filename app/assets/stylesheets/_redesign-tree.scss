@@ -220,6 +220,9 @@ ul.tree {
     margin-bottom:4px;
     @include border-radius();
     position: relative;
+    ul.tree {
+      margin:4px;
+    }
     h3 {
       border:1px solid darken($lightGray,5%);
       color:$gray;
@@ -418,6 +421,8 @@ ul.elements {
   }
 }
 
+/*
+
 ul.tree-structure {
   .controllist {
     float:left;
@@ -428,9 +433,7 @@ ul.tree-structure {
     white-space: nowrap;
     text-overflow: ellipsis;
     @include box-sizing(border-box);
-    /* margin: 3px 0px 2px 2px; */
     padding:0px 6px 0px 6px;
-    //TODO: #333 or #eee
     color:#333;
     border: 1px solid #eeeeee;
     font-weight:normal;
@@ -442,9 +445,6 @@ ul.tree-structure {
   }
   .attached {
     @include oneline();
-    //width:120px; /* preferable to be fluid spans, but not aligning */
-    //position:absolute;
-    //float:right;
     top:-1px;
     right: 20px;
     display: block;
@@ -452,7 +452,6 @@ ul.tree-structure {
     li {
       padding: 2px 0px 2px 2px;
       margin: 0 0 0 0;
-      //background-color: transparent;
       display: inline;
     }
     ul {
@@ -461,3 +460,4 @@ ul.tree-structure {
     }
   }
 }
+*/

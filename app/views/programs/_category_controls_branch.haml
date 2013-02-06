@@ -16,8 +16,8 @@
                 .row-fluid
                   =render :partial => 'object_leaf', :locals => { :instance => control }
                 .item-actions
-                  %a.widgetbtn.fltrt{ :href => flow_control_path(control), :title => 'View Control' }
-                    %i.grcicon-arrowright-grey
+                  %a.btn.btn-mini.pull-right{ :href => flow_control_path(control), :title => 'View Control' }
+                    %i.grcicon-goto
     -if children && children.size > 0
       %ul.tree
         -children.each do |subcategory, subchildren, subcontrols|
