@@ -255,6 +255,9 @@ h4.pbc-title {
     color: $text;
   }
   .response-items {
+    .grcicon-carot {
+      margin-top: 8px;
+    }
     .row-fluid {
       margin-bottom: 20px;
       &:last-child {
