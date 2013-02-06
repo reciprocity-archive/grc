@@ -6,37 +6,16 @@
   -expand_this = consolidated_controls.size > 0 || controls.size > 0
   -toggle_target = expand_this ? "content_system_#{item.id}" : ''
 
-  %li.system-node
-    .row-fluid
-      .span12
-        .span12.slot.regulationslot{ :'data-toggle' => 'collapse', :'data-target' => "##{toggle_target}" }
-          -if expand_this
-            .expander{ :class => expanded && 'in' }
-          -else
-            .enddot
-          %span.prefix=item.slug
-          =item.title
-    %ul.collapse{ :class => expanded && 'in', :id => "#{toggle_target}" }
-      =walk_slug_tree(Program.slugtree(item.consolidated_controls)) do |item, step|
-        -content_id = "content_#{rand(36**8).to_s(36)}"
+  .item-main
+    .openclose{ :class => 'lastchild' }
+    .item-title
+      .row-fluid
+        =render :partial => 'object_leaf', :locals => { :instance => item }
+      .item-actions
+  .item-content.in
+    =walk_slug_tree(Program.slugtree(item.consolidated_controls)) do |item, step|
+      .openclose{ :class => 'lastchild' }
+      .item-title
         .row-fluid
-          .span12
-            .span12.slot.controlslot{ :'data-toggle' => 'collapse', :'data-target' => "##{content_id}" }
-              .expander
-              %span.prefix=item.slug
-              =item.title || strip_tags(item.description)
-        .row-fluid-slotcontent.collapse{ :id => content_id }
-          .span12
-            =display_as_html item.description
-
-      =walk_slug_tree(Program.slugtree(item.controls)) do |item, step|
-        -content_id = "content_#{rand(36**8).to_s(36)}"
-        .row-fluid
-          .span12
-            .span12.slot.controlslot{ :'data-toggle' => 'collapse', :'data-target' => "##{content_id}" }
-              .expander
-              %span.prefix=item.slug
-              =item.title || item.description
-        .row-fluid-slotcontent.collapse{ :id => content_id }
-          .span12
-            =display_as_html item.description
+          =render :partial => 'object_leaf', :locals => { :instance => item }
+        .item-actions

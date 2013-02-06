@@ -33,7 +33,7 @@
       .row-fluid
         =render :partial => 'object_leaf', :locals => { :instance => instance }
       .item-actions
-        %a.btn.btn-mini.halfopacity{ "rel" => "tooltip", "data-placement" => "left", "title" => "Edit this object", 'data-modal-class' => 'modal-wide', 'data-form-target' => 'refresh', "data-toggle" => "modal-ajax-form", :href => url_for(:id => instance.id, :action => :edit, :controller => model_underscore.pluralize, :only_path => true) }
+        %a.btn.btn-mini{ "rel" => "tooltip", "data-placement" => "left", "title" => "Edit this object", 'data-modal-class' => 'modal-wide', 'data-form-target' => 'refresh', "data-toggle" => "modal-ajax-form", :href => url_for(:id => instance.id, :action => :edit, :controller => model_underscore.pluralize, :only_path => true) }
           %i.grcicon-edit-new
         -if has_dependence_relationship
           %a.btn.btn-mini{ :rel => "tooltip", :'data-placement' => "left", :title => "Link #{instance.class.name.titleize.downcase.pluralize} to this object", :'data-modal-class' => 'modal-wide', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :'data-toggle' => "modal-ajax-relationship-selector", :href => list_edit_flow_relationships_path(:object_id => instance.id, :object_type => instance.class.name, :related_model => instance.class.name, :related_side => 'destination', :relationship_type => dependence_relationship_type) }

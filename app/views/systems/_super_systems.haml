@@ -10,16 +10,14 @@
   -if super_systems.empty?
     %p There are no other systems that rely on this system.
 
-  %ul.slugtree
+  %ul.tree-structure
     -super_systems.each do |item|
-      %li( data-toggle='collapse' data-target="#super-system-#{item.id}" data-id="#{item.id}" )
-        .slot.singlecontrolSlot
-          .expander
-          %a.widgetbtn.fltrt{ :href => flow_system_path(item) }
-            %i.grcicon-arrowright-grey
-          %span.prefix
-            =item.slug
-          =item.title
-        .row-fluid-slotcontent.collapse{ :id => "super-system-#{item.id}" }
-          .span13
-            =display_as_html item.description
+      %li
+        .item-main
+          .openclose{ :class => 'lastchild' }
+          .item-title
+            .row-fluid
+              =render :partial => 'object_leaf', :locals => { :instance => item }
+            .item-actions
+              %a.btn.btn-mini.halfopacity{ "rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => flow_system_path(item.id) }
+                %i.grcicon-goto

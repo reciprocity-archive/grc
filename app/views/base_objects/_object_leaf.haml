@@ -4,10 +4,10 @@
 -title_attr = :title if local_assigns[:title_attr].nil?
 -description_attr = :description if local_assigns[:description_attr].nil?
 
--code = instance.send(code_attr)
--title = instance.send(title_attr)
--description = instance.send(description_attr)
--description_inline = sanitize(description, :tags => [])
+-code = instance.send(code_attr) if local_assigns[:code].nil?
+-title = instance.send(title_attr) if local_assigns[:title].nil?
+-description = instance.send(description_attr) if local_assigns[:description].nil?
+-description_inline = sanitize(description, :tags => []) if local_assigns[:description_inline].nil?
 
 .span10
   -if title.present? && description.present?

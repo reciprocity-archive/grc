@@ -5,34 +5,17 @@
   %a.btn.btn-mini.pull-right{ :href => list_edit_flow_control_risks_path(:control_id => control.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :rel => 'tooltip', :title => 'Link risks to this control', :'data-modal-class' => 'modal-wide' }
     %i.grcicon-link-new
 
-%ul.slotlist
+%ul.tree-structure
   -risks.each_with_index do |risk, i|
     -id_prefix = "risk-#{i}"
     -summary_toggle_target = "#{id_prefix}-summary"
 
     %li
-      .row-fluid
-        .slot.span12.processslot
-          .slottitle.span8.toggle{"data-target" => "##{summary_toggle_target}", "data-toggle" => "collapse"}
-            .expander
-            %span.prefix=risk.slug
-            =risk.title
-          -if has_feature? :BETA
-            .slotcolumn.span2
-              .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
-            .slotowner.span1
-              %a.slotowner{:href => "#"} Owner Joe
-          -else
-            .span3{"data-target" => "##{summary_toggle_target}", "data-toggle" => "collapse"}
-          .slotactions.pull-right
-            %a.btn.btn-mini.btn-blue.halfopacity{ "data-target" => "##{summary_toggle_target}", "data-toggle" => "collapse", "rel" => "tooltip", "data-placement" => "left", "title" => "More" }
-              %i.grcicon-more
-
-      .row-fluid.collapse{ :id => summary_toggle_target }
-        .span12.morewell.statusblue.nominheight
-          .slotcontent.span12
-            %ul.contentactions.pull-right
-              %li
-                %a.btn.btn-mini.halfopacity{ "rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => flow_risk_path(risk.id) }
-                  %i.grcicon-arrowright-black
-            =display_as_html risk.description
+      .item-main
+        .openclose{ :class => 'lastchild' }
+        .item-title
+          .row-fluid
+            =render :partial => 'object_leaf', :locals => { :instance => risk }
+          .item-actions
+            %a.btn.btn-mini.halfopacity{ "rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => flow_risk_path(risk.id) }
+              %i.grcicon-arrowright-black

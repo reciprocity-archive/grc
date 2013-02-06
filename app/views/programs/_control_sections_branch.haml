@@ -1,46 +1,34 @@
 -expanded = local_assigns.has_key?(:expanded) && expanded
 
 =walk_slug_tree(Program.slugtree(controls)) do |item, step|
-  %li.system-node
-    .row-fluid
-      .span12
-        %a.span12.slot.controlslot{ :'data-toggle' => 'collapse', :'data-target' => "#content_system_#{item.id}" }
-          /-if !system.description.blank?
-          .expander{ :class => expanded && 'in' }
-          %span.prefix=item.slug
-          =item.title || strip_tags(item.description)
-        -#.controllist.attached.span3{ :class => "statusblue" }
-          dunno
-      .row-fluid-slotcontent
-        .span12
-          -#.collapse{ :id => "content_#{system.id}" }
-          =display_as_html item.description
-    %ul.collapse{ :class => expanded && 'in', :id => "content_system_#{item.id}" }
-      =walk_slug_tree(Program.slugtree(item.implemented_controls)) do |item, step|
+  .item-main
+    .openclose{ :class => 'lastchild' }
+    .item-title
+      .row-fluid
+        =render :partial => 'object_leaf', :locals => { :instance => item }
+      .item-actions
+  .item-content.in
+    =walk_slug_tree(Program.slugtree(item.implemented_controls)) do |item, step|
+      .openclose{ :class => 'lastchild' }
+      .item-title
         .row-fluid
-          .span12
-            %a.span9.slot.regulationslot{ :'data-toggle' => 'collapse', :'data-target' => "#content_item_#{item.id}" }
-              -if !item.description.blank?
-                .expander
-              %span.prefix=item.slug
-              =item.title || item.description
-            .controllist.attached.span3{ :class => "statusblue" }
-              -controls = item.implementing_controls
+          =render :partial => 'object_leaf', :locals => { :instance => item }
+          .span2
+            -controls = item.linked_controls
+            -status_class = (controls.empty? && !item.na?) ? 'statusred' : 'statusyellow'
+            %a.controllist.attached{ :class => status_class, :href => mapping_section_dialog_path(item) }
+
+              -controls = item.linked_controls
               -if !controls.empty?
-                %ul.spannomargin{ :title => controls.map(&:slug).join(", ") }
+                %ul{ :title => controls.map(&:slug).join(", ") }
                   %li
                     %strong #{controls.size}:
                   -controls.each do |control|
                     %li=control.slug
+              -elsif item.na?
+                N/A
               -else
-                .controls
-                  %strong 0
-          .row-fluid-slotcontent
-            .span9
-              .collapse{ :id => "content_item_#{item.id}" }
-                =display_as_html item.description
-      -#subsystems = system.id == 3 ? [System.find(2), System.find(4)] : []
-      -#if subsections.count > 0
-        %li
-          %ul
-            =render :partial => 'section_controls_branch', :locals => { :sections =>  }
+                %strong 0
+        .item-actions
+          %a.btn.btn-mini.fltrt{ :href => edit_flow_section_path(item), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-dirty' => "#regulations, #combo", :title => 'Edit Section' }
+            %i.grcicon-edit-grey

@@ -5,43 +5,23 @@
 
 -instance.risky_attributes.each_with_index do |risky_attribute, i|
   -id_prefix = "risky_attribute-#{i}"
-  .row-fluid
-    .span12.captionbox
-      -#%a.widgetbtn.pull-right{ :href => list_edit_flow_risk_risky_attributes_path(:risk_id => risk.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :rel => 'tooltip', :title => 'Link objects to this Risky Attribute', :'data-modal-class' => 'modal-wide' }
-        %i.grcicon-link
-      %h4
+  %ul.tree
+    %li.category
+      %h3
         =risky_attribute.type_string.presence
         =risky_attribute.title
 
-  %ul.slotlist
+  %ul.tree-structure
     -risky_attribute.attributed_objects.each_with_index do |object, i|
       -summary_id_prefix = "#{id_prefix}-#{object.class.name.underscore}-#{object.id}"
       -summary_toggle_target = "#{summary_id_prefix}-summary"
 
       %li
-        .row-fluid
-          .slot.span12.processslot
-            .slottitle.span8.toggle{"data-target" => "##{summary_toggle_target}", "data-toggle" => "collapse"}
-              .expander
-              %span.prefix=object.slug
-              =object.title
-            -if has_feature? :BETA
-              .slotcolumn.span2
-                .halfopacity.span12.nominheight.btn.btn-slotcolumn Data Integrity
-              .slotowner.span1
-                %a.slotowner{:href => "#"} Owner Joe
-            -else
-              .span3{"data-target" => "##{summary_toggle_target}", "data-toggle" => "collapse"}
-            .slotactions.pull-right
-              %a.btn.btn-mini.btn-blue.halfopacity{ "data-target" => "##{summary_toggle_target}", "data-toggle" => "collapse", "rel" => "tooltip", "data-placement" => "left", "title" => "More" }
-                %i.grcicon-more
-
-        .row-fluid.collapse{ :id => summary_toggle_target }
-          .span12.morewell.statusblue.nominheight
-            .slotcontent.span12
-              %ul.contentactions.pull-right
-                %li
-                  %a.btn.btn-mini.halfopacity{ "rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => send("flow_#{object.class.name.underscore}_path", object.id) }
-                    %i.grcicon-goto
-              =display_as_html object.description
-              
+        .item-main
+          .openclose{ :class => 'lastchild' }
+          .item-title
+            .row-fluid
+              =render :partial => 'object_leaf', :locals => { :instance => object }
+            .item-actions
+              %a.btn.btn-mini.halfopacity{ "rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => send("flow_#{object.class.name.underscore}_path", object.id) }
+                %i.grcicon-goto

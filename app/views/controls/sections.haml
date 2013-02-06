@@ -3,29 +3,12 @@
 %h3.tab-title
   Program or Policy Sections that mandate this Control
 
-%ul.slotlist
+%ul.tree-structure
   =walk_slug_tree(Program.slugtree(sections)) do |item, step|
     -content_id = "content_#{rand(36**8).to_s(36)}" # unique ID for toggle
-    .row-fluid
-      .slot.span12.regulationslot
-        .slottitle.span8.toggle{"data-target" => "##{content_id}", "data-toggle" => "collapse"}
-          .expander
-          %span.prefix
-            =item.slug
-          =item.title || strip_tags(item.description)
-        -if has_feature? :BETA
-          .span2.slotcolumn
-            .halfopacity.span12.nominheight.btn.btn-slotcolumn Full Audit
-          .slotowner.span1
-            %a.slotowner GRC
-        -else
-          .span3{"data-target" => "##{content_id}", "data-toggle" => "collapse"}
-        .slotactions.pull-right
-          %a#tooltip11.btn.btn-mini.btn-blue{"rel" => "tooltip", "data-placement" => "left", "title" => "More", "data-target" => "##{content_id}", "data-toggle" => "collapse"}
-            %i.grcicon-more
-
-      .row-fluid.collapse{ :id => content_id, :'data-id' => item.id }
-        .span12.morewell.nominheight
-          .slotcontent.span12
-            %ul.contentactions.pull-right
-            =display_as_html item.description
+    .item-main
+      .openclose{ :class => 'lastchild' }
+      .item-title
+        .row-fluid
+          =render :partial => 'object_leaf', :locals => { :instance => item }
+        .item-actions

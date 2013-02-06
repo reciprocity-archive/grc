@@ -19,9 +19,11 @@ module SlugfilterHelper
           yield [tree.object, step]
         end
         if !children.empty?
-          haml_tag("ul", { :id => "children_#{tree.prefix}" }) do
-            children.each do |step, child|
-              walk_slug_tree_helper(child, step, odd, depth, &block)
+          haml_tag("div.item-content.in") do
+            haml_tag("ul.tree-structure", { :id => "children_#{tree.prefix}" }) do
+              children.each do |step, child|
+                walk_slug_tree_helper(child, step, odd, depth, &block)
+              end
             end
           end
         end

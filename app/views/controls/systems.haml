@@ -1,5 +1,5 @@
 -# locals: control, systems
-    
+
 %h3.tab-title
   Systems or Processes that implement this Control
   %a.btn.btn-mini.pull-right{ :href => list_edit_flow_system_controls_path(:control_id => control.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :rel => 'tooltip', :'data-placement' => 'left', :title => 'Link systems to this control', :'data-modal-class' => 'modal-wide' }
@@ -11,48 +11,7 @@
       .item-main
         .item-title
           .row-fluid
-            .span10
-              .oneline
-                %span.code=system.slug
-                %span.title=system.title
-                %span.description=system.description
-                
-                
+            =render :partial => 'object_leaf', :locals => { :instance => system }
           .item-actions
             %a{:href => flow_system_path(system.id), :class => "btn btn-mini", :rel => "tooltip" , :'data-placement' => "left", :title => "View Object"}
               %i.grcicon-goto
-%ul.tree
-  -systems.each_with_index do |system, i|
-    %li.main
-      .item-identifier
-        .item-title
-          .row-fluid
-            .span2
-              %p.key.oneline=system.slug
-            -if has_feature? :BETA
-              .span5
-                %p.additional-info.oneline
-                  %span=system.title
-                  -if system.description != ""
-                    %a.more{:href=>"#"} more...
-                    %br
-                    %span.description=system.description
-            -else
-              .span8
-                %p.additional-info.oneline
-                  %span=system.title
-                  -if system.description != ""
-                    %a.more{:href=>"#"} more...
-                    %br
-                    %span.description=system.description
-          
-            -if has_feature? :BETA
-              .span5
-                %span.label Data Integrity
-                %span.additional-info
-                  Owner: Jonathan Myers
-        .item-actions
-          %a{:href => flow_system_path(system.id), :class => "btn btn-mini", :rel => "tooltip" , :'data-placement' => "left", :title => "View Object"}
-            %i.grcicon-goto
-      .item-content
-        =display_as_html system.description

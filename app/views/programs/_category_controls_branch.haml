@@ -2,30 +2,24 @@
 
 -subcategory_content_id = "content_#{rand(36**8).to_s(36)}"
 
-%li
-  .row-fluid{ :'data-toggle' => 'collapse', :'data-target' => "##{subcategory_content_id}" }
-    .span12
-      .span12.slot.categoryslot
-        .expander
-        %span.prefix=category ? category.name : 'Uncategorized Controls'
-  -if controls && controls.size > 0
-    %ul.collapse{ :id => subcategory_content_id, :'data-id' => category ? category.id : "0", :'data-object-type' => "category" }
-      -controls.each do |control|
-        -control_content_id = "content_#{rand(36**8).to_s(36)}"
-        %li
-          .row-fluid{ :'data-toggle' => 'collapse', :'data-target' => "##{control_content_id}" }
-            .span12
-              .span12.slot.controlslot
-                .expander
-                %a.widgetbtn.fltrt{ :href => flow_control_path(control), :title => 'View Control' }
-                  %i.grcicon-arrowright-grey
-                %span.prefix=control.slug
-                =strip_tags(control.title)
-          .row-fluid-slotcontent.collapse{ :id => control_content_id, :'data-id' => control.id  }
-            .span9
-              =display_as_html control.description
-  -if children && children.size > 0
-    %ul
-      -children.each do |subcategory, subchildren, subcontrols|
-        =render :partial => 'category_controls_branch',
-                :locals => { :category => subcategory, :children => subchildren, :controls => subcontrols }
+%li.category
+  %h3=category ? category.name : 'Uncategorized Controls'
+  %section.content
+    -if controls && controls.size > 0
+      %ul.tree-structure{ :id => subcategory_content_id, :'data-id' => category ? category.id : "0", :'data-object-type' => "category" }
+        -controls.each do |control|
+          -control_content_id = "content_#{rand(36**8).to_s(36)}"
+          %li
+            .item-main
+              .openclose{ :class => 'lastchild' }
+              .item-title
+                .row-fluid
+                  =render :partial => 'object_leaf', :locals => { :instance => control }
+                .item-actions
+                  %a.widgetbtn.fltrt{ :href => flow_control_path(control), :title => 'View Control' }
+                    %i.grcicon-arrowright-grey
+    -if children && children.size > 0
+      %ul.tree
+        -children.each do |subcategory, subchildren, subcontrols|
+          =render :partial => 'category_controls_branch',
+                  :locals => { :category => subcategory, :children => subchildren, :controls => subcontrols }

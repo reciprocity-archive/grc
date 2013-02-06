@@ -414,3 +414,47 @@ ul.elements {
     cursor:pointer;  
   }
 }
+
+ul.tree-structure {
+  .controllist {
+    float:left;
+    display: inline-block;
+    height:30px;
+    line-height:30px;
+    overflow:hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    @include box-sizing(border-box);
+    /* margin: 3px 0px 2px 2px; */
+    padding:0px 6px 0px 6px;
+    //TODO: #333 or #eee
+    color:#333;
+    border: 1px solid #eeeeee;
+    font-weight:normal;
+    font-size:12px;
+    &:hover {
+      color:#000;
+      font-weight:bold;
+    }
+  }
+  .attached {
+    @include oneline();
+    //width:120px; /* preferable to be fluid spans, but not aligning */
+    //position:absolute;
+    //float:right;
+    top:-1px;
+    right: 20px;
+    display: block;
+    margin: 2px 0 0 0;
+    li {
+      padding: 2px 0px 2px 2px;
+      margin: 0 0 0 0;
+      //background-color: transparent;
+      display: inline;
+    }
+    ul {
+      margin-left:0;
+      display:inline;
+    }
+  }
+}
