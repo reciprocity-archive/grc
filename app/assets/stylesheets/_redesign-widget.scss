@@ -3,7 +3,7 @@
 .widget {
   border:1px solid $widgetBorder;
   margin-bottom: 20px;
-  overflow-y:auto;
+  overflow-y:hidden;
   background:$white;
   @include transition(box-shadow 0.2s,border-color 0.2s);
   @include border-radius($topBorderRadius);
@@ -67,6 +67,7 @@
     //max-height: 300px;
     overflow: hidden;
     overflow-y: auto;
+    height: 100%;
   }
   .footer {
     background:$lightGray;
