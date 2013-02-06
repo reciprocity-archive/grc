@@ -177,3 +177,11 @@ input.input-block-level {
     @include opacity(0.8);
   }
 }
+
+.no-results {
+  margin-top:20px;
+  h3, p {
+    color:#111;
+    margin-bottom:6px;
+  }
+}

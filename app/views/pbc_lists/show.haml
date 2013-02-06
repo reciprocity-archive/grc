@@ -18,14 +18,15 @@
 
 -content_for :subheader_extras do
   %ul.actions.pull-right
-    %li
+    %li{:class => "items-#{@pbc_list.requests.count}"}
       %a{ :href => import_flow_pbc_list_path(@pbc_list) }
         %i.grcicon-imp-exp
         Import Requests
-    %li
-      %a{ :href => export_flow_pbc_list_path(@pbc_list), :'data-toggle' => 'modal-ajax' }
-        %i.grcicon-export
-        Export Requests
+    -if @pbc_list.requests.count != 0
+      %li
+        %a{ :href => export_flow_pbc_list_path(@pbc_list), :'data-toggle' => 'modal-ajax' }
+          %i.grcicon-export
+          Export Requests
 
 .container-fluid
   .row-fluid
