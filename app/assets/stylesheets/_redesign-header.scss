@@ -279,6 +279,12 @@
           }
         }
       }
+      // zero state
+      &.items-0 {
+        a{
+          color:$green;
+        }
+      }
       &.btn-group {
         margin-top: 0;
         .dropdown-toggle {
