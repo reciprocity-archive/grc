@@ -25,9 +25,10 @@
                 .row-fluid
                   .span12
                     .modalSlot.span12
-                      %a.btn.btn-mini.unmapbtn.fltrt{:href => mapping_map_rcontrol_path(:section => section.id, :rcontrol => control.id, :u => 1), :'data-remote' => true, :'data-method' => 'post', :'data-toggle' => 'unmap-rcontrol'} unmap
+                      %a.btn.btn-mini.pull-right.unmapbtn{:href => mapping_map_rcontrol_path(:section => section.id, :rcontrol => control.id, :u => 1), :'data-remote' => true, :'data-method' => 'post', :'data-toggle' => 'unmap-rcontrol'}
+                        %i.grcicon-remove
                       %span.prefix
-                        =control.slug
+                        %strong=control.slug
                         -
                         =control.title
                       %br
@@ -40,9 +41,10 @@
                   .row-fluid
                     .span12
                       .modalSlot.span12
-                        %a.btn.btn-mini.unmapbtn.fltrt{:href => mapping_map_ccontrol_path(:rcontrol => control.id, :ccontrol => ccontrol.id, :u => 1), :'data-remote' => true, :'data-method' => 'post', :'data-toggle' => 'unmap-ccontrol'} unmap
+                        %a.btn.btn-mini.unmapbtn.pull-right{:href => mapping_map_ccontrol_path(:rcontrol => control.id, :ccontrol => ccontrol.id, :u => 1), :'data-remote' => true, :'data-method' => 'post', :'data-toggle' => 'unmap-ccontrol'}
+                          %i.grcicon-remove
                         %span.prefix
-                          =ccontrol.slug
+                          %strong=ccontrol.slug
                           -
                           =ccontrol.title
                         %br
