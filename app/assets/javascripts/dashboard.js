@@ -447,7 +447,7 @@ jQuery(function($) {
 
 jQuery(function($) {
   $("body").on("change", ".pbc-requests .main-item", function(ev) {
-    if($(ev.target).parents().is(".pbc-status")) {
+    if($(ev.target).parents().is(".status")) {
       var status = $(ev.target).val();
       $.ajax({
         url : "/requests/" + $(ev.currentTarget).data("filter-id") + ".json"
