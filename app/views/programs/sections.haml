@@ -9,15 +9,21 @@
           .span1
             -controls = item.linked_controls
             -status_class = (controls.empty? && !item.na?) ? 'badge-danger' : 'badge-warning'
-            %a.controllist.attached.badge{:href => mapping_section_dialog_path(item), :class => status_class}
+            -popover_content = capture_haml do
+              %ul
+                -controls.each do |control|
+                  %li
+                    %a{ :href => flow_control_path(control) }=control.slug
+ 
+            %a.controllist.attached.badge{:href => mapping_section_dialog_path(item), 
+                                          :class => status_class,
+                                          :'data' => controls.empty? || { :placement => "left",
+                                              :'popover-trigger' =>  "sticky-hover",
+                                              :'original-title' => "Linked Controls",
+                                              :content => popover_content } }
               -controls = item.linked_controls
               -if !controls.empty?
                 =controls.size
-                -#%ul{ :title => controls.map(&:slug).join(", ") }
-                  %li
-                    %strong #{}:
-                  -controls.each do |control|
-                    %li=control.slug
               -elsif item.na?
                 N/A
               -else
