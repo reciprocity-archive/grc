@@ -64,6 +64,10 @@ jQuery(document).ready(function($) {
     }
   };
 
+  $('body').on('shown', '.modal', function() {
+    $('.tooltip').hide();;
+  });
+
   // Listeners for initial tooltip mouseovers
   $('body').on('mouseover', '[data-toggle="tooltip"], [rel=tooltip]', function(e) {
     var $currentTarget = $(e.currentTarget);
