@@ -6,16 +6,16 @@
       .item-title
         .row-fluid
           =render :partial => 'object_leaf', :locals => { :instance => item }
-          .span2
+          .span1
             -controls = item.linked_controls
-            -status_class = (controls.empty? && !item.na?) ? 'statusred' : 'statusyellow'
-            %a.controllist.attached{ :class => status_class, :href => mapping_section_dialog_path(item) }
-
+            -status_class = (controls.empty? && !item.na?) ? 'badge-danger' : 'badge-warning'
+            %a.controllist.attached.badge{:href => mapping_section_dialog_path(item), :class => status_class}
               -controls = item.linked_controls
               -if !controls.empty?
-                %ul{ :title => controls.map(&:slug).join(", ") }
+                =controls.size
+                -#%ul{ :title => controls.map(&:slug).join(", ") }
                   %li
-                    %strong #{controls.size}:
+                    %strong #{}:
                   -controls.each do |control|
                     %li=control.slug
               -elsif item.na?
