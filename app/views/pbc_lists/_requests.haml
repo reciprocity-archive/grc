@@ -141,8 +141,8 @@
                           %span.date{"rel" => "tooltip", "data-placement" => "top", "title" => "Date Requested"}=request.date_requested && request.date_requested.strftime('%m/%d/%Y')
                         -else
                           %span.date Unknown date
-                      .span2
-                        .status
+                      .span2.row-fluid
+                        .status.span10
                           Status:
                           %select
                             -Request.statuses.each do |status|

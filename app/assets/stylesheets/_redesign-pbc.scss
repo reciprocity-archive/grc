@@ -82,7 +82,7 @@ ul.tree-structure.pbc {
         line-height:23px;
         height:23px;
         padding:2px;
-        width:auto;
+        width:100%;
         border-color:darken($lightGray,15%);
         @include border-radius();
       }    
