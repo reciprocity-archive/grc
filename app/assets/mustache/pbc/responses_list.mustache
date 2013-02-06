@@ -50,11 +50,10 @@
                   <ul class="items pbc-item-list">
                     {{#object_people}}
                       <li {{data 'model'}} data-model="true" title="{{person.email}}">
-                        <div class="span5">
-                          {{person.name}}
-                          &nbsp;
+                        <div class="span7">
+                          <span class="inner-element">{{person.name}}</span>
                         </div>
-                        <div class="span6">
+                        <div class="span4">
                           <select class="edit-person-role">
                             <option value="responsible" {{#if_equals role 'responsible'}}selected="true"{{/if_equals}}>Responsible</option>
                             <option value="accountable" {{#if_equals role 'accountable'}}selected="true"{{/if_equals}}>Accountable</option>
@@ -70,11 +69,11 @@
                     <li class="inline-editing inline-add-person hide" data-system-id="{{system.id}}">
                       <form>
                         <div class="row-fluid">
-                          <div class="span10">
-                            <input class="span12 input-ldap" name="ldap" placeholder="LDAP or name" type="text" {{ (el) -> el.pbc_autocomplete_people() }}>
+                          <div class="span7">
+                            <input class="input-block-level input-ldap" name="ldap" placeholder="LDAP or name" type="text" {{ (el) -> el.pbc_autocomplete_people() }}>
                           </div>
-                          <div class="span2">
-                            <a class="btn btn-mini span12 add-person" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/people/new" data-target="#ajax-modal-people-new">
+                          <div class="span5">
+                            <a class="btn btn-mini pull-left add-person" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/people/new" data-target="#ajax-modal-people-new">
                               <i class="grcicon-add"></i>
                             </a>
                           </div>
@@ -114,7 +113,7 @@
               {{/if_equals}}
               {{#if_equals type_name 'Population Sample'}}
                 {{#population_sample}}
-                  <div class="row-fluid">
+                  <div class="row-fluid inner-title">
                     <div class="span9">
                       <h5>Population Worksheet</h5>
                     </div>
@@ -133,20 +132,20 @@
                                   &nbsp;
                                 {{else}}
                                   {{#if_null population_document.link_url}}
-                                    <span>{{population_document.title}}</span>
+                                    <span class="inner-element">{{population_document.title}}</span>
                                   {{else}}
-                                    <a href="{{population_document.link_url}}" target="_blank">{{firstnonempty population_document.title population_document.link_url}}</a>
+                                    <a class="inner-element" href="{{population_document.link_url}}" target="_blank">{{firstnonempty population_document.title population_document.link_url}}</a>
                                   {{/if_null}}
                                 {{/if_null}}
                               </div>
                               <div class="span2">
-                                <a class="btn btn-nano pull-left toggle-edit-population-doc" href="javascript://">
+                                <a class="btn btn-nano toggle-edit-population-doc" href="javascript://">
                                   <i class="grcicon-edit-grey"></i>
                                 </a>
                               </div>
                             </div>
                           </li>
-                          <li class="inline-editing inline-edit-population-doc hide" data-doc-type="population">
+                          <li class="inline-editing custom-edit inline-edit-population-doc hide" data-doc-type="population">
                             <form>
                               <div class="row-fluid">
                                 <div class="span10">
@@ -168,7 +167,7 @@
                             <input class="input-block-level" name="population" type="text" value="{{population}}">
                           </div>
                           <div class="span7">
-                            <a href="javascript://" class="save-population btn disabled">
+                            <a href="javascript://" class="save-population btn btn-mini pull-left disabled">
                               Saved
                             </a>
                           </div>
@@ -177,7 +176,7 @@
                     </div>
                   </div>
                   <div data-model="true" {{data 'model'}}>
-                    <div class="row-fluid">
+                    <div class="row-fluid inner-title">
                       <div class="span9">
                         <h5>Sample Worksheet</h5>
                       </div>
@@ -190,32 +189,32 @@
                         <ul class="items pbc-item-list">
                           <li class="pbc-item">
                             <div class="row-fluid">
-                              <div class="span6">
+                              <div class="span10">
                                 {{#if_null sample_worksheet_document}}
                                   &nbsp;
                                 {{else}}
                                   {{#if_null sample_worksheet_document.link_url}}
-                                    <span>{{sample_worksheet_document.title}}</span>
+                                    <span class="inner-element">{{sample_worksheet_document.title}}</span>
                                   {{else}}
-                                    <a href="{{sample_worksheet_document.link_url}}" target="_blank">{{firstnonempty sample_worksheet_document.title sample_worksheet_document.link_url}}</a>
+                                    <a class="inner-element" href="{{sample_worksheet_document.link_url}}" target="_blank">{{firstnonempty sample_worksheet_document.title sample_worksheet_document.link_url}}</a>
                                   {{/if_null}}
                                 {{/if_null}}
                               </div>
-                              <div class="span6">
+                              <div class="span2">
                                 <a class="btn btn-nano toggle-edit-population-doc" href="javascript://">
                                   <i class="grcicon-edit-grey"></i>
                                 </a>      
                               </div>
                             </div>
                           </li>
-                          <li class="inline-editing inline-edit-population-doc hide" data-doc-type="sample_worksheet">
+                          <li class="inline-editing custom-edit inline-edit-population-doc hide" data-doc-type="sample_worksheet">
                             <form>
                               <div class="row-fluid">
                                 <div class="span10">
                                   <input class="input-block-level input-title" name="title" placeholder="Doc title or URL" type="text" {{ (el) -> el.pbc_autocomplete_documents() }}>
                                 </div>
                                 <div class="span2">
-                                  <a class="btn btn-mini add-document" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/documents/new" data-target="#ajax-modal-documents-new">
+                                  <a class="btn btn-mini pull-left add-document" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/documents/new" data-target="#ajax-modal-documents-new">
                                     <i class="grcicon-add"></i>
                                   </a>
                                 </div>
@@ -228,7 +227,7 @@
                         <div class="row-fluid sample-widget">
                           <div class="span5"><input class="input-block-level" name="samples" type="text" value="{{samples}}"></div>
                           <div class="span7">
-                            <a href="javascript://" class="save-samples btn disabled">
+                            <a href="javascript://" class="save-samples btn btn-mini pull-left disabled">
                               Saved
                             </a>
                           </div>
@@ -246,16 +245,18 @@
                               &nbsp;
                             {{else}}
                               {{#if_null sample_evidence_document.link_url}}
-                                <span>{{sample_evidence_document.title}}</span>
+                                <span class="inner-element">{{sample_evidence_document.title}}</span>
                               {{else}}
-                                <a href="{{sample_evidence_document.link_url}}" target="_blank">{{firstnonempty sample_evidence_document.title sample_evidence_document.link_url}}</a>
+                                <a class="inner-element" href="{{sample_evidence_document.link_url}}" target="_blank">{{firstnonempty sample_evidence_document.title sample_evidence_document.link_url}}</a>
                               {{/if_null}}
                             {{/if_null}}
                           </div>
                           <div class="span2">
-                            <a class="btn btn-nano pull-right toggle-edit-population-doc" href="javascript://">
-                              <i class="grcicon-edit-grey"></i>
-                            </a>
+                            <div class="pull-right">
+                              <a class="btn btn-nano toggle-edit-population-doc" href="javascript://">
+                                <i class="grcicon-edit-grey"></i>
+                              </a>
+                            </div>
                           </div>
                         </div>
                       </li>
@@ -266,7 +267,7 @@
                               <input class="input-block-level input-title" name="title" placeholder="Doc title or URL" type="text" {{ (el) -> el.pbc_autocomplete_documents() }}>
                             </div>
                             <div class="span2">
-                              <a class="btn btn-mini add-document" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/documents/new" data-target="#ajax-modal-documents-new">
+                              <a class="btn btn-mini pull-left add-document" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/documents/new" data-target="#ajax-modal-documents-new">
                                 <i class="grcicon-add"></i>
                               </a>
                             </div>

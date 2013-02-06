@@ -48,6 +48,9 @@ ul.tree-structure {
     &:last-child {
       border-bottom:none;
     }
+    &.pbc-item {
+      line-height: 28px;
+    }
   }
   .progress {
     line-height:16px;

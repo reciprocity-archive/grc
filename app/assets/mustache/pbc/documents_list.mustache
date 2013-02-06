@@ -4,10 +4,10 @@
       <div class="span7">
         {{#if document.link_url}}
         <span>
-          <a href="{{document.link_url}}" target="_blank">{{firstnonempty document.title document.link_url}}</a>
+          <a class="inner-element" href="{{document.link_url}}" target="_blank">{{firstnonempty document.title document.link_url}}</a>
         </span>
         {{else}}
-          <span>{{document.title}}</span>
+          <span class="inner-element">{{document.title}}</span>
         {{/if}}
         </span>
       </div>

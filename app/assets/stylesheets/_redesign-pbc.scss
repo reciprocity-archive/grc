@@ -194,8 +194,12 @@ h4.pbc-title {
       }
     }
     .sample-widget {
-      .input-block-level {
-        margin: 3px 0 0 0;
+      margin-top: 9px;
+      .btn-mini {
+        line-height: 16px;
+      }
+      input {
+        margin-bottom: 0;
       }
     }
     margin-left: 0 !important;
@@ -255,6 +259,14 @@ h4.pbc-title {
       margin-bottom: 20px;
       &:last-child {
         margin-bottom: 0;
+      }
+      &.inner-title {
+        margin-bottom: 0;
+        line-height: 18px;
+        div {
+          line-height: 18px;
+          min-height: 18px;
+        }
       }
     }
     .response-title-bar {
@@ -316,6 +328,9 @@ h4.pbc-title {
     color: $text;
     .items {
       margin-bottom: 20px;
+      li {
+        line-height: auto !important;
+      }
     }
     .inner-element {
       display: block;
@@ -324,6 +339,12 @@ h4.pbc-title {
   }
   .inline-editing {
     border: none !important;
+    &.custom-edit {
+      margin-bottom: -4px;
+      form {
+        padding-top: 5px;
+      }
+    }
     form {
       margin-bottom: 0;
     }
