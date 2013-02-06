@@ -217,6 +217,9 @@ ul.tree {
     margin-bottom:4px;
     @include border-radius();
     position: relative;
+    ul.tree {
+      margin:4px;
+    }
     h3 {
       border:1px solid darken($lightGray,5%);
       color:$gray;
