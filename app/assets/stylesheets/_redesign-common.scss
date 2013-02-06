@@ -164,3 +164,31 @@ input.input-block-level {
     padding-top: 8px;
   }
 }
+
+// resizible widget functionality
+.widget:hover {
+  .ui-resizable-handle {
+    height:12px;
+    border-top:1px solid darken($lightGray,5%);
+    @include new-icons();
+    background-color: lighten($lightGray,5%);
+    background-repeat:no-repeat;
+    background-position:50% -101px;
+    @include opacity(0.8);
+  }
+}
+
+.no-results {
+  margin-top:20px;
+  h3, p {
+    color:#111;
+    margin-bottom:6px;
+  }
+}
+
+.inline-help {
+  color:$green;
+  font-weight:normal;
+  font-size:13px;
+  margin-left:10px;
+}

@@ -6,8 +6,10 @@
 %h4.pbc-title.response-title-bar
   ="Responses (#{request.type_name})"
   %a.btn.btn-mini.btn-add{"data-toggle" => "modal", :href => "#newResponse"}
-    %i.grcicon-add-new{ "data-target" => "##{new_response_id}", "data-toggle" => "collapse", "rel" => "tooltip", "data-placement" => "left", "title" => "Add new response" }
-
+    %i.grcicon-add-new{ "data-target" => "##{new_response_id}", "data-toggle" => "collapse", "rel" => "tooltip", "data-placement" => "top", "title" => "Add new response" }
+  %span.inline-help
+    &laquo;
+    click here to add a response
 %ul.tree-structure.add-response.items-list.collapse{ :id => new_response_id }
   %li.item
     .item-main
