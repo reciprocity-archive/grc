@@ -21,9 +21,9 @@
         {{/system}}
         <div class="span4">
           <div class="inner-response">
-            <div class="row-fluid">
+            <div class="row-fluid response-title-bar">
               <div class="span12">
-                <a class="btn btn-mini delete-response pull-right" style="margin-top:0" href="/responses/{{id}}/delete" data-toggle="modal-ajax-form" title="Delete response" rel="tooltip" data-placement="left" data-id="{{id}}">
+                <a class="btn btn-mini delete-response pull-right" href="/responses/{{id}}/delete" data-toggle="modal-ajax-form" title="Delete response" rel="tooltip" data-placement="left" data-id="{{id}}">
                   <i class="grcicon-x-grey"></i>
                 </a>
                 <h4>Evidence</h4>
@@ -36,8 +36,9 @@
                   <ul class="items pbc-item-list">
                     {{> /assets/pbc/documents_list.mustache}}
                     <li class="toggle-add-document add-new">
-                      <a href="javascript://">
-                        + Add new document
+                      <a class="btn btn-mini btn-add" href="javascript://">
+                        <i class="grcicon-add-new"></i>
+                        Document
                       </a>
                     </li>
                   </ul>
@@ -60,7 +61,7 @@
                           </select>
                         </div>
                         <div class="span1">
-                          <a class="btn btn-nano pull-right remove_person span1" title="Remove from response" rel="tooltip" href="javascript://">
+                          <a class="btn btn-nano remove_person" title="Remove from response" rel="tooltip" href="javascript://">
                             <i class="grcicon-x-grey"></i>
                           </a>                        
                         </div>
@@ -81,8 +82,9 @@
                       </form>
                     </li>
                     <li class="toggle-add-person add-new">
-                      <a href="javascript://">
-                        + Add new participant
+                      <a class="btn btn-mini btn-add" href="javascript://">
+                        <i class="grcicon-add-new"></i>
+                        Participant
                       </a>
                     </li>
                   </ul>
@@ -92,19 +94,20 @@
                   <ul class="items pbc-item-list">
                   {{#meetings}}
                     <li {{data 'model'}} data-model="true">
-                      <div class="span10">
-                        <a href="{{calendar_url}}" target="_blank">{{calendar_url}}</a>
+                      <div class="span11">
+                        <a class="inner-element" href="{{calendar_url}}" target="_blank">{{calendar_url}}</a>
                       </div>
-                      <div class="span2">
-                        <a class="btn btn-nano pull-right remove_person" href="javascript://">
+                      <div class="span1">
+                        <a class="btn btn-nano remove_person" href="javascript://">
                           <i class="grcicon-x-grey"></i>
                         </a>
                       </div>
                     </li>
                   {{/meetings}}
                   <li class="add-meeting add-new">
-                    <a data-modal-reset="reset" data-toggle="modal-ajax-form" data-modal-class="modal-wide" href="/meetings/new?meeting[response_id]={{id}}">
-                      + Add new meeting
+                    <a class="btn btn-mini btn-add" data-modal-reset="reset" data-toggle="modal-ajax-form" data-modal-class="modal-wide" href="/meetings/new?meeting[response_id]={{id}}">
+                      <i class="grcicon-add-new"></i>
+                      Meeting
                     </a>
                   </li>
                 </ul>
@@ -125,7 +128,7 @@
                         <ul class="items pbc-item-list">
                           <li class="pbc-item">
                             <div class="row-fluid">
-                              <div class="span6">
+                              <div class="span10">
                                 {{#if_null population_document}}
                                   &nbsp;
                                 {{else}}
@@ -136,8 +139,8 @@
                                   {{/if_null}}
                                 {{/if_null}}
                               </div>
-                              <div class="span6">
-                                <a class="btn btn-nano toggle-edit-population-doc" href="javascript://">
+                              <div class="span2">
+                                <a class="btn btn-nano pull-left toggle-edit-population-doc" href="javascript://">
                                   <i class="grcicon-edit-grey"></i>
                                 </a>
                               </div>
@@ -150,7 +153,7 @@
                                   <input class="input-block-level input-title" name="title" placeholder="Doc title or URL" type="text" {{ (el) -> el.pbc_autocomplete_documents() }}>
                                 </div>
                                 <div class="span2">
-                                  <a class="btn btn-mini add-document" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/documents/new" data-target="#ajax-modal-documents-new">
+                                  <a class="btn btn-mini pull-left add-document" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/documents/new" data-target="#ajax-modal-documents-new">
                                     <i class="grcicon-add"></i>
                                   </a>
                                 </div>

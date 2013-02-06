@@ -152,6 +152,18 @@ h4.pbc-title {
   margin-bottom:20px;
   border:1px solid #cdecb4;
   position:relative;
+  input {
+    line-height: 12px;
+    height: 12px;
+    font-size: 11px;
+    &.input-block-level {
+      min-height: 22px;
+    }
+  }
+  select {
+    line-height: 22px;
+    height: 22px;
+  }
   .bg-caret {
     background: url('/images/bgnd-responses.png') no-repeat 0 0;
     width:13px;
@@ -162,7 +174,9 @@ h4.pbc-title {
     z-index:2;
   }
   .item-title {
-    color:#111;
+    color:$responsTitle;
+    font-size: 12px;
+    font-weight: bold;
   }
   ul.tree-structure {
     margin-top:8px;
@@ -170,8 +184,10 @@ h4.pbc-title {
     .pbc-counter {
       display:inline-block;
       line-height:28px;
+      margin-right: 20px;
       i {
-        margin-top:4px;
+        margin-top:6px !important;
+        margin-right: 3px;
       }
       &.empty {
         @include opacity(0.3);
@@ -182,20 +198,38 @@ h4.pbc-title {
         margin: 3px 0 0 0;
       }
     }
+    margin-left: 0 !important;
     &.add-response {
       border:none !important;
+      margin-left: 0 !important;
+      .arrow-right {
+        background-position:-112px -32px;
+        margin-top: 3px;
+        float:left;
+        @include size(16px, 16px);
+        @include background-size(160px 160px);
+        background-image: url("/images/grcicons/icons.png");
+        @include opacity(0.4);
+        &.active {
+          @include opacity(1);
+        }
+      }
+      .respons-add {
+        margin-left: 24px;
+        i {
+          margin-top: 0;
+        }
+      }
       li {
         .next-each-other {
           @include clearfix();
           input {
             float:left;
             margin-right: 4px;
+            margin-bottom: 0;
           }
           span {
             float:left;
-          }
-          .btn {
-            margin-top: 3px;
           }
         }
       }
@@ -213,19 +247,118 @@ h4.pbc-title {
     @include border-radius();
     padding:8px 12px;
     margin-bottom:8px;
-    
+    font-size: 11px;
+    color: $text;
+  }
+  .response-items {
+    .row-fluid {
+      margin-bottom: 20px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+    .response-title-bar {
+      line-height: 25px;
+      margin-bottom: 5px;
+      padding-bottom: 5px;
+      border-bottom:1px solid #cdecb4;
+      .btn {
+        &.btn-mini {
+          padding-left: 2px;
+          padding-right: 2px;
+        }
+      }
+    }
+    h4 {
+      color: $responsTitle;
+      font-size: 12px;
+      font-weight: bold;
+      line-height: 25px;
+      span {
+        color: $responsTitle;
+      }
+    }
+    h5 {
+      font-size: 11px;
+      font-weight: bold;
+    }
+    .rtf {
+      font-size: 11px;
+    }
+    p {
+      font-size: 11px;
+      margin: 0;
+    }
+    .edit-person-role,
+    .edit-document-role {
+      border-top-width: 0px;
+      -webkit-appearance: textfield;
+      -moz-appearance: textfield;
+      background: none;
+      border: none;
+      line-height: 16px;
+      height: 16px;
+      font-size: 11px;
+      text-decoration: none;
+      padding: 0;
+      width: auto;
+      cursor:pointer;
+      margin-bottom: 0;
+    }
+    .btn-nano {
+      padding: 1px;
+      line-height: 14px;
+    }
   }
   .inner-response {
-    border:#e8fdd6;
     padding:8px 0;
+    font-size: 11px;
+    color: $text;
+    .items {
+      margin-bottom: 20px;
+    }
+    .inner-element {
+      display: block;
+      @include oneline();
+    }
+  }
+  .inline-editing {
+    border: none !important;
+    form {
+      margin-bottom: 0;
+    }
+    margin-top: 3px;
+    input {
+      margin-bottom: 0;
+    }
+    .btn {
+      i {
+        margin-top: 0;
+      }
+    }
   }
   ul.items {
     @include reset-list();
     margin-top:4px;
+    .row-fluid {
+      margin-bottom: 0;
+    }
     li {
-      border:none;
-      line-height:20px;
+      border-bottom:1px solid #cdecb4;
       @include clearfix();
+      &:last-child {
+        border: none;
+      }
+      .btn {
+        &.btn-add {
+          font-size: 11px;
+          font-weight: normal;
+          line-height: 16px;
+          i {
+            margin-top: 0;
+          }
+        }
+      }
     }
   }
 }

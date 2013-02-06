@@ -10,21 +10,24 @@
 
 %ul.tree-structure.add-response.items-list.collapse{ :id => new_response_id }
   %li.item
-    .row-fluid
-      .span3.pbc-add-response.next-each-other
-        %input.pbc-system-search{:type => "text", :placeholder => "Type to search systems/processes"}
-        %a#tooltip11.btn.btn-mini.pull-left{ :href => new_flow_system_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-modal-class' => 'modal-wide', "rel" => "tooltip", "data-placement" => "top", "title" => "Add new response" }
-          %i.grcicon-add
-      .span1
-
-      .span3
-        %span.pbc-counter.empty
-          %i.grcicon-person
-          0
-      .span3
-        %span.pbc-counter.empty
-          %i{ :class => request_type_icon(request.type_name) }
-          0
-      .span1
-        &nbsp;
+    .item-main
+      .arrow-right
+      .respons-add
+        .row-fluid
+          .span3.pbc-add-response.next-each-other
+            %input.pbc-system-search{:type => "text", :placeholder => "Type to search systems/processes"}
+            %a#tooltip11.btn.btn-mini.pull-left{ :href => new_flow_system_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-modal-class' => 'modal-wide', "rel" => "tooltip", "data-placement" => "top", "title" => "Add new response" }
+              %i.grcicon-add
+          .span1
+    
+          .span3
+            %span.pbc-counter.empty
+              %i.grcicon-person
+              0
+          .span3
+            %span.pbc-counter.empty
+              %i{ :class => request_type_icon(request.type_name) }
+              0
+          .span1
+            &nbsp;
 %ul.tree-structure.items-list.pbc-responses{ :id => response_list_id }
