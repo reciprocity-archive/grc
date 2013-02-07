@@ -233,7 +233,7 @@ can.Control("CMS.Controllers.ResizeWidgets", {
     var that = this;
     var origTarget = ev.originalEvent ? ev.originalEvent.target : ev.target;
     var $t = $(this.element);
-    if ($t.is(origTarget)) {
+    if ($t.is(origTarget) || $(origTarget).is(".width-selector-bar, .width-selector-drag")) {
       var offset = this.getLeftOffset(ev.pageX);
       var widths = that.getWidthsForSelector($t).slice(0);
       var c_width = that.options.total_columns;
@@ -241,18 +241,22 @@ can.Control("CMS.Controllers.ResizeWidgets", {
         c_width -= widths.pop();
       }
       //create the bar that shows where the new split will be
-      $("<div>&nbsp;</div>")
-      .addClass("width-selector-bar")
-      .data("offset", offset)
-      .data("start_offset", offset)
-      .data("index", widths.length)
-      .css({
-        width: "5px"
-        , height : $t.height()
-        , position : "fixed"
-        , left : this.getLeftOffsetAsPixels(offset)
-        , top : $t.offset().top - $(window).scrollTop()
-      }).appendTo($t);
+      var $bar = $(".width-selector-bar", $t);
+      if(!$bar.length) {
+        $bar = $("<div>&nbsp;</div>")
+        .addClass("width-selector-bar")
+        .data("offset", offset)
+        .data("start_offset", offset)
+        .data("index", widths.length)
+        .css({
+          width: "5px"
+          , height : $t.height()
+          , position : "fixed"
+          , left : this.getLeftOffsetAsPixels(offset)
+          , top : $t.offset().top - $(window).scrollTop()
+        }).appendTo($t);
+      }
+      $bar.css("opacity", "1.0");
       //create an invisible drag target so we don't drag around a ghost of the bar
       $("<div>&nbsp;</div>")
       .attr("draggable", true)
@@ -272,6 +276,38 @@ can.Control("CMS.Controllers.ResizeWidgets", {
   }
 
 
+  , " mouseover" : "showGhostResizer"
+
+  , showGhostResizer : function(el, ev) {
+    var that = this;
+    var origTarget = ev.originalEvent ? ev.originalEvent.target : ev.target;
+    var $t = $(this.element);
+    if ($t.is(origTarget) && !$(".width-selector-bar, .width-selector-drag").length) {
+      var offset = this.getLeftOffset(ev.pageX);
+      var widths = that.getWidthsForSelector($t).slice(0);
+      var c_width = that.options.total_columns;
+      while(c_width > offset) { //should be >=?
+        c_width -= widths.pop();
+      }
+      //create the bar that shows where the new split will be
+      $("<div>&nbsp;</div>")
+      .addClass("width-selector-bar")
+      .data("offset", offset)
+      .data("start_offset", offset)
+      .data("index", widths.length)
+      .css({
+        width: "5px"
+        , height : $t.height()
+        , position : "fixed"
+        , left : this.getLeftOffsetAsPixels(offset)
+        , top : $t.offset().top - $(window).scrollTop()
+        , opacity : "0.5"
+      }).appendTo($t);
+    } else if(!$t.is(origTarget) && !$(origTarget).is(".width-selector-bar") && !$(".width-selector-drag", $t).length ) {
+      this.removeResizer();
+    }
+  }
+
   , completeResize : function(el, ev) {
     var $drag = $(".width-selector-drag");
     if($drag.length) {
@@ -282,8 +318,16 @@ can.Control("CMS.Controllers.ResizeWidgets", {
       , index = $bar.data("index");
 
       this.adjust_column(t, index, offset - start_offset);
+      $(".width-selector-drag", t).remove();
+      $(".width-selector-bar", t).css("opacity", "0.5")
+      if(!$(document.elementFromPoint(ev.pageX, ev.pageY)).is($(t).add(".width-selector-bar"))) {
+        this.removeResizer();
+      }
     }
-    $(".width-selector-bar, .width-selector-drag").remove();
+  }
+
+  , removeResizer : function(el, ev) {    
+    $(".width-selector-bar", this.element).remove();
   }
 
   , " mouseup" : "completeResize"
