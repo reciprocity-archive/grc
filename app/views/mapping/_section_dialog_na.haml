@@ -11,7 +11,7 @@
     .row-fluid
       .span12.well
         =f.check_box :na, :class => :checkbox
-        %h3(style='display:inline;')
+        %h3(style='display:inline; font-size:16px')
           &nbsp;No controls implemented for this section
           
     .row-fluid
@@ -19,22 +19,6 @@
         =f.label :notes, "Note", :class => :cleanlabel
         .wysiwyg-area
           =f.text_area :notes, :class => [:span12, :note], :rows => 3
-
-    .row-fluid
-      .span3
-      .span3
-      .span3
-        -#%label.fltrt{:for => "control-effectivedate"}
-          %strong> Last Editor
-          \: Joss Rayburn
-
-      .span3 
-        &nbsp;
-        / %label.fltrt{:for => "control-verificationdate"}
-        /   %strong> Approved
-        /   \:
-        /   %span.statustextred Not Approved
-
 
   .modal-footer
     .row-fluid

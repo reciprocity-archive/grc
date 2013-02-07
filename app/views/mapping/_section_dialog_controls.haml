@@ -7,63 +7,58 @@
         %i.grcicon-x-grey
     
     %h2
-      Controls Mapped to this Section (#{section.slug})
+      Controls Mapped to this Section
+      %small #{section.slug}
 
   .modal-body
 
-    .row-fluid-alternating-background-colors.modal-source
-      -rcontrols.each do |control|
+    -rcontrols.each do |control|
+      %section.modal-section    
         .row-fluid
           .span6.control-group
-            %ul.slugtree.nav
+            %ul.tree-structure
               %li
-                .row-fluid
-                  .span12
-                    .modalSlot.span12
-                      %a.btn.btn-mini.pull-right.unmapbtn{:href => mapping_map_rcontrol_path(:section => section.id, :rcontrol => control.id, :u => 1), :'data-remote' => true, :'data-method' => 'post', :'data-toggle' => 'unmap-rcontrol'}
+                .item-main
+                  .item-title
+                    .row-fluid
+                      .span11
+                        .oneline.expand-on-hover
+                          %span.code
+                            =control.slug
+                          %span.title
+                            =control.title
+                            %i.description-inline=sanitize(control.description, :tags => []) if local_assigns[:description_inline].nil?
+                        .description
+                          =display_as_html(control.description)
+                    .item-actions
+                      %a.btn.btn-mini.pull-right.unmapbtn{:href => mapping_map_rcontrol_path(:section => section.id, :rcontrol => control.id, :u => 1), :'data-remote' => true, :'data-method' => 'post', :'data-toggle' => 'unmap-rcontrol', :rel => "tooltip", :title => "Unmap"}
                         %i.grcicon-remove
-                      %span.prefix
-                        %strong=control.slug
-                        -
-                        =control.title
-                      %br
-                      =display_as_html control.description
-
-          .span6.control-group
-            %ul.slugtree.nav
+          .span6
+            %ul.tree-structure
               -control.implementing_controls.each do |ccontrol|
                 %li
-                  .row-fluid
-                    .span12
-                      .modalSlot.span12
-                        %a.btn.btn-mini.unmapbtn.pull-right{:href => mapping_map_ccontrol_path(:rcontrol => control.id, :ccontrol => ccontrol.id, :u => 1), :'data-remote' => true, :'data-method' => 'post', :'data-toggle' => 'unmap-ccontrol'}
+                  .item-main
+                    .item-title
+                      .row-fluid
+                        .span11
+                          .oneline.expand-on-hover
+                            %span.code
+                              =ccontrol.slug
+                            %span.title
+                              =ccontrol.title
+                              %i.description-inline=sanitize(ccontrol.description, :tags => []) if local_assigns[:description_inline].nil?
+                          .description
+                            =display_as_html(ccontrol.description)
+                      .item-actions
+                        %a.btn.btn-mini.unmapbtn.pull-right{:href => mapping_map_ccontrol_path(:rcontrol => control.id, :ccontrol => ccontrol.id, :u => 1), :'data-remote' => true, :'data-method' => 'post', :'data-toggle' => 'unmap-ccontrol', :rel => "tooltip", :title => "Unmap"}
                           %i.grcicon-remove
-                        %span.prefix
-                          %strong=ccontrol.slug
-                          -
-                          =ccontrol.title
-                        %br
-                        =display_as_html ccontrol.description
+                      
                         
     .row-fluid
       .span12
         =f.label :notes, "Note", :class => :cleanlabel
         .wysiwyg-area
           =f.text_area :notes, :class => [:span12, :note], :rows => 3
-    .row-fluid
-      .span3
-      .span3
-      .span3
-        -#%label.fltrt{:for => "control-effectivedate"}
-          %strong> Last Editor
-          \: Joss Rayburn
-
-      .span3 
-        &nbsp;
-        -#%label.fltrt{:for => "control-verificationdate"}
-          -#%strong> Approved
-          -#\:
-          -#%span.statustextred Not Approved
 
     =f.hidden_field :na
 
@@ -71,7 +66,4 @@
     .row-fluid
       .span12
         .confirm-buttons
-          =f.submit pat(:done), :class => 'btn btn-primary'
-          -#.btn.btn-large.btn-success.btn-primary.disabled Approve
-          -#=f.submit pat(:approve), :class => 'btn btn-large btn-success'
-          
+          =f.submit pat(:done), :class => 'btn btn-primary'          

@@ -2,7 +2,7 @@
   <a class="btn btn-mini pull-right" data-dismiss="modal">
     <i class="grcicon-x-grey"></i>
   </a>
-  <h2> Controls Mapped to {{slug}} </h2>
+  <h2> Controls Mapped to <small>{{slug}}</small> </h2>
 </div>
 
 <div class="modal-body" data-section-id="{{id}}">
@@ -15,19 +15,20 @@
       <h3>Company Controls</h3>
     </div>
   </div>
+
   {{#rcontrols this}}
     {{#foo_controls}}
-    <div class="row-fluid-alternating-background-colors modal-source">
+    <section class="modal-section">
       <div class="row-fluid">
         <div class="span6 control-group">
-          <ul class="slugtree nav">
+          <ul class="tree-structure">
             <li {{data 'model'}} data-model="true">
               {{> /assets/controls/show_unmap_dialog.mustache}}
             </li>
           </ul>
         </div>
         <div class="span6 control-group" data-rcontrol-id="{{id}}">
-          <ul class="slugtree nav">
+          <ul class="tree-structure">
             {{#implementing_controls}}
               <li {{data 'model'}} data-model="true">
               {{> /assets/controls/show_unmap_dialog.mustache}}
@@ -36,7 +37,7 @@
           </ul>
         </div>
       </div>
-    </div>
+    </section>
     {{/foo_controls}}
   {{/rcontrols}}
   {{else}}
