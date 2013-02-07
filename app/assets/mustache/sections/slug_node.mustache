@@ -1,9 +1,9 @@
 <div class="row-fluid">
-  {{#withclass 'selected:selected span10 slot regulationslot toggle selector collapsed'}}
+  {{#withclass 'selected:selected span10 slot regulationslot toggle selector collapsed oneline'}}
   <a href="javascript://">
-    <strong class="prefix">{{slug}}</strong>
-    {{title}}
     <i class="grcicon-ok slct"></i>
+    <strong class="prefix">{{slug}}</strong>
+    {{firstnonempty title description_inline}}
   </a>
   {{/withclass}}
   <a class="attached badge controllistRM status {{#if linked_controls.length}}badge-warning {{/if}}{{^linked_controls.length}}{{#if na}} badge-warning {{else}} badge-important {{/if}}{{/linked_controls.length}}" href="/mapping_section_dialog/{{id}}">
@@ -30,11 +30,13 @@
   </a>
 </div>
 {{#if children}}
-  <ul class="tree-structure" id="children_{{slug}}">
-    {{#children}}
-      <li id="content_{{slug}}" {{data 'model'}} data-model="true">
-        {{> /assets/sections/slug_node.mustache}}
-      </li>
-    {{/children}}
-  </ul>
+  <div class="item-content in">
+    <ul class="tree-structure" id="children_{{slug}}">
+      {{#children}}
+        <li id="content_{{slug}}" {{data 'model'}} data-model="true">
+          {{> /assets/sections/slug_node.mustache}}
+        </li>
+      {{/children}}
+    </ul>
+  </div>
 {{/if}}

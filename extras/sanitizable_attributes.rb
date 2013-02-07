@@ -34,6 +34,12 @@ module SanitizableAttributes
       self.sanitizable_attributes ||= []
       self.sanitizable_attributes += attr_names.to_a
 
+      attr_names.each do |attr_name|
+        define_method "#{attr_name}_inline" do
+          ActionController::Base.helpers.sanitize(self.send(attr_name), :tags => [])
+        end
+      end
+
       before_validation :sanitize!
     end
   end

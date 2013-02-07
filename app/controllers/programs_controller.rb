@@ -363,7 +363,7 @@ class ProgramsController < BaseObjectsController
         render :layout => nil, :locals => { :sections => @sections } 
       end
       format.json do 
-        render :json => @sections, :methods => :linked_controls
+        render :json => @sections, :methods => [:linked_controls, :description_inline]
       end
     end
   end
@@ -379,7 +379,7 @@ class ProgramsController < BaseObjectsController
           render :layout => nil, :locals => { :controls => @controls }
       end
       format.json do 
-        render :json => @controls, :methods => :implementing_controls
+        render :json => @controls, :methods => [:implementing_controls, :description_inline]
       end
     end
   end

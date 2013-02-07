@@ -6,8 +6,8 @@
     }
   }
   ul.tree-structure {
-    li ul li,
-    li.main {
+    li ul li > .row-fluid,
+    li.main > .row-fluid {
       &:hover {
        @include background-image(linear-gradient(left, $white, $lightGray, $white));
        border-color:darken($lightGray,10%);

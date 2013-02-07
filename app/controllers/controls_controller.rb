@@ -56,7 +56,7 @@ class ControlsController < BaseObjectsController
     elsif params[:quick]
       render :partial => 'quick', :locals => { :quick_result => params[:qr]}
     else
-      render :json => @controls
+      render :json => @controls, :methods => [:description_inline]
     end
   end
 
