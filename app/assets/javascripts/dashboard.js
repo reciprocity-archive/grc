@@ -621,7 +621,17 @@ jQuery(function($) {
   });
 });
 
+jQuery(function($) {
+  $('body').on('change', '.modal select[name="system[is_biz_process]"]', function(e) {
+    var $this = $(this)
+      , $modal = $this.closest('.modal')
+      , $header_elem = $modal.find('.modal-header h2')
+      ;
 
-
-
-
+    if ($this.val() == '0') {
+      $header_elem.text($header_elem.text().replace(/business process/i, 'system'));
+    } else {
+      $header_elem.text($header_elem.text().replace(/system/i, 'business process'));
+    }
+  });
+});
