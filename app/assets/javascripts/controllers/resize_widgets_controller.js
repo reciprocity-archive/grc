@@ -205,8 +205,8 @@ can.Control("CMS.Controllers.ResizeWidgets", {
     //adjustment is +1, border_idx reduced by 1, adjustment should never be a higher number than border_idx width minus 1
     //adjustment is -1, border_idx-1 reduced by 1, adjustment should never be lower than negative( border_idx-1 width minus 1)
 
-    adjustment = Math.min(adjustment, col[border_idx] - 1);
-    adjustment = Math.max(adjustment, -col[border_idx - 1] + 1);
+    adjustment = Math.min(adjustment, col[border_idx] - 2);
+    adjustment = Math.max(adjustment, -col[border_idx - 1] + 2);
 
     return adjustment;
   }
