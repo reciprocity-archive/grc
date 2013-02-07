@@ -24,7 +24,7 @@
     %span.item.i-control.has-link.oneline
       =control && control.slug || "".html_safe
     
-  =wrapped_text_field f, :span2, :company_responsible, :placeholder => 'Internal contact email', :label_name => 'Internal Contact'
+  =wrapped_text_field f, :span2, :company_responsible, :placeholder => 'Internal assignee', :label_name => 'Internal Assignee'
   =wrapped_text_field f, :span2, :auditor_responsible, :placeholder => 'Auditor contact email', :label_name => 'Auditor Contact'
   =wrapped_date_field f, :span2, :date_requested, :class => 'date', :placeholder => 'MM/DD/YYYY', :label_name => 'Date Requested', :value => f.object.date_requested.present? ? f.object.date_requested.strftime('%m/%d/%Y') : Time.zone.now.strftime('%m/%d/%Y')
   =wrapped_select f, :span2, :status, Request.statuses, :selected => (f.object.status), :label_name => 'Status of Request'

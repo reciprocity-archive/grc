@@ -4,9 +4,20 @@
 //= require pbc/system
 
 (function(namespace, $) {
-   
-    if(namespace.location.pathname.indexOf("/pbc_lists") < 0) 
+
+    if(namespace.location.pathname.indexOf("/pbc_lists") < 0)
         return;
+
+function escapeHTML(s) {
+  if (typeof(s)=='string') {
+    s = s
+      .replace(/'/g,'&#39;')
+      .replace(/\"/g,'&quot;')
+      .replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;');
+  }
+  return s;
+}
 
 $.widget(
     "pbc.autocomplete"
@@ -24,7 +35,7 @@ $.widget(
                   , resp = new CMS.Models.Response();
                 resp.attr({
                     request_id : $(event.target).closest("[data-filter-id]").data("filter-id")
-                    , system_id : ui.item.value 
+                    , system_id : ui.item.value
                 });
                 resp.
                   save().
@@ -44,7 +55,7 @@ $.widget(
         , _renderItem : function( ul, item ) {
             return $( "<li class='something'>" )
                 .data( "item.autocomplete", item )
-                .append( "<a>"+ item.label + "</a>" )
+                .append( "<a>"+ escapeHTML(item.label) + "</a>" )
                 .appendTo( ul );
         }
     }
@@ -56,20 +67,20 @@ $.widget(
   , $.pbc.autocomplete
   , { options : {
       source : CMS.Models.Person.search
-      , select :  function(event, ui) { 
+      , select :  function(event, ui) {
         $(event.target).trigger("personSelected", ui.item);
         $(this).data("pbcAutocomplete_people")._value("");
         return false;
-      } 
+      }
       , search : function(event) {
-        
+
       }
   }
   , _renderItem : function(ul, item) {
     var label = item.name ? item.name + " (" + item.label + ")" : item.label;
     return $( "<li class='something'>" )
         .data( "item.autocomplete", item )
-        .append( "<a>" + label + "</a>" )
+        .append( "<a>" + escapeHTML(label) + "</a>" )
         .appendTo( ul );
   }
   });
@@ -80,12 +91,12 @@ $.widget(
   , $.pbc.autocomplete
   , { options : {
       source : CMS.Models.Document.search
-      , select :  function(event, ui) { 
+      , select :  function(event, ui) {
         $(event.target).trigger("documentSelected", ui.item);
         return false;
-      } 
+      }
       , search : function(event) {
-        
+
       }
   }
   , _renderItem : function(ul, item) {
@@ -97,7 +108,7 @@ $.widget(
     }
     return $( "<li class='something'>" )
         .data( "item.autocomplete", item )
-        .append( "<a>" + label + "</a>" )
+        .append( "<a>" + escapeHTML(label) + "</a>" )
         .appendTo( ul );
   }
   });

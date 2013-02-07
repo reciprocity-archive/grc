@@ -132,7 +132,7 @@
                       .span3
                         %label.inline.assignee{ :for => "request_" + request.id.to_s + "_responsible"}
                           Assignee
-                        %input.pbc-request-assignee{ :id => "request_" + request.id.to_s + "_responsible", :type => "text", :value => request.auditor_responsible }
+                        %input.pbc-request-assignee{ :id => "request_" + request.id.to_s + "_responsible", :type => "text", :value => request.company_responsible }
                       .span2
                         -if request.date_requested.present?
                           %span.date{"rel" => "tooltip", "data-placement" => "top", "title" => "Date Requested"}=request.date_requested && request.date_requested.strftime('%m/%d/%Y')
@@ -182,7 +182,7 @@
                         %h5 Responsible Parties
                         .rtf
                           %p
-                            %strong Internal contact email:
+                            %strong Internal assignee:
                             -if request.company_responsible.present?
                               =request.company_responsible
                             -else
@@ -298,7 +298,7 @@
                   .span2.pbc-item.pbc-status
                     %h5 Responsible Parties
                     %p
-                      %strong Internal contact email:
+                      %strong Internal assignee:
                       -if request.company_responsible.present?
                         =request.company_responsible
                       -else
@@ -319,7 +319,7 @@
                 .row-fluid.pbc-responses-container{ :class => request_collapse_class }
                   .span12
                     =render :partial => "responses", :locals => { :pbc_list => pbc_list, :request => request }
-                    
+
 -else
   .no-results.alert.alert-block
     %h3 PBC list has no requests.
