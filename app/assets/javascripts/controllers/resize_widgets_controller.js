@@ -207,8 +207,9 @@ can.Control("CMS.Controllers.ResizeWidgets", {
   }
 
   , getLeftOffset : function(pageX) {
-    var $t = $(this.element);
-    return Math.round((pageX - $t.offset().left - parseInt($t.css("padding-left"))) / $t.width() * this.options.total_columns);
+    var $t = $(this.element)
+      , margin = parseInt($t.children('[class*=span]:last').css('margin-left'));
+    return Math.round((pageX * this.options.total_columns) / ($t.width() + margin));
   }
 
   , getLeftOffsetAsPixels : function(offset) {
