@@ -1,0 +1,7 @@
+.width-selector-bar {
+  background:$lightGray url('/images/bgnds/drag-bar.png') repeat-y 1px 0;
+  @include background-size(3px 12px);
+  border:1px solid $white;
+  @include border-radius();
+  @include box-shadow(0 0 2px $darkGray);
+}

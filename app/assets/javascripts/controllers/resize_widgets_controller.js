@@ -249,7 +249,6 @@ can.Control("CMS.Controllers.ResizeWidgets", {
       .css({
         width: "5px"
         , height : $t.height()
-        , "background-color" : "black"
         , position : "fixed"
         , left : this.getLeftOffsetAsPixels(offset)
         , top : $t.offset().top - $(window).scrollTop()
