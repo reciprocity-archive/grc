@@ -31,20 +31,20 @@
         %label
           Request Type
         %select{ :disabled => has_items, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'type-name' }
-          %option{ :value => 'any', :selected => 'selected' } - Any -
+          %option{ :value => 'any', :selected => 'selected' } All
           %option Documentation
           %option Interview
           %option Population Sample
         %label
           Status
         %select{ :disabled => has_items, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'status' }
-          %option{ :value => 'any', :selected => 'selected' } - Any -
+          %option{ :value => 'any', :selected => 'selected' } All
           -Request.statuses.each do |status|
             %option=status
         %label
           Responsible Parties
         %select{ :disabled => has_items, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'person' }
-          %option{ :value => 'any', :selected => 'selected' } - Any -
+          %option{ :value => 'any', :selected => 'selected' } All
           -pbc_list.requests.all.map { |req| [req.company_responsible.presence, req.auditor_responsible.presence] }.flatten.compact.uniq.sort.each do |name|
             %option=name
         %label
