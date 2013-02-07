@@ -64,10 +64,8 @@
   .content {
     padding:6px;
     background:$white;
-    //max-height: 300px;
-    overflow: hidden;
     overflow-y: auto;
-    height: 100%;
+    height:85%; //needs to be removed
   }
   .footer {
     background:$lightGray;
