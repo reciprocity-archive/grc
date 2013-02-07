@@ -74,7 +74,7 @@ module ImportHelper
       elsif email == ""
         attrs[key] = nil
       elsif email !~ / /
-        email = "#{email}@#{ENV['DEFAULT_DOMAIN']}"
+        email = "#{email}@#{CMS_CONFIG['DEFAULT_DOMAIN']}"
         attrs[key] = Person.find_or_create_by_email!({:email => email})
       else
         attrs[key] = nil
