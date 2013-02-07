@@ -5,4 +5,31 @@
       max-height: 300px;
     }
   }
+  ul.tree-structure {
+    li ul li,
+    li.main {
+      &:hover {
+       @include background-image(linear-gradient(left, $white, $lightGray, $white));
+       border-color:darken($lightGray,10%);
+      }
+      a:hover {
+        text-decoration:none;
+      }
+    }
+  }
+}
+
+// temporary classes for marking selected items
+
+i.slct {
+  margin-top:7px;
+  margin-left:4px;
+  display:none;
+}
+
+a.selected {
+  color:$green;
+  i.slct {
+    display:inline-block;
+  }
 }

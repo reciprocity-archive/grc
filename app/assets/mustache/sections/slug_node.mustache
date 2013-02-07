@@ -1,13 +1,15 @@
 <div class="row-fluid">
-  {{#withclass 'selected:selected span9 slot regulationslot toggle selector collapsed'}}
+  {{#withclass 'selected:selected span10 slot regulationslot toggle selector collapsed'}}
   <a href="javascript://">
-    <span class="prefix">{{slug}}</span>
+    <strong class="prefix">{{slug}}</strong>
     {{title}}
+    <i class="grcicon-ok slct"></i>
   </a>
   {{/withclass}}
-  <a class="attached controllistRM span3 status{{#if linked_controls.length}}yellow {{/if}}{{^linked_controls.length}}{{#if na}}yellow {{else}}red {{/if}}{{/linked_controls.length}}" href="/mapping_section_dialog/{{id}}">
+  <a class="attached badge controllistRM status {{#if linked_controls.length}}badge-warning {{/if}}{{^linked_controls.length}}{{#if na}} badge-warning {{else}} badge-important {{/if}}{{/linked_controls.length}}" href="/mapping_section_dialog/{{id}}">
     {{#if linked_controls.length}}
-    <ul class="spannomargin" title="{{join 'slug' linked_controls}}">
+      {{{linked_controls.length}}}
+    <ul class="spannomargin" title="{{join 'slug' linked_controls}}" style="display:none">
     <li>
       <strong>{{linked_controls.length}}</strong>
       : 
@@ -22,17 +24,17 @@
         {{#if na}}
           N/A
         {{else}}
-          <strong>0</strong>
+          0
         {{/if}}
     {{/if}}
   </a>
 </div>
 {{#if children}}
-  <ul id="children_{{slug}}">
+  <ul class="tree-structure" id="children_{{slug}}">
     {{#children}}
-    <li id="content_{{slug}}" {{data 'model'}} data-model="true">
-    {{> /assets/sections/slug_node.mustache}}
-    </li>
+      <li id="content_{{slug}}" {{data 'model'}} data-model="true">
+        {{> /assets/sections/slug_node.mustache}}
+      </li>
     {{/children}}
   </ul>
 {{/if}}

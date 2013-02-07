@@ -1,13 +1,10 @@
 <div>
-	<span class="prefix">
-	  {{prefix}}
-	</span>
+	<strong class="prefix">
+	  {{prefix}} {{slug}}
+	</strong>
 	{{title}}
 </div>
-<div class="rtf">
-  {{{description}}}
-</div>
-<ul id="children_{{slug}}">
+<ul class="tree-structure" id="children_{{slug}}">
 	{{#children}}
 	<li id="content_{{slug}}">
 		{{> /assets/sections/show_selected_children.mustache}}

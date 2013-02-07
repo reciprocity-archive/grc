@@ -1,12 +1,11 @@
-<ul class="slugtree">
+<ul class="tree-structure slugtree">
     <li id="content_">
-    <ul id="children_">
-    {{#children}}
-      <li id="content_{{slug}}" {{data "model"}} data-model="true">
-      {{> /assets/sections/slug_node.mustache}}
-  </li>
-  {{/children}}
-  </ul>
-
+      <ul class="tree-structure" id="children_">
+        {{#children}}
+          <li id="content_{{slug}}" {{data "model"}} data-model="true">
+            {{> /assets/sections/slug_node.mustache}}
+          </li>
+        {{/children}}
+      </ul>
   </li>
 </ul>

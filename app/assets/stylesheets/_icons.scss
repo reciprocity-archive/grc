@@ -293,6 +293,11 @@
   background-position:-80px -80px;
 }
 
+.grcicon-ok {
+  @include new-icons();
+  background-position:-96px -64px;
+}
+
 
 
 .grcicon-sortUp             { background-position:-22px -2px; }

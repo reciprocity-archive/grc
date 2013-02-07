@@ -1,8 +1,9 @@
 <div class="span12">
 	{{#withclass 'selected:selected =type span12 item slot regulationslot selector collapsed'}}
 	<a href="javascript://">
-		<span class="prefix">{{prefix}} {{slug}}</span>
-		{{title}} 
+		<strong class="prefix">{{prefix}} {{slug}}</strong>
+		{{title}}
+		<i class="grcicon-ok slct"></i>
 		{{#unless title}} {{description}} {{/unless}}
 	</a>
 	{{/withclass}}

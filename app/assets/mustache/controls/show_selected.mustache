@@ -1,13 +1,10 @@
   <div class="content">
   	{{#model}}
     <div>
-      <span class="prefix">
-        {{prefix}}
-      </span>
+      <strong class="prefix">
+        {{prefix}} {{slug}}
+      </strong>
       {{title}}
-    </div>
-    <div class="rtf">
-      {{{description}}}
     </div>
     {{/model}}
     {{^model}}

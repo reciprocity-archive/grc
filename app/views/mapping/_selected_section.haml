@@ -11,11 +11,9 @@
             %i.grcicon-demo
 
 #selected_sections.description{:oid => section ? section.id : ""}
-  .clearfix
-
   .content
     -if section
-      %ul.sectiontree
+      %ul.sectiontree.tree-structure
         /-sections = Section.slugfilter(section.slug)
         -sections = Section.find_descendents_by_slug(section.slug)
         =walk_slug_tree(Program.slugtree([section] + sections), 2) do |item, step|

@@ -1,15 +1,16 @@
-  <div class="clearfix"></div>
-  <div class="content">
-    <ul class="sectiontree">
+<div class="content">
+  <ul class="tree-structure sectiontree">
     <li id="content_">
-      <ul id="children_">
-  	  {{#model}}
-        <li id="content_{{slug}}">
-          {{> /assets/sections/show_selected_children.mustache}}
-        </li>
-    {{/model}}
-    {{^model}}
-    	Nothing selected
-    {{/model}}
-    </ul
-  </div>
+      <ul class="tree-structure " id="children_">
+	      {{#model}}
+          <li id="content_{{slug}}">
+            {{> /assets/sections/show_selected_children.mustache}}
+          </li>
+        {{/model}}
+        {{^model}}
+  	      Nothing selected
+        {{/model}}
+      </ul>
+    </li>
+  </ul>
+</div>
