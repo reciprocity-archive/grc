@@ -192,3 +192,29 @@ input.input-block-level {
   font-size:13px;
   margin-left:10px;
 }
+
+.field-failure {
+  input {
+    border: 1px solid $red;
+    @include placeholder($lightRed);
+  }
+  label {
+    color: $red;
+  }
+  .help-inline {
+    margin: -8px 0 8px 0;
+    display: block;
+    font-size: 11px;
+    font-weight: bold;
+    color: $red;
+    padding: 0;
+  }
+}
+
+.inline {
+  display:inline;
+}
+
+input.disabled.pending-ajax{
+  background: #eee url("/images/ajax-loader.gif") no-repeat right center;
+}

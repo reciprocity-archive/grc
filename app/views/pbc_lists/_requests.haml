@@ -130,12 +130,9 @@
                         &nbsp; with
                         %span.pbc-request-count=pluralize(request.responses.count, "response")
                       .span3
-                        .asignee
-                          Asignee
-                          %select
-                            %option Daniel Adams
-                            %option Alexander Contrapolsky
-                            %option Alexander Contrapolsky the Second
+                        %label.inline.assignee{ :for => "request_" + request.id.to_s + "_responsible"}
+                          Assignee
+                        %input.pbc-request-assignee{ :id => "request_" + request.id.to_s + "_responsible", :type => "text", :value => request.auditor_responsible }
                       .span2
                         -if request.date_requested.present?
                           %span.date{"rel" => "tooltip", "data-placement" => "top", "title" => "Date Requested"}=request.date_requested && request.date_requested.strftime('%m/%d/%Y')
@@ -322,6 +319,26 @@
                 .row-fluid.pbc-responses-container{ :class => request_collapse_class }
                   .span12
                     =render :partial => "responses", :locals => { :pbc_list => pbc_list, :request => request }
+
+  :javascript
+    $(".pbc-request-assignee").pbc_autocomplete_people({ select : function(event, ui) {
+        $(event.target).trigger("personSelected", ui.item);
+        can.Control.prototype.bindXHRToButton(
+        $.ajax({
+          type : "put"
+          , url : "/requests/" + $(event.target).closest("[data-filter-id]").data("filter-id") + ".json"
+          , data : { request : { auditor_responsible : ui.item.email }}
+        }).done(function() {
+            $(event.target).parent().removeClass("field-failure");
+            $(event.target).blur().data("pbcAutocomplete_people")._value(ui.item.email);    
+        }).fail(function() {
+          $(event.target).parent().addClass("field-failure");
+        })
+        , $(event.target)
+        );
+        return false;
+      } 
+    });
 -else
   .no-results.alert.alert-block
     %h3 PBC list has no requests.
