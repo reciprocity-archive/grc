@@ -1,15 +1,26 @@
-  <div class="row-fluid">
-    <div class="span12">
-      <div class="modalSlot span12">
-        <a class="btn btn-blue unmapbtn fltrt" data-type="{{type}}" data-id="{{id}}" href="javascript://">unmap</a>
-        <span class="prefix">
-          {{prefix}}
-          {{slug}}
-        </span>
-        <br>
-        <div class="rtf">
-          {{{description}}}
+<div class="item-main">
+  <div class="item-title">
+    <div class="row-fluid">
+      <div class="span11">
+        <div class="oneline expand-on-hover">
+          <span class="code">
+            {{prefix}}
+          </span>
+          <span class="title">
+            {{slug}}          
+          </span>
+        </div>
+        <div class="description">
+          <div class="rtf">
+            {{{description}}}
+          </div>
         </div>
       </div>
     </div>
+    <div class="item-actions">
+      <a class="btn btn-mini pull-right unmapbtn" data-type="{{type}}" data-id="{{id}}" href="javascript://" rel="tooltip" title="Unmap">
+        <i class="grcicon-remove"></i>
+      </a>
+    </div>
   </div>
+</div>

@@ -28,6 +28,12 @@
         line-height: 18px;
         font-size: 14px;
       }
+      small {
+        color:#fff;
+        font-size:13px;
+        font-weight:bold;  
+      }
+      
     }
     &.modal-alert {
       @include gradient-vertical(darken($darkGray,30%), $black);
@@ -219,4 +225,19 @@
   height:200px;
   overflow-y:scroll;
   border:1px solid $lightGray;
+}
+
+
+.modal-section {
+  ul.tree-structure {
+    .item-title {
+      margin-left:0;
+    }
+  }
+  padding-bottom:10px;
+  border-bottom:1px solid $lightGray;
+  &:hover {
+    @include background-image(linear-gradient(left, $white, $lightGray, $white));
+    border-bottom:1px solid darken($lightGray,10%);
+  }
 }
