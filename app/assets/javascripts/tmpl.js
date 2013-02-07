@@ -33,7 +33,7 @@
   $.tmpl.parse = function(str) {
     var strFunc =
       "var " +
-      "  escape=function(s){return(typeof(s)=='string'?s.replace('\\'','&#39;').replace('\"','&quot;'):s)}" +
+      "  escape=function(s){return(typeof(s)=='string'?s.replace(/'/g,'&#39;').replace(/\"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'):s);}" +
       ", p=[],print=function(){p.push.apply(p,arguments);};" +
       "with(obj){p.push('" +
       str.replace(/[\r\t\n]/g, " ")
