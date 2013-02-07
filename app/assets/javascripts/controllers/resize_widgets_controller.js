@@ -111,16 +111,25 @@ can.Control("CMS.Controllers.ResizeWidgets", {
     , $c = $(this.element).children(".widget-area");
 
     $c.each(function(i, child) {
-      var $gc = $(child).find("section[id]");
-      $gc.each(function(j, grandchild) {
+      var $gcs = $(child).find("section[id]");
+      $gcs.each(function(j, grandchild) {
         if(page_heights.attr($(grandchild).attr("id"))) {
           $(grandchild).css("height", page_heights.attr($(grandchild).attr("id")));
         } else {
-          // missing a height.  redistribute evenly
-          var ht = Math.floor(($(window).height() - $(child).offset().top - 10) / $gc.length);
-          $gc.attr("height", ht);
-          $gc.each(function(i, grandchild) {
-            page_heights.attr($(grandchild).attr("id"), ht);
+          // missing a height.  redistribute evenly but don't increase the size of anythng.
+          var visible_ht = Math.floor($(window).height() - $(child).offset().top) - 10
+          , split_ht = visible_ht / $gcs.length
+          , col_ht = $(child).height();
+          $shrink_these = $gcs.filter(function() { return $(this).height() > split_ht });
+          $shrink_these.each(function(i, grandchild) {
+            var $gc = $(grandchild);
+            var this_split_ht = split_ht - parseInt($gc.css("margin-top")) - (parseInt($gc.prev($gcs).css("margin-bottom")) || 0);
+            $gc.attr("height", this_split_ht);
+            page_heights.attr($gc.attr("id"), this_split_ht);
+            col_ht = $(child).height() + $(child).offset().top;
+            if(col_ht < visible_ht) {
+              return false;
+            }
           });
           dirty = true;
           return false;
