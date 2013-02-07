@@ -8,7 +8,7 @@
     .row-fluid
       .span6
         %input.ui-corner-all.widgetsearch-tocontent(type='text' placeholder='Search')
-          
+
       .span6
         .pull-right
           %a.btn.clearselection{ :href => "javascript://"}
@@ -18,7 +18,7 @@
               %i.grcicon-add-new
               New
           -else
-            %a.btn.btn-add{ :href => new_flow_control_path(:'control[program_id]' => @program.id, :company => true), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-modal-class' => 'modal-wide', :title => 'Create New Company Control' }
+            %a.btn.btn-add{ :href => new_flow_control_path(:company => true), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-modal-class' => 'modal-wide', :title => 'Create New Company Control' }
               %i.grcicon-add-new
               New
 
