@@ -108,13 +108,23 @@ can.Control("CMS.Controllers.ResizeWidgets", {
     , page_heights = heights.attr(this.options.page_token)
     , that = this
     , dirty = false
-    , $c = $(this.element).children(".widget-area");
+    , $c = $(this.element).children(".widget-area")
+    , content_height_func = function() {
+        var ch = $(this).parent().height() - parseInt($(this).parent().css("margin-bottom"));
+        $(this).siblings().each(function() {
+          ch -= $(this).height();
+        });
+        return ch;
+      };
 
     $c.each(function(i, child) {
       var $gcs = $(child).find("section[id]");
       $gcs.each(function(j, grandchild) {
         if(page_heights.attr($(grandchild).attr("id"))) {
-          $(grandchild).css("height", page_heights.attr($(grandchild).attr("id")));
+          var sh = page_heights.attr($(grandchild).attr("id"));
+          $(grandchild).css("height", sh)
+          .children(".content").css("height", content_height_func);
+
         } else {
           // missing a height.  redistribute evenly but don't increase the size of anythng.
           var visible_ht = Math.floor($(window).height() - $(child).offset().top) - 10
@@ -124,11 +134,14 @@ can.Control("CMS.Controllers.ResizeWidgets", {
           $shrink_these.each(function(i, grandchild) {
             var $gc = $(grandchild);
             var this_split_ht = split_ht - parseInt($gc.css("margin-top")) - (parseInt($gc.prev($gcs).css("margin-bottom")) || 0);
-            $gc.attr("height", this_split_ht);
+            $gc.attr("height", this_split_ht).children(".content").css("height", content_height_func);
             page_heights.attr($gc.attr("id"), this_split_ht);
             col_ht = $(child).height() + $(child).offset().top;
-            if(col_ht < visible_ht) {
-              return false;
+          });
+          $gcs.not($shrink_these).each(function(i, grandchild) {
+            var $gc = $(grandchild);
+            if(!page_heights.attr($gc.attr("id"))) {
+              page_heights.attr($gc.attr("id"), $gc.height());
             }
           });
           dirty = true;
