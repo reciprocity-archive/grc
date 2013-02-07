@@ -1,0 +1,119 @@
+.popover {
+  .popover-inner {
+    max-height: 300px;
+    width: 400px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    .popover-title {
+      color: $darkGray;
+      h3 {
+        color: $darkGray;
+      }
+    }
+    .popover-content {
+      font-size: 11px;
+      .item {
+        margin-bottom: 10px;
+      }
+      h3 {
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 0;
+      }
+      h4 {
+        font-size: 11px;
+        font-weight: bold;
+      }
+      label {
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+/*
+.popover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2000;
+  display: none;
+  padding: 10px;
+  &.top {
+    margin-top: -5px;
+    .arrow {
+      bottom: 0;
+      left: 50%;
+      margin-left: -5px;
+      border-top: 5px solid #666;
+      border-right: 5px solid transparent;
+      border-left: 5px solid transparent;
+    }
+  }
+  &.right {
+    margin-left: 14px;
+    .arrow {
+      top: 50%;
+      left: 0;
+      margin-top: -10px;
+      border-top: 10px solid transparent;
+      border-right: 10px solid #385780;
+      border-bottom: 10px solid transparent;
+    }
+  }
+  &.bottom {
+    margin-top: 5px;
+    .arrow {
+      top: 0;
+      left: 50%;
+      margin-left: -5px;
+      border-right: 5px solid transparent;
+      border-bottom: 5px solid #666;
+      border-left: 5px solid transparent;
+    }
+  }
+  &.left {
+    margin-left: -5px;
+    .arrow {
+      top: 50%;
+      right: 0;
+      margin-top: -10px;
+      border-top: 10px solid transparent;
+      border-bottom: 10px solid transparent;
+      border-left: 10px solid #385780;
+    }
+  }
+  .arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+  }
+}
+
+.popover-inner {
+  width: 350px;
+  padding: 3px;
+  overflow: hidden;
+  background: #385780;
+  @include border-radius(3px);
+  @include box-shadow(0 3px 7px rgba(0, 0, 0, 0.3));
+}
+
+.popover-title {
+  padding: 4px 8px;
+  line-height: 1;
+  background-color: #efefef;
+  border-bottom: 1px solid #eee;
+  @include border-radius(3px 3px 0 0);
+}
+
+.popover-content {
+  padding: 8px;
+  background-color: $white;
+  @include border-radius(0 0 3px 3px);
+  @include background-clip(padding-box);
+  
+  max-height: 300px;
+  overflow: auto;
+}
+*/
