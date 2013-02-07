@@ -464,6 +464,28 @@ jQuery(function($) {
       });
     }
   });
+
+  if($.fn.pbc_autocomplete_people) {
+    $(".pbc-request-assignee").pbc_autocomplete_people({ 
+      select : function(event, ui) {
+        $(event.target).trigger("personSelected", ui.item);
+        can.Control.prototype.bindXHRToButton(
+        $.ajax({
+          type : "put"
+          , url : "/requests/" + $(event.target).closest("[data-filter-id]").data("filter-id") + ".json"
+          , data : { request : { auditor_responsible : ui.item.email }}
+        }).done(function() {
+            $(event.target).parent().removeClass("field-failure");
+            $(event.target).blur().data("pbcAutocomplete_people")._value(ui.item.email);    
+        }).fail(function() {
+          $(event.target).parent().addClass("field-failure");
+        })
+        , $(event.target)
+        );
+        return false;
+      } 
+    });
+  }
 });
 
 jQuery(function($) {
