@@ -17,7 +17,7 @@
   %a.item-link{ :href => flow_pbc_list_path(pbc_list.id) }
     -status_counts, status_percentages = pbc_list.request_stats
     .progress.progress-higher
-      -["bar-info", "bar-warning", "bar-danger", "bar-danger", "bar-success"].each_with_index do |cssclass, i|
+      -["bar-info", "bar-danger", "bar-warning", "bar-danger", "bar-success"].each_with_index do |cssclass, i|
         -status = Request.statuses[i]
         .bar{:class => cssclass, :rel => "tooltip", :'data-placement' => "top", :title => "#{status} (#{status_counts[status]})", :'data-percentage' => status_percentages[status]}
   %a.btn.pull-right{ :href => flow_pbc_list_path(pbc_list.id) }
