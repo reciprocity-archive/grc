@@ -194,7 +194,7 @@
           window.location.assign(window.location.href.replace(/#.*/, ''));
         }
         else {
-          var modal_form = $(".modal:visible").data("modal_form");
+          var modal_form = $(".modal:visible:last").data("modal_form");
           if(xhr === modal_form.xhr) {
             delete modal_form.xhr;
             $("[data-toggle=modal-submit]", modal_form.$element)
