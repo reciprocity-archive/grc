@@ -27,6 +27,11 @@
       Audit Lead
     %span
       =cycle.audit_lead
+  %li.float-element
+    %label
+      Created by
+    %span
+      =cycle.modified_by.nil? ? 'unknown' : cycle.modified_by.display_name
   %li
     %label
       Description
