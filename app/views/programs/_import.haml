@@ -3,17 +3,15 @@
 
 -content_for :widget_help, 'import'
 
-.import
+=form_tag '', :class => 'import', :multipart => true, :remote => true, :'data-type' => 'html', :'data-update-target' => '#results-container' do
 
-  =form_tag '', :class => 'import', :multipart => true, :remote => true, :'data-type' => 'html', :'data-update-target' => '#results-container' do
-
-    %label(for="file")
-      %strong
-        File to Upload
-    =file_field_tag "upload"
-    =submit_tag "Upload and Review", :class => 'btn btn-primary'
-    -if CMS_CONFIG["SECTION_IMPORT_HELP_LINK"].present?
-      %a{ :href => CMS_CONFIG["SECTION_IMPORT_HELP_LINK"], :target => '_blank', :class => "import-help"}
-        View Help
+  %label(for="file")
+    %strong
+      File to Upload
+  =file_field_tag "upload"
+  =submit_tag "Upload and Review", :class => 'btn btn-primary'
+  -if CMS_CONFIG["SECTION_IMPORT_HELP_LINK"].present?
+    %a{ :href => CMS_CONFIG["SECTION_IMPORT_HELP_LINK"], :target => '_blank', :class => "import-help"}
+      View Help
 
   #results-container
