@@ -39,9 +39,16 @@ ul.single-row-tabs {
     font-size: 11px;
   }
 }
-
 ul.tree-structure {
   @include reset-list();
+  &.one-line-structure {
+    .title {
+      @include oneline();
+    }
+    .item-title {
+      margin-left: 13px;
+    }
+  }
   li {
     line-height:31px;
     border-bottom:1px solid $lightGray;

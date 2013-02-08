@@ -3,13 +3,18 @@
   .no-results
     No results found
 -else
-  %ul.nav.nav-tabs.nav-stacked
+  %ul.tree-structure.simple.one-line-structure
     -@people.each do |person|
       -if quick_result
         =render 'base_objects/quick_result', { :item => person }
       -else
-        %li.group
-          %a.widgetbtn.fltrt{ :'data-form-target' => "refresh", :'data-delete-target' => "refresh", :'data-modal-reset' => "reset", :'data-toggle' => "modal-ajax-form", :href => edit_flow_person_path(person) }
-            %i.grcicon-edit-grey
-          =link_to '#' do #flow_person_path(person), 'data-popover-href' => tooltip_flow_person_path(person)
-            =person.name.presence || person.email.presence || "&nbsp;".html_safe
+        %li
+          .item-title
+            .row-fluid
+              .span10
+                .title
+                  =link_to '#' do #flow_person_path(person), 'data-popover-href' => tooltip_flow_person_path(person)
+                    =person.name.presence || person.email.presence || "&nbsp;".html_safe
+            .item-actions
+              %a.widgetbtn.btn.btn-mini{ :'data-form-target' => "refresh", :'data-delete-target' => "refresh", :'data-modal-reset' => "reset", :'data-toggle' => "modal-ajax-form", :href => edit_flow_person_path(person) }
+                %i.grcicon-edit-new

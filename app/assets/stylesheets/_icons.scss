@@ -194,6 +194,9 @@
   .tree-structure .active & {
     background-position:-48px -32px;
   }
+  .active .tree-structure & {
+    background-position:-48px -32px;
+  }
   .active & {
     background-position:-48px -48px;
   }
