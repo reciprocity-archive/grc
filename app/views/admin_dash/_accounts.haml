@@ -3,9 +3,20 @@
 
 -content_for :widget_help, 'admin_accounts'
 
--#-content_for :widget_buttons do
-  %input.ui-corner-all.widgetsearch.clear-value(type='text' placeholder='Search')
-
+-content_for :widget_buttons do
+  .filter
+    .row-fluid
+      .span6
+        %input.ui-corner-all.widgetsearch.clear-value(type='text' placeholder='Search')
+      .span6
+        .pull-right
+          %a.btn.btn-add{ :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :href => new_flow_account_path }
+            %i.grcicon-add-new
+            New Account
+          %a.btn.btn-add{ :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :href => new_flow_person_path }
+            %i.grcicon-add-new
+            New Person
+            
 .tabbable#quick_find
   %ul.nav.nav-tabs
     %li=link_to 'Accounts', '#accounts', :data => { :'tab-href' => flow_accounts_path(:quick => true), :toggle => 'tab' }
