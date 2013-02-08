@@ -26,6 +26,11 @@
       Description
     %span
       =display_as_html program.description
+  %li.float-element
+    %label
+      Direct link
+    %span
+      =link_to(program.url,program.url,:target => "_blank",:class => "inner-element")
 
 %ul.tree
   %li.category

@@ -56,6 +56,11 @@
       Network Zone
     %span
       =system.network_zone && system.network_zone.title
+  %li.float-element
+    %label
+      Direct Link
+    %span
+      =link_to(system.url,system.url,:target => "_blank",:class => "inner-element")
   %li
     %label
       Description

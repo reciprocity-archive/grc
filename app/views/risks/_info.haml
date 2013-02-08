@@ -20,6 +20,11 @@
       Code
     %span
       =instance.slug
+  %li.float-element
+    %label
+      Direct Link
+    %span
+      =link_to(instance.url,instance.url,:target => "_blank",:class => "inner-element")
   %li
     %label
       Description

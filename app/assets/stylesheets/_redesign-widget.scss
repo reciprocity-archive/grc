@@ -216,8 +216,8 @@
           margin: 0 10px 0 0;
         }
         span {
-          display: inline-block;
-          margin-top: 1px;
+          float: left;
+          width: 60%;
         }
       }
     }
@@ -262,6 +262,14 @@
         }
       }
     }
+  }
+  .inner-element {
+    display: block;
+    @include oneline();
+  }
+  .import-help {
+    display: inline-block;
+    margin: 0 0 0 10px;
   }
 }
 

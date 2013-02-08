@@ -46,8 +46,7 @@
     %label
       Direct Link
     %span
-      =link_to product.url do
-        =product.url
+      =link_to(product.url,product.url,:target => "_blank",:class => "inner-element")
   %li.float-element
     %label
       Effective Date

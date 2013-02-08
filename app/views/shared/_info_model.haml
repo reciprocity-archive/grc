@@ -25,11 +25,11 @@
       Description
     %span
       =display_as_html instance.description
-  %li
+  %li.float-element
     %label
       Direct link
     %span
-      =link_to(instance.url,instance.url,:target => "_blank")
+      =link_to(instance.url,instance.url,:target => "_blank",:class => "inner-element")
 
 
 %ul.tree
