@@ -132,7 +132,7 @@
                       .span3
                         %label.inline.assignee{ :for => "request_" + request.id.to_s + "_responsible"}
                           Assignee
-                        %input.pbc-request-assignee{ :id => "request_" + request.id.to_s + "_responsible", :type => "text", :value => request.company_responsible }
+                        %input.pbc-request-assignee{ :id => "request_" + request.id.to_s + "_responsible", :type => "text", :value => request.company_responsible, :style => "margin-top:-3px;margin-bottom:0;font-size:12px;line-height:16px;height:16px;min-height:0;padding:2px;width:160px" }
                       .span2
                         -if request.date_requested.present?
                           %span.date{"rel" => "tooltip", "data-placement" => "top", "title" => "Date Requested"}=request.date_requested && request.date_requested.strftime('%m/%d/%Y')
