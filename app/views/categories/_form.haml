@@ -17,7 +17,6 @@
         %option{ :value => Control::CATEGORY_TYPE_ID } Control Type
         %option{ :value => Control::CATEGORY_ASSERTION_TYPE_ID } Control Assertion
         %option{ :value => System::CATEGORY_TYPE_ID } System Type
-        %option{ :value => Risk::CATEGORY_TYPE_ID } Risk Type
 
 .row-fluid
   .span4
@@ -29,7 +28,7 @@
         -if f.object.scope_id.present?
           -categories = categories.where(:scope_id => f.object.scope_id)
         -else
-          - categories = categories.where(:scope_id => Control::CATEGORY_TYPE_ID)
+          -categories = categories.where(:scope_id => Control::CATEGORY_TYPE_ID)
 
         -categories.each do |category|
           %option{ :value => category.id }=category.name
