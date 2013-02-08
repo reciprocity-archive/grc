@@ -1,9 +1,13 @@
-.container.graphpaper
-  %header.jumbotron.masthead
-    .clearfix
-      %p.fltlft.highlighted Welcome to
-    %h1 Governance, Risk and Compliance
-    %p
-      -if CMS_CONFIG["ABOUT_LINK"]
-        %a.btn.btn-large{:href => CMS_CONFIG["ABOUT_LINK"]} About this Project
-      %a.btn.btn-large.btn-primary{:href => login_path} Login
+.container-fluid
+  .row-fluid
+    .span3
+    .span6
+      %h2
+        Welcome to
+      %h1
+        Governance, Risk and Compliance
+      %p
+        -if CMS_CONFIG["ABOUT_LINK"]
+          %a.btn.btn-large{:href => CMS_CONFIG["ABOUT_LINK"]} About this Project
+        %a.btn.btn-large.btn-primary{:href => login_path} Login
+    .span3

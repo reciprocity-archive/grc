@@ -325,4 +325,9 @@ jQuery(document).ready(function($) {
     $('.container-fluid').addClass('resizable').css('width', containerNarrow);
     $(this).closest('.menu').find('.screen-size span').text('Narrow');
   });
+  
+  if ($('#welcome').length > 0) {
+		$('#user_session_email').focus();
+	}
+  
 });
