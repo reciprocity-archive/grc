@@ -38,10 +38,10 @@
           <h5>People</h5>
           <ul class="items pbc-item-list">
             {{#object_people}}
-            <li {{data 'model'}} data-model="true" rel="tooltip" data-placement="top" title="{{firstnonempty person.email 'No LDAP'}}">
+            <li {{data 'model'}} data-model="true" rel="tooltip" data-placement="left" title="{{firstnonempty person.email 'No LDAP'}}">
               <div class="row-fluid">
                 <div class="span7">
-                  <a class="inner-element" href="mailto:{{firstnonempty person.email}}">{{firstnonempty person.name person.email}}</a>
+                  <a class="inner-element" target="_blank" href="mailto:{{firstnonempty person.email}}">{{firstnonempty person.name person.email}}</a>
                 </div>
                 <div class="span4">
                   <select class="edit-person-role">

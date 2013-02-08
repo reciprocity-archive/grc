@@ -49,9 +49,9 @@
                   </h5>
                   <ul class="items pbc-item-list">
                     {{#object_people}}
-                      <li {{data 'model'}} data-model="true" title="{{person.email}}">
+                      <li {{data 'model'}} data-model="true" title="{{person.email}}" rel="tooltip" data-placement="left">
                         <div class="span7">
-                          <span class="inner-element">{{person.name}}</span>
+                          <a class="inner-element" target="_blank" href="mailto:{{firstnonempty person.email}}">{{firstnonempty person.name person.email}}</a>
                         </div>
                         <div class="span4">
                           <select class="edit-person-role">
