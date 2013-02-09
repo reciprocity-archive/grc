@@ -12,9 +12,9 @@ class Request < ActiveRecord::Base
   STATUSES = [
     "Draft",
     "Requested",
-    "Responded (by Compliance)",
-    "Amended/Updated Request (by Auditor)",
-    "Accepted (by Auditor)"
+    "Responded",
+    "Amended/Updated Request",
+    "Accepted"
   ]
 
   attr_accessible :pbc_list, :type_id, :control_assessment, :pbc_control_code, :pbc_control_desc, :request, :test, :notes, :company_responsible, :auditor_responsible, :date_requested, :status
