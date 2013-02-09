@@ -26,7 +26,7 @@
         .openclose{ :class => 'lastchild' }
         .item-title
           .row-fluid
-            =render :partial => 'object_leaf', :locals => { :instance => instance }
+            =render :partial => 'object_leaf', :locals => { :instance => risk }
           .item-actions
             %a.btn.btn-mini.halfopacity{ "rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => flow_risk_path(risk.id) }
               %i.grcicon-goto
