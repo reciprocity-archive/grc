@@ -71,7 +71,7 @@
       -control_assessment_collapse_id = "control_assessment-#{control_assessment && control_assessment.control && control_assessment.control_id || 'null'}"
       %li.pbc-ca{ :'data-type' => 'ControlAssessment', :'data-id' => control_assessment_id, :'data-control-id' => control_assessment && control_assessment.control && control_assessment.control_id, 'data-sort-control-code' => control_assessment && control_assessment.control && control_assessment.control.slug }
         .item-main
-          .openclose
+          .openclose.active
           .item-title
             .row-fluid
               .span8
@@ -97,7 +97,7 @@
                     %a.btn.btn-mini.rotate_control_assessment{ :rel => "tooltip", :'data-placement' => "top", :title => "External: Test of Design", :class => control_assessment_button_class(control_assessment.external_tod), :'data-remote' => true, :'data-method' => 'post', :href => rotate_flow_control_assessment_path(control_assessment, :'control_assessment[external_tod]' => 'toggle') }
                       %i{ :class => control_assessment_button_icon(control_assessment.external_tod) }
                     %span Effectiveness
-        .item-content
+        .item-content.in
           %ul.tree-structure.requests.pbc-requests
             -requests.each do |request|
               -request_collapse_class = "control_assessment-#{control_assessment_id || 'null' }-request-#{request.id}"

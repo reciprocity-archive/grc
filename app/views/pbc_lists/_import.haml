@@ -8,7 +8,7 @@
   %label(for="file")
     %strong
       File to Upload
-  =file_field_tag "Upload"
+  =file_field_tag "upload"
   =submit_tag "Upload and Review", :class => 'btn btn-primary'
   -if CMS_CONFIG["PBC_LIST_IMPORT_HELP_LINK"].present?
     %a{ :href => CMS_CONFIG["PBC_LIST_IMPORT_HELP_LINK"], :target => '_blank', :class => "import-help"}
