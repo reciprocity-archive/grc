@@ -2384,7 +2384,7 @@ module['can/view/mustache/mustache.js'] = (function (can) {
 
 
 		isObserve = function (obj) {
-			return can.isFunction(obj.attr) && obj.constructor && !! obj.constructor.canMakeObserve;
+			return obj !== null && can.isFunction(obj.attr) && obj.constructor && !! obj.constructor.canMakeObserve;
 		},
 
 

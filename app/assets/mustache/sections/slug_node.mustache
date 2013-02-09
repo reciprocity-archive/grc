@@ -6,28 +6,21 @@
     {{firstnonempty title description_inline}}
   </a>
   {{/withclass}}
-  <a class="attached badge controllistRM status {{#if linked_controls.length}}badge-warning {{/if}}{{^linked_controls.length}}{{#if na}} badge-warning {{else}} badge-important {{/if}}{{/linked_controls.length}}" href="/mapping_section_dialog/{{id}}">
-    {{#if linked_controls.length}}
-      {{{linked_controls.length}}}
-    <ul class="spannomargin" title="{{join 'slug' linked_controls}}" style="display:none">
-    <li>
-      <strong>{{linked_controls.length}}</strong>
-      : 
-    </li>
-      {{#linked_controls}}
-        <li>
-          {{slug}}
-        </li>
-      {{/linked_controls}}
-    </ul>
-    {{else}}
-        {{#if na}}
-          N/A
-        {{else}}
-          0
-        {{/if}}
-    {{/if}}
-  </a>
+  {{#withclass 'attached badge controllistRM status linked_controls:badge-warning !linked_controls:na:badge-warning !linked_controls:!na:badge-important'}}
+    {{#withattr 'href' '/mapping_section/dialog/\{\{id\}\}'}} 
+    <a data-placement="right" data-popover-trigger="sticky-hover" data-original-title="Linked Controls" data-content="{{render '/assets/controls/list_popover.mustache' linked_controls}}">
+      {{#if linked_controls.length}}
+        {{{linked_controls.length}}}
+      {{else}}
+          {{#if na}}
+            N/A
+          {{else}}
+            0
+          {{/if}}
+      {{/if}}
+    </a>
+    {{/withattr}}
+    {{/withclass}}
 </div>
 {{#if children}}
   <div class="item-content in">
