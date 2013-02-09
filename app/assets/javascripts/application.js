@@ -95,8 +95,9 @@ jQuery(document).ready(function($) {
         width: '100px',
         height: '100px',
         left: '50px',
-        top: '50px'
-      });
+        top: '50px',
+        zIndex : calculate_spinner_z_index
+       });
       return $el[0];
     }
   };

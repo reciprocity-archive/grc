@@ -51,7 +51,7 @@ $(document).ready(function() {
     $dest.html(spinner.el);
     // Scroll up so spinner doesn't get pushed out of visibility
     $dest.scrollTop(0);
-    $(spinner.el).css({ width: '100px', height: '100px', left: '50px', top: '50px' });
+    $(spinner.el).css({ width: '100px', height: '100px', left: '50px', top: '50px', zIndex : calculate_spinner_z_index });
 
     var fullData = undefined
     var abilityData = undefined

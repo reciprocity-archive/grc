@@ -23,7 +23,8 @@
           $(new Spinner().spin().el)
             .css({
               width: '100px', height: '100px',
-              left: '50px', top: '50px'
+              left: '50px', top: '50px', 
+              zIndex : calculate_spinner_z_index
             })
         ).end();
   }
