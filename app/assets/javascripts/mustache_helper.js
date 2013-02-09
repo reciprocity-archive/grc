@@ -111,12 +111,13 @@ $.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
   * helper withclass
   * puts a class string on the element, includes live binding:
   * usage:
-  * {{#withclass 'class strings' bindingattr...}}<element>...</element>{{/withclass}}
+  * {{#withclass 'class strings'}}<element>...</element>{{/withclass}}
+  * {{{withclass 'class strings'}}} to apply to the parent element a la XSLT <xsl:attribute>. Note the triple braces!
   * Tokens usable in class strings:
   *  =attribute : add the value of the attribute as a class
-  *  attribute:value : if attribute is truthy, return value
-  *  !attribute:value : if attribute is falsy, return value
-  *  attr1:!attr2:value : if attr1 is truthy and attr2 is falsy, return value
+  *  attribute:value : if attribute is truthy, add value to the classes
+  *  !attribute:value : if attribute is falsy, add value
+  *  attr1:!attr2:value : if attr1 is truthy and attr2 is falsy, add value
   *  plainstring : use this class literally
     *  
   */
@@ -124,7 +125,6 @@ $.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
     var options = arguments[arguments.length - 1]
     , exprs = preprocessClassString(arguments[0])
     , hash = quickHash(arguments[0], quickHash(this._cid)).toString(36)
-    , content = options.fn(this)
     //, content = options.fn(this).trim()
     //, index = content.indexOf("<") + 1
     , that = this;
@@ -138,11 +138,19 @@ $.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
 
 
     function hookupfunc(el, parent, view_id) {
-      var frag = can.view.frag(content, parent);
-      var $newel = $(frag.querySelector("*"));
+      var content = options.fn(this);
 
-      el.parentNode ? el.parentNode.replaceChild($newel[0], el) : $(parent).append($newel);
-      el = $newel[0];
+      if(content) {
+        var frag = can.view.frag(content, parent);
+        var $newel = $(frag.querySelector("*"));
+        el.parentNode ? el.parentNode.replaceChild($newel[0], el) : $(parent).append($newel);
+        el = $newel[0];
+      } else {
+        //we are inside the element we want to add attrs to.
+        var p = el.parentNode
+        p.removeChild(el)
+        el = p;
+      }
       for(var i = 0; i < exprs.length; i ++) {
         var expr = exprs[i];
         if(typeof expr === "object" && expr.attr) {
@@ -162,15 +170,22 @@ $.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
     + " data-replace='true'/>";
   });
 
-
+  /**
+    Add a live bound attribute to an element, avoiding buggy CanJS attribute interpolations.
+    Usage:
+    {{#withattr attrname attrvalue attrname attrvalue...}}<element/>{{/withattr}} to apply to the child element
+    {{{withattr attrname attrvalue attrname attrvalue...}}} to apply to the parent element a la XSLT <xsl:attribute>. Note the triple braces!
+    attrvalue can take mustache tokens, but they should be backslash escaped.
+  */
   Mustache.registerHelper("withattr", function() {
     var args = can.makeArray(arguments).slice(0, arguments.length - 1)
     , options = arguments[arguments.length - 1]
     , attribs = []
     , that = this
-    , hash = quickHash(args.join("-"), quickHash(this._cid)).toString(36)
-    , content = options.fn(that)
-    , hook = can.view.hook(function(el, parent, view_id) {
+    , hash = quickHash(args.join("-"), quickHash(this._cid)).toString(36);
+
+    var hook = can.view.hook(function(el, parent, view_id) {
+      var content = options.fn(that);
 
       if(content) {
         var frag = can.view.frag(content, parent);
@@ -179,6 +194,11 @@ $.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
 
         el.parentNode ? el.parentNode.replaceChild(newel, el) : $(parent).append($newel);
         el = newel;
+      } else {
+        //we are inside the element we want to add attrs to.
+        var p = el.parentNode
+        p.removeChild(el)
+        el = p;
       }
 
       function sub_all(el, ev, newVal, oldVal) {

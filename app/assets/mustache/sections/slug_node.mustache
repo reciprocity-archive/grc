@@ -1,26 +1,24 @@
 <div class="row-fluid">
-  {{#withclass 'selected:selected span10 slot regulationslot toggle selector collapsed oneline'}}
   <a href="javascript://">
+    {{withclass 'selected:selected span10 slot regulationslot toggle selector collapsed oneline'}}
     <i class="grcicon-ok slct"></i>
     <strong class="prefix">{{slug}}</strong>
     {{firstnonempty title description_inline}}
   </a>
-  {{/withclass}}
-  {{#withclass 'attached badge controllistRM status linked_controls:badge-warning !linked_controls:na:badge-warning !linked_controls:!na:badge-important'}}
-    {{#withattr 'href' '/mapping_section/dialog/\{\{id\}\}'}} 
-    <a data-placement="right" data-popover-trigger="sticky-hover" data-original-title="Linked Controls" data-content="{{render '/assets/controls/list_popover.mustache' linked_controls}}">
-      {{#if linked_controls.length}}
-        {{{linked_controls.length}}}
-      {{else}}
-          {{#if na}}
-            N/A
-          {{else}}
-            0
-          {{/if}}
-      {{/if}}
-    </a>
-    {{/withattr}}
-    {{/withclass}}
+
+  <a data-placement="right" data-popover-trigger="sticky-hover" data-original-title="Linked Controls" data-content="{{render '/assets/controls/list_popover.mustache' linked_controls}}">
+    {{{withattr 'href' '/mapping_section/dialog/\{\{id\}\}'}}}
+    {{{withclass 'attached badge controllistRM status linked_controls:badge-warning !linked_controls:na:badge-warning !linked_controls:!na:badge-important'}}
+    {{#if linked_controls.length}}}
+      {{{linked_controls.length}}}
+    {{else}}
+        {{#if na}}
+          N/A
+        {{else}}
+          0
+        {{/if}}
+    {{/if}}
+  </a>
 </div>
 {{#if children}}
   <div class="item-content in">
