@@ -9,7 +9,7 @@
       -else
         =@help_slug.humanize
         Help
-    .help-content
+    .help-content.rtf
       =display_as_html @help.content
   -else
     -content_for :modal_title do
@@ -17,7 +17,7 @@
         %a.btn.btn-mini.pull-right{:'data-toggle' => 'collapse', :href => '#helpedit', :title => "Edit Help", :rel => "tooltip", :'data-placement' => "left", :style => "margin-right:6px;"}
           %i.grcicon-edit-grey
       GRC Help
-    .help-content
+    .help-content.rtf
       %p This content is coming soon.  We are working on it.
 
 
