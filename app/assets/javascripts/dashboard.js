@@ -12,7 +12,7 @@
  *= require mustache_helper
  *= require_tree ./apps
  *= require_self
- *= require jquery.remotipart
+ *= require jquery.remotipart-patched
  *= require d3.v2
  *= require related
  *= require related_graph
@@ -337,6 +337,19 @@ jQuery(function($) {
   $('body').on('ajax:success', 'form.import', function(e, data, status, xhr) {
     if (xhr.getResponseHeader('Content-Type') == 'application/json') {
       window.location.assign($.parseJSON(data).location);
+    }
+  });
+});
+
+jQuery(function($) {
+  $('body').on('change', 'form.import input#upload', function(e) {
+    var $this = $(this)
+      , value = $this.val()
+      ;
+
+    if ($this.data('last-value') != value) {
+      $this.closest('form').find('#results-container').empty();
+      $this.data('last-value', value);
     }
   });
 });
