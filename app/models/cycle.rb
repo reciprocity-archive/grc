@@ -36,4 +36,9 @@ class Cycle < ActiveRecord::Base
     pbc_list.audit_cycle = self
     pbc_list.save
   end
+
+  def created_by
+    userid = Version.where({:item_id => self[:id], :item_type => self.class.name}).first[:whodunnit] rescue nil
+    userid.nil? ? nil : Person.where({:id => userid}).first
+  end
 end

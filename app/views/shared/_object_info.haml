@@ -5,6 +5,10 @@
     .span3
       %strong Created:
       %span #{object.created_at && object.created_at.strftime("%m/%d/%y")}
+    -if object.class.method_defined? :created_by
+      .span3
+        %strong Creator:
+        %span #{object.created_by.nil? ? 'unknown' : object.created_by.display_name}
     .span3
       %strong Updated:
       %span.updatedDate #{object.updated_at && object.updated_at.strftime("%m/%d/%y")}
