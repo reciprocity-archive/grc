@@ -274,15 +274,24 @@
 }
 .grcicon-x-grey {
   background-position:-152px -176px;
+  .btn-nano & {
+    background-position:-154px -178px;
+  }
 }
 .grcicon-x-white {
   background-position:-176px -176px;
 }
 .grcicon-edit-grey {
   background-position:-128px -176px;
+  .btn-nano & {
+    background-position:-130px -178px;
+  }
 }
 .grcicon-check-green {
   background-position:-224px -176px;
+}
+.grcicon-check-white {
+  background-position:-248px -176px;
 }
 .grcicon-chevron-right {
   background-position:-200px -176px;
