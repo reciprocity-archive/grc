@@ -87,11 +87,3 @@
       min-height:0;
     }
   }
-
-  
-  // temporary mixin - should be removed once redesign is complete
-
-  @mixin new-icons() {
-    @include background-size(160px 160px);
-    background-image: url("/images/grcicons/icons.png");
-  }

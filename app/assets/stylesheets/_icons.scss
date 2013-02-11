@@ -12,10 +12,10 @@
   height: 16px;
   line-height: 16px;
   vertical-align: top; //necessary or button with icon embedded will sometimes be to tall.
-  background-image: url("/images/grcicons/grc-sprite-all.png");    
+  background-image: url("/images/grcicons/icons.png");
   background-position: -2000px -2000px; // blank default state 
   background-repeat: no-repeat;
-  @include background-size(256px 256px);
+  @include background-size(296px 296px);
   .btn-nano & {
     width:12px;
     height:12px;
@@ -27,397 +27,275 @@
 }
 
 .grcicon-add-new {
-  @include new-icons();
-  background-position:-144px -16px;
+  background-position:-224px -32px;
   .active & {
-    background-position:-144px -16px;
+    background-position:-224px -32px;
   }
 }
 .grcicon-add-new-black {
-  @include new-icons();
-  background-position:-144px 0;
+  background-position:-224px -8px;
   .active & {
-    background-position:-144px 0;
+    background-position:-224px -8px;
   }
 }
 .grcicon-admin {
-  @include new-icons();
-  background-position:-64px -16px;
+  background-position:-104px -32px;
   .active & {
-    background-position:-64px 0;
+    background-position:-104px -8px;
   }
 }
 .grcicon-admin-black {
-  @include new-icons();
-  background-position:-64px 0;
+  background-position:-104px -8px;
   .active & {
-    background-position:-64px -16px;
+    background-position:-104px -32px;
   }
 }
 .grcicon-dashboard {
-  @include new-icons();
-  background-position:-16px -16px;
+  background-position:-32px -32px;
   .active & {
-    background-position:-16px 0;
+    background-position:-32px -8px;
   }
 }
 .grcicon-dashboard-black {
-  @include new-icons();
-  background-position:-16px 0;
+  background-position:-32px -8px;
   .active & {
-    background-position:-16px -16px;
+    background-position:-32px -32px;
   }
 }
 .grcicon-demo {
-  @include new-icons();
-  background-position:-80px -16px;
+  background-position:-128px -32px;
   .active & {
-    background-position:-80px 0;
+    background-position:-128px -8px;
   }
 }
 .grcicon-demo-black {
-  @include new-icons();
-  background-position:-80px 0;
+  background-position:-128px -8px;
   .active & {
-    background-position:-80px -16px;
+    background-position:-128px -32px;
   }
 }
 .grcicon-demo-stop {
-  @include new-icons();
-  background-position:-128px -32px;
+  background-position:-152px -56px;
 }
 .grcicon-demo-stop-white {
-  @include new-icons();
-  background-position:-128px -48px;
+  background-position:-152px -80px;
 }
 .grcicon-desktop {
-  @include new-icons();
-  background-position:-32px -16px;
+  background-position:-56px -32px;
   .active & {
-    background-position:-32px 0;
+    background-position:-56px -8px;
   }
 }
 .grcicon-desktop-black {
-  @include new-icons();
-  background-position:-32px 0;
+  background-position:-56px -8px;
   .active & {
-    background-position:-32px -16px;
+    background-position:-56px -32px;
   }
 }
 .grcicon-help {
-  @include new-icons();
-  background-position:-48px -16px;
+  background-position:-80px -32px;
   .active & {
-    background-position:-48px 0;
+    background-position:-80px -8px;
   }
 }
 .grcicon-help-black {
-  @include new-icons();
-  background-position:-48px 0;
+  background-position:-80px -8px;
   .active & {
-    background-position:-48px 0;
+    background-position:-80px -8px;
   }
 }
 .grcicon-logout {
-  @include new-icons();
-  background-position:-96px -16px;
+  background-position:-152px -32px;
   .active & {
-    background-position:-96px 0;
+    background-position:-152px -8px;
   }
 }
 .grcicon-logout-black {
-  @include new-icons();
-  background-position:-96px 0;
+  background-position:-152px -8px;
   .active & {
-    background-position:-96px -16px;
+    background-position:-152px -32px;
   }
 }
 .grcicon-normal {
-  @include new-icons();
-  background-position:-128px -16px;
+  background-position:-200px -32px;
   .active & {
-    background-position:-128px 0;
+    background-position:-200px -8px;
   }
 }
 .grcicon-normal-black {
-  @include new-icons();
-  background-position:-128px 0;
+  background-position:-200px -8px;
   .active & {
-    background-position:-128px -16px;
+    background-position:-200px -32px;
   }
 }
 .grcicon-user {
-  @include new-icons();
-  background-position:0 -16px;
+  background-position:-8px -32px;
   .active & {
-    background-position:0 0;
+    background-position:-8px -8px;
   }
 }
 .grcicon-user-black {
-  @include new-icons();
-  background-position:0 0;
+  background-position:-8px -8px;
   .active & {
-    background-position:0 -16px;
+    background-position:-8px -32px;
   }
 }
 .grcicon-wide {
-  @include new-icons();
-  background-position:-112px -16px;
+  background-position:-176px -32px;
   .active & {
-    background-position:-112px 0;
+    background-position:-176px -8px;
   }
 }
 .grcicon-wide-black {
-  @include new-icons();
-  background-position:-112px 0;
+  background-position:-176px -8px;
   .active & {
-    background-position:-112px -16px;
+    background-position:-176px -32px;
   }
 }
 .grcicon-search-circle {
-  @include new-icons();
-  background-position:0 -48px;
+  background-position:-248px -32px;
   .active & {
-    background-position:0 -48px;
+    background-position:-248px -32px;
   }
 }
 .grcicon-search-black {
-  @include new-icons();
-  background-position:0 -32px;
+  background-position:-248px -8px;
   .active & {
-    background-position:0 -32px;
+    background-position:-248px -8px;
   }
 }
 .grcicon-edit-new {
-  @include new-icons();
-  background-position:-48px -32px;
+  background-position:-32px -56px;
   .tree-structure .active & {
-    background-position:-48px -32px;
+    background-position:-32px -56px;
+  }
+  .modal .active & {
+    background-position:-32px -56px;
   }
   .active .tree-structure & {
-    background-position:-48px -32px;
+    background-position:-32px -56px;
   }
   .active & {
-    background-position:-48px -48px;
+    background-position:-32px -80px;
   }
 }
 .grcicon-edit-new-white {
-  @include new-icons();
-  background-position:-48px -48px;
+  background-position:-32px -80px;
   .active & {
-    background-position:-48px -48px;
+    background-position:-32px -80px;
   }
 }
 .grcicon-audit {
-  @include new-icons();
-  background-position:-16px -32px;
+  background-position:-272px -8px;
   .active & {
-    background-position:-16px -48px;
+    background-position:-272px -32px;
   }
 }
 .grcicon-audit-white {
-  @include new-icons();
-  background-position:-16px -48px;
+  background-position:-272px -32px;
 }
 .grcicon-imp-exp {
-  @include new-icons();
-  background-position:-64px -32px;
+  background-position:-56px -56px;
   .active & {
-    background-position:-64px -48px;
+    background-position:-56px -80px;
   }
 }
 .grcicon-imp-exp-white {
-  @include new-icons();
-  background-position:-64px -48px;
+  background-position:-56px -80px;
   .active & {
-    background-position:-64px -48px;
+    background-position:-56px -80px;
   }
 }
 .grcicon-export {
-  @include new-icons();
-  background-position:-64px -64px;
+  background-position:-8px -104px;
 }
 .grcicon-export-white {
-  @include new-icons();
-  background-position:-64px -80px;
+  background-position:-8px -128px;
 }
 .grcicon-reg-map {
-  @include new-icons();
-  background-position:-32px -32px;
+  background-position:-8px -56px;
   .active & {
-    background-position:-32px -48px;
+    background-position:-8px -80px;
   }
 }
 .grcicon-reg-map-white {
-  @include new-icons();
-  background-position:-32px -48px;
+  background-position:-8px -80px;
 }
 .grcicon-carot {
-  @include new-icons();
-  background-position:-80px -32px;
+  background-position:-80px -56px;
 }
 .grcicon-carot-white {
-  @include new-icons();
-  background-position:-80px -48px;
-}
-
-.grcicon-goto {
-  @include new-icons();
-  background-position:-144px -32px;
-}
-.grcicon-goto-white {
-  @include new-icons();
-  background-position:-144px -48px;
-}
-
-.grcicon-goto-left {
-  @include new-icons();
-  background-position:-144px -64px;
-}
-.grcicon-goto-left-white {
-  @include new-icons();
-  background-position:-144px -80px;
-}
-
-.grcicon-search-new {
-  @include new-icons();
-  background-position:-32px -64px;
-}
-.grcicon-search-new-white {
-  @include new-icons();
-  background-position:-32px -80px;
-}
-.grcicon-link-new {
-  @include new-icons();
-  background-position:-80px -64px;
-}
-.grcicon-link-new-white {
-  @include new-icons();
   background-position:-80px -80px;
 }
-
+.grcicon-goto {
+  background-position:-176px -56px;
+}
+.grcicon-goto-white {
+  background-position:-176px -80px;
+}
+.grcicon-goto-left {
+  background-position:-80px -104px;
+}
+.grcicon-goto-left-white {
+  background-position:-144px -128px;
+}
+.grcicon-search-new {
+  background-position:-248px -56px;
+}
+.grcicon-search-new-white {
+  background-position:-248px -80px;
+}
+.grcicon-link-new {
+  background-position:-32px -104px;
+}
+.grcicon-link-new-white {
+  background-position:-32px -128px;
+}
 .grcicon-ok {
-  @include new-icons();
-  background-position:-96px -64px;
+  background-position:-56px -104px;
 }
-
-
-
-.grcicon-sortUp             { background-position:-22px -2px; }
-.grcicon-sortDown           { background-position:-22px -22px; }
-.grcicon-questionmark-grey  { background-position:-22px -92px; }
-.grcicon-edit-grey          { background-position:-40px -92px; }
-.grcicon-enlarge-grey       { background-position:-58px -109px; }
-.grcicon-blue-expand        { background-position:-58px -92px; }
-.grcicon-more               { background-position:-22px -56px; }
-.grcicon-link               { background-position:-130px -235px; }
-.grcicon-reference          { background-position:-130px -235px; }
-.grcicon-search             { background-position:-130px -235px; }
-.grcicon-process            { background-position:-205px -235px; }
-.grcicon-system             { background-position:-180px -235px; }
-.grcicon-arrowright         { background-position:-76px -56px; }
-.grcicon-arrowright-black   { background-position:-76px -56px; }
-.grcicon-arrowright-grey    { background-position:-92px -56px; }
-.grcicon-arrowright-white   { background-position:-108px -56px; }
-.grcicon-remove             { background-position:-22px -38px; }
-.grcicon-expandAll-grey     { background-position:-75px -110px; }
-.grcicon-shrinkAll-grey     { background-position:-75px -126px; }
-.grcicon-person             { background-position:-29px -235px; }
-.grcicon-document           { background-position:-4px -235px; }
-.grcicon-populationsample   { background-position:-55px -235px; }
-.grcicon-calendar           { background-position:-79px -235px; }
-.grcicon-blank              { background-position:100px 100px; }
-.grcicon-x-grey             { background-position:-40px -110px; }
-.grcicon-x-white            { background-position:-40px -125px; }
-.grcicon-check-green        { background-position:-76px -38px; }
-.grcicon-check-black        { background-position:-76px -20px; }
-.grcicon-check-white        { background-position:-92px -20px; }
-.grcicon-chevron-right      { background-position:-58px -38px; }
-.grcicon-hidden-blue        { background-position:-58px -20px; }
-.grcicon-arrowleft-black    { background-position:-4px -118px; }
-.grcicon-back-black         { background-position:-4px -118px; }
-.grcicon-add                { background-position:-104px -235px; }
-.grcicon-mapping-white      { background-position:-3px -3px; }
-.grcicon-import-white       { background-position:-3px -28px; }
-.grcicon-gears              { background-position:-3px -58px; }
-.grcicon-play-white         { background-position:-3px -88px; }
-
-.btn-nano { // for nano icons, add -2px for background position values
-  .grcicon-x-grey           { background-position:-42px -112px;}
-  .grcicon-edit-grey        { background-position:-42px -94px; }
-  .grcicon-link             { background-position:-24px -76px; }
-  .grcicon-add              { background-position:-106px -237px; }
+.grcicon-process {
+  background-position:-104px -176px;
 }
-
-
-.calendar {
-  background-image: url("../images/icons/icon-calendar-inline.png");
-  background-position: 94% 55%;
-  background-repeat: no-repeat;
+.grcicon-system {
+  background-position:-80px -176px;
 }
-
-.enddot {
-  position:relative;
-  background-image: url("/images/grcicons/grc-sprite-all.png");
-  float:left;
-  display: inline-block;
-  @include background-size(256px 256px);
-  width: 16px;
-  height: 16px;
-  padding: 0 0 0 0;
-  margin: 6px 0 0 0;
-  cursor:pointer;
-  background-position:-22px -110px;
-  
-  &.process {
-    background-position:-22px -110px;
-  }
-  &.risk {
-    background-position:-40px -20px;
-  }
-  &.system {
-    background-position:-40px -2px;
-  }
-  &.regulation {
-    background-position:-40px -38px;
-  }
-  &.control {
-    background-position:-40px -74px;
-  }
-  &.default {
-    background-position:-40px -56px;
-  }
+.grcicon-document {
+  background-position:-8px -176px;
 }
-
-.expander {
-  position:relative;
-  background-image:url("/images/grcicons/grc-sprite-all.png");
-  float:left;
-  display: inline-block;
-  @include background-size(256px 256px);
-  width: 16px;
-  height: 16px;
-  padding: 0 0 0 0;
-  margin: 6px 4px 0 0;
-  background-position:-56px -56px;
-  cursor:pointer;
-  &.in {
-    background-position:-74px -1px;
-  }
-  &.small-expander {
-    margin: 3px 4px 0 -2px;
-  }
+.grcicon-populationsample {
+  background-position:-32px -176px;
+}
+.grcicon-calendar {
+  background-position:-8px -248px;
+}
+.grcicon-remove {
+  background-position:-56px -176px;
+}
+.grcicon-x-grey {
+  background-position:-152px -176px;
+}
+.grcicon-x-white {
+  background-position:-176px -176px;
+}
+.grcicon-edit-grey {
+  background-position:-128px -176px;
+}
+.grcicon-check-green {
+  background-position:-224px -176px;
+}
+.grcicon-chevron-right {
+  background-position:-200px -176px;
 }
 
 .showhide,
 .openclose {
-  @include new-icons();
-  background-position:0 -64px;
+  background-position:-200px -56px;
   cursor:pointer;
   @include opacity(0.5);
   @include transition(opacity 0.4s);
   &.active {
-    background-position:-16px -64px;
+    background-position:-224px -56px;
     @include opacity(1);
   }
   &.lastchild {
@@ -429,10 +307,10 @@
     margin-right:8px;
     @include border-radius();
     background-color:$white;
-    background-position:-112px -32px;
+    background-position:-128px -56px;
     &.active {
       @include opacity(0.5);
-      background-position:-80px -32px;
+      background-position:-80px -56px;
     }
     &:hover {
       @include opacity(1);
