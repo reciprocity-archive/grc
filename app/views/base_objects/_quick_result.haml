@@ -1,10 +1,11 @@
 %li.main
-  .item-identifier
-    .item-title
-      %strong #{item.slug} 
-      #{item.title}
-    .item-actions
-      %a.btn.btn-mini{ :href => self.send("flow_#{controller_name.singularize}_path", item) }
-        %i.grcicon-goto
-      -#%a.btn.btn-mini
-        -#%i.grcicon-link
+  %a{ :href => self.send("flow_#{controller_name.singularize}_path", item) }
+    .item-identifier
+      .item-title
+        %strong #{item.slug} 
+        #{item.title}
+      -#.item-actions
+        %a.btn.btn-mini{ :href => self.send("flow_#{controller_name.singularize}_path", item) }
+          %i.grcicon-goto
+        %a.btn.btn-mini
+          %i.grcicon-link
