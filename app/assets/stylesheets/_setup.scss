@@ -87,3 +87,10 @@
       min-height:0;
     }
   }
+  
+  @mixin input-block-level() {
+    display: block;
+    width: 100%;
+    @include box-sizing(border-box);
+    min-height: 28px;
+  }

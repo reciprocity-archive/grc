@@ -60,6 +60,13 @@
     .btn-mini {
       margin-top: 3px;
     }
+    .btn {
+      font-size: 11px;
+      padding: 3px 5px;
+    }
+    input[type="text"] {
+      @include input-block-level();
+    }
   }
   .content {
     padding:6px;
