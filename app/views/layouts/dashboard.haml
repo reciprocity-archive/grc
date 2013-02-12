@@ -145,7 +145,7 @@
                     %i.grcicon-user
                     %span
                       %strong=current_user.email
-                      %i.grcicon-carot-white
+                    %i.grcicon-carot-white
                   %ul.dropdown-menu{:'aria-labelledby' => 'drop1', :role =>"menu"}
                     -if current_user.has_role?(:superuser)
                       %li
