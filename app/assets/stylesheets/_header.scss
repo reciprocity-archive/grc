@@ -152,6 +152,10 @@
       }
       &.user {
         text-transform:lowercase;
+        .dropdown-menu {
+          left: auto;
+          right: 0;
+        }
       }
       &.screen {
         display:none;
@@ -234,6 +238,8 @@
     margin-top: 0px;
     height: 36px;
     z-index: 900;
+    left: 0;
+    right: 0;
     @include box-shadow(0 3px 6px -1px rgba(0, 0, 0, 0.2));
     .breadcrumbs {
       display: none;

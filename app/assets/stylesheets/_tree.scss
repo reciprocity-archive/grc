@@ -29,6 +29,7 @@ ul.single-row-tabs {
     margin: 0;
     .item-identifier {
       line-height: 28px;
+      @include oneline();
     }
   }
   .no-result {
