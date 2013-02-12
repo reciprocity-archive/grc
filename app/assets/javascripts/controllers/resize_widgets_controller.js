@@ -290,14 +290,32 @@ can.Control("CMS.Controllers.ResizeWidgets", {
 
 
   , " mouseover" : "showGhostResizer"
+  , " mousemove" : "showGhostResizer"
 
   , showGhostResizer : function(el, ev) {
     var that = this;
     var origTarget = ev.originalEvent ? ev.originalEvent.target : ev.target;
     var $t = $(this.element);
-    if ($t.is(origTarget) && !$(".width-selector-bar, .width-selector-drag").length) {
-      var offset = this.getLeftOffset(ev.pageX);
-      var widths = that.getWidthsForSelector($t).slice(0);
+    if(!$t.is(origTarget) && !$(origTarget).is(".width-selector-bar") && !$(".width-selector-drag", $t).length ) {
+      this.removeResizer();
+      return;
+    }
+    var offset = this.getLeftOffset(ev.pageX);
+    var widths = this.getWidthsForSelector($t).slice(0);
+    var acc = 0;
+    for(var i = 0; i < widths.length && acc !== offset; i++) {
+      acc += widths[i];
+      if(acc > offset) { //counted past our current offset. we're not near a gutter.
+        this.removeResizer();
+        return;
+      }
+    }
+
+    var gutterX = this.getLeftOffsetAsPixels(offset);
+    var gutterWidth = Math.max.apply(Math, $t.children().map(function() { return parseInt($(this).css("margin-left")); }).get());
+
+    if (!$(".width-selector-bar, .width-selector-drag").length
+      && Math.abs(ev.pageX - gutterX) < gutterWidth / 2) {
       var c_width = that.options.total_columns;
       while(c_width > offset) { //should be >=?
         c_width -= widths.pop();
@@ -312,12 +330,10 @@ can.Control("CMS.Controllers.ResizeWidgets", {
         width: "5px"
         , height : $t.height()
         , position : "fixed"
-        , left : this.getLeftOffsetAsPixels(offset)
+        , left : gutterX
         , top : $t.offset().top - $(window).scrollTop()
         , opacity : "0.5"
       }).appendTo($t);
-    } else if(!$t.is(origTarget) && !$(origTarget).is(".width-selector-bar") && !$(".width-selector-drag", $t).length ) {
-      this.removeResizer();
     }
   }
 
