@@ -212,7 +212,7 @@ jQuery(document).ready(function($) {
         $quickFind = $this.closest(".quick-search-results");
     $quickFind.fadeOut();
   });
-
+  
   // Close other popovers when one is shown
   $('body').on('show.popover', function(e) {
     $('[data-sticky_popover]').each(function() {
