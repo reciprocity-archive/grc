@@ -7,8 +7,8 @@
     %li=@program.title
     
   %h1
-    %span
-      Program:
+    .grcobject.governance{:rel => "tooltip", :'data-placement'=>"bottom", :title => "Regulation"}
+      %i.grcicon-program
     =@program.title
 
 -content_for :page_help, 'program'
