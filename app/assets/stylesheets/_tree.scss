@@ -195,6 +195,7 @@ ul.tree-structure {
   }
   &.simple {
     .code {
+      color: $green;
       span {
         display: block;
       }
