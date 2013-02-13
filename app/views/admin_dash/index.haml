@@ -7,8 +7,18 @@
  
 -content_for :page_help, 'admin'
 
--#-content_for :subheader_extras do
+-content_for :subheader_extras do
   %ul.actions.pull-right
+    %li
+      %a{:href => "/systems/import"}
+        %i.grcicon-imp-exp
+        Import Systems
+    %li
+      %a{"data-toggle" => "modal-ajax", :href => "/systems/export.html"}
+        %i.grcicon-export
+        Export Systems
+
+  -#%ul.actions.pull-right
     %li.btn-group
       %a.dropdown-toggle{:href => '#', :'data-toggle' => 'dropdown' }
         %i.grcicon-add-new-black
@@ -26,34 +36,10 @@
 .container-fluid
   #admin_columns.row-fluid{ :'data-resize' => "true" }
     #left-column.span4.widget-area
-      %section#status_widget.widget
-        %header.header
-          %h2
-            Demo Status
-        %section.content
-          -path = request.fullpath.gsub(/BETA=[^&]*&?/, '').sub(/[?&]$/, '')
-          -path += path.include?('?') ? '&' : '?'
-          -if has_feature? :BETA
-            %label 
-              Demo features are currently on. 
-              %br 
-              They will be outlined in orange where possible. 
-          -else
-            %label Demo features are currently off. 
-      %section#productInfo.widget
-        %header.header
-          %h2
-            Import/Export Actions
-        %section.content.information
-          .toolbar-widget
-            .row-fluid
-              .span6
-                %a.span12.btn.btn-warning{:href => "/systems/import"}
-                  Import Systems
-              .span6
-                %a.span12.btn.btn-warning{"data-toggle" => "modal-ajax", :href => "/systems/export.html"}
-                  Export Systems
-  
+      =render :partial => 'admin_dash/categories',
+                :layout => 'layouts/widget_box',
+                :locals => { :categories => @categories, :options => @options }
+                
       -if has_feature? :BETA
         %section#StyleGuide.widget
           / in progress
@@ -312,7 +298,3 @@
           :layout => 'layouts/widget_box',
           :locals => { :accounts => @accounts, :people => @people }
           
-      =render :partial => 'admin_dash/categories',
-                :layout => 'layouts/widget_box',
-                :locals => { :categories => @categories, :options => @options }
-	

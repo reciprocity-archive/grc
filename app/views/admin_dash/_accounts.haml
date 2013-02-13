@@ -3,6 +3,8 @@
 
 -content_for :widget_help, 'admin_accounts'
 
+-content_for :widget_id, 'admin_accounts_widget'
+
 -content_for :widget_buttons do
   .filter
     .row-fluid
@@ -12,10 +14,10 @@
         .pull-right
           %a.btn.btn-add{ :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :href => new_flow_account_path }
             %i.grcicon-add-new
-            New Account
+            Account
           %a.btn.btn-add{ :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :href => new_flow_person_path }
             %i.grcicon-add-new
-            New Person
+            Person
             
 .tabbable#quick_find
   %ul.nav.nav-tabs

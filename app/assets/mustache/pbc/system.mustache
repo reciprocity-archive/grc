@@ -4,7 +4,7 @@
         <div class="span6">
           <div class="pull-right">
             <a class="btn btn-mini" href="/systems/{{id}}" title="View {{system_or_process_capitalized}}" rel="tooltip" data-placement="top">
-              <i class="grcicon-arrowright-grey"></i>
+              <i class="grcicon-goto"></i>
             </a>
             <a class="btn btn-mini system-edit" data-toggle="modal-ajax-form" href="/systems/{{id}}/edit" data-modal-reset="reset" data-model-class="modal-wide" title="Edit {{system_or_process_capitalized}}" rel="tooltip" data-placement="top">
               <i class="grcicon-edit-grey"></i>
@@ -18,7 +18,7 @@
         </div>
         <div class="span6">
           <span class="pbc-counter {{^object_people.length}} empty{{/object_people.length}}">
-            <i class="grcicon-person"></i>
+            <i class="grcicon-user-black"></i>
             {{object_people.length}}
           </span>
           <span class="pbc-counter {{^object_documents.length}} empty{{/object_documents.length}}">
@@ -65,7 +65,7 @@
                   </div>
                   <div class="span5">
                     <a class="btn btn-mini pull-left add-person" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/people/new" data-target="#ajax-modal-people-new">
-                      <i class="grcicon-add"></i>
+                      <i class="grcicon-add-new-black"></i>
                     </a>
                   </div>
                 </div>

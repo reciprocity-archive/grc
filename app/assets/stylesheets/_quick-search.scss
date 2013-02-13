@@ -18,14 +18,16 @@
   ul.single-row-tabs {
     li {
       .item-title {
-        a {
-          padding: 0;
+        margin-left: 0;
+      }
+      a {
+        padding: 0;
+        border: none;
+        color: $black;
+        &:hover {
+          background: none;
+          @include border-radius(0);
           border: none;
-          &:hover {
-            background: none;
-            @include border-radius(0);
-            border: none;
-          }
         }
       }
     }

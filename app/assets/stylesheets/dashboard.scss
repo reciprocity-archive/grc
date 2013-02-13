@@ -15,29 +15,32 @@
 @import "compass/css3";
 @import "bootstrap-wysihtml5-0.0.2";
 
-@import "redesign-setup";
-@import "redesign-common";
-@import "redesign-layout";
-@import "redesign-widget";
-@import "redesign-tree";
-@import "redesign-header";
-@import "redesign-footer";
-@import "redesign-styleguide";
+@import "setup";
+@import "common";
+@import "layout";
+@import "widget";
+@import "tree";
+@import "header";
+@import "footer";
+@import "styleguide";
 
 // page specific scss
-@import "redesign-reg-mapper";
-@import "redesign-pbc";
+@import "reg-mapper";
+@import "pbc";
 
-@import "redesign-quick-search";
-@import "redesign-modal";
+@import "quick-search";
+@import "modal";
 
-@import "redesign-popover";
+@import "popover";
+@import "login";
 
 @import "icons";
 
 
-@import "redesign-responsive";
-@import "redesign-js-helpers";
+@import "responsive";
+@import "js-helpers";
+
+@import "import-export";
 /*
 
 // editable styles start here

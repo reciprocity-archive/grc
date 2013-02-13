@@ -12,7 +12,7 @@
  *= require mustache_helper
  *= require_tree ./apps
  *= require_self
- *= require jquery.remotipart
+ *= require jquery.remotipart-patched
  *= require d3.v2
  *= require related
  *= require related_graph
@@ -20,6 +20,18 @@
 
 // Initialize delegated event handlers
 jQuery(function($) {
+
+  window.calculate_spinner_z_index = function() {
+      var zindex = 0;
+      $(this).parents().each(function() {
+        var z;
+        if(z = parseInt($(this).css("z-index"))) {
+          zindex = z;
+          return false;
+        }
+      });
+      return zindex + 10;
+    } 
 
   // put the related widget on the related element.
   $("#related").cms_controllers_related({});
@@ -30,7 +42,7 @@ jQuery(function($) {
     $(this).html(spinner.el);
     // Scroll up so spinner doesn't get pushed out of visibility
     $(this).scrollTop(0);
-    $(spinner.el).css({ width: '100px', height: '100px', left: '50px', top: '50px' });
+    $(spinner.el).css({ width: '100px', height: '100px', left: '50px', top: '50px', zIndex : calculate_spinner_z_index});
   });
 
   // Before submitting, remove any disabled form elements
@@ -118,7 +130,7 @@ jQuery(function($) {
         $(pane).html(spinner.el);
         // Scroll up so spinner doesn't get pushed out of visibility
         $(pane).scrollTop(0);
-        $(spinner.el).css({ width: '100px', height: '100px', left: '50px', top: '50px' });
+        $(spinner.el).css({ width: '100px', height: '100px', left: '50px', top: '50px', zIndex : calculate_spinner_z_index });
       }
 
       $(pane).load(href, function(data, status, xhr) {
@@ -145,9 +157,7 @@ jQuery(function($) {
     $(e.target).find(".modal-body .source").html(
           $(new Spinner().spin().el)
             .css({
-              width: '100px', height: '100px',
-              left: '50px', top: '50px'
-            })
+              width: '100px', height: '100px', zIndex : calculate_spinner_z_index })
       )
   });
 
@@ -337,6 +347,19 @@ jQuery(function($) {
   $('body').on('ajax:success', 'form.import', function(e, data, status, xhr) {
     if (xhr.getResponseHeader('Content-Type') == 'application/json') {
       window.location.assign($.parseJSON(data).location);
+    }
+  });
+});
+
+jQuery(function($) {
+  $('body').on('change', 'form.import input#upload', function(e) {
+    var $this = $(this)
+      , value = $this.val()
+      ;
+
+    if ($this.data('last-value') != value) {
+      $this.closest('form').find('#results-container').empty();
+      $this.data('last-value', value);
     }
   });
 });

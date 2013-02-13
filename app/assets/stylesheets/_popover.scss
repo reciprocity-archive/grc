@@ -78,6 +78,16 @@
       label {
         font-weight: bold;
       }
+      .rtf {
+        ul {
+          @include reset-list();
+          margin:8px 0 10px 25px;
+          li {
+            padding-bottom: 0;
+            list-style-type: disc;
+          }
+        }
+      }
       ul {
         @include reset-list();
         li {

@@ -5,7 +5,7 @@ if File.exist? 'Gemfile.local'
   instance_eval(Bundler.read_file('Gemfile.local'), 'Gemfile.local', 1)
 end
 
-RAILS_VERSION = '= 3.2.11'
+RAILS_VERSION = '= 3.2.12'
 
 # Fulltext search
 gem 'thinking-sphinx', '~> 2.0.14'
@@ -53,7 +53,7 @@ gem 'encrypted-cookie-store'
 gem 'strict-forgery-protection'
 gem 'authlogic'
 gem 'builder'
-gem 'json'
+gem 'json', '~> 1.7.7'
 
 gem 'acl9'
 

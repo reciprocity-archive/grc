@@ -1,0 +1,24 @@
+@media (min-width: 1600px) {
+
+  .header-bar .menu li.screen {
+    display:block;
+  }
+
+}
+
+@media (max-width: 767px) {
+  .header-bar {
+    .menu {
+      li.black-link {
+        a {
+          i{
+            margin-right: 0;
+          }
+          span {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}

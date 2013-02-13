@@ -140,10 +140,10 @@ h4 {
 // Date input field - To see date icon just add class .date to input field
 input.date {
   padding-left: 26px;
-  @include background-size(160px 160px);
+  @include background-size(296px 296px);
   background-image: url("/images/grcicons/icons.png");
   background-repeat: no-repeat;
-  background-position: 4px -123px;
+  background-position: -4px -244px;
 }
 
 input.input-block-level {
@@ -170,10 +170,11 @@ input.input-block-level {
   .ui-resizable-handle {
     height:12px;
     border-top:1px solid darken($lightGray,5%);
-    @include new-icons();
     background-color: lighten($lightGray,5%);
     background-repeat:no-repeat;
-    background-position:50% -101px;
+    background-image: url("/images/grcicons/icons.png");
+    @include background-size(296px 296px);
+    background-position:50% -157px;
     @include opacity(0.8);
   }
 }

@@ -1,86 +1,96 @@
 // defaults
-
+  
   $default-border-radius: 4px;
-  $gradientColor:linear-gradient(top, #ffffff, #eeeeee);
+  $topBorderRadius: 4px 4px 0 0;
+  $bottomBorderRadius: 0 0 4px 4px;
 
-// variables
+// colors
 
-  $linkColor : #43c2c7;
-  $textColor: #666;
-  $failureBgndColor: #FFC8C8;
-  $failureColor: #B94A48;
-  $failureBorderColor: #B94A48;
-  $successBgndColor: #EAFFE6;
-  $borderDefault: #e1e1e1;
-  $borderDark: #999;
-  $borderDefaultHover: #3badb3;
-  $auditBgndColor:#c9f4f9;
-  $errorColor:#ee0000;
-  $disabledTextColor:#aaa;
+  // widget
+    $widgetBorder: #ccc;
+    $widgetHeader: #ccc;
+    $widgetTitle: #666;
+    
+      // widget info
+      $infoWidgetHeader: #111;
+      
 
-  //The first font is loaded from Google Web Fonts inside layouts/dashboard.haml
-  //Titillium+Web'
-  $font-family: Arial, Helvetica, Tahoma, Verdana, sans-serif;
+  // texts
 
-  $darkGray: #666;
-  $lightGray: #ccc;
-  $mediumGray: #999;
-  $lightestGray: #f3f3f3;
+    $text:#666;
+    $error:#e00;
+
+  $headerBgnd: #3f4145;
+  $menuLink: #d7dce8;
+  $screenBgnd: #323438;
+  $link: #369;
+  $headerTitle: #444;
+  $demoHide: #f99c18;
+  $demoShow: #55ab55;
+  $widgetHeaderBgnd: #efefef;
+  $dropPlaceholder: #ccc;
+  $subTitle: #111;
+  $widgetFooteBgnd: #e1e1e1;
+  $risk: #ec9923;
+  $riskActive: #a46203;
+  $gov: #44aac8;
+  $govActive: #026b8a;
+  $addBtn: #5ab45a;
+  $addBtnBorder: #399a39;
+  $sidenavBorder: #e5e5e5;
+  $sidenavHover: #f5f5f5;
+  $responsTitle: #333;
+  
   $white: #fff;
   $black: #000;
-  $red: #ff0000;
-  $green:#5aa026;
-  $orange: #f60;
+  $gray: #999;
+  $darkGray: #7c7c7c;
+  $lightGray: #eee;
+  $red: #ce3e3e;
+  $lightRed: #ff9d9d;
+  $footerBorder: #ddd;
+  $topBarSearchText: #bbbdc1;
+  $topBarSearchBorder: #282a2c;
+  $topBarSearchBgnd: #6a6b6d;
+  $green: #1d8d15;
+  $modalHeader: #0071cc;
+  $modalHeaderBorder: #074fb2;
+  $modalHeaderShadow: #9ac5ff;
+  
+  $popOverHeaderBgnd: #f7f7f7;
+  $popOverHeaderBorder: #ebebeb;
+  $popOverBorder: #b0b0b0;
 
-// widgets
+// mixins
 
-  // this colors affect all elements that define G or R or C - gradients, borders.
-  // changes should be made only here
-
-  $widgetBorder:1px solid $lightGray;
-  $widgetInnerBorder: 1px solid $lightestGray;
-  $bgndWidget: $white;
-  $bgndDefault: $mediumGray;
-  $bgndGovernance: #7A99C1;
-  $bgndRisk: #d34827;
-  $bgndCompliance: #008d00;
-  $bgndProduct: #e6e0f6;
-  $bgndSystem: #d5eff3;
-  $bgndControl: #ece0fc;
-  $bgndProcess: #cfebf9;
-
-  $bgndError: #f9cfcf;
-
-
-// SASS mixins
-
-// placeholders
-
-  // Lighten placeholder text from bootstrap defaults
-  // These rules must be separate, see http://stackoverflow.com/questions/2610497/change-an-inputs-html5-placeholder-color-with-css
-
-  ::-webkit-input-placeholder {
-    color: $lightGray;
+  @mixin reset-list() {
+    margin:0;
+    padding:0;
+    list-style:none;
+  }
+  
+  @mixin outline-fix() {
+    outline:0;
   }
 
-  :-moz-placeholder {
-    color: $lightGray;
+  @mixin oneline() {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width:100%;
   }
 
-// clearfix
-
-.clearfix:after {
-  content: ".";
-  display: block;
-  height: 0;
-  clear: both;
-  visibility: hidden;
-}
-
-// one place to create and define whole 'slot' from one color definition
-
-@mixin border-and-gradient($color) {
-  @include background-image(linear-gradient(top, lighten($color, 1%), darken($color, 1%)));
-  border:1px solid darken($color,5%);
-  color:darken($color,50%);
-}
+  @mixin row-fluid-fix() {
+    [class*="span"] {
+      padding-bottom:0;
+      margin-bottom:0;
+      min-height:0;
+    }
+  }
+  
+  @mixin input-block-level() {
+    display: block;
+    width: 100%;
+    @include box-sizing(border-box);
+    min-height: 28px;
+  }
