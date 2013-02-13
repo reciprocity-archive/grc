@@ -680,3 +680,15 @@ jQuery(function($) {
     }
   });
 });
+
+jQuery(function($) {
+  $('body').on('click', '.clear-display-settings', function(e) {
+    CMS.Models.DisplayPrefs.findAll().done(function(data) {
+      var destroys = [];
+      can.each(data, function(d) {
+        destroys.push(d.destroy());
+      });
+      $.when.apply($, destroys).done($.proxy(window.location, 'reload'));
+    });
+  });
+});
