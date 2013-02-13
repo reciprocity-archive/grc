@@ -12,7 +12,9 @@
       %a{ :href => flow_program_path(program), :data => { :'original-title' => 'Program Information', :'content' => render(:template => 'programs/tooltip', :locals => { :program => program }), :placement => 'right', :'popover-trigger' => 'sticky-hover'}, :style => "display:block;" }
         .row-fluid
           .span12
-            %strong.oneline{:style=>"color:green;"}
+            %strong.oneline{:style => "green"}
+              .grcobject.governance
+                %i.grcicon-program
               =program.title
 
   -@programs.reject {|p|p.company_controls?}.each do |program|
@@ -22,6 +24,8 @@
         .row-fluid
           .span4
             %strong.oneline
+              .grcobject.governance
+                %i.grcicon-regulation
               =program.title
           -if stats[:sections_count] > 0
             .span2.tiny-label
