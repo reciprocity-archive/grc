@@ -25,7 +25,7 @@
   %body{ :class => "#{has_feature?(:BETA) ? 'BETA' : ''}", :'data-target' => '.bs-docs-sidebar', :'data-spy' => 'scroll'}
 
     %header.header.main
-      .header-bar
+      .header-bar{:class => "#{has_feature?(:BETA) ? 'demo-header-bar' : ''}"}
         .container-fluid
           .row-fluid
             .span12

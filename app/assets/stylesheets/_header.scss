@@ -8,6 +8,33 @@
   top: 0px;
   left: 0;
   right: 0;
+  &.demo-header-bar {
+    background: darken($orange, 15%);
+    .menu {
+      li {
+        &.black-link {
+          a {
+            &:hover {
+              background: darken($orange, 25%);
+            }
+          }
+        }
+        &.active {
+          a {
+            &:hover {
+              background: $white;
+              color:$black;
+            }
+          }
+        }
+        &.dropdown-black {
+          .dropdown-menu {
+            background: darken($orange, 25%);
+          }
+        }
+      }
+    }
+  }
   a {
     color:$white;
     text-decoration:none;
