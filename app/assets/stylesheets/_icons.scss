@@ -331,6 +331,7 @@
 // diferentiation of objects by icons
 .grcobject {
   display: inline-block;
+  margin-right:2px;
   width: 24px;
   height: 24px;
   background-image: url("/images/grcicons/objects.png");
@@ -354,6 +355,17 @@
     margin-top:4px;
     margin-left:4px;
   }
-
-
 }
+
+.grcicon-program { background-position:-104px -128px; }
+.grcicon-program-black { background-position:-104px -104px; }
+.grcicon-contract { background-position:-128px -128px; }
+.grcicon-contract-black { background-position:-128px -104px; }
+.grcicon-policy { background-position:-152px -128px; }
+.grcicon-policy-black { background-position:-152px -104px; }
+.grcicon-regulation { background-position:-176px -128px; }
+.grcicon-regulation-black { background-position:-176px -104px; }
+.grcicon-section { background-position:-200px -128px; }
+.grcicon-section-black { background-position:-200px -104px; }
+.grcicon-clause { background-position:-200px -128px; }
+.grcicon-clause-black { background-position:-200px -104px; }

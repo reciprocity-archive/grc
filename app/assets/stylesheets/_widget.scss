@@ -19,7 +19,6 @@
       line-height: 24px;
       color: $widgetTitle;
       margin-bottom:0;
-      @include text-shadow(0 1px 1px $white);
       @include oneline();
     }
     .btn-mini {
@@ -50,7 +49,7 @@
   }
   .filter {
     padding:6px;
-    background: $widgetFooteBgnd;
+    background: $filterBgnd;
     .form-inline {
       margin-bottom: 0;
     }
@@ -179,7 +178,7 @@
       }
     }
   }
-  &.secondary {
+/*  &.secondary {
     background:$white;
     border-color:$lightGray;
     .header {
@@ -192,6 +191,7 @@
       }
     }
   }
+*/
   .info-list {
     @include reset-list();
     margin-bottom: 20px;

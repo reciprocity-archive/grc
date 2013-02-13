@@ -1,9 +1,9 @@
 .help
-  -if CMS_CONFIG["ALLOW_HELP_EDIT"]
-    %a.widgetbtn.fltrt{:'data-toggle' => 'collapse', :href => '#helpedit'}
-      %i.grcicon-edit-grey
   -if @help && !@help.content.blank?
     -content_for :modal_title do
+      -if CMS_CONFIG["ALLOW_HELP_EDIT"]
+        %a.btn.btn-mini.pull-right{:'data-toggle' => 'collapse', :href => '#helpedit', :title => "Edit Help", :rel => "tooltip", :'data-placement' => "left", :style => "margin-right:6px;"}
+          %i.grcicon-edit-grey  
       -if @help.title.present?
         =@help.title
       -else
@@ -13,6 +13,9 @@
       =display_as_html @help.content
   -else
     -content_for :modal_title do
+      -if CMS_CONFIG["ALLOW_HELP_EDIT"]
+        %a.btn.btn-mini.pull-right{:'data-toggle' => 'collapse', :href => '#helpedit', :title => "Edit Help", :rel => "tooltip", :'data-placement' => "left", :style => "margin-right:6px;"}
+          %i.grcicon-edit-grey
       GRC Help
     .help-content
       %p This content is coming soon.  We are working on it.
