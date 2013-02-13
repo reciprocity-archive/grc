@@ -73,3 +73,16 @@
 .real-example {
   margin-bottom: 20px;
 }
+
+.objecticons {
+  td, th {
+    padding:10px;
+    margin:4px;
+  }
+  th {
+    text-align:left;
+  }
+  td {
+    border:1px solid #ccc;
+  }
+}
