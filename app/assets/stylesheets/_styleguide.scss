@@ -89,3 +89,19 @@
     border:1px solid #ccc;
   }
 }
+
+.nesting-example {
+  .row-fluid {
+    text-align: center;
+    [class*="span"] {
+      background: $lightGray;
+      padding: 10px 0;
+      [class*="span"] {
+        background: $widgetBorder;
+        [class*="span"] {
+          background: $gray;
+        }
+      }
+    }
+  }
+}

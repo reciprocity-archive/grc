@@ -682,7 +682,62 @@
           %h2
             Structure nesting
         %section.content
-          
+          .nesting-example.real-example
+            .row-fluid
+              .span12
+                Fluid 12
+                .row-fluid
+                  .span6
+                    Fluid 6
+                    .row-fluid
+                      .span3
+                        Fluid 3
+                      .span9
+                        Fluid 9
+                  .span6
+                    Fluid 6
+                    .row-fluid
+                      .span3
+                        Fluid 3
+                      .span3
+                        Fluid 3
+                      .span3
+                        Fluid 3
+                      .span3
+                        Fluid 3
+          %p
+            %strong
+              Example:
+              
+          %textarea
+            :escaped
+              .row-fluid
+                .span12
+                  Fluid 12
+                  .row-fluid
+                    .span6
+                      Fluid 6
+                      .row-fluid
+                        .span3
+                          Fluid 3
+                        .span9
+                          Fluid 9
+                    .span6
+                      Fluid 6
+                      .row-fluid
+                        .span3
+                          Fluid 3
+                        .span3
+                          Fluid 3
+                        .span3
+                          Fluid 3
+                        .span3
+                          Fluid 3
+          %p
+            <span class="label label-info">Note!</span>
+            This is how nesting work. If you forgot to implement something or you put some element into wrong place it will not work properly.
+            Each nested level of columns should add up to 12 columns. This is because the fluid grid uses percentages, not pixels, for setting widths.
+            
 .container-fluid
   .row-fluid
     %h2{:class =>'pull-left'}
