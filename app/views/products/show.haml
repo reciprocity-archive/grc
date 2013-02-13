@@ -10,9 +10,9 @@
       #{model_title}
     %li= instance.slug
     
-  %h1
-    %span
-      #{model_title}:
+  %h1.business
+    .grcobject.business{:rel => "tooltip", :'data-placement'=>"bottom", :title => model_title}
+      %i.grcicon-product
     =instance.title
 
 -content_for :page_help, model_name

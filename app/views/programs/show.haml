@@ -6,8 +6,8 @@
     %li=link_to 'PROGRAMS', programs_dash_path
     %li=@program.title
     
-  %h1
-    .grcobject.governance{:rel => "tooltip", :'data-placement'=>"bottom", :title => "Regulation"}
+  %h1.governance
+    .grcobject.governance{:rel => "tooltip", :'data-placement'=>"bottom", :title => "Program"}
       %i.grcicon-program
     =@program.title
 

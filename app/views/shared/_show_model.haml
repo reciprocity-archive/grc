@@ -10,11 +10,20 @@
       #{model_title}
     %li= instance.slug
     
-  %h1
-    %span
-      #{model_title}:
-    =instance.slug
-    \: 
+  %h1.business
+    .grcobject.business{:rel => "tooltip", :'data-placement'=>"bottom", :title => model_title}
+      -if model_title == "Org Group"
+        %i.grcicon-orggroup
+      -elsif model_title == "Market"
+        %i.grcicon-market
+      -elsif model_title == "Facility"
+        %i.grcicon-facility
+      -elsif model_title == "Project"
+        %i.grcicon-project
+      -elsif model_title == "Data Asset"
+        %i.grcicon-dataasset
+      -else
+        &nbsp;
     =instance.title
 
 -content_for :page_help, model_name
