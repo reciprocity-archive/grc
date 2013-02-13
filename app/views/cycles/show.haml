@@ -43,6 +43,10 @@
       =render :partial => 'cycles/info',
               :layout => 'layouts/widget_box',
               :locals => { :cycle => @cycle, :widget_class => 'secondary' }
+              
+      =render :partial => 'cycles/more_info',
+              :layout => 'layouts/widget_box',
+              :locals => { :cycle => @cycle, :widget_class => 'related' }
                 
       =render :partial => 'cycles/pbclist',
               :layout => 'layouts/widget_box',

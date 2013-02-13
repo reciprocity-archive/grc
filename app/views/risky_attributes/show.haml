@@ -44,3 +44,7 @@
       =render :partial => "info",
               :layout => 'layouts/widget_box',
               :locals => { model_name.to_sym => instance, :widget_class => 'secondary' }
+              
+      =render :partial => "more_info",
+              :layout => 'layouts/widget_box',
+              :locals => { model_name.to_sym => instance, :widget_class => 'related' }

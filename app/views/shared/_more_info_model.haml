@@ -1,0 +1,18 @@
+-model_name = controller_name.singularize
+-model_title = model_name.titleize
+-instance = instance_variable_get("@" + model_name)
+
+-content_for :widget_title do
+  More Info
+
+-content_for :widget_help, "#{model_name}_more_info"
+
+-content_for :widget_id, "#{model_name}_more_info_widget"
+
+%ul.tree
+  %li.category
+    =render :partial => 'documents/object_list',
+            :locals  => { :object => instance }
+  %li.category
+    =render :partial => 'people/object_list',
+            :locals  => { :object => instance }

@@ -1,5 +1,5 @@
 -content_for :widget_title do
-  Product Information
+  Product Info
 
 -content_for :widget_help, 'product_info'
 
@@ -57,15 +57,6 @@
       Stop Date
     %span
       =product.stop_date && product.stop_date.strftime("%m/%d/%y")
-      
-
-%ul.tree
-  %li.category
-    =render :partial => 'documents/object_list',
-            :locals  => { :object => product }
-  %li.category
-    =render :partial => 'people/object_list',
-            :locals  => { :object => product }
 
 %section.footer
   .row-fluid

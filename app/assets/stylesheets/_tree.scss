@@ -194,6 +194,11 @@ ul.tree-structure {
     }
   }
   &.simple {
+    .code {
+      span {
+        display: block;
+      }
+    }
     li {
       padding:4px 0;
       &:hover {

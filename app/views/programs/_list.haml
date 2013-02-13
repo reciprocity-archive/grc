@@ -12,8 +12,8 @@
       %a{ :href => flow_program_path(program), :data => { :'original-title' => 'Program Information', :'content' => render(:template => 'programs/tooltip', :locals => { :program => program }), :placement => 'right', :'popover-trigger' => 'sticky-hover'}, :style => "display:block;" }
         .row-fluid
           .span12
-            %p.code.oneline
-              %strong
+            %p.code
+              %span.oneline
                 =program.title
 
   -@programs.reject {|p|p.company_controls?}.each do |program|

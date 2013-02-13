@@ -1,0 +1,14 @@
+-content_for :widget_title do
+  More Info
+
+-content_for :widget_id, "cycle_more_info_widget"
+
+-content_for :widget_help, 'cycle_more_info'
+
+%ul.tree
+  %li.category
+    =render :partial => 'documents/object_list',
+            :locals  => { :object => cycle }
+  %li.category
+    =render :partial => 'people/object_list',
+            :locals  => { :object => cycle }

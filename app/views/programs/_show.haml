@@ -32,14 +32,6 @@
     %span
       =link_to(program.url,program.url,:target => "_blank",:class => "inner-element")
 
-%ul.tree
-  %li.category
-    =render :partial => 'documents/object_list',
-            :locals  => { :object => program }
-  %li.category
-    =render :partial => 'people/object_list',
-            :locals  => { :object => program }
-
 %section.footer
   .row-fluid
     .span6
