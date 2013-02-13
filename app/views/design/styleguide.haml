@@ -41,6 +41,10 @@
           %a{:href => "#list"}
             %i.icon-chevron-right
             List
+        %li
+          %a{:href => "#nesting"}
+            %i.icon-chevron-right
+            Nesting
 
     
     .span9.styleguide-content
@@ -673,8 +677,12 @@
                                     %span.title
                                       No Title or Description (shouldn't happen)
 
-
-        
+      %section#nesting.widget
+        %section.header
+          %h2
+            Structure nesting
+        %section.content
+          
 .container-fluid
   .row-fluid
     %h2{:class =>'pull-left'}
