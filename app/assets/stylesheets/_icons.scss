@@ -326,3 +326,34 @@
     }
   }
 }
+
+
+// diferentiation of objects by icons
+.grcobject {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-image: url("/images/grcicons/objects.png");
+  background-repeat: no-repeat;
+  background-position: -2000px -2000px; // blank default state 
+  @include background-size(144px 144px);
+  line-height:24px;
+  &.governance {
+    background-position: 0 0;
+  }
+  &.compliance {
+    background-position: 0 -36px;
+  }
+  &.business {
+    background-position: 0 -72px;
+  }
+  &.risk {
+    background-position: 0 -108px;
+  }
+  [class^="grcicon-"] {
+    margin-top:4px;
+    margin-left:4px;
+  }
+
+
+}
