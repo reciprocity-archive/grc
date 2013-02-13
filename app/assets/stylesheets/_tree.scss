@@ -200,9 +200,9 @@ ul.tree-structure {
       @include border-radius(0);
       border: none;
       padding: 1px 0;
-      span {
-        display: block;
-      }
+    }
+    strong {
+      display: block;
     }
     li {
       padding:4px 0;
