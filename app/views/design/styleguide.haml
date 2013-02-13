@@ -30,10 +30,13 @@
             %i.icon-chevron-right
             Breadcrumbs
         %li
+          %a{:href => "#objects"}
+            %i.icon-chevron-right
+            Objects
+        %li
           %a{:href => "#icons"}
             %i.icon-chevron-right
             Icons
-
         %li
           %a{:href => "#list"}
             %i.icon-chevron-right
@@ -87,6 +90,21 @@
           %p
             <span class="label label-info">Note!</span>
             Do not put class on last %li element. It is solved from CSS.
+
+      %section#objects.widget
+        %section.header
+          %h2
+            Objects
+        %section.content
+          .grcobject.governance
+            %i.grcicon-imp-exp-white
+          .grcobject.risk
+            %i.grcicon-imp-exp-white
+          .grcobject.business
+            %i.grcicon-imp-exp-white
+          .grcobject.compliance
+            %i.grcicon-imp-exp-white
+          Some text next to it
             
       %section#icons.widget
         %section.header
@@ -423,334 +441,6 @@
             
 
 
-      %section#list.widget
-        %section.header
-          %h2
-            Object Tree List
-        %section.content
-          
-          %ul.tree
-            %li.category
-              %h3
-                Category title
-              %section.content
-                %ul.tree
-                  %li.main
-                    .item-identifier
-                      .item-title.active
-                        .row-fluid
-                          .span12
-                            .showhide
-                            %span.key
-                              CTR-001
-                            %span.addition-info
-                              Control
-                      .item-actions
-                        %a{:href => "#", :class => "btn btn-mini"}
-                          %i.grcicon-goto
-                        %a{:href => "#", :class => "btn btn-mini"}
-                          %i.grcicon-link
-                    .item-content
-                      %ul.elements
-                        %li
-                          .item-identifier
-                            .item-title.active
-                              .row-fluid
-                                .span12
-                                  .showhide
-                                  %span.key
-                                    AAA-012
-                                  %span.addition-info
-                                    Control
-                            .item-actions
-                              %a{:href => "#", :class => "btn btn-mini"}
-                                %i.grcicon-goto
-                              %a{:href => "#", :class => "btn btn-mini"}
-                                %i.grcicon-link
-                          .item-content
-                            %ul.elements
-                              %li
-                                AAA
-                              %li
-                                BBB
-                                %ul.elements
-                                  %li
-                                    AAA
-                                  %li
-                                    BBB
-                                  %li
-                                    CCC
-                                    %ul.elements
-                                      %li
-                                        AAA
-                                      %li
-                                        BBB
-                                      %li
-                                        CCC
-                              %li
-                                CCC
-                        %li
-                          .item-identifier
-                            .item-title.active
-                              .row-fluid
-                                .span12
-                                  .showhide
-                                  %span.key
-                                    BBB-612
-                                  %span.addition-info
-                                    Control
-                            .item-actions
-                              %a{:href => "#", :class => "btn btn-mini"}
-                                %i.grcicon-goto
-                              %a{:href => "#", :class => "btn btn-mini"}
-                                %i.grcicon-link
-                          .item-content
-                            %ul.elements
-                              %li
-                                AAA
-                              %li
-                                BBB
-                                %ul.elements
-                                  %li
-                                    AAA
-                                  %li
-                                    BBB
-                                  %li
-                                    CCC
-                                    %ul.elements
-                                      %li
-                                        AAA
-                                      %li
-                                        BBB
-                                      %li
-                                        CCC
-                        %li
-                          .item-identifier
-                            .item-title.active
-                              .row-fluid
-                                .span12
-                                  .showhide
-                                  %span.key
-                                    CCC-223
-                                  %span.addition-info
-                                    Control
-                            .item-actions
-                              %a{:href => "#", :class => "btn btn-mini"}
-                                %i.grcicon-goto
-                              %a{:href => "#", :class => "btn btn-mini"}
-                                %i.grcicon-link
-                          .item-content
-                            %ul.elements
-                              %li
-                                AAA
-                              %li
-                                BBB
-                                %ul.elements
-                                  %li
-                                    AAA
-                                  %li
-                                    BBB
-                                  %li
-                                    CCC
-                                    %ul.elements
-                                      %li
-                                        AAA
-                                      %li
-                                        BBB
-                                      %li
-                                        CCC
-                      
-                  %li.main
-                    .item-identifier
-                      .item-title.active
-                        .row-fluid
-                          .span12
-                            .showhide
-                            %span.key
-                              CTR-023
-                            %span.addition-info
-                              Control 2
-                      .item-actions
-                        %a{:href => "#", :class => "btn btn-mini"}
-                          %i.grcicon-goto
-                        %a{:href => "#", :class => "btn btn-mini"}
-                          %i.grcicon-link
-                    .item-content
-                      %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                  %li.main
-                    .item-identifier
-                      .item-title.active
-                        .row-fluid
-                          .span12
-                            .showhide
-                            %span.key
-                              PRC-031
-                            %span.addition-info
-                              Process of all Processes
-                      .item-actions
-                        %a{:href => "#", :class => "btn btn-mini"}
-                          %i.grcicon-goto
-                        %a{:href => "#", :class => "btn btn-mini"}
-                          %i.grcicon-link
-                    .item-content
-                      %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-              %li.category
-                %h3
-                  Category title
-                %section.content
-                  %ul.tree
-                    %li.main
-                      .item-identifier
-                        .item-title.active
-                          .row-fluid
-                            .span12
-                              .showhide
-                              %span.key
-                                CTR-001
-                              %span.addition-info
-                                Control
-                        .item-actions
-                          %a{:href => "#", :class => "btn btn-mini"}
-                            %i.grcicon-goto
-                          %a{:href => "#", :class => "btn btn-mini"}
-                            %i.grcicon-link
-                      .item-content
-                        %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    %li.main
-                      .item-identifier
-                        .item-title.active
-                          .row-fluid
-                            .span12
-                              .showhide
-                              %span.key
-                                CTR-023
-                              %span.addition-info
-                                Control 2
-                        .item-actions
-                          %a{:href => "#", :class => "btn btn-mini"}
-                            %i.grcicon-goto
-                          %a{:href => "#", :class => "btn btn-mini"}
-                            %i.grcicon-link
-                      .item-content
-                        %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    %li.main
-                      .item-identifier
-                        .item-title.active
-                          .row-fluid
-                            .span12
-                              .showhide
-                              %span.key
-                                PRC-031
-                              %span.addition-info
-                                Process of all Processes
-                        .item-actions
-                          %a{:href => "#", :class => "btn btn-mini"}
-                            %i.grcicon-goto
-                          %a{:href => "#", :class => "btn btn-mini"}
-                            %i.grcicon-link
-                      .item-content
-                        %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      
-
-          %ul.tree
-            %li.main
-              .item-identifier
-                .item-title.active
-                  .row-fluid
-                    .span12
-                      .showhide
-                      %span.key
-                        CTR-001
-                      %span.addition-info
-                        Control
-                .item-actions
-                  %a{:href => "#", :class => "btn btn-mini"}
-                    %i.grcicon-goto
-                  %a{:href => "#", :class => "btn btn-mini"}
-                    %i.grcicon-link
-              .item-content
-                %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            %li.main
-              .item-identifier
-                .item-title.active
-                  .row-fluid
-                    .span12
-                      .showhide
-                      %span.key
-                        CTR-023
-                      %span.addition-info
-                        Control 2
-                .item-actions
-                  %a{:href => "#", :class => "btn btn-mini"}
-                    %i.grcicon-goto
-                  %a{:href => "#", :class => "btn btn-mini"}
-                    %i.grcicon-link
-              .item-content
-                %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            %li.main
-              .item-identifier
-                .item-title.active
-                  .row-fluid
-                    .span12
-                      .showhide
-                      %span.key
-                        PRC-031
-                      %span.addition-info
-                        Process of all Processes
-                .item-actions
-                  %a{:href => "#", :class => "btn btn-mini"}
-                    %i.grcicon-goto
-                  %a{:href => "#", :class => "btn btn-mini"}
-                    %i.grcicon-link
-              .item-content
-                %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-
-          
-          -#%ul.tree
-            %li.main
-              .showhide
-              .tree-content
-                .row-fluid.info-primary
-                  .span12
-                    .buttons
-                      %a{:class => "btn btn-mini", :href => "#", :rel => "tooltip", :title => "Edit Program"}
-                        %i.grcicon-edit-new
-                      %a{:class => "btn btn-mini", :href => "#", :rel => "tooltip", :title => "Link Sections"}
-                        %i.grcicon-link
-                    %span.code PROD-001
-                    %span.info Samsung Galaxy III
-
-            %li.main
-              .showhide.active
-              .tree-content
-                .row-fluid.info-primary
-                  .span12
-                    .buttons
-                      %a{:class => "btn btn-mini", :href => "#", :rel => "tooltip", :title => "Edit Program"}
-                        %i.grcicon-edit-new
-                      %a{:class => "btn btn-mini", :href => "#", :rel => "tooltip", :title => "Link Sections"}
-                        %i.grcicon-link
-                    %span.code PROD-331
-                    %span.info iPhone5
-                .row-fluid
-                  .span8
-                    %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                  
-
-            %li.main
-              .showhide
-              .tree-content
-                .row-fluid.info-primary
-                  .span12
-                    .buttons
-                      %a{:class => "btn btn-mini", :href => "#", :rel => "tooltip", :title => "Edit Program"}
-                        %i.grcicon-edit-new
-                      %a{:class => "btn btn-mini", :href => "#", :rel => "tooltip", :title => "Link Sections"}
-                        %i.grcicon-link
-                    %span.code PROD-761
-                    %span.info Nokia Lumia 800
         
 .container-fluid
   .row-fluid
