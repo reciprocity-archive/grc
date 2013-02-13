@@ -357,6 +357,7 @@
   }
 }
 
+//governance
 .grcicon-program { background-position:-104px -128px; }
 .grcicon-program-black { background-position:-104px -104px; }
 .grcicon-contract { background-position:-128px -128px; }
@@ -369,3 +370,28 @@
 .grcicon-section-black { background-position:-200px -104px; }
 .grcicon-clause { background-position:-200px -128px; }
 .grcicon-clause-black { background-position:-200px -104px; }
+// business
+.grcicon-facility { background-position:-224px -104px; @include opacity(0.7) }
+.grcicon-facility-white { background-position:-224px -128px; }
+.grcicon-market { background-position:-248px -104px; @include opacity(0.7) }
+.grcicon-market-white { background-position:-248px -128px; }
+.grcicon-product { background-position:-272px -104px; @include opacity(0.7) }
+.grcicon-product-white { background-position:-272px -128px; }
+.grcicon-project { background-position:-56px -224px; @include opacity(0.7) }
+.grcicon-project-white { background-position:-56px -248px; }
+.grcicon-orggroup { background-position:-80px -224px; @include opacity(0.7) }
+.grcicon-orggroup-white { background-position:-80px -248px; }
+.grcicon-dataasset { background-position:-176px -224px; @include opacity(0.7) }
+.grcicon-dataasset-white { background-position:-176px -248px; }
+//compliance
+.grcicon-system { background-position:-128px -248px }
+.grcicon-system-black { background-position:-128px -224px; }
+.grcicon-businessprocess { background-position:-104px -248px }
+.grcicon-businessprocess-black { background-position:-104px -224px; }
+.grcicon-control { background-position:-152px -248px }
+.grcicon-control-black { background-position:-152px -224px; }
+// risk
+.grcicon-risk { background-position:-200px -248px }
+.grcicon-risk-black { background-position:-200px -224px; }
+.grcicon-attribute { background-position:-224px -248px }
+.grcicon-attribute-black { background-position:-224px -224px; }
