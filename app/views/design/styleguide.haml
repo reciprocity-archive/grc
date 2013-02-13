@@ -45,6 +45,14 @@
           %a{:href => "#nesting"}
             %i.icon-chevron-right
             Nesting
+        %li
+          %a{:href => "#buttons"}
+            %i.icon-chevron-right
+            Buttons
+        %li
+          %a{:href => "#helper"}
+            %i.icon-chevron-right
+            Helper classes
 
     
     .span9.styleguide-content
@@ -737,7 +745,120 @@
             <span class="label label-info">Note!</span>
             This is how nesting work. If you forgot to implement something or you put some element into wrong place it will not work properly.
             Each nested level of columns should add up to 12 columns. This is because the fluid grid uses percentages, not pixels, for setting widths.
-            
+      
+      %section#buttons.widget
+        %section.header
+          %h2
+            Buttons
+        %section.content
+          %p
+            %strong
+              Button styles:
+          .real-example
+            .btn
+              Default
+            .btn.btn-primary
+              Primary
+            .btn.btn-info
+              Info
+            .btn.btn-add
+              Add
+            .btn.btn-warning
+              Warning
+            .btn.btn-danger
+              Danger
+            .btn.btn-inverse
+              Inverse
+          %p
+            %strong
+              Button sizes:
+          .real-example
+            .btn.btn-large.disabled
+              Large Button
+            .btn
+              Default Button
+            .btn.btn-small
+              Small Button
+            .btn.btn-mini
+              Mini Button
+          
+          %p
+            %strong
+              Example:
+                  
+          %textarea
+            :escaped
+              Types:
+              
+              .btn
+                Default
+              .btn.btn-primary
+                Primary
+              .btn.btn-info
+                Info
+              .btn.btn-add
+                Add
+              .btn.btn-warning
+                Warning
+              .btn.btn-danger
+                Danger
+              .btn.btn-inverse
+                Inverse
+                
+              Sizes:
+              
+              .btn.btn-large.disabled
+                Large Button
+              .btn
+                Default Button
+              .btn.btn-small
+                Small Button
+              .btn.btn-mini
+                Mini Button
+          %p
+            <span class="label label-info">Note!</span>
+            On Large Button we added class 
+            %strong .disabled 
+            to show disabled state of button.
+      
+      %section#helper.widget
+        %section.header
+          %h2
+            Helper classes
+        %section.content
+          %p
+            %strong .pull-left - 
+            Float an element left
+          %p
+            %strong .pull-right - 
+            Float an element right
+          %p
+            %strong .oneline - 
+            Preventing content to go into multiple rows.
+            <span class="label label-info">Note!</span>
+            That element needs to be block element.
+          %p
+            %strong .input-block-level - 
+            Add this class to input field that needs to have width of his parent.
+          %p
+            %strong .date - 
+            Add this class to input field that represent date field.
+          %p
+            %strong .centered - 
+            This class make text or inline elements centered relative on parent element.
+          %p
+            %strong
+              Example:
+                  
+          %textarea
+            :escaped
+              .pull-left
+              .pull-right
+              .oneline
+              .input-block-level
+              .date
+              .centered
+                  
 .container-fluid
   .row-fluid
     %h2{:class =>'pull-left'}
