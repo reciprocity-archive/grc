@@ -6,10 +6,14 @@
       CONTROLS
     %li=@control.slug
   
-  %h1
-    %span
-      Control:
-    =strip_tags(@control.title)
+  %h1.compliance
+    .grcobject.compliance{:rel => "tooltip", :'data-placement'=>"bottom", :title => "Control"}
+      %i.grcicon-control
+    -if @control.title?
+      =strip_tags(@control.title)
+    -else
+      =@control.slug
+
 
 -content_for :page_help, 'control'
 

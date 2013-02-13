@@ -1,14 +1,19 @@
--@title = "GRC #{@system.is_biz_process ? 'Biz Process' : 'System'}: #{@system.title}"
+-@title = "GRC #{@system.is_biz_process ? 'Business Process' : 'System'}: #{@system.title}"
 
 -content_for :header do
   %ul.breadcrumbs
-    %li=@system.is_biz_process ? 'BIZ PROCESSES' : 'SYSTEMS'
+    %li=@system.is_biz_process ? 'BUSINESS PROCESSES' : 'SYSTEMS'
     %li=@system.slug
-    
-  %h1
-    %span
-      =@system.is_biz_process ? 'Biz Process:' : 'System:'
+
+  %h1.compliance
+    -if @system.is_biz_process
+      .grcobject.compliance{:rel => "tooltip", :'data-placement'=>"bottom", :title => "B. Process"}
+        %i.grcicon-businessprocess
+    -else
+      .grcobject.compliance{:rel => "tooltip", :'data-placement'=>"bottom", :title => "System"}
+        %i.grcicon-system
     =@system.title
+    
 
 -content_for :page_help, 'system'
 

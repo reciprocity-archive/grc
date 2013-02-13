@@ -11,10 +11,8 @@
     %li= instance.slug
     
   %h1
-    %span
-      #{model_title}:
-    =instance.slug
-    \: 
+    .grcobject.risk{:rel => "tooltip", :'data-placement'=>"bottom", :title => "Attribute"}
+      %i.grcicon-attribute
     =instance.title
 
 -content_for :page_help, model_name
