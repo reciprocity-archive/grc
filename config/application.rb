@@ -9,7 +9,7 @@ CMS_CONFIG = {
   "ABOUT_LINK" => "https://code.google.com/p/compliance-management/",
   "SECTION_IMPORT_TEMPLATE" => nil,
   "CONTROL_IMPORT_TEMPLATE" => nil,
-  "ALLOW_HELP_EDIT" => false,
+  "ALLOW_HELP_EDIT" => true,
   "DEFAULT_DOMAIN" => "example.com",
 }
 
