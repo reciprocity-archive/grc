@@ -35,5 +35,9 @@
       =render :partial => 'controls/show',
               :layout => 'layouts/widget_box',
               :locals => { :control => @control, :widget_class => 'secondary' }
+      =render :partial => 'controls/more_info',
+              :layout => 'layouts/widget_box',
+              :locals => { :control => @control, :widget_class => 'related' }
+              
         
               

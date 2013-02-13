@@ -67,16 +67,6 @@
     %span
       =display_as_html system.description
 
-%ul.tree
-  %li.category
-    =render :partial => 'documents/object_list',
-            :locals  => { :object => system }
-            
-  %li.category
-    =render :partial => 'people/object_list',
-            :locals  => { :object => system }
-
-
 %section.footer
   .row-fluid
     .span6

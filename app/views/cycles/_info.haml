@@ -38,14 +38,6 @@
     %span
       =display_as_html cycle.description
 
-%ul.tree
-  %li.category
-    =render :partial => 'documents/object_list',
-            :locals  => { :object => cycle }
-  %li.category
-    =render :partial => 'people/object_list',
-            :locals  => { :object => cycle }
-
 %section.footer
   .row-fluid
     .span6
