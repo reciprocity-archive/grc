@@ -179,7 +179,7 @@
       }
     }
   }
-  &.secondary {
+/*  &.secondary {
     background:$white;
     border-color:$lightGray;
     .header {
@@ -192,6 +192,7 @@
       }
     }
   }
+*/
   .info-list {
     @include reset-list();
     margin-bottom: 20px;

@@ -12,9 +12,8 @@
       %a{ :href => flow_program_path(program), :data => { :'original-title' => 'Program Information', :'content' => render(:template => 'programs/tooltip', :locals => { :program => program }), :placement => 'right', :'popover-trigger' => 'sticky-hover'}, :style => "display:block;" }
         .row-fluid
           .span12
-            %p.code
-              %span.oneline
-                =program.title
+            %strong.oneline{:style=>"color:green;"}
+              =program.title
 
   -@programs.reject {|p|p.company_controls?}.each do |program|
     %li
@@ -22,7 +21,7 @@
       %a{ :href => flow_program_path(program), :data => { :'original-title' => 'Program Information', :'content' => render(:template => 'programs/tooltip', :locals => { :program => program }), :placement => 'right', :'popover-trigger' => 'sticky-hover'}, :style => "display:block;" }
         .row-fluid
           .span4
-            %strong.oneline{:style => "width:100%;display:block"}
+            %strong.oneline
               =program.title
           -if stats[:sections_count] > 0
             .span2.tiny-label
