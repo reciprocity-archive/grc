@@ -32,6 +32,13 @@
       }
     }
   }
+  .tree-structure {
+    &.simple {
+      strong {
+        display: inline;
+      }
+    }
+  }
   .title {
     font-weight: bold;
     padding: 8px 4px 0 16px;
@@ -43,7 +50,7 @@
     padding: 0 10px 0 4px;
     overflow-x: hidden;
     overflow-y: auto;
-    height: 443px;
+    height: 456px;
   }
   .tab-content {
     overflow: hidden;
