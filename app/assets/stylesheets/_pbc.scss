@@ -152,6 +152,10 @@ h4.pbc-title {
   margin-bottom:20px;
   border:1px solid #cdecb4;
   position:relative;
+  .btn-mini {
+    padding-left: 2px;
+    padding-right: 2px;
+  }
   input {
     line-height: 12px;
     height: 12px;
@@ -323,10 +327,6 @@ h4.pbc-title {
       width: auto;
       cursor:pointer;
       margin-bottom: 0;
-    }
-    .btn-nano {
-      padding: 1px;
-      line-height: 14px;
     }
   }
   .inner-response {
