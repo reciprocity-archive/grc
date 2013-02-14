@@ -176,14 +176,6 @@
         //console.debug('exc', exc);
       }
 
-      if (data) {
-        // Parse and dispatch JSON object
-        $(e.target).trigger('ajax:json', [data, xhr]);
-      } else if(xhr.responseText) {
-        // Dispatch as html, if there is html to dispatch.  (no result should not blank out forms)
-        $(e.target).trigger('ajax:html', [xhr.responseText, xhr]);
-      }
-
       if (!e.stopRedirect) {
         // Maybe handle AJAX/JSON redirect or refresh
         if (xhr.status == 278) {
@@ -206,6 +198,14 @@
             $("form", modal_form.$element).data("submitpending", false);
           }
         }
+      }
+
+      if (data) {
+        // Parse and dispatch JSON object
+        $(e.target).trigger('ajax:json', [data, xhr]);
+      } else if(xhr.responseText) {
+        // Dispatch as html, if there is html to dispatch.  (no result should not blank out forms)
+        $(e.target).trigger('ajax:html', [xhr.responseText, xhr]);
       }
 
       if (!e.stopFlash) {
