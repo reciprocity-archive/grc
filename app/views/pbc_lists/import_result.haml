@@ -57,11 +57,11 @@
       &nbsp;
     .span3
       -if @errors.any?
-        =submit_tag "Correct Errors Before Proceeding", :class => %w(span12 btn btn-large btn-warning btn-primary), :name => 'confirm', :disabled => true
-      -elsif @messages.any?
-        =submit_tag "Proceed With Caution", :class => %w(span12 btn btn-large btn-warning btn-primary), :name => 'confirm'
+        =submit_tag "Correct Errors Before Proceeding", :class => %w(btn btn-large btn-warning pull-right), :name => 'confirm', :disabled => true
+      -elsif @warnings.any?
+        =submit_tag "Proceed With Caution", :class => %w(btn btn-large btn-warning pull-right), :name => 'confirm'
       -else
-        =submit_tag "Finish Importing", :class => %w(span12 btn btn-large btn-success btn-primary), :name => 'confirm'
+        =submit_tag "Finish Importing", :class => %w(btn btn-large btn-success pull-right), :name => 'confirm'
   -else
     .span12
       Import of

@@ -25,9 +25,11 @@
       padding: 4px;
       border: 1px solid $widgetHeader;
       font-weight: normal;
-      &.member-failure,
-      &.member-warning {
+      &.member-failure {
         background: lighten($red, 35%);
+      }
+      &.member-warning,
+      &.member-failure {
         .help-inline {
           color: $red;
           font-weight: bold;
