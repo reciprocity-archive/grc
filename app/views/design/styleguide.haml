@@ -50,6 +50,10 @@
             %i.icon-chevron-right
             Buttons
         %li
+          %a{:href => "#progress"}
+            %i.icon-chevron-right
+            Progress Bar
+        %li
           %a{:href => "#helper"}
             %i.icon-chevron-right
             Helper classes
@@ -1055,6 +1059,58 @@
               .btn.btn-mini.btn-danger.disabled
                 Mini Button - Danger
                 
+      %section#progress.widget
+        %section.header
+          %h2
+            Progress Bar
+        %section.content
+          .real-example
+            .progress
+              .bar{:style => "width:30%;"}
+            .progress
+              .bar.bar-success{:style => "width:40%;"}
+            .progress
+              .bar.bar-danger{:style => "width:50%;"}
+            .progress
+              .bar.bar-warning{:style => "width:60%;"}
+          %p
+            %strong
+              Example:
+          
+          %textarea
+            :escaped
+              .progress
+                .bar{:style => "width:30%;"}
+              .progress
+                .bar.bar-success{:style => "width:40%;"}
+              .progress
+                .bar.bar-danger{:style => "width:50%;"}
+              .progress
+                .bar.bar-warning{:style => "width:60%;"}
+          
+          .real-example
+            %p
+              %strong
+                You can also combine multiple progress bars into one row. See example below:
+            .progress
+              .bar{:style => "width:25%;"}
+              .bar.bar-success{:style => "width:25%;"}
+              .bar.bar-danger{:style => "width:25%;"}
+              .bar.bar-warning{:style => "width:25%;"}
+          
+          %textarea
+            :escaped
+              .progress
+                .bar{:style => "width:25%;"}
+                .bar.bar-success{:style => "width:25%;"}
+                .bar.bar-danger{:style => "width:25%;"}
+                .bar.bar-warning{:style => "width:25%;"}
+          
+          %p
+            <span class="label label-info">Note!</span>
+            When you adding progress bars please note that instead of 
+            %strong :style => "width:20%;" 
+            you should import code that will calculate required percentage. This percentages are only for demonstration.
       
       %section#helper.widget
         %section.header
