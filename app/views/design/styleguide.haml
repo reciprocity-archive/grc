@@ -54,6 +54,10 @@
             %i.icon-chevron-right
             Progress Bar
         %li
+          %a{:href => "#actions"}
+            %i.icon-chevron-right
+            Actions List
+        %li
           %a{:href => "#helper"}
             %i.icon-chevron-right
             Helper classes
@@ -1112,6 +1116,88 @@
             %strong :style => "width:20%;" 
             you should import code that will calculate required percentage. This percentages are only for demonstration.
       
+      %section#actions.widget
+        %section.header
+          %h2
+            Actions List
+        %section.content
+          .real-example.clearfix
+            %ul.actions.pull-right
+              %li
+                %a{:href => "#"}
+                  %i.grcicon-edit-new
+                  Edit Program
+              %li.btn-group
+                %a.dropdown-toggle{:href => '#', :'data-toggle' => 'dropdown'}
+                  %i.grcicon-imp-exp
+                  Import/Export
+                  %span.caret
+                %ul.dropdown-menu
+                  %li.divider
+                  %li
+                    %a{:href => "#"}
+                      Import Regs
+                  %li
+                    %a{:href => "#"}
+                      Import Controls
+                  %li.divider
+                  %li
+                    %a{:href => "#"}
+                      Export Regs
+                  %li
+                    %a{:href => "#"}
+                      Export Controls
+              %li
+                %a{:href => "#"}
+                  %i.grcicon-reg-map
+                  Reg Mapper
+              %li
+                %a{:href => "#"}
+                  %i.grcicon-audit
+                  Start Audit
+          %p
+            %strong
+              Example:
+              
+          %textarea
+            :escaped
+              %ul.actions.pull-right
+                %li
+                  %a{:href => "#"}
+                    %i.grcicon-edit-new
+                    Edit Program
+                %li.btn-group
+                  %a.dropdown-toggle{:href => '#', :'data-toggle' => 'dropdown'}
+                    %i.grcicon-imp-exp
+                    Import/Export
+                    %span.caret
+                  %ul.dropdown-menu
+                    %li.divider
+                    %li
+                      %a{:href => "#"}
+                        Import Regs
+                    %li
+                      %a{:href => "#"}
+                        Import Controls
+                    %li.divider
+                    %li
+                      %a{:href => "#"}
+                        Export Regs
+                    %li
+                      %a{:href => "#"}
+                        Export Controls
+                %li
+                  %a{:href => "#"}
+                    %i.grcicon-reg-map
+                    Reg Mapper
+                %li
+                  %a{:href => "#"}
+                    %i.grcicon-audit
+                    Start Audit
+          %p
+            <span class="label label-info">Note!</span>
+            You can combine every icon you want and insert any text you want. Also it this example we added dropdown list.
+            
       %section#helper.widget
         %section.header
           %h2

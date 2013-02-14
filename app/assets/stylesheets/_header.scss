@@ -292,97 +292,98 @@
   .demo {
     margin-top: 27px;
   }
-  .actions {
-    @include clearfix();
-    @include reset-list();
-    margin-top: 35px;
-    li {
-      float:left;
-      line-height: 16px;
-      margin-left: 20px;
-      &.open {
-        a {
-          @include box-shadow(none);
-          color: $black;
-          i {
-            @include opacity(1);
-          }
-          .caret {
-            @include opacity(1);
-          }
-        }
-      }
-      // zero state
-      &.items-0 {
-        a{
-          color:$green;
-        }
-      }
-      &.btn-group {
-        margin-top: 0;
-        .dropdown-toggle {
-          @include box-shadow(none);
-          padding: 0;
-        }
-        .dropdown-menu {
-          li {
-            margin: 0;
-            float: none;
-            clear: both;
-            &.divider {
-              margin: 8px 0;
-            }
-          }
-          a {
-            color: $black;
-            text-align: left;
-            font-size: 13px;
-            font-weight: normal;
-            margin: 0;
-            text-transform: none;
-            display: block;
-            @include transition(none);
-            &:hover {
-              color: $white;
-              @include transition(none);
-            }
-          }
-        }
-      }
-      &:last-child {
-        &.btn-group {
-          .dropdown-menu {
-            right: 0;
-            left: auto;
-          }
-        }
-      }
+}
+
+.actions {
+  @include clearfix();
+  @include reset-list();
+  margin-top: 35px;
+  li {
+    float:left;
+    line-height: 16px;
+    margin-left: 20px;
+    &.open {
       a {
-        color: $gray;
-        font-size: 11px;
-        line-height: 16px;
-        font-weight: bold;
-        text-transform: uppercase;
-        @include transition(color 0.3s ease);
+        @include box-shadow(none);
+        color: $black;
         i {
-          @include opacity(0.4);
-          @include transition(opacity 0.3s ease);
-        }
-        &:hover {
-          text-decoration: none;
-          color: $black;
-          i {
-            @include opacity(1);
-          }
-          .caret {
-            @include opacity(1);
-          }
+          @include opacity(1);
         }
         .caret {
-          @include opacity(0.4);
-          margin-top: 6px;
-          @include transition(opacity 0.3s ease);
+          @include opacity(1);
         }
+      }
+    }
+    // zero state
+    &.items-0 {
+      a{
+        color:$green;
+      }
+    }
+    &.btn-group {
+      margin-top: 0;
+      .dropdown-toggle {
+        @include box-shadow(none);
+        padding: 0;
+      }
+      .dropdown-menu {
+        li {
+          margin: 0;
+          float: none;
+          clear: both;
+          &.divider {
+            margin: 8px 0;
+          }
+        }
+        a {
+          color: $black;
+          text-align: left;
+          font-size: 13px;
+          font-weight: normal;
+          margin: 0;
+          text-transform: none;
+          display: block;
+          @include transition(none);
+          &:hover {
+            color: $white;
+            @include transition(none);
+          }
+        }
+      }
+    }
+    &:last-child {
+      &.btn-group {
+        .dropdown-menu {
+          right: 0;
+          left: auto;
+        }
+      }
+    }
+    a {
+      color: $gray;
+      font-size: 11px;
+      line-height: 16px;
+      font-weight: bold;
+      text-transform: uppercase;
+      @include transition(color 0.3s ease);
+      i {
+        @include opacity(0.4);
+        @include transition(opacity 0.3s ease);
+      }
+      &:hover {
+        text-decoration: none;
+        color: $black;
+        i {
+          @include opacity(1);
+        }
+        .caret {
+          @include opacity(1);
+        }
+      }
+      .caret {
+        @include opacity(0.4);
+        margin-top: 6px;
+        @include transition(opacity 0.3s ease);
       }
     }
   }
