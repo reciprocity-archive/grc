@@ -8,7 +8,7 @@
           =render :partial => 'object_leaf', :locals => { :instance => item }
           .span1
             -controls = item.linked_controls
-            -status_class = (controls.empty? || item.na?) ? 'badge-important' : 'badge-warning'
+            -status_class = (controls.empty? && !item.na?) ? 'badge-important' : 'badge-warning'
             -popover_content = capture_haml do
               %ul
                 -controls.each do |control|
