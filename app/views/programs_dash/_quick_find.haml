@@ -15,7 +15,7 @@
 .tabbable.tabs-left{ :id => quick_result ? nil : "quick_find" }
   %ul.nav.nav-tabs
     %li.active=link_to 'Controls', "##{prefix}_controls", :data => { :'tab-href' => flow_controls_path(:quick => true, :qr => quick_result), :toggle => 'tab' }
-    %li=link_to 'Biz Processes', "##{prefix}_biz_processes", :data => { :'tab-href' => flow_systems_path(:quick => true, :qr => quick_result, :is_biz_process => true), :toggle => 'tab' }
+    %li=link_to 'Processes', "##{prefix}_processes", :data => { :'tab-href' => flow_systems_path(:quick => true, :qr => quick_result, :is_biz_process => true), :toggle => 'tab' }
     %li=link_to 'Systems', "##{prefix}_systems", :data => { :'tab-href' => flow_systems_path(:quick => true, :qr => quick_result, :is_biz_process => false), :toggle => 'tab' }
     %li=link_to 'Products', "##{prefix}_products", :data => { :'tab-href' => flow_products_path(:quick => true, :qr => quick_result), :toggle => 'tab' }
     %li=link_to 'Risks', "##{prefix}_risks", :data => { :'tab-href' => flow_risks_path(:quick => true, :qr => quick_result), :toggle => 'tab' }
@@ -29,7 +29,7 @@
 
   .tab-content
     .tab-pane{ :id => "#{prefix}_controls" }
-    .tab-pane{ :id => "#{prefix}_biz_processes" }
+    .tab-pane{ :id => "#{prefix}_processes" }
     .tab-pane{ :id => "#{prefix}_systems" }
     .tab-pane{ :id => "#{prefix}_products" }
     .tab-pane{ :id => "#{prefix}_risks" }

@@ -1,8 +1,8 @@
--@title = "GRC #{@system.is_biz_process ? 'Business Process' : 'System'}: #{@system.title}"
+-@title = "GRC #{@system.is_biz_process ? 'Process' : 'System'}: #{@system.title}"
 
 -content_for :header do
   %ul.breadcrumbs
-    %li=@system.is_biz_process ? 'BUSINESS PROCESSES' : 'SYSTEMS'
+    %li=@system.is_biz_process ? 'PROCESSES' : 'SYSTEMS'
     %li=@system.slug
 
   %h1.compliance
@@ -23,7 +23,7 @@
       %a{ :href => edit_flow_system_path(@system), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide', :title => 'Edit System' }
         %i.grcicon-edit-new
         Edit
-        =@system.is_biz_process ? 'Biz Process' : 'System'
+        =@system.is_biz_process ? 'Process' : 'System'
 
 -content_for :subheader_plus do
   %a.navbarplus.fltrt{ :href => new_flow_system_path(:'system[is_biz_process]' => @system.is_biz_process), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }

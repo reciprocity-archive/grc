@@ -1,8 +1,8 @@
 -content_for :modal_title do
   -if f.object.new_record?
-    Create a new #{f.object.is_biz_process? ? 'business process' : 'system'}
+    Create a new #{f.object.is_biz_process? ? 'process' : 'system'}
   -else
-    Edit #{f.object.is_biz_process? ? 'business process' : 'system'}
+    Edit #{f.object.is_biz_process? ? 'process' : 'system'}
 
 -if !f.object.new_record?
   -content_for :modal_delete_path, delete_flow_system_path(f.object)
@@ -18,11 +18,11 @@
         -if f.object.new_record?
           %select.span12{ :name => 'system[is_biz_process]' }
             %option{ :value => '0', :selected => f.object.is_biz_process || 'selected' } System
-            %option{ :value => '1', :selected => f.object.is_biz_process && 'selected' } Business Process
+            %option{ :value => '1', :selected => f.object.is_biz_process && 'selected' } Process
           =error_messages_inline(f, :is_biz_process)
         -else
           .item
-            =f.object.is_biz_process? ? "Business Process" : "System"
+            =f.object.is_biz_process? ? "Process" : "System"
 .row-fluid
   =wrapped_text_area f, :span6, :description, :class => 'double wysihtml5', :wrapper_div_class => 'wysiwyg-area', :placeholder => 'Enter description here'
   .span6

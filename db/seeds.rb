@@ -56,7 +56,7 @@ ActiveRecord::Base.transaction do
     :document_year => (1980..2012).to_a.map(&:to_s).reverse,
     :language => ['English'],
     :program_kind => ['Regulation', 'Company Policy', 'Operational Group Policy', 'Data Asset Policy', 'Company Controls'],
-    #:system_type => ['System', 'Business Process'],
+    #:system_type => ['System', 'Process'],
     :system_kind => ['Infrastructure'],
     :product_type => ['Appliance', 'Desktop Software', 'SaaS'],
     :product_kind => ['Not Applicable'],

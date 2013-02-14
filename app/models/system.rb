@@ -118,7 +118,7 @@ class System < ActiveRecord::Base
   # TODO: state(), state_by_process left for reference -- remove after
   # implementing proper object states
 
-  # Rolled up state by biz process
+  # Rolled up state by process
   def state_by_process(bp)
     state(:control_id => bp.controls)
   end

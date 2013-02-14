@@ -222,7 +222,7 @@ class SystemsController < BaseObjectsController
 
   def new_object_title
     if object.present? && object.is_biz_process?
-      "Business Process"
+      "Process"
     else
       "System"
     end

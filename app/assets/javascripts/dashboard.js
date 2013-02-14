@@ -674,9 +674,9 @@ jQuery(function($) {
       ;
 
     if ($this.val() == '0') {
-      $header_elem.text($header_elem.text().replace(/business process/i, 'system'));
+      $header_elem.text($header_elem.text().replace(/process/i, 'system'));
     } else {
-      $header_elem.text($header_elem.text().replace(/system/i, 'business process'));
+      $header_elem.text($header_elem.text().replace(/system/i, 'process'));
     }
   });
 });

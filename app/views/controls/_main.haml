@@ -7,7 +7,7 @@
 
 .tabbable
   %ul.nav.nav-tabs
-    %li=link_to 'Systems/Business Processes', '#systems', :data => { :toggle => 'tab', :'tab-href' => systems_flow_control_path(control) }
+    %li=link_to 'Systems/Processes', '#systems', :data => { :toggle => 'tab', :'tab-href' => systems_flow_control_path(control) }
     -if control.program.company?
       %li=link_to 'Linked Controls', '#controls', :data => { :toggle => 'tab', :'tab-href' => implemented_controls_flow_control_path(control) }
     -else
