@@ -781,6 +781,21 @@
               Small Button
             .btn.btn-mini
               Mini Button
+          %p
+            %strong
+              Pening AJAX:
+          .real-example
+            .btn.btn-large.pending-ajax
+              Large Button - Default
+            .btn.btn-add.pending-ajax
+              Default Button - Add 
+            .btn.btn-small.btn-warning.pending-ajax
+              Small Button - Warning
+            .btn.btn-mini.btn-danger.pending-ajax
+              Mini Button - Danger
+          %p
+            <span class="label label-info">Note!</span>
+            When you add class .pending-ajax all buttons will look like default and disabled, no matter what other classes they have. Only classes for size will work.
           
           %p
             %strong
@@ -836,7 +851,10 @@
             %strong .oneline - 
             Preventing content to go into multiple rows.
             <span class="label label-info">Note!</span>
-            That element needs to be block element.
+            That element needs to be block or inline-block element.
+            %strong
+              Please note that you should use mixin oneline when it's possible. Just in cases when you cannot use mixin add class to specific element.
+            
           %p
             %strong .input-block-level - 
             Add this class to input field that needs to have width of his parent.

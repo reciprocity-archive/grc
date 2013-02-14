@@ -105,6 +105,33 @@ h1, h2, h3, h4, h5, h6 {
       }
     }
   }
+  &.pending-ajax {
+    cursor: default;
+    background:#efefef url('/images/ajax-loader.gif') no-repeat 5px 5px;
+    @include box-shadow(none);
+    border: 1px solid #e0e0e0;
+    color: #7b7b7b;
+    text-shadow: none;
+    padding-left: 28px;
+    &:hover {
+      color: #7b7b7b;
+    }
+    &:active {
+      background:#efefef url('/images/ajax-loader.gif') no-repeat 5px 5px;
+      border: 1px solid #e0e0e0;
+      @include box-shadow(none);
+    }
+  }
+  &.btn-mini {
+    &.pending-ajax {
+      background:#efefef url('/images/ajax-loader.gif') no-repeat 5px 1px;
+    }
+  }
+  &.btn-large {
+    &.pending-ajax {
+      background:#efefef url('/images/ajax-loader.gif') no-repeat 5px 8px;
+    }
+  }
 }
 
 // removing outline on anchor element
