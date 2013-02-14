@@ -3,7 +3,7 @@
     -content_for :modal_title do
       -if CMS_CONFIG["ALLOW_HELP_EDIT"]
         %a.btn.btn-mini.pull-right{:'data-toggle' => 'collapse', :href => '#helpedit', :title => "Edit Help", :rel => "tooltip", :'data-placement' => "left", :style => "margin-right:6px;"}
-          %i.grcicon-edit-grey  
+          %i.grcicon-edit-new  
       -if @help.title.present?
         =@help.title
       -else
@@ -15,7 +15,7 @@
     -content_for :modal_title do
       -if CMS_CONFIG["ALLOW_HELP_EDIT"]
         %a.btn.btn-mini.pull-right{:'data-toggle' => 'collapse', :href => '#helpedit', :title => "Edit Help", :rel => "tooltip", :'data-placement' => "left", :style => "margin-right:6px;"}
-          %i.grcicon-edit-grey
+          %i.grcicon-edit-new
       GRC Help
     .help-content.rtf
       %p This content is coming soon.  We are working on it.

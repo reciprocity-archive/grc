@@ -29,7 +29,7 @@
       %span{:class => "grc-badge #{risky_attributes.count.zero? ? "no-object" : ""}"}=risky_attributes.count
   .span2
     %a.widgetbtn.pull-right.juke-left{:href => list_edit_flow_risk_risky_attributes_path(:risk_id => instance.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#risky_attributeList', :'data-modal-class' => 'modal-wide' }
-      %i.grcicon-edit-grey
+      %i.grcicon-edit-new
 
 .collapse.in#riskyAttributeListCollapse
   .bootstrap-collapse-bugfix

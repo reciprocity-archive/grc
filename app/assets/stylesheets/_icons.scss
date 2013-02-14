@@ -166,6 +166,9 @@
 }
 .grcicon-edit-new {
   background-position:-32px -56px;
+  .btn-nano & {
+    background-position:-33px -58px;
+  }
   .tree-structure .active & {
     background-position:-32px -56px;
   }
