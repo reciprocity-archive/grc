@@ -40,7 +40,7 @@
         %li
           %a{:href => "#list"}
             %i.icon-chevron-right
-            List
+            Tree List
         %li
           %a{:href => "#nesting"}
             %i.icon-chevron-right
@@ -107,85 +107,155 @@
         %section.header
           %h2
             Objects
-        %section.content        
-          %table.objecticons
-            %tr
-              %th
-                Governance Objects
-              %td
-                .grcobject.governance
-                  %i.grcicon-program
-                Program
-              %td
-                .grcobject.governance
-                  %i.grcicon-contract
-                Contract
-              %td
-                .grcobject.governance
-                  %i.grcicon-policy
-                Policy
-              %td
-                .grcobject.governance
-                  %i.grcicon-regulation
-                Regulation
-              %td
-                .grcobject.governance
-                  %i.grcicon-section
-                Section/Clause
-            %tr
-              %th
-                Business Objects
-              %td
-                .grcobject.business
-                  %i.grcicon-market
-                Market
-              %td
-                .grcobject.business
-                  %i.grcicon-facility
-                Facility
-              %td
-                .grcobject.business
-                  %i.grcicon-project
-                Project
-              %td
-                .grcobject.business
-                  %i.grcicon-product
-                Product
-              %td
-                .grcobject.business
-                  %i.grcicon-orggroup
-                Org Group
-              %td
-                .grcobject.business
-                  %i.grcicon-dataasset
-                Data Asset
-            %tr
-              %th
-                Compliance Objects
-              %td
-                .grcobject.compliance
-                  %i.grcicon-businessprocess
-                Business Process
-              %td
-                .grcobject.compliance
-                  %i.grcicon-system
-                System
-              %td
-                .grcobject.compliance
-                  %i.grcicon-control
-                Control
-            %tr
-              %th
-                Risk Objects
-              %td
-                .grcobject.risk
-                  %i.grcicon-risk
-                Risk
-              %td
-                .grcobject.risk
-                  %i.grcicon-attribute
-                Attribute
-            
+        %section.content
+          .real-example
+            %table.objecticons
+              %tr
+                %th
+                  Governance Objects
+                %td
+                  .grcobject.governance
+                    %i.grcicon-program
+                  Program
+                %td
+                  .grcobject.governance
+                    %i.grcicon-contract
+                  Contract
+                %td
+                  .grcobject.governance
+                    %i.grcicon-policy
+                  Policy
+                %td
+                  .grcobject.governance
+                    %i.grcicon-regulation
+                  Regulation
+                %td
+                  .grcobject.governance
+                    %i.grcicon-section
+                  Section/Clause
+              %tr
+                %th
+                  Business Objects
+                %td
+                  .grcobject.business
+                    %i.grcicon-market
+                  Market
+                %td
+                  .grcobject.business
+                    %i.grcicon-facility
+                  Facility
+                %td
+                  .grcobject.business
+                    %i.grcicon-project
+                  Project
+                %td
+                  .grcobject.business
+                    %i.grcicon-product
+                  Product
+                %td
+                  .grcobject.business
+                    %i.grcicon-orggroup
+                  Org Group
+                %td
+                  .grcobject.business
+                    %i.grcicon-dataasset
+                  Data Asset
+              %tr
+                %th
+                  Compliance Objects
+                %td
+                  .grcobject.compliance
+                    %i.grcicon-businessprocess
+                  Business Process
+                %td
+                  .grcobject.compliance
+                    %i.grcicon-system
+                  System
+                %td
+                  .grcobject.compliance
+                    %i.grcicon-control
+                  Control
+              %tr
+                %th
+                  Risk Objects
+                %td
+                  .grcobject.risk
+                    %i.grcicon-risk
+                  Risk
+                %td
+                  .grcobject.risk
+                    %i.grcicon-attribute
+                  Attribute
+                
+          %p
+            %strong
+              Example:
+          
+          %textarea
+            :escaped
+              .grcobject.governance
+                %i.grcicon-program
+              Program
+
+              .grcobject.governance
+                %i.grcicon-contract
+              Contract
+
+              .grcobject.governance
+                %i.grcicon-policy
+              Policy
+
+              .grcobject.governance
+                %i.grcicon-regulation
+              Regulation
+
+              .grcobject.governance
+                %i.grcicon-section
+              Section/Clause
+
+              .grcobject.business
+                %i.grcicon-market
+              Market
+
+              .grcobject.business
+                %i.grcicon-facility
+              Facility
+
+              .grcobject.business
+                %i.grcicon-project
+              Project
+              
+              .grcobject.business
+                %i.grcicon-product
+              Product
+
+              .grcobject.business
+                %i.grcicon-orggroup
+              Org Group
+
+              .grcobject.business
+                %i.grcicon-dataasset
+              Data Asset
+
+              .grcobject.compliance
+                %i.grcicon-businessprocess
+              Business Process
+
+              .grcobject.compliance
+                %i.grcicon-system
+              System
+
+              .grcobject.compliance
+                %i.grcicon-control
+              Control
+
+              .grcobject.risk
+                %i.grcicon-risk
+              Risk
+              
+              .grcobject.risk
+                %i.grcicon-attribute
+              Attribute
 
       %section#icons.widget
         %section.header
@@ -316,6 +386,58 @@
             .btn.btn-add
               %i.grcicon-chevron-right
               
+          .real-example
+            %p
+              %strong
+                Object icons:
+            .btn.btn-add
+              %i.grcicon-program
+
+            .btn.btn-add
+              %i.grcicon-contract
+
+            .btn.btn-add
+              %i.grcicon-policy
+
+            .btn.btn-add
+              %i.grcicon-regulation
+
+            .btn.btn-add
+              %i.grcicon-section
+
+            .btn.btn-add
+              %i.grcicon-market
+
+            .btn.btn-add
+              %i.grcicon-facility
+
+            .btn.btn-add
+              %i.grcicon-project
+            
+            .btn.btn-add
+              %i.grcicon-product
+
+            .btn.btn-add
+              %i.grcicon-orggroup
+
+            .btn.btn-add
+              %i.grcicon-dataasset
+
+            .btn.btn-add
+              %i.grcicon-businessprocess
+
+            .btn.btn-add
+              %i.grcicon-system
+
+            .btn.btn-add
+              %i.grcicon-control
+
+            .btn.btn-add
+              %i.grcicon-risk
+            
+            .btn.btn-add
+              %i.grcicon-attribute
+              
           %p
             %strong Example:
           
@@ -380,6 +502,23 @@
               %i.grcicon-remove
               %i.grcicon-edit-grey
               %i.grcicon-chevron-right
+              
+              %i.grcicon-program
+              %i.grcicon-contract
+              %i.grcicon-policy
+              %i.grcicon-regulation
+              %i.grcicon-section
+              %i.grcicon-market
+              %i.grcicon-facility
+              %i.grcicon-project
+              %i.grcicon-product
+              %i.grcicon-orggroup
+              %i.grcicon-dataasset
+              %i.grcicon-businessprocess
+              %i.grcicon-system
+              %i.grcicon-control
+              %i.grcicon-risk
+              %i.grcicon-attribute
               
           %p
             <span class="label label-info">Note!</span>
@@ -783,7 +922,7 @@
               Mini Button
           %p
             %strong
-              Pening AJAX:
+              Pending AJAX:
           .real-example
             .btn.btn-large.pending-ajax
               Large Button - Default
@@ -795,7 +934,28 @@
               Mini Button - Danger
           %p
             <span class="label label-info">Note!</span>
-            When you add class .pending-ajax all buttons will look like default and disabled, no matter what other classes they have. Only classes for size will work.
+            When you add class 
+            %strong .pending-ajax 
+            all buttons will look like default and disabled, no matter what other classes they have. Only classes for size will work.
+          
+          %p
+            %strong
+              Disabled:
+          .real-example
+            .btn.btn-large.disabled
+              Large Button - Default
+            .btn.btn-add.disabled
+              Default Button - Add 
+            .btn.btn-small.btn-warning.disabled
+              Small Button - Warning
+            .btn.btn-mini.btn-danger.disabled
+              Mini Button - Danger
+          
+          %p
+            <span class="label label-info">Note!</span>
+            When you add class
+            %strong .disabled 
+            all buttons will be disabled.
           
           %p
             %strong
@@ -830,11 +990,29 @@
                 Small Button
               .btn.btn-mini
                 Mini Button
-          %p
-            <span class="label label-info">Note!</span>
-            On Large Button we added class 
-            %strong .disabled 
-            to show disabled state of button.
+              
+              Pending AJAX:
+              
+              .btn.btn-large.pending-ajax
+                Large Button - Default
+              .btn.btn-add.pending-ajax
+                Default Button - Add 
+              .btn.btn-small.btn-warning.pending-ajax
+                Small Button - Warning
+              .btn.btn-mini.btn-danger.pending-ajax
+                Mini Button - Danger
+              
+              Disabled:
+              
+              .btn.btn-large.disabled
+                Large Button - Default
+              .btn.btn-add.disabled
+                Default Button - Add 
+              .btn.btn-small.btn-warning.disabled
+                Small Button - Warning
+              .btn.btn-mini.btn-danger.disabled
+                Mini Button - Danger
+                
       
       %section#helper.widget
         %section.header
