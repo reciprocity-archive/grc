@@ -47,13 +47,16 @@
     border-bottom: 1px solid $lightGray;
   }
   .tabs-left {
-    padding: 0 10px 0 4px;
+    padding: 0 0 0 4px;
     overflow-x: hidden;
     overflow-y: auto;
     height: 456px;
   }
   .tab-content {
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 456px;
+    padding: 0 10px 0 0;
   }
   .remove {
     margin: 4px 10px 0 0;
