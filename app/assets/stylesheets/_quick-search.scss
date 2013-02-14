@@ -19,6 +19,7 @@
     li {
       .item-title {
         margin-left: 0;
+        @include oneline();
       }
       a {
         padding: 0;
