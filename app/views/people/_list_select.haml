@@ -15,7 +15,7 @@
 
 %script#person_option_data{ :type => 'text/html' }
   %span.company <%= person.company %>
-  %span.name <%= person.name %>
+  %span.name <%= person.name.trim() ? person.name : person.email  %>
 
 .row-fluid
   .span12

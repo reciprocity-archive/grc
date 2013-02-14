@@ -7,7 +7,7 @@
   %li{ :'data-id' => '<%= person.id %>', :'data-name' => '<%= person.name %>', :'data-company' => '<%= person.company %>' }
     .row-fluid
       .span8
-        %span.name <%= person.name %>
+        %span.name <%= person.name.trim() || person.email %>
         %span.option <%= person.company %>
         
       .span4.actions
@@ -18,7 +18,7 @@
             %i.grcicon-chevron-right
 
 %script#person_option_data{ :type => 'text/html' }
-  %span.name <%= person.name %>
+  %span.name <%= person.name.trim() || person.email %>
   %span.option <%= person.company %>
   
 
