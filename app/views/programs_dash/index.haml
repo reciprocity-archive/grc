@@ -19,67 +19,58 @@
         Widget
         %span.caret
       %ul.dropdown-menu
+        %li.title Governance
+        %li
+          %a{ :href => '#'}
+            Programs
+        %li
+          %a{ :href => '#'}
+            Regulations
+        %li
+          %a{ :href => '#'}
+            Policies
+        %li
+          %a{ :href => '#'}
+            Contracts
         %li.divider
-        %li.title Create New ...
-        -if controller.respond_to?(:new_object_path) && controller.new_object_path.present?
-          %li
-            %a{ :href => controller.new_object_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-              =controller.new_object_title
-          %li.divider
+        %li.title Business
         %li
-          %a{ :href => new_flow_program_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-            Program or Policy
+          %a{ :href => '#'}
+            Org Groups
         %li
-          %a{ :href => new_flow_risky_attribute_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-            Risky Attribute
+          %a{ :href => '#'}
+            Projects
         %li
-          %a{ :href => new_flow_risk_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-            Risk
+          %a{ :href => '#'}
+            Facilities
         %li
-          %a{ :href => new_flow_control_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-            Control
+          %a{ :href => '#'}
+            Products
+        %li
+          %a{ :href => '#'}
+            Data Assets
+        %li
+          %a{ :href => '#'}
+            Markets
         %li.divider
+        %li.title Compliance
         %li
-          %a{ :href => new_flow_system_path(:'system[is_biz_process]' => 1), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-            Process
+          %a{ :href => '#'}
+            Processes
         %li
-          %a{ :href => new_flow_system_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-            System
+          %a{ :href => '#'}
+            Systems
+        %li
+          %a{ :href => '#'}
+            Controls
         %li.divider
+        %li.title Risk Objects
         %li
-          %a{ :href => new_flow_org_group_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-            Org Group
+          %a{ :href => '#'}
+            Risky Attributes
         %li
-          %a{ :href => new_flow_product_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-            Product
-        %li
-          %a{ :href => new_flow_project_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-            Project
-        %li
-          %a{ :href => new_flow_facility_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-            Facility
-        %li
-          %a{ :href => new_flow_market_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-            Market
-        %li
-          %a{ :href => new_flow_data_asset_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-            Data Asset
-        -if has_feature? :BETA
-          %li.demoItem
-            %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-              Person
-          %li.demoItem
-            %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-              Reference
-          %li.demoItem
-            %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-              Business Object
-          %li.demoItem
-            %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-              Threat
-          %li.demoItem
-            %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-              Vulnerability
+          %a{ :href => '#'}
+            Risks
 
 .container-fluid
   #columns.row-fluid{ :'data-resize' => "true" }
@@ -95,68 +86,58 @@
             Add Widget
             %i.grcicon-carot
           %ul.dropdown-menu
+            %li.title Governance
+            %li
+              %a{ :href => '#'}
+                Programs
+            %li
+              %a{ :href => '#'}
+                Regulations
+            %li
+              %a{ :href => '#'}
+                Policies
+            %li
+              %a{ :href => '#'}
+                Contracts
             %li.divider
-            %li.title Create New ...
+            %li.title Business
+            %li
+              %a{ :href => '#'}
+                Org Groups
+            %li
+              %a{ :href => '#'}
+                Projects
+            %li
+              %a{ :href => '#'}
+                Facilities
+            %li
+              %a{ :href => '#'}
+                Products
+            %li
+              %a{ :href => '#'}
+                Data Assets
+            %li
+              %a{ :href => '#'}
+                Markets
             %li.divider
-            -if controller.respond_to?(:new_object_path) && controller.new_object_path.present?
-              %li
-                %a{ :href => controller.new_object_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                  =controller.new_object_title
-              %li.divider
+            %li.title Compliance
             %li
-              %a{ :href => new_flow_program_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                Program or Policy
+              %a{ :href => '#'}
+                Processes
             %li
-              %a{ :href => new_flow_risky_attribute_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                Risky Attribute
+              %a{ :href => '#'}
+                Systems
             %li
-              %a{ :href => new_flow_risk_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                Risk
-            %li
-              %a{ :href => new_flow_control_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                Control
+              %a{ :href => '#'}
+                Controls
             %li.divider
+            %li.title Risk Objects
             %li
-              %a{ :href => new_flow_system_path(:'system[is_biz_process]' => 1), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                Process
+              %a{ :href => '#'}
+                Risky Attributes
             %li
-              %a{ :href => new_flow_system_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                System
-            %li.divider
-            %li
-              %a{ :href => new_flow_org_group_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                Org Group
-            %li
-              %a{ :href => new_flow_product_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                Product
-            %li
-              %a{ :href => new_flow_project_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                Project
-            %li
-              %a{ :href => new_flow_facility_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                Facility
-            %li
-              %a{ :href => new_flow_market_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                Market
-            %li
-              %a{ :href => new_flow_data_asset_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                Data Asset
-            -if has_feature? :BETA
-              %li.demoItem
-                %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                  Person
-              %li.demoItem
-                %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                  Reference
-              %li.demoItem
-                %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                  Business Object
-              %li.demoItem
-                %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                  Threat
-              %li.demoItem
-                %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                  Vulnerability
+              %a{ :href => '#'}
+                Risks
               
     #right_column.span6.widget-area
       =render :partial => 'quick_find',
@@ -172,68 +153,58 @@
             Add Widget
             %i.grcicon-carot
           %ul.dropdown-menu
+            %li.title Governance
+            %li
+              %a{ :href => '#'}
+                Programs
+            %li
+              %a{ :href => '#'}
+                Regulations
+            %li
+              %a{ :href => '#'}
+                Policies
+            %li
+              %a{ :href => '#'}
+                Contracts
             %li.divider
-            %li.title Create New ...
+            %li.title Business
+            %li
+              %a{ :href => '#'}
+                Org Groups
+            %li
+              %a{ :href => '#'}
+                Projects
+            %li
+              %a{ :href => '#'}
+                Facilities
+            %li
+              %a{ :href => '#'}
+                Products
+            %li
+              %a{ :href => '#'}
+                Data Assets
+            %li
+              %a{ :href => '#'}
+                Markets
             %li.divider
-            -if controller.respond_to?(:new_object_path) && controller.new_object_path.present?
-              %li
-                %a{ :href => controller.new_object_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                  =controller.new_object_title
-              %li.divider
+            %li.title Compliance
             %li
-              %a{ :href => new_flow_program_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                Program or Policy
+              %a{ :href => '#'}
+                Processes
             %li
-              %a{ :href => new_flow_risky_attribute_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                Risky Attribute
+              %a{ :href => '#'}
+                Systems
             %li
-              %a{ :href => new_flow_risk_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                Risk
-            %li
-              %a{ :href => new_flow_control_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                Control
+              %a{ :href => '#'}
+                Controls
             %li.divider
+            %li.title Risk Objects
             %li
-              %a{ :href => new_flow_system_path(:'system[is_biz_process]' => 1), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                Process
+              %a{ :href => '#'}
+                Risky Attributes
             %li
-              %a{ :href => new_flow_system_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                System
-            %li.divider
-            %li
-              %a{ :href => new_flow_org_group_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                Org Group
-            %li
-              %a{ :href => new_flow_product_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                Product
-            %li
-              %a{ :href => new_flow_project_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                Project
-            %li
-              %a{ :href => new_flow_facility_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                Facility
-            %li
-              %a{ :href => new_flow_market_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                Market
-            %li
-              %a{ :href => new_flow_data_asset_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                Data Asset
-            -if has_feature? :BETA
-              %li.demoItem
-                %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                  Person
-              %li.demoItem
-                %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                  Reference
-              %li.demoItem
-                %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                  Business Object
-              %li.demoItem
-                %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                  Threat
-              %li.demoItem
-                %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                  Vulnerability
+              %a{ :href => '#'}
+                Risks
         
     -if has_feature? :BETA
       .row-fluid
