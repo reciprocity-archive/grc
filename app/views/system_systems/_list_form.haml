@@ -7,8 +7,9 @@
   %li{ :'data-id' => '<%= system.id %>', :'data-title' => '<%= system.title %>', :'data-slug' => '<%= system.slug %>' }
     .row-fluid
       .span8
-        %span.name <%= system.title %>
-        %span.option <%= system.slug %>
+        .object-info
+          %span.name <%= system.title %>
+          %span.option <%= system.slug %>
       .span4.actions
         .pull-right
           %a.widgetbtn.btn.btn-mini{:href => edit_flow_system_path('<%=system.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
@@ -17,8 +18,9 @@
             %i.grcicon-chevron-right
 
 %script#subsystem_option_data{ :type => 'text/html' }
-  %span.name <%= system.title %>
-  %span.option <%= system.slug %>
+  .object-info
+    %span.name <%= system.title %>
+    %span.option <%= system.slug %>
 
 %script#subsystem_selected{ :type => 'text/html', :'data-mappings' => 'child:system,object:system', :'data-member' => 'system_system' }
   %li{ :'data-id' => '<%= id %>', :'data-object-id' => '<%= system.id %>' }

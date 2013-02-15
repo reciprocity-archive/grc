@@ -136,6 +136,9 @@
           border-bottom: 1px solid $lightGray;
           line-height: 28px;
           padding: 4px 0;
+          .object-info {
+            @include oneline();
+          }
           &:hover {
             cursor: pointer;
             background: lighten($lightGray,3%);

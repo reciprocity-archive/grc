@@ -7,8 +7,9 @@
   %li{ :'data-id' => '<%= category.id %>', :'data-name' => '<%= category.name %>', :'data-parent_name' => '<%= category.parent_name %>' }
     .row-fluid
       .span8
-        %span.name <%= category.name %>
-        %span.option <%= category.parent_name || '&nbsp;' %>
+        .object-info
+          %span.name <%= category.name %>
+          %span.option <%= category.parent_name || '&nbsp;' %>
         
       .span4.actions
         .pull-right
@@ -18,8 +19,9 @@
             %i.grcicon-chevron-right
 
 %script#category_option_data{ :type => 'text/html' }
-  %span.name <%= category.name %>
-  %span.option <%= category.parent_name || '&nbsp;' %>
+  .object-info
+    %span.name <%= category.name %>
+    %span.option <%= category.parent_name || '&nbsp;' %>
 
 %script#categorization_selected{ :type => 'text/html', :'data-mappings' => 'object:category', :'data-member' => 'categorization' }
   %li{ :'data-id' => '<%= id %>', :'data-object-id' => '<%= category.id %>' }

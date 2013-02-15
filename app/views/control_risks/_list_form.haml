@@ -47,8 +47,9 @@
   %li{ :'data-id' => '<%= control.id %>', :'data-title' => '<%= control.title %>', :'data-slug' => '<%= control.slug %>' }
     .row-fluid
       .span8
-        %span.name <%= control.title %>
-        %span.option <%= control.slug %>
+        .object-info
+          %span.name <%= control.title %>
+          %span.option <%= control.slug %>
         
       .span4.actions
         .pull-right
@@ -58,8 +59,9 @@
             %i.grcicon-chevron-right
 
 %script#control_option_data{ :type => 'text/html' }
-  %span.name <%= control.title %>
-  %span.option <%= control.slug %>
+  .object-info
+    %span.name <%= control.title %>
+    %span.option <%= control.slug %>
 
 %script#control_selected{ :type => 'text/html', :'data-mappings' => 'child:control,object:control', :'data-member' => 'control_risk' }
   %li{ :'data-id' => '<%= id %>', :'data-object-id' => '<%= control.id %>' }

@@ -6,11 +6,12 @@
 %script#person_option{ :type => 'text/html', :'data-prefix' => 'person' }
   %li{ :'data-id' => '<%= person.id %>', :'data-name' => '<%= person.name %>', :'data-company' => '<%= person.company %>' }
     .row-fluid
-      .span8
-        %span.name <%= person.name.trim() || person.email %>
-        %span.option <%= person.company %>
+      .span9
+        .object-info
+          %span.name <%= person.name.trim() || person.email %>
+          %span.option <%= person.company %>
         
-      .span4.actions
+      .span3.actions
         .pull-right
           %a.widgetbtn.btn.btn-mini{:href => edit_flow_person_path('<%=person.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
             %i.grcicon-edit-new
@@ -18,8 +19,9 @@
             %i.grcicon-chevron-right
 
 %script#person_option_data{ :type => 'text/html' }
-  %span.name <%= person.name.trim() || person.email %>
-  %span.option <%= person.company %>
+  .object-info
+    %span.name <%= person.name.trim() || person.email %>
+    %span.option <%= person.company %>
   
 
 %script#object_person_selected{ :type => 'text/html', :'data-mappings' => 'object:person', :'data-member' => 'object_person', :'data-role' => 'accountable', :'data-start_date' => '', :'data-stop_date' => '' }

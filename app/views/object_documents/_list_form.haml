@@ -6,10 +6,11 @@
 %script#document_option{ :type => 'text/html', :'data-prefix' => 'document' }
   %li{ :'data-id' => '<%= document.id %>', :'data-title' => '<%= document.title %>', :'data-document_type' => '<%= document.document_type %>', :'data-link_url' => '<%= document.link_url %>' }
     .row-fluid
-      .span6
-        %span.name <%= document.title || document.link_url || '' %>
-        %span.option <%= document.document_type || '' %>
-      .span6.actions
+      .span10
+        .object-info
+          %span.name <%= document.title || document.link_url || '' %>
+          %span.option <%= document.document_type || '' %>
+      .span2.actions
         .pull-right
           %a.widgetbtn.btn.btn-mini{ :href => edit_flow_document_path('<%=document.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target', :'data-modal-class' => 'modal-wide' }
             %i.grcicon-edit-new
@@ -17,14 +18,15 @@
             %i.grcicon-chevron-right
 
 %script#document_option_data{ :type => 'text/html' }
-  %span.name <%= document.title || document.link_url || '&nbsp;' %>
-  %span.option <%= document.document_type || '&nbsp;' %>
+  .object-info
+    %span.name <%= document.title || document.link_url || '&nbsp;' %>
+    %span.option <%= document.document_type || '&nbsp;' %>
 
 %script#object_document_selected{ :type => 'text/html', :'data-mappings' => 'object:document', :'data-member' => 'object_document' }
   %li{ :'data-id' => '<%= id %>', :'data-object-id' => '<%= document.id %>' }
     .row-fluid
-      .span6.object_info{ :'data-template-id' => 'document_option_data' }
-      .span6.actions
+      .span10.object_info{ :'data-template-id' => 'document_option_data' }
+      .span2.actions
         %span.state
         .pull-right
           %input{ :type => 'hidden', :name => 'items[<%= id %>][id]', :value => '<% if (id.toString().substr(0,3) != "new") { %><%= id %><% } %>'.html_safe }

@@ -2,8 +2,9 @@
   =context[:title]
 
 %script#relationship_option_data{ :type => 'text/html' }
-  %span.name <%= object.title %>
-  %span.option <%= object.slug %>
+  .object-info
+    %span.name <%= object.title %>
+    %span.option <%= object.slug %>
 
 %script#relationship_selected{ :type => 'text/html', :'data-member' => 'relationship', :'data-type' => '', :'data-start_date' => '', :'data-stop_date' => '' }
   %li{ :'data-id' => '<%= id %>', :'data-object-id' => '<%= object.id %>', :'data-name' => '<%= object.name %>', :'data-company' => '<%= object.company %>' }
@@ -29,8 +30,9 @@
   %li{ :'data-id' => '<%= system.id %>', :'data-title' => '<%= system.title %>', :'data-slug' => '<%= system.slug %>' }
     .row-fluid
       .span8
-        %span.name <%= system.title %>
-        %span.option <%= system.slug %>
+        .object-info
+          %span.name <%= system.title %>
+          %span.option <%= system.slug %>
         
       .span4.actions
         .pull-right
@@ -43,8 +45,9 @@
   %li{ :'data-id' => '<%= program.id %>', :'data-title' => '<%= program.title %>', :'data-slug' => '<%= program.slug %>' }
     .row-fluid
       .span8
-        %span.name <%= program.title %>
-        %span.option <%= program.slug %>
+        .object-info
+          %span.name <%= program.title %>
+          %span.option <%= program.slug %>
         
       .span4.actions
         .pull-right
@@ -57,8 +60,9 @@
   %li{ :'data-id' => '<%= product.id %>', :'data-title' => '<%= product.title %>', :'data-slug' => '<%= product.slug %>' }
     .row-fluid
       .span8
-        %span.name <%= product.title %>
-        %span.option <%= product.slug %>
+        .object-info
+          %span.name <%= product.title %>
+          %span.option <%= product.slug %>
         
       .span4.actions
         .pull-right
@@ -71,8 +75,9 @@
   %li{ :'data-id' => '<%= org_group.id %>', :'data-title' => '<%= org_group.title %>', :'data-slug' => '<%= org_group.slug %>' }
     .row-fluid
       .span8
-        %span.name <%= org_group.title %>
-        %span.option <%= org_group.slug %>
+        .object-info
+          %span.name <%= org_group.title %>
+          %span.option <%= org_group.slug %>
         
       .span4.actions
         .pull-right
@@ -85,8 +90,9 @@
   %li{ :'data-id' => '<%= facility.id %>', :'data-title' => '<%= facility.title %>', :'data-slug' => '<%= facility.slug %>' }
     .row-fluid
       .span8
-        %span.name <%= facility.title %>
-        %span.option <%= facility.slug %>
+        .object-info
+          %span.name <%= facility.title %>
+          %span.option <%= facility.slug %>
         
       .span4.actions
         .pull-right
@@ -99,8 +105,9 @@
   %li{ :'data-id' => '<%= market.id %>', :'data-title' => '<%= market.title %>', :'data-slug' => '<%= market.slug %>' }
     .row-fluid
       .span8
-        %span.name <%= market.title %>
-        %span.option <%= market.slug %>
+        .object-info
+          %span.name <%= market.title %>
+          %span.option <%= market.slug %>
         
       .span4.actions
         .pull-right
@@ -113,8 +120,9 @@
   %li{ :'data-id' => '<%= data_asset.id %>', :'data-title' => '<%= data_asset.title %>', :'data-slug' => '<%= data_asset.slug %>' }
     .row-fluid
       .span8
-        %span.name <%= data_asset.title %>
-        %span.option <%= data_asset.slug %>
+        .object-info
+          %span.name <%= data_asset.title %>
+          %span.option <%= data_asset.slug %>
         
       .span4.actions
         .pull-right
@@ -127,8 +135,9 @@
   %li{ :'data-id' => '<%= project.id %>', :'data-title' => '<%= project.title %>', :'data-slug' => '<%= project.slug %>' }
     .row-fluid
       .span8
-        %span.name <%= project.title %>
-        %span.option <%= project.slug %>
+        .object-info
+          %span.name <%= project.title %>
+          %span.option <%= project.slug %>
         
       .span4.actions
         .pull-right
@@ -141,8 +150,9 @@
   %li{ :'data-id' => '<%= risky_attribute.id %>', :'data-title' => '<%= risky_attribute.title %>', :'data-slug' => '<%= risky_attribute.slug %>' }
     .row-fluid
       .span8
-        %span.name <%= risky_attribute.title %>
-        %span.option <%= risky_attribute.slug %>
+        .object-info
+          %span.name <%= risky_attribute.title %>
+          %span.option <%= risky_attribute.slug %>
         
       .span4.actions
         .pull-right
