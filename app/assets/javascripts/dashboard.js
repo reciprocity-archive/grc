@@ -157,7 +157,10 @@ jQuery(function($) {
     $(e.target).find(".modal-body .source").html(
           $(new Spinner().spin().el)
             .css({
-              width: '100px', height: '100px', zIndex : calculate_spinner_z_index })
+              width: '100px', height: '100px',
+              left: '50%', top: '50%',
+              zIndex : calculate_spinner_z_index
+            })
       )
   });
 
