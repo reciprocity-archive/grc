@@ -73,7 +73,7 @@
     background:$white;
     overflow-y: auto;
     height:85%; //needs to be removed
-    > .tabbable {
+    > .tabs-left {
       height:100%;
       overflow-y:hidden;
       > .tab-content {
