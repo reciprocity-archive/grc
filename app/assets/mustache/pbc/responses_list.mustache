@@ -5,7 +5,7 @@
       <div class="item-title">
         <div class="row-fluid">
           <div class="span12">
-            <i class="grcicon-{{system.system_or_process}} process-icon"></i>
+            <i class="grcicon-{{system.system_or_process}}-black process-icon"></i>
             Response using {{system.system_or_process_capitalized}}:
             <span style="color:#333">
               {{system.title}}
@@ -264,10 +264,10 @@
                         <form>
                           <div class="row-fluid">
                             <div class="span10">
-                              <input class="input-block-level input-title" name="title" placeholder="Doc title or URL" type="text" {{ (el) -> el.pbc_autocomplete_documents() }}>
+                              <input class="input-block-level input-title" name="title" placeholder="Search for..." type="text" {{ (el) -> el.pbc_autocomplete_documents() }}>
                             </div>
                             <div class="span2">
-                              <a class="btn btn-mini pull-left add-document" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/documents/new" data-target="#ajax-modal-documents-new">
+                              <a class="btn btn-mini pull-left add-document" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/documents/new" data-target="#ajax-modal-documents-new" title="Add New Collection" rel="tooltip" data-placement="top">
                                 <i class="grcicon-add-new-black"></i>
                               </a>
                             </div>
