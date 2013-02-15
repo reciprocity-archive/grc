@@ -44,7 +44,7 @@
 							+ "</div>"
 						+ "</div>"
 
-				    	+ "<a class='btn' data-wysihtml5-command='createLink' title='Link'><i class='icon-share'></i></a>" 
+				    	+ "<a class='btn' data-wysihtml5-command='popupCreateLink' title='Link'><i class='icon-share'></i></a>" 
 
 					+ "</li>",
 
@@ -284,7 +284,7 @@
 				self.editor.currentView.element.focus();
 			});
 
-			toolbar.find('a[data-wysihtml5-command=createLink]').click(function() {
+			toolbar.find('a[data-wysihtml5-command=popupCreateLink]').click(function() {
 				insertLinkModal.modal('show');
 				insertLinkModal.on('click', '[data-dismiss="modal"]', function(e) {
 					e.stopPropagation();
