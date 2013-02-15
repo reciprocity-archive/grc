@@ -13,7 +13,7 @@
       , '  </a>'
       , '  <h2>Loading...</h2>'
       , '</div>'
-      , '<div class="modal-body"></div>'
+      , '<div class="modal-body" style="padding-top:150px;"></div>'
       , '<div class="modal-footer">'
       , '</div>'
       ];
@@ -23,7 +23,7 @@
           $(new Spinner().spin().el)
             .css({
               width: '100px', height: '100px',
-              left: '50px', top: '50px', 
+              left: '50%', top: '50%', 
               zIndex : calculate_spinner_z_index
             })
         ).end();
