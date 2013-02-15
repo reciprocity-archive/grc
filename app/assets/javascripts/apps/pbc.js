@@ -78,7 +78,7 @@ $.widget(
   }
   , _renderItem : function(ul, item) {
     var label = item.name ? item.name + " (" + item.label + ")" : item.label;
-    return $( "<li class='something'>" )
+    return $( "<li class='inline-search-result'>" )
         .data( "item.autocomplete", item )
         .append( "<a>" + escapeHTML(label) + "</a>" )
         .appendTo( ul );
@@ -92,11 +92,23 @@ $.widget(
   , { options : {
       source : CMS.Models.Document.search
       , select :  function(event, ui) {
-        $(event.target).trigger("documentSelected", ui.item);
+        if(ui.item.id !== null) {
+          $(event.target).trigger("documentSelected", ui.item);
+        }
         return false;
       }
       , search : function(event) {
 
+      }
+      , response : function(event, data) {
+        if(!data.content.length) {
+          data.content.push(
+            {link_url : "There is no Doc or URL in the system that matches your search. "
+            , id : null });
+          data.content.push(
+            {link_url : "Please create a new reference by pushing the + icon to the right"
+            , id : null})
+        }
       }
   }
   , _renderItem : function(ul, item) {
@@ -106,7 +118,7 @@ $.widget(
     } else {
       label = item.link_url;
     }
-    return $( "<li class='something'>" )
+    return $( "<li class='inline-search-result'>" )
         .data( "item.autocomplete", item )
         .append( "<a>" + escapeHTML(label) + "</a>" )
         .appendTo( ul );
