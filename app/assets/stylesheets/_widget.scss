@@ -48,13 +48,19 @@
     }
   }
   .filter {
-    padding:6px;
+    padding:3px 2px;
     background: $filterBgnd;
     .form-inline {
       margin-bottom: 0;
     }
     input {
       margin-bottom: 0;
+      border: 1px solid $popOverBorder;
+      background-image: url("/images/grcicons/icons.png");
+      background-repeat: no-repeat;
+      @include background-size(296px 296px);
+      background-position:-265px -51px;
+      padding-left: 33px;
     }
     .btn-mini {
       margin-top: 3px;
@@ -329,4 +335,65 @@
     @include outline-fix();
   }
 
+}
+
+.widget-add-placeholder {
+  background: $popOverHeaderBgnd;
+  border: 1px solid $popOverHeaderBorder;
+  @include border-radius($default-border-radius);
+  padding: 51px 0 49px 0;
+  margin-bottom: 20px;
+  text-align: center;
+  .btn-group {
+    display: inline;
+  }
+  .open {
+    .dropdown-toggle {
+      @include border-radius(0);
+      @include box-shadow(none);
+      color: $black;
+      i {
+        @include opacity(1);
+      }
+    }
+  }
+  a {
+    &.dropdown-toggle {
+      color: $gray;
+      @include transition(color 0.3s ease);
+      @include border-radius(0);
+      @include box-shadow(none);
+      font-size: 13px;
+      font-weight: bold;
+      padding: 0;
+      &:hover {
+        @include border-radius(0);
+        @include box-shadow(none);
+        color: $black;
+        text-decoration: none;
+        i {
+          @include opacity(1);
+        }
+      }
+      i {
+        @include opacity(0.3);
+        @include transition(opacity 0.3s ease);
+        &.grcicon-carot {
+          margin-top: 1px;
+          display: inline-block;
+        }
+      }
+    }
+  }
+  .dropdown-menu {
+    left: auto;
+    right: 115px;
+    bottom: -2px;
+    text-align: left;
+    .title {
+      padding: 0 7px 0 7px;
+      font-weight: bold;
+      line-height: 20px;
+    }
+  }
 }

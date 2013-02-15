@@ -292,6 +292,18 @@
   .demo {
     margin-top: 27px;
   }
+  .dashboard-title {
+    i {
+      margin-top: 6px;
+      @include opacity(0.4);
+      @include transition(opacity 0.3s ease);
+    }
+    &:hover {
+      i {
+        @include opacity(1);
+      }
+    }
+  }
 }
 
 .actions {

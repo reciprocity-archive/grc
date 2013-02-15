@@ -22,6 +22,18 @@
   }
 }
 
+[class^="grciconlarge-"] {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  vertical-align: top; //necessary or button with icon embedded will sometimes be to tall.
+  background-image: url("/images/grcicons/icons-large.png");
+  background-position: -2000px -2000px; // blank default state 
+  background-repeat: no-repeat;
+  @include background-size(264px 264px);
+}
+
 .grcicon-add-new {
   background-position:-224px -32px;
   .active & {
@@ -290,6 +302,14 @@
   background-position:-200px -176px;
 }
 
+// Large icons
+.grciconlarge-dashboard {
+  background-position:-8px -8px;
+}
+.grciconlarge-dashboard-white {
+  background-position:-8px -40px;
+}
+
 .showhide,
 .openclose {
   background-position:-200px -56px;
@@ -344,6 +364,9 @@
   &.risk {
     background-position: 0 -108px;
   }
+  &.dashboard {
+    background-position: -2000px -2000px;
+  }
   [class^="grcicon-"] {
     margin-top:4px;
     margin-left:4px;
@@ -388,3 +411,4 @@
 .grcicon-risk-black { background-position:-200px -224px; }
 .grcicon-attribute { background-position:-224px -248px }
 .grcicon-attribute-black { background-position:-224px -224px; }
+.grcicon-dashboard-big { background-position:-248px -224px; }
