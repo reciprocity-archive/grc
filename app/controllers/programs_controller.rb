@@ -62,7 +62,7 @@ class ProgramsController < BaseObjectsController
     if params[:relevant_to]
       @programs = @programs.relevant_to(Product.find(params[:relevant_to]))
     end
-    if params[:s]
+    if params[:s].present?
       @programs = @programs.db_search(params[:s])
     end
     @programs = allowed_objs(@programs.all, :read)
@@ -354,7 +354,7 @@ class ProgramsController < BaseObjectsController
 
   def sections
     @sections = @program.sections.includes(:controls => :implementing_controls)
-    if params[:s]
+    if params[:s].present?
       @sections = @sections.fulltext_search(params[:s])
     end
     @sections = allowed_objs(@sections.all.sort_by(&:slug_split_for_sort), :read)
@@ -370,7 +370,7 @@ class ProgramsController < BaseObjectsController
 
   def controls
     @controls = @program.controls.includes(:implementing_controls)
-    if params[:s]
+    if params[:s].present?
       @controls = @controls.fulltext_search(params[:s])
     end
     @controls = allowed_objs(@controls.all.sort_by(&:slug_split_for_sort), :read)
@@ -397,7 +397,7 @@ class ProgramsController < BaseObjectsController
 
   def control_sections
     @controls = @program.controls.includes(:sections)
-    if params[:s]
+    if params[:s].present?
       @controls = @controls.fulltext_search(params[:s])
     end
     @controls = allowed_objs(@controls.all.sort_by(&:slug_split_for_sort), :read)

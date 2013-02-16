@@ -35,7 +35,7 @@ class DocumentsController < BaseObjectsController
 
   def index
     @documents = Document
-    if params[:s]
+    if params[:s].present?
       @documents = @documents.db_search(params[:s])
     end
     @documents = allowed_objs(@documents.all, :read)
