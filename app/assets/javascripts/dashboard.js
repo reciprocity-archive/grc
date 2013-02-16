@@ -646,7 +646,7 @@ if(!/\/mapping/.test(window.location.href)) {
       e.preventDefault();
       $dialog.data('href', $(this).attr('href'));
       $dialog.load($(this).attr('href'), function() {
-        $dialog.modal_form({ backdrop: false }).modal_form('show');
+        $dialog.modal_form({ backdrop: true }).modal_form('show');
       });
     });
 
