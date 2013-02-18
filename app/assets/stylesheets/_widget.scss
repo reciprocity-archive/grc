@@ -1,24 +1,142 @@
 
 // widgets styles
 .widget {
-  border:1px solid $widgetBorder;
   margin-bottom: 20px;
   overflow-y:hidden;
   background:$white;
   @include transition(box-shadow 0.2s,border-color 0.2s);
+  ul.tree-structure {
+    &.simple {
+      li {
+        &:hover {
+          border-bottom: 1px solid $text;
+          .key {
+            color: $text;
+          }
+        }
+      }
+    }
+  }
+  &.governance {
+    .header {
+      background: $governance;
+      .widget-action {
+        background: darken($governance, 7%);
+      }
+    }
+    ul.tree-structure {
+      &.simple {
+        li {
+          &:hover {
+            border-bottom: 1px solid $governance;
+            .key {
+              color: $governance;
+            }
+          }
+        }
+      }
+    }
+  }
+  &.widget-tabs {
+    .content {
+      padding: 0;
+    }
+    .nav-tabs {
+      background: $lightGray;
+      margin-right: 7px;
+      padding-left: 2px;
+      padding-top: 9px;
+      border: none;
+      li {
+        a {
+          color: $gray;
+          @include transition(color 0.3s ease);
+          i {
+            @include opacity(0.3);
+            margin-right: 7px;
+            @include transition(opacity 0.3s ease);
+          }
+          &:hover {
+            color: $black;
+            i {
+              @include opacity(1);
+            }
+          }
+        }
+        &.active {
+          a {
+            color: $infoWidgetHeader;
+            i {
+              @include opacity(1);
+            }
+          }
+        }
+      }
+    }
+  }
   .header {
-    background:$widgetHeader;
+    background:$text;
     @include transition(background-color 0.2s);
     color:$white;
-    padding:6px;
+    height: 30px;
+    .widget-action {
+      height: 30px;
+      width: 30px;
+      background: darken($text, 7%);
+      @include box-shadow(inset 0 0 3px rgba(0, 0, 0, 0.5));
+      i {
+        @include opacity(0.5);
+        @include transition(opacity 0.3s ease);
+      }
+      a {
+        display: block;
+        width: 16px;
+        height: 16px;
+        padding: 7px;
+        &:hover {
+          i {
+            @include opacity(1);
+          }
+        }
+      }
+      &.widget-action-help {
+        @include box-shadow(none);
+        background: transparent;
+      }
+      &.widget-showhide {
+        @include transition(background 0.3s ease);
+        a {
+          width: 30px;
+          height: 30px;
+          padding: 0;
+          @include opacity(0.5);
+          @include transition(opacity 0.3s ease);
+          &:hover {
+            @include opacity(1);
+          }
+        }
+        &:hover {
+          @include box-shadow(none);
+          background: transparent;
+        }
+      }
+    }
     h2 {
-      @include transition(color 0.2s);
-      font-size: 15px;
-      font-weight:normal;
-      line-height: 24px;
-      color: $widgetTitle;
+      font-size: 16px;
+      font-weight:bold;
+      line-height: 28px;
+      color: $white;
       margin-bottom:0;
       @include oneline();
+      padding-left: 10px;
+      span {
+        font-size: 11px;
+        font-weight:normal;
+      }
+      i {
+        margin-top: 7px;
+        margin-right: 6px;
+      }
     }
     .btn-mini {
       margin-left:6px;
@@ -33,9 +151,6 @@
           @include opacity(1);
         }
       }
-    }
-    a.help {
-     margin-top:10px; 
     }
     @include row-fluid-fix();
   }
@@ -75,6 +190,8 @@
   }
   .content {
     padding:6px;
+    border:1px solid $widgetBorder;
+    border-top: none;
     background:$white;
     overflow-y: auto;
     height:85%; //needs to be removed
@@ -173,13 +290,6 @@
   }
   &:hover {
     @include box-shadow(0 0 12px $gray);
-    border-color:darken($widgetBorder, 20%);
-    .header {
-      background-color:darken($widgetHeader, 5%);
-      h2 {
-        color:#111;
-      }
-    }
   }
   .related-button {
     li {
