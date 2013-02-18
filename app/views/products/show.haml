@@ -37,7 +37,7 @@
   
       =render :partial => "main",
               :layout => 'layouts/widget_box',
-              :locals => { model_name.to_sym => instance }
+              :locals => { model_name.to_sym => instance, :widget_class => "business" }
                 
       =render :partial => "risks",
               :layout => 'layouts/widget_box',

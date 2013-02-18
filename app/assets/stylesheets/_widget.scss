@@ -9,9 +9,9 @@
     &.simple {
       li {
         &:hover {
-          border-bottom: 1px solid $text;
+          border-bottom: 1px solid $gray;
           .key {
-            color: $text;
+            color: $gray;
           }
         }
       }
@@ -31,6 +31,66 @@
             border-bottom: 1px solid $governance;
             .key {
               color: $governance;
+            }
+          }
+        }
+      }
+    }
+  }
+  &.compliance {
+    .header {
+      background: $compliance;
+      .widget-action {
+        background: darken($compliance, 7%);
+      }
+    }
+    ul.tree-structure {
+      &.simple {
+        li {
+          &:hover {
+            border-bottom: 1px solid $compliance;
+            .key {
+              color: $compliance;
+            }
+          }
+        }
+      }
+    }
+  }
+  &.risk {
+    .header {
+      background: $risk;
+      .widget-action {
+        background: darken($risk, 7%);
+      }
+    }
+    ul.tree-structure {
+      &.simple {
+        li {
+          &:hover {
+            border-bottom: 1px solid $risk;
+            .key {
+              color: $risk;
+            }
+          }
+        }
+      }
+    }
+  }
+  &.business {
+    .header {
+      background: $business;
+      .widget-action {
+        background: darken($business, 7%);
+      }
+    }
+    ul.tree-structure {
+      &.simple {
+        li {
+          &:hover {
+            border-bottom: 1px solid $business;
+            .key {
+              color: $business;
             }
           }
         }
@@ -88,14 +148,14 @@
     }
   }
   .header {
-    background:$text;
+    background:$gray;
     @include transition(background-color 0.2s);
     color:$white;
     height: 30px;
     .widget-action {
       height: 30px;
       width: 30px;
-      background: darken($text, 7%);
+      background: darken($gray, 7%);
       @include box-shadow(inset 0 0 3px rgba(0, 0, 0, 0.5));
       i {
         @include opacity(0.5);
@@ -141,14 +201,14 @@
       color: $white;
       margin-bottom:0;
       @include oneline();
-      padding-left: 10px;
+      padding-left: 16px;
       span {
         font-size: 11px;
         font-weight:normal;
       }
       i {
         margin-top: 7px;
-        margin-right: 6px;
+        margin-right: 7px;
       }
     }
     .btn-mini {
@@ -186,8 +246,8 @@
       background-image: url("/images/grcicons/icons.png");
       background-repeat: no-repeat;
       @include background-size(296px 296px);
-      background-position:-265px -51px;
-      padding-left: 33px;
+      background-position:-259px -195px;
+      padding-left: 40px;
     }
     .btn-mini {
       margin-top: 3px;
@@ -303,6 +363,12 @@
   }
   &:hover {
     @include box-shadow(0 0 12px $gray);
+    .header {
+      background-image: url("/images/grcicons/icons.png");
+      background-repeat: no-repeat;
+      @include background-size(296px 296px);
+      background-position: -272px -169px;
+    }
   }
   .related-button {
     li {
