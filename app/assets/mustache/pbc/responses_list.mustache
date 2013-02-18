@@ -149,10 +149,10 @@
                             <form>
                               <div class="row-fluid">
                                 <div class="span10">
-                                  <input class="input-block-level input-title" name="title" placeholder="Doc title or URL" type="text" {{ (el) -> el.pbc_autocomplete_documents() }}>
+                                  <input class="input-block-level input-title" name="title" placeholder="Search for Doc Title or URL" type="text" {{ (el) -> el.pbc_autocomplete_documents() }}>
                                 </div>
                                 <div class="span2">
-                                  <a class="btn btn-mini pull-left add-document" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/documents/new" data-target="#ajax-modal-documents-new">
+                                  <a class="btn btn-mini pull-left add-document" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/documents/new" data-target="#ajax-modal-documents-new" rel="tooltip" data-placement="top" title="Add new Sample">
                                     <i class="grcicon-add-new-black"></i>
                                   </a>
                                 </div>
@@ -211,10 +211,10 @@
                             <form>
                               <div class="row-fluid">
                                 <div class="span10">
-                                  <input class="input-block-level input-title" name="title" placeholder="Doc title or URL" type="text" {{ (el) -> el.pbc_autocomplete_documents() }}>
+                                  <input class="input-block-level input-title" name="title" placeholder="Search for Doc Title or URL" type="text" {{ (el) -> el.pbc_autocomplete_documents() }}>
                                 </div>
                                 <div class="span2">
-                                  <a class="btn btn-mini pull-left add-document" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/documents/new" data-target="#ajax-modal-documents-new">
+                                  <a class="btn btn-mini pull-left add-document" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/documents/new" data-target="#ajax-modal-documents-new" rel="tooltip" data-placement="top" title="Add new Worksheet">
                                     <i class="grcicon-add-new-black"></i>
                                   </a>
                                 </div>
@@ -264,7 +264,7 @@
                         <form>
                           <div class="row-fluid">
                             <div class="span10">
-                              <input class="input-block-level input-title" name="title" placeholder="Search for..." type="text" {{ (el) -> el.pbc_autocomplete_documents() }}>
+                              <input class="input-block-level input-title" name="title" placeholder="Search for Doc Title or URL" type="text" {{ (el) -> el.pbc_autocomplete_documents() }}>
                             </div>
                             <div class="span2">
                               <a class="btn btn-mini pull-left add-document" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/documents/new" data-target="#ajax-modal-documents-new" title="Add New Collection" rel="tooltip" data-placement="top">
