@@ -213,6 +213,12 @@ ul.tree-structure {
       padding:4px 6px 4px 10px;
       &:hover {
         background: $treeListBgnd;
+        .inline-info {
+          color:$black;
+          i {
+            @include opacity(0.8);
+          }
+        }
       }
       &.simple-item {
         line-height:14px;
