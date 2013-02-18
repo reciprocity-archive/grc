@@ -7,12 +7,12 @@
 %section{ :class => "widget #{widget_class}", :id => widget_id }
   %header.header
     .row-fluid
-      .span9
+      .span8
         %h2
           %i.grcicon-program
           =yield_content!(:widget_title)
       
-      .span3
+      .span4
         -help_path = yield_content!(:widget_help)
         .widget-action.pull-right.widget-showhide
           %a.active{:href => "#", :rel => "tooltip", :title => "Contract widget", :'data-placement'=>"top"}

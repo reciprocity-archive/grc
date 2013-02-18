@@ -33,7 +33,7 @@
     #middle_column.span8.widget-area
       =render :partial => 'systems/sub_systems',
               :layout => 'layouts/widget_box',
-              :locals => { :system => @system }
+              :locals => { :system => @system, :widget_class => "compliance" }
       
       .row-fluid
         .span6           

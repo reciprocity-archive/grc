@@ -32,7 +32,7 @@
     #middle_column.span8.widget-area
       =render :partial => "main",
               :layout => 'layouts/widget_box',
-              :locals => { model_name.to_sym => instance }
+              :locals => { model_name.to_sym => instance, :widget_class => "risk" }
   
       =render :partial => "extras",
               :layout => 'layouts/widget_box',
