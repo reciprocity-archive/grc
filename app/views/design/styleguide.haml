@@ -1207,6 +1207,28 @@
           %h2
             Widgets
         %section.content
+          %p
+            Examples of proper widget implementation. Every widget that is corespodent to some widget group have additional class. Those classes are:
+          %ul
+            %li
+              %strong .governance
+            %li
+              %strong .compliance
+            %li
+              %strong .risk
+            %li
+              %strong .business
+              
+          %p
+            If widget have left tabs structure like examples below it needs additional class
+            %strong .widget-tabs
+          
+          %p
+            On widget hover you can see 3 dots left from widget title. That 3 dots "tells" user that he can drag/drop widget.
+          %p
+            Also left from widget title you can see icons. Those icons corespodent to specific group.
+          %p
+            On the right from widget title you can see 3 icons. Help (always visible), close (it is shown only on widgets that are made by user) and contract/expand (also always visible). Contract/expand function is to contract or expand whole widget, leaving only widget header (title) and widget filter (search) sections.
           %section{ :class => "widget widget-tabs governance"}
             %header.header
               .row-fluid
