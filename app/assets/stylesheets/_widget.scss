@@ -6,7 +6,6 @@
   overflow-y:hidden;
   background:$white;
   @include transition(box-shadow 0.2s,border-color 0.2s);
-  @include border-radius($topBorderRadius);
   .header {
     background:$widgetHeader;
     @include transition(background-color 0.2s);
@@ -173,7 +172,7 @@
     }
   }
   &:hover {
-    @include box-shadow(0 0 2px $gray);
+    @include box-shadow(0 0 12px $gray);
     border-color:darken($widgetBorder, 20%);
     .header {
       background-color:darken($widgetHeader, 5%);
