@@ -1,41 +1,59 @@
 -content_for :tooltip_title do
   %h3 Program Information
 
-=program.title
-\|
-=program.slug
-\|
-=program.company? ? 'Company' : 'Regulation'
-
-%h3 Description
-
-.item
-  =display_as_html program.description
-
-.item
-  Created:
-  =display_time(program.created_at)
-.item
-  Updated:
-  =display_time(program.updated_at)
-
 -stats = program_stats(program)
-%h3 Sections
-.item
-  Done: 
-  =stats[:sections_done_count]
-.item
-  N/A: 
-  =stats[:sections_na_count]
-.item
-  Not Done: 
-  =stats[:sections_undone_count]
 
-%h3 Controls
-.item
-  Controls: 
-  =stats[:controls_count]
+.row-fluid
+  .span10
+    %h3
+      %i.grcicon-regulation-black
+      =program.slug
+      %span=program.title
+  .span2
+    %a.btn.btn-mini.pull-right{:href => flow_program_path(program), :rel => "tooltip", :title => "View Program", :style => "margin-top:2px"}
+      %i.grcicon-goto
 
-.item
-  Parented Controls: 
-  =stats[:controls_parented_count]
+.row-fluid
+  .span12
+    %h4
+      Type:
+      %span=program.company? ? 'Company' : 'Regulation'
+      
+  
+
+-if stats[:sections_count] > 0 || stats[:controls_count] > 0
+  .row-fluid
+    -if stats[:sections_count] > 0
+      .span6
+        %h4
+          Sections
+          (#{stats[:sections_count]})
+        .progress
+          .bar.bar-success{:style => "width:#{stats[:sections_done_percentage]}%", :rel => "tooltip", :title => "#{stats[:sections_done_count]} Done"}=stats[:sections_done_count]
+          .bar.bar-danger{:style => "width:#{stats[:sections_na_percentage]}%", :rel => "tooltip", :title => "#{stats[:sections_na_count]} N/A"}=stats[:sections_na_count]
+          .bar.bar-warning{:style => "width:#{stats[:sections_undone_percentage]}%", :rel => "tooltip", :title => "#{stats[:sections_undone_count]} Pending"}=stats[:sections_undone_count]
+    -if stats[:controls_count] > 0
+      .span6
+        %h4
+          Controls
+          (#{stats[:controls_count]})
+        .progress
+          .bar.bar-success{:style => "width:#{stats[:controls_complying_percentage]}%", :rel => "tooltip", :title => "#{stats[:controls_complying_count]} Complying"}=stats[:controls_complying_count]
+          .bar.bar-danger{:style => "width:#{stats[:controls_pending_percentage]}%", :rel => "tooltip", :title => "#{stats[:controls_pending_count]} Pending"}=stats[:controls_pending_count]
+          .bar.bar-warning{:style => "width:#{stats[:controls_approved_percentage]}%", :rel => "tooltip", :title => "#{stats[:controls_approved_count]} Approved"}=stats[:controls_approved_count]
+        .minor
+          Parented controls:
+          =stats[:controls_parented_count]
+
+-if program.description
+  .row-fluid
+    .span12
+      %h4 Description
+      =display_as_html program.description
+
+%br
+.row-fluid
+  .span6.created
+    Created: #{display_time(program.created_at)}
+  .span6.updated
+    Updated: #{display_time(program.updated_at)}
