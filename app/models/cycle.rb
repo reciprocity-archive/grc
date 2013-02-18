@@ -39,6 +39,6 @@ class Cycle < ActiveRecord::Base
 
   def created_by
     userid = Version.where({:item_id => self[:id], :item_type => self.class.name}).first[:whodunnit] rescue nil
-    userid.nil? ? nil : Person.where({:id => userid}).first
+    userid.nil? ? modified_by : Person.where({:id => userid}).first
   end
 end

@@ -25,7 +25,7 @@ class ProgramsController < BaseObjectsController
 
   def index
     @programs = Program
-    if params[:s]
+    if params[:s].present?
       @programs = @programs.db_search(params[:s])
     end
     @programs = allowed_objs(@programs.all, :read)

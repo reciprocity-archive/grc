@@ -71,7 +71,7 @@ class ControlsController < BaseObjectsController
 
   def implemented_controls
     @controls = @control.implemented_controls
-    if params[:s]
+    if params[:s].present?
       @controls = @controls.fulltext_search(params[:s])
     end
     @controls.all.sort_by(&:slug_split_for_sort)
@@ -87,7 +87,7 @@ class ControlsController < BaseObjectsController
 
   def implementing_controls
     @controls = @control.implementing_controls
-    if params[:s]
+    if params[:s].present?
       @controls = @controls.fulltext_search(params[:s])
     end
     @controls.all.sort_by(&:slug_split_for_sort)
@@ -96,7 +96,7 @@ class ControlsController < BaseObjectsController
 
   def systems
     @systems = @control.systems
-    if params[:s]
+    if params[:s].present?
       @systems = @systems.fulltext_search(params[:s])
     end
     @systems = @systems.all
@@ -106,7 +106,7 @@ class ControlsController < BaseObjectsController
 
   def risks
     @risks = @control.risks
-    if params[:s]
+    if params[:s].present?
       @risks = @risks.fulltext_search(params[:s])
     end
     @risks = @risks.all

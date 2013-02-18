@@ -217,8 +217,8 @@
     var that = this;
     var $el = this.$element;
     var shownevents, keyevents;
-    if(shownevents = $el.data("events").shown
-        && $(shownevents).filter(function() { 
+    if(!(shownevents = $el.data("events").shown)
+        || $(shownevents).filter(function() { 
             return $.inArray("arrange", this.namespace.split(".")) > -1; 
         }).length < 1) {
           $el.on("shown.arrange", function(ev) {

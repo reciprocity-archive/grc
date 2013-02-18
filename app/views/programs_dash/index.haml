@@ -77,7 +77,7 @@
     #left_column.span6.widget-area
       =render :partial => 'programs/list',
               :layout => 'layouts/widget_box',
-              :locals => { :programs => @programs }
+              :locals => { :programs => @programs, :widget_class => "governance" }
               
       %section.widget-add-placeholder
         .btn-group.dropup
@@ -141,7 +141,9 @@
               
     #right_column.span6.widget-area
       =render :partial => 'quick_find',
-            :layout => 'layouts/widget_box'
+              :layout => 'layouts/widget_box',
+              :locals => { :widget_class => "widget-tabs" }
+            
       -if has_feature? :BETA
         =render :partial => 'design/templates/riskWidgetGap'
         =render :partial => 'design/templates/riskWidgetRisk'

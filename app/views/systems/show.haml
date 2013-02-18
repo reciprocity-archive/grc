@@ -33,17 +33,13 @@
     #middle_column.span8.widget-area
       =render :partial => 'systems/sub_systems',
               :layout => 'layouts/widget_box',
+              :locals => { :system => @system, :widget_class => "compliance" }
+      =render :partial => 'systems/super_systems',
+              :layout => 'layouts/widget_box',
               :locals => { :system => @system }
-      
-      .row-fluid
-        .span6           
-          =render :partial => 'systems/super_systems',
-                  :layout => 'layouts/widget_box',
-                  :locals => { :system => @system }
-        .span6
-          =render :partial => 'systems/transactions',
-                  :layout => 'layouts/widget_box',
-                  :locals => { :system => @system }
+      =render :partial => 'systems/transactions',
+              :layout => 'layouts/widget_box',
+              :locals => { :system => @system }
   
   
     #right_column.span4.widget-area

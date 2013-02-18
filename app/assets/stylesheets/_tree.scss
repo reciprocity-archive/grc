@@ -22,6 +22,7 @@ h3.tab-title {
 }
 
 ul.single-row-tabs {
+  margin-right: 7px;
   li {
     float: none;
     clear: both;
@@ -194,6 +195,7 @@ ul.tree-structure {
     }
   }
   &.simple {
+    margin-right: 7px;
     .code {
       color: $green;
       background: none;
@@ -204,11 +206,19 @@ ul.tree-structure {
     strong {
       display: block;
     }
+    .name {
+      color: $text;
+    }
     li {
-      padding:4px 0;
+      padding:4px 6px 4px 10px;
       &:hover {
-        @include background-image(linear-gradient(left, $white, $lightGray, $white));
-        border-color:#ddd;
+        background: $treeListBgnd;
+        .inline-info {
+          color:$black;
+          i {
+            @include opacity(0.8);
+          }
+        }
       }
       &.simple-item {
         line-height:14px;

@@ -157,7 +157,10 @@ jQuery(function($) {
     $(e.target).find(".modal-body .source").html(
           $(new Spinner().spin().el)
             .css({
-              width: '100px', height: '100px', zIndex : calculate_spinner_z_index })
+              width: '100px', height: '100px',
+              left: '50%', top: '50%',
+              zIndex : calculate_spinner_z_index
+            })
       )
   });
 
@@ -643,7 +646,7 @@ if(!/\/mapping/.test(window.location.href)) {
       e.preventDefault();
       $dialog.data('href', $(this).attr('href'));
       $dialog.load($(this).attr('href'), function() {
-        $dialog.modal_form({ backdrop: false }).modal_form('show');
+        $dialog.modal_form({ backdrop: true }).modal_form('show');
       });
     });
 

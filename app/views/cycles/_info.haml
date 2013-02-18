@@ -31,7 +31,7 @@
     %label
       Created by
     %span
-      =cycle.modified_by.nil? ? 'unknown' : cycle.modified_by.display_name
+      =cycle.created_by.nil? ? 'unknown' : cycle.created_by.display_name
   %li
     %label
       Description

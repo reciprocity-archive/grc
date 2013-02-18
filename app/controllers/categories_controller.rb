@@ -23,7 +23,7 @@ class CategoriesController < BaseObjectsController
     if params[:leaves].present? && params[:leaves] == '1'
       @categories = @categories.leaves
     end
-    if params[:s]
+    if params[:s].present?
       @categories = @categories.db_search(params[:s])
     end
 

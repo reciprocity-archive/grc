@@ -49,7 +49,7 @@
   
       =render :partial => "main",
               :layout => 'layouts/widget_box',
-              :locals => { model_name.to_sym => instance, :widget_id => model_name + "_widget" }
+              :locals => { model_name.to_sym => instance, :widget_id => model_name + "_widget", :widget_class => "business" }
   
     #right_column.span4.widget-area
       =render :partial => "info",
