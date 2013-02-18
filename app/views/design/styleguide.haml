@@ -58,6 +58,10 @@
             %i.icon-chevron-right
             Actions List
         %li
+          %a{:href => "#widgets"}
+            %i.icon-chevron-right
+            Widgets
+        %li
           %a{:href => "#helper"}
             %i.icon-chevron-right
             Helper classes
@@ -1197,6 +1201,185 @@
           %p
             <span class="label label-info">Note!</span>
             You can combine every icon you want and insert any text you want. Also it this example we added dropdown list.
+      
+      %section#widgets.widget
+        %section.header
+          %h2
+            Widgets
+        %section.content
+          %section{ :class => "widget widget-tabs governance"}
+            %header.header
+              .row-fluid
+                .span8
+                  %h2
+                    %i.grcicon-program
+                    Governance
+                
+                .span4
+                  -help_path = yield_content!(:widget_help)
+                  .widget-action.pull-right.widget-showhide
+                    %a.active{:href => "#", :rel => "tooltip", :title => "Contract widget", :'data-placement'=>"top"}
+                    
+                  -#-if has_feature? :BETA
+                  .widget-action.pull-right
+                    %a.remove{:href => "#", :rel => "tooltip", :title => "Remove widget", :'data-placement'=>"top"}
+                      %i.grcicon-x-white
+                  -#-if !help_path.blank?
+                  .widget-action.pull-right.widget-action-help
+                    %a{:href => "/help/#{help_path}", :'data-toggle' => 'modal-ajax', :rel => "tooltip", :title => "Help - What is this?", :'data-placement'=>"top"}
+                      %i.grcicon-help
+                
+            %section.content
+              .filter
+                %input.ui-corner-all.widgetsearch.clear-value(type='text' placeholder='Search')
+              
+              -quick_result ||= nil
+              -prefix = quick_result ? "qf" : "dash"
+              
+              .tabbable.tabs-left{ :id => quick_result ? nil : "quick_find" }
+                %ul.nav.nav-tabs
+                  %li.active=link_to '<i class="grcicon-program-black"></i> Programs'.html_safe, "##{prefix}_programs", :data => { :'tab-href' => flow_programs_path(:quick => true, :qr => quick_result), :toggle => 'tab' }
+              
+                .tab-content
+                  .tab-pane{ :id => "#{prefix}_programs" }
+            
+            
+            =yield_content!(:widget_footer)
+            
+          %section{ :class => "widget widget-tabs compliance"}
+            %header.header
+              .row-fluid
+                .span8
+                  %h2
+                    %i.grcicon-system
+                    Compliance
+                
+                .span4
+                  -help_path = yield_content!(:widget_help)
+                  .widget-action.pull-right.widget-showhide
+                    %a.active{:href => "#", :rel => "tooltip", :title => "Contract widget", :'data-placement'=>"top"}
+                    
+                  -#-if has_feature? :BETA
+                  .widget-action.pull-right
+                    %a.remove{:href => "#", :rel => "tooltip", :title => "Remove widget", :'data-placement'=>"top"}
+                      %i.grcicon-x-white
+                  -#-if !help_path.blank?
+                  .widget-action.pull-right.widget-action-help
+                    %a{:href => "/help/#{help_path}", :'data-toggle' => 'modal-ajax', :rel => "tooltip", :title => "Help - What is this?", :'data-placement'=>"top"}
+                      %i.grcicon-help
+                
+            %section.content
+              .filter
+                %input.ui-corner-all.widgetsearch.clear-value(type='text' placeholder='Search')
+              
+              -quick_result ||= nil
+              -prefix = quick_result ? "qf" : "dash"
+              
+              .tabbable.tabs-left{ :id => quick_result ? nil : "quick_find" }
+                %ul.nav.nav-tabs
+                  %li=link_to '<i class="grcicon-control-black"></i> Controls'.html_safe, "##{prefix}_controls", :data => { :'tab-href' => flow_controls_path(:quick => true, :qr => quick_result), :toggle => 'tab' }
+                  %li=link_to '<i class="grcicon-process-black"></i> Processes'.html_safe, "##{prefix}_processes", :data => { :'tab-href' => flow_systems_path(:quick => true, :qr => quick_result, :is_biz_process => true), :toggle => 'tab' }
+                  %li.active
+                    =link_to '<i class="grcicon-system-black"></i> Systems'.html_safe, "##{prefix}_systems", :data => { :'tab-href' => flow_systems_path(:quick => true, :qr => quick_result, :is_biz_process => false), :toggle => 'tab' }
+              
+                .tab-content
+                  .tab-pane{ :id => "#{prefix}_controls" }
+                  .tab-pane{ :id => "#{prefix}_processes" }
+                  .tab-pane{ :id => "#{prefix}_systems" }
+            
+            
+            =yield_content!(:widget_footer)
+              
+          %section{ :class => "widget widget-tabs risk"}
+            %header.header
+              .row-fluid
+                .span8
+                  %h2
+                    %i.grcicon-system
+                    Risk
+                
+                .span4
+                  -help_path = yield_content!(:widget_help)
+                  .widget-action.pull-right.widget-showhide
+                    %a.active{:href => "#", :rel => "tooltip", :title => "Contract widget", :'data-placement'=>"top"}
+                    
+                  -#-if has_feature? :BETA
+                  .widget-action.pull-right
+                    %a.remove{:href => "#", :rel => "tooltip", :title => "Remove widget", :'data-placement'=>"top"}
+                      %i.grcicon-x-white
+                  -#-if !help_path.blank?
+                  .widget-action.pull-right.widget-action-help
+                    %a{:href => "/help/#{help_path}", :'data-toggle' => 'modal-ajax', :rel => "tooltip", :title => "Help - What is this?", :'data-placement'=>"top"}
+                      %i.grcicon-help
+                
+            %section.content
+              .filter
+                %input.ui-corner-all.widgetsearch.clear-value(type='text' placeholder='Search')
+              
+              -quick_result ||= nil
+              -prefix = quick_result ? "qf" : "dash"
+              
+              .tabbable.tabs-left{ :id => quick_result ? nil : "quick_find" }
+                %ul.nav.nav-tabs
+                  %li.active=link_to '<i class="grcicon-risk-black"></i> Risks'.html_safe, "##{prefix}_risks", :data => { :'tab-href' => flow_risks_path(:quick => true, :qr => quick_result), :toggle => 'tab' }
+                  %li=link_to '<i class="grcicon-attribute-black"></i> Attributes'.html_safe, "##{prefix}_risky_attributes", :data => { :'tab-href' => flow_risky_attributes_path(:quick => true, :qr => quick_result), :toggle => 'tab' }
+              
+                .tab-content
+                  .tab-pane{ :id => "#{prefix}_risks" }
+                  .tab-pane{ :id => "#{prefix}_risky_attributes" }
+            
+            
+            =yield_content!(:widget_footer)
+            
+          %section{ :class => "widget widget-tabs business"}
+            %header.header
+              .row-fluid
+                .span8
+                  %h2
+                    %i.grcicon-system
+                    Business
+                
+                .span4
+                  -help_path = yield_content!(:widget_help)
+                  .widget-action.pull-right.widget-showhide
+                    %a.active{:href => "#", :rel => "tooltip", :title => "Contract widget", :'data-placement'=>"top"}
+                    
+                  -#-if has_feature? :BETA
+                  .widget-action.pull-right
+                    %a.remove{:href => "#", :rel => "tooltip", :title => "Remove widget", :'data-placement'=>"top"}
+                      %i.grcicon-x-white
+                  -#-if !help_path.blank?
+                  .widget-action.pull-right.widget-action-help
+                    %a{:href => "/help/#{help_path}", :'data-toggle' => 'modal-ajax', :rel => "tooltip", :title => "Help - What is this?", :'data-placement'=>"top"}
+                      %i.grcicon-help
+                
+            %section.content
+              .filter
+                %input.ui-corner-all.widgetsearch.clear-value(type='text' placeholder='Search')
+              
+              -quick_result ||= nil
+              -prefix = quick_result ? "qf" : "dash"
+              
+              .tabbable.tabs-left{ :id => quick_result ? nil : "quick_find" }
+                %ul.nav.nav-tabs
+                  %li=link_to '<i class="grcicon-product-black"></i> Products'.html_safe, "##{prefix}_products", :data => { :'tab-href' => flow_products_path(:quick => true, :qr => quick_result), :toggle => 'tab' }
+                  %li.active=link_to '<i class="grcicon-orggroup-black"></i> Org Groups'.html_safe, "##{prefix}_org_groups", :data => { :'tab-href' => flow_org_groups_path(:quick => true, :qr => quick_result), :toggle => 'tab' }
+                  %li=link_to '<i class="grcicon-facility-black"></i> Facilities'.html_safe, "##{prefix}_facilities", :data => { :'tab-href' => flow_facilities_path(:quick => true, :qr => quick_result), :toggle => 'tab' }
+                  %li=link_to '<i class="grcicon-market-black"></i> Markets'.html_safe, "##{prefix}_markets", :data => { :'tab-href' => flow_markets_path(:quick => true, :qr => quick_result), :toggle => 'tab' }
+                  %li=link_to '<i class="grcicon-dataasset-black"></i> Data Assets'.html_safe, "##{prefix}_data_assets", :data => { :'tab-href' => flow_data_assets_path(:quick => true, :qr => quick_result), :toggle => 'tab' }
+                  %li=link_to '<i class="grcicon-project-black"></i> Projects'.html_safe, "##{prefix}_projects", :data => { :'tab-href' => flow_projects_path(:quick => true, :qr => quick_result), :toggle => 'tab' }
+              
+                .tab-content
+                  .tab-pane{ :id => "#{prefix}_products" }
+                  .tab-pane{ :id => "#{prefix}_org_groups" }
+                  .tab-pane{ :id => "#{prefix}_facilities" }
+                  .tab-pane{ :id => "#{prefix}_markets" }
+                  .tab-pane{ :id => "#{prefix}_projects" }
+                  .tab-pane{ :id => "#{prefix}_data_assets" }
+            
+            
+            =yield_content!(:widget_footer)
+              
             
       %section#helper.widget
         %section.header
