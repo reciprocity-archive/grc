@@ -14,7 +14,7 @@ module Importer
     end
 
     def run_csv(csv_string)
-      program = nil
+      directive = nil
 
       headers_seen = false
 
@@ -31,19 +31,19 @@ module Importer
             next
 
           # We're still in metadata mode
-          elsif row[0] && row[0].match(/program/i)
+          elsif row[0] && row[0].match(/directive/i)
             slug = row[1].strip
             title = row[2].present? ? row[2].strip : slug
 
-            program = Program.where(:slug => slug).first
-            program ||= Program.create(
+            directive = Directive.where(:slug => slug).first
+            directive ||= Directive.create(
               :slug => slug,
               :title => title)
 
             section = Section.create_in_tree(
               :slug => slug,
               :title => title,
-              :program => program)
+              :directive => directive)
           end
 
         else
@@ -65,7 +65,7 @@ module Importer
             :slug => row[0].strip,
             :title => title,
             :description => description,
-            :program => program)
+            :directive => directive)
         end
       end
 

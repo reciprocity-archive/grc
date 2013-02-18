@@ -10,7 +10,7 @@ describe MappingController do
       # FIXME: rewrite this using the shared authorization controller tests
       login({}, {})
       create_base_objects
-      get 'show', :program_id => @reg.id
+      get 'show', :directive_id => @reg.id
       response.should be_unauthorized
     end
   end
@@ -19,7 +19,7 @@ describe MappingController do
     before :each do
       login({}, { :role => 'superuser' })
       create_base_objects
-      @cctl = FactoryGirl.create(:control, :title => 'Company ctl 1', :slug => 'COM1-CTL2', :description => 'x', :program => @creg);
+      @cctl = FactoryGirl.create(:control, :title => 'Company ctl 1', :slug => 'COM1-CTL2', :description => 'x', :directive => @creg);
     end
 
     describe "GET section_dialog" do
@@ -53,22 +53,22 @@ describe MappingController do
 
     describe "GET find_sections" do
       it "returns success" do
-        get 'find_sections', :program_id => @reg.id
+        get 'find_sections', :directive_id => @reg.id
         response.should be_success
       end
     end
 
     describe "GET find_controls" do
       it "returns success" do
-        get 'find_controls', :program_id => @reg.id, :control_type => 'company'
+        get 'find_controls', :directive_id => @reg.id, :control_type => 'company'
         response.should be_success
       end
     end
 
     describe "GET 'show'" do
       it "returns http success" do
-        get 'show', :program_id => @reg.id
-        assigns(:program).should eq(@reg)
+        get 'show', :directive_id => @reg.id
+        assigns(:directive).should eq(@reg)
         assigns(:rcontrols).should eq([@ctl])
         assigns(:ccontrols).should eq([@cctl])
         response.should be_success

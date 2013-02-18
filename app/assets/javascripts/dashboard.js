@@ -64,8 +64,8 @@ jQuery(function($) {
 
   /* FIXME: This was removed because it's inconsistent with the new slug
        object-name-prefix paradigm.  (E.g. controls having slug of CONTROL-X).
-  // Setup program-select inputs to prefill slug field
-  $('body').on('change', 'select[name$="[program_id]"]', function(e) {
+  // Setup directive-select inputs to prefill slug field
+  $('body').on('change', 'select[name$="[directive_id]"]', function(e) {
     var $this = $(this)
       , $form = $(this).closest('form')
       , $option = $(this).find('option[value="' + $(this).val() + '"]')

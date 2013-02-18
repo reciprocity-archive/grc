@@ -37,12 +37,17 @@ FactoryGirl.define do
   end
 
   factory :program do
+    title 'Program'
+    slug
+  end
+
+  factory :directive do
     ignore do
       num_people 3
       num_sections 3
     end
 
-    title 'Program'
+    title 'Directive'
     slug
 
     trait :with_people do
@@ -56,7 +61,7 @@ FactoryGirl.define do
 
     trait :with_sections do
       after(:create) do |prog, evaluator|
-        section = FactoryGirl.create_list(:section, evaluator.num_sections, program: prog)
+        section = FactoryGirl.create_list(:section, evaluator.num_sections, directive: prog)
       end
     end
 
@@ -64,10 +69,15 @@ FactoryGirl.define do
       after(:create) do |prog, evaluator|
         (1..evaluator.num_sections).to_a.map do
           section = FactoryGirl.create(:section_with_children,
-                                       { program: prog })
+                                       { directive: prog })
         end
       end
     end
+  end
+
+  factory :program_directive do
+    program
+    directive
   end
 
   factory :account do
@@ -84,19 +94,19 @@ FactoryGirl.define do
   factory :section do
     title 'Section'
     slug
-    program
+    directive
 
     factory :section_with_ancestors do
       ignore do
         ancestor_depth 3
       end
 
-      # FIXME: Make all sections have the same program
+      # FIXME: Make all sections have the same directive
       parent do |s|
         if s.ancestor_depth > 0
           s.association(:section_with_ancestors,
                         { ancestor_depth: s.ancestor_depth - 1,
-                          program: s.program })
+                          directive: s.directive })
         end
       end
     end
@@ -111,7 +121,7 @@ FactoryGirl.define do
         s.parent_slug + '-' + FactoryGirl.generate(:slug)
       end
 
-      # FIXME: Make all sections have the same program
+      # FIXME: Make all sections have the same directive
       parent do |s|
         if s.ancestor_depth > 0
           s.association(:section_with_children, ancestor_depth: s.ancestor_depth - 1, parent_slug: sec.slug)
@@ -121,12 +131,12 @@ FactoryGirl.define do
   end
 
   factory :control do
-    # FIXME: program should not be required, as there may be multiple "parent"
-    # programs via different sections
+    # FIXME: directive should not be required, as there may be multiple "parent"
+    # directives via different sections
 
     title 'Factory Control'
     slug
-    program
+    directive
     description 'x'
 
     factory :control_with_child_controls do
@@ -227,7 +237,7 @@ FactoryGirl.define do
   factory :relationship_type do
   end
   factory :relationship do
-    source { |c| c.association(:program) }
+    source { |c| c.association(:directive) }
     destination { |c| c.association(:product) }
   end
 
@@ -251,7 +261,7 @@ FactoryGirl.define do
     title 'title x'
     complete false
     start_at '2012-01-01'
-    program { |c| c.association(:program) }
+    directive { |c| c.association(:directive) }
   end
 
   factory :document do

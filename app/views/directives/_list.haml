@@ -1,0 +1,56 @@
+-content_for :widget_title do
+  Programs
+  %span.badge=@programs.count
+
+-content_for :widget_help, 'programs_list'
+
+-content_for :widget_id, 'programs_list_widget'
+
+%ul.tree-structure.simple
+  -@programs.select {|p|p.company_controls?}.each do |program|
+    %li
+      %a{ :href => flow_program_path(program), :data => { :'original-title' => 'Program Information', :'content' => render(:template => 'programs/tooltip', :locals => { :program => program }), :placement => 'right', :'popover-trigger' => 'sticky-hover'}, :style => "display:block;" }
+        .row-fluid
+          .span12
+            %strong.oneline{:style => "green"}
+              .grcobject.governance
+                %i.grcicon-program
+              =program.title
+
+  -@programs.reject {|p|p.company_controls?}.each do |program|
+    %li
+      -stats = program_stats(program)
+      %a{ :href => flow_program_path(program), :data => { :'original-title' => 'Program Information', :'content' => render(:template => 'programs/tooltip', :locals => { :program => program }), :placement => 'right', :'popover-trigger' => 'sticky-hover'}, :style => "display:block;" }
+        .row-fluid
+          .span4
+            %strong.oneline
+              .grcobject.governance
+                %i.grcicon-regulation
+              =program.title
+          -if stats[:sections_count] > 0
+            .span2.tiny-label
+              %span Regulations (#{stats[:sections_count]})
+            .span2
+              .progress
+                .bar.bar-success{ :'data-percentage' => stats[:sections_done_percentage], :'data-toggle' => 'tooltip', :'title' => "#{stats[:sections_done_count]} Done" } #{stats[:sections_done_count]}
+                .bar.bar-danger{ :'data-percentage' => stats[:sections_na_percentage], :'data-toggle' => 'tooltip', :'title' => "#{stats[:sections_na_count]} N/A" } #{stats[:sections_na_count]}
+                .bar.bar-warning{ :'data-percentage' => stats[:sections_undone_percentage], :'data-toggle' => 'tooltip', :'title' => "#{stats[:sections_undone_count]} Pending" } #{stats[:sections_undone_count]}
+          -else
+            .span2.tiny-label
+              %span no sections
+            .span2
+              .progress
+          -if stats[:controls_count] > 0
+            .span2.tiny-label
+              %span Controls (#{stats[:controls_count]})
+            .span2
+              .progress
+                .bar.bar-success{ :'data-percentage' => stats[:controls_complying_percentage], :'data-toggle' => 'tooltip', :'title' => "#{stats[:controls_complying_count]} Complying" } #{stats[:controls_complying_count]}
+                .bar.bar-danger{ :'data-percentage' => stats[:controls_pending_percentage], :'data-toggle' => 'tooltip', :'title' => "#{stats[:controls_pending_count]} Pending" } #{stats[:controls_pending_count]}
+                .bar.bar-warning{ :'data-percentage' => stats[:controls_approved_percentage], :'data-toggle' => 'tooltip', :'title' => "#{stats[:controls_approved_count]} Approved"} #{stats[:controls_approved_count]}
+          -else
+            .span2.tiny-label
+              %span no controls
+            .span2
+              .progress
+

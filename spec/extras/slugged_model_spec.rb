@@ -2,14 +2,14 @@ require 'spec_helper'
 
 describe SluggedModel do
   before :each do
-    @ap1 = FactoryGirl.create(:program, :slug => 'FASLUG1')
-    @ap2 = FactoryGirl.create(:program, :slug => 'FASLUG2')
-    @bp1 = FactoryGirl.create(:program, :slug => 'FBSLUG1')
-    @bp2 = FactoryGirl.create(:program, :slug => 'FBSLUG2')
-    @as1 = FactoryGirl.create(:section, :slug => 'FASLUG1-ASEC1', :program => @ap1)
-    @as2 = FactoryGirl.create(:section, :slug => 'FASLUG1-ASEC2', :program => @ap1)
-    @bs1 = FactoryGirl.create(:section, :slug => 'FBSLUG1-ASEC1', :program => @bp1)
-    @bs2 = FactoryGirl.create(:section, :slug => 'FBSLUG1-ASEC2', :program => @bp1)
+    @ap1 = FactoryGirl.create(:directive, :slug => 'FASLUG1')
+    @ap2 = FactoryGirl.create(:directive, :slug => 'FASLUG2')
+    @bp1 = FactoryGirl.create(:directive, :slug => 'FBSLUG1')
+    @bp2 = FactoryGirl.create(:directive, :slug => 'FBSLUG2')
+    @as1 = FactoryGirl.create(:section, :slug => 'FASLUG1-ASEC1', :directive => @ap1)
+    @as2 = FactoryGirl.create(:section, :slug => 'FASLUG1-ASEC2', :directive => @ap1)
+    @bs1 = FactoryGirl.create(:section, :slug => 'FBSLUG1-ASEC1', :directive => @bp1)
+    @bs2 = FactoryGirl.create(:section, :slug => 'FBSLUG1-ASEC2', :directive => @bp1)
   end
 
   context "compact_slug" do
@@ -29,20 +29,20 @@ describe SluggedModel do
 
   context "generate" do
     it "should generate an ID when one isn't given" do
-      p = Program.create(:title => 'Test Program')
-      p.slug.should eq('PROGRAM-%04d' % p.id)
+      p = Directive.create(:title => 'Test Directive')
+      p.slug.should eq('DIRECTIVE-%04d' % p.id)
     end
 
     it "should generate a slug with the correct name when there is a parent" do
-      p = FactoryGirl.create(:program)
-      s = Section.create({:title => 'parent', :program => p}, :without_protection => true)
-      s2 = Section.create({:title => 'child', :parent => s, :program => p}, :without_protection => true)
+      p = FactoryGirl.create(:directive)
+      s = Section.create({:title => 'parent', :directive => p}, :without_protection => true)
+      s2 = Section.create({:title => 'child', :parent => s, :directive => p}, :without_protection => true)
 
       s2.slug.should eq(s.slug + '-SECTION-%04d' % s2.id)
     end
 
     it "should undo the generated slug in the case of a validation failure" do
-      p = Program.new
+      p = Directive.new
       p.save
       p.slug.should eq(nil)
     end
@@ -51,7 +51,7 @@ describe SluggedModel do
   context "SlugTree" do
     context "initialize" do
       it "should initialize properly" do
-        st = Program.slugtree([@bs1, @bs2])
+        st = Directive.slugtree([@bs1, @bs2])
         st.prefix.should eq('')
         st.parent.should eq(nil)
       end
@@ -68,13 +68,13 @@ describe SluggedModel do
   context "ClassMethods" do
     context "slugfilter" do
       it "should properly filter" do
-        r = Program.slugfilter('FA')
+        r = Directive.slugfilter('FA')
         r.count.should eq(2)
         r.all.should eq([@ap1, @ap2])
-        r = Program.slugfilter('FB')
+        r = Directive.slugfilter('FB')
         r.count.should eq(2)
         r.all.should eq([@bp1, @bp2])
-        r = Program.slugfilter('F')
+        r = Directive.slugfilter('F')
 
         r.count.should eq(4)
         r.all.should eq([@ap1, @ap2, @bp1, @bp2])
@@ -83,7 +83,7 @@ describe SluggedModel do
 
     context "slugtree" do
       it "should have properly sorted and hierarchical children" do
-        st = Program.slugtree(Control.all)
+        st = Directive.slugtree(Control.all)
       end
     end
   end

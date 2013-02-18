@@ -259,6 +259,6 @@ $(document).ready(function() {
     }
   }
   
-  // Set up tab handlers and load the default tab(programs)
+  // Set up tab handlers and load the default tab(directives)
   setup_ajax_tab('#related-graph')
 })

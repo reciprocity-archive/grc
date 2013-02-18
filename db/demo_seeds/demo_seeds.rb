@@ -21,15 +21,15 @@ ActiveRecord::Base.transaction do
   account_person1 = Account.find_by_email('owner1@t.com').person
   account_person2 = Account.find_by_email('owner2@t.com').person
 
-  # Programs
+  # Directives
   (1..SIZE).each do |ind|
-    Program.
+    Directive.
       where(:slug => "REG#{ind}").
       first_or_create!(:title => "Reg #{ind}")
   end
 
-  prog1 = Program.find_by_slug('REG1')
-  prog2 = Program.find_by_slug('REG2')
+  prog1 = Directive.find_by_slug('REG1')
+  prog2 = Directive.find_by_slug('REG2')
 
   prog1.object_people.
     where(:role => :owner).
@@ -43,28 +43,28 @@ ActiveRecord::Base.transaction do
   co = Section.
     where(:slug => 'REG1-CO1').
     first_or_create!(
-      {:title => 'CO 1', :description => 'x', :program => prog1},
+      {:title => 'CO 1', :description => 'x', :directive => prog1},
       :without_protection => true)
 
   # Controls
   ctl = Control.
     where(:slug => 'REG1-CTL1').
     first_or_create!(
-      {:title => 'Control 1', :description => 'x', :program => prog2},
+      {:title => 'Control 1', :description => 'x', :directive => prog2},
       :without_protection => true)
 
-  company = Program.find_by_slug('COMPANY')
+  company = Directive.find_by_slug('COMPANY')
   ctl = Control.find_or_create_by_slug!({
     :slug => 'COMPANY-EVIL',
     :title => 'Be less evil',
     :description => 'Reduce the quantity and quality of evil',
-    :program => company
+    :directive => company
   })
 
   ctl = Control.
     where(:slug => 'REG1-CTL1').
     first_or_create!(
-      {:title => 'Control 1', :description => 'x', :program => prog2},
+      {:title => 'Control 1', :description => 'x', :directive => prog2},
       :without_protection => true)
 
   ctl.categories << Category.where(:name => 'Authorization').first
@@ -73,18 +73,18 @@ ActiveRecord::Base.transaction do
   (2..SIZE).each do |ind|
     Control.
       where(:slug => "REG2-CTL#{ind}").
-      first_or_create!(:title => "Control #{ind}", :program => prog2)
+      first_or_create!(:title => "Control #{ind}", :directive => prog2)
   end
 
   company_ctl = Control.
     where(:slug => 'COM-CTL1').
     first_or_create!(
-      {:title => 'Company Control 1', :description => 'x', :program => prog1},
+      {:title => 'Company Control 1', :description => 'x', :directive => prog1},
       :without_protection => true)
   cycle = Cycle.
-    where(:program_id => prog1).
+    where(:directive_id => prog1).
     first_or_create!(
-      {:title => 'Audit 1', :program => prog1, :start_at => '2011-01-01', :complete => false},
+      {:title => 'Audit 1', :directive => prog1, :start_at => '2011-01-01', :complete => false},
       :without_protection => true)
 
   # People
@@ -245,13 +245,13 @@ ActiveRecord::Base.transaction do
       )
 
     Relationship.
-      where(:relationship_type_id => 'program_is_relevant_to_org_group',
+      where(:relationship_type_id => 'directive_is_relevant_to_org_group',
         :source_type => prog1.class.to_s,
         :source_id => prog1.id,
         :destination_type => org.class.to_s,
         :destination_id => org.id).
       first_or_create!({
-          :relationship_type_id => 'program_is_relevant_to_org_group',
+          :relationship_type_id => 'directive_is_relevant_to_org_group',
           :source => prog1,
           :destination => org},
         :without_protection => true
@@ -297,13 +297,13 @@ ActiveRecord::Base.transaction do
       )
 
     Relationship.
-      where(:relationship_type_id => 'program_is_relevant_to_product',
+      where(:relationship_type_id => 'directive_is_relevant_to_product',
         :source_type => prog1.class.to_s,
         :source_id => prog1.id,
         :destination_type => prod.class.to_s,
         :destination_id => prod.id).
       first_or_create!({
-          :relationship_type_id => 'program_is_relevant_to_product',
+          :relationship_type_id => 'directive_is_relevant_to_product',
           :source => prog1,
           :destination => prod},
         :without_protection => true

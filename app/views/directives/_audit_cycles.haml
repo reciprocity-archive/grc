@@ -1,6 +1,6 @@
 -content_for :widget_title do
   Audit Cycles
-  %span.badge=program.cycles.count
+  %span.badge=directive.cycles.count
 
 -content_for :widget_help, 'program_cycles'
 
@@ -17,7 +17,7 @@
 
 
 %ul.tree-structure.simple
-  -program.cycles.order("start_at DESC").each do |cycle|
+  -directive.cycles.order("start_at DESC").each do |cycle|
     %li.simple-item
       %a{:href => flow_cycle_path(cycle)}
         .item-title

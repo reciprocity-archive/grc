@@ -9,10 +9,10 @@ describe ControlsController do
     before :each do
       create_base_objects
 
-      @ctl2 = FactoryGirl.create(:control, :title => 'Control 2', :slug => 'CTL2', :description => 'x', :program => @creg)
-      @ctl3 = FactoryGirl.create(:control, :title => 'Control 3', :slug => 'CTL2-CTL3', :description => 'x', :parent => @ctl2, :program => @creg)
-      @sec2 = FactoryGirl.create(:section, :title => 'Section 2', :slug => 'REG1-SEC2', :description => 'x', :program => @reg)
-      @sec3 = FactoryGirl.create(:section, :title => 'Section 3', :slug => 'REG1-SEC3', :description => 'x', :program => @reg)
+      @ctl2 = FactoryGirl.create(:control, :title => 'Control 2', :slug => 'CTL2', :description => 'x', :directive => @creg)
+      @ctl3 = FactoryGirl.create(:control, :title => 'Control 3', :slug => 'CTL2-CTL3', :description => 'x', :parent => @ctl2, :directive => @creg)
+      @sec2 = FactoryGirl.create(:section, :title => 'Section 2', :slug => 'REG1-SEC2', :description => 'x', :directive => @reg)
+      @sec3 = FactoryGirl.create(:section, :title => 'Section 3', :slug => 'REG1-SEC3', :description => 'x', :directive => @reg)
       @sec2.controls << @ctl
       @sec2.save
       @sec3.controls << @ctl2
@@ -23,7 +23,7 @@ describe ControlsController do
       @model = Control
       @index_objs = [@ctl, @ctl2, @ctl3]
       @object = @ctl
-      @create_params = { :slug => 'test', :title => 'test', :program_id => @creg.id }
+      @create_params = { :slug => 'test', :title => 'test', :directive_id => @creg.id }
     end
 
     it_behaves_like "an authorized create"
@@ -44,10 +44,10 @@ describe ControlsController do
       login({}, {:role => 'superuser'})
       create_base_objects
 
-      @ctl2 = FactoryGirl.create(:control, :title => 'Control 2', :slug => 'CTL2', :description => 'x', :program => @creg)
-      @ctl3 = FactoryGirl.create(:control, :title => 'Control 3', :slug => 'CTL2-CTL3', :description => 'x', :parent => @ctl2, :program => @creg)
-      @sec2 = FactoryGirl.create(:section, :title => 'Section 2', :slug => 'REG1-SEC2', :description => 'x', :program => @reg)
-      @sec3 = FactoryGirl.create(:section, :title => 'Section 3', :slug => 'REG1-SEC3', :description => 'x', :program => @reg)
+      @ctl2 = FactoryGirl.create(:control, :title => 'Control 2', :slug => 'CTL2', :description => 'x', :directive => @creg)
+      @ctl3 = FactoryGirl.create(:control, :title => 'Control 3', :slug => 'CTL2-CTL3', :description => 'x', :parent => @ctl2, :directive => @creg)
+      @sec2 = FactoryGirl.create(:section, :title => 'Section 2', :slug => 'REG1-SEC2', :description => 'x', :directive => @reg)
+      @sec3 = FactoryGirl.create(:section, :title => 'Section 3', :slug => 'REG1-SEC3', :description => 'x', :directive => @reg)
       @sec2.controls << @ctl
       @sec2.save
       @sec3.controls << @ctl2

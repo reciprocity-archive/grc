@@ -47,7 +47,7 @@ class ControlsController < BaseObjectsController
       @controls = @controls.fulltext_search(params[:s])
     end
     if params[:company].present?
-      @controls = @controls.joins(:program).where(Program.arel_table[:company].eq(true))
+      @controls = @controls.joins(:directive).where(Directive.arel_table[:company].eq(true))
     end
     @controls = allowed_objs(@controls.all, :read)
 
@@ -133,6 +133,6 @@ class ControlsController < BaseObjectsController
     end
 
     def post_destroy_path
-      flow_program_path(@control.program)
+      flow_directive_path(@control.directive)
     end
 end

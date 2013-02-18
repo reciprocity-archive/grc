@@ -44,7 +44,7 @@ class Option < ActiveRecord::Base
     "person_language",
     "product_kind",
     "product_type",
-    "program_kind",
+    "directive_kind",
     "reference_type",
     "request_type",
     # "system_type",

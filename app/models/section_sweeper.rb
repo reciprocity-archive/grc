@@ -25,10 +25,10 @@ class SectionSweeper < ActionController::Caching::Sweeper
     # values are inaccessible anyway.
     return if section.nil?
 
-    program_id = section.program.nil? ? section.program_id : section.program.id
+    directive_id = section.directive.nil? ? section.directive_id : section.directive.id
     # only expire non-search fragments
     expire_fragment(:controller => 'mapping', :action => 'show',
-                    :program_id => program_id,
+                    :directive_id => directive_id,
                     :action_suffix => "sections_")
   end
 end

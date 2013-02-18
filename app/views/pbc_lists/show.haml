@@ -7,8 +7,8 @@
 -content_for :header do
   %ul.breadcrumbs
     %li=link_to 'PROGRAMS', programs_dash_path
-    %li=link_to instance.audit_cycle.program.title, flow_program_path(instance.audit_cycle.program_id)
-    %li=link_to 'AUDITS', flow_program_path(instance.audit_cycle.program_id)
+    %li=link_to instance.audit_cycle.directive.title, flow_directive_path(instance.audit_cycle.directive_id)
+    %li=link_to 'AUDITS', flow_directive_path(instance.audit_cycle.directive_id)
     %li=link_to instance.audit_cycle.title, flow_cycle_path(instance.audit_cycle)
     %li= 'PBC list'    
   %h1

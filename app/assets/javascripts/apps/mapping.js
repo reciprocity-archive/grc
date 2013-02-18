@@ -7,7 +7,7 @@
 
 
 
-	var programId = namespace.location.pathname.substr(window.location.pathname.lastIndexOf("/") + 1);
+	var directiveId = namespace.location.pathname.substr(window.location.pathname.lastIndexOf("/") + 1);
 
   if(!/\/mapping/.test(window.location.pathname))
     return;
@@ -18,22 +18,22 @@
       //control lists aren't ready yet.
       can.extend(
       	can.getObject("CMS.Controllers.Controls.Instances", namespace, true)
-      	, { 
-      		RegControls : $("#rcontrol_list .content").cms_controllers_controls({ 
-      			arity : 2 
+      	, {
+      		RegControls : $("#rcontrol_list .content").cms_controllers_controls({
+      			arity : 2
       			, list: "/assets/controls/list_mapping.mustache"
       			, model : CMS.Models.RegControl
-      			, id : programId }).control()
-      		, CompanyControls : $("#ccontrol_list .content").cms_controllers_controls({ 
+      			, id : directiveId }).control()
+      		, CompanyControls : $("#ccontrol_list .content").cms_controllers_controls({
       			arity : 2
       			, list: "/assets/controls/list_mapping.mustache"
       			, model : CMS.Models.CompanyControl }).control()
-          , SelectedRegControl : $("#selected_rcontrol").cms_controllers_controls({ 
-            arity : 1 
+          , SelectedRegControl : $("#selected_rcontrol").cms_controllers_controls({
+            arity : 1
             , show: "/assets/controls/show_selected.mustache"
             , model : CMS.Models.RegControl }).control()
-          , SelectedCompanyControl : $("#selected_ccontrol").cms_controllers_controls({ 
-            arity : 1 
+          , SelectedCompanyControl : $("#selected_ccontrol").cms_controllers_controls({
+            arity : 1
             , show: "/assets/controls/show_selected.mustache"
             , model : CMS.Models.CompanyControl }).control()
       	});
@@ -48,7 +48,7 @@
           can.getObject("CMS.Controllers.Sections.Instances", namespace, true)
           , {
             Section : $("#section_list .content").cms_controllers_sections({
-			 	      id : programId
+			 	      id : directiveId
 				      }).control()
             , SelectedSection : $("#selected_sections").cms_controllers_sections({
               arity : 1
@@ -56,9 +56,9 @@
               }).control()
           });
 
-      can.getObject("CMS.Controllers.Mapping.Instances", namespace, true).Mapping 
+      can.getObject("CMS.Controllers.Mapping.Instances", namespace, true).Mapping
         = $(document.body).cms_controllers_mapping({
-          id : programId
+          id : directiveId
           , reg_list_controller : namespace.CMS.Controllers.Controls.Instances.RegControls
           , company_list_controller : namespace.CMS.Controllers.Controls.Instances.CompanyControls
           , section_list_controller : namespace.CMS.Controllers.Sections.Instances.Section

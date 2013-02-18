@@ -8,15 +8,15 @@
   -content_for :modal_delete_path, delete_flow_section_path(f.object)
 
 .row-fluid
-  .span2{:class => error_class(f, :program)}
-    %label{:for => "section-program_id"} Program
-    %input#section-program_id{:name => "section[program_id]", :type => "hidden", :value => f.object.program_id}
-    =f.object.program.slug
-    =error_messages_inline(f, :program)
+  .span2{:class => error_class(f, :directive)}
+    %label{:for => "section-directive_id"} Directive
+    %input#section-directive_id{:name => "section[directive_id]", :type => "hidden", :value => f.object.directive_id}
+    =f.object.directive.slug
+    =error_messages_inline(f, :directive)
 
   .span3{:class => error_class(f, :slug)}
     %label{:for => "section-code"} Code (autofill)
-    %input#section-code.span12{:placeholder => "SECTION-XXXX", :type => "text", :value => f.object.slug, :name => 'section[slug]'}
+    %input#section-code.span12{:placeholder => "#{f.object.default_slug_prefix}-XXXX", :type => "text", :value => f.object.slug, :name => 'section[slug]'}
     =error_messages_inline(f, :slug)
 
   -#.span1.disabled{:class => error_class(f, :version)}

@@ -1,9 +1,9 @@
 module ControlsHelper
   def control_params
     control_params = params[:control] || {}
-    if control_params[:program_id]
-      # TODO: Validate the user has access to add controls to the program
-      control_params[:program] = Program.where(:id => control_params.delete(:program_id)).first
+    if control_params[:directive_id]
+      # TODO: Validate the user has access to add controls to the directive
+      control_params[:directive] = Directive.where(:id => control_params.delete(:directive_id)).first
     end
     %w(type kind means verify_frequency).each do |field|
       parse_option_param(control_params, field)

@@ -12,7 +12,7 @@ describe AuthorizedModel do
       FactoryGirl.create(:object_person, :person => @authorized_person, :personable => @control)
       FactoryGirl.create(:object_person, :person => @authorized_person, :personable => @child_control, :role => 'test')
       FactoryGirl.create(:object_person, :person => @authorized_multiple_person, :personable => @control, :role => 'owner')
-      FactoryGirl.create(:object_person, :person => @authorized_person, :personable => @control.program, :role => 'program_role')
+      FactoryGirl.create(:object_person, :person => @authorized_person, :personable => @control.directive, :role => 'directive_role')
     end
 
     # Fix these tests to use allowed?, since abilities doesn't exist any more.
@@ -36,8 +36,8 @@ describe AuthorizedModel do
     #  # Child control ability
     #  @child_control.abilities(@authorized_person).should include(:test)
     #
-    #  # Parent control program ability
-    #  @child_control.abilities(@authorized_person).should include(:program_role)
+    #  # Parent control directive ability
+    #  @child_control.abilities(@authorized_person).should include(:directive_role)
     #end
     #
     #it "should return multiple abilities if the role has multiple abilities" do
@@ -61,12 +61,12 @@ describe AuthorizedModel do
       FactoryGirl.create(:object_person, :person => @authorized_person, :personable => @control, :role => :responsible)
       FactoryGirl.create(:object_person, :person => @authorized_person, :personable => @child_control, :role => :test)
       FactoryGirl.create(:object_person, :person => @authorized_multiple_person, :personable => @control, :role => :superuser)
-      FactoryGirl.create(:object_person, :person => @authorized_person, :personable => @control.program, :role => :responsible)
+      FactoryGirl.create(:object_person, :person => @authorized_person, :personable => @control.directive, :role => :responsible)
     end
 
     it "should return true if the user has the ability" do
       @control.allowed?(:read, @authorized_person).should eq(true)
-      @control.program.allowed?(:read, @authorized_person).should eq(true)
+      @control.directive.allowed?(:read, @authorized_person).should eq(true)
     end
 
     it "should return false if the user does not have the ability" do

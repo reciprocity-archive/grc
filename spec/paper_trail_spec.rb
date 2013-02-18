@@ -67,18 +67,18 @@ describe PaperTrail do
     end
 
     it "should log deletion of dependent relationships" do
-      program = FactoryGirl.create(:program)
+      directive = FactoryGirl.create(:directive)
       product = FactoryGirl.create(:product)
       maker_of = FactoryGirl.create(:relationship_type, :relationship_type => 'maker_of',
                                 :description => 'The source is the maker of the destination',
                                 :forward_phrase => 'is the maker of',
                                 :backward_phrase => 'is made by')
-      rel = FactoryGirl.create(:relationship, :source => program, :destination => product, :relationship_type_id => 'maker_of')
-      program.destroy
+      rel = FactoryGirl.create(:relationship, :source => directive, :destination => product, :relationship_type_id => 'maker_of')
+      directive.destroy
       product.destination_relationships.count.should eq(0)
       rel1 = Version.find_by_item_id_and_item_type(rel.id, "Relationship").reify
       rel1.live?.should be_false
-      rel1.source_id.should eq(program.id)
+      rel1.source_id.should eq(directive.id)
       rel1.destination_id.should eq(product.id)
     end
   end

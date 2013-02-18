@@ -1,22 +1,22 @@
 # An Audit Cycle
 #
-# Used to group evidence for a particular audit of a program
+# Used to group evidence for a particular audit of a directive
 # start_at is the audit period start date.  If missing, this is a continuous process.
 class Cycle < ActiveRecord::Base
   include CommonModel
   include AuthorizedModel
   include SanitizableAttributes
 
-  attr_accessible :program, :start_at, :complete, :title, :audit_firm, :audit_lead, :description, :list_import_date, :status, :notes, :end_at
+  attr_accessible :directive, :start_at, :complete, :title, :audit_firm, :audit_lead, :description, :list_import_date, :status, :notes, :end_at
 
-  # The program being audited
-  belongs_to :program
+  # The directive being audited
+  belongs_to :directive
 
   has_many :pbc_lists, :foreign_key => :audit_cycle_id
 
   sanitize_attributes :description, :notes
 
-  validates :title, :program, :start_at,
+  validates :title, :directive, :start_at,
     :presence => { :message => "needs a value" }
 
   is_versioned_ext
@@ -24,11 +24,11 @@ class Cycle < ActiveRecord::Base
   after_create :create_pbc_list
 
   def display_name
-    program.display_name + " " + (start_at.strftime("%Y-%m-%d") rescue "-")
+    directive.display_name + " " + (start_at.strftime("%Y-%m-%d") rescue "-")
   end
 
   def slug
-    program.slug + "-" + (start_at.strftime("%Y-%m-%d") rescue "-")
+    directive.slug + "-" + (start_at.strftime("%Y-%m-%d") rescue "-")
   end
 
   def create_pbc_list

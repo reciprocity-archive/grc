@@ -14,12 +14,12 @@ function mapunmap(unmap) {
       if(rcontrol) params.rcontrol = rcontrol.id;
       if(section) params.section = section.id;
 
-      var dfd = section ? 
+      var dfd = section ?
         section.map_rcontrol(params)
         : rcontrol.map_ccontrol(params);
       dfd.then(can.proxy(this.updateButtons, this));
       return dfd;
-  }  
+  }
 }
 
 
@@ -44,7 +44,7 @@ can.Control("CMS.Controllers.Mapping", {
             can.$(rcontrol.implementing_controls).map(function(index, ictl){
               return CMS.Models.Control.findInCacheById(ictl.id);
           })));
-        }); 
+        });
 
         can.each(CMS.Models.SectionSlug.cache, function(section, id) {
           section.update_linked_controls();
@@ -63,10 +63,10 @@ can.Control("CMS.Controllers.Mapping", {
     if(el.is("#cmap")) {
       section = null;
     }
-    var dfd = this[el.is(".unmapbtn") ? "unmap" : "map"](section, rcontrol, ccontrol); 
+    var dfd = this[el.is(".unmapbtn") ? "unmap" : "map"](section, rcontrol, ccontrol);
     this.bindXHRToButton(dfd, el);
     var that = this;
-    dfd.then(function() { 
+    dfd.then(function() {
       that.options.section_list_controller.draw_list(); //manual update because section model doesn't contain "real" rcontrol model
     });
 
@@ -74,7 +74,7 @@ can.Control("CMS.Controllers.Mapping", {
       var notice, reg_slug;
       dfd.then(function(resp, status, xhr) {
         notice = /.*Created regulation control (.+)\. Mapped regulation control\. */.exec(xhr.getResponseHeader("X-Flash-Notice"));
-        if(notice) 
+        if(notice)
           reg_slug = notice[1];
       })
       dfd.then($.proxy(this.options.reg_list_controller, "fetch_list"))
@@ -88,7 +88,7 @@ can.Control("CMS.Controllers.Mapping", {
         });
       });
     }
-  }  
+  }
 
   , unmap : function() { return mapunmap(true).apply(this, arguments); }
   , map : function() { return mapunmap(false).apply(this, arguments); }
@@ -115,7 +115,7 @@ can.Control("CMS.Controllers.Mapping", {
     var section = $("#selected_sections").control(namespace.CMS.Controllers.Sections).options.instance;
     var rcontrol = $("#selected_rcontrol").control(namespace.CMS.Controllers.Controls).options.instance;
     var ccontrol = $("#selected_ccontrol").control(namespace.CMS.Controllers.Controls).options.instance;
-    
+
     var rmap = $('#rmap');
     var cmap = $('#cmap');
 
@@ -153,7 +153,7 @@ can.Control("CMS.Controllers.Mapping", {
 
   // Post-submit handler for new control dialog
   , "#new_control ajax:json" : function(el, ev, data) {
-    if(data.program_id.toString() === this.options.id) {
+    if(data.directive_id.toString() === this.options.id) {
       // add this control to the reg controls.
       // This isn't the best way to go about it, but CanJS/Mustache is currently ornery about accepting new observable list elements
       //  added with "push" --BM 12/11/2012

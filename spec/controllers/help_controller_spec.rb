@@ -4,7 +4,7 @@ require 'authorized_controller'
 describe HelpController do
   it "should render the right help document" do
     login({}, {})
-    get 'show', :slug => 'program'
+    get 'show', :slug => 'directive'
     response.should be_success
   end
 

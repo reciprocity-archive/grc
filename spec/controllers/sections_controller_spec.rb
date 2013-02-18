@@ -12,6 +12,7 @@ describe SectionsController do
       # For use by authorized_controller tests
       @model = Section
       @object = @sec
+      @create_params = { :directive_id => @reg.id }
     end
 
     it_behaves_like "an authorized create"

@@ -4,8 +4,8 @@ require 'authorized_controller'
 describe DocumentController do
   before :each do
     @model = Document
-    @reg = FactoryGirl.create(:program, :title => 'Reg 1', :slug => 'reg1', :company => false)
-    @cycle = FactoryGirl.create(:cycle, :program => @reg, :start_at => '2012-01-01')
+    @reg = FactoryGirl.create(:directive, :title => 'Reg 1', :slug => 'reg1', :company => false)
+    @cycle = FactoryGirl.create(:cycle, :directive => @reg, :start_at => '2012-01-01')
     session[:cycle_id] = @cycle.id
     @object = @reg # FIXME: Necessary for authorized action test to work
   end

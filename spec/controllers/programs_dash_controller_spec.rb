@@ -8,19 +8,19 @@ describe ProgramsDashController do
   before :each do
     Account.create({:email => 'owner1@t.com', :password => 'owner1', :password_confirmation => 'owner1', :role => :user}, :without_protection => true)
     Account.create({:email => 'owner2@t.com', :password => 'owner2', :password_confirmation => 'owner2', :role => :user}, :without_protection => true)
-    prog = Program.create(:title => 'Reg 1', :slug => 'REG1')
+    prog = Directive.create(:title => 'Reg 1', :slug => 'REG1')
 
     (2..10).each do |ind|
-      Program.create(:title => "Reg #{ind}", :slug => "REG#{ind}")
+      Directive.create(:title => "Reg #{ind}", :slug => "REG#{ind}")
     end
 
-    # Set up program owners
+    # Set up directive owners
     @o1 = Account.find_by_email('owner1@t.com')
-    @p1 = Program.find_by_slug('REG1')
+    @p1 = Directive.find_by_slug('REG1')
     FactoryGirl.create(:object_person, :person => @o1.person, :personable => @p1, :role => :owner)
 
     @o2 = Account.find_by_email('owner2@t.com')
-    @p2 = Program.find_by_slug('REG2')
+    @p2 = Directive.find_by_slug('REG2')
     FactoryGirl.create(:object_person,:person => @o2.person, :personable => @p2, :role => :owner)
   end
 

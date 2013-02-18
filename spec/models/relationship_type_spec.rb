@@ -14,8 +14,8 @@ describe RelationshipType do
 
   context 'search' do
     before :each do
-      @source = FactoryGirl.create(:program)
-      @dest = FactoryGirl.create(:program)
+      @source = FactoryGirl.create(:directive)
+      @dest = FactoryGirl.create(:directive)
       @rel = FactoryGirl.create(:relationship, :source => @source, :destination => @dest, :relationship_type_id => 'maker_of')
     end
 

@@ -1,11 +1,11 @@
-module ProgramsHelper
-  # Set up a program and relevant stats for display
-  def program_stats(program)
+module DirectivesHelper
+  # Set up a directive and relevant stats for display
+  def directive_stats(directive)
     stats = {}
-    stats[:sections_count] = Section.where(:program_id => program.id).count()
-    stats[:sections_done_count] = Section.joins(:controls).where(:program_id => program.id).count(:distinct => true)
-    stats[:sections_na_count] = Section.where(:program_id => program.id, :na => true).count()
-    stats[:sections_undone_count] = Section.where(:program_id => program.id).count() - stats[:sections_done_count] - stats[:sections_na_count]
+    stats[:sections_count] = Section.where(:program_id => directive.id).count()
+    stats[:sections_done_count] = Section.joins(:controls).where(:program_id => directive.id).count(:distinct => true)
+    stats[:sections_na_count] = Section.where(:program_id => directive.id, :na => true).count()
+    stats[:sections_undone_count] = Section.where(:program_id => directive.id).count() - stats[:sections_done_count] - stats[:sections_na_count]
 
     if stats[:sections_count] > 0
       stats[:sections_done_percentage] = 100.0 * stats[:sections_done_count] / stats[:sections_count]
@@ -13,7 +13,7 @@ module ProgramsHelper
       stats[:sections_undone_percentage] = 100.0 * stats[:sections_undone_count] / stats[:sections_count]
     end
 
-    controls = Control.joins(:sections).where(Section.arel_table[:program_id].eq(program.id))
+    controls = Control.joins(:sections).where(Section.arel_table[:program_id].eq(directive.id))
     stats[:controls_count] = controls.count(:distinct => true)
     stats[:controls_parented_count] = controls.where(Control.arel_table[:parent_id].not_eq(nil)).count(:distinct => true)
 

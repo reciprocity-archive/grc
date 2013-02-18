@@ -5,7 +5,7 @@ describe DocumentsController do
   before :each do
     @model = Document
     @object = FactoryGirl.create(:document, :title => 'Test')
-    @program = FactoryGirl.create(:program)
+    @directive = FactoryGirl.create(:directive)
     @index_objs = [@object]
   end
 

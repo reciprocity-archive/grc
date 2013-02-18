@@ -43,7 +43,7 @@ module SluggedModel
   end
 
   class SlugTree
-    attr_accessor :prefix, :object, :parent
+    attr_accessor :prefix, :object, :parent, :children
 
     def initialize(prefix, parent=nil)
       @prefix = prefix

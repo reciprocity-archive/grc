@@ -2,14 +2,14 @@ require 'spec_helper'
 require 'base_objects'
 require 'authorized_controller'
 
-describe ProgramsController do
+describe DirectivesController do
   include BaseObjects
 
   before :each do
     create_base_objects
 
     # For use by authorized_controller tests
-    @model = Program
+    @model = Directive
     @object = @reg
   end
 
@@ -25,18 +25,18 @@ describe ProgramsController do
                                            'category_controls']
     it_behaves_like "an authorized update", ['edit', 'update']
     it_behaves_like "an authorized delete"
-    it_behaves_like "an authorized action", ['import'], 'update_program'
+    it_behaves_like "an authorized action", ['import'], 'update_directive'
   end
 
   context "show" do
     before :each do
       login({}, { :role => 'superuser' })
-      @ctl2 = FactoryGirl.create(:control, :title => 'Control 2', :slug => 'CTL2', :description => 'x', :program => @creg)
-      @ctl3 = FactoryGirl.create(:control, :title => 'Control 3', :slug => 'CTL2-1', :description => 'x', :parent => @ctl2, :program => @creg)
+      @ctl2 = FactoryGirl.create(:control, :title => 'Control 2', :slug => 'CTL2', :description => 'x', :directive => @creg)
+      @ctl3 = FactoryGirl.create(:control, :title => 'Control 3', :slug => 'CTL2-1', :description => 'x', :parent => @ctl2, :directive => @creg)
       @person = FactoryGirl.create(:person)
       @ctl3.object_people.create({:person => @person, :role => 'executive'}, :without_protection => true)
-      @sec2 = FactoryGirl.create(:section, :title => 'Section 2', :slug => 'REG1-SEC2', :description => 'x', :program => @reg)
-      @sec3 = FactoryGirl.create(:section, :title => 'Section 3', :slug => 'REG1-SEC3', :description => 'x', :program => @reg)
+      @sec2 = FactoryGirl.create(:section, :title => 'Section 2', :slug => 'REG1-SEC2', :description => 'x', :directive => @reg)
+      @sec3 = FactoryGirl.create(:section, :title => 'Section 3', :slug => 'REG1-SEC3', :description => 'x', :directive => @reg)
       @sec2.controls << @ctl
       @sec2.save
       @sec3.controls << @ctl2
@@ -58,7 +58,7 @@ describe ProgramsController do
   end
 
   context "update" do
-    it "should properly validate and update the program"
+    it "should properly validate and update the directive"
   end
 
   context "export" do
@@ -70,14 +70,14 @@ describe ProgramsController do
       @reg.audit_frequency = Option.create(:title => "Often", :role => 'audit_frequency')
       @reg.save
       get 'export', :id => @reg.id, :format => :csv
-      # program titles, 1 program, 2 blank lines, section titles, 1 section
+      # directive titles, 1 directive, 2 blank lines, section titles, 1 section
       response.body.split("\n").size.should == 6
       (response.body =~ /1 Week/).should_not be_nil
       (response.body =~ /Often/).should_not be_nil
     end
   end
 
-  context "import program/sections" do
+  context "import directive/sections" do
     before :each do
       login({}, { :role => 'superuser' })
     end
@@ -87,7 +87,7 @@ describe ProgramsController do
       Option.create(:title => "Soonish", :role => 'audit_frequency')
       post 'import', :id => @reg.id, :upload => fixture_file_upload("/REG1.csv")
       assigns(:messages).should == [
-        "Invalid program headings: \"Bogus1\"",
+        "Invalid directive headings: \"Bogus1\"",
         "Invalid section headings: \"Bogus2\""
       ]
       assigns(:errors).should include 2
@@ -102,7 +102,7 @@ describe ProgramsController do
     it "should prepare import with missing option" do
       post 'import', :id => @reg.id, :upload => fixture_file_upload("/REG1.csv")
       assigns(:messages).should == [
-        "Invalid program headings: \"Bogus1\"",
+        "Invalid directive headings: \"Bogus1\"",
         "Invalid section headings: \"Bogus2\""
       ]
       assigns(:errors).should include 2
@@ -151,8 +151,8 @@ describe ProgramsController do
   context "export controls" do
     before :each do
       login({}, { :role => 'superuser' })
-      @ctl2 = FactoryGirl.create(:control, :title => 'Control 2', :slug => 'CTL2', :description => 'x', :program => @creg)
-      @ctl3 = FactoryGirl.create(:control, :title => 'Control 3', :slug => 'CTL2-1', :description => 'x', :parent => @ctl2, :program => @creg)
+      @ctl2 = FactoryGirl.create(:control, :title => 'Control 2', :slug => 'CTL2', :description => 'x', :directive => @creg)
+      @ctl3 = FactoryGirl.create(:control, :title => 'Control 3', :slug => 'CTL2-1', :description => 'x', :parent => @ctl2, :directive => @creg)
       @person = FactoryGirl.create(:person)
       @ctl3.object_people.create({:person => @person, :role => 'executive'}, :without_protection => true)
     end
@@ -195,15 +195,15 @@ describe ProgramsController do
   context "complex delete" do
     before :each do
       login({}, {:role => 'superuser'})
-      @section = FactoryGirl.create(:section, :program => @reg)
-      @control = FactoryGirl.create(:control, :program => @reg)
+      @section = FactoryGirl.create(:section, :directive => @reg)
+      @control = FactoryGirl.create(:control, :directive => @reg)
       @control_section = FactoryGirl.create(:control_section, :control => @control, :section => @section)
     end
 
-    it "should delete a complex program object graph" do
+    it "should delete a complex directive object graph" do
       delete 'destroy', :id => @reg.id, :format => 'json'
       response.should be_success
-      Program.exists?(:id => @reg.id).should be_false
+      Directive.exists?(:id => @reg.id).should be_false
       Section.exists?(:id => @section.id).should be_false
       Control.exists?(:id => @control.id).should be_false
       ControlSection.exists?(:id => @control_section.id).should be_false

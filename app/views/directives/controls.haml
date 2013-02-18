@@ -11,7 +11,7 @@
         .bar.progressbar-warning.hidefont.fltrt{ :'data-percentage' => '50', :'data-toggle' => 'tooltip', :'title' => "50 Pending" } 50%
 
 %ul.slugtree
-  =walk_slug_tree(Program.slugtree(controls)) do |item, step|
+  =walk_slug_tree(Directive.slugtree(controls)) do |item, step|
     .row-fluid
       -content_id = "content_#{rand(36**8).to_s(36)}" # unique ID for toggle
       .span12

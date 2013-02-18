@@ -1,7 +1,15 @@
 module SlugfilterHelper
   def walk_slug_tree(tree, depth=nil, &block)
     capture_haml do
-      walk_slug_tree_helper(tree, nil, true, depth, &block)
+      walk_slug_tree_children_helper(tree, nil, true, depth, &block)
+    end
+  end
+
+  def walk_slug_tree_children_helper(tree, step=nil, odd=true, depth=nil, &block)
+    children = tree.first_level_descendents_with_step
+
+    children.each do |step, child|
+      walk_slug_tree_helper(child, step, odd, depth, &block)
     end
   end
 

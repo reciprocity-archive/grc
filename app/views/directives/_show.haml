@@ -1,0 +1,44 @@
+-instance = directive
+
+-content_for :widget_title do
+  Directive Info
+
+-content_for :widget_help, 'program_info'
+
+-content_for :widget_id, 'program_info_widget'
+
+%ul.info-list
+  %li.float-element
+    %label
+      Code
+    %span
+      =instance.slug
+  %li.float-element
+    %label
+      Kind
+    %span
+      =instance.kind && instance.kind.title
+  %li.float-element
+    %label
+      Full Title
+    %span
+      =instance.title
+  %li
+    %label
+      Description
+    %span
+      =display_as_html instance.description
+  %li.float-element
+    %label
+      Direct link
+    %span
+      =link_to(instance.url, instance.url, :target => "_blank", :class => "inner-element")
+
+%section.footer
+  .row-fluid
+    .span6
+      %p.footer-left
+        Created: #{instance.created_at.strftime("%m/%d/%y")}
+    .span6
+      %p.footer-right
+        Updated: #{instance.updated_at.strftime("%m/%d/%y")}

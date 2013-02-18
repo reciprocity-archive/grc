@@ -8,7 +8,7 @@ if (!/\/products/.test(window.location.pathname))
   return;
 
 $(function() {
-    CMS.Controllers.ProgramRoutes.Instances = { 
+    CMS.Controllers.DirectiveRoutes.Instances = {
       Control : $(document.body).cms_controllers_product_routes({}).control(CMS.Controllers.ProductRoutes)};
 });
 

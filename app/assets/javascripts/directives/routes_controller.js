@@ -3,7 +3,7 @@
 (function(can, $){
 
 
-can.Control("CMS.Controllers.ProgramRoutes", {
+can.Control("CMS.Controllers.DirectiveRoutes", {
   //Static
 
 }, {

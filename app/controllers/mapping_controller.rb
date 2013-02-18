@@ -9,10 +9,10 @@ class MappingController < ApplicationController
   cache_sweeper :control_sweeper, :only => [:map_rcontrol, :map_ccontrol]
 
   def show
-    @program = Program.find(params[:program_id])
-    @sections = @program.sections.with_controls
-    @ccontrols = Control.joins(:program).where(Program.arel_table[:company].eq(true)).all.sort_by(&:slug_split_for_sort)
-    @rcontrols = Control.where(:program_id => @program).all.sort_by(&:slug_split_for_sort)
+    @directive = Directive.find(params[:directive_id])
+    @sections = @directive.sections.with_controls
+    @ccontrols = Control.joins(:directive).where(Directive.arel_table[:company].eq(true)).all.sort_by(&:slug_split_for_sort)
+    @rcontrols = Control.where(:directive_id => @directive).all.sort_by(&:slug_split_for_sort)
   end
 
   def section_dialog
@@ -49,7 +49,7 @@ class MappingController < ApplicationController
           :title => section.title,
           :slug => rcontrol_slug,
           :description => "Placeholder",
-          #:program => ccontrol.program,
+          #:directive => ccontrol.directive,
           :type => ccontrol.type,
           :kind => ccontrol.kind,
           :means => ccontrol.means,
@@ -59,7 +59,7 @@ class MappingController < ApplicationController
           :verify_frequency => ccontrol.verify_frequency,
           :documentation_description => ccontrol.documentation_description
         )
-      rcontrol.program = section.program
+      rcontrol.directive = section.directive
       rcontrol.save
 
       rcontrol_id = rcontrol.id
@@ -163,9 +163,9 @@ class MappingController < ApplicationController
   end
 
   def find_sections
-    @program = Program.find(params[:program_id])
+    @directive = Directive.find(params[:directive_id])
     @search = params[:s]
-    sections = @program.sections.with_controls
+    sections = @directive.sections.with_controls
 
     unless @search.blank?
       sections = sections.fulltext_search(@search)
@@ -184,14 +184,14 @@ class MappingController < ApplicationController
   end
 
   def find_controls
-    @program = Program.find(params[:program_id])
+    @directive = Directive.find(params[:directive_id])
     @search = params[:s]
     is_company = params[:control_type] == 'company'
 
     if is_company
-      controls = Control.joins(:program).where(Program.arel_table[:company].eq(true))
+      controls = Control.joins(:directive).where(Directive.arel_table[:company].eq(true))
     else
-      controls = Control.where(:program_id => @program)
+      controls = Control.where(:directive_id => @directive)
     end
 
     unless @search.blank?

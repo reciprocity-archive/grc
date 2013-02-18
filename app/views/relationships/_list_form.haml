@@ -56,6 +56,21 @@
           %a.widgetbtn.add-me.btn.btn-mini{:href => "#", :'data-toggle' => 'selector-list-select'}
             %i.grcicon-chevron-right
 
+%script#relationship_directive_option{ :type => 'text/html', :'data-prefix' => 'directive' }
+  %li{ :'data-id' => '<%= directive.id %>', :'data-title' => '<%= directive.title %>', :'data-slug' => '<%= directive.slug %>' }
+    .row-fluid
+      .span8
+        .object-info
+          %span.name <%= directive.title %>
+          %span.option <%= directive.slug %>
+        
+      .span4.actions
+        .pull-right
+          %a.widgetbtn.btn.btn-mini{:href => edit_flow_directive_path('<%=directive.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
+            %i.grcicon-edit-new
+          %a.widgetbtn.add-me.btn.btn-mini{:href => "#", :'data-toggle' => 'selector-list-select'}
+            %i.grcicon-chevron-right
+
 %script#relationship_product_option{ :type => 'text/html', :'data-prefix' => 'product' }
   %li{ :'data-id' => '<%= product.id %>', :'data-title' => '<%= product.title %>', :'data-slug' => '<%= product.slug %>' }
     .row-fluid

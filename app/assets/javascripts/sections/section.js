@@ -141,7 +141,7 @@ CMS.Models.Section("CMS.Models.SectionSlug", {
     }
 
     return can.ajax({ 
-      url : "/programs/" + (params.id || false) + "/sections.json"
+      url : "/directives/" + (params.id || false) + "/sections.json"
       , type : "get"
       , dataType : "json"
       , data : params

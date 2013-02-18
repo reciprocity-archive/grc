@@ -1,0 +1,39 @@
+
+-instance = program
+-is_root = true
+
+-content_for :widget_title do
+  Program
+
+-content_for :widget_help, 'program_directives'
+
+-content_for :widget_id, 'program_directives_widget'
+
+-content_for :widget_buttons do
+  .filter
+    .row-fluid
+      .span6
+        %input.ui-corner-all.widgetsearch.clear-value(type='text' placeholder='Search')
+      .span6
+        .pull-right
+          %a.btn.btn-mini{ :rel => "tooltip", :'data-placement' => "left", :title => "Link Directives to this Program", :'data-modal-class' => 'modal-wide', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :'data-toggle' => "modal-ajax-relationship-selector", :href => list_edit_flow_program_directives_path(:program_id => instance.id) }
+            %i.grcicon-link-new
+
+%ul.tree-structure
+  -instance.directives.all.each do |directive|
+    %li{ :'data-object-id' => instance.id }
+      .item-main
+        -if !is_root
+          .openclose{ :class => !expand_this && 'lastchild' }
+        .item-title{ :class => is_root && 'active' }
+          .row-fluid
+            =render :partial => 'object_leaf', :locals => { :instance => directive }
+          .item-actions
+            %a.btn.btn-mini{ "rel" => "tooltip", "data-placement" => "left", "title" => "Edit this object", 'data-modal-class' => 'modal-wide', 'data-form-target' => 'refresh', "data-toggle" => "modal-ajax-form", :href => edit_flow_directive_path(directive.id) }
+              %i.grcicon-edit-new
+            %a.btn.btn-mini{ "rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => flow_directive_path(directive.id) }
+              %i.grcicon-goto
+      .item-content{ :class => is_root && 'in' }
+        %ul.tree-structure
+          =render :partial => 'directives/sections', :locals => { :sections => directive.sections }
+

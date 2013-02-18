@@ -34,10 +34,10 @@ can.Control("CMS.Controllers.ProductRoutes", {
     , existing = list.find("[data-object-id]")
       .filter(function() { return $(this).closest(".slotlist").is(list); })
       .map(function() { return $(this).data("object-id")})
-    , s = can.map(can.makeArray(data), function(v) { 
+    , s = can.map(can.makeArray(data), function(v) {
       return $(v.relationship.destination_id).is(existing) ? undefined : v.relationship.destination_id;
     });
-    
+
     can.route.attr("show", s.join(","));
     can.route.attr("parent", parentid);
   }

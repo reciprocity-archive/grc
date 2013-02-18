@@ -299,53 +299,53 @@ module DefaultRelationshipTypes
       :forward_description => "This product relies upon the following systems.",
       :reverse_description => "This system supports the following products."
     },
-    :program_applies_to_data_asset => {
-      :source_type => "Program",
+    :directive_applies_to_data_asset => {
+      :source_type => "Directive",
       :target_type => "DataAsset",
       :forward_phrase => "applies to",
       :reverse_phrase => "is within scope of",
-      :forward_description => "This program/policy applies to the following data assets.",
-      :reverse_description => "This data asset is within scope of the following programs/policies."
+      :forward_description => "This directive applies to the following data assets.",
+      :reverse_description => "This data asset is within scope of the following directives."
     },
-    :program_applies_to_facility => {
-      :source_type => "Program",
+    :directive_applies_to_facility => {
+      :source_type => "Directive",
       :target_type => "Facility",
       :forward_phrase => "applies to",
       :reverse_phrase => "is within scope of",
-      :forward_description => "This program/policy applies to the following facilities.",
-      :reverse_description => "This facility is within scope of the following programs/policies."
+      :forward_description => "This directive applies to the following facilities.",
+      :reverse_description => "This facility is within scope of the following directives."
     },
-    :program_applies_to_market => {
-      :source_type => "Program",
+    :directive_applies_to_market => {
+      :source_type => "Directive",
       :target_type => "Market",
       :forward_phrase => "applies to",
       :reverse_phrase => "is within scope of",
-      :forward_description => "This program/policy applies to the following markets.",
-      :reverse_description => "This market is within scope of the following programs/policies."
+      :forward_description => "This directive applies to the following markets.",
+      :reverse_description => "This market is within scope of the following directives."
     },
-    :program_applies_to_org_group => {
-      :source_type => "Program",
+    :directive_applies_to_org_group => {
+      :source_type => "Directive",
       :target_type => "OrgGroup",
       :forward_phrase => "applies to",
       :reverse_phrase => "is within scope of",
-      :forward_description => "This program/policy applies to the following org groups.",
-      :reverse_description => "This org group is within scope of the following programs/policies."
+      :forward_description => "This directive applies to the following org groups.",
+      :reverse_description => "This org group is within scope of the following directives."
     },
-    :program_applies_to_product => {
-      :source_type => "Program",
+    :directive_applies_to_product => {
+      :source_type => "Directive",
       :target_type => "Product",
       :forward_phrase => "applies to",
       :reverse_phrase => "is within scope of",
-      :forward_description => "This program/policy applies to the following products.",
-      :reverse_description => "This product is within scope of the following programs/policies."
+      :forward_description => "This directive applies to the following products.",
+      :reverse_description => "This product is within scope of the following directives."
     },
-    :program_applies_to_project => {
-      :source_type => "Program",
+    :directive_applies_to_project => {
+      :source_type => "Directive",
       :target_type => "Project",
       :forward_phrase => "applies to",
       :reverse_phrase => "is within scope of",
-      :forward_description => "This program/policy applies to the following projects.",
-      :reverse_description => "This project is within scope of the following programs/policies."
+      :forward_description => "This directive applies to the following projects.",
+      :reverse_description => "This project is within scope of the following directives."
     },
     :project_has_process => {
       :source_type => "Project",
@@ -539,23 +539,23 @@ module DefaultRelationshipTypes
     :product_is_sold_into_market => {
       :meta_read => :both
     },
-    :program_includes_control => {
+    :directive_includes_control => {
       :read => :forward,
       :meta_read => :backward,
       :edit => :forward
     },
-    :program_includes_section => {
+    :directive_includes_section => {
       :read => :forward,
       :meta_read => :backward,
       :edit => :forward
     },
-    :program_is_relevant_to_facility => {
+    :directive_is_relevant_to_facility => {
       :meta_read => :both
     },
-    :program_is_relevant_to_org_group => {
+    :directive_is_relevant_to_org_group => {
       :meta_read => :both
     },
-    :program_is_relevant_to_product => {
+    :directive_is_relevant_to_product => {
       :meta_read => :both
     },
     :section_implemented_by_system => {
@@ -580,7 +580,7 @@ module DefaultRelationshipTypes
 
   }
 
-  PERSONABLE = [Program, Section, Control, System,
+  PERSONABLE = [Directive, Section, Control, System,
                 OrgGroup, Product, Facility]
   ['accountable','responsible', 'owner'].each do |role|
     PERSONABLE.each do |model|

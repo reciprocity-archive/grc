@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130214194649) do
+ActiveRecord::Schema.define(:version => 20130215195435) do
 
   create_table "accounts", :force => true do |t|
     t.string   "username"
@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(:version => 20130214194649) do
     t.string   "title",                     :null => false
     t.string   "slug",                      :null => false
     t.text     "description"
-    t.integer  "program_id"
+    t.integer  "directive_id"
     t.integer  "modified_by_id"
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
@@ -119,11 +119,11 @@ ActiveRecord::Schema.define(:version => 20130214194649) do
     t.text     "notes"
   end
 
-  add_index "controls", ["program_id"], :name => "index_controls_on_regulation_id"
+  add_index "controls", ["directive_id"], :name => "index_controls_on_regulation_id"
   add_index "controls", ["slug"], :name => "index_controls_on_slug", :unique => true
 
   create_table "cycles", :force => true do |t|
-    t.integer  "program_id",                        :null => false
+    t.integer  "directive_id",                      :null => false
     t.date     "start_at"
     t.boolean  "complete",       :default => false, :null => false
     t.integer  "modified_by_id"
@@ -138,7 +138,7 @@ ActiveRecord::Schema.define(:version => 20130214194649) do
     t.date     "end_at"
   end
 
-  add_index "cycles", ["program_id"], :name => "index_cycles_on_regulation_id"
+  add_index "cycles", ["directive_id"], :name => "index_cycles_on_regulation_id"
 
   create_table "data_assets", :force => true do |t|
     t.string   "slug"
@@ -151,6 +151,28 @@ ActiveRecord::Schema.define(:version => 20130214194649) do
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
+
+  create_table "directives", :force => true do |t|
+    t.string   "title",                                 :null => false
+    t.string   "slug",                                  :null => false
+    t.text     "description"
+    t.boolean  "company",            :default => false, :null => false
+    t.integer  "modified_by_id"
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
+    t.string   "version"
+    t.datetime "start_date"
+    t.datetime "stop_date"
+    t.string   "url"
+    t.string   "organization"
+    t.text     "scope"
+    t.integer  "kind_id"
+    t.datetime "audit_start_date"
+    t.integer  "audit_frequency_id"
+    t.integer  "audit_duration_id"
+  end
+
+  add_index "directives", ["slug"], :name => "index_programs_on_slug", :unique => true
 
   create_table "documents", :force => true do |t|
     t.string   "title"
@@ -301,27 +323,25 @@ ActiveRecord::Schema.define(:version => 20130214194649) do
     t.datetime "stop_date"
   end
 
-  create_table "programs", :force => true do |t|
-    t.string   "title",                                 :null => false
-    t.string   "slug",                                  :null => false
-    t.text     "description"
-    t.boolean  "company",            :default => false, :null => false
+  create_table "program_directives", :force => true do |t|
+    t.integer  "program_id",     :null => false
+    t.integer  "directive_id",   :null => false
     t.integer  "modified_by_id"
-    t.datetime "created_at",                            :null => false
-    t.datetime "updated_at",                            :null => false
-    t.string   "version"
-    t.datetime "start_date"
-    t.datetime "stop_date"
-    t.string   "url"
-    t.string   "organization"
-    t.text     "scope"
-    t.integer  "kind_id"
-    t.datetime "audit_start_date"
-    t.integer  "audit_frequency_id"
-    t.integer  "audit_duration_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
-  add_index "programs", ["slug"], :name => "index_programs_on_slug", :unique => true
+  create_table "programs", :force => true do |t|
+    t.string   "slug"
+    t.string   "title"
+    t.text     "description"
+    t.string   "url"
+    t.integer  "modified_by_id"
+    t.datetime "start_date"
+    t.datetime "stop_date"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
 
   create_table "projects", :force => true do |t|
     t.string   "slug"
@@ -441,7 +461,7 @@ ActiveRecord::Schema.define(:version => 20130214194649) do
     t.string   "title",                             :null => false
     t.string   "slug",                              :null => false
     t.text     "description"
-    t.integer  "program_id",                        :null => false
+    t.integer  "directive_id",                      :null => false
     t.integer  "modified_by_id"
     t.datetime "created_at",                        :null => false
     t.datetime "updated_at",                        :null => false
@@ -450,8 +470,8 @@ ActiveRecord::Schema.define(:version => 20130214194649) do
     t.text     "notes"
   end
 
+  add_index "sections", ["directive_id"], :name => "index_control_objectives_on_regulation_id"
   add_index "sections", ["parent_id"], :name => "index_sections_on_parent_id"
-  add_index "sections", ["program_id"], :name => "index_control_objectives_on_regulation_id"
   add_index "sections", ["slug"], :name => "index_sections_on_slug", :unique => true
 
   create_table "system_controls", :force => true do |t|

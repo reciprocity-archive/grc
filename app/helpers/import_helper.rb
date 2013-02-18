@@ -8,7 +8,7 @@ module ImportHelper
 
   def validate_import_slug(object, object_name, expected_slug)
     raise ImportException.new("#{object_name} Code column does not exist") unless object["slug"]
-    raise ImportException.new("#{object_name} Code does not match current program") unless object["slug"].downcase == expected_slug.downcase
+    raise ImportException.new("#{object_name} Code does not match current directive") unless object["slug"].downcase == expected_slug.downcase
   end
 
   def validate_import_type(object, expected_type)

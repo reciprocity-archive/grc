@@ -3,6 +3,13 @@ CmsRails::Application.routes.draw do
   resources :programs, :as => 'flow_programs', :only => [:index, :show, :new, :edit, :create, :update, :destroy] do
     member do
       get 'tooltip'
+      get 'delete'
+    end
+  end
+
+  resources :directives, :as => 'flow_directives', :only => [:index, :show, :new, :edit, :create, :update, :destroy] do
+    member do
+      get 'tooltip'
       get 'export_controls'
       get 'export'
       get 'sections'
@@ -15,6 +22,12 @@ CmsRails::Application.routes.draw do
       post 'import_controls'
       get 'import'
       post 'import'
+    end
+  end
+
+  resources :program_directives, :as => 'flow_program_directives', :only => [:index, :create] do
+    collection do
+      get 'list_edit'
     end
   end
 
@@ -258,7 +271,7 @@ CmsRails::Application.routes.draw do
   get 'design/templates/:name' => 'design#templates'
   get 'design/:action' => 'design'
 
-  get "mapping/show/:program_id" => 'mapping#show', :as => 'mapping_program'
+  get "mapping/show/:directive_id" => 'mapping#show', :as => 'mapping_directive'
   get 'mapping_section_dialog/:section_id' => 'mapping#section_dialog', :as => 'mapping_section_dialog'
   post "mapping/map_rcontrol"
   post "mapping/map_ccontrol"
@@ -266,8 +279,8 @@ CmsRails::Application.routes.draw do
   get "mapping/buttons", :as => :mapping_buttons
   get "mapping/selected_section/:section_id" => 'mapping#selected_section', :as => :mapping_selected_section
   get "mapping/selected_control/:control_id" => 'mapping#selected_control', :as => :mapping_selected_control
-  match 'mapping/sections/:program_id' => 'mapping#find_sections', :as => :mapping_sections
-  match 'mapping/controls/:program_id/:control_type' => 'mapping#find_controls', :as => :mapping_controls
+  match 'mapping/sections/:directive_id' => 'mapping#find_sections', :as => :mapping_sections
+  match 'mapping/controls/:directive_id/:control_type' => 'mapping#find_controls', :as => :mapping_controls
 
   match 'help/:slug' => 'help#show', :as => :help
   post 'help' => 'help#edit', :as => :update_help

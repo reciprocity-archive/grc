@@ -16,12 +16,12 @@ class ControlSweeper < ActionController::Caching::Sweeper
   private
   def expire_cache_for(control)
     # only expire non-search fragments
-    program_id = control.program.nil? ? control.program_id : control.program.id
+    directive_id = control.directive.nil? ? control.directive_id : control.directive.id
     expire_fragment(:controller => 'mapping', :action => 'show',
-                    :program_id => program_id,
+                    :directive_id => directive_id,
                     :action_suffix => "company_controls_")
     expire_fragment(:controller => 'mapping', :action => 'show',
-                    :program_id => program_id,
+                    :directive_id => directive_id,
                     :action_suffix => "regulation_controls_")
   end
 end

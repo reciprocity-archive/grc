@@ -11,7 +11,7 @@ describe Control do
   before :each do
     create_base_objects
     @account = FactoryGirl.create(:account, :email => "a@b.org", :password => "xxxx", :password_confirmation => "xxxx", :role => "admin")
-    @ctl2 = FactoryGirl.create(:control, :title => 'Control 2', :slug => 'REG1-CTL2', :description => 'x', :program => @reg)
+    @ctl2 = FactoryGirl.create(:control, :title => 'Control 2', :slug => 'REG1-CTL2', :description => 'x', :directive => @reg)
     @opt_verify_freq1 = FactoryGirl.create(:option, :role => 'verify_frequency', :title => 'Frequency 1')
     @opt_verify_freq2 = FactoryGirl.create(:option, :role => 'verify_frequency', :title => 'Frequency 2')
   end
@@ -77,9 +77,9 @@ describe Control do
   end
 
   it "gets the parent persons" do
-    # Get all of the parent persons from all of the sections/programs
-    program = FactoryGirl.create(:program, :with_people)
-    program.people.count.should eq(3)
+    # Get all of the parent persons from all of the sections/directives
+    directive = FactoryGirl.create(:directive, :with_people)
+    directive.people.count.should eq(3)
     pending
   end
 

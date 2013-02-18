@@ -1,10 +1,10 @@
 -# locals: sections
 
 %h3.tab-title
-  Program or Policy Sections that mandate this Control
+  Directive Sections that mandate this Control
 
 %ul.tree-structure
-  =walk_slug_tree(Program.slugtree(sections)) do |item, step|
+  =walk_slug_tree(Directive.slugtree(sections)) do |item, step|
     -content_id = "content_#{rand(36**8).to_s(36)}" # unique ID for toggle
     .item-main
       .openclose{ :class => 'lastchild' }

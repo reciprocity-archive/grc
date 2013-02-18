@@ -6,10 +6,10 @@ describe ObjectDocumentsController do
     @model = ObjectDocument
     @object = FactoryGirl.create(:object_document)
     @document = FactoryGirl.create(:document, :title => 'Test')
-    @program = FactoryGirl.create(:program)
+    @directive = FactoryGirl.create(:directive)
     @create_params = {
-      :documentable_type => @program.class.name,
-      :documentable_id => @program.id,
+      :documentable_type => @directive.class.name,
+      :documentable_id => @directive.id,
       :document_id => @document.id
     }
     @index_objs = [@object]
@@ -25,8 +25,8 @@ describe ObjectDocumentsController do
     it "should show the right objects" do
       login({}, {:role => :superuser})
       get 'list_edit', {
-        :object_type => @program.class.name,
-        :object_id => @program.id,
+        :object_type => @directive.class.name,
+        :object_id => @directive.id,
       }
       response.should be_success
     end
@@ -37,13 +37,13 @@ describe ObjectDocumentsController do
       login({}, {:role => :superuser})
       post 'create', {
         :items => { :new_id => {
-          :documentable_type => @program.class.name,
-          :documentable_id => @program.id,
+          :documentable_type => @directive.class.name,
+          :documentable_id => @directive.id,
           :document_id => @document.id
         }}
       }
       response.should be_success
-      @program.documents.should include @document
+      @directive.documents.should include @document
     end
   end
 end

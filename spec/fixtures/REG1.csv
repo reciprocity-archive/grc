@@ -1,5 +1,5 @@
-Type,Bogus1,Program Code,Program Title,Program Description,Company,Version,Start,Stop,Kind,Audit Start,Audit Frequency,"Audit Duration"
-Program,aaa,REG1,Reg 1,new description 1,false,,,,,,Soonish,1 Fortnight
+Type,Bogus1,Directive Code,Directive Title,Directive Description,Company,Version,Start,Stop,Kind,Audit Start,Audit Frequency,"Audit Duration"
+Directive,aaa,REG1,Reg 1,new description 1,false,,,,,,Soonish,1 Fortnight
 This is ignored
 
 Section Code,Section Title,Bogus2,Section Description

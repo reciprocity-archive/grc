@@ -5,7 +5,7 @@ describe PeopleController do
   before :each do
     @model = Person
     @object = FactoryGirl.create(:person)
-    @program = FactoryGirl.create(:program)
+    @directive = FactoryGirl.create(:directive)
     @index_objs = [@object]
   end
 

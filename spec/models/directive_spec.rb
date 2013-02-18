@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe Program do
+describe Directive do
   context "relationships" do
     before :each do
       @product = FactoryGirl.create(:product)
-      @program = FactoryGirl.create(:program)
+      @directive = FactoryGirl.create(:directive)
     end
   end
 end

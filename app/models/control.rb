@@ -13,7 +13,7 @@ class Control < ActiveRecord::Base
   CATEGORY_TYPE_ID = 100
   CATEGORY_ASSERTION_TYPE_ID = 102
 
-  attr_accessible :title, :slug, :description, :program, :section_ids, :type, :kind, :means, :categories, :verify_frequency, :url, :start_date, :stop_date, :version, :documentation_description, :notes, :assertions, :fraud_related, :key_control
+  attr_accessible :title, :slug, :description, :directive, :section_ids, :type, :kind, :means, :categories, :verify_frequency, :url, :start_date, :stop_date, :version, :documentation_description, :notes, :assertions, :fraud_related, :key_control
 
   def general_categories
     categories.ctype(CATEGORY_TYPE_ID)
@@ -27,10 +27,10 @@ class Control < ActiveRecord::Base
     indexes :slug, :sortable => true
     indexes :title
     indexes :description
-    has :created_at, :updated_at, :program_id
+    has :created_at, :updated_at, :directive_id
   end
 
-  belongs_to :program
+  belongs_to :directive
 
   belongs_to :parent, :class_name => 'Control'
 
@@ -70,7 +70,7 @@ class Control < ActiveRecord::Base
 
   sanitize_attributes :description, :documentation_description, :notes
 
-  validates :program, :program_id,
+  validates :directive, :directive_id,
     :presence => { :message => "needs a value" }
 
   validate :slug do
@@ -98,8 +98,8 @@ class Control < ActiveRecord::Base
       edges.add(Edge.new(parent, self, :control_includes_control))
     end
 
-    if program
-      edges.add(Edge.new(program, self, :program_includes_control))
+    if directive
+      edges.add(Edge.new(directive, self, :directive_includes_control))
     end
 
     systems.each do |system|
@@ -124,13 +124,13 @@ class Control < ActiveRecord::Base
   def self.custom_all_edges
     # Returns a list of additional edges that aren't returned by the default method.
     edges = Set.new
-    includes(:parent, :program, :systems, :sections, :implemented_controls, :implementing_controls).each do |c|
+    includes(:parent, :directive, :systems, :sections, :implemented_controls, :implementing_controls).each do |c|
       if c.parent
         edges.add(Edge.new(c.parent, c, :control_includes_control))
       end
 
-      if c.program
-        edges.add(Edge.new(c.program, c, :program_includes_control))
+      if c.directive
+        edges.add(Edge.new(c.directive, c, :directive_includes_control))
       end
 
       c.systems.each do |system|

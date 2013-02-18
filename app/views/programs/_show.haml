@@ -1,3 +1,5 @@
+-instance = program
+
 -content_for :widget_title do
   Program Info
 
@@ -10,33 +12,28 @@
     %label
       Code
     %span
-      =program.slug
-  %li.float-element
-    %label
-      Kind
-    %span
-      =program.kind && program.kind.title
+      =instance.slug
   %li.float-element
     %label
       Full Title
     %span
-      =program.title
+      =instance.title
   %li
     %label
       Description
     %span
-      =display_as_html program.description
+      =display_as_html instance.description
   %li.float-element
     %label
       Direct link
     %span
-      =link_to(program.url,program.url,:target => "_blank",:class => "inner-element")
+      =link_to(instance.url, instance.url, :target => "_blank", :class => "inner-element")
 
 %section.footer
   .row-fluid
     .span6
       %p.footer-left
-        Created: #{program.created_at.strftime("%m/%d/%y")}
+        Created: #{instance.created_at.strftime("%m/%d/%y")}
     .span6
       %p.footer-right
-        Updated: #{program.updated_at.strftime("%m/%d/%y")}
+        Updated: #{instance.updated_at.strftime("%m/%d/%y")}

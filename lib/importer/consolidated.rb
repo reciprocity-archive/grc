@@ -6,21 +6,21 @@ module Importer
   #
   # Expected columns are:
   #   0-4:  Company control index, unused, title, description-part-1, description-part-2
-  #   5-6:  Program 1: description, slug(s)
-  #   7-8:  Program 2: description, slug(s)
-  #   9-10: Program 3: description, slug(s)
+  #   5-6:  Directive 1: description, slug(s)
+  #   7-8:  Directive 2: description, slug(s)
+  #   9-10: Directive 3: description, slug(s)
   #
   # Header format (by column) (some unused):
   #   0: "#"
   #   2,3: Company title, slug
-  #   5,6: Program 1 description, slug
-  #   7,8: Program 1 description, slug
-  #   9,10: Program 1 description, slug
+  #   5,6: Directive 1 description, slug
+  #   7,8: Directive 1 description, slug
+  #   9,10: Directive 1 description, slug
   class Consolidated
     attr_accessor :company_controls
 
     def initialize
-      @programs = []
+      @directives = []
       @company_controls = []
     end
 
@@ -30,7 +30,7 @@ module Importer
       end
     end
 
-    # Create the default Program objects and iterate rows, creating Controls,
+    # Create the default Directive objects and iterate rows, creating Controls,
     # Sections, and associated mappings
     def run_csv(csv_string)
       headers_seen = false
@@ -43,11 +43,11 @@ module Importer
           if row[0] && row[0].match(/#/)
             headers_seen = true
 
-            # Retrieve Program names and slugs from headers of columns
-            add_program(row[3], row[2], true)  # Required
-            add_program(row[6], row[5])  if row[5].present?
-            add_program(row[8], row[7])  if row[7].present?
-            add_program(row[10], row[9]) if row[9].present?
+            # Retrieve Directive names and slugs from headers of columns
+            add_directive(row[3], row[2], true)  # Required
+            add_directive(row[6], row[5])  if row[5].present?
+            add_directive(row[8], row[7])  if row[7].present?
+            add_directive(row[10], row[9]) if row[9].present?
           end
 
         else
@@ -55,9 +55,9 @@ module Importer
 
           # Company controls
           if row[0]
-            program = @programs[0]
+            directive = @directives[0]
 
-            slug = "#{program.slug}.#{row[0]}"
+            slug = "#{directive.slug}.#{row[0]}"
             desc = "Objective:\n#{row[3]}\n\nControl:\n#{row[4]}"
 
             control = find_or_create(
@@ -65,24 +65,24 @@ module Importer
               { :slug => slug },
               { :title => row[2],
                 :description => desc,
-                :program => program })
+                :directive => directive })
 
             @company_controls.push(control)
           end
 
           # Regulatory Controls
-          add_control(@programs[1], row[6],  row[5]) if row[5] && row[6] != "N/A"
-          add_control(@programs[2], row[8],  row[7]) if row[7] && row[8] != "N/A"
-          add_control(@programs[3], row[10], row[9]) if row[9] && row[10] != "N/A"
+          add_control(@directives[1], row[6],  row[5]) if row[5] && row[6] != "N/A"
+          add_control(@directives[2], row[8],  row[7]) if row[7] && row[8] != "N/A"
+          add_control(@directives[3], row[10], row[9]) if row[9] && row[10] != "N/A"
         end
       end
     end
 
-    def add_program(slug, title, is_company=false)
+    def add_directive(slug, title, is_company=false)
       raise ImportError, "Invalid header row" if !slug.present?
 
-      program = find_or_create(
-        Program,
+      directive = find_or_create(
+        Directive,
         { :slug => slug.strip },
         { :title => title.present? ? title.strip : slug,
           :company => is_company })
@@ -91,27 +91,27 @@ module Importer
         Section,
         { :slug => slug.strip },
         { :title => title.present? ? title.strip : slug,
-          :program => program })
+          :directive => directive })
 
-      @programs.push(program)
+      @directives.push(directive)
     end
 
     # For each slug, create the Control object and mappings
-    def add_control(program, slugs, description)
+    def add_control(directive, slugs, description)
       slugs.split(',').map(&:strip).each do |slug|
-        slug = "#{program.slug}.#{slug}"
+        slug = "#{directive.slug}.#{slug}"
         control = find_or_create(
           Control,
           { :slug => slug },
           { :description => description,
             :title => slug,
-            :program => program })
+            :directive => directive })
 
         section = Section.where(:slug => slug).first
         section ||= Section.create_in_tree(
           :slug => slug,
           :title => slug,
-          :program => program)
+          :directive => directive)
 
         control_section = find_or_create(
           ControlSection,

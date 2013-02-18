@@ -1,6 +1,6 @@
-%ul.slugtree{:data => { :href => mapping_sections_path(@program, :format => :html)}}
+%ul.slugtree{:data => { :href => mapping_sections_path(@directive, :format => :html)}}
   -if sections.empty?
     Nothing found.
-  =walk_slug_tree(Program.slugtree(sections)) do |section, step|
+  =walk_slug_tree(Directive.slugtree(sections)) do |section, step|
     =render :partial => 'section_list_content_item',
             :locals => { :section => section }

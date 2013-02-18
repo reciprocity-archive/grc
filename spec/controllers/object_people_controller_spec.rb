@@ -6,10 +6,10 @@ describe ObjectPeopleController do
     @model = ObjectPerson
     @object = FactoryGirl.create(:object_person)
     @person = FactoryGirl.create(:person)
-    @program = FactoryGirl.create(:program)
+    @directive = FactoryGirl.create(:directive)
     @create_params = {
-      :personable_type => @program.class.name,
-      :personable_id => @program.id,
+      :personable_type => @directive.class.name,
+      :personable_id => @directive.id,
       :person_id => @person.id
     }
     @index_objs = [@object]
@@ -28,13 +28,13 @@ describe ObjectPeopleController do
         :items => {1 => {
           :person_id => @person.id,
           :role => 'owner',
-          :personable_type => @program.class.name,
-          :personable_id => @program.id,
+          :personable_type => @directive.class.name,
+          :personable_id => @directive.id,
         }}
       }
       response.should be_success
-      @program.people.should include @person
-      role = @program.object_people.where(:person_id => @person.id).first.role
+      @directive.people.should include @person
+      role = @directive.object_people.where(:person_id => @person.id).first.role
       role.should eq 'owner'
     end
 
@@ -43,20 +43,20 @@ describe ObjectPeopleController do
       post 'create', {
         :items => {1 => {
           :person_id => @person.id,
-          :personable_type => @program.class.name,
-          :personable_id => @program.id,
+          :personable_type => @directive.class.name,
+          :personable_id => @directive.id,
         }}
       }
       response.should_not be_success
-      @program.people.should_not include @person
+      @directive.people.should_not include @person
     end
 
     it "should update role for existing users" do
       login({}, {:role => :superuser})
-      @program.object_people.create(
+      @directive.object_people.create(
         {:person => @person, :role => 'none'},
         :without_protection => true)
-      object_person = @program.object_people.where(:person_id => @person.id).first
+      object_person = @directive.object_people.where(:person_id => @person.id).first
       role = object_person.role
       role.should eq 'none'
       post 'create', {
@@ -64,12 +64,12 @@ describe ObjectPeopleController do
           :id => object_person.id,
           :person_id => @person.id,
           :role => 'owner',
-          :personable_type => @program.class.name,
-          :personable_id => @program.id
+          :personable_type => @directive.class.name,
+          :personable_id => @directive.id
         }}
       }
       response.should be_success
-      role = @program.object_people.reload.where(:person_id => @person.id).first.role
+      role = @directive.object_people.reload.where(:person_id => @person.id).first.role
       role.should eq 'owner'
     end
   end
@@ -78,8 +78,8 @@ describe ObjectPeopleController do
     it "should show the right objects" do
       login({}, {:role => :superuser})
       get 'list_edit', {
-        :object_type => @program.class.name,
-        :object_id => @program.id,
+        :object_type => @directive.class.name,
+        :object_id => @directive.id,
       }
       response.should be_success
     end

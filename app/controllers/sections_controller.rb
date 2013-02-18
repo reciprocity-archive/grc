@@ -4,7 +4,7 @@
 
 # Browse sections
 class SectionsController < BaseObjectsController
-  include ProgramsHelper
+  include DirectivesHelper
 
   cache_sweeper :section_sweeper, :only => [:create, :update, :destroy]
 
@@ -33,18 +33,18 @@ class SectionsController < BaseObjectsController
     end
 
     def object_path
-      flow_program_path(@section.program)
+      flow_directive_path(@section.directive)
     end
 
     def post_destroy_path
-      flow_program_path(@section.program)
+      flow_directive_path(@section.directive)
     end
 
     def section_params
       section_params = params[:section] || {}
-      if section_params[:program_id]
-        # TODO: Validate the user has access to add sections to the program
-        section_params[:program] = Program.where(:id => section_params.delete(:program_id)).first
+      if section_params[:directive_id]
+        # TODO: Validate the user has access to add sections to the directive
+        section_params[:directive] = Directive.where(:id => section_params.delete(:directive_id)).first
       end
       section_params
     end

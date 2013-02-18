@@ -1,6 +1,6 @@
-# A Regulatory Program
+# A Program which links Directives
 #
-# The top of the Program -> CO -> Control hierarchy
+# The top of the Program -> Directive -> Control hierarchy
 class Program < ActiveRecord::Base
   include CommonModel
   include SluggedModel
@@ -9,73 +9,19 @@ class Program < ActiveRecord::Base
   include RelatedModel
   include SanitizableAttributes
 
-  attr_accessible :title, :slug, :company, :description, :start_date, :stop_date, :audit_start_date, :audit_frequency, :audit_duration, :organization, :url, :scope, :kind, :version
+  attr_accessible :title, :slug, :description, :start_date, :stop_date, :url
 
-  has_many :sections, :order => :slug, :dependent => :destroy
-  has_many :controls, :order => :slug, :dependent => :destroy
-
-  has_many :cycles, :dependent => :destroy
-
-  belongs_to :kind, :class_name => 'Option', :conditions => { :role => 'program_kind' }
-
-  belongs_to :audit_frequency, :class_name => 'Option', :conditions => { :role => 'audit_frequency' }
-  belongs_to :audit_duration, :class_name => 'Option', :conditions => { :role => 'audit_duration' }
+  has_many :program_directives, :dependent => :destroy
+  has_many :directives, :through => :program_directives
 
   is_versioned_ext
 
   sanitize_attributes :description
 
-  before_save :assign_company_boolean_from_program_kind
-
   validates :title,
     :presence => { :message => "needs a value" }
 
-  def company_controls?
-    self.kind && self.kind.title == 'Company Controls'
-  end
-
-  def self.all_company_controls_first
-    programs = self.includes(:kind)
-    programs = programs.select {|p| p.company_controls?} +
-      programs.reject {|p| p.company_controls?}
-  end
-
-  def custom_edges
-    # Returns a list of additional edges that aren't returned by the default method.
-    edges = Set.new
-    sections.each do |section|
-      edges.add(Edge.new(self, section, :program_includes_section))
-    end
-
-    controls.each do |control|
-      edges.add(Edge.new(self, control, :program_includes_control))
-    end
-    edges
-  end
-
-  def self.custom_all_edges
-    # Returns a list of additional edges that aren't returned by the default method.
-    edges = Set.new
-    includes(:sections, :controls).each do |p|
-      p.sections.each do |section|
-        edges.add(Edge.new(p, section, :program_includes_section))
-      end
-
-      p.controls.each do |control|
-        edges.add(Edge.new(p, control, :program_includes_control))
-      end
-    end
-    edges
-  end
-
   def display_name
     slug
-  end
-
-  def assign_company_boolean_from_program_kind
-    if !changed_attributes.include?('company')
-      self.company = !(self.kind && self.kind.title == 'Regulation')
-    end
-    true
   end
 end

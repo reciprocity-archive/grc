@@ -81,7 +81,7 @@ CMS.Models.Control("CMS.Models.ImplementedControl", {
 
 /*
 	Note: This is kind of a hack.  I would like to revisit the structure of the control models later
-	in order to just pull the linked ones out of cache, but it takes some clever finagling with 
+	in order to just pull the linked ones out of cache, but it takes some clever finagling with
 	$.Deferred and it's too much work to think through at the moment.  In the meantime, implementing
 	controls as a separate model from Regulation or Company controls works for my needs (comparing IDs)
 	--BM 12/10/2012
@@ -93,7 +93,7 @@ CMS.Models.ImplementedControl("CMS.Models.ImplementingControl", {
 
 // This creates a subclass of the Control model
 CMS.Models.Control("CMS.Models.RegControl", {
-	findAll : "GET /programs/{id}/controls.json"
+	findAll : "GET /directives/{id}/controls.json"
 	, map_ccontrol : function(params, control) {
 		return can.ajax({
 			url : "/mapping/map_ccontrol"
@@ -109,7 +109,7 @@ CMS.Models.Control("CMS.Models.RegControl", {
 						can.each(control.implementing_controls, function(ctl) {
                             //TODO : Put removal functionality into the Cacheable, in the vein of addElementToChildList,
                             //  and update this code to simply remove the unmap code.
-                            //We are needing to manually trigger changes in Model.List due to CanJS being unable to 
+                            //We are needing to manually trigger changes in Model.List due to CanJS being unable to
                             //  trigger template changes for lists automatically.
 							if(ctl.id !== params.ccontrol)
 							{

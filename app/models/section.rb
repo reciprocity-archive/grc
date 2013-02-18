@@ -11,18 +11,18 @@ class Section < ActiveRecord::Base
   include RelatedModel
   include SanitizableAttributes
 
-  attr_accessible :title, :slug, :description, :program, :notes
+  attr_accessible :title, :slug, :description, :directive, :notes
 
   define_index do
     indexes :slug, :sortable => true
     indexes :title
     indexes :description
-    has :created_at, :updated_at, :program_id
+    has :created_at, :updated_at, :directive_id
   end
 
   has_many :controls, :through => :control_sections
   has_many :control_sections
-  belongs_to :program
+  belongs_to :directive
   belongs_to :parent, :class_name => "Section"
 
   is_versioned_ext
@@ -55,8 +55,8 @@ class Section < ActiveRecord::Base
       edges.add(Edge.new(parent, self, :section_includes_section))
     end
 
-    if program
-      edges.add(Edge.new(program, self, :program_includes_section))
+    if directive
+      edges.add(Edge.new(directive, self, :directive_includes_section))
     end
 
     controls.each do |control|
@@ -70,13 +70,13 @@ class Section < ActiveRecord::Base
 
     edges = Set.new
 
-    includes(:parent, :program, :controls).each do |s|
+    includes(:parent, :directive, :controls).each do |s|
       if s.parent
         edges.add(Edge.new(s.parent, s, :section_includes_section))
       end
 
-      if s.program
-        edges.add(Edge.new(s.program, s, :program_includes_section))
+      if s.directive
+        edges.add(Edge.new(s.directive, s, :directive_includes_section))
       end
 
       s.controls.each do |control|
@@ -147,9 +147,13 @@ class Section < ActiveRecord::Base
     sections.select { |section| prefix_test.match(section.slug) }
   end
 
-  # Whether this Section is associated with a company "program"
+  # Whether this Section is associated with a company "directive"
   def company?
-    program.company?
+    directive.company?
+  end
+
+  def default_slug_prefix
+    directive.contract? ? 'CLAUSE' : 'SECTION'
   end
 
   def consolidated_controls
