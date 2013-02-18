@@ -60,7 +60,7 @@
     #middle-column.span8.widget-area
       =render :partial => 'directives/controls',
               :layout => 'layouts/widget_box',
-              :locals => { :directive => instance }
+              :locals => { :directive => instance, :widget_class => "governance" }
     #right-column.span4.widget-area
       =render :partial => 'directives/show',
               :layout => 'layouts/widget_box',
