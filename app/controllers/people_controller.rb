@@ -30,7 +30,7 @@ class PeopleController < BaseObjectsController
 
   def index
     @people = Person
-    if params[:s]
+    if params[:s].present?
       @people = @people.db_search(params[:s])
     end
     @people = allowed_objs(@people.all, :read)

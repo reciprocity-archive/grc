@@ -12,7 +12,7 @@ class OptionsController < BaseObjectsController
 
   def index
     @options = Option.all
-    if params[:s]
+    if params[:s].present?
       @options = @options.db_search(params[:s])
     end
 

@@ -37,7 +37,7 @@ class SystemsController < BaseObjectsController
     @systems = System
     if params[:is_biz_process] == 'false'
       @systems = @systems.where(:is_biz_process => false)
-    else params[:is_biz_process] == 'true'
+    elsif params[:is_biz_process] == 'true'
       @systems = @systems.where(:is_biz_process => true)
     end
     if params[:s].present?
