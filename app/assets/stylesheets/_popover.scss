@@ -79,6 +79,11 @@
         font-weight: bold;
       }
       .rtf {
+        border:1px solid $lightGray;
+        @include border-radius();
+        padding:10px;
+        overflow:auto;
+        max-height:100px;
         ul {
           @include reset-list();
           margin:8px 0 10px 25px;
@@ -94,6 +99,32 @@
           padding-bottom: 4px;
         }
       }
+    }
+  }
+  .progress {
+    margin-bottom:0;
+  }
+  .minor {
+    color:$gray;
+  }
+  .created,
+  .updated {
+    color:$gray;
+    margin-bottom:0;
+  }
+  .updated {
+    text-align:right;
+  }
+  h3,
+  h4 {
+    span {
+      font-weight:normal;
+    }
+  }
+  h3 {
+    i {
+      margin-top:5px;
+      margin-right:5px;
     }
   }
 }

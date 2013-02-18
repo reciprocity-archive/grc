@@ -74,6 +74,19 @@
       }
     }
   }
+  .inline-info {
+    color:$gray;
+    i {
+      @include opacity(0.3);
+      margin-top:7px;
+    }
+    &.blank {
+      color:lighten($gray,20%);
+      i {
+        @include opacity(0.1);
+      }
+    }
+  }
   .header {
     background:$text;
     @include transition(background-color 0.2s);
