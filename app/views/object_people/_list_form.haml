@@ -8,7 +8,7 @@
     .row-fluid
       .span9
         .object-info
-          %span.name <%= person.name.trim() || person.email %>
+          %span.name <%= person.name && person.name.trim() || person.email %>
           %span.option <%= person.company %>
         
       .span3.actions
@@ -20,7 +20,7 @@
 
 %script#person_option_data{ :type => 'text/html' }
   .object-info
-    %span.name <%= person.name.trim() || person.email %>
+    %span.name <%= person.name && person.name.trim() || person.email %>
     %span.option <%= person.company %>
   
 
