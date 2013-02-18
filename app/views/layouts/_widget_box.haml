@@ -9,16 +9,16 @@
     .row-fluid
       .span8
         %h2
-          %i.grcicon-program
+          -#%i.grcicon-program
           =yield_content!(:widget_title)
       
       .span4
         -help_path = yield_content!(:widget_help)
-        .widget-action.pull-right.widget-showhide
+        -#.widget-action.pull-right.widget-showhide
           %a.active{:href => "#", :rel => "tooltip", :title => "Contract widget", :'data-placement'=>"top"}
           
         -#-if has_feature? :BETA
-        .widget-action.pull-right
+        -#.widget-action.pull-right
           %a.remove{:href => "#", :rel => "tooltip", :title => "Remove widget", :'data-placement'=>"top"}
             %i.grcicon-x-white
         -if !help_path.blank?
