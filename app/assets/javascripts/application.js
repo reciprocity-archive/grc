@@ -131,6 +131,22 @@ jQuery(document).ready(function($) {
     $widget.fadeOut();  
   });
 
+  // Contract/Expand widget
+  $('body').on('click', '.widget .header .widget-showhide a', function(e) {
+    e.preventDefault();
+    var $this = $(this),
+        $content = $this.closest(".widget").find(".content")
+    
+    if($this.hasClass("active")) {
+      $content.slideUp();
+      $this.removeClass("active");
+    } else {
+      $content.slideDown();
+      $this.addClass("active");
+    }
+    
+  });
+
   // Show/hide widget content
   $('body').on('click', '.widget .header .showhide', function(e) {
     var $this = $(this),

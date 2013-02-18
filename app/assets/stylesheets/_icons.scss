@@ -6,7 +6,8 @@
 
 [class^="grcicon-"],
 .showhide,
-.openclose {
+.openclose,
+.widget-showhide {
   display: inline-block;
   width: 16px;
   height: 16px;
@@ -332,6 +333,18 @@
     }
     &:hover {
       @include opacity(1);
+    }
+  }
+}
+
+.widget-showhide {
+  a {
+    background-position: -265px -241px;
+    background-image: url("/images/grcicons/icons.png");
+    background-repeat: no-repeat;
+    @include background-size(296px 296px);
+    &.active {
+     background-position: -265px -217px;
     }
   }
 }

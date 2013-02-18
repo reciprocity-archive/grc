@@ -3,7 +3,7 @@
   .no-result.object-no-result
     No results found
 -else
-  %ul.nav.nav-tabs.tree-structure.simple.single-row-tabs
+  %ul.tree-structure.simple.single-row-tabs
     -@risks.each do |risk|
       -if quick_result
         =render 'base_objects/quick_result', { :item => risk }

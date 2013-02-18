@@ -7,7 +7,7 @@
   .no-result.object-no-result
     No results found
 -else
-  %ul.nav.nav-tabs.tree-structure.simple.single-row-tabs
+  %ul.tree-structure.simple.single-row-tabs
     -instances.each do |instance|
       -instance_path = self.send("flow_#{model_name}_path", instance)
       -instance_tooltip_path = self.send("tooltip_flow_#{model_name}_path", instance)
