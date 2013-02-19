@@ -3,25 +3,29 @@
 -instance = instance_variable_get("@" + model_name)
 
 -content_for :tooltip_title do
-  %h3 #{model_title} Information
+  %h3
+    #{model_title} Info
 
-%h4 
-  =model_title
-  \:
-  =instance.title
-  \|
-  =instance.slug
-%br
-%h4 Description
-.rtf
-  =display_as_html instance.description
+.row-fluid
+  .span12
+    %h3
+      %i{:class => "grcicon-#{model_name}-black"}
+      =instance.slug
+      %span=instance.title
 
+.row-fluid
+  .span12
+    %h4 Description
+    -if instance.description != ""
+      =display_as_html instance.description
+    -else
+      .rtf
+        %p.no-data No description available
 
-.tooltip-footer
-  .row-fluid
-    .span6
-      %strong Created:
-      =display_time(instance.created_at)
-    .span6
-      %strong Updated:
-      =display_time(instance.updated_at)
+.row-fluid
+  .span6.created
+    %strong Created:
+    =display_time(instance.created_at)
+  .span6.updated
+    %strong Updated:
+    =display_time(instance.updated_at)

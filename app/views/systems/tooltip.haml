@@ -1,20 +1,31 @@
 -content_for :tooltip_title do
   %h3
     =system.is_biz_process? ? "Process" : "System"
-    Information
+    Info
 
-=system.title
-\|
-=system.slug
+.row-fluid
+  .span12
+    %h3
+      -if system.is_biz_process?
+        %i{:class => "grcicon-businessprocess-black"}
+      -else
+        %i{:class => "grcicon-system-black"}
+      =system.slug
+      %span=system.title
 
-%h3 Description
+.row-fluid
+  .span12
+    %h4 Description
+    -if system.description != ""
+      =display_as_html system.description
+    -else
+      .rtf
+        %p.no-data No description available
 
-.item
-  =display_as_html system.description
-
-.item
-  Created:
-  =display_time(system.created_at)
-.item
-  Updated:
-  =display_time(system.updated_at)
+.row-fluid
+  .span6.created
+    %strong Created:
+    =display_time(system.created_at)
+  .span6.updated
+    %strong Updated:
+    =display_time(system.updated_at)
