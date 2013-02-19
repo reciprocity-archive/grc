@@ -67,6 +67,17 @@ can.Model.Cacheable("CMS.Models.Section", {
       }
     });
   }
+
+  , model : function(attrs) {
+    var id;
+    if((id = attrs.id || (attrs[this.root_object] && attrs[this.root_object].id)) && this.findInCacheById(id)) {
+      var cached = this.findInCacheById(id);
+      cached.update_linked_controls();
+      return cached;
+    } else {
+      return this._super.apply(this, arguments);
+    }
+  }
 }, {
 
   init : function() {

@@ -2,63 +2,72 @@
 //= require models/cacheable
 (function(namespace, $){
 can.Model.Cacheable("CMS.Models.Control", {
-	// static properties
+  // static properties
     root_object : "control"
-	, findAll : "GET /controls.json?company=true"
-	, findOne : "GET /controls/{id}.json"
+  , findAll : "GET /controls.json?company=true"
+  , findOne : "GET /controls/{id}.json"
+
+  , model : function(attrs) {
+    var id;
+    if((id = attrs.id || (attrs[this.root_object] && attrs[this.root_object].id)) && this.findInCacheById(id)) {
+      return this.findInCacheById(id);
+    } else {
+      return this._super.apply(this, arguments);
+    }
+  }
 }
 , {
 // prototype properties
-	init : function() {
+  init : function() {
         // This block now covered in the Cacheable model
-		// if(this.control) {
-		// 	var attrs = this.control._attrs();
-		// 	for(var i in attrs) {
-		// 		if(attrs.hasOwnProperty(i)) {
-		// 			this.attr(i, this.control[i]);
-		// 		}
-		// 	}
-		// 	this.removeAttr("control");
-		// }
-		this.attr({
-			"content_id" : Math.floor(Math.random() * 10000000)
-			, "type" : "company"
-			, "selected" : false
-		});
-		this._super();
-	}
+    // if(this.control) {
+    //  var attrs = this.control._attrs();
+    //  for(var i in attrs) {
+    //    if(attrs.hasOwnProperty(i)) {
+    //      this.attr(i, this.control[i]);
+    //    }
+    //  }
+    //  this.removeAttr("control");
+    // }
+    this.attr({
+      "content_id" : Math.floor(Math.random() * 10000000)
+      , "type" : "company"
+      , "selected" : false
+    });
+    this._super();
+  }
 
-	, bind_section : function(section) {
-		var that = this;
-		this.bind("change.section" + section.id, function(ev, attr, how, newVal, oldVal) {
-			if(attr !== 'implementing_controls')
-				return;
+  , bind_section : function(section) {
+    var that = this;
+    this.bind("change.section" + section.id, function(ev, attr, how, newVal, oldVal) {
+      if(attr !== 'implementing_controls')
+        return;
 
-			var oldValIds = can.map(can.makeArray(oldVal), function(val) { return val.id; });
+      var oldValIds = can.map(can.makeArray(oldVal), function(val) { return val.id; });
 
-			if(newVal.length > oldVal.length) {
-				can.each(newVal, function(el) {
-					if($.inArray(el.id, oldValIds) < 0) {
-						section.addElementToChildList("linked_controls", CMS.Models.Control.findInCacheById(el.id));
-					}
-				});
-			} else {
-				var lcs = section.linked_controls.slice(0);
-				can.each(oldVal, function(el) {
-					if($.inArray(el, newVal) < 0) {
-						lcs.splice($.inArray(el, lcs), 1);
-					}
-				});
-				section.attr(
-					"linked_controls"
-					, lcs
-				);
-			}
-		});
-	}
-	, unbind_section : function(section) {
-		this.unbind("change.section" + section.id);
-	}
+      if(how === "add" || (how === "set" && newVal.length > oldVal.length)) {
+        can.each(newVal, function(el) {
+          if($.inArray(el.id, oldValIds) < 0) {
+            section.addElementToChildList("linked_controls", CMS.Models.Control.findInCacheById(el.id));
+          }
+        });
+      } else {
+        var lcs = section.linked_controls.slice(0);
+        can.each(oldVal, function(el) {
+          if($.inArray(el, newVal) < 0) {
+            lcs.splice($.inArray(el, lcs), 1);
+          }
+        });
+        section.attr(
+          "linked_controls"
+          , lcs
+        );
+      }
+    });
+  }
+  , unbind_section : function(section) {
+    this.unbind("change.section" + section.id);
+  }
 });
 
 // This creates a subclass of the Control model
@@ -139,6 +148,7 @@ CMS.Models.Control("CMS.Models.RegControl", {
 	, map_ccontrol : function(params) {
 		return this.constructor.map_ccontrol(can.extend({}, params, {rcontrol : this.id}), this);
 	}
+
 });
 
 })(this, can.$)
