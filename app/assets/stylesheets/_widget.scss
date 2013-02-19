@@ -4,6 +4,7 @@
   margin-bottom: 20px;
   overflow-y:hidden;
   background:$white;
+  border:1px solid $widgetBorder;
   @include transition(box-shadow 0.2s,border-color 0.2s);
   ul.tree-structure {
     &.simple {
@@ -104,8 +105,7 @@
     .nav-tabs {
       background: $lightGray;
       margin-right: 7px;
-      padding-left: 2px;
-      padding-top: 9px;
+      padding-top: 9px 0 9px 7px;
       border: none;
       li {
         a {
@@ -154,6 +154,13 @@
     color:$white;
     height: 30px;
     padding-left: 16px;
+    &:hover {
+      background-image: url("/images/grcicons/icons.png");
+      background-repeat: no-repeat;
+      @include background-size(296px 296px);
+      background-position: -272px -169px;
+      cursor: move;
+    }
     .widget-action {
       height: 30px;
       width: 30px;
@@ -264,7 +271,6 @@
   }
   .content {
     padding:6px;
-    border:1px solid $widgetBorder;
     border-top: none;
     background:$white;
     height:85%; //needs to be removed
@@ -363,12 +369,6 @@
   }
   &:hover {
     @include box-shadow(0 0 12px $gray);
-    .header {
-      background-image: url("/images/grcicons/icons.png");
-      background-repeat: no-repeat;
-      @include background-size(296px 296px);
-      background-position: -272px -169px;
-    }
   }
   .related-button {
     li {
