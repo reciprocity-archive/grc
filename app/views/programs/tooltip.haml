@@ -1,18 +1,29 @@
 -content_for :tooltip_title do
   %h3 Program Information
 
-=program.title
-\|
-=program.slug
+.row-fluid
+  .span10
+    %h3
+      %i.grcicon-program-black
+      =program.slug
+      %span=program.title
+  .span2
+    %a.btn.btn-mini.pull-right{:href => flow_program_path(program), :rel => "tooltip", :title => "View/Edit Program"} 
+      %i.grcicon-goto
 
-%h3 Description
+.row-fluid
+  .span12
+    %h4 Description
+    -if program.description != ""
+      =display_as_html program.description
+    -else
+      .rtf
+        %p.no-data No description available
 
-.item
-  =display_as_html program.description
-
-.item
-  Created:
-  =display_time(program.created_at)
-.item
-  Updated:
-  =display_time(program.updated_at)
+.row-fluid
+  .span6.created
+    Created:
+    =display_time(program.created_at)  
+  .span6.updated
+    Updated:
+    =display_time(program.updated_at)
