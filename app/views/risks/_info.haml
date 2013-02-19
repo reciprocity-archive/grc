@@ -36,12 +36,10 @@
     =render :partial => 'categories/object_list',
             :locals  => { :object => instance, :scope_id => Control::CATEGORY_TYPE_ID }
 
-%hr.hr-widget
-
-.row-fluid
-  .span12
+  %li.category
     =render :partial => 'documents/object_list',
             :locals  => { :object => instance }
+
   %li.category
     =render :partial => 'people/object_list',
             :locals  => { :object => instance }
