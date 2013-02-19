@@ -1,28 +1,28 @@
+
 -content_for :tooltip_title do
-  %h3.oneline
-    =@control.title
-    Information
+  %h3
+    Control Info
 
-.cleanlabels
-  .row-fluid
-    .span4
-      %label Code
-      %p=@control.slug
-    .span8
-      %label Title
-      %p=@control.title
+.row-fluid
+  .span12
+    %h3
+      %i{:class => "grcicon-control-black"}
+      =@control.slug
+      %span=@control.title
 
-  %br/
-  .row-fluid
-    .span12
-      %label Description
+.row-fluid
+  .span12
+    %h4 Description
+    -if @control.description != ""
       =display_as_html @control.description
+    -else
+      .rtf
+        %p.no-data No description available
 
-  %br/
-  .row-fluid
-    .span6
-      %label Version
-      %p ---
-    .span6
-      %label Deprecated
-      %p ---
+.row-fluid
+  .span6.created
+    %strong Created:
+    =display_time(@control.created_at)
+  .span6.updated
+    %strong Updated:
+    =display_time(@control.updated_at)

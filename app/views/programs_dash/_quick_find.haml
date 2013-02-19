@@ -16,8 +16,7 @@
   %ul.nav.nav-tabs
     %li.active=link_to '<i class="grcicon-control-black"></i> Controls'.html_safe, "##{prefix}_controls", :data => { :'tab-href' => flow_controls_path(:quick => true, :qr => quick_result), :toggle => 'tab' }
     %li=link_to '<i class="grcicon-process-black"></i> Processes'.html_safe, "##{prefix}_processes", :data => { :'tab-href' => flow_systems_path(:quick => true, :qr => quick_result, :is_biz_process => true), :toggle => 'tab' }
-    %li
-      =link_to '<i class="grcicon-system-black"></i> Systems'.html_safe, "##{prefix}_systems", :data => { :'tab-href' => flow_systems_path(:quick => true, :qr => quick_result, :is_biz_process => false), :toggle => 'tab' }
+    %li=link_to '<i class="grcicon-system-black"></i> Systems'.html_safe, "##{prefix}_systems", :data => { :'tab-href' => flow_systems_path(:quick => true, :qr => quick_result, :is_biz_process => false), :toggle => 'tab' }
     %li=link_to '<i class="grcicon-product-black"></i> Products'.html_safe, "##{prefix}_products", :data => { :'tab-href' => flow_products_path(:quick => true, :qr => quick_result), :toggle => 'tab' }
     %li=link_to '<i class="grcicon-risk-black"></i> Risks'.html_safe, "##{prefix}_risks", :data => { :'tab-href' => flow_risks_path(:quick => true, :qr => quick_result), :toggle => 'tab' }
     %li=link_to '<i class="grcicon-attribute-black"></i> Attributes'.html_safe, "##{prefix}_risky_attributes", :data => { :'tab-href' => flow_risky_attributes_path(:quick => true, :qr => quick_result), :toggle => 'tab' }
@@ -43,11 +42,3 @@
     .tab-pane{ :id => "#{prefix}_data_assets" }
     .tab-pane{ :id => "#{prefix}_directives" }
     .tab-pane{ :id => "#{prefix}_programs" }
-
--if has_feature? :BETA
-  .row-fluid
-    .span6
-    .span6
-      %label.fltrt
-        %strong 254
-        of 500
