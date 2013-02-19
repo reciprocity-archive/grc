@@ -29,9 +29,9 @@
           .row-fluid
             =render :partial => 'object_leaf', :locals => { :instance => directive }
           .item-actions
-            %a.btn.btn-mini{ "rel" => "tooltip", "data-placement" => "left", "title" => "Edit this object", 'data-modal-class' => 'modal-wide', 'data-form-target' => 'refresh', "data-toggle" => "modal-ajax-form", :href => edit_flow_directive_path(directive.id) }
+            %a.btn.btn-mini{ "rel" => "tooltip", "data-placement" => "top", "title" => "Edit this object", 'data-modal-class' => 'modal-wide', 'data-form-target' => 'refresh', "data-toggle" => "modal-ajax-form", :href => edit_flow_directive_path(directive.id) }
               %i.grcicon-edit-new
-            %a.btn.btn-mini{ "rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => flow_directive_path(directive.id) }
+            %a.btn.btn-mini{ "rel" => "tooltip", "data-placement" => "top", "title" => "Go to this object's page", :href => flow_directive_path(directive.id) }
               %i.grcicon-goto
       .item-content{ :class => is_root && 'in' }
         %ul.tree-structure
