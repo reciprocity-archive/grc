@@ -1,4 +1,4 @@
-Setting up CMS for development
+Setting up GRC for development
 ==============================
 
 If you've done sufficient Rails development before, you may skip to the end for the condensed version.
@@ -7,7 +7,7 @@ If you've done sufficient Rails development before, you may skip to the end for 
 Setup environment
 -----------------
 
-CMS development uses RVM for environment-isolation during development.
+GRC development uses RVM for environment-isolation during development.
 
 ### Install or Update RVM
 
@@ -17,15 +17,15 @@ If you already have RVM installed, you may need to update to use Ruby 1.9.3:
 
     rvm reload && rvm get stable
 
-### Install Ruby 1.9.3 for CMS
+### Install Ruby 1.9.3 for GRC
 
 If RVM is successfully installed, you should setup a Ruby 1.9.3 environment using:
 
     rvm install 1.9.3-p194
 
-After the Ruby version has installed, setup the gemset for CMS using:
+After the Ruby version has installed, setup the gemset for GRC using:
 
-    rvm --create use ruby-1.9.3-p194@cms
+    rvm --create use ruby-1.9.3-p194@grc
 
 #### Problems?
 
@@ -34,23 +34,23 @@ If you have problems building Ruby 1.9.3, make sure you have the dependencies de
 You may need to reinstall using `rvm pkg install openssl` and/or `rvm pkg install readline` if you have problems with the `linecache19` or `ruby-debug19` gems later on.
 
 
-Checkout CMS
+Checkout GRC
 ------------
 
-CMS is open-source and hosted on Google Code using Git.  You can clone and checkout the project with:
+GRC is open-source and hosted on Google Code using Git.  You can clone and checkout the project with:
 
-    git clone https://code.google.com/p/compliance-management cms
-    cd cms
+    git clone https://code.google.com/p/compliance-management grc
+    cd grc
 
 
 Setup gems
 ----------
 
-CMS uses Bundler (`Gemfile` and `Gemfile.lock`) to manage Gems and dependencies.  Install bundler into your CMS gemset using:
+GRC uses Bundler (`Gemfile` and `Gemfile.lock`) to manage Gems and dependencies.  Install bundler into your GRC gemset using:
 
     gem install bundler
 
-The CMS `Gemfile` references `Gemfile.local`, which you should create with the following template:
+The GRC `Gemfile` references `Gemfile.local`, which you should create with the following template:
 
     source 'http://rubygems.org'
 
@@ -63,7 +63,7 @@ The CMS `Gemfile` references `Gemfile.local`, which you should create with the f
     end
 
 
-And install the gems required for CMS using the command below.  (The `--path=.bundle` is optional, but causes bundler to install gems into the `.bundle` local directory.)
+And install the gems required for GRC using the command below.  (The `--path=.bundle` is optional, but causes bundler to install gems into the `.bundle` local directory.)
 
     bundle install --path=.bundle
 
@@ -88,7 +88,7 @@ The default is fine for private development, but change this to something secret
 
 #### CMS_CONFIG["COMPANY_LOGO"]
 
-The company logo shows in the top-left corner of most pages.  If this setting is nil, the logo will just be the text "CMS".  Change this to the URL to display a custom image.
+The company logo shows in the top-left corner of most pages.  If this setting is nil, the logo will just be the text "GRC".  Change this to the URL to display a custom image.
 
 ### Initialize database:
 
@@ -115,7 +115,7 @@ It is often useful to have a Ruby console to test and debug.  Use `bundle exec r
 
 ### Tests (RSpec):
 
-CMS has lots of tests.  You can invoke these tests using `RAILS_ENV=test bundle exec rspec -d`.
+GRC has lots of tests.  You can invoke these tests using `RAILS_ENV=test bundle exec rspec -d`.
 
 After migrations, you may encounter errors running tests.  Run `bundle exec rake db:test:load` to update the test database to the latest schema.
 
@@ -127,11 +127,11 @@ You have RVM, right?  Do this:
 
     # Install RVM environment
     rvm install 1.9.3-p194
-    rvm --create use ruby-1.9.3-p194@cms
+    rvm --create use ruby-1.9.3-p194@grc
 
     # Checkout code
-    git clone https://code.google.com/p/compliance-management cms
-    cd cms
+    git clone https://code.google.com/p/compliance-management grc
+    cd grc
 
     # Install gems
     gem install bundler

@@ -1,11 +1,11 @@
-CMS Dependencies
+GRC Dependencies
 ================
 
-Gems used by CMS
+Gems used by GRC
 ----------------
 
 [rails ~> 3.1.1](http://rubyonrails.org/)
-    Ruby on Rails is the framework used by CMS for rapid application development.
+    Ruby on Rails is the framework used by GRC for rapid application development.
 
 [gdata/gdata-ruby-util/gdata_19](https://github.com/tokumine/GData)
     [Original gdata-ruby-util](http://code.google.com/p/gdata-ruby-util/)
@@ -40,6 +40,21 @@ Gems used by CMS
 [psych](https://github.com/tenderlove/psych)
     Psych provides YAML import/export; included to work around an issue with migrations.
 
+[thinking-sphinx](http://pat.github.com/ts/en/)
+    Thinking Sphinx handles interaction with a locally running Sphinx full-text search service.
+
+[encrypted-cookie-store](https://github.com/hmcfletch/encrypted-cookie-store)
+    Encrypts session cookies.
+
+[strict-forgery-protection](https://github.com/ratnikov/strict-forgery-protection)
+    Detects CSRF vulnerabilities by monitoring database queries during requests.
+
+[awesome-nested-set](https://github.com/collectiveidea/awesome_nested_set)
+    Awesome Nested Set provides an API and optimized SQL queries for representing hierarchies in SQL.
+
+[validation-scopes](https://github.com/stevehodgkiss/validation-scopes)
+    Validation Scopes provides non-constraining ActiveRecord validations and error objects, e.g. warnings.
+
 
 ### Gems used only in development
 
@@ -50,10 +65,10 @@ Gems used by CMS
     Redcarpet is a Markdown parser
 
 
-Client-side libraries used by CMS
--------------------------------
+Client-side libraries used by GRC
+---------------------------------
 
-For client-side interaction, CMS uses JQuery, JQuery-UI, and several plugins for these frameworks.
+For client-side interaction, GRC uses JQuery, JQuery-UI, and several plugins for these frameworks.
 
 * [JQuery](http://jquery.com/)
 * [JQuery-UI](http://jqueryui.com/)

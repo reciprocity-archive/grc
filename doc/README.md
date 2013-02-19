@@ -1,4 +1,4 @@
-CMS Documentation
+GRC Documentation
 =================
 
 
@@ -10,6 +10,8 @@ Development
     Start here!
 
 - [Dependencies](depends.html)
+
+- [Contributing](contribute.html)
 
 
 Setting up and deploying to other servers
