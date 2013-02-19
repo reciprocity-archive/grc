@@ -25,8 +25,8 @@
 %script#object_document_selected{ :type => 'text/html', :'data-mappings' => 'object:document', :'data-member' => 'object_document' }
   %li{ :'data-id' => '<%= id %>', :'data-object-id' => '<%= document.id %>' }
     .row-fluid
-      .span10.object_info{ :'data-template-id' => 'document_option_data' }
-      .span2.actions
+      .span6.object_info{ :'data-template-id' => 'document_option_data' }
+      .span6.actions
         %span.state
         .pull-right
           %input{ :type => 'hidden', :name => 'items[<%= id %>][id]', :value => '<% if (id.toString().substr(0,3) != "new") { %><%= id %><% } %>'.html_safe }
