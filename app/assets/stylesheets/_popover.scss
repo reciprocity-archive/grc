@@ -33,11 +33,11 @@
     }
   }
   &.left {
-    margin-left: -5px;
+    margin-left: -17px;
     .arrow {
       top: 50%;
       right: -5px;
-      margin-top: -10px;
+      margin-top: 5px;
       border-top: 10px solid transparent;
       border-bottom: 10px solid transparent;
       border-left: 10px solid $popOverBorder;
@@ -111,6 +111,7 @@
   .updated {
     color:$gray;
     margin-bottom:0;
+    min-height: auto;
   }
   .updated {
     text-align:right;

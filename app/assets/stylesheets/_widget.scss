@@ -101,6 +101,7 @@
   &.widget-tabs {
     .content {
       padding: 0;
+      overflow-y: visible;
     }
     .tabs-left {
       padding-bottom: 26px;
@@ -283,6 +284,7 @@
     border-top: none;
     background:$white;
     height:85%; //needs to be removed
+    overflow-y:auto;
     > .tabs-left {
       height:100%;
       overflow-y:hidden;
