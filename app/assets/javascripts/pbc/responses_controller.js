@@ -85,6 +85,12 @@ can.Control("CMS.Controllers.Responses", {
         el.prev(".inline-add-meeting").removeClass("hide");
         el.addClass("hide");
     }
+    // don't submit forms on enter from inline search boxes
+    , "form keydown" : function(el, ev) {
+      if(ev.which === 13) {
+        ev.preventDefault();
+      }
+    }
     , ".toggle-edit-population-doc click" : function(el, ev) {
         el.closest(".pbc-item").next(".inline-edit-population-doc").removeClass("hide").find(".input-title").focus();
         el.closest(".pbc-item").addClass("hide");
