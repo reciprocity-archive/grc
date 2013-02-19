@@ -11,12 +11,12 @@
         %h2
           -#%i.grcicon-program
           =yield_content!(:widget_title)
-      
+
       .span4
         -help_path = yield_content!(:widget_help)
         -#.widget-action.pull-right.widget-showhide
           %a.active{:href => "#", :rel => "tooltip", :title => "Contract widget", :'data-placement'=>"top"}
-          
+
         -#-if has_feature? :BETA
         -#.widget-action.pull-right
           %a.remove{:href => "#", :rel => "tooltip", :title => "Remove widget", :'data-placement'=>"top"}
@@ -25,12 +25,12 @@
           .widget-action.pull-right.widget-action-help
             %a{:href => "/help/#{help_path}", :'data-toggle' => 'modal-ajax', :rel => "tooltip", :title => "Help - What is this?", :'data-placement'=>"top"}
               %i.grcicon-help
-          
+
   =yield_content!(:widget_buttons)
-      
-      
+
+
   %section.content
     =yield
-  
-  
+
+
   =yield_content!(:widget_footer)
