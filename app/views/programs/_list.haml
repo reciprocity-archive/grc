@@ -1,6 +1,7 @@
 -content_for :widget_title do
   Programs
-  %span.badge=@programs.count
+  %span
+    =@programs.count
 
 -content_for :widget_help, 'programs_list'
 
