@@ -102,11 +102,19 @@
     .content {
       padding: 0;
     }
+    .tabs-left {
+      padding-bottom: 26px;
+    }
+    .tab-content {
+      padding-top: 10px;
+    }
     .nav-tabs {
       background: $lightGray;
       margin-right: 7px;
-      padding-top: 9px 0 9px 7px;
+      padding: 9px 0 9px 7px;
       border: none;
+      margin-bottom: 0;
+      min-height: 426px;
       li {
         a {
           color: $gray;
