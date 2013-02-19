@@ -13,10 +13,12 @@
         =render :partial => 'object_leaf', :locals => { :instance => item }
       .item-actions
   .item-content.in
-    %ul.tree-structure
-      =walk_slug_tree(Directive.slugtree(item.consolidated_controls)) do |item, step|
-        .openclose{ :class => 'lastchild' }
-        .item-title
-          .row-fluid
-            =render :partial => 'object_leaf', :locals => { :instance => item }
-          .item-actions
+    -consolidated_controls = item.consolidated_controls
+    -if consolidated_controls.size > 0
+      %ul.tree-structure
+        =walk_slug_tree(Directive.slugtree(consolidated_controls)) do |item, step|
+          .openclose{ :class => 'lastchild' }
+          .item-title
+            .row-fluid
+              =render :partial => 'object_leaf', :locals => { :instance => item }
+            .item-actions
