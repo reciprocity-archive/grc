@@ -19,7 +19,7 @@
           %a.btn.btn-mini{ :rel => "tooltip", :'data-placement' => "left", :title => "Link Directives to this Program", :'data-modal-class' => 'modal-wide', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :'data-toggle' => "modal-ajax-relationship-selector", :href => list_edit_flow_program_directives_path(:program_id => instance.id) }
             %i.grcicon-link-new
 
-%ul.tree-structure
+%ul.tree-structure#directives
   -instance.directives.all.each do |directive|
     %li{ :'data-object-id' => instance.id }
       .item-main
