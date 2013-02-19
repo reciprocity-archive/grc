@@ -111,14 +111,15 @@
     .nav-tabs {
       background: $lightGray;
       margin-right: 7px;
-      padding: 9px 0 9px 7px;
+      padding: 9px 0 0 2px;
       border: none;
       margin-bottom: 0;
-      min-height: 426px;
+      margin-left: 0;
       li {
         a {
           color: $gray;
           @include transition(color 0.3s ease);
+          min-width: 105px;
           i {
             @include opacity(0.3);
             margin-right: 7px;
