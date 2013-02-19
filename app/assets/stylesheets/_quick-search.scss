@@ -98,7 +98,7 @@
         }
         &:hover {
           color: $black;
-          border-right: none;
+          border-right: 1px solid $lightGray;
           i {
             @include opacity(1);
           }
