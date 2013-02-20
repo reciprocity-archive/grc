@@ -24,7 +24,7 @@
     %input#section-version.input-supermini{:placeholder => "SOX", :type => "text", :value => nil, :name => 'section[version]', :disabled => 'disabled'}
     =error_messages_inline(f, :version)
 
-  .span7.disabled{:class => error_class(f, :status)}
+  -#.span7.disabled{:class => error_class(f, :status)}
     %label{:for => "section-status"} Status
     %select#section-status.input-small{ :name => 'section[status]', :value => nil, :disabled => 'disabled' }
       %option Deprecated
@@ -45,9 +45,9 @@
     =error_messages_inline(f, :description)
 
 .row-fluid
-  .span12.disabled{:class => error_class(f, :url)}
+  .span12{:class => error_class(f, :url)}
     %label{:for => "section-url"} URL for this section (optional)
-    %input#section-link.span12{:placeholder => "http://", :type => "text", :value => nil, :name => 'section[url]', :disabled => 'disabled'}
+    %input#section-link.span12{:placeholder => "http://", :type => "text", :value => nil, :name => 'section[url]'}
     =error_messages_inline(f, :url)
 
 =render :partial => "shared/wysihtml5"

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130215222459) do
+ActiveRecord::Schema.define(:version => 20130220201341) do
 
   create_table "accounts", :force => true do |t|
     t.string   "username"
@@ -468,6 +468,7 @@ ActiveRecord::Schema.define(:version => 20130215222459) do
     t.integer  "parent_id"
     t.boolean  "na",             :default => false, :null => false
     t.text     "notes"
+    t.string   "url"
   end
 
   add_index "sections", ["directive_id"], :name => "index_control_objectives_on_regulation_id"
