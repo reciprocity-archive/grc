@@ -36,12 +36,9 @@
       -if has_feature? :BETA
         =render :partial => 'shared/impact_scope'
     #right_column.span4.widget-area
-      =render :partial => 'controls/show',
+      =render :partial => 'controls/info',
               :layout => 'layouts/widget_box',
               :locals => { :control => @control, :widget_class => "compliance" }
       =render :partial => 'controls/more_info',
               :layout => 'layouts/widget_box',
               :locals => { :control => @control, :widget_class => 'related' }
-              
-        
-              
