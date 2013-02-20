@@ -544,39 +544,38 @@
   margin-bottom: 20px;
   text-align: center;
   .btn-group {
-    display: inline;
-  }
-  .open {
-    .dropdown-toggle {
-      @include border-radius(0);
-      @include box-shadow(none);
+    display: inline-block;
+    .btn {
       color: $black;
-      i {
-        @include opacity(1);
-      }
-    }
-  }
-  a {
-    &.dropdown-toggle {
-      color: $gray;
       @include transition(color 0.3s ease);
-      @include border-radius(0);
       @include box-shadow(none);
       font-size: 13px;
       font-weight: bold;
       padding: 0;
+      display: inline-block;
+      padding: 10px;
+      @include opacity(0.4);
+      @include transition(opacity 0.3s ease);
       &:hover {
-        @include border-radius(0);
-        @include box-shadow(none);
-        color: $black;
+        color: $blue;
         text-decoration: none;
+        @include opacity(1);
+        @include gradient-vertical($white, #e6e6e6);
+        background-position: 0 0;
         i {
           @include opacity(1);
         }
       }
+      &:active {
+        @include opacity(1);
+        &:hover {
+          background-image: none;
+          background-color: #e6e6e6;
+          outline: 0;
+          @include box-shadow(inset 0 2px 4px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05));
+        }
+      }
       i {
-        @include opacity(0.3);
-        @include transition(opacity 0.3s ease);
         &.grcicon-carot {
           margin-top: 1px;
           display: inline-block;
@@ -584,10 +583,26 @@
       }
     }
   }
+  .open {
+    .btn {
+      @include opacity(1);
+      background-image: none;
+      background-color: #e6e6e6;
+      outline: 0;
+      @include box-shadow(inset 0 2px 4px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05));
+      color: $blue;
+      &:hover {
+        background-image: none;
+        background-color: #e6e6e6;
+        outline: 0;
+        @include box-shadow(inset 0 2px 4px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05));
+      }
+    }
+  }
   .dropdown-menu {
     left: auto;
-    right: 115px;
-    bottom: -2px;
+    right: 137px;
+    bottom: -1px;
     text-align: left;
     .title {
       padding: 0 7px 0 7px;
