@@ -364,6 +364,17 @@ h4.pbc-title {
         margin-top: 0;
       }
     }
+    .error {
+      line-height: 13px;
+      font-size: 10px;
+      font-weight: bold;
+      color: $red;
+      margin-top: 4px;
+    }
+    .error-input {
+      border: 1px solid $red;
+      @include placeholder($lightRed);
+    }
   }
   ul.items {
     @include reset-list();

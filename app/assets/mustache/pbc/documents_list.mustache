@@ -29,6 +29,11 @@
       <div class="row-fluid">
         <div class="span7">
           <input class="input-block-level input-title" name="title" placeholder="Search for Doc Title or URL" type="text" {{ (el) -> el.pbc_autocomplete_documents() }}>
+          <!--
+          <div class="error">
+            There is no Doc or URL in the system that matches your search. Please create a new reference by pushing the + icon to the right
+          </div>
+          -->
         </div>
         <div class="span5">
           <a class="btn btn-mini pull-left add-document" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/documents/new" data-target="#ajax-modal-documents-new" rel="tooltip" data-placement="top" title="Add new Evidence">
