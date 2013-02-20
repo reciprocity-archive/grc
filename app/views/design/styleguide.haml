@@ -578,7 +578,6 @@
             <span class="label label-info">Note!</span>
             As you can see on real example there is green button surrounding icons. That is just for example purpose so you can see white icons also.
 
-
       %section#list.widget
         %section.header
           %h2
@@ -590,14 +589,34 @@
                 .openclose
                 .item-title
                   .row-fluid
-                    .span9
+                    .span8
                       .oneline.expand-on-hover{:rel => "tooltip", :title => "click to view more"}
-                        %span.code
-                          CTR001
                         %span.title
+                          .grcobject.governance
+                            %i.grcicon-program
                           Lorem ipsum dolor sit amet
                           %i.description-inline
                             consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+                      .note
+                        %a.note-trigger{:href => '#'}
+                          %i.grcicon-add-new-black
+                          Abstract/Note
+                        
+                        .note-text
+                          %textarea
+                          %a.btn.btn-mini.btn-add{:href => '#'}
+                            %i.grcicon-check-white
+                            Save
+                            %a.cancel-link{:href => '#'}
+                              cancel
+                        .note-content
+                          %a{:href => '#'}
+                            %i.grcicon-edit-new
+                          .rtf
+                            Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
+                            consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro.
+                            %span
+                              by Admin, 2013-02-18 5:35PM
                       .description
                         .rtf
                           Lorem 
@@ -630,6 +649,16 @@
                             %li
                               maecenas dignissim tempus adipiscing
                           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tortor libero, convallis eget congue quis, fringilla eget mi. Maecenas dignissim tempus adipiscing.
+                    .span1
+                      %a.view-more{:href => '#'}
+                        view
+                    .objects-count
+                      %a{:href => '#'}
+                        %i.grcicon-control-black
+                        5
+                      %a{:href => '#'}
+                        %i.grcicon-section-black
+                        0
                   .item-actions
                     %a{:href => "#", :class => "btn btn-mini"}
                       %i.grcicon-goto
@@ -642,11 +671,13 @@
                       .openclose
                       .item-title
                         .row-fluid
-                          .span9
+                          .span8
                             .oneline.expand-on-hover{:rel => "tooltip", :title => "click to view more"}
                               %span.code
+                                %i.grcicon-section-black
                                 DEEP2
                               %span.title
+                                %i.grcicon-comment
                                 Lorem ipsum dolor sit amet
                                 %i.description-inline
                                   consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
@@ -654,6 +685,16 @@
                               .rtf
                                 consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
                                 consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+                          .span1
+                            %a.view-more{:href => '#'}
+                              view
+                          .objects-count
+                            %a{:href => '#'}
+                              %i.grcicon-control-black
+                              5
+                            %a{:href => '#'}
+                              %i.grcicon-section-black
+                              0
                         .item-actions
                           %a{:href => "#", :class => "btn btn-mini"}
                             %i.grcicon-goto
@@ -666,9 +707,10 @@
                             .openclose
                             .item-title
                               .row-fluid
-                                .span9
+                                .span8
                                   .oneline.expand-on-hover{:rel => "tooltip", :title => "click to view more"}
                                     %span.code
+                                      %i.grcicon-section-black
                                       DEEP3
                                     %span.title
                                       Lorem ipsum dolor sit amet 3
@@ -677,6 +719,16 @@
                                   .description
                                     .rtf
                                       consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+                                .span1
+                                  %a.view-more{:href => '#'}
+                                    view
+                                .objects-count
+                                  %a{:href => '#'}
+                                    %i.grcicon-control-black
+                                    5
+                                  %a{:href => '#'}
+                                    %i.grcicon-section-black
+                                    0
                               .item-actions
                                 %a{:href => "#", :class => "btn btn-mini"}
                                   %i.grcicon-goto
@@ -692,9 +744,18 @@
                                       .span9
                                         .oneline.expandable
                                           %span.code
+                                            %i.grcicon-control-black
                                             CTR1
                                           %span.title
+                                            %i.grcicon-comment
                                             Just a title
+                                      .objects-count
+                                        %a{:href => '#'}
+                                          %i.grcicon-control-black
+                                          5
+                                        %a{:href => '#'}
+                                          %i.grcicon-section-black
+                                          0
                                     .item-actions
                                       %a{:href => "#", :class => "btn btn-mini"}
                                         %i.grcicon-goto
@@ -706,9 +767,10 @@
                                   .openclose.lastchild
                                   .item-title
                                     .row-fluid
-                                      .span9
+                                      .span8
                                         .oneline.expand-on-hover{:rel => "tooltip", :title => "click to view more"}
                                           %span.code
+                                            %i.grcicon-control-black
                                             CTR2
                                           %span.title
                                             Title with Description
@@ -717,6 +779,16 @@
                                         .description
                                           .rtf
                                             consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+                                      .span1
+                                        %a.view-more{:href => '#'}
+                                          view
+                                      .objects-count
+                                        %a{:href => '#'}
+                                          %i.grcicon-control-black
+                                          5
+                                        %a{:href => '#'}
+                                          %i.grcicon-section-black
+                                          0
                                     .item-actions
                                       %a{:href => "#", :class => "btn btn-mini"}
                                         %i.grcicon-goto
@@ -728,17 +800,29 @@
                                   .openclose.lastchild
                                   .item-title
                                     .row-fluid
-                                      .span9
+                                      .span8
                                         .oneline.expand-on-hover{:rel => "tooltip", :title => "click to view more"}
                                           %span.code
+                                            %i.grcicon-control-black
                                             CTR3
                                           %span.title
+                                            %i.grcicon-comment
                                             Title with Description
                                             %i.description-inline
                                               consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident
                                         .description
                                           .rtf
                                             consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+                                      .span1
+                                        %a.view-more{:href => '#'}
+                                          view
+                                      .objects-count
+                                        %a{:href => '#'}
+                                          %i.grcicon-control-black
+                                          5
+                                        %a{:href => '#'}
+                                          %i.grcicon-section-black
+                                          0
                                     .item-actions
                                       %a{:href => "#", :class => "btn btn-mini"}
                                         %i.grcicon-goto
@@ -753,9 +837,17 @@
                                 .span9
                                   .oneline.expandable
                                     %span.code
+                                      %i.grcicon-section-black
                                       DEEP3.1
                                     %span.title
                                       Title with no Description
+                                .objects-count
+                                  %a{:href => '#'}
+                                    %i.grcicon-control-black
+                                    5
+                                  %a{:href => '#'}
+                                    %i.grcicon-section-black
+                                    0
                               .item-actions
                                 %a{:href => "#", :class => "btn btn-mini"}
                                   %i.grcicon-goto
@@ -770,9 +862,17 @@
                           .span9
                             .oneline.expandable
                               %span.code
+                                %i.grcicon-section-black
                                 DEEP2.1
                               %span.title
                                 Title with no Description
+                          .objects-count
+                            %a{:href => '#'}
+                              %i.grcicon-control-black
+                              5
+                            %a{:href => '#'}
+                              %i.grcicon-section-black
+                              0
                         .item-actions
                           %a{:href => "#", :class => "btn btn-mini"}
                             %i.grcicon-goto
@@ -787,9 +887,18 @@
                     .span9
                       .oneline.expandable
                         %span.code
+                          .grcobject.risk
+                            %i.grcicon-risk
                           RISKYATTR333
                         %span.title
                           Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet
+                    .objects-count
+                      %a{:href => '#'}
+                        %i.grcicon-control-black
+                        5
+                      %a{:href => '#'}
+                        %i.grcicon-section-black
+                        0
                   .item-actions
                     %a{:href => "#", :class => "btn btn-mini"}
                       %i.grcicon-goto
@@ -801,9 +910,11 @@
                 .openclose
                 .item-title
                   .row-fluid
-                    .span9
+                    .span8
                       .oneline.description-only.expand-on-hover{:rel => "tooltip", :title => "click to view more"}
                         %span.code
+                          .grcobject.compliance
+                            %i.grcicon-system
                           SYS444
                         %span.title
                           %i.description-inline
@@ -814,6 +925,16 @@
                         .rtf
                           consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
                           consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+                    .span1
+                      %a.view-more{:href => '#'}
+                        view
+                    .objects-count
+                      %a{:href => '#'}
+                        %i.grcicon-control-black
+                        5
+                      %a{:href => '#'}
+                        %i.grcicon-section-black
+                        0
                   .item-actions
                     %a{:href => "#", :class => "btn btn-mini"}
                       %i.grcicon-goto
@@ -826,7 +947,7 @@
                       .openclose
                       .item-title
                         .row-fluid
-                          .span9
+                          .span8
                             .oneline.expand-on-hover{:rel => "tooltip", :title => "click to view more"}
                               %span.code
                                 DEEP1
@@ -837,6 +958,16 @@
                             .description
                               .rtf
                                 consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                          .span1
+                            %a.view-more{:href => '#'}
+                              view
+                          .objects-count
+                            %a{:href => '#'}
+                              %i.grcicon-control-black
+                              5
+                            %a{:href => '#'}
+                              %i.grcicon-section-black
+                              0
                         .item-actions
                           %a{:href => "#", :class => "btn btn-mini"}
                             %i.grcicon-goto
@@ -849,7 +980,7 @@
                             .openclose.lastchild
                             .item-title
                               .row-fluid
-                                .span9
+                                .span8
                                   .oneline.expandable.description-only
                                     %span.code
                                       DEEP2
@@ -861,6 +992,16 @@
                                       DEEP1
                                     .rtf
                                       consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                .span1
+                                  %a.view-more{:href => '#'}
+                                    view
+                                .objects-count
+                                  %a{:href => '#'}
+                                    %i.grcicon-control-black
+                                    5
+                                  %a{:href => '#'}
+                                    %i.grcicon-section-black
+                                    0
                               .item-actions
                                 %a{:href => "#", :class => "btn btn-mini"}
                                   %i.grcicon-goto
@@ -877,6 +1018,13 @@
                                   .oneline.expandable.description-only
                                     %span.title
                                       No Title or Description (shouldn't happen)
+                                .objects-count
+                                  %a{:href => '#'}
+                                    %i.grcicon-control-black
+                                    5
+                                  %a{:href => '#'}
+                                    %i.grcicon-section-black
+                                    0
 
       %section#nesting.widget
         %section.header

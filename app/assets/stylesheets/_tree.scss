@@ -63,6 +63,37 @@ ul.tree-structure {
     &.pbc-item {
       line-height: 28px;
     }
+    [class^="grcicon-"] {
+      display: inline-block;
+      margin-top: 7px;
+    }
+    .grcobject {
+      [class^="grcicon-"] {
+        margin-top: 4px;
+      }
+    }
+    .objects-count {
+      position: absolute;
+      top: 0;
+      right: 75px;
+      [class^="grcicon-"] {
+        margin-top: 7px;
+      }
+      a {
+        @include opacity(0.3);
+        @include transition(opacity 0.3s ease);
+        color: $black;
+        text-decoration: none;
+        margin-left: 4px;
+        font-weight: bold;
+        &:hover {
+          @include opacity(1);
+        }
+      }
+    }
+    i.grcicon-comment {
+      @include opacity(0.4);
+    }
   }
   .progress {
     line-height:16px;
@@ -81,33 +112,110 @@ ul.tree-structure {
     margin-bottom:5px;
   }
   .code {
-    color:$text;
-    background-color:$lightGray;
+    color:$black;
     font-weight:bold;
     font-size:12px;
-    @include border-radius();
-    border:1px solid darken($lightGray,5%);
-    padding:4px;
     margin-right:8px;
   }
   .title {
-    color:$text;
+    color:$black;
     font-weight:bold;
   }
   i.description-inline {
     color:$gray;
     font-weight:normal;
+    margin-left: 10px;
+  }
+  .view-more {
+    font-style: italic;
+    text-decoration: underline;
+    color: $link;
+    &:hover {
+      text-decoration: none;
+      color: $link;
+    }
+  }
+  .note {
+    margin-bottom: 10px;
+    .note-trigger {
+      text-transform: uppercase;
+      text-decoration: none;
+      color: $gray;
+      font-weight: bold;
+      font-size: 11px;
+      @include transition(color 0.3s ease);
+      i {
+        @include opacity(0.4);
+        @include transition(opacity 0.3s ease);
+      }
+      &:hover {
+        color: $black;
+        i {
+          @include opacity(1);
+        }
+      }
+    }
+    .note-text {
+      margin-bottom: 10px;
+      [class^="grcicon-"] {
+        margin-top: 0;
+      }
+    }
+    .note-content {
+      @include clearfix();
+      .rtf {
+        float: left;
+        width: 90%;
+        margin-bottom: 0;
+        font-weight: bold;
+        font-style: italic;
+        font-size: 12px;
+        line-height: 16px;
+        color: $subTitle;
+        span {
+          display: block;
+          font-weight: normal;
+          color: $gray;
+          font-size: 11px;
+        }
+      }
+      a {
+        float: left;
+        margin-right: 5px;
+        i {
+          margin-top: 0;
+          @include opacity(0.4);
+          @include transition(opacity 0.3s ease);
+        }
+        &:hover {
+          i {
+            @include opacity(1);
+          }
+        }
+      }
+    }
+    textarea {
+      max-height: 50px;
+      display: block;
+    }
+    .cancel-link {
+      font-size: 11px;
+      color: $gray;
+      text-decoration: underline;
+      display: inline-block;
+      margin-left: 7px;
+      &:hover {
+        text-decoration: none;
+      }
+    }
   }
   div.description {
-    border:1px solid $lightGray;
-    background:lighten($lightGray,5%);
     margin-bottom:10px;
-    padding-left:10px;
     padding-right:10px;
     @include border-radius();
     .rtf {
       font-size:12px;
-      color:darken($gray,10%);
+      color:$widgetTitle;
     }
     &.inhover {
       border:none;
@@ -138,7 +246,6 @@ ul.tree-structure {
         @include opacity(1);
       }
     }
-    .title,
     .description {
       color:#111;
     }
@@ -176,6 +283,10 @@ ul.tree-structure {
     .btn-mini {
       padding-left:2px;
       padding-right:2px;
+      [class^="grcicon-"] {
+        display: inline-block;
+        margin-top: 0;
+      }
     }
   }
   .item-content {
