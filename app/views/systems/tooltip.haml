@@ -1,17 +1,13 @@
 -content_for :tooltip_title do
-  %h3
-    =system.is_biz_process? ? "Process" : "System"
-    Info
-
-.row-fluid
-  .span12
-    %h3
-      -if system.is_biz_process?
-        %i{:class => "grcicon-businessprocess-black"}
-      -else
-        %i{:class => "grcicon-system-black"}
-      =system.slug
-      %span=system.title
+  .row-fluid
+    .span12
+      %h3
+        -if system.is_biz_process?
+          %i{:class => "grcicon-businessprocess-black"}
+        -else
+          %i{:class => "grcicon-system-black"}
+        =system.slug
+        %span=system.title
 
 .row-fluid
   .span12

@@ -1,17 +1,15 @@
--content_for :tooltip_title do
-  %h3 Directive Information
-
 -stats = directive_stats(directive)
 
-.row-fluid
-  .span10
-    %h3
-      %i.grcicon-regulation-black
-      =directive.slug
-      %span=directive.title
-  .span2
-    %a.btn.btn-mini.pull-right{:href => flow_directive_path(directive), :rel => "tooltip", :title => "View Directive", :style => "margin-top:2px"}
-      %i.grcicon-goto
+-content_for :tooltip_title do
+  .row-fluid
+    .span10
+      %h3
+        %i.grcicon-regulation-black
+        =directive.slug
+        %span=directive.title
+    .span2
+      %a.btn.btn-mini.pull-right{:href => flow_directive_path(directive), :rel => "tooltip", :title => "View Directive", :style => "margin-top:2px"}
+        %i.grcicon-goto
 
 .row-fluid
   .span12

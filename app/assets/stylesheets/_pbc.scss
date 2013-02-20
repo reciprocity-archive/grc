@@ -1,7 +1,7 @@
 .ca-fields {
   span {
     font-size:11px;
-    color:$gray;
+    color:$text;
   }
   .btn {
     margin-left:0;
@@ -23,8 +23,8 @@
 
 .headline {
   text-transform:uppercase;
-  border-bottom:1px solid $lightGray;
   margin-top:10px;
+  padding:4px;
   font-size:11px;
   color:$gray;
   [class*="span"] {
@@ -36,7 +36,7 @@
 
 span.tiny-title {
   font-size:13px;
-  color:$gray;
+  color:$text;
 }
 
 ul.tree-structure.pbc {
@@ -407,5 +407,29 @@ h4.pbc-title {
   input[type ="file"] {
     line-height:normal;
     height:auto;
+  }
+}
+
+ul.tree-structure {
+  li.pbc-ca {
+    margin-bottom:6px;
+    padding:0 4px 0 4px;
+    @include border-radius();
+    background:#f0f0f0;
+    border:1px solid darken(#f0f0f0, 5%);
+  }
+  ul.pbc-requests {
+    background:$white;
+    @include border-radius();
+    border:1px solid darken(#f0f0f0, 10%) !important;
+    margin-bottom:4px;
+    li {
+      .pbc-item-head {
+        padding:0 4px;
+        .item-actions {
+          padding-right:4px;
+        }
+      }
+    }
   }
 }
