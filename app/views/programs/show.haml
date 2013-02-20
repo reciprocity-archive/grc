@@ -27,16 +27,19 @@
 .container-fluid
   #columns.row-fluid{ :'data-resize' => "true" }
     #middle-column.span8.widget-area
-      =render :partial => 'programs/directives',
+      =render :partial => 'main',
               :layout => 'layouts/widget_box',
               :locals => { :program => instance, :widget_class => 'governance' }
-      =render :partial => 'programs/related',
+      =render :partial => 'related',
               :layout => 'layouts/widget_box',
-              :locals => { :instance => instance, :widget_title => "Impact/Scope of Program's Directives" }
+              :locals => { :instance => instance, :widget_title => "Impact/Scope of Program's Directives", :widget_class => 'related' }
     #right-column.span4.widget-area
-      =render :partial => 'programs/show',
+      =render :partial => 'info',
               :layout => 'layouts/widget_box',
               :locals => { :program => instance, :widget_class => 'governance'}
-      =render :partial => 'programs/more_info',
+      =render :partial => 'more_info',
               :layout => 'layouts/widget_box',
               :locals => { :program => instance, :widget_class => 'related'}
+      =render :partial => 'audit_cycles',
+              :layout => 'layouts/widget_box',
+              :locals => { :program => instance, :widget_class => 'governance' }

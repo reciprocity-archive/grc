@@ -1,0 +1,31 @@
+-sections = @directive.sections.includes(:controls => :implementing_controls)
+
+-content_for :widget_title do
+  -if @directive.company_controls?
+    Controls
+  -else
+    %i.grcicon-section
+    Sections
+    %span=sections.count
+
+-content_for :widget_help, 'program_controls'
+
+-content_for :widget_id, 'program_controls_widget'
+
+-content_for :widget_buttons do
+  .filter
+    -unless @directive.company_controls?
+      .row-fluid
+        .span6
+          -#%input.ui-corner-all.widgetsearch.clear-value(type='text' placeholder='Search')
+        .span6
+          .pull-right
+            %a.btn.btn-add{ :href => new_flow_section_path(:'section[directive_id]' => directive.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-dirty' => '#regulations, #combo', :'data-route' => "tab=regulations", :title => 'Create New Section' }
+              %i.grcicon-add-new
+              Section
+            -#%a.btn.btn-add{ :href => new_flow_control_path(:'control[directive_id]' => directive.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-dirty' => '#category_controls, #combo', :'data-route' => "tab=category_controls", :'data-modal-class' => 'modal-wide', :title => 'Create New Control' }
+              %i.grcicon-add-new
+              Control
+
+%ul.tree-structure#regulations
+  =render :partial => 'sections', :locals => { :sections => sections }

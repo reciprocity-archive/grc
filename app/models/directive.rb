@@ -13,6 +13,9 @@ class Directive < ActiveRecord::Base
   has_many :sections, :order => :slug, :dependent => :destroy
   has_many :controls, :order => :slug, :dependent => :destroy
 
+  has_many :program_directives, :dependent => :destroy
+  has_many :programs, :through => :program_directives
+
   has_many :cycles, :dependent => :destroy
 
   belongs_to :kind, :class_name => 'Option', :conditions => { :role => 'directive_kind' }

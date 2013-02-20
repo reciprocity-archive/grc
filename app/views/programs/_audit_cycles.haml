@@ -1,7 +1,9 @@
+-cycles = Cycle.joins(:directive => :program_directives).where(:program_directives => { :program_id => 1 }).order('start_at DESC')
+
 -content_for :widget_title do
   %i.grcicon-audit-white
   Audit Cycles
-  %span=directive.cycles.count
+  %span=cycles.count
 
 -content_for :widget_help, 'program_cycles'
 
@@ -17,7 +19,7 @@
               Audit Manager
 
 %ul.tree-structure.simple
-  -directive.cycles.order("start_at DESC").each do |cycle|
+  -cycles.each do |cycle|
     %li.simple-item
       %a{:href => flow_cycle_path(cycle)}
         .item-title

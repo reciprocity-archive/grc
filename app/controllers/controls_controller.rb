@@ -49,12 +49,17 @@ class ControlsController < BaseObjectsController
     if params[:company].present?
       @controls = @controls.joins(:directive).where(Directive.arel_table[:company].eq(true))
     end
+    if params[:program_id].present?
+      @controls = @controls.joins(:directive => :program_directives).where(:program_directives => { :program_id => params[:program_id] })
+    end
     @controls = allowed_objs(@controls.all, :read)
 
     if params[:list_select].present?
       render :partial => 'list_select', :layout => 'layouts/list_select_modal', :locals => {}
     elsif params[:quick]
       render :partial => 'quick', :locals => { :quick_result => params[:qr]}
+    elsif params[:list].present?
+      render :partial => 'list', :locals => { :controls => @controls }
     else
       render :json => @controls, :methods => [:description_inline]
     end

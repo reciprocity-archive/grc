@@ -1,0 +1,18 @@
+-content_for :widget_title do
+  %i.grcicon-program
+  Programs using Directive
+  %span=directive.programs.count
+
+-content_for :widget_help, 'directive_programs'
+
+-content_for :widget_id, 'directive_programs_widget'
+
+%ul.tree-structure.simple
+  -directive.programs.each do |program|
+    %li.simple-item
+      %a{:href => flow_program_path(program)}
+        .item-title
+          .row-fluid
+            .span12
+              %span.key
+                =program.title

@@ -58,18 +58,24 @@ class DirectivesController < BaseObjectsController
 
   def index
     @directives = Directive
-    if params[:relevant_to]
+    if params[:relevant_to].present?
       @directives = @directives.relevant_to(Product.find(params[:relevant_to]))
     end
-    if params[:s]
+    if params[:s].present?
       @directives = @directives.db_search(params[:s])
+    end
+    if params[:program_id].present?
+      @directives = @directives.joins(:program_directives).where(:program_directives => { :program_id => params[:program_id] })
     end
     @directives = allowed_objs(@directives.all, :read)
 
     respond_to do |format|
       format.html do
-        if params[:quick]
+        if params[:quick].present?
           render :partial => 'quick', :locals => { :quick_result => params[:qr]}
+        end
+        if params[:tree].present?
+          render :partial => 'tree', :locals => { :directives => @directives }
         end
       end
       format.json do

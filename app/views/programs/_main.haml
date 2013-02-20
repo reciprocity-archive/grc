@@ -1,0 +1,29 @@
+-instance = program
+-is_root = true
+
+-content_for :widget_title do
+  Directives
+
+-content_for :widget_help, 'program_directives'
+
+-content_for :widget_id, 'program_directives_widget'
+
+-content_for :widget_buttons do
+  .filter
+    .row-fluid
+      .span6
+        %input.ui-corner-all.widgetsearch.clear-value(type='text' placeholder='Search')
+      .span6
+        .pull-right
+          %a.btn.btn-mini{ :rel => "tooltip", :'data-placement' => "left", :title => "Link Directives to this Program", :'data-modal-class' => 'modal-wide', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :'data-toggle' => "modal-ajax-relationship-selector", :href => list_edit_flow_program_directives_path(:program_id => instance.id) }
+            %i.grcicon-link-new
+
+.tabbable
+  %ul.nav.nav-tabs
+    %li.active=link_to 'Directives', '#directives', :data => { :toggle => 'tab', :'tab-href' => flow_directives_path(:program_id => instance.id, :tree => true) }
+    %li=link_to 'Controls', '#controls', :data => { :toggle => 'tab', :'tab-href' => flow_controls_path(:program_id => instance.id, :list => true) }
+    -#%li=link_to 'Combo', '#combo', :data => { :toggle => 'tab', :'tab-href' => flow_sections_path(:program_id => instance.id, :combo => true) }
+  .tab-content
+    #directives.tab-pane
+    #controls.tab-pane
+    #combo.tab-pane
