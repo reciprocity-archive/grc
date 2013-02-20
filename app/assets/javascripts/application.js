@@ -85,7 +85,7 @@ jQuery(document).ready(function($) {
 // Setup for Popovers
 jQuery(document).ready(function($) {
   var defaults = {
-    delay: { show: 150, hide: 100 },
+    delay: { show: 300, hide: 150 },
     placement: 'left',
     content: function(trigger) {
       var $trigger = $(trigger);
