@@ -29,14 +29,14 @@
     #middle-column.span8.widget-area
       =render :partial => 'programs/directives',
               :layout => 'layouts/widget_box',
-              :locals => { :program => instance }
+              :locals => { :program => instance, :widget_class => 'governance' }
       =render :partial => 'programs/related',
               :layout => 'layouts/widget_box',
               :locals => { :instance => instance, :widget_title => "Impact/Scope of Program's Directives" }
     #right-column.span4.widget-area
       =render :partial => 'programs/show',
               :layout => 'layouts/widget_box',
-              :locals => { :program => instance, :widget_class => 'secondary'}
+              :locals => { :program => instance, :widget_class => 'governance'}
       =render :partial => 'programs/more_info',
               :layout => 'layouts/widget_box',
               :locals => { :program => instance, :widget_class => 'related'}

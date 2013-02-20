@@ -1,14 +1,11 @@
 
 -content_for :tooltip_title do
-  %h3
-    Control Info
-
-.row-fluid
-  .span12
-    %h3
-      %i{:class => "grcicon-control-black"}
-      =@control.slug
-      %span=@control.title
+  .row-fluid
+    .span12
+      %h3
+        %i{:class => "grcicon-control-black"}
+        =@control.slug
+        %span=@control.title
 
 .row-fluid
   .span12

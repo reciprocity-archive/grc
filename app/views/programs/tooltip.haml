@@ -1,15 +1,13 @@
 -content_for :tooltip_title do
-  %h3 Program Information
-
-.row-fluid
-  .span10
-    %h3
-      %i.grcicon-program-black
-      =program.slug
-      %span=program.title
-  .span2
-    %a.btn.btn-mini.pull-right{:href => flow_program_path(program), :rel => "tooltip", :title => "View/Edit Program"} 
-      %i.grcicon-goto
+  .row-fluid
+    .span10
+      %h3
+        %i.grcicon-program-black
+        =program.slug
+        %span=program.title
+    .span2
+      %a.btn.btn-mini.pull-right{:href => flow_program_path(program), :rel => "tooltip", :title => "View/Edit Program"} 
+        %i.grcicon-goto
 
 .row-fluid
   .span12
