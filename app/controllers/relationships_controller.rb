@@ -317,7 +317,7 @@ class RelationshipsController < BaseMappingsController
         if params[:related_side] == 'source'
           relationship.source = related
           relationship.destination = object
-        elsif params[:related_side] == 'destination'
+        elsif params[:related_side] == 'destination' || params[:related_side] == 'both'
           relationship.destination = related
           relationship.source = object
         end
