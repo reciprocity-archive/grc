@@ -14,9 +14,14 @@
 .container-fluid
   #columns.row-fluid{ :'data-resize' => "true" }
     #left_column.span6.widget-area
-      =render :partial => 'programs/list',
+      =render :partial => 'governance',
               :layout => 'layouts/widget_box',
-              :locals => { :programs => @programs, :widget_class => "governance" }
+              :locals => { :programs => @programs, :widget_class => "governance widget-tabs" }
+              
+      =render :partial => 'risk',
+              :layout => 'layouts/widget_box',
+              :locals => { :programs => @programs, :widget_class => "risk widget-tabs" }
+              
               
       %section.widget-add-placeholder
         .btn-group.dropup
@@ -83,9 +88,13 @@
                 Risks
               
     #right_column.span6.widget-area
-      =render :partial => 'quick_find',
+      =render :partial => 'compliance',
               :layout => 'layouts/widget_box',
-              :locals => { :widget_class => "widget-tabs" }
+              :locals => { :widget_class => "compliance widget-tabs" }
+              
+      =render :partial => 'business_objects',
+              :layout => 'layouts/widget_box',
+              :locals => { :widget_class => "business widget-tabs" }
             
       -if has_feature? :BETA
         =render :partial => 'design/templates/riskWidgetGap'

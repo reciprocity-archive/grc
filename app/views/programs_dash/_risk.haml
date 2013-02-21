@@ -1,0 +1,22 @@
+-content_for :widget_title do
+  Risk
+
+-content_for :widget_buttons do
+  .filter
+    %input.ui-corner-all.widgetsearch.clear-value(type='text' placeholder='Search')
+
+-content_for :widget_help, 'risk'
+
+-content_for :widget_id, 'risk_widget'
+
+-quick_result_risk ||= nil
+-prefix = quick_result_risk ? "qf" : "dash"
+
+.tabbable.tabs-left{ :id => quick_result_risk ? nil : "quick_find_risk" }
+  %ul.nav.nav-tabs
+    %li.active=link_to '<i class="grcicon-risk-black"></i> Risks'.html_safe, "##{prefix}_risks", :data => { :'tab-href' => flow_risks_path(:quick => true, :qr => quick_result_risk), :toggle => 'tab' }
+    %li=link_to '<i class="grcicon-attribute-black"></i> Attributes'.html_safe, "##{prefix}_risky_attributes", :data => { :'tab-href' => flow_risky_attributes_path(:quick => true, :qr => quick_result_risk), :toggle => 'tab' }
+
+  .tab-content
+    .tab-pane{ :id => "#{prefix}_risks" }
+    .tab-pane{ :id => "#{prefix}_risky_attributes" }
