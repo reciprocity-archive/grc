@@ -4,4 +4,5 @@
   border:1px solid $white;
   @include border-radius();
   @include box-shadow(0 0 2px $darkGray);
+  cursor:move;
 }

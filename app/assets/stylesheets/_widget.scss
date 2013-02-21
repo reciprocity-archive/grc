@@ -413,13 +413,13 @@
     @include reset-list();
     margin-bottom: 20px;
     li {
-      border-bottom: 1px solid $lightGray;
       padding: 6px 0 4px 7px;
       &:last-child {
         border-bottom: none;
       }
       label {
-        font-weight: bold;
+        font-weight: normal;
+        text-transform:uppercase;
         color: $darkGray;
       }
       .rtf {
@@ -439,9 +439,11 @@
           float: left;
           width: 35%;
           margin: 0 10px 0 0;
+          color:$gray;
         }
         span {
           float: left;
+          font-weight:bold;
           width: 60%;
         }
       }

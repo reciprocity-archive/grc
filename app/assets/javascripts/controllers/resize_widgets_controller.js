@@ -280,7 +280,7 @@ can.Control("CMS.Controllers.ResizeWidgets", {
         , position : "fixed"
         , width : "3px"
         , height : "3px"
-        , cursor : "e-resize w-resize"
+        , cursor : "move"
       })
       //.bind("mouseup dragend", this.proxy('completeResize', this.element))
       //.bind("dragover", this.proxy('recalculate', this.element))
