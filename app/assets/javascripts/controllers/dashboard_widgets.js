@@ -33,6 +33,10 @@ can.Control("CMS.Controllers.DashboardWidgets", {
 
     can.view(this.options.widget_view, this.options, function(frag) {
       that.element.html(frag);
+      CMS.Models.DisplayPrefs.findAll().done(function(d) {
+        if(d[0].getCollapsed("programs_dash", that.options.object_type)) 
+          that.element.find(".widget-showhide > a").showhide("hide");
+      });
       that.element.find('.wysihtml5').wysihtml5({ 
         link: true
         , image: false
@@ -47,10 +51,12 @@ can.Control("CMS.Controllers.DashboardWidgets", {
     this.element.remove();
   }
 
-  , ".widget-showhide click" : function() {
+  , ".widget-showhide click" : function(el, ev) {
     var that = this;
+    //animation hasn't completed yet, so collapse state is inverse of whether it's actually collapsed right now.
+    var collapse = that.element.find(".content:first").is(":visible");
     CMS.Models.DisplayPrefs.findAll().done(function(d) { 
-      d[0].setShowHide("programs_dash", that.options.object_type, "").save(); 
+      d[0].setCollapsed("programs_dash", that.options.object_type, collapse);
     });
   }
 });

@@ -132,35 +132,33 @@ jQuery(document).ready(function($) {
   });
 
   // Contract/Expand widget
-  $('body').on('click', '.widget .header .widget-showhide a', function(e) {
-    e.preventDefault();
-    var $this = $(this),
-        $content = $this.closest(".widget").find(".content")
+  $('body').on('click', '.widget .header .showhide, .widget .header .widget-showhide a', function(e) {
+
+    if($(this).is(".widget-showhide"))
+      e.preventDefault();
     
-    if($this.hasClass("active")) {
-      $content.slideUp();
-      $this.removeClass("active");
-    } else {
-      $content.slideDown();
-      $this.addClass("active");
-    }
-    
+    showhide.call(this);    
   });
 
-  // Show/hide widget content
-  $('body').on('click', '.widget .header .showhide', function(e) {
-    var $this = $(this),
+  function showhide(command) {
+
+    var $this = $(this);
         $content = $this.closest(".widget").find(".content")
-    
-    if($this.hasClass("active")) {
+    if(typeof command === "undefined" || command === "toggle") {
+      command = $this.hasClass("active") ? "hide" : "show";
+    }
+
+    if(command === "hide") {
       $content.slideUp();
       $this.removeClass("active");
-    } else {
+    } else if(command === "show") {
       $content.slideDown();
       $this.addClass("active");
     }
-    
-  });
+
+  }
+
+  $.fn.showhide = showhide;
 
   // Show/hide widget content
   /*$('body').on('mouseover', 'a.more', function(e) {
