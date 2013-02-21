@@ -272,7 +272,8 @@
     }
     .btn {
       font-size: 11px;
-      padding: 2px 2px;
+      font-weight:normal;
+      padding: 2px 4px;
       margin-top: 2px;
     }
     input[type="text"] {
@@ -301,9 +302,9 @@
   .footer {
     color:$headerTitle;
     padding:6px;
-    border-top: 1px solid $footerBorder;
     p {
       font-size:11px;
+      font-weight:bold;
       margin: 0;
       color: $text;
       &.footer-right {
@@ -393,25 +394,11 @@
       }
     }
   }
-/*  &.secondary {
-    background:$white;
-    border-color:$lightGray;
-    .header {
-      background:$white;
-      h2 {
-        color:$infoWidgetHeader;
-      }
-      .showhide {
-        display:none;
-      }
-    }
-  }
-*/
   .info-list {
     @include reset-list();
     margin-bottom: 20px;
     li {
-      border-bottom:1px solid $lightGray;
+      //border-bottom:1px solid $lightGray;
       padding: 6px 0 4px 7px;
       &:last-child {
         border-bottom: none;
