@@ -1,27 +1,25 @@
 -# locals: instance
 
-%h3.tab-title
-  Business Objects impacted by this Risk
+%ul.tree-structure.simple
+  %li.tab-title-holder
+    %h3.tab-title
+      Business Objects impacted by this Risk
+      
+  -instance.risky_attributes.each_with_index do |risky_attribute, i|
+    -id_prefix = "risky_attribute-#{i}"
 
--instance.risky_attributes.each_with_index do |risky_attribute, i|
-  -id_prefix = "risky_attribute-#{i}"
-  %ul.tree
-    %li.category
-      %h3
-        =risky_attribute.type_string.presence
-        =risky_attribute.title
-
-  %ul.tree-structure
     -risky_attribute.attributed_objects.each_with_index do |object, i|
       -summary_id_prefix = "#{id_prefix}-#{object.class.name.underscore}-#{object.id}"
       -summary_toggle_target = "#{summary_id_prefix}-summary"
-
+      %li.tab-title-holder
+        %h3.tab-title
+          =risky_attribute.type_string.presence
+          =risky_attribute.title
       %li
         .item-main
-          .openclose{ :class => 'lastchild' }
           .item-title
             .row-fluid
               =render :partial => 'object_leaf', :locals => { :instance => object }
             .item-actions
-              %a.btn.btn-mini.halfopacity{ "rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => send("flow_#{object.class.name.underscore}_path", object.id) }
+              %a.btn.btn-mini{ "rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => send("flow_#{object.class.name.underscore}_path", object.id) }
                 %i.grcicon-goto

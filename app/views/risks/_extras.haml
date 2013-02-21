@@ -16,7 +16,7 @@
     %li=link_to 'Business Objects', '#business_objects', :data => { :toggle => 'tab' } #, :'tab-href' => systems_flow_control_path(control) }
 
   .tab-content
-    #business_objects.tab-pane
-      =render :partial => 'business_objects', :locals => { :instance => instance }
     #controls.tab-pane
       =render :partial => 'controls', :locals => { :instance => instance}
+    #business_objects.tab-pane
+      =render :partial => 'business_objects', :locals => { :instance => instance }
