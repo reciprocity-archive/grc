@@ -97,12 +97,10 @@ can.Model.Cacheable("CMS.Models.System", {
 
 CMS.Models.System("CMS.Models.StrictSystem", {
   findAll : "GET /systems.json?is_biz_process=false"
-  , cache : CMS.Models.System.cache
-  , init : function() {}
+  , cache : can.getObject("cache", CMS.Models.System, true)
 }, {});
 
 CMS.Models.System("CMS.Models.Process", {
   findAll : "GET /systems.json?is_biz_process=true"
-  , cache : CMS.Models.System.cache
-  , init : function() {}
+  , cache : can.getObject("cache", CMS.Models.System, true)
 }, {})

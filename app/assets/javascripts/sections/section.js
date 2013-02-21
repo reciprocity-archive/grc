@@ -145,15 +145,16 @@ CMS.Models.Section("CMS.Models.SectionSlug", {
       , type : "get"
       , dataType : "json"
       , data : params
-      }).then(
+      }).pipe(
         function(list, xhr) {
           can.$(list).each(function(i, s) {
             can.extend(s, s.section);
             delete s.section;
           });
           var roots = treeify(list); //empties the list
-          for(var i = 0; i < roots.length; i++)
-            list.push(roots[i]);
+          // for(var i = 0; i < roots.length; i++)
+          //   list.push(roots[i]);
+          return roots;
         });
   }
 }, {});
