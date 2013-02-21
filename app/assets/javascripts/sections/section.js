@@ -115,7 +115,7 @@ can.Model.Cacheable("CMS.Models.Section", {
         });
       }
     }    
-    this.attr("linked_controls", lcs);
+    this.attr("linked_controls").replace(lcs);
   }
 
 });
