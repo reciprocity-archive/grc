@@ -21,7 +21,7 @@
             -rels_count = rels.sum { |rel_type_id, rel_objects| rel_objects.size }
             -table_name = model.underscore.pluralize #.table_name
             -icon = "grcicon-#{model.downcase}-black"
-            %li.tab-btn
+            %li.tab.tab-btn
               %a{:href => "#related-#{table_name}-pane", "data-toggle" => 'tab' }
                 %i{:class => icon }
                 #{table_name.titleize}
@@ -30,29 +30,27 @@
         .tab-content
           -impact_scope.each do |model, rels|
             .tab-pane{:id => "related-#{model.underscore.pluralize}-pane"}
-              %ul.tree
+              %ul.tree-structure.simple
                 -rels.each do |rel_type_id, rel_objects|
-                  %li.category
+                  %li.title
                     %h3
                       Program's Directives Apply to #{model.pluralize.titleize}
-                      %span.sub-title
                     -#.item-actions
                       %a
                         %i.grcicon-link-new
-                    %section.content
-                      %ul.tree
-                        -if rel_objects.size > 0
-                          -rel_objects.uniq.each do |o|
-                            %li.main
-                              %a
-                                .item-identifier
-                                  .item-title
-                                    .row-fluid
-                                      .span12
-                                        %span.key
-                                          =o.slug
-                                        %span.addition-info
-                                          =o.title
-                        -else
-                          %li.main.no-result
-                            No results
+                  -if rel_objects.size > 0
+                    -rel_objects.uniq.each do |o|
+                      %li
+                        .item-main
+                          %a
+                            .item-title
+                              .row-fluid
+                                .span8
+                                  .oneline
+                                    %span.title
+                                      =o.slug
+                                    %span.addition-info
+                                      =o.title
+                  -else
+                    %li.no-result
+                      No results
