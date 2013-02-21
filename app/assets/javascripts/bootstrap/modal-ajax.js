@@ -317,7 +317,7 @@
         , modal_id, target, $target, option, href, new_target, modal_type;
 
       href = $this.attr('data-href') || $this.attr('href');
-      modal_id = 'ajax-modal-' + href.replace(/\//g, '-').replace(/^-/, '');
+      modal_id = 'ajax-modal-' + href.replace(/[\/\?=\&]/g, '-').replace(/^-/, '');
       target = $this.attr('data-target') || $('#' + modal_id);
 
       //if ($this.data('modal-reset') == 'reset')
