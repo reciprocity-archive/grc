@@ -8,11 +8,13 @@
   -content_for :modal_delete_path, delete_flow_cycle_path(f.object)
 
 -if f.object.directive_id.nil?
+  -directives = Directive
+  -if params[:program_id].present?
+    =hidden_field_tag :program_id, params[:program_id]
+    -directives = directives.joins(:program_directives).where(:program_directives => { :program_id => params[:program_id] })
+  -directives = directives.all
   .row-fluid
-    .span4
-      =f.collection_select :directive_id, Directive.all, :id, :display_name, {}, {:class => :collection, :multiple => false}
-    %br
-    %span.description Directive being audited
+    =wrapped_select(f, :span6, :directive_id, directives.map { |d| [d.display_name, d.id] }, :class => :collection, :multiple => false, :include_blank => (directives.count > 1))
 -else
   =f.hidden_field :directive_id
 

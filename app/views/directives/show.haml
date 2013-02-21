@@ -47,10 +47,6 @@
         %a{:href => mapping_directive_path(instance)}
           %i.grcicon-reg-map
           Control Mapper
-      %li
-        %a{:href => new_flow_cycle_path(:'cycle[directive_id]' => instance.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect'}
-          %i.grcicon-audit
-          Start Audit
 
 -content_for :subheader_plus do
   %a.navbarplus.fltrt{ :href => new_flow_directive_path, :'data-toggle' => 'modal-ajax-form', :'data-form-target' => 'redirect', :'data-modal-reset' => 'reset', :'data-modal-class' => 'modal-wide' }

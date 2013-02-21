@@ -16,7 +16,7 @@ class Cycle < ActiveRecord::Base
 
   sanitize_attributes :description, :notes
 
-  validates :title, :directive, :start_at,
+  validates :title, :directive, :directive_id, :start_at,
     :presence => { :message => "needs a value" }
 
   is_versioned_ext
