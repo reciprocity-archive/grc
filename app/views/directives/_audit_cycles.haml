@@ -18,24 +18,33 @@
 
 %ul.tree-structure.simple
   -directive.cycles.order("start_at DESC").each do |cycle|
-    %li.simple-item
+    %li.item-main
       %a{:href => flow_cycle_path(cycle)}
         .item-title
           .row-fluid
-            .span12
-              %span.key
-                =cycle.title
-              %span.additional-info
-                -if cycle.complete
-                  Complete (started #{days_ago_in_words cycle.start_at} ago)
-                -else
-                  %br
-                  -if cycle.start_at == Time.zone.now.to_date
-                    started today
-                  -elsif cycle.start_at < Time.zone.now.to_date
-                    started #{days_ago_in_words cycle.start_at} ago
+            .span9
+              .oneline
+                %span.title
+                  -if cycle.complete
+                    %span.completed
+                      =cycle.title
                   -else
-                    starting in #{days_ago_in_words cycle.start_at}
-                  -if cycle.end_at
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    ends on #{cycle.end_at.strftime("%m/%d/%y")}
+                    =cycle.title
+                %span.additional-info
+                  -if cycle.complete
+                    %span.completed
+                      Completed
+                  -else
+                    -if cycle.start_at == Time.zone.now.to_date
+                      today
+                    -elsif cycle.start_at < Time.zone.now.to_date
+                      #{days_ago_in_words cycle.start_at} ago
+                    -else
+                      starting in: #{days_ago_in_words cycle.start_at}
+                    -if cycle.end_at
+                      &nbsp;&nbsp;&nbsp;&nbsp;
+                      ends on: #{cycle.end_at.strftime("%m/%d/%y")}
+            .objects-count
+              %a{:href => '#'}
+                %i.grcicon-control-black
+                0
