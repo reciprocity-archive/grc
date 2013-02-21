@@ -74,7 +74,9 @@ class Directive < ActiveRecord::Base
   end
 
   def self.all_company_controls_first
-    directives = self.all.select {|p| p.company_controls?} +
+    directives = self.all
+    directives =
+      directives.select {|p| p.company_controls?} +
       directives.reject {|p| p.company_controls?}
   end
 
