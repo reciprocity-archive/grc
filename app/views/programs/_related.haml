@@ -13,42 +13,45 @@
 -impact_scope = instance.impact_scope_for_directives
 
 #related.open
-  .button-set
-    .row-fluid
-      .span12
-        %ul.related-button.nav.nav-pills
+  .row-fluid
+    .span12
+      .tabbable
+        %ul.nav.nav-tabs
           -impact_scope.each do |model, rels|
             -rels_count = rels.sum { |rel_type_id, rel_objects| rel_objects.size }
             -table_name = model.underscore.pluralize #.table_name
             %li.tab-btn
               %a{:href => "#related-#{table_name}-pane", "data-toggle" => 'tab' }
-                #{table_name.titleize} (#{rels_count})
-  .tab-content
-    -impact_scope.each do |model, rels|
-      .tab-pane{:id => "related-#{model.underscore.pluralize}-pane"}
-        %ul.tree
-          -rels.each do |rel_type_id, rel_objects|
-            %li.category
-              %h3
-                Program's Directives Apply to #{model.pluralize.titleize}
-                %span.sub-title
-              -#.item-actions
-                %a
-                  %i.grcicon-link-new
-              %section.content
-                %ul.tree
-                  -if rel_objects.size > 0
-                    -rel_objects.uniq.each do |o|
-                      %li.main
-                        %a
-                          .item-identifier
-                            .item-title
-                              .row-fluid
-                                .span12
-                                  %span.key
-                                    =o.slug
-                                  %span.addition-info
-                                    =o.title
-                  -else
-                    %li.main.no-result
-                      No results
+                %i.grcicon-system-black
+                #{table_name.titleize}
+                %span
+                  #{rels_count}
+        .tab-content
+          -impact_scope.each do |model, rels|
+            .tab-pane{:id => "related-#{model.underscore.pluralize}-pane"}
+              %ul.tree
+                -rels.each do |rel_type_id, rel_objects|
+                  %li.category
+                    %h3
+                      Program's Directives Apply to #{model.pluralize.titleize}
+                      %span.sub-title
+                    -#.item-actions
+                      %a
+                        %i.grcicon-link-new
+                    %section.content
+                      %ul.tree
+                        -if rel_objects.size > 0
+                          -rel_objects.uniq.each do |o|
+                            %li.main
+                              %a
+                                .item-identifier
+                                  .item-title
+                                    .row-fluid
+                                      .span12
+                                        %span.key
+                                          =o.slug
+                                        %span.addition-info
+                                          =o.title
+                        -else
+                          %li.main.no-result
+                            No results

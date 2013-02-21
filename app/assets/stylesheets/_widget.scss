@@ -99,6 +99,42 @@
     }
   }
   &.widget-tabs {
+    &.widget-tabs-horizontal {
+      .tab-content {
+        padding: 9px;
+      }
+      .nav-tabs {
+        padding-left: 10px;
+        margin-right: 0;
+        li {
+          margin-bottom: 0;
+          a {
+            min-width: auto;
+            border-bottom: none;
+            padding-left: 10px;
+            padding-right: 10px;
+            margin-right: 0;
+            color: $text;
+            span {
+              color: $gray;
+              font-size: 11px;
+            }
+            i {
+              margin-right: 4px;
+            }
+          }
+          &.active {
+            a {
+              color: $widgetTitle;
+              span {
+                color: $widgetTitle;
+                font-size: 11px;
+              }
+            }
+          }
+        }
+      }
+    }
     .content {
       padding: 0;
       overflow-y: visible;
