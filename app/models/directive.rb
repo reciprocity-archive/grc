@@ -28,12 +28,6 @@ class Directive < ActiveRecord::Base
     :contract   => [ "Contract" ],
   }
 
-  REGULATION_KINDS = [ "Regulation" ]
-  LIBRARY_KINDS = [ "Company Library", "Fed Contract Library" ]
-  COMPANY_CONTROL_KINDS = [ "Company Controls" ]
-  POLICY_KINDS = [ "Company Policy", "Org Group Policy", "Data Asset Policy", "Product Policy", "Contract-Related Policy" ]
-  CONTRACT_KINDS = [ "Contract" ]
-
   attr_accessible :title, :slug, :company, :description, :start_date, :stop_date, :audit_start_date, :audit_frequency, :audit_duration, :organization, :url, :scope, :kind, :version
 
   has_many :sections, :order => :slug, :dependent => :destroy
