@@ -84,6 +84,10 @@ ul.tree-structure {
       h3 {
         padding-left: 10px;
       }
+      .main-tab-title {
+        font-weight: bold;
+        color: $text;
+      }
     }
     [class^="grcicon-"] {
       display: inline-block;
