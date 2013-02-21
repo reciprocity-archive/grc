@@ -1,4 +1,4 @@
-%ul.tree-structure.simple
+%ul.tree-structure
   =walk_slug_tree(Directive.slugtree(controls)) do |item, step|
     -content_id = "content_#{rand(36**8).to_s(36)}" # unique ID for toggle
     .item-main

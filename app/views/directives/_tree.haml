@@ -3,13 +3,14 @@
 
 %ul.tree-structure
   -directives.each do |directive|
+    -has_children = directive.sections.count > 0
+
     %li{ :'data-object-id' => directive.id }
       .item-main
-        -#if !is_root
-          .openclose{ :class => !expand_this && 'lastchild' }
+        .openclose{ :class => !has_children && 'lastchild' }
         .item-title{ :class => is_root && 'active' }
           .row-fluid
-            =render :partial => 'object_leaf', :locals => { :instance => directive }
+            =render :partial => 'object_leaf', :locals => { :instance => directive, :object_type => 'governance', :object_icon => 'grcicon-program' }
             .objects-count
               %a
                 %i.grcicon-section-black
@@ -19,6 +20,7 @@
               %i.grcicon-edit-new
             %a.btn.btn-mini{ "rel" => "tooltip", "data-placement" => "top", "title" => "Go to this object's page", :href => flow_directive_path(directive.id) }
               %i.grcicon-goto
-      .item-content{ :class => is_root && 'in' }
-        %ul.tree-structure
-          =render :partial => 'directives/sections', :locals => { :sections => directive.sections }
+      .item-content{ :class => expand_this && 'in' }
+        -if has_children
+          %ul.tree-structure
+            =render :partial => 'directives/sections', :locals => { :sections => directive.sections }

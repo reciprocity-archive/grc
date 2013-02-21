@@ -9,10 +9,18 @@
 -description = instance.send(description_attr) if local_assigns[:description].nil?
 -description_inline = sanitize(description, :tags => []) if local_assigns[:description_inline].nil?
 
+-object_type = nil if local_assigns[:object_type].nil?
+-object_icon = nil if local_assigns[:object_icon].nil?
+
 .span9
   -if title.present? && description.present?
     -# Both title and description
     .oneline.expand-on-hover{:rel => "tooltip", :title => "click to view more"}
+      -if object_type.present?
+        .grcobject{ :class => object_type }
+          %i{ :class => object_icon }
+      -elsif object_icon.present?
+        %i{ :class => object_icon }
       %span.code
         =code
       %span.title
@@ -23,6 +31,11 @@
   -elsif title.present?
     -# Title only
     .oneline.expandable
+      -if object_type.present?
+        .grcobject{ :class => object_type }
+          %i{ :class => object_icon }
+      -elsif object_icon.present?
+        %i{ :class => object_icon }
       %span.code
         =code
       %span.title
@@ -30,6 +43,11 @@
   -elsif description.present?
     -# Description only
     .oneline.description-only.expand-on-hover{:rel => "tooltip", :title => "click to view full description"}
+      -if object_type.present?
+        .grcobject{ :class => object_type }
+          %i{ :class => object_icon }
+      -elsif object_icon.present?
+        %i{ :class => object_icon }
       %span.code
         =code
       %span.title
@@ -42,5 +60,11 @@
         %br
   -else
     -# Neither (shouldn't happen)
-    %span.title (No description)
+    .oneline
+      -if object_type.present?
+        .grcobject{ :class => object_type }
+          %i{ :class => object_icon }
+      -elsif object_icon.present?
+        %i{ :class => object_icon }
+      %span.title (No description)
 
