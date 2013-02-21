@@ -4,7 +4,7 @@
   <li>
     {{#pack this tooltip_view=tooltip_view object_type=object_type object_display=object_display object_route=object_route}}
     <a data-popover-trigger="sticky-hover" data-popover-trigger="sticky-hover" data-sticky-popover="true" data-content="{{render tooltip_view}}">
-      {{{withattr "data-popover-href" "/{object_route}/{id}/tooltip" "href" "/{object_route}/{id}" "data-original-title" "&lt;h3&gt; {object_display} Info&lt;/h3&gt;" }}}
+      {{{withattr "href" "/{object_route}/{id}" "data-original-title" "<h3>{object_display} Info</h3>" }}}
       <div class="row-fluid">
         <div class="span12">
           <div class="item-identifier">
