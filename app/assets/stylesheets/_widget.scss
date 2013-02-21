@@ -336,14 +336,15 @@
     }
   }
   .footer {
-    color:$headerTitle;
+    color:$gray;
     padding:6px;
     height: auto;
+    border-top: 1px solid $lightGray;
     p {
       font-size:11px;
       font-weight:bold;
       margin: 0;
-      color: $text;
+      color:$gray;
       line-height: 20px;
       &.footer-right {
         text-align: right;
