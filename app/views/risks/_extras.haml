@@ -12,7 +12,7 @@
 
 .tabbable
   %ul.nav.nav-tabs
-    %li=link_to 'Controls', '#controls', :data => { :toggle => 'tab' }#, :'tab-href' => risks_flow_control_path(control) }
+    %li=link_to '<i class="grcicon-control-black"></i>Controls'.html_safe, '#controls', :data => { :toggle => 'tab' }#, :'tab-href' => risks_flow_control_path(control) }
     %li=link_to 'Business Objects', '#business_objects', :data => { :toggle => 'tab' } #, :'tab-href' => systems_flow_control_path(control) }
 
   .tab-content
