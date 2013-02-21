@@ -18,9 +18,8 @@
               %a
                 %i.grcicon-section-black
                 =sections.count
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           .item-actions
-            %a.btn.btn-mini{ "rel" => "tooltip", "data-placement" => "top", "title" => "Edit this object", 'data-modal-class' => 'modal-wide', 'data-form-target' => 'refresh', "data-toggle" => "modal-ajax-form", :href => edit_flow_directive_path(directive.id) }
-              %i.grcicon-edit-new
             %a.btn.btn-mini{ "rel" => "tooltip", "data-placement" => "top", "title" => "Go to this object's page", :href => flow_directive_path(directive.id) }
               %i.grcicon-goto
       .item-content{ :class => expand_this && 'in' }
