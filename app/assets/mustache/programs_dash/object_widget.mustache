@@ -1,0 +1,38 @@
+{{!section class="widget... }}
+  <header class="header">
+    <div class="row-fluid">
+      <div class="span8">
+        <h2>
+          <i class="grcicon-{{object_type}}"></i>
+          {{object_display}}
+          <span>
+            {{list.length}}
+          </span>
+        </h2>
+      </div>
+      <div class="span4">
+        <div class="widget-action pull-right remove-widget">
+          <a class="remove" data-placement="top" href="javascript://" rel="tooltip" data-original-title="Remove widget">
+            <i class="grcicon-x-white"></i>
+          </a>
+        </div>
+        <div class="widget-action pull-right widget-showhide">
+          <a class="active" data-placement="top" href="javascript://" rel="tooltip" data-original-title="Contract widget"></a>
+        </div>
+        <div class="widget-action pull-right widget-action-help">
+          <a data-placement="top" data-toggle="modal-ajax" href="/help/{{object_type}}_list" rel="tooltip" data-original-title="Help - What is this?">
+            <i class="grcicon-help"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+  
+  <section class="content" style="height: 522px;">
+    <div class="filter">
+      <input class="ui-corner-all widgetsearch clear-value" placeholder="Search" type="text">
+    </div>
+    {{> /assets/programs_dash/object_list.mustache }}
+  </section>
+              
+{{!/section}}

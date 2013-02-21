@@ -1,0 +1,24 @@
+{{! dashboard object listing}}
+<ul class="tree-structure simple single-row-tabs">
+{{#list}}
+  <li>
+    {{#pack this tooltip_view=tooltip_view object_type=object_type object_display=object_display}}{{#packed}}
+    <a data-popover-trigger="sticky-hover" data-original-title="&lt;h3&gt; {{object_display}} Info&lt;/h3&gt;" data-sticky_popover="true" data-content="{{render tooltip_view}}">
+      {{{withattr "data_popover_href" "/{object_route}/{id}/tooltip" "href" "/{object_route}/{id}" }}}
+      <div class="row-fluid">
+        <div class="span12">
+          <div class="item-identifier">
+            <span class="key">
+              <span>{{prefix}}</span> <span>{{slug}}</span>
+            </span>
+            <span class="name">
+              {{title}}
+            </span>
+          </div>
+        </div>
+      </div>
+    </a>
+    {{/packed}}{{/pack}}
+  </li>
+{{/list}}
+</ul>

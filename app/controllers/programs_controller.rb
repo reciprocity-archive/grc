@@ -30,8 +30,15 @@ class ProgramsController < BaseObjectsController
     end
     @programs = allowed_objs(@programs.all, :read)
 
-    if params[:quick]
-      render :partial => 'quick', :locals => { :quick_result => params[:qr]}
+     respond_to do |format|
+      format.html do
+        if params[:quick]
+          render :partial => 'quick', :locals => { :quick_result => params[:qr]}
+        end
+      end
+      format.json do
+        render :json => @programs
+      end
     end
   end
 

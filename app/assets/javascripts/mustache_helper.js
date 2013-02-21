@@ -124,10 +124,10 @@ $.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
   Mustache.registerHelper("withclass", function() {
     var options = arguments[arguments.length - 1]
     , exprs = preprocessClassString(arguments[0])
-    , hash = quickHash(arguments[0], quickHash(this._cid)).toString(36)
+    , that = this.___st4ck ? this[this.length-1] : this
+    , hash = quickHash(arguments[0], quickHash(that._cid)).toString(36)
     //, content = options.fn(this).trim()
     //, index = content.indexOf("<") + 1
-    , that = this;
 
     // while(content[index] != " ") {
     //   index++;
@@ -138,7 +138,7 @@ $.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
 
 
     function hookupfunc(el, parent, view_id) {
-      var content = options.fn(this);
+      var content = options.fn(that);
 
       if(content) {
         var frag = can.view.frag(content, parent);
@@ -181,8 +181,8 @@ $.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
     var args = can.makeArray(arguments).slice(0, arguments.length - 1)
     , options = arguments[arguments.length - 1]
     , attribs = []
-    , that = this
-    , hash = quickHash(args.join("-"), quickHash(this._cid)).toString(36);
+    , that = this.___st4ck ? this[this.length-1] : this
+    , hash = quickHash(args.join("-"), quickHash(that._cid)).toString(36);
 
     var hook = can.view.hook(function(el, parent, view_id) {
       var content = options.fn(that);
@@ -306,36 +306,45 @@ can.each(["firstexist", "firstnonempty"], function(fname) {
   Mustache.registerHelper(fname, function() {
     var args = can.makeArray(arguments).slice(0, arguments.length - 1);
     for(var i = 0; i < args.length; i++) {
-      if(typeof v === "function") v = v.call(this);
       var v = args[i];
+      if(typeof v === "function") v = v.call(this);
       if(v != null && (fname === "firstexist" || !!(v.toString().trim()))) return v;
     }
     return "";
   });
 });
 
-/*
-Thought I was being clever but this doesn't work as expected. --BM
 Mustache.registerHelper("pack", function() {
   var options = arguments[arguments.length - 1];
   var objects = can.makeArray(arguments).slice(0, arguments.length - 1);
   var pack = new can.Observe();
   can.each(objects, function(obj, i) {
+      if(typeof obj === "function") {
+          objects[i] = obj = obj();
+      }
     if(obj instanceof can.Observe) {
       obj.bind("change", function(attr, how, newVal, oldVal) {
         pack.attr(attr, newVal);
       });
       objects[i] = obj.serialize();
+    } else {
+        pack.attr(obj);
     }
   });
-  pack.packed = pack; //CanJS bug workaround
   objects.unshift(pack);
-  options.hash && objects.push(options.hash);
-  can.extend.apply(can, objects);
+  if(options.hash) {
+    can.each(Object.keys(options.hash), function(key) {
+      if(typeof options.hash[key] === "function") {
+        options.hash[key] = options.hash[key]();
+      }
+    });
+    pack.attr(options.hash);
+  }
+  pack.attr("packed", pack.serialize()); //account for Can 1.1.3 not constructing context stack properly
   var retval = options.fn(pack);
   return retval;
 });
-*/
+
 
 Mustache.registerHelper("is_beta", function(){
   var options = arguments[arguments.length - 1];
@@ -348,6 +357,10 @@ Mustache.registerHelper("render", function(template, context, options) {
   if(!options) {
     options = context;
     context = this;
+  }
+
+  if(typeof template === "function") {
+    template = template();
   }
 
   return can.view.render(template, context.serialize ? context.serialize() : context);

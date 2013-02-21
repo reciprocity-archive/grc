@@ -30,28 +30,28 @@ can.Model.Cacheable("CMS.Models.System", {
         var that = this;
 
         CMS.Models.ObjectPerson.bind("created", function(ev, obj_person) {
-            var sys = that.findInCacheById(obj_person.personable_id); //"this" is Cacheable.  WTF?
+            var sys = that.findInCacheById(obj_person.xable_id); //"this" is Cacheable.  WTF?
             if(sys && obj_person.personable_type === that.xable_type) {
                 sys.addElementToChildList("object_people", obj_person);
                 sys.addElementToChildList("people", obj_person.person);
             }
         });
         CMS.Models.ObjectPerson.bind("destroyed", function(ev, obj_person) {
-            var sys = that.findInCacheById(obj_person.personable_id); //"this" is Cacheable.  WTF?
+            var sys = that.findInCacheById(obj_person.xable_id); //"this" is Cacheable.  WTF?
             if(sys && obj_person.personable_type === that.xable_type) {
                 sys.removeElementFromChildList("object_people", obj_person);
                 sys.removeElementFromChildList("people", obj_person.person);
             }
         });
         CMS.Models.ObjectDocument.bind("created", function(ev, obj_doc) {
-            var sys = that.findInCacheById(obj_doc.documentable_id); //"this" is Cacheable.  WTF?
+            var sys = that.findInCacheById(obj_doc.xable_id); //"this" is Cacheable.  WTF?
             if(sys && obj_doc.documentable_type === that.xable_type) {
                 sys.addElementToChildList("object_documents", obj_doc);
                 sys.addElementToChildList("documents", obj_doc.document);
             }
         });
         CMS.Models.ObjectDocument.bind("destroyed", function(ev, obj_doc) {
-            var sys = that.findInCacheById(obj_doc.documentable_id); //"this" is Cacheable.  WTF?
+            var sys = that.findInCacheById(obj_doc.xable_id); //"this" is Cacheable.  WTF?
             if(sys && obj_doc.documentable_type === that.xable_type) {
                 sys.removeElementFromChildList("object_documents", obj_doc);
                 sys.removeElementFromChildList("documents", obj_doc.document);
@@ -94,3 +94,15 @@ can.Model.Cacheable("CMS.Models.System", {
       return str.charAt(0).toUpperCase() + str.slice(1);
     }
 });
+
+CMS.Models.System("CMS.Models.StrictSystem", {
+  findAll : "GET /systems.json?is_biz_process=false"
+  , cache : CMS.Models.System.cache
+  , init : function() {}
+}, {});
+
+CMS.Models.System("CMS.Models.Process", {
+  findAll : "GET /systems.json?is_biz_process=true"
+  , cache : CMS.Models.System.cache
+  , init : function() {}
+}, {})

@@ -10,6 +10,8 @@
  *= require tmpl
  *= require can.jquery-all
  *= require mustache_helper
+ *= require_tree ./models
+ *= require_tree ./controllers
  *= require_tree ./apps
  *= require_self
  *= require jquery.remotipart-patched

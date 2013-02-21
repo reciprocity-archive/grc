@@ -108,6 +108,9 @@ $.widget(
           data.content.push(
             {link_url : "Please create a new reference by pushing the + icon to the right"
             , id : null})
+          $(event.target).addClass("error-input");
+        } else {
+          $(event.target).removeClass("error-input");
         }
       }
   }
@@ -119,6 +122,7 @@ $.widget(
       label = item.link_url;
     }
     return $( "<li class='inline-search-result'>" )
+        .addClass(item.id ? "" : "error")
         .data( "item.autocomplete", item )
         .append( "<a>" + escapeHTML(label) + "</a>" )
         .appendTo( ul );
