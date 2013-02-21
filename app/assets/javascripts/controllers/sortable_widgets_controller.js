@@ -20,17 +20,7 @@ can.Control("CMS.Controllers.SortableWidgets", {
 }, {
   
   init : function() {
-    var sorts = can.getObject(this.options.sortable_token, this.options.model);
-    if(!sorts) {
-      sorts = new can.Observe();
-      this.options.model.attr(this.options.sortable_token, sorts);
-    }
-
-    var page_sorts = sorts.attr(this.options.page_token);
-    if(!page_sorts) {
-      page_sorts = new can.Observe();
-      sorts.attr(this.options.page_token, page_sorts);
-    }
+    var page_sorts = this.options.model.getSorts(this.options.page_token);
 
     var this_sort = page_sorts.attr($(this.element).attr("id"));
     if(!this_sort || !(this_sort instanceof can.Observe.List)) {
@@ -43,13 +33,22 @@ can.Control("CMS.Controllers.SortableWidgets", {
     var firstchild = null;
     can.each(this_sort, function(id) {
       firstchild || (firstchild = $("#" + id));
-      $("#" + id).detach().appendTo(that.element);
+      var $widget = $("#" + id).detach();
+      if(!$widget.length) {
+        var ctl = that.element.find(".cms_controllers_add_widget").control(CMS.Controllers.AddWidget);
+        if(ctl) {
+          ctl.addWidgetByName(id.substr(0, id.indexOf("_list_widget")));
+          $widget = $("#" + id).detach();
+        }
+      }
+      $widget.appendTo(that.element);
     });
     if(firstchild) {
       firstchild.prevAll().detach().appendTo(this.element); //do the shuffle
     }
 
     this.element.sortable().sortable("refresh");
+    this.is_initialized = true;
     this.update_event();
   }
 
@@ -58,8 +57,10 @@ can.Control("CMS.Controllers.SortableWidgets", {
   , " sortremove" : "update_event"
 
   , update_event : function(el, ev, data) {
-    this.options.sort.replace(this.element.sortable("toArray"));
-    this.options.model.save();
+    if(this.is_initialized) {
+      this.options.sort.replace(this.element.sortable("toArray"));
+      this.options.model.save();
+    }
   }
 
 });

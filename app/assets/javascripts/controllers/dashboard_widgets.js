@@ -48,7 +48,9 @@ can.Control("CMS.Controllers.DashboardWidgets", {
   }
 
   , ".remove-widget click" : function() {
+    var parent = this.element.parent();
     this.element.remove();
+    parent.trigger("sortremove");
   }
 
   , ".widget-showhide click" : function(el, ev) {

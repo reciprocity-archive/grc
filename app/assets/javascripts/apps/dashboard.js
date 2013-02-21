@@ -120,7 +120,14 @@ $(function() {
     //Then listen for new ones
     $(document.body).on("mouseover", ".row-fluid[id][data-resize]:not(.cms_controllers_resize_widgets)", bindResizer);
 
+    if(/programs_dash/.test(window.location)) {
+      // next part is just for the dashboard.
 
+      $(".widget-add-placeholder").cms_controllers_add_widget({
+        widget_descriptors : widget_descriptors
+      });
+    }
+    
     function bindSortable(ev) {
         can.getObject("Instances", CMS.Controllers.SortableWidgets, true)[this.id] = 
          $(this)
@@ -132,13 +139,6 @@ $(function() {
     //we will need to consider whether to look for late-added ones later.
   });
 
-  if(!/programs_dash/.test(window.location))
-    return;
-  // next part is just for the dashboard.
-
-  $(".widget-add-placeholder").cms_controllers_add_widget({
-    widget_descriptors : widget_descriptors
-  });
 
 });
 
