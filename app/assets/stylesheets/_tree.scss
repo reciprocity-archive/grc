@@ -345,6 +345,24 @@ ul.tree-structure {
         }
       }
     }
+    .item-title {
+      margin-left:0;
+    }
+    .additional-info {
+      font-size:11px;
+      color:$text;
+      .completed {
+        color: #aaa;
+      }
+    }
+    .title {
+      .completed {
+        color: $gray;
+      }
+    }
+    .objects-count {
+      right: 0;
+    }
   }
   .rtf {
     p {
