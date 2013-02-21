@@ -1,6 +1,7 @@
 /*
  *= require application
  *= require jquery
+ *= require jquery-migrate
  *= require fastfix
  *= require jquery-ui
  *= require bootstrap
