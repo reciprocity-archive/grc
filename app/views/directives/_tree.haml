@@ -10,7 +10,7 @@
         .openclose{ :class => !has_children && 'lastchild' }
         .item-title{ :class => is_root && 'active' }
           .row-fluid
-            =render :partial => 'object_leaf', :locals => { :instance => directive, :object_type => 'governance', :object_icon => 'grcicon-program' }
+            =render :partial => 'object_leaf', :locals => { :instance => directive, :object_type => 'governance', :object_icon => 'grcicon-directive' }
             .objects-count
               %a
                 %i.grcicon-section-black
