@@ -1,0 +1,25 @@
+-content_for :widget_title do
+  Compliance
+
+-content_for :widget_buttons do
+  .filter
+    %input.ui-corner-all.widgetsearch.clear-value(type='text' placeholder='Search')
+
+-content_for :widget_help, 'compliance'
+
+-content_for :widget_id, 'compliance_widget'
+
+-quick_result_compliance ||= nil
+-prefix = quick_result_compliance ? "qf" : "dash"
+
+.tabbable.tabs-left{ :id => quick_result_compliance ? nil : "quick_find_compliance" }
+  %ul.nav.nav-tabs    
+    %li.active=link_to '<i class="grcicon-process-black"></i> Processes'.html_safe, "##{prefix}_processes", :data => { :'tab-href' => flow_systems_path(:quick => true, :qr => quick_result_compliance, :is_biz_process => true), :toggle => 'tab' }
+    %li=link_to '<i class="grcicon-system-black"></i> Systems'.html_safe, "##{prefix}_systems", :data => { :'tab-href' => flow_systems_path(:quick => true, :qr => quick_result_compliance, :is_biz_process => false), :toggle => 'tab' }
+    %li=link_to '<i class="grcicon-control-black"></i> Controls'.html_safe, "##{prefix}_controls", :data => { :'tab-href' => flow_controls_path(:quick => true, :qr => quick_result_compliance), :toggle => 'tab' }
+    
+
+  .tab-content
+    .tab-pane{ :id => "#{prefix}_processes" }
+    .tab-pane{ :id => "#{prefix}_systems" }
+    .tab-pane{ :id => "#{prefix}_controls" }
