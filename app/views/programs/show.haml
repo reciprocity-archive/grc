@@ -29,10 +29,10 @@
     #middle-column.span8.widget-area
       =render :partial => 'main',
               :layout => 'layouts/widget_box',
-              :locals => { :program => instance, :widget_class => 'governance' }
+              :locals => { :program => instance, :widget_class => 'widget-tabs widget-tabs-horizontal governance' }
       =render :partial => 'related',
               :layout => 'layouts/widget_box',
-              :locals => { :instance => instance, :widget_title => "Impact/Scope of Program's Directives", :widget_class => 'related widget-tabs widget-tabs-horizontal' }
+              :locals => { :instance => instance, :widget_title => "Impact/Scope of Program's Directives", :widget_class => 'widget-tabs widget-tabs-horizontal related' }
     #right-column.span4.widget-area
       =render :partial => 'info',
               :layout => 'layouts/widget_box',

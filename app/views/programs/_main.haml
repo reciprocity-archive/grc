@@ -22,8 +22,8 @@
 
 .tabbable
   %ul.nav.nav-tabs
-    %li.active=link_to 'Directives', '#directives', :data => { :toggle => 'tab', :'tab-href' => flow_directives_path(:program_id => instance.id, :tree => true) }
-    %li=link_to 'Controls', '#controls', :data => { :toggle => 'tab', :'tab-href' => flow_controls_path(:program_id => instance.id, :list => true) }
+    %li.active=link_to '<i class="grcicon-directive-black"></i>Directives'.html_safe, '#directives', :data => { :toggle => 'tab', :'tab-href' => flow_directives_path(:program_id => instance.id, :tree => true) }
+    %li=link_to '<i class="grcicon-control-black"></i>Controls'.html_safe, '#controls', :data => { :toggle => 'tab', :'tab-href' => flow_controls_path(:program_id => instance.id, :list => true) }
     -#%li=link_to 'Combo', '#combo', :data => { :toggle => 'tab', :'tab-href' => flow_sections_path(:program_id => instance.id, :combo => true) }
   .tab-content
     #directives.tab-pane
