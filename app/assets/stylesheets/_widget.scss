@@ -338,11 +338,13 @@
   .footer {
     color:$headerTitle;
     padding:6px;
+    height: auto;
     p {
       font-size:11px;
       font-weight:bold;
       margin: 0;
       color: $text;
+      line-height: 20px;
       &.footer-right {
         text-align: right;
       }
