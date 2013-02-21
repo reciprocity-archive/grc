@@ -11,6 +11,7 @@ can.Model("can.Model.Cacheable", {
     this.bind("destroyed", function(ev, old_obj) {
       delete can.getObject("cache", old_obj.constructor, true)[old_obj.id];
     });
+    can.getObject("cache", this, true);
   }
 
   , findInCacheById : function(id) {
