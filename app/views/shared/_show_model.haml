@@ -50,6 +50,11 @@
       =render :partial => "main",
               :layout => 'layouts/widget_box',
               :locals => { model_name.to_sym => instance, :widget_id => model_name + "_widget", :widget_class => "business" }
+              
+      -if instance.class.respond_to?(:valid_relationships)
+        =render :partial => 'shared/related',
+                :layout => 'layouts/widget_box',
+                :locals => { :instance => instance, :widget_class => 'widget-tabs widget-tabs-horizontal' }
   
     #right_column.span4.widget-area
       =render :partial => "info",
@@ -59,8 +64,3 @@
       =render :partial => "more_info",
                 :layout => 'layouts/widget_box',
                 :locals => { model_name.to_sym => instance, :widget_class => 'related' }
-              
-      -if instance.class.respond_to?(:valid_relationships)
-        =render :partial => 'shared/related',
-                :layout => 'layouts/widget_box',
-                :locals => { :instance => instance }

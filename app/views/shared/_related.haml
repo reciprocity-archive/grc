@@ -10,10 +10,10 @@
 
 -content_for :widget_help, 'related'
 #related.open
-  .button-set
-    .row-fluid
-      .span12
-        %ul.related-button.nav.nav-pills
+  .row-fluid
+    .span12
+      .tabbable
+        %ul.nav.nav-tabs
           -models.each do |model|
             -table_name = model.underscore.pluralize #.table_name
             %li.tab-btn
@@ -24,6 +24,7 @@
                   :related_model => model),
                 "data-template" => "/assets/related.mustache",
                 "data-refresh-time" => 60 }
+                %i.grcicon-system-black
                 #{table_name.titleize}
   .tab-content
     -models.each do |model|
