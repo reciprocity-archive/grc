@@ -55,7 +55,7 @@ ActiveRecord::Base.transaction do
     :document_status => [:active, :deprecated],
     :document_year => (1980..2012).to_a.map(&:to_s).reverse,
     :language => ['English'],
-    :directive_kind => ['Regulation', 'Company Policy', 'Operational Group Policy', 'Data Asset Policy', 'Company Controls'],
+    #:directive_kind => ['Regulation', 'Company Policy', 'Operational Group Policy', 'Data Asset Policy', 'Company Controls'],
     #:system_type => ['System', 'Process'],
     :system_kind => ['Infrastructure'],
     :product_type => ['Appliance', 'Desktop Software', 'SaaS'],

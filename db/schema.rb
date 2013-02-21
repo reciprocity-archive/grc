@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130220201341) do
+ActiveRecord::Schema.define(:version => 20130221084347) do
 
   create_table "accounts", :force => true do |t|
     t.string   "username"
@@ -170,6 +170,7 @@ ActiveRecord::Schema.define(:version => 20130220201341) do
     t.datetime "audit_start_date"
     t.integer  "audit_frequency_id"
     t.integer  "audit_duration_id"
+    t.string   "kind"
   end
 
   add_index "directives", ["slug"], :name => "index_programs_on_slug", :unique => true

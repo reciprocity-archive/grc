@@ -64,6 +64,9 @@ class DirectivesController < BaseObjectsController
     if params[:s].present?
       @directives = @directives.db_search(params[:s])
     end
+    if params[:meta_kind].present?
+      @directives = @directives.where(:kind => Directive.kinds_for(params[:meta_kind]))
+    end
     if params[:program_id].present?
       @directives = @directives.joins(:program_directives).where(:program_directives => { :program_id => params[:program_id] })
     end
@@ -484,7 +487,7 @@ class DirectivesController < BaseObjectsController
       %w(start_date stop_date audit_start_date).each do |field|
         parse_date_param(directive_params, field)
       end
-      %w(kind audit_frequency audit_duration).each do |field|
+      %w(audit_frequency audit_duration).each do |field|
         parse_option_param(directive_params, field)
       end
       directive_params

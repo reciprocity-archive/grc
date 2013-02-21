@@ -7,13 +7,15 @@
 -if !f.object.new_record?
   -content_for :modal_delete_path, delete_flow_directive_path(f.object)
 
+-kinds = Directive.kinds_for(params[:meta_kind])
+
 .row-fluid
   =wrapped_text_field f, :span6, :title, :placeholder => 'Enter title', :label_name => 'Title <span class="required">*</span>'.html_safe
   .span6
     .row-fluid
       =wrapped_text_field f, :span6, :slug, :label_name => 'Code (autofill)', :placeholder => 'DIRECTIVE-XXXX'
       -#=wrapped_text_field f, :span6, :version, :placeholder => '1.1.1'
-      =wrapped_select f, :span6, :kind_id, Option.options_for(:directive_kind).map { |o| [o.title, o.id] }, :selected => (f.object.respond_to?(:kind_id) ? f.object.kind_id : nil)
+      =wrapped_select f, :span6, :kind, kinds, :selected => f.object.kind
 
 .row-fluid
   =wrapped_text_area f, :span6, :description, :class => 'double wysihtml5', :wrapper_div_class => 'wysiwyg-area', :placeholder => 'Enter description here'
