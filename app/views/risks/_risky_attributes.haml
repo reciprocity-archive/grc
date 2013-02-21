@@ -43,13 +43,15 @@
           %span.addition-info
             <%= risky_attribute.title || '' %>
 
-  %ul#risky_attributeList.tree{ :'data-template-id' => 'risky_attribute_list_item' }
+  %ul#risky_attributeList.tree-structure.simple{ :'data-template-id' => 'risky_attribute_list_item' }
     -risky_attributes.each do |item|
-      %li.main
-        .item-identifier
-          %a{ :'data-id' => item.id, :href => flow_risky_attribute_path(item.id), :'data-popover-href' => tooltip_flow_risky_attribute_path(item.id), :'data-popover-trigger' => 'sticky-hover' }
-            %span.key
-              =item.type_string
-            %span.addition-info
-              =item.title || '&nbsp;'.html_safe
+      %li
+        .item-main
+          .item-title
+            .row-fluid
+              .span12
+                %a{ :'data-id' => item.id, :href => flow_risky_attribute_path(item.id), :'data-popover-href' => tooltip_flow_risky_attribute_path(item.id), :'data-popover-trigger' => 'sticky-hover', :style => "display:block"}
+                  .oneline
+                    %i{:class => "grcicon-#{item.type_string.downcase}-black"}
+                    =item.title || '&nbsp;'.html_safe
             
