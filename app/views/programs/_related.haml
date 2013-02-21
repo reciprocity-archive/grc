@@ -32,17 +32,11 @@
             .tab-pane{:id => "related-#{model.underscore.pluralize}-pane"}
               %ul.tree-structure.simple
                 -rels.each do |rel_type_id, rel_objects|
-                  %li.tab-title-holder
-                    %h3.tab-title
-                      Program's Directives Apply to #{model.pluralize.titleize}
-                    -#.item-actions
-                      %a
-                        %i.grcicon-link-new
                   -if rel_objects.size > 0
                     -rel_objects.uniq.each do |o|
                       %li
                         .item-main
-                          %a
+                          %a{:href => o.url, :'data-popover-href'=> "#", :'data-popover-trigger' => "sticky-hover", :style => "display:block"}
                             .item-title
                               .row-fluid
                                 .span8
