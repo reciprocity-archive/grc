@@ -20,9 +20,10 @@
           -impact_scope.each do |model, rels|
             -rels_count = rels.sum { |rel_type_id, rel_objects| rel_objects.size }
             -table_name = model.underscore.pluralize #.table_name
+            -icon = "grcicon-#{model.downcase}-black"
             %li.tab-btn
               %a{:href => "#related-#{table_name}-pane", "data-toggle" => 'tab' }
-                %i.grcicon-system-black
+                %i{:class => icon }
                 #{table_name.titleize}
                 %span
                   #{rels_count}
