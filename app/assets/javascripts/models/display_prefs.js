@@ -69,6 +69,10 @@ can.Model.LocalStorage("CMS.Models.DisplayPrefs", {
     return this;    
   }
 
+  , getWidgetHeight : function(page_id, widget_id) {
+    return can.getObject("heights." + page_id + "." + widget_id, this);
+  }
+
 });
 
 })(this.can, this.can.$);

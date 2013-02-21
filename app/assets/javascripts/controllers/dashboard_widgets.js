@@ -35,7 +35,7 @@ can.Control("CMS.Controllers.DashboardWidgets", {
       that.element.html(frag);
       CMS.Models.DisplayPrefs.findAll().done(function(d) {
         if(d[0].getCollapsed("programs_dash", that.options.object_type)) 
-          that.element.find(".widget-showhide > a").showhide("hide");
+          that.element.css("height", "").find(".widget-showhide > a").showhide("hide");
       });
       that.element
       .removeClass("ui-resizable")
@@ -61,7 +61,9 @@ can.Control("CMS.Controllers.DashboardWidgets", {
     //animation hasn't completed yet, so collapse state is inverse of whether it's actually collapsed right now.
     var collapse = that.element.find(".content:first").is(":visible");
     CMS.Models.DisplayPrefs.findAll().done(function(d) { 
+      collapse ? that.element.css("height", "") : that.element.css("height", d[0].getWidgetHeight("programs_dash", that.element.attr("id")))
       d[0].setCollapsed("programs_dash", that.options.object_type, collapse);
     });
   }
+
 });
