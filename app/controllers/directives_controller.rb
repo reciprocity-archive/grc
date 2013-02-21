@@ -62,7 +62,15 @@ class DirectivesController < BaseObjectsController
       @directives = @directives.relevant_to(Product.find(params[:relevant_to]))
     end
     if params[:s].present?
-      @directives = @directives.db_search(params[:s])
+      directive_ids = @directives.db_search(params[:s]).map { |d| d.id }
+      if params[:search_sections].present?
+        directive_ids = directive_ids + Section.
+          includes(:directive).
+          db_search(params[:s]).
+          all.
+          map { |s| s.directive_id }
+      end
+      @directives = @directives.where(:id => directive_ids)
     end
     if params[:meta_kind].present?
       @directives = @directives.where(:kind => Directive.kinds_for(params[:meta_kind]))

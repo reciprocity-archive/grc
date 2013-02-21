@@ -3,7 +3,10 @@
 
 %ul.tree-structure
   -directives.each do |directive|
-    -has_children = directive.sections.count > 0
+    -sections = directive.sections
+    -if params[:s].present? && params[:search_sections].present?
+      -sections = sections.db_search(params[:s])
+    -has_children = sections.count > 0
 
     %li{ :'data-object-id' => directive.id }
       .item-main
@@ -14,7 +17,7 @@
             .objects-count
               %a
                 %i.grcicon-section-black
-                =directive.sections.count
+                =sections.count
           .item-actions
             %a.btn.btn-mini{ "rel" => "tooltip", "data-placement" => "top", "title" => "Edit this object", 'data-modal-class' => 'modal-wide', 'data-form-target' => 'refresh', "data-toggle" => "modal-ajax-form", :href => edit_flow_directive_path(directive.id) }
               %i.grcicon-edit-new
@@ -23,4 +26,4 @@
       .item-content{ :class => expand_this && 'in' }
         -if has_children
           %ul.tree-structure
-            =render :partial => 'directives/sections', :locals => { :sections => directive.sections, :show_edit => false }
+            =render :partial => 'directives/sections', :locals => { :sections => sections, :show_edit => false }
