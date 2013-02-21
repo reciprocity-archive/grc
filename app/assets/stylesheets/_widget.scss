@@ -335,15 +335,13 @@
     }
   }
   .footer {
-    background:$lightGray;
     color:$headerTitle;
     padding:6px;
-    height: 20px;
     border-top: 1px solid $footerBorder;
     p {
+      font-size:11px;
       margin: 0;
-      line-height: 20px;
-      color: $gray;
+      color: $text;
       &.footer-right {
         text-align: right;
       }
@@ -449,6 +447,7 @@
     @include reset-list();
     margin-bottom: 20px;
     li {
+      border-bottom:1px solid $lightGray;
       padding: 6px 0 4px 7px;
       &:last-child {
         border-bottom: none;
@@ -479,7 +478,6 @@
         }
         span {
           float: left;
-          font-weight:bold;
           width: 60%;
         }
       }

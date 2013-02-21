@@ -417,6 +417,12 @@ ul.tree-structure {
     @include border-radius();
     background:#f0f0f0;
     border:1px solid darken(#f0f0f0, 5%);
+    .ca-fields {
+      i {
+        margin-top:0;
+      }
+    }
+    
   }
   ul.pbc-requests {
     background:$white;
@@ -426,10 +432,30 @@ ul.tree-structure {
     li {
       .pbc-item-head {
         padding:0 4px;
+        .btn {
+          i {
+            margin-top:0;
+          }        
+        }
         .item-actions {
           padding-right:4px;
         }
       }
     }
+    h4.pbc-title {
+      .btn i {
+        margin-top:0;
+      }
+    }
+  }
+  ul.pbc-responses {
+    .btn {
+      i {
+        margin-top:0;
+      }
+    }
+  }
+  .responses {
+    margin-right:10px;
   }
 }
