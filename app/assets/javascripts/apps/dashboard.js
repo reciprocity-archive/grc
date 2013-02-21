@@ -22,6 +22,27 @@ var widget_descriptors = {
     , object_route : "directives"
     , object_display : "Regulations/Policies/Contracts"
   }
+  , "regulation" : {
+    model : CMS.Models.Regulation
+    , object_type : "regulation"
+    , object_category : "governance"
+    , object_route : "directives"
+    , object_display : "Regulations"
+  }
+  , "policy" : {
+    model : CMS.Models.Policy
+    , object_type : "policy"
+    , object_category : "governance"
+    , object_route : "directives"
+    , object_display : "Policies"
+  }
+  , "contract" : {
+    model : CMS.Models.Contract
+    , object_type : "contract"
+    , object_category : "governance"
+    , object_route : "directives"
+    , object_display : "Contracts"
+  }
   , "org_group" : {
     model : CMS.Models.OrgGroup
     , object_type : "org_group"

@@ -12,6 +12,18 @@ can.Model.Cacheable("CMS.Models.Directive", {
   , findAll : "/directives.json"
 }, {});
 
+CMS.Models.Directive("CMS.Models.Regulation", {
+  findAll : "/directives.json?meta_kind=regulation"
+}, {});
+
+CMS.Models.Directive("CMS.Models.Policy", {
+  findAll : "/directives.json?meta_kind=policy"
+}, {});
+
+CMS.Models.Directive("CMS.Models.Contract", {
+  findAll : "/directives.json?meta_kind=contract"
+}, {});
+
 can.Model.Cacheable("CMS.Models.OrgGroup", {
   root_object : "org_group"
   , findAll : "/org_groups.json"
