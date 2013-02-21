@@ -16,7 +16,9 @@
         %ul.nav.nav-tabs
           -models.each do |model|
             -table_name = model.underscore.pluralize #.table_name
+            -icon = "grcicon-#{model.downcase}-black"
             %li.tab-btn
+              
               %a{:href => "#related-#{table_name}-pane",
                 "data-toggle" => 'tab',
                 "data-source" => related_objects_flow_relationships_path(:oid => instance.id,
@@ -24,7 +26,7 @@
                   :related_model => model),
                 "data-template" => "/assets/related.mustache",
                 "data-refresh-time" => 60 }
-                %i.grcicon-system-black
+                %i{:class => icon }
                 #{table_name.titleize}
   .tab-content
     -models.each do |model|
