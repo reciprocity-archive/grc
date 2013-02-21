@@ -20,7 +20,7 @@ can.Control("CMS.Controllers.DashboardWidgets", {
     .addClass("widget")
     .addClass(this.options.object_category)
     .attr("id", this.options.object_type + "_list_widget")
-    .resize({handles : "s"});
+    .trigger("section_created");
   }
 
   , fetch_list : function(params) {
@@ -37,7 +37,10 @@ can.Control("CMS.Controllers.DashboardWidgets", {
         if(d[0].getCollapsed("programs_dash", that.options.object_type)) 
           that.element.find(".widget-showhide > a").showhide("hide");
       });
-      that.element.find('.wysihtml5').wysihtml5({ 
+      that.element
+      .removeClass("ui-resizable")
+      .resizable({handles : "s"})
+      .find('.wysihtml5').wysihtml5({ 
         link: true
         , image: false
         , html: true

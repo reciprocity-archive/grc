@@ -102,6 +102,8 @@ can.Control("CMS.Controllers.ResizeWidgets", {
     });
   }
 
+  , " section_created" : "update_heights"
+
   , update_heights : function() {
     var model = this.options.model
     , heights = model.attr(this.options.heights_token)
