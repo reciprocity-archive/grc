@@ -63,10 +63,26 @@ ul.tree-structure {
     &.pbc-item {
       line-height: 28px;
     }
-    &.title {
+    &.tab-title-holder {
+      padding: 0;
+      border: none;
+      [class^="grcicon-"] {
+        margin-top: 10px;
+        margin-right: 6px;
+      }
+      i {
+        @include opacity(0.4);
+        @include transition(opacity 0.3s ease);
+      }
+      &:hover {
+        background:none;
+        border: none;
+        i {
+          @include opacity(1);
+        }
+      }
       h3 {
-        font-size: 13px;
-        line-height: 24px;
+        padding-left: 10px;
       }
     }
     [class^="grcicon-"] {
@@ -340,10 +356,19 @@ ul.tree-structure {
           }
         }
       }
-      &.title {
+      &.tab-title-holder {
+        padding: 0;
+        border: none;
+        &:hover {
+          background:none;
+          border: none;
+        }
+      }
+      &.no-result {
+        border-bottom: 1px solid $white;
         &:hover {
           background: none;
-          border-bottom: 1px solid $lightGray;
+          border-bottom: 1px solid $white;
         }
       }
       &.simple-item {
