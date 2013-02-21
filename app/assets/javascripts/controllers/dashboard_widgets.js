@@ -48,6 +48,9 @@ can.Control("CMS.Controllers.DashboardWidgets", {
   }
 
   , ".widget-showhide click" : function() {
-    CMS.Models.DisplayPrefs.findAll().done(function(d) { d[0].setShowHide("programs_dash", this.options.object_type, "").save(); });
+    var that = this;
+    CMS.Models.DisplayPrefs.findAll().done(function(d) { 
+      d[0].setShowHide("programs_dash", that.options.object_type, "").save(); 
+    });
   }
 });

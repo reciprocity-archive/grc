@@ -326,12 +326,9 @@ Mustache.registerHelper("pack", function() {
       obj.bind("change", function(attr, how, newVal, oldVal) {
         pack.attr(attr, newVal);
       });
-      objects[i] = obj.serialize();
-    } else {
-        pack.attr(obj);
-    }
+    } 
+    pack.attr(obj.serialize ? obj.serialize() : obj);
   });
-  objects.unshift(pack);
   if(options.hash) {
     can.each(Object.keys(options.hash), function(key) {
       if(typeof options.hash[key] === "function") {
