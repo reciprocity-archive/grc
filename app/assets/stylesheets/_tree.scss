@@ -63,6 +63,12 @@ ul.tree-structure {
     &.pbc-item {
       line-height: 28px;
     }
+    &.title {
+      h3 {
+        font-size: 13px;
+        line-height: 24px;
+      }
+    }
     [class^="grcicon-"] {
       display: inline-block;
       margin-top: 7px;
@@ -334,6 +340,12 @@ ul.tree-structure {
           }
         }
       }
+      &.title {
+        &:hover {
+          background: none;
+          border-bottom: 1px solid $lightGray;
+        }
+      }
       &.simple-item {
         line-height:14px;
         .item-title {
@@ -342,6 +354,11 @@ ul.tree-structure {
         .additional-info {
           font-size:11px;
           color:#999;
+        }
+      }
+      .item-main {
+        a {
+          color:$text;
         }
       }
     }
