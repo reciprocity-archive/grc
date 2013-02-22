@@ -67,7 +67,7 @@
 .row-fluid
   .span6{ :class => error_class(f, :documentation_description) }
     .row-fluid
-      =wrapped_text_area(f, :span12, :documentation_description, :placeholder => "One-sentence explanation of the applicability of this directive, used in mail merge templates.", :rows => "3", :class => "double wysihtml5", :wrapper_div_class => 'wysiwyg-area')
+      =wrapped_text_area(f, :span12, :documentation_description, :placeholder => "Description of documentation", :rows => "3", :class => "double wysihtml5", :wrapper_div_class => 'wysiwyg-area')
 
   #assertionlist.span3{ :class => error_class(f, :assertions) }
     %label{:for => 'control-assertions'} Assertions
