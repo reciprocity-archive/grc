@@ -19,24 +19,37 @@
 %ul.info-list
   %li.float-element
     %label
-      Audit Firm
+      Title
     %span
-      =cycle.audit_firm
-  %li.float-element
-    %label
-      Audit Lead
-    %span
-      =cycle.audit_lead
+      %strong=cycle.title
+  -if cycle.audit_firm != ""
+    %li.float-element
+      %label
+        Audit Firm
+      %span
+        =cycle.audit_firm
+  -if cycle.audit_lead != ""
+    %li.float-element
+      %label
+        Audit Lead
+      %span
+        =cycle.audit_lead
   %li.float-element
     %label
       Created by
     %span
-      =cycle.created_by.nil? ? 'unknown' : cycle.created_by.display_name
+      -if !cycle.created_by.nil?
+        =cycle.created_by.display_name
+      -else
+        unknown
   %li
     %label
       Description
-    %span
+    -if cycle.description != ""
       =display_as_html cycle.description
+    -else
+      .rtf
+        %p.no-data no description available
 
 %section.footer
   .row-fluid

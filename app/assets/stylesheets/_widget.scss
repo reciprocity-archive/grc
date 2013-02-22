@@ -405,7 +405,7 @@
     border-top: 1px solid $lightGray;
     p {
       font-size:11px;
-      font-weight:bold;
+      font-weight:normal;
       margin: 0;
       color:$gray;
       line-height: 20px;
@@ -500,25 +500,36 @@
     @include reset-list();
     margin-bottom: 20px;
     li {
-      //border-bottom:1px solid $lightGray;
-      padding: 6px 0 4px 7px;
+      padding: 4px 0 2px 7px;
       &:last-child {
         border-bottom: none;
       }
       label {
         font-weight: normal;
+        font-size:12px;
         text-transform:uppercase;
         color: $darkGray;
       }
+      span i {
+        @include opacity(0.6);
+      }
       .rtf {
+        border:1px solid darken($lightGray,5%);
+        @include border-radius();
+        padding:6px 16px 6px 6px;
         margin-left: 0;
-        font-size: 11px;
+        font-size: 11px !important;
         ul,
         ol {
+          margin-top:0;
+          padding-top:0;
           li {
             border: none;
-            padding: 0;
+            padding: 0 0 6px 0;
           }
+        }
+        p.no-data {
+          margin-bottom:0;
         }
       }
       &.float-element {
@@ -532,6 +543,7 @@
         span {
           float: left;
           width: 60%;
+          font-size:12px;
         }
       }
     }

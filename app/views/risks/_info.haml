@@ -12,24 +12,30 @@
 %ul.info-list
   %li.float-element
     %label
-      Title
-    %span
-      =instance.title
-  %li.float-element
-    %label
       Code
     %span
-      =instance.slug
+      %strong=instance.slug
   %li.float-element
     %label
-      Direct Link
+      Title
     %span
-      =link_to(instance.url,instance.url,:target => "_blank",:class => "inner-element")
+      %strong=instance.title
   %li
     %label
       Description
-    %span
+    -if instance.description != ""
       =display_as_html instance.description
+    -else
+      .rtf
+        %p.no-data no description available
+  -if instance.url != ""
+    %li.float-element
+      %label
+        Direct Link
+      %span
+        =link_to(instance.url,instance.url,:target => "_blank",:class => "inner-element")
+
+
 
 %section.footer
   .row-fluid

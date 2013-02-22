@@ -5,8 +5,8 @@
 
 -content_for :widget_id, 'system_info_widget'
 
-.information
-  -if has_feature?(:BETA)
+-if has_feature?(:BETA)
+  .information
     -status_counts, status_percentages = [[5,9,2,4], [25,45,10,20]]
     %label
       .pull-right
@@ -30,42 +30,42 @@
     %label
       Code
     %span
-      =system.slug
+      %strong=system.slug
+  %li.float-element
+    %label
+      Title
+    %span
+      %strong=system.title
   %li.float-element
     %label
       Type
     %span
-      =system.type && system.type.title
-  %li.float-element
-    %label
-      System or Process
-    %span
-      =system.is_biz_process? ? 'Process' : 'System'
-  %li.float-element
-    %label
-      Full Title
-    %span
-      =system.title
-  %li.float-element
-    %label
-      Status
-    %span
-    
-  %li.float-element
-    %label
-      Network Zone
-    %span
-      =system.network_zone && system.network_zone.title
-  %li.float-element
-    %label
-      Direct Link
-    %span
-      =link_to(system.url,system.url,:target => "_blank",:class => "inner-element")
+      -if system.is_biz_process?
+        %i.grcicon-process-black
+        Process
+      -else
+        %i.grcicon-system-black
+        System
+  -if system.network_zone
+    %li.float-element
+      %label
+        Network Zone
+      %span
+        =system.network_zone && system.network_zone.title
+  -if system.url != ""
+    %li.float-element
+      %label
+        Direct Link
+      %span
+        =link_to(system.url,system.url,:target => "_blank",:class => "inner-element")
   %li
     %label
       Description
-    %span
+    -if system.description != ""
       =display_as_html system.description
+    -else
+      .rtf
+        %p.no-data no description available
 
 %section.footer
   .row-fluid

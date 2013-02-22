@@ -12,27 +12,32 @@
     %label
       Code
     %span
-      =instance.slug
-  %li.float-element
-    %label
-      Kind
-    %span
-      =instance.kind
+      %strong=instance.slug
   %li.float-element
     %label
       Full Title
     %span
-      =instance.title
+      %strong=instance.title
+  %li.float-element
+    %label
+      Kind
+    %span
+      %i.grcicon-directive-black
+      =instance.kind
   %li
     %label
       Description
-    %span
+    -if instance.description != ""
       =display_as_html instance.description
-  %li.float-element
-    %label
-      Direct link
-    %span
-      =link_to(instance.url, instance.url, :target => "_blank", :class => "inner-element")
+    -else
+      .rtf
+        %p.no-data no description available
+  -if instance.url != ""
+    %li.float-element
+      %label
+        Direct link
+      %span
+        =link_to(instance.url, instance.url, :target => "_blank", :class => "inner-element")
 
 %section.footer
   .row-fluid

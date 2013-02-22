@@ -9,12 +9,14 @@
       .widget-action.pull-right.widget-action-help
         %a{:href => "/help/pbc_list", :'data-toggle' => 'modal-ajax', :title => "Help - What is this?"}
           %i.grcicon-help
-    
-%section.info
-  .row-fluid
-    .span12
-      %h5 Description
-      =display_as_html pbc_list.audit_cycle.description
+
+-if pbc_list.audit_cycle.description != ""    
+  %section.info
+    .row-fluid
+      .span12
+        %br
+        %h5 Audit Description
+        =display_as_html pbc_list.audit_cycle.description
 
 %section.content
   =render :partial => "requests", :locals => { :pbc_list => pbc_list }

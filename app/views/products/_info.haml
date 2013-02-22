@@ -5,8 +5,8 @@
 
 -content_for :widget_id, 'product_info_widget'
 
-.information
-  -if has_feature? :BETA
+-if has_feature? :BETA
+  .information
     .well
       %label
         .pull-right
@@ -26,37 +26,44 @@
     %label
       Code
     %span
-      =product.slug
+      %strong=product.slug
   %li.float-element
     %label
-      Type
+      Title
     %span
-      =product.type && product.type.title
-  %li.float-element
-    %label
-      Full Title
-    %span
-      =product.title
+      %strong=product.title
+  -if product.type
+    %li.float-element
+      %label
+        Type
+      %span
+        =product.type.title
   %li
     %label
       Description
-    %span
+    -if product.description != ""
       =display_as_html product.description
-  %li.float-element
-    %label
-      Direct Link
-    %span
-      =link_to(product.url,product.url,:target => "_blank",:class => "inner-element")
-  %li.float-element
-    %label
-      Effective Date
-    %span
-      =product.start_date && product.start_date.strftime("%m/%d/%y")
-  %li.float-element
-    %label
-      Stop Date
-    %span
-      =product.stop_date && product.stop_date.strftime("%m/%d/%y")
+    -else
+      .rtf
+        %p.no-data no description available
+  -if product.url != ""
+    %li.float-element
+      %label
+        Direct Link
+      %span
+        =link_to(product.url,product.url,:target => "_blank",:class => "inner-element")
+  -if product.start_date
+    %li.float-element
+      %label
+        Effective Date
+      %span
+        =product.start_date.strftime("%m/%d/%y")
+  -if product.stop_date
+    %li.float-element
+      %label
+        Stop Date
+      %span
+        =product.stop_date.strftime("%m/%d/%y")
 
 %section.footer
   .row-fluid
