@@ -10,17 +10,27 @@
     %label
       Code
     %span
-      =control.slug
-  %li.float-element
+      %strong=control.slug
+  -if control.title !=""
+    %li.float-element
+      %label
+        Title
+      %span
+        %strong=control.title
+  -if control.kind
+    %li.float-element
+      %label
+        Kind
+      %span
+        =control.kind.title
+  %li
     %label
-      Type
-    %span
-      =control.type && control.type.title
-  %li.float-element
-    %label
-      Kind
-    %span
-      =control.kind && control.kind.title
+      Description
+    -if control.description != ""
+      =display_as_html control.description
+    -else
+      .rtf
+        %p.no-data no description available
   %li.float-element
     %label
       Fraud-related
@@ -31,45 +41,47 @@
       Significance
     %span
       =control.key_control ? 'Key' : 'Non-key'
-  %li.float-element
-    %label
-      Assertions
-    %span
-      =control.assertions.map(&:name).join(', ')
-  %li.float-element
-    %label
-      Means of Operation
-    %span
-      =control.means && control.means.title
-  %li.float-element
-    %label
-      Confirm Frequency
-    %span
-      =control.verify_frequency && control.verify_frequency.title
-  %li
-    %label
-      Description
-    =display_as_html control.description
-  %li
-    %label
-      Notes
-    =display_as_html control.notes
-  %li.float-element
-    %label
-      Direct Link
-    %span
-      =link_to(control.url,control.url,:target => "_blank",:class => "inner-element")
-        
-  %li.float-element
-    %label
-      Effective Date
-    %span
-      =control.start_date && control.start_date.strftime("%m/%d/%y")
-  %li.float-element
-    %label
-      Stop Date
-    %span
-      =control.stop_date && control.stop_date.strftime("%m/%d/%y")
+  -if control.assertions.count > 0
+    %li.float-element
+      %label
+        Assertions
+      %span
+        =control.assertions.map(&:name).join(', ')
+  -if control.means
+    %li.float-element
+      %label
+        Means of Operation
+      %span
+        =control.means && control.means.title
+  -if control.verify_frequency
+    %li.float-element
+      %label
+        Confirm Frequency
+      %span
+        =control.verify_frequency && control.verify_frequency.title
+  -if control.notes != ""
+    %li
+      %label
+        Notes
+      =display_as_html control.notes
+  -if control.url != ""
+    %li.float-element
+      %label
+        Direct Link
+      %span
+        =link_to(control.url,control.url,:target => "_blank",:class => "inner-element")      
+  -if control.start_date
+    %li.float-element
+      %label
+        Effective Date
+      %span
+        =control.start_date.strftime("%m/%d/%y")
+  -if control.stop_date
+    %li.float-element
+      %label
+        Stop Date
+      %span
+        =control.stop_date.strftime("%m/%d/%y")
 
 %section.footer
   .row-fluid
