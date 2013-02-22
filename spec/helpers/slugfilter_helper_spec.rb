@@ -31,7 +31,7 @@ describe SlugfilterHelper do
     end
 
     it "should properly generate a slugtree given depth" do
-      result = walk_slug_tree(Directive.slugtree([@ap1, @as1, @as2]), 1) do |object, step|
+      result = walk_slug_tree(Directive.slugtree([@ap1, @as1, @as2]), :depth => 1) do |object, step|
 
       end
       result.should have_selector('li#content_ASLUG1')
