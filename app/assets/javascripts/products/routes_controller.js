@@ -14,7 +14,7 @@ can.Control("CMS.Controllers.ProductRoutes", {
     var ids = data.show.split(",");
     $("[data-object-id=" + can.route.attr("parent") + "]")
     .parents("[data-object-id]")
-    .andSelf()
+    .addBack()
     .each(function() {
       //walking up the chain to make sure that each one is visible.
       var $el = $(this).closest("[data-object-id]");

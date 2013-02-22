@@ -116,7 +116,7 @@
 
   $.tmpl.render_data = function($dest, data) {
     // $dest: destination parent element
-    $($dest.parents('[data-template-id]').andSelf().get().reverse()).each(function(i) {
+    $($dest.parents('[data-template-id]').addBack().get().reverse()).each(function(i) {
       var $tmpl = $('#' + $(this).data('template-id'));
       data = $.tmpl.render_data_for_template($tmpl, data);
     });
@@ -170,8 +170,8 @@
   $.fn.tmpl_additems = function(list) {
     return this.each(function() {
       var $this = $(this)
-        , $output;
-      $output = $($.tmpl.render_items($this, list));
+        , output = $.tmpl.render_items($this, list)
+        , $output = $(output.trim());
       ($this.is('ul') ? $this : $this.find('> ul')).append($output);
     });
   };

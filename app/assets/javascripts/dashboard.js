@@ -698,3 +698,16 @@ jQuery(function($) {
     });
   });
 });
+
+//Make all external links open in new window.
+jQuery(function($) {
+  $("body").on("click", "a[href]:not([target])", function(e) {
+    if (!e.isDefaultPrevented()) {
+      if(this.hostname !== window.location.hostname) {
+        e.preventDefault();
+        window.open(this.href);
+      }
+    }
+  });
+});
+
