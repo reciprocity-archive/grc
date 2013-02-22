@@ -273,7 +273,7 @@ $(window).load(function(){
 
   // tree-structure
   
-  $('body').on('click', 'ul.tree-structure .item-main .code, ul.tree-structure .item-main .openclose', function(e) {
+  $('body').on('click', 'ul.tree-structure .item-main .grcobject, ul.tree-structure .item-main .openclose', function(e) {
     var $this = $(this)
       , $main = $this.closest('.item-main')
       , $code = $main.find('.code')
