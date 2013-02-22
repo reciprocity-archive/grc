@@ -57,6 +57,36 @@ ul.tree-structure {
   li {
     line-height:31px;
     border-bottom:1px solid $lightGray;
+    &:hover {
+      background: $treeListBgnd;
+      .objects-count {
+        a {
+          @include opacity(1);
+        }
+      }
+      .item-content {
+        ul.tree-structure {
+          background: $white;
+          li {
+            &:last-child {
+              border-bottom: none;
+            }
+            .objects-count {
+              a {
+                @include opacity(0.3);
+              }
+            }
+            &:hover {
+              .objects-count {
+                a {
+                  @include opacity(1);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
     &:last-child {
       border-bottom:none;
     }
@@ -112,9 +142,6 @@ ul.tree-structure {
         text-decoration: none;
         margin-left: 4px;
         font-weight: bold;
-        &:hover {
-          @include opacity(1);
-        }
       }
     }
     i.grcicon-comment {
@@ -145,7 +172,6 @@ ul.tree-structure {
   }
   .title {
     color:$black;
-    font-weight:bold;
   }
   i.description-inline {
     color:$gray;
@@ -321,7 +347,7 @@ ul.tree-structure {
       display:block;
     }
     ul.tree-structure {
-      margin-left:24px;
+      padding-left:24px;
       border-top:1px solid $lightGray;
     }
     .openclose {

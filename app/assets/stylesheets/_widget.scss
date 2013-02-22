@@ -7,13 +7,11 @@
   border:1px solid $widgetBorder;
   @include transition(box-shadow 0.2s,border-color 0.2s);
   ul.tree-structure {
-    &.simple {
-      li {
-        &:hover {
-          border-bottom: 1px solid $gray;
-          .key {
-            color: $gray;
-          }
+    li {
+      &:hover {
+        border-bottom: 1px solid $gray;
+        .key {
+          color: $gray;
         }
       }
     }
@@ -26,13 +24,11 @@
       }
     }
     ul.tree-structure {
-      &.simple {
-        li {
-          &:hover {
-            border-bottom: 1px solid $governance;
-            .key {
-              color: $governance;
-            }
+      li {
+        &:hover {
+          border-bottom: 1px solid $governance;
+          .key {
+            color: $governance;
           }
         }
       }
@@ -46,13 +42,11 @@
       }
     }
     ul.tree-structure {
-      &.simple {
-        li {
-          &:hover {
-            border-bottom: 1px solid $compliance;
-            .key {
-              color: $compliance;
-            }
+      li {
+        &:hover {
+          border-bottom: 1px solid $compliance;
+          .key {
+            color: $compliance;
           }
         }
       }
@@ -66,13 +60,11 @@
       }
     }
     ul.tree-structure {
-      &.simple {
-        li {
-          &:hover {
-            border-bottom: 1px solid $risk;
-            .key {
-              color: $risk;
-            }
+      li {
+        &:hover {
+          border-bottom: 1px solid $risk;
+          .key {
+            color: $risk;
           }
         }
       }
@@ -86,13 +78,11 @@
       }
     }
     ul.tree-structure {
-      &.simple {
-        li {
-          &:hover {
-            border-bottom: 1px solid $business;
-            .key {
-              color: $business;
-            }
+      li {
+        &:hover {
+          border-bottom: 1px solid $business;
+          .key {
+            color: $business;
           }
         }
       }

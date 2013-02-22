@@ -21,7 +21,7 @@
           %i{ :class => object_icon }
       -elsif object_icon.present?
         %i{ :class => object_icon }
-      %span.title
+      %span.code
         =code
       %span.title
         =title
@@ -36,7 +36,7 @@
           %i{ :class => object_icon }
       -elsif object_icon.present?
         %i{ :class => object_icon }
-      %span.title
+      %span.code
         =code
       %span.title
         =title
@@ -48,13 +48,13 @@
           %i{ :class => object_icon }
       -elsif object_icon.present?
         %i{ :class => object_icon }
-      %span.title
+      %span.code
         =code
       %span.title
         %i.description-inline=description_inline
     .description.inhover
       =display_as_html(description) do
-        %span.title
+        %span.code
           =code
         %br
         %br
