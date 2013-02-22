@@ -12,7 +12,7 @@
 -object_type = nil if local_assigns[:object_type].nil?
 -object_icon = nil if local_assigns[:object_icon].nil?
 
-.span9
+.span8
   -if title.present? && description.present?
     -# Both title and description
     .oneline.expand-on-hover{:rel => "tooltip", :title => "click to view more"}
@@ -67,4 +67,6 @@
       -elsif object_icon.present?
         %i{ :class => object_icon }
       %span.title (No description)
-
+.span1
+  %a.view-more{:href => 'javascript://'}
+    view

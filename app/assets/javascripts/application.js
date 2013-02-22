@@ -175,9 +175,9 @@ jQuery(document).ready(function($) {
     //$this.one('mouseout', function(e) { $this.addClass('oneline'); });
   });*/
 
-  $('body').on('click', '.tree-structure .title, .tree-structure .description', function(e) {
+  $('body').on('click', '.tree-structure .title, .tree-structure .description, .tree-structure .view-more', function(e) {
     var $this = $(this)
-      , $leaf = $this.closest('[class*=span]')
+      , $leaf = $this.closest('[class*=span]').parent().children("[class*=span]:first")
       , $title = $leaf.find('.oneline')
       , $description = $leaf.find('.description')
       ;
