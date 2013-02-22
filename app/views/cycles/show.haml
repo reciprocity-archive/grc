@@ -1,13 +1,14 @@
 -content_for :header do
   %ul.breadcrumbs
-    %li
-      DIRECTIVES
+    %li=link_to "DIRECTIVES", programs_dash_path
+
     %li=link_to @cycle.directive.title, flow_directive_path(@cycle.directive_id)
     %li
       AUDIT
-  %h1
+  %h1.governance.active
+    .grcobject.governance{:rel => "tooltip", :'data-placement'=>"bottom", :title => @cycle.title}
+      %i.grcicon-audit
     %span
-      Audit Manager:
     #{@cycle.title}
 
 -content_for :page_help, 'cycle'
@@ -24,12 +25,12 @@
     #main_column.span8.widget-area
       =render :partial => 'cycles/main',
               :layout => 'layouts/widget_box',
-              :locals => { :cycle => @cycle }
+              :locals => { :cycle => @cycle, :widget_class => "governance"}
 
       -if has_feature?(:BETA)
         =render :partial => 'cycles/scope',
                 :layout => 'layouts/widget_box',
-                :locals => { :cycle => @cycle }
+                :locals => { :cycle => @cycle, :widget_class => "governance"}
 
         =render :partial => 'cycles/workflows',
                 :layout => 'layouts/widget_box',
@@ -42,12 +43,14 @@
     #right_column.span4.widget-area
       =render :partial => 'cycles/info',
               :layout => 'layouts/widget_box',
-              :locals => { :cycle => @cycle, :widget_class => 'secondary' }
+              :locals => { :cycle => @cycle, :widget_class => 'governance' }
+
+      =render :partial => 'cycles/pbclist',
+              :layout => 'layouts/widget_box',
+              :locals => { :cycle => @cycle, :widget_class => 'governance' }
+
               
       =render :partial => 'cycles/more_info',
               :layout => 'layouts/widget_box',
               :locals => { :cycle => @cycle, :widget_class => 'related' }
                 
-      =render :partial => 'cycles/pbclist',
-              :layout => 'layouts/widget_box',
-              :locals => { :cycle => @cycle, :widget_class => 'secondary' }
