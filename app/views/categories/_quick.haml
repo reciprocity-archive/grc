@@ -7,38 +7,40 @@
     %a{ :href => export_flow_categories_path(:format => :csv) }
       %i.grcicon-export
       Export
-  %ul.tree
+  %ul.tree-structure
     -@root_categories.sort_by(&:display_name).each do |root_category|
       -if quick_result
         =render 'base_objects/quick_result', { :item => root_category }
         -root_category.descendants.sort_by(&:display_name).each do |category|
           =render 'base_objects/quick_result', { :item => category }
       -else
-        %li.main
-          .item-identifier
+        %li
+          .item-main
+            .openclose
             .item-title
               .row-fluid
                 .span12
-                  .showhide
-                  %span.addition-info
-                    =root_category.display_name
-            .item-actions
-              %a.btn.btn-mini{ :'data-form-target' => "refresh", :'data-delete-target' => "refresh", :'data-modal-reset' => "reset", :'data-toggle' => "modal-ajax-form", :href => edit_flow_category_path(root_category) }
-                %i.grcicon-edit-new
+                  .oneline
+                    %span.title
+                      =root_category.display_name
+              .item-actions
+                %a.btn.btn-mini{ :'data-form-target' => "refresh", :'data-delete-target' => "refresh", :'data-modal-reset' => "reset", :'data-toggle' => "modal-ajax-form", :href => edit_flow_category_path(root_category) }
+                  %i.grcicon-edit-new
                 
           .item-content
-            %ul.elements
+            %ul.tree-structure
               -root_category.descendants.sort_by(&:display_name).each do |category|
                 %li
-                  .item-identifier
+                  .item-main
                     .item-title
                       .row-fluid
                         .span12
-                          %span.addition-info
-                            =category.display_name
-                    .item-actions
-                      %a.btn.btn-mini{ :'data-form-target' => "refresh", :'data-delete-target' => "refresh", :'data-modal-reset' => "reset", :'data-toggle' => "modal-ajax-form", :href => edit_flow_category_path(category) }
-                        %i.grcicon-edit-new
+                          .oneline
+                            %span.title
+                              =category.display_name
+                      .item-actions
+                        %a.btn.btn-mini{ :'data-form-target' => "refresh", :'data-delete-target' => "refresh", :'data-modal-reset' => "reset", :'data-toggle' => "modal-ajax-form", :href => edit_flow_category_path(category) }
+                          %i.grcicon-edit-new
         -#-root_category.descendants.sort_by(&:display_name).each do |category|
           -# TODO: Predrag said to use inline style for now. Ref. story: #40581877
           %li{:style => "margin-left:15px"}

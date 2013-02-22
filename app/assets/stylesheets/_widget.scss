@@ -10,8 +10,22 @@
     li {
       &:hover {
         border-bottom: 1px solid $gray;
-        .key {
+        .code {
           color: $gray;
+        }
+        .item-content {
+          ul.tree-structure {
+            li {
+              .code {
+                color: $black;
+              }
+              &:hover {
+                .code {
+                  color: $gray;
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -27,8 +41,22 @@
       li {
         &:hover {
           border-bottom: 1px solid $governance;
-          .key {
+          .code {
             color: $governance;
+          }
+          .item-content {
+            ul.tree-structure {
+              li {
+                .code {
+                  color: $black;
+                }
+                &:hover {
+                  .code {
+                    color: $governance;
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -45,8 +73,22 @@
       li {
         &:hover {
           border-bottom: 1px solid $compliance;
-          .key {
+          .code {
             color: $compliance;
+          }
+          .item-content {
+            ul.tree-structure {
+              li {
+                .code {
+                  color: $black;
+                }
+                &:hover {
+                  .code {
+                    color: $compliance;
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -63,8 +105,22 @@
       li {
         &:hover {
           border-bottom: 1px solid $risk;
-          .key {
+          .code {
             color: $risk;
+          }
+          .item-content {
+            ul.tree-structure {
+              li {
+                .code {
+                  color: $black;
+                }
+                &:hover {
+                  .code {
+                    color: $risk;
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -81,8 +137,22 @@
       li {
         &:hover {
           border-bottom: 1px solid $business;
-          .key {
+          .code {
             color: $business;
+          }
+          .item-content {
+            ul.tree-structure {
+              li {
+                .code {
+                  color: $black;
+                }
+                &:hover {
+                  .code {
+                    color: $business;
+                  }
+                }
+              }
+            }
           }
         }
       }

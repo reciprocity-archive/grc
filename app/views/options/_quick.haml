@@ -14,20 +14,20 @@
   -else
 
   -@options.sort_by(&:role).group_by(&:role).each do |role, options_for_role|
-    %ul.tree
-      %li.category
-        %h3
+    %ul.tree-structure.simple
+      %li.tab-title-holder
+        %h3.tab-title
           =role.humanize.titleize
-        %section.content
-          %ul.tree
-            -options_for_role.sort_by(&:title).each do |option|
-              %li.main
-                .item-identifier
-                  .item-title
-                    .row-fluid
-                      .span12
-                        %span.addition-info
-                          =option.title
-                  .item-actions
-                    %a.btn.btn-mini{ :'data-form-target' => "refresh", :'data-delete-target' => "refresh", :'data-modal-reset' => "reset", :'data-toggle' => "modal-ajax-form", :href => edit_flow_option_path(option) }
-                      %i.grcicon-edit-new
+        
+      -options_for_role.sort_by(&:title).each do |option|
+        %li
+          .item-main
+            .item-title
+              .row-fluid
+                .span12
+                  .oneline
+                    %span.title
+                      =option.title
+              .item-actions
+                %a.btn.btn-mini{ :'data-form-target' => "refresh", :'data-delete-target' => "refresh", :'data-modal-reset' => "reset", :'data-toggle' => "modal-ajax-form", :href => edit_flow_option_path(option) }
+                  %i.grcicon-edit-new

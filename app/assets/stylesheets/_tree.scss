@@ -363,7 +363,6 @@ ul.tree-structure {
   &.simple {
     margin-right: 7px;
     .code {
-      color: $green;
       background: none;
       @include border-radius(0);
       border: none;
