@@ -28,6 +28,11 @@
           }
         }
       }
+      &:last-child {
+        &:hover {
+          border-bottom: none;
+        }
+      }
     }
   }
   &.governance {

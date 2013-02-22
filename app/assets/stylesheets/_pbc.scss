@@ -422,6 +422,50 @@ ul.tree-structure {
         margin-top:0;
       }
     }
+    &:hover {
+      border:1px solid darken(#f0f0f0, 5%) !important;
+      ul.add-response,
+      ul.items-list {
+        background:#e8fdd6;
+        li.item {
+          border-bottom:1px solid #cdecb4 !important;
+          &:last-child {
+            border-bottom:none !important;
+          }
+        }
+      }
+      .pbc-item-list {
+        li {
+          &:hover {
+            border-bottom:1px solid #cdecb4 !important;
+            &.inline-add-person,
+            &.toggle-add-person,
+            &.add-meeting {
+              border-bottom:none !important;
+              &:hover {
+                border-bottom:none !important;
+              }
+            }
+            &.inline-add-document,
+            &.toggle-add-document,
+            &.add-meeting {
+              border-bottom:none !important;
+              &:hover {
+                border-bottom:none !important;
+              }
+            }
+          }
+        }
+      }
+      .rtf {
+        ul,
+        ol {
+          li {
+            border-bottom: none !important;
+          }
+        }
+      }
+    }
     
   }
   ul.pbc-requests {
@@ -440,6 +484,9 @@ ul.tree-structure {
         .item-actions {
           padding-right:4px;
         }
+      }
+      &:hover {
+        background: transparent;
       }
     }
     h4.pbc-title {
