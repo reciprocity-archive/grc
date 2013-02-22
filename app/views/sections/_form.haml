@@ -47,7 +47,7 @@
 .row-fluid
   .span12{:class => error_class(f, :url)}
     %label{:for => "section-url"} URL for this section (optional)
-    %input#section-link.span12{:placeholder => "http://", :type => "text", :value => nil, :name => 'section[url]'}
+    %input#section-link.span12{:placeholder => "http://", :type => "text", :value => f.object.url, :name => 'section[url]'}
     =error_messages_inline(f, :url)
 
 =render :partial => "shared/wysihtml5"
