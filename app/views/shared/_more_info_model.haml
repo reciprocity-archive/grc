@@ -9,10 +9,9 @@
 
 -content_for :widget_id, "#{model_name}_more_info_widget"
 
-%ul.tree
-  %li.category
-    =render :partial => 'documents/object_list',
-            :locals  => { :object => instance }
-  %li.category
-    =render :partial => 'people/object_list',
-            :locals  => { :object => instance }
+%ul.tree-structure.simple
+  =render :partial => 'documents/object_list',
+          :locals  => { :object => instance }
+
+  =render :partial => 'people/object_list',
+          :locals  => { :object => instance }

@@ -5,10 +5,9 @@
 
 -content_for :widget_id, 'program_more_info_widget'
 
-%ul.tree
-  %li.category
-    =render :partial => 'documents/object_list',
-            :locals  => { :object => directive }
-  %li.category
-    =render :partial => 'people/object_list',
-            :locals  => { :object => directive }
+%ul.tree-structure.simple  
+  =render :partial => 'documents/object_list',
+          :locals  => { :object => directive }
+
+  =render :partial => 'people/object_list',
+          :locals  => { :object => directive }

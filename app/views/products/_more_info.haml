@@ -5,10 +5,9 @@
 
 -content_for :widget_id, 'product_more_info_widget'
 
-%ul.tree
-  %li.category
-    =render :partial => 'documents/object_list',
-            :locals  => { :object => product }
-  %li.category
-    =render :partial => 'people/object_list',
-            :locals  => { :object => product }
+%ul.tree-structure.simple
+  =render :partial => 'documents/object_list',
+          :locals  => { :object => product }
+
+  =render :partial => 'people/object_list',
+          :locals  => { :object => product }

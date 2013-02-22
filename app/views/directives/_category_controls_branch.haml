@@ -19,7 +19,7 @@
                   %a.btn.btn-mini.pull-right{ :href => flow_control_path(control), :title => 'View Control' }
                     %i.grcicon-goto
     -if children && children.size > 0
-      %ul.tree
+      %ul.tree-structure
         -children.each do |subcategory, subchildren, subcontrols|
           =render :partial => 'category_controls_branch',
                   :locals => { :category => subcategory, :children => subchildren, :controls => subcontrols }

@@ -14,7 +14,7 @@
     -next if scs.empty?
     .system<
       %div{:class => :systemhead, :title => system.slug}=system.title
-      .tree
+      .tree-structure
         -scs.each do |sc|
           =render :partial => 'closed_control', :locals => {:sc => sc}
       .docs.collapsible

@@ -148,6 +148,33 @@ ul.tree-structure {
       @include opacity(0.4);
     }
   }
+  .cat-parent {
+    color: $darkGray;
+    font-size: 11px;
+    display: block;
+    line-height: 18px;
+    padding-top: 5px;
+  }
+  .cat-name {
+    display: block;
+    line-height: 18px;
+    padding-bottom: 5px;
+  }
+  .option {
+    font-size: 11px;
+    font-weight: bold;
+  }
+  .additional-info {
+    a {
+      color: $link;
+    }
+  }
+  .role {
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: $green;
+  }
   .progress {
     line-height:16px;
     margin:7px 0 0 0;
@@ -414,6 +441,11 @@ ul.tree-structure {
         a {
           color:$text;
         }
+        .addition-info {
+          a {
+            color: $link;
+          }
+        }
       }
     }
     .item-title {
@@ -442,108 +474,6 @@ ul.tree-structure {
       margin-top:0;
     }
   }
-}
-
-ul.tree {
-  @include reset-list();
-  li.category {
-    background:$lightGray;
-    margin-bottom:4px;
-    @include border-radius();
-    position: relative;
-    h3 {
-      border:1px solid darken($lightGray,5%);
-      color:$gray;
-      font-size:11px;
-      line-height: 14px;
-      text-transform:uppercase;
-      font-weight:normal;
-      padding:5px 6px;
-      @include text-shadow(0 1px 1px $white);
-      @include border-radius(4px 4px 0 0);
-      span {
-        font-weight: bold;
-        &.sub-title {
-          font-weight: normal;
-          font-size: 10px;
-          text-transform: none;
-          display: block;
-          line-height: 14px;
-        }
-      }
-    }
-    .role {
-      font-size: 11px;
-      font-weight: bold;
-      text-transform: uppercase;
-      color: $green;
-    }
-    .item-actions {
-      line-height:14px;
-      position:absolute;
-      right:4px;
-      top:4px;
-      @include opacity(0.4);
-      @include transition(opacity 0.2s);
-    }
-    .content {
-      @include border-radius(0 0 4px 4px);
-      border:1px solid darken($lightGray,5%);
-      border-top:none;
-      padding:0;
-    }
-    .two-row {
-      .main {
-        .key {
-          color: $darkGray;
-          font-size: 11px;
-          display: block;
-          line-height: 18px;
-          padding-top: 5px;
-        }
-        .addition-info {
-          display: block;
-          line-height: 18px;
-          padding-bottom: 5px;
-        }
-      }
-    }
-    &:hover {
-      background:darken($lightGray,5%);
-      h3 {
-        border:1px solid darken($lightGray,7%);
-        color:darken($gray,10%);
-      }
-      .content {
-        border-color:darken($lightGray,7%);
-      }
-    }
-  }
-  li.main {
-    border-bottom:1px solid $lightGray;
-    line-height:30px;
-    padding:0 6px;
-    &:last-child {
-     border-bottom:none; 
-    }
-  }
-  .item-content {
-    display:none;
-    padding:0 0 12px 0;
-  }
-  .rtf {
-    line-height:14px;
-    padding-right:40px;
-    color:$text;
-    font-size:11px;
-    margin-left:22px;
-  }
-  p {
-    line-height:14px;
-    color:$text;
-    font-size:11px;
-  }
-  
 }
 
 .item-identifier {

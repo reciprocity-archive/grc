@@ -5,14 +5,12 @@
 
 -content_for :widget_id, "control_more_info_widget"
 
-%ul.tree
-  %li.category
-    =render :partial => 'categories/object_list',
-            :locals  => { :object => control, :scope_id => Control::CATEGORY_TYPE_ID }
-            
-  %li.category
-    =render :partial => 'documents/object_list',
-            :locals  => { :object => control }
-  %li.category
-    =render :partial => 'people/object_list',
-            :locals  => { :object => control }
+%ul.tree-structure.simple
+  =render :partial => 'categories/object_list',
+          :locals  => { :object => control, :scope_id => Control::CATEGORY_TYPE_ID }
+          
+  =render :partial => 'documents/object_list',
+          :locals  => { :object => control }
+          
+  =render :partial => 'people/object_list',
+          :locals  => { :object => control }

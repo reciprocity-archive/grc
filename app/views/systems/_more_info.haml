@@ -5,11 +5,9 @@
 
 -content_for :widget_id, 'system_more_info_widget'
 
-%ul.tree
-  %li.category
-    =render :partial => 'documents/object_list',
-            :locals  => { :object => system }
-            
-  %li.category
-    =render :partial => 'people/object_list',
-            :locals  => { :object => system }
+%ul.tree-structure.simple
+  =render :partial => 'documents/object_list',
+          :locals  => { :object => system }
+          
+  =render :partial => 'people/object_list',
+          :locals  => { :object => system }

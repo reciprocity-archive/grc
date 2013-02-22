@@ -1,34 +1,41 @@
 -# locals: object
 -all_object_people = object.object_people.all
 
-.js-list-container-title
-  %h3
-    People
-    %span{:class => "grc-badge #{all_object_people.count.zero? ? "no-object" : ""}"}
-      (#{all_object_people.count})
-      
-  .item-actions
-    %a{:href => list_edit_flow_object_people_path(:object_type => object.class.name, :object_id => object.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#personList', :'data-modal-class' => 'modal-wide'}
-      %i.grcicon-edit-new
-
-%section.content
+%li.tab-title-holder
+  .item-main
+    .item-title
+      .row-fluid
+        .span12
+          .js-list-container-title
+            %h3.tab-title
+              People
+              %span{:class => "grc-badge #{all_object_people.count.zero? ? "no-object" : ""}"}
+                (#{all_object_people.count})
+              %a.pull-right{:href => list_edit_flow_object_people_path(:object_type => object.class.name, :object_id => object.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#personList', :'data-modal-class' => 'modal-wide'}
+                %i.grcicon-edit-new
 
   %script#person_list_item{ :type => 'text/html', :'data-member' => 'object_person' }
-    %li.controlSlot.main{ :'data-id' => '<%= person.id %>' }
-      .item-identifier
+    %li.controlSlot{ :'data-id' => '<%= person.id %>' }
+      .item-main
         .item-title
-          %span.addition-info
-            <%= person.name || '&nbsp' %>
-            %span.role
-              <%= role %>
+          .row-fluid
+            .span12
+              .oneline
+                %span.addition-info
+                  <%= person.name || '&nbsp' %>
+                  %span.role
+                    <%= role %>
 
-  %ul#personList.tree{ :'data-template-id' => 'person_list_item' }
+  %ul#personList.tree-structure{ :'data-template-id' => 'person_list_item' }
     -all_object_people.each do |object_item|
       -item = object_item.person
-      %li.main{ :'data-id' => item.id }
-        .item-identifier
+      %li{ :'data-id' => item.id }
+        .item-main
           .item-title
-            %span.addition-info
-              =item.name || '&nbsp;'.html_safe
-              %span.role
-                =object_item.role
+            .row-fluid
+              .span12
+                .oneline
+                  %span.addition-info
+                    =item.name || '&nbsp;'.html_safe
+                    %span.role
+                      =object_item.role
