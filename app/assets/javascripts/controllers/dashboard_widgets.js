@@ -34,7 +34,7 @@ can.Control("CMS.Controllers.DashboardWidgets", {
     can.view(this.options.widget_view, this.options, function(frag) {
       that.element.html(frag);
       CMS.Models.DisplayPrefs.findAll().done(function(d) {
-        if(d[0].getCollapsed("programs_dash", that.options.object_type)) 
+        if(d[0].getCollapsed("programs_dash", that.element.attr("id"))) 
           that.element.css("height", "").find(".widget-showhide > a").showhide("hide");
       });
       that.element
@@ -54,16 +54,6 @@ can.Control("CMS.Controllers.DashboardWidgets", {
     var parent = this.element.parent();
     this.element.remove();
     parent.trigger("sortremove");
-  }
-
-  , ".widget-showhide click" : function(el, ev) {
-    var that = this;
-    //animation hasn't completed yet, so collapse state is inverse of whether it's actually collapsed right now.
-    var collapse = that.element.find(".content:first").is(":visible");
-    CMS.Models.DisplayPrefs.findAll().done(function(d) { 
-      collapse ? that.element.css("height", "") : that.element.css("height", d[0].getWidgetHeight("programs_dash", that.element.attr("id")))
-      d[0].setCollapsed("programs_dash", that.options.object_type, collapse);
-    });
   }
 
 });

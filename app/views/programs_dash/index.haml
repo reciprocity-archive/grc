@@ -16,11 +16,11 @@
     #left_column.span6.widget-area
       =render :partial => 'governance',
               :layout => 'layouts/widget_box',
-              :locals => { :programs => @programs, :widget_class => "governance widget-tabs" }
+              :locals => { :programs => @programs, :widget_class => "governance widget-tabs", :collapsible => true }
               
       =render :partial => 'risk',
               :layout => 'layouts/widget_box',
-              :locals => { :programs => @programs, :widget_class => "risk widget-tabs" }
+              :locals => { :programs => @programs, :widget_class => "risk widget-tabs", :collapsible => true }
               
               
       %section.widget-add-placeholder
@@ -86,11 +86,11 @@
     #right_column.span6.widget-area
       =render :partial => 'compliance',
               :layout => 'layouts/widget_box',
-              :locals => { :widget_class => "compliance widget-tabs" }
+              :locals => { :widget_class => "compliance widget-tabs", :collapsible => true }
               
       =render :partial => 'business_objects',
               :layout => 'layouts/widget_box',
-              :locals => { :widget_class => "business widget-tabs" }
+              :locals => { :widget_class => "business widget-tabs", :collapsible => true }
             
       -if has_feature? :BETA
         =render :partial => 'design/templates/riskWidgetGap'

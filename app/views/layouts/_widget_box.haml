@@ -21,6 +21,9 @@
         -#.widget-action.pull-right
           %a.remove{:href => "#"}
             %i.grcicon-x-white
+        -if !local_assigns[:collapsible].nil?
+          .widget-action.pull-right.widget-showhide
+            %a.active{ :href=>"javascript://"}
         -if !help_path.blank?
           .widget-action.pull-right.widget-action-help
             %a{:href => "/help/#{help_path}", :'data-toggle' => 'modal-ajax', :rel => "tooltip", :title => "Help?", :'data-placement'=>"top"}

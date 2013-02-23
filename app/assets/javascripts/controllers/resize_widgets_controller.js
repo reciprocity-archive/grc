@@ -118,36 +118,41 @@ can.Control("CMS.Controllers.ResizeWidgets", {
         });
         return ch;
       };
+    
 
     $c.each(function(i, child) {
       var $gcs = $(child).find("section[id]");
       $gcs.each(function(j, grandchild) {
-        if(page_heights.attr($(grandchild).attr("id"))) {
-          var sh = page_heights.attr($(grandchild).attr("id"));
-          $(grandchild).css("height", sh)
-          .children(".content").css("height", content_height_func);
-
+        if(that.options.model.getCollapsed("programs_dash", $(grandchild).attr("id"))) {
+          $(grandchild).css("height", "").find(".widget-showhide > a").showhide("hide");
         } else {
-          // missing a height.  redistribute evenly but don't increase the size of anythng.
-          var visible_ht = Math.floor($(window).height() - $(child).offset().top) - 10
-          , split_ht = visible_ht / $gcs.length
-          , col_ht = $(child).height();
-          $shrink_these = $gcs.filter(function() { return $(this).height() > split_ht });
-          $shrink_these.each(function(i, grandchild) {
-            var $gc = $(grandchild);
-            var this_split_ht = split_ht - parseInt($gc.css("margin-top")) - (parseInt($gc.prev($gcs).css("margin-bottom")) || 0);
-            $gc.attr("height", this_split_ht).children(".content").css("height", content_height_func);
-            page_heights.attr($gc.attr("id"), this_split_ht);
-            col_ht = $(child).height() + $(child).offset().top;
-          });
-          $gcs.not($shrink_these).each(function(i, grandchild) {
-            var $gc = $(grandchild);
-            if(!page_heights.attr($gc.attr("id"))) {
-              page_heights.attr($gc.attr("id"), $gc.height());
-            }
-          });
-          dirty = true;
-          return false;
+          if(page_heights.attr($(grandchild).attr("id"))) {
+            var sh = page_heights.attr($(grandchild).attr("id"));
+            $(grandchild).css("height", sh)
+            .children(".content").css("height", content_height_func);
+
+          } else {
+            // missing a height.  redistribute evenly but don't increase the size of anythng.
+            var visible_ht = Math.floor($(window).height() - $(child).offset().top) - 10
+            , split_ht = visible_ht / $gcs.length
+            , col_ht = $(child).height();
+            $shrink_these = $gcs.filter(function() { return $(this).height() > split_ht });
+            $shrink_these.each(function(i, grandchild) {
+              var $gc = $(grandchild);
+              var this_split_ht = split_ht - parseInt($gc.css("margin-top")) - (parseInt($gc.prev($gcs).css("margin-bottom")) || 0);
+              $gc.attr("height", this_split_ht).children(".content").css("height", content_height_func);
+              page_heights.attr($gc.attr("id"), this_split_ht);
+              col_ht = $(child).height() + $(child).offset().top;
+            });
+            $gcs.not($shrink_these).each(function(i, grandchild) {
+              var $gc = $(grandchild);
+              if(!page_heights.attr($gc.attr("id"))) {
+                page_heights.attr($gc.attr("id"), $gc.height());
+              }
+            });
+            dirty = true;
+            return false;
+          }
         }
       });
     });
@@ -389,6 +394,17 @@ can.Control("CMS.Controllers.ResizeWidgets", {
     .attr(this.options.heights_token)
     .attr(this.options.page_token)
     .attr($(ui.element).attr("id"), ui.size.height);
+  }
+
+  , ".widget-showhide click" : function(el, ev) {
+    var that = this;
+    //animation hasn't completed yet, so collapse state is inverse of whether it's actually collapsed right now.
+    var $section = el.closest("section[id]");
+    var collapse = $section.find(".content:first").is(":visible");
+    CMS.Models.DisplayPrefs.findAll().done(function(d) { 
+      collapse ? $section.css("height", "") : $section.css("height", d[0].getWidgetHeight("programs_dash", $section.attr("id")))
+      d[0].setCollapsed("programs_dash", $section.attr("id"), collapse);
+    });
   }
 
 });
