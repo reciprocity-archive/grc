@@ -703,7 +703,7 @@ jQuery(function($) {
 jQuery(function($) {
   $("body").on("click", "a[href]:not([target])", function(e) {
     if (!e.isDefaultPrevented()) {
-      if(this.hostname !== window.location.hostname) {
+      if(/^http/.test(this.protocol) && this.hostname !== window.location.hostname) {
         e.preventDefault();
         window.open(this.href);
       }
