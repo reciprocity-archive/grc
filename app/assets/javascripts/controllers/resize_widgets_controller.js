@@ -11,6 +11,7 @@ can.Control("CMS.Controllers.ResizeWidgets", {
     , total_columns : 12
     , default_layout : null
     , page_token : window.location.pathname.substring(1, (window.location.pathname + "/").indexOf("/", 1))
+    , minimum_widget_height : 37
   }
 }, {
 
@@ -113,6 +114,7 @@ can.Control("CMS.Controllers.ResizeWidgets", {
     , $c = $(this.element).children(".widget-area")
     , content_height_func = function() {
         var ch = $(this).parent().height() - parseInt($(this).parent().css("margin-bottom"));
+        ch = Math.max(ch, that.options.minimum_widget_height)
         $(this).siblings().each(function() {
           ch -= $(this).height();
         });
@@ -390,10 +392,16 @@ can.Control("CMS.Controllers.ResizeWidgets", {
   }
 
   , " resizestop" : function(el, ev, ui) {
+    var ht = ui.size.height;
+    if(ht < this.options.minimum_widget_height) {
+      ht = this.options.minimum_widget_height;
+      $(ui.element).css("height", ht);
+    }
+
     this.options.model
     .attr(this.options.heights_token)
     .attr(this.options.page_token)
-    .attr($(ui.element).attr("id"), ui.size.height);
+    .attr($(ui.element).attr("id"), ht);
   }
 
   , ".widget-showhide click" : function(el, ev) {

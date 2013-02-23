@@ -150,17 +150,21 @@ jQuery(document).ready(function($) {
 
   function showhide(command) {
 
-    var $this = $(this);
-        $content = $this.closest(".widget").find(".content")
+    var $this = $(this)
+        , $content = $this.closest(".widget").find(".content")
+        , $filter = $this.closest(".widget").find(".filter");
+
     if(typeof command === "undefined" || command === "toggle") {
       command = $this.hasClass("active") ? "hide" : "show";
     }
 
     if(command === "hide") {
       $content.slideUp();
+      $filter.slideUp();
       $this.removeClass("active");
     } else if(command === "show") {
       $content.slideDown();
+      $filter.slideDown();
       $this.addClass("active");
     }
 
