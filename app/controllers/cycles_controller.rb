@@ -11,7 +11,7 @@ class CyclesController < BaseObjectsController
       allow :create, :create_cycle
     end
 
-    actions :show do
+    actions :show, :tooltip do
       allow :read, :read_cycle, :of => :cycle
     end
 
@@ -22,7 +22,7 @@ class CyclesController < BaseObjectsController
 
   layout 'dashboard'
 
-  no_base_action :index, :tooltip
+  no_base_action :index
 
   def new_object_path
   end

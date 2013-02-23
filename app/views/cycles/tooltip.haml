@@ -1,0 +1,47 @@
+
+-content_for :tooltip_title do
+  .row-fluid
+    .span10
+      %h3
+        %i{:class => "grcicon-audit"}
+        %span=@cycle.title
+    .span2
+      %a.btn.btn-mini.pull-right{:href => flow_cycle_path(@cycle), :rel => "tooltip", :title => "View/Edit Audit Cycle"} 
+        %i.grcicon-goto
+
+.row-fluid
+  .span6
+    %h4 Firm
+    =@cycle.audit_firm
+  .span6
+    %h4 Contact
+    =@cycle.audit_lead
+%br  
+.row-fluid
+  .span12
+    %h4 Description
+    -if @cycle.description != ""
+      =display_as_html @cycle.description
+    -else
+      .rtf
+        %p.no-data No description available
+
+.row-fluid
+  -ca_count, rq_count, status_counts, status_percentages = @cycle.ca_request_stats
+  %strong Requests
+  #{rq_count} in #{ca_count} control assessment#{ca_count == 1 ? "" : "s"}
+  .progress.progress-higher
+    -["bar-info", "bar-danger", "bar-warning", "bar-danger", "bar-success"].each_with_index do |cssclass, i|
+      -status = Request.statuses[i]
+      -if status_counts[status] > 0
+        .bar{:class => cssclass, :rel => "tooltip", :'data-placement' => "top", :title => "#{status} (#{status_counts[status]})", :'data-percentage' => status_percentages[status], :style => "width: #{status_percentages[status]}%"}
+          =status_counts[status]
+
+
+.row-fluid
+  .span6.created
+    %strong Created:
+    =display_time(@cycle.created_at)
+  .span6.updated
+    %strong Updated:
+    =display_time(@cycle.updated_at)

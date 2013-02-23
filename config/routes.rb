@@ -33,6 +33,7 @@ CmsRails::Application.routes.draw do
 
   resources :cycles, :as => 'flow_cycles', :only => [:show, :new, :edit, :create, :update, :destroy] do
     member do
+      get 'tooltip'
       get 'delete'
     end
   end

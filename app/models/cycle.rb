@@ -41,4 +41,22 @@ class Cycle < ActiveRecord::Base
     userid = Version.where({:item_id => self[:id], :item_type => self.class.name}).first[:whodunnit] rescue nil
     userid.nil? ? modified_by : Person.where({:id => userid}).first
   end
+
+  def ca_request_stats
+    cas = []
+    rqs = []
+    scs = {}
+    total_sc = 0
+    self.pbc_lists.each do |pbc_list|
+      cas.concat pbc_list.requests.map{|rq| rq.control_assessment}
+      rqs.concat pbc_list.requests
+      status_counts, status_percentages = pbc_list.request_stats
+      Request.statuses.each do |status|
+        scs[status] = (scs[status].nil? ? 0 : scs[status]) + status_counts[status]
+        total_sc += status_counts[status]
+      end
+    end
+    cas = cas.uniq
+    [cas.count, rqs.count, scs, scs.merge(scs){|k, sc| total_sc == 0 ? 0 : sc * 100 / total_sc}]
+  end
 end
