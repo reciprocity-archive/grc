@@ -108,7 +108,15 @@ jQuery(document).ready(function($) {
     // force the 'enter' event.
     if (!$(e.currentTarget).data('sticky_popover')) {
       $(e.currentTarget)
-        .sticky_popover($.extend({}, defaults, { trigger: 'sticky-hover' }))
+        .sticky_popover($.extend({}, defaults, { 
+          trigger: 'sticky-hover' 
+          , placement : function() {
+            if(this.$element.closest(".widget-area:first-child").length)
+              return "right";
+            else
+              return "left";
+          }
+        }))
         .triggerHandler(e);
     }
   });
