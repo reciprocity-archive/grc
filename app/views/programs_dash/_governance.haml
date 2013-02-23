@@ -14,8 +14,8 @@
 
 .tabbable.tabs-left{ :id => quick_result ? nil : "quick_find" }
   %ul.nav.nav-tabs
-    %li.active=link_to '<i class="grcicon-program-black"></i> Programs'.html_safe, "##{prefix}_programs", :data => { :'tab-href' => flow_programs_path(:quick => true, :qr => quick_result), :toggle => 'tab' }
-    %li=link_to '<i class="grcicon-directive-black"></i> Directives'.html_safe, "##{prefix}_directives", :data => { :'tab-href' => flow_directives_path(:quick => true, :qr => quick_result), :toggle => 'tab' }
+    %li.active=link_to '<i class="grcicon-program-black"></i> Programs <span class="item-count"></span>'.html_safe, "##{prefix}_programs", :data => { :'tab-href' => flow_programs_path(:quick => true, :qr => quick_result), :toggle => 'tab' }
+    %li=link_to '<i class="grcicon-directive-black"></i> Directives <span class="item-count"></span>'.html_safe, "##{prefix}_directives", :data => { :'tab-href' => flow_directives_path(:quick => true, :qr => quick_result), :toggle => 'tab' }
 
   .tab-content
     .tab-pane{ :id => "#{prefix}_programs" }

@@ -138,7 +138,9 @@ jQuery(function($) {
 
       $(pane).load(href, function(data, status, xhr) {
         $tab.data('tab-loaded', true);
-        $(this).html(data).trigger("loaded", xhr, data);
+        var $data = $(data);
+        $(e.target).find(".item-count").html("(" + $data.find("li").length + ")");
+        $(this).html($data).trigger("loaded", xhr, data);
       });
     }
   });
@@ -273,6 +275,11 @@ jQuery(function($) {
       .removeClass('active')
       .find('> a')
       .tab('show');
+    $($tab.find('> a').attr("href")).one("loaded", function() {
+      setTimeout(function() {
+        $tab.siblings().find("> a").trigger("show"); //load all the others for counts after this one is showing
+      }, 100);
+    })
   });
   //$('.tabbable > ul > li:first-child > a').tab('show');
 });
