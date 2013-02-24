@@ -103,10 +103,11 @@ jQuery(function($) {
 
   // expandAll and shrinkAll buttons
   $('body').on('click', '.tabbable a.expandAll', function(e) {
-    $(this).closest('.tabbable').find('.tab-pane:visible').find('.collapse').collapse({ toggle: false }).collapse('show');
+    $(this).closest('.tabbable').find('.tab-pane.active .openclose:not(.active), .tab-pane.active .tree-structure .description-inline:not(.out)').click();
+
   });
   $('body').on('click', '.tabbable a.shrinkAll', function(e) {
-    $(this).closest('.tabbable').find('.tab-pane:visible').find('.collapse').collapse({ toggle: false }).collapse('hide');
+    $(this).closest('.tabbable').find('.tab-pane.active .openclose.active, .tab-pane.active .tree-structure .description.in').click();
   });
 
   // Tabs via AJAX on 'Quick Find'

@@ -25,6 +25,15 @@
     %li.active=link_to '<i class="grcicon-directive-black"></i>Directives'.html_safe, '#directives', :data => { :toggle => 'tab', :'tab-href' => flow_directives_path(:program_id => instance.id, :tree => true, :search_sections => true) }
     %li=link_to '<i class="grcicon-control-black"></i>Controls'.html_safe, '#controls', :data => { :toggle => 'tab', :'tab-href' => flow_controls_path(:program_id => instance.id, :list => true) }
     -#%li=link_to '<i class="grcicon-reg-map"></i>Combo'.html_safe, '#combo', :data => { :toggle => 'tab', :'tab-href' => flow_sections_path(:program_id => instance.id, :combo => true) }
+
+  .action-items
+    %a.btn.shrinkAll
+      %i.grcicon-normal-black
+      Shrink All
+    %a.btn.expandAll
+      %i.grcicon-wide-black
+      Expand All
+
   .tab-content
     #directives.tab-pane
     #controls.tab-pane
