@@ -332,6 +332,12 @@ jQuery(document).ready(function($) {
       $('.container-fluid').addClass('resizable').css('width', width - containerDelta);
       $(this).closest('.menu').find('.screen-size span').text('100%');
     }
+
+    if(width < 720) {
+      $(".quick-search-results").css("width", width);
+    } else {
+      $(".quick-search-results").css("width", "");      
+    }
   });
 
   $('body').on('click', '.full-view', function(e) {

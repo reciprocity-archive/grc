@@ -1,3 +1,4 @@
+
 .quick-search-results {
   display: none;
   position: absolute;
@@ -179,5 +180,29 @@
         }
       }
     }
+  }
+}
+
+@media screen and (max-width: 556px) {
+  .quick-search-results {
+    left: 0;
+    max-width: 300%;
+    position:fixed;
+  }
+}
+
+@media screen and (max-width: 730px) and (min-width: 557px) {
+  .quick-search-results {
+    left: 0;
+    position:fixed;
+    max-width: 556px;
+  }
+}
+
+@media screen and (max-width: 776px) and (min-width: 731px) {
+  .quick-search-results {
+    right: 0;
+    left: inherit;
+    position:absolute;
   }
 }
