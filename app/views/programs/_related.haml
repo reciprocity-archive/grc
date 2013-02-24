@@ -27,6 +27,13 @@
                 #{table_name.titleize}
                 %span
                   #{rels_count}
+        .action-items
+          %a.btn.shrinkAll
+            %i.grcicon-normal-black
+            Shrink All
+          %a.btn.expandAll
+            %i.grcicon-wide-black
+            Expand All
         .tab-content
           -impact_scope.each do |model, rels|
             .tab-pane{:id => "related-#{model.underscore.pluralize}-pane"}

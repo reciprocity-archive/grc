@@ -452,37 +452,42 @@
       }
     }
   }
+  .action-items {
+    text-align: right;
+    margin-top: 5px;
+    margin-right: 10px;
+    a {
+      display: inline-block;
+      cursor: pointer;
+      text-decoration: none;
+      margin-left: 10px;
+      font-size: 11px;
+      line-height: 16px;
+      color: $gray;
+      @include transition(color 0.2s ease-in-out);
+      i {
+        @include opacity(0.4);
+        @include transition(opacity 0.2s ease-in-out);
+      }
+      &:hover {
+        color: $black;
+        i {
+          @include opacity(1);
+        }
+      }
+    }
+  }
   .tabbable {
     position: relative;
     .action-items {
       position: absolute;
-      top: 5px;
+      top: 0;
       right: 0;
       margin-right: 10px;
       &.action-below {
         position: static;
         margin-bottom: 10px;
         text-align: right;
-      }
-      a {
-        display: inline-block;
-        cursor: pointer;
-        text-decoration: none;
-        margin-left: 10px;
-        font-size: 11px;
-        line-height: 16px;
-        color: $gray;
-        @include transition(color 0.2s ease-in-out);
-        i {
-          @include opacity(0.4);
-          @include transition(opacity 0.2s ease-in-out);
-        }
-        &:hover {
-          color: $black;
-          i {
-            @include opacity(1);
-          }
-        }
       }
     }
   }

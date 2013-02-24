@@ -27,5 +27,13 @@
               %i.grcicon-add-new
               Control
 
+.action-items
+  %a.btn.shrinkAll
+    %i.grcicon-normal-black
+    Shrink All
+  %a.btn.expandAll
+    %i.grcicon-wide-black
+    Expand All
+
 %ul.tree-structure#regulations
   =render :partial => 'sections', :locals => { :sections => sections, :expanded => true }

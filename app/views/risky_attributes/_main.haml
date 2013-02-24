@@ -16,6 +16,14 @@
           %a.widgetbtn.btn.btn-mini{ :href => list_edit_flow_risk_risky_attributes_path(:risky_attribute_id => risky_attribute.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :rel => 'tooltip', :'data-placement' => 'left', :title => 'Link risks to this attribute', :'data-modal-class' => 'modal-wide' }
             %i.grcicon-link-new
 
+.action-items
+  %a.btn.shrinkAll
+    %i.grcicon-normal-black
+    Shrink All
+  %a.btn.expandAll
+    %i.grcicon-wide-black
+    Expand All
+
 %ul.tree-structure
   -risks.each_with_index do |risk, i|
     -id_prefix = "risk-#{i}"

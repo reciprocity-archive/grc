@@ -15,6 +15,14 @@
     %li=link_to 'Sections', '#regulations', :data => { :toggle => 'tab', :'tab-href' => sections_flow_control_path(control) }
     %li=link_to 'Risks', '#risks', :data => { :toggle => 'tab', :'tab-href' => risks_flow_control_path(control) }
 
+  .action-items
+    %a.btn.shrinkAll
+      %i.grcicon-normal-black
+      Shrink All
+    %a.btn.expandAll
+      %i.grcicon-wide-black
+      Expand All
+
   .tab-content
     #systems.tab-pane
     #controls.tab-pane

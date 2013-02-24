@@ -28,6 +28,14 @@
                 "data-refresh-time" => 60 }
                 %i{:class => icon }
                 #{table_name.titleize}
+        .action-items
+          %a.btn.shrinkAll
+            %i.grcicon-normal-black
+            Shrink All
+          %a.btn.expandAll
+            %i.grcicon-wide-black
+            Expand All
+
   .tab-content
     -models.each do |model|
       .tab-pane{:id => "related-#{model.underscore.pluralize}-pane"}
