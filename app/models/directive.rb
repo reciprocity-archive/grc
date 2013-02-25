@@ -67,6 +67,7 @@ class Directive < ActiveRecord::Base
     Directive::META_KINDS.each do |meta_kind, kinds|
       return meta_kind if kinds.include?(kind.to_s)
     end
+    nil
   end
 
   def self.kinds_for(meta_kind)
