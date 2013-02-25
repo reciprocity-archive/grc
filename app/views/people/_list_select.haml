@@ -11,7 +11,7 @@
         -#%span.name <%= person.name %>
       .span4.actions
         %a.widgetbtn.pull-right{:href => edit_flow_person_path('<%=person.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
-          %i.grcicon-edit-new
+          %i.grcicon-edit
 
 %script#person_option_data{ :type => 'text/html' }
   %span.company <%= person.company %>

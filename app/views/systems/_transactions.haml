@@ -12,7 +12,7 @@
       .span12
         .pull-right
           %a.btn.btn-add{ :href => new_flow_transaction_path('transaction[system_id]' => system.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :title => 'Create New Transaction' }
-            %i.grcicon-add-new
+            %i.grcicon-add
             New
 
 .description
@@ -21,7 +21,7 @@
       .slot.singlecontrolSlot
         .expander
         %a.widgetbtn.fltrt{ :href => flow_transactions_path + '/<%= id %>/edit', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh' }
-          %i.grcicon-edit-new
+          %i.grcicon-edit
         %span.prefix <%= title %>
       .row-fluid-slotcontent.collapse{ :id => "transaction-<%= id %>" }
         .span13
@@ -41,4 +41,4 @@
               =render :partial => 'object_leaf', :locals => { :instance => item, :code => '' }
             .item-actions
               %a.widgetbtn.fltrt{ :href => edit_flow_transaction_path(item), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh' }
-                %i.grcicon-edit-new
+                %i.grcicon-edit

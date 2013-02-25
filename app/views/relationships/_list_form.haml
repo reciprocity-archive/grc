@@ -22,7 +22,7 @@
           %input{ :type => 'hidden', :name => 'items[<%= id %>][object_type]', :value => context[:object_type] }
           %input._destroy{ :type => 'hidden', :name => 'items[<%= id %>][_destroy]', :value => '' }
           %a.widgetbtn.btn.btn-mini{ :href => url_for(:action => :edit, :controller => context[:related_type].underscore.pluralize, :id => '<%=object.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
-            %i.grcicon-edit-new
+            %i.grcicon-edit
           %a.widgetbtn.btn.btn-mini{ :href => '#', :'data-toggle' => 'selector-list-remove' }
             %i.grcicon-remove
 
@@ -37,7 +37,7 @@
       .span4.actions
         .pull-right
           %a.widgetbtn.btn.btn-mini{:href => edit_flow_system_path('<%=system.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
-            %i.grcicon-edit-new
+            %i.grcicon-edit
           %a.widgetbtn.add-me.btn.btn-mini{:href => "#", :'data-toggle' => 'selector-list-select'}
             %i.grcicon-chevron-right
 
@@ -52,7 +52,7 @@
       .span4.actions
         .pull-right
           %a.widgetbtn.btn.btn-mini{:href => edit_flow_program_path('<%=program.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
-            %i.grcicon-edit-new
+            %i.grcicon-edit
           %a.widgetbtn.add-me.btn.btn-mini{:href => "#", :'data-toggle' => 'selector-list-select'}
             %i.grcicon-chevron-right
 
@@ -67,7 +67,7 @@
       .span4.actions
         .pull-right
           %a.widgetbtn.btn.btn-mini{:href => edit_flow_directive_path('<%=directive.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
-            %i.grcicon-edit-new
+            %i.grcicon-edit
           %a.widgetbtn.add-me.btn.btn-mini{:href => "#", :'data-toggle' => 'selector-list-select'}
             %i.grcicon-chevron-right
 
@@ -82,7 +82,7 @@
       .span4.actions
         .pull-right
           %a.widgetbtn.btn.btn-mini{:href => edit_flow_product_path('<%=product.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
-            %i.grcicon-edit-new
+            %i.grcicon-edit
           %a.widgetbtn.add-me.btn.btn-mini{:href => "#", :'data-toggle' => 'selector-list-select'}
             %i.grcicon-chevron-right
 
@@ -97,7 +97,7 @@
       .span4.actions
         .pull-right
           %a.widgetbtn.btn.btn-mini{:href => edit_flow_org_group_path('<%=org_group.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
-            %i.grcicon-edit-new
+            %i.grcicon-edit
           %a.widgetbtn.btn.btn-mini.add-me{:href => "#", :'data-toggle' => 'selector-list-select'}
             %i.grcicon-chevron-right
 
@@ -112,7 +112,7 @@
       .span4.actions
         .pull-right
           %a.widgetbtn.btn.btn-mini{:href => edit_flow_facility_path('<%=facility.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
-            %i.grcicon-edit-new
+            %i.grcicon-edit
           %a.widgetbtn.add-me.btn.btn-mini{:href => "#", :'data-toggle' => 'selector-list-select'}
             %i.grcicon-chevron-right
 
@@ -127,7 +127,7 @@
       .span4.actions
         .pull-right
           %a.widgetbtn.btn.btn-mini{:href => edit_flow_market_path('<%=market.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
-            %i.grcicon-edit-new
+            %i.grcicon-edit
           %a.widgetbtn.add-me.btn.btn-mini{:href => "#", :'data-toggle' => 'selector-list-select'}
             %i.grcicon-chevron-right
 
@@ -142,7 +142,7 @@
       .span4.actions
         .pull-right
           %a.widgetbtn.btn.btn-mini{:href => edit_flow_data_asset_path('<%=data_asset.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
-            %i.grcicon-edit-new
+            %i.grcicon-edit
           %a.widgetbtn.btn.btn-mini.add-me{:href => "#", :'data-toggle' => 'selector-list-select'}
             %i.grcicon-chevron-right
 
@@ -157,7 +157,7 @@
       .span4.actions
         .pull-right
           %a.widgetbtn.btn.btn-mini{:href => edit_flow_project_path('<%=project.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
-            %i.grcicon-edit-new
+            %i.grcicon-edit
           %a.widgetbtn.add-me.btn.btn-mini{:href => "#", :'data-toggle' => 'selector-list-select'}
             %i.grcicon-chevron-right
 
@@ -172,7 +172,7 @@
       .span4.actions
         .pull-right
           %a.widgetbtn.btn.btn-mini{:href => edit_flow_risky_attribute_path('<%=risky_attribute.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
-            %i.grcicon-edit-new
+            %i.grcicon-edit
           %a.widgetbtn.btn.btn-mini.add-me{:href => "#", :'data-toggle' => 'selector-list-select'}
             %i.grcicon-chevron-right
 
@@ -184,7 +184,7 @@
         %h3
           =context[:source_title]
           %a.widgetbtn.widgetbtnselector.btn.btn-add{ :href => context[:option_new_url], :'data-toggle' => 'modal-ajax-listnewform', :'data-selector-target' => '.source, .target' }
-            %i.grcicon-add-new
+            %i.grcicon-add
       .span5
         %input.widgetsearch.input-block-level{:type => "text", :placeholder => context[:source_search_text]}
     .filter-block

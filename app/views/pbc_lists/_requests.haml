@@ -8,7 +8,7 @@
 
     .btn-group
       %a{:'data-toggle'=>"dropdown", :href => "#", :class => "btn btn-mini btn-success dropdown-toggle"}
-        %i.grcicon-add-new
+        %i.grcicon-add
       %ul.dropdown-menu
         -Request.types.each do |type_id, type_name|
           %li.add-new-item
@@ -122,10 +122,10 @@
                             UNKNOWN
                         -if request.control.present?
                           %a.btn.btn-mini.btn-controllink{:href => flow_controls_path(:list_select => 1), :'data-toggle' => 'modal-ajax-single-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#referenceList', :'data-modal-class' => 'modal-slim' }
-                            %i.grcicon-link-new
+                            %i.grcicon-link
                         -else
                           %a.btn.btn-mini.btn-danger.btn-controllink{:href => flow_controls_path(:list_select => 1), :'data-toggle' => 'modal-ajax-single-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#referenceList', :'data-modal-class' => 'modal-slim' }
-                            %i.grcicon-link-new-white
+                            %i.grcicon-link-white
                       
                         &nbsp; with
                         %span.pbc-request-count=pluralize(request.responses.count, "response")
@@ -149,7 +149,7 @@
                       
                     .item-actions
                       %a.btn.btn-mini.pull-right{ :href => edit_flow_request_path(request.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide', :title => "Edit Request", :rel => "tooltip", :'data-placement' => "left"}
-                        %i.grcicon-edit-new
+                        %i.grcicon-edit
                   
                 .item-content
                   .request-main
@@ -260,7 +260,7 @@
                       %span{"rel" => "tooltip", "data-placement" => "top", "title" => "Date Requested", :style => "font-style:italic;color:#aaa;"}=request.date_requested && request.date_requested.strftime('%m/%d/%Y')
                   .span3.pbc-status
                     %a.btn.btn-mini.pull-right{ :href => edit_flow_request_path(request.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide'}
-                      %i.grcicon-edit-new
+                      %i.grcicon-edit
 
                     %label.pull-left Status:&nbsp;
                     %select

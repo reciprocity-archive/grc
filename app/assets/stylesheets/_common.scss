@@ -266,3 +266,23 @@ input.disabled.pending-ajax{
   background: #eee url("/images/ajax-loader.gif") no-repeat right center;
 }
 
+.btn-add,
+.btn-warning,
+.btn-danger {
+  &.disabled {
+    cursor: default;
+    background-color: #e6e6e6;
+    background-image: none;
+    @include opacity(0.65);
+    @include box-shadow(none);
+    text-shadow: none;
+    color: $responsTitle;
+    border: 1px solid #ccc;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    &:active,
+    &:hover {
+      @include box-shadow(none);
+      color: $responsTitle;
+    }
+  }
+}

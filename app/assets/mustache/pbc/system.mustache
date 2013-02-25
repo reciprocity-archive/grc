@@ -8,7 +8,7 @@
               <i class="grcicon-goto"></i>
             </a>
             <a class="btn btn-mini system-edit" data-toggle="modal-ajax-form" href="/systems/{{id}}/edit" data-modal-reset="reset" data-model-class="modal-wide" title="Edit {{system_or_process_capitalized}}" rel="tooltip" data-placement="top">
-              <i class="grcicon-edit-new"></i>
+              <i class="grcicon-edit"></i>
             </a>          
           </div>
           <h4>
@@ -23,7 +23,7 @@
             {{object_people.length}}
           </span>
           <span class="pbc-counter {{^object_documents.length}} empty{{/object_documents.length}}">
-            <i class="grcicon-link-new"></i>
+            <i class="grcicon-link"></i>
             {{object_documents.length}}
           </span>
         </div>
@@ -66,7 +66,7 @@
                   </div>
                   <div class="span5">
                     <a class="btn btn-mini pull-left add-person" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/people/new" data-target="#ajax-modal-people-new">
-                      <i class="grcicon-add-new-black"></i>
+                      <i class="grcicon-add-black"></i>
                     </a>
                   </div>
                 </div>
@@ -74,7 +74,7 @@
             </li>
             <li class="toggle-add-person add-new">
               <a class="btn btn-mini btn-add" href="javascript://">
-                <i class="grcicon-add-new"></i>
+                <i class="grcicon-add"></i>
                 Person
               </a>
             </li>
@@ -95,7 +95,7 @@
             {{> /assets/pbc/documents_list.mustache}}
             <li class="toggle-add-document add-new" data-system-id="{{id}}">
               <a class="btn btn-mini btn-add" href="javascript://">
-                <i class="grcicon-add-new"></i>
+                <i class="grcicon-add"></i>
                 Reference
               </a>
             </li>

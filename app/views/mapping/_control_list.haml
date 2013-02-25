@@ -15,11 +15,11 @@
             Reset
           -if control_type == 'regulation'
             %a.btn.btn-add{ :href => new_flow_control_path(:'control[directive_id]' => @directive.id, :company => false), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-modal-class' => 'modal-wide', :title => 'Create New Regulation Control' }
-              %i.grcicon-add-new
+              %i.grcicon-add
               New
           -else
             %a.btn.btn-add{ :href => new_flow_control_path(:company => true), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-modal-class' => 'modal-wide', :title => 'Create New Company Control' }
-              %i.grcicon-add-new
+              %i.grcicon-add
               New
 
 .spinner

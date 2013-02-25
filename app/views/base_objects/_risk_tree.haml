@@ -29,11 +29,11 @@
         =render :partial => 'object_leaf', :locals => { :instance => instance }
       .item-actions
         -if is_editable
-          %a.btn.btn-mini.halfopacity{ "rel" => "tooltip", "data-placement" => "left", "title" => "Edit this object", 'data-modal-class' => 'modal-wide', 'data-form-target' => 'refresh', "data-toggle" => "modal-ajax-form", :href => url_for(:id => instance.id, :action => :edit, :controller => model_underscore.pluralize, :only_path => true) }
-            %i.grcicon-edit-new
-        %a.btn.btn-mini.halfopacity{ :href => list_edit_flow_control_risks_path(:risk_id => instance.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :rel => 'tooltip', :title => 'Link controls to this risk', :'data-modal-class' => 'modal-wide' }
-          %i.grcicon-link-new
-        %a.btn.btn-mini.halfopacity{ "rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => flow_risk_path(instance.id) }
+          %a.btn.btn-mini{ "rel" => "tooltip", "data-placement" => "left", "title" => "Edit this object", 'data-modal-class' => 'modal-wide', 'data-form-target' => 'refresh', "data-toggle" => "modal-ajax-form", :href => url_for(:id => instance.id, :action => :edit, :controller => model_underscore.pluralize, :only_path => true) }
+            %i.grcicon-edit
+        %a.btn.btn-mini{ :href => list_edit_flow_control_risks_path(:risk_id => instance.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :rel => 'tooltip', :title => 'Link controls to this risk', :'data-modal-class' => 'modal-wide' }
+          %i.grcicon-link
+        %a.btn.btn-mini{ "rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => flow_risk_path(instance.id) }
           %i.grcicon-goto
   .item-content{ :class => is_root && 'in' }
     -if controls.count > 0
@@ -49,6 +49,6 @@
                 .row-fluid
                   =render :partial => 'object_leaf', :locals => { :instance => control }
                 .item-actions
-                  %a.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => flow_control_path(control.id) }
+                  %a.btn.btn-mini{"rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => flow_control_path(control.id) }
                     %i.grcicon-goto
             .item-content

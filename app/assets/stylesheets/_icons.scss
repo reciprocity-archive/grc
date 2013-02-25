@@ -35,13 +35,13 @@
   @include background-size(264px 264px);
 }
 
-.grcicon-add-new {
+.grcicon-add {
   background-position:-224px -32px;
   .active & {
     background-position:-224px -32px;
   }
 }
-.grcicon-add-new-black {
+.grcicon-add-black {
   background-position:-224px -8px;
   .active & {
     background-position:-224px -8px;
@@ -173,7 +173,7 @@
     background-position:-248px -8px;
   }
 }
-.grcicon-edit-new {
+.grcicon-edit {
   background-position:-32px -56px;
   .tree-structure .active & {
     background-position:-32px -56px;
@@ -191,7 +191,7 @@
     background-position:-32px -80px;
   }
 }
-.grcicon-edit-new-white {
+.grcicon-edit-white {
   background-position:-32px -80px;
   .active & {
     background-position:-32px -80px;
@@ -252,17 +252,17 @@
 .grcicon-goto-left-white {
   background-position:-80px -128px;
 }
-.grcicon-search-new {
+.grcicon-search {
   background-position:-248px -56px;
 }
-.grcicon-search-new-white {
+.grcicon-search-white {
   background-position:-248px -80px;
 }
 .grcicon-link,
-.grcicon-link-new {
+.grcicon-link {
   background-position:-32px -104px;
 }
-.grcicon-link-new-white {
+.grcicon-link-white {
   background-position:-32px -128px;
 }
 .grcicon-ok {
@@ -413,32 +413,24 @@
 .grcicon-product-black { background-position:-272px -104px; }
 .grcicon-project { background-position:-56px -248px;}
 .grcicon-project-black { background-position:-56px -224px; }
-.grcicon-orggroup { background-position:-80px -248px;}
-.grcicon-org_group { background-position:-80px -248px;}
-.grcicon-orggroup-black { background-position:-80px -224px; }
-.grcicon-org_group-black { background-position:-80px -224px; }
-.grcicon-dataasset { background-position:-176px -248px; }
-.grcicon-data_asset { background-position:-176px -248px; }
-.grcicon-dataasset-black { background-position:-176px -224px; }
-.grcicon-data_asset-black { background-position:-176px -224px; }
+.grcicon-orggroup, .grcicon-org_group { background-position:-80px -248px;}
+.grcicon-orggroup-black, .grcicon-org_group-black { background-position:-80px -224px; }
+.grcicon-dataasset, .grcicon-data_asset { background-position:-176px -248px; }
+.grcicon-dataasset-black, .grcicon-data_asset-black { background-position:-176px -224px; }
 //compliance
 .grcicon-system { background-position:-128px -248px }
 .grcicon-system-black { background-position:-128px -224px; }
 .grcicon-process { background-position:-104px -248px }
 .grcicon-process-black { background-position:-104px -224px; }
-.grcicon-businessprocess { background-position:-104px -248px }
-.grcicon-business_process { background-position:-104px -248px }
-.grcicon-businessprocess-black { background-position:-104px -224px; }
-.grcicon-business_process-black { background-position:-104px -224px; }
+.grcicon-businessprocess, .grcicon-business_process { background-position:-104px -248px }
+.grcicon-businessprocess-black, .grcicon-business_process-black { background-position:-104px -224px; }
 .grcicon-control { background-position:-152px -248px }
 .grcicon-control-black { background-position:-152px -224px; }
 // risk
 .grcicon-risk { background-position:-200px -248px }
 .grcicon-risk-black { background-position:-200px -224px; }
 .grcicon-attribute { background-position:-224px -248px }
-.grcicon-risky_attribute { background-position:-224px -248px }
-.grcicon-riskyattribute { background-position:-224px -248px }
+.grcicon-riskyattribute, .grcicon-risky_attribute { background-position:-224px -248px }
 .grcicon-attribute-black { background-position:-224px -224px; }
-.grcicon-riskyattribute-black { background-position:-224px -224px; }
-.grcicon-risky_attribute-black { background-position:-224px -224px; }
+.grcicon-riskyattribute-black, .grcicon-risky_attribute-black { background-position:-224px -224px; }
 .grcicon-dashboard-big { background-position:-248px -224px; }

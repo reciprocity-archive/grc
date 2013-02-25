@@ -28,14 +28,14 @@
         =render :partial => 'object_leaf', :locals => { :instance => system }
       .item-actions
         -if is_editable
-          %a.btn.btn-mini.halfopacity{ "rel" => "tooltip", "data-placement" => "left", "title" => "Edit this object", 'data-modal-class' => 'modal-wide', 'data-form-target' => 'refresh', "data-toggle" => "modal-ajax-form", :href => url_for(:id => system.id, :action => :edit, :controller => model_underscore.pluralize, :only_path => true) }
-            %i.grcicon-edit-new
-        %a.btn.btn-mini.halfopacity{ :href => list_edit_flow_system_systems_path(:parent_id => system.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :rel => 'tooltip', :title => 'Link systems to this object', :'data-modal-class' => 'modal-wide' }
-          %i.grcicon-link-new
-        %a.btn.btn-mini.halfopacity{ :href => list_edit_flow_system_controls_path(:system_id => system.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :rel => 'tooltip', :title => 'Link controls to this object', :'data-modal-class' => 'modal-wide' }
-          %i.grcicon-link-new
+          %a.btn.btn-mini{ "rel" => "tooltip", "data-placement" => "left", "title" => "Edit this object", 'data-modal-class' => 'modal-wide', 'data-form-target' => 'refresh', "data-toggle" => "modal-ajax-form", :href => url_for(:id => system.id, :action => :edit, :controller => model_underscore.pluralize, :only_path => true) }
+            %i.grcicon-edit
+        %a.btn.btn-mini{ :href => list_edit_flow_system_systems_path(:parent_id => system.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :rel => 'tooltip', :title => 'Link systems to this object', :'data-modal-class' => 'modal-wide' }
+          %i.grcicon-link
+        %a.btn.btn-mini{ :href => list_edit_flow_system_controls_path(:system_id => system.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :rel => 'tooltip', :title => 'Link controls to this object', :'data-modal-class' => 'modal-wide' }
+          %i.grcicon-link
         -if !is_root
-          %a.btn.btn-mini.halfopacity{ "rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => flow_system_path(system.id) }
+          %a.btn.btn-mini{ "rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => flow_system_path(system.id) }
             %i.grcicon-goto
   .item-content
     -if controls.count > 0
@@ -51,7 +51,7 @@
                 .row-fluid
                   =render :partial => 'object_leaf', :locals => { :instance => control }
                 .item-actions
-                  %a.btn.btn-mini.halfopacity{"rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => flow_control_path(control.id) }
+                  %a.btn.btn-mini{"rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => flow_control_path(control.id) }
                     %i.grcicon-goto
 
     -if !seen_this && sub_systems.count > 0

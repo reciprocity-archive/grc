@@ -14,7 +14,7 @@
       .span4.actions
         .pull-right
           %a.widgetbtn.btn.btn-mini{:href => edit_flow_category_path('<%=category.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
-            %i.grcicon-edit-new
+            %i.grcicon-edit
           %a.widgetbtn.btn.btn-mini.add-me{:href => "#", :'data-toggle' => 'selector-list-select'}
             %i.grcicon-chevron-right
 
@@ -36,7 +36,7 @@
           %input{ :type => 'hidden', :name => 'items[<%= id %>][category_id]', :value => '<%= category.id %>' }
           %input._destroy{ :type => 'hidden', :name => 'items[<%= id %>][_destroy]', :value => '' }
           %a.widgetbtn.btn.btn-mini{ :href => edit_flow_category_path('<%=category.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
-            %i.grcicon-edit-new
+            %i.grcicon-edit
           %a.widgetbtn.btn.btn-mini{ :href => '#', :'data-toggle' => 'selector-list-remove' }
             %i.grcicon-remove
 
@@ -47,7 +47,7 @@
         %h3
           Add Category
           %a.widgetbtn.widgetbtnselector.btn.btn-add{ :href => new_flow_category_path(:scope_id => scope_id), :'data-toggle' => 'modal-ajax-listnewform', :'data-selector-target' => '.source, .target', :'data-modal-class' => 'modal-wide'  }
-            %i.grcicon-add-new
+            %i.grcicon-add
       .span5
         %input.widgetsearch.input-block-level{:type => "text", :placeholder => "Search Categories"}
 

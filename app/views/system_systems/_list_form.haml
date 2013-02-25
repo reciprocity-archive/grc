@@ -13,7 +13,7 @@
       .span4.actions
         .pull-right
           %a.widgetbtn.btn.btn-mini{:href => edit_flow_system_path('<%=system.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
-            %i.grcicon-edit-new
+            %i.grcicon-edit
           %a.widgetbtn.add-me.btn.btn-mini{:href => "#", :'data-toggle' => 'selector-list-select'}
             %i.grcicon-chevron-right
 
@@ -34,7 +34,7 @@
           %input{ :type => 'hidden', :name => 'items[<%= id %>][child_id]', :value => '<%= system.id %>' }
           %input._destroy{ :type => 'hidden', :name => 'items[<%= id %>][_destroy]', :value => '' }
           %a.widgetbtn.btn.btn-mini{ :href => edit_flow_system_path('<%=system.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
-            %i.grcicon-edit-new
+            %i.grcicon-edit
           %a.widgetbtn.btn.btn-mini{ :href => '#', :'data-toggle' => 'selector-list-remove' }
             %i.grcicon-remove
 
@@ -45,7 +45,7 @@
         %h3
           Add System
           %a.widgetbtn.widgetbtnselector.btn.btn-add{ :href => new_flow_system_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-selector-target' => '.source, .target' }
-            %i.grcicon-add-new
+            %i.grcicon-add
       .span5
         %input.widgetsearch.input-block-level{:type => "text", :placeholder => "Search Systems"}
 

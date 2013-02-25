@@ -21,10 +21,10 @@
         .span6
           .pull-right
             %a.btn.btn-add{ :href => new_flow_section_path(:'section[directive_id]' => directive.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-dirty' => '#regulations, #combo', :'data-route' => "tab=regulations", :title => 'Create New Section' }
-              %i.grcicon-add-new
+              %i.grcicon-add
               Section
             -#%a.btn.btn-add{ :href => new_flow_control_path(:'control[directive_id]' => directive.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-dirty' => '#category_controls, #combo', :'data-route' => "tab=category_controls", :'data-modal-class' => 'modal-wide', :title => 'Create New Control' }
-              %i.grcicon-add-new
+              %i.grcicon-add
               Control
 
 .action-items

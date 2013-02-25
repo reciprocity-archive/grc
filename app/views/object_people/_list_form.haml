@@ -14,7 +14,7 @@
       .span3.actions
         .pull-right
           %a.widgetbtn.btn.btn-mini{:href => edit_flow_person_path('<%=person.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
-            %i.grcicon-edit-new
+            %i.grcicon-edit
           %a.widgetbtn.add-me.btn.btn-mini{:href => "#", :'data-toggle' => 'selector-list-select'}
             %i.grcicon-chevron-right
 
@@ -37,7 +37,7 @@
           %input{ :type => 'hidden', :name => 'items[<%= id %>][person_id]', :value => '<%= person.id %>' }
           %input._destroy{ :type => 'hidden', :name => 'items[<%= id %>][_destroy]', :value => '' }
           %a.widgetbtn.btn.btn-mini{ :href => edit_flow_person_path('<%=person.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
-            %i.grcicon-edit-new
+            %i.grcicon-edit
           %a.widgetbtn.btn.btn-mini{ :href => '#', :'data-toggle' => 'selector-list-remove' }
             %i.grcicon-remove
         
@@ -71,7 +71,7 @@
         %h3
           Add Person
           %a.widgetbtn.widgetbtnselector.btn.btn-add{ :href => new_flow_person_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-selector-target' => '.source, .target' }
-            %i.grcicon-add-new
+            %i.grcicon-add
       .span5
         %input.widgetsearch.input-block-level{:type => "text", :placeholder => "Search Person"}
 
