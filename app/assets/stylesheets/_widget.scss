@@ -457,8 +457,7 @@
   }
   .action-items {
     text-align: right;
-    margin-top: 5px;
-    margin-right: 10px;
+    margin-bottom: 5px;
     a {
       display: inline-block;
       cursor: pointer;
@@ -483,10 +482,7 @@
   .tabbable {
     position: relative;
     .action-items {
-      position: absolute;
-      top: 0;
-      right: 0;
-      margin-right: 10px;
+      margin: 4px 6px 5px 0;
       &.action-below {
         position: static;
         margin-bottom: 10px;
