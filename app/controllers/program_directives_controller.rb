@@ -8,6 +8,11 @@ class ProgramDirectivesController < BaseMappingsController
     @objects = ProgramDirective
     if params[:program_id].present?
       @objects = @objects.where(:program_id => params[:program_id])
+      if params[:meta_kind].present?
+        @objects = @objects.
+          joins(:directive).
+          where(:directives => { :kind => Directive.kinds_for(params[:meta_kind]) })
+      end
     end
     if params[:directive_id].present?
       @objects = @objects.where(:directive_id => params[:directive_id])

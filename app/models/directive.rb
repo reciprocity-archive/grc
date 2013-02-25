@@ -71,6 +71,7 @@ class Directive < ActiveRecord::Base
   end
 
   def self.kinds_for(meta_kind)
+    meta_kind = meta_kind.to_sym if meta_kind.kind_of?(String)
     return Directive::KINDS unless meta_kind.present?
     return Directive::META_KINDS[meta_kind.to_sym] || []
   end

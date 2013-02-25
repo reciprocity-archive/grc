@@ -16,12 +16,27 @@
         %input.ui-corner-all.widgetsearch.clear-value(type='text' placeholder='Search')
       .span6
         .pull-right
-          %a.btn.btn-success{ :rel => "tooltip", :'data-placement' => "left", :title => "Link Directives to this Program", :'data-modal-class' => 'modal-wide', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :'data-toggle' => "modal-ajax-relationship-selector", :href => list_edit_flow_program_directives_path(:program_id => instance.id) }
+          %a.btn.btn-add{ :href => new_flow_control_path(:'program_id' => instance.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-dirty' => '#category_controls, #combo', :'data-route' => "tab=category_controls", :'data-modal-class' => 'modal-wide', :rel => "tooltip", :title => 'Create New Control' }
             %i.grcicon-add
-            Directive
-          %a.btn.btn-add{ :href => new_flow_control_path(:'program_id' => instance.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-dirty' => '#category_controls, #combo', :'data-route' => "tab=category_controls", :'data-modal-class' => 'modal-wide', :title => 'Create New Control' }
-            %i.grcicon-add-new
             Control
+        .pull-right
+          .btn-group
+            %a{:'data-toggle'=>"dropdown", :href => "#", :class => "btn btn-mini btn-success dropdown-toggle", :rel => "tooltip", :title => "Add Regulation, Contract, or Policy"}
+              %i.grcicon-add
+              Directive
+            %ul.dropdown-menu
+              %li.add-new-item
+                %a{:'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :'data-toggle' => "modal-ajax-relationship-selector", :href => list_edit_flow_program_directives_path(:program_id => instance.id, :meta_kind => :regulation), :'data-modal-class' => 'modal-wide' }
+                  %i.grcicon-regulation-black
+                  Regulation
+              %li.add-new-item
+                %a{:'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :'data-toggle' => "modal-ajax-relationship-selector", :href => list_edit_flow_program_directives_path(:program_id => instance.id, :meta_kind => :contract), :'data-modal-class' => 'modal-wide' }
+                  %i.grcicon-contract-black
+                  Contract
+              %li.add-new-item
+                %a{:'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :'data-toggle' => "modal-ajax-relationship-selector", :href => list_edit_flow_program_directives_path(:program_id => instance.id, :meta_kind => :policy), :'data-modal-class' => 'modal-wide' }
+                  %i.grcicon-policy-black
+                  Policy
 .tabbable
   %ul.nav.nav-tabs
     %li.active=link_to '<i class="grcicon-directive-black"></i>Directives'.html_safe, '#directives', :data => { :toggle => 'tab', :'tab-href' => flow_directives_path(:program_id => instance.id, :tree => true, :search_sections => true) }
