@@ -8,23 +8,21 @@
         =directive.slug
         %span=directive.title
     .span2
-      %a.btn.btn-mini.pull-right{:href => flow_directive_path(directive), :rel => "tooltip", :title => "View Directive", :style => "margin-top:2px"}
+      %a.btn.btn-mini.pull-right{:href => flow_directive_path(directive), :rel => "tooltip", :title => "View #{directive.meta_kind.to_s.titleize}", :style => "margin-top:2px"}
         %i.grcicon-goto
 
 .row-fluid
   .span12
     %h4
       Type:
-      %span=directive.company? ? 'Company' : 'Regulation'
-      
-  
+      %span #{directive.meta_kind.to_s.titleize}
 
 -if stats[:sections_count] > 0 || stats[:controls_count] > 0
   .row-fluid
     -if stats[:sections_count] > 0
       .span6
         %h4
-          Sections
+          =directive.section_meta_kind.to_s.pluralize.titleize
           (#{stats[:sections_count]})
         .progress
           .bar.bar-success{:style => "width:#{stats[:sections_done_percentage]}%", :rel => "tooltip", :title => "#{stats[:sections_done_count]} Done"}=stats[:sections_done_count]

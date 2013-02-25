@@ -18,12 +18,13 @@ class Directive < ActiveRecord::Base
     "Contract-Related Policy",
     "Company Library",
     "Fed Contract Library",
+    "Contract",
   ]
 
   META_KINDS = {
     :regulation => [ "Regulation" ],
     :library    => [ "Company Library", "Fed Contract Library" ],
-    :control    => [ "Company Controls" ],
+    :company_controls => [ "Company Controls" ],
     :policy     => [ "Company Policy", "Org Group Policy", "Data Asset Policy", "Product Policy", "Contract-Related Policy" ],
     :contract   => [ "Contract" ],
   }
@@ -51,7 +52,7 @@ class Directive < ActiveRecord::Base
     :presence => { :message => "needs a value" }
 
   def company_controls?
-    Directive.meta_kind_for(kind) == :controls
+    Directive.meta_kind_for(kind) == :company_controls
   end
 
   def contract?
@@ -71,6 +72,21 @@ class Directive < ActiveRecord::Base
   def self.kinds_for(meta_kind)
     return Directive::KINDS unless meta_kind.present?
     return Directive::META_KINDS[meta_kind.to_sym] || []
+  end
+
+  def section_meta_kind
+    case self.meta_kind
+    when :contract
+      :clause
+    when :company_controls
+      :company_controls
+    else
+      :section
+    end
+  end
+
+  def default_slug_prefix
+    meta_kind.to_s.upcase
   end
 
   def self.all_company_controls_first

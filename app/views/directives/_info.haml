@@ -1,7 +1,7 @@
 -instance = directive
 
 -content_for :widget_title do
-  Directive Info
+  #{directive.meta_kind.to_s.titleize} Info
 
 -content_for :widget_help, 'program_info'
 

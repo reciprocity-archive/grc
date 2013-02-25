@@ -15,18 +15,20 @@
 
 .row-fluid
   =wrapped_text_field f, :span4, :title, :placeholder => 'Enter title', :label_name => 'Title <span class="required">*</span>'.html_safe
-  -directives = Directive
-  -directives = directives.where(:company => true) if only_company
-  -directives = directives.where(:company => false) if only_regulation
-  -directives = directives.all_company_controls_first
-  -# Ensure the specified directive is included?
-  -#directives.unshift(f.object.directive) if f.object.directive && !directives.include?(f.object.directive)
   -if f.object.new_record? && f.object.directive_id.present?
     .span2
       =f.label 'Directive'
       =f.hidden_field :directive_id
       =f.object.directive.slug
   -else
+    -directives = Directive
+    -directives = directives.where(:company => true) if only_company
+    -directives = directives.where(:company => false) if only_regulation
+    -# Ensure the specified directive is included?
+    -#directives.unshift(f.object.directive) if f.object.directive && !directives.include?(f.object.directive)
+    -if params[:program_id].present?
+      -directives = directives.joins(:program_directives).where(:program_directives => { :program_id => params[:program_id] })
+    -directives = directives.all_company_controls_first
     =wrapped_select f, :span2, :directive_id, directives.map { |p| [p.slug, p.id] }, :selected => f.object.directive_id, :include_blank => false
   .span6
     .row-fluid

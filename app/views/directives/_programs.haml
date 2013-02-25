@@ -1,6 +1,6 @@
 -content_for :widget_title do
   %i.grcicon-program
-  Programs using Directive
+  Programs using #{directive.meta_kind.to_s.titleize}
   %span=directive.programs.count
 
 -content_for :widget_help, 'directive_programs'

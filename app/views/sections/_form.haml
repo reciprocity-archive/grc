@@ -38,7 +38,7 @@
     =error_messages_inline(f, :title)
 
 .row-fluid
-  %label{:for => "section-description"} Text of Section:
+  %label{:for => "section-description"} Text of Section / Clause:
 .row-fluid{"control-group" => ""}
   .span12.wysiwyg-area{:class => error_class(f, :description)}
     %textarea#section-description.span12.double.wysihtml5{:placeholder => "", :rows => "4", :name => 'section[description]'}=f.object.description

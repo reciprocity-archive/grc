@@ -148,6 +148,10 @@ class System < ActiveRecord::Base
     is_biz_process? ? 'PROCESS' : 'SYSTEM'
   end
 
+  def meta_kind
+    is_biz_process? ? :process : :system
+  end
+
   def categories_display
     categories.map {|x| x.name}.join(',')
   end

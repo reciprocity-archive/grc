@@ -173,4 +173,8 @@ class Section < ActiveRecord::Base
       [control] + control.implementing_controls.to_a
     end.flatten
   end
+
+  def default_slug_prefix
+    self.directive.section_meta_kind.upcase
+  end
 end

@@ -30,5 +30,5 @@
               -else
                 %strong 0
         .item-actions
-          %a.btn.btn-mini.fltrt{ :href => edit_flow_section_path(item), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-dirty' => "#regulations, #combo", :title => 'Edit Section' }
+          %a.btn.btn-mini.fltrt{ :href => edit_flow_section_path(item), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-dirty' => "#regulations, #combo", :title => 'Edit #{item.meta_kind.to_s.titleize}' }
             %i.grcicon-edit

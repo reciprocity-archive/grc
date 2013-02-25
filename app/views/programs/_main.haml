@@ -19,7 +19,9 @@
           %a.btn.btn-success{ :rel => "tooltip", :'data-placement' => "left", :title => "Link Directives to this Program", :'data-modal-class' => 'modal-wide', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :'data-toggle' => "modal-ajax-relationship-selector", :href => list_edit_flow_program_directives_path(:program_id => instance.id) }
             %i.grcicon-add
             Directive
-
+          %a.btn.btn-add{ :href => new_flow_control_path(:'program_id' => instance.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-dirty' => '#category_controls, #combo', :'data-route' => "tab=category_controls", :'data-modal-class' => 'modal-wide', :title => 'Create New Control' }
+            %i.grcicon-add-new
+            Control
 .tabbable
   %ul.nav.nav-tabs
     %li.active=link_to '<i class="grcicon-directive-black"></i>Directives'.html_safe, '#directives', :data => { :toggle => 'tab', :'tab-href' => flow_directives_path(:program_id => instance.id, :tree => true, :search_sections => true) }

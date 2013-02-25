@@ -6,12 +6,12 @@
 -content_for :widget_id, 'control_mappings_widget'
 
 -content_for :widget_buttons do
-  %a.widgettextbtn{ :href => new_flow_section_path(:'section[directive_id]' => control.directive_id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :title => 'Create New Section' } Add Section
+  %a.widgettextbtn{ :href => new_flow_section_path(:'section[directive_id]' => control.directive_id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :title => 'Create New Section/ Clause' } Add Section / Clause
   %a.widgettextbtn{ :href => new_flow_control_path(:'control[directive_id]' => control.directive_id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide', :title => 'Create New Control' } Add Control
 
 .tabbable
   %ul.nav.nav-tabs
-    %li=link_to 'Regulation Sections', '#regulations', :data => { :toggle => 'tab', :'tab-href' => sections_flow_control_path(control) }
+    %li=link_to 'Sections / Clauses', '#regulations', :data => { :toggle => 'tab', :'tab-href' => sections_flow_control_path(control) }
     -if control.directive.company?
       %li=link_to 'Controls', '#controls', :data => { :toggle => 'tab' }
     -else

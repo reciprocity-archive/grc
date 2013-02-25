@@ -1,15 +1,15 @@
 -instance = @directive
--@title = "GRC Directive: #{instance.title}"
+-@title = "GRC #{instance.meta_kind.to_s.titleize}: #{instance.title}"
 
 -content_for :header do
 
   %ul.breadcrumbs
-    %li=link_to 'DIRECTIVES', programs_dash_path
+    %li=link_to 'PROGRAMS', programs_dash_path
     %li=instance.title
 
   %h1.governance
-    .grcobject.governance{:rel => "tooltip", :'data-placement'=>"bottom", :title => "Directive"}
-      %i.grcicon-directive
+    .grcobject.governance{:rel => "tooltip", :'data-placement'=>"bottom", :title => instance.meta_kind.to_s.titleize}
+      %i{ :class => "grcicon-#{instance.meta_kind}" }
     =instance.title
 
 -content_for :page_help, 'program'
@@ -17,9 +17,9 @@
 -content_for :subheader_extras do
   %ul.actions.pull-right
     %li
-      %a{:href => edit_flow_directive_path(instance), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide',:title => 'Edit Directive'}
+      %a{:href => edit_flow_directive_path(instance), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide', :title => "Edit #{instance.meta_kind.to_s.titleize}"}
         %i.grcicon-edit
-        Edit Directive
+        Edit #{instance.meta_kind.to_s.titleize}
     %li.btn-group
       %a.dropdown-toggle{:href => '#', :'data-toggle' => 'dropdown'}
         %i.grcicon-imp-exp
@@ -60,7 +60,7 @@
       -unless instance.company_controls?
         =render :partial => 'shared/related',
                 :layout => 'layouts/widget_box',
-                :locals => { :instance => instance, :widget_title => "Impact/Scope of Directive", :widget_class => 'related widget-tabs widget-tabs-horizontal' }
+                :locals => { :instance => instance, :widget_title => "Impact/Scope of #{instance.meta_kind.to_s.titleize}", :widget_class => 'related widget-tabs widget-tabs-horizontal' }
     #right-column.span4.widget-area
       =render :partial => 'directives/info',
               :layout => 'layouts/widget_box',
