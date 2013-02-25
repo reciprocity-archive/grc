@@ -50,4 +50,11 @@
     %input#section-link.span12{:placeholder => "http://", :type => "text", :value => f.object.url, :name => 'section[url]'}
     =error_messages_inline(f, :url)
 
+.row-fluid
+  %label{:for => "section-notes"} Notes:
+.row-fluid{"control-group" => ""}
+  .span12.wysiwyg-area{:class => error_class(f, :notes)}
+    %textarea#section-notes.span12.double.wysihtml5{:placeholder => "", :rows => "4", :name => 'section[notes]'}=f.object.notes
+    =error_messages_inline(f, :notes)
+
 =render :partial => "shared/wysihtml5"

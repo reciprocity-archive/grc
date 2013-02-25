@@ -32,12 +32,11 @@
 
 .row-fluid
   .span6.scope{ :class => error_class(f, :scope) }
-    %label.subtitle
-      Scope/Applicability of this Framework or #{meta_kind.to_s.titleize}
-      -#%a.fltrt.underline{"data-toggle" => "modal", :href => "#comingsoonModal"} View as mail merge
+    %label.subtitle{ :for => "directive-scope" }
+      Scope/Applicability of this #{meta_kind.to_s.titleize}
     .row-fluid
       .wysiwyg-area
-        %textarea#wysihtml5d.span12{:name => 'directive[scope]', :placeholder => "One-sentence explanation of the applicability of this #{meta_kind}, used in mail merge templates.", :rows => "3", }=f.object.scope
+        %textarea#directive-scope.span12.double.wysihtml5{:name => 'directive[scope]', :placeholder => "One-sentence explanation of the applicability of this #{meta_kind}, used in mail merge templates.", :rows => "3", }=f.object.scope
       =error_messages_inline(f, :scope)
 
 =render :partial => "shared/wysihtml5"

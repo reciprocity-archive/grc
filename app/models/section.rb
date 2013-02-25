@@ -27,7 +27,7 @@ class Section < ActiveRecord::Base
 
   is_versioned_ext
 
-  sanitize_attributes :description
+  sanitize_attributes :description, :notes
 
   before_save :upcase_slug
   before_save :update_parent_id

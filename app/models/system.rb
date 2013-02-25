@@ -46,7 +46,7 @@ class System < ActiveRecord::Base
 
   is_versioned_ext
 
-  sanitize_attributes :description
+  sanitize_attributes :description, :notes
 
   validates :title,
     :presence => { :message => "needs a value" }
