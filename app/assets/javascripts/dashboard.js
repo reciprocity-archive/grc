@@ -149,7 +149,7 @@ jQuery(function($) {
       $(pane).load(href, function(data, status, xhr) {
         $tab.data('tab-loaded', true);
         var $data = $(data);
-        $(e.target).find(".item-count").html("(" + $data.find("li").length + ")");
+        $(e.target).find(".item-count").html($data.find("li").length);
         $(this).html($data).trigger("loaded", xhr, data);
       });
     }
