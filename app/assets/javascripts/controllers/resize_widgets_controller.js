@@ -11,7 +11,7 @@ can.Control("CMS.Controllers.ResizeWidgets", {
     , total_columns : 12
     , default_layout : null
     , page_token : window.location.pathname.substring(1, (window.location.pathname + "/").indexOf("/", 1))
-    , minimum_widget_height : 37
+    , minimum_widget_height : 150
   }
 }, {
 
