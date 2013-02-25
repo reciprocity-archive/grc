@@ -88,7 +88,7 @@ class Directive < ActiveRecord::Base
   end
 
   def default_slug_prefix
-    meta_kind.to_s.upcase
+    (meta_kind || :directive).to_s.upcase
   end
 
   def self.all_company_controls_first

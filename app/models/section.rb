@@ -152,10 +152,6 @@ class Section < ActiveRecord::Base
     directive.company?
   end
 
-  def default_slug_prefix
-    directive.contract? ? 'CLAUSE' : 'SECTION'
-  end
-
   def consolidated_controls
     controls.map do |control|
       control.implementing_controls
@@ -175,6 +171,6 @@ class Section < ActiveRecord::Base
   end
 
   def default_slug_prefix
-    self.directive.section_meta_kind.upcase
+    self.directive.section_meta_kind.to_s.upcase
   end
 end
