@@ -27,15 +27,10 @@
                 #{table_name.titleize}
                 %span
                   #{rels_count}
-        .action-items
-          %a.shrinkAll
-            %i.grcicon-normal-black
-            Shrink All
-          %a.expandAll
-            %i.grcicon-wide-black
-            Expand All
         .tab-content
           -impact_scope.each do |model, rels|
+            -model_name = model.underscore
+            -puts model_name
             .tab-pane{:id => "related-#{model.underscore.pluralize}-pane"}
               %ul.tree-structure.simple
                 -rels.each do |rel_type_id, rel_objects|
@@ -43,7 +38,7 @@
                     -rel_objects.uniq.each do |o|
                       %li
                         .item-main
-                          %a{:href => o.url, :'data-popover-href'=> "#", :'data-popover-trigger' => "sticky-hover", :style => "display:block"}
+                          %a{:href => self.send("flow_#{model_name}_path", o), :'data-popover-href'=> self.send("tooltip_flow_#{model_name}_path", o), :'data-popover-trigger' => "sticky-hover", :style => "display:block"}
                             .item-title
                               .row-fluid
                                 .span8

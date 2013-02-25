@@ -18,7 +18,6 @@
             -table_name = model.underscore.pluralize #.table_name
             -icon = "grcicon-#{model.downcase}-black"
             %li.tab-btn
-              
               %a{:href => "#related-#{table_name}-pane",
                 "data-toggle" => 'tab',
                 "data-source" => related_objects_flow_relationships_path(:oid => instance.id,
@@ -28,13 +27,6 @@
                 "data-refresh-time" => 60 }
                 %i{:class => icon }
                 #{table_name.titleize}
-        .action-items
-          %a.shrinkAll
-            %i.grcicon-normal-black
-            Shrink All
-          %a.expandAll
-            %i.grcicon-wide-black
-            Expand All
 
   .tab-content
     -models.each do |model|
