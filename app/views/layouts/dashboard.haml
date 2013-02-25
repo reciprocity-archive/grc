@@ -35,6 +35,8 @@
                     =image_tag(CMS_CONFIG['COMPANY_LOGO'], :alt => 'GRC', :title => 'GRC')
                   -elsif has_feature? :BETA
                     =image_tag('/images/logos/logo.png')
+                  -elsif CMS_CONFIG["COMPANY_LOGO_TEXT"].present?
+                    =CMS_CONFIG["COMPANY_LOGO_TEXT"]
                   -else
                     Google GRC
               %ul.menu
