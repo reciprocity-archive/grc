@@ -26,7 +26,7 @@
             %a.active{ :href=>"javascript://"}
         -if !help_path.blank?
           .widget-action.pull-right.widget-action-help
-            %a{:href => "/help/#{help_path}", :'data-toggle' => 'modal-ajax', :rel => "tooltip", :title => "Help?", :'data-placement'=>"top"}
+            %a{:href => "/help/#{help_path}", :'data-toggle' => 'modal-ajax', :rel => "tooltip", :title => "Help", :'data-placement'=>"top"}
               %i.grcicon-help
 
   =yield_content!(:widget_buttons)
