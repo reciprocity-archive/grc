@@ -30,6 +30,17 @@ class Program < ActiveRecord::Base
     slug
   end
 
+  def company_controls?
+    kind == "Company Controls"
+  end
+
+  def self.all_company_control_programs_first
+    programs = self.all
+    programs =
+      programs.select { |p| p.company_controls? } +
+      programs.reject { |p| p.company_controls? }
+  end
+
   def impact_scope_for_directives
     near_model = Directive
     near_ids = directive_ids

@@ -16,7 +16,10 @@
     .row-fluid
       =wrapped_text_field f, :span6, :slug, :label_name => 'Code (autofill)', :placeholder => "#{f.object.default_slug_prefix}-XXXX"
       -#=wrapped_text_field f, :span6, :version, :placeholder => '1.1.1'
-      =wrapped_select f, :span6, :kind, kinds, :selected => f.object.kind
+      -if kinds.size > 0
+        =wrapped_select f, :span6, :kind, kinds, :selected => f.object.kind
+      -else
+        =f.hidden_field(:kind, kinds[0])
 
 .row-fluid
   =wrapped_text_area f, :span6, :description, :class => 'double wysihtml5', :wrapper_div_class => 'wysiwyg-area', :placeholder => 'Enter description here'

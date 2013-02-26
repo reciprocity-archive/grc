@@ -29,6 +29,11 @@ class ProgramsController < BaseObjectsController
       @programs = @programs.db_search(params[:s])
     end
     @programs = allowed_objs(@programs.all, :read)
+    if params[:company_controls_first].present?
+      @programs =
+        @programs.select { |p| p.company_controls? } +
+        @programs.reject { |p| p.company_controls? }
+    end
 
      respond_to do |format|
       format.html do

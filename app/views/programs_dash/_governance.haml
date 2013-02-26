@@ -14,7 +14,7 @@
 
 .tabbable.tabs-left{ :id => quick_result ? nil : "quick_find" }
   %ul.nav.nav-tabs
-    %li.active=link_to '<i class="grcicon-program-black"></i> Programs <span class="item-count"></span>'.html_safe, "##{prefix}_programs", :data => { :'tab-href' => flow_programs_path(:quick => true, :qr => quick_result), :toggle => 'tab' }
+    %li.active=link_to '<i class="grcicon-program-black"></i> Programs <span class="item-count"></span>'.html_safe, "##{prefix}_programs", :data => { :'tab-href' => flow_programs_path(:quick => true, :qr => quick_result, :company_controls_first => true), :toggle => 'tab' }
     %li=link_to '<i class="grcicon-regulation-black"></i> Regulations <span class="item-count"></span>'.html_safe, "##{prefix}_regulations", :data => { :'tab-href' => flow_directives_path(:quick => true, :qr => quick_result, :meta_kind => "regulation"), :toggle => 'tab' }
     %li=link_to '<i class="grcicon-policy-black"></i> Policies <span class="item-count"></span>'.html_safe, "##{prefix}_policies", :data => { :'tab-href' => flow_directives_path(:quick => true, :qr => quick_result, :meta_kind => "policy"), :toggle => 'tab' }
     %li=link_to '<i class="grcicon-contract-black"></i> Contracts <span class="item-count"></span>'.html_safe, "##{prefix}_contracts", :data => { :'tab-href' => flow_directives_path(:quick => true, :qr => quick_result, :meta_kind => "contract"), :toggle => 'tab' }
