@@ -25,8 +25,8 @@
         .item-title
           .row-fluid
             .span9
-              .oneline
-                %a.custom-popover-trigger{:href => flow_cycle_path(cycle), :'data-popover-href' => tooltip_flow_cycle_path(cycle), :'data-popover-trigger' => 'sticky-hover'}
+              %a.custom-popover-trigger{:href => flow_cycle_path(cycle), :'data-popover-href' => tooltip_flow_cycle_path(cycle), :'data-popover-trigger' => 'sticky-hover'}
+                .oneline
                   %span.title
                     -if cycle.complete
                       %span.completed
