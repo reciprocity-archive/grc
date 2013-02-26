@@ -17,7 +17,7 @@
 .span8
   -if title.present? && (description.present? || notes.present?)
     -# Both title and description
-    .oneline.expand-on-hover{:rel => "tooltip", :title => "click to view more"}
+    .oneline.expand-on-hover
       -if object_type.present?
         .grcobject{ :class => object_type }
           %i{ :class => object_icon }
@@ -46,9 +46,11 @@
         =code
       %span.title
         =title
+    .description.inhover.no-description
+      %i No description
   -elsif (description.present? || notes.present?)
     -# Description only
-    .oneline.description-only.expand-on-hover{:rel => "tooltip", :title => "click to view full description"}
+    .oneline.description-only.expand-on-hover
       -if object_type.present?
         .grcobject{ :class => object_type }
           %i{ :class => object_icon }

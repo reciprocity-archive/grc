@@ -1,5 +1,5 @@
 -is_root = true
--expand_this = false
+-expand_this = true
 
 %ul.tree-structure
   -directives.each do |directive|
@@ -10,12 +10,12 @@
 
     %li{ :'data-object-id' => directive.id }
       .item-main
-        .openclose{ :class => !has_children && 'lastchild' }
-        .item-title{ :class => is_root && 'active' }
+        .openclose{ :class => [!has_children && 'lastchild', is_root && 'active'] }
+        .item-title
           .row-fluid
             =render :partial => 'object_leaf', :locals => { :instance => directive, :object_type => 'governance', :object_icon => "grcicon-#{directive.meta_kind}" }
             .objects-count
-              %a
+              %a.sections-count
                 %i.grcicon-section-black
                 =sections.count
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

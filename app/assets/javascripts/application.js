@@ -172,26 +172,13 @@ jQuery(document).ready(function($) {
 
   $.fn.showhide = showhide;
 
-  // Show/hide widget content
-  /*$('body').on('mouseover', 'a.more', function(e) {
-    var $this = $(this),
-        $paragraph = $this.closest("p"),
-        $description = $this.closest("div").find(".description");
-    $description.fadeIn();
-    //$this.closest('div').one('mouseout', function(e) { $description.fadeOut(); });
-  });*/
-
-  /*$('body').on('mouseover', '.tree-structure .description', function(e) {
-    var $this = $(this);
-    $this.removeClass("oneline");
-    //$this.one('mouseout', function(e) { $this.addClass('oneline'); });
-  });*/
-
-  $('body').on('click', '.tree-structure .title, .tree-structure .description, .tree-structure .view-more', function(e) {
+  // Show/hide tree leaf content
+  $('body').on('click', '.tree-structure .oneline, .tree-structure .description, .tree-structure .view-more', function(e) {
     var $this = $(this)
       , $leaf = $this.closest('[class*=span]').parent().children("[class*=span]:first")
       , $title = $leaf.find('.oneline')
       , $description = $leaf.find('.description')
+      , $view = $leaf.closest('.row-fluid').find('.view-more')
       ;
 
     if ($description.length > 0) {
@@ -200,37 +187,20 @@ jQuery(document).ready(function($) {
       if ($title.is('.description-only')) {
         $title.toggleClass('out');
       }
+      if ($description.hasClass('in'))
+        $view.text('hide');
+      else
+        $view.text('view');
     }
   });
 
-  /*$('body').on('mouseenter', '.expand-on-hover', function(e) {
-    var $this = $(this)
-      , $title = $this.find('.title')
-      , $description = $this.find('.description')
-      ;
-    if ($description.length > 0) {
-      $this.on('mouseleave.tree-slide', function(e) {
-          $description.hide();
-          $title.show();
-          $this.off('mouseleave.tree-slide');
-      });
-      if ($title.is('.description-only')) {
-        $title.hide();
-      }
-      $description.show();
-    }
-  });*/
-
-
-
-  
   // Open quick find
   $('body').on('focus', '.quick-search-holder input', function() {
     var $this = $(this),
     $quickFind = $this.closest(".quick-search").find(".quick-search-results");
     $quickFind.fadeIn();
   });
-  
+
   // Remove quick find
   $('body').on('click', '.quick-search-results .remove', function(e) {
     e.preventDefault();
@@ -238,7 +208,7 @@ jQuery(document).ready(function($) {
         $quickFind = $this.closest(".quick-search-results");
     $quickFind.fadeOut();
   });
-  
+
   // Close other popovers when one is shown
   $('body').on('show.popover', function(e) {
     $('[data-sticky_popover]').each(function() {
@@ -288,23 +258,19 @@ $(window).load(function(){
   $('body').on('click', 'ul.tree-structure .item-main .grcobject, ul.tree-structure .item-main .openclose', function(e) {
     var $this = $(this)
       , $main = $this.closest('.item-main')
-      , $code = $main.find('.code')
       , $li = $main.closest('li')
       , $content = $li.find('> .item-content')
-      //, $content = $this.closest('.item-main').closest('li').find('.item-content:first')
       , $icon = $this.closest('.item-main').find('.openclose');
 
     if ($icon.hasClass('active')) {
-    //if($this.hasClass("active")) {
       $content.slideUp('fast');
       $icon.removeClass('active');
-      //$this.removeClass("active");
     } else {
       $content.slideDown('fast');
       $icon.addClass('active');
-      //$this.addClass("active");
     }
-    
+
+    e.stopPropagation();
   });
 
 

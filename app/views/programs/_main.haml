@@ -2,9 +2,10 @@
 -is_root = true
 
 -content_for :widget_title do
-  %i.grcicon-directive
   -unless program.company_controls?
-    Directives (Regulations, Contracts, Policies) and Controls
+    Directives
+    %span.subtitle (Regulations, Contracts, Policies)
+    and Controls
   -else
     Controls
 

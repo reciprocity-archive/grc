@@ -143,6 +143,8 @@ ul.tree-structure {
       position: absolute;
       top: 0;
       right: 75px;
+      width: 0px;
+      white-space: nowrap;
       [class^="grcicon-"] {
         margin-top: 7px;
       }
@@ -153,6 +155,13 @@ ul.tree-structure {
         text-decoration: none;
         margin-left: 4px;
         font-weight: bold;
+        position:absolute;
+        &.sections-count {
+          left:-90px;
+        }
+        &.controls-count {
+          left:-45px;
+        }
       }
     }
     i.grcicon-comment {
@@ -312,6 +321,9 @@ ul.tree-structure {
       padding-left:0;
       padding-right:0;
       background:none;
+    }
+    &.no-description {
+      color: $gray;
     }
   }
   .openclose {

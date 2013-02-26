@@ -42,11 +42,6 @@
         %li
           %a{:href => export_controls_flow_directive_path(instance, :format => :html), :'data-toggle' => 'modal-ajax'}
             Export Controls
-    -unless instance.company_controls?
-      %li
-        %a{:href => mapping_program_path(instance)}
-          %i.grcicon-reg-map
-          Control Mapper
 
 -content_for :subheader_plus do
   %a.navbarplus.fltrt{ :href => new_flow_directive_path, :'data-toggle' => 'modal-ajax-form', :'data-form-target' => 'redirect', :'data-modal-reset' => 'reset', :'data-modal-class' => 'modal-wide' }
