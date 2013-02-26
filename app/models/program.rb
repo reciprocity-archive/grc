@@ -9,7 +9,12 @@ class Program < ActiveRecord::Base
   include RelatedModel
   include SanitizableAttributes
 
-  attr_accessible :title, :slug, :description, :start_date, :stop_date, :url
+  KINDS = [
+    "Directive",
+    "Company Controls",
+  ]
+
+  attr_accessible :title, :slug, :description, :start_date, :stop_date, :url, :kind
 
   has_many :program_directives, :dependent => :destroy
   has_many :directives, :through => :program_directives
