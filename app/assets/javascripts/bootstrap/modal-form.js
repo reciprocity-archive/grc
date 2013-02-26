@@ -271,7 +271,13 @@
     });
 
     $('body').on('ajax:html', '.modal > form', function(e, html, xhr) {
-      $(this).find('.modal-body').html(html);
+      var sel = "script[type='text/javascript'], script[language='javascript'], script:not([type])";
+      var $frag = $(html);
+      $frag.filter(sel).add($frag.find(sel)).each(function() {
+        $(this).remove();
+        setTimeout($(this).html(), 10);
+      }); 
+      $(this).find('.modal-body').html($frag);
     });
 
     //$('body').on('ajax:json', function(e, data, xhr) {
