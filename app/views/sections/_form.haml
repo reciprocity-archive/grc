@@ -1,15 +1,15 @@
 -content_for :modal_title do
   -if f.object.new_record?
-    Create a new regulation section
+    Create a new #{f.object.directive.section_meta_kind}
   -else
-    Edit regulation section
+    Edit #{f.object.directive.section_meta_kind}
 
 -if !f.object.new_record?
   -content_for :modal_delete_path, delete_flow_section_path(f.object)
 
 .row-fluid
   .span2{:class => error_class(f, :directive)}
-    %label{:for => "section-directive_id"} Directive
+    %label{:for => "section-directive_id"} #{f.object.directive.meta_kind.to_s.titleize}
     %input#section-directive_id{:name => "section[directive_id]", :type => "hidden", :value => f.object.directive_id}
     =f.object.directive.slug
     =error_messages_inline(f, :directive)
@@ -38,7 +38,7 @@
     =error_messages_inline(f, :title)
 
 .row-fluid
-  %label{:for => "section-description"} Text of Section / Clause:
+  %label{:for => "section-description"} Text of #{f.object.directive.section_meta_kind.to_s.titleize}:
 .row-fluid{"control-group" => ""}
   .span12.wysiwyg-area{:class => error_class(f, :description)}
     %textarea#section-description.span12.double.wysihtml5{:placeholder => "", :rows => "4", :name => 'section[description]'}=f.object.description
@@ -46,7 +46,7 @@
 
 .row-fluid
   .span12{:class => error_class(f, :url)}
-    %label{:for => "section-url"} URL for this section (optional)
+    %label{:for => "section-url"} URL for this #{f.object.directive.section_meta_kind} (optional)
     %input#section-link.span12{:placeholder => "http://", :type => "text", :value => f.object.url, :name => 'section[url]'}
     =error_messages_inline(f, :url)
 
