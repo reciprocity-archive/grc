@@ -8,7 +8,7 @@ class MappingController < ApplicationController
   cache_sweeper :control_sweeper, :only => [:map_rcontrol, :map_ccontrol]
 
   def show
-    @directive = Program.find(params[:program_id])
+    @program = Program.find(params[:program_id])
   end
 
   def section_dialog

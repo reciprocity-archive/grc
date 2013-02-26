@@ -14,7 +14,7 @@
           %a.btn.clearselection{ :href => "javascript://"}
             Reset
           -if control_type == 'regulation'
-            %a.btn.btn-add{ :href => new_flow_control_path(:'control[directive_id]' => @directive.id, :company => false), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-modal-class' => 'modal-wide', :title => 'Create New Regulation Control' }
+            %a.btn.btn-add{ :href => new_flow_control_path(:program_id => @program.id, :company => false), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-modal-class' => 'modal-wide', :title => 'Create New Regulation Control' }
               %i.grcicon-add
               New
           -else

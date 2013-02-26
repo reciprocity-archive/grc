@@ -1,16 +1,16 @@
--@title = "GRC Control Mapper for: #{@directive.title}"
+-@title = "GRC Control Mapper for: #{@program.title}"
 
 -content_for :header do
   %ul.breadcrumbs
     %li=link_to 'Programs', programs_dash_path
-    %li=link_to @directive.title, flow_directive_path(@directive)
+    %li=link_to @program.title, flow_program_path(@program)
     %li
       Mapping
 
   %h1
     %span
       Control Mapping:
-    =@directive.title
+    =@program.title
 
 -content_for :page_help, 'mapping'
 
@@ -27,7 +27,7 @@
       #rcontrol_list
         =render :partial => 'control_list',
                 :layout => 'layouts/widget_box',
-                :locals => { :title_prefix => 'Reg', :directive => @directive, :control_type => 'regulation' }
+                :locals => { :title_prefix => 'Reg', :program => @program, :control_type => 'regulation' }
 
       =render :partial => 'selected_control',
               :layout => 'layouts/widget_box',
@@ -37,7 +37,7 @@
       #ccontrol_list
         =render :partial => 'control_list',
                 :layout => 'layouts/widget_box',
-                :locals => { :title_prefix => 'Company', :directive => @directive, :control_type => 'company' }
+                :locals => { :title_prefix => 'Company', :program => @program, :control_type => 'company' }
 
       =render :partial => 'selected_control',
               :layout => 'layouts/widget_box',
