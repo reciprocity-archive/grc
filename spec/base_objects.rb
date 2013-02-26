@@ -1,5 +1,6 @@
 module BaseObjects
   def create_base_objects
+    @prog = FactoryGirl.create(:program, :title => 'Program')
     @opt_reg = FactoryGirl.create(:option, :title => 'Regulation', :role => 'directive_kind')
     @opt_com = FactoryGirl.create(:option, :title => 'Company Policy', :role => 'directive_kind')
     @creg = FactoryGirl.create(:directive, :title => 'Company', :slug => 'COM1', :kind => @opt_com)

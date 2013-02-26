@@ -1,6 +1,7 @@
 <ul class="tree-structure simple">
   {{#this}}
-    
+
+    {{^if_page_type "directives"}}
     {{#with relationship_type}}
       <li class="tab-title-holder">
         <h3 class="tab-title">
@@ -9,7 +10,8 @@
         </h3>
       </li>
     {{/with}}
-      
+    {{/if_page_type}}
+
   {{#related_objects}}
     <li>
       <div class="item-main">

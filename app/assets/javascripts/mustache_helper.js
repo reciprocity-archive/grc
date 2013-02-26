@@ -349,6 +349,13 @@ Mustache.registerHelper("is_beta", function(){
   else return options.inverse(this);
 });
 
+Mustache.registerHelper("if_page_type", function(page_type, options) {
+  var options = arguments[arguments.length - 1];
+  if (window.location.pathname.split('/')[1] == page_type)
+    return options.fn(this);
+  else
+    return options.inverse(this);
+});
 
 Mustache.registerHelper("render", function(template, context, options) {
   if(!options) {

@@ -3,7 +3,10 @@
 
 -content_for :widget_title do
   %i.grcicon-directive
-  Directives (Regulations, Contracts, Policies) and Controls
+  -unless program.company_controls?
+    Directives (Regulations, Contracts, Policies) and Controls
+  -else
+    Controls
 
 -content_for :widget_help, 'program_directives'
 
@@ -20,26 +23,29 @@
             %i.grcicon-add
             Control
         .pull-right
-          .btn-group
-            %a{:'data-toggle'=>"dropdown", :href => "#", :class => "btn btn-mini btn-success dropdown-toggle", :rel => "tooltip", :title => "Add Regulation, Contract, or Policy"}
-              %i.grcicon-add
-              Directive
-            %ul.dropdown-menu
-              %li.add-new-item
-                %a{:'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :'data-toggle' => "modal-ajax-relationship-selector", :href => list_edit_flow_program_directives_path(:program_id => instance.id, :meta_kind => :regulation), :'data-modal-class' => 'modal-wide' }
-                  %i.grcicon-regulation-black
-                  Regulation
-              %li.add-new-item
-                %a{:'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :'data-toggle' => "modal-ajax-relationship-selector", :href => list_edit_flow_program_directives_path(:program_id => instance.id, :meta_kind => :contract), :'data-modal-class' => 'modal-wide' }
-                  %i.grcicon-contract-black
-                  Contract
-              %li.add-new-item
-                %a{:'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :'data-toggle' => "modal-ajax-relationship-selector", :href => list_edit_flow_program_directives_path(:program_id => instance.id, :meta_kind => :policy), :'data-modal-class' => 'modal-wide' }
-                  %i.grcicon-policy-black
-                  Policy
+          -unless program.company_controls?
+            .btn-group
+              %a{:'data-toggle'=>"dropdown", :href => "#", :class => "btn btn-mini btn-success dropdown-toggle", :rel => "tooltip", :title => "Add Regulation, Contract, or Policy"}
+                %i.grcicon-add
+                Directive
+              %ul.dropdown-menu
+                %li.add-new-item
+                  %a{:'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :'data-toggle' => "modal-ajax-relationship-selector", :href => list_edit_flow_program_directives_path(:program_id => instance.id, :meta_kind => :regulation), :'data-modal-class' => 'modal-wide' }
+                    %i.grcicon-regulation-black
+                    Regulation
+                %li.add-new-item
+                  %a{:'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :'data-toggle' => "modal-ajax-relationship-selector", :href => list_edit_flow_program_directives_path(:program_id => instance.id, :meta_kind => :contract), :'data-modal-class' => 'modal-wide' }
+                    %i.grcicon-contract-black
+                    Contract
+                %li.add-new-item
+                  %a{:'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :'data-toggle' => "modal-ajax-relationship-selector", :href => list_edit_flow_program_directives_path(:program_id => instance.id, :meta_kind => :policy), :'data-modal-class' => 'modal-wide' }
+                    %i.grcicon-policy-black
+                    Policy
+
 .tabbable
   %ul.nav.nav-tabs
-    %li.active=link_to '<i class="grcicon-directive-black"></i>Directives'.html_safe, '#directives', :data => { :toggle => 'tab', :'tab-href' => flow_directives_path(:program_id => instance.id, :tree => true, :search_sections => true) }
+    -unless program.company_controls?
+      %li.active=link_to '<i class="grcicon-directive-black"></i>Directives'.html_safe, '#directives', :data => { :toggle => 'tab', :'tab-href' => flow_directives_path(:program_id => instance.id, :tree => true, :search_sections => true) }
     %li=link_to '<i class="grcicon-control-black"></i>Controls'.html_safe, '#controls', :data => { :toggle => 'tab', :'tab-href' => flow_controls_path(:program_id => instance.id, :list => true) }
     -#%li=link_to '<i class="grcicon-reg-map"></i>Combo'.html_safe, '#combo', :data => { :toggle => 'tab', :'tab-href' => flow_sections_path(:program_id => instance.id, :combo => true) }
 

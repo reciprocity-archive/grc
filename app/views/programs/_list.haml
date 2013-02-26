@@ -9,7 +9,16 @@
 -content_for :widget_id, 'programs_list_widget'
 
 %ul.tree-structure.simple
-  -@programs.each do |program|
+  -@programs.select { |p|p.company_controls? }.each do |program|
+    %li
+      -#stats = program_stats(program)
+      %a{ :href => flow_program_path(program), :data => { :'original-title' => 'Program Information', :'content' => render(:template => 'programs/tooltip', :locals => { :program => program }), :placement => 'right', :'popover-trigger' => 'sticky-hover'}, :style => "display:block;" }
+        .row-fluid
+          .span4
+            %strong.oneline
+              =program.title
+
+  -@programs.reject { |p|p.company_controls? }.each do |program|
     %li
       -#stats = program_stats(program)
       %a{ :href => flow_program_path(program), :data => { :'original-title' => 'Program Information', :'content' => render(:template => 'programs/tooltip', :locals => { :program => program }), :placement => 'right', :'popover-trigger' => 'sticky-hover'}, :style => "display:block;" }

@@ -4,6 +4,8 @@ CmsRails::Application.routes.draw do
     member do
       get 'tooltip'
       get 'delete'
+      get 'sections'
+      get 'controls'
     end
   end
 
@@ -12,8 +14,6 @@ CmsRails::Application.routes.draw do
       get 'tooltip'
       get 'export_controls'
       get 'export'
-      get 'sections'
-      get 'controls'
       get 'section_controls'
       get 'control_sections'
       get 'category_controls'
@@ -272,16 +272,11 @@ CmsRails::Application.routes.draw do
   get 'design/templates/:name' => 'design#templates'
   get 'design/:action' => 'design'
 
-  get "mapping/show/:directive_id" => 'mapping#show', :as => 'mapping_directive'
+  get "mapping/show/:program_id" => 'mapping#show', :as => 'mapping_program'
   get 'mapping_section_dialog/:section_id' => 'mapping#section_dialog', :as => 'mapping_section_dialog'
   post "mapping/map_rcontrol"
   post "mapping/map_ccontrol"
   put "mapping/update/:section_id" => 'mapping#update', :as => 'mapping_update'
-  get "mapping/buttons", :as => :mapping_buttons
-  get "mapping/selected_section/:section_id" => 'mapping#selected_section', :as => :mapping_selected_section
-  get "mapping/selected_control/:control_id" => 'mapping#selected_control', :as => :mapping_selected_control
-  match 'mapping/sections/:directive_id' => 'mapping#find_sections', :as => :mapping_sections
-  match 'mapping/controls/:directive_id/:control_type' => 'mapping#find_controls', :as => :mapping_controls
 
   match 'help/:slug' => 'help#show', :as => :help
   post 'help' => 'help#edit', :as => :update_help

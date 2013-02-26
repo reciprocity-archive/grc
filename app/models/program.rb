@@ -9,7 +9,12 @@ class Program < ActiveRecord::Base
   include RelatedModel
   include SanitizableAttributes
 
-  attr_accessible :title, :slug, :description, :start_date, :stop_date, :url
+  KINDS = [
+    "Directive",
+    "Company Controls",
+  ]
+
+  attr_accessible :title, :slug, :description, :start_date, :stop_date, :url, :kind
 
   has_many :program_directives, :dependent => :destroy
   has_many :directives, :through => :program_directives
@@ -23,6 +28,17 @@ class Program < ActiveRecord::Base
 
   def display_name
     slug
+  end
+
+  def company_controls?
+    kind == "Company Controls"
+  end
+
+  def self.all_company_control_programs_first
+    programs = self.all
+    programs =
+      programs.select { |p| p.company_controls? } +
+      programs.reject { |p| p.company_controls? }
   end
 
   def impact_scope_for_directives

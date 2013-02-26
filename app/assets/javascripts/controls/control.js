@@ -102,7 +102,7 @@ CMS.Models.ImplementedControl("CMS.Models.ImplementingControl", {
 
 // This creates a subclass of the Control model
 CMS.Models.Control("CMS.Models.RegControl", {
-	findAll : "GET /directives/{id}/controls.json"
+	findAll : "GET /programs/{id}/controls.json"
 	, map_ccontrol : function(params, control) {
 		return can.ajax({
 			url : "/mapping/map_ccontrol"

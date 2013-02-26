@@ -1,4 +1,0 @@
-%ul.slugtree.nav.nav-stacked{:data => { :href => mapping_controls_path(@directive, control_type, :format => :html)}}
-  -controls.each do |control|
-    =render :partial => 'control_list_content_item',
-            :locals => { :control => control, :control_type => control_type }
