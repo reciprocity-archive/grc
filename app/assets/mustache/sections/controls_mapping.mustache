@@ -56,7 +56,7 @@
   <div class="row-fluid">
     <div class="span12">
       <div class="wysiwyg-area">
-        <textarea class="span12 note" cols="40" id="section_notes" name="section[notes]" rows="3">{{notes}}</textarea>
+        <textarea class="span12 note wysihtml5" cols="40" id="section_notes" name="section[notes]" rows="3" {{ (el) -> setTimeout(function() { $(el).cms_wysihtml5(); }, 1); }}>{{notes}}</textarea>
       </div>
     </div>
   </div>

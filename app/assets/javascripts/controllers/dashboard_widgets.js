@@ -40,13 +40,8 @@ can.Control("CMS.Controllers.DashboardWidgets", {
       that.element
       .removeClass("ui-resizable")
       .resizable({handles : "s"})
-      .find('.wysihtml5').wysihtml5({ 
-        link: true
-        , image: false
-        , html: true
-        , 'font-styles': false
-        , parserRules: wysihtml5ParserRules 
-      });
+      .find('.wysihtml5')
+      .cms_wysihtml5();
     });
   }
 
