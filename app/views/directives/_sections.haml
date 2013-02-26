@@ -50,5 +50,5 @@
               %strong 0
       .item-actions
         -if show_edit
-          %a.btn.btn-mini.pull-right{ :href => edit_flow_section_path(item), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-dirty' => "#regulations, #combo", :title => 'Edit Section' }
+          %a.btn.btn-mini.pull-right{ :href => edit_flow_section_path(item), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-dirty' => "#regulations, #combo", :rel => 'tooltip', :title => "Edit #{item.directive.section_meta_kind.to_s.titleize}" }
             %i.grcicon-edit
