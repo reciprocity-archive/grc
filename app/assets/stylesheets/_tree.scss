@@ -57,6 +57,9 @@ ul.tree-structure {
   li {
     line-height:31px;
     border-bottom:1px solid $lightGray;
+    a {
+      display: block;
+    }
     &:hover {
       background: $treeListBgnd;
       .objects-count {
@@ -444,6 +447,7 @@ ul.tree-structure {
         .addition-info {
           a {
             color: $link;
+            display: inline;
           }
         }
       }
