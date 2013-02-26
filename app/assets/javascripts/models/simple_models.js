@@ -4,7 +4,7 @@
 
 can.Model.Cacheable("CMS.Models.Program", {
   root_object : "program"
-  , findAll : "/programs.json"
+  , findAll : "/programs.json?company_controls_first=true"
 }, {});
 
 can.Model.Cacheable("CMS.Models.Directive", {

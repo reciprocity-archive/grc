@@ -18,6 +18,15 @@
       Title
     %span
       %strong=instance.title
+  %li.float-element
+    %label
+      Kind
+    %span
+      -if instance.company_controls?
+        %i.grcicon-control-black
+      -else
+        %i.grcicon-directive-black
+      =instance.kind
   %li
     %label
       Description
