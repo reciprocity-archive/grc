@@ -41,8 +41,6 @@ describe MappingController do
       it "returns http success" do
         get 'show', :program_id => @prog.id
         assigns(:program).should eq(@prog)
-        assigns(:rcontrols).should eq([@ctl])
-        assigns(:ccontrols).should eq([@cctl])
         response.should be_success
       end
     end
