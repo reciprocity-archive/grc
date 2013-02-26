@@ -128,7 +128,6 @@ $(function() {
   CMS.Models.DisplayPrefs.findAll().done(function(data) {
 
     function bindResizer(ev) {
-
         can.getObject("Instances", CMS.Controllers.ResizeWidgets, true)[this.id] = 
          $(this)
           .cms_controllers_resize_widgets({
