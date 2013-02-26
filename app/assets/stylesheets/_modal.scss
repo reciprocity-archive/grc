@@ -92,6 +92,7 @@
       margin-bottom: 10px;
       .double {
         height: 70px;
+        @include input-block-level();
       }
       select {
         float: right;

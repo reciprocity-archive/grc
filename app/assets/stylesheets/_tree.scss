@@ -60,6 +60,11 @@ ul.tree-structure {
     a {
       display: block;
     }
+    .item-actions {
+      a {
+        display: inline-block;
+      }
+    }
     &:hover {
       background: $treeListBgnd;
       .objects-count {
