@@ -286,3 +286,14 @@ input.disabled.pending-ajax{
     }
   }
 }
+
+
+.left-dropdown {
+  .dropdown-menu {
+    right: 0;
+    left: auto;
+  }
+}
+.button-space {
+  margin-right: 4px;
+}

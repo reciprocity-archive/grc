@@ -24,8 +24,8 @@
             Control
         .pull-right
           -unless program.company_controls?
-            .btn-group
-              %a{:'data-toggle'=>"dropdown", :href => "#", :class => "btn btn-mini btn-success dropdown-toggle", :rel => "tooltip", :title => "Add Regulation, Contract, or Policy"}
+            .btn-group.left-dropdown.button-space
+              %a{:'data-toggle'=>"dropdown", :href => "#", :class => "btn btn-add dropdown-toggle", :rel => "tooltip", :title => "Add Regulation, Contract, or Policy"}
                 %i.grcicon-add
                 Directive
               %ul.dropdown-menu
