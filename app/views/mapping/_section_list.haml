@@ -1,5 +1,5 @@
 -content_for :widget_title do
-  Regulation Sections
+  Sections / Clauses
 
 -content_for :widget_help, 'mapping_sections'
 
@@ -8,11 +8,9 @@
     .row-fluid
       .span6
         %input.ui-corner-all.widgetsearch-tocontent(type='text' placeholder='Search')
-        
+
       .span6
         %a.btn.pull-right.clearselection{:href => "javascript://"}
           Reset
 
 .spinner
--#cache({:action => 'show', :action_suffix => "sections_#{@search}"}, :expires_in => @ttl || 300) do
-  =render :partial => 'section_list_content', :locals => { :sections => sections }

@@ -1,4 +1,4 @@
--@title = "GRC Reg Mapper for: #{@directive.title}"
+-@title = "GRC Control Mapper for: #{@directive.title}"
 
 -content_for :header do
   %ul.breadcrumbs
@@ -9,7 +9,7 @@
 
   %h1
     %span
-      Regulation to Control Mapping:
+      Control Mapping:
     =@directive.title
 
 -content_for :page_help, 'mapping'
@@ -19,36 +19,27 @@
     .span4
       #section_list
         =render :partial => 'section_list',
-                :layout => 'layouts/widget_box',
-                :locals => { :sections => @directive.sections.includes(:parent, :controls => :implementing_controls) }
+                :layout => 'layouts/widget_box'
 
       =render :partial => 'selected_section',
-              :layout => 'layouts/widget_box',
-              :locals => {:section => nil}
+              :layout => 'layouts/widget_box'
     .span4
       #rcontrol_list
         =render :partial => 'control_list',
                 :layout => 'layouts/widget_box',
-                :locals => { :controls => @rcontrols, :title_prefix => 'Reg', :directive => @directive, :control_type => 'regulation' }
+                :locals => { :title_prefix => 'Reg', :directive => @directive, :control_type => 'regulation' }
 
       =render :partial => 'selected_control',
               :layout => 'layouts/widget_box',
-              :locals => {:control => nil, :control_type => 'rcontrol', :map_button_id => :cmap, :map_button_path => mapping_map_ccontrol_path }
+              :locals => { :control_type => 'rcontrol', :map_button_id => :cmap }
 
     .span4
       #ccontrol_list
         =render :partial => 'control_list',
                 :layout => 'layouts/widget_box',
-                :locals => { :controls => @ccontrols, :title_prefix => 'Company', :directive => @directive, :control_type => 'company' }
+                :locals => { :title_prefix => 'Company', :directive => @directive, :control_type => 'company' }
 
       =render :partial => 'selected_control',
               :layout => 'layouts/widget_box',
-              :locals => {:control => nil, :control_type => 'ccontrol', :map_button_id => nil }
+              :locals => { :control_type => 'ccontrol', :map_button_id => nil }
 
-  :javascript
-    $(document).ready(function(){
-      init_mapping();
-    });
-    function update_map_buttons() {
-      //update_map_buttons_with_path('#{mapping_buttons_path(:format => "json")}');
-    }

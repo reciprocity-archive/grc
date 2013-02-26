@@ -11,19 +11,7 @@
               %span Map control to control
               %i.grcicon-demo
 
-.description{:id => "selected_#{control_type}", :oid => control ? control.id : ""}
+.description{:id => "selected_#{control_type}"}
   .content
-    -if control
-      %div
-        %span.prefix
-          =control.slug
-        =control.title
-      %div
-        =display_as_html control.description
-    -else
-      Nothing selected.
+    Nothing selected.
 
-:javascript
-  $(document).ready(function(){
-    update_map_buttons();
-  });

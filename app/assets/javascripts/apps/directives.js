@@ -4,7 +4,7 @@
 // Explicitly short circuit until handling of implemented/implementing controls
 // is complete.
 
-if (!/\/directivess\b/.test(window.location.pathname))
+if (!/\/directives\b/.test(window.location.pathname))
   return;
 
 $(function() {

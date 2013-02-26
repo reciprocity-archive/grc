@@ -42,6 +42,38 @@ class ProgramsController < BaseObjectsController
     end
   end
 
+  def sections
+    @sections = Section.
+      joins(:directive => :program_directives).
+      where(:program_directives => { :program_id => params[:id] }).
+      includes(:controls => :implementing_controls)
+    if params[:s].present?
+      @sections = @sections.fulltext_search(params[:s])
+    end
+    @sections = allowed_objs(@sections.all.sort_by(&:slug_split_for_sort), :read)
+    respond_to do |format|
+      format.json do
+        render :json => @sections, :methods => [:linked_controls, :description_inline]
+      end
+    end
+  end
+
+  def controls
+    @controls = Control.
+      joins(:directive => :program_directives).
+      where(:program_directives => { :program_id => params[:id] }).
+      includes(:implementing_controls)
+    if params[:s].present?
+      @controls = @controls.fulltext_search(params[:s])
+    end
+    @controls = allowed_objs(@controls.all.sort_by(&:slug_split_for_sort), :read)
+    respond_to do |format|
+      format.json do
+        render :json => @controls, :methods => [:implementing_controls, :description_inline]
+      end
+    end
+  end
+
   private
 
     def delete_model_stats
