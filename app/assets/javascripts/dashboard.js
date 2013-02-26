@@ -155,16 +155,16 @@ jQuery(function($) {
     }
   });
 
-  // Clear the .widgetsearch box when tab is changed
-  $('body').on('show', '.tabbable ul.nav-tabs > li > a', function(e) {
-    if (e.relatedTarget) {
-      $input = $(this).closest('.widget').find('.widgetsearch');
-      if ($input.val()) {
-        $input.val("");
-        $(e.relatedTarget).trigger('show', 'reset');
-      }
-    }
-  });
+  // // Clear the .widgetsearch box when tab is changed
+  // $('body').on('show', '.tabbable ul.nav-tabs > li > a', function(e) {
+  //   if (e.relatedTarget) {
+  //     $input = $(this).closest('.widget').find('.widgetsearch');
+  //     if ($input.val()) {
+  //       $input.val("");
+  //       $(e.relatedTarget).trigger('show', 'reset');
+  //     }
+  //   }
+  // });
 
   //After the modal template has loaded from the server, but before the
   //  data has loaded to populate into the body, show a spinner
