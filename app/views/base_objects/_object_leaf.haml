@@ -3,17 +3,19 @@
 -code_attr = :slug if local_assigns[:code_attr].nil?
 -title_attr = :title if local_assigns[:title_attr].nil?
 -description_attr = :description if local_assigns[:description_attr].nil?
+-notes_attr = :notes if local_assigns[:notes_attr].nil?
 
 -code = instance.send(code_attr) if local_assigns[:code].nil?
 -title = instance.send(title_attr) if local_assigns[:title].nil?
 -description = instance.send(description_attr) if local_assigns[:description].nil?
 -description_inline = sanitize(description, :tags => []) if local_assigns[:description_inline].nil?
+-notes = instance.send(notes_attr) if local_assigns[:notes].nil? && instance[notes_attr].present?
 
 -object_type = nil if local_assigns[:object_type].nil?
 -object_icon = nil if local_assigns[:object_icon].nil?
 
 .span8
-  -if title.present? && description.present?
+  -if title.present? && (description.present? || notes.present?)
     -# Both title and description
     .oneline.expand-on-hover{:rel => "tooltip", :title => "click to view more"}
       -if object_type.present?
@@ -23,10 +25,14 @@
         %i{ :class => object_icon }
       %span.code
         =code
+      -if notes.present?
+        %i.grcicon-comment
       %span.title
         =title
         %i.description-inline=description_inline
     .description
+      .notes
+        =display_as_html(notes)
       =display_as_html(description)
   -elsif title.present?
     -# Title only
@@ -40,7 +46,7 @@
         =code
       %span.title
         =title
-  -elsif description.present?
+  -elsif (description.present? || notes.present?)
     -# Description only
     .oneline.description-only.expand-on-hover{:rel => "tooltip", :title => "click to view full description"}
       -if object_type.present?
@@ -50,6 +56,8 @@
         %i{ :class => object_icon }
       %span.code
         =code
+      -if notes.present?
+        %i.grcicon-comment
       %span.title
         %i.description-inline=description_inline
     .description.inhover
@@ -58,6 +66,8 @@
           =code
         %br
         %br
+        .notes
+          =display_as_html(notes)
   -else
     -# Neither (shouldn't happen)
     .oneline
