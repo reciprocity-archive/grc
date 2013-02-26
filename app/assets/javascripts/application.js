@@ -367,18 +367,21 @@ jQuery(document).ready(function($) {
 
 jQuery(function($){
   $.fn.cms_wysihtml5 = function() {
-    var that = this
-    , editor = this.wysihtml5({ 
+    
+    this.wysihtml5({ 
         link: true, 
         image: false, 
         html: true, 
         'font-styles': false, 
         parserRules: wysihtml5ParserRules })
-      .data("wysihtml5")
-      .editor;
+    
+    this.each(function() {
+      var $that = $(this)
+      , editor = $that.data("wysihtml5").editor;
 
-    editor.on("change", function(data) {
-      that.html(this.getValue()).trigger("change");
-    });
+      editor.on("change", function(data) {
+        $that.html(this.getValue()).trigger("change");
+      });
+    })
   }
 });
