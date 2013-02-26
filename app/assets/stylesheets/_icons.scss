@@ -175,6 +175,9 @@
 }
 .grcicon-edit {
   background-position:-32px -56px;
+  .active & {
+    background-position:-32px -80px;
+  }
   .tree-structure .active & {
     background-position:-32px -56px;
   }
@@ -186,9 +189,6 @@
   }
   .active .tree & {
     background-position:-32px -56px;
-  }
-  .active & {
-    background-position:-32px -80px;
   }
 }
 .grcicon-edit-white {
