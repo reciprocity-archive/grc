@@ -422,6 +422,9 @@ ul.tree-structure {
         margin-top:0;
       }
     }
+    .inline-edit-population-doc {
+      border-bottom:1px solid #cdecb4 !important;
+    }
     &:hover {
       border:1px solid darken(#f0f0f0, 5%) !important;
       ul.add-response,
@@ -487,6 +490,10 @@ ul.tree-structure {
       }
       &:hover {
         background: transparent;
+        border-bottom: 1px solid $lightGray !important;
+        &:last-child {
+          border-bottom: none !important;
+        }
       }
     }
     h4.pbc-title {
