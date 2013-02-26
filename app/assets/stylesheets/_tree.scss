@@ -65,6 +65,9 @@ ul.tree-structure {
         display: inline-block;
       }
     }
+    .custom-popover-trigger {
+      text-decoration: none;
+    }
     &:hover {
       background: $treeListBgnd;
       .objects-count {

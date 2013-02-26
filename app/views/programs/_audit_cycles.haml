@@ -21,12 +21,12 @@
 %ul.tree-structure.simple
   -cycles.each do |cycle|
     %li
-      %a{:href => flow_cycle_path(cycle), :'data-popover-href' => tooltip_flow_cycle_path(cycle), :'data-popover-trigger' => 'sticky-hover'}
-        .item-main
-          .item-title
-            .row-fluid
-              .span9
-                .oneline
+      .item-main
+        .item-title
+          .row-fluid
+            .span9
+              .oneline
+                %a.custom-popover-trigger{:href => flow_cycle_path(cycle), :'data-popover-href' => tooltip_flow_cycle_path(cycle), :'data-popover-trigger' => 'sticky-hover'}
                   %span.title
                     -if cycle.complete
                       %span.completed
