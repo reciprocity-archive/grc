@@ -51,8 +51,6 @@
   }
   .tabs-left {
     padding: 0;
-    overflow-x: hidden;
-    overflow-y: auto;
     height: 514px;
   }
   .tab-content {
@@ -74,6 +72,9 @@
     }
   } 
   .nav-tabs {
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 100%;
     margin-bottom: 0;
     background: $lightGray;
     padding: 10px 0 10px 2px;
