@@ -6,7 +6,7 @@
     {{firstnonempty title description_inline}}
   </a>
 
-  <a data-placement="right" data-popover-trigger="sticky-hover" data-original-title="Linked Controls" data-content="{{render '/assets/controls/list_popover.mustache' linked_controls}}">
+  <a data-placement="right" {{#linked_controls.length}}data-popover-trigger="sticky-hover" data-original-title="Linked Controls" data-content="{{render '/assets/controls/list_popover.mustache' linked_controls}}"{{/linked_controls.length}}>
     {{{withattr 'href' '/mapping_section/dialog/\{\{id\}\}'}}}
     {{{withclass 'attached badge controllistRM status linked_controls:badge-warning !linked_controls:na:badge-warning !linked_controls:!na:badge-important'}}
     {{#if linked_controls.length}}}

@@ -3148,39 +3148,97 @@ module['can/view/mustache/mustache.js'] = (function (can) {
 
 	// The built-in Mustache helpers.
 	can.each({
-		// Implements the `if` built-in helper.
-		'if': function (expr, options) {
-			if ( !! expr) {
-				return options.fn(this);
-			}
-			else {
-				return options.inverse(this);
-			}
-		},
-		// Implements the `unless` built-in helper.
-		'unless': function (expr, options) {
-			if (!expr) {
-				return options.fn(this);
-			}
-		},
-
-		// Implements the `each` built-in helper.
-		'each': function (expr, options) {
-			if ( !! expr && expr.length) {
-				var result = [];
-				for (var i = 0; i < expr.length; i++) {
-					result.push(options.fn(expr[i]));
-				}
-				return result.join('');
-			}
-		},
-		// Implements the `with` built-in helper.
-		'with': function (expr, options) {
-			if ( !! expr) {
-				return options.fn(expr);
-			}
-		}
-
+    // Implements the `if` built-in helper.
+    /**
+     * @parent can.Mustache.Helpers
+     * @function if
+     * 
+     * Explicit if conditions.
+     * 
+     *    {{#if expr}}
+     *      // if
+     *      {{else}}
+     *        // else
+     *      {{/if}}
+     */
+    'if': function(expr, options){
+      if( can.isFunction(expr) && expr.isComputed ){
+        expr = expr();
+      }
+      if (!!expr) {
+        return options.fn(this);
+      }
+      else {
+        return options.inverse(this);
+      }
+    },
+    // Implements the `unless` built-in helper.
+    /**
+     * @parent can.Mustache.Helpers
+     * @function unless
+     * 
+     * The `unless` helper evaluates the inverse of the value
+     * of the key and renders the block between the helper and the slash.
+     * 
+     *    {{#unless expr}}
+     *      // unless
+     *      {{/unless}}
+     */
+    'unless': function(expr, options){
+      if( can.isFunction(expr) && expr.isComputed ){
+        expr = expr();
+      }
+      if (!expr) {
+        return options.fn(this);
+      }
+    },
+    
+    // Implements the `each` built-in helper.
+    /**
+     * @parent can.Mustache.Helpers
+     * @function each
+     * 
+     * You can use the `each` helper to itterate over a array 
+     * of items and render the block between the helper and the slash.
+     * 
+     *    {{#each arr}}
+     *      // each
+     *      {{/each}}
+     */
+    'each': function(expr, options) {
+      if( can.isFunction(expr) && expr.isComputed ){
+        expr = expr();
+      }
+      if (!!expr && expr.length) {
+        var result = [];
+        for (var i = 0; i < expr.length; i++) {
+          result.push(options.fn(expr[i]));
+        }
+        return result.join('');
+      }
+    },
+    // Implements the `with` built-in helper.
+    /**
+     * @parent can.Mustache.Helpers
+     * @function with
+     * 
+     * Mustache typically applies the context passed in the section 
+     * at compiled time.  However, if you want to override this 
+     * context you can use the `with` helper.
+     * 
+     *    {{#with arr}}
+     *      // with
+     *      {{/with}}
+     */
+    'with': function(expr, options){
+      var ctx = expr;
+      if( can.isFunction(expr) && expr.isComputed ){
+        expr = expr();
+      }
+      if (!!expr) {
+        return options.fn(ctx);
+      }
+    }
 	}, function (fn, name) {
 		Mustache.registerHelper(name, fn);
 	});
