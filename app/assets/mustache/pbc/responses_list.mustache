@@ -36,10 +36,12 @@
                   <ul class="items pbc-item-list">
                     {{> /assets/pbc/documents_list.mustache}}
                     <li class="toggle-add-document add-new">
-                      <a class="btn btn-mini btn-add" href="javascript://">
-                        <i class="grcicon-add"></i>
-                        Document
-                      </a>
+                      <span>
+                        <a class="btn btn-mini btn-add" href="javascript://">
+                          <i class="grcicon-add"></i>
+                          Document
+                        </a>
+                      </span>
                     </li>
                   </ul>
                 {{/if_equals}}
@@ -113,6 +115,7 @@
               {{/if_equals}}
               {{#if_equals type_name 'Population Sample'}}
                 {{#population_sample}}
+                  <br>
                   <div class="row-fluid inner-title">
                     <div class="span9">
                       <h5>Population Worksheet</h5>
@@ -127,7 +130,7 @@
                         <ul class="items pbc-item-list">
                           <li class="pbc-item">
                             <div class="row-fluid">
-                              <div class="span10">
+                              <div class="span8">
                                 {{#if_null population_document}}
                                   &nbsp;
                                 {{else}}
@@ -138,9 +141,14 @@
                                   {{/if_null}}
                                 {{/if_null}}
                               </div>
-                              <div class="span2">
+                              <div class="span4">
                                 <a class="btn btn-mini btn-add toggle-edit-population-doc" href="javascript://">
-                                  <i class="grcicon-add"></i>
+                                  {{#if_equals population_document_id ''}}
+                                    <i class="grcicon-add"></i>
+                                  {{else}}
+                                    <i class="grcicon-edit-white"></i>
+                                  {{/if_equals}}
+                                  Reference
                                 </a>
                               </div>
                             </div>
@@ -157,8 +165,8 @@
                                   -->
                                 </div>
                                 <div class="span2">
-                                  <a class="btn btn-mini btn-add pull-left add-document" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/documents/new" data-target="#ajax-modal-documents-new" rel="tooltip" data-placement="top" title="Create New Sample">
-                                    <i class="grcicon-add"></i>
+                                  <a class="btn btn-mini pull-left add-document" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/documents/new" data-target="#ajax-modal-documents-new" rel="tooltip" data-placement="top" title="Create New Sample">
+                                    <i class="grcicon-add-black"></i>
                                   </a>
                                 </div>
                               </div>
@@ -194,7 +202,7 @@
                         <ul class="items pbc-item-list">
                           <li class="pbc-item">
                             <div class="row-fluid">
-                              <div class="span10">
+                              <div class="span8">
                                 {{#if_null sample_worksheet_document}}
                                   &nbsp;
                                 {{else}}
@@ -205,9 +213,14 @@
                                   {{/if_null}}
                                 {{/if_null}}
                               </div>
-                              <div class="span2">
+                              <div class="span4">
                                 <a class="btn btn-mini btn-add toggle-edit-population-doc" href="javascript://">
-                                  <i class="grcicon-add"></i>
+                                  {{#if_equals sample_worksheet_document_id ''}}
+                                    <i class="grcicon-add"></i>
+                                  {{else}}
+                                    <i class="grcicon-edit-white"></i>
+                                  {{/if_equals}}
+                                  Reference
                                 </a>
                               </div>
                             </div>
@@ -224,8 +237,8 @@
                                   -->
                                 </div>
                                 <div class="span2">
-                                  <a class="btn btn-mini btn-add pull-left add-document" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/documents/new" data-target="#ajax-modal-documents-new" rel="tooltip" data-placement="top" title="Create New Worksheet">
-                                    <i class="grcicon-add"></i>
+                                  <a class="btn btn-mini pull-left add-document" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/documents/new" data-target="#ajax-modal-documents-new" rel="tooltip" data-placement="top" title="Create New Worksheet">
+                                    <i class="grcicon-add-black"></i>
                                   </a>
                                 </div>
                               </div>
@@ -250,7 +263,7 @@
                     <ul class="items pbc-item-list">
                       <li class="pbc-item">
                         <div class="row-fluid">
-                          <div class="span10">
+                          <div class="span7">
                             {{#if_null sample_evidence_document}}
                               &nbsp;
                             {{else}}
@@ -261,10 +274,15 @@
                               {{/if_null}}
                             {{/if_null}}
                           </div>
-                          <div class="span2">
+                          <div class="span5">
                             <div class="pull-right">
                               <a class="btn btn-mini btn-add toggle-edit-population-doc" href="javascript://">
-                                <i class="grcicon-add"></i>
+                                {{#if_equals sample_evidence_document_id ''}}
+                                  <i class="grcicon-add"></i>
+                                {{else}}
+                                  <i class="grcicon-edit-white"></i>
+                                {{/if_equals}}
+                                Reference
                               </a>
                             </div>
                           </div>
@@ -273,7 +291,7 @@
                       <li class="inline-editing inline-edit-population-doc hide" data-doc-type="sample_evidence">
                         <form>
                           <div class="row-fluid">
-                            <div class="span10">
+                            <div class="span9">
                               <input class="input-block-level input-title" name="title" placeholder="Search for Doc Title or URL" type="text" {{ (el) -> el.pbc_autocomplete_documents() }}>
                               <!--
                               <div class="error">
@@ -282,8 +300,8 @@
                               -->
                             </div>
                             <div class="span2">
-                              <a class="btn btn-mini btn-add pull-left add-document" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/documents/new" data-target="#ajax-modal-documents-new" title="Create New Collection" rel="tooltip" data-placement="top">
-                                <i class="grcicon-add"></i>
+                              <a class="btn btn-mini pull-left add-document" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/documents/new" data-target="#ajax-modal-documents-new" title="Create New Collection" rel="tooltip" data-placement="top">
+                                <i class="grcicon-add-black"></i>
                               </a>
                             </div>
                           </div>

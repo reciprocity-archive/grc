@@ -34,12 +34,21 @@ can.Control("CMS.Controllers.DashboardWidgets", {
     can.view(this.options.widget_view, this.options, function(frag) {
       that.element.html(frag);
       CMS.Models.DisplayPrefs.findAll().done(function(d) {
-        if(d[0].getCollapsed("programs_dash", that.element.attr("id"))) 
-          that.element.css("height", "").find(".widget-showhide > a").showhide("hide");
+        if(d[0].getCollapsed("programs_dash", that.element.attr("id"))) {
+          that.element
+          .css("height", "")
+          .find(".widget-showhide > a")
+          .showhide("hide");
+          
+          if(that.element.is(".ui-resizable"))
+            that.element.resizable("destroy")
+        } else {
+          that.element
+          .removeClass("ui-resizable")
+          .resizable({handles : "s"})    
+        }
       });
       that.element
-      .removeClass("ui-resizable")
-      .resizable({handles : "s"})
       .find('.wysihtml5')
       .cms_wysihtml5();
     });

@@ -28,11 +28,17 @@ can.Control("CMS.Controllers.ResizeWidgets", {
   
   , init : function(el, newopts) {
     this._super && this._super(newopts);
+    var that = this;
 
     //set up dragging the bottom border to resize in jQUI
-    $(this.element).find("section[id]").resizable({
+    $(this.element)
+    .find("section[id]")
+    .filter(function() {
+      var cs = that.options.model.getCollapsed(that.options.page_token, $(this).attr("id"));
+      return cs == null ? true : !cs;
+    })
+    .resizable({
       handles : "s"
-      //, ghost : true
     });
 
     this.update(newopts);
@@ -120,12 +126,15 @@ can.Control("CMS.Controllers.ResizeWidgets", {
         });
         return ch;
       };
+    if(!$c.length) {
+      $c = $(this.element).children();
+    }
     
 
     $c.each(function(i, child) {
       var $gcs = $(child).find("section[id]");
       $gcs.each(function(j, grandchild) {
-        if(that.options.model.getCollapsed("programs_dash", $(grandchild).attr("id"))) {
+        if(that.options.model.getCollapsed(that.options.page_token, $(grandchild).attr("id"))) {
           $(grandchild).css("height", "").find(".widget-showhide > a").showhide("hide");
         } else {
           if(page_heights.attr($(grandchild).attr("id"))) {
@@ -410,8 +419,11 @@ can.Control("CMS.Controllers.ResizeWidgets", {
     var $section = el.closest("section[id]");
     var collapse = $section.find(".content:first").is(":visible");
     CMS.Models.DisplayPrefs.findAll().done(function(d) { 
-      collapse ? $section.css("height", "") : $section.css("height", d[0].getWidgetHeight("programs_dash", $section.attr("id")))
-      d[0].setCollapsed("programs_dash", $section.attr("id"), collapse);
+      collapse ? $section.css("height", "") : $section.css("height", d[0].getWidgetHeight(that.options.page_token, $section.attr("id")))
+      $section.resizable(collapse ? "destroy" : {
+        handles : "s"
+      });
+      d[0].setCollapsed(that.options.page_token, $section.attr("id"), collapse);
     });
   }
 

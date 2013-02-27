@@ -58,7 +58,7 @@
       .span12
         =f.label :notes, "Note", :class => :cleanlabel
         .wysiwyg-area
-          =f.text_area :notes, :class => [:span12, :note], :rows => 3
+          =f.text_area :notes, :class => [:wysihtml5, :span12, :note], :rows => 3
 
     =f.hidden_field :na
 
@@ -67,3 +67,5 @@
       .span12
         .confirm-buttons
           =f.submit pat(:done), :class => 'btn btn-primary'          
+
+=render :partial => "shared/wysihtml5"
