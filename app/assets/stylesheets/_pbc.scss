@@ -410,6 +410,19 @@ h4.pbc-title {
   }
 }
 
+.pbc-item-list {
+  li {
+    .alert {
+      font-weight: bold;
+      font-size: 11px;
+      padding: 4px;
+      line-height: 14px;
+      margin-bottom: 10px;
+      margin-top: 5px;
+    }
+  }
+}
+
 ul.tree-structure {
   li.pbc-ca {
     margin-bottom:6px;
@@ -439,6 +452,12 @@ ul.tree-structure {
       }
       .pbc-item-list {
         li {
+          .alert {
+            font-weight: bold;
+            font-size: 11px;
+            padding: 4px;
+            line-height: 14px;
+          }
           &:hover {
             border-bottom:1px solid #cdecb4 !important;
             &.inline-add-person,
