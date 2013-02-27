@@ -5,8 +5,7 @@
   }
   .btn {
     margin-left:0;
-    padding-left:1px;
-    padding-right:2px;
+    padding: 3px 1px;
     @include border-radius(20px);
     border-color:lighten($gray,10%);
     i {
@@ -107,8 +106,8 @@ ul.tree-structure.pbc {
   .btn-controllink {
     @include opacity(0.5);
     margin-top:-2px;
-    padding-left:2px;
-    padding-right:2px;
+    padding-left:0;
+    padding-right:0;
     i {
       margin-top:0;
     }
@@ -153,8 +152,8 @@ h4.pbc-title {
   border:1px solid #cdecb4;
   position:relative;
   .btn-mini {
-    padding-left: 2px;
-    padding-right: 2px;
+    padding-left: 0;
+    padding-right: 0;
   }
   input {
     line-height: 12px;
@@ -201,6 +200,8 @@ h4.pbc-title {
       margin-top: 9px;
       .btn-mini {
         line-height: 16px;
+        padding-left: 2px;
+        padding-right: 2px;
       }
       input {
         margin-bottom: 0;
@@ -283,8 +284,8 @@ h4.pbc-title {
       border-bottom:1px solid #cdecb4;
       .btn {
         &.btn-mini {
-          padding-left: 2px;
-          padding-right: 2px;
+          padding-left: 0;
+          padding-right: 0;
         }
       }
     }
@@ -393,6 +394,7 @@ h4.pbc-title {
           font-size: 11px;
           font-weight: normal;
           line-height: 16px;
+          padding-right: 2px;
           i {
             margin-top: 0;
           }

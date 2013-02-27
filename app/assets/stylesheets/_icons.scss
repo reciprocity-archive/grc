@@ -9,7 +9,7 @@
 .openclose,
 .widget-showhide {
   display: inline-block;
-  width: 16px;
+  width: 20px;
   height: 16px;
   line-height: 16px;
   vertical-align: top; //necessary or button with icon embedded will sometimes be to tall.
@@ -36,291 +36,291 @@
 }
 
 .grcicon-add {
-  background-position:-224px -32px;
+  background-position:-222px -32px;
   .active & {
-    background-position:-224px -32px;
+    background-position:-222px -32px;
   }
 }
 .grcicon-add-black {
-  background-position:-224px -8px;
+  background-position:-222px -8px;
   .active & {
-    background-position:-224px -8px;
+    background-position:-222px -8px;
   }
 }
 .grcicon-admin {
-  background-position:-104px -32px;
+  background-position:-102px -32px;
   .active & {
-    background-position:-104px -8px;
+    background-position:-102px -8px;
   }
 }
 .grcicon-admin-black {
-  background-position:-104px -8px;
+  background-position:-102px -8px;
   .active & {
-    background-position:-104px -32px;
+    background-position:-102px -32px;
   }
 }
 .grcicon-dashboard {
-  background-position:-32px -32px;
+  background-position:-30px -32px;
   .active & {
-    background-position:-32px -8px;
+    background-position:-30px -8px;
   }
 }
 .grcicon-dashboard-black {
-  background-position:-32px -8px;
+  background-position:-30px -8px;
   .active & {
-    background-position:-32px -32px;
+    background-position:-30px -32px;
   }
 }
 .grcicon-demo {
-  background-position:-128px -32px;
+  background-position:-126px -32px;
   .active & {
-    background-position:-128px -8px;
+    background-position:-126px -8px;
   }
 }
 .grcicon-demo-black {
-  background-position:-128px -8px;
+  background-position:-126px -8px;
   .active & {
-    background-position:-128px -32px;
+    background-position:-126px -32px;
   }
 }
 .grcicon-demo-stop {
-  background-position:-152px -56px;
+  background-position:-150px -56px;
 }
 .grcicon-demo-stop-white {
-  background-position:-152px -80px;
+  background-position:-150px -80px;
 }
 .grcicon-desktop {
-  background-position:-56px -32px;
+  background-position:-54px -32px;
   .active & {
-    background-position:-56px -8px;
+    background-position:-54px -8px;
   }
 }
 .grcicon-desktop-black {
-  background-position:-56px -8px;
+  background-position:-54px -8px;
   .active & {
-    background-position:-56px -32px;
+    background-position:-54px -32px;
   }
 }
 .grcicon-help {
-  background-position:-80px -32px;
+  background-position:-78px -32px;
   .active & {
-    background-position:-80px -8px;
+    background-position:-78px -8px;
   }
 }
 .grcicon-help-black {
-  background-position:-80px -8px;
+  background-position:-78px -8px;
   .active & {
-    background-position:-80px -8px;
+    background-position:-78px -8px;
   }
 }
 .grcicon-logout {
-  background-position:-152px -32px;
+  background-position:-150px -32px;
   .active & {
-    background-position:-152px -8px;
+    background-position:-150px -8px;
   }
 }
 .grcicon-logout-black {
-  background-position:-152px -8px;
+  background-position:-150px -8px;
   .active & {
-    background-position:-152px -32px;
+    background-position:-150px -32px;
   }
 }
 .grcicon-normal {
-  background-position:-200px -32px;
+  background-position:-198px -32px;
   .active & {
-    background-position:-200px -8px;
+    background-position:-198px -8px;
   }
 }
 .grcicon-normal-black {
-  background-position:-200px -8px;
+  background-position:-198px -8px;
   .active & {
     background-position:-200px -32px;
   }
 }
 .grcicon-user {
-  background-position:-8px -32px;
+  background-position:-6px -32px;
   .active & {
-    background-position:-8px -8px;
+    background-position:-6px -8px;
   }
 }
 .grcicon-user-black {
-  background-position:-8px -8px;
+  background-position:-6px -8px;
   .active & {
-    background-position:-8px -32px;
+    background-position:-6px -32px;
   }
 }
 .grcicon-wide {
-  background-position:-176px -32px;
+  background-position:-174px -32px;
   .active & {
-    background-position:-176px -8px;
+    background-position:-174px -8px;
   }
 }
 .grcicon-wide-black {
-  background-position:-176px -8px;
+  background-position:-174px -8px;
   .active & {
-    background-position:-176px -32px;
+    background-position:-174px -32px;
   }
 }
 .grcicon-search-circle {
-  background-position:-248px -32px;
+  background-position:-246px -32px;
   .active & {
-    background-position:-248px -32px;
+    background-position:-246px -32px;
   }
 }
 .grcicon-search-black {
-  background-position:-248px -8px;
+  background-position:-246px -8px;
   .active & {
-    background-position:-248px -8px;
+    background-position:-246px -8px;
   }
 }
 .grcicon-edit {
-  background-position:-32px -56px;
+  background-position:-30px -56px;
   .active & {
-    background-position:-32px -80px;
+    background-position:-30px -80px;
   }
   .tree-structure .active & {
-    background-position:-32px -56px;
+    background-position:-30px -56px;
   }
   .modal .active & {
-    background-position:-32px -56px;
+    background-position:-30px -56px;
   }
   .active .tree-structure & {
-    background-position:-32px -56px;
+    background-position:-30px -56px;
   }
   .active .tree & {
-    background-position:-32px -56px;
+    background-position:-30px -56px;
   }
 }
 .grcicon-edit-white {
-  background-position:-32px -80px;
+  background-position:-30px -80px;
   .active & {
     background-position:-32px -80px;
   }
 }
 .grcicon-audit {
-  background-position:-272px -8px;
+  background-position:-270px -8px;
   .active & {
-    background-position:-272px -32px;
+    background-position:-270px -32px;
   }
 }
 .grcicon-audit-white {
-  background-position:-272px -32px;
+  background-position:-270px -32px;
 }
 .grcicon-imp-exp {
-  background-position:-56px -56px;
+  background-position:-54px -56px;
   .active & {
-    background-position:-56px -80px;
+    background-position:-54px -80px;
   }
 }
 .grcicon-imp-exp-white {
-  background-position:-56px -80px;
+  background-position:-54px -80px;
   .active & {
-    background-position:-56px -80px;
+    background-position:-54px -80px;
   }
 }
 .grcicon-export {
-  background-position:-8px -104px;
+  background-position:-6px -104px;
 }
 .grcicon-export-white {
-  background-position:-8px -128px;
+  background-position:-6px -128px;
 }
 .grcicon-reg-map {
-  background-position:-8px -56px;
+  background-position:-6px -56px;
   .active & {
-    background-position:-8px -56px;
+    background-position:-6px -56px;
   }
 }
 .grcicon-reg-map-white {
-  background-position:-8px -80px;
+  background-position:-6px -80px;
 }
 .grcicon-carot {
-  background-position:-80px -56px;
+  background-position:-78px -56px;
 }
 .grcicon-carot-white {
-  background-position:-80px -80px;
+  background-position:-78px -80px;
 }
 .grcicon-arrowright-black,
 .grcicon-goto {
-  background-position:-176px -56px;
+  background-position:-174px -56px;
 }
 .grcicon-goto-white {
-  background-position:-176px -80px;
+  background-position:-174px -80px;
 }
 .grcicon-goto-left {
-  background-position:-80px -104px;
+  background-position:-78px -104px;
 }
 .grcicon-goto-left-white {
-  background-position:-80px -128px;
+  background-position:-78px -128px;
 }
 .grcicon-search {
-  background-position:-248px -56px;
+  background-position:-246px -56px;
 }
 .grcicon-search-white {
-  background-position:-248px -80px;
+  background-position:-246px -80px;
 }
 .grcicon-link,
 .grcicon-link {
-  background-position:-32px -104px;
+  background-position:-30px -104px;
 }
 .grcicon-link-white {
-  background-position:-32px -128px;
+  background-position:-30px -128px;
 }
 .grcicon-ok {
-  background-position:-56px -104px;
+  background-position:-54px -104px;
 }
 .grcicon-document {
-  background-position:-8px -176px;
+  background-position:-6px -176px;
 }
 .grcicon-populationsample {
-  background-position:-32px -176px;
+  background-position:-30px -176px;
 }
 .grcicon-calendar {
-  background-position:-8px -248px;
+  background-position:-6px -248px;
 }
 .grcicon-remove {
-  background-position:-56px -176px;
+  background-position:-54px -176px;
 }
 .grcicon-x-grey {
-  background-position:-152px -176px;
+  background-position:-150px -176px;
 }
 .grcicon-x-white {
-  background-position:-176px -176px;
+  background-position:-174px -176px;
 }
 .grcicon-edit-grey {
-  background-position:-128px -176px;
+  background-position:-126px -176px;
 }
 .grcicon-check-green {
-  background-position:-224px -176px;
+  background-position:-222px -176px;
 }
 .grcicon-check-white {
-  background-position:-248px -176px;
+  background-position:-246px -176px;
 }
 .grcicon-chevron-right {
-  background-position:-200px -176px;
+  background-position:-198px -176px;
 }
 .grcicon-comment {
-  background-position:-272px -56px;
+  background-position:-270px -56px;
 }
 .grcicon-comment-white {
-  background-position:-272px -80px;
+  background-position:-270px -80px;
 }
 
 // Large icons
 .grciconlarge-dashboard {
-  background-position:-8px -8px;
+  background-position:-6px -8px;
 }
 .grciconlarge-dashboard-white {
-  background-position:-8px -40px;
+  background-position:-6px -40px;
 }
 
 .showhide,
 .openclose {
-  background-position:-200px -56px;
+  background-position:-198px -56px;
   cursor:pointer;
   @include opacity(0.5);
   @include transition(opacity 0.4s);
   &.active {
-    background-position:-224px -56px;
+    background-position:-222px -56px;
     @include opacity(1);
   }
   &.lastchild {
@@ -332,10 +332,10 @@
     margin-right:8px;
     @include border-radius();
     background-color:$white;
-    background-position:-128px -56px;
+    background-position:-126px -56px;
     &.active {
       @include opacity(0.5);
-      background-position:-80px -56px;
+      background-position:-78px -56px;
     }
     &:hover {
       @include opacity(1);
@@ -359,7 +359,6 @@
 // diferentiation of objects by icons
 .grcobject {
   display: inline-block;
-  margin-right:2px;
   width: 24px;
   height: 24px;
   background-image: url("/images/grcicons/objects.png");
@@ -384,53 +383,53 @@
   }
   [class^="grcicon-"] {
     margin-top:4px;
-    margin-left:4px;
+    margin-left:2px;
   }
 }
 
 //governance
-.grcicon-program { background-position:-104px -128px; }
-.grcicon-program-black { background-position:-104px -104px; }
-.grcicon-contract { background-position:-128px -128px; }
-.grcicon-contract-black { background-position:-128px -104px; }
-.grcicon-policy { background-position:-152px -128px; }
-.grcicon-policy-black { background-position:-152px -104px; }
-.grcicon-regulation { background-position:-176px -128px; }
-.grcicon-regulation-black { background-position:-176px -104px; }
-.grcicon-directive { background-position:-176px -128px; }
-.grcicon-directive-black { background-position:-176px -104px; }
+.grcicon-program { background-position:-102px -128px; }
+.grcicon-program-black { background-position:-102px -104px; }
+.grcicon-contract { background-position:-126px -128px; }
+.grcicon-contract-black { background-position:-126px -104px; }
+.grcicon-policy { background-position:-150px -128px; }
+.grcicon-policy-black { background-position:-150px -104px; }
+.grcicon-regulation { background-position:-174px -128px; }
+.grcicon-regulation-black { background-position:-174px -104px; }
+.grcicon-directive { background-position:-174px -128px; }
+.grcicon-directive-black { background-position:-174px -104px; }
 
-.grcicon-section { background-position:-200px -128px; }
-.grcicon-section-black { background-position:-200px -104px; }
-.grcicon-clause { background-position:-200px -128px; }
-.grcicon-clause-black { background-position:-200px -104px; }
+.grcicon-section { background-position:-198px -128px; }
+.grcicon-section-black { background-position:-198px -104px; }
+.grcicon-clause { background-position:-198px -128px; }
+.grcicon-clause-black { background-position:-198px -104px; }
 // business
-.grcicon-facility { background-position:-224px -128px;}
-.grcicon-facility-black { background-position:-224px -104px; }
-.grcicon-market { background-position:-248px -128px;}
-.grcicon-market-black { background-position:-248px -104px; }
-.grcicon-product { background-position:-272px -128px;}
-.grcicon-product-black { background-position:-272px -104px; }
-.grcicon-project { background-position:-56px -248px;}
-.grcicon-project-black { background-position:-56px -224px; }
-.grcicon-orggroup, .grcicon-org_group { background-position:-80px -248px;}
-.grcicon-orggroup-black, .grcicon-org_group-black { background-position:-80px -224px; }
-.grcicon-dataasset, .grcicon-data_asset { background-position:-176px -248px; }
-.grcicon-dataasset-black, .grcicon-data_asset-black { background-position:-176px -224px; }
+.grcicon-facility { background-position:-222px -128px;}
+.grcicon-facility-black { background-position:-222px -104px; }
+.grcicon-market { background-position:-246px -128px;}
+.grcicon-market-black { background-position:-246px -104px; }
+.grcicon-product { background-position:-270px -128px;}
+.grcicon-product-black { background-position:-270px -104px; }
+.grcicon-project { background-position:-54px -248px;}
+.grcicon-project-black { background-position:-54px -224px; }
+.grcicon-orggroup, .grcicon-org_group { background-position:-78px -248px;}
+.grcicon-orggroup-black, .grcicon-org_group-black { background-position:-78px -224px; }
+.grcicon-dataasset, .grcicon-data_asset { background-position:-174px -248px; }
+.grcicon-dataasset-black, .grcicon-data_asset-black { background-position:-174px -224px; }
 //compliance
-.grcicon-system { background-position:-128px -248px }
-.grcicon-system-black { background-position:-128px -224px; }
-.grcicon-process { background-position:-104px -248px }
-.grcicon-process-black { background-position:-104px -224px; }
-.grcicon-businessprocess, .grcicon-business_process { background-position:-104px -248px }
-.grcicon-businessprocess-black, .grcicon-business_process-black { background-position:-104px -224px; }
-.grcicon-control { background-position:-152px -248px }
-.grcicon-control-black { background-position:-152px -224px; }
+.grcicon-system { background-position:-126px -248px }
+.grcicon-system-black { background-position:-126px -224px; }
+.grcicon-process { background-position:-102px -248px }
+.grcicon-process-black { background-position:-102px -224px; }
+.grcicon-businessprocess, .grcicon-business_process { background-position:-102px -248px }
+.grcicon-businessprocess-black, .grcicon-business_process-black { background-position:-102px -224px; }
+.grcicon-control { background-position:-150px -248px }
+.grcicon-control-black { background-position:-150px -224px; }
 // risk
-.grcicon-risk { background-position:-200px -248px }
-.grcicon-risk-black { background-position:-200px -224px; }
-.grcicon-attribute { background-position:-224px -248px }
-.grcicon-riskyattribute, .grcicon-risky_attribute { background-position:-224px -248px }
-.grcicon-attribute-black { background-position:-224px -224px; }
-.grcicon-riskyattribute-black, .grcicon-risky_attribute-black { background-position:-224px -224px; }
-.grcicon-dashboard-big { background-position:-248px -224px; }
+.grcicon-risk { background-position:-198px -248px }
+.grcicon-risk-black { background-position:-198px -224px; }
+.grcicon-attribute { background-position:-222px -248px }
+.grcicon-riskyattribute, .grcicon-risky_attribute { background-position:-222px -248px }
+.grcicon-attribute-black { background-position:-222px -224px; }
+.grcicon-riskyattribute-black, .grcicon-risky_attribute-black { background-position:-222px -224px; }
+.grcicon-dashboard-big { background-position:-246px -224px; }

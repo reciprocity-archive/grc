@@ -276,7 +276,7 @@
       background-image: url("/images/grcicons/icons.png");
       background-repeat: no-repeat;
       @include background-size(296px 296px);
-      background-position: -272px -169px;
+      background-position: -270px -169px;
       cursor: move;
     }
     .widget-action {
@@ -290,9 +290,9 @@
       }
       a {
         display: block;
-        width: 16px;
+        width: 20px;
         height: 16px;
-        padding: 7px;
+        padding: 7px 5px;
         &:hover {
           i {
             @include opacity(1);
@@ -385,7 +385,7 @@
     .btn {
       font-size: 11px;
       font-weight:normal;
-      padding: 2px 4px;
+      padding: 2px 2px 2px 0;;
       margin-top: 2px;
     }
     input[type="text"] {

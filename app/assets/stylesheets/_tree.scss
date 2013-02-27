@@ -385,8 +385,8 @@ ul.tree-structure {
     @include opacity(0.2);
     @include transition(opacity 0.2s);
     .btn-mini {
-      padding-left:2px;
-      padding-right:2px;
+      padding-left:0;
+      padding-right:0;
       [class^="grcicon-"] {
         display: inline-block;
         margin-top: 0;
