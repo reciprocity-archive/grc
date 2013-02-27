@@ -42,7 +42,7 @@
       -unless instance.company_controls?
         =render :partial => 'related',
                 :layout => 'layouts/widget_box',
-                :locals => { :instance => instance, :widget_title => "Impact/Scope of Program's Directives", :widget_class => 'widget-tabs widget-tabs-horizontal related' }
+                :locals => { :instance => instance, :widget_title => "Impact/Scope of Program's Directives", :widget_class => 'widget-tabs widget-tabs-horizontal related business' }
     #right-column.span4.widget-area
       =render :partial => 'info',
               :layout => 'layouts/widget_box',
