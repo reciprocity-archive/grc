@@ -672,16 +672,6 @@
       padding: 10px;
       @include opacity(0.4);
       @include transition(opacity 0.3s ease);
-      &:hover {
-        color: $blue;
-        text-decoration: none;
-        @include opacity(1);
-        @include gradient-vertical($white, #e6e6e6);
-        background-position: 0 0;
-        i {
-          @include opacity(1);
-        }
-      }
       &:active {
         @include opacity(1);
         &:hover {
@@ -696,6 +686,23 @@
           margin-top: 1px;
           display: inline-block;
         }
+      }
+    }
+  }
+  &:hover {
+    @include opacity(1);
+    @include gradient-vertical($white, #e6e6e6);
+    .btn-group .btn {
+      &:hover {
+        @include opacity(1);
+      }
+      color: $blue;
+      text-decoration: none;
+      @include opacity(0.7);
+      @include gradient-vertical($white, #e6e6e6);
+      background-position: 0 0;
+      i {
+        @include opacity(0.7);
       }
     }
   }
