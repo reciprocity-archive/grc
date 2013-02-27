@@ -59,7 +59,16 @@ class ControlsController < BaseObjectsController
     elsif params[:quick]
       render :partial => 'quick', :locals => { :quick_result => params[:qr]}
     elsif params[:list].present?
-      render :partial => 'list', :locals => { :controls => @controls }
+      if params[:program_id].present?
+        program = Program.where(:id => params[:program_id]).first
+        if program.present? && program.company_controls?
+          render :partial => 'list', :locals => { :controls => @controls, :include_linked_programs => true }
+        else
+          render :partial => 'list', :locals => { :controls => @controls }
+        end
+      else
+        render :partial => 'list', :locals => { :controls => @controls }
+      end
     else
       render :json => @controls, :methods => [:description_inline]
     end

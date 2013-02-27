@@ -90,6 +90,13 @@ class Control < ActiveRecord::Base
     "#{slug} - #{title}"
   end
 
+  def linked_programs
+    directive_ids = implemented_controls.map(&:directive_id)
+    Program.
+      joins(:program_directives).
+      where(:program_directives => { :directive_id => directive_ids })
+  end
+
   def custom_edges
     # Returns a list of additional edges that aren't returned by the default method.
 
