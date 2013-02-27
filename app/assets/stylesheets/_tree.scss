@@ -57,9 +57,6 @@ ul.tree-structure {
   li {
     line-height:31px;
     border-bottom:1px solid $lightGray;
-    &> a {
-      display: block;
-    }
     .item-actions {
       a {
         display: inline-block;
@@ -67,6 +64,10 @@ ul.tree-structure {
     }
     .custom-popover-trigger {
       text-decoration: none;
+      display: block;
+    }
+    .custom-related-popover-trigger {
+      display: block;
     }
     &:hover {
       background: $treeListBgnd;
@@ -156,6 +157,7 @@ ul.tree-structure {
         margin-left: 4px;
         font-weight: bold;
         position:absolute;
+        display: inline-block;
         &.sections-count {
           left:-90px;
         }
@@ -461,9 +463,6 @@ ul.tree-structure {
         }
       }
       .item-main {
-        &> a {
-          display: block;
-        }
         a {
           color:$text;
         }
@@ -489,9 +488,6 @@ ul.tree-structure {
       .completed {
         color: $gray;
       }
-    }
-    .objects-count {
-      right: 0;
     }
   }
   .rtf {

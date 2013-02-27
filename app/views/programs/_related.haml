@@ -38,7 +38,7 @@
                     -rel_objects.uniq.each do |o|
                       %li
                         .item-main
-                          %a{:href => self.send("flow_#{model_name}_path", o), :'data-popover-href'=> self.send("tooltip_flow_#{model_name}_path", o), :'data-popover-trigger' => "sticky-hover", :style => "display:block"}
+                          %a.custom-related-popover-trigger{:href => self.send("flow_#{model_name}_path", o), :'data-popover-href'=> self.send("tooltip_flow_#{model_name}_path", o), :'data-popover-trigger' => "sticky-hover", :style => "display:block"}
                             .item-title
                               .row-fluid
                                 .span8
