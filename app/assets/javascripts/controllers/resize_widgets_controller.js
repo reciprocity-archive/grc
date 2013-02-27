@@ -28,11 +28,17 @@ can.Control("CMS.Controllers.ResizeWidgets", {
   
   , init : function(el, newopts) {
     this._super && this._super(newopts);
+    var that = this;
 
     //set up dragging the bottom border to resize in jQUI
-    $(this.element).find("section[id]").resizable({
+    $(this.element)
+    .find("section[id]")
+    .filter(function() {
+      var cs = that.options.model.getCollapsed(that.options.page_token, $(this).attr("id"));
+      return cs == null ? true : !cs;
+    })
+    .resizable({
       handles : "s"
-      //, ghost : true
     });
 
     this.update(newopts);
@@ -414,6 +420,9 @@ can.Control("CMS.Controllers.ResizeWidgets", {
     var collapse = $section.find(".content:first").is(":visible");
     CMS.Models.DisplayPrefs.findAll().done(function(d) { 
       collapse ? $section.css("height", "") : $section.css("height", d[0].getWidgetHeight(that.options.page_token, $section.attr("id")))
+      $section.resizable(collapse ? "destroy" : {
+        handles : "s"
+      });
       d[0].setCollapsed(that.options.page_token, $section.attr("id"), collapse);
     });
   }
