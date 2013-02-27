@@ -247,15 +247,17 @@ can.Control("CMS.Controllers.ResizeWidgets", {
   }
 
   , getLeftOffset : function(pageX) {
+    var pct_offset = -.025641;
     var $t = $(this.element)
       , margin = parseInt($t.children('[class*=span]:last').css('margin-left'));
-    return Math.round((pageX * this.options.total_columns) / ($t.width() + margin));
+    return Math.round((pageX + 3 + margin / 2 - $t.offset().left) * this.options.total_columns / (1 - pct_offset) / $t.width());
   }
 
   , getLeftOffsetAsPixels : function(offset) {
+    var pct_offset = -.025641;
     var $t = $(this.element)
       , margin = parseInt($t.children('[class*=span]:last').css('margin-left'));
-    return offset * ($t.width() + margin) / this.options.total_columns - 4;
+    return $t.width() * (offset / this.options.total_columns * (1 - pct_offset)) + $t.offset().left - margin / 2 - 3;
   }
 
   , " mousedown" : "startResize"
@@ -309,6 +311,7 @@ can.Control("CMS.Controllers.ResizeWidgets", {
 
   , " mouseover" : "showGhostResizer"
   , " mousemove" : "showGhostResizer"
+  , "{window} resize" : "showGhostResizer"
 
   , showGhostResizer : function(el, ev) {
     var that = this;
