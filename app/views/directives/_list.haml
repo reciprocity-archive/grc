@@ -3,9 +3,9 @@
   %span
     =@programs.count
 
--content_for :widget_help, 'programs_list'
+-content_for :widget_help, 'directives_list'
 
--content_for :widget_id, 'programs_list_widget'
+-content_for :widget_id, 'directives_list_widget'
 
 %ul.tree-structure.simple
   -@programs.select {|p|p.company_controls?}.each do |program|
