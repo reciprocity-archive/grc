@@ -65,6 +65,7 @@ can.Control("CMS.Controllers.Mapping", {
     }
     var dfd = this[el.is(".unmapbtn") ? "unmap" : "map"](section, rcontrol, ccontrol);
     this.bindXHRToButton(dfd, el);
+    dfd.always(this.proxy("updateButtons")); //bindXHR will remove the disabled attr, so re-check afterwards.
     var that = this;
     dfd.then(function() {
       that.options.section_list_controller.draw_list(); //manual update because section model doesn't contain "real" rcontrol model

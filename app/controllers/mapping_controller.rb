@@ -106,7 +106,7 @@ class MappingController < ApplicationController
     section = Section.find(params[:section_id])
     section.na = params[:section]['na']
     section.notes = params[:section]['notes']
-    section.save
+    section.save(:validate => false)
 
     flash[:notice] = "Saved"
     ajax_refresh
