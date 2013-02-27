@@ -74,7 +74,7 @@ jQuery(document).ready(function($) {
 
     if (!$currentTarget.data('tooltip')) {
       $currentTarget
-        .tooltip()
+        .tooltip({ delay: 300 })
         .triggerHandler(e);
     }
 
