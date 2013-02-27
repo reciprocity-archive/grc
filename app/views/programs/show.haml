@@ -20,11 +20,11 @@
       %a{:href => edit_flow_program_path(instance), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide',:title => 'Edit Program'}
         %i.grcicon-edit
         Edit Program
-    %li
-      %a{:href => new_flow_cycle_path(:'program_id' => instance.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect'}
-        %i.grcicon-audit
-        Start Audit
     -unless instance.company_controls?
+      %li
+        %a{:href => new_flow_cycle_path(:'program_id' => instance.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect'}
+          %i.grcicon-audit
+          Start Audit
       %li
         %a{ :href => mapping_program_path(instance) }
           %i.grcicon-reg-map
@@ -50,6 +50,7 @@
       =render :partial => 'more_info',
               :layout => 'layouts/widget_box',
               :locals => { :program => instance, :widget_class => 'related'}
-      =render :partial => 'audit_cycles',
-              :layout => 'layouts/widget_box',
-              :locals => { :program => instance, :widget_class => 'governance' }
+      -unless instance.company_controls?
+        =render :partial => 'audit_cycles',
+                :layout => 'layouts/widget_box',
+                :locals => { :program => instance, :widget_class => 'governance' }
