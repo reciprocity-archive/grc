@@ -1,6 +1,9 @@
 #results-container {
   font-weight: bold;
   font-size: 11px;
+  .well {
+    overflow: hidden !important;
+  }
   h4 {
     font-weight: bold;
     margin-bottom: 10px;
@@ -13,18 +16,27 @@
     padding: 5px 10px;
   }
   .ggrc-table {
-    width: 100%;
-    margin-bottom: 10px;
     th {
       text-align: left;
       padding: 4px;
       border: 1px solid $gray;
       background: $widgetHeader;
+      word-break: break-all;
     }
+    .inner-tabel {
+      height: 300px;
+      overflow-y: auto;
+      width: 100%;
+    }
+  }
+  .inner-ggrc-table {
+    width: 100%;
+    margin-bottom: 10px;
     td {
       padding: 4px;
       border: 1px solid $widgetHeader;
       font-weight: normal;
+      word-break: break-all;
       &.member-failure {
         background: lighten($red, 35%);
       }

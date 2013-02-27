@@ -35,7 +35,11 @@
         See specific errors below
       %br
 
-    %table.ggrc-table
+    %table.ggrc-table{:cellspacing => "0", :cellpadding => "0"}
+      %col{:style => "width:10%"}
+      %col{:style => "width:20%"}
+      %col{:style => "width:35%"}
+      %col{:style => "width:35%"}
       %thead
         %tr
           %th Code
@@ -43,16 +47,25 @@
           %th Description
           %th Notes
       %tbody
-        -columns = %w(slug title description notes)
-        -@sections.each_with_index do |sec, i|
-          %tr{ :class => (i % 2 == 0 ? :odd : :even) }
-            -columns.each do |column_name|
-              %td{ :class => ( (@errors[i].present? && @errors[i][column_name].present?) ? 'member-failure' : ((@warnings[i].present? && @warnings[i][column_name].present?) ? 'member-warning' : '' ) ) }
-                =sec.send(column_name)
-                -if @errors[i].present? && @errors[i][column_name].present?
-                  .help-inline=@errors[i][column_name].join(', ')
-                -if @warnings[i].present? && @warnings[i][column_name].present?
-                  .help-inline=@warnings[i][column_name].join(', ')
+        %tr
+          %td{:colspan => "4", :cellspacing => "0", :cellpadding => "0"}
+            .inner-tabel
+              %table.inner-ggrc-table{:cellspacing => "0", :cellpadding => "0"}
+                %col{:style => "width:10%"}
+                %col{:style => "width:20%"}
+                %col{:style => "width:35%"}
+                %col{:style => "width:35%"}
+                %tbody
+                  -columns = %w(slug title description notes)
+                  -@sections.each_with_index do |sec, i|
+                    %tr{ :class => (i % 2 == 0 ? :odd : :even) }
+                      -columns.each do |column_name|
+                        %td{ :class => ( (@errors[i].present? && @errors[i][column_name].present?) ? 'member-failure' : ((@warnings[i].present? && @warnings[i][column_name].present?) ? 'member-warning' : '' ) ) }
+                          =sec.send(column_name)
+                          -if @errors[i].present? && @errors[i][column_name].present?
+                            .help-inline=@errors[i][column_name].join(', ')
+                          -if @warnings[i].present? && @warnings[i][column_name].present?
+                            .help-inline=@warnings[i][column_name].join(', ')
 
     Showing 1 to #{@sections.size} of #{@sections.size} entries
     %br/

@@ -20,7 +20,18 @@
       %br
 
 
-    %table.ggrc-table
+    %table.ggrc-table{:cellspacing => "0", :cellpadding => "0"}
+      %col{:style => "width:8%"}
+      %col{:style => "width:9%"}
+      %col{:style => "width:10%"}
+      %col{:style => "width:9%"}
+      %col{:style => "width:9%"}
+      %col{:style => "width:10%"}
+      %col{:style => "width:9%"}
+      %col{:style => "width:9%"}
+      %col{:style => "width:9%"}
+      %col{:style => "width:9%"}
+      %col{:style => "width:9%"}
       %thead
         %tr
           %th System Code
@@ -35,16 +46,32 @@
           %th References
           %th Network Zone
       %tbody
-        -columns = %w(slug title description infrastructure start_date owner_display categories_display sub_systems_display org_groups_display references_display network_zone)
-        -@systems.each_with_index do |sec, i|
-          %tr{ :class => (i % 2 == 0 ? :odd : :even) }
-            -columns.each do |column_name|
-              %td{ :class => ( (@errors[i].present? && @errors[i][column_name].present?) ? 'member-failure' : ((@warnings[i].present? && @warnings[i][column_name].present?) ? 'member-warning' : '' ) ) }
-                =sec.send(column_name)
-                -if @errors[i].present? && @errors[i][column_name].present?
-                  .help-inline=@errors[i][column_name].join(', ')
-                -if @warnings[i].present? && @warnings[i][column_name].present?
-                  .help-inline=@warnings[i][column_name].join(', ')
+        %tr
+          %td{:colspan => "11", :cellspacing => "0", :cellpadding => "0"}
+            .inner-tabel
+              %table.inner-ggrc-table{:cellspacing => "0", :cellpadding => "0"}
+                %col{:style => "width:8%"}
+                %col{:style => "width:9%"}
+                %col{:style => "width:10%"}
+                %col{:style => "width:9%"}
+                %col{:style => "width:9%"}
+                %col{:style => "width:10%"}
+                %col{:style => "width:9%"}
+                %col{:style => "width:9%"}
+                %col{:style => "width:9%"}
+                %col{:style => "width:9%"}
+                %col{:style => "width:9%"}
+                %tbody
+                  -columns = %w(slug title description infrastructure start_date owner_display categories_display sub_systems_display org_groups_display references_display network_zone)
+                  -@systems.each_with_index do |sec, i|
+                    %tr{ :class => (i % 2 == 0 ? :odd : :even) }
+                      -columns.each do |column_name|
+                        %td{ :class => ( (@errors[i].present? && @errors[i][column_name].present?) ? 'member-failure' : ((@warnings[i].present? && @warnings[i][column_name].present?) ? 'member-warning' : '' ) ) }
+                          =sec.send(column_name)
+                          -if @errors[i].present? && @errors[i][column_name].present?
+                            .help-inline=@errors[i][column_name].join(', ')
+                          -if @warnings[i].present? && @warnings[i][column_name].present?
+                            .help-inline=@warnings[i][column_name].join(', ')
 
     Showing 1 to #{@systems.size} of #{@systems.size} entries
     %br/

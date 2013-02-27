@@ -17,7 +17,16 @@
         See specific errors below
       %br
 
-    %table.ggrc-table
+    %table.ggrc-table{:cellspacing => "0", :cellpadding => "0"}
+      %col{:style => "width:9%"}
+      %col{:style => "width:5%"}
+      %col{:style => "width:12%"}
+      %col{:style => "width:12%"}
+      %col{:style => "width:12%"}
+      %col{:style => "width:12%"}
+      %col{:style => "width:15%"}
+      %col{:style => "width:14%"}
+      %col{:style => "width:19%"}
       %thead
         %tr
           %th Request Type
@@ -30,20 +39,34 @@
           %th Auditor Contact
           %th Date Requested
       %tbody
-        -columns = %w(type_id|type_name pbc_control_code pbc_control_desc request notes test company_responsible auditor_responsible date_requested)
-        -@requests.each_with_index do |req, i|
-          %tr{ :class => (i % 2 == 0 ? :odd : :even) }
-            -columns.each do |column_name|
-              -if column_name.include?('|')
-                -column_name, display_name = column_name.split('|')
-              -else
-                -display_name = column_name
-              %td{ :class => ( (@errors[i].present? && @errors[i][column_name].present?) ? 'member-failure' : ((@warnings[i].present? && @warnings[i][column_name].present?) ? 'member-warning' : '' ) ) }
-                =req.send(display_name)
-                -if @errors[i].present? && @errors[i][column_name].present?
-                  .help-inline=@errors[i][column_name].join(', ')
-                -if @warnings[i].present? && @warnings[i][column_name].present?
-                  .help-inline=@warnings[i][column_name].join(', ')
+        %tr
+          %td{:colspan => "9", :cellspacing => "0", :cellpadding => "0"}
+            .inner-tabel
+              %table.inner-ggrc-table{:cellspacing => "0", :cellpadding => "0"}
+                %col{:style => "width:9%"}
+                %col{:style => "width:5%"}
+                %col{:style => "width:12%"}
+                %col{:style => "width:12%"}
+                %col{:style => "width:12%"}
+                %col{:style => "width:12%"}
+                %col{:style => "width:15%"}
+                %col{:style => "width:14%"}
+                %col{:style => "width:9%"}
+                %tbody
+                  -columns = %w(type_id|type_name pbc_control_code pbc_control_desc request notes test company_responsible auditor_responsible date_requested)
+                  -@requests.each_with_index do |req, i|
+                    %tr{ :class => (i % 2 == 0 ? :odd : :even) }
+                      -columns.each do |column_name|
+                        -if column_name.include?('|')
+                          -column_name, display_name = column_name.split('|')
+                        -else
+                          -display_name = column_name
+                        %td{ :class => ( (@errors[i].present? && @errors[i][column_name].present?) ? 'member-failure' : ((@warnings[i].present? && @warnings[i][column_name].present?) ? 'member-warning' : '' ) ) }
+                          =req.send(display_name)
+                          -if @errors[i].present? && @errors[i][column_name].present?
+                            .help-inline=@errors[i][column_name].join(', ')
+                          -if @warnings[i].present? && @warnings[i][column_name].present?
+                            .help-inline=@warnings[i][column_name].join(', ')
 
     Showing 1 to #{@requests.size} of #{@requests.size} entries
 
