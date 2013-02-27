@@ -94,6 +94,9 @@
         height: 70px;
         @include input-block-level();
       }
+      iframe {
+        width: 97.5% !important;
+      }
       select {
         float: right;
         width: auto;
