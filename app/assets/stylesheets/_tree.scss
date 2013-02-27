@@ -461,6 +461,9 @@ ul.tree-structure {
         }
       }
       .item-main {
+        &> a {
+          display: block;
+        }
         a {
           color:$text;
         }
