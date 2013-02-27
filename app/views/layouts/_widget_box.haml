@@ -21,7 +21,7 @@
         -#.widget-action.pull-right
           %a.remove{:href => "#"}
             %i.grcicon-x-white
-        .widget-action.pull-right.widget-showhide
+        .widget-action.pull-right.widget-showhide{ :rel => 'tooltip', :title => 'Expand / Collapse' }
           %a.active{ :href=>"javascript://"}
         -if !help_path.blank?
           .widget-action.pull-right.widget-action-help
