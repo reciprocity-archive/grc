@@ -25,12 +25,10 @@
               Control
 
 .action-items
-  %a.shrinkAll
-    %i.grcicon-normal-black
-    Shrink All
-  %a.expandAll
+  %a.expandAll{:href => "#", :rel => "tooltip", :title => "Expand all"}
     %i.grcicon-wide-black
-    Expand All
-
+  %a.shrinkAll{:href => "#", :rel => "tooltip", :title => "Collapse all"}
+    %i.grcicon-normal-black
+    
 %ul.tree-structure#regulations
   =render :partial => 'sections', :locals => { :sections => sections, :expanded => true }

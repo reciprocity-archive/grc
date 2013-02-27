@@ -6,9 +6,7 @@
             :locals => { :category => category, :children => children, :controls => controls }
 
 .action-items
-  %a.shrinkAll
-    %i.grcicon-normal
-    Shrink All
-  %a.expandAll
-    %i.grcicon-wide
-    Expand All
+  %a.expandAll{:href => "#", :rel => "tooltip", :title => "Expand all"}
+    %i.grcicon-wide-black
+  %a.shrinkAll{:href => "#", :rel => "tooltip", :title => "Collapse all"}
+    %i.grcicon-normal-black
