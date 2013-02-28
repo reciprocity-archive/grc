@@ -70,7 +70,7 @@
                         %ul.dropdown-menu
                           %li.divider
                           %li.title Create New ...
-                          -if controller.respond_to?(:new_object_path) && controller.new_object_path.present?
+                          -#if controller.respond_to?(:new_object_path) && controller.new_object_path.present?
                             %li
                               %a{ :href => controller.new_object_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
                                 =controller.new_object_title
