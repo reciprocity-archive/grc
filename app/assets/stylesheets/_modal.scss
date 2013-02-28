@@ -9,7 +9,7 @@
     margin-left:-480px;
   }
   .modal-header {
-    @include gradient-vertical(#0088cc, #0055cc);
+    @include gradient-vertical($modalLightBlue, $modalDarkBlue);
     border-bottom: 1px solid $modalHeaderBorder;
     @include box-shadow(inset 0 -1px 0 $modalHeaderShadow);
     .btn {
@@ -29,7 +29,7 @@
         font-size: 14px;
       }
       small {
-        color:#fff;
+        color:$white;
         font-size:13px;
         font-weight:bold;  
       }
@@ -141,7 +141,7 @@
         height: 325px;
         padding-right: 10px;
         li {
-          border-bottom: 1px solid $lightGray;
+          @include default-border-bottom();
           line-height: 28px;
           padding: 4px 0;
           .object-info {
@@ -249,7 +249,7 @@
     }
   }
   padding-bottom:10px;
-  border-bottom:1px solid $lightGray;
+  @include default-border-bottom();
   &:hover {
     @include background-image(linear-gradient(left, $white, $lightGray, $white));
     border-bottom:1px solid darken($lightGray,10%);

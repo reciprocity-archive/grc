@@ -83,7 +83,7 @@ h1, h2, h3, h4, h5, h6 {
     color:$white;
     background: $addBtn;
     @include background-image(linear-gradient(center top, lighten($addBtn, 5%) 5%, darken($addBtn, 5%) 100% ));
-    text-shadow: 1px 1px 1px #296029;
+    text-shadow: 1px 1px 1px $btnAddShadow;
     border: 1px solid $addBtnBorder;
     &:active {
       @include box-shadow(inset 0 0 3px $darkGray);
@@ -98,7 +98,7 @@ h1, h2, h3, h4, h5, h6 {
       color:$white;
       background: $addBtn;
       @include background-image(linear-gradient(center top, lighten($addBtn, 5%) 5%, darken($addBtn, 5%) 100% ));
-      text-shadow: 1px 1px 1px #296029;
+      text-shadow: 1px 1px 1px $btnAddShadow;
       border: 1px solid $addBtnBorder;
       &:hover {
         color:$white;
@@ -107,29 +107,29 @@ h1, h2, h3, h4, h5, h6 {
   }
   &.pending-ajax {
     cursor: default;
-    background:#efefef url('/images/ajax-loader.gif') no-repeat 5px 5px;
+    background:$widgetHeaderBgnd url('/images/ajax-loader.gif') no-repeat 5px 5px;
     @include box-shadow(none);
-    border: 1px solid #e0e0e0;
-    color: #7b7b7b;
+    border: 1px solid $ajaxBtnDisabled;
+    color: $ajaxGray;
     text-shadow: none;
     padding-left: 28px;
     &:hover {
-      color: #7b7b7b;
+      color: $ajaxGray;
     }
     &:active {
-      background:#efefef url('/images/ajax-loader.gif') no-repeat 5px 5px;
-      border: 1px solid #e0e0e0;
+      background:$widgetHeaderBgnd url('/images/ajax-loader.gif') no-repeat 5px 5px;
+      border: 1px solid $ajaxBtnDisabled;
       @include box-shadow(none);
     }
   }
   &.btn-mini {
     &.pending-ajax {
-      background:#efefef url('/images/ajax-loader.gif') no-repeat 5px 1px;
+      background:$widgetHeaderBgnd url('/images/ajax-loader.gif') no-repeat 5px 1px;
     }
   }
   &.btn-large {
     &.pending-ajax {
-      background:#efefef url('/images/ajax-loader.gif') no-repeat 5px 8px;
+      background:$widgetHeaderBgnd url('/images/ajax-loader.gif') no-repeat 5px 8px;
     }
   }
 }
@@ -228,7 +228,7 @@ input.input-block-level {
 .no-results {
   margin-top:20px;
   h3, p {
-    color:#111;
+    color:$subTitle;
     margin-bottom:6px;
   }
 }
@@ -263,7 +263,7 @@ input.input-block-level {
 }
 
 input.disabled.pending-ajax{
-  background: #eee url("/images/ajax-loader.gif") no-repeat right center;
+  background: $lightGray url("/images/ajax-loader.gif") no-repeat right center;
 }
 
 .btn-add,
@@ -271,13 +271,13 @@ input.disabled.pending-ajax{
 .btn-danger {
   &.disabled {
     cursor: default;
-    background-color: #e6e6e6;
+    background-color: $btnActive;
     background-image: none;
     @include opacity(0.65);
     @include box-shadow(none);
     text-shadow: none;
     color: $responsTitle;
-    border: 1px solid #ccc;
+    border: 1px solid $dropPlaceholder;
     border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
     &:active,
     &:hover {

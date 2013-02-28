@@ -3,7 +3,7 @@
 h3.tab-title {
   line-height:36px;
   background:$lightGray;
-  color:#777;
+  color:$tabTitle;
   font-size:13px;
   font-weight:normal;
   padding-left:6px;
@@ -351,7 +351,7 @@ ul.tree-structure {
       }
     }
     .description {
-      color:#111;
+      color:$subTitle;
     }
     .title {
       margin-right:10px;
@@ -459,7 +459,7 @@ ul.tree-structure {
         }
         .additional-info {
           font-size:11px;
-          color:#999;
+          color:$gray;
         }
       }
       .item-main {
@@ -481,7 +481,7 @@ ul.tree-structure {
       font-size:11px;
       color:$text;
       .completed {
-        color: #aaa;
+        color: $widgetBorder;
       }
     }
     .title {
@@ -554,7 +554,7 @@ ul.tree-structure {
     margin-top:7px;
     span {
       &:first-child {
-        color:#111;
+        color:$subTitle;
       }
       &.description {
         display:none;
