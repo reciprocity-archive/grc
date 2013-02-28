@@ -41,7 +41,7 @@
               :locals => { :system => @system }
       =render :partial => 'shared/related',
               :layout => 'layouts/widget_box',
-              :locals => { :instance => @system, :widget_class => "widget-tabs widget-tabs-horizontal" }
+              :locals => { :instance => @system, :widget_class => "widget-tabs widget-tabs-horizontal business" }
 
     #right_column.span4.widget-area
       =render :partial => 'systems/info',
@@ -49,4 +49,4 @@
               :locals => { :system => @system, :widget_class => "compliance" }
       =render :partial => 'systems/more_info',
               :layout => 'layouts/widget_box',
-              :locals => { :system => @system, :widget_class => 'related' }
+              :locals => { :system => @system, :widget_class => 'related business' }
