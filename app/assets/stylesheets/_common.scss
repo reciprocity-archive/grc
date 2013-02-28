@@ -1,3 +1,4 @@
+// typography
 h1 {
   color:$headerTitle;
   font-size:24px;
@@ -49,8 +50,25 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+// helpers
 .centered {
   text-align: center;
+}
+
+.no-results {
+  margin-top:20px;
+  h3, p {
+    color:$subTitle;
+    margin-bottom:6px;
+  }
+}
+
+.inline {
+  display:inline;
+}
+
+.button-space {
+  margin-right: 4px;
 }
 
 // progress bar
@@ -134,6 +152,27 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+.btn-add,
+.btn-warning,
+.btn-danger {
+  &.disabled {
+    cursor: default;
+    background-color: $btnActive;
+    background-image: none;
+    @include opacity(0.65);
+    @include box-shadow(none);
+    text-shadow: none;
+    color: $responsTitle;
+    border: 1px solid $dropPlaceholder;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    &:active,
+    &:hover {
+      @include box-shadow(none);
+      color: $responsTitle;
+    }
+  }
+}
+
 // removing outline on anchor element
 .nav-tabs,
 .menu,
@@ -145,14 +184,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 // show hide
-
 .showhide {
   float:left;
   margin-top:8px;
 }
 
 // one line display of paragraphs
-
 .oneline {
   overflow: hidden;
   white-space: nowrap;
@@ -192,6 +229,7 @@ input.date {
   background-position: -4px -244px;
 }
 
+//Making input 100% width of his parent element
 input.input-block-level {
   display: block;
   width: 100%;
@@ -199,6 +237,7 @@ input.input-block-level {
   min-height: 28px;
 }
 
+//tree-structure no results
 .no-result {
   text-align: center;
   font-weight: bold;
@@ -225,14 +264,7 @@ input.input-block-level {
   }
 }
 
-.no-results {
-  margin-top:20px;
-  h3, p {
-    color:$subTitle;
-    margin-bottom:6px;
-  }
-}
-
+// always visible tip
 .inline-help {
   color:$green;
   font-weight:normal;
@@ -240,6 +272,7 @@ input.input-block-level {
   margin-left:10px;
 }
 
+// input error
 .field-failure {
   input {
     border: 1px solid $red;
@@ -258,42 +291,15 @@ input.input-block-level {
   }
 }
 
-.inline {
-  display:inline;
-}
-
+// AJAX loading gif
 input.disabled.pending-ajax{
   background: $lightGray url("/images/ajax-loader.gif") no-repeat right center;
 }
 
-.btn-add,
-.btn-warning,
-.btn-danger {
-  &.disabled {
-    cursor: default;
-    background-color: $btnActive;
-    background-image: none;
-    @include opacity(0.65);
-    @include box-shadow(none);
-    text-shadow: none;
-    color: $responsTitle;
-    border: 1px solid $dropPlaceholder;
-    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-    &:active,
-    &:hover {
-      @include box-shadow(none);
-      color: $responsTitle;
-    }
-  }
-}
-
-
+// Left dropdown positioning
 .left-dropdown {
   .dropdown-menu {
     right: 0;
     left: auto;
   }
-}
-.button-space {
-  margin-right: 4px;
 }
