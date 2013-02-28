@@ -43,16 +43,21 @@ jQuery(document).ready(function($) {
     var monitorFn
       , monitorPeriod = 500
       , monitorTimeoutId = null
-      , $currentTip;
+      , $currentTip
+      , dataTooltip;
 
     if (!$currentTarget.data('tooltip-monitor')) {
-      $currentTip = $currentTarget.data('tooltip').$tip;
+      dataTooltip = $currentTarget.data('tooltip');
+      $currentTip = dataTooltip && dataTooltip.$tip;
 
       monitorFn = function() {
+        dataTooltip = dataTooltip || $currentTarget.data('tooltip');
+        $currentTip = $currentTip || (dataTooltip && dataTooltip.$tip);
+
         if (!$currentTarget.is(':visible')) {
-          $currentTip.remove();
+          $currentTip && $currentTip.remove();
           $currentTarget.data('tooltip-monitor', false);
-        } else if ($currentTip.is(':visible')) {
+        } else if ($currentTip && $currentTip.is(':visible')) {
           monitorTimeoutId = setTimeout(monitorFn, monitorPeriod);
         } else {
           $currentTarget.data('tooltip-monitor', false);
