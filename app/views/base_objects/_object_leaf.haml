@@ -31,8 +31,18 @@
         =title
         %i.description-inline=description_inline
     .description
-      .notes
-        =display_as_html(notes)
+      -if instance.has_attribute? notes_attr
+        .note
+          -if notes.present?
+            .note-content
+              %a.edit-notes{:href => 'javascript://'}
+                %i.grcicon-edit
+              .rtf
+                =display_as_html(notes)
+          -else
+            %a.note-trigger{:href => 'javascript://'}
+              %i.grcicon-add-black
+              Abstract
       =display_as_html(description)
   -elsif title.present?
     -# Title only
@@ -47,7 +57,13 @@
       %span.title
         =title
     .description.inhover.no-description
+      -if instance.has_attribute? notes_attr
+        .note
+          %a.note-trigger{:href => 'javascript://'}
+            %i.grcicon-add-black
+            Abstract
       %i No description
+
   -elsif (description.present? || notes.present?)
     -# Description only
     .oneline.description-only.expand-on-hover
@@ -68,8 +84,19 @@
           =code
         %br
         %br
-        .notes
-          =display_as_html(notes)
+        -if instance.has_attribute? notes_attr
+          .note
+            -if notes.present?
+              .note-content
+                %a.edit-notes{:href => 'javascript://'}
+                  %i.grcicon-edit
+                .rtf
+                  =display_as_html(notes)
+            -else
+              %a.note-trigger{:href => 'javascript://'}
+                %i.grcicon-add-black
+                Abstract
+
   -else
     -# Neither (shouldn't happen)
     .oneline

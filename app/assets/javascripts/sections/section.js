@@ -4,15 +4,16 @@
 
 can.Model.Cacheable("CMS.Models.Section", {
   root_object : "section"
-  , findAll : "GET /sections.json"
+  , findAll : "GET /programs/{id}/sections.json"
   , update : function(id, section) {
     var param = {};
     can.each(section, function(val, key) {
-      param["section[" + key + "]"] = val;
+      if(can.inArray(key, ["created_at", "id", "kind", "modified_by_id", "updated_at", "na", "linked_controls", "description_inline"]) < 0)
+        param["section[" + key + "]"] = val;
     });
     return $.ajax({
       type : "PUT"
-      , url : "/mapping/update/" + id + ".json"
+      , url : "/sections/" + id + ".json"
       , dataType : "json"
       , data : param
     });
@@ -132,7 +133,19 @@ can.Model.Cacheable("CMS.Models.Section", {
 });
 
 CMS.Models.Section("CMS.Models.SectionSlug", {
-  findAll : function(params) {
+  update : function(id, section) {
+    var param = {};
+    can.each(section, function(val, key) {
+      param["section[" + key + "]"] = val;
+    });
+    return $.ajax({
+      type : "PUT"
+      , url : "/mapping/update/" + id + ".json"
+      , dataType : "json"
+      , data : param
+    });
+  }
+  ,  findAll : function(params) {
     function filter_out(original, predicate) {
       var target = [];
       for(var i = original.length - 1; i >= 0; i--) {

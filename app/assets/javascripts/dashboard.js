@@ -14,6 +14,7 @@
  *= require_tree ./models
  *= require_tree ./controllers
  *= require_tree ./apps
+ *= require sections/notes_controller.js
  *= require_self
  *= require jquery.remotipart-patched
  *= require d3.v2
@@ -656,6 +657,28 @@ jQuery(function($) {
         window.open(this.href);
       }
     }
+  });
+});
+
+jQuery(function($) {
+  $("body").on("click", ".note-trigger, .edit-notes", function(ev) {
+    ev.stopPropagation();
+    var $section = $(ev.target).closest("[data-object-id]")
+    , $program = $section.parent().closest("[data-object-id]")
+    , sec;
+
+    if(sec = CMS.Models.Section.findInCacheById($section.data("object-id"))) {
+      $(ev.target).closest(".note").cms_controllers_section_notes({ section_model : sec });
+    } else
+    CMS.Models.Section.findAll({ id : $program.data("object-id") }).done(function(sections) {
+      var sec_id = $section.data("object-id");
+      can.each(sections, function(sec) {
+        if (sec.id === sec_id) {
+          $(ev.target).closest(".note").cms_controllers_section_notes({ section_model : sec });
+          return false;      
+        }
+      })
+    });
   });
 });
 

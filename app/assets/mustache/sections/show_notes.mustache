@@ -1,0 +1,15 @@
+{{#if_equals notes ''}}
+  <a class="note-trigger" href='javascript://'>
+    <i class="grcicon-add-black"></i>
+    Abstract
+  </a>
+{{else}}
+  <div class="note-content">
+    <a class="edit-notes" href='javascript://'>
+      <i class="grcicon-edit"></i>
+    </a>
+    <div class="rtf">
+      {{{notes}}}
+    </div>
+  </div>
+{{/if_equals}}
