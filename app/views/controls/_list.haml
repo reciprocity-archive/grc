@@ -26,5 +26,7 @@
                 %i.grcicon-program-black
                 =programs.count
         .item-actions
-          %a.btn.btn-mini.pull-right{ :href => edit_flow_control_path(item), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-dirty' => "#controls, #combo", :title => 'Edit Control' }
+          %a.btn.btn-mini.pull-right{ :href => flow_control_path(item), :rel => 'tooltip', :title => "Go to this object's page" }
+            %i.grcicon-goto
+          %a.btn.btn-mini.pull-right{ :href => edit_flow_control_path(item), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-dirty' => "#controls, #combo", :rel => 'tooltip', :title => 'Edit Control' }
             %i.grcicon-edit
