@@ -12,6 +12,8 @@ CMS.Models.System("CMS.Models.Response", {
     , init : function() {
       this._super && this._super.apply(this, arguments);
 
+      this.cache = {}; //override System cache
+
       CMS.Models.Meeting.bind("destroyed", function(ev, mtg){
         can.each(CMS.Models.Response.cache, function(response) {
           response.removeElementFromChildList("meetings", mtg);

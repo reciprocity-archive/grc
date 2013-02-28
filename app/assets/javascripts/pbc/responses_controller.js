@@ -71,7 +71,17 @@ can.Control("CMS.Controllers.Responses", {
         }
     }
     , ".remove_person, .remove_document click" : function(el, ev) {
-        el.closest("[data-model]").data("model").destroy();
+      el.closest("[data-model]").data("model").destroy();
+      var $alert = $(el).closest(".items").find(".alert");
+      if(!$alert.length)
+        return;
+      $alert.show().addClass("in");
+      setTimeout(function() {
+        $alert.removeClass("in");
+        setTimeout(function() {
+          $alert.hide();
+        }, 500);
+      }, 3000);
     }
     , ".toggle-add-person:not(.disabled) click" : function(el, ev) {
         el.prev(".inline-add-person").removeClass("hide").find(".input-ldap").focus();
