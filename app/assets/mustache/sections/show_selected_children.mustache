@@ -3,11 +3,15 @@
 	  {{prefix}} {{slug}}
 	</strong>
 	{{title}}
+  <br>
+  {{{description}}}
 </div>
-<ul class="tree-structure" id="children_{{slug}}">
-	{{#children}}
-	<li id="content_{{slug}}">
-		{{> /assets/sections/show_selected_children.mustache}}
-	</li>
-	{{/children}}
-</ul>
+<div class="item-content in">
+  <ul class="tree-structure" id="children_{{slug}}">
+  	{{#children}}
+  	<li id="content_{{slug}}">
+  		{{> /assets/sections/show_selected_children.mustache}}
+  	</li>
+  	{{/children}}
+  </ul>
+</div>
