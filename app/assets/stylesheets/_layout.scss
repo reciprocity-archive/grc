@@ -11,8 +11,16 @@
   background:$dropPlaceholder;
   border:1px dashed $gray;
   height:35px;
-  line-height:20px;
+  line-height:35px;
+  font-size: 13px;
+  font-weight: bold;
   margin-bottom:20px;
+  @include border-radius($default-border-radius);
+  text-align: center;
+  &:before {
+    content:"Drop Here";
+  }
+  color: $darkGray;
 }
 
 // content style
