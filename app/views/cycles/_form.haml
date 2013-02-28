@@ -13,8 +13,15 @@
     =hidden_field_tag :program_id, params[:program_id]
     -directives = directives.joins(:program_directives).where(:program_directives => { :program_id => params[:program_id] })
   -directives = directives.all
-  .row-fluid
-    =wrapped_select(f, :span6, :directive_id, directives.map { |d| [d.display_name, d.id] }, :class => :collection, :multiple => false, :include_blank => (directives.count > 1))
+  -if directives.size > 1
+    .row-fluid
+      =wrapped_select(f, :span6, :directive_id, directives.map { |d| [d.display_name, d.id] }, :class => :collection, :multiple => false)
+  -elsif directives.size == 1
+    =f.hidden_field :directive_id, :value => directives[0].id
+  -else
+    .row-fluid.flash
+      .span12.alert.alert-error
+        Add a Regulation, Contract, or Policy before starting an audit
 -else
   =f.hidden_field :directive_id
 
