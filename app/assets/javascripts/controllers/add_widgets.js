@@ -3,6 +3,7 @@
 can.Control("CMS.Controllers.AddWidget", {
   defaults : {
     widget_descriptors : null
+    , minimum_widget_height : 100
   }
 }, {
   

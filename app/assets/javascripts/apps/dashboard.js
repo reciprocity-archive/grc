@@ -132,7 +132,7 @@ $(function() {
          $(this)
           .cms_controllers_resize_widgets({
             model : data[0]
-            , minimum_widget_height : (/programs_dash/.test(window.location) ? 37 : 167)
+            , minimum_widget_height : (/programs_dash/.test(window.location) ? 97 : 167)
           }).control(CMS.Controllers.ResizeWidgets);
 
     }
@@ -146,6 +146,7 @@ $(function() {
 
       $(".widget-add-placeholder").cms_controllers_add_widget({
         widget_descriptors : widget_descriptors
+        , minimum_widget_height : (/programs_dash/.test(window.location) ? 97 : 167)
       });
     }
     

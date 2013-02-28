@@ -11,6 +11,8 @@ can.Control("CMS.Controllers.DashboardWidgets", {
     , object_category : null //e.g. "governance"
     , object_route : null //e.g. "systems"
     , object_display : null
+    , content_selector : ".content"
+    , minimum_widget_height : 100
   }
 }, {
   
@@ -34,18 +36,26 @@ can.Control("CMS.Controllers.DashboardWidgets", {
     can.view(this.options.widget_view, this.options, function(frag) {
       that.element.html(frag);
       CMS.Models.DisplayPrefs.findAll().done(function(d) {
+        var content = that.element.find(that.options.content_selector).first();
         if(d[0].getCollapsed("programs_dash", that.element.attr("id"))) {
+
           that.element
-          .css("height", "")
           .find(".widget-showhide > a")
           .showhide("hide");
           
-          if(that.element.is(".ui-resizable"))
-            that.element.resizable("destroy")
+          content.add(that.element).css("height", "");
+          if(content.is(".ui-resizable")) {
+            content.resizable("destroy")
+          }
         } else {
-          that.element
+          content
           .removeClass("ui-resizable")
-          .resizable({handles : "s"})    
+          .resizable({
+            handles : "s"
+            , minHeight : that.options.minimum_widget_height
+            , alsoResize : that.element
+            , autoHide : false
+          })
         }
       });
       that.element
