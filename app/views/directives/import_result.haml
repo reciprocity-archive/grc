@@ -1,4 +1,4 @@
--@messages = @messages.reject{|m|m.starts_with?("Invalid section heading") || m.starts_with?("Invalid program heading")}
+-@messages = @messages.reject{|m|m.starts_with?("Invalid section heading") || m.starts_with?("Invalid directive heading")}
 
 .row-fluid
   %hr.hr-widget
@@ -8,13 +8,13 @@
     %h4 Compliance Program
     .row-fluid
       .span10.control-group
-        %label{:for => "slug"} Program/Regulation
-        %input#slug.span12{:disabled => "disabled", :value => @program.slug, :type => "text"}/
+        %label{:for => "slug"} Regulation / Contract / Policy
+        %input#slug.span12{:disabled => "disabled", :value => @directive.slug, :type => "text"}/
         %br/
 
       .span2
         %label{:for => "version"} Version
-        %input#version.span12{:disabled => "disabled", :value => @program.version, :type => "text"}
+        %input#version.span12{:disabled => "disabled", :value => @directive.version, :type => "text"}
 
 .row-fluid
   %hr.hr-widget
@@ -77,7 +77,7 @@
   -if params[:confirm].blank?
     .span8
     .span1
-      =link_to "Cancel", flow_program_path(@program), :class => "btn btn-large"
+      =link_to "Cancel", flow_directive_path(@directive), :class => "btn btn-large"
     .span3
       -if @errors.any?
         =submit_tag "Correct Errors Before Proceeding", :class => %w(btn btn-large btn-warning pull-right), :name => 'confirm', :disabled => true
@@ -88,6 +88,6 @@
   -else
     .span12
       Import of
-      =link_to @program.title, flow_program_path(@program)
+      =link_to @directive.title, flow_directive_path(@directive)
       is done.
 
