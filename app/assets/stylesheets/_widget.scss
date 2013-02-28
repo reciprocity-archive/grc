@@ -64,6 +64,11 @@
             }
           }
         }
+        &:last-child {
+          &:hover {
+            border-bottom: none;
+          }
+        }
       }
     }
   }
@@ -94,6 +99,11 @@
                 }
               }
             }
+          }
+        }
+        &:last-child {
+          &:hover {
+            border-bottom: none;
           }
         }
       }
@@ -128,6 +138,11 @@
             }
           }
         }
+        &:last-child {
+          &:hover {
+            border-bottom: none;
+          }
+        }
       }
     }
   }
@@ -158,6 +173,11 @@
                 }
               }
             }
+          }
+        }
+        &:last-child {
+          &:hover {
+            border-bottom: none;
           }
         }
       }

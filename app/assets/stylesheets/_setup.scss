@@ -102,3 +102,11 @@
     @include box-sizing(border-box);
     min-height: 28px;
   }
+  
+  @mixin default-border-bottom() {
+    border-bottom: 1px solid $lightGray;
+  }
+  
+  @mixin default-border-top() {
+    border-top: 1px solid $lightGray;
+  }
