@@ -72,9 +72,9 @@
     }
   } 
   .nav-tabs {
-    overflow-x: hidden;
-    overflow-y: auto;
-    height: 100%;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    height: 496px !important;
     margin-bottom: 0;
     background: $lightGray;
     padding: 10px 0 10px 2px;
@@ -91,6 +91,7 @@
         color: $gray;
         @include transition(color 0.3s ease);
         margin-right: 0;
+        min-width: 100px;
         i {
           @include opacity(0.3);
           margin-right: 7px;
