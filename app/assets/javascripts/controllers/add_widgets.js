@@ -24,6 +24,8 @@ can.Control("CMS.Controllers.AddWidget", {
       return;
 
     $dropdown.css({"position" : "", "top" : "", "bottom" : "" });
+    //NOTE: if the position property of the dropdown toggle button is changed to "static" (it is current "relative"),
+    //  this code will fail.  Please do not remove the relative positioning from ".dropdown-toggle" --BM 3/1/2013
     if($dropdown.offset().top < window.scrollY) {
       $dropdown.css({
         "position" : "absolute"
