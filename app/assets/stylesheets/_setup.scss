@@ -27,6 +27,36 @@
     $business:#336;
     $risk: #c60;
 
+  // default colors
+    $white: #fff;
+    $black: #000;
+    $gray: #999;
+    $darkGray: #7c7c7c;
+    $lightGray: #eee;
+    $red: #ce3e3e;
+    $lightRed: #ff9d9d;
+    $green: #1d8d15;
+    $darkBlue: #369;
+    $warmGray: #ccc;
+  
+  // quick search
+    $topBarSearchText: #bbbdc1;
+    $topBarSearchBorder: #282a2c;
+    $topBarSearchBgnd: #6a6b6d;
+    $quickSearchOpen: #cbcbcb;
+  
+  // modal
+    $modalHeader: #0071cc;
+    $modalHeaderBorder: #074fb2;
+    $modalHeaderShadow: #9ac5ff;
+    $modalDarkBlue: #0055cc;
+    $modalLightBlue: #0088cc;
+    
+  //popover
+    $popOverHeaderBgnd: #f7f7f7;
+    $popOverHeaderBorder: #ebebeb;
+    $popOverBorder: #b0b0b0;
+  
   $headerBgnd: #3f4145;
   $menuLink: #d7dce8;
   $screenBgnd: #323438;
@@ -47,39 +77,13 @@
   $sidenavBorder: #e5e5e5;
   $sidenavHover: #f5f5f5;
   $responsTitle: #333;
-  
-  $white: #fff;
-  $black: #000;
-  $gray: #999;
-  $darkGray: #7c7c7c;
-  $lightGray: #eee;
-  $red: #ce3e3e;
-  $lightRed: #ff9d9d;
-  $footerBorder: #ddd;
-  $topBarSearchText: #bbbdc1;
-  $topBarSearchBorder: #282a2c;
-  $topBarSearchBgnd: #6a6b6d;
-  $green: #1d8d15;
-  $modalHeader: #0071cc;
-  $modalHeaderBorder: #074fb2;
-  $modalHeaderShadow: #9ac5ff;
-  
-  $popOverHeaderBgnd: #f7f7f7;
-  $popOverHeaderBorder: #ebebeb;
-  $popOverBorder: #b0b0b0;
   $treeListBgnd: #f4f4f4;
-  
-  $darkBlue: #369;
   $btnActive: #e6e6e6;
   $tabTitle: #777;
-  $modalDarkBlue: #0055cc;
-  $modalLightBlue: #0088cc;
   $btnAddShadow: #296029;
   $ajaxBtnDisabled: #e0e0e0;
   $ajaxGray: #7b7b7b;
-  $warmGray: #ccc;
-  
-  $quickSearchOpen: #cbcbcb;
+  $footerBorder: #ddd;
 
 // mixins
 
