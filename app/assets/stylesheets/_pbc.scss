@@ -12,10 +12,10 @@
       margin-top:0;
     }
     &.btn-success {
-      border-color: #51A351;
+      border-color: $btnGreen;
     }
     &.btn-warning {
-      border-color: #F9A732;
+      border-color: $btnOrange;
     }
   }
 }
@@ -146,10 +146,10 @@ h4.pbc-title {
 
 .responses {
   padding:6px 20px;
-  background:#e8fdd6;
+  background:$responsBgnd;
   margin-left:25px;
   margin-bottom:20px;
-  border:1px solid #cdecb4;
+  border:1px solid $responsBorder;
   position:relative;
   .btn-mini {
     padding-left: 0;
@@ -183,7 +183,7 @@ h4.pbc-title {
   }
   ul.tree-structure {
     margin-top:8px;
-    border-color:#cdecb4 !important;
+    border-color:$responsBorder !important;
     .pbc-counter {
       display:inline-block;
       line-height:28px;
@@ -244,15 +244,15 @@ h4.pbc-title {
       }
     }
     li {
-      border-color:#cdecb4;
+      border-color:$responsBorder;
       .response-items {
         margin-left:25px;
       }
     }
   }
   .inner-system {
-    border:1px solid #cdecb4;
-    background:darken(#e8fdd6,5%);
+    border:1px solid $responsBorder;
+    background:darken($responsBgnd,5%);
     @include border-radius();
     padding:8px 12px;
     margin-bottom:8px;
@@ -281,7 +281,7 @@ h4.pbc-title {
       line-height: 25px;
       margin-bottom: 5px;
       padding-bottom: 5px;
-      border-bottom:1px solid #cdecb4;
+      border-bottom:1px solid $responsBorder;
       .btn {
         &.btn-mini {
           padding-left: 0;
@@ -384,7 +384,7 @@ h4.pbc-title {
       margin-bottom: 0;
     }
     li {
-      border-bottom:1px solid #cdecb4;
+      border-bottom:1px solid $responsBorder;
       @include clearfix();
       &:last-child {
         border: none;
@@ -430,23 +430,23 @@ ul.tree-structure {
     margin-bottom:6px;
     padding:0 4px 0 4px;
     @include border-radius();
-    background:#f0f0f0;
-    border:1px solid darken(#f0f0f0, 5%);
+    background:$pbcListGray;
+    border:1px solid darken($pbcListGray, 5%);
     .ca-fields {
       i {
         margin-top:0;
       }
     }
     .inline-edit-population-doc {
-      border-bottom:1px solid #cdecb4 !important;
+      border-bottom:1px solid $responsBorder !important;
     }
     &:hover {
-      border:1px solid darken(#f0f0f0, 5%) !important;
+      border:1px solid darken($pbcListGray, 5%) !important;
       ul.add-response,
       ul.items-list {
-        background:#e8fdd6;
+        background:$responsBgnd;
         li.item {
-          border-bottom:1px solid #cdecb4 !important;
+          border-bottom:1px solid $responsBorder !important;
           &:last-child {
             border-bottom:none !important;
           }
@@ -461,7 +461,7 @@ ul.tree-structure {
             line-height: 14px;
           }
           &:hover {
-            border-bottom:1px solid #cdecb4 !important;
+            border-bottom:1px solid $responsBorder !important;
             &.inline-add-person,
             &.toggle-add-person,
             &.add-meeting {
@@ -495,7 +495,7 @@ ul.tree-structure {
   ul.pbc-requests {
     background:$white;
     @include border-radius();
-    border:1px solid darken(#f0f0f0, 10%) !important;
+    border:1px solid darken($pbcListGray, 10%) !important;
     margin-bottom:4px;
     li {
       .pbc-item-head {
