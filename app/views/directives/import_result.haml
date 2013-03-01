@@ -81,7 +81,7 @@
     .span3
       -if @errors.any?
         =submit_tag "Correct Errors Before Proceeding", :class => %w(btn btn-large btn-warning pull-right), :name => 'confirm', :disabled => true
-      -elsif @messages.any? || @warnings.any?
+      -elsif @messages.any? || (@warnings.any? { |k,v| v.present? })
         =submit_tag "Proceed With Caution", :class => %w(btn btn-large btn-warning pull-right), :name => 'confirm'
       -else
         =submit_tag "Finish Importing", :class => %w(btn btn-large btn-success pull-right), :name => 'confirm'
