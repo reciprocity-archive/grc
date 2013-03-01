@@ -42,6 +42,9 @@ class SectionsController < BaseObjectsController
 
     def section_params
       section_params = params[:section] || {}
+      if section_params[:parent_id]
+        section_params[:parent] = Section.where(:id => section_params.delete(:parent_id)).first
+      end
       if section_params[:directive_id]
         # TODO: Validate the user has access to add sections to the directive
         section_params[:directive] = Directive.where(:id => section_params.delete(:directive_id)).first
