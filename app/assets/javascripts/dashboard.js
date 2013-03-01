@@ -106,17 +106,23 @@ jQuery(function($) {
   $('body').on('click', 'a.expandAll', function(e) {
     var $tabs = $(this).closest('.tabbable');
     if($tabs.length) {
-      $tabs.find('.tab-pane.active .openclose:not(.active), .tab-pane.active .tree-structure .description-inline:not(.out)').click();
+      $tabs.find('.tab-pane.active .openclose').openclose("open");
+      $tabs.find('.tab-pane.active .tree-structure .oneline').oneline("view");
     } else {
-      $(this).closest("section").find('.openclose:not(.active), .tree-structure .description-inline:not(.out)').click();
+      var $section = $(this).closest("section");
+      $section.find('.openclose').openclose("open");
+      $section.find('.tree-structure .oneline').oneline("view");
     }
   });
   $('body').on('click', 'a.shrinkAll', function(e) {
     var $tabs = $(this).closest('.tabbable');
     if($tabs.length) {
-      $tabs.find('.tab-pane.active .openclose.active, .tab-pane.active .tree-structure .description.in').click();
+      $tabs.find('.tab-pane.active .openclose.active').openclose('close');
+      $tabs.find('.tab-pane.active .tree-structure .oneline').oneline("hide");
     } else {
-      $(this).closest("section").find('.openclose.active, .tree-structure .description.in').click();
+      var $section = $(this).closest("section");
+      $section.find('.openclose.active').openclose("close");
+      $section.find('.tree-structure .oneline').oneline("hide");
     }
   });
 

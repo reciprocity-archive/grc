@@ -154,50 +154,69 @@ jQuery(document).ready(function($) {
   });
 
   function showhide(command) {
+    $(this).each(function() {
+      var $this = $(this)
+          , $content = $this.closest(".widget").find(".content")
+          , $filter = $this.closest(".widget").find(".filter")
+          , cmd = command;
 
-    var $this = $(this)
-        , $content = $this.closest(".widget").find(".content")
-        , $filter = $this.closest(".widget").find(".filter");
+      if(typeof cmd === "undefined" || cmd === "toggle") {
+        cmd = $this.hasClass("active") ? "hide" : "show";
+      }
 
-    if(typeof command === "undefined" || command === "toggle") {
-      command = $this.hasClass("active") ? "hide" : "show";
-    }
-
-    if(command === "hide") {
-      $content.slideUp();
-      $filter.slideUp();
-      $this.removeClass("active");
-    } else if(command === "show") {
-      $content.slideDown();
-      $filter.slideDown();
-      $this.addClass("active");
-    }
+      if(cmd === "hide") {
+        $content.slideUp();
+        $filter.slideUp();
+        $this.removeClass("active");
+      } else if(cmd === "show") {
+        $content.slideDown();
+        $filter.slideDown();
+        $this.addClass("active");
+      }
+    });
 
   }
 
   $.fn.showhide = showhide;
 
   // Show/hide tree leaf content
-  $('body').on('click', '.tree-structure .oneline, .tree-structure .description, .tree-structure .view-more', function(e) {
-    var $this = $(this)
-      , $leaf = $this.closest('[class*=span]').parent().children("[class*=span]:first")
-      , $title = $leaf.find('.oneline')
-      , $description = $leaf.find('.description')
-      , $view = $leaf.closest('.row-fluid').find('.view-more')
-      ;
+  $('body').on('click', '.tree-structure .oneline, .tree-structure .description, .tree-structure .view-more', oneline);
 
-    if ($description.length > 0) {
-      $description.toggleClass('in');
-      $title.find('.description-inline').toggleClass('out');
-      if ($title.is('.description-only')) {
-        $title.toggleClass('out');
+  function oneline(command) {
+    $(this).each(function() {
+      var $this = $(this)
+        , $leaf = $this.closest('[class*=span]').parent().children("[class*=span]:first")
+        , $title = $leaf.find('.oneline')
+        , $description = $leaf.find('.description')
+        , $view = $leaf.closest('.row-fluid').find('.view-more')
+        , cmd = command
+        ;
+
+      if ($description.length > 0) {
+        if(typeof cmd !== "string") {
+          cmd = $description.hasClass("in") ? "hide" : "view";
+        }
+
+        if(cmd === "view") {
+          $description.addClass('in');
+          $title.find('.description-inline').addClass('out');
+          if ($title.is('.description-only')) {
+            $title.addClass('out');
+          }
+          $view.text('hide');
+        } else if(cmd === "hide") {
+          $description.removeClass('in');
+          $title.find('.description-inline').removeClass('out');
+          if ($title.is('.description-only')) {
+            $title.removeClass('out');
+          }      
+          $view.text('view');
+        }
       }
-      if ($description.hasClass('in'))
-        $view.text('hide');
-      else
-        $view.text('view');
-    }
-  });
+    });
+  }
+
+  $.fn.oneline = oneline;
 
   // Open quick find
   $('body').on('focus', '.quick-search-holder input', function() {
@@ -270,24 +289,34 @@ $(window).load(function(){
   // tree-structure
   
   $('body').on('click', 'ul.tree-structure .item-main .grcobject, ul.tree-structure .item-main .openclose', function(e) {
-    var $this = $(this)
-      , $main = $this.closest('.item-main')
-      , $li = $main.closest('li')
-      , $content = $li.find('> .item-content')
-      , $icon = $this.closest('.item-main').find('.openclose');
-
-    if ($icon.hasClass('active')) {
-      $content.slideUp('fast');
-      $icon.removeClass('active');
-    } else {
-      $content.slideDown('fast');
-      $icon.addClass('active');
-    }
-
+    openclose.call(this);
     e.stopPropagation();
   });
 
+  function openclose(command) {
+    $(this).each(function(){
+      var $this = $(this)
+        , $main = $this.closest('.item-main')
+        , $li = $main.closest('li')
+        , $content = $li.find('> .item-content')
+        , $icon = $this.closest('.item-main').find('.openclose')
+        , cmd = command;
 
+      if(typeof cmd !== "string" || cmd === "toggle") {
+        cmd = $icon.hasClass("active") ? "close" : "open";
+      }
+
+      if (cmd === "close") {
+        $content.slideUp('fast');
+        $icon.removeClass('active');
+      } else if(cmd === "open") {
+        $content.slideDown('fast');
+        $icon.addClass('active');
+      }
+    });
+  }
+
+  $.fn.openclose = openclose;
 
   $('.widget-area').sortable({
     connectWith: '.widget-area'
