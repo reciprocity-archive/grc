@@ -15,7 +15,7 @@
           .row-fluid
             =render :partial => 'object_leaf', :locals => { :instance => directive, :object_type => 'governance', :object_icon => "grcicon-#{directive.meta_kind}" }
             .objects-count
-              %a.sections-count
+              %a
                 %i.grcicon-section-black
                 =sections.count
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
