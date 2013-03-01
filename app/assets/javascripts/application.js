@@ -293,6 +293,7 @@ $(window).load(function(){
     connectWith: '.widget-area'
     , placeholder: 'drop-placeholder'
     , handle : "header, .header"
+    , items : ".widget"
   });
 
 });
