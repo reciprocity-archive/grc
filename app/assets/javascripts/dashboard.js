@@ -667,18 +667,25 @@ jQuery(function($) {
     , $program = $section.parent().closest("[data-object-id]")
     , sec;
 
-    if(sec = CMS.Models.Section.findInCacheById($section.data("object-id"))) {
-      $(ev.target).closest(".note").cms_controllers_section_notes({ section_model : sec });
-    } else
-    CMS.Models.Section.findAll({ id : $program.data("object-id") }).done(function(sections) {
-      var sec_id = $section.data("object-id");
-      can.each(sections, function(sec) {
-        if (sec.id === sec_id) {
-          $(ev.target).closest(".note").cms_controllers_section_notes({ section_model : sec });
-          return false;      
-        }
-      })
-    });
+    if(!/^\/programs/.test(window.location.pathname)) {
+      $(ev.target).closest(".note").cms_controllers_section_notes({
+        section_id : $section.data("object-id") || (/\d+$/.exec(window.location.pathname) || [null])[0]
+      });
+    } else { 
+      if(sec = CMS.Models.Section.findInCacheById($section.data("object-id"))) {
+        $(ev.target).closest(".note").cms_controllers_section_notes({ section_model : sec });
+      } else {
+        CMS.Models.Section.findAll({ id : $program.data("object-id") }).done(function(sections) {
+          var sec_id = $section.data("object-id");
+          can.each(sections, function(sec) {
+            if (sec.id === sec_id) {
+              $(ev.target).closest(".note").cms_controllers_section_notes({ section_model : sec });
+              return false;      
+            }
+          })
+        });
+      }
+    }
   });
 });
 
