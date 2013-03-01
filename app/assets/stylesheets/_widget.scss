@@ -693,6 +693,7 @@
       padding: 0;
       display: inline-block;
       padding: 10px;
+      position: relative;
       @include opacity(0.4);
       @include transition(opacity 0.3s ease);
       &:active {

@@ -143,7 +143,8 @@ can.Control("CMS.Controllers.ResizeWidgets", {
       var $gcs = $(child).find("section[id]");
       $gcs.each(function(j, grandchild) {
         if(that.options.model.getCollapsed(that.options.page_token, $(grandchild).attr("id"))) {
-          $(grandchild).find(that.options.content_selector).first().css("height", "").find(".widget-showhide > a").showhide("hide");
+          $(grandchild).css("height", "").find(".widget-showhide > a").showhide("hide")
+          $(grandchild).find(that.options.content_selector).first().css("height", "");
         } else {
           if(page_heights.attr($(grandchild).attr("id"))) {
             var sh = page_heights.attr($(grandchild).attr("id"));
@@ -443,6 +444,8 @@ can.Control("CMS.Controllers.ResizeWidgets", {
     CMS.Models.DisplayPrefs.findAll().done(function(d) { 
       collapse ? $section.css("height", "") : $section.css("height", d[0].getWidgetHeight(that.options.page_token, $section.attr("id")))
       $section
+    if(!collapse || $section.find(that.options.content_selector).is(".ui-resizable")) {
+      $section
       .find(that.options.content_selector)
       .first()
       .resizable(collapse ? "destroy" : {
@@ -451,7 +454,7 @@ can.Control("CMS.Controllers.ResizeWidgets", {
         , alsoResize : $section
         , autoHide : false
       });
-
+    }
       d[0].setCollapsed(that.options.page_token, $section.attr("id"), collapse);
     });
   }
