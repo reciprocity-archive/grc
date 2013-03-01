@@ -204,6 +204,15 @@ jQuery(document).ready(function($) {
     var $this = $(this),
     $quickFind = $this.closest(".quick-search").find(".quick-search-results");
     $quickFind.fadeIn();
+    
+    if($(".quick-search-results").css("display") == "block"){
+      $('.quick-search-holder').addClass('open');
+    }
+    
+    $('.quick-search-results .remove').click(function() {
+      $('.quick-search-holder').removeClass('open');
+    });
+    
   });
 
   // Remove quick find

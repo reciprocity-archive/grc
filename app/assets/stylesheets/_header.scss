@@ -76,6 +76,26 @@
             @include box-shadow(none);
             @include placeholder($topBarSearchText);
           }
+          &.open {
+            background: $white;
+            @include border-radius($default-border-radius);
+            @include box-shadow(none);
+            @include border-bottom-radius(0);
+            border: 1px solid $white;
+            position: relative;
+            z-index: 1002;
+            input {
+              color: $darkGray;
+              text-shadow: none;
+              @include placeholder($darkGray);
+            }
+            button {
+              i {
+                background-position:-246px -56px;
+                @include opacity(0.4);
+              }
+            }
+          }
           button {
             float: left;
             background: none;
