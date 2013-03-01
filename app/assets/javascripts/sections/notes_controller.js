@@ -4,7 +4,8 @@ can.Control("CMS.Controllers.SectionNotes", {
   defaults : {
     edit_view : "/assets/sections/edit_notes.mustache"
     , show_view : "/assets/sections/show_notes.mustache"
-    , section_model : null
+    , model_instance : null
+    , model_class : CMS.Models.Section
     , section_id : null
   }
 }, {
@@ -19,10 +20,10 @@ can.Control("CMS.Controllers.SectionNotes", {
 
   , draw_edit : function() {
     var that = this;
-    if(!this.options.section_model) {
+    if(!this.options.model_instance) {
       this.original_value =  this.element.find(".note-content .rtf").html();
     }
-    can.view(this.options.edit_view, this.options.section_model || { notes : this.original_value}, function(frag) {
+    can.view(this.options.edit_view, this.options.model_instance || { notes : this.original_value}, function(frag) {
       that.element.html(frag)
       .find(".wysihtml5").cms_wysihtml5();
     });
@@ -33,7 +34,7 @@ can.Control("CMS.Controllers.SectionNotes", {
     if(ev && ev.stopPropagation)
       ev.stopPropagation();
 
-    can.view(this.options.show_view, this.options.section_model || { notes : this.original_value }, function(frag) {
+    can.view(this.options.show_view, this.options.model_instance || { notes : this.original_value }, function(frag) {
       that.element.html(frag)
     });
   }
@@ -44,11 +45,11 @@ can.Control("CMS.Controllers.SectionNotes", {
 
   , ".btn-add click" : function(el, ev) {
     ev.stopPropagation();
-    if(!this.options.section_model) {
-      this.options.section_model = new CMS.Models.Section({id : this.options.section_id});
+    if(!this.options.model_instance) {
+      this.options.model_instance = new this.options.model_class({id : this.options.section_id});
     }
-    this.options.section_model.attr("notes", this.element.find(".wysihtml5").data().wysihtml5.editor.composer.getValue());
-    this.options.section_model.save().done(this.proxy("draw_notes")); 
+    this.options.model_instance.attr("notes", this.element.find(".wysihtml5").data().wysihtml5.editor.composer.getValue());
+    this.options.model_instance.save().done(this.proxy("draw_notes")); 
   }
 
   , ".cancel-link click" : "draw_notes"

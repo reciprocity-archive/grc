@@ -20,7 +20,7 @@
 
 -main_toggle_target = expand_this ? objects_toggle_target : summary_toggle_target
 
-%li
+%li{ :'data-object-id' => system.id, :'data-object-type' => model_underscore }
   .item-main
     .openclose{ :class => !expand_this && 'lastchild' }
     .item-title
@@ -44,7 +44,7 @@
           -control_id_prefix = "#{id_prefix}-control-#{control.id}"
           -control_summary_target = "#{control_id_prefix}-summary"
 
-          %li
+          %li{ :'data-object-id' => control.id, :'data-object-type' => "control" }
             .item-main
               .openclose.lastchild
               .item-title

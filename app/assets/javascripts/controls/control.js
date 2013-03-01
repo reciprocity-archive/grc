@@ -6,7 +6,13 @@ can.Model.Cacheable("CMS.Models.Control", {
     root_object : "control"
   , findAll : "GET /controls.json?company=true"
   , findOne : "GET /controls/{id}.json"
-
+  , update : function(id, params) {
+    return $.ajax({
+      url : "/controls/" + id + ".json"
+      , type : "put"
+      , data : this.process_args(params, ["notes", "title", "description"])
+    })
+  }
   , model : function(attrs) {
     var id;
     if((id = attrs.id || (attrs[this.root_object] && attrs[this.root_object].id)) && this.findInCacheById(id)) {

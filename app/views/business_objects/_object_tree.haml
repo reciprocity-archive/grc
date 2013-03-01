@@ -25,7 +25,7 @@
 -has_dependence_relationship = instance.has_valid_relationship?(dependence_relationship_type)
 -has_process_relationship = instance.has_valid_relationship?(process_relationship_type)
 
-%li{ :'data-object-id' => instance.id }
+%li{ :'data-object-id' => instance.id, :'data-object-type' => instance.class.name.underscore }
   .item-main
     -if !is_root
       .openclose{ :class => !expand_this && 'lastchild' }

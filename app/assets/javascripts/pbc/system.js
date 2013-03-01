@@ -8,6 +8,13 @@ can.Model.Cacheable("CMS.Models.System", {
     , xable_type : "System"
     , findAll : "GET /systems.json?responseid={id}" 
     , findOne : "GET /systems/{id}.json" 
+    , update : function(id, params) {
+      return $.ajax({
+        url : "/systems/" + id + ".json"
+        , data : this.process_args(params)
+        , type : "put"
+      });
+    }
     , search : function(request, response) {
         return $.ajax({
             type : "get"
