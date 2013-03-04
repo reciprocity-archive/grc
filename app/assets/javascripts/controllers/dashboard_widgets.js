@@ -11,7 +11,7 @@ can.Control("CMS.Controllers.DashboardWidgets", {
     , object_category : null //e.g. "governance"
     , object_route : null //e.g. "systems"
     , object_display : null
-    , content_selector : ".content"
+    , content_selector : ".content"  //This is somewhat deprecated since we are no longer trying to make the section resizable --BM 3/2/2013
     , minimum_widget_height : 100
   }
 }, {
@@ -36,7 +36,7 @@ can.Control("CMS.Controllers.DashboardWidgets", {
     can.view(this.options.widget_view, this.options, function(frag) {
       that.element.html(frag);
       CMS.Models.DisplayPrefs.findAll().done(function(d) {
-        var content = that.element.find(that.options.content_selector).first();
+        var content = that.element;
         if(d[0].getCollapsed("programs_dash", that.element.attr("id"))) {
 
           that.element
@@ -48,14 +48,7 @@ can.Control("CMS.Controllers.DashboardWidgets", {
             content.resizable("destroy")
           }
         } else {
-          content
-          .removeClass("ui-resizable")
-          .resizable({
-            handles : "s"
-            , minHeight : that.options.minimum_widget_height
-            , alsoResize : that.element
-            , autoHide : false
-          })
+          content.trigger("min_size")
         }
       });
       that.element

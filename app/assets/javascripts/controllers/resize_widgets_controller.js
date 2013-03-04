@@ -12,7 +12,7 @@ can.Control("CMS.Controllers.ResizeWidgets", {
     , default_layout : null
     , page_token : window.location.pathname.substring(1, (window.location.pathname + "/").indexOf("/", 1))
     , minimum_widget_height : 100
-    , content_selector : ".content, .tab-content"
+    , resizable_selector : "section[id]"
   }
 }, {
 
@@ -33,18 +33,26 @@ can.Control("CMS.Controllers.ResizeWidgets", {
 
     //set up dragging the bottom border to resize in jQUI
     $(this.element)
-    .find("section[id]")
+    .find(this.options.resizable_selector)
     .filter(function() {
       var cs = that.options.model.getCollapsed(that.options.page_token, $(this).attr("id"));
       return cs == null ? true : !cs;
     })
     .each(function() {
+      var extra_ht = 0;
+      function add_height(index, el) {
+        extra_ht += $(el).height();        
+      }
+
+      $(this).children().not(".content").each(add_height);
+      if($(".content .tab-content", this).not(".tabs-left .tab-content").length) {
+        $(".content .tab-content", this).siblings().each(add_height);
+      }
+
       $(this)
-      .find(that.options.content_selector).first()
       .resizable({
         handles : "s"
-        , minHeight : that.options.minimum_widget_height
-        , alsoResize : this
+        , minHeight : that.options.minimum_widget_height + extra_ht
         , autoHide : false
       });
     });
@@ -144,11 +152,10 @@ can.Control("CMS.Controllers.ResizeWidgets", {
       $gcs.each(function(j, grandchild) {
         if(that.options.model.getCollapsed(that.options.page_token, $(grandchild).attr("id"))) {
           $(grandchild).css("height", "").find(".widget-showhide > a").showhide("hide")
-          $(grandchild).find(that.options.content_selector).first().css("height", "");
         } else {
           if(page_heights.attr($(grandchild).attr("id"))) {
             var sh = page_heights.attr($(grandchild).attr("id"));
-            $(grandchild).find(that.options.content_selector).first().css("height", sh);
+            $(grandchild).css("height", sh);
 
           } else {
             // missing a height.  redistribute evenly but don't increase the size of anythng.
@@ -157,7 +164,7 @@ can.Control("CMS.Controllers.ResizeWidgets", {
             , col_ht = $(child).height();
             $shrink_these = $gcs.filter(function() { return $(this).height() > split_ht });
             $shrink_these.each(function(i, grandchild) {
-              var $gc = $(grandchild).find(that.options.content_selector).first();
+              var $gc = $(grandchild);
               var this_split_ht = split_ht - parseInt($gc.css("margin-top")) - (parseInt($gc.prev($gcs).css("margin-bottom")) || 0);
               $gc.attr("height", content_height_func);
               page_heights.attr($gc.attr("id"), this_split_ht);
@@ -310,8 +317,6 @@ can.Control("CMS.Controllers.ResizeWidgets", {
         , height : "3px"
         , cursor : "move"
       })
-      //.bind("mouseup dragend", this.proxy('completeResize', this.element))
-      //.bind("dragover", this.proxy('recalculate', this.element))
       .appendTo($t);
     }
   }
@@ -369,7 +374,8 @@ can.Control("CMS.Controllers.ResizeWidgets", {
   , completeResize : function(el, ev) {
     var $drag = $(".width-selector-drag");
     if($drag.length) {
-      var t = this.element
+      var that = this
+      , t = this.element
       , $bar = $(".width-selector-bar")
       , offset = $bar.data("offset")
       , start_offset = $bar.data("start_offset")
@@ -381,7 +387,9 @@ can.Control("CMS.Controllers.ResizeWidgets", {
       if(!$(document.elementFromPoint(ev.pageX, ev.pageY)).is($(t).add(".width-selector-bar"))) {
         this.removeResizer();
       }
-      can.each(t.find("section[id]"), this.proxy("ensure_minimum"));
+      t.find(this.options.resizable_selector).each(function(i, section) {
+        that.ensure_minimum(section);
+      });
     }
 
   }
@@ -392,8 +400,6 @@ can.Control("CMS.Controllers.ResizeWidgets", {
 
   , " mouseup" : "completeResize"
   , " dragend" : "completeResize"
-
-  //, " dragstart" : function(el, ev)  { ev.preventDefault(); }
 
   , " dragover" : "recalculateDrag"
   , recalculateDrag : function(el, ev) {
@@ -415,19 +421,43 @@ can.Control("CMS.Controllers.ResizeWidgets", {
 
   , " resizestop" : function(el, ev, ui) {
     var ht = $(ui.element).height();
-    this.ensure_minimum($(ui.element).closest("section[id]"), ht);
+    this.ensure_minimum($(ui.element).closest(this.options.resizable_selector), ht);
+  }
 
+  , "{resizable_selector} min_size" : function(el, ev) {
+    this.ensure_minimum(el);
   }
 
   , ensure_minimum : function(el, ht) {
-    $(el).css("width", ""); //resize sometimes sets width for no reason
+    var $el = $(el);
+    $el.css("width", ""); //bizarre jQUI behavior fix
     if(!ht) {
-      ht = $(el).find(this.options.content_selector).first().height();
+      ht = $el.height();
     }
 
-    if(ht < this.options.minimum_widget_height) {
-      ht = this.options.minimum_widget_height;
-      $(el).find(this.options.content_selector).first().css("height", ht);
+    var min_ht = this.options.minimum_widget_height;
+    function add_height(index, elt) {
+      min_ht += $(elt).height();        
+    }
+
+    $el.children().not(".content, .ui-resizable-handle").each(add_height);
+    if($(".content .tab-content", el).not(".tabs-left .tab-content").length) {
+      $(".content .tab-content", el).siblings().each(add_height);
+    }
+
+    if($el.is(":not(.ui-resizable)") || $el.resizable("option").minHeight !== min_ht) {
+      if($el.is(".ui-resizable")) {
+        $el.resizable("destroy");
+      }
+      $el.resizable({
+        handles : "s"
+        , minHeight : min_ht
+        , autoHide : false
+      });
+    }
+    if(ht < min_ht) {
+      ht = min_ht;
+      $el.css("height", ht);
     }
 
     this.options.model
@@ -439,22 +469,15 @@ can.Control("CMS.Controllers.ResizeWidgets", {
   , ".widget-showhide click" : function(el, ev) {
     var that = this;
     //animation hasn't completed yet, so collapse state is inverse of whether it's actually collapsed right now.
-    var $section = el.closest("section[id]");
-    var collapse = $section.find(that.options.content_selector).first().is(":visible");
+    var $section = el.closest(this.options.resizable_selector);
+    var collapse = $section.find(".content").is(":visible");
     CMS.Models.DisplayPrefs.findAll().done(function(d) { 
       collapse ? $section.css("height", "") : $section.css("height", d[0].getWidgetHeight(that.options.page_token, $section.attr("id")))
-      $section
-    if(!collapse || $section.find(that.options.content_selector).is(".ui-resizable")) {
-      $section
-      .find(that.options.content_selector)
-      .first()
-      .resizable(collapse ? "destroy" : {
-        handles : "s"
-        , minHeight : that.options.minimum_widget_height
-        , alsoResize : $section
-        , autoHide : false
-      });
-    }
+      if(collapse && $section.is(".ui-resizable")) {
+        $section.resizable("destroy");
+      } else if(!collapse) {
+        that.ensure_minimum($section);
+      }
       d[0].setCollapsed(that.options.page_token, $section.attr("id"), collapse);
     });
   }
