@@ -19,8 +19,7 @@
     -# Both title and description
     .oneline.expand-on-hover
       -if object_type.present?
-        .grcobject{ :class => object_type }
-          %i{ :class => object_icon }
+        %i{ :class => "#{object_icon}-black" }
       -elsif object_icon.present?
         %i{ :class => object_icon }
       %span.code
@@ -48,8 +47,7 @@
     -# Title only
     .oneline.expandable
       -if object_type.present?
-        .grcobject{ :class => object_type }
-          %i{ :class => object_icon }
+        %i{ :class => "#{object_icon}-black" }
       -elsif object_icon.present?
         %i{ :class => object_icon }
       %span.code
@@ -68,8 +66,7 @@
     -# Description only
     .oneline.description-only.expand-on-hover
       -if object_type.present?
-        .grcobject{ :class => object_type }
-          %i{ :class => object_icon }
+        %i{ :class => "#{object_icon}-black" }
       -elsif object_icon.present?
         %i{ :class => object_icon }
       %span.code
@@ -101,8 +98,7 @@
     -# Neither (shouldn't happen)
     .oneline
       -if object_type.present?
-        .grcobject{ :class => object_type }
-          %i{ :class => object_icon }
+        %i{ :class => "#{object_icon}-black" }
       -elsif object_icon.present?
         %i{ :class => object_icon }
       %span.title (No description)
