@@ -582,3 +582,19 @@ ul.tree-structure {
 .pbc-request-count {
   color:$subTitle;
 }
+
+input.pbc-request-assignee {
+  border-color:#fff;
+  cursor:pointer;
+  @include box-shadow(none);
+  &:hover {
+    border-color:darken($lightGray, 20%);
+  }
+  &:focus {
+    border:1px solid $gray;
+    cursor:text;
+  }
+  &.empty {
+    border-color:darken($lightGray, 20%);
+  }
+}
