@@ -79,12 +79,12 @@ ul.tree-structure.pbc {
       select {
         position:absolute;
         top:4px;
-        left:-7px;
+        left:50px;
         display:block;
         line-height:23px;
         height:23px;
         padding:2px;
-        width:100%;
+        width:220px;
         border-color:darken($lightGray,15%);
         @include border-radius();
       }    

@@ -107,7 +107,7 @@
                   .openclose.openclose-request
                   .item-title
                     .row-fluid
-                      .span2
+                      .span1
                         %i{"class" => request_type_icon(request.type_name)}
                         -type_shorthand = ""
                         -if request.type_name == "Population Sample"
@@ -117,12 +117,12 @@
                         -else
                           -type_shorthand = "Int"
                         %span.request-title{:rel => "tooltip", :title => "#{request.type_name}"}=type_shorthand
-                      .span3.pbc-item.pbc-control
+                      .span2.pbc-item.pbc-control
                         -if request.control.present?
                         -elsif request.pbc_control_code.present?
                           %i.grcicon-control-black
-                          %span.control.error.oneline
-                            ="#{request.pbc_control_code} (Code not recognized)"
+                          %span.control.error.oneline{:rel => "tooltip", :title => "Code not recognized"}
+                            ="#{request.pbc_control_code}"
                         -else
                           %i.grcicon-control-black
                           %span.control.error.oneline
@@ -139,8 +139,8 @@
                         %label.inline.assignee{ :for => "request_" + request.id.to_s + "_responsible"}
                           Assignee
                         %input.pbc-request-assignee{ :id => "request_" + request.id.to_s + "_responsible", :type => "text", :value => request.company_responsible, :style => "margin-top:-3px;margin-bottom:0;font-size:12px;line-height:16px;height:16px;min-height:0;padding:2px;width:160px" }
-                      .span2.row-fluid
-                        .status.span10
+                      .span4
+                        .status
                           Status:
                           %select
                             -Request.statuses.each do |status|
@@ -179,8 +179,8 @@
                         -else
                           %p.disabled-text Notes not available
                       .span3
-                        %a.btn.btn-mini.pull-right{ :href => edit_flow_request_path(request.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide', :title => "Edit Request", :rel => "tooltip", :'data-placement' => "left"}
-                          %i.grcicon-edit
+                        %a.btn.btn-mini.pull-right{ :href => edit_flow_request_path(request.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide', :title => "Edit Request", :rel => "tooltip", :'data-placement' => "left", :style => "margin-right:10px; padding-left:2px; padding-right:2px"}
+                          %i.grcicon-edit{:style => "margin-right:0px;margin-top:0px"}
                         %h5 Responsible Parties
                         .rtf
                           %p
