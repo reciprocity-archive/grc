@@ -125,6 +125,19 @@
         margin-bottom:4px;
         margin-top:4px;
       }
+      .inner-modal-header {
+        .btn {
+          padding: 2px 0;
+          @include opacity(1);
+        }
+      }
+      .inner-modal-footer {
+        .btn {
+          padding: 4px 10px;
+          @include opacity(1);
+          font-size: 13px;
+        }
+      }
     }
     .modal-source {
       h3 {
