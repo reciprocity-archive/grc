@@ -1,5 +1,5 @@
 {{#system}}
-  <div class="span8 pbc-response-process" data-model="true" {{data 'model'}}>
+  <div class="span8" data-model="true" {{data 'model'}}>
     <div class="inner-system">
       <div class="row-fluid response-title-bar">
         <div class="span6">
@@ -12,9 +12,8 @@
             </a>          
           </div>
           <h4>
-            <span rel="tooltip" data-placement="top" title="Process Title">
-              {{{title}}}
-            </span>
+            <i class="grcicon-{{system_or_process}}-black" rel="tooltip" data-placement="top" title="{{system_or_process_capitalized}}"></i>
+            {{{title}}}
           </h4>
         </div>
         <div class="span6">
@@ -86,9 +85,9 @@
       <div class="row-fluid">
         <div class="span6">
           <h5>Notes</h5>
-          <p class="full-view">
+          <div class="rtf">
             {{notes}}
-          </p>
+          </div>
 
         </div>
         <div class="span6">

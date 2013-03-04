@@ -5,11 +5,9 @@
       <div class="item-title">
         <div class="row-fluid">
           <div class="span12">
-            <i class="grcicon-{{system.system_or_process}}-black process-icon"></i>
-            Response using {{system.system_or_process_capitalized}}:
-            <span style="color:#333">
+            <span style="font-weight:normal">Response:&nbsp;</span>
+            <i class="grcicon-{{system.system_or_process}}-black process-icon" rel="tooltip" title="{{system.system_or_process_capitalized}}"></i>          
               {{system.title}}
-            </span>
           </div>
         </div>
       </div>
@@ -318,6 +316,6 @@
           </div>
         </div>
       </div>
-      </div>
+    </div>
   </li>
 {{/list}}
