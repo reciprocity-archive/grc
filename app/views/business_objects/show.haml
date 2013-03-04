@@ -1,1 +1,59 @@
-=render :partial => "shared/show_model"
+-model_name = controller_name.singularize.underscore
+-model_title = model_name.titleize
+-instance = instance_variable_get("@" + model_name)
+
+-@title = "GRC #{model_title}: #{instance.title}"
+
+-content_for :header do
+  %ul.breadcrumbs
+    %li
+      #{model_title}
+    %li= instance.slug
+
+  %h1.business
+    .grcobject.business{:rel => "tooltip", :'data-placement'=>"bottom", :title => model_title}
+      %i{ :class => "grcicon-#{instance.class.name.downcase}" }
+    =instance.title
+
+-content_for :page_help, model_name
+
+-content_for :subheader_extras do
+  %ul.actions.pull-right
+    %li
+      %a{ :href => method("edit_flow_#{model_name}_path").call(instance), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide', :title => "Edit #{model_title}" }
+        %i.grcicon-edit
+        Edit #{model_title}
+
+-content_for :subheader_plus do
+  %a.navbarplus.fltrt{ :href => method("new_flow_#{model_name}_path").call(), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide'}
+
+.container-fluid
+  #show_columns.row-fluid{ :'data-resize' => "true" }
+    #middle_column.span8.widget-area
+      -#=render :partial => "shared/graph",
+              :layout => 'layouts/widget_box',
+              :locals => { model_name.to_sym => instance,
+                :instance => instance,
+                :widget_id => model_name + "_graph_widget" }
+
+      =render :partial => "main",
+              :layout => 'layouts/widget_box',
+              :locals => { model_name.to_sym => instance, :widget_id => model_name + "_widget", :widget_class => "business" }
+
+      =render :partial => "risks",
+              :layout => 'layouts/widget_box',
+              :locals => { model_name.to_sym => instance, :widget_class => "risk" }
+
+      -if instance.class.respond_to?(:valid_relationships)
+        =render :partial => 'shared/related',
+                :layout => 'layouts/widget_box',
+                :locals => { :instance => instance, :widget_class => 'widget-tabs widget-tabs-horizontal business' }
+
+    #right_column.span4.widget-area
+      =render :partial => "info",
+              :layout => 'layouts/widget_box',
+              :locals => { model_name.to_sym => instance, :widget_class => "business" }
+
+      =render :partial => "more_info",
+                :layout => 'layouts/widget_box',
+                :locals => { model_name.to_sym => instance, :widget_class => 'related business' }

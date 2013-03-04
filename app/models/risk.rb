@@ -44,4 +44,25 @@ class Risk < ActiveRecord::Base
   def display_name
     slug
   end
+
+  def related_objects_with_risky_attributes
+    objects = {}
+    risky_attributes.each do |ra|
+      ra.attributed_objects.each do |object|
+        objects[object] ||= []
+        objects[object].push(ra)
+      end
+    end
+    related_objects.each do |object|
+      objects[object] ||= []
+    end
+    objects
+  end
+
+  def related_objects
+    Relationship.where(
+      :source_type => self.class.name,
+      :source_id => id,
+    ).includes(:destination).map(&:destination)
+  end
 end
