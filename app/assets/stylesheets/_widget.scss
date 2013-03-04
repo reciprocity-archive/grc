@@ -11,17 +11,17 @@
       &:hover {
         border-bottom: 1px solid $gray;
         .code {
-          color: $gray;
+          color: $black;
         }
         .item-content {
           ul.tree-structure {
             li {
               .code {
-                color: $black;
+                color: $text;
               }
               &:hover {
                 .code {
-                  color: $gray;
+                  color: $black;
                 }
               }
             }
