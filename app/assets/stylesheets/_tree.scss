@@ -457,6 +457,9 @@ ul.tree-structure {
       .item-main {
         a {
           color:$text;
+          &.view-more {
+            color: $link;
+          }
         }
         .addition-info {
           a {
