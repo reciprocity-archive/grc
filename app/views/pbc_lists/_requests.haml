@@ -103,12 +103,19 @@
               -request_collapse_class = "control_assessment-#{control_assessment_id || 'null' }-request-#{request.id}"
               %li.main-item{ html_data_attributes(request, "data-filter-", [ ["type-id", "type_id"], ["type-name", "type_name"], "status", ["date-requested", "date_requested.to_date"], ["control-code", "control.slug"], ["person", "persons_responsible"], "id" ]) }
                 .item-main.pbc-item-head
-                  .openclose
+                  .openclose.openclose-request
                   .item-title
                     .row-fluid
                       .span2
                         %i{"class" => request_type_icon(request.type_name)}
-                        %span.request-title=request.type_name
+                        -type_shorthand = ""
+                        -if request.type_name == "Population Sample"
+                          -type_shorthand = "Pop"
+                        -elsif request.type_name == "Documentation"
+                          -type_shorthand = "Doc"
+                        -else
+                          -type_shorthand = "Int"
+                        %span.request-title{:rel => "tooltip", :title => "#{request.type_name}"}=type_shorthand
                       .span3.pbc-item.pbc-control
                         for &nbsp;
                         -if request.control.present?

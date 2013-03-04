@@ -69,7 +69,9 @@ ul.tree-structure.pbc {
     }
     span.request-title {
       text-transform:uppercase;
+      font-size:11px;
       color:darken($gray,20%);
+      cursor:pointer;
     }
     .status {
       position:relative;
@@ -432,6 +434,18 @@ ul.tree-structure {
     @include border-radius();
     background:$pbcListGray;
     border:1px solid darken($pbcListGray, 5%);
+    .openclose {
+      background-position:-128px -56px;
+      &.active {
+        background-position:-104px -56px;
+      }
+      &.openclose-request {
+        background-position:-198px -56px;
+        &.active {
+          background-position:-222px -56px; 
+        }
+      }
+    }
     .ca-fields {
       i {
         margin-top:0;
