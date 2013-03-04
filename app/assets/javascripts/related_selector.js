@@ -85,6 +85,8 @@
               $help_inline = $input.parent().siblings('.help-inline');
             if ($help_inline.length == 0)
               $help_inline = $input.parent().parent().siblings('.help-inline');
+            if ($help_inline.length == 0)
+              $help_inline = $input.parent().parent().parent().siblings('.help-inline');
 
             $help_inline.text(error);
           });

@@ -1,10 +1,26 @@
 -# locals: instance
 
-%ul.tree-structure.simple
+%ul.tree-structure
+  -instance.related_objects_with_risky_attributes.each do |related_object, risky_attributes|
+    %li{ :class => related_object.class.name.downcase, :'data-object-id' => instance.id }
+      .item-main
+        .item-title
+          .row-fluid
+            -title_with_risky_attributes = capture do
+              -if risky_attributes.size > 0
+                -risky_attributes.each_with_index do |ra, i|
+                  %span.mini-risky-attribute{ :rel => 'tooltip', :title => ra.title }
+                    =ra.slug
+                    ="," unless i == risky_attributes.size - 1
+              =instance.title
+            =render :partial => 'object_leaf', :locals => { :instance => related_object, :title => title_with_risky_attributes, :object_type => 'business', :object_icon => "grcicon-#{related_object.class.name.downcase}" }
+
+
+-#%ul.tree-structure.simple
   %li.tab-title-holder
     %h3.tab-title.main-tab-title
       Business Objects impacted by this Risk
-      
+
   -instance.risky_attributes.each_with_index do |risky_attribute, i|
     -id_prefix = "risky_attribute-#{i}"
 
