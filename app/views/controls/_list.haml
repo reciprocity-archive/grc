@@ -13,16 +13,25 @@
             -programs = item.linked_programs.uniq
             .span2
               .objects-count
-                -if !programs.empty?
-                  -popover_content = capture_haml do
-                    %ul
+                -popover_content = capture_haml do
+                  -if !programs.empty?
+                    %ul.tree-structure.simple
                       -programs.each do |program|
-                        %li
-                          %a{ :href => flow_program_path(program) }=program.title
-                  -data_popover_trigger = { :placement => "right",
-                                       :'popover-trigger' =>  "sticky-hover",
-                                       :'original-title' => "Linked Programs",
-                                       :content => popover_content }
+                        %li.program
+                          .item-main
+                            .item-title
+                              .row-fluid
+                                .span12
+                                  .oneline
+                                    %a{ :href => flow_program_path(program) }=program.title
+                  -else
+                    .rtf
+                      %p.no-data{:style=> "font-size:13px"}
+                        No programs are linked to this company control
+                -data_popover_trigger = { :placement => "right",
+                                     :'popover-trigger' =>  "sticky-hover",
+                                     :'original-title' => "<i class='grcicon-program-black'></i>Linked Programs".html_safe,
+                                     :content => popover_content }
                 %a{ :data => data_popover_trigger }
                   %i.grcicon-program-black
                   =programs.size #not using count because count kicks off another query that returns an incorrect result
