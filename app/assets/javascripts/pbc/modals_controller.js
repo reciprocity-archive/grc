@@ -89,9 +89,11 @@ can.Control("CMS.Controllers.PBCModals", {
         }, function(data) {
           // FIXME: Brad, fix this if/when Requests are live-bound
           var $this = el.closest('.pbc-control').find('.control');
-          $this.text(control_data.slug);
+          $this.text("0 responses");
           $this.removeClass("error");
-          $this.addClass("i-control");
+          $this.removeClass("control");
+          $this.prev().hide();
+          $this.next().hide();
             //find this control AND REMOVE ITS ERROR
             var $requests = $("#requests");
             var $ca = $requests.find(".pbc-ca[data-type=ControlAssessment][data-control-id=" + control_data.id + "]");
