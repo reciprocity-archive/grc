@@ -9,14 +9,6 @@ module DefaultRelationshipTypes
       :forward_description => "This data asset relies upon the following processes.",
       :reverse_description => "This process supports the following data assets."
     },
-    :data_asset_has_risky_attribute => {
-      :source_type => "DataAsset",
-      :target_type => "RiskyAttribute",
-      :forward_phrase => "has",
-      :reverse_phrase => "is an attribute of",
-      :forward_description => "This data asset has the following risky attributes.",
-      :reverse_description => "This risky attribute is an attribute of the following data assets."
-    },
     :data_asset_relies_upon_data_asset => {
       :source_type => "DataAsset",
       :target_type => "DataAsset",
@@ -41,6 +33,54 @@ module DefaultRelationshipTypes
       :forward_description => "This data asset relies upon the following systems.",
       :reverse_description => "This system supports the following data assets."
     },
+    :directive_applies_to_data_asset => {
+      :source_type => "Directive",
+      :target_type => "DataAsset",
+      :forward_phrase => "applies to",
+      :reverse_phrase => "is within scope of",
+      :forward_description => "This directive applies to the following data assets.",
+      :reverse_description => "This data asset is within scope of the following directives."
+    },
+    :directive_applies_to_facility => {
+      :source_type => "Directive",
+      :target_type => "Facility",
+      :forward_phrase => "applies to",
+      :reverse_phrase => "is within scope of",
+      :forward_description => "This directive applies to the following facilities.",
+      :reverse_description => "This facility is within scope of the following directives."
+    },
+    :directive_applies_to_market => {
+      :source_type => "Directive",
+      :target_type => "Market",
+      :forward_phrase => "applies to",
+      :reverse_phrase => "is within scope of",
+      :forward_description => "This directive applies to the following markets.",
+      :reverse_description => "This market is within scope of the following directives."
+    },
+    :directive_applies_to_org_group => {
+      :source_type => "Directive",
+      :target_type => "OrgGroup",
+      :forward_phrase => "applies to",
+      :reverse_phrase => "is within scope of",
+      :forward_description => "This directive applies to the following org groups.",
+      :reverse_description => "This org group is within scope of the following directives."
+    },
+    :directive_applies_to_product => {
+      :source_type => "Directive",
+      :target_type => "Product",
+      :forward_phrase => "applies to",
+      :reverse_phrase => "is within scope of",
+      :forward_description => "This directive applies to the following products.",
+      :reverse_description => "This product is within scope of the following directives."
+    },
+    :directive_applies_to_project => {
+      :source_type => "Directive",
+      :target_type => "Project",
+      :forward_phrase => "applies to",
+      :reverse_phrase => "is within scope of",
+      :forward_description => "This directive applies to the following projects.",
+      :reverse_description => "This project is within scope of the following directives."
+    },
     :facility_has_process => {
       :source_type => "Facility",
       :target_type => "Process",
@@ -48,14 +88,6 @@ module DefaultRelationshipTypes
       :reverse_phrase => "is a process for",
       :forward_description => "This facility relies upon the following processes.",
       :reverse_description => "This process supports the following facilities."
-    },
-    :facility_has_risky_attribute => {
-      :source_type => "Facility",
-      :target_type => "RiskyAttribute",
-      :forward_phrase => "has",
-      :reverse_phrase => "is an attribute of",
-      :forward_description => "This facility has the following risky attributes.",
-      :reverse_description => "This risky attribute is an attribute of the following facilities."
     },
     :facility_relies_upon_data_asset => {
       :source_type => "Facility",
@@ -89,14 +121,6 @@ module DefaultRelationshipTypes
       :forward_description => "This market relies upon the following processes.",
       :reverse_description => "This process supports the following markets."
     },
-    :market_has_risky_attribute => {
-      :source_type => "Market",
-      :target_type => "RiskyAttribute",
-      :forward_phrase => "has",
-      :reverse_phrase => "is an attribute of",
-      :forward_description => "This market has the following risky attributes.",
-      :reverse_description => "This risky attribute is an attribute of the following markets."
-    },
     :market_includes_market => {
       :source_type => "Market",
       :target_type => "Market",
@@ -128,14 +152,6 @@ module DefaultRelationshipTypes
       :reverse_phrase => "supports",
       :forward_description => "This market relies upon the following systems.",
       :reverse_description => "This system supports the following markets."
-    },
-    :org_group_has_risky_attribute => {
-      :source_type => "OrgGroup",
-      :target_type => "RiskyAttribute",
-      :forward_phrase => "has",
-      :reverse_phrase => "is an attribute of",
-      :forward_description => "This org group has the following risky attributes.",
-      :reverse_description => "This risky attribute is an attribute of the following org groups."
     },
     :org_group_is_affiliated_with_org_group => {
       :source_type => "OrgGroup",
@@ -226,14 +242,6 @@ module DefaultRelationshipTypes
       :forward_description => "This org group relies upon the following facilities.",
       :reverse_description => "This facility supports the following org groups."
     },
-    :process_has_risky_attribute => {
-      :source_type => "Process",
-      :target_type => "RiskyAttribute",
-      :forward_phrase => "has",
-      :reverse_phrase => "is an attribute of",
-      :forward_description => "This process has the following risky attributes.",
-      :reverse_description => "This risky attribute is an attribute of the following processes."
-    },
     :product_has_process => {
       :source_type => "Product",
       :target_type => "Process",
@@ -241,14 +249,6 @@ module DefaultRelationshipTypes
       :reverse_phrase => "is a process for",
       :forward_description => "This product relies upon the following processes.",
       :reverse_description => "This process supports the following products."
-    },
-    :product_has_risky_attribute => {
-      :source_type => "Product",
-      :target_type => "RiskyAttribute",
-      :forward_phrase => "has",
-      :reverse_phrase => "is an attribute of",
-      :forward_description => "This product has the following risky attributes.",
-      :reverse_description => "This risky attribute is an attribute of the following products."
     },
     :product_is_affiliated_with_product => {
       :source_type => "Product",
@@ -299,54 +299,6 @@ module DefaultRelationshipTypes
       :forward_description => "This product relies upon the following systems.",
       :reverse_description => "This system supports the following products."
     },
-    :directive_applies_to_data_asset => {
-      :source_type => "Directive",
-      :target_type => "DataAsset",
-      :forward_phrase => "applies to",
-      :reverse_phrase => "is within scope of",
-      :forward_description => "This directive applies to the following data assets.",
-      :reverse_description => "This data asset is within scope of the following directives."
-    },
-    :directive_applies_to_facility => {
-      :source_type => "Directive",
-      :target_type => "Facility",
-      :forward_phrase => "applies to",
-      :reverse_phrase => "is within scope of",
-      :forward_description => "This directive applies to the following facilities.",
-      :reverse_description => "This facility is within scope of the following directives."
-    },
-    :directive_applies_to_market => {
-      :source_type => "Directive",
-      :target_type => "Market",
-      :forward_phrase => "applies to",
-      :reverse_phrase => "is within scope of",
-      :forward_description => "This directive applies to the following markets.",
-      :reverse_description => "This market is within scope of the following directives."
-    },
-    :directive_applies_to_org_group => {
-      :source_type => "Directive",
-      :target_type => "OrgGroup",
-      :forward_phrase => "applies to",
-      :reverse_phrase => "is within scope of",
-      :forward_description => "This directive applies to the following org groups.",
-      :reverse_description => "This org group is within scope of the following directives."
-    },
-    :directive_applies_to_product => {
-      :source_type => "Directive",
-      :target_type => "Product",
-      :forward_phrase => "applies to",
-      :reverse_phrase => "is within scope of",
-      :forward_description => "This directive applies to the following products.",
-      :reverse_description => "This product is within scope of the following directives."
-    },
-    :directive_applies_to_project => {
-      :source_type => "Directive",
-      :target_type => "Project",
-      :forward_phrase => "applies to",
-      :reverse_phrase => "is within scope of",
-      :forward_description => "This directive applies to the following projects.",
-      :reverse_description => "This project is within scope of the following directives."
-    },
     :project_has_process => {
       :source_type => "Project",
       :target_type => "Process",
@@ -354,14 +306,6 @@ module DefaultRelationshipTypes
       :reverse_phrase => "is a process for",
       :forward_description => "This project relies upon the following processes.",
       :reverse_description => "This process supports the following projects."
-    },
-    :project_has_risky_attribute => {
-      :source_type => "Project",
-      :target_type => "RiskyAttribute",
-      :forward_phrase => "has",
-      :reverse_phrase => "is an attribute of",
-      :forward_description => "This project has the following risky attributes.",
-      :reverse_description => "This risky attribute is an attribute of the following projects."
     },
     :project_relies_upon_data_asset => {
       :source_type => "Project",
@@ -427,14 +371,70 @@ module DefaultRelationshipTypes
       :forward_description => "This project targets the following products.",
       :reverse_description => "This product is targeted by the following projects."
     },
-    :system_has_risky_attribute => {
-      :source_type => "System",
-      :target_type => "RiskyAttribute",
-      :forward_phrase => "has",
-      :reverse_phrase => "is an attribute of",
-      :forward_description => "This system has the following risky attributes.",
-      :reverse_description => "This risky attribute is an attribute of the following systems."
-    }
+    :risk_is_a_threat_to_data_asset => {
+      :source_type => "Risk",
+      :target_type => "DataAsset",
+      :forward_phrase => "is a threat to",
+      :reverse_phrase => "is vulnerable to",
+      :forward_description => "This risk is a threat to the following data assets.",
+      :reverse_description => "This data asset is vulnerable to the following risks."
+    },
+    :risk_is_a_threat_to_facility => {
+      :source_type => "Risk",
+      :target_type => "Facility",
+      :forward_phrase => "is a threat to",
+      :reverse_phrase => "is vulnerable to",
+      :forward_description => "This risk is a threat to the following facilities.",
+      :reverse_description => "This faciliy is vulnerable to the following risks."
+    },
+    :risk_is_a_threat_to_market => {
+      :source_type => "Risk",
+      :target_type => "Market",
+      :forward_phrase => "is a threat to",
+      :reverse_phrase => "is vulnerable to",
+      :forward_description => "This risk is a threat to the following markets.",
+      :reverse_description => "This market is vulnerable to the following risks."
+    },
+    :risk_is_a_threat_to_org_group => {
+      :source_type => "Risk",
+      :target_type => "OrgGroup",
+      :forward_phrase => "is a threat to",
+      :reverse_phrase => "is vulnerable to",
+      :forward_description => "This risk is not a threat to the following org groups.",
+      :reverse_description => "This org group is vulnerable to the following risks."
+    },
+    :risk_is_a_threat_to_process => {
+      :source_type => "Risk",
+      :target_type => "Process",
+      :forward_phrase => "is a threat to",
+      :reverse_phrase => "is vulnerable to",
+      :forward_description => "This risk is a threat to the following processes.",
+      :reverse_description => "This process is vulnerable to the following risks."
+    },
+    :risk_is_a_threat_to_product => {
+      :source_type => "Risk",
+      :target_type => "Product",
+      :forward_phrase => "is a threat to",
+      :reverse_phrase => "is vulnerable to",
+      :forward_description => "This risk is a threat to the following products.",
+      :reverse_description => "This product is vulnerable to the following risks."
+    },
+    :risk_is_a_threat_to_project => {
+      :source_type => "Risk",
+      :target_type => "Project",
+      :forward_phrase => "is a threat to",
+      :reverse_phrase => "is vulnerable to",
+      :forward_description => "This risk is a threat to the following projects.",
+      :reverse_description => "This project is vulnerable to the following risks."
+    },
+    :risk_is_a_threat_to_system => {
+      :source_type => "Risk",
+      :target_type => "System",
+      :forward_phrase => "is a threat to",
+      :reverse_phrase => "is vulnerable to",
+      :forward_description => "This risk is a threat to the following systems.",
+      :reverse_description => "This system is vulnerable to the following risks."
+    },
   }
 
   def self.types

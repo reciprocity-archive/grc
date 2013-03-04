@@ -40,6 +40,28 @@ module BusinessObjectModel
     ).includes(:destination).map(&:destination)
   end
 
+  def related_risks
+    Relationship.where(
+      :destination_type => self.class.name,
+      :destination_id => id,
+      :relationship_type_id => "risk_is_a_threat_to_#{self.class.name.underscore}"
+    ).includes(:source).map(&:source)
+  end
+
+  def risks_with_risky_attributes
+    risks = {}
+    risky_attributes.each do |ra|
+      ra.risks.all.each do |risk|
+        risks[risk] ||= []
+        risks[risk].push(ra)
+      end
+    end
+    related_risks.each do |risk|
+      risks[risk] ||= []
+    end
+    risks
+  end
+
   module ClassMethods
   end
 

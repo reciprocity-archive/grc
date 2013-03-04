@@ -25,13 +25,13 @@
 -has_dependence_relationship = instance.has_valid_relationship?(dependence_relationship_type)
 -has_process_relationship = instance.has_valid_relationship?(process_relationship_type)
 
-%li{ :'data-object-id' => instance.id }
+%li{ :class => instance.class.name.downcase, :'data-object-id' => instance.id }
   .item-main
     -if !is_root
       .openclose{ :class => !expand_this && 'lastchild' }
     .item-title{ :class => is_root && 'active' }
       .row-fluid
-        =render :partial => 'object_leaf', :locals => { :instance => instance }
+        =render :partial => 'object_leaf', :locals => { :instance => instance, :object_type => 'business', :object_icon => "grcicon-#{instance.class.name.downcase}" }
       .item-actions
         %a.btn.btn-mini{ "rel" => "tooltip", "data-placement" => "left", "title" => "Edit this object", 'data-modal-class' => 'modal-wide', 'data-form-target' => 'refresh', "data-toggle" => "modal-ajax-form", :href => url_for(:id => instance.id, :action => :edit, :controller => model_underscore.pluralize, :only_path => true) }
           %i.grcicon-edit
