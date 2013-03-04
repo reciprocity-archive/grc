@@ -2,6 +2,20 @@
   width:700px;
   margin-left: -350px;
   height: auto !important;
+  .member-failure {
+    background: lighten($error,45%);
+  }
+  .help-inline {
+    color:$error;
+    font-size:12px;
+    padding-left:10px;
+    margin-bottom:-5px;
+    font-weight:bold;
+    float:none;
+    &:empty {
+     float:left; 
+    }
+  }
   form {
     margin: 0;
   }
