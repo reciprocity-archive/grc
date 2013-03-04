@@ -14,21 +14,18 @@
     </div>
     <div class="item-content response-items">
       <div class="row-fluid">
-        {{#system}}
-          {{> /assets/pbc/system.mustache}}
-        {{/system}}
-        <div class="span4">
+        <div class="span6">
           <div class="inner-response">
             <div class="row-fluid response-title-bar">
               <div class="span12">
+                <a class="btn btn-mini delete-response pull-right" href="/responses/{{id}}/delete" data-toggle="modal-ajax-form" title="Delete response" rel="tooltip" data-placement="left" data-id="{{id}}">
+                  <i class="grcicon-x-grey"></i>
+                </a>
                 <h4>Evidence</h4>
               </div>
             </div>
             <div class="row-fluid">
               <div class="span12">
-                <a class="btn btn-mini delete-response pull-right" href="/responses/{{id}}/delete" data-toggle="modal-ajax-form" title="Delete response" rel="tooltip" data-placement="left" data-id="{{id}}">
-                  <i class="grcicon-x-grey"></i>
-                </a>
                 <h5>{{type_name}}</h5>
                 {{#if_equals type_name 'Documentation'}}
                   <ul class="items pbc-item-list">
@@ -316,6 +313,10 @@
           </div>
         </div>
       </div>
+      {{#system}}
+        {{> /assets/pbc/system.mustache}}
+      {{/system}}
+
     </div>
   </li>
 {{/list}}
