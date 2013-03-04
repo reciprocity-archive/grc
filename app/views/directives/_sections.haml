@@ -24,7 +24,7 @@
                                  :'popover-trigger' =>  "sticky-hover",
                                  :'original-title' => "Linked Controls",
                                  :content => popover_content }
-          %a.controllist{:href => mapping_section_dialog_path(item),
+          %a.controls-count.controllist{:href => mapping_section_dialog_path(item),
                          :data => controls.empty? || data_popover_trigger}
             %i.grcicon-control-black
             -if !controls.empty?
