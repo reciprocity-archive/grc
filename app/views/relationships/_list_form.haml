@@ -33,7 +33,6 @@
         .object-info
           %span.name <%= system.title %>
           %span.option <%= system.slug %>
-        
       .span4.actions
         .pull-right
           %a.widgetbtn.btn.btn-mini{:href => edit_flow_system_path('<%=system.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
@@ -48,7 +47,6 @@
         .object-info
           %span.name <%= program.title %>
           %span.option <%= program.slug %>
-        
       .span4.actions
         .pull-right
           %a.widgetbtn.btn.btn-mini{:href => edit_flow_program_path('<%=program.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
@@ -63,7 +61,6 @@
         .object-info
           %span.name <%= directive.title %>
           %span.option <%= directive.slug %>
-        
       .span4.actions
         .pull-right
           %a.widgetbtn.btn.btn-mini{:href => edit_flow_directive_path('<%=directive.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
@@ -78,7 +75,6 @@
         .object-info
           %span.name <%= product.title %>
           %span.option <%= product.slug %>
-        
       .span4.actions
         .pull-right
           %a.widgetbtn.btn.btn-mini{:href => edit_flow_product_path('<%=product.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
@@ -93,7 +89,6 @@
         .object-info
           %span.name <%= org_group.title %>
           %span.option <%= org_group.slug %>
-        
       .span4.actions
         .pull-right
           %a.widgetbtn.btn.btn-mini{:href => edit_flow_org_group_path('<%=org_group.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
@@ -108,7 +103,6 @@
         .object-info
           %span.name <%= facility.title %>
           %span.option <%= facility.slug %>
-        
       .span4.actions
         .pull-right
           %a.widgetbtn.btn.btn-mini{:href => edit_flow_facility_path('<%=facility.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
@@ -123,7 +117,6 @@
         .object-info
           %span.name <%= market.title %>
           %span.option <%= market.slug %>
-        
       .span4.actions
         .pull-right
           %a.widgetbtn.btn.btn-mini{:href => edit_flow_market_path('<%=market.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
@@ -138,7 +131,6 @@
         .object-info
           %span.name <%= data_asset.title %>
           %span.option <%= data_asset.slug %>
-        
       .span4.actions
         .pull-right
           %a.widgetbtn.btn.btn-mini{:href => edit_flow_data_asset_path('<%=data_asset.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
@@ -153,10 +145,23 @@
         .object-info
           %span.name <%= project.title %>
           %span.option <%= project.slug %>
-        
       .span4.actions
         .pull-right
           %a.widgetbtn.btn.btn-mini{:href => edit_flow_project_path('<%=project.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
+            %i.grcicon-edit
+          %a.widgetbtn.add-me.btn.btn-mini{:href => "#", :'data-toggle' => 'selector-list-select'}
+            %i.grcicon-chevron-right
+
+%script#relationship_risk_option{ :type => 'text/html', :'data-prefix' => 'risk' }
+  %li{ :'data-id' => '<%= risk.id %>', :'data-title' => '<%= risk.title %>', :'data-slug' => '<%= risk.slug %>' }
+    .row-fluid
+      .span8
+        .object-info
+          %span.name <%= risk.title %>
+          %span.option <%= risk.slug %>
+      .span4.actions
+        .pull-right
+          %a.widgetbtn.btn.btn-mini{:href => edit_flow_risk_path('<%=risk.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
             %i.grcicon-edit
           %a.widgetbtn.add-me.btn.btn-mini{:href => "#", :'data-toggle' => 'selector-list-select'}
             %i.grcicon-chevron-right
@@ -168,7 +173,6 @@
         .object-info
           %span.name <%= risky_attribute.title %>
           %span.option <%= risky_attribute.slug %>
-        
       .span4.actions
         .pull-right
           %a.widgetbtn.btn.btn-mini{:href => edit_flow_risky_attribute_path('<%=risky_attribute.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }

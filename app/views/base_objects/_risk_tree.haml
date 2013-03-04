@@ -20,13 +20,20 @@
 
 -main_toggle_target = expand_this ? objects_toggle_target : summary_toggle_target
 
-%li
+%li.risk
   .item-main
     -if !is_root
       .openclose{ :class => !expand_this && 'lastchild' }
     .item-title{ :class => is_root && 'active' }
       .row-fluid
-        =render :partial => 'object_leaf', :locals => { :instance => instance }
+        -title_with_risky_attributes = capture do
+          -if risky_attributes.size > 0
+            -risky_attributes.each_with_index do |ra, i|
+              %span.mini-risky-attribute{ :rel => 'tooltip', :title => ra.title }
+                =ra.slug
+                ="," unless i == risky_attributes.size - 1
+          =instance.title
+        =render :partial => 'object_leaf', :locals => { :instance => instance, :title => title_with_risky_attributes, :object_type => 'risk', :object_icon => 'grcicon-risk' }
       .item-actions
         -if is_editable
           %a.btn.btn-mini{ "rel" => "tooltip", "data-placement" => "left", "title" => "Edit this object", 'data-modal-class' => 'modal-wide', 'data-form-target' => 'refresh', "data-toggle" => "modal-ajax-form", :href => url_for(:id => instance.id, :action => :edit, :controller => model_underscore.pluralize, :only_path => true) }
@@ -42,12 +49,12 @@
           -control_id_prefix = "#{id_prefix}-control-#{control.id}"
           -control_summary_target = "#{control_id_prefix}-summary"
 
-          %li
+          %li.control
             .item-main
               .openclose{ :class => 'lastchild' }
               .item-title
                 .row-fluid
-                  =render :partial => 'object_leaf', :locals => { :instance => control }
+                  =render :partial => 'object_leaf', :locals => { :instance => control, :object_type => 'compliance', :object_icon => 'grcicon-control' }
                 .item-actions
                   %a.btn.btn-mini{"rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => flow_control_path(control.id) }
                     %i.grcicon-goto

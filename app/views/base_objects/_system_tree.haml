@@ -20,12 +20,12 @@
 
 -main_toggle_target = expand_this ? objects_toggle_target : summary_toggle_target
 
-%li
+%li{ :class => system.is_biz_process? ? "process" : "system" }
   .item-main
     .openclose{ :class => !expand_this && 'lastchild' }
     .item-title
       .row-fluid
-        =render :partial => 'object_leaf', :locals => { :instance => system }
+        =render :partial => 'object_leaf', :locals => { :instance => system, :object_type => 'compliance', :object_icon => "grcicon-#{system.is_biz_process? ? 'process' : 'system'}" }
       .item-actions
         -if is_editable
           %a.btn.btn-mini{ "rel" => "tooltip", "data-placement" => "left", "title" => "Edit this object", 'data-modal-class' => 'modal-wide', 'data-form-target' => 'refresh', "data-toggle" => "modal-ajax-form", :href => url_for(:id => system.id, :action => :edit, :controller => model_underscore.pluralize, :only_path => true) }
@@ -44,12 +44,12 @@
           -control_id_prefix = "#{id_prefix}-control-#{control.id}"
           -control_summary_target = "#{control_id_prefix}-summary"
 
-          %li
+          %li.control
             .item-main
               .openclose.lastchild
               .item-title
                 .row-fluid
-                  =render :partial => 'object_leaf', :locals => { :instance => control }
+                  =render :partial => 'object_leaf', :locals => { :instance => control, :object_type => 'compliance', :object_icon => 'grcicon-control' }
                 .item-actions
                   %a.btn.btn-mini{"rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => flow_control_path(control.id) }
                     %i.grcicon-goto
