@@ -89,7 +89,7 @@ var widget_descriptors = {
     model : CMS.Models.Process
     , object_type : "process"
     , object_category : "compliance"
-    , object_route : "processes"
+    , object_route : "systems"
     , object_display : "Processes"
   }
   , "system" : {
@@ -146,7 +146,7 @@ $(function() {
 
       $(".widget-add-placeholder").cms_controllers_add_widget({
         widget_descriptors : widget_descriptors
-        , minimum_widget_height : (/programs_dash/.test(window.location) ? 97 : 167)
+        , minimum_widget_height : 100
       });
     }
     
