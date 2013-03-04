@@ -153,7 +153,7 @@ can.Control("CMS.Controllers.Mapping", {
   }
 
   // Post-submit handler for new control dialog
-  , "#new_control ajax:json" : function(el, ev, data) {
+  , "a[href^='/controls/new'] modal:success" : function(el, ev, data) {
     if(data.directive_id.toString() === this.options.id) {
       // add this control to the reg controls.
       // This isn't the best way to go about it, but CanJS/Mustache is currently ornery about accepting new observable list elements
