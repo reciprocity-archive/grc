@@ -206,7 +206,7 @@ ul.tree-structure {
     margin-bottom:5px;
   }
   .code {
-    color:$text;
+    color:$black;
     font-weight:bold;
     font-size:12px;
     margin-right:8px;
@@ -603,4 +603,47 @@ ul.elements {
   span, i {
     cursor:pointer;  
   }
+}
+
+ul.tree-structure {
+  li.product,
+  li.orggroup,
+  li.project,
+  li.facility,
+  li.market,
+  li.dataasset {
+    .code {
+      color:$business;
+    } 
+  }
+
+  li.process,
+  li.system,
+  li.control {
+    .code {
+      color:$compliance;
+    } 
+  }
+
+  li.risk,
+  li.riskyattribute {
+    .code {
+      color:$risk;
+    } 
+  }
+
+  li.program,
+  li.directive,
+  li.policy,
+  li.contract,
+  li.regulation,
+  li.section,
+  li.clause {
+    .code {
+      color:$governance;
+    } 
+  }
+
+
+
 }

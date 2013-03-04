@@ -10,23 +10,6 @@
     li {
       &:hover {
         border-bottom: 1px solid $gray;
-        .code {
-          color: $black;
-        }
-        .item-content {
-          ul.tree-structure {
-            li {
-              .code {
-                color: $text;
-              }
-              &:hover {
-                .code {
-                  color: $black;
-                }
-              }
-            }
-          }
-        }
       }
       &:last-child {
         &:hover {
