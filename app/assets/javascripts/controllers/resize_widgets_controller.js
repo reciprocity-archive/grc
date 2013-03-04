@@ -324,7 +324,13 @@ can.Control("CMS.Controllers.ResizeWidgets", {
 
   , " mouseover" : "showGhostResizer"
   , " mousemove" : "showGhostResizer"
-  , "{window} resize" : "showGhostResizer"
+  , "{window} resize" : function(el, ev) {
+    var that = this;
+    this.showGhostResizer(this.element, ev);
+    this.element.find(this.options.resizable_selector).filter(":has(.content:visible)").each(function(i, el) {
+      that.ensure_minimum(el);
+    });
+  }
 
   , showGhostResizer : function(el, ev) {
     var that = this;
