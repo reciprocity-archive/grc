@@ -294,12 +294,15 @@ $(window).load(function(){
   });
 
   function openclose(command) {
-    $(this).each(function(){
+    var $that = $(this)
+    , use_slide = $that.length < 100
+
+    $that.each(function(){
       var $this = $(this)
         , $main = $this.closest('.item-main')
         , $li = $main.closest('li')
-        , $content = $li.find('> .item-content')
-        , $icon = $this.closest('.item-main').find('.openclose')
+        , $content = $li.children('.item-content')
+        , $icon = $main.find('.openclose')
         , cmd = command;
 
       if(typeof cmd !== "string" || cmd === "toggle") {
@@ -307,10 +310,11 @@ $(window).load(function(){
       }
 
       if (cmd === "close") {
-        $content.slideUp('fast');
+        
+        use_slide ? $content.slideUp('fast') : $content.css("display", "none");
         $icon.removeClass('active');
       } else if(cmd === "open") {
-        $content.slideDown('fast');
+        use_slide ? $content.slideDown('fast') : $content.css("display", "block");
         $icon.addClass('active');
       }
     });
