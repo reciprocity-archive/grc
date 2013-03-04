@@ -42,7 +42,7 @@
           -Request.statuses.each do |status|
             %option=status
         %label
-          Responsible Parties
+          Asignee
         %select{ :disabled => !has_items, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'person' }
           %option{ :value => 'any', :selected => 'selected' } All
           -pbc_list.requests.all.map { |req| [req.company_responsible.presence, req.auditor_responsible.presence] }.flatten.compact.uniq.sort.each do |name|
@@ -75,7 +75,8 @@
           .item-title
             .row-fluid
               .span8
-                %span.tiny-title Requests with Control:
+                %span.tiny-title Grouped by:
+                %i.grcicon-control-black
                 %strong= (control_assessment && control_assessment.control && control_assessment.control.slug) || "<font color='red'>(Missing Control)</font>".html_safe
                 =control_assessment && control_assessment.control && control_assessment.control.title || "&nbsp;".html_safe
               -if control_assessment.present?
@@ -117,46 +118,38 @@
                           -type_shorthand = "Int"
                         %span.request-title{:rel => "tooltip", :title => "#{request.type_name}"}=type_shorthand
                       .span3.pbc-item.pbc-control
-                        for &nbsp;
                         -if request.control.present?
-                          %span.control.oneline
-                            =request.control && request.control.slug
                         -elsif request.pbc_control_code.present?
+                          %i.grcicon-control-black
                           %span.control.error.oneline
-                            ="#{request.pbc_control_code} [Code not recognized]"
+                            ="#{request.pbc_control_code} (Code not recognized)"
                         -else
+                          %i.grcicon-control-black
                           %span.control.error.oneline
                             UNKNOWN
-                        -if request.control.present?
-                          %a.btn.btn-mini.btn-controllink{:href => flow_controls_path(:list_select => 1), :'data-toggle' => 'modal-ajax-single-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#referenceList', :'data-modal-class' => 'modal-slim' }
-                            %i.grcicon-link
-                        -else
+                        -if !request.control.present?
                           %a.btn.btn-mini.btn-danger.btn-controllink{:href => flow_controls_path(:list_select => 1), :'data-toggle' => 'modal-ajax-single-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#referenceList', :'data-modal-class' => 'modal-slim' }
                             %i.grcicon-link-white
-                      
-                        &nbsp; with
-                        %span.pbc-request-count=pluralize(request.responses.count, "response")
+                        -if request.control.present?
+                          -if request.responses.count > 0
+                            %span.pbc-request-count=pluralize(request.responses.count, "response")
+                          -else
+                            0 responses
                       .span3
                         %label.inline.assignee{ :for => "request_" + request.id.to_s + "_responsible"}
                           Assignee
                         %input.pbc-request-assignee{ :id => "request_" + request.id.to_s + "_responsible", :type => "text", :value => request.company_responsible, :style => "margin-top:-3px;margin-bottom:0;font-size:12px;line-height:16px;height:16px;min-height:0;padding:2px;width:160px" }
-                      .span2
-                        -if request.date_requested.present?
-                          %span.date{"rel" => "tooltip", "data-placement" => "top", "title" => "Date Requested"}=request.date_requested && request.date_requested.strftime('%m/%d/%Y')
-                        -else
-                          %span.date Unknown date
                       .span2.row-fluid
                         .status.span10
                           Status:
                           %select
                             -Request.statuses.each do |status|
                               %option{ :selected => request.status == status }=status
-
-
-                      
-                    .item-actions
-                      %a.btn.btn-mini.pull-right{ :href => edit_flow_request_path(request.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide', :title => "Edit Request", :rel => "tooltip", :'data-placement' => "left"}
-                        %i.grcicon-edit
+                      .span2.request-date
+                        -if request.date_requested.present?
+                          %span.date{"rel" => "tooltip", "data-placement" => "top", "title" => "Date Requested"}=request.date_requested && request.date_requested.strftime('%m/%d/%Y')
+                        -else
+                          %span.date Unknown date
                   
                 .item-content
                   .request-main
@@ -186,6 +179,8 @@
                         -else
                           %p.disabled-text Notes not available
                       .span3
+                        %a.btn.btn-mini.pull-right{ :href => edit_flow_request_path(request.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide', :title => "Edit Request", :rel => "tooltip", :'data-placement' => "left"}
+                          %i.grcicon-edit
                         %h5 Responsible Parties
                         .rtf
                           %p

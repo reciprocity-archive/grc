@@ -69,8 +69,9 @@ ul.tree-structure.pbc {
     }
     span.request-title {
       text-transform:uppercase;
+      font-weight:bold;
       font-size:11px;
-      color:darken($gray,20%);
+      color:$subTitle;
       cursor:pointer;
     }
     .status {
@@ -511,6 +512,7 @@ ul.tree-structure {
     @include border-radius();
     border:1px solid darken($pbcListGray, 10%) !important;
     margin-bottom:4px;
+    padding-left:0 !important;
     li {
       .pbc-item-head {
         padding:0 4px;
@@ -547,4 +549,15 @@ ul.tree-structure {
   .responses {
     margin-right:10px;
   }
+}
+
+.request-date {
+  text-align:right;
+  span.date {
+    margin-right:6px;
+  }
+}
+
+.pbc-request-count {
+  color:$subTitle;
 }
