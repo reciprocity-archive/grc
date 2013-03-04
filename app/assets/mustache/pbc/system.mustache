@@ -3,20 +3,20 @@
     <div class="inner-system">
       <div class="row-fluid response-title-bar">
         <div class="span6">
-          <div class="pull-right">
-            <a class="btn btn-mini" href="/systems/{{id}}" title="View {{system_or_process_capitalized}}" rel="tooltip" data-placement="top">
-              <i class="grcicon-goto"></i>
-            </a>
-            <a class="btn btn-mini system-edit" data-toggle="modal-ajax-form" href="/systems/{{id}}/edit" data-modal-reset="reset" data-model-class="modal-wide" title="Edit {{system_or_process_capitalized}}" rel="tooltip" data-placement="top">
-              <i class="grcicon-edit"></i>
-            </a>          
-          </div>
           <h4>
             <i class="grcicon-{{system_or_process}}-black" rel="tooltip" data-placement="top" title="{{system_or_process_capitalized}}"></i>
             {{{title}}}
           </h4>
         </div>
         <div class="span6">
+          <div class="pull-right">
+            <a class="btn btn-mini system-edit" data-toggle="modal-ajax-form" href="/systems/{{id}}/edit" data-modal-reset="reset" data-model-class="modal-wide" title="Edit {{system_or_process_capitalized}}" rel="tooltip" data-placement="top">
+              <i class="grcicon-edit"></i>
+            </a>          
+            <a class="btn btn-mini" href="/systems/{{id}}" title="View {{system_or_process_capitalized}}" rel="tooltip" data-placement="top">
+              <i class="grcicon-goto"></i>
+            </a>
+          </div>
           <span class="pbc-counter {{^object_people.length}} empty{{/object_people.length}}">
             <i class="grcicon-user-black"></i>
             {{object_people.length}}

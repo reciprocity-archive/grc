@@ -265,6 +265,14 @@ h4.pbc-title {
       margin-top:4px;
       @include opacity(0.5);
     }
+    .response-title-bar {
+      .btn {
+        @include opacity(0.5);
+        &:hover {
+          @include opacity(1);
+        }
+      }
+    }
   }
   .response-items {
     .grcicon-carot {
@@ -472,6 +480,15 @@ ul.tree-structure {
         }
       }
       .pbc-item-list {
+        .btn {
+          @include opacity(0.5);
+          &.btn-add {
+            @include opacity(1);
+          }
+          &:hover {
+            @include opacity(1);
+          }
+        }
         li {
           .alert {
             font-weight: bold;
