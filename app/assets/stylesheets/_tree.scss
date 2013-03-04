@@ -141,13 +141,12 @@ ul.tree-structure {
       }
     }
     .objects-count {
-      position: absolute;
-      top: 0;
-      right: 95px;
-      width: 0px;
       white-space: nowrap;
       [class^="grcicon-"] {
         margin-top: 7px;
+      }
+      .grcicon-section-black {
+        background-position:-200px -104px;
       }
       a {
         @include opacity(0.3);
@@ -156,14 +155,7 @@ ul.tree-structure {
         text-decoration: none;
         margin-left: 4px;
         font-weight: bold;
-        position:absolute;
         display: inline-block;
-        &.sections-count {
-          left:-60px;
-        }
-        &.controls-count {
-          left:-45px;
-        }
       }
     }
     i.grcicon-comment {

@@ -10,44 +10,44 @@
     .item-title
       .row-fluid
         =render :partial => 'object_leaf', :locals => { :instance => item }
-        .span1
-        .objects-count
-          -controls = item.linked_controls
-
-          -if !controls.empty?
-            -popover_content = capture_haml do
-              %ul
-                -controls.each do |control|
-                  %li
-                    %a{ :href => flow_control_path(control) }=control.slug
-            -data_popover_trigger = { :placement => "right",
-                                 :'popover-trigger' =>  "sticky-hover",
-                                 :'original-title' => "Linked Controls",
-                                 :content => popover_content }
-          %a.controls-count.controllist{:href => mapping_section_dialog_path(item),
-                         :data => controls.empty? || data_popover_trigger}
-            %i.grcicon-control-black
-            -if !controls.empty?
-              =controls.size
-            -elsif item.na?
-              %span{:style => "font-weight:normal"} N/A
-            -else
-              %strong 0
-
-          -#status_class = (controls.empty? && !item.na?) ? 'badge-important' : 'badge-warning'
-          -#%a.controllist.attached.badge{:href => mapping_section_dialog_path(item),
-                                        :class => status_class,
-                                        :'data' => controls.empty? || { :placement => "right",
-                                            :'popover-trigger' =>  "sticky-hover",
-                                            :'original-title' => "Linked Controls",
-                                            :content => popover_content } }
+        .span2
+          .objects-count
             -controls = item.linked_controls
+  
             -if !controls.empty?
-              =controls.size
-            -elsif item.na?
-              %span{:style => "font-weight:normal"} N/A
-            -else
-              %strong 0
+              -popover_content = capture_haml do
+                %ul
+                  -controls.each do |control|
+                    %li
+                      %a{ :href => flow_control_path(control) }=control.slug
+              -data_popover_trigger = { :placement => "right",
+                                   :'popover-trigger' =>  "sticky-hover",
+                                   :'original-title' => "Linked Controls",
+                                   :content => popover_content }
+            %a.controls-count.controllist{:href => mapping_section_dialog_path(item),
+                           :data => controls.empty? || data_popover_trigger}
+              %i.grcicon-control-black
+              -if !controls.empty?
+                =controls.size
+              -elsif item.na?
+                %span{:style => "font-weight:normal"} N/A
+              -else
+                %strong 0
+  
+            -#status_class = (controls.empty? && !item.na?) ? 'badge-important' : 'badge-warning'
+            -#%a.controllist.attached.badge{:href => mapping_section_dialog_path(item),
+                                          :class => status_class,
+                                          :'data' => controls.empty? || { :placement => "right",
+                                              :'popover-trigger' =>  "sticky-hover",
+                                              :'original-title' => "Linked Controls",
+                                              :content => popover_content } }
+              -controls = item.linked_controls
+              -if !controls.empty?
+                =controls.size
+              -elsif item.na?
+                %span{:style => "font-weight:normal"} N/A
+              -else
+                %strong 0
       .item-actions
         -if show_edit
           %a.btn.btn-mini.pull-right{ :href => edit_flow_section_path(item), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-dirty' => "#regulations, #combo", :rel => 'tooltip', :title => "Edit #{item.directive.section_meta_kind.to_s.titleize}" }
