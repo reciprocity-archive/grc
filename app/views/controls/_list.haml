@@ -10,7 +10,7 @@
           =render :partial => 'object_leaf', :locals => { :instance => item }
 
           -if include_linked_programs
-            -programs = item.linked_programs
+            -programs = item.linked_programs.uniq
             .span2
               .objects-count
                 -if !programs.empty?
@@ -25,7 +25,7 @@
                                        :content => popover_content }
                 %a{ :data => data_popover_trigger }
                   %i.grcicon-program-black
-                  =programs.count
+                  =programs.size #not using count because count kicks off another query that returns an incorrect result
         .item-actions
           %a.btn.btn-mini.pull-right{ :href => flow_control_path(item), :rel => 'tooltip', :title => "Go to this object's page" }
             %i.grcicon-goto
