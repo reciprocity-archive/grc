@@ -3,6 +3,7 @@
 //= require controllers/dashboard_widgets
 //= require models/simple_models
 //= require controls/control
+//= require sections/section
 //= require pbc/system
 
 (function(namespace, $) {
@@ -120,6 +121,12 @@ var widget_descriptors = {
     , object_route : "risks"
     , object_display : "Risks"
   }
+  //section isn't a widget but the descriptors are also useful for notes controller
+  , "section" : {
+    model : CMS.Models.Section
+    , object_type : "section"
+    , object_route : "sections"
+  }
 };
                   
 
@@ -161,6 +168,19 @@ $(function() {
     //we will need to consider whether to look for late-added ones later.
   });
 
+
+  $("body").on("click", ".note-trigger, .edit-notes", function(ev) {
+    ev.stopPropagation();
+    var $object = $(ev.target).closest("[data-object-id]")
+    , type = $object.data("object-type")
+    , notes_model = widget_descriptors[type].model
+    , sec;
+
+    $(ev.target).closest(".note").cms_controllers_section_notes({
+      section_id : $object.data("object-id") || (/\d+$/.exec(window.location.pathname) || [null])[0]
+      , model_class : notes_model
+    });
+  });
 
 });
 

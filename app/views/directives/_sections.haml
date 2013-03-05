@@ -6,7 +6,7 @@
   -content_id = "content_#{rand(36**8).to_s(36)}" # unique ID for toggle
   -has_children = children.size > 0
 
-  .item-main{ :'data-object-id' => item.id }
+  .item-main{ :'data-object-id' => item.id, :'data-object-type' => item.class.name.underscore }
     .openclose{ :class => [!has_children && 'lastchild', expanded && 'active'] }
     .item-title
       .row-fluid

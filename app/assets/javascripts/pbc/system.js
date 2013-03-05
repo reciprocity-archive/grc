@@ -8,6 +8,26 @@ can.Model.Cacheable("CMS.Models.System", {
     , xable_type : "System"
     , findAll : "GET /systems.json?responseid={id}" 
     , findOne : "GET /systems/{id}.json" 
+    , update : function(id, params) {
+      return $.ajax({
+        url : "/systems/" + id + ".json"
+        , data : this.process_args(
+          params
+          , ["notes"
+            , "description"
+            , "infrastructure"
+            , "is_biz_process"
+            , "network_zone_id"
+            , "slug"
+            , "start_date"
+            , "stop_date"
+            , "title"
+            , "type_id"
+            , "url"
+            , "version"])
+        , type : "put"
+      });
+    }
     , search : function(request, response) {
         return $.ajax({
             type : "get"
