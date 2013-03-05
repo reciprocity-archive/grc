@@ -43,7 +43,7 @@
       =render :partial => 'shared/related',
               :layout => 'layouts/widget_box',
               :locals => { :instance => @system, :widget_class => "widget-tabs widget-tabs-horizontal business" }
-
+      =render :partial => 'shared/add_widget_section'
     #right_column.span4.widget-area
       =render :partial => 'systems/info',
               :layout => 'layouts/widget_box',
@@ -51,3 +51,4 @@
       =render :partial => 'systems/more_info',
               :layout => 'layouts/widget_box',
               :locals => { :system => @system, :widget_class => 'related business' }
+      =render :partial => 'shared/add_widget_section'

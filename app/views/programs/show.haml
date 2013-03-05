@@ -61,6 +61,8 @@
         =render :partial => 'linked_programs',
                 :layout => 'layouts/widget_box',
                 :locals => { :instance => instance, :widget_class => 'widget-tabs widget-tabs-horizontal compliance' }
+      -else
+        =render :partial => 'shared/add_widget_section'
 
     #right-column.span4.widget-area
       =render :partial => 'info',
@@ -73,3 +75,5 @@
       =render :partial => 'more_info',
               :layout => 'layouts/widget_box',
               :locals => { :program => instance, :widget_class => 'related business'}
+      -unless instance.company_controls?
+        =render :partial => 'shared/add_widget_section'

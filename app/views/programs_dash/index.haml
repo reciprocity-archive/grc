@@ -22,65 +22,8 @@
               :locals => { :programs => @programs, :widget_class => "risk widget-tabs" }
               
               
-      %section.widget-add-placeholder
-        .btn-group.dropup
-          %a.dropdown-toggle.btn{:href => '#', :'data-toggle' => 'dropdown'}
-            %i.grcicon-add-black
-            Add Widget
-            %i.grcicon-carot
-          %ul.dropdown-menu
-            %li.title Governance Widgets
-            %li.program
-              %a{ :href => 'javascript://'}
-                Programs
-            %li.regulation
-              %a{ :href => 'javascript://'}
-                Regulations
-            %li.policy
-              %a{ :href => 'javascript://'}
-                Policies
-            %li.contract
-              %a{ :href => 'javascript://'}
-                Contracts
-            %li.divider
-            %li.title Business Widgets
-            %li.org_group
-              %a{ :href => 'javascript://'}
-                Org Groups
-            %li.project
-              %a{ :href => 'javascript://'}
-                Projects
-            %li.facility
-              %a{ :href => 'javascript://'}
-                Facilities
-            %li.product
-              %a{ :href => 'javascript://'}
-                Products
-            %li.data_asset
-              %a{ :href => 'javascript://'}
-                Data Assets
-            %li.market
-              %a{ :href => 'javascript://'}
-                Markets
-            %li.divider
-            %li.title Compliance Widgets
-            %li.process
-              %a{ :href => 'javascript://'}
-                Processes
-            %li.system
-              %a{ :href => 'javascript://'}
-                Systems
-            %li.control
-              %a{ :href => 'javascript://'}
-                Controls
-            %li.divider
-            %li.title Risk Widgets
-            %li.risky_attribute
-              %a{ :href => 'javascript://'}
-                Risky Attributes
-            %li.risk
-              %a{ :href => 'javascript://'}
-                Risks
+      =render :partial => 'shared/add_widget_section'
+
               
     #right_column.span6.widget-area
       =render :partial => 'compliance',
@@ -92,65 +35,9 @@
               :locals => { :widget_class => "business widget-tabs" }
             
           
-      %section.widget-add-placeholder
-        .btn-group.dropup
-          %a.dropdown-toggle.btn{:href => '#', :'data-toggle' => 'dropdown'}
-            %i.grcicon-add-black
-            Add Widget
-            %i.grcicon-carot
-          %ul.dropdown-menu
-            %li.title Governance Widgets
-            %li.program
-              %a{ :href => 'javascript://'}
-                Programs
-            %li.regulation
-              %a{ :href => 'javascript://'}
-                Regulations
-            %li.policy
-              %a{ :href => 'javascript://'}
-                Policies
-            %li.contract
-              %a{ :href => 'javascript://'}
-                Contracts
-            %li.divider
-            %li.title Business Widgets
-            %li.org_group
-              %a{ :href => 'javascript://'}
-                Org Groups
-            %li.project
-              %a{ :href => 'javascript://'}
-                Projects
-            %li.facility
-              %a{ :href => 'javascript://'}
-                Facilities
-            %li.product
-              %a{ :href => 'javascript://'}
-                Products
-            %li.data_asset
-              %a{ :href => 'javascript://'}
-                Data Assets
-            %li.market
-              %a{ :href => 'javascript://'}
-                Markets
-            %li.divider
-            %li.title Compliance Widgets
-            %li.process
-              %a{ :href => 'javascript://'}
-                Processes
-            %li.system
-              %a{ :href => 'javascript://'}
-                Systems
-            %li.control
-              %a{ :href => 'javascript://'}
-                Controls
-            %li.divider
-            %li.title Risk Widgets
-            %li.risky_attribute
-              %a{ :href => 'javascript://'}
-                Risky Attributes
-            %li.risk
-              %a{ :href => 'javascript://'}
-                Risks
+      =render :partial => 'shared/add_widget_section'
+
+
         
     -#if has_feature? :BETA
       .row-fluid

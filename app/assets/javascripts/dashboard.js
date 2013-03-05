@@ -22,6 +22,20 @@
  *= require related_graph
  */
 
+  window.cms_singularize = function(type) {
+    type = type.trim();
+    switch(type) {
+      case "facilities":
+      type = "facility"; break;
+      case "people":
+      type = "person"; break;
+      default:
+      type = type.replace(/s$/, "");
+    }
+
+    return type;
+  }
+
 // Initialize delegated event handlers
 jQuery(function($) {
 

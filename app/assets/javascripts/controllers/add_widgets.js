@@ -3,11 +3,54 @@
 can.Control("CMS.Controllers.AddWidget", {
   defaults : {
     widget_descriptors : null
+    , menu_tree : null
+    , menu_view : "/assets/add_widget_menu.mustache"
     , minimum_widget_height : 100
+    , is_related : false
   }
 }, {
   
-  ".dropdown-menu > * click" : function(el, ev) {
+  init : function() {
+    var that = this;
+    if(!this.options.menu_tree) {
+      this.options.is_related = true
+      this.scrapeRelated();
+    }
+
+    can.view(this.options.menu_view, this.options.menu_tree, function(frag) {
+      that.element.find(".dropdown-menu").html(frag).find(".divider:last").remove();
+    });
+  }
+
+  , scrapeRelated : function() {
+    var that = this;
+    this.options.menu_tree = {categories : []};
+    //build the menu from the menu tree.  Build the menu tree if it doesn't exist.
+    var tabs = $(".tab-content .tab-pane").filter("[id]");
+    var categories_index = {};
+    tabs.each(function() {
+      var ref = $(this).attr("id")
+      var type = (/related-(.+)-pane/.exec(ref) || ["", ref])[1];
+
+      type = window.cms_singularize(type);
+
+      var descriptor = that.options.widget_descriptors[type];
+      if(descriptor) {
+        if(!categories_index[descriptor.object_category]) {
+          categories_index[descriptor.object_category] = {
+            title : can.map(descriptor.object_category.split(" "), can.capitalize).join(" ")
+            , objects : []
+          };
+          that.options.menu_tree.categories.push(categories_index[descriptor.object_category]);
+        }
+
+        descriptor.object_display = $("a[href='#" + ref + "']").text().replace(/\s*\d+\s*$/, "") || descriptor.object_display;
+        categories_index[descriptor.object_category].objects.push(descriptor);
+      }
+    });
+  }
+
+  , ".dropdown-menu > * click" : function(el, ev) {
     var descriptor = this.options.widget_descriptors[el.attr("class")];
     this.addWidgetByDescriptor(descriptor);
   }
@@ -38,7 +81,10 @@ can.Control("CMS.Controllers.AddWidget", {
   , addWidgetByDescriptor : function(descriptor) {
     var that = this;
     if(descriptor && !$("#" + descriptor.object_type + "_list_widget").length) {
-      $("<section class='widget'>").insertBefore(that.element).cms_controllers_dashboard_widgets(descriptor).trigger("sortreceive");
+      $("<section class='widget'>")
+      .insertBefore(that.element)
+      .cms_controllers_dashboard_widgets($.extend(descriptor, { is_related : this.options.is_related }))
+      .trigger("sortreceive");
     }
   }
 
