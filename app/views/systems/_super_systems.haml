@@ -12,7 +12,7 @@
 
   %ul.tree-structure
     -super_systems.each do |item|
-      %li
+      %li{ :class => system.is_biz_process? ? "process" : "system" }
         .item-main
           .openclose{ :class => 'lastchild' }
           .item-title

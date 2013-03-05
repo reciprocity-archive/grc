@@ -8,7 +8,7 @@
       -sections = sections.db_search(params[:s])
     -has_children = sections.count > 0
 
-    %li{ :'data-object-id' => directive.id }
+    %li{ :class => directive.class.name.downcase, :'data-object-id' => directive.id }
       .item-main
         .openclose{ :class => [!has_children && 'lastchild', is_root && 'active'] }
         .item-title

@@ -27,7 +27,7 @@
     -id_prefix = "risk-#{i}"
     -summary_toggle_target = "#{id_prefix}-summary"
 
-    %li
+    %li{ :class => risk.class.name.downcase}
       .item-main
         .openclose{ :class => 'lastchild' }
         .item-title

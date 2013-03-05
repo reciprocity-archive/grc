@@ -7,7 +7,7 @@
 
 %ul.tree-structure
   -systems.each_with_index do |system, i|
-    %li
+    %li{ :class => system.is_biz_process? ? "process" : "system" }
       .item-main
         .item-title
           .row-fluid

@@ -36,7 +36,7 @@
                 -rels.each do |rel_type_id, rel_objects|
                   -if rel_objects.size > 0
                     -rel_objects.uniq.each do |o|
-                      %li
+                      %li{ :class => model.downcase }
                         .item-main
                           %a.custom-related-popover-trigger{:href => self.send("flow_#{model_name}_path", o), :'data-popover-href'=> self.send("tooltip_flow_#{model_name}_path", o), :'data-popover-trigger' => "sticky-hover", :style => "display:block"}
                             .item-title
