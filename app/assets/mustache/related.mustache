@@ -11,7 +11,7 @@
     {{/with}}
 
   {{#related_objects}}
-    <li>
+    <li class="{{object.type.toLowerCase}}">
       <div class="item-main">
         <a class="custom-related-popover-trigger" href="/{{ url }}" data-popover-href="/{{ url }}/tooltip" data-popover-trigger="sticky-hover">
           {{#is_beta}}

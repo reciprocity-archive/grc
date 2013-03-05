@@ -4,7 +4,7 @@
   Sections / Clauses that mandate this Control
 
 %ul.tree-structure
-  =walk_slug_tree(Directive.slugtree(sections)) do |item, step|
+  =walk_slug_tree(Directive.slugtree(sections), :li_class => 'section') do |item, step|
     -content_id = "content_#{rand(36**8).to_s(36)}" # unique ID for toggle
     .item-main
       .openclose{ :class => 'lastchild' }
