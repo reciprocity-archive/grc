@@ -29,6 +29,6 @@
     %i.grcicon-wide-black
   %a.shrinkAll{:href => "#", :rel => "tooltip", :title => "Collapse all"}
     %i.grcicon-normal-black
-    
+
 %ul.tree-structure#regulations
-  =render :partial => 'sections', :locals => { :sections => sections, :expanded => true }
+  =render :partial => 'sections', :locals => { :sections => sections, :expanded => true, :editable_notes => true }

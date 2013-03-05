@@ -1,5 +1,8 @@
 -# locals: instance, title_attr, description_attr
 
+-include_notes = false if local_assigns[:include_notes].nil?
+-editable_notes = false if local_assigns[:editable_notes].nil?
+
 -code_attr = :slug if local_assigns[:code_attr].nil?
 -title_attr = :title if local_assigns[:title_attr].nil?
 -description_attr = :description if local_assigns[:description_attr].nil?
@@ -27,8 +30,9 @@
         %i{ :class => object_icon }
       %span.code
         =code
-      -if notes.present?
-        %i.grcicon-comment
+      -if include_notes
+        -if notes.present?
+          %i.grcicon-comment
       %span.title
         =title
         =extra_description
@@ -37,16 +41,19 @@
     .description
       -if instance.has_attribute? notes_attr
         .note
-          -if notes.present?
-            .note-content
-              %a.edit-notes{:href => 'javascript://'}
-                %i.grcicon-edit
-              .rtf
-                =display_as_html(notes)
-          -else
-            %a.note-trigger{:href => 'javascript://'}
-              %i.grcicon-add-black
-              Abstract
+          -if include_notes
+            -if notes.present?
+              .note-content
+                -if editable_notes
+                  %a.edit-notes{:href => 'javascript://'}
+                    %i.grcicon-edit
+                .rtf
+                  =display_as_html(notes)
+            -else
+              -if editable_notes
+                %a.note-trigger{:href => 'javascript://'}
+                  %i.grcicon-add-black
+                  Abstract
       =display_as_html(description)
   -elsif title.present?
     -# Title only
@@ -61,11 +68,12 @@
         =title
         =extra_description
     .description.inhover.no-description
-      -if instance.has_attribute? notes_attr
-        .note
-          %a.note-trigger{:href => 'javascript://'}
-            %i.grcicon-add-black
-            Abstract
+      -if include_notes
+        -if instance.has_attribute? notes_attr
+          .note
+            %a.note-trigger{:href => 'javascript://'}
+              %i.grcicon-add-black
+              Abstract
       %i No description
 
   -elsif (description.present? || notes.present?)
@@ -77,8 +85,9 @@
         %i{ :class => object_icon }
       %span.code
         =code
-      -if notes.present?
-        %i.grcicon-comment
+      -if include_notes
+        -if notes.present?
+          %i.grcicon-comment
       %span.title
         =extra_description
         %i.description-inline=description_inline
@@ -86,20 +95,23 @@
       =display_as_html(description) do
         %span.code
           =code
-        %br
-        %br
-        -if instance.has_attribute? notes_attr
-          .note
-            -if notes.present?
-              .note-content
-                %a.edit-notes{:href => 'javascript://'}
-                  %i.grcicon-edit
-                .rtf
-                  =display_as_html(notes)
-            -else
-              %a.note-trigger{:href => 'javascript://'}
-                %i.grcicon-add-black
-                Abstract
+        -if include_notes
+          %br
+          %br
+          -if instance.has_attribute? notes_attr
+            .note
+              -if notes.present?
+                .note-content
+                  -if editable_notes
+                    %a.edit-notes{:href => 'javascript://'}
+                      %i.grcicon-edit
+                  .rtf
+                    =display_as_html(notes)
+              -else
+                -if editable_notes
+                  %a.note-trigger{:href => 'javascript://'}
+                    %i.grcicon-add-black
+                    Abstract
 
   -else
     -# Neither (shouldn't happen)
