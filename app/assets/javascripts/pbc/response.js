@@ -34,7 +34,18 @@ CMS.Models.System("CMS.Models.Response", {
     }
     , update : function(id, params) {
       var that = this;
-      var _params = this.process_args(params, { not : ["created_at", "id", "modified_by_id", "updated_at"]});
+      var _params = this.process_args(
+        params
+        , { not : ["created_at"
+                  , "id"
+                  , "modified_by_id"
+                  , "updated_at"
+                  , "documents"
+                  , "object_documents"
+                  , "people"
+                  , "object_people"
+                  , "url"]
+        });
       return $.ajax({
               type : "PUT"
               , url : "/responses/" + id + ".json"

@@ -17,8 +17,8 @@
         </select>
       </div>
       <div class="span1">
-        <a class="btn btn-mini remove_document" rel="tooltip" data-placement="bottom" {{#system}}title="Remove from response"{{/system}} {{^system}}title="Remove from {{system_or_process}}"{{/system}} href="javascript://">
-          <i class="grcicon-x-grey"></i>
+        <a class="btn btn-mini edit_document" rel="tooltip" data-toggle="modal-ajax-form" href="/documents/{{document.id}}/edit" data-model-class="modal-wide" data-placement="bottom" title="Edit evidence" data-target="#ajax-modal-edit-evidence">
+          <i class="grcicon-edit"></i>
         </a>
       </div>
     </div>
@@ -35,11 +35,7 @@
           </div>
           -->
         </div>
-        <div class="span5">
-          <a class="btn btn-mini pull-left add-document" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/documents/new" data-target="#ajax-modal-documents-new" rel="tooltip" data-placement="top" title="Add new Evidence">
-            <i class="grcicon-add-black"></i>
-          </a>
-        </div>
+        <div class="span5">&nbsp;</div>
       </div>
     </form>
   </li>

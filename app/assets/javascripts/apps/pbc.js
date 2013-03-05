@@ -89,31 +89,26 @@ $.widget(
   , { options : {
       source : CMS.Models.Document.search
       , select :  function(event, ui) {
-        if(ui.item.id !== null) {
-          $(event.target).trigger("documentSelected", ui.item);
-        }
+        $(event.target).trigger("documentSelected", ui.item);
         return false;
       }
       , search : function(event) {
 
       }
-      , response : function(event, data) {
+      , response : function(event, data, ui) {
         if(!data.content.length) {
           data.content.push(
-            {link_url : "There is no Doc or URL in the system that matches your search. "
+            {label : "Create document " + event.target.value + "..."
+            , link_url : event.target.value
             , id : null });
-          data.content.push(
-            {link_url : "Please create a new reference by pushing the + icon to the right"
-            , id : null})
-          $(event.target).addClass("error-input");
-        } else {
-          $(event.target).removeClass("error-input");
         }
       }
   }
   , _renderItem : function(ul, item) {
     var label;
-    if (item.title) {
+    if (item.label) {
+      label = item.label
+    } else if (item.title) {
       label = "" + item.title + (item.link_url ? " (" + item.link_url + ")" : "");
     } else {
       label = item.link_url;

@@ -32,39 +32,54 @@ class Response < ActiveRecord::Base
   end
 
   def as_json_with_system(options={})
-    o = options.merge(:include => {
-      :object_people => { :include => :person }, 
-      :people => {}, 
-      :population_sample => { 
-        :include => { 
-          :population_document => { :methods => :link_url }, 
-          :sample_worksheet_document => { :methods => :link_url }, 
-          :sample_evidence_document => { :methods => :link_url }
-        } 
-      }, 
-      :meetings => {}, 
-      :object_documents => {
-        :include => { :document => { :methods => :link_url }}
-      }, 
-      :documents => {
-        :methods => :link_url
-      }
-    })
     if system.nil? then
-      o = o.merge(:methods => :system)
+      o = options.merge(:include => {
+        :object_people => { :include => :person }, 
+        :people => {}, 
+        :population_sample => { 
+          :include => { 
+            :population_document => { :methods => :link_url }, 
+            :sample_worksheet_document => { :methods => :link_url }, 
+            :sample_evidence_document => { :methods => :link_url }
+          } 
+        }, 
+        :meetings => {}, 
+        :object_documents => {
+          :include => { :document => { :methods => :link_url }}
+        }, 
+        :documents => {
+          :methods => :link_url
+        }
+      }, :methods => :system)
     else
-      o = o.merge(:include => { 
-      :system => { 
-        :include => [
-          :people, 
-          { 
-            :documents => { :methods => :link_url }
-          }, 
-          :object_people, 
-          :object_documents
-        ] 
-      }
-    })
+      o = options.merge(:include => { 
+        :object_people => { :include => :person }, 
+        :people => {}, 
+        :population_sample => { 
+          :include => { 
+            :population_document => { :methods => :link_url }, 
+            :sample_worksheet_document => { :methods => :link_url }, 
+            :sample_evidence_document => { :methods => :link_url }
+          } 
+        }, 
+        :meetings => {}, 
+        :object_documents => {
+          :include => { :document => { :methods => :link_url }}
+        }, 
+        :documents => {
+          :methods => :link_url
+        },
+        :system => { 
+          :include => [
+            :people, 
+            { 
+              :documents => { :methods => :link_url }
+            }, 
+            :object_people, 
+            :object_documents
+          ] 
+        }
+      })
     end
     as_json(o)
   end
