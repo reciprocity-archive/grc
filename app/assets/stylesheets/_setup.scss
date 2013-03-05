@@ -16,16 +16,18 @@
       
 
   // texts
+    $darkText:#333; // WCAG AAA
+    $text:#666; // WCAG AAA
+    $error:#e00; // WCAG AA
+    $disabled: #777 // WCAG AA
 
-    $text:#666;
-    $error:#e00;
 
   // compliance
-    $defaultWidget:#666;
-    $compliance:#936;
-    $governance:#069;
-    $business:#336;
-    $risk: #6f0000;
+    $defaultWidget:#555; // WCAG AAA
+    $compliance:#936;  // WCAG AAA
+    $governance:#005580;  // WCAG AAA
+    $business:#336;  // WCAG AAA
+    $risk: #8e0000;  // WCAG AAA
 
   // default colors
     $white: #fff;
@@ -76,7 +78,6 @@
   $dropPlaceholder: #ddd;
   $subTitle: #111;
   $widgetFooteBgnd: #e1e1e1;
-//  $risk: #ec9923;
   $riskActive: #a46203;
   $gov: #44aac8;
   $govActive: #026b8a;

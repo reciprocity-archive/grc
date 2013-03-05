@@ -196,7 +196,7 @@ ul.tree-structure {
   .tiny-label {
     font-size:11px;
     text-align:right;
-    color:$gray;
+    color:$text;
   }
   p {
     margin:0;
@@ -223,7 +223,7 @@ ul.tree-structure {
     top: -2px;
   }
   i.description-inline {
-    color:$gray;
+    color:$text;
     font-weight:normal;
     margin-left: 10px;
   }
@@ -241,7 +241,7 @@ ul.tree-structure {
     .note-trigger {
       text-transform: uppercase;
       text-decoration: none;
-      color: $gray;
+      color: $text;
       font-weight: bold;
       font-size: 11px;
       @include transition(color 0.3s ease);
@@ -276,7 +276,7 @@ ul.tree-structure {
         span {
           display: block;
           font-weight: normal;
-          color: $gray;
+          color: $text;
           font-size: 11px;
         }
       }
@@ -301,7 +301,7 @@ ul.tree-structure {
     }
     .cancel-link {
       font-size: 11px;
-      color: $gray;
+      color: $disabled;
       text-decoration: underline;
       display: inline-block;
       margin-left: 7px;
@@ -325,7 +325,7 @@ ul.tree-structure {
       background:none;
     }
     &.no-description {
-      color: $gray;
+      color: $disabled;
     }
   }
   .openclose {
@@ -459,7 +459,7 @@ ul.tree-structure {
         }
         .additional-info {
           font-size:11px;
-          color:$gray;
+          color:$text;
         }
       }
       .item-main {
@@ -489,7 +489,7 @@ ul.tree-structure {
     }
     .title {
       .completed {
-        color: $gray;
+        color: $text;
       }
     }
   }
@@ -548,7 +548,7 @@ ul.tree-structure {
     margin-top:7px;
   }
   .additional-info {
-    color:$gray;
+    color:$text;
   }
   p.additional-info {
     font-size:13px;
@@ -570,7 +570,7 @@ ul.tree-structure {
     font-weight:normal;
   }
   .view-desc {
-    color:$gray;
+    color:$text;
     font-size:11px;
     font-weight:bold;
     &:hover {

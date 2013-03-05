@@ -385,7 +385,7 @@
       }
     }
     a {
-      color: $gray;
+      color: $text;
       font-size: 11px;
       line-height: 16px;
       font-weight: bold;
@@ -423,7 +423,7 @@
     float:left;
     font-size:11px;
     margin-right:3px;
-    color:$gray;
+    color:$text;
     a {
       color:$link;
       text-decoration:underline;
@@ -436,7 +436,7 @@
         content:'';
       }
       a {
-        color:$gray;
+        color:$text;
       }
     }
   }

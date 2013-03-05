@@ -4,7 +4,7 @@ h1 {
   font-size:24px;
   line-height:36px;
   span {
-    color: $gray;
+    color: $disabled;
     font-weight: normal;
   }
   @include oneline();
@@ -31,7 +31,7 @@ h4 {
   font-weight: normal;
   color: $subTitle;
   span {
-    color: $gray;
+    color: $disabled;
   }
 }
 
@@ -215,7 +215,7 @@ h1, h2, h3, h4, h5, h6 {
     border:none;
   }
   p.no-data {
-    color:$gray;
+    color:$disabled;
     text-align:center;
   }
 }

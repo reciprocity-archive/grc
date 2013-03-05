@@ -69,9 +69,9 @@
             padding-left: 10px;
             padding-right: 10px;
             margin-right: 0;
-            color: $text;
+            color: $darkText;
             span {
-              color: $gray;
+              color: $text;
               font-size: 11px;
             }
             i {
@@ -110,7 +110,7 @@
       white-space: nowrap;
       li {
         a {
-          color: $gray;
+          color: $text;
           @include transition(color 0.3s ease);
           min-width: 105px;
           .item-count {
@@ -140,13 +140,13 @@
     }
   }
   .inline-info {
-    color:$gray;
+    color:$text;
     i {
       @include opacity(0.3);
       margin-top:7px;
     }
     &.blank {
-      color:lighten($gray,20%);
+      color:$disabled;
       i {
         @include opacity(0.1);
       }
@@ -307,7 +307,7 @@
     }
   }
   .footer {
-    color:$gray;
+    color:$text;
     padding:6px;
     height: auto;
     @include default-border-top();
@@ -315,7 +315,7 @@
       font-size:11px;
       font-weight:normal;
       margin: 0;
-      color:$gray;
+      color:$text;
       line-height: 20px;
       &.footer-right {
         text-align: right;
@@ -364,7 +364,7 @@
       margin-left: 10px;
       font-size: 11px;
       line-height: 16px;
-      color: $gray;
+      color: $text;
       @include transition(color 0.2s ease-in-out);
       i {
         @include opacity(0.4);
@@ -448,7 +448,7 @@
           float: left;
           width: 35%;
           margin: 0 10px 0 0;
-          color:$gray;
+          color:$text;
         }
         span {
           float: left;
@@ -527,7 +527,7 @@
   label {
     margin-left:30px;
     text-transform:uppercase;
-    color:$gray;
+    color:$text;
     @include text-shadow(0 1px 1px $white);
     font-size:11px;
     &.label-title {

@@ -87,7 +87,7 @@
       font-size: 12px;
       font-weight: normal;
       a {
-        color: $gray;
+        color: $text;
         @include transition(color 0.3s ease);
         margin-right: 0;
         min-width: 100px;
@@ -138,7 +138,7 @@
     @include border-radius(0 0 5px 5px);
     line-height: 34px;
     padding: 0 10px 0 16px;
-    color: $gray;
+    color: $text;
     a {
       color: $black;
       margin-top: 4px;

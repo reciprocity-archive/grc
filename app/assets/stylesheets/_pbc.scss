@@ -25,7 +25,7 @@
   margin-top:10px;
   padding:4px;
   font-size:11px;
-  color:$gray;
+  color:$text;
   [class*="span"] {
     padding-bottom:0;
     margin-bottom:0;
@@ -46,7 +46,7 @@ ul.tree-structure.pbc {
 
 .requests {
   .item-title {
-    color:$gray;
+    color:$text;
     i {
       margin-top:8px;
     }
