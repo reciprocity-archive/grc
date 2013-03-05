@@ -1,6 +1,6 @@
 -include_linked_programs = false if local_assigns[:include_linked_programs].nil?
 
-%ul.tree-structure
+%ul.tree-structure.control
   =walk_slug_tree(Directive.slugtree(controls)) do |item, step|
     -content_id = "content_#{rand(36**8).to_s(36)}" # unique ID for toggle
     

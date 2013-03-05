@@ -4,7 +4,7 @@
 -content_for :header do
 
   %ul.breadcrumbs
-    %li=link_to 'PROGRAMS', programs_dash_path
+    %li=link_to instance.meta_kind.to_s.titleize.pluralize, programs_dash_path
     %li=instance.title
 
   %h1.governance

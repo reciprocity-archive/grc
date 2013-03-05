@@ -303,3 +303,53 @@ input.disabled.pending-ajax{
     left: auto;
   }
 }
+
+.widget .wysiwyg-area {
+  border: 1px solid $widgetBorder;
+  @include border-radius($default-border-radius);
+  padding: 4px;
+  background: $lightGray;
+  margin-bottom: 10px;
+  .double {
+    height: 70px;
+    @include input-block-level();
+  }
+  iframe {
+    width: 97.5% !important;
+    margin-bottom:0 !important;
+  }
+  .wysiwyg-action {
+    .btn {
+      @include opacity(1);
+    }
+  }
+  select {
+    float: right;
+    width: auto;
+    margin: 4px 0 0 0;
+    height: 22px;
+    line-height: 22px;
+    padding: 0;
+  }
+  // smaller buttons in wysiwyg editor
+  .btn {
+    padding:0px 5px 2px 5px;
+    font-size:11px;
+    @include opacity(0.5);
+    &:hover {
+      @include opacity(1);
+    }
+  }
+  .help-inline {
+    display:none;
+  }
+  ul.wysihtml5-toolbar > li {
+    margin-bottom:4px;
+    margin-top:4px;
+    border-bottom:none;
+    line-height:18px;
+    &:hover {
+      border-bottom:none !important;
+    }
+  }
+}
