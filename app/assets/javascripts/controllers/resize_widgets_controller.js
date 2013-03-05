@@ -472,6 +472,12 @@ can.Control("CMS.Controllers.ResizeWidgets", {
     .attr($(el).attr("id"), ht);
   }
 
+  , "section[id] > header dblclick" : function(el, ev) {
+    if(!$(ev.target).closest(".widget-showhide").length) {
+      $(el).find(".widget-showhide a").click();
+    }
+  }
+
   , ".widget-showhide click" : function(el, ev) {
     var that = this;
     //animation hasn't completed yet, so collapse state is inverse of whether it's actually collapsed right now.
