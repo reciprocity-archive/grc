@@ -25,37 +25,6 @@
         background: darken($governance, 7%);
       }
     }
-    /* removed content-aware hovering
-    ul.tree-structure {
-      li {
-        &:hover {
-          border-bottom: 1px solid $governance;
-          .code {
-            color: $governance;
-          }
-          .item-content {
-            ul.tree-structure {
-              li {
-                .code {
-                  color: $black;
-                }
-                &:hover {
-                  .code {
-                    color: $governance;
-                  }
-                }
-              }
-            }
-          }
-        }
-        &:last-child {
-          &:hover {
-            border-bottom: none;
-          }
-        }
-      }
-    }
-    */
   }
   &.compliance {
     .header {
@@ -64,37 +33,6 @@
         background: darken($compliance, 7%);
       }
     }
-    /* removed content-aware hovering
-    ul.tree-structure {
-      li {
-        &:hover {
-          border-bottom: 1px solid $compliance;
-          .code {
-            color: $compliance;
-          }
-          .item-content {
-            ul.tree-structure {
-              li {
-                .code {
-                  color: $black;
-                }
-                &:hover {
-                  .code {
-                    color: $compliance;
-                  }
-                }
-              }
-            }
-          }
-        }
-        &:last-child {
-          &:hover {
-            border-bottom: none;
-          }
-        }
-      }
-    }
-    */
   }
   &.risk {
     .header {
@@ -103,37 +41,6 @@
         background: darken($risk, 7%);
       }
     }
-    /* removed content-aware hovering
-    ul.tree-structure {
-      li {
-        &:hover {
-          border-bottom: 1px solid $risk;
-          .code {
-            color: $risk;
-          }
-          .item-content {
-            ul.tree-structure {
-              li {
-                .code {
-                  color: $black;
-                }
-                &:hover {
-                  .code {
-                    color: $risk;
-                  }
-                }
-              }
-            }
-          }
-        }
-        &:last-child {
-          &:hover {
-            border-bottom: none;
-          }
-        }
-      }
-    }
-    */
   }
   &.business {
     .header {
@@ -142,37 +49,6 @@
         background: darken($business, 7%);
       }
     }
-    /* removed content-aware hovering
-    ul.tree-structure {
-      li {
-        &:hover {
-          border-bottom: 1px solid $business;
-          .code {
-            color: $business;
-          }
-          .item-content {
-            ul.tree-structure {
-              li {
-                .code {
-                  color: $black;
-                }
-                &:hover {
-                  .code {
-                    color: $business;
-                  }
-                }
-              }
-            }
-          }
-        }
-        &:last-child {
-          &:hover {
-            border-bottom: none;
-          }
-        }
-      }
-    }
-    */
   }
   &.widget-tabs {
     &.widget-tabs-horizontal {
