@@ -1,19 +1,25 @@
 -# locals: instance
 
-%ul.tree-structure
+%ul.tree-structure.simple
+  %li.tab-title-holder
+    %h3.tab-title.main-tab-title
+      Business Objects impacted by this Risk
+
   -instance.related_objects_with_risky_attributes.each do |related_object, risky_attributes|
-    %li{ :class => related_object.class.name.downcase, :'data-object-id' => instance.id }
+    %li{ :class => related_object.class.name.downcase, :'data-object-id' => related_object.id }
       .item-main
         .item-title
           .row-fluid
-            -title_with_risky_attributes = capture do
+            -risky_attribute_tags = capture do
               -if risky_attributes.size > 0
                 -risky_attributes.each_with_index do |ra, i|
                   %span.mini-risky-attribute{ :rel => 'tooltip', :title => ra.title }
                     =ra.slug
                     ="," unless i == risky_attributes.size - 1
-              =instance.title
-            =render :partial => 'object_leaf', :locals => { :instance => related_object, :title => title_with_risky_attributes, :object_type => 'business', :object_icon => "grcicon-#{related_object.class.name.downcase}" }
+            =render :partial => 'object_leaf', :locals => { :instance => related_object, :extra_description => risky_attribute_tags, :span_class => 'span10', :object_type => 'business', :object_icon => "grcicon-#{related_object.class.name.downcase}" }
+          .item-actions
+            %a.btn.btn-mini{ "rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => url_for(:id => related_object.id, :action => :show, :controller => related_object.class.name.underscore.pluralize, :only_path => true) }
+              %i.grcicon-goto
 
 
 -#%ul.tree-structure.simple

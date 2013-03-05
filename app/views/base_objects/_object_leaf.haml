@@ -11,10 +11,13 @@
 -description_inline = sanitize(description, :tags => []) if local_assigns[:description_inline].nil?
 -notes = instance.send(notes_attr) if local_assigns[:notes].nil? && instance[notes_attr].present?
 
+-extra_description = nil if local_assigns[:extra_description].nil?
+-span_class = 'span8' if local_assigns[:span_class].nil?
+
 -object_type = nil if local_assigns[:object_type].nil?
 -object_icon = nil if local_assigns[:object_icon].nil?
 
-.span8
+%div{ :class => span_class }
   -if title.present? && (description.present? || notes.present?)
     -# Both title and description
     .oneline.expand-on-hover
@@ -28,7 +31,9 @@
         %i.grcicon-comment
       %span.title
         =title
-        %i.description-inline=description_inline
+        =extra_description
+        %i.description-inline
+          =description_inline
     .description
       -if instance.has_attribute? notes_attr
         .note
@@ -54,6 +59,7 @@
         =code
       %span.title
         =title
+        =extra_description
     .description.inhover.no-description
       -if instance.has_attribute? notes_attr
         .note
@@ -74,6 +80,7 @@
       -if notes.present?
         %i.grcicon-comment
       %span.title
+        =extra_description
         %i.description-inline=description_inline
     .description.inhover
       =display_as_html(description) do

@@ -26,14 +26,13 @@
       .openclose{ :class => !expand_this && 'lastchild' }
     .item-title{ :class => is_root && 'active' }
       .row-fluid
-        -title_with_risky_attributes = capture do
+        -risky_attribute_tags = capture do
           -if risky_attributes.size > 0
             -risky_attributes.each_with_index do |ra, i|
               %span.mini-risky-attribute{ :rel => 'tooltip', :title => ra.title }
                 =ra.slug
                 ="," unless i == risky_attributes.size - 1
-          =instance.title
-        =render :partial => 'object_leaf', :locals => { :instance => instance, :title => title_with_risky_attributes, :object_type => 'risk', :object_icon => 'grcicon-risk' }
+        =render :partial => 'object_leaf', :locals => { :instance => instance, :extra_description => risky_attribute_tags, :object_type => 'risk', :object_icon => 'grcicon-risk' }
       .item-actions
         -if is_editable
           %a.btn.btn-mini{ "rel" => "tooltip", "data-placement" => "left", "title" => "Edit this object", 'data-modal-class' => 'modal-wide', 'data-form-target' => 'refresh', "data-toggle" => "modal-ajax-form", :href => url_for(:id => instance.id, :action => :edit, :controller => model_underscore.pluralize, :only_path => true) }
