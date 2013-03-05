@@ -1,7 +1,7 @@
 -show_edit = true if local_assigns[:show_edit].nil?
 -expanded = false if local_assigns[:expanded].nil?
 
-=walk_slug_tree(Directive.slugtree(sections), :expanded => expanded) do |item, step, children|
+=walk_slug_tree(Directive.slugtree(sections), :expanded => expanded, :li_class => 'section') do |item, step, children|
   -content_id = "content_#{rand(36**8).to_s(36)}" # unique ID for toggle
   -has_children = children.size > 0
 
@@ -28,7 +28,7 @@
                 .rtf
                   %p.no-data{:style=> "font-size:13px"}
                     No controls are linked to this directive
-                
+
             -data_popover_trigger = { :placement => "right",
                                  :'popover-trigger' =>  "sticky-hover",
                                  :'original-title' => "<i class='grcicon-control-black'></i>Linked Controls".html_safe,
@@ -42,7 +42,7 @@
                 %span{:style => "font-weight:normal"} N/A
               -else
                 %strong 0
-  
+
             -#status_class = (controls.empty? && !item.na?) ? 'badge-important' : 'badge-warning'
             -#%a.controllist.attached.badge{:href => mapping_section_dialog_path(item),
                                           :class => status_class,

@@ -4,7 +4,7 @@
   Other controls linked to this control
 
 %ul.tree-structure
-  =walk_slug_tree(Directive.slugtree(controls)) do |item, step|
+  =walk_slug_tree(Directive.slugtree(controls), :li_class => 'control') do |item, step|
     -content_id = "content_#{rand(36**8).to_s(36)}" # unique ID for toggle
     .item-main
       .openclose{ :class => 'lastchild' }

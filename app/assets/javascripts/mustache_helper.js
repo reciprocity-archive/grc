@@ -213,7 +213,7 @@ $.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
         var attr_tmpl = args[i + 1];
         //set up bindings where appropriate
         attr_tmpl = attr_tmpl.replace(/\{\{[^\{]*\}\}/g, function(match, offset, string) {
-          
+
           that.bind(attr_name + "." + hash, $.proxy(sub_all, that, el));
 
           return match.substring(1, match.length - 1);
@@ -406,4 +406,11 @@ Mustache.registerHelper("render", function(template, context, options) {
   return can.view.render(template, context.serialize ? context.serialize() : context);
 });
 
+Mustache.registerHelper("pbc_is_read_only", function() {
+  var options = arguments[arguments.length - 1];
+  if (window.location.pathname.split('/')[1] == 'pbc_lists')
+    return options.inverse(this);
+  else
+    return options.fn(this);
+});
 })(this, jQuery, can);

@@ -27,7 +27,7 @@ module SlugfilterHelper
     end
 
     if tree.object || !children.empty?
-      haml_tag("li", { :id => "content_#{tree.prefix}" }) do
+      haml_tag("li", { :id => "content_#{tree.prefix}", :class => options[:li_class] }) do
         if tree.object
           yield [tree.object, step, children]
         end

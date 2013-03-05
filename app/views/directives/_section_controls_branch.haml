@@ -1,6 +1,6 @@
 -expanded = false #unless local_assigns.has_key?(:expanded)
 
-=walk_slug_tree(Directive.slugtree(sections)) do |item, step|
+=walk_slug_tree(Directive.slugtree(sections), :li_class => 'section') do |item, step|
   -consolidated_controls = item.consolidated_controls
   -controls = item.controls.all
   -expand_this = consolidated_controls.size > 0 || controls.size > 0
@@ -16,7 +16,7 @@
     -consolidated_controls = item.consolidated_controls
     -if consolidated_controls.size > 0
       %ul.tree-structure
-        =walk_slug_tree(Directive.slugtree(consolidated_controls)) do |item, step|
+        =walk_slug_tree(Directive.slugtree(consolidated_controls), :li_class => 'control') do |item, step|
           .openclose{ :class => 'lastchild' }
           .item-title
             .row-fluid

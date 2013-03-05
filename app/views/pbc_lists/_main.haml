@@ -1,5 +1,12 @@
+-pbc_is_read_only = false if local_assigns[:pbc_is_read_only].nil?
 
-%header.header
+-content_for :widget_title do
+  Audit Start Date:
+  =pbc_list.audit_cycle.start_at && pbc_list.audit_cycle.start_at.strftime('%m/%d/%Y')
+
+-content_for :widget_help, 'cycle_pbc_list'
+
+-#%header.header
   .row-fluid
     .span10
       %h2
@@ -19,4 +26,4 @@
         =display_as_html pbc_list.audit_cycle.description
 
 %section.content
-  =render :partial => "requests", :locals => { :pbc_list => pbc_list }
+  =render :partial => "pbc_lists/requests", :locals => { :pbc_list => pbc_list, :pbc_is_read_only => pbc_is_read_only }
