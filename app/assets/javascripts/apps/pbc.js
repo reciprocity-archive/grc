@@ -5,7 +5,7 @@
 
 (function(namespace, $) {
 
-    if(namespace.location.pathname.indexOf("/pbc_lists") < 0)
+    if(namespace.location.pathname.indexOf("/pbc_lists") < 0 && namespace.location.pathname.indexOf("/cycles") < 0)
         return;
 
 function escapeHTML(s) {
