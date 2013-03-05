@@ -33,6 +33,7 @@ can.Control("CMS.Controllers.Responses", {
         , type_id : null // type_id from request
         , type_name : null // type_name from request
     }
+    , one_created : can.compute(false)
 }, {
     init : function() {
         this.fetch_list();
@@ -50,18 +51,23 @@ can.Control("CMS.Controllers.Responses", {
             this.options.list
             , this.options.observer = new can.Observe({
                 list : this.list
+                , request_id : this.options.id
                 , type_id : this.options.type_id
-                , type_name : this.options.type_name})
+                , type_name : this.options.type_name
+                , one_created : this.constructor.one_created})
             , function(frag) {
                 that.element.html(frag);
             });
     }
     , "{model} created" : function(Model, ev, response) {
         if(response.request_id === this.options.id) {  
-            can.Model.Cacheable.prototype.addElementToChildList.call(this.options.observer, "list", response);
+            this.options.observer.list.unshift(response);
             this.element.closest(".main-item").find(".pbc-request-count").html(this.list.length + " " + (this.list.length - 1 ? "Responses" : "Response"));
-            $("#pbc-response-" + response.id).collapse().collapse("show");
-            $(document.body).scrollTop($("#pbc-response-" + response.id).offset().top);
+            $(".pbc-responses > .item[data-id=" + response.id + "] .openclose").openclose("open").height();
+            setTimeout(function() {
+              $(document.body).scrollTop($(".pbc-responses > .item[data-id=" + response.id + "]").offset().top);
+            }, 200);
+            this.constructor.one_created(true);
         }
     }
     , "{model} destroyed" : function(Model, ev, response) {
@@ -191,6 +197,27 @@ can.Control("CMS.Controllers.Responses", {
         model.attr("role", role);
         this.bindXHRToButton(model.save(), ev);
     }
+    , '.response-title-bar > a click' : function(el, e) {
+      var $this = $(el)
+        , $input = $this.closest('.pbc-add-response').find('.pbc-system-search')
+        , resp = new CMS.Models.Response()
+        ;
+      resp.attr({
+        request_id: $(e.target).closest("[data-filter-id]").data("filter-id")
+        //, system_id: data.id
+      });
+      resp.save()
+      .done(function(r) {
+        //after create, go straight to the first form field
+        setTimeout(function() {
+           $this.closest("[data-filter-id]").find("[data-id=" + r.id + "]").find(".btn-add:first").click()
+        }, 200);
+      });
+
+      //$input.val('');
+      //$this.closest('.collapse').collapse('hide');
+    }
+
 });
 
 })(this, can.$);

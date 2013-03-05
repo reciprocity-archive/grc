@@ -175,6 +175,7 @@ jQuery(document).ready(function($) {
       }
     });
 
+    return this;
   }
 
   $.fn.showhide = showhide;
@@ -214,6 +215,8 @@ jQuery(document).ready(function($) {
         }
       }
     });
+
+    return this;
   }
 
   $.fn.oneline = oneline;
@@ -318,6 +321,8 @@ $(window).load(function(){
         $icon.addClass('active');
       }
     });
+
+    return this;
   }
 
   $.fn.openclose = openclose;

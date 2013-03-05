@@ -20,11 +20,11 @@ class Response < ActiveRecord::Base
 
   is_versioned_ext
 
-  validates :request, :system,
+  validates :request,
     :presence => { :message => "needs a value" }
 
   def display_name
-    "Response using \"#{system.title}\""
+    "Response using \"#{system.nil? ? 'no system' : system.title}\""
   end
 
   def create_population_sample_if_type
@@ -32,17 +32,7 @@ class Response < ActiveRecord::Base
   end
 
   def as_json_with_system(options={})
-    as_json(options.merge(:include => { 
-      :system => { 
-        :include => [
-          :people, 
-          { 
-            :documents => { :methods => :link_url }
-          }, 
-          :object_people, 
-          :object_documents
-        ] 
-      }, 
+    o = options.merge(:include => {
       :object_people => { :include => :person }, 
       :people => {}, 
       :population_sample => { 
@@ -59,6 +49,23 @@ class Response < ActiveRecord::Base
       :documents => {
         :methods => :link_url
       }
-    }))
+    })
+    if system.nil? then
+      o = o.merge(:methods => :system)
+    else
+      o = o.merge(:include => { 
+      :system => { 
+        :include => [
+          :people, 
+          { 
+            :documents => { :methods => :link_url }
+          }, 
+          :object_people, 
+          :object_documents
+        ] 
+      }
+    })
+    end
+    as_json(o)
   end
 end

@@ -33,21 +33,6 @@ can.Control("CMS.Controllers.PBCModals", {
           , el);
     } 
 
-    , '.pbc-add-response > a modal:success' : function(el, e, data) {
-      var $this = $(el)
-        , $input = $this.closest('.pbc-add-response').find('.pbc-system-search')
-        , resp = new CMS.Models.Response()
-        ;
-      resp.attr({
-        request_id: $(e.target).closest("[data-filter-id]").data("filter-id")
-        , system_id: data.id
-      });
-      resp.save();
-
-      $input.val('');
-      $this.closest('.collapse').collapse('hide');
-    }
-
     , 'a.system-edit modal:success' : function(el, e, data) {
       var $this = $(el)
         , response_id = $this.closest('li[data-id]').data('id')

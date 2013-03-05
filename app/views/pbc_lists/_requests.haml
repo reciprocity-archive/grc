@@ -193,8 +193,8 @@
                               %span.disabled-text Unknown auditor
                       
                   .responses.pbc-responses-container{:class => request_collapse_class}
-                    .bg-caret
-                    =render :partial => "responses", :locals => { :pbc_list => pbc_list, :request => request }                        
+                    / .bg-caret
+                    / =render :partial => "responses", :locals => { :pbc_list => pbc_list, :request => request }                        
 
 -else
   .no-results.alert.alert-block

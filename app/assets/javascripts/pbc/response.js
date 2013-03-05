@@ -33,13 +33,19 @@ CMS.Models.System("CMS.Models.Response", {
             })
     }
     , update : function(id, params) {
-        var _params = this.process_args(params);
-        return $.ajax({
-                type : "PUT"
-                , url : "/responses/" + id + ".json"
-                , dataType : "json"
-                , data : _params
-            })
+      var that = this;
+      var _params = this.process_args(params, { not : ["created_at", "id", "modified_by_id", "updated_at"]});
+      return $.ajax({
+              type : "PUT"
+              , url : "/responses/" + id + ".json"
+              , dataType : "json"
+              , data : _params
+          }).done(function(d) {
+            var resp = that.findInCacheById(id);
+            if(resp.system == null && d.system != null) {
+              resp.attr("system", new CMS.Models.System(d.system));
+            }
+          });
     }
 
     , findAll : "GET /responses.json"
@@ -50,7 +56,7 @@ CMS.Models.System("CMS.Models.Response", {
         this._super();
 
         function reinit() {
-            this.attr("system", new CMS.Models.System(this.system ? this.system.serialize() : {}));
+          this.system != null && this.attr("system", new CMS.Models.System(this.system ? this.system.serialize() : {}));
             this.attr(
               "population_sample"
               , new CMS.Models.PopulationSample(

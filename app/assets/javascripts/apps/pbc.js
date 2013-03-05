@@ -32,16 +32,13 @@ $.widget(
             }
             , select: function( event, ui ) {
                 var $this = $(this)
-                  , resp = new CMS.Models.Response();
+                  , resp = new CMS.Models.Response({ id : $(event.target).closest("[data-id]").data("id") });
                 resp.attr({
                     request_id : $(event.target).closest("[data-filter-id]").data("filter-id")
                     , system_id : ui.item.value
                 });
-                resp.
-                  save().
-                  then(function(){ $this.val(""); });
+                resp.save()
 
-                $this.closest('.collapse').collapse('hide');
                 $this.val('');
                 return false;
             }
@@ -134,10 +131,16 @@ $(function() {
     // Trigger controller load when collapsed container is expanded
     $(document.body).on("click", ".pbc-requests .pbc-item-head .openclose", function(ev) {
         var filter_element = $(ev.currentTarget).closest("[data-filter-id]")
-        $(ev.currentTarget).closest(".main-item").find(".pbc-responses").cms_controllers_responses({id : filter_element.data("filter-id"), type_id : filter_element.data("filter-type-id"), type_name : filter_element.data("filter-type-name")});
+        $(ev.currentTarget).closest(".main-item")
+        .find(".pbc-responses-container")
+        .cms_controllers_responses({
+          id : filter_element.data("filter-id")
+          , type_id : filter_element.data("filter-type-id")
+          , type_name : filter_element.data("filter-type-name")
+        });
     });
 
-    $(".pbc-system-search").pbc_autocomplete();
+    //$(".pbc-system-search").pbc_autocomplete();
 
     // Using rotate_flow_control_assessment route
     $('body').on('ajax:success', 'a.rotate_control_assessment', function(data) {
