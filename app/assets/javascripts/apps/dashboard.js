@@ -128,7 +128,41 @@ var widget_descriptors = {
     , object_route : "sections"
   }
 };
-                  
+
+var programs_dash_menu = {categories : [
+  {
+    title : "Governance"
+    , objects: [
+      widget_descriptors.program
+      , widget_descriptors.regulation
+      , widget_descriptors.policy
+      , widget_descriptors.contract
+    ]
+  }, {
+    title : "Business"
+    , objects: [
+      widget_descriptors.org_group
+      , widget_descriptors.project
+      , widget_descriptors.facility
+      , widget_descriptors.product
+      , widget_descriptors.data_asset
+      , widget_descriptors.market
+    ]
+  }, {
+    title : "Compliance"
+    , objects: [
+      widget_descriptors.process
+      , widget_descriptors.system
+      , widget_descriptors.control
+    ]
+  }, {
+    title : "Risk"
+    , objects: [
+      widget_descriptors.risky_attribute
+      , widget_descriptors.risk
+    ]
+  }
+]};
 
 $(function() {
 
@@ -148,14 +182,11 @@ $(function() {
     //Then listen for new ones
     $(document.body).on("mouseover", ".row-fluid[id][data-resize]:not(.cms_controllers_resize_widgets)", bindResizer);
 
-    if(/programs_dash/.test(window.location)) {
-      // next part is just for the dashboard.
-
-      $(".widget-add-placeholder").cms_controllers_add_widget({
-        widget_descriptors : widget_descriptors
-        , minimum_widget_height : 100
-      });
-    }
+    $(".widget-add-placeholder").cms_controllers_add_widget({
+      widget_descriptors : widget_descriptors
+      , menu_tree : (/programs_dash/.test(window.location) ? programs_dash_menu : null)
+      , minimum_widget_height : 100
+    });
     
     function bindSortable(ev) {
         can.getObject("Instances", CMS.Controllers.SortableWidgets, true)[this.id] = 

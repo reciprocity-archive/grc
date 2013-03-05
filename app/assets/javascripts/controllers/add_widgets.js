@@ -3,11 +3,54 @@
 can.Control("CMS.Controllers.AddWidget", {
   defaults : {
     widget_descriptors : null
+    , menu_tree : null
+    , menu_view : "/assets/add_widget_menu.mustache"
     , minimum_widget_height : 100
   }
 }, {
   
-  ".dropdown-menu > * click" : function(el, ev) {
+  init : function() {
+    var that = this;
+    if(!this.options.menu_tree) {
+      this.options.menu_tree = {categories : []};
+      //build the menu from the menu tree.  Build the menu tree if it doesn't exist.
+      var tabs = $(".tab-content .tab-pane").filter("[id]");
+      var categories_index = {};
+      tabs.each(function() {
+        var ref = $(this).attr("id")
+        var type = (/related-(.+)-pane/.exec(ref) || ["", ref])[1];
+
+        switch(type) {
+          case "facilities":
+          type = "facility"; break;
+          case "people":
+          type = "person"; break;
+          default:
+          type = type.substr(0, type.length - 1);
+        }
+
+        var descriptor = that.options.widget_descriptors[type];
+        if(descriptor) {
+          if(!categories_index[descriptor.object_category]) {
+            categories_index[descriptor.object_category] = {
+              title : can.map(descriptor.object_category.split(" "), can.capitalize).join(" ")
+              , objects : []
+            };
+            that.options.menu_tree.categories.push(categories_index[descriptor.object_category]);
+          }
+
+          descriptor.object_display = $("a[href='#" + ref + "']").text() || descriptor.object_display;
+          categories_index[descriptor.object_category].objects.push(descriptor);
+        }
+      });
+    }
+
+    can.view(this.options.menu_view, this.options.menu_tree, function(frag) {
+      that.element.find(".dropdown-menu").html(frag).find(".divider:last").remove();
+    });
+  }
+
+  , ".dropdown-menu > * click" : function(el, ev) {
     var descriptor = this.options.widget_descriptors[el.attr("class")];
     this.addWidgetByDescriptor(descriptor);
   }

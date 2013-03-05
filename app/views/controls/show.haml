@@ -35,6 +35,7 @@
               :locals => { :control => @control, :widget_class => "compliance widget-tabs widget-tabs-horizontal" }
       -if has_feature? :BETA
         =render :partial => 'shared/impact_scope'
+      =render :partial => 'shared/add_widget_section'
     #right_column.span4.widget-area
       =render :partial => 'controls/info',
               :layout => 'layouts/widget_box',
@@ -42,3 +43,4 @@
       =render :partial => 'controls/more_info',
               :layout => 'layouts/widget_box',
               :locals => { :control => @control, :widget_class => 'related business' }
+      =render :partial => 'shared/add_widget_section'

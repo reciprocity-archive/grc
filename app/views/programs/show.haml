@@ -46,6 +46,8 @@
         =render :partial => 'related',
                 :layout => 'layouts/widget_box',
                 :locals => { :instance => instance, :widget_title => "Impact/Scope of Program's Directives", :widget_class => 'widget-tabs widget-tabs-horizontal related business' }
+        =render :partial => 'shared/add_widget_section'
+
     #right-column.span4.widget-area
       =render :partial => 'info',
               :layout => 'layouts/widget_box',
@@ -57,3 +59,5 @@
       =render :partial => 'more_info',
               :layout => 'layouts/widget_box',
               :locals => { :program => instance, :widget_class => 'related business'}
+      -unless instance.company_controls?
+        =render :partial => 'shared/add_widget_section'
