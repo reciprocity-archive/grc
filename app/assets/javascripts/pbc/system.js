@@ -11,7 +11,20 @@ can.Model.Cacheable("CMS.Models.System", {
     , update : function(id, params) {
       return $.ajax({
         url : "/systems/" + id + ".json"
-        , data : this.process_args(params)
+        , data : this.process_args(
+          params
+          , ["notes"
+            , "description"
+            , "infrastructure"
+            , "is_biz_process"
+            , "network_zone_id"
+            , "slug"
+            , "start_date"
+            , "stop_date"
+            , "title"
+            , "type_id"
+            , "url"
+            , "version"])
         , type : "put"
       });
     }
