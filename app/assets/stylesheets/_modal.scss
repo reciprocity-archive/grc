@@ -2,6 +2,7 @@
   width:700px;
   margin-left: -350px;
   height: auto !important;
+  position: absolute;
   .member-failure {
     background: lighten($error,45%);
   }

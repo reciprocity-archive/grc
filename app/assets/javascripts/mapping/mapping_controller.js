@@ -154,15 +154,16 @@ can.Control("CMS.Controllers.Mapping", {
 
   // Post-submit handler for new control dialog
   , "a[href^='/controls/new'] modal:success" : function(el, ev, data) {
-    if(data.directive_id.toString() === this.options.id) {
+    if($(el).closest("#mapping_rcontrols_widget").length) {
       // add this control to the reg controls.
       // This isn't the best way to go about it, but CanJS/Mustache is currently ornery about accepting new observable list elements
       //  added with "push" --BM 12/11/2012
       var rctl = this.options.reg_list_controller;
       can.Model.Cacheable.prototype.addElementToChildList.call(rctl.options.observer, "list", new namespace.CMS.Models.RegControl(data));
+    } else {
+      var cctl = this.options.company_list_controller;
+      can.Model.Cacheable.prototype.addElementToChildList.call(cctl.options.observer, "list", new namespace.CMS.Models.Control(data));
     }
-    var cctl = this.options.company_list_controller;
-    can.Model.Cacheable.prototype.addElementToChildList.call(cctl.options.observer, "list", new namespace.CMS.Models.Control(data));
   }
 
   , "a.controllist, a.controllistRM click" : function(el, ev) {

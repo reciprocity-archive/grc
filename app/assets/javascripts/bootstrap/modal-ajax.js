@@ -191,16 +191,19 @@
     modals = $(modals).not(referenceModal);
     if(modals.length < 1) return;
 
-    var _top = parseInt($(referenceModal)[0].offsetTop);
+    var header_height = parseInt(modals.find(".modal-header:first").height());
+
+    var _top = parseInt($(referenceModal)[0].offsetTop) - header_height / 2;
     modals.css({
         "overflow" : "hidden"
       , "height" : function() {
-          return parseInt($(this).find(".modal-header").height()) + 4;
+          return header_height + 4;
         }
       , "top" : function(i) {
-        return _top - (modals.length - i) * (parseInt($(this).find(".modal-header").height()) + 4);
+        return _top - (modals.length - i) * (header_height + 4);
       }
       , "margin-top" : 0
+      , 'position' : "absolute"
     })
     modals.off("scroll.modalajax");
     modals.on("scroll.modalajax", function() { 
@@ -209,7 +212,9 @@
   }
 
   var arrangeTopModal = function(modals, modal) {
-    modal.css("top", (50 + (modals.length - 1) * 5) + "%");    
+    modal
+    .css("top", ($(window).height() - modal.height()) / 2 + (modals.length - 1) * parseInt(modal.find(".modal-header").height()) + "px")
+    .css({"position" : "absolute", "margin-top" : 0});
   }
 
   var _modal_show = $.fn.modal.Constructor.prototype.show;
