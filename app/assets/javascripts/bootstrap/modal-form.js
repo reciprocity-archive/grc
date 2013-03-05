@@ -35,8 +35,10 @@
         .on('loaded.modal-form', function(ev) { 
           $("a[data-wysihtml5-command], a[data-wysihtml5-action]", ev.target).attr('tabindex', "-1"); 
           $form = that.$form();
+          $(this).trigger("shown");
         })
         .on('delete-object', $.proxy(this.delete_object, this))
+        .draggable({ handle: '.modal-header' });
         ;
 
 
