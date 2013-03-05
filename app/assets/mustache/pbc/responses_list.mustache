@@ -340,25 +340,21 @@
       {{else}}
         <div class="span6">
           <div class="inner-system">
-            <ul class="tree-structure add-response items-list">
-              <li class="item">
-                <div class="item-main">
-                  <div class="response-add">
-                    <div class="row-fluid">
-                      <div class="span3 pbc-add-response next-each-other">
-                        <input class="pbc-system-search ui-autocomplete-input" placeholder="Type to search systems/processes" type="text" autocomplete="off" {{ (el) -> el.pbc_autocomplete() }}><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
-                        <a class="btn btn-add btn-mini pull-left" data-modal-class="modal-wide" data-modal-reset="reset" data-placement="top" data-toggle="modal-ajax-form" href="/systems/new" id="tooltip11" rel="tooltip" title="Add new response">
-                          <i class="grcicon-add"></i>
-                        </a>
-                      </div>
-                      <div class="span1">
-                        &nbsp;
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            </ul>
+            <div class="row-fluid response-title-bar">
+              <div class="span12">
+                <h4>Link system or process to this response</h4>
+              </div>
+            </div>
+            <div class="row-fluid">
+              <div class="span11">
+                <input class="pbc-system-search ui-autocomplete-input input-block-level" placeholder="Type to search systems/processes" type="text" autocomplete="off" {{ (el) -> el.pbc_autocomplete() }}><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
+              </div>
+              <div class="span1">
+                <a class="btn btn-add btn-mini pull-left" data-modal-class="modal-wide" data-modal-reset="reset" data-placement="top" data-toggle="modal-ajax-form" href="/systems/new" id="tooltip11" rel="tooltip" title="Add new response">
+                  <i class="grcicon-add"></i>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       {{/if}}
