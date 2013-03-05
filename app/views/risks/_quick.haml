@@ -8,7 +8,7 @@
       -if quick_result
         =render 'base_objects/quick_result', { :item => risk }
       -else
-        %li
+        %li.risk
           %a{ :href => flow_risk_path(risk), :'data-popover-href' => tooltip_flow_risk_path(risk), :'data-popover-trigger' => 'sticky-hover' }
             .row-fluid
               .span12

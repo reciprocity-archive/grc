@@ -14,7 +14,7 @@
       -if quick_result
         =render 'base_objects/quick_result', { :item => instance }
       -else
-        %li
+        %li{ :class => instance.class.name.downcase }
           %a{ :href => instance_path, :'data-popover-href' => instance_tooltip_path, :'data-popover-trigger' => 'sticky-hover' }
             .row-fluid
               .span12
