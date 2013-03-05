@@ -1,9 +1,43 @@
 -pbc_is_read_only = false if local_assigns[:pbc_is_read_only].nil?
 
 -content_for :widget_title do
-  Audit Start Date:
-  =pbc_list.audit_cycle.start_at && pbc_list.audit_cycle.start_at.strftime('%m/%d/%Y')
 
+  -if !pbc_is_read_only
+    Audit Status:
+
+    -if pbc_list.audit_cycle.complete
+      Complete (started #{days_ago_in_words pbc_list.audit_cycle.start_at})
+    -else
+      -if pbc_list.audit_cycle.start_at == Time.zone.now.to_date
+        Started today
+      -elsif pbc_list.audit_cycle.start_at < Time.zone.now.to_date
+        Started #{days_ago_in_words pbc_list.audit_cycle.start_at} ago
+      -else
+        Starting in #{days_ago_in_words pbc_list.audit_cycle.start_at}
+      -if pbc_list.audit_cycle.end_at
+        Ends on #{pbc_list.audit_cycle.end_at.strftime("%m/%d/%y")}
+  -else
+    PBC Requests
+    %span=pbc_list.requests.count
+
+-if pbc_is_read_only
+  -content_for :widget_buttons do
+    .filter.pbc-read-only
+      .row-fluid
+        .span9
+          -if pbc_list.requests.count != 0
+            %a.item-link{ :href => flow_pbc_list_path(pbc_list.id) }
+              -status_counts, status_percentages = pbc_list.request_stats
+              .progress.progress-higher
+                -["bar-info", "bar-danger", "bar-warning", "bar-danger", "bar-success"].each_with_index do |cssclass, i|
+                  -status = Request.statuses[i]
+                  .bar{:class => cssclass, :rel => "tooltip", :'data-placement' => "top", :title => "#{status} (#{status_counts[status]})", :'data-percentage' => status_percentages[status]}=status_counts[status]
+        .span3
+          .pull-right
+            %a.btn.btn-success{:href => flow_pbc_list_path(pbc_list.id)}
+              View/Edit PBC List
+              %i.grcicon-goto-white
+            
 -content_for :widget_help, 'cycle_pbc_list'
 
 -#%header.header
@@ -17,7 +51,7 @@
         %a{:href => "/help/pbc_list", :'data-toggle' => 'modal-ajax', :title => "Help - What is this?"}
           %i.grcicon-help
 
--if pbc_list.audit_cycle.description != ""    
+-if pbc_list.audit_cycle.description != "" && !pbc_is_read_only
   %section.info
     .row-fluid
       .span12

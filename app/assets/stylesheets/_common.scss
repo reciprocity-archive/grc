@@ -85,6 +85,17 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+.progress {
+  &.progress-higher {
+    margin-top:2px;  
+    margin-bottom:0;
+    height:23px;
+    .bar {
+      height:23px;
+      line-height:23px;
+    }
+  }
+}
 
 // buttons
 .btn {

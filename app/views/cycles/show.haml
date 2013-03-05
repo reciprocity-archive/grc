@@ -1,6 +1,6 @@
 -content_for :header do
   %ul.breadcrumbs
-    %li=link_to "DIRECTIVES", programs_dash_path
+    %li=link_to "PROGRAMS", programs_dash_path
 
     %li=link_to @cycle.directive.title, flow_directive_path(@cycle.directive_id)
     %li
@@ -23,9 +23,6 @@
 .container-fluid
   #cycles_columns.row-fluid{ :'data-resize' => "true" }
     #main_column.span8.widget-area
-      =render :partial => 'cycles/main',
-              :layout => 'layouts/widget_box',
-              :locals => { :cycle => @cycle, :widget_class => "governance"}
 
       =render :partial => 'pbc_lists/main',
               :layout => 'layouts/widget_box',
@@ -46,10 +43,6 @@
 
     #right_column.span4.widget-area
       =render :partial => 'cycles/info',
-              :layout => 'layouts/widget_box',
-              :locals => { :cycle => @cycle, :widget_class => 'governance' }
-
-      =render :partial => 'cycles/pbclist',
               :layout => 'layouts/widget_box',
               :locals => { :cycle => @cycle, :widget_class => 'governance' }
 

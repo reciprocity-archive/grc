@@ -1,25 +1,27 @@
 -requests = pbc_list.requests.all
 -has_items = pbc_list.requests.count != 0
 
-.row-fluid
-  .span10
-    %h3.pull-left{:style => "font-weight:normal"}
-      Requests (#{pbc_list.requests.count}) &nbsp;
+-if !pbc_is_read_only
+  .row-fluid
+    .span10
+      %h3.pull-left{:style => "font-weight:normal"}
+        Requests (#{pbc_list.requests.count}) &nbsp;
+      .btn-group
+        %a{:'data-toggle'=>"dropdown", :href => "#", :class => "btn btn-mini btn-success dropdown-toggle"}
+          %i.grcicon-add
+        %ul.dropdown-menu
+          -Request.types.each do |type_id, type_name|
+            %li.add-new-item
+              %a{ :href => new_flow_request_path(:'request[pbc_list_id]' => pbc_list.id, :'request[type_id]' => type_id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide'}
+                %i{ :class => request_type_icon(type_name) }
+                =type_name
 
-    .btn-group
-      %a{:'data-toggle'=>"dropdown", :href => "#", :class => "btn btn-mini btn-success dropdown-toggle"}
-        %i.grcicon-add
-      %ul.dropdown-menu
-        -Request.types.each do |type_id, type_name|
-          %li.add-new-item
-            %a{ :href => new_flow_request_path(:'request[pbc_list_id]' => pbc_list.id, :'request[type_id]' => type_id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide'}
-              %i{ :class => request_type_icon(type_name) }
-              =type_name
-  -if has_items
-    .span2{:style => "position:relative"}
-      %a.pull-right.btn.btn-mini.accordion-toggle.toggle.filter-trigger{:'data-toggle'=>"collapse", :href => "#filters"}
-        %i.grcicon-search
-        Show/Hide Filter&nbsp;
+
+    -if has_items && !pbc_is_read_only
+      .span2{:style => "position:relative"}
+        %a.pull-right.btn.btn-mini.accordion-toggle.toggle.filter-trigger{:'data-toggle'=>"collapse", :href => "#filters"}
+          %i.grcicon-search
+          Show/Hide Filter&nbsp;
 
 #filters.collapse
   .widget-filters
@@ -55,7 +57,7 @@
         %button.btn.pull-right{ :'data-toggle' => 'filter-reset' , :rel => "tooltip", :"data-placement" => "left", :title => "Reset filters" }
           Reset
 
--if has_items
+-if has_items && !pbc_is_read_only
   %section.headline
     .row-fluid
       .span8
@@ -79,7 +81,7 @@
                 %i.grcicon-control-black
                 %strong= (control_assessment && control_assessment.control && control_assessment.control.slug) || "<font color='red'>(Missing Control)</font>".html_safe
                 =control_assessment && control_assessment.control && control_assessment.control.title || "&nbsp;".html_safe
-              -if control_assessment.present?
+              -if control_assessment.present? && !pbc_is_read_only
                 .span2
                   .ca-fields
                     %a.btn.btn-mini.rotate_control_assessment{ :rel => "tooltip", :'data-placement' => "top", :title => "Internal: Test of Effectiveness", :class => control_assessment_button_class(control_assessment.internal_toe), :'data-remote' => true, :'data-method' => 'post', :href => rotate_flow_control_assessment_path(control_assessment, :'control_assessment[internal_toe]' => 'toggle') }
@@ -108,15 +110,16 @@
                   .item-title
                     .row-fluid
                       .span1
-                        %i{"class" => request_type_icon(request.type_name)}
-                        -type_shorthand = ""
-                        -if request.type_name == "Population Sample"
-                          -type_shorthand = "Pop"
-                        -elsif request.type_name == "Documentation"
-                          -type_shorthand = "Doc"
-                        -else
-                          -type_shorthand = "Int"
-                        %span.request-title{:rel => "tooltip", :title => "#{request.type_name}"}=type_shorthand
+                        %i{"class" => request_type_icon(request.type_name), :rel => "tooltip", :title => "#{request.type_name}"}
+                        -if !pbc_is_read_only
+                          -type_shorthand = ""
+                          -if request.type_name == "Population Sample"
+                            -type_shorthand = "Pop"
+                          -elsif request.type_name == "Documentation"
+                            -type_shorthand = "Doc"
+                          -else
+                            -type_shorthand = "Int"
+                          %span.request-title{:rel => "tooltip", :title => "#{request.type_name}"}=type_shorthand
                       .span2.pbc-item.pbc-control
                         -if request.control.present?
                         -elsif request.pbc_control_code.present?
@@ -127,7 +130,7 @@
                           %i.grcicon-control-black
                           %span.control.error.oneline
                             UNKNOWN
-                        -if !request.control.present?
+                        -if !request.control.present? && !pbc_is_read_only
                           %a.btn.btn-mini.btn-danger.btn-controllink{:href => flow_controls_path(:list_select => 1), :'data-toggle' => 'modal-ajax-single-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#referenceList', :'data-modal-class' => 'modal-slim' }
                             %i.grcicon-link-white
                         -if request.control.present?
@@ -136,18 +139,31 @@
                           -else
                             0 responses
                       .span3
-                        %label.inline.assignee{ :for => "request_" + request.id.to_s + "_responsible"}
-                          assignee
-                        -if request.company_responsible == ""
-                          %input.pbc-request-assignee.empty{ :id => "request_" + request.id.to_s + "_responsible", :type => "text", :value => request.company_responsible, :style => "margin-top:-3px;margin-bottom:0;font-size:12px;line-height:16px;height:16px;min-height:0;padding:2px;width:160px", :rel => "tooltip", :title => "Add Assignee", :placeholder => "Add assignee" }
+                        -if !pbc_is_read_only
+                          %label.inline.assignee{ :for => "request_" + request.id.to_s + "_responsible"}
+                            assignee:                      
+                          -if request.company_responsible == "" 
+                            %input.pbc-request-assignee.empty{ :id => "request_" + request.id.to_s + "_responsible", :type => "text", :value => request.company_responsible, :style => "margin-top:-3px;margin-bottom:0;font-size:12px;line-height:16px;height:16px;min-height:0;padding:2px;width:160px", :rel => "tooltip", :title => "Add Assignee", :placeholder => "Add assignee" }
+                          -else
+                            %input.pbc-request-assignee{ :id => "request_" + request.id.to_s + "_responsible", :type => "text", :value => request.company_responsible, :style => "margin-top:-3px;margin-bottom:0;font-size:12px;line-height:16px;height:16px;min-height:0;padding:2px;width:160px", :rel => "tooltip", :title => "Change Assignee", :placeholder => "Add assignee" }
                         -else
-                          %input.pbc-request-assignee{ :id => "request_" + request.id.to_s + "_responsible", :type => "text", :value => request.company_responsible, :style => "margin-top:-3px;margin-bottom:0;font-size:12px;line-height:16px;height:16px;min-height:0;padding:2px;width:160px", :rel => "tooltip", :title => "Change Assignee", :placeholder => "Add assignee" }
+                          -if request.company_responsible == ""
+                            %p.oneline
+                              %span{:style => "color:#777;"} not assigned
+                          -else
+                            %p.oneline{:style => "color:#111;"}
+                              assignee:
+                              =request.company_responsible
                       .span4
-                        .status
-                          Status:
-                          %select
-                            -Request.statuses.each do |status|
-                              %option{ :selected => request.status == status }=status
+                        .status                        
+                          -if !pbc_is_read_only
+                            Status:
+                            %select
+                              -Request.statuses.each do |status|
+                                %option{ :selected => request.status == status }=status
+                          -else
+                            =request.status
+                            
                       .span2.request-date
                         -if request.date_requested.present?
                           %span.date{"rel" => "tooltip", "data-placement" => "top", "title" => "Date Requested"}=request.date_requested && request.date_requested.strftime('%m/%d/%Y')
@@ -182,8 +198,9 @@
                         -else
                           %p.disabled-text Notes not available
                       .span3
-                        %a.btn.btn-mini.pull-right{ :href => edit_flow_request_path(request.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide', :title => "Edit Request", :rel => "tooltip", :'data-placement' => "left", :style => "margin-right:10px; padding-left:2px; padding-right:2px"}
-                          %i.grcicon-edit{:style => "margin-right:0px;margin-top:0px"}
+                        -if !pbc_is_read_only            
+                          %a.btn.btn-mini.pull-right{ :href => edit_flow_request_path(request.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide', :title => "Edit Request", :rel => "tooltip", :'data-placement' => "left", :style => "margin-right:10px; padding-left:2px; padding-right:2px"}
+                            %i.grcicon-edit{:style => "margin-right:0px;margin-top:0px"}
                         %h5 Auditor contact email
                         .rtf
                           %p
@@ -191,13 +208,17 @@
                               =request.auditor_responsible
                             -else
                               %span.disabled-text Unknown auditor
-
-                  .responses.pbc-responses-container{:class => request_collapse_class}
-                    .bg-caret
-                    =render :partial => "pbc_lists/responses", :locals => { :pbc_list => pbc_list, :request => request, :pbc_is_read_only => pbc_is_read_only }
+                  -if !pbc_is_read_only
+                    .responses.pbc-responses-container{:class => request_collapse_class}
+                      .bg-caret
+                      =render :partial => "pbc_lists/responses", :locals => { :pbc_list => pbc_list, :request => request, :pbc_is_read_only => pbc_is_read_only }
 
 -else
   .no-results.alert.alert-block
     %h3 PBC list has no requests.
-    %p
-      Add new requests manually by clicking "+" button or import them as a CSV file by clicking "import requests" link on the right-hand side.
+    -if !pbc_is_read_only
+      %p
+        Add new requests manually by clicking "+" button or import them as a CSV file by clicking "import requests" link on the right-hand side.
+    -else 
+      %p
+        Add new requests by clicking "View/Edit PBC List" button

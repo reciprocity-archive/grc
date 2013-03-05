@@ -254,6 +254,15 @@
   .filter {
     padding:3px 2px;
     background: $filterBgnd;
+    &.pbc-read-only {
+      background:$lightGray;
+      padding-right:12px;
+      padding-left:12px;
+      .btn {
+        padding-right:6px;
+        padding-left:6px;      
+      }
+    }
     .form-inline {
       margin-bottom: 0;
     }

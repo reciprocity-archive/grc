@@ -22,6 +22,28 @@
       Title
     %span
       %strong=cycle.title
+  %li.float-element
+    %label
+      Status
+    %span
+      %strong
+        -if cycle.complete
+          Complete (started #{days_ago_in_words cycle.start_at})
+        -else
+          -if cycle.start_at == Time.zone.now.to_date
+            Started today
+          -elsif cycle.start_at < Time.zone.now.to_date
+            Started #{days_ago_in_words cycle.start_at} ago
+          -else
+            Starting in #{days_ago_in_words cycle.start_at}
+
+          -if cycle.end_at
+            %br
+            Ends on #{cycle.end_at.strftime("%m/%d/%y")}
+      
+
+
+
   -if cycle.audit_firm != ""
     %li.float-element
       %label

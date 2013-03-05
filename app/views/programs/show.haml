@@ -9,7 +9,10 @@
 
   %h1.governance
     .grcobject.governance{:rel => "tooltip", :'data-placement'=>"bottom", :title => "Program"}
-      %i.grcicon-program
+      -if instance.company_controls?
+        %i.grcicon-control
+      -else
+        %i.grcicon-program
     =instance.title
 
 -content_for :page_help, 'program'
@@ -47,10 +50,10 @@
       =render :partial => 'info',
               :layout => 'layouts/widget_box',
               :locals => { :program => instance, :widget_class => 'governance'}
-      =render :partial => 'more_info',
-              :layout => 'layouts/widget_box',
-              :locals => { :program => instance, :widget_class => 'related business'}
       -unless instance.company_controls?
         =render :partial => 'audit_cycles',
                 :layout => 'layouts/widget_box',
                 :locals => { :program => instance, :widget_class => 'governance' }
+      =render :partial => 'more_info',
+              :layout => 'layouts/widget_box',
+              :locals => { :program => instance, :widget_class => 'related business'}

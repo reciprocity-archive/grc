@@ -31,7 +31,7 @@
 .container-fluid
   .row-fluid
     .span12
-      %section#pbc_list_widget.widget.governance
-        =render :partial => "main",
-                :locals => { :pbc_list => instance }
+      =render :partial => 'main',
+        :layout => 'layouts/widget_box',
+        :locals => { :pbc_list => instance, :widget_class => 'governance', :widget_id => "pbc_list_widget"}
 
