@@ -125,11 +125,14 @@ private
         if self.has_attribute?(:parent_id) && !self.parent.nil?
           new_slug += self.parent.slug + '-'
         end
-        new_slug += default_slug_prefix + '-%04d' % id
-        self.slug = new_slug
+        self.slug = new_slug + default_slug_prefix + '-%04d' % id
 
         # HACK: Shouldn't recurse, but still a bit scary.
-        self.save
+        try_count = 0
+        while !self.save
+          try_count += 1
+          self.slug = new_slug + default_slug_prefix + ('-%04d' % id) + '-' + try_count.to_s
+        end
       end
     end
     true
