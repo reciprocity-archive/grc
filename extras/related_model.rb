@@ -354,7 +354,6 @@ module RelatedModel
 
     def valid_relationship_hash(name, model, endpoint)
       model = model.to_s if model.kind_of?(Symbol)
-      model = "System" if model == "Process"
       {
         :relationship_type => name,
         :related_model => model,
