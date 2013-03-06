@@ -52,9 +52,9 @@
     -#%li=link_to '<i class="grcicon-reg-map"></i>Combo'.html_safe, '#combo', :data => { :toggle => 'tab', :'tab-href' => flow_sections_path(:program_id => instance.id, :combo => true) }
 
   .action-items
-    %a.expandAll{:href => "#", :rel => "tooltip", :title => "Expand all"}
+    %a.expandAll.btn.btn-mini{:href => "#", :rel => "tooltip", :title => "Expand all"}
       %i.grcicon-wide-black
-    %a.shrinkAll{:href => "#", :rel => "tooltip", :title => "Collapse all"}
+    %a.shrinkAll.btn.btn-mini{:href => "#", :rel => "tooltip", :title => "Collapse all"}
       %i.grcicon-normal-black
 
   .tab-content

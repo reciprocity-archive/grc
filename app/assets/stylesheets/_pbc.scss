@@ -219,7 +219,7 @@ h4.pbc-title {
         margin-top: 3px;
         float:left;
         @include size(16px, 16px);
-        @include background-size(296px 296px);
+        @include background-size(296px 344px);
         background-image: url("/images/grcicons/icons.png");
         @include opacity(0.4);
         &.active {
@@ -330,7 +330,7 @@ h4.pbc-title {
       -webkit-appearance: textfield;
       -moz-appearance: textfield;
       background-color: transparent;
-      @include background-size(296px 296px);
+      @include background-size(296px 344px);
       background-image: url("/images/grcicons/icons.png");
       background-repeat: no-repeat;
       background-position: right -272px;

@@ -234,7 +234,7 @@ h1, h2, h3, h4, h5, h6 {
 // Date input field - To see date icon just add class .date to input field
 input.date {
   padding-left: 26px;
-  @include background-size(296px 296px);
+  @include background-size(296px 344px);
   background-image: url("/images/grcicons/icons.png");
   background-repeat: no-repeat;
   background-position: -4px -244px;
@@ -269,7 +269,7 @@ input.input-block-level {
     background-color: lighten($lightGray,5%);
     background-repeat:no-repeat;
     background-image: url("/images/grcicons/icons.png");
-    @include background-size(296px 296px);
+    @include background-size(296px 344px);
     background-position:50% -157px;
     @include opacity(0.8);
   }
