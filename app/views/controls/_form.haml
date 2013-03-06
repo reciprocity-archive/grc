@@ -40,6 +40,9 @@
     -else
       .span2.alert.alert-error
         Directive required to add Controls
+      -content_for :modal_save_button do
+        %input.btn.btn-primary.preventdoubleclick.disabled{:type => "button", :href => 'javascript://', :disabled => true, :value=> "Save" } 
+
   .span6
     .row-fluid
       =wrapped_text_field f, :span4, :slug, :label_name => 'Code (autofill)', :placeholder => 'CONTROL-XXXX'

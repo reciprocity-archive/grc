@@ -31,8 +31,6 @@ can.Control("CMS.Controllers.SectionNotes", {
 
   , draw_notes : function(el, ev) {
     var that = this;
-    if(ev && ev.stopPropagation)
-      ev.stopPropagation();
 
     can.view(this.options.show_view, this.options.model_instance || { notes : this.original_value }, function(frag) {
       that.element.html(frag)
@@ -40,11 +38,9 @@ can.Control("CMS.Controllers.SectionNotes", {
   }
 
   , ".wysihtml5-toolbar a click" : function(el, ev) {
-    ev.stopPropagation();
   }
 
   , ".btn-add click" : function(el, ev) {
-    ev.stopPropagation();
     if(!this.options.model_instance) {
       this.options.model_instance = new this.options.model_class({id : this.options.section_id});
     }
@@ -54,4 +50,8 @@ can.Control("CMS.Controllers.SectionNotes", {
 
   , ".cancel-link click" : "draw_notes"
 
+  , " click" : function(el, ev) {
+    if(!el.find(".note-content").length)
+      ev.stopPropagation(); // Don't collapse on click while the notes editor is open.
+  }
 });
