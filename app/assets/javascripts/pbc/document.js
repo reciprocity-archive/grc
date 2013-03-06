@@ -10,7 +10,7 @@ can.Model.Cacheable("CMS.Models.Document", {
         var _params = {
             document : {
                 title : params.title
-                , url : params.link_url
+                , link : params.link_url
             }
         };
         return $.ajax({

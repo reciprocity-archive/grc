@@ -1,3 +1,20 @@
+{{!<div class="control_assessment-32-request-{{request_id}} pbc-responses-container responses">}}
+<div class="bg-caret"></div>
+<h4 class="pbc-title response-title-bar">
+  Responses ({{type_name}})
+  <a class="btn btn-mini btn-add" data-toggle="modal" href="#newResponse" data-target="#request-{{request_id}}-response-new"  data-placement="top" data-toggle="collapse" rel="tooltip" title="Add new response">
+    <i class="grcicon-add"></i>
+  </a>
+  <span class="inline-help">
+    {{^one_created}}
+    «
+    click here to add a response
+    {{/one_created}}
+  </span>
+</h4>
+
+<ul class="tree-structure items-list pbc-responses cms_controllers_responses" id="request-{{request_id}}-responses">
+
 {{#list}}
   <li class="item" {{data 'model'}} data-model="true" data-id="{{id}}">
     <div class="item-main">
@@ -6,8 +23,13 @@
         <div class="row-fluid">
           <div class="span12">
             <span style="font-weight:normal">Response:&nbsp;</span>
-            <i class="grcicon-{{system.system_or_process}}-black process-icon" rel="tooltip" title="{{system.system_or_process_capitalized}}"></i>          
-              {{system.title}}
+            {{#if_null system}}
+              <i rel="tooltip" class="grcicon-system-black process-icon" title=""></i>
+              <span>[no system]</span>
+            {{else}}
+              <i rel="tooltip" class="grcicon-{{system.system_or_process}}-black process-icon" title="{{system.system_or_process_capitalized}}"></i>  
+              <span>{{system.title}}</span>
+            {{/if_null}}
           </div>
         </div>
       </div>
@@ -63,7 +85,7 @@
                         </div>
                       </li>
                     {{/object_people}}
-                    <li class="inline-editing inline-add-person hide" data-system-id="{{system.id}}">
+                    <li class="inline-editing inline-add-person hide">
                       <form>
                         <div class="row-fluid">
                           <div class="span7">
@@ -313,10 +335,38 @@
           </div>
         </div>
       </div>
-      {{#system}}
+      {{#if system}}
         {{> /assets/pbc/system.mustache}}
-      {{/system}}
+      {{/if}}
+      {{#if_null system}}
+        <div class="span6">
+          <div class="inner-system">
+            <div class="row-fluid response-title-bar">
+              <div class="span12">
+                <h4>Link system or process to this response</h4>
+              </div>
+            </div>
+            <div class="item-main add-response">
+              <div class="response-add">
+                <div class="row-fluid">
+                  <div class="span5 pbc-add-response next-each-other">
+                    <input class="pbc-system-search input-block-level" placeholder="Type to search systems/processes" type="text" autocomplete="off" {{ (el) -> el.pbc_autocomplete() }}>
+                  </div>
+                  <div class="span5">
+                    <a class="btn btn-add btn-mini" style="vertical-align: top" data-modal-class="modal-wide" data-modal-reset="reset" data-placement="top" data-toggle="modal-ajax-form" href="/systems/new" id="tooltip11" rel="tooltip" title="Add new system/process">
+                      <i class="grcicon-add"></i>
+                    </a>
+                  </div>
+                  <div class="span1">
+                    &nbsp;
+              </div>
+            </div>
+          </div>
+        </div>
+      {{/if_null}}
 
     </div>
   </li>
 {{/list}}
+</ul>
+{{!</div>}}

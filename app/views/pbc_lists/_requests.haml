@@ -210,8 +210,8 @@
                               %span.disabled-text Unknown auditor
                   -if !pbc_is_read_only
                     .responses.pbc-responses-container{:class => request_collapse_class}
-                      .bg-caret
-                      =render :partial => "pbc_lists/responses", :locals => { :pbc_list => pbc_list, :request => request, :pbc_is_read_only => pbc_is_read_only }
+                      / .bg-caret
+                      / =render :partial => "pbc_lists/responses", :locals => { :pbc_list => pbc_list, :request => request, :pbc_is_read_only => pbc_is_read_only }
 
 -else
   .no-results.alert.alert-block

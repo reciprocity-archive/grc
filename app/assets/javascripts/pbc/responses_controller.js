@@ -6,6 +6,15 @@
 function object_event(type) {
     return function(el, ev, data) {
         var that = this;
+
+        if(type==="document" && !data.id) {
+          //work out what to do when the thing is new
+          if(!/^http[:s]|^file:/i.test(data.link_url)) {
+            data.title = data.link_url;
+            data.link_url = null;
+          }
+        }
+
         this.bindXHRToButton(
           this.create_object_relation(
               type
@@ -33,6 +42,7 @@ can.Control("CMS.Controllers.Responses", {
         , type_id : null // type_id from request
         , type_name : null // type_name from request
     }
+    , one_created : can.compute(false)
 }, {
     init : function() {
         this.fetch_list();
@@ -46,22 +56,42 @@ can.Control("CMS.Controllers.Responses", {
             this.list = list;
         }
 
+        //Here we start by adding a dummy system while rendering the initial responses.
+        //  this is because CanJS is buggy and won't live-bind against a null value, but only 
+        //  when it happens during the initial viewing.  If we went back and live-added another response
+        //  with a null value for system, it would work.  --BM 3/4/2013
+        can.each(this.list, function(resp) {
+          if(!resp.system) {
+            resp.attr("system", {});
+          }
+        });
         can.view(
             this.options.list
             , this.options.observer = new can.Observe({
                 list : this.list
+                , request_id : this.options.id
                 , type_id : this.options.type_id
-                , type_name : this.options.type_name})
+                , type_name : this.options.type_name
+                , one_created : this.constructor.one_created})
             , function(frag) {
                 that.element.html(frag);
+                //Here we unset that dummy value, so the lack of system displays correctly. --BM
+                can.each(that.list, function(resp) {
+                  if(can.isEmptyObject(resp.system.serialize())) {
+                    resp.attr("system", null);
+                  }
+                });
             });
     }
     , "{model} created" : function(Model, ev, response) {
         if(response.request_id === this.options.id) {  
-            can.Model.Cacheable.prototype.addElementToChildList.call(this.options.observer, "list", response);
+            this.options.observer.list.unshift(response);
             this.element.closest(".main-item").find(".pbc-request-count").html(this.list.length + " " + (this.list.length - 1 ? "Responses" : "Response"));
-            $("#pbc-response-" + response.id).collapse().collapse("show");
-            $(document.body).scrollTop($("#pbc-response-" + response.id).offset().top);
+            $(".pbc-responses > .item[data-id=" + response.id + "] .openclose").openclose("open").height();
+            setTimeout(function() {
+              $(document.body).scrollTop($(".pbc-responses > .item[data-id=" + response.id + "]").offset().top);
+            }, 200);
+            this.constructor.one_created(true);
         }
     }
     , "{model} destroyed" : function(Model, ev, response) {
@@ -152,6 +182,9 @@ can.Control("CMS.Controllers.Responses", {
     , ".add-meeting modal:success" : function(el, ev, data) {
       el.closest("[data-model]").data("model").addElementToChildList("meetings", new can.Observe(data));
     } 
+    , ".edit_document modal:success" : function(el, ev, data) {
+      CMS.Models.Document.findInCacheById(data.id).attr(data);
+    } 
     , create_object_relation : function(type, xable, params) {
         var that = this
         , dfd;
@@ -190,6 +223,42 @@ can.Control("CMS.Controllers.Responses", {
 
         model.attr("role", role);
         this.bindXHRToButton(model.save(), ev);
+    }
+    , '.response-title-bar > a click' : function(el, e) {
+      var $this = $(el)
+        , $input = $this.closest('.pbc-add-response').find('.pbc-system-search')
+        , resp = new CMS.Models.Response()
+        ;
+      resp.attr({
+        request_id: $(e.target).closest("[data-filter-id]").data("filter-id")
+        //, system_id: data.id
+      });
+      resp.save()
+      .done(function(r) {
+        //after create, go straight to the first form field
+        setTimeout(function() {
+           $this.closest("[data-filter-id]").find("[data-id=" + r.id + "]").find(".btn-add:first").click()
+        }, 200);
+      });
+
+      //$input.val('');
+      //$this.closest('.collapse').collapse('hide');
+    }
+    , ".ui-autocomplete-input keydown" : function(el, ev) {
+      if(ev.which === 13) {
+        var data = $(el).data();
+        for(var i in data) {
+          if(/^pbcAutocomplete/.test(i)) {
+            var ac = data[i];
+            if(!ac.menu.active) {
+              setTimeout(function() {
+                ac.menu.element.children().first().click();
+              }, 100);
+            }
+            break;
+          }
+        }
+      }
     }
 });
 

@@ -36,9 +36,15 @@ can.Model("can.Model.Cacheable", {
       obj = pargs[this.root_object] = {};
     }
     var src = args.serialize ? args.serialize() : args;
-    names = names || Object.keys(src);
-    for(var i = 0 ; i < names.length ; i++) {
-      obj[names[i]] = src[names[i]];
+    var go_names = (!names || names.not) ? Object.keys(src) : names;
+    for(var i = 0 ; i < (go_names.length || 0) ; i++) {
+      obj[go_names[i]] = src[go_names[i]];
+    }
+    if(names.not) {
+      var not_names = names.not;
+      for(i = 0 ; i < (not_names.length || 0) ; i++) {
+        delete obj[not_names[i]];
+      }
     }
     return pargs;
   }

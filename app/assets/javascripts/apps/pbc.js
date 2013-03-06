@@ -32,16 +32,13 @@ $.widget(
             }
             , select: function( event, ui ) {
                 var $this = $(this)
-                  , resp = new CMS.Models.Response();
+                  , resp = new CMS.Models.Response({ id : $(event.target).closest("[data-id]").data("id") });
                 resp.attr({
                     request_id : $(event.target).closest("[data-filter-id]").data("filter-id")
                     , system_id : ui.item.value
                 });
-                resp.
-                  save().
-                  then(function(){ $this.val(""); });
+                resp.save()
 
-                $this.closest('.collapse').collapse('hide');
                 $this.val('');
                 return false;
             }
@@ -92,31 +89,26 @@ $.widget(
   , { options : {
       source : CMS.Models.Document.search
       , select :  function(event, ui) {
-        if(ui.item.id !== null) {
-          $(event.target).trigger("documentSelected", ui.item);
-        }
+        $(event.target).trigger("documentSelected", ui.item);
         return false;
       }
       , search : function(event) {
 
       }
-      , response : function(event, data) {
+      , response : function(event, data, ui) {
         if(!data.content.length) {
           data.content.push(
-            {link_url : "There is no Doc or URL in the system that matches your search. "
+            {label : "Create document " + event.target.value + "..."
+            , link_url : event.target.value
             , id : null });
-          data.content.push(
-            {link_url : "Please create a new reference by pushing the + icon to the right"
-            , id : null})
-          $(event.target).addClass("error-input");
-        } else {
-          $(event.target).removeClass("error-input");
         }
       }
   }
   , _renderItem : function(ul, item) {
     var label;
-    if (item.title) {
+    if (item.label) {
+      label = item.label
+    } else if (item.title) {
       label = "" + item.title + (item.link_url ? " (" + item.link_url + ")" : "");
     } else {
       label = item.link_url;
@@ -134,10 +126,16 @@ $(function() {
     // Trigger controller load when collapsed container is expanded
     $(document.body).on("click", ".pbc-requests .pbc-item-head .openclose", function(ev) {
         var filter_element = $(ev.currentTarget).closest("[data-filter-id]")
-        $(ev.currentTarget).closest(".main-item").find(".pbc-responses").cms_controllers_responses({id : filter_element.data("filter-id"), type_id : filter_element.data("filter-type-id"), type_name : filter_element.data("filter-type-name")});
+        $(ev.currentTarget).closest(".main-item")
+        .find(".pbc-responses-container")
+        .cms_controllers_responses({
+          id : filter_element.data("filter-id")
+          , type_id : filter_element.data("filter-type-id")
+          , type_name : filter_element.data("filter-type-name")
+        });
     });
 
-    $(".pbc-system-search").pbc_autocomplete();
+    //$(".pbc-system-search").pbc_autocomplete();
 
     // Using rotate_flow_control_assessment route
     $('body').on('ajax:success', 'a.rotate_control_assessment', function(data) {
