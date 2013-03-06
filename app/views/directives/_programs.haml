@@ -10,7 +10,7 @@
 %ul.tree-structure.simple
   -directive.programs.each do |program|
     %li.item-main
-      %a{:href => flow_program_path(program)}
+      %a{:href => flow_program_path(program), :data => { :'popover-href' => tooltip_flow_program_path(program), :'popover-trigger' => 'sticky-hover'}, :style => "display:block;" }
         .item-title
           .row-fluid
             .span12
