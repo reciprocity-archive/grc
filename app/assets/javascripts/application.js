@@ -396,6 +396,17 @@ jQuery(function($){
       editor.on("change", function(data) {
         $that.html(this.getValue()).trigger("change");
       });
+
+      $that.closest(".wysiwyg-area").resizable({
+        handles : "s"
+        , minHeight : 100
+        , alsoResize : "#" + $that.uniqueId().attr("id") + ", #" + $that.closest(".wysiwyg-area").uniqueId().attr("id") + " iframe"
+        , autoHide : false
+      }).bind("resizestop", function(ev) {
+        $that.css({"display" : "block", "height" : $that.height() + 20}); //10px offset between reported height and styled height.
+        editor.composer.style();// re-copy new size of textarea to composer
+        $that.css("display", "none");
+      });
     })
   }
 });
