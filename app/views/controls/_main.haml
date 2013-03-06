@@ -16,9 +16,9 @@
     %li=link_to 'Risks', '#risks', :data => { :toggle => 'tab', :'tab-href' => risks_flow_control_path(control) }
 
   .action-items
-    %a.expandAll{:href => "#", :rel => "tooltip", :title => "Expand all"}
+    %a.expandAll.btn.btn-mini{:href => "#", :rel => "tooltip", :title => "Expand all"}
       %i.grcicon-wide-black
-    %a.shrinkAll{:href => "#", :rel => "tooltip", :title => "Collapse all"}
+    %a.shrinkAll.btn.btn-mini{:href => "#", :rel => "tooltip", :title => "Collapse all"}
       %i.grcicon-normal-black
 
   .tab-content
