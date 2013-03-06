@@ -22,11 +22,11 @@
       =wrapped_date_field f, :span6, :start_date, :class => 'date', :label_name => 'Effective Date', :placeholder => 'MM/DD/YYYY'
       =wrapped_date_field f, :span6, :stop_date, :class => 'date', :label_name => 'Stop Date', :placeholder => 'MM/DD/YYYY'
     .row-fluid
-      -if params[:force_type_string] || !f.object.can_change_type_string?
+      -if params[:force_type_string].present? || !f.object.can_change_type_string?
         .span6
           %label Type
           =f.hidden_field :type_string
-          =hidden_field :force_type_string, params[:force_type_string]
+          =hidden_field_tag :force_type_string, params[:force_type_string]
           .item.oneline=f.object.type_string
       -else
         =wrapped_select f, :span6, :type_string, RiskyAttribute.type_strings.map{ |t| [t.titleize, t] }, :selected => (f.object.type_string), :label_name => 'Type'
