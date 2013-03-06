@@ -10,11 +10,11 @@
   -instance.controls.each_with_index do |control, i|
     -id_prefix = "control-#{i}"
     -summary_toggle_target = "#{id_prefix}-summary"
-    %li
+    %li{ :'data-object-id' => i, :'data-object-type' => "control" }
       .item-main
         .item-title
           .row-fluid
-            =render :partial => 'object_leaf', :locals => { :instance => control }
+            =render :partial => 'object_leaf', :locals => { :instance => control, :notes_attr => "" }
           .item-actions
             %a.btn.btn-mini{ "rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => flow_control_path(control.id) }
               %i.grcicon-goto

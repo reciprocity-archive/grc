@@ -21,7 +21,7 @@
     .openclose{ :class => 'lastchild' }
     .item-title
       .row-fluid
-        =render :partial => 'object_leaf', :locals => { :instance => instance }
+        =render :partial => 'object_leaf', :locals => { :instance => instance, :notes_attr => "" }
       .item-actions
         %a.btn.btn-mini.halfopacity{ "rel" => "tooltip", "data-placement" => "left", "title" => "Edit this object", 'data-modal-class' => 'modal-wide', 'data-form-target' => 'refresh', "data-toggle" => "modal-ajax-form", :href => url_for(:id => instance.id, :action => :edit, :controller => model_underscore.pluralize, :only_path => true) }
           %i.grcicon-edit

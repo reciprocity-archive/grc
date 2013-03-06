@@ -15,11 +15,11 @@
         %h3.tab-title
           =risky_attribute.type_string.presence
           =risky_attribute.title
-      %li
+      %li{ :'data-object-id' => i, :'data-object-type' => object.class.name.underscore }
         .item-main
           .item-title
             .row-fluid
-              =render :partial => 'object_leaf', :locals => { :instance => object }
+              =render :partial => 'object_leaf', :locals => { :instance => object, :notes_attr => "" }
             .item-actions
               %a.btn.btn-mini{ "rel" => "tooltip", "data-placement" => "left", "title" => "Go to this object's page", :href => send("flow_#{object.class.name.underscore}_path", object.id) }
                 %i.grcicon-goto
