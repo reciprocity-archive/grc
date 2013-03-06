@@ -13,11 +13,30 @@ can.Control("CMS.Controllers.DashboardWidgets", {
     , object_display : null
     , content_selector : ".content"  //This is somewhat deprecated since we are no longer trying to make the section resizable --BM 3/2/2013
     , minimum_widget_height : 100
+    , is_related : false
+    , parent_type : null
+    , parent_id : null
   }
 }, {
   
   init : function() {
-    this.fetch_list();
+    var params = {};
+    if(this.options.is_related) {
+      var path_tokens = window.location.pathname.split("/");
+      if(path_tokens[0] === "")
+        path_tokens.shift();
+
+      if(this.options.parent_type == null) {
+        this.options.parent_type = window.cms_singularize(path_tokens[0]);
+      }
+
+      if(this.options.parent_id == null) {
+        this.options.parent_id = path_tokens[1];
+      }
+      params[this.options.parent_type + "_id"] = this.options.parent_id;
+    }
+
+    this.fetch_list(params);
     this.element
     .addClass("widget")
     .addClass(this.options.object_category)
