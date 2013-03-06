@@ -361,18 +361,20 @@ module RelatedModel
       }
     end
 
-    def valid_relationships
+    def valid_relationships(object_type=nil)
+      object_type ||= self.name
+
       valid_relationships = []
       DefaultRelationshipTypes.types.each do |name, rel|
-        if rel[:source_type] == self.name && rel[:target_type] == self.name &&  rel[:symmetric]
+        if rel[:source_type] == object_type && rel[:target_type] == object_type &&  rel[:symmetric]
           valid_relationships.push(
             valid_relationship_hash(name, rel[:source_type], :both))
         end
-        if rel[:source_type] == self.name && !rel[:symmetric]
+        if rel[:source_type] == object_type && !rel[:symmetric]
           valid_relationships.push(
             valid_relationship_hash(name, rel[:target_type], :destination))
         end
-        if rel[:target_type] == self.name && !rel[:symmetric]
+        if rel[:target_type] == object_type && !rel[:symmetric]
           valid_relationships.push(
             valid_relationship_hash(name, rel[:source_type], :source))
         end
@@ -386,8 +388,8 @@ module RelatedModel
       end
     end
 
-    def related_models
-      valid_relationships.reduce(Set.new) do |models, vr|
+    def related_models(object_type=nil)
+      valid_relationships(object_type).reduce(Set.new) do |models, vr|
         models.add(vr[:related_model])
       end
     end

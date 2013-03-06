@@ -1,5 +1,8 @@
 -widget_title = "Related" if local_assigns[:widget_title].nil?
 
+-near_model = instance.class.to_s
+-near_model = "Process" if near_model == "System" && instance.is_biz_process?
+
 -models = related_objects(instance)
 -#left_models, right_models = arranged_related_objects(instance)
 
@@ -21,7 +24,7 @@
               %a{:href => "#related-#{table_name}-pane",
                 "data-toggle" => 'tab',
                 "data-source" => related_objects_flow_relationships_path(:oid => instance.id,
-                  :otype => instance.class.to_s,
+                  :otype => near_model,
                   :related_model => model),
                 "data-template" => "/assets/related.mustache",
                 "data-refresh-time" => 60 }

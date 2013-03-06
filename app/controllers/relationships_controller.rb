@@ -11,6 +11,7 @@ class RelationshipsController < BaseMappingsController
       object_side = related_side == 'source' ? 'destination' : 'source'
       params["#{object_side}_id"] = params.delete(:object_id)
       params["#{object_side}_type"] = params.delete(:object_type)
+      params["#{object_side}_type"] = "System" if params["#{object_side}_type"] == "Process"
       params["#{related_side}_type"] = params.delete(:related_model)
       params["#{related_side}_type"] = "System" if params["#{related_side}_type"] == "Process"
     else
@@ -87,7 +88,7 @@ class RelationshipsController < BaseMappingsController
     # If we include forward, find and fill in forward relationships/forward objects
     # If we include backward, find and fill in backward relationships/backward objects
     @results = []
-    obj_real_type.constantize.valid_relationships.each do |vr|
+    obj_real_type.constantize.valid_relationships(obj_type).each do |vr|
       if vr[:related_model].to_s == related_model
         result = {}
 
@@ -265,7 +266,12 @@ class RelationshipsController < BaseMappingsController
     end
 
     def list_form_context
-      object = params[:object_type].constantize.find(params[:object_id])
+      object_model = params[:object_type]
+      object_real_model = object_model
+      object_real_model = "System" if object_real_model == "Process"
+
+      object = object_real_model.constantize.find(params[:object_id])
+
       # FIXME: Abstraction violation
       related_model = params[:related_model]
       related_real_model = related_model
@@ -330,7 +336,9 @@ class RelationshipsController < BaseMappingsController
         related_type = related_real_type.constantize
         related = related_type.find(params[:related_id])
 
-        object_type = params[:object_type].constantize
+        object_real_type = params[:object_type]
+        object_real_type = "System" if object_real_type == "Process"
+        object_type = object_real_type.constantize
         object = object_type.find(params[:object_id])
 
         if params[:related_side] == 'source'
