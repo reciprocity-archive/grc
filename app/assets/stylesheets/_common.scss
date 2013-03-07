@@ -403,3 +403,9 @@ input.disabled.pending-ajax{
     }
   }
 }
+
+// backdrop
+
+.modal-backdrop {
+  @include opacity(0.4);
+}

@@ -28,6 +28,7 @@
     @include gradient-vertical($modalLightBlue, $modalDarkBlue);
     border-bottom: 1px solid $modalHeaderBorder;
     @include box-shadow(inset 0 -1px 0 $modalHeaderShadow);
+    cursor:move;
     .btn {
       margin-top: 2px;
       padding: 2px 0;
