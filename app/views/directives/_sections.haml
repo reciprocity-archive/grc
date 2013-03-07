@@ -27,7 +27,7 @@
                                 %a{ :href => flow_control_path(control) }=control.slug
               -else
                 .rtf
-                  %p.no-data{:style=> "font-size:13px"}
+                  %p.no-data
                     No controls are linked to this directive
 
             -data_popover_trigger = { :placement => "right",
@@ -40,7 +40,7 @@
               -if !controls.empty?
                 =controls.size
               -elsif item.na?
-                %span{:style => "font-weight:normal"} N/A
+                %span.normal-font N/A
               -else
                 %strong 0
 
@@ -55,7 +55,7 @@
               -if !controls.empty?
                 =controls.size
               -elsif item.na?
-                %span{:style => "font-weight:normal"} N/A
+                %span.normal-font N/A
               -else
                 %strong 0
       .item-actions

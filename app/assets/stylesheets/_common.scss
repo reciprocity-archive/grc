@@ -71,6 +71,44 @@ h1, h2, h3, h4, h5, h6 {
   margin-right: 4px;
 }
 
+.no-float {
+  clear: both;
+}
+
+.normal-font {
+  font-weight: normal;
+}
+
+.top-button {
+  vertical-align: top;
+}
+
+.block-element {
+  display: block;
+}
+
+.no-control {
+  font-size: 16px;
+  display: inline;
+}
+
+.parent-position {
+  position: relative;
+}
+
+.not-assigned {
+  color: $tabTitle;
+}
+
+.assignee-dark {
+  color: $subTitle;
+}
+
+.tab-position {
+  position: relative;
+  overflow: visible;
+}
+
 // progress bar
 .bar {
   float:left;
@@ -228,6 +266,7 @@ h1, h2, h3, h4, h5, h6 {
   p.no-data {
     color:$disabled;
     text-align:center;
+    font-size: 13px;
   }
 }
 

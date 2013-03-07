@@ -132,6 +132,14 @@ ul.tree-structure.pbc {
         margin-top:-2px;
       }
     }
+    .btn-mini {
+      padding-left: 0;
+      padding-right: 0;
+      margin-right: 10px;
+      i {
+        margin-top: 0;
+      }
+    }
     
   }
   .rtf {
@@ -587,6 +595,14 @@ input.pbc-request-assignee {
   border-color:#fff;
   cursor:pointer;
   @include box-shadow(none);
+  margin-top:-3px;
+  margin-bottom:0;
+  font-size:12px;
+  line-height:16px;
+  height:16px;
+  min-height:0;
+  padding:2px;
+  width:160px;
   &:hover {
     border-color:darken($lightGray, 20%);
   }

@@ -50,7 +50,7 @@
           .item-title
             .row-fluid
               .span12
-                %a{ :'data-id' => item.id, :href => flow_risky_attribute_path(item.id), :'data-popover-href' => tooltip_flow_risky_attribute_path(item.id), :'data-popover-trigger' => 'sticky-hover', :style => "display:block"}
+                %a{ :'data-id' => item.id, :href => flow_risky_attribute_path(item.id), :class => "block-element", :'data-popover-href' => tooltip_flow_risky_attribute_path(item.id), :'data-popover-trigger' => 'sticky-hover'}
                   .oneline
                     %i{:class => "grcicon-#{item.type_string.downcase}-black"}
                     =item.title || '&nbsp;'.html_safe

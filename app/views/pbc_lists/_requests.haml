@@ -4,7 +4,7 @@
 -if !pbc_is_read_only
   .row-fluid
     .span10
-      %h3.pull-left{:style => "font-weight:normal"}
+      %h3.pull-left.normal-font
         Requests (#{pbc_list.requests.count}) &nbsp;
       .btn-group
         %a{:'data-toggle'=>"dropdown", :href => "#", :class => "btn btn-mini btn-success dropdown-toggle"}
@@ -18,7 +18,7 @@
 
 
     -if has_items && !pbc_is_read_only
-      .span2{:style => "position:relative"}
+      .span2.parent-position
         %a.pull-right.btn.btn-mini.accordion-toggle.toggle.filter-trigger{:'data-toggle'=>"collapse", :href => "#filters"}
           %i.grcicon-search
           Show/Hide Filter&nbsp;
@@ -143,15 +143,15 @@
                           %label.inline.assignee{ :for => "request_" + request.id.to_s + "_responsible"}
                             assignee:                      
                           -if request.company_responsible == "" 
-                            %input.pbc-request-assignee.empty{ :id => "request_" + request.id.to_s + "_responsible", :type => "text", :value => request.company_responsible, :style => "margin-top:-3px;margin-bottom:0;font-size:12px;line-height:16px;height:16px;min-height:0;padding:2px;width:160px", :rel => "tooltip", :title => "Add Assignee", :placeholder => "Add assignee" }
+                            %input.pbc-request-assignee.empty{ :id => "request_" + request.id.to_s + "_responsible", :type => "text", :value => request.company_responsible, :rel => "tooltip", :title => "Add Assignee", :placeholder => "Add assignee" }
                           -else
-                            %input.pbc-request-assignee{ :id => "request_" + request.id.to_s + "_responsible", :type => "text", :value => request.company_responsible, :style => "margin-top:-3px;margin-bottom:0;font-size:12px;line-height:16px;height:16px;min-height:0;padding:2px;width:160px", :rel => "tooltip", :title => "Change Assignee", :placeholder => "Add assignee" }
+                            %input.pbc-request-assignee{ :id => "request_" + request.id.to_s + "_responsible", :type => "text", :value => request.company_responsible, :rel => "tooltip", :title => "Change Assignee", :placeholder => "Add assignee" }
                         -else
                           -if request.company_responsible == ""
                             %p.oneline
-                              %span{:style => "color:#777;"} not assigned
+                              %span.not-assigned not assigned
                           -else
-                            %p.oneline{:style => "color:#111;"}
+                            %p.oneline.assignee-dark
                               assignee:
                               =request.company_responsible
                       .span4
@@ -199,8 +199,8 @@
                           %p.disabled-text Notes not available
                       .span3
                         -if !pbc_is_read_only            
-                          %a.btn.btn-mini.pull-right{ :href => edit_flow_request_path(request.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide', :title => "Edit Request", :rel => "tooltip", :'data-placement' => "left", :style => "margin-right:10px; padding-left:2px; padding-right:2px"}
-                            %i.grcicon-edit{:style => "margin-right:0px;margin-top:0px"}
+                          %a.btn.btn-mini.pull-right{ :href => edit_flow_request_path(request.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide', :title => "Edit Request", :rel => "tooltip", :'data-placement' => "left"}
+                            %i.grcicon-edit
                         %h5 Auditor contact email
                         .rtf
                           %p

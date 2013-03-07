@@ -12,7 +12,7 @@
   -@programs.select { |p|p.company_controls? }.each do |program|
     %li
       -#stats = program_stats(program)
-      %a{ :href => flow_program_path(program), :data => { :'original-title' => 'Program Information', :'content' => render(:template => 'programs/tooltip', :locals => { :program => program }), :placement => 'right', :'popover-trigger' => 'sticky-hover'}, :style => "display:block;" }
+      %a{ :href => flow_program_path(program), :class => "block-element", :data => { :'original-title' => 'Program Information', :'content' => render(:template => 'programs/tooltip', :locals => { :program => program }), :placement => 'right', :'popover-trigger' => 'sticky-hover'} }
         .row-fluid
           .span4
             %strong.oneline
@@ -21,7 +21,7 @@
   -@programs.reject { |p|p.company_controls? }.each do |program|
     %li
       -#stats = program_stats(program)
-      %a{ :href => flow_program_path(program), :data => { :'original-title' => 'Program Information', :'content' => render(:template => 'programs/tooltip', :locals => { :program => program }), :placement => 'right', :'popover-trigger' => 'sticky-hover'}, :style => "display:block;" }
+      %a{ :href => flow_program_path(program), :class => "block-element", :data => { :'original-title' => 'Program Information', :'content' => render(:template => 'programs/tooltip', :locals => { :program => program }), :placement => 'right', :'popover-trigger' => 'sticky-hover'} }
         .row-fluid
           .span4
             %strong.oneline
