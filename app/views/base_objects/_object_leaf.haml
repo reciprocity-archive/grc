@@ -31,6 +31,7 @@
         =title
         %i.description-inline=description_inline
     .description
+      =display_as_html(description)
       -if instance.has_attribute? notes_attr
         .note
           -if notes.present?
@@ -43,7 +44,7 @@
             %a.note-trigger{:href => 'javascript://'}
               %i.grcicon-add-black
               Abstract
-      =display_as_html(description)
+
   -elsif title.present?
     -# Title only
     .oneline.expandable
@@ -56,13 +57,13 @@
         =code
       %span.title
         =title
-    .description.inhover.no-description
+    .description.inhover.no-description    
+      %i No description
       -if instance.has_attribute? notes_attr
         .note
           %a.note-trigger{:href => 'javascript://'}
             %i.grcicon-add-black
             Abstract
-      %i No description
 
   -elsif (description.present? || notes.present?)
     -# Description only
