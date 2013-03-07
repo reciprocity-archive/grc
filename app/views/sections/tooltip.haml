@@ -1,5 +1,7 @@
 .popover-title
-  %h3 #{@section.meta_kind.to_s.titleize} Information
+  .row-fluid
+    .span12
+      %h3 #{@section.meta_kind.to_s.titleize} Information
 
 .popover-content
   =@section.title
