@@ -1,10 +1,14 @@
 <div class="note-text">
-  <textarea class="span12 note wysihtml5" id="section_{{id}}_notes">{{{notes}}}</textarea>
-  <a class="btn btn-mini btn-add" href="#">
-    <i class="grcicon-check-white"></i>
-    Save
-    </a><a class="cancel-link" href="#">
-      cancel
-    </a>
-  
+  <div class="wysiwyg-area">
+    <textarea class="span12 note wysihtml5" {{ (el) -> el.uniqueId() }}>{{{notes}}}</textarea>
+    <div class="wysiwyg-action">
+      <a class="btn btn-mini btn-add" href="#">
+        <i class="grcicon-check-white"></i>
+        Save
+      </a>
+      <a class="cancel-link" href="#">
+        cancel
+      </a>
+    </div>
+  </div>
 </div>
