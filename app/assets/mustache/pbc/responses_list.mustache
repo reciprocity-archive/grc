@@ -21,7 +21,7 @@
       <div class="openclose"></div>
       <div class="item-title">
         <div class="row-fluid">
-          <div class="span12">
+          <div class="span10">
             <span class="normal-font">Response:&nbsp;</span>
             {{#if_null system}}
               <i rel="tooltip" class="grcicon-system-black process-icon" title=""></i>
@@ -30,6 +30,11 @@
               <i rel="tooltip" class="grcicon-{{system.system_or_process}}-black process-icon" title="{{system.system_or_process_capitalized}}"></i>  
               <span>{{system.title}}</span>
             {{/if_null}}
+          </div>
+          <div class="span2">
+            <a class="btn btn-mini delete-response pull-right" href="/responses/{{id}}/delete" data-toggle="modal-ajax-form" title="Delete response" rel="tooltip" data-placement="left" data-id="{{id}}">
+              <i class="grcicon-x-grey"></i>
+            </a>
           </div>
         </div>
       </div>
@@ -40,9 +45,6 @@
           <div class="inner-response">
             <div class="row-fluid response-title-bar">
               <div class="span12">
-                <a class="btn btn-mini delete-response pull-right" href="/responses/{{id}}/delete" data-toggle="modal-ajax-form" title="Delete response" rel="tooltip" data-placement="left" data-id="{{id}}">
-                  <i class="grcicon-x-grey"></i>
-                </a>
                 <h4>Evidence</h4>
               </div>
             </div>

@@ -614,3 +614,17 @@ input.pbc-request-assignee {
     border-color:darken($lightGray, 20%);
   }
 }
+
+.delete-response {
+  margin-top:5px;
+  @include opacity(0.2);
+}
+
+ul.tree-structure.pbc-responses {
+  li:hover {
+    .delete-response {
+      @include opacity(1);
+    }
+    
+  }
+}
