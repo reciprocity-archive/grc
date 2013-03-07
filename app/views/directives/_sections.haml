@@ -40,9 +40,9 @@
               -if !controls.empty?
                 =controls.size
               -elsif item.na?
-                %span.normal-font N/A
+                %strong.warning N/A
               -else
-                %strong 0
+                %strong.error 0
 
             -#status_class = (controls.empty? && !item.na?) ? 'badge-important' : 'badge-warning'
             -#%a.controllist.attached.badge{:href => mapping_section_dialog_path(item),

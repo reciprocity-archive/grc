@@ -154,6 +154,13 @@ ul.tree-structure {
         font-weight: bold;
         display: inline-block;
       }
+      .error {
+        color:$error;
+      }
+      .warning {
+        color:$warning;
+      }
+
     }
     i.grcicon-comment {
       @include opacity(0.4);
