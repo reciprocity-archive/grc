@@ -78,8 +78,8 @@
             .row-fluid
               .span8
                 %span.tiny-title Grouped by:
-                %i.grcicon-control-black
-                %strong= (control_assessment && control_assessment.control && control_assessment.control.slug) || "<font color='red'>(Missing Control)</font>".html_safe
+                %i.grcicon-control-color
+                %strong.text-compliance= (control_assessment && control_assessment.control && control_assessment.control.slug) || "<span style='color:red'>(Missing Control)</span>".html_safe
                 =control_assessment && control_assessment.control && control_assessment.control.title || "&nbsp;".html_safe
               -if control_assessment.present? && !pbc_is_read_only
                 .span2
@@ -123,11 +123,11 @@
                       .span2.pbc-item.pbc-control
                         -if request.control.present?
                         -elsif request.pbc_control_code.present?
-                          %i.grcicon-control-black
+                          %i.grcicon-control-color
                           %span.control.error.oneline{:rel => "tooltip", :title => "Code not recognized"}
                             ="#{request.pbc_control_code}"
                         -else
-                          %i.grcicon-control-black
+                          %i.grcicon-control-color
                           %span.control.error.oneline
                             UNKNOWN
                         -if !request.control.present? && !pbc_is_read_only

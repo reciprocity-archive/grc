@@ -19,7 +19,7 @@
         %ul.nav.nav-tabs
           -models.each do |model|
             -table_name = model.underscore.pluralize #.table_name
-            -icon = "grcicon-#{model.downcase}-black"
+            -icon = "grcicon-#{model.downcase}-color"
             %li.tab-btn
               %a{:href => "#related-#{table_name}-pane",
                 "data-toggle" => 'tab',

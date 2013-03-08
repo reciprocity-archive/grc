@@ -33,22 +33,22 @@
               %ul.dropdown-menu
                 %li.add-new-item
                   %a{:'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :'data-toggle' => "modal-ajax-relationship-selector", :href => list_edit_flow_program_directives_path(:program_id => instance.id, :meta_kind => :regulation), :'data-modal-class' => 'modal-wide' }
-                    %i.grcicon-regulation-black
+                    %i.grcicon-regulation-color
                     Regulation
                 %li.add-new-item
                   %a{:'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :'data-toggle' => "modal-ajax-relationship-selector", :href => list_edit_flow_program_directives_path(:program_id => instance.id, :meta_kind => :contract), :'data-modal-class' => 'modal-wide' }
-                    %i.grcicon-contract-black
+                    %i.grcicon-contract-color
                     Contract
                 %li.add-new-item
                   %a{:'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :'data-toggle' => "modal-ajax-relationship-selector", :href => list_edit_flow_program_directives_path(:program_id => instance.id, :meta_kind => :policy), :'data-modal-class' => 'modal-wide' }
-                    %i.grcicon-policy-black
+                    %i.grcicon-policy-color
                     Policy
 
 .tabbable
   %ul.nav.nav-tabs
     -unless program.company_controls?
-      %li.active=link_to '<i class="grcicon-directive-black"></i>Directives'.html_safe, '#directives', :data => { :toggle => 'tab', :'tab-href' => flow_directives_path(:program_id => instance.id, :tree => true, :search_sections => true) }
-    %li=link_to '<i class="grcicon-control-black"></i>Controls'.html_safe, '#controls', :data => { :toggle => 'tab', :'tab-href' => flow_controls_path(:program_id => instance.id, :list => true) }
+      %li.active=link_to '<i class="grcicon-directive-color"></i>Directives'.html_safe, '#directives', :data => { :toggle => 'tab', :'tab-href' => flow_directives_path(:program_id => instance.id, :tree => true, :search_sections => true) }
+    %li=link_to '<i class="grcicon-control-color"></i>Controls'.html_safe, '#controls', :data => { :toggle => 'tab', :'tab-href' => flow_controls_path(:program_id => instance.id, :list => true) }
     -#%li=link_to '<i class="grcicon-reg-map"></i>Combo'.html_safe, '#combo', :data => { :toggle => 'tab', :'tab-href' => flow_sections_path(:program_id => instance.id, :combo => true) }
 
   .action-items

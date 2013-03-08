@@ -4,8 +4,8 @@
   .row-fluid
     .span10
       %h3
-        %i.grcicon-regulation-black
-        =directive.slug
+        %i.grcicon-regulation-color
+        %span.governance=directive.slug
         %span=directive.title
     .span2
       %a.btn.btn-mini.pull-right{:href => flow_directive_path(directive), :rel => "tooltip", :title => "View #{directive.meta_kind.to_s.titleize}"}

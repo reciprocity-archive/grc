@@ -14,8 +14,8 @@
 
 .tabbable.tabs-left{ :id => quick_result_risk ? nil : "quick_find_risk" }
   %ul.nav.nav-tabs
-    %li.active=link_to '<i class="grcicon-risk-black"></i> Risks <span class="item-count"></span>'.html_safe, "##{prefix}_risks", :data => { :'tab-href' => flow_risks_path(:quick => true, :qr => quick_result_risk), :toggle => 'tab' }
-    %li=link_to '<i class="grcicon-attribute-black"></i> Attributes <span class="item-count"></span>'.html_safe, "##{prefix}_risky_attributes", :data => { :'tab-href' => flow_risky_attributes_path(:quick => true, :qr => quick_result_risk), :toggle => 'tab' }
+    %li.active=link_to '<i class="grcicon-risk-color"></i> Risks <span class="item-count"></span>'.html_safe, "##{prefix}_risks", :data => { :'tab-href' => flow_risks_path(:quick => true, :qr => quick_result_risk), :toggle => 'tab' }
+    %li=link_to '<i class="grcicon-attribute-color"></i> Attributes <span class="item-count"></span>'.html_safe, "##{prefix}_risky_attributes", :data => { :'tab-href' => flow_risky_attributes_path(:quick => true, :qr => quick_result_risk), :toggle => 'tab' }
 
   .tab-content
     .tab-pane{ :id => "#{prefix}_risks" }

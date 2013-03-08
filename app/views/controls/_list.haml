@@ -31,10 +31,10 @@
                         No programs are linked to this company control
                 -data_popover_trigger = { :placement => "right",
                                      :'popover-trigger' =>  "sticky-hover",
-                                     :'original-title' => "<i class='grcicon-program-black'></i> Programs using #{item.slug}".html_safe,
+                                     :'original-title' => "<i class='grcicon-program-color'></i> Programs using #{item.slug}".html_safe,
                                      :content => popover_content }
                 %a{ :data => data_popover_trigger }
-                  %i.grcicon-program-black
+                  %i.grcicon-program-color
                   =programs.size #not using count because count kicks off another query that returns an incorrect result
         .item-actions
           %a.btn.btn-mini.pull-right{ :href => flow_control_path(item), :rel => 'tooltip', :title => "Go to this object's page" }
