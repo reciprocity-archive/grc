@@ -2,10 +2,10 @@
 
 -content_for :header do
   %ul.breadcrumbs
-    %li=link_to 'Programs', programs_dash_path
+    %li=link_to 'dashboard', programs_dash_path
     %li=link_to @program.title, flow_program_path(@program)
     %li
-      Mapping
+      Control Mapper
 
   %h1
     %span

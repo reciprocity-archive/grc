@@ -5,10 +5,8 @@
   %ul.breadcrumbs
     %li=link_to 'Dashboard', programs_dash_path
     -if instance.programs.count == 1
-      %li Programs
       -program = instance.programs.first
       %li=link_to program.title, flow_program_path(program)
-    %li=instance.meta_kind.to_s.titleize.pluralize
     %li=instance.title
 
   %h1.governance

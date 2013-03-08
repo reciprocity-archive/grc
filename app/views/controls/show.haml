@@ -2,8 +2,7 @@
 
 -content_for :header do
   %ul.breadcrumbs
-    %li
-      CONTROLS
+    %li=link_to "dashboard", programs_dash_path
     %li=@control.slug
   
   %h1.compliance
