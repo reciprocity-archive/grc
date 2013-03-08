@@ -415,8 +415,8 @@ Mustache.registerHelper("pbc_is_read_only", function() {
 });
 
 Mustache.registerHelper("with_line_breaks", function(content) { 
-  var value = content();
-  if (!value.search(/<\w+[^>]*>/) > -1)
+  var value = typeof content === "function" ? content() : content;
+  if (value && value.search(/<\w+[^>]*>/) < 0)
     return value.replace(/\n/g, "<br />");
   else
     return value;
