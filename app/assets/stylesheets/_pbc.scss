@@ -668,9 +668,11 @@ ul.tree-structure.pbc-responses {
   .row-fluid {
     margin-bottom:10px !important;
     p {
-      width:80%;
+      width:70%;
     }
-    
+    .btn {
+      margin-left:4px;
+    }
   }
   .auto-save {
     position:relative;
