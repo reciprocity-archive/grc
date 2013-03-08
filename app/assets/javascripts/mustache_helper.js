@@ -414,10 +414,8 @@ Mustache.registerHelper("pbc_is_read_only", function() {
     return options.fn(this);
 });
 
-Mustache.registerHelper("with_line_breaks", function(content) {
-  console.debug("HEY", arguments);
+Mustache.registerHelper("with_line_breaks", function(content) { 
   var value = content();
-  console.debug(value);
   if (!value.search(/<\w+[^>]*>/) > -1)
     return value.replace(/\n/g, "<br />");
   else
