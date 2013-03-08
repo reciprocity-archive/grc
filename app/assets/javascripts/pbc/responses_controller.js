@@ -260,6 +260,9 @@ can.Control("CMS.Controllers.Responses", {
         }
       }
     }
+    , ".pbc-responses > .item > .item-main > .openclose click" : function(el, ev) {
+      this.constructor.one_created(true);
+    }
 });
 
 })(this, can.$);
