@@ -345,22 +345,42 @@
           <div class="inner-system">
             <div class="row-fluid response-title-bar">
               <div class="span12">
-                <h4>Link system or process to this response</h4>
+                <h4>Add system or process</h4>
               </div>
             </div>
             <div class="item-main add-response">
               <div class="response-add">
                 <div class="row-fluid">
-                  <div class="span5 pbc-add-response next-each-other">
+                  <div class="span6 pbc-add-response next-each-other">
                     <input class="pbc-system-search input-block-level" placeholder="Type to search systems/processes" type="text" autocomplete="off" {{ (el) -> el.pbc_autocomplete() }}>
                   </div>
-                  <div class="span5">
-                    <a class="btn btn-add btn-mini top-button" data-modal-class="modal-wide" data-modal-reset="reset" data-placement="top" data-toggle="modal-ajax-form" href="/systems/new" id="tooltip11" rel="tooltip" title="Add new system/process">
-                      <i class="grcicon-add"></i>
-                    </a>
+                  <div class="span6">
+                    <!--
+                      <a class="btn btn-add btn-mini top-button" data-modal-class="modal-wide" data-modal-reset="reset" data-placement="top" data-toggle="modal-ajax-form" href="/systems/new" id="tooltip11" rel="tooltip" title="Add new system/process">
+                        <i class="grcicon-add"></i>
+                      </a>
+                    -->
+                    <div class="btn-group">
+                      <a class="btn btn-add btn-mini dropdown-toggle" data-toggle="dropdown" rel="tooltip" title="Add new system/process">
+                        <i class="grcicon-add"></i>
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li class="add-new-item text-compliance">
+                          <a href="#">
+                            <i class="grcicon-system-color"></i>
+                            <strong class="text-compliance">System</strong>
+                          </a>
+                        </li>
+                        <li class="add-new-item text-compliance">
+                          <a href="#">
+                            <i class="grcicon-process-color"></i>
+                            <strong class="text-compliance">Process</strong>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
-                  <div class="span1">
-                    &nbsp;
+                </div>
               </div>
             </div>
           </div>

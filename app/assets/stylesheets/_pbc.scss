@@ -263,11 +263,30 @@ h4.pbc-title {
   }
   .inner-system {
     border:1px solid $responsBorder;
-    background:darken($responsBgnd,5%);
+    background:darken($responsBgnd,2%);
+    &:hover {
+      background:$white;
+    }
     @include border-radius();
     padding:8px 12px;
     margin-bottom:8px;
     font-size: 11px;
+    .btn-group {
+      li {
+        font-size:12px;
+        a {
+          &:hover {
+            strong {
+              color:#fff;
+            }
+            
+          }
+        }
+      }
+      i {
+        margin-top:0;
+      }    
+    }
     color: $text;
     h4 i {
       margin-top:4px;
