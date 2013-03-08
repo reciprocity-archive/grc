@@ -91,9 +91,6 @@
               :layout => 'layouts/widget_box',
               :locals => { :widget_class => "business widget-tabs" }
             
-      -if has_feature? :BETA
-        =render :partial => 'design/templates/riskWidgetGap'
-        =render :partial => 'design/templates/riskWidgetRisk'
           
       %section.widget-add-placeholder
         .btn-group.dropup
