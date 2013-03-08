@@ -21,7 +21,7 @@
             -rels_count = rels.sum { |rel_type_id, rel_objects| rel_objects.size }
             -table_name = model.underscore.pluralize #.table_name
             -icon = "grcicon-#{model.downcase}-color"
-            %li.tab.tab-btn
+            %li.text-business.tab.tab-btn
               %a{:href => "#related-#{table_name}-pane", "data-toggle" => 'tab' }
                 %i{:class => icon }
                 #{table_name.titleize}

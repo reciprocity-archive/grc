@@ -20,7 +20,7 @@
           -models.each do |model|
             -table_name = model.underscore.pluralize #.table_name
             -icon = "grcicon-#{model.downcase}-color"
-            %li.tab-btn
+            %li{:class => "tab-btn text-#{model.downcase}"}
               %a{:href => "#related-#{table_name}-pane",
                 "data-toggle" => 'tab',
                 "data-source" => related_objects_flow_relationships_path(:oid => instance.id,
