@@ -131,10 +131,6 @@ can.Control("CMS.Controllers.Responses", {
         ev.preventDefault();
       }
     }
-    , ".toggle-edit-population-doc click" : function(el, ev) {
-        el.closest(".pbc-item").next(".inline-edit-population-doc").removeClass("hide").find(".input-title").focus();
-        el.closest(".pbc-item").addClass("hide");
-    }
     , restore_add_link : function(el) {
         var $li = el.closest(".inline-add-person, .inline-add-document, .inline-edit-population-doc");
 
@@ -153,6 +149,11 @@ can.Control("CMS.Controllers.Responses", {
       this.bindXHRToButton(
         model.save().then(this.proxy('restore_add_link', el)).then(function() { el.find('form')[0].reset(); })
         , el);
+    }
+    // population samples events
+    , ".toggle-edit-population-doc click" : function(el, ev) {
+        el.closest(".pbc-item").next(".inline-edit-population-doc").removeClass("hide").find(".input-title").focus();
+        el.closest(".pbc-item").addClass("hide");
     }
     , ".inline-edit-population-doc modal:success" : function(el, ev, data) {
       var model = el.closest("[data-model]").data("model")
@@ -179,6 +180,7 @@ can.Control("CMS.Controllers.Responses", {
       else
         el.closest(".sample-widget").find(".save-population, .save-samples").text("Save").addClass("disabled");
     }
+    //meeting events
     , ".add-meeting modal:success" : function(el, ev, data) {
       el.closest("[data-model]").data("model").addElementToChildList("meetings", new can.Observe(data));
     } 
@@ -243,22 +245,6 @@ can.Control("CMS.Controllers.Responses", {
 
       //$input.val('');
       //$this.closest('.collapse').collapse('hide');
-    }
-    , ".ui-autocomplete-input keydown" : function(el, ev) {
-      if(ev.which === 13) {
-        var data = $(el).data();
-        for(var i in data) {
-          if(/^pbcAutocomplete/.test(i)) {
-            var ac = data[i];
-            if(!ac.selectedItem) {
-              setTimeout(function() {
-                ac.menu.element.children().first().click();
-              }, ac.options.delay || 100);
-            }
-            break;
-          }
-        }
-      }
     }
     , ".pbc-responses > .item > .item-main > .openclose click" : function(el, ev) {
       this.constructor.one_created(true);

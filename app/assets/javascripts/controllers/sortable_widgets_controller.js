@@ -49,7 +49,7 @@ can.Control("CMS.Controllers.SortableWidgets", {
 
     this.element.sortable().sortable("refresh");
     this.is_initialized = true;
-    this.update_event();
+    this.force_add_widget_bottom();
   }
 
   , " sortremove" : "update_event"
