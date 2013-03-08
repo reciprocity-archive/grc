@@ -14,9 +14,9 @@
 
 .tabbable.tabs-left{ :id => quick_result ? nil : "quick_find" }
   %ul.nav.nav-tabs
-    %li.active=link_to '<i class="grcicon-program-color"></i> Programs <span class="item-count"></span>'.html_safe, "##{prefix}_programs", :data => { :'tab-href' => flow_programs_path(:quick => true, :qr => quick_result, :company_controls_first => true), :toggle => 'tab' }
-    %li=link_to '<i class="grcicon-regulation-color"></i> Regulations <span class="item-count"></span>'.html_safe, "##{prefix}_regulations", :data => { :'tab-href' => flow_directives_path(:quick => true, :qr => quick_result, :meta_kind => "regulation"), :toggle => 'tab' }
-    %li=link_to '<i class="grcicon-policy-color"></i> Policies <span class="item-count"></span>'.html_safe, "##{prefix}_policies", :data => { :'tab-href' => flow_directives_path(:quick => true, :qr => quick_result, :meta_kind => "policy"), :toggle => 'tab' }
+    %li.active=link_to '<i class="grcicon-program-color"></i> <span class="text-governance">Programs</span> <span class="item-count"></span>'.html_safe, "##{prefix}_programs", :data => { :'tab-href' => flow_programs_path(:quick => true, :qr => quick_result, :company_controls_first => true), :toggle => 'tab' }
+    %li=link_to '<i class="grcicon-regulation-color"></i> <span class="text-governance">Regulations</span> <span class="item-count"></span>'.html_safe, "##{prefix}_regulations", :data => { :'tab-href' => flow_directives_path(:quick => true, :qr => quick_result, :meta_kind => "regulation"), :toggle => 'tab' }
+    %li=link_to '<i class="grcicon-policy-color"></i> <span class="text-governance">Policies</span> <span class="item-count"></span>'.html_safe, "##{prefix}_policies", :data => { :'tab-href' => flow_directives_path(:quick => true, :qr => quick_result, :meta_kind => "policy"), :toggle => 'tab' }
     %li=link_to '<i class="grcicon-contract-color"></i> Contracts <span class="item-count"></span>'.html_safe, "##{prefix}_contracts", :data => { :'tab-href' => flow_directives_path(:quick => true, :qr => quick_result, :meta_kind => "contract"), :toggle => 'tab' }
 
   .tab-content
