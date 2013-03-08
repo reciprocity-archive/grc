@@ -250,10 +250,10 @@ can.Control("CMS.Controllers.Responses", {
         for(var i in data) {
           if(/^pbcAutocomplete/.test(i)) {
             var ac = data[i];
-            if(!ac.menu.active) {
+            if(!ac.selectedItem) {
               setTimeout(function() {
                 ac.menu.element.children().first().click();
-              }, 100);
+              }, ac.options.delay || 100);
             }
             break;
           }
