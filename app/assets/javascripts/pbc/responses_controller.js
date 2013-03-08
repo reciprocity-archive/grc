@@ -249,6 +249,25 @@ can.Control("CMS.Controllers.Responses", {
     , ".pbc-responses > .item > .item-main > .openclose click" : function(el, ev) {
       this.constructor.one_created(true);
     }
+    , ".remove-system click" : function(el, ev) {
+      var $system = el.closest("[data-model]");
+      var $resp = $system.parent().closest("[data-model]");
+      var m = this.options.model.findInCacheById($resp.data("model").id);
+      m.attr("system_id", null).attr("system", null).save();
+    }
+
+    , ".system-add modal:success" : "update_system"
+    , ".pbc-system-search systemOrProcessSelected" : "update_system"
+    , update_system : function(el, ev, data) {
+      var $this = $(this)
+      , resp = new CMS.Models.Response({ id : el.closest("[data-id]").data("id") });
+      resp.attr({
+          request_id : el.closest("[data-filter-id]").data("filter-id")
+          , system_id : data.value || data.id
+          , system : CMS.Models.System.findInCacheById(data.value || data.id)
+      });
+      resp.save()
+    }
 });
 
 })(this, can.$);

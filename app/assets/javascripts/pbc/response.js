@@ -44,7 +44,7 @@ CMS.Models.System("CMS.Models.Response", {
                   , "object_documents"
                   , "people"
                   , "object_people"
-                  , "url"]
+                  , "system"]
         });
       return $.ajax({
               type : "PUT"

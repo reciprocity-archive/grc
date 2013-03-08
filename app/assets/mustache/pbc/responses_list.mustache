@@ -414,7 +414,7 @@
               </div>
             </div>
             <div class="item-main add-response">
-              <div class="response-add">
+              <div class="system-add">
                 <div class="row-fluid">
                   <div class="span6 pbc-add-response next-each-other">
                     <input class="pbc-system-search input-block-level" placeholder="Type to search systems/processes" type="text" autocomplete="off" {{ (el) -> el.pbc_autocomplete() }}>
@@ -431,13 +431,13 @@
                       </a>
                       <ul class="dropdown-menu">
                         <li class="add-new-item text-compliance">
-                          <a href="#">
+                          <a href="/systems/new" data-modal-class="modal-wide" data-modal-reset="reset" data-toggle="modal-ajax-form">
                             <i class="grcicon-system-color"></i>
                             <strong class="text-compliance">System</strong>
                           </a>
                         </li>
                         <li class="add-new-item text-compliance">
-                          <a href="#">
+                          <a href="/processes/new" data-modal-class="modal-wide" data-modal-reset="reset" data-toggle="modal-ajax-form">
                             <i class="grcicon-process-color"></i>
                             <strong class="text-compliance">Process</strong>
                           </a>

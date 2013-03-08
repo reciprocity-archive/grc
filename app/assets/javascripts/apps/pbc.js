@@ -32,13 +32,7 @@ $.widget(
             }
             , select: function( event, ui ) {
                 var $this = $(this)
-                  , resp = new CMS.Models.Response({ id : $(event.target).closest("[data-id]").data("id") });
-                resp.attr({
-                    request_id : $(event.target).closest("[data-filter-id]").data("filter-id")
-                    , system_id : ui.item.value
-                });
-                resp.save()
-
+                $this.trigger("systemOrProcessSelected", ui.item);
                 $this.val('');
                 return false;
             }
