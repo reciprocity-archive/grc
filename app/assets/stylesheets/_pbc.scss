@@ -343,6 +343,12 @@ h4.pbc-title {
     h5 {
       font-size: 11px;
       font-weight: bold;
+      &.right {
+        text-align:right;
+      }
+      i {
+        margin-top:0;
+      }
     }
     .rtf {
       font-size: 11px;
@@ -654,5 +660,27 @@ ul.tree-structure.pbc-responses {
       @include opacity(1);
     }
     
+  }
+}
+
+.evidence {
+  padding-top:10px;
+  .row-fluid {
+    margin-bottom:10px !important;
+    p {
+      width:80%;
+    }
+    
+  }
+  .auto-save {
+    position:relative;
+    .success {
+      position:absolute;
+      right:0;
+      bottom:-12px;
+      color:$green;
+      font-weight:bold;
+      font-size:11px;
+    }
   }
 }
