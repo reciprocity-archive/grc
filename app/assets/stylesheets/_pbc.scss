@@ -588,6 +588,15 @@ ul.tree-structure {
     }
   }
   ul.pbc-responses {
+    padding-left:0 !important;
+    li.item {
+      margin-left:0;
+      padding-left:10px;
+      padding-right:10px;
+      &:hover {
+        background:$white;
+      }
+    }
     .btn {
       i {
         margin-top:0;
