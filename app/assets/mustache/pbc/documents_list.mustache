@@ -1,7 +1,7 @@
   {{#object_documents}}
   <li {{data 'model'}} data-model="true" rel="tooltip" data-placement="left" title="{{firstnonempty document.link_url 'No link'}}">
     <div class="row-fluid">
-      <div class="span7">
+      <div class="span6">
         {{#if document.link_url}}
         <span>
           <a class="inner-element" href="{{document.link_url}}" target="_blank">{{firstnonempty document.title document.link_url}}</a>
@@ -11,13 +11,16 @@
         {{/if}}
         </span>
       </div>
-      <div class="span4">
+      <div class="span3">
         <select class="edit-document-role">
           <option value="general" {{#if_equals role 'general'}}selected="true"{{/if_equals}}>General Doc</option>
         </select>
       </div>
-      <div class="span1">
-        <a class="btn btn-mini edit_document" rel="tooltip" data-toggle="modal-ajax-form" href="/documents/{{document.id}}/edit" data-model-class="modal-wide" data-placement="bottom" title="Edit evidence" data-target="#ajax-modal-edit-evidence">
+      <div class="span3">
+        <a class="btn btn-mini remove_document pull-right" rel="tooltip" data-placement="bottom" {{#system}}title="Remove from response"{{/system}}>
+          <i class="grcicon-x-grey"></i>
+        </a>
+        <a class="btn btn-mini edit_document pull-right" rel="tooltip" data-toggle="modal-ajax-form" href="/documents/{{document.id}}/edit?no_delete=true" data-model-class="modal-wide" data-placement="bottom" title="Edit evidence" data-target="#ajax-modal-edit-evidence">
           <i class="grcicon-edit"></i>
         </a>
       </div>
