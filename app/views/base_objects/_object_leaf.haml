@@ -54,7 +54,7 @@
               -if editable_notes
                 %a.note-trigger{:href => 'javascript://'}
                   %i.grcicon-add-black
-                  Abstract / Notes
+                  Abstract
 
   -elsif title.present?
     -# Title only
@@ -75,7 +75,7 @@
           .note
             %a.note-trigger{:href => 'javascript://'}
               %i.grcicon-add-black
-              Abstract / Notes
+              Abstract
 
   -elsif (description.present? || notes.present?)
     -# Description only
@@ -112,7 +112,7 @@
                 -if editable_notes
                   %a.note-trigger{:href => 'javascript://'}
                     %i.grcicon-add-black
-                    Abstract / Notes
+                    Abstract
 
   -else
     -# Neither (shouldn't happen)
