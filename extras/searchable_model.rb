@@ -17,7 +17,7 @@ module SearchableModel
   module ClassMethods
     def fulltext_search(q)
       # Check if Sphinx is enabled globally and for this model; if not, fallback to db_search
-      if CMS_CONFIG["FULLTEXT"].present? && respond_to?(:search_for_ids)
+      if false && CMS_CONFIG["FULLTEXT"].present? && respond_to?(:search_for_ids)
         ids = search_for_ids(q).to_a
         where(:id => ids)
       else
