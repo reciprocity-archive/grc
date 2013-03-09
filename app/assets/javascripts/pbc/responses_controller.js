@@ -161,6 +161,11 @@ can.Control("CMS.Controllers.Responses", {
           , el);
       });
     }
+    , ".inline-edit-population-doc .input-title keydown" : function(el, ev) {
+        if(ev.which === $.ui.keyCode.ESCAPE) {
+            el.val('').blur();
+        }
+    }
     // population samples events
     , ".toggle-edit-population-doc click" : function(el, ev) {
         el.closest(".pbc-item").next(".inline-edit-population-doc").removeClass("hide").find(".input-title").focus();
@@ -239,7 +244,13 @@ can.Control("CMS.Controllers.Responses", {
             return obj.save()
         });
     }
+    , restore_add_link : function(el) {
+        var $li = el.closest(".inline-add-person, .inline-add-document, .inline-edit-population-doc");
 
+        $li.next(".toggle-add-person, .toggle-add-document").removeClass("hide");
+        $li.prev(".pbc-item").removeClass("hide");
+        $li.addClass("hide");        
+    }
     , ".inline-add-person, .inline-add-document keydown" : function(el, ev) {
         if(ev.which === $.ui.keyCode.ESCAPE) {
             this.restore_add_link(el);
