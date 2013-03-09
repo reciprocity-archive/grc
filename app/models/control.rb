@@ -73,10 +73,6 @@ class Control < ActiveRecord::Base
   validates :directive, :directive_id,
     :presence => { :message => "needs a value" }
 
-  validate :slug do
-    validate_slug_parent
-  end
-
   validate :require_title_or_description
 
   def require_title_or_description

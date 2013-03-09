@@ -54,7 +54,7 @@
               -if editable_notes
                 %a.note-trigger{:href => 'javascript://'}
                   %i.grcicon-add-black
-                  Abstract
+                  Abstract / Notes
 
   -elsif title.present?
     -# Title only
@@ -68,14 +68,14 @@
       %span.title
         =title
         =extra_description
-    .description.inhover.no-description    
+    .description.inhover.no-description
       %i No description
       -if include_notes
         -if instance.has_attribute? notes_attr
           .note
             %a.note-trigger{:href => 'javascript://'}
               %i.grcicon-add-black
-              Abstract
+              Abstract / Notes
 
   -elsif (description.present? || notes.present?)
     -# Description only
@@ -112,7 +112,7 @@
                 -if editable_notes
                   %a.note-trigger{:href => 'javascript://'}
                     %i.grcicon-add-black
-                    Abstract
+                    Abstract / Notes
 
   -else
     -# Neither (shouldn't happen)
