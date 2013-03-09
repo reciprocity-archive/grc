@@ -15,15 +15,20 @@
 
 // temporary classes for marking selected items
 
-i.slct {
-  margin-top:7px;
-  margin-left:4px;
-  display:none;
-}
-
-a.selected {
-  color:$green;
-  i.slct {
-    display:inline-block;
+ul.tree-structure li {
+  [class^="grcicon-"] {
+    &.slct {
+      margin-top:7px;
+      margin-left:4px;
+      display:none;
+    }
+  }
+  a.selected {
+    color:$green;
+    i.slct {
+      display:inline-block;
+    }
   }
 }
+
+
