@@ -22,8 +22,8 @@ describe SluggedModel do
 
   context "validate_slug" do
     it "should throw an error on a duplicate slug ID" do
-      @c1 = FactoryGirl.create(:control, :slug => 'PARENT')
-      lambda { @c2 = FactoryGirl.create(:control, :slug => 'BADSLUG', :parent => @c1) }.should raise_error
+      @c1 = FactoryGirl.create(:control, :slug => 'DUPESLUG')
+      lambda { @c2 = FactoryGirl.create(:control, :slug => 'DUPESLUG', :parent => @c1) }.should raise_error
     end
   end
 
