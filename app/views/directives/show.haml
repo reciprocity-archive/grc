@@ -54,10 +54,6 @@
       =render :partial => 'directives/main',
               :layout => 'layouts/widget_box',
               :locals => { :directive => instance, :widget_class => "governance" }
-      -unless instance.company_controls?
-        =render :partial => 'shared/related',
-                :layout => 'layouts/widget_box',
-                :locals => { :instance => instance, :widget_title => "Impact/Scope of #{instance.meta_kind.to_s.titleize}", :widget_class => 'related widget-tabs widget-tabs-horizontal business' }
     #right-column.span4.widget-area
       =render :partial => 'directives/info',
               :layout => 'layouts/widget_box',

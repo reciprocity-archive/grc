@@ -45,9 +45,9 @@
               :layout => 'layouts/widget_box',
               :locals => { :program => instance, :widget_class => 'widget-tabs widget-tabs-horizontal governance' }
       -unless instance.company_controls?
-        =render :partial => 'related',
+        =render :partial => 'shared/related',
                 :layout => 'layouts/widget_box',
-                :locals => { :instance => instance, :widget_title => "Impact/Scope of Program's Directives", :widget_class => 'widget-tabs widget-tabs-horizontal related business' }
+                :locals => { :instance => instance, :widget_title => "Impact/Scope", :widget_class => 'widget-tabs widget-tabs-horizontal related business' }
     #right-column.span4.widget-area
       =render :partial => 'info',
               :layout => 'layouts/widget_box',
