@@ -131,24 +131,35 @@ can.Control("CMS.Controllers.Responses", {
         ev.preventDefault();
       }
     }
-    , restore_add_link : function(el) {
-        var $li = el.closest(".inline-add-person, .inline-add-document, .inline-edit-population-doc");
-
-        $li.next(".toggle-add-person, .toggle-add-document").removeClass("hide");
-        $li.prev(".pbc-item").removeClass("hide");
-        $li.addClass("hide");        
-    }
     , ".inline-add-person personSelected" : object_event("person")
     , ".inline-add-person modal:success" : object_event("person")
     , ".inline-add-document documentSelected" : object_event("document")
     , ".inline-add-document modal:success" : object_event("document")
-    , ".inline-edit-population-doc documentSelected" : function(el, ev, data) {
+    , ".inline-edit-population-doc .input-title documentSelected" : function(el, ev, data) {
       var model = el.closest("[data-model]").data("model")
+      var that = this;
+      var dfd = new can.Deferred();
 
-      model.attr(el.data("doc-type") + "_document_id", data.id)
-      this.bindXHRToButton(
-        model.save().then(this.proxy('restore_add_link', el)).then(function() { el.find('form')[0].reset(); })
-        , el);
+      if(!/^http[:s]|^file:/i.test(data.link_url)) {
+        data.title = data.link_url;
+        data.link_url = null;
+      }
+      if(!data.id) {
+          //need to create a new thing to relate to first
+          dfd = new this.options.document_model(data).save();
+          that.bindXHRToButton(
+            dfd
+           , el);
+      } else {
+        dfd.resolve({id : data.id})
+      }
+
+      dfd.done(function(data) {
+        model.attr(el.closest("[data-doc-type]").data("doc-type") + "_document_id", data.id)
+        that.bindXHRToButton(
+          model.save()
+          , el);
+      });
     }
     // population samples events
     , ".toggle-edit-population-doc click" : function(el, ev) {
@@ -160,25 +171,40 @@ can.Control("CMS.Controllers.Responses", {
 
       model.attr(el.data("doc-type") + "_document_id", data.id)
       this.bindXHRToButton(
-        model.save().then(this.proxy('restore_add_link', el)).then(function() { el.find('form')[0].reset(); })
+        model.save()
         , el);
     }
     , ".save-population, .save-samples click" : function(el, ev) {
       ev.preventDefault();
     }    
-    , ".save-population:not(.disabled), .save-samples:not(.disabled) click" : function(el, ev) {
-      var model = el.closest("[data-model]").data("model")
-      model.attr(el.closest(".sample-widget").find("input").attr("name"), el.closest(".sample-widget").find("input").val());
-      this.bindXHRToButton(
-        model.save().then(function() { el.text("Saved").addClass("disabled"); })
-        , el);
-    }
     , "input[name=population], input[name=samples] keyup" : function(el, ev) {
-      //only allow integers
-      if(parseInt(el.val()).toString() === el.val().trim())
-        el.closest(".sample-widget").find(".save-population, .save-samples").text("Save").removeClass("disabled");
-      else
-        el.closest(".sample-widget").find(".save-population, .save-samples").text("Save").addClass("disabled");
+    //, ".save-population:not(.disabled), .save-samples:not(.disabled) click" : function(el, ev) {
+      var model = el.closest("[data-model]").data("model")
+      , that = this;
+      model.attr(el.attr("name"), el.val());
+      if(that.samples_timeout) {
+        clearTimeout(that.samples_timeout);
+      }
+      that.samples_timeout = setTimeout(function() {
+        that.bindXHRToButton(
+          model.save().then(function() { 
+            el.next(".success").addClass("in");
+            setTimeout(function() {
+              el.next(".success").removeClass("in");
+            }, 3000);
+          })
+          , el);
+      }, 1000);
+    }
+    , ".evidence .remove-population-doc click" : function(el, ev) {
+      var model = el.closest("[data-model]").data("model")
+      , type = el.closest("[data-doc-type]").data("doc-type")
+      , that = this;
+      model.attr(type + "_document_id", null);
+      this.bindXHRToButton(
+        model.save()
+        , el);
+
     }
     //meeting events
     , ".add-meeting modal:success" : function(el, ev, data) {
