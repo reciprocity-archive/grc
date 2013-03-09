@@ -340,6 +340,7 @@ ul.tree-structure {
       @include opacity(1);
     }
     &.lastchild {
+      display:none;
       &.active {
         @include opacity(0.4);
       }

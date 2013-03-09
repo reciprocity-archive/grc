@@ -23,10 +23,13 @@
                     %i.grcicon-control-color.short
                     %span.code
                       %span.text-compliance=instance.slug
-                  -else
+                  -elsif instance.is_a?(Program)
                     %i.grcicon-program-color.short
                     %span.code
                       =instance.slug
+                  -else
+                    %span.code
+                      =instance.slug                
                   %span.title
                     =instance.title
                     

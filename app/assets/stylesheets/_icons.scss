@@ -324,6 +324,7 @@
     @include opacity(1);
   }
   &.lastchild {
+    display:none;
     cursor:default;
     background:none !important;
   }
