@@ -32,7 +32,7 @@
         -unless instance.company_controls?
           %li
             %a{:href => import_flow_directive_path(instance)}
-              Import Regs
+              Import #{instance.section_meta_kind.to_s.pluralize.titleize}
         %li
           %a{:href => import_controls_flow_directive_path(instance)}
             Import Controls
@@ -40,7 +40,7 @@
         -unless instance.company_controls?
           %li
             %a{:href => export_flow_directive_path(instance, :format => :html), :'data-toggle' => 'modal-ajax'}
-              Export Regs
+              Export #{instance.section_meta_kind.to_s.pluralize.titleize}
         %li
           %a{:href => export_controls_flow_directive_path(instance, :format => :html), :'data-toggle' => 'modal-ajax'}
             Export Controls
