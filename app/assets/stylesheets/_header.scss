@@ -411,6 +411,18 @@
         margin-top: 6px;
         @include transition(opacity 0.3s ease);
       }
+      &.disabled {
+        color:#ccc;
+        cursor:default;
+        i {
+          @include opacity(0.2);
+        }
+        &:hover {
+          i {
+            @include opacity(0.2);
+          }
+        }
+      }
     }
   }
 }

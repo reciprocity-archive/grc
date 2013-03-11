@@ -21,11 +21,12 @@
 
 -content_for :subheader_extras do
   %ul.actions.pull-right
-    %li
-      %a{:href => edit_flow_program_path(instance), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide',:title => 'Edit Program'}
-        %i.grcicon-edit
-        Edit Program
-    -unless instance.company_controls?
+    -if instance.company_controls?
+      %li
+        %a{:href => "#", :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide',:title => 'Edit Program', :class => "disabled"}
+          %i.grcicon-reg-map
+          Consolidate Controls
+    -else  
       %li
         %a{:href => new_flow_cycle_path(:'program_id' => instance.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect'}
           %i.grcicon-audit
@@ -34,6 +35,12 @@
         %a{ :href => mapping_program_path(instance) }
           %i.grcicon-reg-map
           Control Mapper
+    %li
+      %a{:href => edit_flow_program_path(instance), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide',:title => 'Edit Program'}
+        %i.grcicon-edit
+        Edit Program
+
+
 
 -content_for :subheader_plus do
   %a.navbarplus.fltrt{ :href => new_flow_program_path, :'data-toggle' => 'modal-ajax-form', :'data-form-target' => 'redirect', :'data-modal-reset' => 'reset', :'data-modal-class' => 'modal-wide' }
