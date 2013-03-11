@@ -79,12 +79,9 @@ class ResponsesController < BaseObjectsController
         end
       end
 
-      system_id = response_params.delete(:system_id)
-      if system_id.present?
-        system = System.where(:id => system_id).first
-        if system.present?
-          response_params[:system] = system
-        end
+      if response_params.has_key? :system_id then
+        system = System.where(:id => response_params.delete(:system_id)).first
+        response_params[:system] = system
       end
       response_params
     end

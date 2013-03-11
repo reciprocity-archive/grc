@@ -41,10 +41,6 @@ class Section < ActiveRecord::Base
     end
   end
 
-  validate :slug do
-    validate_slug_parent
-  end
-
   scope :with_controls, includes([:parent, {:controls => [:implementing_controls]}])
 
   def custom_edges

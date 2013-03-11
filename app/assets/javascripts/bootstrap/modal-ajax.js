@@ -193,7 +193,7 @@
 
     var header_height = parseInt(modals.find(".modal-header:first").height());
 
-    var _top = parseInt($(referenceModal)[0].offsetTop) - header_height / 2;
+    var _top = window.scrollY + parseInt($(referenceModal)[0].offsetTop) - header_height / 2;
     modals.css({
         "overflow" : "hidden"
       , "height" : function() {
@@ -213,7 +213,7 @@
 
   var arrangeTopModal = function(modals, modal) {
     modal
-    .css("top", ($(window).height() - modal.height()) / 2 + (modals.length - 1) * parseInt(modal.find(".modal-header").height()) + "px")
+    .css("top", window.scrollY + ($(window).height() - modal.height()) / 2 + (modals.length - 1) * parseInt(modal.find(".modal-header").height()) + "px")
     .css({"position" : "absolute", "margin-top" : 0});
   }
 

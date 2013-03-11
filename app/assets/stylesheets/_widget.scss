@@ -87,6 +87,44 @@
               }
             }
           }
+          &.text-compliance,
+          &.text-system,
+          &.text-process,
+          &.text-businessprocess,
+          &.text-control {
+            a {
+              color:$compliance;  
+            }
+          }
+          &.text-risk,
+          &.text-attribute {
+            a {
+              color:$risk;  
+            }
+          }
+          &.text-business,
+          &.text-dataasset,
+          &.text-project,
+          &.text-facility,
+          &.text-market,
+          &.text-product,
+          &.text-orggroup {
+            a {
+              color:$business;  
+            }
+          }
+          &.text-governance,
+          &.text-program,
+          &.text-section,
+          &.text-clause,
+          &.text-policy,
+          &.text-directive,
+          &.text-contract,
+          &.text-regulation {
+            a {
+              color:$governance;  
+            }
+          }
         }
       }
     }
@@ -162,7 +200,7 @@
     &:hover {
       background-image: url("/images/grcicons/icons.png");
       background-repeat: no-repeat;
-      @include background-size(296px 296px);
+      @include background-size(296px 344px);
       background-position: -270px -169px;
       cursor: move;
     }
@@ -271,7 +309,7 @@
       border: 1px solid $popOverBorder;
       background-image: url("/images/grcicons/icons.png");
       background-repeat: no-repeat;
-      @include background-size(296px 296px);
+      @include background-size(296px 344px);
       background-position:-259px -195px;
       padding-left: 40px;
     }
@@ -364,26 +402,21 @@
     }
   }
   .action-items {
-    text-align: right;
     margin-bottom: 5px;
+    text-align: right;
     a {
-      display: inline-block;
-      cursor: pointer;
-      text-decoration: none;
-      margin-left: 10px;
-      font-size: 11px;
-      line-height: 16px;
-      color: $text;
       @include transition(color 0.2s ease-in-out);
       i {
         @include opacity(0.4);
         @include transition(opacity 0.2s ease-in-out);
       }
       &:hover {
-        color: $black;
         i {
           @include opacity(1);
         }
+      }
+      &.btn-mini {
+        padding: 2px;
       }
     }
   }
@@ -428,9 +461,6 @@
         font-size:12px;
         text-transform:uppercase;
         color: $darkGray;
-      }
-      span i {
-        @include opacity(0.6);
       }
       .rtf {
         border:1px solid darken($lightGray,5%);

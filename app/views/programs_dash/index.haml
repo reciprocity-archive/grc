@@ -4,8 +4,7 @@
 
 -content_for :header do
   %ul.breadcrumbs
-    %li
-      &nbsp;
+    &nbsp;
   
   %h1.dashboard-title
     %i.grciconlarge-dashboard
@@ -35,9 +34,6 @@
               :layout => 'layouts/widget_box',
               :locals => { :widget_class => "business widget-tabs" }
             
-      -if has_feature? :BETA
-        =render :partial => 'design/templates/riskWidgetGap'
-        =render :partial => 'design/templates/riskWidgetRisk'
           
       =render :partial => 'shared/add_widget_section'
 

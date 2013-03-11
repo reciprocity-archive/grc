@@ -25,7 +25,7 @@
     -# Both title and description
     .oneline.expand-on-hover
       -if object_type.present?
-        %i{ :class => "#{object_icon}-black" }
+        %i{ :class => "#{object_icon}-color" }
       -elsif object_icon.present?
         %i{ :class => object_icon }
       %span.code
@@ -55,11 +55,12 @@
                   %i.grcicon-add-black
                   Abstract
       =display_as_html(description)
+
   -elsif title.present?
     -# Title only
     .oneline.expandable
       -if object_type.present?
-        %i{ :class => "#{object_icon}-black" }
+        %i{ :class => "#{object_icon}-color" }
       -elsif object_icon.present?
         %i{ :class => object_icon }
       %span.code
@@ -68,19 +69,18 @@
         =title
         =extra_description
     .description.inhover.no-description
-      -if include_notes
-        -if instance.has_attribute? notes_attr
-          .note
-            %a.note-trigger{:href => 'javascript://'}
-              %i.grcicon-add-black
-              Abstract
+      -if include_notes && editable_notes
+        .note
+          %a.note-trigger{:href => 'javascript://'}
+            %i.grcicon-add-black
+            Abstract
       %i No description
 
   -elsif (description.present? || notes.present?)
     -# Description only
     .oneline.description-only.expand-on-hover
       -if object_type.present?
-        %i{ :class => "#{object_icon}-black" }
+        %i{ :class => "#{object_icon}-color" }
       -elsif object_icon.present?
         %i{ :class => object_icon }
       %span.code
@@ -117,7 +117,7 @@
     -# Neither (shouldn't happen)
     .oneline
       -if object_type.present?
-        %i{ :class => "#{object_icon}-black" }
+        %i{ :class => "#{object_icon}-color" }
       -elsif object_icon.present?
         %i{ :class => object_icon }
       %span.title (No description)

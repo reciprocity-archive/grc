@@ -14,12 +14,12 @@
 
 .tabbable.tabs-left{ :id => quick_result_business_objects ? nil : "quick_find_business_objects" }
   %ul.nav.nav-tabs
-    %li.active=link_to '<i class="grcicon-orggroup-black"></i> Org Groups <span class="item-count"></span>'.html_safe, "##{prefix}_org_groups", :data => { :'tab-href' => flow_org_groups_path(:quick => true, :qr => quick_result_business_objects), :toggle => 'tab' }
-    %li=link_to '<i class="grcicon-project-black"></i> Projects <span class="item-count"></span>'.html_safe, "##{prefix}_projects", :data => { :'tab-href' => flow_projects_path(:quick => true, :qr => quick_result_business_objects), :toggle => 'tab' }
-    %li=link_to '<i class="grcicon-facility-black"></i> Facilities <span class="item-count"></span>'.html_safe, "##{prefix}_facilities", :data => { :'tab-href' => flow_facilities_path(:quick => true, :qr => quick_result_business_objects), :toggle => 'tab' }
-    %li=link_to '<i class="grcicon-product-black"></i> Products <span class="item-count"></span>'.html_safe, "##{prefix}_products", :data => { :'tab-href' => flow_products_path(:quick => true, :qr => quick_result_business_objects), :toggle => 'tab' }
-    %li=link_to '<i class="grcicon-dataasset-black"></i> Data Assets <span class="item-count"></span>'.html_safe, "##{prefix}_data_assets", :data => { :'tab-href' => flow_data_assets_path(:quick => true, :qr => quick_result_business_objects), :toggle => 'tab' }
-    %li=link_to '<i class="grcicon-market-black"></i> Markets <span class="item-count"></span>'.html_safe, "##{prefix}_markets", :data => { :'tab-href' => flow_markets_path(:quick => true, :qr => quick_result_business_objects), :toggle => 'tab' }
+    %li.active=link_to '<i class="grcicon-orggroup-color"></i> <span class="text-business">Org Groups</span> <span class="item-count"></span>'.html_safe, "##{prefix}_org_groups", :data => { :'tab-href' => flow_org_groups_path(:quick => true, :qr => quick_result_business_objects), :toggle => 'tab' }
+    %li=link_to '<i class="grcicon-project-color"></i> <span class="text-business">Projects</span> <span class="item-count"></span>'.html_safe, "##{prefix}_projects", :data => { :'tab-href' => flow_projects_path(:quick => true, :qr => quick_result_business_objects), :toggle => 'tab' }
+    %li=link_to '<i class="grcicon-facility-color"></i> <span class="text-business">Facilities</span> <span class="item-count"></span>'.html_safe, "##{prefix}_facilities", :data => { :'tab-href' => flow_facilities_path(:quick => true, :qr => quick_result_business_objects), :toggle => 'tab' }
+    %li=link_to '<i class="grcicon-product-color"></i> <span class="text-business">Products</span> <span class="item-count"></span>'.html_safe, "##{prefix}_products", :data => { :'tab-href' => flow_products_path(:quick => true, :qr => quick_result_business_objects), :toggle => 'tab' }
+    %li=link_to '<i class="grcicon-dataasset-color"></i> <span class="text-business">Data Assets</span> <span class="item-count"></span>'.html_safe, "##{prefix}_data_assets", :data => { :'tab-href' => flow_data_assets_path(:quick => true, :qr => quick_result_business_objects), :toggle => 'tab' }
+    %li=link_to '<i class="grcicon-market-color"></i> <span class="text-business">Markets</span> <span class="item-count"></span>'.html_safe, "##{prefix}_markets", :data => { :'tab-href' => flow_markets_path(:quick => true, :qr => quick_result_business_objects), :toggle => 'tab' }
     
 
   .tab-content

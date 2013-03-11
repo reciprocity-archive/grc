@@ -413,4 +413,13 @@ Mustache.registerHelper("pbc_is_read_only", function() {
   else
     return options.fn(this);
 });
+
+Mustache.registerHelper("with_line_breaks", function(content) { 
+  var value = typeof content === "function" ? content() : content;
+  if (value && value.search(/<\w+[^>]*>/) < 0)
+    return value.replace(/\n/g, "<br />");
+  else
+    return value;
+});
+
 })(this, jQuery, can);

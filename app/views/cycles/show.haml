@@ -1,10 +1,9 @@
 -content_for :header do
   %ul.breadcrumbs
-    %li=link_to "PROGRAMS", programs_dash_path
-
+    %li=link_to "dashboard", programs_dash_path
     %li=link_to @cycle.directive.title, flow_directive_path(@cycle.directive_id)
-    %li
-      AUDIT
+    %li=@cycle.title
+
   %h1.governance.active
     .grcobject.governance{:rel => "tooltip", :'data-placement'=>"bottom", :title => @cycle.title}
       %i.grcicon-audit

@@ -21,12 +21,26 @@
           %input{ :type => 'hidden', :name => 'items[<%= id %>][object_id]', :value => context[:object_id] }
           %input{ :type => 'hidden', :name => 'items[<%= id %>][object_type]', :value => context[:object_type] }
           %input._destroy{ :type => 'hidden', :name => 'items[<%= id %>][_destroy]', :value => '' }
-          %a.widgetbtn.btn.btn-mini{ :href => url_for(:action => :edit, :controller => context[:related_type].underscore.pluralize, :id => '<%=object.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
+          %a.widgetbtn.btn.btn-mini{ :href => url_for(:action => :edit, :controller => context[:related_real_type].underscore.pluralize, :id => '<%=object.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
             %i.grcicon-edit
           %a.widgetbtn.btn.btn-mini{ :href => '#', :'data-toggle' => 'selector-list-remove' }
             %i.grcicon-remove
 
 %script#relationship_system_option{ :type => 'text/html', :'data-prefix' => 'system' }
+  %li{ :'data-id' => '<%= system.id %>', :'data-title' => '<%= system.title %>', :'data-slug' => '<%= system.slug %>' }
+    .row-fluid
+      .span8
+        .object-info
+          %span.name <%= system.title %>
+          %span.option <%= system.slug %>
+      .span4.actions
+        .pull-right
+          %a.widgetbtn.btn.btn-mini{:href => edit_flow_system_path('<%=system.id%>'), :'data-toggle' => 'modal-ajax-listeditform', :'data-selector-target' => '.source, .target' }
+            %i.grcicon-edit
+          %a.widgetbtn.add-me.btn.btn-mini{:href => "#", :'data-toggle' => 'selector-list-select'}
+            %i.grcicon-chevron-right
+
+%script#relationship_process_option{ :type => 'text/html', :'data-prefix' => 'system' }
   %li{ :'data-id' => '<%= system.id %>', :'data-title' => '<%= system.title %>', :'data-slug' => '<%= system.slug %>' }
     .row-fluid
       .span8
@@ -187,7 +201,7 @@
       .span7
         %h3
           =context[:source_title]
-          %a.widgetbtn.widgetbtnselector.btn.btn-add{ :href => context[:option_new_url], :'data-toggle' => 'modal-ajax-listnewform', :'data-selector-target' => '.source, .target' }
+          %a.widgetbtn.widgetbtnselector.btn.btn-add{ :href => context[:option_new_url], :'data-toggle' => 'modal-ajax-listnewform', :'data-selector-target' => '.source, .target', :'data-modal-class' => 'modal-wide' }
             %i.grcicon-add
       .span5
         %input.widgetsearch.input-block-level{:type => "text", :placeholder => context[:source_search_text]}

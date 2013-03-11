@@ -190,12 +190,15 @@ module ApplicationHelper
   # If a block is passed, capture and use as a prefix.
   # Be careful what you pass as content!
   def display_as_html(content, &block)
-    content_tag :div, (content.presence || "").html_safe, :class => "rtf"
+    content = content.presence || ""
+    if content !~ /<\w+[^>]>/
+      content = content.gsub("\n", "<br />")
+    end
     content_tag :div, :class => "rtf" do
       if block_given?
         concat(capture(&block))
       end
-      concat((content.presence || "").html_safe)
+      concat(content.html_safe)
     end
   end
 

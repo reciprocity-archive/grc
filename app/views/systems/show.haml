@@ -2,12 +2,12 @@
 
 -content_for :header do
   %ul.breadcrumbs
-    %li=@system.is_biz_process ? 'PROCESSES' : 'SYSTEMS'
+    %li=link_to 'dashboard', programs_dash_path
     %li=@system.slug
 
   %h1.compliance
     -if @system.is_biz_process
-      .grcobject.compliance{:rel => "tooltip", :'data-placement'=>"bottom", :title => "B. Process"}
+      .grcobject.compliance{:rel => "tooltip", :'data-placement'=>"bottom", :title => "Process"}
         %i.grcicon-businessprocess
     -else
       .grcobject.compliance{:rel => "tooltip", :'data-placement'=>"bottom", :title => "System"}

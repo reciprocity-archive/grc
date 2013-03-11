@@ -24,9 +24,10 @@ class PopulationSamplesController < BaseObjectsController
         population_sample_params[:response] = Response.where(:id => population_sample_params.delete(:response_id)).first
       end
       %w(population_document sample_worksheet_document sample_evidence_document).each do |field|
-        if population_sample_params["#{field}_id"]
+        if population_sample_params.has_key? "#{field}_id" then
           population_sample_params[field] = Document.where(:id => population_sample_params.delete("#{field}_id")).first
         end
+
       end
       population_sample_params
     end

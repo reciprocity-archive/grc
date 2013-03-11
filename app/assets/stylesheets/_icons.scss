@@ -16,7 +16,7 @@
   background-image: url("/images/grcicons/icons.png");
   background-position: -2000px -2000px; // blank default state 
   background-repeat: no-repeat;
-  @include background-size(296px 296px);
+  @include background-size(296px 344px);
   &.process-icon {
     margin-top:2px;
     @include opacity(0.5);
@@ -324,6 +324,7 @@
     @include opacity(1);
   }
   &.lastchild {
+    display:none;
     cursor:default;
     background:none !important;
   }
@@ -348,7 +349,7 @@
     background-position: -265px -241px;
     background-image: url("/images/grcicons/icons.png");
     background-repeat: no-repeat;
-    @include background-size(296px 296px);
+    @include background-size(296px 344px);
     &.active {
      background-position: -265px -217px;
     }
@@ -390,52 +391,78 @@
 //governance
 .grcicon-program { background-position:-102px -128px; }
 .grcicon-program-black { background-position:-102px -104px; }
+.grcicon-program-color { background-position:-6px -296px; }
 .grcicon-library { background-position:-102px -128px; }
 .grcicon-library-black { background-position:-102px -104px; }
+.grcicon-library-color { background-position:-6px -296px; }
 
 .grcicon-contract { background-position:-126px -128px; }
 .grcicon-contract-black { background-position:-126px -104px; }
+.grcicon-contract-color { background-position:-30px -296px; }
 .grcicon-policy { background-position:-150px -128px; }
 .grcicon-policy-black { background-position:-150px -104px; }
+.grcicon-policy-color { background-position:-54px -296px; }
 .grcicon-regulation { background-position:-174px -128px; }
 .grcicon-regulation-black { background-position:-174px -104px; }
+.grcicon-regulation-color { background-position:-78px -296px; }
 .grcicon-directive { background-position:-78px -200px; }
 .grcicon-directive-black { background-position:-78px -176px; }
+.grcicon-directive-color { background-position:-198px -296px; }
 
 .grcicon-section { background-position:-198px -128px; }
 .grcicon-section-black { background-position:-198px -104px; }
+.grcicon-section-color { background-position:-102px -296px; }
 .grcicon-clause { background-position:-198px -128px; }
 .grcicon-clause-black { background-position:-198px -104px; }
+.grcicon-clause-color { background-position:-102px -296px; }
 // business
 .grcicon-facility { background-position:-222px -128px;}
 .grcicon-facility-black { background-position:-222px -104px; }
+.grcicon-facility-color { background-position:-126px -296px; }
 .grcicon-market { background-position:-246px -128px;}
 .grcicon-market-black { background-position:-246px -104px; }
+.grcicon-market-color { background-position:-150px -296px; }
 .grcicon-product { background-position:-270px -128px;}
 .grcicon-product-black { background-position:-270px -104px; }
+.grcicon-product-color { background-position:-174px -296px; }
 .grcicon-project { background-position:-54px -248px;}
 .grcicon-project-black { background-position:-54px -224px; }
+.grcicon-project-color { background-position:-222px -296px; }
 .grcicon-orggroup, .grcicon-org_group { background-position:-78px -248px;}
 .grcicon-orggroup-black, .grcicon-org_group-black { background-position:-78px -224px; }
+.grcicon-orggroup-color, .grcicon-org_group-color { background-position:-246px -296px; }
 .grcicon-dataasset, .grcicon-data_asset { background-position:-174px -248px; }
 .grcicon-dataasset-black, .grcicon-data_asset-black { background-position:-174px -224px; }
+.grcicon-dataasset-color, .grcicon-data_asset-color { background-position:-54px -320px; }
 //compliance
 .grcicon-system { background-position:-126px -248px }
 .grcicon-system-black { background-position:-126px -224px; }
+.grcicon-system-color { background-position:-6px -320px; }
 .grcicon-process { background-position:-102px -248px }
 .grcicon-process-black { background-position:-102px -224px; }
+.grcicon-process-color { background-position:-270px -296px; }
 .grcicon-businessprocess, .grcicon-business_process { background-position:-102px -248px }
 .grcicon-businessprocess-black, .grcicon-business_process-black { background-position:-102px -224px; }
+.grcicon-businessprocess-color, .grcicon-business_process-color { background-position:-270px -296px; }
 .grcicon-control { background-position:-150px -248px }
 .grcicon-control-black { background-position:-150px -224px; }
+.grcicon-control-color { background-position:-30px -320px; }
 .grcicon-company_controls { background-position:-150px -248px }
-.grcicon-control-black { background-position:-150px -224px; }
 .grcicon-company_controls-black { background-position:-150px -224px; }
+.grcicon-company_controls-color { background-position:-30px -320px; }
 // risk
 .grcicon-risk { background-position:-198px -248px }
 .grcicon-risk-black { background-position:-198px -224px; }
+.grcicon-risk-color { background-position:-78px -320px; }
 .grcicon-attribute { background-position:-222px -248px }
 .grcicon-riskyattribute, .grcicon-risky_attribute { background-position:-222px -248px }
 .grcicon-attribute-black { background-position:-222px -224px; }
+.grcicon-attribute-color { background-position:-102px -320px; }
 .grcicon-riskyattribute-black, .grcicon-risky_attribute-black { background-position:-222px -224px; }
+.grcicon-riskyattribute-color, .grcicon-risky_attribute-color { background-position:-102px -320px; }
 .grcicon-dashboard-big { background-position:-246px -224px; }
+
+
+i.short {
+  margin-top:5px !important;
+}

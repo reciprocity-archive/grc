@@ -20,8 +20,8 @@
           -impact_scope.each do |model, rels|
             -rels_count = rels.sum { |rel_type_id, rel_objects| rel_objects.size }
             -table_name = model.underscore.pluralize #.table_name
-            -icon = "grcicon-#{model.downcase}-black"
-            %li.tab.tab-btn
+            -icon = "grcicon-#{model.downcase}-color"
+            %li.text-business.tab.tab-btn
               %a{:href => "#related-#{table_name}-pane", "data-toggle" => 'tab' }
                 %i{:class => icon }
                 #{table_name.titleize}
@@ -38,7 +38,7 @@
                     -rel_objects.uniq.each do |o|
                       %li{ :class => model.downcase }
                         .item-main
-                          %a.custom-related-popover-trigger{:href => self.send("flow_#{model_name}_path", o), :'data-popover-href'=> self.send("tooltip_flow_#{model_name}_path", o), :'data-popover-trigger' => "sticky-hover", :style => "display:block"}
+                          %a{:href => self.send("flow_#{model_name}_path", o), :class => "block-element", :'data-popover-href'=> self.send("tooltip_flow_#{model_name}_path", o), :'data-popover-trigger' => "sticky-hover"}
                             .item-title
                               .row-fluid
                                 .span8

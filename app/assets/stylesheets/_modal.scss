@@ -28,6 +28,7 @@
     @include gradient-vertical($modalLightBlue, $modalDarkBlue);
     border-bottom: 1px solid $modalHeaderBorder;
     @include box-shadow(inset 0 -1px 0 $modalHeaderShadow);
+    cursor:move;
     .btn {
       margin-top: 2px;
       padding: 2px 0;
@@ -121,6 +122,19 @@
         line-height: 22px;
         padding: 0;
       }
+      &:hover {
+        .ui-resizable-handle {
+          height:12px;
+          border-top:1px solid darken($lightGray,5%);
+          background-color: lighten($lightGray,5%);
+          background-repeat:no-repeat;
+          background-image: url("/images/grcicons/icons.png");
+          @include background-size(296px 344px);
+          background-position:50% -157px;
+          @include opacity(0.8);
+        }
+      }
+      
       // smaller buttons in wysiwyg editor
       .btn {
         padding:0px 5px 2px 5px;

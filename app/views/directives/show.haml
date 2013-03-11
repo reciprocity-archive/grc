@@ -2,14 +2,19 @@
 -@title = "GRC #{instance.meta_kind.to_s.titleize}: #{instance.title}"
 
 -content_for :header do
-
   %ul.breadcrumbs
-    %li=link_to instance.meta_kind.to_s.titleize.pluralize, programs_dash_path
+    %li=link_to 'Dashboard', programs_dash_path
+    -if instance.programs.count == 1
+      -program = instance.programs.first
+      %li=link_to program.title, flow_program_path(program)
     %li=instance.title
 
   %h1.governance
     .grcobject.governance{:rel => "tooltip", :'data-placement'=>"bottom", :title => instance.meta_kind.to_s.titleize}
       %i{ :class => "grcicon-#{instance.meta_kind}" }
+    %span
+      %strong=instance.meta_kind.to_s.titleize
+      \: 
     =instance.title
 
 -content_for :page_help, 'directive'
@@ -30,7 +35,7 @@
         -unless instance.company_controls?
           %li
             %a{:href => import_flow_directive_path(instance)}
-              Import Regs
+              Import #{instance.section_meta_kind.to_s.pluralize.titleize}
         %li
           %a{:href => import_controls_flow_directive_path(instance)}
             Import Controls
@@ -38,7 +43,7 @@
         -unless instance.company_controls?
           %li
             %a{:href => export_flow_directive_path(instance, :format => :html), :'data-toggle' => 'modal-ajax'}
-              Export Regs
+              Export #{instance.section_meta_kind.to_s.pluralize.titleize}
         %li
           %a{:href => export_controls_flow_directive_path(instance, :format => :html), :'data-toggle' => 'modal-ajax'}
             Export Controls
@@ -52,10 +57,6 @@
       =render :partial => 'directives/main',
               :layout => 'layouts/widget_box',
               :locals => { :directive => instance, :widget_class => "governance" }
-      -unless instance.company_controls?
-        =render :partial => 'shared/related',
-                :layout => 'layouts/widget_box',
-                :locals => { :instance => instance, :widget_title => "Impact/Scope of #{instance.meta_kind.to_s.titleize}", :widget_class => 'related widget-tabs widget-tabs-horizontal business' }
         =render :partial => 'shared/add_widget_section'
     #right-column.span4.widget-area
       =render :partial => 'directives/info',

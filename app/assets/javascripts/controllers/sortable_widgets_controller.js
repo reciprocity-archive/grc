@@ -49,12 +49,14 @@ can.Control("CMS.Controllers.SortableWidgets", {
 
     this.element.sortable().sortable("refresh");
     this.is_initialized = true;
-    this.update_event();
+    this.force_add_widget_bottom();
   }
 
-  , " sortupdate" : "update_event"
   , " sortremove" : "update_event"
-  , " sortreceive" : function(el, ev, data) {
+
+  , " sortupdate" : "force_add_widget_bottom"
+  , " sortreceive" : "force_add_widget_bottom"
+  , force_add_widget_bottom : function(el, ev, data) {
     if(this.is_initialized) {
       var $add_box = this.element.find(".cms_controllers_add_widget")
       , $parent = $add_box.parent();
@@ -62,7 +64,7 @@ can.Control("CMS.Controllers.SortableWidgets", {
         $add_box.detach().appendTo($parent);
       }
     }
-
+    this.element.sortable().sortable("refresh");
     this.update_event(el, ev, data);
   }
 

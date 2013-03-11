@@ -132,6 +132,14 @@ ul.tree-structure.pbc {
         margin-top:-2px;
       }
     }
+    .btn-mini {
+      padding-left: 0;
+      padding-right: 0;
+      margin-right: 10px;
+      i {
+        margin-top: 0;
+      }
+    }
     
   }
   .rtf {
@@ -219,14 +227,14 @@ h4.pbc-title {
         margin-top: 3px;
         float:left;
         @include size(16px, 16px);
-        @include background-size(296px 296px);
+        @include background-size(296px 344px);
         background-image: url("/images/grcicons/icons.png");
         @include opacity(0.4);
         &.active {
           @include opacity(1);
         }
       }
-      .respons-add {
+      .response-add {
         margin-left: 24px;
         i {
           margin-top: 0;
@@ -255,11 +263,31 @@ h4.pbc-title {
   }
   .inner-system {
     border:1px solid $responsBorder;
-    background:darken($responsBgnd,5%);
+    background:darken($responsBgnd,2%);
+    @include transition(background 0.2s);
+    &:hover {
+      background:lighten($responsBgnd,5%);
+    }
     @include border-radius();
     padding:8px 12px;
     margin-bottom:8px;
     font-size: 11px;
+    .btn-group {
+      li {
+        font-size:12px;
+        a {
+          &:hover {
+            strong {
+              color:#fff;
+            }
+            
+          }
+        }
+      }
+      i {
+        margin-top:0;
+      }    
+    }
     color: $text;
     h4 i {
       margin-top:4px;
@@ -316,6 +344,12 @@ h4.pbc-title {
     h5 {
       font-size: 11px;
       font-weight: bold;
+      &.right {
+        text-align:right;
+      }
+      i {
+        margin-top:0;
+      }
     }
     .rtf {
       font-size: 11px;
@@ -330,7 +364,7 @@ h4.pbc-title {
       -webkit-appearance: textfield;
       -moz-appearance: textfield;
       background-color: transparent;
-      @include background-size(296px 296px);
+      @include background-size(296px 344px);
       background-image: url("/images/grcicons/icons.png");
       background-repeat: no-repeat;
       background-position: right -272px;
@@ -561,6 +595,16 @@ ul.tree-structure {
     }
   }
   ul.pbc-responses {
+    padding-left:0 !important;
+    li.item {
+      margin-left:0;
+      padding-left:10px;
+      padding-right:10px;
+      @include transition(background 0.3s);
+      &:hover {
+        background:$white;
+      }
+    }
     .btn {
       i {
         margin-top:0;
@@ -587,6 +631,14 @@ input.pbc-request-assignee {
   border-color:#fff;
   cursor:pointer;
   @include box-shadow(none);
+  margin-top:-3px;
+  margin-bottom:0;
+  font-size:12px;
+  line-height:16px;
+  height:16px;
+  min-height:0;
+  padding:2px;
+  width:160px;
   &:hover {
     border-color:darken($lightGray, 20%);
   }
@@ -596,5 +648,44 @@ input.pbc-request-assignee {
   }
   &.empty {
     border-color:darken($lightGray, 20%);
+  }
+}
+
+.delete-response {
+  margin-top:5px;
+  @include opacity(0.2);
+}
+
+ul.tree-structure.pbc-responses {
+  li:hover {
+    .delete-response {
+      @include opacity(1);
+    }
+    
+  }
+}
+
+.evidence {
+  padding-top:10px;
+  .row-fluid {
+    margin-bottom:10px !important;
+    p {
+      width:70%;
+    }
+    .btn {
+      margin-left:4px;
+      padding:1px;
+    }
+  }
+  .auto-save {
+    position:relative;
+    .success {
+      position:absolute;
+      right:0;
+      bottom:-12px;
+      color:$green;
+      font-weight:bold;
+      font-size:11px;
+    }
   }
 }

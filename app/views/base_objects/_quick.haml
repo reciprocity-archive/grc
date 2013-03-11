@@ -19,10 +19,18 @@
             .row-fluid
               .span12
                 .item-identifier
-                  -# placeholder for object icons
-                  -#.grcobject.compliance
-                    &nbsp;
-                  %span.code
-                    =instance.slug
+                  -if instance.is_a?(Program) && instance.company_controls?
+                    %i.grcicon-control-color.short
+                    %span.code
+                      %span.text-compliance=instance.slug
+                  -elsif instance.is_a?(Program)
+                    %i.grcicon-program-color.short
+                    %span.code
+                      =instance.slug
+                  -else
+                    %span.code
+                      =instance.slug                
                   %span.title
                     =instance.title
+                    
+                  

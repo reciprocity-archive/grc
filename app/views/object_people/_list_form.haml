@@ -4,7 +4,7 @@
 -content_for :modal_help, :select_people
 
 %script#person_option{ :type => 'text/html', :'data-prefix' => 'person' }
-  %li{ :'data-id' => '<%= person.id %>', :'data-name' => '<%= person.name %>', :'data-company' => '<%= person.company %>' }
+  %li{ :'data-id' => '<%= person.id %>', :'data-name' => '<%= person.name %>', :'data-company' => '<%= person.company %>', :'data-email' => '<%= person.email %>' }
     .row-fluid
       .span9
         .object-info
@@ -70,7 +70,7 @@
       .span7
         %h3
           Add Person
-          %a.widgetbtn.widgetbtnselector.btn.btn-add{ :href => new_flow_person_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-selector-target' => '.source, .target' }
+          %a.widgetbtn.widgetbtnselector.btn.btn-add{ :href => new_flow_person_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-selector-target' => '.source, .target' , :'data-modal-class' => 'modal-wide'}
             %i.grcicon-add
       .span5
         %input.widgetsearch.input-block-level{:type => "text", :placeholder => "Search Person"}

@@ -33,54 +33,6 @@ module DefaultRelationshipTypes
       :forward_description => "This data asset relies upon the following systems.",
       :reverse_description => "This system supports the following data assets."
     },
-    :directive_applies_to_data_asset => {
-      :source_type => "Directive",
-      :target_type => "DataAsset",
-      :forward_phrase => "applies to",
-      :reverse_phrase => "is within scope of",
-      :forward_description => "This directive applies to the following data assets.",
-      :reverse_description => "This data asset is within scope of the following directives."
-    },
-    :directive_applies_to_facility => {
-      :source_type => "Directive",
-      :target_type => "Facility",
-      :forward_phrase => "applies to",
-      :reverse_phrase => "is within scope of",
-      :forward_description => "This directive applies to the following facilities.",
-      :reverse_description => "This facility is within scope of the following directives."
-    },
-    :directive_applies_to_market => {
-      :source_type => "Directive",
-      :target_type => "Market",
-      :forward_phrase => "applies to",
-      :reverse_phrase => "is within scope of",
-      :forward_description => "This directive applies to the following markets.",
-      :reverse_description => "This market is within scope of the following directives."
-    },
-    :directive_applies_to_org_group => {
-      :source_type => "Directive",
-      :target_type => "OrgGroup",
-      :forward_phrase => "applies to",
-      :reverse_phrase => "is within scope of",
-      :forward_description => "This directive applies to the following org groups.",
-      :reverse_description => "This org group is within scope of the following directives."
-    },
-    :directive_applies_to_product => {
-      :source_type => "Directive",
-      :target_type => "Product",
-      :forward_phrase => "applies to",
-      :reverse_phrase => "is within scope of",
-      :forward_description => "This directive applies to the following products.",
-      :reverse_description => "This product is within scope of the following directives."
-    },
-    :directive_applies_to_project => {
-      :source_type => "Directive",
-      :target_type => "Project",
-      :forward_phrase => "applies to",
-      :reverse_phrase => "is within scope of",
-      :forward_description => "This directive applies to the following projects.",
-      :reverse_description => "This project is within scope of the following directives."
-    },
     :facility_has_process => {
       :source_type => "Facility",
       :target_type => "Process",
@@ -298,6 +250,54 @@ module DefaultRelationshipTypes
       :reverse_phrase => "supports",
       :forward_description => "This product relies upon the following systems.",
       :reverse_description => "This system supports the following products."
+    },
+    :program_applies_to_data_asset => {
+      :source_type => "Program",
+      :target_type => "DataAsset",
+      :forward_phrase => "applies to",
+      :reverse_phrase => "is within scope of",
+      :forward_description => "This program applies to the following data assets.",
+      :reverse_description => "This data asset is within scope of the following programs."
+    },
+    :program_applies_to_facility => {
+      :source_type => "Program",
+      :target_type => "Facility",
+      :forward_phrase => "applies to",
+      :reverse_phrase => "is within scope of",
+      :forward_description => "This program applies to the following facilities.",
+      :reverse_description => "This facility is within scope of the following programs."
+    },
+    :program_applies_to_market => {
+      :source_type => "Program",
+      :target_type => "Market",
+      :forward_phrase => "applies to",
+      :reverse_phrase => "is within scope of",
+      :forward_description => "This program applies to the following markets.",
+      :reverse_description => "This market is within scope of the following programs."
+    },
+    :program_applies_to_org_group => {
+      :source_type => "Program",
+      :target_type => "OrgGroup",
+      :forward_phrase => "applies to",
+      :reverse_phrase => "is within scope of",
+      :forward_description => "This program applies to the following org groups.",
+      :reverse_description => "This org group is within scope of the following programs."
+    },
+    :program_applies_to_product => {
+      :source_type => "Program",
+      :target_type => "Product",
+      :forward_phrase => "applies to",
+      :reverse_phrase => "is within scope of",
+      :forward_description => "This program applies to the following products.",
+      :reverse_description => "This product is within scope of the following programs."
+    },
+    :program_applies_to_project => {
+      :source_type => "Program",
+      :target_type => "Project",
+      :forward_phrase => "applies to",
+      :reverse_phrase => "is within scope of",
+      :forward_description => "This program applies to the following projects.",
+      :reverse_description => "This project is within scope of the following programs."
     },
     :project_has_process => {
       :source_type => "Project",

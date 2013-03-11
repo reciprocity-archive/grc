@@ -43,7 +43,7 @@
                           %i.grcicon-edit
         -#-root_category.descendants.sort_by(&:display_name).each do |category|
           -# TODO: Predrag said to use inline style for now. Ref. story: #40581877
-          %li{:style => "margin-left:15px"}
+          %li
             %a.widgetbtn.fltrt{ :'data-form-target' => "refresh", :'data-delete-target' => "refresh", :'data-modal-reset' => "reset", :'data-toggle' => "modal-ajax-form", :href => edit_flow_category_path(category) }
               %i.grcicon-edit
             =link_to '#' do

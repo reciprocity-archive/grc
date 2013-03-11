@@ -26,10 +26,10 @@
           });
 
         function reinit(ev) {
-          can.each(that, function(value, name) {
-            if (value === null)
-              that.attr(name, "");
-          });
+          // can.each(that, function(value, name) {
+          //   if (value === null)
+          //     that.attr(name, "");
+          // });
         }
         reinit();
         this.bind("updated", reinit)

@@ -66,9 +66,6 @@ ul.tree-structure {
       text-decoration: none;
       display: block;
     }
-    .custom-related-popover-trigger {
-      display: block;
-    }
     &:hover {
       background: $treeListBgnd;
       .objects-count {
@@ -157,6 +154,13 @@ ul.tree-structure {
         font-weight: bold;
         display: inline-block;
       }
+      .error {
+        color:$error;
+      }
+      .warning {
+        color:$warning;
+      }
+
     }
     i.grcicon-comment {
       @include opacity(0.4);
@@ -296,7 +300,7 @@ ul.tree-structure {
       }
     }
     textarea {
-      max-height: 50px;
+      /*max-height: 50px;*/
       display: block;
     }
     .cancel-link {
@@ -336,6 +340,7 @@ ul.tree-structure {
       @include opacity(1);
     }
     &.lastchild {
+      display:none;
       &.active {
         @include opacity(0.4);
       }

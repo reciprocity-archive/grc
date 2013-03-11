@@ -4,8 +4,8 @@
       <div class="row-fluid response-title-bar">
         <div class="span6">
           <h4>
-            <i class="grcicon-{{system_or_process}}-black" rel="tooltip" data-placement="top" title="{{system_or_process_capitalized}}"></i>
-            {{{title}}}
+            <i class="grcicon-{{system_or_process}}-color" rel="tooltip" data-placement="top" title="{{system_or_process_capitalized}}"></i>
+            <strong class="text-compliance">{{{title}}}</strong>
           </h4>
         </div>
         <div class="span6">
@@ -16,6 +16,10 @@
             <a class="btn btn-mini" href="/systems/{{id}}" title="View {{system_or_process_capitalized}}" rel="tooltip" data-placement="top">
               <i class="grcicon-goto"></i>
             </a>
+            <a class="btn btn-mini remove-system" href="javascript://" title="Remove {{system_or_process_capitalized}} from Response" rel="tooltip" data-placement="top">
+              <i class="grcicon-x-grey"></i>
+            </a>
+
           </div>
           <span class="pbc-counter {{^object_people.length}} empty{{/object_people.length}}">
             <i class="grcicon-user-black"></i>
@@ -31,7 +35,7 @@
         <div class="span6">
           <h5>Description</h5>
           <div class="rtf">
-            {{{description}}}
+            {{{with_line_breaks description}}}
           </div>
         </div>
         <div class="span6">
@@ -86,7 +90,7 @@
         <div class="span6">
           <h5>Notes</h5>
           <div class="rtf">
-            {{{notes}}}
+            {{{with_line_breaks notes}}}
           </div>
 
         </div>

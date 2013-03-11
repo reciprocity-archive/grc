@@ -36,7 +36,11 @@
             %i.grcicon-goto
     .span3
       .confirm-buttons
-        %a.btn.btn-primary.preventdoubleclick{:'data-toggle' => 'modal-submit', :href => 'javascript://' } Save 
+        -save_button = yield_content!(:modal_save_button)
+        -if !save_button.blank?
+          =save_button
+        -else
+          %a.btn.btn-primary.preventdoubleclick{:'data-toggle' => 'modal-submit', :href => 'javascript://' } Save 
         -approve_path = yield_content!(:modal_approve_path)
         -if !approve_path.blank?
           %a.btn.btn-success.btn-primary.disabled{:'data-toggle' => 'modal-approve', :href => 'javascript://', :disabled => 'disabled'} Approve

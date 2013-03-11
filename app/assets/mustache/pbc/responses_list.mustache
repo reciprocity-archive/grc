@@ -1,32 +1,55 @@
+{{!<div class="control_assessment-32-request-{{request_id}} pbc-responses-container responses">}}
+<div class="bg-caret"></div>
+<h4 class="pbc-title response-title-bar">
+  Responses ({{type_name}})
+  <a class="btn btn-mini btn-add" data-toggle="modal" href="#newResponse" data-target="#request-{{request_id}}-response-new"  data-placement="top" data-toggle="collapse" rel="tooltip" title="Add new response">
+    <i class="grcicon-add"></i>
+  </a>
+  <span class="inline-help">
+    {{^one_created}}
+    «
+    click here to add a response
+    {{/one_created}}
+  </span>
+</h4>
+
+<ul class="tree-structure items-list pbc-responses cms_controllers_responses" id="request-{{request_id}}-responses">
+
 {{#list}}
   <li class="item" {{data 'model'}} data-model="true" data-id="{{id}}">
     <div class="item-main">
-      <div class="openclose"></div>
+      <div class="openclose active"></div>
       <div class="item-title">
         <div class="row-fluid">
-          <div class="span12">
-            <span style="font-weight:normal">Response:&nbsp;</span>
-            <i class="grcicon-{{system.system_or_process}}-black process-icon" rel="tooltip" title="{{system.system_or_process_capitalized}}"></i>          
-              {{system.title}}
+          <div class="span10">
+            <span class="normal-font">Response:&nbsp;</span>
+            {{#if_null system}}
+              <i rel="tooltip" class="grcicon-system-color process-icon" title=""></i>
+              <span class="text-compliance">[no system]</span>
+            {{else}}
+              <i rel="tooltip" class="grcicon-{{system.system_or_process}}-color process-icon" title="{{system.system_or_process_capitalized}}"></i>  
+              <span class="text-compliance">{{system.title}}</span>
+            {{/if_null}}
+          </div>
+          <div class="span2">
+            <a class="btn btn-mini delete-response pull-right" href="/responses/{{id}}/delete" data-toggle="modal-ajax-form" title="Delete response" rel="tooltip" data-placement="left" data-id="{{id}}">
+              <i class="grcicon-x-grey"></i>
+            </a>
           </div>
         </div>
       </div>
     </div>
-    <div class="item-content response-items">
+    <div class="item-content response-items" style="display: block;">
       <div class="row-fluid">
         <div class="span6">
           <div class="inner-response">
             <div class="row-fluid response-title-bar">
               <div class="span12">
-                <a class="btn btn-mini delete-response pull-right" href="/responses/{{id}}/delete" data-toggle="modal-ajax-form" title="Delete response" rel="tooltip" data-placement="left" data-id="{{id}}">
-                  <i class="grcicon-x-grey"></i>
-                </a>
-                <h4>Evidence</h4>
+                <h4>Evidence: {{type_name}}</h4>
               </div>
             </div>
             <div class="row-fluid">
               <div class="span12">
-                <h5>{{type_name}}</h5>
                 {{#if_equals type_name 'Documentation'}}
                   <ul class="items pbc-item-list">
                     {{> /assets/pbc/documents_list.mustache}}
@@ -63,7 +86,7 @@
                         </div>
                       </li>
                     {{/object_people}}
-                    <li class="inline-editing inline-add-person hide" data-system-id="{{system.id}}">
+                    <li class="inline-editing inline-add-person hide">
                       <form>
                         <div class="row-fluid">
                           <div class="span7">
@@ -113,210 +136,67 @@
               {{/if_equals}}
               {{#if_equals type_name 'Population Sample'}}
                 {{#population_sample}}
-                  <br>
-                  <div class="row-fluid inner-title">
-                    <div class="span9">
-                      <h5>Population Worksheet</h5>
-                    </div>
-                    <div class="span3">
-                      <h5>Population</h5>
-                    </div>
-                  </div>
-                  <div data-model="true" {{data 'model'}}>
-                    <div class="row-fluid">
-                      <div class="span9">
-                        <ul class="items pbc-item-list">
-                          <li class="pbc-item">
-                            <div class="row-fluid">
-                              <div class="span8">
-                                {{#if_null population_document}}
-                                  &nbsp;
-                                {{else}}
-                                  {{#if_null population_document.link_url}}
-                                    <span class="inner-element">{{population_document.title}}</span>
-                                  {{else}}
-                                    <a class="inner-element" href="{{population_document.link_url}}" target="_blank">{{firstnonempty population_document.title population_document.link_url}}</a>
-                                  {{/if_null}}
-                                {{/if_null}}
-                              </div>
-                              <div class="span4">
-                                <a class="btn btn-mini btn-add toggle-edit-population-doc" href="javascript://">
-                                  {{#if_equals population_document_id ''}}
-                                    <i class="grcicon-add"></i>
-                                  {{else}}
-                                    <i class="grcicon-edit-white"></i>
-                                  {{/if_equals}}
-                                  Reference
-                                </a>
-                              </div>
-                            </div>
-                          </li>
-                          <li class="inline-editing custom-edit inline-edit-population-doc hide" data-doc-type="population">
-                            <form>
-                              <div class="row-fluid">
-                                <div class="span10">
-                                  <input class="input-block-level input-title" name="title" placeholder="Search for Doc Title or URL" type="text" {{ (el) -> el.pbc_autocomplete_documents() }}>
-                                  <!--
-                                  <div class="error">
-                                    There is no Doc or URL in the system that matches your search. Please create a new reference by pushing the + icon to the right
-                                  </div>
-                                  -->
-                                </div>
-                                <div class="span2">
-                                  <a class="btn btn-mini pull-left add-document" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/documents/new" data-target="#ajax-modal-documents-new" rel="tooltip" data-placement="top" title="Create New Sample">
-                                    <i class="grcicon-add-black"></i>
-                                  </a>
-                                </div>
-                              </div>
-                            </form>
-                          </li>
-                        </ul>
-                      </div>
-                      <div class="span3">
-                        <div class="row-fluid sample-widget">
-                          <div class="span5">
-                            <input class="input-block-level" name="population" type="text" value="{{population}}">
-                          </div>
-                          <div class="span7">
-                            <a href="javascript://" class="save-population btn btn-mini pull-left disabled">
-                              Saved
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div data-model="true" {{data 'model'}}>
-                    <div class="row-fluid inner-title">
-                      <div class="span9">
-                        <h5>Sample Worksheet</h5>
-                      </div>
-                      <div class="span3">
-                        <h5>Samples</h5>
-                      </div>
-                    </div>
-                    <div class="row-fluid">
-                      <div class="span9">
-                        <ul class="items pbc-item-list">
-                          <li class="pbc-item">
-                            <div class="row-fluid">
-                              <div class="span8">
-                                {{#if_null sample_worksheet_document}}
-                                  &nbsp;
-                                {{else}}
-                                  {{#if_null sample_worksheet_document.link_url}}
-                                    <span class="inner-element">{{sample_worksheet_document.title}}</span>
-                                  {{else}}
-                                    <a class="inner-element" href="{{sample_worksheet_document.link_url}}" target="_blank">{{firstnonempty sample_worksheet_document.title sample_worksheet_document.link_url}}</a>
-                                  {{/if_null}}
-                                {{/if_null}}
-                              </div>
-                              <div class="span4">
-                                <a class="btn btn-mini btn-add toggle-edit-population-doc" href="javascript://">
-                                  {{#if_equals sample_worksheet_document_id ''}}
-                                    <i class="grcicon-add"></i>
-                                  {{else}}
-                                    <i class="grcicon-edit-white"></i>
-                                  {{/if_equals}}
-                                  Reference
-                                </a>
-                              </div>
-                            </div>
-                          </li>
-                          <li class="inline-editing custom-edit inline-edit-population-doc hide" data-doc-type="sample_worksheet">
-                            <form>
-                              <div class="row-fluid">
-                                <div class="span10">
-                                  <input class="input-block-level input-title" name="title" placeholder="Search for Doc Title or URL" type="text" {{ (el) -> el.pbc_autocomplete_documents() }}>
-                                  <!--
-                                  <div class="error">
-                                    There is no Doc or URL in the system that matches your search. Please create a new reference by pushing the + icon to the right
-                                  </div>
-                                  -->
-                                </div>
-                                <div class="span2">
-                                  <a class="btn btn-mini pull-left add-document" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/documents/new" data-target="#ajax-modal-documents-new" rel="tooltip" data-placement="top" title="Create New Worksheet">
-                                    <i class="grcicon-add-black"></i>
-                                  </a>
-                                </div>
-                              </div>
-                            </form>
-                          </li>
-                        </ul>
-                      </div>
-                      <div class="span3">
-                        <div class="row-fluid sample-widget">
-                          <div class="span5"><input class="input-block-level" name="samples" type="text" value="{{samples}}"></div>
-                          <div class="span7">
-                            <a href="javascript://" class="save-samples btn btn-mini pull-left disabled">
-                              Saved
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div data-model="true" {{data 'model'}}>
-                    <h5>Sample Evidence Collection</h5>
-                    <ul class="items pbc-item-list">
-                      <li class="pbc-item">
-                        <div class="row-fluid">
-                          <div class="span7">
-                            {{#if_null sample_evidence_document}}
-                              &nbsp;
-                            {{else}}
-                              {{#if_null sample_evidence_document.link_url}}
-                                <span class="inner-element">{{sample_evidence_document.title}}</span>
-                              {{else}}
-                                <a class="inner-element" href="{{sample_evidence_document.link_url}}" target="_blank">{{firstnonempty sample_evidence_document.title sample_evidence_document.link_url}}</a>
-                              {{/if_null}}
-                            {{/if_null}}
-                          </div>
-                          <div class="span5">
-                            <div class="pull-right">
-                              <a class="btn btn-mini btn-add toggle-edit-population-doc" href="javascript://">
-                                {{#if_equals sample_evidence_document_id ''}}
-                                  <i class="grcicon-add"></i>
-                                {{else}}
-                                  <i class="grcicon-edit-white"></i>
-                                {{/if_equals}}
-                                Reference
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                      </li>
-                      <li class="inline-editing inline-edit-population-doc hide" data-doc-type="sample_evidence">
-                        <form>
-                          <div class="row-fluid">
-                            <div class="span9">
-                              <input class="input-block-level input-title" name="title" placeholder="Search for Doc Title or URL" type="text" {{ (el) -> el.pbc_autocomplete_documents() }}>
-                              <!--
-                              <div class="error">
-                                There is no Doc or URL in the system that matches your search. Please create a new reference by pushing the + icon to the right
-                              </div>
-                              -->
-                            </div>
-                            <div class="span2">
-                              <a class="btn btn-mini pull-left add-document" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/documents/new" data-target="#ajax-modal-documents-new" title="Create New Collection" rel="tooltip" data-placement="top">
-                                <i class="grcicon-add-black"></i>
-                              </a>
-                            </div>
-                          </div>
-                        </form>
-                      </li>
-                    </ul>
-                  </div>
+                <div class="evidence">
+                  {{> /assets/pbc/population_sample.mustache}}
+                </div>
                 {{/population_sample}}
               {{/if_equals}}
             </div>
           </div>
         </div>
       </div>
-      {{#system}}
+      {{#if system}}
         {{> /assets/pbc/system.mustache}}
-      {{/system}}
+      {{/if}}
+      {{#if_null system}}
+        <div class="span6">
+          <div class="inner-system">
+            <div class="row-fluid response-title-bar">
+              <div class="span12">
+                <h4>Add system or process</h4>
+              </div>
+            </div>
+            <div class="item-main add-response">
+              <div class="system-add">
+                <div class="row-fluid">
+                  <div class="span6 pbc-add-response next-each-other">
+                    <input class="pbc-system-search input-block-level" placeholder="Type to search systems/processes" type="text" autocomplete="off" {{ (el) -> el.pbc_autocomplete() }}>
+                  </div>
+                  <div class="span6">
+                    <!--
+                      <a class="btn btn-add btn-mini top-button" data-modal-class="modal-wide" data-modal-reset="reset" data-placement="top" data-toggle="modal-ajax-form" href="/systems/new" id="tooltip11" rel="tooltip" title="Add new system/process">
+                        <i class="grcicon-add"></i>
+                      </a>
+                    -->
+                    <div class="btn-group">
+                      <a class="btn btn-add btn-mini dropdown-toggle" data-toggle="dropdown" rel="tooltip" title="Add new system/process">
+                        <i class="grcicon-add"></i>
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li class="add-new-item text-compliance">
+                          <a href="/systems/new?system[is_biz_process]=false" data-modal-class="modal-wide" data-modal-reset="reset" data-toggle="modal-ajax-form">
+                            <i class="grcicon-system-color"></i>
+                            <strong class="text-compliance">System</strong>
+                          </a>
+                        </li>
+                        <li class="add-new-item text-compliance">
+                          <a href="/systems/new?system[is_biz_process]=true" data-modal-class="modal-wide" data-modal-reset="reset" data-toggle="modal-ajax-form">
+                            <i class="grcicon-process-color"></i>
+                            <strong class="text-compliance">Process</strong>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {{/if_null}}
 
     </div>
   </li>
 {{/list}}
+</ul>
+{{!</div>}}
