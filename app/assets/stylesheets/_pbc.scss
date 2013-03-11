@@ -264,8 +264,9 @@ h4.pbc-title {
   .inner-system {
     border:1px solid $responsBorder;
     background:darken($responsBgnd,2%);
+    @include transition(background 0.2s);
     &:hover {
-      background:$white;
+      background:lighten($responsBgnd,5%);
     }
     @include border-radius();
     padding:8px 12px;
@@ -599,6 +600,7 @@ ul.tree-structure {
       margin-left:0;
       padding-left:10px;
       padding-right:10px;
+      @include transition(background 0.3s);
       &:hover {
         background:$white;
       }
