@@ -242,12 +242,14 @@ ul.tree-structure {
   }
   .note {
     margin-bottom: 10px;
+    border-bottom:1px solid lighten($gray,20%);
+    line-height:16px;
     .note-trigger {
-      text-transform: uppercase;
+      line-height:16px;
       text-decoration: none;
-      color: $text;
+      font-style:italic;
       font-weight: bold;
-      font-size: 11px;
+      font-size: 12px;
       @include transition(color 0.3s ease);
       i {
         @include opacity(0.4);
@@ -268,11 +270,11 @@ ul.tree-structure {
     }
     .note-content {
       @include clearfix();
+      padding-bottom:6px;
       .rtf {
         float: left;
         width: 90%;
         margin-bottom: 0;
-        font-weight: bold;
         font-style: italic;
         font-size: 12px;
         line-height: 16px;

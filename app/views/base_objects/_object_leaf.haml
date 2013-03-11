@@ -45,15 +45,15 @@
             -if notes.present?
               .note-content
                 -if editable_notes
-                  %a.edit-notes{:href => 'javascript://'}
+                  %a.edit-notes{:href => 'javascript://', :rel => "tooltip" , :title => "Edit Abstract"}
                     %i.grcicon-edit
-                .rtf
-                  =display_as_html(notes)
+                  .rtf
+                    %strong Abstract
+                    =display_as_html(notes)
             -else
               -if editable_notes
                 %a.note-trigger{:href => 'javascript://'}
-                  %i.grcicon-add-black
-                  Abstract
+                  + Add Abstract
       =display_as_html(description)
 
   -elsif title.present?
@@ -72,8 +72,7 @@
       -if include_notes && editable_notes
         .note
           %a.note-trigger{:href => 'javascript://'}
-            %i.grcicon-add-black
-            Abstract
+            + Add Abstract
       %i No description
 
   -elsif (description.present? || notes.present?)
@@ -96,8 +95,6 @@
         %span.code
           =code
         -if include_notes
-          %br
-          %br
           -if instance.has_attribute? notes_attr
             .note
               -if notes.present?
@@ -106,12 +103,12 @@
                     %a.edit-notes{:href => 'javascript://'}
                       %i.grcicon-edit
                   .rtf
+                    %strong Abstract
                     =display_as_html(notes)
               -else
                 -if editable_notes
                   %a.note-trigger{:href => 'javascript://'}
-                    %i.grcicon-add-black
-                    Abstract
+                    + Add Abstract
 
   -else
     -# Neither (shouldn't happen)
