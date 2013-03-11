@@ -12,6 +12,9 @@
   %h1.governance
     .grcobject.governance{:rel => "tooltip", :'data-placement'=>"bottom", :title => instance.meta_kind.to_s.titleize}
       %i{ :class => "grcicon-#{instance.meta_kind}" }
+    %span
+      %strong=instance.meta_kind.to_s.titleize
+      \: 
     =instance.title
 
 -content_for :page_help, 'directive'
