@@ -376,6 +376,19 @@ class DirectivesController < BaseObjectsController
     import
   end
 
+  def sections
+    @sections = @directive.sections.includes(:controls => :implementing_controls)
+    if params[:s]
+      @sections = @sections.fulltext_search(params[:s])
+    end
+    @sections = allowed_objs(@sections.all.sort_by(&:slug_split_for_sort), :read)
+    respond_to do |format|
+      format.html do
+        render :layout => nil, :locals => { :sections => @sections }
+      end
+    end
+  end
+
   def section_controls
     if @directive.company?
       @sections = @directive.controls.includes(:implemented_controls => { :control_sections => :section }).map { |cc| cc.implemented_controls.map { |ic| ic.control_sections.map { |cs| cs.section } }.flatten }.flatten.uniq

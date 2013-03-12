@@ -49,6 +49,9 @@ class ControlsController < BaseObjectsController
     if params[:company].present?
       @controls = @controls.joins(:directive).where(Directive.arel_table[:company].eq(true))
     end
+    if params[:directive_id].present?
+      @controls = @controls.where(:directive_id => params[:directive_id])
+    end
     if params[:program_id].present?
       @controls = @controls.joins(:directive => :program_directives).where(:program_directives => { :program_id => params[:program_id] })
     end
