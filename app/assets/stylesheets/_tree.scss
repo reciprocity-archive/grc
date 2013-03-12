@@ -46,6 +46,9 @@ ul.single-row-tabs {
 }
 ul.tree-structure {
   @include reset-list();
+  &.single-row-tabs {
+    margin-right: 7px;
+  }
   &.one-line-structure {
     .title {
       @include oneline();
@@ -420,7 +423,6 @@ ul.tree-structure {
     }
   }
   &.simple {
-    margin-right: 7px;
     .code {
       background: none;
       @include border-radius(0);
