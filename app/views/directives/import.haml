@@ -6,11 +6,12 @@
     %li=link_to "dashboard", programs_dash_path
     %li=link_to @directive.title, flow_directive_path(@directive)
     %li Import
-    
+
   %h1
-    Import Program or Policy
+    Import #{@directive.section_meta_kind.to_s.titleize.pluralize}
 
 .container-fluid
   .row-fluid
     =render :partial => 'import',
-            :layout => 'layouts/widget_box'
+            :layout => 'layouts/widget_box',
+            :locals => { :directive => @directive }

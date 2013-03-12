@@ -26,6 +26,8 @@ class Program < ActiveRecord::Base
   validates :title,
     :presence => { :message => "needs a value" }
 
+  after_create :create_stealth_directive_for_company_controls
+
   def display_name
     slug
   end
@@ -74,5 +76,13 @@ class Program < ActiveRecord::Base
     end
 
     data
+  end
+
+  def create_stealth_directive_for_company_controls
+    if self.directives.count == 0
+      self.directives.create(
+        :title => "Thou shalt use Company Controls",
+        :kind => "Company Controls Policy")
+    end
   end
 end

@@ -10,7 +10,7 @@ class Directive < ActiveRecord::Base
 
   KINDS = [
     "Regulation",
-    "Company Controls",
+    "Company Controls Policy",
     "Company Policy",
     "Org Group Policy",
     "Data Asset Policy",
@@ -24,8 +24,7 @@ class Directive < ActiveRecord::Base
   META_KINDS = {
     :regulation => [ "Regulation" ],
     :library    => [ "Company Library", "Fed Contract Library" ],
-    :company_controls => [ "Company Controls" ],
-    :policy     => [ "Company Policy", "Org Group Policy", "Data Asset Policy", "Product Policy", "Contract-Related Policy" ],
+    :policy     => [ "Company Policy", "Org Group Policy", "Data Asset Policy", "Product Policy", "Contract-Related Policy", "Company Controls Policy" ],
     :contract   => [ "Contract" ],
   }
 
@@ -51,8 +50,17 @@ class Directive < ActiveRecord::Base
   validates :title,
     :presence => { :message => "needs a value" }
 
+  def self.without_stealth_directives
+    joins(:program_directives => :programs).
+    where(:programs => { :kind => "Directive" })
+  end
+
+  def is_stealth_directive?
+    company_controls? && programs.count == 1 && programs.first.company_controls?
+  end
+
   def company_controls?
-    Directive.meta_kind_for(kind) == :company_controls
+    kind == "Company Controls Policy"
   end
 
   def contract?
