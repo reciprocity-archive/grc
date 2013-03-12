@@ -51,7 +51,7 @@
     =error_messages_inline(f, :url)
 
 .row-fluid
-  %label{:for => "section-notes"} Notes:
+  %label{:for => "section-notes"} Abstract
 .row-fluid{"control-group" => ""}
   .span12.wysiwyg-area{:class => error_class(f, :notes)}
     %textarea#section-notes.span12.double.wysihtml5{:placeholder => "", :rows => "4", :name => 'section[notes]'}=f.object.notes
