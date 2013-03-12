@@ -298,7 +298,7 @@ jQuery(function($) {
 
 jQuery(function($) {
   // Onload trigger tab with 'active' class or default to first tab
-  $('.tabbable > ul').each(function(i, el) {
+  $('.tabbable > ul').filter(":not(.quick-search-results .tabbable > ul)").each(function(i, el) {
     var $tab = $(this).find('> li.active');
     if (!$tab.length)
       $tab = $(this).find('> li:first-child');

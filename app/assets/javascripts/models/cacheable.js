@@ -48,7 +48,16 @@ can.Model("can.Model.Cacheable", {
     }
     return pargs;
   }
-
+  , findRelated : function(params) {
+    return $.ajax({
+      url : "/relationships/related_objects.json"
+      , data : {
+        oid : params.id
+        , otype : params.otype || this.shortName
+        , related_model : typeof params.related_model === "string" ? params.related_model : params.related_model.shortName
+      }
+    });
+  }
 }, {
   init : function() {
     var obj_name = this.constructor.root_object;

@@ -6,7 +6,11 @@
           <i class="grcicon-{{object_type}}"></i>
           {{object_display}}
           <span>
-            {{list.length}}
+            {{#if is_related}}
+              {{related_count}}
+            {{else}}
+              {{list.length}}
+            {{/if}}
           </span>
         </h2>
       </div>
