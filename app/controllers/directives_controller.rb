@@ -79,6 +79,7 @@ class DirectivesController < BaseObjectsController
       @directives = @directives.joins(:program_directives).where(:program_directives => { :program_id => params[:program_id] })
     end
     @directives = allowed_objs(@directives.all, :read)
+    @directives = @directives.reject(&:is_stealth_directive?)
 
     respond_to do |format|
       format.html do
