@@ -24,11 +24,11 @@
     %li
       %a{:href => edit_flow_directive_path(instance), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide', :title => "Edit #{instance.meta_kind.to_s.titleize}"}
         %i.grcicon-edit
-        Edit #{instance.meta_kind.to_s.titleize}
+        %span Edit #{instance.meta_kind.to_s.titleize}
     %li.btn-group
       %a.dropdown-toggle{:href => '#', :'data-toggle' => 'dropdown'}
         %i.grcicon-imp-exp
-        Import/Export
+        %span Import/Export
         %span.caret
       %ul.dropdown-menu
         %li.divider
