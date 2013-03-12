@@ -32,6 +32,7 @@ $.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
 
   var quickHash = function(str, seed) {
     var bitval = seed || 1;
+    str = str || "";
     for(var i = 0; i < str.length; i++)
     {
       bitval *= str.charCodeAt(i);
@@ -420,6 +421,14 @@ Mustache.registerHelper("with_line_breaks", function(content) {
     return value.replace(/\n/g, "<br />");
   else
     return value;
+});
+
+Mustache.registerHelper("related_count", function() {
+  var objects = 0;
+  can.each(this.list, function(item) {
+    objects += item.related_objects.length;
+  });
+  return objects.toString();
 });
 
 })(this, jQuery, can);

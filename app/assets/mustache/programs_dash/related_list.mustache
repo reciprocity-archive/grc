@@ -1,0 +1,48 @@
+<ul class="tree-structure simple single-row-tabs">
+{{#list}}
+  <li class="tab-title-holder">
+    <h3 class="tab-title">
+      {{#relationship_type}}
+      {{title}}
+      <a class="widgetbtn pull-right" href="/relationships/list_edit?object_id={{parent_id}}&amp;object_type={{parent_type}}&amp;related_model={{object_type}}&amp;related_side=destination&amp;relationship_type={{id}}" data-toggle="modal-ajax-relationship-selector" data-modal-reset="reset" data-modal-class="modal-wide" data-list-target="refresh">
+        {{{withattr 'data-tab-target' '#related-objects-{id}' }}}
+        <i class="grcicon-link"></i>
+      </a>
+      {{/relationship_type}}
+    </h3>
+  </li>
+  {{#related_objects}}
+  {{#object}}
+  <li>
+    {{#pack this tooltip_view=tooltip_view object_type=object_type object_display=object_display object_route=object_route}}
+    <a data-popover-trigger="sticky-hover" data-popover-trigger="sticky-hover" data-sticky-popover="true" data-content="{{render tooltip_view}}">
+      {{{withattr "href" "/{object_route}/{id}" "data-original-title" "<div class='row-fluid'><div class='span10'><h3><i class='grcicon-{object_type}-color'></i>{slug} <span>{title}</span></h3></div><div class='span2'><a class='btn btn-mini pull-right' href='/{object_route}/{id}' rel='tooltip' data-original-title='View/Edit {object_display}'><i class='grcicon-goto'></i></a></div></div>" }}}
+      <div class="row-fluid">
+        <div class="span12">
+          <div class="item-identifier">
+            <span class="key">
+              <span>{{prefix}}</span> <span>{{slug}}</span>
+            </span>
+            <span class="name">
+              {{title}}
+            </span>
+          </div>
+        </div>
+      </div>
+    </a>
+    {{/pack}}
+  </li>
+  {{/object}}
+  {{/related_objects}}
+  {{^related_objects}}
+  <li class="no-result">
+    No results
+  </li>
+  {{/related_objects}}
+{{/list}}
+{{^list}}
+  <li class="no-result">
+    No results
+  </li>
+{{/list}}
+</ul>

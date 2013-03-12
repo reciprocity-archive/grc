@@ -26,7 +26,7 @@ can.Control("CMS.Controllers.AddWidget", {
     var that = this;
     this.options.menu_tree = {categories : []};
     //build the menu from the menu tree.  Build the menu tree if it doesn't exist.
-    var tabs = $(".tab-content .tab-pane").filter("[id]");
+    var tabs = $(".tab-content .tab-pane");
     var categories_index = {};
     tabs.each(function() {
       var ref = $(this).attr("id")
