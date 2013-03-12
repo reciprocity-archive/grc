@@ -112,7 +112,8 @@
   
   .widget {
     .header,
-    .filter {
+    .filter,
+    .tree-structure .item-main {
       .row-fluid {
         [class*="span"] {
           display: block;
@@ -183,8 +184,18 @@
         }
       }
     }
-  }
-  .widget {
+    .tree-structure {
+      &.pbc
+      .item-main {
+        .row-fluid {
+          [class*="span"] {
+            float: none;
+            width: 100%;
+            margin-left: 0;
+          }
+        }
+      }
+    }
     .ui-resizable-handle {
       height:12px;
       border-top:1px solid darken($lightGray,5%);
@@ -196,4 +207,5 @@
       @include opacity(0.8);
     }
   }
+  
 }

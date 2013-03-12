@@ -20,12 +20,12 @@
     %li{:class => "items-#{@pbc_list.requests.count}"}
       %a{ :href => import_flow_pbc_list_path(@pbc_list) }
         %i.grcicon-imp-exp
-        Import Requests
+        %span Import Requests
     -if @pbc_list.requests.count != 0
       %li
         %a{ :href => export_flow_pbc_list_path(@pbc_list), :'data-toggle' => 'modal-ajax' }
           %i.grcicon-export
-          Export Requests
+          %span Export Requests
 
 .container-fluid
   .row-fluid
