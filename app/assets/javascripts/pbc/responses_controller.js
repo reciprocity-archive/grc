@@ -131,7 +131,18 @@ can.Control("CMS.Controllers.Responses", {
         ev.preventDefault();
       }
     }
-    , ".inline-add-person personSelected" : object_event("person")
+    , ".inline-add-person personSelected" : function(el, ev, data) {
+      if(!data.id) {
+        el.find(".add-person").click();
+        $(".modal:visible").one("loaded", function() {
+          can.each(Object.keys(data), function(key) {
+            $("#person_" + key).val(data[key]);
+          });
+        });
+      } else {
+        object_event("person").apply(this, arguments);
+      }
+    }
     , ".inline-add-person modal:success" : object_event("person")
     , ".inline-add-document documentSelected" : object_event("document")
     , ".inline-add-document modal:success" : object_event("document")

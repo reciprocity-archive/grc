@@ -12,6 +12,9 @@ class Document < ActiveRecord::Base
   attr_accessible :link, :title, :description, :type, :kind, :language, :year
 
   has_many :object_documents, :dependent => :destroy
+  has_many :population_samples, :dependent => :nullify, :foreign_key => "population_document_id"
+  has_many :population_samples, :dependent => :nullify, :foreign_key => "sample_worksheet_document_id"
+  has_many :population_samples, :dependent => :nullify, :foreign_key => "sample_evidence_document_id"
 
   belongs_to :type, :class_name => 'Option', :conditions => { :role => 'document_type' }
   belongs_to :kind, :class_name => 'Option', :conditions => { :role => 'reference_type' }
