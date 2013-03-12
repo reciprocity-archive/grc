@@ -134,7 +134,6 @@ can.Control("CMS.Controllers.PBCModals", {
       $(el).find("input[name=fromdate]").val(zeropad(n.getMonth() + 1) + "/" + zeropad(n.getDate()) + "/" + n.getFullYear());
       $(el).find("select[name=fromtime]").val(zeropad(n.getHours()) + "0000");
       n = new Date(n.getTime() + 3600000);
-      $(el).find("input[name=todate]").val(zeropad(n.getMonth() + 1) + "/" + zeropad(n.getDate()) + "/" + n.getFullYear());
       $(el).find("select[name=totime]").val(zeropad(n.getHours()) + "0000");
 
       this.generate_calendar_href($(el).find("input[name=fromdate]"), ev);    
@@ -145,7 +144,7 @@ can.Control("CMS.Controllers.PBCModals", {
       var form = $(el).closest("form")[0];
       var href = cal_link.attr("href");
 
-      if(form.fromdate.value === "" || form.todate.value === "")
+      if(form.fromdate.value === "")
         return;
 
       function rearrange(a) {
@@ -220,7 +219,7 @@ can.Control("CMS.Controllers.PBCModals", {
         , "dates="
         + toUTCTime(rearrange(form.fromdate.value.split('/')).join(''), form.fromtime.value)
         + "/"
-        + toUTCTime(rearrange(form.todate.value.split('/')).join(''), form.totime.value)
+        + toUTCTime(rearrange(form.fromdate.value.split('/')).join(''), form.totime.value)
         )
       cal_link.attr("href", href);
     }
