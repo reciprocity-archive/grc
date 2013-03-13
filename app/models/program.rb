@@ -19,6 +19,8 @@ class Program < ActiveRecord::Base
   has_many :program_directives, :dependent => :destroy
   has_many :directives, :through => :program_directives
 
+  has_many :cycles, :dependent => :destroy
+
   is_versioned_ext
 
   sanitize_attributes :description
