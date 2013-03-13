@@ -53,12 +53,12 @@
     - users = f.object.response.people.map do |user| "&add=" + user.email end.join ''
     %a.btn.btn-success.create-gcal-event{ :target => "_blank", 
      :href => "http://www.google.com/calendar/event?" + { :action => "TEMPLATE" ,
-     :text=> ["hold - audit response using ",
+     :text=> f.object.response.system.nil? ? "hold - audit response" : ["hold - audit response using ",
               f.object.response.system.default_slug_prefix.titlecase,
               ': ',
               f.object.response.system.title].join(''), 
       :dates => Time.now.beginning_of_hour.+(3600).utc.strftime("%Y%m%dT%H%M%SZ") + "/" + Time.now.beginning_of_hour.+(7200).utc.strftime("%Y%m%dT%H%M%SZ"),
-      :details=> f.object.response.system.description, 
+      :details=> f.object.response.system.nil? ? "" : f.object.response.system.description, 
       :trp => "false", 
       :sprop=> "website:" + request.url, 
       "sprop" => "name:" + request.domain }.to_query() + users } Create calendar event
