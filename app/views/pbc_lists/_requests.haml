@@ -27,35 +27,40 @@
   .widget-filters
     -if has_items
       .form-inline
-        %label.label-title
-          %strong
-            Filter by
-        %label
-          Request Type
-        %select{ :disabled => !has_items, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'type-name' }
-          %option{ :value => 'any', :selected => 'selected' } All
-          %option Documentation
-          %option Interview
-          %option Population Sample
-        %label
-          Status
-        %select{ :disabled => !has_items, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'status' }
-          %option{ :value => 'any', :selected => 'selected' } All
-          -Request.statuses.each do |status|
-            %option=status
-        %label
-          Assignee
-        %select{ :disabled => !has_items, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'person' }
-          %option{ :value => 'any', :selected => 'selected' } All
-          -pbc_list.requests.all.map { |req| [req.company_responsible.presence, req.auditor_responsible.presence] }.flatten.compact.uniq.sort.each do |name|
-            %option=name
-        %label
-          On or After
-        %input#datepicker-control-date.date{:type => "text",  :placeholder => "MM/DD/YYYY", :disabled => !has_items, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'date-requested' }
-        :javascript
-          $('#datepicker-control-date').datepicker();
-        %button.btn.pull-right{ :'data-toggle' => 'filter-reset' , :rel => "tooltip", :"data-placement" => "left", :title => "Reset filters" }
-          Reset
+        .row-fluid
+          .span3
+            %label.label-title
+              %strong
+                Filter by
+            %label
+              Request Type
+            %select{ :disabled => !has_items, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'type-name' }
+              %option{ :value => 'any', :selected => 'selected' } All
+              %option Documentation
+              %option Interview
+              %option Population Sample
+          .span3
+            %label
+              Status
+            %select{ :disabled => !has_items, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'status' }
+              %option{ :value => 'any', :selected => 'selected' } All
+              -Request.statuses.each do |status|
+                %option=status
+          .span3
+            %label
+              Assignee
+            %select{ :disabled => !has_items, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'person' }
+              %option{ :value => 'any', :selected => 'selected' } All
+              -pbc_list.requests.all.map { |req| [req.company_responsible.presence, req.auditor_responsible.presence] }.flatten.compact.uniq.sort.each do |name|
+                %option=name
+          .span3
+            %label
+              On or After
+            %input#datepicker-control-date.date{:type => "text",  :placeholder => "MM/DD/YYYY", :disabled => !has_items, :'data-toggle' => 'filter-requests', :'data-filter-attribute' => 'date-requested' }
+            :javascript
+              $('#datepicker-control-date').datepicker();
+            %button.btn.btn-reset{ :'data-toggle' => 'filter-reset' , :rel => "tooltip", :"data-placement" => "left", :title => "Reset filters" }
+              Reset
 
 -if has_items && !pbc_is_read_only
   %section.headline

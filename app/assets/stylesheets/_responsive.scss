@@ -208,4 +208,25 @@
     }
   }
   
+  .widget-filters {
+    select {
+      margin-bottom: 20px;
+    }
+    input {
+      margin-bottom: 20px;
+    }
+    .btn-reset {
+      float: none;
+      clear: both;
+      display: block;
+    }
+    label {
+      &.label-title {
+        float: none;
+        clear: both;
+        padding-bottom: 10px;
+      }
+    }
+  }
+  
 }
