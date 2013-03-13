@@ -89,7 +89,11 @@ can.Control("CMS.Controllers.Responses", {
             this.element.closest(".main-item").find(".pbc-request-count").html(this.list.length + " " + (this.list.length - 1 ? "Responses" : "Response"));
             $(".pbc-responses > .item[data-id=" + response.id + "] .openclose").openclose("open").height();
             setTimeout(function() {
-              $(document.body).scrollTop($(".pbc-responses > .item[data-id=" + response.id + "]").offset().top);
+              var $body = $(document.body)
+              , $item = $(".pbc-responses > .item[data-id=" + response.id + "]")
+              if(-$body.scrollTop() + $item.height() + $item.offset().top > $(window).height()) {
+                $body.scrollTop($item.offset().top - $(window).height() + $item.height());
+              }
             }, 200);
             this.constructor.one_created(true);
         }
