@@ -1,5 +1,10 @@
 -content_for :widget_title do
-  Systems that rely on this System
+  Systems/Processes that rely on this
+  -if system.is_biz_process
+    Process
+  -else
+    System
+  
 
 -content_for :widget_help, 'system_super_systems'
 
