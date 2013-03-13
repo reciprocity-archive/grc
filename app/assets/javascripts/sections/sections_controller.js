@@ -16,6 +16,7 @@
 	    draw_list : function(list) {
 	    	if(list) {
 	    		this.list = list;
+          list.sort(window.natural_comparator);
 	    	}
     		var x = can.view(this.options.list, {children : this.list , "id" : this.options.id });
 	        this.element.html(x);

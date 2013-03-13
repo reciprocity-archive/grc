@@ -89,7 +89,11 @@ can.Control("CMS.Controllers.Responses", {
             this.element.closest(".main-item").find(".pbc-request-count").html(this.list.length + " " + (this.list.length - 1 ? "Responses" : "Response"));
             $(".pbc-responses > .item[data-id=" + response.id + "] .openclose").openclose("open").height();
             setTimeout(function() {
-              $(document.body).scrollTop($(".pbc-responses > .item[data-id=" + response.id + "]").offset().top);
+              var $body = $(document.body)
+              , $item = $(".pbc-responses > .item[data-id=" + response.id + "]")
+              if(-$body.scrollTop() + $item.height() + $item.offset().top > $(window).height()) {
+                $body.scrollTop($item.offset().top - $(window).height() + $item.height());
+              }
             }, 200);
             this.constructor.one_created(true);
         }
@@ -131,7 +135,18 @@ can.Control("CMS.Controllers.Responses", {
         ev.preventDefault();
       }
     }
-    , ".inline-add-person personSelected" : object_event("person")
+    , ".inline-add-person personSelected" : function(el, ev, data) {
+      if(!data.id) {
+        el.find(".add-person").click();
+        $(".modal:visible").one("loaded", function() {
+          can.each(Object.keys(data), function(key) {
+            $("#person_" + key).val(data[key]);
+          });
+        });
+      } else {
+        object_event("person").apply(this, arguments);
+      }
+    }
     , ".inline-add-person modal:success" : object_event("person")
     , ".inline-add-document documentSelected" : object_event("document")
     , ".inline-add-document modal:success" : object_event("document")

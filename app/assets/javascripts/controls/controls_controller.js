@@ -47,7 +47,7 @@
       if(list) {
         this.list = list;
       } 
-        this.options.observer = new can.Observe({list : this.list, show : this.options.show });
+        this.options.observer.attr({list : this.list, show : this.options.show });
         var x = can.view(this.options.list, this.options.observer);
         this.element.html(x);
     }
@@ -104,7 +104,29 @@
       el.attr("oid", newVal ? newVal.id : "");
     }
 
+    , "{observer.list} change" : function(el, ev, newVal, oldVal) {
+      el.sort(this.natural_comparator);
+    }
 
+    , natural_comparator : function(a, b) {
+      a = a.slug.toString();
+      b = b.slug.toString();
+      if(a===b) return 0;
+
+      a = a.replace(/(?=\D\d)(.)|(?=\d\D)(.)/g, "$1$2|").split("|");
+      b = b.replace(/(?=\D\d)(.)|(?=\d\D)(.)/g, "$1$2|").split("|")
+
+      for(var i = 0; i < Math.max(a.length, b.length); i++) {
+        if(+a[i] === +a[i] && +b[i] === +b[i]) {
+          if(+a[i] < +b[i]) return -1;
+          if(+b[i] < +a[i]) return 1;
+        } else { 
+          if(a[i] < b[i]) return -1;
+          if(b[i] < a[i]) return 1;
+        }
+      }
+      return 0;
+    }
 
   });
 

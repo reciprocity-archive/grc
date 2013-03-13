@@ -37,6 +37,27 @@ jQuery(function($) {
       return zindex + 10;
     } 
 
+
+  window.natural_comparator = function(a, b) {
+    a = a.slug.toString();
+    b = b.slug.toString();
+    if(a===b) return 0;
+
+    a = a.replace(/(?=\D\d)(.)|(?=\d\D)(.)/g, "$1$2|").split("|");
+    b = b.replace(/(?=\D\d)(.)|(?=\d\D)(.)/g, "$1$2|").split("|")
+
+    for(var i = 0; i < Math.max(a.length, b.length); i++) {
+      if(+a[i] === +a[i] && +b[i] === +b[i]) {
+        if(+a[i] < +b[i]) return -1;
+        if(+b[i] < +a[i]) return 1;
+      } else { 
+        if(a[i] < b[i]) return -1;
+        if(b[i] < a[i]) return 1;
+      }
+    }
+    return 0;
+  }
+
   // put the related widget on the related element.
   $("#related").cms_controllers_related({});
 
@@ -594,6 +615,13 @@ jQuery(function($) {
   $('body').on('change', '#sortTypeSelect', function(e) {
     trigger_sort();
   });
+
+  $("body").on("list-add-item", '[id^=ajax-modal-controls-list_select]', function(e, data) {
+    $(this).find("[data-id=" + data.id + "]").click();
+  });
+
+
+
 });
 
 if(!/\/mapping/.test(window.location.href)) {

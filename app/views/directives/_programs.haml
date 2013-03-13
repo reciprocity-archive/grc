@@ -3,6 +3,16 @@
   Programs using #{directive.meta_kind.to_s.titleize}
   %span=directive.programs.count
 
+-content_for :widget_buttons do
+  -# for story https://www.pivotaltracker.com/story/show/45635355
+  -#.filter  
+    .row-fluid
+      .span12
+        .pull-right
+          .btn.btn-add
+            %i.grcicon-edit-white
+            Manage Programs
+
 -content_for :widget_help, 'directive_programs'
 
 -content_for :widget_id, 'directive_programs_widget'
