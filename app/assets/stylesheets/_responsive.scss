@@ -475,6 +475,7 @@
       }
       span {
         display: block;
+        @include oneline();
         &.left-space {
           margin-right: 0;
         }
@@ -488,5 +489,9 @@
         width: auto;
       }
     }
+  }
+  
+  .request-date {
+    text-align:left;
   }
 }
