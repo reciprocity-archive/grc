@@ -22,7 +22,7 @@
             .span12
               .oneline
                 %span.addition-info
-                  <%= person.name || '&nbsp' %>
+                  <%= person.name && person.name.trim() || person.email || '&nbsp' %>
                   %span.role
                     <%= role %>
 
@@ -36,6 +36,6 @@
               .span12
                 .oneline
                   %span.addition-info
-                    =item.name || '&nbsp;'.html_safe
+                    =item.name.presence || item.email.presence || '&nbsp;'.html_safe
                     %span.role
                       =object_item.role

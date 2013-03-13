@@ -26,7 +26,7 @@ CmsRails::Application.routes.draw do
     end
   end
 
-  resources :program_directives, :as => 'flow_program_directives', :only => [:index, :create] do
+  resources :program_directives, :as => 'flow_program_directives', :only => [:index, :create, :destroy] do
     collection do
       get 'list_edit'
     end

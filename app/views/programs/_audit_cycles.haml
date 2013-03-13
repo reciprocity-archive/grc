@@ -1,4 +1,4 @@
--cycles = Cycle.joins(:directive => :program_directives).where(:program_directives => { :program_id => program.id }).order('start_at DESC')
+-cycles = Cycle.where(:program_id => program.id).order('start_at DESC')
 
 -content_for :widget_title do
   %i.grcicon-audit-white

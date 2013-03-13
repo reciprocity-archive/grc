@@ -29,8 +29,9 @@
     -if params[:program_id].present?
       =hidden_field_tag :program_id, params[:program_id]
       -directives = directives.joins(:program_directives).where(:program_directives => { :program_id => params[:program_id] })
-    -directives = directives.all_company_controls_first
-    -directives = directives.reject(&:is_stealth_directive?)
+    -else
+      -directives = directives.all_company_controls_first
+      -directives = directives.reject(&:is_stealth_directive?)
     -if directives.size > 1
       =wrapped_select f, :span2, :directive_id, directives.map { |p| [p.slug, p.id] }, :selected => f.object.directive_id, :include_blank => false
     -elsif directives.size == 1
