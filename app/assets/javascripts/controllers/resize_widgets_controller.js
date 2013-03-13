@@ -181,9 +181,10 @@ can.Control("CMS.Controllers.ResizeWidgets", {
         }
       });
     });
-    if(dirty)
-     model.save();
-
+    if(dirty) {
+      $c.find("section[id]").each(function() { that.ensure_minimum(this); });
+      model.save();
+    }
   }
 
   , divide_evenly : function(n) {
