@@ -111,8 +111,7 @@ can.Control("CMS.Controllers.ResizeWidgets", {
       } else {
         widths = this.sensible_default($children.length);
       }
-      this.options.model.attr(this.options.columns_token).attr($c.attr("id"), widths);
-      this.options.model.save();
+      this.options.model.setColumnWidths(this.options.page_token, $c.attr("id"), widths);
     }  
 
 
@@ -219,7 +218,7 @@ can.Control("CMS.Controllers.ResizeWidgets", {
 
   , "{model} change" : function(el, ev, attr, how, newVal, oldVal) {
     var parts = attr.split(".");
-    if(parts.length > 1 && parts[0] === this.options.columns_token && parts[1] === $(this.element).attr("id")) {
+    if(parts.length > 1 && parts[0] === this.options.columns_token && parts[2] === $(this.element).attr("id")) {
       this.update_columns();
       this.options.model.save();
     }
@@ -230,7 +229,6 @@ can.Control("CMS.Controllers.ResizeWidgets", {
   }
 
   , adjust_column : function(container, border_idx, adjustment) {
-    var containers = this.options.model[this.options.columns_token];
     var col = this.getWidthsForSelector(container);
     var adjustment = this.normalizeAdjustment(col, border_idx, adjustment);
 
@@ -258,7 +256,7 @@ can.Control("CMS.Controllers.ResizeWidgets", {
   }
 
   , getWidthsForSelector : function(sel) {
-    return this.options.model.attr(this.options.columns_token).attr($(sel).attr("id"));
+    return this.options.model.getColumnWidths(this.options.page_token, $(sel).attr("id"));
   }
 
   , getLeftOffset : function(pageX) {

@@ -73,6 +73,30 @@ can.Model.LocalStorage("CMS.Models.DisplayPrefs", {
     return can.getObject("heights." + page_id + "." + widget_id, this);
   }
 
+  , getColumnWidths : function(page_id, content_id) {
+    return can.getObject("columns." + page_id + "." + content_id, this);
+  }
+
+  , getColumnWidthsForSelector : function(page_id, sel) {
+    return this.getColumnWidths(page_id, $(sel).attr("id"));
+  }
+
+  , setColumnWidths : function(page_id, widget_id, widths) {
+    var cs = this.attr("columns");
+    if(!cs) {
+      cs = new can.Observe(); 
+      this.attr("columns", cs);
+    }
+    var csp = cs.attr(page_id);
+    if(!csp) {
+      csp = new can.Observe(); 
+      cs.attr(page_id, csp);
+    }
+    csp.attr(widget_id, widths);
+    this.autoupdate && this.save();
+    return this;
+  }
+
 });
 
 })(this.can, this.can.$);
