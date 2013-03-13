@@ -1,0 +1,20 @@
+-programs = instance.linked_programs_via_control_mapping
+
+-content_for :widget_title do
+  %i.grcicon-program
+  Programs using these controls
+  %span=programs.count
+
+-content_for :widget_help, 'program_linked_programs'
+
+-content_for :widget_id, 'program_linked_programs_widget'
+
+%ul.tree-structure.simple
+  -programs.each do |program|
+    %li.item-main
+      %a{:href => flow_program_path(program), :class => "block-element", :data => { :'popover-href' => tooltip_flow_program_path(program), :'popover-trigger' => 'sticky-hover'} }
+        .item-title
+          .row-fluid
+            .span12
+              %span.title
+                =program.title
