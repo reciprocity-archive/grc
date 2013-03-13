@@ -10,11 +10,12 @@
         =instance.slug
         %span=instance.title
 
-.row-fluid
-  .span12
-    %h4 Description
-    -if instance.description != ""
-      =display_as_html instance.description
-    -else
-      .rtf
-        %p.no-data No description available
+.popover-inner-content
+  .row-fluid
+    .span12
+      %h4 Description
+      -if instance.description != ""
+        =display_as_html instance.description
+      -else
+        .rtf
+          %p.no-data No description available
