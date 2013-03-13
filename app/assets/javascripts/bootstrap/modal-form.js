@@ -189,7 +189,7 @@
         }
         else {
           var modal_form = $(".modal:visible:last").data("modal_form");
-          if(xhr === modal_form.xhr) {
+          if(modal_form && xhr === modal_form.xhr) {
             delete modal_form.xhr;
             $("[data-toggle=modal-submit]", modal_form.$element)
             .removeAttr("disabled")
