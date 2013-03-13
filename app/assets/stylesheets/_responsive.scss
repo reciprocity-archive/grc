@@ -113,6 +113,7 @@
   .widget {
     .header,
     .filter,
+    .headline,
     .tree-structure .item-main {
       .row-fluid {
         [class*="span"] {
@@ -186,12 +187,178 @@
     }
     .tree-structure {
       &.pbc
-      .item-main {
+      .item-content {
         .row-fluid {
           [class*="span"] {
             float: none;
             width: 100%;
             margin-left: 0;
+          }
+        }
+        .request-main {
+          .rtf {
+            margin-bottom: 10px;
+          }
+        }
+        .pbc-responses {
+          .item-main {
+            .item-title {
+              .row-fluid {
+                [class*="span"] {
+                  display: block;
+                  float: left;
+                  width: 100%;
+                  min-height: 30px;
+                  margin-left: 2.127659574468085%;
+                  *margin-left: 2.074468085106383%;
+                  -webkit-box-sizing: border-box;
+                  -moz-box-sizing: border-box;
+                  box-sizing: border-box;
+                  &:first-child {
+                    margin-left: 0;
+                  }
+                }
+                .span12 {
+                  width: 100%;
+                  *width: 99.94680851063829%;
+                }
+                .span11 {
+                  width: 91.48936170212765%;
+                  *width: 91.43617021276594%;
+                }
+                .span10 {
+                  width: 82.97872340425532%;
+                  *width: 82.92553191489361%;
+                }
+                .span9 {
+                  width: 74.46808510638297%;
+                  *width: 74.41489361702126%;
+                }
+                .span8 {
+                  width: 65.95744680851064%;
+                  *width: 65.90425531914893%;
+                }
+                .span7 {
+                  width: 57.44680851063829%;
+                  *width: 57.39361702127659%;
+                }
+                .span6 {
+                  width: 48.93617021276595%;
+                  *width: 48.88297872340425%;
+                }
+                .span5 {
+                  width: 40.42553191489362%;
+                  *width: 40.37234042553192%;
+                }
+                .span4 {
+                  width: 31.914893617021278%;
+                  *width: 31.861702127659576%;
+                }
+                .span3 {
+                  width: 23.404255319148934%;
+                  *width: 23.351063829787233%;
+                }
+                .span2 {
+                  width: 14.893617021276595%;
+                  *width: 14.840425531914894%;
+                }
+                .span1 {
+                  width: 6.382978723404255%;
+                  *width: 6.329787234042553%;
+                }
+                .controls-row {
+                  [class*="span"] + [class*="span"] {
+                    margin-left: 2.127659574468085%;
+                  }
+                }
+              }
+            }
+          }
+          .item-content {
+            .inner-response {
+              .row-fluid {
+                &.inline-edit-population-doc {
+                  [class*="span"] {
+                    float: none;
+                    width: 100%;
+                    margin-left: 0;
+                    min-height: 20px;
+                  }
+                }
+              }
+            }
+            .inner-response,
+            .inner-system .pbc-item-list {
+              .row-fluid {
+                [class*="span"] {
+                  display: block;
+                  float: left;
+                  width: 100%;
+                  min-height: 30px;
+                  margin-left: 2.127659574468085%;
+                  *margin-left: 2.074468085106383%;
+                  -webkit-box-sizing: border-box;
+                  -moz-box-sizing: border-box;
+                  box-sizing: border-box;
+                  &:first-child {
+                    margin-left: 0;
+                  }
+                }
+                .span12 {
+                  width: 100%;
+                  *width: 99.94680851063829%;
+                }
+                .span11 {
+                  width: 91.48936170212765%;
+                  *width: 91.43617021276594%;
+                }
+                .span10 {
+                  width: 82.97872340425532%;
+                  *width: 82.92553191489361%;
+                }
+                .span9 {
+                  width: 74.46808510638297%;
+                  *width: 74.41489361702126%;
+                }
+                .span8 {
+                  width: 65.95744680851064%;
+                  *width: 65.90425531914893%;
+                }
+                .span7 {
+                  width: 57.44680851063829%;
+                  *width: 57.39361702127659%;
+                }
+                .span6 {
+                  width: 48.93617021276595%;
+                  *width: 48.88297872340425%;
+                }
+                .span5 {
+                  width: 40.42553191489362%;
+                  *width: 40.37234042553192%;
+                }
+                .span4 {
+                  width: 31.914893617021278%;
+                  *width: 31.861702127659576%;
+                }
+                .span3 {
+                  width: 23.404255319148934%;
+                  *width: 23.351063829787233%;
+                }
+                .span2 {
+                  width: 14.893617021276595%;
+                  *width: 14.840425531914894%;
+                }
+                .span1 {
+                  width: 6.382978723404255%;
+                  *width: 6.329787234042553%;
+                }
+                .controls-row {
+                  [class*="span"] + [class*="span"] {
+                    margin-left: 2.127659574468085%;
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -225,6 +392,20 @@
         float: none;
         clear: both;
         padding-bottom: 10px;
+      }
+    }
+  }
+  
+  .pbc-ca {
+    .ca-fields {
+      a {
+        display: inline-block;
+      }
+      span {
+        display: block;
+        &.left-space {
+          margin-right: 0;
+        }
       }
     }
   }
