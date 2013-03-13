@@ -334,6 +334,14 @@ jQuery(function($) {
 });
 
 jQuery(function($) {
+ function refresh_page() {
+    setTimeout(can.proxy(window.location.reload, window.location), 10);
+  }
+
+  $('body').on('ajax:complete', '[data-ajax-complete="refresh"]', refresh_page);
+});
+
+jQuery(function($) {
   $('body').on('change', 'form.import input#upload', function(e) {
     var $this = $(this)
       , value = $this.val()

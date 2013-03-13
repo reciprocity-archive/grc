@@ -6,7 +6,7 @@
         =program.slug
         %span=program.title
     .span2
-      %a.btn.btn-mini.pull-right{:href => flow_program_path(program), :rel => "tooltip", :title => "View/Edit Program"} 
+      %a.btn.btn-mini.pull-right{:href => flow_program_path(program), :rel => "tooltip", :title => "View/Edit Program"}
         %i.grcicon-goto
 
 .row-fluid
@@ -18,10 +18,12 @@
       .rtf
         %p.no-data No description available
 
--# for story https://www.pivotaltracker.com/story/show/45635355        
--#.row-fluid
-  .span12.popoverfooter
-    %a{:href=>"#"}
-      %i.grcicon-remove
-      Unlink from 
-      =program.slug
+-if params[:directive_id].present?
+  -program_directive = program.program_directives.where(:directive_id => params[:directive_id]).first
+  -if program_directive
+    .row-fluid
+      .span12.popoverfooter
+        %a{ :href => flow_program_directive_path(program_directive), :'data-remote' => true, :'data-method' => 'DELETE', :'data-ajax-complete' => 'refresh' }
+          %i.grcicon-remove
+          Unlink from
+          =program.slug
