@@ -247,6 +247,13 @@ h1, h2, h3, h4, h5, h6 {
   &.expandable {
     cursor:pointer;
   }
+  &.expand-on-hover {
+    cursor:pointer;
+  }
+}
+
+.description.inhover {
+  cursor:pointer;
 }
 
 // RTF
