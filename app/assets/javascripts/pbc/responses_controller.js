@@ -291,7 +291,13 @@ can.Control("CMS.Controllers.Responses", {
       .done(function(r) {
         //after create, go straight to the first form field
         setTimeout(function() {
-           $this.closest("[data-filter-id]").find("[data-id=" + r.id + "]").find(".btn-add:first").click()
+          var $newitem = $this.closest("[data-filter-id]").find("[data-id=" + r.id + "]");
+          
+          if($newitem.find(".inline-edit-population-doc").length) {
+            $newitem.find(".inline-edit-population-doc input:visible:first").focus();
+          } else {
+            $newitem.find(".btn-add:first").click();
+          }
         }, 200);
       });
 
