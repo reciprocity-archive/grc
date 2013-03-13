@@ -2,26 +2,27 @@
 -has_items = pbc_list.requests.count != 0
 
 -if !pbc_is_read_only
-  .row-fluid
-    .span10
-      %h3.pull-left.normal-font
-        Requests (#{pbc_list.requests.count}) &nbsp;
-      .btn-group
-        %a{:'data-toggle'=>"dropdown", :href => "#", :class => "btn btn-mini btn-success dropdown-toggle"}
-          %i.grcicon-add
-        %ul.dropdown-menu
-          -Request.types.each do |type_id, type_name|
-            %li.add-new-item
-              %a{ :href => new_flow_request_path(:'request[pbc_list_id]' => pbc_list.id, :'request[type_id]' => type_id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide'}
-                %i{ :class => request_type_icon(type_name) }
-                =type_name
-
-
-    -if has_items && !pbc_is_read_only
-      .span2.parent-position
-        %a.pull-right.btn.btn-mini.accordion-toggle.toggle.filter-trigger{:'data-toggle'=>"collapse", :href => "#filters"}
-          %i.grcicon-search
-          Show/Hide Filter&nbsp;
+  .pbc-one-row
+    .row-fluid
+      .span8
+        %h3.pull-left.normal-font
+          Requests (#{pbc_list.requests.count}) &nbsp;
+        .btn-group
+          %a{:'data-toggle'=>"dropdown", :href => "#", :class => "btn btn-mini btn-success dropdown-toggle"}
+            %i.grcicon-add
+          %ul.dropdown-menu
+            -Request.types.each do |type_id, type_name|
+              %li.add-new-item
+                %a{ :href => new_flow_request_path(:'request[pbc_list_id]' => pbc_list.id, :'request[type_id]' => type_id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide'}
+                  %i{ :class => request_type_icon(type_name) }
+                  =type_name
+  
+  
+      -if has_items && !pbc_is_read_only
+        .span4.parent-position
+          %a.pull-right.btn.btn-mini.accordion-toggle.toggle.filter-trigger{:'data-toggle'=>"collapse", :href => "#filters"}
+            %i.grcicon-search
+            Show/Hide Filter&nbsp;
 
 #filters.collapse
   .widget-filters
