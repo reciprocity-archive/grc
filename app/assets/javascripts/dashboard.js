@@ -615,6 +615,13 @@ jQuery(function($) {
   $('body').on('change', '#sortTypeSelect', function(e) {
     trigger_sort();
   });
+
+  $("body").on("list-add-item", '[id^=ajax-modal-controls-list_select]', function(e, data) {
+    $(this).find("[data-id=" + data.id + "]").click();
+  });
+
+
+
 });
 
 if(!/\/mapping/.test(window.location.href)) {
