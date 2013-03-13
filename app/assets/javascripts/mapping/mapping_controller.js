@@ -154,16 +154,34 @@ can.Control("CMS.Controllers.Mapping", {
 
   // Post-submit handler for new control dialog
   , "a[href^='/controls/new'] modal:success" : function(el, ev, data) {
+    var item;
     if($(el).closest("#mapping_rcontrols_widget").length) {
       // add this control to the reg controls.
       // This isn't the best way to go about it, but CanJS/Mustache is currently ornery about accepting new observable list elements
       //  added with "push" --BM 12/11/2012
       var rctl = this.options.reg_list_controller;
-      can.Model.Cacheable.prototype.addElementToChildList.call(rctl.options.observer, "list", new namespace.CMS.Models.RegControl(data));
+      item = new namespace.CMS.Models.RegControl(data);
+      rctl.options.observer.list.splice(this.slug_sort_position(item, rctl.options.observer.list), 0, item);
     } else {
       var cctl = this.options.company_list_controller;
-      can.Model.Cacheable.prototype.addElementToChildList.call(cctl.options.observer, "list", new namespace.CMS.Models.Control(data));
+      item = new namespace.CMS.Models.Control(data);
+      cctl.options.observer.list.splice(this.slug_sort_position(item, cctl.options.observer.list), 0, item);
     }
+    var $item = $("[content_id=" + item.content_id + "]");
+    var $content = $item.closest(".content");
+    $item.find("a").click();
+    $content.scrollTop($item.offset().top - $content.offset().top - ($content.height() - $item.height()) / 2)
+  }
+
+  , slug_sort_position : function(data, list) {
+    var pos = list.length;
+    can.each(list, function(item, i) {
+      if(window.natural_comparator(data, item) < 1) {
+        pos = i;
+        return false;
+      }
+    });
+    return pos;
   }
 
   , "a.controllist, a.controllistRM click" : function(el, ev) {
