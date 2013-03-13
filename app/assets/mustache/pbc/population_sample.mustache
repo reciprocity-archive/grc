@@ -1,107 +1,127 @@
 {{#population_sample}}
   <div class="row-fluid inline-edit-population-doc" data-model="true" {{data 'model'}}>
-    <div class="span4">
-      <h5>
-        Population Worksheet
-        {{^if_null population_document_id}}
-          <i class="grcicon-ok"></i>
-        {{/if_null}}
-      </h5>
-    </div>
-    <div class="span5 inline-editing custom-edit" data-doc-type="population">
-      {{#if_null population_document_id}}
-        <input class="input-block-level input-title" name="title" placeholder="Search for Doc Title or URL" type="text" {{ (el) -> el.pbc_autocomplete_documents() }}>
-      {{else}}
-        <a class="btn btn-mini pull-right remove-population-doc" href="javascript://" rel="tooltip" title="Remove population worksheet">
-          <i class="grcicon-x-grey"></i>
-        </a>
-        <a class="btn btn-mini pull-right" href="/documents/{{population_document.id}}/edit?no_delete=true" data-toggle="modal-ajax-form" data-modal-class="modal-wide" rel="tooltip" title="Edit population worksheet">
-          <i class="grcicon-edit"></i>
-        </a>
-        <p class="oneline">
-          {{#if_null population_document.link_url}}
-            <span>{{population_document.title}}</span>
+    <div class="span9">
+      <div class="row-fluid inner-population-doc">
+        <div class="span5">
+          <h5>
+            Population Worksheet
+            {{^if_null population_document_id}}
+              <i class="grcicon-ok"></i>
+            {{/if_null}}
+          </h5>
+        </div>
+        <div class="span7 inline-editing custom-edit" data-doc-type="population">
+          {{#if_null population_document_id}}
+            <input class="input-block-level input-title" name="title" placeholder="Search for Doc Title or URL" type="text" {{ (el) -> el.pbc_autocomplete_documents() }}>
           {{else}}
-            <a href="{{population_document.link_url}}" target="_blank">{{firstnonempty population_document.title population_document.link_url}}</a>
+            <a class="btn btn-mini pull-right remove-population-doc" href="javascript://" rel="tooltip" title="Remove population worksheet">
+              <i class="grcicon-x-grey"></i>
+            </a>
+            <a class="btn btn-mini pull-right" href="/documents/{{population_document.id}}/edit?no_delete=true" data-toggle="modal-ajax-form" data-modal-class="modal-wide" rel="tooltip" title="Edit population worksheet">
+              <i class="grcicon-edit"></i>
+            </a>
+            <p class="oneline">
+              {{#if_null population_document.link_url}}
+                <span>{{population_document.title}}</span>
+              {{else}}
+                <a href="{{population_document.link_url}}" target="_blank">{{firstnonempty population_document.title population_document.link_url}}</a>
+              {{/if_null}}
+            </p>
           {{/if_null}}
-        </p>
-      {{/if_null}}
+        </div>
+      </div>
     </div>
-    <div class="span2">
-      <h5 class="right">Population #</h5>
-    </div>
-
-    <div class="span1 auto-save">
-      <input type="text" name="population" class="input-block-level" value="{{firstexist population ''}}" />
-      <span class="success fade">Saved</span>
+    <div class="span3">
+      <div class="row-fluid inner-population-doc">
+        <div class="span8">
+          <h5 class="right">Population #</h5>
+        </div>
+    
+        <div class="span4 auto-save">
+          <input type="text" name="population" class="input-block-level" value="{{firstexist population ''}}" />
+          <span class="success fade">Saved</span>
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="row-fluid inline-edit-population-doc" data-model="true" {{data 'model'}}>
-    <div class="span4">
-      <h5>
-        Sample Worksheet
-        {{^if_null sample_worksheet_document_id}}
-          <i class="grcicon-ok"></i>
-        {{/if_null}}
-      </h5>
-    </div>
-    <div class="span5 inline-editing custom-edit" data-doc-type="sample_worksheet">
-      {{#if_null sample_worksheet_document_id}}
-        <input class="input-block-level input-title" name="title" placeholder="Search for Doc Title or URL" type="text" {{ (el) -> el.pbc_autocomplete_documents() }}>
-      {{else}}
-        <a class="btn btn-mini pull-right remove-population-doc" href="javascript://" rel="tooltip" title="Remove sample worksheet">
-          <i class="grcicon-x-grey"></i>
-        </a>
-        <a class="btn btn-mini pull-right" href="/documents/{{sample_worksheet_document.id}}/edit?no_delete=true" data-toggle="modal-ajax-form" data-modal-class="modal-wide" rel="tooltip" title="Edit sample worksheet">
-          <i class="grcicon-edit"></i>
-        </a>
-        <p class="oneline">
-          {{#if_null sample_worksheet_document.link_url}}
-            <span>{{sample_worksheet_document.title}}</span>
+    <div class="span9">
+      <div class="row-fluid inner-population-doc">
+        <div class="span5">
+          <h5>
+            Sample Worksheet
+            {{^if_null sample_worksheet_document_id}}
+              <i class="grcicon-ok"></i>
+            {{/if_null}}
+          </h5>
+        </div>
+        <div class="span7 inline-editing custom-edit" data-doc-type="sample_worksheet">
+          {{#if_null sample_worksheet_document_id}}
+            <input class="input-block-level input-title" name="title" placeholder="Search for Doc Title or URL" type="text" {{ (el) -> el.pbc_autocomplete_documents() }}>
           {{else}}
-            <a href="{{sample_worksheet_document.link_url}}" target="_blank">{{firstnonempty sample_worksheet_document.title sample_worksheet_document.link_url}}</a>
+            <a class="btn btn-mini pull-right remove-population-doc" href="javascript://" rel="tooltip" title="Remove sample worksheet">
+              <i class="grcicon-x-grey"></i>
+            </a>
+            <a class="btn btn-mini pull-right" href="/documents/{{sample_worksheet_document.id}}/edit?no_delete=true" data-toggle="modal-ajax-form" data-modal-class="modal-wide" rel="tooltip" title="Edit sample worksheet">
+              <i class="grcicon-edit"></i>
+            </a>
+            <p class="oneline">
+              {{#if_null sample_worksheet_document.link_url}}
+                <span>{{sample_worksheet_document.title}}</span>
+              {{else}}
+                <a href="{{sample_worksheet_document.link_url}}" target="_blank">{{firstnonempty sample_worksheet_document.title sample_worksheet_document.link_url}}</a>
+              {{/if_null}}
+            </p>
           {{/if_null}}
-        </p>
-      {{/if_null}}
+        </div>
+      </div>
     </div>
-    <div class="span2">
-      <h5 class="right">Sample #</h5>
-    </div>
-
-    <div class="span1 auto-save">
-      <input type="text" name="samples" class="input-block-level" value="{{firstexist samples ''}}"/>
-      <span class="success fade">Saved</span>
+    <div class="span3">
+      <div class="row-fluid inner-population-doc">
+        <div class="span8">
+          <h5 class="right">Sample #</h5>
+        </div>
+    
+        <div class="span4 auto-save">
+          <input type="text" name="samples" class="input-block-level" value="{{firstexist samples ''}}"/>
+          <span class="success fade">Saved</span>
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="row-fluid inline-edit-population-doc" data-model="true" {{data 'model'}}>
-    <div class="span4">
-      <h5>
-        Sample Evidence
-        {{^if_null sample_evidence_document_id}}
-          <i class="grcicon-ok"></i>
-        {{/if_null}}
-      </h5>
-    </div>
-    <div class="span5 inline-editing custom-edit" data-doc-type="sample_evidence">
-      {{#if_null sample_evidence_document_id}}
-        <input class="input-block-level input-title" name="title" placeholder="Search for Doc Title or URL" type="text" {{ (el) -> el.pbc_autocomplete_documents() }}>
-      {{else}}
-        <a class="btn btn-mini pull-right remove-population-doc" href="javascript://" rel="tooltip" title="Remove sample evidence">
-          <i class="grcicon-x-grey"></i>
-        </a>
-        <a class="btn btn-mini pull-right" href="/documents/{{sample_evidence_document.id}}/edit?no_delete=true" data-toggle="modal-ajax-form" data-modal-class="modal-wide" rel="tooltip" title="Edit sample evidence">
-          <i class="grcicon-edit"></i>
-        </a>
-        <p class="oneline">
-          {{#if_null sample_evidence_document.link_url}}
-            <span>{{sample_evidence_document.title}}</span>
+    <div class="span9">
+      <div class="row-fluid inner-population-doc">
+        <div class="span5">
+          <h5>
+            Sample Evidence
+            {{^if_null sample_evidence_document_id}}
+              <i class="grcicon-ok"></i>
+            {{/if_null}}
+          </h5>
+        </div>
+        <div class="span7 inline-editing custom-edit" data-doc-type="sample_evidence">
+          {{#if_null sample_evidence_document_id}}
+            <input class="input-block-level input-title" name="title" placeholder="Search for Doc Title or URL" type="text" {{ (el) -> el.pbc_autocomplete_documents() }}>
           {{else}}
-            <a href="{{sample_evidence_document.link_url}}" target="_blank">{{firstnonempty sample_evidence_document.title sample_evidence_document.link_url}}</a>
+            <a class="btn btn-mini pull-right remove-population-doc" href="javascript://" rel="tooltip" title="Remove sample evidence">
+              <i class="grcicon-x-grey"></i>
+            </a>
+            <a class="btn btn-mini pull-right" href="/documents/{{sample_evidence_document.id}}/edit?no_delete=true" data-toggle="modal-ajax-form" data-modal-class="modal-wide" rel="tooltip" title="Edit sample evidence">
+              <i class="grcicon-edit"></i>
+            </a>
+            <p class="oneline">
+              {{#if_null sample_evidence_document.link_url}}
+                <span>{{sample_evidence_document.title}}</span>
+              {{else}}
+                <a href="{{sample_evidence_document.link_url}}" target="_blank">{{firstnonempty sample_evidence_document.title sample_evidence_document.link_url}}</a>
+              {{/if_null}}
+            </p>
           {{/if_null}}
-        </p>
-      {{/if_null}}
+        </div>
+      </div>
     </div>
   </div>
 {{/population_sample}}
