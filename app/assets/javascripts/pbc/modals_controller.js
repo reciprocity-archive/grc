@@ -153,7 +153,7 @@ can.Control("CMS.Controllers.PBCModals", {
       }
 
       function toUTCTime(date, time) {
-        var offset = new Date(1970, 0, 1, 0, 0, 0).getTime() / 1000 / 60 / 60;
+        var offset = new Date().getTimezoneOffset() / 60;
         var hours = +(time.substr(0,2)) + offset;
         var minutes = +(time.substr(2,2));
 
