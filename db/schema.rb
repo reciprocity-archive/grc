@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130313173304) do
+ActiveRecord::Schema.define(:version => 20130313190635) do
 
   create_table "accounts", :force => true do |t|
     t.string   "username"
@@ -123,7 +123,6 @@ ActiveRecord::Schema.define(:version => 20130313173304) do
   add_index "controls", ["slug"], :name => "index_controls_on_slug", :unique => true
 
   create_table "cycles", :force => true do |t|
-    t.integer  "directive_id",                      :null => false
     t.date     "start_at"
     t.boolean  "complete",       :default => false, :null => false
     t.integer  "modified_by_id"
@@ -136,9 +135,8 @@ ActiveRecord::Schema.define(:version => 20130313173304) do
     t.string   "status"
     t.text     "notes"
     t.date     "end_at"
+    t.integer  "program_id"
   end
-
-  add_index "cycles", ["directive_id"], :name => "index_cycles_on_regulation_id"
 
   create_table "data_assets", :force => true do |t|
     t.string   "slug"

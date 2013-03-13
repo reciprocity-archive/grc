@@ -31,11 +31,11 @@ class CyclesController < BaseObjectsController
 
     def cycle_params
       cycle_params = params[:cycle] || {}
-      directive_id = cycle_params.delete(:directive_id)
-      if directive_id.present?
-        directive = Directive.where(:id => directive_id).first
-        if directive.present?
-          cycle_params[:directive] = directive
+      program_id = cycle_params.delete(:program_id)
+      if program_id.present?
+        program = Program.where(:id => program_id).first
+        if program.present?
+          cycle_params[:program] = program
         end
       end
       parse_date_param(cycle_params, :start_at)
@@ -44,6 +44,6 @@ class CyclesController < BaseObjectsController
     end
 
     def post_destroy_path
-      flow_directive_path(@cycle.directive)
+      flow_program_path(@cycle.program)
     end
 end
