@@ -69,7 +69,7 @@
       %label
         Direct Link
       %span
-        =link_to(control.url,control.url,:target => "_blank",:class => "inner-element")      
+        =link_to(control.url, absolute_url(control.url), :target => "_blank", :class => "inner-element")
   -if control.start_date
     %li.float-element
       %label
