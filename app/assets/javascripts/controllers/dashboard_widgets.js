@@ -55,11 +55,11 @@ can.Control("CMS.Controllers.DashboardWidgets", {
     if(this.options.is_related) {
 
       if(this.options.object_type === "Control" || this.options.object_type === "Directive") {
-        $.get("/relationships/related_objects.html", { 
-          oid : this.options.parent_id
-          , otype : this.options.parent_type
-          , related_model : this.options.object_type
-        }).done(this.proxy('draw_list'));
+        var params = {
+          list : true
+        };
+        params[can.underscore(this.options.model.shortName) + "_id"] = this.options.parent_id;
+        this.options.model.findAll(params).done(this.proxy('draw_list'));
       } else {
         this.options.model.findRelated({
           id : this.options.parent_id
