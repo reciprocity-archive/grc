@@ -19,6 +19,8 @@ class Program < ActiveRecord::Base
   has_many :program_directives, :dependent => :destroy
   has_many :directives, :through => :program_directives
 
+  has_many :cycles, :dependent => :destroy
+
   is_versioned_ext
 
   sanitize_attributes :description
@@ -84,5 +86,24 @@ class Program < ActiveRecord::Base
         :title => "Thou shalt use Company Controls",
         :kind => "Company Controls Policy")
     end
+  end
+
+  def linked_directive_ids_via_control_mapping
+    Control.
+      includes(:implemented_controls).
+      joins(:directive => :program_directives).
+      where(:program_directives => { :program_id => id }).
+      map(&:implemented_controls).
+      flatten.
+      map(&:directive_id).
+      uniq
+  end
+
+  def linked_programs_via_control_mapping
+    program_ids = ProgramDirective.
+      where(:directive_id => linked_directive_ids_via_control_mapping).
+      map(&:program_id).
+      uniq
+    Program.where(:id => program_ids)
   end
 end

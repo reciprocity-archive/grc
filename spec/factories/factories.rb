@@ -261,7 +261,7 @@ FactoryGirl.define do
     title 'title x'
     complete false
     start_at '2012-01-01'
-    directive { |c| c.association(:directive) }
+    program { |c| c.association(:program) }
   end
 
   factory :document do

@@ -28,7 +28,7 @@
         %a{:href => "#", :class => "disabled"}
           %i.grcicon-reg-map
           %span Consolidate Controls
-    -else  
+    -else
       %li
         %a{:href => new_flow_cycle_path(:'program_id' => instance.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect'}
           %i.grcicon-audit
@@ -57,6 +57,11 @@
         =render :partial => 'shared/related',
                 :layout => 'layouts/widget_box',
                 :locals => { :instance => instance, :widget_title => "Impact/Scope", :widget_class => 'widget-tabs widget-tabs-horizontal related business' }
+      -if instance.company_controls?
+        =render :partial => 'linked_programs',
+                :layout => 'layouts/widget_box',
+                :locals => { :instance => instance, :widget_class => 'widget-tabs widget-tabs-horizontal compliance' }
+
     #right-column.span4.widget-area
       =render :partial => 'info',
               :layout => 'layouts/widget_box',

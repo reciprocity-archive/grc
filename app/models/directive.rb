@@ -36,8 +36,6 @@ class Directive < ActiveRecord::Base
   has_many :program_directives, :dependent => :destroy
   has_many :programs, :through => :program_directives
 
-  has_many :cycles, :dependent => :destroy
-
   belongs_to :audit_frequency, :class_name => 'Option', :conditions => { :role => 'audit_frequency' }
   belongs_to :audit_duration, :class_name => 'Option', :conditions => { :role => 'audit_duration' }
 

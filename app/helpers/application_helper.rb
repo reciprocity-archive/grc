@@ -217,4 +217,11 @@ module ApplicationHelper
     end
   end
 
+  def absolute_url(url, valid_schemes=%w(http https file), default_scheme='http')
+    if url.present? && valid_schemes.include?(url.split(':')[0])
+      url
+    else
+      "#{default_scheme}://#{url}"
+    end
+  end
 end

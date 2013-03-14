@@ -61,7 +61,7 @@
       %label
         Direct Link
       %span
-        =link_to(system.url,system.url,:target => "_blank",:class => "inner-element")
+        =link_to(system.url, absolute_url(system.url), :target => "_blank", :class => "inner-element")
   %li
     %label
       Description
@@ -76,4 +76,4 @@
     .span6
       %p.footer-left
         Created: #{system.created_at.strftime("%m/%d/%y")}
-        
+
