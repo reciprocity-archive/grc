@@ -73,6 +73,35 @@ jQuery(document).ready(function($) {
     $('.tooltip').hide();;
   });
 
+  // Fix positioning of bootstrap tooltips when on left/right edge of screen
+  // Possibly remove this when upgrade to Bootstrap 2.3.0 (which has edge detection)
+  var _tooltip_show = $.fn.tooltip.Constructor.prototype.show;
+  $.fn.tooltip.Constructor.prototype.show = function() {
+    var margin = 10
+      , container_width = document.width
+      , tip_pos, $arrow, offset, return_value;
+
+    _tooltip_show.apply(this);
+
+    return_value = this.$tip.css({ 'white-space': 'nowrap' });
+
+    tip_pos = this.$tip.position();
+    tip_pos.width = this.$tip.width();
+    tip_pos.height = this.$tip.height();
+    $arrow = this.$tip.find('.tooltip-arrow');
+
+    offset = tip_pos.left + tip_pos.width - container_width + margin;
+    if (offset > 0) {
+      this.$tip.css({ left: tip_pos.left - offset });
+      $arrow.css({ left: parseInt($arrow.css('left')) + offset });
+    } else if (tip_pos.left < margin) {
+      this.$tip.css({ left: margin });
+      $arrow.css({ left: parseInt($arrow.css('left')) + tip_pos.left - margin });
+    }
+
+    return return_value;
+  };
+
   // Listeners for initial tooltip mouseovers
   $('body').on('mouseover', '[data-toggle="tooltip"], [rel=tooltip]', function(e) {
     var $currentTarget = $(e.currentTarget);
