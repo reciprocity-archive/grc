@@ -5,7 +5,9 @@
 
   %ul.breadcrumbs
     %li=link_to 'dashboard', programs_dash_path
-    %li=instance.title
+    %li
+      %span
+        =instance.title
 
   %h1.governance
     .grcobject.governance{:rel => "tooltip", :'data-placement'=>"bottom", :title => "Program"}
@@ -25,20 +27,20 @@
       %li
         %a{:href => "#", :class => "disabled"}
           %i.grcicon-reg-map
-          Consolidate Controls
-    -else  
+          %span Consolidate Controls
+    -else
       %li
         %a{:href => new_flow_cycle_path(:'program_id' => instance.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect'}
           %i.grcicon-audit
-          Start Audit
+          %span Start Audit
       %li
         %a{ :href => mapping_program_path(instance) }
           %i.grcicon-reg-map
-          Control Mapper
+          %span Control Mapper
     %li
       %a{:href => edit_flow_program_path(instance), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide',:title => 'Edit Program'}
         %i.grcicon-edit
-        Edit Program
+        %span Edit Program
 
 
 
@@ -55,7 +57,11 @@
         =render :partial => 'shared/related',
                 :layout => 'layouts/widget_box',
                 :locals => { :instance => instance, :widget_title => "Impact/Scope", :widget_class => 'widget-tabs widget-tabs-horizontal related business' }
-        =render :partial => 'shared/add_widget_section'
+      -if instance.company_controls?
+        =render :partial => 'linked_programs',
+                :layout => 'layouts/widget_box',
+                :locals => { :instance => instance, :widget_class => 'widget-tabs widget-tabs-horizontal compliance' }
+      =render :partial => 'shared/add_widget_section'
 
     #right-column.span4.widget-area
       =render :partial => 'info',

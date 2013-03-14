@@ -90,7 +90,8 @@ $.widget(
         if(!data.content.length) {
           data.content.push(
             {label : "Add user " + event.target.value + "..."
-            , email : event.target.value
+            , email : !~event.target.value.indexOf("@") ? "" : event.target.value
+            , name : !~event.target.value.indexOf("@") ? event.target.value : ""
             , id : null });
         }
       }

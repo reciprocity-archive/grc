@@ -3,6 +3,8 @@
   %head
     %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}
     %title=@title || "GRC"
+    %meta{:name => "viewport", :content => "width=device-width", :'initial-scale' => "1.0"}
+    
     -if has_feature? :BETA
       =stylesheet_link_tag 'design'
       =javascript_include_tag 'design'
@@ -194,9 +196,9 @@
       .header-content{:'data-spy' => 'affix', :'data-offset-top' => '25'}
         .container-fluid
           .row-fluid
-            .span6
+            .span5
               =yield :header
-            .span6
+            .span7
               =yield :subheader_extras
               
 

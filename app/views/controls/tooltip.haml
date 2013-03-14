@@ -7,11 +7,12 @@
         =@control.slug
         %span=@control.title
 
-.row-fluid
-  .span12
-    %h4 Description
-    -if @control.description != ""
-      =display_as_html @control.description
-    -else
-      .rtf
-        %p.no-data No description available
+.popover-inner-content
+  .row-fluid
+    .span12
+      %h4 Description
+      -if @control.description != ""
+        =display_as_html @control.description
+      -else
+        .rtf
+          %p.no-data No description available

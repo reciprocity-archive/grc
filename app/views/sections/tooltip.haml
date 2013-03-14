@@ -4,11 +4,12 @@
       %h3 #{@section.meta_kind.to_s.titleize} Information
 
 .popover-content
-  =@section.title
-  \|
-  =@section.slug
+  .popover-inner-content
+    =@section.title
+    \|
+    =@section.slug
 
-  %h3 Description
+    %h3 Description
 
-  .item
-    =display_as_html @section.description
+    .item
+      =display_as_html @section.description

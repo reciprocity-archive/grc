@@ -6,7 +6,7 @@ module BaseObjects
     @creg = FactoryGirl.create(:directive, :title => 'Company', :slug => 'COM1', :kind => @opt_com)
     @reg = FactoryGirl.create(:directive, :title => 'Reg 1', :slug => 'REG1', :kind => @opt_reg)
     @ctl = FactoryGirl.create(:control, :title => 'Control 1', :slug => 'REG1-CTL1', :description => 'x', :directive => @reg)
-    @cycle = FactoryGirl.create(:cycle, :directive => @reg, :start_at => '2011-01-01')
+    @cycle = FactoryGirl.create(:cycle, :program=> @prog, :start_at => '2011-01-01')
     @sec = FactoryGirl.create(:section, :title => 'Section 1', :slug => 'REG1-SEC1', :description => 'x', :directive => @reg)
     @sys = FactoryGirl.create(:system, :title => 'System 1', :slug => 'SYS1', :description => 'x', :infrastructure => true)
     @sc = FactoryGirl.create(:system_control, :control => @ctl, :system => @sys, :cycle => @cycle, :state => :green)

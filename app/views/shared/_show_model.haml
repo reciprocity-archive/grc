@@ -32,7 +32,7 @@
     %li
       %a{ :href => method("edit_flow_#{model_name}_path").call(instance), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide', :title => "Edit #{model_title}" }
         %i.grcicon-edit
-        Edit #{model_title}
+        %span Edit #{model_title}
 
 -content_for :subheader_plus do
   %a.navbarplus.fltrt{ :href => method("new_flow_#{model_name}_path").call(), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide'}

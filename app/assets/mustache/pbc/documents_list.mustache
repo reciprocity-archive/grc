@@ -17,12 +17,14 @@
         </select>
       </div>
       <div class="span3">
-        <a class="btn btn-mini remove_document pull-right" rel="tooltip" data-placement="bottom" {{#system}}title="Remove from response"{{/system}}>
-          <i class="grcicon-x-grey"></i>
-        </a>
-        <a class="btn btn-mini edit_document pull-right" rel="tooltip" data-toggle="modal-ajax-form" href="/documents/{{document.id}}/edit?no_delete=true" data-model-class="modal-wide" data-placement="bottom" title="Edit evidence" data-target="#ajax-modal-edit-evidence">
-          <i class="grcicon-edit"></i>
-        </a>
+        <div class="pull-right">
+          <a class="btn btn-mini edit_document" rel="tooltip" data-toggle="modal-ajax-form" href="/documents/{{document.id}}/edit?no_delete=true" data-model-class="modal-wide" data-placement="bottom" title="Edit evidence" data-target="#ajax-modal-edit-evidence">
+            <i class="grcicon-edit"></i>
+          </a>
+          <a class="btn btn-mini remove_document" rel="tooltip" data-placement="bottom" {{#system}}title="Remove from response"{{/system}}>
+            <i class="grcicon-x-grey"></i>
+          </a>
+        </div>
       </div>
     </div>
   </li>

@@ -24,11 +24,28 @@
               %i.grcicon-add
               Control
 
-.action-items
+-#.action-items
   %a.expandAll.btn.btn-mini{:href => "#", :rel => "tooltip", :title => "Expand all"}
     %i.grcicon-wide-black
   %a.shrinkAll.btn.btn-mini{:href => "#", :rel => "tooltip", :title => "Collapse all"}
     %i.grcicon-normal-black
 
-%ul.tree-structure#regulations
+-#%ul.tree-structure#regulations
   =render :partial => 'sections', :locals => { :sections => sections, :expanded => true, :editable_notes => true }
+
+.tabbable
+  %ul.nav.nav-tabs
+    -unless directive.company_controls?
+      %li.text-governance.active=link_to "<i class='grcicon-#{directive.section_meta_kind.to_s}-color'></i>#{directive.section_meta_kind.to_s.titleize.pluralize}".html_safe, '#sections', :data => { :toggle => 'tab', :'tab-href' => sections_flow_directive_path(directive) }
+    %li.text-compliance=link_to '<i class="grcicon-control-color"></i>Controls'.html_safe, '#controls', :data => { :toggle => 'tab', :'tab-href' => flow_controls_path(:directive_id => directive.id, :list => true) }
+    -#%li=link_to '<i class="grcicon-reg-map"></i>Combo'.html_safe, '#combo', :data => { :toggle => 'tab', :'tab-href' => flow_sections_path(:program_id => instance.id, :combo => true) }
+
+  .action-items
+    %a.expandAll.btn.btn-mini{:href => "#", :rel => "tooltip", :title => "Expand all"}
+      %i.grcicon-wide-black
+    %a.shrinkAll.btn.btn-mini{:href => "#", :rel => "tooltip", :title => "Collapse all"}
+      %i.grcicon-normal-black
+
+  .tab-content
+    #sections.tab-pane
+    #controls.tab-pane

@@ -11,38 +11,39 @@
       %a.btn.btn-mini.pull-right{:href => flow_directive_path(directive), :rel => "tooltip", :title => "View #{directive.meta_kind.to_s.titleize}"}
         %i.grcicon-goto
 
-.row-fluid
-  .span12
-    %h4
-      Type:
-      %span #{directive.meta_kind.to_s.titleize}
-
--if stats[:sections_count] > 0 || stats[:controls_count] > 0
-  .row-fluid
-    -if stats[:sections_count] > 0
-      .span6
-        %h4
-          =directive.section_meta_kind.to_s.pluralize.titleize
-          (#{stats[:sections_count]})
-        .progress
-          .bar.bar-success{:style => "width:#{stats[:sections_done_percentage]}%", :rel => "tooltip", :title => "#{stats[:sections_done_count]} Done"}=stats[:sections_done_count]
-          .bar.bar-danger{:style => "width:#{stats[:sections_na_percentage]}%", :rel => "tooltip", :title => "#{stats[:sections_na_count]} N/A"}=stats[:sections_na_count]
-          .bar.bar-warning{:style => "width:#{stats[:sections_undone_percentage]}%", :rel => "tooltip", :title => "#{stats[:sections_undone_count]} Pending"}=stats[:sections_undone_count]
-    -if stats[:controls_count] > 0
-      .span6
-        %h4
-          Controls
-          (#{stats[:controls_count]})
-        .progress
-          .bar.bar-success{:style => "width:#{stats[:controls_complying_percentage]}%", :rel => "tooltip", :title => "#{stats[:controls_complying_count]} Complying"}=stats[:controls_complying_count]
-          .bar.bar-danger{:style => "width:#{stats[:controls_pending_percentage]}%", :rel => "tooltip", :title => "#{stats[:controls_pending_count]} Pending"}=stats[:controls_pending_count]
-          .bar.bar-warning{:style => "width:#{stats[:controls_approved_percentage]}%", :rel => "tooltip", :title => "#{stats[:controls_approved_count]} Approved"}=stats[:controls_approved_count]
-        .minor
-          Parented controls:
-          =stats[:controls_parented_count]
-
--if directive.description
+.popover-inner-content
   .row-fluid
     .span12
-      %h4 Description
-      =display_as_html directive.description
+      %h4
+        Type:
+        %span #{directive.meta_kind.to_s.titleize}
+
+  -if stats[:sections_count] > 0 || stats[:controls_count] > 0
+    .row-fluid
+      -if stats[:sections_count] > 0
+        .span6
+          %h4
+            =directive.section_meta_kind.to_s.pluralize.titleize
+            (#{stats[:sections_count]})
+          .progress
+            .bar.bar-success{:style => "width:#{stats[:sections_done_percentage]}%", :rel => "tooltip", :title => "#{stats[:sections_done_count]} Done"}=stats[:sections_done_count]
+            .bar.bar-danger{:style => "width:#{stats[:sections_na_percentage]}%", :rel => "tooltip", :title => "#{stats[:sections_na_count]} N/A"}=stats[:sections_na_count]
+            .bar.bar-warning{:style => "width:#{stats[:sections_undone_percentage]}%", :rel => "tooltip", :title => "#{stats[:sections_undone_count]} Pending"}=stats[:sections_undone_count]
+      -if stats[:controls_count] > 0
+        .span6
+          %h4
+            Controls
+            (#{stats[:controls_count]})
+          .progress
+            .bar.bar-success{:style => "width:#{stats[:controls_complying_percentage]}%", :rel => "tooltip", :title => "#{stats[:controls_complying_count]} Complying"}=stats[:controls_complying_count]
+            .bar.bar-danger{:style => "width:#{stats[:controls_pending_percentage]}%", :rel => "tooltip", :title => "#{stats[:controls_pending_count]} Pending"}=stats[:controls_pending_count]
+            .bar.bar-warning{:style => "width:#{stats[:controls_approved_percentage]}%", :rel => "tooltip", :title => "#{stats[:controls_approved_count]} Approved"}=stats[:controls_approved_count]
+          .minor
+            Parented controls:
+            =stats[:controls_parented_count]
+
+  -if directive.description
+    .row-fluid
+      .span12
+        %h4 Description
+        =display_as_html directive.description

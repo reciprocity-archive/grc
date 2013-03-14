@@ -1,7 +1,7 @@
 -content_for :header do
   %ul.breadcrumbs
     %li=link_to "dashboard", programs_dash_path
-    %li=link_to @cycle.directive.title, flow_directive_path(@cycle.directive_id)
+    %li=link_to @cycle.program.title, flow_program_path(@cycle.program_id)
     %li=@cycle.title
 
   %h1.governance.active
@@ -17,7 +17,7 @@
     %li
       %a.widgetbtn{:href => edit_flow_cycle_path(@cycle), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :title => 'Edit Audit Cycle'}
         %i.grcicon-edit
-        Edit Audit
+        %span Edit Audit
 
 .container-fluid
   #cycles_columns.row-fluid{ :'data-resize' => "true" }

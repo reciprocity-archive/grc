@@ -21,7 +21,7 @@
     %li
       %a{ :href => edit_flow_control_path(@control), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide', :title => 'Edit Control' }
         %i.grcicon-edit
-        Edit Control
+        %span Edit Control
 
 -content_for :subheader_plus do
   %a.navbarplus.fltrt{ :href => new_flow_control_path('control[directive_id]' => @control.directive_id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }

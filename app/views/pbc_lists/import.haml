@@ -8,12 +8,11 @@
 
   %ul.breadcrumbs
     %li=link_to 'dashboard', programs_dash_path
-    %li=link_to instance.audit_cycle.directive.title, flow_directive_path(instance.audit_cycle.directive_id)
-    %li=link_to 'AUDITS', flow_directive_path(instance.audit_cycle.directive_id)
+    %li=link_to instance.audit_cycle.program.title, flow_program_path(instance.audit_cycle.program_id)
     %li=link_to instance.audit_cycle.title, flow_cycle_path(instance.audit_cycle)
     %li=link_to 'PBC List', flow_pbc_list_path(instance)
     %li Import
-    
+
   %h1
     Import PBC list
 

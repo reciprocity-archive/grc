@@ -51,7 +51,7 @@ can.Control("CMS.Controllers.SectionNotes", {
   , ".cancel-link click" : "draw_notes"
 
   , " click" : function(el, ev) {
-    if(!el.find(".note-content").length)
+    if(!el.find(".note-content, .note-trigger").length)
       ev.stopPropagation(); // Don't collapse on click while the notes editor is open.
   }
 });

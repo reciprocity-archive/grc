@@ -14,6 +14,7 @@ CmsRails::Application.routes.draw do
       get 'tooltip'
       get 'export_controls'
       get 'export'
+      get 'sections'
       get 'section_controls'
       get 'control_sections'
       get 'category_controls'
@@ -25,7 +26,7 @@ CmsRails::Application.routes.draw do
     end
   end
 
-  resources :program_directives, :as => 'flow_program_directives', :only => [:index, :create] do
+  resources :program_directives, :as => 'flow_program_directives', :only => [:index, :create, :destroy] do
     collection do
       get 'list_edit'
     end

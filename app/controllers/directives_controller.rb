@@ -79,6 +79,7 @@ class DirectivesController < BaseObjectsController
       @directives = @directives.joins(:program_directives).where(:program_directives => { :program_id => params[:program_id] })
     end
     @directives = allowed_objs(@directives.all, :read)
+    @directives = @directives.reject(&:is_stealth_directive?)
 
     respond_to do |format|
       format.html do
@@ -373,6 +374,19 @@ class DirectivesController < BaseObjectsController
     read_import(import, SECTION_MAP, "section", rows)
 
     import
+  end
+
+  def sections
+    @sections = @directive.sections.includes(:controls => :implementing_controls)
+    if params[:s]
+      @sections = @sections.fulltext_search(params[:s])
+    end
+    @sections = allowed_objs(@sections.all.sort_by(&:slug_split_for_sort), :read)
+    respond_to do |format|
+      format.html do
+        render :layout => nil, :locals => { :sections => @sections }
+      end
+    end
   end
 
   def section_controls

@@ -14,7 +14,7 @@
     .row-fluid
       .span12
         .pull-right
-          %a.widgetbtn.btn.btn-mini{ :rel => "tooltip", :"data-placement" => "left", :title => "Link this object to risky attributes", :'data-modal-class' => 'modal-wide', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :"data-toggle" => "modal-ajax-relationship-selector", :href => list_edit_flow_relationships_path(:object_id => risky_attribute.id, :object_type => risky_attribute.class.name, :related_model => risky_attribute.type_string, :related_side => 'source', :relationship_type => "#{risky_attribute.type_string.underscore}_has_risky_attribute") }
+          %a.widgetbtn.btn.btn-mini{ :rel => "tooltip", :"data-placement" => "left", :title => "Link #{risky_attribute.type_string.pluralize.titleize} to this Risky Attribute", :'data-modal-class' => 'modal-wide', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :"data-toggle" => "modal-ajax-relationship-selector", :href => list_edit_flow_relationships_path(:object_id => risky_attribute.id, :object_type => risky_attribute.class.name, :related_model => risky_attribute.type_string, :related_side => 'source', :relationship_type => "#{risky_attribute.type_string.underscore}_has_risky_attribute") }
             %i.grcicon-link
 
 %ul.tree-structure

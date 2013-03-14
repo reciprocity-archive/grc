@@ -272,6 +272,11 @@
   }
   .actions {
     margin: 0;
+    .role-btn {
+      li {
+        margin-left: 0;
+      }
+    }
   }
 }
 

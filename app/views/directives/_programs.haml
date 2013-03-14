@@ -3,6 +3,15 @@
   Programs using #{directive.meta_kind.to_s.titleize}
   %span=directive.programs.count
 
+-content_for :widget_buttons do
+  .filter
+    .row-fluid
+      .span12
+        .pull-right
+          %a.btn.btn-add{:'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :'data-toggle' => "modal-ajax-relationship-selector", :href => list_edit_flow_program_directives_path(:directive_id => directive.id, :program_kind => "Directive"), :'data-modal-class' => 'modal-wide' }
+            %i.grcicon-link-white
+            Programs
+
 -content_for :widget_help, 'directive_programs'
 
 -content_for :widget_id, 'directive_programs_widget'
@@ -10,7 +19,7 @@
 %ul.tree-structure.simple
   -directive.programs.each do |program|
     %li.item-main
-      %a{:href => flow_program_path(program), :class => "block-element", :data => { :'popover-href' => tooltip_flow_program_path(program), :'popover-trigger' => 'sticky-hover'} }
+      %a{:href => flow_program_path(program), :class => "block-element", :data => { :'popover-href' => tooltip_flow_program_path(program, :directive_id => directive.id), :'popover-trigger' => 'sticky-hover'} }
         .item-title
           .row-fluid
             .span12

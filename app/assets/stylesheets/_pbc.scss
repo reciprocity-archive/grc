@@ -2,6 +2,9 @@
   span {
     font-size:11px;
     color:$text;
+    &.left-space {
+      margin-right: 12px;
+    }
   }
   .btn {
     margin-left:0;

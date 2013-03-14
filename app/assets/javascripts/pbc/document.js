@@ -29,7 +29,12 @@ can.Model.Cacheable("CMS.Models.Document", {
             , success : function(data) {
                 response($.map( data, function( item ) {
                   return can.extend({}, item.document, {
-                    label: item.document.title
+                    label: item.document.title 
+                          ? item.document.title 
+                          + (item.document.link_url 
+                            ? " (" + item.document.link_url + ")" 
+                            : "")
+                          : item.document.link_url
                     , value: item.document.id
                   });
                 }));

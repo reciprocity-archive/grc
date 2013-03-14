@@ -28,6 +28,9 @@ class ProgramsController < BaseObjectsController
     if params[:s].present?
       @programs = @programs.db_search(params[:s])
     end
+    if params[:kind].present?
+      @programs = @programs.where(:kind => params[:kind])
+    end
     @programs = allowed_objs(@programs.all, :read)
     if params[:company_controls_first].present?
       @programs =

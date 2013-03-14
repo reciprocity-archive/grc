@@ -319,7 +319,7 @@
       padding: 2px;
       margin-top: 2px;
       &.btn-add {
-        padding: 2px 2px 2px 0;
+        padding: 2px 6px 2px 4px;
       }
       &.btn-mini {
         margin-top: 3px;
@@ -563,14 +563,19 @@
   input {
     width:auto;
   }
+  .btn-reset {
+    float: right;
+  }
   label {
-    margin-left:30px;
     text-transform:uppercase;
     color:$text;
     @include text-shadow(0 1px 1px $white);
     font-size:11px;
+    display: block;
     &.label-title {
-      margin-left:0;
+      margin-right:30px;
+      float: left;
+      padding-bottom: 20px;
     }
   }
 }

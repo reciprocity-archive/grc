@@ -1,4 +1,7 @@
 .popover {
+  .popover-inner-content {
+    padding:6px 14px;
+  }
   &.top {
     margin-top: -5px;
     .arrow {
@@ -81,6 +84,7 @@
       }
     }
     .popover-content {
+      padding:0;
       font-size: 11px;
       max-height: 270px;
       overflow-x: hidden;
@@ -138,6 +142,22 @@
   .updated {
     text-align:right;
   }
+  .popoverfooter {
+    margin-bottom:0;
+    border-top:1px solid $lightGray;
+    background:#f3f3f3;
+    padding:4px 14px;
+    min-height: auto;
+    a {
+      color:$gray;
+      &:hover {
+       color:$error; 
+      }
+    }
+    i {
+      @include opacity(0.4);
+    }
+  }
   h3,
   h4 {
     span {
@@ -151,3 +171,4 @@
     }
   }
 }
+

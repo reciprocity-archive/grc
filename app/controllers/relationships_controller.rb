@@ -278,10 +278,10 @@ class RelationshipsController < BaseMappingsController
       related_real_model = "System" if related_real_model == "Process"
 
       if params[:related_model] == "Process"
-        option_new_url = new_flow_system_path(:is_biz_process => true)
+        option_new_url = new_flow_system_path(:'system[is_biz_process]' => true)
         options_url = flow_systems_path(:is_biz_process => true, :format => :json)
       elsif params[:related_model] == "System"
-        option_new_url = new_flow_system_path(:is_biz_process => false)
+        option_new_url = new_flow_system_path(:'system[is_biz_process]' => false)
         options_url = flow_systems_path(:is_biz_process => false, :format => :json)
       elsif params[:related_model] == 'RiskyAttribute'
         options_new_url = new_flow_risky_attribute_path(:force_type_string => true, :'risky_attribute[type_string]' => params[:object_type])

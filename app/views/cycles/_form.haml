@@ -7,31 +7,20 @@
 -if !f.object.new_record?
   -content_for :modal_delete_path, delete_flow_cycle_path(f.object)
 
--if f.object.directive_id.nil?
-  -directives = Directive
-  -if params[:program_id].present?
-    =hidden_field_tag :program_id, params[:program_id]
-    -directives = directives.joins(:program_directives).where(:program_directives => { :program_id => params[:program_id] })
-  -directives = directives.all
-  -if directives.size > 1
-    .row-fluid
-      =wrapped_select(f, :span6, :directive_id, directives.map { |d| [d.display_name, d.id] }, :class => :collection, :multiple => false)
-  -elsif directives.size == 1
-    =f.hidden_field :directive_id, :value => directives[0].id
-  -else
-    .row-fluid.flash
-      .span12.alert.alert-error
-        Add a Regulation, Contract, or Policy before starting an audit
--else
-  =f.hidden_field :directive_id
-
--default_title = "#{Date.today.year} - Audit"
 -if params[:program_id].present?
   -program = Program.where(:id => params[:program_id]).first
-  -if program.present?
-    -default_title = "#{Date.today.year} - #{program.title} Audit"
--elsif f.object.directive.present?
-  -default_title = "#{Date.today.year} - #{f.object.directive.title} Audit"
+-else
+  -program = f.object.program
+
+-if program.present?
+  =f.hidden_field :program_id, :value => program.id
+-else
+  .row-fluid
+    =wrapped_select(f, :span6, :program_id, Program.all.map { |p| [p.display_name, p.id] }, :class => :collection, :multiple => false)
+
+-default_title = "#{Date.today.year} - Audit"
+-if program.present?
+  -default_title = "#{Date.today.year} - #{program.title} Audit"
 
 .row-fluid
   =wrapped_text_field f, :span4, :title, :placeholder => 'Enter title', :label_name => 'Audit Title <span class="required">*</span>'.html_safe, :value => f.object.title.presence || default_title

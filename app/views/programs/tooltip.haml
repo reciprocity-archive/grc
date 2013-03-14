@@ -6,14 +6,26 @@
         =program.slug
         %span=program.title
     .span2
-      %a.btn.btn-mini.pull-right{:href => flow_program_path(program), :rel => "tooltip", :title => "View/Edit Program"} 
-        %i.grcicon-goto
+      %a.btn.btn-mini.btn-primary.pull-right{:href => flow_program_path(program), :rel => "tooltip", :title => "View/Edit Program"}
+        %i.grcicon-goto-white
 
-.row-fluid
-  .span12
-    %h4 Description
-    -if program.description != ""
-      =display_as_html program.description
-    -else
-      .rtf
-        %p.no-data No description available
+
+.popover-inner-content
+  .row-fluid
+    .span12
+      %h4 Description
+      -if program.description != ""
+        =display_as_html program.description
+      -else
+        .rtf
+          %p.no-data No description available
+
+-if params[:directive_id].present?
+  -program_directive = program.program_directives.where(:directive_id => params[:directive_id]).first
+  -if program_directive
+    .row-fluid
+      .span12.popoverfooter
+        .pull-right
+          %a{ :href => flow_program_directive_path(program_directive), :'data-remote' => true, :'data-method' => 'DELETE', :'data-ajax-complete' => 'refresh' }
+            Unlink from
+            =program.slug

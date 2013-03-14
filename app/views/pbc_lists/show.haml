@@ -7,9 +7,9 @@
 -content_for :header do
   %ul.breadcrumbs
     %li=link_to 'dashboard', programs_dash_path
-    %li=link_to instance.audit_cycle.directive.title, flow_directive_path(instance.audit_cycle.directive_id)
+    %li=link_to instance.audit_cycle.program.title, flow_program_path(instance.audit_cycle.program_id)
     %li=link_to instance.audit_cycle.title, flow_cycle_path(instance.audit_cycle)
-    %li= 'PBC list'    
+    %li= 'PBC list'
   %h1
     #{instance.audit_cycle.title} PBC List
 
@@ -20,12 +20,12 @@
     %li{:class => "items-#{@pbc_list.requests.count}"}
       %a{ :href => import_flow_pbc_list_path(@pbc_list) }
         %i.grcicon-imp-exp
-        Import Requests
+        %span Import Requests
     -if @pbc_list.requests.count != 0
       %li
         %a{ :href => export_flow_pbc_list_path(@pbc_list), :'data-toggle' => 'modal-ajax' }
           %i.grcicon-export
-          Export Requests
+          %span Export Requests
 
 .container-fluid
   .row-fluid

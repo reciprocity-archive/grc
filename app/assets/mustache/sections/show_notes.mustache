@@ -1,13 +1,13 @@
 {{#if_equals notes ''}}
   <a class="note-trigger" href='javascript://'>
-    <i class="grcicon-add-black"></i>
-    Abstract
+    + Abstract
   </a>
 {{else}}
   <div class="note-content">
-    <a class="edit-notes" href='javascript://'>
+    <a class="edit-notes" href='javascript://' rel='tooltip' title='Edit Abstract'>
       <i class="grcicon-edit"></i>
     </a>
+    <strong>Abstract</strong>
     <div class="rtf">
       {{{with_line_breaks notes}}}
     </div>
