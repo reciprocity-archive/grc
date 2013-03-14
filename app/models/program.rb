@@ -81,7 +81,7 @@ class Program < ActiveRecord::Base
   end
 
   def create_stealth_directive_for_company_controls
-    if self.directives.count == 0
+    if self.directives.count == 0 && self.kind == "Company Controls"
       self.directives.create(
         :title => "Thou shalt use Company Controls",
         :kind => "Company Controls Policy")
