@@ -47,8 +47,8 @@
                 -if editable_notes
                   %a.edit-notes{:href => 'javascript://', :rel => "tooltip" , :title => "Edit Abstract"}
                     %i.grcicon-edit
+                  %strong Abstract
                   .rtf
-                    %strong Abstract
                     =display_as_html(notes)
             -else
               -if editable_notes
@@ -102,8 +102,8 @@
                   -if editable_notes
                     %a.edit-notes{:href => 'javascript://'}
                       %i.grcicon-edit
+                  %strong Abstract
                   .rtf
-                    %strong Abstract
                     =display_as_html(notes)
               -else
                 -if editable_notes
