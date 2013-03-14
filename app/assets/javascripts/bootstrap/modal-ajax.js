@@ -213,6 +213,8 @@
   }
 
   var arrangeTopModal = function(modals, modal) {
+    if (modal.length == 0) return;
+
     var offsetParent = modal.offsetParent()[0];
     var _scrollY = 0;
     var _top = 0;    
