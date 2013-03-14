@@ -152,7 +152,7 @@ can.Control("CMS.Controllers.ResizeWidgets", {
         if(that.options.model.getCollapsed(that.options.page_token, $(grandchild).attr("id"))) {
           $(grandchild).css("height", "").find(".widget-showhide > a").showhide("hide")
         } else {
-          if(page_heights.attr($(grandchild).attr("id"))) {
+          if(page_heights.attr($(grandchild).attr("id")) != null) {
             var sh = page_heights.attr($(grandchild).attr("id"));
             $(grandchild).css("height", sh);
 
@@ -182,8 +182,8 @@ can.Control("CMS.Controllers.ResizeWidgets", {
       });
     });
     if(dirty) {
-      $c.find("section[id]").each(function() { that.ensure_minimum(this); });
       model.save();
+      $c.find("section[id]").each(function() { that.ensure_minimum(this); });
     }
   }
 
