@@ -191,17 +191,17 @@
     modals = $(modals).not(referenceModal);
     if(modals.length < 1) return;
 
-    var header_height = parseInt(modals.find(".modal-header:first").height());
-    var offsetParent = modals.first().offsetParent()[0];
-    if(!offsetParent) offsetParent = window;
-    var _top = offsetParent.scrollY + parseInt($(referenceModal)[0].offsetTop) - header_height / 2;
+    var $header = referenceModal.find(".modal-header");
+    var header_height = $header.height() + parseInt($header.css("padding-top")) + parseInt($header.css("padding-bottom"));
+    var _top = parseInt($(referenceModal).offset().top);
+
     modals.css({
         "overflow" : "hidden"
       , "height" : function() {
-          return header_height + 4;
+          return header_height;
         }
       , "top" : function(i) {
-        return _top - (modals.length - i) * (header_height + 4);
+        return _top - (modals.length - i) * (header_height);
       }
       , "margin-top" : 0
       , 'position' : "absolute"
@@ -213,32 +213,31 @@
   }
 
   var arrangeTopModal = function(modals, modal) {
-    if (modal.length == 0) return;
+    if(!modal || !modal.length)
+      return;
 
-    var offsetParent = modal.offsetParent()[0];
+    var $header = modal.find(".modal-header:first");
+    var header_height = $header.height() + parseInt($header.css("padding-top")) + parseInt($header.css("padding-bottom"));
+
+    var offsetParent = modal.offsetParent();
     var _scrollY = 0;
     var _top = 0;    
     var _left = modal.position().left;
-    if(!offsetParent || offsetParent === document.documentElement || offsetParent === document.body) {
-      offsetParent = window;
-      _scrollY = offsetParent.scrollY;
+    if(!offsetParent.length || offsetParent.is("html, body")) {
+      offsetParent = $(window);
+      _scrollY = window.scrollY;
+      _top = _scrollY 
+        + (offsetParent.height() 
+          - modal.height()) / 2 
+        + header_height / 2
+
+        window.scrollY + ($(window).height() - modal.height()) / 2 + (modals.length - 1) * parseInt(modal.find(".modal-header").height()) 
     } else {
-      _left = $(offsetParent).offset().left;
-      _top = $(offsetParent).offset().top
-      _scrollY = 0
-      offsetParent = $(offsetParent).closest(".modal");
-      _left = $(offsetParent).offset().left + $(offsetParent).width() / 2 - _left;
-      _top -= $(offsetParent).offset().top
+      _top = offsetParent.closest(".modal").offset().top - offsetParent.offset().top + header_height;
+      _left = offsetParent.closest(".modal").offset().left + offsetParent.closest(".modal").width() / 2 - offsetParent.offset().left;
     }
     modal
-    .css(
-      "top"
-      , _scrollY 
-        - _top 
-        + ($(offsetParent).height() 
-          - modal.height()) / 2 
-          + (modals.length - 1) * parseInt(modal.find(".modal-header").height()) 
-        + "px")
+    .css("top", _top + "px")
     .css({"position" : "absolute", "margin-top" : 0, "left" : _left});
   }
 

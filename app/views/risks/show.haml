@@ -8,7 +8,7 @@
   %ul.breadcrumbs
     %li=link_to 'dashboard', programs_dash_path
     %li=instance.slug
-    
+
   %h1.risk
     .grcobject.risk{:rel => "tooltip", :'data-placement'=>"bottom", :title => model_title}
       %i.grcicon-risk
@@ -32,20 +32,23 @@
       =render :partial => "main",
               :layout => 'layouts/widget_box',
               :locals => { model_name.to_sym => instance, :widget_class => "risk" }
-  
+
       =render :partial => "extras",
               :layout => 'layouts/widget_box',
               :locals => { model_name.to_sym => instance, :widget_class => "widget-tabs widget-tabs-horizontal risk" }
-  
+      =render :partial => 'shared/related',
+              :layout => 'layouts/widget_box',
+              :locals => { :instance => instance, :widget_class => 'widget-tabs widget-tabs-horizontal business' }
+
     #right_column.span4.widget-area
       =render :partial => "info",
               :layout => 'layouts/widget_box',
               :locals => { model_name.to_sym => instance, :widget_class => "risk" }
-      
+
       =render :partial => "more_info",
               :layout => 'layouts/widget_box',
               :locals => { model_name.to_sym => instance, :widget_class => 'related business' }
-              
+
       =render :partial => "risky_attributes",
               :layout => 'layouts/widget_box',
               :locals => { model_name.to_sym => instance, :widget_class => "risk" }
