@@ -134,6 +134,7 @@ jQuery(function($) {
       $section.find('.openclose').openclose("open");
       $section.find('.tree-structure .oneline').oneline("view");
     }
+    e.preventDefault();
   });
   $('body').on('click', 'a.shrinkAll', function(e) {
     var $tabs = $(this).closest('.tabbable');
@@ -145,6 +146,7 @@ jQuery(function($) {
       $section.find('.openclose.active').openclose("close");
       $section.find('.tree-structure .oneline').oneline("hide");
     }
+    e.preventDefault();
   });
 
   // Tabs via AJAX on 'Quick Find'
