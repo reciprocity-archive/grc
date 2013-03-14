@@ -59,7 +59,13 @@ can.Control("CMS.Controllers.DashboardWidgets", {
           list : true
         };
         params[can.underscore(this.options.model.shortName) + "_id"] = this.options.parent_id;
-        this.options.model.findAll(params).done(this.proxy('draw_list'));
+        $.ajax({
+          url : "/" + this.options.object_route
+          , dataType : "html"
+          , type : "get"
+          , data : params
+        })
+        .done(this.proxy('draw_list'));
       } else {
         this.options.model.findRelated({
           id : this.options.parent_id
@@ -72,12 +78,12 @@ can.Control("CMS.Controllers.DashboardWidgets", {
     }
   }
 
-  , draw_list : function(list) {
+  , draw_list : function(list, xhr) {
     var that = this;
-    this.options.list = list;
 
     function do_draw(frag) {
-      that.element.html(frag);
+       that.element.html(frag);
+     
       CMS.Models.DisplayPrefs.findAll().done(function(d) {
         var content = that.element;
         if(d[0].getCollapsed("programs_dash", that.element.attr("id"))) {
@@ -100,10 +106,12 @@ can.Control("CMS.Controllers.DashboardWidgets", {
     }
 
     if(typeof list === "string") {
-      do_draw(list);
+      can.view.mustache(this.element.attr("id") + "_tmpl", list);
+      this.options.list_view = "#" + this.element.attr("id") + "_tmpl";
     } else {
-      can.view(this.options.widget_view, this.options, do_draw);
+      this.options.list = list;
     }
+    can.view(this.options.widget_view, this.options, do_draw);
   }
 
   , ".remove-widget click" : function() {
