@@ -22,14 +22,14 @@
       .span6
         .pull-right
           %a.btn.btn-add{ :href => new_flow_control_path(:'program_id' => instance.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-dirty' => '#controls, #combo', :'data-route' => "tab=category_controls", :'data-modal-class' => 'modal-wide', :rel => "tooltip", :title => 'Create New Control' }
-            %i.grcicon-add
-            Control
+            %i.grcicon-link-white
+            Controls
         .pull-right
           -unless program.company_controls?
             .btn-group.left-dropdown.button-space
               %a{:'data-toggle'=>"dropdown", :href => "#", :class => "btn btn-add dropdown-toggle", :rel => "tooltip", :title => "Add Regulation, Contract, or Policy"}
-                %i.grcicon-add
-                Directive
+                %i.grcicon-link-white
+                Directives
               %ul.dropdown-menu
                 %li.add-new-item
                   %a{:'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :'data-toggle' => "modal-ajax-relationship-selector", :href => list_edit_flow_program_directives_path(:program_id => instance.id, :directive_meta_kind => :regulation), :'data-modal-class' => 'modal-wide' }
