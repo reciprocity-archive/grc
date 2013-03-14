@@ -343,6 +343,12 @@ h4.pbc-title {
       span {
         color: $responsTitle;
       }
+      &.pbc-add-system-process {
+        color:$compliance;
+        i {
+          @include opacity(1);
+        }
+      }
     }
     h5 {
       font-size: 11px;
