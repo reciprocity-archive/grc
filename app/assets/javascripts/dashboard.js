@@ -638,7 +638,7 @@ if(!/\/mapping/.test(window.location.href)) {
   jQuery(function($) {
     var $dialog = $('<div id="mapping_dialog" class="modal hide"></div>').appendTo('body');
     $dialog.draggable({ handle: '.modal-header' });
-    $('#directives, #regulations, #controls, #section_list').on('click', 'a.controllist, a.controllistRM', function(e) {
+    $('#directives, #regulations, #sections, #controls, #section_list').on('click', 'a.controllist, a.controllistRM', function(e) {
       e.preventDefault();
       $dialog.data('href', $(this).attr('href'));
       $dialog.load($(this).attr('href'), function() {
