@@ -11,6 +11,10 @@ end
 class SystemsController < BaseObjectsController
   include ImportHelper
 
+  SYSTEMS_METADATA_MAP = Hash[*%w(
+    Type type
+  )]
+
   SYSTEM_MAP = Hash[*%w(System\ Code slug Title title Description description Link:References references Infrastructure infrastructure Link:People;Owner owner Link:Categories categories Append:Notes append_notes Link:System;Sub\ System sub_systems Link:Org\ Group org_groups Effective\ Date start_date Created created_at Updated updated_at Network\ Zone network_zone)]
 
   access_control :acl do
@@ -210,8 +214,16 @@ class SystemsController < BaseObjectsController
 
     raise ImportException.new("There must be at least 5 input lines") unless rows.size >= 5
 
-    rows.shift
-    rows.shift
+    systems_headers = read_import_headers(import, SYSTEMS_METADATA_MAP, "metadata", rows)
+    systems_values = rows.shift
+
+    # Remove "Invalid metadata headings" error
+    import[:messages] = []
+
+    import[:metadata] = Hash[*systems_headers.zip(systems_values).flatten]
+
+    validate_import_type(import[:metadata], "Systems")
+
     rows.shift
     rows.shift
 
