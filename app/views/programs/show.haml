@@ -10,10 +10,11 @@
         =instance.title
 
   %h1.governance
-    .grcobject.governance{:rel => "tooltip", :'data-placement'=>"bottom", :title => "Program"}
-      -if instance.company_controls?
+    -if instance.company_controls?
+      .grcobject.compliance{:rel => "tooltip", :'data-placement'=>"bottom", :title => "Program"}    
         %i.grcicon-control
-      -else
+    -else
+      .grcobject.governance{:rel => "tooltip", :'data-placement'=>"bottom", :title => "Program"}    
         %i.grcicon-program
     %span
       %strong Program:
@@ -52,7 +53,7 @@
     #middle-column.span8.widget-area
       =render :partial => 'main',
               :layout => 'layouts/widget_box',
-              :locals => { :program => instance, :widget_class => 'widget-tabs widget-tabs-horizontal governance' }
+              :locals => { :program => instance, :widget_class => 'widget-tabs widget-tabs-horizontal compliance' }
       -unless instance.company_controls?
         =render :partial => 'shared/related',
                 :layout => 'layouts/widget_box',
@@ -60,7 +61,7 @@
       -if instance.company_controls?
         =render :partial => 'linked_programs',
                 :layout => 'layouts/widget_box',
-                :locals => { :instance => instance, :widget_class => 'widget-tabs widget-tabs-horizontal compliance' }
+                :locals => { :instance => instance, :widget_class => 'widget-tabs widget-tabs-horizontal governance' }
       -else
         =render :partial => 'shared/add_widget_section'
 

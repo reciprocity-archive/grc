@@ -19,10 +19,10 @@
       .span12
         .pull-right
           %a.btn.btn-add{ :href => list_edit_flow_system_systems_path(:parent_id => system.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :title => 'Edit Sub-Systems', :'data-modal-class' => 'modal-wide' }
-            %i.grcicon-edit-white
+            %i.grcicon-link-white
             Sub-Systems/Sub-Processes
           %a.btn.btn-add{ :href => list_edit_flow_system_controls_path(:system_id => system.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :title => 'Edit Controls', :'data-modal-class' => 'modal-wide' }
-            %i.grcicon-edit-white
+            %i.grcicon-link-white
             Controls
 
 %ul.tree-structure
