@@ -252,26 +252,58 @@ jQuery(document).ready(function($) {
 
   // Open quick find
   $('body').on('focus', '.quick-search-holder input', function() {
-    var $this = $(this),
-    $quickFind = $this.closest(".quick-search").find(".quick-search-results");
-    $quickFind.fadeIn();
-    
-    if($(".quick-search-results").css("display") == "block"){
-      $('.quick-search-holder').addClass('open');
-    }
-    
-    $('.quick-search-results .remove').click(function() {
-      $('.quick-search-holder').removeClass('open');
-    });
-    
+    var $this = $(this)
+      , $quick_search = $this.closest('.quick-search')
+      ;
+
+    $quick_search.find('.quick-search-results').fadeIn();
+    $quick_search.find('.quick-search-holder').addClass('open');
+  });
+
+  $('.quick-search').on('close', function() {
+    var $this = $(this)
+      ;
+
+    $this.find('.quick-search-results').hide();
+    $this.find('.quick-search-holder').removeClass('open');
+    $this.find('.quick-search-holder input').blur();
   });
 
   // Remove quick find
   $('body').on('click', '.quick-search-results .remove', function(e) {
     e.preventDefault();
-    var $this = $(this),
-        $quickFind = $this.closest(".quick-search-results");
-    $quickFind.fadeOut();
+
+    $(this).closest('.quick-search').trigger('close');
+  });
+
+  // Close quick find popover when clicked outside the box
+  $('body').on('click', function(e) {
+    var $quick_search = $('.quick-search');
+
+    // Bail early if it's not open
+    if (!$quick_search.find('.quick-search-holder').hasClass('open'))
+      return;
+
+    // Don't close if clicking inside a modal
+    if ($(e.target).closest('.modal').length > 0)
+      return;
+
+    // Don't close if clicking on modal backdrop
+    if ($(e.target).closest('.modal-backdrop').length > 0)
+      return;
+
+    // Don't close if click is within the quick search area
+    if ($quick_search.find(e.target).length > 0)
+      return;
+
+    $quick_search.trigger('close');
+  });
+
+  // Close quick find popover when user presses Escape key
+  $('body').on('keyup', function(e) {
+    if (e.keyCode == 27) {
+      $('.quick-search').trigger('close');
+    }
   });
 
   // Close other popovers when one is shown
