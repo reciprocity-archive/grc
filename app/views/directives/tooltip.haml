@@ -35,9 +35,9 @@
             Controls
             (#{stats[:controls_count]})
           .progress
-            .bar.bar-success{:style => "width:#{stats[:controls_complying_percentage]}%", :rel => "tooltip", :title => "#{stats[:controls_complying_count]} Complying"}=stats[:controls_complying_count]
-            .bar.bar-danger{:style => "width:#{stats[:controls_pending_percentage]}%", :rel => "tooltip", :title => "#{stats[:controls_pending_count]} Pending"}=stats[:controls_pending_count]
-            .bar.bar-warning{:style => "width:#{stats[:controls_approved_percentage]}%", :rel => "tooltip", :title => "#{stats[:controls_approved_count]} Approved"}=stats[:controls_approved_count]
+            .bar.bar-success{:style => "width:#{stats[:controls_approved_percentage]}%", :rel => "tooltip", :title => "#{stats[:controls_approved_count]} Approved"}=stats[:controls_approved_count]
+            .bar.bar-danger{:style => "width:#{stats[:controls_complying_percentage]}%", :rel => "tooltip", :title => "#{stats[:controls_complying_count]} Complying"}=stats[:controls_complying_count]
+            .bar.bar-warning{:style => "width:#{stats[:controls_pending_percentage]}%", :rel => "tooltip", :title => "#{stats[:controls_pending_count]} Pending"}=stats[:controls_pending_count]
           .minor
             Parented controls:
             =stats[:controls_parented_count]
