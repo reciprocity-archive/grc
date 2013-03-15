@@ -4,8 +4,8 @@
     <h3 class="tab-title">
       {{#relationship_type}}
       {{title}}
-      <a class="widgetbtn pull-right" href="/relationships/list_edit?object_id={{parent_id}}&amp;object_type={{parent_type}}&amp;related_model={{object_type}}&amp;related_side=destination&amp;relationship_type={{id}}" data-toggle="modal-ajax-relationship-selector" data-modal-reset="reset" data-modal-class="modal-wide" data-list-target="refresh">
-        {{{withattr 'data-tab-target' '#related-objects-{id}' }}}
+      <a class="widgetbtn pull-right" data-toggle="modal-ajax-relationship-selector" data-modal-reset="reset" data-modal-class="modal-wide" data-list-target="refresh">
+        {{{withattr "href" "{edit_url}"}}}
         <i class="grcicon-link"></i>
       </a>
       {{/relationship_type}}
@@ -13,17 +13,17 @@
   </li>
   {{#related_objects}}
   {{#object}}
-  <li>
-    {{#pack this tooltip_view=tooltip_view object_type=object_type object_display=object_display object_route=object_route}}
-    <a data-popover-trigger="sticky-hover" data-popover-trigger="sticky-hover" data-sticky-popover="true" data-content="{{render tooltip_view}}">
-      {{{withattr "href" "/{object_route}/{id}" "data-original-title" "<div class='row-fluid'><div class='span10'><h3><i class='grcicon-{object_type}-color'></i>{slug} <span>{title}</span></h3></div><div class='span2'><a class='btn btn-mini pull-right' href='/{object_route}/{id}' rel='tooltip' data-original-title='View/Edit {object_display}'><i class='grcicon-goto'></i></a></div></div>" }}}
+  <li class="{{object_type.toLowerCase}}">
+    {{#pack this tooltip_view=tooltip_view object_type=object_type object_display=object_display object_route=object_route object_url=url}}
+    <a data-popover-trigger="sticky-hover" data-popover-trigger="sticky-hover">
+      {{{withattr "href" "/{object_route}/{id}" "data-popover-href" "/{object_url}/tooltip"}}}
       <div class="row-fluid">
         <div class="span12">
           <div class="item-identifier">
-            <span class="key">
+            <span class="code">
               <span>{{prefix}}</span> <span>{{slug}}</span>
             </span>
-            <span class="name">
+            <span class="title">
               {{title}}
             </span>
           </div>

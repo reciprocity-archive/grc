@@ -3,7 +3,7 @@
     <div class="row-fluid">
       <div class="span8">
         <h2>
-          <i class="grcicon-{{object_type}}"></i>
+          <i class="grcicon-{{object_type.toLowerCase}}"></i>
           {{object_display}}
           {{#if is_related}}
             related to {{parent_type}}
@@ -34,9 +34,11 @@
       </div>
     </div>
   </header>
+  {{^if is_related}}
   <div class="filter">
     <input class="ui-corner-all widgetsearch clear-value" placeholder="Search" type="text">
   </div>
+  {{/if}}
   <section class="content">
     {{{render list_view}}}
   </section>
