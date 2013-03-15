@@ -5,7 +5,10 @@
         <h2>
           <i class="grcicon-{{object_type}}"></i>
           {{object_display}}
-          <span>
+          {{#if is_related}}
+            related to {{parent_type}}
+          {{/if}}
+          <span class="object_count">
             {{#if is_related}}
               {{related_count}}
             {{else}}

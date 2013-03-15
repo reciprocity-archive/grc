@@ -42,6 +42,7 @@ can.Control("CMS.Controllers.DashboardWidgets", {
     .addClass("widget")
     .addClass(this.options.object_category)
     .attr("id", this.options.object_type + "_list_widget")
+    .html(new Spinner().spin().el)
     .trigger("section_created");
 
     if(this.options.is_related) {
@@ -54,13 +55,14 @@ can.Control("CMS.Controllers.DashboardWidgets", {
   , fetch_list : function(params) {
     if(this.options.is_related) {
 
-      if(this.options.object_type === "Control" || this.options.object_type === "Directive") {
+      if(~can.inArray(this.options.object_type, ["Control", "Directive", "Section"])) {
         var params = {
           list : true
+          , tree : true
         };
-        params[can.underscore(this.options.model.shortName) + "_id"] = this.options.parent_id;
+        params[can.underscore(this.options.parent_type) + "_id"] = this.options.parent_id;
         $.ajax({
-          url : "/" + this.options.object_route
+          url : (this.options.object_type === "Section" ? "/directives/" + this.options.parent_id : "") + "/" + this.options.object_route
           , dataType : "html"
           , type : "get"
           , data : params
@@ -84,6 +86,10 @@ can.Control("CMS.Controllers.DashboardWidgets", {
     function do_draw(frag) {
        that.element.html(frag);
      
+      if(~can.inArray(that.options.object_type, ["Control", "Directive", "Section"])) {
+        that.element.find(".object_count").html(that.element.find("li." + can.underscore(that.options.object_type)).length);
+      }
+
       CMS.Models.DisplayPrefs.findAll().done(function(d) {
         var content = that.element;
         if(d[0].getCollapsed("programs_dash", that.element.attr("id"))) {

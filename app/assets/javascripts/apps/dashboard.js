@@ -126,6 +126,7 @@ var widget_descriptors = {
     model : CMS.Models.Section
     , object_type : "section"
     , object_route : "sections"
+    , object_category : "governance"
   }
 };
 
