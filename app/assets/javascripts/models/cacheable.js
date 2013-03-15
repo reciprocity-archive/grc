@@ -40,7 +40,7 @@ can.Model("can.Model.Cacheable", {
     for(var i = 0 ; i < (go_names.length || 0) ; i++) {
       obj[go_names[i]] = src[go_names[i]];
     }
-    if(names.not) {
+    if(names && names.not) {
       var not_names = names.not;
       for(i = 0 ; i < (not_names.length || 0) ; i++) {
         delete obj[not_names[i]];
