@@ -34,7 +34,7 @@ describe("Cacheable super-model", function() {
 
     });
 
-    describe("findInCacheById", function() {
+    describe("::findInCacheById", function() {
         it("only returns cached instance for model class", function() {
             var model = can.Model.Cacheable({});
 
@@ -63,6 +63,27 @@ describe("Cacheable super-model", function() {
             m.save();
             expect(can.Model.Cacheable.findInCacheById(1)).toBe(m);
         });
+    });
+
+    describe("::process_args", function() {
+      var orig = { bar : "baz", quux : "thud"};
+      beforeEach(function() {
+          can.Model.Cacheable.root_object = "foo";
+      });
+      afterEach(function() {
+          can.Model.Cacheable.root_object = null;
+          delete can.Model.Cacheable.cache;
+      });
+      it("boxes all params into the root object", function() {
+        expect(can.Model.Cacheable.process_args(orig)).toEqual({foo : { bar : "baz", quux : "thud"}});
+      });
+      it("filters all params to just matching names", function() {
+        expect(can.Model.Cacheable.process_args(orig, ["bar"])).toEqual({foo : { bar : "baz"}});
+      });
+      it("filters out params if names is {not : [...]}", function() {
+        expect(can.Model.Cacheable.process_args(orig, {not : ["bar"]})).toEqual({foo : {quux : "thud"}});
+      });
+
     });
 
 });

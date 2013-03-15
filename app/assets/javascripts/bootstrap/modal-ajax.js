@@ -1,5 +1,6 @@
 //= require bootstrap-modal
 //= require can.jquery-all
+//= require jquery-migrate
 
 !function($) {
 

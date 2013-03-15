@@ -41,7 +41,8 @@ describe("AJAXy Modals", function() {
           expect($modal2.css("z-index")).toBe("1070");
       });
     });
-    it("shrinks the height of the first modal to be just over the height of its header", function(){
+    xit("shrinks the height of the first modal to be just over the height of its header", function(){
+      //this no longer happens --BM
       expect($modal1.height()).toBe($modal1.find(".modal-header").height() + 4);
     });
   });
