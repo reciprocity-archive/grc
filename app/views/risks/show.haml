@@ -35,7 +35,7 @@
 
       =render :partial => "extras",
               :layout => 'layouts/widget_box',
-              :locals => { model_name.to_sym => instance, :widget_class => "widget-tabs widget-tabs-horizontal risk" }
+              :locals => { model_name.to_sym => instance, :widget_class => "widget-tabs widget-tabs-horizontal" }
       =render :partial => 'shared/related',
               :layout => 'layouts/widget_box',
               :locals => { :instance => instance, :widget_class => 'widget-tabs widget-tabs-horizontal business' }
