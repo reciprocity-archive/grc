@@ -182,7 +182,7 @@ class SystemsController < BaseObjectsController
 
       handle_option(attrs, 'network_zone', import[:warnings][i], :network_zone)
       handle_date(attrs, 'start_date', import[:warnings][i])
-      
+
       append_notes = attrs.delete('append_notes')
       if append_notes
         splits = (attrs['description'] || system.description || "").split("\n---\n").map {|x| x.strip}
