@@ -28,16 +28,16 @@
         %i{ :class => "#{object_icon}-color" }
       -elsif object_icon.present?
         %i{ :class => object_icon }
-      %span.code
-        =code
-      -if include_notes
-        -if notes.present?
-          %i.grcicon-comment
       %span.title
         =title
+        %span.code
+          =code
         =extra_description
         %i.description-inline
           =description_inline
+      -if include_notes
+        -if notes.present?
+          %i.grcicon-comment
     .description
       -if instance.has_attribute? notes_attr
         .note
@@ -63,10 +63,10 @@
         %i{ :class => "#{object_icon}-color" }
       -elsif object_icon.present?
         %i{ :class => object_icon }
-      %span.code
-        =code
       %span.title
         =title
+        %span.code
+          =code
         =extra_description
     .description.inhover.no-description
       -if include_notes && editable_notes
@@ -82,14 +82,14 @@
         %i{ :class => "#{object_icon}-color" }
       -elsif object_icon.present?
         %i{ :class => object_icon }
-      %span.code
-        =code
+      %span.title
+        =extra_description
+        %span.code
+          =code
+        %i.description-inline=description_inline
       -if include_notes
         -if notes.present?
           %i.grcicon-comment
-      %span.title
-        =extra_description
-        %i.description-inline=description_inline
     .description.inhover
       =display_as_html(description) do
         %span.code

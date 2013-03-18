@@ -23,10 +23,10 @@
                     .row-fluid
                       .span11
                         .oneline.expand-on-hover
-                          %span.code
-                            =control.slug
                           %span.title
                             =control.title
+                            %span.code
+                              =control.slug
                             %i.description-inline=sanitize(control.description, :tags => []) if local_assigns[:description_inline].nil?
                         .description
                           =display_as_html(control.description)
@@ -42,10 +42,10 @@
                       .row-fluid
                         .span11
                           .oneline.expand-on-hover
-                            %span.code
-                              =ccontrol.slug
                             %span.title
                               =ccontrol.title
+                              %span.code
+                                =ccontrol.slug
                               %i.description-inline=sanitize(ccontrol.description, :tags => []) if local_assigns[:description_inline].nil?
                           .description
                             =display_as_html(ccontrol.description)

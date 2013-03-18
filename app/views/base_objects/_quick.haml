@@ -19,6 +19,8 @@
             .row-fluid
               .span12
                 .item-identifier
+                  %span.title
+                    =instance.title
                   -if instance.is_a?(Program) && instance.company_controls?
                     %i.grcicon-control-color.short
                     %span.code
@@ -29,8 +31,4 @@
                       =instance.slug
                   -else
                     %span.code
-                      =instance.slug                
-                  %span.title
-                    =instance.title
-                    
-                  
+                      =instance.slug

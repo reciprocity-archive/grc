@@ -39,10 +39,10 @@
     %li.main
       .item-identifier
         %a{ :'data-id' => '<%= risky_attribute.id %>', :href => flow_risky_attribute_path("<%=risky_attribute.id%>"), :'data-popover-href' => tooltip_flow_risky_attribute_path("<%=risky_attribute.id%>"), :'data-popover-trigger' => 'sticky-hover' }
-          %span.code
-            <%= risky_attribute.type_string %>
           %span.addition-info
             <%= risky_attribute.title || '' %>
+          %span.code
+            <%= risky_attribute.type_string %>
 
   %ul#risky_attributeList.tree-structure.simple{ :'data-template-id' => 'risky_attribute_list_item' }
     -risky_attributes.each do |item|

@@ -5,10 +5,10 @@
         .row-fluid
           .span12
             .oneline
-              %span.code
-                #{item.slug}
               %span.title
                 #{item.title}
+              %span.code
+                #{item.slug}
         -#.item-actions
           %a.btn.btn-mini{ :href => self.send("flow_#{controller_name.singularize}_path", item) }
             %i.grcicon-goto

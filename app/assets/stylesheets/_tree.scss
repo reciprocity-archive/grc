@@ -214,12 +214,18 @@ ul.tree-structure {
   }
   .code {
     color:$black;
-    font-weight:bold;
-    font-size:12px;
+    font-size:11px;
     margin-right:8px;
   }
   .title {
     color:$black;
+    font-weight:bold;
+    .code {
+      color:$black;
+      font-size:11px;
+      margin-right:8px;
+      font-weight: normal;
+    }
   }
   .mini-risky-attribute {
     color: $risk;
