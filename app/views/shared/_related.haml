@@ -1,4 +1,4 @@
--widget_title = "Related" if local_assigns[:widget_title].nil?
+-widget_title = "Related to " + instance.class.to_s.capitalize if local_assigns[:widget_title].nil?
 
 -near_model = instance.class.to_s
 -near_model = "Process" if near_model == "System" && instance.is_biz_process?
