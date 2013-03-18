@@ -25,8 +25,9 @@
                         .oneline.expand-on-hover
                           %span.title
                             =control.title
-                            %span.code
-                              =control.slug
+                          %span.code
+                            =control.slug
+                          %span.description-inline
                             %i.description-inline=sanitize(control.description, :tags => []) if local_assigns[:description_inline].nil?
                         .description
                           =display_as_html(control.description)
@@ -44,8 +45,9 @@
                           .oneline.expand-on-hover
                             %span.title
                               =ccontrol.title
-                              %span.code
-                                =ccontrol.slug
+                            %span.code
+                              =ccontrol.slug
+                            %span.description-inline
                               %i.description-inline=sanitize(ccontrol.description, :tags => []) if local_assigns[:description_inline].nil?
                           .description
                             =display_as_html(ccontrol.description)

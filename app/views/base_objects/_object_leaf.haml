@@ -30,8 +30,9 @@
         %i{ :class => object_icon }
       %span.title
         =title
-        %span.code
-          =code
+      %span.code
+        =code
+      %span.description-inline
         =extra_description
         %i.description-inline
           =description_inline
@@ -65,8 +66,9 @@
         %i{ :class => object_icon }
       %span.title
         =title
-        %span.code
-          =code
+      %span.code
+        =code
+      %span.description-inline
         =extra_description
     .description.inhover.no-description
       -if include_notes && editable_notes
@@ -84,8 +86,9 @@
         %i{ :class => object_icon }
       %span.title
         =extra_description
-        %span.code
-          =code
+      %span.code
+        =code
+      %span.description-inline
         %i.description-inline=description_inline
       -if include_notes
         -if notes.present?
