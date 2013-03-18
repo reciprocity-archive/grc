@@ -2,8 +2,10 @@
 	{{#withclass 'selected:selected =type span12 item slot regulationslot selector collapsed oneline'}}
 	<a href="javascript://">
 		<i class="grcicon-ok slct"></i>
-		<strong class="prefix">{{prefix}} {{slug}}</strong>
-		{{firstnonempty title description_inline}}
+		<span class="title">
+		  {{firstnonempty title description_inline}}
+		</span>
+		<span class="code">{{prefix}} {{slug}}</span>
 	</a>
 	{{/withclass}}
 </div>

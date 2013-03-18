@@ -1,11 +1,12 @@
   <div class="content">
   	{{#model}}
     <div>
-      <strong class="prefix">
+      <span class="title">
+        <strong>{{title}}</strong>
+      </span>
+      <span class="code">
         {{prefix}} {{slug}}
-      </strong>
-      {{title}}
-      <br>
+      </span>
       <div class="rtf">
         {{{with_line_breaks description}}}
       </div>
