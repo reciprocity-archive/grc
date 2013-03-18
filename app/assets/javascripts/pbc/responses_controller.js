@@ -228,7 +228,7 @@ can.Control("CMS.Controllers.Responses", {
     }
     //meeting events
     , ".add-meeting modal:success" : function(el, ev, data) {
-      el.closest("[data-model]").data("model").addElementToChildList("meetings", new can.Observe(data));
+      el.closest("[data-model]").data("model").addElementToChildList("meetings", new CMS.Models.Meeting(data));
     } 
     , ".edit_document modal:success" : function(el, ev, data) {
       CMS.Models.Document.findInCacheById(data.id).attr(data);
