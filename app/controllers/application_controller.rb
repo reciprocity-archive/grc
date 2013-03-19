@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
   before_filter :require_user
   before_filter :filter_set
   before_filter :set_features
+  before_filter  :set_default_cache_control
   after_filter :flash_to_headers
 
   after_filter  :ajax_flash_to_headers
@@ -119,6 +120,14 @@ class ApplicationController < ActionController::Base
   def check_ssl
     # FIXME properly check if we are behind an SSL proxy
     #  request.env['HTTPS'] = 'on' if Rails.env.production?
+  end
+
+  def set_cache_control(value)
+    headers["Cache-Control"] = value
+  end
+
+  def set_default_cache_control
+    set_cache_control("private, no-cache, no-store, must-revalidate")
   end
 
   def need_cycle
