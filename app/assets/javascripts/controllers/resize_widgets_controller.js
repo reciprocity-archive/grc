@@ -142,6 +142,11 @@ can.Control("CMS.Controllers.ResizeWidgets", {
       return ch;
     };
 
+    if(!page_heights) {
+      page_heights = new can.Observe();
+      heights.attr(this.options.page_token, page_heights);
+    }
+
     if(!$c.length) {
       $c = $(this.element).children();
     }

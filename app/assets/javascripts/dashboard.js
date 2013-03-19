@@ -717,7 +717,8 @@ jQuery(function($) {
     CMS.Models.DisplayPrefs.findAll().done(function(data) {
       var destroys = [];
       can.each(data, function(d) {
-        destroys.push(d.destroy());
+        d.unbind("change"); //forget about listening to changes.  we're going to refresh the page
+        destroys.push(d.resetPagePrefs(/^\/([^\/]+)/.exec(window.location.pathname)[1]));
       });
       $.when.apply($, destroys).done($.proxy(window.location, 'reload'));
     });

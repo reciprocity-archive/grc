@@ -97,6 +97,17 @@ can.Model.LocalStorage("CMS.Models.DisplayPrefs", {
     return this;
   }
 
+  , resetPagePrefs : function(page_id) {
+    var that = this;
+    can.each(["collapse", "columns", "sorts", "heights"], function(category) {
+      var cs = can.getObject(category, that);
+      if(cs) {
+        cs.removeAttr(page_id);
+      }
+    });
+    return that.save();
+  }
+
 });
 
 })(this.can, this.can.$);
