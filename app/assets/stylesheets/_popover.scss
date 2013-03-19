@@ -171,4 +171,11 @@
     }
   }
 }
-
+/* slowing down fade-in only.  Fade-out remains 0.15s */
+.tooltip.fade.in, .popover.fade.in {
+  -webkit-transition: opacity 0.35s linear;
+  -moz-transition: opacity 0.35s linear;
+  -ms-transition: opacity 0.35s linear;
+  -o-transition: opacity 0.35s linear;
+  transition: opacity 0.35s linear;
+}

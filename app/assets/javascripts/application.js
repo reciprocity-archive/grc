@@ -108,7 +108,7 @@ jQuery(document).ready(function($) {
 
     if (!$currentTarget.data('tooltip')) {
       $currentTarget
-        .tooltip({ delay: 300 })
+        .tooltip({ delay: {show : 500, hide : 0} })
         .triggerHandler(e);
     }
 
@@ -119,7 +119,7 @@ jQuery(document).ready(function($) {
 // Setup for Popovers
 jQuery(document).ready(function($) {
   var defaults = {
-    delay: { show: 300, hide: 150 },
+    delay: {show : 500, hide : 0},
     placement: 'left',
     content: function(trigger) {
       var $trigger = $(trigger);
