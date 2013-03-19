@@ -432,10 +432,10 @@
   @include reset-list();
   text-transform:uppercase;
   margin-top:4px;
+  @include oneline();
   li {
-    float:left;
+    display: inline-block;
     font-size:11px;
-    margin-right:3px;
     color:$text;
     a {
       color:$link;
