@@ -506,6 +506,24 @@ jQuery(function($) {
         }).done(function() {
             $(event.target).parent().removeClass("field-failure");
             $(event.target).blur().data("pbcAutocomplete_people")._value(ui.item.email);
+            var oldvalues = $(event.target).closest("[data-filter-person]").data("filter-person").split(",");
+            $(event.target).closest("[data-filter-person]").attr("data-filter-person", ui.item.email).data("filter-person", ui.item.email);
+
+            can.each(oldvalues, function(oldvalue) {
+              if(!$("[data-filter-person*='" + oldvalue + "']").length) {
+                $("select[data-filter-attribute=person] option").each(function() {
+                  if($(this).val() === oldvalue) {
+                    var $sel = $(this).closest("select");
+                    $sel.find("option:first").prop("selected", true);
+                    $(this).remove();
+                    $sel.change();
+                  }
+                })
+              }
+            });
+            if(!~can.inArray(ui.item.email, $("select[data-filter-attribute=person] option").map(function() { return $(this).val()}))) {
+              $("<option>").text(ui.item.email).appendTo("select[data-filter-attribute=person]");
+            } 
         }).fail(function() {
           $(event.target).parent().addClass("field-failure");
         })
