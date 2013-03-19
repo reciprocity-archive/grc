@@ -10,7 +10,7 @@
         %span
           =instance.title
 
-  %h1.governance{ :rel => "tooltip", :'data-placement'=>"bottom", :title => "#{instance.title}"}
+  %h1.governance
     -if instance.company_controls?
       .grcobject.compliance{:rel => "tooltip", :'data-placement'=>"bottom", :title => "Program"}    
         %i.grcicon-control
