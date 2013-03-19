@@ -42,7 +42,7 @@
               :locals => { :system => @system, :widget_class => "compliance" }
       =render :partial => 'shared/related',
               :layout => 'layouts/widget_box',
-              :locals => { :instance => @system, :widget_class => "widget-tabs widget-tabs-horizontal business", :widget_title => "Related to " + @system.meta_kind.to_s.capitalize }
+              :locals => { :instance => @system, :widget_class => "widget-tabs widget-tabs-horizontal", :widget_title => "Related to " + @system.meta_kind.to_s.capitalize }
       =render :partial => 'shared/add_widget_section'
     #right_column.span4.widget-area
       =render :partial => 'systems/info',
@@ -50,5 +50,5 @@
               :locals => { :system => @system, :widget_class => "compliance" }
       =render :partial => 'systems/more_info',
               :layout => 'layouts/widget_box',
-              :locals => { :system => @system, :widget_class => 'related business' }
+              :locals => { :system => @system, :widget_class => 'related' }
       =render :partial => 'shared/add_widget_section'

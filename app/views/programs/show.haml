@@ -57,7 +57,7 @@
       -unless instance.company_controls?
         =render :partial => 'shared/related',
                 :layout => 'layouts/widget_box',
-                :locals => { :instance => instance, :widget_title => "Impact/Scope", :widget_class => 'widget-tabs widget-tabs-horizontal related business' }
+                :locals => { :instance => instance, :widget_title => "Impact/Scope", :widget_class => 'widget-tabs widget-tabs-horizontal related' }
       -if instance.company_controls?
         =render :partial => 'linked_programs',
                 :layout => 'layouts/widget_box',
@@ -75,6 +75,6 @@
                 :locals => { :program => instance, :widget_class => 'governance' }
       =render :partial => 'more_info',
               :layout => 'layouts/widget_box',
-              :locals => { :program => instance, :widget_class => 'related business'}
+              :locals => { :program => instance, :widget_class => 'related'}
       -unless instance.company_controls?
         =render :partial => 'shared/add_widget_section'
