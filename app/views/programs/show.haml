@@ -3,13 +3,14 @@
 
 -content_for :header do
 
-  %ul.breadcrumbs
-    %li=link_to 'dashboard', programs_dash_path
-    %li
-      %span
-        =instance.title
+  .breadcrumbs-holder
+    %ul.breadcrumbs
+      %li=link_to 'dashboard', programs_dash_path
+      %li
+        %span
+          =instance.title
 
-  %h1.governance
+  %h1.governance{ :rel => "tooltip", :'data-placement'=>"bottom", :title => "#{instance.title}"}
     -if instance.company_controls?
       .grcobject.compliance{:rel => "tooltip", :'data-placement'=>"bottom", :title => "Program"}    
         %i.grcicon-control
