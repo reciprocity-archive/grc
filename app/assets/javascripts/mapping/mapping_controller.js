@@ -12,10 +12,11 @@ function mapunmap(unmap) {
       if(unmap)
         params.u = "1";
       if(rcontrol) params.rcontrol = rcontrol.id;
+      if(rcontrol === null) params.rcontrol = ccontrol.id;
       if(section) params.section = section.id;
 
       var dfd = section ?
-        section.map_rcontrol(params)
+        section["map_" + (rcontrol === null ? "control" : "rcontrol")](params)
         : rcontrol.map_ccontrol(params);
       dfd.then(can.proxy(this.updateButtons, this));
       return dfd;
@@ -56,9 +57,9 @@ can.Control("CMS.Controllers.Mapping", {
 
   , "#rmap:not([disabled]), #cmap:not([disabled]) click" : function(el, ev) {
     var that = this;
-    var section = $("#selected_sections").control(namespace.CMS.Controllers.Sections).options.instance;
-    var rcontrol = $("#selected_rcontrol").control(namespace.CMS.Controllers.Controls).options.instance;
-    var ccontrol = $("#selected_ccontrol").control(namespace.CMS.Controllers.Controls).options.instance;
+    var section = can.getObject("options.instance", $("#selected_sections").control(namespace.CMS.Controllers.Sections));
+    var rcontrol = can.getObject("options.instance", $("#selected_rcontrol").control(namespace.CMS.Controllers.Controls));
+    var ccontrol = can.getObject("options.instance", $("#selected_ccontrol").control(namespace.CMS.Controllers.Controls));
 
     if(el.is("#cmap")) {
       section = null;
@@ -113,9 +114,9 @@ can.Control("CMS.Controllers.Mapping", {
   }
 
   , updateButtons : function(ev, oldVal, newVal) {
-    var section = $("#selected_sections").control(namespace.CMS.Controllers.Sections).options.instance;
-    var rcontrol = $("#selected_rcontrol").control(namespace.CMS.Controllers.Controls).options.instance;
-    var ccontrol = $("#selected_ccontrol").control(namespace.CMS.Controllers.Controls).options.instance;
+    var section = can.getObject("options.instance", $("#selected_sections").control(namespace.CMS.Controllers.Sections));
+    var rcontrol = can.getObject("options.instance", $("#selected_rcontrol").control(namespace.CMS.Controllers.Controls));
+    var ccontrol = can.getObject("options.instance", $("#selected_ccontrol").control(namespace.CMS.Controllers.Controls));
 
     var rmap = $('#rmap');
     var cmap = $('#cmap');
@@ -237,6 +238,7 @@ can.Control("CMS.Controllers.Mapping", {
     this.bindXHRToButton(section.save(), el);
   }
 
+  
 });
 
 can.Control("CMS.Controllers.MappingWidgets", {}, {
@@ -267,5 +269,68 @@ can.Control("CMS.Controllers.MappingWidgets", {}, {
   }
 
 });
+  //---------------------------------------------------------------
+  // Below this line is new development for killing the reg mapper
+  //---------------------------------------------------------------
+CMS.Controllers.Mapping("CMS.Controllers.ControlMappingPopup", {
+  //static
+}, {
+  init : function() {
+    var that = this;
+    this.element.append(new Spinner().spin().element);
+    this.options.observer = new can.Observe({section : this.options.section});
+    CMS.Models.Control.findAll().done(function(d) {
+      that.list = d;
+      that.options.section.update_linked_controls_ccontrol_only();
+      that.options.observer.controls = d;
+
+      can.view("/assets/sections/control_selector.mustache", that.options.observer, function(frag) {
+        that.element.html(frag).trigger("shown");
+        that.update();
+      });
+    });
+    this.on();
+  }
+
+  , update : function() {
+    var section = this.options.section;
+    this.options.observer.attr("section", section);
+    this.element.find(".controls-list > [data-model]").each(this.proxy("style_item"));
+  }
+
+  , style_item : function(el) {
+    if(arguments.length === 2 && typeof arguments[0] === "number") {  //jQuery "each" case
+      el = arguments[1];
+    }
+
+    if(~can.inArray($(el).data("model"), this.options.section.linked_controls)) {
+      $(el).addClass("selected").css("background-color", "red").find("input[type=checkbox]").prop("checked", true);
+    } else {
+      $(el).removeClass("selected").css("background-color", "").find("input[type=checkbox]").prop("checked", false);
+    }
+  }
+
+  , " hidden" : function() {
+      this.element.remove();
+  }
+
+  , "input[type=checkbox] change" : function(el, ev) {
+    var control = el.closest("[data-model]").data("model")
+    this[el.prop("checked") ? "map" : "unmap"](this.options.section, null, control).done(this.proxy("style_item", el.closest("[data-model]")));
+  }
+
+  , "{section} updated" : function(obj, ev) {
+    // if(!/(^|\.)linked_controls(\.|$)/.test(attr))
+    //   return;
+    var $count = $("#content_" + obj.slug).find("> .item-main .controls-count");
+    $count.html($count.children().filter("i").add($("<span>").html(obj.linked_controls.length)));
+  }
+
+  , ".edit-control modal:success" : function(el, ev, data) {
+    el.closest("[data-model]").data("model").attr(data);
+  }
+});
+
+
 
 })(this, can.$);

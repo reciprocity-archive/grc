@@ -134,6 +134,7 @@
             $(selector_target).trigger('list-update-item', data);
           }
           $target.modal_form('hide');
+          $trigger.trigger('modal:success', data);
         }
       });
     },

@@ -4,7 +4,7 @@
 
 can.Model.Cacheable("CMS.Models.Section", {
   root_object : "section"
-  , findAll : "GET /programs/{id}/sections.json"
+  , findAll : "GET " + (/^\/[^\/]+\/[^\/]+/.exec(window.location.pathname) || [])[0] + "/sections.json"
   , update : function(id, section) {
     var param = {};
     can.each(section, function(val, key) {
@@ -69,6 +69,45 @@ can.Model.Cacheable("CMS.Models.Section", {
     });
   }
 
+  , map_control : function(params, section) {
+    return can.ajax({
+      url : "/mapping/map_rcontrol"
+      , data : params
+      , type : "post"
+      , dataType : "json"
+      , success : function() {
+        if(section) {
+          var flatctls = [];
+          var linkedctl = CMS.Models.Control.findInCacheById(params.ccontrol);
+          var addctls = function(ctl) {
+            flatctls.push(ctl);
+            can.each(ctl.implementing_controls, addctls);
+          }
+          addctls(linkedctl);
+          var ctlids = can.map(flatctls, function(ctl) { return ctl.id });
+
+          if(params.u) {
+            //unmap
+            var ctlindex;
+            for(var i = section.linked_controls.length - 1; i >= 0; i--) {
+              //if(!section.linked_controls[i] instanceof CMS.Models.Control)
+              if((ctlindex = can.inArray(section.linked_controls[i].id, ctlids)) >= 0)
+              {
+                section.linked_controls[i].unbind_section(section);
+                section.linked_controls.splice(i, 1);
+                ctlids.splice(ctlindex, 1);
+              }
+            }
+          } else {
+            section.linked_controls.push.apply(section.linked_controls, flatctls);
+            linkedctl.bind_section(section);
+          }
+          section.updated();
+        }
+      }
+    });
+  }
+
   , model : function(attrs) {
     var id;
     if((id = attrs.id || (attrs[this.root_object] && attrs[this.root_object].id)) && this.findInCacheById(id)) {
@@ -102,6 +141,16 @@ can.Model.Cacheable("CMS.Models.Section", {
 
   , map_rcontrol : function(params) {
     return this.constructor.map_rcontrol(can.extend({}, params, {section : this.id}), this);
+  }
+
+  , map_control : function(params) {
+    return this.constructor.map_control(can.extend({}, params, {section : this.id}), this);
+  }
+
+  , update_linked_controls_ccontrol_only : function() {
+    this.attr("linked_controls").replace(can.map(this.linked_controls, function(lc) {
+      return CMS.Models.Control.findInCacheById(lc.id);
+    }));
   }
 
   , update_linked_controls : function() {
