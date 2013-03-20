@@ -4,7 +4,7 @@
 can.Model.Cacheable("CMS.Models.Control", {
   // static properties
     root_object : "control"
-  , findAll : "GET /controls.json?company=true"
+  , findAll : "GET /controls.json"
   , findOne : "GET /controls/{id}.json"
   , update : function(id, params) {
     return $.ajax({

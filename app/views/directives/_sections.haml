@@ -33,8 +33,9 @@
             -data_popover_trigger = { :placement => "right",
                                  :'popover-trigger' =>  "sticky-hover",
                                  :'original-title' => "<div class='row-fluid'><div class='span12'><h3><i class='grcicon-control-color'></i>Linked Controls</h3></div></div>".html_safe,
-                                 :content => popover_content }
-            %a.controls-count.controllist{:href => mapping_section_dialog_path(item),
+                                 :content => popover_content,
+                                 :id => item.id }
+            %a.controls-count.controllist{:href => "javascript://",
                            :data => data_popover_trigger}
               %i.grcicon-control-color
               -if !controls.empty?
