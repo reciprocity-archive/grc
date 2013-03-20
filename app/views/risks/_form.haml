@@ -15,6 +15,16 @@
 
 .row-fluid
   .span6
+    =wrapped_text_area f, :span12, :inherent_risk, :class => 'double wysihtml5 rtftextarea', :wrapper_div_class => 'wysiwyg-area', :placeholder => 'Enter inherent risk note here'
+  .span6
+    =wrapped_text_area f, :span12, :risk_mitigation, :class => 'double wysihtml5 rtftextarea', :wrapper_div_class => 'wysiwyg-area', :placeholder => 'Enter risk mitigation note here'
+
+.row-fluid
+  .span6
+    =wrapped_text_area f, :span12, :residual_risk, :class => 'double wysihtml5 rtftextarea', :wrapper_div_class => 'wysiwyg-area', :placeholder => 'Enter residual risk note here'
+
+.row-fluid
+  .span6
     =wrapped_text_area f, :span12, :description, :class => 'double wysihtml5 rtftextarea', :wrapper_div_class => 'wysiwyg-area', :placeholder => 'Enter description here'
   .span6
     .row-fluid
@@ -24,12 +34,10 @@
         =wrapped_date_field f, :span12, :start_date, :class => 'date', :label_name => 'Effective Date', :placeholder => 'MM/DD/YYYY'
       .span4
         =wrapped_date_field f, :span12, :stop_date, :class => 'date', :label_name => 'Stop Date', :placeholder => 'MM/DD/YYYY'
-    .row-fluid  
+    .row-fluid
       .span12
         =wrapped_text_field f, :span12, :url, :label_name => 'Direct URL for Product (optional)', :placeholder => 'http://www.example.com/'
-      
 
-    
 .row-fluid
   .span6
     =f.label :likelihood
@@ -37,27 +45,23 @@
       =f.select :likelihood_rating, Risk::RATINGS.map { |k, v| ["#{k} - #{v}", k] }
       =f.text_area :likelihood, :class => 'span12 double wysihtml5 rtftextarea', :placeholder => ''
   .span6
-    =f.label :financial_impact, "Company-wide Financial Impact"
-    .wysiwyg-area
-      =f.select :financial_impact_rating, Risk::RATINGS.map { |k, v| ["#{k} - #{v}", k] }  
-      =f.text_area :financial_impact, :class => 'span12 double wysihtml5 rtftextarea', :placeholder => ''
+    =wrapped_text_area f, :span12, :impact, :class => 'double wysihtml5 rtftextarea', :wrapper_div_class => 'wysiwyg-area', :placeholder => 'Enter impact description here'
+
 .row-fluid
   .span6
     =wrapped_text_area f, :span12, :threat_vector, :class => 'double wysihtml5 rtftextarea', :wrapper_div_class => 'wysiwyg-area', :placeholder => '', :label_name => "Threat Vector"
   .span6
-    =f.label :reputational_impact, "Company-wide Reputational Impact"
-    .wysiwyg-area
-      =f.select :reputational_impact_rating, Risk::RATINGS.map { |k, v| ["#{k} - #{v}", k] }
-      =f.text_area :reputational_impact, :class => 'span12 double wysihtml5 rtftextarea', :placeholder => ''
+    =f.label :reputational_impact_rating, "Company-wide Reputational Impact"
+    =f.select :reputational_impact_rating, Risk::RATINGS.map { |k, v| ["#{k} - #{v}", k] }
+    =f.label :financial_impact_rating, "Company-wide Financial Impact"
+    =f.select :financial_impact_rating, Risk::RATINGS.map { |k, v| ["#{k} - #{v}", k] }
+    =f.label :operational_impact_rating, "Company-wide Operational Impact"
+    =f.select :operational_impact_rating, Risk::RATINGS.map { |k, v| ["#{k} - #{v}", k] }
 
 .row-fluid
   .span6
     =wrapped_text_area f, :span12, :trigger, :class => 'double wysihtml5 rtftextarea', :wrapper_div_class => 'wysiwyg-area', :placeholder => '', :label_name => "Trigger/Immediate /Proximate Cause"
   .span6
-    =f.label :operational_impact, "Company-wide Operational Impact"
-    .wysiwyg-area
-      =f.select :operational_impact_rating, Risk::RATINGS.map { |k, v| ["#{k} - #{v}", k] }
-      =f.text_area :operational_impact, :class => 'span12 double wysihtml5 rtftextarea', :placeholder => ''
 
 .row-fluid
   .span6

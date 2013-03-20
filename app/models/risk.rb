@@ -14,7 +14,7 @@ class Risk < ActiveRecord::Base
     5 => "Extreme"
   }
 
-  attr_accessible :title, :slug, :description, :url, :version, :type, :start_date, :stop_date, :likelihood, :likelihood_rating, :threat_vector, :trigger, :preconditions, :financial_impact, :financial_impact_rating, :reputational_impact, :reputational_impact_rating, :operational_impact, :operational_impact_rating
+  attr_accessible :title, :slug, :description, :url, :version, :type, :start_date, :stop_date, :likelihood, :likelihood_rating, :threat_vector, :trigger, :preconditions, :impact, :financial_impact_rating, :reputational_impact_rating, :operational_impact_rating, :inherent_risk, :risk_mitigation, :residual_risk
 
   has_many :object_people, :as => :personable, :dependent => :destroy
   has_many :people, :through => :object_people

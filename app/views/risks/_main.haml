@@ -8,6 +8,23 @@
 
 .risk-content
   .row-fluid
+    .span12
+      %h4 Description
+      =display_as_html risk.description
+
+  .row-fluid
+    .span6
+      %h4 Inherent Risk Note
+      =display_as_html risk.inherent_risk
+    .span6
+      %h4 Residual Risk Note
+      =display_as_html risk.residual_risk
+  .row-fluid
+    .span6
+      %h4 Risk Mitigation Note
+      =display_as_html risk.risk_mitigation
+
+  .row-fluid
     .span6
       %h3 Causes
     .span6
@@ -19,27 +36,31 @@
       %h4 Likelihood
       =display_as_html risk.likelihood
     .span6
-      .risk-level{ :class=> "risk-level-#{risk.financial_impact_rating}"} #{risk.financial_impact_rating} - #{Risk::RATINGS[risk.financial_impact_rating]}
-      %h4 Company-wide Financial Impact
-      =display_as_html risk.financial_impact
+      %h4 Impact Description
+      =display_as_html risk.impact
   .row-fluid
     .span6
       %h4 Threat Vector
       =display_as_html risk.threat_vector
     .span6
-      .risk-level{ :class=> "risk-level-#{risk.reputational_impact_rating}"} #{risk.reputational_impact_rating} - #{Risk::RATINGS[risk.reputational_impact_rating]}
-      %h4 Company-wide Reputational Impact
-      =display_as_html risk.reputational_impact
+      .row-fluid
+        .span12
+          .risk-level{ :class=> "risk-level-#{risk.financial_impact_rating}"} #{risk.financial_impact_rating} - #{Risk::RATINGS[risk.financial_impact_rating]}
+          %h4 Company-wide Financial Impact
+      .row-fluid
+        .span12
+          .risk-level{ :class=> "risk-level-#{risk.reputational_impact_rating}"} #{risk.reputational_impact_rating} - #{Risk::RATINGS[risk.reputational_impact_rating]}
+          %h4 Company-wide Reputational Impact
+      .row-fluid
+        .span12
+          .risk-level{ :class=> "risk-level-#{risk.operational_impact_rating}"} #{risk.operational_impact_rating} - #{Risk::RATINGS[risk.operational_impact_rating]}
+          %h4 Company-wide Operational Impact
   .row-fluid
     .span6
       %h4 Trigger/Immediate /Proximate Cause
       =display_as_html risk.trigger
-    .span6
-      .risk-level{ :class=> "risk-level-#{risk.operational_impact_rating}"} #{risk.operational_impact_rating} - #{Risk::RATINGS[risk.operational_impact_rating]}
-      %h4 Company-wide Operational Impact
-      =display_as_html risk.operational_impact
 
   .row-fluid
-    .span12
+    .span6
       %h4 Pre-conditions / Contributory Causes
       =display_as_html risk.preconditions

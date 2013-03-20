@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130313190635) do
+ActiveRecord::Schema.define(:version => 20130319233623) do
 
   create_table "accounts", :force => true do |t|
     t.string   "username"
@@ -435,13 +435,14 @@ ActiveRecord::Schema.define(:version => 20130313190635) do
     t.text     "threat_vector"
     t.text     "trigger"
     t.text     "preconditions"
-    t.text     "financial_impact"
-    t.text     "reputational_impact"
-    t.text     "operational_impact"
     t.integer  "likelihood_rating"
     t.integer  "financial_impact_rating"
     t.integer  "reputational_impact_rating"
     t.integer  "operational_impact_rating"
+    t.text     "inherent_risk"
+    t.text     "risk_mitigation"
+    t.text     "residual_risk"
+    t.text     "impact"
   end
 
   create_table "risky_attributes", :force => true do |t|
