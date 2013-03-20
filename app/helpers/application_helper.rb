@@ -224,4 +224,12 @@ module ApplicationHelper
       "#{default_scheme}://#{url}"
     end
   end
+
+  def page_type_attributes
+    page_types = {}
+    page_types[:'data-page-type'] = @page_type || controller.controller_name
+    page_types[:'data-page-subtype'] = @page_subtype if @page_subtype
+    page_types
+  end
+
 end

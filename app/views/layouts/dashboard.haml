@@ -4,7 +4,7 @@
     %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}
     %title=@title || "GRC"
     %meta{:name => "viewport", :content => "width=device-width", :'initial-scale' => "1.0"}
-    
+
     -if has_feature? :BETA
       =stylesheet_link_tag 'design'
       =javascript_include_tag 'design'
@@ -19,12 +19,12 @@
       =javascript_include_tag 'dashboard'
     =csrf_meta_tag
     %link(href='/favicon.ico' rel='icon' type='image/x-icon')
-    
+
     -#NOTE: This resource occasionally hangs and prevents page from rendering, so loaded after the fact via jquery
     :javascript
       jQuery(function($) { $('head').append("<link href='https://fonts.googleapis.com/css?family=Titillium+Web' rel='stylesheet' type='text/css'></link>"); });
 
-  %body{ :class => "#{has_feature?(:BETA) ? 'BETA' : ''}", :'data-target' => '.bs-docs-sidebar', :'data-spy' => 'scroll'}
+  %body{ page_type_attributes, :class => "#{has_feature?(:BETA) ? 'BETA' : ''}", :'data-target' => '.bs-docs-sidebar', :'data-spy' => 'scroll'}
 
     %header.header.main
       .header-bar{:class => "#{has_feature?(:BETA) ? 'demo-header-bar' : ''}"}
@@ -59,9 +59,9 @@
                     %a.remove{:href => "#", :class => "btn btn-mini pull-right", :rel => "tooltip", :title => "Hide", :'data-placement'=>"left"}
                       %i.grcicon-x-grey
                     %p.title
-                      Search Results 
+                      Search Results
                       =render 'programs_dash/quick_find', :quick_result => true
-                      
+
                     .quick-find-add
                       Didn't find it in results?
                       .btn-group.pull-right.dropup
@@ -140,7 +140,7 @@
                             %li.demoItem
                               %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
                                 Vulnerability
-                
+
                 -#%li.black-link
                   %a{:href => programs_dash_path}
                     %i.grcicon-dashboard
@@ -192,7 +192,7 @@
                       %a{:href =>'#', :tabindex =>"-1"}
                         %i.grcicon-normal
                         Narrow
-            
+
       .header-content{:'data-spy' => 'affix', :'data-offset-top' => '25'}
         .container-fluid
           .row-fluid
@@ -200,14 +200,12 @@
               =yield :header
             .span7
               =yield :subheader_extras
-              
-
 
     -#-if has_feature? :BETA
       -if controller.controller_name == 'programs_dash'
         .headercenter.fltnone
           =render :partial => 'design/templates/grcmenu'
-              
+
     =yield :subheader_plus
 
     %section.content{:'data-spy' => 'affix', :'data-offset-top' => '25'}
@@ -223,7 +221,7 @@
                 -if controller_name == 'design'
                   -path = programs_dash_path
                 -else
-                  -path = request.fullpath                
+                  -path = request.fullpath
                 -path = path.gsub(/BETA=[^&]*&?/, '').sub(/[?&]$/, '')
                 -path += path.include?('?') ? '&' : '?'
                 -if has_feature? :BETA
@@ -238,7 +236,7 @@
               Copyright &copy;
               =Time.now.year
               =CMS_CONFIG['COMPANY']
-            
+
     #templates
       #help-modal.modal.hide.fade
         .modal-header

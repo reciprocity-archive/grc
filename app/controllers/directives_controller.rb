@@ -442,6 +442,11 @@ class DirectivesController < BaseObjectsController
 
   private
 
+    def show_set_page_types
+      super
+      @page_subtype = object.meta_kind.to_s.underscore.pluralize
+    end
+
     # Construct the category controls tree
     #   - if neither the current category nor descendants contains controls
     #     then return nil

@@ -254,6 +254,11 @@ class SystemsController < BaseObjectsController
 
   private
 
+    def show_set_page_types
+      super
+      @page_subtype = object.is_biz_process? ? 'processes' : 'systems'
+    end
+
     def delete_model_stats
       [ [ 'System Control', @system.system_controls.count ],
         [ 'System Section', @system.system_sections.count ],

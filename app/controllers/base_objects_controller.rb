@@ -29,6 +29,8 @@ class BaseObjectsController < ApplicationController
   end
 
   def show
+    show_set_page_types
+
     respond_to do |format|
       format.html do
         render :locals => show_context
@@ -156,6 +158,10 @@ class BaseObjectsController < ApplicationController
   end
 
   private
+
+    def show_set_page_types
+      @page_type = object_name.pluralize
+    end
 
     def show_context
       {}
