@@ -1,9 +1,9 @@
 <ul class="tree-structure slugtree items">
-  {{#this}}
+  {{#list}}
     <li {{data 'model'}} data-model="true" class="main">
       <div class="row-fluid" content_id="{{content_id}}">
-        {{> /assets/controls/show.mustache}}
+        {{{render show}}}
       </div>
     </li>
-  {{/this}}
+  {{/list}}
 </ul>

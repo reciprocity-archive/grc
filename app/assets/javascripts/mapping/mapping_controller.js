@@ -277,25 +277,33 @@ CMS.Controllers.Mapping("CMS.Controllers.ControlMappingPopup", {
 }, {
   init : function() {
     var that = this;
-    this.element.append(new Spinner().spin().element);
+    this.element.append($(new Spinner().spin().el).css({"position" : "relative", "left" : 50, "top" : 50, "height": 150, "width": 150}));
     this.options.observer = new can.Observe({section : this.options.section});
-    CMS.Models.Control.findAll().done(function(d) {
-      that.list = d;
-      that.options.section.update_linked_controls_ccontrol_only();
-      that.options.observer.controls = d;
 
-      can.view("/assets/sections/control_selector.mustache", that.options.observer, function(frag) {
-        that.element.html(frag).trigger("shown");
+    can.view("/assets/sections/control_selector.mustache", that.options.observer, function(frag) {
+      that.options.controls_controller = that.element
+      .html(frag).trigger("shown")
+      .find(".controls-list")
+      .append($(new Spinner().spin().el).css({"position" : "relative", "left" : 50, "top" : 50, "height": 150, "width": 150}))
+      .cms_controllers_controls({show : "/assets/controls/show_selector.mustache", arity : 2})
+      .control();
+
+      that.options.controls_controller.find_all_deferred.done(function(d) {
+        that.list = d;
+        that.options.section.update_linked_controls_ccontrol_only();
+        //that.options.observer.attr("controls", d);
         that.update();
+        that.element.trigger("shown");
       });
     });
+
     this.on();
   }
 
   , update : function() {
     var section = this.options.section;
     this.options.observer.attr("section", section);
-    this.element.find(".controls-list > [data-model]").each(this.proxy("style_item"));
+    this.element.find(".controls-list ul > [data-model]").each(this.proxy("style_item"));
   }
 
   , style_item : function(el) {
@@ -327,7 +335,13 @@ CMS.Controllers.Mapping("CMS.Controllers.ControlMappingPopup", {
   }
 
   , ".edit-control modal:success" : function(el, ev, data) {
-    el.closest("[data-model]").data("model").attr(data);
+    el.closest("[data-model]").data("model").attr(data).updated();
+  }
+
+  , ".widgetsearch-tocontent keydown" : function(el, ev) {
+    if(ev.which === 13) {
+      this.options.controls_controller.filter(el.val())
+    }
   }
 });
 

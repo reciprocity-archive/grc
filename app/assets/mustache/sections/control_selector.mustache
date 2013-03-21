@@ -1,0 +1,30 @@
+<div class="modal-header">
+  <a class="btn btn-mini pull-right" data-dismiss="modal">
+    <i class="grcicon-x-grey"></i>
+  </a>
+  <h2> Map Controls to <small>{{section.slug}}</small> </h2>
+</div>
+
+<div class="modal-body" data-section-id="{{section.id}}">
+  <div class="filter">
+    <input class="ui-corner-all widgetsearch-tocontent clear-value" placeholder="Search" type="text">
+  </div>
+
+  {{! this is filled in with the controls controller}}
+  <div class="controls-list source" data-list-data-href="/controls.json"/>
+  
+</div>
+
+<div class="modal-footer">
+  <div class="row-fluid">
+    <nav class="span6">
+      <!-- <input class="btn btn-large btn-info closebtn" name="commit" type="button" value="Cancel"> -->
+    </nav>
+    <nav class="span6">
+      <div class="confirm-buttons">
+        <div class="btn closebtn btn-primary" data-dismiss="modal"> Done </div>
+      </div>
+    </nav>
+  </div>
+</div>
+

@@ -112,7 +112,10 @@ can.Model.Cacheable("CMS.Models.Section", {
     var id;
     if((id = attrs.id || (attrs[this.root_object] && attrs[this.root_object].id)) && this.findInCacheById(id)) {
       var cached = this.findInCacheById(id);
-      cached.update_linked_controls();
+      if($(this.linked_controls).filter(function() { return this instanceof CMS.Models.RegControl }).length)
+        cached.update_linked_controls();
+      else
+        cached.update_linked_controls_ccontrol_only();
       return cached;
     } else {
       return this._super.apply(this, arguments);
