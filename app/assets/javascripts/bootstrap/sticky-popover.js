@@ -45,12 +45,18 @@
   , show: function(force) {
       // Overload `show` to listen for mouseovers on the popover div
       if (force || this.displayState !== 'show') {
-        if (this.displayState !== 'show')
+        if (this.displayState !== 'show') {
           this.$element.trigger($.Event('show'));
+        } else { 
+          //fix the opacity value as it currently stands to prevent show-hide-show after loading.
+          this.tip().css({opacity : window.getComputedStyle(this.tip()[0]).opacity});
+        }
+
 
         this.displayState = 'show';
         this.trigger_load();
         $.fn.popover.Constructor.prototype.show.apply(this);
+        this.tip().css({opacity : ""});
         if (this.options.sticky_hover) {
           this.tip().
             on('mouseenter', $.proxy(this.tip_enter, this)).
