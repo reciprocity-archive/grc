@@ -70,6 +70,8 @@ jQuery(function ($) {
   renderExternalTmpl({ name: 'newRequest', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'newResponse', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'newResponseInterview', selector: '#templates', data: {} });
+  renderExternalTmpl({ name: 'selectorSectionToControl', selector: '#templates', data: {} });
+  renderExternalTmpl({ name: 'selectorSectionToControlNA', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'newResponseDocumentation', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'newResponsePopulation', selector: '#templates', data: {} });
   renderExternalTmpl({ name: 'showSecondModal', selector: '#templates', data: {} });

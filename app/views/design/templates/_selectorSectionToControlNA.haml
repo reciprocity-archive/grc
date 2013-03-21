@@ -1,0 +1,161 @@
+#selectorSectionToControlNA.modal.modal-selector.hide
+  .modal-header
+    .pull-right
+      %a.btn.btn-mini{:'data-dismiss' => 'modal', :href => 'javascript://'}
+        %i.grcicon-x-grey
+    %h2
+      Map Controls to
+      SECTION-2201
+  .modal-filter
+    .row-fluid
+      .span3
+        &nbsp;
+      .span4
+        .modal-search
+          %input{:type => "text", :class => "input-block-level", :placeholder => "Search controls"}
+      .span2
+        %select{:class => "span12"}
+          %option Show all controls
+          %option Regulation controls only
+          %option Company controls only
+      .span3
+        .pull-right
+          %a.btn.btn-add{:href=>"#"}
+            %i.grcicon-add
+            Control
+  .modal-content
+    .row-fluid
+      .span3
+        .selector-info{:style => "margin-right:-10%;"}
+          %h4
+            %i.grcicon-section-color
+            Use of Assets
+          %p.code.governance Section-2201
+          .rtf
+            %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            %ul
+              %li Ut enim ad minim veniam
+              %li Ut enim ad minim veniam
+            %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          %h5
+            Linked Controls
+          %br
+          %input{ :type=> "checkbox" }
+          %strong Controls are not applicable (N/A)
+
+      .span6
+        .selector-list
+          %ul.tree-structure.simple
+            %li.control
+              .item-main
+                .item-title
+                  .row-fluid
+                    .span11
+                      .oneline
+                        %span.title Superb control
+                        %span.code K1
+                    .span1
+                      %input{:type => "checkbox", :rel => "tooltip", :title => "map"}
+            %li.control
+              .item-main
+                .item-title
+                  .row-fluid
+                    .span11
+                      .oneline
+                        %span.title Another control
+                        %span.code CONTROL-AMAZING
+                    .span1
+                      %input{:type => "checkbox", :rel => "tooltip", :title => "map"}
+            %li.control
+              .item-main
+                .item-title
+                  .row-fluid
+                    .span11
+                      .oneline
+                        %span.title Control per se
+                        %span.code CK-L
+                    .span1
+                      %input{:type => "checkbox", :rel => "tooltip", :title => "map"}
+            %li.control
+              .item-main
+                .item-title
+                  .row-fluid
+                    .span11
+                      .oneline
+                        %span.title Verify Passwords via X
+                        %span.code ctr.2201
+                    .span1
+                      %input{:type => "checkbox", :rel => "tooltip", :title => "map"}
+            %li.control
+              .item-main
+                .item-title
+                  .row-fluid
+                    .span11
+                      .oneline
+                        %span.title J' something
+                        %span.code ctr.xyz
+                    .span1
+                      %input{:type => "checkbox", :rel => "tooltip", :title => "map"}
+            %li.control
+              .item-main
+                .item-title
+                  .row-fluid
+                    .span11
+                      .oneline
+                        %span.title Control per du
+                        %span.code ctr.221101
+                    .span1
+                      %input{:type => "checkbox", :rel => "tooltip", :title => "map"}
+            %li.control
+              .item-main
+                .item-title
+                  .row-fluid
+                    .span11
+                      .oneline
+                        %span.title J' something
+                        %span.code ctr.xyz
+                    .span1
+                      %input{:type => "checkbox", :rel => "tooltip", :title => "map"}
+            %li.control
+              .item-main
+                .item-title
+                  .row-fluid
+                    .span11
+                      .oneline
+                        %span.title Control per du
+                        %span.code ctr.221101
+                    .span1
+                      %input{:type => "checkbox", :rel => "tooltip", :title => "map"}
+            %li.control
+              .item-main
+                .item-title
+                  .row-fluid
+                    .span11
+                      .oneline
+                        %span.title J' something
+                        %span.code ctr.xyz
+                    .span1
+                      %input{:type => "checkbox", :rel => "tooltip", :title => "map"}
+
+
+      .span3
+        .selector-info{:style => "margin-left:-10%"}
+          %h4
+            %i.grcicon-control-color
+            Verify Passwords via X
+          %p.code.compliance CTR.2201
+          .rtf
+            %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            %ul
+              %li Ut enim ad minim veniam
+              %li Ut enim ad minim veniam
+
+  .modal-footer
+    .row-fluid
+      .span6
+        .deny-buttons
+      .span6
+        .confirm-buttons
+          %a.btn.btn-primary.preventdoubleclick{:'data-toggle' => 'modal-submit', :href => 'javascript://' } Save
+  

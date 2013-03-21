@@ -30,6 +30,11 @@
             %i.icon-chevron-right
             Breadcrumbs
         %li
+          %a{:href => "#modals"}
+            %i.icon-chevron-right
+            Modals
+
+        %li
           %a{:href => "#objects"}
             %i.icon-chevron-right
             Objects
@@ -114,6 +119,18 @@
           %p
             <span class="label label-info">Note!</span>
             Do not put class on last %li element. It is solved from CSS.
+
+      %section#modals.widget
+        %section.header
+          %h2
+            Modals
+        %section.content
+          %a.btn{"data-toggle" => "modal", :href => "#selectorSectionToControl"}
+            Section to Control Mapper
+          %a.btn{"data-toggle" => "modal", :href => "#selectorSectionToControlNA"}
+            Section to Control Mapper N/A
+
+
 
       %section#objects.widget
         %section.header

@@ -24,6 +24,107 @@
     width:960px;
     margin-left:-480px;
   }
+  &.modal-selector {
+    width:1200px;
+    margin-left:-600px;
+    .modal-content {
+      background:#f3f3f3;
+      .search-title {
+        .guide {
+          text-align:right;
+          padding-top:1px;
+          font-size:12px;
+          font-weight:bold;
+        }
+        background:#f3f3f3;
+        padding:6px 6px 0 10px;
+        border-bottom:1px solid #ccc; 
+        border-left:1px solid lighten($gray,20%);
+        border-right:1px solid lighten($gray,20%);
+      }
+      .selector-list {
+        height:400px;
+        overflow:auto;
+        background:$white;
+        border-left:1px solid lighten($gray,20%);
+        border-right:1px solid lighten($gray,20%);
+        ul.tree-structure {
+          li {
+            cursor:pointer;
+            &:last-child {
+             border-bottom:1px solid $lightGray; 
+            }
+            &.selected {
+             background:lighten(#c8edfc,5%);
+             border-bottom:1px solid darken(#c8edfc,5%); 
+            }
+          }
+        }
+      }
+      .selector-info {
+        height:380px;
+        overflow:hidden;
+        padding:10px;
+        .rtf {
+          overflow:auto;
+          height:220px;
+          border:1px solid #ddd;
+          background:#fff;
+          padding:10px;
+          font-size:12px;
+        }
+      }
+    }
+    .code {
+      text-transform:uppercase;
+      font-size:11px;
+      font-weight:bold;
+      &.governance {
+        color:$governance;
+      }
+      &.compliance {
+        color:$compliance;
+      }
+
+    }
+    h4 {
+      @include oneline();
+      font-weight:bold;
+      margin-bottom:6px;
+      i {
+        margin-top:2px;
+      }
+    }
+  }
+  .modal-filter {
+    background:#e0e0e0;
+    border-bottom:1px solid #ccc;
+    input {
+      border: 1px solid $popOverBorder;
+      background-image: url("/images/grcicons/icons.png");
+      background-repeat: no-repeat;
+      @include background-size(296px 344px);
+      background-position:-259px -195px;
+      padding-left: 40px;
+      margin-top:8px;
+    }
+    select {
+      margin-top:8px;
+    }
+    .btn-add {
+      margin-top:8px;
+      margin-right:8px;
+    }
+    .modal-search {
+      position:relative;
+      .btn-mini {
+        position:absolute;
+        padding:0;
+        right:4px;
+        top:4px;
+      }
+    }
+  }
   .modal-header {
     @include gradient-vertical($modalLightBlue, $modalDarkBlue);
     border-bottom: 1px solid $modalHeaderBorder;
