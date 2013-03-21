@@ -13,7 +13,7 @@
   height: 16px;
   line-height: 16px;
   vertical-align: top; //necessary or button with icon embedded will sometimes be to tall.
-  background-image: url("/images/grcicons/icons.png");
+  background-image: image-url("grcicons/icons.png");
   background-position: -2000px -2000px; // blank default state 
   background-repeat: no-repeat;
   @include background-size(296px 344px);
@@ -29,7 +29,7 @@
   height: 24px;
   line-height: 24px;
   vertical-align: top; //necessary or button with icon embedded will sometimes be to tall.
-  background-image: url("/images/grcicons/icons-large.png");
+  background-image: image-url("grcicons/icons-large.png");
   background-position: -2000px -2000px; // blank default state 
   background-repeat: no-repeat;
   @include background-size(264px 264px);
@@ -356,7 +356,7 @@
 .widget-showhide {
   a {
     background-position: -265px -241px;
-    background-image: url("/images/grcicons/icons.png");
+    background-image: image-url("grcicons/icons.png");
     background-repeat: no-repeat;
     @include background-size(296px 344px);
     &.active {
@@ -371,7 +371,7 @@
   display: inline-block;
   width: 24px;
   height: 24px;
-  background-image: url("/images/grcicons/objects.png");
+  background-image: image-url("grcicons/objects.png");
   background-repeat: no-repeat;
   background-position: -2000px -2000px; // blank default state 
   @include background-size(144px 144px);

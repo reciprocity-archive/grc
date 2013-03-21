@@ -440,7 +440,7 @@
       border-top:1px solid darken($lightGray,5%);
       background-color: lighten($lightGray,5%);
       background-repeat:no-repeat;
-      background-image: url("/images/grcicons/icons.png");
+      background-image: image-url("grcicons/icons.png");
       @include background-size(296px 344px);
       background-position:50% -157px;
       @include opacity(0.8);
