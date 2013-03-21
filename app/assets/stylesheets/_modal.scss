@@ -72,6 +72,13 @@
         font-weight: bold;
       }
     }
+    h2 {
+      margin-top:10px;
+      color:#333;
+      font-weight:normal;
+      border-bottom:1px solid darken($lightGray,10%);
+      margin-bottom:10px;
+    }
     h4 {
       font-size: 16px;
       font-weight: bold;
