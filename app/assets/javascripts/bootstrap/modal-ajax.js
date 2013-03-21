@@ -45,7 +45,7 @@
 
   var handlers = {
     'modal': function($target, $trigger, option) {
-      $target.modal(option);
+      $target.modal(option).draggable({ handle: '.modal-header' });
     },
 
     'listselect': function($target, $trigger, option) {

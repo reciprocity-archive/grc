@@ -178,7 +178,7 @@ blockquote {
   }
   &.pending-ajax {
     cursor: default;
-    background:$widgetHeaderBgnd url('/images/ajax-loader.gif') no-repeat 5px 5px;
+    background:$widgetHeaderBgnd image-url('ajax-loader.gif') no-repeat 5px 5px;
     @include box-shadow(none);
     border: 1px solid $ajaxBtnDisabled;
     color: $ajaxGray;
@@ -188,19 +188,19 @@ blockquote {
       color: $ajaxGray;
     }
     &:active {
-      background:$widgetHeaderBgnd url('/images/ajax-loader.gif') no-repeat 5px 5px;
+      background:$widgetHeaderBgnd image-url('ajax-loader.gif') no-repeat 5px 5px;
       border: 1px solid $ajaxBtnDisabled;
       @include box-shadow(none);
     }
   }
   &.btn-mini {
     &.pending-ajax {
-      background:$widgetHeaderBgnd url('/images/ajax-loader.gif') no-repeat 5px 1px;
+      background:$widgetHeaderBgnd image-url('ajax-loader.gif') no-repeat 5px 1px;
     }
   }
   &.btn-large {
     &.pending-ajax {
-      background:$widgetHeaderBgnd url('/images/ajax-loader.gif') no-repeat 5px 8px;
+      background:$widgetHeaderBgnd image-url('ajax-loader.gif') no-repeat 5px 8px;
     }
   }
 }
@@ -288,7 +288,7 @@ blockquote {
 input.date {
   padding-left: 26px;
   @include background-size(296px 344px);
-  background-image: url("/images/grcicons/icons.png");
+  background-image: image-url("grcicons/icons.png");
   background-repeat: no-repeat;
   background-position: -4px -244px;
 }
@@ -321,7 +321,7 @@ input.input-block-level {
     border-top:1px solid darken($lightGray,5%);
     background-color: lighten($lightGray,5%);
     background-repeat:no-repeat;
-    background-image: url("/images/grcicons/icons.png");
+    background-image: image-url("grcicons/icons.png");
     @include background-size(296px 344px);
     background-position:50% -157px;
     @include opacity(0.8);
@@ -357,7 +357,7 @@ input.input-block-level {
 
 // AJAX loading gif
 input.disabled.pending-ajax{
-  background: $lightGray url("/images/ajax-loader.gif") no-repeat right center;
+  background: $lightGray image-url("ajax-loader.gif") no-repeat right center;
 }
 
 // Left dropdown positioning

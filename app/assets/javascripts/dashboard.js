@@ -212,15 +212,22 @@ jQuery(function($) {
 
   //After the modal template has loaded from the server, but before the
   //  data has loaded to populate into the body, show a spinner
-  $("body").on("loaded", ".modal.modal-slim", function(e) {
-    $(e.target).find(".modal-body .source").html(
-          $(new Spinner().spin().el)
-            .css({
-              width: '100px', height: '100px',
-              left: '50%', top: '50%',
-              zIndex : calculate_spinner_z_index
-            })
-      )
+  $("body").on("loaded", ".modal.modal-slim, .modal.modal-wide", function(e) {
+
+    var spin = function() {
+      $(this).html(
+        $(new Spinner().spin().el)
+          .css({
+            width: '100px', height: '100px',
+            left: '50%', top: '50%',
+            zIndex : calculate_spinner_z_index
+          })
+      ).one("loaded", function() {
+        $(this).find(".source").each(spin);
+      });
+    }
+
+    $(e.target).find(".modal-body .source").each(spin);
   });
 
   function with_params(href, params) {
