@@ -501,12 +501,15 @@
     h3 {
       font-weight: normal;
       padding-bottom: 5px;
+      margin-top:10px;
       color: $headerTitle;
+      @include default-border-bottom();
     }
     h4 {
-      @include default-border-top();
+      //@include default-border-top();
       padding-top: 10px;
-      margin-bottom: 10px;
+      font-weight:bold;
+      margin-bottom: 4px;
       color: $headerTitle;
     }
     .rtf {
@@ -515,10 +518,33 @@
     }
     .risk-level {
       float: right;
-      font-size: 11px;
-      font-weight: bold;
+      font-size: 18px;
+      border:1px solid $lightGray;
+      @include border-radius();
+      padding:0 6px;
       color: $red;
+      cursor:pointer;
       margin-top: 10px;
+      &.risk-level-1 {
+        color:$white;
+        background:$green;
+        border-color:darken($green,5%);
+
+      }
+      &.risk-level-2,
+      &.risk-level-3 {
+         color:$white;
+         background:$warning;
+         border-color:darken($warning,5%);
+
+      }
+      &.risk-level-4,
+      &.risk-level-5 {
+        color:$white;
+        background:$error;
+        border-color:darken($error,5%);
+      }
+
     }
   }
   ul.single-row-tabs {
