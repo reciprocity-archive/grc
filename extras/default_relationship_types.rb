@@ -105,6 +105,14 @@ module DefaultRelationshipTypes
       :forward_description => "This market relies upon the following systems.",
       :reverse_description => "This system supports the following markets."
     },
+    :org_group_has_process => {
+      :source_type => "OrgGroup",
+      :target_type => "Process",
+      :forward_phrase => "has",
+      :reverse_phrase => "is a process for",
+      :forward_description => "This org group relies upon the following processes.",
+      :reverse_description => "This process supports the following org groups."
+    },
     :org_group_is_affiliated_with_org_group => {
       :source_type => "OrgGroup",
       :target_type => "OrgGroup",
@@ -193,6 +201,22 @@ module DefaultRelationshipTypes
       :reverse_phrase => "supports",
       :forward_description => "This org group relies upon the following facilities.",
       :reverse_description => "This facility supports the following org groups."
+    },
+    :org_group_relies_upon_org_group => {
+      :source_type => "OrgGroup",
+      :target_type => "OrgGroup",
+      :forward_phrase => "relies upon",
+      :reverse_phrase => "supports",
+      :forward_description => "This org group relies upon the following org groups.",
+      :reverse_description => "This org group supports the following org groups."
+    },
+    :org_group_relies_upon_system => {
+      :source_type => "OrgGroup",
+      :target_type => "System",
+      :forward_phrase => "relies upon",
+      :reverse_phrase => "supports",
+      :forward_description => "This org group relies upon the following systems.",
+      :reverse_description => "This system supports the following org groups."
     },
     :product_has_process => {
       :source_type => "Product",

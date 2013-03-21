@@ -131,6 +131,19 @@ module ImportHelper
     end
   end
 
+  def handle_import_controls(object, attrs, key)
+    # TODO: Fix this to auto-create controls when Controls are no longer required to belong to a directive
+    objects_string = attrs.delete(key)
+    unless objects_string.blank?
+      slugs = strip_split(objects_string)
+      slugs = slugs.map(&:upcase)
+      objects = slugs.map do |slug|
+        Control.where(:slug => slug).first
+      end.compact
+      object.controls = (object.controls + objects).uniq
+    end
+  end
+
   def handle_boolean(attrs, key)
     if attrs.has_key?(key)
       attrs[key] = (attrs[key] == 'yes' || attrs[key] == '1' || attrs[key] == 'true')
@@ -234,5 +247,8 @@ module ImportHelper
         warnings[key.to_sym] << "#{e}, use YYYY-MM-DD or MM/DD/YYYY format"
       end
     end
+  end
+
+  class ImportException < Exception
   end
 end

@@ -150,6 +150,11 @@ CmsRails::Application.routes.draw do
       get 'tooltip'
       get 'delete'
     end
+    collection do
+      get 'import'
+      post 'import'
+      get 'export'
+    end
   end
 
   resources :control_risks, :as => 'flow_control_risks', :only => [:index, :create] do

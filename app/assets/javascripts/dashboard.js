@@ -747,8 +747,15 @@ jQuery(function($) {
         .draggable({ handle: '.modal-header' });
     }
     $dialog.modal("show");
-    CMS.Models.Section.findAll().done(function(list) {
-      $dialog.cms_controllers_control_mapping_popup({section : $(list).filter(function(i, d) { return d.id == id })[0]});
+
+    (CMS.Models.Section.findInCacheById(id) 
+      ? $.when(CMS.Models.Section.findInCacheById(id)) 
+      : CMS.Models.Section.findAll())
+    .done(function(section) {
+      $dialog.cms_controllers_control_mapping_popup({
+        section : $(section).filter(function(i, d) { return d.id == id })[0]
+      });
     });
+    $(ev.target).trigger('kill-all-popovers');
   });
 });

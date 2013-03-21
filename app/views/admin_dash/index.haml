@@ -3,7 +3,7 @@
     &nbsp;
   %h1
     Sys Admin Dashboard
- 
+
 -content_for :page_help, 'admin'
 
 -content_for :subheader_extras do
@@ -16,6 +16,14 @@
       %a{"data-toggle" => "modal-ajax", :href => "/systems/export.html"}
         %i.grcicon-export
         %span Export Systems
+    %li
+      %a{:href => "/risks/import"}
+        %i.grcicon-imp-exp
+        %span Import Risks
+    %li
+      %a{"data-toggle" => "modal-ajax", :href => "/risks/export.html"}
+        %i.grcicon-export
+        %span Export Risks
 
   -#%ul.actions.pull-right
     %li.btn-group
@@ -38,7 +46,7 @@
       =render :partial => 'admin_dash/categories',
                 :layout => 'layouts/widget_box',
                 :locals => { :categories => @categories, :options => @options, :widget_class => 'widget-tabs widget-tabs-horizontal' }
-                
+
       -if has_feature? :BETA
         %section#StyleGuide.widget
           / in progress
@@ -47,35 +55,35 @@
               Style Guide
             %a.pull-right.btn.btn-mini{"data-toggle" => "modal", :href => "#comingsoonModal"}
               %i.grcicon-help-black
-            
+
             %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#programsInProgress"}
               %i.grcicon-enlarge-grey
-                  
+
           .filter
             %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}
-            
+
           %section.content
             #programsInProgress.toolbar-widget.in
               %ul#quickLinks.nav.nav-tabs.nav-stacked.in
                 %li.group
                   %a.btn{:href => "/design/styleguide"}
                     Style Guide (First Draft)
-  
+
       -if has_feature? :BETA
         %section#Programs.WidgetBox.demoItem.widget
           %section.header
             %h2
               In-Progress
-              
+
             %a.pull-right.btn.btn-mini{"data-toggle" => "modal", :href => "#comingsoonModal"}
               %i.grcicon-help-black
-              
+
             %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#programsInProgress"}
               %i.grcicon-enlarge-grey
-            
+
           .filter
             %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}
-            
+
           %section.content
             #programsInProgress.toolbar-widget.in
               %ul#quickLinks.nav.nav-tabs.nav-stacked.in
@@ -88,7 +96,7 @@
                 %li.group
                   %a.btn{"data-toggle" => "modal", :href => "#pbcListEdit"}
                     Edit PBC List
-  
+
                 %li.group
                   %a.btn{"data-toggle" => "modal", :href => "#newResponseDocumentation"}
                     Edit Response (Documentation)
@@ -98,7 +106,7 @@
                 %li.group
                   %a.btn{"data-toggle" => "modal", :href => "#newResponsePopulation"}
                     Edit Response (Population)
-  
+
                 %li.group
                   %a.btn{"data-toggle" => "modal", :href => "#redesignNewSystem"}
                     New/Edit System
@@ -126,32 +134,32 @@
                 %li.group
                   %a.btn{:href => "/design/audit-control-review"}
                     Audit Controls Review
-                
+
                 %li.group
                   %a.btn{:href => "/design/importregs"}
                     Importing Regulation Data
                 %li.group
                   %a.btn{:href => "/design/importcontrols"}
-                    Importing Controls      
+                    Importing Controls
 
     -if has_feature? :BETA
       #middle-column.span4.widget-area
-      
+
         / in progress
         %section#Programs.widget.WidgetBox.demoItem
           %section.header
             %h2
               WIP : Modals & Widgets
-              
+
             %a.pull-right.btn.btn-mini{"data-toggle" => "modal", :href => "#comingsoonModal"}
               %i.grcicon-help-black
-              
+
             %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#programInProgress"}
               %i.grcicon-enlarge-grey
-              
+
           .filter
-            %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}  
-            
+            %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}
+
           %section.content
             #programInProgress.toolbar-widget.in
               %ul#quickLinks.nav.nav-tabs.nav-stacked.in
@@ -181,23 +189,23 @@
                 %li.row-fluid
                   %a.btn{:href => "/design/products"}
                     Impact Scope (view on Product)
-          
+
       #right-column.span4.widget-area
         / in progress
         %section#Programs.widget.demoItem
           %section.header
             %h2
               Approved Modals
-            
+
             %a.pull-right.btn.btn-mini{"data-toggle" => "modal", :href => "#comingsoonModal"}
               %i.grcicon-help-black
-              
+
             %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#newEditItems"}
               %i.grcicon-enlarge-grey
-                
+
           .filter
             %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}
-              
+
           %section.content
             -#%ul#newEdit.nav.nav-tabs.nav-stacked.in
               %li.group
@@ -257,43 +265,43 @@
                     Link Biz Object to Product
                   %a.span6.btn{"data-toggle" => "modal", :href => "#selectorThreat2Biz"}
                     Link Risky Attribute
-                
+
                 %li.row-fluid
                   %a.span6.btn{"data-toggle" => "modal", :href => "#newthreat"}
                     New Threat/Risk
                 %li.row-fluid
                   %label Are you sure?
-  
+
                 %li.row-fluid
                   %a.span6.btn{"data-toggle" => "modal", :href => "#confirmModal"}
                     Y/N Dialog
                   %a.span6.btn{"data-toggle" => "modal", :href => "#comingsoonModal"}
                     Coming Soon
-        
+
         %section#Implemented.widget
           %section.header
             %h2
               Implemented
-              
+
             %a.pull-right.btn.btn-mini{"data-toggle" => "modal", :href => "#comingsoonModal"}
               %i.grcicon-help-black
 
             %a.accordion-toggle.widgetbtn{"data-toggle" => "collapse", :href => "#ImplementedItems"}
               %i.grcicon-enlarge-grey.grcicon-blue-expand
-                
+
           .filter
             %input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}
-              
+
           %section.content
             #ImplementedItems.toolbar-widget.collapse
               %ul#quickLinks.nav.nav-tabs.nav-stacked.in
                 %li.group
                   %a.btn{"data-toggle" => "modal", :href => "#redesignNewProgram"}
-                    New Program 
-      
+                    New Program
+
 
     #other-column.span4.widget-area
       =render :partial => 'admin_dash/accounts',
           :layout => 'layouts/widget_box',
           :locals => { :accounts => @accounts, :people => @people, :widget_class => 'widget-tabs widget-tabs-horizontal' }
-          
+
