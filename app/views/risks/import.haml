@@ -1,0 +1,15 @@
+-content_for :page_help, 'risks_import'
+
+-content_for :header do
+
+  %ul.breadcrumbs
+    %li=link_to 'ADMIN', admin_dash_path
+    %li= 'Import Risks'
+
+  %h1
+    Import Risks
+
+.container-fluid
+  .row-fluid
+    =render :partial => 'risks/import',
+            :layout => 'layouts/widget_box'

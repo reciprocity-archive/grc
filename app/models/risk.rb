@@ -65,4 +65,12 @@ class Risk < ActiveRecord::Base
       :source_id => id,
     ).includes(:destination).map(&:destination)
   end
+
+  def controls_display
+    controls.uniq.map(&:slug).join(",")
+  end
+
+  def categories_display
+    categories.uniq.map(&:name).join(",")
+  end
 end
