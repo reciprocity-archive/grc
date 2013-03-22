@@ -109,7 +109,7 @@
     border-bottom:1px solid #ccc;
     input {
       border: 1px solid $popOverBorder;
-      background-image: url("/images/grcicons/icons.png");
+      background-image: image-url("/images/grcicons/icons.png");
       background-repeat: no-repeat;
       @include background-size(296px 344px);
       background-position:-259px -195px;
