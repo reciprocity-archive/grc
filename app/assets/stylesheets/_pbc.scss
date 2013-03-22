@@ -1,7 +1,8 @@
 .ca-fields {
   span {
-    font-size:11px;
     color:$text;
+    font-size:$f-small;
+    
     &.left-space {
       margin-right: 12px;
     }
@@ -27,7 +28,7 @@
   text-transform:uppercase;
   margin-top:10px;
   padding:4px;
-  font-size:11px;
+  font-size:$f-small;
   color:$text;
   [class*="span"] {
     padding-bottom:0;
@@ -37,7 +38,7 @@
 }
 
 span.tiny-title {
-  font-size:13px;
+  
   color:$text;
 }
 
@@ -72,8 +73,7 @@ ul.tree-structure.pbc {
     }
     span.request-title {
       text-transform:uppercase;
-      font-weight:bold;
-      font-size:11px;
+      
       color:$subTitle;
       cursor:pointer;
     }
@@ -128,9 +128,8 @@ ul.tree-structure.pbc {
       margin-bottom:4px;
     }
     p {
-      font-size:12px;
+      
       &.disabled-text {
-        font-size:12px;
         color:lighten($gray,10%);
         margin-top:-2px;
       }
@@ -146,9 +145,8 @@ ul.tree-structure.pbc {
     
   }
   .rtf {
-    font-size:12px;
-    line-height:16px;
     color:$text;
+    
   }
 }
 
@@ -172,7 +170,7 @@ h4.pbc-title {
   input {
     line-height: 12px;
     height: 12px;
-    font-size: 11px;
+    
     &.input-block-level {
       min-height: 22px;
     }
@@ -180,6 +178,7 @@ h4.pbc-title {
   select {
     line-height: 22px;
     height: 22px;
+    
   }
   .bg-caret {
     background: image-url('bgnd-responses.png') no-repeat 0 0;
@@ -192,7 +191,7 @@ h4.pbc-title {
   }
   .item-title {
     color:$responsTitle;
-    font-size: 12px;
+    
     font-weight: bold;
   }
   ul.tree-structure {
@@ -274,10 +273,10 @@ h4.pbc-title {
     @include border-radius();
     padding:8px 12px;
     margin-bottom:8px;
-    font-size: 11px;
+    
     .btn-group {
       li {
-        font-size:12px;
+        
         a {
           &:hover {
             strong {
@@ -337,7 +336,7 @@ h4.pbc-title {
     }
     h4 {
       color: $responsTitle;
-      font-size: 12px;
+      
       font-weight: bold;
       line-height: 25px;
       span {
@@ -351,7 +350,7 @@ h4.pbc-title {
       }
     }
     h5 {
-      font-size: 11px;
+      margin-top:4px;
       font-weight: bold;
       &.right {
         text-align:right;
@@ -361,10 +360,9 @@ h4.pbc-title {
       }
     }
     .rtf {
-      font-size: 11px;
+      
     }
     p {
-      font-size: 11px;
       margin: 0;
     }
     .edit-person-role,
@@ -380,7 +378,7 @@ h4.pbc-title {
       border: none;
       line-height: 16px;
       height: 16px;
-      font-size: 11px;
+      
       text-decoration: none;
       padding: 0 18px 0 0;
       width: auto;
@@ -390,7 +388,7 @@ h4.pbc-title {
   }
   .inner-response {
     padding:8px 0;
-    font-size: 11px;
+    
     color: $text;
     .items {
       margin-bottom: 20px;
@@ -425,7 +423,7 @@ h4.pbc-title {
     }
     .error {
       line-height: 13px;
-      font-size: 10px;
+      
       font-weight: bold;
       color: $red;
       margin-top: 4px;
@@ -449,7 +447,7 @@ h4.pbc-title {
       }
       .btn {
         &.btn-add {
-          font-size: 11px;
+          
           font-weight: normal;
           line-height: 16px;
           padding-right: 2px;
@@ -474,11 +472,14 @@ h4.pbc-title {
   li {
     .alert {
       font-weight: bold;
-      font-size: 11px;
+      
       padding: 4px;
       line-height: 14px;
       margin-bottom: 10px;
       margin-top: 5px;
+    }
+    select {
+      display:none;
     }
   }
 }
@@ -535,7 +536,7 @@ ul.tree-structure {
         li {
           .alert {
             font-weight: bold;
-            font-size: 11px;
+            
             padding: 4px;
             line-height: 14px;
           }
@@ -642,12 +643,12 @@ input.pbc-request-assignee {
   @include box-shadow(none);
   margin-top:-3px;
   margin-bottom:0;
-  font-size:12px;
+  
   line-height:16px;
   height:16px;
   min-height:0;
   padding:2px;
-  width:160px;
+  width:200px;
   &:hover {
     border-color:darken($lightGray, 20%);
   }
@@ -694,7 +695,7 @@ ul.tree-structure.pbc-responses {
       bottom:-12px;
       color:$green;
       font-weight:bold;
-      font-size:11px;
+      
     }
   }
 }

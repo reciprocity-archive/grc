@@ -8,7 +8,7 @@
   }
   .help-inline {
     color:$error;
-    font-size:12px;
+    font-size:$f-small;
     padding-left:10px;
     margin-bottom:-5px;
     font-weight:bold;
@@ -33,7 +33,7 @@
         .guide {
           text-align:right;
           padding-top:1px;
-          font-size:12px;
+          font-size:$f-small;
           font-weight:bold;
         }
         background:#f3f3f3;
@@ -71,7 +71,7 @@
           border:1px solid #ddd;
           background:#fff;
           padding:10px;
-          font-size:12px;
+          font-size:$f-small;
         }
         .no-content {
           padding-top:160px;
@@ -85,7 +85,7 @@
     }
     .code {
       text-transform:uppercase;
-      font-size:11px;
+      font-size:$f-small;
       font-weight:bold;
       &.governance {
         color:$governance;
@@ -152,11 +152,11 @@
       span {
         display: block;
         line-height: 18px;
-        font-size: 14px;
+        font-size: $f-regular;
       }
       small {
         color:$white;
-        font-size:13px;
+        font-size:$f-small;
         font-weight:bold;  
       }
       
@@ -174,7 +174,7 @@
     }
     label {
       font-weight: bold;
-      font-size: 11px;
+      font-size: $f-regular;
       color: $darkGray;
       .required {
         color: $red;
@@ -189,7 +189,7 @@
       margin-bottom:10px;
     }
     h4 {
-      font-size: 16px;
+      font-size: $f-subTitle;
       font-weight: bold;
       margin-bottom: 10px;
     }
@@ -204,7 +204,7 @@
       .help-inline {
         margin: -8px 0 8px 0;
         display: block;
-        font-size: 11px;
+        font-size:$f-small;
         font-weight: bold;
         color: $red;
         padding: 0;
@@ -254,7 +254,7 @@
       // smaller buttons in wysiwyg editor
       .btn {
         padding:0px 5px 2px 5px;
-        font-size:11px;
+        font-size:$f-small;
         @include opacity(0.5);
         &:hover {
           @include opacity(1);
@@ -277,13 +277,13 @@
         .btn {
           padding: 4px 10px;
           @include opacity(1);
-          font-size: 13px;
+          font-size: $f-regular;
         }
       }
     }
     .modal-source {
       h3 {
-        font-size: 16px;
+        font-size: $f-regular;
       }
       .role-btn {
         margin-right: 20px;
@@ -312,7 +312,7 @@
           }
           .option {
             font-weight: bold;
-            font-size: 11px;
+            font-size: $f-small;
           }
           .btn-mini {
             padding-left: 2px;
@@ -322,13 +322,13 @@
             .btn-mini {
               padding-left: 5px;
               padding-right: 5px;
-              font-size: 11px;
+              font-size: $f-small;
               line-height: 18px;
               height: 18px
             }
           }
           .state {
-            font-size: 11px;
+            font-size: $f-small;
             font-weight: bold;
             text-transform: uppercase;
             text-align: right;
@@ -349,7 +349,7 @@
   .modal-info {
     background: $widgetFooteBgnd;
     padding: 5px 20px 4px 20px;
-    font-size: 11px;
+    font-size: $f-small;
     color: $darkGray;
     .span3 {
       min-height: auto;
@@ -358,6 +358,9 @@
   .modal-footer {
     background: $lightGray;
     text-align: left;
+    .btn {
+      font-size:$f-regular;
+    }
     .deny-buttons {
       .btn {
         &:hover {
@@ -367,7 +370,7 @@
     }
     .version-nav {
       text-align: center;
-      font-size: 11px;
+      font-size: $f-small;
       color: $text;
       .btn {
         i {

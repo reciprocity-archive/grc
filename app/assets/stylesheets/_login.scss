@@ -4,10 +4,10 @@
   padding-top: 70px;
   h2 {
     margin-bottom: 24px;
-    font-size: 20px;
+    font-size: $f-subTitle;
   }
   h1 {
-    font-size: 34px;
+    font-size: $f-headline;
     line-height: 46px;
     margin-bottom: 10px;
     text-shadow: 0 2px 0 $white;
@@ -19,7 +19,7 @@
   }
   .header {
     h2 {
-      font-size: 15px;
+      font-size: $f-regular;
       margin-bottom: 0;
       text-align: left;
     }
@@ -57,7 +57,7 @@
       padding: 20px;
     }
     label {
-      font-size: 12px;
+      font-size: f-regular;
       font-weight: bold;
       color: $text;
       cursor: pointer;
@@ -74,7 +74,7 @@
       line-height: 24px;
       height: 38px;
       color: $text;
-      font-size: 20px;
+      font-size: $f-subTitle;
       line-height: 24px;
     }
     input[type="checkbox"] {

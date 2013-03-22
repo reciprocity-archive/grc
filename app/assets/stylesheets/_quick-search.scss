@@ -11,7 +11,7 @@
   color:$black;
   text-shadow: none;
   text-transform: none;
-  font-size: 12px;
+  font-size:$f-regular;
   font-weight: normal;
   line-height: 18px;
   z-index: 1001;
@@ -47,6 +47,7 @@
   .title {
     padding: 8px 4px 6px 16px;
     margin: 0;
+    font-size:$f-subTitle;
   }
   .tabs-left {
     padding: 0;
@@ -84,7 +85,7 @@
       clear: both;
       text-shadow: none;
       text-transform: none;
-      font-size: 12px;
+      font-size:$f-subTitle;
       font-weight: normal;
       a {
         color: $text;
@@ -121,7 +122,7 @@
         clear: both;
         text-shadow: none;
         text-transform: none;
-        font-size: 12px;
+        font-size:$f-subTitle;
         font-weight: normal;
         color: $black;
         padding-right: 0;
@@ -135,6 +136,7 @@
   .quick-find-add {
     background: $lightGray;
     height: 34px;
+    font-size:$f-subTitle;
     @include border-radius(0 0 5px 5px);
     line-height: 34px;
     padding: 0 10px 0 16px;
@@ -155,7 +157,7 @@
         }
       }
       &.btn-mini {
-        font-size: 11px;
+        font-size:$f-subTitle;
         line-height: 18px;
       }
     }
@@ -173,6 +175,7 @@
       left: -165px;
       right: auto;
       li {
+        font-size:$f-subTitle;
         a {
           margin-top: 0;
           &:hover {

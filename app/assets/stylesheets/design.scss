@@ -2,45 +2,4 @@
  * Styles used by beta designs
  * ========================================================= */
 
-
-
 @import "dashboard";
-
-/*
-
-@import "datepicker";
-
-.BETA {
-
-  .WidgetBox {
-    .WidgetBoxHeading {
-      background: #2c4361;
-      @include background-image(linear-gradient(top, #7a99c1, #2c4361));
-      border-color: #444444 #444444 #2c4361;
-      text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.56);
-      -webkit-font-smoothing: antialiased;
-      @include box-shadow(inset 0px 1px 0px 0px #7a99c1);
-    }
-    .WidgetBoxContent {
-      border-color: #97abc2;
-    }
-  }
-
-  .modal-header {
-    span.version {
-      display:inline;
-      font-size:12px;
-    }
-  }
-   
-}
-
-// STYLES FOR NEW PAGE LAYOUT (Shouldn't affect existing pages)
-
-.widget-toolbar {
-  .btn {
-    min-height:0;
-  }
-}
-
-*/

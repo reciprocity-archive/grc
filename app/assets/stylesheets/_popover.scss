@@ -49,14 +49,14 @@
   .popover-inner {
     h3.popover-title {
       padding-top:5px;
-      font-size:16px;
+      font-size:$f-subTitle;
       line-height: 22px;
       i {
         margin-top:4px;
       }
     }
     ul.tree-structure {
-      font-size:13px;
+      font-size:$f-regular;
     }
     width: 400px;
     background: $popOverBorder;
@@ -73,7 +73,7 @@
         @include oneline();
         color: $subTitle;
         font-weight: normal;
-        font-size:16px;
+        font-size:$f-regular;
         font-weight:bold;
       }
       .btn {
@@ -85,7 +85,7 @@
     }
     .popover-content {
       padding:0;
-      font-size: 11px;
+      font-size: $f-regular;
       max-height: 270px;
       overflow-x: hidden;
       overflow-y: auto;
@@ -93,12 +93,12 @@
         margin-bottom: 10px;
       }
       h3 {
-        font-size: 14px;
+        font-size: $f-subTitle;
         font-weight: bold;
         margin-bottom: 0;
       }
       h4 {
-        font-size: 11px;
+        font-size: $f-regular;
         font-weight: bold;
       }
       label {

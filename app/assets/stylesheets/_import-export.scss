@@ -1,6 +1,6 @@
 #results-container {
   font-weight: bold;
-  font-size: 11px;
+  font-size: $f-small;
   .well {
     overflow: hidden !important;
   }
@@ -47,13 +47,13 @@
           font-weight: bold;
           padding: 0;
           display: block;
-          font-size: 11px;
+          font-size: $f-small;
         }
       }
     }
   }
   label {
-    font-size: 11px;
+    font-size: $f-small;
     font-weight: bold;
   }
   .control-group {

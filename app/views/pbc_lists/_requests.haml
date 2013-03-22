@@ -66,11 +66,11 @@
 -if has_items && !pbc_is_read_only
   %section.headline
     .row-fluid
-      .span8
+      .span6
         Control Assesments
-      .span2
+      .span3
         &nbsp; Internal
-      .span2
+      .span3
         &nbsp; External
 
 -if has_items
@@ -82,13 +82,13 @@
           .openclose.active
           .item-title
             .row-fluid
-              .span8
+              .span6
                 %span.tiny-title Grouped by:
                 %i.grcicon-control-color
                 %strong.text-compliance= (control_assessment && control_assessment.control && control_assessment.control.slug) || "<span style='color:red'>(Missing Control)</span>".html_safe
                 =control_assessment && control_assessment.control && control_assessment.control.title || "&nbsp;".html_safe
               -if control_assessment.present? && !pbc_is_read_only
-                .span2
+                .span3
                   .ca-fields
                     %a.btn.btn-mini.rotate_control_assessment{ :rel => "tooltip", :'data-placement' => "top", :title => "Internal: Test of Design", :class => control_assessment_button_class(control_assessment.internal_toe), :'data-remote' => true, :'data-method' => 'post', :href => rotate_flow_control_assessment_path(control_assessment, :'control_assessment[internal_toe]' => 'toggle') }
                       %i{ :class => control_assessment_button_icon(control_assessment.internal_toe) }
@@ -96,7 +96,7 @@
                     %a.btn.btn-mini.rotate_control_assessment{ :rel => "tooltip", :'data-placement' => "top", :title => "Internal: Test of Effectiveness", :class => control_assessment_button_class(control_assessment.internal_tod), :'data-remote' => true, :'data-method' => 'post', :href => rotate_flow_control_assessment_path(control_assessment, :'control_assessment[internal_tod]' => 'toggle') }
                       %i{ :class => control_assessment_button_icon(control_assessment.internal_tod) }
                     %span Effectiveness
-                .span2
+                .span3
                   .ca-fields
                     %a.btn.btn-mini.rotate_control_assessment{ :rel => "tooltip", :'data-placement' => "top", :title => "External: Test of Design", :class => control_assessment_button_class(control_assessment.external_toe), :'data-remote' => true, :'data-method' => 'post', :href => rotate_flow_control_assessment_path(control_assessment, :'control_assessment[external_toe]' => 'toggle') }
                       %i{ :class => control_assessment_button_icon(control_assessment.external_toe) }

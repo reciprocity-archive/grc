@@ -72,7 +72,7 @@
             color: $darkText;
             span {
               color: $text;
-              font-size: 11px;
+              font-size: $f-small;
             }
             i {
               margin-right: 4px;
@@ -83,7 +83,7 @@
               color: $widgetTitle;
               span {
                 color: $widgetTitle;
-                font-size: 11px;
+                font-size:$f-small;
               }
             }
           }
@@ -152,7 +152,7 @@
           @include transition(color 0.3s ease);
           min-width: 105px;
           .item-count {
-            font-size: 11px;
+            font-size:$f-small;
           }
           i {
             @include opacity(0.3);
@@ -247,18 +247,17 @@
       }
     }
     h2 {
-      font-size: 16px;
       font-weight:normal;
       line-height: 28px;
       color: $white;
       margin-bottom:0;
       @include oneline();
       span {
-        font-size: 11px;
+        font-size: $f-small;
         font-weight:normal;
       }
       span.subtitle {
-        font-size: 14px;
+        font-size: $f-regular;
         font-style: italic;
       }
       i {
@@ -314,7 +313,7 @@
       padding-left: 40px;
     }
     .btn {
-      font-size: 11px;
+      font-size: $f-small;
       font-weight:normal;
       padding: 2px;
       margin-top: 2px;
@@ -359,7 +358,6 @@
     height: auto;
     @include default-border-top();
     p {
-      font-size:11px;
       font-weight:normal;
       margin: 0;
       color:$text;
@@ -376,11 +374,11 @@
     @include reset-list();
     h3 {
       font-weight:normal;
-      font-size:16px;
+      font-size:$f-regular;
     }
     li.main {
       h4 {
-        font-size: 12px;
+        font-size: $f-regular;
         color:$text;
       }
       a {
@@ -436,7 +434,6 @@
   }
   .related-button {
     li {
-      font-size: 11px;
       a {
         color: $black;
         padding: 5px 9px;
@@ -458,7 +455,6 @@
       }
       label {
         font-weight: normal;
-        font-size:12px;
         text-transform:uppercase;
         color: $darkGray;
       }
@@ -467,7 +463,7 @@
         @include border-radius();
         padding:6px 16px 6px 6px;
         margin-left: 0;
-        font-size: 11px !important;
+        font-size: $f-small !important;
         ul,
         ol {
           margin-top:0;
@@ -492,7 +488,6 @@
         span {
           float: left;
           width: 60%;
-          font-size:12px;
         }
       }
     }
@@ -513,12 +508,12 @@
       color: $headerTitle;
     }
     .rtf {
-      font-size: 12px;
       color: $text;
+      font-size:$f-regular;
     }
     .risk-level {
       float: right;
-      font-size: 18px;
+      font-size: $f-subTitle;
       border:1px solid $lightGray;
       @include border-radius();
       padding:0 6px;
@@ -596,7 +591,6 @@
     text-transform:uppercase;
     color:$text;
     @include text-shadow(0 1px 1px $white);
-    font-size:11px;
     display: block;
     &.label-title {
       margin-right:30px;
@@ -630,7 +624,6 @@
       color: $black;
       @include transition(color 0.3s ease);
       @include box-shadow(none);
-      font-size: 13px;
       font-weight: bold;
       padding: 0;
       display: inline-block;

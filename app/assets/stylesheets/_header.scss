@@ -50,7 +50,7 @@
       float:left;
       color: $white;
       line-height:30px;
-      font-size:11px;
+      font-size:$f-small;
       font-weight:bold;
       text-transform:uppercase;
       text-shadow: 0 1px 1px $black;
@@ -66,7 +66,6 @@
           input {
             height: 21px;
             line-height: 21px;
-            font-size: 11px;
             color: $topBarSearchText;
             width: 144px;
             padding: 0 4px 0 0;
@@ -130,7 +129,6 @@
           float:none;
           clear: both;
           text-transform: none;
-          font-size: 12px;
           &.title {
             padding: 0 7px 6px 7px;
             font-weight: bold;
@@ -294,7 +292,6 @@
     }
     h1 {
       line-height: 32px;
-      font-size:20px;
     }
     .actions {
       margin-top: 10px;
@@ -364,7 +361,7 @@
         a {
           color: $black;
           text-align: left;
-          font-size: 13px;
+          font-size: $f-small;
           font-weight: normal;
           margin: 0;
           text-transform: none;
@@ -387,7 +384,7 @@
     }
     a {
       color: $text;
-      font-size: 11px;
+      font-size: $f-small;
       line-height: 16px;
       font-weight: bold;
       text-transform: uppercase;
@@ -435,7 +432,7 @@
   @include oneline();
   li {
     display: inline-block;
-    font-size:11px;
+    font-size:$f-small;
     color:$text;
     a {
       color:$link;

@@ -1,7 +1,11 @@
+body {
+  font-size:$f-regular;
+}
+
 // typography
 h1 {
   color:$headerTitle;
-  font-size:24px;
+  font-size:$f-headline;
   line-height:36px;
   span {
     color: $disabled;
@@ -11,7 +15,7 @@ h1 {
 }
 
 h2 {
-  font-size: 20px;
+  font-size: $f-subTitle;
   line-height: 26px;
   font-weight: bold;
   color: $subTitle;
@@ -19,14 +23,14 @@ h2 {
 }
 
 h3 {
-  font-size: 18px;
+  font-size: $f-subTitle;
   line-height: 24px;
   font-weight: bold;
   color: $subTitle;
 }
 
 h4 {
-  font-size: 14px;
+  font-size: $f-regular;
   line-height: 20px;
   font-weight: normal;
   color: $subTitle;
@@ -92,7 +96,6 @@ blockquote {
 }
 
 .no-control {
-  font-size: 16px;
   display: inline;
 }
 
@@ -141,7 +144,7 @@ blockquote {
 
 // buttons
 .btn {
-  font-size: 13px;
+  font-size: $f-regular;
   font-weight: bold;
   @include box-shadow(none);
   i {
@@ -280,7 +283,6 @@ blockquote {
   p.no-data {
     color:$disabled;
     text-align:center;
-    font-size: 13px;
   }
 }
 
@@ -307,9 +309,9 @@ input.input-block-level {
   font-weight: bold;
   color: $darkGray;
   line-height: 20px;
-  font-size: 11px;
+  font-size: $f-small;
   &.object-no-result {
-    font-size: 14px;
+    font-size: $f-regular;
     padding-top: 8px;
   }
 }
@@ -332,7 +334,6 @@ input.input-block-level {
 .inline-help {
   color:$green;
   font-weight:normal;
-  font-size:13px;
   margin-left:10px;
 }
 
@@ -348,7 +349,7 @@ input.input-block-level {
   .help-inline {
     margin: -8px 0 8px 0;
     display: block;
-    font-size: 11px;
+    font-size: $f-small;
     font-weight: bold;
     color: $red;
     padding: 0;
@@ -398,7 +399,7 @@ input.disabled.pending-ajax{
   // smaller buttons in wysiwyg editor
   .btn {
     padding:0px 5px 2px 5px;
-    font-size:11px;
+    font-size:$f-small;
     @include opacity(0.5);
     &:hover {
       @include opacity(1);
@@ -450,7 +451,7 @@ strong {
 .description {
   .content {
     .code {
-      font-size: 11px;
+      font-size: $f-small;
     }
   }
 }
