@@ -44,7 +44,7 @@
               
       =render :partial => 'shared/related',
               :layout => 'layouts/widget_box',
-              :locals => { :instance => instance, :widget_class => 'widget-tabs widget-tabs-horizontal' }
+              :locals => { :instance => instance, :widget_class => 'widget-tabs widget-tabs-horizontal business' }
 
       -if has_feature? :BETA
         =render :partial => "actions",
@@ -60,6 +60,6 @@
               
       =render :partial => "more_info",
               :layout => 'layouts/widget_box',
-              :locals => { model_name.to_sym => instance, :widget_class => 'related' }
+              :locals => { model_name.to_sym => instance, :widget_class => 'related business' }
 
       =render :partial => 'shared/add_widget_section'

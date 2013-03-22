@@ -35,10 +35,10 @@
 
       =render :partial => "extras",
               :layout => 'layouts/widget_box',
-              :locals => { model_name.to_sym => instance, :widget_class => "widget-tabs widget-tabs-horizontal" }
+              :locals => { model_name.to_sym => instance, :widget_class => "widget-tabs widget-tabs-horizontal risk" }
       =render :partial => 'shared/related',
               :layout => 'layouts/widget_box',
-              :locals => { :instance => instance, :widget_class => 'widget-tabs widget-tabs-horizontal' }
+              :locals => { :instance => instance, :widget_class => 'widget-tabs widget-tabs-horizontal risk' }
 
     #right_column.span4.widget-area
       =render :partial => "info",
@@ -47,7 +47,7 @@
 
       =render :partial => "more_info",
               :layout => 'layouts/widget_box',
-              :locals => { model_name.to_sym => instance, :widget_class => 'related' }
+              :locals => { model_name.to_sym => instance, :widget_class => 'related business' }
 
       =render :partial => "risky_attributes",
               :layout => 'layouts/widget_box',
