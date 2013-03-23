@@ -28,7 +28,7 @@
               <span class="text-compliance">[no system]</span>
             {{else}}
               <i rel="tooltip" class="grcicon-{{system.system_or_process}}-color process-icon" title="{{system.system_or_process_capitalized}}"></i>  
-              <span class="text-compliance">{{system.title}}</span>
+              <span class="text-compliance"><a href="{{system.url}}" target="_blank">{{system.title}}</a></span>
             {{/if_null}}
           </div>
           <div class="span2">

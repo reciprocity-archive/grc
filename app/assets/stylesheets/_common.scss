@@ -429,12 +429,18 @@ input.disabled.pending-ajax{
 span.text-compliance
 strong.text-compliance {
   color:$compliance;
+  a {
+    color:$compliance !important;
+  }
 }
 
 span,
 strong {
   &.text-compliance {
     color:$compliance;    
+    a {
+      color:$compliance !important;
+    }
   }
   &.text-risk {
     color:$risk;    
