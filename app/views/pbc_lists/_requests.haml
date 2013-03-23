@@ -223,6 +223,10 @@
     -if !pbc_is_read_only
       %p
         Add new requests manually by clicking "+" button or import them as a CSV file by clicking "import requests" link on the right-hand side.
+      %p
+        For easier import, you can
+        %a{:href => "#{asset_path "pbc-import-template.csv"}"} Download PBC Import Template
+        
     -else 
       %p
         Add new requests by clicking "View/Edit PBC List" button
