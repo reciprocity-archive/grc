@@ -1,19 +1,104 @@
 <div class="modal-header">
-  <a class="btn btn-mini pull-right" data-dismiss="modal">
-    <i class="grcicon-x-grey"></i>
-  </a>
+  <div class="pull-right">
+    <a class="btn btn-mini" data-dismiss="modal" href="javascript://">
+      <i class="grcicon-x-grey"></i>
+    </a>
+  </div>
   <h2> Map Controls to <small>{{section.slug}}</small> </h2>
 </div>
 
-<div class="modal-body" data-section-id="{{section.id}}">
-  <div class="filter">
-    <input class="ui-corner-all widgetsearch-tocontent clear-value" placeholder="Search" type="text">
+
+<div class="modal-filter">
+    <div class="row-fluid">
+      <div class="span3">
+        &nbsp;
+      </div>
+      <div class="span4">
+        <div class="modal-search">
+          <a class="btn btn-mini search-reset" href="javascript://">
+            <i class="grcicon-x-grey"></i>
+          </a>
+          <input class="input-block-level widgetsearch-tocontent clear-value" placeholder="Search controls" type="text" />
+        </div>
+      </div>
+      <div class="span2">
+        <select class="span12">
+          <option value="all">Show all controls</option>
+          <option value="reg">Regulation controls only</option>
+          <option value="company">Company controls only</option>
+        </select>
+      </div>
+      <div class="span3">
+        <div class="pull-right">
+          {{! NOTE : set up your new control popup here. }}
+          <a class="btn btn-add" href="/controls/new" data-toggle="modal-form">
+            <i class="grcicon-add"></i>
+            Control
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
 
-  {{! this is filled in with the controls controller}}
-  <div class="controls-list source" data-list-data-href="/controls.json"/>
-  
-</div>
+<div class="modal-content">
+    <div class="row-fluid">
+      {{#section}}
+      <div class="span3">
+        <div class="selector-info" style="margin-right:-10%;">
+          <h4>
+            <i class="grcicon-section-color"></i>
+            {{title}}
+          </h4>
+          <p class="code governance">{{slug}}</p>
+          <div class="rtf">
+            {{{description}}}
+          </div>
+          <h5>
+            Linked Controls
+          </h5>
+          {{#if linked_controls}}
+            <p class="code compliance">
+
+            {{controlslugs ', '}}
+            </p>
+
+          {{/if}}
+          {{#unless linked_controls}}
+            <input type="checkbox">
+            <strong>Controls are not applicable (N/A)</strong>
+          {{/unless}}
+        </div>
+      </div>
+      {{/section}}
+      <div class="span6">
+        <div class="search-title">
+          <div class="row-fluid">
+            <div class="span6">
+              <h4>
+                Search Results (3)
+              </h4>
+            </div>
+            <div class="span5">
+              <div class="guide">
+                map/unmap all
+              </div>
+            </div>
+            <div class="span1">
+              <input class="map-all" rel="tooltip" title="map" type="checkbox">
+            </div>
+          </div>
+        </div>
+        {{! this is filled in with the controls controller}}
+        <div class="controls-list selector-list source" style="overflow-y: auto" data-list-data-href="/controls.json"/>
+        
+      </div>
+      <div class="span3">
+        <div class="selector-info control" style="margin-left:-10%">
+          {{!this is filled in with the selected control controller}}
+        </div>
+      </div>
+    </div>
+  </div>
 
 <div class="modal-footer">
   <div class="row-fluid">

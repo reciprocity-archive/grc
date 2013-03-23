@@ -1,17 +1,19 @@
-     
-<div class="span10">
-  <div class="object-info">           
-    <span class="code">{{slug}}</span>
-    <span class="title">{{title}}</span>           
-    <span class="option"></span>         
-  </div>       
-</div>       
-<div class="span2 actions">         
-  <div class="pull-right">           
-    <a class="widgetbtn btn btn-mini edit-control" data-modal-class="modal-wide" data-toggle="modal-ajax-listeditform" href="/controls/{{id}}/edit">             
-      <i class="grcicon-edit"></i>           
-    </a>           
-    <input type="checkbox" class="widgetbtn btn btn-mini" name="control[{{id}}]" />
-  </div>       
-</div>     
+<div class="item-title">
+  <div class="row-fluid">     
+  <div class="span11">
+    <div class="oneline">
+      <span class="title">{{title}}</span>           
+      <span class="code">{{slug}}</span>
+    </div>       
+  </div>
+  <div class="span1 actions">
+    <div class="pull-right">
+      <!--
+      <a class="widgetbtn btn btn-mini edit-control" data-modal-class="modal-wide" data-toggle="modal-ajax-listeditform" href="/controls/{{id}}/edit">             
+        <i class="grcicon-edit"></i>           
+      </a>
+      -->           
+      <input type="checkbox" class="map-control" name="control[{{id}}]" />
+    </div>       
+  </div>     
 

@@ -152,7 +152,7 @@ can.Model.Cacheable("CMS.Models.Section", {
 
   , update_linked_controls_ccontrol_only : function() {
     this.attr("linked_controls").replace(can.map(this.linked_controls, function(lc) {
-      return CMS.Models.Control.findInCacheById(lc.id);
+      return CMS.Models.Control.findInCacheById(lc.id || lc.control.id);
     }));
   }
 

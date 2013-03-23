@@ -18,7 +18,7 @@ function mapunmap(unmap) {
       var dfd = section ?
         section["map_" + (rcontrol === null ? "control" : "rcontrol")](params)
         : rcontrol.map_ccontrol(params);
-      dfd.then(can.proxy(this.updateButtons, this));
+      dfd.done(can.proxy(this.updateButtons, this));
       return dfd;
   }
 }
@@ -285,7 +285,16 @@ CMS.Controllers.Mapping("CMS.Controllers.ControlMappingPopup", {
       .html(frag).trigger("shown")
       .find(".controls-list")
       .append($(new Spinner().spin().el).css({"position" : "relative", "left" : 50, "top" : 50, "height": 150, "width": 150}))
-      .cms_controllers_controls({show : "/assets/controls/show_selector.mustache", arity : 2})
+      .cms_controllers_controls({
+        list : "/assets/controls/list_selector.mustache"
+        , show : "/assets/controls/show_selector.mustache"
+        , arity : 2})
+      .control();
+
+      that.options.selected_control_controller = that.element
+      .find(".selector-info.control")
+      .append($(new Spinner().spin().el).css({"position" : "relative", "left" : 50, "top" : 50, "height": 150, "width": 150}))
+      .cms_controllers_controls({show : "/assets/controls/show_selected_sidebar.mustache", arity : 1})
       .control();
 
       that.options.controls_controller.find_all_deferred.done(function(d) {
@@ -312,9 +321,9 @@ CMS.Controllers.Mapping("CMS.Controllers.ControlMappingPopup", {
     }
 
     if(~can.inArray($(el).data("model"), this.options.section.linked_controls)) {
-      $(el).addClass("selected").css("background-color", "red").find("input[type=checkbox]").prop("checked", true);
+      $(el).find("input[type=checkbox]").prop("checked", true);
     } else {
-      $(el).removeClass("selected").css("background-color", "").find("input[type=checkbox]").prop("checked", false);
+      $(el).find("input[type=checkbox]").prop("checked", false);
     }
   }
 
@@ -322,9 +331,11 @@ CMS.Controllers.Mapping("CMS.Controllers.ControlMappingPopup", {
       this.element.remove();
   }
 
-  , "input[type=checkbox] change" : function(el, ev) {
-    var control = el.closest("[data-model]").data("model")
-    this[el.prop("checked") ? "map" : "unmap"](this.options.section, null, control).done(this.proxy("style_item", el.closest("[data-model]")));
+  , "input.map-control change" : function(el, ev) {
+    var control = el.closest("[data-model]").data("model");
+    if(~can.inArray(control, this.options.section.linked_controls) ^ el.prop("checked")) {
+      this[el.prop("checked") ? "map" : "unmap"](this.options.section, null, control);
+    }
   }
 
   , "{section} updated" : function(obj, ev) {
@@ -339,10 +350,55 @@ CMS.Controllers.Mapping("CMS.Controllers.ControlMappingPopup", {
   }
 
   , ".widgetsearch-tocontent keydown" : function(el, ev) {
+    var that = this;
     if(ev.which === 13) {
-      this.options.controls_controller.filter(el.val())
+      this.options.controls_controller.filter(el.val()).done(function() {
+        that.update_map_all();
+      });
     }
   }
+
+  , ".search-reset click" : function(el, ev) {
+    var that = this;
+    this.element.find(".widgetsearch-tocontent").val("");
+    this.options.controls_controller.filter("").done(function() {
+      that.update_map_all();
+    })
+  }
+
+  , ".item-main click" : function(el, ev) {
+    this.options.selected_control_controller.update({"instance" : el.closest("[data-model]").data("model")});
+    this.element.find(".control").removeClass("selected");
+    el.closest(".control").addClass("selected");
+  }
+
+  , update_map_all : function() {
+    this.element.find(".map-all").prop("checked", !this.element.find(".item-main:visible input:not(:checked)").length);
+  }
+
+  , ".map-all click" : function(el, ev) {
+    var that = this;
+    var dfds = [];
+    if(el.prop("checked")) {
+      //map
+      this.element.find(".control:visible:has(input:not(:checked))").each(function(i, val) {
+        dfds.push(that.map(that.options.section, null, $(val).data("model")).then(function(d) {
+          that.style_item(val);
+          return d;
+        }));
+      });
+    } else {
+      //unmap
+      this.element.find(".control:visible:has(input:checked)").each(function(i, val) {
+        dfds.push(that.unmap(that.options.section, null, $(val).data("model")).then(function(d) {
+          that.style_item(val);
+          return d;
+        }));
+      });
+    }
+    $.when.apply(dfds).done(this.proxy("update_map_all"));
+  }
+
 });
 
 

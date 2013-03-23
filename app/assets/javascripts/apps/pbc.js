@@ -46,22 +46,30 @@ $.widget(
         , _create: function() {
           //extend autocomplete so if you type something in and hit enter, it selects the first thing in the list.
           this._super.apply(this, arguments);
-          this.element.keydown(function(ev) {
-            if(ev.which === 13) {
-              var data = $(this).data();
-              for(var i in data) {
-                if(/^pbcAutocomplete/.test(i)) {
-                  var ac = data[i];
-                  if(!ac.selectedItem) {
-                    setTimeout(function() {
-                      ac.menu.element.children().first().click();
-                    }, ac.options.delay || 100);
-                  }
-                  break;
+
+          function click_first() {
+            var data = $(this).data();
+            for(var i in data) {
+              if(/^pbcAutocomplete/.test(i)) {
+                var ac = data[i];
+                if(!ac.selectedItem) {
+                  setTimeout(function() {
+                    ac.menu.element.children().first().click();
+                  }, ac.options.delay || 100);
                 }
+                break;
               }
             }
-          });
+          }
+
+          this.element
+          .keydown(function(ev) {
+            if(ev.which === 13) {
+              click_first.call(this);
+            }
+          })
+          .next(".submit-btn")
+          .click(click_first);
         }
         , _renderItem : function( ul, item ) {
             return $( "<li class='something'>" )

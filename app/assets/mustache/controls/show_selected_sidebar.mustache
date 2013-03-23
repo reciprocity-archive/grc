@@ -1,0 +1,18 @@
+  {{#model}}
+  <div class="selector-info" style="margin-left:-5%">
+    <h4>
+      <i class="grcicon-control-color"></i>
+      {{title}}
+    </h4>
+    <p class="code compliance">{{slug}}</p>
+    <div class="rtf">
+      {{{description}}}
+    </div>
+  </div>
+  {{/model}}
+  {{#unless model}}
+  <div class="no-content">
+    <h4>NO CONTROL IS SELECTED</h4>
+    <p>Choose one of the controls from the list.</p>
+  </div>
+  {{/unless}}

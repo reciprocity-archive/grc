@@ -256,7 +256,7 @@ $.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
     can.each(this.linked_controls, function() {
       slugs.push.apply(slugs, controlslugs.apply(this)); 
     });
-    return slugs.join(" ");
+    return slugs.join(arguments.length > 1 ? arguments[0] : " ");
   });
 
 $.each({

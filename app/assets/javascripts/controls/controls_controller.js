@@ -86,6 +86,7 @@
 
     , filter : function(str) {
       var that = this;
+      var dfd = new $.Deferred();
       this.options.model.findAll({ id : this.options.id, s : str}).then(function(data) {
         var ids = can.map(data, function(v) { return v.id });
         that.element.find("[data-model]").each(function() {
@@ -95,7 +96,9 @@
           else
             $this.hide();
         });
+        dfd.resolve(ids);
       });
+      return dfd;
     }
 
     //  Careful you don't try to hook up attribute events to can.Observes until

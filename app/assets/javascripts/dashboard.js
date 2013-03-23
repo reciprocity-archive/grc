@@ -673,24 +673,6 @@ jQuery(function($) {
 
 });
 
-if(!/\/mapping/.test(window.location.href)) {
-  jQuery(function($) {
-    var $dialog = $('<div id="mapping_dialog" class="modal hide"></div>').appendTo('body');
-    $dialog.draggable({ handle: '.modal-header' });
-    // $('#directives, #regulations, #sections, #controls, #section_list').on('click', 'a.controllist, a.controllistRM', function(e) {
-    //   e.preventDefault();
-    //   $dialog.data('href', $(this).attr('href'));
-    //   $dialog.load($(this).attr('href'), function() {
-    //     $dialog.modal_form({ backdrop: true }).modal_form('show');
-    //   });
-    // });
-
-    $dialog.on('ajax:success', '.unmapbtn', function(evt, data, status, xhr) {
-      $dialog.load($dialog.data('href'));
-    });
-  });
-}
-
 //make buttons non-clickable when saving
 jQuery(function($) {
   can.extend(can.Control.prototype, {
@@ -749,7 +731,7 @@ jQuery(function($) {
     var $dialog = $("#mapping_dialog");
     var id = $(ev.target).closest("[data-id]").data("id")
     if(!$dialog.length) {
-      $dialog = $('<div id="mapping_dialog" class="modal hide"></div>')
+      $dialog = $('<div id="mapping_dialog" class="modal modal-selector hide"></div>')
         .appendTo(document.body)
         .draggable({ handle: '.modal-header' });
     }
