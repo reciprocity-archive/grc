@@ -54,11 +54,11 @@
     #middle-column.span8.widget-area
       =render :partial => 'main',
               :layout => 'layouts/widget_box',
-              :locals => { :program => instance, :widget_class => 'widget-tabs widget-tabs-horizontal compliance' }
+              :locals => { :program => instance, :widget_class => 'widget-tabs widget-tabs-horizontal governance' }
       -unless instance.company_controls?
         =render :partial => 'shared/related',
                 :layout => 'layouts/widget_box',
-                :locals => { :instance => instance, :widget_title => "Impact/Scope", :widget_class => 'widget-tabs widget-tabs-horizontal related compliance' }
+                :locals => { :instance => instance, :widget_title => "Impact/Scope", :widget_class => 'widget-tabs widget-tabs-horizontal related business' }
       -if instance.company_controls?
         =render :partial => 'linked_programs',
                 :layout => 'layouts/widget_box',
