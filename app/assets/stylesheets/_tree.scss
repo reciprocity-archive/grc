@@ -279,6 +279,7 @@ ul.tree-structure {
         font-style: italic;
         line-height: 16px;
         color: $subTitle;
+        font-size:$f-regular;
         span {
           display: block;
           font-weight: normal;
@@ -320,7 +321,7 @@ ul.tree-structure {
     padding-right:10px;
     @include border-radius();
     .rtf {
-      font-size:$f-small;
+      font-size:$f-medium;
       color:$widgetTitle;
     }
     &.inhover {
