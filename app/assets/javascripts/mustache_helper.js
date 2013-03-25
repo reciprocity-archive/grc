@@ -234,7 +234,7 @@ $.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
 
   var controlslugs = function() {
     var slugs = [];
-    slugs.push(this.slug);
+    slugs.push((this.title && this.title.length > 15 )? this.title.substr(0, 15) + "..." : this.title);
     can.each(this.implementing_controls, function(val) {
       slugs.push.apply(slugs, controlslugs.call(this));
     });
