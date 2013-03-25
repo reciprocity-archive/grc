@@ -5,12 +5,11 @@
         <div class="span6">
           <h4>
             <i class="grcicon-{{system_or_process}}-color" rel="tooltip" data-placement="top" title="{{system_or_process_capitalized}}"></i>
-            {{{#url}}}
-              <strong class="text-compliance"><a href="{{{url}}}" target="_blank">{{{title}}}</a></strong>
-            {{{/url}}}
-            {{{^url}}}
-              <strong class="text-compliance">{{{title}}}</strong>
-            {{{/url}}}
+            {{#if url}}
+              <strong class="text-compliance"><a href="{{url}}" target="_blank">{{title}}</a></strong>
+            {{else}}
+              <strong class="text-compliance">{{title}}</strong>
+            {{/if}}
 
           </h4>
         </div>

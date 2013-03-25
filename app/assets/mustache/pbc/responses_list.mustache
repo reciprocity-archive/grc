@@ -28,12 +28,11 @@
               <span class="text-compliance">[no system]</span>
             {{else}}
               <i rel="tooltip" class="grcicon-{{system.system_or_process}}-color process-icon" title="{{system.system_or_process_capitalized}}"></i>  
-              {{#system.url}}
+              {{#if system.url}}
                 <span class="text-compliance"><a href="{{system.url}}" target="_blank">{{system.title}}</a></span>
-              {{/system.url}}
-              {{^system.url}}
+              {{else}}
                 <span class="text-compliance">{{system.title}}</span>
-              {{/system.url}}
+              {{/if}}
 
             {{/if_null}}
           </div>
