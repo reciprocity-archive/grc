@@ -27,6 +27,9 @@ function mapunmap(unmap) {
 can.Control("CMS.Controllers.Mapping", {
   //static
   cache : {}
+  , defaults : {
+    section_model : namespace.CMS.Models.SectionSlug
+  }
 }, {
   init : function() {
     this.link_lists();
@@ -34,6 +37,7 @@ can.Control("CMS.Controllers.Mapping", {
   }
 
   , link_lists : function() {
+    var that = this;
       $.when(
         this.options.company_list_controller.find_all_deferred
         , this.options.reg_list_controller.find_all_deferred
@@ -47,7 +51,7 @@ can.Control("CMS.Controllers.Mapping", {
           })));
         });
 
-        can.each(CMS.Models.SectionSlug.cache, function(section, id) {
+        can.each(that.options.section_model.cache, function(section, id) {
           section.update_linked_controls();
         });
 
@@ -172,6 +176,7 @@ can.Control("CMS.Controllers.Mapping", {
     var $content = $item.closest(".content");
     $item.find("a").click();
     $content.scrollTop($item.offset().top - $content.offset().top - ($content.height() - $item.height()) / 2)
+    this.element.find(".search-results-count").html(+(this.element.find(".search-results-count").html()) + 1);
   }
 
   , slug_sort_position : function(data, list) {
@@ -205,7 +210,7 @@ can.Control("CMS.Controllers.Mapping", {
 
   , "#mapping_dialog .unmapbtn click" : function(el, ev) {
     var thiscontrol = el.data("id")
-    , _section = namespace.CMS.Models.SectionSlug.findInCacheById(el.closest("[data-section-id]").data("section-id"))
+    , _section = this.options.section_model.findInCacheById(el.closest("[data-section-id]").data("section-id"))
     , that = this
     , $rc, rcontrol, ccontrol, section;
     if(($rc = el.closest("[data-rcontrol-id]")).length > 0) {
@@ -227,13 +232,13 @@ can.Control("CMS.Controllers.Mapping", {
   }
 
   , "#section_na click" : function(el, ev) {
-    var section = namespace.CMS.Models.SectionSlug.findInCacheById(el.closest("[data-section-id]").data("section-id"));
+    var section = this.options.section_model.findInCacheById(el.closest("[data-section-id]").data("section-id"));
     section.attr("na", el.attr("checked") ? 1 : 0);
     this.bindXHRToButton(section.save(), el);
   }
 
   , "#section_notes change" : function(el, ev) {
-    var section = namespace.CMS.Models.SectionSlug.findInCacheById(el.closest("[data-section-id]").data("section-id"));
+    var section = this.options.section_model.findInCacheById(el.closest("[data-section-id]").data("section-id"));
     section.attr("notes", el.val());
     this.bindXHRToButton(section.save(), el);
   }
@@ -273,6 +278,9 @@ can.Control("CMS.Controllers.MappingWidgets", {}, {
   // Below this line is new development for killing the reg mapper
   //---------------------------------------------------------------
 CMS.Controllers.Mapping("CMS.Controllers.ControlMappingPopup", {
+  defaults : {
+    section_model : namespace.CMS.Models.Section
+  }
   //static
 }, {
   init : function() {
@@ -281,7 +289,7 @@ CMS.Controllers.Mapping("CMS.Controllers.ControlMappingPopup", {
     this.options.observer = new can.Observe({section : this.options.section});
 
     can.view("/assets/sections/control_selector.mustache", that.options.observer, function(frag) {
-      that.options.controls_controller = that.element
+      that.options.company_list_controller = that.element
       .html(frag).trigger("shown")
       .find(".controls-list")
       .append($(new Spinner().spin().el).css({"position" : "relative", "left" : 50, "top" : 50, "height": 150, "width": 150}))
@@ -297,12 +305,13 @@ CMS.Controllers.Mapping("CMS.Controllers.ControlMappingPopup", {
       .cms_controllers_controls({show : "/assets/controls/show_selected_sidebar.mustache", arity : 1})
       .control();
 
-      that.options.controls_controller.find_all_deferred.done(function(d) {
+      that.options.company_list_controller.find_all_deferred.done(function(d) {
         that.list = d;
+        that.element.find(".search-results-count").html(d.length);
         that.options.section.update_linked_controls_ccontrol_only();
         //that.options.observer.attr("controls", d);
         that.update();
-        that.element.trigger("shown");
+        that.element.trigger("shown").trigger("kill-all-popoevers");
       });
     });
 
@@ -342,7 +351,11 @@ CMS.Controllers.Mapping("CMS.Controllers.ControlMappingPopup", {
     // if(!/(^|\.)linked_controls(\.|$)/.test(attr))
     //   return;
     var $count = $("#content_" + obj.slug).find("> .item-main .controls-count");
-    $count.html($count.children().filter("i").add($("<span>").html(obj.linked_controls.length)));
+    $count.html($count.children().filter("i").add(
+      obj.linked_controls.length 
+      ? $("<span>").html(" " + obj.linked_controls.length)
+      : (obj.na ? $("<strong class='warning'>N/A</strong>") : $("<strong class='error'>0</strong>"))
+      ));
   }
 
   , ".edit-control modal:success" : function(el, ev, data) {
@@ -352,7 +365,8 @@ CMS.Controllers.Mapping("CMS.Controllers.ControlMappingPopup", {
   , ".widgetsearch-tocontent keydown" : function(el, ev) {
     var that = this;
     if(ev.which === 13) {
-      this.options.controls_controller.filter(el.val()).done(function() {
+      this.options.company_list_controller.filter(el.val()).done(function(d) {
+        that.element.find(".search-results-count").html(d.length);
         that.update_map_all();
       });
     }
@@ -361,7 +375,8 @@ CMS.Controllers.Mapping("CMS.Controllers.ControlMappingPopup", {
   , ".search-reset click" : function(el, ev) {
     var that = this;
     this.element.find(".widgetsearch-tocontent").val("");
-    this.options.controls_controller.filter("").done(function() {
+    this.options.company_list_controller.filter("").done(function() {
+      that.element.find(".search-results-count").html(that.element.find(".controls-list .item-main").length);
       that.update_map_all();
     })
   }
@@ -397,6 +412,13 @@ CMS.Controllers.Mapping("CMS.Controllers.ControlMappingPopup", {
       });
     }
     $.when.apply(dfds).done(this.proxy("update_map_all"));
+  }
+
+  , ".jump-to-control click" : function(el, ev) {
+    var $item = this.element.find(".controls-list [content_id=" + el.data("content-id") + "]");
+    var $content = $item.closest(".content");
+    $item.find("a").click();
+    $content.scrollTop(0).scrollTop($item.offset().top - $content.offset().top - ($content.height() - $item.height()) / 2);
   }
 
 });

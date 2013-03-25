@@ -11,7 +11,7 @@ class Section < ActiveRecord::Base
   include RelatedModel
   include SanitizableAttributes
 
-  attr_accessible :title, :slug, :description, :directive, :notes, :url, :parent
+  attr_accessible :title, :slug, :description, :directive, :notes, :url, :parent, :na
 
   define_index do
     indexes :slug, :sortable => true

@@ -8,7 +8,7 @@ can.Model.Cacheable("CMS.Models.Section", {
   , update : function(id, section) {
     var param = {};
     can.each(section, function(val, key) {
-      if(can.inArray(key, ["parent_id", "created_at", "id", "kind", "modified_by_id", "updated_at", "na", "linked_controls", "description_inline"]) < 0)
+      if(can.inArray(key, ["parent_id", "created_at", "id", "kind", "modified_by_id", "updated_at", "linked_controls", "description_inline"]) < 0)
         param["section[" + key + "]"] = val;
     });
     return $.ajax({

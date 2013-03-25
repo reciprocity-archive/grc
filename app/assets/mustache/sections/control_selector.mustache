@@ -30,8 +30,7 @@
       </div>
       <div class="span3">
         <div class="pull-right">
-          {{! NOTE : set up your new control popup here. }}
-          <a class="btn btn-add" href="/controls/new" data-toggle="modal-form">
+          <a class="btn btn-add" data-dirty="#controls, #combo" href="/controls/new" data-modal-class="modal-wide" data-toggle="modal-ajax-form" rel="tooltip" data-original-title="Create New Control">
             <i class="grcicon-add"></i>
             Control
           </a>
@@ -40,7 +39,7 @@
     </div>
   </div>
 
-<div class="modal-content">
+<div class="modal-content" data-section-id="{{section.id}}">
     <div class="row-fluid">
       {{#section}}
       <div class="span3">
@@ -54,17 +53,21 @@
             {{{description}}}
           </div>
           <h5>
-            Linked Controls
+            Controls Mapped to This Section
           </h5>
-          {{#if linked_controls}}
-            <p class="code compliance">
-
-            {{controlslugs ', '}}
-            </p>
-
+          {{#if linked_controls.length}}
+            <ul>
+              {{#linked_controls}}
+              <li>
+                <a href="javascript://" class="jump-to-control" data-content-id="{{content_id}}">
+                  {{title}}
+                </a>
+              </li>
+              {{/linked_controls}}
+            </ul>
           {{/if}}
-          {{#unless linked_controls}}
-            <input type="checkbox">
+          {{#unless linked_controls.length}}
+            <input type="checkbox" id="section_na" {{#if na}}checked="checked"{{/if}}>
             <strong>Controls are not applicable (N/A)</strong>
           {{/unless}}
         </div>
@@ -75,21 +78,23 @@
           <div class="row-fluid">
             <div class="span6">
               <h4>
-                Search Results (3)
+                Search Results (<span class="search-results-count">0</span>)
               </h4>
             </div>
-            <div class="span5">
+            <div class="span6">
               <div class="guide">
-                map/unmap all
+                Map/Unmap
               </div>
             </div>
+            <!--
             <div class="span1">
               <input class="map-all" rel="tooltip" title="map" type="checkbox">
             </div>
+          -->
           </div>
         </div>
         {{! this is filled in with the controls controller}}
-        <div class="controls-list selector-list source" style="overflow-y: auto" data-list-data-href="/controls.json"/>
+        <div class="content controls-list selector-list source" style="overflow-y: auto" data-list-data-href="/controls.json"/>
         
       </div>
       <div class="span3">
