@@ -6,7 +6,11 @@
     </h4>
     <p class="code compliance">{{slug}}</p>
     <div class="rtf">
-      {{{description}}}  
+      {{#if description}}
+        {{{description}}}  
+      {{else}}
+        <p class="no-data" style="margin-top:100px">No Description</p>
+      {{/if}}
     </div>
   </div>
   {{/model}}

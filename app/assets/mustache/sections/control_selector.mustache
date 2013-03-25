@@ -67,8 +67,13 @@
             </ul>
           {{/if}}
           {{#unless linked_controls.length}}
-            <input type="checkbox" id="section_na" {{#if na}}checked="checked"{{/if}}>
-            <strong>Controls are not applicable (N/A)</strong>
+            <ul class="linked-controls">
+              <li class="not-applicable">
+                <input type="checkbox" id="section_na" {{#if na}}checked="checked"{{/if}}>
+                <strong>Controls are not applicable (N/A)</strong>
+              </li>
+            </ul>
+            
           {{/unless}}
         </div>
       </div>
@@ -82,9 +87,7 @@
               </h4>
             </div>
             <div class="span6">
-              <div class="guide">
-                Map/Unmap
-              </div>
+              &nbsp;
             </div>
             <!--
             <div class="span1">
