@@ -4,8 +4,10 @@
     .span12
       %h3
         %i{:class => "grcicon-control-color"}
-        =@control.slug
-        %span=@control.title
+        %span.title
+          =@control.title
+        %span.code
+          =@control.slug
 
 .popover-inner-content
   .row-fluid

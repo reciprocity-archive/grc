@@ -6,8 +6,10 @@
           %i{:class => "grcicon-businessprocess-color"}
         -else
           %i{:class => "grcicon-system-color"}
-        =system.slug
-        %span=system.title
+        %span.title
+          =system.title
+        %span.code
+          =system.slug
 
 .popover-inner-content
   .row-fluid

@@ -7,8 +7,10 @@
     .span12
       %h3
         %i{:class => "grcicon-#{instance.class.name.downcase}-color"}
-        =instance.slug
-        %span=instance.title
+        %span.title
+          =instance.title
+        %span.code
+          =instance.slug
 
 .popover-inner-content
   .row-fluid

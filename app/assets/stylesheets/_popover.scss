@@ -170,6 +170,15 @@
       margin-right:5px;
     }
   }
+  .code {
+    color:$black;
+    font-size:$f-small;
+    margin-right:8px;
+  }
+  .title {
+    color:$black;
+    //font-weight:bold;
+  }
 }
 /* slowing down fade-in only.  Fade-out remains 0.15s */
 .tooltip.fade.in, .popover.fade.in {

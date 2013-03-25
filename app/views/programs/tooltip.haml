@@ -3,8 +3,10 @@
     .span10
       %h3
         %i.grcicon-program-color
-        =program.slug
-        %span=program.title
+        %span.title
+          =program.title
+        %span.code
+          =program.slug
     .span2
       %a.btn.btn-mini.btn-primary.pull-right{:href => flow_program_path(program), :rel => "tooltip", :title => "View/Edit Program"}
         %i.grcicon-goto-white
