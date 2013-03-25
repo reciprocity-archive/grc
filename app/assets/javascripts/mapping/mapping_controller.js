@@ -354,7 +354,7 @@ CMS.Controllers.Mapping("CMS.Controllers.ControlMappingPopup", {
     $count.html($count.children().filter("i").add(
       obj.linked_controls.length 
       ? $("<span>").html(" " + obj.linked_controls.length)
-      : (obj.na ? $("<strong class='warning'>N/A</strong>") : $("<strong class='error'>0</strong>"))
+      : (obj.na ? "<strong class='warning'> N/A</strong>" : "<strong class='error'> 0</strong>")
       ));
   }
 

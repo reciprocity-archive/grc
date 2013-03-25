@@ -13,7 +13,7 @@
       <div class="span3">
         &nbsp;
       </div>
-      <div class="span4">
+      <div class="span6">
         <div class="modal-search">
           <a class="btn btn-mini search-reset" href="javascript://">
             <i class="grcicon-x-grey"></i>
@@ -21,13 +21,15 @@
           <input class="input-block-level widgetsearch-tocontent clear-value" placeholder="Search controls" type="text" />
         </div>
       </div>
-      <div class="span2">
-        <select class="span12">
-          <option value="all">Show all controls</option>
-          <option value="reg">Regulation controls only</option>
-          <option value="company">Company controls only</option>
-        </select>
-      </div>
+      {{!
+        <div class="span2">
+          <select class="span12 control-type-filter">
+            <option value="all">Show all controls</option>
+            <option value="prog">Controls for this program only</option>
+            <option value="company">Company controls only</option>
+          </select>
+        </div>
+      }}
       <div class="span3">
         <div class="pull-right">
           <a class="btn btn-add" data-dirty="#controls, #combo" href="/controls/new" data-modal-class="modal-wide" data-toggle="modal-ajax-form" rel="tooltip" data-original-title="Create New Control">
