@@ -27,19 +27,6 @@
               :layout => 'layouts/widget_box',
               :locals => { :pbc_list => @cycle.pbc_lists.first, :widget_class => 'governance', :pbc_is_read_only => true }
 
-      -if has_feature?(:BETA)
-        =render :partial => 'cycles/scope',
-                :layout => 'layouts/widget_box',
-                :locals => { :cycle => @cycle, :widget_class => "governance"}
-
-        =render :partial => 'cycles/workflows',
-                :layout => 'layouts/widget_box',
-                :locals => { :cycle => @cycle }
-
-        =render :partial => 'cycles/schedule',
-                :layout => 'layouts/widget_box',
-                :locals => { :cycle => @cycle }
-
     #right_column.span4.widget-area
       =render :partial => 'cycles/info',
               :layout => 'layouts/widget_box',

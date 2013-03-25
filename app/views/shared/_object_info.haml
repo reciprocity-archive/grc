@@ -15,19 +15,7 @@
     .span3
       %strong Last Editor:
       %span #{object.modified_by.nil? ? 'unknown' : object.modified_by.display_name}
-    -if has_feature?(:BETA)
-      %span.demoText
-        %strong Approved by:
-        -if state == 'approved'
-          %span.statustextgreen Approved
-        -else
-          %span.statustextred Not Approved
-    -else
-      .span3
-    -#%span.status
-      %h5
-        Status:
-        %span.statusValue Active
+    .span3
   -else
     .span3
       %strong Creator:

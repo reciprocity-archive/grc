@@ -35,21 +35,11 @@
                 %a{:href => root_path}
                   -if CMS_CONFIG["COMPANY_LOGO"].present?
                     =image_tag(CMS_CONFIG['COMPANY_LOGO'], :alt => 'GRC', :title => 'GRC')
-                  -elsif has_feature? :BETA
-                    =image_tag('/images/logos/logo.png')
                   -elsif CMS_CONFIG["COMPANY_LOGO_TEXT"].present?
                     =CMS_CONFIG["COMPANY_LOGO_TEXT"]
                   -else
                     Google GRC
               %ul.menu
-                -if has_feature? :BETA
-                  -if controller.controller_name == 'programs_dash'
-                    %li.gov
-                      %a#grcbutton-governance{:href => "#"} Governance
-                    %li.risk
-                      %a#grcbutton-risk{:href => "#"} Risk
-                    %li.compliance
-                      %a#grcbuttonStable Compliance
                 %li.quick-search
                   .quick-search-holder
                     %button(type='submit')
@@ -124,22 +114,6 @@
                           %li
                             %a{ :href => new_flow_data_asset_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
                               Data Asset
-                          -if has_feature? :BETA
-                            %li.demoItem
-                              %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                                Person
-                            %li.demoItem
-                              %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                                Reference
-                            %li.demoItem
-                              %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                                Business Object
-                            %li.demoItem
-                              %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                                Threat
-                            %li.demoItem
-                              %a{ :href => '#', :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                                Vulnerability
 
                 -#%li.black-link
                   %a{:href => programs_dash_path}
@@ -200,11 +174,6 @@
               =yield :header
             .span7
               =yield :subheader_extras
-
-    -#-if has_feature? :BETA
-      -if controller.controller_name == 'programs_dash'
-        .headercenter.fltnone
-          =render :partial => 'design/templates/grcmenu'
 
     =yield :subheader_plus
 

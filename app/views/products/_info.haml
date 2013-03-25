@@ -5,22 +5,6 @@
 
 -content_for :widget_id, 'product_info_widget'
 
--if has_feature? :BETA
-  .information
-    .well
-      %label
-        .pull-right
-          %span.statustextgreen 85
-          %span /
-          %span.statustextyellow 5
-          %span /
-          %span.statustextred 10
-        Status
-      .progress.progress-striped.active
-        .bar.progressbar-success{"data-percentage" => "85"}
-        .bar.progressbar-danger{"data-percentage" => "10"}
-        .bar.progressbar-warning{"data-percentage" => "5"}
-
 %ul.info-list
   %li.float-element
     %label

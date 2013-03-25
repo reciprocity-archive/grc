@@ -24,16 +24,7 @@
         -if !delete_path.blank?
           %a.btn{:href => delete_path, :'data-toggle' => 'modal-ajax-deleteform'} Delete
     .span6
-      -if has_feature?(:BETA) && !f.object.new_record?
-        .version-nav
-          %a.btn{:href => "#", :'data-toggle' => 'version-prev'}
-            %i.grcicon-goto-left
-          %span
-            Showing Most Recent of
-            %strong=f.object.versions.count
-            Revisions
-          %a.btn{:href => "#", :'data-toggle' => 'version-next'}
-            %i.grcicon-goto
+      %nbsp;
     .span3
       .confirm-buttons
         -save_button = yield_content!(:modal_save_button)
