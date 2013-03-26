@@ -354,8 +354,10 @@ CMS.Controllers.Mapping("CMS.Controllers.ControlMappingPopup", {
     $count.html($count.children().filter("i").add(
       obj.linked_controls.length 
       ? $("<span>").html(" " + obj.linked_controls.length)
-      : (obj.na ? $("<strong class='warning'>N/A</strong>") : $("<strong class='error'>0</strong>"))
+      : (obj.na ? "<strong class='warning'> N/A</strong>" : "<strong class='error'> 0</strong>")
       ));
+    var render_str = can.view.render("/assets/controls/list_popover.mustache", obj.linked_controls.serialize());
+    $count.attr("data-content", render_str).data("content", render_str)
   }
 
   , ".edit-control modal:success" : function(el, ev, data) {

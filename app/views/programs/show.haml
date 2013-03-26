@@ -35,10 +35,6 @@
         %a{:href => new_flow_cycle_path(:'program_id' => instance.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect'}
           %i.grcicon-audit
           %span Start Audit
-      %li
-        %a{ :href => mapping_program_path(instance) }
-          %i.grcicon-reg-map
-          %span Control Mapper
     %li
       %a{:href => edit_flow_program_path(instance), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide',:title => 'Edit Program'}
         %i.grcicon-edit

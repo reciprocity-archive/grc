@@ -1,7 +1,17 @@
-<ul>
+<ul class='tree-structure simple'>
   {{#this}}
-  <li>
-    <a href="/controls/{{id}}">{{slug}}</a>
+  <li class='control'>
+    <div class='item-main'>
+      <div class='item-title'>
+        <div class='row-fluid'>
+          <div class='span12'>
+            <div class='oneline'>
+              <a href='/controls/{{id}}'>{{slug}}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </li>
   {{/this}}
 </ul>
