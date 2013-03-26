@@ -70,22 +70,31 @@ class SystemsController < BaseObjectsController
   end
 
   def export
+    @is_biz_process = params[:is_biz_process] == '1' ? '1' : nil
+
     respond_to do |format|
       format.html do
         render :layout => 'export_modal'
       end
       format.csv do
         self.response.headers['Content-Type'] = 'text/csv'
-        headers['Content-Disposition'] = "attachment; filename=\"SYSTEMS.csv\""
+        headers['Content-Disposition'] = "attachment; filename=\"#{@is_biz_process ? "PROCESSES" : "SYSTEMS"}.csv\""
         self.response_body = Enumerator.new do |out|
+          row_header_map = Hash[*SYSTEM_MAP.map { |k,v| [k.gsub("System", "Process"), v] }.flatten]
           out << CSV.generate_line(%w(Type))
-          out << CSV.generate_line(%w(Systems))
+          out << CSV.generate_line([@is_biz_process ? "Processes" : "Systems"])
           out << CSV.generate_line([])
           out << CSV.generate_line([])
-          out << CSV.generate_line(SYSTEM_MAP.keys)
-          System.all.each do |s|
-            values = SYSTEM_MAP.keys.map do |key|
-              field = SYSTEM_MAP[key]
+          out << CSV.generate_line(row_header_map.keys)
+          systems = System
+          if @is_biz_process
+            systems = systems.where(:is_biz_process => true)
+          else
+            systems = systems.where(:is_biz_process => false)
+          end
+          systems.all.each do |s|
+            values = row_header_map.keys.map do |key|
+              field = row_header_map[key]
               case field
               when 'owner'
                 object_person = s.object_people.detect {|x| x.role == 'accountable'}
@@ -97,6 +106,7 @@ class SystemsController < BaseObjectsController
               when 'append_notes'
                 ""
               when 'org_groups'
+                # FIXME: Fix for Processes export
                 rels = Relationship.where(:relationship_type_id => :system_is_a_process_for_org_group, :source_id => s, :source_type => System.name)
                 rels.map {|x| x.destination.slug}.join(',')
               when 'references'
@@ -115,6 +125,8 @@ class SystemsController < BaseObjectsController
   end
 
   def import
+    @is_biz_process = params[:is_biz_process] == '1' ? '1' : nil
+
     upload = params["upload"]
     if upload.present?
       begin
@@ -126,7 +138,9 @@ class SystemsController < BaseObjectsController
         @errors = import[:errors]
         @creates = import[:creates]
         @updates = import[:updates]
-        if params[:confirm].present? && !@errors.any? && !@messages.any?
+        if params[:confirm].present? && !@errors.any?
+          flash[:notice] = "Successfully imported #{@creates.size + @updates.size} #{@is_biz_process ? 'processes' : 'systems'}"
+          keep_flash_after_import
           render :json => { :location => programs_dash_path }
         else
           render 'import_result', :layout => false
@@ -152,7 +166,7 @@ class SystemsController < BaseObjectsController
     import[:warnings] = {}
 
     @systems = []
-    import[:systems].each_with_index do |attrs, i|
+    import[@is_biz_process ? :processes : :systems].each_with_index do |attrs, i|
       import[:warnings][i] = HashWithIndifferentAccess.new
 
       attrs.delete(nil)
@@ -165,7 +179,7 @@ class SystemsController < BaseObjectsController
 
       if slug.blank?
         import[:warnings][i][:slug] ||= []
-        import[:warnings][i][:slug] << "missing system slug"
+        import[:warnings][i][:slug] << "missing #{@is_biz_process ? "process" : "system"} slug"
         system = nil
       else
         system = System.find_by_slug(slug)
@@ -195,6 +209,7 @@ class SystemsController < BaseObjectsController
       end
 
       system.assign_attributes(attrs, :without_protection => true)
+      system.is_biz_process = !!@is_biz_process
 
       if system.new_record?
         import[:creates] << slug
@@ -205,6 +220,7 @@ class SystemsController < BaseObjectsController
       import[:errors][i] = system.errors unless system.valid?
       system.infrastructure = false if system.infrastructure.nil?
       system.save unless check_only
+      # FIXME: Fix for Processes import
       handle_import_relationships(system, org_groups, OrgGroup, :system_is_a_process_for_org_group) unless check_only
     end
   end
@@ -220,14 +236,16 @@ class SystemsController < BaseObjectsController
     # Remove "Invalid metadata headings" error
     import[:messages] = []
 
+    row_header_map = Hash[*SYSTEM_MAP.map { |k,v| [k.gsub("System", "Process"), v] }.flatten]
+
     import[:metadata] = Hash[*systems_headers.zip(systems_values).flatten]
 
-    validate_import_type(import[:metadata], "Systems")
+    validate_import_type(import[:metadata], (@is_biz_process ? "Processes" : "Systems"))
 
     rows.shift
     rows.shift
 
-    read_import(import, SYSTEM_MAP, "system", rows)
+    read_import(import, row_header_map, (@is_biz_process ? "process" : "system"), rows)
 
     import
   end

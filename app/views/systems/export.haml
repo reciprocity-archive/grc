@@ -1,5 +1,5 @@
 -content_for :modal_title do
   %h2
-    Export Systems
+    Export #{@is_biz_process ? "Processes" : "Systems"}
 
--content_for :export_url, export_flow_systems_path(:format => :csv)
+-content_for :export_url, export_flow_systems_path(:is_biz_process => @is_biz_process, :format => :csv)

@@ -1,4 +1,4 @@
--@messages = @messages.reject{|m|m.starts_with?("Invalid system heading")}
+-@messages = @messages.reject{|m|m.starts_with?("Invalid #{@is_biz_process ? "process" : "system"} heading")}
 
 .row-fluid
   %hr.hr-widget
@@ -34,14 +34,14 @@
       %col{:style => "width:9%"}
       %thead
         %tr
-          %th System Code
+          %th Code
           %th Title
           %th Description
           %th Infrastructure
           %th Effective Date
           %th Owner
           %th Categories
-          %th Sub Systems
+          %th Sub #{@is_biz_process ? "Processes" : "Systems"}
           %th Org Groups
           %th References
           %th Network Zone
@@ -93,6 +93,6 @@
         =submit_tag "Finish Importing", :class => %w(btn btn-large btn-success pull-right), :name => 'confirm'
   -else
     .span12
-      Import of Systems is done.  Return to the
+      Import of #{@is_biz_process ? "Processes" : "Systems"} is done.  Return to the
       =link_to "Dashboard", programs_dash_path
 

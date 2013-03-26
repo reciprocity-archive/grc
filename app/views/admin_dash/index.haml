@@ -18,9 +18,17 @@
         %i.grcicon-imp-exp
         %span Import Systems
     %li
+      %a{:href => "/systems/import?is_biz_process=1"}
+        %i.grcicon-imp-exp
+        %span Import Processes
+    %li
       %a{"data-toggle" => "modal-ajax", :href => "/systems/export.html"}
         %i.grcicon-export
         %span Export Systems
+    %li
+      %a{"data-toggle" => "modal-ajax", :href => "/systems/export.html?is_biz_process=1"}
+        %i.grcicon-export
+        %span Export Processes
     %li
       %a{:href => "/risks/import"}
         %i.grcicon-imp-exp
