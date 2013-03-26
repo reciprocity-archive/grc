@@ -26,7 +26,11 @@
               {{#if_null population_document.link_url}}
                 <span>{{population_document.title}}</span>
               {{else}}
-                <a href="{{population_document.link_url}}" target="_blank">{{firstnonempty population_document.title population_document.link_url}}</a>
+                <a href="{{population_document.link_url}}" target="_blank">
+                  <span rel="tooltip" title="{{population_document.link_url}}">
+                    {{firstnonempty population_document.title population_document.link_url}}
+                  </span>
+                </a>
               {{/if_null}}
             </p>
           {{/if_null}}
@@ -74,7 +78,11 @@
               {{#if_null sample_worksheet_document.link_url}}
                 <span>{{sample_worksheet_document.title}}</span>
               {{else}}
-                <a href="{{sample_worksheet_document.link_url}}" target="_blank">{{firstnonempty sample_worksheet_document.title sample_worksheet_document.link_url}}</a>
+                <a href="{{sample_worksheet_document.link_url}}" target="_blank">
+                  <span rel="tooltip" title="{{sample_worksheet_document.link_url}}">
+                    {{firstnonempty sample_worksheet_document.title sample_worksheet_document.link_url}}
+                  </span>
+                </a>
               {{/if_null}}
             </p>
           {{/if_null}}
@@ -122,7 +130,11 @@
               {{#if_null sample_evidence_document.link_url}}
                 <span>{{sample_evidence_document.title}}</span>
               {{else}}
-                <a href="{{sample_evidence_document.link_url}}" target="_blank">{{firstnonempty sample_evidence_document.title sample_evidence_document.link_url}}</a>
+                <a href="{{sample_evidence_document.link_url}}" target="_blank">
+                  <span rel="tooltip" title="{{sample_evidence_document.link_url}}">
+                    {{firstnonempty sample_evidence_document.title sample_evidence_document.link_url}}
+                  </span>
+                </a>
               {{/if_null}}
             </p>
           {{/if_null}}
