@@ -74,9 +74,13 @@
                   </h5>
                   <ul class="items pbc-item-list">
                     {{#object_people}}
-                      <li {{data 'model'}} data-model="true" title="{{person.email}}" rel="tooltip" data-placement="left">
+                      <li {{data 'model'}} data-model="true">
                         <div class="span7">
-                          <a class="inner-element" target="_blank" href="mailto:{{firstnonempty person.email}}">{{firstnonempty person.name person.email}}</a>
+                          <a class="inner-element" target="_blank" href="mailto:{{firstnonempty person.email}}">
+                            <span title="{{person.email}}" rel="tooltip">
+                            {{firstnonempty person.name person.email}}
+                            </span>
+                          </a>
                         </div>
                         <div class="span4">
                           <select class="edit-person-role">
