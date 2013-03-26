@@ -28,7 +28,7 @@
 %li{ :class => instance.class.name.downcase, :'data-object-id' => instance.id }
   .item-main
     -if !is_root
-      .openclose{ :class => !expand_this && 'lastchild' }
+      .openclose
     .item-title{ :class => is_root && 'active' }
       .row-fluid
         =render :partial => 'object_leaf', :locals => { :instance => instance, :object_type => 'business', :object_icon => "grcicon-#{instance.class.name.downcase}" }
@@ -47,10 +47,10 @@
         %ul.tree-structure
           -risks_with_risky_attributes.each do |risk, risky_attributes|
             =render :partial => 'risk_tree', :locals => { :risk => risk, :risky_attributes => risky_attributes, :id_prefix => "#{id_prefix}-risk-#{risk.id}" }
-      -#else
+      -else
         .no-data
           No risks are linked to this object
-          
+
       -if has_dependence_relationship && sub_objects.count > 0
         %ul.tree-structure
           -sub_objects.each_with_index do |sub_object, i|
