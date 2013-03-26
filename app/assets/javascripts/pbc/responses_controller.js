@@ -176,6 +176,28 @@ can.Control("CMS.Controllers.Responses", {
           , el);
       });
     }
+    , immediate_reference_link : function(el, ev, data) {
+      var $input = el.find(".input-title");
+      var that = this;
+      setTimeout(function() {
+        $input.prop("disabled", true);
+        that.options.document_model.search({ term : $input.val() }, function(d) {
+          var params = { link_url : $input.val() };
+          if(d.length) {
+            params = d[0];
+          }
+          el.is(".inline-add-document")
+          ? that.proxy(object_event("document"))(el, ev, params)
+          : $input.trigger("documentSelected", params);
+        })
+        .always(function(){
+          $input.prop("disabled", false);
+        })
+      }, 100);
+    }
+    , ".inline-add-document, .inline-edit-population-doc paste" : "immediate_reference_link"
+    , ".inline-add-document, .inline-edit-population-doc drop" : "immediate_reference_link"
+
     , ".inline-edit-population-doc .input-title keydown" : function(el, ev) {
         if(ev.which === $.ui.keyCode.ESCAPE) {
             el.val('').blur();
@@ -260,7 +282,7 @@ can.Control("CMS.Controllers.Responses", {
         });
     }
     , restore_add_link : function(el) {
-        var $li = el.closest(".inline-add-person, .inline-add-document, .inline-edit-population-doc");
+        var $li = el.closest(".inline-add-person, .inline-add-document");
 
         $li.next(".toggle-add-person, .toggle-add-document").removeClass("hide");
         $li.prev(".pbc-item").removeClass("hide");

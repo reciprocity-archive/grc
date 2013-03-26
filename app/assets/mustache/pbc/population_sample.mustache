@@ -12,8 +12,9 @@
         </div>
         <div class="span7 inline-editing custom-edit" data-doc-type="population">
           {{#if_null population_document_id}}
-            <input class="input-block-level input-title span10" name="title" placeholder="Search for Doc Title or URL" type="text" {{ (el) -> el.pbc_autocomplete_documents() }}>
-            <a href="javascript://" class="btn submit-btn btn-mini span2">Go</a>
+          <form>
+            <input class="input-block-level input-title" name="title" placeholder="Search for Doc Title or URL" type="text" {{ (el) -> el.pbc_autocomplete_documents() }}>
+          </form>
           {{else}}
             <a class="btn btn-mini pull-right remove-population-doc" href="javascript://" rel="tooltip" title="Remove population worksheet">
               <i class="grcicon-x-grey"></i>
@@ -59,8 +60,9 @@
         </div>
         <div class="span7 inline-editing custom-edit" data-doc-type="sample_worksheet">
           {{#if_null sample_worksheet_document_id}}
+          <form>
             <input class="input-block-level input-title" name="title" placeholder="Search for Doc Title or URL" type="text" {{ (el) -> el.pbc_autocomplete_documents() }}>
-            <a href="javascript://" class="btn submit-btn btn-mini">Go</a>
+          </form>
           {{else}}
             <a class="btn btn-mini pull-right remove-population-doc" href="javascript://" rel="tooltip" title="Remove sample worksheet">
               <i class="grcicon-x-grey"></i>
@@ -106,8 +108,9 @@
         </div>
         <div class="span7 inline-editing custom-edit" data-doc-type="sample_evidence">
           {{#if_null sample_evidence_document_id}}
-            <input class="input-block-level input-title" name="title" placeholder="Search for Doc Title or URL" type="text" {{ (el) -> el.pbc_autocomplete_documents() }}>
-            <a href="javascript://" class="btn submit-btn btn-mini">Go</a>
+            <form>
+              <input class="input-block-level input-title" name="title" placeholder="Search for Doc Title or URL" type="text" {{ (el) -> el.pbc_autocomplete_documents() }}>
+            </form>
           {{else}}
             <a class="btn btn-mini pull-right remove-population-doc" href="javascript://" rel="tooltip" title="Remove sample evidence">
               <i class="grcicon-x-grey"></i>
