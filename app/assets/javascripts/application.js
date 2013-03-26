@@ -323,14 +323,6 @@ jQuery(document).ready(function($) {
   });
 });
 
-$(document).ajaxComplete(function(event, request){
-  var flash = $.parseJSON(request.getResponseHeader('X-Flash-Messages'));
-  if (!flash) return;
-  $(['notice', 'error', 'warning']).each(function(i, prop) {
-    $('.flash > .' + prop).html(flash[prop] || '');
-  });
-});
-
 $(window).load(function(){
 
   // tree

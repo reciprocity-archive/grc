@@ -178,7 +178,15 @@
     =yield :subheader_plus
 
     %section.content{:'data-spy' => 'affix', :'data-offset-top' => '25'}
-      .flash!=[:error, :warning, :notice].map { |type| content_tag(:div, flash[type], :class => type) if flash[type] }.join
+      .container-fluid
+        .flash
+          -flash.each do |type, value|
+            -value = [value] unless value.is_a?(Array)
+            -value = value.map(&:presence).compact
+            -if value.size > 0
+              %div{ :class => type }
+                -value.each do |message|
+                  %p=message
       =yield
 
     %section.footer

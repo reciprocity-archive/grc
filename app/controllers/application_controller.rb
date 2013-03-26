@@ -11,10 +11,8 @@ class ApplicationController < ActionController::Base
   include FormHelper
 
   before_filter :require_user
-  before_filter :filter_set
   before_filter :set_features
   before_filter  :set_default_cache_control
-  after_filter :flash_to_headers
 
   after_filter  :ajax_flash_to_headers
   after_filter  :ajax_redirect_to_headers
@@ -97,24 +95,6 @@ class ApplicationController < ActionController::Base
     session[:return_to] = nil
   end
 
-  # Set the program to filte rby if the user selected one on previous page.  This is
-  # a before filter that is always on, since the program filter pulldown appears on
-  # many pages.
-  def filter_set
-    if session[:program_id]
-      @program = Program.where(:id => session[:program_id]).first
-    end
-    if session[:company_id]
-      @company = Program.where(:id => session[:company_id]).first
-    end
-    if params[:cycle_id]
-      session[:cycle_id] = params[:cycle_id]
-    end
-    if session[:cycle_id]
-      @cycle = Cycle.where(:id => params[:cycle_id] || session[:cycle_id]).first
-    end
-  end
-
   before_filter :check_ssl
 
   def check_ssl
@@ -130,22 +110,6 @@ class ApplicationController < ActionController::Base
     set_cache_control("private, no-cache, no-store, must-revalidate")
   end
 
-  def need_cycle
-    unless @cycle
-      render 'base/need_cycle'
-      return false
-    end
-    return true
-  end
-
-  def flash_to_headers
-    if request.xhr?
-      flash_json = Hash[flash.map{|k,v| [k,ERB::Util.h(v)] }].to_json
-      response.headers['X-Flash-Messages'] = flash_json
-      flash.discard
-    end
-  end
-
   def ajax_refresh
     render :text => "", :status => 279
 
@@ -157,16 +121,29 @@ class ApplicationController < ActionController::Base
     # Only if AJAX request
     return unless request.xhr?
 
-    # Not if AJAX redirect
-    #return if [302, 278, 279].include?(response.status)
+    # FIXME: Use only one of these -- consolidated is better(?), but separated
+    # is used more.
 
+    # Separated flash messages
     [:error, :alert, :warning, :notice].each do |type|
       if flash[type]
         response.headers["X-Flash-#{type.capitalize}"] = flash[type].to_json
       end
     end
 
-    flash.discard unless [302, 278, 279].include?(response.status)
+    # Consolidated flash messages
+    flash_json = Hash[flash.map{|k,v| [k,ERB::Util.h(v)] }].to_json
+    response.headers['X-Flash-Messages'] = flash_json
+
+    # Don't discard for redirect, ajax-redirect, or ajax-refresh
+    unless @keep_flash_after_import
+      flash.discard unless [302, 278, 279].include?(response.status)
+    end
+  end
+
+  def keep_flash_after_import
+    # This is only used to not discard flash messages after imports
+    @keep_flash_after_import = true
   end
 
   # Change redirect status code for AJAX redirects
