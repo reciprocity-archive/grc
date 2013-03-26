@@ -88,7 +88,9 @@ class RisksController < BaseObjectsController
         @errors = import[:errors]
         @creates = import[:creates]
         @updates = import[:updates]
-        if params[:confirm].present? && !@errors.any? && !@messages.any?
+        if params[:confirm].present? && !@errors.any?
+          flash[:notice] = "Successfully imported #{@creates.size + @updates.size} risks"
+          keep_flash_after_import
           render :json => { :location => programs_dash_path }
         else
           render 'import_result', :layout => false

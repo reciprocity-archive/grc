@@ -63,7 +63,9 @@ class PbcListsController < BaseObjectsController
         do_import_requests(import, params[:confirm].blank?)
         @warnings = import[:warnings]
         @errors = import[:errors]
-        if params[:confirm].present? && !@errors.any? && !@messages.any?
+        if params[:confirm].present? && !@errors.any?
+          flash[:notice] = "Successfully imported requests"
+          keep_flash_after_import
           render :json => { :location => flow_pbc_list_path(@pbc_list) }
         else
           render 'import_result', :layout => false
