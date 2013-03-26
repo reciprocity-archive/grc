@@ -45,6 +45,16 @@ ul.single-row-tabs {
 }
 ul.tree-structure {
   @include reset-list();
+  .no-data {
+    border:1px solid $lightGray;
+    @include border-radius();
+    margin-left:26px;
+    color:$gray;
+    text-align:center;
+    color:$disabled;
+    font-size:$f-small;
+    margin-bottom:6px;
+  }
   &.single-row-tabs {
     margin-right: 7px;
   }

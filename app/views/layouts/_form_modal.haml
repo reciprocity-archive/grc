@@ -24,7 +24,7 @@
         -if !delete_path.blank?
           %a.btn{:href => delete_path, :'data-toggle' => 'modal-ajax-deleteform'} Delete
     .span6
-      %nbsp;
+      &nbsp;
     .span3
       .confirm-buttons
         -save_button = yield_content!(:modal_save_button)

@@ -47,8 +47,12 @@
         %ul.tree-structure
           -risks_with_risky_attributes.each do |risk, risky_attributes|
             =render :partial => 'risk_tree', :locals => { :risk => risk, :risky_attributes => risky_attributes, :id_prefix => "#{id_prefix}-risk-#{risk.id}" }
-
+      -#else
+        .no-data
+          No risks are linked to this object
+          
       -if has_dependence_relationship && sub_objects.count > 0
         %ul.tree-structure
           -sub_objects.each_with_index do |sub_object, i|
             =render :partial => 'risk_object_tree', :locals => { :instance => sub_object, :id_prefix => "#{id_prefix}-sub-object-#{sub_object.id}", :seen_ids => seen_ids + [instance.id] }
+
