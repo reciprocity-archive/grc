@@ -97,6 +97,9 @@ class DirectivesController < BaseObjectsController
   end
 
   def export_controls
+    directive_meta_kind = @directive.meta_kind
+    metadata_headers_map = Hash[*DIRECTIVE_MAP.map { |k,v| [k.sub("Directive", directive_meta_kind.to_s.titleize),v] }.flatten]
+
     respond_to do |format|
       format.html do
         render :layout => 'export_modal', :locals => { :directive => @directive }
@@ -105,8 +108,9 @@ class DirectivesController < BaseObjectsController
         self.response.headers['Content-Type'] = 'text/csv'
         headers['Content-Disposition'] = "attachment; filename=\"#{@directive.slug}-controls.csv\""
         self.response_body = Enumerator.new do |out|
-          out << CSV.generate_line(%w(Type Directive\ Code))
-          values = %w(Directive\ Code).map { |key| @directive.send(DIRECTIVE_MAP[key]) }
+          code_header = "#{directive_meta_kind.to_s.titleize} Code"
+          out << CSV.generate_line(["Type", code_header])
+          values = [code_header].map { |key| @directive.send(metadata_headers_map[key]) }
           values.unshift("Controls")
           out << CSV.generate_line(values)
           out << CSV.generate_line([])
@@ -141,6 +145,12 @@ class DirectivesController < BaseObjectsController
   end
 
   def export
+    directive_meta_kind = @directive.meta_kind
+    metadata_headers_map = Hash[*DIRECTIVE_MAP.map { |k,v| [k.sub("Directive", directive_meta_kind.to_s.titleize),v] }.flatten]
+
+    section_meta_kind = @directive.section_meta_kind
+    section_headers_map = Hash[*SECTION_MAP.map { |k,v| [k.sub("Section", section_meta_kind.to_s.titleize),v] }.flatten]
+
     respond_to do |format|
       format.html do
         render :layout => 'export_modal', :locals => { :directive => @directive }
@@ -149,17 +159,17 @@ class DirectivesController < BaseObjectsController
         self.response.headers['Content-Type'] = 'text/csv'
         headers['Content-Disposition'] = "attachment; filename=\"#{@directive.slug}.csv\""
         self.response_body = Enumerator.new do |out|
-          out << CSV.generate_line(DIRECTIVE_MAP.keys)
-          keys = DIRECTIVE_MAP.keys
+          out << CSV.generate_line(metadata_headers_map.keys)
+          keys = metadata_headers_map.keys
           keys.shift
-          values = keys.map { |key| @directive.send(DIRECTIVE_MAP[key]) }
-          values.unshift("Directive")
+          values = keys.map { |key| @directive.send(metadata_headers_map[key]) }
+          values.unshift(directive_meta_kind.to_s.titleize)
           out << CSV.generate_line(values)
           out << CSV.generate_line([])
           out << CSV.generate_line([])
-          out << CSV.generate_line(SECTION_MAP.keys)
+          out << CSV.generate_line(section_headers_map.keys)
           @directive.sections.each do |s|
-            values = SECTION_MAP.keys.map { |key| s.send(SECTION_MAP[key]) }
+            values = section_headers_map.keys.map { |key| s.send(section_headers_map[key]) }
             out << CSV.generate_line(values)
           end
         end
@@ -179,7 +189,9 @@ class DirectivesController < BaseObjectsController
         @errors = import[:errors]
         @creates = import[:creates]
         @updates = import[:updates]
-        if params[:confirm].present? && !@errors.any? && !@messages.any?
+        if params[:confirm].present? && !@errors.any?
+          flash[:notice] = "Successfully imported #{@creates.size + @updates.size} controls"
+          keep_flash_after_import
           render :json => { :location => flow_directive_path(@directive) }
         else
           render 'import_controls_result', :layout => false
@@ -210,7 +222,9 @@ class DirectivesController < BaseObjectsController
         @errors = import[:errors]
         @creates = import[:creates]
         @updates = import[:updates]
-        if params[:confirm].present? && !@errors.any? && !@messages.any?
+        if params[:confirm].present? && !@errors.any?
+          flash[:notice] = "Successfully imported #{@creates.size + @updates.size} #{@directive.section_meta_kind.to_s.pluralize}"
+          keep_flash_after_import
           render :json => { :location => flow_directive_path(@directive) }
         else
           render 'import_result', :layout => false
@@ -359,19 +373,25 @@ class DirectivesController < BaseObjectsController
 
     raise ImportException.new("There must be at least 5 input lines") unless rows.size >= 5
 
-    directive_headers = read_import_headers(import, DIRECTIVE_MAP, "directive", rows)
+    directive_meta_kind = @directive.meta_kind
+    metadata_headers_map = Hash[*DIRECTIVE_MAP.map { |k,v| [k.sub("Directive", directive_meta_kind.to_s.titleize),v] }.flatten]
+
+    directive_headers = read_import_headers(import, metadata_headers_map, "directive", rows)
 
     directive_values = rows.shift
 
     import[:directive] = Hash[*directive_headers.zip(directive_values).flatten]
 
-    validate_import_type(import[:directive], "Directive")
-    validate_import_slug(import[:directive], "Directive", @directive.slug)
+    section_meta_kind = @directive.section_meta_kind
+    section_headers_map = Hash[*SECTION_MAP.map { |k,v| [k.sub("Section", section_meta_kind.to_s.titleize),v] }.flatten]
+
+    validate_import_type(import[:directive], directive_meta_kind.to_s.titleize)
+    validate_import_slug(import[:directive], directive_meta_kind.to_s.titleize, @directive.slug)
 
     rows.shift
     rows.shift
 
-    read_import(import, SECTION_MAP, "section", rows)
+    read_import(import, section_headers_map, "section", rows)
 
     import
   end
