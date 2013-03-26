@@ -80,7 +80,7 @@ class SystemsController < BaseObjectsController
         self.response.headers['Content-Type'] = 'text/csv'
         headers['Content-Disposition'] = "attachment; filename=\"#{@is_biz_process ? "PROCESSES" : "SYSTEMS"}.csv\""
         self.response_body = Enumerator.new do |out|
-          row_header_map = Hash[*SYSTEM_MAP.map { |k,v| [k.gsub("System", "Process"), v] }.flatten]
+          row_header_map = Hash[*SYSTEM_MAP.map { |k,v| [k.gsub("System", @is_biz_process ? "Process" : "System"), v] }.flatten]
           out << CSV.generate_line(%w(Type))
           out << CSV.generate_line([@is_biz_process ? "Processes" : "Systems"])
           out << CSV.generate_line([])
@@ -236,7 +236,7 @@ class SystemsController < BaseObjectsController
     # Remove "Invalid metadata headings" error
     import[:messages] = []
 
-    row_header_map = Hash[*SYSTEM_MAP.map { |k,v| [k.gsub("System", "Process"), v] }.flatten]
+    row_header_map = Hash[*SYSTEM_MAP.map { |k,v| [k.gsub("System", @is_biz_process ? "Process" : "System"), v] }.flatten]
 
     import[:metadata] = Hash[*systems_headers.zip(systems_values).flatten]
 
