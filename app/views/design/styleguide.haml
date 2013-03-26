@@ -67,6 +67,11 @@
             %i.icon-chevron-right
             Widgets
         %li
+          %a{:href => "#flash-notice"}
+            %i.icon-chevron-right
+            Flash Notices
+
+        %li
           %a{:href => "#helper"}
             %i.icon-chevron-right
             Helper classes
@@ -1624,6 +1629,17 @@
                 
                 
                 =yield_content!(:widget_footer)
+
+      %section#flash-notice.widget
+        %section.header
+          %h2
+            Flash notice
+        %section.content
+          .flash
+            .notice
+              %p 
+                %i.grcicon-ok
+                Requests are imported successfully!
             
       %section#helper.widget
         %section.header

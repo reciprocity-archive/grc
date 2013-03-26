@@ -190,7 +190,7 @@ class DirectivesController < BaseObjectsController
         @creates = import[:creates]
         @updates = import[:updates]
         if params[:confirm].present? && !@errors.any?
-          flash[:notice] = "Successfully imported #{@creates.size + @updates.size} controls"
+          flash[:notice] = "<i class='grcicon-ok'></i> #{@creates.size + @updates.size} Controls are Imported Successfully!".html_safe
           keep_flash_after_import
           render :json => { :location => flow_directive_path(@directive) }
         else

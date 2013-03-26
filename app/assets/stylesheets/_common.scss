@@ -465,3 +465,21 @@ strong {
 .key-p {
   margin-right:40px;
 }
+
+.flash {
+  margin-bottom:10px;
+  .notice {
+    @include border-radius();
+    p {
+      color:$green;
+      font-weight:bold;
+      text-align:center;
+      margin:0;
+      padding:0;
+      line-height:40px;
+      i {
+        margin-top:12px;
+      }
+    }
+  }
+}

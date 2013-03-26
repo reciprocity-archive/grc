@@ -89,7 +89,7 @@ class RisksController < BaseObjectsController
         @creates = import[:creates]
         @updates = import[:updates]
         if params[:confirm].present? && !@errors.any?
-          flash[:notice] = "Successfully imported #{@creates.size + @updates.size} risks"
+          flash[:notice] = "<i class='grcicon-ok'></i> #{@creates.size + @updates.size} Risks are Imported Successfully!".html_safe
           keep_flash_after_import
           render :json => { :location => programs_dash_path }
         else

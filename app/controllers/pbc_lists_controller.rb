@@ -64,7 +64,7 @@ class PbcListsController < BaseObjectsController
         @warnings = import[:warnings]
         @errors = import[:errors]
         if params[:confirm].present? && !@errors.any?
-          flash[:notice] = "Successfully imported requests"
+          flash[:notice] = "<i class='grcicon-ok'></i> Requests are imported successfully!".html_safe
           keep_flash_after_import
           render :json => { :location => flow_pbc_list_path(@pbc_list) }
         else
