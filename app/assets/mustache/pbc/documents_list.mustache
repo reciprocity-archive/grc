@@ -1,11 +1,15 @@
   {{#object_documents}}
-  <li {{data 'model'}} data-model="true" rel="tooltip" data-placement="left" title="{{firstnonempty document.link_url 'No link'}}">
+  <li {{data 'model'}} data-model="true">
     <div class="row-fluid">
       <div class="span6">
         {{#if document.link_url}}
-        <span>
-          <a class="inner-element" href="{{document.link_url}}" target="_blank">{{firstnonempty document.title document.link_url}}</a>
-        </span>
+
+          <a class="inner-element" href="{{document.link_url}}" target="_blank">
+            <span rel="tooltip" title="{{document.link_url}}" >
+              {{firstnonempty document.title document.link_url}}
+            </span>
+          </a>
+
         {{else}}
           <span class="inner-element">{{document.title}}</span>
         {{/if}}
