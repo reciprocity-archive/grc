@@ -13,18 +13,20 @@
       <div class="span3">
         &nbsp;
       </div>
-      <div class="span4">
-        <div class="modal-search">
-          <a class="btn btn-mini search-reset" href="javascript://">
-            <i class="grcicon-x-grey"></i>
-          </a>
-          <input class="input-block-level widgetsearch-tocontent clear-value" placeholder="Search controls" type="text" />
+      <div class="span6">
+        <div class="span7">
+          <div class="modal-search">
+            <a class="btn btn-mini search-reset" href="javascript://">
+              <i class="grcicon-x-grey"></i>
+            </a>
+            <input class="input-block-level widgetsearch-tocontent clear-value" placeholder="Search controls" type="text" />
+          </div>
+        </div>
+        <div class="span5" style="padding-right:5px;">
+          <input type="checkbox" id="control-type-filter" style="margin-top:18px" class="control-type-filter inline pull-right" checked="checked"/>
+          <label class="inline pull-right" style="margin-right:5px; margin-top:15px" for="control-type-filter">Controls for this {{parent_type}} only:</label>
         </div>
       </div>
-        <div class="span2">
-          <label class="inline" style="margin-left:-20px; line-height:42px" for="control-type-filter">Controls for this {{parent_type}} only:</label>
-          <input type="checkbox" id="control-type-filter" class="control-type-filter inline" checked="checked"/>
-        </div>
       <div class="span3">
         <div class="pull-right">
           <a class="btn btn-add" data-dirty="#controls, #combo" href="/controls/new?{{parent_type}}_id={{parent_id}}" data-modal-class="modal-wide" data-toggle="modal-ajax-form" rel="tooltip" data-original-title="Create New Control">
