@@ -175,4 +175,18 @@ class System < ActiveRecord::Base
     p = object_people.detect {|x| x.role == 'accountable'}
     p ? p.person.email : ''
   end
+
+  def absolute_url(valid_schemes=%w(http https file), default_scheme='http')
+    if url.present? && valid_schemes.include?(url.split(':')[0])
+      url
+    elsif url.present?
+      "#{default_scheme}://#{url}"
+    else
+      ""
+    end
+  end
+
+  def as_json(options={})
+    super(options.merge :methods => :absolute_url)
+  end
 end

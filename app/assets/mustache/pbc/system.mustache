@@ -5,8 +5,8 @@
         <div class="span6">
           <h4>
             <i class="grcicon-{{system_or_process}}-color" rel="tooltip" data-placement="top" title="{{system_or_process_capitalized}}"></i>
-            {{#if url}}
-              <strong class="text-compliance"><a href="{{url}}" target="_blank">{{title}}</a></strong>
+            {{#if absolute_url}}
+              <strong class="text-compliance"><a href="{{absolute_url}}" target="_blank">{{title}}</a></strong>
             {{else}}
               <strong class="text-compliance">{{title}}</strong>
             {{/if}}

@@ -77,7 +77,8 @@ class Response < ActiveRecord::Base
             }, 
             :object_people, 
             :object_documents
-          ] 
+          ], 
+          :methods => :absolute_url
         }
       })
     end
