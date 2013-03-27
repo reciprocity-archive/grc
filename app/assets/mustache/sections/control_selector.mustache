@@ -22,9 +22,9 @@
             <input class="input-block-level widgetsearch-tocontent clear-value" placeholder="Search controls" type="text" />
           </div>
         </div>
-        <div class="span5" style="padding-right:5px;">
-          <input type="checkbox" id="control-type-filter" style="margin-top:18px" class="control-type-filter inline pull-right" checked="checked"/>
-          <label class="inline pull-right" style="margin-right:5px; margin-top:15px" for="control-type-filter">Controls for this {{parent_type}} only:</label>
+        <div class="span5 checkbox-filter">
+          <input type="checkbox" id="control-type-filter" class="control-type-filter inline pull-right" checked="checked"/>
+          <label class="inline pull-right" for="control-type-filter">Controls for this {{parent_type}} only:</label>
         </div>
       </div>
       <div class="span3">
@@ -42,7 +42,7 @@
     <div class="row-fluid">
       {{#section}}
       <div class="span3">
-        <div class="selector-info" style="margin-right:-10%;">
+        <div class="selector-info selector-info-left">
           <h4>
             <i class="grcicon-section-color"></i>
             {{title}}
@@ -82,25 +82,20 @@
           <div class="row-fluid">
             <div class="span6">
               <h4>
-                Search Results (<span class="search-results-count">0</span>)
+                Search Results <span class="search-results-count">0</span>
               </h4>
             </div>
             <div class="span6">
-              &nbsp;
+              <div class="guide">map/unmap</div>
             </div>
-            <!--
-            <div class="span1">
-              <input class="map-all" rel="tooltip" title="map" type="checkbox">
-            </div>
-          -->
           </div>
         </div>
         {{! this is filled in with the controls controller}}
-        <div class="content controls-list selector-list source" style="overflow-y: auto" data-list-data-href="/controls.json"/>
+        <div class="content controls-list selector-list source" data-list-data-href="/controls.json"/>
         
       </div>
       <div class="span3">
-        <div class="selector-info control" style="margin-left:-10%">
+        <div class="selector-info selector-info-right control">
           {{!this is filled in with the selected control controller}}
         </div>
       </div>

@@ -34,7 +34,6 @@
           text-align:right;
           padding-top:1px;
           font-size:$f-small;
-          font-weight:bold;
         }
         background:#f3f3f3;
         padding:6px 6px 0 10px;
@@ -75,7 +74,7 @@
       }
       .selector-list {
         height:400px;
-        overflow:auto;
+        overflow-y:auto;
         background:$white;
         border-left:1px solid lighten($gray,20%);
         border-right:1px solid lighten($gray,20%);
@@ -93,6 +92,12 @@
         }
       }
       .selector-info {
+        &.selector-info-left {
+          margin-right:-10%;
+        }
+        &.selector-info-right {
+          margin-left:-10%;
+        }
         height:420px;
         overflow:hidden;
         padding:10px;
@@ -146,6 +151,15 @@
       background-position:-259px -195px;
       padding-left: 40px;
       margin-top:8px;
+    }
+    .checkbox-filter {
+      label {
+        margin-right:5px;
+        margin-top:15px;
+      }
+      input {
+        margin-top:18px;
+      }
     }
     select {
       margin-top:8px;
