@@ -292,7 +292,7 @@ CMS.Controllers.Mapping("CMS.Controllers.ControlMappingPopup", {
     this.element.append($(new Spinner().spin().el).css({"position" : "relative", "left" : 50, "top" : 50, "height": 150, "width": 150}));
     this.options.observer = new can.Observe({
       section : this.options.section
-      , parent_type : this.options.parent_model.root_object
+      , parent_type : can.underscore(this.options.parent_model.shortName).replace("_", " ")
       , parent_id : this.options.parent_id
     });
 
