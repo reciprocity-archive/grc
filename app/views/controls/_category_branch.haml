@@ -19,7 +19,10 @@
               .openclose{ :class => 'lastchild' }
               .item-title
                 .row-fluid
-                  =render :partial => 'object_leaf', :locals => { :instance => control, :object_icon => (sections.size > 0 ? 'grcicon-control-color' : 'grcicon-control-danger') }
+                  -if sections.size > 0
+                    =render :partial => 'object_leaf', :locals => { :instance => control, :object_icon => (sections.size > 0 ? 'grcicon-control-color' : 'grcicon-control-danger') }
+                  -else
+                    =render :partial => 'object_leaf', :locals => { :instance => control, :object_icon => (sections.size > 0 ? 'grcicon-control-color' : 'grcicon-control-danger'), :title => "<span class='not-mapped'>NOT MAPPED</span> #{h control.title}".html_safe }
                   .span2
                     .objects-count
                       -popover_content = capture_haml do
