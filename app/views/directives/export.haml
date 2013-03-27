@@ -1,5 +1,5 @@
 -content_for :modal_title do
   %h2
-    Export #{directive.meta_kind.titleize}
+    Export #{directive.meta_kind.to_s.titleize}
 
 -content_for :export_url, export_flow_directive_path(directive, :format => :csv)

@@ -238,6 +238,12 @@ ul.tree-structure {
     position: relative;
     top: -2px;
   }
+  .not-mapped {
+    color: $warning;
+    font-size: $f-small;
+    font-weight: bold;
+    display: inline-block;
+  }
   i.description-inline {
     color:$text;
     font-weight:normal;

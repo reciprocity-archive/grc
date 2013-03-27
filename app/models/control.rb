@@ -212,7 +212,7 @@ class Control < ActiveRecord::Base
       Category.ctype(Control::CATEGORY_TYPE_ID).roots.all,
       category_hash)
 
-    if category_hash[nil].size > 0
+    if category_hash[nil] && category_hash[nil].size > 0
       category_controls_tree.push([nil, nil, category_hash[nil]])
     end
 
