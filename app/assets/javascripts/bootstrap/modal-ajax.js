@@ -258,6 +258,26 @@
           });
     }
 
+    if($el.is("body > * *")) {
+      this.$cloneEl = $("<div>").appendTo($el.parent());
+      can.each($el[0].attributes, function(attr) {
+        that.$cloneEl.attr(attr.name, attr.value);
+      });
+      $el.find("*").uniqueId();
+      this.$cloneEl.html($el.html());
+      $el.detach().appendTo(document.body);
+      this.$cloneEl.removeAttr("id").find("*").attr("data-original-id", function() {
+        return this.id;
+      }).removeAttr("id");
+
+      $el.on(["click", "mouseup", "keypress", "keydown", "keyup", "show", "shown", "hide", "hidden"].join(".clone ") + ".clone", function(e) {
+        that.$cloneEl 
+        ? that.$cloneEl.find("[data-original-id=" + e.target.id + "]").trigger(new $.Event(e))
+        : $el.off(".clone");
+      }); 
+    }
+
+
     // prevent form submissions when descendant elements are also modals.
     if(!(keyevents = $el.data("events").keypress)
         || $(keyevents).filter(function() { 
@@ -323,6 +343,13 @@
   $.fn.modal.Constructor.prototype.hide = function(ev) {
     if(ev && (ev.modalHidden))
         return;  //We already hid one
+
+    if(this.$cloneEl) {
+      this.$element.detach().appendTo(this.$cloneEl.parent());
+      this.$cloneEl.remove();
+      this.$cloneEl = null;
+      this.$element.off(".clone")
+    }
 
     _modal_hide.apply(this, arguments);
 
