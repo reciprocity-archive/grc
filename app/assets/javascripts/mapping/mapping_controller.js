@@ -280,13 +280,21 @@ can.Control("CMS.Controllers.MappingWidgets", {}, {
 CMS.Controllers.Mapping("CMS.Controllers.ControlMappingPopup", {
   defaults : {
     section_model : namespace.CMS.Models.Section
+    , parent_model : namespace.CMS.Models.Program
+    , parent_id : null
+    , observer : undefined
+    , section : null
   }
   //static
 }, {
   init : function() {
     var that = this;
     this.element.append($(new Spinner().spin().el).css({"position" : "relative", "left" : 50, "top" : 50, "height": 150, "width": 150}));
-    this.options.observer = new can.Observe({section : this.options.section});
+    this.options.observer = new can.Observe({
+      section : this.options.section
+      , parent_type : this.options.parent_model.root_object
+      , parent_id : this.options.parent_id
+    });
 
     can.view("/assets/sections/control_selector.mustache", that.options.observer, function(frag) {
       that.options.company_list_controller = that.element
@@ -307,10 +315,10 @@ CMS.Controllers.Mapping("CMS.Controllers.ControlMappingPopup", {
 
       that.options.company_list_controller.find_all_deferred.done(function(d) {
         that.list = d;
-        that.element.find(".search-results-count").html(d.length);
         that.options.section.update_linked_controls_ccontrol_only();
         //that.options.observer.attr("controls", d);
         that.update();
+        that.search_filter();
         that.element.trigger("shown").trigger("kill-all-popoevers");
       });
     });
@@ -365,22 +373,42 @@ CMS.Controllers.Mapping("CMS.Controllers.ControlMappingPopup", {
   }
 
   , ".widgetsearch-tocontent keydown" : function(el, ev) {
-    var that = this;
     if(ev.which === 13) {
-      this.options.company_list_controller.filter(el.val()).done(function(d) {
-        that.element.find(".search-results-count").html(d.length);
-        that.update_map_all();
-      });
+      this.search_filter();
     }
   }
 
-  , ".search-reset click" : function(el, ev) {
+  , ".control-type-filter change" : "search_filter"
+
+  , search_filter : function() {
     var that = this;
-    this.element.find(".widgetsearch-tocontent").val("");
-    this.options.company_list_controller.filter("").done(function() {
-      that.element.find(".search-results-count").html(that.element.find(".controls-list .item-main").length);
+    var check = {};
+    if(this.element.find(".control-type-filter").prop("checked")) {
+      check[this.options.parent_model.root_object + "_id"] = this.options.parent_id;
+    }
+    var search = this.element.find(".widgetsearch-tocontent").val();
+    this.options.company_list_controller.filter(search, check).done(function(d) {
+      that.element.find(".search-results-count").html(d.length);
       that.update_map_all();
-    })
+    });
+  }
+
+  , redo_last_search : function(id_to_add) {
+    var that = this;
+    this.options.company_list_controller.redo_last_filter(id_to_add).done(function(d){
+      that.element.find(".search-results-count").html(d.length);
+      that.update_map_all();
+    });
+  }
+
+  , "a[href^='/controls/new'] modal:success" : function(el, ev, data) {
+    this._super(el, ev, data);
+    this.redo_last_search(data.id);
+  }
+
+  , ".search-reset click" : function(el, ev) {
+    this.element.find(".widgetsearch-tocontent").val("");
+    this.search_filter();
   }
 
   , ".item-main click" : function(el, ev) {

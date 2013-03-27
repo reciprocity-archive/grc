@@ -15,6 +15,8 @@
 
 .row-fluid
   =wrapped_text_field f, :span4, :title, :placeholder => 'Enter title', :label_name => 'Title <span class="required">*</span>'.html_safe
+  -if f.object.new_record? && params[:directive_id].present?
+    -f.object.directive_id = params[:directive_id]
   -if f.object.new_record? && f.object.directive_id.present?
     .span2
       =f.label 'Directive'

@@ -84,21 +84,29 @@
       this.setSelected(el.closest("[data-model]").data("model"));
     }
 
-    , filter : function(str) {
+    , filter : function(str, extra_params) {
       var that = this;
       var dfd = new $.Deferred();
-      this.options.model.findAll({ id : this.options.id, s : str}).then(function(data) {
+      this.options.model.findAll($.extend({ id : this.options.id, s : str}, extra_params)).then(function(data) {
         var ids = can.map(data, function(v) { return v.id });
-        that.element.find("[data-model]").each(function() {
-          var $this = $(this);
-          if(can.inArray($this.data("model").id, ids) > - 1)
-            $this.show();
-          else
-            $this.hide();
-        });
+        that.last_filter_ids = ids;
+        that.redo_last_filter();
         dfd.resolve(ids);
       });
       return dfd;
+    }
+
+    , redo_last_filter : function(id_to_add) {
+      id_to_add && this.last_filter_ids.push(id_to_add);
+      var that = this;
+      that.element.find("[data-model]").each(function() {
+        var $this = $(this);
+        if(can.inArray($this.data("model").id, that.last_filter_ids) > - 1)
+          $this.show();
+        else
+          $this.hide();
+      });
+      return $.when(this.last_filter_ids);
     }
 
     //  Careful you don't try to hook up attribute events to can.Observes until
