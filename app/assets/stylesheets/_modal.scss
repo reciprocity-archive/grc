@@ -25,6 +25,9 @@
     margin-left:-480px;
   }
   &.modal-selector {
+    .content {
+      padding-top:0;
+    }
     width:1200px;
     margin-left:-600px;
     .modal-content {
