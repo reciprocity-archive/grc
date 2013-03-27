@@ -93,6 +93,10 @@ class Control < ActiveRecord::Base
       where(:program_directives => { :directive_id => directive_ids })
   end
 
+  def linked_sections
+    sections + implemented_controls.map(&:sections).flatten
+  end
+
   def custom_edges
     # Returns a list of additional edges that aren't returned by the default method.
 
@@ -182,5 +186,48 @@ class Control < ActiveRecord::Base
   # alias used in import
   def operator
     operator_display
+  end
+
+  # Construct the category controls tree
+  #   - if neither the current category nor descendants contains controls
+  #     then return nil
+  #   - else return [category, category_controls_tree(category), controls]
+  def self.category_controls_tree(controls)
+    # First, group controls by category
+    category_hash = {}
+    controls.each do |control|
+      categories = control.categories.all
+      if categories.size == 0
+        category_hash[nil] ||= []
+        category_hash[nil] << control
+      else
+        categories.each do |category|
+          category_hash[category] ||= []
+          category_hash[category] << control
+        end
+      end
+    end
+
+    category_controls_tree = self.category_controls_branch(
+      Category.ctype(Control::CATEGORY_TYPE_ID).roots.all,
+      category_hash)
+
+    if category_hash[nil].size > 0
+      category_controls_tree.push([nil, nil, category_hash[nil]])
+    end
+
+    category_controls_tree
+  end
+
+  def self.category_controls_branch(categories, category_hash)
+    categories.map do |category|
+      controls = category_hash[category] || []
+      children = self.category_controls_branch(category.children.all, category_hash)
+      if children.size > 0 || controls.size > 0
+        [category, children, controls]
+      else
+        nil
+      end
+    end.compact
   end
 end

@@ -1,0 +1,58 @@
+-# Requires category, children, controls
+
+-subcategory_content_id = "content_#{rand(36**8).to_s(36)}"
+
+%li{ :class => 'category', :'data-object-id' => category ? category.id : nil, :'data-object-type' => 'category' }
+  -#%h3=category ? category.name : 'Uncategorized Controls'
+  .item-main
+    .openclose.active
+    .item-title
+      .row-fluid
+        =category ? category.name : 'Uncategorized Controls'
+  .item-content.in
+    -if controls && controls.size > 0
+      %ul.tree-structure
+        -controls.each do |control|
+          -sections = control.linked_sections
+          %li
+            .item-main
+              .openclose{ :class => 'lastchild' }
+              .item-title
+                .row-fluid
+                  =render :partial => 'object_leaf', :locals => { :instance => control, :object_icon => (sections.size > 0 ? 'grcicon-control-color' : 'grcicon-control-danger') }
+                  .span2
+                    .objects-count
+                      -popover_content = capture_haml do
+                        -if !sections.empty?
+                          %ul.tree-structure.simple
+                            -sections.each do |section|
+                              %li.control
+                                .item-main
+                                  .item-title
+                                    .row-fluid
+                                      .span12
+                                        .oneline
+                                          =section.slug
+                                          &mdash;
+                                          =section.title
+                        -else
+                          .rtf
+                            %p.no-data
+                              No sections are linked to this control
+
+                      -data_popover_trigger = { :placement => "right",
+                                           :'popover-trigger' =>  "sticky-hover",
+                                           :'original-title' => "<div class='row-fluid'><div class='span12'><h3><i class='#{sections.size > 0 ? 'grcicon-section-color' : 'grcicon-section-danger'}'></i>Linked Sections</h3></div></div>".html_safe,
+                                           :content => popover_content }
+                      %a.controls-count{ :href => "javascript://", :data => data_popover_trigger }
+                        %i{ :class => (sections.size > 0 ? 'grcicon-section-color' : 'grcicon-section-danger') }
+                        =sections.size
+                .item-actions
+                  %a.btn.btn-mini.pull-right{ :href => flow_control_path(control), :title => 'View Control' }
+                    %i.grcicon-goto
+    -if children && children.size > 0
+      %ul.tree-structure
+        -children.each do |subcategory, subchildren, subcontrols|
+          =render :partial => 'category_branch',
+                  :locals => { :category => subcategory, :children => subchildren, :controls => subcontrols }
+

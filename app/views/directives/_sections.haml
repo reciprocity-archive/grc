@@ -7,10 +7,11 @@
   -has_children = children.size > 0
 
   .item-main{ :'data-object-id' => item.id, :'data-object-type' => item.class.name.underscore }
-    .openclose{ :class => [!has_children && 'lastchild', expanded && 'active'] }
+    .openclose
+    /{ :class => [!has_children && 'lastchild', expanded && 'active'] }
     .item-title
       .row-fluid
-        =render :partial => 'object_leaf', :locals => { :instance => item, :include_notes => true, :editable_notes => editable_notes }
+        =render :partial => 'object_leaf', :locals => { :instance => item, :include_notes => true, :editable_notes => editable_notes, :object_type => 'compliance', :object_icon => 'grcicon-section' }
         .span2
           .objects-count
             -controls = item.linked_controls
@@ -28,7 +29,7 @@
               -else
                 .rtf
                   %p.no-data
-                    No controls are linked to this directive
+                    No controls are linked to this section
 
             -data_popover_trigger = { :placement => "right",
                                  :'popover-trigger' =>  "sticky-hover",
@@ -45,21 +46,17 @@
               -else
                 %strong.error 0
 
-            -#status_class = (controls.empty? && !item.na?) ? 'badge-important' : 'badge-warning'
-            -#%a.controllist.attached.badge{:href => mapping_section_dialog_path(item),
-                                          :class => status_class,
-                                          :'data' => controls.empty? || { :placement => "right",
-                                              :'popover-trigger' =>  "sticky-hover",
-                                              :'original-title' => "Linked Controls",
-                                              :content => popover_content } }
-              -controls = item.linked_controls
-              -if !controls.empty?
-                =controls.size
-              -elsif item.na?
-                %span.normal-font N/A
-              -else
-                %strong 0
       .item-actions
         -if show_edit
           %a.btn.btn-mini.pull-right{ :href => edit_flow_section_path(item), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-dirty' => "#regulations, #combo", :rel => 'tooltip', :title => "Edit #{item.directive.section_meta_kind.to_s.titleize}" }
             %i.grcicon-edit
+
+  .item-content
+    -if with_controls
+      -controls = item.linked_controls
+      -if controls.size > 0
+        %ul.tree-structure
+          =render :partial => 'directives/controls', :locals => { :controls => controls, :show_edit => false }
+      -else
+        .no-data
+          No controls are linked to this section

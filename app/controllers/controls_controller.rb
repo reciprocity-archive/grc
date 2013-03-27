@@ -72,6 +72,9 @@ class ControlsController < BaseObjectsController
       else
         render :partial => 'list', :locals => { :controls => @controls }
       end
+    elsif params[:category_tree].present?
+      category_tree = Control.category_controls_tree(@controls)
+      render :partial => 'category_tree', :locals => { :category_tree => category_tree }
     else
       render :json => @controls, :methods => [:description_inline]
     end

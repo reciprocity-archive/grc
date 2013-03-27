@@ -26,4 +26,4 @@
       .item-content{ :class => expand_this && 'in' }
         -if has_children
           %ul.tree-structure
-            =render :partial => 'directives/sections', :locals => { :sections => sections, :show_edit => false }
+            =render :partial => 'directives/sections', :locals => { :sections => sections, :show_edit => false, :with_controls => true }
