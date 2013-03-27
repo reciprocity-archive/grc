@@ -116,6 +116,36 @@ ul.tree-structure {
                 @include opacity(1);
               }
             }
+            .item-content {
+              ul.tree-structure {
+                background: $white;
+                li {
+                  &:last-child {
+                    border-bottom: none;
+                  }
+                  .objects-count {
+                    a {
+                      @include opacity(0.3);
+                    }
+                  }
+                  &:hover {
+                    .objects-count {
+                      a {
+                        @include opacity(1);
+                      }
+                    }
+                  }
+                  .item-actions {
+                    @include opacity(0.3);
+                  }
+                  &:hover {
+                    .item-actions {
+                      @include opacity(1);
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -264,10 +294,10 @@ ul.tree-structure {
   .view-more {
     font-style: italic;
     text-decoration: underline;
-    color: $link;
+    color: $gray;
+    font-size:$f-regular;
     &:hover {
       text-decoration: none;
-      color: $link;
     }
   }
   .note {
@@ -439,6 +469,7 @@ ul.tree-structure {
     }
     .openclose {
       background-position:-128px -56px;
+      @include opacity(1);
       &.active {
         background-position:-104px -56px;
       }
