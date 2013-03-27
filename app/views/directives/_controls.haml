@@ -1,8 +1,12 @@
 
 -controls.each do |control|
-  .item-main{ :'data-object-id' => control.id, :'data-object-type' => control.class.name.underscore }
-    .openclose{ :class => 'lastchild' }
-    .item-title
-      .row-fluid
-        =render :partial => 'object_leaf', :locals => { :instance => control, :object_type => 'compliance', :object_icon => 'grcicon-control' }
+  %li
+    .item-main{ :'data-object-id' => control.id, :'data-object-type' => control.class.name.underscore }
+      .openclose{ :class => 'lastchild' }
+      .item-title
+        .row-fluid
+          =render :partial => 'object_leaf', :locals => { :instance => control, :object_type => 'compliance', :object_icon => 'grcicon-control' }
+          .item-actions
+            %a.btn.btn-mini.pull-right{ :href => flow_control_path(control), :rel => 'tooltip', :title => "Go to this object's page" }
+              %i.grcicon-goto
 
