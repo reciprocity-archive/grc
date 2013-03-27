@@ -85,7 +85,7 @@ class ProgramsController < BaseObjectsController
   private
 
     def delete_model_stats
-      [ [ 'Directive', @program.directives.count ]
+      [ [ 'Cycle', @program.cycles.count ]
       ]
     end
 

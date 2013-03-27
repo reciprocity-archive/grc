@@ -488,8 +488,7 @@ class DirectivesController < BaseObjectsController
 
     def delete_model_stats
       [ [ 'Section', @directive.sections.count ],
-        [ 'Control', @directive.controls.count ],
-        [ 'Cycle', @directive.cycles.count ]
+        [ 'Control', @directive.controls.count ]
       ]
     end
 
