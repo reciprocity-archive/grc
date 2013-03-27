@@ -1,1 +1,5 @@
-Type,,,,,,,,,,,PBC Requests,,,,,,,,,,,Line #4 contains useful guides to make import easier,,,,,,,,,,,"*can be ""Documentation"", ""Interview"" or ""Population Sample""",,,*required field,,,*has to be valid emal,*has to be valid emal,,,,Request Type,Control Code,Control Description,Request,Notes,Test,Internal Contact,Auditor Contact,Date Requested,Request Id (auto-created),status,firm_responsible
+Type,,,,,,,,,,,
+PBC Requests,,,,,,,,,,,
+Line #4 contains useful guides to make import easier,,,,,,,,,,,
+"*Required field:  Can be ""Documentation"", ""Interview"" or ""Population Sample""",,,*Required field,,,*Enter a valid email or leave blank,*Enter a valid email or leave blank,,,"Can be ""Draft"", ""Requested"", ""Responded"", ""Amended/Updated Request"", or ""Accepted""",
+Request Type,Control Code,Control Description,Request,Notes,Test,Internal Contact,Auditor Contact,Date Requested,Request Id (auto-created),status,firm_responsible
