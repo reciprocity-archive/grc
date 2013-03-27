@@ -64,7 +64,7 @@
       %label
         Notes
       =display_as_html control.notes
-  -if control.url != ""
+  -if control.url.present?
     %li.float-element
       %label
         Direct Link

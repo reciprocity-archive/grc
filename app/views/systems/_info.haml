@@ -36,7 +36,7 @@
         Network Zone
       %span
         =system.network_zone && system.network_zone.title
-  -if system.url != ""
+  -if system.url.present?
     %li.float-element
       %label
         Direct Link

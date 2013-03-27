@@ -28,7 +28,7 @@
     -else
       .rtf
         %p.no-data no description available
-  -if instance.url != ""
+  -if instance.url.present?
     %li.float-element
       %label
         Direct Link

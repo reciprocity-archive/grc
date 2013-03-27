@@ -30,7 +30,7 @@
     -else
       .rtf
         %p.no-data no description available
-  -if product.url != ""
+  -if product.url.present?
     %li.float-element
       %label
         Direct Link
