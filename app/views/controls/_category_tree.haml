@@ -1,0 +1,5 @@
+%ul.tree-structure
+  -category_tree.each do |category, children, controls|
+    =render :partial => 'category_branch',
+            :locals => { :category => category, :children => children, :controls => controls }
+
