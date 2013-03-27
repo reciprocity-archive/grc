@@ -25,7 +25,9 @@
                           .row-fluid
                             .span12
                               .oneline
-                                %a{ :href => flow_control_path(control) }=control.slug
+                                %a{ :href => flow_control_path(control) }
+                                  %span.title=control.title
+                                  %span.text-compliance=control.slug
               -else
                 .rtf
                   %p.no-data

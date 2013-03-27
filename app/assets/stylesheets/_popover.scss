@@ -57,6 +57,17 @@
     }
     ul.tree-structure {
       font-size:$f-regular;
+      li {
+        a:hover {
+          text-decoration:none;
+        }
+        .title {
+          font-weight:bold;
+        }
+        .text-compliance {
+          font-size:90%;
+        }
+      }
     }
     width: 400px;
     background: $popOverBorder;
