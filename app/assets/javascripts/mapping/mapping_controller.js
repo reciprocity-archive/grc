@@ -403,9 +403,12 @@ CMS.Controllers.Mapping("CMS.Controllers.ControlMappingPopup", {
   }
 
   , "a[href^='/controls/new'] modal:success" : function(el, ev, data) {
+    var that = this;
     this._super(el, ev, data);
     this.redo_last_search(data.id);
-    this.element.find("[content_id=" + CMS.Models.Control.findInCacheById(data.id).content_id + "] .map-control").prop("checked", true).trigger("change");
+    this.map(this.options.section, null, data).done(function() {
+      that.update();
+    });
   }
 
   , ".search-reset click" : function(el, ev) {
