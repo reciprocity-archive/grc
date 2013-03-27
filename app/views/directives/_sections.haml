@@ -35,7 +35,7 @@
 
             -data_popover_trigger = { :placement => "right",
                                  :'popover-trigger' =>  "sticky-hover",
-                                 :'original-title' => "<div class='row-fluid'><div class='span12'><h3><i class='grcicon-control-color'></i>Linked Controls</h3></div></div>".html_safe,
+                                 :'original-title' => "<div class='row-fluid'><div class='span12'><h3><i class='grcicon-control-color'></i>Mapped Controls</h3></div></div>".html_safe,
                                  :content => popover_content,
                                  :id => item.id }
             %a.controls-count.controllist{:href => "javascript://",
@@ -50,10 +50,10 @@
 
       .item-actions
         -if show_edit
-          %a.btn.btn-mini.pull-right{ :href => edit_flow_section_path(item), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-dirty' => "#regulations, #combo", :rel => 'tooltip', :title => "Edit #{item.directive.section_meta_kind.to_s.titleize}" }
+          %a.btn.btn-mini.pull-right{ :href => edit_flow_section_path(item), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-dirty' => "#regulations, #combo", :rel => 'tooltip', :title => "Edit #{item.directive.section_meta_kind.to_s.titleize}", :style => "margin-left:6px" }
             %i.grcicon-edit
-        %a.btn.btn-mini.controllist.pull-right{:href => "javascript://", :'data-id'=> item.id , :rel => "tooltip", :title => "Link Controls"}
-          %i.grcicon-link
+        %a.btn.btn-mini.controllist.pull-right{:href => "javascript://", :'data-id'=> item.id , :rel => "tooltip", :title => "Map Controls to Section"}
+          %i.grcicon-reg-map
 
   .item-content{ :class => expanded && 'in' }
     -if with_controls

@@ -9,9 +9,9 @@
   %ul.nav.nav-tabs
     %li.text-compliance=link_to '<i class="grcicon-system-color"></i>Systems / <i class="grcicon-process-color"></i>Processes'.html_safe, '#systems', :data => { :toggle => 'tab', :'tab-href' => systems_flow_control_path(control) }
     -if control.directive.company?
-      %li.text-compliance=link_to '<i class="grcicon-control-color"></i>Linked Controls'.html_safe, '#controls', :data => { :toggle => 'tab', :'tab-href' => implemented_controls_flow_control_path(control) }
+      %li.text-compliance=link_to '<i class="grcicon-control-color"></i>Mapped Controls'.html_safe, '#controls', :data => { :toggle => 'tab', :'tab-href' => implemented_controls_flow_control_path(control) }
     -else
-      %li.text-compliance=link_to '<i class="grcicon-control-color"></i>Linked Controls'.html_safe, '#controls', :data => { :toggle => 'tab', :'tab-href' => implementing_controls_flow_control_path(control) }
+      %li.text-compliance=link_to '<i class="grcicon-control-color"></i>Mapped Controls'.html_safe, '#controls', :data => { :toggle => 'tab', :'tab-href' => implementing_controls_flow_control_path(control) }
     %li.text-governance=link_to '<i class="grcicon-section-color"></i>Sections/Clauses'.html_safe, '#regulations', :data => { :toggle => 'tab', :'tab-href' => sections_flow_control_path(control) }
     %li.text-risk=link_to '<i class="grcicon-risk-color"></i>Risks'.html_safe, '#risks', :data => { :toggle => 'tab', :'tab-href' => risks_flow_control_path(control) }
 
