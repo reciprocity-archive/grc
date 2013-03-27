@@ -475,5 +475,11 @@ jQuery(function($){
 
     return this;
   }
+
+  $(document.body).on("shown", ".bootstrap-wysihtml5-insert-link-modal", function(e) {
+    $(this).draggable({ handle : ".modal-header"})
+    .find(".modal-header [data-dismiss='modal']").css("opacity", 1);
+  });
+
 });
 

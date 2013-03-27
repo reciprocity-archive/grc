@@ -3,18 +3,18 @@
 -editable_notes = false if local_assigns[:editable_notes].nil?
 
 =walk_slug_tree(Directive.slugtree(sections), :expanded => expanded, :li_class => 'section') do |item, step, children|
+  -controls = item.linked_controls
   -content_id = "content_#{rand(36**8).to_s(36)}" # unique ID for toggle
   -has_children = children.size > 0
-
+  -has_controls = controls.size > 0
+  -expandable = has_children || (with_controls && has_controls)
   .item-main{ :'data-object-id' => item.id, :'data-object-type' => item.class.name.underscore }
-    .openclose
-    /{ :class => [!has_children && 'lastchild', expanded && 'active'] }
+    .openclose{ :class => [!expandable && 'lastchild', expanded && 'active'] }
     .item-title
       .row-fluid
         =render :partial => 'object_leaf', :locals => { :instance => item, :include_notes => true, :editable_notes => editable_notes, :object_type => 'compliance', :object_icon => 'grcicon-section' }
         .span2
           .objects-count
-            -controls = item.linked_controls
             -popover_content = capture_haml do
               -if !controls.empty?
                 %ul.tree-structure.simple
@@ -55,15 +55,11 @@
         %a.btn.btn-mini.controllist.pull-right{:href => "javascript://", :'data-id'=> item.id , :rel => "tooltip", :title => "Link Controls"}
           %i.grcicon-link
 
-
-
-
-  .item-content
+  .item-content{ :class => expanded && 'in' }
     -if with_controls
-      -controls = item.linked_controls
       -if controls.size > 0
         %ul.tree-structure
           =render :partial => 'directives/controls', :locals => { :controls => controls, :show_edit => false }
-      -else
+      -#else
         .no-data
           No controls are linked to this section
