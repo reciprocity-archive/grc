@@ -404,6 +404,7 @@ CMS.Controllers.Mapping("CMS.Controllers.ControlMappingPopup", {
   , "a[href^='/controls/new'] modal:success" : function(el, ev, data) {
     this._super(el, ev, data);
     this.redo_last_search(data.id);
+    this.element.find("[content_id=" + CMS.Models.Control.findInCacheById(data.id).content_id + "] .map-control").prop("checked", true).trigger("change");
   }
 
   , ".search-reset click" : function(el, ev) {
