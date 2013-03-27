@@ -468,6 +468,10 @@ strong {
 
 .flash {
   margin-bottom:10px;
+  .close {
+    margin-top:9px;
+    margin-right:16px;
+  }
   .notice {
     @include border-radius();
     p {

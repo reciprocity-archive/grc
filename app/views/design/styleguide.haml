@@ -1636,7 +1636,9 @@
             Flash notice
         %section.content
           .flash
-            .notice
+            %a.close{:href=>"#{}", :'data-dismiss' => "alert"}
+              &times;
+            .notice            
               %p 
                 %i.grcicon-ok
                 Requests are imported successfully!

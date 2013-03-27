@@ -185,6 +185,9 @@
             -value = value.map(&:presence).compact
             -if value.size > 0
               %div{ :class => type }
+                %a.close{:href=>"#{}", :'data-dismiss' => "alert"}
+                  &times;
+                
                 -value.each do |message|
                   %p=message
       =yield
