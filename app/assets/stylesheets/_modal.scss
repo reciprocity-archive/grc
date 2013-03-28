@@ -53,6 +53,11 @@
         font-size:$f-small;
         font-weight:bold;
         li {
+          small {
+            font-weight:normal;
+            font-size:$f-regular;
+          }
+          
           a {
             display:block;
             padding-left:10px;
@@ -201,6 +206,9 @@
         display: block;
         line-height: 18px;
         font-size: $f-regular;
+      }
+      i {
+        margin-top:6px;
       }
       small {
         color:$white;

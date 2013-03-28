@@ -4,7 +4,10 @@
       <i class="grcicon-x-grey"></i>
     </a>
   </div>
-  <h2> Map Controls to <small>{{section.slug}}</small> </h2>
+  <h2>
+    Map Controls to <small>{{section.slug}}</small>
+    <i class="grcicon-section"></i><i class="grcicon-reg-map-white"></i><i class="grcicon-control"></i>
+  </h2>
 </div>
 
 
@@ -60,6 +63,7 @@
               <li>
                 <a href="javascript://" class="jump-to-control" data-content-id="{{content_id}}">
                   {{title}}
+                  <small>{{slug}}</small>
                 </a>
               </li>
               {{/linked_controls}}
