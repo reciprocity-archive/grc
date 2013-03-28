@@ -359,12 +359,16 @@ CMS.Controllers.Mapping("CMS.Controllers.ControlMappingPopup", {
   , "{section} updated" : function(obj, ev) {
     // if(!/(^|\.)linked_controls(\.|$)/.test(attr))
     //   return;
-    var $count = $("#content_" + obj.slug).find("> .item-main .controls-count");
-    $count.html($count.children().filter("i").add(
-      obj.linked_controls.length 
-      ? $("<span>").html(" " + obj.linked_controls.length)
-      : (obj.na ? "<strong class='warning'> N/A</strong>" : "<strong class='error'> 0</strong>")
-      ));
+    var $count = $("#content_" + obj.slug).find("> .item-main .controls-count")
+      , html;
+    if (obj.na) {
+      html = ""
+    } else if (obj.linked_controls.length == 0) {
+      html = "<i class='grcicon-control-danger'></i> 0";
+    } else {
+      html = "<i class='grcicon-control-color'></i> " + obj.linked_controls.length;
+    }
+    $count.html(html);
     var render_str = can.view.render("/assets/controls/list_popover.mustache", obj.linked_controls.serialize());
     $count.attr("data-content", render_str).data("content", render_str)
   }

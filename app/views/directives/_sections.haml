@@ -38,6 +38,8 @@
                                  :'original-title' => "<div class='row-fluid'><div class='span12'><h3><i class='grcicon-control-color'></i>Mapped Controls</h3></div></div>".html_safe,
                                  :content => popover_content,
                                  :id => item.id }
+            -# NOTE: Changes here should be reflected in app/assets/javascript/mapping/mapping_controller.js
+            -#   in the "{section} updated" handler
             %a.controls-count.controllist{:href => "javascript://",
                            :data => data_popover_trigger}
               -if !controls.empty?
@@ -54,9 +56,7 @@
           %a.btn.btn-mini.pull-right{ :href => edit_flow_section_path(item), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-dirty' => "#regulations, #combo", :rel => 'tooltip', :title => "Edit #{item.directive.section_meta_kind.to_s.titleize}", :style => "margin-left:6px" }
             %i.grcicon-edit
         %a.btn.btn-mini.controllist.pull-right{:href => "javascript://", :'data-id'=> item.id , :rel => "tooltip", :title => "Map Controls to Section"}
-          %i.grcicon-section-color
-          %i.grcicon-reg-map
-          %i.grcicon-control-color
+          !="<i class='grcicon-section-color'></i><i class='grcicon-reg-map'></i><i class='grcicon-control-color'></i>"
 
   .item-content{ :class => expanded && 'in' }
     -if with_controls
