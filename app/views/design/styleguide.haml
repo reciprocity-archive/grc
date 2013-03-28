@@ -72,9 +72,16 @@
             Flash Notices
 
         %li
+          %a{:href => "#popover"}
+            %i.icon-chevron-right
+            Popover
+
+        %li
           %a{:href => "#helper"}
             %i.icon-chevron-right
             Helper classes
+
+
 
     
     .span9.styleguide-content
@@ -1642,6 +1649,14 @@
               %p 
                 %i.grcicon-ok
                 Requests are imported successfully!
+
+      %section#popover.widget
+        %section.header
+          %h2
+            Popover
+        %section.content
+          %a{:class=>"btn", :'data-popover-trigger' =>  "sticky-hover", :'data-placement' =>  "right", :'data-original-title' => "Something", :'data-content' => "Woohoooo"} Popover Sample
+
             
       %section#helper.widget
         %section.header
