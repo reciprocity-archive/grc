@@ -13,30 +13,44 @@
         %a{:href => "/design/styleguide"}
           %i.grcicon-project-black
           Styleguide
-    %li
-      %a{:href => "/systems/import"}
+    %li.btn-group
+      %a.dropdown-toggle{:href => '#', :'data-toggle' => 'dropdown'}
         %i.grcicon-imp-exp
-        %span Import Systems
-    %li
-      %a{"data-toggle" => "modal-ajax", :href => "/systems/export.html"}
-        %i.grcicon-export
-        %span Export Systems
-    %li
-      %a{:href => "/systems/import?is_biz_process=1"}
-        %i.grcicon-imp-exp
-        %span Import Processes
-    %li
-      %a{"data-toggle" => "modal-ajax", :href => "/systems/export.html?is_biz_process=1"}
-        %i.grcicon-export
-        %span Export Processes
-    %li
-      %a{:href => "/risks/import"}
-        %i.grcicon-imp-exp
-        %span Import Risks
-    %li
-      %a{"data-toggle" => "modal-ajax", :href => "/risks/export.html"}
-        %i.grcicon-export
-        %span Export Risks
+        %span Import/Export
+        %span.caret
+      %ul.dropdown-menu
+        %li.title
+          Systems
+        %li
+          %a{:href => "/systems/import"}
+            %i.grcicon-system-color
+            %span Import Systems
+        %li
+          %a{"data-toggle" => "modal-ajax", :href => "/systems/export.html"}
+            %i.grcicon-system-color
+            %span Export Systems
+        %li.divider
+        %li.title
+          Processes
+        %li
+          %a{:href => "/systems/import?is_biz_process=1"}
+            %i.grcicon-process-color
+            %span Import Processes
+        %li
+          %a{"data-toggle" => "modal-ajax", :href => "/systems/export.html?is_biz_process=1"}
+            %i.grcicon-process-color
+            %span Export Processes
+        %li.divider
+        %li.title
+          Risks
+        %li
+          %a{:href => "/risks/import"}
+            %i.grcicon-risk-color
+            %span Import Risks
+        %li
+          %a{"data-toggle" => "modal-ajax", :href => "/risks/export.html"}
+            %i.grcicon-risk-color
+            %span Export Risks
 
 .container-fluid
   #columns.row-fluid{ :'data-resize' => "true" }

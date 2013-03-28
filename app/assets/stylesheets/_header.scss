@@ -160,7 +160,6 @@
           background: $black;
           li {
             float:none;
-            font-size:100%;
             clear: both;
             a {
               display:block;
@@ -323,6 +322,9 @@
   @include reset-list();
   margin-top: 35px;
   li {
+    li a {
+      font-size:$f-regular;
+    }
     float:left;
     line-height: 16px;
     margin-left: 20px;
@@ -362,7 +364,6 @@
         a {
           color: $black;
           text-align: left;
-          font-size: $f-small;
           font-weight: normal;
           margin: 0;
           text-transform: none;
