@@ -32,6 +32,7 @@ jQuery(function($) {
         .appendTo(document.body)
         .draggable({ handle: '.modal-header' });
     }
+    $dialog.html($(new Spinner().spin().el).css({"position" : "relative", "left" : 50, "top" : 50, "height": 150, "width": 150}));
     $dialog.modal("show");
 
     (CMS.Models.Section.findInCacheById(id) 

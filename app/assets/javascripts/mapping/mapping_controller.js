@@ -289,7 +289,8 @@ CMS.Controllers.Mapping("CMS.Controllers.ControlMappingPopup", {
 }, {
   init : function() {
     var that = this;
-    this.element.append($(new Spinner().spin().el).css({"position" : "relative", "left" : 50, "top" : 50, "height": 150, "width": 150}));
+    if(this.element.find(".spinner").length < 1)
+      this.element.append($(new Spinner().spin().el).css({"position" : "relative", "left" : 50, "top" : 50, "height": 150, "width": 150}));
     this.options.observer = new can.Observe({
       section : this.options.section
       , parent_type : this.options.parent_model.root_object
@@ -314,12 +315,11 @@ CMS.Controllers.Mapping("CMS.Controllers.ControlMappingPopup", {
       .cms_controllers_controls({show : "/assets/controls/show_selected_sidebar.mustache", arity : 1})
       .control();
 
-      that.options.company_list_controller.find_all_deferred.done(function(d) {
+      that.search_filter(that.options.company_list_controller.find_all_deferred).done(function(d) {
         that.list = d;
         that.options.section.update_linked_controls_ccontrol_only();
         //that.options.observer.attr("controls", d);
         that.update();
-        that.search_filter();
         that.element.trigger("shown").trigger("kill-all-popoevers");
       });
     });
@@ -385,14 +385,16 @@ CMS.Controllers.Mapping("CMS.Controllers.ControlMappingPopup", {
 
   , ".control-type-filter change" : "search_filter"
 
-  , search_filter : function() {
+  , search_filter : function(dfd) {
     var that = this;
     var check = {};
     if(this.element.find(".control-type-filter").prop("checked")) {
       check[this.options.parent_model.root_object + "_id"] = this.options.parent_id;
     }
     var search = this.element.find(".widgetsearch-tocontent").val();
-    this.options.company_list_controller.filter(search, check).done(function(d) {
+    var dfds = [this.options.company_list_controller.filter(search, check)];
+    dfd && dfds.push(dfd);
+    return $.when.apply($, dfds).done(function(d) {
       that.element.find(".search-results-count").html(d.length);
       that.update_map_all();
     });
