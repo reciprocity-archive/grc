@@ -22,7 +22,7 @@
   .span4
     %label Type
     .controls
-      %select(name='category[parent_id]')
+      %select.input-block-level(name='category[parent_id]')
         %option{ :value => '' } &lt;New root object&gt;
         -categories = Category.where(:parent_id => nil).where(Category.arel_table[:id].not_eq(f.object.id))
         -if f.object.scope_id.present?
@@ -32,11 +32,11 @@
 
         -categories.each do |category|
           %option{ :value => category.id, :selected => (category.id == f.object.parent_id) }=category.name
-  .span7
-    .span12{ :class => error_class(f, :name) }
+  .span6
+    .input-holder{ :class => error_class(f, :name) }
       =f.label :name, 'Category Name'
-      =f.text_field :name, :class => 'span12', :placeholder => 'Category Name'
-  .span1
-    .span12{ :class => error_class(f, :required) }
+      =f.text_field :name, :class => 'input-block-level', :placeholder => 'Category Name'
+  .span2
+    .input-holder{ :class => error_class(f, :required) }
       =f.label :required, 'Required'
       =f.check_box :required

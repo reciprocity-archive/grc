@@ -296,7 +296,8 @@ input.date {
 }
 
 //Making input 100% width of his parent element
-input.input-block-level {
+input.input-block-level,
+select.input-block-level {
   display: block;
   width: 100%;
   @include box-sizing(border-box);
