@@ -426,13 +426,24 @@ input.disabled.pending-ajax{
 }
 
 // additional styles
-span.text-compliance
+li.text-compliance,
+span.text-compliance,
 strong.text-compliance {
   color:$compliance;
   a {
     color:$compliance !important;
   }
 }
+
+li.text-governance,
+span.text-governance,
+strong.text-governance {
+  color:$governance;
+  a {
+    color:$governance !important;
+  }
+}
+
 
 span,
 strong {
