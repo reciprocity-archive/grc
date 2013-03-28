@@ -285,7 +285,8 @@ can.Control("CMS.Controllers.ResizeWidgets", {
     var that = this;
     var origTarget = ev.originalEvent ? ev.originalEvent.target : ev.target;
     var $t = $(this.element);
-    if ($t.is(origTarget) || $(origTarget).is(".width-selector-bar, .width-selector-drag")) {
+    if (($t.is(origTarget) || $(origTarget).is(".width-selector-bar, .width-selector-drag"))
+        && $(".width-selector-bar", $t).length) {
       var offset = this.getLeftOffset(ev.pageX);
       var widths = that.getWidthsForSelector($t).slice(0);
       var c_width = that.options.total_columns;
@@ -441,6 +442,10 @@ can.Control("CMS.Controllers.ResizeWidgets", {
   , ensure_minimum : function(el, ht) {
     var $el = $(el);
     $el.css("width", ""); //bizarre jQUI behavior fix
+    if(!$el.find(".content").is(":visible")) {
+      return; //don't resize widgets that are collapsed
+    }
+
     if(!ht) {
       ht = $el.height();
     }
