@@ -256,6 +256,10 @@ ul.tree-structure {
       [class^="grcicon-"] {
         margin-top: 7px;
       }
+      small {
+        font-size:$f-small;
+        color:$gray !important;
+      }
       .grcicon-section-black {
         background-position:-200px -104px;
       }
