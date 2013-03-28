@@ -38,6 +38,8 @@
                                  :'original-title' => "<div class='row-fluid'><div class='span12'><h3><i class='grcicon-control-color'></i>Mapped Controls</h3></div></div>".html_safe,
                                  :content => popover_content,
                                  :id => item.id }
+            -# NOTE: Changes here should be reflected in app/assets/javascript/mapping/mapping_controller.js
+            -#   in the "{section} updated" handler
             %a.controls-count.controllist{:href => "javascript://",
                            :data => data_popover_trigger}
               -if !controls.empty?
