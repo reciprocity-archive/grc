@@ -40,12 +40,13 @@
                                  :id => item.id }
             %a.controls-count.controllist{:href => "javascript://",
                            :data => data_popover_trigger}
-              %i.grcicon-control-color
               -if !controls.empty?
+                %i.grcicon-control-color
                 =controls.size
               -elsif item.na?
-                %strong.warning N/A
+                -#%strong.warning N/A
               -else
+                %i.grcicon-control-danger
                 %strong.error 0
 
       .item-actions
