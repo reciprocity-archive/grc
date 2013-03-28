@@ -45,7 +45,8 @@ CMS.Models.System("CMS.Models.Response", {
                   , "people"
                   , "object_people"
                   , "system"
-                  , "population_sample"]
+                  , "population_sample"
+                  , "meetings"]
         });
       return $.ajax({
               type : "PUT"
