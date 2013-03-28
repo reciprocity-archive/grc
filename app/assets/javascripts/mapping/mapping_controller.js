@@ -362,7 +362,7 @@ CMS.Controllers.Mapping("CMS.Controllers.ControlMappingPopup", {
     var $count = $("#content_" + obj.slug).find("> .item-main .controls-count")
       , html;
     if (obj.na) {
-      html = ""
+      html = "<i class='grcicon-control-danger'></i><small class='warning'>N/A</small>";
     } else if (obj.linked_controls.length == 0) {
       html = "<i class='grcicon-control-danger'></i> 0";
     } else {
