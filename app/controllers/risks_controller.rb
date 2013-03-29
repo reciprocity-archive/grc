@@ -26,7 +26,6 @@ class RisksController < BaseObjectsController
     Residual\ Risk\ Note residual_risk
     URL url
     Link:Controls controls
-    Link:Categories categories
   )]
 
   access_control :acl do
@@ -156,7 +155,7 @@ class RisksController < BaseObjectsController
 
       object ||= Risk.new
 
-      handle_import_category(object, attrs, 'categories', Control::CATEGORY_TYPE_ID)
+      #handle_import_category(object, attrs, 'categories', Control::CATEGORY_TYPE_ID)
       handle_import_controls(object, attrs, 'controls')
       #handle_import_systems(control, attrs, 'processes')
 
