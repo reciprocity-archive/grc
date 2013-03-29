@@ -20,7 +20,7 @@
       %br
 
 
-    -width_pcts = %w(4 5 5 3 6 6 6 6 4 4 4 6 7 6 6 4 5 5)
+    -width_pcts = %w(4 5 5 3 6 6 6 6 4 4 4 6 7 6 6 4 5)
     %table.ggrc-table{:cellspacing => "0", :cellpadding => "0"}
       -width_pcts.each do |width_pct|
         %col{ :style => "width:#{width_pct}%" }
@@ -42,7 +42,6 @@
           %th Risk Mitigation Note
           %th Residual Risk Note
           %th URL
-          %th Categories
           %th Controls
       %tbody
         %tr
@@ -52,7 +51,7 @@
                 -width_pcts.each do |width_pct|
                   %col{ :style => "width:#{width_pct}%" }
                 %tbody
-                  -columns = %w(slug title description likelihood_rating likelihood threat_vector trigger preconditions financial_impact_rating operational_impact_rating reputational_impact_rating impact inherent_risk risk_mitigation residual_risk url categories_display controls_display)
+                  -columns = %w(slug title description likelihood_rating likelihood threat_vector trigger preconditions financial_impact_rating operational_impact_rating reputational_impact_rating impact inherent_risk risk_mitigation residual_risk url controls_display)
                   -@objects.each_with_index do |sec, i|
                     %tr{ :class => (i % 2 == 0 ? :odd : :even) }
                       -columns.each do |column_name|

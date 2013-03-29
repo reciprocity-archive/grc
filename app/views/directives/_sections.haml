@@ -46,7 +46,8 @@
                 %i.grcicon-control-color
                 =controls.size
               -elsif item.na?
-                -#%strong.warning N/A
+                %i.grcicon-control-color
+                %small.warning N/A
               -else
                 %i.grcicon-control-danger
                 %strong.error 0

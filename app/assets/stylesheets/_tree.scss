@@ -143,6 +143,66 @@ ul.tree-structure {
                       @include opacity(1);
                     }
                   }
+                  .item-content {
+                    ul.tree-structure {
+                      background: $white;
+                      li {
+                        &:last-child {
+                          border-bottom: none;
+                        }
+                        .objects-count {
+                          a {
+                            @include opacity(0.3);
+                          }
+                        }
+                        &:hover {
+                          .objects-count {
+                            a {
+                              @include opacity(1);
+                            }
+                          }
+                        }
+                        .item-actions {
+                          @include opacity(0.3);
+                        }
+                        &:hover {
+                          .item-actions {
+                            @include opacity(1);
+                          }
+                        }
+                        .item-content {
+                          ul.tree-structure {
+                            background: $white;
+                            li {
+                              &:last-child {
+                                border-bottom: none;
+                              }
+                              .objects-count {
+                                a {
+                                  @include opacity(0.3);
+                                }
+                              }
+                              &:hover {
+                                .objects-count {
+                                  a {
+                                    @include opacity(1);
+                                  }
+                                }
+                              }
+                              .item-actions {
+                                @include opacity(0.3);
+                              }
+                              &:hover {
+                                .item-actions {
+                                  @include opacity(1);
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -195,6 +255,10 @@ ul.tree-structure {
       white-space: nowrap;
       [class^="grcicon-"] {
         margin-top: 7px;
+      }
+      small {
+        font-size:$f-small;
+        color:$gray !important;
       }
       .grcicon-section-black {
         background-position:-200px -104px;
