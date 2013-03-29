@@ -10,6 +10,8 @@ class ApplicationController < ActionController::Base
   include AuthorizationHelper
   include FormHelper
 
+  before_filter :redirect_to_https if CMS_CONFIG['REQUIRE_SSL']
+
   before_filter :require_user
   before_filter :set_features
   before_filter  :set_default_cache_control
@@ -25,6 +27,10 @@ class ApplicationController < ActionController::Base
   # By default allow only superuser access.  This is relaxed in specific controllers.
   access_control :acl do
     allow :superuser
+  end
+
+  def redirect_to_https
+    redirect_to :protocol => "https://" unless (request.ssl? || request.local?)
   end
 
   rescue_from Acl9::AccessDenied do
