@@ -14,9 +14,8 @@
   .filter
     .row-fluid
       .span12
-        .pull-right
-          %a.widgetbtn.btn{:href => list_edit_flow_risk_risky_attributes_path(:risk_id => instance.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :'data-modal-class' => 'modal-wide', :rel => "tooltip", :title => "Link attributes to this Risk", :'data-placement'=>"left" }
-            %i.grcicon-link
+        %a.pull-right.secondary-link{:href => list_edit_flow_risk_risky_attributes_path(:risk_id => instance.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :'data-modal-class' => 'modal-wide', :rel => "tooltip", :title => "Link attributes to this Risk", :'data-placement'=>"left" }
+          %i.grcicon-link
 
 -risky_attributes = instance.risky_attributes
 
