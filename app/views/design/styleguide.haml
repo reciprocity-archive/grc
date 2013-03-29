@@ -1653,11 +1653,231 @@
       %section#popover.widget
         %section.header
           %h2
-            Popover
+            Popovers
         %section.content
-          %a{:class=>"btn", :'data-popover-trigger' =>  "sticky-hover", :'data-placement' =>  "right", :'data-original-title' => "Something", :'data-content' => "Woohoooo"} Popover Sample
+          -program_popover_title = capture_haml do
+            .row-fluid
+              .span10
+                %h3
+                  %i.grcicon-program-color
+                  %span.title Program Title
+                  %span.code.governance PROGRAM-XXX
+              .span2
+                %a.btn.btn-mini.btn-primary.pull-right{:href=>"#", :rel => "tooltip", :title => "View Program"}
+                  %i.grcicon-goto-white
+              
+          -program_popover_content_inprogress = capture_haml do
+            .popover-inner-content
+              .row-fluid
+                .span12
+                  %h4 Description
+                  .rtf
+                    %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+              .row-fluid
+                .span6
+                  %h4
+                    Audit Status
+                  %p.audit-status
+                    %i.grcicon-eye-inprogress
+                    %span.status.inprogress In Progress
+                    %br
+                    started on:
+                    02/14/2013
+                    %br
+                    ends on:
+                    02/31/2013
+                    %br
+                    %strong
+                      report date:
+                      04/01/2013
 
-            
+                .span6
+                  %h4
+                    Controls (200)
+                    .progress
+                      .bar.bar-success{:style => "width:50%", :rel => "tooltip", :title => "100 Done"}=100
+                      .bar.bar-danger{:style => "width:35%", :rel => "tooltip", :title => "70 N/A"}=70
+                      .bar.bar-warning{:style => "width:15%", :rel => "tooltip", :title => "30 Pending"}=30
+                  %h4
+                    Directives (14)
+                  %i.grcicon-regulation-color
+                  8
+                  &nbsp;
+                  %i.grcicon-contract-color
+                  2
+                  &nbsp;
+                  %i.grcicon-policy-color
+                  4
+
+          -program_popover_content_none = capture_haml do
+            .popover-inner-content
+              .row-fluid
+                .span12
+                  %h4 Description
+                  .rtf
+                    %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+              .row-fluid
+                .span6
+                  %h4
+                    Audit Status
+                  %p.audit-status
+                    %span.status.none No scheduled audits
+
+                .span6
+                  %h4
+                    Controls (200)
+                    .progress
+                      .bar.bar-success{:style => "width:50%", :rel => "tooltip", :title => "100 Done"}=100
+                      .bar.bar-danger{:style => "width:35%", :rel => "tooltip", :title => "70 N/A"}=70
+                      .bar.bar-warning{:style => "width:15%", :rel => "tooltip", :title => "30 Pending"}=30
+                  %h4
+                    Directives (14)
+                  %i.grcicon-regulation-color
+                  8
+                  &nbsp;
+                  %i.grcicon-contract-color
+                  2
+                  &nbsp;
+                  %i.grcicon-policy-color
+                  4
+
+          -program_popover_content_danger = capture_haml do
+            .popover-inner-content
+              .row-fluid
+                .span12
+                  %h4 Description
+                  .rtf
+                    %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+              .row-fluid
+                .span6
+                  %h4
+                    Audit Status
+                  %p.audit-status
+                    %i.grcicon-eye-danger
+                    %span.status.danger Overdue
+                    %br
+                    started on:
+                    02/14/2013
+                    %br
+                    ends on:
+                    02/31/2013
+                    %br
+                    %strong
+                      report date:
+                      04/01/2013
+                .span6
+                  %h4
+                    Controls (0)
+                    .progress
+                      .empty-progress No mapped controls
+                  %h4
+                    Directives (2)
+                  %i.grcicon-regulation-color
+                  1
+                  &nbsp;
+                  %i.grcicon-contract-color
+                  1
+
+          -program_popover_content_completed = capture_haml do
+            .popover-inner-content
+              .row-fluid
+                .span12
+                  %h4 Description
+                  .rtf
+                    %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+              .row-fluid
+                .span6
+                  %h4
+                    Audit Status
+                  %p.audit-status
+                    %i.grcicon-eye-completed
+                    %span.status.completed Completed
+                    %br
+                    started on:
+                    02/14/2013
+                    %br
+                    ended on:
+                    02/31/2013
+                    %br
+                    %strong
+                      report date:
+                      04/01/2013
+                .span6
+                  %h4
+                    Controls (0)
+                    .progress
+                      .empty-progress No mapped controls
+                  %h4
+                    Directives (2)
+                  %i.grcicon-regulation-color
+                  1
+                  &nbsp;
+                  %i.grcicon-contract-color
+                  1
+
+
+
+
+          .row-fluid
+            .span6
+              %ul.tree-structure.simple.single-row-tabs
+                %li.program
+                  %a{:href => "#", :'data-popover-trigger' =>  "sticky-hover", :'data-placement' =>  "right", :'data-original-title' => program_popover_title, :'data-content' => program_popover_content_none}
+                    .row-fluid
+                      .span11
+                        .item-identifier
+                          %i.grcicon-program-color
+                          %span.title
+                            No Scheduled Audits
+                          %span.code
+                            PROGRAM.001
+                      .span1
+                        .objects-count
+                          &nbsp;
+                %li.program
+                  %a{:href => "#", :'data-popover-trigger' =>  "sticky-hover", :'data-placement' =>  "right", :'data-original-title' => program_popover_title, :'data-content' => program_popover_content_inprogress}
+                    .row-fluid
+                      .span11
+                        .item-identifier
+                          %i.grcicon-program-color
+                          %span.title
+                            Audit started or will start within 30 days
+                          %span.code
+                            PROGRAM.002
+                      .span1
+                        .objects-count.pull-right
+                          %i.grcicon-eye-inprogress
+                %li.program
+                  %a{:href => "#", :'data-popover-trigger' =>  "sticky-hover", :'data-placement' =>  "right", :'data-original-title' => program_popover_title, :'data-content' => program_popover_content_danger}
+                    .row-fluid
+                      .span11
+                        .item-identifier
+                          %i.grcicon-program-color
+                          %span.title
+                            Audit is 3 days or less from REPORT DATE
+                          %span.code
+                            PROGRAM.003
+                      .span1
+                        .objects-count.pull-right
+                          %i.grcicon-eye-danger
+                %li.program
+                  %a{:href => "#", :'data-popover-trigger' =>  "sticky-hover", :'data-placement' =>  "right", :'data-original-title' => program_popover_title, :'data-content' => program_popover_content_completed}
+                    .row-fluid
+                      .span11
+                        .item-identifier
+                          %i.grcicon-program-color
+                          %span.title
+                            Program with completed audit (and next one is more than 30 days away)
+                          %span.code
+                            PROGRAM.003
+                      .span1
+                        .objects-count.pull-right
+                          %i.grcicon-eye-completed
+
+
+
+
+
       %section#helper.widget
         %section.header
           %h2

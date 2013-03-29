@@ -140,6 +140,11 @@ blockquote {
       line-height:23px;
     }
   }
+  .empty-progress {
+    text-align:center;
+    color:$gray;
+    font-weight:normal;
+  }
 }
 
 // buttons

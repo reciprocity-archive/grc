@@ -1,6 +1,23 @@
 .popover {
   .popover-inner-content {
     padding:6px 14px;
+    p.audit-status {
+      font-size:$f-regular;
+      color:$text;
+      span.status {
+        font-weight:bold;
+        &.inprogress {
+          color:$warning;
+        }
+        &.danger {
+          color:$error;
+        }
+        &.completed {
+          color:$green;
+        }
+
+      }
+    }
   }
   &.top {
     margin-top: -5px;
@@ -116,7 +133,7 @@
         font-weight: bold;
       }
       .rtf {
-        border:1px solid $lightGray;
+        border:1px solid lighten($gray,10%);
         @include border-radius();
         padding:10px;
         overflow:auto;
@@ -139,7 +156,9 @@
     }
   }
   .progress {
-    margin-bottom:0;
+    margin-bottom:10px;
+    .bar {
+    }
   }
   .minor {
     color:$text;
