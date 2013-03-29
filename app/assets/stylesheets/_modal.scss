@@ -96,6 +96,9 @@
              background:lighten(#c8edfc,5%);
              border-bottom:1px solid darken(#c8edfc,5%); 
             }
+            a:hover {
+              text-decoration:none;
+            }
           }
         }
       }
