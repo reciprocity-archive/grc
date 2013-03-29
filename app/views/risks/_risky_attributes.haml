@@ -15,10 +15,8 @@
     .row-fluid
       .span12
         .pull-right
-          -#%input.ui-corner-all.widgetsearch{:placeholder => "Search", :type => "text"}/
-          %a.widgetbtn.btn.btn-add{:href => list_edit_flow_risk_risky_attributes_path(:risk_id => instance.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :'data-modal-class' => 'modal-wide', :rel => "tooltip", :title => "Link attributes to this Risk", :'data-placement'=>"left" }
-            %i.grcicon-link-white
-            Attribute
+          %a.widgetbtn.btn{:href => list_edit_flow_risk_risky_attributes_path(:risk_id => instance.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :'data-modal-class' => 'modal-wide', :rel => "tooltip", :title => "Link attributes to this Risk", :'data-placement'=>"left" }
+            %i.grcicon-link
 
 -risky_attributes = instance.risky_attributes
 
