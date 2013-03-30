@@ -371,6 +371,7 @@ CMS.Controllers.Mapping("CMS.Controllers.ControlMappingPopup", {
     $count.html(html);
     var render_str = can.view.render("/assets/controls/list_popover.mustache", obj.linked_controls.serialize());
     $count.attr("data-content", render_str).data("content", render_str)
+    this.update();
   }
 
   , ".edit-control modal:success" : function(el, ev, data) {

@@ -76,7 +76,7 @@ class ControlsController < BaseObjectsController
       category_tree = Control.category_controls_tree(@controls)
       render :partial => 'category_tree', :locals => { :category_tree => category_tree }
     else
-      render :json => @controls, :methods => [:description_inline]
+      render :json => @controls, :methods => [:description_inline, :mapped_section_ids]
     end
   end
 
