@@ -51,6 +51,8 @@ can.Model.Cacheable("CMS.Models.Section", {
                 ctlids.splice(ctlindex, 1);
               }
             }
+            var section_idx = can.inArray(section.id, linkedctl.mapped_section_ids);
+            if(~section_idx) linkedctl.mapped_section_ids.splice(section_idx, 1);
           } else {
             //map
             // can.each(section.linked_controls, function() {
@@ -62,6 +64,7 @@ can.Model.Cacheable("CMS.Models.Section", {
             // });
             section.linked_controls.push.apply(section.linked_controls, flatctls);
             params.rcontrol && linkedctl.bind_section(section);
+            ~can.inArray(section.id, linkedctl.mapped_section_ids) || linkedctl.mapped_section_ids.push(section.id);
           }
           section.updated();
         }
@@ -97,10 +100,14 @@ can.Model.Cacheable("CMS.Models.Section", {
                 section.linked_controls.splice(i, 1);
                 ctlids.splice(ctlindex, 1);
               }
+            var section_idx = can.inArray(section.id, linkedctl.mapped_section_ids);
+            if(~section_idx) linkedctl.mapped_section_ids.splice(section_idx, 1);
             }
           } else {
             section.linked_controls.push.apply(section.linked_controls, flatctls);
             linkedctl.bind_section(section);
+            ~can.inArray(section.id, linkedctl.mapped_section_ids) || linkedctl.mapped_section_ids.push(section.id);
+            
           }
           section.updated();
         }

@@ -3,6 +3,10 @@
   <div class="span11">
     <div class="oneline">
       <a href="javascript://">
+        {{#unless mapped_section_ids.length}}
+          <i class="grcicon-control-danger"></i>
+          <span class="error">NOT MAPPED&nbsp;</span>
+        {{/unless}}
         <span class="title">{{title}}</span>           
         <span class="code">{{slug}}</span>
       </a>
