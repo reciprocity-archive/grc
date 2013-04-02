@@ -351,14 +351,17 @@ class DirectivesController < BaseObjectsController
 
     raise ImportException.new("There must be at least 5 input lines") unless rows.size >= 5
 
-    directive_headers = read_import_headers(import, DIRECTIVE_MAP, "directive", rows)
+    directive_meta_kind = @directive.meta_kind
+    metadata_headers_map = Hash[*DIRECTIVE_MAP.map { |k,v| [k.sub("Directive", directive_meta_kind.to_s.titleize),v] }.flatten]
+
+    directive_headers = read_import_headers(import, metadata_headers_map, "directive", rows)
 
     directive_values = rows.shift
 
     import[:directive] = Hash[*directive_headers.zip(directive_values).flatten]
 
     validate_import_type(import[:directive], "Controls")
-    validate_import_slug(import[:directive], "Directive", @directive.slug)
+    validate_import_slug(import[:directive], directive_meta_kind.to_s.titleize, @directive.slug)
 
     rows.shift
     rows.shift
