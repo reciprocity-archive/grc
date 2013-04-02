@@ -3,7 +3,7 @@ class MoveImportHelpPaths < ActiveRecord::Migration
     help = Help.where(:slug => 'import').first
     help.update_attribute(:slug, 'systems_import') if help
     help = Help.where(:slug => 'import_controls').first
-    help.update_attribute(:slug, 'controls_import').first if help
+    help.update_attribute(:slug, 'controls_import') if help
   end
 
   def down
