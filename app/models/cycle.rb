@@ -7,7 +7,7 @@ class Cycle < ActiveRecord::Base
   include AuthorizedModel
   include SanitizableAttributes
 
-  attr_accessible :program, :start_at, :complete, :title, :audit_firm, :audit_lead, :description, :list_import_date, :status, :notes, :end_at
+  attr_accessible :program, :start_at, :complete, :title, :audit_firm, :audit_lead, :description, :list_import_date, :status, :notes, :end_at, :report_due_at
 
   # The program being audited
   belongs_to :program
@@ -19,9 +19,15 @@ class Cycle < ActiveRecord::Base
   validates :title, :program, :program_id, :start_at,
     :presence => { :message => "needs a value" }
 
+  validate :validate_report_due_after_start_at
+
   is_versioned_ext
 
   after_create :create_pbc_list
+
+  def validate_report_due_after_start_at
+    errors.add(:report_due_at, "must be on or after start date") if report_due_at.present? && start_at.present? && report_due_at < start_at
+  end
 
   def display_name
     program.display_name + " " + (start_at.strftime("%Y-%m-%d") rescue "-")

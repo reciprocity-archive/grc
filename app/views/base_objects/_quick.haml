@@ -17,18 +17,32 @@
         %li{ :class => instance.class.name.downcase }
           %a{ :href => instance_path, :'data-popover-href' => instance_tooltip_path, :'data-popover-trigger' => 'sticky-hover' }
             .row-fluid
-              .span12
-                .item-identifier
-                  %span.title
-                    =instance.title
-                  -if instance.is_a?(Program) && instance.company_controls?
-                    %i.grcicon-control-color.short
-                    %span.code
-                      %span.text-compliance=instance.slug
-                  -elsif instance.is_a?(Program)
-                    %i.grcicon-program-color.short
-                    %span.code
-                      =instance.slug
-                  -else
+              -if instance.is_a?(Program)
+                .span11
+                  .item-identifier
+                    %span.title
+                      =instance.title
+                    -if instance.company_controls?
+                      %i.grcicon-control-color.short
+                      %span.code
+                        %span.text-compliance=instance.slug
+                    -else
+                      %i.grcicon-program-color.short
+                      %span.code
+                        =instance.slug
+                .span1
+                  .objects-count.pull-right
+                    -instance.cycles.each do |cycle|
+                      -if cycle.complete
+                        %i.grcicon-eye-completed
+                      -elsif !cycle.report_due_at.nil? && cycle.report_due_at + 3 > Date.today
+                        %i.grcicon-eye-danger
+                      -elsif !cycle.start_at.nil? && cycle.start_at - 30 < Date.today
+                        %i.grcicon-eye-inprogress
+              -else
+                .span12
+                  .item-identifier
+                    %span.title
+                      =instance.title
                     %span.code
                       =instance.slug

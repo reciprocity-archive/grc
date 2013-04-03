@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130320232627) do
+ActiveRecord::Schema.define(:version => 20130401021452) do
 
   create_table "accounts", :force => true do |t|
     t.string   "username"
@@ -136,6 +136,7 @@ ActiveRecord::Schema.define(:version => 20130320232627) do
     t.text     "notes"
     t.date     "end_at"
     t.integer  "program_id"
+    t.date     "report_due_at"
   end
 
   create_table "data_assets", :force => true do |t|

@@ -29,7 +29,10 @@
 .row-fluid
   =wrapped_date_field f, :span4, :start_at, :class => 'date', :label_name => 'Audit Start Date', :placeholder => 'MM/DD/YYYY', :value => f.object.start_at.present? ? f.object.start_at.strftime('%m/%d/%Y') : Time.zone.now.strftime('%m/%d/%Y')
   =wrapped_date_field f, :span4, :end_at, :class => 'date', :label_name => 'Audit End Date', :placeholder => 'MM/DD/YYYY', :value => f.object.end_at.present? ? f.object.end_at.strftime('%m/%d/%Y') : nil
-  .span4
+  =wrapped_date_field f, :span4, :report_due_at, :class => 'date', :label_name => 'Report Due Date', :placeholder => 'MM/DD/YYYY', :value => f.object.report_due_at.present? ? f.object.report_due_at.strftime('%m/%d/%Y') : nil
+.row-fluid
+  .span4 &nbsp;
+  .span8
     =f.label :complete
     =f.check_box :complete, :class => :check_box
     %span.description Was this audit cycle completed?
