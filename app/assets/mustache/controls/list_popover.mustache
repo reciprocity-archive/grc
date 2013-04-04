@@ -1,3 +1,18 @@
+{{#unless push}}
+  <div class="rtf">
+  {{#if na}}
+    <p class="no-data">
+      Controls are not applicable to this section
+    </p>
+  {{/if}}
+  {{#unless na}}
+    <p class="no-data">
+      No controls linked to this section
+    </p>
+  {{/unless}}
+  </div>
+{{/unless}}
+{{#if push}}
 <ul class='tree-structure simple'>
   {{#this}}
   <li class='control'>
@@ -6,7 +21,10 @@
         <div class='row-fluid'>
           <div class='span12'>
             <div class='oneline'>
-              <a href='/controls/{{id}}'>{{slug}}</a>
+              <a href='/controls/{{id}}'>
+                <span class="title">{{title}}</span>
+                <span class="text-compliance">{{slug}}</span>
+              </a>
             </div>
           </div>
         </div>
@@ -15,3 +33,4 @@
   </li>
   {{/this}}
 </ul>
+{{/if}}

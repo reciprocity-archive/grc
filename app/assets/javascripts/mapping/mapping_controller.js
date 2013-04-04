@@ -361,15 +361,16 @@ CMS.Controllers.Mapping("CMS.Controllers.ControlMappingPopup", {
     //   return;
     var $count = $("#content_" + obj.slug).find("> .item-main .controls-count")
       , html;
-    if (obj.na) {
-      html = "<i class='grcicon-control-color'></i><small class='warning'>N/A</small>";
-    } else if (obj.linked_controls.length == 0) {
-      html = "<i class='grcicon-control-danger'></i> <span class='error'>0</span>";
-    } else {
+    if (obj.linked_controls.length > 0) {
       html = "<i class='grcicon-control-color'></i> " + obj.linked_controls.length;
+    } else if (obj.na) {
+      html = "<i class='grcicon-control-color'></i> <small class='warning'>N/A</small>";
+    } else {
+      html = "<i class='grcicon-control-danger'></i> <strong class='error'>0</strong>";
     }
     $count.html(html);
-    var render_str = can.view.render("/assets/controls/list_popover.mustache", obj.linked_controls.serialize());
+    var data = obj.linked_controls.length ? obj.linked_controls.serialize() : {na : obj.na};
+    var render_str = can.view.render("/assets/controls/list_popover.mustache", data);
     $count.attr("data-content", render_str).data("content", render_str)
     this.update();
   }
