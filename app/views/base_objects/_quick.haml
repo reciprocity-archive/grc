@@ -35,7 +35,7 @@
                     -instance.cycles.each do |cycle|
                       -if cycle.complete
                         %i.grcicon-eye-completed
-                      -elsif !cycle.report_due_at.nil? && cycle.report_due_at + 3 > Date.today
+                      -elsif !cycle.report_due_at.nil? && cycle.report_due_at - 3 <= Date.today
                         %i.grcicon-eye-danger
                       -elsif !cycle.start_at.nil? && cycle.start_at - 30 < Date.today
                         %i.grcicon-eye-inprogress

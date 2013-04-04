@@ -36,7 +36,7 @@
               -if cycle.complete
                 %i.grcicon-eye-completed
                 %span.status.completed Completed
-              -elsif !cycle.report_due_at.nil? && cycle.report_due_at + 3 >= Date.today
+              -elsif !cycle.report_due_at.nil? && cycle.report_due_at - 3 <= Date.today
                 %i.grcicon-eye-danger
                 %span.status.danger=cycle.report_due_at >= Date.today ? "Due Soon" : "Overdue"
               -elsif !cycle.start_at.nil? && cycle.start_at - 30 <= Date.today
