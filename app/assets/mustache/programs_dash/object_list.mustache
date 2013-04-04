@@ -1,7 +1,7 @@
 {{! dashboard object listing}}
 <ul class="tree-structure simple single-row-tabs">
 {{#list}}
-  <li>
+  <li data-model="true" {{data 'model'}}>
     {{#pack this tooltip_view=tooltip_view object_type=object_type object_display=object_display object_route=object_route}}
     <a data-popover-trigger="sticky-hover" data-popover-trigger="sticky-hover" data-sticky-popover="true" data-content="{{render tooltip_view}}">
       {{{withattr "href" "/{object_route}/{id}" "data-original-title" "<div class='row-fluid'><div class='span10'><h3><i class='grcicon-{object_type}-color'></i>{slug} <span>{title}</span></h3></div><div class='span2'><a class='btn btn-mini pull-right' href='/{object_route}/{id}' rel='tooltip' data-original-title='View/Edit {object_display}'><i class='grcicon-goto'></i></a></div></div>" }}}

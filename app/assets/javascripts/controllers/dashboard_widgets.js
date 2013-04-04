@@ -1,6 +1,7 @@
-//= requre can.jquery-all
+//= require can.jquery-all
+//= require controllers/filterable_controller
 
-can.Control("CMS.Controllers.DashboardWidgets", {
+CMS.Controllers.Filterable("CMS.Controllers.DashboardWidgets", {
   defaults : {
     model : null
     , list_view : "/assets/programs_dash/object_list.mustache"
@@ -124,6 +125,14 @@ can.Control("CMS.Controllers.DashboardWidgets", {
     var parent = this.element.parent();
     this.element.remove();
     parent.trigger("sortremove");
+  }
+
+  , ".widgetsearch-tocontent keydown" : function(el, ev) {
+    if(ev.which === 13) {
+      this.filter(el.val());
+    }
+    ev.stopPropagation();
+    ev.originalEvent && ev.originalEvent.stopPropagation();
   }
 
 });
