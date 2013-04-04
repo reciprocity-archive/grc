@@ -29,7 +29,12 @@
           -if cycle.end_at
             %br
             Ends on #{cycle.end_at.strftime("%m/%d/%y")}
-      
+          -if cycle.report_due_at
+            %br
+            -if cycle.report_due_at == Time.zone.now.to_date
+              Report due today
+            -else
+              Report due on #{cycle.report_due_at.strftime("%m/%d/%Y")}      
 
 
 
