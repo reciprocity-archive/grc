@@ -142,11 +142,11 @@ jQuery(function($) {
     var $tabs = $(this).closest('.tabbable');
     if($tabs.length) {
       $tabs.find('.tab-pane.active .openclose').openclose("open");
-      $tabs.find('.tab-pane.active .tree-structure .oneline').oneline("view");
+      //$tabs.find('.tab-pane.active .tree-structure .oneline').oneline("view");
     } else {
       var $section = $(this).closest("section");
       $section.find('.openclose').openclose("open");
-      $section.find('.tree-structure .oneline').oneline("view");
+      //$section.find('.tree-structure .oneline').oneline("view");
     }
     e.preventDefault();
   });
@@ -154,11 +154,11 @@ jQuery(function($) {
     var $tabs = $(this).closest('.tabbable');
     if($tabs.length) {
       $tabs.find('.tab-pane.active .openclose.active').openclose('close');
-      $tabs.find('.tab-pane.active .tree-structure .oneline').oneline("hide");
+      //$tabs.find('.tab-pane.active .tree-structure .oneline').oneline("hide");
     } else {
       var $section = $(this).closest("section");
       $section.find('.openclose.active').openclose("close");
-      $section.find('.tree-structure .oneline').oneline("hide");
+      //$section.find('.tree-structure .oneline').oneline("hide");
     }
     e.preventDefault();
   });
