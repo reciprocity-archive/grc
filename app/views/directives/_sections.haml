@@ -28,6 +28,10 @@
                                 %a{ :href => flow_control_path(control) }
                                   %span.title=control.title
                                   %span.text-compliance=control.slug
+              -elsif item.na?
+                .rtf
+                  %p.no-data
+                    Controls are not applicable to this section
               -else
                 .rtf
                   %p.no-data

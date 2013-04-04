@@ -15,9 +15,9 @@ can.Model.LocalStorage("CMS.Models.DisplayPrefs", {
     var args = can.makeArray(arguments);
     can.each(args, function(arg) {
       var tval = can.getObject(arg, retval);
-      if(!tval) {
-        tval = new can.Observe();
-        retval.attr(tval);
+      if(!tval || !(tval instanceof can.Observe)) {
+        tval = new can.Observe(tval);
+        retval.attr(arg, tval);
       }
       retval = tval;
     });
