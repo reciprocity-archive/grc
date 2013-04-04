@@ -44,7 +44,7 @@ can.Control("CMS.Controllers.SectionNotes", {
     if(!this.options.model_instance) {
       this.options.model_instance = new this.options.model_class({id : this.options.section_id});
     }
-    this.options.model_instance.attr("notes", this.element.find(".wysihtml5").data().wysihtml5.editor.composer.getValue());
+    this.options.model_instance.attr("notes", this.element.find(".wysihtml5").data().wysihtml5.editor.currentView.getValue());
     this.options.model_instance.save().done(this.proxy("draw_notes")); 
   }
 
