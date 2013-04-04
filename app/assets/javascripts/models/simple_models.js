@@ -61,7 +61,23 @@ can.Model.Cacheable("CMS.Models.RiskyAttribute", {
 
 can.Model.Cacheable("CMS.Models.Risk", {
   root_object : "risk"
-  , findAll : "/risks.json"
+  , findAll : function(params) {
+    var root_object =  this.root_object;
+    return $.ajax({
+      url : "/risks.json"
+      , type : "get"
+      , data : params
+      , dataType : "json" 
+    }).then(function(risks) {
+      can.each(risks, function(r) {
+        if(r[root_object].hasOwnProperty("trigger")) {
+          r[root_object].risk_trigger = r[root_object].trigger;
+          delete r[root_object].trigger;
+        }
+      });
+      return risks;
+    });
+  }
 }, {});
 
 })(this.can);
