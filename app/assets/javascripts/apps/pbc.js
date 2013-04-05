@@ -129,7 +129,7 @@ $.widget(
       , response : function(event, data, ui) {
         if(!data.content.length) {
           data.content.push(
-            {label : "Create document " + event.target.value + "..."
+            {label : "+ Document " + event.target.value + "..."
             , link_url : event.target.value
             , id : null });
         }
