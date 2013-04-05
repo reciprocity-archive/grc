@@ -2,7 +2,7 @@
   -if @help && !@help.content.blank?
     -content_for :modal_title do
       -if CMS_CONFIG["ALLOW_HELP_EDIT"]
-        %a.btn.btn-mini.pull-right{:'data-toggle' => 'collapse', :href => '#helpedit', :title => "Edit Help", :rel => "tooltip", :'data-placement' => "left"}
+        %a.btn.btn-mini.pull-right.help-edit{:'data-toggle' => 'collapse', :href => '#helpedit', :title => "Edit Help", :rel => "tooltip", :'data-placement' => "left"}
           %i.grcicon-edit
       -if @help.title.present?
         =@help.title
@@ -14,7 +14,7 @@
   -else
     -content_for :modal_title do
       -if CMS_CONFIG["ALLOW_HELP_EDIT"]
-        %a.btn.btn-mini.pull-right{:'data-toggle' => 'collapse', :href => '#helpedit', :title => "Edit Help", :rel => "tooltip", :'data-placement' => "left"}
+        %a.btn.btn-mini.pull-right.help-edit{:'data-toggle' => 'collapse', :href => '#helpedit', :title => "Edit Help", :rel => "tooltip", :'data-placement' => "left"}
           %i.grcicon-edit
       GRC Help
     .help-content.rtf
