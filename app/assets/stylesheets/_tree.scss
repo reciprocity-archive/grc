@@ -78,138 +78,6 @@ ul.tree-structure {
       text-decoration: none;
       display: block;
     }
-    &:hover {
-      background: $treeListBgnd;
-      .objects-count {
-        a {
-          @include opacity(1);
-        }
-      }
-      .item-actions {
-        @include opacity(1);
-      }
-
-      .item-content {
-        ul.tree-structure {
-          background: $white;
-          li {
-            &:last-child {
-              border-bottom: none;
-            }
-            .objects-count {
-              a {
-                @include opacity(0.3);
-              }
-            }
-            &:hover {
-              .objects-count {
-                a {
-                  @include opacity(1);
-                }
-              }
-            }
-            .item-actions {
-              @include opacity(0.3);
-            }
-            &:hover {
-              .item-actions {
-                @include opacity(1);
-              }
-            }
-            .item-content {
-              ul.tree-structure {
-                background: $white;
-                li {
-                  &:last-child {
-                    border-bottom: none;
-                  }
-                  .objects-count {
-                    a {
-                      @include opacity(0.3);
-                    }
-                  }
-                  &:hover {
-                    .objects-count {
-                      a {
-                        @include opacity(1);
-                      }
-                    }
-                  }
-                  .item-actions {
-                    @include opacity(0.3);
-                  }
-                  &:hover {
-                    .item-actions {
-                      @include opacity(1);
-                    }
-                  }
-                  .item-content {
-                    ul.tree-structure {
-                      background: $white;
-                      li {
-                        &:last-child {
-                          border-bottom: none;
-                        }
-                        .objects-count {
-                          a {
-                            @include opacity(0.3);
-                          }
-                        }
-                        &:hover {
-                          .objects-count {
-                            a {
-                              @include opacity(1);
-                            }
-                          }
-                        }
-                        .item-actions {
-                          @include opacity(0.3);
-                        }
-                        &:hover {
-                          .item-actions {
-                            @include opacity(1);
-                          }
-                        }
-                        .item-content {
-                          ul.tree-structure {
-                            background: $white;
-                            li {
-                              &:last-child {
-                                border-bottom: none;
-                              }
-                              .objects-count {
-                                a {
-                                  @include opacity(0.3);
-                                }
-                              }
-                              &:hover {
-                                .objects-count {
-                                  a {
-                                    @include opacity(1);
-                                  }
-                                }
-                              }
-                              .item-actions {
-                                @include opacity(0.3);
-                              }
-                              &:hover {
-                                .item-actions {
-                                  @include opacity(1);
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
     &:last-child {
       border-bottom:none;
     }
@@ -474,6 +342,7 @@ ul.tree-structure {
     margin-left:24px;
     position:relative;
     &:hover {
+      .objects-count a,
       .item-actions,
       .openclose {
         @include opacity(1);
