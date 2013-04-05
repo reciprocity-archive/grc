@@ -78,6 +78,9 @@ ul.tree-structure {
       text-decoration: none;
       display: block;
     }
+    &:hover {
+      background:#f8f8f8;
+    }
     &:last-child {
       border-bottom:none;
     }
