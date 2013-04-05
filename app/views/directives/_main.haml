@@ -24,15 +24,6 @@
               %i.grcicon-add
               Control
 
--#.action-items
-  %a.expandAll.btn.btn-mini{:href => "#", :rel => "tooltip", :title => "Expand all"}
-    %i.grcicon-wide-black
-  %a.shrinkAll.btn.btn-mini{:href => "#", :rel => "tooltip", :title => "Collapse all"}
-    %i.grcicon-normal-black
-
--#%ul.tree-structure#regulations
-  =render :partial => 'sections', :locals => { :sections => sections, :expanded => true, :editable_notes => true }
-
 .tabbable
   %ul.nav.nav-tabs
     -unless directive.company_controls?
