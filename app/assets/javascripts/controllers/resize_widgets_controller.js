@@ -84,7 +84,8 @@ can.Control("CMS.Controllers.ResizeWidgets", {
     , $children = $c.children().not(".width-selector-bar, .width-selector-drag")
     , widths = this.getWidthsForSelector($c)
     , widths
-    , total_width = 0;
+    , total_width = 0
+    , that = this;
 
 
     widths = this.getWidthsForSelector($(this.element)) || [];
@@ -123,6 +124,11 @@ can.Control("CMS.Controllers.ResizeWidgets", {
 
     $children.each(function(i, child) {
       $(child).addClass("span" + widths[i]);
+
+      can.each(
+        $(child).find(that.options.resizable_selector)
+        , that.proxy("check_horizontal_tab_sheet")
+      );
     });
   }
 
@@ -335,6 +341,7 @@ can.Control("CMS.Controllers.ResizeWidgets", {
     this.showGhostResizer(this.element, ev);
     this.element.find(this.options.resizable_selector).filter(":has(.content:visible)").each(function(i, el) {
       that.ensure_minimum(el);
+      that.check_horizontal_tab_sheet(section);
     });
   }
 
@@ -401,6 +408,7 @@ can.Control("CMS.Controllers.ResizeWidgets", {
       }
       t.find(this.options.resizable_selector).each(function(i, section) {
         that.ensure_minimum(section);
+        that.check_horizontal_tab_sheet(section);
       });
     }
 
@@ -505,6 +513,40 @@ can.Control("CMS.Controllers.ResizeWidgets", {
 
     $el.find(".content:first").css("height", Math.max(min_content_ht, content_ht) - this.options.magic_content_height_offset);
   }
+
+  , check_horizontal_tab_sheet : function(el) {
+    var $el = $(el);
+    $el = $el.is(".nav-tabs:not(.tabs-left > *)") ? $el.first() : $el.find(".nav-tabs:not(.tabs-left > *):first");
+
+    if(!$el.length)
+      return;
+
+    $el.find("a:data(text)").each(function(i, tablink) {
+      var $tab = $(tablink);
+      $tab.append($tab.data("text")).tooltip("disable").removeData("text");
+    });
+
+    var fullwidth = can.reduce($el.children(), function(total, t) {
+      return total + $(t).width();
+    }, 0);
+
+    if(fullwidth > $el.parent().width()) {
+      //this is where we need to shrink
+      $el.find("a:not(:data(text))").each(function(i, tablink) {
+        var $tab = $(tablink)
+        , oldtmpl = $tab.attr("data-template");
+        $tab
+        .data("text", $tab.text())
+        .attr("data-original-title", $tab.text())
+        .removeAttr("data-template")
+        .tooltip({delay : {show : 500, hide : 0}})
+        .tooltip("enable")
+        .html($tab.children())
+        .attr("data-template", oldtmpl);
+      });
+    }
+  }
+
 
   , "section[id] > header dblclick" : function(el, ev) {
     if(!$(ev.target).closest(".widget-showhide").length) {

@@ -481,5 +481,8 @@ jQuery(function($){
     .find(".modal-header [data-dismiss='modal']").css("opacity", 1);
   });
 
+can.reduce ||
+  (can.reduce = function(a, f, i) { return [].reduce.apply(a, arguments.length < 3 ? [f] : [f, i]) });
+
 });
 
