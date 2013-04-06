@@ -50,7 +50,6 @@ class Option < ActiveRecord::Base
     # "system_type",
     "system_kind",
     "threat_type",
-    "verify_frequency",
     "verify_frequency"
   ]
 end
