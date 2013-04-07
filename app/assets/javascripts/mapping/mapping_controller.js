@@ -394,9 +394,10 @@ CMS.Controllers.Mapping("CMS.Controllers.ControlMappingPopup", {
       check[this.options.parent_model.root_object + "_id"] = this.options.parent_id;
     }
     var search = this.element.find(".widgetsearch-tocontent").val();
-    var dfds = [this.options.company_list_controller.filter(search, check)];
-    dfd && dfds.push(dfd);
-    return $.when.apply($, dfds).done(function(d) {
+    
+    return this.options.company_list_controller
+    .filter(search, check, dfd)
+    .done(function(d) {
       that.element.find(".search-results-count").html(d.length);
       that.update_map_all();
     });
