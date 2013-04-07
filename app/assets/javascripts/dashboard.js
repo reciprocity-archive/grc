@@ -567,7 +567,7 @@ jQuery(function($) {
       , $expander = $title.find('.expander').eq(0)
       ;
 
-    $span.text("("+data.length+")");
+    $span.text("("+(data.length || 0)+")");
 
     if (data.length > 0)
       $span.removeClass('no-object');
