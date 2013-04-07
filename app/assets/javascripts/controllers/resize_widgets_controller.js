@@ -341,7 +341,7 @@ can.Control("CMS.Controllers.ResizeWidgets", {
     this.showGhostResizer(this.element, ev);
     this.element.find(this.options.resizable_selector).filter(":has(.content:visible)").each(function(i, el) {
       that.ensure_minimum(el);
-      that.check_horizontal_tab_sheet(section);
+      that.check_horizontal_tab_sheet(el);
     });
   }
 
