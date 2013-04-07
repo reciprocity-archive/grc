@@ -458,7 +458,7 @@ jQuery(function($){
         $that.html(this.getValue()).trigger("change");
       });
 
-      $that.closest(".wysiwyg-area").resizable({
+      var $wysiarea = $that.closest(".wysiwyg-area").resizable({
         handles : "s"
         , minHeight : 100
         , alsoResize : "#" + $that.uniqueId().attr("id") + ", #" + $that.closest(".wysiwyg-area").uniqueId().attr("id") + " iframe"
@@ -469,6 +469,15 @@ jQuery(function($){
         editor.composer.style();// re-copy new size of textarea to composer
         $that.css("display", "none");
       });
+      var $sandbox = $wysiarea.find(".wysihtml5-sandbox");
+
+      $($sandbox.prop("contentWindow"))
+      .bind("mouseover mousemove", function(ev) {
+        var e = new $.Event("mousemove"); //jQUI resize listens on this.
+        e.pageX = $sandbox.offset().left + ev.pageX;
+        e.pageY = $sandbox.offset().top + ev.pageY;
+        $sandbox.trigger(e); 
+      })
 
       $that.data("cms_events_bound", true);
     })
