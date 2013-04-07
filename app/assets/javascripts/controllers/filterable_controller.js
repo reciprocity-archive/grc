@@ -9,16 +9,16 @@ can.Control("CMS.Controllers.Filterable", {
   }
   //static
 }, {
-  filter : function(str, extra_params) {
+  filter : function(str, extra_params, dfd) {
     var that = this;
-    var dfd = new $.Deferred();
-    this.options.model.findAll($.extend({ id : this.options.id, s : str}, extra_params)).then(function(data) {
+    var search_dfds = [this.options.model.findAll($.extend({ id : this.options.id, s : str}, extra_params))];
+    dfd && search_dfds.push(dfd);
+    return $.when.apply($, search_dfds).then(function(data) {
       var ids = can.map(data, function(v) { return v.id });
       that.last_filter_ids = ids;
       that.redo_last_filter();
-      dfd.resolve(ids);
+      return ids;
     });
-    return dfd;
   }
 
   , redo_last_filter : function(id_to_add) {
