@@ -389,7 +389,7 @@ CMS.Controllers.Mapping("CMS.Controllers.ControlMappingPopup", {
 
   , search_filter : function(dfd) {
     var that = this;
-    var check = {};
+    var check = { ids_only: true };
     if(this.element.find(".control-type-filter").prop("checked")) {
       check[this.options.parent_model.root_object + "_id"] = this.options.parent_id;
     }

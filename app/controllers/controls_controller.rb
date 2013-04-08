@@ -55,6 +55,7 @@ class ControlsController < BaseObjectsController
     if params[:program_id].present?
       @controls = @controls.joins(:directive => :program_directives).where(:program_directives => { :program_id => params[:program_id] })
     end
+    @controls = @controls.includes(:control_sections)
     @controls = allowed_objs(@controls.all, :read)
 
     if params[:list_select].present?
@@ -76,7 +77,11 @@ class ControlsController < BaseObjectsController
       category_tree = Control.category_controls_tree(@controls)
       render :partial => 'category_tree', :locals => { :category_tree => category_tree }
     else
-      render :json => @controls, :methods => [:description_inline, :mapped_section_ids]
+      if params[:ids_only].present?
+        render :json => @controls, :only => [:id]
+      else
+        render :json => @controls, :methods => [:description_inline, :mapped_section_ids]
+      end
     end
   end
 
