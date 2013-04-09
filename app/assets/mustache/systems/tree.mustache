@@ -18,14 +18,19 @@
           <span class="description-inline">
             
             <i class="description-inline">
-              {{{description}}}
+              {{{firstnonempty description ''}}}
             </i>
           </span>
         </div>
-        <div class="description">
+        <div class="description{{^description}} inhover no-description{{/description}}">
+          <!-- no notes
+          {{#notes}}
           <div class="note">
+            {{{notes}}}
           </div>
-          <div class="rtf">{{{description}}}</div>
+          {{/notes}}
+          -->
+          <div class="rtf">{{{firstnonempty description '<i>No description.</i>'}}}</div>
         </div>
       </div>
       <div class="span1">
@@ -35,15 +40,22 @@
       </div>
       </div>
       <div class="item-actions">
+        {{#single_object}}
         <a class="btn btn-mini edit-object" data-modal-class="modal-wide" data-placement="left" data-toggle="modal-ajax-form" href="/systems/{{id}}/edit" rel="tooltip" title="Edit this object">
           <i class="grcicon-edit"></i>
         </a>
+        {{/single_object}}
         <a class="btn btn-mini link-object" data-child-type="system" data-child-property="child_id" data-modal-class="modal-wide" data-modal-reset="reset" data-toggle="modal-ajax-relationship-selector" href="/system_systems/list_edit?parent_id={{id}}" rel="tooltip" title="Link systems to this {{system_or_process}}">
           <i class="grcicon-link"></i>
         </a>
         <a class="btn btn-mini link-object" data-child-type="control" data-child-property="control_id" data-modal-class="modal-wide" data-modal-reset="reset" data-toggle="modal-ajax-relationship-selector" href="/system_controls/list_edit?system_id={{id}}" rel="tooltip" title="Link controls to this {{system_or_process}}">
           <i class="grcicon-link"></i>
         </a>
+        {{^single_object}}
+          <a class="btn btn-mini" rel="tooltip" data-placement="left" title="Go to this object's page" href="/systems/{{id}}">
+            <i class="grcicon-goto"></i>
+          </a>
+        {{/single_object}}
       </div>
     </div>
   </div>
