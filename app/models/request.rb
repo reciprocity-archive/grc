@@ -17,7 +17,7 @@ class Request < ActiveRecord::Base
     "Accepted"
   ]
 
-  attr_accessible :pbc_list, :type_id, :control_assessment, :pbc_control_code, :pbc_control_desc, :request, :test, :notes, :company_responsible, :auditor_responsible, :date_requested, :status
+  attr_accessible :pbc_list, :type_id, :control_assessment, :pbc_control_code, :pbc_control_desc, :request, :test, :notes, :company_responsible, :auditor_responsible, :date_requested, :response_due_at, :status
 
   belongs_to :pbc_list
   belongs_to :control_assessment

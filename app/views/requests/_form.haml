@@ -13,8 +13,15 @@
 =f.hidden_field :type_id
 
 .row-fluid
-  =wrapped_text_field f, :span2, :pbc_control_code, :placeholder => 'Control Code', :label_name => 'Control Code from PBC'
-  .span2.pbc-control-select
+  =wrapped_text_field f, :span3, :pbc_control_code, :placeholder => 'Control Code', :label_name => 'Control Code from PBC'
+  .span3
+
+  =wrapped_date_field f, :span2, :date_requested, :class => 'date', :placeholder => 'MM/DD/YYYY', :label_name => 'Date Requested', :value => f.object.date_requested.present? ? f.object.date_requested.strftime('%m/%d/%Y') : Time.zone.now.strftime('%m/%d/%Y')
+  =wrapped_date_field f, :span2, :response_due_at, :class => 'date', :placeholder => 'MM/DD/YYYY', :label_name => 'Response Due Date', :value => f.object.response_due_at.present? ? f.object.response_due_at.strftime('%m/%d/%Y') : ""
+  =wrapped_select f, :span2, :status, Request.statuses, :selected => (f.object.status), :label_name => 'Status of Request'
+
+.row-fluid
+  .span3.pbc-control-select
     %label gGRC Control Code
     
     %a.btn.btn-mini.pull-right{:href => flow_controls_path(:list_select => 1), :'data-toggle' => 'modal-ajax-single-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#referenceList', :'data-modal-class' => 'modal-wide' }
@@ -24,11 +31,9 @@
     =hidden_field_tag "request[control_id]", control && control.id
     %span.item.i-control.has-link.oneline
       =control && control.slug || "".html_safe
-    
-  =wrapped_text_field f, :span2, :company_responsible, :placeholder => 'Internal assignee', :label_name => 'Internal Assignee'
-  =wrapped_text_field f, :span2, :auditor_responsible, :placeholder => 'Auditor contact email', :label_name => 'Auditor Contact'
-  =wrapped_date_field f, :span2, :date_requested, :class => 'date', :placeholder => 'MM/DD/YYYY', :label_name => 'Date Requested', :value => f.object.date_requested.present? ? f.object.date_requested.strftime('%m/%d/%Y') : Time.zone.now.strftime('%m/%d/%Y')
-  =wrapped_select f, :span2, :status, Request.statuses, :selected => (f.object.status), :label_name => 'Status of Request'
+  .span3
+  =wrapped_text_field f, :span3, :company_responsible, :placeholder => 'Internal assignee', :label_name => 'Internal Assignee'
+  =wrapped_text_field f, :span3, :auditor_responsible, :placeholder => 'Auditor contact email', :label_name => 'Auditor Contact'
 
 .row-fluid
   =wrapped_text_area f, :span6, :pbc_control_desc, :class => 'double wysihtml5', :placeholder => 'Enter description here', :wrapper_div_class => 'wysiwyg-area', :label_name => 'Control Description from PBC List'
