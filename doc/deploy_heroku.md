@@ -39,9 +39,15 @@ To change it, or just to make sure, you can set the `RACK_ENV` and `RAILS_ENV` e
         RAILS_ENV=<environment> \
         RACK_ENV=<environment>
 
-#### Migrate database
+#### Prepare database
 
-Migrate any pending database changes, if necessary:
+If this is a new deployment:
+
+    heroku run rake db:reset --app <heroku-appname>
+
+(If this is a new deployment with demo data, use `demo:reset`.)
+
+If this is an existing deployment, migrate any pending database changes:
 
     heroku run rake db:migrate --app <heroku-appname>
 
