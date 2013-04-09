@@ -14,6 +14,8 @@
 -description_inline = sanitize(description, :tags => []) if local_assigns[:description_inline].nil?
 -notes = instance.send(notes_attr) if local_assigns[:notes].nil? && instance[notes_attr].present?
 
+-description = description.present? ? description.gsub(/^(?:&nbsp;|<br\/?>|\s)+|(?:&nbsp;|<br\/?>|\s)+$/, '') : nil
+
 -extra_description = nil if local_assigns[:extra_description].nil?
 -span_class = 'span8' if local_assigns[:span_class].nil?
 
@@ -79,13 +81,14 @@
 
   -elsif (description.present? || notes.present?)
     -# Description only
-    .oneline.description-only.expand-on-hover
+    .oneline.expand-on-hover
       -if object_type.present?
         %i{ :class => "#{object_icon}-color" }
       -elsif object_icon.present?
         %i{ :class => object_icon }
-      %span.title
-        =extra_description
+      -if extra_description.present?
+        %span.title
+          =extra_description
       %span.code
         =code
       %span.description-inline
@@ -94,24 +97,22 @@
         -if notes.present?
           %i.grcicon-comment
     .description.inhover
-      =display_as_html(description) do
-        %span.code
-          =code
-        -if include_notes
-          -if instance.has_attribute? notes_attr
-            .note
-              -if notes.present?
-                .note-content
-                  -if editable_notes
-                    %a.edit-notes{:href => 'javascript://'}
-                      %i.grcicon-edit
-                  %strong Abstract
-                  .rtf
-                    =display_as_html(notes)
-              -else
+      =display_as_html(description)
+      -if include_notes
+        -if instance.has_attribute? notes_attr
+          .note
+            -if notes.present?
+              .note-content
                 -if editable_notes
-                  %a.note-trigger{:href => 'javascript://'}
-                    + Add Abstract
+                  %a.edit-notes{:href => 'javascript://'}
+                    %i.grcicon-edit
+                %strong Abstract
+                .rtf
+                  =display_as_html(notes)
+            -else
+              -if editable_notes
+                %a.note-trigger{:href => 'javascript://'}
+                  + Add Abstract
 
   -else
     -# Neither (shouldn't happen)
