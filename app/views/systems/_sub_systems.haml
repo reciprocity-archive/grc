@@ -18,12 +18,12 @@
     .row-fluid
       .span12
         .pull-right
-          %a.btn.btn-add{ :href => list_edit_flow_system_systems_path(:parent_id => system.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :title => 'Edit Sub-Systems', :'data-modal-class' => 'modal-wide' }
+          %a.btn.btn-add.link-objects{ :href => list_edit_flow_system_systems_path(:parent_id => system.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :title => 'Edit Sub-Systems', :'data-modal-class' => 'modal-wide', :'data-child-type' => 'system', :'data-child-property' => 'child_id' }
             %i.grcicon-link-white
             Sub-Systems/Sub-Processes
-          %a.btn.btn-add{ :href => list_edit_flow_system_controls_path(:system_id => system.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :title => 'Edit Controls', :'data-modal-class' => 'modal-wide' }
+          %a.btn.btn-add.link-objects{ :href => list_edit_flow_system_controls_path(:system_id => system.id), :'data-toggle' => 'modal-ajax-relationship-selector', :'data-modal-reset' => 'reset', :title => 'Edit Controls', :'data-modal-class' => 'modal-wide', :'data-child-type' => 'control', :'data-child-property' => 'control_id'}
             %i.grcicon-link-white
             Controls
 
 %ul.tree-structure
-  =render :partial => 'system_tree', :locals => { :system => system, :is_root => true, :is_editable => true }
+  -#=render :partial => 'system_tree', :locals => { :system => system, :is_root => true, :is_editable => true }

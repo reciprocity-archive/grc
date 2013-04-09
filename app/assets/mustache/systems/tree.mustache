@@ -1,0 +1,58 @@
+{{#list}}
+  <li class="{{system_or_process}}" data-object-id="{{id}}" data-id="{{id}}" data-object-type="{{system_or_process}}" data-model="true" {{data 'model'}}>
+  <div class="item-main">
+    {{#draw_children}}
+        <div class="openclose {{#if start_expanded}}active{{/if}}"></div>
+    {{/draw_children}}
+    <div class="item-title">
+      <div class="row-fluid">
+        <div class="span8">
+        <div class="oneline expand-on-hover">
+          <i class="grcicon-system-color"></i>
+          <span class="title">
+            {{title}}
+          </span>
+          <span class="code">
+            {{slug}}
+          </span>
+          <span class="description-inline">
+            
+            <i class="description-inline">
+              {{{description}}}
+            </i>
+          </span>
+        </div>
+        <div class="description">
+          <div class="note">
+          </div>
+          <div class="rtf">{{{description}}}</div>
+        </div>
+      </div>
+      <div class="span1">
+        <a class="view-more" href="javascript://">
+          view
+        </a>
+      </div>
+      </div>
+      <div class="item-actions">
+        <a class="btn btn-mini edit-object" data-modal-class="modal-wide" data-placement="left" data-toggle="modal-ajax-form" href="/systems/{{id}}/edit" rel="tooltip" title="Edit this object">
+          <i class="grcicon-edit"></i>
+        </a>
+        <a class="btn btn-mini link-object" data-child-type="system" data-child-property="child_id" data-modal-class="modal-wide" data-modal-reset="reset" data-toggle="modal-ajax-relationship-selector" href="/system_systems/list_edit?parent_id={{id}}" rel="tooltip" title="Link systems to this {{system_or_process}}">
+          <i class="grcicon-link"></i>
+        </a>
+        <a class="btn btn-mini link-object" data-child-type="control" data-child-property="control_id" data-modal-class="modal-wide" data-modal-reset="reset" data-toggle="modal-ajax-relationship-selector" href="/system_controls/list_edit?system_id={{id}}" rel="tooltip" title="Link controls to this {{system_or_process}}">
+          <i class="grcicon-link"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+  {{#draw_children}}
+  <div class="item-content" {{#start_expanded}}style="display: block;"{{/start_expanded}}>
+    {{#child_options}}
+    <ul class="tree-structure" {{data 'options'}} {{ (el) -> el.cms_controllers_tree_view(el.data("options").serialize()) }}></ul>
+    {{/child_options}}
+  </div>
+  {{/draw_children}}
+</li>
+{{/list}}

@@ -48,6 +48,10 @@ class SystemsController < BaseObjectsController
       @systems = @systems.db_search(params[:s])
     end
 
+    if params[:parent_id].present?
+      @systems = @systems.joins(:super_system_systems).where(:system_systems => { :parent_id => params[:parent_id] })
+    end
+
     @systems = @systems.all
 
     if params[:as_subsystems_for].present?

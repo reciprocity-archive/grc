@@ -55,6 +55,9 @@ class ControlsController < BaseObjectsController
     if params[:program_id].present?
       @controls = @controls.joins(:directive => :program_directives).where(:program_directives => { :program_id => params[:program_id] })
     end
+    if params[:system_id].present?
+      @controls = @controls.joins(:system_controls).where(:system_controls => { :system_id => params[:system_id] })      
+    end
     @controls = @controls.includes(:control_sections)
     @controls = allowed_objs(@controls.all, :read)
 

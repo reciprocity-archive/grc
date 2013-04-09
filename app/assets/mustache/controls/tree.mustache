@@ -1,12 +1,43 @@
-<ul class="slugtree items">
-  {{#this}}
-    <li {{data 'model'}} data-model="true" class="main">
-      <div class="row-fluid" content_id="{{content_id}}">
-      	{{> /assets/controls/show.mustache}}
+{{#list}}
+  <li class="control" data-object-id="{{id}}" data-object-type="control">
+    <div class="item-main">
+      <div class="openclose lastchild"></div>
+      <div class="item-title">
+        <div class="row-fluid">
+          <div class="span8">
+            <div class="oneline expand-on-hover">
+              <i class="grcicon-control-color"></i>
+              <span class="title">
+                {{title}}
+              </span>
+              <span class="code">
+                {{slug}}
+              </span>
+              <span class="description-inline">
+                
+                <i class="description-inline">
+                  {{{description}}}
+                </i>
+              </span>
+            </div>
+            <div class="description">
+              <div class="note">
+              </div>
+              <div class="rtf">{{{description}}}</div>
+            </div>
+          </div>
+          <div class="span1">
+            <a class="view-more" href="javascript://">
+              view
+            </a>
+          </div>
+        </div>
+        <div class="item-actions">
+          <a class="btn btn-mini" data-placement="left" href="/controls/{{id}}" rel="tooltip" title="Go to this object's page">
+            <i class="grcicon-goto"></i>
+          </a>
+        </div>
       </div>
-      {{#children}}
-        {{> /assets/controls/tree.mustache}}
-      {{/children}}
-    </li>
-  {{/this}}
-</ul>
+    </div>
+  </li>
+{{/list}}

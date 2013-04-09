@@ -58,6 +58,7 @@ can.Model("can.Model.Cacheable", {
       }
     });
   }
+  , tree_view_options : {}
 }, {
   init : function() {
     var obj_name = this.constructor.root_object;

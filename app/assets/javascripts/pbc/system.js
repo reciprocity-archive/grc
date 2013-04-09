@@ -77,8 +77,20 @@ can.Model.Cacheable("CMS.Models.System", {
                 sys.removeElementFromChildList("documents", obj_doc.document);
             }
         });
+        this.tree_view_options.child_options[1].model = CMS.Models.System;
     }
-
+    , tree_view_options : {
+      list_view : "/assets/systems/tree.mustache"
+      , child_options : [{
+        model : CMS.Models.Control
+        , list_view : "/assets/controls/tree.mustache"
+        , parent_find_param : "system_id"
+      },{
+        model : null ///filled in after init.
+        , list_view : "/assets/systems/tree.mustache"
+        , parent_find_param : "parent_id"
+      }]
+    }
 }, {
 
     init : function() {
@@ -118,11 +130,11 @@ can.Model.Cacheable("CMS.Models.System", {
 CMS.Models.System("CMS.Models.StrictSystem", {
   findAll : "GET /systems.json?is_biz_process=false"
   , cache : can.getObject("cache", CMS.Models.System, true)
-  , init : function() {} //don't rebind the ObjectDocument/ObjectPerson events.
+  , init : function() { } //don't rebind the ObjectDocument/ObjectPerson events.
 }, {});
 
 CMS.Models.System("CMS.Models.Process", {
   findAll : "GET /systems.json?is_biz_process=true"
   , cache : can.getObject("cache", CMS.Models.System, true)
-  , init : function() {} //don't rebind the ObjectDocument/ObjectPerson events.
+  , init : function() { } //don't rebind the ObjectDocument/ObjectPerson events.
 }, {})
