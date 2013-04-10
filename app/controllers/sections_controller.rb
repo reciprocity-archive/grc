@@ -25,6 +25,32 @@ class SectionsController < BaseObjectsController
 
   layout 'dashboard'
 
+  def index
+    @sections = Section
+    if params[:s].present?
+      @sections = @sections.fulltext_search(params[:s])
+    end
+    if params[:directive_id].present?
+      @sections = @sections.where(:directive_id => params[:directive_id])
+    end
+    if params[:program_id].present?
+      @sections = @sections.joins(:directive => :program_directives).where(:program_directives => { :program_id => params[:program_id] })
+    end
+
+    @sections = allowed_objs(@sections.all, :read)
+    @sections.sort_by(&:slug_split_for_sort)
+
+    respond_to do |format|
+      format.json do
+        if params[:ids_only].present?
+          render :json => @sections, :only => [:id]
+        else
+          render :json => @sections, :methods => [:description_inline]
+        end
+      end
+    end
+  end
+
   private
 
     def extra_delete_relationship_stats

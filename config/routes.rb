@@ -39,7 +39,7 @@ CmsRails::Application.routes.draw do
     end
   end
 
-  resources :sections, :as => 'flow_sections', :only => [:new, :edit, :create, :update, :destroy] do
+  resources :sections, :as => 'flow_sections', :only => [:index, :new, :edit, :create, :update, :destroy] do
     member do
       get 'tooltip'
       get 'delete'
