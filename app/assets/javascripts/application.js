@@ -472,12 +472,12 @@ jQuery(function($){
       var $sandbox = $wysiarea.find(".wysihtml5-sandbox");
 
       $($sandbox.prop("contentWindow"))
-      .bind("mouseover mousemove", function(ev) {
-        var e = new $.Event("mousemove"); //jQUI resize listens on this.
+      .bind("mouseover mousemove mouseup", function(ev) {
+        var e = new $.Event(ev.type === "mouseup" ? "mouseup" : "mousemove"); //jQUI resize listens on this.
         e.pageX = $sandbox.offset().left + ev.pageX;
         e.pageY = $sandbox.offset().top + ev.pageY;
         $sandbox.trigger(e); 
-      })
+      });
 
       $that.data("cms_events_bound", true);
     })
