@@ -24,11 +24,14 @@
 
   window.cms_singularize = function(type) {
     type = type.trim();
-    switch(type) {
+    var _type = type.toLowerCase();
+    switch(_type) {
       case "facilities":
-      type = "facility"; break;
+      type = type[0] + "acility"; break;
       case "people":
-      type = "person"; break;
+      type = type[0] + "erson"; break;
+      case "processes":
+      type = type[0] + "rocess"; break;
       default:
       type = type.replace(/s$/, "");
     }

@@ -30,7 +30,7 @@ CMS.Controllers.Filterable("CMS.Controllers.DashboardWidgets", {
         path_tokens.shift();
 
       if(this.options.parent_type == null) {
-        this.options.parent_type = window.cms_singularize(path_tokens[0]);
+        this.options.parent_type = window.cms_singularize($(document.body).attr("data-page-subtype") || $(document.body).attr("data-page-type") || path_tokens[0]);
       }
 
       if(this.options.parent_id == null) {
@@ -47,7 +47,9 @@ CMS.Controllers.Filterable("CMS.Controllers.DashboardWidgets", {
     .trigger("section_created");
 
     if(this.options.is_related) {
-      this.options.parent_type = this.options.parent_type.split("_").map(can.capitalize).join("");
+      this.options.parent_display = this.options.parent_type.split("_").map(can.capitalize).join(" ");
+      this.options.parent_type = this.options.parent_display.replace(" " , "");
+      this.options.object_display = this.options.object_route.split("_").map(can.capitalize).join(" ");
       this.options.object_type = this.options.object_type.split("_").map(can.capitalize).join("");
     }
     this.fetch_list(params);
