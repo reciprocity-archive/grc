@@ -232,4 +232,15 @@ module ApplicationHelper
     page_types
   end
 
+  def render_import_error(message=nil)
+    render '/error/import_error', :layout => false, :locals => { :message => message }
+  end
+
+  def handle_csv_export(filename)
+    self.response.headers['Content-Type'] = 'text/csv'
+    headers['Content-Disposition'] = "attachment; filename=\"#{filename}\""
+    self.response_body = Enumerator.new do |out|
+      yield out
+    end
+  end
 end

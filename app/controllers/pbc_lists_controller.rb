@@ -109,6 +109,68 @@ class PbcListsController < BaseObjectsController
     end
   end
 
+  def export_responses
+    @pbc_list = PbcList.find(params[:id])
+
+    respond_to do |format|
+      format.html do
+        render :layout => 'export_modal', :locals => { :pbc_list => @pbc_list }
+      end
+      format.csv do
+        filename = "#{@pbc_list.display_name}-responses.csv"
+        handle_csv_export(filename) do |out|
+          headers = [
+            "#",
+            "Request Type",
+            "Control Code",
+            "PBC Control Description",
+            "Description of Request",
+            "Request Status",
+            "Internal Assignee",
+            "Response Due Date",
+            "Notes",
+            "System/Process",
+            "Drive Doclinks"
+          ]
+          out << CSV.generate_line(headers)
+
+          requests = @pbc_list.requests.all
+          by_ca_requests = sorted_requests_with_control_assessments(requests)
+          by_ca_requests.each do |ca_id, ca, requests|
+            control = ca && ca.control
+            requests.each do |request|
+              request.responses.each do |response|
+                system_csv = ""
+                system = response.system
+                if system.present?
+                  system_csv = system.slug
+                  if system.title.present?
+                    system_csv = "[#{system.slug}] #{system.title}"
+                  end
+                end
+
+                data = [
+                  response.id,
+                  request.type_name,
+                  control ? control.slug : request.pbc_control_code,
+                  request.pbc_control_desc_stripped_with_newlines,
+                  request.request_stripped_with_newlines,
+                  request.status,
+                  request.company_responsible,
+                  request.response_due_at.present? ? request.response_due_at.strftime('%m/%d/%Y') : '',
+                  request.notes,
+                  system_csv,
+                  response.csv_doclinks
+                ]
+                out << CSV.generate_line(data)
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+
   def new_object_path
   end
 

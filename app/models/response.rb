@@ -84,4 +84,39 @@ class Response < ActiveRecord::Base
     end
     as_json(o)
   end
+
+  def csv_doclink(document)
+    "#{document.title}\n#{document.link_url}"
+  end
+
+  def csv_doclinks
+    index = 0
+
+    case request.type_name
+    when 'Population Sample'
+      [ "Population Worksheet:",
+        csv_doclink(population_sample.population_document),
+        "",
+        "Sample Worksheet:",
+        csv_doclink(population_sample.sample_worksheet_document),
+        "",
+        "Sample Evidence:",
+        csv_doclink(population_sample.sample_evidence_document)
+      ].join("\n")
+    when 'Documentation'
+      documents.map do |document|
+        index += 1
+        "Document ##{index}:\n#{csv_doclink(document)}"
+      end.join("\n\n")
+    when 'Interview'
+      participants = people.all
+      [ meetings.map do |meeting|
+          index += 1
+          "Meeting ##{index}:\n#{meeting.calendar_url}"
+        end.join("\n\n"),
+        "",
+       "Participants:\n#{participants.map(&:for_email).join(", ")}"
+      ].join("\n")
+    end
+  end
 end

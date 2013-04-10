@@ -38,6 +38,16 @@ module SanitizableAttributes
         define_method "#{attr_name}_inline" do
           ActionController::Base.helpers.sanitize(self.send(attr_name), :tags => [])
         end
+        define_method "#{attr_name}_stripped_with_newlines" do
+          value = self.send(attr_name)
+          value = value.gsub(/(?:\s*<\/?(?:li|ul|ol)>\s*)+/, "\n")
+          value = ActionController::Base.helpers.sanitize(
+            value, :tags => %w(br), :whitespace_elements => %w(i b))
+          value = value.gsub(/\A(?:&nbsp;|<br\/?>|\s)+|(?:&nbsp;|<br\/?>|\s)+\Z/, '')
+          value = value.gsub(/(?:\s*<br>\s*)+/, "\n\n")
+          value = value.gsub(/&nbsp;/, ' ')
+          value
+        end
       end
 
       before_validation :sanitize!
