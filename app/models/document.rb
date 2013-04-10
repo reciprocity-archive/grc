@@ -60,6 +60,16 @@ class Document < ActiveRecord::Base
     link
   end
 
+  def self.linkify(value)
+    if !value.blank?
+      if !VALID_SCHEMES.include?(value.split(':')[0])
+        value = "http://#{value}"
+      else
+        value
+      end
+    end
+  end
+
   def link=(value)
     if !value.blank? && !VALID_SCHEMES.include?(value.split(':')[0])
       value = "http://#{value}"

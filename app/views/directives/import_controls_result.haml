@@ -1,144 +1,29 @@
--@messages = @messages.reject{|m|m.starts_with?("Invalid control heading") || m.starts_with?("Invalid program heading")}
+-columns = %w(slug title description kind means start_date stop_date url systems categories assertions documentation_description verify_frequency documents people key_control active fraud_related)
+-header_overrides = { :documents => "References", :systems => "Systems", :categories => "Categories", :people => "Operator", :assertions => "Assertions" }
 
-.row-fluid
-  %hr.hr-widget
+-content_for :import_cancel_path, flow_directive_path(@directive)
 
-.row-fluid
-  .span6
-    %h4 Compliance Program
-    .row-fluid
-      .span10.control-group
-        %label{:for => "slug"} Regulation / Contract / Policy
-        %input#slug.span12{:disabled => "disabled", :value => @directive.slug, :type => "text"}/
-        %br/
+-content_for :import_success do
+  Import of
+  =link_to @directive.title, flow_directive_path(@directive)
+  controls is done.
 
-      .span2
-        %label{:for => "version"} Version
-        %input#version.span12{:disabled => "disabled", :value => @directive.version, :type => "text"}
+-content_for :import_information do
+  .row-fluid
+    .span6
+      %h4 Compliance Program
+      .row-fluid
+        .span10.control-group
+          %label{:for => "slug"} Regulation / Contract / Policy
+          %input#slug.span12{:disabled => "disabled", :value => @directive.slug, :type => "text"}/
+          %br/
 
-.row-fluid
-  %hr.hr-widget
+        .span2
+          %label{:for => "version"} Version
+          %input#version.span12{:disabled => "disabled", :value => @directive.version, :type => "text"}
 
-.row-fluid
-  %h4 Data to Import
+-width_pcts = %w(5 5 10 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5)
 
-.row-fluid
-  #sampleData.span12
-    -if @messages.present?
-      -@messages.each do |m|
-        %p{ :class => 'label-warning' }
-          =m
-      %br
-
-    -if @errors.any?
-      %p.label-warning
-        See specific errors below
-      %br
-
-    %table.ggrc-table{:cellspacing => "0", :cellpadding => "0"}
-      %col{:style => "width:5%"}
-      %col{:style => "width:5%"}
-      %col{:style => "width:10%"}
-      %col{:style => "width:5%"}
-      %col{:style => "width:5%"}
-      %col{:style => "width:5%"}
-      %col{:style => "width:5%"}
-      %col{:style => "width:5%"}
-      %col{:style => "width:5%"}
-      %col{:style => "width:5%"}
-      %col{:style => "width:5%"}
-      %col{:style => "width:5%"}
-      %col{:style => "width:5%"}
-      %col{:style => "width:5%"}
-      %col{:style => "width:5%"}
-      %col{:style => "width:5%"}
-      %col{:style => "width:5%"}
-      %col{:style => "width:5%"}
-      %col{:style => "width:5%"}
-      %thead
-        %tr
-          %th Code
-          %th Title
-          %th Description
-          %th Kind
-          %th Means
-          %th Version
-          %th Start
-          %th Stop
-          %th URL
-          %th Systems
-          %th Categories
-          %th Assertions
-          %th Documentation
-          %th Frequency
-          %th References
-          %th Operator
-          %th Key Control
-          %th Active
-          %th Fraud Related
-      %tbody
-        %tr
-          %td{:colspan => "19", :cellspacing => "0", :cellpadding => "0"}
-            .inner-table
-              %table.inner-ggrc-table{:cellspacing => "0", :cellpadding => "0"}
-                %col{:style => "width:5%"}
-                %col{:style => "width:5%"}
-                %col{:style => "width:10%"}
-                %col{:style => "width:5%"}
-                %col{:style => "width:5%"}
-                %col{:style => "width:5%"}
-                %col{:style => "width:5%"}
-                %col{:style => "width:5%"}
-                %col{:style => "width:5%"}
-                %col{:style => "width:5%"}
-                %col{:style => "width:5%"}
-                %col{:style => "width:5%"}
-                %col{:style => "width:5%"}
-                %col{:style => "width:5%"}
-                %col{:style => "width:5%"}
-                %col{:style => "width:5%"}
-                %col{:style => "width:5%"}
-                %col{:style => "width:5%"}
-                %col{:style => "width:5%"}
-                %tbody
-                  -columns = %w(slug title description kind means version start_date stop_date url systems_display categories_display assertions_display documentation_description verify_frequency references_display operator key_control active fraud_related)
-                  -@controls.each_with_index do |c, i|
-                    %tr{ :class => (i % 2 == 0 ? :odd : :even) }
-                      -columns.each do |column_name|
-                        -has_errors = @errors[i].present? && @errors[i][column_name].present?
-                        -has_warnings = @warnings[i].present? && @warnings[i][column_name].present?
-                        %td{ :class => ( (@errors[i].present? && @errors[i][column_name].present?) ? 'member-failure' : ((@warnings[i].present? && @warnings[i][column_name].present?) ? 'member-warning' : '' ) ) }
-                          -# make a special case for operator column which should only display error/warning not possible existing value
-                          -unless column_name == "operator" && (has_errors || has_warnings)
-                            =c.send(column_name)
-                          -if has_errors
-                            .help-inline=@errors[i][column_name].join(', ')
-                          -if has_warnings
-                            .help-inline=@warnings[i][column_name].join(', ')
-
-    Showing 1 to #{@controls.size} of #{@controls.size} entries
-    %br/
-    #{@creates.size} created, #{@updates.size} updated
-
-
-.row-fluid
-  %hr.hr-widget
-
-.row-fluid
-  -if params[:confirm].blank?
-    .span8
-    .span1
-      =link_to "Cancel", flow_directive_path(@directive), :class => "btn btn-large"
-    .span3
-      -if @errors.any?
-        =submit_tag "Correct Errors Before Proceeding", :class => %w(btn btn-large btn-warning pull-right), :name => 'confirm', :disabled => true
-      -elsif @messages.any? || (@warnings.any? { |k,v| v.present? })
-        =submit_tag "Proceed With Caution", :class => %w(btn btn-large btn-warning pull-right), :name => 'confirm'
-      -else
-        =submit_tag "Finish Importing", :class => %w(btn btn-large btn-success pull-right), :name => 'confirm'
-  -else
-    .span12
-      Import of
-      =link_to @directive.title, flow_directive_path(@directive)
-      controls is done.
+=render :partial => 'shared/import_table',
+        :locals => { :columns => columns, :header_overrides => header_overrides, :width_pcts => width_pcts, :converter => @import }
 

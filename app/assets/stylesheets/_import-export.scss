@@ -8,10 +8,17 @@
     font-weight: bold;
     margin-bottom: 10px;
   }
-  .label-warning {
+  .label-error {
     @include border-radius($default-border-radius);
     background: lighten($red, 35%);
     border: 1px solid lighten($red, 10%);
+    font-weight: bold;
+    padding: 5px 10px;
+  }
+  .label-warning {
+    @include border-radius($default-border-radius);
+    background: lighten($yellow, 35%);
+    border: 1px solid lighten($yellow, 10%);
     font-weight: bold;
     padding: 5px 10px;
   }
@@ -40,15 +47,24 @@
       &.member-failure {
         background: lighten($red, 35%);
       }
+      &.member-warning {
+        background: lighten($yellow, 35%);
+      }
       &.member-warning,
       &.member-failure {
-        .help-inline {
+        .help-inline, .help-inline-warning {
           color: $red;
           font-weight: bold;
           padding: 0;
           display: block;
           font-size: $f-small;
         }
+        .help-inline-warning {
+          color: $gray;
+        }
+      }
+      hr {
+        margin: 5px 0;
       }
     }
   }

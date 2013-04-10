@@ -1,0 +1,58 @@
+-#@messages = @messages.reject{|m|m.starts_with?("Invalid risk heading")}
+
+.row-fluid
+  %hr.hr-widget
+
+=yield_content! :import_information
+
+.row-fluid
+  #sampleData.span12
+    -if @import.errors.any?
+      -@import.errors.each do |m|
+        %p.label-error
+          =m
+      %br
+
+    -if @import.warnings.any?
+      -@import.warnings.each do |m|
+        %p.label-warning
+          =m
+      %br
+
+    -if @import.has_object_errors?
+      %p.label-error
+        See specific errors below
+      %br
+
+    %h4 Data to Import
+
+    =yield
+
+    Showing 1 to #{@import.results.size} of #{@import.results.size} entries
+    %br/
+    #{@import.created_objects.size} created,
+    #{@import.updated_objects.size} updated,
+    #{@import.changed_objects.size} changed
+    -@import.all_objects.each do |model_class, objects|
+      %p #{model_class.name} - #{objects.size}
+
+%br
+
+.row-fluid
+  -if params[:confirm].blank?
+    .span8
+    .span1
+      =link_to "Cancel", programs_dash_path, :class => "btn btn-large"
+    .span3
+      -if @import.has_errors?
+        =submit_tag "Correct Errors Before Proceeding", :class => %w(btn btn-large btn-warning pull-right), :name => 'confirm', :disabled => true
+      -elsif @import.has_warnings?
+        -#messages.any? || (@warnings.any? { |k,v| v.present? })
+        =submit_tag "Proceed With Caution", :class => %w(btn btn-large btn-warning pull-right), :name => 'confirm'
+      -else
+        =submit_tag "Finish Importing", :class => %w(btn btn-large btn-success pull-right), :name => 'confirm'
+  -else
+    .span12
+      =yield_content! :import_success
+
+

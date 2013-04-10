@@ -1,0 +1,62 @@
+-column_name = column_name.to_sym
+-cell = result[column_name]
+
+-case cell
+
+-when LinkDocumentsHandler
+  -first=true
+  -result[:documents].links_with_details.each do |status, document, value, errors, warnings|
+    -if first
+      -first=false
+    -else
+      %hr
+    -case status
+    -when :created
+      %span.help-inline-warning
+        NEW:
+      %a{ :href => document.link, :rel => 'tooltip', :title => document.link }
+        =document.title
+    -when :existing
+      %a{ :href => document.link, :rel => 'tooltip', :title => document.link }
+        =document.title
+    -else
+      =value
+      .help-inline=errors.join(", ")
+      .help-inline-warning=warnings.join(", ")
+
+-when LinksHandler
+  -first=true
+  -result[column_name].links_with_details.each do |status, object, value, errors, warnings|
+    -if first
+      -first=false
+    -else
+      %hr
+    -case status
+    -when :created
+      %span.help-inline-warning
+        NEW:
+      =result[column_name].display_link(object)
+    -when :existing
+      =result[column_name].display_link(object)
+    -else
+      =value
+      .help-inline=errors.join(", ")
+      .help-inline-warning=warnings.join(", ")
+
+-when TextOrHtmlColumnHandler
+  =display_as_html cell.display
+
+-else
+  =cell.display
+
+-if result.errors_for(column_name).present?
+  .help-inline
+    -result.errors_for(column_name).each do |message|
+      =message
+      %br
+-if result.warnings_for(column_name).present?
+  .help-inline-warning
+    -result.warnings_for(column_name).each do |message|
+      =message
+      %br
+

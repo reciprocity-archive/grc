@@ -236,11 +236,61 @@ module ApplicationHelper
     render '/error/import_error', :layout => false, :locals => { :message => message }
   end
 
+  def handle_csv_import(converter_class, options=nil, &block)
+    template = 'import_result'
+    template = options.delete(:template) if options && options[:template]
+
+    upload = params["upload"]
+    if upload.present?
+      begin
+        file = upload.read.force_encoding('utf-8')
+        importer = converter_class.from_string(file, options)
+        dry_run = params[:confirm].blank?
+        importer.do_import(dry_run)
+        @import = importer
+        if params[:confirm].present? && !@import.has_errors?
+          yield @import
+        else
+          render template, :layout => 'import_result'
+        end
+      rescue CSV::MalformedCSVError, ArgumentError => e
+        log_backtrace(e)
+        render_import_error("Not a recognized file.")
+      rescue ImportException => e
+        render_import_error("Could not import file: #{e.to_s}")
+      rescue => e
+        log_backtrace(e)
+        render_import_error
+      end
+    elsif request.post?
+      render_import_error("Please select a file.")
+    end
+  end
+
   def handle_csv_export(filename)
     self.response.headers['Content-Type'] = 'text/csv'
     headers['Content-Disposition'] = "attachment; filename=\"#{filename}\""
     self.response_body = Enumerator.new do |out|
       yield out
+    end
+  end
+
+  def handle_converter_csv_export(filename, objects, converter_class, options=nil)
+    options ||= {}
+    options = options.merge(:export => true)
+
+    handle_csv_export(filename) do |out|
+      begin
+        @export = converter_class.new(objects, options)
+        @export.do_export_metadata do |line|
+          out << line.encode("UTF-8").force_encoding('UTF-8')
+        end
+        @export.do_export.each do |line|
+          out << line.encode("UTF-8").force_encoding('UTF-8')
+        end
+      rescue => e
+        log_backtrace(e)
+      end
     end
   end
 end

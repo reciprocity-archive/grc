@@ -4,19 +4,7 @@
 
 require 'csv'
 
-class ImportException < Exception
-end
-
 class DirectivesController < BaseObjectsController
-  include DirectivesHelper
-  include ImportHelper
-
-  DIRECTIVE_MAP = Hash[*%w(Type type Directive\ Code slug Directive\ Title title Directive\ Description description Company company Version version Start start_date Stop stop_date Kind kind Audit\ Start audit_start_date Audit\ Frequency audit_frequency Audit\ Duration audit_duration Created created_at Updated updated_at)]
-
-  SECTION_MAP = Hash[*%w(Section\ Code slug Section\ Title title Section\ Description description Section\ Notes notes Created created_at Updated updated_at)]
-
-  CONTROL_MAP = Hash[*%w(Control\ Code slug Title title Description description Kind kind Means means Version version Start start_date Stop stop_date URL url Link:Systems systems Link:Categories categories Link:Assertions assertions Documentation documentation_description Frequency verify_frequency References references Link:People;Operator operator Key\ Control key_control Active active Fraud\ Related fraud_related Created created_at Updated updated_at)]
-
   # FIXME: Decide if the :section, controls, etc.
   # methods should be moved, and what access controls they
   # need.
@@ -97,306 +85,43 @@ class DirectivesController < BaseObjectsController
   end
 
   def export_controls
-    directive_meta_kind = @directive.meta_kind
-    metadata_headers_map = Hash[*DIRECTIVE_MAP.map { |k,v| [k.sub("Directive", directive_meta_kind.to_s.titleize),v] }.flatten]
-
     respond_to do |format|
       format.html do
         render :layout => 'export_modal', :locals => { :directive => @directive }
       end
       format.csv do
-        self.response.headers['Content-Type'] = 'text/csv'
-        headers['Content-Disposition'] = "attachment; filename=\"#{@directive.slug}-controls.csv\""
-        self.response_body = Enumerator.new do |out|
-          code_header = "#{directive_meta_kind.to_s.titleize} Code"
-          out << CSV.generate_line(["Type", code_header])
-          values = [code_header].map { |key| @directive.send(metadata_headers_map[key]) }
-          values.unshift("Controls")
-          out << CSV.generate_line(values)
-          out << CSV.generate_line([])
-          out << CSV.generate_line([])
-          out << CSV.generate_line(CONTROL_MAP.keys)
-          @directive.controls.each do |s|
-            values = CONTROL_MAP.keys.map do |key|
-              field = CONTROL_MAP[key]
-              case field
-              when 'categories'
-                (s.categories.ctype(Control::CATEGORY_TYPE_ID).map {|x| x.name}).join(',')
-              when 'assertions'
-                (s.categories.ctype(Control::CATEGORY_ASSERTION_TYPE_ID).map {|x| x.name}).join(',')
-              when 'systems'
-                (s.systems.map {|x| x.slug}).join(',')
-              when 'operator'
-                object_person = s.object_people.detect {|x| x.role == 'operator'}
-                object_person ? object_person.person.email : ''
-              when 'references'
-                s.documents.map do |doc|
-                  "#{doc.description} [#{doc.link} #{doc.title}]"
-                end.join("\n")
-              else
-                s.send(field)
-              end
-            end
-            out << CSV.generate_line(values)
-          end
-        end
+        filename = "#{@directive.slug}-controls.csv"
+        handle_converter_csv_export(filename, @directive.controls.all, ControlsConverter, :directive => @directive)
       end
     end
   end
 
   def export
-    directive_meta_kind = @directive.meta_kind
-    metadata_headers_map = Hash[*DIRECTIVE_MAP.map { |k,v| [k.sub("Directive", directive_meta_kind.to_s.titleize),v] }.flatten]
-
-    section_meta_kind = @directive.section_meta_kind
-    section_headers_map = Hash[*SECTION_MAP.map { |k,v| [k.sub("Section", section_meta_kind.to_s.titleize),v] }.flatten]
-
     respond_to do |format|
       format.html do
         render :layout => 'export_modal', :locals => { :directive => @directive }
       end
       format.csv do
-        self.response.headers['Content-Type'] = 'text/csv'
-        headers['Content-Disposition'] = "attachment; filename=\"#{@directive.slug}.csv\""
-        self.response_body = Enumerator.new do |out|
-          out << CSV.generate_line(metadata_headers_map.keys)
-          keys = metadata_headers_map.keys
-          keys.shift
-          values = keys.map { |key| @directive.send(metadata_headers_map[key]) }
-          values.unshift(directive_meta_kind.to_s.titleize)
-          out << CSV.generate_line(values)
-          out << CSV.generate_line([])
-          out << CSV.generate_line([])
-          out << CSV.generate_line(section_headers_map.keys)
-          @directive.sections.each do |s|
-            values = section_headers_map.keys.map { |key| s.send(section_headers_map[key]) }
-            out << CSV.generate_line(values)
-          end
-        end
+        filename = "#{@directive.slug}.csv"
+        handle_converter_csv_export(filename, @directive.sections.all, SectionsConverter, :directive => @directive)
       end
     end
   end
 
   def import_controls
-    upload = params["upload"]
-    if upload.present?
-      begin
-        file = upload.read.force_encoding('utf-8')
-        import = read_import_controls(CSV.parse(file))
-        @messages = import[:messages]
-        do_import_controls(import, params[:confirm].blank?)
-        @warnings = import[:warnings]
-        @errors = import[:errors]
-        @creates = import[:creates]
-        @updates = import[:updates]
-        if params[:confirm].present? && !@errors.any?
-          flash[:notice] = "<i class='grcicon-ok'></i> #{@creates.size + @updates.size} Controls are Imported Successfully!".html_safe
-          keep_flash_after_import
-          render :json => { :location => flow_directive_path(@directive) }
-        else
-          render 'import_controls_result', :layout => false
-        end
-      rescue CSV::MalformedCSVError, ArgumentError => e
-        log_backtrace(e)
-        render_import_error("Not a recognized file.")
-      rescue ImportException => e
-        render_import_error("Could not import file: #{e.to_s}")
-      rescue => e
-        log_backtrace(e)
-        render_import_error(e.class)
-      end
-    elsif request.post?
-      render_import_error("Please select a file.")
+    handle_csv_import(ControlsConverter, :template => 'import_controls_result', :directive => @directive) do |converter|
+      flash[:notice] = "<i class='grcicon-ok'></i> #{@import.created_objects.size + @import.updated_objects.size} Controls are Imported Successfully!".html_safe
+      keep_flash_after_import
+      render :json => { :location => flow_directive_path(@directive) }
     end
   end
 
   def import
-    upload = params["upload"]
-    if upload.present?
-      begin
-        file = upload.read.force_encoding('utf-8')
-        import = read_import_sections(CSV.parse(file))
-        @messages = import[:messages]
-        do_import(import, params[:confirm].blank?)
-        @warnings = import[:warnings]
-        @errors = import[:errors]
-        @creates = import[:creates]
-        @updates = import[:updates]
-        if params[:confirm].present? && !@errors.any?
-          flash[:notice] = "Successfully imported #{@creates.size + @updates.size} #{@directive.section_meta_kind.to_s.pluralize}"
-          keep_flash_after_import
-          render :json => { :location => flow_directive_path(@directive) }
-        else
-          render 'import_result', :layout => false
-        end
-      rescue CSV::MalformedCSVError, ArgumentError => e
-        log_backtrace(e)
-        render_import_error("Not a recognized file.")
-      rescue ImportException => e
-        render_import_error("Could not import file: #{e.to_s}")
-      rescue => e
-        log_backtrace(e)
-        render_import_error
-      end
-    elsif request.post?
-      render_import_error("Please select a file.")
+    handle_csv_import(SectionsConverter, :directive => @directive) do |converter|
+      flash[:notice] = "Successfully imported #{@import.created_objects.size + @import.updated_objects.size} #{@directive.section_meta_kind.to_s.pluralize}"
+      keep_flash_after_import
+      render :json => { :location => flow_directive_path(@directive) }
     end
-  end
-
-  def do_import_controls(import, check_only)
-    import[:errors] = {}
-    import[:updates] = []
-    import[:creates] = []
-    import[:warnings] = {}
-
-    @controls = []
-    import[:controls].each_with_index do |attrs, i|
-      import[:warnings][i] = HashWithIndifferentAccess.new
-
-      attrs.delete(nil)
-      attrs.delete('created_at')
-      attrs.delete('updated_at')
-
-      handle_option(attrs, 'kind', import[:warnings][i], :control_kind)
-      handle_option(attrs, 'means', import[:warnings][i], :control_means)
-      handle_option(attrs, 'verify_frequency', import[:warnings][i])
-      handle_boolean(attrs, 'key_control')
-      handle_boolean(attrs, 'fraud_related')
-      handle_boolean(attrs, 'active')
-      handle_import_person(attrs, 'operator', import[:warnings][i], :warning_message => "Warning: unrecognized value. This field should be an LDAP id or an email. Data will be ignored if import proceeds.")
-
-      slug = attrs['slug']
-
-      if slug.blank?
-        import[:warnings][i][:slug] ||= []
-        import[:warnings][i][:slug] << "missing control slug"
-        control = nil
-      else
-        control = Control.find_by_slug(slug)
-      end
-
-      control ||= Control.new
-
-      handle_import_document_reference(control, attrs, 'references', import[:warnings][i])
-      handle_import_object_person(control, attrs, 'operator', 'operator')
-      handle_import_category(control, attrs, 'categories', Control::CATEGORY_TYPE_ID)
-      handle_import_category(control, attrs, 'assertions', Control::CATEGORY_ASSERTION_TYPE_ID)
-      handle_import_systems(control, attrs, 'systems')
-
-      attrs['title'] ||= attrs['description'].split("\n")[0] rescue ""
-
-      control.assign_attributes(attrs, :without_protection => true)
-
-      if control.new_record?
-        control.directive = @directive
-        import[:creates] << slug
-      else
-        import[:updates] << slug
-      end
-      @controls << control
-      import[:errors][i] = control.errors unless control.valid?
-      if control.directive_id != @directive.id
-        import[:errors][i] ||= ActiveModel::Errors.new(control)
-        import[:errors][i].add(:slug, "already used in another directive")
-      end
-      control.save unless check_only
-    end
-  end
-
-  def do_import(import, check_only)
-    import[:errors] = {}
-    import[:updates] = []
-    import[:creates] = []
-    import[:warnings] = {}
-
-    @sections = []
-    import[:sections].each_with_index do |attrs, i|
-      import[:warnings][i] = HashWithIndifferentAccess.new
-
-      attrs.delete(nil)
-      attrs.delete('created_at')
-      attrs.delete('updated_at')
-
-      slug = attrs['slug']
-
-      if slug.blank?
-        import[:warnings][i][:slug] ||= []
-        import[:warnings][i][:slug] << "missing section slug"
-        section = nil
-      else
-        section = Section.find_by_slug(slug)
-      end
-
-      if section
-        section.assign_attributes(attrs, :without_protection => true)
-        import[:updates] << slug
-      else
-        section = Section.new
-        section.assign_attributes(attrs, :without_protection => true)
-        section.directive = @directive
-        import[:creates] << slug
-      end
-      @sections << section
-      import[:errors][i] = section.errors unless section.valid?
-      if section.directive_id != @directive.id
-        import[:errors][i] ||= ActiveModel::Errors.new(section)
-        import[:errors][i].add(:slug, "already used in another directive")
-      end
-      section.save unless check_only
-    end
-  end
-
-  def read_import_controls(rows)
-    import = { :messages => [] }
-
-    raise ImportException.new("There must be at least 5 input lines") unless rows.size >= 5
-
-    directive_meta_kind = @directive.meta_kind
-    metadata_headers_map = Hash[*DIRECTIVE_MAP.map { |k,v| [k.sub("Directive", directive_meta_kind.to_s.titleize),v] }.flatten]
-
-    directive_headers = read_import_headers(import, metadata_headers_map, "directive", rows)
-
-    directive_values = rows.shift
-
-    import[:directive] = Hash[*directive_headers.zip(directive_values).flatten]
-
-    validate_import_type(import[:directive], "Controls")
-    validate_import_slug(import[:directive], directive_meta_kind.to_s.titleize, @directive.slug)
-
-    rows.shift
-    rows.shift
-
-    read_import(import, CONTROL_MAP, "control", rows)
-
-    import
-  end
-
-  def read_import_sections(rows)
-    import = { :messages => [] }
-
-    raise ImportException.new("There must be at least 5 input lines") unless rows.size >= 5
-
-    directive_meta_kind = @directive.meta_kind
-    metadata_headers_map = Hash[*DIRECTIVE_MAP.map { |k,v| [k.sub("Directive", directive_meta_kind.to_s.titleize),v] }.flatten]
-
-    directive_headers = read_import_headers(import, metadata_headers_map, "directive", rows)
-
-    directive_values = rows.shift
-
-    import[:directive] = Hash[*directive_headers.zip(directive_values).flatten]
-
-    section_meta_kind = @directive.section_meta_kind
-    section_headers_map = Hash[*SECTION_MAP.map { |k,v| [k.sub("Section", section_meta_kind.to_s.titleize),v] }.flatten]
-
-    validate_import_type(import[:directive], directive_meta_kind.to_s.titleize)
-    validate_import_slug(import[:directive], directive_meta_kind.to_s.titleize, @directive.slug)
-
-    rows.shift
-    rows.shift
-
-    read_import(import, section_headers_map, "section", rows)
-
-    import
   end
 
   def sections
