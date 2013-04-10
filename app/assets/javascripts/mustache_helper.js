@@ -360,8 +360,19 @@ Mustache.registerHelper("pack", function() {
           objects[i] = obj = obj();
       }
     if(obj instanceof can.Observe) {
-      obj.bind("change", function(attr, how, newVal, oldVal) {
+      obj.bind("change", function(ev, attr, how, newVal, oldVal) {
+        var tokens, idx, subobj;
+        switch(how) {
+        case "remove":
+        case "add":
+        tokens = attr.split(".");
+        idx = tokens.pop();
+        subobj = can.getObject(tokens.join("."), obj);
+        subobj && subobj.splice.apply(subobj, how === "remove" ? [+idx, 1] : [+idx, 0, newVal]);
+        break;
+        default:          
         pack.attr(attr, newVal);
+        }
       });
     } 
     pack.attr(obj.serialize ? obj.serialize() : obj);
