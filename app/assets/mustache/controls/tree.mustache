@@ -7,6 +7,11 @@
           <div class="span8">
             <div class="oneline expand-on-hover">
               <i class="grcicon-control-color"></i>
+              <!-- no notes
+              {{#notes}}
+                <i class="grcicon-comment"></i>
+              {{/notes}}
+              -->
               <span class="title">
                 {{title}}
               </span>
@@ -16,14 +21,19 @@
               <span class="description-inline">
                 
                 <i class="description-inline">
-                  {{{description}}}
+                  {{{firstnonempty description ''}}}
                 </i>
               </span>
             </div>
-            <div class="description">
+            <div class="description{{^description}} inhover no-description{{/description}}">
+              <!-- no notes
+              {{#notes}}
               <div class="note">
+                {{{notes}}}
               </div>
-              <div class="rtf">{{{description}}}</div>
+              {{/notes}}
+              -->
+              <div class="rtf">{{{firstnonempty description '<i>No description.</i>'}}}</div>
             </div>
           </div>
           <div class="span1">

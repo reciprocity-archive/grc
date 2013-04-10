@@ -1,18 +1,18 @@
 {{! dashboard object listing}}
 <ul class="tree-structure simple single-row-tabs">
 {{#list}}
-  <li data-model="true" {{data 'model'}}>
+  <li data-model="true" {{data 'model'}} class="{{object_type}}">
     {{#pack this tooltip_view=tooltip_view object_type=object_type object_display=object_display object_route=object_route}}
-    <a data-popover-trigger="sticky-hover" data-popover-trigger="sticky-hover" data-sticky-popover="true" data-content="{{render tooltip_view}}">
-      {{{withattr "href" "/{object_route}/{id}" "data-original-title" "<div class='row-fluid'><div class='span10'><h3><i class='grcicon-{object_type}-color'></i>{slug} <span>{title}</span></h3></div><div class='span2'><a class='btn btn-mini pull-right' href='/{object_route}/{id}' rel='tooltip' data-original-title='View/Edit {object_display}'><i class='grcicon-goto'></i></a></div></div>" }}}
+    <a data-popover-trigger="sticky-hover" data-sticky-popover="true" data-content="{{render tooltip_view}}">
+      {{{withattr "href" "/{object_route}/{id}" "data-original-title" "<div class='row-fluid'><div class='span12'><h3><i class='grcicon-{object_type}-color'></i> <span class='title'>{title}</span> <span class='code'>{slug}</span></h3></div></div>" }}}
       <div class="row-fluid">
         <div class="span12">
           <div class="item-identifier">
-            <span class="key">
-              <span>{{prefix}}</span> <span>{{slug}}</span>
-            </span>
-            <span class="name">
+            <span class="title">
               {{title}}
+            </span>
+            <span class="code">
+              <span>{{slug}}</span>
             </span>
           </div>
         </div>
