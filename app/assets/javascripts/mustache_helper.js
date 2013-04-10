@@ -345,7 +345,7 @@ can.each(["firstexist", "firstnonempty"], function(fname) {
     for(var i = 0; i < args.length; i++) {
       var v = args[i];
       if(typeof v === "function") v = v.call(this);
-      if(v != null && (fname === "firstexist" || !!(v.toString().trim()))) return v;
+      if(v != null && (fname === "firstexist" || !!(v.toString().trim().replace(/&nbsp;|\s|<br *\/?>/g, "")))) return v;
     }
     return "";
   });
