@@ -97,7 +97,14 @@ class BaseRowConverter
     if options[:export]
       setup_export
     else
+      clean_attrs
       setup_object
+    end
+  end
+
+  def clean_attrs
+    attrs.keys.each do |key|
+      attrs[key] = attrs[key].present? ? attrs[key].strip : ''
     end
   end
 
@@ -110,7 +117,7 @@ class BaseRowConverter
   end
 
   def setup_object_by_slug(attrs)
-    slug = attrs[:slug].upcase if attrs[:slug]
+    slug = model_class.prepare_slug(attrs[:slug]) if attrs[:slug]
     if slug.blank?
       @object = model_class.new
     else

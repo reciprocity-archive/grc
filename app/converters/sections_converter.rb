@@ -29,7 +29,6 @@ class SectionsConverter < BaseConverter
     Directive\ Code slug
     Directive\ Title title
     Directive\ Description description
-    Company company
     Version version
     Start start_date
     Stop stop_date
