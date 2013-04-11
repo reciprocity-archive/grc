@@ -40,6 +40,10 @@ module SluggedModel
       items.each { |item| st.insert(item) }
       st
     end
+
+    def prepare_slug(slug)
+      slug.strip.gsub(/\r|\n/, " ").upcase
+    end
   end
 
   class SlugTree
@@ -91,14 +95,10 @@ module SluggedModel
     self.class.to_s
   end
 
-  def self.prepare_slug(slug)
-    slug.strip.gsub(/\r|\n/, " ").upcase
-  end
-
 private
 
   def upcase_slug
-    self.slug = slug.present? ? self.class.prepare_slug(value) : nil
+    self.slug = slug.present? ? self.class.prepare_slug(slug) : nil
   end
 
   def generate_random_slug_if_needed
