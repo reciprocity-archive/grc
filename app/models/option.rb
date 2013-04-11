@@ -52,4 +52,12 @@ class Option < ActiveRecord::Base
     "threat_type",
     "verify_frequency"
   ]
+  
+  ROLES_OVERRIDE = {
+    "verify_frequency" => "frequency"
+  }
+  
+  def self.human_name(role)
+    return (ROLES_OVERRIDE.has_key?(role) ? ROLES_OVERRIDE[role] : role).humanize.titleize
+  end
 end
