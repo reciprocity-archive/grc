@@ -4,7 +4,11 @@ class SectionRowConverter < BaseRowConverter
 
   def setup_object
     object = setup_object_by_slug(attrs)
-    object.directive = @importer.options[:directive]
+    if object.directive.present? && object.directive != @importer.options[:directive]
+      add_warning(:slug, "Code is used in #{object.directive.slug}")
+    else
+      object.directive = @importer.options[:directive]
+    end
   end
 
   def reify
