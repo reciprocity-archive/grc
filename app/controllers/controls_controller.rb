@@ -51,7 +51,7 @@ class ControlsController < BaseObjectsController
     end
     if params[:directive_id].present?
       @controls = @controls.
-        joins(:sections).
+        includes(:sections).
         where(
           Control.arel_table[:directive_id].eq(params[:directive_id]).or(
             Section.arel_table[:directive_id].eq(params[:directive_id])))
@@ -60,16 +60,18 @@ class ControlsController < BaseObjectsController
       program = Program.where(:id => params[:program_id]).first
       directive_ids = program ? program.directive_ids : []
       @controls = @controls.
-        joins(:sections).
+        includes(:sections).
         where(
           Control.arel_table[:directive_id].in(directive_ids).or(
             Section.arel_table[:directive_id].in(directive_ids)))
     end
     if params[:system_id].present?
-      @controls = @controls.joins(:system_controls).where(:system_controls => { :system_id => params[:system_id] })      
+      @controls = @controls.
+        joins(:system_controls).
+        where(:system_controls => { :system_id => params[:system_id] })
     end
     @controls = @controls.includes(:control_sections)
-    @controls = allowed_objs(@controls.all.uniq, :read)
+    @controls = allowed_objs(@controls.all, :read)
 
     if params[:list_select].present?
       render :partial => 'list_select', :layout => 'layouts/list_select_modal', :locals => {}
