@@ -96,7 +96,7 @@ class ControlsConverter < BaseConverter
 
   def do_export_metadata
     yield CSV.generate_line(metadata_map.keys)
-    yield CSV.generate_line(["Controls"])
+    yield CSV.generate_line(["Controls", directive.slug])
     yield CSV.generate_line([])
     yield CSV.generate_line([])
     yield CSV.generate_line(object_map.keys)
