@@ -604,7 +604,7 @@ class LinkCategoriesHandler < LinksHandler
       cat.name.downcase == data[:name].downcase
     end
     if items.size > 1
-      add_link_error("Multiple matches found for \"#{data[:name]}\" -- \"#{items.map(&:get_path).join("\", \"")\"")
+      add_link_error("Multiple matches found for \"#{data[:name]}\" -- \"#{items.map(&:get_path).join("\", \"")}\"")
     end
     items.first
   end
