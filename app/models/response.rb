@@ -86,7 +86,7 @@ class Response < ActiveRecord::Base
   end
 
   def csv_doclink(document)
-    "#{document.title}\n#{document.link_url}"
+    document.nil? ? 'not yet provided' : "#{document.title}\n#{document.link_url}"
   end
 
   def csv_doclinks

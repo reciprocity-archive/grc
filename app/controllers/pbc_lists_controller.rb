@@ -120,7 +120,7 @@ class PbcListsController < BaseObjectsController
         filename = "#{@pbc_list.display_name}-responses.csv"
         handle_csv_export(filename) do |out|
           headers = [
-            "#",
+            "Response #",
             "Request Type",
             "Control Code",
             "PBC Control Description",
