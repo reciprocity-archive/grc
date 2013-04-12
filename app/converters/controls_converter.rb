@@ -29,9 +29,9 @@ class ControlRowConverter < BaseRowConverter
     handle_option(:means, :role => :control_means)
     handle_option(:verify_frequency)
 
-    handle_boolean(:key_control)
-    handle_boolean(:fraud_related)
-    handle_boolean(:active)
+    handle_boolean(:key_control, :truthy_values => %w(key key_control key\ control))
+    handle_boolean(:fraud_related, :truthy_values => %w(fraud fraud_related fraud\ related))
+    handle_boolean(:active, :truthy_values => %w(active))
 
     handle(:documents, LinkDocumentsHandler)
     handle(:people, LinkPeopleHandler,

@@ -330,8 +330,9 @@ end
 
 class BooleanColumnHandler < ColumnHandler
   def parse_item(value)
+    truthy_values = (options[:truthy_values] || {}) + %w(yes 1 true)
     if value.present?
-      %w(yes 1 true).include?(value)
+      truthy_values.include?(value.downcase)
     end
   end
 end
