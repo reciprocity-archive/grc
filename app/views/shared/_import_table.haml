@@ -22,8 +22,5 @@
               -converter.results.each_with_index do |result, i|
                 %tr{ :class => (i % 2 == 0 ? :odd : :even) }
                   -columns.each do |column_name|
-                    -handler = result[column_name]
-                    -td_class = handler.has_errors? ? 'member-failure' : (handler.has_warnings? ? 'member-warning' : '' )
-                    %td{ :class => td_class }
-                      =render :partial => 'shared/import_cell', :locals => { :result => result, :column_name => column_name }
+                    =render :partial => 'shared/import_cell', :locals => { :result => result, :column_name => column_name }
 

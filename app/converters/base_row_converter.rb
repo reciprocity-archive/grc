@@ -104,7 +104,7 @@ class BaseRowConverter
 
   def clean_attrs
     attrs.keys.each do |key|
-      attrs[key] = attrs[key].present? ? attrs[key].strip : ''
+      attrs[key] = attrs[key].is_a?(String) ? attrs[key].strip : ''
     end
   end
 
@@ -141,7 +141,7 @@ class BaseRowConverter
   end
 
   def save
-    object.save!
+    object.save
     run_after_save_hooks(object)
   end
 
@@ -321,7 +321,7 @@ class OptionColumnHandler < ColumnHandler
         opt.title.downcase == value.downcase
       end
       if option.nil?
-        errors.push("Unknown #{role} option '#{value}' -- create this on the admin page")
+        warnings.push("Unknown \"#{role}\" option \"#{value}\" -- create this option from the Admin Dashboard")
       end
       option
     end
@@ -435,10 +435,12 @@ class LinksHandler < ColumnHandler
 
   def links_with_details
     @link_values.keys.map do |index|
+      object = @link_objects[index]
+      object_errors = object.nil? ? [] : object.errors.full_messages
       [ @link_status[index],
         @link_objects[index],
         @link_values[index],
-        @link_errors[index] || [],
+        (@link_errors[index] || []) + object_errors,
         @link_warnings[index] || []
       ]
     end
@@ -550,10 +552,22 @@ class LinksHandler < ColumnHandler
     return item.slug
   end
 
+  def save_linked_objects
+    success = true
+    created_links.each do |link_object|
+      success = link_object.save && success
+    end
+    success
+  end
+
   def after_save(object)
     if options[:append_only]
       # Save old links plus new links
-      object.send("#{options[:association]}=", @preexisting_links + created_links)
+      if save_linked_objects
+        object.send("#{options[:association]}=", @preexisting_links + created_links)
+      else
+        add_error("Failed to save necessary objects")
+      end
     else
       # Overwrite with only imported links
       object.send("#{options[:association]}=", imported_links)
@@ -590,13 +604,13 @@ class LinkCategoriesHandler < LinksHandler
       cat.name.downcase == data[:name].downcase
     end
     if items.size > 1
-      add_link_error("Multiple matches found for \"#{data[:name]}\"")
+      add_link_error("Multiple matches found for \"#{data[:name]}\" -- \"#{items.map(&:get_path).join("\", \"")\"")
     end
     items.first
   end
 
   def create_item(data)
-    add_link_error("No such category \"#{data[:name]}\"")
+    add_link_warning("Unknown category \"#{data[:name]}\" -- add this category from the Admin Dashboard")
     nil
   end
 
@@ -616,10 +630,19 @@ class LinkDocumentsHandler < LinksHandler
     if value.starts_with?('[')
       re = /^\[([^\s]+)(?:\s+([^\]]*))?\](.*)$/
       match = value.match(re)
-      { :link => match[1], :title => match[2], :description => match[3] }
+      if match
+        { :link => match[1], :title => match[2], :description => match[3] }
+      else
+        add_link_error("Invalid format")
+        nil
+      end
     else
-      add_link_error("Invalid format")
-      nil
+      begin
+        { :link => URI(value.strip).to_s }
+      rescue URI::InvalidURIError => e
+        add_link_error("Invalid format")
+        nil
+      end
     end
   end
 
@@ -629,11 +652,11 @@ class LinkDocumentsHandler < LinksHandler
   end
 
   def create_item_warnings(object, data)
-    add_link_warning("\"#{data[:title]}\" will be created")
+    add_link_warning("\"#{data[:title] || data[:link]}\" will be created")
   end
 
   def render_item(item)
-    item.link_url
+    "[#{item.link_url} #{item.title}] #{item.description}"
   end
 end
 
@@ -644,7 +667,11 @@ class LinkPeopleHandler < LinksHandler
     if value.starts_with?('[')
       re = /^\[(\w+@[^\s\]]+)\s+(\w+)\]([\w\s]+)$/
       match = value.match(re)
-      data = { :email => match[1], :name => match[3] }
+      if match
+        data = { :email => match[1], :name => match[3] }
+      else
+        add_link_error("Invalid format")
+      end
     else
       data = { :email => value }
     end
@@ -684,7 +711,7 @@ class LinkPeopleHandler < LinksHandler
 
   def after_save(object)
     created_links.each do |linked_object|
-      linked_object.save!
+      linked_object.save
       object_person = ObjectPerson.new
       object_person.role = options[:role]
       object_person.personable = @importer.object
@@ -707,23 +734,58 @@ class LinkSystemsHandler < LinksHandler
 
   def parse_item(value)
     if value.starts_with?('[')
-      re = /^(?:\[([\w\d-]+)\])?([^$]+)$/
+      re = /^(?:\[([\w\d-]+)\])([^$]+)$/
       match = value.match(re)
-      { :slug => match[1].upcase, :title => match[2] }
+      if match
+        { :slug => match[1], :title => match[2] }
+      else
+        add_link_error("Invalid format")
+        nil
+      end
     else
       { :slug => value.upcase, :title => value }
     end
   end
 
+  def get_where_params(data)
+    { :is_biz_process => false, :slug => data[:slug].strip.upcase }
+  end
+
   def get_create_params(data)
-    data.merge(
-      :is_biz_process => options[:is_biz_process],
-      :infrastructure => false)
+    data.
+      merge(
+        :is_biz_process => false,
+        :infrastructure => false,
+        :slug => data[:slug].strip.upcase ).
+      reverse_merge(
+        :title => data[:slug])
   end
 
   def create_item(data)
-    type = options[:is_biz_process] ? "Process" : "System"
-    add_link_error("#{type} with code \"#{data[:slug]}\" doesn't exist")
+    #type = options[:is_biz_process] ? "Process" : "System"
+    add_link_error("System with code \"#{data[:slug]}\" doesn't exist")
+    nil
+  end
+end
+
+class LinkProcessesHandler < LinkSystemsHandler
+  @model_class = :System
+
+  def get_where_params(data)
+    { :is_biz_process => true, :slug => data[:slug].strip.upcase }
+  end
+
+  def get_create_params(data)
+    data.
+      merge(
+        :is_biz_process => true,
+        :infrastructure => false,
+        :slug => data[:slug].strip.upcase ).
+      reverse_merge( :title => data[:slug] )
+  end
+
+  def create_item(data)
+    add_link_error("Process with code \"#{data[:slug]}\" doesn't exist")
     nil
   end
 end
@@ -733,7 +795,11 @@ class LinkRelationshipsHandler < LinksHandler
     if value.starts_with?('[')
       re = /^(?:\[([\w-]+)\])?([\w\s]+)$/
       match = value.match(re)
-      { :slug => match[1].upcase, :title => match[2] }
+      if match
+        { :slug => match[1].upcase, :title => match[2] }
+      else
+        add_link_error("Invalid format")
+      end
     else
       { :slug => value.upcase }
     end
@@ -763,7 +829,7 @@ class LinkRelationshipsHandler < LinksHandler
 
   def after_save(object)
     created_links.each do |linked_object|
-      linked_object.save!
+      linked_object.save
       relationship = Relationship.new(
         :relationship_type_id => options[:relationship_type_id])
       if options[:direction] == :to

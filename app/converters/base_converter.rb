@@ -127,16 +127,15 @@ class BaseConverter
       objects.each do |object|
         object.save
       end
+      if has_errors?
+        raise ActiveRecord::Rollback, "Errors encountered during save"
+      end
     end
   end
 
   def register_callback(hook_key, method, args)
     @callbacks[hook_key] ||= []
     @callbacks[hook_key].push([method, args])
-  end
-
-  def after_save(method, args)
-    register_callback(:after_save, method, args)
   end
 
   # Export-only functionality
@@ -194,6 +193,7 @@ class BaseConverter
   private
 
     def read_headers(import_map, row)
+      # FIXME: Should also detect duplicate headers, or read_values should handle it
       ignored_columns = []
 
       keys = trim_array(row).map do |heading|
@@ -211,18 +211,25 @@ class BaseConverter
       if ignored_columns.any?
         warnings.push("Ignored columns: #{ignored_columns.join(", ")}")
       end
+
+      missing_columns = import_map.values - keys
+      if missing_columns.any?
+        warnings.push("Missing columns: #{missing_columns.join(", ")}")
+      end
+
       keys
     end
 
     def read_values(headers, row)
       attrs = HashWithIndifferentAccess.new
       headers.zip(row).each do |key, value|
-        if attrs.has_key?(key)
-          attrs[key] = [attrs[key]] unless attrs[key].is_a?(Array)
-          attrs[key].push(value)
-        else
+        # FIXME: handle duplicate headers, or detect and warn in read_headers
+        #if attrs.has_key?(key)
+        #  attrs[key] = [attrs[key]] unless attrs[key].is_a?(Array)
+        #  attrs[key].push(value)
+        #else
           attrs[key] = value
-        end
+        #end
       end
       attrs
     end
