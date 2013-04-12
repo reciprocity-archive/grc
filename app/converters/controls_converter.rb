@@ -5,7 +5,7 @@ class ControlRowConverter < BaseRowConverter
   def setup_object
     object = setup_object_by_slug(attrs)
     if object.directive.present? && object.directive != @importer.options[:directive]
-      add_warning(:slug, "Code is used in #{object.directive.slug}")
+      add_error(:slug, "Code is used in #{object.directive.meta_kind.to_s.titleize}: #{object.directive.slug}")
     else
       object.directive = @importer.options[:directive]
     end
