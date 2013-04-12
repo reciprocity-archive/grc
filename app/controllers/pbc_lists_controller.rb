@@ -124,7 +124,7 @@ class PbcListsController < BaseObjectsController
             "Request Type",
             "Control Code",
             "PBC Control Description",
-            "Description of Request",
+            "Request",
             "Request Status",
             "Internal Assignee",
             "Response Due Date",
