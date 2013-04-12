@@ -227,7 +227,7 @@ class ColumnHandler
   end
 
   def has_errors?
-    @errors.any? || (@importer.object.valid? ? nil : @importer.object.errors[@key])
+    @errors.any? || (@importer.errors[@key] && @importer.errors[@key].any?) || (@importer.object.valid? ? nil : @importer.object.errors[@key])
   end
 
   def has_warnings?
@@ -605,8 +605,10 @@ class LinkCategoriesHandler < LinksHandler
     end
     if items.size > 1
       add_link_error("Multiple matches found for \"#{data[:name]}\" -- \"#{items.map(&:get_path).join("\", \"")}\"")
+      nil
+    else
+      items.first
     end
-    items.first
   end
 
   def create_item(data)
