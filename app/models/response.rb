@@ -110,10 +110,15 @@ class Response < ActiveRecord::Base
       end.join("\n\n")
     when 'Interview'
       participants = people.all
-      [ meetings.map do |meeting|
+      if meetings.count > 0
+        meeting_csv = meetings.map do |meeting|
           index += 1
           "Meeting ##{index}:\n#{meeting.calendar_url}"
-        end.join("\n\n"),
+        end.join("\n\n")
+      else
+        meeting_csv = "Meeting not yet scheduled"
+      end
+      [ meeting_csv,
         "",
        "Participants:\n#{participants.map(&:for_email).join(", ")}"
       ].join("\n")
