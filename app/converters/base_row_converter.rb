@@ -180,6 +180,10 @@ class BaseRowConverter
     handle(key, TextOrHtmlColumnHandler, options)
   end
 
+  def handle_url(key, options=nil)
+    handle(key, UrlColumnHandler, options)
+  end
+
   def handle_option(key, options=nil)
     handle(key, OptionColumnHandler, options)
   end
@@ -227,7 +231,7 @@ class ColumnHandler
   end
 
   def has_errors?
-    @errors.any? || (@importer.errors[@key] && @importer.errors[@key].any?) || (@importer.object.valid? ? nil : @importer.object.errors[@key])
+    @errors.any? || (@importer.errors[@key] && @importer.errors[@key].any?) || (@importer.object.valid? ? nil : @importer.object.errors[@key].any?)
   end
 
   def has_warnings?
@@ -341,13 +345,13 @@ class DateColumnHandler < ColumnHandler
   def parse_item(value)
     if value.present?
       begin
-        # If it's a US-looking date, convert to YYYY-MM-DD
         if value.respond_to?(:match) && value.match(/\d{1,2}\/\d{1,2}\/\d{4}/)
-          value = Date.strptime(value, '%m/%d/%Y').to_s
+          # If it's a US-looking date, convert to YYYY-MM-DD
+          value = Date.zone.strptime(value, '%m/%d/%Y').to_s
+        else
+          # Parse via Rails
+          value = Date.zone.parse(value)
         end
-
-        # Parse via Rails
-        value = Date.parse(value)
       rescue => e
         warnings.push("#{e}, use YYYY-MM-DD or MM/DD/YYYY format")
       end
@@ -357,6 +361,17 @@ class DateColumnHandler < ColumnHandler
 
   def display
     has_errors? ? @original : @value
+  end
+end
+
+class UrlColumnHandler < ColumnHandler
+  def parse_item(value)
+    begin
+      URI(value.strip).to_s
+    rescue URI::InvalidURIError => e
+      add_error("Invalid format")
+      nil
+    end
   end
 end
 
@@ -509,7 +524,7 @@ class LinksHandler < ColumnHandler
   end
 
   def get_where_params(data)
-    { :slug => data[:slug] }
+    { :slug => data[:slug] }.merge(options[:extra_model_where_params] || {})
   end
 
   def get_create_params(data)
@@ -584,7 +599,7 @@ class LinkControlsHandler < LinksHandler
   end
 
   def create_item(data)
-    add_link_error("Control with code \"#{data[:slug]}\" doesn't exist")
+    add_link_warning("Control with code \"#{data[:slug]}\" doesn't exist")
     nil
   end
 end
@@ -679,9 +694,12 @@ class LinkPeopleHandler < LinksHandler
       data = { :email => value }
     end
     if data[:email].present? && !/^#{EmailValidator::EMAIL_RE}$/.match(data[:email])
-      data[:email] = "#{data[:email]}@#{CMS_CONFIG['DEFAULT_DOMAIN']}"
+      add_link_warning("This email address is invalid and will not be linked")
+      #data[:email] = "#{data[:email]}@#{CMS_CONFIG['DEFAULT_DOMAIN']}"
+      nil
+    else
+      data
     end
-    data
   end
 
   def get_where_params(data)
@@ -750,45 +768,25 @@ class LinkSystemsHandler < LinksHandler
     end
   end
 
-  def get_where_params(data)
-    { :is_biz_process => false, :slug => data[:slug].strip.upcase }
-  end
-
-  def get_create_params(data)
-    data.
-      merge(
-        :is_biz_process => false,
-        :infrastructure => false,
-        :slug => data[:slug].strip.upcase ).
-      reverse_merge(
-        :title => data[:slug])
-  end
-
-  def create_item(data)
-    #type = options[:is_biz_process] ? "Process" : "System"
-    add_link_error("System with code \"#{data[:slug]}\" doesn't exist")
-    nil
-  end
-end
-
-class LinkProcessesHandler < LinkSystemsHandler
-  @model_class = :System
-
-  def get_where_params(data)
-    { :is_biz_process => true, :slug => data[:slug].strip.upcase }
-  end
-
-  def get_create_params(data)
-    data.
-      merge(
-        :is_biz_process => true,
-        :infrastructure => false,
-        :slug => data[:slug].strip.upcase ).
-      reverse_merge( :title => data[:slug] )
+  def find_existing_item(data)
+    system = System.where(:slug => data[:slug]).first
+    if system.nil?
+      type = options[:is_biz_process] ? "Process" : "System"
+      add_link_warning("#{type} with code \"#{data[:slug]}\" doesn't exist")
+    else
+      if options[:is_biz_process] && !system.is_biz_process
+        add_link_warning("That code is used by a Process, and will not be linked")
+        nil
+      elsif !options[:is_biz_process] && system.is_biz_process
+        add_link_warning("That code is used by a System, and will not be linked")
+        nil
+      else
+        system
+      end
+    end
   end
 
   def create_item(data)
-    add_link_error("Process with code \"#{data[:slug]}\" doesn't exist")
     nil
   end
 end
@@ -828,6 +826,15 @@ class LinkRelationshipsHandler < LinksHandler
     end
 
     objects
+  end
+
+  def model_human_name
+    options[:model_human_name] || model_class.to_s.humanize.titleize
+  end
+
+  def create_item(data)
+    add_link_warning("#{model_human_name} with code \"#{data[:slug]}\" doesn't exist")
+    nil
   end
 
   def after_save(object)

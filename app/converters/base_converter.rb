@@ -209,12 +209,14 @@ class BaseConverter
       end
 
       if ignored_columns.any?
-        warnings.push("Ignored columns: #{ignored_columns.join(", ")}")
+        ignored_text = ignored_columns.join(", ")
+        warnings.push("Ignored column#{ 's' if ignored_columns.size > 1 }: #{ignored_text}")
       end
 
       missing_columns = import_map.values - keys
       if missing_columns.any?
-        warnings.push("Missing columns: #{missing_columns.join(", ")}")
+        missing_text = missing_columns.map { |column| get_header_for_column(column) }.join(", ")
+        warnings.push("Missing column#{ 's' if missing_columns.size > 1 }: #{missing_text}")
       end
 
       keys
