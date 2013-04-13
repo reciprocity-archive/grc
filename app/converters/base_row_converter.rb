@@ -347,10 +347,10 @@ class DateColumnHandler < ColumnHandler
       begin
         if value.respond_to?(:match) && value.match(/\d{1,2}\/\d{1,2}\/\d{4}/)
           # If it's a US-looking date, convert to YYYY-MM-DD
-          value = Date.zone.strptime(value, '%m/%d/%Y').to_s
+          value = Date.strptime(value, '%m/%d/%Y').to_s
         else
           # Parse via Rails
-          value = Date.zone.parse(value)
+          value = Date.parse(value)
         end
       rescue => e
         warnings.push("#{e}, use YYYY-MM-DD or MM/DD/YYYY format")
@@ -580,7 +580,7 @@ class LinksHandler < ColumnHandler
     if options[:append_only]
       # Save old links plus new links
       if save_linked_objects
-        object.send("#{options[:association]}=", @preexisting_links + created_links)
+        object.send("#{options[:association]}=", get_existing_items + created_links)
       else
         add_error("Failed to save necessary objects")
       end
@@ -773,12 +773,13 @@ class LinkSystemsHandler < LinksHandler
     if system.nil?
       type = options[:is_biz_process] ? "Process" : "System"
       add_link_warning("#{type} with code \"#{data[:slug]}\" doesn't exist")
+      nil
     else
       if options[:is_biz_process] && !system.is_biz_process
-        add_link_warning("That code is used by a Process, and will not be linked")
+        add_link_warning("That code is used by a System, and will not be linked")
         nil
       elsif !options[:is_biz_process] && system.is_biz_process
-        add_link_warning("That code is used by a System, and will not be linked")
+        add_link_warning("That code is used by a Process, and will not be linked")
         nil
       else
         system
