@@ -23,6 +23,8 @@ jQuery(document).ready(function($) {
   }).next().hide();
 });*/
 
+jQuery.migrateMute = false; //turn off console warnings for jQuery-migrate
+
 jQuery(document).ready(function($) {
   // TODO: Not AJAX friendly
   $('.bar[data-percentage]').each(function() {
