@@ -38,7 +38,11 @@ class ControlRowConverter < BaseRowConverter
            :role => :responsible)
     handle(:categories, LinkCategoriesHandler, :scope_id => Control::CATEGORY_TYPE_ID)
     handle(:assertions, LinkCategoriesHandler, :scope_id => Control::CATEGORY_ASSERTION_TYPE_ID)
-    handle(:systems, LinkSystemsHandler)
+    handle(:systems, LinkSystemsHandler,
+           :is_biz_process => false)
+    handle(:processes, LinkSystemsHandler,
+           :association => :systems,
+           :is_biz_process => true)
   end
 end
 
@@ -59,6 +63,7 @@ class ControlsConverter < BaseConverter
     Stop\ Date stop_date
     URL url
     Link:Systems systems
+    Link:Processes processes
     Link:Categories categories
     Link:Assertions assertions
     Documentation documentation_description

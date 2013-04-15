@@ -1,5 +1,5 @@
--columns = %w(slug title description kind means start_date stop_date url systems categories assertions documentation_description verify_frequency documents people key_control active fraud_related)
--header_overrides = { :documents => "References", :systems => "Systems", :categories => "Categories", :people => "Operator", :assertions => "Assertions" }
+-columns = %w(slug title description kind means start_date stop_date url systems processes categories assertions documentation_description verify_frequency documents people key_control active fraud_related)
+-header_overrides = { :documents => "References", :systems => "Systems", :processes => "Processes", :categories => "Categories", :people => "Operator", :assertions => "Assertions" }
 
 -content_for :import_cancel_path, flow_directive_path(@directive)
 
@@ -22,7 +22,7 @@
           %label{:for => "version"} Version
           %input#version.span12{:disabled => "disabled", :value => @directive.version, :type => "text"}
 
--width_pcts = %w(5 5 10 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5)
+-width_pcts = %w(5 5 10 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5)
 
 =render :partial => 'shared/import_table',
         :locals => { :columns => columns, :header_overrides => header_overrides, :width_pcts => width_pcts, :converter => @import }

@@ -683,7 +683,7 @@ class LinkPeopleHandler < LinksHandler
 
   def parse_item(value)
     if value.starts_with?('[')
-      re = /^\[(\w+@[^\s\]]+)\s+(\w+)\]([\w\s]+)$/
+      re = /^\[(\w+@[^\s\]]+)\s+(\w+)\]([\w\s]*)$/
       match = value.match(re)
       if match
         data = { :email => match[1], :name => match[3] }
@@ -693,12 +693,16 @@ class LinkPeopleHandler < LinksHandler
     else
       data = { :email => value }
     end
-    if data[:email].present? && !/^#{EmailValidator::EMAIL_RE}$/.match(data[:email])
-      add_link_warning("This email address is invalid and will not be linked")
-      #data[:email] = "#{data[:email]}@#{CMS_CONFIG['DEFAULT_DOMAIN']}"
-      nil
+    if data
+      if data[:email].present? && !/^#{EmailValidator::EMAIL_RE}$/.match(data[:email])
+        add_link_warning("This email address is invalid and will not be linked")
+        #data[:email] = "#{data[:email]}@#{CMS_CONFIG['DEFAULT_DOMAIN']}"
+        nil
+      else
+        data
+      end
     else
-      data
+      nil
     end
   end
 
@@ -785,6 +789,11 @@ class LinkSystemsHandler < LinksHandler
         system
       end
     end
+  end
+
+  def get_existing_items
+    where_params = { :is_biz_process => options[:is_biz_process] }
+    super().where(where_params)
   end
 
   def create_item(data)
