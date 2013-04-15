@@ -1,0 +1,66 @@
+-column_name = column_name.to_sym
+-cell = result[column_name]
+
+-td_class = cell.nil? ? '' : (cell.has_errors? ? 'member-failure' : (cell.has_warnings? ? 'member-warning' : '' ))
+
+%td{ :class => td_class }
+
+  -case cell
+
+  -when LinkDocumentsHandler
+    -first=true
+    -cell.links_with_details.each do |status, document, value, errors, warnings|
+      -if first
+        -first=false
+      -else
+        %hr
+      -case status
+      -when :created
+        %span
+          new link:
+        %a{ :href => document.link, :rel => 'tooltip', :title => document.link }
+          =document.title.presence || document.link
+      -when :existing
+        %a{ :href => document.link, :rel => 'tooltip', :title => document.link }
+          =document.title.presence || document.link
+      -else
+        =value
+      .help-inline=errors.join(", ")
+      .help-inline-warning=warnings.join(", ")
+
+  -when LinksHandler
+    -first=true
+    -cell.links_with_details.each do |status, object, value, errors, warnings|
+      -if first
+        -first=false
+      -else
+        %hr
+      -case status
+      -when :created
+        %span
+          new link:
+        =cell.display_link(object)
+      -when :existing
+        =cell.display_link(object)
+      -else
+        =value
+      .help-inline=errors.join(", ")
+      .help-inline-warning=warnings.join(", ")
+
+  -when TextOrHtmlColumnHandler
+    =display_as_html cell.display
+
+  -else
+    =cell.display
+
+  -if result.errors_for(column_name).present?
+    .help-inline
+      -result.errors_for(column_name).each do |message|
+        =message
+        %br
+  -if result.warnings_for(column_name).present?
+    .help-inline-warning
+      -result.warnings_for(column_name).each do |message|
+        =message
+        %br
+

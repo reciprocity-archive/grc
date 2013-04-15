@@ -1,0 +1,26 @@
+-# Locals: columns, header_overrides, width_pcts, converter
+
+%table.ggrc-table{:cellspacing => "0", :cellpadding => "0"}
+  -width_pcts.each do |width_pct|
+    %col{ :style => "width:#{width_pct}%" }
+  %thead
+    %tr
+      -columns.each do |column_name|
+        %th
+          -if header_overrides[column_name.to_sym]
+            =header_overrides[column_name.to_sym]
+          -else
+            #{converter.get_header_for_column(column_name)}
+  %tbody
+    %tr
+      %td{:colspan => width_pcts.size, :cellspacing => "0", :cellpadding => "0"}
+        .inner-table
+          %table.inner-ggrc-table{:cellspacing => "0", :cellpadding => "0"}
+            -width_pcts.each do |width_pct|
+              %col{ :style => "width:#{width_pct}%" }
+            %tbody
+              -converter.results.each_with_index do |result, i|
+                %tr{ :class => (i % 2 == 0 ? :odd : :even) }
+                  -columns.each do |column_name|
+                    =render :partial => 'shared/import_cell', :locals => { :result => result, :column_name => column_name }
+

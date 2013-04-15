@@ -53,4 +53,14 @@ class Person < ActiveRecord::Base
   def abilities(object = nil)
     Authorization::abilities(self, object)
   end
+
+  def for_email
+    if name.present? && email.present?
+      "#{name} <#{email}>"
+    elsif name.present?
+      name
+    else
+      email
+    end
+  end
 end

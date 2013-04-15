@@ -26,6 +26,10 @@ class Category < ActiveRecord::Base
     ancestors.map(&:display_name).join(",")
   end
 
+  def get_path
+    self_and_ancestors.map { |node| node.name }.join("/")
+  end
+
   def as_json(options={})
     super(options.merge(:methods => :parent_name))
   end

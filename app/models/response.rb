@@ -84,4 +84,44 @@ class Response < ActiveRecord::Base
     end
     as_json(o)
   end
+
+  def csv_doclink(document)
+    document.nil? ? 'not yet provided' : "#{document.title}\n#{document.link_url}"
+  end
+
+  def csv_doclinks
+    index = 0
+
+    case request.type_name
+    when 'Population Sample'
+      [ "Population Worksheet:",
+        csv_doclink(population_sample.population_document),
+        "",
+        "Sample Worksheet:",
+        csv_doclink(population_sample.sample_worksheet_document),
+        "",
+        "Sample Evidence:",
+        csv_doclink(population_sample.sample_evidence_document)
+      ].join("\n")
+    when 'Documentation'
+      documents.map do |document|
+        index += 1
+        "Document ##{index}:\n#{csv_doclink(document)}"
+      end.join("\n\n")
+    when 'Interview'
+      participants = people.all
+      if meetings.count > 0
+        meeting_csv = meetings.map do |meeting|
+          index += 1
+          "Meeting ##{index}:\n#{meeting.calendar_url}"
+        end.join("\n\n")
+      else
+        meeting_csv = "Meeting not yet scheduled"
+      end
+      [ meeting_csv,
+        "",
+       "Participants:\n#{participants.map(&:for_email).join(", ")}"
+      ].join("\n")
+    end
+  end
 end

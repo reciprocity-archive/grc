@@ -15,6 +15,7 @@
 -notes = instance.send(notes_attr) if local_assigns[:notes].nil? && instance[notes_attr].present?
 
 -description = description.present? ? description.gsub(/^(?:&nbsp;|<br\/?>|\s)+|(?:&nbsp;|<br\/?>|\s)+$/, '') : nil
+-notes = notes.present? ? notes.gsub(/^(?:&nbsp;|<br\/?>|\s)+|(?:&nbsp;|<br\/?>|\s)+$/, '') : nil
 
 -extra_description = nil if local_assigns[:extra_description].nil?
 -span_class = 'span8' if local_assigns[:span_class].nil?
@@ -23,7 +24,7 @@
 -object_icon = nil if local_assigns[:object_icon].nil?
 
 %div{ :class => span_class }
-  -if title.present? && (description.present? || notes.present?)
+  -if title.present? && (description.present? || (include_notes && notes.present?))
     -# Both title and description
     .oneline.expand-on-hover
       -if object_type.present?
@@ -79,7 +80,7 @@
             + Add Abstract
       %i No description
 
-  -elsif (description.present? || notes.present?)
+  -elsif (description.present? || (include_notes && notes.present?))
     -# Description only
     .oneline.expand-on-hover
       -if object_type.present?

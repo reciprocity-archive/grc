@@ -58,6 +58,24 @@ can.Model("can.Model.Cacheable", {
       }
     });
   }
+  , model : function(params) {
+    var m;
+    var obj_name = this.root_object;
+    if(m = this.findInCacheById(params.id || params[obj_name].id)) {
+      m.attr(params);      
+    } else {
+      m = this._super(params);
+    }
+    if(typeof obj_name !== "undefined" && params[obj_name]) {
+        for(var i in params[obj_name]) {
+          if(params[obj_name].hasOwnProperty(i)) {
+            m.attr(i, params[obj_name][i]);
+          }
+        }
+        m.removeAttr(obj_name);
+    }
+    return m;
+  }
   , tree_view_options : {}
 }, {
   init : function() {

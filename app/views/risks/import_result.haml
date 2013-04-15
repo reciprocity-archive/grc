@@ -1,87 +1,12 @@
--@messages = @messages.reject{|m|m.starts_with?("Invalid risk heading")}
+-columns = %w(slug title description likelihood_rating likelihood threat_vector trigger preconditions financial_impact_rating operational_impact_rating reputational_impact_rating impact inherent_risk risk_mitigation residual_risk url controls systems processes products markets data_assets)
+-header_overrides = { :controls => "Controls" }
 
-.row-fluid
-  %hr.hr-widget
+-content_for :import_success do
+  Import of Risks is done.  Return to the
+  =link_to "Dashboard", programs_dash_path
 
-.row-fluid
-  %h4 Data to Import
+-width_pcts = %w(4 5 5 3 5 5 5 5 4 4 4 5 6 5 5 4 4 4 4 4 4 4)
 
-.row-fluid
-  #sampleData.span12
-    -if @messages.present?
-      -@messages.each do |m|
-        %p.label-warning
-          =m
-      %br
-
-    -if @errors.any?
-      %p.label-warning
-        See specific errors below
-      %br
-
-
-    -width_pcts = %w(4 5 5 3 6 6 6 6 4 4 4 6 7 6 6 4 5)
-    %table.ggrc-table{:cellspacing => "0", :cellpadding => "0"}
-      -width_pcts.each do |width_pct|
-        %col{ :style => "width:#{width_pct}%" }
-      %thead
-        %tr
-          %th Code
-          %th Title
-          %th Description
-          %th Likelihood Score
-          %th Likelihood Description
-          %th Threat Vector
-          %th Trigger
-          %th Pre-Conditions
-          %th Financial Impact Score
-          %th Operational Impact Score
-          %th Reputational Impact Score
-          %th Impact Description
-          %th Inherent Risk Note
-          %th Risk Mitigation Note
-          %th Residual Risk Note
-          %th URL
-          %th Controls
-      %tbody
-        %tr
-          %td{:colspan => "18", :cellspacing => "0", :cellpadding => "0"}
-            .inner-table
-              %table.inner-ggrc-table{:cellspacing => "0", :cellpadding => "0"}
-                -width_pcts.each do |width_pct|
-                  %col{ :style => "width:#{width_pct}%" }
-                %tbody
-                  -columns = %w(slug title description likelihood_rating likelihood threat_vector trigger preconditions financial_impact_rating operational_impact_rating reputational_impact_rating impact inherent_risk risk_mitigation residual_risk url controls_display)
-                  -@objects.each_with_index do |sec, i|
-                    %tr{ :class => (i % 2 == 0 ? :odd : :even) }
-                      -columns.each do |column_name|
-                        %td{ :class => ( (@errors[i].present? && @errors[i][column_name].present?) ? 'member-failure' : ((@warnings[i].present? && @warnings[i][column_name].present?) ? 'member-warning' : '' ) ) }
-                          =sec.send(column_name)
-                          -if @errors[i].present? && @errors[i][column_name].present?
-                            .help-inline=@errors[i][column_name].join(', ')
-                          -if @warnings[i].present? && @warnings[i][column_name].present?
-                            .help-inline=@warnings[i][column_name].join(', ')
-
-    Showing 1 to #{@objects.size} of #{@objects.size} entries
-    %br/
-    #{@creates.size} created, #{@updates.size} updated
-
-%br
-
-.row-fluid
-  -if params[:confirm].blank?
-    .span8
-    .span1
-      =link_to "Cancel", programs_dash_path, :class => "btn btn-large"
-    .span3
-      -if @errors.any?
-        =submit_tag "Correct Errors Before Proceeding", :class => %w(btn btn-large btn-warning pull-right), :name => 'confirm', :disabled => true
-      -elsif @messages.any? || (@warnings.any? { |k,v| v.present? })
-        =submit_tag "Proceed With Caution", :class => %w(btn btn-large btn-warning pull-right), :name => 'confirm'
-      -else
-        =submit_tag "Finish Importing", :class => %w(btn btn-large btn-success pull-right), :name => 'confirm'
-  -else
-    .span12
-      Import of Risks is done.  Return to the
-      =link_to "Dashboard", programs_dash_path
+=render :partial => 'shared/import_table',
+        :locals => { :columns => columns, :header_overrides => header_overrides, :width_pcts => width_pcts, :converter => @import }
 

@@ -1,98 +1,13 @@
--@messages = @messages.reject{|m|m.starts_with?("Invalid #{@is_biz_process ? "process" : "system"} heading")}
+-columns = %w(slug title description start_date people categories sub_systems sub_processes org_groups documents network_zone)
 
-.row-fluid
-  %hr.hr-widget
+-header_overrides = { :slug => "Code", :controls => "Controls", :categories => "Categories", :sub_systems => "Sub Systems", :sub_processes => "Sub Processes", :documents => "References", :people => "Owner", :org_groups => "Org Groups" }
 
-.row-fluid
-  %h4 Data to Import
+-content_for :import_success do
+  Import of Systems is done.  Return to the
+  =link_to "Dashboard", programs_dash_path
 
-.row-fluid
-  #sampleData.span12
-    -if @messages.present?
-      -@messages.each do |m|
-        %p.label-warning
-          =m
-      %br
+-width_pcts = %w(8 9 10 9 10 8 8 8 8 8 8)
 
-    -if @errors.any?
-      %p.label-warning
-        See specific errors below
-      %br
-
-
-    %table.ggrc-table{:cellspacing => "0", :cellpadding => "0"}
-      %col{:style => "width:8%"}
-      %col{:style => "width:9%"}
-      %col{:style => "width:10%"}
-      %col{:style => "width:9%"}
-      %col{:style => "width:9%"}
-      %col{:style => "width:10%"}
-      %col{:style => "width:9%"}
-      %col{:style => "width:9%"}
-      %col{:style => "width:9%"}
-      %col{:style => "width:9%"}
-      %col{:style => "width:9%"}
-      %thead
-        %tr
-          %th Code
-          %th Title
-          %th Description
-          %th Infrastructure
-          %th Effective Date
-          %th Owner
-          %th Categories
-          %th Sub #{@is_biz_process ? "Processes" : "Systems"}
-          %th Org Groups
-          %th References
-          %th Network Zone
-      %tbody
-        %tr
-          %td{:colspan => "11", :cellspacing => "0", :cellpadding => "0"}
-            .inner-table
-              %table.inner-ggrc-table{:cellspacing => "0", :cellpadding => "0"}
-                %col{:style => "width:8%"}
-                %col{:style => "width:9%"}
-                %col{:style => "width:10%"}
-                %col{:style => "width:9%"}
-                %col{:style => "width:9%"}
-                %col{:style => "width:10%"}
-                %col{:style => "width:9%"}
-                %col{:style => "width:9%"}
-                %col{:style => "width:9%"}
-                %col{:style => "width:9%"}
-                %col{:style => "width:9%"}
-                %tbody
-                  -columns = %w(slug title description infrastructure start_date owner_display categories_display sub_systems_display org_groups_display references_display network_zone)
-                  -@systems.each_with_index do |sec, i|
-                    %tr{ :class => (i % 2 == 0 ? :odd : :even) }
-                      -columns.each do |column_name|
-                        %td{ :class => ( (@errors[i].present? && @errors[i][column_name].present?) ? 'member-failure' : ((@warnings[i].present? && @warnings[i][column_name].present?) ? 'member-warning' : '' ) ) }
-                          =sec.send(column_name)
-                          -if @errors[i].present? && @errors[i][column_name].present?
-                            .help-inline=@errors[i][column_name].join(', ')
-                          -if @warnings[i].present? && @warnings[i][column_name].present?
-                            .help-inline=@warnings[i][column_name].join(', ')
-
-    Showing 1 to #{@systems.size} of #{@systems.size} entries
-    %br/
-    #{@creates.size} created, #{@updates.size} updated
-
-%br
-
-.row-fluid
-  -if params[:confirm].blank?
-    .span8
-    .span1
-      =link_to "Cancel", programs_dash_path, :class => "btn btn-large"
-    .span3
-      -if @errors.any?
-        =submit_tag "Correct Errors Before Proceeding", :class => %w(btn btn-large btn-warning pull-right), :name => 'confirm', :disabled => true
-      -elsif @messages.any? || (@warnings.any? { |k,v| v.present? })
-        =submit_tag "Proceed With Caution", :class => %w(btn btn-large btn-warning pull-right), :name => 'confirm'
-      -else
-        =submit_tag "Finish Importing", :class => %w(btn btn-large btn-success pull-right), :name => 'confirm'
-  -else
-    .span12
-      Import of #{@is_biz_process ? "Processes" : "Systems"} is done.  Return to the
-      =link_to "Dashboard", programs_dash_path
+=render :partial => 'shared/import_table',
+        :locals => { :columns => columns, :header_overrides => header_overrides, :width_pcts => width_pcts, :converter => @import }
 

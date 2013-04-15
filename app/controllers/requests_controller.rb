@@ -65,7 +65,7 @@ class RequestsController < BaseObjectsController
       #%w(type).each do |field|
       #  parse_option_param(request_params, field)
       #end
-      %w(date_requested).each do |field|
+      %w(date_requested response_due_at).each do |field|
         parse_date_param(request_params, field)
       end
       request_params

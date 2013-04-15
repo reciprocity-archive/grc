@@ -57,8 +57,11 @@
               {{#linked_controls}}
               <li>
                 <a href="javascript://" class="jump-to-control" data-content-id="{{content_id}}">
-                  {{title}}
-                  <small>{{slug}}</small>
+                  {{#pack this}}
+                    {{! careful to avoid using the section's title or slug here, especially when the controls haven't loaded yet }}
+                    <span>{{firstnonempty control.title title}}</span>
+                    <small>{{firstnonempty control.slug slug}}</small>
+                  {{/pack}}
                 </a>
               </li>
               {{/linked_controls}}

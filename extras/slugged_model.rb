@@ -16,7 +16,7 @@ module SluggedModel
       before_validation :generate_random_slug_if_needed
       after_validation :revert_generated_slug_if_needed
       before_save :generate_random_slug_if_needed
-      before_save :upcase_slug
+      before_validation :upcase_slug
       after_save :generate_human_slug_if_needed
       after_rollback :revert_generated_slug_if_needed
     end
@@ -39,6 +39,10 @@ module SluggedModel
       st = SlugTree.new("")
       items.each { |item| st.insert(item) }
       st
+    end
+
+    def prepare_slug(slug)
+      slug.strip.gsub(/\r|\n/, " ").upcase
     end
   end
 
@@ -84,7 +88,7 @@ module SluggedModel
   end
 
   def slug=(value)
-    super(value.present? ? value.upcase : nil)
+    super(value.present? ? self.class.prepare_slug(value) : nil)
   end
 
   def default_slug_prefix
@@ -94,7 +98,7 @@ module SluggedModel
 private
 
   def upcase_slug
-    self.slug = slug.present? ? slug.upcase : nil
+    self.slug = slug.present? ? self.class.prepare_slug(slug) : nil
   end
 
   def generate_random_slug_if_needed

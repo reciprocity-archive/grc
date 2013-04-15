@@ -50,13 +50,25 @@ class ControlsController < BaseObjectsController
       @controls = @controls.joins(:directive).where(Directive.arel_table[:company].eq(true))
     end
     if params[:directive_id].present?
-      @controls = @controls.where(:directive_id => params[:directive_id])
+      @controls = @controls.
+        includes(:sections).
+        where(
+          Control.arel_table[:directive_id].eq(params[:directive_id]).or(
+            Section.arel_table[:directive_id].eq(params[:directive_id])))
     end
     if params[:program_id].present?
-      @controls = @controls.joins(:directive => :program_directives).where(:program_directives => { :program_id => params[:program_id] })
+      program = Program.where(:id => params[:program_id]).first
+      directive_ids = program ? program.directive_ids : []
+      @controls = @controls.
+        includes(:sections).
+        where(
+          Control.arel_table[:directive_id].in(directive_ids).or(
+            Section.arel_table[:directive_id].in(directive_ids)))
     end
     if params[:system_id].present?
-      @controls = @controls.joins(:system_controls).where(:system_controls => { :system_id => params[:system_id] })      
+      @controls = @controls.
+        joins(:system_controls).
+        where(:system_controls => { :system_id => params[:system_id] })
     end
     @controls = @controls.includes(:control_sections)
     @controls = allowed_objs(@controls.all, :read)

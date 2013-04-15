@@ -39,7 +39,7 @@ CmsRails::Application.routes.draw do
     end
   end
 
-  resources :sections, :as => 'flow_sections', :only => [:new, :edit, :create, :update, :destroy] do
+  resources :sections, :as => 'flow_sections', :only => [:index, :new, :edit, :create, :update, :destroy] do
     member do
       get 'tooltip'
       get 'delete'
@@ -235,8 +235,10 @@ CmsRails::Application.routes.draw do
   resources :pbc_lists, :as => 'flow_pbc_lists', :only => [:show, :new, :create, :edit, :update, :destroy] do
     member do
       get 'delete'
-      match 'import'
-      match 'export'
+      get 'import'
+      post 'import'
+      get 'export'
+      get 'export_responses'
     end
   end
 

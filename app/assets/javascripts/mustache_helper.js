@@ -345,7 +345,7 @@ can.each(["firstexist", "firstnonempty"], function(fname) {
     for(var i = 0; i < args.length; i++) {
       var v = args[i];
       if(typeof v === "function") v = v.call(this);
-      if(v != null && (fname === "firstexist" || !!(v.toString().trim()))) return v;
+      if(v != null && (fname === "firstexist" || !!(v.toString().trim().replace(/&nbsp;|\s|<br *\/?>/g, "")))) return v;
     }
     return "";
   });
@@ -360,8 +360,21 @@ Mustache.registerHelper("pack", function() {
           objects[i] = obj = obj();
       }
     if(obj instanceof can.Observe) {
-      obj.bind("change", function(attr, how, newVal, oldVal) {
+      obj.bind("change", function(ev, attr, how, newVal, oldVal) {
+        var tokens, idx, subobj;
+        switch(how) {
+        case "remove":
+        case "add":
+        tokens = attr.split(".");
+        idx = tokens.pop();
+        subobj = can.getObject(tokens.join("."), pack);
+        subobj && (subobj instanceof can.Observe.List 
+          ? subobj.splice.apply(subobj, how === "remove" ? [+idx, 1] : [+idx, 0, newVal])
+          : subobj.attr(newVal));
+        break;
+        default:          
         pack.attr(attr, newVal);
+        }
       });
     } 
     pack.attr(obj.serialize ? obj.serialize() : obj);

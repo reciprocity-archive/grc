@@ -94,8 +94,9 @@ The company logo shows in the top-left corner of most pages.  If this setting is
 
 Now that your environment and database are configured, you need to initialize the database with the schema and some seed data.  Do the following:
 
-    bundle exec rake db:migrate
+    bundle exec rake db:schema:load
     bundle exec rake db:seed
+    bundle exec rake demo:seed
 
 ### Setup for testing:
 
@@ -143,6 +144,7 @@ You have RVM, right?  Do this:
     # Initialize database
     bundle exec rake db:schema:load
     bundle exec rake db:seed
+    bundle exec rake demo:seed
 
     # Run tests and cross fingers
     bundle exec rake db:test:load

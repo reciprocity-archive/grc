@@ -81,11 +81,13 @@ ActiveRecord::Base.transaction do
     first_or_create!(
       {:title => 'Company Control 1', :description => 'x', :directive => prog1},
       :without_protection => true)
-  cycle = Cycle.
-    where(:directive_id => prog1).
-    first_or_create!(
-      {:title => 'Audit 1', :directive => prog1, :start_at => '2011-01-01', :complete => false},
-      :without_protection => true)
+
+  # FIXME: Cycles now relate to programs
+  #cycle = Cycle.
+  #  where(:directive_id => prog1).
+  #  first_or_create!(
+  #    {:title => 'Audit 1', :directive => prog1, :start_at => '2011-01-01', :complete => false},
+  #    :without_protection => true)
 
   # People
 
@@ -100,9 +102,10 @@ ActiveRecord::Base.transaction do
     where(:role => 'owner').
     first_or_create!(:person => person2)
 
-  sc = SystemControl.
-    where(:control_id => ctl, :system_id => sys, :cycle_id => cycle).
-    first_or_create!({}, :without_protection => true)
+  # FIXME: Fix when cycle is fixed above
+  #sc = SystemControl.
+  #  where(:control_id => ctl, :system_id => sys, :cycle_id => cycle).
+  #  first_or_create!({}, :without_protection => true)
 
   doc = Document.
     where(:link => 'http://doc1.com/', :title => 'Doc 1').

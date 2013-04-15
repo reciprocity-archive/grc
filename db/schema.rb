@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130401021452) do
+ActiveRecord::Schema.define(:version => 20130408232348) do
 
   create_table "accounts", :force => true do |t|
     t.string   "username"
@@ -401,6 +401,7 @@ ActiveRecord::Schema.define(:version => 20130401021452) do
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false
     t.integer  "control_assessment_id"
+    t.date     "response_due_at"
   end
 
   add_index "requests", ["control_assessment_id"], :name => "index_requests_on_control_assessment_id"

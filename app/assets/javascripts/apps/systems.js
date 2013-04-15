@@ -2,7 +2,7 @@
 
 (function(can, $) {
 
-if(!/^\/systems/.test(window.location.pathname))
+if(!/^\/systems\/\d+/.test(window.location.pathname))
  return;
 
 var system_id = /^\/systems\/(\d+)/.exec(window.location.pathname)[1];
