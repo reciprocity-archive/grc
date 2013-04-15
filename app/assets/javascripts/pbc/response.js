@@ -63,30 +63,34 @@ CMS.Models.System("CMS.Models.Response", {
 
     , findAll : "GET /responses.json"
     , destroy : "DELETE /responses/{id}.json"
+    , model : function(params) {
+      var m = this._super(params);
+      m.reinit();
+      return m;
+    }
 }, {
 
     init : function() {
         this._super();
 
-        function reinit() {
-          this.system != null && this.attr("system", new CMS.Models.System(this.system ? this.system.serialize() : {}));
-            this.attr(
-              "population_sample"
-              , new CMS.Models.PopulationSample(
-                  this.population_sample && this.population_sample.serialize 
-                  ? this.population_sample.serialize() 
-                  : this.population_sample
-            ));
-            var mtgs = new can.Model.List();
-            can.each(this.attr("meetings"), function(val) {
-              mtgs.push(new CMS.Models.Meeting(val.serialize ? val.serialize() : val));
-            });
-            this.attr("meetings", mtgs);
-        }
+        this.bind("created updated", can.proxy(this.reinit, this));
 
-        this.bind("created", can.proxy(reinit, this));
-
-        reinit.call(this);
+        this.reinit();
     }
 
+    , reinit : function() {
+      this.system != null && this.attr("system", new CMS.Models.System(this.system ? this.system.serialize() : {}));
+        this.attr(
+          "population_sample"
+          , new CMS.Models.PopulationSample(
+              this.population_sample && this.population_sample.serialize 
+              ? this.population_sample.serialize() 
+              : this.population_sample
+        ));
+        var mtgs = new can.Model.List();
+        can.each(this.attr("meetings"), function(val) {
+          mtgs.push(new CMS.Models.Meeting(val.serialize ? val.serialize() : val));
+        });
+        this.attr("meetings", mtgs);
+    }
 });
