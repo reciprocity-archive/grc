@@ -13,14 +13,14 @@ can.Model.Cacheable("CMS.Models.Control", {
       , data : this.process_args(params, ["notes", "title", "description"])
     })
   }
-  , model : function(attrs) {
-    var id;
-    if((id = attrs.id || (attrs[this.root_object] && attrs[this.root_object].id)) && this.findInCacheById(id)) {
-      return this.findInCacheById(id);
-    } else {
-      return this._super.apply(this, arguments);
-    }
-  }
+  // , model : function(attrs) {
+  //   var id;
+  //   if((id = attrs.id || (attrs[this.root_object] && attrs[this.root_object].id)) && this.findInCacheById(id)) {
+  //     return this.findInCacheById(id);
+  //   } else {
+  //     return this._super.apply(this, arguments);
+  //   }
+  // }
 }
 , {
 // prototype properties

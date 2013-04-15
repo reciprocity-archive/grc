@@ -368,7 +368,9 @@ Mustache.registerHelper("pack", function() {
         tokens = attr.split(".");
         idx = tokens.pop();
         subobj = can.getObject(tokens.join("."), obj);
-        subobj && subobj.splice.apply(subobj, how === "remove" ? [+idx, 1] : [+idx, 0, newVal]);
+        subobj && (subobj instanceof can.Observe.List 
+          ? subobj.splice.apply(subobj, how === "remove" ? [+idx, 1] : [+idx, 0, newVal])
+          : subobj.attr(newVal));
         break;
         default:          
         pack.attr(attr, newVal);
