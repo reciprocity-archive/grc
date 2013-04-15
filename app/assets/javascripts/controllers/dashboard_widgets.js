@@ -43,7 +43,13 @@ CMS.Controllers.Filterable("CMS.Controllers.DashboardWidgets", {
     .addClass("widget")
     .addClass(this.options.object_category)
     .attr("id", this.options.object_type + "_list_widget")
-    .html(new Spinner().spin().el)
+    .css("height", this.options.minimum_widget_height)
+    .html($(new Spinner().spin().el).css({
+        width: '100px',
+        height: '100px',
+        left: '50px',
+        top: '50px'
+        }))
     .trigger("section_created");
 
     if(this.options.is_related) {
