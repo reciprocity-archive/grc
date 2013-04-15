@@ -124,41 +124,42 @@
                           -else
                             -type_shorthand = "Int"
                           %span.request-title{:rel => "tooltip", :title => "#{request.type_name}"}=type_shorthand
-                      .span2.pbc-item.pbc-control
-                        -if request.control.present?
-                        -elsif request.pbc_control_code.present?
-                          %i.grcicon-control-color
-                          %span.control.error.oneline{:rel => "tooltip", :title => "Code not recognized"}
-                            ="#{request.pbc_control_code}"
-                        -else
-                          %i.grcicon-control-color
-                          %span.control.error.oneline
-                            UNKNOWN
-                        -if !request.control.present? && !pbc_is_read_only
-                          %a.btn.btn-mini.btn-danger.btn-controllink{:href => flow_controls_path(:list_select => 1), :'data-toggle' => 'modal-ajax-single-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#referenceList', :'data-modal-class' => 'modal-slim' }
-                            %i.grcicon-link-white
-                        -if request.control.present?
-                          -if request.responses.count > 0
-                            %span.pbc-request-count=pluralize(request.responses.count, "response")
-                          -else
-                            0 responses
-                      .span3
-                        -if !pbc_is_read_only
-                          %label.inline.assignee{ :for => "request_" + request.id.to_s + "_responsible"}
-                            assignee:                      
-                          -if request.company_responsible == "" 
-                            %input.pbc-request-assignee.empty{ :id => "request_" + request.id.to_s + "_responsible", :type => "text", :value => request.company_responsible, :rel => "tooltip", :title => "Add Assignee", :placeholder => "Add assignee" }
-                          -else
-                            %input.pbc-request-assignee{ :id => "request_" + request.id.to_s + "_responsible", :type => "text", :value => request.company_responsible, :rel => "tooltip", :title => "Change Assignee", :placeholder => "Add assignee" }
-                        -else
-                          -if request.company_responsible == ""
-                            %p.oneline
-                              %span.not-assigned not assigned
-                          -else
-                            %p.oneline.assignee-dark
-                              assignee:
-                              =request.company_responsible
                       .span4
+                        .span4.pbc-item.pbc-control
+                          -if request.control.present?
+                          -elsif request.pbc_control_code.present?
+                            %i.grcicon-control-color
+                            %span.control.error.oneline{:rel => "tooltip", :title => "Code not recognized"}
+                              ="#{request.pbc_control_code}"
+                          -else
+                            %i.grcicon-control-color
+                            %span.control.error.oneline
+                              UNKNOWN
+                          -if !request.control.present? && !pbc_is_read_only
+                            %a.btn.btn-mini.btn-danger.btn-controllink{:href => flow_controls_path(:list_select => 1), :'data-toggle' => 'modal-ajax-single-selector', :'data-modal-reset' => 'reset', :'data-list-target' => '#referenceList', :'data-modal-class' => 'modal-slim' }
+                              %i.grcicon-link-white
+                          -if request.control.present?
+                            -if request.responses.count > 0
+                              %span.pbc-request-count=pluralize(request.responses.count, "response")
+                            -else
+                              0 responses
+                        .span8
+                          -if !pbc_is_read_only
+                            %label.inline.assignee{ :for => "request_" + request.id.to_s + "_responsible"}
+                              assignee:                      
+                            -if request.company_responsible == "" 
+                              %input.pbc-request-assignee.empty{ :id => "request_" + request.id.to_s + "_responsible", :type => "text", :value => request.company_responsible, :rel => "tooltip", :title => "Add Assignee", :placeholder => "Add assignee" }
+                            -else
+                              %input.pbc-request-assignee{ :id => "request_" + request.id.to_s + "_responsible", :type => "text", :value => request.company_responsible, :rel => "tooltip", :title => "Change Assignee", :placeholder => "Add assignee" }
+                          -else
+                            -if request.company_responsible == ""
+                              %p.oneline
+                                %span.not-assigned not assigned
+                            -else
+                              %p.oneline.assignee-dark
+                                assignee:
+                                =request.company_responsible
+                      %div{ :class => pbc_is_read_only ? "span3" : "span2" }
                         .status                        
                           -if !pbc_is_read_only
                             Status:
@@ -168,11 +169,21 @@
                           -else
                             =request.status
                             
-                      .span2.request-date
+                      .request-date{ :class => pbc_is_read_only ? "span2" : "span3" }
                         -if request.date_requested.present?
-                          %span.date{"rel" => "tooltip", "data-placement" => "top", "title" => "Date Requested"}=request.date_requested && request.date_requested.strftime('%m/%d/%Y')
+                          %span.date{"rel" => "tooltip", "data-placement" => "top", "title" => "Date Requested"}
+                            =pbc_is_read_only ? "Req " : "Requested "
+                            =request.date_requested && request.date_requested.strftime('%m/%d/%Y')
                         -else
                           %span.date Unknown date
+                      .span2.request-date
+                        -if request.response_due_at.present?
+                          %span.date{"rel" => "tooltip", "data-placement" => "top", "title" => "Response Due By"}
+                            =pbc_is_read_only ? "Due " : "Responses Due "
+                            =request.response_due_at && request.response_due_at.strftime('%m/%d/%Y')
+                        -else
+                          %span.date=pbc_is_read_only ? "No Resp Due " : "No Response Due Date"
+
 
                 .item-content
                   .request-main
