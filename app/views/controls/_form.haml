@@ -79,7 +79,7 @@
   .span6
     .row-fluid
       =wrapped_select(f, :span6, :means_id, Option.options_for(:control_means).map { |o| [o.title, o.id] }, :selected => (f.object.respond_to?(:means_id) ? f.object.means_id : nil))
-      =wrapped_select(f, :span6, :verify_frequency_id, Option.options_for(:verify_frequency).map { |o| [o.title, o.id] }, :selected => (f.object.respond_to?(:verify_frequency_id) ? f.object.verify_frequency_id : nil), :label_name => 'Confirmation Frequency')
+      =wrapped_select(f, :span6, :verify_frequency_id, Option.options_for(:verify_frequency).map { |o| [o.title, o.id] }, :selected => (f.object.respond_to?(:verify_frequency_id) ? f.object.verify_frequency_id : nil), :label_name => 'Frequency')
 
 %br
 
