@@ -28,6 +28,7 @@ can.Control("CMS.Controllers.TreeView", {
     this.options.attr(this.options.model.tree_view_options).attr(opts);
     this.options.list ? this.draw_list() : this.fetch_list(this.options.parent_id);
     this.element.attr("data-object-type", can.underscore(this.options.model.shortName)).data("object-type", can.underscore(this.options.model.shortName));
+    this.element.attr("data-object-meta-type", can.underscore(this.options.model.root_object)).data("object-meta-type", can.underscore(this.options.model.root_object));
   }
   , fetch_list : function() {
     if(can.isEmptyObject(this.options.find_params.serialize())) {
@@ -117,7 +118,7 @@ can.Control("CMS.Controllers.TreeView", {
   , link_objects : function(child_object_type, child_property, $parent, data) {
     var that = this
     , parentid = $parent.data("object-id")
-    , parent_object_type = $parent.data("object-type")
+    , parent_object_type = $parent.data("object-meta-type")
     , $list = $parent.find(".item-content:first").children(".tree-structure[data-object-type=" + child_object_type + "]")
     , existing = $list.children("[data-object-id]")
                  .map(function() { return $(this).data("object-id")})
