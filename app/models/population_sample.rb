@@ -12,6 +12,7 @@ class PopulationSample < ActiveRecord::Base
   is_versioned_ext
 
   validates_presence_of :response
+  validates :population, :samples, :numericality => true
 
   def display_name
     "#{response.system.title} population sample"

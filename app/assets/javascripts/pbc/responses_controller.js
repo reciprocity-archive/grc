@@ -223,14 +223,27 @@ can.Control("CMS.Controllers.Responses", {
     //, ".save-population:not(.disabled), .save-samples:not(.disabled) click" : function(el, ev) {
       var model = el.closest("[data-model]").data("model")
       , that = this;
-      model.attr(el.attr("name"), el.val());
+      model.attr(el.attr("name"), el.val() === "" ? "0" : el.val());
       if(that.samples_timeout) {
         clearTimeout(that.samples_timeout);
       }
       that.samples_timeout = setTimeout(function() {
         that.bindXHRToButton(
           model.save().then(function() { 
-            el.next(".success").addClass("in");
+            //success condition
+            el.next(".success").text("Saved").addClass("in");
+            el.parent().removeClass("field-failure");
+            setTimeout(function() {
+              el.next(".success").removeClass("in");
+            }, 3000);
+          }, function(xhr) {
+            //error condition
+            var t = "Error", r = JSON.parse(xhr.responseText);
+            if(~can.inArray("is not a number", r.errors[el.attr("name")])) {
+              t = "Error: Numbers only";
+            }
+            el.next(".success").html("<span class='error'>" + t + "</span>").addClass("in");
+            el.parent().addClass("field-failure");
             setTimeout(function() {
               el.next(".success").removeClass("in");
             }, 3000);
