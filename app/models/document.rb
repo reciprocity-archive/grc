@@ -88,6 +88,13 @@ class Document < ActiveRecord::Base
   def complete?
     !link.nil? && !link.to_s.blank?
   end
+  
+  def count_population_samples
+    PopulationSample.where(
+      "population_document_id = ? OR sample_worksheet_document_id = ? OR sample_evidence_document_id = ?",
+      id, id, id
+    ).count
+  end
 
   def self.db_search(q)
     q = "%#{q}%"

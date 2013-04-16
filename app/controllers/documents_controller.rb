@@ -56,10 +56,8 @@ class DocumentsController < BaseObjectsController
       [
         ObjectDocument.where(:document_id => @document.id).all.map do |od|
           [od.documentable_type, od.documentable]
-        end,
-        ['PopulationWorksheetsDocumented', @document.population_worksheets_documented.count],
-        ['SampleWorksheetsDocumented', @document.sample_worksheets_documented.count],
-        ['SampleEvidencesDocumented', @document.sample_evidences_documented.count]
+        end +
+        ['PopulationSample', @document.count_population_samples],
       ] 
     end
 
