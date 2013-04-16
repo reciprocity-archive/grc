@@ -649,18 +649,23 @@ class LinkDocumentsHandler < LinksHandler
       re = /^\[([^\s]+)(?:\s+([^\]]*))?\](.*)$/
       match = value.match(re)
       if match
-        { :link => match[1], :title => match[2], :description => match[3] }
+        data = { :link => match[1], :title => match[2], :description => match[3] }
       else
         add_link_error("Invalid format")
-        nil
       end
     else
+      data = { :link => value.strip }
+    end
+    if data
       begin
-        { :link => URI(value.strip).to_s }
+        data[:link] = URI(data[:link]).to_s
+        data
       rescue URI::InvalidURIError => e
         add_link_error("Invalid format")
         nil
       end
+    else
+      nil
     end
   end
 
@@ -683,7 +688,7 @@ class LinkPeopleHandler < LinksHandler
 
   def parse_item(value)
     if value.starts_with?('[')
-      re = /^\[(\w+@[^\s\]]+)\s+(\w+)\]([\w\s]*)$/
+      re = /^\[(\w+@[^\s\]]+)(?:\s+(\w+))?\]([\w\s]*)$/
       match = value.match(re)
       if match
         data = { :email => match[1], :name => match[3] }
