@@ -651,17 +651,21 @@ class LinkDocumentsHandler < LinksHandler
       if match
         data = { :link => match[1], :title => match[2], :description => match[3] }
       else
-        add_link_error("Invalid format")
+        add_link_error("Invalid format: use \"[www.yoururl.com Document Title]\")")
       end
     else
-      data = { :link => value.strip }
+      begin
+        data = { :link => URI(value.strip).to_s }
+      rescue URI::InvalidURIError => e
+        add_link_error("Invalid format: use \"[www.yoururl.com Document Title]\")")
+      end
     end
     if data
       begin
         data[:link] = URI(data[:link]).to_s
         data
       rescue URI::InvalidURIError => e
-        add_link_error("Invalid format")
+        add_link_warning("Invalid URL")
         nil
       end
     else
