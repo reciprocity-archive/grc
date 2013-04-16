@@ -580,7 +580,8 @@ class LinksHandler < ColumnHandler
     if options[:append_only]
       # Save old links plus new links
       if save_linked_objects
-        object.send("#{options[:association]}=", get_existing_items + created_links)
+        new_objects = created_links - get_existing_items
+        object.send("#{options[:association]}") << new_objects
       else
         add_error("Failed to save necessary objects")
       end
@@ -801,7 +802,7 @@ class LinkSystemsHandler < LinksHandler
   end
 
   def get_existing_items
-    where_params = { :is_biz_process => options[:is_biz_process] }
+    where_params = { :is_biz_process => options[:is_biz_process] || false }
     super().where(where_params)
   end
 
