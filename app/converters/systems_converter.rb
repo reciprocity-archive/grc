@@ -4,8 +4,19 @@ class SystemRowConverter < BaseRowConverter
 
   def setup_object
     object = setup_object_by_slug(attrs)
-    object.infrastructure = false if object.infrastructure.nil?
-    object.is_biz_process = true if @importer.options[:is_biz_process]
+    if object.new_record?
+      object.infrastructure = false if object.infrastructure.nil?
+      object.is_biz_process = true if @importer.options[:is_biz_process]
+    else
+      if object.is_biz_process && !@importer.options[:is_biz_process]
+        add_error(:slug, "Code is already used for a Process")
+      elsif !object.is_biz_process && @importer.options[:is_biz_process]
+        add_error(:slug, "Code is already used for a System")
+      else
+        type = @importer.options[:is_biz_process] ? 'Process' : 'System'
+        add_warning(:slug, "#{type} already exists and will be updated")
+      end
+    end
   end
 
   def reify

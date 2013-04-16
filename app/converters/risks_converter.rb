@@ -2,6 +2,13 @@
 class RiskRowConverter < BaseRowConverter
   @model_class = :Risk
 
+  def setup_object
+    object = setup_object_by_slug(attrs)
+    if !object.new_record?
+      add_warning(:slug, "Risk already exists and will be updated")
+    end
+  end
+
   def reify
     handle(:slug, SlugColumnHandler)
 
