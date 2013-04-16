@@ -90,9 +90,12 @@ class Document < ActiveRecord::Base
   end
   
   def count_population_samples
+    t = PopulationSample.arel_table
+    is_population_document = t[:population_document_id].eq(id)
+    is_sample_worksheet_document = t[:sample_worksheet_document_id].eq(id)
+    is_sample_evidence_document = t[:sample_evidence_document_id].eq(id)
     PopulationSample.where(
-      "population_document_id = ? OR sample_worksheet_document_id = ? OR sample_evidence_document_id = ?",
-      id, id, id
+      is_population_document.or(is_sample_worksheet_document).or(is_sample_evidence_document)
     ).count
   end
 
