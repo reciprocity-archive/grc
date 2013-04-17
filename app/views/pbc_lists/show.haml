@@ -28,7 +28,7 @@
           %span Export Requests
     -else
       %li
-        %a{ :href => export_flow_pbc_list_path(@pbc_list), :'data-toggle' => 'modal-ajax' }
+        %a{ :href => "#{asset_path "pbc-import-template.csv"}"}
           %i.grcicon-export
           %span Get Request Template
     %li{:class => "items-#{@pbc_list.requests.count}"}

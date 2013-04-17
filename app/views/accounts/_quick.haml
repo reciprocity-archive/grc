@@ -10,7 +10,7 @@
             .span10
               .title
                 =link_to '#' do
-                  =account.display_name || "&nbsp;".html_safe
+                  =account.display_search_name || "&nbsp;".html_safe
           .item-actions
             %a.widgetbtn.btn.btn-mini{ :'data-form-target' => "refresh", :'data-delete-target' => "refresh", :'data-modal-reset' => "reset", :'data-toggle' => "modal-ajax-form", :href => edit_flow_account_path(account) }
               %i.grcicon-edit

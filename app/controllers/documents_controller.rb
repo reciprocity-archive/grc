@@ -53,9 +53,12 @@ class DocumentsController < BaseObjectsController
     end
 
     def extra_delete_relationship_stats
-      ObjectDocument.where(:document_id => @document.id).all.map do |od|
-        [od.documentable_type, od.documentable]
-      end
+      [
+        ObjectDocument.where(:document_id => @document.id).all.map do |od|
+          [od.documentable_type, od.documentable]
+        end +
+        ['PopulationSample', @document.count_population_samples],
+      ] 
     end
 
     def document_params

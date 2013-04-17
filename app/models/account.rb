@@ -36,6 +36,10 @@ class Account < ActiveRecord::Base
   def display_name
     (person.present? && person.name.presence) || email.presence
   end
+  
+  def display_search_name
+    display_name != email ? "#{display_name} - #{email}" : display_name
+  end
 
   def password=(password)
     @password = password
@@ -117,8 +121,10 @@ class Account < ActiveRecord::Base
   def self.db_search(q)
     q = "%#{q}%"
     t = arel_table
-    where(t[:username].matches(q).
-      or(t[:email].matches(q)))
+    p = Person.arel_table
+    joins(:person).where(t[:username].matches(q).
+      or(t[:email].matches(q)).
+      or(p[:name].matches(q)))
   end
 
   def disable_password!
