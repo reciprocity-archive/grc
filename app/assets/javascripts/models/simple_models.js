@@ -10,7 +10,10 @@ can.Model.Cacheable("CMS.Models.Program", {
 can.Model.Cacheable("CMS.Models.Directive", {
   root_object : "directive"
   , findAll : "/directives.json"
-}, {});
+  , findOne : "/directives/{id}.json"
+}, {
+  lowercase_kind : function() { return this.kind.toLowerCase() }
+});
 
 CMS.Models.Directive("CMS.Models.Regulation", {
   findAll : "/directives.json?meta_kind=regulation"

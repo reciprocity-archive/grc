@@ -107,7 +107,6 @@ can.Control("CMS.Controllers.TreeView", {
   , " newChild" : function(el, ev, data) {
     if(this.options.parent_id === this.data.parent_id) {
       this.options.list.push(new this.options.model(data));
-      this.element.find()
     }
   }
   , ".edit-object modal:success" : function(el, ev, data) {
@@ -137,14 +136,20 @@ can.Control("CMS.Controllers.TreeView", {
   , link_objects : function(child_object_type, child_property, $parent, data) {
     var that = this
     , parentid = $parent.data("object-id")
-    , parent_object_type = $parent.data("object-meta-type")
-    , $list = $parent.find(".item-content:first").children(".tree-structure[data-object-type=" + child_object_type + "]")
-    , existing = $list.children("[data-object-id]")
-                 .map(function() { return $(this).data("object-id")})
+    , parent_object_type = $parent.data("object-meta-type") || window.cms_singularize($(document.body).data("page-type"))
+    , $list = parentid 
+        ? $parent.find(".item-content:first").children(".tree-structure[data-object-type=" + child_object_type + "]")
+        : null
+    , existing = parentid
+        ? $list.children("[data-object-id]")
+          .map(function() { return $(this).data("object-id")})
+        : can.map(this.options.list, function(v, k) {
+            return v.id;
+          })
     , id_list = can.map(can.makeArray(data), function(v) {
       return v[parent_object_type + "_" + child_object_type][child_property];
     })
-    , child_options = $list.control(CMS.Controllers.TreeView).options
+    , child_options = (parentid ? $list.control(CMS.Controllers.TreeView) : this).options
     , find_dfds = [];
 
     can.each(id_list, function(v) {
@@ -175,11 +180,14 @@ can.Control("CMS.Controllers.TreeView", {
       });
     }
 
-    $list.parents(".item-content").siblings(".item-main").openclose("open");
-    var $box = $parent.closest(".content");
-    setTimeout(function() {
-      $box.scrollTop($list.offset().top + $list.height() - $box.height() / 2);
-    }, 300);
+    ($list ? $list.parents(".item-content").siblings(".item-main") : this.element.children("li").children(".item-main")).openclose("open");
+    if($parent && $parent.length) {
+      var $box = $parent.closest(".content");
+      setTimeout(function() {
+        $box.scrollTop(0);
+        $box.scrollTop($list.offset().top + $list.height() - $box.height() / 2);
+      }, 300);
+    }
   }
 
 });

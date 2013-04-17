@@ -32,15 +32,15 @@
                 Directives
               %ul.dropdown-menu
                 %li.add-new-item
-                  %a{:'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :'data-toggle' => "modal-ajax-relationship-selector", :href => list_edit_flow_program_directives_path(:program_id => instance.id, :directive_meta_kind => :regulation), :'data-modal-class' => 'modal-wide' }
+                  %a{:'data-modal-reset' => 'reset', :'data-toggle' => "modal-ajax-relationship-selector", :href => list_edit_flow_program_directives_path(:program_id => instance.id, :directive_meta_kind => :regulation), :'data-modal-class' => 'modal-wide', :'data-child-type' => 'directive', :'data-child-meta-type' => 'regulation', :'data-child-property' => 'directive_id' }
                     %i.grcicon-regulation-color
                     Regulation
                 %li.add-new-item
-                  %a{:'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :'data-toggle' => "modal-ajax-relationship-selector", :href => list_edit_flow_program_directives_path(:program_id => instance.id, :directive_meta_kind => :contract), :'data-modal-class' => 'modal-wide' }
+                  %a{:'data-modal-reset' => 'reset', :'data-toggle' => "modal-ajax-relationship-selector", :href => list_edit_flow_program_directives_path(:program_id => instance.id, :directive_meta_kind => :contract), :'data-modal-class' => 'modal-wide', :'data-child-type' => 'directive', :'data-child-meta-type' => 'contract', :'data-child-property' => 'directive_id' }
                     %i.grcicon-contract-color
                     Contract
                 %li.add-new-item
-                  %a{:'data-modal-reset' => 'reset', :'data-list-target' => 'refresh', :'data-toggle' => "modal-ajax-relationship-selector", :href => list_edit_flow_program_directives_path(:program_id => instance.id, :directive_meta_kind => :policy), :'data-modal-class' => 'modal-wide' }
+                  %a{:'data-modal-reset' => 'reset', :'data-toggle' => "modal-ajax-relationship-selector", :href => list_edit_flow_program_directives_path(:program_id => instance.id, :directive_meta_kind => :policy), :'data-modal-class' => 'modal-wide', :'data-child-type' => 'directive', :'data-child-meta-type' => 'policy', :'data-child-property' => 'directive_id' }
                     %i.grcicon-policy-color
                     Policy
 
@@ -48,7 +48,7 @@
   %ul.nav.nav-tabs
     -unless program.company_controls?
       %li.text-governance.active=link_to '<i class="grcicon-directive-color"></i>Directives'.html_safe, '#directives', :data => { :toggle => 'tab' }
-    %li.text-compliance=link_to '<i class="grcicon-control-color"></i>Controls'.html_safe, '#controls', :data => { :toggle => 'tab' }
+    %li.text-compliance=link_to '<i class="grcicon-control-color"></i>Controls'.html_safe, '#controls', :data => { :toggle => 'tab', :'tab-href' => flow_controls_path(:program_id => instance.id, :category_tree => true) }
     -#%li=link_to '<i class="grcicon-reg-map"></i>Combo'.html_safe, '#combo', :data => { :toggle => 'tab', :'tab-href' => flow_sections_path(:program_id => instance.id, :combo => true) }
 
   .action-items

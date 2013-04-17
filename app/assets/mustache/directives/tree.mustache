@@ -1,5 +1,5 @@
 {{#list}}
-<li class="directive" data-object-id="{{id}}" data-object-type="{{constructor.shortName}}" data-object-meta-type="directive">
+<li class="directive" data-object-id="{{id}}" data-object-sub-type="{{lowercase_kind}}" data-object-type="{{constructor.shortName}}" data-object-meta-type="directive">
     <div class="item-main">
       {{#draw_children}}
           <div class="openclose {{#if start_expanded}}active{{/if}}"></div>
@@ -8,7 +8,7 @@
         <div class="row-fluid">
           <div class="span8">
             <div class="oneline expandable">
-              <i class="grcicon-regulation-color"></i>
+              <i class="grcicon-{{lowercase_kind}}-color"></i>
               {{#notes}}
                 <i class="grcicon-comment"></i>
               {{/notes}}

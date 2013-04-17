@@ -1,7 +1,7 @@
 //= require can.jquery-all
 //= require controllers/tree_view_controller
 //= require controls/control
-//= require controls/category
+// TODO require controls/category
 
 (function(can, $) {
 
@@ -12,14 +12,27 @@ var program_id = /^\/programs\/(\d+)/.exec(window.location.pathname)[1];
 
 $(function() {
   
-  var $controls_tree = $("#controls .tree-structure").cms_controllers_tree_view({
-    model : CMS.Models.Category
+  // var $controls_tree = $("#controls .tree-structure").cms_controllers_tree_view({
+  //   model : CMS.Models.Category
 
-    , child_options : [{      
-      model : CMS.Models.Control
-      , find_params : { program_id : program_id }
-      , list_view : "/assets/controls/categories_tree.mustache"
-    }]
+  //   , child_options : [{      
+  //     model : CMS.Models.Control
+  //     , find_params : { program_id : program_id }
+  //     , list_view : "/assets/controls/categories_tree.mustache"
+  //   }]
+  // });
+
+  var directives_by_type = {
+    regulation : []
+    , contract : []
+    , policy : []
+  }
+
+  can.each(directives_by_type, function(v, k) {
+    can.ajax({url : "/program_directives.json", data : { directive_meta_kind : k , program_id : program_id }})
+    .done(function(d) {
+      directives_by_type[k] = d;
+    });
   });
 
   var $sections_tree;
@@ -51,9 +64,9 @@ $(function() {
   });
 
   $(document.body).on("modal:success", "a[href^='/program_directives/list_edit']", function(ev, data) {
-    $top_tree.trigger("linkObject", $.extend($(this).data(), {
-      parentId : system_id
-      , data : data
+    directives_by_type[$(this).data("child-meta-type")] = data;
+    $sections_tree.trigger("linkObject", $.extend($(this).data(), {
+      data : directives_by_type.regulation.concat(directives_by_type.contract).concat(directives_by_type.policy)
     }))
   });
 
