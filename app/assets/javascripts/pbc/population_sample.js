@@ -3,6 +3,8 @@
   can.Model.Cacheable("CMS.Models.PopulationSample", {
     root_object : "population_sample"
     , update : function(id, params) {
+      params.population || (params.population = 0);
+      params.samples || (params.samples = 0);
       var _params = this.process_args(params, ["population", "samples", "population_document_id", "sample_worksheet_document_id", "sample_evidence_document_id"]);
       return $.ajax({
         type : "put"
