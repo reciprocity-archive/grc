@@ -170,7 +170,7 @@ class BaseRowConverter
     if self.options[:export]
       attrs[key] = @handlers[key].export
     else
-      @handlers[key].import(attrs[key])
+      @handlers[key].do_import(attrs[key])
       add_after_save_hook(@handlers[key])
     end
   end
@@ -210,9 +210,11 @@ class ColumnHandler
   attr_accessor :importer, :options, :errors, :warnings
 
   def initialize(importer, key, options)
+    options ||= {}
+    options[:no_import] = false if !options.has_key?(:no_import)
+
     @importer = importer
     @key = key
-    options ||= {}
     @options = options
 
     @original = nil
@@ -252,9 +254,16 @@ class ColumnHandler
   def validate(data)
   end
 
+  def do_import(content)
+    @original = content
+
+    if !options[:no_import]
+      import(content)
+    end
+  end
+
   def import(content)
     if content.present?
-      @original = content
       data = parse_item(content)
       validate(data)
       if !data.nil?
@@ -269,9 +278,7 @@ class ColumnHandler
   end
 
   def export
-    if !options[:append_to]
-      option = @importer.object.send("#{@key}")
-    end
+    @importer.object.send("#{@key}")
   end
 end
 
@@ -279,7 +286,6 @@ class SlugColumnHandler < ColumnHandler
   # Don't overwrite slug on object
   def import(content)
     if content.present?
-      @original = content
       @value = content
       validate(content)
     else
@@ -314,6 +320,12 @@ class TextOrHtmlColumnHandler < ColumnHandler
   def set_attr(value)
     key = options[:append_to] || @key
     @importer.set_attr(key, value)
+  end
+
+  def export
+    if !options[:append_to]
+      @importer.object.send("#{@key}")
+    end
   end
 end
 
@@ -360,7 +372,7 @@ class DateColumnHandler < ColumnHandler
   end
 
   def display
-    has_errors? ? @original : @value
+    has_errors? ? @original : (@value.presence || @importer.object.send("#{@key}"))
   end
 end
 
