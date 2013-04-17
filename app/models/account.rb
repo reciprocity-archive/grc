@@ -38,7 +38,7 @@ class Account < ActiveRecord::Base
   end
   
   def display_search_name
-    display_name != email ? "#{display_name} (#{email})" : display_name
+    display_name != email ? "#{display_name} - #{email}" : display_name
   end
 
   def password=(password)
