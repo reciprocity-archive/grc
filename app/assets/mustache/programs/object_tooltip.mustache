@@ -1,0 +1,15 @@
+<div class="popover-inner-content">
+  <div class="row-fluid">
+    <div class="span12">
+      <h4>Description</h4>
+      <div class="rtf">
+        {{#description}}
+          {{{with_line_breaks description}}}
+        {{/description}}
+        {{^description}}
+          <p class="no-data">No description available</p>
+        {{/description}}
+    </div>
+    </div>
+  </div>
+</div>

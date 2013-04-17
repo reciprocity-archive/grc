@@ -15,6 +15,7 @@ var widget_descriptors = {
     , object_category : "governance"
     , object_route : "programs"
     , object_display : "Programs"
+    , tooltip_view : "/assets/programs/object_tooltip.mustache"
   }
   , "directive" : {
     model : CMS.Models.Directive
