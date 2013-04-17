@@ -14,8 +14,8 @@ class SectionRowConverter < BaseRowConverter
   def reify
     handle(:slug, SlugColumnHandler)
 
-    handle_date(:created_at)
-    handle_date(:updated_at)
+    handle_date(:created_at, :no_import => true)
+    handle_date(:updated_at, :no_import => true)
 
     handle_text_or_html(:description)
     handle_text_or_html(:notes)

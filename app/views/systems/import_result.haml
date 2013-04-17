@@ -1,12 +1,12 @@
--columns = %w(slug title description start_date people categories sub_systems sub_processes org_groups documents network_zone)
+-columns = %w(slug title description start_date people_responsible people_accountable sub_systems sub_processes org_groups documents network_zone)
 
--header_overrides = { :slug => "Code", :controls => "Controls", :categories => "Categories", :sub_systems => "Sub Systems", :sub_processes => "Sub Processes", :documents => "References", :people => "Owner", :org_groups => "Org Groups" }
+-header_overrides = { :slug => "Code", :controls => "Controls", :sub_systems => "Sub Systems", :sub_processes => "Sub Processes", :documents => "References", :people_responsible => "People:Responsible", :people_accountable => "People:Accountable", :org_groups => "Org Groups" }
+
+-width_pcts = %w(8 9 10 9 10 8 8 8 8 8 8)
 
 -content_for :import_success do
   Import of Systems is done.  Return to the
   =link_to "Dashboard", programs_dash_path
-
--width_pcts = %w(8 9 10 9 10 8 8 8 8 8 8)
 
 =render :partial => 'shared/import_table',
         :locals => { :columns => columns, :header_overrides => header_overrides, :width_pcts => width_pcts, :converter => @import }

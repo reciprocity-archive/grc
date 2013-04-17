@@ -1,4 +1,4 @@
--columns = %w(slug title description notes controls created_at updated_at)
+-columns = %w(slug title description notes controls)
 -header_overrides = {}
 
 -content_for :import_cancel_path, flow_directive_path(@directive)
@@ -22,7 +22,7 @@
           %label{:for => "version"} Version
           %input#version.span12{:disabled => "disabled", :value => @directive.version, :type => "text"}
 
--width_pcts = %w(8 15 24 24 15 7 7)
+-width_pcts = %w(10 20 25 25 30)
 
 =render :partial => 'shared/import_table',
         :locals => { :columns => columns, :header_overrides => header_overrides, :width_pcts => width_pcts, :converter => @import }

@@ -15,9 +15,13 @@ class RiskRowConverter < BaseRowConverter
     handle(:controls, LinkControlsHandler)
     handle(:categories, LinkCategoriesHandler,
            :scope_id => Control::CATEGORY_TYPE_ID)
+    handle(:documents, LinkDocumentsHandler)
 
-    handle(:people, LinkPeopleHandler,
+    handle(:people_responsible, LinkPeopleHandler,
+           :role => :responsible)
+    handle(:people_accountable, LinkPeopleHandler,
            :role => :accountable)
+
     handle(:systems, LinkRelationshipsHandler,
            :model_class => System,
            :relationship_type_id => :risk_is_a_threat_to_system,
@@ -94,7 +98,11 @@ class RisksConverter < BaseConverter
     Risk\ Mitigation\ Note risk_mitigation
     Residual\ Risk\ Note residual_risk
     URL url
+    Link:Categories categories
     Link:Controls controls
+    Link:References documents
+    Link:People;Responsible people_responsible
+    Link:People;Accountable people_accountable
     Link:Processes processes
     Link:Systems systems
     Link:Products products

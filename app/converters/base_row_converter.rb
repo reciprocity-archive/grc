@@ -170,7 +170,7 @@ class BaseRowConverter
     if self.options[:export]
       attrs[key] = @handlers[key].export
     else
-      @handlers[key].import(attrs[key])
+      @handlers[key].do_import(attrs[key])
       add_after_save_hook(@handlers[key])
     end
   end
@@ -210,9 +210,11 @@ class ColumnHandler
   attr_accessor :importer, :options, :errors, :warnings
 
   def initialize(importer, key, options)
+    options ||= {}
+    options[:no_import] = false if !options.has_key?(:no_import)
+
     @importer = importer
     @key = key
-    options ||= {}
     @options = options
 
     @original = nil
@@ -252,9 +254,16 @@ class ColumnHandler
   def validate(data)
   end
 
+  def do_import(content)
+    @original = content
+
+    if !options[:no_import]
+      import(content)
+    end
+  end
+
   def import(content)
     if content.present?
-      @original = content
       data = parse_item(content)
       validate(data)
       if !data.nil?
@@ -269,9 +278,7 @@ class ColumnHandler
   end
 
   def export
-    if !options[:append_to]
-      option = @importer.object.send("#{@key}")
-    end
+    @importer.object.send("#{@key}")
   end
 end
 
@@ -279,7 +286,6 @@ class SlugColumnHandler < ColumnHandler
   # Don't overwrite slug on object
   def import(content)
     if content.present?
-      @original = content
       @value = content
       validate(content)
     else
@@ -314,6 +320,12 @@ class TextOrHtmlColumnHandler < ColumnHandler
   def set_attr(value)
     key = options[:append_to] || @key
     @importer.set_attr(key, value)
+  end
+
+  def export
+    if !options[:append_to]
+      @importer.object.send("#{@key}")
+    end
   end
 end
 
@@ -360,7 +372,7 @@ class DateColumnHandler < ColumnHandler
   end
 
   def display
-    has_errors? ? @original : @value
+    has_errors? ? @original : (@value.presence || @importer.object.send("#{@key}"))
   end
 end
 
@@ -647,7 +659,7 @@ class LinkDocumentsHandler < LinksHandler
 
   def parse_item(value)
     if value.starts_with?('[')
-      re = /^\[([^\s]+)(?:\s+([^\]]*))?\](.*)$/
+      re = /^\[([^\s]+)(?:\s+([^\]]*))?\]([^$]*)$/
       match = value.match(re)
       if match
         data = { :link => match[1], :title => match[2], :description => match[3] }
@@ -693,7 +705,7 @@ class LinkPeopleHandler < LinksHandler
 
   def parse_item(value)
     if value.starts_with?('[')
-      re = /^\[(\w+@[^\s\]]+)(?:\s+(\w+))?\]([\w\s]*)$/
+      re = /^\[([\w\d-]+@[^\s\]]+)(?:\s+([^\]]+))?\]([^$]*)$/
       match = value.match(re)
       if match
         data = { :email => match[1], :name => match[3] }
@@ -769,7 +781,7 @@ class LinkSystemsHandler < LinksHandler
 
   def parse_item(value)
     if value.starts_with?('[')
-      re = /^(?:\[([\w\d-]+)\])([^$]+)$/
+      re = /^(?:\[([\w\d-]+)\])([^$]*)$/
       match = value.match(re)
       if match
         { :slug => match[1], :title => match[2] }
@@ -814,12 +826,13 @@ end
 class LinkRelationshipsHandler < LinksHandler
   def parse_item(value)
     if value.starts_with?('[')
-      re = /^(?:\[([\w-]+)\])?([\w\s]+)$/
+      re = /^(?:\[([\w\d-]+)\])?([^$]*)$/
       match = value.match(re)
       if match
         { :slug => match[1].upcase, :title => match[2] }
       else
         add_link_error("Invalid format")
+        nil
       end
     else
       { :slug => value.upcase }
