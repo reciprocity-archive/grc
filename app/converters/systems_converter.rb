@@ -21,17 +21,21 @@ class SystemRowConverter < BaseRowConverter
 
   def reify
     handle(:slug, SlugColumnHandler)
-    handle(:people, LinkPeopleHandler,
+
+    handle(:people_responsible, LinkPeopleHandler,
+           :role => :responsible)
+    handle(:people_accountable, LinkPeopleHandler,
            :role => :accountable)
-    handle(:categories, LinkCategoriesHandler,
-           :scope_id => System::CATEGORY_TYPE_ID)
+    handle(:documents, LinkDocumentsHandler)
+
     handle(:sub_systems, LinkSystemsHandler,
            :is_biz_process => false)
     handle(:sub_processes, LinkSystemsHandler,
            :association => :sub_systems,
            :is_biz_process => true)
-    handle(:documents, LinkDocumentsHandler)
+
     handle_option(:network_zone)
+
     handle(:org_groups, LinkRelationshipsHandler,
            :model_class => OrgGroup,
            :relationship_type_id =>
@@ -62,13 +66,13 @@ class SystemsConverter < BaseConverter
     Description description
     Link:References documents
     Infrastructure infrastructure
-    Link:People;Owner people
-    Link:Categories categories
+    Link:People;Responsible people_responsible
+    Link:People;Accountable people_accountable
     Link:Controls controls
     Append:Notes append_notes
     Link:System;Sub\ System sub_systems
     Link:Process;Sub\ Process sub_processes
-    Link:Org\ Group org_groups
+    Link:Org\ Group;Overseen\ By org_groups
     Effective\ Date start_date
     Created created_at
     Updated updated_at
