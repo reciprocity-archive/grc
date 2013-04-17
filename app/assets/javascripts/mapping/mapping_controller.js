@@ -279,7 +279,7 @@ can.Control("CMS.Controllers.MappingWidgets", {}, {
   //---------------------------------------------------------------
 CMS.Controllers.Mapping("CMS.Controllers.ControlMappingPopup", {
   defaults : {
-    section_model : namespace.CMS.Models.Section
+    section_model : namespace.CMS.Models.SectionSlug
     , parent_model : namespace.CMS.Models.Program
     , parent_id : null
     , observer : undefined
@@ -350,30 +350,38 @@ CMS.Controllers.Mapping("CMS.Controllers.ControlMappingPopup", {
   }
 
   , "input.map-control change" : function(el, ev) {
-    var control = el.closest("[data-model]").data("model");
-    if(~can.inArray(control, this.options.section.linked_controls) ^ el.prop("checked")) {
-      this[el.prop("checked") ? "map" : "unmap"](this.options.section, null, control);
+    var that = this
+    , control = el.closest("[data-model]").data("model")
+    , is_mapped = !!~can.inArray(control, this.options.section.linked_controls);
+
+    if(is_mapped ^ el.prop("checked")) {
+      this[is_mapped ? "unmap" : "map"](this.options.section, null, control)
+      .done(function() {
+        setTimeout(function() {
+          that.style_item(that.element.find("[content_id=" + control.content_id + "]").parent());
+        }, 10)
+      });
     }
   }
 
-  , "{section} updated" : function(obj, ev) {
-    // if(!/(^|\.)linked_controls(\.|$)/.test(attr))
-    //   return;
-    var $count = $("#content_" + obj.slug).find("> .item-main .controls-count")
-      , html;
-    if (obj.linked_controls.length > 0) {
-      html = "<i class='grcicon-control-color'></i> " + obj.linked_controls.length;
-    } else if (obj.na) {
-      html = "<i class='grcicon-control-color'></i> <small class='warning'>N/A</small>";
-    } else {
-      html = "<i class='grcicon-control-danger'></i> <strong class='error'>0</strong>";
-    }
-    $count.html(html);
-    var data = obj.linked_controls.length ? obj.linked_controls.serialize() : {na : obj.na};
-    var render_str = can.view.render("/assets/controls/list_popover.mustache", data);
-    $count.attr("data-content", render_str).data("content", render_str)
-    this.update();
-  }
+  // , "{section} updated" : function(obj, ev) {
+  //   // if(!/(^|\.)linked_controls(\.|$)/.test(attr))
+  //   //   return;
+  //   var $count = $("#content_" + obj.slug).find("> .item-main .controls-count")
+  //     , html;
+  //   if (obj.linked_controls.length > 0) {
+  //     html = "<i class='grcicon-control-color'></i> " + obj.linked_controls.length;
+  //   } else if (obj.na) {
+  //     html = "<i class='grcicon-control-color'></i> <small class='warning'>N/A</small>";
+  //   } else {
+  //     html = "<i class='grcicon-control-danger'></i> <strong class='error'>0</strong>";
+  //   }
+  //   $count.html(html);
+  //   var data = obj.linked_controls.length ? obj.linked_controls.serialize() : {na : obj.na};
+  //   var render_str = can.view.render("/assets/controls/list_popover.mustache", data);
+  //   $count.attr("data-content", render_str).data("content", render_str)
+  //   this.update();
+  // }
 
   , ".edit-control modal:success" : function(el, ev, data) {
     el.closest("[data-model]").data("model").attr(data).updated();

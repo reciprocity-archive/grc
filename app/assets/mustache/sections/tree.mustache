@@ -1,0 +1,70 @@
+{{#list}}
+  <li class="section" id="content_{{slug}}" data-id="{{id}}">
+    <div class="item-main" data-object-id="{{id}}" data-object-type="section" data-object-meta-type="section">
+      {{#show_expander draw_children children "||" draw_children linked_controls}}
+        <div class="openclose {{#if start_expanded}}active{{/if}}"></div>
+      {{/show_expander}}
+      <div class="item-title">
+        <div class="row-fluid">
+          <div class="span8">
+            <div class="oneline expandable">
+              <i class="grcicon-section-color"></i>
+              <span class="title">
+                {{title}}
+              </span>
+              <span class="code">
+                {{slug}}
+              </span>
+              <span class="description-inline">
+                {{{firstnonempty description_inline ''}}}
+              </span>
+            </div>
+            <div class="description inhover {{^description}}no-description{{/description}}">
+              {{{firstnonempty description '<i>No description</i>'}}}
+            </div>
+          </div>
+          <div class="span1">
+            <a class="view-more" href="javascript://">
+              view
+            </a>
+          </div>
+          <div class="span2">
+            <div class="objects-count">
+              <a class="controls-count controllist" data-content="{{render '/assets/controls/list_popover.mustache' linked_controls}}" data-placement="right" data-popover-trigger="sticky-hover" href="javascript://">
+                {{{withattr 'data-original-title' "<div class='row-fluid'><div class='span12'><h3><i class='grcicon-control-color'></i>Mapped Controls</h3></div></div>" }}}
+                <i class="grcicon-control-color"></i>
+                {{#if na}}
+                    {{^linked_controls}} 
+                      <small class="warning">N/A</small>
+                    {{/linked_controls}}
+                  {{#linked_controls.length}}
+                      <span>{{this}}</span>
+                  {{/linked_controls.length}}
+                {{else}}
+                    {{^linked_controls}} 
+                      <strong class="error">0</strong>
+                    {{/linked_controls}}
+                  {{#linked_controls.length}}
+                      <span>{{this}}</span>
+                  {{/linked_controls.length}}
+                {{/if}}  
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="item-actions">
+          <a class="btn btn-mini controllist pull-right" data-id="{{id}}" href="javascript://" rel="tooltip" title="Map Controls to Section">
+            <i class="grcicon-section-color"></i><i class="grcicon-reg-map"></i><i class="grcicon-control-color"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    {{#draw_children}}
+    <div class="item-content" {{#start_expanded}}style="display: block;"{{/start_expanded}}>
+      {{#child_options}}
+      <ul class="tree-structure" {{data 'options'}} {{ (el) -> el.cms_controllers_tree_view(el.data("options")) }}></ul>
+      {{/child_options}}
+    </div>
+    {{/draw_children}}
+  </li>
+{{/list}}

@@ -19,13 +19,27 @@ can.Control("CMS.Controllers.TreeView", {
   }
 }, {
   //prototype properties
-  setup : function() {
-    typeof this._super === "function" && this._super.apply(this, arguments);
-    this.options = new can.Observe(this.options);
+  setup : function(el, opts) {
+    var that = this;
+    typeof this._super === "function" && this._super.apply(this, [el]);
+    if(opts instanceof can.Observe) {
+
+      this.options = opts;
+      if(this.options.model) {
+        can.each(this.options.model.tree_view_options, function(v, k) {
+          that.options.hasOwnProperty(k) || that.options.attr(k, v);
+        });
+      }      
+      can.each(this.constructor.defaults, function(v, k) {
+        that.options.hasOwnProperty(k) || that.options.attr(k, v);
+      });
+    } else {
+      this.options = new can.Observe(this.constructor.defaults).attr(opts.model ? opts.model.tree_view_options : {}).attr(opts);
+    }
   }
 
   , init : function(el, opts) {
-    this.options.attr(this.options.model.tree_view_options).attr(opts);
+    //this.options.attr(this.options.model.tree_view_options).attr(opts instanceof can.Observe ? opts._data : opts);
     this.options.list ? this.draw_list() : this.fetch_list(this.options.parent_id);
     this.element.attr("data-object-type", can.underscore(this.options.model.shortName)).data("object-type", can.underscore(this.options.model.shortName));
     this.element.attr("data-object-meta-type", can.underscore(this.options.model.root_object)).data("object-meta-type", can.underscore(this.options.model.root_object));
@@ -55,9 +69,14 @@ can.Control("CMS.Controllers.TreeView", {
     if(that.options.draw_children) {
       //Recursively define tree views anywhere we have subtree configs.
       can.each(list, function(item) {
-        item.attr("child_options", that.options.child_options.serialize());
-        can.each(item.child_options.length != null ? item.child_options : [item.child_options], function(data) {
-          that.add_child_list(item, data);
+        item.attr("child_options", new can.Observe.List());
+        can.each(that.options.child_options.length != null ? that.options.child_options : [that.options.child_options], function(data) {
+          var options = new can.Observe();
+          data.each(function(v, k) {
+            options.attr(k, v);
+          });
+          item.child_options.push(options);
+          that.add_child_list(item, options);
         });
       });
     }

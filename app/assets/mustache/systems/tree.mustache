@@ -62,7 +62,7 @@
   {{#draw_children}}
   <div class="item-content" {{#start_expanded}}style="display: block;"{{/start_expanded}}>
     {{#child_options}}
-    <ul class="tree-structure" {{data 'options'}} {{ (el) -> el.cms_controllers_tree_view(el.data("options").serialize()) }}></ul>
+    <ul class="tree-structure" {{data 'options'}} {{ (el) -> el.cms_controllers_tree_view(el.data("options")) }}></ul>
     {{/child_options}}
   </div>
   {{/draw_children}}

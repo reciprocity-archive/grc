@@ -35,9 +35,9 @@ jQuery(function($) {
     $dialog.html($(new Spinner().spin().el).css({"position" : "relative", "left" : 50, "top" : 50, "height": 150, "width": 150}));
     $dialog.modal("show");
 
-    (CMS.Models.Section.findInCacheById(id) 
-      ? $.when(CMS.Models.Section.findInCacheById(id)) 
-      : CMS.Models.Section.findAll())
+    (CMS.Models.SectionSlug.findInCacheById(id) 
+      ? $.when(CMS.Models.SectionSlug.findInCacheById(id)) 
+      : CMS.Models.SectionSlug.findAll())
     .done(function(section) {
       $dialog.cms_controllers_control_mapping_popup({
         section : $(section).filter(function(i, d) { return d.id == id })[0]

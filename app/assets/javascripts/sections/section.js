@@ -158,8 +158,8 @@ can.Model.Cacheable("CMS.Models.Section", {
   }
 
   , update_linked_controls_ccontrol_only : function() {
-    this.attr("linked_controls").replace(can.map(this.linked_controls, function(lc) {
-      return CMS.Models.Control.findInCacheById(lc.id || lc.control.id);
+    this.linked_controls && this.linked_controls.replace(can.map(this.linked_controls, function(lc) {
+      return new CMS.Models.Control(lc.serialize ? lc.serialize() : lc);
     }));
   }
 
@@ -223,12 +223,7 @@ CMS.Models.Section("CMS.Models.SectionSlug", {
       return ret;
     }
 
-    return can.ajax({ 
-      url : "/programs/" + (params.id || false) + "/sections.json"
-      , type : "get"
-      , dataType : "json"
-      , data : params
-      }).pipe(
+    return this._super(params).pipe(
         function(list, xhr) {
           can.$(list).each(function(i, s) {
             can.extend(s, s.section);
@@ -239,5 +234,25 @@ CMS.Models.Section("CMS.Models.SectionSlug", {
           //   list.push(roots[i]);
           return roots;
         });
+  }
+  , model : function(params) {
+    var m = this._super(params);
+    m.attr("children", this.models(m.children));
+    return m;
+  }
+  , tree_view_options : {
+    list_view : "/assets/sections/tree.mustache"
+    , child_options : [{
+      model : CMS.Models.Control
+      , property : "linked_controls"
+      , list_view : "/assets/controls/tree.mustache"
+    }, {
+      model : CMS.Models.SectionSlug
+      , property : "children"
+    }]
+  }
+  , init : function() {
+    this._super.apply(this, arguments);
+    this.tree_view_options.child_options[1].model = this;
   }
 }, {});

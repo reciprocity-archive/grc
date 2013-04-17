@@ -1,9 +1,14 @@
 (function(namespace, $, can) {
 
 //chrome likes to cache AJAX requests for Mustaches.
+var mustache_urls = {};
 $.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
   if ( /\.mustache$/.test(options.url) ) {
-    options.url += "?r=" + Math.random();
+    if(mustache_urls[options.url]) {
+      options.url = mustache_urls[options.url];
+    } else {
+      mustache_urls[options.url] = options.url += "?r=" + Math.random();
+    }
   }
 });
 
@@ -345,7 +350,7 @@ can.each(["firstexist", "firstnonempty"], function(fname) {
     for(var i = 0; i < args.length; i++) {
       var v = args[i];
       if(typeof v === "function") v = v.call(this);
-      if(v != null && (fname === "firstexist" || !!(v.toString().trim().replace(/&nbsp;|\s|<br *\/?>/g, "")))) return v;
+      if(v != null && (fname === "firstexist" || !!(v.toString().trim().replace(/&nbsp;|\s|<br *\/?>/g, "")))) return v.toString();
     }
     return "";
   });
@@ -377,7 +382,7 @@ Mustache.registerHelper("pack", function() {
         }
       });
     } 
-    pack.attr(obj.serialize ? obj.serialize() : obj);
+    pack.attr(typeof obj === "object" && obj.serialize ? obj.serialize() : obj);
   });
   if(options.hash) {
     can.each(Object.keys(options.hash), function(key) {
@@ -442,6 +447,26 @@ Mustache.registerHelper("related_count", function() {
     objects += item.related_objects.length;
   });
   return objects.toString();
+});
+
+Mustache.registerHelper("show_expander", function() {
+  var options = arguments[arguments.length - 1]
+  , args = can.makeArray(arguments).slice(0, arguments.length - 1)
+  , disjunctions = [[]];
+  for(var i = 0; i < args.length; i++) {
+    if(args[i] === "||") {
+      disjunctions.push([]);
+    } else {
+      disjunctions[disjunctions.length - 1].push(args[i]);
+    }
+  }
+
+  return can.reduce(disjunctions, function(a, b) {
+    return a || can.reduce(b, function(c, d) {
+      typeof d === "function" && (d = d());
+      return c && (d && (d.length == null || d.length > 0));
+    }, true);
+  }, false) ? options.fn(this) : options.inverse(this); 
 });
 
 })(this, jQuery, can);
