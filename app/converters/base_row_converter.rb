@@ -647,7 +647,7 @@ class LinkDocumentsHandler < LinksHandler
 
   def parse_item(value)
     if value.starts_with?('[')
-      re = /^\[([^\s]+)(?:\s+([^\]]*))?\](.*)$/
+      re = /^\[([^\s]+)(?:\s+([^\]]*))?\]([^$]*)$/
       match = value.match(re)
       if match
         data = { :link => match[1], :title => match[2], :description => match[3] }
@@ -693,7 +693,7 @@ class LinkPeopleHandler < LinksHandler
 
   def parse_item(value)
     if value.starts_with?('[')
-      re = /^\[(\w+@[^\s\]]+)(?:\s+(\w+))?\]([\w\s]*)$/
+      re = /^\[([\w\d-]+@[^\s\]]+)(?:\s+([^\]]+))?\]([^$]*)$/
       match = value.match(re)
       if match
         data = { :email => match[1], :name => match[3] }
@@ -769,7 +769,7 @@ class LinkSystemsHandler < LinksHandler
 
   def parse_item(value)
     if value.starts_with?('[')
-      re = /^(?:\[([\w\d-]+)\])([^$]+)$/
+      re = /^(?:\[([\w\d-]+)\])([^$]*)$/
       match = value.match(re)
       if match
         { :slug => match[1], :title => match[2] }
@@ -814,12 +814,13 @@ end
 class LinkRelationshipsHandler < LinksHandler
   def parse_item(value)
     if value.starts_with?('[')
-      re = /^(?:\[([\w-]+)\])?([\w\s]+)$/
+      re = /^(?:\[([\w\d-]+)\])?([^$]*)$/
       match = value.match(re)
       if match
         { :slug => match[1].upcase, :title => match[2] }
       else
         add_link_error("Invalid format")
+        nil
       end
     else
       { :slug => value.upcase }
