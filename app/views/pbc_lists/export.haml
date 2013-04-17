@@ -1,4 +1,4 @@
 -content_for :modal_title do
   %h2 Export PBC List Requests
 
--content_for :export_url, export_flow_pbc_list_path(pbc_list, :format => :csv)
+-content_for :export_url, export_flow_pbc_list_path(pbc_list, :format => :csv, :token => @download_token)
