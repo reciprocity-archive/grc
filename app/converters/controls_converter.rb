@@ -34,10 +34,15 @@ class ControlRowConverter < BaseRowConverter
     handle_boolean(:active, :truthy_values => %w(active))
 
     handle(:documents, LinkDocumentsHandler)
-    handle(:people, LinkPeopleHandler,
-           :role => :responsible)
+
     handle(:categories, LinkCategoriesHandler, :scope_id => Control::CATEGORY_TYPE_ID)
     handle(:assertions, LinkCategoriesHandler, :scope_id => Control::CATEGORY_ASSERTION_TYPE_ID)
+
+    handle(:people_responsible, LinkPeopleHandler,
+           :role => :responsible)
+    handle(:people_accountable, LinkPeopleHandler,
+           :role => :accountable)
+
     handle(:systems, LinkSystemsHandler,
            :is_biz_process => false)
     handle(:processes, LinkSystemsHandler,
@@ -69,7 +74,8 @@ class ControlsConverter < BaseConverter
     Documentation documentation_description
     Frequency verify_frequency
     References documents
-    Link:People;Operator people
+    Link:People;Responsible people_responsible
+    Link:People;Accountable people_accountable
     Key\ Control key_control
     Active active
     Fraud\ Related fraud_related
