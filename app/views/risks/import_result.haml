@@ -1,11 +1,12 @@
--columns = %w(slug title description likelihood_rating likelihood threat_vector trigger preconditions financial_impact_rating operational_impact_rating reputational_impact_rating impact inherent_risk risk_mitigation residual_risk url controls systems processes products markets data_assets)
--header_overrides = { :controls => "Controls" }
+-columns = %w(slug title description likelihood_rating likelihood threat_vector trigger preconditions financial_impact_rating operational_impact_rating reputational_impact_rating impact inherent_risk risk_mitigation residual_risk url categories controls documents people_responsible people_accountable systems processes products markets data_assets)
+
+-header_overrides = { :controls => "Controls", :categories => "Categories", :people_responsible => "People:Responsible", :people_accountable => "People:Accountable", :documents => "References" }
+
+-width_pcts = %w(4 4 4 2 4 4 4 4 2 2 2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4)
 
 -content_for :import_success do
   Import of Risks is done.  Return to the
   =link_to "Dashboard", programs_dash_path
-
--width_pcts = %w(4 5 5 3 5 5 5 5 4 4 4 5 6 5 5 4 4 4 4 4 4 4)
 
 =render :partial => 'shared/import_table',
         :locals => { :columns => columns, :header_overrides => header_overrides, :width_pcts => width_pcts, :converter => @import }
