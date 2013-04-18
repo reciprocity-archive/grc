@@ -13,6 +13,7 @@ $(function() {
     model : CMS.Models.System
     , single_object : true
     , find_params : { id : system_id }
+		, link_buttons : true
   });
 
   $(document.body).on("modal:success", ".link-objects", function(ev, data) {
