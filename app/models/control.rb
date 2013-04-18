@@ -193,6 +193,11 @@ class Control < ActiveRecord::Base
     control_sections.map {|cs| cs.section_id }
   end
 
+  # Quick check for sections mapped to control -- allows us to determine whether control is mapped to anything
+  def category_ids
+    categorizations.map {|cs| cs.category_id }
+  end
+
   # Construct the category controls tree
   #   - if neither the current category nor descendants contains controls
   #     then return nil

@@ -21,7 +21,7 @@
         %input.ui-corner-all.widgetsearch.clear-value(type='text' placeholder='Search')
       .span6
         .pull-right
-          %a.btn.btn-add{ :href => new_flow_control_path(:'program_id' => instance.id), :'data-toggle' => 'modal-ajax-form', :'data-form-target' => 'refresh', :'data-modal-reset' => 'reset', :'data-dirty' => '#controls, #combo', :'data-route' => "tab=category_controls", :'data-modal-class' => 'modal-wide', :rel => "tooltip", :title => 'Create New Control' }
+          %a.btn.btn-add{ :href => new_flow_control_path(:'program_id' => instance.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-dirty' => '#controls, #combo', :'data-route' => "tab=category_controls", :'data-modal-class' => 'modal-wide', :rel => "tooltip", :title => 'Create New Control' }
             %i.grcicon-add
             Control
         .pull-right
@@ -48,7 +48,7 @@
   %ul.nav.nav-tabs
     -unless program.company_controls?
       %li.text-governance.active=link_to '<i class="grcicon-directive-color"></i>Directives'.html_safe, '#directives', :data => { :toggle => 'tab' }
-    %li.text-compliance=link_to '<i class="grcicon-control-color"></i>Controls'.html_safe, '#controls', :data => { :toggle => 'tab', :'tab-href' => flow_controls_path(:program_id => instance.id, :category_tree => true) }
+    %li.text-compliance=link_to '<i class="grcicon-control-color"></i>Controls'.html_safe, '#controls', :data => { :toggle => 'tab' }
     -#%li=link_to '<i class="grcicon-reg-map"></i>Combo'.html_safe, '#combo', :data => { :toggle => 'tab', :'tab-href' => flow_sections_path(:program_id => instance.id, :combo => true) }
 
   .action-items
@@ -61,5 +61,5 @@
     #directives.tab-pane
       %ul.tree-structure
     #controls.tab-pane
-      / %ul.tree-structure
+      %ul.tree-structure
     #combo.tab-pane

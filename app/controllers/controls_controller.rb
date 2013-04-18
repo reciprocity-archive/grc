@@ -95,7 +95,7 @@ class ControlsController < BaseObjectsController
       if params[:ids_only].present?
         render :json => @controls, :only => [:id]
       else
-        render :json => @controls, :methods => [:description_inline, :mapped_section_ids]
+        render :json => @controls, :methods => [:description_inline, :mapped_section_ids, :category_ids ]
       end
     end
   end
@@ -155,6 +155,14 @@ class ControlsController < BaseObjectsController
   end
 
   private
+
+    def create_object_as_json
+      object.as_json :methods => [:description_inline, :mapped_section_ids, :category_ids ]
+    end
+
+    def update_object_as_json
+      object.as_json :methods => [:description_inline, :mapped_section_ids, :category_ids ]
+    end
 
     def load_control
       @control = Control.find(params[:id])

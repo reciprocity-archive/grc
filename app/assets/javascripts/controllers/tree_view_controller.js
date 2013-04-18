@@ -105,8 +105,12 @@ can.Control("CMS.Controllers.TreeView", {
   } 
 
   , " newChild" : function(el, ev, data) {
-    if(this.options.parent_id === this.data.parent_id) {
-      this.options.list.push(new this.options.model(data));
+    var that = this;
+    if(this.options.parent_id === data.parent_id) {
+      this.options.list.push(data instanceof this.options.model ? data : new this.options.model(data.serialize ? data.serialize() : data));
+      setTimeout(function() {
+        $("[data-object-id=" + data.id + "]").parents(".item-content").siblings(".item-main").openclose("open");
+      }, 10);
     }
   }
   , ".edit-object modal:success" : function(el, ev, data) {

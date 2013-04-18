@@ -1,7 +1,7 @@
 //= require can.jquery-all
 //= require controllers/tree_view_controller
 //= require controls/control
-// TODO require controls/category
+//= require controls/category
 
 (function(can, $) {
 
@@ -12,15 +12,26 @@ var program_id = /^\/programs\/(\d+)/.exec(window.location.pathname)[1];
 
 $(function() {
   
-  // var $controls_tree = $("#controls .tree-structure").cms_controllers_tree_view({
-  //   model : CMS.Models.Category
+  var $controls_tree;
+  $.when(
+    CMS.Models.Category.findAll()
+    , CMS.Models.Control.findAll({ program_id : program_id })
+  ).done(function(cats, ctls) {
+    var uncategorized = cats[cats.length - 1];
+    can.each(ctls, function(c) {
+      if(c.category_ids.length < 1) {
+        uncategorized.linked_controls.push(c);
+      }
+      can.each(c.category_ids, function(id) {
+        CMS.Models.Category.findInCacheById(id).linked_controls.push(c);
+      });
+    })
 
-  //   , child_options : [{      
-  //     model : CMS.Models.Control
-  //     , find_params : { program_id : program_id }
-  //     , list_view : "/assets/controls/categories_tree.mustache"
-  //   }]
-  // });
+    $controls_tree = $("#controls .tree-structure").cms_controllers_tree_view({
+      model : CMS.Models.Category
+      , list : cats
+    });
+  });
 
   var directives_by_type = {
     regulation : []
@@ -60,10 +71,15 @@ $(function() {
   });
 
   $(document.body).on("modal:success", "a[href^='/controls/new']", function(ev, data) {
-    $controls_tree.control().options.list.push(new CMS.Models.Control(data));
+    var c = new CMS.Models.Control(data);
+    $("a[href='#controls']").click();
+      can.each(c.category_ids.length ? c.category_ids : [-1], function(catid) {
+        $controls_tree.find("[data-object-id=" + catid + "] > .item-content > ul[data-object-type=control]").trigger("newChild", c);
+      });
   });
 
   $(document.body).on("modal:success", "a[href^='/program_directives/list_edit']", function(ev, data) {
+    $("a[href='#directives']").click();
     directives_by_type[$(this).data("child-meta-type")] = data;
     $sections_tree.trigger("linkObject", $.extend($(this).data(), {
       data : directives_by_type.regulation.concat(directives_by_type.contract).concat(directives_by_type.policy)
