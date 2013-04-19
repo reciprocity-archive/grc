@@ -41,11 +41,19 @@ can.Control("CMS.Controllers.Responses", {
         , id : null //The ID of the parent request
         , type_id : null // type_id from request
         , type_name : null // type_name from request
+        , display_prefs : null
+        , page_id : null
     }
     , one_created : can.compute(false)
 }, {
     init : function() {
         this.fetch_list();
+        var that = this;
+        if(!this.options.display_prefs) {
+          CMS.Models.DisplayPrefs.findAll().done(function(prefs) {
+            that.options.display_prefs = prefs[0];
+          })
+        }
     }
     , fetch_list : function() {
         this.options.model.findAll({ request_id : this.options.id }, this.proxy("draw_list"));
@@ -80,6 +88,10 @@ can.Control("CMS.Controllers.Responses", {
                   if(can.isEmptyObject(resp.system.serialize())) {
                     resp.attr("system", null);
                   }
+                  if(that.options.display_prefs.getPbcResponseOpen(that.options.page_id, resp.id) === false) {
+                    that.element.find(".item[data-id=" + resp.id + "] > .item-main > .openclose").openclose("close");
+                  }
+
                 });
             });
     }
@@ -341,6 +353,9 @@ can.Control("CMS.Controllers.Responses", {
     }
     , ".pbc-responses > .item > .item-main > .openclose click" : function(el, ev) {
       this.constructor.one_created(true);
+
+      //openclose is animated so use opposite of active class
+      this.options.display_prefs.setPbcResponseOpen(this.options.page_id, el.closest(".item").data("id"), !el.is(".active"));
     }
     , ".remove-system click" : function(el, ev) {
       var $system = el.closest("[data-model]");

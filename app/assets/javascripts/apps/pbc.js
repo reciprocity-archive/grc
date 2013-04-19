@@ -154,17 +154,43 @@ $.widget(
 $.widget.bridge("pbc_autocomplete_documents", $.pbc.autocomplete_documents);
 
 $(function() {
-    // Trigger controller load when collapsed container is expanded
-    $(document.body).on("click", ".pbc-requests .pbc-item-head .openclose", function(ev) {
-        var filter_element = $(ev.currentTarget).closest("[data-filter-id]")
-        $(ev.currentTarget).closest(".main-item")
+
+    var pbc_list_id = (/\/pbc_lists\/(\d+)/.exec(window.location.pathname) || [])[1];
+
+    function init_responses_controller(display_prefs) {
+        var filter_element = $(this).closest("[data-filter-id]")
+        $(this).closest(".main-item")
         .find(".pbc-responses-container")
         .cms_controllers_responses({
           id : filter_element.data("filter-id")
           , type_id : filter_element.data("filter-type-id")
           , type_name : filter_element.data("filter-type-name")
+          , display_prefs : display_prefs
+          , page_id : pbc_list_id
         });
+    }
+
+    CMS.Models.DisplayPrefs.findAll().done(function(prefs) {
+      var d = prefs[0];
+      if(!d) {
+        d = new CMS.Models.DisplayPrefs().save();
+      }
+
+      // Trigger controller load when collapsed container is expanded
+      $(document.body).on("click", ".pbc-requests .pbc-item-head .openclose", function(ev) {
+        init_responses_controller.call(this, d);
+        d.setPbcRequestOpen(pbc_list_id, $(this).closest("li").data("filter-id"), $(this).is(".active"))
+      });
+
+      $(".pbc-requests > li").each(function(i, req) {
+        if(d.getPbcRequestOpen(pbc_list_id, $(req).data("filter-id"))) {
+          $(this).find(".openclose").openclose("open");
+          init_responses_controller.call(this, d);
+        }
+      })
+
     });
+
 
     //$(".pbc-system-search").pbc_autocomplete();
 

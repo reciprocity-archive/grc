@@ -325,8 +325,7 @@ jQuery(document).ready(function($) {
   });
 });
 
-$(window).load(function(){
-
+jQuery(function($) {
   // tree
   
   $('body').on('click', 'ul.tree .item-title', function(e) {
@@ -381,7 +380,9 @@ $(window).load(function(){
   }
 
   $.fn.openclose = openclose;
+});
 
+$(window).load(function(){
   $('.widget-area').sortable({
     connectWith: '.widget-area'
     , placeholder: 'drop-placeholder'
