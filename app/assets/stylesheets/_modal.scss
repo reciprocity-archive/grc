@@ -84,6 +84,7 @@
         height:400px;
         overflow-y:auto;
         background:$white;
+        position:relative;
         border-left:1px solid lighten($gray,20%);
         border-right:1px solid lighten($gray,20%);
         ul.tree-structure {

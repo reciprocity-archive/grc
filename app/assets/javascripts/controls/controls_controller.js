@@ -12,6 +12,8 @@
       , show : "/assets/controls/show.mustache"
       , model : CMS.Models.Control
       , id : null
+      , spinner_while_filtering : true
+      , spinner_style : {"position" : "absolute", "left" : 50, "top" : 50, "height": 150, "width": 150}
       //, list_model : CMS.Models.Control.List
     }
     , properties : []

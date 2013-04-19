@@ -302,7 +302,6 @@ CMS.Controllers.Mapping("CMS.Controllers.ControlMappingPopup", {
       that.options.company_list_controller = that.element
       .html(frag).trigger("shown")
       .find(".controls-list")
-      .append($(new Spinner().spin().el).css({"position" : "relative", "left" : 50, "top" : 50, "height": 150, "width": 150}))
       .cms_controllers_controls({
         list : "/assets/controls/list_selector.mustache"
         , show : "/assets/controls/show_selector.mustache"

@@ -6,17 +6,33 @@ can.Control("CMS.Controllers.Filterable", {
   defaults : {
     model : null
     , filterable_items_selector : "[data-model]"
+    , spinner_while_filtering : false
+    , spinner_style : {
+      top : 100
+      , left : 100
+      , height : 50
+      , width : 50
+      , position : "absolute"
+    }
   }
   //static
 }, {
   filter : function(str, extra_params, dfd) {
-    var that = this;
-    var search_dfds = [this.options.model.findAll($.extend({ id : this.options.id, s : str}, extra_params))];
+    var that = this
+    , spinner
+    , search_dfds = [this.options.model.findAll($.extend({ id : this.options.id, s : str}, extra_params))];
     dfd && search_dfds.push(dfd);
+
+    if(this.options.spinner_while_filtering) {
+      spinner = new Spinner().spin();
+      $(spinner.el).css(this.options.spinner_style);
+      this.element.append(spinner.el);
+    }
     return $.when.apply($, search_dfds).then(function(data) {
       var ids = can.map(data, function(v) { return v.id });
       that.last_filter_ids = ids;
       that.redo_last_filter();
+      spinner && spinner.stop();
       return ids;
     });
   }
