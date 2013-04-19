@@ -22,6 +22,7 @@ class SystemRowConverter < BaseRowConverter
   def reify
     handle(:slug, SlugColumnHandler)
 
+    handle(:controls, LinkControlsHandler)
     handle(:people_responsible, LinkPeopleHandler,
            :role => :responsible)
     handle(:people_accountable, LinkPeopleHandler,

@@ -1,8 +1,8 @@
--columns = %w(slug title description start_date people_responsible people_accountable sub_systems sub_processes org_groups documents network_zone)
+-columns = %w(slug title description start_date people_responsible people_accountable controls sub_systems sub_processes org_groups documents network_zone infrastructure)
 
 -header_overrides = { :slug => "Code", :controls => "Controls", :sub_systems => "Sub Systems", :sub_processes => "Sub Processes", :documents => "References", :people_responsible => "People:Responsible", :people_accountable => "People:Accountable", :org_groups => "Org Groups" }
 
--width_pcts = %w(8 9 10 9 10 8 8 8 8 8 8)
+-width_pcts = %w(8 8 9 8 9 7 7 7 7 7 7 4 4)
 
 -content_for :import_success do
   Import of Systems is done.  Return to the
