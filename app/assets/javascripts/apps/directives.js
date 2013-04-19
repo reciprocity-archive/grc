@@ -54,8 +54,68 @@ if (!/\/directives\b/.test(window.location.pathname))
   return;
 
 $(function() {
+  var spin_opts = { position : "absolute", top : 100, left : 100, height : 50, width : 50};
+
     CMS.Controllers.DirectiveRoutes.Instances = {
       Control : $(document.body).cms_controllers_directive_routes({}).control(CMS.Controllers.DirectiveRoutes)};
+
+  var $controls_tree = $("#controls .tree-structure").append($(new Spinner().spin().el).css(spin_opts));
+  $.when(
+    CMS.Models.Category.findAll()
+    , CMS.Models.Control.findAll({ directive_id : directive_id })
+  ).done(function(cats, ctls) {
+    var uncategorized = cats[cats.length - 1];
+    can.each(ctls, function(c) {
+      if(c.category_ids.length < 1) {
+        uncategorized.linked_controls.push(c);
+      }
+      can.each(c.category_ids, function(id) {
+        CMS.Models.Category.findInCacheById(id).linked_controls.push(c);
+      });
+    })
+
+    $controls_tree.cms_controllers_tree_view({
+      model : CMS.Models.Category
+      , list : cats
+    });
+  });
+
+  var $sections_tree = $("#sections .tree-structure").append($(new Spinner().spin().el).css(spin_opts));
+
+  CMS.Models.SectionSlug.findAll({ directive_id : directive_id })
+  .done(function(s) {
+    
+    $sections_tree.cms_controllers_tree_view({
+      model : CMS.Models.SectionSlug
+      , list : s
+      , list_view : "/assets/sections/tree.mustache"
+    });
+  });
+
+  $(document.body).on("modal:success", "a[href^='/controls/new']", function(ev, data) {
+    var c = new CMS.Models.Control(data);
+    $("a[href='#controls']").click();
+      can.each(c.category_ids.length ? c.category_ids : [-1], function(catid) {
+        $controls_tree.find("[data-object-id=" + catid + "] > .item-content > ul[data-object-type=control]").trigger("newChild", c);
+      });
+  });
+
+  $(document.body).on("modal:success", "a[href^='/sections'][href$='/edit']", function(ev, data) {
+    CMS.Models.SectionSlug.model(data);
+  });
+
+  $(document.body).on("modal:success", "a[href^='/sections/new']", function(ev, data) {
+    var c = new CMS.Models.SectionSlug(data);
+    $("a[href='#sections']").click();
+
+    if(c.parent_id) {
+      CMS.Models.SectionSlug.findInCacheById(c.parent_id).children.push(c);
+    } else {
+      $sections_tree.trigger("newChild", c);
+    }
+
+  });
+
 });
 
 })(this, jQuery);

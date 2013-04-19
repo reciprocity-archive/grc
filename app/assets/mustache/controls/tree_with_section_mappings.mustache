@@ -1,0 +1,69 @@
+{{#list}}
+  <li class="control" data-object-id="{{id}}" data-object-type="control" data-object-meta-type="control">
+    <div class="item-main">
+      <div class="openclose lastchild"></div>
+      <div class="item-title">
+        <div class="row-fluid">
+          <div class="span8">
+            <div class="oneline expand-on-hover">
+              <i class="grcicon-control-color"></i>
+              <!-- no notes
+              {{#notes}}
+                <i class="grcicon-comment"></i>
+              {{/notes}}
+              -->
+              {{^mapped_section_ids}}
+              <span class="not-mapped">NOT MAPPED</span>
+              {{/mapped_section_ids}}
+              <span class="title">
+                {{title}}
+              </span>
+              <span class="code">
+                {{slug}}
+              </span>
+              <span class="description-inline">
+                
+                <i class="description-inline">
+                  {{{firstnonempty description_inline ''}}}
+                </i>
+              </span>
+            </div>
+            <div class="description{{^description}} inhover no-description{{/description}}">
+              <!-- no notes
+              {{#notes}}
+              <div class="note">
+                {{{notes}}}
+              </div>
+              {{/notes}}
+              -->
+              <div class="rtf">{{{firstnonempty description '<i>No description.</i>'}}}</div>
+            </div>
+          </div>
+          <div class="span1">
+            <a class="view-more" href="javascript://">
+              view
+            </a>
+          </div>
+          <div class="span2">
+            <div class="objects-count">
+              <a class="controls-count" href="javascript://">
+                {{^mapped_section_ids}}
+                <i class="grcicon-section-danger"></i>
+                {{/mapped_section_ids}}
+                {{#if mapped_section_ids.length}}
+                <i class="grcicon-section-color"></i>
+                {{/if}}
+                {{mapped_section_ids.length}}
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="item-actions">
+          <a class="btn btn-mini" data-placement="left" href="/controls/{{id}}" rel="tooltip" title="Go to this object's page">
+            <i class="grcicon-goto"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </li>
+{{/list}}

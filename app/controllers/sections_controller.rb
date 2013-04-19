@@ -53,6 +53,14 @@ class SectionsController < BaseObjectsController
 
   private
 
+    def create_object_as_json
+      object.as_json :methods => [:description_inline, :linked_controls]
+    end
+
+    def update_object_as_json
+      object.as_json :methods => [:description_inline, :linked_controls]
+    end
+
     def extra_delete_relationship_stats
       [ [ 'Control', @section.control_sections.count ],
       ]

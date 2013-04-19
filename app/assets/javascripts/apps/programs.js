@@ -9,10 +9,11 @@ if(!/^\/programs\/\d+/.test(window.location.pathname))
  return;
 
 var program_id = /^\/programs\/(\d+)/.exec(window.location.pathname)[1];
+var spin_opts = { position : "absolute", top : 100, left : 100, height : 50, width : 50 };
 
 $(function() {
   
-  var $controls_tree;
+  var $controls_tree = $("#controls .tree-structure").append($(new Spinner().spin().el).css(spin_opts));
   $.when(
     CMS.Models.Category.findAll()
     , CMS.Models.Control.findAll({ program_id : program_id })
@@ -27,7 +28,7 @@ $(function() {
       });
     })
 
-    $controls_tree = $("#controls .tree-structure").cms_controllers_tree_view({
+    $controls_tree.cms_controllers_tree_view({
       model : CMS.Models.Category
       , list : cats
     });
@@ -46,7 +47,7 @@ $(function() {
     });
   });
 
-  var $sections_tree;
+  var $sections_tree = $("#directives .tree-structure").append($(new Spinner().spin().el).css(spin_opts));
   $.when(
     CMS.Models.SectionSlug.findAll()
     , CMS.Models.Directive.findAll({ program_id : program_id })
@@ -59,7 +60,7 @@ $(function() {
       CMS.Models.Directive.findInCacheById(sec.directive_id).sections.push(sec);
     });
 
-    $sections_tree = $("#directives .tree-structure").cms_controllers_tree_view({
+    $sections_tree.cms_controllers_tree_view({
       model : CMS.Models.Directive
       , list : d
       , list_view : "/assets/directives/tree.mustache"

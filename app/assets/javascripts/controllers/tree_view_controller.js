@@ -106,7 +106,7 @@ can.Control("CMS.Controllers.TreeView", {
 
   , " newChild" : function(el, ev, data) {
     var that = this;
-    if(this.options.parent_id === data.parent_id) {
+    if(this.options.parent_id == data.parent_id) { // '==' just because null vs. undefined sometimes happens here
       this.options.list.push(data instanceof this.options.model ? data : new this.options.model(data.serialize ? data.serialize() : data));
       setTimeout(function() {
         $("[data-object-id=" + data.id + "]").parents(".item-content").siblings(".item-main").openclose("open");

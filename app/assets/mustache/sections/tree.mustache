@@ -1,9 +1,16 @@
 {{#list}}
-  <li class="section" id="content_{{slug}}" data-id="{{id}}">
-    <div class="item-main" data-object-id="{{id}}" data-object-type="section" data-object-meta-type="section">
-      {{#show_expander draw_children children "||" draw_children linked_controls}}
-        <div class="openclose {{#if start_expanded}}active{{/if}}"></div>
-      {{/show_expander}}
+  <li class="section" id="content_{{slug}}" data-id="{{id}}" data-object-id="{{id}}" data-object-type="{{constructor.shortName}}" data-object-meta-type="section">
+    <div class="item-main">
+      {{#start_expanded}}
+        {{#show_expander draw_children children "||" draw_children linked_controls}}
+          <div class="openclose active"></div>
+        {{/show_expander}}
+      {{/start_expanded}}
+      {{^start_expanded}}
+        {{#show_expander draw_children children "||" draw_children linked_controls}}
+          <div class="openclose"></div>
+        {{/show_expander}}
+      {{/start_expanded}}
       <div class="item-title">
         <div class="row-fluid">
           <div class="span8">
