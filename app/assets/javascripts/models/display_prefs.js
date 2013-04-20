@@ -8,6 +8,7 @@ var COLLAPSE = "collapse"
 , HEIGHTS = "heights"
 , COLUMNS = "columns"
 , PBC_LISTS = "pbc_lists"
+, path = window.location.pathname
 
 can.Model.LocalStorage("CMS.Models.DisplayPrefs", {
   autoupdate : true
@@ -30,35 +31,40 @@ can.Model.LocalStorage("CMS.Models.DisplayPrefs", {
     return retval;
   }
 
+  , getObject : function() {
+    return can.getObject(can.makeArray(arguments).join("."), this);
+  }
+
   // collapsed state
   // widgets on a page may be collapsed such that only the title bar is visible.
   , setCollapsed : function(page_id, widget_id, is_collapsed) {
-    this.makeObject(COLLAPSE, page_id).attr(widget_id, is_collapsed);
+
+    this.makeObject(path, COLLAPSE).attr(widget_id, is_collapsed);
+
     this.autoupdate && this.save();
     return this;
   }
 
   , getCollapsed : function(page_id, widget_id) {
-    return this.makeObject(COLLAPSE, page_id)[widget_id];
+    var collapsed = this.getObject(path, COLLAPSE);
+    if(!collapsed) {
+      collapsed = this.makeObject(path, COLLAPSE).attr(this.makeObject(COLLAPSE, page_id).serialize());
+    }
+
+    return widget_id ? collapsed.attr(widget_id) : collapsed;
   }
 
   // sorts = position of widgets in each column on a page
   // This is also use at page load to determine which widgets need to be 
   // generated client-side.
   , getSorts : function(page_id, column_id) {
-    var sorts = can.getObject(SORTS, this);
+    var sorts = this.getObject(path, SORTS);
     if(!sorts) {
-      sorts = new can.Observe();
-      this.attr(SORTS, sorts);
+      sorts = this.makeObject(path, SORTS).attr(this.makeObject(SORTS, page_id).serialize());
+      this.autoupdate && this.save();
     }
 
-    var page_sorts = sorts.attr(page_id);
-    if(!page_sorts) {
-      page_sorts = new can.Observe();
-      sorts.attr(page_id, page_sorts);
-    }
-
-    return column_id ? page_sorts.attr(widget_id) : page_sorts;
+    return column_id ? sorts.attr(column_id) : sorts;
   }
 
   , setSorts : function(page_id, widget_id, sorts) {
@@ -66,13 +72,9 @@ can.Model.LocalStorage("CMS.Models.DisplayPrefs", {
       sorts = widget_id;
       widget_id = undefined;
     }
-    var page_sorts = this.makeObject(SORTS, page_id);
-    if(!page_sorts) {
-      page_sorts = widget_id ? new can.Observe().attr(widget_id, sorts) : new can.Observe(sorts);
-      all_sorts.attr(page_id, page_sorts);
-    } else {
-      page_sorts.attr(widget_id ? widget_id : sorts, widget_id ? sorts : undefined);
-    }
+    var page_sorts = this.makeObject(path, SORTS);
+
+    page_sorts.attr(widget_id ? widget_id : sorts, widget_id ? sorts : undefined);
 
     this.autoupdate && this.save();
     return this;    
@@ -80,14 +82,37 @@ can.Model.LocalStorage("CMS.Models.DisplayPrefs", {
 
   // heights : height of widgets to restore on page start.
   // Is set by jQuery-UI resize functions in ResizeWidgetsController
+  , getWidgetHeights : function(page_id) {
+    var heights = this.getObject(path, HEIGHTS);
+    if(!heights) {
+      heights = this.makeObject(path, HEIGHTS).attr(this.makeObject(HEIGHTS, page_id).serialize());
+      this.autoupdate && this.save();
+    }
+    return heights;
+  }
+
   , getWidgetHeight : function(page_id, widget_id) {
-    return this.makeObject(HEIGHTS, page_id)[widget_id];
+    return this.getWidgetHeights(page_id)[widget_id];
+  }
+
+  , setWidgetHeight : function(page_id, widget_id, height) {
+    var page_heights = this.makeObject(path, HEIGHTS);
+
+    page_heights.attr(widget_id, height);
+
+    this.autoupdate && this.save();
+    return this;    
   }
 
   // columns : the relative width of columns on each page.
   //  should add up to 12 since we're using row-fluid from Bootstrap
   , getColumnWidths : function(page_id, content_id) {
-    return this.makeObject(COLUMNS, page_id, content_id);
+    var widths = this.getObject(path, COLUMNS);
+    if(!widths) {
+      widths = this.makeObject(path, COLUMNS).attr(this.makeObject(COLUMNS, page_id).serialize());
+      this.autoupdate && this.save();
+    }
+    return widths[content_id];
   }
 
   , getColumnWidthsForSelector : function(page_id, sel) {
@@ -102,15 +127,16 @@ can.Model.LocalStorage("CMS.Models.DisplayPrefs", {
   }
 
   // reset function currently resets all layout for a page type (first element in URL path)
-  , resetPagePrefs : function(page_id) {
+  , resetPagePrefs : function() {
+    this.removeAttr(path);
+    return this.save();
+  }
+
+  , setPageAsDefault : function(page_id) {
     var that = this;
-    can.each([COLLAPSE, COLUMNS, SORTS, HEIGHTS], function(category) {
-      var cs = can.getObject(category, that);
-      if(cs) {
-        cs.removeAttr(page_id);
-      }
+    can.each([COLLAPSE, SORTS, HEIGHTS, COLUMNS], function(key) {
+      that.makeObject(key).attr(page_id, that.makeObject(path, key));
     });
-    return that.save();
   }
 
   , getPbcListPrefs : function(pbc_id) {

@@ -710,9 +710,25 @@ jQuery(function($) {
       var destroys = [];
       can.each(data, function(d) {
         d.unbind("change"); //forget about listening to changes.  we're going to refresh the page
-        destroys.push(d.resetPagePrefs(/^\/([^\/]+)/.exec(window.location.pathname)[1]));
+        destroys.push(d.resetPagePrefs());
       });
       $.when.apply($, destroys).done($.proxy(window.location, 'reload'));
+    });
+  })
+  .on('click', '.set-display-settings-default', function(e) {
+    var page_token = /^\/([^\/]+)/.exec(window.location.pathname)[1];
+    CMS.Models.DisplayPrefs.findAll().done(function(data) {
+      var destroys = [];
+      can.each(data, function(d) {
+        d.unbind("change"); //forget about listening to changes.  we're going to refresh the page
+        destroys.push(d.setPageAsDefault(page_token));
+      });
+      $.when.apply($, destroys).done(function() {
+        $('body').trigger(
+          'ajax:flash', 
+          { "message" : "Saved page layout as default for " + (page_token === "programs_dash" ? "dahsboard" : page_token) }
+        );
+      });
     });
   });
 });

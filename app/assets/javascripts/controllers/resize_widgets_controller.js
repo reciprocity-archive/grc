@@ -64,15 +64,7 @@ can.Control("CMS.Controllers.ResizeWidgets", {
 
   , update : function(newopts) {
     var that = this
-    , opts = this.options
-
-    if(!(opts.model[opts.columns_token] instanceof can.Observe)) 
-      opts.model.attr(opts.columns_token, new can.Observe(opts.model[opts.columns_token]));
-    if(!(opts.model[opts.heights_token] instanceof can.Observe)) 
-      opts.model.attr(opts.heights_token, new can.Observe(opts.model[opts.heights_token]));
-    if(!(opts.model[opts.heights_token][opts.page_token] instanceof can.Observe)) 
-      opts.model.attr(opts.heights_token).attr(opts.page_token, new can.Observe(opts.model[opts.heights_token][opts.page_token]));
-
+    , opts = this.options;
 
     this.update_columns();
     this.update_heights();
@@ -136,8 +128,7 @@ can.Control("CMS.Controllers.ResizeWidgets", {
 
   , update_heights : function() {
     var model = this.options.model
-    , heights = model.attr(this.options.heights_token)
-    , page_heights = heights.attr(this.options.page_token)
+    , page_heights = model.getWidgetHeights(this.options.page_token)
     , that = this
     , dirty = false
     , $c = $(this.element).children(".widget-area")
@@ -149,11 +140,6 @@ can.Control("CMS.Controllers.ResizeWidgets", {
       });
       return ch;
     };
-
-    if(!page_heights) {
-      page_heights = new can.Observe();
-      heights.attr(this.options.page_token, page_heights);
-    }
 
     if(!$c.length) {
       $c = $(this.element).children();
@@ -178,13 +164,13 @@ can.Control("CMS.Controllers.ResizeWidgets", {
               var $gc = $(grandchild);
               var this_split_ht = split_ht - parseInt($gc.css("margin-top")) - (parseInt($gc.prev($gcs).css("margin-bottom")) || 0);
               that.set_widget_height($gc, content_height_func.apply(grandchild));
-              page_heights.attr($gc.attr("id"), this_split_ht);
+              model.setWidgetHeight(this.options.page_token, $gc.attr("id"), this_split_ht);
               col_ht = $(child).height() + $(child).offset().top;
             });
             $gcs.not($shrink_these).each(function(i, grandchild) {
               var $gc = $(grandchild);
               if(!page_heights.attr($gc.attr("id"))) {
-                page_heights.attr($gc.attr("id"), $gc.height());
+                model.setWidgetHeight(this.options.page_token, $gc.attr("id"), $gc.height());
               }
             });
             dirty = true;
@@ -231,11 +217,11 @@ can.Control("CMS.Controllers.ResizeWidgets", {
 
   , "{model} change" : function(el, ev, attr, how, newVal, oldVal) {
     var parts = attr.split(".");
-    if(parts.length > 1 && parts[0] === this.options.columns_token && parts[2] === $(this.element).attr("id")) {
+    if(parts.length > 1 && parts[0] === window.location.pathname && parts[2] === $(this.element).attr("id")) {
       this.update_columns();
       this.options.model.save();
     }
-    if(parts.length > 1 && parts[0] === this.options.heights_token && $(this.element).has("#" + parts[1])) {
+    if(parts.length > 1 && parts[0] === window.location.pathname && $(this.element).has("#" + parts[1])) {
       this.update_heights();
       this.options.model.save();
     }
@@ -484,11 +470,7 @@ can.Control("CMS.Controllers.ResizeWidgets", {
       ht = min_ht;
     }
     this.set_widget_height(el, ht);
-
-    this.options.model
-    .attr(this.options.heights_token)
-    .attr(this.options.page_token)
-    .attr($(el).attr("id"), ht);
+    this.options.model.setWidgetHeight(this.options.page_token, $el.attr("id"), ht);
   }
 
   // lower-level function than ensure_minimum
