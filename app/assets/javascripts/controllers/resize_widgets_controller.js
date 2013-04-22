@@ -164,13 +164,13 @@ can.Control("CMS.Controllers.ResizeWidgets", {
               var $gc = $(grandchild);
               var this_split_ht = split_ht - parseInt($gc.css("margin-top")) - (parseInt($gc.prev($gcs).css("margin-bottom")) || 0);
               that.set_widget_height($gc, content_height_func.apply(grandchild));
-              model.setWidgetHeight(this.options.page_token, $gc.attr("id"), this_split_ht);
+              model.setWidgetHeight(that.options.page_token, $gc.attr("id"), this_split_ht);
               col_ht = $(child).height() + $(child).offset().top;
             });
             $gcs.not($shrink_these).each(function(i, grandchild) {
               var $gc = $(grandchild);
               if(!page_heights.attr($gc.attr("id"))) {
-                model.setWidgetHeight(this.options.page_token, $gc.attr("id"), $gc.height());
+                model.setWidgetHeight(that.options.page_token, $gc.attr("id"), $gc.height());
               }
             });
             dirty = true;
