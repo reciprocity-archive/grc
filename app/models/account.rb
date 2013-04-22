@@ -130,7 +130,7 @@ class Account < ActiveRecord::Base
   def disable_password!
     self.crypted_password = 'no'
   end
-
+  
   private
 
     def reset_persistence_token?
@@ -166,5 +166,5 @@ class Account < ActiveRecord::Base
         account.person = person
       end
     end
-
+    
 end
