@@ -89,7 +89,6 @@ can.Model.Cacheable("CMS.Models.System", {
         model : null ///filled in after init.
         , list_view : "/assets/systems/tree.mustache"
         , parent_find_param : "parent_id"
-				, link_buttons: true
       }]
     }
 }, {
