@@ -38,7 +38,7 @@ class Account < ActiveRecord::Base
   end
   
   def display_search_name
-    display_name != email ? "#{display_name} - #{email}" : display_name
+    display_name != email ? "#{display_name} (#{email})" : display_name
   end
 
   def password=(password)
@@ -130,7 +130,7 @@ class Account < ActiveRecord::Base
   def disable_password!
     self.crypted_password = 'no'
   end
-
+  
   private
 
     def reset_persistence_token?
@@ -166,5 +166,5 @@ class Account < ActiveRecord::Base
         account.person = person
       end
     end
-
+    
 end

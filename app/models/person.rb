@@ -63,4 +63,10 @@ class Person < ActiveRecord::Base
       email
     end
   end
+  
+  def last_name
+    if !name.nil?
+      name.split(' ').last
+    end
+  end
 end
