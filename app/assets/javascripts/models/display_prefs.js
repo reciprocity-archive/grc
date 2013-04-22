@@ -137,6 +137,8 @@ can.Model.LocalStorage("CMS.Models.DisplayPrefs", {
     can.each([COLLAPSE, SORTS, HEIGHTS, COLUMNS], function(key) {
       that.makeObject(key).attr(page_id, that.makeObject(path, key));
     });
+    this.save();
+    return this;
   }
 
   , getPbcListPrefs : function(pbc_id) {
