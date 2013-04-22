@@ -4,7 +4,7 @@
     No results found
 -else
   %ul.tree-structure.simple.one-line-structure
-    -@people.each do |person|
+    -@people.sort_by{|person|person.last_name || 'z'}.each do |person|
       -if quick_result
         =render 'base_objects/quick_result', { :item => person }
       -else
