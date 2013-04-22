@@ -56,7 +56,7 @@ can.Control("CMS.Controllers.Responses", {
         }
     }
     , fetch_list : function() {
-        this.options.model.findAll({ request_id : this.options.id }, this.proxy("draw_list"));
+        this.options.model.findAll({ request_id : this.options.id, r : Math.random() }, this.proxy("draw_list"));
     }
     , draw_list : function(list) {
         var that = this;

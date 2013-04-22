@@ -170,27 +170,28 @@ $(function() {
         });
     }
 
-    CMS.Models.DisplayPrefs.findAll().done(function(prefs) {
-      var d = prefs[0];
-      if(!d) {
-        d = new CMS.Models.DisplayPrefs().save();
-      }
-
-      // Trigger controller load when collapsed container is expanded
-      $(document.body).on("click", ".pbc-requests .pbc-item-head .openclose", function(ev) {
-        init_responses_controller.call(this, d);
-        d.setPbcRequestOpen(pbc_list_id, $(this).closest("li").data("filter-id"), $(this).is(".active"))
-      });
-
-      $(".pbc-requests > li").each(function(i, req) {
-        if(d.getPbcRequestOpen(pbc_list_id, $(req).data("filter-id"))) {
-          $(this).find(".openclose").openclose("open");
-          init_responses_controller.call(this, d);
+    if(pbc_list_id) {
+      CMS.Models.DisplayPrefs.findAll().done(function(prefs) {
+        var d = prefs[0];
+        if(!d) {
+          d = new CMS.Models.DisplayPrefs().save();
         }
-      })
 
-    });
+        // Trigger controller load when collapsed container is expanded
+        $(document.body).on("click", ".pbc-requests .pbc-item-head .openclose", function(ev) {
+          init_responses_controller.call(this, d);
+          d.setPbcRequestOpen(pbc_list_id, $(this).closest("li").data("filter-id"), $(this).is(".active"))
+        });
 
+        $(".pbc-requests > li").each(function(i, req) {
+          if(d.getPbcRequestOpen(pbc_list_id, $(req).data("filter-id"))) {
+            $(this).find(".openclose").openclose("open");
+            init_responses_controller.call(this, d);
+          }
+        })
+
+      });
+    }
 
     //$(".pbc-system-search").pbc_autocomplete();
 
