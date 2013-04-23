@@ -43,7 +43,7 @@ class Request < ActiveRecord::Base
     s.validate :validates_request_uniqueness
   end
   
-  before_save :link_control_from_code
+  after_save :link_control_from_code
   after_save :after_save_detect_orphaned_control_assessment
   after_destroy :after_destroy_detect_orphaned_control_assessment
 
@@ -120,13 +120,15 @@ class Request < ActiveRecord::Base
       control = Control.where(:slug => pbc_control_code).first
 
       if control
-        # find or create ControlAssesment for given PbcList and Control
-        control_assessment = ControlAssessment.where(
-          :pbc_list_id => pbc_list_id,
-          :control_id => control.id).first
-        control_assessment ||= ControlAssessment.new(
-          :pbc_list => pbc_list,
-          :control => control)
+        if control.id != self.control.presence.id
+          # find or create ControlAssesment for given PbcList and Control
+          self.control_assessment = ControlAssessment.where(
+            :pbc_list_id => pbc_list_id,
+            :control_id => control.id).first
+          self.control_assessment ||= ControlAssessment.new(
+            :pbc_list => pbc_list,
+            :control => control)
+        end
       end
     end
   end

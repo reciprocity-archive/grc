@@ -11,7 +11,7 @@
   =file_field_tag "upload"
   =hidden_field_tag "is_biz_process", @is_biz_process
   =submit_tag "Upload and Review", :class => 'btn btn-primary'
-  %a{ :href => "/help/pbc_list_import", :target => '_blank', :class => "import-help", :'data-toggle' => 'modal-ajax' }
+  %a{ :href => "/help/#{@is_biz_process ? "processes" : "systems"}_import", :target => '_blank', :class => "import-help", :'data-toggle' => 'modal-ajax' }
     View Help
 
   #results-container
