@@ -42,7 +42,8 @@ class Request < ActiveRecord::Base
   validation_scope :warnings do |s|
     s.validate :validates_request_uniqueness
   end
-
+  
+  after_save :link_control_from_code
   after_save :after_save_detect_orphaned_control_assessment
   after_destroy :after_destroy_detect_orphaned_control_assessment
 
@@ -112,5 +113,23 @@ class Request < ActiveRecord::Base
           where(:request => request)
 
     warnings.add :request, "This request string already exists" if r.any?
+  end
+  
+  def link_control_from_code
+    if pbc_control_code.present?
+      control = Control.where(:slug => pbc_control_code).first
+
+      if control
+        if control.id != self.control.presence.id
+          # find or create ControlAssesment for given PbcList and Control
+          self.control_assessment = ControlAssessment.where(
+            :pbc_list_id => pbc_list_id,
+            :control_id => control.id).first
+          self.control_assessment ||= ControlAssessment.new(
+            :pbc_list => pbc_list,
+            :control => control)
+        end
+      end
+    end
   end
 end

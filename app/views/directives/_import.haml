@@ -10,8 +10,7 @@
       File to Upload
   =file_field_tag "upload"
   =submit_tag "Upload and Review", :class => 'btn btn-primary'
-  -if CMS_CONFIG["SECTION_IMPORT_HELP_LINK"].present?
-    %a{ :href => CMS_CONFIG["SECTION_IMPORT_HELP_LINK"], :target => '_blank', :class => "import-help"}
-      View Help
+  %a{ :href => "/help/sections_import", :target => '_blank', :class => "import-help", :'data-toggle' => 'modal-ajax' }
+    View Help
 
   #results-container
