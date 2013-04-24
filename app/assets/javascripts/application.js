@@ -502,3 +502,8 @@ $(document.body).change("[id$=_start_date]", function(ev) {
 	var start_date = $(this).datepicker('getDate');
   $("[id$=_start_date]").datepicker("option", "minDate", start); 
 });
+$(document.body).change(".rotate_control_assessment", function(ev) { 
+	ev.currentTarget.click(function() {
+		ev.currentTarget.toggle();
+	});
+});
