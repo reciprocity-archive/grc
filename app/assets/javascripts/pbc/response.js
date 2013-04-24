@@ -90,4 +90,11 @@ CMS.Models.System("CMS.Models.Response", {
         });
         this.attr("meetings", mtgs);
     }
+
+    , system_or_process : function( ) {
+      return null;
+    }
+    , system_or_process_capitalized : function() {
+      return null;
+    }
 });

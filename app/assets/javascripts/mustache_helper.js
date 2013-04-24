@@ -188,6 +188,7 @@ $.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
     , options = arguments[arguments.length - 1]
     , attribs = []
     , that = this.___st4ck ? this[this.length-1] : this
+    , data = can.extend({}, that)
     , hash = quickHash(args.join("-"), quickHash(that._cid)).toString(36);
 
     var hook = can.view.hook(function(el, parent, view_id) {
@@ -210,7 +211,7 @@ $.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
       function sub_all(el, ev, newVal, oldVal) {
         var $el = $(el);
         can.each(attribs, function(attrib) {
-          $el.attr(attrib.name, can.sub(attrib.value, that));
+          $el.attr(attrib.name, $("<div>").html(can.view.render(attrib.value, data)).html());
         })
       }
 
@@ -218,13 +219,19 @@ $.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
         var attr_name = args[i];
         var attr_tmpl = args[i + 1];
         //set up bindings where appropriate
-        attr_tmpl = attr_tmpl.replace(/\{\{[^\{]*\}\}/g, function(match, offset, string) {
+        attr_tmpl = attr_tmpl.replace(/\{[^\{]*\}/g, function(match, offset, string) {
+          var token = match.substring(1, match.length - 1);
+          if(typeof data[token] === "function") {
+            data[token].bind && data[token].bind("change." + hash, $.proxy(sub_all, that, el));
+            data[token] = data[token].call(that);
+          }
 
-          that.bind(attr_name + "." + hash, $.proxy(sub_all, that, el));
+          that.bind(token + "." + hash, $.proxy(sub_all, that, el));
 
-          return match.substring(1, match.length - 1);
+          return "{" + match + "}";
         });
-        attribs.push({name : attr_name, value : attr_tmpl});
+        can.view.mustache("withattr_" + hash, attr_tmpl);
+        attribs.push({name : attr_name, value : "withattr_" + hash});
       }
 
       sub_all(el);
@@ -416,6 +423,10 @@ Mustache.registerHelper("render", function(template, context, options) {
   if(!options) {
     options = context;
     context = this;
+  }
+
+  if(typeof context === "function") {
+    context = context();
   }
 
   if(typeof template === "function") {

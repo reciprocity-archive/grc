@@ -6,7 +6,10 @@
           <h4>
             <i class="grcicon-{{system_or_process}}-color" rel="tooltip" data-placement="top" title="{{system_or_process_capitalized}}"></i>
             {{#if absolute_url}}
-              <strong class="text-compliance"><a href="{{absolute_url}}" target="_blank">{{title}}</a></strong>
+              <strong class="text-compliance"><a data-popover-trigger="sticky-hover" data-sticky-popover="true" data-content="{{render '/assets/pbc/iframe_tooltip.mustache'}}" href="{{absolute_url}}" target="_blank">
+                {{{withattr "data-original-title" "<div class='row-fluid'><div class='span12'><h3><i class='grcicon-{system_or_process}-color'></i> Viewing {title} </span> </h3></div></div>"}}}
+                {{title}}
+              </a></strong>
             {{else}}
               <strong class="text-compliance">{{title}}</strong>
             {{/if}}

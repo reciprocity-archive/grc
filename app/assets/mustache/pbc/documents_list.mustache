@@ -2,17 +2,16 @@
   <li {{data 'model'}} data-model="true">
     <div class="row-fluid">
       <div class="span6">
-        {{#if document.link_url}}
-
-          <a class="inner-element" href="{{document.link_url}}" target="_blank">
-            <span rel="tooltip" title="{{document.link_url}}" >
-              {{firstnonempty document.title document.link_url}}
-            </span>
+        {{#pack document issystem=system_or_process}}
+        {{#if link_url}}
+          <a class="inner-element" data-popover-trigger="sticky-hover" data-sticky-popover="true" data-content="{{render '/assets/pbc/iframe_tooltip.mustache'}}" {{^issystem}}data-placement="right"{{/issystem}} href="{{link_url}}" target="_blank">
+              {{{withattr "data-original-title" "<div class='row-fluid'><div class='span12'><h3><i class='grcicon-link'></i> Viewing {firstnonempty title link_url} </span> </h3></div></div>"}}}
+            {{firstnonempty title link_url}}
           </a>
-
         {{else}}
-          <span class="inner-element">{{document.title}}</span>
+          <span class="inner-element">{{title}}</span>
         {{/if}}
+        {{/pack}}
         </span>
       </div>
       <div class="span3">
