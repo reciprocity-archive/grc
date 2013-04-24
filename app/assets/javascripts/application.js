@@ -498,3 +498,7 @@ can.reduce ||
 
 });
 
+$(document.body).change("[id$=_start_date]", function(ev) { 
+	var start_date = $(this).datepicker('getDate');
+  $("[id$=_start_date]").datepicker("option", "minDate", start); 
+});
