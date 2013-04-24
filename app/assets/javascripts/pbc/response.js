@@ -72,13 +72,10 @@ CMS.Models.System("CMS.Models.Response", {
 
     init : function() {
         this._super();
-
-        this.bind("created updated", can.proxy(this.reinit, this));
-
-        this.reinit();
     }
 
     , reinit : function() {
+      this._super();
       this.system != null && this.attr("system", new CMS.Models.System(this.system ? this.system.serialize() : {}));
         this.attr(
           "population_sample"

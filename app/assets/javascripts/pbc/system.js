@@ -96,6 +96,10 @@ can.Model.Cacheable("CMS.Models.System", {
 
     init : function() {
         this._super && this._super();
+        this.reinit();
+        this.bind("created updated", can.proxy(this, 'reinit'))
+    }
+    , reinit : function() {
         var that = this;
         can.each({
             "Person" : "people"
