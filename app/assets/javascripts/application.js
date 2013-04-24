@@ -496,14 +496,25 @@ jQuery(function($){
 can.reduce ||
   (can.reduce = function(a, f, i) { return [].reduce.apply(a, arguments.length < 3 ? [f] : [f, i]) });
 
+
+  $(document.body).change("[id$=_start_date]", function(ev) { 
+    var start_date = $(this).datepicker('getDate');
+    $("[id$=_start_date]").datepicker("option", "minDate", start); 
+  });
+  $(document.body).change(".rotate_control_assessment", function(ev) { 
+    ev.currentTarget.click(function() {
+      ev.currentTarget.toggle();
+    });
+  });
 });
 
-$(document.body).change("[id$=_start_date]", function(ev) { 
-	var start_date = $(this).datepicker('getDate');
-  $("[id$=_start_date]").datepicker("option", "minDate", start); 
-});
-$(document.body).change(".rotate_control_assessment", function(ev) { 
-	ev.currentTarget.click(function() {
-		ev.currentTarget.toggle();
-	});
-});
+
+(function($) {
+
+  window.getPageToken = function getPageToken() {
+      return $(document.body).data("page-subtype") 
+            || $(document.body).data("page-type") 
+            || window.location.pathname.substring(1, (window.location.pathname + "/").indexOf("/", 1));
+    }
+
+})(window.jQuery);

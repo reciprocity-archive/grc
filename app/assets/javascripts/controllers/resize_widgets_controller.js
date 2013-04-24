@@ -10,7 +10,7 @@ can.Control("CMS.Controllers.ResizeWidgets", {
     , heights_token : "heights"
     , total_columns : 12
     , default_layout : null
-    , page_token : window.location.pathname.substring(1, (window.location.pathname + "/").indexOf("/", 1))
+    , page_token : window.getPageToken()
     , minimum_widget_height : 100
     , resizable_selector : "section[id]"
     , magic_content_height_offset : 17 //10px padding of the list inside the section + 7px height of resize handle

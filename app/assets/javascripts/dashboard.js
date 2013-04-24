@@ -705,6 +705,7 @@ jQuery(function($) {
 });
 
 jQuery(function($) {
+
   $('body').on('click', '.clear-display-settings', function(e) {
     CMS.Models.DisplayPrefs.findAll().done(function(data) {
       var destroys = [];
@@ -716,7 +717,7 @@ jQuery(function($) {
     });
   })
   .on('click', '.set-display-settings-default', function(e) {
-    var page_token = /^\/([^\/]+)/.exec(window.location.pathname)[1];
+    var page_token = getPageToken();
     CMS.Models.DisplayPrefs.findAll().done(function(data) {
       var destroys = [];
       can.each(data, function(d) {
@@ -726,7 +727,7 @@ jQuery(function($) {
       $.when.apply($, destroys).done(function() {
         $('body').trigger(
           'ajax:flash', 
-          { "message" : "Saved page layout as default for " + (page_token === "programs_dash" ? "dahsboard" : page_token) }
+          { "success" : "Saved page layout as default for " + (page_token === "programs_dash" ? "dahsboard" : page_token) }
         );
       });
     });
