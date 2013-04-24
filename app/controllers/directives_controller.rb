@@ -79,7 +79,7 @@ class DirectivesController < BaseObjectsController
         end
       end
       format.json do
-        render :json => @directives
+        render :json => @directives, :methods => :description_inline
       end
     end
   end
