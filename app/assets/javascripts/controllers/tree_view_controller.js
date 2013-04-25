@@ -114,7 +114,8 @@ can.Control("CMS.Controllers.TreeView", {
     }
   }
   , ".edit-object modal:success" : function(el, ev, data) {
-    el.closest("[data-model]").data("model").attr(data);
+    var model = el.closest("[data-model]").data("model");
+    model.attr(data[model.constructor.root_object] || data);
     ev.stopPropagation();
   }
 

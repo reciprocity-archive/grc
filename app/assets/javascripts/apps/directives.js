@@ -87,6 +87,7 @@ $(function() {
     
     $sections_tree.cms_controllers_tree_view({
       model : CMS.Models.SectionSlug
+      , edit_sections : true
       , list : s
       , list_view : "/assets/sections/tree.mustache"
     });

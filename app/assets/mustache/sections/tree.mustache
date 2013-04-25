@@ -1,5 +1,5 @@
 {{#list}}
-  <li class="section" id="content_{{slug}}" data-id="{{id}}" data-object-id="{{id}}" data-object-type="{{constructor.shortName}}" data-object-meta-type="section">
+  <li class="section" id="content_{{slug}}" data-id="{{id}}" data-object-id="{{id}}" data-object-type="{{constructor.shortName}}" data-object-meta-type="section" data-model="true" {{data 'model'}}>
     <div class="item-main">
       {{#start_expanded}}
         {{#show_expander draw_children children "||" draw_children linked_controls}}
@@ -60,6 +60,11 @@
           </div>
         </div>
         <div class="item-actions">
+          {{#edit_sections}}
+            <a class="btn btn-mini pull-right edit-object" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/sections/{{id}}/edit" rel="tooltip" style="margin-left:6px" data-original-title="Edit Section">
+              <i class="grcicon-edit"></i>
+            </a>
+          {{/edit_sections}}
           <a class="btn btn-mini controllist pull-right" data-id="{{id}}" href="javascript://" rel="tooltip" title="Map Controls to Section">
             <i class="grcicon-section-color"></i><i class="grcicon-reg-map"></i><i class="grcicon-control-color"></i>
           </a>
