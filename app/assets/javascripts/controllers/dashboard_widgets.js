@@ -64,14 +64,28 @@ CMS.Controllers.Filterable("CMS.Controllers.DashboardWidgets", {
   , fetch_list : function(params) {
     if(this.options.is_related) {
 
-      if(~can.inArray(this.options.object_type, ["Control", "Directive", "Section"])) {
+      if(~can.inArray(this.options.object_type, ["Control", "Directive", "Section"])
+         || (this.options.parent_type === "Control" && this.options.object_type === "SystemProcess")) {
         var params = {
           list : true
           , tree : true
         };
+        var url;
+        switch(this.options.object_type) {
+          case "Section" :
+          url = "/directives/" + this.options.parent_id + "/" + this.options.object_route;
+          break;
+          case "SystemProcess" :
+          url = "/controls/" + this.options.parent_id + "/systems";
+          break;
+          default:
+          url = "/" + this.options.object_route;
+          break;
+        }
+
         params[can.underscore(this.options.parent_type) + "_id"] = this.options.parent_id;
         $.ajax({
-          url : (this.options.object_type === "Section" ? "/directives/" + this.options.parent_id : "") + "/" + this.options.object_route
+          url : url
           , dataType : "html"
           , type : "get"
           , data : params
@@ -97,6 +111,9 @@ CMS.Controllers.Filterable("CMS.Controllers.DashboardWidgets", {
      
       if(~can.inArray(that.options.object_type, ["Control", "Directive", "Section"])) {
         that.element.find(".object_count").html(that.element.find("li." + can.underscore(that.options.object_type)).length);
+      }
+      if(that.options.object_type === "SystemProcess") {
+        that.element.find(".object_count").html(that.element.find("li.system, li.process").length);
       }
 
       CMS.Models.DisplayPrefs.findAll().done(function(d) {

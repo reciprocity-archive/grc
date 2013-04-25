@@ -32,6 +32,9 @@
       type = type[0] + "erson"; break;
       case "processes":
       type = type[0] + "rocess"; break;
+      case "systems_processes":
+      type = type[0] + "ystem_" + type[8] + "rocess";
+      break;
       default:
       type = type.replace(/s$/, "");
     }

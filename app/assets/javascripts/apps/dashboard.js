@@ -129,6 +129,14 @@ var widget_descriptors = {
     , object_route : "sections"
     , object_category : "governance"
   }
+  , "system_process" : {
+    model : CMS.Models.System
+    , object_type : "system_process"
+    , object_category : "compliance"
+    , object_route : "systems"
+    , object_display : "Systems/Processes"
+  }
+
 };
 
 var programs_dash_menu = {categories : [

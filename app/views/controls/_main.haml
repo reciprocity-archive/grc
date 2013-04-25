@@ -7,7 +7,7 @@
 
 .tabbable
   %ul.nav.nav-tabs
-    %li.text-compliance=link_to '<i class="grcicon-system-color"></i>Systems / <i class="grcicon-process-color"></i>Processes'.html_safe, '#systems', :data => { :toggle => 'tab', :'tab-href' => systems_flow_control_path(control) }
+    %li.text-compliance=link_to '<i class="grcicon-system-color"></i>Systems / <i class="grcicon-process-color"></i>Processes'.html_safe, '#systems_processes', :data => { :toggle => 'tab', :'tab-href' => systems_flow_control_path(control) }
     -if control.directive.company?
       %li.text-compliance=link_to '<i class="grcicon-control-color"></i>Mapped Controls'.html_safe, '#controls', :data => { :toggle => 'tab', :'tab-href' => implemented_controls_flow_control_path(control) }
     -else
@@ -22,7 +22,7 @@
       %i.grcicon-normal-black
 
   .tab-content
-    #systems.tab-pane
+    #systems_processes.tab-pane
     #controls.tab-pane
     #regulations.tab-pane
     #risks.tab-pane
