@@ -1,5 +1,5 @@
 {{#list}}
-  <li class="section" id="content_{{slug}}" data-id="{{id}}" data-object-id="{{id}}" data-object-type="{{constructor.shortName}}" data-object-meta-type="section" data-model="true" {{data 'model'}}>
+  <li class="section" id="content_{{slug}}" data-id="{{id}}" data-object-id="{{id}}" data-object-type="{{constructor.shortName.toLowerCase}}" data-object-meta-type="section" data-model="true" {{data 'model'}}>
     <div class="item-main">
       {{#start_expanded}}
         {{#show_expander draw_children children "||" draw_children linked_controls}}
@@ -25,9 +25,37 @@
               <span class="description-inline">
                 {{{firstnonempty description_inline ''}}}
               </span>
+              {{#notes}}
+                <i class="grcicon-comment"></i>
+              {{/notes}}
             </div>
             <div class="description inhover {{^description}}no-description{{/description}}">
-              {{{firstnonempty description '<i>No description</i>'}}}
+              {{^description}}
+                <i>No description</i>
+              {{/description}}
+              <div class="note">
+                {{#notes}}
+                  <div class="note-content">
+                    {{#edit_sections}}
+                      <a class="edit-notes" href="javascript://">
+                        <i class="grcicon-edit"></i>
+                      </a>
+                    {{/edit_sections}}
+                    <strong>Abstract</strong>
+                    <div class="rtf">
+                      {{{notes}}}
+                    </div>
+                  </div>
+                {{/notes}}
+                {{^notes}}
+                  {{#edit_sections}}
+                    <a class="note-trigger" href="javascript://">
+                      + Add Abstract
+                    </a>
+                  {{/edit_sections}}
+                {{/notes}}
+              </div>
+              {{{description}}}
             </div>
           </div>
           <div class="span1">

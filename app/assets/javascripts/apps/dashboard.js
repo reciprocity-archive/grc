@@ -129,6 +129,12 @@ var widget_descriptors = {
     , object_route : "sections"
     , object_category : "governance"
   }
+  , "sectionslug" : {
+    model : CMS.Models.SectionSlug
+    , object_type : "section"
+    , object_route : "sections"
+    , object_category : "governance"
+  }
 };
 
 var programs_dash_menu = {categories : [
