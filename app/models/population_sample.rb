@@ -14,6 +14,13 @@ class PopulationSample < ActiveRecord::Base
   validates_presence_of :response
   validates :population, :samples, :numericality => true
 
+   after_initialize :set_zeroes
+
+  def set_zeroes
+    self.population ||= 0
+    self.samples ||= 0
+  end
+
   def display_name
     "#{response.system.title} population sample"
   end
