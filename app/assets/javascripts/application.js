@@ -497,9 +497,9 @@ can.reduce ||
   (can.reduce = function(a, f, i) { return [].reduce.apply(a, arguments.length < 3 ? [f] : [f, i]) });
 
 
-  $(document.body).change("[id$=_start_date]", function(ev) { 
+  $(document.body).on("change", "[id$=_start_date]", function(ev) { 
     var start_date = $(this).datepicker('getDate');
-    $("[id$=_start_date]").datepicker("option", "minDate", start); 
+    $("[id$=_stop_date]").datepicker().datepicker("option", "minDate", start_date); 
   });
   $(document.body).change(".rotate_control_assessment", function(ev) { 
     ev.currentTarget.click(function() {
