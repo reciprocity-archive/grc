@@ -501,7 +501,7 @@ can.reduce ||
     var start_date = $(this).datepicker('getDate');
     $("[id$=_stop_date]").datepicker().datepicker("option", "minDate", start_date); 
   });
-  $(document.body).change(".rotate_control_assessment", function(ev) { 
+  $(document.body).on("change", ".rotate_control_assessment", function(ev) { 
     ev.currentTarget.click(function() {
       ev.currentTarget.toggle();
     });
