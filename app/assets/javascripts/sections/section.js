@@ -147,6 +147,15 @@ can.Model.Cacheable("CMS.Models.Section", {
       if (value === null)
         that.removeAttr(name);
     });
+
+    this.attr("descendant_sections", can.compute(function() {
+      return that.attr("children").concat(can.reduce(that.children, function(a, b) {
+        return a.concat(can.makeArray(b.descendant_sections()));
+      }, []));
+    }));
+    this.attr("descendant_sections_count", can.compute(function() {
+      return that.attr("descendant_sections")().length;
+    }));
   }
 
   , map_rcontrol : function(params) {
