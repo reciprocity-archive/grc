@@ -7,14 +7,6 @@ function object_event(type) {
     return function(el, ev, data) {
         var that = this;
 
-        if(type==="document" && !data.id) {
-          //work out what to do when the thing is new
-          if(!/^http[:s]|^file:/i.test(data.link_url)) {
-            data.title = data.link_url;
-            data.link_url = null;
-          }
-        }
-
         this.bindXHRToButton(
           this.create_object_relation(
               type
@@ -160,23 +152,53 @@ can.Control("CMS.Controllers.Responses", {
       }
     }
     , ".inline-add-person modal:success" : object_event("person")
-    , ".inline-add-document documentSelected" : object_event("document")
+    , ".inline-add-document documentSelected" : function(el, ev, data) {
+
+      if(!data.id && !/^http[:s]|^file:/i.test(data.link_url)) {
+        data.title = data.link_url;
+        data.link_url = null;
+        // Person gave a new title.  Have to open the modal to supply a URL.
+        el.find(".add-document").click();
+        $(".modal:visible").one("loaded", function() {
+          can.each(Object.keys(data), function(key) {
+            $("#document_" + key).val(data[key]);
+          });
+        });
+      } else {
+        object_event("document").apply(this, arguments);
+      }
+    }
     , ".inline-add-document modal:success" : object_event("document")
     , ".inline-edit-population-doc .input-title documentSelected" : function(el, ev, data) {
       var model = el.closest("[data-model]").data("model")
       var that = this;
       var dfd = new can.Deferred();
 
-      if(!/^http[:s]|^file:/i.test(data.link_url)) {
-        data.title = data.link_url;
-        data.link_url = null;
-      }
       if(!data.id) {
+        if(!/^http[:s]|^file:/i.test(data.link_url)) {
+          data.title = data.link_url;
+          data.link_url = null;
+
+          el.closest(".inline-edit-population-doc")
+          .find(".add-document")
+          .click()
+          .one("modal:success", function(ev, data) {
+            dfd.resolve(data);
+          });
+          $(".modal:visible").one("loaded", function() {
+            can.each(Object.keys(data), function(key) {
+              $("#document_" + key).val(data[key]);
+            });
+
+          });
+        }
+        else {
           //need to create a new thing to relate to first
           dfd = new this.options.document_model(data).save();
           that.bindXHRToButton(
             dfd
            , el);
+        }
       } else {
         dfd.resolve({id : data.id})
       }

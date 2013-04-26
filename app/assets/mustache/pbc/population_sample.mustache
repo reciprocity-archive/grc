@@ -14,6 +14,7 @@
           {{#if_null population_document_id}}
           <form>
             <input class="input-block-level input-title" name="title" placeholder="Search for Doc Title or URL" type="text" {{ (el) -> el.pbc_autocomplete_documents() }}>
+            <a class="add-document" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/documents/new" data-target="#ajax-modal-documents-new"></a>
           </form>
           {{else}}
             <a class="btn btn-mini pull-right remove-population-doc" href="javascript://" rel="tooltip" title="Remove population worksheet">
@@ -66,7 +67,8 @@
           {{#if_null sample_worksheet_document_id}}
           <form>
             <input class="input-block-level input-title" name="title" placeholder="Search for Doc Title or URL" type="text" {{ (el) -> el.pbc_autocomplete_documents() }}>
-          </form>
+             <a class="add-document" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/documents/new" data-target="#ajax-modal-documents-new"></a>
+         </form>
           {{else}}
             <a class="btn btn-mini pull-right remove-population-doc" href="javascript://" rel="tooltip" title="Remove sample worksheet">
               <i class="grcicon-x-grey"></i>
@@ -118,6 +120,7 @@
           {{#if_null sample_evidence_document_id}}
             <form>
               <input class="input-block-level input-title" name="title" placeholder="Search for Doc Title or URL" type="text" {{ (el) -> el.pbc_autocomplete_documents() }}>
+              <a class="add-document" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/documents/new" data-target="#ajax-modal-documents-new"></a>
             </form>
           {{else}}
             <a class="btn btn-mini pull-right remove-population-doc" href="javascript://" rel="tooltip" title="Remove sample evidence">
