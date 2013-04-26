@@ -165,11 +165,11 @@ can.Control("CMS.Controllers.Mapping", {
       // This isn't the best way to go about it, but CanJS/Mustache is currently ornery about accepting new observable list elements
       //  added with "push" --BM 12/11/2012
       var rctl = this.options.reg_list_controller;
-      item = new namespace.CMS.Models.RegControl(data);
+      item = namespace.CMS.Models.RegControl.model(data);
       rctl.options.observer.list.splice(this.slug_sort_position(item, rctl.options.observer.list), 0, item);
     } else {
       var cctl = this.options.company_list_controller;
-      item = new namespace.CMS.Models.Control(data);
+      item = namespace.CMS.Models.Control.model(data);
       cctl.options.observer.list.splice(this.slug_sort_position(item, cctl.options.observer.list), 0, item);
     }
     var $item = $("[content_id=" + item.content_id + "]");
@@ -419,10 +419,12 @@ CMS.Controllers.Mapping("CMS.Controllers.ControlMappingPopup", {
   }
 
   , "a[href^='/controls/new'] modal:success" : function(el, ev, data) {
-    var that = this;
+    var that = this
+    , model;
     this._super(el, ev, data);
-    this.redo_last_search(data.id);
-    this.map(this.options.section, null, data).done(function() {
+    model = CMS.Models.Control.model(data);
+    this.redo_last_search(model.id);
+    this.map(this.options.section, null, model).done(function() {
       that.update();
     });
   }
