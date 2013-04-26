@@ -257,7 +257,7 @@ can.Control("CMS.Controllers.Responses", {
     //, ".save-population:not(.disabled), .save-samples:not(.disabled) click" : function(el, ev) {
       var model = el.closest("[data-model]").data("model")
       , that = this;
-      model.attr(el.attr("name"), el.val() === "" ? "0" : el.val());
+      model.attr(el.attr("name"), el.val());
       if(that.samples_timeout) {
         clearTimeout(that.samples_timeout);
       }
