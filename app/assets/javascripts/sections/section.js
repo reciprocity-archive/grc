@@ -193,10 +193,20 @@ can.Model.Cacheable("CMS.Models.Section", {
 
 CMS.Models.Section("CMS.Models.SectionSlug", {
   update : function(id, section) {
-    var param = {};
-    can.each(section, function(val, key) {
-      param["section[" + key + "]"] = val;
-    });
+    var param = this.process_args(
+      section, 
+      {not : [
+        "parent_id"
+        , "created_at"
+        , "id"
+        , "kind"
+        , "modified_by_id"
+        , "updated_at"
+        , "linked_controls"
+        , "description_inline"
+        , "children"
+        , "child_options"
+      ]});
     return $.ajax({
       type : "PUT"
       , url : "/mapping/update/" + id + ".json"

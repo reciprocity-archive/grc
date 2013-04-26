@@ -136,7 +136,12 @@ var widget_descriptors = {
     , object_route : "systems"
     , object_display : "Systems/Processes"
   }
-
+  , "sectionslug" : {
+    model : CMS.Models.SectionSlug
+    , object_type : "section"
+    , object_route : "sections"
+    , object_category : "governance"
+  }
 };
 
 var programs_dash_menu = {categories : [

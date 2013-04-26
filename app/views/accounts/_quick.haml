@@ -3,7 +3,7 @@
     No results found
 -else
   %ul.tree-structure.simple.one-line-structure
-    -@accounts.sort_by{|account|account.person.presence.last_name || 'z'}.each do |account|
+    -@accounts.sort_by { |account| account.person.nil? ? 'z' : (account.person.last_name || 'z') }.each do |account|
       %li
         .item-title
           .row-fluid

@@ -76,7 +76,7 @@ CMS.Models.System("CMS.Models.Response", {
 
     , reinit : function() {
       this._super();
-      this.system != null && this.attr("system", new CMS.Models.System(this.system ? this.system.serialize() : {}));
+      this.system != null && !(this.system instanceof CMS.Models.System) && this.attr("system", new CMS.Models.System(this.system.serialize ? this.system.serialize() : this.system));
         this.attr(
           "population_sample"
           , new CMS.Models.PopulationSample(

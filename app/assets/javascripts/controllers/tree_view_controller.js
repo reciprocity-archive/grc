@@ -106,15 +106,19 @@ can.Control("CMS.Controllers.TreeView", {
 
   , " newChild" : function(el, ev, data) {
     var that = this;
+    var model;
     if(this.options.parent_id == data.parent_id) { // '==' just because null vs. undefined sometimes happens here
-      this.options.list.push(data instanceof this.options.model ? data : new this.options.model(data.serialize ? data.serialize() : data));
+      model = data instanceof this.options.model ? data : new this.options.model(data.serialize ? data.serialize() : data);
+      this.add_child_lists([model]);
+      this.options.list.push(model);
       setTimeout(function() {
         $("[data-object-id=" + data.id + "]").parents(".item-content").siblings(".item-main").openclose("open");
       }, 10);
     }
   }
   , ".edit-object modal:success" : function(el, ev, data) {
-    el.closest("[data-model]").data("model").attr(data);
+    var model = el.closest("[data-model]").data("model");
+    model.attr(data[model.constructor.root_object] || data);
     ev.stopPropagation();
   }
 

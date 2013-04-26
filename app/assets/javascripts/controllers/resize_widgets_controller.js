@@ -221,7 +221,10 @@ can.Control("CMS.Controllers.ResizeWidgets", {
       this.update_columns();
       this.options.model.save();
     }
-    if(parts.length > 1 && parts[0] === window.location.pathname && $(this.element).has("#" + parts[1])) {
+    if(parts.length > 1 
+      && parts[0] === window.location.pathname 
+      && parts[1] === this.options.heights_token 
+      && $(this.element).has("#" + parts[2]).length) {
       this.update_heights();
       this.options.model.save();
     }
@@ -541,17 +544,16 @@ can.Control("CMS.Controllers.ResizeWidgets", {
     //animation hasn't completed yet, so collapse state is inverse of whether it's actually collapsed right now.
     var $section = el.closest(this.options.resizable_selector);
     var collapse = $section.find(".content").is(":visible");
-    CMS.Models.DisplayPrefs.findAll().done(function(d) { 
+    console.log("collapse is ", collapse)
       collapse && $section.css("height", "").find(".content").css("height", "");
       if(collapse && $section.is(".ui-resizable")) {
         $section.resizable("destroy");
       } else if(!collapse) {
         setTimeout(function() { 
-          that.ensure_minimum($section, d[0].getWidgetHeight(that.options.page_token, $section.attr("id")));
+          that.ensure_minimum($section, that.options.model.getWidgetHeight(that.options.page_token, $section.attr("id")));
         }, 1);
       }
-      d[0].setCollapsed(that.options.page_token, $section.attr("id"), collapse);
-    });
+      that.options.model.setCollapsed(that.options.page_token, $section.attr("id"), collapse);
   }
 
 });
