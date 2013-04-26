@@ -12,14 +12,7 @@ class PopulationSample < ActiveRecord::Base
   is_versioned_ext
 
   validates_presence_of :response
-  validates :population, :samples, :numericality => true
-
-   after_initialize :set_zeroes
-
-  def set_zeroes
-    self.population ||= 0
-    self.samples ||= 0
-  end
+  validates :population, :samples, :numericality => true, :allow_blank => true
 
   def display_name
     "#{response.system.title} population sample"

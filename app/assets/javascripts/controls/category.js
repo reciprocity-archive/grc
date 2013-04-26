@@ -30,7 +30,7 @@ can.Model.Cacheable("CMS.Models.Category", {
       function(list, xhr) {
         can.$(list).each(function(i, s) {
           can.extend(s, s[root_object]);
-          delete s.root_object;
+          delete s[root_object];
         });
         var roots = treeify(list); //empties the list
         // for(var i = 0; i < roots.length; i++)

@@ -12,7 +12,20 @@ can.Model.Cacheable("CMS.Models.Directive", {
   , findAll : "/directives.json"
   , findOne : "/directives/{id}.json"
 }, {
-  lowercase_kind : function() { return this.kind.toLowerCase() }
+  init : function() {
+    this._super && this._super.apply(this, arguments);
+    var that = this;
+    this.attr("descendant_sections", can.compute(function() {
+      return that.attr("sections").concat(can.reduce(that.sections, function(a, b) {
+        return a.concat(can.makeArray(b.descendant_sections()));
+      }, []));
+    }));
+    this.attr("descendant_sections_count", can.compute(function() {
+      return that.attr("descendant_sections")().length;
+    }));
+  }
+  , lowercase_kind : function() { return this.kind.toLowerCase() }
+
 });
 
 CMS.Models.Directive("CMS.Models.Regulation", {

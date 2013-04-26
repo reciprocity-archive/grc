@@ -10,7 +10,7 @@ can.Control("CMS.Controllers.ResizeWidgets", {
     , heights_token : "heights"
     , total_columns : 12
     , default_layout : null
-    , page_token : window.getPageToken()
+    , page_token : null
     , minimum_widget_height : 100
     , resizable_selector : "section[id]"
     , magic_content_height_offset : 17 //10px padding of the list inside the section + 7px height of resize handle
@@ -31,6 +31,9 @@ can.Control("CMS.Controllers.ResizeWidgets", {
   , init : function(el, newopts) {
     this._super && this._super(newopts);
     var that = this;
+
+    //late binding page token because the body properties are not available when the class is created
+    this.options.page_token || (this.options.page_token = window.getPageToken());
 
     //set up dragging the bottom border to resize in jQUI
     $(this.element)
