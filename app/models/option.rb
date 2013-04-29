@@ -60,4 +60,9 @@ class Option < ActiveRecord::Base
   def self.human_name(role)
     return (ROLES_OVERRIDE.has_key?(role) ? ROLES_OVERRIDE[role] : role).humanize.titleize
   end
+  
+  def self.options_with_none_for(role)
+    options = self.options_for(role)
+    options.unshift(Option.new(:title => "None"))
+  end
 end
