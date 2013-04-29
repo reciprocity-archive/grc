@@ -261,7 +261,7 @@ can.Control("CMS.Controllers.ResizeWidgets", {
   }
 
   , getWidthsForSelector : function(sel) {
-    return this.options.model.getColumnWidths(this.options.page_token, $(sel).attr("id"));
+    return this.options.model.getColumnWidths(this.options.page_token, $(sel).attr("id")) || [];
   }
 
   , getLeftOffset : function(pageX) {
