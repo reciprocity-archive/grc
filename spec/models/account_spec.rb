@@ -23,9 +23,9 @@ describe Account do
   context 'role restriction' do
     it 'should derive risk permissions from role field' do
       person = FactoryGirl.create(:person, :role => 'User')
-      person.has_risk_permissions.should == false
+      person.can_manage_risk.should == false
       person = FactoryGirl.create(:person, :role => 'Risk')
-      person.has_risk_permissions.should == true
+      person.can_manage_risk.should == true
     end
     
     it 'should not allow risks to be retrieved '

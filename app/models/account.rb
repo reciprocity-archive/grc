@@ -110,11 +110,11 @@ class Account < ActiveRecord::Base
   
   # Separating out risk role from ACL9
   def can_manage_risk?
-    self.role == 'Risk'
+    self.role == 'risk'
   end
   
   def can_admin?
-    self.role == 'Administrator'
+    self.role == 'superuser'
   end
 
   def self.forget_all!
