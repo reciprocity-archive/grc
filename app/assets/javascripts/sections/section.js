@@ -234,10 +234,12 @@ CMS.Models.Section("CMS.Models.SectionSlug", {
       return target;
     }
 
-    function treeify(list, pid) {
-      var ret = filter_out(list, function(s) { return s.parent_id == pid });
+    function treeify(list, directive_id, pid) {
+      var ret = filter_out(list, function(s) { 
+        return s.parent_id == pid && (!directive_id || s.directive_id === directive_id) 
+      });
       can.$(ret).each(function() {
-        this.children = treeify(list, this.id);
+        this.children = treeify(list, this.directive_id, this.id);
       });
       return ret;
     }
@@ -255,7 +257,7 @@ CMS.Models.Section("CMS.Models.SectionSlug", {
           while(list.length > 0) {
             can.$(list).each(function(i, v) {
               // find a pseudo-root whose parent wasn't in the returned sections
-              if(can.$(list).filter(function(j, c) { return c !== v && c.id === v.parent_id }).length < 1) {
+              if(can.$(list).filter(function(j, c) { return c !== v && c.id === v.parent_id && c.directive_id === v.directive_id) }).length < 1) {
                 current = v;
                 list.splice(i, 1); //remove current from list
                 return false;
