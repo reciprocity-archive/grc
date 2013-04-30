@@ -1,28 +1,28 @@
 # Handle RiskyAttributes
 class RiskyAttributesController < BaseObjectsController
 
-  access_control :acl do
-    # FIXME: Implement real authorization
-
-    allow :superuser
-
-    actions :index do
-      allow :read, :read_risky_attribute
-    end
-
-    actions :new, :create do
-      allow :create, :create_risky_attribute
-    end
-
-    actions :edit, :update do
-      allow :update, :update_risky_attribute, :of => :risky_attribute
-    end
-
-    actions :show, :tooltip do
-      allow :read, :read_risky_attribute, :of => :risky_attribute
-    end
-
-  end
+#  access_control :acl do
+#    # FIXME: Implement real authorization
+#
+#    allow :superuser
+#
+#    actions :index do
+#      allow :read, :read_risky_attribute
+#    end
+#
+#    actions :new, :create do
+#      allow :create, :create_risky_attribute
+#    end
+#
+#    actions :edit, :update do
+#      allow :update, :update_risky_attribute, :of => :risky_attribute
+#    end
+#
+#    actions :show, :tooltip do
+#      allow :read, :read_risky_attribute, :of => :risky_attribute
+#    end
+#
+#  end
   
   before_filter :check_authorization
 

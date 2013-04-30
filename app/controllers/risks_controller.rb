@@ -4,27 +4,27 @@ require 'csv'
 
 class RisksController < BaseObjectsController
 
-  access_control :acl do
-    # FIXME: Implement real authorization
-
-    allow :superuser
-
-    actions :index do
-      allow :read, :read_risk
-    end
-
-    actions :new, :create do
-      allow :create, :create_risk
-    end
-
-    actions :edit, :update do
-      allow :update, :update_risk, :of => :risk
-    end
-
-    actions :show, :tooltip do
-      allow :read, :read_risk, :of => :risk
-    end
-  end
+#  access_control :acl do
+#    # FIXME: Implement real authorization
+#
+#    allow :superuser
+#
+#    actions :index do
+#      allow :read, :read_risk
+#    end
+#
+#    actions :new, :create do
+#      allow :create, :create_risk
+#    end
+#
+#    actions :edit, :update do
+#      allow :update, :update_risk, :of => :risk
+#    end
+#
+#    actions :show, :tooltip do
+#      allow :read, :read_risk, :of => :risk
+#    end
+#  end
   
   before_filter :check_authorization
 

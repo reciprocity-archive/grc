@@ -6,9 +6,9 @@
 class ProgramsDashController < ApplicationController
   include DashboardHelper
 
-  access_control :acl do
-    allow logged_in
-  end
+#  access_control :acl do
+#    allow logged_in
+#  end
 
   layout 'dashboard'
 

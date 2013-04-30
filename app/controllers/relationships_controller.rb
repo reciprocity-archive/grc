@@ -1,9 +1,9 @@
 class RelationshipsController < BaseMappingsController
 
-  access_control :acl do
-    allow :superuser
-    allow :read, :read_relationship, :to => [:related_objects]
-  end
+#  access_control :acl do
+#    allow :superuser
+#    allow :read, :read_relationship, :to => [:related_objects]
+#  end
 
   def index
     if params[:related_side].present? && params[:related_side] != 'both'

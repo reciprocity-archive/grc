@@ -25,9 +25,9 @@ class ApplicationController < ActionController::Base
   helper_method :current_user_session, :current_user
 
   # By default allow only superuser access.  This is relaxed in specific controllers.
-  access_control :acl do
-    allow :superuser
-  end
+#  access_control :acl do
+#    allow :superuser
+#  end
 
   def redirect_to_https
     redirect_to :protocol => "https://" unless (request.ssl? || request.local?)

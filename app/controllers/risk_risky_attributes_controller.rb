@@ -1,8 +1,8 @@
 class RiskRiskyAttributesController < BaseMappingsController
 
-  access_control :acl do
-    allow :superuser
-  end
+#  access_control :acl do
+#    allow :superuser
+#  end
   
   before_filter :check_authorization
 

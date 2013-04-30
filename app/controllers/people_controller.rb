@@ -4,25 +4,25 @@
 
 class PeopleController < BaseObjectsController
 
-  access_control :acl do
-    allow :superuser
-
-    actions :index do
-      allow :read, :read_person
-    end
-
-    actions :new, :create do
-      allow :create, :create_person
-    end
-
-    actions :edit, :update do
-      allow :update, :update_person, :of => :person
-    end
-
-    actions :destroy do
-      allow :delete, :delete_person, :of => :person
-    end
-  end
+#  access_control :acl do
+#    allow :superuser
+#
+#    actions :index do
+#      allow :read, :read_person
+#    end
+#
+#    actions :new, :create do
+#      allow :create, :create_person
+#    end
+#
+#    actions :edit, :update do
+#      allow :update, :update_person, :of => :person
+#    end
+#
+#    actions :destroy do
+#      allow :delete, :delete_person, :of => :person
+#    end
+#  end
 
   layout 'dashboard'
 

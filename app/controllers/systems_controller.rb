@@ -7,20 +7,20 @@ require 'csv'
 # HandleSystems
 class SystemsController < BaseObjectsController
 
-  access_control :acl do
-    allow :superuser
-
-    actions :new, :create, :import do
-      allow :create, :create_system
-    end
-
-    allow :read, :read_system, :of => :system, :to => [:show,
-                                                       :tooltip]
-
-    actions :edit, :update do
-      allow :update, :update_system, :of => :system
-    end
-  end
+#  access_control :acl do
+#    allow :superuser
+#
+#    actions :new, :create, :import do
+#      allow :create, :create_system
+#    end
+#
+#    allow :read, :read_system, :of => :system, :to => [:show,
+#                                                       :tooltip]
+#
+#    actions :edit, :update do
+#      allow :update, :update_system, :of => :system
+#    end
+#  end
   
   before_filter :check_authorization, :only => [:import]
 

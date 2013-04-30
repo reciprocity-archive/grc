@@ -4,17 +4,17 @@
 
 class AccountsController < BaseObjectsController
 
-  access_control :acl do
-    allow :superuser
-
-    actions :new, :create do
-      allow :create, :create_account
-    end
-
-    actions :edit, :update do
-      allow :update, :update_account, :of => :account
-    end
-  end
+#  access_control :acl do
+#    allow :superuser
+#
+#    actions :new, :create do
+#      allow :create, :create_account
+#    end
+#
+#    actions :edit, :update do
+#      allow :update, :update_account, :of => :account
+#    end
+#  end
   
   before_filter :check_authorization
 

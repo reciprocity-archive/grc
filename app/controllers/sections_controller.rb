@@ -8,20 +8,20 @@ class SectionsController < BaseObjectsController
 
   cache_sweeper :section_sweeper, :only => [:create, :update, :destroy]
 
-  access_control :acl do
-    allow :superuser
-
-    actions :new, :create do
-      allow :create, :create_section
-    end
-
-    allow :read, :read_section, :of => :system, :to => [:show,
-                                                        :tooltip]
-
-    actions :edit, :update do
-      allow :update, :update_section, :of => :section
-    end
-  end
+#  access_control :acl do
+#    allow :superuser
+#
+#    actions :new, :create do
+#      allow :create, :create_section
+#    end
+#
+#    allow :read, :read_section, :of => :system, :to => [:show,
+#                                                        :tooltip]
+#
+#    actions :edit, :update do
+#      allow :update, :update_section, :of => :section
+#    end
+#  end
 
   layout 'dashboard'
 

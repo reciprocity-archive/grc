@@ -5,24 +5,24 @@
 # Handle markets
 class MarketsController < BusinessObjectsController
 
-  access_control :acl do
-    # FIXME: Implement real authorization
-
-    allow :superuser
-
-    actions :new, :create do
-      allow :create, :create_market
-    end
-
-    actions :edit, :update do
-      allow :update, :update_market, :of => :market
-    end
-
-    actions :show, :tooltip do
-      allow :read, :read_market, :of => :market
-    end
-
-  end
+#  access_control :acl do
+#    # FIXME: Implement real authorization
+#
+#    allow :superuser
+#
+#    actions :new, :create do
+#      allow :create, :create_market
+#    end
+#
+#    actions :edit, :update do
+#      allow :update, :update_market, :of => :market
+#    end
+#
+#    actions :show, :tooltip do
+#      allow :read, :read_market, :of => :market
+#    end
+#
+#  end
 
   layout 'dashboard'
 

@@ -21,26 +21,26 @@ class DirectivesController < BaseObjectsController
   cache_sweeper :section_sweeper, :only => [:destroy, :import]
   cache_sweeper :control_sweeper, :only => [:destroy, :import_controls]
 
-  access_control :acl do
-    allow :superuser
-
-    allow :create, :create_directive, :to => [:create,
-                                   :new]
-    allow :read, :read_directive, :of => :directive, :to => [:show,
-                                                  :tooltip,
-                                                  :sections,
-                                                  :controls,
-                                                  :section_controls,
-                                                  :control_sections,
-                                                  :category_controls]
-
-    allow :update, :update_directive, :of => :directive, :to => [:edit,
-                                                    :update,
-                                                    :import_controls,
-                                                    :export_controls,
-                                                    :import,
-                                                    :export]
-  end
+#  access_control :acl do
+#    allow :superuser
+#
+#    allow :create, :create_directive, :to => [:create,
+#                                   :new]
+#    allow :read, :read_directive, :of => :directive, :to => [:show,
+#                                                  :tooltip,
+#                                                  :sections,
+#                                                  :controls,
+#                                                  :section_controls,
+#                                                  :control_sections,
+#                                                  :category_controls]
+#
+#    allow :update, :update_directive, :of => :directive, :to => [:edit,
+#                                                    :update,
+#                                                    :import_controls,
+#                                                    :export_controls,
+#                                                    :import,
+#                                                    :export]
+#  end
 
   layout 'dashboard'
 

@@ -5,29 +5,29 @@
 # Handle Documents
 class DocumentsController < BaseObjectsController
 
-  access_control :acl do
-    allow :superuser
-
-    actions :create, :new do
-      allow :create, :create_document
-    end
-
-    actions :show do
-      allow :read, :read_document, :of => :document
-    end
-
-    actions :index do
-      allow :read, :read_document
-    end
-
-    actions :edit, :update do
-      allow :update, :update_document, :of => :document
-    end
-
-    actions :destroy do
-      allow :destroy, :delete_document, :of => :document
-    end
-  end
+#  access_control :acl do
+#    allow :superuser
+#
+#    actions :create, :new do
+#      allow :create, :create_document
+#    end
+#
+#    actions :show do
+#      allow :read, :read_document, :of => :document
+#    end
+#
+#    actions :index do
+#      allow :read, :read_document
+#    end
+#
+#    actions :edit, :update do
+#      allow :update, :update_document, :of => :document
+#    end
+#
+#    actions :destroy do
+#      allow :destroy, :delete_document, :of => :document
+#    end
+#  end
 
   layout 'dashboard'
 

@@ -1,28 +1,28 @@
 # Handle Responses
 class ResponsesController < BaseObjectsController
 
-  access_control :acl do
-    # FIXME: Implement real authorization
-
-    allow :superuser
-
-    actions :index do
-      allow :read, :read_response
-    end
-
-    actions :new, :create do
-      allow :create, :create_response
-    end
-
-    actions :edit, :update do
-      allow :update, :update_response, :of => :response
-    end
-
-    actions :show, :tooltip do
-      allow :read, :read_response, :of => :response
-    end
-
-  end
+#  access_control :acl do
+#    # FIXME: Implement real authorization
+#
+#    allow :superuser
+#
+#    actions :index do
+#      allow :read, :read_response
+#    end
+#
+#    actions :new, :create do
+#      allow :create, :create_response
+#    end
+#
+#    actions :edit, :update do
+#      allow :update, :update_response, :of => :response
+#    end
+#
+#    actions :show, :tooltip do
+#      allow :read, :read_response, :of => :response
+#    end
+#
+#  end
 
   layout 'dashboard'
 
