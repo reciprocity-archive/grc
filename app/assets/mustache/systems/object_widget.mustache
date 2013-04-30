@@ -1,0 +1,46 @@
+{{!section class="widget... }}
+  <header class="header">
+    <div class="row-fluid">
+      <div class="span8">
+        <h2>
+          <i class="grcicon-system"></i>
+          Systems / Processes
+          {{#if is_related}}
+            related to {{parent_display}}
+          {{/if}}
+          <span class="object_count">
+            {{#if is_related}}
+              {{related_count}}
+            {{else}}
+              {{list.length}}
+            {{/if}}
+          </span>
+        </h2>
+      </div>
+      <div class="span4">
+        <div class="widget-action pull-right remove-widget" rel="tooltip" title="Remove">
+          <a class="remove" href="javascript://">
+            <i class="grcicon-x-white"></i>
+          </a>
+        </div>
+        <div class="widget-action pull-right widget-showhide" rel="tooltip" title="Expand / Collapse">
+          <a class="active" href="javascript://"></a>
+        </div>
+        <div class="widget-action pull-right widget-action-help">
+          <a data-placement="top" data-toggle="modal-ajax" href="/help/system_list" rel="tooltip" data-original-title="Help">
+            <i class="grcicon-help"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+  {{^if is_related}}
+  <div class="filter">
+    <input class="ui-corner-all widgetsearch-tocontent clear-value" placeholder="Search" type="text">
+  </div>
+  {{/if}}
+  <section class="content">
+    {{{render list_view}}}
+  </section>
+              
+{{!/section}}

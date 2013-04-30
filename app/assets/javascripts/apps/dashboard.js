@@ -135,6 +135,7 @@ var widget_descriptors = {
     , object_category : "compliance"
     , object_route : "systems"
     , object_display : "Systems/Processes"
+    , widget_view : "/assets/systems/object_widget.mustache"
   }
   , "sectionslug" : {
     model : CMS.Models.SectionSlug

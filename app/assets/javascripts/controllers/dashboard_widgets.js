@@ -53,10 +53,12 @@ CMS.Controllers.Filterable("CMS.Controllers.DashboardWidgets", {
     .trigger("section_created");
 
     if(this.options.is_related) {
+      if(this.options.object_type !== "system_process") {
+        this.options.object_display = this.options.object_route.split("_").map(can.capitalize).join(" ");
+      }
+      this.options.object_type = this.options.object_type.split("_").map(can.capitalize).join("");
       this.options.parent_display = this.options.parent_type.split("_").map(can.capitalize).join(" ");
       this.options.parent_type = this.options.parent_display.replace(" " , "");
-      this.options.object_display = this.options.object_route.split("_").map(can.capitalize).join(" ");
-      this.options.object_type = this.options.object_type.split("_").map(can.capitalize).join("");
     }
     this.fetch_list(params);
   }
@@ -76,7 +78,7 @@ CMS.Controllers.Filterable("CMS.Controllers.DashboardWidgets", {
           url = "/directives/" + this.options.parent_id + "/" + this.options.object_route;
           break;
           case "SystemProcess" :
-          url = "/controls/" + this.options.parent_id + "/systems";
+          url = "/controls/" + this.options.parent_id + "/" + this.options.object_route;
           break;
           default:
           url = "/" + this.options.object_route;
@@ -118,7 +120,7 @@ CMS.Controllers.Filterable("CMS.Controllers.DashboardWidgets", {
 
       CMS.Models.DisplayPrefs.findAll().done(function(d) {
         var content = that.element;
-        if(d[0].getCollapsed("programs_dash", that.element.attr("id"))) {
+        if(d[0].getCollapsed(window.getPageToken(), that.element.attr("id"))) {
 
           that.element
           .find(".widget-showhide > a")
