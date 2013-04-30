@@ -107,13 +107,14 @@ can.Control("CMS.Controllers.TreeView", {
   , " newChild" : function(el, ev, data) {
     var that = this;
     var model;
-    if(this.options.parent_id == data.parent_id) { // '==' just because null vs. undefined sometimes happens here
+    if(!this.options.parent_id || (this.options.parent_id === data.parent_id)) { // '==' just because null vs. undefined sometimes happens here
       model = data instanceof this.options.model ? data : new this.options.model(data.serialize ? data.serialize() : data);
       this.add_child_lists([model]);
       this.options.list.push(model);
       setTimeout(function() {
         $("[data-object-id=" + data.id + "]").parents(".item-content").siblings(".item-main").openclose("open");
       }, 10);
+      ev.stopPropagation();
     }
   }
   , ".edit-object modal:success" : function(el, ev, data) {
