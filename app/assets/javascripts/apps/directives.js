@@ -106,11 +106,13 @@ $(function() {
   });
 
   $(document.body).on("modal:success", "a[href^='/sections/new']", function(ev, data) {
-    var c = new CMS.Models.SectionSlug(data);
+    var c = new CMS.Models.SectionSlug(data)
+    , p;
     $("a[href='#sections']").click();
 
-    if(c.parent_id) {
-      CMS.Models.SectionSlug.findInCacheById(c.parent_id).children.push(c);
+    if(c.parent_id && (p = CMS.Models.SectionSlug.findInCacheById(c.parent_id))) {
+      $sections_tree.control().add_child_lists([c]);
+      p.children.push(c);
     } else {
       $sections_tree.trigger("newChild", c);
     }

@@ -244,13 +244,26 @@ CMS.Models.Section("CMS.Models.SectionSlug", {
 
     return this._super(params).pipe(
         function(list, xhr) {
+          var current;
           can.$(list).each(function(i, s) {
             can.extend(s, s.section);
             delete s.section;
           });
-          var roots = treeify(list); //empties the list
+          var roots = treeify(list); //empties the list if all roots (no parent in list) are actually roots (null parent id)
           // for(var i = 0; i < roots.length; i++)
           //   list.push(roots[i]);
+          while(list.length > 0) {
+            can.$(list).each(function(i, v) {
+              // find a pseudo-root whose parent wasn't in the returned sections
+              if(can.$(list).filter(function(j, c) { return c !== v && c.id === v.parent_id }).length < 1) {
+                current = v;
+                list.splice(i, 1); //remove current from list
+                return false;
+              }
+            });
+            current.attr ? current.attr("children", treeify(list, current.id)) : (children = treeify(list, current.id));
+            roots.push(current);
+          }
           return roots;
         });
   }
