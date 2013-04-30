@@ -4,7 +4,7 @@ class RiskRiskyAttributesController < BaseMappingsController
 #    allow :superuser
 #  end
   
-  before_filter :check_authorization
+  before_filter :check_risk_authorization
 
   def index
     @objects = RiskRiskyAttribute
@@ -47,8 +47,5 @@ class RiskRiskyAttributesController < BaseMappingsController
     def default_as_json_options
       { :include => [:risk, :risky_attribute] }
     end
-    
-    def check_authorization
-      raise ActionController::RoutingError.new('Not Found') unless current_user.can_manage_risk?
-    end
+
 end

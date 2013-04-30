@@ -22,7 +22,7 @@ class SystemsController < BaseObjectsController
 #    end
 #  end
   
-  before_filter :check_authorization, :only => [:import]
+  before_filter :check_risk_authorization, :only => [:import]
 
   layout 'dashboard'
 
@@ -158,9 +158,5 @@ class SystemsController < BaseObjectsController
       end
 
       system_params
-    end
-    
-    def check_authorization
-      raise ActionController::RoutingError.new('Not Found') unless current_user.can_manage_risk?
     end
 end

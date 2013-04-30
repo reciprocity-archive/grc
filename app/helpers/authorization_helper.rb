@@ -1,11 +1,12 @@
 module AuthorizationHelper
   # Roles
   def access_control_roles
-    [:user, :superuser]
+    [:user, :superuser, :risk]
   end
 
   def allowed_objs(objects, ability)
-    Authorization::allowed_objects(ability, @current_user, objects)
+    objects
+    #Authorization::allowed_objects(ability, @current_user, objects)
   end
   
   def check_risk_authorization(models)
@@ -14,5 +15,13 @@ module AuthorizationHelper
     else
       models.delete('Risk')
     end
+  end
+  
+  def check_risk_authorization
+    render_unauthorized unless current_user.can_manage_risk?
+  end
+  
+  def check_admin_authorization
+    render_unauthorized unless current_user.can_admin?
   end
 end

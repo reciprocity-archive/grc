@@ -26,7 +26,7 @@ class RisksController < BaseObjectsController
 #    end
 #  end
   
-  before_filter :check_authorization
+  before_filter :check_risk_authorization
 
   layout 'dashboard'
 
@@ -79,7 +79,4 @@ class RisksController < BaseObjectsController
       risk_params
     end
     
-    def check_authorization
-      raise ActionController::RoutingError.new('Not Found') unless current_user.can_manage_risk?
-    end
 end

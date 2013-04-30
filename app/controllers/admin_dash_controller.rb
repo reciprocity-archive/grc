@@ -9,7 +9,7 @@ class AdminDashController < ApplicationController
 #    allow :superuser
 #  end
   
-  before_filter :check_authorization
+  before_filter :check_admin_authorization
 
   layout 'dashboard'
 
@@ -104,10 +104,4 @@ class AdminDashController < ApplicationController
     end
     render :json => res
   end
-  
-  private
-  
-    def check_authorization
-      raise ActionController::RoutingError.new('Not Found') unless current_user.can_admin?
-    end
 end

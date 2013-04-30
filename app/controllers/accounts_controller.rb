@@ -16,7 +16,7 @@ class AccountsController < BaseObjectsController
 #    end
 #  end
   
-  before_filter :check_authorization
+  before_filter :check_admin_authorization
 
   layout 'dashboard'
 
@@ -34,9 +34,5 @@ class AccountsController < BaseObjectsController
       if params[:disable_password] == 'yes'
         object.disable_password!
       end
-    end
-    
-    def check_authorization
-      raise ActionController::RoutingError.new('Not Found') unless current_user.can_admin?
     end
 end
