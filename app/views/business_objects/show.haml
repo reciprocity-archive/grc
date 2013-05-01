@@ -38,16 +38,18 @@
       =render :partial => "main",
               :layout => 'layouts/widget_box',
               :locals => { model_name.to_sym => instance, :widget_id => model_name + "_widget", :widget_class => "business" }
-
-      =render :partial => "risks",
-              :layout => 'layouts/widget_box',
-              :locals => { model_name.to_sym => instance, :widget_class => "risk" }
+      
+      - if current_user.can_manage_risk?
+        =render :partial => "risks",
+                :layout => 'layouts/widget_box',
+                :locals => { model_name.to_sym => instance, :widget_class => "risk" }
 
       -if instance.class.respond_to?(:valid_relationships)
-        =render :partial => 'shared/related',
-                :layout => 'layouts/widget_box',
-                :locals => { :instance => instance, :widget_class => 'widget-tabs widget-tabs-horizontal business' }
-        =render :partial => 'shared/add_widget_section'
+        -if current_user.can_manage_risk?
+          =render :partial => 'shared/related',
+                  :layout => 'layouts/widget_box',
+                  :locals => { :instance => instance, :widget_class => 'widget-tabs widget-tabs-horizontal business' }
+          =render :partial => 'shared/add_widget_section'
 
     #right_column.span4.widget-area
       =render :partial => "info",
@@ -57,5 +59,5 @@
       =render :partial => "more_info",
                 :layout => 'layouts/widget_box',
                 :locals => { model_name.to_sym => instance, :widget_class => 'related business' }
-      -if instance.class.respond_to?(:valid_relationships)
+      -if instance.class.respond_to?(:valid_relationships) && current_user.can_manage_risk?
         =render :partial => 'shared/add_widget_section'

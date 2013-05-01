@@ -23,6 +23,8 @@ class RiskyAttributesController < BaseObjectsController
     end
 
   end
+  
+  before_filter :check_authorization
 
   layout 'dashboard'
 
@@ -61,5 +63,9 @@ class RiskyAttributesController < BaseObjectsController
         parse_date_param(risky_attribute_params, field)
       end
       risky_attribute_params
+    end
+    
+    def check_authorization
+      raise ActionController::RoutingError.new('Not Found') unless current_user.can_manage_risk?
     end
 end

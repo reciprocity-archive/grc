@@ -19,8 +19,7 @@
               
       =render :partial => 'business_objects',
               :layout => 'layouts/widget_box',
-              :locals => { :widget_class => "business widget-tabs" }
-              
+              :locals => { :widget_class => "business widget-tabs" }              
               
       =render :partial => 'shared/add_widget_section'
 
@@ -29,10 +28,11 @@
       =render :partial => 'programs',
               :layout => 'layouts/widget_box',
               :locals => { :widget_class => "programs widget-tabs" }
-              
-      =render :partial => 'risk',
-              :layout => 'layouts/widget_box',
-              :locals => { :programs => @programs, :widget_class => "risk widget-tabs" }
+      
+      - if current_user.can_manage_risk?        
+        =render :partial => 'risk',
+                :layout => 'layouts/widget_box',
+                :locals => { :programs => @programs, :widget_class => "risk widget-tabs" }
             
           
       =render :partial => 'shared/add_widget_section'

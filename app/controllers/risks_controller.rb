@@ -24,8 +24,9 @@ class RisksController < BaseObjectsController
     actions :show, :tooltip do
       allow :read, :read_risk, :of => :risk
     end
-
   end
+  
+  before_filter :check_authorization
 
   layout 'dashboard'
 
@@ -76,5 +77,9 @@ class RisksController < BaseObjectsController
         parse_date_param(risk_params, field)
       end
       risk_params
+    end
+    
+    def check_authorization
+      raise ActionController::RoutingError.new('Not Found') unless current_user.can_manage_risk?
     end
 end

@@ -107,6 +107,15 @@ class Account < ActiveRecord::Base
     reset_persistence_token
     save!
   end
+  
+  # Separating out risk role from ACL9
+  def can_manage_risk?
+    self.role == 'Risk'
+  end
+  
+  def can_admin?
+    self.role == 'Administrator'
+  end
 
   def self.forget_all!
     records = nil
