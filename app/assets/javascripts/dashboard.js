@@ -334,7 +334,7 @@ jQuery(function($) {
 
 jQuery(function($) {
   // Onload trigger tab with 'active' class or default to first tab
-  $('.tabbable > ul').filter(":not(.quick-search-results .tabbable > ul)").each(function(i, el) {
+  $('.tabbable > ul').each(function(i, el) {
     var $tab = $(this).find('> li.active');
     if (!$tab.length)
       $tab = $(this).find('> li:first-child');
@@ -343,9 +343,11 @@ jQuery(function($) {
       .find('> a')
       .tab('show');
     $($tab.find('> a').attr("href")).one("loaded", function() {
-      setTimeout(function() {
-        $tab.siblings().find("> a").trigger("show"); //load all the others for counts after this one is showing
-      }, 100);
+      if($tab.not(".quick-search-results .tabbable > ul > li").length) { //don't load the quickfind
+        setTimeout(function() {
+          $tab.siblings().find("> a").trigger("show"); //load all the others for counts after this one is showing
+        }, 100);
+      }
     })
   });
   //$('.tabbable > ul > li:first-child > a').tab('show');
