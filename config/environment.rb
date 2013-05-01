@@ -16,6 +16,3 @@ require File.expand_path('../application', __FILE__)
 CmsRails::Application.initialize!
 
 #Sass::Plugin.options[:template_location] = { 'app/stylesheets' => 'public/stylesheets' }
-
-APP_VERSION = `git describe --abbrev=0 --always --tags HEAD` unless defined? APP_VERSION
-
