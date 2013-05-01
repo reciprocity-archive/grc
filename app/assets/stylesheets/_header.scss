@@ -39,12 +39,8 @@
     color:$white;
     text-decoration:none;
   }
-  .logo, .version {
+  .logo {
     line-height:30px;
-  }
-  .version {
-    color: $white;
-    margin-left: 10px;
   }
   .menu {
     @include clearfix();
