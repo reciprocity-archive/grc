@@ -91,12 +91,13 @@ class SystemsConverter < BaseConverter
 
   def object_map
     # Replace only the 'System Code' header, but not 'Link:System'
-    object_map = self.class.object_map.dup
     if options[:is_biz_process]
-      object_map.delete("System Code")
-      object_map["Process Code"] = "slug"
+      Hash[*self.class.object_map.map do |k,v|
+        [k.sub("System Code", "Process Code"),v]
+      end.flatten]
+    else
+      super
     end
-    object_map
   end
 
   def validate_metadata(attrs)
