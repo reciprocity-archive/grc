@@ -595,6 +595,8 @@ ul.elements {
 }
 
 ul.tree-structure {
+  li.process,
+  li.system,
   li.product,
   li.orggroup,
   li.project,
@@ -605,15 +607,12 @@ ul.tree-structure {
       color:$business;
     } 
   }
-
-  li.process,
-  li.system,
-  li.control {
+/*  .notusednow {
     .code {
       color:$compliance;
     } 
   }
-
+*/
   li.risk,
   li.riskyattribute {
     .code {
@@ -621,6 +620,7 @@ ul.tree-structure {
     } 
   }
 
+  li.control,
   li.program,
   li.directive,
   li.policy,

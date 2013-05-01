@@ -226,7 +226,7 @@ $.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
             data[token] = data[token].call(that);
           }
 
-          that.bind(token + "." + hash, $.proxy(sub_all, that, el));
+          that.bind && that.bind(token + "." + hash, $.proxy(sub_all, that, el));
 
           return "{" + match + "}";
         });

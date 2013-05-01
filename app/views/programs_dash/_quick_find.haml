@@ -15,19 +15,19 @@
 .tabbable.tabs-left{ :id => quick_result ? nil : "quick_find" }
   %ul.nav.nav-tabs
     %li.active=link_to '<i class="grcicon-control-color"></i> Controls'.html_safe, "##{prefix}_controls", :data => { :'tab-href' => flow_controls_path(:quick => true, :qr => quick_result), :toggle => 'tab' }
-    %li=link_to '<i class="grcicon-process-color"></i> Processes'.html_safe, "##{prefix}_processes", :data => { :'tab-href' => flow_systems_path(:quick => true, :qr => quick_result, :is_biz_process => true), :toggle => 'tab' }
-    %li=link_to '<i class="grcicon-system-color"></i> Systems'.html_safe, "##{prefix}_systems", :data => { :'tab-href' => flow_systems_path(:quick => true, :qr => quick_result, :is_biz_process => false), :toggle => 'tab' }
-    %li=link_to '<i class="grcicon-product-color"></i> Products'.html_safe, "##{prefix}_products", :data => { :'tab-href' => flow_products_path(:quick => true, :qr => quick_result), :toggle => 'tab' }
-    %li=link_to '<i class="grcicon-risk-color"></i> Risks'.html_safe, "##{prefix}_risks", :data => { :'tab-href' => flow_risks_path(:quick => true, :qr => quick_result), :toggle => 'tab' }
-    %li=link_to '<i class="grcicon-attribute-color"></i> Attributes'.html_safe, "##{prefix}_risky_attributes", :data => { :'tab-href' => flow_risky_attributes_path(:quick => true, :qr => quick_result), :toggle => 'tab' }
-    %li=link_to '<i class="grcicon-orggroup-color"></i> Org Groups'.html_safe, "##{prefix}_org_groups", :data => { :'tab-href' => flow_org_groups_path(:quick => true, :qr => quick_result), :toggle => 'tab' }
-    %li=link_to '<i class="grcicon-facility-color"></i> Facilities'.html_safe, "##{prefix}_facilities", :data => { :'tab-href' => flow_facilities_path(:quick => true, :qr => quick_result), :toggle => 'tab' }
-    %li=link_to '<i class="grcicon-market-color"></i> Markets'.html_safe, "##{prefix}_markets", :data => { :'tab-href' => flow_markets_path(:quick => true, :qr => quick_result), :toggle => 'tab' }
-    %li=link_to '<i class="grcicon-dataasset-color"></i> Data Assets'.html_safe, "##{prefix}_data_assets", :data => { :'tab-href' => flow_data_assets_path(:quick => true, :qr => quick_result), :toggle => 'tab' }
-    %li=link_to '<i class="grcicon-project-color"></i> Projects'.html_safe, "##{prefix}_projects", :data => { :'tab-href' => flow_projects_path(:quick => true, :qr => quick_result), :toggle => 'tab' }
     %li=link_to '<i class="grcicon-regulation-color"></i> Regulations'.html_safe, "##{prefix}_regulations", :data => { :'tab-href' => flow_directives_path(:quick => true, :qr => quick_result, :meta_kind => :regulation), :toggle => 'tab' }
     %li=link_to '<i class="grcicon-policy-color"></i> Policies'.html_safe, "##{prefix}_policies", :data => { :'tab-href' => flow_directives_path(:quick => true, :qr => quick_result, :meta_kind => :policy), :toggle => 'tab' }
     %li=link_to '<i class="grcicon-contract-color"></i> Contracts'.html_safe, "##{prefix}_contracts", :data => { :'tab-href' => flow_directives_path(:quick => true, :qr => quick_result, :meta_kind => :contract), :toggle => 'tab' }
+    %li=link_to '<i class="grcicon-risk-color"></i> Risks'.html_safe, "##{prefix}_risks", :data => { :'tab-href' => flow_risks_path(:quick => true, :qr => quick_result), :toggle => 'tab' }
+    %li=link_to '<i class="grcicon-attribute-color"></i> Attributes'.html_safe, "##{prefix}_risky_attributes", :data => { :'tab-href' => flow_risky_attributes_path(:quick => true, :qr => quick_result), :toggle => 'tab' }
+    %li=link_to '<i class="grcicon-process-color"></i> Processes'.html_safe, "##{prefix}_processes", :data => { :'tab-href' => flow_systems_path(:quick => true, :qr => quick_result, :is_biz_process => true), :toggle => 'tab' }
+    %li=link_to '<i class="grcicon-system-color"></i> Systems'.html_safe, "##{prefix}_systems", :data => { :'tab-href' => flow_systems_path(:quick => true, :qr => quick_result, :is_biz_process => false), :toggle => 'tab' }
+    %li=link_to '<i class="grcicon-orggroup-color"></i> Org Groups'.html_safe, "##{prefix}_org_groups", :data => { :'tab-href' => flow_org_groups_path(:quick => true, :qr => quick_result), :toggle => 'tab' }
+    %li=link_to '<i class="grcicon-project-color"></i> Projects'.html_safe, "##{prefix}_projects", :data => { :'tab-href' => flow_projects_path(:quick => true, :qr => quick_result), :toggle => 'tab' }
+    %li=link_to '<i class="grcicon-facility-color"></i> Facilities'.html_safe, "##{prefix}_facilities", :data => { :'tab-href' => flow_facilities_path(:quick => true, :qr => quick_result), :toggle => 'tab' }
+    %li=link_to '<i class="grcicon-product-color"></i> Products'.html_safe, "##{prefix}_products", :data => { :'tab-href' => flow_products_path(:quick => true, :qr => quick_result), :toggle => 'tab' }
+    %li=link_to '<i class="grcicon-dataasset-color"></i> Data Assets'.html_safe, "##{prefix}_data_assets", :data => { :'tab-href' => flow_data_assets_path(:quick => true, :qr => quick_result), :toggle => 'tab' }
+    %li=link_to '<i class="grcicon-market-color"></i> Markets'.html_safe, "##{prefix}_markets", :data => { :'tab-href' => flow_markets_path(:quick => true, :qr => quick_result), :toggle => 'tab' }
     %li=link_to '<i class="grcicon-program-color"></i> Programs'.html_safe, "##{prefix}_programs", :data => { :'tab-href' => flow_programs_path(:quick => true, :qr => quick_result), :toggle => 'tab' }
 
   .tab-content

@@ -90,21 +90,21 @@ var widget_descriptors = {
   , "process" : {
     model : CMS.Models.Process
     , object_type : "process"
-    , object_category : "compliance"
+    , object_category : "business"
     , object_route : "systems"
     , object_display : "Processes"
   }
   , "system" : {
     model : CMS.Models.StrictSystem
     , object_type : "system"
-    , object_category : "compliance"
+    , object_category : "business"
     , object_route : "systems"
     , object_display : "Systems"
   }
   , "control" : {
     model : CMS.Models.Control
     , object_type : "control"
-    , object_category : "compliance"
+    , object_category : "governance"
     , object_route : "controls"
     , object_display : "Controls"
   }
@@ -132,7 +132,7 @@ var widget_descriptors = {
   , "system_process" : {
     model : CMS.Models.System
     , object_type : "system_process"
-    , object_category : "compliance"
+    , object_category : "business"
     , object_route : "systems"
     , object_display : "Systems/Processes"
     , widget_view : "/assets/systems/object_widget.mustache"
@@ -147,29 +147,24 @@ var widget_descriptors = {
 
 var programs_dash_menu = {categories : [
   {
-    title : "Governance"
+    title : "Governance / Compliance"
     , objects: [
-      widget_descriptors.program
-      , widget_descriptors.regulation
+      widget_descriptors.regulation
       , widget_descriptors.policy
       , widget_descriptors.contract
+      , widget_descriptors.control
     ]
   }, {
-    title : "Business"
+    title : "Asset / Business"
     , objects: [
-      widget_descriptors.org_group
+      widget_descriptors.system
+      , widget_descriptors.process
+      , widget_descriptors.org_group
       , widget_descriptors.project
       , widget_descriptors.facility
       , widget_descriptors.product
       , widget_descriptors.data_asset
       , widget_descriptors.market
-    ]
-  }, {
-    title : "Compliance"
-    , objects: [
-      widget_descriptors.process
-      , widget_descriptors.system
-      , widget_descriptors.control
     ]
   }, {
     title : "Risk"

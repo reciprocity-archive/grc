@@ -48,7 +48,7 @@
   %ul.nav.nav-tabs
     -unless program.company_controls?
       %li.text-governance.active=link_to '<i class="grcicon-directive-color"></i>Directives'.html_safe, '#directives', :data => { :toggle => 'tab' }
-    %li.text-compliance=link_to '<i class="grcicon-control-color"></i>Controls'.html_safe, '#controls', :data => { :toggle => 'tab' }
+    %li.text-governance=link_to '<i class="grcicon-control-color"></i>Controls'.html_safe, '#controls', :data => { :toggle => 'tab' }
     -#%li=link_to '<i class="grcicon-reg-map"></i>Combo'.html_safe, '#combo', :data => { :toggle => 'tab', :'tab-href' => flow_sections_path(:program_id => instance.id, :combo => true) }
 
   .action-items
