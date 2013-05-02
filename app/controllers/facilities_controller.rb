@@ -5,9 +5,9 @@
 # Handle facilities
 class FacilitiesController < BusinessObjectsController
 
-  access_control :acl do
-    # FIXME: Implement real authorization
-
+#  access_control :acl do
+#    # FIXME: Implement real authorization
+#
 #    allow :superuser
 #
 #    actions :new, :create do
