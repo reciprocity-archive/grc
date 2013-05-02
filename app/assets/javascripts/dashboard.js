@@ -35,8 +35,10 @@
       case "systems_processes":
       type = type[0] + "ystem_" + type[8] + "rocess";
       break;
+      case "policies":
+      type = type[0] + "olicy"; break;
       default:
-      type = type.replace(/s$/, "");
+      type = type.replace(/e?s$/, "");
     }
 
     return type;
@@ -748,5 +750,14 @@ jQuery(function($) {
         window.open(this.href);
       }
     }
+  });
+});
+
+//Handler for changing the new object text in dashboard widgets
+jQuery(function($){
+  $(document.body).on("click", "[id^=quick_find] .nav-tabs li", function(ev) {
+    var plural = $(this).find(".text-business, .text-governance, .text-risk").text();
+    var singular = can.map(window.cms_singularize(plural).split("_"), can.capitalize).join(" ");
+    $(this).closest(".widget").find(".object-type").text(singular).closest("a").attr("href", $(this).find("a").data("new-href"));
   });
 });
