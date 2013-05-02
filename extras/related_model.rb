@@ -330,7 +330,17 @@ module RelatedModel
   def has_valid_relationship?(type)
     self.class.has_valid_relationship?(type)
   end
-
+  
+  def count_destination_objects(destination_model)
+    object_type = self.class.to_s
+    object_id   = self.id
+    Relationship.where(
+      source_id: object_id,
+      source_type: object_type,
+      destination_type: destination_model
+    ).count
+  end
+  
   module ClassMethods
     def related_to_source(object, relationship_type_id)
       object_type = object.class.to_s
