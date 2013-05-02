@@ -135,7 +135,7 @@ class DirectivesController < BaseObjectsController
         render :layout => nil, :locals => { :sections => @sections }
       end
       format.json do
-        render :json => @sections, :include => :linked_controls
+        render :json => @sections, :methods => [:linked_controls, :description_inline]
       end
     end
   end

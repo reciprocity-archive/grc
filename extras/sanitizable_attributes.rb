@@ -36,7 +36,7 @@ module SanitizableAttributes
 
       attr_names.each do |attr_name|
         define_method "#{attr_name}_inline" do
-          ActionController::Base.helpers.sanitize(self.send(attr_name), :tags => SANITIZED_ALLOWED_TAGS - %w(ul ol li))
+          ActionController::Base.helpers.sanitize(self.send(attr_name), :tags => SANITIZED_ALLOWED_TAGS - %w(ul ol li div br hr table td tr th))
         end
         define_method "#{attr_name}_stripped_with_newlines" do
           value = self.send(attr_name)
