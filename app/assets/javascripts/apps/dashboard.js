@@ -30,6 +30,7 @@ var widget_descriptors = {
     , object_category : "governance"
     , object_route : "directives"
     , object_display : "Regulations"
+    , widget_view : "/assets/directives/object_widget.mustache"
   }
   , "policy" : {
     model : CMS.Models.Policy
@@ -37,6 +38,7 @@ var widget_descriptors = {
     , object_category : "governance"
     , object_route : "directives"
     , object_display : "Policies"
+    , widget_view : "/assets/directives/object_widget.mustache"
   }
   , "contract" : {
     model : CMS.Models.Contract
@@ -44,6 +46,7 @@ var widget_descriptors = {
     , object_category : "governance"
     , object_route : "directives"
     , object_display : "Contracts"
+    , widget_view : "/assets/directives/object_widget.mustache"
   }
   , "org_group" : {
     model : CMS.Models.OrgGroup
@@ -93,6 +96,7 @@ var widget_descriptors = {
     , object_category : "business"
     , object_route : "systems"
     , object_display : "Processes"
+    , widget_view : "/assets/systems/object_widget.mustache"
   }
   , "system" : {
     model : CMS.Models.StrictSystem
@@ -100,6 +104,7 @@ var widget_descriptors = {
     , object_category : "business"
     , object_route : "systems"
     , object_display : "Systems"
+    , widget_view : "/assets/systems/object_widget.mustache"
   }
   , "control" : {
     model : CMS.Models.Control

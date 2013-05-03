@@ -75,6 +75,7 @@
             $(list_target).tmpl_setitems(data);
             $target.modal_relationship_selector('hide');
           }
+          $trigger.trigger("routeparam", "tab." + $trigger.closest(".widget").attr("id") + "=" + $trigger.data("route"));
         }
 
       });

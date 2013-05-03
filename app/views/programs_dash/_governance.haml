@@ -2,8 +2,14 @@
   Governance / Compliance
 
 -content_for :widget_buttons do
-  .filter
-    %input.ui-corner-all.widgetsearch.clear-value(type='text' placeholder='Search')
+  .filter.row-fluid
+    .span10
+      %input.ui-corner-all.widgetsearch.clear-value(type='text' placeholder='Search')
+    .span2
+      %a.btn.btn-add{ :href => new_flow_control_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide' } 
+        %i.grcicon-add
+        New
+        %span.object-type Control
 
 -content_for :widget_help, 'governance'
 
@@ -15,10 +21,10 @@
 .tabbable.tabs-left{ :id => quick_result ? nil : "quick_find" }
   %ul.nav.nav-tabs
     -#    %li.active=link_to '<i class="grcicon-program-color"></i> <span class="text-governance">Programs</span> <span class="item-count"></span>'.html_safe, "##{prefix}_programs", :data => { :'tab-href' => flow_programs_path(:quick => true, :qr => quick_result, :company_controls_first => true), :toggle => 'tab' }
-    %li=link_to '<i class="grcicon-regulation-color"></i> <span class="text-governance">Regulations</span> <span class="item-count"></span>'.html_safe, "##{prefix}_regulations", :data => { :'tab-href' => flow_directives_path(:quick => true, :qr => quick_result, :meta_kind => "regulation"), :toggle => 'tab' }
-    %li=link_to '<i class="grcicon-policy-color"></i> <span class="text-governance">Policies</span> <span class="item-count"></span>'.html_safe, "##{prefix}_policies", :data => { :'tab-href' => flow_directives_path(:quick => true, :qr => quick_result, :meta_kind => "policy"), :toggle => 'tab' }
-    %li=link_to '<i class="grcicon-contract-color"></i> <span class="text-governance">Contracts</span> <span class="item-count"></span>'.html_safe, "##{prefix}_contracts", :data => { :'tab-href' => flow_directives_path(:quick => true, :qr => quick_result, :meta_kind => "contract"), :toggle => 'tab' }
-    %li.active=link_to '<i class="grcicon-control-color"></i> <span class="text-governance">Controls</span> <span class="item-count"></span>'.html_safe, "##{prefix}_controls", :data => { :'tab-href' => flow_controls_path(:quick => true, :qr => quick_result), :toggle => 'tab' }
+    %li=link_to '<i class="grcicon-regulation-color"></i> <span class="text-governance">Regulations</span> <span class="item-count"></span>'.html_safe, "##{prefix}_regulations", :data => { :'tab-href' => flow_directives_path(:quick => true, :qr => quick_result, :meta_kind => "regulation"), :toggle => 'tab', :'new-href' => new_flow_directive_path(:meta_kind => "regulation") }
+    %li=link_to '<i class="grcicon-policy-color"></i> <span class="text-governance">Policies</span> <span class="item-count"></span>'.html_safe, "##{prefix}_policies", :data => { :'tab-href' => flow_directives_path(:quick => true, :qr => quick_result, :meta_kind => "policy"), :toggle => 'tab', :'new-href' => new_flow_directive_path(:meta_kind => "policy") }
+    %li=link_to '<i class="grcicon-contract-color"></i> <span class="text-governance">Contracts</span> <span class="item-count"></span>'.html_safe, "##{prefix}_contracts", :data => { :'tab-href' => flow_directives_path(:quick => true, :qr => quick_result, :meta_kind => "contract"), :toggle => 'tab', :'new-href' => new_flow_directive_path(:meta_kind => "contract") }
+    %li.active=link_to '<i class="grcicon-control-color"></i> <span class="text-governance">Controls</span> <span class="item-count"></span>'.html_safe, "##{prefix}_controls", :data => { :'tab-href' => flow_controls_path(:quick => true, :qr => quick_result), :toggle => 'tab', :'new-href' => new_flow_control_path }
 
   .tab-content
     -#.tab-pane{ :id => "#{prefix}_programs" }

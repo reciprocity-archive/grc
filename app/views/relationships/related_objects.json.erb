@@ -5,6 +5,7 @@
       "id" : <%= result[:relationship_type_id].to_json.html_safe %>,
       "title" : <%= result[:relationship_title].to_json.html_safe %>,
       "description" : <%= result[:relationship_description].to_json.html_safe %>,
+      "related_type" : <%= result[:related_type].to_json.html_safe %>,
       "edit_url" : <%= result[:edit_url].to_json.html_safe %>
     },
     "related_objects" : [

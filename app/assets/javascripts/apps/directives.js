@@ -47,6 +47,9 @@ jQuery(function($) {
       $(ev.target).trigger('kill-all-popovers');
     });
   });
+
+  CMS.Controllers.DirectiveRoutes.Instances = {
+    Control : $(document.body).cms_controllers_directive_routes({}).control(CMS.Controllers.DirectiveRoutes)};
 });
 
 
@@ -56,8 +59,6 @@ if (!/\/directives\b/.test(window.location.pathname))
 $(function() {
   var spin_opts = { position : "absolute", top : 100, left : 100, height : 50, width : 50};
 
-    CMS.Controllers.DirectiveRoutes.Instances = {
-      Control : $(document.body).cms_controllers_directive_routes({}).control(CMS.Controllers.DirectiveRoutes)};
 
   var $controls_tree = $("#controls .tree-structure").append($(new Spinner().spin().el).css(spin_opts));
   $.when(

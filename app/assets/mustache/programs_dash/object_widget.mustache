@@ -35,8 +35,16 @@
     </div>
   </header>
   {{^if is_related}}
-  <div class="filter">
-    <input class="ui-corner-all widgetsearch-tocontent clear-value" placeholder="Search" type="text">
+  <div class="filter row-fluid">
+    <div class="span10">
+      <input class="ui-corner-all widgetsearch clear-value" type="text" placeholder="Search" />
+    </div>
+    <div class="span2">
+      <a class="btn btn-add" href="/{{object_route}}/new" data-toggle="modal-ajax-form" data-modal-reset="reset" data-form-target="refresh" data-modal-class="modal-wide">
+        <i class="grcicon-add"></i>
+        New <span class="object-type">{{model.shortName}}</span>
+      </a>
+    </div>
   </div>
   {{/if}}
   <section class="content">

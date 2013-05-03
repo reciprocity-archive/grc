@@ -52,7 +52,11 @@
                 .span12
                   .oneline
                     %span.addition-info
-                      %a.reference{:href => item.link_url, :target => "_blank"}
+                      %a.reference{:href => item.link_url,
+                        :target => "_blank",
+                        :data => { :'popover-trigger' => "sticky-hover", 
+                                   :'original-title' => "<div class='row-fluid'><div class='span12'><h3><i class='grcicon-link'></i> Viewing #{item.title.blank? ? item.link_url : item.title} </span> </h3></div></div>", 
+                                   :content => render(:partial => 'documents/tooltip', :locals => { :document => item }) } }
                         =item.title.presence || item.link_url || ''.html_safe
                     %span.option
                       =item.document_type || ''.html_safe
