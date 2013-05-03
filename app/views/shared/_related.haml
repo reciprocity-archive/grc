@@ -17,7 +17,7 @@
     .span12
       .tabbable
         %ul.nav.nav-tabs
-          -check_model_risk_authorization(models).each do |model|
+          -models.delete('Risk').each do |model|
             -table_name = model.underscore.pluralize #.table_name
             -icon = "grcicon-#{model.downcase}-color"
             %li{:class => "tab-btn text-#{model.downcase}"}
