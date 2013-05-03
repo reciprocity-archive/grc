@@ -189,7 +189,8 @@ $.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
     , attribs = []
     , that = this.___st4ck ? this[this.length-1] : this
     , data = can.extend({}, that)
-    , hash = quickHash(args.join("-"), quickHash(that._cid)).toString(36);
+    , hash = quickHash(args.join("-"), quickHash(that._cid)).toString(36)
+    , attr_count = 0;
 
     var hook = can.view.hook(function(el, parent, view_id) {
       var content = options.fn(that);
@@ -211,7 +212,7 @@ $.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
       function sub_all(el, ev, newVal, oldVal) {
         var $el = $(el);
         can.each(attribs, function(attrib) {
-          $el.attr(attrib.name, $("<div>").html(can.view.render(attrib.value, data)).html());
+          $el.attr(attrib.name, $("<div>").html(can.view.render(attrib.value, data.serialize ? data.serialize() : data)).html());
         })
       }
 
@@ -230,8 +231,8 @@ $.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
 
           return "{" + match + "}";
         });
-        can.view.mustache("withattr_" + hash, attr_tmpl);
-        attribs.push({name : attr_name, value : "withattr_" + hash});
+        can.view.mustache("withattr_" + hash + "_" + (++attr_count), attr_tmpl);
+        attribs.push({name : attr_name, value : "withattr_" + hash + "_" + attr_count });
       }
 
       sub_all(el);
