@@ -220,7 +220,7 @@ $.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
         var attr_name = args[i];
         var attr_tmpl = args[i + 1];
         //set up bindings where appropriate
-        attr_tmpl = attr_tmpl.replace(/\{[^\{]*\}/g, function(match, offset, string) {
+        attr_tmpl = attr_tmpl.replace(/\{[^\}]*\}/g, function(match, offset, string) {
           var token = match.substring(1, match.length - 1);
           if(typeof data[token] === "function") {
             data[token].bind && data[token].bind("change." + hash, $.proxy(sub_all, that, el));
