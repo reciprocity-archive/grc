@@ -7,4 +7,5 @@ describe BaseRowConverter do
       account = FactoryGirl.create(:account, :email => 'exists@example.com')
       account.person.should eq(person)
     end
+  end
 end
