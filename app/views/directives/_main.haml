@@ -17,10 +17,10 @@
           -#%input.ui-corner-all.widgetsearch.clear-value(type='text' placeholder='Search')
         .span6
           .pull-right
-            %a.btn.btn-add{ :href => new_flow_section_path(:'section[directive_id]' => directive.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-dirty' => '#regulations, #combo', :'data-route' => "tab=regulations", :'data-modal-class' => 'modal-wide', :rel => 'tooltip', :title => "Create New #{directive.section_meta_kind.to_s.titleize}" }
+            %a.btn.btn-add{ :href => new_flow_section_path(:'section[directive_id]' => directive.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-dirty' => '#regulations, #combo', :'data-route' => "regulations", :'data-modal-class' => 'modal-wide', :rel => 'tooltip', :title => "Create New #{directive.section_meta_kind.to_s.titleize}" }
               %i.grcicon-add
               #{directive.section_meta_kind.to_s.titleize}
-            %a.btn.btn-add{ :href => new_flow_control_path(:'control[directive_id]' => directive.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-dirty' => '#category_controls, #combo', :'data-route' => "tab=category_controls", :'data-modal-class' => 'modal-wide', :rel => 'tooltip', :title => 'Create New Control' }
+            %a.btn.btn-add{ :href => new_flow_control_path(:'control[directive_id]' => directive.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-dirty' => '#category_controls, #combo', :'data-route' => "category_controls", :'data-modal-class' => 'modal-wide', :rel => 'tooltip', :title => 'Create New Control' }
               %i.grcicon-add
               Control
 

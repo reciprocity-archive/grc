@@ -138,6 +138,7 @@ class RelationshipsController < BaseMappingsController
             :relationship_type_id => vr[:relationship_type],
             :relationship_title => relationship_title,
             :relationship_description => relationship_type ? relationship_type[:forward_description] : "Unknown relationship type",
+            :related_type => related_model.underscore.pluralize,
             :edit_url => edit_url,
             :objects => objects,
           })
@@ -163,6 +164,7 @@ class RelationshipsController < BaseMappingsController
               :relationship_type_id => vr[:relationship_type],
               :relationship_title => relationship_title,
               :relationship_description => relationship_type ? relationship_type[:reverse_description] : "Unknown relationship type",
+              :related_type => related_model.underscore.pluralize,
               :edit_url => edit_url,
               :objects => rels.map {|rel| rel.source},
             })
@@ -188,6 +190,7 @@ class RelationshipsController < BaseMappingsController
               :relationship_type_id => vr[:relationship_type],
               :relationship_title => relationship_title,
               :relationship_description => relationship_type ? relationship_type[:forward_description] : "Unknown relationship type",
+              :related_type => related_model.underscore.pluralize,
               :edit_url => edit_url,
               :objects => rels.map {|rel| rel.destination},
             })
