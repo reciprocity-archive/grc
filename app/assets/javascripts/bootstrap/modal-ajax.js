@@ -75,7 +75,7 @@
             $(list_target).tmpl_setitems(data);
             $target.modal_relationship_selector('hide');
           }
-          $trigger.trigger("routeparam", "tab." + $trigger.closest(".widget").attr("id") + "=" + $trigger.data("route"));
+          $trigger.data("route") && $trigger.trigger("routeparam", "tab." + $trigger.closest(".widget").attr("id") + "=" + $trigger.data("route"));
         }
 
       });
@@ -183,7 +183,7 @@
             $active.closest(".active").removeClass("active");
             $active.click();
           }
-          $trigger.trigger("routeparam", $trigger.data("route"));
+          $trigger.data("route") && $trigger.trigger("routeparam", "tab." + $trigger.closest(".widget").attr("id") + "=" + $trigger.data("route"));
           $trigger.trigger('modal:success', data);
         }
       });
