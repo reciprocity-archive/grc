@@ -4,10 +4,12 @@ class BaseMappingsController < ApplicationController
   def create
     if params[:items].present?
       errors, objects = {}, {}
-      params[:items].keys.each do |id|
-        item_errors, item_object = create_or_update_object(params[:items][id])
-        errors[id] = item_errors if item_errors
-        objects[id] = item_object
+      transaction do
+        params[:items].keys.each do |id|
+          item_errors, item_object = create_or_update_object(params[:items][id])
+          errors[id] = item_errors if item_errors
+          objects[id] = item_object
+        end
       end
       if errors.empty?
         render :json => create_objects_as_json(objects.values.compact), :status => 200
@@ -15,7 +17,9 @@ class BaseMappingsController < ApplicationController
         render :json => { :errors => errors, :objects => create_objects_as_json(objects) }, :status => 400
       end
     elsif params[object_name]
-      errors, object = create_or_update_object(params[object_name])
+      transaction do
+        errors, object = create_or_update_object(params[object_name])
+      end
       if errors.nil? || errors.empty?
         render :json => create_object_as_json(object) || {}, :status => 200
       else
@@ -28,7 +32,9 @@ class BaseMappingsController < ApplicationController
 
   def update
     params[object_name][:id] = params[:id]
-    errors, object = create_or_update_object(params[object_name])
+    transaction do
+      errors, object = create_or_update_object(params[object_name])
+    end
     if errors.nil? || errors.empty?
       render :json => update_object_as_json(object) || {}, :status => 200
     else
