@@ -6,6 +6,7 @@ class Cycle < ActiveRecord::Base
   include CommonModel
   include AuthorizedModel
   include SanitizableAttributes
+  include DatedModel
 
   attr_accessible :program, :start_at, :complete, :title, :audit_firm, :audit_lead, :description, :list_import_date, :status, :notes, :end_at, :report_due_at
 

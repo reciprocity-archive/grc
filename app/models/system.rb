@@ -6,6 +6,7 @@ class System < ActiveRecord::Base
   include AuthorizedModel
   include RelatedModel
   include SanitizableAttributes
+  include DatedModel
 
   CATEGORY_TYPE_ID = 101
 

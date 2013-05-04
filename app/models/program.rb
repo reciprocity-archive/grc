@@ -8,6 +8,7 @@ class Program < ActiveRecord::Base
   include AuthorizedModel
   include RelatedModel
   include SanitizableAttributes
+  include DatedModel
 
   KINDS = [
     "Directive",

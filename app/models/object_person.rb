@@ -2,6 +2,7 @@ class ObjectPerson < ActiveRecord::Base
   include AuthoredModel
   include AuthorizedModel
   include RelatedModel
+  include DatedModel
 
   attr_accessible :person, :personable, :notes, :start_date, :stop_date
 

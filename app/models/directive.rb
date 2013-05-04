@@ -7,6 +7,7 @@ class Directive < ActiveRecord::Base
   include AuthorizedModel
   include RelatedModel
   include SanitizableAttributes
+  include DatedModel
 
   KINDS = [
     "Regulation",

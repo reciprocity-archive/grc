@@ -5,6 +5,7 @@ class Risk < ActiveRecord::Base
   include AuthorizedModel
   include RelatedModel
   include SanitizableAttributes
+  include DatedModel
 
   RATINGS = {
     1 => "Minimal",

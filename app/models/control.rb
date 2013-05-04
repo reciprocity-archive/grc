@@ -9,6 +9,7 @@ class Control < ActiveRecord::Base
   include AuthorizedModel
   include RelatedModel
   include SanitizableAttributes
+  include DatedModel
 
   CATEGORY_TYPE_ID = 100
   CATEGORY_ASSERTION_TYPE_ID = 102
