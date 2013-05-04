@@ -6,11 +6,12 @@
     <span class="code">{{slug}}</span>
   </a>
 
-  <a data-placement="right" {{#linked_controls.length}}data-popover-trigger="sticky-hover" data-original-title="Mapped Controls" data-content="{{render '/assets/controls/list_popover.mustache' linked_controls}}"{{/linked_controls.length}}>
+  {{#pack list=linked_controls na=na}}
+  <a data-placement="right" {{#linked_controls.length}}data-popover-trigger="sticky-hover" data-original-title="Mapped Controls" data-content="{{render '/assets/controls/list_popover.mustache'}}"{{/linked_controls.length}}>
     {{{withattr 'href' '/mapping_section/dialog/\{\{id\}\}'}}}
-    {{{withclass 'attached badge controllistRM status linked_controls:badge-warning !linked_controls:na:badge-warning !linked_controls:!na:badge-important'}}
-    {{#if linked_controls.length}}}
-      {{{linked_controls.length}}}
+    {{{withclass 'attached badge controllistRM status list:badge-warning !list:na:badge-warning !list:!na:badge-important'}}
+    {{#if list.length}}}
+      {{{list.length}}}
     {{else}}
         {{#if na}}
           N/A
@@ -19,6 +20,7 @@
         {{/if}}
     {{/if}}
   </a>
+  {{/pack}}
 </div>
 {{#if children}}
   <div class="item-content in">

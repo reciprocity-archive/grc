@@ -65,25 +65,27 @@
           </div>
           <div class="span2">
             <div class="objects-count">
-              <a class="controls-count controllist" data-content="{{render '/assets/controls/list_popover.mustache' linked_controls}}" data-placement="right" data-popover-trigger="sticky-hover" href="javascript://">
-                {{{withattr 'data-original-title' "<div class='row-fluid'><div class='span12'><h3><i class='grcicon-control-color'></i>Mapped Controls</h3></div></div>" }}}
+              {{#pack list=linked_controls na=na}}
+              <a class="controls-count controllist"  data-content="{{render '/assets/controls/list_popover.mustache'}}" data-placement="right" data-popover-trigger="sticky-hover" href="javascript://">
+                {{{withattr 'data-original-title' "<div class='row-fluid'><div class='span12'><h3><i class='grcicon-control-color'></i>Mapped Controls</h3></div></div>"}}}
                 <i class="grcicon-control-color"></i>
                 {{#if na}}
-                    {{^linked_controls}} 
+                    {{^list}} 
                       <small class="warning">N/A</small>
-                    {{/linked_controls}}
-                  {{#linked_controls.length}}
+                    {{/list}}
+                  {{#list.length}}
                       <span>{{this}}</span>
-                  {{/linked_controls.length}}
+                  {{/list.length}}
                 {{else}}
-                    {{^linked_controls}} 
+                    {{^list}} 
                       <strong class="error">0</strong>
-                    {{/linked_controls}}
-                  {{#linked_controls.length}}
+                    {{/list}}
+                  {{#list.length}}
                       <span>{{this}}</span>
-                  {{/linked_controls.length}}
+                  {{/list.length}}
                 {{/if}}  
               </a>
+              {{/pack}}
             </div>
           </div>
         </div>
