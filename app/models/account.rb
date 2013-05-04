@@ -114,7 +114,7 @@ class Account < ActiveRecord::Base
   end
   
   def can_admin?
-    self.role == 'superuser' || self.role == 'admin_risk'
+    self.role == 'admin' || self.role == 'admin_risk'
   end
 
   def self.forget_all!

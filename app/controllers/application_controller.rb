@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
   end
 
   def render_unauthorized
-    render :file => "public/401.html", :status => :unauthorized
+    render :text => "You don't have sufficient privileges to view this.", :status => :unauthorized
 #    flash[:warning] = "You are not authorized to access this page"
 #    if request.xhr?
 #      render :partial => 'error/unauthorized', :layout => nil, :status => 403
