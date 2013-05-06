@@ -56,8 +56,9 @@
         &nbsp;
     .span6
       %h4
-        -controls = program.directives.collect{|d| d.controls}.flatten
-        Controls (#{controls.length})
+        -directive = params[:directive_id].present? ? program.directives.select{|d| d.id.to_s == params[:directive_id]}.first : nil
+        -controls = directive.present? ? directive.controls : program.directives.collect{|d| d.controls}.flatten
+        Controls #{directive.present? ? "from " + directive.title : ""} (#{controls.length})
         -mapped_controls = controls.reject{|c| c.linked_sections.empty?}
         -unmapped_controls = controls.select{|c| c.linked_sections.empty?}
         .progress

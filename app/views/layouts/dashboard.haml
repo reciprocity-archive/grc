@@ -79,6 +79,10 @@
                           %li
                             %a{ :href => new_flow_directive_path(:meta_kind => :policy), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
                               Policy
+                          %li
+                            %a{ :href => new_flow_control_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
+                              Control
+                          %li.divider
                           - if current_user.can_manage_risk?
                             %li
                               %a{ :href => new_flow_risky_attribute_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
@@ -86,17 +90,13 @@
                             %li
                               %a{ :href => new_flow_risk_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
                                 Risk
-                          %li
-                            %a{ :href => new_flow_control_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                              Control
-                          %li.divider
+                            %li.divider
                           %li
                             %a{ :href => new_flow_system_path(:'system[is_biz_process]' => 1), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
                               Process
                           %li
                             %a{ :href => new_flow_system_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
                               System
-                          %li.divider
                           %li
                             %a{ :href => new_flow_org_group_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
                               Org Group
