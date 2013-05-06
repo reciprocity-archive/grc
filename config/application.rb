@@ -13,7 +13,7 @@ CMS_CONFIG = {
   "ALLOW_HELP_EDIT" => false,
   "DEFAULT_DOMAIN" => "example.com",
   "REQUIRE_SSL" => false,
-  "CMS_APP_VERSION" => "1.0"
+  "CMS_APP_VERSION" => "s28"
 }
 
 CMS_CONFIG["SECRET_TOKEN"] = ENV["SECRET_TOKEN"] if ENV["SECRET_TOKEN"]
