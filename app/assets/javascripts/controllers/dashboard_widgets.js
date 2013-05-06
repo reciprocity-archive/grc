@@ -66,7 +66,7 @@ CMS.Controllers.Filterable("CMS.Controllers.DashboardWidgets", {
   , fetch_list : function(params) {
     if(this.options.is_related) {
 
-      if(~can.inArray(this.options.object_type, ["Control", "Directive", "Section"])
+      if(~can.inArray(this.options.object_type, ["Control", "Directive", "Regulation", "Policy", "Contract", "Section", "Clause"])
          || (this.options.parent_type === "Control" && this.options.object_type === "SystemProcess")) {
         var params = {
           list : true
