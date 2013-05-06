@@ -1,7 +1,7 @@
 module AuthorizationHelper
   # Roles
   def access_control_roles
-    [:user, :admin, :risk, :admin_risk]
+    [:user, :admin, :risk, :admin_risk, :no_access]
   end
 
   def allowed_objs(objects, ability)

@@ -83,7 +83,7 @@ class ApplicationController < ActionController::Base
 
   # Pre-filter for requiring the user to be logged in.  On by default.
   def require_user
-    unless current_user
+    unless current_user && current_user.is_active?
       store_location
       render_unauthenticated
       return false

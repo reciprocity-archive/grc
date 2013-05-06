@@ -116,6 +116,10 @@ class Account < ActiveRecord::Base
   def can_admin?
     self.role == 'admin' || self.role == 'admin_risk'
   end
+  
+  def is_active?
+    self.role != 'no_access'
+  end
 
   def self.forget_all!
     records = nil

@@ -74,4 +74,8 @@ class Risk < ActiveRecord::Base
   def categories_display
     categories.uniq.map(&:name).join(",")
   end
+  
+  def max_impact
+    likelihood_rating.to_f * inherent_risk.to_f
+  end
 end
