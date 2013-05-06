@@ -4,10 +4,10 @@
 -content_for :widget_buttons do
   .filter
     .row-fluid
-      .span10
+      .span8
         %input.ui-corner-all.widgetsearch.clear-value(type='text' placeholder='Search')
-      .span2
-        %a.btn.btn-add{ :href => new_flow_control_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide' } 
+      .span4
+        %a.btn.btn-add.pull-right{ :href => new_flow_control_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide' } 
           %i.grcicon-add
           New
           %span.object-type Control
