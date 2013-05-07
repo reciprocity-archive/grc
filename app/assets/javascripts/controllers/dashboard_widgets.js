@@ -75,7 +75,7 @@ CMS.Controllers.Filterable("CMS.Controllers.DashboardWidgets", {
         var url;
         switch(this.options.object_type) {
           case "Section" :
-          url = "/directives/" + this.options.parent_id + "/" + this.options.object_route;
+          url = (this.options.parent_type === "Control" ? "/controls/" : "/directives/") + this.options.parent_id + "/" + this.options.object_route;
           break;
           case "SystemProcess" :
           url = "/controls/" + this.options.parent_id + "/" + this.options.object_route;
