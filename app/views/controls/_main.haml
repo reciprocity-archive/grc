@@ -13,7 +13,8 @@
     -else
       %li.text-governance=link_to '<i class="grcicon-control-color"></i>Mapped Controls'.html_safe, '#controls', :data => { :toggle => 'tab', :'tab-href' => implementing_controls_flow_control_path(control) }
     %li.text-governance=link_to '<i class="grcicon-section-color"></i>Sections/Clauses'.html_safe, '#sections', :data => { :toggle => 'tab', :'tab-href' => sections_flow_control_path(control) }
-    %li.text-risk=link_to '<i class="grcicon-risk-color"></i>Risks'.html_safe, '#risks', :data => { :toggle => 'tab', :'tab-href' => risks_flow_control_path(control) }
+    - if current_user.can_manage_risk?
+      %li.text-risk=link_to '<i class="grcicon-risk-color"></i>Risks'.html_safe, '#risks', :data => { :toggle => 'tab', :'tab-href' => risks_flow_control_path(control) }
 
   .action-items
     %a.expandAll.btn.btn-mini{:href => "#", :rel => "tooltip", :title => "Expand all"}
