@@ -142,7 +142,16 @@ ul.tree-structure {
         margin-left: 4px;
         font-weight: bold;
         display: inline-block;
+        &.btn-control {
+          
+          padding:2px 6px 0 6px;
+          margin-top:-3px;
+          i {
+            margin-top:0;
+          }
+        }
       }
+      
       .error {
         color:$error;
       }
