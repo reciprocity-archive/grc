@@ -24,4 +24,8 @@ module AuthorizationHelper
   def check_admin_authorization
     render_unauthorized unless current_user.can_admin?
   end
+  
+  def is_risky_type?(string)
+    string == 'Risk' || string == 'risk' || string == 'RiskyAttribute' || string == 'risky_attribute'
+  end
 end

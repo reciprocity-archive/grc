@@ -6,6 +6,10 @@ class RelationshipsController < BaseMappingsController
 #  end
 
   def index
+    wants_risk = false
+    if is_risky_type?(params[:object_type]) || is_risky_type?(params[:related_model])
+      wants_risk = true
+    end
     if params[:related_side].present? && params[:related_side] != 'both'
       related_side = params[:related_side]
       object_side = related_side == 'source' ? 'destination' : 'source'
@@ -55,11 +59,17 @@ class RelationshipsController < BaseMappingsController
         obj
       end
     end
-
-    render :json => relationships_with_object
+    if wants_risk && !current_user.can_manage_risk?
+      render_unauthorized
+    else
+      render :json => relationships_with_object
+    end
   end
 
   def related_objects
+    if !current_user.can_manage_risk? && (is_risky_type?(params[:otype]) || is_risky_type?(params[:related_model]))
+      render_unauthorized
+    end
     obj_type = params[:otype]
     obj_real_type = obj_type
     obj_real_type = "System" if obj_type == "Process"
@@ -242,6 +252,9 @@ class RelationshipsController < BaseMappingsController
   end
 
   def graph
+    if is_risky_type?(params[:otype]) && !current_user.can_manage_risk?
+      render_unauthorized
+    end
     obj_type = params[:otype]
     obj_id = params[:oid]
     abilities = params[:abilities]
