@@ -36,6 +36,13 @@
               .span12
                 .oneline
                   %span.addition-info
-                    =item.name.presence || item.email.presence || '&nbsp;'.html_safe
+                    -if item.name.presence && item.email.presence
+                      %a{:href=>"mailto:#{item.email}", :target=>"_blank", :rel => "tooltip", :title => "#{item.email}"}=item.name
+                    -elsif item.name.presence
+                      =item.name
+                    -elsif item.email.presence
+                      %a{:href=>"mailto:#{item.email}", :target=>"_blank"}=item.email
+                    -else
+                      ="&nbsp".html_safe
                     %span.role
                       =object_item.role
