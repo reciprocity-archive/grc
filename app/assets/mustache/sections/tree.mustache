@@ -66,9 +66,10 @@
           <div class="span2">
             <div class="objects-count">
               {{#pack list=linked_controls na=na}}
-              <a class="controls-count controllist"  data-content="{{render '/assets/controls/list_popover.mustache'}}" data-placement="right" data-popover-trigger="sticky-hover" href="javascript://">
-                {{{withattr 'data-original-title' "<div class='row-fluid'><div class='span12'><h3><i class='grcicon-control-color'></i>Mapped Controls</h3></div></div>"}}}
+              <a class="controls-count controllist btn btn-control"  data-content="{{render '/assets/controls/list_popover.mustache'}}" data-placement="right" data-popover-trigger="sticky-hover" href="javascript://">
+                {{{withattr 'data-original-title' "<div class='row-fluid'><div class='span12'><h3><a href='javascript://' data-id='' class='btn btn-mini pull-right controllist' rel='tooltip' title='Map Controls to Section'><i class='grcicon-section-color'></i><i class='grcicon-reg-map'></i><i class='grcicon-control-color'></i></a><i class='grcicon-control-color'></i>Mapped Controls</h3></div></div>"}}}
                 <i class="grcicon-control-color"></i>
+                
                 {{#if na}}
                     {{^list}} 
                       <small class="warning">N/A</small>
