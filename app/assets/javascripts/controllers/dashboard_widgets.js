@@ -66,8 +66,8 @@ CMS.Controllers.Filterable("CMS.Controllers.DashboardWidgets", {
   , fetch_list : function(params) {
     if(this.options.is_related) {
 
-      if(~can.inArray(this.options.object_type, ["Control", "Directive", "Section"])
-         || (this.options.parent_type === "Control" && this.options.object_type === "SystemProcess")) {
+      if(~can.inArray(this.options.object_type, ["Control", "Directive", "Regulation", "Policy", "Contract", "Section", "Clause"])
+         || this.options.parent_type === "Control") {
         var params = {
           list : true
           , tree : true
@@ -78,6 +78,9 @@ CMS.Controllers.Filterable("CMS.Controllers.DashboardWidgets", {
           url = "/directives/" + this.options.parent_id + "/" + this.options.object_route;
           break;
           case "SystemProcess" :
+          url = "/controls/" + this.options.parent_id + "/" + this.options.object_route;
+          break;
+          case "Risk" :
           url = "/controls/" + this.options.parent_id + "/" + this.options.object_route;
           break;
           default:
