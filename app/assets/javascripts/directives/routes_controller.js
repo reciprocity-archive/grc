@@ -5,6 +5,9 @@
 
 can.Control("CMS.Controllers.DirectiveRoutes", {
   //Static
+  init : function() {
+    can.route.attr({}); //make sure the route is set up
+  }
 
 }, {
   //Prototype
@@ -91,7 +94,7 @@ can.Control("CMS.Controllers.DirectiveRoutes", {
     }
 
     var d = typeof data === "string" ? makehash(data) : data;
-    can.route.attr(can.extend(can.route.attr()), d);
+    can.route.attr(can.extend(can.route.attr(), d));
   }
 });
 
