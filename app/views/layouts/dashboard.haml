@@ -5,6 +5,8 @@
     %title=@title || "GRC"
     %meta{:name => "viewport", :content => "width=device-width", :'initial-scale' => "1.0"}
 
+    :javascript
+      window.currentUser = #{current_user.to_json(:root => false, :except => [:crypted_password, :persistence_token], :methods => [:'can_admin?', :'can_manage_risk?'])}
     -if has_feature? :BETA
       =stylesheet_link_tag 'design'
       =javascript_include_tag 'design'
@@ -23,6 +25,7 @@
     -#NOTE: This resource occasionally hangs and prevents page from rendering, so loaded after the fact via jquery
     :javascript
       jQuery(function($) { $('head').append("<link href='https://fonts.googleapis.com/css?family=Titillium+Web' rel='stylesheet' type='text/css'></link>"); });
+
 
   %body{ page_type_attributes, :class => "#{has_feature?(:BETA) ? 'BETA' : ''}", :'data-target' => '.bs-docs-sidebar', :'data-spy' => 'scroll'}
 

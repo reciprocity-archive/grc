@@ -171,14 +171,17 @@ var programs_dash_menu = {categories : [
       , widget_descriptors.data_asset
       , widget_descriptors.market
     ]
-  }, {
+  }
+]};
+if(window.currentUser["can_manage_risk?"]) {
+  programs_dash_menu.categories.push({
     title : "Risk"
     , objects: [
       widget_descriptors.risky_attribute
       , widget_descriptors.risk
     ]
-  }
-]};
+  });
+}
 
 $(function() {
 
