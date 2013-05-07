@@ -115,6 +115,23 @@
       }
     }
   }
+  &.quick-search-small {
+    .tabs-left {
+      height: 559px;
+    }
+    .tab-content {
+      height: 541px;
+    }
+    .nav-tabs {
+      height: 541px !important;
+      li {
+        a {
+          padding-bottom: 6px;
+          padding-top: 6px;
+        }
+      }
+    }
+  }
   .tab-pane {
     ul {
       li {

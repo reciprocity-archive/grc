@@ -414,6 +414,16 @@ jQuery(document).ready(function($) {
       $(".quick-search-results").css("width", "");      
     }
   });
+  
+  $(window).on('resize', function(e) {
+    var height = $(window).height();
+    
+    if(height < 768) {
+      $(".quick-search-results").addClass('quick-search-small');
+    } else {
+      $(".quick-search-results").removeClass('quick-search-small');
+    }
+  }).resize();
 
   $('body').on('click', '.full-view', function(e) {
     var width = $(window).width();
