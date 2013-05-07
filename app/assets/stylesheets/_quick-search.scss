@@ -141,6 +141,7 @@
     line-height: 34px;
     padding: 0 10px 0 16px;
     color: $text;
+    text-align: right;
     a {
       color: $black;
       margin-top: 4px;
@@ -159,6 +160,7 @@
       &.btn-mini {
         font-size:$f-subTitle;
         line-height: 18px;
+        margin-left: 14px;
       }
     }
     .open {
