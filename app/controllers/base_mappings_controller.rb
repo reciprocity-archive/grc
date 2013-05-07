@@ -4,7 +4,7 @@ class BaseMappingsController < ApplicationController
   def create
     if params[:items].present?
       errors, objects = {}, {}
-      transaction do
+      model_class.transaction do
         params[:items].keys.each do |id|
           item_errors, item_object = create_or_update_object(params[:items][id])
           errors[id] = item_errors if item_errors
@@ -17,7 +17,7 @@ class BaseMappingsController < ApplicationController
         render :json => { :errors => errors, :objects => create_objects_as_json(objects) }, :status => 400
       end
     elsif params[object_name]
-      transaction do
+      model_class.transaction do
         errors, object = create_or_update_object(params[object_name])
       end
       if errors.nil? || errors.empty?
@@ -32,7 +32,7 @@ class BaseMappingsController < ApplicationController
 
   def update
     params[object_name][:id] = params[:id]
-    transaction do
+    model_class.transaction do
       errors, object = create_or_update_object(params[object_name])
     end
     if errors.nil? || errors.empty?
