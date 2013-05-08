@@ -188,6 +188,6 @@ class System < ActiveRecord::Base
   end
 
   def as_json(options={})
-    super(options.merge :methods => :absolute_url)
+    super((options || {}).merge :methods => [:absolute_url, :description_inline])
   end
 end

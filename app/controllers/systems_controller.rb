@@ -60,7 +60,7 @@ class SystemsController < BaseObjectsController
         end
       end
       format.json do
-        render :json => @systems
+        render :json => @systems, :methods => :description_inline
       end
     end
   end
@@ -117,6 +117,10 @@ class SystemsController < BaseObjectsController
   end
 
   private
+
+    def object_as_json(args={})
+      object.as_json args
+    end
 
     def show_set_page_types
       super
