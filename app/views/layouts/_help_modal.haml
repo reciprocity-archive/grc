@@ -8,6 +8,8 @@
 
 .modal-footer
   .row-fluid
-    .span12
+    .span3
+      %h5 GRC Version #{CMS_CONFIG["CMS_APP_VERSION"]}
+    .span9
       .confirm-buttons
         %a.btn.btn-primary{"data-dismiss" => "modal", :href => 'javascript://'} Close
