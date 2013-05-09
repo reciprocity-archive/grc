@@ -519,9 +519,9 @@ can.reduce ||
     var start_date = $(this).datepicker('getDate');
     $("[id$=_response_due_at]").datepicker().datepicker("option", "minDate", start_date); 
   });
-	$(document.body).on("change", "[name$=_start_date]", function(ev) { 
+	$(document.body).on("change", "[name$=start_date]", function(ev) { 
     var start_date = $(this).datepicker('getDate');
-    $("[name$=_end_date]").datepicker().datepicker("option", "minDate", start_date); 
+    $("[name$=stop_date]").datepicker().datepicker("option", "minDate", start_date); 
   });
   $(document.body).on("change", ".rotate_control_assessment", function(ev) { 
     ev.currentTarget.click(function() {
