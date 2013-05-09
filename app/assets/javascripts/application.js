@@ -515,6 +515,10 @@ can.reduce ||
     var start_date = $(this).datepicker('getDate');
     $("[id$=_end_at]").datepicker().datepicker("option", "minDate", start_date); 
   });
+	$(document.body).on("change", "[id$=_date_requested]", function(ev) { 
+    var start_date = $(this).datepicker('getDate');
+    $("[id$=_response_due_at]").datepicker().datepicker("option", "minDate", start_date); 
+  });
   $(document.body).on("change", ".rotate_control_assessment", function(ev) { 
     ev.currentTarget.click(function() {
       ev.currentTarget.toggle();
