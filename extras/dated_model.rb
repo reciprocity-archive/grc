@@ -11,12 +11,14 @@ module DatedModel
         errors.add(:stop_date, 'Must be later than start date') unless
           self.start_date <= self.stop_date
       end
-    elsif self.has_attribute? :end_at
+    end
+    if self.has_attribute? :end_at
       if self.start_at.present? && self.end_at.present?
         errors.add(:end_at, 'Must be later than start date') unless
           self.start_at <= self.end_at
       end
-    elsif self.has_attribute? :response_due_at
+    end
+    if self.has_attribute? :response_due_at
       if self.date_requested.present? && self.response_due_at.present?
         errors.add(:response_due_at, 'Must be later than date requested') unless
           self.date_requested <= self.response_due_at
