@@ -523,7 +523,7 @@ can.reduce ||
     ev.currentTarget.click(function() {
       ev.currentTarget.toggle();
     });
-  });
+  });	
 });
 
 
