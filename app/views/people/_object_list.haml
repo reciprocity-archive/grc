@@ -22,7 +22,7 @@
             .span12
               .oneline
                 %span.addition-info
-                  <%= person.name && person.name.trim() || person.email || '&nbsp' %>
+                  %a{:href => 'mailto:<%= person.email %>', :rel => "tooltip", :title => "<%= person.email %>"} <%= person.name && person.name.trim() || person.email %>
                   %span.role
                     <%= role %>
 
