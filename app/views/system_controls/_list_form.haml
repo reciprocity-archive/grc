@@ -2,7 +2,7 @@
   -if params[:system_id].present?
     Select Controls
   -else
-    Select Systems
+    Select Systems/Processes
 
 -if params[:system_id].present?
   -content_for :modal_help, :select_system_controls
@@ -109,7 +109,7 @@
       .row-fluid
         .span7
           %h3
-            Add System
+            Add System/Process
             %a.widgetbtn.widgetbtnselector.btn.btn-add{ :href => new_flow_system_path, :'data-toggle' => 'modal-ajax-listnewform', :'data-selector-target' => '.source, .target', :'data-modal-class' => 'modal-wide' }
               %i.grcicon-add
         .span5
