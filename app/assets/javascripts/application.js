@@ -506,21 +506,21 @@ jQuery(function($){
 can.reduce ||
   (can.reduce = function(a, f, i) { return [].reduce.apply(a, arguments.length < 3 ? [f] : [f, i]) });
 
-
-  $(document.body).on("change", "[id$=_start_date]", function(ev) { 
-    var start_date = $(this).datepicker('getDate');
+	//bf flag
+  $(document.body).on("change load", "[id$=_start_date]", function(ev) { 
+    var start_date = $(ev.currentTarget).datepicker('getDate');
     $("[id$=_stop_date]").datepicker().datepicker("option", "minDate", start_date); 
   });
-	$(document.body).on("change", "[id$=_start_at]", function(ev) { 
-    var start_date = $(this).datepicker('getDate');
+	$(document.body).on("change load", "[id$=_start_at]", function(ev) { 
+    var start_date = $(ev.currentTarget).datepicker('getDate');
     $("[id$=_end_at]").datepicker().datepicker("option", "minDate", start_date); 
   });
-	$(document.body).on("change", "[id$=_date_requested]", function(ev) { 
-    var start_date = $(this).datepicker('getDate');
+	$(document.body).on("change load", "[id$=_date_requested]", function(ev) { 
+    var start_date = $(ev.currentTarget).datepicker('getDate');
     $("[id$=_response_due_at]").datepicker().datepicker("option", "minDate", start_date); 
   });
-	$(document.body).on("change", "[name$=start_date]", function(ev) { 
-    var start_date = $(this).datepicker('getDate');
+	$(document.body).on("change load", "[name$=start_date]", function(ev) { 
+    var start_date = $(ev.currentTarget).datepicker('getDate');
     $("[name$=stop_date]").datepicker().datepicker("option", "minDate", start_date); 
   });
   $(document.body).on("change", ".rotate_control_assessment", function(ev) { 
