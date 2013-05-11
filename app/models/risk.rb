@@ -76,7 +76,7 @@ class Risk < ActiveRecord::Base
   end
   
   def max_impact
-    likelihood_rating.to_f * inherent_risk.to_f
+    likelihood_rating * inherent_risk.to_i
   end
   
   def likelihood_rating
