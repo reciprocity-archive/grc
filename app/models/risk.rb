@@ -8,11 +8,11 @@ class Risk < ActiveRecord::Base
   include DatedModel
 
   RATINGS = {
-    0.2 => "Minimal",
-    0.4 => "Moderate",
-    0.6 => "Significant",
-    0.8 => "Major",
-    1.0 => "Extreme"
+    1 => "Minimal",
+    2 => "Moderate",
+    3 => "Significant",
+    4 => "Major",
+    5 => "Extreme"
   }
 
   attr_accessible :title, :slug, :description, :url, :version, :type, :start_date, :stop_date, :likelihood, :likelihood_rating, :threat_vector, :trigger, :preconditions, :impact, :financial_impact_rating, :reputational_impact_rating, :operational_impact_rating, :inherent_risk, :risk_mitigation, :residual_risk
@@ -77,5 +77,13 @@ class Risk < ActiveRecord::Base
   
   def max_impact
     likelihood_rating.to_f * inherent_risk.to_f
+  end
+  
+  def likelihood_rating
+    read_attribute(:likelihood_rating).to_f / 5
+  end
+  
+  def adjusted_likelihood
+    (likelihood_rating * 5).to_i
   end
 end
