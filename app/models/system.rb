@@ -51,6 +51,8 @@ class System < ActiveRecord::Base
 
   validates :title,
     :presence => { :message => "needs a value" }
+    
+  validates :url, :allow_blank => true, :url => true
 
   def custom_edges
     # Returns a list of additional edges that aren't returned by the default method.
