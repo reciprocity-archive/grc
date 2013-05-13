@@ -82,7 +82,8 @@ end
 class LikelihoodRatingHandler < ColumnHandler
   def validate(value)
     begin
-      if value < 0 || value > 1 || value % 0.2 != 0
+      value = value.strip.to_f
+      if value < 0.2 || value > 1.0
         errors.push("must be between 0.2 and 1")
       end
     rescue => e
