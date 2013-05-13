@@ -19,11 +19,11 @@ class BaseMappingsController < ApplicationController
     elsif params[object_name]
       model_class.transaction do
         errors, object = create_or_update_object(params[object_name])
-      end
-      if errors.nil? || errors.empty?
-        render :json => create_object_as_json(object) || {}, :status => 200
-      else
-        render :json => { :errors => errors }, :status => 400
+        if errors.nil? || errors.empty?
+          render :json => create_object_as_json(object) || {}, :status => 200
+        else
+          render :json => { :errors => errors }, :status => 400
+        end
       end
     else
       render :json => {}, :status => 200
