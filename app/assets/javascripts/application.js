@@ -506,23 +506,32 @@ jQuery(function($){
 can.reduce ||
   (can.reduce = function(a, f, i) { return [].reduce.apply(a, arguments.length < 3 ? [f] : [f, i]) });
 
-	//bf flag
-  $(document.body).on("change load", "[id$=_start_date]", function(ev) { 
-    var start_date = $(ev.currentTarget).datepicker('getDate');
-    $("[id$=_stop_date]").datepicker().datepicker("option", "minDate", start_date); 
-  });
-	$(document.body).on("change load", "[id$=_start_at]", function(ev) { 
-    var start_date = $(ev.currentTarget).datepicker('getDate');
-    $("[id$=_end_at]").datepicker().datepicker("option", "minDate", start_date); 
-  });
-	$(document.body).on("change load", "[id$=_date_requested]", function(ev) { 
-    var start_date = $(ev.currentTarget).datepicker('getDate');
-    $("[id$=_response_due_at]").datepicker().datepicker("option", "minDate", start_date); 
-  });
-	$(document.body).on("change load", "[name$=start_date]", function(ev) { 
-    var start_date = $(ev.currentTarget).datepicker('getDate');
-    $("[name$=stop_date]").datepicker().datepicker("option", "minDate", start_date); 
-  });
+  $(document.body).on("change loaded", ".modal", function(ev) { 
+    var mappings = {
+			"[id$=_stop_date]" : "[id$=_stop_date]",
+			"[id$=_start_at]" : "[id$=_end_at]",
+			"[id$=_date_requested]" : "[id$=_response_due_at]",
+			"[name$='start_date]']" : "[name$='stop_date]']"
+		}
+		if(ev.type == 'change') {
+			can.each(mappings, function(v,k) {
+				if($(ev.target).is(k)) {
+					var start_date = $(ev.target).datepicker('getDate');
+				  $(ev.target).closest(":has("+v+")").find(v).datepicker().datepicker("option", "minDate", start_date);
+				}
+			});
+		}else {
+			setTimeout(function(){
+				can.each(mappings, function(v,k) {
+					$(ev.target).find(k).each(function(i, el) {
+						var start_date = $(el).datepicker().datepicker('getDate');
+						$(el).closest(":has("+v+")").find(v).datepicker().datepicker("option", "minDate", start_date);
+					});
+				});
+			}, 100);
+		}
+	});
+
   $(document.body).on("change", ".rotate_control_assessment", function(ev) { 
     ev.currentTarget.click(function() {
       ev.currentTarget.toggle();
