@@ -30,8 +30,8 @@
       type = type[0] + "acility"; break;
       case "people":
       type = type[0] + "erson"; break;
-      case "processes":
-      type = type[0] + "rocess"; break;
+      case "attributes":
+      type = type[0] + "ttribute"; break;
       case "systems_processes":
       type = type[0] + "ystem_" + type[8] + "rocess";
       break;
