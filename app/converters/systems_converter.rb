@@ -48,7 +48,7 @@ class SystemRowConverter < BaseRowConverter
     handle_date(:updated_at, :no_import => true)
 
     handle_text_or_html(:description)
-    handle_text_or_html(:append_notes, :append_to => :description)
+    #handle_text_or_html(:append_notes, :append_to => :description)
 
     handle_boolean(:infrastructure, :truthy_values => %w(infrastructure))
 
@@ -70,7 +70,6 @@ class SystemsConverter < BaseConverter
     Link:People;Responsible people_responsible
     Link:People;Accountable people_accountable
     Link:Controls controls
-    Append:Notes append_notes
     Link:System;Sub\ System sub_systems
     Link:Process;Sub\ Process sub_processes
     Link:Org\ Group;Overseen\ By org_groups
