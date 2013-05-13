@@ -80,7 +80,11 @@ class Risk < ActiveRecord::Base
   end
   
   def likelihood_rating
-    read_attribute(:likelihood_rating).to_f / 5
+    if read_attribute(:likelihood_rating) > 1
+      read_attribute(:likelihood_rating).to_f / 5
+    else
+      read_attribute(:likelihood_rating)
+    end
   end
   
   def adjusted_likelihood
