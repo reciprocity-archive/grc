@@ -22,6 +22,8 @@
     -if @import.has_object_errors?
       %p.label-error
         See specific errors below
+        -@import.object_errors.each do |m|
+          = m
       %br
 
     %h4 Data to Import
