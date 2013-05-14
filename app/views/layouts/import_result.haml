@@ -21,8 +21,7 @@
 
     -if @import.has_object_errors?
       %p.label-error
-        See specific errors below
-        = @import.objects.any? { |result| result.errors }
+        See specific errors below.
       %br
 
     %h4 Data to Import
