@@ -87,8 +87,12 @@ CMS.Controllers.Filterable("CMS.Controllers.DashboardWidgets", {
           url = "/" + this.options.object_route;
           break;
         }
-
-        params[can.underscore(this.options.parent_type) + "_id"] = this.options.parent_id;
+				if(this.options.parent_type == 'Regulation' || this.options.parent_type == 'Policy' || this.options.parent_type == 'Contract') {
+					var parent_type = 'Directive'
+        }else {
+					var parent_type = this.options.parent_type
+				}
+				params[can.underscore(parent_type) + "_id"] = this.options.parent_id;
         $.ajax({
           url : url
           , dataType : "html"
