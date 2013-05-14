@@ -736,6 +736,9 @@ jQuery(function($) {
           'ajax:flash', 
           { "success" : "Saved page layout as default for " + (page_token === "programs_dash" ? "dahsboard" : page_token) }
         );
+				setTimeout(function() {
+					location.reload();
+				}, 1000);
       });
     });
   });
