@@ -334,11 +334,20 @@ module RelatedModel
   def count_destination_objects(destination_model)
     object_type = self.class.to_s
     object_id   = self.id
-    Relationship.where(
+    relationships = Relationship.where(
       source_id: object_id,
       source_type: object_type,
-      destination_type: destination_model
-    ).count
+      destination_type: destination_model == 'Process' ? 'System' : destination_model
+    )
+    if destination_model == 'System' || destination_model == 'Process'
+      case destination_model
+      when 'System'
+        return System.where(:id => relationships.map(&:destination_id), :is_biz_process => false).count
+      when 'Process'
+        return System.where(:id => relationships.map(&:destination_id), :is_biz_process => true).count
+      end
+    end
+    return relationships.count
   end
   
   module ClassMethods
