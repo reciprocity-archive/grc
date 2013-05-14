@@ -10,7 +10,7 @@ class SectionRowConverter < BaseRowConverter
     else
       object.directive = @importer.options[:directive]
       if @@slugs.include? object.directive.slug
-        add_error(:slug, "Code is duplicated")
+        add_error(:slug, "Code is duplicated in this CSV.")
       else
         @@slugs << object.directive.slug
       end
