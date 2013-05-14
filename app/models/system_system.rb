@@ -14,6 +14,7 @@ class SystemSystem < ActiveRecord::Base
 
   validate :does_not_link_to_self
   validate :does_not_create_cycles
+  validate :does_not_duplicate_entry
 
   def does_not_link_to_self
     if parent_id == child_id
@@ -24,6 +25,12 @@ class SystemSystem < ActiveRecord::Base
   def does_not_create_cycles
     if has_cycle_to_parent?
       errors.add(:base, "Cannot link to Systems that rely on this System.")
+    end
+  end
+  
+  def does_not_duplicate_entry
+    if SystemSystem.where(:parent_id => self.parent_id, :child_id => self.child_id).count >= 1
+      errors.add(:base, "System linking already exists.")
     end
   end
 
