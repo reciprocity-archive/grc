@@ -143,4 +143,10 @@ class Directive < ActiveRecord::Base
     end
     true
   end
+  
+  def controls_to_be_exported
+    controls = self.controls + self.sections.map(&:controls)
+    controls.uniq! {|control| control.id}
+    controls
+  end
 end
