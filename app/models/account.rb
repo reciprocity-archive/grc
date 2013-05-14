@@ -32,6 +32,7 @@ class Account < ActiveRecord::Base
   end
 
   before_save :create_person_if_necessary
+  after_update :update_person_email, :if => proc{|obj| obj.email_changed?}
 
   def display_name
     (person.present? && person.name.presence) || email.presence
@@ -180,6 +181,10 @@ class Account < ActiveRecord::Base
         end
         account.person = person
       end
+    end
+    
+    def update_person_email
+      self.person.update_attribute(:email, self.email)
     end
     
 end
