@@ -91,7 +91,7 @@ class DirectivesController < BaseObjectsController
       end
       format.csv do
         filename = "#{@directive.slug}-controls.csv"
-        handle_converter_csv_export(filename, @directive.controls_to_be_exported, ControlsConverter, :directive => @directive)
+        handle_converter_csv_export(filename, @directive.total_controls, ControlsConverter, :directive => @directive)
       end
     end
   end

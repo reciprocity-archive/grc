@@ -144,9 +144,8 @@ class Directive < ActiveRecord::Base
     true
   end
   
-  def controls_to_be_exported
-    controls = self.controls + self.sections.map(&:controls)
-    controls.uniq! {|control| control.id}
-    controls
+  def total_controls
+    controls = (self.controls + self.sections.presence.collect(&:controls)).flatten!
+    controls.uniq {|control| control.id}
   end
 end

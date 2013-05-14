@@ -67,6 +67,7 @@
           -else
             .bar.bar-success{:style => "width:" + (mapped_controls.length * 100 / controls.length).to_s + "%", :rel => "tooltip", :title => mapped_controls.length.to_s + " Done"}=mapped_controls.length
             .bar.bar-warning{:style => "width:" + (unmapped_controls.length * 100 / controls.length).to_s + "%", :rel => "tooltip", :title => unmapped_controls.length.to_s + " Pending"}=unmapped_controls.length
+      = directive.present? ? '(' + (directive.controls.length / controls.length * 100).to_i.to_s + "% of this program)" : ''
       -directives = program.directives
       -if !program.company_controls?
         %h4
