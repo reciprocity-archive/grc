@@ -45,6 +45,8 @@ class SystemSystem < ActiveRecord::Base
     if ss.count > 0
       if ss.first.id == self.id
         super
+      else
+        return self
       end
     else
       super
