@@ -16,6 +16,8 @@ class SystemSystem < ActiveRecord::Base
   validate :does_not_create_cycles
   
   before_create :does_not_duplicate_entry
+  
+  @stop_save = false
 
   def does_not_link_to_self
     if parent_id == child_id
@@ -31,7 +33,7 @@ class SystemSystem < ActiveRecord::Base
   
   def does_not_duplicate_entry
     if SystemSystem.where(:parent_id => self.parent_id, :child_id => self.child_id).count >= 1
-      false
+      @stop_save = true
     end
   end
 
@@ -45,6 +47,12 @@ class SystemSystem < ActiveRecord::Base
       if next_ids.include?(parent_id)
         return true
       end
+    end
+  end
+  
+  def save
+    if !@stop_save
+      super
     end
   end
 end
