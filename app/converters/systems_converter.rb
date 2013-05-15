@@ -67,6 +67,7 @@ class SystemsConverter < BaseConverter
     Description description
     Link:References documents
     Infrastructure infrastructure
+    Append:Notes append_notes
     Link:People;Responsible people_responsible
     Link:People;Accountable people_accountable
     Link:Controls controls
