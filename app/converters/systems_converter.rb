@@ -48,8 +48,8 @@ class SystemRowConverter < BaseRowConverter
     handle_date(:updated_at, :no_import => true)
 
     handle_text_or_html(:description)
-    #handle_text_or_html(:append_notes, :append_to => :description)
-
+    handle_text_or_html(:append_notes, :no_import => true)
+    
     handle_boolean(:infrastructure, :truthy_values => %w(infrastructure))
 
     handle_raw_attr(:title)
@@ -104,6 +104,12 @@ class SystemsConverter < BaseConverter
     validate_metadata_type(attrs, type)
   end
 
+  def no_new_link_warnings?
+    @warnings.each do |warning|
+      return true if warning.include? 'will be created'
+    end
+  end
+  
   def do_export_metadata
     type = options[:is_biz_process] ? "Processes" : "Systems"
     yield CSV.generate_line(metadata_map.keys)

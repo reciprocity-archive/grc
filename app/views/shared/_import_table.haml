@@ -22,7 +22,5 @@
               -converter.results.each_with_index do |result, i|
                 %tr{ :class => (i % 2 == 0 ? :odd : :even) }
                   -columns.each do |column_name|
-                    - if !result.errors_for(column_name).empty?
-                      = column_name + ' ' + result.errors_for(column_name).join(' ')
                     =render :partial => 'shared/import_cell', :locals => { :result => result, :column_name => column_name }
 
