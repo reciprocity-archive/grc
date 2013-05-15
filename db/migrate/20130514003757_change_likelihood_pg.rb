@@ -1,7 +1,15 @@
 class ChangeLikelihoodPg < ActiveRecord::Migration
+  def _is_postgresql?
+    begin
+      ActiveRecord::Base.connection.kind_of?(
+        ActiveRecord::ConnectionAdapters::PostgreSQLAdapter)
+    rescue
+      false
+    end
+  end
+
   def up
-    case ActiveRecord::Base.connection
-    when ActiveRecord::ConnectionAdapters::PostgreSQLAdapter
+    if _is_postgresql?
         connection.execute(%q{
             alter table risks
             alter column likelihood_rating type float using cast(likelihood_rating as float),
@@ -13,8 +21,7 @@ class ChangeLikelihoodPg < ActiveRecord::Migration
   end
 
   def down
-    case ActiveRecord::Base.connection
-    when ActiveRecord::ConnectionAdapters::PostgreSQLAdapter
+    if _is_postgresql?
         connection.execute(%q{
             alter table risks
             alter column likelihood_rating type integer using cast(likelihood_rating as integer),
