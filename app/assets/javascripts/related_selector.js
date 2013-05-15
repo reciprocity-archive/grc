@@ -183,21 +183,25 @@
     }
 
   , add_option: function(e, item) {
-      var $added_item
+			var $added_item
         , $source = this.$source()
         , data = this.mappers[this.mapper].options_add_item(item)
         ;
-
       $added_item = $source.find('[data-id="' + data.id + '"]');
       $source.tmpl_additem(data);
     }
 
   , add_selected_option: function(e, item) {
+			for (var i in item) {
+    		if (item.hasOwnProperty(i) && typeof(item[i]) === 'object') {
+        	item = item[i]
+        	break;
+    		}
+			}
       var $added_item
         , $target = this.$target()
         , data = this.mappers[this.mapper].current_add_item(item, this.next_random_id())
         ;
-
       $added_item = $target.find('[data-object-id="' + item.id + '"]');
       if ($added_item.is('.removed')) {
         $added_item.removeClass('removed');
