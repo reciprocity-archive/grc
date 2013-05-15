@@ -48,7 +48,6 @@ class SystemRowConverter < BaseRowConverter
     handle_date(:updated_at, :no_import => true)
 
     handle_text_or_html(:description)
-    handle_text_or_html(:append_notes, :no_import => true)
     
     handle_boolean(:infrastructure, :truthy_values => %w(infrastructure))
 
