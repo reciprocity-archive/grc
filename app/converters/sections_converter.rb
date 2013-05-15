@@ -8,12 +8,14 @@ class SectionRowConverter < BaseRowConverter
     if object.directive.present? && object.directive != @importer.options[:directive]
       add_error(:slug, "Code is used in #{object.directive.meta_kind.to_s.titleize}: #{object.directive.slug}")
     else
-      object.directive = @importer.options[:directive]
-      if @@slugs.include? object.directive.slug
-        add_error(:slug, "Code is duplicated in this CSV.")
-      else
-        @@slugs << object.directive.slug
+      if object.directive.present?
+        if @@slugs.include? object.directive.slug
+          add_error(:slug, "Code is duplicated in this CSV.")
+        else
+          @@slugs << object.directive.slug
+        end
       end
+      object.directive = @importer.options[:directive]
     end
   end
 
