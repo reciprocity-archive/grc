@@ -14,6 +14,7 @@ class SystemSystem < ActiveRecord::Base
 
   validate :does_not_link_to_self
   validate :does_not_create_cycles
+  validate :does_not_duplicate_entry
 
   def does_not_link_to_self
     if parent_id == child_id
@@ -27,6 +28,13 @@ class SystemSystem < ActiveRecord::Base
     end
   end
 
+  def does_not_duplicate_entry
+    systems = SystemSystem.where(:parent_id => self.parent_id, :child_id => self.child_id).all
+    if systems.count > 1 || (systems.first && systems.first.id != self.id)
+      errors.add(:base, "Cannot create duplicate links")
+    end
+  end
+
   def has_cycle_to_parent?
     next_ids = [child_id]
     while next_ids.size > 0
@@ -37,19 +45,6 @@ class SystemSystem < ActiveRecord::Base
       if next_ids.include?(parent_id)
         return true
       end
-    end
-  end
-  
-  def save
-    ss = SystemSystem.where(:parent_id => self.parent_id, :child_id => self.child_id)
-    if ss.count > 0
-      if ss.first.id == self.id
-        super
-      else
-        return self
-      end
-    else
-      super
     end
   end
 end

@@ -4,10 +4,15 @@ class BaseMappingsController < ApplicationController
   def create
     if params[:items].present?
       errors, objects = {}, {}
-      params[:items].keys.each do |id|
-        item_errors, item_object = create_or_update_object(params[:items][id])
-        errors[id] = item_errors if item_errors
-        objects[id] = item_object
+      ActiveRecord::Base.transaction do
+        params[:items].keys.each do |id|
+          item_errors, item_object = create_or_update_object(params[:items][id])
+          errors[id] = item_errors if item_errors
+          objects[id] = item_object
+        end
+        if !errors.empty?
+          raise ActiveRecord::Rollback
+        end
       end
       if errors.empty?
         render :json => create_objects_as_json(objects.values.compact), :status => 200
@@ -15,11 +20,19 @@ class BaseMappingsController < ApplicationController
         render :json => { :errors => errors, :objects => create_objects_as_json(objects) }, :status => 400
       end
     elsif params[object_name]
-      errors, object = create_or_update_object(params[object_name])
-      if errors.nil? || errors.empty?
-        render :json => create_object_as_json(object) || {}, :status => 200
+      errors, objects = [], []
+      ActiveRecord::Base.transaction do
+        error, object = create_or_update_object(params[object_name])
+        errors.push(error)
+        objects.push(object)
+        if !errors.first.nil? && !errors.first.empty?
+          raise ActiveRecord::Rollback
+        end
+      end
+      if errors.first.nil? || errors.first.empty?
+        render :json => create_object_as_json(objects.first) || {}, :status => 200
       else
-        render :json => { :errors => errors }, :status => 400
+        render :json => { :errors => errors.first }, :status => 400
       end
     else
       render :json => {}, :status => 200
