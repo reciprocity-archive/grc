@@ -5,6 +5,7 @@ class Risk < ActiveRecord::Base
   include AuthorizedModel
   include RelatedModel
   include SanitizableAttributes
+  include DatedModel
 
   RATINGS = {
     1 => "Minimal",
@@ -72,5 +73,22 @@ class Risk < ActiveRecord::Base
 
   def categories_display
     categories.uniq.map(&:name).join(",")
+  end
+  
+  def max_impact
+    likelihood_rating * inherent_risk.to_i
+  end
+  
+  def likelihood_rating
+    lr = read_attribute(:likelihood_rating) || 0.2
+    if lr > 0.8
+      (lr.to_f / 5.0) - 0.2
+    else
+      lr
+    end
+  end
+  
+  def adjusted_likelihood
+    ((likelihood_rating + 0.2) * 5).to_i
   end
 end

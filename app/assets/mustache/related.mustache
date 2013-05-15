@@ -5,7 +5,7 @@
       <li class="tab-title-holder">
         <h3 class="tab-title">
           {{ title }}
-          <a class="widgetbtn pull-right" href="{{edit_url}}" data-toggle="modal-ajax-relationship-selector" data-modal-reset="reset" data-tab-target="#related-objects-{{id}}" data-modal-class="modal-wide" data-list-target="refresh">
+          <a class="widgetbtn pull-right" href="{{edit_url}}" data-toggle="modal-ajax-relationship-selector" data-modal-reset="reset" data-tab-target="#related-objects-{{id}}" data-modal-class="modal-wide" data-list-target="refresh" data-route="related-{{related_type}}-pane">
             <i class="grcicon-link"></i>
           </a>
         </h3>
@@ -15,7 +15,8 @@
   {{#related_objects}}
     <li class="{{object.type.toLowerCase}}">
       <div class="item-main">
-        <a class="block-element" href="/{{ url }}" data-popover-href="/{{ url }}/tooltip" data-popover-trigger="sticky-hover">
+        <a class="block-element" data-popover-trigger="sticky-hover">
+          {{{withattr 'href' "/{url}" 'data-popover-href' "/{url}/tooltip" }}}
           {{#is_beta}}
           <div class="item-title">
             <div class="row-fluid">

@@ -50,9 +50,11 @@ class RiskRowConverter < BaseRowConverter
       handle_text_or_html(column)
     end
 
-    [:likelihood_rating, :financial_impact_rating, :operational_impact_rating, :reputational_impact_rating, :operational_impact_rating].each do |column|
+    [:financial_impact_rating, :operational_impact_rating, :reputational_impact_rating, :operational_impact_rating].each do |column|
       handle(column, RiskRatingHandler)
     end
+    
+    handle(:likelihood_rating, LikelihoodRatingHandler)
 
     [:url].each do |column|
       handle_url(column)
@@ -75,6 +77,19 @@ class RiskRatingHandler < ColumnHandler
       errors.push("must be an integer between 1 and 5")
     end
   end
+end
+
+class LikelihoodRatingHandler < ColumnHandler
+  def validate(value)
+    begin
+      value = value.strip.to_f
+      if value < 0.0 || value > 0.8
+        errors.push("must be between 0.0 and 0.8")
+      end
+    rescue => e
+      errors.push("must be a decimal between 0.0 and 0.8")
+    end
+  end 
 end
 
 class RisksConverter < BaseConverter

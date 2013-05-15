@@ -15,29 +15,29 @@ class ControlsController < BaseObjectsController
 
   cache_sweeper :control_sweeper, :only => [:create, :update, :destroy]
 
-  access_control :acl do
-    allow :superuser
-
-    actions :new, :create do
-      allow :create, :create_control
-    end
-
-    actions :edit, :update do
-      allow :update, :update_control, :of => :control
-    end
-
-    actions :show, :tooltip do
-      allow :read, :read_control, :of => :control
-    end
-
-    actions :index do
-      allow :read, :read_control
-    end
-
-    actions :sections, :implemented_controls, :implementing_controls do
-      allow :read, :read_control, :of => :control
-    end
-  end
+#  access_control :acl do
+#    allow :superuser
+#
+#    actions :new, :create do
+#      allow :create, :create_control
+#    end
+#
+#    actions :edit, :update do
+#      allow :update, :update_control, :of => :control
+#    end
+#
+#    actions :show, :tooltip do
+#      allow :read, :read_control, :of => :control
+#    end
+#
+#    actions :index do
+#      allow :read, :read_control
+#    end
+#
+#    actions :sections, :implemented_controls, :implementing_controls do
+#      allow :read, :read_control, :of => :control
+#    end
+#  end
 
   layout 'dashboard'
 

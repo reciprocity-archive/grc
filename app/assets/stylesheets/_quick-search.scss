@@ -115,6 +115,23 @@
       }
     }
   }
+  &.quick-search-small {
+    .tabs-left {
+      height: 559px;
+    }
+    .tab-content {
+      height: 541px;
+    }
+    .nav-tabs {
+      height: 541px !important;
+      li {
+        a {
+          padding-bottom: 6px;
+          padding-top: 6px;
+        }
+      }
+    }
+  }
   .tab-pane {
     ul {
       li {
@@ -141,6 +158,7 @@
     line-height: 34px;
     padding: 0 10px 0 16px;
     color: $text;
+    text-align: right;
     a {
       color: $black;
       margin-top: 4px;
@@ -159,6 +177,7 @@
       &.btn-mini {
         font-size:$f-subTitle;
         line-height: 18px;
+        margin-left: 14px;
       }
     }
     .open {

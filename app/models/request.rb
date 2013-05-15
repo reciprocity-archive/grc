@@ -2,6 +2,7 @@ class Request < ActiveRecord::Base
   include AuthoredModel
   include AuthorizedModel
   include SanitizableAttributes
+  include DatedModel
 
   TYPES = {
     1 => "Documentation",

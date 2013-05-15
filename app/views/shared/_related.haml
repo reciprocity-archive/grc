@@ -17,7 +17,7 @@
     .span12
       .tabbable
         %ul.nav.nav-tabs
-          -models.each do |model|
+          -models.delete('Risk').each do |model|
             -table_name = model.underscore.pluralize #.table_name
             -icon = "grcicon-#{model.downcase}-color"
             %li{:class => "tab-btn text-#{model.downcase}"}
@@ -30,7 +30,8 @@
                 "data-refresh-time" => 60 }
                 %i{:class => icon }
                 #{table_name.titleize}
-
+                %span 
+                  #{' ' + instance.count_destination_objects(model).to_s}
   .tab-content
     -models.each do |model|
       .tab-pane{:id => "related-#{model.underscore.pluralize}-pane"}

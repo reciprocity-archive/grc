@@ -3,7 +3,12 @@
 -instance = instance_variable_get("@" + model_name)
 
 -content_for :widget_title do
-  Categories, References, People
+  Categories
+  %span=instance.categories.count
+  , References
+  %span=instance.object_documents.count
+  , People
+  %span=instance.object_people.count
 
 -content_for :widget_help, "#{model_name}_more_info"
 

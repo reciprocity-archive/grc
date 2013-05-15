@@ -1,37 +1,40 @@
 -widget_class = '' if local_assigns[:widget_class].nil?
--widget_class_yield = yield_content!(:widget_class)
--widget_class += " #{widget_class_yield}" if widget_class_yield
--widget_id_yield = yield_content!(:widget_id)
--widget_id = widget_id_yield if local_assigns[:widget_id].nil?
 
-%section{ :class => "widget #{widget_class}", :id => widget_id }
-  %header.header
-    .row-fluid
-      .span8
-        %h2
-          -#%i.grcicon-program
-          =yield_content!(:widget_title)
+-if widget_class != 'risk' || current_user.can_manage_risk?
 
-      .span4
-        -help_path = yield_content!(:widget_help)
-        -#.widget-action.pull-right.widget-showhide
-          %a.active{:href => "#"}
+  -widget_class_yield = yield_content!(:widget_class)
+  -widget_class += " #{widget_class_yield}" if widget_class_yield
+  -widget_id_yield = yield_content!(:widget_id)
+  -widget_id = widget_id_yield if local_assigns[:widget_id].nil?
 
-        -#.widget-action.pull-right
-          %a.remove{:href => "#"}
-            %i.grcicon-x-white
-        .widget-action.pull-right.widget-showhide
-          %a.active{ :href=>"javascript://"}
-        -if !help_path.blank?
-          .widget-action.pull-right.widget-action-help
-            %a{:href => "/help/#{help_path}", :'data-toggle' => 'modal-ajax', :rel => "tooltip", :title => "Help", :'data-placement'=>"top"}
-              %i.grcicon-help
+  %section{ :class => "widget #{widget_class}", :id => widget_id }
+    %header.header
+      .row-fluid
+        .span8
+          %h2
+            -#%i.grcicon-program
+            =yield_content!(:widget_title)
 
-  =yield_content!(:widget_buttons)
+        .span4
+          -help_path = yield_content!(:widget_help)
+          -#.widget-action.pull-right.widget-showhide
+            %a.active{:href => "#"}
+
+          -#.widget-action.pull-right
+            %a.remove{:href => "#"}
+              %i.grcicon-x-white
+          .widget-action.pull-right.widget-showhide
+            %a.active{ :href=>"javascript://"}
+          -if !help_path.blank?
+            .widget-action.pull-right.widget-action-help
+              %a{:href => "/help/#{help_path}", :'data-toggle' => 'modal-ajax', :rel => "tooltip", :title => "Help", :'data-placement'=>"top"}
+                %i.grcicon-help
+
+    =yield_content!(:widget_buttons)
 
 
-  %section.content
-    =yield
+    %section.content
+      =yield
 
 
-  =yield_content!(:widget_footer)
+    =yield_content!(:widget_footer)

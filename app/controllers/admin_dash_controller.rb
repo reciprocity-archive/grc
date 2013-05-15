@@ -5,9 +5,11 @@
 # Admin dashboard
 class AdminDashController < ApplicationController
 
-  access_control :acl do
-    allow :superuser
-  end
+#  access_control :acl do
+#    allow :superuser
+#  end
+  
+  before_filter :check_admin_authorization
 
   layout 'dashboard'
 

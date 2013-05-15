@@ -142,7 +142,16 @@ ul.tree-structure {
         margin-left: 4px;
         font-weight: bold;
         display: inline-block;
+        &.btn-control {
+          
+          padding:2px 6px 0 6px;
+          margin-top:-3px;
+          i {
+            margin-top:0;
+          }
+        }
       }
+      
       .error {
         color:$error;
       }
@@ -595,6 +604,8 @@ ul.elements {
 }
 
 ul.tree-structure {
+  li.process,
+  li.system,
   li.product,
   li.orggroup,
   li.project,
@@ -605,15 +616,12 @@ ul.tree-structure {
       color:$business;
     } 
   }
-
-  li.process,
-  li.system,
-  li.control {
+/*  .notusednow {
     .code {
       color:$compliance;
     } 
   }
-
+*/
   li.risk,
   li.riskyattribute {
     .code {
@@ -621,6 +629,7 @@ ul.tree-structure {
     } 
   }
 
+  li.control,
   li.program,
   li.directive,
   li.policy,

@@ -38,10 +38,11 @@
       =render :partial => "main",
               :layout => 'layouts/widget_box',
               :locals => { model_name.to_sym => instance, :widget_id => model_name + "_widget", :widget_class => "business" }
-
-      =render :partial => "risks",
-              :layout => 'layouts/widget_box',
-              :locals => { model_name.to_sym => instance, :widget_class => "risk" }
+      
+      - if current_user.can_manage_risk?
+        =render :partial => "risks",
+                :layout => 'layouts/widget_box',
+                :locals => { model_name.to_sym => instance, :widget_class => "risk" }
 
       -if instance.class.respond_to?(:valid_relationships)
         =render :partial => 'shared/related',

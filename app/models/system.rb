@@ -6,6 +6,7 @@ class System < ActiveRecord::Base
   include AuthorizedModel
   include RelatedModel
   include SanitizableAttributes
+  include DatedModel
 
   CATEGORY_TYPE_ID = 101
 
@@ -50,6 +51,8 @@ class System < ActiveRecord::Base
 
   validates :title,
     :presence => { :message => "needs a value" }
+    
+  validates :url, :allow_blank => true, :url => true
 
   def custom_edges
     # Returns a list of additional edges that aren't returned by the default method.
@@ -187,6 +190,6 @@ class System < ActiveRecord::Base
   end
 
   def as_json(options={})
-    super(options.merge :methods => :absolute_url)
+    super((options || {}).merge :methods => [:absolute_url, :description_inline])
   end
 end

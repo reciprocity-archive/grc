@@ -25,9 +25,9 @@ class ApplicationController < ActionController::Base
   helper_method :current_user_session, :current_user
 
   # By default allow only superuser access.  This is relaxed in specific controllers.
-  access_control :acl do
-    allow :superuser
-  end
+#  access_control :acl do
+#    allow :superuser
+#  end
 
   def redirect_to_https
     redirect_to :protocol => "https://" unless (request.ssl? || request.local?)
@@ -40,12 +40,13 @@ class ApplicationController < ActionController::Base
   end
 
   def render_unauthorized
-    flash[:warning] = "You are not authorized to access this page"
-    if request.xhr?
-      render :partial => 'error/unauthorized', :layout => nil, :status => 403
-    else
-      render :template => 'error/unauthorized', :status => 403
-    end
+    render :text => "You don't have sufficient privileges to view this.", :status => :unauthorized
+#    flash[:warning] = "You are not authorized to access this page"
+#    if request.xhr?
+#      render :partial => 'error/unauthorized', :layout => nil, :status => 403
+#    else
+#      render :template => 'error/unauthorized', :status => 403
+#    end
   end
 
   def render_unauthenticated
@@ -82,7 +83,7 @@ class ApplicationController < ActionController::Base
 
   # Pre-filter for requiring the user to be logged in.  On by default.
   def require_user
-    unless current_user
+    unless current_user && current_user.is_active?
       store_location
       render_unauthenticated
       return false

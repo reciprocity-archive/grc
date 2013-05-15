@@ -4,9 +4,9 @@
 
 class CategoriesController < BaseObjectsController
 
-  access_control :acl do
-    allow :superuser
-  end
+#  access_control :acl do
+#    allow :superuser
+#  end
 
   layout 'dashboard'
 

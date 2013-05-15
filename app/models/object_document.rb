@@ -2,6 +2,7 @@ class ObjectDocument < ActiveRecord::Base
   include AuthoredModel
   include AuthorizedModel
   include RelatedModel
+  include DatedModel
 
   attr_accessible :document, :documentable, :role, :notes, :start_date, :stop_date
 

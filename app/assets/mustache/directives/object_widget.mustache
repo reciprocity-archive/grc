@@ -1,0 +1,54 @@
+{{!section class="widget... }}
+  <header class="header">
+    <div class="row-fluid">
+      <div class="span8">
+        <h2>
+          <i class="grcicon-{{object_type.toLowerCase}}"></i>
+          {{object_display}}
+          {{#if is_related}}
+            related to {{parent_display}}
+          {{/if}}
+          <span class="object_count">
+            {{#if is_related}}
+              {{related_count}}
+            {{else}}
+              {{list.length}}
+            {{/if}}
+          </span>
+        </h2>
+      </div>
+      <div class="span4">
+        <div class="widget-action pull-right remove-widget" rel="tooltip" title="Remove">
+          <a class="remove" href="javascript://">
+            <i class="grcicon-x-white"></i>
+          </a>
+        </div>
+        <div class="widget-action pull-right widget-showhide" rel="tooltip" title="Expand / Collapse">
+          <a class="active" href="javascript://"></a>
+        </div>
+        <div class="widget-action pull-right widget-action-help">
+          <a data-placement="top" data-toggle="modal-ajax" href="/help/{{object_type}}_list" rel="tooltip" data-original-title="Help">
+            <i class="grcicon-help"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+  {{^if is_related}}
+  <div class="filter row-fluid">
+    <div class="span8">
+      <input class="ui-corner-all widgetsearch clear-value" type="text" placeholder="Search" />
+    </div>
+    <div class="span4">
+      <a class="btn btn-add pull-right" href="/{{object_route}}/new?meta_kind={{object_type}}" data-toggle="modal-ajax-form" data-modal-reset="reset" data-form-target="refresh" data-modal-class="modal-wide">
+        <i class="grcicon-add"></i>
+        <span class="object-type">{{model.shortName}}</span>
+      </a>
+    </div>
+  </div>
+  {{/if}}
+  <section class="content">
+    {{{render list_view}}}
+  </section>
+              
+{{!/section}}

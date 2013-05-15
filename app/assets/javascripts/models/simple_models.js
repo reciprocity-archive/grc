@@ -24,7 +24,7 @@ can.Model.Cacheable("CMS.Models.Directive", {
       return that.attr("descendant_sections")().length;
     }));
   }
-  , lowercase_kind : function() { return this.kind.toLowerCase() }
+  , lowercase_kind : function() { return (this.kind.split(" ").reverse()[0]).toLowerCase() }
 
 });
 

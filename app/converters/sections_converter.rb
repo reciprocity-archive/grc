@@ -1,13 +1,19 @@
 
 class SectionRowConverter < BaseRowConverter
   @model_class = :Section
-
+  @@slugs = []
+  
   def setup_object
     object = setup_object_by_slug(attrs)
     if object.directive.present? && object.directive != @importer.options[:directive]
       add_error(:slug, "Code is used in #{object.directive.meta_kind.to_s.titleize}: #{object.directive.slug}")
     else
       object.directive = @importer.options[:directive]
+      if @@slugs.include? object.directive.slug
+        add_error(:slug, "Code is duplicated in this CSV.")
+      else
+        @@slugs << object.directive.slug
+      end
     end
   end
 

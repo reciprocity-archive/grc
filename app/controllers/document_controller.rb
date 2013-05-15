@@ -8,17 +8,17 @@ class DocumentController < ApplicationController
   include GdataHelper
   include DocumentHelper
 
-  access_control :acl do
-    allow :superuser
-
-    actions :index do
-      allow :read, :read_document
-    end
-
-    actions :sync do
-      allow :update, :update_document
-    end
-  end
+#  access_control :acl do
+#    allow :superuser
+#
+#    actions :index do
+#      allow :read, :read_document
+#    end
+#
+#    actions :sync do
+#      allow :update, :update_document
+#    end
+#  end
 
   before_filter :need_cycle
 

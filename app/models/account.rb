@@ -32,6 +32,7 @@ class Account < ActiveRecord::Base
   end
 
   before_save :create_person_if_necessary
+  after_update :update_person_email, :if => proc{|obj| obj.email_changed?}
 
   def display_name
     (person.present? && person.name.presence) || email.presence
@@ -92,11 +93,13 @@ class Account < ActiveRecord::Base
   end
 
   def abilities(object = nil)
-    Authorization::abilities(self, object)
+    true
+    #Authorization::abilities(self, object)
   end
 
   def allowed?(ability, object = nil, &block)
-    Authorization::allowed?(ability, self, object, &block)
+    true
+    #Authorization::allowed?(ability, self, object, &block)
   end
 
   def reset_persistence_token
@@ -106,6 +109,19 @@ class Account < ActiveRecord::Base
   def reset_persistence_token!
     reset_persistence_token
     save!
+  end
+  
+  # Separating out risk role from ACL9
+  def can_manage_risk?
+    self.role == 'risk' || self.role == 'admin_risk'
+  end
+  
+  def can_admin?
+    self.role == 'admin' || self.role == 'admin_risk'
+  end
+  
+  def is_active?
+    self.role != 'no_access'
   end
 
   def self.forget_all!
@@ -165,6 +181,10 @@ class Account < ActiveRecord::Base
         end
         account.person = person
       end
+    end
+    
+    def update_person_email
+      self.person.update_attribute(:email, self.email)
     end
     
 end

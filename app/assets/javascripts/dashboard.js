@@ -30,13 +30,15 @@
       type = type[0] + "acility"; break;
       case "people":
       type = type[0] + "erson"; break;
-      case "processes":
-      type = type[0] + "rocess"; break;
+      case "attributes":
+      type = type[0] + "ttribute"; break;
       case "systems_processes":
       type = type[0] + "ystem_" + type[8] + "rocess";
       break;
+      case "policies":
+      type = type[0] + "olicy"; break;
       default:
-      type = type.replace(/s$/, "");
+      type = type.replace(/e?s$/, "");
     }
 
     return type;
@@ -334,7 +336,7 @@ jQuery(function($) {
 
 jQuery(function($) {
   // Onload trigger tab with 'active' class or default to first tab
-  $('.tabbable > ul').filter(":not(.quick-search-results .tabbable > ul)").each(function(i, el) {
+  $('.tabbable > ul').each(function(i, el) {
     var $tab = $(this).find('> li.active');
     if (!$tab.length)
       $tab = $(this).find('> li:first-child');
@@ -343,9 +345,11 @@ jQuery(function($) {
       .find('> a')
       .tab('show');
     $($tab.find('> a').attr("href")).one("loaded", function() {
-      setTimeout(function() {
-        $tab.siblings().find("> a").trigger("show"); //load all the others for counts after this one is showing
-      }, 100);
+      if($tab.not(".quick-search-results .tabbable > ul > li").length) { //don't load the quickfind
+        setTimeout(function() {
+          $tab.siblings().find("> a").trigger("show"); //load all the others for counts after this one is showing
+        }, 100);
+      }
     })
   });
   //$('.tabbable > ul > li:first-child > a').tab('show');
@@ -732,6 +736,9 @@ jQuery(function($) {
           'ajax:flash', 
           { "success" : "Saved page layout as default for " + (page_token === "programs_dash" ? "dahsboard" : page_token) }
         );
+				setTimeout(function() {
+					location.reload();
+				}, 1000);
       });
     });
   });
@@ -746,5 +753,14 @@ jQuery(function($) {
         window.open(this.href);
       }
     }
+  });
+});
+
+//Handler for changing the new object text in dashboard widgets
+jQuery(function($){
+  $(document.body).on("click", "[id^=quick_find] .nav-tabs li", function(ev) {
+    var plural = $(this).find(".text-business, .text-governance, .text-risk").text();
+    var singular = can.map(window.cms_singularize(plural).split("_"), can.capitalize).join(" ");
+    $(this).closest(".widget").find(".object-type").text(singular).closest("a").attr("href", $(this).find("a").data("new-href"));
   });
 });

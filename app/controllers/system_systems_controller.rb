@@ -1,8 +1,8 @@
 class SystemSystemsController < BaseMappingsController
 
-  access_control :acl do
-    allow :superuser
-  end
+#  access_control :acl do
+#    allow :superuser
+#  end
 
   def index
     @objects = SystemSystem

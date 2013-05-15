@@ -1,0 +1,25 @@
+-content_for :widget_title do
+  Programs
+
+-content_for :widget_buttons do
+  .filter
+    .row-fluid
+      .span8
+        %input.ui-corner-all.widgetsearch.clear-value(type='text' placeholder='Search')
+      .span4
+        %a.btn.btn-add.pull-right{ :href => new_flow_program_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide' } 
+          %i.grcicon-add
+          %span.object-type Program
+
+-content_for :widget_help, 'programs'
+
+-content_for :widget_id, 'programs_widget'
+
+-quick_result_programs ||= nil
+-prefix = quick_result_programs ? "qf" : "dash"
+
+.tabbable.tabs-left{ :id => quick_result_programs ? nil : "quick_find_programs" }
+  %ul.nav.nav-tabs{ :style => "display:none"}
+    %li.active=link_to 'programs'.html_safe, "##{prefix}_programs", :data => { :'tab-href' => flow_programs_path(:quick => true, :qr => quick_result_programs), :toggle => 'tab' }
+  .tab-content
+    .tab-pane{ :id => "#{prefix}_programs" }
