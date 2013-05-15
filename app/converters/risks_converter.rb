@@ -83,11 +83,11 @@ class LikelihoodRatingHandler < ColumnHandler
   def validate(value)
     begin
       value = value.strip.to_f
-      if value < 0.2 || value > 1.0
-        errors.push("must be between 0.2 and 1")
+      if value < 0.0 || value > 0.8
+        errors.push("must be between 0.0 and 0.8")
       end
     rescue => e
-      errors.push("must be a decimal between 0.2 and 1")
+      errors.push("must be a decimal between 0.0 and 0.8")
     end
   end 
 end
