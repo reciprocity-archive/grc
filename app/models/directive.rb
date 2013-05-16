@@ -145,7 +145,10 @@ class Directive < ActiveRecord::Base
   end
   
   def total_controls
-    controls = (self.controls + self.sections.presence.collect(&:controls)).flatten!
-    controls.uniq {|control| control.id}
+    total_controls = controls
+    if self.sections.present?
+      total_controls += self.sections.collect(&:controls).flatten!
+    end
+    total_controls.uniq {|control| control.id}
   end
 end
