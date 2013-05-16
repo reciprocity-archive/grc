@@ -65,6 +65,9 @@ class ControlsController < BaseObjectsController
           Control.arel_table[:directive_id].in(directive_ids).or(
             Section.arel_table[:directive_id].in(directive_ids)))
     end
+    if params[:control_id].present?
+      @controls = Control.find(params[:control_id]).implemented_controls
+    end
     if params[:system_id].present?
       @controls = @controls.
         joins(:system_controls).
