@@ -192,8 +192,9 @@
     }
 
   , add_selected_option: function(e, item) {
+			//TODO refactor this, it's a quick fix for adding references
 			for (var i in item) {
-    		if (item.hasOwnProperty(i) && typeof(item[i]) === 'object' && item[i]) {
+    		if (item.hasOwnProperty(i) && typeof(item[i]) === 'object' && item[i] && i != "link") {
         	item = item[i]
         	break;
     		}
