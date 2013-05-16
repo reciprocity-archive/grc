@@ -3,6 +3,10 @@ class SectionRowConverter < BaseRowConverter
   @model_class = :Section
   @@slugs = []
   
+  def self.clear_slugs
+    @@slugs = []
+  end
+  
   def setup_object
     object = setup_object_by_slug(attrs)
     if object.directive.present? && object.directive != @importer.options[:directive]
