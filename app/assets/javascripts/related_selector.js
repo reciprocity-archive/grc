@@ -193,7 +193,7 @@
 
   , add_selected_option: function(e, item) {
 			for (var i in item) {
-    		if (item.hasOwnProperty(i) && typeof(item[i]) === 'object') {
+    		if (item.hasOwnProperty(i) && typeof(item[i]) === 'object' && item[i]) {
         	item = item[i]
         	break;
     		}
