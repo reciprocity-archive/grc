@@ -6,7 +6,7 @@ end
 
 class BaseConverter
 
-  attr_accessor :rows, :objects, :all_objects, :options, :warnings, :errors
+  attr_accessor :rows, :objects, :all_objects, :options, :warnings, :errors, :slugs
 
   def initialize(rows_or_objects, options=nil)
     @options = options || {}
@@ -23,11 +23,20 @@ class BaseConverter
 
     @errors = []
     @warnings = []
+    @slugs = []
   end
 
   # Import-only functionality
   def results
     @objects
+  end
+  
+  def add_slug_to_slugs(slug)
+    @slugs << slug
+  end
+  
+  def get_slugs
+    @slugs
   end
 
   def find_object(model_class, key)

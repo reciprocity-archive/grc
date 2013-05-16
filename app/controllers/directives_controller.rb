@@ -118,7 +118,6 @@ class DirectivesController < BaseObjectsController
 
   def import
     handle_csv_import(SectionsConverter, :directive => @directive) do |converter|
-      SectionsConverter.clear_slugs
       flash[:notice] = "Successfully imported #{@import.created_objects.size + @import.updated_objects.size} #{@directive.section_meta_kind.to_s.pluralize}"
       keep_flash_after_import
       render :json => { :location => flow_directive_path(@directive) }

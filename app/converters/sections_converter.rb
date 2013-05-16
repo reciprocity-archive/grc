@@ -1,24 +1,12 @@
 
 class SectionRowConverter < BaseRowConverter
   @model_class = :Section
-  @@slugs = []
-  
-  def self.clear_slugs
-    @@slugs = []
-  end
   
   def setup_object
     object = setup_object_by_slug(attrs)
     if object.directive.present? && object.directive != @importer.options[:directive]
       add_error(:slug, "Code is used in #{object.directive.meta_kind.to_s.titleize}: #{object.directive.slug}")
     else
-      if object.directive.present?
-        if @@slugs.include? object.directive.slug
-          add_error(:slug, "Code is duplicated in this CSV.")
-        else
-          @@slugs << object.directive.slug
-        end
-      end
       object.directive = @importer.options[:directive]
     end
   end
@@ -94,6 +82,10 @@ class SectionsConverter < BaseConverter
     elsif attrs[:slug].upcase != directive.slug.upcase
       errors.push("#{directive.meta_kind.to_s.titleize} Code must be #{directive.slug}")
     end
+  end
+  
+  def validate_slug
+    slugs = self.results.map(&:slug)
   end
 
   def do_export_metadata
