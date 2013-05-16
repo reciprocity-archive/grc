@@ -250,10 +250,16 @@
     }
 
   , delete_option: function(e, item) {
-      var $item
+      
+		  var $item
         , $source = this.$source()
         ;
-
+			for (var i in item) {
+    		if (item.hasOwnProperty(i) && typeof(item[i]) === 'object' && item[i] && i != "link") {
+        	item = item[i]
+        	break;
+    		}
+			}
       $item = $source.find('[data-id="' + item.id + '"]');
       $item.remove();
     }
@@ -262,7 +268,12 @@
       var $item
         , $target = this.$target()
         ;
-
+			for (var i in item) {
+    		if (item.hasOwnProperty(i) && typeof(item[i]) === 'object' && item[i] && i != "link") {
+        	item = item[i]
+        	break;
+    		}
+			}	
       $item = $target.find('[data-object-id="' + item.id + '"]');
       $item.remove();
     }
