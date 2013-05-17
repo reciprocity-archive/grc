@@ -120,7 +120,7 @@ can.Model.LocalStorage("CMS.Models.DisplayPrefs", {
   }
 
   , setColumnWidths : function(page_id, widget_id, widths) {
-    var csp = this.makeObject(COLUMNS, page_id)
+    var csp = this.makeObject(path, COLUMNS);
     csp.attr(widget_id, widths);
     this.autoupdate && this.save();
     return this;
@@ -135,7 +135,7 @@ can.Model.LocalStorage("CMS.Models.DisplayPrefs", {
   , setPageAsDefault : function(page_id) {
     var that = this;
     can.each([COLLAPSE, SORTS, HEIGHTS, COLUMNS], function(key) {
-      that.makeObject(key).attr(page_id, that.makeObject(path, key));
+      that.makeObject(key).attr(page_id, new can.Observe(that.makeObject(path, key).serialize()));
     });
     this.save();
     return this;
@@ -173,5 +173,16 @@ can.Model.LocalStorage("CMS.Models.DisplayPrefs", {
   }
 
 });
+
+if(typeof jasmine !== "undefined") {
+  CMS.Models.DisplayPrefs.exports = {
+    COLLAPSE : COLLAPSE
+    , SORTS : SORTS
+    , HEIGHTS : HEIGHTS
+    , COLUMNS : COLUMNS
+    , PBC_LISTS : PBC_LISTS
+    , path : path
+  };
+}
 
 })(this.can, this.can.$);
