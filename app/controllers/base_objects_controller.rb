@@ -273,8 +273,8 @@ class BaseObjectsController < ApplicationController
       instance_variable_get('@' + object_name.pluralize)
     end
 
-    def objects_as_json
-      objects.as_json
+    def objects_as_json(args=nil)
+      objects.as_json(args)
     end
 
     def set_object(value)
@@ -286,11 +286,7 @@ class BaseObjectsController < ApplicationController
     end
 
     def object_as_json(args=nil)
-      if object.is_a? Directive
-        object.as_json({:root => nil, :include => :sections}.merge(args || {}))
-      else
-        object.as_json({:root => nil}.merge(args || {}))
-      end
+      object.as_json({:root => nil}.merge(args || {}))
     end
 
     def show_object_as_json(args=nil)

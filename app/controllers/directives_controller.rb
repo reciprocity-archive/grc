@@ -82,6 +82,19 @@ class DirectivesController < BaseObjectsController
       end
     end
   end
+  
+  def show
+    show_set_page_types
+
+    respond_to do |format|
+      format.html do
+        render :locals => show_context
+      end
+      format.json do
+        render :json => show_object_as_json({:include => :sections})
+      end
+    end
+  end
 
   def export_controls
     respond_to do |format|
