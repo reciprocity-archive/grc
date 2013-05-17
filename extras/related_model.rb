@@ -331,20 +331,23 @@ module RelatedModel
     self.class.has_valid_relationship?(type)
   end
   
-  def count_destination_objects(destination_model)
+  def count_other_objects(related_model)
     object_type = self.class.to_s
     object_id   = self.id
-    relationships = Relationship.where(
-      source_id: object_id,
-      source_type: object_type,
-      destination_type: destination_model == 'Process' ? 'System' : destination_model
-    )
-    if destination_model == 'System' || destination_model == 'Process'
-      case destination_model
+    
+    related_model = related_model == 'Process' ? 'System' : related_model
+    
+    relationships = Relationship.index_query({
+      :object_type => object_type,
+      :object_id => object_id,
+      :other_type => related_model
+    })
+    if related_model == 'System' || related_model == 'Process'
+      case related_model
       when 'System'
-        return System.where(:id => relationships.map(&:destination_id), :is_biz_process => false).count
+        return System.where(:id => relationships.map{|r|r.other_id(object_id)}, :is_biz_process => false).count
       when 'Process'
-        return System.where(:id => relationships.map(&:destination_id), :is_biz_process => true).count
+        return System.where(:id => relationships.map{|r|r.other_id(object_id)}, :is_biz_process => true).count
       end
     end
     return relationships.count

@@ -31,7 +31,7 @@
                 %i{:class => icon }
                 #{table_name.titleize}
                 %span 
-                  #{' ' + instance.count_destination_objects(model).to_s}
+                  #{' ' + instance.count_other_objects(model).to_s}
   .tab-content
     -models.each do |model|
       .tab-pane{:id => "related-#{model.underscore.pluralize}-pane"}
