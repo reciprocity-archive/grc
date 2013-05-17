@@ -40,7 +40,7 @@ CMS.Controllers.Filterable("CMS.Controllers.TreeView", {
 
   , init : function(el, opts) {
     //this.options.attr(this.options.model.tree_view_options).attr(opts instanceof can.Observe ? opts._data : opts);
-    this.options.list ? this.draw_list() : this.fetch_list(this.options.parent_id);
+    this.options.list ? this.draw_list() : this.fetch_list(this.options.parent_id || '');
     this.element.attr("data-object-type", can.underscore(this.options.model.shortName)).data("object-type", can.underscore(this.options.model.shortName));
     this.element.attr("data-object-meta-type", can.underscore(this.options.model.root_object)).data("object-meta-type", can.underscore(this.options.model.root_object));
   }
@@ -183,6 +183,7 @@ CMS.Controllers.Filterable("CMS.Controllers.TreeView", {
       $.when.apply($, find_dfds).done(function() {
         var new_objs = can.makeArray(arguments);
         can.each(new_objs, function(obj) { 
+					that.add_child_lists([obj])
           child_options.list.push(obj);
           //$list.control(CMS.Controllers.TreeView).add_child_lists($list.find("[data-object-id=" + obj.id + "]"));
         });
