@@ -45,7 +45,7 @@ class DirectivesController < BaseObjectsController
   layout 'dashboard'
 
   def index
-    @directives = Directive
+    @directives = Directive.includes(:sections)
     if params[:relevant_to].present?
       @directives = @directives.relevant_to(Product.find(params[:relevant_to]))
     end
@@ -66,7 +66,6 @@ class DirectivesController < BaseObjectsController
     if params[:program_id].present?
       @directives = @directives.joins(:program_directives).where(:program_directives => { :program_id => params[:program_id] })
     end
-    @directives = allowed_objs(@directives.all, :read)
     @directives = @directives.reject(&:is_stealth_directive?)
 
     respond_to do |format|
@@ -79,7 +78,7 @@ class DirectivesController < BaseObjectsController
         end
       end
       format.json do
-        render :json => @directives, :methods => :description_inline
+        render :json => @directives, :methods => [:description_inline, :sections]
       end
     end
   end

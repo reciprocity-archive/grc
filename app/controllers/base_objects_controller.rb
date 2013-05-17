@@ -286,7 +286,11 @@ class BaseObjectsController < ApplicationController
     end
 
     def object_as_json(args=nil)
-      object.as_json({:root => nil}.merge(args || {}))
+      if object.is_a? Directive
+        object.as_json({:root => nil, :include => :sections}.merge(args || {}))
+      else
+        object.as_json({:root => nil}.merge(args || {}))
+      end
     end
 
     def show_object_as_json(args=nil)
