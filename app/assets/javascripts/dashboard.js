@@ -239,15 +239,15 @@ jQuery(function($) {
   });
 
   function with_params(href, params) {
-		if(href) {
-    	if (href.charAt(href.length - 1) === '?')
-	      return href + params;
-	    else if (href.indexOf('?') > 0)
-	      return href + '&' + params;
-	    else
-	      return href + '?' + params;
-		}else
-			return undefined;
+    if(href) {
+      if (href.charAt(href.length - 1) === '?')
+        return href + params;
+      else if (href.indexOf('?') > 0)
+        return href + '&' + params;
+      else
+        return href + '?' + params;
+    }else
+      return undefined;
   }
 
   // Handle search on related_selectors
@@ -739,9 +739,9 @@ jQuery(function($) {
           'ajax:flash', 
           { "success" : "Saved page layout as default for " + (page_token === "programs_dash" ? "dahsboard" : page_token) }
         );
-				setTimeout(function() {
-					location.reload();
-				}, 1000);
+        setTimeout(function() {
+          location.reload();
+        }, 1000);
       });
     });
   });

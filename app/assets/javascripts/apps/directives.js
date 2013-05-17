@@ -91,7 +91,7 @@ $(function() {
       , edit_sections : true
       , list : s
       , list_view : "/assets/sections/tree.mustache"
-			, filterable_items_selector : "[data-object-type=Directive]"
+      , filterable_items_selector : "[data-object-type=Directive]"
     });
   });
 
