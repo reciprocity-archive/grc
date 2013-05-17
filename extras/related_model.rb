@@ -334,13 +334,11 @@ module RelatedModel
   def count_other_objects(related_model)
     object_type = self.class.to_s
     object_id   = self.id
-    
-    related_model = related_model == 'Process' ? 'System' : related_model
-    
+
     relationships = Relationship.index_query({
       :object_type => object_type,
       :object_id => object_id,
-      :other_type => related_model
+      :other_type => related_model == 'Process' ? 'System' : related_model
     })
     if related_model == 'System' || related_model == 'Process'
       case related_model
