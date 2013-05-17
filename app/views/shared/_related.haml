@@ -29,9 +29,9 @@
                 "data-template" => "/assets/related.mustache",
                 "data-refresh-time" => 60 }
                 %i{:class => icon }
-                #{table_name.titleize}
-                %span 
-                  #{' ' + instance.count_other_objects(model).to_s}
+                %span.collapse_tab_text
+                  #{table_name.titleize} 
+                #{' ' + instance.count_other_objects(model).to_s}
   .tab-content
     -models.each do |model|
       .tab-pane{:id => "related-#{model.underscore.pluralize}-pane"}

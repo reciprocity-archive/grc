@@ -510,7 +510,8 @@ can.Control("CMS.Controllers.ResizeWidgets", {
 
     $el.find("a:data(text)").each(function(i, tablink) {
       var $tab = $(tablink);
-      $tab.append($tab.data("text")).tooltip("disable").removeData("text");
+      $tab.find('.collapse_tab_text').text($tab.data("text"))
+			$tab.tooltip("disable").removeData("text");
     });
 
     var fullwidth = can.reduce($el.children(), function(total, t) {
@@ -523,13 +524,13 @@ can.Control("CMS.Controllers.ResizeWidgets", {
         var $tab = $(tablink)
         , oldtmpl = $tab.attr("data-template");
         $tab
-        .data("text", $tab.text())
-        .attr("data-original-title", $tab.text())
+        .data("text", $tab.find('.collapse_tab_text').text())
+        .attr("data-original-title", $tab.find('.collapse_tab_text').text())
         .removeAttr("data-template")
         .tooltip({delay : {show : 500, hide : 0}})
         .tooltip("enable")
-        .html($tab.children())
-        .attr("data-template", oldtmpl);
+        .attr("data-template", oldtmpl)
+				.find('.collapse_tab_text').text('');
       });
     }
   }
