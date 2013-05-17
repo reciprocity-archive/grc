@@ -1,6 +1,6 @@
 //= require can.jquery-all
 
-can.Control("CMS.Controllers.TreeView", {
+CMS.Controllers.Filterable("CMS.Controllers.TreeView", {
   //static properties
   defaults : {
     model : null

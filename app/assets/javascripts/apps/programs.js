@@ -68,6 +68,7 @@ $(function() {
         model : CMS.Models.SectionSlug
         , property : "sections"
       }]
+      , filterable_items_selector : "[data-object-type=Directive]"
     });
   });
 
@@ -87,6 +88,13 @@ $(function() {
     }))
   });
 
+  $(document.body).on("keydown", "#program_directives_widget .widgetsearch-tocontent", function(ev) {
+    if(ev.which === 13) {
+      $(ev.currentTarget).closest('.widget').find('.cms_controllers_tree_view:first').control().filter($(this).val());
+    }
+    ev.stopPropagation();
+    ev.originalEvent && ev.originalEvent.stopPropagation();
+  });
 });
 
 })(window.can, window.can.$);

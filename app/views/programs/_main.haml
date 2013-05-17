@@ -18,7 +18,7 @@
   .filter
     .row-fluid
       .span6
-        %input.ui-corner-all.widgetsearch.clear-value(type='text' placeholder='Search')
+        %input.ui-corner-all.widgetsearch-tocontent.clear-value(type='text' placeholder='Search')
       .span6
         .pull-right
           %a.btn.btn-add{ :href => new_flow_control_path(:'program_id' => instance.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-dirty' => '#controls, #combo', :'data-route' => "category_controls", :'data-modal-class' => 'modal-wide', :rel => "tooltip", :title => 'Create New Control' }

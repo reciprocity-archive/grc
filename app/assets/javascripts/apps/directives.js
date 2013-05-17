@@ -91,6 +91,7 @@ $(function() {
       , edit_sections : true
       , list : s
       , list_view : "/assets/sections/tree.mustache"
+			, filterable_items_selector : "[data-object-type=Directive]"
     });
   });
 
@@ -119,6 +120,14 @@ $(function() {
     }
 
   });
+  $(document.body).on("keydown", "#directive_controls_widget .widgetsearch-tocontent", function(el, ev) {
+    if(ev.which === 13) {
+      ev.closest('.widget').filter(el.val());
+    }
+    ev.stopPropagation();
+    ev.originalEvent && ev.originalEvent.stopPropagation();
+  });
+
 
 });
 

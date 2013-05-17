@@ -1,5 +1,5 @@
 {{#list}}
-<li class="directive" data-object-id="{{id}}" data-object-sub-type="{{lowercase_kind}}" data-object-type="{{constructor.shortName}}" data-object-meta-type="directive">
+<li class="directive" data-object-id="{{id}}" data-object-sub-type="{{lowercase_kind}}" data-object-type="{{constructor.shortName}}" data-object-meta-type="directive" {{data "model"}}>
     <div class="item-main">
       {{#draw_children}}
           <div class="openclose {{#if start_expanded}}active{{/if}}"></div>
