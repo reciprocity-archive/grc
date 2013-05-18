@@ -33,7 +33,7 @@
   .row-fluid
     .span6
       .risk-level{ :class=> "risk-level-#{risk.adjusted_likelihood}"}
-        %span{ :rel=>"tooltip", :title => "#{Risk::RATINGS[risk.adjusted_likelihood]}"}=risk.likelihood_rating
+        %span{ :rel=>"tooltip", :title => "#{Risk::RATINGS[risk.adjusted_likelihood]}"}=risk.converted_likelihood_rating
       %h4 Likelihood
       =display_as_html risk.likelihood
     .span6

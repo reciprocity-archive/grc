@@ -79,9 +79,9 @@ class Risk < ActiveRecord::Base
     likelihood_rating * inherent_risk.to_i
   end
   
-  def likelihood_rating
+  def converted_likelihood_rating
     lr = read_attribute(:likelihood_rating) || 0.2
-    if lr > 0.8
+    if lr >= 1.0
       (lr.to_f / 5.0) - 0.2
     else
       lr
