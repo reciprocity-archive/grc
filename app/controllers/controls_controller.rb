@@ -104,9 +104,11 @@ class ControlsController < BaseObjectsController
   end
 
   def sections
-    @sections =
-      @control.sections.all +
-      @control.implemented_controls.includes(:sections).map(&:sections).flatten
+    @sections = @control.sections.all
+    # NOTE: removed non-directly-linked controls until control mapping is in
+    #@sections =
+    #  @control.sections.all +
+    #  @control.implemented_controls.includes(:sections).map(&:sections).flatten
     @sections = allowed_objs(@sections, :read)
     @sections.sort_by(&:slug_split_for_sort)
     render :layout => nil, :locals => { :sections => @sections }
