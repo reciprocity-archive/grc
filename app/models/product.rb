@@ -6,6 +6,7 @@ class Product < ActiveRecord::Base
   include RelatedModel
   include SanitizableAttributes
   include BusinessObjectModel
+  include DatedModel
 
   attr_accessible :title, :slug, :description, :url, :version, :type, :start_date, :stop_date
 

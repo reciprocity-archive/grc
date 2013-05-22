@@ -648,7 +648,7 @@ input.pbc-request-assignee {
   height:16px;
   min-height:0;
   padding:2px;
-  width:200px;
+  width:175px;
   &:hover {
     border-color:darken($lightGray, 20%);
   }
@@ -720,5 +720,25 @@ ul li.inline-search-result.error {
       @include box-shadow(inset 0 0 3px $darkGray);
       @include background-image(linear-gradient(center top, darken($addBtn, 5%) 5%, lighten($addBtn, 5%) 100% ));
     }
+  }
+}
+
+.preview-container {
+  height: 250px; 
+  width: 380px; 
+  margin: 10px 10px; 
+  overflow: hidden;
+  .preview {
+    transform: scale3d(0.5, 0.5, 1); 
+    -webkit-transform: scale3d(0.5, 0.5, 1); 
+    -ms-transform: scale3d(0.5, 0.5, 1); 
+    -o-transform: scale3d(0.5, 0.5, 1); 
+    transform-origin: 0px 0px; 
+    -webkit-transform-origin: 0 0; 
+    -ms-transform-origin: 0 0; 
+    -o-transform-origin: 0 0; 
+    height: 500px; 
+    width: 760px; 
+    position: absolute;
   }
 }

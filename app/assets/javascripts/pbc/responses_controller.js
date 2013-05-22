@@ -7,14 +7,6 @@ function object_event(type) {
     return function(el, ev, data) {
         var that = this;
 
-        if(type==="document" && !data.id) {
-          //work out what to do when the thing is new
-          if(!/^http[:s]|^file:/i.test(data.link_url)) {
-            data.title = data.link_url;
-            data.link_url = null;
-          }
-        }
-
         this.bindXHRToButton(
           this.create_object_relation(
               type
@@ -41,14 +33,22 @@ can.Control("CMS.Controllers.Responses", {
         , id : null //The ID of the parent request
         , type_id : null // type_id from request
         , type_name : null // type_name from request
+        , display_prefs : null
+        , page_id : null
     }
     , one_created : can.compute(false)
 }, {
     init : function() {
         this.fetch_list();
+        var that = this;
+        if(!this.options.display_prefs) {
+          CMS.Models.DisplayPrefs.findAll().done(function(prefs) {
+            that.options.display_prefs = prefs[0];
+          })
+        }
     }
     , fetch_list : function() {
-        this.options.model.findAll({ request_id : this.options.id }, this.proxy("draw_list"));
+        this.options.model.findAll({ request_id : this.options.id, r : Math.random() }, this.proxy("draw_list"));
     }
     , draw_list : function(list) {
         var that = this;
@@ -80,6 +80,10 @@ can.Control("CMS.Controllers.Responses", {
                   if(can.isEmptyObject(resp.system.serialize())) {
                     resp.attr("system", null);
                   }
+                  if(that.options.display_prefs.getPbcResponseOpen(that.options.page_id, resp.id) === false) {
+                    that.element.find(".item[data-id=" + resp.id + "] > .item-main > .openclose").openclose("close");
+                  }
+
                 });
             });
     }
@@ -148,23 +152,53 @@ can.Control("CMS.Controllers.Responses", {
       }
     }
     , ".inline-add-person modal:success" : object_event("person")
-    , ".inline-add-document documentSelected" : object_event("document")
+    , ".inline-add-document documentSelected" : function(el, ev, data) {
+
+      if(!data.id && !/^http[:s]|^file:/i.test(data.link_url)) {
+        data.title = data.link_url;
+        data.link_url = null;
+        // Person gave a new title.  Have to open the modal to supply a URL.
+        el.find(".add-document").click();
+        $(".modal:visible").one("loaded", function() {
+          can.each(Object.keys(data), function(key) {
+            $("#document_" + key).val(data[key]);
+          });
+        });
+      } else {
+        object_event("document").apply(this, arguments);
+      }
+    }
     , ".inline-add-document modal:success" : object_event("document")
     , ".inline-edit-population-doc .input-title documentSelected" : function(el, ev, data) {
       var model = el.closest("[data-model]").data("model")
       var that = this;
       var dfd = new can.Deferred();
 
-      if(!/^http[:s]|^file:/i.test(data.link_url)) {
-        data.title = data.link_url;
-        data.link_url = null;
-      }
       if(!data.id) {
+        if(!/^http[:s]|^file:/i.test(data.link_url)) {
+          data.title = data.link_url;
+          data.link_url = null;
+
+          el.closest(".inline-edit-population-doc")
+          .find(".add-document")
+          .click()
+          .one("modal:success", function(ev, data) {
+            dfd.resolve(data);
+          });
+          $(".modal:visible").one("loaded", function() {
+            can.each(Object.keys(data), function(key) {
+              $("#document_" + key).val(data[key]);
+            });
+
+          });
+        }
+        else {
           //need to create a new thing to relate to first
           dfd = new this.options.document_model(data).save();
           that.bindXHRToButton(
             dfd
            , el);
+        }
       } else {
         dfd.resolve({id : data.id})
       }
@@ -230,7 +264,20 @@ can.Control("CMS.Controllers.Responses", {
       that.samples_timeout = setTimeout(function() {
         that.bindXHRToButton(
           model.save().then(function() { 
-            el.next(".success").addClass("in");
+            //success condition
+            el.next(".success").text("Saved").addClass("in");
+            el.parent().removeClass("field-failure");
+            setTimeout(function() {
+              el.next(".success").removeClass("in");
+            }, 3000);
+          }, function(xhr) {
+            //error condition
+            var t = "Error", r = JSON.parse(xhr.responseText);
+            if(~can.inArray("is not a number", r.errors[el.attr("name")])) {
+              t = "Error: Numbers only";
+            }
+            el.next(".success").html("<span class='error'>" + t + "</span>").addClass("in");
+            el.parent().addClass("field-failure");
             setTimeout(function() {
               el.next(".success").removeClass("in");
             }, 3000);
@@ -328,6 +375,9 @@ can.Control("CMS.Controllers.Responses", {
     }
     , ".pbc-responses > .item > .item-main > .openclose click" : function(el, ev) {
       this.constructor.one_created(true);
+
+      //openclose is animated so use opposite of active class
+      this.options.display_prefs.setPbcResponseOpen(this.options.page_id, el.closest(".item").data("id"), !el.is(".active"));
     }
     , ".remove-system click" : function(el, ev) {
       var $system = el.closest("[data-model]");

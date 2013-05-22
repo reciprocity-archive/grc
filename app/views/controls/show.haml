@@ -5,8 +5,8 @@
     %li=link_to "dashboard", programs_dash_path
     %li=@control.slug
   
-  %h1.compliance
-    .grcobject.compliance{:rel => "tooltip", :'data-placement'=>"bottom", :title => "Control"}
+  %h1.governance
+    .grcobject.governance{:rel => "tooltip", :'data-placement'=>"bottom", :title => "Control"}
       %i.grcicon-control
     -if @control.title?
       =strip_tags(@control.title)
@@ -31,12 +31,12 @@
     #main_column.span8.widget-area
       =render :partial => 'controls/main',
               :layout => 'layouts/widget_box',
-              :locals => { :control => @control, :widget_class => "compliance widget-tabs widget-tabs-horizontal" }
+              :locals => { :control => @control, :widget_class => "governance widget-tabs widget-tabs-horizontal" }
       =render :partial => 'shared/add_widget_section'
     #right_column.span4.widget-area
       =render :partial => 'controls/info',
               :layout => 'layouts/widget_box',
-              :locals => { :control => @control, :widget_class => "compliance" }
+              :locals => { :control => @control, :widget_class => "governance" }
       =render :partial => 'controls/more_info',
               :layout => 'layouts/widget_box',
               :locals => { :control => @control, :widget_class => 'related business' }

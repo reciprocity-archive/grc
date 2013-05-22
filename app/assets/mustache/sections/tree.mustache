@@ -1,0 +1,110 @@
+{{#list}}
+  <li class="section" id="content_{{slug}}" data-id="{{id}}" data-object-id="{{id}}" data-object-type="{{constructor.shortName.toLowerCase}}" data-object-meta-type="section" data-model="true" {{data 'model'}}>
+    <div class="item-main">
+      {{#start_expanded}}
+        {{#show_expander draw_children children "||" draw_children linked_controls}}
+          <div class="openclose active"></div>
+        {{/show_expander}}
+      {{/start_expanded}}
+      {{^start_expanded}}
+        {{#show_expander draw_children children "||" draw_children linked_controls}}
+          <div class="openclose"></div>
+        {{/show_expander}}
+      {{/start_expanded}}
+      <div class="item-title">
+        <div class="row-fluid">
+          <div class="span8">
+            <div class="oneline expandable">
+              <i class="grcicon-section-color"></i>
+              <span class="title">
+                {{title}}
+              </span>
+              <span class="code">
+                {{slug}}
+              </span>
+              <span class="description-inline">
+                {{{firstnonempty description_inline ''}}}
+              </span>
+              {{#notes}}
+                <i class="grcicon-comment"></i>
+              {{/notes}}
+            </div>
+            <div class="description inhover {{^description}}no-description{{/description}}">
+              {{^description}}
+                <i>No description</i>
+              {{/description}}
+              <div class="note">
+                {{#notes}}
+                  <div class="note-content">
+                    {{#edit_sections}}
+                      <a class="edit-notes" href="javascript://">
+                        <i class="grcicon-edit"></i>
+                      </a>
+                    {{/edit_sections}}
+                    <strong>Abstract</strong>
+                    <div class="rtf">
+                      {{{notes}}}
+                    </div>
+                  </div>
+                {{/notes}}
+                {{^notes}}
+                  {{#edit_sections}}
+                    <a class="note-trigger" href="javascript://">
+                      + Add Abstract
+                    </a>
+                  {{/edit_sections}}
+                {{/notes}}
+              </div>
+              {{{description}}}
+            </div>
+          </div>
+          <div class="span1">
+            <a class="view-more" href="javascript://">
+              view
+            </a>
+          </div>
+          <div class="span2">
+            <div class="objects-count">
+              {{#pack list=linked_controls na=na id=id}}
+              <a class="controls-count controllist btn btn-control"  data-content="{{render '/assets/controls/list_popover.mustache'}}" data-placement="right" data-popover-trigger="sticky-hover" href="javascript://">
+                {{{withattr 'data-original-title' "<div class='row-fluid'><div class='span12'><h3><a href='javascript://' data-id='{id}' class='btn btn-mini pull-right controllist' rel='tooltip' title='Map Controls to Section'><i class='grcicon-section-color'></i><i class='grcicon-reg-map'></i><i class='grcicon-control-color'></i></a><i class='grcicon-control-color'></i>Mapped Controls</h3></div></div>"}}}
+                <i class="grcicon-control-color"></i>
+                
+                {{#if na}}
+                    {{^list}} 
+                      <small class="warning">N/A</small>
+                    {{/list}}
+                  {{#list.length}}
+                      <span>{{this}}</span>
+                  {{/list.length}}
+                {{else}}
+                    {{^list}} 
+                      <strong class="error">0</strong>
+                    {{/list}}
+                  {{#list.length}}
+                      <span>{{this}}</span>
+                  {{/list.length}}
+                {{/if}}  
+              </a>
+              {{/pack}}
+            </div>
+          </div>
+        </div>
+        <div class="item-actions">
+          {{#edit_sections}}
+            <a class="btn btn-mini pull-right edit-object" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/sections/{{id}}/edit" rel="tooltip" style="margin-left:6px" data-original-title="Edit Section">
+              <i class="grcicon-edit"></i>
+            </a>
+          {{/edit_sections}}
+        </div>
+      </div>
+    </div>
+    {{#draw_children}}
+    <div class="item-content" {{#start_expanded}}style="display: block;"{{/start_expanded}}>
+      {{#child_options}}
+      <ul class="tree-structure" {{data 'options'}} {{ (el) -> el.cms_controllers_tree_view(el.data("options")) }}></ul>
+      {{/child_options}}
+    </div>
+    {{/draw_children}}
+  </li>
+{{/list}}

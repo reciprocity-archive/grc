@@ -1,0 +1,21 @@
+{{#list}}
+<li class="category" data-object-id="{{id}}" data-object-type="category" data-object-meta-type="category" {{^descendant_controls}}style="display:none"{{/descendant_controls}}>
+  <div class="item-main">
+    {{#show_expander draw_children children "||" draw_children linked_controls}}
+      <div class="openclose {{#if start_expanded}}active{{/if}}"></div>
+    {{/show_expander}}    
+    <div class="item-title">
+      <div class="row-fluid">
+        {{name}}
+      </div>
+    </div>
+  </div>
+  {{#draw_children}}
+  <div class="item-content" {{#start_expanded}}style="display: block;"{{/start_expanded}}>
+    {{#child_options}}
+    <ul class="tree-structure" data-object-type="{{ model.shortName }}" {{data 'options'}} {{ (el) -> el.cms_controllers_tree_view(el.data("options")) }}></ul>
+    {{/child_options}}
+  </div>
+  {{/draw_children}}
+</li>
+{{/list}}

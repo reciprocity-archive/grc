@@ -7,6 +7,7 @@ class Directive < ActiveRecord::Base
   include AuthorizedModel
   include RelatedModel
   include SanitizableAttributes
+  include DatedModel
 
   KINDS = [
     "Regulation",
@@ -141,5 +142,13 @@ class Directive < ActiveRecord::Base
       self.company = !([:regulation, :contract].include?(self.meta_kind))
     end
     true
+  end
+  
+  def total_controls
+    total_controls = controls
+    if self.sections.present?
+      total_controls += self.sections.collect(&:controls).flatten!
+    end
+    total_controls.uniq {|control| control.id}
   end
 end

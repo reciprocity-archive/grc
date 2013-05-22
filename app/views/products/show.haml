@@ -37,10 +37,11 @@
       =render :partial => "main",
               :layout => 'layouts/widget_box',
               :locals => { model_name.to_sym => instance, :widget_class => "business" }
-                
-      =render :partial => "risks",
-              :layout => 'layouts/widget_box',
-              :locals => { model_name.to_sym => instance, :widget_class => "risk" }
+      
+      - if current_user.can_manage_risk?
+        =render :partial => "risks",
+                :layout => 'layouts/widget_box',
+                :locals => { model_name.to_sym => instance, :widget_class => "risk" }
               
       =render :partial => 'shared/related',
               :layout => 'layouts/widget_box',
@@ -56,5 +57,6 @@
       =render :partial => "more_info",
               :layout => 'layouts/widget_box',
               :locals => { model_name.to_sym => instance, :widget_class => 'related business' }
+
 
       =render :partial => 'shared/add_widget_section'

@@ -26,37 +26,39 @@
       -if !program.company_controls?
         %h4
           Audit Status
-        -if program.cycles.empty?
+        -last_cycle = program.cycles.select{|c| !c.start_at.nil? && c.start_at - 30 < Date.today }.sort_by{|c| c.start_at}.last
+        -if last_cycle.present?
+          %p.audit-status
+            -if !last_cycle.complete && (last_cycle.report_due_at.nil? || last_cycle.report_due_at - 3 > Date.today)
+              %i.grcicon-eye-inprogress
+              %span.status.inprogress In Progress
+            -elsif !last_cycle.report_due_at.nil? && !last_cycle.complete && last_cycle.report_due_at - 3 <= Date.today
+              %i.grcicon-eye-danger
+              %span.status.danger=last_cycle.report_due_at >= Date.today ? "Due Soon" : "Overdue"
+            -elsif last_cycle.complete
+              %i.grcicon-eye-completed
+              %span.status.completed Completed
+            %br
+            =last_cycle.start_at.nil? || last_cycle.start_at > Date.today ? "Starts " : "Started "
+            =last_cycle.start_at == Date.today ? "today" : "on: " + last_cycle.start_at.strftime("%m/%d/%Y") rescue "on: Not set"
+            %br
+            =last_cycle.end_at.nil? || last_cycle.end_at > Date.today ? "Ends " : "Ended "
+            =last_cycle.end_at == Date.today ? "today" : "on: " + last_cycle.end_at.strftime("%m/%d/%Y") rescue "on: Not set"
+            %br
+            %strong
+              ="Report due " + (last_cycle.report_due_at == Date.today ? "today" : "on: " + last_cycle.report_due_at.strftime("%m/%d/%Y"))rescue "Report due on: Not set"
+        -else
           / no-icon case
           %p.audit-status
             %span.status.none No scheduled audits
-        -else
-          -program.cycles.each do |cycle|
-            %p.audit-status
-              -if cycle.complete
-                %i.grcicon-eye-completed
-                %span.status.completed Completed
-              -elsif !cycle.report_due_at.nil? && cycle.report_due_at - 3 <= Date.today
-                %i.grcicon-eye-danger
-                %span.status.danger=cycle.report_due_at >= Date.today ? "Due Soon" : "Overdue"
-              -elsif !cycle.start_at.nil? && cycle.start_at - 30 <= Date.today
-                %i.grcicon-eye-inprogress
-                %span.status.inprogress In Progress
-              %br
-              =cycle.start_at.nil? || cycle.start_at > Date.today ? "Starts " : "Started "
-              =cycle.start_at == Date.today ? "today" : "on: " + cycle.start_at.strftime("%m/%d/%Y") rescue "on: Not set"
-              %br
-              =cycle.end_at.nil? || cycle.end_at > Date.today ? "Ends " : "Ended "
-              =cycle.end_at == Date.today ? "today" : "on: " + cycle.end_at.strftime("%m/%d/%Y") rescue "on: Not set"
-              %br
-              %strong
-                ="Report due " + (cycle.report_due_at == Date.today ? "today" : "on: " + cycle.report_due_at.strftime("%m/%d/%Y"))rescue "Report due on: Not set"
+
       -else
         &nbsp;
     .span6
       %h4
-        -controls = program.directives.collect{|d| d.controls}.flatten
-        Controls (#{controls.length})
+        -directive = params[:directive_id].present? ? program.directives.select{|d| d.id.to_s == params[:directive_id]}.first : nil
+        -controls = directive.present? ? directive.controls : program.directives.collect{|d| d.controls}.flatten
+        Controls #{directive.present? ? "from " + directive.title : ""} (#{controls.length})
         -mapped_controls = controls.reject{|c| c.linked_sections.empty?}
         -unmapped_controls = controls.select{|c| c.linked_sections.empty?}
         .progress
@@ -65,6 +67,7 @@
           -else
             .bar.bar-success{:style => "width:" + (mapped_controls.length * 100 / controls.length).to_s + "%", :rel => "tooltip", :title => mapped_controls.length.to_s + " Done"}=mapped_controls.length
             .bar.bar-warning{:style => "width:" + (unmapped_controls.length * 100 / controls.length).to_s + "%", :rel => "tooltip", :title => unmapped_controls.length.to_s + " Pending"}=unmapped_controls.length
+      = directive.present? ? '(' + ((directive.total_controls.count.to_f / program.total_controls.count.to_f).round(2) * 100).to_i.to_s + "% of this program)" : ''
       -directives = program.directives
       -if !program.company_controls?
         %h4

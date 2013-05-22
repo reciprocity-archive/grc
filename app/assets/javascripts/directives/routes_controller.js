@@ -5,14 +5,20 @@
 
 can.Control("CMS.Controllers.DirectiveRoutes", {
   //Static
+  init : function() {
+    can.route.attr({}); //make sure the route is set up
+  }
 
 }, {
   //Prototype
 
   "{can.route} tab" : function(el, ev, value, oldval) {
     //regulations, category_controls, combo are the possible values.  Each is a tab ID.
-    if(value !== oldval)
-      $("a[href=#" + value + "]").click();
+    if(value !== oldval) {
+      can.each(value.serialize ? value.serialize() : value, function(val, section) {
+        $("#" + section + " a[href=#" + val + "]:not(.active, li.active *)").click();
+      });
+    }
   }
 
   , ".tab-pane loaded" : function(el, ev) {
@@ -48,7 +54,9 @@ can.Control("CMS.Controllers.DirectiveRoutes", {
   }
 
   , "a[data-toggle=tab] click" : function(el, ev) {
-    can.route.attr("tab", el.attr("href").substr(el.attr("href").indexOf("#") + 1));
+    var params= {};
+    params[el.closest(".widget").attr("id")] = el.attr("href").substr(el.attr("href").indexOf("#") + 1)
+    can.route.attr("tab", can.extend(can.route.attr().tab, params));
   }
 
   , " ajax:beforeSend" : function(el, ev, xhr, settings) {
@@ -71,15 +79,22 @@ can.Control("CMS.Controllers.DirectiveRoutes", {
       if(str.length) {
         var elements = str.split("&");
         can.each(elements, function(el) {
+          var k = h, parent;
           var s = el.split("=");
-          h[s[0]] = s[1];
+          var parts = s[0].split(".");
+          can.each(parts, function(part) {
+            parent = k;
+            k[part] = k[part] || {};
+            k = k[part];
+          })
+          parent[parts[parts.length - 1]] = s[1];
         });
       }
       return h;
     }
 
     var d = typeof data === "string" ? makehash(data) : data;
-    can.route.attr(d);
+    can.route.attr(can.extend(can.route.attr(), d));
   }
 });
 

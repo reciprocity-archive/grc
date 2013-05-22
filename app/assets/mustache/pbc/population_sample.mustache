@@ -14,6 +14,7 @@
           {{#if_null population_document_id}}
           <form>
             <input class="input-block-level input-title" name="title" placeholder="Search for Doc Title or URL" type="text" {{ (el) -> el.pbc_autocomplete_documents() }}>
+            <a class="add-document" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/documents/new" data-target="#ajax-modal-documents-new"></a>
           </form>
           {{else}}
             <a class="btn btn-mini pull-right remove-population-doc" href="javascript://" rel="tooltip" title="Remove population worksheet">
@@ -26,10 +27,9 @@
               {{#if_null population_document.link_url}}
                 <span>{{population_document.title}}</span>
               {{else}}
-                <a href="{{population_document.link_url}}" target="_blank">
-                  <span rel="tooltip" title="{{population_document.link_url}}">
-                    {{firstnonempty population_document.title population_document.link_url}}
-                  </span>
+                <a class="inner-element" data-popover-trigger="sticky-hover" data-sticky-popover="true" data-content="{{render '/assets/pbc/iframe_tooltip.mustache' population_document}}" data-placement="right" href="{{population_document.link_url}}" target="_blank">
+                    {{{withattr "data-original-title" "<div class='row-fluid'><div class='span12'><h3><i class='grcicon-link'></i> Viewing {firstnonempty population_document.title population_document.link_url} </span> </h3></div></div>"}}}
+                  {{firstnonempty population_document.title population_document.link_url}}
                 </a>
               {{/if_null}}
             </p>
@@ -45,7 +45,7 @@
     
         <div class="span4 auto-save">
           <input type="text" name="population" class="input-block-level" value="{{firstexist population ''}}" />
-          <span class="success fade">Saved</span>
+          <span class="success fade" style="white-space:nowrap">Saved</span>
         </div>
       </div>
     </div>
@@ -66,7 +66,8 @@
           {{#if_null sample_worksheet_document_id}}
           <form>
             <input class="input-block-level input-title" name="title" placeholder="Search for Doc Title or URL" type="text" {{ (el) -> el.pbc_autocomplete_documents() }}>
-          </form>
+             <a class="add-document" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/documents/new" data-target="#ajax-modal-documents-new"></a>
+         </form>
           {{else}}
             <a class="btn btn-mini pull-right remove-population-doc" href="javascript://" rel="tooltip" title="Remove sample worksheet">
               <i class="grcicon-x-grey"></i>
@@ -78,10 +79,9 @@
               {{#if_null sample_worksheet_document.link_url}}
                 <span>{{sample_worksheet_document.title}}</span>
               {{else}}
-                <a href="{{sample_worksheet_document.link_url}}" target="_blank">
-                  <span rel="tooltip" title="{{sample_worksheet_document.link_url}}">
-                    {{firstnonempty sample_worksheet_document.title sample_worksheet_document.link_url}}
-                  </span>
+                <a class="inner-element" data-popover-trigger="sticky-hover" data-sticky-popover="true" data-content="{{render '/assets/pbc/iframe_tooltip.mustache' sample_worksheet_document}}" data-placement="right" href="{{sample_worksheet_document.link_url}}" target="_blank">
+                    {{{withattr "data-original-title" "<div class='row-fluid'><div class='span12'><h3><i class='grcicon-link'></i> Viewing {firstnonempty sample_worksheet_document.title sample_worksheet_document.link_url} </span> </h3></div></div>"}}}
+                  {{firstnonempty sample_worksheet_document.title sample_worksheet_document.link_url}}
                 </a>
               {{/if_null}}
             </p>
@@ -97,7 +97,7 @@
     
         <div class="span4 auto-save">
           <input type="text" name="samples" class="input-block-level" value="{{firstexist samples ''}}"/>
-          <span class="success fade">Saved</span>
+          <span class="success fade" style="white-space:nowrap">Saved</span>
         </div>
       </div>
     </div>
@@ -118,6 +118,7 @@
           {{#if_null sample_evidence_document_id}}
             <form>
               <input class="input-block-level input-title" name="title" placeholder="Search for Doc Title or URL" type="text" {{ (el) -> el.pbc_autocomplete_documents() }}>
+              <a class="add-document" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/documents/new" data-target="#ajax-modal-documents-new"></a>
             </form>
           {{else}}
             <a class="btn btn-mini pull-right remove-population-doc" href="javascript://" rel="tooltip" title="Remove sample evidence">
@@ -130,10 +131,9 @@
               {{#if_null sample_evidence_document.link_url}}
                 <span>{{sample_evidence_document.title}}</span>
               {{else}}
-                <a href="{{sample_evidence_document.link_url}}" target="_blank">
-                  <span rel="tooltip" title="{{sample_evidence_document.link_url}}">
-                    {{firstnonempty sample_evidence_document.title sample_evidence_document.link_url}}
-                  </span>
+                <a class="inner-element" data-popover-trigger="sticky-hover" data-sticky-popover="true" data-content="{{render '/assets/pbc/iframe_tooltip.mustache' sample_evidence_document}}" data-placement="right" href="{{sample_evidence_document.link_url}}" target="_blank">
+                    {{{withattr "data-original-title" "<div class='row-fluid'><div class='span12'><h3><i class='grcicon-link'></i> Viewing {firstnonempty sample_evidence_document.title sample_evidence_document.link_url} </span> </h3></div></div>"}}}
+                  {{firstnonempty sample_evidence_document.title sample_evidence_document.link_url}}
                 </a>
               {{/if_null}}
             </p>

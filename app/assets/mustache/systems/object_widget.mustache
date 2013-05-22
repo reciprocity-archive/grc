@@ -1,0 +1,57 @@
+{{!section class="widget... }}
+  <header class="header">
+    <div class="row-fluid">
+      <div class="span8">
+        <h2>
+          <i class="grcicon-system"></i>
+          {{#if is_related}}
+            Systems / Processes related to {{parent_display}}
+          {{else}}
+            {{object_display}}
+          {{/if}}
+          <span class="object_count">
+            {{#if is_related}}
+              {{related_count}}
+            {{else}}
+              {{list.length}}
+            {{/if}}
+          </span>
+        </h2>
+      </div>
+      <div class="span4">
+        <div class="widget-action pull-right remove-widget" rel="tooltip" title="Remove">
+          <a class="remove" href="javascript://">
+            <i class="grcicon-x-white"></i>
+          </a>
+        </div>
+        <div class="widget-action pull-right widget-showhide" rel="tooltip" title="Expand / Collapse">
+          <a class="active" href="javascript://"></a>
+        </div>
+        <div class="widget-action pull-right widget-action-help">
+          <a data-placement="top" data-toggle="modal-ajax" href="/help/system_list" rel="tooltip" data-original-title="Help">
+            <i class="grcicon-help"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+  {{^if is_related}}
+  <div class="filter">
+    <div class="row-fluid">
+      <div class="span8">
+        <input class="ui-corner-all widgetsearch-tocontent clear-value" type="text" placeholder="Search" />
+      </div>
+      <div class="span4">
+        <a class="btn btn-add pull-right"  href="/{{object_route}}/new?{{#if_equals model.shortName 'Process'}}system[is_biz_process]=true{{/if_equals}}" data-toggle="modal-ajax-form" data-modal-reset="reset" data-form-target="refresh" data-modal-class="modal-wide">
+          <i class="grcicon-add"></i>
+          <span class="object-type">{{#if_equals model.shortName "Process"}}Process{{else}}System{{/if}}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  {{/if}}
+  <section class="content">
+    {{{render list_view}}}
+  </section>
+              
+{{!/section}}

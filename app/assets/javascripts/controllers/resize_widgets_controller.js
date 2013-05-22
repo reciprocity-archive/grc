@@ -10,7 +10,7 @@ can.Control("CMS.Controllers.ResizeWidgets", {
     , heights_token : "heights"
     , total_columns : 12
     , default_layout : null
-    , page_token : window.location.pathname.substring(1, (window.location.pathname + "/").indexOf("/", 1))
+    , page_token : null
     , minimum_widget_height : 100
     , resizable_selector : "section[id]"
     , magic_content_height_offset : 17 //10px padding of the list inside the section + 7px height of resize handle
@@ -31,6 +31,9 @@ can.Control("CMS.Controllers.ResizeWidgets", {
   , init : function(el, newopts) {
     this._super && this._super(newopts);
     var that = this;
+
+    //late binding page token because the body properties are not available when the class is created
+    this.options.page_token || (this.options.page_token = window.getPageToken());
 
     //set up dragging the bottom border to resize in jQUI
     $(this.element)
@@ -64,15 +67,7 @@ can.Control("CMS.Controllers.ResizeWidgets", {
 
   , update : function(newopts) {
     var that = this
-    , opts = this.options
-
-    if(!(opts.model[opts.columns_token] instanceof can.Observe)) 
-      opts.model.attr(opts.columns_token, new can.Observe(opts.model[opts.columns_token]));
-    if(!(opts.model[opts.heights_token] instanceof can.Observe)) 
-      opts.model.attr(opts.heights_token, new can.Observe(opts.model[opts.heights_token]));
-    if(!(opts.model[opts.heights_token][opts.page_token] instanceof can.Observe)) 
-      opts.model.attr(opts.heights_token).attr(opts.page_token, new can.Observe(opts.model[opts.heights_token][opts.page_token]));
-
+    , opts = this.options;
 
     this.update_columns();
     this.update_heights();
@@ -125,10 +120,9 @@ can.Control("CMS.Controllers.ResizeWidgets", {
     $children.each(function(i, child) {
       $(child).addClass("span" + widths[i]);
 
-      can.each(
-        $(child).find(that.options.resizable_selector)
-        , that.proxy("check_horizontal_tab_sheet")
-      );
+      $(child).find(that.options.resizable_selector).each(function(i, gc) {
+        that.check_horizontal_tab_sheet(gc);
+      });
     });
   }
 
@@ -136,8 +130,7 @@ can.Control("CMS.Controllers.ResizeWidgets", {
 
   , update_heights : function() {
     var model = this.options.model
-    , heights = model.attr(this.options.heights_token)
-    , page_heights = heights.attr(this.options.page_token)
+    , page_heights = model.getWidgetHeights(this.options.page_token)
     , that = this
     , dirty = false
     , $c = $(this.element).children(".widget-area")
@@ -149,11 +142,6 @@ can.Control("CMS.Controllers.ResizeWidgets", {
       });
       return ch;
     };
-
-    if(!page_heights) {
-      page_heights = new can.Observe();
-      heights.attr(this.options.page_token, page_heights);
-    }
 
     if(!$c.length) {
       $c = $(this.element).children();
@@ -178,13 +166,13 @@ can.Control("CMS.Controllers.ResizeWidgets", {
               var $gc = $(grandchild);
               var this_split_ht = split_ht - parseInt($gc.css("margin-top")) - (parseInt($gc.prev($gcs).css("margin-bottom")) || 0);
               that.set_widget_height($gc, content_height_func.apply(grandchild));
-              page_heights.attr($gc.attr("id"), this_split_ht);
+              model.setWidgetHeight(that.options.page_token, $gc.attr("id"), this_split_ht);
               col_ht = $(child).height() + $(child).offset().top;
             });
             $gcs.not($shrink_these).each(function(i, grandchild) {
               var $gc = $(grandchild);
               if(!page_heights.attr($gc.attr("id"))) {
-                page_heights.attr($gc.attr("id"), $gc.height());
+                model.setWidgetHeight(that.options.page_token, $gc.attr("id"), $gc.height());
               }
             });
             dirty = true;
@@ -231,11 +219,14 @@ can.Control("CMS.Controllers.ResizeWidgets", {
 
   , "{model} change" : function(el, ev, attr, how, newVal, oldVal) {
     var parts = attr.split(".");
-    if(parts.length > 1 && parts[0] === this.options.columns_token && parts[2] === $(this.element).attr("id")) {
+    if(parts.length > 1 && parts[0] === window.location.pathname && parts[2] === $(this.element).attr("id")) {
       this.update_columns();
       this.options.model.save();
     }
-    if(parts.length > 1 && parts[0] === this.options.heights_token && $(this.element).has("#" + parts[1])) {
+    if(parts.length > 1 
+      && parts[0] === window.location.pathname 
+      && parts[1] === this.options.heights_token 
+      && $(this.element).has("#" + parts[2]).length) {
       this.update_heights();
       this.options.model.save();
     }
@@ -269,7 +260,7 @@ can.Control("CMS.Controllers.ResizeWidgets", {
   }
 
   , getWidthsForSelector : function(sel) {
-    return this.options.model.getColumnWidths(this.options.page_token, $(sel).attr("id"));
+    return this.options.model.getColumnWidths(this.options.page_token, $(sel).attr("id")) || [];
   }
 
   , getLeftOffset : function(pageX) {
@@ -484,11 +475,7 @@ can.Control("CMS.Controllers.ResizeWidgets", {
       ht = min_ht;
     }
     this.set_widget_height(el, ht);
-
-    this.options.model
-    .attr(this.options.heights_token)
-    .attr(this.options.page_token)
-    .attr($(el).attr("id"), ht);
+    this.options.model.setWidgetHeight(this.options.page_token, $el.attr("id"), ht);
   }
 
   // lower-level function than ensure_minimum
@@ -523,7 +510,8 @@ can.Control("CMS.Controllers.ResizeWidgets", {
 
     $el.find("a:data(text)").each(function(i, tablink) {
       var $tab = $(tablink);
-      $tab.append($tab.data("text")).tooltip("disable").removeData("text");
+      $tab.find('.collapse_tab_text').text($tab.data("text"))
+			$tab.tooltip("disable").removeData("text");
     });
 
     var fullwidth = can.reduce($el.children(), function(total, t) {
@@ -536,13 +524,13 @@ can.Control("CMS.Controllers.ResizeWidgets", {
         var $tab = $(tablink)
         , oldtmpl = $tab.attr("data-template");
         $tab
-        .data("text", $tab.text())
-        .attr("data-original-title", $tab.text())
+        .data("text", $tab.find('.collapse_tab_text').text())
+        .attr("data-original-title", $tab.find('.collapse_tab_text').text())
         .removeAttr("data-template")
         .tooltip({delay : {show : 500, hide : 0}})
         .tooltip("enable")
-        .html($tab.children())
-        .attr("data-template", oldtmpl);
+        .attr("data-template", oldtmpl)
+				.find('.collapse_tab_text').text('');
       });
     }
   }
@@ -559,17 +547,16 @@ can.Control("CMS.Controllers.ResizeWidgets", {
     //animation hasn't completed yet, so collapse state is inverse of whether it's actually collapsed right now.
     var $section = el.closest(this.options.resizable_selector);
     var collapse = $section.find(".content").is(":visible");
-    CMS.Models.DisplayPrefs.findAll().done(function(d) { 
+    console.log("collapse is ", collapse)
       collapse && $section.css("height", "").find(".content").css("height", "");
       if(collapse && $section.is(".ui-resizable")) {
         $section.resizable("destroy");
       } else if(!collapse) {
         setTimeout(function() { 
-          that.ensure_minimum($section, d[0].getWidgetHeight(that.options.page_token, $section.attr("id")));
+          that.ensure_minimum($section, that.options.model.getWidgetHeight(that.options.page_token, $section.attr("id")));
         }, 1);
       }
-      d[0].setCollapsed(that.options.page_token, $section.attr("id"), collapse);
-    });
+      that.options.model.setCollapsed(that.options.page_token, $section.attr("id"), collapse);
   }
 
 });

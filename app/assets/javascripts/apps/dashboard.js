@@ -15,6 +15,7 @@ var widget_descriptors = {
     , object_category : "governance"
     , object_route : "programs"
     , object_display : "Programs"
+    , tooltip_view : "/assets/programs/object_tooltip.mustache"
   }
   , "directive" : {
     model : CMS.Models.Directive
@@ -29,6 +30,7 @@ var widget_descriptors = {
     , object_category : "governance"
     , object_route : "directives"
     , object_display : "Regulations"
+    , widget_view : "/assets/directives/object_widget.mustache"
   }
   , "policy" : {
     model : CMS.Models.Policy
@@ -36,6 +38,7 @@ var widget_descriptors = {
     , object_category : "governance"
     , object_route : "directives"
     , object_display : "Policies"
+    , widget_view : "/assets/directives/object_widget.mustache"
   }
   , "contract" : {
     model : CMS.Models.Contract
@@ -43,6 +46,7 @@ var widget_descriptors = {
     , object_category : "governance"
     , object_route : "directives"
     , object_display : "Contracts"
+    , widget_view : "/assets/directives/object_widget.mustache"
   }
   , "org_group" : {
     model : CMS.Models.OrgGroup
@@ -89,21 +93,23 @@ var widget_descriptors = {
   , "process" : {
     model : CMS.Models.Process
     , object_type : "process"
-    , object_category : "compliance"
+    , object_category : "business"
     , object_route : "systems"
     , object_display : "Processes"
+    , widget_view : "/assets/systems/object_widget.mustache"
   }
   , "system" : {
     model : CMS.Models.StrictSystem
     , object_type : "system"
-    , object_category : "compliance"
+    , object_category : "business"
     , object_route : "systems"
     , object_display : "Systems"
+    , widget_view : "/assets/systems/object_widget.mustache"
   }
   , "control" : {
     model : CMS.Models.Control
     , object_type : "control"
-    , object_category : "compliance"
+    , object_category : "governance"
     , object_route : "controls"
     , object_display : "Controls"
   }
@@ -128,42 +134,54 @@ var widget_descriptors = {
     , object_route : "sections"
     , object_category : "governance"
   }
+  , "system_process" : {
+    model : CMS.Models.System
+    , object_type : "system_process"
+    , object_category : "business"
+    , object_route : "systems"
+    , object_display : "Systems/Processes"
+    , widget_view : "/assets/systems/object_widget.mustache"
+  }
+  , "sectionslug" : {
+    model : CMS.Models.SectionSlug
+    , object_type : "section"
+    , object_route : "sections"
+    , object_category : "governance"
+  }
 };
 
 var programs_dash_menu = {categories : [
   {
-    title : "Governance"
+    title : "Governance / Compliance"
     , objects: [
-      widget_descriptors.program
-      , widget_descriptors.regulation
+      widget_descriptors.regulation
       , widget_descriptors.policy
       , widget_descriptors.contract
+      , widget_descriptors.control
     ]
   }, {
-    title : "Business"
+    title : "Asset / Business"
     , objects: [
-      widget_descriptors.org_group
+      widget_descriptors.system
+      , widget_descriptors.process
+      , widget_descriptors.org_group
       , widget_descriptors.project
       , widget_descriptors.facility
       , widget_descriptors.product
       , widget_descriptors.data_asset
       , widget_descriptors.market
     ]
-  }, {
-    title : "Compliance"
-    , objects: [
-      widget_descriptors.process
-      , widget_descriptors.system
-      , widget_descriptors.control
-    ]
-  }, {
+  }
+]};
+if(window.currentUser["can_manage_risk?"]) {
+  programs_dash_menu.categories.push({
     title : "Risk"
     , objects: [
       widget_descriptors.risky_attribute
       , widget_descriptors.risk
     ]
-  }
-]};
+  });
+}
 
 $(function() {
 

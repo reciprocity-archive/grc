@@ -165,11 +165,11 @@ can.Control("CMS.Controllers.Mapping", {
       // This isn't the best way to go about it, but CanJS/Mustache is currently ornery about accepting new observable list elements
       //  added with "push" --BM 12/11/2012
       var rctl = this.options.reg_list_controller;
-      item = new namespace.CMS.Models.RegControl(data);
+      item = namespace.CMS.Models.RegControl.model(data);
       rctl.options.observer.list.splice(this.slug_sort_position(item, rctl.options.observer.list), 0, item);
     } else {
       var cctl = this.options.company_list_controller;
-      item = new namespace.CMS.Models.Control(data);
+      item = namespace.CMS.Models.Control.model(data);
       cctl.options.observer.list.splice(this.slug_sort_position(item, cctl.options.observer.list), 0, item);
     }
     var $item = $("[content_id=" + item.content_id + "]");
@@ -279,7 +279,7 @@ can.Control("CMS.Controllers.MappingWidgets", {}, {
   //---------------------------------------------------------------
 CMS.Controllers.Mapping("CMS.Controllers.ControlMappingPopup", {
   defaults : {
-    section_model : namespace.CMS.Models.Section
+    section_model : namespace.CMS.Models.SectionSlug
     , parent_model : namespace.CMS.Models.Program
     , parent_id : null
     , observer : undefined
@@ -302,7 +302,6 @@ CMS.Controllers.Mapping("CMS.Controllers.ControlMappingPopup", {
       that.options.company_list_controller = that.element
       .html(frag).trigger("shown")
       .find(".controls-list")
-      .append($(new Spinner().spin().el).css({"position" : "relative", "left" : 50, "top" : 50, "height": 150, "width": 150}))
       .cms_controllers_controls({
         list : "/assets/controls/list_selector.mustache"
         , show : "/assets/controls/show_selector.mustache"
@@ -350,30 +349,38 @@ CMS.Controllers.Mapping("CMS.Controllers.ControlMappingPopup", {
   }
 
   , "input.map-control change" : function(el, ev) {
-    var control = el.closest("[data-model]").data("model");
-    if(~can.inArray(control, this.options.section.linked_controls) ^ el.prop("checked")) {
-      this[el.prop("checked") ? "map" : "unmap"](this.options.section, null, control);
+    var that = this
+    , control = el.closest("[data-model]").data("model")
+    , is_mapped = !!~can.inArray(control, this.options.section.linked_controls);
+
+    if(is_mapped ^ el.prop("checked")) {
+      this[is_mapped ? "unmap" : "map"](this.options.section, null, control)
+      .done(function() {
+        setTimeout(function() {
+          that.style_item(that.element.find("[content_id=" + control.content_id + "]").parent());
+        }, 10)
+      });
     }
   }
 
-  , "{section} updated" : function(obj, ev) {
-    // if(!/(^|\.)linked_controls(\.|$)/.test(attr))
-    //   return;
-    var $count = $("#content_" + obj.slug).find("> .item-main .controls-count")
-      , html;
-    if (obj.linked_controls.length > 0) {
-      html = "<i class='grcicon-control-color'></i> " + obj.linked_controls.length;
-    } else if (obj.na) {
-      html = "<i class='grcicon-control-color'></i> <small class='warning'>N/A</small>";
-    } else {
-      html = "<i class='grcicon-control-danger'></i> <strong class='error'>0</strong>";
-    }
-    $count.html(html);
-    var data = obj.linked_controls.length ? obj.linked_controls.serialize() : {na : obj.na};
-    var render_str = can.view.render("/assets/controls/list_popover.mustache", data);
-    $count.attr("data-content", render_str).data("content", render_str)
-    this.update();
-  }
+  // , "{section} updated" : function(obj, ev) {
+  //   // if(!/(^|\.)linked_controls(\.|$)/.test(attr))
+  //   //   return;
+  //   var $count = $("#content_" + obj.slug).find("> .item-main .controls-count")
+  //     , html;
+  //   if (obj.linked_controls.length > 0) {
+  //     html = "<i class='grcicon-control-color'></i> " + obj.linked_controls.length;
+  //   } else if (obj.na) {
+  //     html = "<i class='grcicon-control-color'></i> <small class='warning'>N/A</small>";
+  //   } else {
+  //     html = "<i class='grcicon-control-danger'></i> <strong class='error'>0</strong>";
+  //   }
+  //   $count.html(html);
+  //   var data = obj.linked_controls.length ? obj.linked_controls.serialize() : {na : obj.na};
+  //   var render_str = can.view.render("/assets/controls/list_popover.mustache", data);
+  //   $count.attr("data-content", render_str).data("content", render_str)
+  //   this.update();
+  // }
 
   , ".edit-control modal:success" : function(el, ev, data) {
     el.closest("[data-model]").data("model").attr(data).updated();
@@ -412,10 +419,12 @@ CMS.Controllers.Mapping("CMS.Controllers.ControlMappingPopup", {
   }
 
   , "a[href^='/controls/new'] modal:success" : function(el, ev, data) {
-    var that = this;
+    var that = this
+    , model;
     this._super(el, ev, data);
-    this.redo_last_search(data.id);
-    this.map(this.options.section, null, data).done(function() {
+    model = CMS.Models.Control.model(data);
+    this.redo_last_search(model.id);
+    this.map(this.options.section, null, model).done(function() {
       that.update();
     });
   }

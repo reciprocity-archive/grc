@@ -1,24 +1,24 @@
 # Handle markets
 class DataAssetsController < BusinessObjectsController
 
-  access_control :acl do
-    # FIXME: Implement real authorization
-
-    allow :superuser
-
-    actions :new, :create do
-      allow :create, :create_data_asset
-    end
-
-    actions :edit, :update do
-      allow :update, :update_data_asset, :of => :data_asset
-    end
-
-    actions :show, :tooltip do
-      allow :read, :read_data_asset, :of => :data_asset
-    end
-
-  end
+#  access_control :acl do
+#    # FIXME: Implement real authorization
+#
+#    allow :superuser
+#
+#    actions :new, :create do
+#      allow :create, :create_data_asset
+#    end
+#
+#    actions :edit, :update do
+#      allow :update, :update_data_asset, :of => :data_asset
+#    end
+#
+#    actions :show, :tooltip do
+#      allow :read, :read_data_asset, :of => :data_asset
+#    end
+#
+#  end
 
   layout 'dashboard'
 

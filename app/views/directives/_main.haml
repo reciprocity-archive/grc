@@ -17,18 +17,18 @@
           -#%input.ui-corner-all.widgetsearch.clear-value(type='text' placeholder='Search')
         .span6
           .pull-right
-            %a.btn.btn-add{ :href => new_flow_section_path(:'section[directive_id]' => directive.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-dirty' => '#regulations, #combo', :'data-route' => "tab=regulations", :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide', :rel => 'tooltip', :title => "Create New #{directive.section_meta_kind.to_s.titleize}" }
+            %a.btn.btn-add{ :href => new_flow_section_path(:'section[directive_id]' => directive.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-dirty' => '#regulations, #combo', :'data-route' => "regulations", :'data-modal-class' => 'modal-wide', :rel => 'tooltip', :title => "Create New #{directive.section_meta_kind.to_s.titleize}" }
               %i.grcicon-add
               #{directive.section_meta_kind.to_s.titleize}
-            %a.btn.btn-add{ :href => new_flow_control_path(:'control[directive_id]' => directive.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-dirty' => '#category_controls, #combo', :'data-route' => "tab=category_controls", :'data-form-target' => 'refresh', :'data-modal-class' => 'modal-wide', :rel => 'tooltip', :title => 'Create New Control' }
+            %a.btn.btn-add{ :href => new_flow_control_path(:'control[directive_id]' => directive.id), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-dirty' => '#category_controls, #combo', :'data-route' => "category_controls", :'data-modal-class' => 'modal-wide', :rel => 'tooltip', :title => 'Create New Control' }
               %i.grcicon-add
               Control
 
 .tabbable
   %ul.nav.nav-tabs
     -unless directive.company_controls?
-      %li.text-governance.active=link_to "<i class='grcicon-#{directive.section_meta_kind.to_s}-color'></i>#{directive.section_meta_kind.to_s.titleize.pluralize}".html_safe, '#sections', :data => { :toggle => 'tab', :'tab-href' => sections_flow_directive_path(directive) }
-    %li.text-compliance=link_to '<i class="grcicon-control-color"></i>Controls'.html_safe, '#controls', :data => { :toggle => 'tab', :'tab-href' => flow_controls_path(:directive_id => directive.id, :category_tree=> true) }
+      %li.text-governance.active=link_to "<i class='grcicon-#{directive.section_meta_kind.to_s}-color'></i>#{directive.section_meta_kind.to_s.titleize.pluralize}".html_safe, '#sections', :data => { :toggle => 'tab' }
+    %li.text-governance=link_to '<i class="grcicon-control-color"></i>Controls'.html_safe, '#controls', :data => { :toggle => 'tab' }
     -#%li=link_to '<i class="grcicon-reg-map"></i>Combo'.html_safe, '#combo', :data => { :toggle => 'tab', :'tab-href' => flow_sections_path(:program_id => instance.id, :combo => true) }
 
   .action-items
@@ -39,4 +39,7 @@
 
   .tab-content
     #sections.tab-pane
+      %ul.tree-structure
     #controls.tab-pane
+      %ul.tree-structure
+      

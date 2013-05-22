@@ -307,6 +307,14 @@ module DefaultRelationshipTypes
       :forward_description => "This program applies to the following org groups.",
       :reverse_description => "This org group is within scope of the following programs."
     },
+    :program_applies_to_process => {
+      :source_type => "Program",
+      :target_type => "Process",
+      :forward_phrase => "applies to",
+      :reverse_phrase => "is within scope of",
+      :forward_description => "This program applies to the following processes.",
+      :reverse_description => "This process is within scope of the following programs."
+    },
     :program_applies_to_product => {
       :source_type => "Program",
       :target_type => "Product",
@@ -322,6 +330,14 @@ module DefaultRelationshipTypes
       :reverse_phrase => "is within scope of",
       :forward_description => "This program applies to the following projects.",
       :reverse_description => "This project is within scope of the following programs."
+    },
+    :program_applies_to_system => {
+      :source_type => "Program",
+      :target_type => "System",
+      :forward_phrase => "applies to",
+      :reverse_phrase => "is within scope of",
+      :forward_description => "This program applies to the following systems.",
+      :reverse_description => "This system is within scope of the following programs."
     },
     :project_has_process => {
       :source_type => "Project",

@@ -5,9 +5,11 @@
 # Admin dashboard
 class AdminDashController < ApplicationController
 
-  access_control :acl do
-    allow :superuser
-  end
+#  access_control :acl do
+#    allow :superuser
+#  end
+  
+  before_filter :check_admin_authorization
 
   layout 'dashboard'
 
@@ -74,6 +76,36 @@ class AdminDashController < ApplicationController
     res = Relationship.where('relationship_type_id NOT IN (?)', types).map do |r|
       [r.id, r.relationship_type_id, r.source_type, r.source_id, r.destination_type, r.destination_id]
     end
+
+    render :json => res
+  end
+
+  def show_strict_bad_relationships
+    rel_types = DefaultRelationshipTypes.types
+
+    res = Relationship.includes(:source, :destination).all.map do |rel|
+      rel_type = rel_types[rel.relationship_type_id]
+      errors = []
+      if !rel_type
+        errors.append("relationship_type_id invalid")
+      else
+        if rel_type["source_type"] != rel.source_type
+          errors.append("source_type mismatch: expected #{rel_type["source_type"]}, got: #{rel.source_type}")
+        end
+        if rel_type["target_type"] != rel.destination_type
+          errors.append("destination_type mismatch: expected #{rel_type["target_type"]}, got: #{rel.destination_type}")
+        end
+      end
+      if rel.source.nil?
+        errors.append("source doesn't exist")
+      end
+      if rel.destination.nil?
+        errors.append("destination doesn't exist")
+      end
+      if errors.size > 0
+        { :errors => errors, :relationship => rel.as_json }
+      end
+    end.compact
 
     render :json => res
   end

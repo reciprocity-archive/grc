@@ -1,20 +1,20 @@
 class ObjectPeopleController < BaseMappingsController
 
-  access_control :acl do
-    allow :superuser
-
-    actions :index do
-      allow :read, :read_object_person
-    end
-
-    actions :create do
-      allow :create, :create_object_person
-    end
-
-    actions :list_edit, :create do
-      allow :update, :update_object_person
-    end
-  end
+#  access_control :acl do
+#    allow :superuser
+#
+#    actions :index do
+#      allow :read, :read_object_person
+#    end
+#
+#    actions :create do
+#      allow :create, :create_object_person
+#    end
+#
+#    actions :list_edit, :create do
+#      allow :update, :update_object_person
+#    end
+#  end
 
   def index
     @object_people = ObjectPerson

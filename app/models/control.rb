@@ -9,6 +9,7 @@ class Control < ActiveRecord::Base
   include AuthorizedModel
   include RelatedModel
   include SanitizableAttributes
+  include DatedModel
 
   CATEGORY_TYPE_ID = 100
   CATEGORY_ASSERTION_TYPE_ID = 102
@@ -191,6 +192,11 @@ class Control < ActiveRecord::Base
   # Quick check for sections mapped to control -- allows us to determine whether control is mapped to anything
   def mapped_section_ids
     control_sections.map {|cs| cs.section_id }
+  end
+
+  # Quick check for sections mapped to control -- allows us to determine whether control is mapped to anything
+  def category_ids
+    categorizations.map {|cs| cs.category_id }
   end
 
   # Construct the category controls tree

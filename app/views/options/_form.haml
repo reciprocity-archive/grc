@@ -8,7 +8,7 @@
   -content_for :modal_delete_path, delete_flow_option_path(f.object)
 
 .row-fluid
-  =wrapped_select f, :span5, :role, Option::ROLES.map { |o| [o.humanize.titleize, o] }, :selected => f.object.role, :include_blank => true, :label_name => "Name of field"
+  =wrapped_select f, :span5, :role, Option::ROLES.map { |o| [Option.human_name(o), o] }, :selected => f.object.role, :include_blank => true, :label_name => "Name of field"
   .span5
     .span12{ :class => error_class(f, :title) }
       =f.label :title, 'Text of option'

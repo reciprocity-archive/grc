@@ -21,31 +21,31 @@ class DirectivesController < BaseObjectsController
   cache_sweeper :section_sweeper, :only => [:destroy, :import]
   cache_sweeper :control_sweeper, :only => [:destroy, :import_controls]
 
-  access_control :acl do
-    allow :superuser
-
-    allow :create, :create_directive, :to => [:create,
-                                   :new]
-    allow :read, :read_directive, :of => :directive, :to => [:show,
-                                                  :tooltip,
-                                                  :sections,
-                                                  :controls,
-                                                  :section_controls,
-                                                  :control_sections,
-                                                  :category_controls]
-
-    allow :update, :update_directive, :of => :directive, :to => [:edit,
-                                                    :update,
-                                                    :import_controls,
-                                                    :export_controls,
-                                                    :import,
-                                                    :export]
-  end
+#  access_control :acl do
+#    allow :superuser
+#
+#    allow :create, :create_directive, :to => [:create,
+#                                   :new]
+#    allow :read, :read_directive, :of => :directive, :to => [:show,
+#                                                  :tooltip,
+#                                                  :sections,
+#                                                  :controls,
+#                                                  :section_controls,
+#                                                  :control_sections,
+#                                                  :category_controls]
+#
+#    allow :update, :update_directive, :of => :directive, :to => [:edit,
+#                                                    :update,
+#                                                    :import_controls,
+#                                                    :export_controls,
+#                                                    :import,
+#                                                    :export]
+#  end
 
   layout 'dashboard'
 
   def index
-    @directives = Directive
+    @directives = Directive.includes(:sections)
     if params[:relevant_to].present?
       @directives = @directives.relevant_to(Product.find(params[:relevant_to]))
     end
@@ -66,7 +66,6 @@ class DirectivesController < BaseObjectsController
     if params[:program_id].present?
       @directives = @directives.joins(:program_directives).where(:program_directives => { :program_id => params[:program_id] })
     end
-    @directives = allowed_objs(@directives.all, :read)
     @directives = @directives.reject(&:is_stealth_directive?)
 
     respond_to do |format|
@@ -79,7 +78,20 @@ class DirectivesController < BaseObjectsController
         end
       end
       format.json do
-        render :json => @directives
+        render :json => @directives, :methods => [:description_inline, :sections]
+      end
+    end
+  end
+  
+  def show
+    show_set_page_types
+
+    respond_to do |format|
+      format.html do
+        render :locals => show_context
+      end
+      format.json do
+        render :json => show_object_as_json({:include => :sections})
       end
     end
   end
@@ -91,7 +103,7 @@ class DirectivesController < BaseObjectsController
       end
       format.csv do
         filename = "#{@directive.slug}-controls.csv"
-        handle_converter_csv_export(filename, @directive.controls.all, ControlsConverter, :directive => @directive)
+        handle_converter_csv_export(filename, @directive.total_controls, ControlsConverter, :directive => @directive)
       end
     end
   end
@@ -135,7 +147,7 @@ class DirectivesController < BaseObjectsController
         render :layout => nil, :locals => { :sections => @sections }
       end
       format.json do
-        render :json => @sections, :include => :linked_controls
+        render :json => @sections, :methods => [:linked_controls, :description_inline]
       end
     end
   end

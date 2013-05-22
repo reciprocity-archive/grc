@@ -102,4 +102,8 @@ class Relationship < ActiveRecord::Base
 
     return objects
   end
+  
+  def other_id(object_id)
+    source_id == object_id ? destination_id : source_id
+  end
 end

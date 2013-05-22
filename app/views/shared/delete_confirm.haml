@@ -12,7 +12,7 @@
       This will delete
       =to_delete.blank? ? "nothing else" : to_delete
       and unlink from
-      -to_unlink = (relationships.reject {|name, count| count == 0}.map { |name, count| "#{count} #{name.pluralize(count)}" }).join(", ")
+      -to_unlink = (relationships.reject {|name, count| count == 0}.map { |name, count| "#{count} #{(name == 'Document' ? 'Reference' : name).pluralize(count)}" }).join(", ")
       =to_unlink.blank? ? "no other business objects." : "#{to_unlink}."
 
 

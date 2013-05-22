@@ -1,20 +1,20 @@
 class ObjectDocumentsController < BaseMappingsController
 
-  access_control :acl do
-    allow :superuser
-
-    actions :index do
-      allow :read, :read_object_document
-    end
-
-    actions :create do
-      allow :create, :create_object_document
-    end
-
-    actions :list_edit, :create do
-      allow :update, :update_object_document
-    end
-  end
+#  access_control :acl do
+#    allow :superuser
+#
+#    actions :index do
+#      allow :read, :read_object_document
+#    end
+#
+#    actions :create do
+#      allow :create, :create_object_document
+#    end
+#
+#    actions :list_edit, :create do
+#      allow :update, :update_object_document
+#    end
+#  end
 
   def index
     @object_documents = ObjectDocument

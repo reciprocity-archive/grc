@@ -10,12 +10,12 @@
         %span
           =instance.title
 
-  %h1.governance
+  %h1.programs
     -if instance.company_controls?
-      .grcobject.compliance{:rel => "tooltip", :'data-placement'=>"bottom", :title => "Program"}    
+      .grcobject.governance{:rel => "tooltip", :'data-placement'=>"bottom", :title => "Program"}    
         %i.grcicon-control
     -else
-      .grcobject.governance{:rel => "tooltip", :'data-placement'=>"bottom", :title => "Program"}    
+      .grcobject.programs{:rel => "tooltip", :'data-placement'=>"bottom", :title => "Program"}    
         %i.grcicon-program
     %span
       %strong Program:
@@ -50,7 +50,7 @@
     #middle-column.span8.widget-area
       =render :partial => 'main',
               :layout => 'layouts/widget_box',
-              :locals => { :program => instance, :widget_class => 'widget-tabs widget-tabs-horizontal governance' }
+              :locals => { :program => instance, :widget_class => 'widget-tabs widget-tabs-horizontal programs' }
       -unless instance.company_controls?
         =render :partial => 'shared/related',
                 :layout => 'layouts/widget_box',
@@ -58,18 +58,18 @@
       -if instance.company_controls?
         =render :partial => 'linked_programs',
                 :layout => 'layouts/widget_box',
-                :locals => { :instance => instance, :widget_class => 'widget-tabs widget-tabs-horizontal governance' }
+                :locals => { :instance => instance, :widget_class => 'widget-tabs widget-tabs-horizontal programs' }
       -else
         =render :partial => 'shared/add_widget_section'
 
     #right-column.span4.widget-area
       =render :partial => 'info',
               :layout => 'layouts/widget_box',
-              :locals => { :program => instance, :widget_class => 'governance'}
+              :locals => { :program => instance, :widget_class => 'programs'}
       -unless instance.company_controls?
         =render :partial => 'audit_cycles',
                 :layout => 'layouts/widget_box',
-                :locals => { :program => instance, :widget_class => 'governance' }
+                :locals => { :program => instance, :widget_class => 'programs' }
       =render :partial => 'more_info',
               :layout => 'layouts/widget_box',
               :locals => { :program => instance, :widget_class => 'related business'}

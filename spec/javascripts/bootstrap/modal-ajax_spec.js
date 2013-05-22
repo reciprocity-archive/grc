@@ -6,9 +6,9 @@ describe("AJAXy Modals", function() {
   beforeEach(function() {
       m1shown = false;
       m2shown = false;
-      $modal1 = affix("#m1.modal.fade").bind("shown", function() { m1shown = true; });
+      $modal1 = $("<div id='m1' class='modal fade'>").appendTo(document.body).bind("shown", function() { m1shown = true; });
       $modal1.affix(".modal-header, .modal-body, .modal-buttons");
-      $modal2 = affix("#m2.modal.fade").bind("shown", function() { m2shown = true; });
+      $modal2 = $("<div id='m2' class='modal fade'>").appendTo(document.body).bind("shown", function() { m2shown = true; });
       $modal2.affix(".modal-header, .modal-body, .modal-buttons");
       $modal1.add($modal2).find(".modal-header").text("foo");
       $modal1.add($modal2).find(".modal-body").text("bar");
@@ -23,7 +23,7 @@ describe("AJAXy Modals", function() {
   });
 
   afterEach(function() {
-    $(".modal-backdrop").remove();
+    $(".modal-backdrop, #m1, #m2").remove();
   });
 
   describe("#show aspect", function() {
@@ -36,9 +36,9 @@ describe("AJAXy Modals", function() {
       runs(function() {
           expect($(".modal-backdrop").length).toBe(2);
           expect($(".modal-backdrop:first").css("z-index")).toBe("1040");
-          expect($(".modal-backdrop:eq(1)").css("z-index")).toBe("1060");
-          expect($modal1.css("z-index")).toBe("1050");
-          expect($modal2.css("z-index")).toBe("1070");
+          expect($(".modal-backdrop:eq(1)").css("z-index")).toBeGreaterThan($modal1.css("z-index"));
+          expect($modal1.css("z-index")).toBeGreaterThan($(".modal-backdrop:first").css("z-index"));
+          expect($modal2.css("z-index")).toBeGreaterThan($(".modal-backdrop:eq(1)").css("z-index"));
       });
     });
     xit("shrinks the height of the first modal to be just over the height of its header", function(){

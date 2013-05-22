@@ -5,7 +5,7 @@
 can.Control("CMS.Controllers.SortableWidgets", {
   defaults : {
     sortable_token : "sorts"
-    , page_token : window.location.pathname.substring(1, (window.location.pathname + "/").indexOf("/", 1))
+    , page_token : null
   }
 
   , init : function(el, opts) {
@@ -20,6 +20,8 @@ can.Control("CMS.Controllers.SortableWidgets", {
 }, {
   
   init : function() {
+    this.options.page_token = window.getPageToken();
+
     var page_sorts = this.options.model.getSorts(this.options.page_token);
 
     var this_sort = page_sorts.attr($(this.element).attr("id"));

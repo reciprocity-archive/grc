@@ -1,8 +1,10 @@
 class RiskRiskyAttributesController < BaseMappingsController
 
-  access_control :acl do
-    allow :superuser
-  end
+#  access_control :acl do
+#    allow :superuser
+#  end
+  
+  before_filter :check_risk_authorization
 
   def index
     @objects = RiskRiskyAttribute
@@ -45,4 +47,5 @@ class RiskRiskyAttributesController < BaseMappingsController
     def default_as_json_options
       { :include => [:risk, :risky_attribute] }
     end
+
 end

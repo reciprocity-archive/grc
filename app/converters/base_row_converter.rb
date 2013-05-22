@@ -287,6 +287,11 @@ class SlugColumnHandler < ColumnHandler
   def import(content)
     if content.present?
       @value = content
+      if @importer.importer.get_slugs.include? @value
+        add_error("Slug Code is duplicated in CSV")
+      else
+        @importer.importer.add_slug_to_slugs @value
+      end
       validate(content)
     else
       add_warning("Code will be autofilled")

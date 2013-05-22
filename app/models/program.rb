@@ -8,6 +8,7 @@ class Program < ActiveRecord::Base
   include AuthorizedModel
   include RelatedModel
   include SanitizableAttributes
+  include DatedModel
 
   KINDS = [
     "Directive",
@@ -105,5 +106,11 @@ class Program < ActiveRecord::Base
       map(&:program_id).
       uniq
     Program.where(:id => program_ids)
+  end
+  
+  def total_controls
+    if !directives.nil?
+      directives.map{|d|d.total_controls unless d.nil?}.flatten
+    end
   end
 end

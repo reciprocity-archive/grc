@@ -1,28 +1,28 @@
 # Handle Requests
 class RequestsController < BaseObjectsController
 
-  access_control :acl do
-    # FIXME: Implement real authorization
-
-    allow :superuser
-
-    actions :index do
-      allow :read, :read_request
-    end
-
-    actions :new, :create do
-      allow :create, :create_request
-    end
-
-    actions :edit, :update do
-      allow :update, :update_request, :of => :request
-    end
-
-    actions :show, :tooltip do
-      allow :read, :read_request, :of => :request
-    end
-
-  end
+#  access_control :acl do
+#    # FIXME: Implement real authorization
+#
+#    allow :superuser
+#
+#    actions :index do
+#      allow :read, :read_request
+#    end
+#
+#    actions :new, :create do
+#      allow :create, :create_request
+#    end
+#
+#    actions :edit, :update do
+#      allow :update, :update_request, :of => :request
+#    end
+#
+#    actions :show, :tooltip do
+#      allow :read, :read_request, :of => :request
+#    end
+#
+#  end
 
   layout 'dashboard'
 

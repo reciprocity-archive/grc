@@ -15,29 +15,29 @@ class ControlsController < BaseObjectsController
 
   cache_sweeper :control_sweeper, :only => [:create, :update, :destroy]
 
-  access_control :acl do
-    allow :superuser
-
-    actions :new, :create do
-      allow :create, :create_control
-    end
-
-    actions :edit, :update do
-      allow :update, :update_control, :of => :control
-    end
-
-    actions :show, :tooltip do
-      allow :read, :read_control, :of => :control
-    end
-
-    actions :index do
-      allow :read, :read_control
-    end
-
-    actions :sections, :implemented_controls, :implementing_controls do
-      allow :read, :read_control, :of => :control
-    end
-  end
+#  access_control :acl do
+#    allow :superuser
+#
+#    actions :new, :create do
+#      allow :create, :create_control
+#    end
+#
+#    actions :edit, :update do
+#      allow :update, :update_control, :of => :control
+#    end
+#
+#    actions :show, :tooltip do
+#      allow :read, :read_control, :of => :control
+#    end
+#
+#    actions :index do
+#      allow :read, :read_control
+#    end
+#
+#    actions :sections, :implemented_controls, :implementing_controls do
+#      allow :read, :read_control, :of => :control
+#    end
+#  end
 
   layout 'dashboard'
 
@@ -64,6 +64,9 @@ class ControlsController < BaseObjectsController
         where(
           Control.arel_table[:directive_id].in(directive_ids).or(
             Section.arel_table[:directive_id].in(directive_ids)))
+    end
+    if params[:control_id].present?
+      @controls = Control.find(params[:control_id]).implemented_controls
     end
     if params[:system_id].present?
       @controls = @controls.
@@ -95,15 +98,17 @@ class ControlsController < BaseObjectsController
       if params[:ids_only].present?
         render :json => @controls, :only => [:id]
       else
-        render :json => @controls, :methods => [:description_inline, :mapped_section_ids]
+        render :json => @controls, :methods => [:description_inline, :mapped_section_ids, :category_ids ]
       end
     end
   end
 
   def sections
-    @sections =
-      @control.sections.all +
-      @control.implemented_controls.includes(:sections).map(&:sections).flatten
+    @sections = @control.sections.all
+    # NOTE: removed non-directly-linked controls until control mapping is in
+    #@sections =
+    #  @control.sections.all +
+    #  @control.implemented_controls.includes(:sections).map(&:sections).flatten
     @sections = allowed_objs(@sections, :read)
     @sections.sort_by(&:slug_split_for_sort)
     render :layout => nil, :locals => { :sections => @sections }
@@ -155,6 +160,14 @@ class ControlsController < BaseObjectsController
   end
 
   private
+
+    def create_object_as_json
+      object.as_json :methods => [:description_inline, :mapped_section_ids, :category_ids ]
+    end
+
+    def update_object_as_json
+      object.as_json :methods => [:description_inline, :mapped_section_ids, :category_ids ]
+    end
 
     def load_control
       @control = Control.find(params[:id])

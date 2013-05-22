@@ -106,6 +106,12 @@
 
         if(data) {
           data = JSON.parse(data);
+          params._removedKeys && can.each(params._removedKeys, function(key) {
+            if(!params[key]) {
+              delete data[key];
+            }
+          });
+          delete params._removedKeys;
           can.extend(data, params);
           var item = this.model(data);
 
@@ -144,6 +150,14 @@
       }
     }
 
-  }, {});
+  }, {
+    removeAttr : function(attr) {
+      this._super(attr);
+      this._removedKeys || (this._data._removedKeys = this._removedKeys = []);
+      this._removedKeys.push(attr);
+      return this;
+    }
+
+  });
 
 })(this.can);

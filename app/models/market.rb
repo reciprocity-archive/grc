@@ -6,6 +6,7 @@ class Market < ActiveRecord::Base
   include RelatedModel
   include SanitizableAttributes
   include BusinessObjectModel
+  include DatedModel
 
   attr_accessible :title, :slug, :description, :url, :version, :start_date, :stop_date
 

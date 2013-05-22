@@ -5,24 +5,24 @@
 # Handle facilities
 class FacilitiesController < BusinessObjectsController
 
-  access_control :acl do
-    # FIXME: Implement real authorization
-
-    allow :superuser
-
-    actions :new, :create do
-      allow :create, :create_facility
-    end
-
-    actions :edit, :update do
-      allow :update, :update_facility, :of => :facility
-    end
-
-    actions :show, :tooltip do
-      allow :read, :read_facility, :of => :facility
-    end
-
-  end
+#  access_control :acl do
+#    # FIXME: Implement real authorization
+#
+#    allow :superuser
+#
+#    actions :new, :create do
+#      allow :create, :create_facility
+#    end
+#
+#    actions :edit, :update do
+#      allow :update, :update_facility, :of => :facility
+#    end
+#
+#    actions :show, :tooltip do
+#      allow :read, :read_facility, :of => :facility
+#    end
+#
+#  end
 
   layout 'dashboard'
 

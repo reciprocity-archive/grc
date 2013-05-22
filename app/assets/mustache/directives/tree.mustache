@@ -1,0 +1,64 @@
+{{#list}}
+<li class="directive" data-object-id="{{id}}" data-object-sub-type="{{lowercase_kind}}" data-object-type="{{constructor.shortName}}" data-object-meta-type="directive" {{data "model"}}>
+    <div class="item-main">
+      {{#draw_children}}
+          <div class="openclose {{#if start_expanded}}active{{/if}}"></div>
+      {{/draw_children}}
+      <div class="item-title">
+        <div class="row-fluid">
+          <div class="span8">
+            <div class="oneline expandable">
+              <i class="grcicon-{{lowercase_kind}}-color"></i>
+              {{#notes}}
+                <i class="grcicon-comment"></i>
+              {{/notes}}
+              <span class="title">
+                {{title}}
+              </span>
+              <span class="code">
+                {{slug}}
+              </span>
+              <span class="description-inline">
+                {{{firstnonempty description_inline ''}}}
+              </span>
+            </div>
+            <div class="description inhover {{^description}}no-description{{/description}}">
+              {{#notes}}
+              <div class="note">
+                {{{notes}}}
+              </div>
+              {{/notes}}
+              <div class="rtf">{{{firstnonempty description '<i>No description</i>'}}}</div>
+            </div>
+          </div>
+          <div class="span1">
+            <a class="view-more" href="javascript://">
+              view
+            </a>
+          </div>
+          <div class="span2">
+            <div class="objects-count">
+              <a class="sections-count">
+                <i class="grcicon-section-color"></i>
+                {{descendant_sections_count}}
+              </a>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
+          </div>
+        </div>
+        <div class="item-actions">
+          <a class="btn btn-mini" data-placement="top" href="/directives/{{id}}" rel="tooltip" title="Go to this object's page">
+            <i class="grcicon-goto"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    {{#draw_children}}
+    <div class="item-content" {{#start_expanded}}style="display: block;"{{/start_expanded}}>
+      {{#child_options}}
+      <ul class="tree-structure" {{data 'options'}} {{ (el) -> el.cms_controllers_tree_view(el.data("options")) }}></ul>
+      {{/child_options}}
+    </div>
+    {{/draw_children}}
+  </li>
+{{/list}}

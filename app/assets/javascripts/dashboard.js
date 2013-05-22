@@ -24,13 +24,21 @@
 
   window.cms_singularize = function(type) {
     type = type.trim();
-    switch(type) {
+    var _type = type.toLowerCase();
+    switch(_type) {
       case "facilities":
-      type = "facility"; break;
+      type = type[0] + "acility"; break;
       case "people":
-      type = "person"; break;
+      type = type[0] + "erson"; break;
+      case "attributes":
+      type = type[0] + "ttribute"; break;
+      case "systems_processes":
+      type = type[0] + "ystem_" + type[8] + "rocess";
+      break;
+      case "policies":
+      type = type[0] + "olicy"; break;
       default:
-      type = type.replace(/s$/, "");
+      type = type.replace(/e?s$/, "");
     }
 
     return type;
@@ -231,12 +239,15 @@ jQuery(function($) {
   });
 
   function with_params(href, params) {
-    if (href.charAt(href.length - 1) === '?')
-      return href + params;
-    else if (href.indexOf('?') > 0)
-      return href + '&' + params;
-    else
-      return href + '?' + params;
+    if(href) {
+      if (href.charAt(href.length - 1) === '?')
+        return href + params;
+      else if (href.indexOf('?') > 0)
+        return href + '&' + params;
+      else
+        return href + '?' + params;
+    }else
+      return undefined;
   }
 
   // Handle search on related_selectors
@@ -328,7 +339,7 @@ jQuery(function($) {
 
 jQuery(function($) {
   // Onload trigger tab with 'active' class or default to first tab
-  $('.tabbable > ul').filter(":not(.quick-search-results .tabbable > ul)").each(function(i, el) {
+  $('.tabbable > ul').each(function(i, el) {
     var $tab = $(this).find('> li.active');
     if (!$tab.length)
       $tab = $(this).find('> li:first-child');
@@ -337,9 +348,11 @@ jQuery(function($) {
       .find('> a')
       .tab('show');
     $($tab.find('> a').attr("href")).one("loaded", function() {
-      setTimeout(function() {
-        $tab.siblings().find("> a").trigger("show"); //load all the others for counts after this one is showing
-      }, 100);
+      if($tab.not(".quick-search-results .tabbable > ul > li").length) { //don't load the quickfind
+        setTimeout(function() {
+          $tab.siblings().find("> a").trigger("show"); //load all the others for counts after this one is showing
+        }, 100);
+      }
     })
   });
   //$('.tabbable > ul > li:first-child > a').tab('show');
@@ -702,14 +715,34 @@ jQuery(function($) {
 });
 
 jQuery(function($) {
+
   $('body').on('click', '.clear-display-settings', function(e) {
     CMS.Models.DisplayPrefs.findAll().done(function(data) {
       var destroys = [];
       can.each(data, function(d) {
         d.unbind("change"); //forget about listening to changes.  we're going to refresh the page
-        destroys.push(d.resetPagePrefs(/^\/([^\/]+)/.exec(window.location.pathname)[1]));
+        destroys.push(d.resetPagePrefs());
       });
       $.when.apply($, destroys).done($.proxy(window.location, 'reload'));
+    });
+  })
+  .on('click', '.set-display-settings-default', function(e) {
+    var page_token = getPageToken();
+    CMS.Models.DisplayPrefs.findAll().done(function(data) {
+      var destroys = [];
+      can.each(data, function(d) {
+        d.unbind("change"); //forget about listening to changes.  we're going to refresh the page
+        destroys.push(d.setPageAsDefault(page_token));
+      });
+      $.when.apply($, destroys).done(function() {
+        $('body').trigger(
+          'ajax:flash', 
+          { "success" : "Saved page layout as default for " + (page_token === "programs_dash" ? "dahsboard" : page_token) }
+        );
+        setTimeout(function() {
+          location.reload();
+        }, 1000);
+      });
     });
   });
 });
@@ -723,5 +756,14 @@ jQuery(function($) {
         window.open(this.href);
       }
     }
+  });
+});
+
+//Handler for changing the new object text in dashboard widgets
+jQuery(function($){
+  $(document.body).on("click", "[id^=quick_find] .nav-tabs li", function(ev) {
+    var plural = $(this).find(".text-business, .text-governance, .text-risk").text();
+    var singular = can.map(window.cms_singularize(plural).split("_"), can.capitalize).join(" ");
+    $(this).closest(".widget").find(".object-type").text(singular).closest("a").attr("href", $(this).find("a").data("new-href"));
   });
 });

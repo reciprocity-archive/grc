@@ -2,6 +2,7 @@ class Request < ActiveRecord::Base
   include AuthoredModel
   include AuthorizedModel
   include SanitizableAttributes
+  include DatedModel
 
   TYPES = {
     1 => "Documentation",
@@ -42,7 +43,8 @@ class Request < ActiveRecord::Base
   validation_scope :warnings do |s|
     s.validate :validates_request_uniqueness
   end
-
+  
+  before_validation :link_control_from_code
   after_save :after_save_detect_orphaned_control_assessment
   after_destroy :after_destroy_detect_orphaned_control_assessment
 
@@ -112,5 +114,23 @@ class Request < ActiveRecord::Base
           where(:request => request)
 
     warnings.add :request, "This request string already exists" if r.any?
+  end
+  
+  def link_control_from_code
+    if self.pbc_control_code.present?
+      control = Control.where(:slug => self.pbc_control_code).first
+      if control 
+        if !self.control_assessment.present? || 
+          self.control_assessment.presence.control_id != control.id
+          #find or create ControlAssesment for given PbcList and Control
+          self.control_assessment = ControlAssessment.where(
+            :pbc_list_id => pbc_list_id,
+            :control_id => control.id).first
+          self.control_assessment ||= ControlAssessment.new(
+            :pbc_list => pbc_list,
+            :control => control)
+        end
+      end
+    end
   end
 end

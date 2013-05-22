@@ -52,4 +52,17 @@ class Option < ActiveRecord::Base
     "threat_type",
     "verify_frequency"
   ]
+  
+  ROLES_OVERRIDE = {
+    "verify_frequency" => "frequency"
+  }
+  
+  def self.human_name(role)
+    return (ROLES_OVERRIDE.has_key?(role) ? ROLES_OVERRIDE[role] : role).humanize.titleize
+  end
+  
+  def self.options_with_none_for(role)
+    options = self.options_for(role)
+    options.unshift(Option.new(:title => "None"))
+  end
 end

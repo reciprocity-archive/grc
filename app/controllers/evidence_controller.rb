@@ -10,9 +10,9 @@ class EvidenceController < ApplicationController
   include EvidenceHelper
   include ApplicationHelper
 
-  access_control :acl do
-    allow :superuser
-  end
+#  access_control :acl do
+#    allow :superuser
+#  end
 
   before_filter :need_cycle
 

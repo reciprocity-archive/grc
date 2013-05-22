@@ -1,7 +1,7 @@
 
 class SectionRowConverter < BaseRowConverter
   @model_class = :Section
-
+  
   def setup_object
     object = setup_object_by_slug(attrs)
     if object.directive.present? && object.directive != @importer.options[:directive]
@@ -82,6 +82,10 @@ class SectionsConverter < BaseConverter
     elsif attrs[:slug].upcase != directive.slug.upcase
       errors.push("#{directive.meta_kind.to_s.titleize} Code must be #{directive.slug}")
     end
+  end
+  
+  def validate_slug
+    slugs = self.results.map(&:slug)
   end
 
   def do_export_metadata

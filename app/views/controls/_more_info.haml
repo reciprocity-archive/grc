@@ -1,6 +1,10 @@
 -content_for :widget_title do
-  Categories, References, People
-
+  Categories
+  %span=control.categories.count
+  , References
+  %span=control.object_documents.count
+  , People
+  %span=control.object_people.count
 -content_for :widget_help, 'control_more_info'
 
 -content_for :widget_id, "control_more_info_widget"

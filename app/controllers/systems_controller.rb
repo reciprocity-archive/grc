@@ -7,20 +7,22 @@ require 'csv'
 # HandleSystems
 class SystemsController < BaseObjectsController
 
-  access_control :acl do
-    allow :superuser
-
-    actions :new, :create, :import do
-      allow :create, :create_system
-    end
-
-    allow :read, :read_system, :of => :system, :to => [:show,
-                                                       :tooltip]
-
-    actions :edit, :update do
-      allow :update, :update_system, :of => :system
-    end
-  end
+#  access_control :acl do
+#    allow :superuser
+#
+#    actions :new, :create, :import do
+#      allow :create, :create_system
+#    end
+#
+#    allow :read, :read_system, :of => :system, :to => [:show,
+#                                                       :tooltip]
+#
+#    actions :edit, :update do
+#      allow :update, :update_system, :of => :system
+#    end
+#  end
+  
+  before_filter :check_risk_authorization, :only => [:import]
 
   layout 'dashboard'
 
@@ -58,7 +60,7 @@ class SystemsController < BaseObjectsController
         end
       end
       format.json do
-        render :json => @systems
+        render :json => @systems, :methods => :description_inline
       end
     end
   end
@@ -115,6 +117,10 @@ class SystemsController < BaseObjectsController
   end
 
   private
+
+    def object_as_json(args={})
+      object.as_json args
+    end
 
     def show_set_page_types
       super

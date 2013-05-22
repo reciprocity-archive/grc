@@ -5,6 +5,7 @@ class RiskyAttribute < ActiveRecord::Base
   include AuthorizedModel
   include RelatedModel
   include SanitizableAttributes
+  include DatedModel
 
   TYPE_STRINGS = %w(OrgGroup Product Facility Market Project DataAsset Process System)
 

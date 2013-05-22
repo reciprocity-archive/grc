@@ -8,6 +8,8 @@ class Person < ActiveRecord::Base
 
   attr_accessible :email, :name, :company, :language
 
+  has_one :account
+
   has_many :object_people, :dependent => :destroy
 
   belongs_to :language, :class_name => 'Option', :conditions => { :role => 'person_language' } 
@@ -61,6 +63,12 @@ class Person < ActiveRecord::Base
       name
     else
       email
+    end
+  end
+  
+  def last_name
+    if !name.nil?
+      name.split(' ').last
     end
   end
 end

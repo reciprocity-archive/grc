@@ -72,14 +72,11 @@ CMS.Models.System("CMS.Models.Response", {
 
     init : function() {
         this._super();
-
-        this.bind("created updated", can.proxy(this.reinit, this));
-
-        this.reinit();
     }
 
     , reinit : function() {
-      this.system != null && this.attr("system", new CMS.Models.System(this.system ? this.system.serialize() : {}));
+      this._super();
+      this.system != null && !(this.system instanceof CMS.Models.System) && this.attr("system", new CMS.Models.System(this.system.serialize ? this.system.serialize() : this.system));
         this.attr(
           "population_sample"
           , new CMS.Models.PopulationSample(
@@ -92,5 +89,12 @@ CMS.Models.System("CMS.Models.Response", {
           mtgs.push(new CMS.Models.Meeting(val.serialize ? val.serialize() : val));
         });
         this.attr("meetings", mtgs);
+    }
+
+    , system_or_process : function( ) {
+      return null;
+    }
+    , system_or_process_capitalized : function() {
+      return null;
     }
 });

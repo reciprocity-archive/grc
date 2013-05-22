@@ -1,0 +1,72 @@
+
+    <div class="row-fluid">
+      <div class="span12">
+        <h4>Description</h4>
+        <div class="rtf">{{{with_line_breaks description}}}</div>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span6">
+        <h4>
+          Audit Status
+        </h4>
+        <p class="audit-status">
+          {{#if completed}}
+          <i class="grcicon-eye-completed"></i>
+          <span class="status completed">Completed</span>
+          {{else}}
+            {{#due_soon}}
+            <i class="grcicon-eye-danger"></i>
+            <span class="status danger">Due Soon</span>
+            {{/due_soon}}
+            {{^due_soon}}
+            <i class="grcicon-eye-inprogress"></i>
+            <span class="status inprogress">In Progress</span>
+            {{/due_soon}}
+          {{/if}}
+          <br>
+          Started
+          on: {{firstnonempty start_at 'Not Set'}}
+          <br>
+          Ends
+          on: {{firstnonempty end_at 'Not Set'}}
+          <br>
+          <strong>
+            Report due on: {{firstnonempty report_due_at 'Not Set'}}
+          </strong>
+        </p>
+        <p class="audit-status">
+          <br>
+          Started
+          on: 02/18/2013
+          <br>
+          Ends
+          on: Not set
+          <br>
+          <strong>
+            Report due on: 04/05/2013
+          </strong>
+        </p>
+      </div>
+      <div class="span6">
+        <h4>
+          Controls (214)
+          <div class="progress">
+            <div class="bar bar-success" rel="tooltip" style="width:26%" title="56 Done">56</div>
+            <div class="bar bar-warning" rel="tooltip" style="width:73%" title="158 Pending">158</div>
+          </div>
+        </h4>
+        <h4>
+          Directives (21)
+        </h4>
+        <i class="grcicon-regulation-color"></i>
+        20
+        &nbsp;
+        <i class="grcicon-contract-color"></i>
+        0
+        &nbsp;
+        <i class="grcicon-policy-color"></i>
+        1
+      </div>
+    </div>
+  

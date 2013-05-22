@@ -4,21 +4,21 @@
 
 class CyclesController < BaseObjectsController
 
-  access_control :acl do
-    allow :superuser
-
-    actions :new, :create do
-      allow :create, :create_cycle
-    end
-
-    actions :show, :tooltip do
-      allow :read, :read_cycle, :of => :cycle
-    end
-
-    actions :edit, :update do
-      allow :update, :update_cycle, :of => :cycle
-    end
-  end
+#  access_control :acl do
+#    allow :superuser
+#
+#    actions :new, :create do
+#      allow :create, :create_cycle
+#    end
+#
+#    actions :show, :tooltip do
+#      allow :read, :read_cycle, :of => :cycle
+#    end
+#
+#    actions :edit, :update do
+#      allow :update, :update_cycle, :of => :cycle
+#    end
+#  end
 
   layout 'dashboard'
 

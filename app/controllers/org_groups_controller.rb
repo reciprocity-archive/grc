@@ -5,28 +5,28 @@
 # Handle Org Groups
 class OrgGroupsController < BusinessObjectsController
 
-  access_control :acl do
-    # FIXME: Implement real authorization
-
-    allow :superuser
-
-    actions :index do
-      allow :read, :read_org_group
-    end
-
-    actions :new, :create do
-      allow :create, :create_org_group
-    end
-
-    actions :edit, :update do
-      allow :update, :update_org_group, :of => :org_group
-    end
-
-    actions :show, :tooltip do
-      allow :read, :read_org_group, :of => :org_group
-    end
-
-  end
+#  access_control :acl do
+#    # FIXME: Implement real authorization
+#
+#    allow :superuser
+#
+#    actions :index do
+#      allow :read, :read_org_group
+#    end
+#
+#    actions :new, :create do
+#      allow :create, :create_org_group
+#    end
+#
+#    actions :edit, :update do
+#      allow :update, :update_org_group, :of => :org_group
+#    end
+#
+#    actions :show, :tooltip do
+#      allow :read, :read_org_group, :of => :org_group
+#    end
+#
+#  end
 
   layout 'dashboard'
 

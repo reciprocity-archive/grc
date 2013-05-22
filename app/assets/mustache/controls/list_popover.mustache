@@ -1,5 +1,5 @@
-{{#unless push}}
-  <div class="rtf">
+{{^list}}
+  <div class="rtf" style="margin:20px">
   {{#if na}}
     <p class="no-data">
       Controls are not applicable to this section
@@ -11,10 +11,10 @@
     </p>
   {{/unless}}
   </div>
-{{/unless}}
-{{#if push}}
+{{/list}}
+{{#if list.length}}
 <ul class='tree-structure simple'>
-  {{#this}}
+  {{#list}}
   <li class='control'>
     <div class='item-main'>
       <div class='item-title'>
@@ -31,6 +31,6 @@
       </div>
     </div>
   </li>
-  {{/this}}
+  {{/list}}
 </ul>
 {{/if}}

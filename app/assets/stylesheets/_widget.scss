@@ -34,6 +34,14 @@
       }
     }
   }
+  &.programs {
+    .header {
+      background: $programs;
+      .widget-action {
+        background: darken($programs, 7%);
+      }
+    }
+  }
   &.risk {
     .header {
       background: $risk;

@@ -1,9 +1,14 @@
 (function(namespace, $, can) {
 
 //chrome likes to cache AJAX requests for Mustaches.
+var mustache_urls = {};
 $.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
   if ( /\.mustache$/.test(options.url) ) {
-    options.url += "?r=" + Math.random();
+    if(mustache_urls[options.url]) {
+      options.url = mustache_urls[options.url];
+    } else {
+      mustache_urls[options.url] = options.url += "?r=" + Math.random();
+    }
   }
 });
 
@@ -183,7 +188,9 @@ $.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
     , options = arguments[arguments.length - 1]
     , attribs = []
     , that = this.___st4ck ? this[this.length-1] : this
-    , hash = quickHash(args.join("-"), quickHash(that._cid)).toString(36);
+    , data = can.extend({}, that)
+    , hash = quickHash(args.join("-"), quickHash(that._cid)).toString(36)
+    , attr_count = 0;
 
     var hook = can.view.hook(function(el, parent, view_id) {
       var content = options.fn(that);
@@ -205,7 +212,7 @@ $.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
       function sub_all(el, ev, newVal, oldVal) {
         var $el = $(el);
         can.each(attribs, function(attrib) {
-          $el.attr(attrib.name, can.sub(attrib.value, that));
+          $el.attr(attrib.name, $("<div>").html(can.view.render(attrib.value, data.serialize ? data.serialize() : data)).html());
         })
       }
 
@@ -213,13 +220,19 @@ $.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
         var attr_name = args[i];
         var attr_tmpl = args[i + 1];
         //set up bindings where appropriate
-        attr_tmpl = attr_tmpl.replace(/\{\{[^\{]*\}\}/g, function(match, offset, string) {
+        attr_tmpl = attr_tmpl.replace(/\{[^\}]*\}/g, function(match, offset, string) {
+          var token = match.substring(1, match.length - 1);
+          if(typeof data[token] === "function") {
+            data[token].bind && data[token].bind("change." + hash, $.proxy(sub_all, that, el));
+            data[token] = data[token].call(that);
+          }
 
-          that.bind(attr_name + "." + hash, $.proxy(sub_all, that, el));
+          that.bind && that.bind(token + "." + hash, $.proxy(sub_all, that, el));
 
-          return match.substring(1, match.length - 1);
+          return "{" + match + "}";
         });
-        attribs.push({name : attr_name, value : attr_tmpl});
+        can.view.mustache("withattr_" + hash + "_" + (++attr_count), attr_tmpl);
+        attribs.push({name : attr_name, value : "withattr_" + hash + "_" + attr_count });
       }
 
       sub_all(el);
@@ -345,7 +358,7 @@ can.each(["firstexist", "firstnonempty"], function(fname) {
     for(var i = 0; i < args.length; i++) {
       var v = args[i];
       if(typeof v === "function") v = v.call(this);
-      if(v != null && (fname === "firstexist" || !!(v.toString().trim().replace(/&nbsp;|\s|<br *\/?>/g, "")))) return v;
+      if(v != null && (fname === "firstexist" || !!(v.toString().trim().replace(/&nbsp;|\s|<br *\/?>/g, "")))) return v.toString();
     }
     return "";
   });
@@ -370,14 +383,14 @@ Mustache.registerHelper("pack", function() {
         subobj = can.getObject(tokens.join("."), pack);
         subobj && (subobj instanceof can.Observe.List 
           ? subobj.splice.apply(subobj, how === "remove" ? [+idx, 1] : [+idx, 0, newVal])
-          : subobj.attr(newVal));
+          : pack.attr(attr, newVal));
         break;
         default:          
         pack.attr(attr, newVal);
         }
       });
     } 
-    pack.attr(obj.serialize ? obj.serialize() : obj);
+    pack.attr(typeof obj === "object" && obj.serialize ? obj.serialize() : obj);
   });
   if(options.hash) {
     can.each(Object.keys(options.hash), function(key) {
@@ -413,6 +426,10 @@ Mustache.registerHelper("render", function(template, context, options) {
     context = this;
   }
 
+  if(typeof context === "function") {
+    context = context();
+  }
+
   if(typeof template === "function") {
     template = template();
   }
@@ -442,6 +459,26 @@ Mustache.registerHelper("related_count", function() {
     objects += item.related_objects.length;
   });
   return objects.toString();
+});
+
+Mustache.registerHelper("show_expander", function() {
+  var options = arguments[arguments.length - 1]
+  , args = can.makeArray(arguments).slice(0, arguments.length - 1)
+  , disjunctions = [[]];
+  for(var i = 0; i < args.length; i++) {
+    if(args[i] === "||") {
+      disjunctions.push([]);
+    } else {
+      disjunctions[disjunctions.length - 1].push(args[i]);
+    }
+  }
+
+  return can.reduce(disjunctions, function(a, b) {
+    return a || can.reduce(b, function(c, d) {
+      typeof d === "function" && (d = d());
+      return c && (d && (d.length == null || d.length > 0));
+    }, true);
+  }, false) ? options.fn(this) : options.inverse(this); 
 });
 
 })(this, jQuery, can);

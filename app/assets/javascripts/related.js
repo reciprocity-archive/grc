@@ -78,7 +78,6 @@ can.Control("CMS.Controllers.Related", {
       data: undefined,
     }).then(function(data) {
       // Empty and add data to the result node
-      x = $dest;
       $dest.empty()
       $dest.append(can.view(template, data))
       $tab.data('last-loaded', Date.now())

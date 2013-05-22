@@ -32,13 +32,15 @@
                         =instance.slug
                 .span1
                   .objects-count.pull-right
-                    -instance.cycles.each do |cycle|
-                      -if cycle.complete
-                        %i.grcicon-eye-completed
-                      -elsif !cycle.report_due_at.nil? && cycle.report_due_at - 3 <= Date.today
-                        %i.grcicon-eye-danger
-                      -elsif !cycle.start_at.nil? && cycle.start_at - 30 < Date.today
+                    -last_cycle = instance.cycles.select{|c| !c.start_at.nil? && c.start_at - 30 < Date.today }.sort_by{|c| c.start_at}.last
+                    -if last_cycle.present?
+                      -if !last_cycle.complete && (last_cycle.report_due_at.nil? || last_cycle.report_due_at - 3 > Date.today)
                         %i.grcicon-eye-inprogress
+                      -elsif !last_cycle.report_due_at.nil? && !last_cycle.complete && last_cycle.report_due_at - 3 <= Date.today
+                        %i.grcicon-eye-danger
+                      -elsif last_cycle.complete
+                        %i.grcicon-eye-completed
+                    
               -else
                 .span12
                   .item-identifier

@@ -10,7 +10,23 @@ can.Model.Cacheable("CMS.Models.Program", {
 can.Model.Cacheable("CMS.Models.Directive", {
   root_object : "directive"
   , findAll : "/directives.json"
-}, {});
+  , findOne : "/directives/{id}.json"
+}, {
+  init : function() {
+    this._super && this._super.apply(this, arguments);
+    var that = this;
+    this.attr("descendant_sections", can.compute(function() {
+      return that.attr("sections").concat(can.reduce(that.sections, function(a, b) {
+        return a.concat(can.makeArray(b.descendant_sections()));
+      }, []));
+    }));
+    this.attr("descendant_sections_count", can.compute(function() {
+      return that.attr("descendant_sections")().length;
+    }));
+  }
+  , lowercase_kind : function() { return (this.kind.split(" ").reverse()[0]).toLowerCase() }
+
+});
 
 CMS.Models.Directive("CMS.Models.Regulation", {
   findAll : "/directives.json?meta_kind=regulation"

@@ -59,18 +59,20 @@
   .span6
     .row-fluid
       -#=wrapped_select(f, :span6, :type_id, ['Regulation', 'Company'], :selected => f.object.company? ? 'Company' : 'Regulation', :)
-      =wrapped_select(f, :span6, :kind_id, Option.options_for(:control_kind).map { |o| [o.title, o.id] }, :selected => (f.object.respond_to?(:kind_id) ? f.object.kind_id : nil))
+      =wrapped_select(f, :span6, :kind_id, Option.options_with_none_for(:control_kind).map { |o| [o.title, o.id] }, :selected => (f.object.respond_to?(:kind_id) ? f.object.kind_id : nil))
     .row-fluid
       .span6
         =f.label 'Fraud-related'
         %select.span12{ :name => 'control[fraud_related]' }
-          %option{ :value => '0', :selected => f.object.fraud_related || 'selected' } No
+          %option{ :value => nil, :selected => f.object.fraud_related.nil? && 'selected' }
+          %option{ :value => '0', :selected => f.object.fraud_related === false && 'selected' } No
           %option{ :value => '1', :selected => f.object.fraud_related && 'selected' } Yes
         =error_messages_inline(f, :fraud_related)
       .span6
         =f.label 'Significance'
         %select.span12{ :name => 'control[key_control]' }
-          %option{ :value => '0', :selected => f.object.key_control || 'selected' } Non-key
+          %option{ :value => nil, :selected => f.object.fraud_related.nil? && 'selected' }
+          %option{ :value => '0', :selected => f.object.fraud_related === false && 'selected' } Non-key
           %option{ :value => '1', :selected => f.object.key_control && 'selected' } Key
         =error_messages_inline(f, :key_control)
 
@@ -78,8 +80,8 @@
   =wrapped_text_field f, :span6, :url, :label_name => 'Direct Link', :placeholder => 'http://www.example.com/'
   .span6
     .row-fluid
-      =wrapped_select(f, :span6, :means_id, Option.options_for(:control_means).map { |o| [o.title, o.id] }, :selected => (f.object.respond_to?(:means_id) ? f.object.means_id : nil))
-      =wrapped_select(f, :span6, :verify_frequency_id, Option.options_for(:verify_frequency).map { |o| [o.title, o.id] }, :selected => (f.object.respond_to?(:verify_frequency_id) ? f.object.verify_frequency_id : nil), :label_name => 'Confirmation Frequency')
+      =wrapped_select(f, :span6, :means_id, Option.options_with_none_for(:control_means).map { |o| [o.title, o.id] }, :selected => (f.object.respond_to?(:means_id) ? f.object.means_id : nil))
+      =wrapped_select(f, :span6, :verify_frequency_id, Option.options_with_none_for(:verify_frequency).map { |o| [o.title, o.id] }, :selected => (f.object.respond_to?(:verify_frequency_id) ? f.object.verify_frequency_id : nil), :label_name => 'Frequency')
 
 %br
 

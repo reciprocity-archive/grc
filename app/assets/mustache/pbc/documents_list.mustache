@@ -2,17 +2,16 @@
   <li {{data 'model'}} data-model="true">
     <div class="row-fluid">
       <div class="span6">
-        {{#if document.link_url}}
-
-          <a class="inner-element" href="{{document.link_url}}" target="_blank">
-            <span rel="tooltip" title="{{document.link_url}}" >
-              {{firstnonempty document.title document.link_url}}
-            </span>
+        {{#pack document issystem=system_or_process}}
+        {{#if link_url}}
+          <a class="inner-element" data-popover-trigger="sticky-hover" data-sticky-popover="true" data-content="{{render '/assets/pbc/iframe_tooltip.mustache'}}" {{^issystem}}data-placement="right"{{/issystem}} href="{{link_url}}" target="_blank">
+              {{{withattr "data-original-title" "<div class='row-fluid'><div class='span12'><h3><i class='grcicon-link'></i> Viewing {firstnonempty title link_url} </span> </h3></div></div>"}}}
+            {{firstnonempty title link_url}}
           </a>
-
         {{else}}
-          <span class="inner-element">{{document.title}}</span>
+          <span class="inner-element">{{title}}</span>
         {{/if}}
+        {{/pack}}
         </span>
       </div>
       <div class="span3">
@@ -38,6 +37,7 @@
       <div class="row-fluid">
         <div class="span7">
           <input class="input-block-level input-title" name="title" placeholder="Search for Doc Title or URL" type="text" {{ (el) -> el.pbc_autocomplete_documents() }}>
+          <a class="add-document" data-modal-reset="reset" data-toggle="modal-ajax-form" href="/documents/new" data-target="#ajax-modal-documents-new"></a>
           <!--
           <div class="error">
             There is no Doc or URL in the system that matches your search. Please create a new reference by pushing the + icon to the right

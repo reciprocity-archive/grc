@@ -27,28 +27,28 @@ class PbcListsController < BaseObjectsController
     firm_responsible firm_responsible
   )].merge("" => "")
 
-  access_control :acl do
-    # FIXME: Implement real authorization
-
-    allow :superuser
-
-    actions :index do
-      allow :read, :read_pbc_list
-    end
-
-    actions :new, :create do
-      allow :create, :create_pbc_list
-    end
-
-    actions :edit, :update do
-      allow :update, :update_pbc_list, :of => :pbc_list
-    end
-
-    actions :show, :tooltip do
-      allow :read, :read_pbc_list, :of => :pbc_list
-    end
-
-  end
+#  access_control :acl do
+#    # FIXME: Implement real authorization
+#
+#    allow :superuser
+#
+#    actions :index do
+#      allow :read, :read_pbc_list
+#    end
+#
+#    actions :new, :create do
+#      allow :create, :create_pbc_list
+#    end
+#
+#    actions :edit, :update do
+#      allow :update, :update_pbc_list, :of => :pbc_list
+#    end
+#
+#    actions :show, :tooltip do
+#      allow :read, :read_pbc_list, :of => :pbc_list
+#    end
+#
+#  end
 
   layout 'dashboard'
 

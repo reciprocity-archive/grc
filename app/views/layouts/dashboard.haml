@@ -5,6 +5,8 @@
     %title=@title || "GRC"
     %meta{:name => "viewport", :content => "width=device-width", :'initial-scale' => "1.0"}
 
+    :javascript
+      window.currentUser = #{current_user.to_json(:root => false, :except => [:crypted_password, :persistence_token], :methods => [:'can_admin?', :'can_manage_risk?'])}
     -if has_feature? :BETA
       =stylesheet_link_tag 'design'
       =javascript_include_tag 'design'
@@ -23,6 +25,7 @@
     -#NOTE: This resource occasionally hangs and prevents page from rendering, so loaded after the fact via jquery
     :javascript
       jQuery(function($) { $('head').append("<link href='https://fonts.googleapis.com/css?family=Titillium+Web' rel='stylesheet' type='text/css'></link>"); });
+
 
   %body{ page_type_attributes, :class => "#{has_feature?(:BETA) ? 'BETA' : ''}", :'data-target' => '.bs-docs-sidebar', :'data-spy' => 'scroll'}
 
@@ -70,6 +73,7 @@
                           %li
                             %a{ :href => new_flow_program_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
                               Program
+                          %li.divider
                           %li
                             %a{ :href => new_flow_directive_path(:meta_kind => :regulation), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
                               Regulation
@@ -80,22 +84,23 @@
                             %a{ :href => new_flow_directive_path(:meta_kind => :policy), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
                               Policy
                           %li
-                            %a{ :href => new_flow_risky_attribute_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                              Risky Attribute
-                          %li
-                            %a{ :href => new_flow_risk_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
-                              Risk
-                          %li
                             %a{ :href => new_flow_control_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
                               Control
                           %li.divider
+                          - if current_user.can_manage_risk?
+                            %li
+                              %a{ :href => new_flow_risky_attribute_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
+                                Risky Attribute
+                            %li
+                              %a{ :href => new_flow_risk_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
+                                Risk
+                            %li.divider
                           %li
                             %a{ :href => new_flow_system_path(:'system[is_biz_process]' => 1), :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
                               Process
                           %li
                             %a{ :href => new_flow_system_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
                               System
-                          %li.divider
                           %li
                             %a{ :href => new_flow_org_group_path, :'data-toggle' => 'modal-ajax-form', :'data-modal-reset' => 'reset', :'data-form-target' => 'redirect', :'data-modal-class' => 'modal-wide' }
                               Org Group
@@ -134,7 +139,7 @@
                       %strong=current_user.email
                     %i.grcicon-carot-white
                   %ul.dropdown-menu{:'aria-labelledby' => 'drop1', :role =>"menu"}
-                    -if current_user.has_role?(:superuser)
+                    -if current_user.can_admin?
                       %li
                         %a{:href => admin_dash_path}
                           %i.grcicon-admin
@@ -142,7 +147,11 @@
                     %li
                       %a.clear-display-settings{:href =>"javascript://", :tabindex =>"-1"}
                         %i.grcicon-desktop
-                        Reset Layout
+                        Reset Layout to Default
+                    %li
+                      %a.set-display-settings-default{:href =>"javascript://", :tabindex =>"-1"}
+                        %i.grcicon-desktop
+                        Set Layout as Default
                     %li
                       %a{:href =>logout_path, :tabindex =>"-1"}
                         %i.grcicon-logout
@@ -216,6 +225,7 @@
               Copyright &copy;
               =Time.now.year
               =CMS_CONFIG['COMPANY']
+              Version #{CMS_CONFIG['CMS_APP_VERSION']}
 
     #templates
       #help-modal.modal.hide.fade

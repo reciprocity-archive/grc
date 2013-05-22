@@ -147,6 +147,15 @@ can.Model.Cacheable("CMS.Models.Section", {
       if (value === null)
         that.removeAttr(name);
     });
+
+    this.attr("descendant_sections", can.compute(function() {
+      return that.attr("children").concat(can.reduce(that.children, function(a, b) {
+        return a.concat(can.makeArray(b.descendant_sections()));
+      }, []));
+    }));
+    this.attr("descendant_sections_count", can.compute(function() {
+      return that.attr("descendant_sections")().length;
+    }));
   }
 
   , map_rcontrol : function(params) {
@@ -158,8 +167,8 @@ can.Model.Cacheable("CMS.Models.Section", {
   }
 
   , update_linked_controls_ccontrol_only : function() {
-    this.attr("linked_controls").replace(can.map(this.linked_controls, function(lc) {
-      return CMS.Models.Control.findInCacheById(lc.id || lc.control.id);
+    this.linked_controls && this.linked_controls.replace(can.map(this.linked_controls, function(lc) {
+      return new CMS.Models.Control(lc.serialize ? lc.serialize() : lc);
     }));
   }
 
@@ -193,10 +202,20 @@ can.Model.Cacheable("CMS.Models.Section", {
 
 CMS.Models.Section("CMS.Models.SectionSlug", {
   update : function(id, section) {
-    var param = {};
-    can.each(section, function(val, key) {
-      param["section[" + key + "]"] = val;
-    });
+    var param = this.process_args(
+      section, 
+      {not : [
+        "parent_id"
+        , "created_at"
+        , "id"
+        , "kind"
+        , "modified_by_id"
+        , "updated_at"
+        , "linked_controls"
+        , "description_inline"
+        , "children"
+        , "child_options"
+      ]});
     return $.ajax({
       type : "PUT"
       , url : "/mapping/update/" + id + ".json"
@@ -215,29 +234,59 @@ CMS.Models.Section("CMS.Models.SectionSlug", {
       return target;
     }
 
-    function treeify(list, pid) {
-      var ret = filter_out(list, function(s) { return s.parent_id == pid });
+    function treeify(list, directive_id, pid) {
+      var ret = filter_out(list, function(s) { 
+        return s.parent_id == pid && (!directive_id || s.directive_id === directive_id) 
+      });
       can.$(ret).each(function() {
-        this.children = treeify(list, this.id);
+        this.children = treeify(list, this.directive_id, this.id);
       });
       return ret;
     }
 
-    return can.ajax({ 
-      url : "/programs/" + (params.id || false) + "/sections.json"
-      , type : "get"
-      , dataType : "json"
-      , data : params
-      }).pipe(
+    return this._super(params).pipe(
         function(list, xhr) {
+          var current;
           can.$(list).each(function(i, s) {
             can.extend(s, s.section);
             delete s.section;
           });
-          var roots = treeify(list); //empties the list
+          var roots = treeify(list); //empties the list if all roots (no parent in list) are actually roots (null parent id)
           // for(var i = 0; i < roots.length; i++)
           //   list.push(roots[i]);
+          while(list.length > 0) {
+            can.$(list).each(function(i, v) {
+              // find a pseudo-root whose parent wasn't in the returned sections
+              if(can.$(list).filter(function(j, c) { return c !== v && c.id === v.parent_id && c.directive_id === v.directive_id }).length < 1) {
+                current = v;
+                list.splice(i, 1); //remove current from list
+                return false;
+              }
+            });
+            current.attr ? current.attr("children", treeify(list, current.id)) : (children = treeify(list, current.id));
+            roots.push(current);
+          }
           return roots;
         });
+  }
+  , model : function(params) {
+    var m = this._super(params);
+    m.attr("children", this.models(m.children));
+    return m;
+  }
+  , tree_view_options : {
+    list_view : "/assets/sections/tree.mustache"
+    , child_options : [{
+      model : CMS.Models.Control
+      , property : "linked_controls"
+      , list_view : "/assets/controls/tree.mustache"
+    }, {
+      model : CMS.Models.SectionSlug
+      , property : "children"
+    }]
+  }
+  , init : function() {
+    this._super.apply(this, arguments);
+    this.tree_view_options.child_options[1].model = this;
   }
 }, {});

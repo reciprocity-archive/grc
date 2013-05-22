@@ -37,17 +37,9 @@ class Document < ActiveRecord::Base
     end
   end
 
-  validate :require_link_or_title
-
-  def require_link_or_title
-    if !(link.present? || title.present?)
-      errors.add(:link, "either link or title is required")
-      errors.add(:title, "either link or title is required")
-    end
-  end
-
   validates :link,
-    :uniqueness => true, :allow_blank => true
+    :presence => { :message => "needs a value" },
+    :uniqueness => true
 
   def display_name
     title
@@ -87,6 +79,16 @@ class Document < ActiveRecord::Base
 
   def complete?
     !link.nil? && !link.to_s.blank?
+  end
+  
+  def count_population_samples
+    t = PopulationSample.arel_table
+    is_population_document = t[:population_document_id].eq(id)
+    is_sample_worksheet_document = t[:sample_worksheet_document_id].eq(id)
+    is_sample_evidence_document = t[:sample_evidence_document_id].eq(id)
+    PopulationSample.where(
+      is_population_document.or(is_sample_worksheet_document).or(is_sample_evidence_document)
+    ).count
   end
 
   def self.db_search(q)

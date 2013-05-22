@@ -5,12 +5,12 @@
     %li=link_to 'dashboard', programs_dash_path
     %li=@system.slug
 
-  %h1.compliance
+  %h1.business
     -if @system.is_biz_process
-      .grcobject.compliance{:rel => "tooltip", :'data-placement'=>"bottom", :title => "Process"}
+      .grcobject.business{:rel => "tooltip", :'data-placement'=>"bottom", :title => "Process"}
         %i.grcicon-businessprocess
     -else
-      .grcobject.compliance{:rel => "tooltip", :'data-placement'=>"bottom", :title => "System"}
+      .grcobject.business{:rel => "tooltip", :'data-placement'=>"bottom", :title => "System"}
         %i.grcicon-system
     =@system.title
 
@@ -33,21 +33,21 @@
     #middle_column.span8.widget-area
       =render :partial => 'systems/sub_systems',
               :layout => 'layouts/widget_box',
-              :locals => { :system => @system, :widget_class => "compliance" }
+              :locals => { :system => @system, :widget_class => "business" }
       =render :partial => 'systems/super_systems',
               :layout => 'layouts/widget_box',
-              :locals => { :system => @system, :widget_class => "compliance" }
+              :locals => { :system => @system, :widget_class => "business" }
       -#=render :partial => 'systems/transactions',
               :layout => 'layouts/widget_box',
-              :locals => { :system => @system, :widget_class => "compliance" }
+              :locals => { :system => @system, :widget_class => "business" }
       =render :partial => 'shared/related',
               :layout => 'layouts/widget_box',
-              :locals => { :instance => @system, :widget_class => "widget-tabs widget-tabs-horizontal compliance", :widget_title => "Related to " + @system.meta_kind.to_s.capitalize }
+              :locals => { :instance => @system, :widget_class => "widget-tabs widget-tabs-horizontal business", :widget_title => "Related to " + @system.meta_kind.to_s.capitalize }
       =render :partial => 'shared/add_widget_section'
     #right_column.span4.widget-area
       =render :partial => 'systems/info',
               :layout => 'layouts/widget_box',
-              :locals => { :system => @system, :widget_class => "compliance" }
+              :locals => { :system => @system, :widget_class => "business" }
       =render :partial => 'systems/more_info',
               :layout => 'layouts/widget_box',
               :locals => { :system => @system, :widget_class => 'related business' }

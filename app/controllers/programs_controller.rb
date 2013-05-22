@@ -1,25 +1,25 @@
 # Browse programs
 class ProgramsController < BaseObjectsController
 
-  access_control :acl do
-    allow :superuser
-
-    actions :new, :create do
-      allow :create, :create_program
-    end
-
-    actions :edit, :update do
-      allow :update, :update_program, :of => :program
-    end
-
-    actions :show, :tooltip do
-      allow :read, :read_program, :of => :program
-    end
-
-    actions :index do
-      allow :read, :read_program
-    end
-  end
+#  access_control :acl do
+#    allow :superuser
+#
+#    actions :new, :create do
+#      allow :create, :create_program
+#    end
+#
+#    actions :edit, :update do
+#      allow :update, :update_program, :of => :program
+#    end
+#
+#    actions :show, :tooltip do
+#      allow :read, :read_program, :of => :program
+#    end
+#
+#    actions :index do
+#      allow :read, :read_program
+#    end
+#  end
 
   layout 'dashboard'
 

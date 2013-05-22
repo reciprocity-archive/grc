@@ -48,8 +48,7 @@ class SystemRowConverter < BaseRowConverter
     handle_date(:updated_at, :no_import => true)
 
     handle_text_or_html(:description)
-    handle_text_or_html(:append_notes, :append_to => :description)
-
+    
     handle_boolean(:infrastructure, :truthy_values => %w(infrastructure))
 
     handle_raw_attr(:title)
@@ -70,7 +69,6 @@ class SystemsConverter < BaseConverter
     Link:People;Responsible people_responsible
     Link:People;Accountable people_accountable
     Link:Controls controls
-    Append:Notes append_notes
     Link:System;Sub\ System sub_systems
     Link:Process;Sub\ Process sub_processes
     Link:Org\ Group;Overseen\ By org_groups
@@ -91,12 +89,13 @@ class SystemsConverter < BaseConverter
 
   def object_map
     # Replace only the 'System Code' header, but not 'Link:System'
-    object_map = self.class.object_map.dup
     if options[:is_biz_process]
-      object_map.delete("System Code")
-      object_map["Process Code"] = "slug"
+      Hash[*self.class.object_map.map do |k,v|
+        [k.sub("System Code", "Process Code"),v]
+      end.flatten]
+    else
+      super
     end
-    object_map
   end
 
   def validate_metadata(attrs)
@@ -104,6 +103,12 @@ class SystemsConverter < BaseConverter
     validate_metadata_type(attrs, type)
   end
 
+  def no_new_link_warnings?
+    @warnings.each do |warning|
+      return true if warning.include? 'will be created'
+    end
+  end
+  
   def do_export_metadata
     type = options[:is_biz_process] ? "Processes" : "Systems"
     yield CSV.generate_line(metadata_map.keys)

@@ -19,6 +19,17 @@ describe Account do
       account.person.should_not eq(nil)
     end
   end
+  
+  context 'role restriction' do
+    it 'should derive risk permissions from role field' do
+      person = FactoryGirl.create(:person, :role => 'User')
+      person.can_manage_risk.should == false
+      person = FactoryGirl.create(:person, :role => 'Risk')
+      person.can_manage_risk.should == true
+    end
+    
+    it 'should not allow risks to be retrieved '
+  end
 
   context "authorization" do
     it "should do the right thing with no object"

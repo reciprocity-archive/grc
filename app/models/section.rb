@@ -155,9 +155,11 @@ class Section < ActiveRecord::Base
   end
 
   def linked_controls
-    controls.map do |control|
-      [control] + control.implementing_controls
-    end.flatten
+    controls.all
+    # NOTE: Removed non-direct control linkings until control mapping is in
+    #controls.map do |control|
+    #  [control] + control.implementing_controls
+    #end.flatten
   end
 
   def preloaded_linked_controls

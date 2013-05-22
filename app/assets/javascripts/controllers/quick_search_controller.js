@@ -2,12 +2,16 @@
 
 (function(can, $) {
   function with_params(href, params) {
-    if (href.charAt(href.length - 1) === '?')
-      return href + params;
-    else if (href.indexOf('?') > 0)
-      return href + '&' + params;
-    else
-      return href + '?' + params;
+    if (href) {
+      if (href.charAt(href.length - 1) === '?')
+        return href + params;
+      else if (href.indexOf('?') > 0)
+        return href + '&' + params;
+      else
+        return href + '?' + params;
+    }else{
+      return undefined;
+    }   
   }
 
 can.Control("CMS.Controllers.QuickSearch", {
@@ -33,11 +37,15 @@ can.Control("CMS.Controllers.QuickSearch", {
 
     $tabs.each(function() {
       var href = $(this).data("tab-href");
-      href = href.split("?");
-      var qparams = can.deparam(href[1])
-      qparams["s"] = newval;
-      href[1] = can.param(qparams);
-      $(this).data("tab-href", href.join("?"));
+      if(href){
+        href = href.split("?");
+        var qparams = can.deparam(href[1])
+        qparams["s"] = newval;
+        href[1] = can.param(qparams);
+        $(this).data("tab-href", href.join("?"));
+      }else{
+        return undefined;
+      }
     })
     $tabs.data("tab-loaded", false)
     $tab.trigger('show', $tab.data("tab-href"));

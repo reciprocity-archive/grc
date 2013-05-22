@@ -273,8 +273,8 @@ class BaseObjectsController < ApplicationController
       instance_variable_get('@' + object_name.pluralize)
     end
 
-    def objects_as_json
-      objects.as_json
+    def objects_as_json(args=nil)
+      objects.as_json(args)
     end
 
     def set_object(value)

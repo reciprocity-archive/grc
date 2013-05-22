@@ -89,12 +89,24 @@ can.Model.Cacheable("CMS.Models.System", {
         model : null ///filled in after init.
         , list_view : "/assets/systems/tree.mustache"
         , parent_find_param : "parent_id"
+				, link_buttons: true
       }]
     }
 }, {
 
     init : function() {
-        this._super && this._super();
+      var that = this;
+      this._super && this._super();
+      this.bind("created updated", can.proxy(this, 'reinit'))
+      this.reinit();
+      //careful to only do this on init.  Once live binding is set up, some live binding
+      //  stops happening when doing removeAttr instead of attr(..., null)
+      this.each(function(value, name) {
+        if (value === null)
+          that.removeAttr(name);
+      });
+    }
+    , reinit : function() {
         var that = this;
         can.each({
             "Person" : "people"
@@ -110,10 +122,6 @@ can.Model.Cacheable("CMS.Models.System", {
             that.attr(collection, list);
         });
 
-        this.each(function(value, name) {
-          if (value === null)
-            that.removeAttr(name);
-        });
     }
     , system_or_process: function() {
       if (this.attr('is_biz_process'))

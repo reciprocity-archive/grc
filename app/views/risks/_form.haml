@@ -47,7 +47,7 @@
   .span6
     =f.label :likelihood
     .wysiwyg-area
-      =f.select :likelihood_rating, Risk::RATINGS.map { |k, v| ["#{k} - #{v}", k] }
+      =f.select :likelihood_rating, Risk::RATINGS.map { |k, v| ["#{((k.to_f / 5.0) - 0.2).round(1)}", ((k.to_f / 5.0) - 0.2).round(1)] }
       =f.text_area :likelihood, :class => 'span12 double wysihtml5 rtftextarea', :placeholder => ''
   .span6
     =wrapped_text_area f, :span12, :impact, :class => 'double wysihtml5 rtftextarea', :wrapper_div_class => 'wysiwyg-area', :placeholder => 'Enter impact description here', :label_name => "Impact Description"

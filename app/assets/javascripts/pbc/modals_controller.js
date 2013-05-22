@@ -90,7 +90,7 @@ can.Control("CMS.Controllers.PBCModals", {
               $requests.append(
                 can.view(
                     "/assets/pbc/control_assessment.mustache"
-                    , $.extend({}, control_data, { type_name : type_name})
+                    , $.extend({}, control_data, { type_name : type_name, control_assessment_id : data.control_assessment_id })
                 ));
               $ca = $requests.find(".pbc-ca[data-control-id=" + control_data.id + "]");
 
